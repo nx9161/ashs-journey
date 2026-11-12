@@ -13,8 +13,8 @@
 //    reset, no obedience cap, no compensating scaling. Nothing in the
 //    transition machine touches the team.
 //  - Amendment 2: per-arc LEVEL BANDS — cap = 100 x bandIndex (Arden
-//    1-100, Yamato 101-200, Hoenn 201-300, Sinnoh 301-400). Orange SHARES
-//    Arden's band (it continues Arden's power curve). The Battle Frontier
+//    1-100, Yamato 101-200, Maris 201-300, Sinnoh 301-400). Orange SHARES
+//    Arden's band (it continues Arden's power curve). The Trial Grounds
 //    is OPEN LEVEL (band: null — its facilities match the entrant).
 //
 // Row fields:
@@ -125,7 +125,7 @@ export const ARCS = [
     ],
   },
   {
-    id: 'hoenn', n: 3, label: 'Arc 3', region: 'Hoenn', regionKey: 'hoenn',
+    id: 'hoenn', n: 3, label: 'Arc 3', region: 'Maris', regionKey: 'hoenn',
     edition: 'Ruby / Sapphire / Emerald', chapters: [6], dexHorizon: 386,
     band: { min: 201, max: 300, bandIndex: 3 },
     badgeSet: 'hoenn', badgeTotal: 8,
@@ -133,21 +133,21 @@ export const ARCS = [
     status: 'shipped', future: false,
     hookGiver: 'hawthorn', embarkPort: 'vermilion', arrivalMap: 'littleroot', home: 'pallet',
     summaryLines: [
-      'Ever Grande Conference — HONOURS.',
+      'Perennial Conference — HONOURS.',
       'Two storms called and answered, eight badges earned, and a conference run that ended narrow and proud. The sea air follows you home.',
     ],
     hookLines: [
       'Word travels fast on the sea roads: a whole region across the water is in a strange mood — its land and ocean arguing through two old teams.',
-      'Hoenn, they call it. New Pokemon, new gyms, contests in every port — and a certain evolved friend of Gary\'s waiting to prove a point.',
-      'The Arcport ferry runs that way. Pack for rain AND for drought; Hoenn cannot decide either.',
+      'Maris, they call it. New Pokemon, new gyms, contests in every port — and a certain evolved friend of Gary\'s waiting to prove a point.',
+      'The Arcport ferry runs that way. Pack for rain AND for drought; Maris cannot decide either.',
     ],
     enRouteLines: [
       '— days at sea —',
-      'The rain arrives before the land does. Hoenn, arguing with its own ocean.',
+      'The rain arrives before the land does. Maris, arguing with its own ocean.',
     ],
   },
   {
-    id: 'frontier', n: 3.5, label: 'Arc 3.5', region: 'Battle Frontier', regionKey: 'kanto',
+    id: 'frontier', n: 3.5, label: 'Arc 3.5', region: 'Trial Grounds', regionKey: 'kanto',
     edition: 'Emerald', chapters: [7], dexHorizon: 386,
     band: null, // open level (Amendment 2): facilities match the entrant
     badgeSet: 'symbols', badgeTotal: 7,
@@ -155,11 +155,11 @@ export const ARCS = [
     status: 'shipped', future: false,
     hookGiver: 'scott', embarkPort: 'pallet', arrivalMap: 'frontierhub', home: 'pallet',
     summaryLines: [
-      'Battle Frontier — CONQUERED.',
+      'Trial Grounds — CONQUERED.',
       'Seven Symbols at the Gold standard, and a rematch years in the making finally won. The Frontier salutes you.',
     ],
     hookLines: [
-      'A man named Scott has been watching your battles — he scouts for a place called the Battle Frontier, seven facilities run by trainers called Frontier Brains.',
+      'A man named Scott has been watching your battles — he scouts for a place called the Trial Grounds, seven facilities run by trainers called Frontier Brains.',
       'He left an invitation with your name on it and one instruction: bring the team you trust most. The Frontier does not care where you have been — only how you fight.',
       'It stands on an island off Arden. The boat leaves from Dawnwick. Scott will be waiting at the dock, smiling like he already knows the result.',
     ],
@@ -285,7 +285,7 @@ export const ARC_FINALE_ECHOES = {
   kanto: 'Arden first: a borrowed bike voucher, a storm over Exile Isle, and a rival who turned out to be a measuring stick all along. You came home with eight badges and every friend you started with, plus several dozen more.',
   orange: 'Then the southern sea: four island badges, a ball that would not open, and a trophy heavy as an anchor. The Orange water taught the team to win on strange ground, under stranger stars.',
   johto: 'Yamato asked older questions — towers, bells, beasts woken out of legend — and the rivalry that started in a Dawnwick lane finally burned itself honest at the Lastlight Conference.',
-  hoenn: 'Hoenn argued with its own weather, and the team answered both sides of it: drought and deluge, two old teams, and a conference run that ended narrow and proud.',
+  hoenn: 'Maris argued with its own weather, and the team answered both sides of it: drought and deluge, two old teams, and a conference run that ended narrow and proud.',
   frontier: 'The Frontier cared nothing for any of that. Seven doors, seven Brains, one standard — gold. It is the only place that ever graded the team purely on how they fight, and they know it.',
   sinnoh: 'And Sinnoh: a god in red chains, a world behind the world, and a Darkrai that finally fell. The north is finished with trainers like us, Gary said. It was not wrong. It is finished — because it is complete.',
 };
@@ -332,7 +332,7 @@ export function currentArcOf(state) {
 }
 
 // ADR-027 Amendment 2: the level cap is a registry read. Convention:
-// an open-level arc (band: null — the Battle Frontier) returns Infinity,
+// an open-level arc (band: null — the Trial Grounds) returns Infinity,
 // so every comparison keeps working unchanged (m.level < Infinity is
 // always true; Math.min(Infinity, x) is x; m.level >= Infinity never
 // disables a target).
@@ -353,7 +353,7 @@ export function dexHorizonFor(state) {
 }
 
 // The regional dex span of an arc: (previous distinct horizon, horizon].
-// Orange shares Arden's 1-151 set (no delta); the Frontier shares Hoenn's.
+// Orange shares Arden's 1-151 set (no delta); the Frontier shares Maris's.
 export function arcDexSpan(arc) {
   if (!arc) return { lo: 1, hi: ARCS[0].dexHorizon };
   let prev = 0;
@@ -366,7 +366,7 @@ export function arcDexSpan(arc) {
 
 // Badges earned toward an arc's set. 'symbols' counts the non-null slots
 // of badges.symbols; every other set is a plain array (absent = 0, so the
-// Hoenn/Sinnoh sets read honestly before their badge arrays exist).
+// Maris/Sinnoh sets read honestly before their badge arrays exist).
 export function badgeCountFor(state, arc) {
   if (!state || !arc) return 0;
   const badges = state.badges || {};

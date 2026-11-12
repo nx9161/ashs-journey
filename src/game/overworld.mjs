@@ -190,9 +190,9 @@ export class OverworldScene {
         npcs = [...npcs, ...johtoNpcs.map((n) => { const c = { ...n }; delete c.map; return c; })];
         changed = true;
       }
-      // Stage H4a (Hoenn story): the same append idiom fields the
-      // Hoenn story actors (Birch, May, Wally, Norman, the west
-      // leaders + gym rosters, Cozmo, the admins) and stamps Hoenn
+      // Stage H4a (Maris story): the same append idiom fields the
+      // Maris story actors (Birch, May, Wally, Norman, the west
+      // leaders + gym rosters, Cozmo, the admins) and stamps Maris
       // tale roles onto existing maps7 townsfolk by name
       // (HOENN_NPC_PATCHES). The generated maps7 definitions are
       // never mutated; the scene works on this copy.

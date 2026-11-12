@@ -200,7 +200,7 @@ export function validateSave(data) {
     if (!Array.isArray(j) || !seq || j.length > seq.length || j.some((id, i) => id !== seq[i])) errors.push('bad-badges-johto');
   }
   // Stage H4a: badges.hoenn, when present, must be a PREFIX of the
-  // Hoenn earn order (BADGE_SETS) — the same rule, the same source.
+  // Maris earn order (BADGE_SETS) — the same rule, the same source.
   if (isObj(data.badges) && data.badges.hoenn !== undefined) {
     const h = data.badges.hoenn;
     const seq = BADGE_SETS.hoenn;

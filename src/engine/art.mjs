@@ -687,10 +687,10 @@ for (const k of O1_PROP_KINDS) TILE_ART[k] = 'tile-prop-' + k;
 // Arc 2 Stage J3a: Yamato kinds — same convention as O1.
 for (const k of [...J3_WALL_KINDS, ...J3_FLOOR_KINDS]) TILE_ART[k] = 'tile-' + k;
 for (const k of J3_PROP_KINDS) TILE_ART[k] = 'tile-prop-' + k;
-// Arc 3 Stage H3a: Hoenn kinds — same convention as O1/J3.
+// Arc 3 Stage H3a: Maris kinds — same convention as O1/J3.
 for (const k of [...H3_WALL_KINDS, ...H3_FLOOR_KINDS]) TILE_ART[k] = 'tile-' + k;
 for (const k of H3_PROP_KINDS) TILE_ART[k] = 'tile-prop-' + k;
-// Arc 3 Stage H3b: Hoenn east/water kinds — same convention as H3a.
+// Arc 3 Stage H3b: Maris east/water kinds — same convention as H3a.
 for (const k of [...H3B_WALL_KINDS, ...H3B_FLOOR_KINDS]) TILE_ART[k] = 'tile-' + k;
 for (const k of H3B_PROP_KINDS) TILE_ART[k] = 'tile-prop-' + k;
 // Arc 4 Stage S3a: Sinnoh kinds — same convention as H3/H3b.
@@ -793,7 +793,7 @@ for (const id of JOHTO_TOWN_ORDER) {
   TILE_ART['th-' + id] = 'tile-th-' + id;
   TILE_ART['tw-' + id] = 'tile-tw-' + id;
 }
-// Arc 3 Stage H3a: Hoenn town identity kinds -> their authored tiles
+// Arc 3 Stage H3a: Maris town identity kinds -> their authored tiles
 // (same resolver prefix branches as Yamato).
 for (const id of SINNOH_TOWN_ORDER) {
   TILE_ART['tg-' + id] = 'tile-tg-' + id;
@@ -928,7 +928,7 @@ export function buildArtTileCache(doc, seasonSwapFor, seasonKitSwapFor) {
     mahogany: { roof: ['#476e4e', '#2c4632', '#648a68'], log: '#6e5230', door: '#3c5c42' }, // quiet lakeside timber: deep pine
     blackthorn: { roof: ['#3f4a6e', '#272e47', '#5d6a8f'], log: '#5e4a30', door: '#35406b' }, // mountain slate + dragon motifs: charcoal
     silvertown: { roof: ['#c9c9d4', '#8f8fa3', '#e2e2ea'], log: '#9a8a70', door: '#a8a8ba' }, // league marble: silver
-    // ---- Wave B: Hoenn (keyed to HOENN_TOWN_STYLE forms) ----
+    // ---- Wave B: Maris (keyed to HOENN_TOWN_STYLE forms) ----
     littleroot: { roof: ['#c08d45', '#7d551f', '#dcab62'], log: '#7d5226', door: '#8a5a2a' }, // starter-village timber: honey cedar
     oldale: { roof: ['#c2a054', '#856830', '#d9bc76'], log: '#8a6a3d', door: '#97742f' }, // dry-meadow gable: weathered straw
     petalburg: { roof: ['#75997c', '#4a6b52', '#9ab89e'], log: '#75603d', door: '#5d7d66' }, // park-pond stone: sage
@@ -1075,7 +1075,7 @@ export function buildArtTileCache(doc, seasonSwapFor, seasonKitSwapFor) {
   for (const townId of Object.keys(KIT_VARIANTS)) cache.kitTowns[townId] = buildKitSet(townId);
   cache.kitTowns.route1 = buildKitSet(null); // Dawnwick->Fernmere corridor: reference kit dressing
   cache.kitTowns.r29 = buildKitSet('newbark'); // Wave B: Yamato starter corridor wears Galefield's set
-  cache.kitTowns.r101 = buildKitSet('littleroot'); // Wave B: Hoenn starter corridor wears Littleroot's set
+  cache.kitTowns.r101 = buildKitSet('littleroot'); // Wave B: Maris starter corridor wears Rootlet's set
   cache.kitTowns.r201 = buildKitSet('twinleaf'); // Wave C: Sinnoh starter corridor wears Twinleaf's set
   cache.kitTowns.r216 = buildKitSet('snowpoint'); // Wave C: the snow approach — canopies + tufts dress, authored frost/ice floors stay
   cache.kitTowns.r217 = buildKitSet('snowpoint');
@@ -1551,9 +1551,9 @@ const PROP_KINDS = new Set(['counter', 'healmachine', 'pcdesk', 'bed', 'table',
   ...O1_PROP_KINDS,
   // Arc 2 Stage J3a: Yamato props composite over their ground too.
   ...J3_PROP_KINDS,
-  // Arc 3 Stage H3a: Hoenn props composite over their ground too.
+  // Arc 3 Stage H3a: Maris props composite over their ground too.
   ...H3_PROP_KINDS,
-  // Arc 3 Stage H3b: Hoenn east props composite over their ground too.
+  // Arc 3 Stage H3b: Maris east props composite over their ground too.
   ...H3B_PROP_KINDS,
   // Arc 4 Stage S3a: Sinnoh props composite over their ground too.
   ...S3_PROP_KINDS,
@@ -1654,7 +1654,7 @@ function atmoKeyFor(mapId) {
 const KIT_PROP_KINDS = new Set(['lamp', 'crates', 'signpost', 'postbox', 'stall',
   'waterpump', 'barrel', 'haycart', 'well', 'sacks', 'tub', 'bench', 'planter',
   'birdbath', 'bikestand', 'pottedtree', 'sundial', 'gatepost', 'gatearch',
-  // Wave B: Yamato/Hoenn regional props (J3/H3/H3B kinds + the W6 props
+  // Wave B: Yamato/Maris regional props (J3/H3/H3B kinds + the W6 props
   // those towns use) — same kit-ground treatment as the Arden set.
   'maple', 'apricorn', 'jwell', 'stonebell', 'leaguefountain', 'snackmachine',
   'fossildisplay', 'lifering', 'divingtank', 'coil', 'batterypack',
@@ -1665,8 +1665,8 @@ const KIT_PROP_KINDS = new Set(['lamp', 'crates', 'signpost', 'postbox', 'stall'
   'honeytree', 'ironarch', 'contestdome', 'marshreed', 'solarpanel',
   'originstone', 'shrine', 'switchboard', 'gamestation', 'trophycase',
   'sandcolumn', 'icecrystal']);
-// Props often stand on authored floor families (Dewford sand,
-// Fortree/Pacifidlog boardwalk): the prop underlay follows the floor
+// Props often stand on authored floor families (Mistford sand,
+// Highbranch/Driftlog boardwalk): the prop underlay follows the floor
 // family south of the prop instead of defaulting to kit grass, so a
 // lifering on the beach keeps its sand (see floorUnder below).
 const KIT_SIGN_KINDS = ['sign-gym', 'sign-mart', 'sign-lab', 'sign-center'];

@@ -1,4 +1,4 @@
-// frontier.mjs — Arc 3.5 Stage F2: the Battle Frontier controller.
+// frontier.mjs — Arc 3.5 Stage F2: the Trial Grounds controller.
 //
 // Systems layer in the contest.mjs shape: pure helpers + the
 // receptionist entry (startFrontier, dispatched from the overworld
@@ -208,7 +208,7 @@ export function frontierScottLines(state) {
     ];
   }
   return [
-    'Welcome to the Battle Frontier! I\'m Scott — I scouted every brick of this place into being.',
+    'Welcome to the Trial Grounds! I\'m Scott — I scouted every brick of this place into being.',
     'Seven facilities, seven Frontier Brains, seven Symbols waiting for someone stubborn enough. That grin says it might be you.',
     'No rush and no shortcuts here. Heal at the Center, stock up at the Mart — then pick a door and make it famous.',
   ];
@@ -245,7 +245,7 @@ export function tryScottClosing(g, mapId) {
   flags.scott_closing_done = true; // fire-once, set at scene start
   g.ui.say([
     'There you are. I followed the whole campaign, trainer — every facility, every Brain, every last gold strike. I would not have missed the end of it for a quieter island.',
-    'Seven Symbols, all of them gold. The Battle Frontier salutes its conqueror — and its founder got to watch it happen, door by door.',
+    'Seven Symbols, all of them gold. The Trial Grounds salutes its conqueror — and its founder got to watch it happen, door by door.',
     'One thing more, and it is not about my island. Word came in off the water: Professor Hawthorn\'s lab has a visitor — Gary, fresh home from somewhere called Sinnoh, an Electivire shadowing him and stories enough to fill the room.',
     'Home first, though — your mother has waited out this whole campaign too. Eat. Rest. Then the lab talk, and whatever road it opens next.',
   ], () => {}, 'SCOTT');
@@ -350,14 +350,14 @@ function beginEntry(g, facilityId, ow) {
       run.bracket = buildBracket(g, team);
       state.frontier.run = run;
       g.ui.say(['The bracket is drawn — sixteen names, one Dome. Your first match is ready when you are.'],
-        () => domeNextMatch(g, ow), 'BATTLE DOME DESK');
+        () => domeNextMatch(g, ow), 'TRIAL DOME DESK');
       return;
     }
     if (facilityId === 'pike') {
       run.events = preRollPike(g);
       state.frontier.run = run;
       g.ui.say(['Your Pike run is booked. Every door ahead already knows its secret — walk the hall and choose.',
-        'Seven chambers. Behind the dais, the way out. Good luck — you will need a little.'], () => {}, 'BATTLE PIKE DESK');
+        'Seven chambers. Behind the dais, the way out. Good luck — you will need a little.'], () => {}, 'TRIAL PIKE DESK');
       return;
     }
     if (facilityId === 'pyramid') {
@@ -366,7 +366,7 @@ function beginEntry(g, facilityId, ow) {
       state.frontier.pyramidBag = [];
       state.frontier.run = run;
       g.ui.say(['Climb ' + run.runNo + ' is booked, and the Pyramid Bag hangs empty at your hip.',
-        'The inner doors will open for you now. Seven floors, no free healing — take what the mountain offers.'], () => {}, 'BATTLE PYRAMID DESK');
+        'The inner doors will open for you now. Seven floors, no free healing — take what the mountain offers.'], () => {}, 'TRIAL PYRAMID DESK');
       return;
     }
     state.frontier.run = run;
@@ -481,7 +481,7 @@ function factoryDraft(g, ow) {
   const state = g.state;
   const able = state.party.filter((m) => m && !m.egg && m.hp > 0);
   if (!able.length) {
-    g.ui.say(['Even borrowed partners need a trainer standing upright. Come back with at least one able partner in your party.'], () => {}, 'BATTLE FACTORY DESK');
+    g.ui.say(['Even borrowed partners need a trainer standing upright. Come back with at least one able partner in your party.'], () => {}, 'TRIAL FACTORY DESK');
     return;
   }
   const foeLevel = Math.max(...able.map((m) => m.level));
@@ -501,7 +501,7 @@ function factoryDraft(g, ow) {
       state.frontier.run = run;
       healTeam(picked);
       g.ui.say(['Drafted and stamped. Those three are yours until the streak says otherwise — your own partners rest, untouched.'],
-        () => launchSetBattle(g, ow), 'BATTLE FACTORY DESK');
+        () => launchSetBattle(g, ow), 'TRIAL FACTORY DESK');
       return;
     }
     const rest = candidates.filter((m) => !picked.includes(m));
@@ -513,7 +513,7 @@ function factoryDraft(g, ow) {
       step();
     });
   };
-  g.ui.say(['Six rentals on the table, all stamped Lv' + foeLevel + ' to match your best. Pick three — choose like you mean it.'], step, 'BATTLE FACTORY DESK');
+  g.ui.say(['Six rentals on the table, all stamped Lv' + foeLevel + ' to match your best. Pick three — choose like you mean it.'], step, 'TRIAL FACTORY DESK');
 }
 
 // After a Factory WIN: the swap offer — one of the foe's team for
@@ -535,10 +535,10 @@ function factorySwapOffer(g, ow, foeTrainer, cb) {
         if (w === null || w === undefined) { cb(); return; }
         run.rentals[w] = makeMon(taken.species, run.foeLevel, SPECIES, MOVES);
         healTeam(run.rentals);
-        g.ui.say(['Stamped and swapped. The ' + SPECIES[taken.species].name + ' fights for you now.'], cb, 'BATTLE FACTORY DESK');
+        g.ui.say(['Stamped and swapped. The ' + SPECIES[taken.species].name + ' fights for you now.'], cb, 'TRIAL FACTORY DESK');
       });
     });
-  }, 'BATTLE FACTORY DESK');
+  }, 'TRIAL FACTORY DESK');
 }
 
 // ------------------------------------------------------------------
@@ -643,7 +643,7 @@ function domeNextMatch(g, ow) {
       const rec = state.frontier.records.dome;
       if (b.round > (rec.bestFinish || 0)) rec.bestFinish = b.round;
       closeRun(state);
-      g.ui.say(['Out in ' + DOME_ROUNDS[b.round] + ' — a ' + finish + ' finish, written into the Dome book. The bracket plays on without you.'], () => {}, 'BATTLE DOME DESK');
+      g.ui.say(['Out in ' + DOME_ROUNDS[b.round] + ' — a ' + finish + ' finish, written into the Dome book. The bracket plays on without you.'], () => {}, 'TRIAL DOME DESK');
       return;
     }
     healTeam(team);
@@ -654,7 +654,7 @@ function domeNextMatch(g, ow) {
         state.frontier.records.dome.tournamentWins++;
         if (state.frontier.records.dome.bestFinish < 4) state.frontier.records.dome.bestFinish = 4;
         closeRun(state);
-        const done = () => g.ui.say(['CHAMPION OF THE DOME! Sixteen names went up; yours is the one still lit.'], () => {}, 'BATTLE DOME DESK');
+        const done = () => g.ui.say(['CHAMPION OF THE DOME! Sixteen names went up; yours is the one still lit.'], () => {}, 'TRIAL DOME DESK');
         if (tier) awardSymbol(g, 'dome', tier, done); else done();
         return;
       }
@@ -662,7 +662,7 @@ function domeNextMatch(g, ow) {
       // promises exactly that): the bracket flows match to match
       // without a desk re-talk in between.
       g.ui.say(['You advance! Elsewhere in ' + DOME_ROUNDS[b.round - 1] + ':', ...narration, 'Next match: ' + DOME_ROUNDS[b.round] + '. The desk calls your name —'],
-        () => domeNextMatch(g, ow), 'BATTLE DOME DESK');
+        () => domeNextMatch(g, ow), 'TRIAL DOME DESK');
     };
     advance();
   };
@@ -791,7 +791,7 @@ function launchPossessedBattle(g, ow) {
       ], () => {
         awardSymbol(g, 'pyramid', 'silver', () => {
           closeRun(state);
-          g.ui.say(['The run closes in triumph — the desk strikes it in silver ink.'], () => {}, 'BATTLE PYRAMID DESK');
+          g.ui.say(['The run closes in triumph — the desk strikes it in silver ink.'], () => {}, 'TRIAL PYRAMID DESK');
         });
       }, 'BRANDON');
       return;
@@ -865,7 +865,7 @@ export function pikeChamberEvent(g, ow, chamber, door) {
   if (!run || run.facility !== 'pike' || !run.events) return;
   const kind = run.events[chamber - 1][door];
   const team = activeTeam(state, run);
-  const say = (lines, cb) => g.ui.say(lines, cb || (() => {}), 'BATTLE PIKE');
+  const say = (lines, cb) => g.ui.say(lines, cb || (() => {}), 'TRIAL PIKE');
   const cleared = () => { run.rooms++; };
   if (kind === 'battle-trainer' || kind === 'battle-wild') {
     const facility = { id: 'pike', partyOverride: team };

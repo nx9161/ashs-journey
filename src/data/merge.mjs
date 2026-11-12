@@ -12,7 +12,7 @@ Object.assign(EVENTS, ORANGE_EVENTS, JOHTO_EVENTS, HOENN_EVENTS, SINNOH_EVENTS);
 // QUESTS) — the shipped tale machine (stage values, Quest Log section,
 // validator quest list via gen-tables) serves them unchanged.
 Object.assign(QUESTS, JOHTO_TALES);
-// Stage H4a: Hoenn Town Tales fold into the same tales table.
+// Stage H4a: Maris Town Tales fold into the same tales table.
 Object.assign(QUESTS, HOENN_TALES);
 // Arc 4 Stage S5a: Sinnoh Town Tales fold into the same tales table.
 Object.assign(QUESTS, SINNOH_TALES);
@@ -22,7 +22,7 @@ Object.assign(LEGENDARY_ARCS, ORANGE_LEGENDARY_ARCS);
 // story-kanto.mjs (its steps described an errand the shipped game
 // never told); arc_hooh was activated in place in LEGENDARY_ARCS.
 Object.assign(LEGENDARY_ARCS, JOHTO_LEGENDARY_ARCS);
-// Stage H6 fold: Hoenn's ten live legendary arcs (the Regi tombs,
+// Stage H6 fold: Maris's ten live legendary arcs (the Regi tombs,
 // the Eon pair, the weather trio + Rayquaza, Jirachi, Deoxys) —
 // every one supersedes its story-kanto.mjs designed stub (dead lair
 // ids, pre-band levels, and arc_rayquaza's arcs-prereq, replaced by

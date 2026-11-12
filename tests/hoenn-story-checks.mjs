@@ -99,7 +99,7 @@ const { MAPS2 } = await import(join(ROOT, 'src/data/maps2.mjs'));
       && HOENN_NPC_PATCHES.some((p) => p.tale === t.id && p.role === 'stage'))
     && HOENN_NPC_PATCHES.every((p) => (MAPS7[p.map].npcs || []).some((n) => n.name === p.name)));
   ok('A12 embark captain: CAPT HOENN rides the TALE_NPCS loadMap append on vermilion (16,10), ferry littleroot + ferryArc hoenn — Vermilion\'s OWN captain (the Johto smell); the Slateport return port (CAPT MERIDIAN, maps7) carries ferryArc hoenn + ferry vermilion',
-    (() => { const c = TALE_NPCS.find((n) => n.name === 'CAPT HOENN');
+    (() => { const c = TALE_NPCS.find((n) => n.name === 'CAPT MARIS');
       return c && c.map === 'vermilion' && c.x === 16 && c.y === 10 && c.ferry === 'littleroot' && c.ferryArc === 'hoenn' && !c.tale; })()
     && (() => { const m = (MAPS7.slateport.npcs || []).find((n) => n.name === 'CAPT MERIDIAN');
       return m && m.ferryArc === 'hoenn' && m.ferry === 'vermilion'; })());
@@ -198,7 +198,7 @@ const { MAPS2 } = await import(join(ROOT, 'src/data/maps2.mjs'));
     HOENN_NPCS.length === 45 && bad.length === 0, bad.join(';'));
   // Vermilion captain connectivity (maps2 town, start = its dock entry).
   const v = MAPS2.vermilion || MAPS_BASE.vermilion;
-  const vSeen = bfs({ ...v, npcs: [...(v.npcs || []), { x: 16, y: 10, name: 'CAPT HOENN' }] }, 7, 9);
+  const vSeen = bfs({ ...v, npcs: [...(v.npcs || []), { x: 16, y: 10, name: 'CAPT MARIS' }] }, 7, 9);
   ok('A23 CAPT HOENN (16,10) is reachable-adjacent on the Vermilion dock row and does not collide with CAPT ORANGE (13,10) or SAILOR BRINE (10,10)',
     adjacent(v, 16, 10, vSeen) && !(v.npcs || []).some((n) => n.x === 16 && n.y === 10));
   const order = JSON.parse(readFileSync(join(ROOT, 'scripts/module-order.json'), 'utf8'));
@@ -416,7 +416,7 @@ const driver = `
     st.story.arc === 'hoenn' && st.story.region === 'hoenn' && !!st.story.flags.hook_hoenn && !!st.story.flags.embark_hoenn && st.story.arc_directive === null,
     'arc=' + st.story.arc + ' embark=' + !!st.story.flags.embark_hoenn);
   ow = gotoMap(g, 'vermilion', 16, 12); pump(g);
-  var capt = ow.map.npcs.find(function (n) { return n.name === 'CAPT HOENN'; });
+  var capt = ow.map.npcs.find(function (n) { return n.name === 'CAPT MARIS'; });
   ok('B03 CAPT HOENN stands on the Vermilion dock in the loaded scene (ferry littleroot, ferryArc hoenn)', !!capt && capt.ferry === 'littleroot' && capt.ferryArc === 'hoenn');
   if (capt) { ow.sysNpc(capt); pump(g, 600); }
   ok('B04 embark drive: Vermilion -> littleroot on the shipped ferryArc machinery (position littleroot, reachedarc_hoenn stamped, arc stays hoenn)',

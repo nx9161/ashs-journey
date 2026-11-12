@@ -173,7 +173,7 @@ export function xpForLevel(curve, level) {
 // Candy) can carry it past xpForLevel('slow', cap). The x2 slack is
 // the generous margin for post-cap accumulation — the battle XP loop
 // keeps adding shares to a capped mon without levelling it. An
-// open-level cap (Infinity — the Battle Frontier) has no ceiling.
+// open-level cap (Infinity — the Trial Grounds) has no ceiling.
 // The client schema, the server validator (via the gen-tables
 // emission) and this function are the matched pair: one derivation,
 // never a hand-copied number.

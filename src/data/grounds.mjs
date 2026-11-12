@@ -186,26 +186,26 @@ export const MAP_GROUND = {
   // so its battles ride the Storm ground.
   'rocket-hideout': 'storm',
   'silver-stadium': 'open',
-  // Stage H4a: Hoenn west gym signature Grounds (existing 15 only —
+  // Stage H4a: Maris west gym signature Grounds (existing 15 only —
   // no new Grounds this stage): Roxanne's quarry gym rides the Rubble,
   // Brawly's shore gym the Rubble too (physical moves land true where
   // the surf hits — the Chuck precedent), Wattson's the Volt, and
-  // Flannery's the Pyre. Landmarks follow their feel: Meteor Falls is
-  // Rubble-dark, Mt. Chimney's crater rim is Ember ground.
-  'gym-rustboro': 'rubble', // Rustboro Gym — Roxanne
-  'gym-dewford': 'rubble', // Dewford Gym — Brawly
-  'gym-mauville': 'volt', // Mauville Gym — Wattson
-  'gym-lavaridge': 'pyre', // Lavaridge Gym — Flannery
+  // Flannery's the Pyre. Landmarks follow their feel: Comet Falls is
+  // Rubble-dark, Mt. Smokestack's crater rim is Ember ground.
+  'gym-rustboro': 'rubble', // Copperton Gym — Roxanne
+  'gym-dewford': 'rubble', // Mistford Gym — Brawly
+  'gym-mauville': 'volt', // Lilac Gym — Wattson
+  'gym-lavaridge': 'pyre', // Steamspring Gym — Flannery
   'meteor-falls': 'rubble',
   'mt-chimney': 'ember',
-  // Stage H4b: Hoenn east gym signature Grounds (existing 15 only):
+  // Stage H4b: Maris east gym signature Grounds (existing 15 only):
   // Norman's honest weight rides the Open, Winona's canopy the
   // Storm, the twins' shared mind the Mind, Juan's conducted water
   // the Tide. Landmarks follow their feel likewise.
-  'gym-petalburg': 'open', // Petalburg Gym — Norman
-  'gym-fortree': 'storm', // Fortree Gym — Winona
-  'gym-mossdeep': 'mind', // Mossdeep Gym — Tate & Liza
-  'gym-sootopolis': 'tide', // Sootopolis Gym — Juan
+  'gym-petalburg': 'open', // Meadowbrook Gym — Norman
+  'gym-fortree': 'storm', // Highbranch Gym — Winona
+  'gym-mossdeep': 'mind', // Starfall Gym — Tate & Liza
+  'gym-sootopolis': 'tide', // Craterlake Gym — Juan
   'mt-pyre': 'grave',
   'seafloor-cavern': 'tide',
   'cave-of-origin': 'spirit',

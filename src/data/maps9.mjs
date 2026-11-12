@@ -3,7 +3,7 @@
 // routes, 13 dungeons/places, 25 interiors — Rowan's lab, Jubilife
 // TV, the two Galactic buildings, the Hearthome Contest Hall,
 // Canalave Library, 14 houses, 5 gyms — shared center/mart
-// interiors ride the via{} idiom exactly as Yamato/Hoenn) + S3b's 77:
+// interiors ride the via{} idiom exactly as Yamato/Maris) + S3b's 77:
 // the 4 remaining settlements (Pastoria + the Great Marsh set,
 // Celestic, Snowpoint, Sunyshore) + the League exterior and
 // its lobby/chamber chain, 20 routes (212S, 210N fog segment, 213,
@@ -33,7 +33,7 @@
 // foothill web into Mt. Coronet's south + central caverns, and the
 // Hearthome -> Solaceon -> Veilstone north loop. Canalave fields the
 // ferryArc 'sinnoh' network port (CAPT WESTWIND, ferry 'vermilion')
-// on its harbour pier, the maps6 Beacon / maps7 Slateport idiom —
+// on its harbour pier, the maps6 Beacon / maps7 Fairhaven idiom —
 // the return is unconditional once reached. Gym interiors are
 // layouts only (leaders/battles: Stage S5); the Contest Hall is a
 // dressed, NPC-free floor with a counter (contestHall field — S4

@@ -68,7 +68,7 @@ export const JOHTO_QUESTS = [
   { id: 'q_johto_rising', flag: 'badge_rising', text: 'Win Clair\'s trust — and the Rising Badge — in Cragmoor', hint: 'Clair\'s gym is only the first half. By the clan\'s law the badge itself is given in the Drake\'s Den, after the elder\'s test. Her Dragon types fear Ice and Dragon moves.' },
   { id: 'q_johto_conference', flag: 'conference_registered', text: 'Register for the Lastlight Conference at Lastlight Town', hint: 'Eight Yamato badges open the road north: Cragmoor, Lastlight Pass, Lastlight Town. The Conference Official in the stadium keeps the bracket.' },
   { id: 'q_johto_gary', flag: 'beat_gary_johto', text: 'The Lastlight Conference — beat Gary', hint: 'He has been waiting on the far side of the bracket all arc. ABYSSAR and all. This one you have to win.' },
-  { id: 'q_johto_harrison', flag: 'johto_complete', text: 'The Lastlight Conference — the quarter-final, and whatever it decides', hint: 'Harrison of Littleroot, and a Houndoom that has ended better runs than yours. Face him with everything — the Conference, and Yamato, end on the far side of this battle.' },
+  { id: 'q_johto_harrison', flag: 'johto_complete', text: 'The Lastlight Conference — the quarter-final, and whatever it decides', hint: 'Harrison of Rootlet, and a Houndoom that has ended better runs than yours. Face him with everything — the Conference, and Yamato, end on the far side of this battle.' },
   { id: 'q_johto_red', flag: 'red_defeated', text: 'Post-game: the silent trainer on Mt. Lastlight', hint: 'Past Lastlight Town, the mountain keeps one more name off every bracket. He has been standing on that dais a long time, saying nothing, waiting for someone worth the silence.' },
 ];
 
@@ -420,7 +420,7 @@ export const JOHTO_TRAINERS = {
   // lines on a win, and johto_complete set either way.
   harrison: {
     id: 'harrison', name: 'Harrison', title: 'Lastlight Conference Trainer', ai: 'smart',
-    intro: ['Harrison, from Littleroot Town — a long way from home, same as you. I watched your Gary match from the tunnel. Whatever happens here, trainer, this crowd is getting a final worthy of a semi.'],
+    intro: ['Harrison, from Rootlet Town — a long way from home, same as you. I watched your Gary match from the tunnel. Whatever happens here, trainer, this crowd is getting a final worthy of a semi.'],
     lose: ['There it is! There is the battle I crossed an ocean of brackets for!'],
     team: [
       { species: 'sneasel', level: 192 },
@@ -892,7 +892,7 @@ export const JOHTO_NPCS = [
   { map: 'silver-stadium', x: 13, y: 5, name: 'GARY', art: 'gary', skin: '#f0c8a0', shirt: '#3a5a9a', pants: '#2a2a3a', hair: '#6a4a2a', johto: 'gary_stadium',
     dialogue: ['Took you long enough. The bracket has been boring without you.'] },
   { map: 'silver-stadium', x: 9, y: 5, name: 'HARRISON', art: 'acetrainer', skin: '#d8a878', shirt: '#7a672a', pants: '#3a3a2a', hair: '#a03a2a', johto: 'harrison',
-    dialogue: ['Harrison, from Littleroot. I have been watching your side of the bracket with great interest.'] },
+    dialogue: ['Harrison, from Rootlet. I have been watching your side of the bracket with great interest.'] },
   { map: 'mt-silver-cave', x: 8, y: 2, name: 'RED', art: 'rival', skin: '#f0c8a0', shirt: '#c83a2a', pants: '#2a3a5a', hair: '#2a1a0a', johto: 'red',
     dialogue: ['...'] },
   // ---- Stage J5: legendary witnesses, elders, and the hideout stairs.

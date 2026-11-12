@@ -205,7 +205,7 @@ export function defaultState(inherit) {
     // CONTEST_RIBBONS). Defaults-filled on load (schema.mjs) so
     // pre-H5 saves open unchanged in shape.
     contest: { ribbons: [] },
-    // Arc 3.5 Stage F2: Battle Frontier run state (game/frontier.mjs)
+    // Arc 3.5 Stage F2: Trial Grounds run state (game/frontier.mjs)
     // — per-facility records, ONE active run across all facilities,
     // and the Pyramid run bag. The J6 treatment: defaultState here +
     // client schema (validate-if-present + fill) + server validator

@@ -264,10 +264,10 @@ Object.assign(OverworldScene.prototype, {
         this.runEvent('ev_johto_radio_top');
       }
     }
-    // Stage H4a (Hoenn story, first half): map-entry scenes, same
+    // Stage H4a (Maris story, first half): map-entry scenes, same
     // idiom — each scene's own completion flag is its gate, so a fled
     // or stalled beat re-fires on a later entry. The rescue fires on
-    // the ferry landing map itself (Littleroot); Meteor Falls waits
+    // the ferry landing map itself (Rootlet); Comet Falls waits
     // for the Stone Badge and Chimney for the Dynamo Badge (the
     // anime-true order of the seed chain).
     if (!arcCardFired && !g.ui.dialogueOpen) {
@@ -282,13 +282,13 @@ Object.assign(OverworldScene.prototype, {
         this.runEvent('ev_hoenn_chimney');
       }
     }
-    // Stage H4b (Hoenn story, second half): map-entry scenes, same
+    // Stage H4b (Maris story, second half): map-entry scenes, same
     // idiom and same gate law — each scene's own completion flag is
     // its gate, so a fled or stalled beat re-fires on a later entry.
     // The chain order is the fiction's: Institute (Balance held) ->
     // Pyre (Mind held) -> the two hideouts (orbs taken / Pyre done)
-    // -> Seafloor (submarine stolen) -> the Sootopolis standoff
-    // (Seafloor done) -> Sky Pillar (standoff seen). The climax
+    // -> Seafloor (submarine stolen) -> the Craterlake standoff
+    // (Seafloor done) -> Tempest Tower (standoff seen). The climax
     // phase flags move ONLY inside these scenes' steps.
     if (!arcCardFired && !g.ui.dialogueOpen) {
       const hf = g.state.story.flags;
@@ -364,7 +364,7 @@ Object.assign(OverworldScene.prototype, {
         this.runEvent('ev_sinnoh_distortion_climax');
       }
     }
-    // Stage H6 (Hoenn legendary arcs): map-entry faces, same idiom —
+    // Stage H6 (Maris legendary arcs): map-entry faces, same idiom —
     // every face is gated on its arc's own progress flags (never on
     // the event-done flag alone), and the catch-only chain
     // (wildBattleCatch) leaves everything unwritten on a flee or a
@@ -372,7 +372,7 @@ Object.assign(OverworldScene.prototype, {
     //  - The weather trio + Rayquaza key off climax_resolved ONLY
     //    (H4b ruling: their climax roles were appearances — no catch
     //    state exists, and NONE of these can fire before it).
-    //  - Jirachi's star fall is witnessed on Meteor Falls entry once
+    //  - Jirachi's star fall is witnessed on Comet Falls entry once
     //    the Space Center's news is in hand and the falls' own story
     //    beat (H4a) is behind the player.
     //  - Latias ROAMS: no roaming engine shipped (the Yamato beasts
@@ -381,7 +381,7 @@ Object.assign(OverworldScene.prototype, {
     //    deterministically from the PERSISTED walked-step counter
     //    (state.stepsTotal: one landing per 50 walked steps, cycling
     //    r110 -> r118 -> r123 -> r127 -> r134). Entering the map she
-    //    currently holds fires her face; walking Hoenn turns her.
+    //    currently holds fires her face; walking Maris turns her.
     if (!arcCardFired && !g.ui.dialogueOpen) {
       const hf = g.state.story.flags;
       if (id === 'magma-hideout' && hf.climax_resolved && !hf.arc_groudon_done && !hf.ev_hoenn_groudon_done) {
@@ -581,7 +581,7 @@ Object.assign(OverworldScene.prototype, {
         }
         if (!hf[tomb.done] && !hf[tomb.evDone]) { this.runEvent(tomb.ev); return true; }
       }
-      // Latios, the Eon stop: the Shoal Cave island's shore apron
+      // Latios, the Eon stop: the Ebbtide Cave island's shore apron
       // (r125, the island landmass x12-18 / y4-8). Post-climax only.
       if (this.mapId === 'r125' && x >= 12 && x <= 18 && y >= 4 && y <= 8) {
         const hf = g.state.story.flags;
@@ -685,7 +685,7 @@ Object.assign(OverworldScene.prototype, {
     if (s.toast) { g.ui.toast(s.toast); next(); return; }
     if (s.flag) { g.state.story.flags[s.flag] = true; next(); return; }
     // Stage H4b: a flag CLEAR step — the climax's phase transitions
-    // (drought -> deluge -> resolved) are data steps in the Hoenn
+    // (drought -> deluge -> resolved) are data steps in the Maris
     // events, not engine special cases. Setting false (not delete)
     // keeps the save's flag vocabulary stable for the validator.
     if (s.clearFlag) { g.state.story.flags[s.clearFlag] = false; next(); return; }
@@ -945,7 +945,7 @@ Object.assign(OverworldScene.prototype, {
     // is Celebi's door — faced-tile, exactly like a tale spot.
     if (this.mapId === 'ilex-forest' && fx === 14 && fy === 3 && this.johtoShrineInteract()) return true;
     // Stage H6: the Regi tombs (inscriptions, seals, puzzle stones)
-    // and Meteor Falls' meteorstones (the Jirachi wish stone; the
+    // and Comet Falls' meteorstones (the Jirachi wish stone; the
     // Deoxys crater meteorite + its forme switch). Faced-tile, the
     // shrine idiom exactly: each handler declines (returns false)
     // whenever the faced tile is not one of its own.
@@ -1119,11 +1119,11 @@ Object.assign(OverworldScene.prototype, {
           && p.surfaceTile.x === diveSpot.x && p.surfaceTile.y === diveSpot.y);
         if (pair) {
           if (!((g.state.badges && g.state.badges.hoenn) || []).includes('mindbadge')) {
-            g.ui.say(['The water here goes down like a stairway into dark blue — a dive spot, marked by the old sea-charts.', 'Come back with the Mind Badge in your case — Mossdeep\'s gym, out east. The League does not let trainers down into the trenches without it.']);
+            g.ui.say(['The water here goes down like a stairway into dark blue — a dive spot, marked by the old sea-charts.', 'Come back with the Mind Badge in your case — Starfall\'s gym, out east. The League does not let trainers down into the trenches without it.']);
             return true;
           }
           if (!this.partyKnowsDive()) {
-            g.ui.say(['The water here goes down like a stairway into dark blue — a dive spot, marked by the old sea-charts.', 'You have the Mind Badge, but no partner who knows Dive. Steven Stone, in Mossdeep, teaches the way down — his house stands by the shore.']);
+            g.ui.say(['The water here goes down like a stairway into dark blue — a dive spot, marked by the old sea-charts.', 'You have the Mind Badge, but no partner who knows Dive. Steven Stone, in Starfall, teaches the way down — his house stands by the shore.']);
             return true;
           }
           g.ui.showMenu('The water darkens straight down. Dive?', [
@@ -1524,7 +1524,7 @@ Object.assign(OverworldScene.prototype, {
     // Stage J4a: Yamato story actors (Elm, the west leaders, Kurt, the
     // Sprout Elder, the well Rockets) run their own scenes.
     if (npc.johto) { if (this.runJohtoNpc(npc)) return true; }
-    // Stage H4a: Hoenn story actors (Birch, May, Wally, Norman, the
+    // Stage H4a: Maris story actors (Birch, May, Wally, Norman, the
     // west leaders, Cozmo, the two admins) run their own scenes.
     if (npc.hoenn) { if (this.runHoennNpc(npc)) return true; }
     // Arc 4 Stage S5a: Sinnoh story actors (Rowan, Dawn, Barry, Paul,
@@ -2308,13 +2308,13 @@ Object.assign(OverworldScene.prototype, {
 
     if (kind === 'harrison') {
       if (flags.johto_complete) { say(['The Conference book is closed and your name is in it in the good ink, trainer. Whatever either of us does next, this stadium saw the real thing. Travel well. Houndoom and I will be telling this one for years.']); return true; }
-      if (!flags.beat_gary_johto) { say(['Harrison, from Littleroot Town. We are on a collision course, you and I — but Gary is your road to me, and the bracket does not bend. Beat him first. I will be here, and I will be ready either way.']); return true; }
+      if (!flags.beat_gary_johto) { say(['Harrison, from Rootlet Town. We are on a collision course, you and I — but Gary is your road to me, and the bracket does not bend. Beat him first. I will be here, and I will be ready either way.']); return true; }
       // The quarter-final (mechanism recorded at his trainer def):
       // a real full-strength battle, fought FRIENDLY — the predicate
       // is FACED, not won. Win or lose, the branch-true honours play,
       // johto_complete is set, and the Foundation machine itself
       // fires (checkArcCompletion — ARC COMPLETE card, regionsDone,
-      // the pinned Hoenn directive; nothing here writes regionsDone).
+      // the pinned Maris directive; nothing here writes regionsDone).
       say(['So it is us. Gary is beaten — I watched it from the tunnel, and I will carry that match with me whatever happens here.', 'Quarter-final rules, trainer, and Conference stakes. Give me everything you gave him. Houndoom and I did not cross the bracket for less.'], () => {
         g.ui.showMenu('The quarter-final — face Harrison?', [
           { label: 'Battle', value: 'yes' }, { label: 'Not yet', value: 'no' },
@@ -2561,7 +2561,7 @@ Object.assign(OverworldScene.prototype, {
     }));
   },
 
-  // ---------- Stage H4a: Hoenn story actors ----------
+  // ---------- Stage H4a: Maris story actors ----------
   // One dispatch for every NPC carrying a `hoenn:` key (appended at
   // loadMap from story-hoenn.mjs HOENN_NPCS). Leaders ride the shared
   // leader runner (startHoennBattle = the startJohtoBattle idiom:
@@ -2571,7 +2571,7 @@ Object.assign(OverworldScene.prototype, {
   // Birch, May, Wally, Norman, Cozmo and the admins are state-driven
   // scenes. H4b extends this dispatch at the marked seam.
   // Stage H6: the Space Center briefing (see the sysNpc dispatch —
-  // SPACE RESEARCHER ORBIT, the Mossdeep Space Center's facade
+  // SPACE RESEARCHER ORBIT, the Starfall Space Center's facade
   // researcher, is the information source for BOTH star arcs: the
   // comet news opens Jirachi's chain, and the crater rumour arms
   // Deoxys. Later talks track the two arcs' states.
@@ -2582,7 +2582,7 @@ Object.assign(OverworldScene.prototype, {
     const say = (lines, cb, who) => g.ui.say(lines.map((l) => l.replace('{player}', st.player.name)), cb, who === undefined ? npc.name : who);
 
     if (!flags.arc_jirachi_news) {
-      say(['You found the one person in Mossdeep who is paid to look UP. Researcher Orbit, Space Center — the telescopes are mine, the comet is everyone\'s, and the paperwork is forever.', 'The comet, trainer. THE comet — the old one, the one in the Center\'s oldest file, the one that comes over Hoenn so rarely the file is mostly other centuries\' handwriting. It is crossing NOW. And the file says — every hand in it says — that when it crosses, a Wish Maker wakes under it. A small star that sleeps a thousand years and grants what it is asked. The last note in the file, in the shakiest hand, says where: wherever a piece of the sky has already fallen. Meteor Falls, trainer. The falls are FULL of fallen sky.', 'And since you have the look of someone who collects impossible errands, a second one, free: something fell with the old meteor shower in that same cave and never cooled. We track it. It does not move. It does not cool. It just — waits, in the crater in the north chamber, being warm at us through three generations of instruments. If you go to the falls for the comet, {player}, go and be warm back at it. Professionally.'], () => {
+      say(['You found the one person in Starfall who is paid to look UP. Researcher Orbit, Space Center — the telescopes are mine, the comet is everyone\'s, and the paperwork is forever.', 'The comet, trainer. THE comet — the old one, the one in the Center\'s oldest file, the one that comes over Maris so rarely the file is mostly other centuries\' handwriting. It is crossing NOW. And the file says — every hand in it says — that when it crosses, a Wish Maker wakes under it. A small star that sleeps a thousand years and grants what it is asked. The last note in the file, in the shakiest hand, says where: wherever a piece of the sky has already fallen. Comet Falls, trainer. The falls are FULL of fallen sky.', 'And since you have the look of someone who collects impossible errands, a second one, free: something fell with the old meteor shower in that same cave and never cooled. We track it. It does not move. It does not cool. It just — waits, in the crater in the north chamber, being warm at us through three generations of instruments. If you go to the falls for the comet, {player}, go and be warm back at it. Professionally.'], () => {
         flags.arc_jirachi_news = true;
         flags.arc_deoxys_rumor = true;
         st.story.quests.arc_jirachi = 'discovered';
@@ -2593,10 +2593,10 @@ Object.assign(OverworldScene.prototype, {
       return true;
     }
     if (flags.arc_jirachi_done && flags.arc_deoxys_done) { say(['Both of my sky errands, closed by one trainer. The comet has gone over, the crater stone is cold, and the Center\'s oldest file finally has a last page that ends the story instead of asking about it. I wrote it myself, {player}. In my best hand. It mostly says: told you so.']); return true; }
-    if (flags.arc_deoxys_done && !flags.arc_jirachi_done) { say(['The crater stone went cold the day you met its tenant — our instruments noticed before our pride did. The comet is still up there, though, and the Wish Maker with it. Meteor Falls, {player}. Wishes do not keep.']); return true; }
+    if (flags.arc_deoxys_done && !flags.arc_jirachi_done) { say(['The crater stone went cold the day you met its tenant — our instruments noticed before our pride did. The comet is still up there, though, and the Wish Maker with it. Comet Falls, {player}. Wishes do not keep.']); return true; }
     if (flags.jirachi_star_fell && !flags.arc_jirachi_done) { say(['You SAW it come down? At the falls? Then stop standing in my telescope light, trainer — it fell by the lower falls, and a Wish Maker\'s waking is measured in days, not in however long you are about to spend admiring my instruments. Go. Be polite. Earn it.']); return true; }
-    if (flags.arc_jirachi_done && !flags.arc_deoxys_done) { say(['A granted wish and a filed report — the Center is calling it the best week since the building went up. One file remains open: the crater stone in Meteor Falls\' north chamber, still warm, still waiting. It has waited this long, {player}. It can wait for you to be ready. Barely.']); return true; }
-    say(['The comet is up there now, trainer, crossing whether anyone watches or not. Meteor Falls is where the sky has already fallen once — the Wish Maker wakes where the falling is familiar. And the crater stone is still warm. It is always, professionally speaking, still warm.']);
+    if (flags.arc_jirachi_done && !flags.arc_deoxys_done) { say(['A granted wish and a filed report — the Center is calling it the best week since the building went up. One file remains open: the crater stone in Comet Falls\' north chamber, still warm, still waiting. It has waited this long, {player}. It can wait for you to be ready. Barely.']); return true; }
+    say(['The comet is up there now, trainer, crossing whether anyone watches or not. Comet Falls is where the sky has already fallen once — the Wish Maker wakes where the falling is familiar. And the crater stone is still warm. It is always, professionally speaking, still warm.']);
     return true;
     return true;
   },
@@ -2609,38 +2609,38 @@ Object.assign(OverworldScene.prototype, {
     const say = (lines, cb, who) => g.ui.say(lines.map((l) => l.replace('{player}', st.player.name)), cb, who === undefined ? npc.name : who);
     const kind = npc.hoenn;
     const HOENN_LEADER_WAITS = {
-      stonebadge: 'Roxanne, in Rustboro City\'s gym',
-      knucklebadge: 'Brawly, in Dewford Town\'s gym',
-      dynamobadge: 'Wattson, in Mauville City\'s gym',
-      heatbadge: 'Flannery, in Lavaridge Town\'s gym',
-      balancebadge: 'Norman, in Petalburg City\'s gym',
-      featherbadge: 'Winona, in Fortree City\'s gym',
-      mindbadge: 'Tate and Liza, in Mossdeep City\'s gym',
-      rainbadge: 'Juan, in Sootopolis City\'s gym',
+      stonebadge: 'Roxanne, in Copperton City\'s gym',
+      knucklebadge: 'Brawly, in Mistford Town\'s gym',
+      dynamobadge: 'Wattson, in Lilac City\'s gym',
+      heatbadge: 'Flannery, in Steamspring Town\'s gym',
+      balancebadge: 'Norman, in Meadowbrook City\'s gym',
+      featherbadge: 'Winona, in Highbranch City\'s gym',
+      mindbadge: 'Tate and Liza, in Starfall City\'s gym',
+      rainbadge: 'Juan, in Craterlake City\'s gym',
     };
     const badgeOrderRefusal = (badgeId) => {
       const idx = BADGE_SETS.hoenn.indexOf(badgeId);
       if (idx <= 0 || hBadges.length >= idx) return null;
       const miss = BADGE_SETS.hoenn[hBadges.length];
       const missItem = ITEMS[miss];
-      return ['The League keeps an order in Hoenn, challenger, and I keep it with them: the badges are earned in sequence here, west to east.',
+      return ['The League keeps an order in Maris, challenger, and I keep it with them: the badges are earned in sequence here, west to east.',
         'You are missing the ' + (missItem ? missItem.name : miss) + ' — ' + (HOENN_LEADER_WAITS[miss] || 'its leader') + ' is where that road goes next. Win that badge first, and I will be here, ready, when you come back.'];
     };
 
     if (kind === 'birch') {
       if (!flags.hoenn_arrival && !flags.ev_hoenn_arrival_done) { this.runEvent('ev_hoenn_arrival'); return true; }
       if (flags.chimney_clash_done) { say(['Star-stone fed to a crater, and the sky argued about it in two colors. My instruments have been restless ever since, {player}. Whatever those teams are waking, it is older than both of them — and the Weather Institute up Route 119 reads this region\'s sky for a living. If anyone can name what is coming, they can.']); return true; }
-      if (flags.meteor_falls_done) { say(['Cozmo wrote me a letter with shaking handwriting, {player}. A stolen meteorite and two teams with flags — that is not fieldwork anymore, that is a forecast. Keep your eyes on the sky as much as the road. Hoenn\'s weather has opinions this year.']); return true; }
-      say(['Registered, welcomed, and only slightly mauled by the local wildlife — a complete Hoenn arrival, {player}. Petalburg first, then Rustboro. And if a Poochyena ever corners me again, I am retiring to study sedimentary rock. Indoors.']);
+      if (flags.meteor_falls_done) { say(['Cozmo wrote me a letter with shaking handwriting, {player}. A stolen meteorite and two teams with flags — that is not fieldwork anymore, that is a forecast. Keep your eyes on the sky as much as the road. Maris\'s weather has opinions this year.']); return true; }
+      say(['Registered, welcomed, and only slightly mauled by the local wildlife — a complete Maris arrival, {player}. Meadowbrook first, then Copperton. And if a Poochyena ever corners me again, I am retiring to study sedimentary rock. Indoors.']);
       return true;
     }
 
     if (kind === 'may_littleroot') {
       if (!flags.may_met) {
-        say(['You are the trainer who rescued Dad? He tells it with sound effects now. I am May — I live two doors down and I am going to win a contest ribbon before you win a badge, so... no pressure on either of us.', 'Gyms are your road. Halls are mine. But roads cross, {player} — Slateport has a hall, and so do Verdanturf and Fallarbor. Come and sit in my world sometime. I will sit in yours at Rustboro and try not to grade your footwork. Much.'], () => { flags.may_met = true; });
+        say(['You are the trainer who rescued Dad? He tells it with sound effects now. I am May — I live two doors down and I am going to win a contest ribbon before you win a badge, so... no pressure on either of us.', 'Gyms are your road. Halls are mine. But roads cross, {player} — Fairhaven has a hall, and so do Wildflower and Ashfall. Come and sit in my world sometime. I will sit in yours at Copperton and try not to grade your footwork. Much.'], () => { flags.may_met = true; });
         return true;
       }
-      say(['Slateport, Verdanturf, Fallarbor — that is my road, in order. Yours has more volcanoes. I checked. See you in a hall, {player} — bring your loudest polite applause.']);
+      say(['Fairhaven, Wildflower, Ashfall — that is my road, in order. Yours has more volcanoes. I checked. See you in a hall, {player} — bring your loudest polite applause.']);
       return true;
     }
 
@@ -2656,27 +2656,27 @@ Object.assign(OverworldScene.prototype, {
       return true;
     };
     if (kind === 'may_contest_slateport') {
-      return mayContest('Slateport', 'knucklebadge', 'may_slateport_done', null,
-        ['Too early, {player} — the hall wants a coordinator with sea legs, and I want one more badge\'s worth of road behind me before I face that crowd. Dewford first. Then watch me.'],
-        ['You came. You actually — okay. Okay! Watch this, then. From the top, just like practice.', '...The hall lights are a different country, {player}. My appeal landed, my timing held, and the Slateport judges still gave the ribbon to a coordinator with six years on me — by half a point. HALF. I am not crying about it. I am taking notes about it. There is a difference, and the difference is Verdanturf.'],
-        ['Half a point, {player}. I have replayed it so many times the judges have started appearing in my dreams to apologize. Verdanturf is next, and I am not losing that one in the last round. I have decided.']);
+      return mayContest('Fairhaven', 'knucklebadge', 'may_slateport_done', null,
+        ['Too early, {player} — the hall wants a coordinator with sea legs, and I want one more badge\'s worth of road behind me before I face that crowd. Mistford first. Then watch me.'],
+        ['You came. You actually — okay. Okay! Watch this, then. From the top, just like practice.', '...The hall lights are a different country, {player}. My appeal landed, my timing held, and the Fairhaven judges still gave the ribbon to a coordinator with six years on me — by half a point. HALF. I am not crying about it. I am taking notes about it. There is a difference, and the difference is Wildflower.'],
+        ['Half a point, {player}. I have replayed it so many times the judges have started appearing in my dreams to apologize. Wildflower is next, and I am not losing that one in the last round. I have decided.']);
     }
     if (kind === 'may_contest_verdanturf') {
-      return mayContest('Verdanturf', 'dynamobadge', 'may_verdanturf_done', 'may_ribbon_verdanturf',
-        ['Verdanturf is the serious hall, {player} — small room, sharp judges. I am not stepping in there until Mauville is behind you and my new appeal is behind ME. Wattson first. Then this.'],
-        ['Small room. Sharp judges. New appeal. Deep breath... and — YES. Yes! Did you see the last round? The whole hall stood up, {player}, the whole hall!', 'My first ribbon. Verdanturf. It is going on the case exactly like this, dust and all, so I remember what earning one feels like. Your road taught me something, you know: you do not wait to feel ready. You enter, and readiness catches up. Fallarbor next. Their crowd is harsher. So am I, now.'],
-        ['Verdanturf, {player}. First ribbon. I still take it out of the case sometimes just to check it is real. It is. Fallarbor is next — ash, hard judges, harder applause. Perfect.']);
+      return mayContest('Wildflower', 'dynamobadge', 'may_verdanturf_done', 'may_ribbon_verdanturf',
+        ['Wildflower is the serious hall, {player} — small room, sharp judges. I am not stepping in there until Lilac is behind you and my new appeal is behind ME. Wattson first. Then this.'],
+        ['Small room. Sharp judges. New appeal. Deep breath... and — YES. Yes! Did you see the last round? The whole hall stood up, {player}, the whole hall!', 'My first ribbon. Wildflower. It is going on the case exactly like this, dust and all, so I remember what earning one feels like. Your road taught me something, you know: you do not wait to feel ready. You enter, and readiness catches up. Ashfall next. Their crowd is harsher. So am I, now.'],
+        ['Wildflower, {player}. First ribbon. I still take it out of the case sometimes just to check it is real. It is. Ashfall is next — ash, hard judges, harder applause. Perfect.']);
     }
     if (kind === 'may_contest_fallarbor') {
-      return mayContest('Fallarbor', 'heatbadge', 'may_fallarbor_done', 'may_ribbon_fallarbor',
-        ['Fallarbor judges have seen everything twice and applauded once, {player}. I picked this hall on purpose — but not before Lavaridge. Flannery first. A coordinator keeps her order too.'],
-        ['Ash on the windows, silence like a held breath — and then the last appeal landed and the whole room came up out of its seats like startled birds. FALLARBOR, {player}! They applauded. THIS crowd applauded!', 'Two ribbons. Slateport taught me the half point, Verdanturf taught me the entry, and Fallarbor — Fallarbor taught me the room is mine if I walk in like it is. Lilycove is the last hall on my road. When your road bends east, come and see how this story ends.'],
-        ['Two ribbons, {player}, and the hardest room in Hoenn stood up for the second one. Lilycove remains — the last hall, out east where your gym road is going anyway. See you there.']);
+      return mayContest('Ashfall', 'heatbadge', 'may_fallarbor_done', 'may_ribbon_fallarbor',
+        ['Ashfall judges have seen everything twice and applauded once, {player}. I picked this hall on purpose — but not before Steamspring. Flannery first. A coordinator keeps her order too.'],
+        ['Ash on the windows, silence like a held breath — and then the last appeal landed and the whole room came up out of its seats like startled birds. ASHFALL, {player}! They applauded. THIS crowd applauded!', 'Two ribbons. Fairhaven taught me the half point, Wildflower taught me the entry, and Ashfall — Ashfall taught me the room is mine if I walk in like it is. Lotus Cove is the last hall on my road. When your road bends east, come and see how this story ends.'],
+        ['Two ribbons, {player}, and the hardest room in Maris stood up for the second one. Lotus Cove remains — the last hall, out east where your gym road is going anyway. See you there.']);
     }
 
     if (kind === 'wally') {
       if (!flags.wally_helped) {
-        say(['Oh — excuse me. You are a trainer, aren\'t you? I can tell. Everyone here can always tell, and I — I am Wally. I am moving away soon, to Verdanturf, for my health. The air, the doctors say.', 'I asked my family for a Pokemon of my own before we go, and they said yes, if — if I could catch one. Me. The pond grass past the gym has Ralts in it sometimes. I have a ball, and a borrowed Zigzagoon from my neighbor, and hands that shake at exactly the wrong moments. Would you... walk with me? Just to the grass. Just so the shaking is not the loudest thing there.'], () => {
+        say(['Oh — excuse me. You are a trainer, aren\'t you? I can tell. Everyone here can always tell, and I — I am Wally. I am moving away soon, to Wildflower, for my health. The air, the doctors say.', 'I asked my family for a Pokemon of my own before we go, and they said yes, if — if I could catch one. Me. The pond grass past the gym has Ralts in it sometimes. I have a ball, and a borrowed Zigzagoon from my neighbor, and hands that shake at exactly the wrong moments. Would you... walk with me? Just to the grass. Just so the shaking is not the loudest thing there.'], () => {
           say(['The grass shivers. A Ralts — small, horned, already turning away — and the borrowed Zigzagoon looks back once, waiting to be believed in.', 'You did it. YOU DID IT — no, wait. WE did it. Ralts, I — thank you. Thank you for not running. I will take care of you. I will learn how, I promise, I will learn everything.', 'I have a Pokemon. I HAVE a Pokemon, {player}. When I am stronger — when we are both stronger — our road is going to cross yours again, and I am not going to be the boy who needed help standing in the grass. Remember my name for then. Wally. Remember it kindly.'], () => {
             flags.wally_helped = true;
             flags.wally_ralts = true;
@@ -2686,18 +2686,18 @@ Object.assign(OverworldScene.prototype, {
         });
         return true;
       }
-      say(['Ralts is learning my moods faster than my doctors ever did, {player}. Verdanturf soon — the air there, and my uncle\'s house, and a whole new road. When it crosses yours again, I will not be hard to recognize. I will be the one who is ready.']);
+      say(['Ralts is learning my moods faster than my doctors ever did, {player}. Wildflower soon — the air there, and my uncle\'s house, and a whole new road. When it crosses yours again, I will not be hard to recognize. I will be the one who is ready.']);
       return true;
     }
 
     if (kind === 'norman') {
       if (!flags.norman_met) {
-        say(['Norman. I keep this gym, and the road to it: four badges stand between a challenger and my door, by the League\'s order and by my own judgment.', 'You have the look of a road that ends here eventually, {player}. Walk it honestly. When you stand in this room with four badges, I will not be a formality — I will be the wall the first half of Hoenn was building toward. Go and earn the meeting.'], () => { flags.norman_met = true; });
+        say(['Norman. I keep this gym, and the road to it: four badges stand between a challenger and my door, by the League\'s order and by my own judgment.', 'You have the look of a road that ends here eventually, {player}. Walk it honestly. When you stand in this room with four badges, I will not be a formality — I will be the wall the first half of Maris was building toward. Go and earn the meeting.'], () => { flags.norman_met = true; });
         return true;
       }
       if (hBadges.includes('balancebadge')) { say(['Balance, held — by the trainer I deferred in this room, which remains my favourite sentence of the year. East now, {player}: the rain road, the sea, the deep. Keep standing honestly.']); return true; }
       if (hBadges.length < 4) {
-        say(['The road is counting, {player}: ' + hBadges.length + ' of the four badges my door asks for. Rustboro, Dewford, Mauville, Lavaridge — in that order, earned honestly. I will be here. Balance keeps.']);
+        say(['The road is counting, {player}: ' + hBadges.length + ' of the four badges my door asks for. Copperton, Mistford, Lilac, Steamspring — in that order, earned honestly. I will be here. Balance keeps.']);
         return true;
       }
       // H4b: four badges held — the deferred meeting pays off.
@@ -2707,7 +2707,7 @@ Object.assign(OverworldScene.prototype, {
 
     if (kind === 'cozmo') {
       if (!flags.meteor_falls_done) { say(['Mind the spray, mind the ledges, and mind any scarves — red OR blue — that you meet in my cave, trainer. The meteorites here fell before there were teams to want them. I intend them to outlast the wanting.']); return true; }
-      say(['Gone to a crater, my finest stone, and the mountain spat the plan back out — for now. Teams like that do not retire, {player}; they relocate. A weather station, a shrine, a cavern under the sea. Hoenn is old machinery all the way down, and both crews are collectors.']);
+      say(['Gone to a crater, my finest stone, and the mountain spat the plan back out — for now. Teams like that do not retire, {player}; they relocate. A weather station, a shrine, a cavern under the sea. Maris is old machinery all the way down, and both crews are collectors.']);
       return true;
     }
     if (kind === 'magma_admin_npc') {
@@ -2727,15 +2727,15 @@ Object.assign(OverworldScene.prototype, {
 
     // ---- H4b east actors ----
     if (kind === 'may_contest_lilycove') {
-      return mayContest('Lilycove', 'featherbadge', 'may_lilycove_done', 'may_ribbon_lilycove',
-        ['Lilycove is the last hall, {player} — and the biggest. I am not walking into it until the Feather Badge is yours and the sea road is behind us both. Winona first. Then watch me finish this.'],
-        ['Harbour lights, a full house, and my whole road in one appeal set... and the last card turned MY way, {player}. LILYCOVE. Three ribbons. Slateport\'s half point is IN this one — I spent it here, on the biggest floor in Hoenn, and it was worth every fraction.', 'One thing remains, and it is not in a hall like the others. The Grand Festival. Coordinators from the whole region, one stage, invitations earned in ribbon cases like mine. Mine just qualified. When your road lets you, harbourside — I will tell you the rest where the boats can hear it.'],
+      return mayContest('Lotus Cove', 'featherbadge', 'may_lilycove_done', 'may_ribbon_lilycove',
+        ['Lotus Cove is the last hall, {player} — and the biggest. I am not walking into it until the Feather Badge is yours and the sea road is behind us both. Winona first. Then watch me finish this.'],
+        ['Harbour lights, a full house, and my whole road in one appeal set... and the last card turned MY way, {player}. LOTUS COVE. Three ribbons. Fairhaven\'s half point is IN this one — I spent it here, on the biggest floor in Maris, and it was worth every fraction.', 'One thing remains, and it is not in a hall like the others. The Grand Festival. Coordinators from the whole region, one stage, invitations earned in ribbon cases like mine. Mine just qualified. When your road lets you, harbourside — I will tell you the rest where the boats can hear it.'],
         ['Three ribbons, {player}, and a Festival invitation with my name spelled right. Harbourside, when you are ready — the ending of my road is a boat ride and a promise.']);
     }
     if (kind === 'may_festival') {
-      if (flags.may_festival_done) { say(['The Festival is behind me and the whole sea road is ahead, {player}. Whatever hall is next — and there is always a next one — it gets the coordinator Lilycove made. Wish your road the same: endings that are also doors.']); return true; }
-      if (!flags.may_lilycove_done) { say(['You found me rehearsing, {player}. The Lilycove hall first — a coordinator keeps her order too. Three ribbons, then this conversation, in that sequence.']); return true; }
-      say(['Here it is, then — the end of my road, said out loud where the boats can hear it. The Grand Festival committee read my case this morning: Slateport\'s schooling, Verdanturf, Fallarbor, Lilycove. The invitation is real, {player}. I am sailing for the Festival at the next tide.', 'You sat in my world at every hall on this coast. So hear the last of it as my guest, not my audience: whatever the Festival decides, this road was mine, I walked it at full stretch, and I am not afraid of its ending. That is what your gyms taught me, by the way. Do not tell the judges.', 'Four ribbons ride in my case now — the Festival\'s own commendation makes the set, whatever the big stage decides. Go and finish YOUR road, {player}. Ever Grande is lit. I will be cheering loud enough to grade the echo.'], () => {
+      if (flags.may_festival_done) { say(['The Festival is behind me and the whole sea road is ahead, {player}. Whatever hall is next — and there is always a next one — it gets the coordinator Lotus Cove made. Wish your road the same: endings that are also doors.']); return true; }
+      if (!flags.may_lilycove_done) { say(['You found me rehearsing, {player}. The Lotus Cove hall first — a coordinator keeps her order too. Three ribbons, then this conversation, in that sequence.']); return true; }
+      say(['Here it is, then — the end of my road, said out loud where the boats can hear it. The Grand Festival committee read my case this morning: Fairhaven\'s schooling, Wildflower, Ashfall, Lotus Cove. The invitation is real, {player}. I am sailing for the Festival at the next tide.', 'You sat in my world at every hall on this coast. So hear the last of it as my guest, not my audience: whatever the Festival decides, this road was mine, I walked it at full stretch, and I am not afraid of its ending. That is what your gyms taught me, by the way. Do not tell the judges.', 'Four ribbons ride in my case now — the Festival\'s own commendation makes the set, whatever the big stage decides. Go and finish YOUR road, {player}. Perennial is lit. I will be cheering loud enough to grade the echo.'], () => {
         flags.may_festival_done = true;
         flags.may_grand_festival_done = true;
         flags.may_ribbon_grandfestival = true;
@@ -2748,7 +2748,7 @@ Object.assign(OverworldScene.prototype, {
     if (kind === 'steven') {
       if (!hBadges.includes('mindbadge')) { say(['Steven Stone. I collect rare stones, rarer battles, and — lately — weather reports I do not enjoy. The twins keep this city\'s gym, trainer. What I teach is for Mind Badge holders only: the deep road is not a shortcut, and it does not forgive tourists.']); return true; }
       if (flags.dive_taught || this.partyKnowsDive()) { say(['The trenches are open to you now, {player}. Remember what the deep is: not a place that hates you — a place that has never once needed you. Surface whenever you choose; the way up asks nothing. That is the whole ethic of diving, and of most worthwhile roads.']); return true; }
-      say(['Steven Stone — and you hold the Mind Badge, which makes this your lesson to claim. Dive: the field craft of descending at the dark-water spots the old charts mark, trenches off Routes 124, 126, 127, 128, and one very private lake in Sootopolis. It is knowledge, not a battle move — it will ride in your partner\'s field craft, the way the old HM teachings are kept, and it will never take a battle slot.', 'Choose the partner who learns it. Choose a strong swimmer at heart; the deep can tell.'], () => {
+      say(['Steven Stone — and you hold the Mind Badge, which makes this your lesson to claim. Dive: the field craft of descending at the dark-water spots the old charts mark, trenches off Routes 124, 126, 127, 128, and one very private lake in Craterlake. It is knowledge, not a battle move — it will ride in your partner\'s field craft, the way the old HM teachings are kept, and it will never take a battle slot.', 'Choose the partner who learns it. Choose a strong swimmer at heart; the deep can tell.'], () => {
         const items = st.party.map((m, i) => ({ label: displayName(m, SPECIES), value: i }));
         items.push({ label: 'Not yet', value: -1 });
         g.ui.showMenu('Who should learn Dive?', items, (v) => {
@@ -2801,8 +2801,8 @@ Object.assign(OverworldScene.prototype, {
     }
 
     if (kind === 'wally_final') {
-      if (flags.wally_final_done) { say(['Right behind you, forever, one road back and closing, {player}. That was always the promise. The doors are yours — walk through them like the whole of Hoenn is watching. It is. I checked. I am some of it.']); return true; }
-      if (!hBadges.includes('rainbadge')) { say(['You — here? No. Not yet, {player}. Not before Sootopolis, not before the last badge. I waited a whole region for this battle to mean the whole region. Earn the full road first. Then find me where the victories are kept. I will be standing in it.']); return true; }
+      if (flags.wally_final_done) { say(['Right behind you, forever, one road back and closing, {player}. That was always the promise. The doors are yours — walk through them like the whole of Maris is watching. It is. I checked. I am some of it.']); return true; }
+      if (!hBadges.includes('rainbadge')) { say(['You — here? No. Not yet, {player}. Not before Craterlake, not before the last badge. I waited a whole region for this battle to mean the whole region. Earn the full road first. Then find me where the victories are kept. I will be standing in it.']); return true; }
       const wt = TRAINERS.wally_final;
       say([wt.intro[0].replace('{player}', st.player.name)], () => {
         g.ui.showMenu('Face Wally — Crown Road?', [
@@ -2817,44 +2817,44 @@ Object.assign(OverworldScene.prototype, {
 
     if (kind === 'lucario_keeper') {
       // The Lucario special (chronology-mapping.md, Chapter 6 —
-      // "Rise Through Hoenn": Lucario and the Mystery of PRIMARA is
-      // listed among Hoenn's special story events, so it stages
+      // "Rise Through Maris": Lucario and the Mystery of PRIMARA is
+      // listed among Maris's special story events, so it stages
       // IN-ARC, here). Original writing; the Tree of Beginning beat
       // is abstracted to our fiction — a great-tree root chamber in
-      // Petalburg Woods and an aura that walked like a friend.
+      // Meadowbrook Woods and an aura that walked like a friend.
       // Honest limit, recorded: Lucario is a Sinnoh-dex species
       // (Arc 4's horizon), so no Lucario battle or catch is staged
       // or faked here; the event is the aura-legend beat itself.
       if (flags.lucario_event_done) { say(['The tree keeps its counsel and its flowers, {player}. Some meetings are not battles, and some friends are not caught. They are recognised. Walk well — something in the wood is walking well because you stopped here.']); return true; }
-      say(['You feel it too, then. Everyone with a kind team does, eventually, in this part of the wood. Sit a moment, trainer. The old tree is telling its story again, and it tells it in aura, not words — I only translate.', 'Long ago — the keepers\' count says before the gyms, before the League — a guardian walked these woods whose aura burned the blue of deep water. No ball ever held it. No trainer ever commanded it. It came when the tree was threatened, it fought like weather, and it stayed, afterward, the way a friend stays: without being asked twice.', 'The time-flowers still open along the roots when a worthy aura passes. Look — along the north root. Opening. For YOUR team, trainer, the way the stories say they opened for the guardian\'s friend, all those centuries ago. Whatever road that aura walked next... the flowers think yours rhymes with it.', 'Take that with you. Not a badge, not a ribbon — a recognition. The wood remembers a lucario-hearted guardian, and today it decided your team walks in the same light. Somewhere far north, in a region of mountains and snow, that story has a second half. But its first half happened HERE, in Hoenn\'s green dark, and now you are in it.'], () => {
+      say(['You feel it too, then. Everyone with a kind team does, eventually, in this part of the wood. Sit a moment, trainer. The old tree is telling its story again, and it tells it in aura, not words — I only translate.', 'Long ago — the keepers\' count says before the gyms, before the League — a guardian walked these woods whose aura burned the blue of deep water. No ball ever held it. No trainer ever commanded it. It came when the tree was threatened, it fought like weather, and it stayed, afterward, the way a friend stays: without being asked twice.', 'The time-flowers still open along the roots when a worthy aura passes. Look — along the north root. Opening. For YOUR team, trainer, the way the stories say they opened for the guardian\'s friend, all those centuries ago. Whatever road that aura walked next... the flowers think yours rhymes with it.', 'Take that with you. Not a badge, not a ribbon — a recognition. The wood remembers a lucario-hearted guardian, and today it decided your team walks in the same light. Somewhere far north, in a region of mountains and snow, that story has a second half. But its first half happened HERE, in Maris\'s green dark, and now you are in it.'], () => {
         flags.lucario_event_done = true;
         flags.lucario_aura_seen = true;
         g.audio.playSfx('dex-register');
-        g.ui.toast('The aura flowers opened — the Lucario legend, witnessed in Hoenn.');
+        g.ui.toast('The aura flowers opened — the Lucario legend, witnessed in Maris.');
       });
       return true;
     }
 
     if (kind === 'origin_keeper') {
-      if (flags.climax_resolved) { say(['The cave is quiet, the lake is a lake again, and the sky over my city has gone back to arguing in private, the way weather should. You pointed UP, trainer, when pointing was the hardest work in the world. Sootopolis remembers.']); return true; }
+      if (flags.climax_resolved) { say(['The cave is quiet, the lake is a lake again, and the sky over my city has gone back to arguing in private, the way weather should. You pointed UP, trainer, when pointing was the hardest work in the world. Craterlake remembers.']); return true; }
       if (flags.standoff_seen) {
-        say(['You have seen them, then — the two old answers, glaring across my city\'s water. The cave behind me is where their argument was first carved, and carving is all it can do now. The ANSWER is not down here, trainer. It never was.', 'It is UP. East of Pacifidlog, where the charts go polite and vague, a pillar stands that the sky built for its own guardian. Climb it. Wake what sleeps at its top. And when the green light comes down — be somewhere the whole region can see you standing. It matters that someone stood.'], () => { flags.origin_guidance = true; });
+        say(['You have seen them, then — the two old answers, glaring across my city\'s water. The cave behind me is where their argument was first carved, and carving is all it can do now. The ANSWER is not down here, trainer. It never was.', 'It is UP. East of Driftlog, where the charts go polite and vague, a pillar stands that the sky built for its own guardian. Climb it. Wake what sleeps at its top. And when the green light comes down — be somewhere the whole region can see you standing. It matters that someone stood.'], () => { flags.origin_guidance = true; });
         return true;
       }
       if (flags.climax_drought || flags.climax_deluge) { say(['The cave mouth is weeping steam, trainer, and the old carvings are too hot — or too drowned — to read. Whatever has woken, the answer to it is not in this cave. It is ABOVE. Remember that when the city needs it: above.']); return true; }
-      say(['I keep the Cave of Origin — the first argument, carved in stone, between the land that rose and the sea that covered it. The carvings are quiet today, trainer. Keep them that way, if the road ever gives you the choice.']);
+      say(['I keep the Worldroot Cave — the first argument, carved in stone, between the land that rose and the sea that covered it. The carvings are quiet today, trainer. Keep them that way, if the road ever gives you the choice.']);
       return true;
     }
 
     if (kind === 'hoenn_conference') {
-      if (flags.hoenn_complete) { say(['The bracket is archived, the confetti is swept, and your name is in the Ever Grande book in the good ink, trainer. A man named Scott has been asking after you by name, which at a Conference means exactly what you hope it means.']); return true; }
-      if (hBadges.length < 8) { say(['Conference registration, trainer — and your case is not finished yet. Eight Hoenn badges open this bracket; you hold ' + hBadges.length + '. Sootopolis is the usual last stop, and it is reached from below. I will keep your page open.']); return true; }
+      if (flags.hoenn_complete) { say(['The bracket is archived, the confetti is swept, and your name is in the Perennial book in the good ink, trainer. A man named Scott has been asking after you by name, which at a Conference means exactly what you hope it means.']); return true; }
+      if (hBadges.length < 8) { say(['Conference registration, trainer — and your case is not finished yet. Eight Maris badges open this bracket; you hold ' + hBadges.length + '. Craterlake is the usual last stop, and it is reached from below. I will keep your page open.']); return true; }
       if (!flags.climax_resolved) { say(['Eight badges — counted, verified, well carried. And yet I cannot open the bracket while the sky itself is undecided, trainer. Finish the region\'s weather first. The Conference will be here; it has waited through worse than a titan or two. Well. Comparable.']); return true; }
       if (!flags.hoenn_conference_registered) {
-        say(['Eight badges, a quiet sky, and a name the harbour has been carrying for weeks. Let me write you into the Ever Grande Conference properly... There. Registered.', 'The bracket: two preliminary battles, here in this hall — then Morrison, who has been telling the stands you are his favourite problem — then the final. Tyson waits at the end of it, with a TINKLETOM that has never smiled at anyone. Begin when you are ready: speak to me for each preliminary.'], () => {
+        say(['Eight badges, a quiet sky, and a name the harbour has been carrying for weeks. Let me write you into the Perennial Conference properly... There. Registered.', 'The bracket: two preliminary battles, here in this hall — then Morrison, who has been telling the stands you are his favourite problem — then the final. Tyson waits at the end of it, with a TINKLETOM that has never smiled at anyone. Begin when you are ready: speak to me for each preliminary.'], () => {
           flags.hoenn_conference_registered = true;
           g.audio.playSfx('dex-register');
-          g.ui.toast('Registered for the Ever Grande Conference!');
+          g.ui.toast('Registered for the Perennial Conference!');
         });
         return true;
       }
@@ -2919,18 +2919,18 @@ Object.assign(OverworldScene.prototype, {
               flags.tyson_faced = true;
               if (won) flags.tyson_won = true; else flags.tyson_lost = true;
               const lines = won ? [
-                '...Well. WELL. The card may argue with the papers, trainer, but I was ON the floor: you out-played me, exchange for exchange, in a final. An upset, they will call it in the harbour. It was not an upset. I was there. It was a better team on the biggest day Hoenn has.',
+                '...Well. WELL. The card may argue with the papers, trainer, but I was ON the floor: you out-played me, exchange for exchange, in a final. An upset, they will call it in the harbour. It was not an upset. I was there. It was a better team on the biggest day Maris has.',
                 'Take the honours road with my respect — you beat everyone this bracket owns, back to back, and the last of them is standing here applauding. Whatever the book says, this hall knows what it saw.',
               ] : [
                 '...It is decided. The final exchange — TINKLETOM endures by a whisker and a promise, the crowd comes up off its seats like a tide, and the judges\' card, when it turns, says Tyson. By the narrowest margin this hall has ever recorded.',
                 'Do not hang your head. DO NOT. You carried eight badges across a region that was ending its own weather, you calmed two titans and a sky, and you took me to the last Pokemon I own. The loss stands — that is sport. So does everything you did to get here — that is history. Morrison is on his feet. The whole hall is. Look at them, trainer. That sound is yours.',
               ];
               say(lines, () => {
-                say(['Trainer. TYSON\'s trainer — and everyone still standing. My name is Scott. I scout battle the way other men scout weather, and I have watched every match you fought in this hall with an envelope in my pocket getting heavier by the round.', 'Inside it: an invitation. Seven facilities, seven Frontier Brains, one island off Arden where battle is the whole civilisation. The Battle Frontier, trainer. When you have rested — when HOME has had you back a while — that envelope is your next horizon. Bring the team you trust most. The Frontier does not care where you have been. Only how you fight.'], () => {
+                say(['Trainer. TYSON\'s trainer — and everyone still standing. My name is Scott. I scout battle the way other men scout weather, and I have watched every match you fought in this hall with an envelope in my pocket getting heavier by the round.', 'Inside it: an invitation. Seven facilities, seven Frontier Brains, one island off Arden where battle is the whole civilisation. The Trial Grounds, trainer. When you have rested — when HOME has had you back a while — that envelope is your next horizon. Bring the team you trust most. The Frontier does not care where you have been. Only how you fight.'], () => {
                   flags.scott_invitation = true;
                   flags.hoenn_complete = true;
                   g.audio.playSfx('badge');
-                  say(['Ever Grande Conference — the run ends in honours, and Hoenn ends with it: eight badges, two titans calmed, a sky handed back its weather, and a final that will be argued about in Lilycove harbour for a decade. The road home is waiting, trainer. It always was.'], () => { checkArcCompletion(g); }, 'NARRATOR');
+                  say(['Perennial Conference — the run ends in honours, and Maris ends with it: eight badges, two titans calmed, a sky handed back its weather, and a final that will be argued about in Lotus Cove harbour for a decade. The road home is waiting, trainer. It always was.'], () => { checkArcCompletion(g); }, 'NARRATOR');
                 }, 'SCOTT');
               }, 'TYSON');
             },
@@ -2949,19 +2949,19 @@ Object.assign(OverworldScene.prototype, {
     // ---- the west leaders ----
     const LEADERS = {
       roxanne: { badge: 'stonebadge', gate: null, gateLines: [],
-        post: 'The quarry road north runs past Meteor Falls, challenger. The stone up there fell out of the sky — Roxanne\'s professional opinion is that it should be admired, not argued over. Mind who else admires it.' },
+        post: 'The quarry road north runs past Comet Falls, challenger. The stone up there fell out of the sky — Roxanne\'s professional opinion is that it should be admired, not argued over. Mind who else admires it.' },
       brawly: { badge: 'knucklebadge', gate: null, gateLines: [],
-        post: 'The boatman runs Dewford to Slateport whenever the tide allows, Knuckle Badge holder. May\'s world is showing in the hall there — a surf man recommends the seats. The view is all footwork.' },
+        post: 'The boatman runs Mistford to Fairhaven whenever the tide allows, Knuckle Badge holder. May\'s world is showing in the hall there — a surf man recommends the seats. The view is all footwork.' },
       wattson: { badge: 'dynamobadge', gate: null, gateLines: [],
-        post: 'Wahahaha! Still sparking, Dynamo Badge holder! The Verdanturf hall is west through the tunnel road, and the volcano road is north — an old electrician recommends the volcano second and the hall first. Order matters in wiring AND journeys!' },
+        post: 'Wahahaha! Still sparking, Dynamo Badge holder! The Wildflower hall is west through the tunnel road, and the volcano road is north — an old electrician recommends the volcano second and the hall first. Order matters in wiring AND journeys!' },
       flannery: { badge: 'heatbadge', gate: null, gateLines: [],
-        post: 'The springs are that way, Heat Badge holder, and you have earned every degree of them. Fallarbor lies past the ash fields north — take a breath before you go in. The air up there is half mountain already.' },
+        post: 'The springs are that way, Heat Badge holder, and you have earned every degree of them. Ashfall lies past the ash fields north — take a breath before you go in. The air up there is half mountain already.' },
       norman: { badge: 'balancebadge', gate: null, gateLines: [],
-        post: 'Balance, held. East now, Balance Badge holder: the rain road to Fortree, then the sea itself. The Institute on Route 119 has gone quiet on the radio, they say. Nothing in Hoenn stays quiet for long this year.' },
+        post: 'Balance, held. East now, Balance Badge holder: the rain road to Highbranch, then the sea itself. The Institute on Route 119 has gone quiet on the radio, they say. Nothing in Maris stays quiet for long this year.' },
       winona: { badge: 'featherbadge', gate: null, gateLines: [],
-        post: 'The Feather Badge suits you, challenger — light, and earned at altitude. Lilycove is east: a harbour, a hall, and a mountain of the dead beyond it. The sky sends its regards to all three.' },
-      juan: { badge: 'rainbadge', gate: 'climax_resolved', gateLines: ['Ah — the challenger who surfaced in my lake. I know your road, and I know the sky above it is not finished arguing. My gym is the last QUIET water in Hoenn, challenger, and I will not conduct its final while the region\'s weather is still deciding the score. End the titans\' argument first. Then come and take the Rain Badge from a finished world.'],
-        post: 'Eight badges, Rain Badge holder, and a region breathing evenly again. Ever Grande, challenger. The Conference is lit, and I shall be in the stands with the whole of Sootopolis, conducting nothing at all. A holiday.' },
+        post: 'The Feather Badge suits you, challenger — light, and earned at altitude. Lotus Cove is east: a harbour, a hall, and a mountain of the dead beyond it. The sky sends its regards to all three.' },
+      juan: { badge: 'rainbadge', gate: 'climax_resolved', gateLines: ['Ah — the challenger who surfaced in my lake. I know your road, and I know the sky above it is not finished arguing. My gym is the last QUIET water in Maris, challenger, and I will not conduct its final while the region\'s weather is still deciding the score. End the titans\' argument first. Then come and take the Rain Badge from a finished world.'],
+        post: 'Eight badges, Rain Badge holder, and a region breathing evenly again. Perennial, challenger. The Conference is lit, and I shall be in the stands with the whole of Craterlake, conducting nothing at all. A holiday.' },
     };
     const L = LEADERS[kind];
     if (!L) return false;
@@ -2978,7 +2978,7 @@ Object.assign(OverworldScene.prototype, {
     return true;
   },
 
-  // The shared leader runner, Hoenn seat (startJohtoBattle's idiom).
+  // The shared leader runner, Maris seat (startJohtoBattle's idiom).
   startHoennBattle(trainerId, onWin) {
     const g = this.game;
     const t0 = TRAINERS[trainerId];
@@ -2994,7 +2994,7 @@ Object.assign(OverworldScene.prototype, {
   // One dispatch for every NPC carrying a `sinnoh:` key (the actors
   // loadMap appends from story-sinnoh.mjs SINNOH_NPCS). Leaders ride
   // the shared leader runner; the badge-order refusal reads
-  // badges.sinnoh (the generic Yamato/Hoenn path). Paul's beats are
+  // badges.sinnoh (the generic Yamato/Maris path). Paul's beats are
   // the arc's spine: the lab battle is an entry EVENT (ev_sinnoh_lab);
   // here are his Eterna assessment, the Hearthome Chimchar beat, and
   // the Veilstone audit battle. Dawn's Hearthome beat mirrors May's
@@ -3311,7 +3311,7 @@ Object.assign(OverworldScene.prototype, {
     }
 
     if (kind === 'sinnoh_conference') {
-      // The registrar (the Hoenn registrar's idiom): registration
+      // The registrar (the Maris registrar's idiom): registration
       // is gated on eight badges + the climax resolved — the
       // Conference does not open its bracket over an unmended sky.
       if (flags.sinnoh_complete) { say(['The bracket is archived, the confetti is swept, and your name is in the Lily of the Valley book in the good ink, trainer — twice: once for the bracket, and once in the margin next to a Darkrai, where the clerks keep the results they still argue about.']); return true; }
@@ -4071,7 +4071,7 @@ Object.assign(OverworldScene.prototype, {
     return true;
   },
 
-  // Stage H6: Meteor Falls' meteorstones. Three stones carry H3a's
+  // Stage H6: Comet Falls' meteorstones. Three stones carry H3a's
   // meteorstone dressing; two are H6's set pieces:
   //  - (21,4), the crater meteorite in the north chamber: Deoxys'
   //    door (the rumour arms it) and, after the catch, the forme
@@ -4086,7 +4086,7 @@ Object.assign(OverworldScene.prototype, {
     if (fx === 21 && fy === 4) {
       if (!f.arc_deoxys_done) {
         if (f.arc_deoxys_rumor) { this.runEvent('ev_hoenn_deoxys'); return true; }
-        g.ui.say(['A meteorite the size of a cart, glassy and dark — and warm, which stops you mid-thought. Fallen stone should be cold. This one is warm the way a held hand is warm. The researchers at the Mossdeep Space Center would have opinions about this. Loud ones.']);
+        g.ui.say(['A meteorite the size of a cart, glassy and dark — and warm, which stops you mid-thought. Fallen stone should be cold. This one is warm the way a held hand is warm. The researchers at the Starfall Space Center would have opinions about this. Loud ones.']);
         return true;
       }
       const mon = this.deoxysInParty();
@@ -4134,19 +4134,19 @@ Object.assign(OverworldScene.prototype, {
   },
 
   // Stage H6: the Regi tombs. Each tomb is self-contained (there is
-  // no Sealed Chamber map in the shipped Hoenn — no cross-tomb
+  // no Sealed Chamber map in the shipped Maris — no cross-tomb
   // chain): its inscription, read from the stone by the door (the
   // sign tile at (9,11)), is the only key, and its solution is a
   // concrete action performed in the chamber:
-  //  - Desert Ruins (Regirock): THE STANDING BEAT. Read, then stand
+  //  - Dune Tomb (Regirock): THE STANDING BEAT. Read, then stand
   //    before the sealstone (face the sealstone row) and choose to
   //    wait — the shipped choice idiom carries the beat; the desert
   //    counts six slow breaths and the sealstones part.
-  //  - Island Cave (Regice): THE GREETING ORDER. Read, then greet
+  //  - Sea Tomb (Regice): THE GREETING ORDER. Read, then greet
   //    the chamber's two boulders (caveboulder tiles) in the
   //    inscription's order — west (2,12) first, east (14,11)
   //    second. The wrong order is politely forgotten by the cold.
-  //  - Ancient Tomb (Registeel): IRON ANSWERS IRON. Read, then
+  //  - Iron Tomb (Registeel): IRON ANSWERS IRON. Read, then
   //    press the sealstone with a living Steel-type partner in the
   //    party (partyHasType — the shipped field check).
   // Solving parts the sealstone row (its flag stands; the sysOnStep
@@ -4247,7 +4247,7 @@ Object.assign(OverworldScene.prototype, {
           if (v !== 'wait') return;
           f.regi_rock_open = true;
           g.audio.playSfx('map-enter');
-          g.ui.say(['You stand before the seal and do the hardest thing the road has ever asked of you: nothing. Breath one. The sand in the seams of the floor stops drifting. Breath two. Somewhere above, the desert goes on being a desert, without you. Breath three. Your partners, unasked, go quiet with you. Breath four. The chamber\'s held century settles around your shoulders like a hand deciding not to strike. Breath five. A single grain of sand falls off the middle sealstone, and it is the loudest sound in Hoenn. Breath six—', 'The sealstones PART — not broken, not forced: released, the way a held breath is released, grinding aside with the deep patience of stone that was only ever waiting to be waited at.', 'The impatient knock forever. You did not knock. Go and meet what the desert has been keeping.'], () => {
+          g.ui.say(['You stand before the seal and do the hardest thing the road has ever asked of you: nothing. Breath one. The sand in the seams of the floor stops drifting. Breath two. Somewhere above, the desert goes on being a desert, without you. Breath three. Your partners, unasked, go quiet with you. Breath four. The chamber\'s held century settles around your shoulders like a hand deciding not to strike. Breath five. A single grain of sand falls off the middle sealstone, and it is the loudest sound in Maris. Breath six—', 'The sealstones PART — not broken, not forced: released, the way a held breath is released, grinding aside with the deep patience of stone that was only ever waiting to be waited at.', 'The impatient knock forever. You did not knock. Go and meet what the desert has been keeping.'], () => {
             if (!f.arc_regirock_done) this.runEvent(tomb.ev);
           });
         });
@@ -5229,7 +5229,7 @@ Object.assign(OverworldScene.prototype, {
       const jq = JOHTO_QUESTS.find((qq) => qq.flag && !g.state.story.flags[qq.flag]);
       if (jq) return '▶ ' + jq.text;
     }
-    // Stage H4a: while the Hoenn arc is current, its chain leads the
+    // Stage H4a: while the Maris arc is current, its chain leads the
     // HUD objective (the first-half rows; H4b's appended rows join
     // the same find, in chain order).
     if (currentArcOf(g.state).id === 'hoenn') {

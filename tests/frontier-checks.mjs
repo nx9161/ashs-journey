@@ -203,7 +203,7 @@ const VAL = await import(join(ROOT, 'api/_lib/validator.mjs'));
 const { MAPS8 } = await import(join(ROOT, 'src/data/maps8.mjs'));
 const F1_IDS = ['frontierhub', 'frontier-tower', 'frontier-factory', 'frontier-arena', 'frontier-dome', 'frontier-pike', 'frontier-palace', 'frontier-pyramid', 'frontier-pyramid-a', 'frontier-pyramid-b', 'frontier-pyramid-c'];
 const BRAIN = { tower: 'Anabel', factory: 'Noland', arena: 'Greta', dome: 'Tucker', pike: 'Lucy', palace: 'Spencer', pyramid: 'Brandon' };
-const FAC_NAME = { tower: 'Battle Tower', factory: 'Battle Factory', arena: 'Battle Arena', dome: 'Battle Dome', pike: 'Battle Pike', palace: 'Battle Palace', pyramid: 'Battle Pyramid' };
+const FAC_NAME = { tower: 'Trial Tower', factory: 'Trial Factory', arena: 'Trial Arena', dome: 'Trial Dome', pike: 'Trial Pike', palace: 'Trial Palace', pyramid: 'Trial Pyramid' };
 {
   ok('A22 MAPS8 exports exactly the 11 F1 maps; merge.mjs folds MAPS8 into MAPS and module-order.json loads maps8.mjs after maps7.mjs (the bundle-side merge is proven live in Part C)',
     JSON.stringify(Object.keys(MAPS8)) === JSON.stringify(F1_IDS)
@@ -403,7 +403,7 @@ const driver = `
   }
   drain(g);
   ok('B02 with embark_frontier deleted, CAPT FRONTIER yields the ferry gate line and NO warp (still on pallet, no sail menu offered)',
-    seenLines.some(function (l) { return l.indexOf('No sailing to Battle Frontier yet') === 0; }) && menuSeen === false && !g.ui.menuOpen
+    seenLines.some(function (l) { return l.indexOf('No sailing to Trial Grounds yet') === 0; }) && menuSeen === false && !g.ui.menuOpen
     && st.story.position.map === 'pallet' && ow.mapId === 'pallet',
     'lines=' + seenLines.join(' | ').slice(0, 200) + ' pos=' + st.story.position.map);
 
@@ -1659,12 +1659,12 @@ const driverD = `
     g.openQuestLog(); tk(g, 2);
     var labels2 = g.ui.menu.items.map(function (i) { return i.label; }).join(' | ');
     ok('D35 quest log Frontier section: with the Frontier reached, the section renders one informational row per facility from badges.symbols — Tower/GOLD, Factory/SILVER, the unearned rows at — (Arena Greta, Pyramid Brandon by name); with no hook, no crossing and no symbols it does not render',
-      joined.indexOf('— BATTLE FRONTIER —') >= 0
-      && joined.indexOf('Battle Tower — Anabel — GOLD') >= 0
-      && joined.indexOf('Battle Factory — Noland — SILVER') >= 0
-      && joined.indexOf('Battle Arena — Greta — —') >= 0
-      && joined.indexOf('Battle Pyramid — Brandon — —') >= 0
-      && labels2.indexOf('BATTLE FRONTIER') < 0,
+      joined.indexOf('— TRIAL GROUNDS —') >= 0
+      && joined.indexOf('Trial Tower — Anabel — GOLD') >= 0
+      && joined.indexOf('Trial Factory — Noland — SILVER') >= 0
+      && joined.indexOf('Trial Arena — Greta — —') >= 0
+      && joined.indexOf('Trial Pyramid — Brandon — —') >= 0
+      && labels2.indexOf('TRIAL GROUNDS') < 0,
       joined.slice(0, 200));
   }
 
@@ -1873,7 +1873,7 @@ const driverE = `
     var frontierArc = arcById('frontier');
     var sum = arcCompleteSummary(st, frontierArc);
     ok('E03 next map load fires checkArcCompletion: the ARC COMPLETE card plays — its title names the Battle Frontier, badgeLine reads Badges: 7/7, the registry frontier summaryLines are present verbatim, and the summary forwardLine names Sinnoh and Gary',
-      cardLines.length > 0 && cardLines[0] === sum.title && sum.title.indexOf('BATTLE FRONTIER') >= 0
+      cardLines.length > 0 && cardLines[0] === sum.title && sum.title.indexOf('TRIAL GROUNDS') >= 0
       && sum.badgeLine === 'Badges: 7/7' && cardLines.includes('Badges: 7/7')
       && frontierArc.summaryLines.every(function (l) { return cardLines.includes(l); })
       && sum.forwardLine.indexOf('Sinnoh') >= 0 && sum.forwardLine.indexOf('Gary') >= 0,
@@ -1946,7 +1946,7 @@ const driverE = `
     pick(g, 'close'); tk(g, 2);
     ok('E11 Journey surface: the arc headers read ARC 3.5 BATTLE FRONTIER COMPLETE and ARC 4 SINNOH CURRENT (Stage S0 supersedes the sealed reading: arcStateOf agrees — frontier complete, sinnoh current after its shipped homecoming)',
       arcStateOf(st, 'frontier') === 'complete' && arcStateOf(st, 'sinnoh') === 'current'
-      && jLabels.some(function (l) { return l.indexOf('BATTLE FRONTIER') >= 0 && l.indexOf('COMPLETE') >= 0; })
+      && jLabels.some(function (l) { return l.indexOf('TRIAL GROUNDS') >= 0 && l.indexOf('COMPLETE') >= 0; })
       && jLabels.some(function (l) { return l.indexOf('SINNOH') >= 0 && l.indexOf('CURRENT') >= 0; }),
       jLabels.join(' / ').slice(0, 300));
     ok('E12 Regions surface: the Sinnoh row reads current — you are here (Stage S0 supersedes the sealed reading; not done, not sealed)',

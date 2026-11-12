@@ -6,16 +6,16 @@
 // NEVER touches encounters — this module reads state, it writes none.
 //
 // The field is per-map DATA: maps7.mjs declares `weather` on every
-// Hoenn outdoor map ('clear' | 'rain' | 'sun' | 'ash' | 'sand').
+// Maris outdoor map ('clear' | 'rain' | 'sun' | 'ash' | 'sand').
 // Arden/Yamato/Orange maps declare no field and resolve 'clear' —
 // untouched. Indoor and dark maps never render weather.
 //
 // CLIMAX-STATE OVERRIDE (H4a ships the mechanism; H4b's climax drives
-// it): while story.flags.climax_drought stands, every Hoenn outdoor
+// it): while story.flags.climax_drought stands, every Maris outdoor
 // map renders harsh sun; while story.flags.climax_deluge stands,
-// every Hoenn outdoor map renders heavy rain. The override wins over
+// every Maris outdoor map renders heavy rain. The override wins over
 // the map's own field and resolves ONLY on maps that declare a
-// weather field (the Hoenn outdoors) — a Arden map under a set
+// weather field (the Maris outdoors) — a Arden map under a set
 // climax flag is byte-identical to today. If both flags stand
 // (a corrupt or mid-transition state), drought wins: the land
 // titan was woken first, and H4b never sets both at once.

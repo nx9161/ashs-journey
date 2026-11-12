@@ -8,7 +8,7 @@
 
 export const ACTS = [
   { n: 1, title: 'Act I: The Beginning', scope: 'playable', note: 'Arden → Orange Islands → Yamato (v1)' },
-  { n: 2, title: 'Act II: New Horizons', scope: 'announced', note: 'Hoenn → Battle Frontier → Sinnoh (v2, announced ADR-006)' },
+  { n: 2, title: 'Act II: New Horizons', scope: 'announced', note: 'Maris → Trial Grounds → Sinnoh (v2, announced ADR-006)' },
   { n: 3, title: 'Act III: Beyond', scope: 'planned', note: 'Unova → Kalos → Alola → Journeys → Horizons (planned, not built)' },
 ];
 
@@ -50,17 +50,17 @@ export const CHAPTERS = [
   },
   // ---- locked: Act II (v2, announced in ADR-006) ----
   {
-    n: 6, id: 'hoenn', act: 2, region: 'Hoenn', scope: 'locked',
-    title: 'Rise Through Hoenn',
+    n: 6, id: 'hoenn', act: 2, region: 'Maris', scope: 'locked',
+    title: 'Rise Through Maris',
     arc: 'Locked — Act II (v2).',
     anime: 'Seasons 6–8: Advanced / Advanced Challenge / Advanced Battle',
     movies: ['Jirachi: Wish Maker', 'Destiny Deoxys', 'Lucario and the Mystery of PRIMARA'],
   },
   {
     n: 7, id: 'battle-frontier', act: 2, region: 'Arden (Frontier)', scope: 'locked',
-    title: 'Battle Frontier',
+    title: 'Trial Grounds',
     arc: 'Locked — Act II (v2). The Frontier-Brain seat is the announced finale.',
-    anime: 'Season 9: Battle Frontier (Ep 1–5, Special: Mastermind of Mirage Pok\u00e9mon, Ep 6–47)',
+    anime: 'Season 9: Trial Grounds (Ep 1–5, Special: Mastermind of Mirage Pok\u00e9mon, Ep 6–47)',
     movies: ['Ranger and the Temple of the Sea'],
   },
   {

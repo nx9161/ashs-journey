@@ -4,7 +4,7 @@
 // SAME table through speciesBattleArt, so a species is the same size
 // on both sides of the field — staged parity, not uniform parity.
 //
-// Stage H1 (Arc 3): +138 Hoenn rows appended (395 rows total).
+// Stage H1 (Arc 3): +138 Maris rows appended (395 rows total).
 // Stage S1 (Arc 4): +114 Sinnoh rows appended (509 rows total).
 // Assignment rule (auditable): bulk = base HP + DEF + SPD from the
 // species data (the mass proxy the data carries — no height/weight
@@ -277,7 +277,7 @@ export const BATTLER_TIERS = {
   pupitar: 'M', // bulk 210
   tyranitar: 'L', // bulk 310
   celebi: 'L', // bulk 300
-  // Stage H1 (Arc 3): +138 Hoenn rows by the same bulk rule (HP+DEF+SPD).
+  // Stage H1 (Arc 3): +138 Maris rows by the same bulk rule (HP+DEF+SPD).
   treecko: 'S', // bulk 130
   grovyle: 'M', // bulk 160
   sceptile: 'M', // bulk 220

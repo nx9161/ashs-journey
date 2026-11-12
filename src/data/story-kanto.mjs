@@ -547,10 +547,10 @@ export const LEGENDARY_ARCS = {
     lair: 'ilexforest',
   },
 
-  // ---- Hoenn (designed) ------------------------------------------------------
+  // ---- Maris (designed) ------------------------------------------------------
   arc_regirock: {
-    id: 'arc_regirock', title: 'The Tomb in the Sand', species: 'regirock', region: 'Hoenn', designedOnly: true,
-    hook: 'Braille in a sealed chamber off Route 111 names three tombs across Hoenn. The desert one is only the first lock.',
+    id: 'arc_regirock', title: 'The Tomb in the Sand', species: 'regirock', region: 'Maris', designedOnly: true,
+    hook: 'Braille in a sealed chamber off Route 111 names three tombs across Maris. The desert one is only the first lock.',
     steps: [
       { text: 'Read the braille in the Sealed Chamber' },
       { text: 'Open the Desert Tomb' },
@@ -559,69 +559,69 @@ export const LEGENDARY_ARCS = {
     lair: 'deserttomb',
   },
   arc_regice: {
-    id: 'arc_regice', title: 'The Tomb in the Ice', species: 'regice', region: 'Hoenn', designedOnly: true,
-    hook: 'North of Dewford, an island cave exhales air colder than the sea around it — and its door reads like a riddle about patience.',
+    id: 'arc_regice', title: 'The Tomb in the Ice', species: 'regice', region: 'Maris', designedOnly: true,
+    hook: 'North of Mistford, an island cave exhales air colder than the sea around it — and its door reads like a riddle about patience.',
     steps: [
       { text: 'Read the braille in the Sealed Chamber' },
-      { text: 'Open the Island Cave and wait, perfectly still' },
+      { text: 'Open the Sea Tomb and wait, perfectly still' },
       { text: 'Face Regice, level 40', catch: 'regice' },
     ],
     lair: 'islandcave',
   },
   arc_registeel: {
-    id: 'arc_registeel', title: 'The Tomb in the Ruin', species: 'registeel', region: 'Hoenn', designedOnly: true,
-    hook: 'The Ancient Tomb west of Lilycove predates every map of Hoenn. Its door opens from the center of the room — and nowhere else.',
+    id: 'arc_registeel', title: 'The Tomb in the Ruin', species: 'registeel', region: 'Maris', designedOnly: true,
+    hook: 'The Iron Tomb west of Lotus Cove predates every map of Maris. Its door opens from the center of the room — and nowhere else.',
     steps: [
       { text: 'Read the braille in the Sealed Chamber' },
-      { text: 'Open the Ancient Tomb' },
+      { text: 'Open the Iron Tomb' },
       { text: 'Face Registeel, level 40', catch: 'registeel' },
     ],
     lair: 'ancienttomb',
   },
   arc_kyogre: {
-    id: 'arc_kyogre', title: 'The Sea That Wants Everything', species: 'kyogre', region: 'Hoenn', designedOnly: true,
-    hook: 'The rain over Sootopolis is not weather anymore. It has intent.',
+    id: 'arc_kyogre', title: 'The Sea That Wants Everything', species: 'kyogre', region: 'Maris', designedOnly: true,
+    hook: 'The rain over Craterlake is not weather anymore. It has intent.',
     steps: [
       { text: 'Wake Kyogre’s trail at the Weather Institute' },
-      { text: 'Descend into the Cave of Origin' },
+      { text: 'Descend into the Worldroot Cave' },
       { text: 'Face Kyogre, level 70', catch: 'kyogre' },
     ],
     lair: 'caveoforigin',
   },
   arc_groudon: {
-    id: 'arc_groudon', title: 'The Land That Wants Everything', species: 'groudon', region: 'Hoenn', designedOnly: true,
-    hook: 'The drought over Sootopolis is not weather anymore. It has a heartbeat, and it is under the mountain.',
+    id: 'arc_groudon', title: 'The Land That Wants Everything', species: 'groudon', region: 'Maris', designedOnly: true,
+    hook: 'The drought over Craterlake is not weather anymore. It has a heartbeat, and it is under the mountain.',
     steps: [
-      { text: 'Follow the Magma trail into Mt. Chimney' },
-      { text: 'Descend into the Cave of Origin' },
+      { text: 'Follow the Magma trail into Mt. Smokestack' },
+      { text: 'Descend into the Worldroot Cave' },
       { text: 'Face Groudon, level 70', catch: 'groudon' },
     ],
     lair: 'caveoforigin',
   },
   arc_rayquaza: {
-    id: 'arc_rayquaza', title: 'The Sky Settles It', species: 'rayquaza', region: 'Hoenn', designedOnly: true,
+    id: 'arc_rayquaza', title: 'The Sky Settles It', species: 'rayquaza', region: 'Maris', designedOnly: true,
     prereq: { arcs: ['arc_kyogre', 'arc_groudon'] },
-    hook: 'When sea and land finally collide, the oldest voice in Hoenn’s sky is the only one both of them obey.',
+    hook: 'When sea and land finally collide, the oldest voice in Maris’s sky is the only one both of them obey.',
     steps: [
       { text: 'Settle Kyogre and Groudon’s arcs', flag: 'weather_duo_done' },
-      { text: 'Climb the Sky Pillar, floor by crumbling floor' },
+      { text: 'Climb the Tempest Tower, floor by crumbling floor' },
       { text: 'Face Rayquaza, level 70', catch: 'rayquaza' },
     ],
     lair: 'skypillar',
   },
   arc_latios: {
-    id: 'arc_latios', title: 'The Jet Over the Water', species: 'latios', region: 'Hoenn', designedOnly: true,
+    id: 'arc_latios', title: 'The Jet Over the Water', species: 'latios', region: 'Maris', designedOnly: true,
     hook: 'Fishermen keep reporting the same impossible thing: a blue jet-shaped shadow that outruns their boats and laughs like a boy.',
     steps: [
-      { text: 'Hear the fishermen’s reports in Lilycove' },
-      { text: 'Track the sightings across Hoenn’s sea routes' },
+      { text: 'Hear the fishermen’s reports in Lotus Cove' },
+      { text: 'Track the sightings across Maris’s sea routes' },
       { text: 'Meet Latios at full speed', catch: 'latios' },
     ],
     lair: 'hoennsearoutes',
   },
   arc_latias: {
-    id: 'arc_latias', title: 'The Guardian of the Garden', species: 'latias', region: 'Hoenn', designedOnly: true,
-    hook: 'Somewhere in Hoenn there is a garden that exists on no map, tended by something red, kind, and very fast.',
+    id: 'arc_latias', title: 'The Guardian of the Garden', species: 'latias', region: 'Maris', designedOnly: true,
+    hook: 'Somewhere in Maris there is a garden that exists on no map, tended by something red, kind, and very fast.',
     steps: [
       { text: 'Earn the trust of the garden’s keeper' },
       { text: 'Follow the Eon trail to the hidden island' },
@@ -630,7 +630,7 @@ export const LEGENDARY_ARCS = {
     lair: 'southernisland',
   },
   arc_jirachi: {
-    id: 'arc_jirachi', title: 'The Thousand-Year Wish', species: 'jirachi', region: 'Hoenn', designedOnly: true,
+    id: 'arc_jirachi', title: 'The Thousand-Year Wish', species: 'jirachi', region: 'Maris', designedOnly: true,
     hook: 'A comet is coming, and a small voice has started singing in its sleep — it gets one week awake every thousand years.',
     steps: [
       { text: 'Reach the millennium comet’s festival grounds' },
@@ -640,7 +640,7 @@ export const LEGENDARY_ARCS = {
     lair: 'forina',
   },
   arc_deoxys: {
-    id: 'arc_deoxys', title: 'The Triangle That Moves', species: 'deoxys', region: 'Hoenn', designedOnly: true,
+    id: 'arc_deoxys', title: 'The Triangle That Moves', species: 'deoxys', region: 'Maris', designedOnly: true,
     hook: 'A meteorite on Birth Island sits in a perfect triangle of stones. The stones, researchers insist, were not arranged yesterday.',
     steps: [
       { text: 'Earn passage to Birth Island' },

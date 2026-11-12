@@ -1,4 +1,4 @@
-// frontier.mjs — Arc 3.5 Stage F2: Battle Frontier facility DATA.
+// frontier.mjs — Arc 3.5 Stage F2: Trial Grounds facility DATA.
 //
 // Pure data for the seven facilities (src/game/frontier.mjs is the
 // controller). Facility ids ARE the BADGE_SETS.symbols slot order
@@ -121,7 +121,7 @@ export const SYMBOL_ITEMS = {
 // names/titles: generated trainer dressing. brain: the Frontier Brain.
 export const FACILITIES = {
   tower: {
-    id: 'tower', name: 'Battle Tower', brain: 'Anabel', brainTitle: 'Salon Maiden',
+    id: 'tower', name: 'Trial Tower', brain: 'Anabel', brainTitle: 'Salon Maiden',
     setSize: 7, healBetween: true,
     intro: 'Seven straight wins make a set at the Tower. No tricks, no mercy rounds — just trainers, one after another. At a set\'s end you may rest and resume later: the streak waits where you left it.',
     pools: ['alakazam', 'gengar', 'snorlax', 'lapras', 'dragonite', 'machamp', 'arcanine', 'gyarados', 'venusaur', 'charizard', 'blastoise', 'jolteon', 'aerodactyl', 'tauros'],
@@ -131,7 +131,7 @@ export const FACILITIES = {
     brainLose: ['...Ah. I saw the ending a breath too late. The Ability Symbol is yours — you earned every line of it.'],
   },
   factory: {
-    id: 'factory', name: 'Battle Factory', brain: 'Noland', brainTitle: 'Factory Head',
+    id: 'factory', name: 'Trial Factory', brain: 'Noland', brainTitle: 'Factory Head',
     setSize: 7, healBetween: true,
     intro: 'Nobody fights with their own team at the Factory. You draft three rentals from six, and after every win you may swap one of yours for one of theirs.',
     pools: ['heracross', 'aerodactyl', 'venusaur', 'pinsir', 'scyther', 'kangaskhan', 'starmie', 'electabuzz', 'magmar', 'jynx', 'omastar', 'kabutops', 'ampharos', 'sudowoodo', 'charizard', 'blastoise'],
@@ -141,7 +141,7 @@ export const FACILITIES = {
     brainLose: ['Ha! Out-drafted in my own factory. Take the Knowledge Symbol — you knew my team better than I did.'],
   },
   arena: {
-    id: 'arena', name: 'Battle Arena', brain: 'Greta', brainTitle: 'Arena Tycoon',
+    id: 'arena', name: 'Trial Arena', brain: 'Greta', brainTitle: 'Arena Tycoon',
     setSize: 7, healBetween: true,
     intro: 'Three turns. That is all the Arena gives you. If nobody falls, the judge scores Mind, Skill and Body — and a tie goes against the challenger. The Frontier demands a winner.',
     pools: ['heracross', 'primeape', 'hitmonlee', 'hitmonchan', 'poliwrath', 'machamp', 'breloom', 'medicham', 'hariyama', 'blaziken', 'vigoroth', 'exploud'],
@@ -151,7 +151,7 @@ export const FACILITIES = {
     brainLose: ['Clean. Decisive. Everything the Arena asks for. The Guts Symbol is yours.'],
   },
   dome: {
-    id: 'dome', name: 'Battle Dome', brain: 'Tucker', brainTitle: 'Dome Ace',
+    id: 'dome', name: 'Trial Dome', brain: 'Tucker', brainTitle: 'Dome Ace',
     setSize: 0, healBetween: true,
     intro: 'Sixteen entrants, one bracket, no second chances. Win four matches and the Dome is yours — the crowd does the rest. The matches you are not in are decided off-screen, and the desk calls every result by name.',
     pools: ['swampert', 'charizard', 'salamence', 'metagross', 'flygon', 'altaria', 'aggron', 'walrein', 'camerupt', 'sceptile', 'blaziken', 'gardevoir', 'milotic', 'kingdra'],
@@ -161,7 +161,7 @@ export const FACILITIES = {
     brainLose: ['Listen to that crowd — they are cheering for YOU now. The Tactics Symbol, champion. You read the bracket like a book.'],
   },
   pike: {
-    id: 'pike', name: 'Battle Pike', brain: 'Lucy', brainTitle: 'Pike Queen',
+    id: 'pike', name: 'Trial Pike', brain: 'Lucy', brainTitle: 'Pike Queen',
     setSize: 0, healBetween: false,
     intro: 'Seven chambers, three doors each, and every door already knows what is behind it. Luck is just information you have not earned yet. And there is no free healing inside — only what the doors themselves offer.',
     pools: ['seviper', 'arbok', 'weezing', 'muk', 'crobat', 'tentacruel', 'gengar', 'shuckle', 'dunsparce', 'qwilfish', 'roselia', 'dustox', 'banette', 'ariados'],
@@ -171,7 +171,7 @@ export const FACILITIES = {
     brainLose: ['...The doors themselves applaud you. Take the Luck Symbol. You make your own luck — I checked.'],
   },
   palace: {
-    id: 'palace', name: 'Battle Palace', brain: 'Spencer', brainTitle: 'Palace Maven',
+    id: 'palace', name: 'Trial Palace', brain: 'Spencer', brainTitle: 'Palace Maven',
     setSize: 7, healBetween: true,
     intro: 'At the Palace your Pokémon choose their own moves — you are the heart, not the hand. You call nothing; you simply learn what kind of team you really raised.',
     pools: ['crobat', 'slaking', 'lapras', 'arcanine', 'exeggutor', 'slowbro', 'starmie', 'gardevoir', 'altaria', 'tropius', 'grumpig', 'xatu', 'noctowl', 'togetic'],
@@ -181,7 +181,7 @@ export const FACILITIES = {
     brainLose: ['Your partners chose beautifully. They trust their own hearts because you trusted them first. The Spirit Symbol is yours.'],
   },
   pyramid: {
-    id: 'pyramid', name: 'Battle Pyramid', brain: 'Brandon', brainTitle: 'Pyramid King',
+    id: 'pyramid', name: 'Trial Pyramid', brain: 'Brandon', brainTitle: 'Pyramid King',
     setSize: 0, healBetween: false,
     intro: 'Seven floors up through the dark. No free healing, no shop, no way back but through — only what the mountain lets you carry in the Pyramid Bag. And the Bag empties when the climb ends, so spend what you find while the mountain lets you.',
     pools: ['golbat', 'graveler', 'onix', 'steelix', 'claydol', 'nosepass', 'solrock', 'lunatone', 'geodude', 'rhyhorn', 'phanpy', 'larvitar', 'aron', 'baltoy'],

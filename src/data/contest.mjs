@@ -43,7 +43,7 @@ export const CONTEST_HALLS = ['verdanturf', 'fallarbor', 'slateport', 'lilycove'
 // hall key of its own (its own NPC field below, its own ribbon), and
 // ranks unlock in sequence: a rank's `requires` is the previous
 // rank's ribbon. CONTEST_RIBBONS (the validators' closed set) is the
-// Hoenn halls PLUS the four rank ribbons — one persistence shape
+// Maris halls PLUS the four rank ribbons — one persistence shape
 // (state.contest.ribbons, the H5 quintet) serves both regions.
 export const CONTEST_RANKS = {
   hearthome: [
@@ -56,10 +56,10 @@ export const CONTEST_RANKS = {
 export const CONTEST_RIBBONS = [...CONTEST_HALLS,
   ...Object.values(CONTEST_RANKS).flat().map((r) => r.key)];
 export const RIBBON_NAMES = {
-  verdanturf: 'Verdanturf Ribbon',
-  fallarbor: 'Fallarbor Ribbon',
-  slateport: 'Slateport Ribbon',
-  lilycove: 'Lilycove Ribbon',
+  verdanturf: 'Wildflower Ribbon',
+  fallarbor: 'Ashfall Ribbon',
+  slateport: 'Fairhaven Ribbon',
+  lilycove: 'Lotus Cove Ribbon',
   'hearthome-normal': 'Hearthome Ribbon (Normal Rank)',
   'hearthome-great': 'Hearthome Ribbon (Great Rank)',
   'hearthome-ultra': 'Hearthome Ribbon (Ultra Rank)',
@@ -100,7 +100,7 @@ export const CONTEST_NOTABLES = {
   guillotine: [6, 2],  // OHKO set pieces: precision with menace
   horndrill: [6, 2],
   fissure: [6, 2],
-  spore: [4, 3],       // the rudest snooze in Hoenn
+  spore: [4, 3],       // the rudest snooze in Maris
   lovelykiss: [4, 3],
   sleeppowder: [4, 3],
   hypnosis: [4, 2],
@@ -150,11 +150,11 @@ export function appealJamFor(moveId) {
   return MOVE_APPEAL[moveId] || { appeal: 1, jam: 0 };
 }
 
-// The NPC fields. Three original entrants per hall, dressed Hoenn-era
+// The NPC fields. Three original entrants per hall, dressed Maris-era
 // species, each with a 4-round script of real move ids. Scripts are
 // tuned so a hall is always winnable with headliner play and always
 // losable with a flop act: every scripted move scores appeal 4-5, jam
-// stays 0 in Verdanturf (the suite's proving hall) and <= 1 elsewhere.
+// stays 0 in Wildflower (the suite's proving hall) and <= 1 elsewhere.
 export const CONTEST_NPCS = {
   verdanturf: [
     { name: 'FERN', species: 'roselia', script: ['razorleaf', 'growth', 'razorleaf', 'growth'] },
@@ -179,7 +179,7 @@ export const CONTEST_NPCS = {
   // Arc 4 Stage S4: the Super Contest fields, one per Hearthome rank.
   // Scripts escalate with rank (appeal 4-5 at Normal, headliners and
   // jam at Master) on the same winnable-with-headliner-play tuning
-  // law as the Hoenn fields.
+  // law as the Maris fields.
   'hearthome-normal': [
     { name: 'MIMI', species: 'buneary', script: ['razorleaf', 'growth', 'razorleaf', 'growth'] },
     { name: 'VOLT', species: 'pachirisu', script: ['thunderbolt', 'swift', 'thunderbolt', 'swift'] },

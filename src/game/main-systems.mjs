@@ -27,8 +27,8 @@ const REGIONS = [
   { id: 'kanto', name: 'Arden', note: 'The beginning. Eight badges, one League, a storm over Exile Isle.' },
   { id: 'orange', name: 'Orange Islands', note: 'A southern sea league of trials. Complete Arden first.' },
   { id: 'johto', name: 'Yamato', note: 'Old towers, older legends. Complete the Orange voyage first.' },
-  { id: 'hoenn', name: 'Hoenn', note: 'Sea and land at war with the sky. Complete Yamato first.' },
-  { id: 'sinnoh', name: 'Sinnoh', note: 'Myths written in stone and time. Complete Hoenn first.' },
+  { id: 'hoenn', name: 'Maris', note: 'Sea and land at war with the sky. Complete Yamato first.' },
+  { id: 'sinnoh', name: 'Sinnoh', note: 'Myths written in stone and time. Complete Maris first.' },
   { id: 'unova', name: 'Unova', note: 'Truth against ideals. Complete Sinnoh first.' },
   { id: 'kalos', name: 'Kalos', note: 'Beauty, bonds, and a flare of war. Complete Unova first.' },
   { id: 'alola', name: 'Alola', note: 'An island challenge under twin lights. Complete Kalos first.' },
@@ -455,7 +455,7 @@ Object.assign(Game.prototype, {
         });
       }
     }
-    // Section 1.9 — Battle Frontier (Stage F3): one row per facility
+    // Section 1.9 — Trial Grounds (Stage F3): one row per facility
     // in the Yamato section's idiom, rendered once the Frontier is
     // reached (its homecoming hook, the crossing, the current arc,
     // or any symbol earned). The rows are INFORMATIONAL — they carry
@@ -467,7 +467,7 @@ Object.assign(Game.prototype, {
       || !!g.state.story.flags.reachedarc_frontier
       || ((g.state.badges.symbols || []).some((s) => !!s));
     if (frontierReached) {
-      items.push({ label: '— BATTLE FRONTIER —', value: null, disabled: true, band: true });
+      items.push({ label: '— TRIAL GROUNDS —', value: null, disabled: true, band: true });
       const symbols = g.state.badges.symbols || [];
       for (const fid of FACILITY_IDS) {
         const slot = symbols[FACILITY_IDS.indexOf(fid)];

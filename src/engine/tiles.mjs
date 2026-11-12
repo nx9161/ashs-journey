@@ -274,7 +274,7 @@ JOHTO_TOWN_ORDER.forEach((id, i) => {
 });
 export const JOHTO_TOWN_GROUND_CHARS = JOHTO_TOWN_ORDER.map((id) => JOHTO_TOWN_CHARS[id].tg);
 export const JOHTO_TOWN_GROUND2_CHARS = JOHTO_TOWN_ORDER.map((id) => JOHTO_TOWN_CHARS[id].tg2);
-// ---- Arc 3 Stage H3a: Hoenn kinds ----
+// ---- Arc 3 Stage H3a: Maris kinds ----
 // Chars continue the block at U+1E00+261 (W6 0..131, W7 132..151, O1
 // 152..163, J3 kinds 164..172, Yamato towns 173..260). Same class
 // convention: floor = WALKABLE ground family of its own, wall = solid,
@@ -295,13 +295,13 @@ export const H3_PROP_KINDS = H3_KIND_DEFS.filter(([, c]) => c === 'prop').map(([
 export const H3_FLOOR_KINDS = H3_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
 export const H3_WALL_KINDS = H3_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
 export const H3_WALKABLE_CHARS = H3_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => H3_KIND_CHARS[k]);
-// ---- Arc 3 Stage H3a: Hoenn per-town identity kinds (the W5/J3
+// ---- Arc 3 Stage H3a: Maris per-town identity kinds (the W5/J3
 // machinery, extended a third time) ----
-// The eleven west/central-Hoenn settlements own the same eight
+// The eleven west/central-Maris settlements own the same eight
 // signature kinds as the Arden/Yamato towns. Chars continue the block
 // after the H3 kinds: town i owns idx 268+i*8 .. 275+i*8 in the order
 // [tg, tg2, tc, td, tr, tl, th, tw]. The art.mjs resolver keys on the
-// kind-name prefixes, so Hoenn kinds ride the shipped W5 paths.
+// kind-name prefixes, so Maris kinds ride the shipped W5 paths.
 export const HOENN_TOWN_ORDER = ['littleroot', 'oldale', 'petalburg', 'rustboro', 'dewford',
   'slateport', 'mauville', 'verdanturf', 'fallarbor', 'lavaridge', 'fortree',
   'lilycove', 'mossdeep', 'sootopolis', 'pacifidlog', 'evergrande'];
@@ -335,8 +335,8 @@ HOENN_TOWN_ORDER.forEach((id, i) => {
 });
 export const HOENN_TOWN_GROUND_CHARS = HOENN_TOWN_ORDER.map((id) => HOENN_TOWN_CHARS[id].tg);
 export const HOENN_TOWN_GROUND2_CHARS = HOENN_TOWN_ORDER.map((id) => HOENN_TOWN_CHARS[id].tg2);
-// ---- Arc 3 Stage H3b: Hoenn east/water kinds ----
-// Chars continue the block at U+1E00+396 (H3a kinds 261..267, Hoenn
+// ---- Arc 3 Stage H3b: Maris east/water kinds ----
+// Chars continue the block at U+1E00+396 (H3a kinds 261..267, Maris
 // towns 268..395 — the five east settlements own idx 356..395 in
 // HOENN_TOWN_CHARS above). Same class convention as H3: floor =
 // WALKABLE ground family of its own, wall = solid, prop = solid
@@ -360,7 +360,7 @@ export const H3B_WALKABLE_CHARS = H3B_KIND_DEFS.filter(([, c]) => c === 'floor')
 // ---- Arc 4 Stage S3a: Sinnoh kinds ----
 // Chars continue the block at U+1E00+404 (W6 0..131, W7 132..151, O1
 // 152..163, J3 kinds 164..172, Yamato towns 173..260, H3 kinds 261..267,
-// Hoenn towns 268..395, H3b kinds 396..403). Same class convention:
+// Maris towns 268..395, H3b kinds 396..403). Same class convention:
 // floor = WALKABLE ground family of its own, wall = solid, prop =
 // solid object composited over the ground it stands on. Authored
 // art: assets/sprites/pix/tiles/tile-{prop-,}<kind>.pix (Stage S3a).
@@ -382,12 +382,12 @@ export const S3_WALKABLE_CHARS = S3_KIND_DEFS.filter(([, c]) => c === 'floor').m
 // ---- Arc 4 Stage S3a: Sinnoh per-town identity kinds (the W5/J3/H3
 // machinery, extended a fourth time) ----
 // The fourteen Sinnoh settlements own the same eight signature kinds
-// as the Arden/Yamato/Hoenn towns. Chars continue the block after the
+// as the Arden/Yamato/Maris towns. Chars continue the block after the
 // S3 kinds: town i owns idx 412+i*8 .. 419+i*8 in the order
 // [tg, tg2, tc, td, tr, tl, th, tw]. S3a authors the ten west/central
 // towns (twinleaf..canalave, idx 412..491); the four east towns
 // (pastoria..sunnyshore, idx 492..523) are reserved here exactly as
-// Hoenn reserved its east towns at H3a — S3b authors their tiles.
+// Maris reserved its east towns at H3a — S3b authors their tiles.
 // The art.mjs resolver keys on the kind-name prefixes, so Sinnoh
 // kinds ride the shipped W5 rendering paths unchanged.
 export const SINNOH_TOWN_ORDER = ['twinleaf', 'sandgem', 'jubilife', 'oreburgh', 'floaroma',

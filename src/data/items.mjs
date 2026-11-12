@@ -178,24 +178,24 @@ export const ITEMS = {
   mineralbadge: { id: 'mineralbadge', name: 'Mineral Badge', pocket: 'key', desc: 'From Jasmine of Beacon. It shines back at the lighthouse.' },
   glacierbadge: { id: 'glacierbadge', name: 'Glacier Badge', pocket: 'key', desc: 'From Pryce of Redwood. It will not melt. Neither will you.' },
   risingbadge: { id: 'risingbadge', name: 'Rising Badge', pocket: 'key', desc: 'From Clair of Cragmoor — awarded in the Drake\'s Den, by the clan\'s law, after the elder\'s test.' },
-  // Hoenn badges (Stage H4a): the Arden representation exactly — a
+  // Maris badges (Stage H4a): the Arden representation exactly — a
   // key-pocket ITEMS row per badge, the id in badges.hoenn, and the
   // badge_<root> story flag. First four are playable in H4a; the east
   // four rows ship now so the earn order is complete from day one
   // (H4b's leaders award them without touching this table).
-  stonebadge: { id: 'stonebadge', name: 'Stone Badge', pocket: 'key', desc: 'From Roxanne of Rustboro. Cut from the same stone her gym is built from.' },
-  knucklebadge: { id: 'knucklebadge', name: 'Knuckle Badge', pocket: 'key', desc: 'From Brawly of Dewford. For a team that can take a wave standing up.' },
-  dynamobadge: { id: 'dynamobadge', name: 'Dynamo Badge', pocket: 'key', desc: 'From Wattson of Mauville. It hums faintly in a thunderstorm.' },
-  heatbadge: { id: 'heatbadge', name: 'Heat Badge', pocket: 'key', desc: 'From Flannery of Lavaridge. Warm to the touch, always.' },
-  balancebadge: { id: 'balancebadge', name: 'Balance Badge', pocket: 'key', desc: 'From Norman of Petalburg. Perfectly weighted, either way up.' },
-  featherbadge: { id: 'featherbadge', name: 'Feather Badge', pocket: 'key', desc: 'From Winona of Fortree. Light enough to ride the canopy wind.' },
-  mindbadge: { id: 'mindbadge', name: 'Mind Badge', pocket: 'key', desc: 'From Tate and Liza of Mossdeep. Two halves, one thought.' },
-  rainbadge: { id: 'rainbadge', name: 'Rain Badge', pocket: 'key', desc: 'From Juan of Sootopolis. It smells of deep water and old rain.' },
+  stonebadge: { id: 'stonebadge', name: 'Stone Badge', pocket: 'key', desc: 'From Roxanne of Copperton. Cut from the same stone her gym is built from.' },
+  knucklebadge: { id: 'knucklebadge', name: 'Knuckle Badge', pocket: 'key', desc: 'From Brawly of Mistford. For a team that can take a wave standing up.' },
+  dynamobadge: { id: 'dynamobadge', name: 'Dynamo Badge', pocket: 'key', desc: 'From Wattson of Lilac. It hums faintly in a thunderstorm.' },
+  heatbadge: { id: 'heatbadge', name: 'Heat Badge', pocket: 'key', desc: 'From Flannery of Steamspring. Warm to the touch, always.' },
+  balancebadge: { id: 'balancebadge', name: 'Balance Badge', pocket: 'key', desc: 'From Norman of Meadowbrook. Perfectly weighted, either way up.' },
+  featherbadge: { id: 'featherbadge', name: 'Feather Badge', pocket: 'key', desc: 'From Winona of Highbranch. Light enough to ride the canopy wind.' },
+  mindbadge: { id: 'mindbadge', name: 'Mind Badge', pocket: 'key', desc: 'From Tate and Liza of Starfall. Two halves, one thought.' },
+  rainbadge: { id: 'rainbadge', name: 'Rain Badge', pocket: 'key', desc: 'From Juan of Craterlake. It smells of deep water and old rain.' },
   // Sinnoh badges (Arc 4 Stage S0): the Arden representation exactly —
   // a key-pocket ITEMS row per badge, the id in badges.sinnoh, and the
   // badge_<root> story flag. Platinum order, minted complete now so
   // the set, the Cheat Terminal stock and the validator sequence are
-  // whole before S5 stages their gyms (the Hoenn H4a precedent: the
+  // whole before S5 stages their gyms (the Maris H4a precedent: the
   // east four rows shipped before their leaders existed).
   coalbadge: { id: 'coalbadge', name: 'Coal Badge', pocket: 'key', desc: 'From Roark of Oreburgh. Cut from the seam his miners work — it still smells faintly of coal dust.' },
   forestbadge: { id: 'forestbadge', name: 'Forest Badge', pocket: 'key', desc: 'From Gardenia of Eterna. It carries the green hush of the old forest at the town\'s edge.' },
@@ -213,13 +213,13 @@ export const ITEMS = {
   // These rows are the case/display record of a Symbol once earned —
   // they are earned-only and never stock (see the Cheat Terminal
   // exclusion in overworld-systems.mjs openCheatShop).
-  abilitysymbol: { id: 'abilitysymbol', name: 'Ability Symbol', pocket: 'key', desc: 'From the Battle Tower. Struck in silver for the first long climb, and in gold for the trainer who climbs twice as far again.' },
-  knowledgesymbol: { id: 'knowledgesymbol', name: 'Knowledge Symbol', pocket: 'key', desc: 'From the Battle Factory. For winning with borrowed partners — proof that what you know matters more than what you own.' },
-  gutssymbol: { id: 'gutssymbol', name: 'Guts Symbol', pocket: 'key', desc: 'From the Battle Arena. Three turns, judged without mercy — for a team that never once fought scared.' },
-  tacticssymbol: { id: 'tacticssymbol', name: 'Tactics Symbol', pocket: 'key', desc: 'From the Battle Dome. Won through a whole tournament bracket, one read at a time, under the brightest lights on the island.' },
-  lucksymbol: { id: 'lucksymbol', name: 'Luck Symbol', pocket: 'key', desc: 'From the Battle Pike. The rooms choose what happens to you in there; this says you walked out smiling anyway.' },
-  spiritsymbol: { id: 'spiritsymbol', name: 'Spirit Symbol', pocket: 'key', desc: 'From the Battle Palace. For trusting your partners to choose their own moves — and being right to trust them.' },
-  bravesymbol: { id: 'bravesymbol', name: 'Brave Symbol', pocket: 'key', desc: 'From the Battle Pyramid. Carried up through the dark, floor by floor, with only what you brought in your bag.' },
+  abilitysymbol: { id: 'abilitysymbol', name: 'Ability Symbol', pocket: 'key', desc: 'From the Trial Tower. Struck in silver for the first long climb, and in gold for the trainer who climbs twice as far again.' },
+  knowledgesymbol: { id: 'knowledgesymbol', name: 'Knowledge Symbol', pocket: 'key', desc: 'From the Trial Factory. For winning with borrowed partners — proof that what you know matters more than what you own.' },
+  gutssymbol: { id: 'gutssymbol', name: 'Guts Symbol', pocket: 'key', desc: 'From the Trial Arena. Three turns, judged without mercy — for a team that never once fought scared.' },
+  tacticssymbol: { id: 'tacticssymbol', name: 'Tactics Symbol', pocket: 'key', desc: 'From the Trial Dome. Won through a whole tournament bracket, one read at a time, under the brightest lights on the island.' },
+  lucksymbol: { id: 'lucksymbol', name: 'Luck Symbol', pocket: 'key', desc: 'From the Trial Pike. The rooms choose what happens to you in there; this says you walked out smiling anyway.' },
+  spiritsymbol: { id: 'spiritsymbol', name: 'Spirit Symbol', pocket: 'key', desc: 'From the Trial Palace. For trusting your partners to choose their own moves — and being right to trust them.' },
+  bravesymbol: { id: 'bravesymbol', name: 'Brave Symbol', pocket: 'key', desc: 'From the Trial Pyramid. Carried up through the dark, floor by floor, with only what you brought in your bag.' },
   // Stage J4b key item: the Tidewall pharmacy's Secret Potion, the
   // medicine errand's whole cargo (delivered to Amphy in the Glitter
   // Lighthouse; the delivery scene removes it from the bag).

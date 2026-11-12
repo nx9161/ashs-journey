@@ -276,7 +276,7 @@ export const IDLE_CLASS = {
   pupitar: 'inert',
   tyranitar: 'grounded',
   celebi: 'hover',
-  // Stage H1 (Arc 3): +138 Hoenn rows by the same rule (bird->hover,
+  // Stage H1 (Arc 3): +138 Maris rows by the same rule (bird->hover,
   // fish/serpent->serpentine, blob->inert, else grounded; hand overrides
   // for floaters/levitators: castform/lunatone/solrock/chimecho/shedinja/
   // beldum/metang/claydol/shuppet/duskull/jirachi/latias/latios/deoxys

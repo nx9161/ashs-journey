@@ -186,19 +186,19 @@ export const TALE_NPCS = [
   { map: 'pallet', x: 11, y: 9, name: 'CAPT FRONTIER', art: 'sailor', skin: '#e8b888', shirt: '#5a3a7a', pants: '#2a2a3a', hair: '#1a1a2a',
     ferry: 'frontierhub', ferryArc: 'frontier',
     dialogue: ['The Frontier run is the short island crossing — seven arenas on one island, and every trainer there fighting like the whole sea is watching.', "Scott himself left your invitation — his scouts book that passage, and his name is already on your boarding card. No invitation, no boarding — captain's orders, trainer."] },
-  // Arc 3 Stage H4a: the Hoenn embark captain, appended to Arcport's
+  // Arc 3 Stage H4a: the Maris embark captain, appended to Arcport's
   // roster through this same loadMap append idiom (Arcport's map def
   // in maps2.mjs is NOT rewritten). He carries NO tale/role — the ferry
   // handler (overworld-systems, ferryArc 'hoenn') owns him entirely:
   // gated by the Foundation embark leg (embark_hoenn, armed at
-  // Homecoming #3) outbound, and unconditional once Hoenn has been
+  // Homecoming #3) outbound, and unconditional once Maris has been
   // reached (NO-SOFT-LOCK LAW). He stands at (16,10) on Arcport's
   // dock row, east of CAPT ORANGE (13,10) — each port its OWN captain
   // (the Yamato smell, J-register). The return captain stands on the
-  // Slateport dock (maps7.mjs, CAPT MERIDIAN).
-  { map: 'vermilion', x: 16, y: 10, name: 'CAPT HOENN', art: 'sailor', skin: '#d8a878', shirt: '#5a2a7a', pants: '#2a2a3a', hair: '#2a1a0a',
+  // Fairhaven dock (maps7.mjs, CAPT MERIDIAN).
+  { map: 'vermilion', x: 16, y: 10, name: 'CAPT MARIS', art: 'sailor', skin: '#d8a878', shirt: '#5a2a7a', pants: '#2a2a3a', hair: '#2a1a0a',
     ferry: 'littleroot', ferryArc: 'hoenn',
-    dialogue: ['The Littleroot run is the long weather crossing — Hoenn water, arguing with its own sky the whole way.', "Professor Hawthorn's office books that passage. No booking, no boarding — captain's orders, trainer."] },
+    dialogue: ['The Rootlet run is the long weather crossing — Maris water, arguing with its own sky the whole way.', "Professor Hawthorn's office books that passage. No booking, no boarding — captain's orders, trainer."] },
   // Arc 4 Stage S0: the Sinnoh embark captain, appended to Arcport's
   // roster through this same loadMap append idiom (Arcport's map def
   // is NOT rewritten). He carries NO tale/role — the ferry handler
@@ -208,7 +208,7 @@ export const TALE_NPCS = [
   // consumed that homecoming while Sinnoh was still sealed) outbound,
   // and unconditional once Sinnoh has been reached (NO-SOFT-LOCK LAW).
   // He stands at (14,10) on Arcport's dock row, one tile east of
-  // CAPT ORANGE (13,10) and two west of CAPT HOENN (16,10), leaving
+  // CAPT ORANGE (13,10) and two west of CAPT MARIS (16,10), leaving
   // (15,10) open as the passage between them: a plain ground tile —
   // no warp, door, sign or event tile is sealed from there, and
   // Arcport's walkable graph keeps its exact base shape (the main
