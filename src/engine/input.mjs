@@ -18,6 +18,10 @@ export const KEYMAP = {
 };
 export const ACTIONS = ['up', 'down', 'left', 'right', 'a', 'b', 'start', 'select',
   'pageup', 'pagedown', 'slot1', 'slot2', 'slot3', 'slot4', 'fullscreen', 'mute', 'escape'];
+// Gamepad (W3C standard mapping): button index -> action. Shoulders page
+// lists (the game's pageup/pagedown equivalents); 12-15 are the D-pad.
+export const PAD_BUTTONS = { 0: 'a', 1: 'b', 4: 'pageup', 5: 'pagedown', 8: 'select', 9: 'start',
+  12: 'up', 13: 'down', 14: 'left', 15: 'right' };
 
 export class Input {
   constructor() {
@@ -25,6 +29,7 @@ export class Input {
     this.pressed = {};   // action -> bool (edge: went down since last sample)
     this._dirStack = []; // last-pressed-wins for diagonals
     this.remap = Object.assign({}, KEYMAP);
+    this._padHeld = {};  // action -> bool, gamepad-sourced held state
     this.flipControls = false;
     for (const a of ACTIONS) { this.held[a] = false; this.pressed[a] = false; }
     this._bound = false;
@@ -59,6 +64,31 @@ export class Input {
     // Touch overlays call press/release directly.
   }
 
+  // Gamepad polling, called once per tick from sample(). The first
+  // connected pad wins; the left stick acts as digital directions at a
+  // 0.5 threshold. State transitions feed the same _press/_release path
+  // as keyboard/touch, so edges, held state and the direction stack
+  // behave identically. No pad, no API (headless), or a disconnect is a
+  // silent no-op — a disconnect simply releases whatever the pad held.
+  pollGamepad() {
+    if (typeof navigator === 'undefined' || !navigator.getGamepads) return;
+    let pad = null;
+    for (const p of navigator.getGamepads() || []) if (p && p.connected) { pad = p; break; }
+    const now = {};
+    if (pad) {
+      for (const i in PAD_BUTTONS) if (pad.buttons[i] && pad.buttons[i].pressed) now[PAD_BUTTONS[i]] = true;
+      const x = pad.axes[0] || 0, y = pad.axes[1] || 0;
+      if (x < -0.5) now.left = true; else if (x > 0.5) now.right = true;
+      if (y < -0.5) now.up = true; else if (y > 0.5) now.down = true;
+    }
+    for (const a of ACTIONS) {
+      const is = !!now[a];
+      if (is === !!this._padHeld[a]) continue;
+      this._padHeld[a] = is;
+      if (is) this._press(a); else this._release(a);
+    }
+  }
+
   _press(action, repeat) {
     // AUDIT FIX (laptop paging): OS key-repeat re-fires direction edges so
     // HOLDING an arrow scrolls menus/lists (Platinum behavior). Buttons
@@ -86,6 +116,7 @@ export class Input {
 
   // Called once per sim tick (and per rAF in loop) — edges consumed here.
   sample() {
+    this.pollGamepad();
     // pressed[] stays true until consumed by game code via wasPressed().
   }
 
