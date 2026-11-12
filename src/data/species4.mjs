@@ -1114,7 +1114,7 @@ export const SPECIES_HOENN = {
     tm: [1, 5, 6, 8, 9, 10, 11, 12, 13, 14, 15, 20, 24, 25, 28, 31, 32, 33, 34, 38, 39, 40, 44, 45, 50, 102, 103, 104, 105],
   },
   beldum: {
-    id: 'beldum', name: 'Beldum', dexNo: 374, types: ['steel', 'psychic'],
+    id: 'beldum', name: 'MAGNALET', dexNo: 374, types: ['steel', 'psychic'],
     base: { hp: 40, atk: 55, def: 80, spa: 35, spd: 60, spe: 30 },
     catchRate: 3, growth: 'slow', baseXp: 60, body: 'blob', spriteSeed: 37401,
     eggGroups: ['mineral'], hatchCounter: 40,
@@ -1123,7 +1123,7 @@ export const SPECIES_HOENN = {
     evo: { to: 'metang', method: 'level', level: 220 }, tm: [1, 5, 6, 8, 9, 10, 11, 12, 13, 14, 15, 17, 18, 19, 29, 30, 31, 32, 33, 34, 35, 40, 42, 44, 45, 46, 49, 50, 103],
   },
   metang: {
-    id: 'metang', name: 'Metang', dexNo: 375, types: ['steel', 'psychic'],
+    id: 'metang', name: 'MAGNAFUSE', dexNo: 375, types: ['steel', 'psychic'],
     base: { hp: 60, atk: 75, def: 100, spa: 55, spd: 80, spe: 50 },
     catchRate: 3, growth: 'slow', baseXp: 147, body: 'blob', spriteSeed: 37501,
     eggGroups: ['mineral'], hatchCounter: 40,
@@ -1132,7 +1132,7 @@ export const SPECIES_HOENN = {
     evo: { to: 'metagross', method: 'level', level: 245 }, tm: [1, 5, 6, 9, 10, 17, 18, 19, 28, 29, 30, 31, 32, 33, 34, 35, 40, 42, 44, 45, 46, 49, 50, 105],
   },
   metagross: {
-    id: 'metagross', name: 'Metagross', dexNo: 376, types: ['steel', 'psychic'],
+    id: 'metagross', name: 'MAGNATITAN', dexNo: 376, types: ['steel', 'psychic'],
     base: { hp: 80, atk: 135, def: 130, spa: 95, spd: 90, spe: 70 },
     catchRate: 3, growth: 'slow', baseXp: 270, body: 'quad', spriteSeed: 37601,
     eggGroups: ['mineral'], hatchCounter: 40,
@@ -1141,7 +1141,7 @@ export const SPECIES_HOENN = {
     tm: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 44, 45, 46, 47, 48, 49, 50, 101, 102, 103, 104, 105],
   },
   regirock: {
-    id: 'regirock', name: 'Regirock', dexNo: 377, types: ['rock'],
+    id: 'regirock', name: 'PETRAGOLEM', dexNo: 377, types: ['rock'],
     base: { hp: 80, atk: 100, def: 200, spa: 50, spd: 100, spe: 50 },
     catchRate: 3, growth: 'slow', baseXp: 261, body: 'biped', spriteSeed: 37701,
     eggGroups: ['no-eggs'], hatchCounter: 80,
@@ -1150,7 +1150,7 @@ export const SPECIES_HOENN = {
     tm: [2, 4, 6, 9, 10, 15, 20, 28, 31, 32, 34, 38, 39, 44, 50, 102],
   },
   regice: {
-    id: 'regice', name: 'Regice', dexNo: 378, types: ['ice'],
+    id: 'regice', name: 'CRYOGOLEM', dexNo: 378, types: ['ice'],
     base: { hp: 80, atk: 50, def: 100, spa: 100, spd: 200, spe: 50 },
     catchRate: 3, growth: 'slow', baseXp: 261, body: 'biped', spriteSeed: 37801,
     eggGroups: ['no-eggs'], hatchCounter: 80,
@@ -1159,7 +1159,7 @@ export const SPECIES_HOENN = {
     tm: [2, 4, 6, 9, 10, 11, 12, 13, 14, 15, 20, 31, 32, 33, 34, 39, 44, 50, 102],
   },
   registeel: {
-    id: 'registeel', name: 'Registeel', dexNo: 379, types: ['steel'],
+    id: 'registeel', name: 'SIDEROGOLEM', dexNo: 379, types: ['steel'],
     base: { hp: 80, atk: 75, def: 150, spa: 75, spd: 150, spe: 50 },
     catchRate: 3, growth: 'slow', baseXp: 261, body: 'biped', spriteSeed: 37901,
     eggGroups: ['no-eggs'], hatchCounter: 80,
@@ -1168,7 +1168,7 @@ export const SPECIES_HOENN = {
     tm: [1, 5, 6, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 24, 25, 26, 27, 28, 31, 32, 33, 34, 38, 39, 44, 48, 50, 103, 104],
   },
   latias: {
-    id: 'latias', name: 'Latias', dexNo: 380, types: ['dragon', 'psychic'],
+    id: 'latias', name: 'RUBIAVIS', dexNo: 380, types: ['dragon', 'psychic'],
     base: { hp: 80, atk: 80, def: 90, spa: 110, spd: 130, spe: 110 },
     catchRate: 3, growth: 'slow', baseXp: 270, body: 'bird', spriteSeed: 38001,
     eggGroups: ['no-eggs'], hatchCounter: 120,
@@ -1177,7 +1177,7 @@ export const SPECIES_HOENN = {
     tm: [1, 5, 6, 8, 9, 10, 11, 12, 13, 14, 15, 20, 24, 25, 28, 31, 32, 33, 34, 38, 39, 40, 44, 45, 50, 102, 103, 104, 105],
   },
   latios: {
-    id: 'latios', name: 'Latios', dexNo: 381, types: ['dragon', 'psychic'],
+    id: 'latios', name: 'AZURAVIS', dexNo: 381, types: ['dragon', 'psychic'],
     base: { hp: 80, atk: 90, def: 80, spa: 130, spd: 110, spe: 110 },
     catchRate: 3, growth: 'slow', baseXp: 270, body: 'bird', spriteSeed: 38101,
     eggGroups: ['no-eggs'], hatchCounter: 120,
@@ -1186,7 +1186,7 @@ export const SPECIES_HOENN = {
     tm: [1, 5, 6, 8, 9, 10, 11, 12, 13, 14, 15, 20, 24, 25, 28, 31, 32, 33, 34, 38, 39, 40, 44, 45, 50, 102, 103, 104, 105],
   },
   kyogre: {
-    id: 'kyogre', name: 'Kyogre', dexNo: 382, types: ['water'],
+    id: 'kyogre', name: 'ABYSSORCA', dexNo: 382, types: ['water'],
     base: { hp: 100, atk: 100, def: 90, spa: 150, spd: 140, spe: 90 },
     catchRate: 3, growth: 'slow', baseXp: 302, body: 'fish', spriteSeed: 38201,
     eggGroups: ['no-eggs'], hatchCounter: 120,
@@ -1195,7 +1195,7 @@ export const SPECIES_HOENN = {
     tm: [6, 8, 9, 10, 11, 12, 13, 14, 15, 20, 24, 25, 28, 31, 32, 34, 38, 39, 44, 50, 103, 104],
   },
   groudon: {
-    id: 'groudon', name: 'Groudon', dexNo: 383, types: ['ground'],
+    id: 'groudon', name: 'TERRATITAN', dexNo: 383, types: ['ground'],
     base: { hp: 100, atk: 150, def: 140, spa: 100, spd: 90, spe: 90 },
     catchRate: 3, growth: 'slow', baseXp: 302, body: 'biped', spriteSeed: 38301,
     eggGroups: ['no-eggs'], hatchCounter: 120,
@@ -1204,7 +1204,7 @@ export const SPECIES_HOENN = {
     tm: [1, 5, 6, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 24, 25, 26, 27, 28, 31, 32, 33, 34, 38, 39, 44, 48, 50, 103, 104],
   },
   rayquaza: {
-    id: 'rayquaza', name: 'Rayquaza', dexNo: 384, types: ['dragon', 'flying'],
+    id: 'rayquaza', name: 'STRATOWYRM', dexNo: 384, types: ['dragon', 'flying'],
     base: { hp: 105, atk: 150, def: 90, spa: 150, spd: 90, spe: 95 },
     catchRate: 45, growth: 'slow', baseXp: 306, body: 'serpent', spriteSeed: 38401,
     eggGroups: ['no-eggs'], hatchCounter: 120,
@@ -1213,7 +1213,7 @@ export const SPECIES_HOENN = {
     tm: [1, 5, 6, 8, 9, 10, 11, 12, 13, 14, 15, 20, 24, 25, 28, 31, 32, 33, 34, 38, 39, 40, 44, 45, 50, 102, 103, 104, 105],
   },
   jirachi: {
-    id: 'jirachi', name: 'Jirachi', dexNo: 385, types: ['steel', 'psychic'],
+    id: 'jirachi', name: 'ASTRAEON', dexNo: 385, types: ['steel', 'psychic'],
     base: { hp: 100, atk: 100, def: 100, spa: 100, spd: 100, spe: 100 },
     catchRate: 3, growth: 'slow', baseXp: 270, body: 'biped', spriteSeed: 38501,
     eggGroups: ['no-eggs'], hatchCounter: 120,
@@ -1222,7 +1222,7 @@ export const SPECIES_HOENN = {
     tm: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 44, 45, 46, 47, 48, 49, 50, 101, 102, 103, 104, 105],
   },
   deoxys: {
-    id: 'deoxys', name: 'Deoxys', dexNo: 386, types: ['psychic'],
+    id: 'deoxys', name: 'XENOGENE', dexNo: 386, types: ['psychic'],
     base: { hp: 50, atk: 150, def: 50, spa: 150, spd: 50, spe: 150 },
     catchRate: 3, growth: 'slow', baseXp: 270, body: 'biped', spriteSeed: 38601,
     eggGroups: ['no-eggs'], hatchCounter: 120,
@@ -1231,7 +1231,7 @@ export const SPECIES_HOENN = {
     tm: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 44, 45, 46, 47, 48, 49, 50, 101, 102, 103, 104, 105],
   },
   deoxysattack: {
-    id: 'deoxysattack', name: 'Deoxys (Attack Forme)', dexNo: 386, types: ['psychic'],
+    id: 'deoxysattack', name: 'XENOGENE', dexNo: 386, types: ['psychic'],
     base: { hp: 50, atk: 180, def: 20, spa: 180, spd: 20, spe: 150 },
     catchRate: 3, growth: 'slow', baseXp: 270, body: 'biped', spriteSeed: 38602,
     eggGroups: ['no-eggs'], hatchCounter: 120,
@@ -1241,7 +1241,7 @@ export const SPECIES_HOENN = {
     form: true, baseSpecies: 'deoxys',
   },
   deoxysdefense: {
-    id: 'deoxysdefense', name: 'Deoxys (Defense Forme)', dexNo: 386, types: ['psychic'],
+    id: 'deoxysdefense', name: 'XENOGENE', dexNo: 386, types: ['psychic'],
     base: { hp: 50, atk: 70, def: 160, spa: 70, spd: 160, spe: 90 },
     catchRate: 3, growth: 'slow', baseXp: 270, body: 'biped', spriteSeed: 38603,
     eggGroups: ['no-eggs'], hatchCounter: 120,
@@ -1251,7 +1251,7 @@ export const SPECIES_HOENN = {
     form: true, baseSpecies: 'deoxys',
   },
   deoxysspeed: {
-    id: 'deoxysspeed', name: 'Deoxys (Speed Forme)', dexNo: 386, types: ['psychic'],
+    id: 'deoxysspeed', name: 'XENOGENE', dexNo: 386, types: ['psychic'],
     base: { hp: 50, atk: 95, def: 90, spa: 95, spd: 90, spe: 180 },
     catchRate: 3, growth: 'slow', baseXp: 270, body: 'biped', spriteSeed: 38604,
     eggGroups: ['no-eggs'], hatchCounter: 120,
