@@ -1351,7 +1351,7 @@ export const SPECIES2 = {
     evo: { to: 'azumarill', method: 'level', level: 18 },
   },
   snubbull: {
-    id: 'snubbull', name: 'Snubbull', dexNo: 209, types: ['fairy'],
+    id: 'snubbull', name: 'GRUMPLET', dexNo: 209, types: ['fairy'],
     base: { hp: 60, atk: 80, def: 50, spa: 40, spd: 40, spe: 30 },
     catchRate: 190, growth: 'fast', baseXp: 60, body: 'quad', spriteSeed: 20901,
     eggGroups: ['ground', 'fairy'], hatchCounter: 20,
