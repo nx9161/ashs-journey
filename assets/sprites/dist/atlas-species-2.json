@@ -1860,7 +1860,7 @@
       "frames": [
         "bob"
       ],
-      "palette": 16,
+      "palette": 15,
       "seed": null,
       "derived_from": "cyndaquil-front",
       "mirror_of": null
@@ -4382,7 +4382,7 @@
       "frames": [
         "bob"
       ],
-      "palette": 15,
+      "palette": 16,
       "seed": null,
       "derived_from": "misdreavus-front",
       "mirror_of": null
@@ -6163,7 +6163,7 @@
       "frames": [
         "bob"
       ],
-      "palette": 14,
+      "palette": 15,
       "seed": null,
       "derived_from": "snubbull-front",
       "mirror_of": null
@@ -9836,7 +9836,7 @@
       "frames": [
         "idle"
       ],
-      "palette": 16,
+      "palette": 15,
       "seed": null,
       "derived_from": null,
       "mirror_of": null
@@ -10499,7 +10499,7 @@
       "frames": [
         "idle"
       ],
-      "palette": 16,
+      "palette": 10,
       "seed": null,
       "derived_from": null,
       "mirror_of": null
@@ -11188,7 +11188,7 @@
       "frames": [
         "idle"
       ],
-      "palette": 16,
+      "palette": 11,
       "seed": null,
       "derived_from": null,
       "mirror_of": null
@@ -12488,7 +12488,7 @@
       "frames": [
         "idle"
       ],
-      "palette": 15,
+      "palette": 13,
       "seed": null,
       "derived_from": null,
       "mirror_of": null

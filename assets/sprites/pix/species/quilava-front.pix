@@ -1,6 +1,6 @@
-# quilava-front battle sprite, 64x64. Wave G: generated original design,
-# converted by assets/sprites/tools/convert-monster.mjs from
-# assets/sprites/designs/quillvent.png (deterministic).
+# quilava-front battle sprite, 64x64. Wave J B2-G10 repair: re-converted by
+# assets/sprites/tools/repair-battle-art.mjs from the locked Wave G design
+# assets/sprites/designs/quillvent.png (deterministic; strata pull 0.55 / palette own; body steps 8).
 PIX quilava-front 64 64
 ................................................................
 ................................................................
