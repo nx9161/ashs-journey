@@ -336,6 +336,20 @@ export const NAME_REGISTRY = {
     shellos:     { name: 'TIDESLUG', status: 'named', wave: 'G-ST3', design: 'tideslug' },
     gastrodon:   { name: 'MARESLUG', status: 'named', wave: 'G-ST3', design: 'mareslug' },
     ambipom:     { name: 'TWINAPE', status: 'named', wave: 'G-ST3', design: 'twinape' },
+    // -- Wave G Sinnoh, Tranche 4 --
+    drifloon:    { name: 'BALLOOM', status: 'named', wave: 'G-ST4', design: 'balloom' },
+    drifblim:    { name: 'GUSTBLIMP', status: 'named', wave: 'G-ST4', design: 'gustblimp' },
+    buneary:     { name: 'LOPLET', status: 'named', wave: 'G-ST4', design: 'loplet' },
+    lopunny:     { name: 'VELVETLOP', status: 'named', wave: 'G-ST4', design: 'velvetlop' },
+    mismagius:   { name: 'COVENCAT', status: 'named', wave: 'G-ST4', design: 'covencat' },
+    honchkrow:   { name: 'DONCROW', status: 'named', wave: 'G-ST4', design: 'doncrow' },
+    glameow:     { name: 'COILCAT', status: 'named', wave: 'G-ST4', design: 'coilcat' },
+    purugly:     { name: 'STOUTCAT', status: 'named', wave: 'G-ST4', design: 'stoutcat' },
+    chingling:   { name: 'BELLLET', status: 'named', wave: 'G-ST4', design: 'belllet' },
+    stunky:      { name: 'MUSKUNK', status: 'named', wave: 'G-ST4', design: 'muskunk' },
+    skuntank:    { name: 'TANKCAT', status: 'named', wave: 'G-ST4', design: 'tankcat' },
+    bronzor:     { name: 'RELICT', status: 'named', wave: 'G-ST4', design: 'relict' },
+    bronzong:    { name: 'CARILLON', status: 'named', wave: 'G-ST4', design: 'carillon' },
   },
 
   // Evolution lines fully renamed so far (slot ids, in order).
@@ -434,6 +448,13 @@ export const NAME_REGISTRY = {
     orchlet: ['cherubi', 'cherrim'],
     tideslug: ['shellos', 'gastrodon'],
     tailgrip: ['aipom', 'ambipom'],
+    balloom: ['drifloon', 'drifblim'],
+    loplet: ['buneary', 'lopunny'],
+    wailwisp: ['misdreavus', 'mismagius'],
+    hexcrow: ['murkrow', 'honchkrow'],
+    coilcat: ['glameow', 'purugly'],
+    muskunk: ['stunky', 'skuntank'],
+    relict: ['bronzor', 'bronzong'],
   },
 
   // -- Places (registry extension, owner order 2026-11-12 00:54) --
