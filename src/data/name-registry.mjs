@@ -480,6 +480,20 @@ export const NAME_REGISTRY = {
     rampardos:   { name: 'CRASHSAUR', status: 'named', wave: 'G-ST2', design: 'crashsaur' },
     shieldon:    { name: 'AEGITRIKE', status: 'named', wave: 'G-ST2', design: 'aegitrike' },
     bastiodon:   { name: 'WALLTRIKE', status: 'named', wave: 'G-ST2', design: 'walltrike' },
+    // -- Wave G Sinnoh, Tranche 3 --
+    burmy:       { name: 'LEAFWORM', status: 'named', wave: 'G-ST3', design: 'leafworm' },
+    wormadam:    { name: 'VEILWORM', status: 'named', wave: 'G-ST3', design: 'veilworm' },
+    mothim:      { name: 'DUSKMOTH', status: 'named', wave: 'G-ST3', design: 'duskmoth' },
+    combee:      { name: 'HEXABEE', status: 'named', wave: 'G-ST3', design: 'hexabee' },
+    vespiquen:   { name: 'COMBREIGN', status: 'named', wave: 'G-ST3', design: 'combreign' },
+    pachirisu:   { name: 'SPARKREL', status: 'named', wave: 'G-ST3', design: 'sparkrel' },
+    buizel:      { name: 'BUOYSEL', status: 'named', wave: 'G-ST3', design: 'buoysel' },
+    floatzel:    { name: 'TIDESEL', status: 'named', wave: 'G-ST3', design: 'tidesel' },
+    cherubi:     { name: 'ORCHLET', status: 'named', wave: 'G-ST3', design: 'orchlet' },
+    cherrim:     { name: 'SUNBLOSS', status: 'named', wave: 'G-ST3', design: 'sunbloss' },
+    shellos:     { name: 'TIDESLUG', status: 'named', wave: 'G-ST3', design: 'tideslug' },
+    gastrodon:   { name: 'MARESLUG', status: 'named', wave: 'G-ST3', design: 'mareslug' },
+    ambipom:     { name: 'TWINAPE', status: 'named', wave: 'G-ST3', design: 'twinape' },
   },
 
   // Evolution lines fully renamed so far (slot ids, in order).
@@ -621,6 +635,12 @@ export const NAME_REGISTRY = {
     voltcub: ['shinx', 'luxio', 'luxray'],
     ramosaur: ['cranidos', 'rampardos'],
     aegitrike: ['shieldon', 'bastiodon'],
+    leafworm: ['burmy', 'wormadam', 'mothim'],
+    hexabee: ['combee', 'vespiquen'],
+    buoysel: ['buizel', 'floatzel'],
+    orchlet: ['cherubi', 'cherrim'],
+    tideslug: ['shellos', 'gastrodon'],
+    tailgrip: ['aipom', 'ambipom'],
   },
 
   // -- Places (registry extension, owner order 2026-11-12 00:54) --

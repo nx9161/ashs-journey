@@ -247,7 +247,7 @@ export const SPECIES_SINNOH = {
     tm: [2, 4, 6, 9, 10, 15, 20, 28, 31, 32, 34, 38, 39, 44, 50, 102],
   },
   burmy: {
-    id: 'burmy', name: 'Burmy', dexNo: 412, types: ['bug'],
+    id: 'burmy', name: 'LEAFWORM', dexNo: 412, types: ['bug'],
     base: { hp: 40, atk: 29, def: 45, spa: 29, spd: 45, spe: 36 },
     catchRate: 120, growth: 'mediumfast', baseXp: 45, body: 'blob', spriteSeed: 41201,
     eggGroups: ['bug'], hatchCounter: 15,
@@ -256,7 +256,7 @@ export const SPECIES_SINNOH = {
     evo: { to: 'wormadam', method: 'level', level: 320 }, evos: [{ to: 'wormadam', method: 'level', level: 320 }, { to: 'mothim', method: 'level', level: 320 }], tm: [],
   },
   wormadam: {
-    id: 'wormadam', name: 'Wormadam', dexNo: 413, types: ['bug', 'grass'],
+    id: 'wormadam', name: 'VEILWORM', dexNo: 413, types: ['bug', 'grass'],
     base: { hp: 60, atk: 59, def: 85, spa: 79, spd: 105, spe: 36 },
     catchRate: 45, growth: 'mediumfast', baseXp: 148, body: 'blob', spriteSeed: 41301,
     eggGroups: ['bug'], hatchCounter: 15,
@@ -265,7 +265,7 @@ export const SPECIES_SINNOH = {
     tm: [3, 6, 9, 10, 15, 20, 21, 22, 28, 31, 32, 34, 44, 50, 101],
   },
   mothim: {
-    id: 'mothim', name: 'Mothim', dexNo: 414, types: ['bug', 'flying'],
+    id: 'mothim', name: 'DUSKMOTH', dexNo: 414, types: ['bug', 'flying'],
     base: { hp: 70, atk: 94, def: 50, spa: 94, spd: 50, spe: 66 },
     catchRate: 45, growth: 'mediumfast', baseXp: 148, body: 'bird', spriteSeed: 41401,
     eggGroups: ['bug'], hatchCounter: 15,
@@ -274,7 +274,7 @@ export const SPECIES_SINNOH = {
     tm: [2, 4, 6, 15, 21, 22, 29, 30, 31, 32, 33, 34, 42, 44, 46, 50, 105],
   },
   combee: {
-    id: 'combee', name: 'Combee', dexNo: 415, types: ['bug', 'flying'],
+    id: 'combee', name: 'HEXABEE', dexNo: 415, types: ['bug', 'flying'],
     base: { hp: 30, atk: 30, def: 42, spa: 30, spd: 42, spe: 70 },
     catchRate: 120, growth: 'mediumslow', baseXp: 49, body: 'blob', spriteSeed: 41501,
     eggGroups: ['bug'], hatchCounter: 15,
@@ -283,7 +283,7 @@ export const SPECIES_SINNOH = {
     evo: { to: 'vespiquen', method: 'level', level: 321 }, tm: [2, 4, 6, 15, 21, 22, 29, 30, 31, 32, 33, 34, 42, 44, 46, 50, 105],
   },
   vespiquen: {
-    id: 'vespiquen', name: 'Vespiquen', dexNo: 416, types: ['bug', 'flying'],
+    id: 'vespiquen', name: 'COMBREIGN', dexNo: 416, types: ['bug', 'flying'],
     base: { hp: 70, atk: 80, def: 102, spa: 80, spd: 102, spe: 40 },
     catchRate: 45, growth: 'mediumslow', baseXp: 166, body: 'bird', spriteSeed: 41601,
     eggGroups: ['bug'], hatchCounter: 15,
@@ -292,7 +292,7 @@ export const SPECIES_SINNOH = {
     tm: [3, 6, 9, 10, 15, 20, 31, 32, 34, 39, 44, 50, 101, 102],
   },
   pachirisu: {
-    id: 'pachirisu', name: 'Pachirisu', dexNo: 417, types: ['electric'],
+    id: 'pachirisu', name: 'SPARKREL', dexNo: 417, types: ['electric'],
     base: { hp: 60, atk: 45, def: 70, spa: 45, spd: 90, spe: 95 },
     catchRate: 200, growth: 'mediumfast', baseXp: 142, body: 'quad', spriteSeed: 41701,
     eggGroups: ['ground', 'fairy'], hatchCounter: 10,
@@ -301,7 +301,7 @@ export const SPECIES_SINNOH = {
     tm: [6, 9, 10, 20, 24, 25, 31, 32, 33, 34, 36, 39, 44, 50, 105],
   },
   buizel: {
-    id: 'buizel', name: 'Buizel', dexNo: 418, types: ['water'],
+    id: 'buizel', name: 'BUOYSEL', dexNo: 418, types: ['water'],
     base: { hp: 55, atk: 65, def: 35, spa: 60, spd: 30, spe: 85 },
     catchRate: 190, growth: 'mediumfast', baseXp: 66, body: 'quad', spriteSeed: 41801,
     eggGroups: ['water1', 'ground'], hatchCounter: 20,
@@ -310,7 +310,7 @@ export const SPECIES_SINNOH = {
     evo: { to: 'floatzel', method: 'level', level: 326 }, tm: [6, 9, 10, 20, 24, 25, 31, 32, 33, 34, 36, 39, 44, 50, 105],
   },
   floatzel: {
-    id: 'floatzel', name: 'Floatzel', dexNo: 419, types: ['water'],
+    id: 'floatzel', name: 'TIDESEL', dexNo: 419, types: ['water'],
     base: { hp: 85, atk: 105, def: 55, spa: 85, spd: 50, spe: 115 },
     catchRate: 75, growth: 'mediumfast', baseXp: 173, body: 'quad', spriteSeed: 41901,
     eggGroups: ['water1', 'ground'], hatchCounter: 20,
@@ -319,7 +319,7 @@ export const SPECIES_SINNOH = {
     tm: [6, 8, 9, 10, 11, 12, 13, 14, 15, 20, 31, 32, 34, 44, 50, 103, 104],
   },
   cherubi: {
-    id: 'cherubi', name: 'Cherubi', dexNo: 420, types: ['grass'],
+    id: 'cherubi', name: 'ORCHLET', dexNo: 420, types: ['grass'],
     base: { hp: 45, atk: 35, def: 45, spa: 62, spd: 53, spe: 35 },
     catchRate: 190, growth: 'mediumfast', baseXp: 55, body: 'blob', spriteSeed: 42001,
     eggGroups: ['fairy', 'plant'], hatchCounter: 20,
@@ -328,7 +328,7 @@ export const SPECIES_SINNOH = {
     evo: { to: 'cherrim', method: 'level', level: 325 }, tm: [3, 6, 9, 10, 20, 21, 22, 28, 31, 32, 34, 44, 50, 101],
   },
   cherrim: {
-    id: 'cherrim', name: 'Cherrim', dexNo: 421, types: ['grass'],
+    id: 'cherrim', name: 'SUNBLOSS', dexNo: 421, types: ['grass'],
     base: { hp: 70, atk: 60, def: 70, spa: 87, spd: 78, spe: 85 },
     catchRate: 75, growth: 'mediumfast', baseXp: 158, body: 'quad', spriteSeed: 42101,
     eggGroups: ['fairy', 'plant'], hatchCounter: 20,
@@ -337,7 +337,7 @@ export const SPECIES_SINNOH = {
     tm: [2, 4, 6, 9, 10, 15, 20, 21, 31, 32, 34, 39, 44, 50, 102],
   },
   shellos: {
-    id: 'shellos', name: 'Shellos', dexNo: 422, types: ['water'],
+    id: 'shellos', name: 'TIDESLUG', dexNo: 422, types: ['water'],
     base: { hp: 76, atk: 48, def: 48, spa: 57, spd: 62, spe: 34 },
     catchRate: 190, growth: 'mediumfast', baseXp: 65, body: 'serpent', spriteSeed: 42201,
     eggGroups: ['water1', 'indeterminate'], hatchCounter: 20,
@@ -346,7 +346,7 @@ export const SPECIES_SINNOH = {
     evo: { to: 'gastrodon', method: 'level', level: 330 }, tm: [6, 8, 9, 10, 11, 12, 13, 14, 16, 20, 31, 32, 34, 44, 50, 103],
   },
   gastrodon: {
-    id: 'gastrodon', name: 'Gastrodon', dexNo: 423, types: ['water', 'ground'],
+    id: 'gastrodon', name: 'MARESLUG', dexNo: 423, types: ['water', 'ground'],
     base: { hp: 111, atk: 83, def: 68, spa: 92, spd: 82, spe: 39 },
     catchRate: 75, growth: 'mediumfast', baseXp: 166, body: 'serpent', spriteSeed: 42301,
     eggGroups: ['water1', 'indeterminate'], hatchCounter: 20,
@@ -355,7 +355,7 @@ export const SPECIES_SINNOH = {
     tm: [6, 8, 9, 10, 15, 20, 26, 27, 28, 31, 32, 34, 44, 48, 50],
   },
   ambipom: {
-    id: 'ambipom', name: 'Ambipom', dexNo: 424, types: ['normal'],
+    id: 'ambipom', name: 'TWINAPE', dexNo: 424, types: ['normal'],
     base: { hp: 75, atk: 100, def: 66, spa: 60, spd: 66, spe: 115 },
     catchRate: 45, growth: 'fast', baseXp: 169, body: 'biped', spriteSeed: 42401,
     eggGroups: ['ground'], hatchCounter: 20,
