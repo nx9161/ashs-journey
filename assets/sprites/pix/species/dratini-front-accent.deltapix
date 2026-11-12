@@ -1,9 +1,0 @@
-# dratini-front-accent — Premium+ W2 accent frame (blink). Recolor-only delta
-# over dratini-front: the silhouette never changes; the accent reads in
-# alternation with the base frame under the species idle class.
-PIXD dratini-front-accent dratini-front 64 64
-21 16 Y
-22 16 Y
-39 16 Y
-40 16 Y
-PAL

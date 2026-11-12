@@ -185,6 +185,23 @@ export const NAME_REGISTRY = {
     magmar:    { name: 'LAVAMAND', status: 'named', wave: 'G-KT8', design: 'lavamand' },
     pinsir:    { name: 'STAGHORN', status: 'named', wave: 'G-KT8', design: 'staghorn' },
     tauros:    { name: 'BOVARCH', status: 'named', wave: 'G-KT8', design: 'bovarch' },
+    // -- Wave G Kanto Completion, Tranche 9 (coordinator-named) --
+    magikarp:  { name: 'RUSTCARP', status: 'named', wave: 'G-KT9', design: 'rustcarp' },
+    gyarados:  { name: 'WRATHWYRM', status: 'named', wave: 'G-KT9', design: 'wrathwyrm' },
+    lapras:    { name: 'KELPSAIL', status: 'named', wave: 'G-KT9', design: 'kelpsail' },
+    ditto:     { name: 'MIMIBLOB', status: 'named', wave: 'G-KT9', design: 'mimiblob' },
+    porygon:   { name: 'POLYCRANE', status: 'named', wave: 'G-KT9', design: 'polycrane' },
+    omanyte:   { name: 'AMMONLET', status: 'named', wave: 'G-KT9', design: 'ammonlet' },
+    omastar:   { name: 'AMMONARCH', status: 'named', wave: 'G-KT9', design: 'ammonarch' },
+    kabuto:    { name: 'DOMESHEL', status: 'named', wave: 'G-KT9', design: 'domeshel' },
+    kabutops:  { name: 'DOMEREAP', status: 'named', wave: 'G-KT9', design: 'domereap' },
+    aerodactyl: { name: 'PTERARCH', status: 'named', wave: 'G-KT9', design: 'pterarch' },
+    snorlax:   { name: 'NAPPASAUR', status: 'named', wave: 'G-KT9', design: 'nappasaur' },
+    dratini:   { name: 'WYRMLING', status: 'named', wave: 'G-KT9', design: 'wyrmling' },
+    dragonair: { name: 'WYRMSAGE', status: 'named', wave: 'G-KT9', design: 'wyrmsage' },
+    dragonite: { name: 'WYRMARCH', status: 'named', wave: 'G-KT9', design: 'wyrmarch' },
+    giantdragonite: { name: 'Giant WYRMARCH', status: 'named', wave: 'G-KT9', design: 'wyrmarch-giant' },
+    mew:       { name: 'PRIMARA', status: 'named', wave: 'G-KT9', design: 'primara' },
   },
 
   // Evolution lines fully renamed so far (slot ids, in order).
@@ -237,6 +254,10 @@ export const NAME_REGISTRY = {
     seapip: ['horsea', 'seadra'],
     veilfin: ['goldeen', 'seaking'],
     astlet: ['staryu', 'starmie'],
+    rustcarp: ['magikarp', 'gyarados'],
+    ammonlet: ['omanyte', 'omastar'],
+    domeshel: ['kabuto', 'kabutops'],
+    wyrmling: ['dratini', 'dragonair', 'dragonite'],
   },
 
   // -- Places (registry extension, owner order 2026-11-12 00:54) --

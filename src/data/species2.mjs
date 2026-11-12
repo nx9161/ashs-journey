@@ -1052,7 +1052,7 @@ export const SPECIES2 = {
     tm: [6, 8, 9, 10, 13, 14, 15, 20, 24, 25, 26, 27, 28, 31, 32, 34, 38, 44, 50, 104],
   },
   magikarp: {
-    id: 'magikarp', name: 'Magikarp', dexNo: 129, types: ['water'],
+    id: 'magikarp', name: 'RUSTCARP', dexNo: 129, types: ['water'],
     base: { hp: 20, atk: 10, def: 55, spa: 15, spd: 20, spe: 80 },
     catchRate: 255, growth: 'slow', baseXp: 40, body: 'fish', spriteSeed: 12901,
     eggGroups: ['water2', 'dragon'], hatchCounter: 5,
@@ -1061,7 +1061,7 @@ export const SPECIES2 = {
     evo: { to: 'gyarados', method: 'level', level: 20 }, tm: [],
   },
   gyarados: {
-    id: 'gyarados', name: 'Gyarados', dexNo: 130, types: ['water', 'flying'],
+    id: 'gyarados', name: 'WRATHWYRM', dexNo: 130, types: ['water', 'flying'],
     base: { hp: 95, atk: 125, def: 79, spa: 60, spd: 100, spe: 81 },
     catchRate: 45, growth: 'slow', baseXp: 189, body: 'serpent', spriteSeed: 13001,
     eggGroups: ['water2', 'dragon'], hatchCounter: 5,
@@ -1070,7 +1070,7 @@ export const SPECIES2 = {
     tm: [6, 8, 9, 10, 11, 12, 13, 14, 15, 20, 24, 25, 28, 31, 32, 34, 38, 39, 44, 50, 103, 104],
   },
   lapras: {
-    id: 'lapras', name: 'Lapras', dexNo: 131, types: ['water', 'ice'],
+    id: 'lapras', name: 'KELPSAIL', dexNo: 131, types: ['water', 'ice'],
     base: { hp: 130, atk: 85, def: 80, spa: 85, spd: 95, spe: 60 },
     catchRate: 45, growth: 'slow', baseXp: 187, body: 'fish', spriteSeed: 13101,
     eggGroups: ['monster', 'water1'], hatchCounter: 40,
@@ -1079,7 +1079,7 @@ export const SPECIES2 = {
     tm: [6, 8, 9, 10, 11, 12, 13, 14, 15, 20, 29, 31, 32, 34, 39, 42, 44, 46, 50, 103, 104],
   },
   ditto: {
-    id: 'ditto', name: 'Ditto', dexNo: 132, types: ['normal'],
+    id: 'ditto', name: 'MIMIBLOB', dexNo: 132, types: ['normal'],
     base: { hp: 48, atk: 48, def: 48, spa: 48, spd: 48, spe: 48 },
     catchRate: 35, growth: 'mediumfast', baseXp: 101, body: 'blob', spriteSeed: 13201,
     eggGroups: ['ditto'], hatchCounter: 20,
@@ -1133,7 +1133,7 @@ export const SPECIES2 = {
     tm: [6, 8, 9, 10, 15, 20, 28, 31, 32, 34, 38, 39, 44, 50],
   },
   porygon: {
-    id: 'porygon', name: 'Porygon', dexNo: 137, types: ['normal'],
+    id: 'porygon', name: 'POLYCRANE', dexNo: 137, types: ['normal'],
     base: { hp: 65, atk: 60, def: 70, spa: 85, spd: 75, spe: 40 },
     catchRate: 45, growth: 'mediumfast', baseXp: 79, body: 'blob', spriteSeed: 13701,
     eggGroups: ['mineral'], hatchCounter: 20,
@@ -1142,7 +1142,7 @@ export const SPECIES2 = {
     evo: { to: 'porygon2', method: 'trade' }, tm: [6, 9, 10, 11, 12, 13, 14, 15, 24, 25, 29, 30, 31, 32, 33, 34, 39, 42, 44, 45, 46, 49, 50, 105],
   },
   omanyte: {
-    id: 'omanyte', name: 'Omanyte', dexNo: 138, types: ['rock', 'water'],
+    id: 'omanyte', name: 'AMMONLET', dexNo: 138, types: ['rock', 'water'],
     base: { hp: 35, atk: 40, def: 100, spa: 90, spd: 55, spe: 35 },
     catchRate: 45, growth: 'mediumfast', baseXp: 71, body: 'blob', spriteSeed: 13801,
     eggGroups: ['water1', 'water3'], hatchCounter: 30,
@@ -1151,7 +1151,7 @@ export const SPECIES2 = {
     evo: { to: 'omastar', method: 'level', level: 40 }, tm: [6, 8, 9, 10, 11, 12, 13, 14, 20, 31, 32, 34, 44, 50, 103],
   },
   omastar: {
-    id: 'omastar', name: 'Omastar', dexNo: 139, types: ['rock', 'water'],
+    id: 'omastar', name: 'AMMONARCH', dexNo: 139, types: ['rock', 'water'],
     base: { hp: 70, atk: 60, def: 125, spa: 115, spd: 70, spe: 55 },
     catchRate: 45, growth: 'mediumfast', baseXp: 173, body: 'blob', spriteSeed: 13901,
     eggGroups: ['water1', 'water3'], hatchCounter: 30,
@@ -1160,7 +1160,7 @@ export const SPECIES2 = {
     tm: [6, 8, 9, 10, 11, 12, 13, 14, 15, 20, 31, 32, 34, 44, 50, 103, 104],
   },
   kabuto: {
-    id: 'kabuto', name: 'Kabuto', dexNo: 140, types: ['rock', 'water'],
+    id: 'kabuto', name: 'DOMESHEL', dexNo: 140, types: ['rock', 'water'],
     base: { hp: 30, atk: 80, def: 90, spa: 55, spd: 45, spe: 55 },
     catchRate: 45, growth: 'mediumfast', baseXp: 71, body: 'blob', spriteSeed: 14001,
     eggGroups: ['water1', 'water3'], hatchCounter: 30,
@@ -1169,7 +1169,7 @@ export const SPECIES2 = {
     evo: { to: 'kabutops', method: 'level', level: 40 }, tm: [6, 8, 9, 10, 11, 12, 13, 14, 20, 31, 32, 34, 44, 50, 103],
   },
   kabutops: {
-    id: 'kabutops', name: 'Kabutops', dexNo: 141, types: ['rock', 'water'],
+    id: 'kabutops', name: 'DOMEREAP', dexNo: 141, types: ['rock', 'water'],
     base: { hp: 60, atk: 115, def: 105, spa: 65, spd: 70, spe: 80 },
     catchRate: 45, growth: 'mediumfast', baseXp: 173, body: 'biped', spriteSeed: 14101,
     eggGroups: ['water1', 'water3'], hatchCounter: 30,
@@ -1178,7 +1178,7 @@ export const SPECIES2 = {
     tm: [3, 6, 8, 9, 10, 11, 12, 13, 14, 15, 20, 28, 31, 32, 34, 39, 44, 50, 101, 103, 104],
   },
   aerodactyl: {
-    id: 'aerodactyl', name: 'Aerodactyl', dexNo: 142, types: ['rock', 'flying'],
+    id: 'aerodactyl', name: 'PTERARCH', dexNo: 142, types: ['rock', 'flying'],
     base: { hp: 80, atk: 105, def: 65, spa: 60, spd: 75, spe: 130 },
     catchRate: 45, growth: 'slow', baseXp: 180, body: 'bird', spriteSeed: 14201,
     eggGroups: ['flying'], hatchCounter: 35,
@@ -1187,7 +1187,7 @@ export const SPECIES2 = {
     tm: [2, 4, 6, 9, 10, 15, 20, 28, 31, 32, 34, 38, 39, 44, 50, 102],
   },
   snorlax: {
-    id: 'snorlax', name: 'Snorlax', dexNo: 143, types: ['normal'],
+    id: 'snorlax', name: 'NAPPASAUR', dexNo: 143, types: ['normal'],
     base: { hp: 160, atk: 110, def: 65, spa: 65, spd: 110, spe: 30 },
     catchRate: 25, growth: 'slow', baseXp: 189, body: 'biped', spriteSeed: 14301,
     eggGroups: ['monster'], hatchCounter: 40,
@@ -1223,7 +1223,7 @@ export const SPECIES2 = {
     tm: [2, 4, 6, 9, 10, 15, 20, 31, 32, 33, 34, 38, 39, 44, 50, 102],
   },
   dratini: {
-    id: 'dratini', name: 'Dratini', dexNo: 147, types: ['dragon'],
+    id: 'dratini', name: 'WYRMLING', dexNo: 147, types: ['dragon'],
     base: { hp: 41, atk: 64, def: 45, spa: 50, spd: 50, spe: 50 },
     catchRate: 45, growth: 'slow', baseXp: 60, body: 'serpent', spriteSeed: 14701,
     eggGroups: ['water1', 'dragon'], hatchCounter: 40,
@@ -1232,7 +1232,7 @@ export const SPECIES2 = {
     evo: { to: 'dragonair', method: 'level', level: 30 }, tm: [6, 9, 10, 11, 12, 13, 14, 20, 24, 25, 31, 32, 34, 38, 39, 44, 50, 103],
   },
   dragonair: {
-    id: 'dragonair', name: 'Dragonair', dexNo: 148, types: ['dragon'],
+    id: 'dragonair', name: 'WYRMSAGE', dexNo: 148, types: ['dragon'],
     base: { hp: 61, atk: 84, def: 65, spa: 70, spd: 70, spe: 70 },
     catchRate: 45, growth: 'slow', baseXp: 147, body: 'serpent', spriteSeed: 14801,
     eggGroups: ['water1', 'dragon'], hatchCounter: 40,
@@ -1241,7 +1241,7 @@ export const SPECIES2 = {
     evo: { to: 'dragonite', method: 'level', level: 55 }, tm: [6, 9, 10, 11, 12, 13, 14, 15, 20, 24, 25, 31, 32, 34, 38, 39, 44, 50, 103],
   },
   dragonite: {
-    id: 'dragonite', name: 'Dragonite', dexNo: 149, types: ['dragon', 'flying'],
+    id: 'dragonite', name: 'WYRMARCH', dexNo: 149, types: ['dragon', 'flying'],
     base: { hp: 91, atk: 134, def: 95, spa: 100, spd: 100, spe: 80 },
     catchRate: 45, growth: 'slow', baseXp: 300, body: 'biped', spriteSeed: 14901,
     eggGroups: ['water1', 'dragon'], hatchCounter: 40,
@@ -1259,7 +1259,7 @@ export const SPECIES2 = {
     tm: [1, 5, 6, 8, 9, 10, 11, 12, 13, 14, 15, 17, 18, 19, 20, 24, 25, 29, 30, 31, 32, 33, 34, 35, 38, 39, 40, 42, 44, 45, 46, 49, 50, 103, 104, 105],
   },
   mew: {
-    id: 'mew', name: 'Mew', dexNo: 151, types: ['psychic'],
+    id: 'mew', name: 'PRIMARA', dexNo: 151, types: ['psychic'],
     base: { hp: 100, atk: 100, def: 100, spa: 100, spd: 100, spe: 100 },
     catchRate: 45, growth: 'mediumslow', baseXp: 300, body: 'biped', spriteSeed: 15101,
     eggGroups: ['no-eggs'], hatchCounter: 120,
@@ -1317,7 +1317,7 @@ export const SPECIES2 = {
   giantdragonite: {
     // The lighthouse giant: same gentle heart, enormous frame. Stats are
     // Onix-scale upsized: huge bulk, heavy blows, slower on the wing.
-    id: 'giantdragonite', name: 'Giant Dragonite', dexNo: 149, types: ['dragon', 'flying'],
+    id: 'giantdragonite', name: 'Giant WYRMARCH', dexNo: 149, types: ['dragon', 'flying'],
     base: { hp: 121, atk: 154, def: 115, spa: 120, spd: 120, spe: 70 },
     catchRate: 45, growth: 'slow', baseXp: 300, body: 'biped', spriteSeed: 14902,
     eggGroups: ['water1', 'dragon'], hatchCounter: 40,
