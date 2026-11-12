@@ -154106,16 +154106,16 @@ const MAPS3 = {
       'ÑÑÑÜÑÑÑÑÑÑÜÑÑÑÑÑÑÜ',
       'ÑẐÆÆÆďòďďďďẎÆďOďÆÑ',
       'ÑÆÆÆÆZ6ZZ6ZÆÆP12ÆÑ',
-      'ÑÆÆÆÆZZZ45ZÆÆÆÆÆÆÑ',
-      'ÑÆÜẌÆÆoÆÆÆÆÆÆÆÆÆÆÆ',
-      'ÑÆďďďďẒÆÆÆďXďďÜÆÆÑ',
-      'ÑÆħħħħẐÆÆÆḅḅḅḅÆÆẎÑ',
-      'ÑÆħ78ħÆÆÆÆÆVYḅÆÆÆÑ',
-      'ÑÆÆÆÆÆççççÆÆÆÆÆÆÆÑ',
-      'ÑÆÆÆÆÆAJKAÆÆÆÆÆÆÆÑ',
-      'ÑÆÆFFÆoÆÆoÆFÆÜÆÆÆÑ',
-      'ÑÆÆÆÆÆÆÆÆÆÆÆoÆÆÆÆÑ',
-      'ÑÑÑÜÑÑÑÑÑÆÆÑÑÑÜÑÑÑ',
+      'ÑÆÆÆÆZZZ45ZļļļļļÆÑ',
+      'ÑÆÜẌÆÆoÆļļļļļļļļļļ',
+      'ÑÆďďďďẒoļļďXďďļļļÑ',
+      'ÑÆħħħħẐÆļļḅḅḅḅļļẎÑ',
+      'ÑÆħ78ħÆÆļļļVYḅļļÜÑ',
+      'ÑÆļļļļççççļļļļļļFÑ',
+      'ÑFļļļļAJKAļļļļļļÆÑ',
+      'ÑFļļļļļļļļļļļÜoļÆÑ',
+      'ÑÆÆļļļļļļļļļoÆÆÆÆÑ',
+      'ÑÑÑÜÑÑÑÑÑļļÑÑÑÜÑÑÑ'
     ]),
     warps: [
       { x: 8, y: 3, to: { map: 'silph1', x: 8, y: 10 } },
@@ -154135,6 +154135,7 @@ const MAPS3 = {
     signs: [
       { x: 8, y: 6, text: 'SAFFRON CITY — The golden city at the heart of Kanto. Silph Co. HQ towers over all.' },
       { x: 10, y: 7, text: 'SAFFRON GYM — Leader: Sabrina. The master of Psychic Pokemon! Inside lies a MIND GROUND: Psychic moves hit harder and status rites falter — for Sabrina, and for you.' },
+      { x: 6, y: 10, text: 'SAFFRON CITY — East: ROUTE 9 · South: ROUTE 8.' }
     ],
     npcs: [
       { x: 15, y: 9, name: 'SEER IVO', art: 'monk', skin: '#e8b888', shirt: '#6a5a8a', pants: '#2a2a3a', hair: '#c0c0c0',
@@ -155215,19 +155216,19 @@ const MAPS3 = {
   cinnabar: {
     id: 'cinnabar', name: 'Cinnabar Island', music: 'viridian-theme',
     rows: rows([
-      'ÔÔÔßÔÔÔÔÔÔßÔÔÔÔÔÔß',
+      'ÔÔÔßÔÔÔÔÔÔßÔÔÔÔÔÔÉ',
       'ÔÉÉÉÉÉÉÉÉÉÉÉÉÉÉÉÉÔ',
       'ÔÉĕõĕÉÉÉÉÉĕXĕĕÉÉÉÔ',
-      'ÔÉĭyĭÉÉÉÉÉḇḇḇḇẉÉÉÔ',
-      'ÔÉÉÉÉÉÉÉÉÉḇVYḇÉẋÉÔ',
-      'ÉÉÉÉÉÉÉÉÉÉÉÉÉÉẓoẇÔ',
-      'ÔÉÉÉÉÉêêêêÉÉÉÉÉÉÉÔ',
-      'ÔÉÉÉÉoAJKAoÉÉÉÉÉÉÔ',
-      'ÔẑßÉÉÉÉÉÉÉÉÉÉÉÉÉÉÔ',
-      'ÔĕOĕÉĕĕĕĕÉÉĕ3ĕÉÉÉÔ',
-      'ÔP12Éĭ78ĭÉẑZ6ZÉÉÉÔ',
-      'ÔÉÉÉÉÉÉÉÉÉoÉÉÉÉÉÉÔ',
-      'ÔÔÔßÔÔÔÔÔÔßÔÔÔÔÔÔß',
+      'ÔÉĭyĭÉoÉÉoḇḇḇḇẉÉÉÔ',
+      'ÔÉÉłłłłłłłḇVYḇßẋÉÔ',
+      'łłłłłłłłłłłłłłẓoÉÔ',
+      'ÔłłłłłêêêêłłÉłłłẇÔ',
+      'ÔłłłłłAJKAłłłłÉłÉÔ',
+      'ÔẑßłłłłłłłłłłłłłÉÔ',
+      'ÔĕOĕłĕĕĕĕłłĕ3ĕłłÉÔ',
+      'ÔP12łĭ78ĭłẑZ6ZłłÉÔ',
+      'ÔÉłłłłłłłłoÉÉÉłÉÉÔ',
+      'ÔÔÔßÔÔÔÔÔÔßÔÔÔÔÔÔß'
     ]),
     warps: [
       { x: 11, y: 4, to: { map: 'gym-cinnabar', x: 7, y: 8 } },
@@ -155244,6 +155245,8 @@ const MAPS3 = {
     signs: [
       { x: 7, y: 4, text: 'CINNABAR ISLAND — A volcanic isle of labs and legends. The sea here never quite cools.' },
       { x: 8, y: 4, text: 'CINNABAR GYM — Leader: Blaine. Locked fast. A note reads: THE KEY SLEEPS WHERE THE FIRE SLEPT FIRST. Inside lies a PYRE GROUND: Fire moves hit harder and burns catch more easily — for Blaine, and for you.' },
+      { x: 12, y: 6, text: 'CINNABAR ISLAND — West: ROUTE 20.' },
+      { x: 4, y: 11, text: 'CINNABAR ISLAND — West: ROUTE 20.' }
     ],
     npcs: [
       { x: 15, y: 11, name: 'CAPT SALT', art: 'sailor', skin: '#d8a878', shirt: '#3a6ac0', pants: '#2a2a3a', hair: '#c0c0c0', ferry: 'pallet',
@@ -162990,20 +162993,20 @@ const MAPS6 = {
       "ỗổổổnổổổổổổổổổổổổổổổổổnổổổỘổoỗ",
       "ỗổổjklmổổdeefổổộộộộỘổộộộộổổớớớ",
       "ỗổổAJKAổổP12PổổUVYUổổỚỚỚỚổổỜsỜ",
-      "ỗổổổổổổổổổổổổổổổổổổổổổổổổổổổổổ",
-      "ỗổSổổổổổổổổổổổổổổổổổổổổổổổổổổỗ",
-      "ỗẤổổnổổổổổổổổổổổổổổổổổổổổổổổổỗ",
-      "ỗoổổổổổổổổổẤẤổổổổổổổổổổổổổổổổỗ",
-      "ỗổổổổổổổổổổổổổổổẤổổổổổổoổổổổổỗ",
-      "ỗổổṀổnổổổổổoổổổổổổổổổổổổổổổổổỗ",
-      "ỗổổẫẫẫẫẎổổổổổổổổổổổổổộộộộổổổổỗ",
-      "ỗổổẫ99ẫổổổổổổổổổổổổổổỚsỚỚổổổổỗ",
-      "ỗổoổổổSổổổổổổẤổổổổổổổổổSổổổổổỗ",
-      "ỗổổổổổổổổổ....ổổổổổổổổổổổẤổổổỗ",
-      "ỗổổổổổổổổ.,,,,.ổổṀổổổổổổ...ổổỗ",
-      "ỗổổổổổổổổ.,,,,.ổổổổổổổổ.,,,.ổỗ",
-      "ỗổổổổổổổổổ....ổổổổổổổổo.,,,.ổỗ",
-      "ỗỗỗỘỗỗỗỗỗỗỘỗỗỗỗỗỗỘỗỗỗỗỗỗỘỗỗỗỗỗ"
+      "ỗSỖỖỖỖỖỖỖỖỖỖỖỖỖỖỖỖỖỖỖỖỖỖỖỖỖỖỖổ",
+      "ỗỖỖỖỖỖỖỖỖỖỖỖỖỖỖỖỖỖỖỖỖỖỖỖỖỖỖoổỗ",
+      "ỗẤỖỖnỖỖỖỖỖỖỖỖỖỖỖỖổỖỖỖỖỖỖỖỖỖổổỗ",
+      "ỗoỖỖỖỖổổỖỖổẤẤỖỖỖỖỖỖỖỖỖỖỖỖỖổổổỗ",
+      "ỗổỖỖỖỖỖỖỖỖỖỖỖỖỖỖẤỖỖSỖỖỖỖỖỖỖổổỗ",
+      "ỗổỖṀonỖỖỖỖỖỖỖỖỖỖỖỖỖỖỖỖỖỖỖỖỖổổỗ",
+      "ỗoỖẫẫẫẫẎỖỖỖỖỖổỖỖổỖổỖỖộộộộỖỖổổỗ",
+      "ỗỖỖẫ99ẫỖỖỖỖỖỖỖỖỖỖỖỖỖỖỚsỚỚỖỖổổỗ",
+      "ỗỖỖỖỖỖỖỖỖỖỖỖỖẤỖỖỖỖỖỖỖỖỖỖỖỖỖổổỗ",
+      "ỗỖỖỖỖỖỖỖỖỖ....ỖỖỖỖỖỖỖỖỖỖỖẤỖổổỗ",
+      "ỗổỖỖSỖỖỖỖ.,,,,.ỖỖṀổỖỖổổỖ...ổổỗ",
+      "ỗổổổổỘỖỖỖ.,,,,.ỖỖỖỖỖỖỖỖ.,,,,ổỗ",
+      "ỗổổổổổổổổổ,,,,ổổổổổổổổo.,,,,ổỗ",
+      "ỗỗỗổỗỗỗỗỗỗỘỗỗỗỗỗỗỘỗỗỗỗỗỗỘỗỗỗỗỗ"
     ],
     "warps": [
       {
@@ -163137,19 +163140,29 @@ const MAPS6 = {
     ],
     "signs": [
       {
-        "x": 23,
-        "y": 12,
+        "x": 19,
+        "y": 8,
         "text": "DANCE THEATER — The Kimono Girls perform the old dances. Visitors are welcome, quietly."
       },
       {
-        "x": 6,
-        "y": 12,
+        "x": 4,
+        "y": 14,
         "text": "BURNED TOWER — It caught the lightning long ago and never stopped smouldering in story. Enter respectfully."
       },
       {
-        "x": 2,
-        "y": 5,
+        "x": 1,
+        "y": 4,
         "text": "ECRUTEAK CITY — A city of old traditions. Two towers watch it: the Bell Tower standing, the Burned Tower remembered."
+      },
+      {
+        "x": 21,
+        "y": 8,
+        "text": "ECRUTEAK CITY — South: ROUTE 37."
+      },
+      {
+        "x": 15,
+        "y": 14,
+        "text": "ECRUTEAK CITY — South: ROUTE 37."
       }
     ],
     "npcs": [
@@ -181679,20 +181692,20 @@ const MAPS9 = {
       "ῶῴῴῴῴῴῴῴῴῴῴḡῴῴῴῴῴῴῴῴῴṀῴῴῴῴῴῶ",
       "ῶῴῴjklmῴῴdeefῴῴῺῺῺῴῴῸῸῸῸᾖᾖῴῶ",
       "ῶῴῴAJKAṀῴP12PῴῴΏsΏῴῴΌsΌΌᾖᾖoῶ",
-      "ῶῴῴῴῴῴῴῴῴῴῴῴῴῴῴῴῴῴῴῴῴῴῴῴᾖᾖῴῶ",
-      "ῶῴSῴῴῴῴῴῴῴῴῴῴῴῴῴῴῴῴῴῴῴῴῴῴῴῴῶ",
-      "ῶῴῴῴῴῴῴῴῴῴῴῴῴῴῴῴῴῴῴῴῴῴῴῴῴῴῴῶ",
-      "ῶῴṀῴῴῴ–ῴḡῴῴῴῴῴῴῴῴῴῷῴῴῴῴῴῴῴῴῶ",
-      "ῴῴῴῴῴῴῴῴῴῴῴῴῴῴῴῴῴῴῴῴῴῴῴῴῴῴῴῴ",
-      "ῴῴῴῴῴῴῴῴῴῴῴῴῴῴῴῴῴῴῴῴῴῴῴῴῴῴῴῴ",
-      "ῶῴῴῴῴῴῴῴῴῴῴῴῴῴῴῴῴῴῴῴῴḡῴῴῴῴῴῶ",
-      "ῶῴῴẠẠẠẠẠẠẠẠẠῴẅῴῴῴῴῴῴῴṀῴῴῴῴῴῶ",
-      "ῶῴῴẠẠẠẠẠẠẠẠẠῴῴῴῴῴῴῴῴῴῴῴῴῴῴḡῶ",
-      "ῶῴῴẠẠẠẠẠẠẠẠẠῴῴῴῴῴῴῴῴῴ–ῴῴῴῴῴῶ",
-      "ῶῴῴẠẠẠẠẠẠẠẠẠῴῴῴῴῴῴῴῴῴῴῴῴῴῷῴῶ",
-      "ῶῴῴẠẠẠẠẠẠẠẠẠῷῴῴS–ῴῷῴῴῴῴῴῴῴῴῶ",
+      "ῶS῵῵῵῵῵῵῵῵῵῵῵῵῵῵῵῵῵῵῵῵῵῵ᾖᾖ῵ῶ",
+      "ῶ῵ῴ῵῵῵῵῵῵῵῵῵῵῵῵῵῵῵῵῵ῷῴῴῴῴῴ῵ῶ",
+      "ῶ῵῵῵ῴῴῴ῵ῴῴῴ῵ῴ῵ῴ῵ῴῴῴ῵ῴῴῴῴῴῴ῵ῶ",
+      "ῶ῵Ṁ῵ῴῴ–῵ḡ῵῵ῴ῵῵῵῵῵῵῵῵ῴῴῴῴῴῴ῵ῶ",
+      "ῴ῵῵῵῵῵῵῵῵῵῵῵῵῵῵῵῵῵῵῵῵῵῵῵῵῵῵῵",
+      "ῴ῵῵῵῵῵῵῵῵῵῵῵῵῵῵῵῵῵῵῵῵῵῵῵῵῵῵῵",
+      "ῶῴῴ῵῵῵῵῵῵῵῵῵῵ῴ῵῵῵῵῵῵ῴḡῷῴῴῴῴῶ",
+      "ῶῴῴẠẠẠẠẠẠẠẠẠῴẅ῵῵ῴῴῴ῵ῴṀῴῴῴῴῴῶ",
+      "ῶῴῴẠẠẠẠẠẠẠẠẠ῵῵῵῵῵῵῵ῴῴῴῴῴῴῴḡῶ",
+      "ῶῴῴẠẠẠẠẠẠẠẠẠ῵ῴ῵῵ῴῴῴ῵ῷ–ῴῴῴῴῴῶ",
+      "ῶῴῴẠẠẠẠẠẠẠẠẠ῵῵῵῵῵῵῵῵ῴῴῴῴῴῴῴῶ",
+      "ῶῴῴẠẠẠẠẠẠẠẠẠῷ῵῵S–ῴῷῴῴῴῴῴῴῴῴῶ",
       "ῶῴῴῷῴῴῴῴῴῴῴῴῴῴῴῴῴῴῴῴῴῴῴῴῴῴῴῶ",
-      "ῶῶῶῷῶῶῶῶῶῶῷῶῶῶῶῶῶῷῶῶῶῶῶῶῷῶῶῶ",
+      "ῶῶῶῷῶῶῶῶῶῶῷῶῶῶῶῶῶῷῶῶῶῶῶῶῴῶῶῶ"
     ],
     "warps": [
       {"x": 4, "y": 3, "to": {"map": "center", "x": 4, "y": 4}, "via": {"map": "celestic", "x": 4, "y": 4}},
@@ -181705,8 +181718,9 @@ const MAPS9 = {
       {"x": 27, "y": 9, "to": {"map": "r210-north", "x": 1, "y": 8}},
     ],
     "signs": [
-      {"x": 2, "y": 5, "text": "CELESTIC TOWN — The shrine town in the mountain’s lap. The oldest stories in Sinnoh are kept here, and they are kept carefully."},
+      {"x": 1, "y": 4, "text": "CELESTIC TOWN — The shrine town in the mountain’s lap. The oldest stories in Sinnoh are kept here, and they are kept carefully."},
       {"x": 15, "y": 15, "text": "THE OLD SHRINE — Three small shrines in a ring of stones. What they commemorate, the town remembers so you do not have to ask twice."},
+      {"x": 13, "y": 10, "text": "CELESTIC TOWN — East: ROUTE 210 — NORTH."}
     ],
     "npcs": [
       {"x": 3, "y": 5, "name": "MART CLERK", "art": "clerk", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#4a3a2a", "dialogue": ["Celestic Town Mart — stocked for the road ahead."], "mart": {"stock": ["greatball", "ultraball", "hyperpotion", "fullheal", "revive", "superpotion"]}},
@@ -181782,24 +181796,24 @@ const MAPS9 = {
     "music": "viridian-theme",
     "weather": "sun",
     "rows": [
-      "                              ",
-      "      ᾕ  oᾕ     ᾕᾕ ṃ ᾕ     ᾕ  ",
-      "   jklm  deef       ᾕ         ",
-      "   AJKA  P12P  UVYU  ​s​ᾕ   ᾕ ",
-      "                        S ᾕ ᾕ ",
-      "  S                           ",
-      " o    ‒           ‒     ᾕᾕᾕ   ",
-      " ᾕ ᾕ    ᾕ           ᾕo  ᾕ  ᾕ  ",
-      "                              ",
-      "                              ",
-      " ᾕ ᾕ ᾕ   ᾕᾕ    ᾕᾕ       ᾕ     ",
-      "       ᾕoᾕ            ᾕ  ~~~~ ",
-      "    s   ‒ ᾕ     o ᾕ ᾕ   ‒~~~~ ",
-      "   . .. ᾕ              ‒ ~~~~ ",
-      "  ᾕ,ᾕ,,.ᾕ         ᾕᾕ  ᾕ  ~~~~ ",
-      " ᾕ.,,,,.  ᾕ    ᾕ   Ẋ‒  ᾕ ~~~~ ",
-      "   .ṃ..   ᾕ      Ẋ     oᾕ~~~~ ",
-      "                              ",
+      "                              ",
+      "      ᾕ  oᾕ     ᾕᾕ ṃ ᾕ     ᾕ  ",
+      "   jklm  deef       ᾕ         ",
+      "   AJKA  P12P  UVYU  ​s​ᾕ   ᾕ ",
+      " S                      S ᾕ ᾕ ",
+      "                              ",
+      " o    ‒           ‒     ᾕᾕᾕ   ",
+      " ᾕ ᾕ    ᾕ           ᾕo  ᾕ  ᾕ  ",
+      "                              ",
+      "                              ",
+      " ᾕ ᾕ ᾕ   ᾕᾕ    ᾕᾕ       ᾕ     ",
+      "       ᾕoᾕ            ᾕ  ~~~~ ",
+      "    s   ‒ ᾕ     o ᾕ ᾕ   ‒~~~~ ",
+      "   . .. ᾕ              ‒ ~~~~ ",
+      "  ᾕ,ᾕ,,.ᾕ         ᾕᾕ oᾕ  ~~~~ ",
+      " ᾕ,,,,,.  ᾕ    ᾕ   Ẋ‒  ᾕ ~~~~ ",
+      "   ,ṃ,,   ᾕ      Ẋ      ᾕ~~~~ ",
+      "                              "
     ],
     "warps": [
       {"x": 4, "y": 3, "to": {"map": "center", "x": 4, "y": 4}, "via": {"map": "sunnyshore", "x": 4, "y": 4}},
@@ -181816,8 +181830,10 @@ const MAPS9 = {
       {"x": 14, "y": 0, "to": {"map": "r223", "x": 11, "y": 16}},
     ],
     "signs": [
-      {"x": 2, "y": 5, "text": "SUNNYSHORE CITY — The solar city. Its roads are panels, its lighthouse is a promise, and its gym leader is bored by everything except a real challenge."},
+      {"x": 1, "y": 4, "text": "SUNNYSHORE CITY — The solar city. Its roads are panels, its lighthouse is a promise, and its gym leader is bored by everything except a real challenge."},
       {"x": 24, "y": 4, "text": "THE LIGHTHOUSE — Vista light over the north sea road. The League’s shore is visible from the top on a clear day, which is most of them."},
+      {"x": 9, "y": 12, "text": "SUNYSHORE CITY — West: ROUTE 222 · North: ROUTE 223."},
+      {"x": 1, "y": 14, "text": "SUNYSHORE CITY — West: ROUTE 222 · North: ROUTE 223."}
     ],
     "npcs": [
       {"x": 3, "y": 5, "name": "MART CLERK", "art": "clerk", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#4a3a2a", "dialogue": ["Sunyshore City Mart — stocked for the road ahead."], "mart": {"stock": ["ultraball", "hyperpotion", "maxpotion", "fullheal", "revive", "escape"]}},
