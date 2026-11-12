@@ -133,7 +133,7 @@ export const MAP_GROUND = {
   league: 'open',
   ceruleancave: 'rubble',
   newisland: 'tide',
-  // Stage O2: Orange gym/stadium signature Grounds (existing 15 only —
+  // Stage O2: Amber gym/stadium signature Grounds (existing 15 only —
   // no new Grounds this stage): Cissy's lagoon range rides the Tide,
   // Danny's summit gym the Frost, Rudy's spike-stone arena the Rubble,
   // Luana's resort arena the Mind (her MENTARCH's home turf); the

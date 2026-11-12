@@ -1,5 +1,5 @@
-// story-orange.mjs — Arc 1.5 (Orange Islands) campaign data: the quest
-// chain, the Orange Crew + Drake trainer defs, and the scripted story
+// story-orange.mjs — Arc 1.5 (Amber Isles) campaign data: the quest
+// chain, the Amber Crew + Drake trainer defs, and the scripted story
 // events (Ivy / the GS Orb, KELPSAIL, the pod reunion). Anime is primary
 // canon (ADR-015); ALL dialogue/copy is original writing in the anime's
 // spirit — no quoted or closely-paraphrased anime/game lines.
@@ -19,25 +19,25 @@
 //                      the beat can be re-run — never a soft-fail.
 
 // ---------------------------------------------------------------------------
-// ORANGE_QUESTS — the Orange main-story objective chain, in the
+// ORANGE_QUESTS — the Amber main-story objective chain, in the
 // MAIN_QUESTS idiom (id / flag / text / hint). `flag` is the story flag
 // that completes the objective; the badge stage additionally carries a
 // dynamic count (the Quest Log renders "n/4" from badges.orange while
 // the stage is active — see main-systems openQuestLog).
 // ---------------------------------------------------------------------------
 export const ORANGE_QUESTS = [
-  { id: 'q_orange_gsball', flag: 'orange_gsball', text: 'Fetch the GS Orb from Prof. Ivy on Valencia Island', hint: 'Professor Ivy\'s lab stands at the north edge of Valencia. The ball on her pedestal has defeated every machine she owns.' },
-  { id: 'q_orange_crew', flag: 'orange_crew_done', text: 'Win the four Orange Crew badges', hint: 'Cissy on Mikan, Danny on Navel, Rudy on Trovita, Luana on Kumquat. Each leader tests something before the battle — that is the Orange way.', badgeCount: true },
-  { id: 'q_orange_league', flag: 'orange_champion', text: 'Challenge Drake at Pummelo Stadium and win the Orange League', hint: 'Four island badges open the stadium doors. Drake, the Orange League champion, waits inside with six partners and no intention of moving.' },
+  { id: 'q_orange_gsball', flag: 'orange_gsball', text: 'Fetch the GS Orb from Prof. Ivy on Marisol Island', hint: 'Professor Ivy\'s lab stands at the north edge of Marisol. The ball on her pedestal has defeated every machine she owns.' },
+  { id: 'q_orange_crew', flag: 'orange_crew_done', text: 'Win the four Amber Crew badges', hint: 'Cissy on Tangelo, Danny on Pomelo, Rudy on Reefside, Luana on Calamondin. Each leader tests something before the battle — that is the Amber way.', badgeCount: true },
+  { id: 'q_orange_league', flag: 'orange_champion', text: 'Challenge Drake at Grapefruit Stadium and win the Amber League', hint: 'Four island badges open the stadium doors. Drake, the Amber League champion, waits inside with six partners and no intention of moving.' },
   // --- O3 APPEND SEAM: the Lugia / 2000 stages join here. ---
   // The storm chain is chronology-true mid-arc content (it unlocks at
-  // 2 Orange badges — see the sysLoadMap gate in overworld-systems)
+  // 2 Amber badges — see the sysLoadMap gate in overworld-systems)
   // but APPENDS after the League stage: it is never a gym blocker,
   // and the League completion flow is untouched by it. Its stage text
   // tracks titans calmed n/3 (titanCount — the Quest Log and the HUD
   // objective count the orange_2000_<bird> flags, the badgeCount
   // idiom carried to flags).
-  { id: 'q_orange_storm', flag: 'orange_2000_storm_stilled', titanCount: true, text: 'The Storm over Shamouti — calm the three titans and still the guardian\'s storm', hint: 'Unlocks once the Sea Ruby Badge is held. A sky-collector named Vance Halloway has caged the shrines of Fire, Lightning and Ice Isle, and the currents are tearing themselves apart. Free and calm Moltres, FULMINIS and Articuno at their shrine caves (any order), then return to Shamouti Shrine — Slowking counsels from its rock on Shamouti\'s west shore.' },
+  { id: 'q_orange_storm', flag: 'orange_2000_storm_stilled', titanCount: true, text: 'The Storm over Sanctum — calm the three titans and still the guardian\'s storm', hint: 'Unlocks once the Sea Ruby Badge is held. A sky-collector named Vance Halloway has caged the shrines of Fire, Lightning and Rime Isle, and the currents are tearing themselves apart. Free and calm Moltres, FULMINIS and Articuno at their shrine caves (any order), then return to Sanctum Shrine — Slowking counsels from its rock on Sanctum\'s west shore.' },
 ];
 
 // ---------------------------------------------------------------------------
@@ -50,7 +50,7 @@ export const ORANGE_QUESTS = [
 // ---------------------------------------------------------------------------
 export const ORANGE_TRAINERS = {
   cissy: {
-    id: 'cissy', name: 'Cissy', title: 'Mikan Gym Leader', ai: 'smart', badgeSet: 'orange',
+    id: 'cissy', name: 'Cissy', title: 'Tangelo Gym Leader', ai: 'smart', badgeSet: 'orange',
     intro: ['Range rules are range rules — you passed the targets, so now you get the real thing. My water team does not miss, challenger. Neither do I.'],
     lose: ['Beaten on my own lagoon... clean and fair.', 'The Coral-Eye Badge is yours. Aim true out there — the sea rewards it.'],
     team: [
@@ -60,7 +60,7 @@ export const ORANGE_TRAINERS = {
     reward: 4000, badge: 'coraleyebadge',
   },
   danny: {
-    id: 'danny', name: 'Danny', title: 'Navel Gym Leader', ai: 'smart', badgeSet: 'orange',
+    id: 'danny', name: 'Danny', title: 'Pomelo Gym Leader', ai: 'smart', badgeSet: 'orange',
     intro: ['You climbed my mountain, so you already know half my philosophy: the hard way up is the honest way. Now the other half — battle.'],
     lose: ['Winded, beaten, and grinning. That is a summit day.', 'The Sea Ruby Badge, earned at altitude. Mind the sled on your way down — ceremony rules.'],
     team: [
@@ -71,8 +71,8 @@ export const ORANGE_TRAINERS = {
     reward: 4400, badge: 'searubybadge',
   },
   rudy: {
-    id: 'rudy', name: 'Rudy', title: 'Trovita Gym Leader', ai: 'smart', badgeSet: 'orange',
-    intro: ['You showed me your team\'s types with an open hand. I respect that. Now show me their rhythm — Trovita battles are danced as much as fought.'],
+    id: 'rudy', name: 'Rudy', title: 'Reefside Gym Leader', ai: 'smart', badgeSet: 'orange',
+    intro: ['You showed me your team\'s types with an open hand. I respect that. Now show me their rhythm — Reefside battles are danced as much as fought.'],
     lose: ['What a number. What a finish. I am applauding and I do not even mind.', 'The Spike Shell Badge is yours. Dance on, champion-to-be.'],
     team: [
       { species: 'electabuzz', level: 44 },
@@ -87,7 +87,7 @@ export const ORANGE_TRAINERS = {
   // state carries between stages with NO heal. Only stage B carries
   // the badge, so the award fires once, on clearing both.
   luana_a: {
-    id: 'luana_a', name: 'Luana', title: 'Kumquat Gym Leader', ai: 'smart', badgeSet: 'orange',
+    id: 'luana_a', name: 'Luana', title: 'Calamondin Gym Leader', ai: 'smart', badgeSet: 'orange',
     intro: ['Pair one. MENTARCH takes the floor — mind the spoons, dear, they bend toward trouble.'],
     lose: ['Pair one, down! No resting — that is the whole point. Pair two, straight away!'],
     team: [
@@ -97,7 +97,7 @@ export const ORANGE_TRAINERS = {
     reward: 0,
   },
   luana_b: {
-    id: 'luana_b', name: 'Luana', title: 'Kumquat Gym Leader', ai: 'smart', badgeSet: 'orange',
+    id: 'luana_b', name: 'Luana', title: 'Calamondin Gym Leader', ai: 'smart', badgeSet: 'orange',
     intro: ['Pair two. FOSSILORD, darling — show them the ground remembers every step.'],
     lose: ['Both pairs. Both! Oh, that was a match to frame.', 'The Jade Star Badge is yours, with the resort\'s compliments — and mine, which are rarer.'],
     team: [
@@ -107,9 +107,9 @@ export const ORANGE_TRAINERS = {
     reward: 5000, badge: 'jadestarbadge',
   },
   drake: {
-    id: 'drake', name: 'Drake', title: 'Orange League Champion', ai: 'smart',
+    id: 'drake', name: 'Drake', title: 'Amber League Champion', ai: 'smart',
     intro: ['Four badges, and every one of them earned the island way. Good. I have waited all season for a final worth the stadium. Give me a battle the sea can hear.'],
-    lose: ['...Listen to that crowd. They know. I know.', 'Champion of the Orange League — the title is yours, and so is the Winner\'s Trophy. Hold it high. You carried a strange ball across my whole sea to earn it.'],
+    lose: ['...Listen to that crowd. They know. I know.', 'Champion of the Amber League — the title is yours, and so is the Winner\'s Trophy. Hold it high. You carried a strange ball across my whole sea to earn it.'],
     team: [
       { species: 'ditto', level: 52 },
       { species: 'onix', level: 53 },
@@ -125,7 +125,7 @@ export const ORANGE_TRAINERS = {
 // ---------------------------------------------------------------------------
 // ORANGE_EVENTS — merged into EVENTS by merge.mjs. Map-entry scenes
 // (sysLoadMap fires them once, flag-gated): Ivy's intro on first entry
-// to ivy-lab, KELPSAIL on Valencia after the first Orange badge, and the
+// to ivy-lab, KELPSAIL on Marisol after the first Amber badge, and the
 // pod reunion pre-League. Leader / Drake scenes live in
 // overworld-systems (runOrangeLeader / runOrangeDrake) because their
 // challenges are menu-driven, not step-driven.
@@ -133,12 +133,12 @@ export const ORANGE_TRAINERS = {
 export const ORANGE_EVENTS = {
   ev_orange_ivy: [
     { say: ['The lab smells of salt, paper, and hot electronics. On a pedestal at its heart, under a glass hood: a Capture Orb banded in gold and silver, humming very faintly, like a kettle thinking about it.'], who: 'NARRATOR' },
-    { say: ['You must be Professor Hawthorn\'s runner. I am Professor Ivy — welcome to Valencia.', 'Forgive the mess. Marine research is ninety percent waiting for the sea to finish a sentence.'], who: 'PROF. IVY' },
+    { say: ['You must be Professor Hawthorn\'s runner. I am Professor Ivy — welcome to Marisol.', 'Forgive the mess. Marine research is ninety percent waiting for the sea to finish a sentence.'], who: 'PROF. IVY' },
     { say: ['That is the famous ball. It turned up in these waters, and in three months it has beaten every opener, scanner, and polite request this lab owns. No machine can open it. I have stopped taking that personally. Mostly.'], who: 'PROF. IVY' },
     { gsBall: true },
-    { say: ['Carry it carefully. Whatever is inside has waited this long — it can wait for the one pair of hands in the world that works the old way. Hawthorn will know whose those are.', 'And since you are here — the Orange Crew are taking challengers this season. Four islands, four badges, and a champion at Pummelo who has forgotten how to lose. The sea would love to watch you try.'], who: 'PROF. IVY' },
+    { say: ['Carry it carefully. Whatever is inside has waited this long — it can wait for the one pair of hands in the world that works the old way. Hawthorn will know whose those are.', 'And since you are here — the Amber Crew are taking challengers this season. Four islands, four badges, and a champion at Grapefruit who has forgotten how to lose. The sea would love to watch you try.'], who: 'PROF. IVY' },
     { flag: 'orange_gsball' },
-    { toast: 'The Orange Crew quest is open!' },
+    { toast: 'The Amber Crew quest is open!' },
   ],
 
   ev_orange_lapras: [
@@ -153,7 +153,7 @@ export const ORANGE_EVENTS = {
 
   ev_orange_lapras_pod: [
     { say: ['A sound rolls over the water — many voices, one song, the harmony KELPSAIL answers in its sleep. Out beyond the surf line, backs are breaking the surface in a slow, travelling line. The pod. Passing, at last, on its old road.'], who: 'NARRATOR' },
-    { say: ['KELPSAIL goes very still. Then it sings — the thin, lost note from the Valencia shallows, grown strong. An older voice answers from the line, and for a while the two songs braid around each other: news, and grief, and pride, all in the family key.'], who: 'NARRATOR' },
+    { say: ['KELPSAIL goes very still. Then it sings — the thin, lost note from the Marisol shallows, grown strong. An older voice answers from the line, and for a while the two songs braid around each other: news, and grief, and pride, all in the family key.'], who: 'NARRATOR' },
     { say: ['It swims out. It rides a long circle with its own kind, touching flippers, learning the road it missed. The stadium lights behind you can wait. Some things a trainer simply stands back for.'], who: 'NARRATOR' },
     { say: ['Then — a turn. A choice, made the way it made the first one: with its whole heart, in the open. KELPSAIL cuts back through the surf and beaches itself at your feet, singing fit to burst. It visited home. It is choosing its other home. Yours.'], who: 'NARRATOR' },
     { flag: 'orange_lapras_pod' },
@@ -161,7 +161,7 @@ export const ORANGE_EVENTS = {
   ],
 
   // =====================================================================
-  // Stage O3 — Pokemon 2000: the Shamouti climax + the Lugia arc.
+  // Stage O3 — Pokemon 2000: the Sanctum climax + the Lugia arc.
   // The antagonist is an ORIGINAL character: Vance Halloway, a wealthy
   // sky-collector who cages wonders for a frozen menagerie he calls
   // the Still Sky Collection. He is not a renamed film character and
@@ -181,19 +181,19 @@ export const ORANGE_EVENTS = {
   // entry is read or written anywhere below.
   // =====================================================================
 
-  // -- The storm trigger (first Shamouti arrival with the Sea Ruby held;
-  //    sysLoadMap gate: >= 2 Orange badges, no storm flag yet) ----------
+  // -- The storm trigger (first Sanctum arrival with the Sea Ruby held;
+  //    sysLoadMap gate: >= 2 Amber badges, no storm flag yet) ----------
   ev_orange_2000_storm: [
-    { say: ['The ferry rope is singing in the wind before the dock is even under your feet. Shamouti\'s festival banners snap like sails, the plaza lanterns swing wild, and out past the shrine isles the sky is the colour of a bruise — three storm cells, turning slowly around an empty centre, like something enormous is being wound up.'], who: 'NARRATOR' },
+    { say: ['The ferry rope is singing in the wind before the dock is even under your feet. Sanctum\'s festival banners snap like sails, the plaza lanterns swing wild, and out past the shrine isles the sky is the colour of a bruise — three storm cells, turning slowly around an empty centre, like something enormous is being wound up.'], who: 'NARRATOR' },
     { say: ['Trainer! Off the dock, quickly — mind the crates, the sea keeps throwing them back. You have come for the festival, poor soul. So had we all.'], who: 'FEST ELDER MIRA' },
     { say: ['Three nights ago a sky-barge came over the shrine isles — all glass and brass and quiet engines. Since then: cages of light on the shrines, the currents running wrong, and the birds — oh, the birds. When the three titans rage, the whole sky argues with itself.'], who: 'FEST ELDER MIRA' },
     { say: ['A pleasure to be introduced by my weather. Vance Halloway, collector — the Still Sky Collection, soon to be the wonder of every port that matters. Three titans, stilled forever in glass and frost-light. No more storms. No more moods. Perfection, kept.'], who: 'VANCE HALLOWAY' },
     { say: ['You mistake me for a villain, child. I am a curator. The sea cannot be trusted with its own treasures — look at it! I am simply... tidying the sky.'], who: 'VANCE HALLOWAY' },
-    { say: ['The barge lifts away toward Fire Isle, unhurried as snowfall. On the west shore, unmoving on its rock through all of it, the island\'s oldest resident watches you approach — and, for the first time in living memory, the Slowking speaks first.'], who: 'NARRATOR' },
+    { say: ['The barge lifts away toward Ember Isle, unhurried as snowfall. On the west shore, unmoving on its rock through all of it, the island\'s oldest resident watches you approach — and, for the first time in living memory, the Slowking speaks first.'], who: 'NARRATOR' },
     { say: ['Slow... king. King. Slowking slow, king — slow.'], who: 'SLOWKING' },
     { say: ['It turns its great head toward the three isles, one by one. Fire. Lightning. Ice. Then toward the shrine above the plaza, and down — deep down — with a patience like the bottom of the sea. The meaning arrives the way its speech does: slowly, and all at once. Free the shrines. Calm the titans. Then the guardian will decide what the sea does next.'], who: 'NARRATOR' },
     { flag: 'orange_2000_active' },
-    { toast: 'The Storm over Shamouti has begun!' },
+    { toast: 'The Storm over Sanctum has begun!' },
   ],
 
   // -- The three titan quells (shrine-cave altar tiles; any order) -----
@@ -224,7 +224,7 @@ export const ORANGE_EVENTS = {
     { toast: 'Articuno is calmed. The northern storm cell breaks.' },
   ],
 
-  // -- The Lugia climax (Shamouti Shrine entry at 3/3 titans calmed;
+  // -- The Lugia climax (Sanctum Shrine entry at 3/3 titans calmed;
   //    sysLoadMap gate. The proving is a straight win — the shipped
   //    event idiom — fought UNcatchable at the deep altar.) ------------
   ev_orange_2000_climax: [
@@ -237,7 +237,7 @@ export const ORANGE_EVENTS = {
     { say: ['It rises the way the tide rises: not fast, not slow — inevitably. Wings like white headlands. Eyes that have watched ten thousand festivals and every storm since the first one. The guardian of the sea does not rage. It MEASURES. The one who calmed the titans will be tested the way the sea tests everything: completely.'], who: 'NARRATOR' },
     { wildBattle: { species: 'lugia', level: 55, uncatchable: true } },
     { say: ['Lugia folds its wings. The proving is over — and somewhere far above, audible even here, the storm simply... stops. Rain first, then wind, then the long grinding argument of the currents, settling one by one into their old, kind roads.'], who: 'NARRATOR' },
-    { say: ['Halloway\'s barge comes down in the harbour like a tired bird — cage swinging empty, lights drowned, engines full of seawater and second thoughts. Its owner stands on Shamouti\'s dock in the returning sunlight, holding his hat, looking at the calm he tried to steal and somehow helped to save.'], who: 'NARRATOR' },
+    { say: ['Halloway\'s barge comes down in the harbour like a tired bird — cage swinging empty, lights drowned, engines full of seawater and second thoughts. Its owner stands on Sanctum\'s dock in the returning sunlight, holding his hat, looking at the calm he tried to steal and somehow helped to save.'], who: 'NARRATOR' },
     { say: ['...Stilled. All of it. And not one piece of it mine. Do you know, I believe that is the first honest thing the sea has ever said to me. Keep your guardian, island. Keep your storms. A collection, it turns out, is a poor substitute for a sky.'], who: 'VANCE HALLOWAY' },
     { flag: 'orange_2000_storm_stilled' },
     { arc: 'arc_lugia_shamouti', stage: 'discovered' },
@@ -246,7 +246,7 @@ export const ORANGE_EVENTS = {
     { warp: { map: 'shamouti', x: 14, y: 14 } },
   ],
 
-  // -- The catch: Lugia waits at the deep altar (Shamouti Deep entry
+  // -- The catch: Lugia waits at the deep altar (Sanctum Deep entry
   //    once the storm is stilled; sysLoadMap gate). Standard legendary
   //    pattern — Lv 55, CATCHABLE, and flee-safe per the Arden arc
   //    idiom: the runSteps guard completes the arc only on a clean
@@ -266,21 +266,21 @@ export const ORANGE_EVENTS = {
 // ORANGE_LEGENDARY_ARCS — merged into LEGENDARY_ARCS by merge.mjs and
 // into the validator's quest table by gen-tables (the Arden table's
 // presentation: hook + requirement steps spelled out in the Quest
-// Log's LEGENDARY ARCS section). This is the Orange Lugia — a
+// Log's LEGENDARY ARCS section). This is the Amber Lugia — a
 // DIFFERENT arc from the designed Yamato arc_lugia stub in
 // story-kanto (that arc's prereqs and lair are untouched).
 // ---------------------------------------------------------------------------
 export const ORANGE_LEGENDARY_ARCS = {
   arc_lugia_shamouti: {
-    id: 'arc_lugia_shamouti', title: 'The Guardian of the Sea', species: 'lugia', region: 'Orange Islands',
-    hook: 'When the three titans raged over Shamouti, the sea\'s guardian rose to measure the one who calmed them — and having measured, it waits now in still water for the meeting to be finished properly.',
+    id: 'arc_lugia_shamouti', title: 'The Guardian of the Sea', species: 'lugia', region: 'Amber Isles',
+    hook: 'When the three titans raged over Sanctum, the sea\'s guardian rose to measure the one who calmed them — and having measured, it waits now in still water for the meeting to be finished properly.',
     steps: [
-      { text: 'Hold the Sea Ruby Badge and come to Shamouti as the storm breaks', flag: 'orange_2000_active' },
-      { text: 'Calm Moltres at the Fire Isle shrine cave', flag: 'orange_2000_moltres' },
-      { text: 'Calm FULMINIS at the Lightning Isle shrine cave', flag: 'orange_2000_zapdos' },
-      { text: 'Calm Articuno at the Ice Isle shrine cave', flag: 'orange_2000_articuno' },
+      { text: 'Hold the Sea Ruby Badge and come to Sanctum as the storm breaks', flag: 'orange_2000_active' },
+      { text: 'Calm Moltres at the Ember Isle shrine cave', flag: 'orange_2000_moltres' },
+      { text: 'Calm FULMINIS at the Storm Isle shrine cave', flag: 'orange_2000_zapdos' },
+      { text: 'Calm Articuno at the Rime Isle shrine cave', flag: 'orange_2000_articuno' },
       { text: 'Face the guardian\'s proving at the deep altar (it cannot be caught there)', flag: 'orange_2000_storm_stilled' },
-      { text: 'Return to the altar in Shamouti Deep, where Lugia waits in still water', catch: 'lugia' },
+      { text: 'Return to the altar in Sanctum Deep, where Lugia waits in still water', catch: 'lugia' },
     ],
     lair: 'shamouti-deep',
   },

@@ -25,8 +25,8 @@ import { switchForme, FORME_OF } from './sinnoh-systems.mjs';
 
 const REGIONS = [
   { id: 'kanto', name: 'Arden', note: 'The beginning. Eight badges, one League, a storm over Exile Isle.' },
-  { id: 'orange', name: 'Orange Islands', note: 'A southern sea league of trials. Complete Arden first.' },
-  { id: 'johto', name: 'Yamato', note: 'Old towers, older legends. Complete the Orange voyage first.' },
+  { id: 'orange', name: 'Amber Isles', note: 'A southern sea league of trials. Complete Arden first.' },
+  { id: 'johto', name: 'Yamato', note: 'Old towers, older legends. Complete the Amber voyage first.' },
   { id: 'hoenn', name: 'Maris', note: 'Sea and land at war with the sky. Complete Yamato first.' },
   { id: 'sinnoh', name: 'Borea', note: 'Myths written in stone and time. Complete Maris first.' },
   { id: 'unova', name: 'Unova', note: 'Truth against ideals. Complete Borea first.' },
@@ -390,9 +390,9 @@ Object.assign(Game.prototype, {
         value: 'q:' + q.id, disabled: !active && !doneF,
       });
     }
-    // Section 1.5 — Orange Islands (Stage O2): the ORANGE_QUESTS chain
+    // Section 1.5 — Amber Isles (Stage O2): the ORANGE_QUESTS chain
     // in the MAIN_QUESTS idiom, rendered as its own section once the
-    // Orange arc is reached (the homecoming hook, the current arc, a
+    // Amber arc is reached (the homecoming hook, the current arc, a
     // first badge, or a completed voyage). The badge stage's text
     // tracks n/4 from badges.orange while it is the active stage.
     const orangeReached = currentArcOf(g.state).id === 'orange'
@@ -401,7 +401,7 @@ Object.assign(Game.prototype, {
       || !!g.state.story.flags.orange_gsball
       || (g.state.story.regionsDone || []).includes('orange');
     if (orangeReached) {
-      items.push({ label: '— ORANGE ISLANDS —', value: null, disabled: true, band: true });
+      items.push({ label: '— AMBER ISLES —', value: null, disabled: true, band: true });
       for (const q of ORANGE_QUESTS) {
         const doneF = q.flag && g.state.story.flags[q.flag];
         const active = !doneF && ORANGE_QUESTS.find((x) => !x.flag || !g.state.story.flags[x.flag]) === q;

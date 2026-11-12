@@ -185,7 +185,7 @@ export function validateSave(data) {
   }
   if (!isObj(data.badges) || !Array.isArray(data.badges.kanto)) errors.push('bad-badges');
   // Stage O2: badges.orange, when present, must be a PREFIX of the
-  // Orange earn order (BADGE_SETS) — the same rule the server
+  // Amber earn order (BADGE_SETS) — the same rule the server
   // validator enforces; absent = legacy save (filled to [] on load).
   if (isObj(data.badges) && data.badges.orange !== undefined) {
     const o = data.badges.orange;
@@ -308,7 +308,7 @@ const HOUSE_RULE_KEYS = ['steadyDamage', 'mercifulFoes', 'fastLearner', 'generou
 
 export function fillV2Defaults(data) {
   // Stage O2: badges.orange defaults-fill — a legacy save with no
-  // Orange set opens with badges.orange = [] and loses nothing (the
+  // Amber set opens with badges.orange = [] and loses nothing (the
   // other sets pass through untouched when present and well-shaped).
   if (isObj(data.badges)) {
     // Wave E (s6 triage): the ARDEN set fills only when ABSENT. The old

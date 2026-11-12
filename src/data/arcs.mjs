@@ -13,7 +13,7 @@
 //    reset, no obedience cap, no compensating scaling. Nothing in the
 //    transition machine touches the team.
 //  - Amendment 2: per-arc LEVEL BANDS — cap = 100 x bandIndex (Arden
-//    1-100, Yamato 101-200, Maris 201-300, Borea 301-400). Orange SHARES
+//    1-100, Yamato 101-200, Maris 201-300, Borea 301-400). Amber SHARES
 //    Arden's band (it continues Arden's power curve). The Trial Grounds
 //    is OPEN LEVEL (band: null — its facilities match the entrant).
 //
@@ -81,7 +81,7 @@ export const ARCS = [
     enRouteLines: [],
   },
   {
-    id: 'orange', n: 1.5, label: 'Arc 1.5', region: 'Orange Islands', regionKey: 'orange',
+    id: 'orange', n: 1.5, label: 'Arc 1.5', region: 'Amber Isles', regionKey: 'orange',
     edition: 'Anime-original', chapters: [2], dexHorizon: 151,
     band: { min: 1, max: 100, bandIndex: 1 }, // shares Arden's band (Amendment 2)
     badgeSet: 'orange', badgeTotal: 4,
@@ -89,17 +89,17 @@ export const ARCS = [
     status: 'next', future: false,
     hookGiver: 'hawthorn', embarkPort: 'vermilion', arrivalMap: 'valencia', home: 'pallet',
     summaryLines: [
-      'Orange League — WINNER.',
+      'Amber League — WINNER.',
       'Four island badges and a champion\'s battle under southern stars. The Winner\'s Trophy is yours — and so is the strange ball that started the voyage.',
     ],
     hookLines: [
-      'A colleague of mine — Professor Ivy, on Valencia Island in the Orange Archipelago — is holding a Capture Orb that no machine can open.',
-      'They call it the GS Orb. Fetch it for me, would you? The ferry for Valencia leaves from Arcport City.',
+      'A colleague of mine — Professor Ivy, on Marisol Island in the Amber Archipelago — is holding a Capture Orb that no machine can open.',
+      'They call it the GS Orb. Fetch it for me, would you? The ferry for Marisol leaves from Arcport City.',
       'Mind the sea air down there. It changes trainers — usually for the better.',
     ],
     enRouteLines: [
       '— days at sea —',
-      'The water turns the colour of warm glass. Somewhere ahead: Valencia Island, and a ball that will not open.',
+      'The water turns the colour of warm glass. Somewhere ahead: Marisol Island, and a ball that will not open.',
     ],
   },
   {
@@ -115,7 +115,7 @@ export const ARCS = [
       'Eight badges, the beasts woken and quieted, and the rivalry settled at last in the conference fire. The road home feels shorter than the road out.',
     ],
     hookLines: [
-      'That GS Orb you carried across the Orange Islands — there is a man in Cinder Town named Kurt who still works Capture Orbs by hand, the old way.',
+      'That GS Orb you carried across the Amber Isles — there is a man in Cinder Town named Kurt who still works Capture Orbs by hand, the old way.',
       'If anyone alive can open it, it is him. And Yamato itself is calling: new towers, new legends, and a rival who will not wait forever.',
       'The boat for Yamato leaves from Dawnwick\'s own dock. Come home first. You always come home first.',
     ],
@@ -283,7 +283,7 @@ export const FINALE_UNLOCK_FLAG = 'arceus_unlocked';
 
 export const ARC_FINALE_ECHOES = {
   kanto: 'Arden first: a borrowed bike voucher, a storm over Exile Isle, and a rival who turned out to be a measuring stick all along. You came home with eight badges and every friend you started with, plus several dozen more.',
-  orange: 'Then the southern sea: four island badges, a ball that would not open, and a trophy heavy as an anchor. The Orange water taught the team to win on strange ground, under stranger stars.',
+  orange: 'Then the southern sea: four island badges, a ball that would not open, and a trophy heavy as an anchor. The Amber water taught the team to win on strange ground, under stranger stars.',
   johto: 'Yamato asked older questions — towers, bells, beasts woken out of legend — and the rivalry that started in a Dawnwick lane finally burned itself honest at the Lastlight Conference.',
   hoenn: 'Maris argued with its own weather, and the team answered both sides of it: drought and deluge, two old teams, and a conference run that ended narrow and proud.',
   frontier: 'The Frontier cared nothing for any of that. Seven doors, seven Brains, one standard — gold. It is the only place that ever graded the team purely on how they fight, and they know it.',
@@ -353,7 +353,7 @@ export function dexHorizonFor(state) {
 }
 
 // The regional dex span of an arc: (previous distinct horizon, horizon].
-// Orange shares Arden's 1-151 set (no delta); the Frontier shares Maris's.
+// Amber shares Arden's 1-151 set (no delta); the Frontier shares Maris's.
 export function arcDexSpan(arc) {
   if (!arc) return { lo: 1, hi: ARCS[0].dexHorizon };
   let prev = 0;

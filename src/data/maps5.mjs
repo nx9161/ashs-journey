@@ -1,8 +1,8 @@
-// maps5.mjs — Arc 1.5 Stage O1: the Orange Islands (maps, world art data,
+// maps5.mjs — Arc 1.5 Stage O1: the Amber Isles (maps, world art data,
 // wild tables, ferry network). 30 new maps: 11 island exteriors, 4 sea
 // lanes, 15 interiors. Every exterior/sea map is >=24x14 (viewport-
 // filling from the first tile, roadmap §5 note). Travel law: the
-// Arcport<->Valencia crossing is the Stage F ferryArc network port
+// Arcport<->Marisol crossing is the Stage F ferryArc network port
 // (embark-gated outbound, unconditional return); every island dock
 // fields plain two-way ferry legs to its neighbours (the island-hopper
 // graph is connected by construction); sea lanes are surfable and
@@ -15,7 +15,7 @@ import { MAPS4 } from './maps4.mjs';
 export const MAPS5 = {
   "valencia": {
     "id": "valencia",
-    "name": "Valencia Island",
+    "name": "Marisol Island",
     "music": "viridian-theme",
     "rows": [
       "~~~~~~~~~~~~~~~~~~~~~~~~~~~~",
@@ -144,7 +144,7 @@ export const MAPS5 = {
       {
         "x": 19,
         "y": 12,
-        "text": "Valencia Island DOCK — Ferries run both ways, every day. The sea lanes are surfable for trainers with the Soul Badge and Surf."
+        "text": "Marisol Island DOCK — Ferries run both ways, every day. The sea lanes are surfable for trainers with the Soul Badge and Surf."
       },
       {
         "x": 9,
@@ -154,7 +154,7 @@ export const MAPS5 = {
       {
         "x": 3,
         "y": 7,
-        "text": "VALENCIA ISLAND — East: ORANGE SEA — WEST."
+        "text": "MARISOL ISLAND — East: AMBER SEA — WEST."
       }
     ],
     "npcs": [
@@ -169,7 +169,7 @@ export const MAPS5 = {
         "hair": "#4a3a2a",
         "dialogue": [
           "The Arcport City boat ties up at this dock — I run her both ways, fair weather or foul.",
-          "Step aboard when you're ready. The Orange sea keeps no one waiting who knows her moods."
+          "Step aboard when you're ready. The Amber sea keeps no one waiting who knows her moods."
         ],
         "ferry": "vermilion",
         "ferryArc": "orange"
@@ -184,8 +184,8 @@ export const MAPS5 = {
         "pants": "#2a3a4a",
         "hair": "#1a1a1a",
         "dialogue": [
-          "The Mikan Island boat ties up at this dock — I run her both ways, fair weather or foul.",
-          "Step aboard when you're ready. The Orange sea keeps no one waiting who knows her moods."
+          "The Tangelo Island boat ties up at this dock — I run her both ways, fair weather or foul.",
+          "Step aboard when you're ready. The Amber sea keeps no one waiting who knows her moods."
         ],
         "ferry": "mikan"
       },
@@ -199,8 +199,8 @@ export const MAPS5 = {
         "pants": "#3a3a4a",
         "hair": "#7a4a1a",
         "dialogue": [
-          "The Navel Island boat ties up at this dock — I run her both ways, fair weather or foul.",
-          "Step aboard when you're ready. The Orange sea keeps no one waiting who knows her moods."
+          "The Pomelo Island boat ties up at this dock — I run her both ways, fair weather or foul.",
+          "Step aboard when you're ready. The Amber sea keeps no one waiting who knows her moods."
         ],
         "ferry": "navel"
       },
@@ -214,7 +214,7 @@ export const MAPS5 = {
         "pants": "#2a2a3a",
         "hair": "#c0c0c0",
         "dialogue": [
-          "Valencia grows oranges sweet enough to make a NAPPASAUR sit up.",
+          "Marisol grows oranges sweet enough to make a NAPPASAUR sit up.",
           "Professor Ivy studies the sea's odd Capture Orbs in the lab up the street."
         ]
       },
@@ -358,7 +358,7 @@ export const MAPS5 = {
   },
   "mikan": {
     "id": "mikan",
-    "name": "Mikan Island",
+    "name": "Tangelo Island",
     "music": "viridian-theme",
     "rows": [
       "~~~~~~~~~~~~~~~~~~~~~~~~~~",
@@ -485,37 +485,37 @@ export const MAPS5 = {
       {
         "x": 16,
         "y": 13,
-        "text": "Mikan Island DOCK — Ferries run both ways, every day. The sea lanes are surfable for trainers with the Soul Badge and Surf."
+        "text": "Tangelo Island DOCK — Ferries run both ways, every day. The sea lanes are surfable for trainers with the Soul Badge and Surf."
       },
       {
         "x": 7,
         "y": 3,
-        "text": "MIKAN GYM — The Coral-Eye challenge waits inside. (Stage O2: the gym battle ships with the Orange story stage.)"
+        "text": "TANGELO GYM — The Coral-Eye challenge waits inside. (Stage O2: the gym battle ships with the Amber story stage.)"
       },
       {
         "x": 8,
         "y": 9,
-        "text": "MIKAN ISLAND — South: ORANGE SEA — WEST."
+        "text": "TANGELO ISLAND — South: AMBER SEA — WEST."
       },
       {
         "x": 11,
         "y": 11,
-        "text": "MIKAN ISLAND — South: ORANGE SEA — WEST."
+        "text": "TANGELO ISLAND — South: AMBER SEA — WEST."
       },
       {
         "x": 7,
         "y": 14,
-        "text": "MIKAN ISLAND — South: ORANGE SEA — WEST."
+        "text": "TANGELO ISLAND — South: AMBER SEA — WEST."
       },
       {
         "x": 3,
         "y": 13,
-        "text": "MIKAN ISLAND — South: ORANGE SEA — WEST."
+        "text": "TANGELO ISLAND — South: AMBER SEA — WEST."
       },
       {
         "x": 4,
         "y": 6,
-        "text": "MIKAN ISLAND — South: ORANGE SEA — WEST."
+        "text": "TANGELO ISLAND — South: AMBER SEA — WEST."
       }
     ],
     "npcs": [
@@ -529,8 +529,8 @@ export const MAPS5 = {
         "pants": "#2a2a3a",
         "hair": "#4a3a2a",
         "dialogue": [
-          "The Valencia Island boat ties up at this dock — I run her both ways, fair weather or foul.",
-          "Step aboard when you're ready. The Orange sea keeps no one waiting who knows her moods."
+          "The Marisol Island boat ties up at this dock — I run her both ways, fair weather or foul.",
+          "Step aboard when you're ready. The Amber sea keeps no one waiting who knows her moods."
         ],
         "ferry": "valencia"
       },
@@ -544,8 +544,8 @@ export const MAPS5 = {
         "pants": "#2a3a4a",
         "hair": "#1a1a1a",
         "dialogue": [
-          "The Navel Island boat ties up at this dock — I run her both ways, fair weather or foul.",
-          "Step aboard when you're ready. The Orange sea keeps no one waiting who knows her moods."
+          "The Pomelo Island boat ties up at this dock — I run her both ways, fair weather or foul.",
+          "Step aboard when you're ready. The Amber sea keeps no one waiting who knows her moods."
         ],
         "ferry": "navel"
       },
@@ -559,7 +559,7 @@ export const MAPS5 = {
         "pants": "#3a3a4a",
         "hair": "#7a4a1a",
         "dialogue": [
-          "Mikan's gym stands over the water — the range out back floats on pontoons.",
+          "Tangelo's gym stands over the water — the range out back floats on pontoons.",
           "Target practice at dawn. The whole island wakes to it."
         ]
       },
@@ -574,7 +574,7 @@ export const MAPS5 = {
         "hair": "#c0c0c0",
         "dialogue": [
           "The lagoon is warm as soup. Mind the Corsola— er, the coral.",
-          "I race the ferry to Navel on calm days. I have never won."
+          "I race the ferry to Pomelo on calm days. I have never won."
         ]
       },
       {
@@ -702,7 +702,7 @@ export const MAPS5 = {
   },
   "navel": {
     "id": "navel",
-    "name": "Navel Island",
+    "name": "Pomelo Island",
     "music": "pewter-theme",
     "rows": [
       "~~~~~~~~~~~~~~~~~~~~~~~~~~",
@@ -812,42 +812,42 @@ export const MAPS5 = {
       {
         "x": 23,
         "y": 3,
-        "text": "NAVEL PEAK — The island wears its mountain like a crown. Climbers leave a stone; the mountain keeps them all."
+        "text": "POMELO PEAK — The island wears its mountain like a crown. Climbers leave a stone; the mountain keeps them all."
       },
       {
         "x": 16,
         "y": 15,
-        "text": "Navel Island DOCK — Ferries run both ways, every day. The sea lanes are surfable for trainers with the Soul Badge and Surf."
+        "text": "Pomelo Island DOCK — Ferries run both ways, every day. The sea lanes are surfable for trainers with the Soul Badge and Surf."
       },
       {
         "x": 8,
         "y": 3,
-        "text": "NAVEL GYM — The Sea Ruby challenge waits inside, up where the slope begins."
+        "text": "POMELO GYM — The Sea Ruby challenge waits inside, up where the slope begins."
       },
       {
         "x": 7,
         "y": 11,
-        "text": "NAVEL ISLAND — South: ORANGE SEA — CENTRAL · North: ORANGE SEA — NORTH."
+        "text": "POMELO ISLAND — South: AMBER SEA — CENTRAL · North: AMBER SEA — NORTH."
       },
       {
         "x": 15,
         "y": 8,
-        "text": "NAVEL ISLAND — South: ORANGE SEA — CENTRAL · North: ORANGE SEA — NORTH."
+        "text": "POMELO ISLAND — South: AMBER SEA — CENTRAL · North: AMBER SEA — NORTH."
       },
       {
         "x": 9,
         "y": 9,
-        "text": "NAVEL ISLAND — South: ORANGE SEA — CENTRAL · North: ORANGE SEA — NORTH."
+        "text": "POMELO ISLAND — South: AMBER SEA — CENTRAL · North: AMBER SEA — NORTH."
       },
       {
         "x": 19,
         "y": 5,
-        "text": "NAVEL ISLAND — South: ORANGE SEA — CENTRAL · North: ORANGE SEA — NORTH."
+        "text": "POMELO ISLAND — South: AMBER SEA — CENTRAL · North: AMBER SEA — NORTH."
       },
       {
         "x": 16,
         "y": 5,
-        "text": "NAVEL ISLAND — South: ORANGE SEA — CENTRAL · North: ORANGE SEA — NORTH."
+        "text": "POMELO ISLAND — South: AMBER SEA — CENTRAL · North: AMBER SEA — NORTH."
       }
     ],
     "npcs": [
@@ -861,8 +861,8 @@ export const MAPS5 = {
         "pants": "#2a2a3a",
         "hair": "#4a3a2a",
         "dialogue": [
-          "The Valencia Island boat ties up at this dock — I run her both ways, fair weather or foul.",
-          "Step aboard when you're ready. The Orange sea keeps no one waiting who knows her moods."
+          "The Marisol Island boat ties up at this dock — I run her both ways, fair weather or foul.",
+          "Step aboard when you're ready. The Amber sea keeps no one waiting who knows her moods."
         ],
         "ferry": "valencia"
       },
@@ -876,23 +876,23 @@ export const MAPS5 = {
         "pants": "#2a3a4a",
         "hair": "#1a1a1a",
         "dialogue": [
-          "The Mikan Island boat ties up at this dock — I run her both ways, fair weather or foul.",
-          "Step aboard when you're ready. The Orange sea keeps no one waiting who knows her moods."
+          "The Tangelo Island boat ties up at this dock — I run her both ways, fair weather or foul.",
+          "Step aboard when you're ready. The Amber sea keeps no one waiting who knows her moods."
         ],
         "ferry": "mikan"
       },
       {
         "x": 9,
         "y": 15,
-        "name": "CAPT MARINA-MORO",
+        "name": "CAPT MARINA-BERGAMOT",
         "art": "sailor",
         "skin": "#c89878",
         "shirt": "#2a7a6a",
         "pants": "#3a3a4a",
         "hair": "#7a4a1a",
         "dialogue": [
-          "The Moro Island boat ties up at this dock — I run her both ways, fair weather or foul.",
-          "Step aboard when you're ready. The Orange sea keeps no one waiting who knows her moods."
+          "The Bergamot Island boat ties up at this dock — I run her both ways, fair weather or foul.",
+          "Step aboard when you're ready. The Amber sea keeps no one waiting who knows her moods."
         ],
         "ferry": "moro"
       },
@@ -920,7 +920,7 @@ export const MAPS5 = {
         "pants": "#2a2a3a",
         "hair": "#4a3a2a",
         "dialogue": [
-          "Navel's gym bakes its slope into the challenge itself, they say.",
+          "Pomelo's gym bakes its slope into the challenge itself, they say.",
           "Mountain weather turns fast. Pack a jumper, dear."
         ]
       }
@@ -1015,7 +1015,7 @@ export const MAPS5 = {
   },
   "moro": {
     "id": "moro",
-    "name": "Moro Island",
+    "name": "Bergamot Island",
     "music": "viridian-theme",
     "rows": [
       "~~~~~~~~~~~~~~~~~~~~~~~~~~",
@@ -1087,17 +1087,17 @@ export const MAPS5 = {
       {
         "x": 13,
         "y": 7,
-        "text": "OLD RUINS — A harbour town stood here once, say the Moro elders. The sea took the streets and left the stones."
+        "text": "OLD RUINS — A harbour town stood here once, say the Bergamot elders. The sea took the streets and left the stones."
       },
       {
         "x": 16,
         "y": 13,
-        "text": "Moro Island DOCK — Ferries run both ways, every day. The sea lanes are surfable for trainers with the Soul Badge and Surf."
+        "text": "Bergamot Island DOCK — Ferries run both ways, every day. The sea lanes are surfable for trainers with the Soul Badge and Surf."
       },
       {
         "x": 10,
         "y": 10,
-        "text": "MORO ISLAND — North: ORANGE SEA — CENTRAL."
+        "text": "BERGAMOT ISLAND — North: AMBER SEA — CENTRAL."
       }
     ],
     "npcs": [
@@ -1111,8 +1111,8 @@ export const MAPS5 = {
         "pants": "#2a2a3a",
         "hair": "#4a3a2a",
         "dialogue": [
-          "The Navel Island boat ties up at this dock — I run her both ways, fair weather or foul.",
-          "Step aboard when you're ready. The Orange sea keeps no one waiting who knows her moods."
+          "The Pomelo Island boat ties up at this dock — I run her both ways, fair weather or foul.",
+          "Step aboard when you're ready. The Amber sea keeps no one waiting who knows her moods."
         ],
         "ferry": "navel"
       },
@@ -1126,8 +1126,8 @@ export const MAPS5 = {
         "pants": "#2a3a4a",
         "hair": "#1a1a1a",
         "dialogue": [
-          "The Trovita Island boat ties up at this dock — I run her both ways, fair weather or foul.",
-          "Step aboard when you're ready. The Orange sea keeps no one waiting who knows her moods."
+          "The Reefside Island boat ties up at this dock — I run her both ways, fair weather or foul.",
+          "Step aboard when you're ready. The Amber sea keeps no one waiting who knows her moods."
         ],
         "ferry": "trovita"
       },
@@ -1141,7 +1141,7 @@ export const MAPS5 = {
         "pants": "#3a3a4a",
         "hair": "#7a4a1a",
         "dialogue": [
-          "Quiet Moro. The ruins were old when my grandmother was a girl.",
+          "Quiet Bergamot. The ruins were old when my grandmother was a girl.",
           "A ship went down in the cove long ago. On still nights you can hear her bell."
         ]
       },
@@ -1262,7 +1262,7 @@ export const MAPS5 = {
   },
   "trovita": {
     "id": "trovita",
-    "name": "Trovita Island",
+    "name": "Reefside Island",
     "music": "viridian-theme",
     "rows": [
       "~~~~~~~~~~~~~~~~~~~~~~~~~~",
@@ -1380,37 +1380,37 @@ export const MAPS5 = {
       {
         "x": 16,
         "y": 13,
-        "text": "Trovita Island DOCK — Ferries run both ways, every day. The sea lanes are surfable for trainers with the Soul Badge and Surf."
+        "text": "Reefside Island DOCK — Ferries run both ways, every day. The sea lanes are surfable for trainers with the Soul Badge and Surf."
       },
       {
         "x": 7,
         "y": 3,
-        "text": "TROVITA GYM — The Spike Shell challenge waits inside, among the rock spikes."
+        "text": "REEFSIDE GYM — The Spike Shell challenge waits inside, among the rock spikes."
       },
       {
         "x": 8,
         "y": 12,
-        "text": "TROVITA ISLAND — North: ORANGE SEA — EAST."
+        "text": "REEFSIDE ISLAND — North: AMBER SEA — EAST."
       },
       {
         "x": 3,
         "y": 7,
-        "text": "TROVITA ISLAND — North: ORANGE SEA — EAST."
+        "text": "REEFSIDE ISLAND — North: AMBER SEA — EAST."
       }
     ],
     "npcs": [
       {
         "x": 5,
         "y": 13,
-        "name": "CAPT DUNE-MORO",
+        "name": "CAPT DUNE-BERGAMOT",
         "art": "sailor",
         "skin": "#d8a878",
         "shirt": "#3a6ac0",
         "pants": "#2a2a3a",
         "hair": "#4a3a2a",
         "dialogue": [
-          "The Moro Island boat ties up at this dock — I run her both ways, fair weather or foul.",
-          "Step aboard when you're ready. The Orange sea keeps no one waiting who knows her moods."
+          "The Bergamot Island boat ties up at this dock — I run her both ways, fair weather or foul.",
+          "Step aboard when you're ready. The Amber sea keeps no one waiting who knows her moods."
         ],
         "ferry": "moro"
       },
@@ -1424,8 +1424,8 @@ export const MAPS5 = {
         "pants": "#2a3a4a",
         "hair": "#1a1a1a",
         "dialogue": [
-          "The Kumquat Island boat ties up at this dock — I run her both ways, fair weather or foul.",
-          "Step aboard when you're ready. The Orange sea keeps no one waiting who knows her moods."
+          "The Calamondin Island boat ties up at this dock — I run her both ways, fair weather or foul.",
+          "Step aboard when you're ready. The Amber sea keeps no one waiting who knows her moods."
         ],
         "ferry": "kumquat"
       },
@@ -1439,8 +1439,8 @@ export const MAPS5 = {
         "pants": "#3a3a4a",
         "hair": "#7a4a1a",
         "dialogue": [
-          "The Pummelo Island boat ties up at this dock — I run her both ways, fair weather or foul.",
-          "Step aboard when you're ready. The Orange sea keeps no one waiting who knows her moods."
+          "The Grapefruit Island boat ties up at this dock — I run her both ways, fair weather or foul.",
+          "Step aboard when you're ready. The Amber sea keeps no one waiting who knows her moods."
         ],
         "ferry": "pummelo"
       },
@@ -1454,7 +1454,7 @@ export const MAPS5 = {
         "pants": "#2a2a3a",
         "hair": "#c0c0c0",
         "dialogue": [
-          "Trovita's rock spikes grew around the gym like it was always meant to stand there.",
+          "Reefside's rock spikes grew around the gym like it was always meant to stand there.",
           "Trainers come off the ferry already arguing strategy."
         ]
       },
@@ -1597,7 +1597,7 @@ export const MAPS5 = {
   },
   "kumquat": {
     "id": "kumquat",
-    "name": "Kumquat Island",
+    "name": "Calamondin Island",
     "music": "viridian-theme",
     "rows": [
       "~~~~~~~~~~~~~~~~~~~~~~~~~~~~",
@@ -1724,27 +1724,27 @@ export const MAPS5 = {
       {
         "x": 17,
         "y": 13,
-        "text": "Kumquat Island DOCK — Ferries run both ways, every day. The sea lanes are surfable for trainers with the Soul Badge and Surf."
+        "text": "Calamondin Island DOCK — Ferries run both ways, every day. The sea lanes are surfable for trainers with the Soul Badge and Surf."
       },
       {
         "x": 7,
         "y": 3,
-        "text": "KUMQUAT GYM — The Jade Star challenge waits inside the resort arena."
+        "text": "CALAMONDIN GYM — The Jade Star challenge waits inside the resort arena."
       },
       {
         "x": 9,
         "y": 11,
-        "text": "KUMQUAT ISLAND — South: ORANGE SEA — EAST."
+        "text": "CALAMONDIN ISLAND — South: AMBER SEA — EAST."
       },
       {
         "x": 3,
         "y": 12,
-        "text": "KUMQUAT ISLAND — South: ORANGE SEA — EAST."
+        "text": "CALAMONDIN ISLAND — South: AMBER SEA — EAST."
       },
       {
         "x": 4,
         "y": 6,
-        "text": "KUMQUAT ISLAND — South: ORANGE SEA — EAST."
+        "text": "CALAMONDIN ISLAND — South: AMBER SEA — EAST."
       }
     ],
     "npcs": [
@@ -1758,8 +1758,8 @@ export const MAPS5 = {
         "pants": "#2a2a3a",
         "hair": "#4a3a2a",
         "dialogue": [
-          "The Trovita Island boat ties up at this dock — I run her both ways, fair weather or foul.",
-          "Step aboard when you're ready. The Orange sea keeps no one waiting who knows her moods."
+          "The Reefside Island boat ties up at this dock — I run her both ways, fair weather or foul.",
+          "Step aboard when you're ready. The Amber sea keeps no one waiting who knows her moods."
         ],
         "ferry": "trovita"
       },
@@ -1773,8 +1773,8 @@ export const MAPS5 = {
         "pants": "#2a3a4a",
         "hair": "#1a1a1a",
         "dialogue": [
-          "The Pummelo Island boat ties up at this dock — I run her both ways, fair weather or foul.",
-          "Step aboard when you're ready. The Orange sea keeps no one waiting who knows her moods."
+          "The Grapefruit Island boat ties up at this dock — I run her both ways, fair weather or foul.",
+          "Step aboard when you're ready. The Amber sea keeps no one waiting who knows her moods."
         ],
         "ferry": "pummelo"
       },
@@ -1788,7 +1788,7 @@ export const MAPS5 = {
         "pants": "#3a3a4a",
         "hair": "#7a4a1a",
         "dialogue": [
-          "Kumquat is the archipelago's holiday — resort, gym, and the best juice bar on any island.",
+          "Calamondin is the archipelago's holiday — resort, gym, and the best juice bar on any island.",
           "Book the sunset ferry. Trust me."
         ]
       },
@@ -1931,7 +1931,7 @@ export const MAPS5 = {
   },
   "pummelo": {
     "id": "pummelo",
-    "name": "Pummelo Island",
+    "name": "Grapefruit Island",
     "music": "viridian-theme",
     "rows": [
       "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~",
@@ -2051,27 +2051,27 @@ export const MAPS5 = {
       {
         "x": 16,
         "y": 5,
-        "text": "PUMMELO STADIUM — Home of the Orange League. The doors open for trainers carrying four island badges."
+        "text": "GRAPEFRUIT STADIUM — Home of the Amber League. The doors open for trainers carrying four island badges."
       },
       {
         "x": 18,
         "y": 15,
-        "text": "Pummelo Island DOCK — Ferries run both ways, every day. The sea lanes are surfable for trainers with the Soul Badge and Surf."
+        "text": "Grapefruit Island DOCK — Ferries run both ways, every day. The sea lanes are surfable for trainers with the Soul Badge and Surf."
       },
       {
         "x": 21,
         "y": 6,
-        "text": "PUMMELO ISLAND — West: ORANGE SEA — EAST."
+        "text": "GRAPEFRUIT ISLAND — West: AMBER SEA — EAST."
       },
       {
         "x": 4,
         "y": 11,
-        "text": "PUMMELO ISLAND — West: ORANGE SEA — EAST."
+        "text": "GRAPEFRUIT ISLAND — West: AMBER SEA — EAST."
       },
       {
         "x": 10,
         "y": 9,
-        "text": "PUMMELO ISLAND — West: ORANGE SEA — EAST."
+        "text": "GRAPEFRUIT ISLAND — West: AMBER SEA — EAST."
       }
     ],
     "npcs": [
@@ -2085,8 +2085,8 @@ export const MAPS5 = {
         "pants": "#2a2a3a",
         "hair": "#4a3a2a",
         "dialogue": [
-          "The Trovita Island boat ties up at this dock — I run her both ways, fair weather or foul.",
-          "Step aboard when you're ready. The Orange sea keeps no one waiting who knows her moods."
+          "The Reefside Island boat ties up at this dock — I run her both ways, fair weather or foul.",
+          "Step aboard when you're ready. The Amber sea keeps no one waiting who knows her moods."
         ],
         "ferry": "trovita"
       },
@@ -2100,8 +2100,8 @@ export const MAPS5 = {
         "pants": "#2a3a4a",
         "hair": "#1a1a1a",
         "dialogue": [
-          "The Kumquat Island boat ties up at this dock — I run her both ways, fair weather or foul.",
-          "Step aboard when you're ready. The Orange sea keeps no one waiting who knows her moods."
+          "The Calamondin Island boat ties up at this dock — I run her both ways, fair weather or foul.",
+          "Step aboard when you're ready. The Amber sea keeps no one waiting who knows her moods."
         ],
         "ferry": "kumquat"
       },
@@ -2115,8 +2115,8 @@ export const MAPS5 = {
         "pants": "#3a3a4a",
         "hair": "#7a4a1a",
         "dialogue": [
-          "The Shamouti Island boat ties up at this dock — I run her both ways, fair weather or foul.",
-          "Step aboard when you're ready. The Orange sea keeps no one waiting who knows her moods."
+          "The Sanctum Island boat ties up at this dock — I run her both ways, fair weather or foul.",
+          "Step aboard when you're ready. The Amber sea keeps no one waiting who knows her moods."
         ],
         "ferry": "shamouti"
       },
@@ -2130,7 +2130,7 @@ export const MAPS5 = {
         "pants": "#2a2a3a",
         "hair": "#c0c0c0",
         "dialogue": [
-          "Pummelo! The League island! I get goosebumps at the dock, every time.",
+          "Grapefruit! The League island! I get goosebumps at the dock, every time.",
           "Four badges open the stadium doors. The whole island counts them with you."
         ]
       },
@@ -2144,7 +2144,7 @@ export const MAPS5 = {
         "pants": "#2a2a3a",
         "hair": "#4a3a2a",
         "dialogue": [
-          "I have watched forty years of Orange League finals from that stadium.",
+          "I have watched forty years of Amber League finals from that stadium.",
           "The trophy ceremony at dusk — there is nothing like it on any sea."
         ]
       },
@@ -2273,7 +2273,7 @@ export const MAPS5 = {
   },
   "shamouti": {
     "id": "shamouti",
-    "name": "Shamouti Island",
+    "name": "Sanctum Island",
     "music": "pewter-theme",
     "rows": [
       "~~~~~~~~~~~~~~~~~~~~~~~~~~~~",
@@ -2419,22 +2419,22 @@ export const MAPS5 = {
       {
         "x": 13,
         "y": 9,
-        "text": "SHAMOUTI SHRINE PLAZA — Festival of the sea, kept since anyone can remember. Mind the Slowking rock by the shore."
+        "text": "SANCTUM SHRINE PLAZA — Festival of the sea, kept since anyone can remember. Mind the Slowking rock by the shore."
       },
       {
         "x": 8,
         "y": 7,
-        "text": "SHAMOUTI ISLAND — South: ORANGE SEA — NORTH · West: FIRE ISLE · East: LIGHTNING ISLE · North: ICE ISLE."
+        "text": "SANCTUM ISLAND — South: AMBER SEA — NORTH · West: EMBER ISLE · East: STORM ISLE · North: RIME ISLE."
       },
       {
         "x": 8,
         "y": 10,
-        "text": "SHAMOUTI ISLAND — South: ORANGE SEA — NORTH · West: FIRE ISLE · East: LIGHTNING ISLE · North: ICE ISLE."
+        "text": "SANCTUM ISLAND — South: AMBER SEA — NORTH · West: EMBER ISLE · East: STORM ISLE · North: RIME ISLE."
       },
       {
         "x": 3,
         "y": 14,
-        "text": "SHAMOUTI ISLAND — South: ORANGE SEA — NORTH · West: FIRE ISLE · East: LIGHTNING ISLE · North: ICE ISLE."
+        "text": "SANCTUM ISLAND — South: AMBER SEA — NORTH · West: EMBER ISLE · East: STORM ISLE · North: RIME ISLE."
       }
     ],
     "npcs": [
@@ -2448,21 +2448,21 @@ export const MAPS5 = {
         "pants": "#2a2a3a",
         "hair": "#4a3a2a",
         "dialogue": [
-          "The Pummelo Island boat ties up at this dock — I run her both ways, fair weather or foul.",
-          "Step aboard when you're ready. The Orange sea keeps no one waiting who knows her moods."
+          "The Grapefruit Island boat ties up at this dock — I run her both ways, fair weather or foul.",
+          "Step aboard when you're ready. The Amber sea keeps no one waiting who knows her moods."
         ],
         "dialogueStates": [
           {
             "flag": "orange_2000_storm_stilled",
             "dialogue": [
-              "The Pummelo boat sails on a sea like glass today — I have not seen the currents run this kind since I was a girl.",
+              "The Grapefruit boat sails on a sea like glass today — I have not seen the currents run this kind since I was a girl.",
               "Whatever you did up at that shrine, trainer, every sailor in the archipelago owes you a fair wind. Step aboard when you're ready."
             ]
           },
           {
             "flag": "orange_2000_active",
             "dialogue": [
-              "The Pummelo boat still runs — I run her both ways, fair weather or foul, and this is as foul as I have ever seen it.",
+              "The Grapefruit boat still runs — I run her both ways, fair weather or foul, and this is as foul as I have ever seen it.",
               "Three storm cells out there, turning like millstones. You sail careful, trainer. The isles need their shrines back."
             ]
           }
@@ -2479,8 +2479,8 @@ export const MAPS5 = {
         "pants": "#2a3a4a",
         "hair": "#1a1a1a",
         "dialogue": [
-          "The Fire Isle boat ties up at this dock — I run her both ways, fair weather or foul.",
-          "Step aboard when you're ready. The Orange sea keeps no one waiting who knows her moods."
+          "The Ember Isle boat ties up at this dock — I run her both ways, fair weather or foul.",
+          "Step aboard when you're ready. The Amber sea keeps no one waiting who knows her moods."
         ],
         "ferry": "fire-isle"
       },
@@ -2494,8 +2494,8 @@ export const MAPS5 = {
         "pants": "#3a3a4a",
         "hair": "#7a4a1a",
         "dialogue": [
-          "The Ice Isle boat ties up at this dock — I run her both ways, fair weather or foul.",
-          "Step aboard when you're ready. The Orange sea keeps no one waiting who knows her moods."
+          "The Rime Isle boat ties up at this dock — I run her both ways, fair weather or foul.",
+          "Step aboard when you're ready. The Amber sea keeps no one waiting who knows her moods."
         ],
         "ferry": "ice-isle"
       },
@@ -2509,8 +2509,8 @@ export const MAPS5 = {
         "pants": "#2a2a3a",
         "hair": "#c0c0c0",
         "dialogue": [
-          "The Lightning Isle boat ties up at this dock — I run her both ways, fair weather or foul.",
-          "Step aboard when you're ready. The Orange sea keeps no one waiting who knows her moods."
+          "The Storm Isle boat ties up at this dock — I run her both ways, fair weather or foul.",
+          "Step aboard when you're ready. The Amber sea keeps no one waiting who knows her moods."
         ],
         "ferry": "lightning-isle"
       },
@@ -2524,7 +2524,7 @@ export const MAPS5 = {
         "pants": "#2a2a3a",
         "hair": "#4a3a2a",
         "dialogue": [
-          "Shamouti keeps the old festival: three isles, three shrines, one guardian of the sea.",
+          "Sanctum keeps the old festival: three isles, three shrines, one guardian of the sea.",
           "When the birds quarrel, the whole sky argues. The shrine keeps the peace."
         ],
         "dialogueStates": [
@@ -2691,7 +2691,7 @@ export const MAPS5 = {
   },
   "fire-isle": {
     "id": "fire-isle",
-    "name": "Fire Isle",
+    "name": "Ember Isle",
     "music": "pewter-theme",
     "rows": [
       "~~~~~~~~~~~~~~~~~~~~~~~~",
@@ -2742,12 +2742,12 @@ export const MAPS5 = {
       {
         "x": 14,
         "y": 4,
-        "text": "FIRE ISLE — A shrine cave in the old rock. The air smells of warm ash."
+        "text": "EMBER ISLE — A shrine cave in the old rock. The air smells of warm ash."
       },
       {
         "x": 15,
         "y": 11,
-        "text": "Fire Isle DOCK — Ferries run both ways, every day. The sea lanes are surfable for trainers with the Soul Badge and Surf."
+        "text": "Ember Isle DOCK — Ferries run both ways, every day. The sea lanes are surfable for trainers with the Soul Badge and Surf."
       }
     ],
     "npcs": [
@@ -2761,8 +2761,8 @@ export const MAPS5 = {
         "pants": "#2a2a3a",
         "hair": "#4a3a2a",
         "dialogue": [
-          "The Shamouti Island boat ties up at this dock — I run her both ways, fair weather or foul.",
-          "Step aboard when you're ready. The Orange sea keeps no one waiting who knows her moods."
+          "The Sanctum Island boat ties up at this dock — I run her both ways, fair weather or foul.",
+          "Step aboard when you're ready. The Amber sea keeps no one waiting who knows her moods."
         ],
         "ferry": "shamouti"
       },
@@ -2776,7 +2776,7 @@ export const MAPS5 = {
         "pants": "#2a3a4a",
         "hair": "#1a1a1a",
         "dialogue": [
-          "Fire Isle shrine. I sweep the ash and mind the flame.",
+          "Ember Isle shrine. I sweep the ash and mind the flame.",
           "The cave breathes warm. Step soft."
         ]
       }
@@ -2859,7 +2859,7 @@ export const MAPS5 = {
   },
   "ice-isle": {
     "id": "ice-isle",
-    "name": "Ice Isle",
+    "name": "Rime Isle",
     "music": "pewter-theme",
     "rows": [
       "~~~~~~~~~~~~~~~~~~~~~~~~",
@@ -2910,12 +2910,12 @@ export const MAPS5 = {
       {
         "x": 14,
         "y": 4,
-        "text": "ICE ISLE — A shrine cave in the old rock. Breath fogs; the stone sings faintly."
+        "text": "RIME ISLE — A shrine cave in the old rock. Breath fogs; the stone sings faintly."
       },
       {
         "x": 15,
         "y": 11,
-        "text": "Ice Isle DOCK — Ferries run both ways, every day. The sea lanes are surfable for trainers with the Soul Badge and Surf."
+        "text": "Rime Isle DOCK — Ferries run both ways, every day. The sea lanes are surfable for trainers with the Soul Badge and Surf."
       }
     ],
     "npcs": [
@@ -2929,8 +2929,8 @@ export const MAPS5 = {
         "pants": "#2a2a3a",
         "hair": "#4a3a2a",
         "dialogue": [
-          "The Shamouti Island boat ties up at this dock — I run her both ways, fair weather or foul.",
-          "Step aboard when you're ready. The Orange sea keeps no one waiting who knows her moods."
+          "The Sanctum Island boat ties up at this dock — I run her both ways, fair weather or foul.",
+          "Step aboard when you're ready. The Amber sea keeps no one waiting who knows her moods."
         ],
         "ferry": "shamouti"
       },
@@ -2944,7 +2944,7 @@ export const MAPS5 = {
         "pants": "#2a3a4a",
         "hair": "#1a1a1a",
         "dialogue": [
-          "Ice Isle shrine. Mind your footing — the floor remembers every slip.",
+          "Rime Isle shrine. Mind your footing — the floor remembers every slip.",
           "Cold keeps the old carvings sharp."
         ]
       }
@@ -3027,7 +3027,7 @@ export const MAPS5 = {
   },
   "lightning-isle": {
     "id": "lightning-isle",
-    "name": "Lightning Isle",
+    "name": "Storm Isle",
     "music": "pewter-theme",
     "rows": [
       "~~~~~~~~~~~~~~~~~~~~~~~~",
@@ -3078,12 +3078,12 @@ export const MAPS5 = {
       {
         "x": 14,
         "y": 4,
-        "text": "LIGHTNING ISLE — A shrine cave in the old rock. Loose hair stands on end here."
+        "text": "STORM ISLE — A shrine cave in the old rock. Loose hair stands on end here."
       },
       {
         "x": 15,
         "y": 11,
-        "text": "Lightning Isle DOCK — Ferries run both ways, every day. The sea lanes are surfable for trainers with the Soul Badge and Surf."
+        "text": "Storm Isle DOCK — Ferries run both ways, every day. The sea lanes are surfable for trainers with the Soul Badge and Surf."
       }
     ],
     "npcs": [
@@ -3097,8 +3097,8 @@ export const MAPS5 = {
         "pants": "#2a2a3a",
         "hair": "#4a3a2a",
         "dialogue": [
-          "The Shamouti Island boat ties up at this dock — I run her both ways, fair weather or foul.",
-          "Step aboard when you're ready. The Orange sea keeps no one waiting who knows her moods."
+          "The Sanctum Island boat ties up at this dock — I run her both ways, fair weather or foul.",
+          "Step aboard when you're ready. The Amber sea keeps no one waiting who knows her moods."
         ],
         "ferry": "shamouti"
       },
@@ -3112,7 +3112,7 @@ export const MAPS5 = {
         "pants": "#2a3a4a",
         "hair": "#1a1a1a",
         "dialogue": [
-          "Lightning Isle shrine. Storms queue politely here. Mostly.",
+          "Storm Isle shrine. Storms queue politely here. Mostly.",
           "The cave hums before thunder. Count the seconds."
         ]
       }
@@ -3201,7 +3201,7 @@ export const MAPS5 = {
   },
   "orange-sea-west": {
     "id": "orange-sea-west",
-    "name": "Orange Sea — West",
+    "name": "Amber Sea — West",
     "music": "route1-theme",
     "rows": [
       "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~",
@@ -3341,7 +3341,7 @@ export const MAPS5 = {
   },
   "orange-sea-central": {
     "id": "orange-sea-central",
-    "name": "Orange Sea — Central",
+    "name": "Amber Sea — Central",
     "music": "route1-theme",
     "rows": [
       "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~",
@@ -3499,7 +3499,7 @@ export const MAPS5 = {
   },
   "orange-sea-east": {
     "id": "orange-sea-east",
-    "name": "Orange Sea — East",
+    "name": "Amber Sea — East",
     "music": "route1-theme",
     "rows": [
       "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~",
@@ -3657,7 +3657,7 @@ export const MAPS5 = {
   },
   "orange-sea-north": {
     "id": "orange-sea-north",
-    "name": "Orange Sea — North",
+    "name": "Amber Sea — North",
     "music": "route1-theme",
     "rows": [
       "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~",
@@ -3825,7 +3825,7 @@ export const MAPS5 = {
       {
         "x": 2,
         "y": 1,
-        "text": "Reef survey terminal: the Valencia transect logged 214 species passes this season."
+        "text": "Reef survey terminal: the Marisol transect logged 214 species passes this season."
       }
     ],
     "npcs": [
@@ -3864,7 +3864,7 @@ export const MAPS5 = {
   },
   "mikan-gym": {
     "id": "mikan-gym",
-    "name": "Mikan Gym",
+    "name": "Tangelo Gym",
     "music": "gym-theme",
     "indoor": true,
     "rows": [
@@ -3903,7 +3903,7 @@ export const MAPS5 = {
       {
         "x": 2,
         "y": 1,
-        "text": "MIKAN GYM — A floating range over the lagoon: ring targets, water lanes, and a very smug stopwatch. Cissy's Coral-Eye challenge is staged here."
+        "text": "TANGELO GYM — A floating range over the lagoon: ring targets, water lanes, and a very smug stopwatch. Cissy's Coral-Eye challenge is staged here."
       }
     ],
     "npcs": [
@@ -3943,7 +3943,7 @@ export const MAPS5 = {
   },
   "navel-gym": {
     "id": "navel-gym",
-    "name": "Navel Gym",
+    "name": "Pomelo Gym",
     "music": "gym-theme",
     "indoor": true,
     "rows": [
@@ -3982,7 +3982,7 @@ export const MAPS5 = {
       {
         "x": 2,
         "y": 1,
-        "text": "NAVEL GYM — The floor tilts like the mountain outside; frost slicks the high lane. Danny's Sea Ruby challenge is staged here."
+        "text": "POMELO GYM — The floor tilts like the mountain outside; frost slicks the high lane. Danny's Sea Ruby challenge is staged here."
       }
     ],
     "npcs": [
@@ -4022,7 +4022,7 @@ export const MAPS5 = {
   },
   "trovita-gym": {
     "id": "trovita-gym",
-    "name": "Trovita Gym",
+    "name": "Reefside Gym",
     "music": "gym-theme",
     "indoor": true,
     "rows": [
@@ -4061,7 +4061,7 @@ export const MAPS5 = {
       {
         "x": 2,
         "y": 1,
-        "text": "TROVITA GYM — A rocky arena ringed with carved spike stone. Rudy's Spike Shell challenge is staged here."
+        "text": "REEFSIDE GYM — A rocky arena ringed with carved spike stone. Rudy's Spike Shell challenge is staged here."
       }
     ],
     "npcs": [
@@ -4074,7 +4074,7 @@ export const MAPS5 = {
         "shirt": "#c05a7a",
         "pants": "#2a2a3a",
         "hair": "#7a2a3a",
-        "dialogue": ["Ah, the Spike Shell holder returns! Trovita still hums the rhythm of our battle."],
+        "dialogue": ["Ah, the Spike Shell holder returns! Reefside still hums the rhythm of our battle."],
         "trainer": "rudy",
         "orange": "rudy"
       },
@@ -4101,7 +4101,7 @@ export const MAPS5 = {
   },
   "kumquat-gym": {
     "id": "kumquat-gym",
-    "name": "Kumquat Gym",
+    "name": "Calamondin Gym",
     "music": "gym-theme",
     "indoor": true,
     "rows": [
@@ -4140,7 +4140,7 @@ export const MAPS5 = {
       {
         "x": 2,
         "y": 1,
-        "text": "KUMQUAT GYM — A resort arena: palm shade, polished stone, doubles under the sun. Luana's Jade Star challenge is staged here."
+        "text": "CALAMONDIN GYM — A resort arena: palm shade, polished stone, doubles under the sun. Luana's Jade Star challenge is staged here."
       }
     ],
     "npcs": [
@@ -4180,7 +4180,7 @@ export const MAPS5 = {
   },
   "pummelo-stadium": {
     "id": "pummelo-stadium",
-    "name": "Pummelo Stadium",
+    "name": "Grapefruit Stadium",
     "music": "gym-theme",
     "indoor": true,
     "rows": [
@@ -4223,12 +4223,12 @@ export const MAPS5 = {
       {
         "x": 5,
         "y": 5,
-        "text": "The Winner's Trophy case. Forty seasons of Orange League champions gleam behind the glass."
+        "text": "The Winner's Trophy case. Forty seasons of Amber League champions gleam behind the glass."
       },
       {
         "x": 11,
         "y": 5,
-        "text": "PUMMELO STADIUM — The Orange League arena. Drake, the Orange League champion, waits on this floor."
+        "text": "GRAPEFRUIT STADIUM — The Amber League arena. Drake, the Amber League champion, waits on this floor."
       }
     ],
     "npcs": [
@@ -4241,7 +4241,7 @@ export const MAPS5 = {
         "shirt": "#2a4a7a",
         "pants": "#2a2a3a",
         "hair": "#c0c0c0",
-        "dialogue": ["Orange League rules, trainer — the stadium doors open at four island badges."],
+        "dialogue": ["Amber League rules, trainer — the stadium doors open at four island badges."],
         "orange": "stadium-official"
       },
       {
@@ -4280,7 +4280,7 @@ export const MAPS5 = {
   },
   "shamouti-shrine": {
     "id": "shamouti-shrine",
-    "name": "Shamouti Shrine",
+    "name": "Sanctum Shrine",
     "music": "pewter-theme",
     "indoor": true,
     "rows": [
@@ -4387,7 +4387,7 @@ export const MAPS5 = {
   },
   "shamouti-deep": {
     "id": "shamouti-deep",
-    "name": "Shamouti Deep Shrine",
+    "name": "Sanctum Deep Shrine",
     "music": "pewter-theme",
     "indoor": true,
     "rows": [
@@ -4440,7 +4440,7 @@ export const MAPS5 = {
   },
   "fire-cave": {
     "id": "fire-cave",
-    "name": "Fire Isle Shrine Cave",
+    "name": "Ember Isle Shrine Cave",
     "music": "pewter-theme",
     "indoor": true,
     "rows": [
@@ -4494,7 +4494,7 @@ export const MAPS5 = {
   },
   "ice-cave": {
     "id": "ice-cave",
-    "name": "Ice Isle Shrine Cave",
+    "name": "Rime Isle Shrine Cave",
     "music": "pewter-theme",
     "indoor": true,
     "rows": [
@@ -4548,7 +4548,7 @@ export const MAPS5 = {
   },
   "lightning-cave": {
     "id": "lightning-cave",
-    "name": "Lightning Isle Shrine Cave",
+    "name": "Storm Isle Shrine Cave",
     "music": "pewter-theme",
     "indoor": true,
     "rows": [
@@ -4602,7 +4602,7 @@ export const MAPS5 = {
   },
   "house-valencia": {
     "id": "house-valencia",
-    "name": "Valencia Island — House",
+    "name": "Marisol Island — House",
     "music": "viridian-theme",
     "indoor": true,
     "rows": [
@@ -4647,7 +4647,7 @@ export const MAPS5 = {
         "hair": "#7a4a1a",
         "dialogue": [
           "Ferry days, the whole street smells of orange peel and rope tar.",
-          "Valencia oranges travel further than most trainers. Half the Arden shops stock them."
+          "Marisol oranges travel further than most trainers. Half the Arden shops stock them."
         ]
       }
     ],
@@ -4659,7 +4659,7 @@ export const MAPS5 = {
   },
   "house-mikan": {
     "id": "house-mikan",
-    "name": "Mikan Island — House",
+    "name": "Tangelo Island — House",
     "music": "viridian-theme",
     "indoor": true,
     "rows": [
@@ -4704,7 +4704,7 @@ export const MAPS5 = {
         "hair": "#7a4a1a",
         "dialogue": [
           "Lagoon light gets in everywhere here. Even the spoons shine.",
-          "Mikan rule: never challenge the gym on an empty stomach."
+          "Tangelo rule: never challenge the gym on an empty stomach."
         ]
       }
     ],
@@ -4716,7 +4716,7 @@ export const MAPS5 = {
   },
   "house-kumquat": {
     "id": "house-kumquat",
-    "name": "Kumquat Island — House",
+    "name": "Calamondin Island — House",
     "music": "viridian-theme",
     "indoor": true,
     "rows": [
@@ -4761,7 +4761,7 @@ export const MAPS5 = {
         "hair": "#7a4a1a",
         "dialogue": [
           "I rent this room out during League season. Booked solid, darling, booked solid.",
-          "Kumquat sunsets should be illegal. They'd still happen anyway."
+          "Calamondin sunsets should be illegal. They'd still happen anyway."
         ]
       }
     ],
@@ -4773,7 +4773,7 @@ export const MAPS5 = {
   },
   "house-shamouti": {
     "id": "house-shamouti",
-    "name": "Shamouti Island — House",
+    "name": "Sanctum Island — House",
     "music": "viridian-theme",
     "indoor": true,
     "rows": [
@@ -4830,20 +4830,20 @@ export const MAPS5 = {
   }
 };
 
-// ---- Arcport dock: the Orange crossing ferryman (Stage O1) ----
+// ---- Arcport dock: the Amber crossing ferryman (Stage O1) ----
 // Rides on MAPS4's travel-graph-repaired Arcport (which already
 // carries SAILOR BRINE + the movie events), adding ONE npc: the
-// Valencia ferryman, gated by the Stage F ferryArc handler — before
+// Marisol ferryman, gated by the Stage F ferryArc handler — before
 // the embark is armed he stands at the dock with flavour dialogue and
 // the handler speaks the gate line; after the homecoming (or once
-// Valencia has ever been reached) the crossing runs both ways.
+// Marisol has ever been reached) the crossing runs both ways.
 MAPS5.vermilion = {
   ...MAPS4.vermilion,
   npcs: [
     ...MAPS4.vermilion.npcs,
-    { x: 13, y: 10, name: 'CAPT ORANGE', art: 'sailor', skin: '#c89878', shirt: '#c05a3a', pants: '#2a2a3a', hair: '#3a2a1a',
+    { x: 13, y: 10, name: 'CAPT AMBER', art: 'sailor', skin: '#c89878', shirt: '#c05a3a', pants: '#2a2a3a', hair: '#3a2a1a',
       ferry: 'valencia', ferryArc: 'orange',
-      dialogue: ['The Valencia run is the long southern crossing — Orange Islands water, warm as bathwater and twice as blue.',
+      dialogue: ['The Marisol run is the long southern crossing — Amber Isles water, warm as bathwater and twice as blue.',
                  "Professor Hawthorn's office books that passage. No booking, no boarding — captain's orders, trainer."] },
   ],
 };

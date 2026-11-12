@@ -193,7 +193,7 @@ export const W7_KIND_CHARS = {};
   TILE_CHARS[ch] = kind;
 });
 export const W7_PROP_KINDS = [...W7_DRESS_KINDS, ...W7_GATE_KINDS];
-// ---- Arc 1.5 Stage O1: Orange Islands kinds ----
+// ---- Arc 1.5 Stage O1: Amber Isles kinds ----
 // Chars continue the W6/W7 block at U+1E00+152 (W6 idx 0..131, W7
 // 132..151). Classes follow the W6 convention: floor = WALKABLE ground
 // family of its own, wall = solid, prop = solid object composited over
@@ -471,7 +471,7 @@ export const G0_WALKABLE_CHARS = G0_KIND_DEFS.filter(([, c]) => c === 'facade').
 // whose <dir> edge(s) feather sand speckle (tile-beach-<dir>), placed
 // on tropgrass cells bordering sand; psand-<dir> is the same grammar
 // on the path side (tile-psand-<dir>). All are floor class (WALKABLE),
-// swapped 1:1 from tropgrass/path cells in the Orange Islands, so
+// swapped 1:1 from tropgrass/path cells in the Amber Isles, so
 // walkable stays walkable and encounter eligibility is unchanged
 // (neither family is ',' / water / cavefloor).
 export const G2_KIND_DEFS = [

@@ -439,7 +439,7 @@ export const SINNOH_EVENTS = {
   ],
   // The lab: Rowan registers a veteran; Paul takes his first measure.
   ev_sinnoh_lab: [
-    { say: ['The lab is quiet the way libraries are quiet — by enforcement. PROF. ROWAN looks up from a fossil ledger, and his eyebrows conduct a brief, severe census of you.', '"Hm. The Arden champion. The Orange voyager. The Yamato and Maris name my colleagues keep attaching to weather events."'], who: 'PROF. ROWAN' },
+    { say: ['The lab is quiet the way libraries are quiet — by enforcement. PROF. ROWAN looks up from a fossil ledger, and his eyebrows conduct a brief, severe census of you.', '"Hm. The Arden champion. The Amber voyager. The Yamato and Maris name my colleagues keep attaching to weather events."'], who: 'PROF. ROWAN' },
     { say: ['"Understand me: I do not register beginners in this room, and I am not registering one now. Your Pokedex is a working instrument, not a schoolbook. Borea\'s pages are open to it — all of them, from the lake spirits to the things the mountain keeps."', '"Walk my region carefully, trainer. It is older than the League, and it keeps its evidence in stone."'], who: 'PROF. ROWAN' },
     { flag: 'rowan_registered' },
     { say: ['The door opens on the cold. A trainer your age stands in it — cap low, hands in pockets, a gaze that has already finished measuring the room and moved on to you.', '"Paul." The professor\'s tone files the name under weather warnings. "You were told to wait outside." — "I waited. Then I came in."'], who: '' },

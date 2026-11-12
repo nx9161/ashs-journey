@@ -148,10 +148,10 @@ Object.assign(OverworldScene.prototype, {
     // Town + frontier_complete + its fire-once flag, and yields to
     // the ARC COMPLETE card exactly as the homecoming does).
     if (!arcCardFired) tryScottClosing(g, id);
-    // Stage O2 (Orange story): map-entry scenes, flag-gated once each.
+    // Stage O2 (Amber story): map-entry scenes, flag-gated once each.
     // Ivy's intro fires on FIRST entry to her lab; KELPSAIL fires on
-    // Valencia once the first Orange badge is held; the pod reunion
-    // fires pre-League (4 badges) on Pummelo / the north sea. Each
+    // Marisol once the first Amber badge is held; the pod reunion
+    // fires pre-League (4 badges) on Grapefruit / the north sea. Each
     // scene's own completion flag is the gate, so a stalled chain
     // (e.g. a gift that found no room) re-fires on a later entry
     // instead of soft-failing.
@@ -167,9 +167,9 @@ Object.assign(OverworldScene.prototype, {
         this.runEvent('ev_orange_lapras_pod');
       }
     }
-    // Stage O3 (Pokemon 2000): the Shamouti storm chain. The trigger
-    // is chronology-true mid-arc — first Shamouti arrival with the
-    // Sea Ruby held (>= 2 Orange badges) — and is NEVER a gym
+    // Stage O3 (Pokemon 2000): the Sanctum storm chain. The trigger
+    // is chronology-true mid-arc — first Sanctum arrival with the
+    // Sea Ruby held (>= 2 Amber badges) — and is NEVER a gym
     // blocker: nothing here gates badges 3/4, Drake, or the machine's
     // league flow. Each scene's own flag is its gate, so a chain
     // stalled by a flee or a blackout re-fires on a later entry
@@ -212,7 +212,7 @@ Object.assign(OverworldScene.prototype, {
       }
     }
     // Stage J4a (Yamato story, west): map-entry scenes, flag-gated once
-    // each, in the Orange idiom — a scene's own completion flag is its
+    // each, in the Amber idiom — a scene's own completion flag is its
     // gate, so a stalled chain re-fires on a later entry. The Silver
     // clash additionally requires Elm's registration (the arrival
     // scene) so the thief thread can never fire before it is set up.
@@ -1516,9 +1516,9 @@ Object.assign(OverworldScene.prototype, {
     if (npc.sparCoach) { this.startSpar(npc); return true; }
     // ADR-025 §2 (Bonds): the Canopy parley pair run their scene.
     if (npc.parley) { if (this.runParleyNpc(npc)) return true; }
-    // Stage O2: Orange story actors (Ivy, the four Crew leaders, the
+    // Stage O2: Amber story actors (Ivy, the four Crew leaders, the
     // stadium official, Drake) run their own scenes — challenges,
-    // gates, and the two-stage Kumquat match are menu/battle flows,
+    // gates, and the two-stage Calamondin match are menu/battle flows,
     // not plain dialogue or a single trainer battle.
     if (npc.orange) { if (this.runOrangeNpc(npc)) return true; }
     // Stage J4a: Yamato story actors (Elm, the west leaders, Kurt, the
@@ -1741,8 +1741,8 @@ Object.assign(OverworldScene.prototype, {
     return false;
   },
 
-  // ---------- Stage O2: Orange story actors ----------
-  // One dispatch for every Orange NPC carrying an `orange:` key.
+  // ---------- Stage O2: Amber story actors ----------
+  // One dispatch for every Amber NPC carrying an `orange:` key.
   // Leaders: challenge scene -> real leader battle (the Arden gym
   // idiom, via BattleScene + TRAINERS defs whose badge award writes
   // badges.orange) -> post-badge dialogue on later talks. Drake: the
@@ -1765,8 +1765,8 @@ Object.assign(OverworldScene.prototype, {
     if (kind === 'stadium-official') {
       if (flags.orange_champion) { say(['Champion. The stadium still talks about that final — walk in like you own the carpet. You do.']); return true; }
       if (oBadges.length < 4) {
-        say(['Orange League rules, trainer — the stadium doors open at four island badges.',
-          'You hold ' + oBadges.length + ' of the 4. ' + (4 - oBadges.length) + ' to go: the Crew keeps the sea road — Mikan, Navel, Trovita, Kumquat.']);
+        say(['Amber League rules, trainer — the stadium doors open at four island badges.',
+          'You hold ' + oBadges.length + ' of the 4. ' + (4 - oBadges.length) + ' to go: the Crew keeps the sea road — Tangelo, Pomelo, Reefside, Calamondin.']);
         return true;
       }
       say(['Four badges. Counted, checked, and gleaming. Drake is waiting on the arena floor, champion — give the islands a final.']);
@@ -1781,7 +1781,7 @@ Object.assign(OverworldScene.prototype, {
         return true;
       }
       say(['So. Four badges, a full sea behind you, and my stadium gone quiet. This is the match I keep this floor polished for.'], () => {
-        g.ui.showMenu('Challenge Drake for the Orange League title?', [
+        g.ui.showMenu('Challenge Drake for the Amber League title?', [
           { label: 'Challenge Drake', value: 'yes' }, { label: 'Not yet', value: 'no' },
         ], (v) => {
           if (v !== 'yes') return;
@@ -1791,19 +1791,19 @@ Object.assign(OverworldScene.prototype, {
       return true;
     }
 
-    // ---- the Orange Crew ----
+    // ---- the Amber Crew ----
     const LEADER_BADGE = { cissy: 'coraleyebadge', danny: 'searubybadge', rudy: 'spikeshellbadge', luana: 'jadestarbadge' };
     const POST = {
       cissy: 'The lagoon is calm today. If your aim ever needs a tune-up, my range is your range, Coral-Eye holder.',
       danny: 'The mountain misses you already. It says so in avalanches. Small ones. Friendly ones.',
-      rudy: 'Ah, the Spike Shell holder returns! Trovita still hums the rhythm of our battle. My ASTRION asks after your team — dancer to dancer.',
+      rudy: 'Ah, the Spike Shell holder returns! Reefside still hums the rhythm of our battle. My ASTRION asks after your team — dancer to dancer.',
       luana: 'Darling! The Jade Star holder, in my resort. Both pairs still talk about that match — MENTARCH sulks beautifully about it.',
     };
     if (!LEADER_BADGE[kind]) return false;
     if (oBadges.includes(LEADER_BADGE[kind])) { say([POST[kind]]); return true; }
 
     if (kind === 'cissy') {
-      say(['Welcome to Mikan Gym, challenger. I am Cissy — and on Mikan we do this properly: first my water range, then my team.',
+      say(['Welcome to Tangelo Gym, challenger. I am Cissy — and on Tangelo we do this properly: first my water range, then my team.',
         'Three rings ride the lagoon swell. Call your aim for each one. It is a test of nerve, not a trap — the range is generous, and so am I. Mostly.'], () => {
         g.ui.showMenu('Take Cissy\'s target challenge?', [
           { label: 'Take the range', value: 'yes' }, { label: 'Not yet', value: 'no' },
@@ -1860,7 +1860,7 @@ Object.assign(OverworldScene.prototype, {
       const typeLine = types.length
         ? 'I have been watching your team warm up. ' + types.slice(0, 4).map((t) => t[0].toUpperCase() + t.slice(1)).join(', ') + ' — a bold palette, challenger. My challenge is simple: show me you know what those types are FOR.'
         : 'My challenge is simple: a leader should know a team by its types. Show me yours in battle — that will be introduction enough.';
-      say(['Rudy of Trovita. Dancer, romantic, and — ask anyone on this island — a leader who tests before he battles.',
+      say(['Rudy of Reefside. Dancer, romantic, and — ask anyone on this island — a leader who tests before he battles.',
         typeLine], () => {
         const drill = types.length
           ? types.slice(0, 4).map((t) => ({ label: 'Show the ' + t + ' heart of the team', value: t }))
@@ -1877,7 +1877,7 @@ Object.assign(OverworldScene.prototype, {
     }
 
     if (kind === 'luana') {
-      say(['Luana, of the Kumquat resort gym. My format is famous on four islands, so I will say it plainly, darling:',
+      say(['Luana, of the Calamondin resort gym. My format is famous on four islands, so I will say it plainly, darling:',
         'Mine is a double battle — two pairs, back to back, no rest. MENTARCH\'s pair first, then FOSSILORD\'s, with your team carrying every scratch from one into the other. Clear both, and the Jade Star is yours.'], () => {
         g.ui.showMenu('Take Luana\'s two-stage match?', [
           { label: 'Take the match', value: 'yes' }, { label: 'Not yet', value: 'no' },
@@ -1913,7 +1913,7 @@ Object.assign(OverworldScene.prototype, {
     }, t.name);
   },
 
-  // Drake beaten: the Winner's Trophy (collectible grant), the Orange
+  // Drake beaten: the Winner's Trophy (collectible grant), the Amber
   // Hall of Fame entry (the shipped story.hof shape, team snapshot),
   // orange_champion + 'orange' in regionsDone — then the Stage F
   // transition machine itself fires the ARC COMPLETE card and pins
@@ -1933,8 +1933,8 @@ Object.assign(OverworldScene.prototype, {
     g.audio.playSfx('badge');
     g.ui.say([
       'The stadium erupts. Somewhere above the roar, an announcer is saying your name like it is a place the sea has always known.',
-      'Drake presents the WINNER\'S TROPHY — gold, salt-bright, and heavier than four badges put together. Your team is recorded in the Orange League\'s Hall of Fame.',
-      'Orange League — WINNER. The GS Orb rides in your bag, the trophy in your hands, and the whole southern sea behind you.',
+      'Drake presents the WINNER\'S TROPHY — gold, salt-bright, and heavier than four badges put together. Your team is recorded in the Amber League\'s Hall of Fame.',
+      'Amber League — WINNER. The GS Orb rides in your bag, the trophy in your hands, and the whole southern sea behind you.',
     ], () => { checkArcCompletion(g); }, '');
   },
 
@@ -4818,7 +4818,7 @@ Object.assign(OverworldScene.prototype, {
   openCheatShop() {
     const g = this.game;
     // Badge stock is data-driven from BADGE_SETS (Stage O2): the
-    // Arden eight plus the Orange four, each set claimed under its
+    // Arden eight plus the Amber four, each set claimed under its
     // own prefix rule (cheatClaimBadge resolves the set from the id).
     // Stage F0: 'symbols' is excluded EXPLICITLY at this read site.
     // BADGE_SETS.symbols is the Frontier SLOT ORDER (facility ids, not
@@ -5206,7 +5206,7 @@ Object.assign(OverworldScene.prototype, {
   // ---------- objective (quest-driven HUD line) ----------
   sysObjective() {
     const g = this.game;
-    // Stage O2: while the Orange arc is current, its chain leads the
+    // Stage O2: while the Amber arc is current, its chain leads the
     // HUD objective (the badge stage counts n/4, as in the Quest Log).
     if (currentArcOf(g.state).id === 'orange') {
       // Stage O3: while the storm is live it leads the objective,
@@ -5216,8 +5216,8 @@ Object.assign(OverworldScene.prototype, {
       if (f.orange_2000_active && !f.orange_2000_storm_stilled) {
         const n = (f.orange_2000_moltres ? 1 : 0) + (f.orange_2000_zapdos ? 1 : 0) + (f.orange_2000_articuno ? 1 : 0);
         return n >= 3
-          ? '▶ The Storm over Shamouti — return to Shamouti Shrine: the guardian rises'
-          : '▶ The Storm over Shamouti — calm the three titans (' + n + '/3)';
+          ? '▶ The Storm over Sanctum — return to Sanctum Shrine: the guardian rises'
+          : '▶ The Storm over Sanctum — calm the three titans (' + n + '/3)';
       }
       const oq = ORANGE_QUESTS.find((qq) => qq.flag && !g.state.story.flags[qq.flag]);
       if (oq) return '▶ ' + oq.text + (oq.badgeCount ? ' (' + ((g.state.badges.orange || []).length) + '/4)' : '') + (oq.titanCount ? ' (' + ((f.orange_2000_moltres ? 1 : 0) + (f.orange_2000_zapdos ? 1 : 0) + (f.orange_2000_articuno ? 1 : 0)) + '/3 titans calmed)' : '');

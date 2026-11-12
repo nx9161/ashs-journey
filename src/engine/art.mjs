@@ -680,7 +680,7 @@ for (const k of W6_FLOOR_KINDS) TILE_ART[k] = 'tile-' + k;
 for (const k of [...W6_PROP_KINDS, ...W6_RUG_KINDS]) TILE_ART[k] = 'tile-prop-' + k;
 // Premium+ W7 (TX-6): dressing + gate/arch props draw tile-prop-<kind>.
 for (const k of W7_PROP_KINDS) TILE_ART[k] = 'tile-prop-' + k;
-// Arc 1.5 Stage O1: Orange kinds — walls/floors draw tile-<kind>,
+// Arc 1.5 Stage O1: Amber kinds — walls/floors draw tile-<kind>,
 // props draw tile-prop-<kind> (same convention as W6/W7).
 for (const k of [...O1_WALL_KINDS, ...O1_FLOOR_KINDS]) TILE_ART[k] = 'tile-' + k;
 for (const k of O1_PROP_KINDS) TILE_ART[k] = 'tile-prop-' + k;
@@ -945,7 +945,7 @@ export function buildArtTileCache(doc, seasonSwapFor, seasonKitSwapFor) {
     sootopolis: { roof: ['#e6e1d5', '#b0aa9c', '#f4f1ea'], log: '#a08b62', door: '#c2bbaa' }, // crater white stone
     pacifidlog: { roof: ['#9c7648', '#684a26', '#bd9868'], log: '#8d5f2b', door: '#a34d3f' }, // raft-timber float, coral door
     evergrande: { roof: ['#c3cfe6', '#969fb5', '#e6eaf2'], log: '#8a7a52', door: '#b8933f' }, // league marble + gold door
-    // ---- Wave C: Arden league + Orange Islands (keyed to each town's identity) ----
+    // ---- Wave C: Arden league + Amber Isles (keyed to each town's identity) ----
     indigo: { roof: ['#5a4a8a', '#372a55', '#7d6cab'], log: '#6a5636', door: '#4a3a75' }, // league plateau: royal indigo
     valencia: { roof: ['#c96f4a', '#8a4526', '#e09a70'], log: '#8a6844', door: '#a85638' }, // professor's island: coral terra
     mikan: { roof: ['#d98a2b', '#96590f', '#eda94f'], log: '#7d5a26', door: '#b06e1e' }, // citrus grove: mikan orange
@@ -1547,7 +1547,7 @@ const PROP_KINDS = new Set(['counter', 'healmachine', 'pcdesk', 'bed', 'table',
   ...W6_PROP_KINDS, ...W6_RUG_KINDS,
   // Premium+ W7 (TX-6): dressing + gate/arch props.
   ...W7_PROP_KINDS,
-  // Arc 1.5 Stage O1: Orange props composite over their ground too.
+  // Arc 1.5 Stage O1: Amber props composite over their ground too.
   ...O1_PROP_KINDS,
   // Arc 2 Stage J3a: Yamato props composite over their ground too.
   ...J3_PROP_KINDS,
@@ -1660,7 +1660,7 @@ const KIT_PROP_KINDS = new Set(['lamp', 'crates', 'signpost', 'postbox', 'stall'
   'fossildisplay', 'lifering', 'divingtank', 'coil', 'batterypack',
   'contestarch', 'ashshrub', 'forge', 'meteorstone', 'telescope',
   'starglobe', 'column', 'coral', 'bonsai',
-  // Wave C: Orange / frontier / Borea regional props (S3/S3B + the
+  // Wave C: Amber / frontier / Borea regional props (S3/S3B + the
   // generic prop kinds those towns use) — same kit-ground treatment.
   'honeytree', 'ironarch', 'contestdome', 'marshreed', 'solarpanel',
   'originstone', 'shrine', 'switchboard', 'gamestation', 'trophycase',
@@ -1784,7 +1784,7 @@ function kitTownLayers(cache, kind, x, y, kindAt, mapId, phase) {
   if (kind === 'door-house' || kind === 'door-wood-facade' || kind === 'door-brick') return [K.door].filter(Boolean);
   if (kind === 'door-wood-l') return [K.door].filter(Boolean);
   if (kind === 'door-wood-r') return [K.doorR || K.door].filter(Boolean);
-  // Generic shared buildings (Wave C): Orange / frontier / Borea
+  // Generic shared buildings (Wave C): Amber / frontier / Borea
   // towns whose houses and service blocks use the shared roof and
   // wall families instead of per-town tr-/tw- rows. Roof rows read
   // across their whole family (+ signs) and wear the kit roof, like
@@ -2054,9 +2054,9 @@ export function resolveTileLayers(cache, kind, x, y, kindAt, t, phase, mapId) {
   // the grassground ground treatment (sway / pulse / detail / blends /
   // atmo / shadow / doormat) PLUS the edge-dirt set against path — until
   // now tropgrass fell through to the bare default tile, so every
-  // tropgrass<->path border in the Orange Islands rendered untreated
+  // tropgrass<->path border in the Amber Isles rendered untreated
   // even though the pair is classified FULL. Tropgrass occurs only in
-  // the Orange Islands, so this branch is region-scoped in effect.
+  // the Amber Isles, so this branch is region-scoped in effect.
   const pushEdgeDirtVsPath = (layers) => {
     if (!cache.edgeDirt) return;
     // psand kinds are path material wearing its sand edge — the dirt

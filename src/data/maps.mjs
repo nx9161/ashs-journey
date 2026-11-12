@@ -348,7 +348,7 @@ export const WALKABLE = new Set(['.', ',', 'D', 'E', 'C', 'F', 'J', 'K', '1', '2
   // was swapped 1:1 from a walkable floor char, so floor stays floor.
   ...[98, 99, 100, 103, 104, 105, 109, 115, 118, 123, 124, 130, 131]
     .map((i) => String.fromCodePoint(0x1E00 + i)),
-  // Arc 1.5 Stage O1: the Orange floor kinds (sand / tropgrass /
+  // Arc 1.5 Stage O1: the Amber floor kinds (sand / tropgrass /
   // shrinefloor / stadiumfloor — O1_KIND_DEFS idx 6,7,8,10 at
   // U+1E00+152, tiles.mjs) are walkable ground, swapped from walkable
   // ground chars, so floor stays floor.
@@ -414,7 +414,7 @@ export const WALKABLE = new Set(['.', ',', 'D', 'E', 'C', 'F', 'J', 'K', '1', '2
     .map((i) => String.fromCodePoint(0x1E00 + i)),
   // Perfection Pass Stage 2 Gate 2 (G2): the beach transition chars
   // (block idx 533..562, tiles.mjs G2_KIND_DEFS) are walkable floor,
-  // swapped 1:1 from walkable tropgrass/path cells in the Orange
+  // swapped 1:1 from walkable tropgrass/path cells in the Amber
   // Islands, so floor stays floor.
   ...[533, 534, 535, 536, 537, 538, 539, 540, 541, 542, 543, 544, 545, 546, 547, 548,
     549, 550, 551, 552, 553, 554, 555, 556, 557, 558, 559, 560, 561, 562]

@@ -1093,7 +1093,7 @@ export const CREDITS_LINES = [
   'Every badge was a person who believed the road would test you fairly. Every rival was a mirror. Every goodbye made room for a hello.',
   'Thank you for playing ASH’S JOURNEY — an unofficial fan homage, made by fans, for fans.',
   'The road does not end at the Plateau. It just gets saltier.',
-  // ADR-027 (Stage F): the static 'TO BE CONTINUED — the Orange Islands
+  // ADR-027 (Stage F): the static 'TO BE CONTINUED — the Amber Isles
   // await.' card is RETIRED — the arc transition machine (src/game/
   // arcs.mjs) replaces it: runEnding now hands off to the ARC COMPLETE
   // summary card + the pinned "Go home" directive, so only one ending

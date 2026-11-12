@@ -52,7 +52,7 @@ export const JOHTO_QUESTS = [
   { id: 'q_johto_sprout', flag: 'sprout_tower_done', text: 'Climb Newleaf Tower and earn the Elder\'s blessing', hint: 'Iris City\'s tower sways like the Pokemon it honors. Falkner expects challengers to climb it first — the monks inside are the first half of his test.' },
   { id: 'q_johto_zephyr', flag: 'badge_zephyr', text: 'Win the Zephyr Badge from Falkner in Iris City', hint: 'Falkner keeps Iris\'s gym with birds raised in the tower\'s shadow. Flying types fear Electric, Ice and Rock moves.' },
   { id: 'q_johto_well', flag: 'johto_well_cleared', text: 'Clear Team Rocket out of the DOZELING Well', hint: 'Below Cinder Town, Rockets are cutting DOZELING tails to sell. Kurt went down to stop them and hurt his back — finish what he started.' },
-  { id: 'q_johto_gsball', flag: 'gsball_delivered', text: 'Deliver the GS Orb to Kurt in Cinder Town', hint: 'The ball no machine can open, carried all the way from Valencia. Kurt of Cinder works Capture Orbs by hand, the old way — his house stands in the east of town.' },
+  { id: 'q_johto_gsball', flag: 'gsball_delivered', text: 'Deliver the GS Orb to Kurt in Cinder Town', hint: 'The ball no machine can open, carried all the way from Marisol. Kurt of Cinder works Capture Orbs by hand, the old way — his house stands in the east of town.' },
   { id: 'q_johto_hive', flag: 'badge_hive', text: 'Win the Hive Badge from Bugsy in Cinder Town', hint: 'Bugsy\'s Bug types are proud and quick. Fire, Flying and Rock moves end arguments with them.' },
   { id: 'q_johto_plain', flag: 'badge_plain', text: 'Win the Plain Badge from Whitney in Signal City', hint: 'Whitney\'s Miltank is famous all over Yamato, and not for being gentle. Bring a team that can take a rolling hit — and give one back.' },
   { id: 'q_johto_burned', flag: 'beasts_awakened', text: 'See what woke in the Ashen Tower', hint: 'In Lantern, the tower that burned a hundred and fifty years ago stands open and ash-smelling. Its basement held three statues. Held.' },
@@ -393,7 +393,7 @@ export const JOHTO_TRAINERS = {
   // INFERNOX-vs-ABYSSAR echo the whole rivalry has pointed at.
   gary_johto: {
     id: 'gary_johto', name: 'Gary', title: 'Lastlight Conference Trainer', ai: 'smart',
-    intro: ['Well. Look who the bracket dragged in.', 'Arden champion, Orange winner — and still the second-most interesting trainer in this stadium. I have waited two regions for this draw, {player}. Do not make me regret the wait.'],
+    intro: ['Well. Look who the bracket dragged in.', 'Arden champion, Amber winner — and still the second-most interesting trainer in this stadium. I have waited two regions for this draw, {player}. Do not make me regret the wait.'],
     lose: ['...Ha. Hahaha. Yeah. Yeah, that is the one I wanted.', 'Two regions, and it still comes down to us at the end of the bracket. Take the win. Take it all the way to Harrison — and do not you dare lose to him after beating me.'],
     team: [
       { species: 'pidgeot', level: 186 },
@@ -960,7 +960,7 @@ export const JOHTO_NPC_PATCHES = [
 
 // ---------------------------------------------------------------------------
 // JOHTO_LEGENDARY_ARCS — Stage J5. The five Yamato legendary arcs,
-// folded into LEGENDARY_ARCS by merge.mjs exactly the way Orange's
+// folded into LEGENDARY_ARCS by merge.mjs exactly the way Amber's
 // arcs fold (one arcs table, one quest log). arc_hooh is NOT here:
 // it was designed inside LEGENDARY_ARCS (story-kanto.mjs) and J5
 // activated it in place there. arc_celebi IS here, and Object.assign

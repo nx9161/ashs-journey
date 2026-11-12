@@ -1380,7 +1380,7 @@ export const SPECIES2 = {
   // move). Canon facts (types/base stats/catch rate/growth/base XP)
   // verified against PokeAPI at build time (2026-10-29); learnset
   // restricted to this game's move table; flavor original. No wild
-  // placement in O1 (the Shamouti deep-shrine encounter is Stage O3)
+  // placement in O1 (the Sanctum deep-shrine encounter is Stage O3)
   // and no evolution entry. Cheat Terminal claimability follows the
   // guest-species precedent automatically (data-driven picker).
   lugia: {

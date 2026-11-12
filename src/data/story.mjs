@@ -1,13 +1,13 @@
 // story.mjs — Anime-chronology campaign spine (ADR-015).
 // Maps the owner's complete anime+movies watch order onto the game's chapter
-// structure. v1 "Act I: The Beginning" (ADR-006) = chapters 1-5 (Arden, Orange,
+// structure. v1 "Act I: The Beginning" (ADR-006) = chapters 1-5 (Arden, Amber,
 // Yamato). Everything beyond is scaffolded as honest locked markers — no fake
 // content, no playable claims (scope-honesty rule). Non-canon movies/minis
 // live on the BONUS shelf, never on the main spine.
 // All text is original phrasing; episode/movie titles are factual references.
 
 export const ACTS = [
-  { n: 1, title: 'Act I: The Beginning', scope: 'playable', note: 'Arden → Orange Islands → Yamato (v1)' },
+  { n: 1, title: 'Act I: The Beginning', scope: 'playable', note: 'Arden → Amber Isles → Yamato (v1)' },
   { n: 2, title: 'Act II: New Horizons', scope: 'announced', note: 'Maris → Trial Grounds → Borea (v2, announced ADR-006)' },
   { n: 3, title: 'Act III: Beyond', scope: 'planned', note: 'Unova → Kalos → Alola → Journeys → Horizons (planned, not built)' },
 ];
@@ -21,10 +21,10 @@ export const CHAPTERS = [
     movies: ['The First Movie — OMNIGEN Strikes Back'],
   },
   {
-    n: 2, id: 'orange-islands', act: 1, region: 'Orange Islands', scope: 'playable',
-    title: 'Adventures in the Orange Islands',
-    arc: 'Four Orange badges across the southern seas.',
-    anime: 'Season 2: Adventures in the Orange Islands (Ep 1–24, Special: Slowking\u2019s Day, Ep 25–36)',
+    n: 2, id: 'orange-islands', act: 1, region: 'Amber Isles', scope: 'playable',
+    title: 'Adventures in the Amber Isles',
+    arc: 'Four Amber badges across the southern seas.',
+    anime: 'Season 2: Adventures in the Amber Isles (Ep 1–24, Special: Slowking\u2019s Day, Ep 25–36)',
     movies: ['Pok\u00e9mon 2000 — The Power of One'],
   },
   {

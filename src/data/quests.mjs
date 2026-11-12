@@ -193,7 +193,7 @@ export const TALE_NPCS = [
   // gated by the Foundation embark leg (embark_hoenn, armed at
   // Homecoming #3) outbound, and unconditional once Maris has been
   // reached (NO-SOFT-LOCK LAW). He stands at (16,10) on Arcport's
-  // dock row, east of CAPT ORANGE (13,10) — each port its OWN captain
+  // dock row, east of CAPT AMBER (13,10) — each port its OWN captain
   // (the Yamato smell, J-register). The return captain stands on the
   // Fairhaven dock (maps7.mjs, CAPT MERIDIAN).
   { map: 'vermilion', x: 16, y: 10, name: 'CAPT MARIS', art: 'sailor', skin: '#d8a878', shirt: '#5a2a7a', pants: '#2a2a3a', hair: '#2a1a0a',
@@ -208,7 +208,7 @@ export const TALE_NPCS = [
   // consumed that homecoming while Borea was still sealed) outbound,
   // and unconditional once Borea has been reached (NO-SOFT-LOCK LAW).
   // He stands at (14,10) on Arcport's dock row, one tile east of
-  // CAPT ORANGE (13,10) and two west of CAPT MARIS (16,10), leaving
+  // CAPT AMBER (13,10) and two west of CAPT MARIS (16,10), leaving
   // (15,10) open as the passage between them: a plain ground tile —
   // no warp, door, sign or event tile is sealed from there, and
   // Arcport's walkable graph keeps its exact base shape (the main
