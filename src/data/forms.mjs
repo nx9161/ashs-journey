@@ -100,7 +100,7 @@ export const FORMS = [
   { id: 'mega-sceptile', speciesId: 254, name: 'Mega SYLGEKON', kind: 'mega', region: 'kalos', types: ['grass', 'dragon'], note: 'Mega form; it fires its own tail as a missile.' },
   { id: 'mega-blaziken', speciesId: 257, name: 'Mega PYRROOST', kind: 'mega', region: 'kalos', types: ['fire', 'fighting'], note: 'Mega form; flame ribbons stream from its wrists.' },
   { id: 'mega-swampert', speciesId: 260, name: 'Mega MARODON', kind: 'mega', region: 'kalos', types: ['water', 'ground'], note: 'Mega form; rain turns it into a wrecking ball.' },
-  { id: 'mega-gardevoir', speciesId: 282, name: 'Mega Gardevoir', kind: 'mega', region: 'kalos', types: ['psychic', 'fairy'], note: 'Mega form; a bridal gown woven from psychic force.' },
+  { id: 'mega-gardevoir', speciesId: 282, name: 'Mega AEGISFAE', kind: 'mega', region: 'kalos', types: ['psychic', 'fairy'], note: 'Mega form; a bridal gown woven from psychic force.' },
   { id: 'mega-sableye', speciesId: 302, name: 'Mega Sableye', kind: 'mega', region: 'kalos', types: ['dark', 'ghost'], note: 'Mega form; it hides behind one enormous ruby.' },
   { id: 'mega-mawile', speciesId: 303, name: 'Mega Mawile', kind: 'mega', region: 'kalos', types: ['steel', 'fairy'], note: 'Mega form; two jawed ponytails, twice the deception.' },
   { id: 'mega-aggron', speciesId: 306, name: 'Mega Aggron', kind: 'mega', region: 'kalos', types: ['steel'], note: 'Mega form; pure steel, pure refusal to move.' },
