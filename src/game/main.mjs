@@ -231,7 +231,7 @@ export class Game {
     // (the W3 gate, extended to the new sets).
     const dir = (opts && opts.dir) || (npc && npc._face) || 'down';
     const moving = !!(opts && opts.moving);
-    const cacheKey = [npc.art || '', npc.pc ? 'pc' : '', npc.name || '',
+    const cacheKey = [npc.art || '', npc.pc ? 'pc' : '', npc.name || '', npc._cloneIx || '',
       npc.skin || '', npc.shirt || '', npc.pants || '', npc.hair || '',
       dir, moving ? 'w' : 'i'].join('|');
     if (!this.npcCache[cacheKey]) this.npcCache[cacheKey] = npcFramesFor(doc, npc, dir, moving);

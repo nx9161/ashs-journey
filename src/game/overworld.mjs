@@ -259,9 +259,16 @@ export class OverworldScene {
     //             state resets on every load (deterministic re-entry).
     if (this.map && Array.isArray(this.map.npcs)) {
       const roster = this.map.npcs.length;
+      // Wave F: _cloneIx — occurrence index of this NPC's kind+palette
+      // on this map; the kit cast resolver rotates hair/skin nudges by
+      // it so same-map crowds never pixel-clone (see kitCastVariant).
+      const cloneSeen = new Map();
       const stamped = this.map.npcs.map((n, i) => {
         const c = { ...n };
         c._pk = id + ':' + i;
+        const cloneKey = (c.art || '') + '|' + [c.skin, c.shirt, c.pants, c.hair].join('/');
+        c._cloneIx = cloneSeen.get(cloneKey) || 0;
+        cloneSeen.set(cloneKey, c._cloneIx + 1);
         const slot = 600 / Math.max(1, roster);
         c._phaseMs = Math.floor(i * slot + hashTile(i, roster, 77) * slot * 0.6);
         c._face = (n.sight && n.sight.dir) || 'down';
