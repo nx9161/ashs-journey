@@ -62,12 +62,12 @@ audio subsystem (B2-R3) 25652 B in audio/ + src/engine/audio.mjs.
 | src/data/merge.mjs | 2347 | 41 | content pack (NARC analogue — B2-R2) |
 | src/data/moves.mjs | 3419 | 28 | content pack (NARC analogue — B2-R2) |
 | src/data/moves2.mjs | 21560 | 141 | content pack (NARC analogue — B2-R2) |
-| src/data/name-registry.mjs | 10389 | 165 | content pack (NARC analogue — B2-R2) |
+| src/data/name-registry.mjs | 12045 | 187 | content pack (NARC analogue — B2-R2) |
 | src/data/narrative-db.mjs | 63158 | 379 | content pack (NARC analogue — B2-R2) |
 | src/data/quests.mjs | 24860 | 395 | content pack (NARC analogue — B2-R2) |
 | src/data/rivals.mjs | 1386 | 30 | content pack (NARC analogue — B2-R2) |
-| src/data/species.mjs | 7535 | 148 | content pack (NARC analogue — B2-R2) |
-| src/data/species2.mjs | 91074 | 1400 | content pack (NARC analogue — B2-R2) |
+| src/data/species.mjs | 7536 | 148 | content pack (NARC analogue — B2-R2) |
+| src/data/species2.mjs | 91072 | 1400 | content pack (NARC analogue — B2-R2) |
 | src/data/species3.mjs | 57148 | 859 | content pack (NARC analogue — B2-R2) |
 | src/data/species4.mjs | 83076 | 1263 | content pack (NARC analogue — B2-R2) |
 | src/data/species5.mjs | 69317 | 1057 | content pack (NARC analogue — B2-R2) |

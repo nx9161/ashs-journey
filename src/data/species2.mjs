@@ -414,7 +414,7 @@ export const SPECIES2 = {
     tm: [1, 5, 6, 8, 9, 10, 11, 12, 13, 14, 15, 17, 18, 19, 28, 31, 32, 34, 44, 50, 103, 104],
   },
   primeape: {
-    id: 'primeape', name: 'Primeape', dexNo: 57, types: ['fighting'],
+    id: 'primeape', name: 'WRATHAPE', dexNo: 57, types: ['fighting'],
     base: { hp: 65, atk: 105, def: 60, spa: 60, spd: 70, spe: 95 },
     catchRate: 75, growth: 'mediumfast', baseXp: 159, body: 'biped', spriteSeed: 5701,
     eggGroups: ['ground'], hatchCounter: 20,
@@ -423,7 +423,7 @@ export const SPECIES2 = {
     tm: [1, 5, 6, 8, 9, 10, 16, 17, 18, 19, 20, 24, 25, 28, 31, 32, 34, 39, 44, 48, 50, 104],
   },
   growlithe: {
-    id: 'growlithe', name: 'Growlithe', dexNo: 58, types: ['fire'],
+    id: 'growlithe', name: 'CINDERPUP', dexNo: 58, types: ['fire'],
     base: { hp: 55, atk: 70, def: 45, spa: 70, spd: 50, spe: 60 },
     catchRate: 190, growth: 'mediumfast', baseXp: 70, body: 'quad', spriteSeed: 5801,
     eggGroups: ['ground'], hatchCounter: 20,
@@ -432,7 +432,7 @@ export const SPECIES2 = {
     evo: { to: 'arcanine', method: 'stone', stone: 'firestone' }, tm: [6, 8, 9, 10, 20, 28, 31, 32, 33, 34, 38, 39, 44, 50],
   },
   arcanine: {
-    id: 'arcanine', name: 'Arcanine', dexNo: 59, types: ['fire'],
+    id: 'arcanine', name: 'EMBERMANE', dexNo: 59, types: ['fire'],
     base: { hp: 90, atk: 110, def: 80, spa: 100, spd: 80, spe: 95 },
     catchRate: 75, growth: 'mediumfast', baseXp: 194, body: 'quad', spriteSeed: 5901,
     eggGroups: ['ground'], hatchCounter: 20,
@@ -441,7 +441,7 @@ export const SPECIES2 = {
     tm: [6, 8, 9, 10, 15, 20, 28, 30, 31, 32, 33, 34, 38, 39, 44, 50, 104],
   },
   poliwag: {
-    id: 'poliwag', name: 'Poliwag', dexNo: 60, types: ['water'],
+    id: 'poliwag', name: 'TADLET', dexNo: 60, types: ['water'],
     base: { hp: 40, atk: 50, def: 40, spa: 40, spd: 40, spe: 90 },
     catchRate: 255, growth: 'mediumslow', baseXp: 60, body: 'fish', spriteSeed: 6001,
     eggGroups: ['water1'], hatchCounter: 20,
@@ -450,7 +450,7 @@ export const SPECIES2 = {
     evo: { to: 'poliwhirl', method: 'level', level: 25 }, tm: [6, 9, 10, 11, 12, 13, 14, 31, 32, 34, 44, 46, 50, 103],
   },
   poliwhirl: {
-    id: 'poliwhirl', name: 'Poliwhirl', dexNo: 61, types: ['water'],
+    id: 'poliwhirl', name: 'WHIRLBOG', dexNo: 61, types: ['water'],
     base: { hp: 65, atk: 65, def: 65, spa: 50, spd: 50, spe: 90 },
     catchRate: 120, growth: 'mediumslow', baseXp: 135, body: 'biped', spriteSeed: 6101,
     eggGroups: ['water1'], hatchCounter: 20,
@@ -463,7 +463,7 @@ export const SPECIES2 = {
     ], tm: [1, 6, 8, 9, 10, 11, 12, 13, 14, 17, 18, 19, 26, 27, 28, 31, 32, 34, 44, 46, 50, 103, 104],
   },
   poliwrath: {
-    id: 'poliwrath', name: 'Poliwrath', dexNo: 62, types: ['water', 'fighting'],
+    id: 'poliwrath', name: 'BRAWLTOAD', dexNo: 62, types: ['water', 'fighting'],
     base: { hp: 90, atk: 95, def: 95, spa: 70, spd: 90, spe: 70 },
     catchRate: 45, growth: 'mediumslow', baseXp: 255, body: 'biped', spriteSeed: 6201,
     eggGroups: ['water1'], hatchCounter: 20,
@@ -472,7 +472,7 @@ export const SPECIES2 = {
     tm: [1, 5, 6, 8, 9, 10, 11, 12, 13, 14, 15, 17, 18, 19, 26, 27, 28, 31, 32, 34, 44, 46, 50, 103, 104],
   },
   abra: {
-    id: 'abra', name: 'Abra', dexNo: 63, types: ['psychic'],
+    id: 'abra', name: 'NAPSEER', dexNo: 63, types: ['psychic'],
     base: { hp: 25, atk: 20, def: 15, spa: 105, spd: 55, spe: 90 },
     catchRate: 200, growth: 'mediumslow', baseXp: 62, body: 'biped', spriteSeed: 6301,
     eggGroups: ['humanshape'], hatchCounter: 20,
@@ -481,7 +481,7 @@ export const SPECIES2 = {
     evo: { to: 'kadabra', method: 'level', level: 16 }, tm: [1, 5, 6, 9, 10, 17, 18, 19, 29, 30, 31, 32, 33, 34, 40, 42, 44, 45, 46, 49, 50, 105],
   },
   kadabra: {
-    id: 'kadabra', name: 'Kadabra', dexNo: 64, types: ['psychic'],
+    id: 'kadabra', name: 'ORAKIN', dexNo: 64, types: ['psychic'],
     base: { hp: 40, atk: 35, def: 30, spa: 120, spd: 70, spe: 105 },
     catchRate: 100, growth: 'mediumslow', baseXp: 140, body: 'biped', spriteSeed: 6401,
     eggGroups: ['humanshape'], hatchCounter: 20,
@@ -490,7 +490,7 @@ export const SPECIES2 = {
     evo: { to: 'alakazam', method: 'trade' }, tm: [1, 5, 6, 9, 10, 17, 18, 19, 28, 29, 30, 31, 32, 33, 34, 35, 40, 42, 44, 45, 46, 49, 50, 105],
   },
   alakazam: {
-    id: 'alakazam', name: 'Alakazam', dexNo: 65, types: ['psychic'],
+    id: 'alakazam', name: 'MENTARCH', dexNo: 65, types: ['psychic'],
     base: { hp: 55, atk: 50, def: 45, spa: 135, spd: 95, spe: 120 },
     catchRate: 50, growth: 'mediumslow', baseXp: 225, body: 'biped', spriteSeed: 6501,
     eggGroups: ['humanshape'], hatchCounter: 20,
@@ -499,7 +499,7 @@ export const SPECIES2 = {
     tm: [1, 5, 6, 9, 10, 15, 17, 18, 19, 28, 29, 30, 31, 32, 33, 34, 35, 40, 42, 44, 45, 46, 49, 50, 105],
   },
   machop: {
-    id: 'machop', name: 'Machop', dexNo: 66, types: ['fighting'],
+    id: 'machop', name: 'MUSCLING', dexNo: 66, types: ['fighting'],
     base: { hp: 70, atk: 80, def: 50, spa: 35, spd: 35, spe: 35 },
     catchRate: 180, growth: 'mediumslow', baseXp: 61, body: 'biped', spriteSeed: 6601,
     eggGroups: ['humanshape'], hatchCounter: 20,
@@ -508,7 +508,7 @@ export const SPECIES2 = {
     evo: { to: 'machoke', method: 'level', level: 28 }, tm: [1, 5, 6, 8, 9, 10, 17, 18, 19, 20, 26, 27, 28, 31, 32, 34, 38, 44, 48, 50, 104],
   },
   machoke: {
-    id: 'machoke', name: 'Machoke', dexNo: 67, types: ['fighting'],
+    id: 'machoke', name: 'HEFTOR', dexNo: 67, types: ['fighting'],
     base: { hp: 80, atk: 100, def: 70, spa: 50, spd: 60, spe: 45 },
     catchRate: 90, growth: 'mediumslow', baseXp: 146, body: 'biped', spriteSeed: 6701,
     eggGroups: ['humanshape'], hatchCounter: 20,
@@ -517,7 +517,7 @@ export const SPECIES2 = {
     evo: { to: 'machamp', method: 'trade' }, tm: [1, 5, 6, 8, 9, 10, 17, 18, 19, 20, 26, 27, 28, 31, 32, 34, 38, 44, 48, 50, 104],
   },
   machamp: {
-    id: 'machamp', name: 'Machamp', dexNo: 68, types: ['fighting'],
+    id: 'machamp', name: 'QUADRAX', dexNo: 68, types: ['fighting'],
     base: { hp: 90, atk: 130, def: 80, spa: 65, spd: 85, spe: 55 },
     catchRate: 45, growth: 'mediumslow', baseXp: 253, body: 'biped', spriteSeed: 6801,
     eggGroups: ['humanshape'], hatchCounter: 20,
@@ -553,7 +553,7 @@ export const SPECIES2 = {
     tm: [3, 6, 9, 10, 15, 20, 21, 22, 31, 32, 33, 34, 44, 50, 101],
   },
   tentacool: {
-    id: 'tentacool', name: 'Tentacool', dexNo: 72, types: ['water', 'poison'],
+    id: 'tentacool', name: 'STINGEL', dexNo: 72, types: ['water', 'poison'],
     base: { hp: 40, atk: 40, def: 35, spa: 50, spd: 100, spe: 70 },
     catchRate: 190, growth: 'mediumfast', baseXp: 67, body: 'blob', spriteSeed: 7201,
     eggGroups: ['water3'], hatchCounter: 20,
@@ -562,7 +562,7 @@ export const SPECIES2 = {
     evo: { to: 'tentacruel', method: 'level', level: 30 }, tm: [3, 6, 9, 10, 11, 12, 13, 14, 20, 31, 32, 34, 44, 50, 101, 103],
   },
   tentacruel: {
-    id: 'tentacruel', name: 'Tentacruel', dexNo: 73, types: ['water', 'poison'],
+    id: 'tentacruel', name: 'ABYSSGEL', dexNo: 73, types: ['water', 'poison'],
     base: { hp: 80, atk: 70, def: 65, spa: 80, spd: 120, spe: 100 },
     catchRate: 60, growth: 'mediumfast', baseXp: 180, body: 'blob', spriteSeed: 7301,
     eggGroups: ['water3'], hatchCounter: 20,

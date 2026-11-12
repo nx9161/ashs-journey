@@ -112,7 +112,7 @@ export const SPECIES = {
     flavor: 'Ears always up. Hears a trainer\u2019s step long before seeing one.',
   },
   mankey: {
-    id: 'mankey', name: 'Mankey', dexNo: 56, types: ['fighting'],
+    id: 'mankey', name: 'FUSSAPE', dexNo: 56, types: ['fighting'],
     base: { hp: 40, atk: 80, def: 35, spa: 35, spd: 45, spe: 70 },
     catchRate: 190, growth: 'mediumfast', baseXp: 61, body: 'biped', spriteSeed: 5601,
     eggGroups: ['ground'], hatchCounter: 20,

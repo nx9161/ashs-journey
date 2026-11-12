@@ -107,6 +107,22 @@ export const NAME_REGISTRY = {
     persian:   { name: 'MAJESTOM', status: 'named', wave: 'G-KT3', design: 'majestom' },
     psyduck:   { name: 'DIZDUCK', status: 'named', wave: 'G-KT3', design: 'dizduck' },
     golduck:   { name: 'TORRIDUCK', status: 'named', wave: 'G-KT3', design: 'torriduck' },
+    // -- Wave G Kanto Completion, Tranche 4 (coordinator-named) --
+    mankey:    { name: 'FUSSAPE', status: 'named', wave: 'G-KT4', design: 'fussape' },
+    primeape:  { name: 'WRATHAPE', status: 'named', wave: 'G-KT4', design: 'wrathape' },
+    growlithe: { name: 'CINDERPUP', status: 'named', wave: 'G-KT4', design: 'cinderpup' },
+    arcanine:  { name: 'EMBERMANE', status: 'named', wave: 'G-KT4', design: 'embermane' },
+    poliwag:   { name: 'TADLET', status: 'named', wave: 'G-KT4', design: 'tadlet' },
+    poliwhirl: { name: 'WHIRLBOG', status: 'named', wave: 'G-KT4', design: 'whirlbog' },
+    poliwrath: { name: 'BRAWLTOAD', status: 'named', wave: 'G-KT4', design: 'brawltoad' },
+    abra:      { name: 'NAPSEER', status: 'named', wave: 'G-KT4', design: 'napseer' },
+    kadabra:   { name: 'ORAKIN', status: 'named', wave: 'G-KT4', design: 'orakin' },
+    alakazam:  { name: 'MENTARCH', status: 'named', wave: 'G-KT4', design: 'mentarch' },
+    machop:    { name: 'MUSCLING', status: 'named', wave: 'G-KT4', design: 'muscling' },
+    machoke:   { name: 'HEFTOR', status: 'named', wave: 'G-KT4', design: 'heftor' },
+    machamp:   { name: 'QUADRAX', status: 'named', wave: 'G-KT4', design: 'quadrax' },
+    tentacool: { name: 'STINGEL', status: 'named', wave: 'G-KT4', design: 'stingel' },
+    tentacruel: { name: 'ABYSSGEL', status: 'named', wave: 'G-KT4', design: 'abyssgel' },
   },
 
   // Evolution lines fully renamed so far (slot ids, in order).
@@ -133,6 +149,12 @@ export const NAME_REGISTRY = {
     moling: ['diglett', 'dugtrio'],
     tinkletom: ['meowth', 'persian'],
     dizduck: ['psyduck', 'golduck'],
+    fussape: ['mankey', 'primeape'],
+    cinderpup: ['growlithe', 'arcanine'],
+    tadlet: ['poliwag', 'poliwhirl', 'poliwrath'],
+    napseer: ['abra', 'kadabra', 'alakazam'],
+    muscling: ['machop', 'machoke', 'machamp'],
+    stingel: ['tentacool', 'tentacruel'],
   },
 
   // -- Places (registry extension, owner order 2026-11-12 00:54) --

@@ -742,7 +742,7 @@
       "frames": [
         "bob"
       ],
-      "palette": 15,
+      "palette": 16,
       "seed": null,
       "derived_from": "abra-front",
       "mirror_of": null
@@ -807,7 +807,7 @@
       "frames": [
         "bob"
       ],
-      "palette": 18,
+      "palette": 16,
       "seed": null,
       "derived_from": "alakazam-front",
       "mirror_of": null
@@ -885,7 +885,7 @@
       "frames": [
         "bob"
       ],
-      "palette": 13,
+      "palette": 16,
       "seed": null,
       "derived_from": "arcanine-front",
       "mirror_of": null
@@ -2952,7 +2952,7 @@
       "frames": [
         "bob"
       ],
-      "palette": 13,
+      "palette": 16,
       "seed": null,
       "derived_from": "growlithe-front",
       "mirror_of": null
@@ -3394,7 +3394,7 @@
       "frames": [
         "bob"
       ],
-      "palette": 19,
+      "palette": 13,
       "seed": null,
       "derived_from": "kadabra-front",
       "mirror_of": null
@@ -3901,7 +3901,7 @@
       "frames": [
         "bob"
       ],
-      "palette": 15,
+      "palette": 16,
       "seed": null,
       "derived_from": "machop-front",
       "mirror_of": null
@@ -4070,7 +4070,7 @@
       "frames": [
         "bob"
       ],
-      "palette": 13,
+      "palette": 16,
       "seed": null,
       "derived_from": "mankey-front",
       "mirror_of": null
@@ -5019,7 +5019,7 @@
       "frames": [
         "bob"
       ],
-      "palette": 13,
+      "palette": 16,
       "seed": null,
       "derived_from": "poliwag-front",
       "mirror_of": null
@@ -5032,7 +5032,7 @@
       "frames": [
         "bob"
       ],
-      "palette": 13,
+      "palette": 15,
       "seed": null,
       "derived_from": "poliwhirl-front",
       "mirror_of": null
@@ -5045,7 +5045,7 @@
       "frames": [
         "bob"
       ],
-      "palette": 13,
+      "palette": 16,
       "seed": null,
       "derived_from": "poliwrath-front",
       "mirror_of": null
@@ -5123,7 +5123,7 @@
       "frames": [
         "bob"
       ],
-      "palette": 13,
+      "palette": 16,
       "seed": null,
       "derived_from": "primeape-front",
       "mirror_of": null
@@ -6592,7 +6592,7 @@
       "frames": [
         "bob"
       ],
-      "palette": 12,
+      "palette": 16,
       "seed": null,
       "derived_from": "tentacool-front",
       "mirror_of": null
@@ -6605,7 +6605,7 @@
       "frames": [
         "bob"
       ],
-      "palette": 13,
+      "palette": 16,
       "seed": null,
       "derived_from": "tentacruel-front",
       "mirror_of": null
@@ -7325,64 +7325,8 @@
       "derived_from": "zubat-front",
       "mirror_of": null
     },
-    "abra-back-accent": {
-      "x": 331,
-      "y": 1189,
-      "w": 64,
-      "h": 64,
-      "frames": [
-        "idle"
-      ],
-      "palette": 12,
-      "seed": null,
-      "derived_from": null,
-      "mirror_of": null,
-      "delta_of": "abra-back"
-    },
-    "abra-front-accent": {
-      "x": 397,
-      "y": 1189,
-      "w": 64,
-      "h": 64,
-      "frames": [
-        "idle"
-      ],
-      "palette": 15,
-      "seed": null,
-      "derived_from": null,
-      "mirror_of": null,
-      "delta_of": "abra-front"
-    },
-    "arcanine-back-accent": {
-      "x": 463,
-      "y": 1189,
-      "w": 64,
-      "h": 64,
-      "frames": [
-        "idle"
-      ],
-      "palette": 13,
-      "seed": null,
-      "derived_from": null,
-      "mirror_of": null,
-      "delta_of": "arcanine-back"
-    },
-    "arcanine-front-accent": {
-      "x": 529,
-      "y": 1189,
-      "w": 64,
-      "h": 64,
-      "frames": [
-        "idle"
-      ],
-      "palette": 13,
-      "seed": null,
-      "derived_from": null,
-      "mirror_of": null,
-      "delta_of": "arcanine-front"
-    },
     "arceus-back-accent": {
-      "x": 595,
+      "x": 331,
       "y": 1189,
       "w": 64,
       "h": 64,
@@ -7396,7 +7340,7 @@
       "delta_of": "arceus-back"
     },
     "arceus-front-accent": {
-      "x": 661,
+      "x": 397,
       "y": 1189,
       "w": 64,
       "h": 64,
@@ -7410,7 +7354,7 @@
       "delta_of": "arceus-front"
     },
     "articuno-back-accent": {
-      "x": 727,
+      "x": 463,
       "y": 1189,
       "w": 64,
       "h": 64,
@@ -7424,7 +7368,7 @@
       "delta_of": "articuno-back"
     },
     "articuno-front-accent": {
-      "x": 793,
+      "x": 529,
       "y": 1189,
       "w": 64,
       "h": 64,
@@ -7438,7 +7382,7 @@
       "delta_of": "articuno-front"
     },
     "bayleef-back-accent": {
-      "x": 859,
+      "x": 595,
       "y": 1189,
       "w": 64,
       "h": 64,
@@ -7452,7 +7396,7 @@
       "delta_of": "bayleef-back"
     },
     "bayleef-front-accent": {
-      "x": 925,
+      "x": 661,
       "y": 1189,
       "w": 64,
       "h": 64,
@@ -7466,7 +7410,7 @@
       "delta_of": "bayleef-front"
     },
     "blaziken-back-accent": {
-      "x": 991,
+      "x": 727,
       "y": 1189,
       "w": 64,
       "h": 64,
@@ -7480,7 +7424,7 @@
       "delta_of": "blaziken-back"
     },
     "blaziken-front-accent": {
-      "x": 1057,
+      "x": 793,
       "y": 1189,
       "w": 64,
       "h": 64,
@@ -7494,7 +7438,7 @@
       "delta_of": "blaziken-front"
     },
     "celebi-back-accent": {
-      "x": 1123,
+      "x": 859,
       "y": 1189,
       "w": 64,
       "h": 64,
@@ -7508,7 +7452,7 @@
       "delta_of": "celebi-back"
     },
     "celebi-front-accent": {
-      "x": 1189,
+      "x": 925,
       "y": 1189,
       "w": 64,
       "h": 64,
@@ -7522,7 +7466,7 @@
       "delta_of": "celebi-front"
     },
     "chikorita-back-accent": {
-      "x": 1255,
+      "x": 991,
       "y": 1189,
       "w": 64,
       "h": 64,
@@ -7536,7 +7480,7 @@
       "delta_of": "chikorita-back"
     },
     "chikorita-front-accent": {
-      "x": 1321,
+      "x": 1057,
       "y": 1189,
       "w": 64,
       "h": 64,
@@ -7550,7 +7494,7 @@
       "delta_of": "chikorita-front"
     },
     "chimchar-back-accent": {
-      "x": 1387,
+      "x": 1123,
       "y": 1189,
       "w": 64,
       "h": 64,
@@ -7564,7 +7508,7 @@
       "delta_of": "chimchar-back"
     },
     "chimchar-front-accent": {
-      "x": 1453,
+      "x": 1189,
       "y": 1189,
       "w": 64,
       "h": 64,
@@ -7578,7 +7522,7 @@
       "delta_of": "chimchar-front"
     },
     "combusken-back-accent": {
-      "x": 1519,
+      "x": 1255,
       "y": 1189,
       "w": 64,
       "h": 64,
@@ -7592,7 +7536,7 @@
       "delta_of": "combusken-back"
     },
     "combusken-front-accent": {
-      "x": 1585,
+      "x": 1321,
       "y": 1189,
       "w": 64,
       "h": 64,
@@ -7606,7 +7550,7 @@
       "delta_of": "combusken-front"
     },
     "cresselia-back-accent": {
-      "x": 1651,
+      "x": 1387,
       "y": 1189,
       "w": 64,
       "h": 64,
@@ -7620,7 +7564,7 @@
       "delta_of": "cresselia-back"
     },
     "cresselia-front-accent": {
-      "x": 1717,
+      "x": 1453,
       "y": 1189,
       "w": 64,
       "h": 64,
@@ -7634,7 +7578,7 @@
       "delta_of": "cresselia-front"
     },
     "croconaw-back-accent": {
-      "x": 1783,
+      "x": 1519,
       "y": 1189,
       "w": 64,
       "h": 64,
@@ -7648,7 +7592,7 @@
       "delta_of": "croconaw-back"
     },
     "croconaw-front-accent": {
-      "x": 1849,
+      "x": 1585,
       "y": 1189,
       "w": 64,
       "h": 64,
@@ -7662,7 +7606,7 @@
       "delta_of": "croconaw-front"
     },
     "cyndaquil-back-accent": {
-      "x": 1915,
+      "x": 1651,
       "y": 1189,
       "w": 64,
       "h": 64,
@@ -7676,7 +7620,7 @@
       "delta_of": "cyndaquil-back"
     },
     "cyndaquil-front-accent": {
-      "x": 1981,
+      "x": 1717,
       "y": 1189,
       "w": 64,
       "h": 64,
@@ -7690,8 +7634,8 @@
       "delta_of": "cyndaquil-front"
     },
     "darkrai-back-accent": {
-      "x": 1,
-      "y": 1255,
+      "x": 1783,
+      "y": 1189,
       "w": 64,
       "h": 64,
       "frames": [
@@ -7704,8 +7648,8 @@
       "delta_of": "darkrai-back"
     },
     "darkrai-front-accent": {
-      "x": 67,
-      "y": 1255,
+      "x": 1849,
+      "y": 1189,
       "w": 64,
       "h": 64,
       "frames": [
@@ -7718,8 +7662,8 @@
       "delta_of": "darkrai-front"
     },
     "deoxys-back-accent": {
-      "x": 133,
-      "y": 1255,
+      "x": 1915,
+      "y": 1189,
       "w": 64,
       "h": 64,
       "frames": [
@@ -7732,8 +7676,8 @@
       "delta_of": "deoxys-back"
     },
     "deoxys-front-accent": {
-      "x": 199,
-      "y": 1255,
+      "x": 1981,
+      "y": 1189,
       "w": 64,
       "h": 64,
       "frames": [
@@ -7746,7 +7690,7 @@
       "delta_of": "deoxys-front"
     },
     "deoxysattack-back-accent": {
-      "x": 265,
+      "x": 1,
       "y": 1255,
       "w": 64,
       "h": 64,
@@ -7760,7 +7704,7 @@
       "delta_of": "deoxysattack-back"
     },
     "deoxysattack-front-accent": {
-      "x": 331,
+      "x": 67,
       "y": 1255,
       "w": 64,
       "h": 64,
@@ -7774,7 +7718,7 @@
       "delta_of": "deoxysattack-front"
     },
     "deoxysdefense-back-accent": {
-      "x": 397,
+      "x": 133,
       "y": 1255,
       "w": 64,
       "h": 64,
@@ -7788,7 +7732,7 @@
       "delta_of": "deoxysdefense-back"
     },
     "deoxysdefense-front-accent": {
-      "x": 463,
+      "x": 199,
       "y": 1255,
       "w": 64,
       "h": 64,
@@ -7802,7 +7746,7 @@
       "delta_of": "deoxysdefense-front"
     },
     "deoxysspeed-back-accent": {
-      "x": 529,
+      "x": 265,
       "y": 1255,
       "w": 64,
       "h": 64,
@@ -7816,7 +7760,7 @@
       "delta_of": "deoxysspeed-back"
     },
     "deoxysspeed-front-accent": {
-      "x": 595,
+      "x": 331,
       "y": 1255,
       "w": 64,
       "h": 64,
@@ -7830,7 +7774,7 @@
       "delta_of": "deoxysspeed-front"
     },
     "dialga-back-accent": {
-      "x": 661,
+      "x": 397,
       "y": 1255,
       "w": 64,
       "h": 64,
@@ -7844,7 +7788,7 @@
       "delta_of": "dialga-back"
     },
     "dialga-front-accent": {
-      "x": 727,
+      "x": 463,
       "y": 1255,
       "w": 64,
       "h": 64,
@@ -7858,7 +7802,7 @@
       "delta_of": "dialga-front"
     },
     "dragonite-back-accent": {
-      "x": 793,
+      "x": 529,
       "y": 1255,
       "w": 64,
       "h": 64,
@@ -7872,7 +7816,7 @@
       "delta_of": "dragonite-back"
     },
     "dragonite-front-accent": {
-      "x": 859,
+      "x": 595,
       "y": 1255,
       "w": 64,
       "h": 64,
@@ -7886,7 +7830,7 @@
       "delta_of": "dragonite-front"
     },
     "dratini-back-accent": {
-      "x": 925,
+      "x": 661,
       "y": 1255,
       "w": 64,
       "h": 64,
@@ -7900,7 +7844,7 @@
       "delta_of": "dratini-back"
     },
     "dratini-front-accent": {
-      "x": 991,
+      "x": 727,
       "y": 1255,
       "w": 64,
       "h": 64,
@@ -7914,7 +7858,7 @@
       "delta_of": "dratini-front"
     },
     "eevee-back-accent": {
-      "x": 1057,
+      "x": 793,
       "y": 1255,
       "w": 64,
       "h": 64,
@@ -7928,7 +7872,7 @@
       "delta_of": "eevee-back"
     },
     "eevee-front-accent": {
-      "x": 1123,
+      "x": 859,
       "y": 1255,
       "w": 64,
       "h": 64,
@@ -7942,7 +7886,7 @@
       "delta_of": "eevee-front"
     },
     "empoleon-back-accent": {
-      "x": 1189,
+      "x": 925,
       "y": 1255,
       "w": 64,
       "h": 64,
@@ -7956,7 +7900,7 @@
       "delta_of": "empoleon-back"
     },
     "empoleon-front-accent": {
-      "x": 1255,
+      "x": 991,
       "y": 1255,
       "w": 64,
       "h": 64,
@@ -7970,7 +7914,7 @@
       "delta_of": "empoleon-front"
     },
     "entei-back-accent": {
-      "x": 1321,
+      "x": 1057,
       "y": 1255,
       "w": 64,
       "h": 64,
@@ -7984,7 +7928,7 @@
       "delta_of": "entei-back"
     },
     "entei-front-accent": {
-      "x": 1387,
+      "x": 1123,
       "y": 1255,
       "w": 64,
       "h": 64,
@@ -7998,7 +7942,7 @@
       "delta_of": "entei-front"
     },
     "feraligatr-back-accent": {
-      "x": 1453,
+      "x": 1189,
       "y": 1255,
       "w": 64,
       "h": 64,
@@ -8012,7 +7956,7 @@
       "delta_of": "feraligatr-back"
     },
     "feraligatr-front-accent": {
-      "x": 1519,
+      "x": 1255,
       "y": 1255,
       "w": 64,
       "h": 64,
@@ -8026,7 +7970,7 @@
       "delta_of": "feraligatr-front"
     },
     "flareon-back-accent": {
-      "x": 1585,
+      "x": 1321,
       "y": 1255,
       "w": 64,
       "h": 64,
@@ -8040,7 +7984,7 @@
       "delta_of": "flareon-back"
     },
     "flareon-front-accent": {
-      "x": 1651,
+      "x": 1387,
       "y": 1255,
       "w": 64,
       "h": 64,
@@ -8054,7 +7998,7 @@
       "delta_of": "flareon-front"
     },
     "gastly-back-accent": {
-      "x": 1717,
+      "x": 1453,
       "y": 1255,
       "w": 64,
       "h": 64,
@@ -8068,7 +8012,7 @@
       "delta_of": "gastly-back"
     },
     "gastly-front-accent": {
-      "x": 1783,
+      "x": 1519,
       "y": 1255,
       "w": 64,
       "h": 64,
@@ -8082,7 +8026,7 @@
       "delta_of": "gastly-front"
     },
     "gengar-back-accent": {
-      "x": 1849,
+      "x": 1585,
       "y": 1255,
       "w": 64,
       "h": 64,
@@ -8096,7 +8040,7 @@
       "delta_of": "gengar-back"
     },
     "gengar-front-accent": {
-      "x": 1915,
+      "x": 1651,
       "y": 1255,
       "w": 64,
       "h": 64,
@@ -8110,7 +8054,7 @@
       "delta_of": "gengar-front"
     },
     "geodude-back-accent": {
-      "x": 1981,
+      "x": 1717,
       "y": 1255,
       "w": 64,
       "h": 64,
@@ -8124,8 +8068,8 @@
       "delta_of": "geodude-back"
     },
     "geodude-front-accent": {
-      "x": 1,
-      "y": 1321,
+      "x": 1783,
+      "y": 1255,
       "w": 64,
       "h": 64,
       "frames": [
@@ -8138,8 +8082,8 @@
       "delta_of": "geodude-front"
     },
     "giratina-back-accent": {
-      "x": 67,
-      "y": 1321,
+      "x": 1849,
+      "y": 1255,
       "w": 64,
       "h": 64,
       "frames": [
@@ -8152,8 +8096,8 @@
       "delta_of": "giratina-back"
     },
     "giratina-front-accent": {
-      "x": 133,
-      "y": 1321,
+      "x": 1915,
+      "y": 1255,
       "w": 64,
       "h": 64,
       "frames": [
@@ -8166,8 +8110,8 @@
       "delta_of": "giratina-front"
     },
     "giratinaorigin-back-accent": {
-      "x": 199,
-      "y": 1321,
+      "x": 1981,
+      "y": 1255,
       "w": 64,
       "h": 64,
       "frames": [
@@ -8180,7 +8124,7 @@
       "delta_of": "giratinaorigin-back"
     },
     "giratinaorigin-front-accent": {
-      "x": 265,
+      "x": 1,
       "y": 1321,
       "w": 64,
       "h": 64,
@@ -8194,7 +8138,7 @@
       "delta_of": "giratinaorigin-front"
     },
     "grotle-back-accent": {
-      "x": 331,
+      "x": 67,
       "y": 1321,
       "w": 64,
       "h": 64,
@@ -8208,7 +8152,7 @@
       "delta_of": "grotle-back"
     },
     "grotle-front-accent": {
-      "x": 397,
+      "x": 133,
       "y": 1321,
       "w": 64,
       "h": 64,
@@ -8222,7 +8166,7 @@
       "delta_of": "grotle-front"
     },
     "groudon-back-accent": {
-      "x": 463,
+      "x": 199,
       "y": 1321,
       "w": 64,
       "h": 64,
@@ -8236,7 +8180,7 @@
       "delta_of": "groudon-back"
     },
     "groudon-front-accent": {
-      "x": 529,
+      "x": 265,
       "y": 1321,
       "w": 64,
       "h": 64,
@@ -8250,7 +8194,7 @@
       "delta_of": "groudon-front"
     },
     "grovyle-back-accent": {
-      "x": 595,
+      "x": 331,
       "y": 1321,
       "w": 64,
       "h": 64,
@@ -8264,7 +8208,7 @@
       "delta_of": "grovyle-back"
     },
     "grovyle-front-accent": {
-      "x": 661,
+      "x": 397,
       "y": 1321,
       "w": 64,
       "h": 64,
@@ -8277,36 +8221,8 @@
       "mirror_of": null,
       "delta_of": "grovyle-front"
     },
-    "growlithe-back-accent": {
-      "x": 727,
-      "y": 1321,
-      "w": 64,
-      "h": 64,
-      "frames": [
-        "idle"
-      ],
-      "palette": 12,
-      "seed": null,
-      "derived_from": null,
-      "mirror_of": null,
-      "delta_of": "growlithe-back"
-    },
-    "growlithe-front-accent": {
-      "x": 793,
-      "y": 1321,
-      "w": 64,
-      "h": 64,
-      "frames": [
-        "idle"
-      ],
-      "palette": 13,
-      "seed": null,
-      "derived_from": null,
-      "mirror_of": null,
-      "delta_of": "growlithe-front"
-    },
     "gyarados-back-accent": {
-      "x": 859,
+      "x": 463,
       "y": 1321,
       "w": 64,
       "h": 64,
@@ -8320,7 +8236,7 @@
       "delta_of": "gyarados-back"
     },
     "gyarados-front-accent": {
-      "x": 925,
+      "x": 529,
       "y": 1321,
       "w": 64,
       "h": 64,
@@ -8334,7 +8250,7 @@
       "delta_of": "gyarados-front"
     },
     "haunter-back-accent": {
-      "x": 991,
+      "x": 595,
       "y": 1321,
       "w": 64,
       "h": 64,
@@ -8348,7 +8264,7 @@
       "delta_of": "haunter-back"
     },
     "haunter-front-accent": {
-      "x": 1057,
+      "x": 661,
       "y": 1321,
       "w": 64,
       "h": 64,
@@ -8362,7 +8278,7 @@
       "delta_of": "haunter-front"
     },
     "infernape-back-accent": {
-      "x": 1123,
+      "x": 727,
       "y": 1321,
       "w": 64,
       "h": 64,
@@ -8376,7 +8292,7 @@
       "delta_of": "infernape-back"
     },
     "infernape-front-accent": {
-      "x": 1189,
+      "x": 793,
       "y": 1321,
       "w": 64,
       "h": 64,
@@ -8390,7 +8306,7 @@
       "delta_of": "infernape-front"
     },
     "jirachi-back-accent": {
-      "x": 1255,
+      "x": 859,
       "y": 1321,
       "w": 64,
       "h": 64,
@@ -8404,7 +8320,7 @@
       "delta_of": "jirachi-back"
     },
     "jirachi-front-accent": {
-      "x": 1321,
+      "x": 925,
       "y": 1321,
       "w": 64,
       "h": 64,
@@ -8418,7 +8334,7 @@
       "delta_of": "jirachi-front"
     },
     "jolteon-back-accent": {
-      "x": 1387,
+      "x": 991,
       "y": 1321,
       "w": 64,
       "h": 64,
@@ -8432,7 +8348,7 @@
       "delta_of": "jolteon-back"
     },
     "jolteon-front-accent": {
-      "x": 1453,
+      "x": 1057,
       "y": 1321,
       "w": 64,
       "h": 64,
@@ -8446,7 +8362,7 @@
       "delta_of": "jolteon-front"
     },
     "kyogre-back-accent": {
-      "x": 1519,
+      "x": 1123,
       "y": 1321,
       "w": 64,
       "h": 64,
@@ -8460,7 +8376,7 @@
       "delta_of": "kyogre-back"
     },
     "kyogre-front-accent": {
-      "x": 1585,
+      "x": 1189,
       "y": 1321,
       "w": 64,
       "h": 64,
@@ -8474,7 +8390,7 @@
       "delta_of": "kyogre-front"
     },
     "lapras-back-accent": {
-      "x": 1651,
+      "x": 1255,
       "y": 1321,
       "w": 64,
       "h": 64,
@@ -8488,7 +8404,7 @@
       "delta_of": "lapras-back"
     },
     "lapras-front-accent": {
-      "x": 1717,
+      "x": 1321,
       "y": 1321,
       "w": 64,
       "h": 64,
@@ -8502,7 +8418,7 @@
       "delta_of": "lapras-front"
     },
     "latias-back-accent": {
-      "x": 1783,
+      "x": 1387,
       "y": 1321,
       "w": 64,
       "h": 64,
@@ -8516,7 +8432,7 @@
       "delta_of": "latias-back"
     },
     "latias-front-accent": {
-      "x": 1849,
+      "x": 1453,
       "y": 1321,
       "w": 64,
       "h": 64,
@@ -8530,7 +8446,7 @@
       "delta_of": "latias-front"
     },
     "latios-back-accent": {
-      "x": 1915,
+      "x": 1519,
       "y": 1321,
       "w": 64,
       "h": 64,
@@ -8544,7 +8460,7 @@
       "delta_of": "latios-back"
     },
     "latios-front-accent": {
-      "x": 1981,
+      "x": 1585,
       "y": 1321,
       "w": 64,
       "h": 64,
@@ -8558,8 +8474,8 @@
       "delta_of": "latios-front"
     },
     "magikarp-back-accent": {
-      "x": 1,
-      "y": 1387,
+      "x": 1651,
+      "y": 1321,
       "w": 64,
       "h": 64,
       "frames": [
@@ -8572,8 +8488,8 @@
       "delta_of": "magikarp-back"
     },
     "magikarp-front-accent": {
-      "x": 67,
-      "y": 1387,
+      "x": 1717,
+      "y": 1321,
       "w": 64,
       "h": 64,
       "frames": [
@@ -8586,8 +8502,8 @@
       "delta_of": "magikarp-front"
     },
     "magnemite-back-accent": {
-      "x": 133,
-      "y": 1387,
+      "x": 1783,
+      "y": 1321,
       "w": 64,
       "h": 64,
       "frames": [
@@ -8600,8 +8516,8 @@
       "delta_of": "magnemite-back"
     },
     "magnemite-front-accent": {
-      "x": 199,
-      "y": 1387,
+      "x": 1849,
+      "y": 1321,
       "w": 64,
       "h": 64,
       "frames": [
@@ -8613,37 +8529,9 @@
       "mirror_of": null,
       "delta_of": "magnemite-front"
     },
-    "mankey-back-accent": {
-      "x": 265,
-      "y": 1387,
-      "w": 64,
-      "h": 64,
-      "frames": [
-        "idle"
-      ],
-      "palette": 11,
-      "seed": null,
-      "derived_from": null,
-      "mirror_of": null,
-      "delta_of": "mankey-back"
-    },
-    "mankey-front-accent": {
-      "x": 331,
-      "y": 1387,
-      "w": 64,
-      "h": 64,
-      "frames": [
-        "idle"
-      ],
-      "palette": 13,
-      "seed": null,
-      "derived_from": null,
-      "mirror_of": null,
-      "delta_of": "mankey-front"
-    },
     "marshtomp-back-accent": {
-      "x": 397,
-      "y": 1387,
+      "x": 1915,
+      "y": 1321,
       "w": 64,
       "h": 64,
       "frames": [
@@ -8656,8 +8544,8 @@
       "delta_of": "marshtomp-back"
     },
     "marshtomp-front-accent": {
-      "x": 463,
-      "y": 1387,
+      "x": 1981,
+      "y": 1321,
       "w": 64,
       "h": 64,
       "frames": [
@@ -8670,7 +8558,7 @@
       "delta_of": "marshtomp-front"
     },
     "meganium-back-accent": {
-      "x": 529,
+      "x": 1,
       "y": 1387,
       "w": 64,
       "h": 64,
@@ -8684,7 +8572,7 @@
       "delta_of": "meganium-back"
     },
     "meganium-front-accent": {
-      "x": 595,
+      "x": 67,
       "y": 1387,
       "w": 64,
       "h": 64,
@@ -8698,7 +8586,7 @@
       "delta_of": "meganium-front"
     },
     "moltres-back-accent": {
-      "x": 661,
+      "x": 133,
       "y": 1387,
       "w": 64,
       "h": 64,
@@ -8712,7 +8600,7 @@
       "delta_of": "moltres-back"
     },
     "moltres-front-accent": {
-      "x": 727,
+      "x": 199,
       "y": 1387,
       "w": 64,
       "h": 64,
@@ -8726,7 +8614,7 @@
       "delta_of": "moltres-front"
     },
     "monferno-back-accent": {
-      "x": 793,
+      "x": 265,
       "y": 1387,
       "w": 64,
       "h": 64,
@@ -8740,7 +8628,7 @@
       "delta_of": "monferno-back"
     },
     "monferno-front-accent": {
-      "x": 859,
+      "x": 331,
       "y": 1387,
       "w": 64,
       "h": 64,
@@ -8754,7 +8642,7 @@
       "delta_of": "monferno-front"
     },
     "mudkip-back-accent": {
-      "x": 925,
+      "x": 397,
       "y": 1387,
       "w": 64,
       "h": 64,
@@ -8768,7 +8656,7 @@
       "delta_of": "mudkip-back"
     },
     "mudkip-front-accent": {
-      "x": 991,
+      "x": 463,
       "y": 1387,
       "w": 64,
       "h": 64,
@@ -8782,7 +8670,7 @@
       "delta_of": "mudkip-front"
     },
     "onix-back-accent": {
-      "x": 1057,
+      "x": 529,
       "y": 1387,
       "w": 64,
       "h": 64,
@@ -8796,7 +8684,7 @@
       "delta_of": "onix-back"
     },
     "onix-front-accent": {
-      "x": 1123,
+      "x": 595,
       "y": 1387,
       "w": 64,
       "h": 64,
@@ -8810,7 +8698,7 @@
       "delta_of": "onix-front"
     },
     "palkia-back-accent": {
-      "x": 1189,
+      "x": 661,
       "y": 1387,
       "w": 64,
       "h": 64,
@@ -8824,7 +8712,7 @@
       "delta_of": "palkia-back"
     },
     "palkia-front-accent": {
-      "x": 1255,
+      "x": 727,
       "y": 1387,
       "w": 64,
       "h": 64,
@@ -8838,7 +8726,7 @@
       "delta_of": "palkia-front"
     },
     "piplup-back-accent": {
-      "x": 1321,
+      "x": 793,
       "y": 1387,
       "w": 64,
       "h": 64,
@@ -8852,7 +8740,7 @@
       "delta_of": "piplup-back"
     },
     "piplup-front-accent": {
-      "x": 1387,
+      "x": 859,
       "y": 1387,
       "w": 64,
       "h": 64,
@@ -8865,36 +8753,8 @@
       "mirror_of": null,
       "delta_of": "piplup-front"
     },
-    "poliwag-back-accent": {
-      "x": 1453,
-      "y": 1387,
-      "w": 64,
-      "h": 64,
-      "frames": [
-        "idle"
-      ],
-      "palette": 13,
-      "seed": null,
-      "derived_from": null,
-      "mirror_of": null,
-      "delta_of": "poliwag-back"
-    },
-    "poliwag-front-accent": {
-      "x": 1519,
-      "y": 1387,
-      "w": 64,
-      "h": 64,
-      "frames": [
-        "idle"
-      ],
-      "palette": 13,
-      "seed": null,
-      "derived_from": null,
-      "mirror_of": null,
-      "delta_of": "poliwag-front"
-    },
     "ponyta-back-accent": {
-      "x": 1585,
+      "x": 925,
       "y": 1387,
       "w": 64,
       "h": 64,
@@ -8908,7 +8768,7 @@
       "delta_of": "ponyta-back"
     },
     "ponyta-front-accent": {
-      "x": 1651,
+      "x": 991,
       "y": 1387,
       "w": 64,
       "h": 64,
@@ -8922,7 +8782,7 @@
       "delta_of": "ponyta-front"
     },
     "prinplup-back-accent": {
-      "x": 1717,
+      "x": 1057,
       "y": 1387,
       "w": 64,
       "h": 64,
@@ -8936,7 +8796,7 @@
       "delta_of": "prinplup-back"
     },
     "prinplup-front-accent": {
-      "x": 1783,
+      "x": 1123,
       "y": 1387,
       "w": 64,
       "h": 64,
@@ -8950,7 +8810,7 @@
       "delta_of": "prinplup-front"
     },
     "quilava-back-accent": {
-      "x": 1849,
+      "x": 1189,
       "y": 1387,
       "w": 64,
       "h": 64,
@@ -8964,7 +8824,7 @@
       "delta_of": "quilava-back"
     },
     "quilava-front-accent": {
-      "x": 1915,
+      "x": 1255,
       "y": 1387,
       "w": 64,
       "h": 64,
@@ -8978,7 +8838,7 @@
       "delta_of": "quilava-front"
     },
     "raikou-back-accent": {
-      "x": 1981,
+      "x": 1321,
       "y": 1387,
       "w": 64,
       "h": 64,
@@ -8992,8 +8852,8 @@
       "delta_of": "raikou-back"
     },
     "raikou-front-accent": {
-      "x": 1,
-      "y": 1453,
+      "x": 1387,
+      "y": 1387,
       "w": 64,
       "h": 64,
       "frames": [
@@ -9006,8 +8866,8 @@
       "delta_of": "raikou-front"
     },
     "rayquaza-back-accent": {
-      "x": 67,
-      "y": 1453,
+      "x": 1453,
+      "y": 1387,
       "w": 64,
       "h": 64,
       "frames": [
@@ -9020,8 +8880,8 @@
       "delta_of": "rayquaza-back"
     },
     "rayquaza-front-accent": {
-      "x": 133,
-      "y": 1453,
+      "x": 1519,
+      "y": 1387,
       "w": 64,
       "h": 64,
       "frames": [
@@ -9034,8 +8894,8 @@
       "delta_of": "rayquaza-front"
     },
     "regice-back-accent": {
-      "x": 199,
-      "y": 1453,
+      "x": 1585,
+      "y": 1387,
       "w": 64,
       "h": 64,
       "frames": [
@@ -9048,8 +8908,8 @@
       "delta_of": "regice-back"
     },
     "regice-front-accent": {
-      "x": 265,
-      "y": 1453,
+      "x": 1651,
+      "y": 1387,
       "w": 64,
       "h": 64,
       "frames": [
@@ -9062,8 +8922,8 @@
       "delta_of": "regice-front"
     },
     "regirock-back-accent": {
-      "x": 331,
-      "y": 1453,
+      "x": 1717,
+      "y": 1387,
       "w": 64,
       "h": 64,
       "frames": [
@@ -9076,8 +8936,8 @@
       "delta_of": "regirock-back"
     },
     "regirock-front-accent": {
-      "x": 397,
-      "y": 1453,
+      "x": 1783,
+      "y": 1387,
       "w": 64,
       "h": 64,
       "frames": [
@@ -9090,8 +8950,8 @@
       "delta_of": "regirock-front"
     },
     "registeel-back-accent": {
-      "x": 463,
-      "y": 1453,
+      "x": 1849,
+      "y": 1387,
       "w": 64,
       "h": 64,
       "frames": [
@@ -9104,8 +8964,8 @@
       "delta_of": "registeel-back"
     },
     "registeel-front-accent": {
-      "x": 529,
-      "y": 1453,
+      "x": 1915,
+      "y": 1387,
       "w": 64,
       "h": 64,
       "frames": [
@@ -9118,8 +8978,8 @@
       "delta_of": "registeel-front"
     },
     "sceptile-back-accent": {
-      "x": 595,
-      "y": 1453,
+      "x": 1981,
+      "y": 1387,
       "w": 64,
       "h": 64,
       "frames": [
@@ -9132,7 +8992,7 @@
       "delta_of": "sceptile-back"
     },
     "sceptile-front-accent": {
-      "x": 661,
+      "x": 1,
       "y": 1453,
       "w": 64,
       "h": 64,
@@ -9146,7 +9006,7 @@
       "delta_of": "sceptile-front"
     },
     "shaymin-back-accent": {
-      "x": 727,
+      "x": 67,
       "y": 1453,
       "w": 64,
       "h": 64,
@@ -9160,7 +9020,7 @@
       "delta_of": "shaymin-back"
     },
     "shaymin-front-accent": {
-      "x": 793,
+      "x": 133,
       "y": 1453,
       "w": 64,
       "h": 64,
@@ -9174,7 +9034,7 @@
       "delta_of": "shaymin-front"
     },
     "shayminsky-back-accent": {
-      "x": 859,
+      "x": 199,
       "y": 1453,
       "w": 64,
       "h": 64,
@@ -9188,7 +9048,7 @@
       "delta_of": "shayminsky-back"
     },
     "shayminsky-front-accent": {
-      "x": 925,
+      "x": 265,
       "y": 1453,
       "w": 64,
       "h": 64,
@@ -9202,7 +9062,7 @@
       "delta_of": "shayminsky-front"
     },
     "snorlax-back-accent": {
-      "x": 991,
+      "x": 331,
       "y": 1453,
       "w": 64,
       "h": 64,
@@ -9216,7 +9076,7 @@
       "delta_of": "snorlax-back"
     },
     "snorlax-front-accent": {
-      "x": 1057,
+      "x": 397,
       "y": 1453,
       "w": 64,
       "h": 64,
@@ -9230,7 +9090,7 @@
       "delta_of": "snorlax-front"
     },
     "suicune-back-accent": {
-      "x": 1123,
+      "x": 463,
       "y": 1453,
       "w": 64,
       "h": 64,
@@ -9244,7 +9104,7 @@
       "delta_of": "suicune-back"
     },
     "suicune-front-accent": {
-      "x": 1189,
+      "x": 529,
       "y": 1453,
       "w": 64,
       "h": 64,
@@ -9258,7 +9118,7 @@
       "delta_of": "suicune-front"
     },
     "swampert-back-accent": {
-      "x": 1255,
+      "x": 595,
       "y": 1453,
       "w": 64,
       "h": 64,
@@ -9272,7 +9132,7 @@
       "delta_of": "swampert-back"
     },
     "swampert-front-accent": {
-      "x": 1321,
+      "x": 661,
       "y": 1453,
       "w": 64,
       "h": 64,
@@ -9286,7 +9146,7 @@
       "delta_of": "swampert-front"
     },
     "torchic-back-accent": {
-      "x": 1387,
+      "x": 727,
       "y": 1453,
       "w": 64,
       "h": 64,
@@ -9300,7 +9160,7 @@
       "delta_of": "torchic-back"
     },
     "torchic-front-accent": {
-      "x": 1453,
+      "x": 793,
       "y": 1453,
       "w": 64,
       "h": 64,
@@ -9314,7 +9174,7 @@
       "delta_of": "torchic-front"
     },
     "totodile-back-accent": {
-      "x": 1519,
+      "x": 859,
       "y": 1453,
       "w": 64,
       "h": 64,
@@ -9328,7 +9188,7 @@
       "delta_of": "totodile-back"
     },
     "totodile-front-accent": {
-      "x": 1585,
+      "x": 925,
       "y": 1453,
       "w": 64,
       "h": 64,
@@ -9342,7 +9202,7 @@
       "delta_of": "totodile-front"
     },
     "treecko-back-accent": {
-      "x": 1651,
+      "x": 991,
       "y": 1453,
       "w": 64,
       "h": 64,
@@ -9356,7 +9216,7 @@
       "delta_of": "treecko-back"
     },
     "treecko-front-accent": {
-      "x": 1717,
+      "x": 1057,
       "y": 1453,
       "w": 64,
       "h": 64,
@@ -9370,7 +9230,7 @@
       "delta_of": "treecko-front"
     },
     "turtwig-back-accent": {
-      "x": 1783,
+      "x": 1123,
       "y": 1453,
       "w": 64,
       "h": 64,
@@ -9384,7 +9244,7 @@
       "delta_of": "turtwig-back"
     },
     "turtwig-front-accent": {
-      "x": 1849,
+      "x": 1189,
       "y": 1453,
       "w": 64,
       "h": 64,
@@ -9398,7 +9258,7 @@
       "delta_of": "turtwig-front"
     },
     "typhlosion-back-accent": {
-      "x": 1915,
+      "x": 1255,
       "y": 1453,
       "w": 64,
       "h": 64,
@@ -9412,7 +9272,7 @@
       "delta_of": "typhlosion-back"
     },
     "typhlosion-front-accent": {
-      "x": 1981,
+      "x": 1321,
       "y": 1453,
       "w": 64,
       "h": 64,
@@ -9426,8 +9286,8 @@
       "delta_of": "typhlosion-front"
     },
     "vaporeon-back-accent": {
-      "x": 1,
-      "y": 1519,
+      "x": 1387,
+      "y": 1453,
       "w": 64,
       "h": 64,
       "frames": [
@@ -9440,8 +9300,8 @@
       "delta_of": "vaporeon-back"
     },
     "vaporeon-front-accent": {
-      "x": 67,
-      "y": 1519,
+      "x": 1453,
+      "y": 1453,
       "w": 64,
       "h": 64,
       "frames": [
@@ -9454,8 +9314,8 @@
       "delta_of": "vaporeon-front"
     },
     "abomasnow-back-bob": {
-      "x": 133,
-      "y": 1519,
+      "x": 1519,
+      "y": 1453,
       "w": 64,
       "h": 64,
       "frames": [
@@ -9467,21 +9327,21 @@
       "mirror_of": null
     },
     "abra-back-bob": {
-      "x": 199,
-      "y": 1519,
+      "x": 1585,
+      "y": 1453,
       "w": 64,
       "h": 64,
       "frames": [
         "idle"
       ],
-      "palette": 12,
+      "palette": 14,
       "seed": null,
       "derived_from": null,
       "mirror_of": null
     },
     "absol-back-bob": {
-      "x": 265,
-      "y": 1519,
+      "x": 1651,
+      "y": 1453,
       "w": 64,
       "h": 64,
       "frames": [
@@ -9493,8 +9353,8 @@
       "mirror_of": null
     },
     "aerodactyl-back-bob": {
-      "x": 331,
-      "y": 1519,
+      "x": 1717,
+      "y": 1453,
       "w": 64,
       "h": 64,
       "frames": [
@@ -9506,8 +9366,8 @@
       "mirror_of": null
     },
     "aggron-back-bob": {
-      "x": 397,
-      "y": 1519,
+      "x": 1783,
+      "y": 1453,
       "w": 64,
       "h": 64,
       "frames": [
@@ -9519,8 +9379,8 @@
       "mirror_of": null
     },
     "aipom-back-bob": {
-      "x": 463,
-      "y": 1519,
+      "x": 1849,
+      "y": 1453,
       "w": 64,
       "h": 64,
       "frames": [
@@ -9532,21 +9392,21 @@
       "mirror_of": null
     },
     "alakazam-back-bob": {
-      "x": 529,
-      "y": 1519,
+      "x": 1915,
+      "y": 1453,
       "w": 64,
       "h": 64,
       "frames": [
         "idle"
       ],
-      "palette": 13,
+      "palette": 16,
       "seed": null,
       "derived_from": null,
       "mirror_of": null
     },
     "altaria-back-bob": {
-      "x": 595,
-      "y": 1519,
+      "x": 1981,
+      "y": 1453,
       "w": 64,
       "h": 64,
       "frames": [
@@ -9558,7 +9418,7 @@
       "mirror_of": null
     },
     "ambipom-back-bob": {
-      "x": 661,
+      "x": 1,
       "y": 1519,
       "w": 64,
       "h": 64,
@@ -9571,7 +9431,7 @@
       "mirror_of": null
     },
     "ampharos-back-bob": {
-      "x": 727,
+      "x": 67,
       "y": 1519,
       "w": 64,
       "h": 64,
@@ -9584,7 +9444,7 @@
       "mirror_of": null
     },
     "anorith-back-bob": {
-      "x": 793,
+      "x": 133,
       "y": 1519,
       "w": 64,
       "h": 64,
@@ -9597,7 +9457,7 @@
       "mirror_of": null
     },
     "arbok-back-bob": {
-      "x": 859,
+      "x": 199,
       "y": 1519,
       "w": 64,
       "h": 64,
@@ -9610,20 +9470,20 @@
       "mirror_of": null
     },
     "arcanine-back-bob": {
-      "x": 925,
+      "x": 265,
       "y": 1519,
       "w": 64,
       "h": 64,
       "frames": [
         "idle"
       ],
-      "palette": 13,
+      "palette": 16,
       "seed": null,
       "derived_from": null,
       "mirror_of": null
     },
     "arceus-back-bob": {
-      "x": 991,
+      "x": 331,
       "y": 1519,
       "w": 64,
       "h": 64,
@@ -9636,7 +9496,7 @@
       "mirror_of": null
     },
     "ariados-back-bob": {
-      "x": 1057,
+      "x": 397,
       "y": 1519,
       "w": 64,
       "h": 64,
@@ -9649,7 +9509,7 @@
       "mirror_of": null
     },
     "armaldo-back-bob": {
-      "x": 1123,
+      "x": 463,
       "y": 1519,
       "w": 64,
       "h": 64,
@@ -9662,7 +9522,7 @@
       "mirror_of": null
     },
     "aron-back-bob": {
-      "x": 1189,
+      "x": 529,
       "y": 1519,
       "w": 64,
       "h": 64,
@@ -9675,7 +9535,7 @@
       "mirror_of": null
     },
     "articuno-back-bob": {
-      "x": 1255,
+      "x": 595,
       "y": 1519,
       "w": 64,
       "h": 64,
@@ -9688,7 +9548,7 @@
       "mirror_of": null
     },
     "azelf-back-bob": {
-      "x": 1321,
+      "x": 661,
       "y": 1519,
       "w": 64,
       "h": 64,
@@ -9701,7 +9561,7 @@
       "mirror_of": null
     },
     "azumarill-back-bob": {
-      "x": 1387,
+      "x": 727,
       "y": 1519,
       "w": 64,
       "h": 64,
@@ -9714,7 +9574,7 @@
       "mirror_of": null
     },
     "azurill-back-bob": {
-      "x": 1453,
+      "x": 793,
       "y": 1519,
       "w": 64,
       "h": 64,
@@ -9727,7 +9587,7 @@
       "mirror_of": null
     },
     "bagon-back-bob": {
-      "x": 1519,
+      "x": 859,
       "y": 1519,
       "w": 64,
       "h": 64,
@@ -9740,7 +9600,7 @@
       "mirror_of": null
     },
     "baltoy-back-bob": {
-      "x": 1585,
+      "x": 925,
       "y": 1519,
       "w": 64,
       "h": 64,
@@ -9753,7 +9613,7 @@
       "mirror_of": null
     },
     "banette-back-bob": {
-      "x": 1651,
+      "x": 991,
       "y": 1519,
       "w": 64,
       "h": 64,
@@ -9766,7 +9626,7 @@
       "mirror_of": null
     },
     "barboach-back-bob": {
-      "x": 1717,
+      "x": 1057,
       "y": 1519,
       "w": 64,
       "h": 64,
@@ -9779,7 +9639,7 @@
       "mirror_of": null
     },
     "bastiodon-back-bob": {
-      "x": 1783,
+      "x": 1123,
       "y": 1519,
       "w": 64,
       "h": 64,
@@ -9792,7 +9652,7 @@
       "mirror_of": null
     },
     "bayleef-back-bob": {
-      "x": 1849,
+      "x": 1189,
       "y": 1519,
       "w": 64,
       "h": 64,
@@ -9805,7 +9665,7 @@
       "mirror_of": null
     },
     "beautifly-back-bob": {
-      "x": 1915,
+      "x": 1255,
       "y": 1519,
       "w": 64,
       "h": 64,
@@ -9818,7 +9678,7 @@
       "mirror_of": null
     },
     "beedrill-back-bob": {
-      "x": 1981,
+      "x": 1321,
       "y": 1519,
       "w": 64,
       "h": 64,
@@ -9831,8 +9691,8 @@
       "mirror_of": null
     },
     "beldum-back-bob": {
-      "x": 1,
-      "y": 1585,
+      "x": 1387,
+      "y": 1519,
       "w": 64,
       "h": 64,
       "frames": [
@@ -9844,8 +9704,8 @@
       "mirror_of": null
     },
     "bellossom-back-bob": {
-      "x": 67,
-      "y": 1585,
+      "x": 1453,
+      "y": 1519,
       "w": 64,
       "h": 64,
       "frames": [
@@ -9857,8 +9717,8 @@
       "mirror_of": null
     },
     "bellsprout-back-bob": {
-      "x": 133,
-      "y": 1585,
+      "x": 1519,
+      "y": 1519,
       "w": 64,
       "h": 64,
       "frames": [
@@ -9870,8 +9730,8 @@
       "mirror_of": null
     },
     "bibarel-back-bob": {
-      "x": 199,
-      "y": 1585,
+      "x": 1585,
+      "y": 1519,
       "w": 64,
       "h": 64,
       "frames": [
@@ -9883,8 +9743,8 @@
       "mirror_of": null
     },
     "bidoof-back-bob": {
-      "x": 265,
-      "y": 1585,
+      "x": 1651,
+      "y": 1519,
       "w": 64,
       "h": 64,
       "frames": [
@@ -9896,8 +9756,8 @@
       "mirror_of": null
     },
     "blastoise-back-bob": {
-      "x": 331,
-      "y": 1585,
+      "x": 1717,
+      "y": 1519,
       "w": 64,
       "h": 64,
       "frames": [
@@ -9909,8 +9769,8 @@
       "mirror_of": null
     },
     "blaziken-back-bob": {
-      "x": 397,
-      "y": 1585,
+      "x": 1783,
+      "y": 1519,
       "w": 64,
       "h": 64,
       "frames": [
@@ -9922,8 +9782,8 @@
       "mirror_of": null
     },
     "blissey-back-bob": {
-      "x": 463,
-      "y": 1585,
+      "x": 1849,
+      "y": 1519,
       "w": 64,
       "h": 64,
       "frames": [
@@ -9935,8 +9795,8 @@
       "mirror_of": null
     },
     "bonsly-back-bob": {
-      "x": 529,
-      "y": 1585,
+      "x": 1915,
+      "y": 1519,
       "w": 64,
       "h": 64,
       "frames": [
@@ -9948,8 +9808,8 @@
       "mirror_of": null
     },
     "breloom-back-bob": {
-      "x": 595,
-      "y": 1585,
+      "x": 1981,
+      "y": 1519,
       "w": 64,
       "h": 64,
       "frames": [
@@ -9961,7 +9821,7 @@
       "mirror_of": null
     },
     "bronzong-back-bob": {
-      "x": 661,
+      "x": 1,
       "y": 1585,
       "w": 64,
       "h": 64,
@@ -9974,7 +9834,7 @@
       "mirror_of": null
     },
     "bronzor-back-bob": {
-      "x": 727,
+      "x": 67,
       "y": 1585,
       "w": 64,
       "h": 64,
@@ -9987,7 +9847,7 @@
       "mirror_of": null
     },
     "budew-back-bob": {
-      "x": 793,
+      "x": 133,
       "y": 1585,
       "w": 64,
       "h": 64,
@@ -10000,7 +9860,7 @@
       "mirror_of": null
     },
     "buizel-back-bob": {
-      "x": 859,
+      "x": 199,
       "y": 1585,
       "w": 64,
       "h": 64,
@@ -10013,7 +9873,7 @@
       "mirror_of": null
     },
     "bulbasaur-back-bob": {
-      "x": 925,
+      "x": 265,
       "y": 1585,
       "w": 64,
       "h": 64,
@@ -10026,7 +9886,7 @@
       "mirror_of": null
     },
     "buneary-back-bob": {
-      "x": 991,
+      "x": 331,
       "y": 1585,
       "w": 64,
       "h": 64,
@@ -10039,7 +9899,7 @@
       "mirror_of": null
     },
     "burmy-back-bob": {
-      "x": 1057,
+      "x": 397,
       "y": 1585,
       "w": 64,
       "h": 64,
@@ -10052,7 +9912,7 @@
       "mirror_of": null
     },
     "butterfree-back-bob": {
-      "x": 1123,
+      "x": 463,
       "y": 1585,
       "w": 64,
       "h": 64,
@@ -10065,7 +9925,7 @@
       "mirror_of": null
     },
     "cacnea-back-bob": {
-      "x": 1189,
+      "x": 529,
       "y": 1585,
       "w": 64,
       "h": 64,
@@ -10078,7 +9938,7 @@
       "mirror_of": null
     },
     "cacturne-back-bob": {
-      "x": 1255,
+      "x": 595,
       "y": 1585,
       "w": 64,
       "h": 64,
@@ -10091,7 +9951,7 @@
       "mirror_of": null
     },
     "camerupt-back-bob": {
-      "x": 1321,
+      "x": 661,
       "y": 1585,
       "w": 64,
       "h": 64,
@@ -10104,7 +9964,7 @@
       "mirror_of": null
     },
     "carnivine-back-bob": {
-      "x": 1387,
+      "x": 727,
       "y": 1585,
       "w": 64,
       "h": 64,
@@ -10117,7 +9977,7 @@
       "mirror_of": null
     },
     "carvanha-back-bob": {
-      "x": 1453,
+      "x": 793,
       "y": 1585,
       "w": 64,
       "h": 64,
@@ -10130,7 +9990,7 @@
       "mirror_of": null
     },
     "cascoon-back-bob": {
-      "x": 1519,
+      "x": 859,
       "y": 1585,
       "w": 64,
       "h": 64,
@@ -10143,7 +10003,7 @@
       "mirror_of": null
     },
     "castform-back-bob": {
-      "x": 1585,
+      "x": 925,
       "y": 1585,
       "w": 64,
       "h": 64,
@@ -10156,7 +10016,7 @@
       "mirror_of": null
     },
     "caterpie-back-bob": {
-      "x": 1651,
+      "x": 991,
       "y": 1585,
       "w": 64,
       "h": 64,
@@ -10169,7 +10029,7 @@
       "mirror_of": null
     },
     "celebi-back-bob": {
-      "x": 1717,
+      "x": 1057,
       "y": 1585,
       "w": 64,
       "h": 64,
@@ -10182,7 +10042,7 @@
       "mirror_of": null
     },
     "chansey-back-bob": {
-      "x": 1783,
+      "x": 1123,
       "y": 1585,
       "w": 64,
       "h": 64,
@@ -10195,7 +10055,7 @@
       "mirror_of": null
     },
     "charizard-back-bob": {
-      "x": 1849,
+      "x": 1189,
       "y": 1585,
       "w": 64,
       "h": 64,
@@ -10208,7 +10068,7 @@
       "mirror_of": null
     },
     "charmander-back-bob": {
-      "x": 1915,
+      "x": 1255,
       "y": 1585,
       "w": 64,
       "h": 64,
@@ -10221,7 +10081,7 @@
       "mirror_of": null
     },
     "charmeleon-back-bob": {
-      "x": 1981,
+      "x": 1321,
       "y": 1585,
       "w": 64,
       "h": 64,
@@ -10234,8 +10094,8 @@
       "mirror_of": null
     },
     "chatot-back-bob": {
-      "x": 1,
-      "y": 1651,
+      "x": 1387,
+      "y": 1585,
       "w": 64,
       "h": 64,
       "frames": [
@@ -10247,8 +10107,8 @@
       "mirror_of": null
     },
     "cherrim-back-bob": {
-      "x": 67,
-      "y": 1651,
+      "x": 1453,
+      "y": 1585,
       "w": 64,
       "h": 64,
       "frames": [
@@ -10260,8 +10120,8 @@
       "mirror_of": null
     },
     "cherubi-back-bob": {
-      "x": 133,
-      "y": 1651,
+      "x": 1519,
+      "y": 1585,
       "w": 64,
       "h": 64,
       "frames": [
@@ -10273,8 +10133,8 @@
       "mirror_of": null
     },
     "chikorita-back-bob": {
-      "x": 199,
-      "y": 1651,
+      "x": 1585,
+      "y": 1585,
       "w": 64,
       "h": 64,
       "frames": [
@@ -10286,8 +10146,8 @@
       "mirror_of": null
     },
     "chimchar-back-bob": {
-      "x": 265,
-      "y": 1651,
+      "x": 1651,
+      "y": 1585,
       "w": 64,
       "h": 64,
       "frames": [
@@ -10299,8 +10159,8 @@
       "mirror_of": null
     },
     "chimecho-back-bob": {
-      "x": 331,
-      "y": 1651,
+      "x": 1717,
+      "y": 1585,
       "w": 64,
       "h": 64,
       "frames": [
@@ -10312,8 +10172,8 @@
       "mirror_of": null
     },
     "chinchou-back-bob": {
-      "x": 397,
-      "y": 1651,
+      "x": 1783,
+      "y": 1585,
       "w": 64,
       "h": 64,
       "frames": [
@@ -10325,8 +10185,8 @@
       "mirror_of": null
     },
     "chingling-back-bob": {
-      "x": 463,
-      "y": 1651,
+      "x": 1849,
+      "y": 1585,
       "w": 64,
       "h": 64,
       "frames": [
@@ -10338,8 +10198,8 @@
       "mirror_of": null
     },
     "clamperl-back-bob": {
-      "x": 529,
-      "y": 1651,
+      "x": 1915,
+      "y": 1585,
       "w": 64,
       "h": 64,
       "frames": [
@@ -10351,8 +10211,8 @@
       "mirror_of": null
     },
     "claydol-back-bob": {
-      "x": 595,
-      "y": 1651,
+      "x": 1981,
+      "y": 1585,
       "w": 64,
       "h": 64,
       "frames": [
@@ -10364,7 +10224,7 @@
       "mirror_of": null
     },
     "clefable-back-bob": {
-      "x": 661,
+      "x": 1,
       "y": 1651,
       "w": 64,
       "h": 64,
@@ -10377,7 +10237,7 @@
       "mirror_of": null
     },
     "clefairy-back-bob": {
-      "x": 727,
+      "x": 67,
       "y": 1651,
       "w": 64,
       "h": 64,
@@ -10390,7 +10250,7 @@
       "mirror_of": null
     },
     "cleffa-back-bob": {
-      "x": 793,
+      "x": 133,
       "y": 1651,
       "w": 64,
       "h": 64,
@@ -10403,7 +10263,7 @@
       "mirror_of": null
     },
     "cloyster-back-bob": {
-      "x": 859,
+      "x": 199,
       "y": 1651,
       "w": 64,
       "h": 64,
@@ -10416,7 +10276,7 @@
       "mirror_of": null
     },
     "combee-back-bob": {
-      "x": 925,
+      "x": 265,
       "y": 1651,
       "w": 64,
       "h": 64,
@@ -10429,7 +10289,7 @@
       "mirror_of": null
     },
     "combusken-back-bob": {
-      "x": 991,
+      "x": 331,
       "y": 1651,
       "w": 64,
       "h": 64,
@@ -10442,7 +10302,7 @@
       "mirror_of": null
     },
     "corphish-back-bob": {
-      "x": 1057,
+      "x": 397,
       "y": 1651,
       "w": 64,
       "h": 64,
@@ -10455,7 +10315,7 @@
       "mirror_of": null
     },
     "corsola-back-bob": {
-      "x": 1123,
+      "x": 463,
       "y": 1651,
       "w": 64,
       "h": 64,
@@ -10468,7 +10328,7 @@
       "mirror_of": null
     },
     "cradily-back-bob": {
-      "x": 1189,
+      "x": 529,
       "y": 1651,
       "w": 64,
       "h": 64,
@@ -10481,7 +10341,7 @@
       "mirror_of": null
     },
     "cranidos-back-bob": {
-      "x": 1255,
+      "x": 595,
       "y": 1651,
       "w": 64,
       "h": 64,
@@ -10494,7 +10354,7 @@
       "mirror_of": null
     },
     "crawdaunt-back-bob": {
-      "x": 1321,
+      "x": 661,
       "y": 1651,
       "w": 64,
       "h": 64,
@@ -10507,7 +10367,7 @@
       "mirror_of": null
     },
     "cresselia-back-bob": {
-      "x": 1387,
+      "x": 727,
       "y": 1651,
       "w": 64,
       "h": 64,
@@ -10520,7 +10380,7 @@
       "mirror_of": null
     },
     "croagunk-back-bob": {
-      "x": 1453,
+      "x": 793,
       "y": 1651,
       "w": 64,
       "h": 64,
@@ -10533,7 +10393,7 @@
       "mirror_of": null
     },
     "crobat-back-bob": {
-      "x": 1519,
+      "x": 859,
       "y": 1651,
       "w": 64,
       "h": 64,
@@ -10546,7 +10406,7 @@
       "mirror_of": null
     },
     "croconaw-back-bob": {
-      "x": 1585,
+      "x": 925,
       "y": 1651,
       "w": 64,
       "h": 64,
@@ -10559,7 +10419,7 @@
       "mirror_of": null
     },
     "crystalonix-back-bob": {
-      "x": 1651,
+      "x": 991,
       "y": 1651,
       "w": 64,
       "h": 64,
@@ -10572,7 +10432,7 @@
       "mirror_of": null
     },
     "cubone-back-bob": {
-      "x": 1717,
+      "x": 1057,
       "y": 1651,
       "w": 64,
       "h": 64,
@@ -10585,7 +10445,7 @@
       "mirror_of": null
     },
     "cyndaquil-back-bob": {
-      "x": 1783,
+      "x": 1123,
       "y": 1651,
       "w": 64,
       "h": 64,
@@ -10598,7 +10458,7 @@
       "mirror_of": null
     },
     "darkrai-back-bob": {
-      "x": 1849,
+      "x": 1189,
       "y": 1651,
       "w": 64,
       "h": 64,
@@ -10611,7 +10471,7 @@
       "mirror_of": null
     },
     "delcatty-back-bob": {
-      "x": 1915,
+      "x": 1255,
       "y": 1651,
       "w": 64,
       "h": 64,
@@ -10624,7 +10484,7 @@
       "mirror_of": null
     },
     "delibird-back-bob": {
-      "x": 1981,
+      "x": 1321,
       "y": 1651,
       "w": 64,
       "h": 64,
@@ -10637,8 +10497,8 @@
       "mirror_of": null
     },
     "deoxys-back-bob": {
-      "x": 1,
-      "y": 1717,
+      "x": 1387,
+      "y": 1651,
       "w": 64,
       "h": 64,
       "frames": [
@@ -10650,8 +10510,8 @@
       "mirror_of": null
     },
     "deoxysattack-back-bob": {
-      "x": 67,
-      "y": 1717,
+      "x": 1453,
+      "y": 1651,
       "w": 64,
       "h": 64,
       "frames": [
@@ -10663,8 +10523,8 @@
       "mirror_of": null
     },
     "deoxysdefense-back-bob": {
-      "x": 133,
-      "y": 1717,
+      "x": 1519,
+      "y": 1651,
       "w": 64,
       "h": 64,
       "frames": [
@@ -10676,8 +10536,8 @@
       "mirror_of": null
     },
     "deoxysspeed-back-bob": {
-      "x": 199,
-      "y": 1717,
+      "x": 1585,
+      "y": 1651,
       "w": 64,
       "h": 64,
       "frames": [
@@ -10689,8 +10549,8 @@
       "mirror_of": null
     },
     "dewgong-back-bob": {
-      "x": 265,
-      "y": 1717,
+      "x": 1651,
+      "y": 1651,
       "w": 64,
       "h": 64,
       "frames": [
@@ -10702,8 +10562,8 @@
       "mirror_of": null
     },
     "dialga-back-bob": {
-      "x": 331,
-      "y": 1717,
+      "x": 1717,
+      "y": 1651,
       "w": 64,
       "h": 64,
       "frames": [
@@ -10715,8 +10575,8 @@
       "mirror_of": null
     },
     "diglett-back-bob": {
-      "x": 397,
-      "y": 1717,
+      "x": 1783,
+      "y": 1651,
       "w": 64,
       "h": 64,
       "frames": [
@@ -10728,8 +10588,8 @@
       "mirror_of": null
     },
     "ditto-back-bob": {
-      "x": 463,
-      "y": 1717,
+      "x": 1849,
+      "y": 1651,
       "w": 64,
       "h": 64,
       "frames": [
@@ -10741,8 +10601,8 @@
       "mirror_of": null
     },
     "dodrio-back-bob": {
-      "x": 529,
-      "y": 1717,
+      "x": 1915,
+      "y": 1651,
       "w": 64,
       "h": 64,
       "frames": [
@@ -10754,8 +10614,8 @@
       "mirror_of": null
     },
     "doduo-back-bob": {
-      "x": 595,
-      "y": 1717,
+      "x": 1981,
+      "y": 1651,
       "w": 64,
       "h": 64,
       "frames": [
@@ -10767,7 +10627,7 @@
       "mirror_of": null
     },
     "donphan-back-bob": {
-      "x": 661,
+      "x": 1,
       "y": 1717,
       "w": 64,
       "h": 64,
@@ -10780,7 +10640,7 @@
       "mirror_of": null
     },
     "dragonair-back-bob": {
-      "x": 727,
+      "x": 67,
       "y": 1717,
       "w": 64,
       "h": 64,
@@ -10793,7 +10653,7 @@
       "mirror_of": null
     },
     "dragonite-back-bob": {
-      "x": 793,
+      "x": 133,
       "y": 1717,
       "w": 64,
       "h": 64,
@@ -10806,7 +10666,7 @@
       "mirror_of": null
     },
     "drapion-back-bob": {
-      "x": 859,
+      "x": 199,
       "y": 1717,
       "w": 64,
       "h": 64,
@@ -10819,7 +10679,7 @@
       "mirror_of": null
     },
     "dratini-back-bob": {
-      "x": 925,
+      "x": 265,
       "y": 1717,
       "w": 64,
       "h": 64,
@@ -10832,7 +10692,7 @@
       "mirror_of": null
     },
     "drifblim-back-bob": {
-      "x": 991,
+      "x": 331,
       "y": 1717,
       "w": 64,
       "h": 64,
@@ -10845,7 +10705,7 @@
       "mirror_of": null
     },
     "drifloon-back-bob": {
-      "x": 1057,
+      "x": 397,
       "y": 1717,
       "w": 64,
       "h": 64,
@@ -10858,7 +10718,7 @@
       "mirror_of": null
     },
     "drowzee-back-bob": {
-      "x": 1123,
+      "x": 463,
       "y": 1717,
       "w": 64,
       "h": 64,
@@ -10871,7 +10731,7 @@
       "mirror_of": null
     },
     "dugtrio-back-bob": {
-      "x": 1189,
+      "x": 529,
       "y": 1717,
       "w": 64,
       "h": 64,
@@ -10884,7 +10744,7 @@
       "mirror_of": null
     },
     "dunsparce-back-bob": {
-      "x": 1255,
+      "x": 595,
       "y": 1717,
       "w": 64,
       "h": 64,
@@ -10897,7 +10757,7 @@
       "mirror_of": null
     },
     "dusclops-back-bob": {
-      "x": 1321,
+      "x": 661,
       "y": 1717,
       "w": 64,
       "h": 64,
@@ -10910,7 +10770,7 @@
       "mirror_of": null
     },
     "dusknoir-back-bob": {
-      "x": 1387,
+      "x": 727,
       "y": 1717,
       "w": 64,
       "h": 64,
@@ -10923,7 +10783,7 @@
       "mirror_of": null
     },
     "duskull-back-bob": {
-      "x": 1453,
+      "x": 793,
       "y": 1717,
       "w": 64,
       "h": 64,
@@ -10936,7 +10796,7 @@
       "mirror_of": null
     },
     "dustox-back-bob": {
-      "x": 1519,
+      "x": 859,
       "y": 1717,
       "w": 64,
       "h": 64,
@@ -10949,7 +10809,7 @@
       "mirror_of": null
     },
     "eevee-back-bob": {
-      "x": 1585,
+      "x": 925,
       "y": 1717,
       "w": 64,
       "h": 64,
@@ -10962,7 +10822,7 @@
       "mirror_of": null
     },
     "ekans-back-bob": {
-      "x": 1651,
+      "x": 991,
       "y": 1717,
       "w": 64,
       "h": 64,
@@ -10975,7 +10835,7 @@
       "mirror_of": null
     },
     "electabuzz-back-bob": {
-      "x": 1717,
+      "x": 1057,
       "y": 1717,
       "w": 64,
       "h": 64,
@@ -10988,7 +10848,7 @@
       "mirror_of": null
     },
     "electivire-back-bob": {
-      "x": 1783,
+      "x": 1123,
       "y": 1717,
       "w": 64,
       "h": 64,
@@ -11001,7 +10861,7 @@
       "mirror_of": null
     },
     "electrike-back-bob": {
-      "x": 1849,
+      "x": 1189,
       "y": 1717,
       "w": 64,
       "h": 64,
@@ -11014,7 +10874,7 @@
       "mirror_of": null
     },
     "electrode-back-bob": {
-      "x": 1915,
+      "x": 1255,
       "y": 1717,
       "w": 64,
       "h": 64,
@@ -11027,7 +10887,7 @@
       "mirror_of": null
     },
     "elekid-back-bob": {
-      "x": 1981,
+      "x": 1321,
       "y": 1717,
       "w": 64,
       "h": 64,
@@ -11040,8 +10900,8 @@
       "mirror_of": null
     },
     "empoleon-back-bob": {
-      "x": 1,
-      "y": 1783,
+      "x": 1387,
+      "y": 1717,
       "w": 64,
       "h": 64,
       "frames": [
@@ -11053,8 +10913,8 @@
       "mirror_of": null
     },
     "entei-back-bob": {
-      "x": 67,
-      "y": 1783,
+      "x": 1453,
+      "y": 1717,
       "w": 64,
       "h": 64,
       "frames": [
@@ -11066,8 +10926,8 @@
       "mirror_of": null
     },
     "espeon-back-bob": {
-      "x": 133,
-      "y": 1783,
+      "x": 1519,
+      "y": 1717,
       "w": 64,
       "h": 64,
       "frames": [
@@ -11079,8 +10939,8 @@
       "mirror_of": null
     },
     "exeggcute-back-bob": {
-      "x": 199,
-      "y": 1783,
+      "x": 1585,
+      "y": 1717,
       "w": 64,
       "h": 64,
       "frames": [
@@ -11092,8 +10952,8 @@
       "mirror_of": null
     },
     "exeggutor-back-bob": {
-      "x": 265,
-      "y": 1783,
+      "x": 1651,
+      "y": 1717,
       "w": 64,
       "h": 64,
       "frames": [
@@ -11105,8 +10965,8 @@
       "mirror_of": null
     },
     "exploud-back-bob": {
-      "x": 331,
-      "y": 1783,
+      "x": 1717,
+      "y": 1717,
       "w": 64,
       "h": 64,
       "frames": [
@@ -11118,8 +10978,8 @@
       "mirror_of": null
     },
     "farfetchd-back-bob": {
-      "x": 397,
-      "y": 1783,
+      "x": 1783,
+      "y": 1717,
       "w": 64,
       "h": 64,
       "frames": [
@@ -11131,8 +10991,8 @@
       "mirror_of": null
     },
     "fearow-back-bob": {
-      "x": 463,
-      "y": 1783,
+      "x": 1849,
+      "y": 1717,
       "w": 64,
       "h": 64,
       "frames": [
@@ -11144,8 +11004,8 @@
       "mirror_of": null
     },
     "feebas-back-bob": {
-      "x": 529,
-      "y": 1783,
+      "x": 1915,
+      "y": 1717,
       "w": 64,
       "h": 64,
       "frames": [
@@ -11157,8 +11017,8 @@
       "mirror_of": null
     },
     "feraligatr-back-bob": {
-      "x": 595,
-      "y": 1783,
+      "x": 1981,
+      "y": 1717,
       "w": 64,
       "h": 64,
       "frames": [
@@ -11170,7 +11030,7 @@
       "mirror_of": null
     },
     "finneon-back-bob": {
-      "x": 661,
+      "x": 1,
       "y": 1783,
       "w": 64,
       "h": 64,
@@ -11183,7 +11043,7 @@
       "mirror_of": null
     },
     "flaaffy-back-bob": {
-      "x": 727,
+      "x": 67,
       "y": 1783,
       "w": 64,
       "h": 64,
@@ -11196,7 +11056,7 @@
       "mirror_of": null
     },
     "flareon-back-bob": {
-      "x": 793,
+      "x": 133,
       "y": 1783,
       "w": 64,
       "h": 64,
@@ -11209,7 +11069,7 @@
       "mirror_of": null
     },
     "floatzel-back-bob": {
-      "x": 859,
+      "x": 199,
       "y": 1783,
       "w": 64,
       "h": 64,
@@ -11222,7 +11082,7 @@
       "mirror_of": null
     },
     "flygon-back-bob": {
-      "x": 925,
+      "x": 265,
       "y": 1783,
       "w": 64,
       "h": 64,
@@ -11235,7 +11095,7 @@
       "mirror_of": null
     },
     "flyingpikachu-back-bob": {
-      "x": 991,
+      "x": 331,
       "y": 1783,
       "w": 64,
       "h": 64,
@@ -11248,7 +11108,7 @@
       "mirror_of": null
     },
     "forretress-back-bob": {
-      "x": 1057,
+      "x": 397,
       "y": 1783,
       "w": 64,
       "h": 64,
@@ -11261,7 +11121,7 @@
       "mirror_of": null
     },
     "froslass-back-bob": {
-      "x": 1123,
+      "x": 463,
       "y": 1783,
       "w": 64,
       "h": 64,
@@ -11274,7 +11134,7 @@
       "mirror_of": null
     },
     "furret-back-bob": {
-      "x": 1189,
+      "x": 529,
       "y": 1783,
       "w": 64,
       "h": 64,
@@ -11287,7 +11147,7 @@
       "mirror_of": null
     },
     "gabite-back-bob": {
-      "x": 1255,
+      "x": 595,
       "y": 1783,
       "w": 64,
       "h": 64,
@@ -11300,7 +11160,7 @@
       "mirror_of": null
     },
     "gallade-back-bob": {
-      "x": 1321,
+      "x": 661,
       "y": 1783,
       "w": 64,
       "h": 64,
@@ -11313,7 +11173,7 @@
       "mirror_of": null
     },
     "garchomp-back-bob": {
-      "x": 1387,
+      "x": 727,
       "y": 1783,
       "w": 64,
       "h": 64,
@@ -11326,7 +11186,7 @@
       "mirror_of": null
     },
     "gardevoir-back-bob": {
-      "x": 1453,
+      "x": 793,
       "y": 1783,
       "w": 64,
       "h": 64,
@@ -11339,7 +11199,7 @@
       "mirror_of": null
     },
     "gastly-back-bob": {
-      "x": 1519,
+      "x": 859,
       "y": 1783,
       "w": 64,
       "h": 64,
@@ -11352,7 +11212,7 @@
       "mirror_of": null
     },
     "gastrodon-back-bob": {
-      "x": 1585,
+      "x": 925,
       "y": 1783,
       "w": 64,
       "h": 64,
@@ -11365,7 +11225,7 @@
       "mirror_of": null
     },
     "gengar-back-bob": {
-      "x": 1651,
+      "x": 991,
       "y": 1783,
       "w": 64,
       "h": 64,
@@ -11378,7 +11238,7 @@
       "mirror_of": null
     },
     "geodude-back-bob": {
-      "x": 1717,
+      "x": 1057,
       "y": 1783,
       "w": 64,
       "h": 64,
@@ -11391,7 +11251,7 @@
       "mirror_of": null
     },
     "giantdragonite-back-bob": {
-      "x": 1783,
+      "x": 1123,
       "y": 1783,
       "w": 64,
       "h": 64,
@@ -11404,7 +11264,7 @@
       "mirror_of": null
     },
     "gible-back-bob": {
-      "x": 1849,
+      "x": 1189,
       "y": 1783,
       "w": 64,
       "h": 64,
@@ -11417,7 +11277,7 @@
       "mirror_of": null
     },
     "girafarig-back-bob": {
-      "x": 1915,
+      "x": 1255,
       "y": 1783,
       "w": 64,
       "h": 64,
@@ -11430,7 +11290,7 @@
       "mirror_of": null
     },
     "giratina-back-bob": {
-      "x": 1981,
+      "x": 1321,
       "y": 1783,
       "w": 64,
       "h": 64,
@@ -11443,8 +11303,8 @@
       "mirror_of": null
     },
     "giratinaorigin-back-bob": {
-      "x": 1,
-      "y": 1849,
+      "x": 1387,
+      "y": 1783,
       "w": 64,
       "h": 64,
       "frames": [
@@ -11456,8 +11316,8 @@
       "mirror_of": null
     },
     "glaceon-back-bob": {
-      "x": 67,
-      "y": 1849,
+      "x": 1453,
+      "y": 1783,
       "w": 64,
       "h": 64,
       "frames": [
@@ -11469,8 +11329,8 @@
       "mirror_of": null
     },
     "glalie-back-bob": {
-      "x": 133,
-      "y": 1849,
+      "x": 1519,
+      "y": 1783,
       "w": 64,
       "h": 64,
       "frames": [
@@ -11482,8 +11342,8 @@
       "mirror_of": null
     },
     "glameow-back-bob": {
-      "x": 199,
-      "y": 1849,
+      "x": 1585,
+      "y": 1783,
       "w": 64,
       "h": 64,
       "frames": [
@@ -11495,8 +11355,8 @@
       "mirror_of": null
     },
     "gligar-back-bob": {
-      "x": 265,
-      "y": 1849,
+      "x": 1651,
+      "y": 1783,
       "w": 64,
       "h": 64,
       "frames": [
@@ -11508,8 +11368,8 @@
       "mirror_of": null
     },
     "gliscor-back-bob": {
-      "x": 331,
-      "y": 1849,
+      "x": 1717,
+      "y": 1783,
       "w": 64,
       "h": 64,
       "frames": [
@@ -11521,8 +11381,8 @@
       "mirror_of": null
     },
     "gloom-back-bob": {
-      "x": 397,
-      "y": 1849,
+      "x": 1783,
+      "y": 1783,
       "w": 64,
       "h": 64,
       "frames": [
@@ -11534,8 +11394,8 @@
       "mirror_of": null
     },
     "golbat-back-bob": {
-      "x": 463,
-      "y": 1849,
+      "x": 1849,
+      "y": 1783,
       "w": 64,
       "h": 64,
       "frames": [
@@ -11547,8 +11407,8 @@
       "mirror_of": null
     },
     "goldeen-back-bob": {
-      "x": 529,
-      "y": 1849,
+      "x": 1915,
+      "y": 1783,
       "w": 64,
       "h": 64,
       "frames": [
@@ -11560,8 +11420,8 @@
       "mirror_of": null
     },
     "golduck-back-bob": {
-      "x": 595,
-      "y": 1849,
+      "x": 1981,
+      "y": 1783,
       "w": 64,
       "h": 64,
       "frames": [
@@ -11573,7 +11433,7 @@
       "mirror_of": null
     },
     "golem-back-bob": {
-      "x": 661,
+      "x": 1,
       "y": 1849,
       "w": 64,
       "h": 64,
@@ -11586,7 +11446,7 @@
       "mirror_of": null
     },
     "gorebyss-back-bob": {
-      "x": 727,
+      "x": 67,
       "y": 1849,
       "w": 64,
       "h": 64,
@@ -11599,7 +11459,7 @@
       "mirror_of": null
     },
     "granbull-back-bob": {
-      "x": 793,
+      "x": 133,
       "y": 1849,
       "w": 64,
       "h": 64,
@@ -11612,7 +11472,7 @@
       "mirror_of": null
     },
     "graveler-back-bob": {
-      "x": 859,
+      "x": 199,
       "y": 1849,
       "w": 64,
       "h": 64,
@@ -11625,7 +11485,7 @@
       "mirror_of": null
     },
     "grimer-back-bob": {
-      "x": 925,
+      "x": 265,
       "y": 1849,
       "w": 64,
       "h": 64,
@@ -11638,7 +11498,7 @@
       "mirror_of": null
     },
     "grotle-back-bob": {
-      "x": 991,
+      "x": 331,
       "y": 1849,
       "w": 64,
       "h": 64,
@@ -11651,7 +11511,7 @@
       "mirror_of": null
     },
     "groudon-back-bob": {
-      "x": 1057,
+      "x": 397,
       "y": 1849,
       "w": 64,
       "h": 64,
@@ -11664,7 +11524,7 @@
       "mirror_of": null
     },
     "grovyle-back-bob": {
-      "x": 1123,
+      "x": 463,
       "y": 1849,
       "w": 64,
       "h": 64,
@@ -11677,20 +11537,20 @@
       "mirror_of": null
     },
     "growlithe-back-bob": {
-      "x": 1189,
+      "x": 529,
       "y": 1849,
       "w": 64,
       "h": 64,
       "frames": [
         "idle"
       ],
-      "palette": 12,
+      "palette": 16,
       "seed": null,
       "derived_from": null,
       "mirror_of": null
     },
     "grumpig-back-bob": {
-      "x": 1255,
+      "x": 595,
       "y": 1849,
       "w": 64,
       "h": 64,
@@ -11703,7 +11563,7 @@
       "mirror_of": null
     },
     "gulpin-back-bob": {
-      "x": 1321,
+      "x": 661,
       "y": 1849,
       "w": 64,
       "h": 64,
@@ -11716,7 +11576,7 @@
       "mirror_of": null
     },
     "gyarados-back-bob": {
-      "x": 1387,
+      "x": 727,
       "y": 1849,
       "w": 64,
       "h": 64,
@@ -11729,7 +11589,7 @@
       "mirror_of": null
     },
     "happiny-back-bob": {
-      "x": 1453,
+      "x": 793,
       "y": 1849,
       "w": 64,
       "h": 64,
@@ -11742,7 +11602,7 @@
       "mirror_of": null
     },
     "hariyama-back-bob": {
-      "x": 1519,
+      "x": 859,
       "y": 1849,
       "w": 64,
       "h": 64,
@@ -11755,7 +11615,7 @@
       "mirror_of": null
     },
     "haunter-back-bob": {
-      "x": 1585,
+      "x": 925,
       "y": 1849,
       "w": 64,
       "h": 64,
@@ -11768,7 +11628,7 @@
       "mirror_of": null
     },
     "heatran-back-bob": {
-      "x": 1651,
+      "x": 991,
       "y": 1849,
       "w": 64,
       "h": 64,
@@ -11781,7 +11641,7 @@
       "mirror_of": null
     },
     "heracross-back-bob": {
-      "x": 1717,
+      "x": 1057,
       "y": 1849,
       "w": 64,
       "h": 64,
@@ -11794,7 +11654,7 @@
       "mirror_of": null
     },
     "hippopotas-back-bob": {
-      "x": 1783,
+      "x": 1123,
       "y": 1849,
       "w": 64,
       "h": 64,
@@ -11807,7 +11667,7 @@
       "mirror_of": null
     },
     "hippowdon-back-bob": {
-      "x": 1849,
+      "x": 1189,
       "y": 1849,
       "w": 64,
       "h": 64,
@@ -11820,7 +11680,7 @@
       "mirror_of": null
     },
     "hitmonchan-back-bob": {
-      "x": 1915,
+      "x": 1255,
       "y": 1849,
       "w": 64,
       "h": 64,
@@ -11833,7 +11693,7 @@
       "mirror_of": null
     },
     "hitmonlee-back-bob": {
-      "x": 1981,
+      "x": 1321,
       "y": 1849,
       "w": 64,
       "h": 64,
@@ -11846,8 +11706,8 @@
       "mirror_of": null
     },
     "hitmontop-back-bob": {
-      "x": 1,
-      "y": 1915,
+      "x": 1387,
+      "y": 1849,
       "w": 64,
       "h": 64,
       "frames": [
@@ -11859,8 +11719,8 @@
       "mirror_of": null
     },
     "honchkrow-back-bob": {
-      "x": 67,
-      "y": 1915,
+      "x": 1453,
+      "y": 1849,
       "w": 64,
       "h": 64,
       "frames": [
@@ -11872,8 +11732,8 @@
       "mirror_of": null
     },
     "hooh-back-bob": {
-      "x": 133,
-      "y": 1915,
+      "x": 1519,
+      "y": 1849,
       "w": 64,
       "h": 64,
       "frames": [
@@ -11885,8 +11745,8 @@
       "mirror_of": null
     },
     "hoothoot-back-bob": {
-      "x": 199,
-      "y": 1915,
+      "x": 1585,
+      "y": 1849,
       "w": 64,
       "h": 64,
       "frames": [
@@ -11898,8 +11758,8 @@
       "mirror_of": null
     },
     "hoppip-back-bob": {
-      "x": 265,
-      "y": 1915,
+      "x": 1651,
+      "y": 1849,
       "w": 64,
       "h": 64,
       "frames": [
@@ -11911,8 +11771,8 @@
       "mirror_of": null
     },
     "horsea-back-bob": {
-      "x": 331,
-      "y": 1915,
+      "x": 1717,
+      "y": 1849,
       "w": 64,
       "h": 64,
       "frames": [
@@ -11924,8 +11784,8 @@
       "mirror_of": null
     },
     "houndoom-back-bob": {
-      "x": 397,
-      "y": 1915,
+      "x": 1783,
+      "y": 1849,
       "w": 64,
       "h": 64,
       "frames": [
@@ -11937,8 +11797,8 @@
       "mirror_of": null
     },
     "houndour-back-bob": {
-      "x": 463,
-      "y": 1915,
+      "x": 1849,
+      "y": 1849,
       "w": 64,
       "h": 64,
       "frames": [
@@ -11950,8 +11810,8 @@
       "mirror_of": null
     },
     "huntail-back-bob": {
-      "x": 529,
-      "y": 1915,
+      "x": 1915,
+      "y": 1849,
       "w": 64,
       "h": 64,
       "frames": [
@@ -11963,8 +11823,8 @@
       "mirror_of": null
     },
     "hypno-back-bob": {
-      "x": 595,
-      "y": 1915,
+      "x": 1981,
+      "y": 1849,
       "w": 64,
       "h": 64,
       "frames": [
@@ -11976,7 +11836,7 @@
       "mirror_of": null
     },
     "igglybuff-back-bob": {
-      "x": 661,
+      "x": 1,
       "y": 1915,
       "w": 64,
       "h": 64,
@@ -11989,7 +11849,7 @@
       "mirror_of": null
     },
     "illumise-back-bob": {
-      "x": 727,
+      "x": 67,
       "y": 1915,
       "w": 64,
       "h": 64,
@@ -12002,7 +11862,7 @@
       "mirror_of": null
     },
     "infernape-back-bob": {
-      "x": 793,
+      "x": 133,
       "y": 1915,
       "w": 64,
       "h": 64,
@@ -12015,7 +11875,7 @@
       "mirror_of": null
     },
     "ivysaur-back-bob": {
-      "x": 859,
+      "x": 199,
       "y": 1915,
       "w": 64,
       "h": 64,
@@ -12028,7 +11888,7 @@
       "mirror_of": null
     },
     "jigglypuff-back-bob": {
-      "x": 925,
+      "x": 265,
       "y": 1915,
       "w": 64,
       "h": 64,
@@ -12041,7 +11901,7 @@
       "mirror_of": null
     },
     "jirachi-back-bob": {
-      "x": 991,
+      "x": 331,
       "y": 1915,
       "w": 64,
       "h": 64,
@@ -12054,7 +11914,7 @@
       "mirror_of": null
     },
     "jolteon-back-bob": {
-      "x": 1057,
+      "x": 397,
       "y": 1915,
       "w": 64,
       "h": 64,
@@ -12067,7 +11927,7 @@
       "mirror_of": null
     },
     "jumpluff-back-bob": {
-      "x": 1123,
+      "x": 463,
       "y": 1915,
       "w": 64,
       "h": 64,
@@ -12080,7 +11940,7 @@
       "mirror_of": null
     },
     "jynx-back-bob": {
-      "x": 1189,
+      "x": 529,
       "y": 1915,
       "w": 64,
       "h": 64,
@@ -12093,7 +11953,7 @@
       "mirror_of": null
     },
     "kabuto-back-bob": {
-      "x": 1255,
+      "x": 595,
       "y": 1915,
       "w": 64,
       "h": 64,
@@ -12106,7 +11966,7 @@
       "mirror_of": null
     },
     "kabutops-back-bob": {
-      "x": 1321,
+      "x": 661,
       "y": 1915,
       "w": 64,
       "h": 64,
@@ -12119,20 +11979,20 @@
       "mirror_of": null
     },
     "kadabra-back-bob": {
-      "x": 1387,
+      "x": 727,
       "y": 1915,
       "w": 64,
       "h": 64,
       "frames": [
         "idle"
       ],
-      "palette": 12,
+      "palette": 10,
       "seed": null,
       "derived_from": null,
       "mirror_of": null
     },
     "kakuna-back-bob": {
-      "x": 1453,
+      "x": 793,
       "y": 1915,
       "w": 64,
       "h": 64,
@@ -12145,7 +12005,7 @@
       "mirror_of": null
     },
     "kangaskhan-back-bob": {
-      "x": 1519,
+      "x": 859,
       "y": 1915,
       "w": 64,
       "h": 64,
@@ -12158,7 +12018,7 @@
       "mirror_of": null
     },
     "kecleon-back-bob": {
-      "x": 1585,
+      "x": 925,
       "y": 1915,
       "w": 64,
       "h": 64,
@@ -12171,7 +12031,7 @@
       "mirror_of": null
     },
     "kingdra-back-bob": {
-      "x": 1651,
+      "x": 991,
       "y": 1915,
       "w": 64,
       "h": 64,
@@ -12184,7 +12044,7 @@
       "mirror_of": null
     },
     "kingler-back-bob": {
-      "x": 1717,
+      "x": 1057,
       "y": 1915,
       "w": 64,
       "h": 64,
@@ -12197,7 +12057,7 @@
       "mirror_of": null
     },
     "kirlia-back-bob": {
-      "x": 1783,
+      "x": 1123,
       "y": 1915,
       "w": 64,
       "h": 64,
@@ -12210,7 +12070,7 @@
       "mirror_of": null
     },
     "koffing-back-bob": {
-      "x": 1849,
+      "x": 1189,
       "y": 1915,
       "w": 64,
       "h": 64,
@@ -12223,7 +12083,7 @@
       "mirror_of": null
     },
     "krabby-back-bob": {
-      "x": 1915,
+      "x": 1255,
       "y": 1915,
       "w": 64,
       "h": 64,
@@ -12236,7 +12096,7 @@
       "mirror_of": null
     },
     "kricketot-back-bob": {
-      "x": 1981,
+      "x": 1321,
       "y": 1915,
       "w": 64,
       "h": 64,
@@ -12249,8 +12109,8 @@
       "mirror_of": null
     },
     "kricketune-back-bob": {
-      "x": 1,
-      "y": 1981,
+      "x": 1387,
+      "y": 1915,
       "w": 64,
       "h": 64,
       "frames": [
@@ -12262,8 +12122,8 @@
       "mirror_of": null
     },
     "kyogre-back-bob": {
-      "x": 67,
-      "y": 1981,
+      "x": 1453,
+      "y": 1915,
       "w": 64,
       "h": 64,
       "frames": [
@@ -12275,8 +12135,8 @@
       "mirror_of": null
     },
     "lairon-back-bob": {
-      "x": 133,
-      "y": 1981,
+      "x": 1519,
+      "y": 1915,
       "w": 64,
       "h": 64,
       "frames": [
@@ -12288,8 +12148,8 @@
       "mirror_of": null
     },
     "lanturn-back-bob": {
-      "x": 199,
-      "y": 1981,
+      "x": 1585,
+      "y": 1915,
       "w": 64,
       "h": 64,
       "frames": [
@@ -12301,8 +12161,8 @@
       "mirror_of": null
     },
     "lapras-back-bob": {
-      "x": 265,
-      "y": 1981,
+      "x": 1651,
+      "y": 1915,
       "w": 64,
       "h": 64,
       "frames": [
@@ -12314,8 +12174,8 @@
       "mirror_of": null
     },
     "larvitar-back-bob": {
-      "x": 331,
-      "y": 1981,
+      "x": 1717,
+      "y": 1915,
       "w": 64,
       "h": 64,
       "frames": [
@@ -12327,8 +12187,8 @@
       "mirror_of": null
     },
     "latias-back-bob": {
-      "x": 397,
-      "y": 1981,
+      "x": 1783,
+      "y": 1915,
       "w": 64,
       "h": 64,
       "frames": [
@@ -12340,8 +12200,8 @@
       "mirror_of": null
     },
     "latios-back-bob": {
-      "x": 463,
-      "y": 1981,
+      "x": 1849,
+      "y": 1915,
       "w": 64,
       "h": 64,
       "frames": [
@@ -12353,8 +12213,8 @@
       "mirror_of": null
     },
     "leafeon-back-bob": {
-      "x": 529,
-      "y": 1981,
+      "x": 1915,
+      "y": 1915,
       "w": 64,
       "h": 64,
       "frames": [
@@ -12366,8 +12226,8 @@
       "mirror_of": null
     },
     "ledian-back-bob": {
-      "x": 595,
-      "y": 1981,
+      "x": 1981,
+      "y": 1915,
       "w": 64,
       "h": 64,
       "frames": [
@@ -12379,7 +12239,7 @@
       "mirror_of": null
     },
     "ledyba-back-bob": {
-      "x": 661,
+      "x": 1,
       "y": 1981,
       "w": 64,
       "h": 64,
@@ -12392,7 +12252,7 @@
       "mirror_of": null
     },
     "lickilicky-back-bob": {
-      "x": 727,
+      "x": 67,
       "y": 1981,
       "w": 64,
       "h": 64,
@@ -12405,7 +12265,7 @@
       "mirror_of": null
     },
     "lickitung-back-bob": {
-      "x": 793,
+      "x": 133,
       "y": 1981,
       "w": 64,
       "h": 64,
@@ -12418,7 +12278,7 @@
       "mirror_of": null
     },
     "lileep-back-bob": {
-      "x": 859,
+      "x": 199,
       "y": 1981,
       "w": 64,
       "h": 64,
@@ -12431,7 +12291,7 @@
       "mirror_of": null
     },
     "linoone-back-bob": {
-      "x": 925,
+      "x": 265,
       "y": 1981,
       "w": 64,
       "h": 64,
@@ -12444,7 +12304,7 @@
       "mirror_of": null
     },
     "lombre-back-bob": {
-      "x": 991,
+      "x": 331,
       "y": 1981,
       "w": 64,
       "h": 64,
@@ -12457,7 +12317,7 @@
       "mirror_of": null
     },
     "lopunny-back-bob": {
-      "x": 1057,
+      "x": 397,
       "y": 1981,
       "w": 64,
       "h": 64,
@@ -12470,7 +12330,7 @@
       "mirror_of": null
     },
     "lotad-back-bob": {
-      "x": 1123,
+      "x": 463,
       "y": 1981,
       "w": 64,
       "h": 64,
@@ -12483,7 +12343,7 @@
       "mirror_of": null
     },
     "loudred-back-bob": {
-      "x": 1189,
+      "x": 529,
       "y": 1981,
       "w": 64,
       "h": 64,
@@ -12496,7 +12356,7 @@
       "mirror_of": null
     },
     "lucario-back-bob": {
-      "x": 1255,
+      "x": 595,
       "y": 1981,
       "w": 64,
       "h": 64,
@@ -12509,7 +12369,7 @@
       "mirror_of": null
     },
     "ludicolo-back-bob": {
-      "x": 1321,
+      "x": 661,
       "y": 1981,
       "w": 64,
       "h": 64,
@@ -12522,7 +12382,7 @@
       "mirror_of": null
     },
     "lugia-back-bob": {
-      "x": 1387,
+      "x": 727,
       "y": 1981,
       "w": 64,
       "h": 64,
@@ -12535,7 +12395,7 @@
       "mirror_of": null
     },
     "lumineon-back-bob": {
-      "x": 1453,
+      "x": 793,
       "y": 1981,
       "w": 64,
       "h": 64,
@@ -12548,7 +12408,7 @@
       "mirror_of": null
     },
     "lunatone-back-bob": {
-      "x": 1519,
+      "x": 859,
       "y": 1981,
       "w": 64,
       "h": 64,
@@ -12561,7 +12421,7 @@
       "mirror_of": null
     },
     "luvdisc-back-bob": {
-      "x": 1585,
+      "x": 925,
       "y": 1981,
       "w": 64,
       "h": 64,
@@ -12574,7 +12434,7 @@
       "mirror_of": null
     },
     "luxio-back-bob": {
-      "x": 1651,
+      "x": 991,
       "y": 1981,
       "w": 64,
       "h": 64,
@@ -12587,7 +12447,7 @@
       "mirror_of": null
     },
     "luxray-back-bob": {
-      "x": 1717,
+      "x": 1057,
       "y": 1981,
       "w": 64,
       "h": 64,
@@ -12600,7 +12460,20 @@
       "mirror_of": null
     },
     "machamp-back-bob": {
-      "x": 1783,
+      "x": 1123,
+      "y": 1981,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 15,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "machoke-back-bob": {
+      "x": 1189,
       "y": 1981,
       "w": 64,
       "h": 64,
@@ -12612,21 +12485,8 @@
       "derived_from": null,
       "mirror_of": null
     },
-    "machoke-back-bob": {
-      "x": 1849,
-      "y": 1981,
-      "w": 64,
-      "h": 64,
-      "frames": [
-        "idle"
-      ],
-      "palette": 13,
-      "seed": null,
-      "derived_from": null,
-      "mirror_of": null
-    },
     "machop-back-bob": {
-      "x": 1915,
+      "x": 1255,
       "y": 1981,
       "w": 64,
       "h": 64,
@@ -12639,6 +12499,136 @@
       "mirror_of": null
     },
     "magby-back-bob": {
+      "x": 1321,
+      "y": 1981,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 5,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "magcargo-back-bob": {
+      "x": 1387,
+      "y": 1981,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 6,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "magikarp-back-bob": {
+      "x": 1453,
+      "y": 1981,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "magmar-back-bob": {
+      "x": 1519,
+      "y": 1981,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 16,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "magmortar-back-bob": {
+      "x": 1585,
+      "y": 1981,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 8,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "magnemite-back-bob": {
+      "x": 1651,
+      "y": 1981,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 14,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "magneton-back-bob": {
+      "x": 1717,
+      "y": 1981,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 15,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "magnezone-back-bob": {
+      "x": 1783,
+      "y": 1981,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 8,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "makuhita-back-bob": {
+      "x": 1849,
+      "y": 1981,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 8,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "mamoswine-back-bob": {
+      "x": 1915,
+      "y": 1981,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 6,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "manaphy-back-bob": {
       "x": 1981,
       "y": 1981,
       "w": 64,
