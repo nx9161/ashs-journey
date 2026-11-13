@@ -67,7 +67,7 @@ const driver = `
   out.faintMenuTitle = ui.menu && ui.menu.title;
   out.faintMenuHasNoBack = ui.menu && !ui.menu.items.some((it) => it.label === 'Back');
   ui.cancelMenu(); // what B/Esc does in update()
-  out.cancelReopensFaintMenu = ui.menuOpen && ui.menu.title === 'Choose next Pokemon';
+  out.cancelReopensFaintMenu = ui.menuOpen && ui.menu.title === 'Choose next Kin'; // W1 resync: faint menu title renamed in the KIN branding sweep (battle.mjs:804)
   // Choosing the reserve completes the switch and returns to command.
   ui.debugChoose(1);
   drainSay(b1);
@@ -110,7 +110,7 @@ ok('S-14 Super Potion heals 50 via the shared apply path', res.superHeals50 === 
 ok('S-13 battle reaches the command root', res.reachedCommand === true, JSON.stringify(res));
 ok('S-13 classic command root is sticky', res.rootIsSticky === true);
 ok('S-13 B at the root keeps the command grid', res.bAtRootKeepsGrid === true);
-ok('S-12 faint menu is the forced choice', res.faintMenuTitle === 'Choose next Pokemon', String(res.faintMenuTitle));
+ok('S-12 faint menu is the forced choice', res.faintMenuTitle === 'Choose next Kin', String(res.faintMenuTitle)); // W1 resync: title renamed (battle.mjs:804)
 ok('S-12 faint menu offers no Back row', res.faintMenuHasNoBack === true);
 ok('S-12 B/cancel re-opens the forced choice (no strand)', res.cancelReopensFaintMenu === true);
 ok('S-12 choosing the reserve completes the switch to command', res.switchCompleted === true);
