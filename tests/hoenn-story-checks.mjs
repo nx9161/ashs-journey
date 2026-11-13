@@ -575,7 +575,7 @@ const driver = `
   ok('B43 the Lucario special stages in-arc (chronology Ch.6): the aura flowers open in Petalburg Woods (lucario_event_done + lucario_aura_seen — a legend beat, no fake Sinnoh-dex battle staged)',
     !!auraNpc && !!st.story.flags.lucario_event_done && !!st.story.flags.lucario_aura_seen);
   st.party.forEach(function (m) { m.hp = m.maxHp; m.status = null; (m.moves || []).forEach(function (mv) { mv.pp = mv.maxPp; }); });
-  ow = gotoMap(g, 'victory-road', 11, 10); pump(g);
+  ow = gotoMap(g, 'victory-road-maris', 11, 10); pump(g);
   var walFinal = talkKind(g, ow, 'wally_final'); pump(g, 1200);
   ok('B44 Wally\\'s payoff in Victory Road: the grown boy is faced and beaten before the league doors (wally_final_done + beat_wally_final)', !!walFinal && !!st.story.flags.wally_final_done && !!st.story.flags.beat_wally_final);
   st.party.forEach(function (m) { m.hp = m.maxHp; m.status = null; (m.moves || []).forEach(function (mv) { mv.pp = mv.maxPp; }); });

@@ -107,7 +107,7 @@ for (const mapId of Object.keys(MAPS)) {
 }
 ok('census assembles a real population (>600 posts)', totalPosts > 600, String(totalPosts));
 ok('every census post yields a unique charId on its map', !dupReport, dupReport);
-for (const cid of ['mom@pallet', 'master-ko@dojo', 'wally@petalburg', 'wally@victory-road',
+for (const cid of ['mom@pallet', 'master-ko@dojo', 'wally@petalburg', 'wally@victory-road-maris',
   'rue@celadon', 'cole@celadon', 'harbormaster@vermilion', 'shopkeeper@mart']) {
   const mapId = cid.split('@')[1];
   ok('charId exists: ' + cid, cidsOf(mapId).includes(cid));
@@ -119,10 +119,10 @@ ok('slug derivation is the documented one',
 
 // ---------- persistence: overrides across save/load ----------
 ok('ACTOR_DEFAULTS holds the Crown Road post empty until Wally departs',
-  ACTOR_DEFAULTS['wally@victory-road'] && ACTOR_DEFAULTS['wally@victory-road'].hidden === true);
+  ACTOR_DEFAULTS['wally@victory-road-maris'] && ACTOR_DEFAULTS['wally@victory-road-maris'].hidden === true);
 ok('directive precedence: default applies with no save', (() => {
   const s = defaultState();
-  const d = actorDirective(s, 'wally@victory-road');
+  const d = actorDirective(s, 'wally@victory-road-maris');
   return !!d && d.hidden === true && actorDirective(s, 'mom@pallet') === null;
 })());
 {
@@ -130,13 +130,13 @@ ok('directive precedence: default applies with no save', (() => {
   ok('new saves start with an empty override store', !!s.story.actors && Object.keys(s.story.actors).length === 0);
   setActorOverride(s, 'master-ko@dojo', { map: 'dojo', x: 5, y: 5, hidden: false });
   setActorOverride(s, 'wally@petalburg', { hidden: true, map: 'petalburg' });
-  setActorOverride(s, 'wally@victory-road', { hidden: false });
+  setActorOverride(s, 'wally@victory-road-maris', { hidden: false });
   const round = migrate(JSON.parse(JSON.stringify(s)));
   const v = validateSave(round);
   ok('overrides survive JSON round-trip + migrate + validate', v.ok
     && actorDirective(round, 'master-ko@dojo').x === 5
     && actorDirective(round, 'wally@petalburg').hidden === true
-    && actorDirective(round, 'wally@victory-road').hidden === false,
+    && actorDirective(round, 'wally@victory-road-maris').hidden === false,
     v.errors.join(','));
 }
 {
@@ -208,13 +208,13 @@ ok('identity + resolver wired in loadMap',
 // ---------- proof 3: Wally relocates at his quest's end ----------
 {
   const wP = hoenn.HOENN_NPCS.find((n) => n.name === 'WALLY' && n.map === 'petalburg');
-  const wV = hoenn.HOENN_NPCS.find((n) => n.name === 'WALLY' && n.map === 'victory-road');
+  const wV = hoenn.HOENN_NPCS.find((n) => n.name === 'WALLY' && n.map === 'victory-road-maris');
   ok('both Wally posts are authored (Meadowbrook + Crown Road)',
     !!wP && wP.x === 13 && wP.y === 7 && !!wV && wV.x === 11 && wV.y === 6);
-  ok('Wally posts stand on walkable tiles', walkableAt('petalburg', 13, 7) && walkableAt('victory-road', 11, 6));
+  ok('Wally posts stand on walkable tiles', walkableAt('petalburg', 13, 7) && walkableAt('victory-road-maris', 11, 6));
   ok('the departure route east out of Meadowbrook exists', bfsExists('petalburg', 13, 7, 29, 8));
   ok('the farewell scene wires the relocation (exit + show)',
-    SRC_SYS.includes("actorExit: { who: 'wally@petalburg'") && SRC_SYS.includes("actorShow: { who: 'wally@victory-road' }"));
+    SRC_SYS.includes("actorExit: { who: 'wally@petalburg'") && SRC_SYS.includes("actorShow: { who: 'wally@victory-road-maris' }"));
 }
 
 console.log(`\nactor-lifecycle: ${pass} pass, ${fail} fail (${totalPosts} census posts)`);
