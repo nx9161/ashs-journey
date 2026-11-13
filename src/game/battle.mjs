@@ -2202,6 +2202,10 @@ export class BattleScene {
     const t = this.trainer;
     this.state = 'victory';
     if (this._exitStartT < 0) this._exitStartT = this.t; // W1 FX-6: exit mirror wipe
+    // W6 (audit D2): the composed trainer-win fanfare (SCORE.md: 'fanfare
+    // (trainer win)') finally plays — ordinary trainer wins only; badge
+    // wins already get the 'badge' fanfare at the award below.
+    if (!t.badge) g.audio.playSfx('fanfare');
     // ADR-025 §4: Generous World scales prize money (x1.5).
     // F2: under facility law there is NO prize (generated trainers
     // also carry reward: 0 — the flag is the second lock) and NO
