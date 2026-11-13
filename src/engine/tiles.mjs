@@ -639,6 +639,27 @@ T15_KIND_DEFS.forEach(([kind], i) => {
   TILE_CHARS[ch] = kind;
 });
 export const T15_PROP_KINDS = T15_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
+// ---- Wave T17 (Signal build): the radio mast ----
+// One new kind continuing the block at idx 574 (T15 ends at
+// 573; U+203E, verified free in TILE_CHARS and unused by
+// every map row). Class 'prop': a solid object composited
+// over the ground it stands on (art.mjs resolver). The mast
+// is the Radio Tower's lattice made visible — cross-braced
+// iron, a side dish and the red beacon — standing in its
+// fenced compound east of the broadcast house (the design's
+// fenced tower plot). Authored art:
+// assets/sprites/pix/tiles/tile-prop-radiomast.pix (Wave
+// T17 register in WAVE-T17-SIGNAL-PLAN.md, Prop register).
+export const T17_KIND_DEFS = [
+  ['radiomast', 'prop'],
+];
+export const T17_KIND_CHARS = {};
+T17_KIND_DEFS.forEach(([kind], i) => {
+  const ch = String.fromCodePoint(0x1E00 + 574 + i);
+  T17_KIND_CHARS[kind] = ch;
+  TILE_CHARS[ch] = kind;
+});
+export const T17_PROP_KINDS = T17_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
 export const SINNOH_TOWN_GROUND_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg);
 export const SINNOH_TOWN_GROUND2_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg2);
 // TX-3: the 8 gym exteriors by town (original type-accent motifs).
