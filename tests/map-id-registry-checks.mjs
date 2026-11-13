@@ -120,7 +120,7 @@ const BASELINE = {
   "mansion": ['D', 'maps2.mjs:6036b681', 'maps3.mjs:0b89e84d'],
   "newisland": ['D', 'maps2.mjs:06f895d7', 'maps3.mjs:87e908ce', 'maps4.mjs:0a2b629f'],
   "pallet": ['D', 'maps.mjs:4b19b4ef', 'maps2.mjs:e32d3d85', 'maps3.mjs:9797c889'],
-  "pewter": ['D', 'maps.mjs:c6fbbbdb', 'maps2.mjs:74dbbce8'],
+  "pewter": ['D', 'maps.mjs:c6fbbbdb', 'maps2.mjs:34f2aafe'],
   "powerplant": ['D', 'maps2.mjs:7ce38a29', 'maps3.mjs:f19569a9'],
   "rocktunnel": ['D', 'maps2.mjs:474d1700', 'maps3.mjs:a4e228fb'],
   "route10": ['I', 'maps2.mjs:d1f5b22e', 'maps3.mjs:d1f5b22e'],

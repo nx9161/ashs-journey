@@ -54,6 +54,9 @@ export const MAPS2 = {
     signs: [
       { x: 6, y: 9, text: 'FLINTRIDGE CITY — A stone-gray city nestled between mountains.' },
       { x: 12, y: 4, text: 'FLINTRIDGE GYM — Leader: Brock. The rock-solid Kin trainer! Inside lies a RUBBLE GROUND: Rock moves hit harder and physical moves land true — for Brock, and for you.' },
+      { x: 13, y: 9, text: 'FLINTRIDGE EAST — Route 3 by the east gate; the Gym and the Museum lie west.' },
+      { x: 13, y: 12, text: 'SOUTH STREET — The Mart fronts this row; the Center stands west. Route 2 leaves south.' },
+      { x: 6, y: 12, text: 'THE CENTER — Rest your Kin inside. The Museum square lies north; Route 2 south.' },
     ],
     npcs: [
       { x: 13, y: 11, name: 'MART CLERK', art: 'clerk', skin: '#f0c8a0', shirt: '#3a6ac0', pants: '#2a2a3a', hair: '#2a1a0a',
