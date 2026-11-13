@@ -32,7 +32,7 @@ export const MAPS2 = {
       'GabcÂÂÂ..îabqĵĵdefÂG',
       'GğyğÂÂÂ..ÂrstĵĵxyzÂG',
       'G...................',
-      'GnFnÂĵÂ..npÂÂÂÂÂÂÂÂG',
+      'GÂFÂÂĵÂ..npÂÂÂÂÂÂÂÂG',
       'GdefÂ.jklmÂ..ÂdeOefG',
       'GvsuÂ.AJKAÂ..ÂPṝ12PG',
       'GẐĵ.ĵ.............BG',
