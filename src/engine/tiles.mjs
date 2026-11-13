@@ -660,6 +660,26 @@ T17_KIND_DEFS.forEach(([kind], i) => {
   TILE_CHARS[ch] = kind;
 });
 export const T17_PROP_KINDS = T17_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
+// ---- Wave T23 (Rootlet build): the notched fence post ----
+// One new kind continuing the block at idx 575 (T17 ends at
+// 574; U+203F, verified free in TILE_CHARS and unused by
+// every map row). Class 'prop': a solid object composited
+// over the ground it stands on (art.mjs resolver). The cedar
+// post at the west side of Rootlet's north road, carved with
+// a notch for every trainer who ever left — on the side only
+// the town can see (the Rootlet tale made visible).
+// Authored art: assets/sprites/pix/tiles/tile-prop-notchpost.pix
+// (Wave T23 register in WAVE-T23-ROOTLET-PLAN.md, Prop register).
+export const T23_KIND_DEFS = [
+  ['notchpost', 'prop'],
+];
+export const T23_KIND_CHARS = {};
+T23_KIND_DEFS.forEach(([kind], i) => {
+  const ch = String.fromCodePoint(0x1E00 + 575 + i);
+  T23_KIND_CHARS[kind] = ch;
+  TILE_CHARS[ch] = kind;
+});
+export const T23_PROP_KINDS = T23_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
 export const SINNOH_TOWN_GROUND_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg);
 export const SINNOH_TOWN_GROUND2_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg2);
 // TX-3: the 8 gym exteriors by town (original type-accent motifs).
