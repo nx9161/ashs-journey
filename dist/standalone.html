@@ -109596,7 +109596,7 @@ function materializeArt(id) {
   // Kit entries (Gassasin CC-BY tileset/character, Phase 1 2026-11-11)
   // live in their own generated registry; they are plain entries (no
   // delta chains), resolved here so artCanvas — and with it the swap
-  // and seasonal-grade machinery — treats them identically to ART.
+  // machinery — treats them identically to ART.
   const a = ART[id] || KIT_ART[id];
   if (!a) return null;
   if (!a.deltas && !a.shiftY) return a;
@@ -110399,39 +110399,25 @@ function pickVariant(arr, x, y, salt) {
 // agree on it, so it lives in exactly one place.
 function isTallGrass(x, y) { return hashTile(x, y, 11) < 0.78; }
 
-function buildArtTileCache(doc, seasonSwapFor, seasonKitSwapFor) {
+function buildArtTileCache(doc) {
   // kind -> canvas (16x16). 'water' -> [water-1..3] animated frames.
   // 'void' stays a solid fill (no art). Kinds without ART fall back to paintTile.
-  // Season grade (Black 2 imposition, 2026-11-11): when seasonSwapFor is
-  // supplied (main.mjs passes seasons.mjs's), vegetation tile art —
-  // grass / tall grass / flowers / trees / bush / tropgrass — is
-  // rasterized with its greens re-graded for the current season. Every
-  // other tile keeps its authored palette exactly.
-  const VEG_ID = /^tile-(grass|tallgrass|flower|tree|bush|tropgrass|grassground)/;
-  const swapFor = (id) => {
-    if (!seasonSwapFor || !VEG_ID.test(id)) return undefined;
-    const a = materializeArt(id);
-    if (!a || !a.pal) return undefined;
-    const sw = seasonSwapFor(a.pal);
-    return sw && Object.keys(sw).length ? sw : undefined;
-  };
+  // Fixed palette (Wave SZ, owner order 2026-11-12 — seasons removed):
+  // every tile rasterizes with its authored palette exactly, on every
+  // date. There is no seasonal grade; tests/seasons-checks.mjs guards it.
   const cache = {};
   for (const kind of Object.keys(TILE_ART)) {
-    const cv = artCanvas(doc, TILE_ART[kind], 1, false, swapFor(TILE_ART[kind]));
+    const cv = artCanvas(doc, TILE_ART[kind], 1, false);
     if (cv) { cache[kind] = cv; continue; }
     const fb = doc.createElement('canvas');
     fb.width = 16; fb.height = 16;
     paintTile(fb.getContext('2d'), kind, 0, 0);
     cache[kind] = fb;
   }
-  const ids = (list) => list.map((id) => artCanvas(doc, id, 1, false, swapFor(id))).filter(Boolean);
+  const ids = (list) => list.map((id) => artCanvas(doc, id, 1, false)).filter(Boolean);
   // ---- Gassasin kit towns (Phase 1: pallet; Wave A: Arden + route1) ----
   // Kit canvases for opted-in maps, keyed cache.kitTowns[mapId] and
   // consumed by resolveTileLayers' kit branch (docs/THIRD-PARTY-ART.md).
-  // Vegetation tiles pass through the KIT seasonal grade (seasons.mjs
-  // seasonalSwapForKit, fed by main.mjs): the shared grade's Autumn
-  // overshoot on the kit's deep greens is dampened back into our amber
-  // family there; roofs, logs, dirt and doors keep authored colors.
   //
   // PER-TOWN VARIANTS (B2-G9 anti-repetition law: no two towns share
   // an identical house set): each town remaps the kit's structural
@@ -110520,7 +110506,6 @@ function buildArtTileCache(doc, seasonSwapFor, seasonKitSwapFor) {
     'resort-area': { roof: ['#e8d9c4', '#bfae94', '#f7ecdc'], log: '#9a7a52', door: '#d4695e' }, // villa resort: pearl, coral door
   };
   const KIT_VEG_IDS = new Set(['kit-grass-1', 'kit-grass-2', 'kit-grass-3', 'kit-tallgrass', 'kit-flora', 'kit-canopy']);
-  const kitSeasonFn = seasonKitSwapFor || seasonSwapFor;
   const buildKitSet = (townId, opts) => {
     const variant = townId ? (KIT_VARIANTS[townId] || null) : null;
     // Wave C biome ground families (original kit-pattern tiles for
@@ -110531,8 +110516,7 @@ function buildArtTileCache(doc, seasonSwapFor, seasonKitSwapFor) {
     const anchor = townId && TOWN_STYLE_ANY[townId] ? TOWN_STYLE_ANY[townId].ground : null;
     // hex -> hex remap for one kit entry under this town's variant:
     // structural colors swap outright; vegetation greens tint toward
-    // the town's ground anchor (composed BEFORE the seasonal grade,
-    // so the grade acts on the town's own greens).
+    // the town's ground anchor — the town's own greens, fixed.
     const remapFor = (id) => {
       if (!variant) return null;
       if (id.startsWith('kit-roof')) return { '#a03e00': variant.roof[0], '#531a00': variant.roof[1], '#8d5500': variant.roof[2] };
@@ -110560,10 +110544,9 @@ function buildArtTileCache(doc, seasonSwapFor, seasonKitSwapFor) {
         pal2 = {};
         for (const ch of Object.keys(a.pal)) pal2[ch] = remap[a.pal[ch]] || a.pal[ch];
       }
-      const graded = KIT_VEG_IDS.has(id) && kitSeasonFn ? kitSeasonFn(pal2) : null;
       let swap = null;
       for (const ch of Object.keys(a.pal)) {
-        const fin = (graded && graded[ch]) || pal2[ch];
+        const fin = pal2[ch];
         if (fin !== a.pal[ch]) (swap = swap || {})[ch] = fin;
       }
       return artCanvas(doc, id, 1, false, swap || undefined);
@@ -111287,8 +111270,8 @@ function kitTownLayers(cache, kind, x, y, kindAt, mapId, phase) {
       if (!fab(at2(-1, 0))) g += 'w';
       if (!g) return [pathBase];
       // Edge tiles carry transparent grass margins (build-kit-art):
-      // composite over this cell's own season-graded grass so the
-      // blend follows the town palette in every season.
+      // composite over this cell's own grass so the blend follows
+      // the town palette.
       if (E[g]) return [grassBase, E[g]];
     }
     return [pathBase];
@@ -162828,152 +162811,6 @@ function drawWeatherOverlay(r, game, wstate) {
 }
 
 
-// ---- src/game/seasons.mjs ----
-// seasons.mjs — the season system (Black 2 baseline imposition, owner order
-// 2026-11-11: "make it more like Pokemon Black"). Gen V's signature world
-// system, implemented original: the season advances MONTHLY, cycling all
-// four seasons every four months — the world you walk in January is not
-// the world you walk in February. Before this module the game had only a
-// cosmetic season color bar in the clock glyph (quarter-year, hardcoded
-// in overworld.mjs); this module is now the single source of season truth.
-//
-// PRESENTATION ONLY, same doctrine as weather.mjs: seasons read the
-// calendar and write NOTHING — no state, no save fields, no encounter or
-// battle effects. Season is derived from the date, never stored (the
-// Bonds rule: derived, never stored). Effects today: a seasonal light
-// tint over outdoor maps, the clock-glyph season bar, and a one-shot
-// season toast when the season rolls over. Anything mechanical is a
-// future owner ruling, not a silent addition.
-//
-// Anchor (ours): January opens Spring, then the cycle turns monthly —
-// Feb Summer, Mar Autumn, Apr Winter, May Spring… — so November plays
-// in Autumn and December in Winter.
-//
-// SEASONAL ART (added same day, owner verdict "the game looks the
-// same"): the season also re-grades the world's vegetation art. Tile
-// palettes pass through seasonalHex() below when the tile cache is
-// built (buildArtTileCache in engine/art.mjs, fed by main.mjs):
-// greens — grass, tall grass, flowers' stems, tree canopies — shift
-// per season (spring brighter, autumn amber, winter frost-pale) while
-// every non-green (trunks, roofs, paths, water) keeps its authored
-// color. Original color math, our own art; the authored palette is
-// the Summer grade.
-
-const SEASON_ORDER = ['Winter', 'Spring', 'Summer', 'Autumn'];
-
-// Per-season presentation: glyph/bar color (the exact hexes the clock
-// glyph has always used) and the outdoor light tint (rgb + alpha —
-// kept subtle, illumination only, like PHASE_TINTS).
-const SEASON_STYLE = {
-  Winter: { color: '#5a9ae8', tint: { rgb: [90, 154, 232], alpha: 0.08 } },
-  Spring: { color: '#58c94f', tint: { rgb: [88, 201, 79], alpha: 0.05 } },
-  Summer: { color: '#e8c832', tint: { rgb: [232, 200, 50], alpha: 0.04 } },
-  Autumn: { color: '#e08a4a', tint: { rgb: [224, 138, 74], alpha: 0.07 } },
-};
-
-// Pure resolver: Date -> { name, index, color, tint }.
-function seasonForDate(d) {
-  const month = d && typeof d.getMonth === 'function' ? d.getMonth() : 0;
-  const name = SEASON_ORDER[(((month + 1) % 4) + 4) % 4];
-  const style = SEASON_STYLE[name];
-  return { name, index: SEASON_ORDER.indexOf(name), color: style.color, tint: style.tint };
-}
-
-// The current season, resolved from the real calendar. Headless-safe:
-// any Date failure resolves to the anchor season.
-function currentSeason() {
-  try { return seasonForDate(new Date()); } catch (e) { return seasonForDate(null); }
-}
-
-// The season's light tint for a map, or null where seasons never show:
-// interiors and dark maps (caves own their darkness — same exclusion as
-// the time-of-day tint and the weather layer).
-function seasonTintFor(map) {
-  if (!map || map.indoor || map.dark) return null;
-  return currentSeason().tint;
-}
-
-// ---- seasonal art grade -------------------------------------------------
-const clamp255 = (v) => Math.max(0, Math.min(255, Math.round(v)));
-function hexToRgb(hex) {
-  const m = /^#?([0-9a-f]{6})$/i.exec(hex || '');
-  if (!m) return null;
-  const n = parseInt(m[1], 16);
-  return [(n >> 16) & 255, (n >> 8) & 255, n & 255];
-}
-const rgbToHex = (r, g, b) => '#' + [r, g, b].map((v) => clamp255(v).toString(16).padStart(2, '0')).join('');
-
-// One authored color -> its seasonal grade. Only green-dominant colors
-// (foliage and grass: g strictly greatest) are re-graded; everything
-// else returns unchanged, in every season.
-function seasonalHex(hex, seasonName) {
-  const rgb = hexToRgb(hex);
-  if (!rgb) return hex;
-  const [r, g, b] = rgb;
-  if (!(g > r && g > b)) return hex;
-  switch (seasonName) {
-    case 'Spring': return rgbToHex(r * 0.94 + 14, g * 1.07 + 8, b * 0.94 + 6);
-    case 'Summer': return rgbToHex(r * 0.97, g, b * 0.97);
-    case 'Autumn': return rgbToHex(g * 1.05 + 26, r * 0.58 + g * 0.22, b * 0.5);
-    case 'Winter': {
-      const lum = (r + g + b) / 3;
-      const mix = (t) => lum + (t - lum) * 0.66;
-      return rgbToHex(mix(228), mix(238), mix(244));
-    }
-    default: return hex;
-  }
-}
-
-// Build an artCanvas swap ({ paletteChar: hex }) re-grading every
-// green in a palette for the current season. Entries whose grade is
-// unchanged are omitted; an all-unchanged palette yields {}.
-function seasonalSwapFor(pal) {
-  if (!pal) return {};
-  const season = currentSeason().name;
-  const swap = {};
-  for (const ch of Object.keys(pal)) {
-    const graded = seasonalHex(pal[ch], season);
-    if (graded !== pal[ch]) swap[ch] = graded;
-  }
-  return swap;
-}
-
-// ---- kit grade (Wave A, 2026-11-11) --------------------------------------
-// The adopted Gassasin kit's greens are far deeper than our authored
-// ramp (its grass is a pure #008100 against our #5da24a), and the
-// shared Autumn formula drives its red channel from the green — so on
-// kit palettes the grade overshoots into deep red (#a11c00, r:g 5.8:1)
-// where our own art lands in the amber family (r:g ~2.1:1, b ~0.28r).
-// The kit grade corrects ONLY that overshoot, and ONLY on the kit
-// path (engine/art.mjs feeds kit palettes through seasonalSwapForKit;
-// our own art keeps seasonalHex exactly): after the shared grade, a
-// red-dominant Autumn result is pulled back into the family band —
-// green floored at r/2.15, blue floored at 0.26r. Every other season
-// passes through untouched: the kit's Spring/Summer/Winter grades
-// already sit in the family (measured 2026-11-11).
-function seasonalHexKit(hex, seasonName) {
-  const graded = seasonalHex(hex, seasonName);
-  if (seasonName !== 'Autumn') return graded;
-  const rgb = hexToRgb(graded);
-  if (!rgb) return graded;
-  const [r, g, b] = rgb;
-  if (!(r > g)) return graded;
-  return rgbToHex(r, Math.max(g, r / 2.15), Math.max(b, r * 0.26));
-}
-
-// seasonalSwapFor for kit palettes (same contract as seasonalSwapFor).
-function seasonalSwapForKit(pal) {
-  if (!pal) return {};
-  const season = currentSeason().name;
-  const swap = {};
-  for (const ch of Object.keys(pal)) {
-    const graded = seasonalHexKit(pal[ch], season);
-    if (graded !== pal[ch]) swap[ch] = graded;
-  }
-  return swap;
-}
-
-
 // ---- src/game/ball-rules.mjs ----
 // ball-rules.mjs — Stage J6: apricorn-ball catch rules, ONE shared
 // evaluation for both battle engines (battle.mjs classic + battle-rt.mjs
@@ -173714,17 +173551,6 @@ class OverworldScene {
     // eaves) composes ON TOP of this sorted pass — the scene calls
     // sysRenderForeground here when W7 ships it. Nothing draws today.
     if (this.sysRenderForeground) this.sysRenderForeground(r);
-    // Black 2 baseline (2026-11-11): season tint — the season system's
-    // light over outdoor maps, drawn under the time-of-day tint so night
-    // still darkens over the season. Presentation only (src/game/
-    // seasons.mjs): derived from the calendar, never stored, and never
-    // drawn indoors or in dark maps (seasonTintFor resolves null there).
-    const sTint = seasonTintFor(this.map);
-    if (sTint) {
-      const c = r.ctx;
-      c.fillStyle = 'rgba(' + sTint.rgb[0] + ',' + sTint.rgb[1] + ',' + sTint.rgb[2] + ',' + sTint.alpha + ')';
-      c.fillRect(r.camX - T, r.camY - T, r.viewW + 2 * T, r.viewH + 2 * T);
-    }
     // Premium+ W5 (LD-2): time-of-day tint — ONE flat overlay over the
     // WORLD layer only, drawn after the sorted world pass and before
     // every HUD/canvas-text draw below (banner, clock glyph, prompts),
@@ -173780,7 +173606,7 @@ class OverworldScene {
       // at 16 (was 400/14, same thin-stem defect class as the dialogue).
       r.text(prompt, bx + 38, by + 2, { size: 16, bold: true, color: '#202028', shadow: false, align: 'center' });
     }
-    // P1/D8: clock glyph — day/night pixel icon + season bar (no text, ambient).
+    // P1/D8: clock glyph — day/night pixel icon (no text, ambient).
     this.renderClockGlyph(r);
     r.end();
     // HUD lives in DOM chips now (UI seat): the area banner, the permanent
@@ -173827,15 +173653,6 @@ class OverworldScene {
         this.moveTut._toastSent = true;
         ui.hudToast('Walk with the D-pad — VOLTIK follows you!', 3600);
       }
-      // Season toast (Black 2 baseline): once per season rollover, when
-      // the calendar season differs from the last one announced. The
-      // season itself is derived (seasons.mjs), never stored; only the
-      // announcement marker lives here, per scene.
-      try {
-        const sName = seasonForDate(new Date()).name;
-        if (this._hudSeason === undefined) this._hudSeason = sName;
-        else if (sName !== this._hudSeason) { this._hudSeason = sName; ui.hudToast('Season — ' + sName, 2600); }
-      } catch (e) { /* headless */ }
     }
   }
 
@@ -173862,7 +173679,7 @@ class OverworldScene {
     return '▶ Explore Arden';
   }
 
-  // P1/D8: day/night pixel icon + season color bar, top-right of canvas.
+  // P1/D8: day/night pixel icon, top-right of canvas.
   renderClockGlyph(r) {
     const g = this.game;
     let hour = 12;
@@ -173881,12 +173698,6 @@ class OverworldScene {
       c.fillStyle = '#101018';
       c.fillRect(x + 6, y + 2, 5, 8);
     }
-    // season bar: color from the season system (src/game/seasons.mjs) —
-    // the single source of season truth since the Black 2 imposition.
-    let seasonCol = '#5a9ae8';
-    try { seasonCol = seasonForDate(new Date()).color; } catch (e) { /* headless */ }
-    c.fillStyle = seasonCol;
-    c.fillRect(x, y + 14, 12, 3);
   }
 }
 
@@ -179156,7 +178967,7 @@ class Game {
     this.store = new SaveStore();
     this.state = freshState();
     this.rng = makeRngStreams(nextSeed());
-    this.tileCache = buildArtTileCache(doc, seasonalSwapFor, seasonalSwapForKit); // hand-authored tileset (art.mjs), season-graded vegetation; void -> solid fill
+    this.tileCache = buildArtTileCache(doc); // hand-authored tileset (art.mjs), authored palettes fixed (Wave SZ: seasons removed); void -> solid fill
     this.spriteCache = {};
     this._spriteUrlCache = {}; // species id -> battle-art data URL (toDataURL once per species)
     this._iconUrlCache = {};   // item id -> uiIcon data URL (toDataURL once per item)
@@ -181385,6 +181196,6 @@ if (typeof Game !== 'undefined') Object.assign(Game.prototype, {
 });
 
 </script>
-<!-- contentHash:1bec2cbec09d56bc2a090c0cdbd012790f3f26b618f4cdba35262fbaf5008e4f -->
+<!-- contentHash:b0e025591c787677f9f1bafe2068fdfee48a1e77837b3485c3fa3aebaf911165 -->
 </body>
 </html>
