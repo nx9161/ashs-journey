@@ -2420,6 +2420,10 @@ export function resolveTileLayers(cache, kind, x, y, kindAt, t, phase, mapId) {
     case 'stall': case 'haycart': case 'sundial': case 'birdbath':
     case 'tub': case 'sacks': case 'pottedtree': case 'waterpump':
     case 'gatepost': case 'gatearch': case 'routearch': case 'vinearch':
+    // Wave FIX-PROP: Dawnwick's boat + chalkmap composite over their
+    // ground the same way (their T1 registration stopped at TILE_ART).
+    case 'boat':
+    case 'chalkmap':
     // Wave T3: Marlow's tortoise composites over its lawn the same way.
     case 'tortoise': {
       // Object tiles carry transparent surrounds (Wave 1): lay the ground
