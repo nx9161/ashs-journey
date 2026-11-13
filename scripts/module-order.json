@@ -73,6 +73,7 @@
  "src/game/battle-rt.mjs",
  "src/game/overworld.mjs",
  "src/game/overworld-systems.mjs",
+ "src/game/johto-actors.mjs",
  "src/game/main.mjs",
  "src/game/main-systems.mjs",
  "src/game/second-journey.mjs"
