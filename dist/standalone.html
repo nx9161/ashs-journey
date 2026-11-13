@@ -153896,6 +153896,21 @@ const EVENTS = {
     { flag: 'butterfree_released' },
     { toast: 'PRISMWING flew to its future.' },
   ],
+
+  // -- Canopy City: the parley pair ARRIVE (Wave ACT proof) ---------------
+  // RUE and COLE used to simply BE standing in the plaza whenever the
+  // post-St. Anne window was open (a load-time append). Now the
+  // loadMap resolver stages them hidden and this entry event walks
+  // them in out of the Game Corner they serve: west door for RUE,
+  // east door for COLE, south around the planters to their posts at
+  // (8,8) / (9,8). Fired once by sysLoadMap (its done flag is the
+  // gate); resolving the parley walks them back the same way.
+  ev_parley_enter: [
+    { say: ['The Game Corner doors spill light across the plaza — and two figures cross to the corner post, unhurried, like they hold the lease on it.'], who: 'NARRATOR' },
+    { say: ['RUE and COLE. The parley, in person. They are waiting on YOU.'], who: 'NARRATOR' },
+    { actorEnter: { who: 'rue@celadon', x: 12, y: 7, path: [[12, 8], [12, 9], [11, 9], [10, 9], [9, 9], [8, 9], [8, 8]], face: 'down' } },
+    { actorEnter: { who: 'cole@celadon', x: 13, y: 7, path: [[13, 8], [13, 9], [12, 9], [11, 9], [10, 9], [9, 9], [9, 8]], face: 'down' } },
+  ],
 };
 
 // The PRISMWING send-off, exported standalone for the overworld trigger.
@@ -158258,6 +158273,16 @@ const QUESTS = {
     ],
     reward: { choice: true }, rewardText: 'Dojo spar (XP) or a keepsake IOU',
     bondNpc: 'sabrina', bondDelta: 1,
+    // Wave ACT proof (tale-giver relocation): for twenty years the
+    // Dojo and the Gym have traded two-word messages across the
+    // street ("The hall stands." / "So does the Gym.") without the
+    // masters meeting. The completed tale is the thaw — so when it
+    // completes, Master Ko leaves the master's seat at the head of
+    // the dojo (7,1) and takes a post by the door (5,5), the
+    // threshold facing the street and the other half of his school.
+    // Fires via the tale-completion watcher, whichever of the tale's
+    // two endings (his spar, her IOU) the player chose.
+    onComplete: [{ actorMove: { who: 'master-ko@dojo', to: [5, 5] } }],
     revelation: "The Dojo and the Gym were one school once. Sabrina's father and Master Ko trained side by side — until the day they disagreed about what strength is FOR, and split the hall, the students, and Farsight itself down the middle.",
   },
   tale_fuchsia: {
@@ -158658,7 +158683,7 @@ const NARRATIVE_CHAPTERS = [
 {"id":"q_vermilion","arcId":"kanto","volume":1,"kind":"main","title":"Reach Arcport City","flag":"reached_vermilion","requires":["q_bill"],"locations":["vermilion"],"canon":"original"},
 {"id":"q_stanne","arcId":"kanto","volume":1,"kind":"main","title":"Sail on the St. Anne","flag":"stanne_done","requires":["q_vermilion"],"locations":["vermilion","stanne"],"characters":["ATTENDANT","RUE","COLE"],"events":["ev_stanne","ev_duo_stanne"],"battles":["duo2_vermilion"],"rivalBattles":["duo2_vermilion"],"relationships":["rue","cole"],"mechanics":["trainer-battle","bond-choice"],"canon":"original"},
 {"id":"q_thunder","arcId":"kanto","volume":1,"kind":"main","title":"Win the Thunder Badge in Arcport City","flag":"badge_thunder","requires":["q_stanne"],"locations":["vermilion","gym-vermilion"],"characters":["LT. SURGE"],"battles":["surge"],"mechanics":["gym-battle"],"canon":"original"},
-{"id":"q_celadon","arcId":"kanto","volume":1,"kind":"main","title":"Reach Canopy City","flag":"reached_celadon","requires":["q_thunder"],"locations":["celadon"],"canon":"original"},
+{"id":"q_celadon","arcId":"kanto","volume":1,"kind":"main","title":"Reach Canopy City","flag":"reached_celadon","requires":["q_thunder"],"locations":["celadon"],"characters":["RUE","COLE"],"events":["ev_parley_enter"],"canon":"original"},
 {"id":"q_rainbow","arcId":"kanto","volume":1,"kind":"main","title":"Win the Rainbow Badge in Canopy City","flag":"badge_rainbow","requires":["q_celadon"],"locations":["celadon","gym-celadon"],"characters":["ERIKA"],"battles":["erika"],"mechanics":["gym-battle"],"canon":"original"},
 {"id":"q_scope","arcId":"kanto","volume":1,"kind":"main","title":"Infiltrate the Game Corner and recover the Vantage Scope","flag":"scope_done","requires":["q_rainbow"],"locations":["gamecorner","hideout"],"characters":["THE BOSS (speaker)"],"events":["ev_hideout_entry","ev_scope_boss"],"battles":["rocket_admin_hideout"],"mechanics":["trainer-battle"],"canon":"original"},
 {"id":"q_flute","arcId":"kanto","volume":1,"kind":"main","title":"Climb Hushmoor Tower and earn the Kin Flute","flag":"flute_got","requires":["q_scope"],"locations":["tower2"],"characters":["RUE","COLE","MR. FUJI"],"events":["ev_fuji"],"relationships":["rue","cole"],"mechanics":["bond-choice"],"canon":"original"},
@@ -161533,6 +161558,11 @@ function defaultState(inherit) {
       // Phase 4 records the Town Tale sources (structural only); the
       // tiers, dialogue variants and consumers are Phase 5.
       bonds: {},
+      // Wave ACT (Actor Lifecycle): placement/visibility overrides,
+      // charId -> { map, x, y, face?, hidden?, template? } — where a
+      // character CURRENTLY stands when the story has moved them off
+      // their authored post (game/actors.mjs). Empty = everyone home.
+      actors: {},
       // ADR-025 §6 (Phase 6): Second Journey fields, all defaults-filled
       // on load (schema v2 stays). hof holds THIS run's own entries
       // only; priorHof keeps earlier runs' teams viewable without ever
@@ -162416,6 +162446,101 @@ const BOND_NPC_IDS = {
   BROCK: 'brock', MISTY: 'misty', 'LT. SURGE': 'surge', ERIKA: 'erika',
   KOGA: 'koga', SABRINA: 'sabrina', BLAINE: 'blaine', 'MR. FUJI': 'fuji',
 };
+
+
+// ---- src/game/actors.mjs ----
+// actors.mjs — Wave ACT (Actor Lifecycle): stable character identity
+// + the saved placement/visibility override store.
+//
+// The owner's design law (2026-11-12): every character has a
+// particular post; cinematic characters ARRIVE via events; quest
+// characters wait at their post; when the quest ends or the player
+// performs the triggering action, the character MOVES. The engine
+// already authored every post (map placements + the append tables),
+// so identity is DERIVED from those posts, never re-authored:
+//
+//   charId = slug(name) + '@' + mapId        e.g. 'mom@pallet'
+//   duplicates on one map take '#2', '#3'... e.g. 'paul@eterna'
+//   (occurrence order = loadMap assembly order, so ids are stable
+//   across loads and saves for the same authored world.)
+//
+// The lifecycle state lives in story.actors (save schema v2,
+// additive — see save/schema.mjs): charId -> directive
+//   { map, x, y, face?, hidden?, template? }
+// A directive REPLACES the authored post: `map/x/y` say where the
+// character currently stands (another map = relocated; the resolver
+// fields them there from `template` when their home post is
+// elsewhere), `hidden: true` says they are not fielded at all.
+// Directives committed by the event primitives (overworld-systems
+// actorEnter/actorMove/actorExit/actorShow/actorHide) persist across
+// save/load; the loadMap resolver applies them on every load.
+//
+// ACTOR_DEFAULTS below is the authored RESTING state for posts whose
+// story begins away from their post (arrivals). A saved override
+// always wins over a default; a default never moves anyone, it only
+// holds a post empty (or filled) until the story acts.
+
+function actorSlug(name) {
+  const s = String(name == null ? 'npc' : name).toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
+  return s || 'npc';
+}
+
+function actorCharId(name, mapId) {
+  return actorSlug(name) + '@' + String(mapId);
+}
+
+// Resting defaults (Wave ACT proofs):
+// - wally@victory-road: Wally's Crown Road post stands EMPTY until
+//   his Meadowbrook departure (the `wally` handler's catch scene is
+//   his farewell; its completion shows him here). Before this wave
+//   both Wallys stood in both places at once, forever.
+const ACTOR_DEFAULTS = {
+  'wally@victory-road': { hidden: true },
+};
+
+// The character's effective directive: the saved override when one
+// exists, else the authored default, else null (stand at the
+// authored post, visible). Pure over the save — safe on any state
+// shape, including a state with no story.actors yet.
+function actorDirective(state, charId) {
+  const saved = state && state.story && state.story.actors
+    ? state.story.actors[charId] : undefined;
+  if (saved && typeof saved === 'object') return saved;
+  return ACTOR_DEFAULTS[charId] || null;
+}
+
+// Commit (merge) a directive patch into the saved store. Creates
+// story.actors on first use. Returns the stored entry.
+function setActorOverride(state, charId, patch) {
+  if (!state || !state.story || !charId || !patch) return null;
+  const store = state.story.actors || (state.story.actors = {});
+  const cur = store[charId] && typeof store[charId] === 'object' ? store[charId] : {};
+  const next = { ...cur, ...patch };
+  store[charId] = next;
+  return next;
+}
+
+// The presentation + handler template a cross-map relocation carries
+// so the resolver can field the character on a map that never
+// authored them. Presentation fields verbatim; handler props limited
+// to the dispatch vocabulary the scene understands.
+function actorTemplateOf(npc) {
+  if (!npc || typeof npc !== 'object') return null;
+  const t = {};
+  for (const k of ['name', 'art', 'skin', 'shirt', 'pants', 'hair', 'dir']) {
+    if (typeof npc[k] === 'string') t[k] = npc[k];
+  }
+  if (Array.isArray(npc.dialogue)) t.dialogue = npc.dialogue.filter((l) => typeof l === 'string').slice(0, 12);
+  for (const k of ['tale', 'role', 'johto', 'hoenn', 'sinnoh']) {
+    if (typeof npc[k] === 'string') t[k] = npc[k];
+  }
+  for (const k of ['witness', 'parley', 'mart']) {
+    if (npc[k]) t[k] = true;
+  }
+  if (npc.sight && typeof npc.sight === 'object') t.sight = { ...npc.sight };
+  return t;
+}
 
 
 // ---- src/game/arcs.mjs ----
@@ -163625,6 +163750,29 @@ function validateSave(data) {
       if (typeof v !== 'number' || !Number.isInteger(v) || v < -10 || v > 10) { errors.push('bad-bond-value'); break; }
     }
   }
+  if (isObj(data.story) && data.story.actors !== undefined) {
+    // Wave ACT: story.actors — charId ('slug@map', '#n' suffix for
+    // same-map duplicates) -> placement/visibility directive
+    // { map?, x?, y?, face?, hidden?, template? }. Absent = pre-ACT
+    // save (fillV2Defaults derives {}); present-but-wrong = reject.
+    if (!isObj(data.story.actors)) errors.push('bad-story-actors');
+    else {
+      const keys = Object.keys(data.story.actors);
+      if (keys.length > 512) errors.push('bad-story-actors');
+      for (const k of keys) {
+        const v = data.story.actors[k];
+        const okKey = /^[a-z0-9-]+@[a-z0-9-]+(#\d+)?$/.test(k) && k.length <= 80;
+        const okV = isObj(v)
+          && (v.map === undefined || (typeof v.map === 'string' && /^[a-z0-9-]{1,40}$/.test(v.map)))
+          && ((v.x === undefined && v.y === undefined)
+            || (Number.isInteger(v.x) && Number.isInteger(v.y) && v.x >= 0 && v.x <= 999 && v.y >= 0 && v.y <= 999))
+          && (v.face === undefined || ['up', 'down', 'left', 'right'].includes(v.face))
+          && (v.hidden === undefined || typeof v.hidden === 'boolean')
+          && (v.template === undefined || (isObj(v.template) && typeof v.template.name === 'string'));
+        if (!okKey || !okV) { errors.push('bad-story-actors-entry'); break; }
+      }
+    }
+  }
   // ADR-025 §6 (Phase 6): Hall of Fame lists — ONE canonical shape
   // ({ team: [{speciesId, level, nickname}], badges }); the legacy
   // { species, level } entry stays acceptable here and is normalized
@@ -163828,6 +163976,36 @@ function fillV2Defaults(data) {
       if (typeof v === 'number' && Number.isFinite(v)) bonds[k] = Math.max(-10, Math.min(10, Math.trunc(v)));
     }
     data.story.bonds = bonds;
+    // Wave ACT: story.actors defaults-filled on load (pre-ACT saves
+    // open with {} — everyone at their authored post). Entries are
+    // rebuilt into the closed directive shape; malformed entries
+    // drop (that character simply stands home again).
+    if (!isObj(data.story.actors)) data.story.actors = {};
+    const actors = {};
+    for (const k of Object.keys(data.story.actors).slice(0, 512)) {
+      if (!/^[a-z0-9-]+@[a-z0-9-]+(#\d+)?$/.test(k) || k.length > 80) continue;
+      const v = data.story.actors[k];
+      if (!isObj(v)) continue;
+      const out = {};
+      if (typeof v.map === 'string' && /^[a-z0-9-]{1,40}$/.test(v.map)) out.map = v.map;
+      if (Number.isFinite(v.x) && Number.isFinite(v.y)) {
+        out.x = Math.max(0, Math.min(999, Math.trunc(v.x)));
+        out.y = Math.max(0, Math.min(999, Math.trunc(v.y)));
+      }
+      if (['up', 'down', 'left', 'right'].includes(v.face)) out.face = v.face;
+      if (typeof v.hidden === 'boolean') out.hidden = v.hidden;
+      if (isObj(v.template) && typeof v.template.name === 'string') {
+        const t = {};
+        for (const f of ['name', 'art', 'skin', 'shirt', 'pants', 'hair', 'dir', 'tale', 'role', 'johto', 'hoenn', 'sinnoh']) {
+          if (typeof v.template[f] === 'string') t[f] = v.template[f].slice(0, 60);
+        }
+        if (Array.isArray(v.template.dialogue)) t.dialogue = v.template.dialogue.filter((l) => typeof l === 'string').slice(0, 12);
+        for (const f of ['witness', 'parley', 'mart']) if (v.template[f]) t[f] = true;
+        out.template = t;
+      }
+      actors[k] = out;
+    }
+    data.story.actors = actors;
     // P1 (2026-10-28): story.lastCenter — the persisted door-front
     // anchor of the last Center entered (the Center exit resolver
     // falls back to it after a reload inside a Center). Sanitized to
@@ -172693,9 +172871,18 @@ class OverworldScene {
       // on this map; the kit cast resolver rotates hair/skin nudges by
       // it so same-map crowds never pixel-clone (see kitCastVariant).
       const cloneSeen = new Map();
+      const cidSeen = new Map();
       const stamped = this.map.npcs.map((n, i) => {
         const c = { ...n };
         c._pk = id + ':' + i;
+        // Wave ACT: _cid — the stable character identity, derived
+        // from the authored post (slug(name)@map, '#n' for same-name
+        // duplicates in assembly order). The lifecycle resolver and
+        // the event primitives key on it; _pk stays the roster slot.
+        const cidBase = actorCharId(c.name, id);
+        const cidOcc = cidSeen.get(cidBase) || 0;
+        cidSeen.set(cidBase, cidOcc + 1);
+        c._cid = cidOcc ? cidBase + '#' + (cidOcc + 1) : cidBase;
         const cloneKey = (c.art || '') + '|' + [c.skin, c.shirt, c.pants, c.hair].join('/');
         c._cloneIx = cloneSeen.get(cloneKey) || 0;
         cloneSeen.set(cloneKey, c._cloneIx + 1);
@@ -172713,7 +172900,59 @@ class OverworldScene {
         }
         return c;
       });
-      this.map = { ...this.map, npcs: stamped };
+      // Wave ACT (Actor Lifecycle): the lifecycle resolver — a
+      // character's saved/default directive (game/actors.mjs)
+      // replaces their authored post. A directive naming ANOTHER map
+      // removes them here (that map's resolver fields them from the
+      // stored template); `hidden` keeps the roster slot but out of
+      // play (the event layer can still find and re-show them); a
+      // directive naming THIS map re-posts them via _stage, which
+      // npcX/npcY resolve ahead of wander. Staged and hidden actors
+      // never wander — they hold the post the story gave them.
+      const actState = this.game && this.game.state;
+      const savedActors = (actState && actState.story && actState.story.actors) || {};
+      const finalRoster = [];
+      const fielded = new Set();
+      for (const c of stamped) {
+        const dir = actorDirective(actState, c._cid);
+        if (dir && dir.map && dir.map !== id) continue; // relocated away
+        if (dir && dir.hidden) c._actorHidden = true;
+        if (dir && dir.map === id && Number.isInteger(dir.x) && Number.isInteger(dir.y)) {
+          c._stage = { x: dir.x, y: dir.y, fx: dir.x, fy: dir.y, glide: 0 };
+          if (dir.face) c._face = dir.face;
+        }
+        // Canopy parley staging: while their entry event has not yet
+        // played, the pair are NOT pre-placed — they ARRIVE via
+        // ev_parley_enter (sysLoadMap). A saved override (a reload
+        // mid-entry) outranks the staging and fields them as saved.
+        if (c.parley && parleyVisible(actState) && !savedActors[c._cid]
+          && !(actState && actState.story && actState.story.flags && actState.story.flags.ev_parley_enter_done)) {
+          c._actorHidden = true;
+        }
+        if (c._stage || c._actorHidden) delete c._wander;
+        fielded.add(c._cid);
+        finalRoster.push(c);
+      }
+      // Cross-map arrivals: a saved directive placing a character
+      // HERE whose home post is on another map fields them from the
+      // template the move committed.
+      for (const cid of Object.keys(savedActors)) {
+        const ov = savedActors[cid];
+        if (!ov || ov.map !== id || ov.hidden || !ov.template || fielded.has(cid)) continue;
+        if (!Number.isInteger(ov.x) || !Number.isInteger(ov.y)) continue;
+        const c = { ...ov.template };
+        delete c.map;
+        c.x = ov.x; c.y = ov.y;
+        c._pk = id + ':actor:' + cid;
+        c._cid = cid;
+        c._cloneIx = 0;
+        c._phaseMs = 0;
+        c._face = ov.face || c.dir || 'down';
+        c._stage = { x: ov.x, y: ov.y, fx: ov.x, fy: ov.y, glide: 0 };
+        fielded.add(cid);
+        finalRoster.push(c);
+      }
+      this.map = { ...this.map, npcs: finalRoster };
     }
     this.w = this.map.rows[0].length;
     this.h = this.map.rows.length;
@@ -172759,8 +172998,8 @@ class OverworldScene {
   // roams, its authored home tile otherwise. Every occupancy, sight,
   // interaction and render consumer resolves through these two helpers
   // so the picture, the collision and the talk target never disagree.
-  npcX(n) { return n._wander ? n._wander.x : n.x; }
-  npcY(n) { return n._wander ? n._wander.y : n.y; }
+  npcX(n) { return n._stage ? n._stage.x : n._wander ? n._wander.x : n.x; }
+  npcY(n) { return n._stage ? n._stage.y : n._wander ? n._wander.y : n.y; }
 
   // Premium+ W4: the door-critical set — static-terrain articulation
   // tiles whose removal would disconnect a warp from the map's largest
@@ -172826,8 +173065,9 @@ class OverworldScene {
     if (this.boulderAt && this.boulderAt(x, y)) return false;
     const base = WALKABLE.has(t) || (this.sysWalkableExtra && this.sysWalkableExtra(x, y));
     if (!base) return false;
-    // NPCs block (at their CURRENT tiles — wander positions included)
-    for (const n of this.map.npcs) if (this.npcX(n) === x && this.npcY(n) === y) return false;
+    // NPCs block (at their CURRENT tiles — wander positions included;
+    // lifecycle-hidden actors occupy nothing)
+    for (const n of this.map.npcs) if (!n._actorHidden && this.npcX(n) === x && this.npcY(n) === y) return false;
     return true;
   }
 
@@ -172837,7 +173077,7 @@ class OverworldScene {
   }
 
   npcAt(x, y) {
-    for (const n of this.map.npcs) if (this.npcX(n) === x && this.npcY(n) === y) return n;
+    for (const n of this.map.npcs) if (!n._actorHidden && this.npcX(n) === x && this.npcY(n) === y) return n;
     return null;
   }
 
@@ -172904,6 +173144,8 @@ class OverworldScene {
     if (this.warpFx) { this.updateWarpFx(dt); return; } // W7: warp transition owns the tick
     if (this.enc) { this.updateEncounter(dt); return; }
     if (this.challenge) { this.updateChallenge(dt); return; } // input locked: a trainer is walking up
+    if (this.checkTaleCompletions) this.checkTaleCompletions(); // Wave ACT: fire tale-completion lifecycle directives
+    if (this.actorWalk) { this.updateActorWalk(dt); return; } // input locked: a scripted actor is walking
     if (this.checkSightLines()) return; // spotted this tick — challenge takes over
     this.updateWander(dt); // Premium+ W4: ambient town wander (frozen while any modal above consumed the tick)
 
@@ -173193,6 +173435,7 @@ class OverworldScene {
     const g = this.game;
     for (const n of this.map.npcs) {
       if (!n.trainer || !n.sight) continue;
+      if (n._actorHidden) continue; // Wave ACT: a hidden actor spots no one
       if (g.state.story.flags['beat_' + n.trainer]) continue;
       const dir = n.sight.dir || 'down';
       const range = n.sight.range || 3;
@@ -173262,6 +173505,113 @@ class OverworldScene {
         q.cx = nx; q.cy = ny; return;
       }
     }
+  }
+
+  // ---- Wave ACT: the scripted actor walker ----
+  // An actor with somewhere to be walks tile by tile at the
+  // challenge pace (150ms/tile), input locked exactly as for a
+  // trainer walk-up. Routing is a fresh BFS to the next waypoint on
+  // every step, over the live occupancy grid — a temporary block
+  // (the player, a wanderer) detours or waits instead of failing.
+  // If the PLAYER alone seals the route for ~1.5s the actor brushes
+  // past (a single overlapping step): a scripted departure can never
+  // soft-lock the scene. Reduced Motion completes walks instantly —
+  // the wander-freeze discipline applied to scripted motion.
+  queueActorWalk(npc, waypoints, onArrive) {
+    if (!npc) { if (onArrive) onArrive(); return; }
+    if (!npc._stage) {
+      const cx = this.npcX(npc), cy = this.npcY(npc);
+      npc._stage = { x: cx, y: cy, fx: cx, fy: cy, glide: 0 };
+    }
+    delete npc._wander;
+    const pts = (waypoints || []).filter((p) => Array.isArray(p) && p.length === 2);
+    if (!pts.length) { if (onArrive) onArrive(); return; }
+    const st = this.game && this.game.state;
+    if (st && st.settings && st.settings.reducedMotion) {
+      const last = pts[pts.length - 1];
+      npc._stage = { x: last[0], y: last[1], fx: last[0], fy: last[1], glide: 0 };
+      if (onArrive) onArrive();
+      return;
+    }
+    if (!this.actorWalk) this.actorWalk = { jobs: [] };
+    this.actorWalk.jobs.push({ npc, pts, ix: 0, stepT: 0, sealed: 0, onArrive });
+  }
+
+  actorStepLegal(n, x, y, allowPlayer) {
+    const t = this.tileAt(x, y);
+    if (!(WALKABLE.has(t) || (this.sysWalkableExtra && this.sysWalkableExtra(x, y)))) return false;
+    if (this.boulderAt && this.boulderAt(x, y)) return false;
+    for (const m of this.map.npcs) {
+      if (m === n || m._actorHidden) continue;
+      if (this.npcX(m) === x && this.npcY(m) === y) return false;
+    }
+    if (!allowPlayer) {
+      if (x === this.player.tx && y === this.player.ty) return false;
+      const ptx = Math.round(this.partner.px / TILE), pty = Math.round(this.partner.py / TILE);
+      if (x === ptx && y === pty) return false;
+    }
+    return true;
+  }
+
+  actorBfsStep(n, tx, ty, allowPlayer) {
+    const sx = this.npcX(n), sy = this.npcY(n);
+    if (sx === tx && sy === ty) return null;
+    const prev = new Map([[sx + ',' + sy, null]]);
+    const q = [[sx, sy]];
+    const dirs = [[0, 1], [0, -1], [1, 0], [-1, 0]];
+    while (q.length) {
+      const [x, y] = q.shift();
+      for (const [dx, dy] of dirs) {
+        const nx = x + dx, ny = y + dy, k = nx + ',' + ny;
+        if (prev.has(k)) continue;
+        if (!this.actorStepLegal(n, nx, ny, allowPlayer)) continue;
+        prev.set(k, [x, y]);
+        if (nx === tx && ny === ty) {
+          let cur = [nx, ny];
+          while (true) {
+            const p = prev.get(cur[0] + ',' + cur[1]);
+            if (!p || (p[0] === sx && p[1] === sy)) return cur;
+            cur = p;
+          }
+        }
+        q.push([nx, ny]);
+      }
+    }
+    return null;
+  }
+
+  updateActorWalk(dt) {
+    const w = this.actorWalk;
+    if (!w || !w.jobs.length) { this.actorWalk = null; return; }
+    const job = w.jobs[0];
+    const n = job.npc;
+    if (n._stage && n._stage.glide > 0) n._stage.glide = Math.max(0, n._stage.glide - dt * 1000);
+    job.stepT += dt * 1000;
+    if (job.stepT < 150) return;
+    job.stepT = 0;
+    let guard = 0;
+    while (job.ix < job.pts.length && guard++ < 64
+      && this.npcX(n) === job.pts[job.ix][0] && this.npcY(n) === job.pts[job.ix][1]) job.ix++;
+    if (job.ix >= job.pts.length) {
+      if (n._stage) { n._stage.fx = n._stage.x; n._stage.fy = n._stage.y; n._stage.glide = 0; }
+      w.jobs.shift();
+      if (!w.jobs.length) this.actorWalk = null;
+      if (job.onArrive) job.onArrive();
+      return;
+    }
+    const target = job.pts[job.ix];
+    let step = this.actorBfsStep(n, target[0], target[1], false);
+    if (!step) {
+      job.sealed++;
+      if (job.sealed >= 10) step = this.actorBfsStep(n, target[0], target[1], true); // brush past the player only
+      if (!step) return; // wait a beat and retry
+    }
+    job.sealed = 0;
+    const cx = this.npcX(n), cy = this.npcY(n);
+    n._face = step[0] !== cx ? (step[0] > cx ? 'right' : 'left') : (step[1] > cy ? 'down' : 'up');
+    n._stage.fx = cx; n._stage.fy = cy;
+    n._stage.x = step[0]; n._stage.y = step[1];
+    n._stage.glide = 150;
   }
 
   startTutorialEncounter() {
@@ -173573,9 +173923,22 @@ class OverworldScene {
     const list = this._drawList || (this._drawList = []);
     list.length = 0;
     for (const n of this.map.npcs) {
+      if (n._actorHidden) continue; // Wave ACT: hidden actors are not drawn
       let nx = n.x * T, footY = n.y * T - 4 + T;
       const cq = this.challenge && this.challenge.parts.find((q) => q.npc === n);
       if (cq) { nx = cq.cx * T; footY = cq.cy * T - 4 + T; }
+      else if (n._stage) {
+        // Wave ACT: lifecycle-staged actors draw at their staged
+        // tile, gliding over a scripted walk's 150ms step.
+        const s = n._stage;
+        let rx = s.x, ry = s.y;
+        if (s.glide > 0) {
+          const k = 1 - s.glide / 150;
+          rx = s.fx + (s.x - s.fx) * k;
+          ry = s.fy + (s.y - s.fy) * k;
+        }
+        nx = rx * T; footY = ry * T - 4 + T;
+      }
       else if (n._wander) {
         // Premium+ W4: wanderers draw at their current tile, gliding
         // between tiles over the step's 280ms in their walk pair.
@@ -173588,7 +173951,7 @@ class OverworldScene {
         }
         nx = rx * T; footY = ry * T - 4 + T;
       }
-      const moving = !!cq || !!(n._wander && n._wander.glide > 0);
+      const moving = !!cq || !!(n._stage && n._stage.glide > 0) || !!(n._wander && n._wander.glide > 0);
       const spr = g.npcFrame(n, { dir: n._face || 'down', moving });
       list.push({ y: footY, spr, x: nx, footY });
     }
@@ -173888,6 +174251,18 @@ Object.assign(OverworldScene.prototype, {
     // Town + frontier_complete + its fire-once flag, and yields to
     // the ARC COMPLETE card exactly as the homecoming does).
     if (!arcCardFired) tryScottClosing(g, id);
+    // Wave ACT (cinematic entry): the Canopy parley pair ARRIVE.
+    // While the post-St. Anne window is open and their entry event
+    // has not played, the loadMap resolver stages RUE and COLE
+    // hidden — this hook plays their walk-in from the Game Corner
+    // doors (ev_parley_enter) instead of leaving them pre-placed.
+    // The event's own done flag is the once-gate; a stalled chain
+    // re-fires on a later entry, the entry-scene idiom.
+    if (!arcCardFired && !g.ui.dialogueOpen && id === 'celadon'
+      && g.state.story.flags.stanne_done && !g.state.story.flags.parley_celadon_done
+      && !g.state.story.flags.ev_parley_enter_done) {
+      this.runEvent('ev_parley_enter');
+    }
     // Stage O2 (Amber story): map-entry scenes, flag-gated once each.
     // Ivy's intro fires on FIRST entry to her lab; KELPSAIL fires on
     // Marisol once the first Amber badge is held; the pod reunion
@@ -174618,8 +174993,151 @@ Object.assign(OverworldScene.prototype, {
       }));
       return;
     }
+    // Wave ACT: actor lifecycle steps (see runActorStep below).
+    if (s.actorEnter || s.actorMove || s.actorExit || s.actorShow || s.actorHide) {
+      this.runActorStep(s, next); return;
+    }
     if (s.ending) { this.runEnding(next); return; }
     next();
+  },
+
+  // ---- Wave ACT: actor lifecycle primitives ----
+  // The event vocabulary for moving CHARACTERS (identity +
+  // persistence: game/actors.mjs). Every step commits its directive
+  // to story.actors FIRST — a save taken mid-walk reloads into the
+  // committed end state — then animates in-scene when the actor is
+  // fielded here; an actor who lives on another map is committed
+  // only, and the loadMap resolver fields the result on next load.
+  //   { actorEnter: { who, x, y, face?, path? } }  spawn, then optional walk
+  //   { actorMove:  { who, to: [x, y] | { map, x, y }, path? } }
+  //   { actorExit:  { who, to?, path? } }          walk off, then hidden
+  //   { actorShow:  { who, x?, y? } }              instant, persisted
+  //   { actorHide:  { who } }                      instant, persisted
+  actorByCid(cid) {
+    if (!this.map || !Array.isArray(this.map.npcs)) return null;
+    return this.map.npcs.find((n) => n._cid === cid) || null;
+  },
+
+  stageActorAt(npc, x, y, face) {
+    npc._stage = { x, y, fx: x, fy: y, glide: 0 };
+    delete npc._wander;
+    if (face) npc._face = face;
+  },
+
+  // Field an actor who is not in this scene's roster from the
+  // template their saved directive carries (a cross-map arrival
+  // walking in). Returns the live npc, or null when no template
+  // exists (the committed directive still applies on next load).
+  fieldActorFromTemplate(cid, x, y, face) {
+    const st = this.game.state;
+    const ov = st && st.story && st.story.actors ? st.story.actors[cid] : null;
+    if (!ov || !ov.template || !this.map) return null;
+    const c = { ...ov.template };
+    delete c.map;
+    c.x = x; c.y = y;
+    c._pk = this.mapId + ':actor:' + cid;
+    c._cid = cid;
+    c._cloneIx = 0;
+    c._phaseMs = 0;
+    c._face = face || c.dir || 'down';
+    this.stageActorAt(c, x, y, face);
+    this.map = { ...this.map, npcs: [...this.map.npcs, c] };
+    return c;
+  },
+
+  runActorStep(s, next) {
+    const g = this.game;
+    const st = g.state;
+    const kind = s.actorEnter ? 'enter' : s.actorMove ? 'move' : s.actorExit ? 'exit' : s.actorShow ? 'show' : 'hide';
+    const spec = s.actorEnter || s.actorMove || s.actorExit || s.actorShow || s.actorHide;
+    const who = spec && spec.who;
+    if (!who) { next(); return; }
+    let npc = this.actorByCid(who);
+    const walkThen = (pts, after) => {
+      if (npc && pts && pts.length) this.queueActorWalk(npc, pts, after);
+      else if (after) after();
+    };
+    if (kind === 'enter') {
+      const x = Number.isInteger(spec.x) ? spec.x : (npc ? npc.x : 0);
+      const y = Number.isInteger(spec.y) ? spec.y : (npc ? npc.y : 0);
+      const pts = Array.isArray(spec.path) && spec.path.length ? spec.path : null;
+      const end = pts ? pts[pts.length - 1] : [x, y];
+      setActorOverride(st, who, { map: this.mapId, x: end[0], y: end[1], hidden: false, ...(spec.face ? { face: spec.face } : {}) });
+      if (!npc) npc = this.fieldActorFromTemplate(who, x, y, spec.face);
+      if (!npc) { next(); return; }
+      npc._actorHidden = false;
+      this.stageActorAt(npc, x, y, spec.face);
+      walkThen(pts, next);
+      return;
+    }
+    if (kind === 'move') {
+      const to = spec.to;
+      const cross = to && !Array.isArray(to) && typeof to.map === 'string' && to.map !== this.mapId;
+      if (cross) {
+        // Relocate: commit the destination (with the template that
+        // fields them there), then walk the exit path here and hide.
+        setActorOverride(st, who, { map: to.map, x: to.x, y: to.y, hidden: false, ...(npc ? { template: actorTemplateOf(npc) } : {}), ...(spec.face ? { face: spec.face } : {}) });
+        if (!npc) { next(); return; }
+        const pts = Array.isArray(spec.path) && spec.path.length ? spec.path : null;
+        walkThen(pts, () => { npc._actorHidden = true; next(); });
+        return;
+      }
+      const dest = Array.isArray(to) ? to : (to && Number.isInteger(to.x) ? [to.x, to.y] : null);
+      if (!dest) { next(); return; }
+      setActorOverride(st, who, { map: this.mapId, x: dest[0], y: dest[1], hidden: false, ...(spec.face ? { face: spec.face } : {}) });
+      if (!npc) { next(); return; }
+      npc._actorHidden = false;
+      const pts = Array.isArray(spec.path) && spec.path.length ? spec.path : [dest];
+      walkThen(pts, next);
+      return;
+    }
+    if (kind === 'exit') {
+      setActorOverride(st, who, { hidden: true, ...(npc ? { map: this.mapId } : {}) });
+      if (!npc) { next(); return; }
+      const pts = Array.isArray(spec.path) && spec.path.length ? spec.path
+        : (Array.isArray(spec.to) ? [spec.to] : null);
+      walkThen(pts, () => { npc._actorHidden = true; next(); });
+      return;
+    }
+    if (kind === 'show') {
+      const hasPost = Number.isInteger(spec.x) && Number.isInteger(spec.y);
+      setActorOverride(st, who, { hidden: false, ...(hasPost ? { map: this.mapId, x: spec.x, y: spec.y } : {}) });
+      if (npc) {
+        npc._actorHidden = false;
+        if (hasPost) this.stageActorAt(npc, spec.x, spec.y, spec.face);
+      }
+      next(); return;
+    }
+    // hide
+    setActorOverride(st, who, { hidden: true });
+    if (npc) npc._actorHidden = true;
+    next();
+  },
+
+  // Wave ACT: tale-completion lifecycle directives. A tale def may
+  // carry onComplete steps (the actor vocabulary above). Completions
+  // arrive through MANY paths — finishWith, advanceTale's internal
+  // completion, one direct completeTale call — so instead of hooking
+  // each, update() polls the quest table: the first tick a tale
+  // reads 'complete' with its marker unset runs the steps and sets
+  // the marker (story flag talefx_<taleId>), so each tale's
+  // directives fire exactly once. Saves that completed the tale
+  // before this layer existed fire on first load — the world catches
+  // up to the story.
+  checkTaleCompletions() {
+    const st = this.game && this.game.state;
+    if (!st || !st.story || !st.story.quests) return;
+    const flags = st.story.flags || (st.story.flags = {});
+    for (const id of Object.keys(QUESTS)) {
+      const t = QUESTS[id];
+      if (!t || !Array.isArray(t.onComplete) || !t.onComplete.length) continue;
+      if (st.story.quests[id] !== 'complete') continue;
+      const mark = 'talefx_' + id;
+      if (flags[mark]) continue;
+      flags[mark] = true;
+      this.runSteps(t.onComplete, 0, null);
+      return;
+    }
   },
 
   runEnding(done) {
@@ -176422,6 +176940,19 @@ Object.assign(OverworldScene.prototype, {
             flags.wally_ralts = true;
             g.audio.playSfx('dex-register');
             g.ui.toast('Wally caught a PSYLET!');
+            // Wave ACT proof (quest-end relocation, recurring
+            // character): the catch scene IS Wally's farewell — he
+            // told you he is moving away, and promised your roads
+            // would cross again. So he goes: east out of Meadowbrook
+            // toward Wildflower and the long road, and his identity
+            // relocates to the Crown Road post (wally@victory-road,
+            // held empty by ACTOR_DEFAULTS until this moment) where
+            // he waits for the end-of-region meeting. Before this
+            // wave, both Wallys stood in both places at once.
+            this.runSteps([
+              { actorExit: { who: 'wally@petalburg', to: [29, 8] } },
+              { actorShow: { who: 'wally@victory-road' } },
+            ], 0, null);
           }, 'WALLY');
         });
         return true;
@@ -177625,9 +178156,18 @@ Object.assign(OverworldScene.prototype, {
     if (flags.parley_celadon_done || !flags.stanne_done) return false;
     const say = (lines, cb) => this.taleSay(lines, npc.name, cb);
     const resolve = () => { flags.parley_celadon_done = true; };
+    // Wave ACT: a resolved parley is a DEPARTURE, played — the pair
+    // walk back to the Game Corner doors they arrived from (RUE to
+    // the west door, COLE to the east) and out of the scene, instead
+    // of vanishing at the next load. Their hidden overrides persist;
+    // parley_celadon_done already keeps them unfielded hereafter.
+    const depart = () => this.runSteps([
+      { actorExit: { who: 'rue@celadon', path: [[8, 9], [9, 9], [10, 9], [11, 9], [12, 9], [12, 8], [12, 7]] } },
+      { actorExit: { who: 'cole@celadon', path: [[9, 9], [10, 9], [11, 9], [12, 9], [13, 9], [13, 8], [13, 7]] } },
+    ], 0, null);
     const fight = () => {
       const def = TRAINERS.duo3_celadon;
-      if (!def) { resolve(); return; }
+      if (!def) { resolve(); depart(); return; }
       // A clone carrying the pair's own names and lines for THIS scene;
       // team, levels and reward are the authored def's, untouched (R3).
       const t = { ...def, name: 'Rue & Cole',
@@ -177639,7 +178179,7 @@ Object.assign(OverworldScene.prototype, {
           recordBattleBond(st, 'duo3_celadon', won, fled);
           if (won && !fled) {
             resolve();
-            this.taleSay(['They flee toward the Game Corner, arguing about whose idea Canopy was.', 'Some things even a long road cannot fix. Their next ambush, wherever it is, will still be an ambush — but maybe a shorter one.'], '');
+            this.taleSay(['They flee toward the Game Corner, arguing about whose idea Canopy was.', 'Some things even a long road cannot fix. Their next ambush, wherever it is, will still be an ambush — but maybe a shorter one.'], '', () => depart());
           }
         },
       }));
@@ -177672,7 +178212,7 @@ Object.assign(OverworldScene.prototype, {
                 ? 'On the way out, Rue presses something into your hand — then stops. "You already carry a Second-Wind," she says, flat. "One of a kind. Fine." She counts out $2,000 instead, like it personally offends her. "Do NOT make it a thing." It is absolutely a thing.'
                 : 'On the way out, Rue presses two XP Candies into your hand. "For the road," she says. "Do NOT make it a thing." It is absolutely a thing.',
             'They walk off arguing about lunch. Not running. Walking. (Received an XP Candy for the road — less than a prize fight pays, and worth more.)',
-          ], '');
+          ], '', () => depart());
         });
       });
       return true;
@@ -181265,6 +181805,6 @@ if (typeof Game !== 'undefined') Object.assign(Game.prototype, {
 });
 
 </script>
-<!-- contentHash:c0f5f427af7e05ddea55c8193d60b216dc2ec946cdeda39ab1d0236f9104d4db -->
+<!-- contentHash:c3634881fe8039201e05315724b53051b91493c36b4aa279eb3b712f37c11ac1 -->
 </body>
 </html>
