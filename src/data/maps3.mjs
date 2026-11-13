@@ -1705,8 +1705,8 @@ export const MAPS3 = {
       '^^^^^^^^^^^^^^^^^^^^',
     ]),
     warps: [
-      { x: 3, y: 10, to: { map: 'indigo', x: 11, y: 5 } },
-      { x: 4, y: 10, to: { map: 'indigo', x: 12, y: 5 } },
+      { x: 3, y: 10, to: { map: 'indigo', x: 6, y: 7 } },
+      { x: 4, y: 10, to: { map: 'indigo', x: 7, y: 7 } },
     ],
     signs: [
       { x: 3, y: 1, text: 'FIRST CHAMBER — Ice closes over every doubt.' },

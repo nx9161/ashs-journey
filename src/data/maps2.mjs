@@ -2481,8 +2481,8 @@ export const MAPS2 = {
       { x: 9, y: 12, to: { map: 'league', x: 9, y: 11 } },
       { x: 8, y: 16, to: { map: 'league', x: 8, y: 17 } },
       { x: 9, y: 16, to: { map: 'league', x: 9, y: 15 } },
-      { x: 8, y: 19, to: { map: 'indigo', x: 8, y: 4 } },
-      { x: 9, y: 19, to: { map: 'indigo', x: 9, y: 4 } },
+      { x: 8, y: 19, to: { map: 'indigo', x: 6, y: 7 } },
+      { x: 9, y: 19, to: { map: 'indigo', x: 7, y: 7 } },
     ],
     signs: [],
     npcs: [
