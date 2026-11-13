@@ -262,6 +262,37 @@ export const MAP_GROUND = {
   'house-fuchsia': 'open',
   'house-cinnabar': 'open',
   'house-indigo': 'open',
+  // War Room W-BG (No-Same-Kit fix #3): Amber Isles completion —
+  // every maps5 map now assigned explicitly (existing 15 only). The
+  // three shrine isles and their caves take their birds' elements
+  // (Ember Isle / Rime Isle / Storm Isle), the Sanctum shrines ride
+  // the Spirit with the deep shrine on the Tide below it, the four
+  // Amber Sea lanes are open water, and the island towns + houses
+  // take Open (the Arden town/house precedent).
+  'fire-isle': 'ember',
+  'fire-cave': 'ember',
+  'ice-isle': 'frost',
+  'ice-cave': 'frost',
+  'lightning-isle': 'storm',
+  'lightning-cave': 'storm',
+  'shamouti-shrine': 'spirit',
+  'shamouti-deep': 'tide',
+  'orange-sea-north': 'tide',
+  'orange-sea-east': 'tide',
+  'orange-sea-west': 'tide',
+  'orange-sea-central': 'tide',
+  valencia: 'open',
+  mikan: 'open',
+  navel: 'open',
+  moro: 'open',
+  kumquat: 'open',
+  trovita: 'open',
+  shamouti: 'open',
+  pummelo: 'open',
+  'house-valencia': 'open',
+  'house-mikan': 'open',
+  'house-kumquat': 'open',
+  'house-shamouti': 'open',
 };
 
 export function groundForMap(mapId) {
