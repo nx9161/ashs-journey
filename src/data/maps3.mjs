@@ -35,8 +35,8 @@ export const MAPS3 = {
       '=====++DD++=====',
     ]),
     warps: [
-      { x: 7, y: 9, to: { map: 'cerulean', x: 13, y: 5 } },
-      { x: 8, y: 9, to: { map: 'cerulean', x: 14, y: 5 } },
+      { x: 7, y: 9, to: { map: 'cerulean', x: 9, y: 8 } },
+      { x: 8, y: 9, to: { map: 'cerulean', x: 10, y: 8 } },
     ],
     signs: [],
     npcs: [
