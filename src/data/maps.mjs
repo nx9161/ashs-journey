@@ -418,6 +418,11 @@ export const WALKABLE = new Set(['.', ',', 'D', 'E', 'C', 'F', 'J', 'K', '1', '2
   // Islands, so floor stays floor.
   ...[533, 534, 535, 536, 537, 538, 539, 540, 541, 542, 543, 544, 545, 546, 547, 548,
     549, 550, 551, 552, 553, 554, 555, 556, 557, 558, 559, 560, 561, 562]
+    .map((i) => String.fromCodePoint(0x1E00 + i)),
+  // Wave T6: the tidechart rug char (U+1E00+566, tiles.mjs
+  // T6_KIND_DEFS) is walkable — a ground decal on the Fan Club
+  // porch, swapped 1:1 from a walkable boardwalk cell.
+  ...[566]
     .map((i) => String.fromCodePoint(0x1E00 + i))]);
 
 // Trainer definitions for the slice.

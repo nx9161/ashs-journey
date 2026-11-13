@@ -537,6 +537,28 @@ T3_KIND_DEFS.forEach(([kind], i) => {
   TILE_CHARS[ch] = kind;
 });
 export const T3_PROP_KINDS = T3_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
+// ---- Wave T6 (Arcport build): harbour props ----
+// Three new kinds continuing the block at idx 566..568 (T3 ends at
+// 565; U+2036..U+2038, verified free in TILE_CHARS and unused by
+// every map row). tidechart is class 'rug': a WALKABLE ground decal
+// (the founder's tide chart spread on the Fan Club porch — sailors
+// stand around and on it). crane and gull are class 'prop': solid
+// objects composited over the ground they stand on (crane over the
+// dock boardwalk, gull over the water). Authored art:
+// assets/sprites/pix/tiles/tile-prop-<kind>.pix (Wave T6 register
+// in WAVE-T6-ARCPORT-PLAN.md Part 4).
+export const T6_KIND_DEFS = [
+  ['tidechart', 'rug'], ['crane', 'prop'], ['gull', 'prop'],
+];
+export const T6_KIND_CHARS = {};
+T6_KIND_DEFS.forEach(([kind], i) => {
+  const ch = String.fromCodePoint(0x1E00 + 566 + i);
+  T6_KIND_CHARS[kind] = ch;
+  TILE_CHARS[ch] = kind;
+});
+export const T6_PROP_KINDS = T6_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
+export const T6_RUG_KINDS = T6_KIND_DEFS.filter(([, c]) => c === 'rug').map(([k]) => k);
+export const T6_WALKABLE_CHARS = T6_KIND_DEFS.filter(([, c]) => c === 'rug').map(([k]) => T6_KIND_CHARS[k]);
 export const SINNOH_TOWN_GROUND_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg);
 export const SINNOH_TOWN_GROUND2_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg2);
 // TX-3: the 8 gym exteriors by town (original type-accent motifs).

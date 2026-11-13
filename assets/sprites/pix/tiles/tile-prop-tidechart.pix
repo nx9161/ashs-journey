@@ -1,0 +1,27 @@
+# Wave T6 (Arcport register): the founder's hand-drawn tide chart,
+# spread on the Fan Club porch (6,10) — parchment rug-class ground
+# decal: ink coastline, blue tide channels, a red X, compass rose.
+PIX tile-prop-tidechart 16 16
+................
+.kkkkkkkkkkkkkk.
+.kPPPPPPPPPPPPk.
+.kPPIIIPPPPPPPk.
+.kPPIPPPBBBPPPk.
+.kPPIPPBPBPPPPk.
+.kPPPPBPBPBPPPk.
+.kPPPPBBPPBPPPk.
+.kPPPPPPPPPPPPk.
+.kPIIPPPPPPRRPk.
+.kPPIPPIIPPRRPk.
+.kPPPPPPPIIPPPk.
+.kPPNPPPPPPPPPk.
+.kPPPPPPPPPPPPk.
+.kkkkkkkkkkkkkk.
+................
+PAL
+k #6a4a2e chart-edge
+P #e1d9ba parchment
+I #3e2c1c ink
+B #5677bd tide-blue
+R #9c4b3d mark-red
+N #3e2c1c compass
