@@ -1,0 +1,29 @@
+# Wave T15: Cinder Town charcoal kiln — squat stone dome with a
+# dark fire-mouth and ember glow (design: two charcoal kilns at the
+# west edge among the apricorn trees). Class 'prop', composited
+# over town grass.
+PIX tile-prop-kiln 16 16
+................
+......llll......
+.....lsssssl....
+....ssssssss....
+...ssdssslsss...
+...ssssssssss...
+..sssdssssdsss..
+..ssssssssssss..
+..ssssoooossss..
+..sssommmmosss..
+..sssommmmosss..
+..sssomffmosss..
+...ssmmmmmmss...
+...ssssssssss...
+..aaaaaaaaaaaa..
+................
+PAL
+l #a89f8f stone-light
+s #8d8578 stone
+d #6e675c stone-dark
+o #3a332c mouth-arch
+m #241d18 mouth
+f #f5a83d ember
+a #b9b2a4 ash

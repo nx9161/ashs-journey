@@ -1,0 +1,29 @@
+# Wave T15: Cinder Town well lounger — a DOZPOTAM head and
+# shoulders soaking in the town well (design centrepiece; T6 gull
+# precedent: decorative Kin-shaped prop composited over the basin
+# tile). Painted in the species' own palette from its battle art
+# (pinks + cream snout), NOT the design painting's grey.
+PIX tile-prop-dozpotam 16 16
+................
+...baaaaaaaab...
+..aaaaaaaaaaaa..
+..aaaaaaaaaaaa..
+..aaaaaaaaaaaa..
+..aakkaaaakkaa..
+..aaaaaaaaaaaa..
+...gggggggggg...
+...gggggggggg...
+...gggkgggkgg...
+...gggggggggg...
+..aaaaaaaaaaaa..
+..bbbbbbbbbbbb..
+.bbbbbbbbbbbbbb.
+..uuwuuwwuuwwu..
+................
+PAL
+k #2a1800 outline
+a #f58f92 pink-light
+b #ee8388 pink
+g #f2e1c3 snout-cream
+u #7ec8e3 water
+w #bfe3f2 water-light

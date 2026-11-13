@@ -615,6 +615,30 @@ T14_KIND_DEFS.forEach(([kind], i) => {
   TILE_CHARS[ch] = kind;
 });
 export const T14_PROP_KINDS = T14_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
+// ---- Wave T15 (Cinder build): the charcoal kiln + the well
+// lounger ----
+// Two new kinds continuing the block at idx 572-573 (T14 ends at
+// 571; U+203C/U+203D, verified free in TILE_CHARS and unused by
+// every map row). Class 'prop': solid objects composited over the
+// ground they stand on (art.mjs resolver). The kiln is Cinder's
+// charcoal craft made visible (the design's twin kilns at the west
+// edge); the dozpotam is the town well's resident Kin lounging in
+// the basin — a decorative Kin-shaped prop in the species' own
+// palette (T6 gull precedent; no overworld-Kin system exists).
+// Authored art: assets/sprites/pix/tiles/tile-prop-kiln.pix and
+// tile-prop-dozpotam.pix (Wave T15 register in
+// WAVE-T15-CINDER-PLAN.md Part 4).
+export const T15_KIND_DEFS = [
+  ['kiln', 'prop'],
+  ['dozpotam', 'prop'],
+];
+export const T15_KIND_CHARS = {};
+T15_KIND_DEFS.forEach(([kind], i) => {
+  const ch = String.fromCodePoint(0x1E00 + 572 + i);
+  T15_KIND_CHARS[kind] = ch;
+  TILE_CHARS[ch] = kind;
+});
+export const T15_PROP_KINDS = T15_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
 export const SINNOH_TOWN_GROUND_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg);
 export const SINNOH_TOWN_GROUND2_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg2);
 // TX-3: the 8 gym exteriors by town (original type-accent motifs).
