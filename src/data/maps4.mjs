@@ -23,8 +23,8 @@ export const MAPS4 = {
       '=======DD=======',
     ],
     warps: [
-      { x: 7, y: 9, to: { map: 'saffron', x: 11, y: 8 } },
-      { x: 8, y: 9, to: { map: 'saffron', x: 12, y: 8 } },
+      { x: 7, y: 9, to: { map: 'saffron', x: 13, y: 8 } },
+      { x: 8, y: 9, to: { map: 'saffron', x: 14, y: 8 } },
     ],
     signs: [
       { x: 7, y: 1, text: 'The air in here hums, very faintly, like a held breath.' },

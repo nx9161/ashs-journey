@@ -1024,8 +1024,8 @@ export const MAPS2 = {
       '=======DD=======',
     ]),
     warps: [
-      { x: 7, y: 9, to: { map: 'saffron', x: 11, y: 8 } },
-      { x: 8, y: 9, to: { map: 'saffron', x: 12, y: 8 } },
+      { x: 7, y: 9, to: { map: 'saffron', x: 13, y: 8 } },
+      { x: 8, y: 9, to: { map: 'saffron', x: 14, y: 8 } },
     ],
     signs: [],
     npcs: [
@@ -1055,8 +1055,8 @@ export const MAPS2 = {
       '======DD======',
     ]),
     warps: [
-      { x: 6, y: 6, to: { map: 'saffron', x: 3, y: 8 } },
-      { x: 7, y: 6, to: { map: 'saffron', x: 4, y: 8 } },
+      { x: 6, y: 6, to: { map: 'saffron', x: 14, y: 12 } },
+      { x: 7, y: 6, to: { map: 'saffron', x: 15, y: 12 } },
     ],
     signs: [],
     npcs: [
@@ -1096,8 +1096,8 @@ export const MAPS2 = {
     warps: [
       { x: 8, y: 5, to: { map: 'silph2', x: 8, y: 3 } },
       { x: 9, y: 5, to: { map: 'silph2', x: 9, y: 3 } },
-      { x: 8, y: 10, to: { map: 'saffron', x: 8, y: 4 } },
-      { x: 9, y: 10, to: { map: 'saffron', x: 9, y: 4 } },
+      { x: 8, y: 10, to: { map: 'saffron', x: 10, y: 4 } },
+      { x: 9, y: 10, to: { map: 'saffron', x: 11, y: 4 } },
     ],
     signs: [],
     npcs: [
