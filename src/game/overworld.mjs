@@ -316,7 +316,7 @@ export class OverworldScene {
     if (this.centerReturn && this.centerReturn.map) return this.centerReturn;
     const lc = this.game && this.game.state && this.game.state.story && this.game.state.story.lastCenter;
     if (lc && typeof lc.map === 'string' && Number.isFinite(lc.x) && Number.isFinite(lc.y)) return { map: lc.map, x: lc.x, y: lc.y };
-    return { map: 'pallet', x: 7, y: 9 };
+    return { map: 'pallet', x: 6, y: 9 };
   }
 
   tileAt(x, y) {
