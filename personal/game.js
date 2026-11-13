@@ -105199,6 +105199,24 @@ const ART = {
   "zapdos-back-bob": { base: "zapdos-back", w: 64, h: 64, pal: {}, shiftY: 2 },
   "zigzagoon-back-bob": { base: "zigzagoon-back", w: 64, h: 64, pal: {}, shiftY: 2 },
   "zubat-back-bob": { base: "zubat-back", w: 64, h: 64, pal: {}, shiftY: 2 },
+  "tile-prop-tortoise": { w: 16, h: 16, pal: {"k":"#232b1c","S":"#5c7038","s":"#7d9150","L":"#a8bf74","b":"#c9b458","H":"#93a55f","h":"#71813f","d":"#42512c"}, rows: [
+    "................",
+    "................",
+    "................",
+    "................",
+    ".......kkkkk....",
+    ".....kkSSSSSkk..",
+    "....kSsLSSsLSk..",
+    "...kSSSSSSSSSk..",
+    "..kHHkSsLSSSsk..",
+    ".kHkkHSSSsSSSk..",
+    ".kHHHkSSSSSSk...",
+    "..kkkbbbbbbk....",
+    "....k.k..k.k....",
+    "....h.h..h.h....",
+    "...ddddddddd....",
+    "................",
+  ] },
 };
 const ART_META = {
   "families": [
@@ -111567,7 +111585,9 @@ function resolveTileLayers(cache, kind, x, y, kindAt, t, phase, mapId) {
     case 'signpost': case 'well': case 'postbox': case 'bikestand':
     case 'stall': case 'haycart': case 'sundial': case 'birdbath':
     case 'tub': case 'sacks': case 'pottedtree': case 'waterpump':
-    case 'gatepost': case 'gatearch': case 'routearch': case 'vinearch': {
+    case 'gatepost': case 'gatearch': case 'routearch': case 'vinearch':
+    // Wave T3: Marlow's tortoise composites over its lawn the same way.
+    case 'tortoise': {
       // Object tiles carry transparent surrounds (Wave 1): lay the ground
       // the object stands on beneath it — south neighbour's family first
       // (the contact edge), else the neighbour majority, else grass.
@@ -122378,7 +122398,7 @@ const MAPS3 = {
       'ÌÌÌÁĲ....deXXefÁdefÌ',
       'ÌÌÁĲĲ....UUVYUUÁrstÌ',
       'ÌÁÁÁ×.............ĲÌ',
-      'ÌghiÁĲÁÁĲĲĲĲĲ×ÁnnÁnÌ',
+      'ÌghiÁÁÁÁÁÁĲĲÁ×ÁnnÁnÌ',
       'ÌvsvÁjklm...ââOâÁ‵FÌ',
       'ÌÁÁĲĲAJKA...P12PÁÁÁÌ',
       '....................',

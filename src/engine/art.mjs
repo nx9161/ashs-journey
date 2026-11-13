@@ -2419,7 +2419,9 @@ export function resolveTileLayers(cache, kind, x, y, kindAt, t, phase, mapId) {
     case 'signpost': case 'well': case 'postbox': case 'bikestand':
     case 'stall': case 'haycart': case 'sundial': case 'birdbath':
     case 'tub': case 'sacks': case 'pottedtree': case 'waterpump':
-    case 'gatepost': case 'gatearch': case 'routearch': case 'vinearch': {
+    case 'gatepost': case 'gatearch': case 'routearch': case 'vinearch':
+    // Wave T3: Marlow's tortoise composites over its lawn the same way.
+    case 'tortoise': {
       // Object tiles carry transparent surrounds (Wave 1): lay the ground
       // the object stands on beneath it — south neighbour's family first
       // (the contact edge), else the neighbour majority, else grass.

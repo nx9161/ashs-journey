@@ -102951,6 +102951,24 @@ export const ART = {
   "zapdos-back-bob": { base: "zapdos-back", w: 64, h: 64, pal: {}, shiftY: 2 },
   "zigzagoon-back-bob": { base: "zigzagoon-back", w: 64, h: 64, pal: {}, shiftY: 2 },
   "zubat-back-bob": { base: "zubat-back", w: 64, h: 64, pal: {}, shiftY: 2 },
+  "tile-prop-tortoise": { w: 16, h: 16, pal: {"k":"#232b1c","S":"#5c7038","s":"#7d9150","L":"#a8bf74","b":"#c9b458","H":"#93a55f","h":"#71813f","d":"#42512c"}, rows: [
+    "................",
+    "................",
+    "................",
+    "................",
+    ".......kkkkk....",
+    ".....kkSSSSSkk..",
+    "....kSsLSSsLSk..",
+    "...kSSSSSSSSSk..",
+    "..kHHkSsLSSSsk..",
+    ".kHkkHSSSsSSSk..",
+    ".kHHHkSSSSSSk...",
+    "..kkkbbbbbbk....",
+    "....k.k..k.k....",
+    "....h.h..h.h....",
+    "...ddddddddd....",
+    "................",
+  ] },
 };
 export const ART_META = {
   "families": [
