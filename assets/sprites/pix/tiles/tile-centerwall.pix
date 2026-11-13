@@ -1,4 +1,5 @@
-# Wave 5a: Center wall — rose panels, cream crown, plum baseboard
+# Wave 5a: Center wall — T2 re-dress (INTERIOR-STANDARD): warm cream
+# plaster, one tan trim line, warm red-brown baseboard. No banding.
 PIX tile-centerwall 16 16
 cccccccccccccccc
 cccccccccccccccc
@@ -13,12 +14,12 @@ fffffsfffffsffff
 fffffsfffffsffff
 fffffsfffffsffff
 fffffsfffffsffff
-tttttttttttttttt
+ffffffffffffffff
 bbbbbbbbbbbbbbbb
 bbbbbbbbbbbbbbbb
 PAL
-f #9a6248 center-wall
-c #e8dcc0 center-crown
-t #7c4a34 center-trim
-s #7c4a34 center-seam
-b #6e4230 center-baseboard
+f #e7dbc0 center-wall
+c #f0e7cf center-crown
+t #c3a06d center-trim
+s #d8c8a4 center-seam
+b #8a5a40 center-baseboard

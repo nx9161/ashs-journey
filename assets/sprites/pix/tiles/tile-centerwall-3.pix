@@ -1,24 +1,25 @@
-# Premium+ W6: TX-4 Center wall variant 3: shade course lines
+# Premium+ W5: TX-1 interior wall variant 3 — T2 re-dress: the same
+# calm cream plaster as tile-centerwall (hash-mix uniform).
 PIX tile-centerwall-3 16 16
 cccccccccccccccc
 cccccccccccccccc
 tttttttttttttttt
 fffffsfffffsffff
 fffffsfffffsffff
-bbbbbbbbbbbbbbbb
 fffffsfffffsffff
 fffffsfffffsffff
-tttttstttttstttt
-tttttstttttstttt
-bbbbbbbbbbbbbbbb
-tttttstttttstttt
-tttttstttttstttt
-tttttttttttttttt
+fffffsfffffsffff
+fffffsfffffsffff
+fffffsfffffsffff
+fffffsfffffsffff
+fffffsfffffsffff
+fffffsfffffsffff
+ffffffffffffffff
 bbbbbbbbbbbbbbbb
 bbbbbbbbbbbbbbbb
 PAL
-f #9a6248 center-wall
-c #e8dcc0 center-crown
-t #7c4a34 center-trim
-s #7c4a34 center-seam
-b #6e4230 center-baseboard
+f #e7dbc0 center-wall-3
+c #eee3c8 center-crown-3
+t #c3a06d center-trim-3
+s #d8c8a4 center-seam-3
+b #8a5a40 center-baseboard-3

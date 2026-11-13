@@ -1,22 +1,25 @@
-# Premium+ W5: TX-1 interior wall variant 2 — sage wainscot
+# Premium+ W5: TX-1 interior wall variant 2 — T2 re-dress: the same
+# soft blue-grey as tile-martwall, one tone deeper (hash-mix uniform).
 PIX tile-martwall-2 16 16
-dddddddddddddddd
-dddddddddddddddd
-wwwwwwwdwwwwwwwd
-wwwwwwwdwwwwwwwd
-wwwwwwwdwwwwwwwd
-wwwwwwwdwwwwwwwd
-wwwwwwwdwwwwwwwd
-wwwwwwwdwwwwwwwd
-wwwwwwwdwwwwwwwd
-llllllllllllllll
-wwwdwwwdwwwdwwwd
-wwwdwwwdwwwdwwwd
-wwwdwwwdwwwdwwwd
-wwwdwwwdwwwdwwwd
-dddddddddddddddd
-dddddddddddddddd
+cccccccccccccccc
+cccccccccccccccc
+tttttttttttttttt
+fffffsfffffsffff
+fffffsfffffsffff
+fffffsfffffsffff
+fffffsfffffsffff
+fffffsfffffsffff
+fffffsfffffsffff
+fffffsfffffsffff
+fffffsfffffsffff
+fffffsfffffsffff
+fffffsfffffsffff
+ffffffffffffffff
+bbbbbbbbbbbbbbbb
+bbbbbbbbbbbbbbbb
 PAL
-w #519d8d sage wainscot
-l #d3d8c5 wall-light
-d #458678 wall-deep
+f #8fa5b2 mart-wall-2
+c #a4b8c2 mart-crown-2
+t #6e8291 mart-trim-2
+s #8296a4 mart-seam-2
+b #8a6f52 mart-baseboard-2

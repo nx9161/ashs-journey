@@ -1,22 +1,26 @@
-# Premium+ W5: TX-1 interior wall variant 2 — rose wainscot
+# Premium+ W5: TX-1 interior wall variant 2 — T2 re-dress: the same
+# calm cream plaster as tile-centerwall, one tone deeper, so the
+# spread-hash variant mix reads as one uniform wall.
 PIX tile-centerwall-2 16 16
-dddddddddddddddd
-dddddddddddddddd
-wwwwwwwdwwwwwwwd
-wwwwwwwdwwwwwwwd
-wwwwwwwdwwwwwwwd
-wwwwwwwdwwwwwwwd
-wwwwwwwdwwwwwwwd
-wwwwwwwdwwwwwwwd
-wwwwwwwdwwwwwwwd
-llllllllllllllll
-wwwdwwwdwwwdwwwd
-wwwdwwwdwwwdwwwd
-wwwdwwwdwwwdwwwd
-wwwdwwwdwwwdwwwd
-dddddddddddddddd
-dddddddddddddddd
+cccccccccccccccc
+cccccccccccccccc
+tttttttttttttttt
+fffffsfffffsffff
+fffffsfffffsffff
+fffffsfffffsffff
+fffffsfffffsffff
+fffffsfffffsffff
+fffffsfffffsffff
+fffffsfffffsffff
+fffffsfffffsffff
+fffffsfffffsffff
+fffffsfffffsffff
+ffffffffffffffff
+bbbbbbbbbbbbbbbb
+bbbbbbbbbbbbbbbb
 PAL
-w #9a6248 rose wainscot
-l #c09a78 wall-light
-d #7c4a34 wall-deep
+f #dfcfae center-wall-2
+c #eadfc4 center-crown-2
+t #c3a06d center-trim-2
+s #cfbd92 center-seam-2
+b #8a5a40 center-baseboard-2
