@@ -2518,6 +2518,25 @@ T9_KIND_DEFS.forEach(([kind], i) => {
   TILE_CHARS[ch] = kind;
 });
 const T9_PROP_KINDS = T9_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
+// ---- Wave T14 (Blossom build): the sakura tree ----
+// One new kind continuing the block at idx 571 (T9 ends at 570;
+// U+203B, verified free in TILE_CHARS and unused by every map row).
+// Class 'prop': a solid object composited over the ground it stands
+// on (art.mjs resolver). Blossom City's cherry-blossom tree — the
+// tc-cherrygrove canopy shape recoloured green->pink; the approved
+// design's signature (cherry-pink roofs and blossom trees).
+// Authored art: assets/sprites/pix/tiles/tile-prop-sakura.pix
+// (Wave T14 register item in WAVE-T14-BLOSSOM-PLAN.md Part 4).
+const T14_KIND_DEFS = [
+  ['sakura', 'prop'],
+];
+const T14_KIND_CHARS = {};
+T14_KIND_DEFS.forEach(([kind], i) => {
+  const ch = String.fromCodePoint(0x1E00 + 571 + i);
+  T14_KIND_CHARS[kind] = ch;
+  TILE_CHARS[ch] = kind;
+});
+const T14_PROP_KINDS = T14_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
 const SINNOH_TOWN_GROUND_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg);
 const SINNOH_TOWN_GROUND2_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg2);
 // TX-3: the 8 gym exteriors by town (original type-accent motifs).
@@ -91696,6 +91715,24 @@ const ART = {
     "...bbbbbbbbbb...",
     "................",
   ] },
+  "tile-prop-sakura": { w: 16, h: 16, pal: {"a":"#dd8fb4","b":"#b45f8d","c":"#f8d7e6","d":"#d14e8c","k":"#71523d","w":"#846a4e"}, rows: [
+    "................",
+    "................",
+    ".....abccad.....",
+    "...bbcbddacac...",
+    "..cabdbbbadaaa..",
+    "..bbbacbccddaa..",
+    "...babbbbdbaa...",
+    "....bbbaabba....",
+    ".....bbbbab.....",
+    ".......kk.......",
+    ".......kw.......",
+    ".......kk.......",
+    ".......kk.......",
+    ".......wk.......",
+    ".......kk.......",
+    "................",
+  ] },
   "tile-prop-sandcolumn": { w: 16, h: 32, pal: {"B":"#c6b388","D":"#8e755b","L":"#dec1b7","A":"#b99b74","C":"#6a5c47"}, rows: [
     "................",
     "................",
@@ -110396,6 +110433,8 @@ for (const k of [...T6_PROP_KINDS, ...T6_RUG_KINDS]) TILE_ART[k] = 'tile-prop-' 
 TILE_ART['memorialwall'] = 'tile-memorialwall';
 // Wave T9: Bramble's lure post draws its prop art.
 for (const k of T9_PROP_KINDS) TILE_ART[k] = 'tile-prop-' + k;
+// Wave T14: Blossom's sakura tree draws its prop art.
+for (const k of T14_PROP_KINDS) TILE_ART[k] = 'tile-prop-' + k;
 
 // Premium+ W6 (TX-3/PL-1): door-open frames, authored in TX-3 for every
 // door kind. The warp-fade engine that plays them lands in W7 — W6
@@ -111241,7 +111280,9 @@ const PROP_KINDS = new Set(['counter', 'healmachine', 'pcdesk', 'bed', 'table',
   // Wave T7: Hushmoor's memorial wall composites over its ground too.
   ...T7_PROP_KINDS,
   // Wave T9: Bramble's lure post composites over its ground too.
-  ...T9_PROP_KINDS]);
+  ...T9_PROP_KINDS,
+  // Wave T14: Blossom's sakura tree composites over its ground too.
+  ...T14_PROP_KINDS]);
 function groundFamilyOf(kind) {
   // Perfection Pass Stage 2 Gate 2 (G2): beach kinds stand on tropgrass,
   // psand kinds stand on path (props composite over the parent ground).
@@ -129687,24 +129728,24 @@ const MAPS6 = {
     "name": "Blossom City",
     "music": "viridian-theme",
     "rows": [
-      "ặặặẸặặặặặặẸặặặặặặẸặặặặặặẸặặặ",
-      "ặẵẵoẵẵẵẵẵẵẵẵẵẵẵẵẵẵẵẵẵẵẅẵẵẵẵặ",
-      "ặnẵjklmẵẵdeefẵẸẻẻẻẵẵẵẵẵẵoẵẵặ",
-      "ặẵẵAJKAẵẵP12PẵẵẼsẼẵẵẵẵẵẵẵẵFặ",
-      "ặSẶẶẶẶẶẶẶẶẶẶẶẏẶẶẶẶẶẶẶẶẶẶẶẶẶặ",
-      "ặẶẶẶẶẶẶẶẶẶẶẶẶẶẶẶẶẶẶẶẶẶẶẶẶẶẶặ",
-      "ặẶẶẶẵẵẵẵẅẶẶẶẶẶẶẶẶẵẶẶẶẶẶẶẵẵẶặ",
-      "ặẶẶẶẵẵẵẵẵẶẵẶẵẵẵnẵẶẶẵẵẵẵẶẵFẶặ",
-      "ặẶẶẶẶẶẶẶẶẶẶẶẶẶẶẶẶẶẶẶẶẶẶẶẶẶẶẶ",
-      "ặẶẶẶẶẶẶẶẶẶẶẶẶẶẶẶẶẶẶẶẶẶẶẶẶẶẶẶ",
-      "ặẵẵẶẶẶẶẶẶẵẶẶẶẶẶẅẶẶẵẶẶẶẶẶẵFẵặ",
-      "ặẵẵẶẶẶẶẶẶẶẶẶẶẶẶ....ẶẶẶẶẶẶẵẵặ",
-      "ặẵẵFFFFFFFFẵnẶ.,,,,.ẶẶ.ẵ.ẵẵặ",
-      "ặẵẵ~~~~~~~ẵẵẵẸF,,,,.ẵ.,,,,ẵặ",
-      "ặẵF~~~~~~~ẵẵẵẵẵ,,,,ẵẵ.,,,,ẵặ",
-      "ặFẵ~~~~~~~ẵẵẵẵẵẵẵẵẵẵẵẸ,,,ẏẵặ",
-      "ặẵẵ~~~~~~~ẵẵẏẵẵẵFẵẵẵẵẵẵẵẵẵẵặ",
-      "ặặặẸặặặặặặẵặặặặặặẸặặặặặặẵặặặ"
+      "ặặặặặặặặặặặặặặặặặặặặặặặặặặặặ",
+      "ặẵẵẵẵẵ※ẵẵẵẵẵẵẵẵẵẵẵẵẵ※ẵẵẵẵẵẵ~",
+      "ặẵẵjklmẵẵẵẵẻẻẻẻẵẵẵẵẵabbc,,~~",
+      "ặẵẵAJKAẵẵẵẵẼsẼẼẵẵẵẵẵzyzz,,~~",
+      "ặẵẸ....ẵẵẵnp.pẏnẵẵẵẵẵ.ẵẵ,F~~",
+      "ặẵẵẵ..ẵẵẵẵnẵ.ẵẵnẵẵẵẵẵ.ẵẵẵ″~~",
+      "ặẵặặ..ẵẵẵẵẵẵ.ẵẵẵẵẵặặẵ.ẵẵẵẵ~~",
+      "ặẵSẵ..oẵ.ẵẵẵ.ppẵẵ.oẵẵ.※ẵẞἇἇ~",
+      "............................",
+      "............................",
+      "ặẵẵẵẵpẵẵ.oẵẵ.ẵẵẵo.ẵẵpẵẵẵẞẞ~~",
+      "ặẵẻẻẻẻẵẵ.ẵẵẵ.ặặẵẵ.ẵẵẵẵẵẵẞẞ″~",
+      "ặẵẼwẼẼẵẵ.pẵẵ.ẵẵẵẵ.pẵẞẞẞẞẞẞ~~",
+      "ặ.......................″″~~",
+      "ặṔdeefẵẵ.ẵSẵẵẵdeefS.ẵᾕᾕᾕẞẞ~~",
+      "ặẵP12Pẵẵ.ẵẵẵẵẵtsttẵ.Sᾕᾕᾕẞẞ~~",
+      "ặẸ.......ẵẵ※ẵẵ......ẵᾕᾕᾕẞẞ~~",
+      "ặặặặặặặặặặặặặặặặặặặặặặặặặặặặ"
     ],
     "warps": [
       {
@@ -129736,40 +129777,58 @@ const MAPS6 = {
         }
       },
       {
-        "x": 10,
-        "y": 3,
-        "to": {
-          "map": "mart",
-          "x": 5,
-          "y": 5
-        },
-        "via": {
-          "map": "cherrygrove",
-          "x": 10,
-          "y": 4
-        }
-      },
-      {
-        "x": 11,
-        "y": 3,
-        "to": {
-          "map": "mart",
-          "x": 5,
-          "y": 5
-        },
-        "via": {
-          "map": "cherrygrove",
-          "x": 11,
-          "y": 4
-        }
-      },
-      {
-        "x": 16,
+        "x": 12,
         "y": 3,
         "to": {
           "map": "house-cherrygrove",
           "x": 6,
           "y": 8
+        }
+      },
+      {
+        "x": 3,
+        "y": 15,
+        "to": {
+          "map": "mart",
+          "x": 5,
+          "y": 5
+        },
+        "via": {
+          "map": "cherrygrove",
+          "x": 3,
+          "y": 16
+        }
+      },
+      {
+        "x": 4,
+        "y": 15,
+        "to": {
+          "map": "mart",
+          "x": 5,
+          "y": 5
+        },
+        "via": {
+          "map": "cherrygrove",
+          "x": 4,
+          "y": 16
+        }
+      },
+      {
+        "x": 0,
+        "y": 8,
+        "to": {
+          "map": "r29",
+          "x": 24,
+          "y": 8
+        }
+      },
+      {
+        "x": 0,
+        "y": 9,
+        "to": {
+          "map": "r29",
+          "x": 24,
+          "y": 9
         }
       },
       {
@@ -129793,24 +129852,29 @@ const MAPS6 = {
     ],
     "signs": [
       {
-        "x": 1,
-        "y": 4,
+        "x": 2,
+        "y": 7,
         "text": "BLOSSOM CITY — The city of fragrant flowers. Route 30 climbs north from the east gate."
       },
       {
-        "x": 18,
-        "y": 10,
+        "x": 10,
+        "y": 14,
         "text": "BLOSSOM CITY — East: ROUTE 30."
       },
       {
-        "x": 9,
-        "y": 10,
+        "x": 18,
+        "y": 14,
         "text": "BLOSSOM CITY — East: ROUTE 30."
+      },
+      {
+        "x": 20,
+        "y": 15,
+        "text": "BLOSSOM TIDE TABLE — carved into this stone by Marin fifty years ago, from memory, after the printed one washed away. It still reads true."
       }
     ],
     "npcs": [
       {
-        "x": 11,
+        "x": 23,
         "y": 11,
         "name": "OLD MARIN",
         "art": "fisher",
@@ -129824,8 +129888,8 @@ const MAPS6 = {
         ]
       },
       {
-        "x": 17,
-        "y": 6,
+        "x": 13,
+        "y": 12,
         "name": "PETAL",
         "art": "lass",
         "skin": "#c89878",
@@ -129838,8 +129902,8 @@ const MAPS6 = {
         ]
       },
       {
-        "x": 23,
-        "y": 12,
+        "x": 10,
+        "y": 7,
         "name": "GUIDE GENT",
         "art": "gent",
         "skin": "#d8a878",
@@ -129852,8 +129916,8 @@ const MAPS6 = {
         ]
       },
       {
-        "x": 3,
-        "y": 5,
+        "x": 7,
+        "y": 15,
         "name": "MART CLERK",
         "art": "clerk",
         "skin": "#f0c8a0",
@@ -133726,7 +133790,7 @@ const MAPS6 = {
         "y": 9,
         "to": {
           "map": "cherrygrove",
-          "x": 16,
+          "x": 12,
           "y": 4
         }
       },
@@ -133735,7 +133799,7 @@ const MAPS6 = {
         "y": 9,
         "to": {
           "map": "cherrygrove",
-          "x": 16,
+          "x": 12,
           "y": 4
         }
       }
@@ -182016,6 +182080,6 @@ if (typeof Game !== 'undefined') Object.assign(Game.prototype, {
 });
 
 </script>
-<!-- contentHash:1779383d93875a54cc0e50fd0c3d1ee0985790cddc4826244de9f2794e5fc4d2 -->
+<!-- contentHash:ff725e8f86619ec004a48a50d95f8dc46452046256ee931a95d73e66b3b45767 -->
 </body>
 </html>
