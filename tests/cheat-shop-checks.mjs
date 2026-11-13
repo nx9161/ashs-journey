@@ -61,9 +61,11 @@ const BADGES = ['boulderbadge', 'cascadebadge', 'thunderbadge', 'rainbowbadge', 
 {
   const pallet = ALL_MAPS.pallet.npcs.find((n) => n.cheat);
   const center = ALL_MAPS.center.npcs.find((n) => n.cheat);
-  ok('A04 Pallet CHEAT TERMINAL at (6,4) beside the PC at (5,4)',
-    !!pallet && pallet.x === 6 && pallet.y === 4 && pallet.name === 'CHEAT TERMINAL'
-    && ALL_MAPS.pallet.npcs.some((n) => n.pc && n.x === 5 && n.y === 4));
+  // Wave T1 re-pin: the rebuilt lab door at (4,3) seats Hawthorn (4,4) with the
+  // terminals flanking him — PC (3,4), CHEAT (5,4). (S1 seats were (5,4)/(6,4).)
+  ok('A04 Pallet CHEAT TERMINAL at (5,4) beside the PC at (3,4), flanking Hawthorn',
+    !!pallet && pallet.x === 5 && pallet.y === 4 && pallet.name === 'CHEAT TERMINAL'
+    && ALL_MAPS.pallet.npcs.some((n) => n.pc && n.x === 3 && n.y === 4));
   ok('A05 shared Center CHEAT TERMINAL at (6,2) beside the PC at (7,2)',
     !!center && center.x === 6 && center.y === 2 && center.name === 'CHEAT TERMINAL'
     && ALL_MAPS.center.npcs.some((n) => n.pc && n.x === 7 && n.y === 2));
