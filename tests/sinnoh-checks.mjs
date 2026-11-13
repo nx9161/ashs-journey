@@ -202,9 +202,9 @@ const VAL = await import(join(ROOT, 'api/_lib/validator.mjs'));
     return comps.sort((a, b) => b.length - a.length);
   };
   const before = graph(false); const after = graph(true);
-  ok('A22 Vermilion\'s walkable graph keeps its exact base shape with the captain standing: base [main 119, the pre-existing isolated tile (5,11)] -> [main 118, (5,11)] — the main fragment loses ONLY the captain\'s own tile, no new fragment, and every warp tile is in the main fragment or beside it',
-    before.length === 2 && before[0].length === 119 && JSON.stringify(before[1]) === JSON.stringify(['5,11'])
-    && after.length === 2 && after[0].length === 118 && JSON.stringify(after[1]) === JSON.stringify(['5,11'])
+  ok('A22 Vermilion\'s walkable graph keeps its exact base shape with the captain standing: base [main 112, the pre-existing isolated tile (5,11)] -> [main 111, (5,11)] — the main fragment loses ONLY the captain\'s own tile, no new fragment, and every warp tile is in the main fragment or beside it (Wave S1 re-pin: base was 119 before the Arcport Mart was built — its 6 non-door footprint tiles plus the mart clerk\'s (3,5) stance account for exactly 7; the 2 door tiles stay in the graph)',
+    before.length === 2 && before[0].length === 112 && JSON.stringify(before[1]) === JSON.stringify(['5,11'])
+    && after.length === 2 && after[0].length === 111 && JSON.stringify(after[1]) === JSON.stringify(['5,11'])
     && (v.warps || []).every((w) => after[0].includes(w.x + ',' + w.y)
       || [[0, 1], [0, -1], [1, 0], [-1, 0]].some(([dx, dy]) => after[0].includes((w.x + dx) + ',' + (w.y + dy)))),
     'before=' + before.map((c) => c.length).join(',') + ' after=' + after.map((c) => c.length).join(','));
