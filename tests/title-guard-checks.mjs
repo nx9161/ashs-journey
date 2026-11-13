@@ -18,12 +18,19 @@
 //      of a canonical title (the pre-sweep wording, derived mechanically
 //      by substituting the old franchise noun for 'Kin'). ZERO tolerance
 //      in the five W1-resynced suites and in every unlisted file.
-//   T3 ratchet — the files on the RATCHET list carry known-INERT retired
-//      literals in suites that are green today and outside W1's scope
-//      (they are the W2 triage queue's, per the E2E audit §7). Their count
-//      may only shrink; any growth — or any occurrence in a new file —
-//      fails here. Burn an entry down by resyncing that driver and
-//      deleting its line from RATCHET.
+//   T3 ratchet — a file on the RATCHET list carries known-INERT retired
+//      literals whose count may only shrink; any growth — or any
+//      occurrence in a new file — fails here. Burn an entry down by
+//      resyncing that driver and deleting its line from RATCHET.
+//      W2 TRIAGE (2026-11-13): the original 10-entry queue was inspected
+//      occurrence by occurrence and ALL 10 proved to be live-code-path
+//      literals (menu-title comparisons in battle/contest driver loops —
+//      the intended branch was dead and a catch-all fallback was silently
+//      driving those menus), so all 10 were resynced to the canonical
+//      Kin titles and the ratchet burned to zero. Per-file dispositions
+//      are recorded in .github/workflows/checks.yml. The mechanism stays
+//      armed: a future known-inert occurrence may be ratcheted only with
+//      a written disposition, and its count may still only shrink.
 //   T4 captain coordinates — frontier-checks' A19/B01 stance literals must
 //      equal the live TALE_NPCS posts in src/data/quests.mjs.
 //   T5 Center anchors — battle-model's E02 fallback literal must equal
@@ -73,21 +80,13 @@ const VARIANTS = [...new Set(CANONICAL.flatMap((c) => [
 
 // ---------------- T2/T3: retired-variant scan over the drivers ---------
 const W1_SUITES = ['frontier-checks.mjs', 'cheat-shop-checks.mjs', 'campaign-smoke.mjs', 'battle-model-checks.mjs', 'audit-headless.mjs'];
-// Known-inert occurrences in green suites outside W1's scope (W2 triage
-// queue, E2E audit Cluster 3 §7). Counts verified at W1 landing; an entry
+// Known-inert occurrences in green suites outside the resync waves'
+// scope. EMPTY since the W2 triage burned the original queue to zero
+// (see the header): every queued occurrence proved to be a live-path
+// literal and was resynced, not ratcheted. Add an entry only with a
+// written disposition in .github/workflows/checks.yml; an entry's count
 // may only shrink. Resync the driver, then delete its line here.
-const RATCHET = {
-  'hoenn-contest-checks.mjs': 1,
-  'hoenn-story-checks.mjs': 1,
-  'johto-story-checks.mjs': 1,
-  'orange-climax-checks.mjs': 1,
-  'orange-story-checks.mjs': 1,
-  'qa-changed-flows.mjs': 1,
-  'rejuv-phase4-checks.mjs': 1,
-  'rejuv-phase5-checks.mjs': 1,
-  'sinnoh-checks.mjs': 1,
-  'sinnoh-story-checks.mjs': 1,
-};
+const RATCHET = {};
 const EXCLUDE = new Set(['title-guard-checks.mjs', 'branding-checks.mjs']);
 const driverFiles = [
   ...readdirSync(TESTS).filter((f) => f.endsWith('.mjs')).map((f) => [f, join(TESTS, f)]),

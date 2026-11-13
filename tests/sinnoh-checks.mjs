@@ -1097,7 +1097,7 @@ const driver = `
     if (g2.ui.dialogueOpen) { drain(g2); continue; }
     if (g2.ui.menuOpen) {
       var cm = g2.ui.menu;
-      if (cm.title === 'Enter which Pokemon?') { g2.ui.debugChoose(0); tk(g2, 3); continue; }
+      if (cm.title === 'Enter which Kin?') { g2.ui.debugChoose(0); tk(g2, 3); continue; }
       if (cm.title === 'Choose a move') { moveMenus++; g2.ui.debugChoose(0); tk(g2, 3); continue; }
       g2.ui.debugChoose(0); tk(g2, 3); continue;
     }

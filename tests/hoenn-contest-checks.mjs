@@ -215,7 +215,7 @@ const driver = `
       if (g.ui.dialogueOpen) { drain(g); continue; }
       if (g.ui.menuOpen) {
         var m = g.ui.menu;
-        if (m.title === 'Enter which Pokemon?') { g.ui.debugChoose(pickIdx); tk(g, 3); continue; }
+        if (m.title === 'Enter which Kin?') { g.ui.debugChoose(pickIdx); tk(g, 3); continue; }
         if (m.title === 'Choose a move') { moveMenus++; g.ui.debugChoose(moveIdx); tk(g, 3); continue; }
         g.ui.debugChoose(0); tk(g, 3); continue;
       }

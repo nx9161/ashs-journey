@@ -243,7 +243,7 @@ const driver = `
           var foeTypes = SPECIES[b.foe.speciesId].types, allyTypes = SPECIES[b.ally.speciesId].types;
           m.items.forEach(function (it, i) { if (it.disabled) return; var slot = b.ally.moves[i]; if (!slot) return; var md = MOVES[slot.id]; var sc = md.cat === 'status' ? 0.05 : (md.power || 0) * effectiveness(md.type, foeTypes) * (allyTypes.includes(md.type) ? 1.5 : 1); if (sc > bs) { bs = sc; best = i; } });
           g.ui.debugChoose(best); tk(g, 3);
-        } else if (m.title === 'Choose next Pokemon' || m.title === 'Party') {
+        } else if (m.title === 'Choose next Kin' || m.title === 'Party') {
           var idx2 = g.state.party.findIndex(function (mm) { return mm.hp > 0 && mm !== b.ally; });
           g.ui.debugChoose(idx2 >= 0 ? idx2 : m.items.length - 1); tk(g, 3);
         } else { g.ui.debugChoose(m.items.length - 1); tk(g, 3); }

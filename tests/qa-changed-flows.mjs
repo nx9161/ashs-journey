@@ -322,7 +322,7 @@ const driver = `
       var bm = gS.ui.menu;
       if (bm.kind === 'commands') choose(gS, 0); // FIGHT
       else if (bm.title === 'Choose a move') choose(gS, 0); // first move
-      else if (bm.title === 'Choose next Pokemon' || bm.title === 'Party') choose(gS, 0);
+      else if (bm.title === 'Choose next Kin' || bm.title === 'Party') choose(gS, 0);
       else choose(gS, bm.items.length - 1);
     } else { pA(gS, 1); tk(gS, 3); }
   }
