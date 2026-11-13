@@ -1824,9 +1824,9 @@ export const MAPS3 = {
       'ËÀo......ı..ÀÖÀË',
       'ËÀÀıÀ.ıËËıııoẆÀË',
       'ËÀÀıÀ.ıËËıııÀÀÀË',
-      'ËÀÖıÀ.ııııııÀÀÀË',
-      'ËÀÀıÀ.ııÀıııÀÀÀË',
-      'ËÀÀıı....ıııÀÀÀË',
+      'ËÀÖıÀjklmıdeefÀË',
+      'ËÀÀıÀAJKAıP12PÀË',
+      'ËÀÀıı....ııııÀÀË',
       'ËËÖËËË....ËËËÖËË',
     ]),
     warps: [
@@ -1836,13 +1836,20 @@ export const MAPS3 = {
       { x: 9, y: 10, to: { map: 'route1', x: 7, y: 14 } },
       { x: 3, y: 3, to: { map: 'house-pallet-ash', x: 4, y: 4 } },
       { x: 11, y: 3, to: { map: 'house-pallet-gary', x: 4, y: 4 } },
+      { x: 6, y: 8, to: { map: 'center', x: 4, y: 4 }, via: { map: 'pallet', x: 6, y: 9 } },
+      { x: 7, y: 8, to: { map: 'center', x: 5, y: 4 }, via: { map: 'pallet', x: 7, y: 9 } },
+      { x: 11, y: 8, to: { map: 'mart', x: 5, y: 5 }, via: { map: 'pallet', x: 11, y: 9 } },
+      { x: 12, y: 8, to: { map: 'mart', x: 6, y: 5 }, via: { map: 'pallet', x: 12, y: 9 } },
     ],
     signs: [
       { x: 6, y: 3, text: "PROF. HAWTHORN'S LAB — Kin research. The professor is out on Route 1 today." },
       { x: 7, y: 3, text: "PROF. HAWTHORN'S LAB — Kin research. The professor is out on Route 1 today." },
-      { x: 7, y: 9, text: "DAWNWICK — a quiet shore town. The road south leads to ROUTE 1." },
+      { x: 8, y: 9, text: "DAWNWICK — a quiet shore town. The road south leads to ROUTE 1." },
     ],
     npcs: [
+      { x: 3, y: 5, name: 'MART CLERK', art: 'clerk', skin: '#f0c8a0', shirt: '#3a6ac0', pants: '#2a2a3a', hair: '#2a1a0a',
+        mart: { stock: ['pokeball', 'greatball', 'potion', 'superpotion', 'antidote', 'awakening'] },
+        dialogue: ["Dawnwick Mart — small shelves, honest prices. Everything a first road needs."] },
       { x: 10, y: 4, name: 'GARY', art: 'gary', skin: '#f0c8a0', shirt: '#3a5a9a', pants: '#2a2a3a', hair: '#6a4a2a',
         dialogue: ["Yo, {player}! The professor gave me a PRISMKIT — fluffy, clever, and all mine!", "He says it'll evolve to match how I battle. Just watch — we'll be champions!"] },
       // UI v2.3 (defect 5): the lab's storage terminal at the lab entrance
@@ -1860,7 +1867,7 @@ export const MAPS3 = {
       // lines are what he says to everyone else.
       { x: 8, y: 4, name: 'PROF. HAWTHORN', art: 'hawthorn', skin: '#f0c8a0', shirt: '#f0f0f0', pants: '#4a4a5a', hair: '#c8c4bc',
         dialogue: ["Ah, {player}! Out walking the town again? Good. Legs first, glory later — that is the order of things.", "VOLTIK still refusing every Capture Orb it sees, I hope. Some bonds are not meant to be carried in a pocket."] },
-      { x: 10, y: 8, name: 'FERRYMAN', art: 'sailor', skin: '#d8a878', shirt: '#3a6ac0', pants: '#2a2a3a', hair: '#c0c0c0', ferry: 'cinnabar', ferryGate: 'surf',
+      { x: 14, y: 8, name: 'FERRYMAN', art: 'sailor', skin: '#d8a878', shirt: '#3a6ac0', pants: '#2a2a3a', hair: '#c0c0c0', ferry: 'cinnabar', ferryGate: 'surf',
         dialogue: ["My little ferry runs Dawnwick to Caldera for trainers who've earned the sea legs — and the badges.", "Say the word when you want the crossing. The volcano smokes a welcome the whole way in."] },
     ],
     encounters: null,

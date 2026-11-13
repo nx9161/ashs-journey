@@ -234,6 +234,7 @@ export const TALE_NPCS = [
   // counter in the shared 'mart' scene, fielded only for a Fernmere
   // entry (see overworld loadMap). Same NPC, same tale, same lines.
   { map: 'mart', x: 5, y: 2, name: 'SHOPKEEPER', art: 'clerk', ...APPEAR.shop, tale: 'tale_pallet', role: 'stage',
+    mart: { stock: ['greatball', 'ultraball', 'hyperpotion', 'fullheal', 'revive', 'superpotion'] },
     dialogue: ['Fernmere sundries! Maps, string, and strong opinions about both.'] },
   { map: 'viridian', x: 14, y: 4, name: 'ACE MARLOW', art: 'elder', ...APPEAR.ace, tale: 'tale_viridian', role: 'giver',
     dialogue: ['Sixty years I walked that forest. It kept one thing of mine. Fair trade, I suppose.'] },
