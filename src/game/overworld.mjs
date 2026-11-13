@@ -536,6 +536,8 @@ export class OverworldScene {
     if (this.warpFx) { this.updateWarpFx(dt); return; } // W7: warp transition owns the tick
     if (this.enc) { this.updateEncounter(dt); return; }
     if (this.challenge) { this.updateChallenge(dt); return; } // input locked: a trainer is walking up
+    if (this.checkTaleCompletions) this.checkTaleCompletions(); // Wave ACT: fire tale-completion lifecycle directives
+    if (this.actorWalk) { this.updateActorWalk(dt); return; } // input locked: a scripted actor is walking
     if (this.checkSightLines()) return; // spotted this tick — challenge takes over
     this.updateWander(dt); // Premium+ W4: ambient town wander (frozen while any modal above consumed the tick)
 
@@ -897,6 +899,113 @@ export class OverworldScene {
     }
   }
 
+  // ---- Wave ACT: the scripted actor walker ----
+  // An actor with somewhere to be walks tile by tile at the
+  // challenge pace (150ms/tile), input locked exactly as for a
+  // trainer walk-up. Routing is a fresh BFS to the next waypoint on
+  // every step, over the live occupancy grid — a temporary block
+  // (the player, a wanderer) detours or waits instead of failing.
+  // If the PLAYER alone seals the route for ~1.5s the actor brushes
+  // past (a single overlapping step): a scripted departure can never
+  // soft-lock the scene. Reduced Motion completes walks instantly —
+  // the wander-freeze discipline applied to scripted motion.
+  queueActorWalk(npc, waypoints, onArrive) {
+    if (!npc) { if (onArrive) onArrive(); return; }
+    if (!npc._stage) {
+      const cx = this.npcX(npc), cy = this.npcY(npc);
+      npc._stage = { x: cx, y: cy, fx: cx, fy: cy, glide: 0 };
+    }
+    delete npc._wander;
+    const pts = (waypoints || []).filter((p) => Array.isArray(p) && p.length === 2);
+    if (!pts.length) { if (onArrive) onArrive(); return; }
+    const st = this.game && this.game.state;
+    if (st && st.settings && st.settings.reducedMotion) {
+      const last = pts[pts.length - 1];
+      npc._stage = { x: last[0], y: last[1], fx: last[0], fy: last[1], glide: 0 };
+      if (onArrive) onArrive();
+      return;
+    }
+    if (!this.actorWalk) this.actorWalk = { jobs: [] };
+    this.actorWalk.jobs.push({ npc, pts, ix: 0, stepT: 0, sealed: 0, onArrive });
+  }
+
+  actorStepLegal(n, x, y, allowPlayer) {
+    const t = this.tileAt(x, y);
+    if (!(WALKABLE.has(t) || (this.sysWalkableExtra && this.sysWalkableExtra(x, y)))) return false;
+    if (this.boulderAt && this.boulderAt(x, y)) return false;
+    for (const m of this.map.npcs) {
+      if (m === n || m._actorHidden) continue;
+      if (this.npcX(m) === x && this.npcY(m) === y) return false;
+    }
+    if (!allowPlayer) {
+      if (x === this.player.tx && y === this.player.ty) return false;
+      const ptx = Math.round(this.partner.px / TILE), pty = Math.round(this.partner.py / TILE);
+      if (x === ptx && y === pty) return false;
+    }
+    return true;
+  }
+
+  actorBfsStep(n, tx, ty, allowPlayer) {
+    const sx = this.npcX(n), sy = this.npcY(n);
+    if (sx === tx && sy === ty) return null;
+    const prev = new Map([[sx + ',' + sy, null]]);
+    const q = [[sx, sy]];
+    const dirs = [[0, 1], [0, -1], [1, 0], [-1, 0]];
+    while (q.length) {
+      const [x, y] = q.shift();
+      for (const [dx, dy] of dirs) {
+        const nx = x + dx, ny = y + dy, k = nx + ',' + ny;
+        if (prev.has(k)) continue;
+        if (!this.actorStepLegal(n, nx, ny, allowPlayer)) continue;
+        prev.set(k, [x, y]);
+        if (nx === tx && ny === ty) {
+          let cur = [nx, ny];
+          while (true) {
+            const p = prev.get(cur[0] + ',' + cur[1]);
+            if (!p || (p[0] === sx && p[1] === sy)) return cur;
+            cur = p;
+          }
+        }
+        q.push([nx, ny]);
+      }
+    }
+    return null;
+  }
+
+  updateActorWalk(dt) {
+    const w = this.actorWalk;
+    if (!w || !w.jobs.length) { this.actorWalk = null; return; }
+    const job = w.jobs[0];
+    const n = job.npc;
+    if (n._stage && n._stage.glide > 0) n._stage.glide = Math.max(0, n._stage.glide - dt * 1000);
+    job.stepT += dt * 1000;
+    if (job.stepT < 150) return;
+    job.stepT = 0;
+    let guard = 0;
+    while (job.ix < job.pts.length && guard++ < 64
+      && this.npcX(n) === job.pts[job.ix][0] && this.npcY(n) === job.pts[job.ix][1]) job.ix++;
+    if (job.ix >= job.pts.length) {
+      if (n._stage) { n._stage.fx = n._stage.x; n._stage.fy = n._stage.y; n._stage.glide = 0; }
+      w.jobs.shift();
+      if (!w.jobs.length) this.actorWalk = null;
+      if (job.onArrive) job.onArrive();
+      return;
+    }
+    const target = job.pts[job.ix];
+    let step = this.actorBfsStep(n, target[0], target[1], false);
+    if (!step) {
+      job.sealed++;
+      if (job.sealed >= 10) step = this.actorBfsStep(n, target[0], target[1], true); // brush past the player only
+      if (!step) return; // wait a beat and retry
+    }
+    job.sealed = 0;
+    const cx = this.npcX(n), cy = this.npcY(n);
+    n._face = step[0] !== cx ? (step[0] > cx ? 'right' : 'left') : (step[1] > cy ? 'down' : 'up');
+    n._stage.fx = cx; n._stage.fy = cy;
+    n._stage.x = step[0]; n._stage.y = step[1];
+    n._stage.glide = 150;
+  }
+
   startTutorialEncounter() {
     const g = this.game;
     g.state.story.flags.tutorialDone = true;
@@ -1206,9 +1315,22 @@ export class OverworldScene {
     const list = this._drawList || (this._drawList = []);
     list.length = 0;
     for (const n of this.map.npcs) {
+      if (n._actorHidden) continue; // Wave ACT: hidden actors are not drawn
       let nx = n.x * T, footY = n.y * T - 4 + T;
       const cq = this.challenge && this.challenge.parts.find((q) => q.npc === n);
       if (cq) { nx = cq.cx * T; footY = cq.cy * T - 4 + T; }
+      else if (n._stage) {
+        // Wave ACT: lifecycle-staged actors draw at their staged
+        // tile, gliding over a scripted walk's 150ms step.
+        const s = n._stage;
+        let rx = s.x, ry = s.y;
+        if (s.glide > 0) {
+          const k = 1 - s.glide / 150;
+          rx = s.fx + (s.x - s.fx) * k;
+          ry = s.fy + (s.y - s.fy) * k;
+        }
+        nx = rx * T; footY = ry * T - 4 + T;
+      }
       else if (n._wander) {
         // Premium+ W4: wanderers draw at their current tile, gliding
         // between tiles over the step's 280ms in their walk pair.
@@ -1221,7 +1343,7 @@ export class OverworldScene {
         }
         nx = rx * T; footY = ry * T - 4 + T;
       }
-      const moving = !!cq || !!(n._wander && n._wander.glide > 0);
+      const moving = !!cq || !!(n._stage && n._stage.glide > 0) || !!(n._wander && n._wander.glide > 0);
       const spr = g.npcFrame(n, { dir: n._face || 'down', moving });
       list.push({ y: footY, spr, x: nx, footY });
     }
