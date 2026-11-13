@@ -1605,7 +1605,7 @@ export const MAPS3 = {
     ]),
     warps: [
       { x: 0, y: 5, to: { map: 'route22', x: 1, y: 5 } },
-      { x: 17, y: 5, to: { map: 'indigo', x: 8, y: 9 } },
+      { x: 17, y: 5, to: { map: 'indigo', x: 9, y: 13 } },
     ],
     signs: [],
     npcs: [

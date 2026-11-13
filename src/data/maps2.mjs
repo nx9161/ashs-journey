@@ -2360,8 +2360,8 @@ export const MAPS2 = {
       'GGGGGGGGLLGGGGGG',
     ]),
     warps: [
-      { x: 8, y: 0, to: { map: 'indigo', x: 8, y: 11 } },
-      { x: 9, y: 0, to: { map: 'indigo', x: 9, y: 11 } },
+      { x: 8, y: 0, to: { map: 'indigo', x: 9, y: 13 } },
+      { x: 9, y: 0, to: { map: 'indigo', x: 10, y: 13 } },
       { x: 8, y: 13, to: { map: 'route22', x: 1, y: 5 } },
       { x: 9, y: 13, to: { map: 'route22', x: 1, y: 5 } },
     ],
