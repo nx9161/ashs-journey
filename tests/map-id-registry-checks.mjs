@@ -140,7 +140,7 @@ const BASELINE = {
   "stanne": ['D', 'maps2.mjs:24fa77c5', 'maps4.mjs:9c9e452f'],
   "tower1": ['I', 'maps2.mjs:008f0030', 'maps3.mjs:008f0030'],
   "tower2": ['D', 'maps2.mjs:67e834db', 'maps3.mjs:209d7be2'],
-  "vermilion": ['D', 'maps2.mjs:9029cc4f', 'maps4.mjs:af20e701', 'maps5.mjs:88986a61', 'maps6.mjs:c78d9f6b'],
+  "vermilion": ['D', 'maps2.mjs:95f01316', 'maps4.mjs:3ea316ac', 'maps5.mjs:b04ae76c', 'maps6.mjs:d97cdbc0'],
   "victoryroad": ['D', 'maps2.mjs:68ee1404', 'maps3.mjs:4d27c6e3'],
   "viridian": ['D', 'maps.mjs:ee32a92d', 'maps2.mjs:2de2d36f', 'maps3.mjs:af6d11d0'],
 };
