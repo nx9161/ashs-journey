@@ -103,8 +103,8 @@ export const MAPS3 = {
       '=====++DD++=====',
     ]),
     warps: [
-      { x: 7, y: 9, to: { map: 'celadon', x: 7, y: 4 } },
-      { x: 8, y: 9, to: { map: 'celadon', x: 8, y: 4 } },
+      { x: 7, y: 9, to: { map: 'celadon', x: 10, y: 4 } },
+      { x: 8, y: 9, to: { map: 'celadon', x: 11, y: 4 } },
     ],
     signs: [],
     npcs: [

@@ -695,7 +695,7 @@ export const MAPS2 = {
       '################',
     ]),
     warps: [
-      { x: 0, y: 5, to: { map: 'celadon', x: 16, y: 3 } },
+      { x: 0, y: 5, to: { map: 'celadon', x: 18, y: 4 } },
       { x: 15, y: 5, to: { map: 'vermilion', x: 1, y: 5 } },
     ],
     signs: [
@@ -804,8 +804,8 @@ export const MAPS2 = {
       '=====++DD++=====',
     ]),
     warps: [
-      { x: 7, y: 9, to: { map: 'celadon', x: 7, y: 4 } },
-      { x: 8, y: 9, to: { map: 'celadon', x: 8, y: 4 } },
+      { x: 7, y: 9, to: { map: 'celadon', x: 10, y: 4 } },
+      { x: 8, y: 9, to: { map: 'celadon', x: 11, y: 4 } },
     ],
     signs: [],
     npcs: [
