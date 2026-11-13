@@ -169,17 +169,25 @@ const VAL = await import(join(ROOT, 'api/_lib/validator.mjs'));
 }
 
 // -- CAPT FRONTIER placement + Pallet connectivity (pure, sweep-style) --
+// W1 resync: A20/A21 must probe the SHIPPED Dawnwick. The raw MAPS import
+// above is maps.mjs's stale 16x11 pallet copy; the game folds MAPS2/MAPS3
+// over it (src/data/merge.mjs, module-order), so maps3's 20x14 pallet is
+// the merge winner the bundle actually ships.
+const { MAPS3 } = await import(join(ROOT, 'src/data/maps3.mjs'));
 {
   const capt = TALE_NPCS.find((n) => n.name === 'CAPT FRONTIER');
   const johto = TALE_NPCS.find((n) => n.name === 'CAPT YAMATO');
-  ok('A19 CAPT FRONTIER appended via the TALE_NPCS idiom on pallet (11,9) — ferry frontierhub + ferryArc frontier, sailor art, no tale/role; CAPT JOHTO at (14,9) since the S1xS2 merge resolution (his (11,8) stance became the Dawnwick Mart west door warp in the S1 rebuild; (14,9) is the walkable shore-lawn tile south of the FERRYMAN (14,8))',
-    !!capt && capt.map === 'pallet' && capt.x === 11 && capt.y === 9 && capt.ferry === 'frontierhub' && capt.ferryArc === 'frontier'
+  // W1 resync: the T1 Dawnwick rebuild (20x14) re-seated both captains to the
+  // shore/dock row — CAPT FRONTIER (10,11), CAPT YAMATO (6,11) in
+  // src/data/quests.mjs TALE_NPCS; the (11,9)/(14,9) stances are pre-rebuild.
+  ok('A19 CAPT FRONTIER appended via the TALE_NPCS idiom on pallet (10,11) — ferry frontierhub + ferryArc frontier, sailor art, no tale/role; CAPT YAMATO at (6,11) on the dock head since the T1 Dawnwick rebuild re-seated both captains to the shore row',
+    !!capt && capt.map === 'pallet' && capt.x === 10 && capt.y === 11 && capt.ferry === 'frontierhub' && capt.ferryArc === 'frontier'
     && capt.art === 'sailor' && !capt.tale && Array.isArray(capt.dialogue) && capt.dialogue.length === 2
-    && !!johto && johto.x === 14 && johto.y === 9);
-  const p = MAPS.pallet;
-  ok('A20 the stance tile seals nothing by position: (11,9) is a walkable ground tile, not a warp tile, not a door, and no base pallet NPC stands there',
-    WALKABLE.has(p.rows[9][11]) && !(p.warps || []).some((w) => w.x === 11 && w.y === 9)
-    && !(p.npcs || []).some((n) => n.x === 11 && n.y === 9));
+    && !!johto && johto.x === 6 && johto.y === 11);
+  const p = MAPS3.pallet; // shipped Dawnwick (merge winner), not the maps.mjs copy
+  ok('A20 the stance tile seals nothing by position: (10,11) is a walkable ground tile, not a warp tile, not a door, and no base pallet NPC stands there',
+    WALKABLE.has(p.rows[11][10]) && !(p.warps || []).some((w) => w.x === 10 && w.y === 11)
+    && !(p.npcs || []).some((n) => n.x === 10 && n.y === 11));
   const blocked = (x, y) => (p.npcs || []).some((n) => n.x === x && n.y === y)
     || TALE_NPCS.some((n) => n.map === 'pallet' && n.x === x && n.y === y);
   const walkable = (x, y) => y >= 0 && y < p.rows.length && x >= 0 && x < p.rows[y].length && WALKABLE.has(p.rows[y][x]) && !blocked(x, y);
@@ -192,10 +200,20 @@ const VAL = await import(join(ROOT, 'api/_lib/validator.mjs'));
         if (!seenAll.has(k) && walkable(nx, ny)) { seenAll.add(k); q.push([nx, ny]); } } }
     comps.push(comp);
   }
-  const main = comps[0] || [];
-  ok('A21 Pallet\'s walkable graph stays ONE fragment with the captain standing (and every warp tile is in it or beside it)',
-    comps.length === 1 && (p.warps || []).every((w) => main.includes(w.x + ',' + w.y)
-      || [[0, 1], [0, -1], [1, 0], [-1, 0]].some(([dx, dy]) => main.includes((w.x + dx) + ',' + (w.y + dy)))),
+  const main = comps.reduce((a, b) => (b.length > a.length ? b : a), []);
+  const others = comps.filter((c) => c !== main);
+  // W1 resync: on the shipped 20x14 Dawnwick the graph is one functional
+  // fragment (every warp in it or beside it; both captains stand embedded
+  // in it, sealing nothing) plus exactly one known sealed cell: (14,10),
+  // a step-off tile whose only walkable neighbour is the MART CLERK's post
+  // (14,9) — a pre-existing dead-pocket cell of the T1 rebuild, counted by
+  // the reachability audit. Any NEW fragment fails this check by name.
+  ok('A21 Pallet\'s walkable graph: one functional fragment with the captains standing (every warp tile in it or beside it); the only other fragment is the clerk-sealed cell (14,10)',
+    (p.warps || []).every((w) => main.includes(w.x + ',' + w.y)
+      || [[0, 1], [0, -1], [1, 0], [-1, 0]].some(([dx, dy]) => main.includes((w.x + dx) + ',' + (w.y + dy))))
+    && others.length === 1 && others[0].length === 1 && others[0][0] === '14,10'
+    && [[capt.x, capt.y], [johto.x, johto.y]].every(([cx, cy]) =>
+      [[0, 1], [0, -1], [1, 0], [-1, 0]].some(([dx, dy]) => main.includes((cx + dx) + ',' + (cy + dy)))),
     'components=' + comps.map((c) => c.length).join(','));
 }
 
@@ -381,9 +399,9 @@ const driver = `
   var st = g.state;
   var ow = gotoMap(g, 'pallet', 7, 9); drain(g);
   var capt = ow.map.npcs.find(function (n) { return n.name === 'CAPT FRONTIER'; });
-  ok('B01 CAPT FRONTIER stands on Pallet\\'s live roster at (11,9) (ferry frontierhub, ferryArc frontier), with CAPT JOHTO on the shore lawn at (14,9)',
-    !!capt && capt.x === 11 && capt.y === 9 && capt.ferry === 'frontierhub' && capt.ferryArc === 'frontier'
-    && !!ow.map.npcs.find(function (n) { return n.name === 'CAPT YAMATO' && n.x === 14 && n.y === 9; }));
+  ok('B01 CAPT FRONTIER stands on Pallet\\'s live roster at (10,11) (ferry frontierhub, ferryArc frontier), with CAPT YAMATO on the dock head at (6,11)', // W1 resync: T1 rebuild stances, as A19
+    !!capt && capt.x === 10 && capt.y === 11 && capt.ferry === 'frontierhub' && capt.ferryArc === 'frontier'
+    && !!ow.map.npcs.find(function (n) { return n.name === 'CAPT YAMATO' && n.x === 6 && n.y === 11; }));
 
   // The gate: embark_frontier deleted (a fresh state never had it) —
   // talking yields the ferry gate line and NO warp, NO sail menu.
@@ -732,7 +750,7 @@ const driverD = `
           var foeTypes = SPECIES[b.foe.speciesId].types, allyTypes = SPECIES[b.ally.speciesId].types;
           m.items.forEach(function (it, i) { if (it.disabled) return; var slot = b.ally.moves[i]; if (!slot) return; var md = MOVES[slot.id]; var sc = md.cat === 'status' ? 0.05 : (md.power || 0) * effectiveness(md.type, foeTypes) * (allyTypes.includes(md.type) ? 1.5 : 1); if (sc > bs) { bs = sc; best = i; } });
           g.ui.debugChoose(best); tk(g, 3);
-        } else if (m.title === 'Choose next Pokemon' || m.title === 'Party') {
+        } else if (m.title === 'Choose next Kin' || m.title === 'Party') {
           var pi = m.items.findIndex(function (it) { return !it.disabled && it.value !== -1 && it.value !== null; });
           g.ui.debugChoose(pi >= 0 ? pi : 0); tk(g, 3);
         } else {
@@ -1199,7 +1217,7 @@ const driverD = `
         if (!scene0) { scene0 = b; b.ally.hp = 1; } // fixture (battle 1 only): the lead faints to the first real hit
         if (g.ui.menuOpen) {
           var m = g.ui.menu;
-          if (m.title === 'Choose next Pokemon') {
+          if (m.title === 'Choose next Kin') {
             faintMenuSeen = true;
             var pi = m.items.findIndex(function (it) { return !it.disabled && it.value !== -1 && it.value !== null; });
             g.ui.debugChoose(pi >= 0 ? pi : 0); tk(g, 3);
@@ -1491,7 +1509,7 @@ const driverD = `
         if (g.ui.menuOpen) {
           var m = g.ui.menu;
           if (m.kind === 'commands' || m.title === 'Choose a move') { cmdMenu = true; tk(g, 3); }
-          else if (m.title === 'Choose next Pokemon') {
+          else if (m.title === 'Choose next Kin') {
             var pi = m.items.findIndex(function (it) { return !it.disabled && it.value !== -1 && it.value !== null; });
             g.ui.debugChoose(pi >= 0 ? pi : 0); tk(g, 3);
           } else { tk(g, 3); }
@@ -1769,7 +1787,7 @@ const driverE = `
           var foeTypes = SPECIES[b.foe.speciesId].types, allyTypes = SPECIES[b.ally.speciesId].types;
           m.items.forEach(function (it, i) { if (it.disabled) return; var slot = b.ally.moves[i]; if (!slot) return; var md = MOVES[slot.id]; var sc = md.cat === 'status' ? 0.05 : (md.power || 0) * effectiveness(md.type, foeTypes) * (allyTypes.includes(md.type) ? 1.5 : 1); if (sc > bs) { bs = sc; best = i; } });
           g.ui.debugChoose(best); tk(g, 3);
-        } else if (m.title === 'Choose next Pokemon' || m.title === 'Party') {
+        } else if (m.title === 'Choose next Kin' || m.title === 'Party') {
           var pi = m.items.findIndex(function (it) { return !it.disabled && it.value !== -1 && it.value !== null; });
           g.ui.debugChoose(pi >= 0 ? pi : 0); tk(g, 3);
         } else {
