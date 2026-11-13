@@ -133,7 +133,8 @@ const driver = `
   ok('partner joins party', game.state.party.length === 1 && game.state.party[0].speciesId === 'partner');
   ok('pikachu refuses ball flag', game.state.story.flags.refusedBall === true);
   ok('dex caught pikachu (#25)', !!game.state.dex.caught[25]);
-  ok('starts in pallet', ow.mapId === 'pallet' && ow.player.tx === 7 && ow.player.ty === 7);
+  // Wave T1 re-pin: the rebuilt Dawnwick starts the player on the plaza causeway axis (9,10).
+  ok('starts in pallet', ow.mapId === 'pallet' && ow.player.tx === 9 && ow.player.ty === 10);
 
   // ----- 3. walk south to Route 1 (real movement, warp on step) -----
   // W7 (TX-6): warps now play an authored ~180ms fade before the map
@@ -859,7 +860,7 @@ const qaDriver = `
   bW.winTrainer();
   ok('qa y5 trainer win with partner conscious -> excited', gM.state.pikachu.mood === 'excited');
   var gP = mkGame(5150);
-  gP.state.story.position = { map: 'pallet', x: 7, y: 7, dir: 'down' };
+  gP.state.story.position = { map: 'pallet', x: 9, y: 10, dir: 'down' }; // Wave T1: was (7,7), now Center roof
   gP.scenes.push(new OverworldScene());
   var owP = gP.scenes.top;
   gP.state.pikachu.mood = 'sleepy';

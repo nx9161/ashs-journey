@@ -287,7 +287,7 @@ export const EVENTS = {
     { arc: 'arc_mew', stage: 'complete' },
     { flag: 'movie_done' },
     { questDone: 'q_movie' },
-    { warp: { map: 'pallet', x: 8, y: 10 } },
+    { warp: { map: 'pallet', x: 9, y: 10 } },
     { toast: 'The storm clears over Exile Isle.' },
   ],
 

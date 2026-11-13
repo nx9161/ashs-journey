@@ -183,7 +183,7 @@ export function defaultState(inherit) {
       arc_directive: null,
       arcDexStart: 0,
       arcStartPlaytime: 0,
-      position: { map: 'pallet', x: 8, y: 10, dir: 'down' },
+      position: { map: 'pallet', x: 9, y: 10, dir: 'down' },
       // ADR-025 §4: the run's difficulty mode. 'classic' = the game exactly
       // as shipped; levers live in game/rules.mjs (threat-side only).
       difficulty: 'classic',
