@@ -2537,6 +2537,30 @@ T14_KIND_DEFS.forEach(([kind], i) => {
   TILE_CHARS[ch] = kind;
 });
 const T14_PROP_KINDS = T14_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
+// ---- Wave T15 (Cinder build): the charcoal kiln + the well
+// lounger ----
+// Two new kinds continuing the block at idx 572-573 (T14 ends at
+// 571; U+203C/U+203D, verified free in TILE_CHARS and unused by
+// every map row). Class 'prop': solid objects composited over the
+// ground they stand on (art.mjs resolver). The kiln is Cinder's
+// charcoal craft made visible (the design's twin kilns at the west
+// edge); the dozpotam is the town well's resident Kin lounging in
+// the basin — a decorative Kin-shaped prop in the species' own
+// palette (T6 gull precedent; no overworld-Kin system exists).
+// Authored art: assets/sprites/pix/tiles/tile-prop-kiln.pix and
+// tile-prop-dozpotam.pix (Wave T15 register in
+// WAVE-T15-CINDER-PLAN.md Part 4).
+const T15_KIND_DEFS = [
+  ['kiln', 'prop'],
+  ['dozpotam', 'prop'],
+];
+const T15_KIND_CHARS = {};
+T15_KIND_DEFS.forEach(([kind], i) => {
+  const ch = String.fromCodePoint(0x1E00 + 572 + i);
+  T15_KIND_CHARS[kind] = ch;
+  TILE_CHARS[ch] = kind;
+});
+const T15_PROP_KINDS = T15_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
 const SINNOH_TOWN_GROUND_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg);
 const SINNOH_TOWN_GROUND2_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg2);
 // TX-3: the 8 gym exteriors by town (original type-accent motifs).
@@ -90223,6 +90247,24 @@ const ART = {
     "................",
     "................",
   ] },
+  "tile-prop-dozpotam": { w: 16, h: 16, pal: {"k":"#2a1800","a":"#f58f92","b":"#ee8388","g":"#f2e1c3","u":"#7ec8e3","w":"#bfe3f2"}, rows: [
+    "................",
+    "...baaaaaaaab...",
+    "..aaaaaaaaaaaa..",
+    "..aaaaaaaaaaaa..",
+    "..aaaaaaaaaaaa..",
+    "..aakkaaaakkaa..",
+    "..aaaaaaaaaaaa..",
+    "...gggggggggg...",
+    "...gggggggggg...",
+    "...gggkgggkgg...",
+    "...gggggggggg...",
+    "..aaaaaaaaaaaa..",
+    "..bbbbbbbbbbbb..",
+    ".bbbbbbbbbbbbbb.",
+    "..uuwuuwwuuwwu..",
+    "................",
+  ] },
   "tile-prop-drum": { w: 16, h: 16, pal: {"B":"#c16a61","D":"#87493f","L":"#e9e9cc","A":"#b0b6c1","C":"#d1bc88"}, rows: [
     "................",
     "................",
@@ -90825,6 +90867,24 @@ const ART = {
     ".....b..b..b....",
     ".....b..b..b....",
     ".....b..b..b....",
+    "................",
+  ] },
+  "tile-prop-kiln": { w: 16, h: 16, pal: {"l":"#a89f8f","s":"#8d8578","d":"#6e675c","o":"#3a332c","m":"#241d18","f":"#f5a83d","a":"#b9b2a4"}, rows: [
+    "................",
+    "......llll......",
+    ".....lsssssl....",
+    "....ssssssss....",
+    "...ssdssslsss...",
+    "...ssssssssss...",
+    "..sssdssssdsss..",
+    "..ssssssssssss..",
+    "..ssssoooossss..",
+    "..sssommmmosss..",
+    "..sssommmmosss..",
+    "..sssomffmosss..",
+    "...ssmmmmmmss...",
+    "...ssssssssss...",
+    "..aaaaaaaaaaaa..",
     "................",
   ] },
   "tile-prop-kitchen": { w: 16, h: 32, pal: {"B":"#c6b388","D":"#8e755b","L":"#dec1b7","A":"#59687a","C":"#c1835f"}, rows: [
@@ -110435,6 +110495,8 @@ TILE_ART['memorialwall'] = 'tile-memorialwall';
 for (const k of T9_PROP_KINDS) TILE_ART[k] = 'tile-prop-' + k;
 // Wave T14: Blossom's sakura tree draws its prop art.
 for (const k of T14_PROP_KINDS) TILE_ART[k] = 'tile-prop-' + k;
+// Wave T15: Cinder's kiln + well lounger draw their prop art.
+for (const k of T15_PROP_KINDS) TILE_ART[k] = 'tile-prop-' + k;
 
 // Premium+ W6 (TX-3/PL-1): door-open frames, authored in TX-3 for every
 // door kind. The warp-fade engine that plays them lands in W7 — W6
@@ -111282,7 +111344,9 @@ const PROP_KINDS = new Set(['counter', 'healmachine', 'pcdesk', 'bed', 'table',
   // Wave T9: Bramble's lure post composites over its ground too.
   ...T9_PROP_KINDS,
   // Wave T14: Blossom's sakura tree composites over its ground too.
-  ...T14_PROP_KINDS]);
+  ...T14_PROP_KINDS,
+  // Wave T15: Cinder's kiln + well lounger composite too.
+  ...T15_PROP_KINDS]);
 function groundFamilyOf(kind) {
   // Perfection Pass Stage 2 Gate 2 (G2): beach kinds stand on tropgrass,
   // psand kinds stand on path (props composite over the parent ground).
@@ -112239,6 +112303,15 @@ function resolveTileLayers(cache, kind, x, y, kindAt, t, phase, mapId) {
     // prop lift); the gull rides over open water, so its underlay is
     // the water tile itself, not the shore ground the generic prop
     // branch would pick from its neighbours.
+    case 'dozpotam': {
+      // Wave T15: the well lounger soaks IN the basin — the
+      // meteorstone well rim is its underlay, not town grass.
+      const layers = [];
+      const mb = groundBase(cache, 'meteorstone', x, y) || cache.meteorstone;
+      if (mb) layers.push(mb);
+      if (cache[kind]) layers.push(cache[kind]);
+      return layers.filter(Boolean);
+    }
     case 'tidechart': case 'gull': {
       const layers = [];
       if (kind === 'tidechart') {
@@ -130356,27 +130429,27 @@ const MAPS6 = {
     "rows": [
       "ệệệỈệệệệệệỈệệệệệệỈệệệệệệỈệệệ",
       "ệễễễễễễễễễễễoễễễễễễầầễễễễễễệ",
-      "ệễỈjklmễễdeefễẑỉỉỉỉễễịịịễễịị",
-      "ệễễAJKAễễP12PễễUVYUễễỌsỌễầỌs",
-      "ệSầỆỆỆỆỆỆỆỆỆỆỆẑỆỆỆỆỆỆỆỆỆỆỆỆỆ",
-      "ệỆỆỆỆỆỆỆỆỆỆỆỆỆỆỆỆỆỆỆỆỆỆỆỆỆỆệ",
-      "ệỆỆỆầỆỆỆỆỆỆỆỆỆỆỆỆỆỆỆỆỆỆỆẦSỆệ",
-      "ệỆỆỆễễễỆễễễễỆỆỆỆỆỆỆễầẑỆỆ9nỆệ",
-      "ỆỆỆỆỆỆỆỆỆỆỆỆỆỆỆỆỆỆỆỆỆỆỆỆỆỆỆệ",
-      "ỆỆỆỆỆỆỆỆỆỆỆỆỆỆỆỆỆỆỆỆỆỆỆỆỆỆỆệ",
-      "ệễầỆỆỆỆỆỆỆỆỆễỆỆỆỆầỆẍỈnễễễễễệ",
-      "ệỆỆỆỆỆỆỆỆỆỆỆỆỆỆỆỆỆễễễễnễễễẑệ",
-      "ệễễỆ....oỈễnễễ....ễễễễễễễễễệ",
-      "ệễễ.,,,,,ễễễễ,,,,,,ễễễnễễễễệ",
-      "ệễỈ.,,,,,ễễễễ,,,,,,ễễễễễễễễệ",
-      "ệễễẍ,,,ễễễễễễầ,,,,ễễễễễễễễễệ",
-      "ệễễễễễễễễễễễễễễễễễễnễễầễễễễệ",
+      "ệễỈễễễễễễdeefễịịịễễễễễễễễễịị",
+      "ệễễễễễễễoP12PṓỌsỌẑễễễễễễễầsỌ",
+      "ệSầ.........................",
+      "ệễễễễjklmễễễ.Sễ.ễễễễễễễễoS.ệ",
+      "ệễễễầAJKAễễễ.ễễ.ễễễễẑỉỉỉỉễ.ệ",
+      "ệễễễễ....ễễễ.....ễễễầUVYUṸ.ệ",
+      ".............nẦn............",
+      ".............Ἂ‽Ἂ............",
+      "ệSầễễễ.ễễễễ...9.Sầễễễễễễễễễệ",
+      "ệṒ‼ṓễễ.ễễễễ.ễ...ễễễ,,,ễễễễễệ",
+      "ệễ‼ễễễ.Sễễễ.ễễễễễễễ,,,ễễễễễệ",
+      "ệ........................ễễệ",
+      "ệ,nẻẻẻẻnnnS.,,ễdeefễịịịịễễễệ",
+      "ệ,nẼsẼẼnn,ễ.,ầễtsttễỌsỌỌễễễệ",
+      "ệễn...................ầễễễễệ",
       "ệệệễệệệệệệễệệệệệệỈệệệệệệễệệệ"
     ],
     "warps": [
       {
-        "x": 4,
-        "y": 3,
+        "x": 6,
+        "y": 6,
         "to": {
           "map": "center",
           "x": 4,
@@ -130384,13 +130457,13 @@ const MAPS6 = {
         },
         "via": {
           "map": "azalea",
-          "x": 4,
-          "y": 4
+          "x": 6,
+          "y": 7
         }
       },
       {
-        "x": 5,
-        "y": 3,
+        "x": 7,
+        "y": 6,
         "to": {
           "map": "center",
           "x": 4,
@@ -130398,8 +130471,8 @@ const MAPS6 = {
         },
         "via": {
           "map": "azalea",
-          "x": 5,
-          "y": 4
+          "x": 7,
+          "y": 7
         }
       },
       {
@@ -130431,25 +130504,25 @@ const MAPS6 = {
         }
       },
       {
-        "x": 16,
-        "y": 3,
-        "to": {
-          "map": "gym-azalea",
-          "x": 7,
-          "y": 8
-        }
-      },
-      {
-        "x": 17,
-        "y": 3,
-        "to": {
-          "map": "gym-azalea",
-          "x": 7,
-          "y": 8
-        }
-      },
-      {
         "x": 22,
+        "y": 7,
+        "to": {
+          "map": "gym-azalea",
+          "x": 7,
+          "y": 8
+        }
+      },
+      {
+        "x": 23,
+        "y": 7,
+        "to": {
+          "map": "gym-azalea",
+          "x": 7,
+          "y": 8
+        }
+      },
+      {
+        "x": 15,
         "y": 3,
         "to": {
           "map": "kurt-house",
@@ -130458,7 +130531,7 @@ const MAPS6 = {
         }
       },
       {
-        "x": 27,
+        "x": 26,
         "y": 3,
         "to": {
           "map": "house-azalea",
@@ -130485,8 +130558,26 @@ const MAPS6 = {
         }
       },
       {
-        "x": 24,
-        "y": 7,
+        "x": 27,
+        "y": 8,
+        "to": {
+          "map": "r33",
+          "x": 1,
+          "y": 8
+        }
+      },
+      {
+        "x": 27,
+        "y": 9,
+        "to": {
+          "map": "r33",
+          "x": 1,
+          "y": 9
+        }
+      },
+      {
+        "x": 14,
+        "y": 10,
         "to": {
           "map": "slowpoke-well",
           "x": 9,
@@ -130496,30 +130587,45 @@ const MAPS6 = {
     ],
     "signs": [
       {
-        "x": 25,
-        "y": 6,
-        "text": "DOZPOTAM WELL — The town well, and the DOZPOTAMs own it. Mind your step on the way down."
-      },
-      {
         "x": 1,
         "y": 4,
         "text": "CINDER TOWN — Where people and Kin live in happy harmony. Kurt works his craft on the north street."
       },
       {
+        "x": 16,
+        "y": 10,
+        "text": "DOZPOTAM WELL — The town well, and the DOZPOTAMs own it. Mind your step on the way down."
+      },
+      {
         "x": 1,
         "y": 10,
         "text": "CINDER TOWN — East: CINDER HOUSE · West: HOLLY FOREST."
       },
       {
-        "x": 12,
-        "y": 10,
+        "x": 13,
+        "y": 5,
+        "text": "CINDER TOWN — East: CINDER HOUSE · West: HOLLY FOREST."
+      },
+      {
+        "x": 25,
+        "y": 5,
+        "text": "CINDER TOWN — East: CINDER HOUSE · West: HOLLY FOREST."
+      },
+      {
+        "x": 7,
+        "y": 12,
+        "text": "CINDER TOWN — East: CINDER HOUSE · West: HOLLY FOREST."
+      },
+      {
+        "x": 10,
+        "y": 14,
         "text": "CINDER TOWN — East: CINDER HOUSE · West: HOLLY FOREST."
       }
     ],
     "npcs": [
       {
-        "x": 12,
-        "y": 6,
+        "x": 13,
+        "y": 4,
         "name": "MAIZIE",
         "art": "kid",
         "skin": "#f0c8a0",
@@ -130532,8 +130638,8 @@ const MAPS6 = {
         ]
       },
       {
-        "x": 18,
-        "y": 11,
+        "x": 12,
+        "y": 9,
         "name": "WELLKEEPER JONAS",
         "art": "elder",
         "skin": "#e8b888",
@@ -130546,8 +130652,8 @@ const MAPS6 = {
         ]
       },
       {
-        "x": 7,
-        "y": 13,
+        "x": 5,
+        "y": 12,
         "name": "CHARCOAL KID",
         "art": "youngster",
         "skin": "#f0c8a0",
@@ -130560,8 +130666,8 @@ const MAPS6 = {
         ]
       },
       {
-        "x": 3,
-        "y": 5,
+        "x": 9,
+        "y": 4,
         "name": "MART CLERK",
         "art": "clerk",
         "skin": "#f0c8a0",
@@ -133916,7 +134022,7 @@ const MAPS6 = {
         "y": 9,
         "to": {
           "map": "azalea",
-          "x": 27,
+          "x": 26,
           "y": 4
         }
       },
@@ -133925,7 +134031,7 @@ const MAPS6 = {
         "y": 9,
         "to": {
           "map": "azalea",
-          "x": 27,
+          "x": 26,
           "y": 4
         }
       }
@@ -134190,7 +134296,7 @@ const MAPS6 = {
         "y": 9,
         "to": {
           "map": "azalea",
-          "x": 22,
+          "x": 15,
           "y": 4
         }
       },
@@ -134199,7 +134305,7 @@ const MAPS6 = {
         "y": 9,
         "to": {
           "map": "azalea",
-          "x": 22,
+          "x": 15,
           "y": 4
         }
       }
@@ -134322,8 +134428,8 @@ const MAPS6 = {
         "y": 9,
         "to": {
           "map": "azalea",
-          "x": 16,
-          "y": 4
+          "x": 22,
+          "y": 8
         }
       },
       {
@@ -134331,8 +134437,8 @@ const MAPS6 = {
         "y": 9,
         "to": {
           "map": "azalea",
-          "x": 16,
-          "y": 4
+          "x": 22,
+          "y": 8
         }
       }
     ],
@@ -134719,8 +134825,8 @@ const MAPS6 = {
         "y": 13,
         "to": {
           "map": "azalea",
-          "x": 24,
-          "y": 8
+          "x": 14,
+          "y": 11
         }
       },
       {
@@ -134728,8 +134834,8 @@ const MAPS6 = {
         "y": 13,
         "to": {
           "map": "azalea",
-          "x": 24,
-          "y": 8
+          "x": 14,
+          "y": 11
         }
       }
     ],
@@ -182080,6 +182186,6 @@ if (typeof Game !== 'undefined') Object.assign(Game.prototype, {
 });
 
 </script>
-<!-- contentHash:ff725e8f86619ec004a48a50d95f8dc46452046256ee931a95d73e66b3b45767 -->
+<!-- contentHash:9681474e77f1cceb71933b231f3ee90d7061da5f0609b487cd1478eb3cce084a -->
 </body>
 </html>
