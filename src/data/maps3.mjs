@@ -841,7 +841,7 @@ export const MAPS3 = {
     warps: [
       { x: 2, y: 0, to: { map: 'route12', x: 8, y: 12 } },
       { x: 3, y: 0, to: { map: 'route12', x: 9, y: 12 } },
-      { x: 0, y: 5, to: { map: 'fuchsia', x: 16, y: 5 } },
+      { x: 0, y: 5, to: { map: 'fuchsia', x: 18, y: 5 } },
     ],
     signs: [
       { x: 5, y: 7, text: 'ROUTE 15 — Bramble lies west. Something in this grass copies what it touches. Almost.' },
