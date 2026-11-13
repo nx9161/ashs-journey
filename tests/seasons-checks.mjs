@@ -1,35 +1,92 @@
-// seasons-checks.mjs — Black 2 baseline: season system invariants.
-import { seasonForDate, seasonTintFor, seasonalHex, seasonalSwapFor, SEASON_ORDER } from '../src/game/seasons.mjs';
+// seasons-checks.mjs — Wave SZ (owner order 2026-11-12): SEASONS REMOVED.
+// This file used to pin the season system (monthly rotation, seasonal
+// palette grades, tints). It is now the PERMANENT GUARD against its
+// return: the season module must not exist, no source may reference the
+// season API, and the tile cache must render byte-identical output no
+// matter what the calendar says — one fixed, authored palette per place.
+import fs from 'node:fs';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
+import { buildArtTileCache } from '../src/engine/art.mjs';
+
 let fail = 0;
 const ok = (c, m) => { if (!c) { console.error('FAIL:', m); fail = 1; } };
-// All 12 months resolve, cycle length exactly 4, monthly advance.
-// Anchor: January opens Spring (so November plays in Autumn).
-const names = [];
-for (let m = 0; m < 12; m++) names.push(seasonForDate(new Date(2026, m, 15)).name);
-ok(names[0] === 'Spring', 'January anchors Spring, got ' + names[0]);
-for (let m = 0; m < 12; m++) ok(names[m] === SEASON_ORDER[(m + 1) % 4], `month ${m} follows the 4-cycle`);
-ok(names[10] === 'Autumn', 'November is Autumn, got ' + names[10]);
-ok(new Set(names.slice(0, 4)).size === 4, 'four distinct seasons per cycle');
-// Presentation bounds: tint always subtle illumination.
-for (let m = 0; m < 12; m++) { const s = seasonForDate(new Date(2026, m, 1)); ok(s.tint.alpha > 0 && s.tint.alpha <= 0.1, 'tint alpha subtle'); ok(s.color.startsWith('#'), 'glyph color present'); }
-// Map gating: interiors and dark maps never tint; outdoors do.
-ok(seasonTintFor({ indoor: true }) === null, 'indoor -> no tint');
-ok(seasonTintFor({ dark: true }) === null, 'dark -> no tint');
-ok(seasonTintFor({}) !== null, 'outdoor -> tint');
-ok(seasonTintFor(null) === null, 'no map -> no tint');
-// Seasonal art grade: greens re-grade per season; non-greens never move.
-const rgb = (h) => [parseInt(h.slice(1, 3), 16), parseInt(h.slice(3, 5), 16), parseInt(h.slice(5, 7), 16)];
-const autumn = rgb(seasonalHex('#5da24a', 'Autumn'));
-ok(autumn[0] > autumn[1], 'autumn grass reads amber (red wins), got ' + seasonalHex('#5da24a', 'Autumn'));
-const winter = rgb(seasonalHex('#5da24a', 'Winter'));
-ok(winter[0] > 170 && winter[1] > 180 && winter[2] > 180, 'winter grass reads snow-pale, got ' + seasonalHex('#5da24a', 'Winter'));
-for (const s of SEASON_ORDER) {
-  ok(seasonalHex('#8a5a30', s) === '#8a5a30', 'trunk brown untouched in ' + s);
-  ok(seasonalHex('#3a6fd8', s) === '#3a6fd8', 'water blue untouched in ' + s);
-  ok(seasonalHex('#e8e4da', s) === '#e8e4da', 'path stone untouched in ' + s);
+const ROOT = path.join(path.dirname(fileURLToPath(import.meta.url)), '..');
+
+// ---- 1. the module and its wiring are gone ------------------------------
+ok(!fs.existsSync(path.join(ROOT, 'src/game/seasons.mjs')), 'src/game/seasons.mjs does not exist');
+const order = JSON.parse(fs.readFileSync(path.join(ROOT, 'scripts/module-order.json'), 'utf8'));
+ok(!order.some((p) => String(p).toLowerCase().includes('season')), 'module-order.json lists no season module');
+
+const API_TOKENS = ['seasons.mjs', 'seasonForDate', 'seasonTintFor', 'seasonalHex', 'seasonalSwapFor',
+  'seasonalSwapForKit', 'currentSeason', 'SEASON_ORDER', 'SEASON_STYLE', '_hudSeason', 'Season — '];
+function scanTree(dir) {
+  for (const ent of fs.readdirSync(dir, { withFileTypes: true })) {
+    if (ent.name === 'node_modules') continue;
+    const p = path.join(dir, ent.name);
+    if (ent.isDirectory()) { scanTree(p); continue; }
+    if (!ent.name.endsWith('.mjs')) continue;
+    const text = fs.readFileSync(p, 'utf8');
+    for (const tok of API_TOKENS) {
+      ok(!text.includes(tok), path.relative(ROOT, p) + ' must not reference ' + tok);
+    }
+  }
 }
-const swap = seasonalSwapFor({ a: '#5da24a', b: '#8a5a30', c: '#2e7d46' });
-ok(!('b' in swap), 'swap never includes non-greens');
-ok(Object.keys(swap).length >= 1, 'current season re-grades at least one green');
-console.log(fail ? 'seasons-checks FAILED' : 'seasons-checks: all PASS (' + names.join(' → ') + ' → …)');
+scanTree(path.join(ROOT, 'src'));
+scanTree(path.join(ROOT, 'scripts'));
+
+// ---- 2. date-independence: the cache is identical in every month -------
+// Recording stub document: every canvas logs its fill ops, so two cache
+// builds can be compared exactly, palettes included.
+function makeDoc() {
+  return {
+    createElement: () => {
+      const cv = { width: 0, height: 0, ops: [] };
+      cv.getContext = () => {
+        const target = {
+          fillStyle: '#000000',
+          fillRect(x, y, w, h) { cv.ops.push(target.fillStyle + '@' + x + ',' + y + ',' + w + 'x' + h); },
+        };
+        return new Proxy(target, {
+          get: (t, p) => (p in t ? t[p] : () => {}),
+          set: (t, p, v) => { t[p] = v; return true; },
+        });
+      };
+      return cv;
+    },
+  };
+}
+function serialize(v) {
+  if (v && typeof v === 'object') {
+    if (Array.isArray(v.ops)) return 'CV(' + v.ops.join(';') + ')';
+    if (Array.isArray(v)) return '[' + v.map(serialize).join(',') + ']';
+    return '{' + Object.keys(v).sort().map((k) => k + ':' + serialize(v[k])).join(',') + '}';
+  }
+  return String(v);
+}
+const RealDate = Date;
+function freezeDate(iso) {
+  const t = new RealDate(iso).getTime();
+  globalThis.Date = class extends RealDate {
+    constructor(...a) { super(...(a.length ? a : [t])); }
+    static now() { return t; }
+  };
+}
+const builds = [];
+for (const iso of ['2026-01-15T12:00:00', '2026-04-15T12:00:00', '2026-07-15T12:00:00', '2026-11-15T12:00:00']) {
+  freezeDate(iso);
+  builds.push(serialize(buildArtTileCache(makeDoc())));
+}
+globalThis.Date = RealDate;
+for (let i = 1; i < builds.length; i++) {
+  ok(builds[i] === builds[0], 'tile cache identical across calendar months (build 0 vs ' + i + ')');
+}
+
+// ---- 3. the fixed look IS the authored base palette ----------------------
+// Under the removed system a November build wore the Autumn grade, which
+// moved both of these greens. They must render exactly as authored now.
+ok(builds[0].includes('#6b9e5d'), 'authored tile-grass base green renders ungraded');
+ok(builds[0].includes('#008100'), 'authored kit-grass green renders ungraded');
+
+console.log(fail ? 'seasons-checks FAILED' : 'seasons-checks: all PASS (seasons removed — fixed palette in every month)');
 process.exit(fail);
