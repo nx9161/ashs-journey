@@ -74,6 +74,20 @@
 //     identical (156/156, 7/7) on honest materials — the shipped
 //     pass was measured on mud counted as fabric. Re-pinned with
 //     the T21 build.
+//     FIFTH DOCUMENTED EXCEPTION (T22): silvertown's pin is its
+//     POST-T22 tuple. The Lastlight rebuild replaced the shipped tg2
+//     mud slab (161 of 540 cells) with the calm-grass + path-fabric
+//     town of the approved design: gate STATUS FAIL -> PASS (fabric
+//     0.9747 -> 0.9886 on honest materials — the mud counted as
+//     fabric and still fell short), junctions 6 -> 13 (all marked;
+//     the directions text now stands on visible S tiles at real
+//     junctions), apronMin 0.929 -> 0.706 (eight freestanding
+//     buildings + the forge where four stood on the north strip;
+//     still above the 0.6 gate), unanchoredAny 1 -> 0 (the td post
+//     at (13,13) anchored by the forge stamp), strict 0.9125 ->
+//     0.6299 (the street grid gives desire lines real corners to
+//     cut; still above the 0.60 gate). Conn/step-offs identical
+//     (90/90, 6/6). Re-pinned with the T22 build.
 //     Tuple: [pass, connOk, connPairs, stepTouch, stepTot, components,
 //     junctionSites, junctionsBare, apronLow, apronMin, merged,
 //     onFabric, shoulderOrphans, unanchoredAny, strict, fabric].
@@ -170,7 +184,7 @@ const PIN = {
   "saffron": [1, 156, 156, 10, 10, 1, 2, 0, 0, 0.875, 0, 0, 0, 0, 0.7649, 1],
   "sandgem": [1, 156, 156, 7, 7, 1, 1, 0, 0, 0.833, 0, 0, 0, 0, 1, 1],
   "shamouti": [0, 30, 182, 6, 6, 1, 4, 0, 1, 0.588, 0, 0, 0, 0, 0.912, 0.912],
-  "silvertown": [0, 90, 90, 6, 6, 1, 6, 0, 0, 0.929, 0, 0, 0, 1, 0.9125, 0.9747],
+  "silvertown": [1, 90, 90, 6, 6, 1, 13, 0, 0, 0.706, 0, 0, 0, 0, 0.6299, 0.9886],
   "slateport": [0, 56, 90, 6, 6, 1, 1, 0, 0, 0.875, 0, 0, 0, 0, 0.9972, 0.9972],
   "snowpoint": [1, 90, 90, 8, 8, 1, 3, 0, 0, 0.824, 0, 0, 0, 0, 0.998, 0.9983],
   "solaceon": [1, 110, 110, 7, 7, 1, 11, 0, 0, 0.938, 0, 0, 0, 0, 0.9226, 0.9948],
