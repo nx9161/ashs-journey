@@ -71,10 +71,14 @@ export const GROUNDS = {
     'The arena is a Spirit Ground — Ground moves hit harder here, and the earth drags at the unadapted.', '#8a6a42'),
 };
 
-// map id -> groundId. Every Arden map in the merged MAPS table is assigned
-// explicitly (70 unique ids across maps.mjs/maps2/maps3/maps4 — interiors
-// that are shared, 'center'/'mart', resolve Open). Unmapped ids fall back
-// to Open in groundForMap(), so a future map can never crash a battle.
+// map id -> groundId. EVERY map in the merged MAPS table is assigned
+// explicitly (432 ids; Arden first, then the gym/landmark stages, then
+// War Room W-BG completed Amber/Yamato/Maris/Borea/Frontier map by
+// map — interiors that are shared, 'center'/'mart', resolve Open).
+// 'open' entries are authored choices (towns, houses, league floors),
+// never silent defaults: tests/battle-ground-checks.mjs pins full
+// coverage, so a future map cannot ship unassigned. Unmapped ids
+// still fall back to Open in groundForMap() as a crash guard only.
 export const MAP_GROUND = {
   pallet: 'open',
   route1: 'open',
