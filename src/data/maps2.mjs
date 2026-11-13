@@ -727,7 +727,7 @@ export const MAPS2 = {
     id: 'celadon', name: 'Canopy City', music: 'viridian-theme',
     rows: rows([
       'ÐÐÐÐÐÐÐÐÐÐÐÐÐÐÐÐÐÐÐÐ',
-      'ÐÅÅÅÅÅÅÅÅÅÅXÅÅÅÅÅÅÅÐ',
+      'ÐÅÅÅÅÅÅÅÅÅÅÅÅÅÅÅÅÅÅÐ',
       'ÐæææÅčččÅḄḄḄḄḄḄÅčččÐ',
       'ÐP12oĥsĥÅUVYUUUoĥsĥÐ',
       '....................',
