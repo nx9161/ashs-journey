@@ -157827,11 +157827,20 @@ const TALE_NPCS = [
   // handler (overworld-systems, ferryArc 'johto') owns him entirely:
   // gated by the Foundation embark leg (embark_johto) outbound, and
   // unconditional once Yamato has been reached (NO-SOFT-LOCK LAW). He
-  // stands at (11,8), one tile east of the Caldera FERRYMAN, on a
-  // tg2 ground tile in the open south field — no door, warp or route
-  // can be sealed from there. The return captain stands on the
+  // stands at (14,9), one tile south of the Caldera FERRYMAN (14,8),
+  // on a plain ground tile of the shore lawn east of the Mart — no
+  // door, warp or route can be sealed from there (the lawn's
+  // through-route runs west along row 9; nothing routes through
+  // (14,9)). S1xS2 MERGE RESOLUTION (2026-11-12): his original
+  // stance, (11,8), was open south-field ground when this entry was
+  // written, but Wave S1's Dawnwick rebuild placed the Mart exactly
+  // over it — (11,8) is now the Mart's west DOOR WARP (mart warps
+  // (11,8)/(12,8)), leaving him standing in the doorway, unreachable
+  // without warping inside. Wave S2's quest-integrity guard (the A14
+  // law, generalized) caught the collision at the merge; he moved
+  // east to the FERRYMAN's side. The return captain stands on the
   // Galefield dock (maps6.mjs, CAPT WESTWIND).
-  { map: 'pallet', x: 11, y: 8, name: 'CAPT YAMATO', art: 'sailor', skin: '#c89878', shirt: '#2a7a6a', pants: '#2a2a3a', hair: '#3a2a1a',
+  { map: 'pallet', x: 14, y: 9, name: 'CAPT YAMATO', art: 'sailor', skin: '#c89878', shirt: '#2a7a6a', pants: '#2a2a3a', hair: '#3a2a1a',
     ferry: 'newbark', ferryArc: 'johto',
     dialogue: ['The Galefield run is the western crossing — Yamato water, old towers on the horizon.', "Professor Hawthorn's office books that passage. No booking, no boarding — captain's orders, trainer."] },
   // Arc 3.5 Stage F0: the Frontier embark captain, appended to
@@ -157842,15 +157851,20 @@ const TALE_NPCS = [
   // or by the deriveArcDefaults catch-up for a save that consumed
   // that homecoming while the Frontier was still sealed) outbound,
   // and unconditional once the Frontier has been reached
-  // (NO-SOFT-LOCK LAW). He stands at (11,9), one tile south of CAPT
-  // YAMATO (11,8) in Dawnwick's open south field — a plain ground tile:
-  // no door, warp or route tile is sealed from there, and Dawnwick's
-  // walkable graph stays one fragment with all warps reachable
-  // (celadon-sweep verified before/after in F0; the bundle suite pins
-  // his adjacency). The tile one EAST of CAPT YAMATO, (12,8), was
-  // tried first and REJECTED on that evidence: it is the only exit
-  // of the (13,8)/(14,8) pocket and an NPC there seals it into a
-  // second fragment.
+  // (NO-SOFT-LOCK LAW). He stands at (11,9), on the paved street
+  // before the Mart in Wave S1's rebuilt Dawnwick — a plain ground
+  // tile: no door, warp or route tile is sealed from there, and
+  // Dawnwick's walkable graph stays one fragment with all warps
+  // reachable (celadon-sweep verified before/after in F0; the bundle
+  // suite pins his stance). The tile one NORTH of him, (11,8), was
+  // CAPT YAMATO's stance when this entry was written; since S1's
+  // rebuild it is the Mart's west door warp, and YAMATO moved to the
+  // shore lawn at (14,9) in the S1xS2 merge resolution (see his entry
+  // above). The tile one EAST of that old stance, (12,8), was tried
+  // first for YAMATO and REJECTED on the F0 evidence: it was the
+  // only exit of the (13,8)/(14,8) pocket and an NPC there seals it
+  // into a second fragment — and it is the Mart's east door warp
+  // now besides.
   { map: 'pallet', x: 11, y: 9, name: 'CAPT FRONTIER', art: 'sailor', skin: '#e8b888', shirt: '#5a3a7a', pants: '#2a2a3a', hair: '#1a1a2a',
     ferry: 'frontierhub', ferryArc: 'frontier',
     dialogue: ['The Frontier run is the short island crossing — seven arenas on one island, and every trainer there fighting like the whole sea is watching.', "Scott himself left your invitation — his scouts book that passage, and his name is already on your boarding card. No invitation, no boarding — captain's orders, trainer."] },
