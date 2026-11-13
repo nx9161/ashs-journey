@@ -981,8 +981,8 @@ export const MAPS3 = {
       '####################',
     ]),
     warps: [
-      { x: 8, y: 12, to: { map: 'fuchsia', x: 7, y: 11 } },
-      { x: 9, y: 12, to: { map: 'fuchsia', x: 8, y: 11 } },
+      { x: 8, y: 12, to: { map: 'fuchsia', x: 7, y: 12 } },
+      { x: 9, y: 12, to: { map: 'fuchsia', x: 8, y: 12 } },
     ],
     signs: [],
     npcs: [
