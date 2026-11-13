@@ -6772,29 +6772,29 @@ export const MAPS6 = {
     "name": "Tidewall City",
     "music": "viridian-theme",
     "rows": [
-      "ủủủỨủủủủủủỨủủủủủủỨủủủủủủụủủủ",
-      "ủụụụụụụụụụụụụụụụụỨụụụụụụụụụủ",
-      "ủụụjklmụụứứứứụụừừừụụụụdeefụủ",
-      "ủỨụAJKARụUVYUụụỬsỬụụụụP12Pụủ",
-      "ủụRỦỦỦỦỦỦỦỦỦỦỦỦỦỦỦỦỦỦỦỦỦỦụụủ",
-      "ủụSỦỦỦỦỦỦỦỦỦỦỦỦỦỦỦỨụụụụụụụụủ",
-      "ủụỦỦụỦRẄỦụỦỦỦụỦỦỦỦẄụnụụụụụụủ",
-      "ủnRỦụỦỦụỦụỦỦỦụỦỦỦỦụỨụoụụụụụủ",
-      "ủụụỦụỦỦụỦụỦỦỦụỦỦỦỦỦỦỦỦỦỦỦỦ~~",
-      "ủụụỦụụỦỦỦỦỦỦỦỦỦỦỦỦụụụụụụụỦ~~",
-      "ủụụỦụỦỦRỦỦỦỦỦỦỦỦỦỦoụụụụụnoụủ",
-      "ủụụỦụỦỦỦỦỦỦỦỦỦỦỦỦỦụụ,,ụụụụụủ",
-      "ủụụỦụỦụỦụụụỦỦụỦỦỦno,,,,ụụụụủ",
-      "ủụụỦỦỦụụụụụỦỦụỦỦỦụụ,,,,,ụụụủ",
-      "ủụụoỦỦỦỦỦỦỦỦỦỦỦỦỦụụụ,,,ụụụụủ",
-      "ủ~~~~~~~~~~ỦỦỦS~~~~~~~~~~~~ủ",
-      "ủ~~~~~~~~~~~ụụ~~~~~~~~~~~~~ủ",
-      "ủ~~~~~~~~~~~ụụ~~~~~~~~~~~~~ủ"
+      "ủủủỨủủủủủủỨủủủủủủủủủủủủủỨủủủ",
+      "ủụụụụụụụụụụụụụụụụụụụ.......ủ",
+      "ủụabcụnpừừừnpụụụụụụụ..ứXứứ.ủ",
+      "ủụrstụnpỬsỬnpụụụụụụụ..UVYU.ủ",
+      "ủ..........................ủ",
+      "ủụụụS.oụụụụụụụụụoụụS.9.9ụRRủ",
+      "ủụụụụ.ụụụụụụụụụụụụụụ.9.9oRRủ",
+      "ủụdef.jklmụdeefụabcn.......ủ",
+      "ủụxyz.AJKAụP12PụtsrpụụụụS...",
+      "ủ...........................",
+      "ủụụụụS.ụụoụụụụụủủụụoẍ,,,,.ụủ",
+      "ủụụừừừ.ụụụabcụụủủừừừừ,,,ụ.ụủ",
+      "ủụnỬsỬ.ụẄụvwvụụụẄỬsỬỬụụụụ.ụủ",
+      "ủ..........................ủ",
+      "ủ..........................ủ",
+      "ủ~~~~~~~~~~...S~~~~~~~~~~~~ủ",
+      "ủ~~~~~~~~~~~ἇἇ~~~~~~~~~~~~~ủ",
+      "ủ~~~~~~~~~~″ἇἇ~~~~~~~~~~~~~ủ"
     ],
     "warps": [
       {
-        "x": 4,
-        "y": 3,
+        "x": 7,
+        "y": 8,
         "to": {
           "map": "center",
           "x": 4,
@@ -6802,13 +6802,13 @@ export const MAPS6 = {
         },
         "via": {
           "map": "cianwood",
-          "x": 4,
-          "y": 4
+          "x": 7,
+          "y": 9
         }
       },
       {
-        "x": 5,
-        "y": 3,
+        "x": 8,
+        "y": 8,
         "to": {
           "map": "center",
           "x": 4,
@@ -6816,12 +6816,12 @@ export const MAPS6 = {
         },
         "via": {
           "map": "cianwood",
-          "x": 5,
-          "y": 4
+          "x": 8,
+          "y": 9
         }
       },
       {
-        "x": 10,
+        "x": 23,
         "y": 3,
         "to": {
           "map": "gym-cianwood",
@@ -6830,7 +6830,7 @@ export const MAPS6 = {
         }
       },
       {
-        "x": 11,
+        "x": 24,
         "y": 3,
         "to": {
           "map": "gym-cianwood",
@@ -6839,7 +6839,7 @@ export const MAPS6 = {
         }
       },
       {
-        "x": 16,
+        "x": 9,
         "y": 3,
         "to": {
           "map": "house-cianwood",
@@ -6866,8 +6866,8 @@ export const MAPS6 = {
         }
       },
       {
-        "x": 23,
-        "y": 3,
+        "x": 12,
+        "y": 8,
         "to": {
           "map": "mart",
           "x": 5,
@@ -6875,13 +6875,13 @@ export const MAPS6 = {
         },
         "via": {
           "map": "cianwood",
-          "x": 23,
-          "y": 4
+          "x": 12,
+          "y": 9
         }
       },
       {
-        "x": 24,
-        "y": 3,
+        "x": 13,
+        "y": 8,
         "to": {
           "map": "mart",
           "x": 6,
@@ -6889,14 +6889,14 @@ export const MAPS6 = {
         },
         "via": {
           "map": "cianwood",
-          "x": 24,
-          "y": 4
+          "x": 13,
+          "y": 9
         }
-      },
+      }
     ],
     "signs": [
       {
-        "x": 2,
+        "x": 19,
         "y": 5,
         "text": "TIDEWALL CITY — An island town of stone and surf. The gym trains where the waves can watch."
       },
@@ -6906,25 +6906,25 @@ export const MAPS6 = {
         "text": "TIDEWALL LANDING — The island boat runs to Beacon, weather and whim permitting. It always permits."
       },
       {
-        "x": 15,
-        "y": 9,
+        "x": 24,
+        "y": 8,
         "text": "TIDEWALL CITY — East: ROUTE 41."
       },
       {
         "x": 5,
-        "y": 9,
+        "y": 10,
         "text": "TIDEWALL CITY — East: ROUTE 41."
       },
       {
-        "x": 2,
-        "y": 11,
+        "x": 4,
+        "y": 5,
         "text": "TIDEWALL CITY — East: ROUTE 41."
       }
     ],
     "npcs": [
       {
-        "x": 3,
-        "y": 5,
+        "x": 10,
+        "y": 9,
         "name": "MART CLERK",
         "art": "clerk",
         "skin": "#f0c8a0",
@@ -6961,8 +6961,8 @@ export const MAPS6 = {
         "ferry": "olivine"
       },
       {
-        "x": 18,
-        "y": 11,
+        "x": 20,
+        "y": 5,
         "name": "ISLAND ELDER BRAN",
         "art": "elder",
         "skin": "#e8b888",
@@ -6976,7 +6976,7 @@ export const MAPS6 = {
       },
       {
         "x": 7,
-        "y": 13,
+        "y": 14,
         "name": "SURF KID NIA",
         "art": "kid",
         "skin": "#f0c8a0",
@@ -11508,7 +11508,7 @@ export const MAPS6 = {
         "y": 9,
         "to": {
           "map": "cianwood",
-          "x": 16,
+          "x": 9,
           "y": 4
         }
       },
@@ -11517,7 +11517,7 @@ export const MAPS6 = {
         "y": 9,
         "to": {
           "map": "cianwood",
-          "x": 16,
+          "x": 9,
           "y": 4
         }
       }
@@ -11823,7 +11823,7 @@ export const MAPS6 = {
         "y": 9,
         "to": {
           "map": "cianwood",
-          "x": 10,
+          "x": 23,
           "y": 4
         }
       },
@@ -11832,7 +11832,7 @@ export const MAPS6 = {
         "y": 9,
         "to": {
           "map": "cianwood",
-          "x": 10,
+          "x": 23,
           "y": 4
         }
       }
