@@ -225,6 +225,9 @@ const SFXSET = {
   // Yellow homage: the trainer-spot alert — an original ascending two-note
   // sting (visual twin: the "!" mark over the challenger).
   'trainer-spot': { id:'trainer-spot', wave:'pulse', duty:0.125, vol:0.5, env:[0.002,0.12], notes:[[0,'E5',1],[1,'A5',2]] },
+  // W6 (audit D1): the Fly teleport's own cue — a falling sparkle, distinct
+  // from the screen-transition whoosh/fade the engine plays separately.
+  'warp': { id:'warp', wave:'pulse', duty:0.125, vol:0.35, env:[0.002,0.18], notes:[[0,'E6',0.5],[0.5,'C6',0.5],[1,'G5',0.5],[1.5,'E5',1.5]] },
 
   // --- battle beats ---
   'battle-hit':   { id:'battle-hit',   wave:'noise', vol:0.5,  env:[0.002,0.12], notes:[[0,null,2]] },
@@ -267,6 +270,12 @@ const SFXSET = {
   'dex':       { id:'dex',       wave:'pulse', duty:0.5, vol:0.5, env:[0.003,0.25], notes:[[0,'E5',1.5],[1.5,'G5',1.5],[3,'B5',1.5],[4.5,'E6',3]] },
   'lowhp_legacy': { id:'lowhp_legacy', wave:'pulse', duty:0.25, vol:0.5, env:[0.002,0.12], notes:[[0,'A4',1.5],[2,'A4',1.5],[4,'A4',1.5]] },
   'encounter': { id:'encounter', wave:'pulse', duty:0.125, vol:0.5, env:[0.004,0.2], notes:[[0,'G4',1],[1,'A4',1],[2,'B4',1],[3,'C5',3]] },
+
+  // --- W6 (audit D1): live call-site keys that were never tabled — the game
+  // played these names for years and heard nothing. The sounds were always
+  // the tables below; the keys just never landed in SFXSET. ---
+  'menu-move': { id:'menu-move', wave:'pulse', duty:0.5, vol:0.22, env:[0.002,0.06], notes:[[0,'A5',1]] },
+  'item-get':  { id:'item-get',  wave:'pulse', duty:0.5, vol:0.45, env:[0.002,0.15], notes:[[0,'A5',1],[1,'D6',1],[2,'F#6',2]] },
 };
 
 // ============================================================ CRIES ====
@@ -861,7 +870,7 @@ class AudioEngine {
   // Call from the first user gesture (A press / tap). AC may be injected
   // (tests) — otherwise resolves the browser's AudioContext.
   unlock(AC) {
-    if (this._unlocked) return;
+    if (this._unlocked) { this.resume(); return; }
     const Ctor = AC || (typeof AudioContext !== 'undefined' ? AudioContext
       : (typeof webkitAudioContext !== 'undefined' ? webkitAudioContext : null));
     if (!Ctor) return; // headless: stay silent, never throw
@@ -877,11 +886,30 @@ class AudioEngine {
       this.sfxBus.connect(this.master);
       this.master.connect(this.ctx.destination);
       this._unlocked = true;
+      // Suspended-context recovery (audit U4): iOS interruptions and tab
+      // backgrounding can park the context at 'suspended' while the game
+      // keeps running — resume when the tab becomes visible again.
+      if (typeof document !== 'undefined' && document.addEventListener && !this._visHook) {
+        this._visHook = true;
+        document.addEventListener('visibilitychange', () => { if (!document.hidden) this.resume(); });
+      }
       // If a track was requested before unlock (e.g. title theme queued at
       // boot), start it now that the gesture arrived. _musicId is cleared
       // first so the same-id no-op guard doesn't swallow the replay.
       if (this._pendingMusic) { const id = this._pendingMusic; this._pendingMusic = null; this._musicId = null; this.playMusic(id); }
     } catch (e) { /* audio unavailable: silent mode */ }
+  }
+
+  // Resume a context parked at 'suspended' (audit U4). Called on gesture
+  // return (unlock re-entry), on visibility return, and by the music
+  // scheduler, which keeps firing on timers even while suspended.
+  resume() {
+    if (this.ctx && this.ctx.state === 'suspended') {
+      try {
+        const p = this.ctx.resume();
+        if (p && p.catch) p.catch(() => { /* still suspended: a later path retries */ });
+      } catch (e) { /* stay silent */ }
+    }
   }
 
   setMuted(m) {
@@ -942,6 +970,7 @@ class AudioEngine {
     const loopLen = Math.max(0.25, this._tableBeats(table) * spb);
     let nextStart = this.ctx.currentTime + 0.06;
     const scheduleLoop = () => {
+      if (this.ctx.state === 'suspended') this.resume(); // audit U4: self-heal after interruptions
       const t0 = nextStart;
       try {
         for (const tr of table.tracks) {
@@ -169265,6 +169294,10 @@ class BattleScene {
     const t = this.trainer;
     this.state = 'victory';
     if (this._exitStartT < 0) this._exitStartT = this.t; // W1 FX-6: exit mirror wipe
+    // W6 (audit D2): the composed trainer-win fanfare (SCORE.md: 'fanfare
+    // (trainer win)') finally plays — ordinary trainer wins only; badge
+    // wins already get the 'badge' fanfare at the award below.
+    if (!t.badge) g.audio.playSfx('fanfare');
     // ADR-025 §4: Generous World scales prize money (x1.5).
     // F2: under facility law there is NO prize (generated trainers
     // also carry reward: 0 — the flag is the second lock) and NO
