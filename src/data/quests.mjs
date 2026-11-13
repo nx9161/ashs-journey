@@ -270,7 +270,7 @@ export const TALE_NPCS = [
   // passage, per the CAPT BOREA note above).
   { map: 'vermilion', x: 11, y: 11, name: 'HARBORMASTER', art: 'sailor', ...APPEAR.harbor, tale: 'tale_vermilion', role: 'stage',
     dialogue: ['Every crate, every rope, every lost page — the harbor keeps what the sea gives back.'] },
-  { map: 'lavender', x: 16, y: 5, name: 'ELDER BRAM', art: 'elder', ...APPEAR.elder, tale: 'tale_lavender', role: 'stage',
+  { map: 'lavender', x: 15, y: 7, name: 'ELDER BRAM', art: 'elder', ...APPEAR.elder, tale: 'tale_lavender', role: 'stage',
     dialogue: ['I remember every name the tower forgot. Sit; an old man likes an audience.'] },
   // Canopy fragmentation fix (2026-10-28): the GARDENER stands at
   // (15,9), NOT (16,9) — (16,9) is the Route 8 gate's only approach tile
