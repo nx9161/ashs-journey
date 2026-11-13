@@ -118711,6 +118711,9 @@ const MAPS2 = {
     signs: [
       { x: 6, y: 9, text: 'FLINTRIDGE CITY — A stone-gray city nestled between mountains.' },
       { x: 12, y: 4, text: 'FLINTRIDGE GYM — Leader: Brock. The rock-solid Kin trainer! Inside lies a RUBBLE GROUND: Rock moves hit harder and physical moves land true — for Brock, and for you.' },
+      { x: 13, y: 9, text: 'FLINTRIDGE EAST — Route 3 by the east gate; the Gym and the Museum lie west.' },
+      { x: 13, y: 12, text: 'SOUTH STREET — The Mart fronts this row; the Center stands west. Route 2 leaves south.' },
+      { x: 6, y: 12, text: 'THE CENTER — Rest your Kin inside. The Museum square lies north; Route 2 south.' },
     ],
     npcs: [
       { x: 13, y: 11, name: 'MART CLERK', art: 'clerk', skin: '#f0c8a0', shirt: '#3a6ac0', pants: '#2a2a3a', hair: '#2a1a0a',
@@ -119164,9 +119167,9 @@ const MAPS2 = {
       'ĸĸĸĸÄģģģw.ģ—ģẆḃVYḃἇ~',
       'ĸĸĸĸĸĸĸĸ..ἇἇἇἇἇἇἇἇἇ~',
       'ĸċċċἇἇ‶ἇἇ.ἇἇἇἇἇἇἇ‷ἇ~',
-      'ĸģwģÄÄÄÄ..ἇἇἇἇἇἇἇἇo~',
-      '.......oἇἇἇἇἇἇἇἇἇἇĸ~',
-      '~~~‸~~~~ἇἇ~″~~~~~~~~',
+      'ĸģwģÄÄÄÄ..ἇἇἇἇἇἇἇἇἇ~',
+      '........ἇἇἇἇἇἇἇἇἇἇo~',
+      '~~~‸~~~~ἇo~″~~~~~~~~',
     ]),
     warps: [
       { x: 15, y: 8, to: { map: 'gym-vermilion', x: 5, y: 7 } },
@@ -119184,7 +119187,10 @@ const MAPS2 = {
     signs: [
       { x: 7, y: 1, text: 'ARCPORT CITY — The port of the vermilion sunset. Ships from every sea dock here.' },
       { x: 13, y: 9, text: 'ARCPORT GYM — Leader: Lt. Surge. The Lightning Lieutenant! Inside lies a VOLT GROUND: Electric moves hit harder and strike swift and true — for Surge, and for you.' },
-      { x: 14, y: 2, text: 'ARCPORT MART — Two doors south of the gym row. Harbour stock, ferry-proof prices.' },
+      { x: 14, y: 4, text: 'ARCPORT MART — Two doors south of the gym row. Harbour stock, ferry-proof prices.' },
+      { x: 2, y: 5, text: 'ARCPORT HARBOUR — The docks, the ferries and the Fan Club lie east along the street.' },
+      { x: 5, y: 9, text: "KIN FAN CLUB — The founder's tide charts are spread on the porch, just south of here." },
+      { x: 18, y: 7, text: "ARCPORT DOCKS — Cranes, crates and the captains' row. Ferries for every sea leave from the dock street." },
     ],
     npcs: [
       { x: 13, y: 4, name: 'MART CLERK', art: 'clerk', skin: '#f0c8a0', shirt: '#3a6ac0', pants: '#2a2a3a', hair: '#2a1a0a',
