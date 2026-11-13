@@ -2043,6 +2043,25 @@ T7_KIND_DEFS.forEach(([kind], i) => {
   TILE_CHARS[ch] = kind;
 });
 const T7_PROP_KINDS = T7_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
+// ---- Wave T9 (Bramble build): the Warden's lure post ----
+// One new kind continuing the block at idx 570 (T7 ends at 569;
+// U+203A, verified free in TILE_CHARS and unused by every map row).
+// Class 'prop': a solid object composited over the ground it stands
+// on (art.mjs resolver). The gate post at the Preserve gatehouse's
+// east corner, with the carved lure of tale_fuchsia hanging from
+// its cross-arm — the BACKSTORY-SYNC-AUDIT row made visible.
+// Authored art: assets/sprites/pix/tiles/tile-prop-lurepost.pix
+// (Wave T9 register item in WAVE-T9-BRAMBLE-PLAN.md Part 4).
+const T9_KIND_DEFS = [
+  ['lurepost', 'prop'],
+];
+const T9_KIND_CHARS = {};
+T9_KIND_DEFS.forEach(([kind], i) => {
+  const ch = String.fromCodePoint(0x1E00 + 570 + i);
+  T9_KIND_CHARS[kind] = ch;
+  TILE_CHARS[ch] = kind;
+});
+const T9_PROP_KINDS = T9_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
 const SINNOH_TOWN_GROUND_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg);
 const SINNOH_TOWN_GROUND2_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg2);
 // TX-3: the 8 gym exteriors by town (original type-accent motifs).
@@ -90527,6 +90546,24 @@ const ART = {
     "................",
     "................",
   ] },
+  "tile-prop-lurepost": { w: 16, h: 16, pal: {"h":"#b08d57","P":"#8a6a42","p":"#5f4128","l":"#e6dfc2","m":"#aeb8c4","f":"#d29a3a","F":"#a8742a","w":"#efe6cc","r":"#b03a30","d":"#2a2018"}, rows: [
+    "................",
+    "...hP...........",
+    "...hP...........",
+    "..hPPPPPP.......",
+    "...hP...l.......",
+    "...hP...l.......",
+    "...hP...l.......",
+    "...hP...m.......",
+    "...hP.ffrfd.....",
+    "...hPFfwrff.....",
+    "...hP.FfffF.....",
+    "...hP..m........",
+    "...hP..m.m......",
+    "...hP...mm......",
+    "...hP...........",
+    "..ppp...........",
+  ] },
   "tile-prop-mapdesk": { w: 16, h: 16, pal: {"B":"#b99b74","D":"#726648","L":"#d7bd97","A":"#916a47","C":"#6a5c47"}, rows: [
     "................",
     "................",
@@ -109901,6 +109938,8 @@ for (const k of T3_PROP_KINDS) TILE_ART[k] = 'tile-prop-' + k;
 for (const k of [...T6_PROP_KINDS, ...T6_RUG_KINDS]) TILE_ART[k] = 'tile-prop-' + k;
 // Wave T7: Hushmoor's memorial wall draws its own tile art.
 TILE_ART['memorialwall'] = 'tile-memorialwall';
+// Wave T9: Bramble's lure post draws its prop art.
+for (const k of T9_PROP_KINDS) TILE_ART[k] = 'tile-prop-' + k;
 
 // Premium+ W6 (TX-3/PL-1): door-open frames, authored in TX-3 for every
 // door kind. The warp-fade engine that plays them lands in W7 — W6
@@ -110744,7 +110783,9 @@ const PROP_KINDS = new Set(['counter', 'healmachine', 'pcdesk', 'bed', 'table',
   // Wave T6: Arcport harbour props + tidechart rug composite too.
   ...T6_PROP_KINDS, ...T6_RUG_KINDS,
   // Wave T7: Hushmoor's memorial wall composites over its ground too.
-  ...T7_PROP_KINDS]);
+  ...T7_PROP_KINDS,
+  // Wave T9: Bramble's lure post composites over its ground too.
+  ...T9_PROP_KINDS]);
 function groundFamilyOf(kind) {
   // Perfection Pass Stage 2 Gate 2 (G2): beach kinds stand on tropgrass,
   // psand kinds stand on path (props composite over the parent ground).
@@ -111624,7 +111665,9 @@ function resolveTileLayers(cache, kind, x, y, kindAt, t, phase, mapId) {
     // Wave T6: the dock crane composites over its boardwalk the same way.
     case 'crane':
     // Wave T7: the memorial wall composites over its garden grass too.
-    case 'memorialwall': {
+    case 'memorialwall':
+    // Wave T9: the lure post composites over its gate lawn the same way.
+    case 'lurepost': {
       // Object tiles carry transparent surrounds (Wave 1): lay the ground
       // the object stands on beneath it — south neighbour's family first
       // (the contact edge), else the neighbour majority, else grass.
@@ -120045,7 +120088,7 @@ const MAPS2 = {
     warps: [
       { x: 2, y: 0, to: { map: 'route12', x: 8, y: 12 } },
       { x: 3, y: 0, to: { map: 'route12', x: 9, y: 12 } },
-      { x: 0, y: 5, to: { map: 'fuchsia', x: 16, y: 5 } },
+      { x: 0, y: 5, to: { map: 'fuchsia', x: 18, y: 5 } },
     ],
     signs: [
       { x: 5, y: 7, text: 'ROUTE 15 — Bramble lies west. Something in this grass copies what it touches. Almost.' },
@@ -120076,42 +120119,53 @@ const MAPS2 = {
   fuchsia: {
     id: 'fuchsia', name: 'Bramble City', music: 'viridian-theme',
     rows: rows([
-      'ÓÓÓÓÓÓÓÓŀÈÓÓÓÓÓÓÓÓ',
-      'ÓŀŀŀÈŀŀÈÈÈÈÈŀÈŀŀÈÓ',
-      'ÓÈēēēŀŀÈÈŀēXēēÈÈÈÓ',
-      'ÓÈīwīŀÈŀÈÈḆḆḆḆÈŀŀÓ',
-      'ÓÈÞÈÞŀÈÞÞÈḆVYḆÞŀÈÓ',
-      'ÓŀÈÈoÈÈÈÈŀŀÈÈŀŀoÈŀ',
-      'ÓÈÈÈÈŀééééŀÈŀÈŀÈŀÓ',
-      'ÓŀÈŀŀoAJKAoŀÈÈÈÈŀÓ',
-      'ÓÈÞûûŀÈÈÈŀÈûûÞÈŀŀÓ',
-      'ÓÈÈÈŀŀēēēēŀÈÈÈÈÈÈÓ',
-      'ÓŀÈÈŀÈī78īŀŀŀÈÈŀŀÓ',
-      'ÓŀŀŀÈŀÈŀŀŀÈÈÞŀÈŀŀÓ',
-      'ÓÓÓÓÓÓÓÓŀŀÓÓÓÓÓÓÓÓ',
+      'ÓÓÓÓÓÓÓÓ..ÓÓÓÓÓÓÓÓÓÓ',
+      'ÓÈÈÈÈÈÈÈ..ÈÈÈÈÈÈÈÈÈÓ',
+      'ÓÈēēēÈÈẉ..ÈûḆḆḆḆûÈÈÓ',
+      'ÓÈīwīÈÈÈ..ÈÈḆVYḆÈÈÈÓ',
+      'Ó..................Ó',
+      'Ó...................',
+      'ÓÈÈÈÈ.ééééÈ.ēôēÈÈÈÈÓ',
+      'ÓÈÈÈÈ.AJKAÈ.P12ÈÈÈÈÓ',
+      'Ó...............ẌÈÈÓ',
+      'Ó..................Ó',
+      'Ópēēē.ēēēē›.ÈēēēẍÈÈÓ',
+      'Ópīīw.ī78ī..ÈīwīÈÈÈÓ',
+      'Óp~~ûÈ.....È~~ûÈûÈÈÓ',
+      'Ó~~~~~~~..~~~~~~~~~Ó'
     ]),
     warps: [
-      { x: 11, y: 4, to: { map: 'gym-fuchsia', x: 5, y: 7 } },
-      { x: 12, y: 4, to: { map: 'gym-fuchsia', x: 6, y: 7 } },
+      { x: 13, y: 3, to: { map: 'gym-fuchsia', x: 7, y: 8 } },
+      { x: 14, y: 3, to: { map: 'gym-fuchsia', x: 8, y: 8 } },
       { x: 7, y: 7, to: { map: 'center', x: 4, y: 4 }, via: { map: 'fuchsia', x: 7, y: 8 } },
       { x: 8, y: 7, to: { map: 'center', x: 5, y: 4 }, via: { map: 'fuchsia', x: 8, y: 8 } },
-      { x: 7, y: 10, to: { map: 'safari', x: 8, y: 11 } },
-      { x: 8, y: 10, to: { map: 'safari', x: 9, y: 11 } },
+      { x: 7, y: 11, to: { map: 'safari', x: 8, y: 11 } },
+      { x: 8, y: 11, to: { map: 'safari', x: 9, y: 11 } },
       { x: 8, y: 0, to: { map: 'route16', x: 8, y: 12 } },
       { x: 9, y: 0, to: { map: 'route16', x: 9, y: 12 } },
-      { x: 17, y: 5, to: { map: 'route15', x: 1, y: 5 } },
-      { x: 8, y: 12, to: { map: 'route19', x: 8, y: 1 } },
-      { x: 9, y: 12, to: { map: 'route19', x: 9, y: 1 } },
+      { x: 19, y: 5, to: { map: 'route15', x: 1, y: 5 } },
+      { x: 8, y: 13, to: { map: 'route19', x: 8, y: 1 } },
+      { x: 9, y: 13, to: { map: 'route19', x: 9, y: 1 } },
+      { x: 3, y: 3, to: { map: 'house-fuchsia', x: 4, y: 4 } },
+      { x: 13, y: 7, to: { map: 'mart', x: 5, y: 5 }, via: { map: 'fuchsia', x: 13, y: 8 } },
+      { x: 14, y: 7, to: { map: 'mart', x: 6, y: 5 }, via: { map: 'fuchsia', x: 14, y: 8 } },
     ],
     signs: [
       { x: 7, y: 4, text: 'BRAMBLE CITY — The Preserve City. Wild Kin roam free beyond the south gate.' },
-      { x: 8, y: 4, text: 'BRAMBLE GYM — Leader: Koga. The poisonous ninja master!' },
+      { x: 11, y: 4, text: 'BRAMBLE GYM — Leader: Koga. The poisonous ninja master! Inside lies a VENOM GROUND: Poison moves hit harder and venom seeps in more easily — for Koga, and for you.' },
+      { x: 17, y: 4, text: 'BRAMBLE CITY — North: ROUTE 16 · East: ROUTE 15 · South: ROUTE 19.' },
+      { x: 11, y: 11, text: 'BRAMBLE CITY — North: ROUTE 16 · East: ROUTE 15 · South: ROUTE 19.' }
     ],
     npcs: [
-      { x: 10, y: 11, name: 'WARDEN', art: 'ranger', skin: '#e8b888', shirt: '#324a83', pants: '#2a304a', hair: '#c0c0c0',
-        dialogue: ["Mmh — pardon the mumbling, lost my Gold Teeth to the Bramble Preserve mud again.", "Find them and I'll teach your Kin to push boulders like they're made of foam. Mmh!"] },
+      { x: 10, y: 11, name: 'PRESERVE WARDEN', art: 'ranger', skin: '#e8b888', shirt: '#324a83', pants: '#2a304a', hair: '#c0c0c0', safariGate: true,
+        dialogue: ["Mmh — pardon the mumbling, lost my Gold Teeth to the Bramble Preserve mud again.", "Step through the south gatehouse for the Safari, mmh. Find my teeth in there and I'll teach your Kin to push boulders like foam. Mmh!"] },
       { x: 3, y: 9, name: 'ZOO FAN', art: 'lady', skin: '#f0c8a0', shirt: '#e08a3a', pants: '#2c3049', hair: '#7a4a1a',
         dialogue: ["The zoo's NURSELING waved at me once. WAVED. I think about it every day.", "Koga's gym is full of invisible walls. Ninjas, man. Ninjas."] },
+      { x: 15, y: 8, name: 'MART CLERK', art: 'clerk', skin: '#f0c8a0', shirt: '#3a6ac0', pants: '#2a2a3a', hair: '#2a1a0a',
+        mart: { stock: ['greatball', 'ultraball', 'hyperpotion', 'fullheal', 'revive', 'antidote'] },
+        dialogue: ["Bramble Mart! Safari-goers, take note: Ultra Balls and Full Heals, right here, no mud required."] },
+      // Wave 5b: AUNTIE MOSS moved into her house (house-fuchsia in
+      // maps4.mjs) — her dialogue names it as hers; same NPC, same lines.
     ],
     encounters: null,
     items: [],
@@ -120135,8 +120189,8 @@ const MAPS2 = {
       '=====++DD++=====',
     ]),
     warps: [
-      { x: 7, y: 9, to: { map: 'fuchsia', x: 11, y: 5 } },
-      { x: 8, y: 9, to: { map: 'fuchsia', x: 12, y: 5 } },
+      { x: 7, y: 9, to: { map: 'fuchsia', x: 13, y: 4 } },
+      { x: 8, y: 9, to: { map: 'fuchsia', x: 14, y: 4 } },
     ],
     signs: [],
     npcs: [
@@ -120173,8 +120227,8 @@ const MAPS2 = {
       '####################',
     ]),
     warps: [
-      { x: 8, y: 12, to: { map: 'fuchsia', x: 7, y: 11 } },
-      { x: 9, y: 12, to: { map: 'fuchsia', x: 8, y: 11 } },
+      { x: 8, y: 12, to: { map: 'fuchsia', x: 7, y: 12 } },
+      { x: 9, y: 12, to: { map: 'fuchsia', x: 8, y: 12 } },
     ],
     signs: [],
     npcs: [
@@ -120301,8 +120355,8 @@ const MAPS2 = {
       '######....######',
     ]),
     warps: [
-      { x: 8, y: 0, to: { map: 'fuchsia', x: 8, y: 11 } },
-      { x: 9, y: 0, to: { map: 'fuchsia', x: 9, y: 11 } },
+      { x: 8, y: 0, to: { map: 'fuchsia', x: 8, y: 12 } },
+      { x: 9, y: 0, to: { map: 'fuchsia', x: 9, y: 12 } },
       { x: 6, y: 12, to: { map: 'route20', x: 2, y: 1 } },
       { x: 7, y: 12, to: { map: 'route20', x: 2, y: 1 } },
       { x: 8, y: 12, to: { map: 'route20', x: 3, y: 1 } },
@@ -121865,7 +121919,7 @@ const MAPS3 = {
     warps: [
       { x: 2, y: 0, to: { map: 'route12', x: 8, y: 12 } },
       { x: 3, y: 0, to: { map: 'route12', x: 9, y: 12 } },
-      { x: 0, y: 5, to: { map: 'fuchsia', x: 16, y: 5 } },
+      { x: 0, y: 5, to: { map: 'fuchsia', x: 18, y: 5 } },
     ],
     signs: [
       { x: 5, y: 7, text: 'ROUTE 15 — Bramble lies west. Something in this grass copies what it touches. Almost.' },
@@ -121896,48 +121950,49 @@ const MAPS3 = {
   fuchsia: {
     id: 'fuchsia', name: 'Bramble City', music: 'viridian-theme',
     rows: rows([
-      'ÓÓÓÞÓÓÓÓŀŀÓÓÓÞÓÓÓÓ',
-      'ÓÈÈẌÈŀŀŀŀŀÈÈÈẈÈÈÈÓ',
-      'ÓÈēēēŀÈŀŀŀēXēēÈÈÈÓ',
-      'ÓÈīwīŀÈŀŀŀḆḆḆḆÈÈÈÓ',
-      'ÓÈÈŀŀŀŀŀŀŀḆVYḆÈẄÈÓ',
-      'ÓÈoŀŀŀŀŀŀŀŀŀŀŀẐoŀŀ',
-      'ÓÈoŀŀŀééééẐŀŀŀŀŀŀÓ',
-      'ÓÈẈŀŀŀAJKAoŀŀÈŀŀŀÓ',
-      'ÓẒÞŀŀŀŀŀŀŀŀŀŀŀŀŀŀÓ',
-      'ÓÈÈŀŀŀēēēēŀŀŀēôēŀÓ',
-      'ÓÈẆŀÈŀī78īŀŀẒP12ŀÓ',
-      'ÓÈÈŀŀŀŀŀŀŀŀŀÞÈŀŀŀÓ',
-      'ÓÓÓÞÓÓÓÓŀŀÓÓÓÞÓÓÓÓ'
+      'ÓÓÓÓÓÓÓÓ..ÓÓÓÓÓÓÓÓÓÓ',
+      'ÓÈÈÈÈÈÈÈ..ÈÈÈÈÈÈÈÈÈÓ',
+      'ÓÈēēēÈÈẉ..ÈûḆḆḆḆûÈÈÓ',
+      'ÓÈīwīÈÈÈ..ÈÈḆVYḆÈÈÈÓ',
+      'Ó..................Ó',
+      'Ó...................',
+      'ÓÈÈÈÈ.ééééÈ.ēôēÈÈÈÈÓ',
+      'ÓÈÈÈÈ.AJKAÈ.P12ÈÈÈÈÓ',
+      'Ó...............ẌÈÈÓ',
+      'Ó..................Ó',
+      'Ópēēē.ēēēē›.ÈēēēẍÈÈÓ',
+      'Ópīīw.ī78ī..ÈīwīÈÈÈÓ',
+      'Óp~~ûÈ.....È~~ûÈûÈÈÓ',
+      'Ó~~~~~~~..~~~~~~~~~Ó'
     ]),
     warps: [
-      { x: 11, y: 4, to: { map: 'gym-fuchsia', x: 7, y: 8 } },
-      { x: 12, y: 4, to: { map: 'gym-fuchsia', x: 8, y: 8 } },
+      { x: 13, y: 3, to: { map: 'gym-fuchsia', x: 7, y: 8 } },
+      { x: 14, y: 3, to: { map: 'gym-fuchsia', x: 8, y: 8 } },
       { x: 7, y: 7, to: { map: 'center', x: 4, y: 4 }, via: { map: 'fuchsia', x: 7, y: 8 } },
       { x: 8, y: 7, to: { map: 'center', x: 5, y: 4 }, via: { map: 'fuchsia', x: 8, y: 8 } },
-      { x: 7, y: 10, to: { map: 'safari', x: 8, y: 11 } },
-      { x: 8, y: 10, to: { map: 'safari', x: 9, y: 11 } },
+      { x: 7, y: 11, to: { map: 'safari', x: 8, y: 11 } },
+      { x: 8, y: 11, to: { map: 'safari', x: 9, y: 11 } },
       { x: 8, y: 0, to: { map: 'route16', x: 8, y: 12 } },
       { x: 9, y: 0, to: { map: 'route16', x: 9, y: 12 } },
-      { x: 17, y: 5, to: { map: 'route15', x: 1, y: 5 } },
-      { x: 8, y: 12, to: { map: 'route19', x: 8, y: 1 } },
-      { x: 9, y: 12, to: { map: 'route19', x: 9, y: 1 } },
+      { x: 19, y: 5, to: { map: 'route15', x: 1, y: 5 } },
+      { x: 8, y: 13, to: { map: 'route19', x: 8, y: 1 } },
+      { x: 9, y: 13, to: { map: 'route19', x: 9, y: 1 } },
       { x: 3, y: 3, to: { map: 'house-fuchsia', x: 4, y: 4 } },
-      { x: 14, y: 10, to: { map: 'mart', x: 5, y: 5 }, via: { map: 'fuchsia', x: 14, y: 11 } },
-      { x: 15, y: 10, to: { map: 'mart', x: 6, y: 5 }, via: { map: 'fuchsia', x: 15, y: 11 } },
+      { x: 13, y: 7, to: { map: 'mart', x: 5, y: 5 }, via: { map: 'fuchsia', x: 13, y: 8 } },
+      { x: 14, y: 7, to: { map: 'mart', x: 6, y: 5 }, via: { map: 'fuchsia', x: 14, y: 8 } },
     ],
     signs: [
       { x: 7, y: 4, text: 'BRAMBLE CITY — The Preserve City. Wild Kin roam free beyond the south gate.' },
-      { x: 8, y: 4, text: 'BRAMBLE GYM — Leader: Koga. The poisonous ninja master! Inside lies a VENOM GROUND: Poison moves hit harder and venom seeps in more easily — for Koga, and for you.' },
-      { x: 13, y: 7, text: 'BRAMBLE CITY — North: ROUTE 16 · East: ROUTE 15 · South: ROUTE 19.' },
-      { x: 4, y: 10, text: 'BRAMBLE CITY — North: ROUTE 16 · East: ROUTE 15 · South: ROUTE 19.' }
+      { x: 11, y: 4, text: 'BRAMBLE GYM — Leader: Koga. The poisonous ninja master! Inside lies a VENOM GROUND: Poison moves hit harder and venom seeps in more easily — for Koga, and for you.' },
+      { x: 17, y: 4, text: 'BRAMBLE CITY — North: ROUTE 16 · East: ROUTE 15 · South: ROUTE 19.' },
+      { x: 11, y: 11, text: 'BRAMBLE CITY — North: ROUTE 16 · East: ROUTE 15 · South: ROUTE 19.' }
     ],
     npcs: [
-      { x: 10, y: 9, name: 'PRESERVE WARDEN', art: 'ranger', skin: '#e8b888', shirt: '#324a83', pants: '#2a304a', hair: '#c0c0c0', safariGate: true,
+      { x: 10, y: 11, name: 'PRESERVE WARDEN', art: 'ranger', skin: '#e8b888', shirt: '#324a83', pants: '#2a304a', hair: '#c0c0c0', safariGate: true,
         dialogue: ["Mmh — pardon the mumbling, lost my Gold Teeth to the Bramble Preserve mud again.", "Step through the south gatehouse for the Safari, mmh. Find my teeth in there and I'll teach your Kin to push boulders like foam. Mmh!"] },
       { x: 3, y: 9, name: 'ZOO FAN', art: 'lady', skin: '#f0c8a0', shirt: '#e08a3a', pants: '#2c3049', hair: '#7a4a1a',
         dialogue: ["The zoo's NURSELING waved at me once. WAVED. I think about it every day.", "Koga's gym is full of invisible walls. Ninjas, man. Ninjas."] },
-      { x: 15, y: 11, name: 'MART CLERK', art: 'clerk', skin: '#f0c8a0', shirt: '#3a6ac0', pants: '#2a2a3a', hair: '#2a1a0a',
+      { x: 15, y: 8, name: 'MART CLERK', art: 'clerk', skin: '#f0c8a0', shirt: '#3a6ac0', pants: '#2a2a3a', hair: '#2a1a0a',
         mart: { stock: ['greatball', 'ultraball', 'hyperpotion', 'fullheal', 'revive', 'antidote'] },
         dialogue: ["Bramble Mart! Safari-goers, take note: Ultra Balls and Full Heals, right here, no mud required."] },
       // Wave 5b: AUNTIE MOSS moved into her house (house-fuchsia in
@@ -121965,8 +122020,8 @@ const MAPS3 = {
       '=====++DD++=====',
     ]),
     warps: [
-      { x: 7, y: 9, to: { map: 'fuchsia', x: 11, y: 5 } },
-      { x: 8, y: 9, to: { map: 'fuchsia', x: 12, y: 5 } },
+      { x: 7, y: 9, to: { map: 'fuchsia', x: 13, y: 4 } },
+      { x: 8, y: 9, to: { map: 'fuchsia', x: 14, y: 4 } },
     ],
     signs: [],
     npcs: [
@@ -122004,8 +122059,8 @@ const MAPS3 = {
       '####################',
     ]),
     warps: [
-      { x: 8, y: 12, to: { map: 'fuchsia', x: 7, y: 11 } },
-      { x: 9, y: 12, to: { map: 'fuchsia', x: 8, y: 11 } },
+      { x: 8, y: 12, to: { map: 'fuchsia', x: 7, y: 12 } },
+      { x: 9, y: 12, to: { map: 'fuchsia', x: 8, y: 12 } },
     ],
     signs: [],
     npcs: [
@@ -122141,8 +122196,8 @@ const MAPS3 = {
       '######....######',
     ]),
     warps: [
-      { x: 8, y: 0, to: { map: 'fuchsia', x: 8, y: 11 } },
-      { x: 9, y: 0, to: { map: 'fuchsia', x: 9, y: 11 } },
+      { x: 8, y: 0, to: { map: 'fuchsia', x: 8, y: 12 } },
+      { x: 9, y: 0, to: { map: 'fuchsia', x: 9, y: 12 } },
       { x: 6, y: 12, to: { map: 'route20', x: 2, y: 1 } },
       { x: 7, y: 12, to: { map: 'route20', x: 2, y: 1 } },
       { x: 8, y: 12, to: { map: 'route20', x: 3, y: 1 } },
