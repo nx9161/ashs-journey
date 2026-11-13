@@ -157519,6 +157519,28 @@ const SINNOH_TALES = {
     ['The coil? Oh, it is not broken — it is TUNED. Volkner rebuilt the beacon\'s array last spring and the spare picked up the new frequency like a song it already knew. It hums when the gym\'s voltage climbs, keeper. It hums loudest on battle days. Your coil is not haunted, Bly. It is a fan.'],
     ['A fan. Forty years of keeping the light, and my lamp room has been cheering for the gym the whole season. Brightshore, trainer. Even the hardware has a favourite.', 'The Beacon Coil is yours — take it before it starts humming at your battles too. If it does... let it. A little extra voltage never decided a match, but it has started a few legends.']),
 };
+// Wave S2 (quest integrity): the sinnohTale factory predates the
+// `revelation` field the other regions' tales carry — without it, the
+// Quest Log's completed-tale line rendered "Complete. undefined" for
+// all thirteen Sinnoh tales (taleStageText appends tale.revelation).
+// The denouements live here, one per tale, each drawn from that
+// tale's own closing lines — no new lore, just the missing field.
+const SINNOH_REVELATIONS = {
+  tale_sinnoh_twinleaf: 'Dawn\u2019s mother has kept the drawer all these years because beginnings are not outgrown \u2014 they are handed on, and Tam by the pond has stopped waiting for his to look bigger.',
+  tale_sinnoh_sandgem: 'The washed-up notebook was never the Professor\u2019s \u2014 its star charts are in his own teacher\u2019s hand, and the lab keeps a secret shelf for exactly the things it will not admit to treasuring.',
+  tale_sinnoh_jubilife: 'The meteor-logo people bowed to the TV station like it was already theirs \u2014 and thanks to one intern\u2019s quote with teeth, the whole city now watches its skyline back.',
+  tale_sinnoh_oreburgh: 'The lunchbox was the first foreman\u2019s wager with the mountain, sealed in coal before the gym existed \u2014 and the mountain held it for a hundred years, until the deepest digger\u2019s shift came round.',
+  tale_sinnoh_eterna: 'The statue was never only a monument \u2014 it is a sundial for a festival older than the city, and Heritage was celebrating this valley before it had streets.',
+  tale_sinnoh_hearthome: 'The tin was never stolen \u2014 it spent a week in the apron of Rosa\u2019s successor, and the scolding she feared turned out to be an inheritance.',
+  tale_sinnoh_solaceon: 'The ruins were a day-care before they were ruins \u2014 Una\u2019s grandmother\u2019s ledger is a thousand pages long, and most of them are stone.',
+  tale_sinnoh_veilstone: 'The fallen stone is warm, and dreaming, and in no hurry \u2014 a heart that has not decided to wake, kept like a garden by a priesthood of one.',
+  tale_sinnoh_floaroma: 'The meadow was never blighted \u2014 the bees were waiting for the wind-works\u2019 air to remember its directions, and a delayed spring is not a cancelled one.',
+  tale_sinnoh_pastoria: 'Lost things surface at the third reed bed when the water drops \u2014 the marsh gives back only to people it approves of, and it decided the asking itself was the approval.',
+  tale_sinnoh_celestic: 'The bell\u2019s inscription is not a prayer to the gods of time and space, but for them \u2014 a warning shaped like a blessing, rung unknowing for sixty years by its own keeper.',
+  tale_sinnoh_snowpoint: 'The lake keeps a garden of its own beneath the ice, from a summer before there were people \u2014 and once, for a hundred years, it was grateful about something.',
+  tale_sinnoh_sunnyshore: 'The spare coil was never haunted \u2014 it is tuned to the beacon\u2019s new frequency and hums loudest on battle days. In Brightshore, even the hardware has a favourite.',
+};
+for (const [taleId, revelation] of Object.entries(SINNOH_REVELATIONS)) SINNOH_TALES[taleId].revelation = revelation;
 
 const SINNOH_NPCS = [
   // Rowan, in his lab (his event is the entry scene; this is the man).
@@ -157888,7 +157910,15 @@ const TALE_NPCS = [
     dialogue: ['Off duty, I read to the museum fossils. They never heckle.'] },
   { map: 'cerulean', x: 16, y: 1, name: 'PIP', art: 'kid', ...APPEAR.kid, tale: 'tale_cerulean', role: 'culprit',
     dialogue: ['The cape is mine. The view is mine. The bell is — also around here somewhere.'] },
-  { map: 'vermilion', x: 16, y: 11, name: 'HARBORMASTER', art: 'sailor', ...APPEAR.harbor, tale: 'tale_vermilion', role: 'stage',
+  // Wave S2 (quest integrity): the HARBORMASTER stood at (16,11) — a
+  // td-vermilion TOWN DRESS tile (solid planter/signpost class), which
+  // failed the A14 placement gate and left the tale's post-departure
+  // stage actor standing inside the scenery. He now stands at (11,11),
+  // the dock's south row one tile below CAPT EASTBOUND: walkable 'Ä'
+  // town ground, unoccupied, sealing nothing (the row stays connected
+  // west through (8..10,11); (15,10) remains the captains' open
+  // passage, per the CAPT BOREA note above).
+  { map: 'vermilion', x: 11, y: 11, name: 'HARBORMASTER', art: 'sailor', ...APPEAR.harbor, tale: 'tale_vermilion', role: 'stage',
     dialogue: ['Every crate, every rope, every lost page — the harbor keeps what the sea gives back.'] },
   { map: 'lavender', x: 16, y: 5, name: 'ELDER BRAM', art: 'elder', ...APPEAR.elder, tale: 'tale_lavender', role: 'stage',
     dialogue: ['I remember every name the tower forgot. Sit; an old man likes an audience.'] },
