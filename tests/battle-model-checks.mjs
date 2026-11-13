@@ -102,11 +102,11 @@ const driver = `
       if (opts.afterPrompt && !snapped && b.state === 'command' && promptsInLog() > 0) { snapped = true; opts.afterPrompt(b); }
       if (ui.menuOpen && ui.menu) {
         const m = ui.menu;
-        if (m.title === 'Will you change Pokemon?') {
+        if (m.title === 'Will you change Kin?') { // W1 resync: SHIFT prompt renamed in the KIN branding sweep (battle.mjs:1834)
           const idx = m.items.findIndex((it) => it.value === (opts.shift === 'yes' ? 'yes' : 'no'));
           ui.debugChoose(idx >= 0 ? idx : 0); game.loop.stepTicks(2); continue;
         }
-        if (m.title === 'Choose a Pokemon') { // Shift voluntary party menu
+        if (m.title === 'Choose a Kin') { // Shift voluntary party menu (W1 resync: title renamed, battle.mjs:1855)
           const idx = m.items.findIndex((it) => !it.disabled && typeof it.value === 'number' && it.value >= 0);
           ui.debugChoose(idx); game.loop.stepTicks(2); continue;
         }
@@ -118,7 +118,7 @@ const driver = `
           const idx = m.items.findIndex((it) => !it.disabled && typeof it.value === 'number' && it.value >= 0);
           ui.debugChoose(idx >= 0 ? idx : 0); game.loop.stepTicks(2); continue;
         }
-        if (m.title === 'Choose next Pokemon') {
+        if (m.title === 'Choose next Kin') { // W1 resync: faint menu title renamed (battle.mjs:804)
           const idx = m.items.findIndex((it) => !it.disabled);
           ui.debugChoose(idx); game.loop.stepTicks(2); continue;
         }
@@ -219,7 +219,7 @@ const driver = `
     let n = 0; while (!b.rt && n++ < 600) { game.loop.stepTicks(2); if (b.msgOpen) pressA(); }
     b.ally.hp = 0;
     b.rtCheckFaints();
-    out.rtForcedMenuOpen = ui.menuOpen === true && ui.menu && ui.menu.title === 'Choose next Pokemon';
+    out.rtForcedMenuOpen = ui.menuOpen === true && ui.menu && ui.menu.title === 'Choose next Kin'; // W1 resync: faint menu title renamed (battle.mjs:804)
     out.rtForcedRowEnabled = !!(ui.menu && ui.menu.items[ui.menu.idx] && !ui.menu.items[ui.menu.idx].disabled);
     if (ui.menuOpen) ui.cancelMenu();
     game.scenes.pop();
@@ -529,10 +529,12 @@ const p1Driver = `
     game.scenes.pop();
   }
 
-  // (E2) Voluntary Viridian visit round-trips to the door-front (7,6);
+  // (E2) Voluntary Viridian visit round-trips to the door-front (7,8);
   // then a route blackout (systems path) respawns and exits VIRIDIAN.
+  // W1 resync: rebuilt Fernmere's Center doors are (6,7)/(7,7) with via
+  // (6,8)/(7,8) in maps3 — the pre-rebuild door (7,5) no longer exists.
   {
-    ow.loadMap('viridian'); stepOn(ow, 7, 5); // step on the Center door
+    ow.loadMap('viridian'); stepOn(ow, 7, 7); // step on the Center door
     out.e2Entered = ow.mapId; out.e2Anchor = st.story.lastCenter;
     exitCenter(ow);
     out.e2VoluntaryExit = { map: ow.mapId, x: ow.player.tx, y: ow.player.ty };
@@ -544,9 +546,12 @@ const p1Driver = `
   }
 
   // (E3) Fuchsia + Cinnabar exits re-verified (the register's old
-  // roof-tile quirk towns): door (7,7) in, exit lands (town, 7, 8).
-  for (const town of ['fuchsia', 'cinnabar']) {
-    ow.loadMap(town); stepOn(ow, 7, 7);
+  // roof-tile quirk towns): step on the town's Center door, exit lands
+  // on its door-front. W1 resync: Caldera's Center doors moved to
+  // (3,10)/(4,10) via (3,11)/(4,11) in the T11 rebuild (maps3 cinnabar);
+  // Fuchsia's (7,7) via (7,8) is unchanged.
+  for (const [town, dx, dy] of [['fuchsia', 7, 7], ['cinnabar', 3, 10]]) {
+    ow.loadMap(town); stepOn(ow, dx, dy);
     const inC = ow.mapId;
     exitCenter(ow);
     out['e3_' + town] = { inC, map: ow.mapId, x: ow.player.tx, y: ow.player.ty };
@@ -575,19 +580,23 @@ const p1Driver = `
   try { eval(gameJs + p1Driver); } finally { console.log = origLog4; }
   const r = JSON.parse((logs4.find((l) => l.startsWith('P1-RESULT')) || 'P1-RESULT {}').slice(10));
   ok('E01 P1 owner scenario: defeat on Route 1 blacks out to the Center', r.e1InCenter === 'center', JSON.stringify(r));
-  ok('E02 P1 owner scenario: exiting lands in PALLET (7,9) — never back on route1',
-    r.e1Exit && r.e1Exit.map === 'pallet' && r.e1Exit.x === 7 && r.e1Exit.y === 9, JSON.stringify(r.e1Exit));
+  // W1 resync: E02 expects the current centerExit() fallback (pallet 6,9 —
+  // moved by f2c13cd to match rebuilt Dawnwick); E03–E05 expect Fernmere's
+  // rebuilt door-front (7,8); E06/E07 expect Caldera's rebuilt door-front
+  // (3,11). All values read from maps3 / overworld.mjs, game untouched.
+  ok('E02 P1 owner scenario: exiting lands in PALLET (6,9) — never back on route1',
+    r.e1Exit && r.e1Exit.map === 'pallet' && r.e1Exit.x === 6 && r.e1Exit.y === 9, JSON.stringify(r.e1Exit));
   ok('E03 P1 voluntary: Viridian Center door enters the Center and persists the door-front anchor',
-    r.e2Entered === 'center' && r.e2Anchor && r.e2Anchor.map === 'viridian' && r.e2Anchor.x === 7 && r.e2Anchor.y === 6, JSON.stringify(r));
-  ok('E04 P1 voluntary: exit returns to Viridian door-front (7,6)',
-    r.e2VoluntaryExit && r.e2VoluntaryExit.map === 'viridian' && r.e2VoluntaryExit.x === 7 && r.e2VoluntaryExit.y === 6, JSON.stringify(r.e2VoluntaryExit));
+    r.e2Entered === 'center' && r.e2Anchor && r.e2Anchor.map === 'viridian' && r.e2Anchor.x === 7 && r.e2Anchor.y === 8, JSON.stringify(r));
+  ok('E04 P1 voluntary: exit returns to Viridian door-front (7,8)',
+    r.e2VoluntaryExit && r.e2VoluntaryExit.map === 'viridian' && r.e2VoluntaryExit.x === 7 && r.e2VoluntaryExit.y === 8, JSON.stringify(r.e2VoluntaryExit));
   ok('E05 P1 blackout after visiting Viridian: exit lands Viridian door-front, not the route',
-    r.e2BlackoutInCenter === 'center' && r.e2BlackoutExit && r.e2BlackoutExit.map === 'viridian' && r.e2BlackoutExit.x === 7 && r.e2BlackoutExit.y === 6, JSON.stringify(r));
-  ok('E06 P1 Fuchsia + Cinnabar exits land on their door-fronts (7,8)',
+    r.e2BlackoutInCenter === 'center' && r.e2BlackoutExit && r.e2BlackoutExit.map === 'viridian' && r.e2BlackoutExit.x === 7 && r.e2BlackoutExit.y === 8, JSON.stringify(r));
+  ok('E06 P1 Fuchsia + Cinnabar exits land on their door-fronts (Fuchsia 7,8 · Cinnabar 3,11)',
     r.e3_fuchsia && r.e3_fuchsia.map === 'fuchsia' && r.e3_fuchsia.x === 7 && r.e3_fuchsia.y === 8
-    && r.e3_cinnabar && r.e3_cinnabar.map === 'cinnabar' && r.e3_cinnabar.x === 7 && r.e3_cinnabar.y === 8, JSON.stringify(r));
-  ok('E07 P1 reload inside a Center: persisted anchor alone exits to the last-visited door-front (Cinnabar 7,8)',
-    r.e4TicketGone === true && r.e4ReloadExit && r.e4ReloadExit.map === 'cinnabar' && r.e4ReloadExit.x === 7 && r.e4ReloadExit.y === 8, JSON.stringify(r));
+    && r.e3_cinnabar && r.e3_cinnabar.map === 'cinnabar' && r.e3_cinnabar.x === 3 && r.e3_cinnabar.y === 11, JSON.stringify(r));
+  ok('E07 P1 reload inside a Center: persisted anchor alone exits to the last-visited door-front (Cinnabar 3,11)',
+    r.e4TicketGone === true && r.e4ReloadExit && r.e4ReloadExit.map === 'cinnabar' && r.e4ReloadExit.x === 3 && r.e4ReloadExit.y === 11, JSON.stringify(r));
 }
 // (E08) save-fill + server validator treat story.lastCenter soundly
 {
