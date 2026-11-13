@@ -42,7 +42,46 @@ const DECOR_KINDS = ['lamp', 'fence', 'flowerbed', 'sign', 'flower'];
 const FREESTANDING = (k) => k === 'lamp' || k === 'signpost' || k.startsWith('td-') ||
   ['flower', 'flowerbed', 'barrel', 'crates', 'sandcrate', 'well', 'bench', 'statue', 'pottedtree', 'haycart'].includes(k);
 const ROUTE_FURNITURE = (k) => ['lamp', 'signpost', 'barrel', 'crates', 'sandcrate', 'well', 'bench', 'statue', 'pottedtree', 'haycart'].includes(k);
-const BUILD = (k) => k.startsWith('roof') || k.startsWith('wall') || k.startsWith('door') || k.startsWith('th-') || k.startsWith('tr-') || k.startsWith('tl-') || k.startsWith('tw-') || ['house', 'gymwall', 'gymdoor', 'centerdoor'].includes(k);
+// BUILD: a building's MASS. Beyond the roof/wall/door families, the kit
+// authors structural building parts under their own kinds — gym roof
+// bands (gym-rock, gym-volt) and the museum/lab display + column parts
+// (fossildisplay, dresswindow, ancientpillar). Before W4 the classifier
+// missed them, so one visual building fragmented into several
+// "footprints" whose parts filled each other's apron rings (Flintridge:
+// the Mart read as two footprints merged at gap 0, the museum/gym
+// complex at 0.32 ring clearance). They are mass, not neighbours.
+// The roof SIGN faces (sign-gym, sign-lab, sign-center, sign-mart) are
+// deliberately NOT mass: a sign is a face hung on a building, and
+// counting it as structure would credit a floating sign as a bridge —
+// Craterlake's Center sign sits in its building's ring and would lift
+// that ring 0.588 -> 0.625 without a single tile moving (W4 probe).
+const BUILD = (k) => k.startsWith('roof') || k.startsWith('wall') || k.startsWith('door') || k.startsWith('th-') || k.startsWith('tr-') || k.startsWith('tl-') || k.startsWith('tw-') || ['house', 'gymwall', 'gymdoor', 'centerdoor', 'gym-rock', 'gym-volt', 'fossildisplay', 'dresswindow', 'ancientpillar'].includes(k);
+
+// STREET-MATERIAL REGISTRY (W4, 2026-11-13). The network tier counts
+// the universal street materials (path, psand*, tg2-*). A town whose
+// CLEAN build record authors a dressed material AS its street fabric
+// registers that material here, per town: vermilion — the T6 build
+// record seats Arcport's gym on the boardwalk dock street and keeps
+// the captains' row on it; boardwalk is the harbour's street material
+// (the desire-paths fabric tier already counts it via DRESSED_KINDS).
+// Without the registration the audit was blind to the dock street:
+// gym step-offs 5/7, connectivity 72/110 — while the walkable graph
+// itself connects 177/177 (T6 CHECKLIST residual, closed by W4).
+// NOT registered, deliberately: fortree / slateport / pacifidlog
+// boardwalk is un-rebuilt legacy state whose connectivity belongs to
+// their rebuild waves (they register, and mark their junctions, when
+// they are brought to the CLEAN standard); sunnyshore's harbourstone
+// is decorative inlay speckle, not a street, and is not registrable
+// as one. tests/placement-gates-checks.mjs pins this registry's exact
+// contents and every unregistered town's baseline gate tuple, so the
+// registration can neither leak nor silently widen.
+export const STREET_REGISTRY = { vermilion: ['boardwalk'] };
+export function tiersFor(id, tiers) {
+  const extra = STREET_REGISTRY[id];
+  if (!extra || !extra.length) return tiers;
+  const isNetwork = (ch) => { const k = tiers.kind(ch); return tiers.isNetwork(ch) || extra.includes(k); };
+  return { ...tiers, isNetwork };
+}
 const TREE = (k) => k.startsWith('tc-') || k === 'tree';
 
 export async function scoreTown(id, MAPS, WALKABLE, tiers) {
@@ -238,7 +277,15 @@ export async function scoreTown(id, MAPS, WALKABLE, tiers) {
   for (const fp of footprints) {
     const ring = new Set();
     for (const [x, y] of fp) for (let dy = -1; dy <= 1; dy++) for (let dx = -1; dx <= 1; dx++) { const nx = x + dx, ny = y + dy;
-      if (nx < 0 || ny < 0 || nx >= W || ny >= H) continue; if (!bcomp.has(ny * W + nx)) ring.add(ny * W + nx); }
+      if (nx < 0 || ny < 0 || nx >= W || ny >= H) continue;
+      // The town frame (cavewall — the cliff/rock face the settlement
+      // is built against) is the boundary of the playable town, not a
+      // crowding neighbour: it leaves the ring exactly like an
+      // out-of-bounds cell (W4). Flintridge's museum/gym complex
+      // stands at the cliff foot by design; counting the cliff face
+      // against its clearance measured the frame, not the building.
+      if (kind(cell(nx, ny)) === 'cavewall') continue;
+      if (!bcomp.has(ny * W + nx)) ring.add(ny * W + nx); }
     let clear = 0; for (const k of ring) if (WALKABLE.has(cell(k % W, (k / W) | 0))) clear++;
     const frac = ring.size ? clear / ring.size : 1;
     if (frac < r.apronMin) r.apronMin = +frac.toFixed(3);
@@ -300,7 +347,7 @@ if (isMain) {
   const out = [];
   for (const id of ids) {
     if (!MAPS[id]) continue;
-    const r = await scoreTown(id, MAPS, WALKABLE, tiers);
+    const r = await scoreTown(id, MAPS, WALKABLE, tiersFor(id, tiers));
     let gate = null;
     if (args.includes('--gates')) {
       const clarity = analyzeMap(id, MAPS[id], { WALKABLE, tiers, townSet: towns });

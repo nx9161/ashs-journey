@@ -37,6 +37,7 @@ const GROUPS = {
     T('name-registry-checks.mjs'),
     T('narrative-db-checks.mjs'), T('orange-climax-checks.mjs'),
     T('orange-story-checks.mjs'), T('partner-guarantee-checks.mjs'),
+    T('placement-gates-checks.mjs'),
     T('quest-integrity-checks.mjs'), T('seasons-checks.mjs'),
     T('sinnoh-checks.mjs'), T('sinnoh-legendary-checks.mjs'),
     T('sinnoh-story-checks.mjs'), T('title-guard-checks.mjs'),
