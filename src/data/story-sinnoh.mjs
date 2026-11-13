@@ -1065,9 +1065,9 @@ export const SINNOH_NPCS = [
   // Barry, in Revelry, at speed.
   { map: 'jubilife', name: 'BARRY', x: 13, y: 10, dir: 'left', art: 'kid', skin: '#f0c8a0', shirt: '#e8a818', pants: '#2c3049', hair: '#2a1a0a', sinnoh: 'barry', dialogue: ['No time! No time at all! The gym road is THAT way and I am already behind myself!'] },
   // The commanders, holding their floors (their battles are events).
-  { map: 'valley-windworks', name: 'COMMANDER MARS', x: 8, y: 3, dir: 'down', art: 'rocket', skin: '#f0c8a0', shirt: '#c83a3a', pants: '#2a2a3a', hair: '#8a2a4a', sinnoh: 'mars', dialogue: ['The wind is ours until it finishes singing, darling.'] },
-  { map: 'galactic-eterna', name: 'COMMANDER JUPITER', x: 8, y: 3, dir: 'down', art: 'rocket', skin: '#f0c8a0', shirt: '#c83a3a', pants: '#2a2a3a', hair: '#8a2a4a', sinnoh: 'jupiter', dialogue: ['Everything in these rooms is already counted, child. Including you.'] },
-  { map: 'galactic-hq', name: 'COMMANDER SATURN', x: 9, y: 3, dir: 'down', art: 'rocket', skin: '#e8b888', shirt: '#3a3a4a', pants: '#2a2a3a', hair: '#2a2a4a', sinnoh: 'saturn', dialogue: ['This facility is not a destination, trainer. It is a door, and doors here open inward only.'] },
+  { map: 'valley-windworks', name: 'COMMANDER MARS', x: 8, y: 3, dir: 'down', art: 'cmd-windworks', skin: '#f0c8a0', shirt: '#c83a3a', pants: '#2a2a3a', hair: '#8a2a4a', sinnoh: 'mars', dialogue: ['The wind is ours until it finishes singing, darling.'] },
+  { map: 'galactic-eterna', name: 'COMMANDER JUPITER', x: 8, y: 3, dir: 'down', art: 'cmd-eterna', skin: '#f0c8a0', shirt: '#c83a3a', pants: '#2a2a3a', hair: '#8a2a4a', sinnoh: 'jupiter', dialogue: ['Everything in these rooms is already counted, child. Including you.'] },
+  { map: 'galactic-hq', name: 'COMMANDER SATURN', x: 9, y: 3, dir: 'down', art: 'cmd-hq', skin: '#e8b888', shirt: '#3a3a4a', pants: '#2a2a3a', hair: '#2a2a4a', sinnoh: 'saturn', dialogue: ['This facility is not a destination, trainer. It is a door, and doors here open inward only.'] },
   // Paul, distributed on the spine.
   { map: 'eterna', name: 'PAUL', x: 19, y: 10, dir: 'down', art: 'rival', skin: '#f0c8a0', shirt: '#4a3a6a', pants: '#2a2a3a', hair: '#3a2a4a', sinnoh: 'paul_eterna', dialogue: ['Still walking. Noted.'] },
   { map: 'hearthome', name: 'PAUL', x: 20, y: 9, dir: 'down', art: 'rival', skin: '#f0c8a0', shirt: '#4a3a6a', pants: '#2a2a3a', hair: '#3a2a4a', sinnoh: 'paul_hearthome', dialogue: ['...'] },
@@ -1078,10 +1078,10 @@ export const SINNOH_NPCS = [
   // she is this stage's one authored addition there).
   { map: 'contest-hearthome', name: 'DAWN', x: 5, y: 7, dir: 'right', art: 'lass', skin: '#f0c8a0', shirt: '#3a6ac8', pants: '#2a2a3a', hair: '#3a5a8a', sinnoh: 'dawn_contest', dialogue: ['Deep breath. Stage lights. Okay. OKAY. Watch me, {player}.'] },
   // The leaders, at their gyms' hearts (Maris's (7,2) idiom).
-  { map: 'gym-oreburgh', name: 'ROARK', x: 7, y: 2, dir: 'down', art: 'gym1', skin: '#e8b888', shirt: '#50368e', pants: '#2a2a3a', hair: '#5a3a2a', sinnoh: 'roark', dialogue: ['Welcome to Coalseam Gym. Records are strata, trainer — show me the present tense.'] },
-  { map: 'gym-eterna', name: 'GARDENIA', x: 7, y: 2, dir: 'down', art: 'gym2', skin: '#f0c8a0', shirt: '#324a83', pants: '#2a2a3a', hair: '#2a4a2a', sinnoh: 'gardenia', dialogue: ['Everything in this gym grows, challenger, including the difficulty.'] },
-  { map: 'gym-hearthome', name: 'FANTINA', x: 7, y: 2, dir: 'down', art: 'gym3', skin: '#f0c8a0', shirt: '#6a3a8a', pants: '#2a2a3a', hair: '#c0a0d8', sinnoh: 'fantina', dialogue: ['A battle is an appeal performed at speed, darling. Show me your grace.'] },
-  { map: 'gym-veilstone', name: 'MAYLENE', x: 7, y: 2, dir: 'down', art: 'gym4', skin: '#f0c8a0', shirt: '#c85a3a', pants: '#2a2a3a', hair: '#8a3a5a', sinnoh: 'maylene', dialogue: ['No speeches in this gym. Stance up.'] },
+  { map: 'gym-oreburgh', name: 'ROARK', x: 7, y: 2, dir: 'down', art: 'lead-oreburgh', skin: '#e8b888', shirt: '#50368e', pants: '#2a2a3a', hair: '#5a3a2a', sinnoh: 'roark', dialogue: ['Welcome to Coalseam Gym. Records are strata, trainer — show me the present tense.'] },
+  { map: 'gym-eterna', name: 'GARDENIA', x: 7, y: 2, dir: 'down', art: 'lead-eterna', skin: '#f0c8a0', shirt: '#324a83', pants: '#2a2a3a', hair: '#2a4a2a', sinnoh: 'gardenia', dialogue: ['Everything in this gym grows, challenger, including the difficulty.'] },
+  { map: 'gym-hearthome', name: 'FANTINA', x: 7, y: 2, dir: 'down', art: 'lead-hearthome', skin: '#f0c8a0', shirt: '#6a3a8a', pants: '#2a2a3a', hair: '#c0a0d8', sinnoh: 'fantina', dialogue: ['A battle is an appeal performed at speed, darling. Show me your grace.'] },
+  { map: 'gym-veilstone', name: 'MAYLENE', x: 7, y: 2, dir: 'down', art: 'lead-veilstone', skin: '#f0c8a0', shirt: '#c85a3a', pants: '#2a2a3a', hair: '#8a3a5a', sinnoh: 'maylene', dialogue: ['No speeches in this gym. Stance up.'] },
   // Gym rosters (base trainer path: `trainer:` + beaten-flag dialogue).
   { map: 'gym-oreburgh', name: 'MINER COLE', x: 4, y: 5, dir: 'right', art: 'hiker', skin: '#e8b888', shirt: '#833732', pants: '#2c3049', hair: '#3a2a1a', trainer: 'roark_miner1', dialogue: ['Stubborn met stubborn. Roark is at the back, past the seam.'] },
   { map: 'gym-oreburgh', name: 'MINER FENN', x: 11, y: 5, dir: 'left', art: 'hiker', skin: '#e8b888', shirt: '#833732', pants: '#2c3049', hair: '#3a2a1a', trainer: 'roark_miner2', dialogue: ['The museum upstairs sells my fossils now. Fame is a drafty thing.'] },
@@ -1093,10 +1093,10 @@ export const SINNOH_NPCS = [
   { map: 'gym-veilstone', name: 'BLACK BELT RUE', x: 11, y: 5, dir: 'left', art: 'blackbelt', skin: '#e8b888', shirt: '#e8e8e8', pants: '#2a2a3a', hair: '#1a1a1a', trainer: 'maylene_belt2', dialogue: ['Two years of mornings. Her AURAJACK has been listening. It always is.'] },
   // ---- Stage S5b actors ----
   // The second-half leaders, at their gyms' hearts ((7,2) idiom).
-  { map: 'gym-pastoria', name: 'CRASHER WAKE', x: 7, y: 2, dir: 'down', art: 'gym1', skin: '#e8b888', shirt: '#3a6ac8', pants: '#2a2a3a', hair: '#8a2a1a', sinnoh: 'wake', dialogue: ['CRASHER WAKE! The ring is ready when you are, challenger!'] },
-  { map: 'gym-canalave', name: 'BYRON', x: 7, y: 2, dir: 'down', art: 'gym2', skin: '#e8b888', shirt: '#5a5a6a', pants: '#2a2a3a', hair: '#3a3a3a', sinnoh: 'byron', dialogue: ['Steel does not argue, challenger. It simply does not break.'] },
-  { map: 'gym-snowpoint', name: 'CANDICE', x: 7, y: 2, dir: 'down', art: 'gym3', skin: '#f0c8a0', shirt: '#e8e8f0', pants: '#2a2a3a', hair: '#1a1a2a', sinnoh: 'candice', dialogue: ['Focus beats temperature, challenger. Show me yours.'] },
-  { map: 'gym-sunnyshore', name: 'VOLKNER', x: 7, y: 2, dir: 'down', art: 'gym4', skin: '#f0c8a0', shirt: '#e8c832', pants: '#2a2a3a', hair: '#d8b84a', sinnoh: 'volkner', dialogue: ['Make it cost, challenger.'] },
+  { map: 'gym-pastoria', name: 'CRASHER WAKE', x: 7, y: 2, dir: 'down', art: 'lead-pastoria', skin: '#e8b888', shirt: '#3a6ac8', pants: '#2a2a3a', hair: '#8a2a1a', sinnoh: 'wake', dialogue: ['CRASHER WAKE! The ring is ready when you are, challenger!'] },
+  { map: 'gym-canalave', name: 'BYRON', x: 7, y: 2, dir: 'down', art: 'lead-canalave', skin: '#e8b888', shirt: '#5a5a6a', pants: '#2a2a3a', hair: '#3a3a3a', sinnoh: 'byron', dialogue: ['Steel does not argue, challenger. It simply does not break.'] },
+  { map: 'gym-snowpoint', name: 'CANDICE', x: 7, y: 2, dir: 'down', art: 'lead-snowpoint', skin: '#f0c8a0', shirt: '#e8e8f0', pants: '#2a2a3a', hair: '#1a1a2a', sinnoh: 'candice', dialogue: ['Focus beats temperature, challenger. Show me yours.'] },
+  { map: 'gym-sunnyshore', name: 'VOLKNER', x: 7, y: 2, dir: 'down', art: 'lead-sunnyshore', skin: '#f0c8a0', shirt: '#e8c832', pants: '#2a2a3a', hair: '#d8b84a', sinnoh: 'volkner', dialogue: ['Make it cost, challenger.'] },
   // Gym rosters, second half (base trainer path).
   { map: 'gym-pastoria', name: 'FISHER TAMSIN', x: 4, y: 5, dir: 'right', art: 'fisher', skin: '#e8b888', shirt: '#324a83', pants: '#2c3049', hair: '#3a2a1a', trainer: 'wake_fisher1', dialogue: ['Opinions overruled. The big ring is his, at the back.'] },
   { map: 'gym-pastoria', name: 'FISHER BOGUE', x: 11, y: 5, dir: 'left', art: 'fisher', skin: '#e8b888', shirt: '#324a83', pants: '#2c3049', hair: '#5a4a3a', trainer: 'wake_fisher2', dialogue: ['Wake is waiting, and Wake does not do patience at all.'] },
