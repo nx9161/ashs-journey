@@ -395,8 +395,8 @@ export const MAPS4 = {
       '<<<<<<<<<<',
     ],
     warps: [
-      { x: 4, y: 5, to: { map: 'indigo', x: 3, y: 4 } },
-      { x: 5, y: 5, to: { map: 'indigo', x: 3, y: 4 } },
+      { x: 4, y: 5, to: { map: 'indigo', x: 3, y: 14 } },
+      { x: 5, y: 5, to: { map: 'indigo', x: 3, y: 14 } },
     ],
     signs: [],
     npcs: [],
