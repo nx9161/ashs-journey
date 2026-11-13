@@ -18,11 +18,18 @@ body{font-family:var(--font);-webkit-user-select:none;user-select:none;-webkit-t
    layout at every size. Landscape dissolves the band into grid flanks. */
 #screenwrap{flex:1 1 auto;width:100%;min-height:0;min-width:0;display:flex;align-items:center;justify-content:center}
 #ctlband{width:100%;padding:10px 12px calc(10px + env(safe-area-inset-bottom,0px))}
+/* UI v2.6 (Wave CAM): #hudband — the reserved in-flow HUD band above
+   #screenwrap. The HUD chips column, quick-strip and mood pip mount here
+   (ui.mjs), in page flow, so no HUD element can ever overlap the 16x16
+   canvas — the same structural trick v2.5 used for the touch pad below.
+   On desktop ui.mjs width-syncs the band to the canvas box. */
+#hudband{width:100%;flex:0 0 auto;display:flex;align-items:flex-start;gap:8px;padding:8px 10px 2px}
 body.desktop #ctlband{display:none}
 body.desktop.showtouch #ctlband{display:block}
 @media (pointer:coarse){body.desktop #ctlband{display:block}}
-body.landscape #stage{display:grid;grid-template-columns:auto 1fr auto;grid-template-rows:1fr auto;align-items:stretch;justify-content:stretch;column-gap:20px;padding-left:max(10px,env(safe-area-inset-left,0px));padding-right:max(10px,env(safe-area-inset-right,0px));padding-top:env(safe-area-inset-top,0px)}
-body.landscape #screenwrap{grid-column:2;grid-row:1/3;width:auto}
+body.landscape #stage{display:grid;grid-template-columns:auto 1fr auto;grid-template-rows:auto 1fr auto;align-items:stretch;justify-content:stretch;column-gap:20px;padding-left:max(10px,env(safe-area-inset-left,0px));padding-right:max(10px,env(safe-area-inset-right,0px));padding-top:env(safe-area-inset-top,0px)}
+body.landscape #hudband{grid-column:2;grid-row:1;width:auto}
+body.landscape #screenwrap{grid-column:2;grid-row:2/4;width:auto}
 body.landscape #ctlband{display:contents}
 #game{image-rendering:pixelated;background:#000;outline:2px solid #8d9bbf;box-shadow:0 4px 18px rgba(0,0,0,.35)}
 #ui{position:fixed;inset:0;pointer-events:none}
@@ -229,9 +236,9 @@ body.flip .controls{flex-direction:row-reverse}
 .sysbtns{position:relative;width:100%;display:flex;gap:8px;justify-content:center;pointer-events:auto}
 .sysbtn{background:#26304d;color:#dfe7f5;border:2px solid #8d9bbf;border-radius:14px;font-family:var(--font);font-size:14px;padding:10px 14px;min-height:48px;pointer-events:auto}
 body.landscape .controls{display:contents;opacity:1}
-body.landscape .dpad{grid-column:1;grid-row:1/3;align-self:center;opacity:var(--ctlop,1)}
-body.landscape .ab{grid-column:3;grid-row:1;align-self:center;opacity:var(--ctlop,1)}
-body.landscape .sysbtns{grid-column:3;grid-row:2;width:auto;align-self:start;opacity:var(--ctlop,1)}
+body.landscape .dpad{grid-column:1;grid-row:1/4;align-self:center;opacity:var(--ctlop,1)}
+body.landscape .ab{grid-column:3;grid-row:2;align-self:center;opacity:var(--ctlop,1)}
+body.landscape .sysbtns{grid-column:3;grid-row:3;width:auto;align-self:start;opacity:var(--ctlop,1)}
 body.flip.landscape .dpad{grid-column:3}
 body.flip.landscape .ab{grid-column:1}
 body.flip.landscape .sysbtns{grid-column:1}
@@ -361,6 +368,18 @@ body.landscape .moodpip{display:none}
 /* UI v2.5: the landscape right-edge rail is retired — it rendered ON the
    canvas. Landscape now uses the portrait form (in-frame, top-right,
    horizontal), inside the frame bounds and clear of the dialogue zone. */
+/* UI v2.6 (Wave CAM): band context — inside #hudband the chips column,
+   quick-strip and mood pip are in-flow flex items, not frame overlays,
+   so their base top/left/right anchors are inert. The chips column
+   pushes the strip + pip to the band's right edge via margin-right:auto.
+   .nohud/.inbattle live on the #ui root (not a band ancestor), so
+   ui.mjs mirrors both classes onto the band and these rules hide the
+   HUD in the band exactly as the frame rules hide it in-frame. */
+#hudband .hudchips{position:static;max-width:44%;margin-right:auto}
+#hudband .hudstrip{position:static}
+#hudband .moodpip{position:static;flex:0 0 auto}
+#hudband.nohud .hudchips,#hudband.nohud .hudstrip{display:none}
+#hudband.inbattle .hudchips,#hudband.inbattle .hudstrip{display:none}
 /* desktop keyboard-hint card — Platinum mini-frame */
 .hintcard{position:absolute;left:50%;transform:translateX(-50%);bottom:8px;display:flex;align-items:center;gap:10px;background-color:var(--paper);background-image:var(--rivets);border:2px solid var(--frame);outline:2px solid var(--frame2);outline-offset:-5px;border-radius:3px;color:var(--ink);font-family:var(--font);font-size:16px;font-weight:700;padding:8px 8px 8px 16px;pointer-events:auto;z-index:25;max-width:92vw;box-shadow:0 4px 18px rgba(0,0,0,.35);-webkit-text-stroke:.8px currentColor;letter-spacing:-.3px}
 .hintcard-x{background:linear-gradient(#4a7dd0,#2a4d9c);color:#fff;border:2px solid var(--frame);border-radius:6px;font-size:14px;font-weight:bold;font-family:inherit;padding:8px 12px;min-height:48px;cursor:pointer;white-space:nowrap}
@@ -432,7 +451,7 @@ body.desktop.showtouch .controls{display:flex}
 </style>
 </head>
 <body>
-<div id="stage"><div id="screenwrap"><canvas id="game"></canvas></div><div id="ctlband"></div></div>
+<div id="stage"><div id="hudband"></div><div id="screenwrap"><canvas id="game"></canvas></div><div id="ctlband"></div></div>
 <div id="ui"></div>
 <script>
 
@@ -109617,7 +109636,7 @@ function materializeArt(id) {
   // Kit entries (Gassasin CC-BY tileset/character, Phase 1 2026-11-11)
   // live in their own generated registry; they are plain entries (no
   // delta chains), resolved here so artCanvas — and with it the swap
-  // and seasonal-grade machinery — treats them identically to ART.
+  // machinery — treats them identically to ART.
   const a = ART[id] || KIT_ART[id];
   if (!a) return null;
   if (!a.deltas && !a.shiftY) return a;
@@ -110422,39 +110441,25 @@ function pickVariant(arr, x, y, salt) {
 // agree on it, so it lives in exactly one place.
 function isTallGrass(x, y) { return hashTile(x, y, 11) < 0.78; }
 
-function buildArtTileCache(doc, seasonSwapFor, seasonKitSwapFor) {
+function buildArtTileCache(doc) {
   // kind -> canvas (16x16). 'water' -> [water-1..3] animated frames.
   // 'void' stays a solid fill (no art). Kinds without ART fall back to paintTile.
-  // Season grade (Black 2 imposition, 2026-11-11): when seasonSwapFor is
-  // supplied (main.mjs passes seasons.mjs's), vegetation tile art —
-  // grass / tall grass / flowers / trees / bush / tropgrass — is
-  // rasterized with its greens re-graded for the current season. Every
-  // other tile keeps its authored palette exactly.
-  const VEG_ID = /^tile-(grass|tallgrass|flower|tree|bush|tropgrass|grassground)/;
-  const swapFor = (id) => {
-    if (!seasonSwapFor || !VEG_ID.test(id)) return undefined;
-    const a = materializeArt(id);
-    if (!a || !a.pal) return undefined;
-    const sw = seasonSwapFor(a.pal);
-    return sw && Object.keys(sw).length ? sw : undefined;
-  };
+  // Fixed palette (Wave SZ, owner order 2026-11-12 — seasons removed):
+  // every tile rasterizes with its authored palette exactly, on every
+  // date. There is no seasonal grade; tests/seasons-checks.mjs guards it.
   const cache = {};
   for (const kind of Object.keys(TILE_ART)) {
-    const cv = artCanvas(doc, TILE_ART[kind], 1, false, swapFor(TILE_ART[kind]));
+    const cv = artCanvas(doc, TILE_ART[kind], 1, false);
     if (cv) { cache[kind] = cv; continue; }
     const fb = doc.createElement('canvas');
     fb.width = 16; fb.height = 16;
     paintTile(fb.getContext('2d'), kind, 0, 0);
     cache[kind] = fb;
   }
-  const ids = (list) => list.map((id) => artCanvas(doc, id, 1, false, swapFor(id))).filter(Boolean);
+  const ids = (list) => list.map((id) => artCanvas(doc, id, 1, false)).filter(Boolean);
   // ---- Gassasin kit towns (Phase 1: pallet; Wave A: Arden + route1) ----
   // Kit canvases for opted-in maps, keyed cache.kitTowns[mapId] and
   // consumed by resolveTileLayers' kit branch (docs/THIRD-PARTY-ART.md).
-  // Vegetation tiles pass through the KIT seasonal grade (seasons.mjs
-  // seasonalSwapForKit, fed by main.mjs): the shared grade's Autumn
-  // overshoot on the kit's deep greens is dampened back into our amber
-  // family there; roofs, logs, dirt and doors keep authored colors.
   //
   // PER-TOWN VARIANTS (B2-G9 anti-repetition law: no two towns share
   // an identical house set): each town remaps the kit's structural
@@ -110543,7 +110548,6 @@ function buildArtTileCache(doc, seasonSwapFor, seasonKitSwapFor) {
     'resort-area': { roof: ['#e8d9c4', '#bfae94', '#f7ecdc'], log: '#9a7a52', door: '#d4695e' }, // villa resort: pearl, coral door
   };
   const KIT_VEG_IDS = new Set(['kit-grass-1', 'kit-grass-2', 'kit-grass-3', 'kit-tallgrass', 'kit-flora', 'kit-canopy']);
-  const kitSeasonFn = seasonKitSwapFor || seasonSwapFor;
   const buildKitSet = (townId, opts) => {
     const variant = townId ? (KIT_VARIANTS[townId] || null) : null;
     // Wave C biome ground families (original kit-pattern tiles for
@@ -110554,8 +110558,7 @@ function buildArtTileCache(doc, seasonSwapFor, seasonKitSwapFor) {
     const anchor = townId && TOWN_STYLE_ANY[townId] ? TOWN_STYLE_ANY[townId].ground : null;
     // hex -> hex remap for one kit entry under this town's variant:
     // structural colors swap outright; vegetation greens tint toward
-    // the town's ground anchor (composed BEFORE the seasonal grade,
-    // so the grade acts on the town's own greens).
+    // the town's ground anchor — the town's own greens, fixed.
     const remapFor = (id) => {
       if (!variant) return null;
       if (id.startsWith('kit-roof')) return { '#a03e00': variant.roof[0], '#531a00': variant.roof[1], '#8d5500': variant.roof[2] };
@@ -110583,10 +110586,9 @@ function buildArtTileCache(doc, seasonSwapFor, seasonKitSwapFor) {
         pal2 = {};
         for (const ch of Object.keys(a.pal)) pal2[ch] = remap[a.pal[ch]] || a.pal[ch];
       }
-      const graded = KIT_VEG_IDS.has(id) && kitSeasonFn ? kitSeasonFn(pal2) : null;
       let swap = null;
       for (const ch of Object.keys(a.pal)) {
-        const fin = (graded && graded[ch]) || pal2[ch];
+        const fin = pal2[ch];
         if (fin !== a.pal[ch]) (swap = swap || {})[ch] = fin;
       }
       return artCanvas(doc, id, 1, false, swap || undefined);
@@ -111312,8 +111314,8 @@ function kitTownLayers(cache, kind, x, y, kindAt, mapId, phase) {
       if (!fab(at2(-1, 0))) g += 'w';
       if (!g) return [pathBase];
       // Edge tiles carry transparent grass margins (build-kit-art):
-      // composite over this cell's own season-graded grass so the
-      // blend follows the town palette in every season.
+      // composite over this cell's own grass so the blend follows
+      // the town palette.
       if (E[g]) return [grassBase, E[g]];
     }
     return [pathBase];
@@ -115296,7 +115298,7 @@ const SPECIES_HOENN = {
     catchRate: 150, growth: 'slow', baseXp: 151, body: 'biped', spriteSeed: 31401,
     eggGroups: ['bug', 'humanshape'], hatchCounter: 15,
     learnset: { 1: ['tackle', 'leechlife', 'pinmissile'], 217: ['quickattack'] },
-    flavor: 'Its perfume conducts the volbeat choir through the reeds.',
+    flavor: 'Its perfume conducts the GLOWFLY choir through the reeds.',
     tm: [2, 4, 6, 9, 10, 15, 20, 22, 29, 31, 32, 33, 34, 44, 46, 50, 105],
   },
   roselia: {
@@ -115485,7 +115487,7 @@ const SPECIES_HOENN = {
     catchRate: 90, growth: 'fast', baseXp: 160, body: 'biped', spriteSeed: 33501,
     eggGroups: ['ground'], hatchCounter: 20,
     learnset: { 1: ['scratch'], 204: ['leer'], 207: ['quickattack'], 210: ['swordsdance'], 219: ['slash'] },
-    flavor: 'Every scar is a sentence in one long argument with seviper.',
+    flavor: 'Every scar is a sentence in one long argument with SABERVIPER.',
     tm: [1, 5, 6, 8, 9, 10, 11, 12, 13, 14, 15, 17, 18, 19, 29, 30, 31, 32, 33, 34, 35, 40, 42, 44, 45, 46, 49, 50, 103],
   },
   seviper: {
@@ -116550,7 +116552,7 @@ const SPECIES_SINNOH = {
     catchRate: 75, growth: 'mediumslow', baseXp: 57, body: 'biped', spriteSeed: 44701,
     eggGroups: ['no-eggs'], baby: true, hatchCounter: 25,
     learnset: { 1: ['quickattack', 'lowkick'], 306: ['counter'], 324: ['screech'] },
-    flavor: 'It reads auras like moods in a room it just walked into. It joins Lucario at level 310 here — friendship, in this region, is patience.',
+    flavor: 'It reads auras like moods in a room it just walked into. It joins AURAJACK at level 310 here — friendship, in this region, is patience.',
     evo: { to: 'lucario', method: 'level', level: 310 }, tm: [1, 5, 6, 8, 9, 10, 17, 18, 19, 20, 26, 27, 28, 31, 32, 34, 38, 44, 48, 50, 104],
   },
   lucario: {
@@ -116928,7 +116930,7 @@ const SPECIES_SINNOH = {
     catchRate: 30, growth: 'slow', baseXp: 216, body: 'blob', spriteSeed: 48901,
     eggGroups: ['water1', 'fairy'], hatchCounter: 40,
     learnset: { 1: ['bubble'], 316: ['supersonic'], 324: ['bubblebeam'], 331: ['acidarmor'] },
-    flavor: 'The sea’s rumour of Manaphy, drifting warm currents home. It does not evolve, and Manaphy’s line continues only through the breeding pools.',
+    flavor: 'The sea’s rumour of CLIONARCH, drifting warm currents home. It does not evolve, and CLIONARCH’s line continues only through the breeding pools.',
     tm: [6, 8, 9, 10, 11, 12, 13, 14, 15, 16, 20, 31, 32, 34, 44, 50, 103],
   },
   manaphy: {
@@ -116937,7 +116939,7 @@ const SPECIES_SINNOH = {
     catchRate: 3, growth: 'slow', baseXp: 270, body: 'biped', spriteSeed: 49001,
     eggGroups: ['water1', 'fairy'], hatchCounter: 10, eggSpecies: 'phione',
     learnset: { 1: ['bubble'], 316: ['supersonic'], 324: ['bubblebeam'], 331: ['acidarmor'] },
-    flavor: 'Born on a cold seafloor, it swaps hearts the way tides swap shores. Its eggs hatch Phione here — the one line the breeding pools carry further than the KinDex does.',
+    flavor: 'Born on a cold seafloor, it swaps hearts the way tides swap shores. Its eggs hatch CLIONEA here — the one line the breeding pools carry further than the KinDex does.',
     tm: [6, 8, 9, 10, 11, 12, 13, 14, 15, 20, 24, 25, 28, 31, 32, 34, 38, 39, 44, 50, 103, 104],
   },
   darkrai: {
@@ -116973,7 +116975,7 @@ const SPECIES_SINNOH = {
     catchRate: 45, growth: 'mediumfast', baseXp: 182, body: 'blob', spriteSeed: 47902,
     eggGroups: ['indeterminate'], hatchCounter: 20,
     learnset: { 1: ['thundershock', 'thunderwave', 'confuseray'], 315: ['doubletam'], 336: ['substitute'] },
-    flavor: 'Rotom in an oven: the roast is armed and preheated.',
+    flavor: 'A spark-spirit in a possessed oven: the roast is armed and preheated.',
     tm: [6, 8, 9, 10, 15, 20, 24, 25, 28, 31, 32, 34, 39, 44, 45, 50, 105],
     form: true, baseSpecies: 'rotom',
   },
@@ -116983,7 +116985,7 @@ const SPECIES_SINNOH = {
     catchRate: 45, growth: 'mediumfast', baseXp: 182, body: 'blob', spriteSeed: 47903,
     eggGroups: ['indeterminate'], hatchCounter: 20,
     learnset: { 1: ['thundershock', 'thunderwave', 'confuseray'], 315: ['doubletam'], 336: ['substitute'] },
-    flavor: 'Rotom in a washer: every battle is a rinse cycle.',
+    flavor: 'A spark-spirit in a possessed washer: every battle is a rinse cycle.',
     tm: [6, 9, 10, 15, 20, 24, 25, 30, 31, 32, 33, 34, 39, 44, 45, 49, 50, 105],
     form: true, baseSpecies: 'rotom',
   },
@@ -116993,7 +116995,7 @@ const SPECIES_SINNOH = {
     catchRate: 45, growth: 'mediumfast', baseXp: 182, body: 'blob', spriteSeed: 47904,
     eggGroups: ['indeterminate'], hatchCounter: 20,
     learnset: { 1: ['thundershock', 'thunderwave', 'confuseray'], 315: ['doubletam'], 336: ['substitute'] },
-    flavor: 'Rotom in a fridge: it keeps its cool and weaponises yours.',
+    flavor: 'A spark-spirit in a possessed fridge: it keeps its cool and weaponises yours.',
     tm: [6, 9, 10, 11, 12, 13, 14, 15, 20, 31, 32, 33, 34, 39, 44, 49, 50, 103],
     form: true, baseSpecies: 'rotom',
   },
@@ -117003,7 +117005,7 @@ const SPECIES_SINNOH = {
     catchRate: 45, growth: 'mediumfast', baseXp: 182, body: 'blob', spriteSeed: 47905,
     eggGroups: ['indeterminate'], hatchCounter: 20,
     learnset: { 1: ['thundershock', 'thunderwave', 'confuseray'], 315: ['doubletam'], 336: ['substitute'] },
-    flavor: 'Rotom in a fan: a small gale with a plug.',
+    flavor: 'A spark-spirit in a possessed fan: a small gale with a plug.',
     tm: [2, 4, 6, 9, 10, 15, 20, 24, 25, 31, 32, 33, 34, 39, 44, 45, 50, 102, 105],
     form: true, baseSpecies: 'rotom',
   },
@@ -117013,7 +117015,7 @@ const SPECIES_SINNOH = {
     catchRate: 45, growth: 'mediumfast', baseXp: 182, body: 'blob', spriteSeed: 47906,
     eggGroups: ['indeterminate'], hatchCounter: 20,
     learnset: { 1: ['thundershock', 'thunderwave', 'confuseray'], 315: ['doubletam'], 336: ['substitute'] },
-    flavor: 'Rotom in a mower: the lawn, trimmed at battle speed.',
+    flavor: 'A spark-spirit in a possessed mower: the lawn, trimmed at battle speed.',
     tm: [3, 6, 9, 10, 15, 21, 22, 32, 33, 34, 44, 50, 101],
     form: true, baseSpecies: 'rotom',
   },
@@ -117023,7 +117025,7 @@ const SPECIES_SINNOH = {
     catchRate: 3, growth: 'slow', baseXp: 340, body: 'serpent', spriteSeed: 48702,
     eggGroups: ['no-eggs'], hatchCounter: 120,
     learnset: { 1: ['lick', 'nightshade', 'confuseray'], 370: ['slash'] },
-    flavor: 'Giratina unbound — the reversed world’s own serpent shape.',
+    flavor: 'VOIDARCH unbound — the reversed world’s own serpent shape.',
     tm: [1, 5, 6, 8, 9, 10, 11, 12, 13, 14, 15, 20, 24, 25, 28, 31, 32, 33, 34, 38, 39, 40, 44, 45, 50, 102, 103, 104, 105],
     form: true, baseSpecies: 'giratina',
   },
@@ -117033,7 +117035,7 @@ const SPECIES_SINNOH = {
     catchRate: 45, growth: 'mediumslow', baseXp: 270, body: 'blob', spriteSeed: 49202,
     eggGroups: ['no-eggs'], hatchCounter: 120,
     learnset: { 1: ['growth', 'absorb'], 319: ['leechseed'], 328: ['quickattack'] },
-    flavor: 'Shaymin at full gratitude — the sky is a garden it commutes through.',
+    flavor: 'GRATHOG at full gratitude — the sky is a garden it commutes through.',
     tm: [2, 4, 6, 9, 10, 15, 20, 21, 31, 32, 34, 39, 44, 50, 102],
     form: true, baseSpecies: 'shaymin',
   },
@@ -157999,6 +158001,28 @@ const SINNOH_TALES = {
     ['The coil? Oh, it is not broken — it is TUNED. Volkner rebuilt the beacon\'s array last spring and the spare picked up the new frequency like a song it already knew. It hums when the gym\'s voltage climbs, keeper. It hums loudest on battle days. Your coil is not haunted, Bly. It is a fan.'],
     ['A fan. Forty years of keeping the light, and my lamp room has been cheering for the gym the whole season. Brightshore, trainer. Even the hardware has a favourite.', 'The Beacon Coil is yours — take it before it starts humming at your battles too. If it does... let it. A little extra voltage never decided a match, but it has started a few legends.']),
 };
+// Wave S2 (quest integrity): the sinnohTale factory predates the
+// `revelation` field the other regions' tales carry — without it, the
+// Quest Log's completed-tale line rendered "Complete. undefined" for
+// all thirteen Sinnoh tales (taleStageText appends tale.revelation).
+// The denouements live here, one per tale, each drawn from that
+// tale's own closing lines — no new lore, just the missing field.
+const SINNOH_REVELATIONS = {
+  tale_sinnoh_twinleaf: 'Dawn\u2019s mother has kept the drawer all these years because beginnings are not outgrown \u2014 they are handed on, and Tam by the pond has stopped waiting for his to look bigger.',
+  tale_sinnoh_sandgem: 'The washed-up notebook was never the Professor\u2019s \u2014 its star charts are in his own teacher\u2019s hand, and the lab keeps a secret shelf for exactly the things it will not admit to treasuring.',
+  tale_sinnoh_jubilife: 'The meteor-logo people bowed to the TV station like it was already theirs \u2014 and thanks to one intern\u2019s quote with teeth, the whole city now watches its skyline back.',
+  tale_sinnoh_oreburgh: 'The lunchbox was the first foreman\u2019s wager with the mountain, sealed in coal before the gym existed \u2014 and the mountain held it for a hundred years, until the deepest digger\u2019s shift came round.',
+  tale_sinnoh_eterna: 'The statue was never only a monument \u2014 it is a sundial for a festival older than the city, and Heritage was celebrating this valley before it had streets.',
+  tale_sinnoh_hearthome: 'The tin was never stolen \u2014 it spent a week in the apron of Rosa\u2019s successor, and the scolding she feared turned out to be an inheritance.',
+  tale_sinnoh_solaceon: 'The ruins were a day-care before they were ruins \u2014 Una\u2019s grandmother\u2019s ledger is a thousand pages long, and most of them are stone.',
+  tale_sinnoh_veilstone: 'The fallen stone is warm, and dreaming, and in no hurry \u2014 a heart that has not decided to wake, kept like a garden by a priesthood of one.',
+  tale_sinnoh_floaroma: 'The meadow was never blighted \u2014 the bees were waiting for the wind-works\u2019 air to remember its directions, and a delayed spring is not a cancelled one.',
+  tale_sinnoh_pastoria: 'Lost things surface at the third reed bed when the water drops \u2014 the marsh gives back only to people it approves of, and it decided the asking itself was the approval.',
+  tale_sinnoh_celestic: 'The bell\u2019s inscription is not a prayer to the gods of time and space, but for them \u2014 a warning shaped like a blessing, rung unknowing for sixty years by its own keeper.',
+  tale_sinnoh_snowpoint: 'The lake keeps a garden of its own beneath the ice, from a summer before there were people \u2014 and once, for a hundred years, it was grateful about something.',
+  tale_sinnoh_sunnyshore: 'The spare coil was never haunted \u2014 it is tuned to the beacon\u2019s new frequency and hums loudest on battle days. In Brightshore, even the hardware has a favourite.',
+};
+for (const [taleId, revelation] of Object.entries(SINNOH_REVELATIONS)) SINNOH_TALES[taleId].revelation = revelation;
 
 const SINNOH_NPCS = [
   // Rowan, in his lab (his event is the entry scene; this is the man).
@@ -158285,14 +158309,14 @@ const TALE_NPCS = [
   // handler (overworld-systems, ferryArc 'johto') owns him entirely:
   // gated by the Foundation embark leg (embark_johto) outbound, and
   // unconditional once Yamato has been reached (NO-SOFT-LOCK LAW). He
-  // stands at (11,8), one tile east of the Caldera FERRYMAN, on a
-  // tg2 ground tile in the open south field — no door, warp or route
-  // can be sealed from there. The return captain stands on the
-  // Galefield dock (maps6.mjs, CAPT WESTWIND).
-  // Wave T1: Dawnwick rebuilt to the approved design — he now stands
-  // at (6,11) on the shore sand at the dock head, one tile west of
-  // the Caldera FERRYMAN (7,11); open beach on every side, so no
-  // door, warp or route can be sealed from there either.
+  // stands at (6,11) on the shore sand at the dock head, one tile
+  // west of the Caldera FERRYMAN (7,11); open beach on every side,
+  // so no door, warp or route can be sealed from there. History:
+  // his S1xS2 stance was (14,9) on the shore lawn east of the Mart
+  // (moved there from (11,8) when S1's rebuild put the Mart's west
+  // door warp over it); Wave T1's rebuild re-seated him at the dock.
+  // The return captain stands on the Galefield dock (maps6.mjs,
+  // CAPT WESTWIND).
   { map: 'pallet', x: 6, y: 11, name: 'CAPT YAMATO', art: 'sailor', skin: '#c89878', shirt: '#2a7a6a', pants: '#2a2a3a', hair: '#3a2a1a',
     ferry: 'newbark', ferryArc: 'johto',
     dialogue: ['The Galefield run is the western crossing — Yamato water, old towers on the horizon.', "Professor Hawthorn's office books that passage. No booking, no boarding — captain's orders, trainer."] },
@@ -158304,18 +158328,15 @@ const TALE_NPCS = [
   // or by the deriveArcDefaults catch-up for a save that consumed
   // that homecoming while the Frontier was still sealed) outbound,
   // and unconditional once the Frontier has been reached
-  // (NO-SOFT-LOCK LAW). He stands at (11,9), one tile south of CAPT
-  // YAMATO (11,8) in Dawnwick's open south field — a plain ground tile:
-  // no door, warp or route tile is sealed from there, and Dawnwick's
-  // walkable graph stays one fragment with all warps reachable
-  // (celadon-sweep verified before/after in F0; the bundle suite pins
-  // his adjacency). The tile one EAST of CAPT YAMATO, (12,8), was
-  // tried first and REJECTED on that evidence: it is the only exit
-  // of the (13,8)/(14,8) pocket and an NPC there seals it into a
-  // second fragment.
-  // Wave T1: Dawnwick rebuilt — re-seated to (10,11), on the shore
-  // sand east of the Route 1 causeway; open beach around him and
-  // the walkable graph stays one fragment (T1 audit battery).
+  // (NO-SOFT-LOCK LAW). He stands at (10,11), on the shore sand
+  // east of the Route 1 causeway — open beach around him, and
+  // Dawnwick's walkable graph stays one fragment with all warps
+  // reachable (celadon-sweep verified before/after in F0; the T1
+  // audit battery re-verified on the rebuilt map). History: his S1
+  // stance was (11,9) on the paved street before the Mart; the
+  // (12,8) pocket exit was tried for YAMATO and REJECTED on the F0
+  // evidence (an NPC there seals the (13,8)/(14,8) pocket into a
+  // second fragment) — and it was the Mart's east door warp besides.
   { map: 'pallet', x: 10, y: 11, name: 'CAPT FRONTIER', art: 'sailor', skin: '#e8b888', shirt: '#5a3a7a', pants: '#2a2a3a', hair: '#1a1a2a',
     ferry: 'frontierhub', ferryArc: 'frontier',
     dialogue: ['The Frontier run is the short island crossing — seven arenas on one island, and every trainer there fighting like the whole sea is watching.', "Scott himself left your invitation — his scouts book that passage, and his name is already on your boarding card. No invitation, no boarding — captain's orders, trainer."] },
@@ -158379,7 +158400,15 @@ const TALE_NPCS = [
     dialogue: ['Off duty, I read to the museum fossils. They never heckle.'] },
   { map: 'cerulean', x: 16, y: 1, name: 'PIP', art: 'kid', ...APPEAR.kid, tale: 'tale_cerulean', role: 'culprit',
     dialogue: ['The cape is mine. The view is mine. The bell is — also around here somewhere.'] },
-  { map: 'vermilion', x: 16, y: 11, name: 'HARBORMASTER', art: 'sailor', ...APPEAR.harbor, tale: 'tale_vermilion', role: 'stage',
+  // Wave S2 (quest integrity): the HARBORMASTER stood at (16,11) — a
+  // td-vermilion TOWN DRESS tile (solid planter/signpost class), which
+  // failed the A14 placement gate and left the tale's post-departure
+  // stage actor standing inside the scenery. He now stands at (11,11),
+  // the dock's south row one tile below CAPT EASTBOUND: walkable 'Ä'
+  // town ground, unoccupied, sealing nothing (the row stays connected
+  // west through (8..10,11); (15,10) remains the captains' open
+  // passage, per the CAPT BOREA note above).
+  { map: 'vermilion', x: 11, y: 11, name: 'HARBORMASTER', art: 'sailor', ...APPEAR.harbor, tale: 'tale_vermilion', role: 'stage',
     dialogue: ['Every crate, every rope, every lost page — the harbor keeps what the sea gives back.'] },
   { map: 'lavender', x: 16, y: 5, name: 'ELDER BRAM', art: 'elder', ...APPEAR.elder, tale: 'tale_lavender', role: 'stage',
     dialogue: ['I remember every name the tower forgot. Sit; an old man likes an audience.'] },
@@ -162838,152 +162867,6 @@ function drawWeatherOverlay(r, game, wstate) {
 }
 
 
-// ---- src/game/seasons.mjs ----
-// seasons.mjs — the season system (Black 2 baseline imposition, owner order
-// 2026-11-11: "make it more like Pokemon Black"). Gen V's signature world
-// system, implemented original: the season advances MONTHLY, cycling all
-// four seasons every four months — the world you walk in January is not
-// the world you walk in February. Before this module the game had only a
-// cosmetic season color bar in the clock glyph (quarter-year, hardcoded
-// in overworld.mjs); this module is now the single source of season truth.
-//
-// PRESENTATION ONLY, same doctrine as weather.mjs: seasons read the
-// calendar and write NOTHING — no state, no save fields, no encounter or
-// battle effects. Season is derived from the date, never stored (the
-// Bonds rule: derived, never stored). Effects today: a seasonal light
-// tint over outdoor maps, the clock-glyph season bar, and a one-shot
-// season toast when the season rolls over. Anything mechanical is a
-// future owner ruling, not a silent addition.
-//
-// Anchor (ours): January opens Spring, then the cycle turns monthly —
-// Feb Summer, Mar Autumn, Apr Winter, May Spring… — so November plays
-// in Autumn and December in Winter.
-//
-// SEASONAL ART (added same day, owner verdict "the game looks the
-// same"): the season also re-grades the world's vegetation art. Tile
-// palettes pass through seasonalHex() below when the tile cache is
-// built (buildArtTileCache in engine/art.mjs, fed by main.mjs):
-// greens — grass, tall grass, flowers' stems, tree canopies — shift
-// per season (spring brighter, autumn amber, winter frost-pale) while
-// every non-green (trunks, roofs, paths, water) keeps its authored
-// color. Original color math, our own art; the authored palette is
-// the Summer grade.
-
-const SEASON_ORDER = ['Winter', 'Spring', 'Summer', 'Autumn'];
-
-// Per-season presentation: glyph/bar color (the exact hexes the clock
-// glyph has always used) and the outdoor light tint (rgb + alpha —
-// kept subtle, illumination only, like PHASE_TINTS).
-const SEASON_STYLE = {
-  Winter: { color: '#5a9ae8', tint: { rgb: [90, 154, 232], alpha: 0.08 } },
-  Spring: { color: '#58c94f', tint: { rgb: [88, 201, 79], alpha: 0.05 } },
-  Summer: { color: '#e8c832', tint: { rgb: [232, 200, 50], alpha: 0.04 } },
-  Autumn: { color: '#e08a4a', tint: { rgb: [224, 138, 74], alpha: 0.07 } },
-};
-
-// Pure resolver: Date -> { name, index, color, tint }.
-function seasonForDate(d) {
-  const month = d && typeof d.getMonth === 'function' ? d.getMonth() : 0;
-  const name = SEASON_ORDER[(((month + 1) % 4) + 4) % 4];
-  const style = SEASON_STYLE[name];
-  return { name, index: SEASON_ORDER.indexOf(name), color: style.color, tint: style.tint };
-}
-
-// The current season, resolved from the real calendar. Headless-safe:
-// any Date failure resolves to the anchor season.
-function currentSeason() {
-  try { return seasonForDate(new Date()); } catch (e) { return seasonForDate(null); }
-}
-
-// The season's light tint for a map, or null where seasons never show:
-// interiors and dark maps (caves own their darkness — same exclusion as
-// the time-of-day tint and the weather layer).
-function seasonTintFor(map) {
-  if (!map || map.indoor || map.dark) return null;
-  return currentSeason().tint;
-}
-
-// ---- seasonal art grade -------------------------------------------------
-const clamp255 = (v) => Math.max(0, Math.min(255, Math.round(v)));
-function hexToRgb(hex) {
-  const m = /^#?([0-9a-f]{6})$/i.exec(hex || '');
-  if (!m) return null;
-  const n = parseInt(m[1], 16);
-  return [(n >> 16) & 255, (n >> 8) & 255, n & 255];
-}
-const rgbToHex = (r, g, b) => '#' + [r, g, b].map((v) => clamp255(v).toString(16).padStart(2, '0')).join('');
-
-// One authored color -> its seasonal grade. Only green-dominant colors
-// (foliage and grass: g strictly greatest) are re-graded; everything
-// else returns unchanged, in every season.
-function seasonalHex(hex, seasonName) {
-  const rgb = hexToRgb(hex);
-  if (!rgb) return hex;
-  const [r, g, b] = rgb;
-  if (!(g > r && g > b)) return hex;
-  switch (seasonName) {
-    case 'Spring': return rgbToHex(r * 0.94 + 14, g * 1.07 + 8, b * 0.94 + 6);
-    case 'Summer': return rgbToHex(r * 0.97, g, b * 0.97);
-    case 'Autumn': return rgbToHex(g * 1.05 + 26, r * 0.58 + g * 0.22, b * 0.5);
-    case 'Winter': {
-      const lum = (r + g + b) / 3;
-      const mix = (t) => lum + (t - lum) * 0.66;
-      return rgbToHex(mix(228), mix(238), mix(244));
-    }
-    default: return hex;
-  }
-}
-
-// Build an artCanvas swap ({ paletteChar: hex }) re-grading every
-// green in a palette for the current season. Entries whose grade is
-// unchanged are omitted; an all-unchanged palette yields {}.
-function seasonalSwapFor(pal) {
-  if (!pal) return {};
-  const season = currentSeason().name;
-  const swap = {};
-  for (const ch of Object.keys(pal)) {
-    const graded = seasonalHex(pal[ch], season);
-    if (graded !== pal[ch]) swap[ch] = graded;
-  }
-  return swap;
-}
-
-// ---- kit grade (Wave A, 2026-11-11) --------------------------------------
-// The adopted Gassasin kit's greens are far deeper than our authored
-// ramp (its grass is a pure #008100 against our #5da24a), and the
-// shared Autumn formula drives its red channel from the green — so on
-// kit palettes the grade overshoots into deep red (#a11c00, r:g 5.8:1)
-// where our own art lands in the amber family (r:g ~2.1:1, b ~0.28r).
-// The kit grade corrects ONLY that overshoot, and ONLY on the kit
-// path (engine/art.mjs feeds kit palettes through seasonalSwapForKit;
-// our own art keeps seasonalHex exactly): after the shared grade, a
-// red-dominant Autumn result is pulled back into the family band —
-// green floored at r/2.15, blue floored at 0.26r. Every other season
-// passes through untouched: the kit's Spring/Summer/Winter grades
-// already sit in the family (measured 2026-11-11).
-function seasonalHexKit(hex, seasonName) {
-  const graded = seasonalHex(hex, seasonName);
-  if (seasonName !== 'Autumn') return graded;
-  const rgb = hexToRgb(graded);
-  if (!rgb) return graded;
-  const [r, g, b] = rgb;
-  if (!(r > g)) return graded;
-  return rgbToHex(r, Math.max(g, r / 2.15), Math.max(b, r * 0.26));
-}
-
-// seasonalSwapFor for kit palettes (same contract as seasonalSwapFor).
-function seasonalSwapForKit(pal) {
-  if (!pal) return {};
-  const season = currentSeason().name;
-  const swap = {};
-  for (const ch of Object.keys(pal)) {
-    const graded = seasonalHexKit(pal[ch], season);
-    if (graded !== pal[ch]) swap[ch] = graded;
-  }
-  return swap;
-}
-
-
 // ---- src/game/ball-rules.mjs ----
 // ball-rules.mjs — Stage J6: apricorn-ball catch rules, ONE shared
 // evaluation for both battle engines (battle.mjs classic + battle-rt.mjs
@@ -164251,6 +164134,9 @@ class UI {
     // (full-screen modal dim), hint card, 503 banner, sync dot. The touch
     // controls live in #stage's #ctlband (UI v2.5, see buildControls).
     this.frame = this.el('div', 'frameui', this.root);
+    // UI v2.6 (Wave CAM): the HUD mounts in #stage's #hudband when the
+    // shell provides one (fallback: the frame, pre-v2.6 shells).
+    this.hudBand = doc.getElementById ? doc.getElementById('hudband') : null;
     if (typeof window !== 'undefined' && window.addEventListener) {
       window.addEventListener('resize', () => this._syncChipAnchor());
     }
@@ -165237,7 +165123,7 @@ class UI {
   // .nohud (setHudVisible) and .inbattle (setBattleMode) in CSS, same as
   // .hudstrip — menus/dialogues overlay it, they do not hide it.
   buildHudChips() {
-    const wrap = this.el('div', 'hudchips', this.frame);
+    const wrap = this.el('div', 'hudchips', this.hudBand || this.frame);
     const loc = this.el('div', 'hudchip locchip hidden', wrap);
     const locText = this.el('span', 'locchip-text', loc);
     const obj = this.el('div', 'hudchip objchip hidden', wrap);
@@ -165600,7 +165486,7 @@ class UI {
   // ---- P1/D4: persistent HUD quick-strip (one-tap Bag/Party/Dex/Menu) ----
   // Choice documented: portrait = overlaid top-right of canvas (gameux §4.1).
   buildHudStrip() {
-    const strip = this.el('div', 'hudstrip', this.frame);
+    const strip = this.el('div', 'hudstrip', this.hudBand || this.frame);
     this._hudStrip = strip;
     const defs = [
       ['bag', 'Bag'], ['party', 'Party'], ['dex', 'Dex'], ['menu', 'Menu'],
@@ -165649,6 +165535,7 @@ class UI {
     this.hudVisible = v;
     if (this.headless || !this.root) return;
     this.root.classList.toggle('nohud', !v); // P1/D4: SELECT toggles the strip
+    if (this.hudBand) this.hudBand.classList.toggle('nohud', !v); // v2.6: band mirror
   }
 
   // ---- P1/D7: partner mood pip (persistent, tappable) ----
@@ -165657,7 +165544,7 @@ class UI {
   // in landscape (body.landscape) where the vertical rail owns the right
   // edge. No longer a floating bottom-right page widget.
   buildMoodPip() {
-    const b = this.el('button', 'moodpip hidden', this.frame);
+    const b = this.el('button', 'moodpip hidden', this.hudBand || this.frame);
     b.setAttribute('aria-label', 'VOLTIK');
     const cv = this.headless ? null : document.createElement('canvas');
     if (cv) {
@@ -165779,6 +165666,14 @@ class UI {
     s.top = Math.round(r.top) + 'px';
     s.width = Math.round(r.width) + 'px';
     s.height = Math.round(r.height) + 'px';
+    // UI v2.6 (Wave CAM): on desktop the HUD band takes the canvas box's
+    // width (the stage centers it), so the band's chips column and strip
+    // align with the field's left/right edges — above it, never on it.
+    // Phones/landscape leave the band at its natural full/grid width.
+    if (this.hudBand) {
+      const desk = document.body && document.body.classList.contains('desktop');
+      this.hudBand.style.width = desk ? Math.round(r.width) + 'px' : '';
+    }
   }
 
   update(dt) {
@@ -165940,6 +165835,7 @@ class UI {
     // window sliver under the message box during battle messages.
     this.cmdEl.classList.add('hidden');
     if (this.root) this.root.classList.toggle('inbattle', on); // hides the HUD strip in battle
+    if (this.hudBand) this.hudBand.classList.toggle('inbattle', on); // v2.6: band mirror
     if (this._moodPip) this._moodPip.classList.toggle('hidden', on || !this._moodWanted);
     if (!on) this.hideCommands();
   }
@@ -173724,17 +173620,6 @@ class OverworldScene {
     // eaves) composes ON TOP of this sorted pass — the scene calls
     // sysRenderForeground here when W7 ships it. Nothing draws today.
     if (this.sysRenderForeground) this.sysRenderForeground(r);
-    // Black 2 baseline (2026-11-11): season tint — the season system's
-    // light over outdoor maps, drawn under the time-of-day tint so night
-    // still darkens over the season. Presentation only (src/game/
-    // seasons.mjs): derived from the calendar, never stored, and never
-    // drawn indoors or in dark maps (seasonTintFor resolves null there).
-    const sTint = seasonTintFor(this.map);
-    if (sTint) {
-      const c = r.ctx;
-      c.fillStyle = 'rgba(' + sTint.rgb[0] + ',' + sTint.rgb[1] + ',' + sTint.rgb[2] + ',' + sTint.alpha + ')';
-      c.fillRect(r.camX - T, r.camY - T, r.viewW + 2 * T, r.viewH + 2 * T);
-    }
     // Premium+ W5 (LD-2): time-of-day tint — ONE flat overlay over the
     // WORLD layer only, drawn after the sorted world pass and before
     // every HUD/canvas-text draw below (banner, clock glyph, prompts),
@@ -173790,7 +173675,7 @@ class OverworldScene {
       // at 16 (was 400/14, same thin-stem defect class as the dialogue).
       r.text(prompt, bx + 38, by + 2, { size: 16, bold: true, color: '#202028', shadow: false, align: 'center' });
     }
-    // P1/D8: clock glyph — day/night pixel icon + season bar (no text, ambient).
+    // P1/D8: clock glyph — day/night pixel icon (no text, ambient).
     this.renderClockGlyph(r);
     r.end();
     // HUD lives in DOM chips now (UI seat): the area banner, the permanent
@@ -173837,15 +173722,6 @@ class OverworldScene {
         this.moveTut._toastSent = true;
         ui.hudToast('Walk with the D-pad — VOLTIK follows you!', 3600);
       }
-      // Season toast (Black 2 baseline): once per season rollover, when
-      // the calendar season differs from the last one announced. The
-      // season itself is derived (seasons.mjs), never stored; only the
-      // announcement marker lives here, per scene.
-      try {
-        const sName = seasonForDate(new Date()).name;
-        if (this._hudSeason === undefined) this._hudSeason = sName;
-        else if (sName !== this._hudSeason) { this._hudSeason = sName; ui.hudToast('Season — ' + sName, 2600); }
-      } catch (e) { /* headless */ }
     }
   }
 
@@ -173872,7 +173748,7 @@ class OverworldScene {
     return '▶ Explore Arden';
   }
 
-  // P1/D8: day/night pixel icon + season color bar, top-right of canvas.
+  // P1/D8: day/night pixel icon, top-right of canvas.
   renderClockGlyph(r) {
     const g = this.game;
     let hour = 12;
@@ -173891,12 +173767,6 @@ class OverworldScene {
       c.fillStyle = '#101018';
       c.fillRect(x + 6, y + 2, 5, 8);
     }
-    // season bar: color from the season system (src/game/seasons.mjs) —
-    // the single source of season truth since the Black 2 imposition.
-    let seasonCol = '#5a9ae8';
-    try { seasonCol = seasonForDate(new Date()).color; } catch (e) { /* headless */ }
-    c.fillStyle = seasonCol;
-    c.fillRect(x, y + 14, 12, 3);
   }
 }
 
@@ -179166,7 +179036,7 @@ class Game {
     this.store = new SaveStore();
     this.state = freshState();
     this.rng = makeRngStreams(nextSeed());
-    this.tileCache = buildArtTileCache(doc, seasonalSwapFor, seasonalSwapForKit); // hand-authored tileset (art.mjs), season-graded vegetation; void -> solid fill
+    this.tileCache = buildArtTileCache(doc); // hand-authored tileset (art.mjs), authored palettes fixed (Wave SZ: seasons removed); void -> solid fill
     this.spriteCache = {};
     this._spriteUrlCache = {}; // species id -> battle-art data URL (toDataURL once per species)
     this._iconUrlCache = {};   // item id -> uiIcon data URL (toDataURL once per item)
@@ -179463,7 +179333,7 @@ class Game {
   applyLayout() {
     const r = this.renderer;
     if (typeof window === 'undefined') {
-      r.resize(256, 192, 256, 192);
+      r.resize(256, 256, 256, 256);
       this.layoutMode = 'desktop';
       return;
     }
@@ -179486,16 +179356,16 @@ class Game {
     const wrap = document.getElementById && document.getElementById('screenwrap');
     const ww = wrap ? wrap.clientWidth : w, wh = wrap ? wrap.clientHeight : h;
     if (mode === 'desktop') {
-      // D3: aspect-locked 16:9; height reserves room for the hint card.
-      const cssW0 = Math.min(1120, w * 0.9);
-      let cw = cssW0, ch = cssW0 * 9 / 16;
-      const maxH = Math.min(630, Math.max(240, h - 140));
-      if (ch > maxH) { ch = maxH; cw = ch * 16 / 9; }
-      r.resize(384, 216, Math.round(cw), Math.round(ch));
+      // Wave CAM (owner law): the viewport is 16x16 tiles in EVERY
+      // presentation. Square request capped 128px under the wrap box so
+      // the renderer's integer snap (B2-G5, <= +128px) can never spill
+      // past #screenwrap into the HUD band above or the hint zone below.
+      const s = Math.min(1120, w * 0.9, Math.max(160, Math.min(ww, wh) - 128));
+      r.resize(256, 256, Math.round(s), Math.round(s));
     } else if (mode === 'landscape') {
-      // 4:3 in the screen column; width capped so snapped height fits.
-      const cw = Math.min(ww * 0.96, wh * 1.234);
-      r.resize(256, 192, Math.round(cw), Math.round(cw * 3 / 4));
+      // Square in the screen column; same snap-safe cap as desktop.
+      const s = Math.max(160, Math.min(ww, wh) - 128);
+      r.resize(256, 256, Math.round(s), Math.round(s));
     } else {
       // Square: short side requested, height pre-divided by snap tolerance.
       const s = Math.min(ww, wh / 1.08);
@@ -181395,6 +181265,6 @@ if (typeof Game !== 'undefined') Object.assign(Game.prototype, {
 });
 
 </script>
-<!-- contentHash:cba178123f410f51d9e1b6ad978a97160ab51425e80d3792edc74b30449a8284 -->
+<!-- contentHash:c0f5f427af7e05ddea55c8193d60b216dc2ec946cdeda39ab1d0236f9104d4db -->
 </body>
 </html>

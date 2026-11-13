@@ -18,11 +18,18 @@ body{font-family:var(--font);-webkit-user-select:none;user-select:none;-webkit-t
    layout at every size. Landscape dissolves the band into grid flanks. */
 #screenwrap{flex:1 1 auto;width:100%;min-height:0;min-width:0;display:flex;align-items:center;justify-content:center}
 #ctlband{width:100%;padding:10px 12px calc(10px + env(safe-area-inset-bottom,0px))}
+/* UI v2.6 (Wave CAM): #hudband — the reserved in-flow HUD band above
+   #screenwrap. The HUD chips column, quick-strip and mood pip mount here
+   (ui.mjs), in page flow, so no HUD element can ever overlap the 16x16
+   canvas — the same structural trick v2.5 used for the touch pad below.
+   On desktop ui.mjs width-syncs the band to the canvas box. */
+#hudband{width:100%;flex:0 0 auto;display:flex;align-items:flex-start;gap:8px;padding:8px 10px 2px}
 body.desktop #ctlband{display:none}
 body.desktop.showtouch #ctlband{display:block}
 @media (pointer:coarse){body.desktop #ctlband{display:block}}
-body.landscape #stage{display:grid;grid-template-columns:auto 1fr auto;grid-template-rows:1fr auto;align-items:stretch;justify-content:stretch;column-gap:20px;padding-left:max(10px,env(safe-area-inset-left,0px));padding-right:max(10px,env(safe-area-inset-right,0px));padding-top:env(safe-area-inset-top,0px)}
-body.landscape #screenwrap{grid-column:2;grid-row:1/3;width:auto}
+body.landscape #stage{display:grid;grid-template-columns:auto 1fr auto;grid-template-rows:auto 1fr auto;align-items:stretch;justify-content:stretch;column-gap:20px;padding-left:max(10px,env(safe-area-inset-left,0px));padding-right:max(10px,env(safe-area-inset-right,0px));padding-top:env(safe-area-inset-top,0px)}
+body.landscape #hudband{grid-column:2;grid-row:1;width:auto}
+body.landscape #screenwrap{grid-column:2;grid-row:2/4;width:auto}
 body.landscape #ctlband{display:contents}
 #game{image-rendering:pixelated;background:#000;outline:2px solid #8d9bbf;box-shadow:0 4px 18px rgba(0,0,0,.35)}
 #ui{position:fixed;inset:0;pointer-events:none}
@@ -229,9 +236,9 @@ body.flip .controls{flex-direction:row-reverse}
 .sysbtns{position:relative;width:100%;display:flex;gap:8px;justify-content:center;pointer-events:auto}
 .sysbtn{background:#26304d;color:#dfe7f5;border:2px solid #8d9bbf;border-radius:14px;font-family:var(--font);font-size:14px;padding:10px 14px;min-height:48px;pointer-events:auto}
 body.landscape .controls{display:contents;opacity:1}
-body.landscape .dpad{grid-column:1;grid-row:1/3;align-self:center;opacity:var(--ctlop,1)}
-body.landscape .ab{grid-column:3;grid-row:1;align-self:center;opacity:var(--ctlop,1)}
-body.landscape .sysbtns{grid-column:3;grid-row:2;width:auto;align-self:start;opacity:var(--ctlop,1)}
+body.landscape .dpad{grid-column:1;grid-row:1/4;align-self:center;opacity:var(--ctlop,1)}
+body.landscape .ab{grid-column:3;grid-row:2;align-self:center;opacity:var(--ctlop,1)}
+body.landscape .sysbtns{grid-column:3;grid-row:3;width:auto;align-self:start;opacity:var(--ctlop,1)}
 body.flip.landscape .dpad{grid-column:3}
 body.flip.landscape .ab{grid-column:1}
 body.flip.landscape .sysbtns{grid-column:1}
@@ -361,6 +368,18 @@ body.landscape .moodpip{display:none}
 /* UI v2.5: the landscape right-edge rail is retired — it rendered ON the
    canvas. Landscape now uses the portrait form (in-frame, top-right,
    horizontal), inside the frame bounds and clear of the dialogue zone. */
+/* UI v2.6 (Wave CAM): band context — inside #hudband the chips column,
+   quick-strip and mood pip are in-flow flex items, not frame overlays,
+   so their base top/left/right anchors are inert. The chips column
+   pushes the strip + pip to the band's right edge via margin-right:auto.
+   .nohud/.inbattle live on the #ui root (not a band ancestor), so
+   ui.mjs mirrors both classes onto the band and these rules hide the
+   HUD in the band exactly as the frame rules hide it in-frame. */
+#hudband .hudchips{position:static;max-width:44%;margin-right:auto}
+#hudband .hudstrip{position:static}
+#hudband .moodpip{position:static;flex:0 0 auto}
+#hudband.nohud .hudchips,#hudband.nohud .hudstrip{display:none}
+#hudband.inbattle .hudchips,#hudband.inbattle .hudstrip{display:none}
 /* desktop keyboard-hint card — Platinum mini-frame */
 .hintcard{position:absolute;left:50%;transform:translateX(-50%);bottom:8px;display:flex;align-items:center;gap:10px;background-color:var(--paper);background-image:var(--rivets);border:2px solid var(--frame);outline:2px solid var(--frame2);outline-offset:-5px;border-radius:3px;color:var(--ink);font-family:var(--font);font-size:16px;font-weight:700;padding:8px 8px 8px 16px;pointer-events:auto;z-index:25;max-width:92vw;box-shadow:0 4px 18px rgba(0,0,0,.35);-webkit-text-stroke:.8px currentColor;letter-spacing:-.3px}
 .hintcard-x{background:linear-gradient(#4a7dd0,#2a4d9c);color:#fff;border:2px solid var(--frame);border-radius:6px;font-size:14px;font-weight:bold;font-family:inherit;padding:8px 12px;min-height:48px;cursor:pointer;white-space:nowrap}
@@ -432,9 +451,9 @@ body.desktop.showtouch .controls{display:flex}
 </style>
 </head>
 <body>
-<div id="stage"><div id="screenwrap"><canvas id="game"></canvas></div><div id="ctlband"></div></div>
+<div id="stage"><div id="hudband"></div><div id="screenwrap"><canvas id="game"></canvas></div><div id="ctlband"></div></div>
 <div id="ui"></div>
 <script src="game.js"></script>
-<!-- contentHash:702c81855b3ab7285a722b0894e8d65de526a6db34b245f7fae997e52c6f827d -->
+<!-- contentHash:0e31a22296fe231a1d0defc5e907ab5a39ff02c19f207fa818fbced7aedb67ac -->
 </body>
 </html>
