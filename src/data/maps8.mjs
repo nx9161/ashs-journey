@@ -257,6 +257,29 @@ export const MAPS8 = {
     ],
     "npcs": [
       {
+        "x": 3,
+        "y": 5,
+        "name": "MART CLERK",
+        "art": "clerk",
+        "skin": "#f0c8a0",
+        "shirt": "#c05a3a",
+        "pants": "#2a2a3a",
+        "hair": "#4a3a2a",
+        "dialogue": [
+          "Trial Grounds Mart — facility-grade stock for the long streaks."
+        ],
+        "mart": {
+          "stock": [
+            "ultraball",
+            "hyperpotion",
+            "maxpotion",
+            "fullheal",
+            "revive",
+            "escaperope"
+          ]
+        }
+      },
+      {
         "x": 17,
         "y": 19,
         "name": "CAPT BREAKWATER",
