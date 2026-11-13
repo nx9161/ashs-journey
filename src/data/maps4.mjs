@@ -157,8 +157,8 @@ export const MAPS4 = {
       '<<<<<<<<<<',
     ],
     warps: [
-      { x: 4, y: 5, to: { map: 'pallet', x: 3, y: 4 } },
-      { x: 5, y: 5, to: { map: 'pallet', x: 3, y: 4 } },
+      { x: 4, y: 5, to: { map: 'pallet', x: 2, y: 8 } },
+      { x: 5, y: 5, to: { map: 'pallet', x: 2, y: 8 } },
     ],
     signs: [
       { x: 4, y: 1, text: 'A shelf of maps in a careful hand, and a teacup that never quite empties.' },

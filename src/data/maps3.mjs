@@ -1812,29 +1812,40 @@ export const MAPS3 = {
     start: null,
   },
 
-  // Dawnwick override: COMPLETE copy of maps.mjs pallet + the Caldera
-  // ferryman waiting at the south shore.
+  // Dawnwick — Wave T1 trial build: the town rebuilt to the owner's
+  // approved design (town-designs/dawnwick.webp). Hawthorn's Lab is a
+  // real building NW (facade only, as ever — no interior map); the
+  // Center/Mart pair is Wave S1's as-built (Center x5-8 west, Mart
+  // x10-13 east, paved seam x9, row-9 street); Gary's house never
+  // moved (x10-12, y2-3); the player's house is the garden house
+  // W-mid; a slate/brick house NE and a teal shore house SE are
+  // facade-only (G0 panels, no false doors); the wide barn E carries
+  // the chalkmap board beside its doors; the shore band runs S
+  // around the Route 1 causeway (game geography: Route 1 is south).
   pallet: {
     id: 'pallet', name: 'Dawnwick', music: 'pallet-theme',
     rows: rows([
-      'ËËËËËÖËËËËÖËËËËË',
-      'ËẆẈÀÀÀÀÀÀÀÀÀÀÀẈË',
-      'ËẊāìāÀÀÀÀÀāāāÀÀË',
-      'ËẌęsę...ıoęsęÀÀË',
-      'ËÀo......ı..ÀÖÀË',
-      'ËÀÀıÀ.ıËËıııoẆÀË',
-      'ËÀÀıÀ.ıËËıııÀÀÀË',
-      'ËÀÖıÀjklmıdeefÀË',
-      'ËÀÀıÀAJKAıP12PÀË',
-      'ËÀÀıı....ııııÀÀË',
-      'ËËÖËËË....ËËËÖËË',
+      'ËËËËÖËËËËËËËËËËÖËËËË',
+      'ËÀıÀÀıÀÀıÀÀıÀÀıÀÀËËË',
+      'ËÀáá3áááÀıāāāÀdefËËË',
+      'ËÀZZ06ZZÀıęsęÀx—zËËË',
+      'Ëo..............oËËË',
+      'ËËÀıÀÀ÷À..ıÀıËÀıÀËËË',
+      'ËāìāẊÀıÀ..ıÀıÀÀabbcË',
+      'ËrsvÀjklm.dOefÀv——vË',
+      'Ën.pÀAJKA.P12PẆ...‴Ë',
+      'Ë..................Ë',
+      'ËÀıÀıoẉ....ẄoÀÀghiÀË',
+      'Ëẞẞẞẞẞẞẞ..ẞẞẞẞẘt—uÀË',
+      'Ëẞẞẞẞ″ἇἇ~...″~ẞẞẞẞẘË',
+      'Ë~R~~~ἇἇ....~~~~~~RË',
     ]),
     warps: [
-      { x: 6, y: 10, to: { map: 'route1', x: 6, y: 14 } },
-      { x: 7, y: 10, to: { map: 'route1', x: 7, y: 14 } },
-      { x: 8, y: 10, to: { map: 'route1', x: 6, y: 14 } },
-      { x: 9, y: 10, to: { map: 'route1', x: 7, y: 14 } },
-      { x: 3, y: 3, to: { map: 'house-pallet-ash', x: 4, y: 4 } },
+      { x: 8, y: 13, to: { map: 'route1', x: 6, y: 14 } },
+      { x: 9, y: 13, to: { map: 'route1', x: 7, y: 14 } },
+      { x: 10, y: 13, to: { map: 'route1', x: 6, y: 14 } },
+      { x: 11, y: 13, to: { map: 'route1', x: 7, y: 14 } },
+      { x: 2, y: 7, to: { map: 'house-pallet-ash', x: 4, y: 4 } },
       { x: 11, y: 3, to: { map: 'house-pallet-gary', x: 4, y: 4 } },
       { x: 6, y: 8, to: { map: 'center', x: 4, y: 4 }, via: { map: 'pallet', x: 6, y: 9 } },
       { x: 7, y: 8, to: { map: 'center', x: 5, y: 4 }, via: { map: 'pallet', x: 7, y: 9 } },
@@ -1842,41 +1853,46 @@ export const MAPS3 = {
       { x: 12, y: 8, to: { map: 'mart', x: 6, y: 5 }, via: { map: 'pallet', x: 12, y: 9 } },
     ],
     signs: [
-      { x: 6, y: 3, text: "PROF. HAWTHORN'S LAB — Kin research. The professor is out on Route 1 today." },
-      { x: 7, y: 3, text: "PROF. HAWTHORN'S LAB — Kin research. The professor is out on Route 1 today." },
-      { x: 8, y: 9, text: "DAWNWICK — a quiet shore town. The road south leads to ROUTE 1." },
+      { x: 2, y: 4, text: "PROF. HAWTHORN'S LAB — Kin research. The professor is out on Route 1 today." },
+      { x: 6, y: 4, text: "PROF. HAWTHORN'S LAB — Kin research. The professor is out on Route 1 today." },
+      { x: 9, y: 10, text: "DAWNWICK — a quiet shore town. The road south leads to ROUTE 1." },
     ],
     npcs: [
-      { x: 3, y: 5, name: 'MART CLERK', art: 'clerk', skin: '#f0c8a0', shirt: '#3a6ac0', pants: '#2a2a3a', hair: '#2a1a0a',
+      // Wave T1: the Mart's own clerk, re-seated from the west field
+      // to the main street at his shop's east corner.
+      { x: 14, y: 9, name: 'MART CLERK', art: 'clerk', skin: '#f0c8a0', shirt: '#3a6ac0', pants: '#2a2a3a', hair: '#2a1a0a',
         mart: { stock: ['pokeball', 'greatball', 'potion', 'superpotion', 'antidote', 'awakening'] },
         dialogue: ["Dawnwick Mart — small shelves, honest prices. Everything a first road needs."] },
       { x: 10, y: 4, name: 'GARY', art: 'gary', skin: '#f0c8a0', shirt: '#3a5a9a', pants: '#2a2a3a', hair: '#6a4a2a',
         dialogue: ["Yo, {player}! The professor gave me a PRISMKIT — fluffy, clever, and all mine!", "He says it'll evolve to match how I battle. Just watch — we'll be champions!"] },
       // UI v2.3 (defect 5): the lab's storage terminal at the lab entrance
       // (Dawnwick's lab has no interior map; the terminal stands by its door,
-      // like the one in every Center).
-      { x: 5, y: 4, name: 'PC TERMINAL', art: 'pc', skin: '#c0c0c0', shirt: '#3a3a4a', pants: '#2a2a2a', hair: '#3a6ac0', pc: true,
+      // like the one in every Center). Wave T1: flanks the built lab's
+      // door on the west, Hawthorn himself at the door.
+      { x: 3, y: 4, name: 'PC TERMINAL', art: 'pc', skin: '#c0c0c0', shirt: '#3a3a4a', pants: '#2a2a2a', hair: '#3a6ac0', pc: true,
         dialogue: ["Lab PC — Kin Storage System. The professor keeps a terminal by the door for trainers passing through. Access your boxes here."] },
-      { x: 6, y: 4, name: 'CHEAT TERMINAL', art: 'pc', skin: '#c0c0c0', shirt: '#3a3a4a', pants: '#2a2a2a', hair: '#3a6ac0', cheat: true,
+      { x: 5, y: 4, name: 'CHEAT TERMINAL', art: 'pc', skin: '#c0c0c0', shirt: '#3a3a4a', pants: '#2a2a2a', hair: '#3a6ac0', cheat: true,
         dialogue: ["CHEAT TERMINAL — everything is free here. Every item, every Kin, no questions asked. The professor pretends not to see this machine."] },
       // Partner guarantee (hotfix): the professor himself, at his lab
       // door. Pre-fix he existed only inside the intro cutscene, so a
       // player whose partner never arrived (defect 4's stranded saves)
       // found nobody in Pallet who could sort it out. His handover
       // branch lives in overworld-systems.mjs (talkHawthorn); these
-      // lines are what he says to everyone else.
-      { x: 8, y: 4, name: 'PROF. HAWTHORN', art: 'hawthorn', skin: '#f0c8a0', shirt: '#f0f0f0', pants: '#4a4a5a', hair: '#c8c4bc',
+      // lines are what he says to everyone else. Wave T1: the lab is
+      // built; he stands at its real door (4,4), on the lab street.
+      { x: 4, y: 4, name: 'PROF. HAWTHORN', art: 'hawthorn', skin: '#f0c8a0', shirt: '#f0f0f0', pants: '#4a4a5a', hair: '#c8c4bc',
         dialogue: ["Ah, {player}! Out walking the town again? Good. Legs first, glory later — that is the order of things.", "VOLTIK still refusing every Capture Orb it sees, I hope. Some bonds are not meant to be carried in a pocket."] },
-      { x: 14, y: 8, name: 'FERRYMAN', art: 'sailor', skin: '#d8a878', shirt: '#3a6ac0', pants: '#2a2a3a', hair: '#c0c0c0', ferry: 'cinnabar', ferryGate: 'surf',
+      // The Caldera ferryman, at the dock head on the south shore —
+      // where his dialogue always said he waits.
+      { x: 7, y: 11, name: 'FERRYMAN', art: 'sailor', skin: '#d8a878', shirt: '#3a6ac0', pants: '#2a2a3a', hair: '#c0c0c0', ferry: 'cinnabar', ferryGate: 'surf',
         dialogue: ["My little ferry runs Dawnwick to Caldera for trainers who've earned the sea legs — and the badges.", "Say the word when you want the crossing. The volcano smokes a welcome the whole way in."] },
     ],
     encounters: null,
     items: [],
     hidden: [],
     events: [],
-    start: { x: 7, y: 7, dir: 'down' },
+    start: { x: 8, y: 10, dir: 'down' },
   },
-
   // Center override: COMPLETE copy of maps.mjs center + a PC terminal.
   // The exit doors carry viaExit:true — the engine returns the player to
   // whichever city door they entered from; the pallet target is the
@@ -1893,8 +1909,8 @@ export const MAPS3 = {
       '::::::::::',
     ]),
     warps: [
-      { x: 4, y: 5, to: { map: 'pallet', x: 7, y: 9 }, viaExit: true },
-      { x: 5, y: 5, to: { map: 'pallet', x: 8, y: 9 }, viaExit: true },
+      { x: 4, y: 5, to: { map: 'pallet', x: 6, y: 9 }, viaExit: true },
+      { x: 5, y: 5, to: { map: 'pallet', x: 7, y: 9 }, viaExit: true },
     ],
     signs: [],
     npcs: [
