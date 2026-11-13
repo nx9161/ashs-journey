@@ -103,6 +103,25 @@
 //     get real corners; still above the 0.60 gate). Conn/step-offs
 //     identical (90/90, 8/8), unanchoredAny identical (1, the
 //     shipped frame decor at (24,17)). Re-pinned with the T23 build.
+//     SEVENTH DOCUMENTED EXCEPTION (W-DIFF pilot): blackthorn's pin is
+//     its POST-W-DIFF tuple. The distinctiveness pilot gave Cragmoor
+//     the Basalt Sett & Drake-Gable kit (owner ruling 2026-11-13:
+//     "Every town kit should be different"): sand path -> settfloor
+//     (registered street material, STREET_REGISTRY), house roofs ->
+//     drakeroof, tg2 scree at the Den apron + smithy yard. Junction
+//     sites 7 -> 6 (the sett network merges one cluster; all 6 still
+//     marked, junctionsBare 0), strict 0.7712 -> 0.7915 (more of the
+//     town stands on strict-tier material). Gate STATUS unchanged
+//     (PASS); conn/step-offs/apronMin/fabric identical (156/156,
+//     7/7, 0.813, 0.988). Re-pinned with the W-DIFF pilot.
+//     EIGHTH DOCUMENTED EXCEPTION (W-DIFF pilot): silvertown's pin
+//     is its POST-W-DIFF tuple. Lastlight got the Marble Slab &
+//     Parapet kit: sand path -> marblefloor (registered), house
+//     roofs -> parapetroof, tg2 aprons chained around Center/Mart/
+//     Stadium, two parterre flowerbed grids. Junction sites 13 -> 15
+//     (all marked), strict 0.6299 -> 0.6654, fabric 0.9886 -> 0.9896.
+//     Gate STATUS unchanged (PASS); conn/step-offs/apronMin identical
+//     (90/90, 6/6, 0.706). Re-pinned with the W-DIFF pilot.
 //     Tuple: [pass, connOk, connPairs, stepTouch, stepTot, components,
 //     junctionSites, junctionsBare, apronLow, apronMin, merged,
 //     onFabric, shoulderOrphans, unanchoredAny, strict, fabric].
@@ -132,8 +151,8 @@ async function gateTuple(id, t) {
 }
 
 // 1. registry scope lock
-ok('street registry is exactly { vermilion: [boardwalk] }',
-  JSON.stringify(STREET_REGISTRY) === '{"vermilion":["boardwalk"]}',
+ok('street registry is exactly { vermilion: [boardwalk], blackthorn: [settfloor], silvertown: [marblefloor] }',
+  JSON.stringify(STREET_REGISTRY) === '{"vermilion":["boardwalk"],"blackthorn":["settfloor"],"silvertown":["marblefloor"]}',
   JSON.stringify(STREET_REGISTRY));
 
 // 2. census: the 64 towns of townSetOf (pallet included)
@@ -151,7 +170,7 @@ ok('gate census covers 64 towns', ids.length === 64, `${ids.length} ids`);
 // 4. per-town pins on the production path (targets use post-W4 pins)
 const PIN = {
   "azalea": [1, 132, 132, 8, 8, 1, 8, 0, 0, 0.688, 0, 0, 0, 0, 0.7723, 0.9977],
-  "blackthorn": [1, 156, 156, 7, 7, 1, 7, 0, 0, 0.813, 0, 0, 0, 0, 0.7712, 0.988],
+  "blackthorn": [1, 156, 156, 7, 7, 1, 6, 0, 0, 0.813, 0, 0, 0, 0, 0.7915, 0.988],
   "canalave": [0, 36, 90, 8, 8, 3, 3, 0, 1, 0.417, 0, 0, 0, 0, 1, 1],
   "celadon": [1, 156, 156, 10, 10, 1, 3, 0, 0, 0.611, 0, 0, 0, 0, 0.9725, 1],
   "celestic": [1, 56, 56, 6, 6, 1, 3, 0, 0, 0.882, 0, 0, 0, 0, 1, 1],
@@ -199,7 +218,7 @@ const PIN = {
   "saffron": [1, 156, 156, 10, 10, 1, 2, 0, 0, 0.875, 0, 0, 0, 0, 0.7649, 1],
   "sandgem": [1, 156, 156, 7, 7, 1, 1, 0, 0, 0.833, 0, 0, 0, 0, 1, 1],
   "shamouti": [0, 30, 182, 6, 6, 1, 4, 0, 1, 0.588, 0, 0, 0, 0, 0.912, 0.912],
-  "silvertown": [1, 90, 90, 6, 6, 1, 13, 0, 0, 0.706, 0, 0, 0, 0, 0.6299, 0.9886],
+  "silvertown": [1, 90, 90, 6, 6, 1, 15, 0, 0, 0.706, 0, 0, 0, 0, 0.6654, 0.9896],
   "slateport": [0, 56, 90, 6, 6, 1, 1, 0, 0, 0.875, 0, 0, 0, 0, 0.9972, 0.9972],
   "snowpoint": [1, 90, 90, 8, 8, 1, 3, 0, 0, 0.824, 0, 0, 0, 0, 0.998, 0.9983],
   "solaceon": [1, 110, 110, 7, 7, 1, 11, 0, 0, 0.938, 0, 0, 0, 0, 0.9226, 0.9948],
