@@ -2456,7 +2456,9 @@ export function resolveTileLayers(cache, kind, x, y, kindAt, t, phase, mapId) {
     // Wave T7: the memorial wall composites over its garden grass too.
     case 'memorialwall':
     // Wave T9: the lure post composites over its gate lawn the same way.
-    case 'lurepost': {
+    case 'lurepost':
+    // Wave T17: the radio mast composites over its compound grass too.
+    case 'radiomast': {
       // Object tiles carry transparent surrounds (Wave 1): lay the ground
       // the object stands on beneath it — south neighbour's family first
       // (the contact edge), else the neighbour majority, else grass.
