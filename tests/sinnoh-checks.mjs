@@ -175,11 +175,11 @@ const VAL = await import(join(ROOT, 'api/_lib/validator.mjs'));
   const capt = TALE_NPCS.find((n) => n.name === 'CAPT BOREA');
   const hoenn = TALE_NPCS.find((n) => n.name === 'CAPT MARIS');
   const harbor = TALE_NPCS.find((n) => n.name === 'HARBORMASTER');
-  ok('A20 CAPT SINNOH appended via the TALE_NPCS idiom on vermilion (14,10) — ferry sandgem + ferryArc sinnoh, sailor art, no tale/role; CAPT HOENN unmoved at (16,10), HARBORMASTER unmoved at (16,11)',
+  ok('A20 CAPT SINNOH appended via the TALE_NPCS idiom on vermilion (14,10) — ferry sandgem + ferryArc sinnoh, sailor art, no tale/role; CAPT HOENN unmoved at (16,10), HARBORMASTER at (11,11) since the Wave S2 repair (he stood on the solid town-dress tile (16,11); (11,11) is walkable dock ground, unoccupied)',
     !!capt && capt.map === 'vermilion' && capt.x === 14 && capt.y === 10 && capt.ferry === 'sandgem' && capt.ferryArc === 'sinnoh'
     && capt.art === 'sailor' && !capt.tale && Array.isArray(capt.dialogue) && capt.dialogue.length === 2
     && !!hoenn && hoenn.x === 16 && hoenn.y === 10
-    && !!harbor && harbor.x === 16 && harbor.y === 11);
+    && !!harbor && harbor.x === 11 && harbor.y === 11);
   const v = ALL_MAPS.vermilion;
   ok('A21 the stance tile seals nothing by position: (14,10) is a walkable ground tile, not a warp tile, not a sign/event tile, and no base vermilion NPC stands there',
     WALKABLE.has(v.rows[10][14]) && !(v.warps || []).some((w) => w.x === 14 && w.y === 10)
@@ -202,9 +202,9 @@ const VAL = await import(join(ROOT, 'api/_lib/validator.mjs'));
     return comps.sort((a, b) => b.length - a.length);
   };
   const before = graph(false); const after = graph(true);
-  ok('A22 Vermilion\'s walkable graph keeps its exact base shape with the captain standing: base [main 112, the pre-existing isolated tile (5,11)] -> [main 111, (5,11)] — the main fragment loses ONLY the captain\'s own tile, no new fragment, and every warp tile is in the main fragment or beside it (Wave S1 re-pin: base was 119 before the Arcport Mart was built — its 6 non-door footprint tiles plus the mart clerk\'s (3,5) stance account for exactly 7; the 2 door tiles stay in the graph)',
-    before.length === 2 && before[0].length === 112 && JSON.stringify(before[1]) === JSON.stringify(['5,11'])
-    && after.length === 2 && after[0].length === 111 && JSON.stringify(after[1]) === JSON.stringify(['5,11'])
+  ok('A22 Vermilion\'s walkable graph keeps its exact base shape with the captain standing: base [main 111, the pre-existing isolated tile (5,11)] -> [main 110, (5,11)] — the main fragment loses ONLY the captain\'s own tile, no new fragment, and every warp tile is in the main fragment or beside it (Wave S1 re-pin: base was 119 before the Arcport Mart was built — its 6 non-door footprint tiles plus the mart clerk\'s (3,5) stance account for exactly 7; the 2 door tiles stay in the graph; Wave S2 re-pin at the S1xS2 merge: the Harbormaster repair moved him from solid (16,11), never in the graph, to walkable (11,11), so the base loses exactly his stance tile too — 112 -> 111 base, 111 -> 110 with the captain)',
+    before.length === 2 && before[0].length === 111 && JSON.stringify(before[1]) === JSON.stringify(['5,11'])
+    && after.length === 2 && after[0].length === 110 && JSON.stringify(after[1]) === JSON.stringify(['5,11'])
     && (v.warps || []).every((w) => after[0].includes(w.x + ',' + w.y)
       || [[0, 1], [0, -1], [1, 0], [-1, 0]].some(([dx, dy]) => after[0].includes((w.x + dx) + ',' + (w.y + dy)))),
     'before=' + before.map((c) => c.length).join(',') + ' after=' + after.map((c) => c.length).join(','));
