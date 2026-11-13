@@ -517,6 +517,26 @@ T1_KIND_DEFS.forEach(([kind], i) => {
   TILE_CHARS[ch] = kind;
 });
 export const T1_PROP_KINDS = T1_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
+// ---- Wave T3 (Fernmere build): Marlow's tortoise ----
+// One new kind continuing the block at idx 565 (T1 ends at 564;
+// U+2035, verified free in TILE_CHARS and unused by every map row).
+// Class 'prop': a solid object composited over the ground it stands
+// on (art.mjs resolver). The tortoise is tale_viridian made visible —
+// the retired ace Marlow's partner, dozing beside his cottage fence
+// (BACKSTORY-SYNC-AUDIT build note: in the story, absent from the
+// approved design). Authored art:
+// assets/sprites/pix/tiles/tile-prop-tortoise.pix (Wave T3 register
+// item N1 in WAVE-T3-FERNMERE-PLAN.md).
+export const T3_KIND_DEFS = [
+  ['tortoise', 'prop'],
+];
+export const T3_KIND_CHARS = {};
+T3_KIND_DEFS.forEach(([kind], i) => {
+  const ch = String.fromCodePoint(0x1E00 + 565 + i);
+  T3_KIND_CHARS[kind] = ch;
+  TILE_CHARS[ch] = kind;
+});
+export const T3_PROP_KINDS = T3_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
 export const SINNOH_TOWN_GROUND_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg);
 export const SINNOH_TOWN_GROUND2_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg2);
 // TX-3: the 8 gym exteriors by town (original type-accent motifs).
