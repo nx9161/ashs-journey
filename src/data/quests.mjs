@@ -241,7 +241,15 @@ export const TALE_NPCS = [
     dialogue: ['Off duty, I read to the museum fossils. They never heckle.'] },
   { map: 'cerulean', x: 16, y: 1, name: 'PIP', art: 'kid', ...APPEAR.kid, tale: 'tale_cerulean', role: 'culprit',
     dialogue: ['The cape is mine. The view is mine. The bell is — also around here somewhere.'] },
-  { map: 'vermilion', x: 16, y: 11, name: 'HARBORMASTER', art: 'sailor', ...APPEAR.harbor, tale: 'tale_vermilion', role: 'stage',
+  // Wave S2 (quest integrity): the HARBORMASTER stood at (16,11) — a
+  // td-vermilion TOWN DRESS tile (solid planter/signpost class), which
+  // failed the A14 placement gate and left the tale's post-departure
+  // stage actor standing inside the scenery. He now stands at (11,11),
+  // the dock's south row one tile below CAPT EASTBOUND: walkable 'Ä'
+  // town ground, unoccupied, sealing nothing (the row stays connected
+  // west through (8..10,11); (15,10) remains the captains' open
+  // passage, per the CAPT BOREA note above).
+  { map: 'vermilion', x: 11, y: 11, name: 'HARBORMASTER', art: 'sailor', ...APPEAR.harbor, tale: 'tale_vermilion', role: 'stage',
     dialogue: ['Every crate, every rope, every lost page — the harbor keeps what the sea gives back.'] },
   { map: 'lavender', x: 16, y: 5, name: 'ELDER BRAM', art: 'elder', ...APPEAR.elder, tale: 'tale_lavender', role: 'stage',
     dialogue: ['I remember every name the tower forgot. Sit; an old man likes an audience.'] },
