@@ -218,8 +218,8 @@ export const MAPS4 = {
       '<<<<<<<<<<',
     ],
     warps: [
-      { x: 4, y: 5, to: { map: 'pewter', x: 3, y: 4 } },
-      { x: 5, y: 5, to: { map: 'pewter', x: 3, y: 4 } },
+      { x: 4, y: 5, to: { map: 'pewter', x: 2, y: 8 } },
+      { x: 5, y: 5, to: { map: 'pewter', x: 2, y: 8 } },
     ],
     signs: [],
     npcs: [],
@@ -237,8 +237,8 @@ export const MAPS4 = {
       '<<<<<<<<<<',
     ],
     warps: [
-      { x: 4, y: 5, to: { map: 'pewter', x: 12, y: 4 } },
-      { x: 5, y: 5, to: { map: 'pewter', x: 12, y: 4 } },
+      { x: 4, y: 5, to: { map: 'pewter', x: 16, y: 8 } },
+      { x: 5, y: 5, to: { map: 'pewter', x: 16, y: 8 } },
     ],
     signs: [],
     npcs: [],
