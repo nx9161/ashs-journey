@@ -2105,6 +2105,27 @@ T15_KIND_DEFS.forEach(([kind], i) => {
   TILE_CHARS[ch] = kind;
 });
 const T15_PROP_KINDS = T15_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
+// ---- Wave T17 (Signal build): the radio mast ----
+// One new kind continuing the block at idx 574 (T15 ends at
+// 573; U+203E, verified free in TILE_CHARS and unused by
+// every map row). Class 'prop': a solid object composited
+// over the ground it stands on (art.mjs resolver). The mast
+// is the Radio Tower's lattice made visible — cross-braced
+// iron, a side dish and the red beacon — standing in its
+// fenced compound east of the broadcast house (the design's
+// fenced tower plot). Authored art:
+// assets/sprites/pix/tiles/tile-prop-radiomast.pix (Wave
+// T17 register in WAVE-T17-SIGNAL-PLAN.md, Prop register).
+const T17_KIND_DEFS = [
+  ['radiomast', 'prop'],
+];
+const T17_KIND_CHARS = {};
+T17_KIND_DEFS.forEach(([kind], i) => {
+  const ch = String.fromCodePoint(0x1E00 + 574 + i);
+  T17_KIND_CHARS[kind] = ch;
+  TILE_CHARS[ch] = kind;
+});
+const T17_PROP_KINDS = T17_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
 const SINNOH_TOWN_GROUND_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg);
 const SINNOH_TOWN_GROUND2_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg2);
 // TX-3: the 8 gym exteriors by town (original type-accent motifs).
@@ -91125,6 +91146,24 @@ const ART = {
     "................",
     "................",
   ] },
+  "tile-prop-radiomast": { w: 16, h: 16, pal: {"k":"#3a3f47","W":"#aeb6bd","R":"#e8402c","r":"#8f1f14"}, rows: [
+    ".......Rr.......",
+    ".......kk.......",
+    "....WW.kk.......",
+    "...W...kk.......",
+    "..W....kk.......",
+    "......k..k......",
+    ".....k....k.....",
+    ".....kk..kk.....",
+    "....k......k....",
+    "....k..kk..k....",
+    "...k........k...",
+    "...k...kk...k...",
+    "..k..........k..",
+    "..k....kk....k..",
+    ".k............k.",
+    ".kkkkkkkkkkkkkk.",
+  ] },
   "tile-prop-redcarpet": { w: 16, h: 16, pal: {"B":"#a96152","D":"#6a5c47","A":"#d1bc88"}, rows: [
     "BBBBAABBBAAABBBB",
     "BAAAAAAAAAAAAAAB",
@@ -110041,6 +110080,8 @@ for (const k of T9_PROP_KINDS) TILE_ART[k] = 'tile-prop-' + k;
 for (const k of T14_PROP_KINDS) TILE_ART[k] = 'tile-prop-' + k;
 // Wave T15: Cinder's kiln + well lounger draw their prop art.
 for (const k of T15_PROP_KINDS) TILE_ART[k] = 'tile-prop-' + k;
+// Wave T17: Signal's radio mast draws its prop art.
+for (const k of T17_PROP_KINDS) TILE_ART[k] = 'tile-prop-' + k;
 
 // Premium+ W6 (TX-3/PL-1): door-open frames, authored in TX-3 for every
 // door kind. The warp-fade engine that plays them lands in W7 — W6
@@ -110890,7 +110931,9 @@ const PROP_KINDS = new Set(['counter', 'healmachine', 'pcdesk', 'bed', 'table',
   // Wave T14: Blossom's sakura tree composites over its ground too.
   ...T14_PROP_KINDS,
   // Wave T15: Cinder's kiln + well lounger composite too.
-  ...T15_PROP_KINDS]);
+  ...T15_PROP_KINDS,
+  // Wave T17: Signal's radio mast composites too.
+  ...T17_PROP_KINDS]);
 function groundFamilyOf(kind) {
   // Perfection Pass Stage 2 Gate 2 (G2): beach kinds stand on tropgrass,
   // psand kinds stand on path (props composite over the parent ground).
@@ -111772,7 +111815,9 @@ function resolveTileLayers(cache, kind, x, y, kindAt, t, phase, mapId) {
     // Wave T7: the memorial wall composites over its garden grass too.
     case 'memorialwall':
     // Wave T9: the lure post composites over its gate lawn the same way.
-    case 'lurepost': {
+    case 'lurepost':
+    // Wave T17: the radio mast composites over its compound grass too.
+    case 'radiomast': {
       // Object tiles carry transparent surrounds (Wave 1): lay the ground
       // the object stands on beneath it — south neighbour's family first
       // (the contact edge), else the neighbour majority, else grass.
@@ -130379,26 +130424,26 @@ const MAPS6 = {
     "name": "Signal City",
     "music": "pewter-theme",
     "rows": [
-      "ỏỏỏỐỏỏỏỏỏỏỐỏỏỏỏỏỎỎỏỏỏỐỏỏỏỏỏỏỐỏỏỏỏỏ",
-      "ỏọỎỎỎỎỎỎỎỎỎỎỎỎỎỎỎỎọỐọọọọọọọọọọọọọỏ",
-      "ỏọỎjklmỎọdeefỎọốỎỎốọọốốốốọọốốốốọọỏ",
-      "ỏọỎAJKAỎẋP12PỎọUỎỎUọọỒỒỒỒọọỒsỒỒọọỏ",
-      "ỏọỎỎỎỎỎỎỎỎỎỎỎỎỎỎỎỎỎỎỎỎỎỎỎỎỎỎỎỎọọọỏ",
-      "ỏọSỎỎỎỎỎỎỎỎỎỎỎỎỎỎỎSỎỎỎỎỎọỎọỎọỎọọọỏ",
-      "ỏọỎỎọọọọỎọọọỎọẊỎỎỎỎỎỎỎỎỎọỎọỎọỎọọọỏ",
-      "ỏẊỎỎỎỎỎỎỎỎỎỎỎỎỎỎỎỎỎỎỎỎỎỎọỎọỎọỎọọọỏ",
-      "ỏọỎnỎọọọỎỎỎỎỎỎọọỎọỎẋỎỎỎỎọỎọỎọỎọọọỏ",
-      "ỏọỎọỎọọọỎọoọỎỎọọỎọỎọỎẊẊỎọỎỎỎọỎỎọọỏ",
-      "ỏọỎọỎọọọỎọọọẌỎọọỎọỎọỎoỐỎọỎốốốốỎọọỏ",
-      "ỏọỎỎỎỎỎỎỎỎỎỎỎỎỎỎỎỎỎỎỎỎỎỎnỎỒsỒỒỎọọỏ",
-      "ỏọỎỎỎọọọỎọọọọỎọọỎọỎỎẋọỎỎỎỎỎỎSỎỎọọỏ",
-      "ỏọḋỎỎọọọỎỎỎỎỎỎỎỎỎỎỎỎỎỎỎỎẋỎỎỎỎọọọọỏ",
-      "ỏọọỎ....ỎọọọọỎọọỎỎẌỎọọọỎỎỎỎỎḋọọọọỏ",
-      "ỏọọ.,,,,.ỎỎỎỎỎỎỎỎỎỎỎỎỎỎỎỎọ..ḋọọọọỏ",
-      "ỏọọ.,.,,.ỎọọọỎọọỎỎọỎọọọọỎ.,,,ọọẋọỏ",
-      "ỏọoỎ.Ỏ..ỎỎỎỎỎỎỎỎỎỎỎỎỎỎỎỎ.,,,,ọọọọỏ",
-      "ỏọọọọọọoọọọẋọẊọọọọọọọọọọẋ,ọ,ẋọọọọỏ",
-      "ỏỏỏỐỏỏỏỏỏỏỐỏỏỏỏỏỏỐỏỏỏỏỏỏỐỏỏỏỏỏỏỐỏỏ"
+      "ỏỏỏỐỏỏỏỏỏỏỐỏỏỏỏỏ..ỏỏỏỏỏỏỐỏỏỏỏỏỏỐỏỏ",
+      "ỏọoọ............................oỏ",
+      "ỏọọjklmọ.deefọốốXốốốốốốốố‾Ṇốốốốốốỏ",
+      "ỏọọAJKAọ.P12PọUUVYUUỒỒssỒọnỒsỒỒỒỒỏ",
+      "ỏ................................ỏ",
+      "ỏ........................ọọSọọọSọỏ",
+      "ỏỏọốốốốọ.Ẋốốốốẋọ..ḋpFọọọọọọốốốố.ỏỏ",
+      "ỏỏọỒsỒỒọ.ọỒỒsỒọọ..ọọọọọọọọọỒsỒỒ.ỏỏ",
+      "ỏ................................ỏ",
+      "ỏọọọọọọọ.ọọọọọọọ..ọọọọọ.ọpoọFọẊ.ọỏ",
+      "ỏ.......................ốốốốốố...ỏ",
+      "ỏ......................nỒỒỒsỒỒn..ỏ",
+      "ỏḋẌẌọọọọ.ọốốốốọṀ..Ṁpọọọ.........ẋỏ",
+      "ỏ........ọỒsỒỒoọ..ọṀọọo.....,ẋẋ,,ỏ",
+      "ỏ........ọn.,nọọ..ọọWWọ.....,,,,,ỏ",
+      "ỏ................................ỏ",
+      "ỏỏFọọọọo.ọ,p,,ọọ..ọoọẤẤọốốốốốốF.ọỏ",
+      "ỏỏpọọọpọ.ọ,,p,So..opọẤpọỒỒsỒỒỒọ.ọỏ",
+      "ỏọọọo...........................ọỏ",
+      "ỏỏỏỐỏỏỏỏỏỏỐỏỏỏỏỏ..ỏỏỏỏỏỏỐỏỏỏỏỏỏỐỏỏ"
     ],
     "warps": [
       {
@@ -130477,7 +130522,7 @@ const MAPS6 = {
       },
       {
         "x": 22,
-        "y": 4,
+        "y": 3,
         "to": {
           "map": "radio-tower-1",
           "x": 8,
@@ -130486,7 +130531,7 @@ const MAPS6 = {
       },
       {
         "x": 23,
-        "y": 4,
+        "y": 3,
         "to": {
           "map": "radio-tower-1",
           "x": 8,
@@ -130528,38 +130573,56 @@ const MAPS6 = {
           "x": 6,
           "y": 8
         }
+      },
+      {
+        "x": 16,
+        "y": 19,
+        "to": {
+          "map": "r34",
+          "x": 11,
+          "y": 1
+        }
+      },
+      {
+        "x": 17,
+        "y": 19,
+        "to": {
+          "map": "r34",
+          "x": 12,
+          "y": 1
+        }
       }
     ],
     "signs": [
       {
-        "x": 28,
-        "y": 12,
+        "x": 31,
+        "y": 5,
         "text": "SIGNAL DEPARTMENT STORE — Six floors of everything a trainer can carry. (The annex doors serve the east arcade.)"
       },
       {
-        "x": 2,
-        "y": 5,
+        "x": 14,
+        "y": 17,
         "text": "SIGNAL CITY — The festival city of sights and sounds. Radio Tower broadcasts from the west end of the north street."
       },
       {
-        "x": 18,
+        "x": 27,
         "y": 5,
         "text": "SIGNAL UNDERGROUND — A shopping passage beneath the city. Stairs down by the landmark door."
       },
-      {"x": 14, "y": 12, "text": "SIGNAL CITY — North: ROUTE 35."},
-      {"x": 6, "y": 9, "text": "SIGNAL CITY — North: ROUTE 35."},
-      {"x": 11, "y": 16, "text": "SIGNAL CITY — North: ROUTE 35."},
-      {"x": 25, "y": 2, "text": "SIGNAL CITY — North: ROUTE 35."},
-      {"x": 18, "y": 16, "text": "SIGNAL CITY — North: ROUTE 35."},
-      {"x": 8, "y": 2, "text": "SIGNAL CITY — North: ROUTE 35."},
-      {"x": 14, "y": 2, "text": "SIGNAL CITY — North: ROUTE 35."},
-      {"x": 24, "y": 7, "text": "SIGNAL CITY — North: ROUTE 35."},
-      {"x": 6, "y": 18, "text": "SIGNAL CITY — North: ROUTE 35."},
+      {"x": 14, "y": 1, "text": "SIGNAL CITY — North: ROUTE 35."},
+      {"x": 8, "y": 3, "text": "SIGNAL CITY — North: ROUTE 35."},
+      {"x": 7, "y": 6, "text": "SIGNAL CITY — North: ROUTE 35."},
+      {"x": 24, "y": 9, "text": "SIGNAL CITY — North: ROUTE 35."},
+      {"x": 22, "y": 12, "text": "SIGNAL CITY — North: ROUTE 35."},
+      {"x": 7, "y": 17, "text": "SIGNAL CITY — North: ROUTE 35."},
+      {"x": 32, "y": 9, "text": "SIGNAL CITY — North: ROUTE 35."},
+      {"x": 9, "y": 14, "text": "SIGNAL CITY — North: ROUTE 35."},
+      {"x": 30, "y": 17, "text": "SIGNAL CITY — North: ROUTE 35."}
     ],
     "npcs": [
       {
-        "x": 12,
-        "y": 7,
+        "x": 20,
+        "y": 5,
         "name": "DJ MARY FAN",
         "art": "lass",
         "skin": "#c89878",
@@ -130572,8 +130635,8 @@ const MAPS6 = {
         ]
       },
       {
-        "x": 21,
-        "y": 6,
+        "x": 7,
+        "y": 13,
         "name": "COMMUTER KOBE",
         "art": "gent",
         "skin": "#d8a878",
@@ -130586,8 +130649,8 @@ const MAPS6 = {
         ]
       },
       {
-        "x": 8,
-        "y": 15,
+        "x": 4,
+        "y": 12,
         "name": "FLOWER SELLER UNA",
         "art": "lady",
         "skin": "#e8b888",
@@ -130600,8 +130663,8 @@ const MAPS6 = {
         ]
       },
       {
-        "x": 25,
-        "y": 15,
+        "x": 27,
+        "y": 12,
         "name": "BIKE HAND RYO",
         "art": "worker",
         "skin": "#f0c8a0",
@@ -130614,7 +130677,7 @@ const MAPS6 = {
         ]
       },
       {
-        "x": 3,
+        "x": 12,
         "y": 5,
         "name": "MART CLERK",
         "art": "clerk",
@@ -134500,7 +134563,7 @@ const MAPS6 = {
         "to": {
           "map": "goldenrod",
           "x": 22,
-          "y": 5
+          "y": 4
         }
       },
       {
@@ -134509,7 +134572,7 @@ const MAPS6 = {
         "to": {
           "map": "goldenrod",
           "x": 22,
-          "y": 5
+          "y": 4
         }
       },
       {
