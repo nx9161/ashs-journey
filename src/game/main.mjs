@@ -364,7 +364,7 @@ export class Game {
   applyLayout() {
     const r = this.renderer;
     if (typeof window === 'undefined') {
-      r.resize(256, 192, 256, 192);
+      r.resize(256, 256, 256, 256);
       this.layoutMode = 'desktop';
       return;
     }
@@ -387,16 +387,16 @@ export class Game {
     const wrap = document.getElementById && document.getElementById('screenwrap');
     const ww = wrap ? wrap.clientWidth : w, wh = wrap ? wrap.clientHeight : h;
     if (mode === 'desktop') {
-      // D3: aspect-locked 16:9; height reserves room for the hint card.
-      const cssW0 = Math.min(1120, w * 0.9);
-      let cw = cssW0, ch = cssW0 * 9 / 16;
-      const maxH = Math.min(630, Math.max(240, h - 140));
-      if (ch > maxH) { ch = maxH; cw = ch * 16 / 9; }
-      r.resize(384, 216, Math.round(cw), Math.round(ch));
+      // Wave CAM (owner law): the viewport is 16x16 tiles in EVERY
+      // presentation. Square request capped 128px under the wrap box so
+      // the renderer's integer snap (B2-G5, <= +128px) can never spill
+      // past #screenwrap into the HUD band above or the hint zone below.
+      const s = Math.min(1120, w * 0.9, Math.max(160, Math.min(ww, wh) - 128));
+      r.resize(256, 256, Math.round(s), Math.round(s));
     } else if (mode === 'landscape') {
-      // 4:3 in the screen column; width capped so snapped height fits.
-      const cw = Math.min(ww * 0.96, wh * 1.234);
-      r.resize(256, 192, Math.round(cw), Math.round(cw * 3 / 4));
+      // Square in the screen column; same snap-safe cap as desktop.
+      const s = Math.max(160, Math.min(ww, wh) - 128);
+      r.resize(256, 256, Math.round(s), Math.round(s));
     } else {
       // Square: short side requested, height pre-divided by snap tolerance.
       const s = Math.min(ww, wh / 1.08);
