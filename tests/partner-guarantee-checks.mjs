@@ -133,8 +133,10 @@ function runIntro(opts) {
 {
   const { MAPS3 } = await import(join(ROOT, 'src/data/maps3.mjs'));
   const hawk = MAPS3.pallet.npcs.find((n) => n.name === 'PROF. HAWTHORN');
+  // Wave T1 re-pin: the rebuilt lab puts Hawthorn at (4,4) before his facade door (4,3);
+  // the stance below him is (4,5). (Was (8,4)/(8,5) pre-T1; S1 A22 precedent.)
   ok('D0 Hawthorn stands at his lab door in the live pallet (maps3)',
-    !!hawk && hawk.art === 'hawthorn' && hawk.x === 8 && hawk.y === 4
+    !!hawk && hawk.art === 'hawthorn' && hawk.x === 4 && hawk.y === 4
     && Array.isArray(hawk.dialogue) && hawk.dialogue.length === 2);
   const src = readFileSync(join(ROOT, 'src/data/story-kanto.mjs'), 'utf8');
   const hintLine = src.split('\n').find((l) => l.includes("id: 'q_partner'")) || '';
@@ -165,8 +167,8 @@ const driver = `
   function pA(g, t) { t = t || 1; for (var i = 0; i < t; i++) { g.input.inject('a'); tk(g, 2); g.input.release('a'); } }
   function talkToHawthorn(g) {
     var ow = g.scenes.top;
-    ow.player.tx = 8; ow.player.ty = 5; ow.player.px = 8 * TILE; ow.player.py = 5 * TILE;
-    ow.player.fx = 8; ow.player.fy = 5; ow.player.dir = 'up';
+    ow.player.tx = 4; ow.player.ty = 5; ow.player.px = 4 * TILE; ow.player.py = 5 * TILE;
+    ow.player.fx = 4; ow.player.fy = 5; ow.player.dir = 'up';
     tk(g, 2);
     pA(g, 1);
     var seen = [], n = 0;
@@ -179,7 +181,7 @@ const driver = `
   function palletGame(mutate, seed) {
     var g = mkGame(seed);
     var st = defaultState();
-    st.story.position = { map: 'pallet', x: 8, y: 5, dir: 'up' };
+    st.story.position = { map: 'pallet', x: 4, y: 5, dir: 'up' };
     mutate(st);
     g.state = st;
     g.scenes.push(new OverworldScene());
