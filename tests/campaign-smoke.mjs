@@ -69,7 +69,7 @@ const driver = `
           const foeTypes = SPECIES[b.foe.speciesId].types, allyTypes = SPECIES[b.ally.speciesId].types;
           m.items.forEach((it, i) => { if (it.disabled) return; const slot = b.ally.moves[i]; if (!slot) return; const md = MOVES[slot.id]; const sc = md.cat === 'status' ? 0.05 : (md.power || 0) * effectiveness(md.type, foeTypes) * (allyTypes.includes(md.type) ? 1.5 : 1); if (sc > bs) { bs = sc; best = i; } });
           ui.debugChoose(best); tick(3);
-        } else if (m.title === 'Choose next Pokemon' || m.title === 'Party') {
+        } else if (m.title === 'Choose next Kin' || m.title === 'Party') { // W1 resync: faint menu title renamed in the KIN branding sweep (battle.mjs)
           const idx = st.party.findIndex((mm) => mm.hp > 0 && mm !== b.ally);
           ui.debugChoose(idx >= 0 ? idx : m.items.length - 1); tick(3);
         } else { ui.debugChoose(m.items.length - 1); tick(3); }
