@@ -2647,6 +2647,38 @@ T23_KIND_DEFS.forEach(([kind], i) => {
   TILE_CHARS[ch] = kind;
 });
 const T23_PROP_KINDS = T23_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
+// ---- Wave W-DIFF (town distinctiveness pilot): the first two KIT-LEVEL
+// identity kinds pairs ----
+// Four new kinds continuing the block at idx 577-580 (T17 ends at 574;
+// idx 575 is reserved by T23's notchpost on its own branch and 576 is
+// held as a merge buffer; U+2041/U+2042/U+2043/U+2044, verified free in
+// TILE_CHARS, unused by every map row, trim-stable single code units).
+// Owner ruling 2026-11-13: "Every town kit should be different" — these
+// kinds are the pilot of the kit-level identity layer specified in
+// muse-directive/W-DIFF-AUDIT.md Phase B: Cragmoor (blackthorn) gets the
+// Basalt Sett & Drake-Gable kit (settfloor streets, drakeroof house
+// roofs), Lastlight (silvertown) gets the Marble Slab & Parapet kit
+// (marblefloor streets, parapetroof house roofs). Floors are full-bleed
+// walkable street materials (registered per town in the placement
+// audit's STREET_REGISTRY, W4 precedent); roofs are solid wall-class
+// tiles swapped onto house-stamp roof cells only — footprints, doors
+// and warps untouched. Authored art:
+// assets/sprites/pix/tiles/tile-settfloor.pix, tile-marblefloor.pix,
+// tile-drakeroof.pix, tile-parapetroof.pix.
+const WD_KIND_DEFS = [
+  ['settfloor', 'floor'],
+  ['marblefloor', 'floor'],
+  ['drakeroof', 'wall'],
+  ['parapetroof', 'wall'],
+];
+const WD_KIND_CHARS = {};
+WD_KIND_DEFS.forEach(([kind], i) => {
+  const ch = String.fromCodePoint(0x1E00 + 577 + i);
+  WD_KIND_CHARS[kind] = ch;
+  TILE_CHARS[ch] = kind;
+});
+const WD_FLOOR_KINDS = WD_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
+const WD_WALL_KINDS = WD_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
 const SINNOH_TOWN_GROUND_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg);
 const SINNOH_TOWN_GROUND2_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg2);
 // TX-3: the 8 gym exteriors by town (original type-accent motifs).
@@ -86669,6 +86701,24 @@ const ART = {
     "................",
     "................",
   ] },
+  "tile-drakeroof": { w: 16, h: 16, pal: {"a":"#39434c","b":"#2b333a","c":"#55626c","d":"#20262c","e":"#5d7263"}, rows: [
+    "acccacccacccaccc",
+    "aaaaaaaeaaaaaaaa",
+    "aaadaaadaeadaaad",
+    "dddddddddddddddd",
+    "ccacccacccacccac",
+    "aaaaaaaaaaaaaaae",
+    "edaaadaaadaaadaa",
+    "dddddddddddddddd",
+    "acccecccacccaccc",
+    "aaaaaaeaaaaaaaaa",
+    "aaadaaadeaadaaad",
+    "dddddddddddddddd",
+    "ccacccacccacccac",
+    "aaaaaaaaaaaaaaea",
+    "adaaadaaadaaadaa",
+    "dddddddddddddddd",
+  ] },
   "tile-dressbanner": { w: 16, h: 16, pal: {"W":"#b99b74","D":"#8e755b","B":"#5681bd","L":"#7097c7","A":"#d1bc88","C":"#c6d8e9"}, rows: [
     "WWWWWWWWWWWWDDWW",
     "WWWDDDDDDDDDDWWW",
@@ -89033,6 +89083,24 @@ const ART = {
     "bbbbbbbbbbbbbbbb",
     "bbbbbbbbbbbbbbbb",
   ] },
+  "tile-marblefloor": { w: 16, h: 16, pal: {"a":"#c6c6cd","b":"#a7a7b1","c":"#d4d4db","d":"#bdbdc6","e":"#9893ad","f":"#dcdce2"}, rows: [
+    "fffffffbdefcfffb",
+    "faaadaabfeaaaaab",
+    "daacaaabeaaaadab",
+    "faaaaaabfdaacaab",
+    "faaaadabcaaaaaab",
+    "fdaacaebfaaaaadb",
+    "caaaaeabfadaacab",
+    "bbbbbbbbbbbbbbbb",
+    "ffdfecfbfffffffb",
+    "fcaeaaabfaadaacb",
+    "faaeaaabfacaaaab",
+    "faedaacbfaaaaaab",
+    "fecaaaabfaaadaab",
+    "feaaaaabdaacaaab",
+    "eaaadaabfaaaaaab",
+    "bbbbbbbbbbbbbbbb",
+  ] },
   "tile-marshbog": { w: 16, h: 16, pal: {"a":"#6c8358","b":"#5b7150","c":"#7c9469","d":"#526a7b"}, rows: [
     "acacaaaacaaacaaa",
     "aaacccacaaaaadaa",
@@ -89212,6 +89280,24 @@ const ART = {
     "DDBBAADDBBAAAABB",
     "DDBBAABBBBBBABBB",
     "DDBBAABBBBBBAAAA",
+  ] },
+  "tile-parapetroof": { w: 16, h: 16, pal: {"a":"#b9b9c1","b":"#8f8f99","c":"#d8d8df","d":"#76767f","e":"#cbcbd3"}, rows: [
+    "cccccccccccccccc",
+    "aaaaaaaaaaaaaaaa",
+    "bbbbbbbbbbbbbbbb",
+    "aaaaaaabaaeaaaab",
+    "aeaaaaabaaaaaaab",
+    "aaaaaaabaaaeaaab",
+    "aaeaaaabaaaaaaab",
+    "aaaaaaabaaaaeaab",
+    "aaaeaaabaaaaaaab",
+    "aaaaaaabaaaaaeab",
+    "aaaaeaabaaaaaaab",
+    "aaaaaaabaaaaaaeb",
+    "aaaaaeabaaaaaaab",
+    "bbbbbbbbbbbbbbbb",
+    "dddddddddddddddd",
+    "dddddddddddddddd",
   ] },
   "tile-path-2": { w: 16, h: 16, pal: {"p":"#c1b184","q":"#b0a279","b":"#a69574","n":"#d7c999","k":"#a08a6c","r":"#71553d"}, rows: [
     "pppppppppppppppp",
@@ -93696,6 +93782,24 @@ const ART = {
     "ababbcaaaaaaabca",
     "aaaaadbabaaaaabc",
     "aaacaaaaaaaaaaab",
+  ] },
+  "tile-settfloor": { w: 16, h: 16, pal: {"a":"#55555f","b":"#43434c","c":"#686873","d":"#2e2e35","e":"#7a7a85"}, rows: [
+    "cacacdeccacdacac",
+    "aebaadaaaaadebaa",
+    "aaaaadaebaadaaaa",
+    "dddddddddddddddd",
+    "ccdcaccecdaccaca",
+    "aadbaaaaadaaaeba",
+    "aadaaaaaedaaaaaa",
+    "dddddddddddddddd",
+    "accacadceccadcac",
+    "aaaebadaaaaadaeb",
+    "aaaaaadaaebadaaa",
+    "dddddddddddddddd",
+    "cacdacaccedcacca",
+    "aaadebaaaadaaaae",
+    "baadaaaaaadbaaaa",
+    "dddddddddddddddd",
   ] },
   "tile-shadow-boulder": { w: 16, h: 16, pal: {"s":"#71523d"}, rows: [
     "................",
@@ -110596,6 +110700,8 @@ for (const k of [...S3_WALL_KINDS, ...S3_FLOOR_KINDS]) TILE_ART[k] = 'tile-' + k
 for (const k of S3_PROP_KINDS) TILE_ART[k] = 'tile-prop-' + k;
 // Arc 4 Stage S3b: Borea east/north kinds — same convention as S3a.
 for (const k of [...S3B_WALL_KINDS, ...S3B_FLOOR_KINDS]) TILE_ART[k] = 'tile-' + k;
+// Wave W-DIFF: kit-identity kinds — same convention as S3b.
+for (const k of [...WD_WALL_KINDS, ...WD_FLOOR_KINDS]) TILE_ART[k] = 'tile-' + k;
 for (const k of S3B_PROP_KINDS) TILE_ART[k] = 'tile-prop-' + k;
 // Perfection Pass Stage 2 Gate 0 (G0-4): the shuttered facade panel draws
 // its own tile and renders as-is (no facade group, no upper/side variant).
@@ -111165,6 +111271,7 @@ function buildArtTileCache(doc) {
   for (const k of H3B_FLOOR_KINDS) cache[k + 'Variants'] = ids(['tile-' + k]);
   for (const k of S3_FLOOR_KINDS) cache[k + 'Variants'] = ids(['tile-' + k]);
   for (const k of S3B_FLOOR_KINDS) cache[k + 'Variants'] = ids(['tile-' + k]);
+  for (const k of WD_FLOOR_KINDS) cache[k + 'Variants'] = ids(['tile-' + k]);
   cache.foundationVariants = ids(['tile-foundation-1', 'tile-foundation-2', 'tile-foundation-3']);
   // P-1 side walls: the SAME authored art rasterized through a palette
   // swap that darkens every hex by one full shade step (x0.72 — the
@@ -111430,6 +111537,7 @@ for (const k of H3_FLOOR_KINDS) FLOOR_VARIANTS[k] = k + 'Variants';
 for (const k of H3B_FLOOR_KINDS) FLOOR_VARIANTS[k] = k + 'Variants';
 for (const k of S3_FLOOR_KINDS) FLOOR_VARIANTS[k] = k + 'Variants';
 for (const k of S3B_FLOOR_KINDS) FLOOR_VARIANTS[k] = k + 'Variants';
+for (const k of WD_FLOOR_KINDS) FLOOR_VARIANTS[k] = k + 'Variants';
 // Wave 5a: interior floor kinds are ground families of their own (a prop
 // inside a Center stands on Center floor, never on grass or path), and
 // interior walls cast the shared shadow strip onto the floor below.
@@ -111482,7 +111590,7 @@ function groundFamilyOf(kind) {
   // psand kinds stand on path (props composite over the parent ground).
   if (kind && kind.startsWith('beach-')) return 'tropgrass';
   if (kind && kind.startsWith('psand-')) return 'path';
-  if (kind && (W6_FLOOR_KINDS.includes(kind) || O1_FLOOR_KINDS.includes(kind) || J3_FLOOR_KINDS.includes(kind) || H3_FLOOR_KINDS.includes(kind) || H3B_FLOOR_KINDS.includes(kind) || S3_FLOOR_KINDS.includes(kind) || S3B_FLOOR_KINDS.includes(kind))) return kind; // W6/O1/J3/H3/H3B/S3/S3B floors are own families
+  if (kind && (W6_FLOOR_KINDS.includes(kind) || O1_FLOOR_KINDS.includes(kind) || J3_FLOOR_KINDS.includes(kind) || H3_FLOOR_KINDS.includes(kind) || H3B_FLOOR_KINDS.includes(kind) || S3_FLOOR_KINDS.includes(kind) || S3B_FLOOR_KINDS.includes(kind) || WD_FLOOR_KINDS.includes(kind))) return kind; // W6/O1/J3/H3/H3B/S3/S3B/WD floors are own families
   if (kind && (kind.startsWith('tg-') || kind.startsWith('tg2-'))) return kind; // W5: town ground is its own family
   if (kind && (kind.startsWith('tc-') || kind.startsWith('td-') || kind.startsWith('flora-'))) return 'grass';
   if (kind === 'grass' || kind === 'grassground' || kind === 'flower' || kind === 'tree' || kind === 'rock' || kind === 'sign' ||
@@ -119095,6 +119203,12 @@ const WALKABLE = new Set(['.', ',', 'D', 'E', 'C', 'F', 'J', 'K', '1', '2', 'V',
   // T6_KIND_DEFS) is walkable — a ground decal on the Fan Club
   // porch, swapped 1:1 from a walkable boardwalk cell.
   ...[566]
+    .map((i) => String.fromCodePoint(0x1E00 + i)),
+  // Wave W-DIFF: the kit-identity street floors (settfloor /
+  // marblefloor — WD_KIND_DEFS idx 577,578 at U+1E00+577, tiles.mjs)
+  // are walkable street material, swapped 1:1 from the walkable '.'
+  // path char in Cragmoor / Lastlight, so floor stays floor.
+  ...[577, 578]
     .map((i) => String.fromCodePoint(0x1E00 + i))]);
 
 // Trainer definitions for the slice.
@@ -137022,24 +137136,24 @@ const MAPS6 = {
     "name": "Cragmoor City",
     "music": "pewter-theme",
     "rows": [
-      "ỷỷỷỸỷỷỷỷỷỷỸỷỷỷỷỷỷỸỷỷỷỷỷỷỸỷỷỷỷỷ",
+      "ỷỷỷỸỷỷỷỷỷỷỸỷỷỷỷỷỷỸỷỷỷỷỷỷỸỷRRỷỷ",
       "ỷỸỵỵẤỵRỵỵỵỵỵỵỵẤỵỵỵỵỸỵỵỵỵỵRRRRỷ",
-      "ỷỵỵjklmỵỵdeefỵỵỹỹỹỹỵỵỻỻỻỸR99Rỷ",
-      "ỷRỵAJKAỵỵP12PỵỵUVYUỵỵỼsỼỵỵỵỵỵỷ",
-      "ỷ.............S..........S...ỷ",
-      "ỷỵSỵS..ỵỵỵỵẤỵ...ỵỵỵỵỵỵỵṀ....Ṁỷ",
-      "ỷỵỵỵẤ.ỵỵỵỵỵỵỵỵ.ỵỵỵỵỵỵẤỵỵRỵ.Rỵỷ",
-      "ỷỵỵỵỵ.oỵỵỵỵỵỵỵ.ỵỵỵỵỵỵỵỵỵỵo.ỵỵỷ",
-      "..............S...............",
-      ".....S........................",
-      "ỷỵỵỵỵ.ỵỵỵỵỵỵỵỵ.ỵỵẤỵỵỵỵỵỵỵỵ.ỵỵỷ",
-      "ỷỵỵỵỵ.ỵỵỹỹỹỵỵỵ.ỵỵỵỵỹỹỹnẑnỵ.ỵỵỷ",
-      "ỷỵỵỵỵ.ỵpỼsỼpỵ...ỵỵỵỼsỼnṑn...ỵỷ",
-      "ỷ.............S...........S..ỷ",
-      "ỷỵỵỵ,S,,ỵỵỵỵỵ...ỵỵỵỵ,,,ỵỵ...ỵỷ",
-      "ỷỵỵỵ,,,,,ỵỵỵỵ...ỵỵỵỵ,,,ỵỵỵỵỵỵỷ",
-      "ỷỵnnnỵnnnnnỵỵẤS.ỵnnẤnnỵỵỵRnnRỷ",
-      "ỷỷỷỸỷỷỷỷỷỷỸỷỷỷ..ỷỷỷỸỷỷỷỷỷỷỸỷỷỷ"
+      "ỷỵỵjklmỵỵdeefỵỵỹỹỹỹỵỵ⁃⁃⁃ỸR99Rỷ",
+      "ỷRỵAJKAỵỵP12PỵỵUVYUỵỵỼsỼỵỶỶỶỶỷ",
+      "ỷ⁁⁁⁁⁁⁁⁁⁁⁁⁁⁁⁁⁁⁁S⁁⁁⁁⁁⁁⁁⁁⁁⁁⁁S⁁⁁⁁ỷ",
+      "ỷỵSỵS⁁⁁ỵỵỵỵẤỵ⁁⁁⁁ỵỵỵỵỵỵỵṀ⁁⁁⁁⁁Ṁỷ",
+      "ỷỵỵỵẤ⁁ỵỵỵỵỵỵỵỵ⁁ỵỵỵỵỵỵẤỵỵRỵ⁁Rỵỷ",
+      "ỷỵỵỵỵ⁁oỵỵỵỵỵỵỵ⁁ỵỵỵỵỵỵỵỵỵỵo⁁Ỷỵỷ",
+      "⁁⁁⁁⁁⁁⁁⁁⁁⁁⁁⁁⁁⁁⁁S⁁⁁⁁⁁⁁⁁⁁⁁⁁⁁⁁⁁⁁⁁⁁",
+      "⁁⁁⁁⁁⁁S⁁⁁⁁⁁⁁⁁⁁⁁⁁⁁⁁⁁⁁⁁⁁⁁⁁⁁⁁⁁⁁⁁⁁⁁",
+      "ỷỵỵỵỵ⁁ỵỵỵỵỵỵỵỵ⁁ỵỵẤỵỵỵỶỶỶỶỶ⁁ỵỵỷ",
+      "ỷỵỵỵỵ⁁ỵỵ⁃⁃⁃ỵỵỵ⁁ỵỵỵỵ⁃⁃⁃nẑnỶ⁁ỵỵỷ",
+      "ỷỵỵỵỵ⁁ỵpỼsỼpỵ⁁⁁⁁ỵỵỵỼsỼnṑn⁁⁁⁁ỵỷ",
+      "ỷ⁁⁁⁁⁁⁁⁁⁁⁁⁁⁁⁁⁁⁁S⁁⁁⁁⁁⁁⁁⁁⁁⁁⁁⁁S⁁⁁ỷ",
+      "ỷỵỵỵ,S,,ỵỵỵỵỵ⁁⁁⁁ỵỵỵỵ,,,ỵỵ⁁⁁⁁ỵỷ",
+      "ỷỵỵỵ,,,,,ỵỵỵỵ⁁⁁⁁ỵỵỵỵ,,,ỵỵỶỵỵỵỷ",
+      "ỷỵnnnỵnnnnnỵỵẤS⁁ỵnnẤnnỵỵỵRnnRỷ",
+      "ỷỷỷỸỷỷỷỷỷỷỸỷỷỷ⁁⁁ỷỷỷỸỷỷỷỷỷỷỸỷỷỷ"
     ],
     "warps": [
       {
@@ -137369,23 +137483,23 @@ const MAPS6 = {
     "name": "Lastlight Town",
     "music": "pewter-theme",
     "rows": [
-      "ỿỿỿἀỿỿỿỿỿỿἀỿỿ..ỿỿỿἀỿỿỿỿỿỿἀỿỿỿỿ",
-      "ỿỽỽỽỽỽỽỽỽỽỽỽỽS.ỽỽỽỽỽỽỽỽỽỽỽỽỽỽỿ",
-      "ỿỽỽjklmỽỽdeef..ἁἁἁἁἁỽἃἃἃỽỽἃἃἃỿ",
-      "ỿỽỽAJKAỽỽP12P.ἂἂsἂἂỽỽἄsἄỽỽἄsἄỿ",
-      "ỿF..........Ṁ......ṀS........ỿ",
-      "ỿỽSỽỽ.SỽỽS.ỽỽỽỽS.ỽỽỽỽỽ.ỽoἃἃἃỽỿ",
-      "ỿỽỽỽỽ.ỽỽỽỽ.ỽỽỽỽỽ.ỽỽỽỽn.ỽἀἄsἄỽỿ",
-      "ỿỽỽnỽ.ỽỽỽỽ.ỽỽỽỽỽ.ỽỽẄỽn.ỽỽ...ỽỿ",
-      ".............................ỽ",
-      ".............................ỽ",
-      "ỿoἃἃἃ.pἃἃἃ.ỽỽỽỽỽ.ỽỽỽỽS.ỽỽỽỽỽnỿ",
-      "ỿpἄsἄ.Sἄsἄ.ỽỽỽỽS.............ỿ",
-      "ỿỽẄ......ỽ.ỽỽỽỽỽ.onỽḣḣ..oF,ỽỽỿ",
-      "ỿỽỽ.,.,,.,.ỽFἀἃἃἃἃỽỽỽỽo.ỽ,,,ỽỿ",
-      "ỿỽỽ.,..,.,.ỽỽSἄṑἄἄỽFẅỽỽ.ỽ,ỽ,ỽỿ",
-      "ỿẄS......ỽ.Sỽỽ....Fἀỽỽo...ỽỽỽỿ",
-      "ỿ...oS..................S....ỿ",
+      "ỿỿỿἀỿỿỿỿỿỿἀỿỿ⁂⁂ỿỿỿἀỿỿỿỿỿỿἀỿỿỿỿ",
+      "ỿỽỾỾỾỾỾỽỾỾỾỾỾS⁂ỾỾỾỾỾỽỽỽỽỽỽỽỽỽỿ",
+      "ỿỽỾjklmỾỾdeef⁂⁂ἁἁἁἁἁỽ⁄⁄⁄ỽỽ⁄⁄⁄ỿ",
+      "ỿỽỾAJKAỾỾP12P⁂ἂἂsἂἂỽỽἄsἄỽỽἄsἄỿ",
+      "ỿF⁂⁂⁂⁂⁂⁂⁂⁂⁂⁂Ṁ⁂⁂⁂⁂⁂⁂ṀS⁂⁂⁂⁂⁂⁂⁂⁂ỿ",
+      "ỿỽSỽỽ⁂SỽỽS⁂ppỽỽS⁂ỽỽỽỽỽ⁂ỽo⁄⁄⁄ỽỿ",
+      "ỿỽỽỽỽ⁂ỽỽỽỽ⁂ppỽỽỽ⁂ỽỽỽỽn⁂ỽἀἄsἄỽỿ",
+      "ỿỽỽnỽ⁂ỽỽỽỽ⁂ỽỽỽỽỽ⁂ỽỽẄỽn⁂ỽỽ⁂⁂⁂ỽỿ",
+      "⁂⁂⁂⁂⁂⁂⁂⁂⁂⁂⁂⁂⁂⁂⁂⁂⁂⁂⁂⁂⁂⁂⁂⁂⁂⁂⁂⁂⁂ỽ",
+      "⁂⁂⁂⁂⁂⁂⁂⁂⁂⁂⁂⁂⁂⁂⁂⁂⁂⁂⁂⁂⁂⁂⁂⁂⁂⁂⁂⁂⁂ỽ",
+      "ỿo⁄⁄⁄⁂p⁄⁄⁄⁂ỽpppỽ⁂ỽỽỽỽS⁂ỽỽỽỽỽnỿ",
+      "ỿpἄsἄ⁂Sἄsἄ⁂ỽpppS⁂⁂⁂⁂⁂⁂⁂⁂⁂⁂⁂⁂⁂ỿ",
+      "ỿỽẄ⁂⁂⁂⁂⁂⁂ỽ⁂ỽỽỽỽỽ⁂onỽḣḣ⁂⁂oF,ỽỽỿ",
+      "ỿỽỽ⁂,⁂,,⁂,⁂ỽFἀἃἃἃἃỽỽỽỽo⁂ỽ,,,ỽỿ",
+      "ỿỽỽ⁂,⁂⁂,⁂,⁂ỽỽSἄṑἄἄỽFẅỽỽ⁂ỽ,ỽ,ỽỿ",
+      "ỿẄS⁂⁂⁂⁂⁂⁂ỽ⁂Sỽỽ⁂⁂⁂⁂Fἀỽỽo⁂⁂⁂ỽỽỽỿ",
+      "ỿ⁂⁂⁂oS⁂⁂⁂⁂⁂⁂⁂⁂⁂⁂⁂⁂⁂⁂⁂⁂⁂⁂S⁂⁂⁂⁂ỿ",
       "ỿỿỿἀỿỿỿỿỿỿἀỿỿỿỿỿỿἀỿỿỿỿỿỿἀỿỿỿỿỿ"
     ],
     "warps": [
@@ -183249,6 +183363,6 @@ if (typeof Game !== 'undefined') Object.assign(Game.prototype, {
 });
 
 </script>
-<!-- contentHash:5fc18e853e848c66e3825c7cb79efb42f9668df0e06f4d5ab74fbd3b4d57b6a0 -->
+<!-- contentHash:bc3ca18676222e5cec515c840fb40cf8f039ffdffbfc02520f027c4ff44e662c -->
 </body>
 </html>
