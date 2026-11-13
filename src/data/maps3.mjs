@@ -942,8 +942,8 @@ export const MAPS3 = {
       '=====++DD++=====',
     ]),
     warps: [
-      { x: 7, y: 9, to: { map: 'fuchsia', x: 11, y: 5 } },
-      { x: 8, y: 9, to: { map: 'fuchsia', x: 12, y: 5 } },
+      { x: 7, y: 9, to: { map: 'fuchsia', x: 13, y: 4 } },
+      { x: 8, y: 9, to: { map: 'fuchsia', x: 14, y: 4 } },
     ],
     signs: [],
     npcs: [
