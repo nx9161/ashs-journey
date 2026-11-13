@@ -431,6 +431,21 @@ export const EVENTS = {
     { flag: 'butterfree_released' },
     { toast: 'PRISMWING flew to its future.' },
   ],
+
+  // -- Canopy City: the parley pair ARRIVE (Wave ACT proof) ---------------
+  // RUE and COLE used to simply BE standing in the plaza whenever the
+  // post-St. Anne window was open (a load-time append). Now the
+  // loadMap resolver stages them hidden and this entry event walks
+  // them in out of the Game Corner they serve: west door for RUE,
+  // east door for COLE, south around the planters to their posts at
+  // (8,8) / (9,8). Fired once by sysLoadMap (its done flag is the
+  // gate); resolving the parley walks them back the same way.
+  ev_parley_enter: [
+    { say: ['The Game Corner doors spill light across the plaza — and two figures cross to the corner post, unhurried, like they hold the lease on it.'], who: 'NARRATOR' },
+    { say: ['RUE and COLE. The parley, in person. They are waiting on YOU.'], who: 'NARRATOR' },
+    { actorEnter: { who: 'rue@celadon', x: 12, y: 7, path: [[12, 8], [12, 9], [11, 9], [10, 9], [9, 9], [8, 9], [8, 8]], face: 'down' } },
+    { actorEnter: { who: 'cole@celadon', x: 13, y: 7, path: [[13, 8], [13, 9], [12, 9], [11, 9], [10, 9], [9, 9], [9, 8]], face: 'down' } },
+  ],
 };
 
 // The PRISMWING send-off, exported standalone for the overworld trigger.

@@ -149,6 +149,18 @@ Object.assign(OverworldScene.prototype, {
     // Town + frontier_complete + its fire-once flag, and yields to
     // the ARC COMPLETE card exactly as the homecoming does).
     if (!arcCardFired) tryScottClosing(g, id);
+    // Wave ACT (cinematic entry): the Canopy parley pair ARRIVE.
+    // While the post-St. Anne window is open and their entry event
+    // has not played, the loadMap resolver stages RUE and COLE
+    // hidden — this hook plays their walk-in from the Game Corner
+    // doors (ev_parley_enter) instead of leaving them pre-placed.
+    // The event's own done flag is the once-gate; a stalled chain
+    // re-fires on a later entry, the entry-scene idiom.
+    if (!arcCardFired && !g.ui.dialogueOpen && id === 'celadon'
+      && g.state.story.flags.stanne_done && !g.state.story.flags.parley_celadon_done
+      && !g.state.story.flags.ev_parley_enter_done) {
+      this.runEvent('ev_parley_enter');
+    }
     // Stage O2 (Amber story): map-entry scenes, flag-gated once each.
     // Ivy's intro fires on FIRST entry to her lab; KELPSAIL fires on
     // Marisol once the first Amber badge is held; the pod reunion
@@ -2826,6 +2838,19 @@ Object.assign(OverworldScene.prototype, {
             flags.wally_ralts = true;
             g.audio.playSfx('dex-register');
             g.ui.toast('Wally caught a PSYLET!');
+            // Wave ACT proof (quest-end relocation, recurring
+            // character): the catch scene IS Wally's farewell — he
+            // told you he is moving away, and promised your roads
+            // would cross again. So he goes: east out of Meadowbrook
+            // toward Wildflower and the long road, and his identity
+            // relocates to the Crown Road post (wally@victory-road,
+            // held empty by ACTOR_DEFAULTS until this moment) where
+            // he waits for the end-of-region meeting. Before this
+            // wave, both Wallys stood in both places at once.
+            this.runSteps([
+              { actorExit: { who: 'wally@petalburg', to: [29, 8] } },
+              { actorShow: { who: 'wally@victory-road' } },
+            ], 0, null);
           }, 'WALLY');
         });
         return true;
@@ -4029,9 +4054,18 @@ Object.assign(OverworldScene.prototype, {
     if (flags.parley_celadon_done || !flags.stanne_done) return false;
     const say = (lines, cb) => this.taleSay(lines, npc.name, cb);
     const resolve = () => { flags.parley_celadon_done = true; };
+    // Wave ACT: a resolved parley is a DEPARTURE, played — the pair
+    // walk back to the Game Corner doors they arrived from (RUE to
+    // the west door, COLE to the east) and out of the scene, instead
+    // of vanishing at the next load. Their hidden overrides persist;
+    // parley_celadon_done already keeps them unfielded hereafter.
+    const depart = () => this.runSteps([
+      { actorExit: { who: 'rue@celadon', path: [[8, 9], [9, 9], [10, 9], [11, 9], [12, 9], [12, 8], [12, 7]] } },
+      { actorExit: { who: 'cole@celadon', path: [[9, 9], [10, 9], [11, 9], [12, 9], [13, 9], [13, 8], [13, 7]] } },
+    ], 0, null);
     const fight = () => {
       const def = TRAINERS.duo3_celadon;
-      if (!def) { resolve(); return; }
+      if (!def) { resolve(); depart(); return; }
       // A clone carrying the pair's own names and lines for THIS scene;
       // team, levels and reward are the authored def's, untouched (R3).
       const t = { ...def, name: 'Rue & Cole',
@@ -4043,7 +4077,7 @@ Object.assign(OverworldScene.prototype, {
           recordBattleBond(st, 'duo3_celadon', won, fled);
           if (won && !fled) {
             resolve();
-            this.taleSay(['They flee toward the Game Corner, arguing about whose idea Canopy was.', 'Some things even a long road cannot fix. Their next ambush, wherever it is, will still be an ambush — but maybe a shorter one.'], '');
+            this.taleSay(['They flee toward the Game Corner, arguing about whose idea Canopy was.', 'Some things even a long road cannot fix. Their next ambush, wherever it is, will still be an ambush — but maybe a shorter one.'], '', () => depart());
           }
         },
       }));
@@ -4076,7 +4110,7 @@ Object.assign(OverworldScene.prototype, {
                 ? 'On the way out, Rue presses something into your hand — then stops. "You already carry a Second-Wind," she says, flat. "One of a kind. Fine." She counts out $2,000 instead, like it personally offends her. "Do NOT make it a thing." It is absolutely a thing.'
                 : 'On the way out, Rue presses two XP Candies into your hand. "For the road," she says. "Do NOT make it a thing." It is absolutely a thing.',
             'They walk off arguing about lunch. Not running. Walking. (Received an XP Candy for the road — less than a prize fight pays, and worth more.)',
-          ], '');
+          ], '', () => depart());
         });
       });
       return true;

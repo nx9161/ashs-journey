@@ -108,6 +108,16 @@ export const QUESTS = {
     ],
     reward: { choice: true }, rewardText: 'Dojo spar (XP) or a keepsake IOU',
     bondNpc: 'sabrina', bondDelta: 1,
+    // Wave ACT proof (tale-giver relocation): for twenty years the
+    // Dojo and the Gym have traded two-word messages across the
+    // street ("The hall stands." / "So does the Gym.") without the
+    // masters meeting. The completed tale is the thaw — so when it
+    // completes, Master Ko leaves the master's seat at the head of
+    // the dojo (7,1) and takes a post by the door (5,5), the
+    // threshold facing the street and the other half of his school.
+    // Fires via the tale-completion watcher, whichever of the tale's
+    // two endings (his spar, her IOU) the player chose.
+    onComplete: [{ actorMove: { who: 'master-ko@dojo', to: [5, 5] } }],
     revelation: "The Dojo and the Gym were one school once. Sabrina's father and Master Ko trained side by side — until the day they disagreed about what strength is FOR, and split the hall, the students, and Farsight itself down the middle.",
   },
   tale_fuchsia: {
