@@ -163641,6 +163641,9 @@ class UI {
     // (full-screen modal dim), hint card, 503 banner, sync dot. The touch
     // controls live in #stage's #ctlband (UI v2.5, see buildControls).
     this.frame = this.el('div', 'frameui', this.root);
+    // UI v2.6 (Wave CAM): the HUD mounts in #stage's #hudband when the
+    // shell provides one (fallback: the frame, pre-v2.6 shells).
+    this.hudBand = doc.getElementById ? doc.getElementById('hudband') : null;
     if (typeof window !== 'undefined' && window.addEventListener) {
       window.addEventListener('resize', () => this._syncChipAnchor());
     }
@@ -164627,7 +164630,7 @@ class UI {
   // .nohud (setHudVisible) and .inbattle (setBattleMode) in CSS, same as
   // .hudstrip — menus/dialogues overlay it, they do not hide it.
   buildHudChips() {
-    const wrap = this.el('div', 'hudchips', this.frame);
+    const wrap = this.el('div', 'hudchips', this.hudBand || this.frame);
     const loc = this.el('div', 'hudchip locchip hidden', wrap);
     const locText = this.el('span', 'locchip-text', loc);
     const obj = this.el('div', 'hudchip objchip hidden', wrap);
@@ -164990,7 +164993,7 @@ class UI {
   // ---- P1/D4: persistent HUD quick-strip (one-tap Bag/Party/Dex/Menu) ----
   // Choice documented: portrait = overlaid top-right of canvas (gameux §4.1).
   buildHudStrip() {
-    const strip = this.el('div', 'hudstrip', this.frame);
+    const strip = this.el('div', 'hudstrip', this.hudBand || this.frame);
     this._hudStrip = strip;
     const defs = [
       ['bag', 'Bag'], ['party', 'Party'], ['dex', 'Dex'], ['menu', 'Menu'],
@@ -165039,6 +165042,7 @@ class UI {
     this.hudVisible = v;
     if (this.headless || !this.root) return;
     this.root.classList.toggle('nohud', !v); // P1/D4: SELECT toggles the strip
+    if (this.hudBand) this.hudBand.classList.toggle('nohud', !v); // v2.6: band mirror
   }
 
   // ---- P1/D7: partner mood pip (persistent, tappable) ----
@@ -165047,7 +165051,7 @@ class UI {
   // in landscape (body.landscape) where the vertical rail owns the right
   // edge. No longer a floating bottom-right page widget.
   buildMoodPip() {
-    const b = this.el('button', 'moodpip hidden', this.frame);
+    const b = this.el('button', 'moodpip hidden', this.hudBand || this.frame);
     b.setAttribute('aria-label', 'VOLTIK');
     const cv = this.headless ? null : document.createElement('canvas');
     if (cv) {
@@ -165169,6 +165173,14 @@ class UI {
     s.top = Math.round(r.top) + 'px';
     s.width = Math.round(r.width) + 'px';
     s.height = Math.round(r.height) + 'px';
+    // UI v2.6 (Wave CAM): on desktop the HUD band takes the canvas box's
+    // width (the stage centers it), so the band's chips column and strip
+    // align with the field's left/right edges — above it, never on it.
+    // Phones/landscape leave the band at its natural full/grid width.
+    if (this.hudBand) {
+      const desk = document.body && document.body.classList.contains('desktop');
+      this.hudBand.style.width = desk ? Math.round(r.width) + 'px' : '';
+    }
   }
 
   update(dt) {
@@ -165330,6 +165342,7 @@ class UI {
     // window sliver under the message box during battle messages.
     this.cmdEl.classList.add('hidden');
     if (this.root) this.root.classList.toggle('inbattle', on); // hides the HUD strip in battle
+    if (this.hudBand) this.hudBand.classList.toggle('inbattle', on); // v2.6: band mirror
     if (this._moodPip) this._moodPip.classList.toggle('hidden', on || !this._moodWanted);
     if (!on) this.hideCommands();
   }
@@ -178827,7 +178840,7 @@ class Game {
   applyLayout() {
     const r = this.renderer;
     if (typeof window === 'undefined') {
-      r.resize(256, 192, 256, 192);
+      r.resize(256, 256, 256, 256);
       this.layoutMode = 'desktop';
       return;
     }
@@ -178850,16 +178863,16 @@ class Game {
     const wrap = document.getElementById && document.getElementById('screenwrap');
     const ww = wrap ? wrap.clientWidth : w, wh = wrap ? wrap.clientHeight : h;
     if (mode === 'desktop') {
-      // D3: aspect-locked 16:9; height reserves room for the hint card.
-      const cssW0 = Math.min(1120, w * 0.9);
-      let cw = cssW0, ch = cssW0 * 9 / 16;
-      const maxH = Math.min(630, Math.max(240, h - 140));
-      if (ch > maxH) { ch = maxH; cw = ch * 16 / 9; }
-      r.resize(384, 216, Math.round(cw), Math.round(ch));
+      // Wave CAM (owner law): the viewport is 16x16 tiles in EVERY
+      // presentation. Square request capped 128px under the wrap box so
+      // the renderer's integer snap (B2-G5, <= +128px) can never spill
+      // past #screenwrap into the HUD band above or the hint zone below.
+      const s = Math.min(1120, w * 0.9, Math.max(160, Math.min(ww, wh) - 128));
+      r.resize(256, 256, Math.round(s), Math.round(s));
     } else if (mode === 'landscape') {
-      // 4:3 in the screen column; width capped so snapped height fits.
-      const cw = Math.min(ww * 0.96, wh * 1.234);
-      r.resize(256, 192, Math.round(cw), Math.round(cw * 3 / 4));
+      // Square in the screen column; same snap-safe cap as desktop.
+      const s = Math.max(160, Math.min(ww, wh) - 128);
+      r.resize(256, 256, Math.round(s), Math.round(s));
     } else {
       // Square: short side requested, height pre-divided by snap tolerance.
       const s = Math.min(ww, wh / 1.08);
