@@ -45,9 +45,9 @@ export const DISCLAIMER_CREDITS = [
   'or tips, and collects no personal data for commercial purposes.',
   '',
   'If you represent a rights holder and have concerns about this project,',
-  'contact the developer directly and we will respond promptly.',
-  '// OQ-grade: rights-holder contact resolves to an owner-designated address',
-  '// before any public share. Not a dead link in a signed build.',
+  'please contact the developer through the GitHub account that',
+  'publishes this game (github.com/nx9161), or through the GitHub',
+  'copyright-reporting process.',
 ];
 
 export const GAME_TITLE = "ASH'S JOURNEY";
