@@ -7436,21 +7436,21 @@ export const MAPS6 = {
       "ỷỷỷỸỷỷỷỷỷỷỸỷỷỷỷỷỷỸỷỷỷỷỷỷỸỷỷỷỷỷ",
       "ỷỸỵỵẤỵRỵỵỵỵỵỵỵẤỵỵỵỵỸỵỵỵỵỵRRRRỷ",
       "ỷỵỵjklmỵỵdeefỵỵỹỹỹỹỵỵỻỻỻỸR99Rỷ",
-      "ỷRỵAJKAỵỵP12PỵỵUVYUỵỵỼsỼỶỶỶỶỵỷ",
-      "ỷỶỶỶỶỶỶỶỶỶỶỶỶỶỶỶỶỶỶỶỶỶỶỶỶSỶỶỵỷ",
-      "ỷỶSỶỶỶỶỶỶỶỶỶỶỶỶỶỶỶỶỵỵỵỵỵỶỶỶỶỶỷ",
-      "ỷỶỶỶẤỶỶỶỶỶỶỶỶỶỶỶỶỶỵỵỵỵỵỵỵỶỶỶỶỷ",
-      "ỷỶỶỶẤỵỵỵỶỵỵỵỵỶRỶỵỵỶỵỵỵRỵỵỶỶỶỶỷ",
-      "ỶỶỶỶỶỶỶỶỶỶỶỶỶỶỶỶỶỶỶỶỶỶỶỶỶỶỶỶỶỶ",
-      "ỶỶỶỶỶỶỶỶỶỶỶỶỶỶỶỶỶỶỶỶỶỶỶỶỶỶỶỶỶỶ",
-      "ỷỵỶỶỵỵỵỵỶẤỵỸỵỵỶỶỵỵỶỵỵỵỵỵỶẤỶỶỵỷ",
-      "ỷỵỶỶỵỵỵỵỶỵỵỵỵỵỶỶỵỵỶỵỵỵỵỵỶỵỶỶỵỷ",
-      "ỷỵỶỶ....ỶỵRRỵỵỶỶỵỵỶỶ...ỵỶỵỶỶỵỷ",
-      "ỷỵỶ.,,,,.ỵỸỵỵỵỶỶỵỵỶ.,,,.ỶỵỶỶỵỷ",
-      "ỷỵR.,,,,.ỵỵỵỵỵỶỶỵỸỶ.,,,.ỶỵỶỶỵỷ",
-      "ỷỵỵỶ..R.ỶỶỶỶỶỶỶỶỵỶỶỶ...ỶỶỶỶỶỵỷ",
-      "ỷỵỵỵỵỵỵỵnỵỵỵẤỶỶỶỶỶẤỵỵỵỵỵRỵỵỵRỷ",
-      "ỷỷỷỸỷỷỷỷỷỷỸỷỷỷỶỶỷỷỷỸỷỷỷỷỷỷỸỷỷỷ"
+      "ỷRỵAJKAỵỵP12PỵỵUVYUỵỵỼsỼỵỵỵỵỵỷ",
+      "ỷ.............S..........S...ỷ",
+      "ỷỵSỵS..ỵỵỵỵẤỵ...ỵỵỵỵỵỵỵṀ....Ṁỷ",
+      "ỷỵỵỵẤ.ỵỵỵỵỵỵỵỵ.ỵỵỵỵỵỵẤỵỵRỵ.Rỵỷ",
+      "ỷỵỵỵỵ.oỵỵỵỵỵỵỵ.ỵỵỵỵỵỵỵỵỵỵo.ỵỵỷ",
+      "..............S...............",
+      ".....S........................",
+      "ỷỵỵỵỵ.ỵỵỵỵỵỵỵỵ.ỵỵẤỵỵỵỵỵỵỵỵ.ỵỵỷ",
+      "ỷỵỵỵỵ.ỵỵỹỹỹỵỵỵ.ỵỵỵỵỹỹỹnẑnỵ.ỵỵỷ",
+      "ỷỵỵỵỵ.ỵpỼsỼpỵ...ỵỵỵỼsỼnṑn...ỵỷ",
+      "ỷ.............S...........S..ỷ",
+      "ỷỵỵỵ,S,,ỵỵỵỵỵ...ỵỵỵỵ,,,ỵỵ...ỵỷ",
+      "ỷỵỵỵ,,,,,ỵỵỵỵ...ỵỵỵỵ,,,ỵỵỵỵỵỵỷ",
+      "ỷỵnnnỵnnnnnỵỵẤS.ỵnnẤnnỵỵỵRnnRỷ",
+      "ỷỷỷỸỷỷỷỷỷỷỸỷỷỷ..ỷỷỷỸỷỷỷỷỷỷỸỷỷỷ"
     ],
     "warps": [
       {
@@ -7620,13 +7620,51 @@ export const MAPS6 = {
         "y": 5,
         "text": "CRAGMOOR CITY — A mountain town of slate and dragon-lore. The clan has kept the Den behind the gym for nine generations."
       },
-      {"x": 9, "y": 13, "text": "CRAGMOOR CITY — West: FROST PATH — EAST HALL · East: LASTLIGHT PASS · South: ROUTE 45."},
-      {"x": 21, "y": 16, "text": "CRAGMOOR CITY — West: FROST PATH — EAST HALL · East: LASTLIGHT PASS · South: ROUTE 45."},
+      {
+        "x": 14,
+        "y": 8,
+        "text": "CRAGMOOR CITY — West: FROST PATH — EAST HALL · East: LASTLIGHT PASS · South: ROUTE 45."
+      },
+      {
+        "x": 5,
+        "y": 9,
+        "text": "CRAGMOOR CITY — West: FROST PATH — EAST HALL · East: LASTLIGHT PASS · South: ROUTE 45."
+      },
+      {
+        "x": 14,
+        "y": 13,
+        "text": "CRAGMOOR CITY — West: FROST PATH — EAST HALL · East: LASTLIGHT PASS · South: ROUTE 45."
+      },
+      {
+        "x": 26,
+        "y": 13,
+        "text": "CRAGMOOR CITY — West: FROST PATH — EAST HALL · East: LASTLIGHT PASS · South: ROUTE 45."
+      },
+      {
+        "x": 4,
+        "y": 5,
+        "text": "CRAGMOOR CITY — West: FROST PATH — EAST HALL · East: LASTLIGHT PASS · South: ROUTE 45."
+      },
+      {
+        "x": 14,
+        "y": 4,
+        "text": "CRAGMOOR CITY — West: FROST PATH — EAST HALL · East: LASTLIGHT PASS · South: ROUTE 45."
+      },
+      {
+        "x": 5,
+        "y": 14,
+        "text": "CRAGMOOR CITY — West: FROST PATH — EAST HALL · East: LASTLIGHT PASS · South: ROUTE 45."
+      },
+      {
+        "x": 14,
+        "y": 16,
+        "text": "CRAGMOOR CITY — West: FROST PATH — EAST HALL · East: LASTLIGHT PASS · South: ROUTE 45."
+      }
     ],
     "npcs": [
       {
-        "x": 18,
-        "y": 6,
+        "x": 24,
+        "y": 5,
         "name": "DRAGON TAMER RYU",
         "art": "youngster",
         "skin": "#f0c8a0",
@@ -7653,8 +7691,8 @@ export const MAPS6 = {
         ]
       },
       {
-        "x": 3,
-        "y": 5,
+        "x": 9,
+        "y": 4,
         "name": "MART CLERK",
         "art": "clerk",
         "skin": "#f0c8a0",

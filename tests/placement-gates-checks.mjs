@@ -63,6 +63,17 @@
 //     after); conn/step-offs identical (156/156, 7/7) on honest
 //     materials — the shipped pass was measured on mud counted as
 //     fabric. Re-pinned with the T20 build.
+//     FOURTH DOCUMENTED EXCEPTION (T21): blackthorn's pin is its
+//     POST-T21 tuple. The Cragmoor rebuild replaced the shipped tg2
+//     mud checkerboard (208 of 540 cells) with the calm-grass +
+//     path-fabric town of the approved design: junctions 5 -> 7 (all
+//     marked), apronMin 0.824 -> 0.813 (six freestanding buildings
+//     where four stood on the north strip; still above the 0.6
+//     gate), strict 0.9534 -> 0.7712, fabric 0.9867 -> 0.988. Gate
+//     STATUS unchanged (PASS before and after); conn/step-offs
+//     identical (156/156, 7/7) on honest materials — the shipped
+//     pass was measured on mud counted as fabric. Re-pinned with
+//     the T21 build.
 //     Tuple: [pass, connOk, connPairs, stepTouch, stepTot, components,
 //     junctionSites, junctionsBare, apronLow, apronMin, merged,
 //     onFabric, shoulderOrphans, unanchoredAny, strict, fabric].
@@ -111,7 +122,7 @@ ok('gate census covers 64 towns', ids.length === 64, `${ids.length} ids`);
 // 4. per-town pins on the production path (targets use post-W4 pins)
 const PIN = {
   "azalea": [1, 132, 132, 8, 8, 1, 8, 0, 0, 0.688, 0, 0, 0, 0, 0.7723, 0.9977],
-  "blackthorn": [1, 156, 156, 7, 7, 1, 5, 0, 0, 0.824, 0, 0, 0, 0, 0.9534, 0.9867],
+  "blackthorn": [1, 156, 156, 7, 7, 1, 7, 0, 0, 0.813, 0, 0, 0, 0, 0.7712, 0.988],
   "canalave": [0, 36, 90, 8, 8, 3, 3, 0, 1, 0.417, 0, 0, 0, 0, 1, 1],
   "celadon": [1, 156, 156, 10, 10, 1, 3, 0, 0, 0.611, 0, 0, 0, 0, 0.9725, 1],
   "celestic": [1, 56, 56, 6, 6, 1, 3, 0, 0, 0.882, 0, 0, 0, 0, 1, 1],
