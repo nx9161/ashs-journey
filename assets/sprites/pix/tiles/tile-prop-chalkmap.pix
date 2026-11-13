@@ -1,0 +1,29 @@
+# Wave T1 (register N2): the chalk street-map board. Mom drew
+# Dawnwick's first street map in chalk on a barn door, because paper
+# cost money (Town Tale, tale_pallet); the board stands beside the
+# barn doors. Slate face, chalk streets, the causeway running down
+# to a chalk waterline.
+PIX tile-prop-chalkmap 16 16
+................
+.kkkkkkkkkkkkkk.
+.kwwwwwwwwwwwwk.
+.kwccccccccccwk.
+.kwchhcchcchcwk.
+.kwchhcchcchcwk.
+.kwhhhhhhhhhhwk.
+.kwccchcchcccwk.
+.kwccchcchcccwk.
+.kwchhhcchhhcwk.
+.kwccccchccccwk.
+.kwhchchchchcwk.
+.kwwwwwwwwwwwwk.
+.kkkkkkkkkkkkkk.
+.....pp..pp.....
+....ssssssss....
+PAL
+k #202028 outline
+w #71523d frame-wood
+c #3a4149 slate-face
+h #e8e8e0 chalk
+p #5a3a24 post
+s #4a4a3a shadow

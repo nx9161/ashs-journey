@@ -496,6 +496,27 @@ G2_KIND_DEFS.forEach(([kind], i) => {
 });
 export const G2_KINDS = G2_KIND_DEFS.map(([k]) => k);
 export const G2_WALKABLE_CHARS = G2_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => G2_KIND_CHARS[k]);
+// ---- Wave T1 (Dawnwick trial build): shore props ----
+// Two new kinds continuing the block at idx 563..564 (G2 ends at 562;
+// U+2033..U+2034, verified free in TILE_CHARS and unused by every map
+// row). Both are class 'prop': solid objects composited over the
+// ground they stand on (art.mjs resolver). boat rides on water cells
+// at the Dawnwick dock (hull browns only — no green-dominant pixels,
+// so the season re-grade leaves it alone); chalkmap is the standing
+// board carrying the chalk street-map from Dawnwick's Town Tale,
+// planted beside the barn doors. Authored art:
+// assets/sprites/pix/tiles/tile-prop-<kind>.pix (Wave T1 register
+// items N1/N2 in WAVE-T1-DAWNWICK-PLAN.md).
+export const T1_KIND_DEFS = [
+  ['boat', 'prop'], ['chalkmap', 'prop'],
+];
+export const T1_KIND_CHARS = {};
+T1_KIND_DEFS.forEach(([kind], i) => {
+  const ch = String.fromCodePoint(0x1E00 + 563 + i);
+  T1_KIND_CHARS[kind] = ch;
+  TILE_CHARS[ch] = kind;
+});
+export const T1_PROP_KINDS = T1_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
 export const SINNOH_TOWN_GROUND_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg);
 export const SINNOH_TOWN_GROUND2_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg2);
 // TX-3: the 8 gym exteriors by town (original type-accent motifs).
