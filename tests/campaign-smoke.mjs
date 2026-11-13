@@ -128,7 +128,7 @@ const driver = `
   ok('gym 1: boulder badge + flag', st.badges.kanto.includes('boulderbadge') && flags().badge_boulder === true);
   ow = gotoMap('gym-cerulean', 7, 7); fightTrainer('misty');
   ok('gym 2: cascade badge', st.badges.kanto.includes('cascadebadge'));
-  ow = gotoMap('cerulean', 12, 3); stepEvent(ow, 12, 2);
+  ow = gotoMap('cerulean', 17, 3); stepEvent(ow, 17, 2);
   ok('bill: helped + s.s. ticket arc', flags().bill_helped === true);
   ow = gotoMap('gym-vermilion', 5, 6); fightTrainer('surge');
   ok('gym 3: thunder badge', st.badges.kanto.includes('thunderbadge'));
