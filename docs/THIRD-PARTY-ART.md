@@ -9,12 +9,20 @@
 - Files in this repo: `assets/kit/gassasin-16x16.png`,
   `assets/kit/character/` (walk/idle frames)
 - Required credit (must ship in the game's credits wherever this art
-  is used): "Tileset by Damian Gasinski aka Gassasin
+  is used): "Tileset and character by Damian Gasinski aka Gassasin
   (opengameart.org/content/16xx16-tileset-pokemonzelda-styled),
   used under CC-BY 3.0."
 - Adopted by owner order 2026-11-11 as the world-art family for the
   town re-dress program (B2-G9 rollout). Everything else in the game
   remains original art drawn for this project.
+- Modifications (CC-BY 3.0 change indication, added by War Room W5,
+  2026-11-13): the work is used in modified form — tiles recoloured
+  per town (roof/wall/door/path palette remapping in
+  `src/engine/art.mjs`), derived tiles synthesised from the sheet
+  (`kit-door-r`, `kit-door-open`, the Wave H `kit-path-*` family,
+  sliced/synthesised in `assets/sprites/tools/build-kit-art.mjs`),
+  and character instances recoloured (`src/engine/art.mjs`). The
+  in-game Legal screen carries the same change indication.
 
 ## Wave H addition (2026-11-12): the kit's dirt-path family
 
