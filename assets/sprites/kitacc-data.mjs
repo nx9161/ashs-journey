@@ -82,6 +82,18 @@ const SHAPES = {
     down: { 14: '........C.C.....', 15: '........CcC.....', 16: '.........c......' },
     up: { 15: '.......C.C......', 16: '.......CcC......' },
     right: { 14: '....C.C.........', 15: '....CcC.........', 16: '.....c..........' } },
+  // twin hair buns (W-CHAR1: lead-hearthome): H/h follow the wearer's
+  // hair via swap; buns sit on the head's top corners (rows 13-16).
+  'hair-buns': { pal: { H: '#3b2400', h: '#8d5500' },
+    down: { 13: '..HHH......HHH..', 14: '..HhH......HhH..', 15: '...HH......HH...', 16: '...H........H...' },
+    up: 'down',
+    right: { 13: '...HHH..........', 14: '...HhH..........', 15: '....HH..........', 16: '....H...........' } },
+  // luchador mask (W-CHAR1: lead-pastoria): hood over hair and head
+  // sides, face window left open; C/c the mask cloth, W the trim stripe.
+  'mask-lucha': { pal: { O: '#241a20', C: '#3a6ac8', c: '#274a8f', W: '#f4f4f0' },
+    down: { 16: '....OCCCCCCO....', 17: '....OCCWWCCO....', 18: '....OCcWWcCO....', 19: '...OCCCWWCCCO...', 20: '...OC......CO...', 21: '...OC......CO...', 22: '....C......C....', 23: '....Cc....cC....' },
+    up: { 16: '....OCCCCCCO....', 17: '....OCCWWCCO....', 18: '....OCcWWcCO....', 19: '...OCCCWWCCCO...', 20: '...OCCCCCCCCO...', 21: '...OCCCCCCCCO...', 22: '....OCCCCCCO....', 23: '....OccccccO....' },
+    right: { 16: '....OCCCCCO.....', 17: '....OCCCCCCO....', 18: '....OCcCCcCO....', 19: '....OCCCCCCO....', 20: '....OC....CO....', 21: '....OC....CO....', 22: '.....C....C.....', 23: '.....Cc..cC.....' } },
 };
 export const KITACC = {};
 for (const [shape, s] of Object.entries(SHAPES)) {

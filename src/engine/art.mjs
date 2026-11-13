@@ -315,6 +315,48 @@ const NPC_SWAP_KEYS = {
   rue: { S: 'skin', H: 'hair', J: 'shirt', P: 'pants' },
   cole: { S: 'skin', H: 'hair', J: 'shirt', P: 'pants' },
   sparcoach: { S: 'skin', H: 'hair', J: 'shirt', P: 'pants' },
+  // W-CHAR1 (leaders & commanders): the palette-ignored kinds join the
+  // uniform scheme. Root cause of the NO-SAME-KIT audit's sharpest
+  // violation: gym1-gym5 / rocket / blackbelt / picnicker / kimono had
+  // NO entry here and NO KIT_CAST_SPEC entry, so kitCastVariant()
+  // returned null, no authored npc-<kind> art exists either, and every
+  // post on those kinds fell through to the forgeHumanoid placeholder
+  // — one flat silhouette for 18 gym leaders and every villain
+  // commander, their authored instance palettes reduced to four flat
+  // fills. The per-character kinds below (lead-*/cmd-*, keyed to the
+  // post, never to a display name) carry each boss's own design.
+  'lead-violet': { S: 'skin', H: 'hair', J: 'shirt', P: 'pants' },
+  'lead-azalea': { S: 'skin', H: 'hair', J: 'shirt', P: 'pants' },
+  'lead-goldenrod': { S: 'skin', H: 'hair', J: 'shirt', P: 'pants' },
+  'lead-ecruteak': { S: 'skin', H: 'hair', J: 'shirt', P: 'pants' },
+  'lead-rustboro': { S: 'skin', H: 'hair', J: 'shirt', P: 'pants' },
+  'lead-dewford': { S: 'skin', H: 'hair', J: 'shirt', P: 'pants' },
+  'lead-lavaridge': { S: 'skin', H: 'hair', J: 'shirt', P: 'pants' },
+  'lead-fortree': { S: 'skin', H: 'hair', J: 'shirt', P: 'pants' },
+  'lead-petalburg': { S: 'skin', H: 'hair', J: 'shirt', P: 'pants' },
+  'lead-sootopolis': { S: 'skin', H: 'hair', J: 'shirt', P: 'pants' },
+  'lead-oreburgh': { S: 'skin', H: 'hair', J: 'shirt', P: 'pants' },
+  'lead-eterna': { S: 'skin', H: 'hair', J: 'shirt', P: 'pants' },
+  'lead-hearthome': { S: 'skin', H: 'hair', J: 'shirt', P: 'pants' },
+  'lead-veilstone': { S: 'skin', H: 'hair', J: 'shirt', P: 'pants' },
+  'lead-pastoria': { S: 'skin', H: 'hair', J: 'shirt', P: 'pants' },
+  'lead-canalave': { S: 'skin', H: 'hair', J: 'shirt', P: 'pants' },
+  'lead-snowpoint': { S: 'skin', H: 'hair', J: 'shirt', P: 'pants' },
+  'lead-sunnyshore': { S: 'skin', H: 'hair', J: 'shirt', P: 'pants' },
+  'cmd-chimney-a': { S: 'skin', H: 'hair', J: 'shirt', P: 'pants' },
+  'cmd-chimney-b': { S: 'skin', H: 'hair', J: 'shirt', P: 'pants' },
+  'cmd-windworks': { S: 'skin', H: 'hair', J: 'shirt', P: 'pants' },
+  'cmd-eterna': { S: 'skin', H: 'hair', J: 'shirt', P: 'pants' },
+  'cmd-hq': { S: 'skin', H: 'hair', J: 'shirt', P: 'pants' },
+  gym1: { S: 'skin', H: 'hair', J: 'shirt', P: 'pants' },
+  gym2: { S: 'skin', H: 'hair', J: 'shirt', P: 'pants' },
+  gym3: { S: 'skin', H: 'hair', J: 'shirt', P: 'pants' },
+  gym4: { S: 'skin', H: 'hair', J: 'shirt', P: 'pants' },
+  gym5: { S: 'skin', H: 'hair', J: 'shirt', P: 'pants' },
+  rocket: { S: 'skin', H: 'hair', J: 'shirt', P: 'pants' },
+  blackbelt: { S: 'skin', H: 'hair', J: 'shirt', P: 'pants' },
+  picnicker: { S: 'skin', H: 'hair', J: 'shirt', P: 'pants' },
+  kimono: { S: 'skin', H: 'hair', J: 'shirt', P: 'pants' },
 };
 const HEX_RE = /^#[0-9a-fA-F]{6}$/;
 export function npcSwapFor(npc, kind) {
@@ -396,6 +438,52 @@ const KIT_CAST_SPEC = {
   agatha: { acc: [['skirt', { C: '@J', c: '@j' }]] },
   lance: { acc: [['cape', { C: '#7a1a3a', c: '#4a0f24' }]] },
   brock: {}, surge: {}, rue: {},
+  // W-CHAR1 named cast — gym leaders & villain commanders of Yamato /
+  // Maris / Borea. Kinds key to the POST (gym town / story site), never
+  // to a display name, so renames cannot break them. The palette is the
+  // character's own shipped instance data; the accessory is the
+  // signature their CHARACTER-PROMPTS role calls for (miner helmet,
+  // leaf cloak, lucha mask...). Two leaders ship bare (petalburg,
+  // sunnyshore) on the aide/rival precedent — their palettes are
+  // unique in the cast and carry the design alone.
+  'lead-violet': { acc: [['headband', { C: '@H', c: '@h' }]] },
+  'lead-azalea': { acc: [['cap', { C: '@J', c: '@j', X: '#e8c832' }]] },
+  'lead-goldenrod': { acc: [['hair-long', {}], ['bow', { C: '#e86a8a', c: '#c04a68' }]] },
+  'lead-ecruteak': { acc: [['headband', { C: '#4a3a6a', c: '#2d2342' }]] },
+  'lead-rustboro': { acc: [['hair-long', {}], ['bow', { C: '#7a3a3a', c: '#522626' }]] },
+  'lead-dewford': { acc: [['bandana', { C: '#2a6a8a', c: '#1a4258' }]] },
+  'lead-lavaridge': { acc: [['hair-pony', { T: '#2a2a3a' }]] },
+  'lead-fortree': { acc: [['hair-long', {}], ['headband', { C: '#5a7a9a', c: '#3c546c' }]] },
+  'lead-petalburg': {},
+  'lead-sootopolis': { acc: [['cape', { C: '#2a4a6a', c: '#1a2f45' }]] },
+  'lead-oreburgh': { acc: [['hat-hard', { C: '#c83a2a', c: '#8f2718' }]] },
+  'lead-eterna': { acc: [['cape', { C: '#3a6a2a', c: '#24451a' }]] },
+  'lead-hearthome': { acc: [['hair-buns', {}], ['skirt', { C: '@J', c: '@j' }]] },
+  'lead-veilstone': { acc: [['headband', { C: '#e8e8e8', c: '#bdbdbd' }]] },
+  'lead-pastoria': { force: { shirt: '@skin' }, acc: [['mask-lucha', { C: '#3a6ac8', c: '#274a8f', W: '#f4f4f0' }]] },
+  'lead-canalave': { acc: [['hat-hard', { C: '#6a6a76', c: '#43434e' }]] },
+  'lead-snowpoint': { acc: [['hair-pony', { T: '#c83a7a' }], ['skirt', { C: '#2a2a3a', c: '#1c1c26' }]] },
+  'lead-sunnyshore': {},
+  'cmd-chimney-a': { acc: [['bandana', { C: '#a02a2a', c: '#5f1818' }]] },
+  'cmd-chimney-b': { acc: [['hair-pony', { T: '#e8e8e8' }]] },
+  'cmd-windworks': { acc: [['hair-pony', { T: '#2a2a3a' }], ['skirt', { C: '#3a3a4a', c: '#282832' }]] },
+  'cmd-eterna': { acc: [['hair-long', {}], ['glasses', {}], ['skirt', { C: '#3a3a4a', c: '#282832' }]] },
+  'cmd-hq': { acc: [['glasses', {}]] },
+  // W-CHAR1 class closure — the remaining palette-ignored kinds get
+  // class specs so NO posted NPC can fall through to the forge
+  // placeholder again (guarded by tests/leader-cast-checks.mjs). The
+  // gym1-gym5 legacy kinds keep class specs as belt-and-braces: their
+  // leader posts moved to the per-character kinds above, but a stray
+  // post on a legacy kind now still renders a paletted kit figure.
+  rocket: { force: { shirt: '#2a2a2a', pants: '#2a2a3a' }, acc: [['cap', { C: '#2a2a33', c: '#14141c', X: '#c83a3a' }]] },
+  blackbelt: { acc: [['headband', { C: '#c83a2a', c: '#8f2718' }]] },
+  picnicker: { acc: [['cap', { C: '@J', c: '@j', X: '@j' }]] },
+  kimono: { acc: [['hair-long', {}], ['skirt', { C: '@J', c: '@j' }]] },
+  gym1: { acc: [['cap', { C: '@J', c: '@j', X: '@j' }]] },
+  gym2: { acc: [['headband', { C: '@J', c: '@j' }]] },
+  gym3: { acc: [['hair-long', {}]] },
+  gym4: { acc: [['bandana', { C: '@J', c: '@j' }]] },
+  gym5: {},
 };
 // Same-map clone breaker: loadMap stamps _cloneIx (occurrence index of
 // this kind+palette on the map); later occurrences rotate deterministic
@@ -478,6 +566,14 @@ export const NPC_NAMED_KINDS = new Set([
   'gary', 'garychamp', 'mom', 'hawthorn', 'brock', 'misty', 'surge',
   'erika', 'koga', 'sabrina', 'blaine', 'giovanni', 'lorelei', 'bruno',
   'agatha', 'lance', 'rue', 'cole', 'nurse', 'sparcoach',
+  // W-CHAR1: the Yamato/Maris/Borea leaders + commanders (see
+  // KIT_CAST_SPEC) join the named cast — 4-frame front idle cycle.
+  'lead-violet', 'lead-azalea', 'lead-goldenrod', 'lead-ecruteak',
+  'lead-rustboro', 'lead-dewford', 'lead-lavaridge', 'lead-fortree',
+  'lead-petalburg', 'lead-sootopolis', 'lead-oreburgh', 'lead-eterna',
+  'lead-hearthome', 'lead-veilstone', 'lead-pastoria', 'lead-canalave',
+  'lead-snowpoint', 'lead-sunnyshore', 'cmd-chimney-a', 'cmd-chimney-b',
+  'cmd-windworks', 'cmd-eterna', 'cmd-hq',
 ]);
 export const NPC_ROAMING_KINDS = new Set([
   'youngster', 'lass', 'kid', 'twin', 'camper', 'bugcatcher', 'hiker',
