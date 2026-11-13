@@ -159,6 +159,11 @@ export function defaultState(inherit) {
       // Phase 4 records the Town Tale sources (structural only); the
       // tiers, dialogue variants and consumers are Phase 5.
       bonds: {},
+      // Wave ACT (Actor Lifecycle): placement/visibility overrides,
+      // charId -> { map, x, y, face?, hidden?, template? } — where a
+      // character CURRENTLY stands when the story has moved them off
+      // their authored post (game/actors.mjs). Empty = everyone home.
+      actors: {},
       // ADR-025 §6 (Phase 6): Second Journey fields, all defaults-filled
       // on load (schema v2 stays). hof holds THIS run's own entries
       // only; priorHof keeps earlier runs' teams viewable without ever

@@ -17,6 +17,7 @@ import { HOENN_NPCS, HOENN_NPC_PATCHES } from '../data/story-hoenn.mjs';
 import { SINNOH_NPCS, SINNOH_NPC_PATCHES } from '../data/story-sinnoh.mjs';
 import { weatherForMap, drawWeatherOverlay } from './weather.mjs';
 import { PARLEY_NPCS, parleyVisible, bondTrainerVariant, recordBattleBond } from './bonds.mjs';
+import { actorCharId, actorDirective } from './actors.mjs';
 import { MOVES } from '../data/moves.mjs';
 import { SFX } from '../engine/audio.mjs';
 import { BattleScene } from './battle.mjs';
@@ -262,9 +263,18 @@ export class OverworldScene {
       // on this map; the kit cast resolver rotates hair/skin nudges by
       // it so same-map crowds never pixel-clone (see kitCastVariant).
       const cloneSeen = new Map();
+      const cidSeen = new Map();
       const stamped = this.map.npcs.map((n, i) => {
         const c = { ...n };
         c._pk = id + ':' + i;
+        // Wave ACT: _cid — the stable character identity, derived
+        // from the authored post (slug(name)@map, '#n' for same-name
+        // duplicates in assembly order). The lifecycle resolver and
+        // the event primitives key on it; _pk stays the roster slot.
+        const cidBase = actorCharId(c.name, id);
+        const cidOcc = cidSeen.get(cidBase) || 0;
+        cidSeen.set(cidBase, cidOcc + 1);
+        c._cid = cidOcc ? cidBase + '#' + (cidOcc + 1) : cidBase;
         const cloneKey = (c.art || '') + '|' + [c.skin, c.shirt, c.pants, c.hair].join('/');
         c._cloneIx = cloneSeen.get(cloneKey) || 0;
         cloneSeen.set(cloneKey, c._cloneIx + 1);
@@ -282,7 +292,59 @@ export class OverworldScene {
         }
         return c;
       });
-      this.map = { ...this.map, npcs: stamped };
+      // Wave ACT (Actor Lifecycle): the lifecycle resolver — a
+      // character's saved/default directive (game/actors.mjs)
+      // replaces their authored post. A directive naming ANOTHER map
+      // removes them here (that map's resolver fields them from the
+      // stored template); `hidden` keeps the roster slot but out of
+      // play (the event layer can still find and re-show them); a
+      // directive naming THIS map re-posts them via _stage, which
+      // npcX/npcY resolve ahead of wander. Staged and hidden actors
+      // never wander — they hold the post the story gave them.
+      const actState = this.game && this.game.state;
+      const savedActors = (actState && actState.story && actState.story.actors) || {};
+      const finalRoster = [];
+      const fielded = new Set();
+      for (const c of stamped) {
+        const dir = actorDirective(actState, c._cid);
+        if (dir && dir.map && dir.map !== id) continue; // relocated away
+        if (dir && dir.hidden) c._actorHidden = true;
+        if (dir && dir.map === id && Number.isInteger(dir.x) && Number.isInteger(dir.y)) {
+          c._stage = { x: dir.x, y: dir.y, fx: dir.x, fy: dir.y, glide: 0 };
+          if (dir.face) c._face = dir.face;
+        }
+        // Canopy parley staging: while their entry event has not yet
+        // played, the pair are NOT pre-placed — they ARRIVE via
+        // ev_parley_enter (sysLoadMap). A saved override (a reload
+        // mid-entry) outranks the staging and fields them as saved.
+        if (c.parley && parleyVisible(actState) && !savedActors[c._cid]
+          && !(actState && actState.story && actState.story.flags && actState.story.flags.ev_parley_enter_done)) {
+          c._actorHidden = true;
+        }
+        if (c._stage || c._actorHidden) delete c._wander;
+        fielded.add(c._cid);
+        finalRoster.push(c);
+      }
+      // Cross-map arrivals: a saved directive placing a character
+      // HERE whose home post is on another map fields them from the
+      // template the move committed.
+      for (const cid of Object.keys(savedActors)) {
+        const ov = savedActors[cid];
+        if (!ov || ov.map !== id || ov.hidden || !ov.template || fielded.has(cid)) continue;
+        if (!Number.isInteger(ov.x) || !Number.isInteger(ov.y)) continue;
+        const c = { ...ov.template };
+        delete c.map;
+        c.x = ov.x; c.y = ov.y;
+        c._pk = id + ':actor:' + cid;
+        c._cid = cid;
+        c._cloneIx = 0;
+        c._phaseMs = 0;
+        c._face = ov.face || c.dir || 'down';
+        c._stage = { x: ov.x, y: ov.y, fx: ov.x, fy: ov.y, glide: 0 };
+        fielded.add(cid);
+        finalRoster.push(c);
+      }
+      this.map = { ...this.map, npcs: finalRoster };
     }
     this.w = this.map.rows[0].length;
     this.h = this.map.rows.length;
@@ -328,8 +390,8 @@ export class OverworldScene {
   // roams, its authored home tile otherwise. Every occupancy, sight,
   // interaction and render consumer resolves through these two helpers
   // so the picture, the collision and the talk target never disagree.
-  npcX(n) { return n._wander ? n._wander.x : n.x; }
-  npcY(n) { return n._wander ? n._wander.y : n.y; }
+  npcX(n) { return n._stage ? n._stage.x : n._wander ? n._wander.x : n.x; }
+  npcY(n) { return n._stage ? n._stage.y : n._wander ? n._wander.y : n.y; }
 
   // Premium+ W4: the door-critical set — static-terrain articulation
   // tiles whose removal would disconnect a warp from the map's largest
@@ -395,8 +457,9 @@ export class OverworldScene {
     if (this.boulderAt && this.boulderAt(x, y)) return false;
     const base = WALKABLE.has(t) || (this.sysWalkableExtra && this.sysWalkableExtra(x, y));
     if (!base) return false;
-    // NPCs block (at their CURRENT tiles — wander positions included)
-    for (const n of this.map.npcs) if (this.npcX(n) === x && this.npcY(n) === y) return false;
+    // NPCs block (at their CURRENT tiles — wander positions included;
+    // lifecycle-hidden actors occupy nothing)
+    for (const n of this.map.npcs) if (!n._actorHidden && this.npcX(n) === x && this.npcY(n) === y) return false;
     return true;
   }
 
@@ -406,7 +469,7 @@ export class OverworldScene {
   }
 
   npcAt(x, y) {
-    for (const n of this.map.npcs) if (this.npcX(n) === x && this.npcY(n) === y) return n;
+    for (const n of this.map.npcs) if (!n._actorHidden && this.npcX(n) === x && this.npcY(n) === y) return n;
     return null;
   }
 
@@ -762,6 +825,7 @@ export class OverworldScene {
     const g = this.game;
     for (const n of this.map.npcs) {
       if (!n.trainer || !n.sight) continue;
+      if (n._actorHidden) continue; // Wave ACT: a hidden actor spots no one
       if (g.state.story.flags['beat_' + n.trainer]) continue;
       const dir = n.sight.dir || 'down';
       const range = n.sight.range || 3;

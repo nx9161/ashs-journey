@@ -53,6 +53,7 @@
  "src/game/rules.mjs",
  "src/game/keepsakes.mjs",
  "src/game/bonds.mjs",
+ "src/game/actors.mjs",
  "src/game/arcs.mjs",
  "src/game/weather.mjs",
  "src/game/ball-rules.mjs",

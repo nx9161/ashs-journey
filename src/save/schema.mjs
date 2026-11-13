@@ -245,6 +245,29 @@ export function validateSave(data) {
       if (typeof v !== 'number' || !Number.isInteger(v) || v < -10 || v > 10) { errors.push('bad-bond-value'); break; }
     }
   }
+  if (isObj(data.story) && data.story.actors !== undefined) {
+    // Wave ACT: story.actors — charId ('slug@map', '#n' suffix for
+    // same-map duplicates) -> placement/visibility directive
+    // { map?, x?, y?, face?, hidden?, template? }. Absent = pre-ACT
+    // save (fillV2Defaults derives {}); present-but-wrong = reject.
+    if (!isObj(data.story.actors)) errors.push('bad-story-actors');
+    else {
+      const keys = Object.keys(data.story.actors);
+      if (keys.length > 512) errors.push('bad-story-actors');
+      for (const k of keys) {
+        const v = data.story.actors[k];
+        const okKey = /^[a-z0-9-]+@[a-z0-9-]+(#\d+)?$/.test(k) && k.length <= 80;
+        const okV = isObj(v)
+          && (v.map === undefined || (typeof v.map === 'string' && /^[a-z0-9-]{1,40}$/.test(v.map)))
+          && ((v.x === undefined && v.y === undefined)
+            || (Number.isInteger(v.x) && Number.isInteger(v.y) && v.x >= 0 && v.x <= 999 && v.y >= 0 && v.y <= 999))
+          && (v.face === undefined || ['up', 'down', 'left', 'right'].includes(v.face))
+          && (v.hidden === undefined || typeof v.hidden === 'boolean')
+          && (v.template === undefined || (isObj(v.template) && typeof v.template.name === 'string'));
+        if (!okKey || !okV) { errors.push('bad-story-actors-entry'); break; }
+      }
+    }
+  }
   // ADR-025 §6 (Phase 6): Hall of Fame lists — ONE canonical shape
   // ({ team: [{speciesId, level, nickname}], badges }); the legacy
   // { species, level } entry stays acceptable here and is normalized
@@ -448,6 +471,36 @@ export function fillV2Defaults(data) {
       if (typeof v === 'number' && Number.isFinite(v)) bonds[k] = Math.max(-10, Math.min(10, Math.trunc(v)));
     }
     data.story.bonds = bonds;
+    // Wave ACT: story.actors defaults-filled on load (pre-ACT saves
+    // open with {} — everyone at their authored post). Entries are
+    // rebuilt into the closed directive shape; malformed entries
+    // drop (that character simply stands home again).
+    if (!isObj(data.story.actors)) data.story.actors = {};
+    const actors = {};
+    for (const k of Object.keys(data.story.actors).slice(0, 512)) {
+      if (!/^[a-z0-9-]+@[a-z0-9-]+(#\d+)?$/.test(k) || k.length > 80) continue;
+      const v = data.story.actors[k];
+      if (!isObj(v)) continue;
+      const out = {};
+      if (typeof v.map === 'string' && /^[a-z0-9-]{1,40}$/.test(v.map)) out.map = v.map;
+      if (Number.isFinite(v.x) && Number.isFinite(v.y)) {
+        out.x = Math.max(0, Math.min(999, Math.trunc(v.x)));
+        out.y = Math.max(0, Math.min(999, Math.trunc(v.y)));
+      }
+      if (['up', 'down', 'left', 'right'].includes(v.face)) out.face = v.face;
+      if (typeof v.hidden === 'boolean') out.hidden = v.hidden;
+      if (isObj(v.template) && typeof v.template.name === 'string') {
+        const t = {};
+        for (const f of ['name', 'art', 'skin', 'shirt', 'pants', 'hair', 'dir', 'tale', 'role', 'johto', 'hoenn', 'sinnoh']) {
+          if (typeof v.template[f] === 'string') t[f] = v.template[f].slice(0, 60);
+        }
+        if (Array.isArray(v.template.dialogue)) t.dialogue = v.template.dialogue.filter((l) => typeof l === 'string').slice(0, 12);
+        for (const f of ['witness', 'parley', 'mart']) if (v.template[f]) t[f] = true;
+        out.template = t;
+      }
+      actors[k] = out;
+    }
+    data.story.actors = actors;
     // P1 (2026-10-28): story.lastCenter — the persisted door-front
     // anchor of the last Center entered (the Center exit resolver
     // falls back to it after a reload inside a Center). Sanitized to
