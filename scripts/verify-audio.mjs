@@ -3,6 +3,9 @@
 // schema, audits the channel budget, and exercises the engine's scheduling
 // logic through a fake AudioContext (no audible output — asserts events,
 // timings, frequencies, gains, mute/volume/reduced-motion behavior).
+// W6 added [6] a call-site cross-check (every SFX key the game plays must
+// resolve in SFXSET — the audit D1 dead-key guard) and [7] audible proof
+// that the fixed keys schedule voices + suspended-context recovery.
 // Exit 0 = all pass. Run: node scripts/verify-audio.mjs
 
 import { execFileSync } from 'node:child_process';
@@ -221,6 +224,103 @@ else ok('voice budget cap enforced (' + EVENTS.length + ' of 10 simultaneous not
 A.applySettings({ mute: true, musicVol: 0.3, sfxVol: 0.4, reducedMotion: true });
 if (!A.muted || A.musicVol !== 0.3 || A.sfxVol !== 0.4 || !A.reducedMotion) bad('applySettings', 'settings not applied');
 else ok('applySettings persists mute + both volumes + reduced motion');
+
+console.log('[6] call-site cross-check: every played SFX key resolves (W6 / audit D1 guard)');
+const fs = await import('node:fs');
+function walkMjs(dir) {
+  const out = [];
+  for (const e of fs.readdirSync(dir, { withFileTypes: true })) {
+    const p = path.join(dir, e.name);
+    if (e.isDirectory()) out.push(...walkMjs(p));
+    else if (e.name.endsWith('.mjs')) out.push(p);
+  }
+  return out;
+}
+// Argument text of every playSfx(...) call in a source text: tracks paren
+// depth and copies string literals verbatim (so '}' or ')' inside a raw
+// table argument cannot truncate the scan).
+function playSfxArgs(text) {
+  const args = [];
+  let i = 0;
+  while ((i = text.indexOf('playSfx(', i)) !== -1) {
+    let j = i + 'playSfx('.length, depth = 1, arg = '';
+    while (j < text.length && depth > 0) {
+      const c = text[j];
+      if (c === "'" || c === '"' || c === '`') {
+        let k = j + 1;
+        while (k < text.length && text[k] !== c) { if (text[k] === '\\') k++; k++; }
+        arg += text.slice(j, Math.min(k + 1, text.length));
+        j = k + 1;
+        continue;
+      }
+      if (c === '(') depth++;
+      else if (c === ')') { depth--; if (depth === 0) { j++; break; } }
+      arg += c; j++;
+    }
+    args.push(arg);
+    i = j;
+  }
+  return args;
+}
+const KEY_RE = /'([a-z0-9][a-z0-9_-]*)'/g;
+let siteCount = 0;
+const usedKeys = new Map();   // key -> first file that plays it
+const dynamicSites = [];      // playSfx calls with no literal key (must stay exactly the known one)
+for (const f of walkMjs(path.join(ROOT, 'src'))) {
+  const rel = path.relative(ROOT, f);
+  const text = fs.readFileSync(f, 'utf8');
+  for (const arg of playSfxArgs(text)) {
+    if (rel === path.join('src', 'engine', 'audio.mjs') && arg.trim() === 'key') continue; // the definition
+    siteCount++;
+    // The one known dynamic call: playCry passing a CRIES table / raw
+    // fallback table (cries resolve against CRIES, not SFXSET, by design).
+    if (arg.trimStart().startsWith('cry ||')) { dynamicSites.push(rel); continue; }
+    const keys = [...arg.matchAll(KEY_RE)].map((m) => m[1]);
+    if (!keys.length) { dynamicSites.push(rel + ': playSfx(' + arg.trim().slice(0, 40) + '…)'); continue; }
+    for (const k of keys) if (!usedKeys.has(k)) usedKeys.set(k, rel);
+  }
+  for (const m of text.matchAll(/SFX\[\s*'([^']+)'\s*\]/g)) {
+    if (!usedKeys.has(m[1])) usedKeys.set(m[1], rel);
+  }
+}
+let dangling = 0;
+for (const [k, rel] of usedKeys) {
+  if (!SFXSET[k]) { dangling++; bad('callsite:' + k, 'played in ' + rel + ' but not in SFXSET — the sound is silently dropped'); }
+}
+if (!dangling) ok('all ' + usedKeys.size + ' distinct SFX keys across ' + siteCount + ' playSfx sites resolve in SFXSET');
+if (dynamicSites.length === 1 && dynamicSites[0] === path.join('src', 'engine', 'audio.mjs')) ok('exactly one known dynamic playSfx call (playCry table pass-through)');
+else bad('dynamic-calls', 'expected only the playCry pass-through, found: ' + (dynamicSites.join('; ') || 'none'));
+// Named regression pins for the W6 fixes: the keys exist AND are played.
+for (const k of ['menu-move', 'item-get', 'warp', 'fanfare']) {
+  if (!SFXSET[k]) bad('w6-pin:' + k, 'table missing from SFXSET');
+  else if (!usedKeys.has(k)) bad('w6-pin:' + k, 'tabled but no call site plays it (unwired)');
+}
+if (!failures) ok('W6 pins: menu-move / item-get / warp tabled + played; fanfare tabled + played');
+
+console.log('[7] W6 audible proof: fixed keys schedule voices; suspended ctx resumes');
+A.setMuted(false); A.setSfxVolume(0.8); A.setMusicVolume(0.8); A.setReducedMotion(false); // undo 5k test settings
+for (const key of ['menu-move', 'item-get', 'warp', 'fanfare']) {
+  EVENTS.length = 0; A._live = []; // voices ended (fake clock is frozen)
+  A.playSfx(key);
+  const want = SFXSET[key].notes.length;
+  if (EVENTS.length !== want) bad('audible:' + key, 'scheduled ' + EVENTS.length + ' events != ' + want + ' notes');
+  else ok('playSfx(\'' + key + '\') schedules all ' + want + ' notes');
+}
+class FakeAC2 extends FakeAC {
+  constructor() { super(); this.state = 'running'; this.resumeCalls = 0; }
+  resume() { this.resumeCalls++; this.state = 'running'; return Promise.resolve(); }
+}
+const B = new engine.AudioEngine();
+B.unlock(FakeAC2);
+B.ctx.state = 'suspended'; // iOS interruption / backgrounded tab
+B.unlock(); // already unlocked: a returning gesture must attempt resume
+if (B.ctx.resumeCalls !== 1 || B.ctx.state !== 'running') bad('resume:unlock', 'gesture re-entry did not resume a suspended ctx');
+else ok('unlock() re-entry resumes a suspended context');
+B.ctx.state = 'suspended';
+B.playMusic('title-theme'); // the scheduler's first pass runs synchronously
+if (B.ctx.resumeCalls !== 2) bad('resume:scheduler', 'scheduler pass did not attempt resume');
+else ok('music scheduler attempts resume when it finds the ctx suspended');
+B.stopMusic();
 
 console.log(failures ? '\nAUDIO VERIFY: ' + failures + ' FAILURES' : '\nAUDIO VERIFY: ALL PASS');
 process.exit(failures ? 1 : 0);
