@@ -158206,6 +158206,16 @@ const SINNOH_TALES = {
     ['The coil? Oh, it is not broken — it is TUNED. Volkner rebuilt the beacon\'s array last spring and the spare picked up the new frequency like a song it already knew. It hums when the gym\'s voltage climbs, keeper. It hums loudest on battle days. Your coil is not haunted, Bly. It is a fan.'],
     ['A fan. Forty years of keeping the light, and my lamp room has been cheering for the gym the whole season. Brightshore, trainer. Even the hardware has a favourite.', 'The Beacon Coil is yours — take it before it starts humming at your battles too. If it does... let it. A little extra voltage never decided a match, but it has started a few legends.']),
 };
+// Wave W9 (actor completion beat B1): when The Intern's Scoop
+// completes, Vesk takes the staff job his finish line promises —
+// "the staff job has my name in pencil by Friday" — and relocates
+// from the plaza (11,7) to the Revelry TV station door's west flank
+// (15,4; the door-front tile (16,4) stays clear so the entrance is
+// never sealed). Fired by the tale-completion watcher (ACT layer);
+// positions only — no dialogue or tale logic changes.
+SINNOH_TALES.tale_sinnoh_jubilife.onComplete = [
+  { actorMove: { who: 'broadcast-intern-vesk@jubilife', to: [15, 4] } },
+];
 // Wave S2 (quest integrity): the sinnohTale factory predates the
 // `revelation` field the other regions' tales carry — without it, the
 // Quest Log's completed-tale line rendered "Complete. undefined" for
@@ -162690,14 +162700,39 @@ const ACTOR_DEFAULTS = {
   'wally@victory-road-maris': { hidden: true },
 };
 
+// Flag-gated resting defaults (Wave W9): a character whose story beat
+// has ALREADY resolved in this save no longer stands at the beat's
+// origin post — the beat's own text sends them onward, and their
+// destination post is authored elsewhere (never invented here).
+// Consulted only when the save holds no explicit override for the
+// charId (a saved override always wins), and keyed on flags already
+// in the save shape, so a pre-W9 save resolves correctly on load
+// with no migration and no watcher pass.
+// - jasmine@lighthouse-2: once Lumi is healed (amphy_healed) Jasmine
+//   leaves the lighthouse for her gym, in her own words: "My gym,
+//   when you are ready. I will be there." The gym post is authored
+//   (gym-olivine, kind `jasmine`).
+// - lance@lake-of-rage: once the Red WRATHWYRM is calmed
+//   (red_gyarados_done) Lance leaves the lake — the aftermath scene
+//   ends "Redwood. Meet me there." His Redwood post is authored
+//   (mahogany, kind `lance_mahogany`).
+const ACTOR_FLAG_DEFAULTS = {
+  'jasmine@lighthouse-2': { flag: 'amphy_healed', directive: { hidden: true } },
+  'lance@lake-of-rage': { flag: 'red_gyarados_done', directive: { hidden: true } },
+};
+
 // The character's effective directive: the saved override when one
-// exists, else the authored default, else null (stand at the
-// authored post, visible). Pure over the save — safe on any state
-// shape, including a state with no story.actors yet.
+// exists, else a flag-gated default whose flag the save has set,
+// else the authored default, else null (stand at the authored post,
+// visible). Pure over the save — safe on any state shape, including
+// a state with no story.actors yet.
 function actorDirective(state, charId) {
   const saved = state && state.story && state.story.actors
     ? state.story.actors[charId] : undefined;
   if (saved && typeof saved === 'object') return saved;
+  const gated = ACTOR_FLAG_DEFAULTS[charId];
+  if (gated && state && state.story && state.story.flags
+    && state.story.flags[gated.flag]) return gated.directive;
   return ACTOR_DEFAULTS[charId] || null;
 }
 
@@ -162823,7 +162858,17 @@ const actorLifecycleMixin = {
       }
       const dest = Array.isArray(to) ? to : (to && Number.isInteger(to.x) ? [to.x, to.y] : null);
       if (!dest) { next(); return; }
-      setActorOverride(st, who, { map: this.mapId, x: dest[0], y: dest[1], hidden: false, ...(spec.face ? { face: spec.face } : {}) });
+      // Wave W9 hardening: when the actor is fielded in THIS scene,
+      // the scene is their home map. When they are NOT (a tale
+      // completion observed on another map — tale_saffron completes
+      // inside saffron-shop on its IOU branch, while Ko's home is
+      // the dojo), the override must still be written against the
+      // actor's HOME map, derived from the charId suffix. Writing
+      // the scene's map instead made the home resolver read
+      // "relocated away" and the character vanished from home.
+      const homeMap = npc ? this.mapId
+        : (who.includes('@') ? who.slice(who.indexOf('@') + 1) : this.mapId);
+      setActorOverride(st, who, { map: homeMap, x: dest[0], y: dest[1], hidden: false, ...(spec.face ? { face: spec.face } : {}) });
       if (!npc) { next(); return; }
       npc._actorHidden = false;
       const pts = Array.isArray(spec.path) && spec.path.length ? spec.path : [dest];
