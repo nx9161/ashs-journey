@@ -144106,10 +144106,10 @@ const MAPS7 = {
       {"x": 5, "y": 11, "to": {"map": "center", "x": 4, "y": 4}, "via": {"map": "evergrande", "x": 5, "y": 12}},
       {"x": 10, "y": 11, "to": {"map": "mart", "x": 5, "y": 5}, "via": {"map": "evergrande", "x": 10, "y": 12}},
       {"x": 11, "y": 11, "to": {"map": "mart", "x": 5, "y": 5}, "via": {"map": "evergrande", "x": 11, "y": 12}},
-      {"x": 14, "y": 6, "to": {"map": "victory-road", "x": 11, "y": 14}},
-      {"x": 15, "y": 6, "to": {"map": "victory-road", "x": 12, "y": 14}},
-      {"x": 20, "y": 6, "to": {"map": "victory-road", "x": 18, "y": 1}},
-      {"x": 21, "y": 6, "to": {"map": "victory-road", "x": 19, "y": 1}},
+      {"x": 14, "y": 6, "to": {"map": "victory-road-maris", "x": 11, "y": 14}},
+      {"x": 15, "y": 6, "to": {"map": "victory-road-maris", "x": 12, "y": 14}},
+      {"x": 20, "y": 6, "to": {"map": "victory-road-maris", "x": 18, "y": 1}},
+      {"x": 21, "y": 6, "to": {"map": "victory-road-maris", "x": 19, "y": 1}},
       {"x": 13, "y": 3, "to": {"map": "league-evergrande", "x": 11, "y": 14}},
       {"x": 0, "y": 12, "to": {"map": "r134", "x": 26, "y": 8}},
       {"x": 0, "y": 13, "to": {"map": "r134", "x": 26, "y": 9}},
@@ -145137,8 +145137,8 @@ const MAPS7 = {
     "events": [],
     "start": {"x": 8, "y": 16}
   },
-  "victory-road": {
-    "id": "victory-road",
+  "victory-road-maris": {
+    "id": "victory-road-maris",
     "name": "Crown Road",
     "music": "pewter-theme",
     "indoor": true,
@@ -156993,7 +156993,7 @@ const HOENN_NPCS = [
     dialogue: ['The last hall on my road. Watch how it ends.'] },
   { map: 'lilycove', x: 16, y: 8, name: 'MAY', art: 'lass', skin: '#f0c8a0', shirt: '#c83a3a', pants: '#2a4a6a', hair: '#6a4a2a', hoenn: 'may_festival',
     dialogue: ['The Grand Festival, {player}. My whole road, in one hall.'] },
-  { map: 'victory-road', x: 11, y: 6, name: 'WALLY', art: 'kid', skin: '#f0d8b8', shirt: '#7c3fa5', pants: '#3a3a4a', hair: '#4a7a4a', hoenn: 'wally_final',
+  { map: 'victory-road-maris', x: 11, y: 6, name: 'WALLY', art: 'kid', skin: '#f0d8b8', shirt: '#7c3fa5', pants: '#3a3a4a', hair: '#4a7a4a', hoenn: 'wally_final',
     dialogue: ['I have thought about how this sentence ends for a whole region.'] },
   { map: 'cave-of-origin', x: 8, y: 7, name: 'KEEPER ANTHEA', art: 'elder', skin: '#e8b888', shirt: '#2d4377', pants: '#2a2a3a', hair: '#c0c0c0', hoenn: 'origin_keeper',
     dialogue: ['The cave keeps the first argument. The sky keeps its answer.'] },
@@ -158781,7 +158781,7 @@ const NARRATIVE_CHAPTERS = [
 {"id":"q_hoenn_seafloor","arcId":"hoenn","volume":6,"kind":"main","title":"Dive to the Sunken Cavern off Route 128","flag":"seafloor_done","requires":["q_hoenn_aqua_hideout"],"locations":["seafloor-cavern"],"events":["ev_hoenn_seafloor"],"canon":"original"},
 {"id":"q_hoenn_climax","arcId":"hoenn","volume":6,"kind":"main","title":"End the clash of the weather titans","flag":"climax_resolved","requires":["q_hoenn_seafloor"],"locations":["sky-pillar"],"events":["ev_hoenn_rayquaza"],"canon":"original"},
 {"id":"q_hoenn_rain","arcId":"hoenn","volume":6,"kind":"main","title":"Win the Rain Badge from Juan in Craterlake City","flag":"badge_rain","requires":["q_hoenn_climax"],"locations":["sootopolis","gym-sootopolis"],"characters":["JUAN"],"battles":["juan"],"mechanics":["gym-battle"],"canon":"original"},
-{"id":"q_hoenn_wally_final","arcId":"hoenn","volume":6,"kind":"main","title":"Face Wally in Crown Road","flag":"wally_final_done","requires":["q_hoenn_rain"],"locations":["victoryroad"],"canon":"original"},
+{"id":"q_hoenn_wally_final","arcId":"hoenn","volume":6,"kind":"main","title":"Face Wally in Crown Road","flag":"wally_final_done","requires":["q_hoenn_rain"],"locations":["victory-road-maris"],"canon":"original"},
 {"id":"q_hoenn_conference","arcId":"hoenn","volume":6,"kind":"main","title":"Register for the Perennial Conference","flag":"hoenn_conference_registered","requires":["q_hoenn_wally_final"],"locations":["league-evergrande"],"canon":"original"},
 {"id":"q_hoenn_tyson","arcId":"hoenn","volume":6,"kind":"main","title":"The Perennial Conference — the final, against Tyson","flag":"hoenn_complete","requires":["q_hoenn_conference"],"locations":["league-evergrande"],"canon":"original"},
 {"id":"q_sinnoh_arrival","arcId":"sinnoh","volume":8,"kind":"main","title":"Sail to Borea — land at Shingle Town","flag":"sinnoh_arrival","locations":["sandgem"],"events":["ev_sinnoh_arrival"],"mechanics":["chapter-card"],"canon":"original"},
@@ -160116,6 +160116,7 @@ const NAME_REGISTRY = {
     verdanturf: { name: "Wildflower Town", status: 'named', wave: 'I-H' },
     vermilion: { name: "Arcport City", status: 'locked', wave: 'I-K' },
     "victory-road": { name: "Summit Road", status: 'named', wave: 'I-S' },
+    "victory-road-maris": { name: "Crown Road", status: 'named', wave: 'W3' },
     victoryroad: { name: "Crown Road", status: 'named', wave: 'I-K' },
     violet: { name: "Iris City", status: 'named', wave: 'I-J' },
     viridian: { name: "Fernmere City", status: 'locked', wave: 'I-K' },
@@ -162524,12 +162525,12 @@ function actorCharId(name, mapId) {
 }
 
 // Resting defaults (Wave ACT proofs):
-// - wally@victory-road: Wally's Crown Road post stands EMPTY until
+// - wally@victory-road-maris: Wally's Crown Road post stands EMPTY until
 //   his Meadowbrook departure (the `wally` handler's catch scene is
 //   his farewell; its completion shows him here). Before this wave
 //   both Wallys stood in both places at once, forever.
 const ACTOR_DEFAULTS = {
-  'wally@victory-road': { hidden: true },
+  'wally@victory-road-maris': { hidden: true },
 };
 
 // The character's effective directive: the saved override when one
@@ -176982,7 +176983,7 @@ Object.assign(OverworldScene.prototype, {
             flags.wally_ralts = true;
             g.audio.playSfx('dex-register');
             g.ui.toast('Wally caught a PSYLET!');
-            this.runSteps([{ actorExit: { who: 'wally@petalburg', to: [29, 8] } }, { actorShow: { who: 'wally@victory-road' } }], 0, null);
+            this.runSteps([{ actorExit: { who: 'wally@petalburg', to: [29, 8] } }, { actorShow: { who: 'wally@victory-road-maris' } }], 0, null);
           }, 'WALLY');
         });
         return true;
