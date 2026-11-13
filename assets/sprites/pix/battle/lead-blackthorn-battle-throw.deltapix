@@ -1,0 +1,19 @@
+# lead-blackthorn-battle-throw — W-CHAR1 throw pose delta (ball at the throwing hand).
+PIXD lead-blackthorn-battle-throw lead-blackthorn-battle 48 64
+36 20 O
+37 20 O
+38 20 O
+39 20 B
+40 20 O
+36 21 O
+37 21 J
+38 21 J
+39 21 B
+40 21 O
+36 22 O
+37 22 O
+38 22 O
+39 22 O
+40 22 O
+PAL
+B #e03c31 ball red

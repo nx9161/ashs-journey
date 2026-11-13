@@ -2777,6 +2777,35 @@ const TRAINER_BATTLE_ART = {
   agatha: 'agatha-battle', lance: 'lance-battle',
   gary: 'gary-battle', garychamp: 'garychamp-battle',
   rue: 'rue-battle', cole: 'cole-battle',
+  // W-CHAR1: per-character figures for the Yamato/Maris/Borea leaders,
+  // the villain commanders/admins/bosses, the Amber champion and the
+  // two posted Frontier Brains. Before this wave every one of them
+  // resolved to a generic trainer-CLASS figure (most to the youngster
+  // default) — the battle-side half of the audit's clone violation.
+  // Keys mirror the overworld cast kinds (lead-*/cmd-*) where the
+  // character has one; registration is by trainer ID (below), never by
+  // display name, so renames cannot break resolution.
+  'lead-violet': 'lead-violet-battle', 'lead-azalea': 'lead-azalea-battle',
+  'lead-goldenrod': 'lead-goldenrod-battle', 'lead-ecruteak': 'lead-ecruteak-battle',
+  'lead-cianwood': 'lead-cianwood-battle', 'lead-olivine': 'lead-olivine-battle',
+  'lead-mahogany': 'lead-mahogany-battle', 'lead-blackthorn': 'lead-blackthorn-battle',
+  'lead-rustboro': 'lead-rustboro-battle', 'lead-dewford': 'lead-dewford-battle',
+  'lead-mauville': 'lead-mauville-battle', 'lead-petalburg': 'lead-petalburg-battle',
+  'lead-lavaridge': 'lead-lavaridge-battle', 'lead-fortree': 'lead-fortree-battle',
+  'lead-mossdeep-a': 'lead-mossdeep-a-battle', 'lead-mossdeep-b': 'lead-mossdeep-b-battle',
+  'lead-sootopolis': 'lead-sootopolis-battle', 'lead-oreburgh': 'lead-oreburgh-battle',
+  'lead-eterna': 'lead-eterna-battle', 'lead-hearthome': 'lead-hearthome-battle',
+  'lead-veilstone': 'lead-veilstone-battle', 'lead-pastoria': 'lead-pastoria-battle',
+  'lead-canalave': 'lead-canalave-battle', 'lead-snowpoint': 'lead-snowpoint-battle',
+  'lead-sunnyshore': 'lead-sunnyshore-battle',
+  'cmd-chimney-a': 'cmd-chimney-a-battle', 'cmd-chimney-b': 'cmd-chimney-b-battle',
+  'cmd-pyre': 'cmd-pyre-battle', 'cmd-hideout-a': 'cmd-hideout-a-battle',
+  'cmd-institute': 'cmd-institute-battle', 'cmd-hideout-b': 'cmd-hideout-b-battle',
+  'cmd-windworks': 'cmd-windworks-battle', 'cmd-eterna': 'cmd-eterna-battle',
+  'cmd-hq': 'cmd-hq-battle',
+  'boss-magma': 'boss-magma-battle', 'boss-aqua': 'boss-aqua-battle',
+  'boss-galactic': 'boss-galactic-battle', 'champ-amber': 'champ-amber-battle',
+  'brain-pike': 'brain-pike-battle', 'brain-pyramid': 'brain-pyramid-battle',
 };
 const TRAINER_BATTLE_IDS = {
   brock: 'brock', misty: 'misty', surge: 'surge', erika: 'erika',
@@ -2789,6 +2818,27 @@ const TRAINER_BATTLE_IDS = {
   r2_duo: 'rue',
   duo2_vermilion: 'cole', duo3_celadon: 'cole', duo4_saffron: 'cole',
   duo5_island: 'cole',
+  // W-CHAR1 (by trainer ID only — display names are not a stable key):
+  falkner: 'lead-violet', bugsy: 'lead-azalea', whitney: 'lead-goldenrod',
+  morty: 'lead-ecruteak', chuck: 'lead-cianwood', jasmine: 'lead-olivine',
+  pryce: 'lead-mahogany', clair: 'lead-blackthorn',
+  roxanne: 'lead-rustboro', brawly: 'lead-dewford', wattson: 'lead-mauville',
+  norman: 'lead-petalburg', flannery: 'lead-lavaridge', winona: 'lead-fortree',
+  tate: 'lead-mossdeep-a', liza: 'lead-mossdeep-b',
+  juan: 'lead-sootopolis',
+  roark: 'lead-oreburgh', gardenia: 'lead-eterna', fantina: 'lead-hearthome',
+  maylene: 'lead-veilstone', wake: 'lead-pastoria', byron: 'lead-canalave',
+  candice: 'lead-snowpoint', volkner: 'lead-sunnyshore',
+  mars_windworks: 'cmd-windworks', jupiter_eterna: 'cmd-eterna',
+  saturn_hq: 'cmd-hq',
+  magma_admin_chimney: 'cmd-chimney-a', aqua_admin_chimney: 'cmd-chimney-b',
+  magma_admin_pyre: 'cmd-pyre', magma_admin_hideout: 'cmd-hideout-a',
+  aqua_admin_institute: 'cmd-institute', aqua_admin_hideout: 'cmd-hideout-b',
+  maxie: 'boss-magma', archie: 'boss-aqua',
+  cyrus_spear: 'boss-galactic', cyrus_final: 'boss-galactic',
+  drake: 'champ-amber',
+  'frontier-brain-pike-silver': 'brain-pike', 'frontier-brain-pike-gold': 'brain-pike',
+  'frontier-brain-pyramid-silver': 'brain-pyramid', 'frontier-brain-pyramid-gold': 'brain-pyramid',
 };
 const TRAINER_BATTLE_NAMES = {
   'brock': 'brock', 'misty': 'misty', 'lt. surge': 'surge',
