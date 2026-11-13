@@ -52,6 +52,7 @@ const { PARLEY_NPCS } = await G('bonds.mjs');
 
 const SRC_OW = fs.readFileSync(path.join(ROOT, 'src/game/overworld.mjs'), 'utf8');
 const SRC_SYS = fs.readFileSync(path.join(ROOT, 'src/game/overworld-systems.mjs'), 'utf8');
+const SRC_ACT = fs.readFileSync(path.join(ROOT, 'src/game/actors.mjs'), 'utf8');
 
 const walkableAt = (mapId, x, y) => {
   const m = MAPS[mapId];
@@ -166,7 +167,7 @@ for (const k of ['actorEnter', 'actorMove', 'actorExit', 'actorShow', 'actorHide
 }
 ok('walker + watcher wired in the scene',
   SRC_OW.includes('queueActorWalk') && SRC_OW.includes('updateActorWalk')
-  && SRC_OW.includes('this.checkTaleCompletions()') && SRC_SYS.includes("mark = 'talefx_' + id"));
+  && SRC_OW.includes('this.checkTaleCompletions()') && SRC_ACT.includes("mark = 'talefx_' + id"));
 ok('identity + resolver wired in loadMap',
   SRC_OW.includes('c._cid') && SRC_OW.includes('actorDirective') && SRC_OW.includes('_actorHidden'));
 
@@ -199,7 +200,7 @@ ok('identity + resolver wired in loadMap',
   ok('entry paths end at the authored parley posts', endsAtPost(rue, ruePost) && endsAtPost(cole, colePost));
   const pathTilesOk = (e) => !!e && e.path.every(([x, y]) => walkableAt('celadon', x, y));
   ok('entry path tiles are walkable', pathTilesOk(rue) && pathTilesOk(cole));
-  ok('sysLoadMap fires the entry (entry-scene idiom)', SRC_SYS.includes("this.runEvent('ev_parley_enter')"));
+  ok('sysLoadMap fires the entry (entry-scene idiom)', SRC_SYS.includes('maybePlayParleyEnter(') && SRC_ACT.includes("this.runEvent('ev_parley_enter')"));
   ok('a resolved parley departs on foot (runParleyNpc exits)',
     SRC_SYS.includes("actorExit: { who: 'rue@celadon'") && SRC_SYS.includes("actorExit: { who: 'cole@celadon'"));
 }

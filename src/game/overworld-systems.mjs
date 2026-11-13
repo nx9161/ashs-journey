@@ -30,7 +30,6 @@ import { SINNOH_QUESTS, roamLanding, EMPATHIS_LANDINGS, LUNACYGN_LANDINGS, HALLO
 import { DIVE_PAIRS } from '../data/maps7.mjs';
 import { QUESTS, taleSpotAt, taleStageOf, taleStatus, acceptTale, advanceTale, completeTale, IOU_PRIORITY } from '../data/quests.mjs';
 import { applyBond, applyBondOnce, bondOf, bondSceneLines, bondTrainerVariant, recordBattleBond, tierAtLeast, takeEchoGreeting, ECHO_LINE, BOND_NPC_IDS } from './bonds.mjs';
-import { setActorOverride, actorTemplateOf } from './actors.mjs';
 import { CHAPTERS } from '../data/story.mjs';
 import { statValue, hpValue } from '../engine/formulas.mjs';
 import { levelCapFor, HOME_MAP_ID, currentArcOf } from '../data/arcs.mjs';
@@ -148,19 +147,7 @@ Object.assign(OverworldScene.prototype, {
     // map-entry check, on this same seam (it gates itself on Dawnwick
     // Town + frontier_complete + its fire-once flag, and yields to
     // the ARC COMPLETE card exactly as the homecoming does).
-    if (!arcCardFired) tryScottClosing(g, id);
-    // Wave ACT (cinematic entry): the Canopy parley pair ARRIVE.
-    // While the post-St. Anne window is open and their entry event
-    // has not played, the loadMap resolver stages RUE and COLE
-    // hidden — this hook plays their walk-in from the Game Corner
-    // doors (ev_parley_enter) instead of leaving them pre-placed.
-    // The event's own done flag is the once-gate; a stalled chain
-    // re-fires on a later entry, the entry-scene idiom.
-    if (!arcCardFired && !g.ui.dialogueOpen && id === 'celadon'
-      && g.state.story.flags.stanne_done && !g.state.story.flags.parley_celadon_done
-      && !g.state.story.flags.ev_parley_enter_done) {
-      this.runEvent('ev_parley_enter');
-    }
+    if (!arcCardFired) tryScottClosing(g, id); this.maybePlayParleyEnter(g, id, arcCardFired); // Wave ACT: the Canopy parley pair arrive.
     // Stage O2 (Amber story): map-entry scenes, flag-gated once each.
     // Ivy's intro fires on FIRST entry to her lab; KELPSAIL fires on
     // Marisol once the first Amber badge is held; the pod reunion
@@ -891,151 +878,8 @@ Object.assign(OverworldScene.prototype, {
       }));
       return;
     }
-    // Wave ACT: actor lifecycle steps (see runActorStep below).
-    if (s.actorEnter || s.actorMove || s.actorExit || s.actorShow || s.actorHide) {
-      this.runActorStep(s, next); return;
-    }
-    if (s.ending) { this.runEnding(next); return; }
+    if (s.actorEnter || s.actorMove || s.actorExit || s.actorShow || s.actorHide) { this.runActorStep(s, next); return; } if (s.ending) { this.runEnding(next); return; }
     next();
-  },
-
-  // ---- Wave ACT: actor lifecycle primitives ----
-  // The event vocabulary for moving CHARACTERS (identity +
-  // persistence: game/actors.mjs). Every step commits its directive
-  // to story.actors FIRST — a save taken mid-walk reloads into the
-  // committed end state — then animates in-scene when the actor is
-  // fielded here; an actor who lives on another map is committed
-  // only, and the loadMap resolver fields the result on next load.
-  //   { actorEnter: { who, x, y, face?, path? } }  spawn, then optional walk
-  //   { actorMove:  { who, to: [x, y] | { map, x, y }, path? } }
-  //   { actorExit:  { who, to?, path? } }          walk off, then hidden
-  //   { actorShow:  { who, x?, y? } }              instant, persisted
-  //   { actorHide:  { who } }                      instant, persisted
-  actorByCid(cid) {
-    if (!this.map || !Array.isArray(this.map.npcs)) return null;
-    return this.map.npcs.find((n) => n._cid === cid) || null;
-  },
-
-  stageActorAt(npc, x, y, face) {
-    npc._stage = { x, y, fx: x, fy: y, glide: 0 };
-    delete npc._wander;
-    if (face) npc._face = face;
-  },
-
-  // Field an actor who is not in this scene's roster from the
-  // template their saved directive carries (a cross-map arrival
-  // walking in). Returns the live npc, or null when no template
-  // exists (the committed directive still applies on next load).
-  fieldActorFromTemplate(cid, x, y, face) {
-    const st = this.game.state;
-    const ov = st && st.story && st.story.actors ? st.story.actors[cid] : null;
-    if (!ov || !ov.template || !this.map) return null;
-    const c = { ...ov.template };
-    delete c.map;
-    c.x = x; c.y = y;
-    c._pk = this.mapId + ':actor:' + cid;
-    c._cid = cid;
-    c._cloneIx = 0;
-    c._phaseMs = 0;
-    c._face = face || c.dir || 'down';
-    this.stageActorAt(c, x, y, face);
-    this.map = { ...this.map, npcs: [...this.map.npcs, c] };
-    return c;
-  },
-
-  runActorStep(s, next) {
-    const g = this.game;
-    const st = g.state;
-    const kind = s.actorEnter ? 'enter' : s.actorMove ? 'move' : s.actorExit ? 'exit' : s.actorShow ? 'show' : 'hide';
-    const spec = s.actorEnter || s.actorMove || s.actorExit || s.actorShow || s.actorHide;
-    const who = spec && spec.who;
-    if (!who) { next(); return; }
-    let npc = this.actorByCid(who);
-    const walkThen = (pts, after) => {
-      if (npc && pts && pts.length) this.queueActorWalk(npc, pts, after);
-      else if (after) after();
-    };
-    if (kind === 'enter') {
-      const x = Number.isInteger(spec.x) ? spec.x : (npc ? npc.x : 0);
-      const y = Number.isInteger(spec.y) ? spec.y : (npc ? npc.y : 0);
-      const pts = Array.isArray(spec.path) && spec.path.length ? spec.path : null;
-      const end = pts ? pts[pts.length - 1] : [x, y];
-      setActorOverride(st, who, { map: this.mapId, x: end[0], y: end[1], hidden: false, ...(spec.face ? { face: spec.face } : {}) });
-      if (!npc) npc = this.fieldActorFromTemplate(who, x, y, spec.face);
-      if (!npc) { next(); return; }
-      npc._actorHidden = false;
-      this.stageActorAt(npc, x, y, spec.face);
-      walkThen(pts, next);
-      return;
-    }
-    if (kind === 'move') {
-      const to = spec.to;
-      const cross = to && !Array.isArray(to) && typeof to.map === 'string' && to.map !== this.mapId;
-      if (cross) {
-        // Relocate: commit the destination (with the template that
-        // fields them there), then walk the exit path here and hide.
-        setActorOverride(st, who, { map: to.map, x: to.x, y: to.y, hidden: false, ...(npc ? { template: actorTemplateOf(npc) } : {}), ...(spec.face ? { face: spec.face } : {}) });
-        if (!npc) { next(); return; }
-        const pts = Array.isArray(spec.path) && spec.path.length ? spec.path : null;
-        walkThen(pts, () => { npc._actorHidden = true; next(); });
-        return;
-      }
-      const dest = Array.isArray(to) ? to : (to && Number.isInteger(to.x) ? [to.x, to.y] : null);
-      if (!dest) { next(); return; }
-      setActorOverride(st, who, { map: this.mapId, x: dest[0], y: dest[1], hidden: false, ...(spec.face ? { face: spec.face } : {}) });
-      if (!npc) { next(); return; }
-      npc._actorHidden = false;
-      const pts = Array.isArray(spec.path) && spec.path.length ? spec.path : [dest];
-      walkThen(pts, next);
-      return;
-    }
-    if (kind === 'exit') {
-      setActorOverride(st, who, { hidden: true, ...(npc ? { map: this.mapId } : {}) });
-      if (!npc) { next(); return; }
-      const pts = Array.isArray(spec.path) && spec.path.length ? spec.path
-        : (Array.isArray(spec.to) ? [spec.to] : null);
-      walkThen(pts, () => { npc._actorHidden = true; next(); });
-      return;
-    }
-    if (kind === 'show') {
-      const hasPost = Number.isInteger(spec.x) && Number.isInteger(spec.y);
-      setActorOverride(st, who, { hidden: false, ...(hasPost ? { map: this.mapId, x: spec.x, y: spec.y } : {}) });
-      if (npc) {
-        npc._actorHidden = false;
-        if (hasPost) this.stageActorAt(npc, spec.x, spec.y, spec.face);
-      }
-      next(); return;
-    }
-    // hide
-    setActorOverride(st, who, { hidden: true });
-    if (npc) npc._actorHidden = true;
-    next();
-  },
-
-  // Wave ACT: tale-completion lifecycle directives. A tale def may
-  // carry onComplete steps (the actor vocabulary above). Completions
-  // arrive through MANY paths — finishWith, advanceTale's internal
-  // completion, one direct completeTale call — so instead of hooking
-  // each, update() polls the quest table: the first tick a tale
-  // reads 'complete' with its marker unset runs the steps and sets
-  // the marker (story flag talefx_<taleId>), so each tale's
-  // directives fire exactly once. Saves that completed the tale
-  // before this layer existed fire on first load — the world catches
-  // up to the story.
-  checkTaleCompletions() {
-    const st = this.game && this.game.state;
-    if (!st || !st.story || !st.story.quests) return;
-    const flags = st.story.flags || (st.story.flags = {});
-    for (const id of Object.keys(QUESTS)) {
-      const t = QUESTS[id];
-      if (!t || !Array.isArray(t.onComplete) || !t.onComplete.length) continue;
-      if (st.story.quests[id] !== 'complete') continue;
-      const mark = 'talefx_' + id;
-      if (flags[mark]) continue;
-      flags[mark] = true;
-      this.runSteps(t.onComplete, 0, null);
-      return;
-    }
   },
 
   runEnding(done) {
@@ -2838,19 +2682,7 @@ Object.assign(OverworldScene.prototype, {
             flags.wally_ralts = true;
             g.audio.playSfx('dex-register');
             g.ui.toast('Wally caught a PSYLET!');
-            // Wave ACT proof (quest-end relocation, recurring
-            // character): the catch scene IS Wally's farewell — he
-            // told you he is moving away, and promised your roads
-            // would cross again. So he goes: east out of Meadowbrook
-            // toward Wildflower and the long road, and his identity
-            // relocates to the Crown Road post (wally@victory-road,
-            // held empty by ACTOR_DEFAULTS until this moment) where
-            // he waits for the end-of-region meeting. Before this
-            // wave, both Wallys stood in both places at once.
-            this.runSteps([
-              { actorExit: { who: 'wally@petalburg', to: [29, 8] } },
-              { actorShow: { who: 'wally@victory-road' } },
-            ], 0, null);
+            this.runSteps([{ actorExit: { who: 'wally@petalburg', to: [29, 8] } }, { actorShow: { who: 'wally@victory-road' } }], 0, null);
           }, 'WALLY');
         });
         return true;
@@ -4054,15 +3886,7 @@ Object.assign(OverworldScene.prototype, {
     if (flags.parley_celadon_done || !flags.stanne_done) return false;
     const say = (lines, cb) => this.taleSay(lines, npc.name, cb);
     const resolve = () => { flags.parley_celadon_done = true; };
-    // Wave ACT: a resolved parley is a DEPARTURE, played — the pair
-    // walk back to the Game Corner doors they arrived from (RUE to
-    // the west door, COLE to the east) and out of the scene, instead
-    // of vanishing at the next load. Their hidden overrides persist;
-    // parley_celadon_done already keeps them unfielded hereafter.
-    const depart = () => this.runSteps([
-      { actorExit: { who: 'rue@celadon', path: [[8, 9], [9, 9], [10, 9], [11, 9], [12, 9], [12, 8], [12, 7]] } },
-      { actorExit: { who: 'cole@celadon', path: [[9, 9], [10, 9], [11, 9], [12, 9], [13, 9], [13, 8], [13, 7]] } },
-    ], 0, null);
+    const depart = () => this.runSteps([{ actorExit: { who: 'rue@celadon', path: [[8, 9], [9, 9], [10, 9], [11, 9], [12, 9], [12, 8], [12, 7]] } }, { actorExit: { who: 'cole@celadon', path: [[9, 9], [10, 9], [11, 9], [12, 9], [13, 9], [13, 8], [13, 7]] } }], 0, null);
     const fight = () => {
       const def = TRAINERS.duo3_celadon;
       if (!def) { resolve(); depart(); return; }

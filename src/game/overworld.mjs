@@ -17,7 +17,7 @@ import { HOENN_NPCS, HOENN_NPC_PATCHES } from '../data/story-hoenn.mjs';
 import { SINNOH_NPCS, SINNOH_NPC_PATCHES } from '../data/story-sinnoh.mjs';
 import { weatherForMap, drawWeatherOverlay } from './weather.mjs';
 import { PARLEY_NPCS, parleyVisible, bondTrainerVariant, recordBattleBond } from './bonds.mjs';
-import { actorCharId, actorDirective } from './actors.mjs';
+import { actorCharId, actorDirective, actorLifecycleMixin } from './actors.mjs';
 import { MOVES } from '../data/moves.mjs';
 import { SFX } from '../engine/audio.mjs';
 import { BattleScene } from './battle.mjs';
@@ -1524,3 +1524,6 @@ export class OverworldScene {
     }
   }
 }
+
+// Wave ACT: apply the actor-lifecycle mixin (enter/move/exit/show/hide + tale watcher + parley entry).
+Object.assign(OverworldScene.prototype, actorLifecycleMixin);
