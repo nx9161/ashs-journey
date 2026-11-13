@@ -1024,6 +1024,16 @@ export const SINNOH_TALES = {
     ['The coil? Oh, it is not broken — it is TUNED. Volkner rebuilt the beacon\'s array last spring and the spare picked up the new frequency like a song it already knew. It hums when the gym\'s voltage climbs, keeper. It hums loudest on battle days. Your coil is not haunted, Bly. It is a fan.'],
     ['A fan. Forty years of keeping the light, and my lamp room has been cheering for the gym the whole season. Brightshore, trainer. Even the hardware has a favourite.', 'The Beacon Coil is yours — take it before it starts humming at your battles too. If it does... let it. A little extra voltage never decided a match, but it has started a few legends.']),
 };
+// Wave W9 (actor completion beat B1): when The Intern's Scoop
+// completes, Vesk takes the staff job his finish line promises —
+// "the staff job has my name in pencil by Friday" — and relocates
+// from the plaza (11,7) to the Revelry TV station door's west flank
+// (15,4; the door-front tile (16,4) stays clear so the entrance is
+// never sealed). Fired by the tale-completion watcher (ACT layer);
+// positions only — no dialogue or tale logic changes.
+SINNOH_TALES.tale_sinnoh_jubilife.onComplete = [
+  { actorMove: { who: 'broadcast-intern-vesk@jubilife', to: [15, 4] } },
+];
 // Wave S2 (quest integrity): the sinnohTale factory predates the
 // `revelation` field the other regions' tales carry — without it, the
 // Quest Log's completed-tale line rendered "Complete. undefined" for
