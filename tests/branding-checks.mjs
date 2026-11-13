@@ -124,5 +124,73 @@ for (const [f, t] of ALLOW) {
   ok(`allowlisted line intact in ${f}`, content.split('\n').some(l => l.trim() === t), t.slice(0, 60));
 }
 
+// ---- species flavour text: the retired CREATURE NAMES guard ----
+// The sweep above covers the franchise TERMS (Pokemon/Pokedex). This
+// section covers the retired creature NAMES themselves in the one
+// prose field species records ship: flavour text (KinDex display copy,
+// so display rules apply in full). The retired list is DERIVED from the
+// name registry's species keys, so a species added to the roster guards
+// its own retired name automatically. Internal identifiers are NOT
+// scanned — record ids, evolution targets, baseSpecies and egg tokens
+// keep the franchise slugs under the standing rule (ids are exempt;
+// display text is not). This reads record flavour/description fields
+// only: values, never keys.
+// Added by the flavour sweep (wave-flavour-sweep, 2026-11-12), which
+// found 12 shipped flavour lines still naming retired creatures.
+import { NAME_REGISTRY } from '../src/data/name-registry.mjs';
+import { SPECIES } from '../src/data/species.mjs';
+import { SPECIES2 } from '../src/data/species2.mjs';
+import { SPECIES_JOHTO } from '../src/data/species3.mjs';
+import { SPECIES_HOENN } from '../src/data/species4.mjs';
+import { SPECIES_SINNOH } from '../src/data/species5.mjs';
+
+// Registry keys that are NOT retired creature names: 'partner' is this
+// game's own partner-slot id, and the word is ordinary prose ('It
+// steadies its partner's sparks').
+const NON_CREATURE_KEYS = new Set(['partner']);
+// Retired names that are also ordinary English words: prose use is not
+// a creature reference (standing example, SUNBLOSS: 'under gloom it
+// keeps its counsel'). Exempt as words, documented here so the
+// exemption is a decision, not a hole.
+const COMMON_WORD_EXEMPT = new Set(['gloom']);
+// Prose spellings that differ from the registry slug.
+const PROSE_FORMS = {
+  nidoranf: ['Nidoran'], nidoranm: ['Nidoran'],
+  farfetchd: ["Farfetch'd"],
+  mrmime: ['Mr. Mime', 'Mr Mime'],
+  mimejr: ['Mime Jr.', 'Mime Jr'],
+  hooh: ['Ho-Oh'],
+  porygonz: ['Porygon-Z'],
+};
+const retiredSurfaces = new Set();
+for (const key of Object.keys(NAME_REGISTRY.species)) {
+  if (NON_CREATURE_KEYS.has(key) || COMMON_WORD_EXEMPT.has(key)) continue;
+  retiredSurfaces.add(key);
+  retiredSurfaces.add(key.charAt(0).toUpperCase() + key.slice(1));
+  for (const f of (PROSE_FORMS[key] || [])) retiredSurfaces.add(f);
+}
+const escRe = s => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+const RETIRED_RE = new RegExp(
+  '(?<![A-Za-zÀ-ÖØ-öø-ÿ])(' +
+  [...retiredSurfaces].sort((a, b) => b.length - a.length).map(escRe).join('|') +
+  ')(?![A-Za-zÀ-ÖØ-öø-ÿ])', 'gi');
+
+let flavourViolations = 0, flavourScanned = 0;
+for (const table of [SPECIES, SPECIES2, SPECIES_JOHTO, SPECIES_HOENN, SPECIES_SINNOH]) {
+  for (const rec of Object.values(table)) {
+    for (const field of ['flavor', 'description', 'desc']) {
+      const text = rec[field];
+      if (typeof text !== 'string') continue;
+      flavourScanned++;
+      for (const m of text.matchAll(RETIRED_RE)) {
+        flavourViolations++;
+        console.log(`  flavour violation ${rec.id} (${rec.name}) :: "${m[0]}" in "${text.slice(0, 110)}"`);
+      }
+    }
+  }
+}
+ok('no retired creature names in species flavour text', flavourViolations === 0,
+  flavourViolations + ' violation(s) over ' + flavourScanned + ' scanned flavour fields');
+
 console.log(`\nbranding-checks: ${pass} pass, ${fail} fail`);
 process.exit(fail ? 1 : 0);

@@ -579,7 +579,7 @@ export const SPECIES_HOENN = {
     catchRate: 150, growth: 'slow', baseXp: 151, body: 'biped', spriteSeed: 31401,
     eggGroups: ['bug', 'humanshape'], hatchCounter: 15,
     learnset: { 1: ['tackle', 'leechlife', 'pinmissile'], 217: ['quickattack'] },
-    flavor: 'Its perfume conducts the volbeat choir through the reeds.',
+    flavor: 'Its perfume conducts the GLOWFLY choir through the reeds.',
     tm: [2, 4, 6, 9, 10, 15, 20, 22, 29, 31, 32, 33, 34, 44, 46, 50, 105],
   },
   roselia: {
@@ -768,7 +768,7 @@ export const SPECIES_HOENN = {
     catchRate: 90, growth: 'fast', baseXp: 160, body: 'biped', spriteSeed: 33501,
     eggGroups: ['ground'], hatchCounter: 20,
     learnset: { 1: ['scratch'], 204: ['leer'], 207: ['quickattack'], 210: ['swordsdance'], 219: ['slash'] },
-    flavor: 'Every scar is a sentence in one long argument with seviper.',
+    flavor: 'Every scar is a sentence in one long argument with SABERVIPER.',
     tm: [1, 5, 6, 8, 9, 10, 11, 12, 13, 14, 15, 17, 18, 19, 29, 30, 31, 32, 33, 34, 35, 40, 42, 44, 45, 46, 49, 50, 103],
   },
   seviper: {
