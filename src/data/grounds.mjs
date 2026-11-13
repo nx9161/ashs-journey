@@ -586,6 +586,25 @@ export const MAP_GROUND = {
   'house-survival': 'open',
   'house-resort': 'open',
   'house-resort-villa': 'open',
+  // War Room W-BG: Frontier completion — all seven Trial Grounds
+  // facilities assigned explicitly (existing 15 only), each on
+  // its own theme: the Tower and the Arena stand on Rubble
+  // (stone and physical truth), the Factory hums Volt, the
+  // Palace plays the Mind, the Pike runs Venom (the serpent's
+  // own ground), the Pyramid and its three tomb floors stand on
+  // Spirit, and the Dome keeps the tournament floor's Open.
+  // The hub takes Open (a town floor, by precedent).
+  frontierhub: 'open',
+  'frontier-tower': 'rubble',
+  'frontier-arena': 'rubble',
+  'frontier-dome': 'open',
+  'frontier-factory': 'volt',
+  'frontier-palace': 'mind',
+  'frontier-pike': 'venom',
+  'frontier-pyramid': 'spirit',
+  'frontier-pyramid-a': 'spirit',
+  'frontier-pyramid-b': 'spirit',
+  'frontier-pyramid-c': 'spirit',
 };
 
 export function groundForMap(mapId) {
