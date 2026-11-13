@@ -2459,6 +2459,28 @@ T3_KIND_DEFS.forEach(([kind], i) => {
   TILE_CHARS[ch] = kind;
 });
 const T3_PROP_KINDS = T3_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
+// ---- Wave T6 (Arcport build): harbour props ----
+// Three new kinds continuing the block at idx 566..568 (T3 ends at
+// 565; U+2036..U+2038, verified free in TILE_CHARS and unused by
+// every map row). tidechart is class 'rug': a WALKABLE ground decal
+// (the founder's tide chart spread on the Fan Club porch — sailors
+// stand around and on it). crane and gull are class 'prop': solid
+// objects composited over the ground they stand on (crane over the
+// dock boardwalk, gull over the water). Authored art:
+// assets/sprites/pix/tiles/tile-prop-<kind>.pix (Wave T6 register
+// in WAVE-T6-ARCPORT-PLAN.md Part 4).
+const T6_KIND_DEFS = [
+  ['tidechart', 'rug'], ['crane', 'prop'], ['gull', 'prop'],
+];
+const T6_KIND_CHARS = {};
+T6_KIND_DEFS.forEach(([kind], i) => {
+  const ch = String.fromCodePoint(0x1E00 + 566 + i);
+  T6_KIND_CHARS[kind] = ch;
+  TILE_CHARS[ch] = kind;
+});
+const T6_PROP_KINDS = T6_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
+const T6_RUG_KINDS = T6_KIND_DEFS.filter(([, c]) => c === 'rug').map(([k]) => k);
+const T6_WALKABLE_CHARS = T6_KIND_DEFS.filter(([, c]) => c === 'rug').map(([k]) => T6_KIND_CHARS[k]);
 const SINNOH_TOWN_GROUND_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg);
 const SINNOH_TOWN_GROUND2_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg2);
 // TX-3: the 8 gym exteriors by town (original type-accent motifs).
@@ -90003,6 +90025,24 @@ const ART = {
     "................",
     "................",
   ] },
+  "tile-prop-crane": { w: 16, h: 16, pal: {"k":"#3f3f49","W":"#8a6a42","Y":"#c4b367"}, rows: [
+    "................",
+    "................",
+    ".kkYYYYYYYYYYk..",
+    ".kWkY.......k...",
+    "..WW........k...",
+    "..WW........kk..",
+    "..WW.........k..",
+    "..WW............",
+    "..WW............",
+    "..WWkk..........",
+    "..WW..kk........",
+    "..WW....kk......",
+    "..WW......k.....",
+    ".kWWWWWWWWk.....",
+    ".kkkkkkkkkk.....",
+    "................",
+  ] },
   "tile-prop-crates": { w: 16, h: 16, pal: {"W":"#726648","w":"#71523d","L":"#8e755b"}, rows: [
     "................",
     "................",
@@ -90477,6 +90517,24 @@ const ART = {
     "....aaaaaaaa....",
     "....aaaaaaaa....",
     "...nnnnnnnnnn...",
+    "................",
+  ] },
+  "tile-prop-gull": { w: 16, h: 16, pal: {"k":"#3f3f49","W":"#e1d9ba","G":"#59687a","Y":"#c4b367"}, rows: [
+    "................",
+    "................",
+    "................",
+    ".kk..........kk.",
+    ".kWWk......kWWk.",
+    "..kWWk....kWWk..",
+    "...kWWk..kWWk...",
+    "....kWWkkWWk....",
+    ".....kWWWWk.....",
+    ".....kWGGWk.....",
+    "......kWWk......",
+    "......kYYk......",
+    ".......kk.......",
+    "................",
+    "................",
     "................",
   ] },
   "tile-prop-harp": { w: 16, h: 16, pal: {"B":"#d1bc88","D":"#8e755b","L":"#cac177","A":"#b99b74","C":"#a96152"}, rows: [
@@ -92239,6 +92297,24 @@ const ART = {
     "...dddddddddd...",
     "..eeeeeeeeeeee..",
     "..dddddddddddd..",
+    "................",
+  ] },
+  "tile-prop-tidechart": { w: 16, h: 16, pal: {"k":"#6a4a2e","P":"#e1d9ba","I":"#3e2c1c","B":"#5677bd","R":"#9c4b3d","N":"#3e2c1c"}, rows: [
+    "................",
+    ".kkkkkkkkkkkkkk.",
+    ".kPPPPPPPPPPPPk.",
+    ".kPPIIIPPPPPPPk.",
+    ".kPPIPPPBBBPPPk.",
+    ".kPPIPPBPBPPPPk.",
+    ".kPPPPBPBPBPPPk.",
+    ".kPPPPBBPPBPPPk.",
+    ".kPPPPPPPPPPPPk.",
+    ".kPIIPPPPPPRRPk.",
+    ".kPPIPPIIPPRRPk.",
+    ".kPPPPPPPIIPPPk.",
+    ".kPPNPPPPPPPPPk.",
+    ".kPPPPPPPPPPPPk.",
+    ".kkkkkkkkkkkkkk.",
     "................",
   ] },
   "tile-prop-tombstone": { w: 16, h: 16, pal: {"B":"#96969f","D":"#757585","L":"#b0b6c1","A":"#6a5c47","C":"#cbc5d8"}, rows: [
@@ -110240,6 +110316,9 @@ for (const k of G2_KINDS) TILE_ART[k] = 'tile-' + k;
 for (const k of T1_PROP_KINDS) TILE_ART[k] = 'tile-prop-' + k;
 // Wave T3: Marlow's tortoise (Fernmere) draws its prop art.
 for (const k of T3_PROP_KINDS) TILE_ART[k] = 'tile-prop-' + k;
+// Wave T6: Arcport harbour props (crane / gull) + the tidechart rug
+// draw their prop art.
+for (const k of [...T6_PROP_KINDS, ...T6_RUG_KINDS]) TILE_ART[k] = 'tile-prop-' + k;
 
 // Premium+ W6 (TX-3/PL-1): door-open frames, authored in TX-3 for every
 // door kind. The warp-fade engine that plays them lands in W7 — W6
@@ -111079,7 +111158,9 @@ const PROP_KINDS = new Set(['counter', 'healmachine', 'pcdesk', 'bed', 'table',
   // Wave T1: Dawnwick shore props composite over their ground too.
   ...T1_PROP_KINDS,
   // Wave T3: Marlow's tortoise composites over its ground too.
-  ...T3_PROP_KINDS]);
+  ...T3_PROP_KINDS,
+  // Wave T6: Arcport harbour props + tidechart rug composite too.
+  ...T6_PROP_KINDS, ...T6_RUG_KINDS]);
 function groundFamilyOf(kind) {
   // Perfection Pass Stage 2 Gate 2 (G2): beach kinds stand on tropgrass,
   // psand kinds stand on path (props composite over the parent ground).
@@ -111955,7 +112036,9 @@ function resolveTileLayers(cache, kind, x, y, kindAt, t, phase, mapId) {
     case 'boat':
     case 'chalkmap':
     // Wave T3: Marlow's tortoise composites over its lawn the same way.
-    case 'tortoise': {
+    case 'tortoise':
+    // Wave T6: the dock crane composites over its boardwalk the same way.
+    case 'crane': {
       // Object tiles carry transparent surrounds (Wave 1): lay the ground
       // the object stands on beneath it — south neighbour's family first
       // (the contact edge), else the neighbour majority, else grass.
@@ -112023,6 +112106,23 @@ function resolveTileLayers(cache, kind, x, y, kindAt, t, phase, mapId) {
       } else if (kind === 'caveboulder') {
         layers.push(boulderCanvasFor(cache, x, y, true));
       } else if (cache[kind]) layers.push(cache[kind]);
+      return layers.filter(Boolean);
+    }
+    // Wave T6: the tidechart is a rug-class ground decal — it lies
+    // flat on the Fan Club porch boardwalk (no contact shadow, no
+    // prop lift); the gull rides over open water, so its underlay is
+    // the water tile itself, not the shore ground the generic prop
+    // branch would pick from its neighbours.
+    case 'tidechart': case 'gull': {
+      const layers = [];
+      if (kind === 'tidechart') {
+        const bw = groundBase(cache, 'boardwalk', x, y) || cache.boardwalk;
+        if (bw) layers.push(bw);
+      } else {
+        const wb = Array.isArray(cache.water) ? pickAnim(cache.water, tt, x, y, CAD_MED, 71) : cache.water;
+        if (wb) layers.push(wb);
+      }
+      if (cache[kind]) layers.push(cache[kind]);
       return layers.filter(Boolean);
     }
     default: {
@@ -118657,6 +118757,11 @@ const WALKABLE = new Set(['.', ',', 'D', 'E', 'C', 'F', 'J', 'K', '1', '2', 'V',
   // Islands, so floor stays floor.
   ...[533, 534, 535, 536, 537, 538, 539, 540, 541, 542, 543, 544, 545, 546, 547, 548,
     549, 550, 551, 552, 553, 554, 555, 556, 557, 558, 559, 560, 561, 562]
+    .map((i) => String.fromCodePoint(0x1E00 + i)),
+  // Wave T6: the tidechart rug char (U+1E00+566, tiles.mjs
+  // T6_KIND_DEFS) is walkable — a ground decal on the Fan Club
+  // porch, swapped 1:1 from a walkable boardwalk cell.
+  ...[566]
     .map((i) => String.fromCodePoint(0x1E00 + i))]);
 
 // Trainer definitions for the slice.
@@ -119260,49 +119365,50 @@ const MAPS2 = {
   vermilion: {
     id: 'vermilion', name: 'Arcport City', music: 'viridian-theme',
     rows: rows([
-      'ÏÏÏÚÏÏÏÏĸĸÏÏÏÚÏÏÏÏ',
-      'ÏẌẊẒẄĸĸĸĸĸÚẐẒÄÄẈÄÏ',
-      'ÏÚċċċĸÄĸĸĸċðċÄÄÄÄÏ',
-      'ÏÄģwģĸĸĸĸĸḃḃḃĸÄÄÄÏ',
-      'ÏÄÚĸĸĸĸÚÚĸḃVYĸĸoÚÏ',
-      'ĸĸĸĸĸĸĸẊẆĸĸĸĸĸĸĸĸĸ',
-      'ÏĸĸĸĸĸååååĸċOċċĸĸÏ',
-      'ÏĸĸĸÄĸAJKAĸP12PĸẐÏ',
-      'ÏẌÚĸĸĸĸĸĸĸĸĸĸĸĸĸÚÏ',
-      'ÏÄoĸĸĸĸĸĸĸĸĸĸĸĸĸẆÏ',
-      'ÏÄFFċċċĸĸĸĸĸĸFÄFÄÏ',
-      'ÏẐoÄģ—ģẈĸĸÄÄooÚẄÚÏ',
-      'ÏÏÏÚÏÏÏÏÏÏÚÏÏÏÏÏÏÚ',
+      'ÏÏÏÏÏÏÏÏ..ÏÏÏÏÏÏÏBB~',
+      'ĸÄÄÄÄÄÄÄ..ÄÄÄÄÄÄÄBB~',
+      'ĸjjlmÄÄÄĸĸċOċċÄÄÄBB~',
+      'ĸAJKAÄÄÄĸĸP12PÄååååå',
+      'ĸÄ..ÄoÄÄ..Ä..ÄÄģģ—ģģ',
+      '....................',
+      'ĸċċċÄÄÄÄÄĸÄÄÄÄÄÄÄÄÄ~',
+      'ĸģwģÄåååå.ċċċÄḃḃḃḃÄ‸',
+      'ĸĸĸĸÄģģģw.ģ—ģẆḃVYḃἇ~',
+      'ĸĸĸĸĸĸĸĸ..ἇἇἇἇἇἇἇἇἇ~',
+      'ĸċċċἇἇ‶ἇἇ.ἇἇἇἇἇἇἇ‷ἇ~',
+      'ĸģwģÄÄÄÄ..ἇἇἇἇἇἇἇἇo~',
+      '.......oἇἇἇἇἇἇἇἇἇἇĸ~',
+      '~~~‸~~~~ἇἇ~″~~~~~~~~',
     ]),
     warps: [
-      { x: 11, y: 4, to: { map: 'gym-vermilion', x: 5, y: 7 } },
-      { x: 12, y: 4, to: { map: 'gym-vermilion', x: 6, y: 7 } },
-      { x: 7, y: 7, to: { map: 'center', x: 4, y: 4 }, via: { map: 'vermilion', x: 7, y: 8 } },
-      { x: 8, y: 7, to: { map: 'center', x: 5, y: 4 }, via: { map: 'vermilion', x: 8, y: 8 } },
+      { x: 15, y: 8, to: { map: 'gym-vermilion', x: 5, y: 7 } },
+      { x: 16, y: 8, to: { map: 'gym-vermilion', x: 6, y: 7 } },
+      { x: 2, y: 3, to: { map: 'center', x: 4, y: 4 }, via: { map: 'vermilion', x: 2, y: 4 } },
+      { x: 3, y: 3, to: { map: 'center', x: 5, y: 4 }, via: { map: 'vermilion', x: 3, y: 4 } },
       { x: 8, y: 0, to: { map: 'route6', x: 8, y: 12 } },
       { x: 9, y: 0, to: { map: 'route6', x: 9, y: 12 } },
       { x: 0, y: 5, to: { map: 'route7', x: 15, y: 5 } },
-      { x: 17, y: 5, to: { map: 'route11', x: 1, y: 5 } },
-      { x: 3, y: 3, to: { map: 'house-vermilion', x: 4, y: 4 } },
-      { x: 12, y: 7, to: { map: 'mart', x: 5, y: 5 }, via: { map: 'vermilion', x: 12, y: 8 } },
-      { x: 13, y: 7, to: { map: 'mart', x: 6, y: 5 }, via: { map: 'vermilion', x: 13, y: 8 } },
+      { x: 19, y: 5, to: { map: 'route11', x: 1, y: 5 } },
+      { x: 2, y: 7, to: { map: 'house-vermilion', x: 4, y: 4 } },
+      { x: 11, y: 3, to: { map: 'mart', x: 5, y: 5 }, via: { map: 'vermilion', x: 11, y: 4 } },
+      { x: 12, y: 3, to: { map: 'mart', x: 6, y: 5 }, via: { map: 'vermilion', x: 12, y: 4 } },
     ],
     signs: [
-      { x: 7, y: 4, text: 'ARCPORT CITY — The port of the vermilion sunset. Ships from every sea dock here.' },
-      { x: 8, y: 4, text: 'ARCPORT GYM — Leader: Lt. Surge. The Lightning Lieutenant! Inside lies a VOLT GROUND: Electric moves hit harder and strike swift and true — for Surge, and for you.' },
-      { x: 12, y: 5, text: 'ARCPORT MART — Two doors south of the gym row. Harbour stock, ferry-proof prices.' },
+      { x: 7, y: 1, text: 'ARCPORT CITY — The port of the vermilion sunset. Ships from every sea dock here.' },
+      { x: 13, y: 9, text: 'ARCPORT GYM — Leader: Lt. Surge. The Lightning Lieutenant! Inside lies a VOLT GROUND: Electric moves hit harder and strike swift and true — for Surge, and for you.' },
+      { x: 14, y: 2, text: 'ARCPORT MART — Two doors south of the gym row. Harbour stock, ferry-proof prices.' },
     ],
     npcs: [
-      { x: 3, y: 5, name: 'MART CLERK', art: 'clerk', skin: '#f0c8a0', shirt: '#3a6ac0', pants: '#2a2a3a', hair: '#2a1a0a',
+      { x: 13, y: 4, name: 'MART CLERK', art: 'clerk', skin: '#f0c8a0', shirt: '#3a6ac0', pants: '#2a2a3a', hair: '#2a1a0a',
         mart: { stock: ['pokeball', 'greatball', 'superpotion', 'hyperpotion', 'antidote', 'parlyzheal', 'revive'] },
         dialogue: ["Arcport Mart — harbour stock. Everything ferry-proof, gull-proof, and salt-proof."] },
-      { x: 5, y: 8, name: 'OFFICER RAE', art: 'officer', skin: '#d8a878', shirt: '#3a6ac0', pants: '#2a2a3a', hair: '#1a1a1a',
+      { x: 3, y: 9, name: 'OFFICER RAE', art: 'officer', skin: '#d8a878', shirt: '#3a6ac0', pants: '#2a2a3a', hair: '#1a1a1a',
         giveMon: { species: 'squirtle', level: 10 },
         dialogue: ["This BUBLET leads a whole squad of pranksters — they flooded the pier AGAIN this morning.", "He listens to you, though. Take him, trainer. A squad needs a real leader."] },
       { x: 14, y: 9, name: 'HANK', art: 'fisher', skin: '#c89878', shirt: '#50368e', pants: '#4a4a5a', hair: '#3a2a1a',
         trade: { give: 'spearow', get: 'farfetchd', nickname: 'DUX' },
         dialogue: ["Caught this GALEDUCK — Dux — by the harbor. Clever bird. Keeps outsmarting my dinner plans.", "Swap me a KEENBEAK for him? A sailor needs a scout, not a chef."] },
-      { x: 13, y: 2, name: 'CHAIRMAN', art: 'elder', skin: '#e8b888', shirt: '#6a5a8a', pants: '#3a3a4a', hair: '#c0c0c0',
+      { x: 4, y: 10, name: 'CHAIRMAN', art: 'elder', skin: '#e8b888', shirt: '#6a5a8a', pants: '#3a3a4a', hair: '#c0c0c0',
         dialogue: ["I chair the Kin Fan Club! Did I tell you about my PYROGALOP? Its coat — like spun sunset!", "And my GLAREHAWK? Magnificent. I could talk for hours. I HAVE talked for hours. Ask anyone."] },
     ],
     encounters: null,
@@ -119311,7 +119417,7 @@ const MAPS2 = {
     ],
     events: [
       { id: 'ev_stanne', x: 8, y: 11, when: { flagNot: 'ev_stanne_done' } },
-      { id: 'ev_squirtle_squad', x: 5, y: 9, when: { flagNot: 'ev_squirtle_squad_done' } },
+      { id: 'ev_squirtle_squad', x: 4, y: 9, when: { flagNot: 'ev_squirtle_squad_done' } },
     ],
     start: null,
   },
@@ -119331,8 +119437,8 @@ const MAPS2 = {
       '=====++DD++=====',
     ]),
     warps: [
-      { x: 7, y: 9, to: { map: 'vermilion', x: 11, y: 5 } },
-      { x: 8, y: 9, to: { map: 'vermilion', x: 12, y: 5 } },
+      { x: 7, y: 9, to: { map: 'vermilion', x: 15, y: 9 } },
+      { x: 8, y: 9, to: { map: 'vermilion', x: 16, y: 9 } },
     ],
     signs: [],
     npcs: [
@@ -119410,7 +119516,7 @@ const MAPS2 = {
       '##################',
     ]),
     warps: [
-      { x: 0, y: 5, to: { map: 'vermilion', x: 16, y: 5 } },
+      { x: 0, y: 5, to: { map: 'vermilion', x: 18, y: 5 } },
       { x: 17, y: 5, to: { map: 'route12', x: 1, y: 5 } },
     ],
     signs: [
@@ -121390,8 +121496,8 @@ const MAPS3 = {
       '=====++DD++=====',
     ]),
     warps: [
-      { x: 7, y: 9, to: { map: 'vermilion', x: 11, y: 5 } },
-      { x: 8, y: 9, to: { map: 'vermilion', x: 12, y: 5 } },
+      { x: 7, y: 9, to: { map: 'vermilion', x: 15, y: 9 } },
+      { x: 8, y: 9, to: { map: 'vermilion', x: 16, y: 9 } },
     ],
     signs: [],
     npcs: [
@@ -123857,8 +123963,8 @@ const MAPS4 = {
       '<<<<<<<<<<',
     ],
     warps: [
-      { x: 4, y: 5, to: { map: 'vermilion', x: 3, y: 4 } },
-      { x: 5, y: 5, to: { map: 'vermilion', x: 3, y: 4 } },
+      { x: 4, y: 5, to: { map: 'vermilion', x: 2, y: 8 } },
+      { x: 5, y: 5, to: { map: 'vermilion', x: 2, y: 8 } },
     ],
     signs: [],
     npcs: [],
@@ -153547,7 +153653,7 @@ const EVENTS = {
     { say: ['There IS no service exit, it is a boat—'], who: 'RUE' },
     { say: ['THEN WE SWIM WITH DIGNITY.'], who: 'COLE' },
     { say: ['Some hours later, the horn sounds. The St. Anne weighs anchor and slides toward the horizon — and just like that, she is gone for good. Whatever she was carrying, she took it with her.'], who: 'NARRATOR' },
-    { warp: { map: 'vermilion', x: 12, y: 20 } },
+    { warp: { map: 'vermilion', x: 9, y: 10 } },
     { flag: 'stanne_done' },
     { questDone: 'q_stanne' },
   ],
@@ -181760,6 +181866,6 @@ if (typeof Game !== 'undefined') Object.assign(Game.prototype, {
 });
 
 </script>
-<!-- contentHash:bb3082304ad18792d031eefa50041976de07246782cc1eee5c4a196048423f93 -->
+<!-- contentHash:e5b9e109c070aac0b60f647c35f9876665ce6cc09144bbbdf1d026ff34288ded -->
 </body>
 </html>
