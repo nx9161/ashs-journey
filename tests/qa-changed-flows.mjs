@@ -249,13 +249,14 @@ const driver = `
    ['1280x800 no-matchmedia', 1280, 800, false]].forEach(function(c) {
     setWin(c[1], c[2], c[3]); gV.applyLayout();
     var s = cssSize(gV);
-    ok('e ' + c[0] + ' desktop 16:9 aspect-locked (' + s.w + 'x' + s.h + ')',
-      gV.layoutMode === 'desktop' && Math.abs(s.w / s.h - 16 / 9) < 0.01);
+    ok('e ' + c[0] + ' desktop 1:1 aspect-locked, 16x16 view (' + s.w + 'x' + s.h + ')',
+      gV.layoutMode === 'desktop' && Math.abs(s.w / s.h - 1) < 0.01 &&
+      gV.renderer.viewW === 256 && gV.renderer.viewH === 256);
   });
   setWin(844, 390, false); gV.applyLayout();
   var sp = cssSize(gV);
-  ok('e phone-landscape 4:3 aspect-locked (regression)', gV.layoutMode === 'landscape' &&
-    Math.abs(sp.w / sp.h - 4 / 3) < 0.01);
+  ok('e phone-landscape 1:1 aspect-locked, 16x16 view (regression)', gV.layoutMode === 'landscape' &&
+    Math.abs(sp.w / sp.h - 1) < 0.01 && gV.renderer.viewW === 256 && gV.renderer.viewH === 256);
   clearWin();
   ok('e keyboard map: arrows/WASD move, Z/Space=A, X=B, Enter=START, M=mute, F=fullscreen',
     KEYMAP.ArrowUp === 'up' && KEYMAP.KeyW === 'up' && KEYMAP.ArrowDown === 'down' && KEYMAP.KeyS === 'down' &&

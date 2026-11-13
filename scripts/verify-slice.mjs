@@ -1029,7 +1029,7 @@ const qaDriver = `
   var introN = 0;
   while (b9.state === 'intro' && introN < 100) { introN++; pA(g9, 1); }
   ok('qa s9 battle reaches command', b9.state === 'command');
-  rotAssert('qa s9 rotation: landscape mid-command', 844, 390, false, 'landscape', 256, 192, 'command');
+  rotAssert('qa s9 rotation: landscape mid-command', 844, 390, false, 'landscape', 256, 256, 'command');
   ok('qa s9 command menu intact across rotation', g9.ui.menuOpen && g9.ui.menu.kind === 'commands');
   choose(g9, 0);
   ok('qa s9 moves submenu', b9.state === 'moves');
