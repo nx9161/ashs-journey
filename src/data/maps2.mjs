@@ -2104,8 +2104,8 @@ export const MAPS2 = {
       '=======DD=======',
     ]),
     warps: [
-      { x: 7, y: 9, to: { map: 'cinnabar', x: 11, y: 5 } },
-      { x: 8, y: 9, to: { map: 'cinnabar', x: 12, y: 5 } },
+      { x: 7, y: 9, to: { map: 'cinnabar', x: 15, y: 7 } },
+      { x: 8, y: 9, to: { map: 'cinnabar', x: 16, y: 7 } },
     ],
     signs: [],
     npcs: [
@@ -2140,8 +2140,8 @@ export const MAPS2 = {
       '<<<<<<<<<<<<<<<<<<',
     ]),
     warps: [
-      { x: 8, y: 10, to: { map: 'cinnabar', x: 6, y: 11 } },
-      { x: 9, y: 10, to: { map: 'cinnabar', x: 7, y: 11 } },
+      { x: 8, y: 10, to: { map: 'cinnabar', x: 3, y: 4 } },
+      { x: 9, y: 10, to: { map: 'cinnabar', x: 4, y: 4 } },
     ],
     signs: [],
     npcs: [

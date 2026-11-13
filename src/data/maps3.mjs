@@ -1364,8 +1364,8 @@ export const MAPS3 = {
       '<<<<<<<<<<<<<<<<<<',
     ]),
     warps: [
-      { x: 8, y: 10, to: { map: 'cinnabar', x: 6, y: 11 } },
-      { x: 9, y: 10, to: { map: 'cinnabar', x: 7, y: 11 } },
+      { x: 8, y: 10, to: { map: 'cinnabar', x: 3, y: 4 } },
+      { x: 9, y: 10, to: { map: 'cinnabar', x: 4, y: 4 } },
     ],
     signs: [
       { x: 3, y: 2, text: "DIARY — '...a new Kin was born in this house. We named the newborn with shaking hands, and it named us back with its eyes.'" },
@@ -1416,8 +1416,8 @@ export const MAPS3 = {
       '=======DD=======',
     ]),
     warps: [
-      { x: 7, y: 9, to: { map: 'cinnabar', x: 11, y: 5 } },
-      { x: 8, y: 9, to: { map: 'cinnabar', x: 12, y: 5 } },
+      { x: 7, y: 9, to: { map: 'cinnabar', x: 15, y: 7 } },
+      { x: 8, y: 9, to: { map: 'cinnabar', x: 16, y: 7 } },
     ],
     signs: [],
     npcs: [

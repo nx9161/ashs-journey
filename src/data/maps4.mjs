@@ -53,8 +53,8 @@ export const MAPS4 = {
       '=======DD=======',
     ],
     warps: [
-      { x: 7, y: 9, to: { map: 'cinnabar', x: 11, y: 5 } },
-      { x: 8, y: 9, to: { map: 'cinnabar', x: 12, y: 5 } },
+      { x: 7, y: 9, to: { map: 'cinnabar', x: 15, y: 7 } },
+      { x: 8, y: 9, to: { map: 'cinnabar', x: 16, y: 7 } },
     ],
     signs: [
       { x: 7, y: 1, text: 'QUIZ: A volcano sleeps under this island. True or false? (Blaine grades on attitude.)' },
@@ -376,8 +376,8 @@ export const MAPS4 = {
       '<<<<<<<<<<',
     ],
     warps: [
-      { x: 4, y: 5, to: { map: 'cinnabar', x: 3, y: 4 } },
-      { x: 5, y: 5, to: { map: 'cinnabar', x: 3, y: 4 } },
+      { x: 4, y: 5, to: { map: 'cinnabar', x: 3, y: 8 } },
+      { x: 5, y: 5, to: { map: 'cinnabar', x: 3, y: 8 } },
     ],
     signs: [],
     npcs: [],
