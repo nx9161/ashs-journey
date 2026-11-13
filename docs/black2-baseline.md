@@ -450,3 +450,23 @@ Game Freak through official channels).
   proven by the same measurement. The audit tool is
   scripts/audit-battle-art.mjs; the art-gate enforces rules 2-4
   per tranche from Wave J on.
+
+## Addendum 2026-11-12 — SEASONS REMOVED (owner order; reverses the 2026-11-11 SEASONS addendum)
+
+"Remove the concept of seasons": the season system adopted on
+2026-11-11 is removed entire (Wave SZ). src/game/seasons.mjs is
+deleted; nothing derives a season from the calendar. The monthly
+rotation, the green-dominant palette re-grade (the shared path and
+the dampened kit path), the outdoor season light tint, the season
+rollover toast, and the clock-glyph season bar are all gone. Every
+place now renders its authored palettes exactly, on every date —
+one fixed look per place, permanently: the base palette. No palette
+on disk was ever stored as a seasonal variant (the grades were
+computed at runtime from the authored art), so no art needed
+re-pinning. Per-town kit variants (B2-G9) are untouched — a town's
+own palette is its identity, not a season. The word "season" in
+dialogue and flavor prose is ordinary language, not the system, and
+stays. Guard: tests/seasons-checks.mjs now asserts the module's
+absence, scans src/ + scripts/ for any reference to the season API,
+and builds the tile cache under four frozen calendar months
+asserting byte-identical output, authored base greens included.
