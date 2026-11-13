@@ -223,6 +223,9 @@ export const SFXSET = {
   // Yellow homage: the trainer-spot alert — an original ascending two-note
   // sting (visual twin: the "!" mark over the challenger).
   'trainer-spot': { id:'trainer-spot', wave:'pulse', duty:0.125, vol:0.5, env:[0.002,0.12], notes:[[0,'E5',1],[1,'A5',2]] },
+  // W6 (audit D1): the Fly teleport's own cue — a falling sparkle, distinct
+  // from the screen-transition whoosh/fade the engine plays separately.
+  'warp': { id:'warp', wave:'pulse', duty:0.125, vol:0.35, env:[0.002,0.18], notes:[[0,'E6',0.5],[0.5,'C6',0.5],[1,'G5',0.5],[1.5,'E5',1.5]] },
 
   // --- battle beats ---
   'battle-hit':   { id:'battle-hit',   wave:'noise', vol:0.5,  env:[0.002,0.12], notes:[[0,null,2]] },
@@ -265,6 +268,12 @@ export const SFXSET = {
   'dex':       { id:'dex',       wave:'pulse', duty:0.5, vol:0.5, env:[0.003,0.25], notes:[[0,'E5',1.5],[1.5,'G5',1.5],[3,'B5',1.5],[4.5,'E6',3]] },
   'lowhp_legacy': { id:'lowhp_legacy', wave:'pulse', duty:0.25, vol:0.5, env:[0.002,0.12], notes:[[0,'A4',1.5],[2,'A4',1.5],[4,'A4',1.5]] },
   'encounter': { id:'encounter', wave:'pulse', duty:0.125, vol:0.5, env:[0.004,0.2], notes:[[0,'G4',1],[1,'A4',1],[2,'B4',1],[3,'C5',3]] },
+
+  // --- W6 (audit D1): live call-site keys that were never tabled — the game
+  // played these names for years and heard nothing. The sounds were always
+  // the tables below; the keys just never landed in SFXSET. ---
+  'menu-move': { id:'menu-move', wave:'pulse', duty:0.5, vol:0.22, env:[0.002,0.06], notes:[[0,'A5',1]] },
+  'item-get':  { id:'item-get',  wave:'pulse', duty:0.5, vol:0.45, env:[0.002,0.15], notes:[[0,'A5',1],[1,'D6',1],[2,'F#6',2]] },
 };
 
 // ============================================================ CRIES ====
