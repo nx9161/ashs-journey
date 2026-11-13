@@ -28,7 +28,8 @@ const S = (f) => ['scripts/' + f, join(ROOT, 'scripts', f), ROOT];
 const GROUPS = {
   suites: [
     T('actor-lifecycle-checks.mjs'), T('arc-foundation-checks.mjs'),
-    T('battle-model-checks.mjs'), T('branding-checks.mjs'),
+    T('battle-model-checks.mjs'), T('battle-ground-checks.mjs'),
+    T('branding-checks.mjs'),
     T('cheat-shop-checks.mjs'), T('fidelity-checks.mjs'),
     T('frontier-checks.mjs'), T('hoenn-contest-checks.mjs'),
     T('hoenn-legendary-checks.mjs'), T('hoenn-story-checks.mjs'),
