@@ -47,6 +47,13 @@
 //     unchanged (PASS before and after) — a measurement refinement of
 //     one sub-metric, disclosed here and in the W4 repair note.
 //     Tuple: [pass, connOk, connPairs, stepTouch, stepTot, components,
+//     SECOND DOCUMENTED EXCEPTION (T19 merge): cianwood's pin is its
+//     POST-T19 tuple. The Tidewall rebuild (gym terrace + worn steps,
+//     jetty footing repaired) moved the town FAIL -> PASS: conn
+//     42/72 -> 72/72, junctionSites 2 -> 6, apronMin 0.824 -> 0.688,
+//     strict 0.9591 -> 0.7965, fabric 0.9926 -> 0.9993 — the rebuilt
+//     town's measured values, re-pinned at the T19 director merge.
+//     Tuple: [pass, connOk, connPairs, stepTouch, stepTot, components,
 //     junctionSites, junctionsBare, apronLow, apronMin, merged,
 //     onFabric, shoulderOrphans, unanchoredAny, strict, fabric].
 
@@ -100,7 +107,7 @@ const PIN = {
   "celestic": [1, 56, 56, 6, 6, 1, 3, 0, 0, 0.882, 0, 0, 0, 0, 1, 1],
   "cerulean": [1, 132, 132, 7, 7, 1, 1, 0, 0, 0.625, 0, 0, 0, 0, 0.7314, 0.9839],
   "cherrygrove": [1, 72, 72, 5, 5, 1, 5, 0, 0, 0.688, 0, 0, 0, 0, 0.7126, 0.9902],
-  "cianwood": [0, 42, 72, 7, 7, 1, 2, 0, 0, 0.824, 0, 0, 0, 0, 0.9591, 0.9926],
+  "cianwood": [1, 72, 72, 7, 7, 1, 6, 0, 0, 0.688, 0, 0, 0, 0, 0.7965, 0.9993],
   "cinnabar": [1, 90, 90, 9, 9, 1, 3, 0, 0, 0.769, 0, 0, 0, 0, 0.8694, 1],
   "dewford": [0, 72, 110, 7, 7, 1, 6, 0, 1, 0.588, 0, 0, 0, 0, 0.9625, 0.9625],
   "ecruteak": [1, 156, 156, 11, 11, 1, 6, 0, 0, 0.625, 0, 0, 0, 0, 0.7915, 0.9937],
