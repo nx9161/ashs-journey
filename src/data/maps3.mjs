@@ -1118,8 +1118,8 @@ export const MAPS3 = {
       '######....######',
     ]),
     warps: [
-      { x: 8, y: 0, to: { map: 'fuchsia', x: 8, y: 11 } },
-      { x: 9, y: 0, to: { map: 'fuchsia', x: 9, y: 11 } },
+      { x: 8, y: 0, to: { map: 'fuchsia', x: 8, y: 12 } },
+      { x: 9, y: 0, to: { map: 'fuchsia', x: 9, y: 12 } },
       { x: 6, y: 12, to: { map: 'route20', x: 2, y: 1 } },
       { x: 7, y: 12, to: { map: 'route20', x: 2, y: 1 } },
       { x: 8, y: 12, to: { map: 'route20', x: 3, y: 1 } },
