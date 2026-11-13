@@ -1386,26 +1386,26 @@ export const MAPS6 = {
     "name": "Signal City",
     "music": "pewter-theme",
     "rows": [
-      "ỏỏỏỐỏỏỏỏỏỏỐỏỏỏỏỏỎỎỏỏỏỐỏỏỏỏỏỏỐỏỏỏỏỏ",
-      "ỏọỎỎỎỎỎỎỎỎỎỎỎỎỎỎỎỎọỐọọọọọọọọọọọọọỏ",
-      "ỏọỎjklmỎọdeefỎọốỎỎốọọốốốốọọốốốốọọỏ",
-      "ỏọỎAJKAỎẋP12PỎọUỎỎUọọỒỒỒỒọọỒsỒỒọọỏ",
-      "ỏọỎỎỎỎỎỎỎỎỎỎỎỎỎỎỎỎỎỎỎỎỎỎỎỎỎỎỎỎọọọỏ",
-      "ỏọSỎỎỎỎỎỎỎỎỎỎỎỎỎỎỎSỎỎỎỎỎọỎọỎọỎọọọỏ",
-      "ỏọỎỎọọọọỎọọọỎọẊỎỎỎỎỎỎỎỎỎọỎọỎọỎọọọỏ",
-      "ỏẊỎỎỎỎỎỎỎỎỎỎỎỎỎỎỎỎỎỎỎỎỎỎọỎọỎọỎọọọỏ",
-      "ỏọỎnỎọọọỎỎỎỎỎỎọọỎọỎẋỎỎỎỎọỎọỎọỎọọọỏ",
-      "ỏọỎọỎọọọỎọoọỎỎọọỎọỎọỎẊẊỎọỎỎỎọỎỎọọỏ",
-      "ỏọỎọỎọọọỎọọọẌỎọọỎọỎọỎoỐỎọỎốốốốỎọọỏ",
-      "ỏọỎỎỎỎỎỎỎỎỎỎỎỎỎỎỎỎỎỎỎỎỎỎnỎỒsỒỒỎọọỏ",
-      "ỏọỎỎỎọọọỎọọọọỎọọỎọỎỎẋọỎỎỎỎỎỎSỎỎọọỏ",
-      "ỏọḋỎỎọọọỎỎỎỎỎỎỎỎỎỎỎỎỎỎỎỎẋỎỎỎỎọọọọỏ",
-      "ỏọọỎ....ỎọọọọỎọọỎỎẌỎọọọỎỎỎỎỎḋọọọọỏ",
-      "ỏọọ.,,,,.ỎỎỎỎỎỎỎỎỎỎỎỎỎỎỎỎọ..ḋọọọọỏ",
-      "ỏọọ.,.,,.ỎọọọỎọọỎỎọỎọọọọỎ.,,,ọọẋọỏ",
-      "ỏọoỎ.Ỏ..ỎỎỎỎỎỎỎỎỎỎỎỎỎỎỎỎ.,,,,ọọọọỏ",
-      "ỏọọọọọọoọọọẋọẊọọọọọọọọọọẋ,ọ,ẋọọọọỏ",
-      "ỏỏỏỐỏỏỏỏỏỏỐỏỏỏỏỏỏỐỏỏỏỏỏỏỐỏỏỏỏỏỏỐỏỏ"
+      "ỏỏỏỐỏỏỏỏỏỏỐỏỏỏỏỏ..ỏỏỏỏỏỏỐỏỏỏỏỏỏỐỏỏ",
+      "ỏọoọ............................oỏ",
+      "ỏọọjklmọ.deefọốốXốốốốốốốố‾Ṇốốốốốốỏ",
+      "ỏọọAJKAọ.P12PọUUVYUUỒỒssỒọnỒsỒỒỒỒỏ",
+      "ỏ................................ỏ",
+      "ỏ........................ọọSọọọSọỏ",
+      "ỏỏọốốốốọ.Ẋốốốốẋọ..ḋpFọọọọọọốốốố.ỏỏ",
+      "ỏỏọỒsỒỒọ.ọỒỒsỒọọ..ọọọọọọọọọỒsỒỒ.ỏỏ",
+      "ỏ................................ỏ",
+      "ỏọọọọọọọ.ọọọọọọọ..ọọọọọ.ọpoọFọẊ.ọỏ",
+      "ỏ.......................ốốốốốố...ỏ",
+      "ỏ......................nỒỒỒsỒỒn..ỏ",
+      "ỏḋẌẌọọọọ.ọốốốốọṀ..Ṁpọọọ.........ẋỏ",
+      "ỏ........ọỒsỒỒoọ..ọṀọọo.....,ẋẋ,,ỏ",
+      "ỏ........ọn.,nọọ..ọọWWọ.....,,,,,ỏ",
+      "ỏ................................ỏ",
+      "ỏỏFọọọọo.ọ,p,,ọọ..ọoọẤẤọốốốốốốF.ọỏ",
+      "ỏỏpọọọpọ.ọ,,p,So..opọẤpọỒỒsỒỒỒọ.ọỏ",
+      "ỏọọọo...........................ọỏ",
+      "ỏỏỏỐỏỏỏỏỏỏỐỏỏỏỏỏ..ỏỏỏỏỏỏỐỏỏỏỏỏỏỐỏỏ"
     ],
     "warps": [
       {
@@ -1484,7 +1484,7 @@ export const MAPS6 = {
       },
       {
         "x": 22,
-        "y": 4,
+        "y": 3,
         "to": {
           "map": "radio-tower-1",
           "x": 8,
@@ -1493,7 +1493,7 @@ export const MAPS6 = {
       },
       {
         "x": 23,
-        "y": 4,
+        "y": 3,
         "to": {
           "map": "radio-tower-1",
           "x": 8,
@@ -1535,38 +1535,56 @@ export const MAPS6 = {
           "x": 6,
           "y": 8
         }
+      },
+      {
+        "x": 16,
+        "y": 19,
+        "to": {
+          "map": "r34",
+          "x": 11,
+          "y": 1
+        }
+      },
+      {
+        "x": 17,
+        "y": 19,
+        "to": {
+          "map": "r34",
+          "x": 12,
+          "y": 1
+        }
       }
     ],
     "signs": [
       {
-        "x": 28,
-        "y": 12,
+        "x": 31,
+        "y": 5,
         "text": "SIGNAL DEPARTMENT STORE — Six floors of everything a trainer can carry. (The annex doors serve the east arcade.)"
       },
       {
-        "x": 2,
-        "y": 5,
+        "x": 14,
+        "y": 17,
         "text": "SIGNAL CITY — The festival city of sights and sounds. Radio Tower broadcasts from the west end of the north street."
       },
       {
-        "x": 18,
+        "x": 27,
         "y": 5,
         "text": "SIGNAL UNDERGROUND — A shopping passage beneath the city. Stairs down by the landmark door."
       },
-      {"x": 14, "y": 12, "text": "SIGNAL CITY — North: ROUTE 35."},
-      {"x": 6, "y": 9, "text": "SIGNAL CITY — North: ROUTE 35."},
-      {"x": 11, "y": 16, "text": "SIGNAL CITY — North: ROUTE 35."},
-      {"x": 25, "y": 2, "text": "SIGNAL CITY — North: ROUTE 35."},
-      {"x": 18, "y": 16, "text": "SIGNAL CITY — North: ROUTE 35."},
-      {"x": 8, "y": 2, "text": "SIGNAL CITY — North: ROUTE 35."},
-      {"x": 14, "y": 2, "text": "SIGNAL CITY — North: ROUTE 35."},
-      {"x": 24, "y": 7, "text": "SIGNAL CITY — North: ROUTE 35."},
-      {"x": 6, "y": 18, "text": "SIGNAL CITY — North: ROUTE 35."},
+      {"x": 14, "y": 1, "text": "SIGNAL CITY — North: ROUTE 35."},
+      {"x": 8, "y": 3, "text": "SIGNAL CITY — North: ROUTE 35."},
+      {"x": 7, "y": 6, "text": "SIGNAL CITY — North: ROUTE 35."},
+      {"x": 24, "y": 9, "text": "SIGNAL CITY — North: ROUTE 35."},
+      {"x": 22, "y": 12, "text": "SIGNAL CITY — North: ROUTE 35."},
+      {"x": 7, "y": 17, "text": "SIGNAL CITY — North: ROUTE 35."},
+      {"x": 32, "y": 9, "text": "SIGNAL CITY — North: ROUTE 35."},
+      {"x": 9, "y": 14, "text": "SIGNAL CITY — North: ROUTE 35."},
+      {"x": 30, "y": 17, "text": "SIGNAL CITY — North: ROUTE 35."}
     ],
     "npcs": [
       {
-        "x": 12,
-        "y": 7,
+        "x": 20,
+        "y": 5,
         "name": "DJ MARY FAN",
         "art": "lass",
         "skin": "#c89878",
@@ -1579,8 +1597,8 @@ export const MAPS6 = {
         ]
       },
       {
-        "x": 21,
-        "y": 6,
+        "x": 7,
+        "y": 13,
         "name": "COMMUTER KOBE",
         "art": "gent",
         "skin": "#d8a878",
@@ -1593,8 +1611,8 @@ export const MAPS6 = {
         ]
       },
       {
-        "x": 8,
-        "y": 15,
+        "x": 4,
+        "y": 12,
         "name": "FLOWER SELLER UNA",
         "art": "lady",
         "skin": "#e8b888",
@@ -1607,8 +1625,8 @@ export const MAPS6 = {
         ]
       },
       {
-        "x": 25,
-        "y": 15,
+        "x": 27,
+        "y": 12,
         "name": "BIKE HAND RYO",
         "art": "worker",
         "skin": "#f0c8a0",
@@ -1621,7 +1639,7 @@ export const MAPS6 = {
         ]
       },
       {
-        "x": 3,
+        "x": 12,
         "y": 5,
         "name": "MART CLERK",
         "art": "clerk",
@@ -5507,7 +5525,7 @@ export const MAPS6 = {
         "to": {
           "map": "goldenrod",
           "x": 22,
-          "y": 5
+          "y": 4
         }
       },
       {
@@ -5516,7 +5534,7 @@ export const MAPS6 = {
         "to": {
           "map": "goldenrod",
           "x": 22,
-          "y": 5
+          "y": 4
         }
       },
       {
