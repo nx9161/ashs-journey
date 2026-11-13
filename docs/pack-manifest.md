@@ -59,7 +59,7 @@ audio subsystem (B2-R3) 26407 B in audio/ + src/engine/audio.mjs.
 | src/data/maps3.mjs | 112525 | 2270 | content pack (NARC analogue — B2-R2) |
 | src/data/maps4.mjs | 20120 | 488 | content pack (NARC analogue — B2-R2) |
 | src/data/maps5.mjs | 118590 | 5005 | content pack (NARC analogue — B2-R2) |
-| src/data/maps6.mjs | 274686 | 12309 | content pack (NARC analogue — B2-R2) |
+| src/data/maps6.mjs | 274801 | 12310 | content pack (NARC analogue — B2-R2) |
 | src/data/maps7.mjs | 257870 | 4340 | content pack (NARC analogue — B2-R2) |
 | src/data/maps8.mjs | 31106 | 1335 | content pack (NARC analogue — B2-R2) |
 | src/data/maps9.mjs | 324082 | 5668 | content pack (NARC analogue — B2-R2) |
