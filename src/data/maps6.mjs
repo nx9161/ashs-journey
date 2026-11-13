@@ -34,61 +34,47 @@ export const MAPS6 = {
     "name": "Galefield Town",
     "music": "pallet-theme",
     "rows": [
-      "ắắắẰắắắắắắẰắắắắắắẰắắắắắắậắắắ",
-      "ắậậậậFậậậậoậậẅậậậậậậậậậậậậậắ",
-      "ắậậdeeeefậậjklmậậẳẳẳodeefậậắ",
-      "ắậậZZ45ZZậậAJKAậoẴsẴậP12Pậậắ",
-      "ắậẮẮẮẮẮẮẮẮẮẮẮẮẮẮẮẮẮẮẮẮẮẮậoậắ",
-      "ắậSẮẮẮẮẮẮẮẮẮẮẮẮẮẮẮẮẮẮẮẮẮẮẮẮắ",
-      "ắậẮậậậẮẮẮẮẮẮẮẮẮẮẮẮẮậẤậậậậậẮắ",
-      "ắậẮậnậẮẮậẮẮẮẮẮẮẮẮậậẮậFậậậậẮắ",
-      "ắậẮẮẮẮẮẮẮẮẮẮẮẮẮẮẮẮẮẮẮẮẮẮẮẮẮẮ",
-      "ắậẮẮẮẮẮẮẮẮẮẮẮẮẮẮẮẮẮẮẮẮẮẮẮẮẮẮ",
-      "ắậẮậậậẮậẮậậẮẮẮẮậẮẰậẮậậẮậậậậắ",
-      "ắậẮ....ậẮậẰẮẮẮẮẮẮẄậẮ....ẮẤậắ",
-      "ắậ.,,,,.ẮậoẮẮẮẮẮẮậậ.,,,,.ậậắ",
-      "ắậ.,,,,.ẮậậậẮẮậẮẤậậ.,,,,.ậậắ",
-      "ắậẮ....ậẮậậậẮẮẮẮẮẮẮẮ....ậậậắ",
-      "ắậẮẮẮẮẮẮẮẮẮẮẮẮẮSẮẮẮẮậậậậậậậắ",
-      "ắ~~~~~~~~~~~~ậậ~~~~~~~~~~~~ắ",
-      "ắ~~~~~~~~~~~~ậậ~~~~~~~~~~~~ắ"
+      "~~~~~~~~~~~~~~~~~~~~~~~~~~~~",
+      "~~~″ἇἇ~~~~~~~~~~~~~~~~~~~~~~",
+      "~~~~ἇἇ~~~~~~~~~~~~~~~~~~~~~~",
+      "ắậậ....ậSậậậậậậậậậậậậậậậậậậắ",
+      "ắậậậậ.ậậậậậdeeeefậậậậậậậậậậắ",
+      "ắẤậậậ.SậậậẅZZ45ZZẅậậoậậậậậậắ",
+      "ắ..........................ắ",
+      "ắậjklmậậậậậậậậậậậdeefậẳẳẳậ.ắ",
+      "ắậAJKAậậậậậậậậậậSP12PậẴsẴậ.ắ",
+      "ắ...........................",
+      "ắậậậậậậậậậoậậậậậậậậậ........",
+      "ắậẳẳẳậậậậậậậẳẳẳậậậậậậẳẳẳậậ.ắ",
+      "ắậẴwẴậậậậậFậẴwẴậậậậFậẴwẴậậ.ắ",
+      "ắn,.,ẉnậẰận,,.,Fnậận,,,,Fn.ắ",
+      "ắnn.nẉnậẰậnnn.nnnậậnnnnnnn.ắ",
+      "ắ..........................ắ",
+      "ắậậậSậậậậẤậậSậậoậậậậoậậậậậậắ",
+      "ắắắắắắắắắắắắắắắắắắắắắắắắắắắắ"
     ],
     "warps": [
       {
-        "x": 5,
-        "y": 3,
-        "to": {
-          "map": "elm-lab",
-          "x": 8,
-          "y": 10
-        }
-      },
-      {
-        "x": 6,
-        "y": 3,
-        "to": {
-          "map": "elm-lab",
-          "x": 8,
-          "y": 10
-        }
-      },
-      {
-        "x": 12,
-        "y": 3,
-        "to": {
-          "map": "center",
-          "x": 4,
-          "y": 4
-        },
-        "via": {
-          "map": "newbark",
-          "x": 12,
-          "y": 4
-        }
-      },
-      {
         "x": 13,
-        "y": 3,
+        "y": 5,
+        "to": {
+          "map": "elm-lab",
+          "x": 8,
+          "y": 10
+        }
+      },
+      {
+        "x": 14,
+        "y": 5,
+        "to": {
+          "map": "elm-lab",
+          "x": 8,
+          "y": 10
+        }
+      },
+      {
+        "x": 3,
+        "y": 8,
         "to": {
           "map": "center",
           "x": 4,
@@ -96,25 +82,30 @@ export const MAPS6 = {
         },
         "via": {
           "map": "newbark",
-          "x": 13,
-          "y": 4
+          "x": 3,
+          "y": 9
         }
       },
       {
-        "x": 18,
-        "y": 3,
+        "x": 4,
+        "y": 8,
+        "to": {
+          "map": "center",
+          "x": 4,
+          "y": 4
+        },
+        "via": {
+          "map": "newbark",
+          "x": 4,
+          "y": 9
+        }
+      },
+      {
+        "x": 23,
+        "y": 8,
         "to": {
           "map": "house-newbark",
           "x": 6,
-          "y": 8
-        }
-      },
-      {
-        "x": 27,
-        "y": 8,
-        "to": {
-          "map": "r29",
-          "x": 1,
           "y": 8
         }
       },
@@ -124,12 +115,21 @@ export const MAPS6 = {
         "to": {
           "map": "r29",
           "x": 1,
+          "y": 8
+        }
+      },
+      {
+        "x": 27,
+        "y": 10,
+        "to": {
+          "map": "r29",
+          "x": 1,
           "y": 9
         }
       },
       {
-        "x": 22,
-        "y": 3,
+        "x": 18,
+        "y": 8,
         "to": {
           "map": "mart",
           "x": 5,
@@ -137,13 +137,13 @@ export const MAPS6 = {
         },
         "via": {
           "map": "newbark",
-          "x": 22,
-          "y": 4
+          "x": 18,
+          "y": 9
         }
       },
       {
-        "x": 23,
-        "y": 3,
+        "x": 19,
+        "y": 8,
         "to": {
           "map": "mart",
           "x": 6,
@@ -151,35 +151,35 @@ export const MAPS6 = {
         },
         "via": {
           "map": "newbark",
-          "x": 23,
-          "y": 4
+          "x": 19,
+          "y": 9
         }
-      },
+      }
     ],
     "signs": [
       {
-        "x": 2,
+        "x": 6,
         "y": 5,
         "text": "PROF. ELM'S LAB — Galefield's own Kin laboratory. Elm studies how Kin grow and hatch."
       },
       {
-        "x": 15,
-        "y": 15,
+        "x": 8,
+        "y": 3,
         "text": "GALEFIELD DOCK — The Yamato boat ties up here. West across the water lies Dawnwick and home."
       },
-      {"x": 7, "y": 14, "text": "GALEFIELD TOWN — East: ROUTE 29."},
-      {"x": 20, "y": 10, "text": "GALEFIELD TOWN — East: ROUTE 29."},
-      {"x": 1, "y": 9, "text": "GALEFIELD TOWN — East: ROUTE 29."},
+      {"x": 25, "y": 8, "text": "GALEFIELD TOWN — East: ROUTE 29."},
+      {"x": 4, "y": 16, "text": "GALEFIELD TOWN — East: ROUTE 29."},
+      {"x": 12, "y": 16, "text": "GALEFIELD TOWN — East: ROUTE 29."},
       {
-        "x": 24,
-        "y": 4,
+        "x": 16,
+        "y": 8,
         "text": "GALEFIELD MART — Stocked for the road ahead, at the east end of town."
-      },
+      }
     ],
     "npcs": [
       {
-        "x": 3,
-        "y": 5,
+        "x": 20,
+        "y": 9,
         "name": "MART CLERK",
         "art": "clerk",
         "skin": "#f0c8a0",
@@ -201,8 +201,8 @@ export const MAPS6 = {
         }
       },
       {
-        "x": 12,
-        "y": 15,
+        "x": 4,
+        "y": 3,
         "name": "CAPT WESTWIND",
         "art": "sailor",
         "skin": "#f0c8a0",
@@ -218,7 +218,7 @@ export const MAPS6 = {
       },
       {
         "x": 8,
-        "y": 7,
+        "y": 9,
         "name": "WREN",
         "art": "lady",
         "skin": "#d8a878",
@@ -231,8 +231,8 @@ export const MAPS6 = {
         ]
       },
       {
-        "x": 19,
-        "y": 6,
+        "x": 18,
+        "y": 5,
         "name": "TOMO",
         "art": "kid",
         "skin": "#f0c8a0",
@@ -245,7 +245,7 @@ export const MAPS6 = {
         ]
       },
       {
-        "x": 6,
+        "x": 11,
         "y": 13,
         "name": "ELDER MARA",
         "art": "elder",
@@ -343,8 +343,8 @@ export const MAPS6 = {
     "hidden": [],
     "events": [],
     "start": {
-      "x": 13,
-      "y": 15
+      "x": 6,
+      "y": 3
     }
   },
   "cherrygrove": {
@@ -2050,7 +2050,7 @@ export const MAPS6 = {
         "to": {
           "map": "newbark",
           "x": 26,
-          "y": 8
+          "y": 9
         }
       },
       {
@@ -2059,7 +2059,7 @@ export const MAPS6 = {
         "to": {
           "map": "newbark",
           "x": 26,
-          "y": 9
+          "y": 10
         }
       },
       {
@@ -4328,8 +4328,8 @@ export const MAPS6 = {
         "y": 9,
         "to": {
           "map": "newbark",
-          "x": 18,
-          "y": 4
+          "x": 23,
+          "y": 9
         }
       },
       {
@@ -4337,8 +4337,8 @@ export const MAPS6 = {
         "y": 9,
         "to": {
           "map": "newbark",
-          "x": 18,
-          "y": 4
+          "x": 23,
+          "y": 9
         }
       }
     ],
@@ -4708,8 +4708,8 @@ export const MAPS6 = {
         "y": 11,
         "to": {
           "map": "newbark",
-          "x": 5,
-          "y": 4
+          "x": 13,
+          "y": 6
         }
       },
       {
@@ -4717,8 +4717,8 @@ export const MAPS6 = {
         "y": 11,
         "to": {
           "map": "newbark",
-          "x": 5,
-          "y": 4
+          "x": 13,
+          "y": 6
         }
       }
     ],
