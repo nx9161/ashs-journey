@@ -980,27 +980,27 @@ export const MAPS6 = {
     "rows": [
       "ệệệỈệệệệệệỈệệệệệệỈệệệệệệỈệệệ",
       "ệễễễễễễễễễễễoễễễễễễầầễễễễễễệ",
-      "ệễỈjklmễễdeefễẑỉỉỉỉễễịịịễễịị",
-      "ệễễAJKAễễP12PễễUVYUễễỌsỌễầỌs",
-      "ệSầỆỆỆỆỆỆỆỆỆỆỆẑỆỆỆỆỆỆỆỆỆỆỆỆỆ",
-      "ệỆỆỆỆỆỆỆỆỆỆỆỆỆỆỆỆỆỆỆỆỆỆỆỆỆỆệ",
-      "ệỆỆỆầỆỆỆỆỆỆỆỆỆỆỆỆỆỆỆỆỆỆỆẦSỆệ",
-      "ệỆỆỆễễễỆễễễễỆỆỆỆỆỆỆễầẑỆỆ9nỆệ",
-      "ỆỆỆỆỆỆỆỆỆỆỆỆỆỆỆỆỆỆỆỆỆỆỆỆỆỆỆệ",
-      "ỆỆỆỆỆỆỆỆỆỆỆỆỆỆỆỆỆỆỆỆỆỆỆỆỆỆỆệ",
-      "ệễầỆỆỆỆỆỆỆỆỆễỆỆỆỆầỆẍỈnễễễễễệ",
-      "ệỆỆỆỆỆỆỆỆỆỆỆỆỆỆỆỆỆễễễễnễễễẑệ",
-      "ệễễỆ....oỈễnễễ....ễễễễễễễễễệ",
-      "ệễễ.,,,,,ễễễễ,,,,,,ễễễnễễễễệ",
-      "ệễỈ.,,,,,ễễễễ,,,,,,ễễễễễễễễệ",
-      "ệễễẍ,,,ễễễễễễầ,,,,ễễễễễễễễễệ",
-      "ệễễễễễễễễễễễễễễễễễễnễễầễễễễệ",
+      "ệễỈễễễễễễdeefễịịịễễễễễễễễễịị",
+      "ệễễễễễễễoP12PṓỌsỌẑễễễễễễễầsỌ",
+      "ệSầ.........................",
+      "ệễễễễjklmễễễ.Sễ.ễễễễễễễễoS.ệ",
+      "ệễễễầAJKAễễễ.ễễ.ễễễễẑỉỉỉỉễ.ệ",
+      "ệễễễễ....ễễễ.....ễễễầUVYUṸ.ệ",
+      ".............nẦn............",
+      ".............Ἂ‽Ἂ............",
+      "ệSầễễễ.ễễễễ...9.Sầễễễễễễễễễệ",
+      "ệễ‼ṓễễ.ễễễễ.ễ...ễễễ,,,ễễễễễệ",
+      "ệṒ‼ễễễ.Sễễễ.ễễễễễễễ,,,ễễễễễệ",
+      "ệ........................ễễệ",
+      "ệ,nẻẻẻẻnnnS.,,ễdeefễịịịịễễễệ",
+      "ệ,nẼsẼẼnn,ễ.,ầễtsttễỌsỌỌễễễệ",
+      "ệễn...................ầễễễễệ",
       "ệệệễệệệệệệễệệệệệệỈệệệệệệễệệệ"
     ],
     "warps": [
       {
-        "x": 4,
-        "y": 3,
+        "x": 6,
+        "y": 6,
         "to": {
           "map": "center",
           "x": 4,
@@ -1008,13 +1008,13 @@ export const MAPS6 = {
         },
         "via": {
           "map": "azalea",
-          "x": 4,
-          "y": 4
+          "x": 6,
+          "y": 7
         }
       },
       {
-        "x": 5,
-        "y": 3,
+        "x": 7,
+        "y": 6,
         "to": {
           "map": "center",
           "x": 4,
@@ -1022,8 +1022,8 @@ export const MAPS6 = {
         },
         "via": {
           "map": "azalea",
-          "x": 5,
-          "y": 4
+          "x": 7,
+          "y": 7
         }
       },
       {
@@ -1055,25 +1055,25 @@ export const MAPS6 = {
         }
       },
       {
-        "x": 16,
-        "y": 3,
-        "to": {
-          "map": "gym-azalea",
-          "x": 7,
-          "y": 8
-        }
-      },
-      {
-        "x": 17,
-        "y": 3,
-        "to": {
-          "map": "gym-azalea",
-          "x": 7,
-          "y": 8
-        }
-      },
-      {
         "x": 22,
+        "y": 7,
+        "to": {
+          "map": "gym-azalea",
+          "x": 7,
+          "y": 8
+        }
+      },
+      {
+        "x": 23,
+        "y": 7,
+        "to": {
+          "map": "gym-azalea",
+          "x": 7,
+          "y": 8
+        }
+      },
+      {
+        "x": 15,
         "y": 3,
         "to": {
           "map": "kurt-house",
@@ -1082,7 +1082,7 @@ export const MAPS6 = {
         }
       },
       {
-        "x": 27,
+        "x": 26,
         "y": 3,
         "to": {
           "map": "house-azalea",
@@ -1109,8 +1109,26 @@ export const MAPS6 = {
         }
       },
       {
-        "x": 24,
-        "y": 7,
+        "x": 27,
+        "y": 8,
+        "to": {
+          "map": "r33",
+          "x": 1,
+          "y": 8
+        }
+      },
+      {
+        "x": 27,
+        "y": 9,
+        "to": {
+          "map": "r33",
+          "x": 1,
+          "y": 9
+        }
+      },
+      {
+        "x": 14,
+        "y": 10,
         "to": {
           "map": "slowpoke-well",
           "x": 9,
@@ -1120,30 +1138,45 @@ export const MAPS6 = {
     ],
     "signs": [
       {
-        "x": 25,
-        "y": 6,
-        "text": "DOZPOTAM WELL — The town well, and the DOZPOTAMs own it. Mind your step on the way down."
-      },
-      {
         "x": 1,
         "y": 4,
         "text": "CINDER TOWN — Where people and Kin live in happy harmony. Kurt works his craft on the north street."
       },
       {
+        "x": 16,
+        "y": 10,
+        "text": "DOZPOTAM WELL — The town well, and the DOZPOTAMs own it. Mind your step on the way down."
+      },
+      {
         "x": 1,
         "y": 10,
         "text": "CINDER TOWN — East: CINDER HOUSE · West: HOLLY FOREST."
       },
       {
-        "x": 12,
-        "y": 10,
+        "x": 13,
+        "y": 5,
+        "text": "CINDER TOWN — East: CINDER HOUSE · West: HOLLY FOREST."
+      },
+      {
+        "x": 25,
+        "y": 5,
+        "text": "CINDER TOWN — East: CINDER HOUSE · West: HOLLY FOREST."
+      },
+      {
+        "x": 7,
+        "y": 12,
+        "text": "CINDER TOWN — East: CINDER HOUSE · West: HOLLY FOREST."
+      },
+      {
+        "x": 10,
+        "y": 14,
         "text": "CINDER TOWN — East: CINDER HOUSE · West: HOLLY FOREST."
       }
     ],
     "npcs": [
       {
-        "x": 12,
-        "y": 6,
+        "x": 13,
+        "y": 4,
         "name": "MAIZIE",
         "art": "kid",
         "skin": "#f0c8a0",
@@ -1156,8 +1189,8 @@ export const MAPS6 = {
         ]
       },
       {
-        "x": 18,
-        "y": 11,
+        "x": 12,
+        "y": 9,
         "name": "WELLKEEPER JONAS",
         "art": "elder",
         "skin": "#e8b888",
@@ -1170,8 +1203,8 @@ export const MAPS6 = {
         ]
       },
       {
-        "x": 7,
-        "y": 13,
+        "x": 5,
+        "y": 12,
         "name": "CHARCOAL KID",
         "art": "youngster",
         "skin": "#f0c8a0",
@@ -1184,8 +1217,8 @@ export const MAPS6 = {
         ]
       },
       {
-        "x": 3,
-        "y": 5,
+        "x": 9,
+        "y": 4,
         "name": "MART CLERK",
         "art": "clerk",
         "skin": "#f0c8a0",
@@ -4540,7 +4573,7 @@ export const MAPS6 = {
         "y": 9,
         "to": {
           "map": "azalea",
-          "x": 27,
+          "x": 26,
           "y": 4
         }
       },
@@ -4549,7 +4582,7 @@ export const MAPS6 = {
         "y": 9,
         "to": {
           "map": "azalea",
-          "x": 27,
+          "x": 26,
           "y": 4
         }
       }
@@ -4814,7 +4847,7 @@ export const MAPS6 = {
         "y": 9,
         "to": {
           "map": "azalea",
-          "x": 22,
+          "x": 15,
           "y": 4
         }
       },
@@ -4823,7 +4856,7 @@ export const MAPS6 = {
         "y": 9,
         "to": {
           "map": "azalea",
-          "x": 22,
+          "x": 15,
           "y": 4
         }
       }
@@ -4946,8 +4979,8 @@ export const MAPS6 = {
         "y": 9,
         "to": {
           "map": "azalea",
-          "x": 16,
-          "y": 4
+          "x": 22,
+          "y": 8
         }
       },
       {
@@ -4955,8 +4988,8 @@ export const MAPS6 = {
         "y": 9,
         "to": {
           "map": "azalea",
-          "x": 16,
-          "y": 4
+          "x": 22,
+          "y": 8
         }
       }
     ],
@@ -5343,8 +5376,8 @@ export const MAPS6 = {
         "y": 13,
         "to": {
           "map": "azalea",
-          "x": 24,
-          "y": 8
+          "x": 14,
+          "y": 11
         }
       },
       {
@@ -5352,8 +5385,8 @@ export const MAPS6 = {
         "y": 13,
         "to": {
           "map": "azalea",
-          "x": 24,
-          "y": 8
+          "x": 14,
+          "y": 11
         }
       }
     ],
