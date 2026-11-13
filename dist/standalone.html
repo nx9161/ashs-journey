@@ -2439,6 +2439,26 @@ T1_KIND_DEFS.forEach(([kind], i) => {
   TILE_CHARS[ch] = kind;
 });
 const T1_PROP_KINDS = T1_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
+// ---- Wave T3 (Fernmere build): Marlow's tortoise ----
+// One new kind continuing the block at idx 565 (T1 ends at 564;
+// U+2035, verified free in TILE_CHARS and unused by every map row).
+// Class 'prop': a solid object composited over the ground it stands
+// on (art.mjs resolver). The tortoise is tale_viridian made visible —
+// the retired ace Marlow's partner, dozing beside his cottage fence
+// (BACKSTORY-SYNC-AUDIT build note: in the story, absent from the
+// approved design). Authored art:
+// assets/sprites/pix/tiles/tile-prop-tortoise.pix (Wave T3 register
+// item N1 in WAVE-T3-FERNMERE-PLAN.md).
+const T3_KIND_DEFS = [
+  ['tortoise', 'prop'],
+];
+const T3_KIND_CHARS = {};
+T3_KIND_DEFS.forEach(([kind], i) => {
+  const ch = String.fromCodePoint(0x1E00 + 565 + i);
+  T3_KIND_CHARS[kind] = ch;
+  TILE_CHARS[ch] = kind;
+});
+const T3_PROP_KINDS = T3_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
 const SINNOH_TOWN_GROUND_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg);
 const SINNOH_TOWN_GROUND2_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg2);
 // TX-3: the 8 gym exteriors by town (original type-accent motifs).
@@ -110292,6 +110312,8 @@ TILE_ART['facade-panel'] = 'tile-facade-panel';
 for (const k of G2_KINDS) TILE_ART[k] = 'tile-' + k;
 // Wave T1: Dawnwick shore props (boat / chalkmap) draw their prop art.
 for (const k of T1_PROP_KINDS) TILE_ART[k] = 'tile-prop-' + k;
+// Wave T3: Marlow's tortoise (Fernmere) draws its prop art.
+for (const k of T3_PROP_KINDS) TILE_ART[k] = 'tile-prop-' + k;
 
 // Premium+ W6 (TX-3/PL-1): door-open frames, authored in TX-3 for every
 // door kind. The warp-fade engine that plays them lands in W7 — W6
@@ -111129,7 +111151,9 @@ const PROP_KINDS = new Set(['counter', 'healmachine', 'pcdesk', 'bed', 'table',
   // Arc 4 Stage S3b: Borea east/north props composite over their ground too.
   ...S3B_PROP_KINDS,
   // Wave T1: Dawnwick shore props composite over their ground too.
-  ...T1_PROP_KINDS]);
+  ...T1_PROP_KINDS,
+  // Wave T3: Marlow's tortoise composites over its ground too.
+  ...T3_PROP_KINDS]);
 function groundFamilyOf(kind) {
   // Perfection Pass Stage 2 Gate 2 (G2): beach kinds stand on tropgrass,
   // psand kinds stand on path (props composite over the parent ground).
@@ -122795,51 +122819,59 @@ const MAPS3 = {
   },
 
   // ================= CHUNK 4 — endgame block ===========================
-  // Fernmere override: COMPLETE copy of maps.mjs viridian + the Gym on the
-  // west side. The gym door warp is always present; the step event in front
-  // of it (ev_viridian_gym_locked, badgesBelow 7) handles the locked case.
+  // Fernmere override: COMPLETE copy of maps.mjs viridian. Wave T3
+  // (2026-11-12): rebuilt 20x14 to the owner's approved design — stone
+  // gym hall N-center, Center/Mart pair on the main street, statue
+  // garden S-center (the Marlow plaque), Marlow's tortoise beside his
+  // cottage fence. The gym door warp is always present; the step event
+  // in front of it (ev_viridian_gym_locked, badgesBelow 7) handles the
+  // locked case. Plan: WAVE-T3-FERNMERE-PLAN.md.
   viridian: {
     id: 'viridian', name: 'Fernmere City', music: 'viridian-theme',
     rows: rows([
-      'ÌÌÌÌÌÌĲĲĲĲÌÌÌÌÌÌ',
-      'Ìẇ×ÁÁĲĲÌÌÁÁÁÁ×ÁÌ',
-      'ÌÁăíăĲĲÌÌÁăăăÁÁÌ',
-      'ÌẍḀḀḀĲĲoẉÁěsěÁÁÌ',
-      'ÌÁḀVYĲââââĲĲÁÁÁÌ',
-      'ÌĲĲĲĲĲAJKAĲĲoÁẓÌ',
-      'ÌĲĲĲĲĲĲĲĲĲĲĲĲFÁÌ',
-      'ĲĲăOăĲĲĲĲĲĲĲÁÁÁÌ',
-      'ÌĲP12ĲĲĲĲĲĲĲF×ẑÌ',
-      'ÌĲĲĲĲĲĲĲĲĲĲĲẓÁÁÌ',
-      'ÌÌÌÌÌÌĲĲĲĲÌÌÌÌÌÌ',
+      'ÌÌÌÌÌ....ÌÌÌÌÌÌÌÌÌÌÌ',
+      'ÌÌÌ×Á......ÁÁÁÁÁÁÁÁÌ',
+      'ÌÌÌÁĲ....deXXefÁdefÌ',
+      'ÌÌÁĲĲ....UUVYUUÁrstÌ',
+      'ÌÁÁÁ×.............ĲÌ',
+      'ÌghiÁĲÁÁĲĲĲĲĲ×ÁnnÁnÌ',
+      'ÌvsvÁjklm...ââOâÁ‵FÌ',
+      'ÌÁÁĲĲAJKA...P12PÁÁÁÌ',
+      '....................',
+      'ÌÁÁÁĲ........ĲĲÁÁÁÁÌ',
+      'ÌÁdef.onnn..n.hdefẑÌ',
+      'ÌÁvsr.ẄnFμ..n.@xyzẆÌ',
+      'ÌĲĲ....n....n.....oÌ',
+      'ÌÌÌ×ÌÌÌÌ....ÌÌÌÌ×ÌÌÌ',
     ]),
     warps: [
-      { x: 3, y: 4, to: { map: 'gym-viridian', x: 5, y: 7 } },
-      { x: 4, y: 4, to: { map: 'gym-viridian', x: 6, y: 7 } },
-      { x: 7, y: 5, to: { map: 'center', x: 4, y: 4 }, via: { map: 'viridian', x: 7, y: 6 } },
-      { x: 8, y: 5, to: { map: 'center', x: 5, y: 4 }, via: { map: 'viridian', x: 8, y: 6 } },
-      { x: 6, y: 0, to: { map: 'route2', x: 6, y: 12 } },
-      { x: 7, y: 0, to: { map: 'route2', x: 7, y: 12 } },
-      { x: 8, y: 0, to: { map: 'route2', x: 6, y: 12 } },
-      { x: 9, y: 0, to: { map: 'route2', x: 7, y: 12 } },
-      { x: 0, y: 7, to: { map: 'route22', x: 16, y: 5 } },
-      { x: 11, y: 3, to: { map: 'house-viridian', x: 4, y: 4 } },
-      { x: 3, y: 8, to: { map: 'mart', x: 5, y: 5 }, via: { map: 'viridian', x: 3, y: 9 } },
-      { x: 4, y: 8, to: { map: 'mart', x: 6, y: 5 }, via: { map: 'viridian', x: 4, y: 9 } },
-      { x: 6, y: 10, to: { map: 'route1', x: 6, y: 1 } },
-      { x: 7, y: 10, to: { map: 'route1', x: 7, y: 1 } },
-      { x: 8, y: 10, to: { map: 'route1', x: 6, y: 1 } },
-      { x: 9, y: 10, to: { map: 'route1', x: 7, y: 1 } },
+      { x: 11, y: 3, to: { map: 'gym-viridian', x: 5, y: 7 } },
+      { x: 12, y: 3, to: { map: 'gym-viridian', x: 6, y: 7 } },
+      { x: 6, y: 7, to: { map: 'center', x: 4, y: 4 }, via: { map: 'viridian', x: 6, y: 8 } },
+      { x: 7, y: 7, to: { map: 'center', x: 5, y: 4 }, via: { map: 'viridian', x: 7, y: 8 } },
+      { x: 5, y: 0, to: { map: 'route2', x: 6, y: 12 } },
+      { x: 6, y: 0, to: { map: 'route2', x: 7, y: 12 } },
+      { x: 7, y: 0, to: { map: 'route2', x: 6, y: 12 } },
+      { x: 8, y: 0, to: { map: 'route2', x: 7, y: 12 } },
+      { x: 0, y: 8, to: { map: 'route22', x: 16, y: 5 } },
+      { x: 17, y: 3, to: { map: 'house-viridian', x: 4, y: 4 } },
+      { x: 13, y: 7, to: { map: 'mart', x: 5, y: 5 }, via: { map: 'viridian', x: 13, y: 8 } },
+      { x: 14, y: 7, to: { map: 'mart', x: 6, y: 5 }, via: { map: 'viridian', x: 14, y: 8 } },
+      { x: 8, y: 13, to: { map: 'route1', x: 6, y: 1 } },
+      { x: 9, y: 13, to: { map: 'route1', x: 7, y: 1 } },
+      { x: 10, y: 13, to: { map: 'route1', x: 6, y: 1 } },
+      { x: 11, y: 13, to: { map: 'route1', x: 7, y: 1 } },
     ],
     signs: [
-      { x: 3, y: 6, text: 'FERNMERE CITY — The city of evergreen. The Center heals your team for free.' },
-      { x: 11, y: 6, text: 'FERNMERE GYM — The leader returned at last. Seven badges to knock; the eighth door in Arden. Inside lies a SPIRIT GROUND: Ground moves hit harder and the earth drags at the unadapted — for the leader, and for you.' },
+      { x: 6, y: 12, text: 'FERNMERE CITY — The city of evergreen. The Center heals your team for free.' },
+      { x: 15, y: 4, text: 'FERNMERE GYM — The leader returned at last. Seven badges to knock; the eighth door in Arden. Inside lies a SPIRIT GROUND: Ground moves hit harder and the earth drags at the unadapted — for the leader, and for you.' },
       { x: 4, y: 1, text: 'FERNMERE CITY — North: ROUTE 2 · West: ROUTE 22 · South: ROUTE 1.' },
+      { x: 10, y: 11, text: 'The statue in the garden plot is Marlow himself, first challenger — the town set him where he can watch the gym door, in case a challenger ever makes the old tortoise look up.' },
     ],
     npcs: [
-      { x: 11, y: 7, name: 'HIKER', art: 'hiker', skin: '#d8a878', shirt: '#50368e', pants: '#4a4a5a', hair: '#3a2a1a',
+      { x: 2, y: 8, name: 'HIKER', art: 'hiker', skin: '#d8a878', shirt: '#50368e', pants: '#4a4a5a', hair: '#3a2a1a',
         dialogue: ["Heading north? Route 2's grass is thicker — I saw a FUSSAPE up there yesterday.", "Fighting-types crack rock wide open. A FUSSAPE that knows Low Kick will humble Brock's PEBBLET."] },
-      { x: 5, y: 7, name: 'GYM GUIDE', art: 'clerk', skin: '#e8b888', shirt: '#c03a3a', pants: '#2a2a3a', hair: '#1a1a1a',
+      { x: 10, y: 4, name: 'GYM GUIDE', art: 'clerk', skin: '#e8b888', shirt: '#c03a3a', pants: '#2a2a3a', hair: '#1a1a1a',
         dialogue: ["That gym slept for years, doors chained, paint peeling. Then HE came back and the lights came on in one night.", "Word is the League won't even look at you without all eight. Knock when you're carrying seven, trainer."] },
     ],
     encounters: null,
@@ -122847,7 +122879,7 @@ const MAPS3 = {
     hidden: [
     ],
     events: [
-      { id: 'ev_viridian_gym_locked', x: 3, y: 5, when: { badgesBelow: 7 } },
+      { id: 'ev_viridian_gym_locked', x: 11, y: 4, when: { badgesBelow: 7 } },
     ],
     start: null,
   },
@@ -122866,8 +122898,8 @@ const MAPS3 = {
       '=====DD=====',
     ]),
     warps: [
-      { x: 5, y: 8, to: { map: 'viridian', x: 3, y: 5 } },
-      { x: 6, y: 8, to: { map: 'viridian', x: 4, y: 5 } },
+      { x: 5, y: 8, to: { map: 'viridian', x: 11, y: 4 } },
+      { x: 6, y: 8, to: { map: 'viridian', x: 12, y: 4 } },
     ],
     signs: [],
     npcs: [
@@ -122901,7 +122933,7 @@ const MAPS3 = {
       '##################',
     ]),
     warps: [
-      { x: 17, y: 5, to: { map: 'viridian', x: 1, y: 7 } },
+      { x: 17, y: 5, to: { map: 'viridian', x: 1, y: 8 } },
       { x: 0, y: 5, to: { map: 'victoryroad', x: 1, y: 5 } },
     ],
     signs: [
@@ -123754,8 +123786,8 @@ const MAPS4 = {
       ';;;;;;;;;;;;',
     ],
     warps: [
-      { x: 5, y: 6, to: { map: 'viridian', x: 3, y: 9 }, viaExit: true },
-      { x: 6, y: 6, to: { map: 'viridian', x: 4, y: 9 }, viaExit: true },
+      { x: 5, y: 6, to: { map: 'viridian', x: 13, y: 8 }, viaExit: true },
+      { x: 6, y: 6, to: { map: 'viridian', x: 14, y: 8 }, viaExit: true },
     ],
     signs: [],
     npcs: [],
@@ -123815,8 +123847,8 @@ const MAPS4 = {
       '<<<<<<<<<<',
     ],
     warps: [
-      { x: 4, y: 5, to: { map: 'viridian', x: 11, y: 4 } },
-      { x: 5, y: 5, to: { map: 'viridian', x: 11, y: 4 } },
+      { x: 4, y: 5, to: { map: 'viridian', x: 17, y: 4 } },
+      { x: 5, y: 5, to: { map: 'viridian', x: 17, y: 4 } },
     ],
     signs: [],
     npcs: [],
@@ -158419,7 +158451,7 @@ const TALE_NPCS = [
   { map: 'mart', x: 5, y: 2, name: 'SHOPKEEPER', art: 'clerk', ...APPEAR.shop, tale: 'tale_pallet', role: 'stage',
     mart: { stock: ['greatball', 'ultraball', 'hyperpotion', 'fullheal', 'revive', 'superpotion'] },
     dialogue: ['Fernmere sundries! Maps, string, and strong opinions about both.'] },
-  { map: 'viridian', x: 14, y: 4, name: 'ACE MARLOW', art: 'elder', ...APPEAR.ace, tale: 'tale_viridian', role: 'giver',
+  { map: 'viridian', x: 16, y: 6, name: 'ACE MARLOW', art: 'elder', ...APPEAR.ace, tale: 'tale_viridian', role: 'giver',
     dialogue: ['Sixty years I walked that forest. It kept one thing of mine. Fair trade, I suppose.'] },
   { map: 'pewter', x: 5, y: 4, name: 'BROCK', art: 'brock', ...APPEAR.brock, tale: 'tale_pewter', role: 'stage',
     dialogue: ['Off duty, I read to the museum fossils. They never heckle.'] },
@@ -173548,7 +173580,7 @@ class OverworldScene {
       // Wave 5b: viaExit resolves per shared interior — the Mart's
       // exit ticket is its own (martReturn), the Center's is unchanged.
       if (wp.viaExit) to = this.mapId === 'mart'
-        ? (this.martReturn || { map: 'viridian', x: 3, y: 9 })
+        ? (this.martReturn || { map: 'viridian', x: 13, y: 8 })
         : this.centerExit();
       this.startWarpFade(to, wp);
       return;
@@ -181794,6 +181826,6 @@ if (typeof Game !== 'undefined') Object.assign(Game.prototype, {
 });
 
 </script>
-<!-- contentHash:333657b72ec37929e4f0f631f788abd03b8b5b95ab3df62f0d0afaf16ceeb349 -->
+<!-- contentHash:ed897762cb7fbd4a050450d95aabf3f77bb9fc5f2cc7a3f27c7613f9d0d48772 -->
 </body>
 </html>
