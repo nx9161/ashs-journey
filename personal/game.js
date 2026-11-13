@@ -2025,6 +2025,24 @@ T6_KIND_DEFS.forEach(([kind], i) => {
 const T6_PROP_KINDS = T6_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
 const T6_RUG_KINDS = T6_KIND_DEFS.filter(([, c]) => c === 'rug').map(([k]) => k);
 const T6_WALKABLE_CHARS = T6_KIND_DEFS.filter(([, c]) => c === 'rug').map(([k]) => T6_KIND_CHARS[k]);
+// ---- Wave T7 (Hushmoor build): memorial wall ----
+// One new kind continuing the block at idx 569 (T6 ends at 568;
+// U+2039, verified free in TILE_CHARS and unused by every map row).
+// Class 'prop': a solid object composited over the ground it stands
+// on (art.mjs resolver). The low stone wall of names south of the
+// tower garden in Hushmoor — the wall tale_lavender is named for.
+// Authored art: assets/sprites/pix/tiles/tile-memorialwall.pix
+// (Wave T7 register item in WAVE-T7-HUSHMOOR-PLAN.md Part 4).
+const T7_KIND_DEFS = [
+  ['memorialwall', 'prop'],
+];
+const T7_KIND_CHARS = {};
+T7_KIND_DEFS.forEach(([kind], i) => {
+  const ch = String.fromCodePoint(0x1E00 + 569 + i);
+  T7_KIND_CHARS[kind] = ch;
+  TILE_CHARS[ch] = kind;
+});
+const T7_PROP_KINDS = T7_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
 const SINNOH_TOWN_GROUND_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg);
 const SINNOH_TOWN_GROUND2_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg2);
 // TX-3: the 8 gym exteriors by town (original type-accent motifs).
@@ -88537,6 +88555,24 @@ const ART = {
     "bbbbbbbbbbbbbbbb",
     "bbbbbbbbbbbbbbbb",
   ] },
+  "tile-memorialwall": { w: 16, h: 16, pal: {"l":"#8a8494","m":"#6a6472","s":"#4a4450","v":"#7a6a8a","d":"#3a3542","g":"#5a6a4a"}, rows: [
+    "................",
+    "................",
+    "................",
+    "................",
+    "................",
+    "llllllllllllllll",
+    "mvlmmmmvmmmmvlmm",
+    "ssssssssssssssss",
+    "ssdddssdddddssss",
+    "ssssvsssssssssss",
+    "sddddssdddssssss",
+    "ssssssssssssggss",
+    "ssdddssssdddssss",
+    "ssssssssssssssss",
+    "ggssssssssssssgg",
+    "dddddddddddddddd",
+  ] },
   "tile-moonmoss": { w: 16, h: 16, pal: {"B":"#84754e","D":"#6a5c47","A":"#549e8d"}, rows: [
     "BBDDAABBBBDDBBAA",
     "BBAABBBBBBBDDBAA",
@@ -109863,6 +109899,8 @@ for (const k of T3_PROP_KINDS) TILE_ART[k] = 'tile-prop-' + k;
 // Wave T6: Arcport harbour props (crane / gull) + the tidechart rug
 // draw their prop art.
 for (const k of [...T6_PROP_KINDS, ...T6_RUG_KINDS]) TILE_ART[k] = 'tile-prop-' + k;
+// Wave T7: Hushmoor's memorial wall draws its own tile art.
+TILE_ART['memorialwall'] = 'tile-memorialwall';
 
 // Premium+ W6 (TX-3/PL-1): door-open frames, authored in TX-3 for every
 // door kind. The warp-fade engine that plays them lands in W7 — W6
@@ -110704,7 +110742,9 @@ const PROP_KINDS = new Set(['counter', 'healmachine', 'pcdesk', 'bed', 'table',
   // Wave T3: Marlow's tortoise composites over its ground too.
   ...T3_PROP_KINDS,
   // Wave T6: Arcport harbour props + tidechart rug composite too.
-  ...T6_PROP_KINDS, ...T6_RUG_KINDS]);
+  ...T6_PROP_KINDS, ...T6_RUG_KINDS,
+  // Wave T7: Hushmoor's memorial wall composites over its ground too.
+  ...T7_PROP_KINDS]);
 function groundFamilyOf(kind) {
   // Perfection Pass Stage 2 Gate 2 (G2): beach kinds stand on tropgrass,
   // psand kinds stand on path (props composite over the parent ground).
@@ -111582,7 +111622,9 @@ function resolveTileLayers(cache, kind, x, y, kindAt, t, phase, mapId) {
     // Wave T3: Marlow's tortoise composites over its lawn the same way.
     case 'tortoise':
     // Wave T6: the dock crane composites over its boardwalk the same way.
-    case 'crane': {
+    case 'crane':
+    // Wave T7: the memorial wall composites over its garden grass too.
+    case 'memorialwall': {
       // Object tiles carry transparent surrounds (Wave 1): lay the ground
       // the object stands on beneath it — south neighbour's family first
       // (the contact edge), else the neighbour majority, else grass.
@@ -119739,8 +119781,8 @@ const MAPS2 = {
     warps: [
       { x: 8, y: 0, to: { map: 'route10', x: 7, y: 12 } },
       { x: 9, y: 0, to: { map: 'route10', x: 8, y: 12 } },
-      { x: 8, y: 12, to: { map: 'lavender', x: 8, y: 1 } },
-      { x: 9, y: 12, to: { map: 'lavender', x: 9, y: 1 } },
+      { x: 8, y: 12, to: { map: 'lavender', x: 10, y: 1 } },
+      { x: 9, y: 12, to: { map: 'lavender', x: 11, y: 1 } },
     ],
     signs: [],
     npcs: [
@@ -119769,44 +119811,54 @@ const MAPS2 = {
   lavender: {
     id: 'lavender', name: 'Hushmoor Town', music: 'viridian-theme',
     rows: rows([
-      'ÒÒÒÒÒÒÒÒľÇÒÒÒÒÒÒÒÒ',
-      'ÒľľľÇľľÇÇÇÝÇľÇľľÇÒ',
-      'ÒÇđđđľľÇÇľđóđđÇÇÇÒ',
-      'ÒÇĩsĩľÇľÇÇUUUUÇľľÒ',
-      'ÒÇÝÇÝľÇÝÝÇUVYUÝľÇÒ',
-      'ÇľoÇľÇÇÇÇľľÇÇľľoÇÒ',
-      'ÒÇÇÇÇľèèèèľÇľÇľÇľÒ',
-      'ÒľÇľľľAJKAľľÇÇÇÇľÒ',
-      'ÒÇÝúúľoÇÇoÇúúÝÇľľÒ',
-      'ÒÇÇÇľľÇľÇľľÇÇÇÇÇÇÒ',
-      'ÒľÇÇľÇľÇľľľľľÇÇľľÒ',
-      'ÒľľľÇÝÇľľľÇÇÇľÇľľÒ',
-      'ÒÒÒÒÒÒÒÒľľÒÒÒÒÒÒÒÒ',
+      'ÒÒÒÒÒÒÒÒÒÒ..ÒÒÒÒÒÒÒÒ',
+      'ÒÇÇÇÇÇÇÇ...ÇÇÇÇÇÇÇÇÒ',
+      'ÒđđđÇđđđ.đóđđÇđđđđÇÒ',
+      'ÒĩsĩÇĩwĩ.UUUUÇĩwĩĩÇÒ',
+      'ÒÇ...úúẅ.UUUUÇúúẅÇÇÒ',
+      '...Ç.nnn.UVYUÇnnnnÇÒ',
+      'Òđđđ.....ṵ..ṵÇÇÇđđđÇ',
+      'ÒĩwĩÇFp.....pÇẄÇĩwĩÇ',
+      'ÒÇÇÇÇÇÇ.ÇÇ..ÇÇÇFFÇÇÒ',
+      'ÒÇèèèèÇ‹‹‹..‹‹‹đđOđÒ',
+      'ÒÇAJKAÇÇFÇ..ÇÇÇó12óÒ',
+      'ÒÇÇ..ÇoÇÇÇ..ÇoÇÇ..ÇÒ',
+      'ÒÇÇú.............úÇÒ',
+      'ÒÒÒÒÒÒÒÒÒÒ..ÒÒÒÒÒÒÒÒ',
     ]),
     warps: [
-      { x: 11, y: 4, to: { map: 'tower1', x: 3, y: 8 } },
-      { x: 12, y: 4, to: { map: 'tower1', x: 4, y: 8 } },
-      { x: 7, y: 7, to: { map: 'center', x: 4, y: 4 }, via: { map: 'lavender', x: 7, y: 8 } },
-      { x: 8, y: 7, to: { map: 'center', x: 5, y: 4 }, via: { map: 'lavender', x: 8, y: 8 } },
-      { x: 8, y: 0, to: { map: 'rocktunnel', x: 8, y: 11 } },
-      { x: 9, y: 0, to: { map: 'rocktunnel', x: 9, y: 11 } },
+      { x: 10, y: 5, to: { map: 'tower1', x: 3, y: 8 } },
+      { x: 11, y: 5, to: { map: 'tower1', x: 4, y: 8 } },
+      { x: 3, y: 10, to: { map: 'center', x: 4, y: 4 }, via: { map: 'lavender', x: 3, y: 11 } },
+      { x: 4, y: 10, to: { map: 'center', x: 5, y: 4 }, via: { map: 'lavender', x: 4, y: 11 } },
+      { x: 10, y: 0, to: { map: 'rocktunnel', x: 8, y: 11 } },
+      { x: 11, y: 0, to: { map: 'rocktunnel', x: 9, y: 11 } },
       { x: 0, y: 5, to: { map: 'route8', x: 16, y: 5 } },
-      { x: 8, y: 12, to: { map: 'route12', x: 8, y: 1 } },
-      { x: 9, y: 12, to: { map: 'route12', x: 9, y: 1 } },
+      { x: 10, y: 13, to: { map: 'route12', x: 8, y: 1 } },
+      { x: 11, y: 13, to: { map: 'route12', x: 9, y: 1 } },
+      { x: 2, y: 3, to: { map: 'house-lavender', x: 4, y: 4 } },
+      { x: 16, y: 10, to: { map: 'mart', x: 5, y: 5 }, via: { map: 'lavender', x: 16, y: 11 } },
+      { x: 17, y: 10, to: { map: 'mart', x: 6, y: 5 }, via: { map: 'lavender', x: 17, y: 11 } },
     ],
     signs: [
-      { x: 7, y: 4, text: 'HUSHMOOR TOWN — The noble purple town. Speak softly here; the tower is listening.' },
-      { x: 8, y: 4, text: 'HUSHMOOR TOWER — Honor the spirits of departed Kin.' },
+      { x: 8, y: 6, text: 'HUSHMOOR TOWN — The noble purple town. Speak softly here; the tower is listening.' },
+      { x: 13, y: 6, text: 'HUSHMOOR TOWER — Honor the spirits of departed Kin.' },
+      { x: 9, y: 12, text: 'HUSHMOOR TOWN — North: STONEBORE TUNNEL · West: ROUTE 8 · South: ROUTE 12.' },
+      { x: 12, y: 12, text: 'HUSHMOOR TOWN — North: STONEBORE TUNNEL · West: ROUTE 8 · South: ROUTE 12.' },
     ],
     npcs: [
-      { x: 5, y: 9, name: 'VOLUNTEER', art: 'lady', skin: '#f0c8a0', shirt: '#e8e0f0', pants: '#5a4a6a', hair: '#3a2a4a',
+      { x: 5, y: 8, name: 'VOLUNTEER', art: 'lady', skin: '#f0c8a0', shirt: '#e8e0f0', pants: '#5a4a6a', hair: '#3a2a4a',
         dialogue: ["I volunteer at the Kin House. Mr. Fuji takes in every orphan the roads leave behind.", "Lately the tower's restless — a mother's spirit, the channelers say, searching for her child."] },
-      { x: 13, y: 9, name: 'CHILD', art: 'kid', skin: '#f0c8a0', shirt: '#3a9ac0', pants: '#2a3a4a', hair: '#6a4a2a',
+      { x: 9, y: 10, name: 'CHILD', art: 'kid', skin: '#f0c8a0', shirt: '#3a9ac0', pants: '#2a3a4a', hair: '#6a4a2a',
         dialogue: ["My grandma says the tower ghosts are just Kin who loved us too much to leave.", "Do you believe her? I do. It makes the tower feel less scary. Mostly."] },
+      { x: 15, y: 11, name: 'MART CLERK', art: 'clerk', skin: '#f0c8a0', shirt: '#3a6ac0', pants: '#2a2a3a', hair: '#2a1a0a',
+        mart: { stock: ['pokeball', 'greatball', 'superpotion', 'hyperpotion', 'antidote', 'awakening'] },
+        dialogue: ["Hushmoor Mart. Quiet shelves, honest prices. Travelers heading south stock up on Antidotes — the fishing road is all fangs."] },
     ],
     encounters: null,
     items: [],
-    hidden: [],
+    hidden: [
+    ],
     events: [],
     start: null,
   },
@@ -119827,8 +119879,8 @@ const MAPS2 = {
       'MMMMMMMMMMMMMMMM',
     ]),
     warps: [
-      { x: 3, y: 9, to: { map: 'lavender', x: 11, y: 5 } },
-      { x: 4, y: 9, to: { map: 'lavender', x: 12, y: 5 } },
+      { x: 3, y: 9, to: { map: 'lavender', x: 10, y: 6 } },
+      { x: 4, y: 9, to: { map: 'lavender', x: 11, y: 6 } },
       { x: 11, y: 9, to: { map: 'tower2', x: 3, y: 8 } },
       { x: 12, y: 9, to: { map: 'tower2', x: 4, y: 8 } },
     ],
@@ -119924,8 +119976,8 @@ const MAPS2 = {
       '########..######',
     ]),
     warps: [
-      { x: 8, y: 0, to: { map: 'lavender', x: 8, y: 11 } },
-      { x: 9, y: 0, to: { map: 'lavender', x: 9, y: 11 } },
+      { x: 8, y: 0, to: { map: 'lavender', x: 10, y: 12 } },
+      { x: 9, y: 0, to: { map: 'lavender', x: 11, y: 12 } },
       { x: 8, y: 13, to: { map: 'route15', x: 2, y: 1 } },
       { x: 9, y: 13, to: { map: 'route15', x: 3, y: 1 } },
     ],
@@ -121531,8 +121583,8 @@ const MAPS3 = {
     warps: [
       { x: 8, y: 0, to: { map: 'route10', x: 7, y: 12 } },
       { x: 9, y: 0, to: { map: 'route10', x: 8, y: 12 } },
-      { x: 8, y: 12, to: { map: 'lavender', x: 8, y: 1 } },
-      { x: 9, y: 12, to: { map: 'lavender', x: 9, y: 1 } },
+      { x: 8, y: 12, to: { map: 'lavender', x: 10, y: 1 } },
+      { x: 9, y: 12, to: { map: 'lavender', x: 11, y: 1 } },
     ],
     signs: [],
     npcs: [
@@ -121560,44 +121612,45 @@ const MAPS3 = {
   lavender: {
     id: 'lavender', name: 'Hushmoor Town', music: 'viridian-theme',
     rows: rows([
-      'ÒÒÒÝÒÒÒÒľľÒÒÒÝÒÒÒÒ',
-      'ÒÇÇẓÇľľľľľÇÇẅẑÇÇẋÒ',
-      'ÒÇđđđľÇľľľđóđđÇÇÇÒ',
-      'ÒÇĩsĩľÇľľľUUUUẓÇÇÒ',
-      'ÒľľľľľľľľľUVYUÝẅÇÒ',
-      'ľľľľľľľľľľľľľľÇoÇÒ',
-      'ÒľľľľľèèèèľÇÇľÇÇÇÒ',
-      'ÒľÇľÇľAJKAľoÇľđOđÒ',
-      'ÒľľľÇľľľľľľÇÇľó12Ò',
-      'ÒľľľľľľľľľľľľľľľľÒ',
-      'ÒoÝľľľľľľľÇÇÇľÇľľÒ',
-      'ÒẏÇÇoÝľľľľľľľľľľľÒ',
-      'ÒÒÒÝÒÒÒÒľľÒÒÒÝÒÒÒÒ',
+      'ÒÒÒÒÒÒÒÒÒÒ..ÒÒÒÒÒÒÒÒ',
+      'ÒÇÇÇÇÇÇÇ...ÇÇÇÇÇÇÇÇÒ',
+      'ÒđđđÇđđđ.đóđđÇđđđđÇÒ',
+      'ÒĩsĩÇĩwĩ.UUUUÇĩwĩĩÇÒ',
+      'ÒÇ...úúẅ.UUUUÇúúẅÇÇÒ',
+      '...Ç.nnn.UVYUÇnnnnÇÒ',
+      'Òđđđ.....ṵ..ṵÇÇÇđđđÇ',
+      'ÒĩwĩÇFp.....pÇẄÇĩwĩÇ',
+      'ÒÇÇÇÇÇÇ.ÇÇ..ÇÇÇFFÇÇÒ',
+      'ÒÇèèèèÇ‹‹‹..‹‹‹đđOđÒ',
+      'ÒÇAJKAÇÇFÇ..ÇÇÇó12óÒ',
+      'ÒÇÇ..ÇoÇÇÇ..ÇoÇÇ..ÇÒ',
+      'ÒÇÇú.............úÇÒ',
+      'ÒÒÒÒÒÒÒÒÒÒ..ÒÒÒÒÒÒÒÒ',
     ]),
     warps: [
-      { x: 11, y: 4, to: { map: 'tower1', x: 3, y: 8 } },
-      { x: 12, y: 4, to: { map: 'tower1', x: 4, y: 8 } },
-      { x: 7, y: 7, to: { map: 'center', x: 4, y: 4 }, via: { map: 'lavender', x: 7, y: 8 } },
-      { x: 8, y: 7, to: { map: 'center', x: 5, y: 4 }, via: { map: 'lavender', x: 8, y: 8 } },
-      { x: 8, y: 0, to: { map: 'rocktunnel', x: 8, y: 11 } },
-      { x: 9, y: 0, to: { map: 'rocktunnel', x: 9, y: 11 } },
+      { x: 10, y: 5, to: { map: 'tower1', x: 3, y: 8 } },
+      { x: 11, y: 5, to: { map: 'tower1', x: 4, y: 8 } },
+      { x: 3, y: 10, to: { map: 'center', x: 4, y: 4 }, via: { map: 'lavender', x: 3, y: 11 } },
+      { x: 4, y: 10, to: { map: 'center', x: 5, y: 4 }, via: { map: 'lavender', x: 4, y: 11 } },
+      { x: 10, y: 0, to: { map: 'rocktunnel', x: 8, y: 11 } },
+      { x: 11, y: 0, to: { map: 'rocktunnel', x: 9, y: 11 } },
       { x: 0, y: 5, to: { map: 'route8', x: 16, y: 5 } },
-      { x: 8, y: 12, to: { map: 'route12', x: 8, y: 1 } },
-      { x: 9, y: 12, to: { map: 'route12', x: 9, y: 1 } },
-      { x: 3, y: 3, to: { map: 'house-lavender', x: 4, y: 4 } },
-      { x: 15, y: 8, to: { map: 'mart', x: 5, y: 5 }, via: { map: 'lavender', x: 15, y: 9 } },
-      { x: 16, y: 8, to: { map: 'mart', x: 6, y: 5 }, via: { map: 'lavender', x: 16, y: 9 } },
+      { x: 10, y: 13, to: { map: 'route12', x: 8, y: 1 } },
+      { x: 11, y: 13, to: { map: 'route12', x: 9, y: 1 } },
+      { x: 2, y: 3, to: { map: 'house-lavender', x: 4, y: 4 } },
+      { x: 16, y: 10, to: { map: 'mart', x: 5, y: 5 }, via: { map: 'lavender', x: 16, y: 11 } },
+      { x: 17, y: 10, to: { map: 'mart', x: 6, y: 5 }, via: { map: 'lavender', x: 17, y: 11 } },
     ],
     signs: [
-      { x: 7, y: 4, text: 'HUSHMOOR TOWN — The noble purple town. Speak softly here; the tower is listening.' },
-      { x: 8, y: 4, text: 'HUSHMOOR TOWER — Honor the spirits of departed Kin.' },
-      { x: 11, y: 10, text: 'HUSHMOOR TOWN — North: STONEBORE TUNNEL · West: ROUTE 8 · South: ROUTE 12.' },
-      { x: 14, y: 10, text: 'HUSHMOOR TOWN — North: STONEBORE TUNNEL · West: ROUTE 8 · South: ROUTE 12.' },
+      { x: 8, y: 6, text: 'HUSHMOOR TOWN — The noble purple town. Speak softly here; the tower is listening.' },
+      { x: 13, y: 6, text: 'HUSHMOOR TOWER — Honor the spirits of departed Kin.' },
+      { x: 9, y: 12, text: 'HUSHMOOR TOWN — North: STONEBORE TUNNEL · West: ROUTE 8 · South: ROUTE 12.' },
+      { x: 12, y: 12, text: 'HUSHMOOR TOWN — North: STONEBORE TUNNEL · West: ROUTE 8 · South: ROUTE 12.' },
     ],
     npcs: [
-      { x: 5, y: 9, name: 'VOLUNTEER', art: 'lady', skin: '#f0c8a0', shirt: '#e8e0f0', pants: '#5a4a6a', hair: '#3a2a4a',
+      { x: 5, y: 8, name: 'VOLUNTEER', art: 'lady', skin: '#f0c8a0', shirt: '#e8e0f0', pants: '#5a4a6a', hair: '#3a2a4a',
         dialogue: ["I volunteer at the Kin House. Mr. Fuji takes in every orphan the roads leave behind.", "Lately the tower's restless — a mother's spirit, the channelers say, searching for her child."] },
-      { x: 13, y: 9, name: 'CHILD', art: 'kid', skin: '#f0c8a0', shirt: '#3a9ac0', pants: '#2a3a4a', hair: '#6a4a2a',
+      { x: 9, y: 10, name: 'CHILD', art: 'kid', skin: '#f0c8a0', shirt: '#3a9ac0', pants: '#2a3a4a', hair: '#6a4a2a',
         dialogue: ["My grandma says the tower ghosts are just Kin who loved us too much to leave.", "Do you believe her? I do. It makes the tower feel less scary. Mostly."] },
       { x: 15, y: 11, name: 'MART CLERK', art: 'clerk', skin: '#f0c8a0', shirt: '#3a6ac0', pants: '#2a2a3a', hair: '#2a1a0a',
         mart: { stock: ['pokeball', 'greatball', 'superpotion', 'hyperpotion', 'antidote', 'awakening'] },
@@ -121627,8 +121680,8 @@ const MAPS3 = {
       'MMMMMMMMMMMMMMMM',
     ]),
     warps: [
-      { x: 3, y: 9, to: { map: 'lavender', x: 11, y: 5 } },
-      { x: 4, y: 9, to: { map: 'lavender', x: 12, y: 5 } },
+      { x: 3, y: 9, to: { map: 'lavender', x: 10, y: 6 } },
+      { x: 4, y: 9, to: { map: 'lavender', x: 11, y: 6 } },
       { x: 11, y: 9, to: { map: 'tower2', x: 3, y: 8 } },
       { x: 12, y: 9, to: { map: 'tower2', x: 4, y: 8 } },
     ],
@@ -121739,8 +121792,8 @@ const MAPS3 = {
     ]),
     warps: [
       { x: 0, y: 5, to: { map: 'route11', x: 16, y: 5 } },
-      { x: 8, y: 0, to: { map: 'lavender', x: 8, y: 11 } },
-      { x: 9, y: 0, to: { map: 'lavender', x: 9, y: 11 } },
+      { x: 8, y: 0, to: { map: 'lavender', x: 10, y: 12 } },
+      { x: 9, y: 0, to: { map: 'lavender', x: 11, y: 12 } },
       { x: 8, y: 13, to: { map: 'route15', x: 2, y: 1 } },
       { x: 9, y: 13, to: { map: 'route15', x: 3, y: 1 } },
     ],
@@ -123564,8 +123617,8 @@ const MAPS4 = {
       '<<<<<<<<<<',
     ],
     warps: [
-      { x: 4, y: 5, to: { map: 'lavender', x: 3, y: 4 } },
-      { x: 5, y: 5, to: { map: 'lavender', x: 3, y: 4 } },
+      { x: 4, y: 5, to: { map: 'lavender', x: 2, y: 4 } },
+      { x: 5, y: 5, to: { map: 'lavender', x: 2, y: 4 } },
     ],
     signs: [],
     npcs: [],
@@ -158051,7 +158104,7 @@ const TALE_NPCS = [
   // passage, per the CAPT BOREA note above).
   { map: 'vermilion', x: 11, y: 11, name: 'HARBORMASTER', art: 'sailor', ...APPEAR.harbor, tale: 'tale_vermilion', role: 'stage',
     dialogue: ['Every crate, every rope, every lost page — the harbor keeps what the sea gives back.'] },
-  { map: 'lavender', x: 16, y: 5, name: 'ELDER BRAM', art: 'elder', ...APPEAR.elder, tale: 'tale_lavender', role: 'stage',
+  { map: 'lavender', x: 15, y: 7, name: 'ELDER BRAM', art: 'elder', ...APPEAR.elder, tale: 'tale_lavender', role: 'stage',
     dialogue: ['I remember every name the tower forgot. Sit; an old man likes an audience.'] },
   // Canopy fragmentation fix (2026-10-28): the GARDENER stands at
   // (15,9), NOT (16,9) — (16,9) is the Route 8 gate's only approach tile
