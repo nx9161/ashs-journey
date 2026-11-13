@@ -116,7 +116,7 @@ export const EVENTS = {
     { say: ['There IS no service exit, it is a boat—'], who: 'RUE' },
     { say: ['THEN WE SWIM WITH DIGNITY.'], who: 'COLE' },
     { say: ['Some hours later, the horn sounds. The St. Anne weighs anchor and slides toward the horizon — and just like that, she is gone for good. Whatever she was carrying, she took it with her.'], who: 'NARRATOR' },
-    { warp: { map: 'vermilion', x: 12, y: 20 } },
+    { warp: { map: 'vermilion', x: 9, y: 10 } },
     { flag: 'stanne_done' },
     { questDone: 'q_stanne' },
   ],
