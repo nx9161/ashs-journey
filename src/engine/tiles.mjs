@@ -596,6 +596,25 @@ T9_KIND_DEFS.forEach(([kind], i) => {
   TILE_CHARS[ch] = kind;
 });
 export const T9_PROP_KINDS = T9_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
+// ---- Wave T14 (Blossom build): the sakura tree ----
+// One new kind continuing the block at idx 571 (T9 ends at 570;
+// U+203B, verified free in TILE_CHARS and unused by every map row).
+// Class 'prop': a solid object composited over the ground it stands
+// on (art.mjs resolver). Blossom City's cherry-blossom tree — the
+// tc-cherrygrove canopy shape recoloured green->pink; the approved
+// design's signature (cherry-pink roofs and blossom trees).
+// Authored art: assets/sprites/pix/tiles/tile-prop-sakura.pix
+// (Wave T14 register item in WAVE-T14-BLOSSOM-PLAN.md Part 4).
+export const T14_KIND_DEFS = [
+  ['sakura', 'prop'],
+];
+export const T14_KIND_CHARS = {};
+T14_KIND_DEFS.forEach(([kind], i) => {
+  const ch = String.fromCodePoint(0x1E00 + 571 + i);
+  T14_KIND_CHARS[kind] = ch;
+  TILE_CHARS[ch] = kind;
+});
+export const T14_PROP_KINDS = T14_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
 export const SINNOH_TOWN_GROUND_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg);
 export const SINNOH_TOWN_GROUND2_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg2);
 // TX-3: the 8 gym exteriors by town (original type-accent motifs).
