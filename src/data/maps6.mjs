@@ -7780,23 +7780,23 @@ export const MAPS6 = {
     "name": "Lastlight Town",
     "music": "pewter-theme",
     "rows": [
-      "ỿỿỿἀỿỿỿỿỿỿἀỿỿỾỾỿỿỿἀỿỿỿỿỿỿἀỿỿỿỿ",
-      "ỿỽỾỾỾỾỾỾỾỾỾỾỾỾỾỾỾỾỾỾỾỽỽỽỽỽỽỽỽỿ",
-      "ỿỽỾjklmỾỽdeefỾỾἁἁἁἁỽỾἃἃἃỽỽỽỽỽỿ",
-      "ỿỽỾAJKAỾỽP12PỾỾἂsἂἂỽỾἄsἄỽỽỽỽỽỿ",
-      "ỿFỾỾỾỾỾỾỾỾỾỾỾỾỾỾỾỾỾỾSỾỾỽỽoỽỽỽỿ",
-      "ỿỾSỾỾỾỾỾỾỾỾỾỾỾỾỾỾỾỾỾỾỾỾỽỽỽỽỽỽỿ",
-      "ỿỾỾỾỾỽỽỾỽỽỽỽỽỾỾỽỽỽỾỾỾnỽỽἀỽỽỽỽỿ",
-      "ỿỾỾnỾỽỽỾỽỽỽỽỽỾỾỽỽỽỾỽỾnỽỽỽỽἀỽỽỿ",
-      "ỾỾỾỾỾỾỾỾỾỾỾỾỾỾỾỾỾỾỾỾỾẄỽỽỽỽỽỽỽỽ",
-      "ỾỾỾỾỾỾỾỾỾỾỾỾỾỾỾỾỾỾỾỾỾỽỽỽỽỽỽỽỽỽ",
-      "ỿoỽỽỾỾỾỾỾỾỾỾỾỾỾỾỾỾỽỽỾỽỽỽỽỽỽỽỽỿ",
-      "ỿỽỽỽỾỽỽỾỽỽỽỽỽỽỽỽỽỽỽỽỾỾỾỽoỽỽỽnỿ",
-      "ỿỽẄỾ....ỾỽỽỽỽỽỽỽnoỽỽḣḣỾỾ.F,ỽỽỿ",
-      "ỿỽỽ.,,,,.Ẅỽỽỽἀỽỽỽỽỽỽỽỽo.,,,.ỽỿ",
-      "ỿỽỽ.,,.,.ỽỽỽỽỽỽỽỽỽỽFẅỽỽ.,,.Ỿỽỿ",
-      "ỿỽỽỽ..Ỿ.ỾỽỽỽỽỽỽỽỽỽFἀỽỽoỾ..Ỿỽỽỿ",
-      "ỿỽỽỽoỽỽỽỽỽỽỽỽỽỽỽFỽỽỽỽỽỽỽỽỽỽỽỽỿ",
+      "ỿỿỿἀỿỿỿỿỿỿἀỿỿ..ỿỿỿἀỿỿỿỿỿỿἀỿỿỿỿ",
+      "ỿỽỽỽỽỽỽỽỽỽỽỽỽS.ỽỽỽỽỽỽỽỽỽỽỽỽỽỽỿ",
+      "ỿỽỽjklmỽỽdeef..ἁἁἁἁἁỽἃἃἃỽỽἃἃἃỿ",
+      "ỿỽỽAJKAỽỽP12P.ἂἂsἂἂỽỽἄsἄỽỽἄsἄỿ",
+      "ỿF..........Ṁ......ṀS........ỿ",
+      "ỿỽSỽỽ.SỽỽS.ỽỽỽỽS.ỽỽỽỽỽ.ỽoἃἃἃỽỿ",
+      "ỿỽỽỽỽ.ỽỽỽỽ.ỽỽỽỽỽ.ỽỽỽỽn.ỽἀἄsἄỽỿ",
+      "ỿỽỽnỽ.ỽỽỽỽ.ỽỽỽỽỽ.ỽỽẄỽn.ỽỽ...ỽỿ",
+      ".............................ỽ",
+      ".............................ỽ",
+      "ỿoἃἃἃ.pἃἃἃ.ỽỽỽỽỽ.ỽỽỽỽS.ỽỽỽỽỽnỿ",
+      "ỿpἄsἄ.Sἄsἄ.ỽỽỽỽS.............ỿ",
+      "ỿỽẄ......ỽ.ỽỽỽỽỽ.onỽḣḣ..oF,ỽỽỿ",
+      "ỿỽỽ.,.,,.,.ỽFἀἃἃἃἃỽỽỽỽo.ỽ,,,ỽỿ",
+      "ỿỽỽ.,..,.,.ỽỽSἄṑἄἄỽFẅỽỽ.ỽ,ỽ,ỽỿ",
+      "ỿẄS......ỽ.Sỽỽ....Fἀỽỽo...ỽỽỽỿ",
+      "ỿ...oS..................S....ỿ",
       "ỿỿỿἀỿỿỿỿỿỿἀỿỿỿỿỿỿἀỿỿỿỿỿỿἀỿỿỿỿỿ"
     ],
     "warps": [
@@ -7922,10 +7922,66 @@ export const MAPS6 = {
         "y": 4,
         "text": "LASTLIGHT STADIUM — The Conference arena. Bracket halls flank the main pitch; the mountain watches every final."
       },
-      {"x": 5, "y": 11, "text": "LASTLIGHT TOWN — West: LASTLIGHT PASS · North: MT. LASTLIGHT — SLOPES."},
-      {"x": 8, "y": 2, "text": "LASTLIGHT TOWN — West: LASTLIGHT PASS · North: MT. LASTLIGHT — SLOPES."},
-      {"x": 21, "y": 10, "text": "LASTLIGHT TOWN — West: LASTLIGHT PASS · North: MT. LASTLIGHT — SLOPES."},
-      {"x": 5, "y": 16, "text": "LASTLIGHT TOWN — West: LASTLIGHT PASS · North: MT. LASTLIGHT — SLOPES."},
+      {
+        "x": 6,
+        "y": 5,
+        "text": "LASTLIGHT TOWN — West: LASTLIGHT PASS · North: MT. LASTLIGHT — SLOPES."
+      },
+      {
+        "x": 6,
+        "y": 11,
+        "text": "LASTLIGHT TOWN — West: LASTLIGHT PASS · North: MT. LASTLIGHT — SLOPES."
+      },
+      {
+        "x": 21,
+        "y": 10,
+        "text": "LASTLIGHT TOWN — West: LASTLIGHT PASS · North: MT. LASTLIGHT — SLOPES."
+      },
+      {
+        "x": 5,
+        "y": 16,
+        "text": "LASTLIGHT TOWN — West: LASTLIGHT PASS · North: MT. LASTLIGHT — SLOPES."
+      },
+      {
+        "x": 2,
+        "y": 15,
+        "text": "LASTLIGHT TOWN — West: LASTLIGHT PASS · North: MT. LASTLIGHT — SLOPES."
+      },
+      {
+        "x": 11,
+        "y": 15,
+        "text": "LASTLIGHT TOWN — West: LASTLIGHT PASS · North: MT. LASTLIGHT — SLOPES."
+      },
+      {
+        "x": 24,
+        "y": 16,
+        "text": "LASTLIGHT TOWN — West: LASTLIGHT PASS · North: MT. LASTLIGHT — SLOPES."
+      },
+      {
+        "x": 13,
+        "y": 1,
+        "text": "LASTLIGHT TOWN — West: LASTLIGHT PASS · North: MT. LASTLIGHT — SLOPES."
+      },
+      {
+        "x": 15,
+        "y": 11,
+        "text": "LASTLIGHT TOWN — West: LASTLIGHT PASS · North: MT. LASTLIGHT — SLOPES."
+      },
+      {
+        "x": 13,
+        "y": 14,
+        "text": "LASTLIGHT TOWN — West: LASTLIGHT PASS · North: MT. LASTLIGHT — SLOPES."
+      },
+      {
+        "x": 9,
+        "y": 5,
+        "text": "LASTLIGHT TOWN — West: LASTLIGHT PASS · North: MT. LASTLIGHT — SLOPES."
+      },
+      {
+        "x": 15,
+        "y": 5,
+        "text": "LASTLIGHT STADIUM — The Conference arena. Bracket halls flank the main pitch; the mountain watches every final."
+      }
     ],
     "npcs": [
       {
@@ -7943,8 +7999,8 @@ export const MAPS6 = {
         ]
       },
       {
-        "x": 7,
-        "y": 14,
+        "x": 15,
+        "y": 15,
         "name": "MEDAL ENGRAVER INES",
         "art": "lady",
         "skin": "#c89878",
@@ -7957,8 +8013,8 @@ export const MAPS6 = {
         ]
       },
       {
-        "x": 3,
-        "y": 5,
+        "x": 9,
+        "y": 4,
         "name": "MART CLERK",
         "art": "clerk",
         "skin": "#f0c8a0",
