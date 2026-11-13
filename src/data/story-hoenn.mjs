@@ -1057,7 +1057,7 @@ export const HOENN_NPCS = [
     dialogue: ['The last hall on my road. Watch how it ends.'] },
   { map: 'lilycove', x: 16, y: 8, name: 'MAY', art: 'lass', skin: '#f0c8a0', shirt: '#c83a3a', pants: '#2a4a6a', hair: '#6a4a2a', hoenn: 'may_festival',
     dialogue: ['The Grand Festival, {player}. My whole road, in one hall.'] },
-  { map: 'victory-road', x: 11, y: 6, name: 'WALLY', art: 'kid', skin: '#f0d8b8', shirt: '#7c3fa5', pants: '#3a3a4a', hair: '#4a7a4a', hoenn: 'wally_final',
+  { map: 'victory-road-maris', x: 11, y: 6, name: 'WALLY', art: 'kid', skin: '#f0d8b8', shirt: '#7c3fa5', pants: '#3a3a4a', hair: '#4a7a4a', hoenn: 'wally_final',
     dialogue: ['I have thought about how this sentence ends for a whole region.'] },
   { map: 'cave-of-origin', x: 8, y: 7, name: 'KEEPER ANTHEA', art: 'elder', skin: '#e8b888', shirt: '#2d4377', pants: '#2a2a3a', hair: '#c0c0c0', hoenn: 'origin_keeper',
     dialogue: ['The cave keeps the first argument. The sky keeps its answer.'] },

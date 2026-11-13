@@ -41,12 +41,12 @@ export function actorCharId(name, mapId) {
 }
 
 // Resting defaults (Wave ACT proofs):
-// - wally@victory-road: Wally's Crown Road post stands EMPTY until
+// - wally@victory-road-maris: Wally's Crown Road post stands EMPTY until
 //   his Meadowbrook departure (the `wally` handler's catch scene is
 //   his farewell; its completion shows him here). Before this wave
 //   both Wallys stood in both places at once, forever.
 export const ACTOR_DEFAULTS = {
-  'wally@victory-road': { hidden: true },
+  'wally@victory-road-maris': { hidden: true },
 };
 
 // The character's effective directive: the saved override when one

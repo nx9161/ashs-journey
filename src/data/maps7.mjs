@@ -2783,10 +2783,10 @@ export const MAPS7 = {
       {"x": 5, "y": 11, "to": {"map": "center", "x": 4, "y": 4}, "via": {"map": "evergrande", "x": 5, "y": 12}},
       {"x": 10, "y": 11, "to": {"map": "mart", "x": 5, "y": 5}, "via": {"map": "evergrande", "x": 10, "y": 12}},
       {"x": 11, "y": 11, "to": {"map": "mart", "x": 5, "y": 5}, "via": {"map": "evergrande", "x": 11, "y": 12}},
-      {"x": 14, "y": 6, "to": {"map": "victory-road", "x": 11, "y": 14}},
-      {"x": 15, "y": 6, "to": {"map": "victory-road", "x": 12, "y": 14}},
-      {"x": 20, "y": 6, "to": {"map": "victory-road", "x": 18, "y": 1}},
-      {"x": 21, "y": 6, "to": {"map": "victory-road", "x": 19, "y": 1}},
+      {"x": 14, "y": 6, "to": {"map": "victory-road-maris", "x": 11, "y": 14}},
+      {"x": 15, "y": 6, "to": {"map": "victory-road-maris", "x": 12, "y": 14}},
+      {"x": 20, "y": 6, "to": {"map": "victory-road-maris", "x": 18, "y": 1}},
+      {"x": 21, "y": 6, "to": {"map": "victory-road-maris", "x": 19, "y": 1}},
       {"x": 13, "y": 3, "to": {"map": "league-evergrande", "x": 11, "y": 14}},
       {"x": 0, "y": 12, "to": {"map": "r134", "x": 26, "y": 8}},
       {"x": 0, "y": 13, "to": {"map": "r134", "x": 26, "y": 9}},
@@ -3814,8 +3814,8 @@ export const MAPS7 = {
     "events": [],
     "start": {"x": 8, "y": 16}
   },
-  "victory-road": {
-    "id": "victory-road",
+  "victory-road-maris": {
+    "id": "victory-road-maris",
     "name": "Crown Road",
     "music": "pewter-theme",
     "indoor": true,

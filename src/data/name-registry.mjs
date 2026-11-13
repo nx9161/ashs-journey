@@ -1068,6 +1068,7 @@ export const NAME_REGISTRY = {
     verdanturf: { name: "Wildflower Town", status: 'named', wave: 'I-H' },
     vermilion: { name: "Arcport City", status: 'locked', wave: 'I-K' },
     "victory-road": { name: "Summit Road", status: 'named', wave: 'I-S' },
+    "victory-road-maris": { name: "Crown Road", status: 'named', wave: 'W3' },
     victoryroad: { name: "Crown Road", status: 'named', wave: 'I-K' },
     violet: { name: "Iris City", status: 'named', wave: 'I-J' },
     viridian: { name: "Fernmere City", status: 'locked', wave: 'I-K' },
