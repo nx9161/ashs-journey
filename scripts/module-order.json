@@ -63,6 +63,7 @@
  "src/save/store.mjs",
  "src/game/scenes.mjs",
  "src/game/ui.mjs",
+ "src/game/ui-panels.mjs",
  "src/game/auth.mjs",
  "src/game/sync.mjs",
  "src/game/title.mjs",
