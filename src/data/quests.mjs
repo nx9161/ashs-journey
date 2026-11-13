@@ -280,7 +280,7 @@ export const TALE_NPCS = [
     dialogue: ["Erika's roof garden. Three waterings a season, or the vines file a complaint."] },
   { map: 'fuchsia', x: 5, y: 11, name: 'JANINE', art: 'lass', ...APPEAR.janine, tale: 'tale_fuchsia', role: 'flavor',
     dialogue: ["Father says a ninja's patience is a pond: still on top, deep below. I am working on the still part."] },
-  { map: 'cinnabar', x: 10, y: 9, name: 'LAB TECH', art: 'scientist', ...APPEAR.tech, tale: 'tale_cinnabar', role: 'giver',
+  { map: 'cinnabar', x: 10, y: 8, name: 'LAB TECH', art: 'scientist', ...APPEAR.tech, tale: 'tale_cinnabar', role: 'giver',
     dialogue: ['The mansion library burned, but paper is stubborn. So are we.'] },
 ];
 
