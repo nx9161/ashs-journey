@@ -186,8 +186,10 @@ const driver = `
   ow1.sysNpc(palletNpc); drain(g1);
   ok('B01 Pallet CHEAT TERMINAL opens the Cheat Shop menu',
     g1.ui.menuOpen && g1.ui.menu.title === 'Cheat Terminal — everything is $0', g1.ui.menu && g1.ui.menu.title);
-  ok('B02 top menu is [Get Items, Get Pokemon, Leave] — no Sell',
-    g1.ui.menu.items.map(function (i) { return i.label; }).join(',') === 'Get Items,Get Pokémon,Leave');
+  // W1 resync: game label is 'Get Kin' since the 2026-11-12 KIN branding sweep
+  // (openCheatShop in src/game/overworld-systems.mjs); expectation was stale.
+  ok('B02 top menu is [Get Items, Get Kin, Leave] — no Sell',
+    g1.ui.menu.items.map(function (i) { return i.label; }).join(',') === 'Get Items,Get Kin,Leave');
 
   var g2 = mkGame(102); var ow2 = boot(g2);
   // walk the scene to the shared Center map, then use its terminal NPC
