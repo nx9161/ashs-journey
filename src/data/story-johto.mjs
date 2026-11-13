@@ -864,7 +864,7 @@ export const JOHTO_NPCS = [
     dialogue: ['This well is a work site. Scram!'] },
   { map: 'slowpoke-well', x: 13, y: 5, name: 'VANTA GRUNT', art: 'rocket', skin: '#d8a878', shirt: '#2a2a2a', pants: '#2a2a3a', hair: '#1a1a1a', johto: 'rocket_well_2',
     dialogue: ['You people are bad for business.'] },
-  { map: 'slowpoke-well', x: 10, y: 10, name: 'ROCKET SENIOR', art: 'rocket', skin: '#c89878', shirt: '#3a2a3a', pants: '#2a2a3a', hair: '#5a5a5a', johto: 'rocket_well_3',
+  { map: 'slowpoke-well', x: 10, y: 10, name: 'VANTA SENIOR', art: 'rocket', skin: '#c89878', shirt: '#3a2a3a', pants: '#2a2a3a', hair: '#5a5a5a', johto: 'rocket_well_3',
     dialogue: ['I run this well crew.'] },
   { map: 'kurt-house', x: 4, y: 3, name: 'HENDRIK', art: 'elder', skin: '#e8b888', shirt: '#2d4377', pants: '#3a3a4a', hair: '#e8e8e8', johto: 'kurt',
     dialogue: ['Balls made by hand remember the hand. Machines never learned that.'] },

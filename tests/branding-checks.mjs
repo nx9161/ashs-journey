@@ -2,13 +2,15 @@
 // name-registry suite; run the same way: node tests/branding-checks.mjs).
 //
 // The generic class noun for the creatures is KIN (owner branding call,
-// 2026-11-12). The old franchise terms may survive ONLY in the exact
-// allowlisted lines below — the verbatim legal/attribution text and the
-// verbatim titles of real referenced works — plus internal identifiers
-// and code comments, which this suite never scans (it reads string
-// literals only, and skips literals whose whole content is an internal
-// token). Any NEW display occurrence of Pokemon/Pokémon/Pokedex in a
-// string literal fails here, so the branding cannot creep back.
+// 2026-11-12). W-SCRUB (owner order, 2026-11-13) then removed EVERY
+// remaining franchise name from display text — people, teams, places,
+// species formes, media titles, the legal screen itself. What survives
+// is only the exact allowlisted line below (a functional CC-BY citation
+// URL), plus internal identifiers and code comments, which this suite
+// never scans (it reads string literals only, and skips literals whose
+// whole content is an internal token). Any NEW display occurrence of a
+// blocklisted term in a string literal fails here, so the franchise
+// cannot creep back.
 //
 // The sweep that established this state: branch branding-kin-sweep
 // (212 display lines / 222 replacements; residual census zero).
@@ -25,25 +27,16 @@ function ok(name, cond, extra) {
 }
 
 // ---- the allowlist: exact (file, line-text) exemptions ----
-// Legal: the GC-verbatim disclaimer/credits in title.mjs — the trademark
-// is named there precisely to disclaim it; plus the CC-BY credit URL of
-// the Gassasin tileset (a functional link to the source page).
-// Reference: story.mjs renders the factual titles of the real anime
-// works the chapters adapt ("episode/movie titles are factual
-// references" — the file's own header); renaming them would falsify
-// the reference.
+// W-SCRUB (2026-11-13) removed the last two exemption classes of the
+// 2026-11-12 sweep on the owner's direct order: the legal screen no
+// longer names any franchise (it was reworded to a generic
+// original-work notice), and story.mjs no longer references real media
+// titles (its codex now names original in-world media). One allowlisted
+// line remains: the CC-BY credit URL of the Gassasin tileset — a
+// functional citation link to the source page, not franchise copy.
 const ALLOW = [
   // file, exact trimmed line content
-  ['src/game/title.mjs', "'Pok\\u00e9mon, VOLTIK, and all character names are trademarks of',"],
-  ['src/game/title.mjs', "'GAME FREAK inc. Pok\\u00e9mon and all related names, characters, and indicia are',"],
-  ['src/game/title.mjs', "'Pok\\u00e9mon, VOLTIK, and all',"],
   ['src/game/title.mjs', "'(opengameart.org/content/16xx16-tileset-pokemonzelda-styled),',"],
-  ['src/data/story.mjs', "movies: ['Pok\\u00e9mon 2000 — The Power of One'],"],
-  ['src/data/story.mjs', "anime: 'Season 9: Trial Grounds (Ep 1–5, Special: Mastermind of Mirage Pok\\u00e9mon, Ep 6–47)',"],
-  ['src/data/story.mjs', "arc: 'Locked — future act. Ends with \"Aim to Be a Pok\\u00e9mon Master\" — the end of Ash\\u2019s story.',"],
-  ['src/data/story.mjs', "'Pok\\u00e9mon Origins',"],
-  ['src/data/story.mjs', "'Pok\\u00e9mon Generations',"],
-  ['src/data/story.mjs', "'Pok\\u00e9mon Concierge',"],
 ];
 const allowSet = new Set(ALLOW.map(([f, t]) => f + '|' + t));
 
@@ -191,6 +184,87 @@ for (const table of [SPECIES, SPECIES2, SPECIES_JOHTO, SPECIES_HOENN, SPECIES_SI
 }
 ok('no retired creature names in species flavour text', flavourViolations === 0,
   flavourViolations + ' violation(s) over ' + flavourScanned + ' scanned flavour fields');
+
+// ---- W-SCRUB: the franchise-name blocklist (display string literals) ----
+// Every proper name the scrub removed (table:
+// ~/workspace/muse-directive/W-SCRUB-RENAME-TABLE.md) is pinned here in
+// its Title-case and ALL-CAPS display forms. Documented keeps are
+// exempted per segment below: Drake's Den is a place (the drake's den),
+// the Magma Stone / Magma-red / "Magma inside" are the rock not the org,
+// one "Dawn" is the time of day and the Dawn Flute / Altar of the Dawn
+// are in-world names built on that same time word, one "May" is the
+// modal verb in a Frontier Brain's blessing, the ASH FIELDS / ASH
+// COLLECTOR / ASHA strings are volcanic-ash places and professions, and
+// "Ash on the windows" / "Ash and empty shelf" are the noun ash.
+const BLOCK_TERMS = [
+  'Ash', 'ASH', 'Pikachu', 'Gary', 'Oak', 'Brock', 'Misty', 'Surge', 'Erika',
+  'Koga', 'Janine', 'Sabrina', 'Blaine', 'Giovanni', 'Lorelei', 'Bruno',
+  'Agatha', 'Lance', 'Bill', 'Falkner', 'Bugsy', 'Whitney', 'Morty', 'Chuck',
+  'Jasmine', 'Pryce', 'Clair', 'Silver', 'Archer', 'Ariana', 'Petrel',
+  'Proton', 'Kurt', 'Roxanne', 'Brawly', 'Wattson', 'Flannery', 'Norman',
+  'Winona', 'Tate', 'Liza', 'Wallace', 'Juan', 'Steven', 'Brendan', 'May',
+  'Wally', 'Maxie', 'Archie', 'Tabitha', 'Courtney', 'Matt', 'Shelly',
+  'Stern', 'Roark', 'Gardenia', 'Maylene', 'Fantina', 'Byron', 'Candice',
+  'Volkner', 'Dawn', 'Paul', 'Buck', 'Cissy', 'Danny', 'Rudy', 'Luana',
+  'Drake', 'Elm', 'Birch', 'Rowan', 'Ivy', 'Cozmo', 'Scott', 'Spencer',
+  'Noland', 'Greta', 'Tucker', 'Lucy', 'Anabel', 'Brandon', 'Cyrus', 'Mars',
+  'Jupiter', 'Saturn', 'Tobias', 'Karen', 'Aaron', 'Bertha', 'Lucian',
+  'Cynthia', 'Sidney', 'Phoebe', 'Glacia', 'Lucas', 'Charon', 'Looker',
+  'Delia', 'Tracey', 'Jessie', 'James', 'Unova', 'Kalos', 'Alola', 'Hisuian',
+  'Galarian', 'Alolan', 'Paldean', 'Apricorn', 'apricorn', 'Rocket',
+  'Galactic', 'Magma', 'Celebi', 'Lucario', 'Darkrai', 'Giratina', 'Arceus',
+  'Victini', 'Reshiram', 'Zekrom', 'Kyurem', 'Genesect', 'Diancie', 'Hoopa',
+  'Volcanion', 'Cobalion', 'Terrakion', 'Virizion', 'Keldeo', 'Meloetta',
+  'Xerneas', 'Yveltal', 'Zygarde', 'Carbink', 'Cosmog', 'Nebby', 'Necrozma',
+  'Magearna', 'Marshadow', 'Zeraora', 'Zacian', 'Zamazenta', 'Eternatus',
+  'Calyrex', 'Mimikyu', 'Greninja', 'Aegislash', 'Tornadus', 'Thundurus',
+  'Landorus', 'Latios', 'Latias', 'Zoroark', 'Alcremie', 'Vivillon',
+  'Sawsbuck', 'Pumpkaboo', 'Gourgeist', 'Nintendo', 'Creatures Inc',
+  'GAME FREAK', 'Team Rocket', 'Team Magma', 'Team Aqua', 'Team Galactic',
+  'GS Orb', 'Nurse Joy', 'Officer Jenny', 'Mr. Stone', 'fan homage',
+  'fan project', 'fan work', 'fan game', 'Icirrus', 'Castelia', 'Geosenge',
+  'Nebel', 'Liberty Pass', 'Azure Flute', 'Odd Keystone', 'Hallowed Tower',
+  'Sun Flute', 'Altar of the Sunne', 'Prison Bottle', 'Diamond Domain',
+  'Terminus Cave', 'P2 Laboratory', 'Moor of Icirrus',
+];
+const blockForms = new Set();
+for (const t of BLOCK_TERMS) { blockForms.add(t); if (/^[A-Z][a-z]+$/.test(t)) blockForms.add(t.toUpperCase()); }
+const escB = s => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+const BLOCK_RE = new RegExp(
+  '\\b(' + [...blockForms].sort((a, b) => b.length - a.length).map(escB).join('|') + ')\\b', 'g');
+function blockExempt(term, seg) {
+  const T = term.toUpperCase();
+  if (term === 'Ash' && (seg.includes('on the windows') || seg.includes('empty shelf'))) return true;
+  if (T === 'ASH' && /(ASH WALKER|ASHA|ASH FIELDS|ASH COLLECTOR|ASH RESEARCHER|ASH SWEEPER)/.test(seg)) return true;
+  if (T === 'MAY' && seg.includes('May yours speak well')) return true;
+  if (T === 'DAWN' && ((seg.includes('tower') && seg.includes('foot')) ||
+      seg.includes('Dawn Flute') || seg.includes('Altar of the Dawn'))) return true;
+  if (T === 'DRAKE' && /DRAKE\\?'S DEN/i.test(seg)) return true;
+  if (T === 'MAGMA' && (seg.includes('Magma Stone') || seg.includes('Magma inside') ||
+      seg.includes('Magma-red'))) return true;
+  return false;
+}
+const allSrc = execSync('find src -name "*.mjs" | sort', { cwd: ROOT, encoding: 'utf8' })
+  .trim().split('\n').filter(Boolean);
+let blockViolations = 0, blockScanned = 0;
+for (const rel of allSrc) {
+  const content = readFileSync(path.join(ROOT, rel), 'utf8');
+  content.split('\n').forEach((line, li) => {
+    const text = cutComment(line);
+    for (const seg of stringSegments(text)) {
+      const inner = seg.slice(1, -1);
+      if (/^[a-z0-9_\-.\/:]+$/.test(inner)) continue; // internal token / slug / URL
+      blockScanned++;
+      for (const m of inner.matchAll(BLOCK_RE)) {
+        if (blockExempt(m[1], inner)) continue;
+        blockViolations++;
+        console.log(`  blocklist violation ${rel}:${li + 1} :: "${m[1]}" in ${seg.slice(0, 110)}`);
+      }
+    }
+  });
+}
+ok('no franchise names in display string literals (W-SCRUB blocklist)', blockViolations === 0,
+  blockViolations + ' violation(s) over ' + blockScanned + ' scanned segments');
 
 console.log(`\nbranding-checks: ${pass} pass, ${fail} fail`);
 process.exit(fail ? 1 : 0);

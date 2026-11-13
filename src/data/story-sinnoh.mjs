@@ -487,7 +487,7 @@ export const SINNOH_EVENTS = {
   // are S6's; this half only ever glimpses.
   ev_sinnoh_valor: [
     { say: ['Lake Gallant is wrong the moment you see it: the water sits low and steaming in its banks, the shore reeds are flattened outward in a ring, and the air smells of hot stone. Something was done here — recently, and with machinery, not malice aforethought. Malice would have been quieter.', 'Half the lake is simply GONE — blown skyward hours ago, the wardens say, by men in grey who came in boats and left in aircraft. And in the churned shallows, for exactly one breath, something small and blue-gold rises out of the steam, looks at the ruin of its home — and is taken, gently, terribly efficiently, by hands that were waiting for it.'], who: '' },
-    { say: ['VOLITAR. The being of willpower, the wardens whisper, already carrying the word GALACTIC between their teeth like a stone. The aircraft are specks before the name finishes leaving their mouths.', 'Whatever is being counted at the lakes now has a body count of one lake and one god. The HQ in Shardfall holds the ledgers. It is time the door opened.'], who: '' },
+    { say: ['VOLITAR. The being of willpower, the wardens whisper, already carrying the word ASTRAL between their teeth like a stone. The aircraft are specks before the name finishes leaving their mouths.', 'Whatever is being counted at the lakes now has a body count of one lake and one god. The HQ in Shardfall holds the ledgers. It is time the door opened.'], who: '' },
     { flag: 'valor_glimpse' },
     { flag: 'azelf_glimpsed' },
     { toast: 'Lake Gallant was bombed — and VOLITAR was taken.' },
