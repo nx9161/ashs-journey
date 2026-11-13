@@ -17,7 +17,6 @@ import { SPECIES, DEX_TOTAL } from '../data/species.mjs';
 import { MOVES } from '../data/moves.mjs';
 import { ITEMS, POCKETS, BALLS, KEEPSAKES } from '../data/items.mjs';
 import { giveKeepsake, takeKeepsake } from './keepsakes.mjs';
-import { seasonalSwapFor, seasonalSwapForKit } from './seasons.mjs';
 import { MAPS } from '../data/maps.mjs';
 import { CHAPTERS, BONUS_SHELF, chapterOf } from '../data/story.mjs';
 import { ARCS, arcStateOf, currentArcOf, arcDexSpan, PLATINUM_DEX_HORIZON } from '../data/arcs.mjs';
@@ -68,7 +67,7 @@ export class Game {
     this.store = new SaveStore();
     this.state = freshState();
     this.rng = makeRngStreams(nextSeed());
-    this.tileCache = buildArtTileCache(doc, seasonalSwapFor, seasonalSwapForKit); // hand-authored tileset (art.mjs), season-graded vegetation; void -> solid fill
+    this.tileCache = buildArtTileCache(doc); // hand-authored tileset (art.mjs), authored palettes fixed (Wave SZ: seasons removed); void -> solid fill
     this.spriteCache = {};
     this._spriteUrlCache = {}; // species id -> battle-art data URL (toDataURL once per species)
     this._iconUrlCache = {};   // item id -> uiIcon data URL (toDataURL once per item)

@@ -52,7 +52,7 @@ export function materializeArt(id) {
   // Kit entries (Gassasin CC-BY tileset/character, Phase 1 2026-11-11)
   // live in their own generated registry; they are plain entries (no
   // delta chains), resolved here so artCanvas — and with it the swap
-  // and seasonal-grade machinery — treats them identically to ART.
+  // machinery — treats them identically to ART.
   const a = ART[id] || KIT_ART[id];
   if (!a) return null;
   if (!a.deltas && !a.shiftY) return a;
@@ -855,39 +855,25 @@ function pickVariant(arr, x, y, salt) {
 // agree on it, so it lives in exactly one place.
 function isTallGrass(x, y) { return hashTile(x, y, 11) < 0.78; }
 
-export function buildArtTileCache(doc, seasonSwapFor, seasonKitSwapFor) {
+export function buildArtTileCache(doc) {
   // kind -> canvas (16x16). 'water' -> [water-1..3] animated frames.
   // 'void' stays a solid fill (no art). Kinds without ART fall back to paintTile.
-  // Season grade (Black 2 imposition, 2026-11-11): when seasonSwapFor is
-  // supplied (main.mjs passes seasons.mjs's), vegetation tile art —
-  // grass / tall grass / flowers / trees / bush / tropgrass — is
-  // rasterized with its greens re-graded for the current season. Every
-  // other tile keeps its authored palette exactly.
-  const VEG_ID = /^tile-(grass|tallgrass|flower|tree|bush|tropgrass|grassground)/;
-  const swapFor = (id) => {
-    if (!seasonSwapFor || !VEG_ID.test(id)) return undefined;
-    const a = materializeArt(id);
-    if (!a || !a.pal) return undefined;
-    const sw = seasonSwapFor(a.pal);
-    return sw && Object.keys(sw).length ? sw : undefined;
-  };
+  // Fixed palette (Wave SZ, owner order 2026-11-12 — seasons removed):
+  // every tile rasterizes with its authored palette exactly, on every
+  // date. There is no seasonal grade; tests/seasons-checks.mjs guards it.
   const cache = {};
   for (const kind of Object.keys(TILE_ART)) {
-    const cv = artCanvas(doc, TILE_ART[kind], 1, false, swapFor(TILE_ART[kind]));
+    const cv = artCanvas(doc, TILE_ART[kind], 1, false);
     if (cv) { cache[kind] = cv; continue; }
     const fb = doc.createElement('canvas');
     fb.width = 16; fb.height = 16;
     paintTile(fb.getContext('2d'), kind, 0, 0);
     cache[kind] = fb;
   }
-  const ids = (list) => list.map((id) => artCanvas(doc, id, 1, false, swapFor(id))).filter(Boolean);
+  const ids = (list) => list.map((id) => artCanvas(doc, id, 1, false)).filter(Boolean);
   // ---- Gassasin kit towns (Phase 1: pallet; Wave A: Arden + route1) ----
   // Kit canvases for opted-in maps, keyed cache.kitTowns[mapId] and
   // consumed by resolveTileLayers' kit branch (docs/THIRD-PARTY-ART.md).
-  // Vegetation tiles pass through the KIT seasonal grade (seasons.mjs
-  // seasonalSwapForKit, fed by main.mjs): the shared grade's Autumn
-  // overshoot on the kit's deep greens is dampened back into our amber
-  // family there; roofs, logs, dirt and doors keep authored colors.
   //
   // PER-TOWN VARIANTS (B2-G9 anti-repetition law: no two towns share
   // an identical house set): each town remaps the kit's structural
@@ -976,7 +962,6 @@ export function buildArtTileCache(doc, seasonSwapFor, seasonKitSwapFor) {
     'resort-area': { roof: ['#e8d9c4', '#bfae94', '#f7ecdc'], log: '#9a7a52', door: '#d4695e' }, // villa resort: pearl, coral door
   };
   const KIT_VEG_IDS = new Set(['kit-grass-1', 'kit-grass-2', 'kit-grass-3', 'kit-tallgrass', 'kit-flora', 'kit-canopy']);
-  const kitSeasonFn = seasonKitSwapFor || seasonSwapFor;
   const buildKitSet = (townId, opts) => {
     const variant = townId ? (KIT_VARIANTS[townId] || null) : null;
     // Wave C biome ground families (original kit-pattern tiles for
@@ -987,8 +972,7 @@ export function buildArtTileCache(doc, seasonSwapFor, seasonKitSwapFor) {
     const anchor = townId && TOWN_STYLE_ANY[townId] ? TOWN_STYLE_ANY[townId].ground : null;
     // hex -> hex remap for one kit entry under this town's variant:
     // structural colors swap outright; vegetation greens tint toward
-    // the town's ground anchor (composed BEFORE the seasonal grade,
-    // so the grade acts on the town's own greens).
+    // the town's ground anchor — the town's own greens, fixed.
     const remapFor = (id) => {
       if (!variant) return null;
       if (id.startsWith('kit-roof')) return { '#a03e00': variant.roof[0], '#531a00': variant.roof[1], '#8d5500': variant.roof[2] };
@@ -1016,10 +1000,9 @@ export function buildArtTileCache(doc, seasonSwapFor, seasonKitSwapFor) {
         pal2 = {};
         for (const ch of Object.keys(a.pal)) pal2[ch] = remap[a.pal[ch]] || a.pal[ch];
       }
-      const graded = KIT_VEG_IDS.has(id) && kitSeasonFn ? kitSeasonFn(pal2) : null;
       let swap = null;
       for (const ch of Object.keys(a.pal)) {
-        const fin = (graded && graded[ch]) || pal2[ch];
+        const fin = pal2[ch];
         if (fin !== a.pal[ch]) (swap = swap || {})[ch] = fin;
       }
       return artCanvas(doc, id, 1, false, swap || undefined);
@@ -1743,8 +1726,8 @@ function kitTownLayers(cache, kind, x, y, kindAt, mapId, phase) {
       if (!fab(at2(-1, 0))) g += 'w';
       if (!g) return [pathBase];
       // Edge tiles carry transparent grass margins (build-kit-art):
-      // composite over this cell's own season-graded grass so the
-      // blend follows the town palette in every season.
+      // composite over this cell's own grass so the blend follows
+      // the town palette.
       if (E[g]) return [grassBase, E[g]];
     }
     return [pathBase];
