@@ -1432,51 +1432,59 @@ export const MAPS3 = {
   },
 
   // ================= CHUNK 4 — endgame block ===========================
-  // Fernmere override: COMPLETE copy of maps.mjs viridian + the Gym on the
-  // west side. The gym door warp is always present; the step event in front
-  // of it (ev_viridian_gym_locked, badgesBelow 7) handles the locked case.
+  // Fernmere override: COMPLETE copy of maps.mjs viridian. Wave T3
+  // (2026-11-12): rebuilt 20x14 to the owner's approved design — stone
+  // gym hall N-center, Center/Mart pair on the main street, statue
+  // garden S-center (the Marlow plaque), Marlow's tortoise beside his
+  // cottage fence. The gym door warp is always present; the step event
+  // in front of it (ev_viridian_gym_locked, badgesBelow 7) handles the
+  // locked case. Plan: WAVE-T3-FERNMERE-PLAN.md.
   viridian: {
     id: 'viridian', name: 'Fernmere City', music: 'viridian-theme',
     rows: rows([
-      'ÌÌÌÌÌÌĲĲĲĲÌÌÌÌÌÌ',
-      'Ìẇ×ÁÁĲĲÌÌÁÁÁÁ×ÁÌ',
-      'ÌÁăíăĲĲÌÌÁăăăÁÁÌ',
-      'ÌẍḀḀḀĲĲoẉÁěsěÁÁÌ',
-      'ÌÁḀVYĲââââĲĲÁÁÁÌ',
-      'ÌĲĲĲĲĲAJKAĲĲoÁẓÌ',
-      'ÌĲĲĲĲĲĲĲĲĲĲĲĲFÁÌ',
-      'ĲĲăOăĲĲĲĲĲĲĲÁÁÁÌ',
-      'ÌĲP12ĲĲĲĲĲĲĲF×ẑÌ',
-      'ÌĲĲĲĲĲĲĲĲĲĲĲẓÁÁÌ',
-      'ÌÌÌÌÌÌĲĲĲĲÌÌÌÌÌÌ',
+      'ÌÌÌÌÌ....ÌÌÌÌÌÌÌÌÌÌÌ',
+      'ÌÁĲ×Á....ÁĲÁÁĲÁ×ÁĲÁÌ',
+      'ÌÌÌÁĲ....deXXefÁdefÌ',
+      'ÌÌÁĲÁ....UUVYUUÁrstÌ',
+      'ÌÁĲÁ×..........ÁÁ.ĲÌ',
+      'ÌghiÁĲÁÁĲÁÁĲÁ×ÁnnÁnÌ',
+      'ÌvsvÁjklm...ââOâÁ‵FÌ',
+      'ÌÁ.ÁĲAJKA...P12PĲÁÁÌ',
+      '....................',
+      'ÌĲÁÁĲÁĲÁÁo..oÁĲÁÁĲÁÌ',
+      'ÌÁdefĲÁnnn..nÁhdefẑÌ',
+      'ÌÁvsrÁẄnFμ..nÁ@xyzẆÌ',
+      'ÌĲÁ.ÁĲÁn....nÁĲÁ.ÁĲÌ',
+      'ÌÌÌ×ÌÌÌÌ....ÌÌÌÌ×ÌÌÌ',
     ]),
     warps: [
-      { x: 3, y: 4, to: { map: 'gym-viridian', x: 5, y: 7 } },
-      { x: 4, y: 4, to: { map: 'gym-viridian', x: 6, y: 7 } },
-      { x: 7, y: 5, to: { map: 'center', x: 4, y: 4 }, via: { map: 'viridian', x: 7, y: 6 } },
-      { x: 8, y: 5, to: { map: 'center', x: 5, y: 4 }, via: { map: 'viridian', x: 8, y: 6 } },
-      { x: 6, y: 0, to: { map: 'route2', x: 6, y: 12 } },
-      { x: 7, y: 0, to: { map: 'route2', x: 7, y: 12 } },
-      { x: 8, y: 0, to: { map: 'route2', x: 6, y: 12 } },
-      { x: 9, y: 0, to: { map: 'route2', x: 7, y: 12 } },
-      { x: 0, y: 7, to: { map: 'route22', x: 16, y: 5 } },
-      { x: 11, y: 3, to: { map: 'house-viridian', x: 4, y: 4 } },
-      { x: 3, y: 8, to: { map: 'mart', x: 5, y: 5 }, via: { map: 'viridian', x: 3, y: 9 } },
-      { x: 4, y: 8, to: { map: 'mart', x: 6, y: 5 }, via: { map: 'viridian', x: 4, y: 9 } },
-      { x: 6, y: 10, to: { map: 'route1', x: 6, y: 1 } },
-      { x: 7, y: 10, to: { map: 'route1', x: 7, y: 1 } },
-      { x: 8, y: 10, to: { map: 'route1', x: 6, y: 1 } },
-      { x: 9, y: 10, to: { map: 'route1', x: 7, y: 1 } },
+      { x: 11, y: 3, to: { map: 'gym-viridian', x: 5, y: 7 } },
+      { x: 12, y: 3, to: { map: 'gym-viridian', x: 6, y: 7 } },
+      { x: 6, y: 7, to: { map: 'center', x: 4, y: 4 }, via: { map: 'viridian', x: 6, y: 8 } },
+      { x: 7, y: 7, to: { map: 'center', x: 5, y: 4 }, via: { map: 'viridian', x: 7, y: 8 } },
+      { x: 5, y: 0, to: { map: 'route2', x: 6, y: 12 } },
+      { x: 6, y: 0, to: { map: 'route2', x: 7, y: 12 } },
+      { x: 7, y: 0, to: { map: 'route2', x: 6, y: 12 } },
+      { x: 8, y: 0, to: { map: 'route2', x: 7, y: 12 } },
+      { x: 0, y: 8, to: { map: 'route22', x: 16, y: 5 } },
+      { x: 17, y: 3, to: { map: 'house-viridian', x: 4, y: 4 } },
+      { x: 13, y: 7, to: { map: 'mart', x: 5, y: 5 }, via: { map: 'viridian', x: 13, y: 8 } },
+      { x: 14, y: 7, to: { map: 'mart', x: 6, y: 5 }, via: { map: 'viridian', x: 14, y: 8 } },
+      { x: 8, y: 13, to: { map: 'route1', x: 6, y: 1 } },
+      { x: 9, y: 13, to: { map: 'route1', x: 7, y: 1 } },
+      { x: 10, y: 13, to: { map: 'route1', x: 6, y: 1 } },
+      { x: 11, y: 13, to: { map: 'route1', x: 7, y: 1 } },
     ],
     signs: [
-      { x: 3, y: 6, text: 'FERNMERE CITY — The city of evergreen. The Center heals your team for free.' },
-      { x: 11, y: 6, text: 'FERNMERE GYM — The leader returned at last. Seven badges to knock; the eighth door in Arden. Inside lies a SPIRIT GROUND: Ground moves hit harder and the earth drags at the unadapted — for the leader, and for you.' },
-      { x: 4, y: 1, text: 'FERNMERE CITY — North: ROUTE 2 · West: ROUTE 22 · South: ROUTE 1.' },
+      { x: 6, y: 12, text: 'FERNMERE CITY — The city of evergreen. The Center heals your team for free.' },
+      { x: 15, y: 4, text: 'FERNMERE GYM — The leader returned at last. Seven badges to knock; the eighth door in Arden. Inside lies a SPIRIT GROUND: Ground moves hit harder and the earth drags at the unadapted — for the leader, and for you.' },
+      { x: 9, y: 1, text: 'FERNMERE CITY — North: ROUTE 2 · West: ROUTE 22 · South: ROUTE 1.' },
+      { x: 10, y: 11, text: 'The statue in the garden plot is Marlow himself, first challenger — the town set him where he can watch the gym door, in case a challenger ever makes the old tortoise look up.' },
     ],
     npcs: [
-      { x: 11, y: 7, name: 'HIKER', art: 'hiker', skin: '#d8a878', shirt: '#50368e', pants: '#4a4a5a', hair: '#3a2a1a',
+      { x: 2, y: 8, name: 'HIKER', art: 'hiker', skin: '#d8a878', shirt: '#50368e', pants: '#4a4a5a', hair: '#3a2a1a',
         dialogue: ["Heading north? Route 2's grass is thicker — I saw a FUSSAPE up there yesterday.", "Fighting-types crack rock wide open. A FUSSAPE that knows Low Kick will humble Brock's PEBBLET."] },
-      { x: 5, y: 7, name: 'GYM GUIDE', art: 'clerk', skin: '#e8b888', shirt: '#c03a3a', pants: '#2a2a3a', hair: '#1a1a1a',
+      { x: 10, y: 4, name: 'GYM GUIDE', art: 'clerk', skin: '#e8b888', shirt: '#c03a3a', pants: '#2a2a3a', hair: '#1a1a1a',
         dialogue: ["That gym slept for years, doors chained, paint peeling. Then HE came back and the lights came on in one night.", "Word is the League won't even look at you without all eight. Knock when you're carrying seven, trainer."] },
     ],
     encounters: null,
@@ -1484,7 +1492,7 @@ export const MAPS3 = {
     hidden: [
     ],
     events: [
-      { id: 'ev_viridian_gym_locked', x: 3, y: 5, when: { badgesBelow: 7 } },
+      { id: 'ev_viridian_gym_locked', x: 11, y: 4, when: { badgesBelow: 7 } },
     ],
     start: null,
   },
@@ -1503,8 +1511,8 @@ export const MAPS3 = {
       '=====DD=====',
     ]),
     warps: [
-      { x: 5, y: 8, to: { map: 'viridian', x: 3, y: 5 } },
-      { x: 6, y: 8, to: { map: 'viridian', x: 4, y: 5 } },
+      { x: 5, y: 8, to: { map: 'viridian', x: 11, y: 4 } },
+      { x: 6, y: 8, to: { map: 'viridian', x: 12, y: 4 } },
     ],
     signs: [],
     npcs: [
@@ -1538,7 +1546,7 @@ export const MAPS3 = {
       '##################',
     ]),
     warps: [
-      { x: 17, y: 5, to: { map: 'viridian', x: 1, y: 7 } },
+      { x: 17, y: 5, to: { map: 'viridian', x: 1, y: 8 } },
       { x: 0, y: 5, to: { map: 'victoryroad', x: 1, y: 5 } },
     ],
     signs: [

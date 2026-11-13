@@ -138,8 +138,8 @@ export const MAPS4 = {
       ';;;;;;;;;;;;',
     ],
     warps: [
-      { x: 5, y: 6, to: { map: 'viridian', x: 3, y: 9 }, viaExit: true },
-      { x: 6, y: 6, to: { map: 'viridian', x: 4, y: 9 }, viaExit: true },
+      { x: 5, y: 6, to: { map: 'viridian', x: 13, y: 8 }, viaExit: true },
+      { x: 6, y: 6, to: { map: 'viridian', x: 14, y: 8 }, viaExit: true },
     ],
     signs: [],
     npcs: [],
@@ -199,8 +199,8 @@ export const MAPS4 = {
       '<<<<<<<<<<',
     ],
     warps: [
-      { x: 4, y: 5, to: { map: 'viridian', x: 11, y: 4 } },
-      { x: 5, y: 5, to: { map: 'viridian', x: 11, y: 4 } },
+      { x: 4, y: 5, to: { map: 'viridian', x: 17, y: 4 } },
+      { x: 5, y: 5, to: { map: 'viridian', x: 17, y: 4 } },
     ],
     signs: [],
     npcs: [],

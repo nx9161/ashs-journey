@@ -779,7 +779,7 @@ export class OverworldScene {
       // Wave 5b: viaExit resolves per shared interior — the Mart's
       // exit ticket is its own (martReturn), the Center's is unchanged.
       if (wp.viaExit) to = this.mapId === 'mart'
-        ? (this.martReturn || { map: 'viridian', x: 3, y: 9 })
+        ? (this.martReturn || { map: 'viridian', x: 13, y: 8 })
         : this.centerExit();
       this.startWarpFade(to, wp);
       return;

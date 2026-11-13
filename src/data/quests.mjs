@@ -254,7 +254,7 @@ export const TALE_NPCS = [
   { map: 'mart', x: 5, y: 2, name: 'SHOPKEEPER', art: 'clerk', ...APPEAR.shop, tale: 'tale_pallet', role: 'stage',
     mart: { stock: ['greatball', 'ultraball', 'hyperpotion', 'fullheal', 'revive', 'superpotion'] },
     dialogue: ['Fernmere sundries! Maps, string, and strong opinions about both.'] },
-  { map: 'viridian', x: 14, y: 4, name: 'ACE MARLOW', art: 'elder', ...APPEAR.ace, tale: 'tale_viridian', role: 'giver',
+  { map: 'viridian', x: 16, y: 6, name: 'ACE MARLOW', art: 'elder', ...APPEAR.ace, tale: 'tale_viridian', role: 'giver',
     dialogue: ['Sixty years I walked that forest. It kept one thing of mine. Fair trade, I suppose.'] },
   { map: 'pewter', x: 5, y: 4, name: 'BROCK', art: 'brock', ...APPEAR.brock, tale: 'tale_pewter', role: 'stage',
     dialogue: ['Off duty, I read to the museum fossils. They never heckle.'] },
