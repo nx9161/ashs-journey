@@ -482,7 +482,7 @@ export const MAP_GROUND = {
   r210: 'bloom',
   'r210-north': 'bloom',
   r211: 'bloom',
-  'r212-north': 'bloom',
+  r212: 'bloom',
   'r212-south': 'bloom',
   r213: 'bloom',
   r214: 'bloom',
@@ -586,6 +586,7 @@ export const MAP_GROUND = {
   'house-survival': 'open',
   'house-resort': 'open',
   'house-resort-villa': 'open',
+  'house-veilstone': 'open',
   // War Room W-BG: Frontier completion — all seven Trial Grounds
   // facilities assigned explicitly (existing 15 only), each on
   // its own theme: the Tower and the Arena stand on Rubble
