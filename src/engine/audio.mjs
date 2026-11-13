@@ -55,7 +55,7 @@ export class AudioEngine {
   // Call from the first user gesture (A press / tap). AC may be injected
   // (tests) — otherwise resolves the browser's AudioContext.
   unlock(AC) {
-    if (this._unlocked) return;
+    if (this._unlocked) { this.resume(); return; }
     const Ctor = AC || (typeof AudioContext !== 'undefined' ? AudioContext
       : (typeof webkitAudioContext !== 'undefined' ? webkitAudioContext : null));
     if (!Ctor) return; // headless: stay silent, never throw
@@ -71,11 +71,30 @@ export class AudioEngine {
       this.sfxBus.connect(this.master);
       this.master.connect(this.ctx.destination);
       this._unlocked = true;
+      // Suspended-context recovery (audit U4): iOS interruptions and tab
+      // backgrounding can park the context at 'suspended' while the game
+      // keeps running — resume when the tab becomes visible again.
+      if (typeof document !== 'undefined' && document.addEventListener && !this._visHook) {
+        this._visHook = true;
+        document.addEventListener('visibilitychange', () => { if (!document.hidden) this.resume(); });
+      }
       // If a track was requested before unlock (e.g. title theme queued at
       // boot), start it now that the gesture arrived. _musicId is cleared
       // first so the same-id no-op guard doesn't swallow the replay.
       if (this._pendingMusic) { const id = this._pendingMusic; this._pendingMusic = null; this._musicId = null; this.playMusic(id); }
     } catch (e) { /* audio unavailable: silent mode */ }
+  }
+
+  // Resume a context parked at 'suspended' (audit U4). Called on gesture
+  // return (unlock re-entry), on visibility return, and by the music
+  // scheduler, which keeps firing on timers even while suspended.
+  resume() {
+    if (this.ctx && this.ctx.state === 'suspended') {
+      try {
+        const p = this.ctx.resume();
+        if (p && p.catch) p.catch(() => { /* still suspended: a later path retries */ });
+      } catch (e) { /* stay silent */ }
+    }
   }
 
   setMuted(m) {
@@ -136,6 +155,7 @@ export class AudioEngine {
     const loopLen = Math.max(0.25, this._tableBeats(table) * spb);
     let nextStart = this.ctx.currentTime + 0.06;
     const scheduleLoop = () => {
+      if (this.ctx.state === 'suspended') this.resume(); // audit U4: self-heal after interruptions
       const t0 = nextStart;
       try {
         for (const tr of table.tracks) {
