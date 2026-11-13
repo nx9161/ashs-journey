@@ -49,14 +49,39 @@ export const ACTOR_DEFAULTS = {
   'wally@victory-road-maris': { hidden: true },
 };
 
+// Flag-gated resting defaults (Wave W9): a character whose story beat
+// has ALREADY resolved in this save no longer stands at the beat's
+// origin post — the beat's own text sends them onward, and their
+// destination post is authored elsewhere (never invented here).
+// Consulted only when the save holds no explicit override for the
+// charId (a saved override always wins), and keyed on flags already
+// in the save shape, so a pre-W9 save resolves correctly on load
+// with no migration and no watcher pass.
+// - jasmine@lighthouse-2: once Lumi is healed (amphy_healed) Jasmine
+//   leaves the lighthouse for her gym, in her own words: "My gym,
+//   when you are ready. I will be there." The gym post is authored
+//   (gym-olivine, kind `jasmine`).
+// - lance@lake-of-rage: once the Red WRATHWYRM is calmed
+//   (red_gyarados_done) Lance leaves the lake — the aftermath scene
+//   ends "Redwood. Meet me there." His Redwood post is authored
+//   (mahogany, kind `lance_mahogany`).
+export const ACTOR_FLAG_DEFAULTS = {
+  'jasmine@lighthouse-2': { flag: 'amphy_healed', directive: { hidden: true } },
+  'lance@lake-of-rage': { flag: 'red_gyarados_done', directive: { hidden: true } },
+};
+
 // The character's effective directive: the saved override when one
-// exists, else the authored default, else null (stand at the
-// authored post, visible). Pure over the save — safe on any state
-// shape, including a state with no story.actors yet.
+// exists, else a flag-gated default whose flag the save has set,
+// else the authored default, else null (stand at the authored post,
+// visible). Pure over the save — safe on any state shape, including
+// a state with no story.actors yet.
 export function actorDirective(state, charId) {
   const saved = state && state.story && state.story.actors
     ? state.story.actors[charId] : undefined;
   if (saved && typeof saved === 'object') return saved;
+  const gated = ACTOR_FLAG_DEFAULTS[charId];
+  if (gated && state && state.story && state.story.flags
+    && state.story.flags[gated.flag]) return gated.directive;
   return ACTOR_DEFAULTS[charId] || null;
 }
 
@@ -182,7 +207,17 @@ export const actorLifecycleMixin = {
       }
       const dest = Array.isArray(to) ? to : (to && Number.isInteger(to.x) ? [to.x, to.y] : null);
       if (!dest) { next(); return; }
-      setActorOverride(st, who, { map: this.mapId, x: dest[0], y: dest[1], hidden: false, ...(spec.face ? { face: spec.face } : {}) });
+      // Wave W9 hardening: when the actor is fielded in THIS scene,
+      // the scene is their home map. When they are NOT (a tale
+      // completion observed on another map — tale_saffron completes
+      // inside saffron-shop on its IOU branch, while Ko's home is
+      // the dojo), the override must still be written against the
+      // actor's HOME map, derived from the charId suffix. Writing
+      // the scene's map instead made the home resolver read
+      // "relocated away" and the character vanished from home.
+      const homeMap = npc ? this.mapId
+        : (who.includes('@') ? who.slice(who.indexOf('@') + 1) : this.mapId);
+      setActorOverride(st, who, { map: homeMap, x: dest[0], y: dest[1], hidden: false, ...(spec.face ? { face: spec.face } : {}) });
       if (!npc) { next(); return; }
       npc._actorHidden = false;
       const pts = Array.isArray(spec.path) && spec.path.length ? spec.path : [dest];
