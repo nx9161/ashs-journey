@@ -172,10 +172,10 @@ const VAL = await import(join(ROOT, 'api/_lib/validator.mjs'));
 {
   const capt = TALE_NPCS.find((n) => n.name === 'CAPT FRONTIER');
   const johto = TALE_NPCS.find((n) => n.name === 'CAPT YAMATO');
-  ok('A19 CAPT FRONTIER appended via the TALE_NPCS idiom on pallet (11,9) — ferry frontierhub + ferryArc frontier, sailor art, no tale/role; CAPT JOHTO unmoved at (11,8)',
+  ok('A19 CAPT FRONTIER appended via the TALE_NPCS idiom on pallet (11,9) — ferry frontierhub + ferryArc frontier, sailor art, no tale/role; CAPT JOHTO at (14,9) since the S1xS2 merge resolution (his (11,8) stance became the Dawnwick Mart west door warp in the S1 rebuild; (14,9) is the walkable shore-lawn tile south of the FERRYMAN (14,8))',
     !!capt && capt.map === 'pallet' && capt.x === 11 && capt.y === 9 && capt.ferry === 'frontierhub' && capt.ferryArc === 'frontier'
     && capt.art === 'sailor' && !capt.tale && Array.isArray(capt.dialogue) && capt.dialogue.length === 2
-    && !!johto && johto.x === 11 && johto.y === 8);
+    && !!johto && johto.x === 14 && johto.y === 9);
   const p = MAPS.pallet;
   ok('A20 the stance tile seals nothing by position: (11,9) is a walkable ground tile, not a warp tile, not a door, and no base pallet NPC stands there',
     WALKABLE.has(p.rows[9][11]) && !(p.warps || []).some((w) => w.x === 11 && w.y === 9)
@@ -381,9 +381,9 @@ const driver = `
   var st = g.state;
   var ow = gotoMap(g, 'pallet', 7, 9); drain(g);
   var capt = ow.map.npcs.find(function (n) { return n.name === 'CAPT FRONTIER'; });
-  ok('B01 CAPT FRONTIER stands on Pallet\\'s live roster at (11,9) (ferry frontierhub, ferryArc frontier), beside CAPT JOHTO (11,8)',
+  ok('B01 CAPT FRONTIER stands on Pallet\\'s live roster at (11,9) (ferry frontierhub, ferryArc frontier), with CAPT JOHTO on the shore lawn at (14,9)',
     !!capt && capt.x === 11 && capt.y === 9 && capt.ferry === 'frontierhub' && capt.ferryArc === 'frontier'
-    && !!ow.map.npcs.find(function (n) { return n.name === 'CAPT YAMATO' && n.x === 11 && n.y === 8; }));
+    && !!ow.map.npcs.find(function (n) { return n.name === 'CAPT YAMATO' && n.x === 14 && n.y === 9; }));
 
   // The gate: embark_frontier deleted (a fresh state never had it) —
   // talking yields the ferry gate line and NO warp, NO sail menu.
