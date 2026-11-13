@@ -1,0 +1,27 @@
+# Wave T7 (Hushmoor register): low memorial wall — weathered
+# grey-violet stone, carved name-lines, moss at the base. Stands
+# south of the tower garden (y9); grass shows through the top.
+PIX tile-memorialwall 16 16
+................
+................
+................
+................
+................
+llllllllllllllll
+mvlmmmmvmmmmvlmm
+ssssssssssssssss
+ssdddssdddddssss
+ssssvsssssssssss
+sddddssdddssssss
+ssssssssssssggss
+ssdddssssdddssss
+ssssssssssssssss
+ggssssssssssssgg
+dddddddddddddddd
+PAL
+l #8a8494 cap-light
+m #6a6472 stone-mid
+s #4a4450 stone-face
+v #7a6a8a violet-tint
+d #3a3542 carve-dark
+g #5a6a4a moss

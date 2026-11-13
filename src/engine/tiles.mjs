@@ -559,6 +559,24 @@ T6_KIND_DEFS.forEach(([kind], i) => {
 export const T6_PROP_KINDS = T6_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
 export const T6_RUG_KINDS = T6_KIND_DEFS.filter(([, c]) => c === 'rug').map(([k]) => k);
 export const T6_WALKABLE_CHARS = T6_KIND_DEFS.filter(([, c]) => c === 'rug').map(([k]) => T6_KIND_CHARS[k]);
+// ---- Wave T7 (Hushmoor build): memorial wall ----
+// One new kind continuing the block at idx 569 (T6 ends at 568;
+// U+2039, verified free in TILE_CHARS and unused by every map row).
+// Class 'prop': a solid object composited over the ground it stands
+// on (art.mjs resolver). The low stone wall of names south of the
+// tower garden in Hushmoor — the wall tale_lavender is named for.
+// Authored art: assets/sprites/pix/tiles/tile-memorialwall.pix
+// (Wave T7 register item in WAVE-T7-HUSHMOOR-PLAN.md Part 4).
+export const T7_KIND_DEFS = [
+  ['memorialwall', 'prop'],
+];
+export const T7_KIND_CHARS = {};
+T7_KIND_DEFS.forEach(([kind], i) => {
+  const ch = String.fromCodePoint(0x1E00 + 569 + i);
+  T7_KIND_CHARS[kind] = ch;
+  TILE_CHARS[ch] = kind;
+});
+export const T7_PROP_KINDS = T7_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
 export const SINNOH_TOWN_GROUND_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg);
 export const SINNOH_TOWN_GROUND2_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg2);
 // TX-3: the 8 gym exteriors by town (original type-accent motifs).
