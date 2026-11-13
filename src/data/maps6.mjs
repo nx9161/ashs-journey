@@ -1779,29 +1779,29 @@ export const MAPS6 = {
     "name": "Lantern City",
     "music": "pewter-theme",
     "rows": [
-      "ỗỗỗỘỗỗỗỗỗỗỘỗỗỗỗỗỗỘỗỗỗỗỗỗỘỗỗỗỗỗ",
-      "ỗổổổnổổổổổổổổổổổổổổổổổnổổổỘổoỗ",
-      "ỗổổjklmổổdeefổổộộộộỘổộộộộổổớớớ",
-      "ỗổổAJKAổổP12PổổUVYUổổỚỚỚỚổổỜsỜ",
-      "ỗSỖỖỖỖỖỖỖỖỖỖỖỖỖỖỖỖỖỖỖỖỖỖỖỖỖỖỖổ",
-      "ỗỖỖỖỖỖỖỖỖỖỖỖỖỖỖỖỖỖỖỖỖỖỖỖỖỖỖoổỗ",
-      "ỗẤỖỖnỖỖỖỖỖỖỖỖỖỖỖỖổỖỖỖỖỖỖỖỖỖổổỗ",
-      "ỗoỖỖỖỖổổỖỖổẤẤỖỖỖỖỖỖỖỖỖỖỖỖỖổổổỗ",
-      "ỗổỖỖỖỖỖỖỖỖỖỖỖỖỖỖẤỖỖSỖỖỖỖỖỖỖổổỗ",
-      "ỗổỖṀonỖỖỖỖỖỖỖỖỖỖỖỖỖỖỖỖỖỖỖỖỖổổỗ",
-      "ỗoỖẫẫẫẫẎỖỖỖỖỖổỖỖổỖổỖỖộộộộỖỖổổỗ",
-      "ỗỖỖẫ99ẫỖỖỖỖỖỖỖỖỖỖỖỖỖỖỚsỚỚỖỖổổỗ",
-      "ỗỖỖỖỖỖỖỖỖỖỖỖỖẤỖỖỖỖỖỖỖỖỖỖỖỖỖổổỗ",
-      "ỗỖỖỖỖỖỖỖỖỖ....ỖỖỖỖỖỖỖỖỖỖỖẤỖổổỗ",
-      "ỗổỖỖSỖỖỖỖ.,,,,.ỖỖṀổỖỖổổỖ...ổổỗ",
-      "ỗổổổổỘỖỖỖ.,,,,.ỖỖỖỖỖỖỖỖ.,,,,ổỗ",
-      "ỗổổổổổổổổổ,,,,ổổổổổổổổo.,,,,ổỗ",
-      "ỗỗỗổỗỗỗỗỗỗỘỗỗỗỗỗỗỘỗỗỗỗỗỗỘỗỗỗỗỗ"
+      "ỗỗỗỗỘỗỗỗỗỗỗỘỗỗỗỗỗỗỗỘỗỗỗỗỗỗỘỗỗỗ",
+      "ỗổổổổổổổổổổổổổổổổổổổổẤỗỗỗỗẤổổỗ",
+      "ỗổổớớớớổổdeefổớớớớổổổổộỚỚộổổổỗ",
+      "ỗổổỜsỜỜoổP12PổỜssỜổoổổỚssỚổổổỗ",
+      "ỗ............................ỗ",
+      "ỗổỗổổổổổổổổổổổṀổổổổ.ṀổổổổổổṀổỗ",
+      "ỗổổjklmẤổổổổổổổổổổS.ổổẤổ,,ổ,,ỗ",
+      "ỗổổAJKAổổổổổoổổổổổo.ổổẤổ,,ổ,,ỗ",
+      "ỗ............................ỗ",
+      "ỗổRẫẫS..ổổổổổổổổổổn.ổổổổnổổoổỗ",
+      "ỗổỘẫẫẫẫẎổổổổổổổổổổp.ộộộộpổổổổỗ",
+      "ỗṀỘẫ99ẫỘổRổổổổṀổổổS.ỚỚsỚổổổổổỗ",
+      "ỗ............................ỗ",
+      "ỗỗẤổổổRoổớớớpổộộXộộộ.pớớớớổoẤỗ",
+      "ỗổổổổổổổổỜsỜỜổUUVYUU.ổỜsỜỜổổổỗ",
+      "ỗ............................ỗ",
+      "ỗổổ,,,,oổṀ...S......S,,,,,oổỗỗ",
+      "ỗỗỗỗỘỗỗỗỗỗỗỘỗỗ..ỗỗỗỘỗỗỗỗỗỗỘỗỗỗ"
     ],
     "warps": [
       {
         "x": 4,
-        "y": 3,
+        "y": 7,
         "to": {
           "map": "center",
           "x": 4,
@@ -1810,12 +1810,12 @@ export const MAPS6 = {
         "via": {
           "map": "ecruteak",
           "x": 4,
-          "y": 4
+          "y": 8
         }
       },
       {
         "x": 5,
-        "y": 3,
+        "y": 7,
         "to": {
           "map": "center",
           "x": 4,
@@ -1824,7 +1824,7 @@ export const MAPS6 = {
         "via": {
           "map": "ecruteak",
           "x": 5,
-          "y": 4
+          "y": 8
         }
       },
       {
@@ -1857,7 +1857,7 @@ export const MAPS6 = {
       },
       {
         "x": 16,
-        "y": 3,
+        "y": 14,
         "to": {
           "map": "gym-ecruteak",
           "x": 7,
@@ -1866,7 +1866,7 @@ export const MAPS6 = {
       },
       {
         "x": 17,
-        "y": 3,
+        "y": 14,
         "to": {
           "map": "gym-ecruteak",
           "x": 7,
@@ -1874,17 +1874,8 @@ export const MAPS6 = {
         }
       },
       {
-        "x": 22,
-        "y": 4,
-        "to": {
-          "map": "bell-tower-1",
-          "x": 7,
-          "y": 10
-        }
-      },
-      {
         "x": 23,
-        "y": 4,
+        "y": 3,
         "to": {
           "map": "bell-tower-1",
           "x": 7,
@@ -1892,7 +1883,25 @@ export const MAPS6 = {
         }
       },
       {
-        "x": 28,
+        "x": 24,
+        "y": 3,
+        "to": {
+          "map": "bell-tower-1",
+          "x": 7,
+          "y": 10
+        }
+      },
+      {
+        "x": 15,
+        "y": 3,
+        "to": {
+          "map": "house-ecruteak",
+          "x": 6,
+          "y": 8
+        }
+      },
+      {
+        "x": 16,
         "y": 3,
         "to": {
           "map": "house-ecruteak",
@@ -1926,39 +1935,57 @@ export const MAPS6 = {
           "x": 9,
           "y": 10
         }
+      },
+      {
+        "x": 14,
+        "y": 17,
+        "to": {
+          "map": "r37",
+          "x": 11,
+          "y": 1
+        }
+      },
+      {
+        "x": 15,
+        "y": 17,
+        "to": {
+          "map": "r37",
+          "x": 12,
+          "y": 1
+        }
       }
     ],
     "signs": [
       {
-        "x": 19,
-        "y": 8,
-        "text": "DANCE THEATER — The Kimono Girls perform the old dances. Visitors are welcome, quietly."
-      },
-      {
-        "x": 4,
-        "y": 14,
-        "text": "ASHEN TOWER — It caught the lightning long ago and never stopped smouldering in story. Enter respectfully."
-      },
-      {
-        "x": 1,
-        "y": 4,
+        "x": 13,
+        "y": 16,
         "text": "LANTERN CITY — A city of old traditions. Two towers watch it: the Chime Tower standing, the Ashen Tower remembered."
       },
       {
-        "x": 21,
-        "y": 8,
+        "x": 5,
+        "y": 9,
+        "text": "ASHEN TOWER — It caught the lightning long ago and never stopped smouldering in story. Enter respectfully."
+      },
+      {
+        "x": 18,
+        "y": 11,
+        "text": "DANCE THEATER — The Kimono Girls perform the old dances. Visitors are welcome, quietly."
+      },
+      {
+        "x": 20,
+        "y": 16,
         "text": "LANTERN CITY — South: ROUTE 37."
       },
       {
-        "x": 15,
-        "y": 14,
+        "x": 18,
+        "y": 6,
         "text": "LANTERN CITY — South: ROUTE 37."
       }
     ],
     "npcs": [
       {
-        "x": 17,
-        "y": 6,
+        "x": 24,
+        "y": 5,
         "name": "SAGE OF THE BELLS",
         "art": "monk",
         "skin": "#e8b888",
@@ -1971,8 +1998,8 @@ export const MAPS6 = {
         ]
       },
       {
-        "x": 26,
-        "y": 7,
+        "x": 20,
+        "y": 12,
         "name": "KIMONO DANCER SAKURA",
         "art": "lady",
         "skin": "#c89878",
@@ -1985,8 +2012,8 @@ export const MAPS6 = {
         ]
       },
       {
-        "x": 9,
-        "y": 14,
+        "x": 17,
+        "y": 4,
         "name": "HISTORIAN ELIAS",
         "art": "elder",
         "skin": "#e8b888",
@@ -1999,8 +2026,8 @@ export const MAPS6 = {
         ]
       },
       {
-        "x": 3,
-        "y": 5,
+        "x": 12,
+        "y": 4,
         "name": "MART CLERK",
         "art": "clerk",
         "skin": "#f0c8a0",
@@ -4751,7 +4778,7 @@ export const MAPS6 = {
         "y": 9,
         "to": {
           "map": "ecruteak",
-          "x": 28,
+          "x": 15,
           "y": 4
         }
       },
@@ -4760,7 +4787,7 @@ export const MAPS6 = {
         "y": 9,
         "to": {
           "map": "ecruteak",
-          "x": 28,
+          "x": 15,
           "y": 4
         }
       }
@@ -5158,7 +5185,7 @@ export const MAPS6 = {
         "to": {
           "map": "ecruteak",
           "x": 16,
-          "y": 4
+          "y": 15
         }
       },
       {
@@ -5167,7 +5194,7 @@ export const MAPS6 = {
         "to": {
           "map": "ecruteak",
           "x": 16,
-          "y": 4
+          "y": 15
         }
       }
     ],
@@ -6061,8 +6088,8 @@ export const MAPS6 = {
         "y": 11,
         "to": {
           "map": "ecruteak",
-          "x": 22,
-          "y": 5
+          "x": 23,
+          "y": 4
         }
       },
       {
@@ -6070,8 +6097,8 @@ export const MAPS6 = {
         "y": 11,
         "to": {
           "map": "ecruteak",
-          "x": 22,
-          "y": 5
+          "x": 23,
+          "y": 4
         }
       },
       {
