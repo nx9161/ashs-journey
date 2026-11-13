@@ -53,56 +53,345 @@ export const MAPS7 = {
     "music": "pallet-theme",
     "weather": "clear",
     "rows": [
-      "ἎἎἎἏἎἎἎἎἎἎἏἎἎἍἍἎἎἎἏἎἎἎἎἎἎἏἎἎ",
-      "ἎἌἍἍἍἍἍἍἍἍἍἍἍἍἍἍἍἌoἌἌἌἌἌἌἌnἎ",
-      "ἎἌἍdeeeefἍἍjklmἍἍἒἒἒἌἌἒἒἒἌἌἎ",
-      "ἎἌἍZZ45ZZἍἍAJKAἍἍἓsἓἌἌἓsἓἌἌἎ",
-      "ἎἌἍἍἍἍἍἍἍἍἍἍἍἍἍἍἍἍἍἍἍἍἍἍἌἌἌἎ",
-      "ἎἌSἍἍἍἍἍἍἍἍἍἍἍἍἍἍἍἍἍἌἌἌἌἌἌἌἎ",
-      "ἎἌἍἍἌἌἍἌἍἌἍἍἍἍἍἍἍẅἍἌἌἌἌἌἌἌἌἎ",
-      "ἎἌἍἌἌἌἍἍἌἍἍἍἍἍἍἍἍἍἍἍἌἌἌἌἌἌἌἎ",
-      "ἎἌἍἌἌἌἍἍἍἍἍἍἍἍἌἍFἌἌἍẄἌἌἌἌἌἌἎ",
-      "ἎFἍἌἌἌἍἌἍἌoἌἌἍἌἍἌἌἌἍἌἌἌἌἌἌẅἎ",
-      "ἎẅἍẄἌἌἍἌἍἌἌἌἌἍἌἍἌἌἌἍἌἌἌἌἌἌἌἎ",
-      "ἎἌἍ....ἌἍἌἌἌἌἍἌἍἌἌFἍἍ....ἍἌἎ",
-      "ἎἌ.,,,,.ἍἌἌἌἌἍἌἍἌἌἌἍdeef,.ἌἎ",
-      "ἎἌ.,,,,.ἍἌἌἌἌἍἌἍἌἌἌἍP12P,.ἌἎ",
-      "ἎἌἍ....ἍἍἌἌἌἌἍἍἍἍἍἍἍἍ....ἌἌἎ",
-      "ἎẅἌoἌἌẄἍἍἍἍἍἍἍἍSἍἍἍἍἌἌἌἌἌἌἌἎ",
+      "ἎἎἎἏἎἎἎἎἎἎἏἎἎ..ἎἎἎἏἎἎἎἎἎἎἏἎἎ",
+      "ἎἌἌἌἌἌἌἌἌἌἌἌ‿..ἌἌἌoἌἌἌἌἌἌἌnἎ",
+      "ἎἌἌdeeeefἌἌjk..ἌἌἒἒἒἌἌἒἒἒἌἌἎ",
+      "ἎἌἌZS45ZZἌἌAJ..ἌἌἓsἓἌἌἓsἓἌἌἎ",
+      "Ἆ..........................Ἆ",
+      "Ἆ.SἌἌ.ἌἌἌἌἌἌἌ..ἌἌἌἌἌS.ἌἌἌἌἌἎ",
+      "Ἆ.ἌἌἌ.ἌἌἌFἒἒἒ..ἌἌẅἌἌ..ἌἌἒἒἒἎ",
+      "Ἆ.ἌἌἌ.SἌἌἌἓsἓ..ἌFἌἌ...ἌἌἓsFἎ",
+      "Ἆ.Ἄ....S.Ἄ.....ἌἌἌἌἌἌ.ẄἌ..SἎ",
+      "Ἆ..Ἄἒἒἒ...................ẅἎ",
+      "Ἆ.SẄἓsἓἌFἌoἌS..ἌFS.ἌS.ἌἌἌἌἌἎ",
+      "Ἆ......ἌἌἌἌἌἌ..ἌἌἌ.......ἌἌἎ",
+      "Ἆ..,,,,.ἌἌἌἌἌ..ἌἌἌ.Ἄdeef,.ἌἎ",
+      "Ἆ..,,,,.ἌἌἌἌἌ..ἌἌἌ.ἌP12P,.ἌἎ",
+      "ἎἌἌ.......................ἌἎ",
+      "ἎẅἌoἌἌẄSἌἌἌἌSἌ.SἌἌἌSἌἌἌἌἌἌἌἎ",
       "ἎἌἌἌἌἌFFἌἌἌἌἌἌἌἌἌFἌnἌἌἌἌἌἌἌἎ",
-      "ἎἎἎἏἎἎἎἎἎἎἏἎἎἎἎἎἎἏἎἎἎἎἎἎἏἎἎἎ",
+      "ἎἎἎἏἎἎἎἎἎἎἏἎἎἎἎἎἎἏἎἎἎἎἎἎἏἎἎἎ"
     ],
     "warps": [
-      {"x": 5, "y": 3, "to": {"map": "birch-lab", "x": 8, "y": 10}},
-      {"x": 6, "y": 3, "to": {"map": "birch-lab", "x": 8, "y": 10}},
-      {"x": 12, "y": 3, "to": {"map": "center", "x": 4, "y": 4}, "via": {"map": "littleroot", "x": 12, "y": 4}},
-      {"x": 13, "y": 3, "to": {"map": "center", "x": 4, "y": 4}, "via": {"map": "littleroot", "x": 13, "y": 4}},
-      {"x": 18, "y": 3, "to": {"map": "house-littleroot", "x": 6, "y": 8}},
-      {"x": 23, "y": 3, "to": {"map": "house-littleroot-rival", "x": 6, "y": 8}},
-      {"x": 13, "y": 0, "to": {"map": "r101", "x": 11, "y": 14}},
-      {"x": 14, "y": 0, "to": {"map": "r101", "x": 12, "y": 14}},
-      {"x": 21, "y": 13, "to": {"map": "mart", "x": 5, "y": 5}, "via": {"map": "littleroot", "x": 21, "y": 14}},
-      {"x": 22, "y": 13, "to": {"map": "mart", "x": 6, "y": 5}, "via": {"map": "littleroot", "x": 22, "y": 14}},
+      {
+        "x": 5,
+        "y": 3,
+        "to": {
+          "map": "birch-lab",
+          "x": 8,
+          "y": 10
+        }
+      },
+      {
+        "x": 6,
+        "y": 3,
+        "to": {
+          "map": "birch-lab",
+          "x": 8,
+          "y": 10
+        }
+      },
+      {
+        "x": 12,
+        "y": 3,
+        "to": {
+          "map": "center",
+          "x": 4,
+          "y": 4
+        },
+        "via": {
+          "map": "littleroot",
+          "x": 12,
+          "y": 4
+        }
+      },
+      {
+        "x": 13,
+        "y": 3,
+        "to": {
+          "map": "center",
+          "x": 4,
+          "y": 4
+        },
+        "via": {
+          "map": "littleroot",
+          "x": 13,
+          "y": 4
+        }
+      },
+      {
+        "x": 18,
+        "y": 3,
+        "to": {
+          "map": "house-littleroot",
+          "x": 6,
+          "y": 8
+        }
+      },
+      {
+        "x": 23,
+        "y": 3,
+        "to": {
+          "map": "house-littleroot-rival",
+          "x": 6,
+          "y": 8
+        }
+      },
+      {
+        "x": 13,
+        "y": 0,
+        "to": {
+          "map": "r101",
+          "x": 11,
+          "y": 14
+        }
+      },
+      {
+        "x": 14,
+        "y": 0,
+        "to": {
+          "map": "r101",
+          "x": 12,
+          "y": 14
+        }
+      },
+      {
+        "x": 21,
+        "y": 13,
+        "to": {
+          "map": "mart",
+          "x": 5,
+          "y": 5
+        },
+        "via": {
+          "map": "littleroot",
+          "x": 21,
+          "y": 14
+        }
+      },
+      {
+        "x": 22,
+        "y": 13,
+        "to": {
+          "map": "mart",
+          "x": 6,
+          "y": 5
+        },
+        "via": {
+          "map": "littleroot",
+          "x": 22,
+          "y": 14
+        }
+      }
     ],
     "signs": [
-      {"x": 2, "y": 5, "text": "PROF. BIRCH'S LAB — Rootlet's own Kin laboratory. Birch studies Kin where they actually live: outside."},
-      {"x": 15, "y": 15, "text": "ROOTLET TOWN — A town that cannot be shaded any further. Route 101 runs north to Eldergrove."},
-      {"x": 20, "y": 5, "text": "ROOTLET TOWN — North: ROUTE 101."},
-      {"x": 3, "y": 9, "text": "ROOTLET TOWN — North: ROUTE 101."},
-      {"x": 7, "y": 10, "text": "ROOTLET TOWN — North: ROUTE 101."},
-      {"x": 20, "y": 11, "text": "ROOTLET MART — Stocked for the road ahead, at the east end of the dock road."},
+      {
+        "x": 2,
+        "y": 5,
+        "text": "PROF. BIRCH'S LAB — Rootlet's own Kin laboratory. Birch studies Kin where they actually live: outside."
+      },
+      {
+        "x": 15,
+        "y": 15,
+        "text": "ROOTLET TOWN — A town that cannot be shaded any further. Route 101 runs north to Eldergrove."
+      },
+      {
+        "x": 20,
+        "y": 5,
+        "text": "ROOTLET TOWN — North: ROUTE 101."
+      },
+      {
+        "x": 2,
+        "y": 10,
+        "text": "ROOTLET TOWN — North: ROUTE 101."
+      },
+      {
+        "x": 7,
+        "y": 8,
+        "text": "ROOTLET TOWN — North: ROUTE 101."
+      },
+      {
+        "x": 17,
+        "y": 10,
+        "text": "ROOTLET MART — Stocked for the road ahead, at the east end of the dock road."
+      },
+      {
+        "x": 12,
+        "y": 10,
+        "text": "ROOTLET TOWN — North: ROUTE 101."
+      },
+      {
+        "x": 20,
+        "y": 10,
+        "text": "ROOTLET TOWN — North: ROUTE 101."
+      },
+      {
+        "x": 12,
+        "y": 15,
+        "text": "ROOTLET TOWN — North: ROUTE 101."
+      },
+      {
+        "x": 4,
+        "y": 3,
+        "text": "ROOTLET TOWN — North: ROUTE 101."
+      },
+      {
+        "x": 6,
+        "y": 7,
+        "text": "ROOTLET TOWN — North: ROUTE 101."
+      },
+      {
+        "x": 26,
+        "y": 8,
+        "text": "ROOTLET TOWN — North: ROUTE 101."
+      },
+      {
+        "x": 7,
+        "y": 15,
+        "text": "ROOTLET TOWN — North: ROUTE 101."
+      },
+      {
+        "x": 19,
+        "y": 15,
+        "text": "ROOTLET TOWN — North: ROUTE 101."
+      }
     ],
     "npcs": [
-      {"x": 3, "y": 5, "name": "MART CLERK", "art": "clerk", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#4a3a2a", "dialogue": ["Rootlet Mart — stocked for the road ahead."], "mart": {"stock": ["pokeball", "greatball", "potion", "superpotion", "antidote", "awakening"]}},
-      {"x": 8, "y": 7, "name": "MS. HARLOW", "art": "lady", "skin": "#d8a878", "shirt": "#7a4a8a", "pants": "#2a2a3a", "hair": "#c0c0c0", "dialogue": ["Rootlet rule one: if Birch comes home muddy, the research went well.", "Trainers leave this town small and come back enormous. The door frames remember."]},
-      {"x": 19, "y": 6, "name": "PIP", "art": "kid", "skin": "#f0c8a0", "shirt": "#3a7a4a", "pants": "#4a3a2a", "hair": "#2a1a0a", "dialogue": ["I know every shortcut in town. There are two. This is one of them.", "When I start my journey I'm going NORTH first. North is where journeys live."]},
-      {"x": 6, "y": 13, "name": "ELDER BRAMBLE", "art": "elder", "skin": "#e8b888", "shirt": "#b0503c", "pants": "#2a2a3a", "hair": "#5a3a2a", "dialogue": ["Forty years I have watched this town not change, on purpose.", "The lab was a shed once. Birch's shed. Some sheds grow."]},
+      {
+        "x": 18,
+        "y": 12,
+        "name": "MART CLERK",
+        "art": "clerk",
+        "skin": "#f0c8a0",
+        "shirt": "#c05a3a",
+        "pants": "#2a2a3a",
+        "hair": "#4a3a2a",
+        "dialogue": [
+          "Rootlet Mart — stocked for the road ahead."
+        ],
+        "mart": {
+          "stock": [
+            "pokeball",
+            "greatball",
+            "potion",
+            "superpotion",
+            "antidote",
+            "awakening"
+          ]
+        }
+      },
+      {
+        "x": 8,
+        "y": 7,
+        "name": "MS. HARLOW",
+        "art": "lady",
+        "skin": "#d8a878",
+        "shirt": "#7a4a8a",
+        "pants": "#2a2a3a",
+        "hair": "#c0c0c0",
+        "dialogue": [
+          "Rootlet rule one: if Birch comes home muddy, the research went well.",
+          "Trainers leave this town small and come back enormous. The door frames remember."
+        ]
+      },
+      {
+        "x": 19,
+        "y": 6,
+        "name": "PIP",
+        "art": "kid",
+        "skin": "#f0c8a0",
+        "shirt": "#3a7a4a",
+        "pants": "#4a3a2a",
+        "hair": "#2a1a0a",
+        "dialogue": [
+          "I know every shortcut in town. There are two. This is one of them.",
+          "When I start my journey I'm going NORTH first. North is where journeys live."
+        ]
+      },
+      {
+        "x": 6,
+        "y": 13,
+        "name": "ELDER BRAMBLE",
+        "art": "elder",
+        "skin": "#e8b888",
+        "shirt": "#b0503c",
+        "pants": "#2a2a3a",
+        "hair": "#5a3a2a",
+        "dialogue": [
+          "Forty years I have watched this town not change, on purpose.",
+          "The lab was a shed once. Birch's shed. Some sheds grow."
+        ]
+      }
     ],
-    "encounters": {"rate": 0.12, "table": [{"species": "zigzagoon", "min": 201, "max": 204, "weight": 30}, {"species": "poochyena", "min": 201, "max": 204, "weight": 28}, {"species": "wurmple", "min": 201, "max": 204, "weight": 22}, {"species": "seedot", "min": 202, "max": 205, "weight": 10}, {"species": "lotad", "min": 202, "max": 205, "weight": 10}], "water": [{"species": "tentacool", "min": 202, "max": 210, "weight": 28}, {"species": "magikarp", "min": 202, "max": 208, "weight": 24}, {"species": "wingull", "min": 203, "max": 210, "weight": 20}, {"species": "pelipper", "min": 206, "max": 212, "weight": 8}], "waterRate": 0.08},
+    "encounters": {
+      "rate": 0.12,
+      "table": [
+        {
+          "species": "zigzagoon",
+          "min": 201,
+          "max": 204,
+          "weight": 30
+        },
+        {
+          "species": "poochyena",
+          "min": 201,
+          "max": 204,
+          "weight": 28
+        },
+        {
+          "species": "wurmple",
+          "min": 201,
+          "max": 204,
+          "weight": 22
+        },
+        {
+          "species": "seedot",
+          "min": 202,
+          "max": 205,
+          "weight": 10
+        },
+        {
+          "species": "lotad",
+          "min": 202,
+          "max": 205,
+          "weight": 10
+        }
+      ],
+      "water": [
+        {
+          "species": "tentacool",
+          "min": 202,
+          "max": 210,
+          "weight": 28
+        },
+        {
+          "species": "magikarp",
+          "min": 202,
+          "max": 208,
+          "weight": 24
+        },
+        {
+          "species": "wingull",
+          "min": 203,
+          "max": 210,
+          "weight": 20
+        },
+        {
+          "species": "pelipper",
+          "min": 206,
+          "max": 212,
+          "weight": 8
+        }
+      ],
+      "waterRate": 0.08
+    },
     "items": [],
     "hidden": [],
     "events": [],
-    "start": {"x": 13, "y": 15}
+    "start": {
+      "x": 13,
+      "y": 15
+    }
   },
   "oldale": {
     "id": "oldale",

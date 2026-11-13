@@ -88,6 +88,21 @@
 //     0.6299 (the street grid gives desire lines real corners to
 //     cut; still above the 0.60 gate). Conn/step-offs identical
 //     (90/90, 6/6). Re-pinned with the T22 build.
+//     SIXTH DOCUMENTED EXCEPTION (T23): littleroot's pin is its
+//     POST-T23 tuple. The Rootlet rebuild replaced the shipped
+//     tg2/tg checkerboard (Ἅ mud across the town interior) with
+//     the calm-grass + sand-fabric town of the approved design:
+//     gate STATUS stays PASS, now on honest materials (fabric
+//     0.987 -> 0.9848 — the shipped number leaned on tg2 counting
+//     as network; the new fabric is streets alone), junctions
+//     6 -> 15 (all marked; four direction texts shipped invisible
+//     on plain grass, now on visible S tiles at real junctions,
+//     T22-style verbatim repeats), apronMin 0.929 -> 0.714 (three
+//     added facade houses where the design shows them; still
+//     above the 0.6 gate), strict 0.8968 -> 0.674 (desire lines
+//     get real corners; still above the 0.60 gate). Conn/step-offs
+//     identical (90/90, 8/8), unanchoredAny identical (1, the
+//     shipped frame decor at (24,17)). Re-pinned with the T23 build.
 //     Tuple: [pass, connOk, connPairs, stepTouch, stepTot, components,
 //     junctionSites, junctionsBare, apronLow, apronMin, merged,
 //     onFabric, shoulderOrphans, unanchoredAny, strict, fabric].
@@ -162,7 +177,7 @@ const PIN = {
   "lavaridge": [0, 72, 72, 7, 7, 1, 1, 0, 0, 0.929, 0, 0, 0, 0, 0.9715, 0.9715],
   "lavender": [1, 132, 132, 7, 7, 1, 2, 0, 0, 0.643, 0, 0, 0, 0, 0.7211, 0.9873],
   "lilycove": [0, 42, 72, 5, 5, 1, 8, 0, 0, 0.706, 0, 0, 0, 0, 0.9249, 0.9687],
-  "littleroot": [1, 90, 90, 8, 8, 1, 6, 0, 0, 0.929, 0, 0, 0, 1, 0.8968, 0.987],
+  "littleroot": [1, 90, 90, 8, 8, 1, 15, 0, 0, 0.714, 0, 0, 0, 1, 0.674, 0.9848],
   "mahogany": [1, 156, 156, 7, 7, 1, 5, 0, 0, 0.786, 0, 0, 0, 0, 0.9332, 1],
   "mauville": [1, 210, 210, 7, 7, 1, 9, 0, 0, 0.929, 0, 0, 0, 0, 0.9382, 0.9931],
   "mikan": [0, 42, 72, 7, 7, 1, 4, 0, 3, 0.429, 0, 0, 0, 0, 0.9717, 0.9717],
