@@ -20,6 +20,13 @@
 //   (ev_parley_enter + runParleyNpc exits), and Wally's quest-end
 //   relocation (Meadowbrook departure -> Crown Road post, held
 //   empty by ACTOR_DEFAULTS until his farewell scene completes).
+//   W9 PROOFS — Intern Vesk's tale-end relocation to the Revelry TV
+//   door (tale_sinnoh_jubilife onComplete), the off-map completion
+//   application + save-resume resolution (a tale already complete in
+//   the save resolves its actor to the post-completion post), and
+//   the two flag-gated departures (Jasmine leaves the lighthouse
+//   once Lumi is healed; Lance leaves the lake once the WRATHWYRM
+//   is calmed — ACTOR_FLAG_DEFAULTS, saved overrides still win).
 
 import path from 'node:path';
 import fs from 'node:fs';
@@ -45,7 +52,12 @@ const johto = await D('story-johto.mjs');
 const hoenn = await D('story-hoenn.mjs');
 const sinnoh = await D('story-sinnoh.mjs');
 const kanto = await D('story-kanto.mjs');
-const { actorSlug, actorCharId, actorDirective, setActorOverride, ACTOR_DEFAULTS } = await G('actors.mjs');
+const { actorSlug, actorCharId, actorDirective, setActorOverride, ACTOR_DEFAULTS, ACTOR_FLAG_DEFAULTS, actorLifecycleMixin } = await G('actors.mjs');
+// The bundle folds the regional tale tables into quests.mjs's QUESTS
+// (merge.mjs, Object.assign on the same object the watcher iterates;
+// merge.mjs runs in bundle scope, so the fold is pinned by source
+// below rather than by importing it here).
+const SRC_MERGE = fs.readFileSync(path.join(ROOT, 'src/data/merge.mjs'), 'utf8');
 const { defaultState } = await G('state.mjs');
 const { validateSave, migrate } = await import(path.join(ROOT, 'src/save/schema.mjs'));
 const { PARLEY_NPCS } = await G('bonds.mjs');
@@ -215,6 +227,95 @@ ok('identity + resolver wired in loadMap',
   ok('the departure route east out of Meadowbrook exists', bfsExists('petalburg', 13, 7, 29, 8));
   ok('the farewell scene wires the relocation (exit + show)',
     SRC_SYS.includes("actorExit: { who: 'wally@petalburg'") && SRC_SYS.includes("actorShow: { who: 'wally@victory-road-maris' }"));
+}
+
+// ---------- W9 proof 4: Intern Vesk relocates when his tale completes ----------
+{
+  const t = sinnoh.SINNOH_TALES.tale_sinnoh_jubilife;
+  const step = t && Array.isArray(t.onComplete) && t.onComplete[0] && t.onComplete[0].actorMove;
+  ok('W9: SINNOH_TALES carries the Vesk relocation, and merge.mjs folds it into the watcher\'s QUESTS',
+    !!step && step.who === 'broadcast-intern-vesk@jubilife'
+    && Array.isArray(step.to) && step.to[0] === 15 && step.to[1] === 4
+    && SRC_MERGE.includes('Object.assign(QUESTS, SINNOH_TALES)'));
+  ok('W9: Vesk charId exists in the census', cidsOf('jubilife').includes('broadcast-intern-vesk@jubilife'));
+  const vesk = (MAPS.jubilife.npcs || []).find((n) => n.name === 'BROADCAST INTERN VESK');
+  const tvWarp = (MAPS.jubilife.warps || []).find((w) => w.to && w.to.map === 'jubilife-tv');
+  ok('W9: Vesk authored post is the plaza (11,7); destination is the TV door flank (15,4), walkable + reachable, door-front (16,4) left clear',
+    !!vesk && vesk.x === 11 && vesk.y === 7 && !!tvWarp && tvWarp.x === 16 && tvWarp.y === 3
+    && walkableAt('jubilife', 15, 4) && bfsExists('jubilife', 11, 7, 15, 4)
+    && !(step && step.to[0] === tvWarp.x && step.to[1] === tvWarp.y + 1)
+    && !(MAPS.jubilife.warps || []).some((w) => w.x === 15 && w.y === 4));
+}
+
+// ---------- W9 proof 5: off-map completion application + save-resume ----------
+{
+  // A pre-W9 save: the tale is already complete, no talefx marker,
+  // no actors override. The watcher fires the tale's steps on first
+  // update — possibly on a map that is NOT the actor's home (the
+  // player may be anywhere). Applying the step from a foreign scene
+  // must still write the override against the actor's home map.
+  const stubScene = (state, mapId) => ({
+    mapId, game: { state }, actorByCid: () => null,
+  });
+  const s = defaultState();
+  s.story.quests.tale_sinnoh_jubilife = 'complete';
+  ok('W9 save-resume: before the watcher pass, Vesk resolves home (no directive)',
+    actorDirective(s, 'broadcast-intern-vesk@jubilife') === null);
+  const step = sinnoh.SINNOH_TALES.tale_sinnoh_jubilife.onComplete[0];
+  actorLifecycleMixin.runActorStep.call(stubScene(s, 'jubilife-tv'), step, () => {});
+  const d = actorDirective(s, 'broadcast-intern-vesk@jubilife');
+  ok('W9 save-resume: the off-map application writes the HOME map (jubilife), post (15,4)',
+    !!d && d.map === 'jubilife' && d.x === 15 && d.y === 4 && d.hidden === false,
+    JSON.stringify(d));
+  const round = migrate(JSON.parse(JSON.stringify(s)));
+  const rd = actorDirective(round, 'broadcast-intern-vesk@jubilife');
+  ok('W9 save-resume: the resolved post survives migrate + validateSave',
+    validateSave(round).ok && !!rd && rd.map === 'jubilife' && rd.x === 15 && rd.y === 4);
+  // Regression pin for the same defect on the pre-W9 beat: Ko's tale
+  // completes inside saffron-shop on its IOU branch — his override
+  // must name the dojo, never the shop, or he vanishes from home.
+  const s2 = defaultState();
+  const koStep = Q.QUESTS.tale_saffron.onComplete[0];
+  actorLifecycleMixin.runActorStep.call(stubScene(s2, 'saffron-shop'), koStep, () => {});
+  const kd = actorDirective(s2, 'master-ko@dojo');
+  ok('W9 regression: Ko applied from saffron-shop still lands in the dojo (5,5)',
+    !!kd && kd.map === 'dojo' && kd.x === 5 && kd.y === 5, JSON.stringify(kd));
+}
+
+// ---------- W9 proof 6: Jasmine leaves the lighthouse once Lumi is healed ----------
+{
+  const jLight = johto.JOHTO_NPCS.find((n) => n.name === 'JASMINE' && n.map === 'lighthouse-2');
+  const jGym = johto.JOHTO_NPCS.find((n) => n.name === 'JASMINE' && n.map === 'gym-olivine');
+  ok('W9: both Jasmine posts are authored (lighthouse (5,4), gym (7,2))',
+    !!jLight && jLight.x === 5 && jLight.y === 4 && !!jGym && jGym.x === 7 && jGym.y === 2);
+  ok('W9: Jasmine charId exists in the census', cidsOf('lighthouse-2').includes('jasmine@lighthouse-2'));
+  const s = defaultState();
+  ok('W9: before the delivery, Jasmine stands at the lighthouse (no directive)',
+    actorDirective(s, 'jasmine@lighthouse-2') === null);
+  s.story.flags.amphy_healed = true;
+  const d = actorDirective(s, 'jasmine@lighthouse-2');
+  ok('W9: after amphy_healed, the lighthouse post resolves empty (she is at her gym)',
+    !!d && d.hidden === true && ACTOR_FLAG_DEFAULTS['jasmine@lighthouse-2'].flag === 'amphy_healed');
+  setActorOverride(s, 'jasmine@lighthouse-2', { hidden: false });
+  ok('W9: a saved override still wins over the flag-gated default',
+    actorDirective(s, 'jasmine@lighthouse-2').hidden === false);
+}
+
+// ---------- W9 proof 7: Lance leaves the lake once the WRATHWYRM is calmed ----------
+{
+  const lLake = johto.JOHTO_NPCS.find((n) => n.name === 'LANCE' && n.map === 'lake-of-rage');
+  const lTown = johto.JOHTO_NPCS.find((n) => n.name === 'LANCE' && n.map === 'mahogany');
+  ok('W9: both Lance posts are authored (lake (16,15), Redwood (18,7))',
+    !!lLake && lLake.x === 16 && lLake.y === 15 && !!lTown && lTown.x === 18 && lTown.y === 7);
+  ok('W9: Lance charId exists in the census', cidsOf('lake-of-rage').includes('lance@lake-of-rage'));
+  const s = defaultState();
+  ok('W9: before the lake beat, Lance stands at the lake (no directive)',
+    actorDirective(s, 'lance@lake-of-rage') === null);
+  s.story.flags.red_gyarados_done = true;
+  const d = actorDirective(s, 'lance@lake-of-rage');
+  ok('W9: after red_gyarados_done, the lake post resolves empty (he is in Redwood), and his Redwood post is untouched',
+    !!d && d.hidden === true && ACTOR_FLAG_DEFAULTS['lance@lake-of-rage'].flag === 'red_gyarados_done'
+    && actorDirective(s, 'lance@mahogany') === null);
 }
 
 console.log(`\nactor-lifecycle: ${pass} pass, ${fail} fail (${totalPosts} census posts)`);
