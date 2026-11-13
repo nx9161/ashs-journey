@@ -53,6 +53,16 @@
 //     42/72 -> 72/72, junctionSites 2 -> 6, apronMin 0.824 -> 0.688,
 //     strict 0.9591 -> 0.7965, fabric 0.9926 -> 0.9993 — the rebuilt
 //     town's measured values, re-pinned at the T19 director merge.
+//     THIRD DOCUMENTED EXCEPTION (T20): mahogany's pin is its POST-T20
+//     tuple. The Redwood rebuild replaced the shipped tg2 mud field
+//     (194 of 504 cells) with the calm-grass + path-fabric town of the
+//     approved design: junctions 3 -> 5 (all marked), apronMin
+//     0.857 -> 0.786 (nine freestanding buildings where four stood on
+//     the north strip; still above the 0.6 gate), strict 0.9727 ->
+//     0.9332, fabric 1 -> 1. Gate STATUS unchanged (PASS before and
+//     after); conn/step-offs identical (156/156, 7/7) on honest
+//     materials — the shipped pass was measured on mud counted as
+//     fabric. Re-pinned with the T20 build.
 //     Tuple: [pass, connOk, connPairs, stepTouch, stepTot, components,
 //     junctionSites, junctionsBare, apronLow, apronMin, merged,
 //     onFabric, shoulderOrphans, unanchoredAny, strict, fabric].
@@ -128,7 +138,7 @@ const PIN = {
   "lavender": [1, 132, 132, 7, 7, 1, 2, 0, 0, 0.643, 0, 0, 0, 0, 0.7211, 0.9873],
   "lilycove": [0, 42, 72, 5, 5, 1, 8, 0, 0, 0.706, 0, 0, 0, 0, 0.9249, 0.9687],
   "littleroot": [1, 90, 90, 8, 8, 1, 6, 0, 0, 0.929, 0, 0, 0, 1, 0.8968, 0.987],
-  "mahogany": [1, 156, 156, 7, 7, 1, 3, 0, 0, 0.857, 0, 0, 0, 0, 0.9727, 1],
+  "mahogany": [1, 156, 156, 7, 7, 1, 5, 0, 0, 0.786, 0, 0, 0, 0, 0.9332, 1],
   "mauville": [1, 210, 210, 7, 7, 1, 9, 0, 0, 0.929, 0, 0, 0, 0, 0.9382, 0.9931],
   "mikan": [0, 42, 72, 7, 7, 1, 4, 0, 3, 0.429, 0, 0, 0, 0, 0.9717, 0.9717],
   "moro": [0, 12, 30, 4, 4, 1, 1, 0, 1, 0.529, 0, 0, 0, 0, 0.9402, 0.9402],
