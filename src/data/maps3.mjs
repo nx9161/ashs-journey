@@ -140,8 +140,8 @@ export const MAPS3 = {
     warps: [
       { x: 0, y: 5, to: { map: 'celadon', x: 16, y: 9 } },
       { x: 17, y: 5, to: { map: 'lavender', x: 1, y: 5 } },
-      { x: 9, y: 0, to: { map: 'saffron', x: 9, y: 11 } },
-      { x: 10, y: 0, to: { map: 'saffron', x: 10, y: 11 } },
+      { x: 9, y: 0, to: { map: 'saffron', x: 9, y: 12 } },
+      { x: 10, y: 0, to: { map: 'saffron', x: 10, y: 12 } },
     ],
     signs: [
       { x: 5, y: 7, text: 'ROUTE 8 — Canopy to Hushmoor, under the shadow of Farsight. The grass here smells faintly of perfume.' },
@@ -390,7 +390,7 @@ export const MAPS3 = {
       '##################',
     ]),
     warps: [
-      { x: 0, y: 5, to: { map: 'saffron', x: 16, y: 4 } },
+      { x: 0, y: 5, to: { map: 'saffron', x: 18, y: 8 } },
       { x: 17, y: 5, to: { map: 'route10', x: 8, y: 1 } },
     ],
     signs: [
