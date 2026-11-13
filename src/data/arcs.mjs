@@ -60,8 +60,8 @@ export const HOME_MAP_ID = 'house-pallet-ash'; // Mom's house interior (maps4.mj
 
 export const ARC_GIVER_NAMES = {
   hawthorn: 'Prof. Hawthorn',
-  scott: 'Scott',
-  gary: 'Gary',
+  scott: 'Sutter',
+  gary: 'Vale',
 };
 
 export const ARCS = [
@@ -93,8 +93,8 @@ export const ARCS = [
       'Four island badges and a champion\'s battle under southern stars. The Winner\'s Trophy is yours — and so is the strange ball that started the voyage.',
     ],
     hookLines: [
-      'A colleague of mine — Professor Ivy, on Marisol Island in the Amber Archipelago — is holding a Capture Orb that no machine can open.',
-      'They call it the GS Orb. Fetch it for me, would you? The ferry for Marisol leaves from Arcport City.',
+      'A colleague of mine — Professor Isla, on Marisol Island in the Amber Archipelago — is holding a Capture Orb that no machine can open.',
+      'They call it the Sealed Orb. Fetch it for me, would you? The ferry for Marisol leaves from Arcport City.',
       'Mind the sea air down there. It changes trainers — usually for the better.',
     ],
     enRouteLines: [
@@ -104,7 +104,7 @@ export const ARCS = [
   },
   {
     id: 'johto', n: 2, label: 'Arc 2', region: 'Yamato', regionKey: 'johto',
-    edition: 'Gold / Silver / Crystal', chapters: [3, 4, 5], dexHorizon: 251,
+    edition: 'Gold / Riven / Crystal', chapters: [3, 4, 5], dexHorizon: 251,
     band: { min: 101, max: 200, bandIndex: 2 },
     badgeSet: 'johto', badgeTotal: 8,
     completionKey: 'johto', completionFlag: 'johto_complete',
@@ -115,7 +115,7 @@ export const ARCS = [
       'Eight badges, the beasts woken and quieted, and the rivalry settled at last in the conference fire. The road home feels shorter than the road out.',
     ],
     hookLines: [
-      'That GS Orb you carried across the Amber Isles — there is a man in Cinder Town named Kurt who still works Capture Orbs by hand, the old way.',
+      'That Sealed Orb you carried across the Amber Isles — there is a man in Cinder Town named Hendrik who still works Capture Orbs by hand, the old way.',
       'If anyone alive can open it, it is him. And Yamato itself is calling: new towers, new legends, and a rival who will not wait forever.',
       'The boat for Yamato leaves from Dawnwick\'s own dock. Come home first. You always come home first.',
     ],
@@ -138,7 +138,7 @@ export const ARCS = [
     ],
     hookLines: [
       'Word travels fast on the sea roads: a whole region across the water is in a strange mood — its land and ocean arguing through two old teams.',
-      'Maris, they call it. New Kin, new gyms, contests in every port — and a certain evolved friend of Gary\'s waiting to prove a point.',
+      'Maris, they call it. New Kin, new gyms, contests in every port — and a certain evolved friend of Vale\'s waiting to prove a point.',
       'The Arcport ferry runs that way. Pack for rain AND for drought; Maris cannot decide either.',
     ],
     enRouteLines: [
@@ -159,9 +159,9 @@ export const ARCS = [
       'Seven Symbols at the Gold standard, and a rematch years in the making finally won. The Frontier salutes you.',
     ],
     hookLines: [
-      'A man named Scott has been watching your battles — he scouts for a place called the Trial Grounds, seven facilities run by trainers called Frontier Brains.',
+      'A man named Sutter has been watching your battles — he scouts for a place called the Trial Grounds, seven facilities run by trainers called Frontier Brains.',
       'He left an invitation with your name on it and one instruction: bring the team you trust most. The Frontier does not care where you have been — only how you fight.',
-      'It stands on an island off Arden. The boat leaves from Dawnwick. Scott will be waiting at the dock, smiling like he already knows the result.',
+      'It stands on an island off Arden. The boat leaves from Dawnwick. Sutter will be waiting at the dock, smiling like he already knows the result.',
     ],
     enRouteLines: [
       '— a short crossing —',
@@ -181,9 +181,9 @@ export const ARCS = [
       'Eight badges, a god unchained and answered, and the only victory anyone took from the conference\'s darkest trainer. History will remember the attempt — and the NOCTARCH that fell.',
     ],
     hookLines: [
-      'Gary came by the lab while you were away — back from a northern region called Borea, with an VOLTYETI at his side and stories that sound half like weather reports, half like scripture.',
-      'Mountains that touch the sky, lakes older than kingdoms, and something sleeping at the top of the world. He said one more thing: "Tell Ash the north is not finished with trainers like us."',
-      'The Shingle-bound ship sails from Arcport. Go and see what Gary saw.',
+      'Vale came by the lab while you were away — back from a northern region called Borea, with an VOLTYETI at his side and stories that sound half like weather reports, half like scripture.',
+      'Mountains that touch the sky, lakes older than kingdoms, and something sleeping at the top of the world. He said one more thing: "Tell Kian the north is not finished with trainers like us."',
+      'The Shingle-bound ship sails from Arcport. Go and see what Vale saw.',
     ],
     enRouteLines: [
       '— days at sea —',
@@ -195,7 +195,7 @@ export const ARCS = [
   // the dex frame and the finale's forward line can point at them honestly.
   // Unbuilt, undeleted. Bands continue the Amendment-2 pattern as data.
   {
-    id: 'unova', n: 5, label: 'Arc 5', region: 'Unova', regionKey: 'unova',
+    id: 'unova', n: 5, label: 'Arc 5', region: 'Vespera', regionKey: 'unova',
     edition: 'Black & White', chapters: [9], dexHorizon: 1025,
     band: { min: 401, max: 500, bandIndex: 5 },
     badgeSet: 'unova', badgeTotal: 8,
@@ -203,11 +203,11 @@ export const ARCS = [
     status: 'sealed', future: true,
     hookGiver: null, embarkPort: null, arrivalMap: null, home: 'pallet',
     summaryLines: ['A future arc — sealed.', 'This road is drawn on the map but not yet walked.'],
-    hookLines: ['Far across the ocean there is a region of bridges and bright cities — Unova. Its road is drawn, but this journey has not reached it yet.'],
+    hookLines: ['Far across the ocean there is a region of bridges and bright cities — Vespera. Its road is drawn, but this journey has not reached it yet.'],
     enRouteLines: [],
   },
   {
-    id: 'kalos', n: 6, label: 'Arc 6', region: 'Kalos', regionKey: 'kalos',
+    id: 'kalos', n: 6, label: 'Arc 6', region: 'Aurelia', regionKey: 'kalos',
     edition: 'XY & XYZ', chapters: [10], dexHorizon: 1025,
     band: { min: 501, max: 600, bandIndex: 6 },
     badgeSet: 'kalos', badgeTotal: 8,
@@ -215,11 +215,11 @@ export const ARCS = [
     status: 'sealed', future: true,
     hookGiver: null, embarkPort: null, arrivalMap: null, home: 'pallet',
     summaryLines: ['A future arc — sealed.', 'This road is drawn on the map but not yet walked.'],
-    hookLines: ['Beyond Unova, a region that treats beauty as a discipline — Kalos. A future arc, when this journey is ready for it.'],
+    hookLines: ['Beyond Vespera, a region that treats beauty as a discipline — Aurelia. A future arc, when this journey is ready for it.'],
     enRouteLines: [],
   },
   {
-    id: 'alola', n: 7, label: 'Arc 7', region: 'Alola', regionKey: 'alola',
+    id: 'alola', n: 7, label: 'Arc 7', region: 'Solana', regionKey: 'alola',
     edition: 'Sun & Moon', chapters: [11], dexHorizon: 1025,
     band: { min: 601, max: 700, bandIndex: 7 },
     badgeSet: 'alola', badgeTotal: 0, // the island challenge awards no badges
@@ -227,7 +227,7 @@ export const ARCS = [
     status: 'sealed', future: true,
     hookGiver: null, embarkPort: null, arrivalMap: null, home: 'pallet',
     summaryLines: ['A future arc — sealed.', 'This road is drawn on the map but not yet walked.'],
-    hookLines: ['South past every charted sea: islands under twin lights — Alola. A future arc.'],
+    hookLines: ['South past every charted sea: islands under twin lights — Solana. A future arc.'],
     enRouteLines: [],
   },
   {
@@ -287,7 +287,7 @@ export const ARC_FINALE_ECHOES = {
   johto: 'Yamato asked older questions — towers, bells, beasts woken out of legend — and the rivalry that started in a Dawnwick lane finally burned itself honest at the Lastlight Conference.',
   hoenn: 'Maris argued with its own weather, and the team answered both sides of it: drought and deluge, two old teams, and a conference run that ended narrow and proud.',
   frontier: 'The Frontier cared nothing for any of that. Seven doors, seven Brains, one standard — gold. It is the only place that ever graded the team purely on how they fight, and they know it.',
-  sinnoh: 'And Borea: a god in red chains, a world behind the world, and a NOCTARCH that finally fell. The north is finished with trainers like us, Gary said. It was not wrong. It is finished — because it is complete.',
+  sinnoh: 'And Borea: a god in red chains, a world behind the world, and a NOCTARCH that finally fell. The north is finished with trainers like us, Vale said. It was not wrong. It is finished — because it is complete.',
 };
 
 export const FINALE_CREDITS_OPEN = [

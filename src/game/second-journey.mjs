@@ -111,8 +111,8 @@ if (typeof Game !== 'undefined') Object.assign(Game.prototype, {
     if (typeof activeHouseRules === 'function' && activeHouseRules(g.state).length) {
       g.state.meta.houseRulesTouched = true;
     }
-    g.state.player.name = 'ASH';
-    g.state.player.rivalName = 'GARY';
+    g.state.player.name = 'KIAN';
+    g.state.player.rivalName = 'VALE';
     if (typeof makeRngStreams === 'function' && typeof nextSeed === 'function') g.rng = makeRngStreams(nextSeed());
     g.skipIntroVeteran = true; // a returning champion may skip the intro
     g.scenes.replace(new IntroScene());

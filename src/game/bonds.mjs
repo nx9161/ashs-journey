@@ -74,17 +74,17 @@ export function tierAtLeast(state, npcId, tier) {
 export const BOND_CHARACTERS = [
   { id: 'mom', name: 'Mom', plate: 'MOM', note: 'Dawnwick. Drew the first street maps of home, chalk on a barn door.' },
   { id: 'hawthorn', name: 'Prof. Hawthorn', plate: 'Prof. Hawthorn', note: 'The professor who studies how Kin and people grow together. He gave you your partner.' },
-  { id: 'gary', name: 'Gary', plate: 'GARY', note: 'Your rival since before either of you could reach the lab door. His PRISMKIT is still deciding.' },
+  { id: 'gary', name: 'Vale', plate: 'VALE', note: 'Your rival since before either of you could reach the lab door. His PRISMKIT is still deciding.' },
   { id: 'rue', name: 'Rue', plate: 'RUE', note: 'Half of a uniformed duo with theatrical ambitions and a drawn-on moustache.' },
   { id: 'cole', name: 'Cole', plate: 'COLE', note: 'The other half. Holds the menu right-side up and the conscience for both of them.' },
   { id: 'retiredace', name: 'Ace Marlow', plate: 'ACE MARLOW', note: 'Fernmere elder. The first trainer ever to challenge the Fernmere Gym, before there was a League to record it.' },
-  { id: 'brock', name: 'Brock', plate: 'BROCK', note: 'Flintridge leader and part-time museum curator. The museum came first; the gym is built from its stone.' },
-  { id: 'misty', name: 'Misty', plate: 'MISTY', note: 'Tidehaven leader. Keeps the old bike-shop ledger from when her gym had a pool out back.' },
-  { id: 'surge', name: 'Lt. Surge', plate: 'LT. SURGE', note: 'Arcport leader. Learned to read the bay from the Fan Club founder\'s tide tables.' },
-  { id: 'erika', name: 'Erika', plate: 'ERIKA', note: 'Canopy leader. Her grandmother planted the roof garden so the city\'s green would outgrow its neon.' },
-  { id: 'koga', name: 'Koga', plate: 'KOGA', note: 'Bramble leader. His grandfather taught the Preserve Warden to fish with one carved lure.' },
-  { id: 'sabrina', name: 'Sabrina', plate: 'SABRINA', note: 'Farsight leader. Her father and Master Ko split one school over what strength is for.' },
-  { id: 'blaine', name: 'Blaine', plate: 'BLAINE', note: 'Caldera leader. He was on the jungle expedition that followed a mirage, and never called it a failure.' },
+  { id: 'brock', name: 'Garran', plate: 'GARRAN', note: 'Flintridge leader and part-time museum curator. The museum came first; the gym is built from its stone.' },
+  { id: 'misty', name: 'Marina', plate: 'MARINA', note: 'Tidehaven leader. Keeps the old bike-shop ledger from when her gym had a pool out back.' },
+  { id: 'surge', name: 'Lt. Brandt', plate: 'LT. BRANDT', note: 'Arcport leader. Learned to read the bay from the Fan Club founder\'s tide tables.' },
+  { id: 'erika', name: 'Verna', plate: 'VERNA', note: 'Canopy leader. Her grandmother planted the roof garden so the city\'s green would outgrow its neon.' },
+  { id: 'koga', name: 'Marek', plate: 'MAREK', note: 'Bramble leader. His grandfather taught the Preserve Warden to fish with one carved lure.' },
+  { id: 'sabrina', name: 'Sybil', plate: 'SYBIL', note: 'Farsight leader. Her father and Master Ko split one school over what strength is for.' },
+  { id: 'blaine', name: 'Ignas', plate: 'IGNAS', note: 'Caldera leader. He was on the jungle expedition that followed a mirage, and never called it a failure.' },
   { id: 'fuji', name: 'Mr. Fuji', plate: 'MR. FUJI', note: 'Hushmoor elder. He has carried his town\'s grief longer than anyone, and keeps a bell for the kind.' },
 ];
 export function bondCharacter(id) {
@@ -261,6 +261,6 @@ export function takeEchoGreeting(state, npcId) {
 // Overworld NPC display name -> bond id, for the echo greeting hook.
 export const BOND_NPC_IDS = {
   MOM: 'mom', GARY: 'gary', RUE: 'rue', COLE: 'cole', 'ACE MARLOW': 'retiredace',
-  BROCK: 'brock', MISTY: 'misty', 'LT. SURGE': 'surge', ERIKA: 'erika',
+  BROCK: 'brock', MISTY: 'misty', 'LT. BRANDT': 'surge', ERIKA: 'erika',
   KOGA: 'koga', SABRINA: 'sabrina', BLAINE: 'blaine', 'MR. FUJI': 'fuji',
 };

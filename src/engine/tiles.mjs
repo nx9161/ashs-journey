@@ -222,7 +222,7 @@ export const O1_WALKABLE_CHARS = O1_KIND_DEFS.filter(([, c]) => c === 'floor').m
 // over the ground it stands on (art.mjs resolver). Authored art:
 // assets/sprites/pix/tiles/tile-{prop-,}<kind>.pix (Stage J3a).
 export const J3_KIND_DEFS = [
-  ['maple', 'prop'], ['jshrine', 'prop'], ['jwell', 'prop'], ['apricorn', 'prop'], ['jbell', 'prop'],
+  ['maple', 'prop'], ['jshrine', 'prop'], ['jwell', 'prop'], ['podnut', 'prop'], ['jbell', 'prop'],
   ['cityfloor', 'floor'], ['woodfloor', 'floor'],
   ['towerwood', 'wall'], ['citybrick', 'wall'],
 ];

@@ -32,7 +32,7 @@ export const MAPS = {
       { x: 7, y: 3, text: "PROF. HAWTHORN'S LAB — Kin research. The professor is out on Route 1 today." },
     ],
     npcs: [
-      { x: 10, y: 4, name: 'GARY', art: 'gary', skin: '#f0c8a0', shirt: '#3a5a9a', pants: '#2a2a3a', hair: '#6a4a2a',
+      { x: 10, y: 4, name: 'VALE', art: 'gary', skin: '#f0c8a0', shirt: '#3a5a9a', pants: '#2a2a3a', hair: '#6a4a2a',
         // Yellow homage (original lines): the rival's partner is a PRISMKIT.
         dialogue: ["Yo, {player}! The professor gave me a PRISMKIT — fluffy, clever, and all mine!", "He says it'll evolve to match how I battle. Just watch — we'll be champions!"] },
       // UI v2.3 (defect 5): the lab's storage terminal, standing at the lab
@@ -133,7 +133,7 @@ export const MAPS = {
     ],
     npcs: [
       { x: 11, y: 7, name: 'HIKER', art: 'hiker', skin: '#d8a878', shirt: '#50368e', pants: '#4a4a5a', hair: '#3a2a1a',
-        dialogue: ["Heading north? Route 2's grass is thicker — I saw a FUSSAPE up there yesterday.", "Fighting-types crack rock wide open. A FUSSAPE that knows Low Kick will humble Brock's PEBBLET."] },
+        dialogue: ["Heading north? Route 2's grass is thicker — I saw a FUSSAPE up there yesterday.", "Fighting-types crack rock wide open. A FUSSAPE that knows Low Kick will humble Garran's PEBBLET."] },
     ],
     encounters: null,
     start: null,
@@ -271,11 +271,11 @@ export const MAPS = {
     ],
     signs: [
       { x: 3, y: 6, text: 'FLINTRIDGE CITY — A stone-gray city nestled between mountains.' },
-      { x: 11, y: 6, text: 'FLINTRIDGE GYM — Leader: Brock. The rock-solid Kin trainer!' },
+      { x: 11, y: 6, text: 'FLINTRIDGE GYM — Leader: Garran. The rock-solid Kin trainer!' },
     ],
     npcs: [
       { x: 10, y: 4, name: 'COACH', art: 'coach', skin: '#d8a878', shirt: '#c03a3a', pants: '#2a2a3a', hair: '#1a1a1a',
-        dialogue: ["Brock's rock-types shrug off electric attacks — your partner's sparks won't cut it in there.", "Catch a FUSSAPE on Route 2 — fighting beats rock, and they learn Low Kick young. Water or grass would work too, but you won't find those this side of the forest.", "You've got heart, kid. Take these Capture Orbs — on the house."],
+        dialogue: ["Garran's rock-types shrug off electric attacks — your partner's sparks won't cut it in there.", "Catch a FUSSAPE on Route 2 — fighting beats rock, and they learn Low Kick young. Water or grass would work too, but you won't find those this side of the forest.", "You've got heart, kid. Take these Capture Orbs — on the house."],
         give: { flag: 'coach_balls', items: { pokeball: 3 }, text: '3 Capture Orbs' } },
     ],
     encounters: null,
@@ -301,9 +301,9 @@ export const MAPS = {
     ],
     signs: [],
     npcs: [
-      { x: 5, y: 2, name: 'BROCK', art: 'brock', skin: '#c89878', shirt: '#c8782a', pants: '#3a405a', hair: '#1a1a1a',
+      { x: 5, y: 2, name: 'GARRAN', art: 'brock', skin: '#c89878', shirt: '#c8782a', pants: '#3a405a', hair: '#1a1a1a',
         trainer: 'brock',
-        dialogue: ["I'm Brock! I'm Flintridge's Gym Leader! My rock-hard willpower is evident even in my Kin!", "Stone may endure for ages, but your resolve struck harder today. The Boulder Badge is yours."] },
+        dialogue: ["I'm Garran! I'm Flintridge's Gym Leader! My rock-hard willpower is evident even in my Kin!", "Stone may endure for ages, but your resolve struck harder today. The Boulder Badge is yours."] },
     ],
     encounters: null,
     start: null,
@@ -517,7 +517,7 @@ export const TRAINERS = {
     reward: 200,
   },
   brock: {
-    id: 'brock', name: 'Brock', title: 'Flintridge Gym Leader',
+    id: 'brock', name: 'Garran', title: 'Flintridge Gym Leader',
     ai: 'opener-setup',
     intro: ["My rock-type Kin will crush you! Show me what you've got!"],
     lose: ["I took you for granted... You're stronger than I thought.", "Take the Boulder Badge — you earned it."],

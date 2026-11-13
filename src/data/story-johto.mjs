@@ -47,27 +47,27 @@
 // the marked seam.
 // ---------------------------------------------------------------------------
 export const JOHTO_QUESTS = [
-  { id: 'q_johto_arrival', flag: 'johto_arrival', text: 'Meet Professor Elm in Galefield Town', hint: 'Elm\'s lab stands at the north edge of Galefield, the first building past the dock. Something happened there just before your boat came in.' },
-  { id: 'q_johto_thief', flag: 'silver_reported', text: 'Watch for the red-haired thief — and report back to Elm', hint: 'A starter was stolen from Elm\'s lab. The thief was seen heading north, toward Blossom and Route 30. If you meet him, tell Elm what you saw.' },
-  { id: 'q_johto_sprout', flag: 'sprout_tower_done', text: 'Climb Newleaf Tower and earn the Elder\'s blessing', hint: 'Iris City\'s tower sways like the Kin it honors. Falkner expects challengers to climb it first — the monks inside are the first half of his test.' },
-  { id: 'q_johto_zephyr', flag: 'badge_zephyr', text: 'Win the Zephyr Badge from Falkner in Iris City', hint: 'Falkner keeps Iris\'s gym with birds raised in the tower\'s shadow. Flying types fear Electric, Ice and Rock moves.' },
-  { id: 'q_johto_well', flag: 'johto_well_cleared', text: 'Clear Team Rocket out of the DOZPOTAM Well', hint: 'Below Cinder Town, Rockets are cutting DOZPOTAM tails to sell. Kurt went down to stop them and hurt his back — finish what he started.' },
-  { id: 'q_johto_gsball', flag: 'gsball_delivered', text: 'Deliver the GS Orb to Kurt in Cinder Town', hint: 'The ball no machine can open, carried all the way from Marisol. Kurt of Cinder works Capture Orbs by hand, the old way — his house stands in the east of town.' },
-  { id: 'q_johto_hive', flag: 'badge_hive', text: 'Win the Hive Badge from Bugsy in Cinder Town', hint: 'Bugsy\'s Bug types are proud and quick. Fire, Flying and Rock moves end arguments with them.' },
-  { id: 'q_johto_plain', flag: 'badge_plain', text: 'Win the Plain Badge from Whitney in Signal City', hint: 'Whitney\'s MOOBELLE is famous all over Yamato, and not for being gentle. Bring a team that can take a rolling hit — and give one back.' },
+  { id: 'q_johto_arrival', flag: 'johto_arrival', text: 'Meet Professor Linden in Galefield Town', hint: 'Linden\'s lab stands at the north edge of Galefield, the first building past the dock. Something happened there just before your boat came in.' },
+  { id: 'q_johto_thief', flag: 'silver_reported', text: 'Watch for the red-haired thief — and report back to Linden', hint: 'A starter was stolen from Linden\'s lab. The thief was seen heading north, toward Blossom and Route 30. If you meet him, tell Linden what you saw.' },
+  { id: 'q_johto_sprout', flag: 'sprout_tower_done', text: 'Climb Newleaf Tower and earn the Elder\'s blessing', hint: 'Iris City\'s tower sways like the Kin it honors. Aven expects challengers to climb it first — the monks inside are the first half of his test.' },
+  { id: 'q_johto_zephyr', flag: 'badge_zephyr', text: 'Win the Zephyr Badge from Aven in Iris City', hint: 'Aven keeps Iris\'s gym with birds raised in the tower\'s shadow. Flying types fear Electric, Ice and Rock moves.' },
+  { id: 'q_johto_well', flag: 'johto_well_cleared', text: 'Clear the Vanta Syndicate out of the DOZPOTAM Well', hint: 'Below Cinder Town, Rockets are cutting DOZPOTAM tails to sell. Hendrik went down to stop them and hurt his back — finish what he started.' },
+  { id: 'q_johto_gsball', flag: 'gsball_delivered', text: 'Deliver the Sealed Orb to Hendrik in Cinder Town', hint: 'The ball no machine can open, carried all the way from Marisol. Hendrik of Cinder works Capture Orbs by hand, the old way — his house stands in the east of town.' },
+  { id: 'q_johto_hive', flag: 'badge_hive', text: 'Win the Hive Badge from Bex in Cinder Town', hint: 'Bex\'s Bug types are proud and quick. Fire, Flying and Rock moves end arguments with them.' },
+  { id: 'q_johto_plain', flag: 'badge_plain', text: 'Win the Plain Badge from Willa in Signal City', hint: 'Willa\'s MOOBELLE is famous all over Yamato, and not for being gentle. Bring a team that can take a rolling hit — and give one back.' },
   { id: 'q_johto_burned', flag: 'beasts_awakened', text: 'See what woke in the Ashen Tower', hint: 'In Lantern, the tower that burned a hundred and fifty years ago stands open and ash-smelling. Its basement held three statues. Held.' },
-  { id: 'q_johto_fog', flag: 'badge_fog', text: 'Win the Fog Badge from Morty in Lantern City', hint: 'Morty reads the fog the way sailors read weather. His Ghost types fear Ghost and Dark moves — and respect trainers who have looked into the tower.' },
+  { id: 'q_johto_fog', flag: 'badge_fog', text: 'Win the Fog Badge from Silas in Lantern City', hint: 'Silas reads the fog the way sailors read weather. His Ghost types fear Ghost and Dark moves — and respect trainers who have looked into the tower.' },
   // --- J4b: the east rows (appended at the J4a seam) ---
-  { id: 'q_johto_potion', flag: 'amphy_healed', text: 'Fetch the Secret Potion for Lumi, the lighthouse Kin', hint: 'Lumi, the LUMENECK whose light guides Beacon\'s ships, is sick in the Gleam Lighthouse. The pharmacy across Route 40 in Tidewall makes a Secret Potion — Jasmine is waiting on it.' },
-  { id: 'q_johto_storm', flag: 'badge_storm', text: 'Win the Storm Badge from Chuck in Tidewall City', hint: 'Chuck trains where the sea hits the island hardest. His Fighting types fear Flying and Psychic moves — and respect anyone who crossed the water to reach him.' },
-  { id: 'q_johto_mineral', flag: 'badge_mineral', text: 'Win the Mineral Badge from Jasmine in Beacon City', hint: 'Jasmine will not battle while Lumi is sick — the errand comes first. Her FERROWYRM fears Fire, Fighting and Ground moves.' },
+  { id: 'q_johto_potion', flag: 'amphy_healed', text: 'Fetch the Secret Potion for Lumi, the lighthouse Kin', hint: 'Lumi, the LUMENECK whose light guides Beacon\'s ships, is sick in the Gleam Lighthouse. The pharmacy across Route 40 in Tidewall makes a Secret Potion — Liora is waiting on it.' },
+  { id: 'q_johto_storm', flag: 'badge_storm', text: 'Win the Storm Badge from Rourke in Tidewall City', hint: 'Rourke trains where the sea hits the island hardest. His Fighting types fear Flying and Psychic moves — and respect anyone who crossed the water to reach him.' },
+  { id: 'q_johto_mineral', flag: 'badge_mineral', text: 'Win the Mineral Badge from Liora in Beacon City', hint: 'Liora will not battle while Lumi is sick — the errand comes first. Her FERROWYRM fears Fire, Fighting and Ground moves.' },
   { id: 'q_johto_redgyarados', flag: 'red_gyarados_done', text: 'Face the Red WRATHWYRM at the Wrathmere Lake', hint: 'North of Redwood, something red and furious is tearing the lake apart. The fishermen say it was not always red — or always furious.' },
-  { id: 'q_johto_hideout', flag: 'johto_hideout_cleared', text: 'Clear the Hideout beneath Redwood\'s souvenir shop', hint: 'Lance is waiting in Redwood Town. Whatever is humming under that shop is the same signal that has been hurting the lake.' },
-  { id: 'q_johto_glacier', flag: 'badge_glacier', text: 'Win the Glacier Badge from Pryce in Redwood Town', hint: 'Pryce has trained through fifty winters and one Rocket occupation. His Ice types fear Fire, Fighting, Rock and Steel moves.' },
-  { id: 'q_johto_radio', flag: 'radio_tower_cleared', text: 'Take back the Signal Radio Tower', hint: 'With the hideout gone, Team Rocket has seized the Radio Tower to broadcast their return. The real Director is being held somewhere below the city — the Card Key is with him.' },
-  { id: 'q_johto_rising', flag: 'badge_rising', text: 'Win Clair\'s trust — and the Rising Badge — in Cragmoor', hint: 'Clair\'s gym is only the first half. By the clan\'s law the badge itself is given in the Drake\'s Den, after the elder\'s test. Her Dragon types fear Ice and Dragon moves.' },
+  { id: 'q_johto_hideout', flag: 'johto_hideout_cleared', text: 'Clear the Hideout beneath Redwood\'s souvenir shop', hint: 'Darian is waiting in Redwood Town. Whatever is humming under that shop is the same signal that has been hurting the lake.' },
+  { id: 'q_johto_glacier', flag: 'badge_glacier', text: 'Win the Glacier Badge from Albin in Redwood Town', hint: 'Albin has trained through fifty winters and one Syndicate occupation. His Ice types fear Fire, Fighting, Rock and Steel moves.' },
+  { id: 'q_johto_radio', flag: 'radio_tower_cleared', text: 'Take back the Signal Radio Tower', hint: 'With the hideout gone, the Vanta Syndicate has seized the Radio Tower to broadcast their return. The real Director is being held somewhere below the city — the Card Key is with him.' },
+  { id: 'q_johto_rising', flag: 'badge_rising', text: 'Win Rhea\'s trust — and the Rising Badge — in Cragmoor', hint: 'Rhea\'s gym is only the first half. By the clan\'s law the badge itself is given in the Drake\'s Den, after the elder\'s test. Her Dragon types fear Ice and Dragon moves.' },
   { id: 'q_johto_conference', flag: 'conference_registered', text: 'Register for the Lastlight Conference at Lastlight Town', hint: 'Eight Yamato badges open the road north: Cragmoor, Lastlight Pass, Lastlight Town. The Conference Official in the stadium keeps the bracket.' },
-  { id: 'q_johto_gary', flag: 'beat_gary_johto', text: 'The Lastlight Conference — beat Gary', hint: 'He has been waiting on the far side of the bracket all arc. ABYSSAR and all. This one you have to win.' },
+  { id: 'q_johto_gary', flag: 'beat_gary_johto', text: 'The Lastlight Conference — beat Vale', hint: 'He has been waiting on the far side of the bracket all arc. ABYSSAR and all. This one you have to win.' },
   { id: 'q_johto_harrison', flag: 'johto_complete', text: 'The Lastlight Conference — the quarter-final, and whatever it decides', hint: 'Harrison of Rootlet, and a CHARHOUND that has ended better runs than yours. Face him with everything — the Conference, and Yamato, end on the far side of this battle.' },
   { id: 'q_johto_red', flag: 'red_defeated', text: 'Post-game: the silent trainer on Mt. Lastlight', hint: 'Past Lastlight Town, the mountain keeps one more name off every bracket. He has been standing on that dais a long time, saying nothing, waiting for someone worth the silence.' },
 ];
@@ -81,7 +81,7 @@ export const JOHTO_QUESTS = [
 // ---------------------------------------------------------------------------
 export const JOHTO_TRAINERS = {
   falkner: {
-    id: 'falkner', name: 'Falkner', title: 'Iris Gym Leader', ai: 'smart', badgeSet: 'johto',
+    id: 'falkner', name: 'Aven', title: 'Iris Gym Leader', ai: 'smart', badgeSet: 'johto',
     intro: ['So the tower let you through. Good — my father kept this gym before me, and the birds keep it with me now. We do not hand the sky to anyone who has not climbed for it.'],
     lose: ['Beaten fairly, at altitude... My father would have liked that battle.', 'The Zephyr Badge is yours. The wind over Iris is yours to borrow now — spend it well.'],
     team: [
@@ -92,7 +92,7 @@ export const JOHTO_TRAINERS = {
     reward: 4600, badge: 'zephyrbadge',
   },
   bugsy: {
-    id: 'bugsy', name: 'Bugsy', title: 'Cinder Gym Leader', ai: 'smart', badgeSet: 'johto',
+    id: 'bugsy', name: 'Bex', title: 'Cinder Gym Leader', ai: 'smart', badgeSet: 'johto',
     intro: ['You found my gym under the trees — most people walk past it twice. I have studied Bug Kin my whole life, challenger. Every web in this room is load-bearing.'],
     lose: ['My webbing... cut clean through. You really did your homework out there.', 'The Hive Badge is yours. Take a breath of the forest on your way out — Cinder smells best after a good battle.'],
     team: [
@@ -103,8 +103,8 @@ export const JOHTO_TRAINERS = {
     reward: 5200, badge: 'hivebadge',
   },
   whitney: {
-    id: 'whitney', name: 'Whitney', title: 'Signal Gym Leader', ai: 'smart', badgeSet: 'johto',
-    intro: ['Hi! I am Whitney, and everybody in Signal already knows how this goes, so let us skip to the fun part. My MOOBELLE has been waiting ALL week for a real challenger.'],
+    id: 'whitney', name: 'Willa', title: 'Signal Gym Leader', ai: 'smart', badgeSet: 'johto',
+    intro: ['Hi! I am Willa, and everybody in Signal already knows how this goes, so let us skip to the fun part. My MOOBELLE has been waiting ALL week for a real challenger.'],
     lose: ['Waaah! You — you actually stopped her roll...', 'Sniff. Okay. Okay! The Plain Badge is yours. It is not plain at all, whatever people say. Neither is that battle you just fought.'],
     team: [
       { species: 'clefairy', level: 131 },
@@ -114,7 +114,7 @@ export const JOHTO_TRAINERS = {
     reward: 5800, badge: 'plainbadge',
   },
   morty: {
-    id: 'morty', name: 'Morty', title: 'Lantern Gym Leader', ai: 'smart', badgeSet: 'johto',
+    id: 'morty', name: 'Silas', title: 'Lantern Gym Leader', ai: 'smart', badgeSet: 'johto',
     intro: ['I train in the fog because the fog is honest — it hides nothing that matters and shows everything that does. You have the look of someone the tower has already spoken to. Let us see what it said.'],
     lose: ['The fog lifts, and there you stand. Clear as a bell.', 'The Fog Badge is yours. Whatever woke under this town, trainer — it will be looking for a heart like the one that just beat me.'],
     team: [
@@ -130,7 +130,7 @@ export const JOHTO_TRAINERS = {
   // the battle is fought through the battleAny event step, win or
   // lose, and the branch flag records what actually happened.
   silver_r30: {
-    id: 'silver_r30', name: 'Silver', title: 'Red-Haired Trainer', ai: 'basic',
+    id: 'silver_r30', name: 'Riven', title: 'Red-Haired Trainer', ai: 'basic',
     intro: ['...You saw nothing. That lab, that Kin — none of it is your business. Move, or I move you.'],
     lose: ['Tch. Lucky. Take your little victory — it changes nothing. Weak Kin, weak trainers... I will fix both.'],
     team: [
@@ -163,7 +163,7 @@ export const JOHTO_TRAINERS = {
   // The DOZPOTAM Well Rockets (plain trainers; the johto NPC handler
   // gates their battles on Kurt's plea and counts the clear).
   rocket_well_1: {
-    id: 'rocket_well_1', name: 'Rocket Grunt', title: 'Team Rocket', ai: 'basic',
+    id: 'rocket_well_1', name: 'Vanta Grunt', title: 'The Vanta Syndicate', ai: 'basic',
     intro: ['Hey! This well is a work site! DOZPOTAM tails, one snip at a time — the boss calls it harvesting. I call it overtime. Scram!'],
     lose: ['Ow — okay, okay! The tail business was the boss\'s idea anyway...'],
     team: [
@@ -173,7 +173,7 @@ export const JOHTO_TRAINERS = {
     reward: 700,
   },
   rocket_well_2: {
-    id: 'rocket_well_2', name: 'Rocket Grunt', title: 'Team Rocket', ai: 'basic',
+    id: 'rocket_well_2', name: 'Vanta Grunt', title: 'The Vanta Syndicate', ai: 'basic',
     intro: ['Another do-gooder down the ladder. You people are bad for business, you know that?'],
     lose: ['Business... ruined... The boss is going to hear about this. From someone else. I am leaving.'],
     team: [
@@ -183,7 +183,7 @@ export const JOHTO_TRAINERS = {
     reward: 750,
   },
   rocket_well_3: {
-    id: 'rocket_well_3', name: 'Rocket Senior', title: 'Team Rocket', ai: 'basic',
+    id: 'rocket_well_3', name: 'The Syndicate Senior', title: 'The Vanta Syndicate', ai: 'basic',
     intro: ['I run this well crew. The old man upstairs already learned what happens to heroes down here. Last lesson is free, kid.'],
     lose: ['Crew! Fall back — FALL BACK! The well is not worth this. Nothing down here is worth this.'],
     team: [
@@ -194,7 +194,7 @@ export const JOHTO_TRAINERS = {
   },
   // ================= Stage J4b: the east =================
   chuck: {
-    id: 'chuck', name: 'Chuck', title: 'Tidewall Gym Leader', ai: 'smart', badgeSet: 'johto',
+    id: 'chuck', name: 'Rourke', title: 'Tidewall Gym Leader', ai: 'smart', badgeSet: 'johto',
     intro: ['You crossed the whole sea to stand in my gym — good. Out here we train where the waves hit, because a wave does not care about your excuses. Neither do I. Show me a team the storm respects!'],
     lose: ['Hah! Knocked clean off my feet — and I have excellent feet!', 'The Storm Badge is yours. You hit like weather, trainer. Like weather.'],
     team: [
@@ -205,7 +205,7 @@ export const JOHTO_TRAINERS = {
     reward: 6600, badge: 'stormbadge',
   },
   jasmine: {
-    id: 'jasmine', name: 'Jasmine', title: 'Beacon Gym Leader', ai: 'smart', badgeSet: 'johto',
+    id: 'jasmine', name: 'Liora', title: 'Beacon Gym Leader', ai: 'smart', badgeSet: 'johto',
     intro: ['Lumi is well. The light is turning again, and the ships are safe — because of you. So now... now I can battle with my whole heart. My FERROWYRM has been patient. I have not.'],
     lose: ['Oh...! Beaten, truly beaten. Lumi\'s light and your battle — Beacon is bright today in every way there is.', 'The Mineral Badge is yours. Hold it up to the lighthouse sometime. It shines back.'],
     team: [
@@ -216,7 +216,7 @@ export const JOHTO_TRAINERS = {
     reward: 7000, badge: 'mineralbadge',
   },
   pryce: {
-    id: 'pryce', name: 'Pryce', title: 'Redwood Gym Leader', ai: 'smart', badgeSet: 'johto',
+    id: 'pryce', name: 'Albin', title: 'Redwood Gym Leader', ai: 'smart', badgeSet: 'johto',
     intro: ['Fifty winters I have trained in this town, and I will tell you the secret of every one of them: winter does not hate you. Winter is simply honest about what you are. Let us be honest, then.'],
     lose: ['...Warm. That is the word. Your team fights warm, the way my SHAGBOAR and I did when we were both young and foolish.', 'The Glacier Badge is yours. It will not melt. Neither, I think, will you.'],
     team: [
@@ -232,8 +232,8 @@ export const JOHTO_TRAINERS = {
   // representation (badges.johto push + badge_rising flag) when the
   // test is passed. A gym win here sets clair_beaten only.
   clair: {
-    id: 'clair', name: 'Clair', title: 'Cragmoor Gym Leader', ai: 'smart', badgeSet: 'johto',
-    intro: ['I am Clair. The clan has kept dragons since before your maps had names for these mountains, and I keep this gym the way we keep everything: completely. You may try to be the exception.'],
+    id: 'clair', name: 'Rhea', title: 'Cragmoor Gym Leader', ai: 'smart', badgeSet: 'johto',
+    intro: ['I am Rhea. The clan has kept dragons since before your maps had names for these mountains, and I keep this gym the way we keep everything: completely. You may try to be the exception.'],
     lose: ['...Beaten. In my own gym, by — very well. VERY well.', 'But understand this: you have won a battle here, not the badge. The badge is not mine to hand over in a gym. The Drake\'s Den decides — the elder, the shrine, the old questions. Go and be judged properly.'],
     team: [
       { species: 'dragonair', level: 172 },
@@ -258,7 +258,7 @@ export const JOHTO_TRAINERS = {
   // the road. Fought through battleAny like the first clash — the
   // branch flag records the honest outcome.
   silver_ilex: {
-    id: 'silver_ilex', name: 'Silver', title: 'Red-Haired Trainer', ai: 'basic',
+    id: 'silver_ilex', name: 'Riven', title: 'Red-Haired Trainer', ai: 'basic',
     intro: ['You again. Route 30 was interrupted, not finished. RIDGEJAW — we finish it here.'],
     lose: ['...Again?! No — no, this is data. You are data. I will be back with better.'],
     team: [
@@ -273,7 +273,7 @@ export const JOHTO_TRAINERS = {
   // around it is a real team. Still battleAny: he concedes the race
   // either way, in words (the handler event's closing lines).
   silver_route: {
-    id: 'silver_route', name: 'Silver', title: 'Red-Haired Trainer', ai: 'basic',
+    id: 'silver_route', name: 'Riven', title: 'Red-Haired Trainer', ai: 'basic',
     intro: ['Last road, trainer. Whatever is left between us, we settle it here — SNAPTYRANT and I have been waiting for a finish line.'],
     lose: ['...There it is. There is the gap. I have been measuring it wrong all this time.'],
     team: [
@@ -289,7 +289,7 @@ export const JOHTO_TRAINERS = {
   // maps6 stays untouched, so the gauntlet plays as a scripted
   // descent from Redwood's souvenir shop with Lance beside you).
   rocket_hideout_1: {
-    id: 'rocket_hideout_1', name: 'Rocket Grunt', title: 'Team Rocket', ai: 'basic',
+    id: 'rocket_hideout_1', name: 'Vanta Grunt', title: 'The Vanta Syndicate', ai: 'basic',
     intro: ['The shop is closed! The basement is DEFINITELY closed! Nobody ordered a hero!'],
     lose: ['Security! SECURITY! ...The security is also me. Run!'],
     team: [
@@ -299,7 +299,7 @@ export const JOHTO_TRAINERS = {
     reward: 800,
   },
   rocket_hideout_2: {
-    id: 'rocket_hideout_2', name: 'Rocket Grunt', title: 'Team Rocket', ai: 'basic',
+    id: 'rocket_hideout_2', name: 'Vanta Grunt', title: 'The Vanta Syndicate', ai: 'basic',
     intro: ['You hear that hum? That is the sound of every WRATHWYRM on the lake answering US. Keep walking and you join the choir — as the example!'],
     lose: ['The hum... it stopped for a second there. Did you feel it stop? That is bad. That is very bad.'],
     team: [
@@ -309,7 +309,7 @@ export const JOHTO_TRAINERS = {
     reward: 850,
   },
   rocket_hideout_exec: {
-    id: 'rocket_hideout_exec', name: 'Executive Vey', title: 'Team Rocket Executive', ai: 'smart',
+    id: 'rocket_hideout_exec', name: 'Executive Vey', title: 'The Vanta Syndicate Executive', ai: 'smart',
     intro: ['I am Vey. I sign the orders the grunts are afraid to read aloud. The lake, the signal, this little shop of horrors — my paperwork, all of it. And you are the audit.'],
     lose: ['Audit... accepted. The signal dies with this room, trainer. Tell the man with the WYRMARCH that Vey sends her regards — and her resignation.'],
     team: [
@@ -320,7 +320,7 @@ export const JOHTO_TRAINERS = {
   },
   // The Radio Tower takeover gauntlet (post-hideout, canon order).
   rocket_radio_1: {
-    id: 'rocket_radio_1', name: 'Rocket Grunt', title: 'Team Rocket', ai: 'basic',
+    id: 'rocket_radio_1', name: 'Vanta Grunt', title: 'The Vanta Syndicate', ai: 'basic',
     intro: ['This station is under new management! All broadcasts are belong — are property of — look, just hand over the badges, kid!'],
     lose: ['We interrupt this takeover for a message from our sponsors: pain.'],
     team: [
@@ -330,7 +330,7 @@ export const JOHTO_TRAINERS = {
     reward: 900,
   },
   rocket_underground: {
-    id: 'rocket_underground', name: 'Rocket Grunt', title: 'Team Rocket', ai: 'basic',
+    id: 'rocket_underground', name: 'Vanta Grunt', title: 'The Vanta Syndicate', ai: 'basic',
     intro: ['Nobody comes down here! The old man in the back is a — a storage item! Very valuable! Very stored!'],
     lose: ['Stored... defeated... The Director is going to be furious. The REAL one. Oh no.'],
     team: [
@@ -340,7 +340,7 @@ export const JOHTO_TRAINERS = {
     reward: 950,
   },
   rocket_radio_2: {
-    id: 'rocket_radio_2', name: 'Rocket Senior', title: 'Team Rocket', ai: 'basic',
+    id: 'rocket_radio_2', name: 'The Syndicate Senior', title: 'The Vanta Syndicate', ai: 'basic',
     intro: ['The Card Key? Then the old man talked. They always talk. The tower is still ours above this floor, trainer — come and take the stairs.'],
     lose: ['Stairs... yours. The Director upstairs is not going to like this. Either of them.'],
     team: [
@@ -352,7 +352,7 @@ export const JOHTO_TRAINERS = {
   rocket_director_fake: {
     id: 'rocket_director_fake', name: 'Director?', title: 'Radio Tower Director', ai: 'smart',
     intro: ['Ah, our rescuer! I am the Director, as you can plainly — the suit, trainer. Judge the suit. Everything is under control, the Rockets have fled, and you may go home with our gratit— why are you still standing there.'],
-    lose: ['The suit... was expensive... Petrel — no. VEY. Vey said the suit would work. Nobody questions a suit, she said...'],
+    lose: ['The suit... was expensive... Renner — no. VEY. Vey said the suit would work. Nobody questions a suit, she said...'],
     team: [
       { species: 'persian', level: 172 },
       { species: 'hypno', level: 173 },
@@ -375,7 +375,7 @@ export const JOHTO_TRAINERS = {
   conference_q2: {
     id: 'conference_q2', name: 'Cato', title: 'Conference Trainer', ai: 'smart',
     intro: ['Second qualifier. They are saying your name in the stands already — did you know? I intend to make them say mine instead.'],
-    lose: ['Say it, then. Say yours. You earned the volume. The Gary match is next — I will be in the front row, taking notes and taking it personally.'],
+    lose: ['Say it, then. Say yours. You earned the volume. The Vale match is next — I will be in the front row, taking notes and taking it personally.'],
     team: [
       { species: 'magmar', level: 183 },
       { species: 'electabuzz', level: 185 },
@@ -392,7 +392,7 @@ export const JOHTO_TRAINERS = {
   // you shared — and ABYSSAR, his starter, anchoring it all, the
   // INFERNOX-vs-ABYSSAR echo the whole rivalry has pointed at.
   gary_johto: {
-    id: 'gary_johto', name: 'Gary', title: 'Lastlight Conference Trainer', ai: 'smart',
+    id: 'gary_johto', name: 'Vale', title: 'Lastlight Conference Trainer', ai: 'smart',
     intro: ['Well. Look who the bracket dragged in.', 'Arden champion, Amber winner — and still the second-most interesting trainer in this stadium. I have waited two regions for this draw, {player}. Do not make me regret the wait.'],
     lose: ['...Ha. Hahaha. Yeah. Yeah, that is the one I wanted.', 'Two regions, and it still comes down to us at the end of the bracket. Take the win. Take it all the way to Harrison — and do not you dare lose to him after beating me.'],
     team: [
@@ -420,7 +420,7 @@ export const JOHTO_TRAINERS = {
   // lines on a win, and johto_complete set either way.
   harrison: {
     id: 'harrison', name: 'Harrison', title: 'Lastlight Conference Trainer', ai: 'smart',
-    intro: ['Harrison, from Rootlet Town — a long way from home, same as you. I watched your Gary match from the tunnel. Whatever happens here, trainer, this crowd is getting a final worthy of a semi.'],
+    intro: ['Harrison, from Rootlet Town — a long way from home, same as you. I watched your Vale match from the tunnel. Whatever happens here, trainer, this crowd is getting a final worthy of a semi.'],
     lose: ['There it is! There is the battle I crossed an ocean of brackets for!'],
     team: [
       { species: 'sneasel', level: 192 },
@@ -436,7 +436,7 @@ export const JOHTO_TRAINERS = {
   // The canon team at the band ceiling: VOLTIK 200, the rest
   // 195-198. Rematchable: talk again, battle again.
   red: {
-    id: 'red', name: 'Red', title: 'Trainer', ai: 'smart',
+    id: 'red', name: 'Ross', title: 'Trainer', ai: 'smart',
     intro: ['...'],
     lose: ['...!'],
     team: [
@@ -460,10 +460,10 @@ export const JOHTO_TRAINERS = {
 export const JOHTO_EVENTS = {
   // -- Galefield: the arrival (first elm-lab entry) ---------------------
   ev_johto_arrival: [
-    { say: ['Elm\'s lab is not the calm place the ferry captain described. Paper covers the floor like leaves. A glass case near the back stands open and empty, and two aides are arguing in the hushed voices people use at the scene of a small disaster.'], who: 'NARRATOR' },
-    { say: ['Oh — a trainer! From the boat, by your pack. I am Professor Elm. Forgive the lab. Forgive everything, actually — it has been that kind of morning.', 'First, the duty: your Yamato journey, registered. There. Whatever else today has done, it has not stopped that.'], who: 'PROF. ELM' },
-    { say: ['Now the rest. This case held three young Kin this morning, waiting for new trainers. It holds two. Sometime before dawn, someone came through that window, helped themselves to the third — a CROCLET, already strong for its age — and was gone over the fence before the alarm finished waking up.', 'The guard on the dock saw red hair. That is all anyone saw. Red hair, and no fear at all.'], who: 'PROF. ELM' },
-    { say: ['I am not asking you to chase a thief across Yamato — you have badges to earn and a whole region to see. I am asking smaller: keep your eyes open. If you cross paths with whoever did this, come back and tell me what you found. A lab keeps records. Today, mine has a page missing.', 'Iris City is your road: north through Blossom, then Route 30. Professor Hawthorn speaks well of you, trainer. So does Hawthorn\'s friend in Cinder — a man named Kurt, who works Capture Orbs by hand. When you reach him... you are carrying something he should see. But that is a later page. Go safely.'], who: 'PROF. ELM' },
+    { say: ['Linden\'s lab is not the calm place the ferry captain described. Paper covers the floor like leaves. A glass case near the back stands open and empty, and two aides are arguing in the hushed voices people use at the scene of a small disaster.'], who: 'NARRATOR' },
+    { say: ['Oh — a trainer! From the boat, by your pack. I am Professor Linden. Forgive the lab. Forgive everything, actually — it has been that kind of morning.', 'First, the duty: your Yamato journey, registered. There. Whatever else today has done, it has not stopped that.'], who: 'PROF. LINDEN' },
+    { say: ['Now the rest. This case held three young Kin this morning, waiting for new trainers. It holds two. Sometime before dawn, someone came through that window, helped themselves to the third — a CROCLET, already strong for its age — and was gone over the fence before the alarm finished waking up.', 'The guard on the dock saw red hair. That is all anyone saw. Red hair, and no fear at all.'], who: 'PROF. LINDEN' },
+    { say: ['I am not asking you to chase a thief across Yamato — you have badges to earn and a whole region to see. I am asking smaller: keep your eyes open. If you cross paths with whoever did this, come back and tell me what you found. A lab keeps records. Today, mine has a page missing.', 'Iris City is your road: north through Blossom, then Route 30. Professor Hawthorn speaks well of you, trainer. So does Hawthorn\'s friend in Cinder — a man named Hendrik, who works Capture Orbs by hand. When you reach him... you are carrying something he should see. But that is a later page. Go safely.'], who: 'PROF. LINDEN' },
     { flag: 'johto_arrival' },
     { flag: 'elm_registered' },
     { toast: 'Your Yamato journey is registered!' },
@@ -472,10 +472,10 @@ export const JOHTO_EVENTS = {
   // -- Route 30: the first Silver clash (battleAny: win or lose) -------
   ev_johto_silver_r30: [
     { say: ['A shape cuts across the Route 30 grass — too fast for a hiker, too careless for a bird. Red hair. A carrier under one arm, the kind labs use. And at his heel, a RIDGEJAW whose every glance checks with him first, the way new partners do.'], who: 'NARRATOR' },
-    { say: ['...You. You were at the lab. I saw your boat from the hill.', 'Do not bother denying it. And do not bother with the speech either — I know what I took, and I know why. That lab keeps Kin in glass cases waiting for permission to live. Mine is LIVING now.'], who: 'SILVER' },
-    { say: ['You want to judge me, judge me the way trainers do. Come on, then. RIDGEJAW — show them what a head start looks like.'], who: 'SILVER' },
+    { say: ['...You. You were at the lab. I saw your boat from the hill.', 'Do not bother denying it. And do not bother with the speech either — I know what I took, and I know why. That lab keeps Kin in glass cases waiting for permission to live. Mine is LIVING now.'], who: 'RIVEN' },
+    { say: ['You want to judge me, judge me the way trainers do. Come on, then. RIDGEJAW — show them what a head start looks like.'], who: 'RIVEN' },
     { battleAny: { trainer: 'silver_r30', winFlag: 'silver_r30_won', loseFlag: 'silver_r30_lost' } },
-    { say: ['Whatever the battle decided, it decides nothing for him. He recalls his Kin mid-motion, already turning away — over the fence line and into the trees before the grass has finished swaying, gone like he was never standing there at all.', 'On the path where he stood: nothing. No card, no name, no clue. Only Elm\'s missing page, still missing. Elm will want to hear about this.'], who: 'NARRATOR' },
+    { say: ['Whatever the battle decided, it decides nothing for him. He recalls his Kin mid-motion, already turning away — over the fence line and into the trees before the grass has finished swaying, gone like he was never standing there at all.', 'On the path where he stood: nothing. No card, no name, no clue. Only Linden\'s missing page, still missing. Linden will want to hear about this.'], who: 'NARRATOR' },
     { flag: 'silver_r30_done' },
     { toast: 'The red-haired thief got away.' },
   ],
@@ -483,9 +483,9 @@ export const JOHTO_EVENTS = {
   // -- DOZPOTAM Well: Kurt's plea (first well entry) -------------------
   ev_johto_well: [
     { say: ['The well smells of wet stone and something worse — a sweet, wrong smell, like a market stall in a cave. Halfway down the ladder, a voice you know from Cinder\'s doorsteps calls up, tight with pain.'], who: 'NARRATOR' },
-    { say: ['Careful on that rung — and careful below it, too. Kurt. Yes, THAT Kurt, sitting in the mud like a dropped tool. I came down to have words with the tail-cutters and my back had words with ME. Fair trade, the old traitor.', 'Listen, trainer. Three of them are still down there, and the DOZPOTAM are too gentle to run and too slow to hide. I cannot climb, I cannot fight, and I am too proud to crawl past them. So the well is yours, if you will take it. Clear them out. Every last one. For the DOZPOTAM — and so an old man\'s pride survives the afternoon.'], who: 'KURT' },
+    { say: ['Careful on that rung — and careful below it, too. Hendrik. Yes, THAT Hendrik, sitting in the mud like a dropped tool. I came down to have words with the tail-cutters and my back had words with ME. Fair trade, the old traitor.', 'Listen, trainer. Three of them are still down there, and the DOZPOTAM are too gentle to run and too slow to hide. I cannot climb, I cannot fight, and I am too proud to crawl past them. So the well is yours, if you will take it. Clear them out. Every last one. For the DOZPOTAM — and so an old man\'s pride survives the afternoon.'], who: 'HENDRIK' },
     { flag: 'kurt_well_plea' },
-    { toast: 'Kurt is counting on you.' },
+    { toast: 'Hendrik is counting on you.' },
   ],
 
   // -- Ashen Tower basement: the awakening (first B1F entry) ----------
@@ -495,7 +495,7 @@ export const JOHTO_EVENTS = {
   ev_johto_burned: [
     { say: ['The basement of the Ashen Tower smells of rain that fell a hundred and fifty years ago. Three plinths stand in a row at the chamber\'s heart, worn smooth by centuries of reverence — and all three are empty. Whatever slept here as statues is not sleeping here anymore.'], who: 'NARRATOR' },
     { say: ['A sound. Not a footstep — a held breath, released. At the far edge of the lamplight, where the broken stairs fall away: a shape. Tall. Blue as deep water under ice, with a crest like a wave deciding. It is watching you the way weather watches a coastline.'], who: 'NARRATOR' },
-    { say: ['You do not reach for a ball. Some meetings are not battles, and your hand knows it before your head does. The shape holds your gaze for one long, measuring moment — then it is simply gone, and the basement is a basement again, and your heart is very loud in it.', 'Three plinths. Three absences. Lantern is going to want to hear about this — and Morty most of all.'], who: 'NARRATOR' },
+    { say: ['You do not reach for a ball. Some meetings are not battles, and your hand knows it before your head does. The shape holds your gaze for one long, measuring moment — then it is simply gone, and the basement is a basement again, and your heart is very loud in it.', 'Three plinths. Three absences. Lantern is going to want to hear about this — and Silas most of all.'], who: 'NARRATOR' },
     { arc: 'arc_raikou', stage: 'discovered' },
     { arc: 'arc_entei', stage: 'discovered' },
     { arc: 'arc_suicune', stage: 'discovered' },
@@ -512,19 +512,19 @@ export const JOHTO_EVENTS = {
   // battle itself is the shared battleAny (win or lose advances).
   ev_johto_silver_ilex_won: [
     { say: ['The Ilex trees close overhead like a held breath. Then — a laugh, short and disbelieving, from the Cinder-side path. Red hair. A GLOOMBITE riding the thermals between the trunks. And a RIDGEJAW, bigger than you remember, keeping pace like a shadow with teeth.'], who: 'NARRATOR' },
-    { say: ['Route 30. I have replayed it every night since. You got LUCKY — the grass, the light, one lucky bounce. Luck is not a strategy, trainer. It runs out. Watch it run out.'], who: 'SILVER' },
+    { say: ['Route 30. I have replayed it every night since. You got LUCKY — the grass, the light, one lucky bounce. Luck is not a strategy, trainer. It runs out. Watch it run out.'], who: 'RIVEN' },
     { battleAny: { trainer: 'silver_ilex', winFlag: 'silver_ilex_won', loseFlag: 'silver_ilex_lost' } },
     { say: ['He is gone into the trees before the echo is — but slower than last time, and looking back once, the way a person looks at a measuring mark they did not expect to move.'], who: 'NARRATOR' },
     { flag: 'silver_ilex_done' },
-    { toast: 'Silver is measuring himself against you now.' },
+    { toast: 'Riven is measuring himself against you now.' },
   ],
   ev_johto_silver_ilex_lost: [
     { say: ['The Ilex trees close overhead like a held breath. Then — footsteps, unhurried, from the Cinder-side path. Red hair. A GLOOMBITE in the branches. And a RIDGEJAW, bigger than you remember, wearing Route 30 like a medal.'], who: 'NARRATOR' },
-    { say: ['You. I wondered when the road would return my practice partner. Route 30 was not a fluke, and this forest is about to prove it twice. RIDGEJAW — encore.'], who: 'SILVER' },
+    { say: ['You. I wondered when the road would return my practice partner. Route 30 was not a fluke, and this forest is about to prove it twice. RIDGEJAW — encore.'], who: 'RIVEN' },
     { battleAny: { trainer: 'silver_ilex', winFlag: 'silver_ilex_won', loseFlag: 'silver_ilex_lost' } },
     { say: ['He is gone into the trees before the echo is — but slower than you would expect from a boy in a hurry, and looking back once, at the space where the battle happened, like it surprised him too.'], who: 'NARRATOR' },
     { flag: 'silver_ilex_done' },
-    { toast: 'Silver is measuring himself against you now.' },
+    { toast: 'Riven is measuring himself against you now.' },
   ],
 
   // -- The Red WRATHWYRM (Wrathmere Lake entry): a one-time CATCHABLE
@@ -540,10 +540,10 @@ export const JOHTO_EVENTS = {
     { say: ['It sees you. Whatever is screaming inside its head, for one moment you are louder. The Red WRATHWYRM comes at the shore like weather.'], who: 'NARRATOR' },
     { wildBattle: { species: 'gyarados', level: 162 } },
     { say: ['Quiet. Not peace — exhaustion, the lake settling back into its banks, the gulls daring their way down again one at a time. And over it, a new sound: wings. Very large wings, folding.'], who: 'NARRATOR' },
-    { say: ['You felt it too, then. Not the rage — the cause. I am Lance. I train dragons, and I have been following a signal across Yamato that should not exist: a radio wave, tuned like a hand on a shoulder, that Kin cannot refuse. It is loudest here. It drove that WRATHWYRM out of the deep water and painted it with its own fury.', 'Signals have sources, trainer. This one is close — buried under a town that smells of cedar and souvenirs. Redwood. Meet me there. Bring that look with you — the one you are wearing now. We are going to need it.'], who: 'LANCE' },
+    { say: ['You felt it too, then. Not the rage — the cause. I am Darian. I train dragons, and I have been following a signal across Yamato that should not exist: a radio wave, tuned like a hand on a shoulder, that Kin cannot refuse. It is loudest here. It drove that WRATHWYRM out of the deep water and painted it with its own fury.', 'Signals have sources, trainer. This one is close — buried under a town that smells of cedar and souvenirs. Redwood. Meet me there. Bring that look with you — the one you are wearing now. We are going to need it.'], who: 'DARIAN' },
     { flag: 'red_gyarados_done' },
     { flag: 'lance_met' },
-    { toast: 'Lance is waiting in Redwood Town.' },
+    { toast: 'Darian is waiting in Redwood Town.' },
   ],
 
   // -- The Hideout (the descent, run from Lance in Redwood):
@@ -555,15 +555,15 @@ export const JOHTO_EVENTS = {
   // dialogue between beats, not as a mechanic.
   ev_johto_hideout: [
     { say: ['Behind the souvenir shop\'s counter, under a trapdoor stacked with unsold keychains: stairs. The air coming up is warm, electric, and humming at a pitch that makes your teeth ache — the lake\'s scream, at its source.'], who: 'NARRATOR' },
-    { say: ['WYRMARCH walks point with me — you watch our backs, trainer, and I will watch yours. Whatever they are powering down here, it ends tonight. On three. One — two —'], who: 'LANCE' },
+    { say: ['WYRMARCH walks point with me — you watch our backs, trainer, and I will watch yours. Whatever they are powering down here, it ends tonight. On three. One — two —'], who: 'DARIAN' },
     { battle: 'rocket_hideout_1' },
-    { say: ['The first room folds. Lance does not even slow down — somewhere to your left a WYRMARCH\'s wingbeat puts out a row of lights like candles, and the humming climbs a note. The core is close. The core is AWAKE.'], who: 'NARRATOR' },
+    { say: ['The first room folds. Darian does not even slow down — somewhere to your left a WYRMARCH\'s wingbeat puts out a row of lights like candles, and the humming climbs a note. The core is close. The core is AWAKE.'], who: 'NARRATOR' },
     { battle: 'rocket_hideout_2' },
-    { say: ['There. The power core: a ring of MEGACELL, wired into the transmitter like beads on a wire, pouring themselves into the signal. They cannot be caught and they cannot be reasoned with — they can only be emptied. Gently is not available. Go.'], who: 'LANCE' },
+    { say: ['There. The power core: a ring of MEGACELL, wired into the transmitter like beads on a wire, pouring themselves into the signal. They cannot be caught and they cannot be reasoned with — they can only be emptied. Gently is not available. Go.'], who: 'DARIAN' },
     { wildBattle: { species: 'electrode', level: 166, uncatchable: true } },
     { say: ['The core cracks open like an egg of light. The hum stutters — drops — dies, floor by floor, and in the sudden quiet you can hear the lake, miles north, going calm. One door remains, and behind it, the hand that signed the orders.'], who: 'NARRATOR' },
     { battle: 'rocket_hideout_exec' },
-    { say: ['It is over. The transmitter is dark, the signal is dead, and Team Rocket\'s little empire under the souvenir shop is a basement again — wet concrete and abandoned paperwork.', 'You fight the way the lake needed someone to fight, trainer. Remember that. Now — Redwood has a gym, and an old man in it who has been waiting out an occupation. Pryce is free to take challengers again. Tell him Lance sent you. Tell him the lake is quiet.'], who: 'LANCE' },
+    { say: ['It is over. The transmitter is dark, the signal is dead, and the Vanta Syndicate\'s little empire under the souvenir shop is a basement again — wet concrete and abandoned paperwork.', 'You fight the way the lake needed someone to fight, trainer. Remember that. Now — Redwood has a gym, and an old man in it who has been waiting out an occupation. Albin is free to take challengers again. Tell him Darian sent you. Tell him the lake is quiet.'], who: 'DARIAN' },
     { flag: 'johto_hideout_cleared' },
     { toast: 'The Hideout is cleared!' },
   ],
@@ -571,11 +571,11 @@ export const JOHTO_EVENTS = {
   // -- The Radio Tower takeover (staged AFTER the hideout) ---------
   ev_johto_radio_takeover: [
     { say: ['The Radio Tower\'s lobby is too quiet, and every speaker in it is playing the same thing: a cheerful jingle, cut off mid-note, and a voice you do not know, reading the same sentence it was reading when you walked the plaza an hour ago. "— we are back. Tell your Kin to listen closely. We are back —"'], who: 'NARRATOR' },
-    { say: ['Team Rocket has taken the tower. With the hideout gone they have gone loud instead — a broadcast to every Kin in Yamato, calling them to a new Rocket age. The staff are locked out, the stairs are guarded, and somewhere above you a fake cheerful voice is reading your region its future. Not today.'], who: 'NARRATOR' },
+    { say: ['The Vanta Syndicate has taken the tower. With the hideout gone they have gone loud instead — a broadcast to every Kin in Yamato, calling them to a new Syndicate age. The staff are locked out, the stairs are guarded, and somewhere above you a fake cheerful voice is reading your region its future. Not today.'], who: 'NARRATOR' },
     { battle: 'rocket_radio_1' },
     { flag: 'radio_takeover_active' },
     { flag: 'radio_f1_cleared' },
-    { toast: 'Team Rocket holds the upper floors!' },
+    { toast: 'The Vanta Syndicate holds the upper floors!' },
   ],
   ev_johto_radio_locked: [
     { say: ['The stair door to the third floor is locked — a card reader, blinking red, patient as a held breath. From below, the tower\'s own speakers carry a waltz. From above, boots.'], who: 'NARRATOR' },
@@ -584,9 +584,9 @@ export const JOHTO_EVENTS = {
     { toast: 'The real Director is in the Underground!' },
   ],
   ev_johto_director: [
-    { say: ['The Underground\'s south passage smells of damp wool and old bargains. At its far end, behind a stall\'s worth of crates: a Rocket guard, a rope, and a very dignified man in a broadcasting blazer, sitting on a box with the posture of a king on a very small throne.'], who: 'NARRATOR' },
+    { say: ['The Underground\'s south passage smells of damp wool and old bargains. At its far end, behind a stall\'s worth of crates: a Vanta guard, a rope, and a very dignified man in a broadcasting blazer, sitting on a box with the posture of a king on a very small throne.'], who: 'NARRATOR' },
     { battle: 'rocket_underground' },
-    { say: ['Untied, brushed down, and furious in the quiet way of men who sign licences: "Director Ainsley Hale, Signal Radio. You have my thanks and my outrage, trainer, in equal measure. They took my tower, my microphone, and — the insult I cannot forgive — my SUIT is being worn by a Rocket upstairs, badly."', '"Take this. My Card Key. It opens the tower\'s locked floor — the stairs above the second. Go and take my building back. And trainer — when you reach the top floor, the man in my suit will try to thank you for rescuing him. He rehearsed it. I can hear him through the vents."'], who: 'DIRECTOR HALE' },
+    { say: ['Untied, brushed down, and furious in the quiet way of men who sign licences: "Director Ainsley Hale, Signal Radio. You have my thanks and my outrage, trainer, in equal measure. They took my tower, my microphone, and — the insult I cannot forgive — my SUIT is being worn by a Vanta upstairs, badly."', '"Take this. My Card Key. It opens the tower\'s locked floor — the stairs above the second. Go and take my building back. And trainer — when you reach the top floor, the man in my suit will try to thank you for rescuing him. He rehearsed it. I can hear him through the vents."'], who: 'DIRECTOR HALE' },
     { give: { items: { cardkey: 1 }, text: 'Got the Card Key!' } },
     { flag: 'radio_director_rescued' },
     { toast: 'The Card Key opens the tower\'s locked floor.' },
@@ -600,9 +600,9 @@ export const JOHTO_EVENTS = {
   ev_johto_radio_top: [
     { say: ['The Director\'s office. A wide desk, a warmer suit than the real Director has ever owned, and behind it a man arranging his face into gratitude like a bouquet. On the desk, the master microphone. On his face, when he sees your badge case: the exact moment the rehearsal fails.'], who: 'NARRATOR' },
     { battle: 'rocket_director_fake' },
-    { say: ['It ends the way takeovers end when one trainer climbs the whole building: quickly, and then all at once. The fake Director is hauled down the stairs by his own former guards, the master microphone is cut, and Director Hale\'s real voice — crackling up from the plaza speakers, borrowed from a handheld set — says the only honest broadcast of the day:', '"— to every trainer and Kin in Yamato: the tower is ours again. Theirs is over. Team Rocket has left the air."', 'Below, Signal is cheering at loudspeakers. Rocket is gone from Yamato — the well, the lake, the tower: finished. The road east is calling, trainer. Cragmoor. Then the Conference.'], who: 'NARRATOR' },
+    { say: ['It ends the way takeovers end when one trainer climbs the whole building: quickly, and then all at once. The fake Director is hauled down the stairs by his own former guards, the master microphone is cut, and Director Hale\'s real voice — crackling up from the plaza speakers, borrowed from a handheld set — says the only honest broadcast of the day:', '"— to every trainer and Kin in Yamato: the tower is ours again. Theirs is over. the Vanta Syndicate has left the air."', 'Below, Signal is cheering at loudspeakers. The Syndicate is gone from Yamato — the well, the lake, the tower: finished. The road east is calling, trainer. Cragmoor. Then the Conference.'], who: 'NARRATOR' },
     { flag: 'radio_tower_cleared' },
-    { toast: 'Team Rocket has left Yamato!' },
+    { toast: 'The Vanta Syndicate has left Yamato!' },
   ],
 
   // -- Lastlight Pass: the badge gate. Fired by sysLoadMap when a
@@ -612,7 +612,7 @@ export const JOHTO_EVENTS = {
   // the eighth badge lands).
   ev_johto_silver_gate: [
     { say: ['At the mouth of Lastlight Pass, a League official in a wind-cut coat steps into the road with one hand raised — not unkindly. Just finally.'], who: 'NARRATOR' },
-    { say: ['"Conference road, trainer, and the Conference keeps its one rule: eight Yamato badges, earned in Yamato, no exceptions and no shortcuts — I have turned back gym leaders\' own children at this post, so do not take it personally."', '"Cragmoor is behind you, and Clair and the Drake\'s Den are where the last of it waits for most. When your case holds eight, this road will be the proudest walk of your life. I will be here. I am always here."'], who: 'PASS OFFICER HALD' },
+    { say: ['"Conference road, trainer, and the Conference keeps its one rule: eight Yamato badges, earned in Yamato, no exceptions and no shortcuts — I have turned back gym leaders\' own children at this post, so do not take it personally."', '"Cragmoor is behind you, and Rhea and the Drake\'s Den are where the last of it waits for most. When your case holds eight, this road will be the proudest walk of your life. I will be here. I am always here."'], who: 'PASS OFFICER HALD' },
     { warp: { map: 'blackthorn', x: 28, y: 8 } },
   ],
 
@@ -621,9 +621,9 @@ export const JOHTO_EVENTS = {
   // land: he acknowledges the gap either way.
   ev_johto_silver_route: [
     { say: ['Halfway up Lastlight Pass, where the wind has opinions and the road narrows to single file: red hair, a DREADBITE on the crosswind, and a SNAPTYRANT standing in the road like a toll. He has been waiting. By the look of the camp ashes behind him, he has been waiting a while.'], who: 'NARRATOR' },
-    { say: ['I stole a Kin from a glass case, and I told myself the case was the crime. Then a trainer from a boat kept showing up — Route 30, the forest — and the story kept not going the way I wrote it.', 'One more measurement, {player}. The real one. SNAPTYRANT: FULL strength. No excuses left in either of us.'], who: 'SILVER' },
+    { say: ['I stole a Kin from a glass case, and I told myself the case was the crime. Then a trainer from a boat kept showing up — Route 30, the forest — and the story kept not going the way I wrote it.', 'One more measurement, {player}. The real one. SNAPTYRANT: FULL strength. No excuses left in either of us.'], who: 'RIVEN' },
     { battleAny: { trainer: 'silver_route', winFlag: 'silver_route_won', loseFlag: 'silver_route_lost' } },
-    { say: ['Whatever the battle decided, he stands in the settling dust doing the arithmetic he has avoided all arc — and then, astonishingly, he laughs. Once. Like it hurts and helps at the same time.', '"There is the gap. Not luck. Not the road. You trained yours like partners and I trained mine like weapons, and the weapons kept... looking at me. Waiting to be asked, not aimed." He looks at SNAPTYRANT. SNAPTYRANT looks back, patient as a tide. "...We are going back to Cinder. There is a man there who makes balls by hand, and a lab with a page missing. I do not know how you return a beginning. I am going to learn."', 'He steps out of the road. The whole road, all of it, held his breath with him — Lastlight Pass is yours, trainer. The Conference is at the top of it. Go and be measured by better judges than me.'], who: 'SILVER' },
+    { say: ['Whatever the battle decided, he stands in the settling dust doing the arithmetic he has avoided all arc — and then, astonishingly, he laughs. Once. Like it hurts and helps at the same time.', '"There is the gap. Not luck. Not the road. You trained yours like partners and I trained mine like weapons, and the weapons kept... looking at me. Waiting to be asked, not aimed." He looks at SNAPTYRANT. SNAPTYRANT looks back, patient as a tide. "...We are going back to Cinder. There is a man there who makes balls by hand, and a lab with a page missing. I do not know how you return a beginning. I am going to learn."', 'He steps out of the road. The whole road, all of it, held his breath with him — Lastlight Pass is yours, trainer. The Conference is at the top of it. Go and be measured by better judges than me.'], who: 'RIVEN' },
     { flag: 'silver_route_done' },
     { toast: 'The road to the Conference is clear.' },
   ],
@@ -674,14 +674,14 @@ export const JOHTO_EVENTS = {
   // faced-tile interact in overworld-systems, not a map-entry gate —
   // the shrine is a place you go to, not a room you pass through).
   ev_johto_celebi: [
-    { say: ['The GS Orb comes out of your bag already warm. At the shrine\'s foot it clicks — a small, definite sound, like a latch being asked a question and answering yes — and the two halves open on nothing at all, and the nothing is looking at you.', 'Then the forest breathes in. For one held moment Ilex is young: saplings where the old oaks stand, light the colour of first mornings, leaf-mould unstepped-on by any boot that has ever existed. A small green shape hangs in that younger light, wings ticking like a clock that counts in seasons, and it is laughing — delighted, entirely unafraid — and the laugh says: you took the long way round, and the long way round was the way.'], who: 'NARRATOR' },
+    { say: ['The Sealed Orb comes out of your bag already warm. At the shrine\'s foot it clicks — a small, definite sound, like a latch being asked a question and answering yes — and the two halves open on nothing at all, and the nothing is looking at you.', 'Then the forest breathes in. For one held moment Ilex is young: saplings where the old oaks stand, light the colour of first mornings, leaf-mould unstepped-on by any boot that has ever existed. A small green shape hangs in that younger light, wings ticking like a clock that counts in seasons, and it is laughing — delighted, entirely unafraid — and the laugh says: you took the long way round, and the long way round was the way.'], who: 'NARRATOR' },
     { flag: 'celebi_shrine_opened' },
     { arc: 'arc_celebi', stage: 'active' },
     { wildBattleCatch: { species: 'celebi', level: 170, legendary: true } },
     { arc: 'arc_celebi', stage: 'complete' },
     { flag: 'arc_celebi_done' },
-    { say: ['When it is over the forest is old again, and kind about it. The GS Orb hangs open and empty in your hand — an ordinary impossible object, its one errand run. You keep it. Some souvenirs are proof; this one is a receipt.'], who: 'NARRATOR' },
-    { toast: 'CHRONOFAE is yours. The empty GS Orb stays in your bag — a memento.' },
+    { say: ['When it is over the forest is old again, and kind about it. The Sealed Orb hangs open and empty in your hand — an ordinary impossible object, its one errand run. You keep it. Some souvenirs are proof; this one is a receipt.'], who: 'NARRATOR' },
+    { toast: 'CHRONOFAE is yours. The empty Sealed Orb stays in your bag — a memento.' },
   ],
   // IRISAVIS: the Chime Tower summit, with the Clear Bell in hand.
   ev_johto_hooh: [
@@ -709,15 +709,15 @@ export const JOHTO_TALES = {
   tale_newbark: {
     id: 'tale_newbark', town: 'Galefield Town', giver: 'ELDER MARA', title: 'A Letter for the Lab', johtoTale: true,
     stages: [
-      'Carry Elder Mara\'s letter to Aide Lin in Elm\'s Lab',
+      'Carry Elder Mara\'s letter to Aide Lin in Linden\'s Lab',
       'Bring Aide Lin\'s reply back to Elder Mara in Galefield Town',
     ],
     reward: { items: { superpotion: 2 } }, rewardText: '2 Super Potions',
     bondNpc: 'mara', bondDelta: 1,
-    revelation: 'Mara\'s letter is the forty-first she has written to that lab — she wrote the first to Elm\'s grandfather, asking whether a girl who watched the wind could ever be a scientist. The lab still keeps every one.',
+    revelation: 'Mara\'s letter is the forty-first she has written to that lab — she wrote the first to Linden\'s grandfather, asking whether a girl who watched the wind could ever be a scientist. The lab still keeps every one.',
     offerLines: ['Forty years I have watched trainers leave this town, and the lab still answers my letters faster than my own grandchildren.', 'Carry this one to Aide Lin for me? It is about the wind over the dock — it changed this spring, and changed winds mean changed journeys. The Quest Log has it. Two Super Potions for your legs, trainer.'],
     stageLines: ['A letter from Mara? Oh — oh, this is about the spring wind. She noticed before our instruments did. Again.', 'Here, my reply, sealed properly. Tell her the lab says thank you — and that she was right. She is always right. It is extremely annoying and we love her for it.'],
-    finishLines: ['Lin\'s seal, Lin\'s hand. Forty-one letters, trainer, and every one answered.', 'I wrote the first to Elm\'s grandfather, when I was a girl who watched the wind and wondered if watching could be a science. The lab keeps them all, they tell me.', 'Two Super Potions, as promised. Mind the wind out there — it has started something new this year.'],
+    finishLines: ['Lin\'s seal, Lin\'s hand. Forty-one letters, trainer, and every one answered.', 'I wrote the first to Linden\'s grandfather, when I was a girl who watched the wind and wondered if watching could be a science. The lab keeps them all, they tell me.', 'Two Super Potions, as promised. Mind the wind out there — it has started something new this year.'],
   },
   tale_cherrygrove: {
     id: 'tale_cherrygrove', town: 'Blossom City', giver: 'GUIDE GENT', title: 'The Old Man and the Tide', johtoTale: true,
@@ -755,7 +755,7 @@ export const JOHTO_TALES = {
     bondNpc: 'maizie', bondDelta: 1,
     revelation: 'The wellkeeper\'s grandfather swore the great drought broke the morning a whole town simply stood in the dry well and sang — the DOZPOTAM answered first, and the rain answered them.',
     offerLines: ['Everyone says the DOZPOTAM brought the rain back to Cinder, once, in the big drought. Everyone! But nobody tells it PROPERLY anymore.', 'Wellkeeper Jonas tells it properly. Go and hear it from him, then tell it back to me — a Hyper Potion for the full story, no skipping the good parts.'],
-    stageLines: ['The rain story? You want it properly, then. Sit on the well rim — no, not IN, sit ON.', 'My grandfather was there. A year with no rain, the well dry as a drum, and the whole town gone quiet with thirst. Then old Yuna — Kurt\'s mother — climbed down and started SINGING into the empty well, and one by one the town joined her, and the DOZPOTAM lifted their heads and sang back. By morning: rain. A week of it. Tell Maizie all of it — especially the singing.'],
+    stageLines: ['The rain story? You want it properly, then. Sit on the well rim — no, not IN, sit ON.', 'My grandfather was there. A year with no rain, the well dry as a drum, and the whole town gone quiet with thirst. Then old Yuna — Hendrik\'s mother — climbed down and started SINGING into the empty well, and one by one the town joined her, and the DOZPOTAM lifted their heads and sang back. By morning: rain. A week of it. Tell Maizie all of it — especially the singing.'],
     finishLines: ['They SANG into the well?! And the DOZPOTAM sang back, and THEN the rain...', 'That is the best version. That is the one I am telling from now on, and I am telling it exactly like that. A Hyper Potion — earned. Storytellers should be paid properly; Jonas says so.'],
   },
   tale_goldenrod: {
@@ -805,9 +805,9 @@ export const JOHTO_TALES = {
     ],
     reward: { items: { greatball: 2 } }, rewardText: '2 Great Balls',
     bondNpc: 'bran', bondDelta: 1,
-    revelation: 'The gym\'s stone steps are worn hollow in the middle because for a hundred years every challenger, winner or loser, has sat on the same step afterward to watch the sea — Chuck\'s master started it, sitting with the trainers he had just beaten until their hands stopped shaking.',
+    revelation: 'The gym\'s stone steps are worn hollow in the middle because for a hundred years every challenger, winner or loser, has sat on the same step afterward to watch the sea — Rourke\'s master started it, sitting with the trainers he had just beaten until their hands stopped shaking.',
     offerLines: ['Look at the gym steps as you pass, trainer. Worn in the middle, like a saddle. A hundred years of challengers did that — but not the way you think.', 'Surf Kid Nia watches those steps every day from the water. Ask her what she sees, and bring me her answer. Two Great Balls for it — island knowledge should travel.'],
-    stageLines: ['The steps? Oh, I know the steps. I surf past them every morning, and every morning somebody is sitting in the hollow.', 'Winners sit there. Losers sit there LONGER. And here is the thing nobody from the mainland believes: Chuck sits there too. After every battle. Next to whoever he just fought, saying nothing, until their hands stop shaking. His master did it. His master\'s master did it. The stone remembers a hundred years of sitting still until it is over.'],
+    stageLines: ['The steps? Oh, I know the steps. I surf past them every morning, and every morning somebody is sitting in the hollow.', 'Winners sit there. Losers sit there LONGER. And here is the thing nobody from the mainland believes: Rourke sits there too. After every battle. Next to whoever he just fought, saying nothing, until their hands stop shaking. His master did it. His master\'s master did it. The stone remembers a hundred years of sitting still until it is over.'],
     finishLines: ['Until their hands stop shaking... She sees it clearly, that girl. Clearer than the ones who climb.', 'That hollow is the real trophy of this island, trainer. Badges leave. The sitting stays. Two Great Balls — and when your hands shake out there, find a step. It is what they are for.'],
   },
   tale_mahogany: {
@@ -848,9 +848,9 @@ export const JOHTO_TALES = {
 // hair); `art` names the sprite family the map data already uses.
 // ---------------------------------------------------------------------------
 export const JOHTO_NPCS = [
-  { map: 'elm-lab', x: 8, y: 4, name: 'PROF. ELM', art: 'scientist', skin: '#f0c8a0', shirt: '#f0f0f0', pants: '#4a4a5a', hair: '#6a4a2a', johto: 'elm',
+  { map: 'elm-lab', x: 8, y: 4, name: 'PROF. LINDEN', art: 'scientist', skin: '#f0c8a0', shirt: '#f0f0f0', pants: '#4a4a5a', hair: '#6a4a2a', johto: 'elm',
     dialogue: ['The lab keeps records, trainer. Today, one page is missing — and I mean to see it found.'] },
-  { map: 'gym-violet', x: 7, y: 2, name: 'FALKNER', art: 'lead-violet', skin: '#e8b888', shirt: '#3a5a8a', pants: '#2a2a3a', hair: '#2a3a6a', johto: 'falkner',
+  { map: 'gym-violet', x: 7, y: 2, name: 'AVEN', art: 'lead-violet', skin: '#e8b888', shirt: '#3a5a8a', pants: '#2a2a3a', hair: '#2a3a6a', johto: 'falkner',
     dialogue: ['My father kept this gym before me. The birds keep it with me now.'] },
   { map: 'sprout-tower-1', x: 10, y: 6, name: 'MONK JIN', art: 'monk', skin: '#e8b888', shirt: '#50368e', pants: '#2c3049', hair: '#2a1a0a', trainer: 'sprout_monk_1',
     dialogue: ['You bend well, traveler. The stairs are yours.'] },
@@ -858,42 +858,42 @@ export const JOHTO_NPCS = [
     dialogue: ['They dance, your legs. The Elder is expecting you.'] },
   { map: 'sprout-tower-2', x: 8, y: 2, name: 'ELDER LI', art: 'elder', skin: '#e8b888', shirt: '#5a4a6a', pants: '#3a3a4a', hair: '#e8e8e8', johto: 'sprout_elder',
     dialogue: ['The tower sways, and so do we all. That is not weakness, child. That is how tall things survive.'] },
-  { map: 'gym-azalea', x: 7, y: 2, name: 'BUGSY', art: 'lead-azalea', skin: '#f0c8a0', shirt: '#324a83', pants: '#3a3a2a', hair: '#3a6a2a', johto: 'bugsy',
+  { map: 'gym-azalea', x: 7, y: 2, name: 'BEX', art: 'lead-azalea', skin: '#f0c8a0', shirt: '#324a83', pants: '#3a3a2a', hair: '#3a6a2a', johto: 'bugsy',
     dialogue: ['Every web in this room is load-bearing, challenger.'] },
-  { map: 'slowpoke-well', x: 5, y: 2, name: 'ROCKET GRUNT', art: 'rocket', skin: '#e8b888', shirt: '#2a2a2a', pants: '#2a2a3a', hair: '#3a2a1a', johto: 'rocket_well_1',
+  { map: 'slowpoke-well', x: 5, y: 2, name: 'VANTA GRUNT', art: 'rocket', skin: '#e8b888', shirt: '#2a2a2a', pants: '#2a2a3a', hair: '#3a2a1a', johto: 'rocket_well_1',
     dialogue: ['This well is a work site. Scram!'] },
-  { map: 'slowpoke-well', x: 13, y: 5, name: 'ROCKET GRUNT', art: 'rocket', skin: '#d8a878', shirt: '#2a2a2a', pants: '#2a2a3a', hair: '#1a1a1a', johto: 'rocket_well_2',
+  { map: 'slowpoke-well', x: 13, y: 5, name: 'VANTA GRUNT', art: 'rocket', skin: '#d8a878', shirt: '#2a2a2a', pants: '#2a2a3a', hair: '#1a1a1a', johto: 'rocket_well_2',
     dialogue: ['You people are bad for business.'] },
   { map: 'slowpoke-well', x: 10, y: 10, name: 'ROCKET SENIOR', art: 'rocket', skin: '#c89878', shirt: '#3a2a3a', pants: '#2a2a3a', hair: '#5a5a5a', johto: 'rocket_well_3',
     dialogue: ['I run this well crew.'] },
-  { map: 'kurt-house', x: 4, y: 3, name: 'KURT', art: 'elder', skin: '#e8b888', shirt: '#2d4377', pants: '#3a3a4a', hair: '#e8e8e8', johto: 'kurt',
+  { map: 'kurt-house', x: 4, y: 3, name: 'HENDRIK', art: 'elder', skin: '#e8b888', shirt: '#2d4377', pants: '#3a3a4a', hair: '#e8e8e8', johto: 'kurt',
     dialogue: ['Balls made by hand remember the hand. Machines never learned that.'] },
-  { map: 'gym-goldenrod', x: 7, y: 2, name: 'WHITNEY', art: 'lead-goldenrod', skin: '#f0c8a0', shirt: '#e88ab0', pants: '#4a3a5a', hair: '#e8a0b8', johto: 'whitney',
+  { map: 'gym-goldenrod', x: 7, y: 2, name: 'WILLA', art: 'lead-goldenrod', skin: '#f0c8a0', shirt: '#e88ab0', pants: '#4a3a5a', hair: '#e8a0b8', johto: 'whitney',
     dialogue: ['My MOOBELLE has been waiting ALL week for a real challenger.'] },
-  { map: 'gym-ecruteak', x: 7, y: 2, name: 'MORTY', art: 'lead-ecruteak', skin: '#e8b888', shirt: '#4a3a6a', pants: '#2a2a3a', hair: '#d8c8a0', johto: 'morty',
+  { map: 'gym-ecruteak', x: 7, y: 2, name: 'SILAS', art: 'lead-ecruteak', skin: '#e8b888', shirt: '#4a3a6a', pants: '#2a2a3a', hair: '#d8c8a0', johto: 'morty',
     dialogue: ['The fog is honest. It hides nothing that matters.'] },
   // ---- Stage J4b: the east actors ----
-  { map: 'gym-cianwood', x: 7, y: 2, name: 'CHUCK', art: 'bruno', skin: '#d8a878', shirt: '#a03a2a', pants: '#3a3a2a', hair: '#2a1a0a', johto: 'chuck',
+  { map: 'gym-cianwood', x: 7, y: 2, name: 'ROURKE', art: 'bruno', skin: '#d8a878', shirt: '#a03a2a', pants: '#3a3a2a', hair: '#2a1a0a', johto: 'chuck',
     dialogue: ['We train where the waves hit, challenger!'] },
-  { map: 'house-cianwood', x: 10, y: 5, name: 'CHUCK\'S WIFE', art: 'lady', skin: '#f0c8a0', shirt: '#e8e0c8', pants: '#5a4a6a', hair: '#6a4a2a', johto: 'chucks_wife',
+  { map: 'house-cianwood', x: 10, y: 5, name: 'ROURKE\'S WIFE', art: 'lady', skin: '#f0c8a0', shirt: '#e8e0c8', pants: '#5a4a6a', hair: '#6a4a2a', johto: 'chucks_wife',
     dialogue: ['My husband is at the gym, roaring at the weather.'] },
-  { map: 'lighthouse-2', x: 5, y: 4, name: 'JASMINE', art: 'lady', skin: '#f0c8a0', shirt: '#c8d4e0', pants: '#4a5a6a', hair: '#8a6a4a', johto: 'jasmine_light',
+  { map: 'lighthouse-2', x: 5, y: 4, name: 'LIORA', art: 'lady', skin: '#f0c8a0', shirt: '#c8d4e0', pants: '#4a5a6a', hair: '#8a6a4a', johto: 'jasmine_light',
     dialogue: ['Lumi... please hold on. The light has to hold on.'] },
-  { map: 'gym-olivine', x: 7, y: 2, name: 'JASMINE', art: 'lady', skin: '#f0c8a0', shirt: '#c8d4e0', pants: '#4a5a6a', hair: '#8a6a4a', johto: 'jasmine',
+  { map: 'gym-olivine', x: 7, y: 2, name: 'LIORA', art: 'lady', skin: '#f0c8a0', shirt: '#c8d4e0', pants: '#4a5a6a', hair: '#8a6a4a', johto: 'jasmine',
     dialogue: ['Lumi first. Everything in Beacon is Lumi first, until the light is well.'] },
-  { map: 'lake-of-rage', x: 16, y: 15, name: 'LANCE', art: 'lance', skin: '#f0c8a0', shirt: '#7a2a3a', pants: '#2a2a3a', hair: '#c83a3a', johto: 'lance_lake',
+  { map: 'lake-of-rage', x: 16, y: 15, name: 'DARIAN', art: 'lance', skin: '#f0c8a0', shirt: '#7a2a3a', pants: '#2a2a3a', hair: '#c83a3a', johto: 'lance_lake',
     dialogue: ['The lake is screaming, trainer. Something is making it scream.'] },
-  { map: 'mahogany', x: 18, y: 7, name: 'LANCE', art: 'lance', skin: '#f0c8a0', shirt: '#7a2a3a', pants: '#2a2a3a', hair: '#c83a3a', johto: 'lance_mahogany',
+  { map: 'mahogany', x: 18, y: 7, name: 'DARIAN', art: 'lance', skin: '#f0c8a0', shirt: '#7a2a3a', pants: '#2a2a3a', hair: '#c83a3a', johto: 'lance_mahogany',
     dialogue: ['Redwood smells of cedar and souvenirs. One of those is a lie.'] },
-  { map: 'gym-mahogany', x: 7, y: 2, name: 'PRYCE', art: 'elder', skin: '#e8b888', shirt: '#dfe8ee', pants: '#3a4a5a', hair: '#e8e8e8', johto: 'pryce',
+  { map: 'gym-mahogany', x: 7, y: 2, name: 'ALBIN', art: 'elder', skin: '#e8b888', shirt: '#dfe8ee', pants: '#3a4a5a', hair: '#e8e8e8', johto: 'pryce',
     dialogue: ['Winter is honest about what you are. So am I.'] },
-  { map: 'gym-blackthorn', x: 7, y: 2, name: 'CLAIR', art: 'acetrainer', skin: '#f0c8a0', shirt: '#3a4a7a', pants: '#2a2a4a', hair: '#4a6ac8', johto: 'clair',
+  { map: 'gym-blackthorn', x: 7, y: 2, name: 'RHEA', art: 'acetrainer', skin: '#f0c8a0', shirt: '#3a4a7a', pants: '#2a2a4a', hair: '#4a6ac8', johto: 'clair',
     dialogue: ['The clan keeps dragons. I keep this gym. Completely.'] },
-  { map: 'silver-stadium', x: 13, y: 5, name: 'GARY', art: 'gary', skin: '#f0c8a0', shirt: '#3a5a9a', pants: '#2a2a3a', hair: '#6a4a2a', johto: 'gary_stadium',
+  { map: 'silver-stadium', x: 13, y: 5, name: 'VALE', art: 'gary', skin: '#f0c8a0', shirt: '#3a5a9a', pants: '#2a2a3a', hair: '#6a4a2a', johto: 'gary_stadium',
     dialogue: ['Took you long enough. The bracket has been boring without you.'] },
   { map: 'silver-stadium', x: 9, y: 5, name: 'HARRISON', art: 'acetrainer', skin: '#d8a878', shirt: '#7a672a', pants: '#3a3a2a', hair: '#a03a2a', johto: 'harrison',
     dialogue: ['Harrison, from Rootlet. I have been watching your side of the bracket with great interest.'] },
-  { map: 'mt-silver-cave', x: 8, y: 2, name: 'RED', art: 'rival', skin: '#f0c8a0', shirt: '#c83a2a', pants: '#2a3a5a', hair: '#2a1a0a', johto: 'red',
+  { map: 'mt-silver-cave', x: 8, y: 2, name: 'ROSS', art: 'rival', skin: '#f0c8a0', shirt: '#c83a2a', pants: '#2a3a5a', hair: '#2a1a0a', johto: 'red',
     dialogue: ['...'] },
   // ---- Stage J5: legendary witnesses, elders, and the hideout stairs.
   // The beast "signs" are witness NPCs placed by this same append
@@ -1015,10 +1015,10 @@ export const JOHTO_LEGENDARY_ARCS = {
   arc_celebi: {
     id: 'arc_celebi', title: 'The Ball That Hums at Shrines', species: 'celebi', region: 'Yamato',
     prereq: 'beasts_awakened',
-    hook: 'The GS Orb Kurt has been studying began to hum the night the tower woke — and Kurt, who trusts old objects the way sailors trust weather, says it is not his to keep any longer.',
+    hook: 'The Sealed Orb Hendrik has been studying began to hum the night the tower woke — and Hendrik, who trusts old objects the way sailors trust weather, says it is not his to keep any longer.',
     steps: [
-      { text: 'Return to Kurt in Cinder Town — the GS Orb stirred the night the tower woke, and he is giving it back', flag: 'gsball_back_with_player' },
-      { text: 'Take the GS Orb to the forest shrine in Holly Forest and stand before it', flag: 'celebi_shrine_opened' },
+      { text: 'Return to Hendrik in Cinder Town — the Sealed Orb stirred the night the tower woke, and he is giving it back', flag: 'gsball_back_with_player' },
+      { text: 'Take the Sealed Orb to the forest shrine in Holly Forest and stand before it', flag: 'celebi_shrine_opened' },
       { text: 'Face CHRONOFAE, level 170, in the forest\'s younger light', catch: 'celebi' },
     ],
     lair: 'ilex-forest',

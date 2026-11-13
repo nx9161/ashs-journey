@@ -43,14 +43,14 @@ Object.assign(OverworldScene.prototype, {
     // holds fewer than i Yamato badges, naming where the first
     // missing badge's leader waits. Falkner (index 0) is always open.
     const JOHTO_LEADER_WAITS = {
-      zephyrbadge: 'Falkner, in Iris City\'s gym',
-      hivebadge: 'Bugsy, in Cinder Town\'s gym',
-      plainbadge: 'Whitney, in Signal City\'s gym',
-      fogbadge: 'Morty, in Lantern City\'s gym',
-      stormbadge: 'Chuck, in Tidewall City\'s gym',
-      mineralbadge: 'Jasmine, in Beacon City\'s gym',
-      glacierbadge: 'Pryce, in Redwood Town\'s gym',
-      risingbadge: 'Clair, in Cragmoor City\'s gym',
+      zephyrbadge: 'Aven, in Iris City\'s gym',
+      hivebadge: 'Bex, in Cinder Town\'s gym',
+      plainbadge: 'Willa, in Signal City\'s gym',
+      fogbadge: 'Silas, in Lantern City\'s gym',
+      stormbadge: 'Rourke, in Tidewall City\'s gym',
+      mineralbadge: 'Liora, in Beacon City\'s gym',
+      glacierbadge: 'Albin, in Redwood Town\'s gym',
+      risingbadge: 'Rhea, in Cragmoor City\'s gym',
     };
     const badgeOrderRefusal = (badgeId) => {
       const idx = BADGE_SETS.johto.indexOf(badgeId);
@@ -67,23 +67,23 @@ Object.assign(OverworldScene.prototype, {
       if (!flags.johto_arrival && !flags.ev_johto_arrival_done) { this.runEvent('ev_johto_arrival'); return true; }
       if (flags.silver_r30_done && !flags.silver_reported) {
         say(['You met him. On Route 30, with the RIDGEJAW — yes. Yes, that is my missing page, walking around with red hair and no intention of apologizing.',
-          'A name. You are sure? ...Silver. One of the aides found his practice registration in the hedge by the window — half a card, all the name we need. Silver.',
-          'Thank you, {player}. A lab keeps records, and now mine has its page back — the rest of that story is his to write, and I suspect he will write it at you, repeatedly. The road west is yours: Iris first, then Cinder. And when you reach Kurt — remember what you are carrying.'], () => {
+          'A name. You are sure? ...Riven. One of the aides found his practice registration in the hedge by the window — half a card, all the name we need. Riven.',
+          'Thank you, {player}. A lab keeps records, and now mine has its page back — the rest of that story is his to write, and I suspect he will write it at you, repeatedly. The road west is yours: Iris first, then Cinder. And when you reach Hendrik — remember what you are carrying.'], () => {
           flags.silver_reported = true;
-          g.ui.toast('You reported the thief to Elm.');
+          g.ui.toast('You reported the thief to Linden.');
         });
         return true;
       }
-      if (flags.silver_reported) { say(['Silver. The record is complete, and the road is yours, {player}. Iris, Cinder, and Kurt — in that order, the way the wind goes.']); return true; }
+      if (flags.silver_reported) { say(['Riven. The record is complete, and the road is yours, {player}. Iris, Cinder, and Hendrik — in that order, the way the wind goes.']); return true; }
       say(['North through Blossom, then Route 30 to Iris, {player}. And eyes open — red hair, no fear. Come back to me with whatever you find.']);
       return true;
     }
 
     if (kind === 'sprout_elder') {
-      if (flags.sprout_tower_done) { say(['The tower sways, and so do we all. Falkner\'s birds are watching the road for you, child.']); return true; }
+      if (flags.sprout_tower_done) { say(['The tower sways, and so do we all. Aven\'s birds are watching the road for you, child.']); return true; }
       say(['You climbed. Slowly, I hope — the tower dislikes being hurried, and so do my knees.',
         'I am Li, keeper of this creaking old prayer. The monks tell me your legs danced on the stairs, and the tower tells me the rest: you bend, traveler. You do not break.',
-        'Take these, and an old man\'s ruling with them: Falkner of the Iris Gym now owes you his proper challenge. Tell him the tower said so. It usually sways him.'], () => {
+        'Take these, and an old man\'s ruling with them: Aven of the Iris Gym now owes you his proper challenge. Tell him the tower said so. It usually sways him.'], () => {
         st.bag.superpotion = (st.bag.superpotion || 0) + 2;
         flags.sprout_tower_done = true;
         g.audio.playSfx('dex-register');
@@ -116,12 +116,12 @@ Object.assign(OverworldScene.prototype, {
       } else {
         const ownedApricorns = APRICORN_IDS.filter((id) => (st.bag[id] || 0) > 0);
         if (ownedApricorns.length) {
-          say(['Forty years I have worked Capture Orbs by hand, trainer — and my eyes still catch an apricorn in a bag before the bag is even open. You are carrying ripe ones.',
+          say(['Forty years I have worked Capture Orbs by hand, trainer — and my eyes still catch an podnut in a bag before the bag is even open. You are carrying ripe ones.',
             'One ball at a time — that is the workbench law — and it settles over 250 steps of your walking. Shall I work one for you?'], () => {
             const items = ownedApricorns.map((id) => ({ label: 'Craft: ' + ITEMS[id].name + ' -> ' + ITEMS[APRICORN_TO_BALL[id]].name, value: id }));
             items.push({ label: 'Just talk', value: '__talk' });
             items.push({ label: 'Leave', value: null });
-            g.ui.showMenu('Hand Kurt an apricorn?', items, (v) => {
+            g.ui.showMenu('Hand Hendrik an podnut?', items, (v) => {
               if (v === '__talk') { st.session.kurtTalkOnce = true; this.runJohtoNpc(npc); return; }
               if (!v) return;
               const res = kurtPlaceOrder(st, v);
@@ -151,7 +151,7 @@ Object.assign(OverworldScene.prototype, {
             // J5's shrine scene moves it.
             flags.gsball_at_kurt_house = true;
             g.audio.playSfx('dex-register');
-            g.ui.toast('Kurt is studying the GS Orb.');
+            g.ui.toast('Hendrik is studying the Sealed Orb.');
           });
           return true;
         }
@@ -174,7 +174,7 @@ Object.assign(OverworldScene.prototype, {
           flags.gsball_back_with_player = true;
           if (!st.story.quests.arc_celebi) st.story.quests.arc_celebi = 'discovered';
           g.audio.playSfx('dex-register');
-          g.ui.toast('Kurt returned the GS Orb.');
+          g.ui.toast('Hendrik returned the Sealed Orb.');
         });
         return true;
       }
@@ -199,7 +199,7 @@ Object.assign(OverworldScene.prototype, {
           if (!won) return;
           if (flags.beat_rocket_well_1 && flags.beat_rocket_well_2 && flags.beat_rocket_well_3 && !flags.johto_well_cleared) {
             flags.johto_well_cleared = true;
-            say(['The last Rocket scrambles up the ladder and does not look back. Below, in the wet dark, the DOZPOTAM lift their heads one by one — slow, unhurried, already forgetting, which is the kindest thing about them.', 'Somewhere above, a bent old man is about to hear the best news of his year. Kurt\'s house, trainer. And bring what you are carrying — he has waited long enough.'], null, 'NARRATOR');
+            say(['The last Vanta scrambles up the ladder and does not look back. Below, in the wet dark, the DOZPOTAM lift their heads one by one — slow, unhurried, already forgetting, which is the kindest thing about them.', 'Somewhere above, a bent old man is about to hear the best news of his year. Hendrik\'s house, trainer. And bring what you are carrying — he has waited long enough.'], null, 'NARRATOR');
           }
         });
       }, npc.name);
@@ -228,12 +228,12 @@ Object.assign(OverworldScene.prototype, {
           if (st.bag.secretpotion <= 0) delete st.bag.secretpotion;
           flags.amphy_healed = true;
           g.audio.playSfx('heal');
-          say(['She drinks. A long, shuddering breath — and then the lamp room does what it has done every dusk for a hundred years, all at once, like a held note finally sounded: the light comes on. Slowly. Then completely. Out past the harbor mouth, three ships sound their horns in answer.', 'Lumi is well. And I... I am free to be a gym leader again, with my whole heart in it. My gym is across the plaza, trainer. Come and take your battle — you have more than earned the queue jumping.'], null, 'JASMINE');
+          say(['She drinks. A long, shuddering breath — and then the lamp room does what it has done every dusk for a hundred years, all at once, like a held note finally sounded: the light comes on. Slowly. Then completely. Out past the harbor mouth, three ships sound their horns in answer.', 'Lumi is well. And I... I am free to be a gym leader again, with my whole heart in it. My gym is across the plaza, trainer. Come and take your battle — you have more than earned the queue jumping.'], null, 'LIORA');
         });
         return true;
       }
       if (!flags.jasmine_asked) {
-        say(['Oh — a trainer. Forgive me, I — my name is Jasmine. I keep Beacon\'s gym, most days. These days I keep this room.',
+        say(['Oh — a trainer. Forgive me, I — my name is Liora. I keep Beacon\'s gym, most days. These days I keep this room.',
           'This is Lumi. Her light has guided Beacon\'s ships since before I was born, and she is sick — a fever no medicine in this city touches. The pharmacy in Tidewall, across Route 40, makes one thing that might: their Secret Potion. I cannot leave her. The ships cannot wait much longer. Trainer... would you go? For a lighthouse?'], () => { flags.jasmine_asked = true; });
         return true;
       }
@@ -248,10 +248,10 @@ Object.assign(OverworldScene.prototype, {
     }
 
     if (kind === 'lance_mahogany') {
-      if (flags.johto_hideout_cleared) { say(['The signal is dead and the lake is calm — I checked from the air at dawn. Team Rocket\'s Yamato operation ended in that basement, trainer. What remains is the honest work: Pryce, Cragmoor, and a Conference with your name rising up its bracket.']); return true; }
+      if (flags.johto_hideout_cleared) { say(['The signal is dead and the lake is calm — I checked from the air at dawn. the Vanta Syndicate\'s Yamato operation ended in that basement, trainer. What remains is the honest work: Albin, Cragmoor, and a Conference with your name rising up its bracket.']); return true; }
       if (!flags.red_gyarados_done) { say(['You have the look of a trainer between errands, so let me lend you one: the Wrathmere Lake, north of here. Something red is tearing it apart, and I do not believe in coincidences with scales. Look into it. Then come back and tell me what the water said.']); return true; }
       say(['You saw the lake. You heard the signal in its screaming. The source is here, {player} — under the souvenir shop, behind the postcards: a transmitter, a power core, and the whole Yamato operation of a team that should have stayed beaten.', 'WYRMARCH and I take the front, through the shop\'s stair. You take everything that moves behind us. Are you ready to go down?'], () => {
-        g.ui.showMenu('Enter the Hideout with Lance?', [
+        g.ui.showMenu('Enter the Hideout with Darian?', [
           { label: 'Descend', value: 'yes' }, { label: 'Not yet', value: 'no' },
         ], (v) => { if (v === 'yes') this.enterJohtoHideout(); });
       });
@@ -267,14 +267,14 @@ Object.assign(OverworldScene.prototype, {
       if (clairRefusal) { say(clairRefusal); return true; }
       const ct = TRAINERS.clair;
       say([ct.intro[0]], () => {
-        g.ui.showMenu('Challenge Clair?', [
+        g.ui.showMenu('Challenge Rhea?', [
           { label: 'Challenge', value: 'yes' }, { label: 'Not yet', value: 'no' },
         ], (v) => {
           if (v !== 'yes') return;
           this.startJohtoBattle('clair', (won) => {
             if (!won) return;
             flags.clair_beaten = true;
-            say(['North, then. The cliff behind this town, the water that runs black and patient — the Drake\'s Den. The elder will ask you the old questions, and the shrine will ask its own. Pass, and the Rising Badge is yours by the clan\'s law. Fail... and you may try again. Dragons respect persistence almost as much as strength.'], null, 'CLAIR');
+            say(['North, then. The cliff behind this town, the water that runs black and patient — the Drake\'s Den. The elder will ask you the old questions, and the shrine will ask its own. Pass, and the Rising Badge is yours by the clan\'s law. Fail... and you may try again. Dragons respect persistence almost as much as strength.'], null, 'RHEA');
           });
         });
       });
@@ -283,14 +283,14 @@ Object.assign(OverworldScene.prototype, {
 
     if (kind === 'den_elder') {
       if (jBadges.includes('risingbadge')) { say(['The badge rose, the shrine is quiet, and the dragons have a new name to respect, {player}. Walk the Conference road the way you walked this den: like you belong on it. You do.']); return true; }
-      if (!flags.clair_beaten) { say(['I am the elder of this den, and this is a place of judgment, not tourism. The test is for those Clair has faced and failed to dismiss — win her gym first, trainer, and then come and be weighed properly.']); return true; }
+      if (!flags.clair_beaten) { say(['I am the elder of this den, and this is a place of judgment, not tourism. The test is for those Rhea has faced and failed to dismiss — win her gym first, trainer, and then come and be weighed properly.']); return true; }
       // The elder's test: three questions (every answer is heard —
       // the choice law — and the elder's verdict names what the
       // answers showed), then the shrine battle. Win the battle and
       // the Rising Badge is awarded HERE, by the exact leader-award
       // representation (badges.johto push + badge_rising flag) —
       // the badge-count proof: 7 after the gym, 8 after the den.
-      say(['So. Clair faced you and could not dismiss you. Then the den will weigh what the gym could not. Three questions, trainer, the old ones. Answer as yourself — the shrine can hear varnish crack.', 'First: a young dragon in your care loses, badly, in front of the whole clan. What do you do?'], () => {
+      say(['So. Rhea faced you and could not dismiss you. Then the den will weigh what the gym could not. Three questions, trainer, the old ones. Answer as yourself — the shrine can hear varnish crack.', 'First: a young dragon in your care loses, badly, in front of the whole clan. What do you do?'], () => {
         let honest = 0;
         const ask2 = () => {
           g.ui.showMenu('Second: what makes a dragon strong?', [
@@ -316,7 +316,7 @@ Object.assign(OverworldScene.prototype, {
                     if (!st.badges.johto.includes('risingbadge')) st.badges.johto.push('risingbadge');
                     flags.badge_rising = true;
                     g.audio.playSfx('badge');
-                    say(['It is decided, then — by gym, by word, and by battle, the full measure of the old law.', 'The RISING BADGE is yours, {player}. Eight badges. The whole of Yamato, answered. Clair will hear of this before you reach the town — the den has its own ways of telling her. The road north is open now: Lastlight Pass, Lastlight Town, and the Conference that has been waiting for you since Galefield.'], null, 'DEN ELDER');
+                    say(['It is decided, then — by gym, by word, and by battle, the full measure of the old law.', 'The RISING BADGE is yours, {player}. Eight badges. The whole of Yamato, answered. Rhea will hear of this before you reach the town — the den has its own ways of telling her. The road north is open now: Lastlight Pass, Lastlight Town, and the Conference that has been waiting for you since Galefield.'], null, 'DEN ELDER');
                   });
                 });
               });
@@ -333,7 +333,7 @@ Object.assign(OverworldScene.prototype, {
     }
 
     if (kind === 'silver_gate') {
-      if (jBadges.length >= 8) { say(['Eight badges, counted with my own eyes — the pass is yours, Conference trainer. Hald, veteran of this road, at your service. Silver, when you are ready, is in the stadium. So is the young man with the red hair\'s opposite number. Make it a good one.']); return true; }
+      if (jBadges.length >= 8) { say(['Eight badges, counted with my own eyes — the pass is yours, Conference trainer. Hald, veteran of this road, at your service. Riven, when you are ready, is in the stadium. So is the young man with the red hair\'s opposite number. Make it a good one.']); return true; }
       say(['Pass Officer Hald — the League keeps me at this end of the road to count, so let me count for you, trainer: ' + jBadges.length + ' of 8 Yamato badges in that case.', 'The rule is the rule, and it turns nobody away forever: earn the eight — Cragmoor and the Drake\'s Den hold the last of it for most — and this road opens like it was built for you. Because by then, trainer, it will have been.']);
       return true;
     }
@@ -342,7 +342,7 @@ Object.assign(OverworldScene.prototype, {
       if (flags.johto_complete) { say(['The bracket is archived, the confetti is swept, and your name is in the Conference book in the good ink, trainer. Whatever mountain is next — and there is always a next one — Lastlight Town was glad to host this chapter.']); return true; }
       if (jBadges.length < 8) { say(['Conference registration, trainer — and I can see by your case that the road is not finished with you yet. Eight Yamato badges open this bracket. You hold ' + jBadges.length + '. Cragmoor is the usual last stop. I will keep your page open.']); return true; }
       if (!flags.conference_registered) {
-        say(['Eight badges. Counted, verified, and — if I may — well carried, trainer. Let me write your name into the Lastlight Conference properly... There. Registered.', 'The bracket: two qualifying battles, here in this stadium, then the names you already know are waiting deeper in. Gary is on the far side of the draw. He asked me to tell you the bracket was "finally interesting." His words. Begin when you are ready — speak to me for each qualifier.'], () => {
+        say(['Eight badges. Counted, verified, and — if I may — well carried, trainer. Let me write your name into the Lastlight Conference properly... There. Registered.', 'The bracket: two qualifying battles, here in this stadium, then the names you already know are waiting deeper in. Vale is on the far side of the draw. He asked me to tell you the bracket was "finally interesting." His words. Begin when you are ready — speak to me for each qualifier.'], () => {
           flags.conference_registered = true;
           g.audio.playSfx('dex-register');
           g.ui.toast('Registered for the Lastlight Conference!');
@@ -365,8 +365,8 @@ Object.assign(OverworldScene.prototype, {
         });
         return true;
       }
-      if (!flags.beat_gary_johto) { say(['The qualifiers are behind you, and the whole stadium knows what is next. Gary is on the pitch, pretending not to warm up. Go and give these people the match they came for.']); return true; }
-      if (!flags.harrison_faced) { say(['Gary is beaten, and the bracket has one name left on your side of it: Harrison, in the quarter-final. He is standing by the pitch with his CHARHOUND and his good manners. End this Conference properly, trainer.']); return true; }
+      if (!flags.beat_gary_johto) { say(['The qualifiers are behind you, and the whole stadium knows what is next. Vale is on the pitch, pretending not to warm up. Go and give these people the match they came for.']); return true; }
+      if (!flags.harrison_faced) { say(['Vale is beaten, and the bracket has one name left on your side of it: Harrison, in the quarter-final. He is standing by the pitch with his CHARHOUND and his good manners. End this Conference properly, trainer.']); return true; }
       say(['The Conference is decided, and decided honestly. The book has it. So does everyone who was here.']);
       return true;
     }
@@ -378,23 +378,23 @@ Object.assign(OverworldScene.prototype, {
       if (!flags.beat_conference_q2) { say(['Qualifiers first. Brenna, then Cato — the bracket is the bracket, even for the main event. I will be right here, being patient at a professional standard.']); return true; }
       const gt = TRAINERS.gary_johto;
       say(gt.intro.map((l) => l.replace('{player}', st.player.name)), () => {
-        g.ui.showMenu('Face Gary — the Lastlight Conference centrepiece?', [
+        g.ui.showMenu('Face Vale — the Lastlight Conference centrepiece?', [
           { label: 'Battle', value: 'yes' }, { label: 'Not yet', value: 'no' },
         ], (v) => { if (v === 'yes') this.startJohtoBattle('gary_johto', null); });
-      }, 'GARY');
+      }, 'VALE');
       return true;
     }
 
     if (kind === 'harrison') {
       if (flags.johto_complete) { say(['The Conference book is closed and your name is in it in the good ink, trainer. Whatever either of us does next, this stadium saw the real thing. Travel well. CHARHOUND and I will be telling this one for years.']); return true; }
-      if (!flags.beat_gary_johto) { say(['Harrison, from Rootlet Town. We are on a collision course, you and I — but Gary is your road to me, and the bracket does not bend. Beat him first. I will be here, and I will be ready either way.']); return true; }
+      if (!flags.beat_gary_johto) { say(['Harrison, from Rootlet Town. We are on a collision course, you and I — but Vale is your road to me, and the bracket does not bend. Beat him first. I will be here, and I will be ready either way.']); return true; }
       // The quarter-final (mechanism recorded at his trainer def):
       // a real full-strength battle, fought FRIENDLY — the predicate
       // is FACED, not won. Win or lose, the branch-true honours play,
       // johto_complete is set, and the Foundation machine itself
       // fires (checkArcCompletion — ARC COMPLETE card, regionsDone,
       // the pinned Maris directive; nothing here writes regionsDone).
-      say(['So it is us. Gary is beaten — I watched it from the tunnel, and I will carry that match with me whatever happens here.', 'Quarter-final rules, trainer, and Conference stakes. Give me everything you gave him. CHARHOUND and I did not cross the bracket for less.'], () => {
+      say(['So it is us. Vale is beaten — I watched it from the tunnel, and I will carry that match with me whatever happens here.', 'Quarter-final rules, trainer, and Conference stakes. Give me everything you gave him. CHARHOUND and I did not cross the bracket for less.'], () => {
         g.ui.showMenu('The quarter-final — face Harrison?', [
           { label: 'Battle', value: 'yes' }, { label: 'Not yet', value: 'no' },
         ], (v) => {
@@ -412,8 +412,8 @@ Object.assign(OverworldScene.prototype, {
                 'Take the semi-final road with my respect — you have beaten the two best trainers in this bracket back to back, and one of them is standing here applauding. The Conference is yours in every way that history checks.',
               ] : [
                 '...It is decided. The final exchange — CHARHOUND endures, the crowd comes up off its seats like a tide, and the judges\' card, when it turns, says Harrison.',
-                'Do not hang your head. DO NOT. You beat Gary Oak in this stadium, you carried eight badges across a region that tests everything, and you took me to the last Kin I own. The loss stands — that is sport. So does everything you did to get here — that is history.',
-                'Gary is in the tunnel, trainer. Even he is applauding. Especially him, though he will deny the especially.',
+                'Do not hang your head. DO NOT. You beat Vale Hawthorn in this stadium, you carried eight badges across a region that tests everything, and you took me to the last Kin I own. The loss stands — that is sport. So does everything you did to get here — that is history.',
+                'Vale is in the tunnel, trainer. Even he is applauding. Especially him, though he will deny the especially.',
               ];
               say(lines, () => {
                 flags.johto_complete = true;
@@ -428,22 +428,22 @@ Object.assign(OverworldScene.prototype, {
     }
 
     if (kind === 'red') {
-      if (!flags.johto_complete) { say(['...'], null, 'RED'); return true; }
+      if (!flags.johto_complete) { say(['...'], null, 'ROSS'); return true; }
       if (flags.red_defeated) {
         say(['...!', '...'], () => {
-          g.ui.showMenu('Battle Red again?', [
+          g.ui.showMenu('Battle Ross again?', [
             { label: 'Battle', value: 'yes' }, { label: 'Not yet', value: 'no' },
           ], (v) => { if (v === 'yes') this.startJohtoBattle('red', null); });
-        }, 'RED');
+        }, 'ROSS');
         return true;
       }
       say(['...'], () => {
         this.startJohtoBattle('red', (won) => {
           if (!won) return;
           flags.red_defeated = true;
-          say(['...!!', 'He tips his cap — once, the way a mountain might bow — and turns back to the snow and the silence, satisfied in a way that has nothing to do with winning. Some names are not beaten, exactly. They are answered. His was.'], null, 'RED');
+          say(['...!!', 'He tips his cap — once, the way a mountain might bow — and turns back to the snow and the silence, satisfied in a way that has nothing to do with winning. Some names are not beaten, exactly. They are answered. His was.'], null, 'ROSS');
         });
-      }, 'RED');
+      }, 'ROSS');
       return true;
     }
 
@@ -584,7 +584,7 @@ Object.assign(OverworldScene.prototype, {
         gateLines: ['I am sorry — truly. I cannot battle while Lumi is sick. A leader who fights with her heart in a lighthouse lamp room is no leader at all, and my FERROWYRM deserves better from me. The light first, trainer. Please. The light first.'],
         post: 'Lumi\'s light and your Mineral Badge, trainer — Beacon shines twice tonight. Come back for a rematch whenever the harbor looks quiet. It so rarely is, and I so rarely mind.' },
       pryce: { badge: 'glacierbadge', gate: 'johto_hideout_cleared',
-        gateLines: ['Not yet, challenger. My town is sitting on a Rocket nest, my lake is screaming, and an old man does not hand out badges over an occupation. Clear what is under the souvenir shop — Lance is in town, and the lake road is north. Then come back, and winter will receive you properly.'],
+        gateLines: ['Not yet, challenger. My town is sitting on a Vanta nest, my lake is screaming, and an old man does not hand out badges over an occupation. Clear what is under the souvenir shop — Darian is in town, and the lake road is north. Then come back, and winter will receive you properly.'],
         post: 'The lake is calm, the town is ours, and the Glacier Badge is where it belongs — with the warm-hearted. Winter remembers you kindly, trainer. That is rarer than the badge.' },
     };
     const L = LEADERS[kind];
@@ -604,13 +604,13 @@ Object.assign(OverworldScene.prototype, {
     if (orderRefusal) { say(orderRefusal); return true; }
     if (L.gate && !flags[L.gate]) { say(L.gateLines); return true; }
     if (kind === 'morty' && !flags.beasts_awakened) {
-      say(['Morty of Lantern. Before we battle, a keeper\'s courtesy: the Ashen Tower stands open in the west of town, and its basement has been... restless. Look into it, trainer. A leader likes to know what his challengers have seen. Then come back, and we will see each other clearly.']);
+      say(['Silas of Lantern. Before we battle, a keeper\'s courtesy: the Ashen Tower stands open in the west of town, and its basement has been... restless. Look into it, trainer. A leader likes to know what his challengers have seen. Then come back, and we will see each other clearly.']);
       return true;
     }
     if (kind === 'morty' && flags.beasts_awakened) {
       say(['You have been below the tower. I can see the ash on you — not on your clothes, {player}. On the way you hold still.',
         'Then you know what I know: the statues are gone, and something with eyes like deep water is abroad in Yamato. We will speak of it properly after. First — the Fog Badge has been waiting for a challenger the fog respects.'], () => {
-        g.ui.showMenu('Challenge Morty?', [
+        g.ui.showMenu('Challenge Silas?', [
           { label: 'Challenge', value: 'yes' }, { label: 'Not yet', value: 'no' },
         ], (v) => { if (v === 'yes') this.startJohtoBattle('morty', null); });
       });

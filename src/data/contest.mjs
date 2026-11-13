@@ -196,7 +196,7 @@ export const CONTEST_NPCS = {
     { name: 'MARIS', species: 'milotic', script: ['hydropump', 'icebeam', 'hydropump', 'icebeam'] },
   ],
   'hearthome-master': [
-    { name: 'FANTINA', species: 'gengar', script: ['psychic', 'hyperbeam', 'psychic', 'hyperbeam'] },
+    { name: 'ODILE', species: 'gengar', script: ['psychic', 'hyperbeam', 'psychic', 'hyperbeam'] },
     { name: 'ORIN', species: 'garchomp', script: ['earthquake', 'fireblast', 'earthquake', 'fireblast'] },
     { name: 'SOLENNE', species: 'roserade', script: ['solarbeam', 'petaldance', 'solarbeam', 'petaldance'] },
   ],

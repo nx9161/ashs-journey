@@ -188,7 +188,7 @@ export const MAPS7 = {
       {
         "x": 2,
         "y": 5,
-        "text": "PROF. BIRCH'S LAB — Rootlet's own Kin laboratory. Birch studies Kin where they actually live: outside."
+        "text": "PROF. ASPEN'S LAB — Rootlet's own Kin laboratory. Aspen studies Kin where they actually live: outside."
       },
       {
         "x": 15,
@@ -290,7 +290,7 @@ export const MAPS7 = {
         "pants": "#2a2a3a",
         "hair": "#c0c0c0",
         "dialogue": [
-          "Rootlet rule one: if Birch comes home muddy, the research went well.",
+          "Rootlet rule one: if Aspen comes home muddy, the research went well.",
           "Trainers leave this town small and come back enormous. The door frames remember."
         ]
       },
@@ -319,7 +319,7 @@ export const MAPS7 = {
         "hair": "#5a3a2a",
         "dialogue": [
           "Forty years I have watched this town not change, on purpose.",
-          "The lab was a shed once. Birch's shed. Some sheds grow."
+          "The lab was a shed once. Aspen's shed. Some sheds grow."
         ]
       }
     ],
@@ -496,7 +496,7 @@ export const MAPS7 = {
       {"x": 19, "y": 1, "text": "MEADOWBROOK CITY — North: ROUTE 104 · East: ROUTE 102."},
     ],
     "npcs": [
-      {"x": 11, "y": 6, "name": "WALLY’S NEIGHBOR UNA", "art": "lady", "skin": "#d8a878", "shirt": "#7a4a8a", "pants": "#2a2a3a", "hair": "#c0c0c0", "dialogue": ["A shy boy from this street went out with a borrowed Kin and came back standing taller.", "The gym leader's family keeps the ponds. Balance is a household habit here."]},
+      {"x": 11, "y": 6, "name": "EMIL’S NEIGHBOR UNA", "art": "lady", "skin": "#d8a878", "shirt": "#7a4a8a", "pants": "#2a2a3a", "hair": "#c0c0c0", "dialogue": ["A shy boy from this street went out with a borrowed Kin and came back standing taller.", "The gym leader's family keeps the ponds. Balance is a household habit here."]},
       {"x": 20, "y": 6, "name": "BALANCE KEEPER ORIN", "art": "gent", "skin": "#e8b888", "shirt": "#3a6ac0", "pants": "#2a3a4a", "hair": "#1a1a1a", "dialogue": ["I trim the pond reeds to the same height on both banks. It matters. It does.", "Route 104's woods begin north of town. Mind the DOZSLOTH — they mind nothing."]},
       {"x": 10, "y": 14, "name": "FISHER LIO", "art": "fisher", "skin": "#c89878", "shirt": "#2a7a6a", "pants": "#3a3a4a", "hair": "#7a4a1a", "dialogue": ["Pond fishing is patience practice. The gym is the exam.", "STRIDLET walk the surface here like it owes them money."]},
       {"x": 3, "y": 5, "name": "MART CLERK", "art": "clerk", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#4a3a2a", "dialogue": ["Meadowbrook Mart — woods-ready stock. Bug spray is a state of mind; we sell the other kind too."], "mart": {"stock": ["pokeball", "greatball", "potion", "superpotion", "antidote", "awakening"]}},
@@ -554,7 +554,7 @@ export const MAPS7 = {
       {"x": 9, "y": 14, "text": "COPPERTON CITY — South: ROUTE 104 · East: ROUTE 116 · North: ROUTE 115."},
     ],
     "npcs": [
-      {"x": 11, "y": 7, "name": "NORWICK RESEARCHER PELL", "art": "scientist", "skin": "#c89878", "shirt": "#2a7a6a", "pants": "#3a3a4a", "hair": "#7a4a1a", "dialogue": ["We turned a fossil into a living Kin in this building. Twice. The paperwork was the hard part.", "Mr. Stone collects rare stones the way other presidents collect ties."]},
+      {"x": 11, "y": 7, "name": "NORWICK RESEARCHER PELL", "art": "scientist", "skin": "#c89878", "shirt": "#2a7a6a", "pants": "#3a3a4a", "hair": "#7a4a1a", "dialogue": ["We turned a fossil into a living Kin in this building. Twice. The paperwork was the hard part.", "Mr. Castellan collects rare stones the way other presidents collect ties."]},
       {"x": 18, "y": 11, "name": "CUTTER’S APPRENTICE RUE", "art": "youngster", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#4a3a2a", "dialogue": ["The Cutter's house hands out field craft to anyone who asks nicely.", "Route 116 east ends at a tunnel the HUSHLET own. Bring earplugs and respect."]},
       {"x": 7, "y": 14, "name": "TRAINER SCHOOL KID MOSS", "art": "kid", "skin": "#f0c8a0", "shirt": "#3a7a4a", "pants": "#4a3a2a", "hair": "#2a1a0a", "dialogue": ["Our teacher makes us battle the gym leader's portrait. It has never lost.", "Rock types run this town's gym AND its quarries. Copperton is honest about its geology."]},
       {"x": 3, "y": 5, "name": "MART CLERK", "art": "clerk", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#4a3a2a", "dialogue": ["Copperton Mart — company-town stock, company-town prices. The fossils are display only."], "mart": {"stock": ["pokeball", "greatball", "superpotion", "hyperpotion", "antidote", "parlyzheal", "revive"]}},
@@ -679,8 +679,8 @@ export const MAPS7 = {
     ],
     "npcs": [
       {"x": 20, "y": 16, "name": "CAPT MERIDIAN", "art": "sailor", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#4a3a2a", "dialogue": ["The Fairhaven run is the long crossing home — Arcport, straight across the weather.", "Once this port knows you, the whole ferry network does. Step aboard when you're ready."], "ferry": "vermilion", "ferryArc": "hoenn"},
-      {"x": 11, "y": 13, "name": "MARKET CRIER VESK", "art": "worker", "skin": "#f0c8a0", "shirt": "#3a7a4a", "pants": "#4a3a2a", "hair": "#2a1a0a", "dialogue": ["Berries! Stones! A chair shaped like a SPOUTLET! The market provides!", "Captain Stern's shipyard builds hulls at the north end. Fine work, slow varnish."]},
-      {"x": 24, "y": 7, "name": "STERN’S APPRENTICE LIO", "art": "youngster", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#4a3a2a", "dialogue": ["The Captain's new submersible part went missing between the dock and the museum. Again.", "Maritime Museum's queue is longest at opening. The exhibits don't mind."]},
+      {"x": 11, "y": 13, "name": "MARKET CRIER VESK", "art": "worker", "skin": "#f0c8a0", "shirt": "#3a7a4a", "pants": "#4a3a2a", "hair": "#2a1a0a", "dialogue": ["Berries! Stones! A chair shaped like a SPOUTLET! The market provides!", "Captain Merrick's shipyard builds hulls at the north end. Fine work, slow varnish."]},
+      {"x": 24, "y": 7, "name": "MERRICK’S APPRENTICE LIO", "art": "youngster", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#4a3a2a", "dialogue": ["The Captain's new submersible part went missing between the dock and the museum. Again.", "Maritime Museum's queue is longest at opening. The exhibits don't mind."]},
       {"x": 5, "y": 15, "name": "BEACHCOMBER ANA", "art": "lady", "skin": "#d8a878", "shirt": "#7a4a8a", "pants": "#2a2a3a", "hair": "#c0c0c0", "dialogue": ["The tide delivers the market half its stock and all of its gossip.", "Route 110's cycling road runs north to Lilac, humming the whole way."]},
       {"x": 3, "y": 5, "name": "MART CLERK", "art": "clerk", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#4a3a2a", "dialogue": ["Fairhaven Mart — harbor stock. Everything smells faintly of rope and triumph."], "mart": {"stock": ["pokeball", "greatball", "superpotion", "hyperpotion", "antidote", "parlyzheal", "revive"]}},
     ],
@@ -742,7 +742,7 @@ export const MAPS7 = {
     ],
     "npcs": [
       {"x": 11, "y": 7, "name": "RYDEL’S MECHANIC JUNO", "art": "worker", "skin": "#f0c8a0", "shirt": "#3a7a4a", "pants": "#4a3a2a", "hair": "#2a1a0a", "dialogue": ["Rydel's Cycles, north street: first bike's a loaner if your legs look honest.", "The cycling road south is my commute and my religion."]},
-      {"x": 18, "y": 12, "name": "VOLT FANATIC PELL", "art": "youngster", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#4a3a2a", "dialogue": ["The gym leader built half this city's grid by hand. The humming is him, saying hello.", "PLUSQUEAK and MINUSQUEAK hold hands on Route 110. Science cannot explain it. Wattson can."]},
+      {"x": 18, "y": 12, "name": "VOLT FANATIC PELL", "art": "youngster", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#4a3a2a", "dialogue": ["The gym leader built half this city's grid by hand. The humming is him, saying hello.", "PLUSQUEAK and MINUSQUEAK hold hands on Route 110. Science cannot explain it. Olin can."]},
       {"x": 7, "y": 14, "name": "CORNER REGULAR VEDA", "art": "lady", "skin": "#d8a878", "shirt": "#7a4a8a", "pants": "#2a2a3a", "hair": "#c0c0c0", "dialogue": ["I come for the lights and stay for the company. The coins are a rumor.", "Wildflower's contest hall is a walk west through Route 117's flower fields. Prettier than winning."]},
       {"x": 3, "y": 5, "name": "MART CLERK", "art": "clerk", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#4a3a2a", "dialogue": ["Lilac Mart — crossroads stock. If the region sells it, it passes through us."], "mart": {"stock": ["pokeball", "greatball", "superpotion", "hyperpotion", "antidote", "parlyzheal", "revive"]}},
     ],
@@ -798,7 +798,7 @@ export const MAPS7 = {
     "npcs": [
       {"x": 3, "y": 5, "name": "MART CLERK", "art": "clerk", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#4a3a2a", "dialogue": ["Wildflower Mart — contest-town shelves, ribbon not included."], "mart": {"stock": ["pokeball", "greatball", "superpotion", "hyperpotion", "antidote", "parlyzheal", "revive"]}},
       {"x": 12, "y": 6, "name": "CONTEST AUNTIE ROSA", "art": "lady", "skin": "#d8a878", "shirt": "#7a4a8a", "pants": "#2a2a3a", "hair": "#c0c0c0", "dialogue": ["A ribbon is just a judge admitting, in writing, that your Kin shone.", "My ROSEFAE has opinions about the hall's lighting. All of them correct."]},
-      {"x": 21, "y": 13, "name": "WALLY’S UNCLE PIOTR", "art": "gent", "skin": "#e8b888", "shirt": "#3a6ac0", "pants": "#2a3a4a", "hair": "#1a1a1a", "dialogue": ["My nephew went out to catch his first Kin and came back a trainer. This town's air, I say.", "The tunnel air does my lungs good. The fresh side of the hill is this one."]},
+      {"x": 21, "y": 13, "name": "EMIL’S UNCLE PIOTR", "art": "gent", "skin": "#e8b888", "shirt": "#3a6ac0", "pants": "#2a3a4a", "hair": "#1a1a1a", "dialogue": ["My nephew went out to catch his first Kin and came back a trainer. This town's air, I say.", "The tunnel air does my lungs good. The fresh side of the hill is this one."]},
       {"x": 8, "y": 14, "name": "GARDENER FENN", "art": "worker", "skin": "#f0c8a0", "shirt": "#3a7a4a", "pants": "#4a3a2a", "hair": "#2a1a0a", "dialogue": ["I mow around the wildflowers. The wildflowers were the point.", "Battle Tent hopefuls train on the north lawn at dawn. Quietly. It's Wildflower."]},
     ],
     "encounters": {"rate": 0.12, "table": [{"species": "roselia", "min": 214, "max": 220, "weight": 24}, {"species": "zigzagoon", "min": 214, "max": 220, "weight": 20}, {"species": "poochyena", "min": 214, "max": 220, "weight": 16}, {"species": "shroomish", "min": 215, "max": 221, "weight": 14}, {"species": "illumise", "min": 215, "max": 221, "weight": 8}, {"species": "volbeat", "min": 215, "max": 221, "weight": 8}, {"species": "skitty", "min": 215, "max": 220, "weight": 10}], "water": [{"species": "tentacool", "min": 202, "max": 210, "weight": 28}, {"species": "magikarp", "min": 202, "max": 208, "weight": 24}, {"species": "wingull", "min": 203, "max": 210, "weight": 20}, {"species": "pelipper", "min": 206, "max": 212, "weight": 8}], "waterRate": 0.08},
@@ -846,13 +846,13 @@ export const MAPS7 = {
     ],
     "signs": [
       {"x": 2, "y": 5, "text": "ASHFALL TOWN — A town formed by fine volcanic ash. It falls like snow that remembers the mountain."},
-      {"x": 16, "y": 12, "text": "ASH FIELDS — Professor Cozmo’s house stands by the ash fields, where meteorites and ash share the same sky."},
+      {"x": 16, "y": 12, "text": "ASH FIELDS — Professor Ando’s house stands by the ash fields, where meteorites and ash share the same sky."},
       {"x": 17, "y": 14, "text": "ASHFALL TOWN — East: ROUTE 113 · South: ROUTE 114."},
       {"x": 24, "y": 11, "text": "ASHFALL TOWN — East: ROUTE 113 · South: ROUTE 114."},
       {"x": 22, "y": 15, "text": "ASHFALL TOWN — East: ROUTE 113 · South: ROUTE 114."},
     ],
     "npcs": [
-      {"x": 11, "y": 6, "name": "PROF. COZMO’S NEIGHBOR HANA", "art": "lady", "skin": "#d8a878", "shirt": "#7a4a8a", "pants": "#2a2a3a", "hair": "#c0c0c0", "dialogue": ["The Professor watches the sky the way farmers watch weather. Both are right to.", "A meteorite fell on Route 114 once. The town still points at the crater like family."]},
+      {"x": 11, "y": 6, "name": "PROF. ANDO’S NEIGHBOR HANA", "art": "lady", "skin": "#d8a878", "shirt": "#7a4a8a", "pants": "#2a2a3a", "hair": "#c0c0c0", "dialogue": ["The Professor watches the sky the way farmers watch weather. Both are right to.", "A meteorite fell on Route 114 once. The town still points at the crater like family."]},
       {"x": 19, "y": 13, "name": "ASH COLLECTOR BRIN", "art": "youngster", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#4a3a2a", "dialogue": ["I sweep ash into sacks for the glassworks. A bottle of Ashfall glass holds a little of every year.", "DIZBEAR on the ash road walk like the mountain is still moving. It isn't. Probably."]},
       {"x": 6, "y": 13, "name": "METEOR WATCHER SOL", "art": "elder", "skin": "#e8b888", "shirt": "#b0503c", "pants": "#2a2a3a", "hair": "#5a3a2a", "dialogue": ["Forty years of falling ash, and the town has never once been buried. It settles gentle.", "South, Route 114 runs down to Comet Falls. Mind the craters; they mind you back."]},
       {"x": 3, "y": 5, "name": "MART CLERK", "art": "clerk", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#4a3a2a", "dialogue": ["Ashfall Mart — ash-country stock. The brooms are not merchandise; stop asking."], "mart": {"stock": ["greatball", "ultraball", "hyperpotion", "fullheal", "revive", "superpotion"]}},
@@ -1007,7 +1007,7 @@ export const MAPS7 = {
       {"x": 13, "y": 13, "text": "ROUTE 101 — Rootlet Town to Eldergrove Town. Every Maris journey starts with this grass on its shoes."},
     ],
     "npcs": [
-      {"x": 9, "y": 7, "name": "YOUNGSTER TAM", "art": "youngster", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#4a3a2a", "dialogue": ["My FURCOON knows this route better than I do. It leads; I follow.", "Prof. Birch does his fieldwork up this way. If you hear shouting, it's science."]},
+      {"x": 9, "y": 7, "name": "YOUNGSTER TAM", "art": "youngster", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#4a3a2a", "dialogue": ["My FURCOON knows this route better than I do. It leads; I follow.", "Prof. Aspen does his fieldwork up this way. If you hear shouting, it's science."]},
     ],
     "encounters": {"rate": 0.13, "table": [{"species": "zigzagoon", "min": 201, "max": 204, "weight": 32}, {"species": "poochyena", "min": 201, "max": 204, "weight": 30}, {"species": "wurmple", "min": 201, "max": 205, "weight": 26}, {"species": "seedot", "min": 202, "max": 205, "weight": 6}, {"species": "lotad", "min": 202, "max": 205, "weight": 6}], "water": [{"species": "tentacool", "min": 202, "max": 210, "weight": 28}, {"species": "magikarp", "min": 202, "max": 208, "weight": 24}, {"species": "wingull", "min": 203, "max": 210, "weight": 20}, {"species": "pelipper", "min": 206, "max": 212, "weight": 8}], "waterRate": 0.08},
     "items": [],
@@ -2144,7 +2144,7 @@ export const MAPS7 = {
     "signs": [
     ],
     "npcs": [
-      {"x": 7, "y": 3, "name": "MR. OKONKWO", "art": "gent", "skin": "#e8b888", "shirt": "#3a6ac0", "pants": "#2a3a4a", "hair": "#1a1a1a", "dialogue": ["My kid left at dawn with a notebook and a head start. Rootlet exports rivals.", "Birch's lab coats the whole town in questions. Good weather, that."]},
+      {"x": 7, "y": 3, "name": "MR. OKONKWO", "art": "gent", "skin": "#e8b888", "shirt": "#3a6ac0", "pants": "#2a3a4a", "hair": "#1a1a1a", "dialogue": ["My kid left at dawn with a notebook and a head start. Rootlet exports rivals.", "Aspen's lab coats the whole town in questions. Good weather, that."]},
     ],
     "encounters": null,
     "items": [],
@@ -2304,7 +2304,7 @@ export const MAPS7 = {
     "signs": [
     ],
     "npcs": [
-      {"x": 7, "y": 3, "name": "CURATOR MARA", "art": "lady", "skin": "#f0c8a0", "shirt": "#3a7a4a", "pants": "#4a3a2a", "hair": "#2a1a0a", "dialogue": ["The Maritime Museum keeps the sea's autobiography: hulls, charts, and one very patient anchor.", "Captain Stern donates something every season and pretends it was ballast."]},
+      {"x": 7, "y": 3, "name": "CURATOR MARA", "art": "lady", "skin": "#f0c8a0", "shirt": "#3a7a4a", "pants": "#4a3a2a", "hair": "#2a1a0a", "dialogue": ["The Maritime Museum keeps the sea's autobiography: hulls, charts, and one very patient anchor.", "Captain Merrick donates something every season and pretends it was ballast."]},
     ],
     "encounters": null,
     "items": [],
@@ -2378,7 +2378,7 @@ export const MAPS7 = {
   },
   "house-fallarbor": {
     "id": "house-fallarbor",
-    "name": "Cozmo Residence",
+    "name": "Ando Residence",
     "music": "viridian-theme",
     "indoor": true,
     "rows": [
@@ -2400,7 +2400,7 @@ export const MAPS7 = {
     "signs": [
     ],
     "npcs": [
-      {"x": 7, "y": 3, "name": "COZMO’S ASSISTANT FENN", "art": "scientist", "skin": "#e8b888", "shirt": "#b0503c", "pants": "#2a2a3a", "hair": "#5a3a2a", "dialogue": ["The Professor's charts cover every wall the ash hasn't claimed.", "A meteorite's place is in a museum, he says, and then keeps three in the study. For company."]},
+      {"x": 7, "y": 3, "name": "ANDO’S ASSISTANT FENN", "art": "scientist", "skin": "#e8b888", "shirt": "#b0503c", "pants": "#2a2a3a", "hair": "#5a3a2a", "dialogue": ["The Professor's charts cover every wall the ash hasn't claimed.", "A meteorite's place is in a museum, he says, and then keeps three in the study. For company."]},
     ],
     "encounters": null,
     "items": [],
@@ -2474,7 +2474,7 @@ export const MAPS7 = {
   },
   "birch-lab": {
     "id": "birch-lab",
-    "name": "Birch Lab",
+    "name": "Aspen Lab",
     "music": "viridian-theme",
     "indoor": true,
     "rows": [
@@ -2496,7 +2496,7 @@ export const MAPS7 = {
       {"x": 9, "y": 11, "to": {"map": "littleroot", "x": 5, "y": 4}},
     ],
     "signs": [
-      {"x": 8, "y": 2, "text": "BIRCH'S FIELD BOARD — 'A Kin is not fully known until you have been muddy in its company.'"},
+      {"x": 8, "y": 2, "text": "ASPEN'S FIELD BOARD — 'A Kin is not fully known until you have been muddy in its company.'"},
     ],
     "npcs": [
       {"x": 9, "y": 4, "name": "AIDE FERN", "art": "aide", "skin": "#e8b888", "shirt": "#3a6ac0", "pants": "#2a3a4a", "hair": "#1a1a1a", "dialogue": ["The Professor does fieldwork the way weather does rain: personally and everywhere.", "Habitat charts on every wall. The mud on the floor is also a chart, unofficially."]},
@@ -2918,14 +2918,14 @@ export const MAPS7 = {
       {"x": 21, "y": 17, "to": {"map": "r126", "x": 21, "y": 1}},
     ],
     "signs": [
-      {"x": 25, "y": 11, "text": "STEVEN'S HOUSE — A stone collector's quiet house above the south shore. The door is shut; the garden rocks are labelled."},
+      {"x": 25, "y": 11, "text": "ALBAN'S HOUSE — A stone collector's quiet house above the south shore. The door is shut; the garden rocks are labelled."},
       {"x": 1, "y": 3, "text": "STARFALL CITY — The island city that watches the sky for a living. The Space Center tower keeps the north street; the gym keeps the twins’ hours."},
       {"x": 22, "y": 5, "text": "STARFALL SPACE CENTER — Rockets, meteor charts, and a viewing floor that never blinks. Visitor launches are announced by bell."},
       {"x": 17, "y": 9, "text": "STARFALL CITY — West: ROUTE 124 · North: ROUTE 125 · South: ROUTE 126."},
       {"x": 23, "y": 9, "text": "STARFALL CITY — West: ROUTE 124 · North: ROUTE 125 · South: ROUTE 126."}
     ],
     "npcs": [
-      {"x": 11, "y": 7, "name": "SPACE RESEARCHER ORBIT", "art": "scientist", "skin": "#c89878", "shirt": "#2a7a6a", "pants": "#3a3a4a", "hair": "#7a4a1a", "dialogue": ["We track every rock that falls toward Maris. Most miss. The paperwork never does.", "A collector named Steven dives the trenches east of here for stones the sea keeps. Ask at the shut house."]},
+      {"x": 11, "y": 7, "name": "SPACE RESEARCHER ORBIT", "art": "scientist", "skin": "#c89878", "shirt": "#2a7a6a", "pants": "#3a3a4a", "hair": "#7a4a1a", "dialogue": ["We track every rock that falls toward Maris. Most miss. The paperwork never does.", "A collector named Alban dives the trenches east of here for stones the sea keeps. Ask at the shut house."]},
       {"x": 18, "y": 12, "name": "DIVE TUTOR MARA", "art": "lass", "skin": "#d8a878", "shirt": "#7a4a8a", "pants": "#2a2a3a", "hair": "#c0c0c0", "dialogue": ["The trenches have doors, if you know how to look: dark water, a held breath, and down.", "Mind Badge in hand and a partner who knows the way down — that is the whole key, divers say."]},
       {"x": 6, "y": 13, "name": "TWIN FAN SOL", "art": "kid", "skin": "#f0c8a0", "shirt": "#3a7a4a", "pants": "#4a3a2a", "hair": "#2a1a0a", "dialogue": ["Two gym leaders, one gym. Challengers get read twice and battled once, thoroughly.", "Ebbtide Cave north changes with the tide. The island keeps two faces and shows you one."]},
       {"x": 3, "y": 5, "name": "MART CLERK", "art": "clerk", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#4a3a2a", "dialogue": ["Starfall Mart — island stock, rocket-delivered prices."], "mart": {"stock": ["greatball", "ultraball", "hyperpotion", "fullheal", "revive", "superpotion"]}},
@@ -2983,7 +2983,7 @@ export const MAPS7 = {
     ],
     "npcs": [
       {"x": 11, "y": 7, "name": "CAVE KEEPER ANTHEA", "art": "elder", "skin": "#e8b888", "shirt": "#b0503c", "pants": "#2a2a3a", "hair": "#5a3a2a", "dialogue": ["The Worldroot Cave is not locked. It is listened to. There is a difference, and the city knows it.", "Two great sleeps meet in stories of this crater. The lake keeps both their dreams polite."]},
-      {"x": 19, "y": 13, "name": "WALLACE FAN RUE", "art": "lass", "skin": "#c89878", "shirt": "#2a7a6a", "pants": "#3a3a4a", "hair": "#7a4a1a", "dialogue": ["Our gym leader paints battles the way the lake paints mornings: on purpose, beautifully.", "When the sky over the crater changes its mind, the whole city watches the lake first."]},
+      {"x": 19, "y": 13, "name": "CASPIAN FAN RUE", "art": "lass", "skin": "#c89878", "shirt": "#2a7a6a", "pants": "#3a3a4a", "hair": "#7a4a1a", "dialogue": ["Our gym leader paints battles the way the lake paints mornings: on purpose, beautifully.", "When the sky over the crater changes its mind, the whole city watches the lake first."]},
       {"x": 6, "y": 14, "name": "FISHER ONEN", "art": "fisher", "skin": "#e8b888", "shirt": "#3a6ac0", "pants": "#2a3a4a", "hair": "#1a1a1a", "dialogue": ["I fish a lake inside a volcano on an island in the sea. Geography gave up; I didn’t.", "Something old circles the deep trench outside the crater wall. The divers wave at it. Carefully."]},
       {"x": 3, "y": 5, "name": "MART CLERK", "art": "clerk", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#4a3a2a", "dialogue": ["Craterlake Mart — crater stock. Everything arrived by air or by nerve."], "mart": {"stock": ["ultraball", "hyperpotion", "fullheal", "revive", "maxpotion", "superpotion"]}},
     ],

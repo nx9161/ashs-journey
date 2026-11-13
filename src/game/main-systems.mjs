@@ -29,10 +29,10 @@ const REGIONS = [
   { id: 'johto', name: 'Yamato', note: 'Old towers, older legends. Complete the Amber voyage first.' },
   { id: 'hoenn', name: 'Maris', note: 'Sea and land at war with the sky. Complete Yamato first.' },
   { id: 'sinnoh', name: 'Borea', note: 'Myths written in stone and time. Complete Maris first.' },
-  { id: 'unova', name: 'Unova', note: 'Truth against ideals. Complete Borea first.' },
-  { id: 'kalos', name: 'Kalos', note: 'Beauty, bonds, and a flare of war. Complete Unova first.' },
-  { id: 'alola', name: 'Alola', note: 'An island challenge under twin lights. Complete Kalos first.' },
-  { id: 'galar', name: 'Galar / Hisui', note: 'Stadiums roar; an older land remembers. Complete Alola first.' },
+  { id: 'unova', name: 'Vespera', note: 'Truth against ideals. Complete Borea first.' },
+  { id: 'kalos', name: 'Aurelia', note: 'Beauty, bonds, and a flare of war. Complete Vespera first.' },
+  { id: 'alola', name: 'Solana', note: 'An island challenge under twin lights. Complete Aurelia first.' },
+  { id: 'galar', name: 'Galar / Hisui', note: 'Stadiums roar; an older land remembers. Complete Solana first.' },
   { id: 'paldea', name: 'Paldea', note: 'A treasure hunt in three directions. Complete Galar first.' },
   { id: 'liko', name: 'A New Horizon', note: 'The next traveler\'s opening. Complete Paldea first.' },
 ];
@@ -471,7 +471,7 @@ Object.assign(Game.prototype, {
       const symbols = g.state.badges.symbols || [];
       for (const fid of FACILITY_IDS) {
         const slot = symbols[FACILITY_IDS.indexOf(fid)];
-        const word = slot === 'gold' ? 'GOLD' : slot === 'silver' ? 'SILVER' : '—';
+        const word = slot === 'gold' ? 'GOLD' : slot === 'silver' ? 'RIVEN' : '—';
         items.push({
           label: '· ' + FACILITIES[fid].name + ' — ' + FACILITIES[fid].brain + ' — ' + word,
           value: 'fq:' + fid,
@@ -555,7 +555,7 @@ Object.assign(Game.prototype, {
         const fac = FACILITIES[fid];
         if (fac) {
           const slot = (g.state.badges.symbols || [])[FACILITY_IDS.indexOf(fid)];
-          const word = slot === 'gold' ? 'GOLD' : slot === 'silver' ? 'SILVER' : 'not yet earned';
+          const word = slot === 'gold' ? 'GOLD' : slot === 'silver' ? 'RIVEN' : 'not yet earned';
           g.ui.say([fac.name + ' — Frontier Brain ' + fac.brain + ', ' + fac.brainTitle + '.', 'Your symbol here: ' + word + '. The facility desk books the runs; the Brain keeps the symbol.'], () => g.openQuestLog(), 'Frontier');
         }
       } else if (v.startsWith('sq:')) {

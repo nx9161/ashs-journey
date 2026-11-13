@@ -290,7 +290,7 @@ export const MAPS8 = {
         "hair": "#1a1a1a",
         "dialogue": [
           "The Dawnwick run is my whole world — one island of arenas behind you, one quiet town ahead of you.",
-          "Scott books the crossings; I just keep the boat honest. Step aboard whenever you are ready."
+          "Sutter books the crossings; I just keep the boat honest. Step aboard whenever you are ready."
         ],
         "ferry": "pallet",
         "ferryArc": "frontier"
@@ -298,14 +298,14 @@ export const MAPS8 = {
       {
         "x": 20,
         "y": 16,
-        "name": "SCOTT",
+        "name": "SUTTER",
         "art": "gent",
         "skin": "#d8a878",
         "shirt": "#7a4a8a",
         "pants": "#2a2a3a",
         "hair": "#c0c0c0",
         "dialogue": [
-          "Welcome to the Trial Grounds! I'm Scott — I scouted every brick of this place into being.",
+          "Welcome to the Trial Grounds! I'm Sutter — I scouted every brick of this place into being.",
           "Seven facilities, seven Frontier Brains, seven Symbols waiting for someone stubborn enough. That grin says it might be you.",
           "No rush and no shortcuts here. Heal at the Center, stock up at the Mart — then pick a door and make it famous."
         ]
@@ -403,7 +403,7 @@ export const MAPS8 = {
         "hair": "#1a1a1a",
         "dialogue": [
           "Welcome to the Trial Tower! Streaks are the currency here — win in runs of seven and the tower learns your name.",
-          "Salon Maiden Anabel waits at the top of the streaks. Nobody has flustered her yet. Nobody."
+          "Salon Maiden Esme waits at the top of the streaks. Nobody has flustered her yet. Nobody."
         ],
         "frontier": "tower"
       }
@@ -471,7 +471,7 @@ export const MAPS8 = {
         "hair": "#7a4a1a",
         "dialogue": [
           "Welcome to the Trial Factory! We rent the teams and keep the luck — you borrow both, one battle at a time.",
-          "Factory Head Noland built half these machines and charmed the other half. Win enough rentals in a row and you will meet him."
+          "Factory Head Faber built half these machines and charmed the other half. Win enough rentals in a row and you will meet him."
         ],
         "frontier": "factory"
       }
@@ -538,7 +538,7 @@ export const MAPS8 = {
         "hair": "#c0c0c0",
         "dialogue": [
           "Welcome to the Trial Arena! Short, fierce bouts here — three turns, and the judges have seen enough.",
-          "Arena Tycoon Greta judges every bout herself. Bring guts; she can smell the difference."
+          "Arena Tycoon Veda judges every bout herself. Bring guts; she can smell the difference."
         ],
         "frontier": "arena"
       }
@@ -609,7 +609,7 @@ export const MAPS8 = {
         "hair": "#2a1a0a",
         "dialogue": [
           "Welcome to the Trial Dome! Sixteen trainers enter every tournament, and the crowd has already picked its favourite. It is not you. Yet.",
-          "Dome Ace Tucker headlines the final when a streak earns it. He performs like the whole dome is one big stage — because it is."
+          "Dome Ace Dorian headlines the final when a streak earns it. He performs like the whole dome is one big stage — because it is."
         ],
         "frontier": "dome"
       }
@@ -971,7 +971,7 @@ export const MAPS8 = {
         "hair": "#4a3a2a",
         "dialogue": [
           "Welcome to the Trial Pike! Seven chambers, three doors apiece, and no map — the Pike likes its secrets.",
-          "Pike Queen Lucy waits at the end of the run. What the doors hide between here and her is, well. That's the Pike."
+          "Pike Queen Selene waits at the end of the run. What the doors hide between here and her is, well. That's the Pike."
         ],
         "frontier": "pike"
       }
@@ -1039,7 +1039,7 @@ export const MAPS8 = {
         "hair": "#5a3a2a",
         "dialogue": [
           "Welcome to the Trial Palace! Here your Kin choose their own moves — we simply keep the gardens quiet for them.",
-          "Palace Maven Spencer believes a Kin's spirit speaks loudest uncommanded. Win your streaks and he will listen for yours."
+          "Palace Maven Ambrose believes a Kin's spirit speaks loudest uncommanded. Win your streaks and he will listen for yours."
         ],
         "frontier": "palace"
       }
@@ -1123,7 +1123,7 @@ export const MAPS8 = {
         "hair": "#1a1a1a",
         "dialogue": [
           "Welcome to the Trial Pyramid! Seven floors up through the dark, and the only supplies are the ones in your run bag.",
-          "Pyramid King Brandon keeps the summit. The mountain has opinions about who reaches him. So does he."
+          "Pyramid King Titus keeps the summit. The mountain has opinions about who reaches him. So does he."
         ],
         "frontier": "pyramid"
       }

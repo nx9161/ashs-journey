@@ -72,21 +72,21 @@ export const CHAPTERS = [
   },
   // ---- locked: Act III (planned) ----
   {
-    n: 9, id: 'unova', act: 3, region: 'Unova', scope: 'locked',
+    n: 9, id: 'unova', act: 3, region: 'Vespera', scope: 'locked',
     title: 'The Vespera Road',
     arc: 'Locked — future act.',
     anime: 'Seasons 14–16: Vespera / Rival Destinies / Adventures in Vespera',
     movies: ['The Twin Dragons of Vespera', 'The Sword of the Vale', 'The Legend Awakened'],
   },
   {
-    n: 10, id: 'kalos', act: 3, region: 'Kalos', scope: 'locked',
+    n: 10, id: 'kalos', act: 3, region: 'Aurelia', scope: 'locked',
     title: 'The Aurelia Standard',
     arc: 'Locked — future act.',
     anime: 'Seasons 17–19: Aurelia / The Aurelia Quest / Aurelia Rising (incl. Mega Evolution specials)',
     movies: ['The Jewel and the Cocoon', 'The Clash of Ages', 'The Mechanical Marvel'],
   },
   {
-    n: 11, id: 'alola', act: 3, region: 'Alola', scope: 'locked',
+    n: 11, id: 'alola', act: 3, region: 'Solana', scope: 'locked',
     title: 'Twin Lights',
     arc: 'Locked — future act.',
     anime: 'Seasons 20–22: Twin Lights / Island Adventures / Island Legends',

@@ -7,7 +7,7 @@
 export const RIVALS = {
   gary: {
     id: 'gary',
-    name: 'GARY',
+    name: 'VALE',
     partner: 'eevee', // Yellow: the rival's starter is a PRISMKIT
     // Team plans per act reference species ids; acts beyond Arden resolve
     // partner -> rivalPartnerEvolution(earlyWins, earlyLosses) at build time.

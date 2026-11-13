@@ -197,25 +197,25 @@ export function frontierScottLines(state) {
     return [
       'Seven Symbols. Every Brain on my island has looked at your team and nodded — in silver, at least, and ' + golds + ' of them in gold already.',
       'Now the truth I saved for this moment: silver was the introduction. Gold is the argument. Every Brain here keeps a harder team for the trainer who comes back.',
-      'And when you hunt the last of the gold, finish at the Pyramid. Brandon is the last word on this island — what he says on that summit, nobody overrules.',
+      'And when you hunt the last of the gold, finish at the Pyramid. Titus is the last word on this island — what he says on that summit, nobody overrules.',
     ];
   }
   if (earned > 0) {
     return [
       'Counted your case on the way in, trainer — ' + earned + ' of seven Symbols in hand: ' + silvers + ' silver, ' + golds + ' gold.',
-      'Silver is a Brain respecting you. Gold is a Brain with nothing left to teach you — and gold, trainer, is the standard I built this island to demand.',
+      'Riven is a Brain respecting you. Gold is a Brain with nothing left to teach you — and gold, trainer, is the standard I built this island to demand.',
       'Keep pushing door to door. The Brains you have only met in silver are keeping their real teams warm for you.',
     ];
   }
   return [
-    'Welcome to the Trial Grounds! I\'m Scott — I scouted every brick of this place into being.',
+    'Welcome to the Trial Grounds! I\'m Sutter — I scouted every brick of this place into being.',
     'Seven facilities, seven Frontier Brains, seven Symbols waiting for someone stubborn enough. That grin says it might be you.',
     'No rush and no shortcuts here. Heal at the Center, stock up at the Mart — then pick a door and make it famous.',
   ];
 }
 
 export function talkFrontierScott(g, ow) {
-  g.ui.say(frontierScottLines(g.state), () => {}, 'SCOTT');
+  g.ui.say(frontierScottLines(g.state), () => {}, 'SUTTER');
 }
 
 // ------------------------------------------------------------------
@@ -246,9 +246,9 @@ export function tryScottClosing(g, mapId) {
   g.ui.say([
     'There you are. I followed the whole campaign, trainer — every facility, every Brain, every last gold strike. I would not have missed the end of it for a quieter island.',
     'Seven Symbols, all of them gold. The Trial Grounds salutes its conqueror — and its founder got to watch it happen, door by door.',
-    'One thing more, and it is not about my island. Word came in off the water: Professor Hawthorn\'s lab has a visitor — Gary, fresh home from somewhere called Borea, an VOLTYETI shadowing him and stories enough to fill the room.',
+    'One thing more, and it is not about my island. Word came in off the water: Professor Hawthorn\'s lab has a visitor — Vale, fresh home from somewhere called Borea, an VOLTYETI shadowing him and stories enough to fill the room.',
     'Home first, though — your mother has waited out this whole campaign too. Eat. Rest. Then the lab talk, and whatever road it opens next.',
-  ], () => {}, 'SCOTT');
+  ], () => {}, 'SUTTER');
   return true;
 }
 
@@ -752,17 +752,17 @@ function startPossessedBrandon(g, ow) {
   const state = g.state;
   const voice = String(state.player.name || '???').toUpperCase() + '??';
   g.ui.say([
-    'Brandon\'s chamber is older than the Pyramid around it. Against its heart stands a sealed stone in black iron bands — the King of Thalantis, the keeper whispers, asleep inside it for three thousand years.',
+    'Titus\'s chamber is older than the Pyramid around it. Against its heart stands a sealed stone in black iron bands — the King of Thalantis, the keeper whispers, asleep inside it for three thousand years.',
     'The bands hum. Dust falls upward. The seal cracks a hair\'s width — and something is suddenly standing where you stand, wearing your stance, your grin, your voice.',
   ], () => {
     g.ui.say([
       'At last. A body that CLIMBS. Three thousand years in the dark, and the mountain delivers me hands.',
-      'King Brandon! I have crossed an age for this summit. Give me its symbol. Give me EVERYTHING on this island.',
+      'King Titus! I have crossed an age for this summit. Give me its symbol. Give me EVERYTHING on this island.',
     ], () => {
       g.ui.say([
         'Whatever wears the boy has his fire and none of his manners. Very well, King of Thalantis — I accept YOUR challenge.',
         'Hear the terms, spirit: my Regis will stand TEN levels above the team the boy climbed with, and I will not hold back one stone\'s weight. If his team breaks you, it breaks you honestly.',
-      ], () => launchPossessedBattle(g, ow), 'BRANDON');
+      ], () => launchPossessedBattle(g, ow), 'TITUS');
     }, voice);
   }, '');
 }
@@ -793,7 +793,7 @@ function launchPossessedBattle(g, ow) {
           closeRun(state);
           g.ui.say(['The run closes in triumph — the desk strikes it in silver ink.'], () => {}, 'TRIAL PYRAMID DESK');
         });
-      }, 'BRANDON');
+      }, 'TITUS');
       return;
     }
     // The canon path: the broken battle breaks the possession.
@@ -807,7 +807,7 @@ function launchPossessedBattle(g, ow) {
         'It is done. Brass and old words, and the seal holds again. You are yourself, climber — shaken is not beaten.',
         'My keeper has tended your team while the stone was re-sealed; I will not take a symbol\'s measure from a half-dead team. It would prove nothing.',
         'Challenge me again when you are ready. This time I battle YOU.',
-      ], () => {}, 'BRANDON');
+      ], () => {}, 'TITUS');
     }, '');
   };
   g.scenes.push(b);
@@ -1051,14 +1051,14 @@ export function frontierBrainNpcs(state, mapId) {
   if (!F || !F.run) return [];
   if (mapId === 'frontier-pike' && F.run.facility === 'pike' && lucyDue(state)) {
     return [{
-      name: 'LUCY', x: LUCY_TILE.x, y: LUCY_TILE.y, art: 'lady', dir: 'down', frontierBrain: 'pike',
+      name: 'SELENE', x: LUCY_TILE.x, y: LUCY_TILE.y, art: 'lady', dir: 'down', frontierBrain: 'pike',
       skin: '#f0c8a0', shirt: '#5a2a6a', pants: '#2a2a3a', hair: '#3a2a1a',
       dialog: ['So the serpent delivers you to me at last.'],
     }];
   }
   if (mapId === 'frontier-pyramid-a' && F.run.facility === 'pyramid' && brandonDue(state)) {
     return [{
-      name: 'BRANDON', x: BRANDON_TILE.x, y: BRANDON_TILE.y, art: 'hiker', dir: 'down', frontierBrain: 'pyramid',
+      name: 'TITUS', x: BRANDON_TILE.x, y: BRANDON_TILE.y, art: 'hiker', dir: 'down', frontierBrain: 'pyramid',
       skin: '#e8b888', shirt: '#7a4a22', pants: '#3a3a2a', hair: '#1a1a1a',
       dialog: ['You climbed into my light, climber.'],
     }];

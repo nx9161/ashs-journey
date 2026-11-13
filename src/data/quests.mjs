@@ -49,14 +49,14 @@ export const QUESTS = {
     revelation: 'Marlow was the first trainer ever to challenge the Fernmere Gym — before there was a League to record it. His tortoise outlived three gyms, two badges designs, and every one of his rivals.',
   },
   tale_pewter: {
-    id: 'tale_pewter', town: 'Flintridge City', giver: 'CURATOR', title: "Brock's Day Off",
+    id: 'tale_pewter', town: 'Flintridge City', giver: 'CURATOR', title: "Garran's Day Off",
     stages: [
       'Cover the museum desk: answer 3 visitor questions from the exhibits',
-      "Spar Brock's PEBBLET, off-duty, here in Flintridge City",
+      "Spar Garran's PEBBLET, off-duty, here in Flintridge City",
     ],
     reward: { keepsake: 'ironacorn' }, rewardText: 'Iron Acorn',
     bondNpc: 'brock', bondDelta: 2,
-    revelation: "The museum came first. Flintridge's gym was built afterwards, out of the museum's own stone — the city's leaders have been part-time curators ever since. Brock still pays the fossil lab out of his gym winnings.",
+    revelation: "The museum came first. Flintridge's gym was built afterwards, out of the museum's own stone — the city's leaders have been part-time curators ever since. Garran still pays the fossil lab out of his gym winnings.",
   },
   tale_cerulean: {
     id: 'tale_cerulean', town: 'Tidehaven City', giver: 'TESS', title: 'The Stolen Bike Bell',
@@ -66,7 +66,7 @@ export const QUESTS = {
     ],
     reward: { items: { tm11: 1 } }, rewardText: 'TM11 (BubbleBeam)',
     bondNpc: 'misty', bondDelta: 1,
-    revelation: "The bell is older than the gym: it rang on the first bicycle ever ridden over Nugget Bridge, back when Tidehaven's gym was a bike shop with a pool out back. Misty still keeps the shop's old ledger.",
+    revelation: "The bell is older than the gym: it rang on the first bicycle ever ridden over Nugget Bridge, back when Tidehaven's gym was a bike shop with a pool out back. Marina still keeps the shop's old ledger.",
   },
   tale_vermilion: {
     id: 'tale_vermilion', town: 'Arcport City', giver: 'CHAIRMAN', title: 'Fan Club Founder',
@@ -76,7 +76,7 @@ export const QUESTS = {
     ],
     reward: { keepsake: 'tidepearl' }, rewardText: 'Tide Pearl',
     bondNpc: 'surge', bondDelta: 1,
-    revelation: "The founder charted Arcport's tides before there was a harbor — the Fan Club began as three sailors arguing over his tide tables. Even Lt. Surge learned to read the bay from those notes.",
+    revelation: "The founder charted Arcport's tides before there was a harbor — the Fan Club began as three sailors arguing over his tide tables. Even Lt. Brandt learned to read the bay from those notes.",
   },
   tale_lavender: {
     id: 'tale_lavender', town: 'Hushmoor Town', giver: 'VOLUNTEER', title: 'Names on the Wall',
@@ -95,16 +95,16 @@ export const QUESTS = {
       'Water the plants again once you hold 4 badges (visit 2 of 3)',
       'Water the plants once more at 6 badges, and chase off the wild TINKLETOM (visit 3 of 3)',
     ],
-    reward: { keepsake: 'gardeniasash' }, rewardText: 'Gardenia Sash',
+    reward: { keepsake: 'gardeniasash' }, rewardText: 'Tansy Sash',
     bondNpc: 'erika', bondDelta: 2,
-    revelation: "The roof garden grows over Canopy's first gym — a wooden hall that stood where the Game Corner now glitters. Erika's grandmother planted the first bed so the city's green would always be taller than its neon.",
+    revelation: "The roof garden grows over Canopy's first gym — a wooden hall that stood where the Game Corner now glitters. Verna's grandmother planted the first bed so the city's green would always be taller than its neon.",
   },
   tale_saffron: {
     id: 'tale_saffron', town: 'Farsight City', giver: 'MASTER KO', title: 'Two Gyms, One City',
     stages: [
-      "Carry the Dojo's message to Sabrina in Farsight Gym",
-      "Witness the old rivalry — then choose: the Dojo spar (XP), or Sabrina's keepsake IOU",
-      'Finish it: win the Dojo spar, or redeem the IOU with Sabrina after winning her Marsh Badge',
+      "Carry the Dojo's message to Sybil in Farsight Gym",
+      "Witness the old rivalry — then choose: the Dojo spar (XP), or Sybil's keepsake IOU",
+      'Finish it: win the Dojo spar, or redeem the IOU with Sybil after winning her Marsh Badge',
     ],
     reward: { choice: true }, rewardText: 'Dojo spar (XP) or a keepsake IOU',
     bondNpc: 'sabrina', bondDelta: 1,
@@ -118,7 +118,7 @@ export const QUESTS = {
     // Fires via the tale-completion watcher, whichever of the tale's
     // two endings (his spar, her IOU) the player chose.
     onComplete: [{ actorMove: { who: 'master-ko@dojo', to: [5, 5] } }],
-    revelation: "The Dojo and the Gym were one school once. Sabrina's father and Master Ko trained side by side — until the day they disagreed about what strength is FOR, and split the hall, the students, and Farsight itself down the middle.",
+    revelation: "The Dojo and the Gym were one school once. Sybil's father and Master Ko trained side by side — until the day they disagreed about what strength is FOR, and split the hall, the students, and Farsight itself down the middle.",
   },
   tale_fuchsia: {
     id: 'tale_fuchsia', town: 'Bramble City', giver: 'PRESERVE WARDEN', title: "The Warden's Teeth",
@@ -129,7 +129,7 @@ export const QUESTS = {
     ],
     reward: { items: { safariball: 10 } }, rewardText: '10 Safari Balls',
     bondNpc: 'koga', bondDelta: 1, // via his daughter Janine's thanks, at completion
-    revelation: "The lure is older than the Bramble Preserve: the Warden carved it the year the marsh fed all of Bramble, before there were fences, gates, or tickets. Koga's grandfather taught him to fish with it.",
+    revelation: "The lure is older than the Bramble Preserve: the Warden carved it the year the marsh fed all of Bramble, before there were fences, gates, or tickets. Marek's grandfather taught him to fish with it.",
   },
   tale_cinnabar: {
     id: 'tale_cinnabar', town: 'Caldera Town', giver: 'LAB TECH', title: 'Lab Notes',
@@ -139,7 +139,7 @@ export const QUESTS = {
     ],
     reward: { keepsake: 'embereed' }, rewardText: 'Ember Seed',
     bondNpc: 'blaine', bondDelta: 1,
-    revelation: 'One surviving page describes a jungle expedition that followed a mirage no instrument could record — the team came home with a single curled eyelash in a specimen jar, and a leader, Blaine among them, who never once called it a failure. What slept in that jungle, the page does not say.',
+    revelation: 'One surviving page describes a jungle expedition that followed a mirage no instrument could record — the team came home with a single curled eyelash in a specimen jar, and a leader, Ignas among them, who never once called it a failure. What slept in that jungle, the page does not say.',
   },
 };
 
@@ -199,7 +199,7 @@ export const TALE_NPCS = [
   // second fragment) — and it was the Mart's east door warp besides.
   { map: 'pallet', x: 10, y: 11, name: 'CAPT FRONTIER', art: 'sailor', skin: '#e8b888', shirt: '#5a3a7a', pants: '#2a2a3a', hair: '#1a1a2a',
     ferry: 'frontierhub', ferryArc: 'frontier',
-    dialogue: ['The Frontier run is the short island crossing — seven arenas on one island, and every trainer there fighting like the whole sea is watching.', "Scott himself left your invitation — his scouts book that passage, and his name is already on your boarding card. No invitation, no boarding — captain's orders, trainer."] },
+    dialogue: ['The Frontier run is the short island crossing — seven arenas on one island, and every trainer there fighting like the whole sea is watching.', "Sutter himself left your invitation — his scouts book that passage, and his name is already on your boarding card. No invitation, no boarding — captain's orders, trainer."] },
   // Arc 3 Stage H4a: the Maris embark captain, appended to Arcport's
   // roster through this same loadMap append idiom (Arcport's map def
   // in maps2.mjs is NOT rewritten). He carries NO tale/role — the ferry
@@ -256,7 +256,7 @@ export const TALE_NPCS = [
     dialogue: ['Fernmere sundries! Maps, string, and strong opinions about both.'] },
   { map: 'viridian', x: 16, y: 6, name: 'ACE MARLOW', art: 'elder', ...APPEAR.ace, tale: 'tale_viridian', role: 'giver',
     dialogue: ['Sixty years I walked that forest. It kept one thing of mine. Fair trade, I suppose.'] },
-  { map: 'pewter', x: 5, y: 4, name: 'BROCK', art: 'brock', ...APPEAR.brock, tale: 'tale_pewter', role: 'stage',
+  { map: 'pewter', x: 5, y: 4, name: 'GARRAN', art: 'brock', ...APPEAR.brock, tale: 'tale_pewter', role: 'stage',
     dialogue: ['Off duty, I read to the museum fossils. They never heckle.'] },
   { map: 'cerulean', x: 16, y: 1, name: 'PIP', art: 'kid', ...APPEAR.kid, tale: 'tale_cerulean', role: 'culprit',
     dialogue: ['The cape is mine. The view is mine. The bell is — also around here somewhere.'] },
@@ -277,8 +277,8 @@ export const TALE_NPCS = [
   // and its landing tile; an NPC there seals the gate (see
   // ~/workspace/ashs-journey-qa/celadon-fix.md).
   { map: 'celadon', x: 15, y: 9, name: 'GARDENER', art: 'worker', ...APPEAR.gardener, tale: 'tale_celadon', role: 'giver',
-    dialogue: ["Erika's roof garden. Three waterings a season, or the vines file a complaint."] },
-  { map: 'fuchsia', x: 5, y: 11, name: 'JANINE', art: 'lass', ...APPEAR.janine, tale: 'tale_fuchsia', role: 'flavor',
+    dialogue: ["Verna's roof garden. Three waterings a season, or the vines file a complaint."] },
+  { map: 'fuchsia', x: 5, y: 11, name: 'JESSA', art: 'lass', ...APPEAR.janine, tale: 'tale_fuchsia', role: 'flavor',
     dialogue: ["Father says a ninja's patience is a pond: still on top, deep below. I am working on the still part."] },
   { map: 'cinnabar', x: 10, y: 8, name: 'LAB TECH', art: 'scientist', ...APPEAR.tech, tale: 'tale_cinnabar', role: 'giver',
     dialogue: ['The mansion library burned, but paper is stubborn. So are we.'] },
@@ -295,7 +295,7 @@ export const TALE_NPC_PATCHES = [
   { map: 'vermilion', name: 'CHAIRMAN', tale: 'tale_vermilion', role: 'giver' },
   { map: 'lavender', name: 'VOLUNTEER', tale: 'tale_lavender', role: 'giver' },
   { map: 'dojo', name: 'MASTER KO', tale: 'tale_saffron', role: 'giver' },
-  { map: 'gym-saffron', name: 'SABRINA', tale: 'tale_saffron', role: 'stage' },
+  { map: 'gym-saffron', name: 'SYBIL', tale: 'tale_saffron', role: 'stage' },
   { map: 'fuchsia', name: 'PRESERVE WARDEN', tale: 'tale_fuchsia', role: 'giver' },
 ];
 
@@ -344,7 +344,7 @@ export function taleStageText(state, tale) {
   // Farsight's final stage reads differently per branch (the choice is a
   // story flag, since flags are the save's boolean scratch space).
   if (tale.id === 'tale_saffron' && s === 2 && state.story.flags && state.story.flags.tale_saffron_iou) {
-    text = 'Redeem the keepsake IOU with Sabrina (needs the Marsh Badge, if not yet won)';
+    text = 'Redeem the keepsake IOU with Sybil (needs the Marsh Badge, if not yet won)';
   }
   // Canopy tells the player exactly which badge count unlocks a visit.
   return text;

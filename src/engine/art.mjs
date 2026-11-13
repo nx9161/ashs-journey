@@ -246,7 +246,7 @@ export function npcArtKind(npc) {
   if (npc.pc) return 'pc';
   if (npc.art) return npc.art;
   const name = (npc.name || '').toUpperCase();
-  if (name === 'BROCK') return 'brock';
+  if (name === 'GARRAN') return 'brock';
   return NPC_ROLE[name] || 'youngster';
 }
 
@@ -1776,7 +1776,7 @@ const KIT_PROP_KINDS = new Set(['lamp', 'crates', 'signpost', 'postbox', 'stall'
   'birdbath', 'bikestand', 'pottedtree', 'sundial', 'gatepost', 'gatearch',
   // Wave B: Yamato/Maris regional props (J3/H3/H3B kinds + the W6 props
   // those towns use) — same kit-ground treatment as the Arden set.
-  'maple', 'apricorn', 'jwell', 'stonebell', 'leaguefountain', 'snackmachine',
+  'maple', 'podnut', 'jwell', 'stonebell', 'leaguefountain', 'snackmachine',
   'fossildisplay', 'lifering', 'divingtank', 'coil', 'batterypack',
   'contestarch', 'ashshrub', 'forge', 'meteorstone', 'telescope',
   'starglobe', 'column', 'coral', 'bonsai',
@@ -2729,14 +2729,14 @@ export function uiIcon(doc, name) {
 // with no entry has NO portrait (the dialogue UI shows none — never a
 // placeholder). All 15 portrait subjects are reachable through this map.
 const SPEAKER_PORTRAITS = {
-  'ASH': 'ash',
-  'GARY': 'gary', 'CHAMPION': 'gary',
+  'KIAN': 'ash',
+  'VALE': 'gary', 'CHAMPION': 'gary',
   'PROF HAWTHORN': 'hawthorn', 'HAWTHORN': 'hawthorn',
-  'MISTY': 'misty', 'LT SURGE': 'surge', 'SURGE': 'surge',
-  'ERIKA': 'erika', 'KOGA': 'koga', 'SABRINA': 'sabrina',
-  'BLAINE': 'blaine', 'GIOVANNI': 'giovanni', 'THE BOSS': 'giovanni',
-  'LORELEI': 'lorelei', 'BRUNO': 'bruno', 'AGATHA': 'agatha',
-  'LANCE': 'lance', 'NURSE': 'nurse', 'NURSE JOY': 'nurse',
+  'MARINA': 'misty', 'LT BRANDT': 'surge', 'BRANDT': 'surge',
+  'VERNA': 'erika', 'MAREK': 'koga', 'SYBIL': 'sabrina',
+  'IGNAS': 'blaine', 'VANE': 'giovanni', 'THE BOSS': 'giovanni',
+  'ISOLDE': 'lorelei', 'GORAN': 'bruno', 'ODESSA': 'agatha',
+  'DARIAN': 'lance', 'NURSE': 'nurse',
 };
 export function speakerPortraitId(speaker) {
   if (!speaker || typeof speaker !== 'string') return null;

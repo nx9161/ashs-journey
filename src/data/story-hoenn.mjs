@@ -29,31 +29,31 @@
 // the marked seam.
 // ---------------------------------------------------------------------------
 export const HOENN_QUESTS = [
-  { id: 'q_hoenn_rescue', flag: 'birch_rescued', text: 'Help Professor Birch — something is chasing him near Rootlet', hint: 'Shouting, just off the Rootlet road. A wild UMBHYEN has the professor cornered — drive it off.' },
-  { id: 'q_hoenn_arrival', flag: 'hoenn_arrival', text: 'Meet Professor Birch in his Rootlet lab', hint: 'Birch\'s lab stands at the north edge of Rootlet. He owes you a proper welcome — and your Maris journey needs registering.' },
-  { id: 'q_hoenn_wally', flag: 'wally_helped', text: 'Help Wally catch his first Kin in Meadowbrook', hint: 'A frail boy in Meadowbrook wants to catch a Kin of his own before his family moves. He has the heart; he needs a borrowed partner and a steady friend.' },
-  { id: 'q_hoenn_stone', flag: 'badge_stone', text: 'Win the Stone Badge from Roxanne in Copperton City', hint: 'Roxanne keeps Copperton\'s gym with Rock types raised from the quarry stone itself. Water, Grass, Fighting, Ground and Steel moves crack them.' },
-  { id: 'q_hoenn_knuckle', flag: 'badge_knuckle', text: 'Win the Knuckle Badge from Brawly in Mistford Town', hint: 'Brawly trains where the surf breaks. His Fighting types fear Flying and Psychic moves — and respect anyone who crossed the water to reach him.' },
-  { id: 'q_hoenn_slateport_may', flag: 'may_slateport_done', text: 'Watch May compete at the Fairhaven Contest Hall', hint: 'May is entering her first big contest in Fairhaven. She would never ask you to come. Come anyway.' },
-  { id: 'q_hoenn_meteor', flag: 'meteor_falls_done', text: 'See what the two teams wanted at Comet Falls', hint: 'North of Copperton, the falls run cold under old star-stone. Professor Cozmo studies the meteorites there — and lately, he has had watchers.' },
-  { id: 'q_hoenn_dynamo', flag: 'badge_dynamo', text: 'Win the Dynamo Badge from Wattson in Lilac City', hint: 'Wattson built Lilac\'s grid and its gym with his own hands. His Electric types fear Ground moves above all.' },
-  { id: 'q_hoenn_verdanturf_may', flag: 'may_verdanturf_done', text: 'Watch May compete at the Wildflower Contest Hall', hint: 'Wildflower\'s hall is small and serious about it. May has been practicing a new appeal all week.' },
+  { id: 'q_hoenn_rescue', flag: 'birch_rescued', text: 'Help Professor Aspen — something is chasing him near Rootlet', hint: 'Shouting, just off the Rootlet road. A wild UMBHYEN has the professor cornered — drive it off.' },
+  { id: 'q_hoenn_arrival', flag: 'hoenn_arrival', text: 'Meet Professor Aspen in his Rootlet lab', hint: 'Aspen\'s lab stands at the north edge of Rootlet. He owes you a proper welcome — and your Maris journey needs registering.' },
+  { id: 'q_hoenn_wally', flag: 'wally_helped', text: 'Help Emil catch his first Kin in Meadowbrook', hint: 'A frail boy in Meadowbrook wants to catch a Kin of his own before his family moves. He has the heart; he needs a borrowed partner and a steady friend.' },
+  { id: 'q_hoenn_stone', flag: 'badge_stone', text: 'Win the Stone Badge from Saxa in Copperton City', hint: 'Saxa keeps Copperton\'s gym with Rock types raised from the quarry stone itself. Water, Grass, Fighting, Ground and Steel moves crack them.' },
+  { id: 'q_hoenn_knuckle', flag: 'badge_knuckle', text: 'Win the Knuckle Badge from Enzo in Mistford Town', hint: 'Enzo trains where the surf breaks. His Fighting types fear Flying and Psychic moves — and respect anyone who crossed the water to reach him.' },
+  { id: 'q_hoenn_slateport_may', flag: 'may_slateport_done', text: 'Watch Maia compete at the Fairhaven Contest Hall', hint: 'Maia is entering her first big contest in Fairhaven. She would never ask you to come. Come anyway.' },
+  { id: 'q_hoenn_meteor', flag: 'meteor_falls_done', text: 'See what the two teams wanted at Comet Falls', hint: 'North of Copperton, the falls run cold under old star-stone. Professor Ando studies the meteorites there — and lately, he has had watchers.' },
+  { id: 'q_hoenn_dynamo', flag: 'badge_dynamo', text: 'Win the Dynamo Badge from Olin in Lilac City', hint: 'Olin built Lilac\'s grid and its gym with his own hands. His Electric types fear Ground moves above all.' },
+  { id: 'q_hoenn_verdanturf_may', flag: 'may_verdanturf_done', text: 'Watch Maia compete at the Wildflower Contest Hall', hint: 'Wildflower\'s hall is small and serious about it. Maia has been practicing a new appeal all week.' },
   { id: 'q_hoenn_chimney', flag: 'chimney_clash_done', text: 'Break up the clash on Mt. Smokestack', hint: 'Two teams, one volcano, and a meteorite that does not belong to either of them. The cable car from Route 112 climbs straight into it.' },
-  { id: 'q_hoenn_heat', flag: 'badge_heat', text: 'Win the Heat Badge from Flannery in Steamspring Town', hint: 'Flannery is new to her grandfather\'s gym and determined to burn bright enough to fill it. Her Fire types fear Water, Ground and Rock moves.' },
-  { id: 'q_hoenn_fallarbor_may', flag: 'may_fallarbor_done', text: 'Watch May compete at the Ashfall Contest Hall', hint: 'Ash country. The Ashfall crowd judges hard and applauds harder. May knows it — she picked this hall on purpose.' },
+  { id: 'q_hoenn_heat', flag: 'badge_heat', text: 'Win the Heat Badge from Sola in Steamspring Town', hint: 'Sola is new to her grandfather\'s gym and determined to burn bright enough to fill it. Her Fire types fear Water, Ground and Rock moves.' },
+  { id: 'q_hoenn_fallarbor_may', flag: 'may_fallarbor_done', text: 'Watch Maia compete at the Ashfall Contest Hall', hint: 'Kian country. The Ashfall crowd judges hard and applauds harder. Maia knows it — she picked this hall on purpose.' },
   // --- H4b: the east rows ---
-  { id: 'q_hoenn_balance', flag: 'badge_balance', text: 'Win the Balance Badge from Norman in Meadowbrook City', hint: 'The deferred meeting, at full circle: Norman has waited behind four badges of road. His Normal types fear Fighting moves — and respect balance.' },
+  { id: 'q_hoenn_balance', flag: 'badge_balance', text: 'Win the Balance Badge from Alden in Meadowbrook City', hint: 'The deferred meeting, at full circle: Alden has waited behind four badges of road. His Normal types fear Fighting moves — and respect balance.' },
   { id: 'q_hoenn_institute', flag: 'institute_done', text: 'Clear the team takeover at the Weather Institute on Route 119', hint: 'Red scarves asked about drought records; blue ones about rain. Now the Institute has gone quiet on the radio. Go and make it loud again.' },
-  { id: 'q_hoenn_feather', flag: 'badge_feather', text: 'Win the Feather Badge from Winona in Highbranch City', hint: 'Winona fights from the canopy, where the rain road ends. Her Flying types fear Electric, Ice and Rock moves.' },
-  { id: 'q_hoenn_lilycove_may', flag: 'may_lilycove_done', text: 'Watch May compete at the Lotus Cove Contest Hall', hint: 'The last hall on May\'s road, in the harbour city. Three ribbons ride on this one — hers, and the road\'s opinion of her.' },
-  { id: 'q_hoenn_mind', flag: 'badge_mind', text: 'Win the Mind Badge from Tate and Liza in Starfall City', hint: 'Twins, one gym, two battles back to back — the pair fight as one mind in two bodies. Their Psychic types fear Bug, Ghost and Dark moves.' },
+  { id: 'q_hoenn_feather', flag: 'badge_feather', text: 'Win the Feather Badge from Aria in Highbranch City', hint: 'Aria fights from the canopy, where the rain road ends. Her Flying types fear Electric, Ice and Rock moves.' },
+  { id: 'q_hoenn_lilycove_may', flag: 'may_lilycove_done', text: 'Watch Maia compete at the Lotus Cove Contest Hall', hint: 'The last hall on Maia\'s road, in the harbour city. Three ribbons ride on this one — hers, and the road\'s opinion of her.' },
+  { id: 'q_hoenn_mind', flag: 'badge_mind', text: 'Win the Mind Badge from Theo and Lena in Starfall City', hint: 'Twins, one gym, two battles back to back — the pair fight as one mind in two bodies. Their Psychic types fear Bug, Ghost and Dark moves.' },
   { id: 'q_hoenn_pyre', flag: 'orbs_taken', text: 'Mt. Requiem — stop the teams taking the orbs', hint: 'The shrine mountain east of Lotus Cove keeps two old orbs asleep in stone. Both teams have stopped pretending they do not want them.' },
-  { id: 'q_hoenn_magma_hideout', flag: 'magma_hideout_done', text: 'Raid the Ember Hideout in Mt. Smokestack\'s caldera', hint: 'A door in the caldera wall, cut while the clash covered the digging. Maxie is done hiding what the orbs are for.' },
-  { id: 'q_hoenn_aqua_hideout', flag: 'submarine_stolen', text: 'Stop Team Aqua stealing the submarine at Lotus Cove harbour', hint: 'A research submarine, a harbour at low tide, and blue scarves with a schedule. Whatever is under the sea, Archie means to reach it first.' },
-  { id: 'q_hoenn_seafloor', flag: 'seafloor_done', text: 'Dive to the Sunken Cavern off Route 128', hint: 'Mind Badge, a partner who knows Dive, and a trench that has waited since before there were teams. Steven in Starfall can teach the way down.' },
+  { id: 'q_hoenn_magma_hideout', flag: 'magma_hideout_done', text: 'Raid the Ember Hideout in Mt. Smokestack\'s caldera', hint: 'A door in the caldera wall, cut while the clash covered the digging. Cormac is done hiding what the orbs are for.' },
+  { id: 'q_hoenn_aqua_hideout', flag: 'submarine_stolen', text: 'Stop the Tidal Pact stealing the submarine at Lotus Cove harbour', hint: 'A research submarine, a harbour at low tide, and blue scarves with a schedule. Whatever is under the sea, Marinus means to reach it first.' },
+  { id: 'q_hoenn_seafloor', flag: 'seafloor_done', text: 'Dive to the Sunken Cavern off Route 128', hint: 'Mind Badge, a partner who knows Dive, and a trench that has waited since before there were teams. Alban in Starfall can teach the way down.' },
   { id: 'q_hoenn_climax', flag: 'climax_resolved', text: 'End the clash of the weather titans', hint: 'When the sky chooses sides, the answer is older than either side: a green pillar east of Driftlog, and something asleep at its top.' },
-  { id: 'q_hoenn_rain', flag: 'badge_rain', text: 'Win the Rain Badge from Juan in Craterlake City', hint: 'Craterlake is reached only from below — surface inside its crater lake. Juan, the last gym, keeps Water types and a conductor\'s patience.' },
-  { id: 'q_hoenn_wally_final', flag: 'wally_final_done', text: 'Face Wally in Crown Road', hint: 'The boy from Meadowbrook, grown into the road. He asked to be remembered kindly. He did not ask to be gone easy on.' },
+  { id: 'q_hoenn_rain', flag: 'badge_rain', text: 'Win the Rain Badge from Julen in Craterlake City', hint: 'Craterlake is reached only from below — surface inside its crater lake. Julen, the last gym, keeps Water types and a conductor\'s patience.' },
+  { id: 'q_hoenn_wally_final', flag: 'wally_final_done', text: 'Face Emil in Crown Road', hint: 'The boy from Meadowbrook, grown into the road. He asked to be remembered kindly. He did not ask to be gone easy on.' },
   { id: 'q_hoenn_conference', flag: 'hoenn_conference_registered', text: 'Register for the Perennial Conference', hint: 'Eight Maris badges open the league hall at Perennial. The registrar keeps the bracket; Tyson waits at the end of it.' },
   { id: 'q_hoenn_tyson', flag: 'hoenn_complete', text: 'The Perennial Conference — the final, against Tyson', hint: 'Face him with everything the region taught you. However the card falls, Maris ends on the far side of this battle.' },
 ];
@@ -68,8 +68,8 @@ export const HOENN_QUESTS = [
 // ---------------------------------------------------------------------------
 export const HOENN_TRAINERS = {
   roxanne: {
-    id: 'roxanne', name: 'Roxanne', title: 'Copperton Gym Leader', ai: 'smart', badgeSet: 'hoenn',
-    intro: ['I am Roxanne, and this gym is my classroom as much as my arena. Every stone in it was placed to teach one lesson: what looks immovable is only waiting for the right pressure. Show me yours, challenger.'],
+    id: 'roxanne', name: 'Saxa', title: 'Copperton Gym Leader', ai: 'smart', badgeSet: 'hoenn',
+    intro: ['I am Saxa, and this gym is my classroom as much as my arena. Every stone in it was placed to teach one lesson: what looks immovable is only waiting for the right pressure. Show me yours, challenger.'],
     lose: ['Pressure, perfectly applied... The class is yours today.', 'The Stone Badge is yours. Take the quarry road north sometime — the falls up there have been teaching the same lesson longer than either of us.'],
     team: [
       { species: 'geodude', level: 209 },
@@ -79,7 +79,7 @@ export const HOENN_TRAINERS = {
     reward: 6600, badge: 'stonebadge',
   },
   brawly: {
-    id: 'brawly', name: 'Brawly', title: 'Mistford Gym Leader', ai: 'smart', badgeSet: 'hoenn',
+    id: 'brawly', name: 'Enzo', title: 'Mistford Gym Leader', ai: 'smart', badgeSet: 'hoenn',
     intro: ['You crossed open water to stand on my mats — good. Out here we read a challenger the way we read a wave: not by how loud it arrives, but by whether it is still standing after the break. Show me your balance, trainer.'],
     lose: ['Clean through the break, and still standing... Beautifully surfed.', 'The Knuckle Badge is yours. The tide that carried you here will carry you further — Fairhaven next, if the sea road calls. Mind the contest crowds; they are louder than the surf.'],
     team: [
@@ -90,7 +90,7 @@ export const HOENN_TRAINERS = {
     reward: 7200, badge: 'knucklebadge',
   },
   wattson: {
-    id: 'wattson', name: 'Wattson', title: 'Lilac Gym Leader', ai: 'smart', badgeSet: 'hoenn',
+    id: 'wattson', name: 'Olin', title: 'Lilac Gym Leader', ai: 'smart', badgeSet: 'hoenn',
     intro: ['Wahahaha! A challenger with sparks in their step! I built this city\'s grid with these hands, youngster, and I built this gym to trip anyone who walks it carelessly. Mind the barriers — they bite in my favorite key!'],
     lose: ['Wahaha — BZZT! Beaten, and grinning about it! That has not happened in far too long.', 'The Dynamo Badge is yours! Take the north road when you are ready — but a word from an old electrician: something up by the volcano is drawing current it should not. Teams, arguing over a rock. Watch yourself up there.'],
     team: [
@@ -102,8 +102,8 @@ export const HOENN_TRAINERS = {
     reward: 7800, badge: 'dynamobadge',
   },
   flannery: {
-    id: 'flannery', name: 'Flannery', title: 'Steamspring Gym Leader', ai: 'smart', badgeSet: 'hoenn',
-    intro: ['I — I am Flannery, and this gym was my grandfather\'s before it was mine, and I will thank you not to go easy on either of us. The springs outside are for resting. In here, we burn. Show me you can stand the heat, challenger!'],
+    id: 'flannery', name: 'Sola', title: 'Steamspring Gym Leader', ai: 'smart', badgeSet: 'hoenn',
+    intro: ['I — I am Sola, and this gym was my grandfather\'s before it was mine, and I will thank you not to go easy on either of us. The springs outside are for resting. In here, we burn. Show me you can stand the heat, challenger!'],
     lose: ['Beaten — fairly, completely beaten, in my own fire... Grandfather would say that is the tuition. He would be right.', 'The Heat Badge is yours. It is warm. It is always warm — that is how you will know it is real. Whatever is smoking up on Chimney, trainer... after this battle, I believe you can face it.'],
     team: [
       { species: 'numel', level: 239 },
@@ -116,7 +116,7 @@ export const HOENN_TRAINERS = {
   // Gym rosters (plain talk-to trainers, the Sprout monk idiom).
   rustboro_gym_1: {
     id: 'rustboro_gym_1', name: 'Youngster Bram', title: 'Copperton Gym Trainer', ai: 'basic',
-    intro: ['Roxanne makes us sign the quarry book and check our boots. Then she makes us battle every challenger twice as hard. Boots checked. Book signed. Your turn.'],
+    intro: ['Saxa makes us sign the quarry book and check our boots. Then she makes us battle every challenger twice as hard. Boots checked. Book signed. Your turn.'],
     lose: ['Checked, signed, and beaten. The book has a column for that too, probably.'],
     team: [
       { species: 'geodude', level: 205 },
@@ -127,7 +127,7 @@ export const HOENN_TRAINERS = {
   rustboro_gym_2: {
     id: 'rustboro_gym_2', name: 'Hiker Sella', title: 'Copperton Gym Trainer', ai: 'basic',
     intro: ['I haul stone for this gym on weekdays and defend it on all the others. The stone does not care which day it is. Neither do I.'],
-    lose: ['Hauled down fair and square. Roxanne is at the back, challenger — mind the compass stone. It points at whoever is proudest. Today, that is you.'],
+    lose: ['Hauled down fair and square. Saxa is at the back, challenger — mind the compass stone. It points at whoever is proudest. Today, that is you.'],
     team: [
       { species: 'geodude', level: 207 },
       { species: 'nosepass', level: 209 },
@@ -136,8 +136,8 @@ export const HOENN_TRAINERS = {
   },
   dewford_gym_1: {
     id: 'dewford_gym_1', name: 'Blackbelt Rook', title: 'Mistford Gym Trainer', ai: 'basic',
-    intro: ['In the dark, footwork is everything. Brawly turns the lights down on purpose. He says the sea does not fight you in daylight either — it fights you in weather. Step up.'],
-    lose: ['Your footwork found me in the dark. Brawly is through the gloom, trainer — follow the sound of the surf in the walls.'],
+    intro: ['In the dark, footwork is everything. Enzo turns the lights down on purpose. He says the sea does not fight you in daylight either — it fights you in weather. Step up.'],
+    lose: ['Your footwork found me in the dark. Enzo is through the gloom, trainer — follow the sound of the surf in the walls.'],
     team: [
       { species: 'machop', level: 216 },
       { species: 'meditite', level: 218 },
@@ -147,7 +147,7 @@ export const HOENN_TRAINERS = {
   dewford_gym_2: {
     id: 'dewford_gym_2', name: 'Battle Girl Sana', title: 'Mistford Gym Trainer', ai: 'basic',
     intro: ['Everyone asks why a fighting gym sits on a surf island. Because a wave is just a punch the ocean throws forever, that is why. Catch mine!'],
-    lose: ['Caught, and returned with interest! Brawly felt that one through the mats, I promise you.'],
+    lose: ['Caught, and returned with interest! Enzo felt that one through the mats, I promise you.'],
     team: [
       { species: 'makuhita', level: 220 },
       { species: 'machop', level: 221 },
@@ -156,8 +156,8 @@ export const HOENN_TRAINERS = {
   },
   mauville_gym_1: {
     id: 'mauville_gym_1', name: 'Camper Ilya', title: 'Lilac Gym Trainer', ai: 'basic',
-    intro: ['Wattson wired these barriers himself and still apologizes to them when they trip. I do not apologize. I conduct. Ready?'],
-    lose: ['Grounded. Completely grounded. Wattson is laughing somewhere behind that last barrier — I can hear the grid hum it.'],
+    intro: ['Olin wired these barriers himself and still apologizes to them when they trip. I do not apologize. I conduct. Ready?'],
+    lose: ['Grounded. Completely grounded. Olin is laughing somewhere behind that last barrier — I can hear the grid hum it.'],
     team: [
       { species: 'voltorb', level: 226 },
       { species: 'electrike', level: 228 },
@@ -177,7 +177,7 @@ export const HOENN_TRAINERS = {
   lavaridge_gym_1: {
     id: 'lavaridge_gym_1', name: 'Kindler Fenn', title: 'Steamspring Gym Trainer', ai: 'basic',
     intro: ['The floor grates breathe spring steam, and the footing here is a local tradition and a local test. Mind your step — then mind my MAGSLUG.'],
-    lose: ['Out-steamed and out-fought. Flannery is at the back, past the last grate. She has been pacing. Challengers make her nervous; nervous makes her dangerous.'],
+    lose: ['Out-steamed and out-fought. Sola is at the back, past the last grate. She has been pacing. Challengers make her nervous; nervous makes her dangerous.'],
     team: [
       { species: 'slugma', level: 236 },
       { species: 'numel', level: 238 },
@@ -187,7 +187,7 @@ export const HOENN_TRAINERS = {
   lavaridge_gym_2: {
     id: 'lavaridge_gym_2', name: 'Hiker Brasa', title: 'Steamspring Gym Trainer', ai: 'basic',
     intro: ['Her grandfather\'s portrait watches that door. Every challenger swears he nods at them. He has never nodded at me, and I work here. Battle me, and I will check if he nods at you.'],
-    lose: ['...He nodded. At YOU. Unbelievable. Go on, then — Flannery is waiting, and the portrait has opinions now.'],
+    lose: ['...He nodded. At YOU. Unbelievable. Go on, then — Sola is waiting, and the portrait has opinions now.'],
     team: [
       { species: 'numel', level: 239 },
       { species: 'vulpix', level: 241 },
@@ -200,7 +200,7 @@ export const HOENN_TRAINERS = {
   // battleAny: the clash breaks up whatever the outcome, and the
   // branch flags record what actually happened.
   magma_grunt_falls: {
-    id: 'magma_grunt_falls', name: 'Magma Grunt', title: 'Team Magma', ai: 'basic',
+    id: 'magma_grunt_falls', name: 'Cinder Grunt', title: 'The Cinder Pact', ai: 'basic',
     intro: ['This cave is a worksite! Red scarves only! The professor\'s rocks are coming with us — orders — and you are leaving the way you came in!'],
     lose: ['The rocks — the ADMIN will hear about this! The land will be expanded anyway, you hear me? ANYWAY!'],
     team: [
@@ -210,7 +210,7 @@ export const HOENN_TRAINERS = {
     reward: 700,
   },
   aqua_grunt_falls: {
-    id: 'aqua_grunt_falls', name: 'Aqua Grunt', title: 'Team Aqua', ai: 'basic',
+    id: 'aqua_grunt_falls', name: 'Tidal Grunt', title: 'The Tidal Pact', ai: 'basic',
     intro: ['Blue scarves, this cave, NOW! Those land-grabbers in red are stealing star-stone to wake things best left asleep — and I am not letting a bystander complicate a rescue!'],
     lose: ['Fine — FINE. You fight like the tide: annoying, and everywhere. The stone is theirs anyway. It was ALWAYS going to be theirs. That is the problem!'],
     team: [
@@ -220,8 +220,8 @@ export const HOENN_TRAINERS = {
     reward: 700,
   },
   magma_admin_chimney: {
-    id: 'magma_admin_chimney', name: 'Admin Brask', title: 'Team Magma Admin', ai: 'smart',
-    intro: ['Brask, Team Magma. You stand on the throat of the world, trainer, holding a conversation that is over. The meteorite goes into the crater, the mountain remembers what land is FOR — step aside, or be stepped over.'],
+    id: 'magma_admin_chimney', name: 'Admin Brask', title: 'The Cinder Pact Admin', ai: 'smart',
+    intro: ['Brask, the Cinder Pact. You stand on the throat of the world, trainer, holding a conversation that is over. The meteorite goes into the crater, the mountain remembers what land is FOR — step aside, or be stepped over.'],
     lose: ['...You delayed a mountain. Do you understand how absurd that is? A trainer, delaying a MOUNTAIN. Very well. The crater keeps. So do we.'],
     team: [
       { species: 'mightyena', level: 232 },
@@ -231,8 +231,8 @@ export const HOENN_TRAINERS = {
     reward: 2400,
   },
   aqua_admin_chimney: {
-    id: 'aqua_admin_chimney', name: 'Admin Selka', title: 'Team Aqua Admin', ai: 'smart',
-    intro: ['Selka, Team Aqua — and the only adult on this volcano, apparently. The red scarves mean to feed star-stone to a crater, trainer. Whatever you think of my crew, help me stop THAT first. Questions drown later.'],
+    id: 'aqua_admin_chimney', name: 'Admin Selka', title: 'The Tidal Pact Admin', ai: 'smart',
+    intro: ['Selka, the Tidal Pact — and the only adult on this volcano, apparently. The red scarves mean to feed star-stone to a crater, trainer. Whatever you think of my crew, help me stop THAT first. Questions drown later.'],
     lose: ['Beaten by the bystander. The sea provides ironies the way it provides everything: constantly, and without asking. The crater is quiet — that is what matters. For today.'],
     team: [
       { species: 'mightyena', level: 232 },
@@ -244,8 +244,8 @@ export const HOENN_TRAINERS = {
   // --- H4b: gyms 5-8 (ruling 6 curve: Norman ace 255, Winona 265,
   // Tate & Liza 275, Juan 285 — aces at the range tops) ---
   norman: {
-    id: 'norman', name: 'Norman', title: 'Meadowbrook Gym Leader', ai: 'smart', badgeSet: 'hoenn',
-    intro: ['Four badges, and the road kept its word — so will I. I am Norman, and this gym tests the one thing every strong trainer eventually runs out of: balance. No tricks in my team, challenger. Only weight, placed honestly. Show me yours does not tip.'],
+    id: 'norman', name: 'Alden', title: 'Meadowbrook Gym Leader', ai: 'smart', badgeSet: 'hoenn',
+    intro: ['Four badges, and the road kept its word — so will I. I am Alden, and this gym tests the one thing every strong trainer eventually runs out of: balance. No tricks in my team, challenger. Only weight, placed honestly. Show me yours does not tip.'],
     lose: ['Tipped — cleanly, and by the trainer I deferred in this very room. There is a symmetry in that I will be telling people about.', 'The Balance Badge is yours. Five down. The road east gets wetter and stranger from here — Highbranch, then the sea itself. Walk it the way you walked to me: honestly.'],
     team: [
       { species: 'vigoroth', level: 249 },
@@ -256,8 +256,8 @@ export const HOENN_TRAINERS = {
     reward: 9000, badge: 'balancebadge',
   },
   winona: {
-    id: 'winona', name: 'Winona', title: 'Highbranch Gym Leader', ai: 'smart', badgeSet: 'hoenn',
-    intro: ['I am Winona, and I keep the sky over Highbranch. Down on the ground a battle is arithmetic. Up here it is weather — it arrives from the direction you were not watching. Mind the canopy, challenger, and mind the wind.'],
+    id: 'winona', name: 'Aria', title: 'Highbranch Gym Leader', ai: 'smart', badgeSet: 'hoenn',
+    intro: ['I am Aria, and I keep the sky over Highbranch. Down on the ground a battle is arithmetic. Up here it is weather — it arrives from the direction you were not watching. Mind the canopy, challenger, and mind the wind.'],
     lose: ['Read the wind, and flown through it... The canopy itself applauds, and so do I.', 'The Feather Badge is yours. East now: Lotus Cove, the shrine mountain, and a sea that keeps secrets at depth. The sky will be watching. So will I.'],
     team: [
       { species: 'swellow', level: 259 },
@@ -273,9 +273,9 @@ export const HOENN_TRAINERS = {
   // opens, Liza closes and carries the badge. Nothing here pretends
   // two foes stood on the field at once.
   tate: {
-    id: 'tate', name: 'Tate', title: 'Starfall Gym Leader', ai: 'smart',
-    intro: ['I am Tate — the left half of this gym. My sister and I share one strategy the way we share everything: completely, and without asking. Beat me, and you have only beaten the half that was talking.'],
-    lose: ['Beaten — and Liza felt it from across the room, which is rather the point of us. Sister! The challenger is warmed up. Finish the lesson we started.'],
+    id: 'tate', name: 'Theo', title: 'Starfall Gym Leader', ai: 'smart',
+    intro: ['I am Theo — the left half of this gym. My sister and I share one strategy the way we share everything: completely, and without asking. Beat me, and you have only beaten the half that was talking.'],
+    lose: ['Beaten — and Lena felt it from across the room, which is rather the point of us. Sister! The challenger is warmed up. Finish the lesson we started.'],
     team: [
       { species: 'xatu', level: 270 },
       { species: 'solrock', level: 274 },
@@ -283,9 +283,9 @@ export const HOENN_TRAINERS = {
     reward: 5000,
   },
   liza: {
-    id: 'liza', name: 'Liza', title: 'Starfall Gym Leader', ai: 'smart', badgeSet: 'hoenn',
-    intro: ['Liza — the half that was listening. Tate showed me your whole team, challenger; that is what a first half is FOR. Two minds, one gym. Come and meet the second one.'],
-    lose: ['Two minds, one gym — and one better trainer standing in it. Tate is laughing. So am I. That is also rather the point of us.', 'The Mind Badge is yours — from both of us, which in Starfall is the only way anything is given. Steven Stone keeps a house by the shore here. What he teaches opens the deep road. You have earned the lesson.'],
+    id: 'liza', name: 'Lena', title: 'Starfall Gym Leader', ai: 'smart', badgeSet: 'hoenn',
+    intro: ['Lena — the half that was listening. Theo showed me your whole team, challenger; that is what a first half is FOR. Two minds, one gym. Come and meet the second one.'],
+    lose: ['Two minds, one gym — and one better trainer standing in it. Theo is laughing. So am I. That is also rather the point of us.', 'The Mind Badge is yours — from both of us, which in Starfall is the only way anything is given. Alban Stone keeps a house by the shore here. What he teaches opens the deep road. You have earned the lesson.'],
     team: [
       { species: 'claydol', level: 272 },
       { species: 'lunatone', level: 275, keepsake: 'ironacorn' },
@@ -293,9 +293,9 @@ export const HOENN_TRAINERS = {
     reward: 10200, badge: 'mindbadge',
   },
   juan: {
-    id: 'juan', name: 'Juan', title: 'Craterlake Gym Leader', ai: 'smart', badgeSet: 'hoenn',
-    intro: ['Juan, of Craterlake — a city you reached from beneath the sea, in the middle of the end of the weather. My gym is the last quiet water in Maris, challenger. I intend to conduct this battle the way I conduct everything: precisely, and to a finish.'],
-    lose: ['Precisely conducted — by you. Magnificent. The last badge in Maris could not have asked for a better keeper to lose it to.', 'The Rain Badge is yours. Eight badges, trainer. Perennial is east, the Conference is lit, and a boy named Wally is somewhere on that road with something to prove to both of you. Go and be history.'],
+    id: 'juan', name: 'Julen', title: 'Craterlake Gym Leader', ai: 'smart', badgeSet: 'hoenn',
+    intro: ['Julen, of Craterlake — a city you reached from beneath the sea, in the middle of the end of the weather. My gym is the last quiet water in Maris, challenger. I intend to conduct this battle the way I conduct everything: precisely, and to a finish.'],
+    lose: ['Precisely conducted — by you. Magnificent. The last badge in Maris could not have asked for a better keeper to lose it to.', 'The Rain Badge is yours. Eight badges, trainer. Perennial is east, the Conference is lit, and a boy named Emil is somewhere on that road with something to prove to both of you. Go and be history.'],
     team: [
       { species: 'luvdisc', level: 279 },
       { species: 'whiscash', level: 281 },
@@ -306,22 +306,22 @@ export const HOENN_TRAINERS = {
   },
   petalburg_gym_1: {
     id: 'petalburg_gym_1', name: 'Ace Trainer Dario', title: 'Meadowbrook Gym Trainer', ai: 'basic',
-    intro: ['Norman\'s rooms test your stance before they test your team. I am the first room. Stand honestly, trainer.'],
-    lose: ['Honest stance, honest win. The keeper by the pond will approve — Norman is at the back.'],
+    intro: ['Alden\'s rooms test your stance before they test your team. I am the first room. Stand honestly, trainer.'],
+    lose: ['Honest stance, honest win. The keeper by the pond will approve — Alden is at the back.'],
     team: [{ species: 'linoone', level: 246 }, { species: 'vigoroth', level: 248 }],
     reward: 900,
   },
   petalburg_gym_2: {
     id: 'petalburg_gym_2', name: 'Cool Trainer Marn', title: 'Meadowbrook Gym Trainer', ai: 'basic',
     intro: ['Everyone underestimates a gym with no type tricks. Then the weight arrives, all at once, honestly. Like this.'],
-    lose: ['Weight received — and returned. Norman deferred a meeting with you once, trainer. He is done deferring.'],
+    lose: ['Weight received — and returned. Alden deferred a meeting with you once, trainer. He is done deferring.'],
     team: [{ species: 'spinda', level: 247 }, { species: 'zangoose', level: 249 }],
     reward: 950,
   },
   fortree_gym_1: {
     id: 'fortree_gym_1', name: 'Bird Keeper Ansel', title: 'Highbranch Gym Trainer', ai: 'basic',
-    intro: ['The canopy gym turns on rotating gates and bad sightlines. Winona\'s rule: if you cannot see the wind, battle like it sees you.'],
-    lose: ['It saw you fine. Winona is up the last turn, trainer — mind the wind.'],
+    intro: ['The canopy gym turns on rotating gates and bad sightlines. Aria\'s rule: if you cannot see the wind, battle like it sees you.'],
+    lose: ['It saw you fine. Aria is up the last turn, trainer — mind the wind.'],
     team: [{ species: 'swellow', level: 256 }, { species: 'pelipper', level: 258 }],
     reward: 1000,
   },
@@ -342,14 +342,14 @@ export const HOENN_TRAINERS = {
   mossdeep_gym_2: {
     id: 'mossdeep_gym_2', name: 'Hex Maniac Ione', title: 'Starfall Gym Trainer', ai: 'basic',
     intro: ['Two leaders, one mind, zero mercy for a challenger who plans only one battle ahead. Plan for two, trainer. Starting with mine.'],
-    lose: ['Planned, and executed. Tate first, then Liza — and may your second plan be as good as your first.'],
+    lose: ['Planned, and executed. Theo first, then Lena — and may your second plan be as good as your first.'],
     team: [{ species: 'claydol', level: 267 }, { species: 'solrock', level: 270 }],
     reward: 1150,
   },
   sootopolis_gym_1: {
     id: 'sootopolis_gym_1', name: 'Swimmer Cato', title: 'Craterlake Gym Trainer', ai: 'basic',
-    intro: ['You surfaced in our lake to reach this gym. Juan respects that enormously. He still made me battle you first. Tradition.'],
-    lose: ['Tradition satisfied. Juan conducts at the back, trainer — precisely, and to a finish.'],
+    intro: ['You surfaced in our lake to reach this gym. Julen respects that enormously. He still made me battle you first. Tradition.'],
+    lose: ['Tradition satisfied. Julen conducts at the back, trainer — precisely, and to a finish.'],
     team: [{ species: 'whiscash', level: 276 }, { species: 'seaking', level: 278 }],
     reward: 1200,
   },
@@ -362,8 +362,8 @@ export const HOENN_TRAINERS = {
   },
   // --- H4b: the villain chains converge (admins + leaders in band) ---
   aqua_admin_institute: {
-    id: 'aqua_admin_institute', name: 'Admin Shelly', title: 'Team Aqua Admin', ai: 'smart',
-    intro: ['Shelly, Team Aqua — and this Institute is under new management until its rain records say what we need them to say. The sea is coming back to this region, trainer. We are just reading its mail first.'],
+    id: 'aqua_admin_institute', name: 'Admin Nerissa', title: 'The Tidal Pact Admin', ai: 'smart',
+    intro: ['Nerissa, the Tidal Pact — and this Institute is under new management until its rain records say what we need them to say. The sea is coming back to this region, trainer. We are just reading its mail first.'],
     lose: ['Read, and answered... The records are yours, then. For all the good dry paper will do anyone when the real rain comes.'],
     team: [
       { species: 'mightyena', level: 252 },
@@ -373,9 +373,9 @@ export const HOENN_TRAINERS = {
     reward: 2600,
   },
   magma_admin_pyre: {
-    id: 'magma_admin_pyre', name: 'Admin Courtney', title: 'Team Magma Admin', ai: 'smart',
-    intro: ['Courtney, Team Magma. Analysis complete: you are... an obstacle. The orbs on this mountain are not decorations, trainer. They are leashes. And leashes are for holding — or for letting go, at the chosen moment.'],
-    lose: ['Analysis... revised. You are a larger obstacle than modelled. The orbs are taken anyway — both crews, both leashes, gone in the smoke. Tell the keepers Courtney sends her regrets. And her regards.'],
+    id: 'magma_admin_pyre', name: 'Admin Vesna', title: 'The Cinder Pact Admin', ai: 'smart',
+    intro: ['Vesna, the Cinder Pact. Analysis complete: you are... an obstacle. The orbs on this mountain are not decorations, trainer. They are leashes. And leashes are for holding — or for letting go, at the chosen moment.'],
+    lose: ['Analysis... revised. You are a larger obstacle than modelled. The orbs are taken anyway — both crews, both leashes, gone in the smoke. Tell the keepers Vesna sends her regrets. And her regards.'],
     team: [
       { species: 'numel', level: 266 },
       { species: 'camerupt', level: 268 },
@@ -383,9 +383,9 @@ export const HOENN_TRAINERS = {
     reward: 2800,
   },
   magma_admin_hideout: {
-    id: 'magma_admin_hideout', name: 'Admin Tabitha', title: 'Team Magma Admin', ai: 'smart',
-    intro: ['Tabitha, Team Magma — and you have walked into the mountain\'s own furnace room, trainer. The leader is below with the orb and the old fire. You get me first. Everyone gets me first. It is my whole personality, and I have made peace with it.'],
-    lose: ['Through — THROUGH, and the furnace room is yours. Maxie! MAXIE, the bystander is done being a bystander!'],
+    id: 'magma_admin_hideout', name: 'Admin Tessa', title: 'The Cinder Pact Admin', ai: 'smart',
+    intro: ['Tessa, the Cinder Pact — and you have walked into the mountain\'s own furnace room, trainer. The leader is below with the orb and the old fire. You get me first. Everyone gets me first. It is my whole personality, and I have made peace with it.'],
+    lose: ['Through — THROUGH, and the furnace room is yours. Cormac! CORMAC, the bystander is done being a bystander!'],
     team: [
       { species: 'mightyena', level: 272 },
       { species: 'camerupt', level: 275 },
@@ -393,8 +393,8 @@ export const HOENN_TRAINERS = {
     reward: 3000,
   },
   maxie: {
-    id: 'maxie', name: 'Maxie', title: 'Team Magma Leader', ai: 'smart',
-    intro: ['Maxie. You have delayed my teams at a falls, a crater, and a shrine, trainer — a pattern any scientist would call data. The land was here before the sea covered it, and it will be here when my work is done. The orb answers the old fire. I merely... hold the leash, until the moment comes to let go.'],
+    id: 'maxie', name: 'Cormac', title: 'The Cinder Pact Leader', ai: 'smart',
+    intro: ['Cormac. You have delayed my teams at a falls, a crater, and a shrine, trainer — a pattern any scientist would call data. The land was here before the sea covered it, and it will be here when my work is done. The orb answers the old fire. I merely... hold the leash, until the moment comes to let go.'],
     lose: ['Beaten — in my own furnace, at the threshold of the work itself. Very well, data is data: the moment is not here. It is BELOW. Everything I need sleeps under the sea your friends worship. Take this hideout, trainer. Take it. The deep does not have doors.'],
     team: [
       { species: 'mightyena', level: 276 },
@@ -404,8 +404,8 @@ export const HOENN_TRAINERS = {
     reward: 6000,
   },
   aqua_admin_hideout: {
-    id: 'aqua_admin_hideout', name: 'Admin Matt', title: 'Team Aqua Admin', ai: 'smart',
-    intro: ['Matt, Team Aqua, bro — and this harbour, this boat, this whole beautiful schedule is OURS now. The boss has waited his whole life to go down where the sea keeps its first heartbeat. You are not postponing that, trainer. Nobody is.'],
+    id: 'aqua_admin_hideout', name: 'Admin Toren', title: 'The Tidal Pact Admin', ai: 'smart',
+    intro: ['Toren, the Tidal Pact, bro — and this harbour, this boat, this whole beautiful schedule is OURS now. The boss has waited his whole life to go down where the sea keeps its first heartbeat. You are not postponing that, trainer. Nobody is.'],
     lose: ['Postponed — me, anyway. Boss! BOSS, the schedule has a trainer-shaped problem!'],
     team: [
       { species: 'mightyena', level: 272 },
@@ -414,8 +414,8 @@ export const HOENN_TRAINERS = {
     reward: 3000,
   },
   archie: {
-    id: 'archie', name: 'Archie', title: 'Team Aqua Leader', ai: 'smart',
-    intro: ['Archie, of Team Aqua. I have dreamed of the deep since I was a boy the sea kept almost taking. Everything above the water is borrowed, trainer — I am simply returning the region to its owner. The submarine goes down with or without your blessing. Choose how this looks.'],
+    id: 'archie', name: 'Marinus', title: 'The Tidal Pact Leader', ai: 'smart',
+    intro: ['Marinus, of the Tidal Pact. I have dreamed of the deep since I was a boy the sea kept almost taking. Everything above the water is borrowed, trainer — I am simply returning the region to its owner. The submarine goes down with or without your blessing. Choose how this looks.'],
     lose: ['Chosen — and chosen well, you magnificent storm warning. But hear the harbour, trainer: the engines are already turning. The submarine is GONE, and so am I. The deep is calling, and for once in my life, I am answering on time.'],
     team: [
       { species: 'mightyena', level: 276 },
@@ -426,7 +426,7 @@ export const HOENN_TRAINERS = {
   },
   // --- H4b: Wally, grown (Crown Road, in-band 286-292) ---
   wally_final: {
-    id: 'wally_final', name: 'Wally', title: 'Trainer', ai: 'smart',
+    id: 'wally_final', name: 'Emil', title: 'Trainer', ai: 'smart',
     intro: ['You remembered my name kindly, {player}. I have thought about how this sentence ends for a whole region: not with thanks. With a battle. PSYLET is a AEGISFAE now, and my hands do not shake at the wrong moments anymore. They shake at the right ones. Face me — the way I always meant to face you.'],
     lose: ['There it is. There is the whole road, in one battle: the pond grass, the borrowed FURCOON, and THIS. I am not the boy who needed help standing anymore — and you are still the trainer who helped him stand. Both of those are true. The league doors are yours. Mine will keep. I will be right behind you, forever, one road back and closing.'],
     team: [
@@ -512,18 +512,18 @@ export const HOENN_EVENTS = {
   // A flee stalls the chain (nothing set), so it re-fires on entry.
   ev_hoenn_rescue: [
     { say: ['Shouting — close, and getting closer. Around the bend of the Rootlet road a man in a lab coat is backed against the fence line, briefcase held up like a very small shield, while a wild UMBHYEN worries at the hem of his coat with the total confidence of the young and territorial.'], who: 'NARRATOR' },
-    { say: ['You — trainer! Yes, you, with the team that walks like it has somewhere to be! A hand, if you would! This youngster objects to my fieldwork, my footwear, and my entire profession, in that order!'], who: 'PROF. BIRCH' },
+    { say: ['You — trainer! Yes, you, with the team that walks like it has somewhere to be! A hand, if you would! This youngster objects to my fieldwork, my footwear, and my entire profession, in that order!'], who: 'PROF. ASPEN' },
     { wildBattle: { species: 'poochyena', level: 203, uncatchable: true } },
-    { say: ['Gone — over the fence and into the long grass, dignity intact on exactly one side of this encounter. ...Thank you. Sincerely. Professor Birch, of the Rootlet lab — you have caught me at my most empirical.', 'Come to the lab, trainer. Proper thanks, a proper registration, and a chair that no UMBHYEN has opinions about. North side of town. I will put the kettle on and pretend this never happens weekly.'], who: 'PROF. BIRCH' },
+    { say: ['Gone — over the fence and into the long grass, dignity intact on exactly one side of this encounter. ...Thank you. Sincerely. Professor Aspen, of the Rootlet lab — you have caught me at my most empirical.', 'Come to the lab, trainer. Proper thanks, a proper registration, and a chair that no UMBHYEN has opinions about. North side of town. I will put the kettle on and pretend this never happens weekly.'], who: 'PROF. ASPEN' },
     { flag: 'birch_rescued' },
     { toast: 'You drove off the UMBHYEN!' },
   ],
 
   // -- Birch's lab: the arrival (first birch-lab entry) --------------
   ev_hoenn_arrival: [
-    { say: ['Birch\'s lab smells of kettle steam, field mud, and paper — a working lab, not a showroom. Assistants weave between specimen shelves with the ease of people who have dodged the same UMBHYEN-shaped hazards for years.'], who: 'NARRATOR' },
-    { say: ['There. Registered, stamped, and entirely official: your Maris journey begins in this lab, with a rescued professor as its first entry. Professor Hawthorn wrote ahead, you know. The letter just said: "He walks far and arrives kind. Register whatever he asks."', 'You will want the gym road: Meadowbrook first — mind young Wally there, he is frailer than he looks and braver than he knows — then Copperton, and Roxanne. And a warning from my own fieldwork: Maris is arguing with itself this year. Land people, sea people, and weather that cannot pick a side. Walk carefully, and walk anyway.'], who: 'PROF. BIRCH' },
-    { say: ['Oh — and my neighbor\'s girl, May, is somewhere about town. A beginning coordinator, all nerves and ribbon dreams. If a contest hall ever crosses your road, trainer, that is her world the way gyms are yours. You might learn something in the seats. She would die before saying so, but she hopes you come.'], who: 'PROF. BIRCH' },
+    { say: ['Aspen\'s lab smells of kettle steam, field mud, and paper — a working lab, not a showroom. Assistants weave between specimen shelves with the ease of people who have dodged the same UMBHYEN-shaped hazards for years.'], who: 'NARRATOR' },
+    { say: ['There. Registered, stamped, and entirely official: your Maris journey begins in this lab, with a rescued professor as its first entry. Professor Hawthorn wrote ahead, you know. The letter just said: "He walks far and arrives kind. Register whatever he asks."', 'You will want the gym road: Meadowbrook first — mind young Emil there, he is frailer than he looks and braver than he knows — then Copperton, and Saxa. And a warning from my own fieldwork: Maris is arguing with itself this year. Land people, sea people, and weather that cannot pick a side. Walk carefully, and walk anyway.'], who: 'PROF. ASPEN' },
+    { say: ['Oh — and my neighbor\'s girl, Maia, is somewhere about town. A beginning coordinator, all nerves and ribbon dreams. If a contest hall ever crosses your road, trainer, that is her world the way gyms are yours. You might learn something in the seats. She would die before saying so, but she hopes you come.'], who: 'PROF. ASPEN' },
     { flag: 'hoenn_arrival' },
     { flag: 'birch_registered' },
     { toast: 'Your Maris journey is registered!' },
@@ -535,9 +535,9 @@ export const HOENN_EVENTS = {
   // meteorite changes hands in the confusion — the seed of Chimney.
   ev_hoenn_meteor: [
     { say: ['Comet Falls runs cold and loud, and today it has an audience it did not invite. On the lower ledge: red scarves, hauling equipment. On the upper: blue, watching them do it. Between them, a grey-haired professor with a specimen case clutched to his chest like a hymn book in a storm.'], who: 'NARRATOR' },
-    { say: ['Cozmo. Professor Cozmo — the meteorites of this cave are my life\'s work, and these — these COSTUMES are trying to make them a crowbar! Tell them, trainer! Tell them star-stone is for STUDYING!'], who: 'PROF. COZMO' },
+    { say: ['Ando. Professor Ando — the meteorites of this cave are my life\'s work, and these — these COSTUMES are trying to make them a crowbar! Tell them, trainer! Tell them star-stone is for STUDYING!'], who: 'PROF. ANDO' },
     { battleAny: { trainer: 'magma_grunt_falls', winFlag: 'meteor_magma_won', loseFlag: 'meteor_magma_lost' } },
-    { say: ['Whatever the scuffle decided, it decided too loudly. In the echo and the spray, a red-scarfed shape slips past the professor — and when the case is opened on the ledge to check the damage, one meteorite is simply not in it anymore.', 'Gone. Forty years of cataloguing, and the finest stone I ever held is a handle in someone else\'s plan. They spoke of a mountain, trainer. A crater. Chimney, unless my ears have gone the way of my specimen. Whatever they mean to feed that rock to — star-stone remembers the sky, and mountains remember being fire. I do not enjoy that arithmetic.'], who: 'PROF. COZMO' },
+    { say: ['Whatever the scuffle decided, it decided too loudly. In the echo and the spray, a red-scarfed shape slips past the professor — and when the case is opened on the ledge to check the damage, one meteorite is simply not in it anymore.', 'Gone. Forty years of cataloguing, and the finest stone I ever held is a handle in someone else\'s plan. They spoke of a mountain, trainer. A crater. Chimney, unless my ears have gone the way of my specimen. Whatever they mean to feed that rock to — star-stone remembers the sky, and mountains remember being fire. I do not enjoy that arithmetic.'], who: 'PROF. ANDO' },
     { flag: 'meteor_falls_done' },
     { flag: 'teams_glimpsed' },
     { flag: 'cozmo_met' },
@@ -595,10 +595,10 @@ export const HOENN_EVENTS = {
 
   // -- Ember Hideout: the caldera door (entry, orbs taken) -----------
   ev_hoenn_magma_hideout: [
-    { say: ['The caldera door H3\'s road hinted at stands open on furnace air. Inside Mt. Smokestack, Team Magma has built a second crater — orderly, humming, terrified of its own leader\'s patience — and at its heart, under glass, the red orb turns slowly in its cradle like something dreaming of weather.'], who: 'NARRATOR' },
+    { say: ['The caldera door H3\'s road hinted at stands open on furnace air. Inside Mt. Smokestack, the Cinder Pact has built a second crater — orderly, humming, terrified of its own leader\'s patience — and at its heart, under glass, the red orb turns slowly in its cradle like something dreaming of weather.'], who: 'NARRATOR' },
     { battleAny: { trainer: 'magma_admin_hideout', winFlag: 'magma_hideout_won', loseFlag: 'magma_hideout_lost' } },
     { battleAny: { trainer: 'maxie', winFlag: 'maxie_won', loseFlag: 'maxie_lost' } },
-    { say: ['Whatever the battles decided, Maxie\'s retreat is a scientist\'s, not a soldier\'s: measured, unhurried, and already elsewhere. The orb cradle stands empty — not smashed, not looted. Carried out the way a surgeon carries a heart. On the console, one line of the plan remains lit, and it is not about land at all. It is a depth sounding.', 'The furnace room ticks as it cools. Somewhere under the sea your rivals worship, an old fire is about to be introduced to salt water — and Maxie is counting on the introduction going exactly the way a mountain would want it to.'], who: 'NARRATOR' },
+    { say: ['Whatever the battles decided, Cormac\'s retreat is a scientist\'s, not a soldier\'s: measured, unhurried, and already elsewhere. The orb cradle stands empty — not smashed, not looted. Carried out the way a surgeon carries a heart. On the console, one line of the plan remains lit, and it is not about land at all. It is a depth sounding.', 'The furnace room ticks as it cools. Somewhere under the sea your rivals worship, an old fire is about to be introduced to salt water — and Cormac is counting on the introduction going exactly the way a mountain would want it to.'], who: 'NARRATOR' },
     { flag: 'magma_hideout_done' },
     { flag: 'maxie_faced' },
     { toast: 'The Ember Hideout is emptied — the orb went deeper.' },
@@ -606,10 +606,10 @@ export const HOENN_EVENTS = {
 
   // -- Tide Hideout: the submarine stolen (entry, Pyre done) ---------
   ev_hoenn_aqua_hideout: [
-    { say: ['Lotus Cove harbour, under the warehouse the charts call a boathouse: Team Aqua\'s hideout, all tide-smell and engine light. The research submarine rides her cradle in the flooded dock — a yellow, patient, impossible machine — and blue scarves are casting off her lines one by one with the terrible calm of people ahead of schedule.'], who: 'NARRATOR' },
+    { say: ['Lotus Cove harbour, under the warehouse the charts call a boathouse: the Tidal Pact\'s hideout, all tide-smell and engine light. The research submarine rides her cradle in the flooded dock — a yellow, patient, impossible machine — and blue scarves are casting off her lines one by one with the terrible calm of people ahead of schedule.'], who: 'NARRATOR' },
     { battleAny: { trainer: 'aqua_admin_hideout', winFlag: 'aqua_hideout_won', loseFlag: 'aqua_hideout_lost' } },
     { battleAny: { trainer: 'archie', winFlag: 'archie_won', loseFlag: 'archie_lost' } },
-    { say: ['The battles buy minutes, and minutes are not the currency this heist runs on. In the wash of the last exchange the cradle locks sing open, the submarine slides into black harbour water with her lights hooded, and Archie — on her conning tower, saluting no one in particular — goes down with her into the deep he has dreamed about since boyhood.', 'The harbour closes over the theft without a ripple to prosecute. But a stolen submarine leaves one honest clue: her heading. East, then down — toward the trenches off Route 128, where the charts go quiet and the water turns the colour of the first morning.'], who: 'NARRATOR' },
+    { say: ['The battles buy minutes, and minutes are not the currency this heist runs on. In the wash of the last exchange the cradle locks sing open, the submarine slides into black harbour water with her lights hooded, and Marinus — on her conning tower, saluting no one in particular — goes down with her into the deep he has dreamed about since boyhood.', 'The harbour closes over the theft without a ripple to prosecute. But a stolen submarine leaves one honest clue: her heading. East, then down — toward the trenches off Route 128, where the charts go quiet and the water turns the colour of the first morning.'], who: 'NARRATOR' },
     { flag: 'aqua_hideout_done' },
     { flag: 'archie_faced' },
     { flag: 'submarine_stolen' },
@@ -626,7 +626,7 @@ export const HOENN_EVENTS = {
   ev_hoenn_seafloor: [
     { say: ['The Sunken Cavern is not a cave. It is a held breath the ocean has been holding since the world was young — basalt chambers, water the colour of bottled night, and at its heart a floor that is warm through boot leather. Red scarves have been here. Red scarves are GONE from here, which is worse: their instruments stand abandoned mid-reading, needles pegged, in a silence that is getting hotter.'], who: 'NARRATOR' },
     { battleAny: { trainer: 'maxie', winFlag: 'seafloor_maxie_won', loseFlag: 'seafloor_maxie_lost' } },
-    { say: ['Whatever the battle\'s verdict, it arrives one heartbeat too late to matter. Maxie — scorched, exultant, halfway to a sermon — holds the red orb up to the chamber\'s heart the way a key is held up to a lock. "The leash," he says, almost gently, "was never for holding. It was for CHOOSING THE MOMENT."', 'The floor answers. Not an earthquake — earthquakes end. This is a waking: heat rolling up through basalt like a sunrise through a wall, light the colour of a kiln\'s heart, and a shape older than the sea floor itself rising out of the world\'s oldest ground with the sun already gathering at its shoulders. TERRATITAN does not roar. The SKY roars for it, all across Maris, as the rain simply... stops. Everywhere. At once.', 'Maxie is gone into the light and the steam, laughing or weeping — the cavern does not say. What it says, in heat shimmer and falling dust, is simpler: get to the surface. Get to Craterlake. A titan is walking toward the sea, and the sea has never once in its life intended to be walked on.'], who: 'NARRATOR' },
+    { say: ['Whatever the battle\'s verdict, it arrives one heartbeat too late to matter. Cormac — scorched, exultant, halfway to a sermon — holds the red orb up to the chamber\'s heart the way a key is held up to a lock. "The leash," he says, almost gently, "was never for holding. It was for CHOOSING THE MOMENT."', 'The floor answers. Not an earthquake — earthquakes end. This is a waking: heat rolling up through basalt like a sunrise through a wall, light the colour of a kiln\'s heart, and a shape older than the sea floor itself rising out of the world\'s oldest ground with the sun already gathering at its shoulders. TERRATITAN does not roar. The SKY roars for it, all across Maris, as the rain simply... stops. Everywhere. At once.', 'Cormac is gone into the light and the steam, laughing or weeping — the cavern does not say. What it says, in heat shimmer and falling dust, is simpler: get to the surface. Get to Craterlake. A titan is walking toward the sea, and the sea has never once in its life intended to be walked on.'], who: 'NARRATOR' },
     { flag: 'seafloor_done' },
     { flag: 'groudon_woken' },
     { flag: 'climax_drought' },
@@ -858,7 +858,7 @@ export const HOENN_LEGENDARY_ARCS = {
     hook: 'When the sky settled the argument, the land\'s answer did not die and was not caught — it withdrew, sullen and alive, to the earth\'s own heat.',
     steps: [
       { text: 'End the clash of the weather titans at the Tempest Tower', flag: 'climax_resolved' },
-      { text: 'Return to the deep chamber of Team Magma\'s old hideout and face TERRATITAN, level 298, risen from its magma pool', catch: 'groudon' },
+      { text: 'Return to the deep chamber of the Cinder Pact\'s old hideout and face TERRATITAN, level 298, risen from its magma pool', catch: 'groudon' },
     ],
     lair: 'magma-hideout',
   },
@@ -936,7 +936,7 @@ export const HOENN_TALES = {
     reward: { items: { greatball: 2 } }, rewardText: '2 Great Balls',
     bondNpc: 'orin', bondDelta: 1,
     revelation: 'The gym\'s balance rooms were built by Orin\'s grandfather, a pond fisherman who believed a trainer\'s stance should be judged the way a heron judges water — by what does not ripple.',
-    offerLines: ['I keep the balance rooms of Norman\'s gym, trainer — sweeping, chalking, judging stances. Thirty years of it, and I still cannot say what balance weighs. The man who taught me could. He fishes the pond now and answers nothing quickly.', 'Ask Fisher Lio what the pond taught him. Bring me the whole answer. Two Great Balls — knowledge should travel with tackle.'],
+    offerLines: ['I keep the balance rooms of Alden\'s gym, trainer — sweeping, chalking, judging stances. Thirty years of it, and I still cannot say what balance weighs. The man who taught me could. He fishes the pond now and answers nothing quickly.', 'Ask Fisher Lio what the pond taught him. Bring me the whole answer. Two Great Balls — knowledge should travel with tackle.'],
     stageLines: ['What the pond taught me? Orin sent you. Sit on the bank a moment — no. Stand. The lesson stands.', 'A heron does not balance, boy. A heron commits. Every ripple it refuses to make is a fish deciding it is safe. Balance is not stillness — it is the weight of everything you chose not to disturb. Tell the keeper the pond said so.'],
     finishLines: ['The weight of everything you chose not to disturb... Forty years, and the old fox still teaches in riddles that turn out to be instructions.', 'His grandfather built those rooms, you know. A fisherman, building a gym — and every tamer since has stood in them learning to be a heron. Two Great Balls, trainer. Disturb little.'],
   },
@@ -980,45 +980,45 @@ export const HOENN_TALES = {
 // for leaders/rosters).
 // ---------------------------------------------------------------------------
 export const HOENN_NPCS = [
-  { map: 'birch-lab', x: 7, y: 3, name: 'PROF. BIRCH', art: 'scientist', skin: '#f0c8a0', shirt: '#f0f0f0', pants: '#4a4a5a', hair: '#3a2a1a', hoenn: 'birch',
+  { map: 'birch-lab', x: 7, y: 3, name: 'PROF. ASPEN', art: 'scientist', skin: '#f0c8a0', shirt: '#f0f0f0', pants: '#4a4a5a', hair: '#3a2a1a', hoenn: 'birch',
     dialogue: ['The field is my library, trainer. It keeps trying to eat me, but it IS my library.'] },
-  { map: 'littleroot', x: 15, y: 8, name: 'MAY', art: 'lass', skin: '#f0c8a0', shirt: '#c83a3a', pants: '#2a4a6a', hair: '#6a4a2a', hoenn: 'may_littleroot',
+  { map: 'littleroot', x: 15, y: 8, name: 'MAIA', art: 'lass', skin: '#f0c8a0', shirt: '#c83a3a', pants: '#2a4a6a', hair: '#6a4a2a', hoenn: 'may_littleroot',
     dialogue: ['Contests are not the soft option, you know. They are battles where the crowd grades your footwork.'] },
-  { map: 'petalburg', x: 13, y: 7, name: 'WALLY', art: 'kid', skin: '#f0d8b8', shirt: '#7c3fa5', pants: '#3a3a4a', hair: '#4a7a4a', hoenn: 'wally',
+  { map: 'petalburg', x: 13, y: 7, name: 'EMIL', art: 'kid', skin: '#f0d8b8', shirt: '#7c3fa5', pants: '#3a3a4a', hair: '#4a7a4a', hoenn: 'wally',
     dialogue: ['I caught one. Me. A PSYLET, by the pond grass — well. We caught each other, I think.'] },
-  { map: 'gym-petalburg', x: 7, y: 2, name: 'NORMAN', art: 'lead-petalburg', skin: '#e8b888', shirt: '#4a4a5a', pants: '#2a2a3a', hair: '#2a2a3a', hoenn: 'norman',
+  { map: 'gym-petalburg', x: 7, y: 2, name: 'ALDEN', art: 'lead-petalburg', skin: '#e8b888', shirt: '#4a4a5a', pants: '#2a2a3a', hair: '#2a2a3a', hoenn: 'norman',
     dialogue: ['Balance is not standing still, challenger. Come back when the road has taught you that, and I will test it personally.'] },
-  { map: 'gym-rustboro', x: 7, y: 2, name: 'ROXANNE', art: 'lead-rustboro', skin: '#f0c8a0', shirt: '#7a3a3a', pants: '#3a3a4a', hair: '#5a2a3a', hoenn: 'roxanne',
+  { map: 'gym-rustboro', x: 7, y: 2, name: 'SAXA', art: 'lead-rustboro', skin: '#f0c8a0', shirt: '#7a3a3a', pants: '#3a3a4a', hair: '#5a2a3a', hoenn: 'roxanne',
     dialogue: ['Every stone in this gym was placed to teach. Mind the compass stone.'] },
   { map: 'gym-rustboro', x: 4, y: 5, name: 'YOUNGSTER BRAM', art: 'youngster', skin: '#f0c8a0', shirt: '#324a83', pants: '#2a2a3a', hair: '#7a4a1a', trainer: 'rustboro_gym_1',
     dialogue: ['Boots checked. Book signed.'] },
   { map: 'gym-rustboro', x: 11, y: 5, name: 'HIKER SELLA', art: 'hiker', skin: '#d8a878', shirt: '#50368e', pants: '#3a3a2a', hair: '#2a1a0a', trainer: 'rustboro_gym_2',
     dialogue: ['The stone does not care which day it is.'] },
-  { map: 'gym-dewford', x: 7, y: 2, name: 'BRAWLY', art: 'lead-dewford', skin: '#d8a878', shirt: '#2a6a8a', pants: '#2a2a3a', hair: '#1a2a4a', hoenn: 'brawly',
+  { map: 'gym-dewford', x: 7, y: 2, name: 'ENZO', art: 'lead-dewford', skin: '#d8a878', shirt: '#2a6a8a', pants: '#2a2a3a', hair: '#1a2a4a', hoenn: 'brawly',
     dialogue: ['Read the wave, trainer. Then stand in it.'] },
   { map: 'gym-dewford', x: 4, y: 5, name: 'BLACKBELT ROOK', art: 'blackbelt', skin: '#c89878', shirt: '#e8e0c8', pants: '#3a3a3a', hair: '#1a1a1a', trainer: 'dewford_gym_1',
     dialogue: ['In the dark, footwork is everything.'] },
   { map: 'gym-dewford', x: 11, y: 5, name: 'BATTLE GIRL SANA', art: 'lass', skin: '#f0c8a0', shirt: '#c05a7a', pants: '#2a2a3a', hair: '#2a1a3a', trainer: 'dewford_gym_2',
     dialogue: ['A wave is a punch the ocean throws forever.'] },
-  { map: 'gym-mauville', x: 7, y: 2, name: 'WATTSON', art: 'elder', skin: '#e8b888', shirt: '#e8c832', pants: '#3a4a5a', hair: '#e8e8e8', hoenn: 'wattson',
+  { map: 'gym-mauville', x: 7, y: 2, name: 'OLIN', art: 'elder', skin: '#e8b888', shirt: '#e8c832', pants: '#3a4a5a', hair: '#e8e8e8', hoenn: 'wattson',
     dialogue: ['Wahahaha! Mind the barriers, youngster!'] },
   { map: 'gym-mauville', x: 4, y: 5, name: 'CAMPER ILYA', art: 'camper', skin: '#f0c8a0', shirt: '#324a83', pants: '#3a3a2a', hair: '#7a1a1a', trainer: 'mauville_gym_1',
     dialogue: ['I do not apologize. I conduct.'] },
   { map: 'gym-mauville', x: 11, y: 5, name: 'ENGINEER PASK', art: 'scientist', skin: '#d8a878', shirt: '#5a6a7a', pants: '#2a2a3a', hair: '#4a4a5a', trainer: 'mauville_gym_2',
     dialogue: ['Every challenger is a load test.'] },
-  { map: 'gym-lavaridge', x: 7, y: 2, name: 'FLANNERY', art: 'lead-lavaridge', skin: '#f0c8a0', shirt: '#c83a2a', pants: '#2a2a3a', hair: '#c83a1a', hoenn: 'flannery',
+  { map: 'gym-lavaridge', x: 7, y: 2, name: 'SOLA', art: 'lead-lavaridge', skin: '#f0c8a0', shirt: '#c83a2a', pants: '#2a2a3a', hair: '#c83a1a', hoenn: 'flannery',
     dialogue: ['In here, we burn. That is the whole policy.'] },
   { map: 'gym-lavaridge', x: 4, y: 5, name: 'KINDLER FENN', art: 'camper', skin: '#e8b888', shirt: '#a03a2a', pants: '#3a3a2a', hair: '#3a2a1a', trainer: 'lavaridge_gym_1',
     dialogue: ['Mind your step — then mind my MAGSLUG.'] },
   { map: 'gym-lavaridge', x: 11, y: 5, name: 'HIKER BRASA', art: 'hiker', skin: '#c89878', shirt: '#2d4377', pants: '#3a3a2a', hair: '#1a1a0a', trainer: 'lavaridge_gym_2',
     dialogue: ['The portrait watches that door. It has never nodded at me.'] },
-  { map: 'contest-slateport', x: 8, y: 6, name: 'MAY', art: 'lass', skin: '#f0c8a0', shirt: '#c83a3a', pants: '#2a4a6a', hair: '#6a4a2a', hoenn: 'may_contest_slateport',
+  { map: 'contest-slateport', x: 8, y: 6, name: 'MAIA', art: 'lass', skin: '#f0c8a0', shirt: '#c83a3a', pants: '#2a4a6a', hair: '#6a4a2a', hoenn: 'may_contest_slateport',
     dialogue: ['First big hall. First big crowd. Watch me anyway.'] },
-  { map: 'contest-verdanturf', x: 8, y: 6, name: 'MAY', art: 'lass', skin: '#f0c8a0', shirt: '#c83a3a', pants: '#2a4a6a', hair: '#6a4a2a', hoenn: 'may_contest_verdanturf',
+  { map: 'contest-verdanturf', x: 8, y: 6, name: 'MAIA', art: 'lass', skin: '#f0c8a0', shirt: '#c83a3a', pants: '#2a4a6a', hair: '#6a4a2a', hoenn: 'may_contest_verdanturf',
     dialogue: ['New appeal. Practiced all week. Do not tell me to relax.'] },
-  { map: 'contest-fallarbor', x: 8, y: 6, name: 'MAY', art: 'lass', skin: '#f0c8a0', shirt: '#c83a3a', pants: '#2a4a6a', hair: '#6a4a2a', hoenn: 'may_contest_fallarbor',
+  { map: 'contest-fallarbor', x: 8, y: 6, name: 'MAIA', art: 'lass', skin: '#f0c8a0', shirt: '#c83a3a', pants: '#2a4a6a', hair: '#6a4a2a', hoenn: 'may_contest_fallarbor',
     dialogue: ['I picked the hardest crowd in Maris on purpose.'] },
-  { map: 'meteor-falls', x: 12, y: 8, name: 'PROF. COZMO', art: 'scientist', skin: '#e8b888', shirt: '#f0f0f0', pants: '#4a4a5a', hair: '#c0c0c0', hoenn: 'cozmo',
+  { map: 'meteor-falls', x: 12, y: 8, name: 'PROF. ANDO', art: 'scientist', skin: '#e8b888', shirt: '#f0f0f0', pants: '#4a4a5a', hair: '#c0c0c0', hoenn: 'cozmo',
     dialogue: ['Star-stone is for STUDYING. I shall be saying it in my sleep.'] },
   { map: 'mt-chimney', x: 12, y: 6, name: 'ADMIN BRASK', art: 'cmd-chimney-a', skin: '#d8a878', shirt: '#a02a2a', pants: '#2a2a3a', hair: '#2a1a0a', hoenn: 'magma_admin_npc',
     dialogue: ['The crater keeps, trainer. So do we.'] },
@@ -1031,33 +1031,33 @@ export const HOENN_NPCS = [
     dialogue: ['Stand honestly, trainer.'] },
   { map: 'gym-petalburg', x: 11, y: 5, name: 'COOL TRAINER MARN', art: 'lass', skin: '#f0c8a0', shirt: '#7a4a6a', pants: '#2a2a3a', hair: '#3a2a4a', trainer: 'petalburg_gym_2',
     dialogue: ['Then the weight arrives, all at once, honestly.'] },
-  { map: 'gym-fortree', x: 7, y: 2, name: 'WINONA', art: 'lead-fortree', skin: '#f0c8a0', shirt: '#5a7a9a', pants: '#e8e8e8', hair: '#7a9ab8', hoenn: 'winona',
+  { map: 'gym-fortree', x: 7, y: 2, name: 'ARIA', art: 'lead-fortree', skin: '#f0c8a0', shirt: '#5a7a9a', pants: '#e8e8e8', hair: '#7a9ab8', hoenn: 'winona',
     dialogue: ['Mind the canopy, challenger, and mind the wind.'] },
   { map: 'gym-fortree', x: 4, y: 5, name: 'BIRD KEEPER ANSEL', art: 'camper', skin: '#e8b888', shirt: '#833732', pants: '#3a3a2a', hair: '#5a3a1a', trainer: 'fortree_gym_1',
     dialogue: ['If you cannot see the wind, battle like it sees you.'] },
   { map: 'gym-fortree', x: 11, y: 5, name: 'PICNICKER WREN', art: 'picnicker', skin: '#f0c8a0', shirt: '#c8a03a', pants: '#2a304a', hair: '#8a5a2a', trainer: 'fortree_gym_2',
     dialogue: ['I picnic at altitude and battle at altitude.'] },
-  { map: 'gym-mossdeep', x: 7, y: 2, name: 'TATE', art: 'kid', skin: '#f0d8b8', shirt: '#6a5a9a', pants: '#2a2a3a', hair: '#3a3a6a', hoenn: 'tate_liza',
-    dialogue: ['I am Tate — the left half of this gym.'] },
-  { map: 'gym-mossdeep', x: 9, y: 2, name: 'LIZA', art: 'lass', skin: '#f0d8b8', shirt: '#8a5a9a', pants: '#2a2a3a', hair: '#3a3a6a', hoenn: 'liza_flavor',
-    dialogue: ['Liza — the half that was listening.'] },
+  { map: 'gym-mossdeep', x: 7, y: 2, name: 'THEO', art: 'kid', skin: '#f0d8b8', shirt: '#6a5a9a', pants: '#2a2a3a', hair: '#3a3a6a', hoenn: 'tate_liza',
+    dialogue: ['I am Theo — the left half of this gym.'] },
+  { map: 'gym-mossdeep', x: 9, y: 2, name: 'LENA', art: 'lass', skin: '#f0d8b8', shirt: '#8a5a9a', pants: '#2a2a3a', hair: '#3a3a6a', hoenn: 'liza_flavor',
+    dialogue: ['Lena — the half that was listening.'] },
   { map: 'gym-mossdeep', x: 4, y: 5, name: 'PSYCHIC HOLLIS', art: 'scientist', skin: '#d8a878', shirt: '#5a5a7a', pants: '#2a2a3a', hair: '#2a2a3a', trainer: 'mossdeep_gym_1',
     dialogue: ['Losing here is educational.'] },
   { map: 'gym-mossdeep', x: 11, y: 5, name: 'HEX MANIAC IONE', art: 'lass', skin: '#e8b888', shirt: '#3a2a4a', pants: '#2a2a3a', hair: '#1a1a2a', trainer: 'mossdeep_gym_2',
     dialogue: ['Plan for two battles, trainer.'] },
-  { map: 'gym-sootopolis', x: 7, y: 2, name: 'JUAN', art: 'lead-sootopolis', skin: '#e8b888', shirt: '#2a4a6a', pants: '#e8e8e8', hair: '#e8e8e8', hoenn: 'juan',
+  { map: 'gym-sootopolis', x: 7, y: 2, name: 'JULEN', art: 'lead-sootopolis', skin: '#e8b888', shirt: '#2a4a6a', pants: '#e8e8e8', hair: '#e8e8e8', hoenn: 'juan',
     dialogue: ['Precisely, and to a finish.'] },
   { map: 'gym-sootopolis', x: 4, y: 5, name: 'SWIMMER CATO', art: 'camper', skin: '#d8a878', shirt: '#2a6a8a', pants: '#2a2a3a', hair: '#2a1a0a', trainer: 'sootopolis_gym_1',
     dialogue: ['Tradition, trainer.'] },
   { map: 'gym-sootopolis', x: 11, y: 5, name: 'BEAUTY ONDINE', art: 'lass', skin: '#f0c8a0', shirt: '#4a8a9a', pants: '#2a2a3a', hair: '#6a3a5a', trainer: 'sootopolis_gym_2',
     dialogue: ['Sing, trainer.'] },
-  { map: 'mossdeep', x: 14, y: 9, name: 'STEVEN', art: 'acetrainer', skin: '#f0c8a0', shirt: '#4a4a5a', pants: '#6a2a2a', hair: '#b8c8d8', hoenn: 'steven',
+  { map: 'mossdeep', x: 14, y: 9, name: 'ALBAN', art: 'acetrainer', skin: '#f0c8a0', shirt: '#4a4a5a', pants: '#6a2a2a', hair: '#b8c8d8', hoenn: 'steven',
     dialogue: ['Stones, steel, and the deep road. I collect all three.'] },
-  { map: 'contest-lilycove', x: 8, y: 6, name: 'MAY', art: 'lass', skin: '#f0c8a0', shirt: '#c83a3a', pants: '#2a4a6a', hair: '#6a4a2a', hoenn: 'may_contest_lilycove',
+  { map: 'contest-lilycove', x: 8, y: 6, name: 'MAIA', art: 'lass', skin: '#f0c8a0', shirt: '#c83a3a', pants: '#2a4a6a', hair: '#6a4a2a', hoenn: 'may_contest_lilycove',
     dialogue: ['The last hall on my road. Watch how it ends.'] },
-  { map: 'lilycove', x: 16, y: 8, name: 'MAY', art: 'lass', skin: '#f0c8a0', shirt: '#c83a3a', pants: '#2a4a6a', hair: '#6a4a2a', hoenn: 'may_festival',
+  { map: 'lilycove', x: 16, y: 8, name: 'MAIA', art: 'lass', skin: '#f0c8a0', shirt: '#c83a3a', pants: '#2a4a6a', hair: '#6a4a2a', hoenn: 'may_festival',
     dialogue: ['The Grand Festival, {player}. My whole road, in one hall.'] },
-  { map: 'victory-road-maris', x: 11, y: 6, name: 'WALLY', art: 'kid', skin: '#f0d8b8', shirt: '#7c3fa5', pants: '#3a3a4a', hair: '#4a7a4a', hoenn: 'wally_final',
+  { map: 'victory-road-maris', x: 11, y: 6, name: 'EMIL', art: 'kid', skin: '#f0d8b8', shirt: '#7c3fa5', pants: '#3a3a4a', hair: '#4a7a4a', hoenn: 'wally_final',
     dialogue: ['I have thought about how this sentence ends for a whole region.'] },
   { map: 'cave-of-origin', x: 8, y: 7, name: 'KEEPER ANTHEA', art: 'elder', skin: '#e8b888', shirt: '#2d4377', pants: '#2a2a3a', hair: '#c0c0c0', hoenn: 'origin_keeper',
     dialogue: ['The cave keeps the first argument. The sky keeps its answer.'] },
@@ -1069,7 +1069,7 @@ export const HOENN_NPCS = [
     dialogue: ['No holding back, either of us. That IS the friendship.'] },
   { map: 'league-evergrande', x: 11, y: 8, name: 'TYSON', art: 'acetrainer', skin: '#d8a878', shirt: '#60243a', pants: '#2a2a3a', hair: '#2a2a1a', hoenn: 'tyson',
     dialogue: ['Come and take the ending, if it is yours.'] },
-  { map: 'league-evergrande', x: 15, y: 12, name: 'SCOTT', art: 'gent', skin: '#e8b888', shirt: '#7a6a2a', pants: '#3a3a2a', hair: '#5a4a2a', hoenn: 'scott',
+  { map: 'league-evergrande', x: 15, y: 12, name: 'SUTTER', art: 'gent', skin: '#e8b888', shirt: '#7a6a2a', pants: '#3a3a2a', hair: '#5a4a2a', hoenn: 'scott',
     dialogue: ['I scout battle the way other men scout weather: professionally, and with great enjoyment.'] },
 ];
 

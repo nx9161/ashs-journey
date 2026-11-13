@@ -26,9 +26,9 @@
 // the stage is active — see main-systems openQuestLog).
 // ---------------------------------------------------------------------------
 export const ORANGE_QUESTS = [
-  { id: 'q_orange_gsball', flag: 'orange_gsball', text: 'Fetch the GS Orb from Prof. Ivy on Marisol Island', hint: 'Professor Ivy\'s lab stands at the north edge of Marisol. The ball on her pedestal has defeated every machine she owns.' },
-  { id: 'q_orange_crew', flag: 'orange_crew_done', text: 'Win the four Amber Crew badges', hint: 'Cissy on Tangelo, Danny on Pomelo, Rudy on Reefside, Luana on Calamondin. Each leader tests something before the battle — that is the Amber way.', badgeCount: true },
-  { id: 'q_orange_league', flag: 'orange_champion', text: 'Challenge Drake at Grapefruit Stadium and win the Amber League', hint: 'Four island badges open the stadium doors. Drake, the Amber League champion, waits inside with six partners and no intention of moving.' },
+  { id: 'q_orange_gsball', flag: 'orange_gsball', text: 'Fetch the Sealed Orb from Prof. Isla on Marisol Island', hint: 'Professor Isla\'s lab stands at the north edge of Marisol. The ball on her pedestal has defeated every machine she owns.' },
+  { id: 'q_orange_crew', flag: 'orange_crew_done', text: 'Win the four Amber Crew badges', hint: 'Sela on Tangelo, Oren on Pomelo, Renzo on Reefside, Alba on Calamondin. Each leader tests something before the battle — that is the Amber way.', badgeCount: true },
+  { id: 'q_orange_league', flag: 'orange_champion', text: 'Challenge Barrow at Grapefruit Stadium and win the Amber League', hint: 'Four island badges open the stadium doors. Barrow, the Amber League champion, waits inside with six partners and no intention of moving.' },
   // --- O3 APPEND SEAM: the ABYSSORN / 2000 stages join here. ---
   // The storm chain is chronology-true mid-arc content (it unlocks at
   // 2 Amber badges — see the sysLoadMap gate in overworld-systems)
@@ -50,7 +50,7 @@ export const ORANGE_QUESTS = [
 // ---------------------------------------------------------------------------
 export const ORANGE_TRAINERS = {
   cissy: {
-    id: 'cissy', name: 'Cissy', title: 'Tangelo Gym Leader', ai: 'smart', badgeSet: 'orange',
+    id: 'cissy', name: 'Sela', title: 'Tangelo Gym Leader', ai: 'smart', badgeSet: 'orange',
     intro: ['Range rules are range rules — you passed the targets, so now you get the real thing. My water team does not miss, challenger. Neither do I.'],
     lose: ['Beaten on my own lagoon... clean and fair.', 'The Coral-Eye Badge is yours. Aim true out there — the sea rewards it.'],
     team: [
@@ -60,7 +60,7 @@ export const ORANGE_TRAINERS = {
     reward: 4000, badge: 'coraleyebadge',
   },
   danny: {
-    id: 'danny', name: 'Danny', title: 'Pomelo Gym Leader', ai: 'smart', badgeSet: 'orange',
+    id: 'danny', name: 'Oren', title: 'Pomelo Gym Leader', ai: 'smart', badgeSet: 'orange',
     intro: ['You climbed my mountain, so you already know half my philosophy: the hard way up is the honest way. Now the other half — battle.'],
     lose: ['Winded, beaten, and grinning. That is a summit day.', 'The Sea Ruby Badge, earned at altitude. Mind the sled on your way down — ceremony rules.'],
     team: [
@@ -71,7 +71,7 @@ export const ORANGE_TRAINERS = {
     reward: 4400, badge: 'searubybadge',
   },
   rudy: {
-    id: 'rudy', name: 'Rudy', title: 'Reefside Gym Leader', ai: 'smart', badgeSet: 'orange',
+    id: 'rudy', name: 'Renzo', title: 'Reefside Gym Leader', ai: 'smart', badgeSet: 'orange',
     intro: ['You showed me your team\'s types with an open hand. I respect that. Now show me their rhythm — Reefside battles are danced as much as fought.'],
     lose: ['What a number. What a finish. I am applauding and I do not even mind.', 'The Spike Shell Badge is yours. Dance on, champion-to-be.'],
     team: [
@@ -87,7 +87,7 @@ export const ORANGE_TRAINERS = {
   // state carries between stages with NO heal. Only stage B carries
   // the badge, so the award fires once, on clearing both.
   luana_a: {
-    id: 'luana_a', name: 'Luana', title: 'Calamondin Gym Leader', ai: 'smart', badgeSet: 'orange',
+    id: 'luana_a', name: 'Alba', title: 'Calamondin Gym Leader', ai: 'smart', badgeSet: 'orange',
     intro: ['Pair one. MENTARCH takes the floor — mind the spoons, dear, they bend toward trouble.'],
     lose: ['Pair one, down! No resting — that is the whole point. Pair two, straight away!'],
     team: [
@@ -97,7 +97,7 @@ export const ORANGE_TRAINERS = {
     reward: 0,
   },
   luana_b: {
-    id: 'luana_b', name: 'Luana', title: 'Calamondin Gym Leader', ai: 'smart', badgeSet: 'orange',
+    id: 'luana_b', name: 'Alba', title: 'Calamondin Gym Leader', ai: 'smart', badgeSet: 'orange',
     intro: ['Pair two. FOSSILORD, darling — show them the ground remembers every step.'],
     lose: ['Both pairs. Both! Oh, that was a match to frame.', 'The Jade Star Badge is yours, with the resort\'s compliments — and mine, which are rarer.'],
     team: [
@@ -107,7 +107,7 @@ export const ORANGE_TRAINERS = {
     reward: 5000, badge: 'jadestarbadge',
   },
   drake: {
-    id: 'drake', name: 'Drake', title: 'Amber League Champion', ai: 'smart',
+    id: 'drake', name: 'Barrow', title: 'Amber League Champion', ai: 'smart',
     intro: ['Four badges, and every one of them earned the island way. Good. I have waited all season for a final worth the stadium. Give me a battle the sea can hear.'],
     lose: ['...Listen to that crowd. They know. I know.', 'Champion of the Amber League — the title is yours, and so is the Winner\'s Trophy. Hold it high. You carried a strange ball across my whole sea to earn it.'],
     team: [
@@ -133,10 +133,10 @@ export const ORANGE_TRAINERS = {
 export const ORANGE_EVENTS = {
   ev_orange_ivy: [
     { say: ['The lab smells of salt, paper, and hot electronics. On a pedestal at its heart, under a glass hood: a Capture Orb banded in gold and silver, humming very faintly, like a kettle thinking about it.'], who: 'NARRATOR' },
-    { say: ['You must be Professor Hawthorn\'s runner. I am Professor Ivy — welcome to Marisol.', 'Forgive the mess. Marine research is ninety percent waiting for the sea to finish a sentence.'], who: 'PROF. IVY' },
-    { say: ['That is the famous ball. It turned up in these waters, and in three months it has beaten every opener, scanner, and polite request this lab owns. No machine can open it. I have stopped taking that personally. Mostly.'], who: 'PROF. IVY' },
+    { say: ['You must be Professor Hawthorn\'s runner. I am Professor Isla — welcome to Marisol.', 'Forgive the mess. Marine research is ninety percent waiting for the sea to finish a sentence.'], who: 'PROF. ISLA' },
+    { say: ['That is the famous ball. It turned up in these waters, and in three months it has beaten every opener, scanner, and polite request this lab owns. No machine can open it. I have stopped taking that personally. Mostly.'], who: 'PROF. ISLA' },
     { gsBall: true },
-    { say: ['Carry it carefully. Whatever is inside has waited this long — it can wait for the one pair of hands in the world that works the old way. Hawthorn will know whose those are.', 'And since you are here — the Amber Crew are taking challengers this season. Four islands, four badges, and a champion at Grapefruit who has forgotten how to lose. The sea would love to watch you try.'], who: 'PROF. IVY' },
+    { say: ['Carry it carefully. Whatever is inside has waited this long — it can wait for the one pair of hands in the world that works the old way. Hawthorn will know whose those are.', 'And since you are here — the Amber Crew are taking challengers this season. Four islands, four badges, and a champion at Grapefruit who has forgotten how to lose. The sea would love to watch you try.'], who: 'PROF. ISLA' },
     { flag: 'orange_gsball' },
     { toast: 'The Amber Crew quest is open!' },
   ],

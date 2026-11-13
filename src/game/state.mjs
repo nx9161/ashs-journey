@@ -143,7 +143,7 @@ export function starterLinesFromSave(save) {
 export function defaultState(inherit) {
   const st = {
     v: SCHEMA_VERSION,
-    player: { name: 'ASH', rivalName: 'GARY', trainerId: 0, playtimeSec: 0, money: 300 },
+    player: { name: 'KIAN', rivalName: 'VALE', trainerId: 0, playtimeSec: 0, money: 300 },
     party: [],
     boxes: {},
     dex: { caught: {}, seen: {}, befriended: {} }, // dexNo -> true
@@ -297,7 +297,7 @@ export function makeMon(speciesId, level, speciesTable, movesTable) {
     keepsake: null, // ADR-025 §3 (Phase 3): held Keepsake itemId | null
     status: null,
     stages: { atk: 0, def: 0, spa: 0, spd: 0, spe: 0 },
-    ot: 'ASH',
+    ot: 'KIAN',
     friendship: 70,
   };
   const learned = [];

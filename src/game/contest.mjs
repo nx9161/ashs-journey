@@ -48,7 +48,7 @@ function npcMon(def) {
 export function createContest(opts) {
   const hall = opts.hall;
   const entrants = [{
-    key: 'player', name: opts.playerName || 'ASH', mon: opts.playerMon,
+    key: 'player', name: opts.playerName || 'KIAN', mon: opts.playerMon,
     script: null, total: 0, roundGain: 0, lastGain: 0, performed: false,
   }];
   for (const def of CONTEST_NPCS[hall] || []) {

@@ -44,7 +44,7 @@ export const TUTORIAL_AIDE_EXTRA = [
 ];
 
 export const GYM_WIN_TEXT = [
-  'You defeated Gym Leader Brock!',
+  'You defeated Gym Leader Garran!',
 ];
 
 export const SLICE_CAPSTONE = [
@@ -151,8 +151,8 @@ export const BOND_DIALOGUE = {
   koga: {
     banter: {
       cold: ['A ninja\'s gym has no small talk. State your purpose or become part of the scenery.'],
-      wary: ['Janine speaks of the lure, and of you. In this family, that is not nothing.'],
-      warm: ['My grandfather carved that lure the winter the marsh fed all of Bramble. A ninja learns patience from water: still on top, deep below.', 'Janine trains twice as hard since your visit. She says a stranger showed her what our family code looks like from outside. She is right to study it.'],
+      wary: ['Jessa speaks of the lure, and of you. In this family, that is not nothing.'],
+      warm: ['My grandfather carved that lure the winter the marsh fed all of Bramble. A ninja learns patience from water: still on top, deep below.', 'Jessa trains twice as hard since your visit. She says a stranger showed her what our family code looks like from outside. She is right to study it.'],
       close: ['The Warden\'s lure hangs by my door now, between my grandfather\'s portrait and my daughter\'s first badge sketch. You understand what that shelf means, {player}.', 'Poison is the honest type. It never pretends the world is safe — it teaches you to move through it anyway. You move well.'],
     },
   },

@@ -213,7 +213,7 @@ Object.assign(OverworldScene.prototype, {
       const bodyHtml = '<div class="pcmain"><div class="pcgrid">' + cells + '</div>'
         + '<div class="pcside"><div class="pcpartyhd">PARTY</div><div class="pcparty">' + party + '</div>'
         + '<div class="pcinfo">' + infoFor() + '</div>'
-        + '<button class="pclink" data-pcact="link">Link Transfer (Bill\'s system) — Shift</button>'
+        + '<button class="pclink" data-pcact="link">Link Transfer (Odo\'s system) — Shift</button>'
         + '<button class="pclink" data-pcact="off">Log off</button></div></div>';
       const data = {
         title: 'SOMEONE\'S PC — BOX ' + st.box + ' (' + arr.length + '/' + BOX_CAP + ')'

@@ -15,8 +15,8 @@ export class IntroScene {
   enter() {
     this.step = 'ask-skip';
     this.lineIdx = 0;
-    this.name = 'ASH';
-    this.rival = 'GARY';
+    this.name = 'KIAN';
+    this.rival = 'VALE';
     this._startHeld = 0;
     this.game.ui.log.push({ ui: 'intro' });
     const g = this.game;
@@ -52,7 +52,7 @@ export class IntroScene {
     // P0/C3: full A-Z grid ships now (replaces the Wave-1 two-option menu).
     const g = this.game;
     this.step = 'name';
-    g.ui.showNameEntry('Your name?', 'ASH', 8, (value) => {
+    g.ui.showNameEntry('Your name?', 'KIAN', 8, (value) => {
       this.name = value;
       g.state.player.name = this.name;
       if (g.ui.headless) {
@@ -63,7 +63,7 @@ export class IntroScene {
       }
       // P1/C4: rival name entry reuses the same grid.
       this.step = 'rival';
-      g.ui.showNameEntry("Rival's name?", 'GARY', 8, (rv) => {
+      g.ui.showNameEntry("Rival's name?", 'VALE', 8, (rv) => {
         this.rival = rv;
         g.state.player.rivalName = this.rival;
         this.rivalEntryDone();

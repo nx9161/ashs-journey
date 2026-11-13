@@ -149,7 +149,7 @@ export const MAPS5 = {
       {
         "x": 9,
         "y": 3,
-        "text": "PROF. IVY'S LAB — Marine Kin research. A certain unopenable Capture Orb rests inside."
+        "text": "PROF. ISLA'S LAB — Marine Kin research. A certain unopenable Capture Orb rests inside."
       },
       {
         "x": 3,
@@ -177,7 +177,7 @@ export const MAPS5 = {
       {
         "x": 8,
         "y": 15,
-        "name": "SAILOR BRUNO-MIKA",
+        "name": "SAILOR GORAN-MIKA",
         "art": "sailor",
         "skin": "#e8b888",
         "shirt": "#3a9ac0",
@@ -215,7 +215,7 @@ export const MAPS5 = {
         "hair": "#c0c0c0",
         "dialogue": [
           "Marisol grows oranges sweet enough to make a SOMNIBEAR sit up.",
-          "Professor Ivy studies the sea's odd Capture Orbs in the lab up the street."
+          "Professor Isla studies the sea's odd Capture Orbs in the lab up the street."
         ]
       },
       {
@@ -552,7 +552,7 @@ export const MAPS5 = {
       {
         "x": 13,
         "y": 11,
-        "name": "CISSY-FAN REN",
+        "name": "SELA-FAN REN",
         "art": "youngster",
         "skin": "#c89878",
         "shirt": "#2a7a6a",
@@ -1205,7 +1205,7 @@ export const MAPS5 = {
       {
         "x": 7,
         "y": 13,
-        "name": "CAPT BRUNO-NAVE",
+        "name": "CAPT GORAN-NAVE",
         "art": "sailor",
         "skin": "#d8a878",
         "shirt": "#3a6ac0",
@@ -1220,7 +1220,7 @@ export const MAPS5 = {
       {
         "x": 9,
         "y": 13,
-        "name": "SAILOR BRUNO-TROV",
+        "name": "SAILOR GORAN-TROV",
         "art": "sailor",
         "skin": "#e8b888",
         "shirt": "#3a9ac0",
@@ -1867,7 +1867,7 @@ export const MAPS5 = {
       {
         "x": 10,
         "y": 13,
-        "name": "SAILOR BRUNO-PUMM",
+        "name": "SAILOR GORAN-PUMM",
         "art": "sailor",
         "skin": "#e8b888",
         "shirt": "#3a9ac0",
@@ -3935,7 +3935,7 @@ export const MAPS5 = {
   },
   "ivy-lab": {
     "id": "ivy-lab",
-    "name": "Prof. Ivy's Lab",
+    "name": "Prof. Isla's Lab",
     "music": "viridian-theme",
     "indoor": true,
     "rows": [
@@ -3976,7 +3976,7 @@ export const MAPS5 = {
       {
         "x": 8,
         "y": 2,
-        "text": "The GS Orb rests on its pedestal — gold, banded, and sealed tighter than any lock. No machine in the lab can open it."
+        "text": "The Sealed Orb rests on its pedestal — gold, banded, and sealed tighter than any lock. No machine in the lab can open it."
       },
       {
         "x": 2,
@@ -3988,13 +3988,13 @@ export const MAPS5 = {
       {
         "x": 8,
         "y": 3,
-        "name": "PROF. IVY",
+        "name": "PROF. ISLA",
         "art": "lady",
         "skin": "#f0c8a0",
         "shirt": "#5a3a8a",
         "pants": "#e8e0d0",
         "hair": "#3a5a2a",
-        "dialogue": ["The GS Orb rides with you now, trainer. Whatever hands finally open it, I suspect they will be old, patient, and far inland.", "My reef transect can wait. Some mysteries only visit a lab once."],
+        "dialogue": ["The Sealed Orb rides with you now, trainer. Whatever hands finally open it, I suspect they will be old, patient, and far inland.", "My reef transect can wait. Some mysteries only visit a lab once."],
         "orange": "ivy"
       },
       {
@@ -4007,7 +4007,7 @@ export const MAPS5 = {
         "pants": "#3a3a4a",
         "hair": "#7a4a1a",
         "dialogue": [
-          "Professor Ivy is out on the reef transect — she studies how the sea changes Kin.",
+          "Professor Isla is out on the reef transect — she studies how the sea changes Kin.",
           "That ball on the pedestal? Every scanner we own just shrugs at it."
         ]
       }
@@ -4059,14 +4059,14 @@ export const MAPS5 = {
       {
         "x": 2,
         "y": 1,
-        "text": "TANGELO GYM — A floating range over the lagoon: ring targets, water lanes, and a very smug stopwatch. Cissy's Coral-Eye challenge is staged here."
+        "text": "TANGELO GYM — A floating range over the lagoon: ring targets, water lanes, and a very smug stopwatch. Sela's Coral-Eye challenge is staged here."
       }
     ],
     "npcs": [
       {
         "x": 8,
         "y": 2,
-        "name": "CISSY",
+        "name": "SELA",
         "art": "lady",
         "skin": "#f0c8a0",
         "shirt": "#e86a8a",
@@ -4138,14 +4138,14 @@ export const MAPS5 = {
       {
         "x": 2,
         "y": 1,
-        "text": "POMELO GYM — The floor tilts like the mountain outside; frost slicks the high lane. Danny's Sea Ruby challenge is staged here."
+        "text": "POMELO GYM — The floor tilts like the mountain outside; frost slicks the high lane. Oren's Sea Ruby challenge is staged here."
       }
     ],
     "npcs": [
       {
         "x": 7,
         "y": 2,
-        "name": "DANNY",
+        "name": "OREN",
         "art": "hiker",
         "skin": "#d8a878",
         "shirt": "#3a7a4a",
@@ -4217,14 +4217,14 @@ export const MAPS5 = {
       {
         "x": 2,
         "y": 1,
-        "text": "REEFSIDE GYM — A rocky arena ringed with carved spike stone. Rudy's Spike Shell challenge is staged here."
+        "text": "REEFSIDE GYM — A rocky arena ringed with carved spike stone. Renzo's Spike Shell challenge is staged here."
       }
     ],
     "npcs": [
       {
         "x": 8,
         "y": 2,
-        "name": "RUDY",
+        "name": "RENZO",
         "art": "gent",
         "skin": "#e8b888",
         "shirt": "#c05a7a",
@@ -4296,14 +4296,14 @@ export const MAPS5 = {
       {
         "x": 2,
         "y": 1,
-        "text": "CALAMONDIN GYM — A resort arena: palm shade, polished stone, doubles under the sun. Luana's Jade Star challenge is staged here."
+        "text": "CALAMONDIN GYM — A resort arena: palm shade, polished stone, doubles under the sun. Alba's Jade Star challenge is staged here."
       }
     ],
     "npcs": [
       {
         "x": 8,
         "y": 2,
-        "name": "LUANA",
+        "name": "ALBA",
         "art": "lady",
         "skin": "#f0c8a0",
         "shirt": "#7a3a9a",
@@ -4384,7 +4384,7 @@ export const MAPS5 = {
       {
         "x": 11,
         "y": 5,
-        "text": "GRAPEFRUIT STADIUM — The Amber League arena. Drake, the Amber League champion, waits on this floor."
+        "text": "GRAPEFRUIT STADIUM — The Amber League arena. Barrow, the Amber League champion, waits on this floor."
       }
     ],
     "npcs": [
@@ -4403,7 +4403,7 @@ export const MAPS5 = {
       {
         "x": 11,
         "y": 9,
-        "name": "DRAKE",
+        "name": "BARROW",
         "art": "gent",
         "skin": "#d8a878",
         "shirt": "#8a2a2a",

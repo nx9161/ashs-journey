@@ -14,13 +14,13 @@ export const BALLS = {
   // flavour: the desc states the real condition, and a rule that does
   // not meet its condition multiplies by exactly 1. `bonus` stays the
   // nominal 1; the rule supplies the true multiplier.
-  levelball: { id: 'levelball', name: 'Level Ball', bonus: 1, rule: 'level', desc: 'Kurt-made. The bigger your lead\'s level edge over the wild foe, the stronger it pulls: over 4x its level x8, over 2x x4, over 1x x2, otherwise x1.' },
-  lureball: { id: 'lureball', name: 'Lure Ball', bonus: 1, rule: 'lure', desc: 'Kurt-made. x3 on a Kin hooked while fishing; x1 on any other encounter.' },
-  moonball: { id: 'moonball', name: 'Moon Ball', bonus: 1, rule: 'moon', desc: 'Kurt-made. x4 on a species that evolves by Moon Stone; x1 on anything else.' },
-  loveball: { id: 'loveball', name: 'Love Ball', bonus: 1, rule: 'love', desc: 'Kurt-made. x8 when the wild foe is the same species as your lead; x1 otherwise.' },
-  fastball: { id: 'fastball', name: 'Fast Ball', bonus: 1, rule: 'fast', desc: 'Kurt-made. x4 on a species whose base Speed is 100 or more; x1 on slower species.' },
-  friendball: { id: 'friendball', name: 'Friend Ball', bonus: 1, rule: 'friend', desc: 'Kurt-made. A plain x1 catch — but a Kin caught in it starts out trusting you (friendship set high).' },
-  heavyball: { id: 'heavyball', name: 'Heavy Ball', bonus: 1, rule: 'heavy', desc: 'Kurt-made. Pulls harder the bulkier the foe\'s battler tier: S x1, M x1.5, L x2.5, XL x4.' },
+  levelball: { id: 'levelball', name: 'Level Ball', bonus: 1, rule: 'level', desc: 'Hendrik-made. The bigger your lead\'s level edge over the wild foe, the stronger it pulls: over 4x its level x8, over 2x x4, over 1x x2, otherwise x1.' },
+  lureball: { id: 'lureball', name: 'Lure Ball', bonus: 1, rule: 'lure', desc: 'Hendrik-made. x3 on a Kin hooked while fishing; x1 on any other encounter.' },
+  moonball: { id: 'moonball', name: 'Moon Ball', bonus: 1, rule: 'moon', desc: 'Hendrik-made. x4 on a species that evolves by Moon Stone; x1 on anything else.' },
+  loveball: { id: 'loveball', name: 'Love Ball', bonus: 1, rule: 'love', desc: 'Hendrik-made. x8 when the wild foe is the same species as your lead; x1 otherwise.' },
+  fastball: { id: 'fastball', name: 'Fast Ball', bonus: 1, rule: 'fast', desc: 'Hendrik-made. x4 on a species whose base Speed is 100 or more; x1 on slower species.' },
+  friendball: { id: 'friendball', name: 'Friend Ball', bonus: 1, rule: 'friend', desc: 'Hendrik-made. A plain x1 catch — but a Kin caught in it starts out trusting you (friendship set high).' },
+  heavyball: { id: 'heavyball', name: 'Heavy Ball', bonus: 1, rule: 'heavy', desc: 'Hendrik-made. Pulls harder the bulkier the foe\'s battler tier: S x1, M x1.5, L x2.5, XL x4.' },
 };
 
 // TM number -> move id (canonical Gen-1 assignments; moves live in moves data).
@@ -76,13 +76,13 @@ export const ITEMS = {
   // Stage J6: apricorns (pocket 'items') — picked from apricorn trees
   // across Yamato (src/game/johto-systems.mjs APRICORN_TREES); Kurt in
   // Cinder crafts one into its matching ball. No price: never mart stock.
-  redapricorn: { id: 'redapricorn', name: 'Red Apricorn', pocket: 'items', desc: 'A ripe red apricorn. Kurt of Cinder can work it into a Level Ball.' },
-  blueapricorn: { id: 'blueapricorn', name: 'Blue Apricorn', pocket: 'items', desc: 'A ripe blue apricorn. Kurt of Cinder can work it into a Lure Ball.' },
-  yellowapricorn: { id: 'yellowapricorn', name: 'Yellow Apricorn', pocket: 'items', desc: 'A ripe yellow apricorn. Kurt of Cinder can work it into a Moon Ball.' },
-  greenapricorn: { id: 'greenapricorn', name: 'Green Apricorn', pocket: 'items', desc: 'A ripe green apricorn. Kurt of Cinder can work it into a Friend Ball.' },
-  pinkapricorn: { id: 'pinkapricorn', name: 'Pink Apricorn', pocket: 'items', desc: 'A ripe pink apricorn. Kurt of Cinder can work it into a Love Ball.' },
-  whiteapricorn: { id: 'whiteapricorn', name: 'White Apricorn', pocket: 'items', desc: 'A ripe white apricorn. Kurt of Cinder can work it into a Fast Ball.' },
-  blackapricorn: { id: 'blackapricorn', name: 'Black Apricorn', pocket: 'items', desc: 'A ripe black apricorn. Kurt of Cinder can work it into a Heavy Ball.' },
+  redapricorn: { id: 'redpodnut', name: 'Red Podnut', pocket: 'items', desc: 'A ripe red podnut. Hendrik of Cinder can work it into a Level Ball.' },
+  blueapricorn: { id: 'bluepodnut', name: 'Blue Podnut', pocket: 'items', desc: 'A ripe blue podnut. Hendrik of Cinder can work it into a Lure Ball.' },
+  yellowapricorn: { id: 'yellowpodnut', name: 'Yellow Podnut', pocket: 'items', desc: 'A ripe yellow podnut. Hendrik of Cinder can work it into a Moon Ball.' },
+  greenapricorn: { id: 'greenpodnut', name: 'Green Podnut', pocket: 'items', desc: 'A ripe green podnut. Hendrik of Cinder can work it into a Friend Ball.' },
+  pinkapricorn: { id: 'pinkpodnut', name: 'Pink Podnut', pocket: 'items', desc: 'A ripe pink podnut. Hendrik of Cinder can work it into a Love Ball.' },
+  whiteapricorn: { id: 'whitepodnut', name: 'White Podnut', pocket: 'items', desc: 'A ripe white podnut. Hendrik of Cinder can work it into a Fast Ball.' },
+  blackapricorn: { id: 'blackpodnut', name: 'Black Podnut', pocket: 'items', desc: 'A ripe black podnut. Hendrik of Cinder can work it into a Heavy Ball.' },
   // Medicine
   potion: { id: 'potion', name: 'Potion', pocket: 'medicine', price: 300, heal: 20, desc: 'Restores 20 HP.' },
   superpotion: { id: 'superpotion', name: 'Super Potion', pocket: 'medicine', price: 700, heal: 50, desc: 'Restores 50 HP.' },
@@ -133,7 +133,7 @@ export const ITEMS = {
   coincase: { id: 'coincase', name: 'Coin Case', pocket: 'key', desc: 'Holds Game Corner coins.' },
   coin: { id: 'coin', name: 'Game Coin', pocket: 'key', desc: 'Game Corner currency. Win at the slots; spend at the prize corner.' },
   itemfinder: { id: 'itemfinder', name: 'Itemfinder', pocket: 'key', desc: 'Beeps near hidden items when used (SELECT near a spot).' },
-  townmap: { id: 'townmap', name: 'Town Map', pocket: 'key', desc: 'Arden at a glance. Gary\'s sister would approve.' },
+  townmap: { id: 'townmap', name: 'Town Map', pocket: 'key', desc: 'Arden at a glance. Vale\'s sister would approve.' },
   // Arc 4 Stage S5b: the Lunar Wing — carried away from Brightmoon
   // Island in the NOCTARCH beat; S6's Darkmoon arc reads it.
   lunarwing: { id: 'lunarwing', name: 'Lunar Wing', pocket: 'key', desc: 'A feather that shines like a crescent moon. Said to drive off nightmares.' },
@@ -141,70 +141,70 @@ export const ITEMS = {
   // traveller's gift) and Oak's Letter (GRATHOG's gate, Rowan-granted
   // post-Conference; no item is invented for NOCTARCH — the inn event
   // is its key, by flag).
-  oddkeystone: { id: 'oddkeystone', name: 'Odd Keystone', pocket: 'key', desc: 'A cracked stone, cold in a way weather does not explain. Something in it is counting. It wants a tower to go home to.' },
-  oaksletter: { id: 'oaksletter', name: "Oak's Letter", pocket: 'key', desc: 'A letter in a famous hand, sealed with a sprig pressed flat as a bookmark. It opens a flower field at the end of the sea road — to gratitude, it says. Bring some.' },
+  oddkeystone: { id: 'oddkeystone', name: 'Sealed Keystone', pocket: 'key', desc: 'A cracked stone, cold in a way weather does not explain. Something in it is counting. It wants a tower to go home to.' },
+  oaksletter: { id: 'oaksletter', name: "Hawthorn's Letter", pocket: 'key', desc: 'A letter in a famous hand, sealed with a sprig pressed flat as a bookmark. It opens a flower field at the end of the sea road — to gratitude, it says. Bring some.' },
   // Arc 4 Stage S7: the Azure Flute — the finale's entrusting (the
   // arc machine grants it at the finale homecoming, never at arc
   // completion alone); the PRIMARCH capstone at Zenith Spire reads it.
-  azureflute: { id: 'azureflute', name: 'Azure Flute', pocket: 'key', desc: 'A flute of clear blue glass, older than the mountains it was carved under. Its note is said to build stairs where the sky keeps its first room.' },
+  azureflute: { id: 'azureflute', name: 'Zenith Flute', pocket: 'key', desc: 'A flute of clear blue glass, older than the mountains it was carved under. Its note is said to build stairs where the sky keeps its first room.' },
   goldteeth: { id: 'goldteeth', name: 'Gold Teeth', pocket: 'key', desc: 'The Safari warden\'s lost teeth. He\'d be grateful.' },
   // Badges (key pocket; effects enforced by the field-move + obedience systems)
-  boulderbadge: { id: 'boulderbadge', name: 'Boulder Badge', pocket: 'key', desc: 'From Brock of Flintridge. Lets you use FLASH outside battle; Attack rises.' },
-  cascadebadge: { id: 'cascadebadge', name: 'Cascade Badge', pocket: 'key', desc: 'From Misty of Tidehaven. Kin up to Lv30 obey; CUT outside battle.' },
-  thunderbadge: { id: 'thunderbadge', name: 'Thunder Badge', pocket: 'key', desc: 'From Lt. Surge of Arcport. FLY outside battle; Speed rises.' },
-  rainbowbadge: { id: 'rainbowbadge', name: 'Rainbow Badge', pocket: 'key', desc: 'From Erika of Canopy. Up to Lv50 obey; STRENGTH outside battle.' },
-  soulbadge: { id: 'soulbadge', name: 'Soul Badge', pocket: 'key', desc: 'From Koga of Bramble. SURF outside battle; Defense rises.' },
-  marshbadge: { id: 'marshbadge', name: 'Marsh Badge', pocket: 'key', desc: 'From Sabrina of Farsight. Up to Lv70 obey.' },
-  volcanobadge: { id: 'volcanobadge', name: 'Volcano Badge', pocket: 'key', desc: 'From Blaine of Caldera. Special rises.' },
+  boulderbadge: { id: 'boulderbadge', name: 'Boulder Badge', pocket: 'key', desc: 'From Garran of Flintridge. Lets you use FLASH outside battle; Attack rises.' },
+  cascadebadge: { id: 'cascadebadge', name: 'Cascade Badge', pocket: 'key', desc: 'From Marina of Tidehaven. Kin up to Lv30 obey; CUT outside battle.' },
+  thunderbadge: { id: 'thunderbadge', name: 'Thunder Badge', pocket: 'key', desc: 'From Lt. Brandt of Arcport. FLY outside battle; Speed rises.' },
+  rainbowbadge: { id: 'rainbowbadge', name: 'Rainbow Badge', pocket: 'key', desc: 'From Verna of Canopy. Up to Lv50 obey; STRENGTH outside battle.' },
+  soulbadge: { id: 'soulbadge', name: 'Soul Badge', pocket: 'key', desc: 'From Marek of Bramble. SURF outside battle; Defense rises.' },
+  marshbadge: { id: 'marshbadge', name: 'Marsh Badge', pocket: 'key', desc: 'From Sybil of Farsight. Up to Lv70 obey.' },
+  volcanobadge: { id: 'volcanobadge', name: 'Volcano Badge', pocket: 'key', desc: 'From Ignas of Caldera. Special rises.' },
   earthbadge: { id: 'earthbadge', name: 'Earth Badge', pocket: 'key', desc: 'From the Fernmere Gym. All Kin obey. The League gate opens.' },
   // Amber Crew badges (Stage O2): the Arden representation exactly —
   // a key-pocket ITEMS row per badge, the id in badges.orange, and the
   // badge_<root> story flag (winTrainer / cheatClaimBadge write all
   // three from the trainer def / claim, never a parallel shape).
-  coraleyebadge: { id: 'coraleyebadge', name: 'Coral-Eye Badge', pocket: 'key', desc: 'From Cissy of Tangelo. Won on her water range — aim first, battle second.' },
-  searubybadge: { id: 'searubybadge', name: 'Sea Ruby Badge', pocket: 'key', desc: 'From Danny of Pomelo. The climb was the first half of the challenge.' },
-  spikeshellbadge: { id: 'spikeshellbadge', name: 'Spike Shell Badge', pocket: 'key', desc: 'From Rudy of Reefside. He tests a team type by type, then dances.' },
-  jadestarbadge: { id: 'jadestarbadge', name: 'Jade Star Badge', pocket: 'key', desc: 'From Luana of Calamondin. Her double battle: two pairs, back to back, no rest.' },
+  coraleyebadge: { id: 'coraleyebadge', name: 'Coral-Eye Badge', pocket: 'key', desc: 'From Sela of Tangelo. Won on her water range — aim first, battle second.' },
+  searubybadge: { id: 'searubybadge', name: 'Sea Ruby Badge', pocket: 'key', desc: 'From Oren of Pomelo. The climb was the first half of the challenge.' },
+  spikeshellbadge: { id: 'spikeshellbadge', name: 'Spike Shell Badge', pocket: 'key', desc: 'From Renzo of Reefside. He tests a team type by type, then dances.' },
+  jadestarbadge: { id: 'jadestarbadge', name: 'Jade Star Badge', pocket: 'key', desc: 'From Alba of Calamondin. Her double battle: two pairs, back to back, no rest.' },
   // Yamato badges (Stage J4a): the Arden representation exactly — a
   // key-pocket ITEMS row per badge, the id in badges.johto, and the
   // badge_<root> story flag. West four ship playable in J4a; the east
   // four rows exist now so the set, the Cheat Terminal stock and the
   // validator sequence are complete before J4b stages their gyms.
-  zephyrbadge: { id: 'zephyrbadge', name: 'Zephyr Badge', pocket: 'key', desc: 'From Falkner of Iris. The wind over the tower road is yours to borrow.' },
-  hivebadge: { id: 'hivebadge', name: 'Hive Badge', pocket: 'key', desc: 'From Bugsy of Cinder. Won under the trees, in a room of load-bearing webs.' },
-  plainbadge: { id: 'plainbadge', name: 'Plain Badge', pocket: 'key', desc: 'From Whitney of Signal. It is not plain at all, whatever people say.' },
-  fogbadge: { id: 'fogbadge', name: 'Fog Badge', pocket: 'key', desc: 'From Morty of Lantern. For a trainer the fog decided to show things to.' },
-  stormbadge: { id: 'stormbadge', name: 'Storm Badge', pocket: 'key', desc: 'From Chuck of Tidewall. For a team the storm respects.' },
-  mineralbadge: { id: 'mineralbadge', name: 'Mineral Badge', pocket: 'key', desc: 'From Jasmine of Beacon. It shines back at the lighthouse.' },
-  glacierbadge: { id: 'glacierbadge', name: 'Glacier Badge', pocket: 'key', desc: 'From Pryce of Redwood. It will not melt. Neither will you.' },
-  risingbadge: { id: 'risingbadge', name: 'Rising Badge', pocket: 'key', desc: 'From Clair of Cragmoor — awarded in the Drake\'s Den, by the clan\'s law, after the elder\'s test.' },
+  zephyrbadge: { id: 'zephyrbadge', name: 'Zephyr Badge', pocket: 'key', desc: 'From Aven of Iris. The wind over the tower road is yours to borrow.' },
+  hivebadge: { id: 'hivebadge', name: 'Hive Badge', pocket: 'key', desc: 'From Bex of Cinder. Won under the trees, in a room of load-bearing webs.' },
+  plainbadge: { id: 'plainbadge', name: 'Plain Badge', pocket: 'key', desc: 'From Willa of Signal. It is not plain at all, whatever people say.' },
+  fogbadge: { id: 'fogbadge', name: 'Fog Badge', pocket: 'key', desc: 'From Silas of Lantern. For a trainer the fog decided to show things to.' },
+  stormbadge: { id: 'stormbadge', name: 'Storm Badge', pocket: 'key', desc: 'From Rourke of Tidewall. For a team the storm respects.' },
+  mineralbadge: { id: 'mineralbadge', name: 'Mineral Badge', pocket: 'key', desc: 'From Liora of Beacon. It shines back at the lighthouse.' },
+  glacierbadge: { id: 'glacierbadge', name: 'Glacier Badge', pocket: 'key', desc: 'From Albin of Redwood. It will not melt. Neither will you.' },
+  risingbadge: { id: 'risingbadge', name: 'Rising Badge', pocket: 'key', desc: 'From Rhea of Cragmoor — awarded in the Drake\'s Den, by the clan\'s law, after the elder\'s test.' },
   // Maris badges (Stage H4a): the Arden representation exactly — a
   // key-pocket ITEMS row per badge, the id in badges.hoenn, and the
   // badge_<root> story flag. First four are playable in H4a; the east
   // four rows ship now so the earn order is complete from day one
   // (H4b's leaders award them without touching this table).
-  stonebadge: { id: 'stonebadge', name: 'Stone Badge', pocket: 'key', desc: 'From Roxanne of Copperton. Cut from the same stone her gym is built from.' },
-  knucklebadge: { id: 'knucklebadge', name: 'Knuckle Badge', pocket: 'key', desc: 'From Brawly of Mistford. For a team that can take a wave standing up.' },
-  dynamobadge: { id: 'dynamobadge', name: 'Dynamo Badge', pocket: 'key', desc: 'From Wattson of Lilac. It hums faintly in a thunderstorm.' },
-  heatbadge: { id: 'heatbadge', name: 'Heat Badge', pocket: 'key', desc: 'From Flannery of Steamspring. Warm to the touch, always.' },
-  balancebadge: { id: 'balancebadge', name: 'Balance Badge', pocket: 'key', desc: 'From Norman of Meadowbrook. Perfectly weighted, either way up.' },
-  featherbadge: { id: 'featherbadge', name: 'Feather Badge', pocket: 'key', desc: 'From Winona of Highbranch. Light enough to ride the canopy wind.' },
-  mindbadge: { id: 'mindbadge', name: 'Mind Badge', pocket: 'key', desc: 'From Tate and Liza of Starfall. Two halves, one thought.' },
-  rainbadge: { id: 'rainbadge', name: 'Rain Badge', pocket: 'key', desc: 'From Juan of Craterlake. It smells of deep water and old rain.' },
+  stonebadge: { id: 'stonebadge', name: 'Stone Badge', pocket: 'key', desc: 'From Saxa of Copperton. Cut from the same stone her gym is built from.' },
+  knucklebadge: { id: 'knucklebadge', name: 'Knuckle Badge', pocket: 'key', desc: 'From Enzo of Mistford. For a team that can take a wave standing up.' },
+  dynamobadge: { id: 'dynamobadge', name: 'Dynamo Badge', pocket: 'key', desc: 'From Olin of Lilac. It hums faintly in a thunderstorm.' },
+  heatbadge: { id: 'heatbadge', name: 'Heat Badge', pocket: 'key', desc: 'From Sola of Steamspring. Warm to the touch, always.' },
+  balancebadge: { id: 'balancebadge', name: 'Balance Badge', pocket: 'key', desc: 'From Alden of Meadowbrook. Perfectly weighted, either way up.' },
+  featherbadge: { id: 'featherbadge', name: 'Feather Badge', pocket: 'key', desc: 'From Aria of Highbranch. Light enough to ride the canopy wind.' },
+  mindbadge: { id: 'mindbadge', name: 'Mind Badge', pocket: 'key', desc: 'From Theo and Lena of Starfall. Two halves, one thought.' },
+  rainbadge: { id: 'rainbadge', name: 'Rain Badge', pocket: 'key', desc: 'From Julen of Craterlake. It smells of deep water and old rain.' },
   // Borea badges (Arc 4 Stage S0): the Arden representation exactly —
   // a key-pocket ITEMS row per badge, the id in badges.sinnoh, and the
   // badge_<root> story flag. Platinum order, minted complete now so
   // the set, the Cheat Terminal stock and the validator sequence are
   // whole before S5 stages their gyms (the Maris H4a precedent: the
   // east four rows shipped before their leaders existed).
-  coalbadge: { id: 'coalbadge', name: 'Coal Badge', pocket: 'key', desc: 'From Roark of Coalseam. Cut from the seam his miners work — it still smells faintly of coal dust.' },
-  forestbadge: { id: 'forestbadge', name: 'Forest Badge', pocket: 'key', desc: 'From Gardenia of Heritage. It carries the green hush of the old forest at the town\'s edge.' },
-  relicbadge: { id: 'relicbadge', name: 'Relic Badge', pocket: 'key', desc: 'From Fantina of Inglenook. An old, elegant thing — it feels heavier than it looks, like a held breath.' },
-  cobblebadge: { id: 'cobblebadge', name: 'Cobble Badge', pocket: 'key', desc: 'From Maylene of Shardfall. Plain, hard and honest — it has never once pretended to be anything else.' },
-  fenbadge: { id: 'fenbadge', name: 'Fen Badge', pocket: 'key', desc: 'From Crasher Wake of Fenland. It smells of marsh water and arena lights, and it grins back at you.' },
-  minebadge: { id: 'minebadge', name: 'Mine Badge', pocket: 'key', desc: 'From Byron of Bridgeport. Forged steel, harbour-forged — the iron island\'s weight in miniature.' },
-  iciclebadge: { id: 'iciclebadge', name: 'Icicle Badge', pocket: 'key', desc: 'From Candice of Rimefall. Cold enough to sting the palm. It will not melt. Neither will she.' },
-  beaconbadge: { id: 'beaconbadge', name: 'Beacon Badge', pocket: 'key', desc: 'From Volkner of Brightshore. It hums at lighthouse pitch — the last light before the League road.' },
+  coalbadge: { id: 'coalbadge', name: 'Coal Badge', pocket: 'key', desc: 'From Ronan of Coalseam. Cut from the seam his miners work — it still smells faintly of coal dust.' },
+  forestbadge: { id: 'forestbadge', name: 'Forest Badge', pocket: 'key', desc: 'From Tansy of Heritage. It carries the green hush of the old forest at the town\'s edge.' },
+  relicbadge: { id: 'relicbadge', name: 'Relic Badge', pocket: 'key', desc: 'From Odile of Inglenook. An old, elegant thing — it feels heavier than it looks, like a held breath.' },
+  cobblebadge: { id: 'cobblebadge', name: 'Cobble Badge', pocket: 'key', desc: 'From Maren of Shardfall. Plain, hard and honest — it has never once pretended to be anything else.' },
+  fenbadge: { id: 'fenbadge', name: 'Fen Badge', pocket: 'key', desc: 'From Breaker Braddock of Fenland. It smells of marsh water and arena lights, and it grins back at you.' },
+  minebadge: { id: 'minebadge', name: 'Mine Badge', pocket: 'key', desc: 'From Doran of Bridgeport. Forged steel, harbour-forged — the iron island\'s weight in miniature.' },
+  iciclebadge: { id: 'iciclebadge', name: 'Icicle Badge', pocket: 'key', desc: 'From Neve of Rimefall. Cold enough to sting the palm. It will not melt. Neither will she.' },
+  beaconbadge: { id: 'beaconbadge', name: 'Beacon Badge', pocket: 'key', desc: 'From Rainer of Brightshore. It hums at lighthouse pitch — the last light before the League road.' },
   // Frontier Symbols (Stage F0): the Arden representation adapted to
   // the Frontier's shape — a key-pocket ITEMS row per Symbol, but the
   // earned state itself is NOT a bag/badge array: it is the slot array
@@ -236,9 +236,9 @@ export const ITEMS = {
   // Cheat Shop collectibles (owner order 2026-10-28): anime/book canon
   // treasures with NO game system to hook — honestly labeled COLLECTIBLE
   // in the shop, with no effects of any kind.
-  gsball: { id: 'gsball', name: 'GS Orb', pocket: 'items', collectible: true, desc: 'COLLECTIBLE — A gold-and-silver orb no machine can open. It hums near old shrines.' },
+  gsball: { id: 'gsball', name: 'Sealed Orb', pocket: 'items', collectible: true, desc: 'COLLECTIBLE — A gold-and-silver orb no machine can open. It hums near old shrines.' },
   pinkanberry: { id: 'pinkanberry', name: 'Pinkan Berry', pocket: 'items', collectible: true, desc: 'COLLECTIBLE — A rosy island berry. One bite blushes fur and feathers pink for a day.' },
-  minimistylure: { id: 'minimistylure', name: 'Mini-Misty Lure', pocket: 'items', collectible: true, desc: 'COLLECTIBLE — A hand-painted fishing lure, a tiny redhead in a yellow top. Fish approve.' },
+  minimistylure: { id: 'minimistylure', name: 'Mini-Marina Lure', pocket: 'items', collectible: true, desc: 'COLLECTIBLE — A hand-painted fishing lure, a tiny redhead in a yellow top. Fish approve.' },
   rainbowwing: { id: 'rainbowwing', name: 'Rainbow Wing', pocket: 'items', collectible: true, desc: 'COLLECTIBLE — A single feather in every color at once. It is warm, as if just flown in.' },
 };
 
@@ -269,7 +269,7 @@ export const KEEPSAKES = {
   gloomfang: { id: 'gloomfang', name: 'DROOPETAL Fang', kind: 'statusChance', moveType: 'poison', status: 'poison', bonus: 10, rtCooldown: 0.85, effect: 'Poison moves: +10% poison chance (RT: cooldown x0.85).' },
   ironacorn: { id: 'ironacorn', name: 'Iron Acorn', kind: 'firstHitWard', factor: 0.85, effect: 'Takes x0.85 from the first hit it takes each battle.' },
   spectrebell: { id: 'spectrebell', name: 'Spectre Bell', kind: 'matchupDamage', moveType: 'ghost', vsType: 'psychic', factor: 1.2, effect: 'Ghost moves deal x1.2 vs Psychic-types.' },
-  gardeniasash: { id: 'gardeniasash', name: 'Gardenia Sash', kind: 'healBoost', factor: 1.5, effect: 'Healing moves on the holder restore +50%.' },
+  gardeniasash: { id: 'gardeniasash', name: 'Tansy Sash', kind: 'healBoost', factor: 1.5, effect: 'Healing moves on the holder restore +50%.' },
   thunderheadpin: { id: 'thunderheadpin', name: 'Thunderhead Pin', kind: 'lowHpDamage', moveType: 'electric', factor: 1.15, hpFrac: 0.5, effect: 'Electric moves deal x1.15 while at 50% HP or less.' },
   fossilspur: { id: 'fossilspur', name: 'Fossil Spur', kind: 'fasterFoeDamage', moveType: 'rock', factor: 1.15, effect: 'Rock moves deal x1.15 vs faster foes.' },
   championsribbon: { id: 'championsribbon', name: "Champion's Ribbon", kind: 'xpBoost', factor: 1.2, effect: 'Holder gains x1.2 XP.' },
@@ -278,7 +278,7 @@ export const KEEPSAKES = {
   // gate is untouched). Every piece is acquired in-world: the six Town
   // Tales of this half pay them (see SINNOH_TALES), and two double as
   // gym-ace signatures (Roark's RAMOSAUR, Gardenia's BOUQUADE).
-  dawnribbon: { id: 'dawnribbon', name: 'Dawn Ribbon', kind: 'xpBoost', factor: 1.2, effect: 'Holder gains x1.2 XP.' },
+  dawnribbon: { id: 'dawnribbon', name: 'Daybreak Ribbon', kind: 'xpBoost', factor: 1.2, effect: 'Holder gains x1.2 XP.' },
   starshard: { id: 'starshard', name: 'Star Shard', kind: 'underdogDamage', factor: 1.25, levelGap: 3, effect: 'Deals x1.25 damage while 3+ levels below the foe.' },
   coalseamcharm: { id: 'coalseamcharm', name: 'Coal Seam Charm', kind: 'lowHpDamage', moveType: 'rock', factor: 1.15, hpFrac: 0.5, effect: 'Rock moves deal x1.15 while at 50% HP or less.' },
   meadowcord: { id: 'meadowcord', name: 'Meadow Cord', kind: 'healBoost', factor: 1.5, effect: 'Healing moves on the holder restore +50%.' },

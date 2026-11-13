@@ -57,7 +57,7 @@ const WANDER_PIN_PROPS = [
   'parley', 'event', 'ferry', 'sparCoach', 'tale', 'role', 'witness',
   'duoPartner',
 ];
-const WANDER_NAME_PINS = new Set(['BILL']);
+const WANDER_NAME_PINS = new Set(['ODO']);
 const WANDER_DIRS = [[0, -1, 'up'], [0, 1, 'down'], [-1, 0, 'left'], [1, 0, 'right']];
 
 export class OverworldScene {

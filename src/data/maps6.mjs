@@ -160,7 +160,7 @@ export const MAPS6 = {
       {
         "x": 6,
         "y": 5,
-        "text": "PROF. ELM'S LAB — Galefield's own Kin laboratory. Elm studies how Kin grow and hatch."
+        "text": "PROF. LINDEN'S LAB — Galefield's own Kin laboratory. Linden studies how Kin grow and hatch."
       },
       {
         "x": 8,
@@ -227,7 +227,7 @@ export const MAPS6 = {
         "hair": "#c0c0c0",
         "dialogue": [
           "Galefield is where the wind comes from — that's what the old name means, anyway.",
-          "Professor Elm's lab coats have pockets full of apricorns. Don't ask me why."
+          "Professor Linden's lab coats have pockets full of podnuts. Don't ask me why."
         ]
       },
       {
@@ -241,7 +241,7 @@ export const MAPS6 = {
         "hair": "#2a1a0a",
         "dialogue": [
           "A bird Kin delivered a letter to the lab once. A LETTER.",
-          "When I grow up I'm studying eggs, just like Professor Elm."
+          "When I grow up I'm studying eggs, just like Professor Linden."
         ]
       },
       {
@@ -254,7 +254,7 @@ export const MAPS6 = {
         "pants": "#2a2a3a",
         "hair": "#5a3a2a",
         "dialogue": [
-          "I watched them raise the lab, brick by brick. Elm was a boy with a notebook then.",
+          "I watched them raise the lab, brick by brick. Linden was a boy with a notebook then.",
           "The lake gives us our weather and our suppers. Mind both."
         ]
       }
@@ -1174,7 +1174,7 @@ export const MAPS6 = {
       {
         "x": 1,
         "y": 4,
-        "text": "CINDER TOWN — Where people and Kin live in happy harmony. Kurt works his craft on the north street."
+        "text": "CINDER TOWN — Where people and Kin live in happy harmony. Hendrik works his craft on the north street."
       },
       {
         "x": 16,
@@ -1218,7 +1218,7 @@ export const MAPS6 = {
         "pants": "#4a3a2a",
         "hair": "#2a1a0a",
         "dialogue": [
-          "Grandpa Kurt makes Capture Orbs from apricorns, one at a time, by hand.",
+          "Grandpa Hendrik makes Capture Orbs from podnuts, one at a time, by hand.",
           "The DOZPOTAM bring rain. That's not a story, that's just Cinder."
         ]
       },
@@ -1260,7 +1260,7 @@ export const MAPS6 = {
         "pants": "#2a2a3a",
         "hair": "#4a3a2a",
         "dialogue": [
-          "Cinder Mart — forest-ready stock. The apricorn balls are Kurt's department, not ours."
+          "Cinder Mart — forest-ready stock. The podnut balls are Hendrik's department, not ours."
         ],
         "mart": {
           "stock": [
@@ -2238,7 +2238,7 @@ export const MAPS6 = {
       {
         "x": 3,
         "y": 7,
-        "text": "ROUTE 29 — Galefield Town to Blossom City. The wind off the lake smells of rain and apricorns."
+        "text": "ROUTE 29 — Galefield Town to Blossom City. The wind off the lake smells of rain and podnuts."
       }
     ],
     "npcs": [
@@ -4367,7 +4367,7 @@ export const MAPS6 = {
       {
         "x": 13,
         "y": 15,
-        "text": "ROUTE 37 — Route 36 to Lantern City. Twin apricorn trees mark the old road east."
+        "text": "ROUTE 37 — Route 36 to Lantern City. Twin podnut trees mark the old road east."
       }
     ],
     "npcs": [
@@ -4489,7 +4489,7 @@ export const MAPS6 = {
         "pants": "#3a3a4a",
         "hair": "#7a4a1a",
         "dialogue": [
-          "Elm's aides all but live at the lab, so this street cooks for them.",
+          "Linden's aides all but live at the lab, so this street cooks for them.",
           "A trainer's mother learns to pack for any weather. It's a whole education."
         ]
       }
@@ -4821,7 +4821,7 @@ export const MAPS6 = {
   },
   "elm-lab": {
     "id": "elm-lab",
-    "name": "Elm Lab",
+    "name": "Linden Lab",
     "music": "viridian-theme",
     "rows": [
       ">>>>>>>>>>>>>>>>>>",
@@ -4861,7 +4861,7 @@ export const MAPS6 = {
       {
         "x": 8,
         "y": 2,
-        "text": "ELM'S RESEARCH BOARD — 'Eggs are not the beginning of a Kin. They are the middle of a story.'"
+        "text": "LINDEN'S RESEARCH BOARD — 'Eggs are not the beginning of a Kin. They are the middle of a story.'"
       }
     ],
     "npcs": [
@@ -4876,7 +4876,7 @@ export const MAPS6 = {
         "hair": "#1a1a1a",
         "dialogue": [
           "The lab tracks every registered egg in western Yamato. Every one.",
-          "Professor Elm names his notebooks by year and by weather. It works for him."
+          "Professor Linden names his notebooks by year and by weather. It works for him."
         ]
       },
       {
@@ -4906,7 +4906,7 @@ export const MAPS6 = {
   },
   "kurt-house": {
     "id": "kurt-house",
-    "name": "Kurt's House",
+    "name": "Hendrik's House",
     "music": "viridian-theme",
     "rows": [
       "<<<<<<<<<<<<<<",
@@ -4944,7 +4944,7 @@ export const MAPS6 = {
       {
         "x": 7,
         "y": 2,
-        "text": "KURT'S WORKBENCH — Apricorns in every colour, each with a name and a season. The tools are older than the town hall."
+        "text": "HENDRIK'S WORKBENCH — Podnuts in every colour, each with a name and a season. The tools are older than the town hall."
       }
     ],
     "npcs": [
@@ -4958,7 +4958,7 @@ export const MAPS6 = {
         "pants": "#2a2a3a",
         "hair": "#4a3a2a",
         "dialogue": [
-          "Mr. Kurt can hear whether an apricorn is ripe. I am on year three of learning how.",
+          "Mr. Hendrik can hear whether an podnut is ripe. I am on year three of learning how.",
           "One ball at a time. The workbench has rules and I am not one of them."
         ]
       }
@@ -6625,7 +6625,7 @@ export const MAPS6 = {
         "pants": "#3a3a4a",
         "hair": "#7a4a1a",
         "dialogue": [
-          "The lighthouse lamp burns apricorn oil and stubbornness, in that order.",
+          "The lighthouse lamp burns podnut oil and stubbornness, in that order.",
           "Ships read our light from halfway to Arcport. I intend to keep it that way."
         ]
       },
@@ -12136,7 +12136,7 @@ export const MAPS6 = {
       {
         "x": 7,
         "y": 4,
-        "text": "GLEAM LIGHTHOUSE — GROUND FLOOR — Apricorn oil, brass, and a stair that has outlasted four keepers. Mind the lamp-room door at the top."
+        "text": "GLEAM LIGHTHOUSE — GROUND FLOOR — Podnut oil, brass, and a stair that has outlasted four keepers. Mind the lamp-room door at the top."
       }
     ],
     "npcs": [

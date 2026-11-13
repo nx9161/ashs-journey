@@ -116,7 +116,7 @@ const COPY = {
 // MARKED DRAFT-PENDING-GC-WORDING: GC + licensed counsel must review before launch.
 const PRIVACY_DRAFT = [
   ['Status', 'DRAFT — pending GC + licensed-counsel review. This is not final legal text.'],
-  ['1. Who runs this', 'This fan game is operated by its developer. Contact: [to be designated by the project owner before launch].'],
+  ['1. Who runs this', 'This game is operated by its developer. Contact: [to be designated by the project owner before launch].'],
   ['2. What we store and why',
     'Your username — a public handle. Pick one that is not your real name.\n' +
     'Your password — stored only as a salted one-way hash. We never see or store the password itself.\n' +
@@ -131,10 +131,10 @@ const PRIVACY_DRAFT = [
     'If you delete your account, it is erased from all live systems immediately; residual encrypted backup copies expire within the backup retention window (7 days or less) and are never restored except in a disaster-recovery event, after which the deletion is re-applied.'],
   ['5. Your rights', '\u201CMy data\u201D in the account menu shows your account record and lets you download your saves. \u201CDelete account\u201D erases your account and cloud saves.'],
   ['6. Age', 'Accounts are for players 13 and older. Under 13? Play as a guest — guest saves never leave your device.'],
-  ['7. Fan work', 'This is an unofficial fan homage. The full legal notice is on the title screen and credits — please read it.'],
+  ['7. Original work', 'This is an original work. The full legal notice is on the title screen and credits — please read it.'],
   ['8. Changes', 'If this notice changes, we will announce it in-game.'],
   ['TERMS OF PLAY — DRAFT',
-    'This is a free, non-commercial fan project. No purchases, donations, or payments of any kind.\n' +
+    'This is a free, non-commercial project. No purchases, donations, or payments of any kind.\n' +
     'Usernames are public — pick a handle, not your real name.\n' +
     'Accounts unused for 24 months may be deleted after a 30-day warning shown at your next login.\n' +
     'Play fair: tampered save data is rejected, and suspicious saves may be logged for review.\n' +

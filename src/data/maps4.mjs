@@ -31,7 +31,7 @@ export const MAPS4 = {
       { x: 8, y: 1, text: 'A small doll sits on a shelf, watching the door. It has always been watching the door.' },
     ],
     npcs: [
-      { x: 7, y: 2, name: 'SABRINA', art: 'sabrina', skin: '#f0c8a0', shirt: '#7a2a4a', pants: '#2a2a3a', hair: '#1a2a4a', trainer: 'sabrina',
+      { x: 7, y: 2, name: 'SYBIL', art: 'sabrina', skin: '#f0c8a0', shirt: '#7a2a4a', pants: '#2a2a3a', hair: '#1a2a4a', trainer: 'sabrina',
         dialogue: ['I foresaw your arrival three turns of the moon ago. The future is a door — and I am holding it shut.', 'The door opens a crack. Take the Marsh Badge — and go on surprising me.'] },
       { x: 4, y: 5, name: 'MEDIUM LIA', art: 'monk', skin: '#e8b888', shirt: '#4a3a5a', pants: '#2a2a3a', hair: '#8a8a9a', trainer: 'gym_saffron_1', sight: { dir: 'right', range: 3 },
         dialogue: ['My senses tingle — a challenger with a loud heart approaches!', 'So loud... and so kind. Odd.'] },
@@ -57,11 +57,11 @@ export const MAPS4 = {
       { x: 8, y: 9, to: { map: 'cinnabar', x: 16, y: 7 } },
     ],
     signs: [
-      { x: 7, y: 1, text: 'QUIZ: A volcano sleeps under this island. True or false? (Blaine grades on attitude.)' },
+      { x: 7, y: 1, text: 'QUIZ: A volcano sleeps under this island. True or false? (Ignas grades on attitude.)' },
       { x: 8, y: 1, text: 'QUIZ: What beats Fire every time? Answer at the door, with your whole team.' },
     ],
     npcs: [
-      { x: 8, y: 2, name: 'BLAINE', art: 'blaine', skin: '#e8b888', shirt: '#a03a2a', pants: '#3a3a4a', hair: '#e8e4da', trainer: 'blaine',
+      { x: 8, y: 2, name: 'IGNAS', art: 'blaine', skin: '#e8b888', shirt: '#a03a2a', pants: '#3a3a4a', hair: '#e8e4da', trainer: 'blaine',
         dialogue: ['Wahaha! A challenger climbs MY mountain of fire? Riddle me this first: what burns hotter — magma, or regret? Battle me and find out!', 'Scalded but smiling — that is the correct answer. The Volcano Badge, hot off the press!'] },
       { x: 11, y: 5, name: 'BURGLAR OTIS', art: 'biker', skin: '#c89878', shirt: '#51296b', pants: '#2a2a3a', hair: '#3a2a1a', trainer: 'gym_cinnabar_1', sight: { dir: 'left', range: 3 },
         dialogue: ['I only came in to warm my hands, honest! ...Fine. Battle first, alibi later.', 'Hot hands, cold heart. Story of my life.'] },
@@ -167,7 +167,7 @@ export const MAPS4 = {
     encounters: null, items: [], hidden: [], events: [], start: null,
   },
   'house-pallet-gary': {
-    id: 'house-pallet-gary', name: "Gary's House", music: 'pallet-theme', indoor: true,
+    id: 'house-pallet-gary', name: "Vale's House", music: 'pallet-theme', indoor: true,
     rows: [
       'ṙ<<<<<<<<<',
       '<θḏηḧḔḕḉδ<',
@@ -463,7 +463,7 @@ export const TRAINERS4 = {
     intro: ['I practiced all week for a trainer like you!'], lose: ['Practice or not — you were better.'] },
   r3_bug: { id: 'r3_bug', name: 'Bug Catcher Colt', team: [{ species: 'caterpie', level: 11 }, { species: 'weedle', level: 11 }, { species: 'metapod', level: 12 }], prize: 180,
     intro: ['My net, my rules!'], lose: ['My net has a hole in it. So does my strategy.'] },
-  moon_grunt: { id: 'moon_grunt', name: 'Rocket Grunt', team: [{ species: 'zubat', level: 13 }, { species: 'sandshrew', level: 13 }], prize: 420,
+  moon_grunt: { id: 'moon_grunt', name: 'Vanta Grunt', team: [{ species: 'zubat', level: 13 }, { species: 'sandshrew', level: 13 }], prize: 420,
     intro: ['This cave is ours now. The fossils too.'], lose: ['Tch. The boss will hear about this...'] },
   r4_lass: { id: 'r4_lass', name: 'Lass Robin', team: [{ species: 'oddish', level: 14 }, { species: 'bellsprout', level: 14 }], prize: 280,
     intro: ['Tidehaven is just over the hill — but I am the hill!'], lose: ['Okay. The hill has been climbed.'] },

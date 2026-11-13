@@ -25,23 +25,23 @@
 
 export const MAIN_QUESTS = [
   { id: 'q_partner', flag: 'metPartner', text: 'Meet Prof. Hawthorn and receive your partner', hint: 'VOLTIK joins you at the very start of your journey — it has opinions, and a strong dislike of Capture Orbs. If you ever find yourselves parted, Prof. Hawthorn at his Dawnwick lab will set it right.' },
-  { id: 'q_boulder', flag: 'badge_boulder', text: 'Win the Boulder Badge in Flintridge City', hint: 'Through Fernmere Forest, then challenge Brock. Water and Grass moves crack Rock types open.' },
+  { id: 'q_boulder', flag: 'badge_boulder', text: 'Win the Boulder Badge in Flintridge City', hint: 'Through Fernmere Forest, then challenge Garran. Water and Grass moves crack Rock types open.' },
   { id: 'q_cerulean', flag: 'reached_cerulean', text: 'Cross Mt. Lunestone and reach Tidehaven City', hint: 'The cave east of Flintridge is dark and full of SKREEBAT. Stock up on Potions before you go in.' },
-  { id: 'q_cascade', flag: 'badge_cascade', text: 'Win the Cascade Badge in Tidehaven City', hint: 'Misty’s Water types fear Grass and Electric moves. Watch for her ASTRION.' },
+  { id: 'q_cascade', flag: 'badge_cascade', text: 'Win the Cascade Badge in Tidehaven City', hint: 'Marina’s Water types fear Grass and Electric moves. Watch for her ASTRION.' },
   { id: 'q_bill', flag: 'bill_helped', text: 'Help the researcher at the Sea Cottage', hint: 'Cross Nugget Bridge, then follow Route 25 to the cottage on the cape. Something there is not what it seems.' },
   { id: 'q_vermilion', flag: 'reached_vermilion', text: 'Reach Arcport City', hint: 'South through the underground path from Tidehaven. The harbor smells of salt and adventure.' },
-  { id: 'q_stanne', flag: 'stanne_done', text: 'Sail on the St. Anne', hint: 'Bill’s spare ticket gets you aboard. Enjoy the party — and keep an eye on the waiters.' },
-  { id: 'q_thunder', flag: 'badge_thunder', text: 'Win the Thunder Badge in Arcport City', hint: 'Lt. Surge respects only power. Ground types shrug off his Electric moves entirely.' },
+  { id: 'q_stanne', flag: 'stanne_done', text: 'Sail on the St. Anne', hint: 'Odo’s spare ticket gets you aboard. Enjoy the party — and keep an eye on the waiters.' },
+  { id: 'q_thunder', flag: 'badge_thunder', text: 'Win the Thunder Badge in Arcport City', hint: 'Lt. Brandt respects only power. Ground types shrug off his Electric moves entirely.' },
   { id: 'q_celadon', flag: 'reached_celadon', text: 'Reach Canopy City', hint: 'The department-store city lies west. The road bends past Hushmoor Town — mind the tower’s shadow.' },
-  { id: 'q_rainbow', flag: 'badge_rainbow', text: 'Win the Rainbow Badge in Canopy City', hint: 'Erika’s Grass types wilt under Fire, Ice, and Flying moves.' },
+  { id: 'q_rainbow', flag: 'badge_rainbow', text: 'Win the Rainbow Badge in Canopy City', hint: 'Verna’s Grass types wilt under Fire, Ice, and Flying moves.' },
   { id: 'q_scope', flag: 'scope_done', text: 'Infiltrate the Game Corner and recover the Vantage Scope', hint: 'That poster in the Game Corner is hiding something. Whatever is underneath it took the Scope — take it back.' },
   { id: 'q_flute', flag: 'flute_got', text: 'Climb Hushmoor Tower and earn the Kin Flute', hint: 'The Scope reveals what haunts the tower. Bring a gentle heart for the upper floors.' },
   { id: 'q_snorlax', flag: 'snorlax_west', text: 'Wake a sleeping SOMNIBEAR', hint: 'The Kin Flute’s tune is the only alarm clock a SOMNIBEAR respects. One sleeps east of Hushmoor, one west above Cycling Road — either road leads on.' },
-  { id: 'q_soul', flag: 'badge_soul', text: 'Win the Soul Badge in Bramble City', hint: 'Koga’s Poison types and invisible walls reward patience. Ground and Psychic moves help.' },
+  { id: 'q_soul', flag: 'badge_soul', text: 'Win the Soul Badge in Bramble City', hint: 'Marek’s Poison types and invisible walls reward patience. Ground and Psychic moves help.' },
   { id: 'q_silph', flag: 'silph_done', text: 'Liberate Vantage Co. in Farsight City', hint: 'Eleven floors of trouble, and the president is held on the top one. Find the card key and climb.' },
-  { id: 'q_marsh', flag: 'badge_marsh', text: 'Win the Marsh Badge in Farsight City', hint: 'Sabrina’s Psychic types hit like prophecy. Bug, Ghost, and Dark moves are your friends.' },
+  { id: 'q_marsh', flag: 'badge_marsh', text: 'Win the Marsh Badge in Farsight City', hint: 'Sybil’s Psychic types hit like prophecy. Bug, Ghost, and Dark moves are your friends.' },
   { id: 'q_mansion', flag: 'mansion_key', text: 'Find the Secret Key in the Caldera Mansion', hint: 'The burned mansion keeps its secrets in the basement. Read the surviving journals — they matter later.' },
-  { id: 'q_volcano', flag: 'badge_volcano', text: 'Win the Volcano Badge on Caldera Town', hint: 'Blaine quizzes before he battles. Fire fears Water, Ground, and Rock.' },
+  { id: 'q_volcano', flag: 'badge_volcano', text: 'Win the Volcano Badge on Caldera Town', hint: 'Ignas quizzes before he battles. Fire fears Water, Ground, and Rock.' },
   { id: 'q_earth', flag: 'badge_earth', text: 'Win the Earth Badge in Fernmere City', hint: 'The traveling leader has finally come home. Bring everything you have — this is the last door before the League.' },
   { id: 'q_movie', flag: 'movie_done', text: 'Answer the invitation to Exile Isle', hint: 'A courier brought it on a storm wind. Whatever waits there already knows your name.' },
   { id: 'q_league', flag: 'league_gate_passed', text: 'Pass the League gate on Route 23', hint: 'The guards check all eight badges. No exceptions, no shortcuts, no stories.' },
@@ -62,30 +62,30 @@ export const EVENTS = {
 
   // -- Tidehaven: Bill's Sea Cottage ---------------------------------------
   ev_bill: [
-    { say: ['...Hello? Is someone there? Oh, thank goodness — a human. With hands. Hands are very important right now.'], who: 'BILL' },
-    { say: ['It is me. Bill. The researcher. And before you ask — yes, this small round Kin standing in my cottage IS me, wearing the consequences of my own experiment.', 'I was testing pod-to-pod transfers and the separation step... improvised. Now I am roughly forty percent MOONLET and one hundred percent embarrassed.'], who: 'BILL' },
-    { say: ['The fix is on that terminal. Big friendly button. Press it, and try not to enjoy this too much.'], who: 'BILL' },
-    { say: ['...And — THERE. Two legs, ten fingers, one dignity, slightly used. Bill is back!'], who: 'BILL' },
-    { say: ['You saved my career and my afternoon, in that order. Take this — I get invited to a floating trainer party every year and I never go. A spare ticket for the St. Anne, docked in Arcport.', 'Go. Mingle. Battle someone who owns a butler. You have earned it.'], who: 'BILL' },
+    { say: ['...Hello? Is someone there? Oh, thank goodness — a human. With hands. Hands are very important right now.'], who: 'ODO' },
+    { say: ['It is me. Odo. The researcher. And before you ask — yes, this small round Kin standing in my cottage IS me, wearing the consequences of my own experiment.', 'I was testing pod-to-pod transfers and the separation step... improvised. Now I am roughly forty percent MOONLET and one hundred percent embarrassed.'], who: 'ODO' },
+    { say: ['The fix is on that terminal. Big friendly button. Press it, and try not to enjoy this too much.'], who: 'ODO' },
+    { say: ['...And — THERE. Two legs, ten fingers, one dignity, slightly used. Odo is back!'], who: 'ODO' },
+    { say: ['You saved my career and my afternoon, in that order. Take this — I get invited to a floating trainer party every year and I never go. A spare ticket for the St. Anne, docked in Arcport.', 'Go. Mingle. Battle someone who owns a butler. You have earned it.'], who: 'ODO' },
     { flag: 'bill_helped' },
     { questDone: 'q_bill' },
-    { toast: 'Bill is himself again!' },
+    { toast: 'Odo is himself again!' },
   ],
 
   // -- Tidehaven: Gary on the bridge ---------------------------------------
   ev_rival_bridge: [
-    { say: ['Well, well. Look who finally crawled out of Mt. Lunestone.'], who: 'GARY' },
-    { say: ['I was just up at that cottage on the cape. The researcher there let me scroll his whole database — some of us get the guided tour, {player}.'], who: 'GARY' },
-    { say: ['Badges? Funny you should ask. Two already. I would show them off, but the glare might sting your eyes.'], who: 'GARY' },
-    { say: ['And this — this is PRISMKIT. Everyone keeps asking why it has not evolved yet.', 'Because I am saving it. Evolution is a promise you make exactly once. When mine happens, it is going to mean something.'], who: 'GARY' },
-    { choice: { npc: 'gary', who: 'GARY', prompt: 'PRISMKIT looks at you, head tilted. You —', options: [
+    { say: ['Well, well. Look who finally crawled out of Mt. Lunestone.'], who: 'VALE' },
+    { say: ['I was just up at that cottage on the cape. The researcher there let me scroll his whole database — some of us get the guided tour, {player}.'], who: 'VALE' },
+    { say: ['Badges? Funny you should ask. Two already. I would show them off, but the glare might sting your eyes.'], who: 'VALE' },
+    { say: ['And this — this is PRISMKIT. Everyone keeps asking why it has not evolved yet.', 'Because I am saving it. Evolution is a promise you make exactly once. When mine happens, it is going to mean something.'], who: 'VALE' },
+    { choice: { npc: 'gary', who: 'VALE', prompt: 'PRISMKIT looks at you, head tilted. You —', options: [
       { label: 'Ask what PRISMKIT wants', delta: 2, say: ['...What PRISMKIT wants? Nobody asks that. They ask what it will BECOME.', 'Huh. It wants to win, obviously. Like me. ...Thanks for asking, I guess. Do not make it weird.'] },
       { label: 'Laugh at the speech', delta: -1, say: ['Oh, REAL mature, {player}. Laugh it up. In about ten minutes one of us is going to look extremely stupid, and it is not the one with two badges.'] },
       { label: 'Say nothing', delta: 0, say: ['...Yeah. You get it. Enough talk, then.'] },
     ] } },
-    { say: ['Enough talk. Show me what the mountain taught you — if it taught you anything.'], who: 'GARY' },
+    { say: ['Enough talk. Show me what the mountain taught you — if it taught you anything.'], who: 'VALE' },
     { battle: 'gary_cerulean' },
-    { say: ['Tch. Fine. Take the win and the bridge. Tidehaven’s gym is just south — Misty has been bored all week, so try not to disappoint her too quickly.'], who: 'GARY' },
+    { say: ['Tch. Fine. Take the win and the bridge. Tidehaven’s gym is just south — Marina has been bored all week, so try not to disappoint her too quickly.'], who: 'VALE' },
     { flag: 'rival_bridge_done' },
   ],
 
@@ -197,25 +197,25 @@ export const EVENTS = {
 
   // -- Vantage Co.: Gary, mid-tower ---------------------------------------------
   ev_silph_rival: [
-    { say: ['{player}?! What are YOU doing on the eighth floor of a hostage situation?'], who: 'GARY' },
-    { say: ['Do not give me that look. I smelled something rotten in Farsight and followed it up the elevator. Say what you want about me — even I do not let uniforms in matching shirts bully a whole company.'], who: 'GARY' },
-    { say: ['And before you ask: yes, PRISMKIT is still PRISMKIT. Still saving it. When it changes, it will be because WE decided. Nobody else.'], who: 'GARY' },
-    { choice: { npc: 'gary', who: 'GARY', prompt: 'He is grinning like this is a game. It is not a game. You —', options: [
+    { say: ['{player}?! What are YOU doing on the eighth floor of a hostage situation?'], who: 'VALE' },
+    { say: ['Do not give me that look. I smelled something rotten in Farsight and followed it up the elevator. Say what you want about me — even I do not let uniforms in matching shirts bully a whole company.'], who: 'VALE' },
+    { say: ['And before you ask: yes, PRISMKIT is still PRISMKIT. Still saving it. When it changes, it will be because WE decided. Nobody else.'], who: 'VALE' },
+    { choice: { npc: 'gary', who: 'VALE', prompt: 'He is grinning like this is a game. It is not a game. You —', options: [
       { label: 'Admit you followed the same smell', delta: 1, say: ['HA! Knew it. Two noses, one rotten building. That is us all over, {player} — everyone else smells flowers, we smell a fight.'] },
       { label: 'Tell him to stay out of your way', delta: -1, say: ['...Wow. Okay. Message received, hero. Do not come crying to the elevator when the top floor eats you.'] },
     ] } },
-    { say: ['Race you to the top floor. Loser buys the lemonade and the winner gets eternal bragging rights.'], who: 'GARY' },
+    { say: ['Race you to the top floor. Loser buys the lemonade and the winner gets eternal bragging rights.'], who: 'VALE' },
     { battle: 'gary_silph' },
-    { say: ['Hah... okay. OKAY. You take the president’s floor. I will hold this elevator so this lot cannot regroup. Go be a hero, {player}.'], who: 'GARY' },
+    { say: ['Hah... okay. OKAY. You take the president’s floor. I will hold this elevator so this lot cannot regroup. Go be a hero, {player}.'], who: 'VALE' },
     { flag: 'silph_rival_done' },
   ],
 
   // -- Vantage Co.: the boss, almost in person -----------------------------------
   ev_silph_boss: [
-    { say: ['You again. The child from beneath the Game Corner. My employer sends his regards — he would deliver them himself, but you are not worth his calendar.'], who: 'ROCKET ADMIN' },
+    { say: ['You again. The child from beneath the Game Corner. My employer sends his regards — he would deliver them himself, but you are not worth his calendar.'], who: 'VANTA ADMIN' },
     { battle: 'rocket_admin_silph' },
     { say: ['A phone rings on the president’s desk. The Admin goes the color of old milk and holds the receiver out like it might bite.'], who: 'NARRATOR' },
-    { say: ['...So. The little trainer from Dawnwick, standing in my building, holding my company.', 'You have spirit. Spirit is a resource, and I collect resources. Remember this voice, child. When we meet properly, I will be considerably less charming.'], who: 'GIOVANNI (phone)' },
+    { say: ['...So. The little trainer from Dawnwick, standing in my building, holding my company.', 'You have spirit. Spirit is a resource, and I collect resources. Remember this voice, child. When we meet properly, I will be considerably less charming.'], who: 'VANE (phone)' },
     { say: ['The line goes dead. For a moment, nobody in the room breathes.'], who: 'NARRATOR' },
     { say: ['Young trainer... you have saved Vantage Co. Words are cheap; prototypes are not. This is our one-of-one. It has never failed, not once, not for anyone. Use it on something that matters.'], who: 'VANTAGE PRESIDENT' },
     { give: { items: { masterball: 1 }, text: 'Master Orb' } },
@@ -293,15 +293,15 @@ export const EVENTS = {
 
   // -- Route 22: the last taunt ------------------------------------------------
   ev_rival_route22: [
-    { say: ['Knew I would find you here, {player}. Route 22 — where big talk goes to get measured.'], who: 'GARY' },
-    { say: ['The League gate is just ahead, and I am NOT letting you walk through it first. Everything since Dawnwick comes down to who is still standing after this.'], who: 'GARY' },
-    { say: ['And before you ask — yes, PRISMKIT is still PRISMKIT. I am saving its evolution for the League itself. When the whole region is watching. It deserves an entrance.'], who: 'GARY' },
-    { choice: { npc: 'gary', who: 'GARY', prompt: 'The League gate glitters at the top of the road. You —', options: [
+    { say: ['Knew I would find you here, {player}. Route 22 — where big talk goes to get measured.'], who: 'VALE' },
+    { say: ['The League gate is just ahead, and I am NOT letting you walk through it first. Everything since Dawnwick comes down to who is still standing after this.'], who: 'VALE' },
+    { say: ['And before you ask — yes, PRISMKIT is still PRISMKIT. I am saving its evolution for the League itself. When the whole region is watching. It deserves an entrance.'], who: 'VALE' },
+    { choice: { npc: 'gary', who: 'VALE', prompt: 'The League gate glitters at the top of the road. You —', options: [
       { label: 'Wish him luck — and mean it', delta: 1, say: ['...Luck. HAH. I do not need— ...yeah. Yeah, okay. You too, {player}. Mean it back. Do not waste it.'] },
       { label: 'Promise to end his run here', delta: -1, say: ['Big words. You have been promising that since Dawnwick, and somehow we are BOTH still standing. Make it count this time.'] },
     ] } },
     { battle: 'gary_r22_final' },
-    { say: ['Tch! Fine — warm-up over anyway. First one to the top of the Plateau wins everything. Do not be late, {player}.'], who: 'GARY' },
+    { say: ['Tch! Fine — warm-up over anyway. First one to the top of the Plateau wins everything. Do not be late, {player}.'], who: 'VALE' },
     { flag: 'rival_route22_done' },
   ],
 
@@ -342,37 +342,37 @@ export const EVENTS = {
 
   // -- The Elite Four ---------------------------------------------------------------
   ev_e4_1: [
-    { say: ['Welcome to the cold end of the road, {player}. I am Lorelei. Everything you love about summer ends at my door.'], who: 'LORELEI' },
+    { say: ['Welcome to the cold end of the road, {player}. I am Isolde. Everything you love about summer ends at my door.'], who: 'ISOLDE' },
     { battle: 'lorelei' },
   ],
 
   ev_e4_2: [
-    { say: ['Bruno. My team and I train where the mountains argue back. Show me your strength — all of it. Nothing held back!'], who: 'BRUNO' },
+    { say: ['Goran. My team and I train where the mountains argue back. Show me your strength — all of it. Nothing held back!'], who: 'GORAN' },
     { battle: 'bruno' },
   ],
 
   ev_e4_3: [
-    { say: ['Oh ho. A living child, come to visit old Agatha. I knew a boy like you once — all heart, no patience. He grew up to be a professor. Let us see what YOU grow into.'], who: 'AGATHA' },
+    { say: ['Oh ho. A living child, come to visit old Odessa. I knew a boy like you once — all heart, no patience. He grew up to be a professor. Let us see what YOU grow into.'], who: 'ODESSA' },
     { battle: 'agatha' },
   ],
 
   ev_e4_4: [
-    { say: ['Lance. I have watched your whole road from the sky, {player}. Dragons are not strong because they are born strong — they are strong because they endure. Endure me.'], who: 'LANCE' },
+    { say: ['Darian. I have watched your whole road from the sky, {player}. Dragons are not strong because they are born strong — they are strong because they endure. Endure me.'], who: 'DARIAN' },
     { battle: 'lance' },
   ],
 
   // -- Champion: the reveal ----------------------------------------------------------
   ev_champion: [
-    { say: ['...You actually did it. Four of them. In a row. I had a whole speech for this moment and I have forgotten every word of it.'], who: 'GARY' },
-    { say: ['Fine. No speech. Just this: I saved my partner’s evolution for the biggest stage there is. No more waiting. It is time — OUR time.'], who: 'GARY' },
-    { say: ['Whatever stands across from you now, {player} — that is us, finished deciding. Come and take the crown. If you can.'], who: 'GARY' },
-    { choice: { npc: 'gary', who: 'GARY', prompt: 'The crown, the crowd, the whole road behind you both. You —', options: [
+    { say: ['...You actually did it. Four of them. In a row. I had a whole speech for this moment and I have forgotten every word of it.'], who: 'VALE' },
+    { say: ['Fine. No speech. Just this: I saved my partner’s evolution for the biggest stage there is. No more waiting. It is time — OUR time.'], who: 'VALE' },
+    { say: ['Whatever stands across from you now, {player} — that is us, finished deciding. Come and take the crown. If you can.'], who: 'VALE' },
+    { choice: { npc: 'gary', who: 'VALE', prompt: 'The crown, the crowd, the whole road behind you both. You —', options: [
       { label: 'Tell him: "Wouldn\'t be here without you."', delta: 1, say: ['...Do NOT get sentimental on me before the biggest battle of our lives, {player}. ...Save it for after. When I have won. Obviously.'] },
       { label: 'Say nothing. Battle says it.', delta: 0, say: ['...Yeah. Yeah, that is the most {player} thing you have ever not said. Come on, then.'] },
     ] } },
     { battle: 'gary_champion' },
-    { say: ['...Yeah. Yeah, okay. It had to be you, did it not. Champion. Ha! Say it back to me when we are old, {player}. I will still be one win behind, and twice as loud about it.'], who: 'GARY' },
-    { sayVar: { npc: 'gary', scene: 'championAfter', who: 'GARY' } },
+    { say: ['...Yeah. Yeah, okay. It had to be you, did it not. Champion. Ha! Say it back to me when we are old, {player}. I will still be one win behind, and twice as loud about it.'], who: 'VALE' },
+    { sayVar: { npc: 'gary', scene: 'championAfter', who: 'VALE' } },
     { flag: 'champion' },
     { questDone: 'q_champion' },
     { ending: true },
@@ -544,7 +544,7 @@ export const LEGENDARY_ARCS = {
     hook: 'When the three birds of Arden are gathered, an old melody surfaces — the sea guardian only answers those who have met its storms.',
     steps: [
       { text: 'Catch FULMINIS, PYREHAWK, and GLACIERNE', flag: 'birds_caught' },
-      { text: 'Receive the Silver Wing at the Maelstrom Islands' },
+      { text: 'Receive the Riven Wing at the Maelstrom Islands' },
       { text: 'Descend to the deepest waterfall chamber' },
       { text: 'Face ABYSSORN, level 70', catch: 'lugia' },
     ],
@@ -555,8 +555,8 @@ export const LEGENDARY_ARCS = {
     hook: 'Holly Forest has a shrine older than the road through it, and the charcoal maker swears the trees sometimes repeat your words back — forty years younger.',
     steps: [
       { text: 'Return the lost GALEDUCK to the charcoal maker' },
-      { text: 'Receive the GS Orb from a grateful craftsman' },
-      { text: 'Place the GS Orb at the forest shrine' },
+      { text: 'Receive the Sealed Orb from a grateful craftsman' },
+      { text: 'Place the Sealed Orb at the forest shrine' },
       { text: 'Meet CHRONOFAE where the forest remembers', catch: 'celebi' },
     ],
     lair: 'ilexforest',
@@ -607,7 +607,7 @@ export const LEGENDARY_ARCS = {
     id: 'arc_groudon', title: 'The Land That Wants Everything', species: 'groudon', region: 'Maris', designedOnly: true,
     hook: 'The drought over Craterlake is not weather anymore. It has a heartbeat, and it is under the mountain.',
     steps: [
-      { text: 'Follow the Magma trail into Mt. Smokestack' },
+      { text: 'Follow the Cinder Pact trail into Mt. Smokestack' },
       { text: 'Descend into the Worldroot Cave' },
       { text: 'Face TERRATITAN, level 70', catch: 'groudon' },
     ],
@@ -765,7 +765,7 @@ export const LEGENDARY_ARCS = {
     id: 'arc_shaymin', title: 'The Gratitude Bloom', species: 'shaymin', region: 'Borea', designedOnly: true,
     hook: 'A white-stone road north of the League ends in a flower field that only blooms for a thankful heart.',
     steps: [
-      { text: 'Receive Oak’s Letter' },
+      { text: 'Receive Hawthorn’s Letter' },
       { text: 'Walk the Foamline Path with gratitude in mind' },
       { text: 'Meet GRATHOG in the Petal Paradise', catch: 'shaymin' },
     ],
@@ -799,8 +799,8 @@ export const LEGENDARY_ARCS = {
     id: 'arc_spiritomb', title: 'The Hundred and Eight', species: 'spiritomb', region: 'Borea', designedOnly: true,
     hook: 'A cracked keystone, a ruined tower on the Forsaken Tower road, and a number the stones keep repeating: one hundred and eight.',
     steps: [
-      { text: 'Receive the Odd Keystone' },
-      { text: 'Set the keystone into the Hallowed Tower' },
+      { text: 'Receive the Sealed Keystone' },
+      { text: 'Set the keystone into the Weathered Tower' },
       { text: 'Face what the tower was built to hold', catch: 'spiritomb' },
     ],
     lair: 'hallowedtower',
@@ -813,7 +813,7 @@ export const LEGENDARY_ARCS = {
     id: 'arc_arceus', title: 'The Hall of Dawning', species: 'arceus', region: 'Borea', designedOnly: true,
     hook: 'Above the oldest pillar in the world there is said to be a first room, and in it the one who was present before the chains, before the lakes, before everything — waiting for a flute only a finished road can be trusted with.',
     steps: [
-      { text: 'Be entrusted with the Azure Flute at journey\u2019s end' },
+      { text: 'Be entrusted with the Zenith Flute at journey\u2019s end' },
       { text: 'Play it at Zenith Spire, where the stairs should be' },
       { text: 'Climb to the Hall of Dawning', catch: 'arceus' },
     ],
@@ -822,166 +822,166 @@ export const LEGENDARY_ARCS = {
 
   // ---- Unova (designed) -----------------------------------------------------------
   arc_victini: {
-    id: 'arc_victini', title: 'The Victory in the Lighthouse', species: 'victini', region: 'Unova', designedOnly: true,
+    id: 'arc_victini', title: 'The Victory in the Lighthouse', species: 'victini', region: 'Vespera', designedOnly: true,
     hook: 'Liberty Garden’s lighthouse has been sealed for two centuries, and the keeper’s log ends mid-sentence: "It brought us luck. Then it hid."',
     steps: [
-      { text: 'Earn the Liberty Pass' },
+      { text: 'Earn the Keeper's Pass' },
       { text: 'Open the lighthouse basement' },
-      { text: 'Meet Victini, level 50', catch: 'victini' },
+      { text: 'Meet TRIUMPHARE, level 50', catch: 'victini' },
     ],
     lair: 'libertygarden',
   },
   arc_keldeo: {
-    id: 'arc_keldeo', title: 'The Fourth Sword', species: 'keldeo', region: 'Unova', designedOnly: true,
-    hook: 'Three old soldiers of Unova keep glancing at an empty fourth place at their glade — the student who ran ahead of the lesson.',
+    id: 'arc_keldeo', title: 'The Fourth Sword', species: 'keldeo', region: 'Vespera', designedOnly: true,
+    hook: 'Three old soldiers of Vespera keep glancing at an empty fourth place at their glade — the student who ran ahead of the lesson.',
     steps: [
-      { text: 'Earn the respect of Cobalion, Terrakion, and Virizion' },
-      { text: 'Bring the three to the Moor of Icirrus' },
-      { text: 'Witness Keldeo take up the sword', catch: 'keldeo' },
+      { text: 'Earn the respect of SABERHART, BOULDHORN, and VERDANTLER' },
+      { text: 'Bring the three to the the Bladesmoor' },
+      { text: 'Witness RILLFOAL take up the sword', catch: 'keldeo' },
     ],
     lair: 'pledgegrove',
   },
   arc_meloetta: {
-    id: 'arc_meloetta', title: 'The Song That Was Taken', species: 'meloetta', region: 'Unova', designedOnly: true,
-    hook: 'A melody older than Unova has gone missing from the world — and a certain cafe pianist hums four notes of it when it rains.',
+    id: 'arc_meloetta', title: 'The Song That Was Taken', species: 'meloetta', region: 'Vespera', designedOnly: true,
+    hook: 'A melody older than Vespera has gone missing from the world — and a certain cafe pianist hums four notes of it when it rains.',
     steps: [
-      { text: 'Gather the four forgotten verses across Unova' },
-      { text: 'Play the verses at the Castelia cafe' },
-      { text: 'Meet Meloetta where the song returns', catch: 'meloetta' },
+      { text: 'Gather the four forgotten verses across Vespera' },
+      { text: 'Play the verses at the Brightport cafe' },
+      { text: 'Meet ARIETTE where the song returns', catch: 'meloetta' },
     ],
     lair: 'casteliacafe',
   },
   arc_genesect: {
-    id: 'arc_genesect', title: 'The Fossil With a Cannon', species: 'genesect', region: 'Unova', designedOnly: true,
+    id: 'arc_genesect', title: 'The Fossil With a Cannon', species: 'genesect', region: 'Vespera', designedOnly: true,
     hook: 'A laboratory ruin outside the city keeps one pod unaccounted for — and satellite photos of the hills show a red shape that moves like nothing alive.',
     steps: [
-      { text: 'Search the abandoned P2 Laboratory' },
+      { text: 'Search the abandoned Pierhead Laboratory' },
       { text: 'Follow the burn marks into the hills' },
-      { text: 'Face Genesect, level 70', catch: 'genesect' },
+      { text: 'Face FERROMANTIS, level 70', catch: 'genesect' },
     ],
     lair: 'p2laboratory',
   },
 
   // ---- Kalos (designed) --------------------------------------------------------------
   arc_xerneas: {
-    id: 'arc_xerneas', title: 'The Tree That Walked Away', species: 'xerneas', region: 'Kalos', designedOnly: true,
-    hook: 'Kalos folklore says a great tree once stood where the weapon sleeps — and that the tree had antlers, and opinions.',
+    id: 'arc_xerneas', title: 'The Tree That Walked Away', species: 'xerneas', region: 'Aurelia', designedOnly: true,
+    hook: 'Aurelia folklore says a great tree once stood where the weapon sleeps — and that the tree had antlers, and opinions.',
     steps: [
-      { text: 'Uncover the ultimate weapon’s history' },
-      { text: 'Enter the chamber beneath Geosenge' },
-      { text: 'Face Xerneas, level 70', catch: 'xerneas' },
+      { text: 'Uncover the ancient weapon’s history' },
+      { text: 'Enter the chamber beneath Cairnholt' },
+      { text: 'Face VITASTAG, level 70', catch: 'xerneas' },
     ],
     lair: 'geosengechamber',
   },
   arc_yveltal: {
-    id: 'arc_yveltal', title: 'The Cocoon Under the Stone', species: 'yveltal', region: 'Kalos', designedOnly: true,
-    hook: 'The stones around Geosenge are not carved. They are drained. Something beneath the town has been feeding for three thousand years.',
+    id: 'arc_yveltal', title: 'The Cocoon Under the Stone', species: 'yveltal', region: 'Aurelia', designedOnly: true,
+    hook: 'The stones around Cairnholt are not carved. They are drained. Something beneath the town has been feeding for three thousand years.',
     steps: [
-      { text: 'Uncover the ultimate weapon’s history' },
-      { text: 'Enter the chamber beneath Geosenge' },
-      { text: 'Face Yveltal, level 70', catch: 'yveltal' },
+      { text: 'Uncover the ancient weapon’s history' },
+      { text: 'Enter the chamber beneath Cairnholt' },
+      { text: 'Face MORTAVIS, level 70', catch: 'yveltal' },
     ],
     lair: 'geosengechamber',
   },
   arc_zygarde: {
-    id: 'arc_zygarde', title: 'The Watcher in the Dark', species: 'zygarde', region: 'Kalos', designedOnly: true,
-    hook: 'Terminus Cave has a final chamber the maps leave blank. The miners who found it describe the same dream afterwards: being counted.',
+    id: 'arc_zygarde', title: 'The Watcher in the Dark', species: 'zygarde', region: 'Aurelia', designedOnly: true,
+    hook: 'The Hollowdeep has a final chamber the maps leave blank. The miners who found it describe the same dream afterwards: being counted.',
     steps: [
-      { text: 'Gather Zygarde Cells across Kalos', flag: 'zygarde_cells' },
-      { text: 'Reach the blank chamber of Terminus Cave' },
-      { text: 'Face Zygarde, level 70', catch: 'zygarde' },
+      { text: 'Gather ORDWYRM Cells across Aurelia', flag: 'zygarde_cells' },
+      { text: 'Reach the blank chamber of the Hollowdeep' },
+      { text: 'Face ORDWYRM, level 70', catch: 'zygarde' },
     ],
     lair: 'terminuscave',
   },
   arc_diancie: {
-    id: 'arc_diancie', title: 'The Princess of the Diamond Domain', species: 'diancie', region: 'Kalos', designedOnly: true,
-    hook: 'Deep beneath Kalos runs a kingdom of living crystal, and its heart diamond is going dark.',
+    id: 'arc_diancie', title: 'The Princess of the Glitterdeep', species: 'diancie', region: 'Aurelia', designedOnly: true,
+    hook: 'Deep beneath Aurelia runs a kingdom of living crystal, and its heart diamond is going dark.',
     steps: [
-      { text: 'Find the Carbink messengers in the caves' },
-      { text: 'Descend into the Diamond Domain' },
-      { text: 'Help Diancie remake the heart diamond', catch: 'diancie' },
+      { text: 'Find the JEWELMITE messengers in the caves' },
+      { text: 'Descend into the Glitterdeep' },
+      { text: 'Help GEMMARCH remake the heart diamond', catch: 'diancie' },
     ],
     lair: 'diamonddomain',
   },
   arc_hoopa: {
-    id: 'arc_hoopa', title: 'The Rings in the Desert', species: 'hoopa', region: 'Kalos', designedOnly: true,
+    id: 'arc_hoopa', title: 'The Rings in the Desert', species: 'hoopa', region: 'Aurelia', designedOnly: true,
     hook: 'A certain bottle, sealed a century ago in a desert ruin, has started ringing like a telephone. Nothing good ever rings like that.',
     steps: [
-      { text: 'Find the Prison Bottle in the desert ruins' },
+      { text: 'Find the Binding Bottle in the desert ruins' },
       { text: 'Weather the rings’ summoning storm' },
-      { text: 'Face Hoopa Unbound, level 70', catch: 'hoopa' },
+      { text: 'Face PORTARCH Unbound, level 70', catch: 'hoopa' },
     ],
     lair: 'desertruins',
   },
   arc_volcanion: {
-    id: 'arc_volcanion', title: 'The Steam of the Nebel Plateau', species: 'volcanion', region: 'Kalos', designedOnly: true,
+    id: 'arc_volcanion', title: 'The Steam of the Mistral Plateau', species: 'volcanion', region: 'Aurelia', designedOnly: true,
     hook: 'Hunters who poach the plateau’s Kin keep coming down the mountain missing their traps — and smelling of boiled rain.',
     steps: [
-      { text: 'Drive the poachers off the Nebel Plateau' },
+      { text: 'Drive the poachers off the Mistral Plateau' },
       { text: 'Follow the steam vent trail' },
-      { text: 'Meet Volcanion, level 70', catch: 'volcanion' },
+      { text: 'Meet CALDERTORT, level 70', catch: 'volcanion' },
     ],
     lair: 'nebelplateau',
   },
 
   // ---- Alola (designed) ----------------------------------------------------------------
   arc_solgaleo: {
-    id: 'arc_solgaleo', title: 'The Child of the Stars, Sun', species: 'solgaleo', region: 'Alola', designedOnly: true,
-    hook: 'A strange little nebula of a Kin has fallen into your life, and every old altar in Alola is suddenly relevant.',
+    id: 'arc_solgaleo', title: 'The Child of the Stars, Sun', species: 'solgaleo', region: 'Solana', designedOnly: true,
+    hook: 'A strange little nebula of a Kin has fallen into your life, and every old altar in Solana is suddenly relevant.',
     steps: [
-      { text: 'Raise the Cosmog the professor rescued', flag: 'cosmog_raised' },
-      { text: 'Sound the Sun Flute at the Altar of the Sunne' },
-      { text: 'Watch Nebby become the sun', catch: 'solgaleo' },
+      { text: 'Raise the NEBLET the professor rescued', flag: 'cosmog_raised' },
+      { text: 'Sound the Dawn Flute at the Altar of the Dawn' },
+      { text: 'Watch Neb become the sun', catch: 'solgaleo' },
     ],
     lair: 'altarofthesunne',
   },
   arc_lunala: {
-    id: 'arc_lunala', title: 'The Child of the Stars, Moon', species: 'lunala', region: 'Alola', designedOnly: true,
-    hook: 'A strange little nebula of a Kin has fallen into your life, and every old altar in Alola is suddenly relevant.',
+    id: 'arc_lunala', title: 'The Child of the Stars, Moon', species: 'lunala', region: 'Solana', designedOnly: true,
+    hook: 'A strange little nebula of a Kin has fallen into your life, and every old altar in Solana is suddenly relevant.',
     steps: [
-      { text: 'Raise the Cosmog the professor rescued', flag: 'cosmog_raised' },
+      { text: 'Raise the NEBLET the professor rescued', flag: 'cosmog_raised' },
       { text: 'Sound the Moon Flute at the Altar of the Moone' },
-      { text: 'Watch Nebby become the moon', catch: 'lunala' },
+      { text: 'Watch Neb become the moon', catch: 'lunala' },
     ],
     lair: 'altarofthmoone',
   },
   arc_necrozma: {
-    id: 'arc_necrozma', title: 'The Light That Was Stolen', species: 'necrozma', region: 'Alola', designedOnly: true,
-    hook: 'Alola’s oldest legend is not about a god. It is about a wound — something that arrived hungry for light and never stopped aching.',
+    id: 'arc_necrozma', title: 'The Light That Was Stolen', species: 'necrozma', region: 'Solana', designedOnly: true,
+    hook: 'Solana’s oldest legend is not about a god. It is about a wound — something that arrived hungry for light and never stopped aching.',
     steps: [
       { text: 'Learn the legend of the Blinding One' },
       { text: 'Ascend the tower in Ultra Space' },
-      { text: 'Restore the light — face Necrozma, level 75', catch: 'necrozma' },
+      { text: 'Restore the light — face ECLIPSARCH, level 75', catch: 'necrozma' },
     ],
     lair: 'ultramegalopolis',
   },
   arc_magearna: {
-    id: 'arc_magearna', title: 'The Clockwork Gift', species: 'magearna', region: 'Alola', designedOnly: true,
+    id: 'arc_magearna', title: 'The Clockwork Gift', species: 'magearna', region: 'Solana', designedOnly: true,
     hook: 'Five hundred years ago an artificer built a friend for a lonely princess. The friend is still keeping the appointment.',
     steps: [
       { text: 'Find the artificer’s workshop journal' },
       { text: 'Wind the heart that was never wound' },
-      { text: 'Meet Magearna, level 70', catch: 'magearna' },
+      { text: 'Meet AUTOMARCH, level 70', catch: 'magearna' },
     ],
     lair: 'antiqueruins',
   },
   arc_marshadow: {
-    id: 'arc_marshadow', title: 'The Shadow in Your Shadow', species: 'marshadow', region: 'Alola', designedOnly: true,
+    id: 'arc_marshadow', title: 'The Shadow in Your Shadow', species: 'marshadow', region: 'Solana', designedOnly: true,
     hook: 'Trainers who have glimpsed the rainbow-winged one sometimes report a second shadow at their feet. It is studying your fighting spirit.',
     steps: [
       { text: 'Be witnessed by IRISAVIS’s rainbow', flag: 'rainbow_witnessed' },
       { text: 'Prove your spirit in three dojos' },
-      { text: 'Face Marshadow, level 70', catch: 'marshadow' },
+      { text: 'Face UMBRELET, level 70', catch: 'marshadow' },
     ],
     lair: 'shadowdojo',
   },
   arc_zeraora: {
-    id: 'arc_zeraora', title: 'The Thunder Without a Cloud', species: 'zeraora', region: 'Alola', designedOnly: true,
+    id: 'arc_zeraora', title: 'The Thunder Without a Cloud', species: 'zeraora', region: 'Solana', designedOnly: true,
     hook: 'Lightning has been striking the same burnt meadow in clear weather for weeks, in a pattern that looks almost like footprints.',
     steps: [
       { text: 'Investigate the burnt meadow’s strike pattern' },
       { text: 'Follow the voltage trail at a run' },
-      { text: 'Face Zeraora, level 70', catch: 'zeraora' },
+      { text: 'Face PLASMACLAW, level 70', catch: 'zeraora' },
     ],
     lair: 'burntmeadow',
   },
@@ -993,7 +993,7 @@ export const LEGENDARY_ARCS = {
     steps: [
       { text: 'Enter the Slumbering Weald’s deep mist' },
       { text: 'Take up the Rusted Sword from the altar' },
-      { text: 'Face Zacian, level 70', catch: 'zacian' },
+      { text: 'Face SABERWOLF, level 70', catch: 'zacian' },
     ],
     lair: 'slumberingweald',
   },
@@ -1003,7 +1003,7 @@ export const LEGENDARY_ARCS = {
     steps: [
       { text: 'Enter the Slumbering Weald’s deep mist' },
       { text: 'Take up the Rusted Shield from the altar' },
-      { text: 'Face Zamazenta, level 70', catch: 'zamazenta' },
+      { text: 'Face AEGISWOLF, level 70', catch: 'zamazenta' },
     ],
     lair: 'slumberingweald',
   },
@@ -1013,7 +1013,7 @@ export const LEGENDARY_ARCS = {
     steps: [
       { text: 'Gather the Wishing Stars falling over Galar' },
       { text: 'Ascend the Energy Plant tower' },
-      { text: 'Face Eternatus, level 70', catch: 'eternatus' },
+      { text: 'Face VENOMWYRM, level 70', catch: 'eternatus' },
     ],
     lair: 'energyplant',
   },
@@ -1023,7 +1023,7 @@ export const LEGENDARY_ARCS = {
     steps: [
       { text: 'Restore the king’s statue in Freezington' },
       { text: 'Reunite the king with his loyal steed' },
-      { text: 'Meet Calyrex at the Crown Shrine', catch: 'calyrex' },
+      { text: 'Meet REGIHARE at the Crown Shrine', catch: 'calyrex' },
     ],
     lair: 'crownshrine',
   },
@@ -1106,7 +1106,7 @@ export const CREDITS_LINES = [
   'You beat the League.',
   'Not with the strongest team in Arden — with the team that never stopped walking beside you.',
   'Every badge was a person who believed the road would test you fairly. Every rival was a mirror. Every goodbye made room for a hello.',
-  'Thank you for playing ASH’S JOURNEY — an unofficial fan homage, made by fans, for fans.',
+  'Thank you for playing KIAN’S JOURNEY — an original adventure, made with love, for every tamer.',
   'The road does not end at the Plateau. It just gets saltier.',
   // ADR-027 (Stage F): the static 'TO BE CONTINUED — the Amber Isles
   // await.' card is RETIRED — the arc transition machine (src/game/

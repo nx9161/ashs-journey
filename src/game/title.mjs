@@ -441,7 +441,7 @@ export class BootScene {
     }
 
     // ---- Footer: centered, inset from both edges, never clipped ----
-    r.text('Unofficial fan homage.', cx, footerY, { size: 14, align: 'center', color: '#f5efdc', display: true });
+    r.text('An original work.', cx, footerY, { size: 14, align: 'center', color: '#f5efdc', display: true });
     r.end(); r.camX = pcx; r.camY = pcy;
   }
   renderLegal(r) {

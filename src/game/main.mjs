@@ -302,10 +302,10 @@ export class Game {
     // document.fonts.check instead of silently shipping a fallback again.
     try {
       if (typeof document !== 'undefined' && document.fonts && document.fonts.load) {
-        document.fonts.load('16px "PtGalmuri"', 'ASH');
-        document.fonts.load('700 16px "PtGalmuri"', 'ASH');
-        document.fonts.load('16px "PtPixel"', 'ASH');
-        document.fonts.load('700 16px "PtPixel"', 'ASH');
+        document.fonts.load('16px "PtGalmuri"', 'KIAN');
+        document.fonts.load('700 16px "PtGalmuri"', 'KIAN');
+        document.fonts.load('16px "PtPixel"', 'KIAN');
+        document.fonts.load('700 16px "PtPixel"', 'KIAN');
       }
     } catch (e) { /* headless / stub DOM */ }
     // Track B: auth health probe (503 banner) + sync dot. Guest target: no-ops.
@@ -520,7 +520,7 @@ export class Game {
     this.state.story.difficulty = keepDifficulty;
     // A run that STARTS with a House Rule on has enabled one: no Pure Run.
     if (activeHouseRules(this.state).length) this.state.meta.houseRulesTouched = true;
-    this.state.player.name = 'ASH';
+    this.state.player.name = 'KIAN';
     this.rng = makeRngStreams(nextSeed());
     this.skipIntroVeteran = this.store.exists();
     this.scenes.replace(new IntroScene());
