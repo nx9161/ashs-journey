@@ -202,9 +202,9 @@ const VAL = await import(join(ROOT, 'api/_lib/validator.mjs'));
     return comps.sort((a, b) => b.length - a.length);
   };
   const before = graph(false); const after = graph(true);
-  ok('A22 Vermilion\'s walkable graph keeps its exact base shape with the captain standing: base [main 111, the pre-existing isolated tile (5,11)] -> [main 110, (5,11)] — the main fragment loses ONLY the captain\'s own tile, no new fragment, and every warp tile is in the main fragment or beside it (Wave S1 re-pin: base was 119 before the Arcport Mart was built — its 6 non-door footprint tiles plus the mart clerk\'s (3,5) stance account for exactly 7; the 2 door tiles stay in the graph; Wave S2 re-pin at the S1xS2 merge: the Harbormaster repair moved him from solid (16,11), never in the graph, to walkable (11,11), so the base loses exactly his stance tile too — 112 -> 111 base, 111 -> 110 with the captain)',
-    before.length === 2 && before[0].length === 111 && JSON.stringify(before[1]) === JSON.stringify(['5,11'])
-    && after.length === 2 && after[0].length === 110 && JSON.stringify(after[1]) === JSON.stringify(['5,11'])
+  ok('A22 Vermilion\'s walkable graph keeps its exact base shape with the captain standing: base [main 168, ONE fragment] -> [main 167] — the main fragment loses ONLY the captain\'s own tile, no new fragment, and every warp tile is in the main fragment or beside it (Wave S1 re-pin: base was 119 before the Arcport Mart was built — its 6 non-door footprint tiles plus the mart clerk\'s (3,5) stance account for exactly 7; the 2 door tiles stay in the graph; Wave S2 re-pin at the S1xS2 merge: the Harbormaster repair moved him from solid (16,11), never in the graph, to walkable (11,11), so the base loses exactly his stance tile too — 112 -> 111 base, 111 -> 110 with the captain; Wave T6 re-pin: Arcport rebuilt 20x14 per the approved harbour design — the walkable graph is now ONE fragment of 168 (the old isolated (5,11) tale-spot tile joins the main fragment via the Fan Club porch boardwalk), 167 with the captain standing)',
+    before.length === 1 && before[0].length === 168
+    && after.length === 1 && after[0].length === 167
     && (v.warps || []).every((w) => after[0].includes(w.x + ',' + w.y)
       || [[0, 1], [0, -1], [1, 0], [-1, 0]].some(([dx, dy]) => after[0].includes((w.x + dx) + ',' + (w.y + dy)))),
     'before=' + before.map((c) => c.length).join(',') + ' after=' + after.map((c) => c.length).join(','));
@@ -932,8 +932,8 @@ const driver = `
   ok('B04 walk west along the dock street from (15,10) to (10,9), past every captain on the row — the stance seals no route on the dock',
     w2 && live().map === 'vermilion' && live().x === 10 && live().y === 9,
     'walked=' + w2 + ' live=' + JSON.stringify(live()));
-  var w3 = walkTo(g, 11, 4);
-  ok('B05 walk to the Vermilion Gym door (11,4) and the warp FIRES (lands inside gym-vermilion) — no warp/door interference from the captain\\'s stance',
+  var w3 = walkTo(g, 15, 8);
+  ok('B05 walk to the Vermilion Gym door (15,8) — Wave T6 re-pin: gym moved to its dockside seat, doors (15,8)/(16,8) and the warp FIRES (lands inside gym-vermilion) — no warp/door interference from the captain\\'s stance',
     w3 && pos(g).map === 'gym-vermilion',
     'walked=' + w3 + ' pos=' + JSON.stringify(pos(g)));
 

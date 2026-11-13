@@ -152,7 +152,10 @@ const ALL_TRAINERS = Object.assign({}, TRAINERS3, TRAINERS4);
       // U+00C0..U+00CA + TG2 U+0131..U+0144) are walkable floor by
       // engine law (src/data/maps.mjs WALKABLE) — tale actors standing
       // on redressed town ground are on walkable floor tiles.
-      if (!['.', ',', '$'].includes(ch)
+      // Wave T6: the boardwalk char (an H3 floor in WALKABLE) joins
+      // the whitelist — Arcport's tale actors (HARBORMASTER + the
+      // ferry captains) stand on the dock boardwalk by design.
+      if (!['.', ',', '$', 'ἇ'].includes(ch)
         && !(ch >= 'À' && ch <= 'Ê')
         && !(ch >= 'ı' && ch <= 'ń')) return false;
       if ((m.npcs || []).some((b) => b.x === n.x && b.y === n.y)) return false;
