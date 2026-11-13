@@ -1,0 +1,159 @@
+# Checks fleet — War Room E2E Phase 2, Wave W2 (CI Gate Wiring).
+#
+# WHY THIS EXISTS: at the E2E audit baseline, 30 of the 31 tests/*-checks
+# suites were wired into NO workflow (ci.yml ran verify-slice + API tests;
+# pages.yml added pack-manifest, art-gate, seasons). That gap is exactly
+# how battle-model rotted 45/45 -> 37/45 unnoticed (audit Cluster 3/6).
+# This workflow runs the whole fleet on every push and pull request.
+# Runners: tests/run-checks.mjs (groups below). A hard-gate job FAILS the
+# run on any suite failure and prints every suite's own count line.
+#
+# ============================ CENSUS (W2, 2026-11-13) ===================
+# Entry points enumerated: 31 tests/*-checks + campaign-smoke +
+# audit-headless + qa-changed-flows + audit-laptop + 6 Track B suites +
+# 6 tools/api-scripts suites + 13 scripts/ gates/audits/probes.
+#
+# HARD GATE — job `suites` (27 entries, all green at W2 baseline):
+#   actor-lifecycle 37/0 · arc-foundation 47/47 · battle-model 45/45 ·
+#   branding 12/0 · cheat-shop 44/44 · fidelity 35/35 · frontier 136/136 ·
+#   hoenn-contest 28/0 · hoenn-legendary 24/0 · hoenn-story 88/0 ·
+#   input 22/22 · johto-story 110/110 · johto-systems 62/0 ·
+#   name-registry 2309/0 · narrative-db 49/49 · orange-climax 42/42 ·
+#   orange-story 38/38 · partner-guarantee 23/0 · quest-integrity 17/0 ·
+#   seasons PASS · sinnoh 132/132 · sinnoh-legendary 27/27 ·
+#   sinnoh-story 123/0 · title-guard 24/0 · viewport-matrix 27/0 ·
+#   campaign-smoke 24/24 · audit-headless 17/17
+# HARD GATE — job `audits` (6): scripts/verify-audio (ALL PASS) +
+#   audit-towns / audit-reachability / audit-placement / audit-desire-paths
+#   / audit-battle-art, all exit 0 at baseline in their default modes.
+# HARD GATE — job `track-b`: tests/suites/01-06 via the documented
+#   `node --import ./register.mjs run.mjs` (PGlite): 114/114 at baseline.
+#   Needs npm ci at the repo root AND in tests/ (its own package).
+#
+# NON-BLOCKING — job `triage` (runs every push; continue-on-error):
+#   The known-red queue. It runs so its state is printed on every push —
+#   never silently unrun again — but it cannot fail the workflow until
+#   each suite is triaged green and PROMOTED (move its line in
+#   tests/run-checks.mjs from `triage` to `suites`, update this header).
+#   Baselines + failure character (all unclassified per audit Cluster 3;
+#   none is a title-literal issue after the W2 ratchet burn-down):
+#   - rejuv-phase1 41/44 — B14/B17/B18: XP Candy grants 0 XP; fleeing the
+#     spar pays candy (house-rules behaviour assertions).
+#   - rejuv-phase2 38/40 — A09 MAP_GROUND assignment expectation (audit:
+#     test-side proven); C01 browser parity (see below).
+#   - rejuv-phase3 56/61 — B21-B23/B32 keepsake/Sparrow Feather behaviour;
+#     C01.
+#   - rejuv-phase4 50/51 — C01 only.
+#   - rejuv-phase5 49/53 — B13-B15 parley behaviour; C01.
+#   - rejuv-phase6 42/45 — B05/B06 intro-reunion/HoF-viewer behaviour; C01.
+#   - C01 (all rejuv phases): the real-browser smoke reads public/index.html
+#     + public/game.js — the RETIRED Vercel build output — and a hardcoded
+#     /opt/meta-chromium/chrome path; it records its own skip as a FAIL.
+#     Cannot pass in CI as written; needs re-pointing at dist/ by its seat.
+#   - qa-changed-flows 51/57 then crashes — 6 stale chapter-system
+#     expectations from its @361d70b snapshot (title card, Journey menu
+#     rows, dex chapter header, petting line, sight cones), then ENOENT on
+#     the same retired public/index.html in its served-file tail.
+#
+# ALREADY IN CI ELSEWHERE (unchanged by W2): ci.yml — verify-slice,
+#   budgets-check, contamination-scan, drift-gate, gen-tables freshness,
+#   the 6 tools/api-scripts suites. pages.yml — pack-manifest, art-gate,
+#   seasons-checks (seasons also runs in `suites` above so the fleet is
+#   complete in one place). NOTE: pack-manifest REGENERATES
+#   docs/pack-manifest.md when run; the committed copy was 4 lines stale
+#   at W2 (observed, not fixed — the pages gate checks exit code only).
+#
+# EXCLUDED (with reasons — no silent skips):
+#   - tests/audit-laptop.mjs — drives a REAL Chromium (sandbox-path
+#     transport, screenshots written outside the repo). Browser coverage
+#     belongs to the CAM after-pass (audit Cluster 5 / Wave W8).
+#   - scripts/verify-live.mjs (+ .sh) — post-deploy probe against a SERVED
+#     production URL; it grades the deployed site, not a change.
+#   - scripts/font-gate.mjs — argument-taking CLI invoked BY verify-live
+#     on served bytes; no standalone mode.
+#   - scripts/audit-placement.mjs --gates mode — the strict per-town
+#     acceptance gates have known FAIL towns at baseline (Arcport,
+#     Flintridge — Wave W4's scope). The default scorer mode IS wired.
+#   - scripts/wfc-tiled.mjs — a map-generation tool, not a check.
+#   - scripts/build.mjs — the build itself; already run by ci.yml/pages.yml.
+#   - tests/{harness,migrate,pg-stub,register,resolve-hooks}.mjs — Track B
+#     support modules (imported by run.mjs), not standalone suites.
+#
+# TITLE-GUARD RATCHET DISPOSITIONS (W2 triage of the W1 queue — all 10
+# occurrences inspected in place; ALL were live-code-path literals, i.e.
+# menu-title comparisons inside driver loops whose intended branch was
+# dead while a catch-all fallback silently drove the menu — the exact
+# drift-masking class W1 fixed in campaign-smoke. Disposition for every
+# one: RESYNCED to the canonical Kin title; none kept on the ratchet;
+# RATCHET in tests/title-guard-checks.mjs is now empty and those files
+# sit under T2 zero-tolerance):
+#   hoenn-contest-checks.mjs:218  'Enter which Pokemon?' (contest pick)
+#   sinnoh-checks.mjs:1100        'Enter which Pokemon?' (contest pick)
+#   hoenn-story-checks.mjs:362    'Choose next Pokemon' (faint switch)
+#   johto-story-checks.mjs:363    'Choose next Pokemon' (faint switch)
+#   orange-climax-checks.mjs:252  'Choose next Pokemon' (faint switch)
+#   orange-story-checks.mjs:246   'Choose next Pokemon' (faint switch)
+#   qa-changed-flows.mjs:325      'Choose next Pokemon' (faint switch)
+#   rejuv-phase4-checks.mjs:317   'Choose next Pokemon' (faint switch)
+#   rejuv-phase5-checks.mjs:277   'Choose next Pokemon' (faint switch)
+#   sinnoh-story-checks.mjs:506   'Choose next Pokemon' (faint switch)
+#   Post-resync: all 8 green suites kept identical counts; rejuv-phase4
+#   50/51 and rejuv-phase5 49/53 unchanged (their reds are the unclassified
+#   behaviour failures above, not titles); title-guard 24/0.
+# =========================================================================
+
+name: checks
+on: [push, pull_request]
+
+jobs:
+  suites:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: checks fleet — game suites (hard gate)
+        run: node tests/run-checks.mjs suites
+
+  audits:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: checks fleet — audio + world audits (hard gate)
+        run: node tests/run-checks.mjs audits
+
+  track-b:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: install api deps (pinned, server-only)
+        run: npm ci --no-audit --no-fund
+      - name: install Track B test deps (tests/ is its own package)
+        working-directory: tests
+        run: npm ci --no-audit --no-fund
+      - name: Track B integration gate (PGlite, hard gate)
+        run: node tests/run-checks.mjs track-b
+
+  triage:
+    # Known-red queue: runs and prints counts on every push, never blocks.
+    # Promote a suite to the hard gate when it is green on main (see header).
+    continue-on-error: true
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: known-red triage queue (non-blocking, always reported)
+        run: node tests/run-checks.mjs triage
