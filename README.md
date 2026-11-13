@@ -1,14 +1,15 @@
 # Ash's Journey
 
 An unofficial fan-homage web game — a DS-era creature-catching adventure starring Ash
-with Pikachu as his partner. **100% original code, artwork, music, and dialogue** —
-created from scratch for this fan project.
+with Pikachu as his partner. **Original code, music, dialogue, and creature artwork** —
+created from scratch for this fan project; the world tileset and one character are
+third-party art used under CC-BY 3.0 and credited in the game's Legal screen.
 
 > **ASH'S JOURNEY**
 > *An unofficial fan homage. Not affiliated with, endorsed by, or connected to
 > Nintendo, Creatures Inc., or GAME FREAK inc.*
 >
-> Pokémon, Pikachu, and all character names are trademarks of Nintendo / Creatures Inc. /
+> Pokémon, VOLTIK, and all character names are trademarks of Nintendo / Creatures Inc. /
 > GAME FREAK inc. This is a free, non-commercial fan project made with love by fans.
 > No purchase is required or accepted. Please support the official releases.
 

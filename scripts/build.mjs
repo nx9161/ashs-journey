@@ -724,7 +724,7 @@ function shellHtml({ gameJs, inline }) {
   return '<!DOCTYPE html>\n<html lang="en">\n<head>\n<meta charset="utf-8">\n' +
     '<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">\n' +
     '<title>ASH\'S JOURNEY — An Unofficial Fan Homage</title>\n' +
-    '<meta name="description" content="Ash\'s Journey — an unofficial fan-homage creature-catching web game. 100% original code, art, and audio.">\n' +
+    '<meta name="description" content="Ash\'s Journey — an unofficial fan-homage creature-catching web game. Original code, audio, and creature art; world tiles by Gassasin (CC-BY 3.0), credited in-game.">\n' +
     '<style>' + FONT_FACE_CSS + SHELL_CSS + '</style>\n</head>\n<body>\n' +
     '<div id="stage"><div id="hudband"></div><div id="screenwrap"><canvas id="game"></canvas></div><div id="ctlband"></div></div>\n<div id="ui"></div>\n' +
     scriptTag + '\n</body>\n</html>\n';
