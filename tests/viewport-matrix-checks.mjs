@@ -31,6 +31,15 @@ for (const rel of ['dist/standalone.html', 'personal/index.html']) {
     html.includes('#hudband .hudstrip{position:static') &&
     html.includes('#hudband.nohud .hudchips') &&
     html.includes('#hudband.inbattle .hudchips'));
+  // W8-F1 pin: at 844x390 the stacked chips column starved #screenwrap
+  // below the 256px canvas, which overflowed up into the dexchip. The
+  // landscape band must span the full top row with the chips in a row,
+  // the D-pad flank below the band, and the mood pip un-hidden in band.
+  ok(rel + ': W8-F1 landscape band geometry (full-row band, chips row, pip in band)',
+    html.includes('body.landscape #hudband{grid-column:1/4') &&
+    html.includes('body.landscape #hudband .hudchips{flex-direction:row') &&
+    html.includes('body.landscape #hudband .moodpip{display:flex') &&
+    html.includes('body.landscape .dpad{grid-column:1;grid-row:2/4'));
 }
 // Source tripwire: no pre-CAM viewport request may return to the layout code.
 const mainSrc = fs.readFileSync(path.join(ROOT, 'src/game/main.mjs'), 'utf8');
