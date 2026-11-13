@@ -577,6 +577,25 @@ T7_KIND_DEFS.forEach(([kind], i) => {
   TILE_CHARS[ch] = kind;
 });
 export const T7_PROP_KINDS = T7_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
+// ---- Wave T9 (Bramble build): the Warden's lure post ----
+// One new kind continuing the block at idx 570 (T7 ends at 569;
+// U+203A, verified free in TILE_CHARS and unused by every map row).
+// Class 'prop': a solid object composited over the ground it stands
+// on (art.mjs resolver). The gate post at the Preserve gatehouse's
+// east corner, with the carved lure of tale_fuchsia hanging from
+// its cross-arm — the BACKSTORY-SYNC-AUDIT row made visible.
+// Authored art: assets/sprites/pix/tiles/tile-prop-lurepost.pix
+// (Wave T9 register item in WAVE-T9-BRAMBLE-PLAN.md Part 4).
+export const T9_KIND_DEFS = [
+  ['lurepost', 'prop'],
+];
+export const T9_KIND_CHARS = {};
+T9_KIND_DEFS.forEach(([kind], i) => {
+  const ch = String.fromCodePoint(0x1E00 + 570 + i);
+  T9_KIND_CHARS[kind] = ch;
+  TILE_CHARS[ch] = kind;
+});
+export const T9_PROP_KINDS = T9_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
 export const SINNOH_TOWN_GROUND_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg);
 export const SINNOH_TOWN_GROUND2_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg2);
 // TX-3: the 8 gym exteriors by town (original type-accent motifs).
