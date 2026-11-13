@@ -294,8 +294,8 @@ export const MAPS4 = {
       '<<<<<<<<<<',
     ],
     warps: [
-      { x: 4, y: 5, to: { map: 'celadon', x: 3, y: 4 } },
-      { x: 5, y: 5, to: { map: 'celadon', x: 3, y: 4 } },
+      { x: 4, y: 5, to: { map: 'celadon', x: 6, y: 4 } },
+      { x: 5, y: 5, to: { map: 'celadon', x: 6, y: 4 } },
     ],
     signs: [],
     npcs: [],
@@ -313,8 +313,8 @@ export const MAPS4 = {
       '<<<<<<<<<<',
     ],
     warps: [
-      { x: 4, y: 5, to: { map: 'celadon', x: 13, y: 4 } },
-      { x: 5, y: 5, to: { map: 'celadon', x: 13, y: 4 } },
+      { x: 4, y: 5, to: { map: 'celadon', x: 17, y: 4 } },
+      { x: 5, y: 5, to: { map: 'celadon', x: 17, y: 4 } },
     ],
     signs: [],
     npcs: [],
