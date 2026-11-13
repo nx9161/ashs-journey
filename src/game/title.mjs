@@ -1,4 +1,4 @@
-// title.mjs — boot disclaimer card (GC verbatim, §2a) + title screen.
+// title.mjs — boot disclaimer card (W-SCRUB original-work wording) + title screen.
 // The legal card renders in the shell before any interactive element and is not
 // skippable-in-one-tap on first boot (readable dwell >= 3 seconds).
 // Title flow (UI v2, Platinum standard): logo plate + framed keyart + a
@@ -6,28 +6,28 @@
 // appears only after Start/A (or a tap, which injects 'a') is pressed.
 
 export const DISCLAIMER_BOOT = [
-  "ASH'S JOURNEY",
-  'An unofficial fan homage. Not affiliated with, endorsed by, or connected to',
-  'Nintendo, Creatures Inc., or GAME FREAK inc.',
+  "KIAN'S JOURNEY",
+  'An original work. Not affiliated with, endorsed by, or connected to',
+  'any existing game franchise or its owners.',
   '',
-  'Pok\u00e9mon, VOLTIK, and all character names are trademarks of',
-  'Nintendo / Creatures Inc. / GAME FREAK inc.',
-  'This is a free, non-commercial fan project made with love by fans.',
-  'No purchase is required or accepted. Please support the official releases.',
+  'VOLTIK, and all names and characters in this game, are original',
+  'creations of this project.',
+  'This is a free, non-commercial project made with love by its makers.',
+  'No purchase is required or accepted.',
 ];
 
 export const DISCLAIMER_CREDITS = [
   'LEGAL',
   '',
-  'This game is an unofficial fan work and is not affiliated with, endorsed by,',
-  'sponsored by, or connected to Nintendo Co., Ltd., Creatures Inc., or',
-  'GAME FREAK inc. Pok\u00e9mon and all related names, characters, and indicia are',
-  'trademarks of their respective owners.',
+  'This game is an original work and is not affiliated with, endorsed by,',
+  'sponsored by, or connected to any existing game franchise or its owners.',
+  'All names, characters, and indicia in this game are original creations',
+  'of this project, except where credited below.',
   '',
   'All code, music, sound effects, and dialogue in this game are original',
-  'creations made for this fan project, as is its artwork except where',
+  'creations made for this project, as is its artwork except where',
   'credited below; no game assets were copied or extracted from any',
-  'official release.',
+  'other game.',
   '',
   'Third-party art: tileset and character by Damian',
   'Gasinski aka Gassasin',
@@ -50,13 +50,13 @@ export const DISCLAIMER_CREDITS = [
   'copyright-reporting process.',
 ];
 
-export const GAME_TITLE = "ASH'S JOURNEY";
-export const GAME_SUBTITLE = 'An Unofficial Fan Homage';
+export const GAME_TITLE = "KIAN'S JOURNEY";
+export const GAME_SUBTITLE = 'An Original Kin-Taming Adventure';
 // ADR-012: personal-edition marker. The build substitutes the EDITION_MARKER
 // compile-time token with a quoted JS string literal ("NAMAN'S EDITION" for the
 // personal target, '' for every other target — guest and vercel show nothing).
 // Original text, subtle: a small gold ribbon drawn under the subtitle on the
-// title screen. The GC-verbatim disclaimers above stay byte-identical.
+// title screen. The disclaimers above are the W-SCRUB original-work wording.
 export const EDITION_MARKER = /*__EDITION_MARKER__*/;
 
 // ---- Title recomposition helpers (Seat B) ----
@@ -160,29 +160,28 @@ function dawnSky(w, h) {
   return cv;
 }
 
-// P1/A5: legal card renders at >=14px. The GC-verbatim DISCLAIMER_BOOT wording
-// is preserved word-for-word; only the line-wrap changes, paginated across the
+// P1/A5: legal card renders at >=14px. The DISCLAIMER_BOOT wording is
+// preserved word-for-word; only the line-wrap changes, paginated across the
 // 3s dwell (page flips at 1.5s, still non-skippable).
 const LEGAL_PAGES = [
   [
-    "ASH'S JOURNEY",
-    'An unofficial fan homage.',
+    "KIAN'S JOURNEY",
+    'An original work.',
     'Not affiliated with, endorsed',
-    'by, or connected to Nintendo,',
-    'Creatures Inc., or',
-    'GAME FREAK inc.',
+    'by, or connected to any',
+    'existing game franchise',
+    'or its owners.',
   ],
   [
-    'Pok\u00e9mon, VOLTIK, and all',
-    'character names are trademarks',
-    'of Nintendo / Creatures Inc. /',
-    'GAME FREAK inc.',
+    'VOLTIK, and all names and',
+    'characters in this game, are',
+    'original creations of',
+    'this project.',
     'This is a free, non-commercial',
-    'fan project made with love',
-    'by fans.',
+    'project made with love',
+    'by its makers.',
     'No purchase is required or',
-    'accepted. Please support the',
-    'official releases.',
+    'accepted.',
   ],
 ];
 
@@ -451,7 +450,7 @@ export class BootScene {
     const page = this.t >= 1.5 ? 1 : 0; // P1/A5: paginated 14px legal copy
     let y = 18;
     for (const line of LEGAL_PAGES[page]) {
-      const isTitle = page === 0 && line === "ASH'S JOURNEY";
+      const isTitle = page === 0 && line === "KIAN'S JOURNEY";
       if (isTitle) {
         r.text(line, w / 2, y, { size: 14, bold: true, align: 'center', color: '#e8c832' });
       } else {

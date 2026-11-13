@@ -1,21 +1,21 @@
-# Ash's Journey
+# Kian's Journey
 
-An unofficial fan-homage web game — a DS-era creature-catching adventure starring Ash
-with Pikachu as his partner. **Original code, music, dialogue, and creature artwork** —
-created from scratch for this fan project; the world tileset and one character are
+An original web game — a DS-era creature-catching adventure starring Kian
+with VOLTIK as his partner. **Original code, music, dialogue, and creature artwork** —
+created from scratch for this project; the world tileset and one character are
 third-party art used under CC-BY 3.0 and credited in the game's Legal screen.
 
-> **ASH'S JOURNEY**
-> *An unofficial fan homage. Not affiliated with, endorsed by, or connected to
-> Nintendo, Creatures Inc., or GAME FREAK inc.*
+> **KIAN'S JOURNEY**
+> *An original work. Not affiliated with, endorsed by, or connected to
+> any existing game franchise or its owners.*
 >
-> Pokémon, VOLTIK, and all character names are trademarks of Nintendo / Creatures Inc. /
-> GAME FREAK inc. This is a free, non-commercial fan project made with love by fans.
-> No purchase is required or accepted. Please support the official releases.
+> VOLTIK, and all names and characters in this game, are original creations
+> of this project. This is a free, non-commercial project made with love by
+> its makers. No purchase is required or accepted.
 
 - Free, non-commercial, personal use only. No ads, no payments, no donations, no tips.
 - No analytics, no tracking, no network calls (guest build works fully offline).
-- Repo is **private** by design (General Counsel ruling — this is Nintendo-IP fan work).
+- Repo is **private** by design.
 
 ## Live Demo
 
