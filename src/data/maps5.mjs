@@ -716,8 +716,8 @@ export const MAPS5 = {
       "~~‥ẟ,,,.....”..ẟ.Ẅẟẟẟ‗ẞẞ~~",
       "~~ẞ‘,,,..........Ẅẟ‖ẟẟ’ẞ~~",
       "~~ẞ‘Ẅ......ẘẟ....Ẉ‗ẞ‘ẟ‗ẞ~~",
-      "~~ẞ‘Ẇ............ẟẟ―ẟẟ‗ẞ~~",
-      "~~‥ẟ,,,....oẟ....nẟ,,,‗ẞ~~",
+      "~~ẞ‘Ẇ.........deefẟ―ẟẟ‗ẞ~~",
+      "~~‥ẟ,,,....oẟ.P12Pẟ,,,‗ẞ~~",
       "~~ẞ‘,,,....Ẉẟ....ẟẟ,,,‗ẞ~~",
       "~~―ẟẟ......ẟẟ....‖‖‖‖‖‛ẞ~~",
       "~~..............Sẞẞẞẞẞẞẞ~~",
@@ -806,7 +806,35 @@ export const MAPS5 = {
           "x": 13,
           "y": 14
         }
-      }
+      },
+      {
+        "x": 15,
+        "y": 12,
+        "to": {
+          "map": "mart",
+          "x": 5,
+          "y": 5
+        },
+        "via": {
+          "map": "navel",
+          "x": 15,
+          "y": 13
+        }
+      },
+      {
+        "x": 16,
+        "y": 12,
+        "to": {
+          "map": "mart",
+          "x": 6,
+          "y": 5
+        },
+        "via": {
+          "map": "navel",
+          "x": 16,
+          "y": 13
+        }
+      },
     ],
     "signs": [
       {
@@ -851,6 +879,28 @@ export const MAPS5 = {
       }
     ],
     "npcs": [
+      {
+        "x": 3,
+        "y": 5,
+        "name": "MART CLERK",
+        "art": "clerk",
+        "skin": "#f0c8a0",
+        "shirt": "#c05a3a",
+        "pants": "#2a2a3a",
+        "hair": "#4a3a2a",
+        "dialogue": [
+          "Pomelo Mart — peak-tested stock for the climb and the crossing."
+        ],
+        "mart": {
+          "stock": [
+            "greatball",
+            "ultraball",
+            "hyperpotion",
+            "fullheal",
+            "revive"
+          ]
+        }
+      },
       {
         "x": 5,
         "y": 15,
@@ -1020,9 +1070,9 @@ export const MAPS5 = {
     "rows": [
       "~~~~~~~~~~~~~~~~~~~~~~~~~~",
       "~~~~~~~~~~~~~~~~~~~~~~~~~~",
-      "~~‖jklm‗ẞẞẄẞẘ.‟ẞẞẞẞẞẞẞẞẞ~~",
-      "~~ẞAJKAẈ――ẟ―ẟ..――――‥’ẞ ẞ~~",
-      "~~―............ẟẟẟ‗ẞ‘―‗ẞ~~",
+      "~~‖jklm‗ẞẞẄẞẘ.deefẞẞẞẞẞẞ~~",
+      "~~ẞAJKAẈ――ẟ―ẟ.P12P―‥’ẞ ẞ~~",
+      "~~―..............ẟ‗ẞ‘―‗ẞ~~",
       "~~„„„„.............”...‬~~",
       "~~ẞẞẞẞ†ẟẟ..ạạ..ạạẟẟẟẄẟ‗ẞ~~",
       "~~ẞ‚――.ẟẟ..ạ....ạẟẟ‖ẟ‖‗ẞ~~",
@@ -1081,7 +1131,35 @@ export const MAPS5 = {
           "x": 13,
           "y": 14
         }
-      }
+      },
+      {
+        "x": 15,
+        "y": 3,
+        "to": {
+          "map": "mart",
+          "x": 5,
+          "y": 5
+        },
+        "via": {
+          "map": "moro",
+          "x": 15,
+          "y": 4
+        }
+      },
+      {
+        "x": 16,
+        "y": 3,
+        "to": {
+          "map": "mart",
+          "x": 6,
+          "y": 5
+        },
+        "via": {
+          "map": "moro",
+          "x": 16,
+          "y": 4
+        }
+      },
     ],
     "signs": [
       {
@@ -1101,6 +1179,29 @@ export const MAPS5 = {
       }
     ],
     "npcs": [
+      {
+        "x": 3,
+        "y": 5,
+        "name": "MART CLERK",
+        "art": "clerk",
+        "skin": "#f0c8a0",
+        "shirt": "#c05a3a",
+        "pants": "#2a2a3a",
+        "hair": "#4a3a2a",
+        "dialogue": [
+          "Bergamot Mart — island stock, ferry-proof and ruin-adjacent."
+        ],
+        "mart": {
+          "stock": [
+            "pokeball",
+            "greatball",
+            "superpotion",
+            "hyperpotion",
+            "revive",
+            "antidote"
+          ]
+        }
+      },
       {
         "x": 7,
         "y": 13,
@@ -2278,9 +2379,9 @@ export const MAPS5 = {
     "rows": [
       "~~~~~~~~~~~~~~~~~~~~~~~~~~~~",
       "~~~~~~~~~~~~~~~~~~~~~~~~~~~~",
-      "~~ẞghhiẞ‘jklm..abcẞẞ…ẞẞẞẛẞ~~",
-      "~~ẞxyzx―ẟAJKAẟ.rstẞ‚ẟ――‥‗ẞ~~",
-      "~~ẞ†..............―Fẟẟ‗ẞ…ẞ~~",
+      "~~ẞghhiẞ‘jklm..abcẞdeefẞẛẞ~~",
+      "~~ẞxyzx―ẟAJKAẟ.rstẞP12P‥‗ẞ~~",
+      "~~ẞ†..............―F..‗ẞ…ẞ~~",
       "~~‬..................„.‬.”~~",
       "~~ẞ†..ẟ....ẟ.ẟ..oẟẟẈ‗ẞ…ẞ#.~~",
       "~~”...#....ẚ.ẚẚ.Ẅẟẟẟẟ―ẘ’ẞ†~~",
@@ -2413,7 +2514,35 @@ export const MAPS5 = {
           "x": 4,
           "y": 4
         }
-      }
+      },
+      {
+        "x": 20,
+        "y": 3,
+        "to": {
+          "map": "mart",
+          "x": 5,
+          "y": 5
+        },
+        "via": {
+          "map": "shamouti",
+          "x": 20,
+          "y": 4
+        }
+      },
+      {
+        "x": 21,
+        "y": 3,
+        "to": {
+          "map": "mart",
+          "x": 6,
+          "y": 5
+        },
+        "via": {
+          "map": "shamouti",
+          "x": 21,
+          "y": 4
+        }
+      },
     ],
     "signs": [
       {
@@ -2435,9 +2564,36 @@ export const MAPS5 = {
         "x": 3,
         "y": 14,
         "text": "SANCTUM ISLAND — South: AMBER SEA — NORTH · West: EMBER ISLE · East: STORM ISLE · North: RIME ISLE."
-      }
+      },
+      {
+        "x": 19,
+        "y": 5,
+        "text": "SANCTUM MART — Festival stock for the shrine road, at the east end of the shore."
+      },
     ],
     "npcs": [
+      {
+        "x": 3,
+        "y": 5,
+        "name": "MART CLERK",
+        "art": "clerk",
+        "skin": "#f0c8a0",
+        "shirt": "#c05a3a",
+        "pants": "#2a2a3a",
+        "hair": "#4a3a2a",
+        "dialogue": [
+          "Sanctum Mart — festival stock, blessed by geography."
+        ],
+        "mart": {
+          "stock": [
+            "ultraball",
+            "hyperpotion",
+            "maxpotion",
+            "fullrestore",
+            "revive"
+          ]
+        }
+      },
       {
         "x": 4,
         "y": 15,

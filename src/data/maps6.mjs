@@ -36,9 +36,9 @@ export const MAPS6 = {
     "rows": [
       "ắắắẰắắắắắắẰắắắắắắẰắắắắắắậắắắ",
       "ắậậậậFậậậậoậậẅậậậậậậậậậậậậậắ",
-      "ắậậdeeeefậậjklmậậẳẳẳoậậậậậậắ",
-      "ắậậZZ45ZZậậAJKAậoẴsẴậậẤậẰậậắ",
-      "ắậẮẮẮẮẮẮẮẮẮẮẮẮẮẮẮẮẮẮẮoậậậậậắ",
+      "ắậậdeeeefậậjklmậậẳẳẳodeefậậắ",
+      "ắậậZZ45ZZậậAJKAậoẴsẴậP12Pậậắ",
+      "ắậẮẮẮẮẮẮẮẮẮẮẮẮẮẮẮẮẮẮẮẮẮẮậoậắ",
       "ắậSẮẮẮẮẮẮẮẮẮẮẮẮẮẮẮẮẮẮẮẮẮẮẮẮắ",
       "ắậẮậậậẮẮẮẮẮẮẮẮẮẮẮẮẮậẤậậậậậẮắ",
       "ắậẮậnậẮẮậẮẮẮẮẮẮẮẮậậẮậFậậậậẮắ",
@@ -126,7 +126,35 @@ export const MAPS6 = {
           "x": 1,
           "y": 9
         }
-      }
+      },
+      {
+        "x": 22,
+        "y": 3,
+        "to": {
+          "map": "mart",
+          "x": 5,
+          "y": 5
+        },
+        "via": {
+          "map": "newbark",
+          "x": 22,
+          "y": 4
+        }
+      },
+      {
+        "x": 23,
+        "y": 3,
+        "to": {
+          "map": "mart",
+          "x": 6,
+          "y": 5
+        },
+        "via": {
+          "map": "newbark",
+          "x": 23,
+          "y": 4
+        }
+      },
     ],
     "signs": [
       {
@@ -142,8 +170,36 @@ export const MAPS6 = {
       {"x": 7, "y": 14, "text": "GALEFIELD TOWN — East: ROUTE 29."},
       {"x": 20, "y": 10, "text": "GALEFIELD TOWN — East: ROUTE 29."},
       {"x": 1, "y": 9, "text": "GALEFIELD TOWN — East: ROUTE 29."},
+      {
+        "x": 24,
+        "y": 4,
+        "text": "GALEFIELD MART — Stocked for the road ahead, at the east end of town."
+      },
     ],
     "npcs": [
+      {
+        "x": 3,
+        "y": 5,
+        "name": "MART CLERK",
+        "art": "clerk",
+        "skin": "#f0c8a0",
+        "shirt": "#c05a3a",
+        "pants": "#2a2a3a",
+        "hair": "#4a3a2a",
+        "dialogue": [
+          "Galefield Mart — stocked for the road ahead."
+        ],
+        "mart": {
+          "stock": [
+            "pokeball",
+            "greatball",
+            "potion",
+            "superpotion",
+            "antidote",
+            "awakening"
+          ]
+        }
+      },
       {
         "x": 12,
         "y": 15,
@@ -6583,9 +6639,9 @@ export const MAPS6 = {
     "rows": [
       "ủủủỨủủủủủủỨủủủủủủỨủủủủủủụủủủ",
       "ủụụụụụụụụụụụụụụụụỨụụụụụụụụụủ",
-      "ủụụjklmụụứứứứụụừừừụụụụụụụụụủ",
-      "ủỨụAJKARụUVYUụụỬsỬụụụụụụụụụủ",
-      "ủụRỦỦỦỦỦỦỦỦỦỦỦỦỦỦỦụụụụụụụụụủ",
+      "ủụụjklmụụứứứứụụừừừụụụụdeefụủ",
+      "ủỨụAJKARụUVYUụụỬsỬụụụụP12Pụủ",
+      "ủụRỦỦỦỦỦỦỦỦỦỦỦỦỦỦỦỦỦỦỦỦỦỦụụủ",
       "ủụSỦỦỦỦỦỦỦỦỦỦỦỦỦỦỦỨụụụụụụụụủ",
       "ủụỦỦụỦRẄỦụỦỦỦụỦỦỦỦẄụnụụụụụụủ",
       "ủnRỦụỦỦụỦụỦỦỦụỦỦỦỦụỨụoụụụụụủ",
@@ -6673,7 +6729,35 @@ export const MAPS6 = {
           "x": 1,
           "y": 9
         }
-      }
+      },
+      {
+        "x": 23,
+        "y": 3,
+        "to": {
+          "map": "mart",
+          "x": 5,
+          "y": 5
+        },
+        "via": {
+          "map": "cianwood",
+          "x": 23,
+          "y": 4
+        }
+      },
+      {
+        "x": 24,
+        "y": 3,
+        "to": {
+          "map": "mart",
+          "x": 6,
+          "y": 5
+        },
+        "via": {
+          "map": "cianwood",
+          "x": 24,
+          "y": 4
+        }
+      },
     ],
     "signs": [
       {
@@ -6703,6 +6787,29 @@ export const MAPS6 = {
       }
     ],
     "npcs": [
+      {
+        "x": 3,
+        "y": 5,
+        "name": "MART CLERK",
+        "art": "clerk",
+        "skin": "#f0c8a0",
+        "shirt": "#c05a3a",
+        "pants": "#2a2a3a",
+        "hair": "#4a3a2a",
+        "dialogue": [
+          "Tidewall Mart — crossing stock. The whirlpools charge extra; we don’t."
+        ],
+        "mart": {
+          "stock": [
+            "greatball",
+            "ultraball",
+            "hyperpotion",
+            "fullheal",
+            "revive",
+            "superpotion"
+          ]
+        }
+      },
       {
         "x": 11,
         "y": 15,
