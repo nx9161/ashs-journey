@@ -105217,6 +105217,42 @@ const ART = {
     "...ddddddddd....",
     "................",
   ] },
+  "tile-prop-boat": { w: 16, h: 16, pal: {"k":"#3e2c1c","H":"#8a6a42","W":"#a8825a","I":"#6a4a2e","B":"#c9a06a","f":"#dceefb"}, rows: [
+    "................",
+    ".......kk.......",
+    "......kHHk......",
+    ".....kHHHHk.....",
+    ".....kWIIWk.....",
+    "....kWIIIIWk....",
+    "....kWBBBBWk....",
+    "....kWIIIIWk....",
+    "....kWIIIIWk....",
+    "....kWBBBBWk....",
+    "....kWIIIIWk....",
+    ".....kWIIWk.....",
+    ".....kkkkkk.....",
+    "..ff........ff..",
+    "................",
+    "................",
+  ] },
+  "tile-prop-chalkmap": { w: 16, h: 16, pal: {"k":"#202028","w":"#71523d","c":"#3a4149","h":"#e8e8e0","p":"#5a3a24","s":"#4a4a3a"}, rows: [
+    "................",
+    ".kkkkkkkkkkkkkk.",
+    ".kwwwwwwwwwwwwk.",
+    ".kwccccccccccwk.",
+    ".kwchhcchcchcwk.",
+    ".kwchhcchcchcwk.",
+    ".kwhhhhhhhhhhwk.",
+    ".kwccchcchcccwk.",
+    ".kwccchcchcccwk.",
+    ".kwchhhcchhhcwk.",
+    ".kwccccchccccwk.",
+    ".kwhchchchchcwk.",
+    ".kwwwwwwwwwwwwk.",
+    ".kkkkkkkkkkkkkk.",
+    ".....pp..pp.....",
+    "....ssssssss....",
+  ] },
 };
 const ART_META = {
   "families": [
@@ -111586,6 +111622,10 @@ function resolveTileLayers(cache, kind, x, y, kindAt, t, phase, mapId) {
     case 'stall': case 'haycart': case 'sundial': case 'birdbath':
     case 'tub': case 'sacks': case 'pottedtree': case 'waterpump':
     case 'gatepost': case 'gatearch': case 'routearch': case 'vinearch':
+    // Wave FIX-PROP: Dawnwick's boat + chalkmap composite over their
+    // ground the same way (their T1 registration stopped at TILE_ART).
+    case 'boat':
+    case 'chalkmap':
     // Wave T3: Marlow's tortoise composites over its lawn the same way.
     case 'tortoise': {
       // Object tiles carry transparent surrounds (Wave 1): lay the ground
