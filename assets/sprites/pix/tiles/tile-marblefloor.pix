@@ -1,0 +1,25 @@
+# Wave W-DIFF: marblefloor — pale marble slab street of Lastlight (Marble Slab & Parapet kit). Full-bleed, walkable street material.
+PIX tile-marblefloor 16 16
+fffffffbdefcfffb
+faaadaabfeaaaaab
+daacaaabeaaaadab
+faaaaaabfdaacaab
+faaaadabcaaaaaab
+fdaacaebfaaaaadb
+caaaaeabfadaacab
+bbbbbbbbbbbbbbbb
+ffdfecfbfffffffb
+fcaeaaabfaadaacb
+faaeaaabfacaaaab
+faedaacbfaaaaaab
+fecaaaabfaaadaab
+feaaaaabdaacaaab
+eaaadaabfaaaaaab
+bbbbbbbbbbbbbbbb
+PAL
+a #c6c6cd marble-slab
+b #a7a7b1 marble-joint
+c #d4d4db marble-cloud
+d #bdbdc6 marble-speck
+e #9893ad marble-vein-indigo
+f #dcdce2 marble-lit

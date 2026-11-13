@@ -1,0 +1,24 @@
+# Wave W-DIFF: settfloor — basalt sett street of Cragmoor (Basalt Sett & Drake-Gable kit). Full-bleed, walkable street material.
+PIX tile-settfloor 16 16
+cacacdeccacdacac
+aebaadaaaaadebaa
+aaaaadaebaadaaaa
+dddddddddddddddd
+ccdcaccecdaccaca
+aadbaaaaadaaaeba
+aadaaaaaedaaaaaa
+dddddddddddddddd
+accacadceccadcac
+aaaebadaaaaadaeb
+aaaaaadaaebadaaa
+dddddddddddddddd
+cacdacaccedcacca
+aaadebaaaadaaaae
+baadaaaaaadbaaaa
+dddddddddddddddd
+PAL
+a #55555f basalt-sett
+b #43434c basalt-sett-dark
+c #686873 basalt-sett-lit
+d #2e2e35 basalt-mortar
+e #7a7a85 basalt-chip

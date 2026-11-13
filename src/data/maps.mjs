@@ -423,6 +423,12 @@ export const WALKABLE = new Set(['.', ',', 'D', 'E', 'C', 'F', 'J', 'K', '1', '2
   // T6_KIND_DEFS) is walkable — a ground decal on the Fan Club
   // porch, swapped 1:1 from a walkable boardwalk cell.
   ...[566]
+    .map((i) => String.fromCodePoint(0x1E00 + i)),
+  // Wave W-DIFF: the kit-identity street floors (settfloor /
+  // marblefloor — WD_KIND_DEFS idx 577,578 at U+1E00+577, tiles.mjs)
+  // are walkable street material, swapped 1:1 from the walkable '.'
+  // path char in Cragmoor / Lastlight, so floor stays floor.
+  ...[577, 578]
     .map((i) => String.fromCodePoint(0x1E00 + i))]);
 
 // Trainer definitions for the slice.

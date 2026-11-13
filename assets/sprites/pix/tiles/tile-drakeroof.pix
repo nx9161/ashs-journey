@@ -1,0 +1,24 @@
+# Wave W-DIFF: drakeroof — steep drake-gable shingle roof of Cragmoor (Basalt Sett & Drake-Gable kit). Solid wall-class roof tile.
+PIX tile-drakeroof 16 16
+acccacccacccaccc
+aaaaaaaeaaaaaaaa
+aaadaaadaeadaaad
+dddddddddddddddd
+ccacccacccacccac
+aaaaaaaaaaaaaaae
+edaaadaaadaaadaa
+dddddddddddddddd
+acccecccacccaccc
+aaaaaaeaaaaaaaaa
+aaadaaadeaadaaad
+dddddddddddddddd
+ccacccacccacccac
+aaaaaaaaaaaaaaea
+adaaadaaadaaadaa
+dddddddddddddddd
+PAL
+a #39434c drake-shingle
+b #2b333a drake-shingle-deep
+c #55626c drake-shingle-lit
+d #20262c drake-shadow
+e #5d7263 drake-moss

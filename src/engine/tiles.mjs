@@ -680,6 +680,38 @@ T23_KIND_DEFS.forEach(([kind], i) => {
   TILE_CHARS[ch] = kind;
 });
 export const T23_PROP_KINDS = T23_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
+// ---- Wave W-DIFF (town distinctiveness pilot): the first two KIT-LEVEL
+// identity kinds pairs ----
+// Four new kinds continuing the block at idx 577-580 (T17 ends at 574;
+// idx 575 is reserved by T23's notchpost on its own branch and 576 is
+// held as a merge buffer; U+2041/U+2042/U+2043/U+2044, verified free in
+// TILE_CHARS, unused by every map row, trim-stable single code units).
+// Owner ruling 2026-11-13: "Every town kit should be different" — these
+// kinds are the pilot of the kit-level identity layer specified in
+// muse-directive/W-DIFF-AUDIT.md Phase B: Cragmoor (blackthorn) gets the
+// Basalt Sett & Drake-Gable kit (settfloor streets, drakeroof house
+// roofs), Lastlight (silvertown) gets the Marble Slab & Parapet kit
+// (marblefloor streets, parapetroof house roofs). Floors are full-bleed
+// walkable street materials (registered per town in the placement
+// audit's STREET_REGISTRY, W4 precedent); roofs are solid wall-class
+// tiles swapped onto house-stamp roof cells only — footprints, doors
+// and warps untouched. Authored art:
+// assets/sprites/pix/tiles/tile-settfloor.pix, tile-marblefloor.pix,
+// tile-drakeroof.pix, tile-parapetroof.pix.
+export const WD_KIND_DEFS = [
+  ['settfloor', 'floor'],
+  ['marblefloor', 'floor'],
+  ['drakeroof', 'wall'],
+  ['parapetroof', 'wall'],
+];
+export const WD_KIND_CHARS = {};
+WD_KIND_DEFS.forEach(([kind], i) => {
+  const ch = String.fromCodePoint(0x1E00 + 577 + i);
+  WD_KIND_CHARS[kind] = ch;
+  TILE_CHARS[ch] = kind;
+});
+export const WD_FLOOR_KINDS = WD_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
+export const WD_WALL_KINDS = WD_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
 export const SINNOH_TOWN_GROUND_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg);
 export const SINNOH_TOWN_GROUND2_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg2);
 // TX-3: the 8 gym exteriors by town (original type-accent motifs).

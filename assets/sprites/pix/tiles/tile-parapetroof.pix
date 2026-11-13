@@ -1,0 +1,24 @@
+# Wave W-DIFF: parapetroof — flat parapet roof of Lastlight (Marble Slab & Parapet kit). Solid wall-class roof tile.
+PIX tile-parapetroof 16 16
+cccccccccccccccc
+aaaaaaaaaaaaaaaa
+bbbbbbbbbbbbbbbb
+aaaaaaabaaeaaaab
+aeaaaaabaaaaaaab
+aaaaaaabaaaeaaab
+aaeaaaabaaaaaaab
+aaaaaaabaaaaeaab
+aaaeaaabaaaaaaab
+aaaaaaabaaaaaeab
+aaaaeaabaaaaaaab
+aaaaaaabaaaaaaeb
+aaaaaeabaaaaaaab
+bbbbbbbbbbbbbbbb
+dddddddddddddddd
+dddddddddddddddd
+PAL
+a #b9b9c1 parapet-slab
+b #8f8f99 parapet-trim
+c #d8d8df parapet-cap-lit
+d #76767f parapet-shadow
+e #cbcbd3 parapet-cloud
