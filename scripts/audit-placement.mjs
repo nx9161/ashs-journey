@@ -753,6 +753,36 @@ export const STREET_REGISTRY = { vermilion: ['boardwalk'], blackthorn: ['settflo
 // classifier gains 'shrineroof' on the same kit-roof
 // terms.
 // (Register: WAVE-T64-SANCTUM-PLAN.md §5/§7.)
+// T65 extension (SIXTY-THIRD documented exception in the
+// guard; the parallel WAVE T64 Sanctum claim held #62 —
+// the two landed in order at merge and the Director
+// renumbered this one to #63, so the registry order is
+// …pummelo, shamouti, frontierhub): frontierhub registers
+// 'trialfloor' (Trial Bronze & Flecked Sandstone), the
+// Trial Grounds hub's own flecked sandstone street, on
+// the same one-material one-town terms. frontierhub
+// shipped its defects quiet: its gates already PASS and
+// it has no tg2 anywhere — but its WHOLE street graph
+// was the generic path kind, ALL NINE of its sign
+// records stood invisible (zero sign tiles on the hub),
+// the Tower shared its roof-terra kind with the Dome +
+// Palace, and the MART CLERK stood orphaned at (3,5)
+// on a flower tile. The wave converts the street graph
+// 1:1 in trialfloor, crowns the Tower in the
+// standing-seam bronze trialroof (breaking the
+// roof-terra share), tiles all eight remaining sign
+// records, stands the streakboard on the town-sign
+// record's own cell (23,10) and the trialbanner at the
+// pier head (20,19), and re-seats the orphaned MART
+// CLERK (3,5) -> (24,13). All ten facility interiors,
+// every warp, every sign text and every other post
+// stay byte-for-byte; no tale exists for the Grounds
+// and none was invented. The pin STAYS pass 1 — only
+// the strict/fabric means move, 0.9829 -> 0.9811, the
+// measured price of the clerk re-seat and the two DIRS
+// sign tilings. The BUILD classifier gains 'trialroof'
+// on the same kit-roof terms.
+// (Register: WAVE-T65-TRIALGROUNDS-PLAN.md §5/§7.)
 export function tiersFor(id, tiers) {
   const extra = STREET_REGISTRY[id];
   if (!extra || !extra.length) return tiers;
