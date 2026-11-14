@@ -1,0 +1,24 @@
+# Wave T49 (Bridgeport kit): harbourbell — the ferry bell: a brass bell on an iron harbour post with its rope, rung for the crossings, seated at (16,12) on the pier's land side beside the shipped crates (15,12) — the harbour sign's own beat made dressing: 'The ferry captain keeps the long crossings at the pier.' Fully opaque: the town grass is baked in (measured #0d8420, tg-canalave's rendered pure flat). (NO-SAME-KIT law; WAVE-T49-BRIDGEPORT-PLAN.md §5.)
+PIX tile-prop-harbourbell 16 16
+gggggggggggggggg
+gggggggggggggggg
+gggggiiiiiiigggg
+ggggggiigiiggggg
+gggggggBBggggggg
+ggggggBbbBgggggg
+ggggggBbbBgggggg
+gggggggBBggggggg
+ggggggibiggggggg
+gggggggiiggggggg
+gggggggiiigggggg
+gggggggiiigggggg
+ggggggissigggggg
+ggggggsssssggggg
+gggggggggggggggg
+gggggggggggggggg
+PAL
+g #0d8420 town grass (measured tg-canalave flat)
+i #3a4149 post iron
+b #a87c28 bell shade
+B #d8a83c brass bell
+s #5a6773 base stone

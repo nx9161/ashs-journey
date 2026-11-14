@@ -1,0 +1,25 @@
+# Wave T49 (Bridgeport kit): trussfloor — the IRON TRUSS DECK of Bridgeport's one bridge: dark iron deck plates crossed by two truss chords with diagonal braces and rivets. The town sign's own words made deck: 'split by its canal and joined by one iron bridge'. Worn only by the shipped span's four boardwalk cells (21,8),(22,8),(21,9),(22,9); the ferry pier keeps its wooden boardwalk — the painting's bridge is iron and its piers are wood. Registered street material for canalave beside ringfloor. No other town in the fleet walks on a truss. (NO-SAME-KIT law; WAVE-T49-BRIDGEPORT-PLAN.md §5.)
+PIX tile-trussfloor 16 16
+llllllllllllllll
+aaasaaasaaasaaas
+aaasaaasaaasaaas
+trtttrtttrtttrtt
+tttttttttttttttt
+aaattaasaaattaas
+aattaaasaattaaas
+attsdaasattsaaas
+ttasaaasttasaaas
+taasaaattaasaaat
+aaasaattadasaatt
+tttttttttttttttt
+trtttrtttrtttrtt
+aaasaaasaaasaads
+aaasaaasdaasaaas
+llllllllllllllll
+PAL
+a #59626d iron deck plate
+d #39414a deck wear shade
+s #272d34 deck plate seam
+t #2e343b truss iron
+l #7e8894 worn deck edge
+r #aeb9c4 chord rivet

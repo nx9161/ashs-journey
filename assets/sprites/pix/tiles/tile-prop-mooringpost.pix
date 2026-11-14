@@ -1,0 +1,26 @@
+# Wave T49 (Bridgeport kit): mooringpost — an iron mooring bollard with a coil of rope at its base: the harbour's mooring furniture, seated at the canal head (20,1) where the foundry boats tie up on the north reach, and on the east shore (25,10) by the Route 218 landing. Fully opaque: the town grass is baked in (measured #0d8420, tg-canalave's rendered pure flat). (NO-SAME-KIT law; WAVE-T49-BRIDGEPORT-PLAN.md §5.)
+PIX tile-prop-mooringpost 16 16
+gggggggggggggggg
+gggggggggggggggg
+gggggggggggggggg
+gggggggggggggggg
+gggggggLLggggggg
+ggggggLiiLgggggg
+ggggggiiiiiggggg
+ggggggiliigggggg
+ggggggiiiigggggg
+gggggiiiiigggggg
+gggggrrrrggggggg
+gggggrRRrrgggggg
+gggggssssggggggg
+gggggggggggggggg
+gggggggggggggggg
+gggggggggggggggg
+PAL
+g #0d8420 town grass (measured tg-canalave flat)
+i #3a4149 bollard iron
+l #6a7480 bollard light
+L #8b96a1 bollard cap light
+r #c9a86a rope coil
+R #a8874e rope shade
+s #0a6b1c bollard ground shadow

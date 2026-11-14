@@ -730,6 +730,25 @@ export const WALKABLE = new Set(['.', ',', 'D', 'E', 'C', 'F', 'J', 'K', '1', '2
   // 816-819 + 828-831; the parallel T47 claim holds 840-843;
   // gaps stay empty.)
   ...[852]
+    .map((i) => String.fromCodePoint(0x1E00 + i)),
+  // Wave T49: the ringfloor char (U+1E00+864, tiles.mjs
+  // T49_KIND_DEFS) is walkable street material — Bridgeport
+  // City's ring-inset quay flags, swapped onto the town's tg2
+  // street cells (the front street, the library lane, the
+  // bridge avenue — all shipped walkable as tg2), so floor
+  // stays floor. (Indices 864-868 per the Director's index
+  // ruling: main's kinds run 594-636 + 645-648 + 660-662 +
+  // 672-675 + 684-687 + 696-699 + 708-711 + 720-724 +
+  // 732-736 + 744-748 + 756-759 + 768-771 + 780-783 +
+  // 792-795 + 804-807 + 816-819 + 828-831 + 840-843; the
+  // parallel T48 claim holds 852-855; gaps stay empty.)
+  ...[864]
+    .map((i) => String.fromCodePoint(0x1E00 + i)),
+  // Wave T49: the trussfloor char (U+1E00+868, tiles.mjs
+  // T49_KIND_DEFS) is walkable street material — the iron
+  // truss deck of Bridgeport's one bridge, swapped onto the
+  // shipped span's four boardwalk cells at rows 8-9.
+  ...[868]
     .map((i) => String.fromCodePoint(0x1E00 + i))]);
 
 // Trainer definitions for the slice.

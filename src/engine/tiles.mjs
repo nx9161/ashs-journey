@@ -1907,6 +1907,49 @@ T48_KIND_DEFS.forEach(([kind], i) => {
 export const T48_PROP_KINDS = T48_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
 export const T48_WALL_KINDS = T48_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
 export const T48_FLOOR_KINDS = T48_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
+// Wave T49: Bridgeport City's own kit from birth — 'Ring Quay &
+// Rivet Iron': the ringfloor (large blue-grey harbour flags with
+// a dark iron mooring ring inlaid in the flags — the town's
+// registered street), the rivetroof (riveted pale iron plate
+// courses carrying a bold badge roundel, worn only by the
+// shipped Gym stamp's tr roof cells, so the Gym + Library
+// tr-roof share breaks and the town's unmarked gym hall — the
+// Backstory-Sync-Audit's Bridgeport flag — is marked by its
+// roof emblem), the trussfloor (a dark iron truss deck, worn
+// only by the shipped canal span's four boardwalk cells at
+// rows 8-9: the town sign's 'one iron bridge' made deck; also
+// registered street material for canalave), and two props: the
+// mooringpost (an iron mooring bollard with a rope coil — the
+// canal head and the east shore) and the harbourbell (the brass
+// ferry bell on its iron post, at the pier's land side).
+// Indices 864-868 per the Director's index ruling (main's kinds
+// run 594-636 + 645-648 + 660-662 + 672-675 + 684-687 + 696-699 +
+// 708-711 + 720-724 + 732-736 + 744-748 + 756-759 (T40) +
+// 768-771 (T41) + 780-783 (T42) + 792-795 (T43) + 804-807 (T44) +
+// 816-819 (T45) + 828-831 (T46) + 840-843 (T47); the parallel
+// T48 claim holds 852-855; 808-815 + 820-827 + 832-839 +
+// 844-851 + 856-863 stay empty), verified free against
+// origin/main, TILE_CHARS and every map row. Authored art:
+// assets/sprites/pix/tiles/tile-ringfloor.pix,
+// tile-rivetroof.pix, tile-trussfloor.pix,
+// tile-prop-mooringpost.pix, tile-prop-harbourbell.pix.
+// (WAVE-T49-BRIDGEPORT-PLAN.md.)
+export const T49_KIND_DEFS = [
+  ['ringfloor', 'floor'],
+  ['rivetroof', 'wall'],
+  ['mooringpost', 'prop'],
+  ['harbourbell', 'prop'],
+  ['trussfloor', 'floor'],
+];
+export const T49_KIND_CHARS = {};
+T49_KIND_DEFS.forEach(([kind], i) => {
+  const ch = String.fromCodePoint(0x1E00 + 864 + i);
+  T49_KIND_CHARS[kind] = ch;
+  TILE_CHARS[ch] = kind;
+});
+export const T49_PROP_KINDS = T49_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
+export const T49_WALL_KINDS = T49_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
+export const T49_FLOOR_KINDS = T49_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
 export const SINNOH_TOWN_GROUND_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg);
 export const SINNOH_TOWN_GROUND2_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg2);
 // TX-3: the 8 gym exteriors by town (original type-accent motifs).

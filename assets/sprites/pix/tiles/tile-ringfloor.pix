@@ -1,0 +1,26 @@
+# Wave T49 (Bridgeport kit): ringfloor — Bridgeport City's registered street kind (the fleet's street kinds carry the -floor suffix; the desire-path tiers key on it). RING-INSET QUAY FLAGS: large blue-grey harbour flags with a dark iron mooring ring inlaid in the flags — the town form 'harbour iron + sailcloth' (TOWN_STYLE) laid as a street, the quay paving of the canal harbour. A BLUE-GREY, RING-INLAID geometry: unlike Heritage's heritagefloor (pale teal-green worn flags, cross-hatched, no rings), Fairhaven's quayfloor (small running-bond quay stone), Shardfall's shardfloor (dark cracked slate with crystal inlay), Repose's pebblefloor (rounded pebbles in pale mortar), Inglenook's giltfloor (rectangular gilt setts), Honeyfield's honeyfloor (hexagonal comb), Coalseam's clinkerfloor (fine black aggregate), Revelry's beamfloor (steel plates), Shingle's shellfloor (raked shell sand) and Clover's cloverfloor (flecked earth). (NO-SAME-KIT law; WAVE-T49-BRIDGEPORT-PLAN.md §5.)
+PIX tile-ringfloor 16 16
+lllllllsllllllls
+daaaaaasdaaaaaas
+ddaRrRasdaaaaaas
+daRiiiRsdaaaaaas
+dariiirsdaaaaaas
+daRiiiRsdaaaaaas
+daaRrRasdaaaaaas
+ssssssssssssssss
+lllllllsllllllls
+daaaaaasdaaaaaas
+daaaadasdaaaaaas
+daaaaaasdaaaaaas
+daaaaadsdaaaaaas
+daaaaaasdaaaaarr
+daaaaaasdaaaarar
+sssssssssssssrrr
+PAL
+a #71808e quay flag body
+l #8b99a6 flag top light
+d #5a6773 flag side shade
+s #46525e flag seam
+i #525f6b ring disc inset
+r #333b44 iron mooring ring
+R #59636e ring rim light

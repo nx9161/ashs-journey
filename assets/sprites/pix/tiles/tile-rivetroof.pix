@@ -1,0 +1,27 @@
+# Wave T49 (Bridgeport kit): rivetroof — the RIVETED PALE IRON of the Bridgeport Gym, worn only by the shipped Gym stamp's tr roof cells, so the Gym + Library tr-roof share breaks and the town's unmarked gym hall (the Backstory-Sync-Audit's Bridgeport flag) is marked by its roof emblem: pale iron plate courses with rivet dots and a bold badge roundel at the centre — Doran's gym is 'all iron and certainty' (LIBRARIAN MIRA), and the town's bridge 'is also iron'. PALE iron with an emblem: the inverse register of Coalseam's dark soot-iron ironroof; no other fleet roof carries a roundel (Inglenook's domeroof is gold dome segments, Honeyfield's bloomroof petal scales, Heritage's heritageroof teal slate courses, Repose's oliveroof olive wood shingle, Shardfall's shardroof a checkerboard). (NO-SAME-KIT law; WAVE-T49-BRIDGEPORT-PLAN.md §5.)
+PIX tile-rivetroof 16 16
+llllllllllllllll
+araaaradaraaarad
+aaaaaaadaaaaaaad
+ssssssssssssssss
+llllllllllllllll
+aradaraRRRadaraa
+aaadaaRmmmRdaaaa
+sssssRmmCmmRssss
+lllllRmCCCmRllll
+araaaRmmCmmRarad
+aaaaaaRmmmRaaaad
+sssssssRRRssssss
+llllllllllllllll
+aradaraaaradaraa
+aaadaaaaaaadaaaa
+ssssssssssssssss
+PAL
+a #a7b4c0 pale iron plate
+l #c3cedb plate lip light
+d #8794a1 plate shade
+s #626e7a course seam
+r #525d68 rivet
+R #4a545f medallion ring iron
+m #8b98a5 medallion disc
+C #e8eef5 medallion rivet core
