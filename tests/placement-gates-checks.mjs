@@ -248,6 +248,34 @@
 //     ('tg + meadow/pond') is T20's shipped pond + meadow at
 //     encounter parity, byte-kept. Re-pinned with the W-DIFF4
 //     build (registry scope only).
+//     SIXTEENTH DOCUMENTED EXCEPTION (T26): the registry grows by
+//     (renumbered at merge — the branch's #14 was taken on main by
+//     W-DIFF4's azalea #14 / mahogany #15)
+//     one scoped entry — rustboro: [cutstonefloor] — on the same
+//     terms as the exceptions above, and rustboro's pin is its
+//     POST-T26 tuple. The Copperton rebuild replaced the shipped
+//     tg2 field (249 of 540 cells ἥ mud — 46.1%, the worst share
+//     of any town) with the calm ground + cut-stone fabric of the
+//     approved design: coproof copper-seamed roofs (idx 598),
+//     cutstonefloor avenue stone (idx 599; the -floor suffix the
+//     desire-path tiers key on), the travstone prop (idx 600) on
+//     its court between the shipped fossil displays, gardenfloor
+//     HQ-forecourt beds (idx 601), two facade houses, and the
+//     orphaned MART CLERK re-seated at his Mart's front apron
+//     (9,4). Gate STATUS holds PASS — the shipped pass leaned on
+//     the mud sea counting as one 266-cell fabric component; the
+//     new fabric is streets alone (0.9877 -> 0.9828, now honest),
+//     conn/step-offs identical (156/156, 7/7), junctions identical
+//     (5 sites, now 5/5 marked — both shipped DIRS records stood
+//     invisible on plain ground; re-seated onto S tiles at real
+//     junctions, four more verbatim copies at the new junctions,
+//     T23-T25 pattern, and the HQ sign stepped one cell south off
+//     the street line), strict 0.9566 -> 0.7274 (desire lines get
+//     real corners; above the 0.60 gate), apronMin 0.833 -> 0.714
+//     (the facade houses stand in the open meadow; above the 0.60
+//     floor), unanchoredAny identical (0). (Indices 598-601 per
+//     the Director's index ruling: W-DIFF4 holds 594-597.)
+//     Re-pinned with the T26 build.
 //     Tuple: [pass, connOk, connPairs, stepTouch, stepTot, components,
 //     junctionSites, junctionsBare, apronLow, apronMin, merged,
 //     onFabric, shoulderOrphans, unanchoredAny, strict, fabric].
@@ -277,8 +305,8 @@ async function gateTuple(id, t) {
 }
 
 // 1. registry scope lock
-ok('street registry is exactly { vermilion: [boardwalk], blackthorn: [settfloor], silvertown: [marblefloor], ecruteak: [wornfloor], saffron: [avenuefloor], violet: [violetfloor], azalea: [brickfloor], mahogany: [gravelfloor] }',
-  JSON.stringify(STREET_REGISTRY) === '{"vermilion":["boardwalk"],"blackthorn":["settfloor"],"silvertown":["marblefloor"],"ecruteak":["wornfloor"],"saffron":["avenuefloor"],"violet":["violetfloor"],"azalea":["brickfloor"],"mahogany":["gravelfloor"]}',
+ok('street registry is exactly { vermilion: [boardwalk], blackthorn: [settfloor], silvertown: [marblefloor], ecruteak: [wornfloor], saffron: [avenuefloor], violet: [violetfloor], azalea: [brickfloor], mahogany: [gravelfloor], rustboro: [cutstonefloor] }',
+  JSON.stringify(STREET_REGISTRY) === '{"vermilion":["boardwalk"],"blackthorn":["settfloor"],"silvertown":["marblefloor"],"ecruteak":["wornfloor"],"saffron":["avenuefloor"],"violet":["violetfloor"],"azalea":["brickfloor"],"mahogany":["gravelfloor"],"rustboro":["cutstonefloor"]}',
   JSON.stringify(STREET_REGISTRY));
 
 // 2. census: the 64 towns of townSetOf (pallet included)
@@ -340,7 +368,7 @@ const PIN = {
   "pewter": [1, 110, 110, 8, 8, 1, 6, 0, 0, 0.824, 0, 0, 0, 0, 0.8602, 1],
   "pummelo": [0, 30, 56, 6, 6, 1, 3, 0, 1, 0.529, 0, 0, 0, 0, 0.9639, 0.9639],
   "resort-area": [1, 182, 182, 6, 6, 1, 5, 0, 0, 0.941, 0, 0, 0, 0, 0.944, 0.9846],
-  "rustboro": [1, 156, 156, 7, 7, 1, 5, 0, 0, 0.833, 0, 0, 0, 0, 0.9566, 0.9877],
+  "rustboro": [1, 156, 156, 7, 7, 1, 5, 0, 0, 0.714, 0, 0, 0, 0, 0.7274, 0.9828],
   "saffron": [1, 156, 156, 10, 10, 1, 2, 0, 0, 0.857, 0, 0, 0, 0, 0.8655, 1],
   "sandgem": [1, 156, 156, 7, 7, 1, 1, 0, 0, 0.833, 0, 0, 0, 0, 1, 1],
   "shamouti": [0, 30, 182, 6, 6, 1, 4, 0, 1, 0.588, 0, 0, 0, 0, 0.912, 0.912],
