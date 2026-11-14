@@ -3176,6 +3176,38 @@ T41_KIND_DEFS.forEach(([kind], i) => {
 const T41_PROP_KINDS = T41_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
 const T41_WALL_KINDS = T41_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
 const T41_FLOOR_KINDS = T41_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
+// Wave T42: Revelry City's own kit — "Broadcast Steel & Signal
+// Slab": the beamfloor (large smooth steel-blue signal slabs with
+// riveted corners — the registered street material of the front
+// street, the east-west avenue and the gate avenues), the beamroof
+// (a horizontal steel-glass beam panel worn only by the TV
+// station's roof cells), the condoroof (a lit-window frieze worn
+// only by the Condo's roof cells, so the condo stops sharing the
+// base house roof) and the screentotem (a standing street screen;
+// a pair flanks the front lawn). Indices 780-783 per the
+// Director's index ruling (main's kinds run 594-636 + 645-648 +
+// 660-662 + 672-675 + 684-687 + 696-699 + 708-711 + 720-724 +
+// 732-736 + 744-748 + 756-759 (T40) + 768-771 (T41, parallel
+// branch); 760-767 + 772-779 stay empty), verified free against
+// origin/main, TILE_CHARS and every map row. Authored art:
+// assets/sprites/pix/tiles/tile-beamfloor.pix,
+// tile-beamroof.pix, tile-condoroof.pix,
+// tile-prop-screentotem.pix. (WAVE-T42-REVELRY-PLAN.md.)
+const T42_KIND_DEFS = [
+  ['beamfloor', 'floor'],
+  ['beamroof', 'wall'],
+  ['condoroof', 'wall'],
+  ['screentotem', 'prop'],
+];
+const T42_KIND_CHARS = {};
+T42_KIND_DEFS.forEach(([kind], i) => {
+  const ch = String.fromCodePoint(0x1E00 + 780 + i);
+  T42_KIND_CHARS[kind] = ch;
+  TILE_CHARS[ch] = kind;
+});
+const T42_PROP_KINDS = T42_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
+const T42_WALL_KINDS = T42_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
+const T42_FLOOR_KINDS = T42_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
 const SINNOH_TOWN_GROUND_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg);
 const SINNOH_TOWN_GROUND2_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg2);
 // TX-3: the 8 gym exteriors by town (original type-accent motifs).
@@ -95164,6 +95196,78 @@ const ART = {
     "gggggggggggggggg",
     "ggglggggdggggggg"
   ] },
+  "tile-beamfloor": { w: 16, h: 16, pal: {"b":"#6d87a0","j":"#47617a","s":"#84a6c0","r":"#a8c4da"}, rows: [
+    "jjjjjjjjjjjjjjjj",
+    "jbbbbbbbbbbbbbbb",
+    "jbrbbbbbbbbbbrbb",
+    "jbbbbbbbbbbsbbbb",
+    "jbbbbsbbbbbbbbbb",
+    "jbbbbbbbbbbbbbbb",
+    "jbbbbbbbbbbbbbbb",
+    "jbbbbbbbbbbbbbbb",
+    "jbbbbbbbbbsbbbbb",
+    "jbbbsbbbbbbbbbbb",
+    "jbbbbbbbbbbbbbbb",
+    "jbbbbbbbbbbbbbbb",
+    "jbbbbbbbbbbbbbbs",
+    "jbrbbbbbbsbbbrbb",
+    "jbbsbbbbbbbbbbbb",
+    "jbbbbbbbbbbbbbbb"
+  ] },
+  "tile-beamroof": { w: 16, h: 16, pal: {"m":"#5d8aa8","l":"#84aec9","d":"#385a73","w":"#dceef8"}, rows: [
+    "llllllllllllllll",
+    "llllllllllllllll",
+    "dmmmmdmmmmdmmmmd",
+    "dmmmmdmmmmdmmmmd",
+    "dmmmmdmmmmdmmmmd",
+    "dmmmmdmmwmdmmmmd",
+    "dmmmmdmwmwdmmmmd",
+    "dmmmmdwwwwwmmmmd",
+    "dmmmmdmwmwdmmmmd",
+    "dmmmmdmmwmdmmmmd",
+    "dmmmmdmmmmdmmmmd",
+    "dmmmmdmmmmdmmmmd",
+    "dmmmmdmmmmdmmmmd",
+    "dddddddddddddddd",
+    "dddddddddddddddd",
+    "dddddddddddddddd"
+  ] },
+  "tile-condoroof": { w: 16, h: 16, pal: {"g":"#77644a","k":"#5d4c36","t":"#8a7554","w":"#f2e3b3"}, rows: [
+    "kkkkkkkkkkkkkkkk",
+    "kkkkkkkkkkkkkkkk",
+    "gggggggggggggggg",
+    "gggggggggggggggg",
+    "gtgggggggggggggg",
+    "gggggggggtgggggg",
+    "gkkkggkkkggkkkgg",
+    "gwwwggwwwggwwwgg",
+    "gwwwggwwwggwwwgg",
+    "gwwwggwwwgtwwwgg",
+    "gkkkggkkkggkkkgg",
+    "gggggggggggggggg",
+    "gggtgggggggggggg",
+    "gggggggggggtgggg",
+    "kkkkkkkkkkkkkkkk",
+    "kkkkkkkkkkkkkkkk"
+  ] },
+  "tile-prop-screentotem": { w: 16, h: 16, pal: {"g":"#19841e","p":"#2a2f38","c":"#bfe6f2","s":"#7fb8cc","d":"#385a73"}, rows: [
+    "gggggggggggggggg",
+    "ggppppppppppppgg",
+    "ggpccccccccccpgg",
+    "ggpccccddccccpgg",
+    "ggpcccdccdcccpgg",
+    "ggpcccdccdcccpgg",
+    "ggpccccddccccpgg",
+    "ggpsssssssssspgg",
+    "ggpccccccccccpgg",
+    "ggppppppppppppgg",
+    "gggggggppggggggg",
+    "gggggggppggggggg",
+    "gggggggppggggggg",
+    "gggggggppggggggg",
+    "ggggggppppgggggg",
+    "gggggggggggggggg"
+  ] },
   "tile-trellisroof": { w: 16, h: 16, pal: {"c":"#f2e7ce","r":"#cf8296","l":"#e2a5b4","d":"#a85f74","b":"#8e3d55","v":"#557f3e"}, rows: [
     "cclrllllcclllvll",
     "cccldllccccbrllc",
@@ -115951,6 +116055,11 @@ for (const k of T40_FLOOR_KINDS) TILE_ART[k] = 'tile-' + k;
 for (const k of T41_PROP_KINDS) TILE_ART[k] = 'tile-prop-' + k;
 for (const k of T41_WALL_KINDS) TILE_ART[k] = 'tile-' + k;
 for (const k of T41_FLOOR_KINDS) TILE_ART[k] = 'tile-' + k;
+// Wave T42: Revelry City's own kit kinds take their authored
+// tiles (assets/sprites/pix/tiles/tile-<kind>.pix).
+for (const k of T42_PROP_KINDS) TILE_ART[k] = 'tile-prop-' + k;
+for (const k of T42_WALL_KINDS) TILE_ART[k] = 'tile-' + k;
+for (const k of T42_FLOOR_KINDS) TILE_ART[k] = 'tile-' + k;
 // Premium+ W6 (TX-3/PL-1): door-open frames, authored in TX-3 for every
 // door kind. The warp-fade engine that plays them lands in W7 — W6
 // wires the frames (this registry + cache.doorOpen + doorOpenCanvas)
@@ -117796,6 +117905,9 @@ function resolveTileLayers(cache, kind, x, y, kindAt, t, phase, mapId) {
     // are fully opaque — the beach sand is baked in).
     case 'tideslug':
     case 'tidelog':
+    // Wave T42: Revelry's screen totems composite over their
+    // lawn the same way (art fully opaque — grass baked in).
+    case 'screentotem':
     // Wave T17: the radio mast composites over its compound grass too.
     case 'radiomast': {
       // Object tiles carry transparent surrounds (Wave 1): lay the ground
@@ -124804,6 +124916,18 @@ const WALKABLE = new Set(['.', ',', 'D', 'E', 'C', 'F', 'J', 'K', '1', '2', 'V',
   // 720-724 + 732-736 + 744-748; the parallel T40 claim holds
   // 756-759; gaps stay empty.)
   ...[768]
+    .map((i) => String.fromCodePoint(0x1E00 + i)),
+  // Wave T42: the beamfloor char (U+1E00+780, tiles.mjs
+  // T42_KIND_DEFS) is walkable street material — Revelry
+  // City's steel signal slab, swapped onto the town's tg2
+  // street cells (the front street, the east-west avenue, the
+  // gate avenues — all shipped walkable as tg2), so floor
+  // stays floor. (Indices 780-783 per the Director's index
+  // ruling: main's kinds run 594-636 + 645-648 + 660-662 +
+  // 672-675 + 684-687 + 696-699 + 708-711 + 720-724 +
+  // 732-736 + 744-748 (T39) + 756-759 (T40); the parallel
+  // T41 claim holds 768-771; gaps stay empty.)
+  ...[780]
     .map((i) => String.fromCodePoint(0x1E00 + i))]);
 
 // Trainer definitions for the slice.
@@ -153918,26 +154042,26 @@ const MAPS9 = {
     "music": "viridian-theme",
     "weather": "clear",
     "rows": [
-      "ᾮᾮᾮᾯᾮᾮᾮᾮᾮᾮᾯᾮᾮᾭᾭᾮᾮᾮᾯᾮᾮᾮᾮᾮᾮᾯᾮᾮᾮᾮ",
-      "ᾮᾬᾬᾬᾬᾬᾬᾬṇnᾬᾬᾬᾭᾭᾭᾭᾭᾭᾭᾭᾭᾭᾭᾭᾯᾬᾬᾬᾮ",
-      "ᾮᾬᾬjklmᾬᾬdeefᾭᾭᾰᾰᾰᾰᾭᾬᾲᾲᾲᾭᾬᾬᾬᾬᾮ",
-      "ᾮᾬᾬAJKAᾬṇP12Pᾭᾭᾱsᾱᾱᾭᾭᾳsᾳᾭᾬᾬᾬᾬᾮ",
-      "ᾮoᾭᾭᾭᾭᾭᾭᾭᾭᾭᾭᾭᾭᾭᾭᾭᾭᾭẋᾭᾭᾭᾭSᾬᾬᾬᾬᾮ",
-      "ᾮᾬSᾭᾭᾭᾭᾭᾭᾭᾭᾭᾭᾭᾭᾭᾭᾭᾭᾭᾭᾭᾭᾭᾭᾭᾭᾭᾭᾮ",
-      "ᾮᾬᾭᾭᾭoᾬᾭᾬᾬᾬᾭᾬᾭᾭᾬᾬᾬᾭᾬᾬᾬᾬᾬᾭᾬᾬᾬᾭᾮ",
-      "ᾮᾭᾭᾭᾭoᾬᾭᾭᾭᾭᾬᾭᾭᾭᾭᾭᾭᾭᾬᾬᾬᾬᾬᾭᾬᾬṇᾭᾮ",
-      "ᾭᾭᾭᾭᾭᾭᾭᾭᾭᾭᾭᾭᾭᾭᾭᾭᾭᾭᾭᾭᾭᾭᾭᾭᾭᾭᾭᾭᾭᾭ",
-      "ᾭᾭᾭᾭᾭᾭᾭᾭᾭᾭᾭᾭᾭᾭᾭᾭᾭᾭᾭᾭᾭᾭᾭᾭᾭᾭᾭᾭᾭᾭ",
-      "ᾮᾭᾭᾭᾭᾬnᾭẋᾬᾬᾭᾬᾭᾭᾬᾬᾬᾭᾬᾬᾬᾬᾭᾭᾭᾭᾭᾭᾮ",
-      "ᾮᾭᾭᾲᾲᾲᾭᾭoᾯᾬᾭᾭᾭᾭᾭᾭᾭᾭᾭᾭᾭᾭᾭṇᾬᾬᾬᾭᾮ",
-      "ᾮᾭᾭᾳsᾳᾭᾭᾭᾭᾭᾭnᾭᾭnᾬᾭᾬᾬṇᾬᾬᾭᾬᾬᾬᾬᾭᾮ",
-      "ᾮᾭᾭᾭᾭᾭᾭᾭᾭᾭᾭᾭᾭᾭᾭᾭᾭᾭᾭoᾬᾬᾬᾭᾬᾬᾬᾬᾭᾮ",
-      "ᾮᾭᾭᾭᾭ..ᾭᾭᾭᾭᾭᾬᾭᾭᾬᾬᾬᾭᾬnᾬᾬᾭᾬᾬᾬṇᾭᾮ",
-      "ᾮᾭn.,,,.ᾭᾭᾭᾭᾭᾭᾭoᾬᾬᾭᾬᾬᾬᾬᾭᾬᾬᾬᾬᾭᾮ",
-      "ᾮᾭ.,,o,.ᾬᾯᾬᾭᾬᾭᾭᾬᾬᾭᾭᾬᾬᾬᾬᾭᾬᾬᾬᾬᾭᾮ",
-      "ᾮᾭᾬ..ᾬ.ᾭᾬẋᾬᾭᾬᾭᾭᾬᾬᾭẊᾬᾬᾬᾬᾭᾬᾬᾬᾬᾭᾮ",
-      "ᾮᾭᾭᾭᾭᾭᾭᾭᾭᾭᾭᾭᾭᾭᾭᾭᾭᾭᾭᾭᾭᾭᾭᾭᾭᾭᾭᾭᾭᾮ",
-      "ᾮᾮᾮᾯᾮᾮᾮᾮᾮᾮᾯᾮᾮᾭᾭᾮᾮᾮᾯᾮᾮᾮᾮᾮᾮᾯᾮᾮᾮᾮ",
+      "ᾮᾮᾮᾯᾮᾮᾮᾮᾮᾮᾯᾮᾮℌℌᾮᾮᾮᾯᾮᾮᾮᾮᾮᾮᾯᾮᾮᾮᾮ",
+      "ᾮᾬᾬᾬᾬᾬᾬᾬṇnᾬᾬᾬℌℌᾬᾬᾬᾬᾬᾬᾬᾬᾬᾬᾯᾬᾬᾬᾮ",
+      "ᾮᾬᾬjklmᾬᾬdeefℌℌℍℍℍℍᾬSᾲᾲᾲᾬᾬᾬᾬᾬᾮ",
+      "ᾮᾬᾬAJKAᾬṇP12Pℌℌᾱsᾱᾱᾬᾬᾳsᾳᾬᾬᾬᾬᾬᾮ",
+      "ᾮoℏℌℌℌℌℌℌℌℌℌℌℌℌℌℌℌℌẋℌℌℌℌSℏᾬᾬᾬᾮ",
+      "ᾮᾬSᾬᾬᾬᾬᾬᾬᾬᾬℌSℌℌᾬᾬᾬᾬᾬᾬᾬᾬℌᾬᾬᾬᾬᾬᾮ",
+      "ᾮᾬᾬᾬᾬoᾬᾬᾬᾬᾬℌᾬℌℌᾬᾬᾬᾬᾬᾬᾬᾬℌᾬᾬᾬᾬᾬᾮ",
+      "ᾮᾬᾬᾬᾬoᾬᾬᾬᾬᾬᾬᾬℌℌᾬᾬᾬᾬᾬᾬᾬᾬℌᾬᾬᾬṇᾬᾮ",
+      "ℌℌℌℌℌℌℌℌℌℌℌℌℌℌℌℌℌℌℌℌℌℌℌℌℌℌℌℌℌℌ",
+      "ℌℌℌℌℌℌℌℌℌℌℌℌℌℌℌℌℌℌℌℌℌℌℌℌℌℌℌℌℌℌ",
+      "ᾮᾬᾬᾬᾬᾬnᾬẋᾬᾬᾬᾬℌℌᾬᾬᾬᾬᾬᾬᾬᾬᾬᾬᾬᾬᾬᾬᾮ",
+      "ᾮᾬᾬℎℎℎᾬᾬoᾯᾬᾬᾬℌℌᾬᾬᾬᾬᾬᾬᾬᾬᾬṇᾬᾬᾬᾬᾮ",
+      "ᾮᾬᾬᾳsᾳSᾬᾬᾬᾬᾬnℌℌnSᾬᾬᾬṇᾬᾬᾬᾬᾬᾬᾬᾬᾮ",
+      "ᾮᾬSℌℌℌℌℌℌℌℌℌℌℌℌℌℌℌᾬoᾬᾬᾬᾬᾬᾬᾬᾬᾬᾮ",
+      "ᾮℌℌℌᾬ..ℌᾬᾬᾬᾬᾬℌℌᾬᾬᾬᾬᾬnᾬᾬᾬᾬᾬᾬṇᾬᾮ",
+      "ᾮℌn.,,,.ᾬᾬᾬᾬᾬℌℌoᾬᾬᾬᾬᾬᾬᾬᾬᾬᾬᾬᾬᾬᾮ",
+      "ᾮℌ.,,o,.SᾯSᾬᾬℌℌSᾬᾬᾬᾬᾬSᾬᾬᾬᾬᾬᾬᾬᾮ",
+      "ᾮᾬS..ᾬ.ᾬᾬẋᾬᾬᾬℌℌᾬᾬᾬẊᾬᾬᾬᾬᾬᾬᾬᾬᾬᾬᾮ",
+      "ᾮᾬᾬℌℌℌℌℌℌℌℌℌℌℌℌℌℌℌℌℌℌℌℌℌℌᾬᾬᾬᾬᾮ",
+      "ᾮᾮᾮᾯᾮᾮᾮᾮᾮᾮᾯᾮᾮℌℌᾮᾮᾮᾯᾮᾮᾮᾮᾮᾮᾯᾮᾮᾮᾮ",
     ],
     "warps": [
       {"x": 4, "y": 3, "to": {"map": "center", "x": 4, "y": 4}, "via": {"map": "jubilife", "x": 4, "y": 4}},
@@ -153966,9 +154090,12 @@ const MAPS9 = {
       {"x": 10, "y": 16, "text": "REVELRY CITY — South: ROUTE 202 · East: ROUTE 203 · North: ROUTE 204 · West: ROUTE 218."},
       {"x": 15, "y": 16, "text": "REVELRY CITY — South: ROUTE 202 · East: ROUTE 203 · North: ROUTE 204 · West: ROUTE 218."},
       {"x": 21, "y": 16, "text": "REVELRY CITY — South: ROUTE 202 · East: ROUTE 203 · North: ROUTE 204 · West: ROUTE 218."},
+      {"x": 12, "y": 5, "text": "REVELRY CITY — South: ROUTE 202 · East: ROUTE 203 · North: ROUTE 204 · West: ROUTE 218."},
+      {"x": 6, "y": 12, "text": "REVELRY CITY — South: ROUTE 202 · East: ROUTE 203 · North: ROUTE 204 · West: ROUTE 218."},
+      {"x": 2, "y": 13, "text": "REVELRY CITY — South: ROUTE 202 · East: ROUTE 203 · North: ROUTE 204 · West: ROUTE 218."}
     ],
     "npcs": [
-      {"x": 3, "y": 5, "name": "MART CLERK", "art": "clerk", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#4a3a2a", "dialogue": ["Revelry City Mart — stocked for the road ahead."], "mart": {"stock": ["pokeball", "greatball", "superpotion", "hyperpotion", "antidote", "parlyzheal", "revive"]}},
+      {"x": 9, "y": 4, "name": "MART CLERK", "art": "clerk", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#4a3a2a", "dialogue": ["Revelry City Mart — stocked for the road ahead."], "mart": {"stock": ["pokeball", "greatball", "superpotion", "hyperpotion", "antidote", "parlyzheal", "revive"]}},
       {"x": 11, "y": 7, "name": "BROADCAST INTERN VESK", "art": "worker", "skin": "#f0c8a0", "shirt": "#3a7a4a", "pants": "#4a3a2a", "hair": "#2a1a0a", "dialogue": ["I fetch coffee for people whose faces are on the building. The building is also their face. It's a lot.", "West gate: the causeway over the water to Bridgeport. East: Coalseam's smoke. North: flower country."]},
       {"x": 18, "y": 12, "name": "CITY KID MOSS", "art": "kid", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#4a3a2a", "dialogue": ["The condos have a hundred windows and every one has a Kin in it. I counted the lit ones.", "My NAPSEER teleports to school before I do. Every day. Show-off."]},
       {"x": 7, "y": 16, "name": "COMMUTER UNA", "art": "lady", "skin": "#d8a878", "shirt": "#7a4a8a", "pants": "#2a2a3a", "hair": "#c0c0c0", "dialogue": ["Coalseam miners, Bridgeport sailors, Honeyfield florists — this city's platforms hold all of Borea at rush hour.", "The TV station lets visitors watch a recording. The cameras are kind. Mostly."]},
