@@ -2026,6 +2026,48 @@ T51_KIND_DEFS.forEach(([kind], i) => {
 export const T51_PROP_KINDS = T51_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
 export const T51_WALL_KINDS = T51_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
 export const T51_FLOOR_KINDS = T51_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
+// Wave T52 — Rimefall City kit 'Packed Snow & Drift Cap': the
+// rimefloor (hard-packed snow with two dark sledge-runner
+// grooves running the tile's length and sparse ice flecks —
+// the snow port's streets are snow itself, pressed flat; a
+// grooved packed field, unlike Astral's lavender moonstone
+// flags, Fenland's pegged olive planks, Repose's rounded
+// pebbles and the fleet's cave/route ice kinds), the
+// driftroof (dark slate shingles at the foot under a deep
+// snowdrift cap with a scalloped drift edge and an icicle
+// fringe — worn by the Gym only, breaking the Gym + Temple
+// tr-snowpoint roof share; the Temple keeps tr), the
+// ironbollard (a squat dark-iron mooring bollard, rope coil
+// at its foot, snow cap — the pier block's shoulder pair;
+// distinct from Bridgeport's tall timber mooringpost) and
+// the stonelantern (a snow-capped stone lantern with a warm
+// window slit — the temple approach pair). Indices 900-903
+// per the Director's index ruling (main's kinds run 594-636 +
+// 645-648 + 660-662 + 672-675 + 684-687 + 696-699 + 708-711 +
+// 720-724 + 732-736 + 744-748 + 756-759 (T40) + 768-771 (T41) +
+// 780-783 (T42) + 792-795 (T43) + 804-807 (T44) + 816-819
+// (T45) + 828-831 (T46) + 840-843 (T47) + 852-855 (T48) +
+// 864-868 (T49) + 876-879 (T50) + 888-891 (T51); 892-899 stay
+// empty), verified free against origin/main, TILE_CHARS and
+// every map row. Authored art:
+// assets/sprites/pix/tiles/tile-rimefloor.pix,
+// tile-driftroof.pix, tile-prop-ironbollard.pix,
+// tile-prop-stonelantern.pix. (WAVE-T52-RIMEFALL-PLAN.md.)
+export const T52_KIND_DEFS = [
+  ['rimefloor', 'floor'],
+  ['driftroof', 'wall'],
+  ['ironbollard', 'prop'],
+  ['stonelantern', 'prop'],
+];
+export const T52_KIND_CHARS = {};
+T52_KIND_DEFS.forEach(([kind], i) => {
+  const ch = String.fromCodePoint(0x1E00 + 900 + i);
+  T52_KIND_CHARS[kind] = ch;
+  TILE_CHARS[ch] = kind;
+});
+export const T52_PROP_KINDS = T52_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
+export const T52_WALL_KINDS = T52_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
+export const T52_FLOOR_KINDS = T52_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
 export const SINNOH_TOWN_GROUND_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg);
 export const SINNOH_TOWN_GROUND2_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg2);
 // TX-3: the 8 gym exteriors by town (original type-accent motifs).

@@ -1,0 +1,25 @@
+# Wave T52 (Rimefall kit): rimefloor — Rimefall City's registered street kind (the fleet's street kinds carry the -floor suffix; the desire-path tiers key on it). PACKED-SNOW STREET: hard-packed snow in blue-white tones with two dark sledge-runner grooves running the tile's length and sparse ice flecks — the snow port's streets are snow itself, pressed flat by sledges and boots. A GROOVED PACKED FIELD: unlike Astral's moonfloor (lavender flags, violet grout, star flecks), Fenland's walkfloor (pegged olive planks), Repose's pebblefloor (rounded cobbles), Heritage's heritagefloor (worn teal flagstone) and the fleet's cave/route ice kinds (icefloor glossy cave ice, frostfloor route crust — neither a packed town street). (NO-SAME-KIT law; WAVE-T52-RIMEFALL-PLAN.md §5.)
+PIX tile-rimefloor 16 16
+waaagGaaaabGgaab
+abaagGbawaaGgaaa
+aabagGabaaaGgaaa
+aaabgGaabaaGgbaa
+awaagGaaabaGgaba
+baaagGaaawbGgaab
+abaagGbaaaaGgaaa
+aabagGabaaaGgaaa
+aawbgGaabaiGgbaa
+aaaagGaaabwGgaba
+baaagGaaaabGgaab
+abaagGbaaaaGgaaa
+aabwgGabaaaGgaai
+aaabgGaabiaGgbaa
+aaaigGaaabaGgaba
+baaagGaaaabGgaab
+PAL
+a #dde9f2 packed snow — blue-white
+b #cfdfec packed snow — pressed tone
+w #f4fafc fresh-snow fleck
+i #a9c6dc ice fleck
+g #5d7690 sledge-runner groove — dark
+G #7590ab sledge-runner groove — worn edge

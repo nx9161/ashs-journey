@@ -1,0 +1,24 @@
+# Wave T52 (Rimefall kit): stonelantern — a snow-capped stone lantern with a warm window slit: the approved painting's temple-court dressing, carried to the backend's temple ground (the shipped temple stamp, rows 11-12 x3-6) as a pair flanking its approach at (2,13) and (6,13), either side of the garden plot's north dot; the temple's steps are swept by TEMPLE ACOLYTE REN (his own dialogue, byte-kept) — no actor, no dialogue, no event invented. Fully opaque: the town snow is baked in at the MEASURED tg-snowpoint colour (#e9f2f6). (WAVE-T52-RIMEFALL-PLAN.md §5.)
+PIX tile-prop-stonelantern 16 16
+gggggggggggggggg
+ggggggwwwwgggggg
+gggggwwwwwwggggg
+ggggSSSSSSSSgggg
+ggggSSSSSSSSgggg
+gggggSSSSSSggggg
+gggggsSSSSsggggg
+gggggsSWWSsggggg
+gggggsSWWSsggggg
+gggggsSSSSsggggg
+gggggSSSSSSggggg
+ggggggSSSSgggggg
+ggggggSSSSgggggg
+gggggSSSSSSggggg
+ggggSSSSSSSSgggg
+gggggggggggggggg
+PAL
+g #e9f2f6 town snow — measured tg-snowpoint
+w #f7fcfd snow cap — fresh white
+S #7e8ea0 lantern stone — grey
+s #5d6d80 lantern stone — shaded edge
+W #ffd98a window slit — warm light

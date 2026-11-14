@@ -1,0 +1,25 @@
+# Wave T52 (Rimefall kit): ironbollard — a squat dark-iron mooring bollard with a rope coil at its foot and a cap of snow: the approved painting's pier bollards, carried to the backend's pier (the shipped boardwalk block, rows 13-16 x12-15) as a pair on its shoulders at (11,13) and (16,13) beside CAPT NORTHSTAR's ferry post; no actor, no dialogue, no event invented. Distinct from Bridgeport's mooringpost (a tall timber post): this is iron, squat, rope-coiled. Fully opaque: the town snow is baked in at the MEASURED tg-snowpoint colour (#e9f2f6). (WAVE-T52-RIMEFALL-PLAN.md §5.)
+PIX tile-prop-ironbollard 16 16
+gggggggggggggggg
+gggggggwwggggggg
+ggggggwwwwgggggg
+gggggiiiiiiigggg
+gggggiiiiiiigggg
+ggggggiiiiiggggg
+ggggggiiiiiggggg
+gggggIIIIIIggggg
+gggggIiiiiIggggg
+gggggIIIIIIggggg
+gggggIIIIIIggggg
+gggggrrrrrrggggg
+ggggrRRRRRRrgggg
+ggggrrrrrrrrgggg
+gggggggggggggggg
+gggggggggggggggg
+PAL
+g #e9f2f6 town snow — measured tg-snowpoint
+w #f7fcfd snow cap — fresh white
+i #8fa5ba iron — lit face
+I #54687e iron — body
+r #8a6f4d rope coil — shaded
+R #b08d5f rope coil — lit

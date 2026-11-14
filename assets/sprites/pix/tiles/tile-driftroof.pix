@@ -1,0 +1,27 @@
+# Wave T52 (Rimefall kit): driftroof — worn only by the shipped Rimefall Gym stamp's tr roof cells, so the town's landmark wears the town's own register: a DRIFT-CAP ROOF, dark slate shingles at the foot under a deep snowdrift cap with a scalloped drift edge and an icicle fringe at the eave — the approved painting's gym hall carries the deepest snow load in town. A snow-LOADED roof: unlike Astral's duskroof (violet shingle courses, no snow load), Fenland's boardroof (vertical board courses), Honeyfield's bloomroof (petal scales), Heritage's heritageroof (plain teal slate). (NO-SAME-KIT law; WAVE-T52-RIMEFALL-PLAN.md §5.)
+PIX tile-driftroof 16 16
+WwwwwwwWwwwwwwWw
+wwwwwWwwwwwwWwww
+wwwWwwwwwwWwwwww
+wWwwwwwwWwwwwwwW
+wwwwwwWwwwwwwWww
+wwwwWwwwwwwWwwww
+wwWwwwwwwWwwwwww
+WwwwwwwWwwwwwwWw
+ewwwwWweewwwWwee
+eeeWweeeeeWweeee
+ieeeeeeeeeeeeeei
+leeeeeillieeiell
+aaaieaaaaaeeaaaa
+aaaaaaaaaaaadaaa
+ssssssssssssssss
+llllllllllllllll
+PAL
+w #eef6fa snowdrift cap
+W #e2eef6 snowdrift cap — shaded scoop
+e #b9d2e4 drift edge / eave — blue shade
+i #dceefb icicle fringe
+a #46586e shingle body — dark slate
+l #5d748e shingle lit top edge
+d #37485c shingle grain shade
+s #26313f shingle course seam
