@@ -3331,6 +3331,42 @@ T46_KIND_DEFS.forEach(([kind], i) => {
 const T46_PROP_KINDS = T46_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
 const T46_WALL_KINDS = T46_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
 const T46_FLOOR_KINDS = T46_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
+// Wave T47: Repose Town's own kit — 'Olive Shingle & River
+// Pebble': the pebblefloor (rounded river pebbles in offset
+// rows bedded in pale sand mortar — the town's registered
+// street), the oliveroof (olive wood shingle courses, worn
+// only by the shipped Daycare stamp's th roof cells, so the
+// painting's olive roofs land on the town's namesake building
+// and the House + Daycare roof share breaks) and two props:
+// the standingstone (a weathered standing stone with cord-mark
+// grooves — the tale 'The Day-Care Egg Ledger' register —
+// flanking the Route 210 landing) and the eggbasket (a straw
+// nest of eggs at the day-care yard and the Daycare frontage).
+// Indices 840-843 per the Director's index ruling (main's kinds
+// run 594-636 + 645-648 + 660-662 + 672-675 + 684-687 + 696-699 +
+// 708-711 + 720-724 + 732-736 + 744-748 + 756-759 (T40) +
+// 768-771 (T41) + 780-783 (T42) + 792-795 (T43) + 804-807 (T44) +
+// 816-819 (T45); the parallel T46 claim holds 828-831; 808-815 +
+// 820-827 + 832-839 stay empty), verified free against
+// origin/main, TILE_CHARS and every map row. Authored art:
+// assets/sprites/pix/tiles/tile-pebblefloor.pix,
+// tile-oliveroof.pix, tile-prop-standingstone.pix,
+// tile-prop-eggbasket.pix. (WAVE-T47-REPOSE-PLAN.md.)
+const T47_KIND_DEFS = [
+  ['pebblefloor', 'floor'],
+  ['oliveroof', 'wall'],
+  ['standingstone', 'prop'],
+  ['eggbasket', 'prop'],
+];
+const T47_KIND_CHARS = {};
+T47_KIND_DEFS.forEach(([kind], i) => {
+  const ch = String.fromCodePoint(0x1E00 + 840 + i);
+  T47_KIND_CHARS[kind] = ch;
+  TILE_CHARS[ch] = kind;
+});
+const T47_PROP_KINDS = T47_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
+const T47_WALL_KINDS = T47_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
+const T47_FLOOR_KINDS = T47_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
 const SINNOH_TOWN_GROUND_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg);
 const SINNOH_TOWN_GROUND2_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg2);
 // TX-3: the 8 gym exteriors by town (original type-accent motifs).
@@ -111122,6 +111158,78 @@ const ART = {
     "gggggggggggggggg",
     "gggggggggggggggg"
   ] },
+  "tile-pebblefloor": { w: 16, h: 16, pal: {"a":"#b4bda1","l":"#d6dcc4","s":"#8d9678","m":"#77775f","o":"#5f7d3c"}, rows: [
+    "lllmlllmlllmlllm",
+    "laamlaamlaamlsam",
+    "lasmlasmlasmlasm",
+    "mmmmmmmmmmmommmm",
+    "lmlllolllmlllmll",
+    "amlaamlaamlaamla",
+    "smlasmlasmlasmla",
+    "mmmmmmmmmmmmmmmm",
+    "lllmlllmlllmlllm",
+    "laamlasmlaamlaam",
+    "lasmlasmlasmlasm",
+    "mmmmmmmmmmmmmmmm",
+    "lmlllmlllmlllmll",
+    "amlaamlaaolaamla",
+    "smlasmlasmlasmla",
+    "mmmmmmmmmmmmmmmm"
+  ] },
+  "tile-oliveroof": { w: 16, h: 16, pal: {"a":"#77863f","l":"#9aa854","s":"#5b6a2e","d":"#47541f","o":"#a9bf62"}, rows: [
+    "slllllslllllslll",
+    "saaaaasaaoaasaaa",
+    "saaaaasaaaaasaaa",
+    "dddddddddddddddd",
+    "lllslllllsllllls",
+    "aaasaaaaasaaaaos",
+    "aaasaaaaasaaaaas",
+    "dddodddddddddddd",
+    "slllllslllllslll",
+    "saaaaasaaaaasaaa",
+    "saaaaasaaaaasaaa",
+    "ddddddddoddddddd",
+    "lllslllllsllllls",
+    "aaasaaaaasaaaaas",
+    "aaosaaaaasaaaaas",
+    "dddddddddddddodd"
+  ] },
+  "tile-prop-standingstone": { w: 16, h: 16, pal: {"g":"#1d8a19","G":"#1d5419","s":"#7e878d","S":"#a7adb0","l":"#ccd1d2","d":"#565e63","o":"#7d9b4a"}, rows: [
+    "gggggggggggggggg",
+    "ggGGggggggggGGgg",
+    "ggggggssssgggggg",
+    "gggggsSSSSsggggg",
+    "gggggsSllSsggggg",
+    "gggggsSSSSsggggg",
+    "gggggsSddSsggggg",
+    "gggggssssssggggg",
+    "gggggsSoSSsggggg",
+    "gggggsSSSSsggggg",
+    "gggggsSddSsggggg",
+    "gggggssssssggggg",
+    "gggggsSSSSsggggg",
+    "gggggsSooSsggggg",
+    "ggggggssssgggggg",
+    "ggGGggggggggGGgg"
+  ] },
+  "tile-prop-eggbasket": { w: 16, h: 16, pal: {"g":"#1d8a19","G":"#1d5419","E":"#f2ead6","e":"#d9cbae","s":"#c9a44a","w":"#a37f2c","S":"#8a6a24"}, rows: [
+    "gggggggggggggggg",
+    "ggGGggggggggGGgg",
+    "gggggggggggggggg",
+    "gggggEEggggggggg",
+    "ggggEeeEEggggggg",
+    "gggEEeEEeEEggggg",
+    "gggEeEEeEeEgGGgg",
+    "ggggEEEEEEgggggg",
+    "gggssssssssggggg",
+    "gggswswswswsgggg",
+    "ggggssssssgggggg",
+    "ggggswswswgggggg",
+    "gggggssssggggggg",
+    "ggggggSSgggggggg",
+    "ggGGggggggggGGgg",
+    "gggggggggggggggg"
+  ] },
   "partner-back-bob": { base: "partner-back", w: 64, h: 64, pal: {}, shiftY: 2 },
   "partner-front-bob": { base: "partner-front", w: 64, h: 64, pal: {}, shiftY: 2 },
   "abomasnow-back-bob": { base: "abomasnow-back", w: 64, h: 64, pal: {}, shiftY: 2 },
@@ -116490,6 +116598,11 @@ for (const k of T45_FLOOR_KINDS) TILE_ART[k] = 'tile-' + k;
 for (const k of T46_PROP_KINDS) TILE_ART[k] = 'tile-prop-' + k;
 for (const k of T46_WALL_KINDS) TILE_ART[k] = 'tile-' + k;
 for (const k of T46_FLOOR_KINDS) TILE_ART[k] = 'tile-' + k;
+// Wave T47: Repose Town's own kit kinds take their authored
+// tiles (assets/sprites/pix/tiles/tile-<kind>.pix).
+for (const k of T47_PROP_KINDS) TILE_ART[k] = 'tile-prop-' + k;
+for (const k of T47_WALL_KINDS) TILE_ART[k] = 'tile-' + k;
+for (const k of T47_FLOOR_KINDS) TILE_ART[k] = 'tile-' + k;
 // Premium+ W6 (TX-3/PL-1): door-open frames, authored in TX-3 for every
 // door kind. The warp-fade engine that plays them lands in W7 — W6
 // wires the frames (this registry + cache.doorOpen + doorOpenCanvas)
@@ -118358,6 +118471,11 @@ function resolveTileLayers(cache, kind, x, y, kindAt, t, phase, mapId) {
     // fully opaque — the town grass is baked in).
     case 'poffintin':
     case 'berrybasket':
+    // Wave T47: Repose's standing stones and its egg baskets
+    // composite over their meadow the same way (both arts are
+    // fully opaque — the town grass is baked in).
+    case 'standingstone':
+    case 'eggbasket':
     // Wave T17: the radio mast composites over its compound grass too.
     case 'radiomast': {
       // Object tiles carry transparent surrounds (Wave 1): lay the ground
@@ -125424,6 +125542,19 @@ const WALKABLE = new Set(['.', ',', 'D', 'E', 'C', 'F', 'J', 'K', '1', '2', 'V',
   // 780-783 + 792-795 + 804-807; the parallel T45 claim holds
   // 816-819; gaps stay empty.)
   ...[828]
+    .map((i) => String.fromCodePoint(0x1E00 + i)),
+  // Wave T47: the pebblefloor char (U+1E00+840, tiles.mjs
+  // T47_KIND_DEFS) is walkable street material — Repose
+  // Town's river-pebble cobble, swapped onto the town's tg2
+  // street cells (the front street, the north/south avenues,
+  // the ruins approach — all shipped walkable as tg2), so
+  // floor stays floor. (Indices 840-843 per the Director's
+  // index ruling: main's kinds run 594-636 + 645-648 +
+  // 660-662 + 672-675 + 684-687 + 696-699 + 708-711 +
+  // 720-724 + 732-736 + 744-748 + 756-759 + 768-771 +
+  // 780-783 + 792-795 + 804-807 + 816-819; the parallel
+  // T46 claim holds 828-831; gaps stay empty.)
+  ...[840]
     .map((i) => String.fromCodePoint(0x1E00 + i))]);
 
 // Trainer definitions for the slice.
@@ -154852,24 +154983,24 @@ const MAPS9 = {
     "music": "viridian-theme",
     "weather": "clear",
     "rows": [
-      "ῖῖῖῗῖῖῖῖῖῖῗῖῖ῕῕ῖῖῖῗῖῖῖῖῖῖῗῖῖ",
-      "ῖ῔῔῔῔῔῔῔῔ẍ῔῔῔῕῕῕῕῕῕῕῕῕῕῕῔῔῔ῖ",
-      "ῖ῔῔jklm῔῔deef῕῕ῚῚῚ῕῔ῚῚῚ῕῔῔῔ῖ",
-      "ῖ῔῔AJKA῔῔P12P῕῕ΊsΊ῕῔ΊsΊ῕῔῔῔ῖ",
-      "ῖ῔῕῕῕῕῕῕῕῕῕῕῕῕῕῕῕῕῕῕῕῕῕῕ṿ῔῔ῖ",
-      "ῖ῔S῕῕῕῕῕῕῕῕῕῕῕῕῕῕῕῕῕῕῕῕῕῕῔῔ῖ",
-      "ῖ῔῕῕῕῕῔῕ẑ῔῔῕῔῕῕῔῔῔῕῔῔῔῔῔῕῔῔ῖ",
-      "ῖ῔῕῕῕῕῔῕Rẍ῕῔῕῕῕῕R῔῕R῔῔῔῔῕῔῔ῖ",
-      "ῖ῔῕῕῕῕῔῕ṿ῔῕῕῕῕῕῕῕῕῕῔῔῔῔῔῕῔῔ῖ",
-      "ῖ῔῕῕῕῕R῕῔R῕ṿ῕῕῕῔῔῔῕ṿ῔῔῔῔῕῔῔ῖ",
-      "ῖẍ῕῕῕῕῕῕῕῕῕῕῕῕῕῔῔῔῕῔῔῔῔῔῕῔῔ῖ",
-      "ῖ῔῕ῘῘῘῘ῕῔῔῕῔ṿ῕῕῔῔῔῕῔ᾔᾔᾔᾔ῕ᾔ῔ῖ",
-      "ῖ῔῕ῙsῙῙ῕῔῔῕ṿ῔῕῕῕῕῕῕῕῕῕῕῕Sᾔ῔ῖ",
-      "ῖ῔῕....῕῕῕῕῕῕῕῕῕῕῕῕῕῕῕῕῕῕ᾔ῔ῖ",
-      "ῖ῔.,,,,.῔῔῔῔῔῕῕῔῔῔῕῔ᾔᾔᾔᾔ῕ᾔ῔ῖ",
-      "ῖ῔῕ṿ,,,.῔R῔῔῔῕῕῔῔῕῕῕῕῕῕῕῕ᾔ῔ῖ",
-      "ῖṿ῕῕.ẑ.῕῕῕῕῕῕῕῕῕῕῕ṿ῔῔῔῔῔῔῔῔ῖ",
-      "ῖῖῖῗῖῖῖῖῖῖῗῖῖ῕῕ῖῖῖῗῖῖῖῖῖῖῗῖῖ",
+      "ῖῖῖῗῖῖῖῖῖῖῗῖῖⅈⅈῖῖῖῗῖῖῖῖῖῖῗῖῖ",
+      "ῖ῔῔῔῔῔῔῔῔ẍ⅊῔῔ⅈⅈ῔⅊῔῔῔῔῔῔῔῔ⅈ῔ῖ",
+      "ῖ῔῔jklm῔῔deefⅈⅈῚῚῚ῔Sⅉⅉⅉ῔῔ⅈ῔ῖ",
+      "ῖ῔῔AJKA῔῔P12PⅈⅈΊsΊ῔῔ΊsΊⅈⅈⅈ῔ῖ",
+      "ῖⅈⅈⅈⅈⅈⅈⅈⅈⅈⅈⅈⅈⅈⅈⅈⅈⅈⅈⅈⅈⅈⅈⅈṿ῔῔ῖ",
+      "ῖ῔S῔῔῔ⅈS῔῔῔ⅈ῔ⅈⅈ῔῔ῚῚῚ῔῔῔⅋῔῔῔ῖ",
+      "ῖ῔῔῔῔῔ⅈⅈẑS῔ⅈ῔ⅈⅈ῔SΊsΊ῔῔῔῔῔῔῔ῖ",
+      "ῖ῔῔῔῔῔ⅈⅈRẍ῔῔῔ⅈⅈ῔R῔ⅈR῔῔῔῔῔῔῔ῖ",
+      "ῖ῔῔ῚῚῚⅈⅈṿ῔῔῔῔ⅈⅈ῔῔῔ⅈ῔῔῔῔῔῔῔῔ῖ",
+      "ῖ῔῔ΊsΊRⅈ῔R῔ṿ῔ⅈⅈ῔῔῔ⅈṿ῔῔῔῔῔῔῔ῖ",
+      "ῖẍⅈⅈⅈⅈⅈⅈ῔῔῔῔῔ⅈⅈ῔῔῔ⅈ῔῔῔῔῔῔῔῔ῖ",
+      "ῖS῔ῘῘῘῘ῔S῔῔῔ṿⅈⅈ῔῔῔ⅈ῔ᾔᾔᾔᾔ῔ᾔ῔ῖ",
+      "ῖ῔⅋ῙsῙῙ῔῔῔῔ṿ῔ⅈⅈⅈⅈⅈⅈⅈⅈⅈⅈⅈSᾔ῔ῖ",
+      "ῖ῔ⅈ....ⅈⅈⅈⅈⅈⅈⅈⅈⅈⅈⅈⅈⅈⅈⅈⅈⅈⅈᾔ῔ῖ",
+      "ῖ῔.,,,,.S῔῔῔῔ⅈⅈ῔S῔῔῔ᾔᾔᾔᾔⅈᾔ῔ῖ",
+      "ῖ῔ⅈṿ,,,.῔R῔῔῔ⅈⅈ῔῔῔῔῔῔῔῔῔ⅈᾔ῔ῖ",
+      "ῖṿⅈⅈ.ẑ.ⅈ῔῔῔ⅈⅈⅈⅈⅈⅈⅈṿ῔῔῔῔῔ⅈ῔῔ῖ",
+      "ῖῖῖῗῖῖῖῖῖῖῗῖῖⅈⅈῖῖῖῗῖῖῖῖῖῖῗῖῖ",
     ],
     "warps": [
       {"x": 4, "y": 3, "to": {"map": "center", "x": 4, "y": 4}, "via": {"map": "solaceon", "x": 4, "y": 4}},
@@ -154894,9 +155025,10 @@ const MAPS9 = {
       {"x": 1, "y": 11, "text": "REPOSE TOWN — South: ROUTE 209 · North: ROUTE 210."},
       {"x": 8, "y": 14, "text": "REPOSE TOWN — South: ROUTE 209 · North: ROUTE 210."},
       {"x": 16, "y": 14, "text": "REPOSE TOWN — South: ROUTE 209 · North: ROUTE 210."},
+      {"x": 7, "y": 5, "text": "REPOSE TOWN — South: ROUTE 209 · North: ROUTE 210."}
     ],
     "npcs": [
-      {"x": 3, "y": 5, "name": "MART CLERK", "art": "clerk", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#4a3a2a", "dialogue": ["Repose Town Mart — stocked for the road ahead."], "mart": {"stock": ["greatball", "ultraball", "hyperpotion", "fullheal", "revive", "superpotion"]}},
+      {"x": 9, "y": 4, "name": "MART CLERK", "art": "clerk", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#4a3a2a", "dialogue": ["Repose Town Mart — stocked for the road ahead."], "mart": {"stock": ["greatball", "ultraball", "hyperpotion", "fullheal", "revive", "superpotion"]}},
       {"x": 11, "y": 7, "name": "DAY CARE LADY UNA", "art": "lady", "skin": "#d8a878", "shirt": "#7a4a8a", "pants": "#2a2a3a", "hair": "#c0c0c0", "dialogue": ["We raise what trainers entrust to us, egg to elder. The fence has heard ten thousand first steps.", "Two eggs hatched the same morning last week. The whole town took the day off."]},
       {"x": 18, "y": 13, "name": "RUIN DELVER OSSA", "art": "ranger", "skin": "#e8b888", "shirt": "#3a6ac0", "pants": "#2a3a4a", "hair": "#1a1a1a", "dialogue": ["The ruins' chambers spell nothing I will repeat, and I have read them all.", "North road climbs toward Shardfall country. The tower south keeps the road's dead company."]},
       {"x": 6, "y": 10, "name": "BREEDER KID WREN", "art": "kid", "skin": "#f0c8a0", "shirt": "#3a7a4a", "pants": "#4a3a2a", "hair": "#2a1a0a", "dialogue": ["My PETRILET pretends to be a plant until snack time. Then it pretends faster.", "Inglenook's domes are a walk south. I can see the gold from the north hill."]},
