@@ -697,6 +697,51 @@
 //     T35 Lotus Cove claim; the THIRTY-THIRD exception is
 //     T35's, recorded on its own branch.) Re-pinned with the
 //     T36 build.
+//     THIRTY-SIXTH DOCUMENTED EXCEPTION (WAVE T38; the
+//     THIRTY-FIFTH is WAVE T37 Craterlake's, recorded on its
+//     own branch): the registry grows by one scoped entry —
+//     pacifidlog: [raftfloor] (the rebuild-wave registration
+//     the registry's own W4 comment promised this town) — and
+//     pacifidlog's pin migrates FAIL -> PASS: the Driftlog
+//     rebuild on its own kit from birth ('Lashed Log & Coral
+//     Door', idx 732-736: lashed-log raftfloor streets, raft-
+//     timber shingle raftroof, the coraldoor face, WREN's
+//     anchor fence posts, the west-edge pontoon props) per
+//     WAVE-T38-DRIFTLOG-PLAN.md. Driftlog shipped with its
+//     whole 252-cell island as ONE shared boardwalk slab — a
+//     kind in NO audit tier — so its connectivity lived on a
+//     19-cell sand spine and both r131 exits stood on open
+//     water: conn 12/30 by construction, fabric 0.9367. The
+//     build retires the slab behind the town's own re-
+//     authored raft grass (tg-pacifidlog, its art re-authored
+//     from its .pix — the entry serves no other map), lands
+//     the exits as a lashed-log landfall nose (the T31 jetty
+//     ruling), runs ONE avenue from the landings to the spine
+//     and ONE plaza lane on row 11 south of it (the shipped
+//     south-lawn desire legs scored strict 0.00 over bare
+//     ground; the lane's gaps at (7,11) and (12,11) are
+//     load-bearing — paving either straddles the byte-kept
+//     barrel / flower on the fabric), moves the orphaned MART
+//     CLERK (3,5) -> (21,7) at his Mart's west-front apron,
+//     and marks its four junction sites with verbatim copies
+//     of the town's CURRENT ROADS sign (no DIRS record exists
+//     in this town; the copies carry the directions text the
+//     town itself ships). Disclosed residues: fabric 0.9807
+//     carries two shipped flower cells standing on desire
+//     corridors — (20,7) on the Mart's west corridor, (12,10)
+//     on the x12 column — byte-kept dressing the A* steps
+//     over, inside the same terms as T37's disclosures;
+//     CORALIE stands on the plaza lane at her byte-kept post
+//     (10,11) (her standing cell takes raftfloor, the bridge
+//     her access segment needed). No encounter cell touched:
+//     commas 14 + the sea's water table byte-kept; stamps,
+//     warps, posts and both shipped sign texts byte-kept.
+//     Gate STATUS flips: pass 0 -> 1, conn 12/30 -> 30/30,
+//     junctions 0 -> 4 (0 bare), strict 0.9367 -> 0.6569 (the
+//     shipped figure was the boardwalk's DRESSED-tier
+//     accident; the landed figure is carried by the authored
+//     street graph), fabric 0.9367 -> 0.9807, apronMin 0.75
+//     unchanged. NO other town's pin moves.
 //     Tuple: [pass, connOk, connPairs, stepTouch, stepTot, components,
 //     junctionSites, junctionsBare, apronLow, apronMin, merged,
 //     onFabric, shoulderOrphans, unanchoredAny, strict, fabric].
@@ -939,8 +984,8 @@ async function gateTuple(id, t) {
 }
 
 // 1. registry scope lock
-ok('street registry is exactly { vermilion: [boardwalk], blackthorn: [settfloor], silvertown: [marblefloor], ecruteak: [wornfloor], saffron: [avenuefloor], violet: [violetfloor], azalea: [brickfloor], mahogany: [gravelfloor], rustboro: [cutstonefloor], fuchsia: [marshfloor], cianwood: [driftfloor], dewford: [plankfloor], viridian: [slatefloor], celadon: [promfloor], slateport: [quayfloor, boardwalk], cerulean: [pierfloor], mauville: [gridfloor], lavender: [shinglefloor], cherrygrove: [inlayfloor], verdanturf: [petalfloor, cavefloor], olivine: [harbourfloor, jettyfloor], fallarbor: [ashfloor], lavaridge: [steamfloor, terracefloor], fortree: [canopyfloor, boardwalk], lilycove: [cobblefloor, cavefloor], mossdeep: [starfloor, dockfloor], sootopolis: [craterfloor, cavefloor] }',
-  JSON.stringify(STREET_REGISTRY) === '{"vermilion":["boardwalk"],"blackthorn":["settfloor"],"silvertown":["marblefloor"],"ecruteak":["wornfloor"],"saffron":["avenuefloor"],"violet":["violetfloor"],"azalea":["brickfloor"],"mahogany":["gravelfloor"],"rustboro":["cutstonefloor"],"fuchsia":["marshfloor"],"cianwood":["driftfloor"],"dewford":["plankfloor"],"viridian":["slatefloor"],"celadon":["promfloor"],"slateport":["quayfloor","boardwalk"],"cerulean":["pierfloor"],"mauville":["gridfloor"],"lavender":["shinglefloor"],"cherrygrove":["inlayfloor"],"verdanturf":["petalfloor","cavefloor"],"olivine":["harbourfloor","jettyfloor"],"fallarbor":["ashfloor"],"lavaridge":["steamfloor","terracefloor"],"fortree":["canopyfloor","boardwalk"],"lilycove":["cobblefloor","cavefloor"],"mossdeep":["starfloor","dockfloor"],"sootopolis":["craterfloor","cavefloor"]}',
+ok('street registry is exactly { vermilion: [boardwalk], blackthorn: [settfloor], silvertown: [marblefloor], ecruteak: [wornfloor], saffron: [avenuefloor], violet: [violetfloor], azalea: [brickfloor], mahogany: [gravelfloor], rustboro: [cutstonefloor], fuchsia: [marshfloor], cianwood: [driftfloor], dewford: [plankfloor], viridian: [slatefloor], celadon: [promfloor], slateport: [quayfloor, boardwalk], cerulean: [pierfloor], mauville: [gridfloor], lavender: [shinglefloor], cherrygrove: [inlayfloor], verdanturf: [petalfloor, cavefloor], olivine: [harbourfloor, jettyfloor], fallarbor: [ashfloor], lavaridge: [steamfloor, terracefloor], fortree: [canopyfloor, boardwalk], lilycove: [cobblefloor, cavefloor], mossdeep: [starfloor, dockfloor], sootopolis: [craterfloor, cavefloor], pacifidlog: [raftfloor] }',
+  JSON.stringify(STREET_REGISTRY) === '{"vermilion":["boardwalk"],"blackthorn":["settfloor"],"silvertown":["marblefloor"],"ecruteak":["wornfloor"],"saffron":["avenuefloor"],"violet":["violetfloor"],"azalea":["brickfloor"],"mahogany":["gravelfloor"],"rustboro":["cutstonefloor"],"fuchsia":["marshfloor"],"cianwood":["driftfloor"],"dewford":["plankfloor"],"viridian":["slatefloor"],"celadon":["promfloor"],"slateport":["quayfloor","boardwalk"],"cerulean":["pierfloor"],"mauville":["gridfloor"],"lavender":["shinglefloor"],"cherrygrove":["inlayfloor"],"verdanturf":["petalfloor","cavefloor"],"olivine":["harbourfloor","jettyfloor"],"fallarbor":["ashfloor"],"lavaridge":["steamfloor","terracefloor"],"fortree":["canopyfloor","boardwalk"],"lilycove":["cobblefloor","cavefloor"],"mossdeep":["starfloor","dockfloor"],"sootopolis":["craterfloor","cavefloor"],\"pacifidlog\":[\"raftfloor\"]}',
   JSON.stringify(STREET_REGISTRY));
 
 // 2. census: the 64 towns of townSetOf (pallet included)
@@ -1002,7 +1047,7 @@ const PIN = {
   "oldale": [1, 110, 110, 5, 5, 1, 11, 0, 0, 0.857, 0, 0, 0, 1, 0.6991, 0.9821],
   "olivine": [1, 110, 110, 7, 7, 1, 11, 0, 0, 0.857, 0, 0, 0, 0, 0.6186, 0.9819],
   "oreburgh": [1, 182, 182, 8, 8, 1, 1, 0, 0, 0.714, 0, 0, 0, 0, 0.9985, 1],
-  "pacifidlog": [0, 12, 30, 4, 4, 1, 0, 0, 0, 0.75, 0, 0, 0, 0, 0.9367, 0.9367],
+  "pacifidlog": [1, 30, 30, 4, 4, 1, 4, 0, 0, 0.75, 0, 0, 0, 0, 0.6569, 0.9807],
   "pallet": [1, 90, 90, 6, 6, 1, 5, 0, 0, 0.643, 0, 0, 0, 0, 0.9463, 0.9945],
   "pastoria": [1, 182, 182, 8, 8, 1, 8, 0, 0, 0.824, 0, 0, 0, 0, 0.9582, 0.9945],
   "petalburg": [1, 110, 110, 7, 7, 1, 10, 1, 0, 0.643, 0, 0, 0, 1, 0.6643, 0.9896],

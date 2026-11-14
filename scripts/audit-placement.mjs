@@ -58,7 +58,7 @@ const ROUTE_FURNITURE = (k) => ['lamp', 'signpost', 'barrel', 'crates', 'sandcra
 // counting it as structure would credit a floating sign as a bridge —
 // Craterlake's Center sign sits in its building's ring and would lift
 // that ring 0.588 -> 0.625 without a single tile moving (W4 probe).
-const BUILD = (k) => k.startsWith('roof') || k.startsWith('wall') || k.startsWith('door') || k.startsWith('th-') || k.startsWith('tr-') || k.startsWith('tl-') || k.startsWith('tw-') || ['house', 'gymwall', 'gymdoor', 'centerdoor', 'gym-rock', 'gym-volt', 'fossildisplay', 'dresswindow', 'ancientpillar', 'drakeroof', 'parapetroof', 'slabroof', 'cedarroof', 'thatchroof', 'sageroof', 'towerroof', 'mossroof', 'pineroof', 'coproof', 'safariroof', 'surfroof', 'shackroof', 'slateroof', 'glassroof', 'canvasroof', 'mansardroof', 'copperroof', 'bronzroof', 'shingleroof', 'sakuraroof', 'trellisroof', 'beaconroof', 'timberroof', 'steamroof', 'leafroof', 'lotusroof', 'starroof', 'craterroof', 'craterwall'].includes(k);// ('drakeroof'/'parapetroof': the W-DIFF kit-identity roof kinds —
+const BUILD = (k) => k.startsWith('roof') || k.startsWith('wall') || k.startsWith('door') || k.startsWith('th-') || k.startsWith('tr-') || k.startsWith('tl-') || k.startsWith('tw-') || ['house', 'gymwall', 'gymdoor', 'centerdoor', 'gym-rock', 'gym-volt', 'fossildisplay', 'dresswindow', 'ancientpillar', 'drakeroof', 'parapetroof', 'slabroof', 'cedarroof', 'thatchroof', 'sageroof', 'towerroof', 'mossroof', 'pineroof', 'coproof', 'safariroof', 'surfroof', 'shackroof', 'slateroof', 'glassroof', 'canvasroof', 'mansardroof', 'copperroof', 'bronzroof', 'shingleroof', 'sakuraroof', 'trellisroof', 'beaconroof', 'timberroof', 'steamroof', 'leafroof', 'lotusroof', 'starroof', 'craterroof', 'craterwall', 'raftroof'].includes(k);// ('drakeroof'/'parapetroof': the W-DIFF kit-identity roof kinds —
 // wall-class roofs that don't carry the roof-/th- prefixes; registered
 // here so house footprints/aprons measure whole, W-DIFF-AUDIT Phase C.
 // 'slabroof'/'cedarroof': the W-DIFF2 pair's roof kinds, same terms.)
@@ -103,6 +103,12 @@ const BUILD = (k) => k.startsWith('roof') || k.startsWith('wall') || k.startsWit
 // ('craterroof'/'craterwall': the T37 Craterlake City kit-identity
 // kinds — same wall-class registration, WAVE-T37-CRATERLAKE-PLAN.md
 // kit register.)
+// ('raftroof': the T38 Driftlog Town kit-identity roof kind — same
+// wall-class registration, WAVE-T38-DRIFTLOG-PLAN.md kit register.
+// 'coraldoor' is deliberately NOT registered here: it replaces the
+// shipped facade-panel cells, which are not BUILD mass either, so
+// Driftlog's house footprints and aprons measure exactly as
+// shipped.)
 // STREET-MATERIAL REGISTRY (W4, 2026-11-13). The network tier counts
 // the universal street materials (path, psand*, tg2-*). A town whose
 // CLEAN build record authors a dressed material AS its street fabric
@@ -113,15 +119,18 @@ const BUILD = (k) => k.startsWith('roof') || k.startsWith('wall') || k.startsWit
 // Without the registration the audit was blind to the dock street:
 // gym step-offs 5/7, connectivity 72/110 — while the walkable graph
 // itself connects 177/177 (T6 CHECKLIST residual, closed by W4).
-// NOT registered, deliberately: fortree / slateport / pacifidlog
-// boardwalk is un-rebuilt legacy state whose connectivity belongs to
-// their rebuild waves (they register, and mark their junctions, when
-// they are brought to the CLEAN standard); sunnyshore's harbourstone
+// NOT registered, deliberately (as written at W4): fortree /
+// slateport / pacifidlog boardwalk was un-rebuilt legacy state
+// whose connectivity belonged to their rebuild waves (they
+// register, and mark their junctions, when they are brought to
+// the CLEAN standard) — all three rebuild waves have since
+// landed (slateport T28, fortree T34, pacifidlog T38, each
+// registering its own authored material); sunnyshore's harbourstone
 // is decorative inlay speckle, not a street, and is not registrable
 // as one. tests/placement-gates-checks.mjs pins this registry's exact
 // contents and every unregistered town's baseline gate tuple, so the
 // registration can neither leak nor silently widen.
-export const STREET_REGISTRY = { vermilion: ['boardwalk'], blackthorn: ['settfloor'], silvertown: ['marblefloor'], ecruteak: ['wornfloor'], saffron: ['avenuefloor'], violet: ['violetfloor'], azalea: ['brickfloor'], mahogany: ['gravelfloor'], rustboro: ['cutstonefloor'], fuchsia: ['marshfloor'], cianwood: ['driftfloor'], dewford: ['plankfloor'], viridian: ['slatefloor'], celadon: ['promfloor'] , slateport: ['quayfloor', 'boardwalk'], cerulean: ['pierfloor'], mauville: ['gridfloor'], lavender: ['shinglefloor'], cherrygrove: ['inlayfloor'], verdanturf: ['petalfloor', 'cavefloor'], olivine: ['harbourfloor', 'jettyfloor'], fallarbor: ['ashfloor'], lavaridge: ['steamfloor', 'terracefloor'], fortree: ['canopyfloor', 'boardwalk'], lilycove: ['cobblefloor', 'cavefloor'], mossdeep: ['starfloor', 'dockfloor'], sootopolis: ['craterfloor', 'cavefloor'] };// W-DIFF pilot extension (2026-11-13, documented exception #6/#7 in the
+export const STREET_REGISTRY = { vermilion: ['boardwalk'], blackthorn: ['settfloor'], silvertown: ['marblefloor'], ecruteak: ['wornfloor'], saffron: ['avenuefloor'], violet: ['violetfloor'], azalea: ['brickfloor'], mahogany: ['gravelfloor'], rustboro: ['cutstonefloor'], fuchsia: ['marshfloor'], cianwood: ['driftfloor'], dewford: ['plankfloor'], viridian: ['slatefloor'], celadon: ['promfloor'] , slateport: ['quayfloor', 'boardwalk'], cerulean: ['pierfloor'], mauville: ['gridfloor'], lavender: ['shinglefloor'], cherrygrove: ['inlayfloor'], verdanturf: ['petalfloor', 'cavefloor'], olivine: ['harbourfloor', 'jettyfloor'], fallarbor: ['ashfloor'], lavaridge: ['steamfloor', 'terracefloor'], fortree: ['canopyfloor', 'boardwalk'], lilycove: ['cobblefloor', 'cavefloor'], mossdeep: ['starfloor', 'dockfloor'], sootopolis: ['craterfloor', 'cavefloor'], pacifidlog: ['raftfloor'] };// W-DIFF pilot extension (2026-11-13, documented exception #6/#7 in the
 // guard): blackthorn's settfloor and silvertown's marblefloor are the
 // first two kit-level identity street materials (owner ruling: "Every
 // town kit should be different" — muse-directive/W-DIFF-AUDIT.md Phase
@@ -294,6 +303,19 @@ export const STREET_REGISTRY = { vermilion: ['boardwalk'], blackthorn: ['settflo
 // town FAILED the apron gate alone: its Center's ring stood at
 // 0.588 against the rim rock band, and its 124-cell network
 // was the tg2 mud sea; WAVE-T37-CRATERLAKE-PLAN.md §2/§3).
+// T38 extension (THIRTY-SIXTH documented exception in the guard;
+// #35 is T37 Craterlake's parallel claim, per the Director's
+// allocation): pacifidlog registers 'raftfloor' (Lashed Log &
+// Coral Door), Driftlog Town's lashed-log street, on the same
+// one-material one-town terms. pacifidlog shipped a connectivity
+// FAIL by construction — conn 12/30, both r131 exits standing on
+// open water — over a 252-cell boardwalk slab that sits in NO
+// audit tier (the registry comment above named it un-rebuilt
+// legacy awaiting exactly this wave); the wave retires the slab
+// behind the town's own re-authored raft grass, builds the
+// landfall nose + north avenue in raftfloor, and marks its
+// junctions with verbatim copies of the town's CURRENT ROADS
+// sign. (Register: WAVE-T38-DRIFTLOG-PLAN.md §5/§7.)
 export function tiersFor(id, tiers) {
   const extra = STREET_REGISTRY[id];
   if (!extra || !extra.length) return tiers;
