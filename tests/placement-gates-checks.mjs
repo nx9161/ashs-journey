@@ -2125,6 +2125,74 @@
 //     (Proof + register: WAVE-T64-SANCTUM-PLAN.md §7/§9;
 //     dossier BLOCKED-FABRIC-GATE.md in the wave's
 //     deliverables.) NO other town's pin moves.
+//     SIXTY-THIRD DOCUMENTED EXCEPTION (WAVE T65):
+//     frontierhub's pin is its POST-T65 tuple.
+//     STREET_REGISTRY gains an entry — frontierhub:
+//     [trialfloor] (the rebuild-wave registration the
+//     registry's own terms promise each town) — and
+//     frontierhub's pin migrates to its post-T65
+//     measured tuple (below), and NO other town's
+//     pin moves. UNLIKE WAVES T61/T63, THIS PIN
+//     STAYS pass 1: the Trial Grounds shipped a full
+//     PASS and still passes — conn 210/210, step-offs
+//     15/15, exactly 1 fabric component, junctions
+//     3/3 covered / bare 0, apronLow 0 / apronMin
+//     0.85, onFabric 0, orphans 0, unanchored 0.
+//     ONLY the strict/fabric means move: 0.9829 ->
+//     0.9811, still above the 0.98 gate. The delta
+//     is measured phase-by-phase on the real audit
+//     code (plan §6): the path -> trialfloor street
+//     conversion is score-NEUTRAL (tuple byte-
+//     identical); the Tower crown, the streakboard
+//     and the trialbanner cost nothing; the MART
+//     CLERK re-seat (3,5) -> (24,13) costs 0.0008
+//     (his post is a desire-path POI — routes to the
+//     Mart's front row run a shade less on fabric
+//     than routes to his orphaned flower tile); the
+//     sign tilings at (9,14) + (9,19) cost 0.0010
+//     combined (two DIRS records now VISIBLE on sign
+//     tiles; their cells leave the walkable ground
+//     and two desire lines reroute a step wider).
+//     The Trial Grounds build on its own kit from
+//     birth ('Trial Bronze & Flecked Sandstone', idx
+//     1056-1059: flecked sandstone trialfloor
+//     streets, the standing-seam bronze trialroof
+//     Tower crown, the blank streakboard + the
+//     bronze-and-teal trialbanner props) per
+//     WAVE-T65-TRIALGROUNDS-PLAN.md. The hub shipped
+//     its defects quieter than its island siblings:
+//     gates already PASS, NO tg2 anywhere — but its
+//     WHOLE street graph was the generic path kind,
+//     ALL NINE sign records stood invisible (zero
+//     sign tiles on the island), the Tower shared
+//     its roof-terra kind with the Dome + Palace,
+//     and the MART CLERK stood orphaned at (3,5) on
+//     a flower tile in front of the Tower, his Mart
+//     the south stamp. The build converts the
+//     street graph 1:1 in trialfloor, crowns the
+//     Tower in trialroof (the BUILD classifier
+//     gains 'trialroof' on the kit-roof terms),
+//     tiles all eight remaining sign records, stands
+//     the painting's blank streak board on the
+//     town-sign record's own cell (23,10) and the
+//     trialbanner at the pier head (20,19), and
+//     re-seats the clerk at (24,13). All ten
+//     facility interiors, every warp, every sign
+//     text and every other post stay byte-for-byte;
+//     no tale exists for the Grounds and none was
+//     invented. frontierhub's pin migrates [1, 210,
+//     210, 15, 15, 1, 3, 0, 0, 0.85, 0, 0, 0, 0,
+//     0.9829, 0.9829] -> [1, 210, 210, 15, 15, 1, 3,
+//     0, 0, 0.85, 0, 0, 0, 0, 0.9811, 0.9811]: pass
+//     1 -> 1, every count identical, strict/fabric
+//     0.9829 -> 0.9811 (the disclosed price of the
+//     clerk + tiling repairs, above). NO other
+//     town's pin moves. (The parallel WAVE T64
+//     Sanctum claim landed first as #62 at its
+//     merge, so the Director renumbered this one
+//     to #63 — the number is bookkeeping, the pin
+//     migration is the substance; the registry
+//     order is …pummelo, shamouti, frontierhub.)
 
 import { loadMaps, makeTiers, townSetOf, analyzeMap } from '../scripts/audit-desire-paths.mjs';
 import { scoreTown, gateCheck, tiersFor, STREET_REGISTRY } from '../scripts/audit-placement.mjs';
@@ -2151,8 +2219,8 @@ async function gateTuple(id, t) {
 }
 
 // 1. registry scope lock
-ok('street registry is exactly { vermilion: [boardwalk], blackthorn: [settfloor], silvertown: [marblefloor], ecruteak: [wornfloor], saffron: [avenuefloor], violet: [violetfloor], azalea: [brickfloor], mahogany: [gravelfloor], rustboro: [cutstonefloor], fuchsia: [marshfloor], cianwood: [driftfloor], dewford: [plankfloor], viridian: [slatefloor], celadon: [promfloor], slateport: [quayfloor, boardwalk], cerulean: [pierfloor], mauville: [gridfloor], lavender: [shinglefloor], cherrygrove: [inlayfloor], verdanturf: [petalfloor, cavefloor], olivine: [harbourfloor, jettyfloor], fallarbor: [ashfloor], lavaridge: [steamfloor, terracefloor], fortree: [canopyfloor, boardwalk], lilycove: [cobblefloor, cavefloor], mossdeep: [starfloor, dockfloor], sootopolis: [craterfloor, cavefloor], pacifidlog: [raftfloor], evergrande: [plateaufloor, cavefloor], twinleaf: [cloverfloor], sandgem: [shellfloor], jubilife: [beamfloor], oreburgh: [clinkerfloor], floaroma: [honeyfloor], eterna: [heritagefloor], hearthome: [giltfloor], solaceon: [pebblefloor], veilstone: [shardfloor], canalave: [ringfloor, boardwalk, harbourstone, trussfloor], pastoria: [walkfloor], celestic: [moonfloor], snowpoint: [rimefloor], sunnyshore: [panelfloor], fight-area: [basaltfloor], survival-area: [hardpanfloor], resort-area: [coralfloor], valencia: [dunefloor], mikan: [grovefloor], navel: [screefloor], moro: [ruinfloor], trovita: [reeffloor], kumquat: [mosaicfloor], pummelo: [leaguefloor], shamouti: [stepfloor, shrinefloor] }',
-  JSON.stringify(STREET_REGISTRY) === '{"vermilion":["boardwalk"],"blackthorn":["settfloor"],"silvertown":["marblefloor"],"ecruteak":["wornfloor"],"saffron":["avenuefloor"],"violet":["violetfloor"],"azalea":["brickfloor"],"mahogany":["gravelfloor"],"rustboro":["cutstonefloor"],"fuchsia":["marshfloor"],"cianwood":["driftfloor"],"dewford":["plankfloor"],"viridian":["slatefloor"],"celadon":["promfloor"],"slateport":["quayfloor","boardwalk"],"cerulean":["pierfloor"],"mauville":["gridfloor"],"lavender":["shinglefloor"],"cherrygrove":["inlayfloor"],"verdanturf":["petalfloor","cavefloor"],"olivine":["harbourfloor","jettyfloor"],"fallarbor":["ashfloor"],"lavaridge":["steamfloor","terracefloor"],"fortree":["canopyfloor","boardwalk"],"lilycove":["cobblefloor","cavefloor"],"mossdeep":["starfloor","dockfloor"],"sootopolis":["craterfloor","cavefloor"],\"pacifidlog\":[\"raftfloor\"],\"evergrande\":[\"plateaufloor\",\"cavefloor\"],\"twinleaf\":[\"cloverfloor\"],\"sandgem\":[\"shellfloor\"],\"jubilife\":[\"beamfloor\"],\"oreburgh\":[\"clinkerfloor\"],\"floaroma\":[\"honeyfloor\"],\"eterna\":[\"heritagefloor\"],\"hearthome\":[\"giltfloor\"],\"solaceon\":[\"pebblefloor\"],\"veilstone\":[\"shardfloor\"],\"canalave\":[\"ringfloor\",\"boardwalk\",\"harbourstone\",\"trussfloor\"],\"pastoria\":[\"walkfloor\"],\"celestic\":[\"moonfloor\"],\"snowpoint\":[\"rimefloor\"],\"sunnyshore\":[\"panelfloor\"],\"fight-area\":[\"basaltfloor\"],\"survival-area\":[\"hardpanfloor\"],\"resort-area\":[\"coralfloor\"],\"valencia\":[\"dunefloor\"],\"mikan\":[\"grovefloor\"],\"navel\":[\"screefloor\"],\"moro\":[\"ruinfloor\"],\"trovita\":[\"reeffloor\"],\"kumquat\":[\"mosaicfloor\"],\"pummelo\":[\"leaguefloor\"],\"shamouti\":[\"stepfloor\",\"shrinefloor\"]}',
+ok('street registry is exactly { vermilion: [boardwalk], blackthorn: [settfloor], silvertown: [marblefloor], ecruteak: [wornfloor], saffron: [avenuefloor], violet: [violetfloor], azalea: [brickfloor], mahogany: [gravelfloor], rustboro: [cutstonefloor], fuchsia: [marshfloor], cianwood: [driftfloor], dewford: [plankfloor], viridian: [slatefloor], celadon: [promfloor], slateport: [quayfloor, boardwalk], cerulean: [pierfloor], mauville: [gridfloor], lavender: [shinglefloor], cherrygrove: [inlayfloor], verdanturf: [petalfloor, cavefloor], olivine: [harbourfloor, jettyfloor], fallarbor: [ashfloor], lavaridge: [steamfloor, terracefloor], fortree: [canopyfloor, boardwalk], lilycove: [cobblefloor, cavefloor], mossdeep: [starfloor, dockfloor], sootopolis: [craterfloor, cavefloor], pacifidlog: [raftfloor], evergrande: [plateaufloor, cavefloor], twinleaf: [cloverfloor], sandgem: [shellfloor], jubilife: [beamfloor], oreburgh: [clinkerfloor], floaroma: [honeyfloor], eterna: [heritagefloor], hearthome: [giltfloor], solaceon: [pebblefloor], veilstone: [shardfloor], canalave: [ringfloor, boardwalk, harbourstone, trussfloor], pastoria: [walkfloor], celestic: [moonfloor], snowpoint: [rimefloor], sunnyshore: [panelfloor], fight-area: [basaltfloor], survival-area: [hardpanfloor], resort-area: [coralfloor], valencia: [dunefloor], mikan: [grovefloor], navel: [screefloor], moro: [ruinfloor], trovita: [reeffloor], kumquat: [mosaicfloor], pummelo: [leaguefloor], shamouti: [stepfloor, shrinefloor], frontierhub: [trialfloor] }',
+  JSON.stringify(STREET_REGISTRY) === '{"vermilion":["boardwalk"],"blackthorn":["settfloor"],"silvertown":["marblefloor"],"ecruteak":["wornfloor"],"saffron":["avenuefloor"],"violet":["violetfloor"],"azalea":["brickfloor"],"mahogany":["gravelfloor"],"rustboro":["cutstonefloor"],"fuchsia":["marshfloor"],"cianwood":["driftfloor"],"dewford":["plankfloor"],"viridian":["slatefloor"],"celadon":["promfloor"],"slateport":["quayfloor","boardwalk"],"cerulean":["pierfloor"],"mauville":["gridfloor"],"lavender":["shinglefloor"],"cherrygrove":["inlayfloor"],"verdanturf":["petalfloor","cavefloor"],"olivine":["harbourfloor","jettyfloor"],"fallarbor":["ashfloor"],"lavaridge":["steamfloor","terracefloor"],"fortree":["canopyfloor","boardwalk"],"lilycove":["cobblefloor","cavefloor"],"mossdeep":["starfloor","dockfloor"],"sootopolis":["craterfloor","cavefloor"],\"pacifidlog\":[\"raftfloor\"],\"evergrande\":[\"plateaufloor\",\"cavefloor\"],\"twinleaf\":[\"cloverfloor\"],\"sandgem\":[\"shellfloor\"],\"jubilife\":[\"beamfloor\"],\"oreburgh\":[\"clinkerfloor\"],\"floaroma\":[\"honeyfloor\"],\"eterna\":[\"heritagefloor\"],\"hearthome\":[\"giltfloor\"],\"solaceon\":[\"pebblefloor\"],\"veilstone\":[\"shardfloor\"],\"canalave\":[\"ringfloor\",\"boardwalk\",\"harbourstone\",\"trussfloor\"],\"pastoria\":[\"walkfloor\"],\"celestic\":[\"moonfloor\"],\"snowpoint\":[\"rimefloor\"],\"sunnyshore\":[\"panelfloor\"],\"fight-area\":[\"basaltfloor\"],\"survival-area\":[\"hardpanfloor\"],\"resort-area\":[\"coralfloor\"],\"valencia\":[\"dunefloor\"],\"mikan\":[\"grovefloor\"],\"navel\":[\"screefloor\"],\"moro\":[\"ruinfloor\"],\"trovita\":[\"reeffloor\"],\"kumquat\":[\"mosaicfloor\"],\"pummelo\":[\"leaguefloor\"],\"shamouti\":[\"stepfloor\",\"shrinefloor\"],\"frontierhub\":[\"trialfloor\"]}',
   JSON.stringify(STREET_REGISTRY));
 
 // 2. census: the 64 towns of townSetOf (pallet included)
@@ -2193,7 +2261,7 @@ const PIN = {
   "fight-area": [1, 72, 72, 5, 5, 1, 4, 0, 0, 0.929, 0, 0, 0, 0, 0.8295, 1],
   "floaroma": [1, 72, 72, 5, 5, 1, 3, 0, 0, 0.857, 0, 0, 0, 0, 0.7784, 0.9811],
   "fortree": [1, 110, 110, 7, 7, 1, 4, 0, 0, 0.824, 0, 0, 0, 1, 0.6701, 0.9801],
-  "frontierhub": [1, 210, 210, 15, 15, 1, 3, 0, 0, 0.85, 0, 0, 0, 0, 0.9829, 0.9829],
+  "frontierhub": [1, 210, 210, 15, 15, 1, 3, 0, 0, 0.85, 0, 0, 0, 0, 0.9811, 0.9811],
   "fuchsia": [1, 182, 182, 9, 9, 1, 3, 0, 0, 0.643, 0, 0, 0, 0, 0.8842, 0.9952],
   "goldenrod": [1, 182, 182, 10, 10, 1, 12, 0, 0, 0.65, 0, 0, 0, 0, 0.8671, 0.9828],
   "hearthome": [1, 272, 272, 9, 9, 1, 5, 0, 0, 0.786, 0, 0, 0, 0, 0.6723, 0.9952],
