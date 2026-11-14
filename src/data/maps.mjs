@@ -443,6 +443,7 @@ export const WALKABLE = new Set(['.', ',', 'D', 'E', 'C', 'F', 'J', 'K', '1', '2
   // is walkable ground — Meadowbrook's dressed pond banks, swapped
   // 1:1 from walkable 'F' flower cells, so floor stays floor.
   ...[591]
+    .map((i) => String.fromCodePoint(0x1E00 + i)),
   // Wave W-DIFF3: the violetfloor char (U+1E00+592, tiles.mjs
   // WD3_KIND_DEFS; re-indexed from 588 — T25 took 588-591) is
   // walkable street material, swapped 1:1 from the walkable '.'
