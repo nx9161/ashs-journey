@@ -1415,6 +1415,39 @@ T33_KIND_DEFS.forEach(([kind], i) => {
 export const T33_PROP_KINDS = T33_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
 export const T33_WALL_KINDS = T33_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
 export const T33_FLOOR_KINDS = T33_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
+// Wave T34: Highbranch City's own kit — "Leafscale & Lashed Plank"
+// (WAVE-T34-HIGHBRANCH-PLAN.md). Indices 684-687 — verified against
+// origin/main at registration: in-tree kinds end at 662 (T32);
+// 663-683 unclaimed in-tree, with 672-675 held by T33 Steamspring's
+// parallel claim per the Director's allocation, so this block
+// registers ABOVE that claim (606-607 stay empty, as always; kind
+// names leafroof/canopyfloor/camoleon/bunting verified unclaimed).
+// 'leafroof' (wall) — overlapping leaf scales in canopy greens,
+// worn by the Gym, the House and the town's two facade cottages.
+// 'canopyfloor' (floor) — the town's registered street kind:
+// sun-bleached vertical planks bound by rope-lashing bands and
+// flecked with fallen leaves (the shipped boardwalk decks stay in
+// the south as the Long Walkway — registered, not re-paved).
+// 'camoleon' (prop) — a CAMOLEON napping on the east deck, where
+// the town's own sign and the approved painting both put it; the
+// boardwalk it stands on is baked into its tile. 'bunting' (prop)
+// — a pennant strand dressing the gym's approach (the painting's
+// 'bunting hall'), grass baked in. Both props fully opaque.
+export const T34_KIND_DEFS = [
+  ['leafroof', 'wall'],
+  ['canopyfloor', 'floor'],
+  ['camoleon', 'prop'],
+  ['bunting', 'prop'],
+];
+export const T34_KIND_CHARS = {};
+T34_KIND_DEFS.forEach(([kind], i) => {
+  const ch = String.fromCodePoint(0x1E00 + 684 + i);
+  T34_KIND_CHARS[kind] = ch;
+  TILE_CHARS[ch] = kind;
+});
+export const T34_PROP_KINDS = T34_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
+export const T34_WALL_KINDS = T34_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
+export const T34_FLOOR_KINDS = T34_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
 export const SINNOH_TOWN_GROUND_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg);
 export const SINNOH_TOWN_GROUND2_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg2);
 // TX-3: the 8 gym exteriors by town (original type-accent motifs).

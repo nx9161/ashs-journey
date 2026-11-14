@@ -1,0 +1,34 @@
+# Wave T34 (Highbranch kit): canopyfloor — Highbranch's registered
+# street kind (the fleet's street kinds carry the -floor suffix;
+# the desire-path tiers key on it). LASHED-PLANK WALKWAY:
+# sun-bleached VERTICAL planks bound by two horizontal
+# rope-lashing bands and flecked with fallen leaves. Orientation,
+# lashings and leaf litter make it structurally unlike the
+# shipped boardwalk (horizontal planks, plain seams — kept in
+# the south as the Long Walkway), Mistford's long horizontal
+# timber planks, Beacon's bolted decking and Tidewall's
+# driftwood. (NO-SAME-KIT law; WAVE-T34-HIGHBRANCH-PLAN.md.)
+PIX tile-canopyfloor 16 16
+fppspppspppsppls
+pppsflpspppslpps
+pppspppsfplsppps
+wrrwrrwrrwrrwrrw
+rrwrrwrrwrrwrrwr
+pppslppspppsppps
+pplspppsplpsppps
+lppspppspppsppls
+pppsplpspppslpps
+ppfspppspplsppps
+plpsppfslppsppps
+rwrrwrrwrrwrrwrr
+wrrwrrwrrwrrwrrw
+pflspppsplpsppps
+lppspfpspppsppls
+pppsplpspfpslpps
+PAL
+p #b59a6d plank-face
+l #c8ae7f plank-light
+s #8a6f47 plank-seam
+r #6e5133 rope
+w #96754e rope-wrap
+f #4d7d33 leaf-fleck

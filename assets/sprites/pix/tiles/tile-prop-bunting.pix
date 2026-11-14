@@ -1,0 +1,36 @@
+# Wave T34 (Highbranch kit): bunting — a festival bunting strand:
+# two short posts strung with a sagging line of pennant flags in
+# the gym's colours (red, gold, blue). The painting and the
+# design manifest name the Highbranch Gym the 'bunting hall';
+# the stamp facade is byte-preserved, so the bunting dresses its
+# approach — a pair flanks the walkway spine's head at (13,5)
+# and (18,5), the sunlamp-pair precedent. Fully opaque, town
+# grass baked in (measured #118612 / #115012).
+# (NO-SAME-KIT law; WAVE-T34-HIGHBRANCH-PLAN.md.)
+PIX tile-prop-bunting 16 16
+sgsgsgsgsgsgsgsg
+gggggggggggggggg
+gggggggggggggggl
+gsgsgsgsgsgsgsgs
+ggSgggggggglgSgg
+ggWSSgggglgSSWgg
+sgPgsSSSSSUUsPsg
+ggPgRRgGGgUggPgg
+ggPlRggGgggggPgg
+gsPsgsgsgsgsgPgs
+ggPggggggggggPgg
+ggPggggggggggPgg
+sgPgsgsgsgsgsPsg
+ggPggggggggglPgg
+ggPggggggglggPgg
+gsPsgsgslsgsgPgs
+PAL
+g #118612 grass-face
+s #115012 grass-speckle
+l #1a9e1a grass-light
+P #6b4a26 post
+W #8a6a42 post-top
+S #3a2c1c string
+R #d8544a pennant-red
+G #e8b23a pennant-gold
+U #3a6ac0 pennant-blue

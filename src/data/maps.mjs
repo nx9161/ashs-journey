@@ -555,6 +555,14 @@ export const WALKABLE = new Set(['.', ',', 'D', 'E', 'C', 'F', 'J', 'K', '1', '2
   // Director's ruling: main's kinds run 594-636 + 645-648;
   // T32 Ashfall holds 660-662; 606-607 stay empty.)
   ...[673, 674]
+    .map((i) => String.fromCodePoint(0x1E00 + i)),
+  // Wave T34: the canopyfloor char (U+1E00+685, tiles.mjs
+  // T34_KIND_DEFS) is walkable street material — Highbranch
+  // City's lashed-plank walkway, swapped onto the town's street
+  // cells (which shipped as walkable tg2 mud), so floor stays
+  // floor. (Indices 684-687, above T33's parallel 672-675 claim;
+  // 606-607 stay empty.)
+  ...[685]
     .map((i) => String.fromCodePoint(0x1E00 + i))]);
 
 // Trainer definitions for the slice.

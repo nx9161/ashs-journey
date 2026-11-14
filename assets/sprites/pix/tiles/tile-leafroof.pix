@@ -1,0 +1,32 @@
+# Wave T34 (Highbranch kit): leafroof — Highbranch's own roof kind.
+# LEAFSCALE ROOF: overlapping leaf scales in canopy greens — deep
+# scale shadow, leaf bodies, lit tips, sparse vein flecks; scale
+# rows scallop every 4px. A grown roof, not a tiled one:
+# structurally unlike Meadowbrook's sage stone courses, Cinder's
+# mossy shingles, Eldergrove's banded thatch, Wildflower's open
+# trellis and the shipped tr-fortree dark shingle. Worn by the
+# Gym, the House and the town's two facade cottages.
+# (NO-SAME-KIT law; WAVE-T34-HIGHBRANCH-PLAN.md.)
+PIX tile-leafroof 16 16
+dllttllddllttvld
+dllllllddlllllld
+dvlllllddlllllvd
+ssssssssssssssss
+tlvddllttllddllt
+lllddllllvlddlll
+lllddllllllddlll
+ssssssssssssssss
+dllttllddllttlld
+dllllllddllvllld
+dllllvlddlllllld
+ssssssssssssssss
+tllddlvttllddllt
+vllddllllllddvll
+lllddllvlllddlll
+ssssssssssssssss
+PAL
+l #3f7a2e leaf-body
+t #57a047 leaf-tip
+d #2c5a20 scale-seam
+s #1e4020 scale-shadow
+v #79bc63 vein

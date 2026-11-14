@@ -1,0 +1,35 @@
+# Wave T34 (Highbranch kit): camoleon — a CAMOLEON napping on the
+# Long Walkway, exactly where the town's own sign puts it ('CAMOLEON
+# nap on the warm planks; step politely') and where the approved
+# painting shows it asleep. Curled green body, spiral tail, one
+# closed eye. Fully opaque: the boardwalk it stands on is baked
+# into the tile (measured #997e5b / #7d6547), the lampglass
+# precedent. One seat: the east deck at (24,11).
+# (NO-SAME-KIT law; WAVE-T34-HIGHBRANCH-PLAN.md.)
+PIX tile-prop-camoleon 16 16
+lpplpplpplpplppl
+pppppppppppppppp
+pppppppppppppppp
+ssssssssssssssss
+pppppppppppppppp
+pppppppppcccpppp
+pplpplpBBBBBcplp
+sssssBBBBBBEEsss
+ppppBBBBBBBBBppp
+lpplBbBBBBBbBppl
+pppBBBBBBBBBpppp
+sssbLLLLLLbsssss
+plppbpplppbpplpp
+ppttpppppppppppp
+ptpptppppppppppp
+ssttssssssssssss
+PAL
+p #997e5b plank-face
+l #a8906a plank-light
+s #7d6547 plank-seam
+B #4d9a4d body
+b #3a7d3a body-shade
+L #a8d888 belly
+c #66bb55 crest
+E #1e4620 closed-eye
+t #3a7d3a tail
