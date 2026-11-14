@@ -1,0 +1,24 @@
+# Wave T50 (Fenland kit): walkfloor — Fenland City's registered street kind (the fleet's street kinds carry the -floor suffix; the desire-path tiers key on it). MARSH BOARDWALK: horizontal weathered-olive planks laid as a raised walkway — seams every 4 px, staggered end joints with dark pegs, a pale worn centre band where feet pass, wet dark plank feet. The town form 'great-marsh boardwalk reed' (TOWN_STYLE) laid as a street: the boardwalk the town sign and the audit row name, become the street graph itself. A PLANK DECK: unlike Bridgeport's ringfloor (ring-inset quay flags), Heritage's heritagefloor (cross-hatched flagstone), Repose's pebblefloor (rounded pebbles), Shardfall's shardfloor (cracked slate), Honeyfield's honeyfloor (hex comb), Clover's cloverfloor (flecked earth) — and unlike the harbour boardwalks of Arcport/Driftlog (grey-brown ship timber, nailed): Fenland's is olive marsh timber, pegged, worn pale at the centre. (NO-SAME-KIT law; WAVE-T50-FENLAND-PLAN.md §5.)
+PIX tile-walkfloor 16 16
+llallllallslalll
+aaaaaaaadpspaaaa
+aaaaaaaaaasaaaaa
+ssssssssssssssss
+llallslallllalll
+aaaapspaaaaaaaaa
+lalllsallllallll
+ssssssssssssssss
+llallllallllslll
+aaadaaaaaaapspaa
+aaaaaaaaaaadsaaa
+ssssssssssssssss
+llaslllallllalll
+aapspaaaaaaadaaa
+aaasaaaaalaaaaaa
+ssssssssssssssss
+PAL
+a #6e8a4f plank body — weathered marsh olive (the shipped roof family, measured)
+l #8aa863 plank light — sun-worn face / centre band
+d #55703c plank grain shade
+s #2f4423 seam / end joint — wet dark
+p #3d5a2e joint peg

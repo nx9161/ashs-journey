@@ -1,0 +1,26 @@
+# Wave T50 (Fenland kit): bogeyes — the MUDGILL's eyes and dorsal fin at water level in Fenland's south pool: two pale eyes with dark pupils and a low fin ridge breaking a moss-bog pool, ripples at the waterline. The GREAT MIRE sign's own words — 'things with eyes at water level' — and ODO's tenancy ('MUDGILL own the south pools and sublet to the BOGNEWT'), realized as dressing per the Backstory Sync Audit row ('design = tale + sign'); no actor, no dialogue, no event invented. Fully opaque: the pool is baked in at the MEASURED marshbog colours (#6c8358 moss-bog, #526a7b water, #7c9469 highlight). (WAVE-T50-FENLAND-PLAN.md §5.)
+PIX tile-prop-bogeyes 16 16
+wbbbbbbbbbbbbwbb
+bbbbwbbbbbbbbhbb
+bbbbbbbbwhbbbbbb
+bbbbbhbbbbbbwbbb
+bhbwbbbbbbbbbbbb
+bbbbbbbFFbbbbbhb
+bbbbbbFffFhwbbbb
+bbwbbbfffffbbbbw
+bbhbbbwfffbwbbbb
+bbbbewbbbbwebbbh
+bwbekebbbbekebwb
+bbbwwwbhbbwwwbbb
+bbbhwbwbbwwbwbbb
+wbbbbbbbbbbbbwbb
+bbbbwbbbbbbbhbbb
+bbbbbbbbwbbbbbbb
+PAL
+b #6c8358 pool body — moss bog (measured marshbog)
+w #526a7b open water fleck / ripple (measured)
+h #7c9469 moss highlight (measured)
+f #44543a dorsal fin — dark olive
+F #5d7350 fin crest light
+e #e8e4c8 eye — pale
+k #1c2416 pupil — near-black

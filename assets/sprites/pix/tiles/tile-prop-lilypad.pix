@@ -1,0 +1,28 @@
+# Wave T50 (Fenland kit): lilypad — two lily pads on Fenland's south pool and the BOGNEWT itself: a tiny frog seated on the big pad, a pink bud on the small one. ODO's tenancy made dressing ('MUDGILL own the south pools and sublet to the BOGNEWT — I pay rent in patience'), seated beside the bogeyes per the Backstory Sync Audit row; no actor, no dialogue, no event invented. Fully opaque: the pool is baked in at the MEASURED marshbog colours. (WAVE-T50-FENLAND-PLAN.md §5.)
+PIX tile-prop-lilypad 16 16
+wbbbbbbbbbbbbwbb
+bbbbwbbbbbbbbhbb
+bbbbbbbbwhbbbbbb
+bbbbbhbbbbbbGbbb
+bhbwbbbbbbbGPGbb
+bbbbbbbwbbGggbhb
+bbbbebebbbhGgGbb
+bbwbFFFbbbbbGbbw
+bbhFFkFFbbbbbbbb
+bbbGFFFGbbwbbbbh
+bwGgggbbbbbhbbwb
+bbbGgggGbbbbbbbb
+bbbGGgGGbwbbbbbb
+wbbbbGbbbbbbbwbb
+bbbbwbbbbbbbhbbb
+bbbbbbbbwbbbbbbb
+PAL
+b #6c8358 pool body — moss bog (measured marshbog)
+w #526a7b open water fleck (measured)
+h #7c9469 moss highlight (measured)
+g #4a7a3a lily pad body
+G #5d9148 lily pad rim / light
+F #7a9a4a the BOGNEWT — frog body
+e #e8e4c8 frog eye — pale
+k #1c2416 frog back spot
+P #c88aa0 lily bud — pink

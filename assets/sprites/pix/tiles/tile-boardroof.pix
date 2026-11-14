@@ -1,0 +1,23 @@
+# Wave T50 (Fenland kit): boardroof — Fenland City's landmark roof kind. BOARDWALK ROOF: steep vertical marsh-olive board courses — weathered boards with dark seams, lit and shaded faces, a dark ridge cap — the boardwalk's own timber stood on end for the Gym (whose shipped tr-pastoria olive wash it replaces; the Gatehouse keeps tr). BOARDS, not a wash: unlike the shipped tr/th flat olive, Inglenook's domeroof (gold dome segments), Shardfall's shardroof (checker slate), Heritage's heritageroof (teal flags), Honeyfield's bloomroof (petal scales), Clover's battenroof (green battens — horizontal thin battens; boardroof is wide vertical boards with a cap ridge). (NO-SAME-KIT law; WAVE-T50-FENLAND-PLAN.md §5.)
+PIX tile-boardroof 16 16
+ssssssssssssssss
+dddsdddsdddsddds
+ladsladsladslads
+ladsladsladslads
+lddsladsladslads
+ladsladslddslads
+ladsladsladslads
+ladsladsladslads
+ladsladsladslads
+ladsladsladslads
+ladsladsladslads
+ladsladsladslads
+ladsladsladslads
+ladsladsladslads
+ladsladsladslads
+dddsdddsdddsddds
+PAL
+a #6e8a4f board body — marsh olive (measured shipped family)
+l #7d9c5c lit board face
+d #49632f shaded board face / ridge / eave
+s #2f4423 board seam — dark
