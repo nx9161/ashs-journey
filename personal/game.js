@@ -3923,6 +3923,33 @@ T63_KIND_DEFS.forEach(([kind], i) => {
 const T63_PROP_KINDS = T63_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
 const T63_WALL_KINDS = T63_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
 const T63_FLOOR_KINDS = T63_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
+// Wave T64 (Sanctum Island): the town's own kit kinds (Festival
+// Stepping & Vermillion) — indices 1044-1047 per the Director's
+// index ruling (main's kinds run through T62's 1020-1023; the
+// parallel T63 claim holds 1032-1035; 1036-1043 stay empty).
+// stepfloor (idx 1044): large soft stepping discs scattered on
+// warm festival sand — the festival isle's street; shrineroof
+// (idx 1045): horizontal vermillion tile courses with a gold
+// ridge cap, worn only by the Sanctum Shrine stamp; festlantern
+// (idx 1046): a festival lantern post at the plaza's shoulders;
+// fairbanner (idx 1047): a nobori banner pole at the ferry
+// landing. Chars U+1E00+1044..
+// (Register: WAVE-T64-SANCTUM-PLAN.md §5.)
+const T64_KIND_DEFS = [
+  ['stepfloor', 'floor'],
+  ['shrineroof', 'wall'],
+  ['festlantern', 'prop'],
+  ['fairbanner', 'prop'],
+];
+const T64_KIND_CHARS = {};
+T64_KIND_DEFS.forEach(([kind], i) => {
+  const ch = String.fromCodePoint(0x1E00 + 1044 + i);
+  T64_KIND_CHARS[kind] = ch;
+  TILE_CHARS[ch] = kind;
+});
+const T64_PROP_KINDS = T64_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
+const T64_WALL_KINDS = T64_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
+const T64_FLOOR_KINDS = T64_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
 const SINNOH_TOWN_GROUND_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg);
 const SINNOH_TOWN_GROUND2_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg2);
 // TX-3: the 8 gym exteriors by town (original type-accent motifs).
@@ -112668,6 +112695,78 @@ const ART = {
     "ssssssssssssssss",
     "sssssssSssssssss"
   ] },
+  "tile-stepfloor": { w: 16, h: 16, pal: {"a":"#d6c096","b":"#cbb489","c":"#e2d2aa","D":"#eadfc0","e":"#f4ecd4","s":"#b39d72","v":"#c8451f","g":"#e0a83c"}, rows: [
+    "ssaaaaabacassDDD",
+    "aaaassscaaaaasss",
+    "aassDDDssaaabaca",
+    "aaseDDDDsaavacaa",
+    "asDDDDDDesbaaaaa",
+    "asDDDDDDDsaaaaaa",
+    "asDDDDeDDsaaaaab",
+    "bcsDDDDDsaaacaba",
+    "aassDDDssacaabaa",
+    "caaasssaaaacbsss",
+    "ssaabaaacgassDeD",
+    "DsvbaaaaacbsDDDD",
+    "DDsaaaacabsDeDDD",
+    "DDscaaaabasDDDDD",
+    "DDsaaaabaasDDDDD",
+    "DsaaaabaaaasDDDe"
+  ] },
+  "tile-shrineroof": { w: 16, h: 16, pal: {"g":"#e8b64c","d":"#7e2413","V":"#cf4a24","v":"#b8371d"}, rows: [
+    "gggggggggggggggg",
+    "dddddddddddddddd",
+    "dVVVVVdVVVVVdVVV",
+    "dvvvvvdvvvvvdvvv",
+    "dvvvvvdvvvvvdvvv",
+    "dddddddddddddddd",
+    "VVVdVVVVVdVVVVVd",
+    "vvvdvvvvvdvvvvvd",
+    "vvvdvvvvvdvvvvvd",
+    "dddddddddddddddd",
+    "dVVVVVdVVVVVdVVV",
+    "dvvvvvdvvvvvdvvv",
+    "dvvvvvdvvvvvdvvv",
+    "dddddddddddddddd",
+    "VVVdVVVVVdVVVVVd",
+    "vvvdvvvvvdvvvvvd"
+  ] },
+  "tile-prop-festlantern": { w: 16, h: 16, pal: {"a":"#5fa064","b":"#4c8b4a","c":"#729e66","d":"#7fb273","e":"#458650","p":"#3a2c20","L":"#f2b64c","G":"#ffd97a","v":"#b8371d"}, rows: [
+    "baaaaabaaaadbaaa",
+    "aaaaaaacaaaaaaaa",
+    "daacppppppppcdaa",
+    "aaaaaaapdpppaaaa",
+    "acbaaaapbvvvaaba",
+    "aaaaaacpLLGLLaac",
+    "baaaaabpLGGLLaaa",
+    "aaadcaapLLLLLcaa",
+    "cadaaaapaLLLaaad",
+    "aaaaaaapaavaaaaa",
+    "aabaaadpbavaaaba",
+    "aaacadapaaaacaaa",
+    "baaaaabpadaabaaa",
+    "acaaaaapaacdaaaa",
+    "aaaaaaeeeaaaaaac",
+    "daaaaeeeeeaaadaa"
+  ] },
+  "tile-prop-fairbanner": { w: 16, h: 16, pal: {"a":"#c6b388","b":"#bdab85","c":"#d4c69c","d":"#b2a581","p":"#3a2c20","v":"#b8371d","V":"#cf4a24","w":"#f6f1e2"}, rows: [
+    "baaaaacbaaadaaba",
+    "aaappppppppaabaa",
+    "aaapcVvvvvVabaca",
+    "adapbVvvvvVbaada",
+    "caapaVvwwvVaadaa",
+    "aabpdVwvvwVaaaaa",
+    "abapaVvwwvVaaaab",
+    "badpaVvvvvVaaabd",
+    "aaapaVvwwvVaabaa",
+    "aaapaVwvvwVabaaa",
+    "aaapbVvwwvVbaaaa",
+    "aaapaVvvvvVaaaaa",
+    "aabpcVvvvvVaaaca",
+    "abapaaaabaadaaab",
+    "baapaaabaacaaaba",
+    "aaddddbaaaaaabaa"
+  ] },
   "tile-grovefloor": { w: 16, h: 16, pal: {"e":"#c79f66","m":"#b8905a","f":"#9a7440","l":"#dec084","L":"#4d8a34","p":"#e8862a"}, rows: [
     "Leeeeeeeeeeeeeee",
     "eeeeeeeeemeeeeee",
@@ -118400,6 +118499,9 @@ for (const k of T62_FLOOR_KINDS) TILE_ART[k] = 'tile-' + k;
 for (const k of T63_PROP_KINDS) TILE_ART[k] = 'tile-prop-' + k;
 for (const k of T63_WALL_KINDS) TILE_ART[k] = 'tile-' + k;
 for (const k of T63_FLOOR_KINDS) TILE_ART[k] = 'tile-' + k;
+for (const k of T64_PROP_KINDS) TILE_ART[k] = 'tile-prop-' + k;
+for (const k of T64_WALL_KINDS) TILE_ART[k] = 'tile-' + k;
+for (const k of T64_FLOOR_KINDS) TILE_ART[k] = 'tile-' + k;
 // Premium+ W6 (TX-3/PL-1): door-open frames, authored in TX-3 for every
 // door kind. The warp-fade engine that plays them lands in W7 — W6
 // wires the frames (this registry + cache.doorOpen + doorOpenCanvas)
@@ -120364,6 +120466,12 @@ function resolveTileLayers(cache, kind, x, y, kindAt, t, phase, mapId) {
     // measured colours).
     case 'badgepillar':
     case 'bannerpost':
+    // Wave T64: Sanctum's festival lantern post and its nobori
+    // banner pole composite over their ground the same way
+    // (both arts are fully opaque — the tropgrass and the
+    // island sand are baked in at their measured colours).
+    case 'festlantern':
+    case 'fairbanner':
     // Wave T17: the radio mast composites over its compound grass too.
     case 'radiomast': {
       // Object tiles carry transparent surrounds (Wave 1): lay the ground
@@ -127663,6 +127771,17 @@ const WALKABLE = new Set(['.', ',', 'D', 'E', 'C', 'F', 'J', 'K', '1', '2', 'V',
   // parallel T62 claim holds 1020-1023; 1012-1019 + 1024-1031
   // stay empty.)
   ...[1032]
+    .map((i) => String.fromCodePoint(0x1E00 + i)),
+  // Wave T64: the stepfloor char (U+1E00+1044, tiles.mjs
+  // T64_KIND_DEFS) is walkable street material — Sanctum's
+  // festival-stepping street, swapped onto the island's whole
+  // shipped street graph (authored as the generic `path` dirt
+  // track) plus the four surf-exit jetty heads + necks, so
+  // floor stays floor.
+  // (Indices 1044-1047 per the Director's index ruling: main's
+  // kinds run …1020-1023 (T62); the parallel T63 claim holds
+  // 1032-1035; 1036-1043 stay empty.)
+  ...[1044]
     .map((i) => String.fromCodePoint(0x1E00 + i))]);
 
 // Trainer definitions for the slice.
@@ -135548,24 +135667,24 @@ const MAPS5 = {
     "name": "Sanctum Island",
     "music": "pewter-theme",
     "rows": [
-      "~~~~~~~~~~~~~~~~~~~~~~~~~~~~",
-      "~~~~~~~~~~~~~~~~~~~~~~~~~~~~",
-      "~~ẞghhiẞ‘jklm..abcẞdeefẞẛẞ~~",
-      "~~ẞxyzx―ẟAJKAẟ.rstẞP12P‥‗ẞ~~",
-      "~~ẞ†..............―F..‗ẞ…ẞ~~",
-      "~~‬..................„.‬.”~~",
-      "~~ẞ†..ẟ....ẟ.ẟ..oẟẟẈ‗ẞ…ẞ#.~~",
-      "~~”...#....ẚ.ẚẚ.Ẅẟẟẟẟ―ẘ’ẞ†~~",
-      "~~..,,,...ẠẛẠẠẠẠẛẠẟẟẟẟẟẟ―.~~",
-      "~~„.,,,...ẠẠẠẠẠẠẠẠẟẟ‖ẟẟẛẘ„~~",
-      "~~ẞ†......ẠẠẠẠẠẠẠẠ‖‗ẞ‘ẟẟ‛ẞ~~",
-      "~~ẞ†.ẟẛ.#.ẠẠẠẠẠẠẠẠẞ‘―ẟẟ‗ẞẞ~~",
-      "~~ẞ†RR,.........‗ẞ‚ṃẟ,,,’ẞ~~",
-      "~~ẞ†R,,..........‥ẟẟ‖,,,‗ẞ~~",
-      "~~”..ẚ..........‛ẞ‘‛ẞ“‖ẟṃ‥~~",
-      "~~.............‟ẞoṃẞẞẞẞ‘ẘẞ~~",
-      "~~~~~~~~~~~~~~..~~~~~~~~~~~~",
-      "~~~~~~~~~~~~~~..~~~~~~~~~~~~"
+      "~~~~~~~~~~~~~∔∔~~~~~~~~~~~~~",
+      "~~~~ẞẞẞ∔∔∔∔∔∔∔∔∔∔∔∔∔∔∔∔∔∔∔~~",
+      "~~ẞ∕∕∕∕∔∔jklm∔∔abcSdeefẞẛ∔~~",
+      "~~ẞxyzx∔∔AJKA∔∔rst∔P12PẈ‗∔~~",
+      "~~∔†∔∔∔∔∔∔∔∔∔∔∔∔∔∔∔∔∔∔∔∔∔∔~~",
+      "~~∔∔∔∔∔∔∔∔∔∔∔∔∔∔∔∔∔S∔„∔‬∔∔~~",
+      "~~∔†∔∔ẟ∔∔∔∔∔∔∔∔∔o∖∔∔∔∔∔∔#∔~~",
+      "~~”∔∔∔#∔S∔∔ẚ∔ẚẚ∔Ẅẟ∔∔∔∔ẘ∔∔S~~",
+      "∔∔∔∔,,,∔∔∔ẠẛẠẠẠẠẛẠ∔∔∔∔∔∔∔∔∔∔",
+      "∔∔„∔,,,∔∔∔ẠẠẠSẠẠẠẠ∔∔∔∔∔ẛẘ„∔∔",
+      "~~∔†∔∔∔∔S∔ẠẠẠẠẠẠẠẠ∔∔∔∔∔∔∔∔~~",
+      "~~∔†∔∔ẛ∔#∔ẠẠẠẠẠẠẠẠ∔∔∔ẟẟ‗ẞ∔~~",
+      "~~∔†RR,∔∔∔∔∔∔∔∔∔‗∔∔ṃ∔,,,’∔~~",
+      "~~∔†R,,∔∔∔∔∔∔∔∔∔∔∔∖ẟ∔,,,‗∔~~",
+      "~~”S∔ẚ∔∔∔∔∔∔∔∔∔∔∔∔∔∔∔∔∔∔ṃ‥~~",
+      "~~∔∔∔∔∔∔∔∔∔∔∔∔∔‟∗oṃẞSẞẞ‘ẘẞ~~",
+      "~~∔∔~~~~~~~~~~∔∔~~~~~~~~~~~~",
+      "~~∔∔~~~~~~~~~~∔∔~~~~~~~~~~~~"
     ],
     "warps": [
       {
@@ -135741,11 +135860,26 @@ const MAPS5 = {
         "y": 5,
         "text": "SANCTUM MART — Festival stock for the shrine road, at the east end of the shore."
       },
+      {
+        "x": 25,
+        "y": 7,
+        "text": "SANCTUM ISLAND — South: AMBER SEA — NORTH · West: EMBER ISLE · East: STORM ISLE · North: RIME ISLE."
+      },
+      {
+        "x": 18,
+        "y": 2,
+        "text": "SANCTUM ISLAND — South: AMBER SEA — NORTH · West: EMBER ISLE · East: STORM ISLE · North: RIME ISLE."
+      },
+      {
+        "x": 20,
+        "y": 15,
+        "text": "SANCTUM ISLAND — South: AMBER SEA — NORTH · West: EMBER ISLE · East: STORM ISLE · North: RIME ISLE."
+      },
     ],
     "npcs": [
       {
-        "x": 3,
-        "y": 5,
+        "x": 19,
+        "y": 4,
         "name": "MART CLERK",
         "art": "clerk",
         "skin": "#f0c8a0",
