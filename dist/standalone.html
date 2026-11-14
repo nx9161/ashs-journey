@@ -3027,6 +3027,70 @@ T27_KIND_DEFS.forEach(([kind], i) => {
 const T27_PROP_KINDS = T27_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
 const T27_WALL_KINDS = T27_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
 const T27_FLOOR_KINDS = T27_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
+// ---- Wave W-DIFF6 (identity retrofit): Fernmere + Canopy ----
+// Four new kinds at idx 613-616 (U+2065-U+2068, verified free
+// in TILE_CHARS and unused by every map row; the block runs
+// T23 575, W-DIFF 577-580, W-DIFF2 581-584, T24 585-587,
+// T25 588-591, WD3 592-593, W-DIFF4 594-597, T26 598-601,
+// W-DIFF5 602-605, T27 608-612 — 606/607 stand empty). The
+// closest remaining pair where BOTH towns still wear the
+// shared kit (audit A.3 #10, 0.0739; 0.0639 re-measured on the
+// current tree) gets the identity table's own kits (W-DIFF-
+// AUDIT Phase B). Fernmere City (TOWN_STYLE viridian: ground
+// #4f9e57, form 'gabled slate') — 'Slate Gable & Evergreen':
+// 'slatefloor' (floor) — dark slate sett paving, the town's
+// street fabric (STREET_REGISTRY; the fleet's street kinds
+// carry the -floor suffix the desire-path tiers key on),
+// swapped onto every street cell. The table names Redwood's
+// gravelfloor here, but gravelfloor is Redwood's built street
+// (W-DIFF4) — the W-DIFF5 precedent (the table's shared
+// 'boardwalk' became marshfloor/driftfloor) gives Fernmere
+// its own slate sett instead of a second helping of gravel.
+// 'slateroof' (wall) — a true slate GABLE in the KIT_VARIANTS
+// viridian roof tones (ridge band + offset slate courses +
+// deep eave foot), swapped onto the four houses' roofs —
+// Marlow's house included; the gym's roof-slate band, the
+// Center's roof-center and the Mart's tr- stamps keep their
+// shipped roofs entire. The table's ground treatment (tg +
+// deep tc evergreen frame) and its signature (the heavy
+// fence family, 11 runs, with td- posts) are the shipped
+// town's own — byte-kept. Viridian is a drifted triple
+// definition (map-id registry status D): ONLY the live
+// maps3 copy is swapped; the maps/maps2 copies stay frozen
+// under the registry ratchet, their reconciliation the
+// standing dual-copy backlog wave's business. Canopy City
+// (TOWN_STYLE celadon: ground #4fae7e, form 'glass dome') —
+// 'Glass Dome & Promenade': 'promfloor' (floor) — pale
+// sage-stone promenade slabs, the town's street fabric
+// (STREET_REGISTRY), swapped onto every street cell — the
+// avenues ARE the promenade. 'glassroof' (wall) — ribbed
+// glass-dome roofing (mullion ribs, glass gradient, glints,
+// deep frame foot) in the KIT_VARIANTS celadon tones,
+// swapped onto the four houses' th- roofs; the Mart's,
+// Center's and Dept Store's tr- roofs, the Game Corner +
+// Dept Store tl- frontages and the gym-leaf band keep their
+// shipped faces entire. The table's ground treatment (tg +
+// flowerbed promenades) is T8's shipped flowerbed/planter
+// dressing along the Center-Game Corner promenade — byte-
+// kept, the Tidewall herb-garden precedent. Authored art:
+// assets/sprites/pix/tiles/tile-slatefloor.pix,
+// tile-slateroof.pix, tile-promfloor.pix, tile-glassroof.pix
+// (register: your_files/w-diff6/GRADE.md).
+const WD6_KIND_DEFS = [
+  ['slatefloor', 'floor'],
+  ['slateroof', 'wall'],
+  ['promfloor', 'floor'],
+  ['glassroof', 'wall'],
+];
+const WD6_KIND_CHARS = {};
+WD6_KIND_DEFS.forEach(([kind], i) => {
+  const ch = String.fromCodePoint(0x1E00 + 613 + i);
+  WD6_KIND_CHARS[kind] = ch;
+  TILE_CHARS[ch] = kind;
+});
+const WD6_PROP_KINDS = WD6_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
+const WD6_WALL_KINDS = WD6_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
+const WD6_FLOOR_KINDS = WD6_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
 const SINNOH_TOWN_GROUND_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg);
 const SINNOH_TOWN_GROUND2_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg2);
 // TX-3: the 8 gym exteriors by town (original type-accent motifs).
@@ -109198,6 +109262,78 @@ const ART = {
     "aaabaaaaabaaaaab",
     "eebeeeeeeeebeeee",
   ] },
+  "tile-slatefloor": { w: 16, h: 16, pal: {"a":"#5a6779","b":"#48536a","c":"#77879c","d":"#39445a","e":"#8598ad"}, rows: [
+    "caaccaadaccacacb",
+    "eaaaeaabaaaeaaad",
+    "eaaaaabbaaeaaaad",
+    "aaaaaaedabaeaaad",
+    "aaaabaabaaaaaaab",
+    "aeaaaaadeaaaaaad",
+    "eaaaaaadaaaaaaad",
+    "bdddbbbddddbdddd",
+    "caccaacdcacccccd",
+    "abaaaaabaaaaaaed",
+    "aaaaaeadaeaaaaab",
+    "aaaaaaadaaaaaaab",
+    "aaaaaaabaabaaaab",
+    "baaabeabaebaaaad",
+    "baaaaaadaeaaaaad",
+    "ddddddddddddbddd",
+  ] },
+  "tile-slateroof": { w: 16, h: 16, pal: {"a":"#59687a","b":"#47566b","c":"#7b8da1","d":"#333f52","e":"#9db0c4"}, rows: [
+    "eeeeeeeceeceeeee",
+    "cccbcccccbacccbc",
+    "aaabaaaaabaaaaba",
+    "bbddbbbbbdbdbbbb",
+    "caccacbcccccbcca",
+    "aaaaaabaaaaabdad",
+    "ddbbbbbbbbdbbbbb",
+    "cbccaaaabacccbca",
+    "abaaaaaabadaabaa",
+    "bbbdddbbdbbbbbdb",
+    "caaccbcccccbccca",
+    "daaadbaaaaabaaaa",
+    "bbbbbbdbbbbbdbbb",
+    "ccbcaccacbcacccb",
+    "bbbbbbbdbddbbbbb",
+    "dddddddddddddddd",
+  ] },
+  "tile-promfloor": { w: 16, h: 16, pal: {"a":"#a9bda1","b":"#93ab8c","c":"#c6d8bd","d":"#71896d","e":"#b9cbb0"}, rows: [
+    "cccccccdcacaaaad",
+    "baaaabadbbaaabbb",
+    "aaabaaabbbabbbad",
+    "baaaaaadbbbbabed",
+    "aeaaaabbbbbbbbad",
+    "abaaabadabbbbbbd",
+    "aaaaaaadbbbbabbd",
+    "dddddddbddbddddd",
+    "acccccabaccccacd",
+    "aaaababdebbbbaad",
+    "aaaabbabbbbbebbd",
+    "ababaaadbbabbbbd",
+    "abaaaaadbbaabbbb",
+    "baaaaaadbbbabaad",
+    "aaaaaabbbabbbbbd",
+    "dbddddddbbdddddd",
+  ] },
+  "tile-glassroof": { w: 16, h: 16, pal: {"a":"#8fcbb4","b":"#5da487","c":"#c4e8da","d":"#3d6b55","e":"#f2fbf6"}, rows: [
+    "dccacbccccbccccd",
+    "dcecabacccbceccd",
+    "dcccabcecabccacd",
+    "daccebccccbccacd",
+    "dcccabcaccbcccad",
+    "dbbbbbbbbbbbbbbd",
+    "daaaabaaaabaaacd",
+    "daaaabaaaabccacd",
+    "daaaabaaacbcaaad",
+    "daaaabacaabaaacd",
+    "dddddddddddddddd",
+    "daabbbbbaabaabad",
+    "daababbaaabbbabd",
+    "daaaababaabbabbd",
+    "dabaabaaaabbbabd",
+    "dddddddddddddddd",
+  ] },
   "partner-back-bob": { base: "partner-back", w: 64, h: 64, pal: {}, shiftY: 2 },
   "partner-front-bob": { base: "partner-front", w: 64, h: 64, pal: {}, shiftY: 2 },
   "abomasnow-back-bob": { base: "abomasnow-back", w: 64, h: 64, pal: {}, shiftY: 2 },
@@ -114457,6 +114593,10 @@ for (const k of WD5_FLOOR_KINDS) TILE_ART[k] = 'tile-' + k;
 for (const k of T27_PROP_KINDS) TILE_ART[k] = 'tile-prop-' + k;
 for (const k of T27_WALL_KINDS) TILE_ART[k] = 'tile-' + k;
 for (const k of T27_FLOOR_KINDS) TILE_ART[k] = 'tile-' + k;
+// Wave W-DIFF6: Fernmere's slatefloor/slateroof + Canopy's promfloor/glassroof kit kinds.
+for (const k of WD6_PROP_KINDS) TILE_ART[k] = 'tile-prop-' + k;
+for (const k of WD6_WALL_KINDS) TILE_ART[k] = 'tile-' + k;
+for (const k of WD6_FLOOR_KINDS) TILE_ART[k] = 'tile-' + k;
 
 // Premium+ W6 (TX-3/PL-1): door-open frames, authored in TX-3 for every
 // door kind. The warp-fade engine that plays them lands in W7 — W6
@@ -115003,6 +115143,7 @@ function buildArtTileCache(doc) {
   for (const k of WD3_FLOOR_KINDS) cache[k + 'Variants'] = ids(['tile-' + k]);
   for (const k of WD4_FLOOR_KINDS) cache[k + 'Variants'] = ids(['tile-' + k]);
   for (const k of WD5_FLOOR_KINDS) cache[k + 'Variants'] = ids(['tile-' + k]);
+  for (const k of WD6_FLOOR_KINDS) cache[k + 'Variants'] = ids(['tile-' + k]);
   cache.foundationVariants = ids(['tile-foundation-1', 'tile-foundation-2', 'tile-foundation-3']);
   // P-1 side walls: the SAME authored art rasterized through a palette
   // swap that darkens every hex by one full shade step (x0.72 — the
@@ -115272,6 +115413,7 @@ for (const k of WD_FLOOR_KINDS) FLOOR_VARIANTS[k] = k + 'Variants';
 for (const k of WD3_FLOOR_KINDS) FLOOR_VARIANTS[k] = k + 'Variants';
 for (const k of WD4_FLOOR_KINDS) FLOOR_VARIANTS[k] = k + 'Variants';
 for (const k of WD5_FLOOR_KINDS) FLOOR_VARIANTS[k] = k + 'Variants';
+for (const k of WD6_FLOOR_KINDS) FLOOR_VARIANTS[k] = k + 'Variants';
 // Wave 5a: interior floor kinds are ground families of their own (a prop
 // inside a Center stands on Center floor, never on grass or path), and
 // interior walls cast the shared shadow strip onto the floor below.
@@ -115328,7 +115470,7 @@ function groundFamilyOf(kind) {
   // psand kinds stand on path (props composite over the parent ground).
   if (kind && kind.startsWith('beach-')) return 'tropgrass';
   if (kind && kind.startsWith('psand-')) return 'path';
-  if (kind && (W6_FLOOR_KINDS.includes(kind) || O1_FLOOR_KINDS.includes(kind) || J3_FLOOR_KINDS.includes(kind) || H3_FLOOR_KINDS.includes(kind) || H3B_FLOOR_KINDS.includes(kind) || S3_FLOOR_KINDS.includes(kind) || S3B_FLOOR_KINDS.includes(kind) || WD_FLOOR_KINDS.includes(kind) || WD3_FLOOR_KINDS.includes(kind) || WD4_FLOOR_KINDS.includes(kind) || WD5_FLOOR_KINDS.includes(kind))) return kind; // W6/O1/J3/H3/H3B/S3/S3B/WD/WD3/WD4/WD5 floors are own families
+  if (kind && (W6_FLOOR_KINDS.includes(kind) || O1_FLOOR_KINDS.includes(kind) || J3_FLOOR_KINDS.includes(kind) || H3_FLOOR_KINDS.includes(kind) || H3B_FLOOR_KINDS.includes(kind) || S3_FLOOR_KINDS.includes(kind) || S3B_FLOOR_KINDS.includes(kind) || WD_FLOOR_KINDS.includes(kind) || WD3_FLOOR_KINDS.includes(kind) || WD4_FLOOR_KINDS.includes(kind) || WD5_FLOOR_KINDS.includes(kind) || WD6_FLOOR_KINDS.includes(kind))) return kind; // W6/O1/J3/H3/H3B/S3/S3B/WD/WD3/WD4/WD5/WD6 floors are own families
   if (kind && (kind.startsWith('tg-') || kind.startsWith('tg2-'))) return kind; // W5: town ground is its own family
   if (kind && (kind.startsWith('tc-') || kind.startsWith('td-') || kind.startsWith('flora-'))) return 'grass';
   if (kind === 'grass' || kind === 'grassground' || kind === 'flower' || kind === 'tree' || kind === 'rock' || kind === 'sign' ||
@@ -123065,6 +123207,13 @@ const WALKABLE = new Set(['.', ',', 'D', 'E', 'C', 'F', 'J', 'K', '1', '2', 'V',
   // boardwalk, swapped onto the town's street cells (which
   // shipped as walkable tg2 mud), so floor stays floor.
   ...[609]
+    .map((i) => String.fromCodePoint(0x1E00 + i)),
+  // Wave W-DIFF6: the slatefloor char (U+1E00+613, tiles.mjs
+  // WD6_KIND_DEFS) is walkable street material, swapped 1:1
+  // from the walkable '.' path char in Fernmere City, and the
+  // promfloor char (U+1E00+615) likewise in Canopy City,
+  // so floor stays floor in both.
+  ...[613, 615]
     .map((i) => String.fromCodePoint(0x1E00 + i))]);
 
 // Trainer definitions for the slice.
@@ -123906,17 +124055,17 @@ const MAPS2 = {
     rows: rows([
       'ÐÐÐÐÐÐÐÐÐÐÐÐÐÐÐÐÐÐÐÐ',
       'ÐÅÅÅÅÅÅÅÅÅÅÅÅÅÅÅÅÅÅÐ',
-      'ÐæææÅčččÅḄḄḄḄḄḄÅčččÐ',
+      'ÐæææÅ⁨⁨⁨ÅḄḄḄḄḄḄÅ⁨⁨⁨Ð',
       'ÐP12oĥsĥÅUVYUUUoĥsĥÐ',
-      '....................',
-      'Ð..................Ð',
-      'Ðææææẅp...pẅẅpùpùpÅÐ',
-      'ÐAJKA.ḣ...ḣ.12ññññÅÐ',
-      'Ð................ẅÅÐ',
-      'Ðo..................',
-      'ÐæææææææÅččč.ččč.ẌÅÐ',
-      'Ðñ78ñ—ññoĥsĥ.ĥsĥ..oÐ',
-      'Ð..................Ð',
+      '⁧⁧⁧⁧⁧⁧⁧⁧⁧⁧⁧⁧⁧⁧⁧⁧⁧⁧⁧⁧',
+      'Ð⁧⁧⁧⁧⁧⁧⁧⁧⁧⁧⁧⁧⁧⁧⁧⁧⁧⁧Ð',
+      'Ðææææẅp⁧⁧⁧pẅẅpùpùpÅÐ',
+      'ÐAJKA⁧ḣ⁧⁧⁧ḣ⁧12ññññÅÐ',
+      'Ð⁧⁧⁧⁧⁧⁧⁧⁧⁧⁧⁧⁧⁧⁧⁧⁧ẅÅÐ',
+      'Ðo⁧⁧⁧⁧⁧⁧⁧⁧⁧⁧⁧⁧⁧⁧⁧⁧⁧⁧',
+      'ÐæææææææÅ⁨⁨⁨⁧⁨⁨⁨⁧ẌÅÐ',
+      'Ðñ78ñ—ññoĥsĥ⁧ĥsĥ⁧⁧oÐ',
+      'Ð⁧⁧⁧⁧⁧⁧⁧⁧⁧⁧⁧⁧⁧⁧⁧⁧⁧⁧Ð',
       'ÐÐÐÐÐÐÐÐÐÐÐÐÐÐÐÐÐÐÐÐ',
     ]),
     warps: [
@@ -127237,20 +127386,20 @@ const MAPS3 = {
   viridian: {
     id: 'viridian', name: 'Fernmere City', music: 'viridian-theme',
     rows: rows([
-      'ÌÌÌÌÌ....ÌÌÌÌÌÌÌÌÌÌÌ',
-      'ÌÌÌ×Á......ÁÁÁÁÁÁÁÁÌ',
-      'ÌÌÌÁĲ....deXXefÁdefÌ',
-      'ÌÌÁĲĲ....UUVYUUÁrstÌ',
-      'ÌÁÁÁ×.............ĲÌ',
-      'ÌghiÁÁÁÁÁÁĲĲÁ×ÁnnÁnÌ',
-      'ÌvsvÁjklm...ââOâÁ‵FÌ',
-      'ÌÁÁĲĲAJKA...P12PÁÁÁÌ',
-      '....................',
-      'ÌÁÁÁĲ........ĲĲÁÁÁÁÌ',
-      'ÌÁdef.onnn..n.hdefẑÌ',
-      'ÌÁvsr.ẄnFμ..n.@xyzẆÌ',
-      'ÌĲĲ....n....n.....oÌ',
-      'ÌÌÌ×ÌÌÌÌ....ÌÌÌÌ×ÌÌÌ',
+      'ÌÌÌÌÌ⁥⁥⁥⁥ÌÌÌÌÌÌÌÌÌÌÌ',
+      'ÌÌÌ×Á⁥⁥⁥⁥⁥⁥ÁÁÁÁÁÁÁÁÌ',
+      'ÌÌÌÁĲ⁥⁥⁥⁥deXXefÁ⁦⁦⁦Ì',
+      'ÌÌÁĲĲ⁥⁥⁥⁥UUVYUUÁrstÌ',
+      'ÌÁÁÁ×⁥⁥⁥⁥⁥⁥⁥⁥⁥⁥⁥⁥⁥ĲÌ',
+      'Ì⁦⁦⁦ÁÁÁÁÁÁĲĲÁ×ÁnnÁnÌ',
+      'ÌvsvÁjklm⁥⁥⁥ââOâÁ‵FÌ',
+      'ÌÁÁĲĲAJKA⁥⁥⁥P12PÁÁÁÌ',
+      '⁥⁥⁥⁥⁥⁥⁥⁥⁥⁥⁥⁥⁥⁥⁥⁥⁥⁥⁥⁥',
+      'ÌÁÁÁĲ⁥⁥⁥⁥⁥⁥⁥⁥ĲĲÁÁÁÁÌ',
+      'ÌÁ⁦⁦⁦⁥onnn⁥⁥n⁥⁦⁦⁦⁦ẑÌ',
+      'ÌÁvsr⁥ẄnFμ⁥⁥n⁥@xyzẆÌ',
+      'ÌĲĲ⁥⁥⁥⁥n⁥⁥⁥⁥n⁥⁥⁥⁥⁥oÌ',
+      'ÌÌÌ×ÌÌÌÌ⁥⁥⁥⁥ÌÌÌÌ×ÌÌÌ',
     ]),
     warps: [
       { x: 11, y: 3, to: { map: 'gym-viridian', x: 5, y: 7 } },
@@ -187254,6 +187403,6 @@ if (typeof Game !== 'undefined') Object.assign(Game.prototype, {
 });
 
 </script>
-<!-- contentHash:ffdf6927c51a2eb5acc8f298e6a0288d5930a72af17f9329449210807179cc22 -->
+<!-- contentHash:5ee4b8b6e0bfc4fad8f2bd002ae7ae714c3632700b5d889da485f45eb7c4fdcb -->
 </body>
 </html>
