@@ -2193,11 +2193,28 @@ const T23_PROP_KINDS = T23_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) =
 // and warps untouched. Authored art:
 // assets/sprites/pix/tiles/tile-settfloor.pix, tile-marblefloor.pix,
 // tile-drakeroof.pix, tile-parapetroof.pix.
+// ---- Wave W-DIFF2 (identity retrofit #2): the next pair from the same
+// audit's ranking — Lantern City (ecruteak) + Farsight City (saffron),
+// the closest remaining pair on main (composite 0.0393). Appended at
+// idx 581-584 (U+2045-U+2048, verified free in TILE_CHARS, unused by
+// every map row, trim-stable single code units); the pilot's idx
+// 577-580 assignments are untouched. Farsight gets the Gold Spire &
+// Avenue Slab kit (avenuefloor streets, slabroof roofs with gold trim),
+// Lantern gets the Cedar & Ashen Stone kit (wornfloor streets,
+// cedarroof house roofs). Same rules as the pilot: floors are walkable
+// street materials registered per town in STREET_REGISTRY; roofs are
+// solid wall-class, swapped onto roof cells only. Authored art:
+// assets/sprites/pix/tiles/tile-avenuefloor.pix, tile-wornfloor.pix,
+// tile-slabroof.pix, tile-cedarroof.pix.
 const WD_KIND_DEFS = [
   ['settfloor', 'floor'],
   ['marblefloor', 'floor'],
   ['drakeroof', 'wall'],
   ['parapetroof', 'wall'],
+  ['avenuefloor', 'floor'],
+  ['wornfloor', 'floor'],
+  ['slabroof', 'wall'],
+  ['cedarroof', 'wall'],
 ];
 const WD_KIND_CHARS = {};
 WD_KIND_DEFS.forEach(([kind], i) => {
@@ -86691,6 +86708,24 @@ const ART = {
     "................",
     "................",
   ] },
+  "tile-avenuefloor": { w: 16, h: 16, pal: {"a":"#c9ae62","b":"#b3944a","c":"#e6d194","d":"#7d6530","e":"#eec95e"}, rows: [
+    "aaaaaaadaaaaaaaa",
+    "aacaaaadaaaeaaaa",
+    "aaaaaaadaacaaaaa",
+    "aaaabaadaaaaaaaa",
+    "aaaaaaadaaaaacaa",
+    "aaaaaaadaaaabaaa",
+    "aaaaaabdaaaaaaaa",
+    "dddddddddddddddd",
+    "aaadaaaaabadaaaa",
+    "aaadacaaaaadaaaa",
+    "aaaeaaaaaaadaaca",
+    "aabdaaaaaaadaaaa",
+    "aaadaaaacaadaeaa",
+    "acadaaaaaaadaaab",
+    "aaadaaabaaadaaaa",
+    "dddddddddddddddd",
+  ] },
   "tile-bannerwall": { w: 16, h: 16, pal: {"B":"#8d8b9b","D":"#6a5c47","A":"#a96152"}, rows: [
     "DDBBDDBBBBDDBBAA",
     "DDDDDDDDDDDDDBAA",
@@ -87338,6 +87373,24 @@ const ART = {
     "bbbbyyyybbvvbbaa",
     "vvvvbbvvyybbaabb",
     "vvvvbbvvyybbaabb",
+  ] },
+  "tile-cedarroof": { w: 16, h: 16, pal: {"a":"#6e4530","b":"#54352a","c":"#8a5f3d","d":"#38241a","e":"#97754e"}, rows: [
+    "cabaacbaaaabcaae",
+    "aabaaababaabaaaa",
+    "aabaaabaaaabaaba",
+    "dddddddddddddddd",
+    "caaabcaaabaacaba",
+    "aaabbaaeabaaaaba",
+    "aaaabaaaabbaaaba",
+    "dddddddddddddddd",
+    "cabaacbaaaabcaaa",
+    "aabaaabaaaabaaaa",
+    "aabaaabaaaababaa",
+    "dddddddddddddddd",
+    "caaabcaaabaaeaba",
+    "abaabaaaabaaaaba",
+    "aaaaeaaaabaaaaba",
+    "dddddddddddddddd",
   ] },
   "tile-centerdoor-open": { w: 16, h: 16, pal: {"h":"#b99b74","w":"#5681bd","y":"#7097c7","Z":"#3f3f49","F":"#f5f0dc","Q":"#202028","%":"#a02828"}, rows: [
     "hhhhhhhhhhhhhhhh",
@@ -96706,6 +96759,24 @@ const ART = {
     "zgggggggzggggggg",
     "zgggggggzggggggg",
     "zzzzzzzzzzzzzzzz",
+  ] },
+  "tile-slabroof": { w: 16, h: 16, pal: {"a":"#d6c48c","b":"#bfa96e","c":"#eee0ae","d":"#8a6d2f","e":"#d9a92e"}, rows: [
+    "eaaaaaabeaaaaaaa",
+    "aaacaaababaaaaaa",
+    "aaaaaaabaaaacaaa",
+    "bbbbbbbbbbbbbbbb",
+    "eaabaaaaeaabaaaa",
+    "aaabacaaaaabaaaa",
+    "aaabbaaaaaabaaca",
+    "bbbbbbbbbbbbbbbb",
+    "eaaaaaabeaaaaaaa",
+    "aacaaaabaaaaaaab",
+    "aaaaaaabaacaaaaa",
+    "bbbbbbbbbbbbbbbb",
+    "eaabaaabeaabaaaa",
+    "aaabaacaaaabaaaa",
+    "ababaaaaaaabacaa",
+    "dddddddddddddddd",
   ] },
   "tile-smoke-grey-1": { w: 16, h: 16, pal: {"a":"#8b8b9b","b":"#757585","c":"#b0b6c1"}, rows: [
     "................",
@@ -107855,6 +107926,24 @@ const ART = {
   "tile-water-4": { base: "tile-water-1", w: 16, h: 16, pal: {}, deltas: [[1,2,"w"],[6,2,"y"],[1,3,"w"],[4,3,"z"],[8,3,"w"],[9,3,"z"],[2,4,"w"],[3,4,"z"],[7,4,"w"],[8,4,"z"],[11,4,"x"],[12,4,"c"],[2,5,"w"],[3,5,"c"],[8,5,"w"],[9,5,"z"],[10,5,"w"],[13,5,"c"],[1,6,"w"],[4,6,"c"],[6,6,"w"],[11,6,"y"],[12,6,"c"],[2,7,"w"],[3,7,"c"],[5,7,"z"],[3,8,"w"],[6,8,"x"],[2,10,"w"],[7,10,"y"],[5,11,"w"],[6,11,"c"],[0,12,"w"],[3,12,"x"],[4,12,"w"],[7,12,"c"],[5,13,"w"],[6,13,"c"],[7,14,"w"],[12,14,"y"]] },
   "tile-water-5": { base: "tile-water-2", w: 16, h: 16, pal: {}, deltas: [[9,1,"c"],[10,1,"w"],[3,2,"y"],[8,2,"c"],[11,2,"w"],[1,3,"z"],[2,3,"w"],[4,3,"z"],[5,3,"w"],[9,3,"c"],[10,3,"w"],[0,4,"z"],[1,4,"x"],[4,4,"z"],[6,4,"w"],[10,4,"z"],[11,4,"w"],[1,5,"z"],[2,5,"w"],[4,5,"z"],[5,5,"w"],[9,5,"z"],[12,5,"w"],[4,6,"w"],[10,6,"z"],[11,6,"w"],[15,6,"y"],[5,8,"x"],[8,8,"w"],[4,10,"y"],[9,10,"w"],[8,11,"c"],[9,11,"w"],[2,12,"x"],[5,12,"w"],[7,12,"c"],[10,12,"w"],[12,12,"c"],[13,12,"w"],[8,13,"c"],[9,13,"w"],[11,13,"c"],[14,13,"w"],[0,14,"y"],[5,14,"w"],[12,14,"c"],[13,14,"w"]] },
   "tile-water-6": { base: "tile-water-3", w: 16, h: 16, pal: {}, deltas: [[4,2,"w"],[5,2,"c"],[7,2,"w"],[12,2,"y"],[3,3,"w"],[6,3,"c"],[2,4,"w"],[5,4,"c"],[8,4,"x"],[3,5,"w"],[4,5,"c"],[12,5,"w"],[13,5,"z"],[3,6,"w"],[8,6,"y"],[11,6,"w"],[14,6,"z"],[12,7,"w"],[13,7,"z"],[2,8,"w"],[15,8,"x"],[7,10,"y"],[12,10,"w"],[7,11,"z"],[8,11,"w"],[12,11,"z"],[13,11,"w"],[1,12,"c"],[2,12,"w"],[5,12,"x"],[8,12,"z"],[9,12,"w"],[11,12,"z"],[14,12,"w"],[0,13,"c"],[3,13,"w"],[7,13,"z"],[8,13,"w"],[12,13,"z"],[13,13,"w"],[1,14,"c"],[2,14,"w"],[3,14,"y"],[8,14,"w"]] },
+  "tile-wornfloor": { w: 16, h: 16, pal: {"a":"#8d8578","b":"#76705f","c":"#a89e8b","d":"#55504a","e":"#6d7a52"}, rows: [
+    "aaaaadaaaaaaaaaa",
+    "aaaaadaaabaaaaaa",
+    "aaccadaaaaaadaaa",
+    "aaaaadaaaaaaadba",
+    "aaaaadaacaaaaaaa",
+    "aaaabdaaaaaaaaaa",
+    "eaaaadaaaaaaaaab",
+    "dddddddddddddddd",
+    "aaaaaeaaaadaaaaa",
+    "aaaaaaaaaadacaaa",
+    "abaaaaaaaadaaaaa",
+    "aaaaaaaaaadbaaaa",
+    "aaaaaacaaadaaaaa",
+    "aadaaaaaaadaacaa",
+    "aaaaaaabaaeaaaaa",
+    "dddddddddddddddd",
+  ] },
   "partner-back-bob": { base: "partner-back", w: 64, h: 64, pal: {}, shiftY: 2 },
   "partner-front-bob": { base: "partner-front", w: 64, h: 64, pal: {}, shiftY: 2 },
   "abomasnow-back-bob": { base: "abomasnow-back", w: 64, h: 64, pal: {}, shiftY: 2 },
@@ -121614,7 +121703,10 @@ const WALKABLE = new Set(['.', ',', 'D', 'E', 'C', 'F', 'J', 'K', '1', '2', 'V',
   // marblefloor — WD_KIND_DEFS idx 577,578 at U+1E00+577, tiles.mjs)
   // are walkable street material, swapped 1:1 from the walkable '.'
   // path char in Cragmoor / Lastlight, so floor stays floor.
-  ...[577, 578]
+  // Wave W-DIFF2: the second pair's street floors (avenuefloor /
+  // wornfloor — idx 581,582) join on the same terms for Farsight /
+  // Lantern City.
+  ...[577, 578, 581, 582]
     .map((i) => String.fromCodePoint(0x1E00 + i))]);
 
 // Trainer definitions for the slice.
@@ -122687,18 +122779,18 @@ const MAPS2 = {
     rows: rows([
       'ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ',
       'ÑÆÆÆÆÆÆÆÆÆÆÆÆÆÆÆÆÆÆÑ',
-      'ÑFççççÆďòďďďďÆďòďďÆÑ',
+      'ÑFççççÆ⁇⁇⁇⁇⁇⁇Æ⁇⁇⁇⁇ÆÑ',
       'ÑFAJKAÆZZZ45ZÆZZZZÆÑ',
-      'Ñ..................Ñ',
-      'ÑÆÆÆÆÆÆoÆ..ÆoÆÆÆÆÆÆÑ',
-      'ÑÆďďďOÆÆÆ..ÆḅḅḅḅÆÆÆÑ',
-      'ÑÆP12PÆÆÆ..ÆḅVYḅXÆoÑ',
-      'Ñ...................',
-      'ÑÆÆÆÆÆÆÆÆ..Æ......ÆÑ',
-      'ÑÆÆďďďÆÆÆ..ÆÜħħħħÜÆÑ',
-      'ÑÆÆħwħÆÆÆ..ÆÆħ78ħÆÆÑ',
-      'ÑÆÆÆÆÆÆÆÆ..........Ñ',
-      'ÑÑÑÑÑÑÑÑÑ..ÑÑÑÑÑÑÑÑÑ',
+      'Ñ⁅⁅⁅⁅⁅⁅⁅⁅⁅⁅⁅⁅⁅⁅⁅⁅⁅⁅Ñ',
+      'ÑÆÆÆÆÆÆoo⁅⁅ooÆÆÆppÆÑ',
+      'ÑÆďďďOÆÆÆ⁅⁅ÆḅḅḅḅppÆÑ',
+      'ÑÆP12PÆÆÆ⁅⁅ÆḅVYḅXÆoÑ',
+      'Ñ⁅⁅⁅⁅⁅⁅⁅⁅⁅⁅⁅⁅⁅⁅⁅⁅⁅⁅⁅',
+      'ÑÆÆÆÆÆppÆ⁅⁅Æ⁅⁅⁅⁅⁅⁅ÆÑ',
+      'ÑÆÆ⁇⁇⁇ppo⁅⁅oÜħħħħÜÆÑ',
+      'ÑÆÆħwħÆÆÆ⁅⁅ÆÆħ78ħÆÆÑ',
+      'ÑÆÆÆÆÆÆÆo⁅⁅⁅⁅⁅⁅⁅⁅⁅⁅Ñ',
+      'ÑÑÑÑÑÑÑÑÑ⁅⁅ÑÑÑÑÑÑÑÑÑ',
     ]),
     warps: [
       { x: 10, y: 3, to: { map: 'silph1', x: 8, y: 10 } },
@@ -124518,18 +124610,18 @@ const MAPS3 = {
     rows: rows([
       'ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ',
       'ÑÆÆÆÆÆÆÆÆÆÆÆÆÆÆÆÆÆÆÑ',
-      'ÑFççççÆďòďďďďÆďòďďÆÑ',
+      'ÑFççççÆ⁇⁇⁇⁇⁇⁇Æ⁇⁇⁇⁇ÆÑ',
       'ÑFAJKAÆZZZ45ZÆZZZZÆÑ',
-      'Ñ..................Ñ',
-      'ÑÆÆÆÆÆÆoÆ..ÆoÆÆÆÆÆÆÑ',
-      'ÑÆďďďOÆÆÆ..ÆḅḅḅḅÆÆÆÑ',
-      'ÑÆP12PÆÆÆ..ÆḅVYḅXÆoÑ',
-      'Ñ...................',
-      'ÑÆÆÆÆÆÆÆÆ..Æ......ÆÑ',
-      'ÑÆÆďďďÆÆÆ..ÆÜħħħħÜÆÑ',
-      'ÑÆÆħwħÆÆÆ..ÆÆħ78ħÆÆÑ',
-      'ÑÆÆÆÆÆÆÆÆ..........Ñ',
-      'ÑÑÑÑÑÑÑÑÑ..ÑÑÑÑÑÑÑÑÑ',
+      'Ñ⁅⁅⁅⁅⁅⁅⁅⁅⁅⁅⁅⁅⁅⁅⁅⁅⁅⁅Ñ',
+      'ÑÆÆÆÆÆÆoo⁅⁅ooÆÆÆppÆÑ',
+      'ÑÆďďďOÆÆÆ⁅⁅ÆḅḅḅḅppÆÑ',
+      'ÑÆP12PÆÆÆ⁅⁅ÆḅVYḅXÆoÑ',
+      'Ñ⁅⁅⁅⁅⁅⁅⁅⁅⁅⁅⁅⁅⁅⁅⁅⁅⁅⁅⁅',
+      'ÑÆÆÆÆÆppÆ⁅⁅Æ⁅⁅⁅⁅⁅⁅ÆÑ',
+      'ÑÆÆ⁇⁇⁇ppo⁅⁅oÜħħħħÜÆÑ',
+      'ÑÆÆħwħÆÆÆ⁅⁅ÆÆħ78ħÆÆÑ',
+      'ÑÆÆÆÆÆÆÆo⁅⁅⁅⁅⁅⁅⁅⁅⁅⁅Ñ',
+      'ÑÑÑÑÑÑÑÑÑ⁅⁅ÑÑÑÑÑÑÑÑÑ',
     ]),
     warps: [
       { x: 10, y: 3, to: { map: 'silph1', x: 8, y: 10 } },
@@ -133890,22 +133982,22 @@ const MAPS6 = {
     "rows": [
       "ỗỗỗỗỘỗỗỗỗỗỗỘỗỗỗỗỗỗỗỘỗỗỗỗỗỗỘỗỗỗ",
       "ỗổổổổổổổổổổổổổổổổổổổổẤỗỗỗỗẤổổỗ",
-      "ỗổổớớớớổổdeefổớớớớổổổổộỚỚộổổổỗ",
-      "ỗổổỜsỜỜoổP12PổỜssỜổoổổỚssỚổổổỗ",
-      "ỗ............................ỗ",
-      "ỗổỗổổổổổổổổổổổṀổổổổ.ṀổổổổổổṀổỗ",
-      "ỗổổjklmẤổổổổổổổổổổS.ổổẤổ,,ổ,,ỗ",
-      "ỗổổAJKAổổổổổoổổổổổo.ổổẤổ,,ổ,,ỗ",
-      "ỗ............................ỗ",
-      "ỗổRẫẫS..ổổổổổổổổổổn.ổổổổnổổoổỗ",
-      "ỗổỘẫẫẫẫẎổổổổổổổổổổp.ộộộộpổổổổỗ",
-      "ỗṀỘẫ99ẫỘổRổổổổṀổổổS.ỚỚsỚổổổổổỗ",
-      "ỗ............................ỗ",
-      "ỗỗẤổổổRoổớớớpổộộXộộộ.pớớớớổoẤỗ",
-      "ỗổổổổổổổổỜsỜỜổUUVYUU.ổỜsỜỜổổổỗ",
-      "ỗ............................ỗ",
-      "ỗổổ,,,,oổṀ...S......S,,,,,oổỗỗ",
-      "ỗỗỗỗỘỗỗỗỗỗỗỘỗỗ..ỗỗỗỘỗỗỗỗỗỗỘỗỗỗ"
+      "ỗổổ⁈⁈⁈⁈ổổdeefổ⁈⁈⁈⁈ổổổổ⁈⁈⁈⁈ổổổỗ",
+      "ỗổổỜsỜỜṵổP12PổỜssỜổṵổổỚssỚổổổỗ",
+      "ỗ⁆⁆⁆⁆⁆⁆⁆⁆⁆⁆⁆⁆⁆⁆⁆⁆⁆⁆⁆⁆⁆⁆⁆⁆⁆⁆⁆⁆ỗ",
+      "ỗổỗổổổổổổổổổổổṀổổổổ⁆ṀổổổổổổṀổỗ",
+      "ỗổổjklmẤổổổổổổổổổổS⁆ổổẤổ,,ổ,,ỗ",
+      "ỗổổAJKAổổổổổṵổổổổổṵ⁆ổổẤổ,,ổ,,ỗ",
+      "ỗ⁆⁆⁆⁆⁆⁆⁆⁆⁆⁆⁆⁆⁆⁆⁆⁆⁆⁆⁆⁆⁆⁆⁆⁆⁆⁆⁆⁆ỗ",
+      "ỗỖRẫẫS⁆⁆ỖỖổổổổổổổổn⁆ổổổổnổổṵổỗ",
+      "ỗỖỘẫẫẫẫẎổổổổổổổổổổp⁆⁈⁈⁈⁈pổổổổỗ",
+      "ỗṀỘẫ99ẫỘổRổổổổṀổổổS⁆ỚỚsỚổổổổổỗ",
+      "ỗ⁆⁆⁆⁆⁆⁆⁆⁆⁆⁆⁆⁆⁆⁆⁆⁆⁆⁆⁆⁆⁆⁆⁆⁆⁆⁆⁆⁆ỗ",
+      "ỗỗẤổổổRṵổ⁈⁈⁈pổộộXộộộ⁆p⁈⁈⁈⁈ổṵẤỗ",
+      "ỗổổổổổổổổỜsỜỜổUUVYUU⁆ổỜsỜỜổổổỗ",
+      "ỗ⁆⁆⁆⁆⁆⁆⁆⁆⁆⁆⁆⁆⁆⁆⁆⁆⁆⁆⁆⁆⁆⁆⁆⁆⁆⁆⁆⁆ỗ",
+      "ỗổổ,,,,ṵổṀ⁆⁆⁆S⁆⁆⁆⁆⁆⁆S,,,,,ṵổỗỗ",
+      "ỗỗỗỗỘỗỗỗỗỗỗỘỗỗ⁆⁆ỗỗỗỘỗỗỗỗỗỗỘỗỗỗ"
     ],
     "warps": [
       {
