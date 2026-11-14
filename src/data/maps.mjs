@@ -428,7 +428,10 @@ export const WALKABLE = new Set(['.', ',', 'D', 'E', 'C', 'F', 'J', 'K', '1', '2
   // marblefloor — WD_KIND_DEFS idx 577,578 at U+1E00+577, tiles.mjs)
   // are walkable street material, swapped 1:1 from the walkable '.'
   // path char in Cragmoor / Lastlight, so floor stays floor.
-  ...[577, 578]
+  // Wave W-DIFF2: the second pair's street floors (avenuefloor /
+  // wornfloor — idx 581,582) join on the same terms for Farsight /
+  // Lantern City.
+  ...[577, 578, 581, 582]
     .map((i) => String.fromCodePoint(0x1E00 + i))]);
 
 // Trainer definitions for the slice.

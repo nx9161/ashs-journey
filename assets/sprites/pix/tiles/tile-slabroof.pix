@@ -1,0 +1,24 @@
+# Wave W-DIFF2: slabroof — pale gold-trimmed slab roof of Farsight (Gold Spire & Avenue Slab kit). Solid wall-class roof tile.
+PIX tile-slabroof 16 16
+eaaaaaabeaaaaaaa
+aaacaaababaaaaaa
+aaaaaaabaaaacaaa
+bbbbbbbbbbbbbbbb
+eaabaaaaeaabaaaa
+aaabacaaaaabaaaa
+aaabbaaaaaabaaca
+bbbbbbbbbbbbbbbb
+eaaaaaabeaaaaaaa
+aacaaaabaaaaaaab
+aaaaaaabaacaaaaa
+bbbbbbbbbbbbbbbb
+eaabaaabeaabaaaa
+aaabaacaaaabaaaa
+ababaaaaaaabacaa
+dddddddddddddddd
+PAL
+a #d6c48c slab-face
+b #bfa96e slab-shade
+c #eee0ae slab-lit
+d #8a6d2f slab-shadow
+e #d9a92e gold-trim

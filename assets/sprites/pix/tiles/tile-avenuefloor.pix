@@ -1,0 +1,24 @@
+# Wave W-DIFF2: avenuefloor — wide gold-sandstone avenue slabs of Farsight (Gold Spire & Avenue Slab kit). Full-bleed, walkable street material.
+PIX tile-avenuefloor 16 16
+aaaaaaadaaaaaaaa
+aacaaaadaaaeaaaa
+aaaaaaadaacaaaaa
+aaaabaadaaaaaaaa
+aaaaaaadaaaaacaa
+aaaaaaadaaaabaaa
+aaaaaabdaaaaaaaa
+dddddddddddddddd
+aaadaaaaabadaaaa
+aaadacaaaaadaaaa
+aaaeaaaaaaadaaca
+aabdaaaaaaadaaaa
+aaadaaaacaadaeaa
+acadaaaaaaadaaab
+aaadaaabaaadaaaa
+dddddddddddddddd
+PAL
+a #c9ae62 avenue-slab
+b #b3944a avenue-shade
+c #e6d194 avenue-lit
+d #7d6530 avenue-grout
+e #eec95e gold-fleck

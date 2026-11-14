@@ -698,11 +698,28 @@ export const T23_PROP_KINDS = T23_KIND_DEFS.filter(([, c]) => c === 'prop').map(
 // and warps untouched. Authored art:
 // assets/sprites/pix/tiles/tile-settfloor.pix, tile-marblefloor.pix,
 // tile-drakeroof.pix, tile-parapetroof.pix.
+// ---- Wave W-DIFF2 (identity retrofit #2): the next pair from the same
+// audit's ranking — Lantern City (ecruteak) + Farsight City (saffron),
+// the closest remaining pair on main (composite 0.0393). Appended at
+// idx 581-584 (U+2045-U+2048, verified free in TILE_CHARS, unused by
+// every map row, trim-stable single code units); the pilot's idx
+// 577-580 assignments are untouched. Farsight gets the Gold Spire &
+// Avenue Slab kit (avenuefloor streets, slabroof roofs with gold trim),
+// Lantern gets the Cedar & Ashen Stone kit (wornfloor streets,
+// cedarroof house roofs). Same rules as the pilot: floors are walkable
+// street materials registered per town in STREET_REGISTRY; roofs are
+// solid wall-class, swapped onto roof cells only. Authored art:
+// assets/sprites/pix/tiles/tile-avenuefloor.pix, tile-wornfloor.pix,
+// tile-slabroof.pix, tile-cedarroof.pix.
 export const WD_KIND_DEFS = [
   ['settfloor', 'floor'],
   ['marblefloor', 'floor'],
   ['drakeroof', 'wall'],
   ['parapetroof', 'wall'],
+  ['avenuefloor', 'floor'],
+  ['wornfloor', 'floor'],
+  ['slabroof', 'wall'],
+  ['cedarroof', 'wall'],
 ];
 export const WD_KIND_CHARS = {};
 WD_KIND_DEFS.forEach(([kind], i) => {

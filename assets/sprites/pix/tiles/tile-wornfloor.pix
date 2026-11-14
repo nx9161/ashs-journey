@@ -1,0 +1,24 @@
+# Wave W-DIFF2: wornfloor — worn ash-grey stone flags of Lantern City (Cedar & Ashen Stone kit). Full-bleed, walkable street material.
+PIX tile-wornfloor 16 16
+aaaaadaaaaaaaaaa
+aaaaadaaabaaaaaa
+aaccadaaaaaadaaa
+aaaaadaaaaaaadba
+aaaaadaacaaaaaaa
+aaaabdaaaaaaaaaa
+eaaaadaaaaaaaaab
+dddddddddddddddd
+aaaaaeaaaadaaaaa
+aaaaaaaaaadacaaa
+abaaaaaaaadaaaaa
+aaaaaaaaaadbaaaa
+aaaaaacaaadaaaaa
+aadaaaaaaadaacaa
+aaaaaaabaaeaaaaa
+dddddddddddddddd
+PAL
+a #8d8578 worn-stone
+b #76705f worn-shade
+c #a89e8b worn-lit
+d #55504a worn-crack
+e #6d7a52 worn-moss
