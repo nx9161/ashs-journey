@@ -2777,6 +2777,58 @@ W17D_KIND_DEFS.forEach(([kind], i) => {
 export const W17D_PROP_KINDS = W17D_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
 export const W17D_WALL_KINDS = W17D_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
 export const W17D_FLOOR_KINDS = W17D_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
+// Wave W17-E (Route Build Program, Arden Tranche 5 — the finale):
+// the Crown Road (victoryroad, maps2 + maps3 DUAL), the last cave
+// before the League, its own kit under the NO-SAME-KIT law. Like
+// Tranche 4's caves it converts the generic cave base — char 'L'
+// (cavefloor) to its own floor kind, char 'G' (cavewall) to its own
+// wall kind — art layer only: encounter tables, warps (the Route 22
+// gate mouth and the Crownspire exit), NPC posts, items and the
+// ev_moltres event record byte-identical in both copies, and the
+// shipped cave-encounter trigger chars ('.'/'R',
+// overworld-systems sysEncounterStep) occur in neither copy's grid
+// before or after. The two copies are registry class D in the
+// strongest form — different sizes (maps2 16x14, maps3 18x12) and
+// drifted records; maps3 is the live copy (the loader census and
+// the W17 plan agree: 18x12, W->route22, E->indigo, the VETERAN at
+// his post with the recorded boulder/second-sun dialogue). Each
+// copy is converted char-for-char on its own rows; the drift —
+// ACE RIN's trainer post and the higher encounter band in the
+// stale maps2 copy included — stays byte-preserved, untouched.
+// "Crown Road Ceremonial" (idx 1166-1167): crownfloor is LAID
+// stone — dark violet-charcoal flags in a running bond, the only
+// cave floor in Arden that was built rather than formed — split
+// from Lunestone's pale/dark moonstone speckle, Stonebore's warm
+// strata speckle, and from Crownspire town's bright veined marble
+// (veinfloor, W-DIFF10) by value: the town is the League's white
+// plaza in daylight, the road is its dark mountain undercroft.
+// crownwall is ashlar masonry — squared block courses with
+// staggered joints — against every other cave's natural bands.
+// The road's signature dressing (bannerwall, torchpost, lavaglow
+// — the second sun — cavelantern, crackedfloor, rubble, the rock
+// boulders) already ships in the grid and stands byte-preserved
+// inside the new register; no props are placed (a cave floor is
+// encounter ground — Tranche 4's cave discipline). Cave floor
+// kinds end in 'floor' exactly as cavefloor/stratafloor do,
+// keeping their audit classification. Indices 1166-1167 per the
+// Director's index ruling: Tranches 1-4 took 1092-1110, 1112-1131,
+// 1132-1151 and 1152-1165 (W17-D lands at merge); 1111 and every
+// earlier documented gap stay empty. Kind names verified
+// unclaimed against origin/main. Chars U+1E00+1166.. (Register:
+// WAVE-W17-ROUTE-PROGRAM-PLAN.md.)
+export const W17E_KIND_DEFS = [
+  ['crownfloor', 'floor'],
+  ['crownwall', 'wall'],
+];
+export const W17E_KIND_CHARS = {};
+W17E_KIND_DEFS.forEach(([kind], i) => {
+  const ch = String.fromCodePoint(0x1E00 + 1166 + i);
+  W17E_KIND_CHARS[kind] = ch;
+  TILE_CHARS[ch] = kind;
+});
+export const W17E_PROP_KINDS = W17E_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
+export const W17E_WALL_KINDS = W17E_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
+export const W17E_FLOOR_KINDS = W17E_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
 export const SINNOH_TOWN_GROUND_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg);
 export const SINNOH_TOWN_GROUND2_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg2);
 // TX-3: the 8 gym exteriors by town (original type-accent motifs).

@@ -1030,6 +1030,17 @@ export const WALKABLE = new Set(['.', ',', 'D', 'E', 'C', 'F', 'J', 'K', '1', '2
   // took 1092-1110, W17-B 1112-1131, W17-C 1132-1151 on its
   // parallel branch; 1111 stays empty.)
   ...[1152, 1153, 1156, 1157, 1160, 1162, 1164]
+    .map((i) => String.fromCodePoint(0x1E00 + i)),
+  // Wave W17-E: the Crown Road's cave floor char (U+1E00+1166,
+  // tiles.mjs W17E_KIND_DEFS) is walkable — crownfloor
+  // (victoryroad), swapped 1:1 from the walkable 'L' cavefloor
+  // char in both copies of the road, so floor stays floor. The
+  // crownwall char (1167) is NOT here: walls stay walls, like
+  // 'G'. (Indices 1166-1167 per the Director's index ruling:
+  // Tranches 1-3 took 1092-1110, 1112-1131 and 1132-1151;
+  // W17-D takes 1152-1165 on its parallel branch; 1111 stays
+  // empty.)
+  ...[1166]
     .map((i) => String.fromCodePoint(0x1E00 + i))]);
 
 // Trainer definitions for the slice.
