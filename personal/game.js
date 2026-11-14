@@ -3296,6 +3296,41 @@ T45_KIND_DEFS.forEach(([kind], i) => {
 const T45_PROP_KINDS = T45_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
 const T45_WALL_KINDS = T45_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
 const T45_FLOOR_KINDS = T45_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
+// Wave T46: Inglenook City's own kit — 'Violet Slate & Gilt': the
+// giltfloor (warm gold-ochre setts in a running offset grid —
+// the town's registered street), the domeroof (gold dome
+// segments with violet seams, worn only by the shipped Contest
+// Hall's tr roof cells, so the town sign's 'Contests under the
+// gold dome' becomes true and the Gym + Contest Hall roof share
+// breaks) and two props: the poffintin (a poffin tin stack at
+// the Poffin House landing and MASA's post — the town tale
+// 'Auntie's Poffin Tin' made dressing) and the berrybasket (a
+// berry basket at the Mart's and the Contest Hall's frontages).
+// Indices 828-831 per the Director's index ruling (main's kinds
+// run 594-636 + 645-648 + 660-662 + 672-675 + 684-687 + 696-699 +
+// 708-711 + 720-724 + 732-736 + 744-748 + 756-759 (T40) +
+// 768-771 (T41) + 780-783 (T42) + 792-795 (T43) + 804-807 (T44);
+// the parallel T45 claim holds 816-819; 808-815 + 820-827 stay
+// empty), verified free against origin/main, TILE_CHARS and
+// every map row. Authored art: assets/sprites/pix/tiles/
+// tile-giltfloor.pix, tile-domeroof.pix,
+// tile-prop-poffintin.pix, tile-prop-berrybasket.pix.
+// (WAVE-T46-INGLENOOK-PLAN.md.)
+const T46_KIND_DEFS = [
+  ['giltfloor', 'floor'],
+  ['domeroof', 'wall'],
+  ['poffintin', 'prop'],
+  ['berrybasket', 'prop'],
+];
+const T46_KIND_CHARS = {};
+T46_KIND_DEFS.forEach(([kind], i) => {
+  const ch = String.fromCodePoint(0x1E00 + 828 + i);
+  T46_KIND_CHARS[kind] = ch;
+  TILE_CHARS[ch] = kind;
+});
+const T46_PROP_KINDS = T46_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
+const T46_WALL_KINDS = T46_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
+const T46_FLOOR_KINDS = T46_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
 const SINNOH_TOWN_GROUND_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg);
 const SINNOH_TOWN_GROUND2_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg2);
 // TX-3: the 8 gym exteriors by town (original type-accent motifs).
@@ -95428,6 +95463,78 @@ const ART = {
     "gggggggggggggggg",
     "gggggggggggggggg"
   ] },
+  "tile-giltfloor": { w: 16, h: 16, pal: {"a":"#d9ac55","l":"#ecc978","j":"#8a6a2f","k":"#f7e7ae","s":"#b8893a"}, rows: [
+    "jllljllljllljlll",
+    "jaaajaakjaaajsaa",
+    "jjjjjjjjjjjjjjjj",
+    "lljllljllljllljl",
+    "aajaaajaaajaaajs",
+    "jjjjjjjjjjjjjjjj",
+    "jllljllljllljlll",
+    "jaaajaaajaaajaaa",
+    "jjjjjjjjjjjjjjjj",
+    "lljllljllljllljl",
+    "aajaaajakajaaaja",
+    "jjjjjjjjjjjjjjjj",
+    "jllljllljllljlll",
+    "jaaajaaajaaajaaa",
+    "jjjjjjjjjjjjjjjj",
+    "lljllljllljllljl"
+  ] },
+  "tile-domeroof": { w: 16, h: 16, pal: {"a":"#e3b341","h":"#f7dc8a","v":"#5a3a7a","d":"#b8892e","k":"#fdf0bc"}, rows: [
+    "dhhhhhdhhhhhdhhh",
+    "daaaaadaaaaadaaa",
+    "daaaaadaaaaadaaa",
+    "vvvvvvvvvvvvvvvv",
+    "hhhdhhhhhdhhhhhd",
+    "aaadaaaaadaaaaad",
+    "aaadaaaaadaaaaad",
+    "vvvvvvvvvvvvvvvv",
+    "dhhhhhdhhhhhdhhh",
+    "daaaaadaaaaadaaa",
+    "daaaaadaaaaadaaa",
+    "vvvvvvvvvvvvvvvv",
+    "hhhdhhhhhdhhhhhd",
+    "aaadaaaaadaaaaad",
+    "aaadaaaaadaaaaad",
+    "vvvvvvvvvvvvvvvv"
+  ] },
+  "tile-prop-poffintin": { w: 16, h: 16, pal: {"g":"#248707","G":"#245107","t":"#c8ccd4","T":"#8a8f9a","r":"#c03a3a","R":"#e86a5a","b":"#a8763e","B":"#7a5226","y":"#f4d03f","u":"#3a5ac0","e":"#d23c2e"}, rows: [
+    "gggggggggggggggg",
+    "ggGGggggggggGGgg",
+    "gggttttttttttggg",
+    "ggtrRRRRRRRRrtgg",
+    "ggtrrrrrrrrrrtgg",
+    "gggttttttttttggg",
+    "gggTttttttttTggg",
+    "gggttttttttttggg",
+    "gggTttttttttTggg",
+    "gggttttttttttggg",
+    "ggggTTTTTTTTgggg",
+    "gggggbbbbbbggggg",
+    "ggggbbyubuebgggg",
+    "ggggbbbbbbbbgggg",
+    "gggggBBBBBBggggg",
+    "ggGGggggggggGGgg"
+  ] },
+  "tile-prop-berrybasket": { w: 16, h: 16, pal: {"g":"#248707","G":"#245107","b":"#a8763e","B":"#7a5226","y":"#f4d03f","u":"#3a5ac0","e":"#d23c2e","r":"#e86a5a"}, rows: [
+    "gggggggggggggggg",
+    "ggGGggggggggGGgg",
+    "gggggggggggggggg",
+    "ggggeryuyreggggg",
+    "ggggeuyeryuegggg",
+    "ggggbyuyerybgggg",
+    "ggggbbbbbbbbgggg",
+    "gggggbbbbbbggggg",
+    "gggggBbBbBbggggg",
+    "gggggbbbbbbggggg",
+    "ggggggBBBBgggggg",
+    "gggggggggggggggg",
+    "gggggggggggggggg",
+    "gggggggggggggggg",
+    "ggGGggggggggGGgg",
+    "gggggggggggggggg"
+  ] },
   "tile-trellisroof": { w: 16, h: 16, pal: {"c":"#f2e7ce","r":"#cf8296","l":"#e2a5b4","d":"#a85f74","b":"#8e3d55","v":"#557f3e"}, rows: [
     "cclrllllcclllvll",
     "cccldllccccbrllc",
@@ -116377,6 +116484,12 @@ for (const k of T44_FLOOR_KINDS) TILE_ART[k] = 'tile-' + k;
 for (const k of T45_PROP_KINDS) TILE_ART[k] = 'tile-prop-' + k;
 for (const k of T45_WALL_KINDS) TILE_ART[k] = 'tile-' + k;
 for (const k of T45_FLOOR_KINDS) TILE_ART[k] = 'tile-' + k;
+// Wave T46: Inglenook City's own kit kinds take their authored
+// art: giltfloor setts, the Contest Hall's gold domeroof, the
+// poffin tin stack and the berry basket.
+for (const k of T46_PROP_KINDS) TILE_ART[k] = 'tile-prop-' + k;
+for (const k of T46_WALL_KINDS) TILE_ART[k] = 'tile-' + k;
+for (const k of T46_FLOOR_KINDS) TILE_ART[k] = 'tile-' + k;
 // Premium+ W6 (TX-3/PL-1): door-open frames, authored in TX-3 for every
 // door kind. The warp-fade engine that plays them lands in W7 — W6
 // wires the frames (this registry + cache.doorOpen + doorOpenCanvas)
@@ -118240,6 +118353,11 @@ function resolveTileLayers(cache, kind, x, y, kindAt, t, phase, mapId) {
     // the town grass is baked in).
     case 'oldstatue':
     case 'flowerurn':
+    // Wave T46: Inglenook's poffin tins and berry baskets
+    // composite over their lawn the same way (both arts are
+    // fully opaque — the town grass is baked in).
+    case 'poffintin':
+    case 'berrybasket':
     // Wave T17: the radio mast composites over its compound grass too.
     case 'radiomast': {
       // Object tiles carry transparent surrounds (Wave 1): lay the ground
@@ -125294,6 +125412,18 @@ const WALKABLE = new Set(['.', ',', 'D', 'E', 'C', 'F', 'J', 'K', '1', '2', 'V',
   // 744-748 + 756-759 + 768-771 + 780-783 + 792-795; the
   // parallel T44 claim holds 804-807; gaps stay empty.)
   ...[816]
+    .map((i) => String.fromCodePoint(0x1E00 + i)),
+  // Wave T46: the giltfloor char (U+1E00+828, tiles.mjs
+  // T46_KIND_DEFS) is walkable street material — Inglenook
+  // City's warm gilt setts, swapped onto the town's tg2 street
+  // cells (the front street, the avenues, the west road — all
+  // shipped walkable as tg2), so floor stays floor. (Indices
+  // 828-831 per the Director's index ruling: main's kinds run
+  // 594-636 + 645-648 + 660-662 + 672-675 + 684-687 + 696-699 +
+  // 708-711 + 720-724 + 732-736 + 744-748 + 756-759 + 768-771 +
+  // 780-783 + 792-795 + 804-807; the parallel T45 claim holds
+  // 816-819; gaps stay empty.)
+  ...[828]
     .map((i) => String.fromCodePoint(0x1E00 + i))]);
 
 // Trainer definitions for the slice.
@@ -154655,26 +154785,26 @@ const MAPS9 = {
     "music": "viridian-theme",
     "weather": "clear",
     "rows": [
-      "῎῎῎῎῎῎῍῍῎῎῎῎῎῍῍῎῎῎῏῎῎῎῎῎῎῏῎῎῎῎",
-      "῎ῌῌῌF῍῍῍῍῍῍῍῍῍῍῍῍῍῍῍ῌῌῌFῌῌῌῌῌ῎",
-      "῎ῌῌjkS῍῍῍deef῍῍ῐῐῐῐ῍ῌῐῐῐῐḣῌῌῌ῎",
-      "῎ẅῌAJK῍῍῍P12P῍῍UVYU῍ῌῑsῑῑῌῌῌῌ῎",
-      "῎ῌḣ῍῍῍῍῍῍῍῍῍῍῍῍῍῍῍῍῍῍῍῍ῌῌῌῌῌῌ῎",
-      "῎ῌS῍῍῍῍῍῍῍῍῍῍῍῍῍῍῍῍῍ῌoῌῌῌῌῌῌῌ῎",
-      "῎῍῍῍῍ῌ῍῍῍῍ῌ῍῍῍῍ῌᾛῌῌ῍ᾛῌῌῌῌῌῌῌῌ῎",
-      "῎῍῍῍῍ῌ῍῍῍῍῍ῌ῍῍῍oῌῌῌ῍ῌῌῌFᾛῌῌῌῌ῎",
-      "῍῍῍῍῍῍῍῍῍῍῍῍῍῍῍῍῍῍῍῍ῌῌῌῌῌῌῌῌῌῌ",
-      "῍῍῍῍῍῍῍῍῍῍῍῍῍῍῍῍῍῍῍῍ῌῌῌῌῌῌῌῌῌῌ",
-      "῎῍῍῍῍῍῍῍῍῍῍῍῍῍῍ῌFῌῌ῍ῌῌῌῌῌῌῌῌῌ῎",
-      "῎῍῍ῒῒῒ῍῍ῒῒῒ῍῍῍῍ῌᾛῌῌ῍ῌẅῌḣῌῌῌ῏ῌ῎",
-      "῎῍῍ΐsΐ῍῍ΐsΐ῍῍῍῍ῌḣῌῌ῍ῌῌῌῌῌῌẅῌῌ῎",
-      "῎῍῍῍῍῍῍῍῍῍ῌḣ῍῍῍῍῍῍῍ῌῌῌῌῌῌῌᾛῌῌ῎",
-      "῎ῌ῍.῍.῍῍῍῍῍῍῍῍῍῍῍῍῍῍ᾔᾔᾔᾔᾔᾔᾔῌῌ῎",
-      "῎F.,,,,.῍῍῍῍῍῍῍oῌῌῌ῍ᾔᾔᾔᾔᾔᾔᾔῌῌ῎",
-      "῎῏.,,,.ᾛ῍ῌῌ῍῍῍῍oῌẅῌ῍ᾔᾔᾔᾔᾔᾔᾔῌῌ῎",
-      "῎F῍.῍.῍῍῍῍῍῍῍῍῍ῌῌḣḣ῍ῌῌῌῌῌῌ῏ῌῌ῎",
-      "῎ῌoFῌῌoῌῌῌ῏ῌᾛ῍῍῍῍῍῍῍ῌῌῌῌῌῌῌῌῌ῎",
-      "῎῎῎῏῎῎῎῎῎῎῏῎῎῍῍῎῎῎῏῎῎῎῎῎῎῏῎῎῎῎",
+      "῎῎῎῎῎῎ℼℼ῎῎῎῎῎ℼℼ῎῎῎῏῎῎῎῎῎῎῏῎῎῎῎",
+      "῎ῌῌῌFῌℼῌῌῌῌῌῌℼℼῌῌῌῌῌῌῌῌFῌῌῌῌῌ῎",
+      "῎ῌῌjkSℼῌῌdeefℼℼῐῐῐῐῌῌℽℽℽℽḣῌῌῌ῎",
+      "῎ẅῌAJKℼῌῌP12PℼℼUVYUῌῌῑsῑῑῌῌῌῌ῎",
+      "῎ℼḣℼℼℼℼℼℼℼℼℼℿℼℼℼℼℼℼℼℼℼℼℼℼℼℼℼℼ῎",
+      "῎ℼSῌῌῌῌῌῌῌῌℼSℼℼῌῌῌῌῌῌoῌῌℿℼSῌῌ῎",
+      "῎ℼῌῒῒῒῌῌῌῌῌℼῌℼℼῌᾛῌῌῌᾛῌῌῌῌℼῌῌῌ῎",
+      "῎ℼῌΐsΐῌῌῌῌῌℼῌℼℼoῌῌῌῌῌῌῌFᾛℼῌῌῌ῎",
+      "ℼℼℼℼℼℼℼℼℼℼℼℼℼℼℼῌῌῌῌῌῌῌῌῌῌℼῌῌῌῌ",
+      "ℼℼℼℼℼℼℼℼℼℼℼℼℼℼℼῌῌῌῌῌῌῌῌῌῌℼῌῌῌῌ",
+      "῎ῌῌῌῌῌℼῌῌῌῌℼῌℼℼῌFῌῌῌῌῌῌῌῌℼῌῌῌ῎",
+      "῎ῌῌῒῒῒℼῌῒῒῒℼῌℼℼῌᾛῌῌῌῌẅῌḣῌℼῌ῏ῌ῎",
+      "῎ῌSΐsΐℼSΐsΐℼℼℼℼῌḣῌῌῌῌῌῌῌῌℼẅῌῌ῎",
+      "῎ῌℼℼℼℼℼℼℼℼῌḣℼℼℼῌῌῌℾῌῌῌῌῌῌℼᾛῌῌ῎",
+      "῎ῌℼ.ῌ.ῌℼῌῌℾῌῌℼℼῌῌῌῌῌᾔᾔᾔᾔᾔᾔᾔῌῌ῎",
+      "῎F.,,,,.ῌῒῒῒῌℼℼoῌῌῌῌᾔᾔᾔᾔᾔᾔᾔῌῌ῎",
+      "῎῏.,,,.ᾛῌΐsΐῌℼℼoῌẅῌῌᾔᾔᾔᾔᾔᾔᾔῌῌ῎",
+      "῎Fℼ.ℼ.ℼῌῌῌℼℼℼℼℼῌῌḣḣῌῌῌῌῌῌῌ῏ῌῌ῎",
+      "῎ῌoFῌῌoSῌῌ῏ῌᾛℼℼℼℼℼῌῌῌῌῌῌῌῌῌῌῌ῎",
+      "῎῎῎῏῎῎῎῎῎῎῏῎῎ℼℼ῎῎῎῏῎῎῎῎῎῎῏῎῎῎῎",
     ],
     "warps": [
       {"x": 4, "y": 3, "to": {"map": "center", "x": 4, "y": 4}, "via": {"map": "hearthome", "x": 4, "y": 4}},
@@ -154699,9 +154829,13 @@ const MAPS9 = {
       {"x": 2, "y": 5, "text": "INGLENOOK CITY — The warm heart of Borea. Contests under the gold dome, Kindred Square through the north gate, and a gym that haunts politely."},
       {"x": 5, "y": 2, "text": "KINDRED SQUARE — North gate. Walk the lawns with a cute partner and a clear afternoon."},
       {"x": 7, "y": 18, "text": "INGLENOOK CITY — West: ROUTE 208 · North: ROUTE 209 / KINDRED SQUARE · South: ROUTE 212 — NORTH."},
+      {"x": 12, "y": 5, "text": "INGLENOOK CITY — West: ROUTE 208 · North: ROUTE 209 / KINDRED SQUARE · South: ROUTE 212 — NORTH."},
+      {"x": 2, "y": 12, "text": "INGLENOOK CITY — West: ROUTE 208 · North: ROUTE 209 / KINDRED SQUARE · South: ROUTE 212 — NORTH."},
+      {"x": 7, "y": 12, "text": "INGLENOOK CITY — West: ROUTE 208 · North: ROUTE 209 / KINDRED SQUARE · South: ROUTE 212 — NORTH."},
+      {"x": 26, "y": 5, "text": "INGLENOOK CITY — West: ROUTE 208 · North: ROUTE 209 / KINDRED SQUARE · South: ROUTE 212 — NORTH."}
     ],
     "npcs": [
-      {"x": 3, "y": 5, "name": "MART CLERK", "art": "clerk", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#4a3a2a", "dialogue": ["Inglenook City Mart — stocked for the road ahead."], "mart": {"stock": ["greatball", "ultraball", "hyperpotion", "fullheal", "revive", "superpotion"]}},
+      {"x": 9, "y": 4, "name": "MART CLERK", "art": "clerk", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#4a3a2a", "dialogue": ["Inglenook City Mart — stocked for the road ahead."], "mart": {"stock": ["greatball", "ultraball", "hyperpotion", "fullheal", "revive", "superpotion"]}},
       {"x": 11, "y": 7, "name": "CONTEST AUNTIE ROSA", "art": "lady", "skin": "#d8a878", "shirt": "#7a4a8a", "pants": "#2a2a3a", "hair": "#c0c0c0", "dialogue": ["A ribbon is a judge admitting, in the record books, that your Kin shone.", "Odile judges the gym AND half the contests. The city runs on her standards and her accent."]},
       {"x": 19, "y": 13, "name": "POFFIN COOK MASA", "art": "worker", "skin": "#f0c8a0", "shirt": "#3a7a4a", "pants": "#4a3a2a", "hair": "#2a1a0a", "dialogue": ["Berries in, poffins out, patience throughout. The house by the square takes apprentices.", "Repose is north past the Forsaken Tower. Mind the tower's quiet; it minds you."]},
       {"x": 8, "y": 16, "name": "SQUARE WARDEN PIOTR", "art": "gent", "skin": "#e8b888", "shirt": "#3a6ac0", "pants": "#2a3a4a", "hair": "#1a1a1a", "dialogue": ["Amity's lawns are for strolling pairs. The Kin choose the route; we keep the gates.", "West road runs to the mountain's south door. South, Route 212 heads for the marsh country."]},
