@@ -2827,6 +2827,36 @@ T30_KIND_DEFS.forEach(([kind], i) => {
 const T30_PROP_KINDS = T30_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
 const T30_WALL_KINDS = T30_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
 const T30_FLOOR_KINDS = T30_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
+// Wave T31 (Beacon City): the 'Gleam Lamp & Harbour Plank' kit —
+// Beacon's own kit from birth (NO-SAME-KIT law). 'beaconroof'
+// (wall) — harbour-red STANDING SEAM metal, worn by the Gleam
+// Lighthouse, the House and the facade cottages. 'harbourfloor'
+// (floor) — the town's street: bolted harbour plank decking.
+// 'jettyfloor' (floor) — tarred cross-batten planks at the
+// Route 40 landfall jetty. 'lampglass' (prop) — the lighthouse's
+// lit lamp, brass housing + warm glass on the tower's own roof.
+// Indices 645-648 per the Director's index ruling (main's kinds
+// run to 632; T30 Wildflower claims from 633 in parallel; this
+// block registers at 645+, verified free against origin/main,
+// TILE_CHARS and every map row; 606-607 stay empty). Authored
+// art: assets/sprites/pix/tiles/tile-beaconroof.pix,
+// tile-harbourfloor.pix, tile-jettyfloor.pix,
+// tile-prop-lampglass.pix. (WAVE-T31-BEACON-PLAN.md.)
+const T31_KIND_DEFS = [
+  ['beaconroof', 'wall'],
+  ['harbourfloor', 'floor'],
+  ['jettyfloor', 'floor'],
+  ['lampglass', 'prop'],
+];
+const T31_KIND_CHARS = {};
+T31_KIND_DEFS.forEach(([kind], i) => {
+  const ch = String.fromCodePoint(0x1E00 + 645 + i);
+  T31_KIND_CHARS[kind] = ch;
+  TILE_CHARS[ch] = kind;
+});
+const T31_PROP_KINDS = T31_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
+const T31_WALL_KINDS = T31_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
+const T31_FLOOR_KINDS = T31_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
 const SINNOH_TOWN_GROUND_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg);
 const SINNOH_TOWN_GROUND2_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg2);
 // TX-3: the 8 gym exteriors by town (original type-accent motifs).
@@ -109430,6 +109460,78 @@ const ART = {
     "bddbbbbbdbdbbbbb",
     "dddddddddddddddd",
   ] },
+  "tile-beaconroof": { w: 16, h: 16, pal: {"b":"#b04a3c","B":"#a64434","h":"#cc7263","s":"#74302a","e":"#5f241d"}, rows: [
+    "bbbhsbbhsbbhsbbh",
+    "BBBhsBBhsBBhsBBh",
+    "bbbhsbbhsbbhsbbh",
+    "BBBhsBBhsBBhsBBh",
+    "bbbhsbbhsbbhsbbh",
+    "BBBhsBBhsBBhsBBh",
+    "bbbhsbbhsbbhsbbh",
+    "BBBhsBBhsBBhsBBh",
+    "bbbhsbbhsbbhsbbh",
+    "BBBhsBBhsBBhsBBh",
+    "bbbhsbbhsbbhsbbh",
+    "BBBhsBBhsBBhsBBh",
+    "bbbhsbbhsbbhsbbh",
+    "BBBhsBBhsBBhsBBh",
+    "eeeeeeeeeeeeeeee",
+    "eeeeeeeeeeeeeeee"
+  ] },
+  "tile-harbourfloor": { w: 16, h: 16, pal: {"b":"#9a8a68","d":"#8a7a58","s":"#5f5138","i":"#3a3a40","w":"#c9bd9e"}, rows: [
+    "bbbbbbbbbbbbbbbb",
+    "bbbbbbbbbwbbbbbb",
+    "bbibbbbbbbbbbibb",
+    "ssssssssssssssss",
+    "dddddddddddddddd",
+    "dwddddddddddwddd",
+    "ddiddddddddddidd",
+    "ssssssssssssssss",
+    "bbbbbbbbbbbbbbbb",
+    "bbbbwbbbbbbbbbbw",
+    "bbibbbbbbbbbbibb",
+    "ssssssssssssssss",
+    "dddddddddddddddd",
+    "dddddddwdddddddd",
+    "ddiddddddddddidd",
+    "ssssssssssssssss"
+  ] },
+  "tile-jettyfloor": { w: 16, h: 16, pal: {"b":"#6a5638","d":"#5a4830","s":"#46351f","t":"#7d6844","n":"#2e2a26","e":"#332716"}, rows: [
+    "eeeeeeeeeeeeeeee",
+    "bbbttbbbbbbttbbb",
+    "bbbttbbbbbbttbbb",
+    "sssttssssssttsss",
+    "dddnnddddddnnddd",
+    "dddttddddddttddd",
+    "dddttddddddttddd",
+    "sssttssssssttsss",
+    "bbbttbbbbbbttbbb",
+    "bbbttbbbbbbttbbb",
+    "bbbttbbbbbbttbbb",
+    "sssnnssssssnnsss",
+    "dddttddddddttddd",
+    "dddttddddddttddd",
+    "dddttddddddttddd",
+    "eeeeeeeeeeeeeeee"
+  ] },
+  "tile-prop-lampglass": { w: 16, h: 16, pal: {"b":"#b04a3c","h":"#cc7263","s":"#74302a","e":"#5f241d","k":"#2e2a26","a":"#c9a227","g":"#ffd98a","o":"#f5a623","W":"#fff6d8"}, rows: [
+    "bbbhsbbhsbbhsbbh",
+    "bbbhsbbhsbbhsbbh",
+    "bbbhskkkkkkhsbbh",
+    "bbbhsbbkkbbhsbbh",
+    "bbbhkkkkkkkksbbh",
+    "bbbhkaaaaaaksbbh",
+    "bbbhkagWggaksbbh",
+    "bbbhkagWogaksbbh",
+    "bbbhkagoogaksbbh",
+    "bbbhkaggggaksbbh",
+    "bbbhkaaaaaaksbbh",
+    "bbbhkkkkkkkksbbh",
+    "bbbhskkkkkkhsbbh",
+    "bbbhsbbhsbbhsbbh",
+    "eeeeeeeeeeeeeeee",
+    "eeeeeeeeeeeeeeee"
+  ] },
   "partner-back-bob": { base: "partner-back", w: 64, h: 64, pal: {}, shiftY: 2 },
   "partner-front-bob": { base: "partner-front", w: 64, h: 64, pal: {}, shiftY: 2 },
   "abomasnow-back-bob": { base: "abomasnow-back", w: 64, h: 64, pal: {}, shiftY: 2 },
@@ -114716,6 +114818,11 @@ for (const k of WD8_FLOOR_KINDS) TILE_ART[k] = 'tile-' + k;
 for (const k of T30_PROP_KINDS) TILE_ART[k] = 'tile-prop-' + k;
 for (const k of T30_WALL_KINDS) TILE_ART[k] = 'tile-' + k;
 for (const k of T30_FLOOR_KINDS) TILE_ART[k] = 'tile-' + k;
+// Wave T31: Beacon City's lit lamp draws its prop art; its
+// standing-seam roofs + harbour deck/jetty kit kinds theirs.
+for (const k of T31_PROP_KINDS) TILE_ART[k] = 'tile-prop-' + k;
+for (const k of T31_WALL_KINDS) TILE_ART[k] = 'tile-' + k;
+for (const k of T31_FLOOR_KINDS) TILE_ART[k] = 'tile-' + k;
 // Premium+ W6 (TX-3/PL-1): door-open frames, authored in TX-3 for every
 // door kind. The warp-fade engine that plays them lands in W7 — W6
 // wires the frames (this registry + cache.doorOpen + doorOpenCanvas)
@@ -116505,6 +116612,10 @@ function resolveTileLayers(cache, kind, x, y, kindAt, t, phase, mapId) {
     // is fully opaque — the green is baked in).
     case 'trellis':
     case 'rosebush':
+    // Wave T31: the Gleam Lighthouse's lit lamp composites over
+    // its roof the same way (its art is fully opaque — the
+    // tower's harbour-red roof is baked in).
+    case 'lampglass':
     // Wave T17: the radio mast composites over its compound grass too.
     case 'radiomast': {
       // Object tiles carry transparent surrounds (Wave 1): lay the ground
@@ -123391,6 +123502,18 @@ const WALKABLE = new Set(['.', ',', 'D', 'E', 'C', 'F', 'J', 'K', '1', '2', 'V',
   // floor stays floor. (Indices 633-636 after the Director's
   // re-index ruling: W-DIFF8 holds 629-632; 606-607 stay empty.)
   ...[634]
+    .map((i) => String.fromCodePoint(0x1E00 + i)),
+  // Wave T31: the harbourfloor char (U+1E00+646, tiles.mjs
+  // T31_KIND_DEFS) is walkable street material — Beacon City's
+  // harbour plank decking, swapped onto the town's street cells
+  // (shipped as walkable tg2 mud / tg), and the jettyfloor char
+  // (U+1E00+647) likewise at the Route 40 landfall jetty
+  // (swapped from water at the crossing seam — the jetty is the
+  // crossing's landing, so floor replaces surf there), so floor
+  // stays floor. (Indices 645-648 per the Director's ruling:
+  // W-DIFF8 holds 629-632; T30 claims from 633 in parallel;
+  // 606-607 stay empty.)
+  ...[646, 647]
     .map((i) => String.fromCodePoint(0x1E00 + i))]);
 
 // Trainer definitions for the slice.
@@ -140291,23 +140414,23 @@ const MAPS6 = {
     "name": "Beacon City",
     "music": "viridian-theme",
     "rows": [
-      "ởởởỠởởởởởởỠởởởởởởỠởởởởởởỠỞỞởởởỠởởở",
-      "ởờỞỞỞỞỞỞỞỞỞỞỞỞỞỞỞỞỞỞỞỞỞỞỞỞỞờỠờờờờở",
-      "ởFỞjklmỞỞdeefờờỡỡỡỡỞờỡỡỡỡỞỞợợợờờờở",
-      "ởờỞAJKAỞỞP12PờờUVYUỞờỢỢỢỢỞỞỤsỤờờờở",
-      "ởờỞỞỞỞỞỞỞỞỞỞỞỞỞỞỞỞỞỞỞỞỞỞỞỞỞỞỞờờờờở",
-      "ởờSỞỞỞỞỞỞỞỞỞỞỞỞỞỞỞỞỞỞỞỞỞờờoờờờờờờở",
-      "ởờỞỞoờờờỞẅỞỞỞỞỞỞỞỞỞỞỞỞỞờờờờẅờFờờờở",
-      "ởờỞỞờờờờỞỞỞờỠờỞờỞờỞoờờờỞờờờờờờờờờở",
-      "ởờỞỞờờờờỞẅờỠờờỞờỞờỞờờờờỞờờờờờờờờờở",
-      "ởờỞỞờờỠờỞờờờờờỞờỞờỞnờỞỞỞờờờờờờờờờở",
-      "ởờỞỞỞờờờỞờờờờờỞờỞờỞờờỞoờờờờờờờờờờở",
-      "ở~ờỠỞờ..ỞờờờờờỞờỞờỞờờỞờẅờờờờờờờờờở",
-      "~~~ờỞ.,,.ỞờờờờỞnỞờỞờỠỞờờờờờờờờờờờở",
-      "~~~ờ.,,,oỞẄờờFỞỞỞờỞờờỞờờờờờờờờờờờở",
-      "ở~ờờỞ...ờỞờẄFờờỞỞỞỞỞỞỞờẅờờờờờờờờờở",
-      "ởờờờỞỞỞỞỞỞỞỞỞỞỞỞỞỞSỞỞỞờờờờờờờờờờờở",
-      "ở~~~~~~~~~~~~~~~ờờ~~~~~~~~~~~~~~~ở",
+      "ởởởỠởởởởởởỠởởởởởởỠởởởởởởỠ₆₆ởởởỠởởở",
+      "ởờờờờờờờờờờờờờờờờờờờờờờờ₆₆₆SỠờờờờở",
+      "ởFờjklmờờdeefờờỡỡỡỡờS₅₈₅₅₆₆₅₅₅ờờờở",
+      "ởờờAJKAờờP12PờờUVYUờờỢỢỢỢ₆₆ỤsỤờờờở",
+      "ở₆₆₆₆₆₆₆₆₆₆₆₆₆₆₆₆₆₆₆₆₆₆₆₆₆₆₆₆₆₆₆₆ở",
+      "ởờS₆ờờờờờờờờờờờờ₆ờSờờờờờờ₆oờờờờờờở",
+      "ởờờ₆oờờờờẅờờờờờờ₆ờờờờờờờờ₆ờẅờFờờờở",
+      "ởờờ₆ờờờờờờờờỠ₅₅₅₆₆₆oờờờờờ₆ờờ₅₅₅ờờở",
+      "ởờờ₆ờờờờờẅờỠờỤsỤ₆ờờờờờờờờ₆ờờỤsỤờờở",
+      "ởờờ₆ờờỠSờờờờờờ₆₆₆ờờnờờờờờ₆₆₆₆₆ờờờở",
+      "ởờờ₆₆₆₆₆₆ờờờờờờờ₆ờSờờờo₆₆₆ờSờờờờờở",
+      "ở~ờỠờ₆..₆ờờờờờờờ₆ờờờờờờẅờ₆ờờờờờờờở",
+      "₇₇₇Sờ.,,.ờờờờờờn₆ờờờỠờờờờ₆ờờờờờờờở",
+      "₇₇₇₇.,,,oờẄờờFờờ₆ờờờờờờờờ₆ờờờờờờờở",
+      "ở~₇₇ờ...SờờẄFờờờ₆ờờờờờờẅờ₆ờSờờờờờở",
+      "ở₆₆₆₆₆₆₆₆₆₆₆₆₆₆₆₆₆S₆₆₆₆₆₆₆₆₆₆₆₆₆₆ở",
+      "ở~~~″~~~~~~″~~~~ờờ~~~~″~~~~~″~~~~ở",
       "ở~~~~~~~~~~~~~~~ờờ~~~~~~~~~~~~~~~ở",
       "ở~~~~~~~~~~~~~~~ờờ~~~~~~~~~~~~~~~ở",
       "ở~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ở"
@@ -140467,6 +140590,10 @@ const MAPS6 = {
       {"x": 20, "y": 2, "text": "BEACON CITY — North: ROUTE 39 · West: ROUTE 40."},
       {"x": 27, "y": 1, "text": "BEACON CITY — North: ROUTE 39 · West: ROUTE 40."},
       {"x": 8, "y": 14, "text": "BEACON CITY — North: ROUTE 39 · West: ROUTE 40."},
+      {"x": 18, "y": 5, "text": "BEACON CITY — North: ROUTE 39 · West: ROUTE 40."},
+      {"x": 18, "y": 10, "text": "BEACON CITY — North: ROUTE 39 · West: ROUTE 40."},
+      {"x": 27, "y": 10, "text": "BEACON CITY — North: ROUTE 39 · West: ROUTE 40."},
+      {"x": 27, "y": 14, "text": "BEACON CITY — North: ROUTE 39 · West: ROUTE 40."},
     ],
     "npcs": [
       {
@@ -140529,8 +140656,8 @@ const MAPS6 = {
         ]
       },
       {
-        "x": 3,
-        "y": 5,
+        "x": 9,
+        "y": 4,
         "name": "MART CLERK",
         "art": "clerk",
         "skin": "#f0c8a0",
