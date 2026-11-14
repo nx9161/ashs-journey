@@ -1,0 +1,34 @@
+# Wave T41 (Shingle kit): tideslug — the TIDESLUG of Shingle
+# Beach, seated beside BEACHCOMBER ANA's post; her byte-kept
+# dialogue is its caption ('TIDESLUG change colour with the
+# coast here. The lab writes it down; the beach just does
+# it.'). A low sea-slug worn teal-blue on this shore,
+# orange-tipped cerata along its back, on the beach's own
+# sand (measured #c6b388) baked in, fully opaque.
+# (NO-SAME-KIT law; WAVE-T41-SHINGLE-PLAN.md.)
+PIX tile-prop-tideslug 16 16
+bppppppbppppppbp
+pppppbnpppppbppp
+pppbppppppbpnppp
+pbppppppbppppppb
+pppppkbkpkpppkpp
+ppppbopopopbtopp
+ppbppoooooopoppp
+bpppottttttpppbp
+pppottttttttoppp
+pnpttttttttttopp
+pbpltttttttttppb
+pppplllllllllbwp
+ppwpbppppwpbpppp
+ppbppppppbpppppp
+bppppppbppppppbp
+pppppbppppppbppp
+PAL
+p #c6b388 beach-sand
+b #a69274 sand-worn
+n #d7c699 sand-pale
+t #3f8f8a slug-body
+l #7fb8ad slug-fringe
+o #2a5f5c slug-shade
+k #e8875a cerata-tip
+w #f2ead6 shell-chip

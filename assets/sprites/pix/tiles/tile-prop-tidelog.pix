@@ -1,0 +1,34 @@
+# Wave T41 (Shingle kit): tidelog — a bleached driftwood log
+# delivered by the tide, seated on the west beach; the beach
+# sign's own words made visible ('The tide delivers shells,
+# driftwood, and the occasional research assistant.').
+# Weathered pale wood, dark end rings, one white shell at
+# its foot, on the beach's own sand (measured #c6b388)
+# baked in, fully opaque. (NO-SAME-KIT law;
+# WAVE-T41-SHINGLE-PLAN.md.)
+PIX tile-prop-tidelog 16 16
+bppppppbppppppbp
+pppppbnpppppbppp
+pppbppppppbpnppp
+pbppppppbppppppb
+ppppppbppppppbpp
+ppppbppppppbpppp
+ppbppppppbpppppp
+blllllllllllllgp
+pwwggwrwgggwwgrp
+pgwwwgrwwwwgwgrp
+pgwwwwwwwwwwwwgb
+ppbbbbbbbbbbbbpp
+pppssppppppnpppp
+ppbppppppbpppppp
+bppppppbppppppbp
+pppppbppppppbppp
+PAL
+p #c6b388 beach-sand
+b #a69274 sand-worn
+n #d7c699 sand-pale
+w #b39b7d bleached-wood
+l #cdb69a wood-light
+g #8a7358 wood-grain
+r #71523d end-ring
+s #f2ead6 shell

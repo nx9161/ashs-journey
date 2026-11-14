@@ -636,6 +636,17 @@ export const WALKABLE = new Set(['.', ',', 'D', 'E', 'C', 'F', 'J', 'K', '1', '2
   // 708-711 + 720-724 + 732-736 + 744-748 (T39); the gaps
   // stay empty.)
   ...[756]
+    .map((i) => String.fromCodePoint(0x1E00 + i)),
+  // Wave T41: the shellfloor char (U+1E00+768, tiles.mjs
+  // T41_KIND_DEFS) is walkable street material — Shingle
+  // Town's raked shell-sand, swapped onto the town's street
+  // cells (which shipped as walkable tg2 mud or walkable
+  // ground), so floor stays floor. (Indices 768-771 per the
+  // Director's index ruling: main's kinds run 594-636 +
+  // 645-648 + 660-662 + 672-675 + 684-687 + 696-699 + 708-711 +
+  // 720-724 + 732-736 + 744-748; the parallel T40 claim holds
+  // 756-759; gaps stay empty.)
+  ...[768]
     .map((i) => String.fromCodePoint(0x1E00 + i))]);
 
 // Trainer definitions for the slice.

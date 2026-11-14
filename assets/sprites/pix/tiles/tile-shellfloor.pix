@@ -1,0 +1,34 @@
+# Wave T41 (Shingle kit): shellfloor — Shingle Town's own
+# street kind. RAKED SHINGLE-SAND: pale shell-sand (#d9c491
+# body) combed into fine horizontal rake grooves every four
+# pixels, strewn with shell chips — white shell shards, a
+# pink shell fleck, grey pebbles — in loose tide-line drifts.
+# Structurally unlike the beach's own unraked psand speckle
+# (byte-kept beside it), Wildflower's petal scatter on cream
+# gravel and Clover's flecked packed earth. The registered
+# street material of the town's front street, gate lanes and
+# cottage lanes. (NO-SAME-KIT law; WAVE-T41-SHINGLE-PLAN.md.)
+PIX tile-shellfloor 16 16
+wppppppppppppnpp
+pppppnpppppppppp
+pppppwpspknppppp
+ggggpggggggggggn
+pppppppnppwpppsp
+pppsppppppppnppp
+ppppnppppppppppw
+ggpggggggggggpgg
+pnppppppppppppnp
+ppwpppnkpppppppp
+ppppppsppppnpppp
+pggggggggggpgggg
+ppppppppnppppspp
+npspppppppppwnpp
+pppppnpppppppppp
+gggggggggsgggggg
+PAL
+p #d9c491 shell-sand-body
+g #b4a17e rake-groove
+w #f2ead6 shell-chip
+k #e3a48f pink-shell
+s #8d8272 pebble
+n #e6d7ac sand-lift

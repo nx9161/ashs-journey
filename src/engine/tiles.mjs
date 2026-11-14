@@ -1644,6 +1644,43 @@ T40_KIND_DEFS.forEach(([kind], i) => {
 export const T40_PROP_KINDS = T40_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
 export const T40_WALL_KINDS = T40_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
 export const T40_FLOOR_KINDS = T40_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
+// Wave T41: Shingle Town's own kit — "Shell Shingle & Raked
+// Shingle-Sand": the shellfloor (raked shell-sand street — pale
+// sand combed into fine grooves and strewn with shell chips,
+// the registered street material), the shellroof (scalloped
+// pale shell-shingle courses worn by the House and the town's
+// two facade cottages), the tideslug (the TIDESLUG of Shingle
+// Beach beside ANA's post — her dialogue is its caption) and
+// the tidelog (a bleached driftwood log on the west beach —
+// the beach sign's own driftwood). Indices 768-771 per the
+// Director's index ruling (main's kinds run 594-636 + 645-648 +
+// 660-662 + 672-675 + 684-687 + 696-699 + 708-711 + 720-724 +
+// 732-736 + 744-748; the parallel T40 claim holds 756-759 on
+// its branch; 606-607 + 637-644 + 649-659 + 663-671 + 676-683 +
+// 688-695 + 700-707 + 712-719 + 725-731 + 737-743 + 749-767
+// stay empty), verified free against origin/main, TILE_CHARS
+// and every map row. The wave also RESTORES the Center stamp's
+// missing east half (l/m/K/A — shipped as bare tg2 mud, its
+// K-door warp firing from a mud cell; no new index — the stamp
+// chars already exist). Authored art:
+// assets/sprites/pix/tiles/tile-shellfloor.pix,
+// tile-shellroof.pix, tile-prop-tideslug.pix,
+// tile-prop-tidelog.pix. (WAVE-T41-SHINGLE-PLAN.md.)
+export const T41_KIND_DEFS = [
+  ['shellfloor', 'floor'],
+  ['shellroof', 'wall'],
+  ['tideslug', 'prop'],
+  ['tidelog', 'prop'],
+];
+export const T41_KIND_CHARS = {};
+T41_KIND_DEFS.forEach(([kind], i) => {
+  const ch = String.fromCodePoint(0x1E00 + 768 + i);
+  T41_KIND_CHARS[kind] = ch;
+  TILE_CHARS[ch] = kind;
+});
+export const T41_PROP_KINDS = T41_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
+export const T41_WALL_KINDS = T41_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
+export const T41_FLOOR_KINDS = T41_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
 export const SINNOH_TOWN_GROUND_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg);
 export const SINNOH_TOWN_GROUND2_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg2);
 // TX-3: the 8 gym exteriors by town (original type-accent motifs).

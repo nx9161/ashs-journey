@@ -1,0 +1,32 @@
+# Wave T41 (Shingle kit): shellroof — Shingle Town's own roof
+# kind. SCALLOPED SHELL SHINGLE: courses of pale sand
+# shingles (#d9c491) whose lower edges curve into scallop
+# arcs, each course shadowed under its lip, shell-white
+# flecks on the faces. A scalloped course is structurally
+# unlike Clover's vertical batten boards, Hushmoor's dark
+# gravel shingles and the Lab/Mart's flat slate (byte-kept).
+# Worn by the House and the town's two facade cottages.
+# (NO-SAME-KIT law; WAVE-T41-SHINGLE-PLAN.md.)
+PIX tile-shellroof 16 16
+llllllllllllllll
+gpppgpwpgpppgppp
+gpppgpppgpppgppp
+gddggddggddggddg
+llllllllllllllll
+ppgpppgpppgpppgp
+ppgpppgpppgpppgp
+dggddggddggddggd
+llllllllllllllll
+gpppgppwgpppgppp
+gpppgpppgpppgwpp
+gddggddggddggddg
+llllllllllllllll
+ppgpppgpppgpppgp
+ppgpppgpppgpppgp
+dggddggddggddggd
+PAL
+p #d9c491 shingle-body
+l #e8dcbc course-crown
+g #b4a17e lip-shadow
+d #a08b62 scallop-cup
+w #f2ead6 shell-fleck
