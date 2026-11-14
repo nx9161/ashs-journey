@@ -1,0 +1,26 @@
+# Wave T57 (Marisol): staghorn coral branch on wet shore sand.
+PIX tile-prop-coralbranch 16 16
+SsSsSsSsSsSsSsSs
+ssssssssssssssss
+ssssssssssssssss
+sssssssssstsssss
+sssstssssscCstss
+ssssCcstsssccCss
+ssssscCcssscCsss
+sSsSsCcSsScCsSsS
+sssssscCssCcssss
+sssssssccCcsssss
+ssssssscCcssssss
+ssssssssccssssss
+sssssssscCssssss
+ssssWWWWCcWWWsss
+SsShWWWCCCWWWhSs
+ssssWWWWWWWWWsss
+PAL
+s #c6b388 island sand
+S #d4c69c sand speckle
+W #b3a075 wet sand sheen
+c #e58a7a coral rose
+C #c96a5e coral shadow
+t #f4d9c8 coral tip
+h #f2ead2 shell

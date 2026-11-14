@@ -1,0 +1,28 @@
+# Wave T57 (Marisol): slatted crate of oranges, rope handle, on island sand.
+PIX tile-prop-orangecrate 16 16
+SsSsSsSsSsSsSsSs
+ssssssssssssssss
+ssssssssssssssss
+ssssssssssssssss
+sssoolooolooosss
+ssooolooolooolss
+ssOOOlOOOlOOOlss
+sSWwwwwWwwwwWWsS
+ssWwwwwWwwwwWrss
+ssWkkkkWkkkkWrss
+ssWwwwwWwwwwWrss
+ssWwwwwWwwwwWrss
+ssWkkkkWkkkkWWss
+ssWwwwwWwwwwWWss
+SsSsSsSsSsSsSsSs
+ssssssssssssssss
+PAL
+s #c6b388 island sand
+S #d4c69c sand speckle
+o #e8862a orange
+O #c96a1e orange shade
+l #3f7a2e orange leaf
+w #a06a34 crate slat
+W #7d4f24 crate batten
+k #54331a crate gap
+r #d9c9a0 rope handle

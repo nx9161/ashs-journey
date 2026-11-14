@@ -1,0 +1,25 @@
+# Wave T57 (Marisol): dune-rippled coral sand street.
+PIX tile-dunefloor 16 16
+ddddllllssssssss
+ssssgcsssmssssss
+smssssssgscsdddd
+ssssddddllllgssc
+llllssssssssssss
+sscssssssssmssss
+sssmssscddddllll
+ddddllllsssscsss
+sssgmsssssssssss
+sssssssgssssdddd
+ssssddddllllssss
+llllssssscssssmg
+ssssssmssssssscs
+ssssssssddddllll
+ddddllllssssssss
+ssgssscsssssssss
+PAL
+s #c1b184 pale coral sand
+m #b3a075 sand grain shadow
+d #a89468 ripple drift shadow
+l #ded0ad ripple crest light
+c #e8907c crushed coral fleck
+g #f2ead2 shell grit

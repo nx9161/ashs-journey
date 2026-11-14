@@ -2240,6 +2240,34 @@ T56_KIND_DEFS.forEach(([kind], i) => {
 export const T56_PROP_KINDS = T56_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
 export const T56_WALL_KINDS = T56_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
 export const T56_FLOOR_KINDS = T56_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
+// ---- Wave T57 (Marisol Island identity, own kit from birth):
+// "Dune Ripple & Kelp Glass" — dunefloor (idx 960): wind-rippled
+// coral sand, the island's street material (worn by the whole
+// shipped street blob + the surf-exit jetty head); kelproof (idx
+// 961): kelp-green marine-glass panels with brass seams, the
+// painting's domed lab read as a roof — worn by the Lab's six
+// roof cells only, breaking the shipped Lab/Mart roof-slate
+// share; orangecrate (idx 962): the orange trade's slatted
+// shipping crate; coralbranch (idx 963): a staghorn coral on the
+// shore sand. (Indices 960-963 per the Director's index ruling:
+// main's kinds run …924-927 + 936-939; the parallel T56 claim
+// holds 948-951; 940-947 + 952-959 stay empty. Chars U+1E00+960..)
+// (Register: WAVE-T57-MARISOL-PLAN.md §5.)
+export const T57_KIND_DEFS = [
+  ['dunefloor', 'floor'],
+  ['kelproof', 'wall'],
+  ['orangecrate', 'prop'],
+  ['coralbranch', 'prop'],
+];
+export const T57_KIND_CHARS = {};
+T57_KIND_DEFS.forEach(([kind], i) => {
+  const ch = String.fromCodePoint(0x1E00 + 960 + i);
+  T57_KIND_CHARS[kind] = ch;
+  TILE_CHARS[ch] = kind;
+});
+export const T57_PROP_KINDS = T57_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
+export const T57_WALL_KINDS = T57_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
+export const T57_FLOOR_KINDS = T57_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
 export const SINNOH_TOWN_GROUND_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg);
 export const SINNOH_TOWN_GROUND2_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg2);
 // TX-3: the 8 gym exteriors by town (original type-accent motifs).

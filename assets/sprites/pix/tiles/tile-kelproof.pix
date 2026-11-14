@@ -1,0 +1,25 @@
+# Wave T57 (Marisol): kelp-glass panel roof, brass seams (the domed lab).
+PIX tile-kelproof 16 16
+BbbBbbBbbBbbBbbB
+bGGgggggbGGggggg
+bGwgggggbGwggggg
+bgggggggbggggggg
+bggggggDbggggggD
+bgggggDDbgggggDD
+bggggDDDBggggDDD
+bgggDDDDbgggDDDD
+bbbbbbbbbbbbbbbb
+BGGgggggbGGggggg
+bGwgggggbGwggggg
+bgggggggbggggggg
+bggggggDbggggggD
+bgggggDDbgggggDD
+bggggDDDbggggDDD
+bgggDDDDBgggDDDD
+PAL
+g #1f6f6a kelp glass
+G #3d9c8f glass light
+D #14424a glass depth
+b #b08d3e brass seam
+B #7d5f24 brass rivet
+w #bfe8d8 dome glint
