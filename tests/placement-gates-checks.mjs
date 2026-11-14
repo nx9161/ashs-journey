@@ -648,6 +648,55 @@
 //     THIRTY-FIRST exception is T33's, recorded on its own
 //     branch and merged ahead of this one.) Re-pinned with the
 //     T34 build.
+//     THIRTY-FOURTH DOCUMENTED EXCEPTION (T36): the registry
+//     grows by one scoped entry — mossdeep: [starfloor,
+//     dockfloor] — on the slateport/olivine two-material terms,
+//     and mossdeep's pin flips FAIL -> PASS: FOUR of its gates.
+//     Starfall shipped the fleet's worst raw FAIL: conn 30/132
+//     with components 2 — all six of the island town's exits
+//     stand on open water (no tier counts water, so every exit
+//     pair failed by construction; the 30 passing pairs were
+//     exactly the six step-offs among themselves, carried by a
+//     152-cell tg2 mud sea, 30.2% of the town, the 28th tg2
+//     town), and its SE shore strip was severed by the east
+//     channel. The T36 build retires the mud (tg2 152 -> 0) and
+//     lands the crossings as piers, not paving: dockfloor
+//     horizontal harbour boards (idx 710 — the kind is named
+//     for the -floor suffix the desire tiers key on, the T31
+//     jettyfloor lesson) on the r124 west jetty, the r125 north
+//     pier, the r126 south pier and ONE east bridge at (20,6),
+//     (21,6); starfloor star-sand lanes (idx 709) carry the
+//     front street, the main street, the shore lane down the
+//     strip and the plot threading; starroof star-flecked cyan
+//     shingles (idx 708) dress the Space Center facade, Alban's
+//     house and ONE facade cottage on the SW lawn (the x5-7
+//     seat failed apron 0.5 against the border row; the x2-4
+//     seat holds 0.643) while the Gym keeps its banded
+//     tr-mossdeep slab — two roof families answer the design's
+//     recorded roof-similar soft spot; the chartboard prop
+//     (idx 711) stands east of the Space Center at (25,4), the
+//     board its own sign names; the two invisible DIRS posts
+//     (17,9) + (23,9) gain S tiles and seven verbatim copies
+//     mark the validator-named junctions; the orphaned MART
+//     CLERK re-seated at his Mart's west-front apron
+//     (3,5) -> (9,4). Design catches the rig proved before
+//     landing: the shore road jogs around the telescope at
+//     (9,9); the plot's dot clusters join at (9,12), not the
+//     encounter comma at (10,13). Gate STATUS flips: pass
+//     0 -> 1, conn 30/132 -> 132/132, components 2 -> 1,
+//     junction sites 3 -> 14 (0 bare), strict 0.9289 -> 0.7436
+//     (desire lines get real corners on the authored graph),
+//     fabric 0.9289 -> 0.9944, apronMin 0.667 -> 0.643 (the
+//     cottage's disclosed ring). No encounter cell touched:
+//     commas 22 + dots 13 byte-kept, SOL still standing on his
+//     comma; stamps, warps, posts, sign texts byte-kept (the
+//     Space Center's four tr cells take starroof — geometry
+//     identical, kind only). (Kind indices 708-711 per the
+//     Director's allocation: main's ceiling was 687 (T34);
+//     688-707 left empty, including 696-699 for the parallel
+//     T35 Lotus Cove claim; the THIRTY-THIRD exception is
+//     T35's, recorded on its own branch.) Re-pinned with the
+//     T36 build.
 //     Tuple: [pass, connOk, connPairs, stepTouch, stepTot, components,
 //     junctionSites, junctionsBare, apronLow, apronMin, merged,
 //     onFabric, shoulderOrphans, unanchoredAny, strict, fabric].
@@ -858,8 +907,8 @@ async function gateTuple(id, t) {
 }
 
 // 1. registry scope lock
-ok('street registry is exactly { vermilion: [boardwalk], blackthorn: [settfloor], silvertown: [marblefloor], ecruteak: [wornfloor], saffron: [avenuefloor], violet: [violetfloor], azalea: [brickfloor], mahogany: [gravelfloor], rustboro: [cutstonefloor], fuchsia: [marshfloor], cianwood: [driftfloor], dewford: [plankfloor], viridian: [slatefloor], celadon: [promfloor], slateport: [quayfloor, boardwalk], cerulean: [pierfloor], mauville: [gridfloor], lavender: [shinglefloor], cherrygrove: [inlayfloor], verdanturf: [petalfloor, cavefloor], olivine: [harbourfloor, jettyfloor], fallarbor: [ashfloor], lavaridge: [steamfloor, terracefloor], fortree: [canopyfloor, boardwalk], lilycove: [cobblefloor, cavefloor] }',
-  JSON.stringify(STREET_REGISTRY) === '{"vermilion":["boardwalk"],"blackthorn":["settfloor"],"silvertown":["marblefloor"],"ecruteak":["wornfloor"],"saffron":["avenuefloor"],"violet":["violetfloor"],"azalea":["brickfloor"],"mahogany":["gravelfloor"],"rustboro":["cutstonefloor"],"fuchsia":["marshfloor"],"cianwood":["driftfloor"],"dewford":["plankfloor"],"viridian":["slatefloor"],"celadon":["promfloor"],"slateport":["quayfloor","boardwalk"],"cerulean":["pierfloor"],"mauville":["gridfloor"],"lavender":["shinglefloor"],"cherrygrove":["inlayfloor"],"verdanturf":["petalfloor","cavefloor"],"olivine":["harbourfloor","jettyfloor"],"fallarbor":["ashfloor"],"lavaridge":["steamfloor","terracefloor"],"fortree":["canopyfloor","boardwalk"],"lilycove":["cobblefloor","cavefloor"]}',
+ok('street registry is exactly { vermilion: [boardwalk], blackthorn: [settfloor], silvertown: [marblefloor], ecruteak: [wornfloor], saffron: [avenuefloor], violet: [violetfloor], azalea: [brickfloor], mahogany: [gravelfloor], rustboro: [cutstonefloor], fuchsia: [marshfloor], cianwood: [driftfloor], dewford: [plankfloor], viridian: [slatefloor], celadon: [promfloor], slateport: [quayfloor, boardwalk], cerulean: [pierfloor], mauville: [gridfloor], lavender: [shinglefloor], cherrygrove: [inlayfloor], verdanturf: [petalfloor, cavefloor], olivine: [harbourfloor, jettyfloor], fallarbor: [ashfloor], lavaridge: [steamfloor, terracefloor], fortree: [canopyfloor, boardwalk], lilycove: [cobblefloor, cavefloor], mossdeep: [starfloor, dockfloor] }',
+  JSON.stringify(STREET_REGISTRY) === '{"vermilion":["boardwalk"],"blackthorn":["settfloor"],"silvertown":["marblefloor"],"ecruteak":["wornfloor"],"saffron":["avenuefloor"],"violet":["violetfloor"],"azalea":["brickfloor"],"mahogany":["gravelfloor"],"rustboro":["cutstonefloor"],"fuchsia":["marshfloor"],"cianwood":["driftfloor"],"dewford":["plankfloor"],"viridian":["slatefloor"],"celadon":["promfloor"],"slateport":["quayfloor","boardwalk"],"cerulean":["pierfloor"],"mauville":["gridfloor"],"lavender":["shinglefloor"],"cherrygrove":["inlayfloor"],"verdanturf":["petalfloor","cavefloor"],"olivine":["harbourfloor","jettyfloor"],"fallarbor":["ashfloor"],"lavaridge":["steamfloor","terracefloor"],"fortree":["canopyfloor","boardwalk"],"lilycove":["cobblefloor","cavefloor"],"mossdeep":["starfloor","dockfloor"]}',
   JSON.stringify(STREET_REGISTRY));
 
 // 2. census: the 64 towns of townSetOf (pallet included)
@@ -915,7 +964,7 @@ const PIN = {
   "mauville": [1, 210, 210, 7, 7, 1, 11, 0, 0, 0.857, 0, 0, 0, 0, 0.7977, 0.9919],
   "mikan": [0, 42, 72, 7, 7, 1, 4, 0, 3, 0.429, 0, 0, 0, 0, 0.9717, 0.9717],
   "moro": [0, 12, 30, 4, 4, 1, 1, 0, 1, 0.529, 0, 0, 0, 0, 0.9402, 0.9402],
-  "mossdeep": [0, 30, 132, 6, 6, 2, 3, 0, 0, 0.667, 0, 0, 0, 0, 0.9289, 0.9289],
+  "mossdeep": [1, 132, 132, 6, 6, 1, 14, 0, 0, 0.643, 0, 0, 0, 0, 0.7436, 0.9944],
   "navel": [0, 30, 90, 6, 6, 1, 5, 0, 1, 0.588, 0, 0, 0, 0, 0.9418, 0.9418],
   "newbark": [1, 72, 72, 7, 7, 1, 5, 0, 0, 0.857, 0, 0, 0, 0, 0.7385, 0.9913],
   "oldale": [1, 110, 110, 5, 5, 1, 11, 0, 0, 0.857, 0, 0, 0, 1, 0.6991, 0.9821],
