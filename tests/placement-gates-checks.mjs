@@ -782,6 +782,56 @@
 //     CLEAN measure — every CLEAN town reads 0.62-0.93);
 //     fabric 0.9715 -> 0.9879; apron min 0.929 unmoved.
 //     NO other town's pin moves.
+//     THIRTY-THIRD DOCUMENTED EXCEPTION (WAVE T35; the
+//     THIRTY-SECOND is WAVE T34 Highbranch's, landing at its
+//     merge): the registry grows by one scoped entry —
+//     lilycove: [cobblefloor, cavefloor] (the verdanturf
+//     two-material terms: the kit street + the shipped cave-
+//     mouth threshold material) — and lilycove's pin migrates
+//     FAIL -> PASS: the Lotus Cove rebuild on its own kit
+//     from birth ('Lavender Tile & Cobble Harbour', idx
+//     696-699: scalloped lavender barrel-tile lotusroof,
+//     round-cobble cobblefloor streets, the chainbar brow
+//     props, the gullpost at the pier head) per
+//     WAVE-T35-LOTUSCOVE-PLAN.md. The shipped town FAILED
+//     outright: conn 42/72 (its Route 124 exit warps stood
+//     on open water, no network tier — the T31 Beacon jetty
+//     ruling swaps the two exit cells to cobblefloor, warps
+//     untouched) and fabric 0.9687, its one 210-cell
+//     'component' being the 190-cell tg2 mud web itself.
+//     The build retires tg2 to zero and lays the kit's
+//     streets (front street with a one-cell jog south around
+//     its own shipped fence at (7,4), the two-row shore
+//     road, harbour avenue + pier walk, contest + caves +
+//     east arms, the paved cave lane to the brow mouths,
+//     both encounter-plot frame threads, the dockside lane
+//     shouldering the shipped barrels/crates/lamp). The
+//     four invisible DIRS sign posts gain their tiles
+//     (words byte-identical) + five verbatim copies at the
+//     validator-named junctions (25,3), (12,5), (14,5),
+//     (22,11), (18,12); the orphaned MART CLERK re-seats
+//     (3,5) -> (9,4) west of his Mart's west via. The
+//     Contest Hall + Department Store stamps wear the
+//     town's barrel tile on their shared tr kind (the
+//     department store stays a facade — no warp invented);
+//     two facade cottages wear it too; the chained
+//     notice-board dressing the town's own harbour-caves
+//     sign describes stands on the NORTH brow where the
+//     backend keeps the mouths (the painting's south cliff
+//     is compass-ruled out — warps pinned). All warps,
+//     landings, posts, sign texts, both encounter plots
+//     and the pier byte-preserved. Tuple migration: [0,
+//     42, 72, 5, 5, 1, 8, 0, 0, 0.706, 0, 0, 0, 0, 0.9249,
+//     0.9687] -> [1, 72, 72, 5, 5, 1, 9, 0, 0, 0.647, 0, 0,
+//     0, 0, 0.724, 0.9898]: conn 42/72 -> 72/72, junctions
+//     8 -> 9 sites all covered, strict 0.9249 -> 0.724 (the
+//     tg2 web was strict tier by definition; the cobble
+//     streets carry the same lines at the honest CLEAN
+//     measure — every CLEAN town reads 0.62-0.93), fabric
+//     0.9687 -> 0.9898, apron min 0.706 -> 0.647 (the two
+//     facade cottages re-measured on their lawns; no
+//     building below 60%, none merged). NO other town's
+//     pin moves.
 
 import { loadMaps, makeTiers, townSetOf, analyzeMap } from '../scripts/audit-desire-paths.mjs';
 import { scoreTown, gateCheck, tiersFor, STREET_REGISTRY } from '../scripts/audit-placement.mjs';
@@ -808,8 +858,8 @@ async function gateTuple(id, t) {
 }
 
 // 1. registry scope lock
-ok('street registry is exactly { vermilion: [boardwalk], blackthorn: [settfloor], silvertown: [marblefloor], ecruteak: [wornfloor], saffron: [avenuefloor], violet: [violetfloor], azalea: [brickfloor], mahogany: [gravelfloor], rustboro: [cutstonefloor], fuchsia: [marshfloor], cianwood: [driftfloor], dewford: [plankfloor], viridian: [slatefloor], celadon: [promfloor], slateport: [quayfloor, boardwalk], cerulean: [pierfloor], mauville: [gridfloor], lavender: [shinglefloor], cherrygrove: [inlayfloor], verdanturf: [petalfloor, cavefloor], olivine: [harbourfloor, jettyfloor], fallarbor: [ashfloor], lavaridge: [steamfloor, terracefloor], fortree: [canopyfloor, boardwalk] }',
-  JSON.stringify(STREET_REGISTRY) === '{"vermilion":["boardwalk"],"blackthorn":["settfloor"],"silvertown":["marblefloor"],"ecruteak":["wornfloor"],"saffron":["avenuefloor"],"violet":["violetfloor"],"azalea":["brickfloor"],"mahogany":["gravelfloor"],"rustboro":["cutstonefloor"],"fuchsia":["marshfloor"],"cianwood":["driftfloor"],"dewford":["plankfloor"],"viridian":["slatefloor"],"celadon":["promfloor"],"slateport":["quayfloor","boardwalk"],"cerulean":["pierfloor"],"mauville":["gridfloor"],"lavender":["shinglefloor"],"cherrygrove":["inlayfloor"],"verdanturf":["petalfloor","cavefloor"],"olivine":["harbourfloor","jettyfloor"],"fallarbor":["ashfloor"],"lavaridge":["steamfloor","terracefloor"],"fortree":["canopyfloor","boardwalk"]}',
+ok('street registry is exactly { vermilion: [boardwalk], blackthorn: [settfloor], silvertown: [marblefloor], ecruteak: [wornfloor], saffron: [avenuefloor], violet: [violetfloor], azalea: [brickfloor], mahogany: [gravelfloor], rustboro: [cutstonefloor], fuchsia: [marshfloor], cianwood: [driftfloor], dewford: [plankfloor], viridian: [slatefloor], celadon: [promfloor], slateport: [quayfloor, boardwalk], cerulean: [pierfloor], mauville: [gridfloor], lavender: [shinglefloor], cherrygrove: [inlayfloor], verdanturf: [petalfloor, cavefloor], olivine: [harbourfloor, jettyfloor], fallarbor: [ashfloor], lavaridge: [steamfloor, terracefloor], fortree: [canopyfloor, boardwalk], lilycove: [cobblefloor, cavefloor] }',
+  JSON.stringify(STREET_REGISTRY) === '{"vermilion":["boardwalk"],"blackthorn":["settfloor"],"silvertown":["marblefloor"],"ecruteak":["wornfloor"],"saffron":["avenuefloor"],"violet":["violetfloor"],"azalea":["brickfloor"],"mahogany":["gravelfloor"],"rustboro":["cutstonefloor"],"fuchsia":["marshfloor"],"cianwood":["driftfloor"],"dewford":["plankfloor"],"viridian":["slatefloor"],"celadon":["promfloor"],"slateport":["quayfloor","boardwalk"],"cerulean":["pierfloor"],"mauville":["gridfloor"],"lavender":["shinglefloor"],"cherrygrove":["inlayfloor"],"verdanturf":["petalfloor","cavefloor"],"olivine":["harbourfloor","jettyfloor"],"fallarbor":["ashfloor"],"lavaridge":["steamfloor","terracefloor"],"fortree":["canopyfloor","boardwalk"],"lilycove":["cobblefloor","cavefloor"]}',
   JSON.stringify(STREET_REGISTRY));
 
 // 2. census: the 64 towns of townSetOf (pallet included)
@@ -859,7 +909,7 @@ const PIN = {
   "kumquat": [0, 42, 72, 7, 7, 1, 6, 0, 3, 0.5, 0, 0, 0, 0, 0.9742, 0.9742],
   "lavaridge": [1, 72, 72, 7, 7, 1, 8, 0, 0, 0.929, 0, 0, 0, 0, 0.6726, 0.9879],
   "lavender": [1, 132, 132, 7, 7, 1, 2, 0, 0, 0.643, 0, 0, 0, 0, 0.7211, 0.9873],
-  "lilycove": [0, 42, 72, 5, 5, 1, 8, 0, 0, 0.706, 0, 0, 0, 0, 0.9249, 0.9687],
+  "lilycove": [1, 72, 72, 5, 5, 1, 9, 0, 0, 0.647, 0, 0, 0, 0, 0.724, 0.9898],
   "littleroot": [1, 90, 90, 8, 8, 1, 15, 0, 0, 0.714, 0, 0, 0, 1, 0.674, 0.9848],
   "mahogany": [1, 156, 156, 7, 7, 1, 5, 0, 0, 0.786, 0, 0, 0, 0, 0.9332, 1],
   "mauville": [1, 210, 210, 7, 7, 1, 11, 0, 0, 0.857, 0, 0, 0, 0, 0.7977, 0.9919],
