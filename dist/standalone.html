@@ -4389,6 +4389,39 @@ T62_KIND_DEFS.forEach(([kind], i) => {
 const T62_PROP_KINDS = T62_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
 const T62_WALL_KINDS = T62_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
 const T62_FLOOR_KINDS = T62_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
+// "League Herringbone & Crimson Rib" — leaguefloor (idx 1032):
+// herringbone clay pavers, rectangular bricks in a 45° bond,
+// crimson-tan faces with dark mortar (worn by the whole shipped
+// street graph + the west surf-exit jetty head); crimsonroof
+// (idx 1033): vertical standing ribs of deep crimson — worn by
+// the Stadium's twelve front-band cells only, breaking the
+// shipped Stadium/Mart roof-slate share; badgepillar (idx
+// 1034): a stone pillar with a crimson-and-gold badge plaque,
+// at the Stadium's sand shoulders; bannerpost (idx 1035): a
+// timber post flying a crimson-and-gold pennant, at the ferry
+// dock.
+// (Indices 1032-1035 per the Director's index ruling: main's
+// kinds run …996-999 + 1008-1011 on this base; the parallel
+// T62 claim holds 1020-1023; 1012-1019 + 1024-1031 stay empty.
+// Kind names verified unclaimed — driftroof/standingstone/
+// shellfloor/shellroof/gullpost/badgeroof/brickfloor are taken
+// by other towns. Chars U+1E00+1032..)
+// (Register: WAVE-T63-GRAPEFRUIT-PLAN.md §5.)
+const T63_KIND_DEFS = [
+  ['leaguefloor', 'floor'],
+  ['crimsonroof', 'wall'],
+  ['badgepillar', 'prop'],
+  ['bannerpost', 'prop'],
+];
+const T63_KIND_CHARS = {};
+T63_KIND_DEFS.forEach(([kind], i) => {
+  const ch = String.fromCodePoint(0x1E00 + 1032 + i);
+  T63_KIND_CHARS[kind] = ch;
+  TILE_CHARS[ch] = kind;
+});
+const T63_PROP_KINDS = T63_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
+const T63_WALL_KINDS = T63_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
+const T63_FLOOR_KINDS = T63_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
 const SINNOH_TOWN_GROUND_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg);
 const SINNOH_TOWN_GROUND2_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg2);
 // TX-3: the 8 gym exteriors by town (original type-accent motifs).
@@ -113368,6 +113401,78 @@ const ART = {
     "sshhhhhhhhhhhhhs",
     "ssssssssssSsssss"
   ] },
+  "tile-leaguefloor": { w: 16, h: 16, pal: {"a":"#c98a68","b":"#d8a078","c":"#b87a5c","m":"#7a4a38","l":"#e8bc96"}, rows: [
+    "aallbbmmccmmbbll",
+    "allbbmmccmmbbaal",
+    "llbbmmccmmbbaacc",
+    "bbmmccmmbbaaccmm",
+    "mmccmmbbaaccmmll",
+    "ccmmbbaaccmmllbb",
+    "mmbbaaccmmllbbmm",
+    "bbaaccmmllbbmmcc",
+    "aaccmmllbbmmccaa",
+    "ccmmllbbmmccaall",
+    "mmllbbmmccaallbb",
+    "llbbmmccaallbbmm",
+    "bbmmccaallbbmmcc",
+    "mmccaallbbmmccmm",
+    "ccaallbbmmccmmll",
+    "aallbbmmccmmbbll"
+  ] },
+  "tile-crimsonroof": { w: 16, h: 16, pal: {"r":"#a8232a","R":"#c03340","l":"#e8706a","d":"#6e141c"}, rows: [
+    "lRrdlRrdlRrdlRrd",
+    "lRrdlRrdlRrdlRrd",
+    "lRrdlRrdlRrdlRrd",
+    "lRrdlRrdlRrdlRrd",
+    "lRrdlRrdlRrdlRrd",
+    "lRrdlRrdlRrdlRrd",
+    "lRrdlRrdlRrdlRrd",
+    "lRrdlRrdlRrdlRrd",
+    "lRrdlRrdlRrdlRrd",
+    "lRrdlRrdlRrdlRrd",
+    "lRrdlRrdlRrdlRrd",
+    "lRrdlRrdlRrdlRrd",
+    "lRrdlRrdlRrdlRrd",
+    "lRrdlRrdlRrdlRrd",
+    "lRrdlRrdlRrdlRrd",
+    "dddddddddddddddd"
+  ] },
+  "tile-prop-badgepillar": { w: 16, h: 16, pal: {"s":"#c6b388","S":"#d4c69c","h":"#a69274","g":"#9a97a0","G":"#74717c","L":"#c4c1ca","r":"#a8232a","o":"#e8a83c","w":"#f4f2ec"}, rows: [
+    "ssssssssssssssss",
+    "ssSsssssssssssss",
+    "ssssssLLLLssssss",
+    "sssssLooooLsssss",
+    "sssssLorroLsssss",
+    "sssssLorwroLssss",
+    "sssssLorroLsssss",
+    "ssssssLooLssssss",
+    "ssssssggggssssss",
+    "sssssggGGggsssss",
+    "sssssggGGggsssss",
+    "sssssggGGggsssss",
+    "sssssggGGggsssss",
+    "ssshgggggggghhss",
+    "sshhhhhhhhhhhhss",
+    "ssssssssssSsssss"
+  ] },
+  "tile-prop-bannerpost": { w: 16, h: 16, pal: {"s":"#c6b388","S":"#d4c69c","h":"#a69274","t":"#8a6844","T":"#6e5234","r":"#a8232a","o":"#e8a83c","R":"#c03340"}, rows: [
+    "ssssssttssssssss",
+    "ssssssttrrrrrrrs",
+    "ssssssttRrrorrrs",
+    "ssssssttrrrrrrrs",
+    "ssssssttssssssss",
+    "ssssssttssssssss",
+    "ssssssttssssssss",
+    "ssssssttssssssss",
+    "ssssssttssssssss",
+    "ssssssttssssssss",
+    "ssssssttssssssss",
+    "ssssssttssssssss",
+    "ssssssttssssssss",
+    "sssshhtttthhssss",
+    "sshhhhhhhhhhhsss",
+    "ssssssssssSsssss"
+  ] },
   "partner-back-bob": { base: "partner-back", w: 64, h: 64, pal: {}, shiftY: 2 },
   "partner-front-bob": { base: "partner-front", w: 64, h: 64, pal: {}, shiftY: 2 },
   "abomasnow-back-bob": { base: "abomasnow-back", w: 64, h: 64, pal: {}, shiftY: 2 },
@@ -118791,6 +118896,9 @@ for (const k of T61_FLOOR_KINDS) TILE_ART[k] = 'tile-' + k;
 for (const k of T62_PROP_KINDS) TILE_ART[k] = 'tile-prop-' + k;
 for (const k of T62_WALL_KINDS) TILE_ART[k] = 'tile-' + k;
 for (const k of T62_FLOOR_KINDS) TILE_ART[k] = 'tile-' + k;
+for (const k of T63_PROP_KINDS) TILE_ART[k] = 'tile-prop-' + k;
+for (const k of T63_WALL_KINDS) TILE_ART[k] = 'tile-' + k;
+for (const k of T63_FLOOR_KINDS) TILE_ART[k] = 'tile-' + k;
 // Premium+ W6 (TX-3/PL-1): door-open frames, authored in TX-3 for every
 // door kind. The warp-fade engine that plays them lands in W7 — W6
 // wires the frames (this registry + cache.doorOpen + doorOpenCanvas)
@@ -120749,6 +120857,12 @@ function resolveTileLayers(cache, kind, x, y, kindAt, t, phase, mapId) {
     // measured colours).
     case 'jadestar':
     case 'sunshade':
+    // Wave T63: Grapefruit's badge pillar and its dock banner
+    // composite over their ground the same way (both arts are
+    // fully opaque — the island sand is baked in at its
+    // measured colours).
+    case 'badgepillar':
+    case 'bannerpost':
     // Wave T17: the radio mast composites over its compound grass too.
     case 'radiomast': {
       // Object tiles carry transparent surrounds (Wave 1): lay the ground
@@ -128037,6 +128151,17 @@ const WALKABLE = new Set(['.', ',', 'D', 'E', 'C', 'F', 'J', 'K', '1', '2', 'V',
   // kinds run …996-999 (T60); the parallel T61 claim holds
   // 1008-1011; 1000-1007 + 1012-1019 stay empty.)
   ...[1020]
+    .map((i) => String.fromCodePoint(0x1E00 + i)),
+  // Wave T63: the leaguefloor char (U+1E00+1032, tiles.mjs
+  // T63_KIND_DEFS) is walkable street material — Grapefruit's
+  // herringbone clay pavers, swapped onto the island's whole
+  // shipped street graph (authored as the generic `path` dirt
+  // track) plus the west surf-exit jetty head, so floor stays
+  // floor. (Indices 1032-1035 per the Director's index ruling:
+  // main's kinds run …996-999 + 1008-1011 on this base; the
+  // parallel T62 claim holds 1020-1023; 1012-1019 + 1024-1031
+  // stay empty.)
+  ...[1032]
     .map((i) => String.fromCodePoint(0x1E00 + i))]);
 
 // Trainer definitions for the slice.
@@ -135581,23 +135706,23 @@ const MAPS5 = {
     "music": "viridian-theme",
     "rows": [
       "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~",
-      "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~",
-      "~~Fjklm‗ẞdeefẞảảảảảẝẝảảảảảẞR~~",
-      "~~ẞAJKARẞP12P―eeeeeeeeeeee’ẞ~~",
-      "~~ẞ†....”.....UUUUUVYUUUUU‗ẞ~~",
-      "~~‬.........„..............‬~~",
-      "~~ẞ†..ẟẟ...‟ẞ‘ẟ...R..ẟẟẟoẈ‗ẞ~~",
-      "~~ẞ†........‬.......„.onẟẟẟ‥~~",
-      "~~”.,,,ẟ...‟ẞ‘ẟ....‟ẞ†ẟẟẟẟ‗ẞ~~",
-      "~~„.,,,...ẟ.”....ẟ.‗ẞ†ẟ‖ẟẟ‛ẞ~~",
-      "~~ẞ†...ẘ..R.‖ẟẟ..‖.‖―.‛ẞ‘‗ẞẞ~~",
-      "~~―.ẟ.Ẉẟ..ẟ‟ẞ“Ẅ.‟ẞ‭ẞ‘‟ẞ‚ẟẟ’ẞ~~",
-      "~~‖.,,,ẘ..ẟ‟ẞẞ‘..―.―ṃ.―,,,‗ẞ~~",
-      "~~ẞ†,,,.....””........ẟ,,,‗ẞ~~",
-      "~~ẞ†.............ẘ...„ẟẟ‖‖‖ẘ~~",
-      "~~#........ṃ......S.Ẇẞ‘#ẞẞẞẞ~~",
-      "~~~~~~~~~~~~~~~..~~~~~~~~~~~~~",
-      "~~~~~~~~~~~~~~~..~~~~~~~~~~~~~"
+      "~~ẞẞẞẞẞẞẞẞẞẞẞẞẞẞẞẞẞẞẞẞẞẞẞẞẞẞ~~",
+      "~~Fjklm‗ẞdeef∊ảảảảảẝẝảảảảả∊R~~",
+      "~~ẞAJKARẞP12P―∉∉∉∉∉∉∉∉∉∉∉∉’ẞ~~",
+      "~~∈†∈∈∈∈”∈∈∈∈∈UUUUUVYUUUUU‗ẞ~~",
+      "~~‬∈∈∈∈∈∈∈∈∈„∈∈∈S∈∈∈∈∈∈∈∈∈∈‬~~",
+      "~~∈†∈∈∈∈∈∈∈‟∈∈∈∈∈∈R∈∈SẟẟoẈ‗ẞ~~",
+      "~~∈†∈∈∈∈∈∈∈∈‬∈∈∈∈∈∈∈„∈onẟẟẟ‥~~",
+      "∈∈”∈,,,∈∈∈∈‟∈∈∈∈∈∈∈‟∈†ẟẟẟẟ‗ẞ~~",
+      "∈∈„∈,,,∈∈∈S∈”∈∈∈∈ẟ∈‗ẞ†ẟ‖ẟẟ‛ẞ~~",
+      "~~ẞ†∈∈∈ẘ∈∈R∈‖ẟẟ∈∈‖∈‖―∈‛ẞ‘‗ẞẞ~~",
+      "~~―∈S∈Ẉẟ∈∈∈‟∈“Ẅ∈‟ẞ‭ẞ‘‟ẞ‚ẟẟ’ẞ~~",
+      "~~‖∈,,,ẘ∈∈ẟ‟ẞ∈∈∈∈―∈―ṃ∈―,,,‗ẞ~~",
+      "~~ẞ†,,,∈∈∈∈∈””∈∈∈∈∈∈∈∈ẟ,,,‗ẞ~~",
+      "~~ẞ†∈∈∈∈∈∈∈∈∈∈∈∈∈ẘ∈∈∈„ẟẟ‖‖‖ẘ~~",
+      "~~#∈∈∈∈∈∈∈∈ṃ∈∈∈∈∈∈S∈Ẇ∋‘#ẞẞẞẞ~~",
+      "~~~~~~~~~~~~~~~∈∈~~~~~~~~~~~~~",
+      "~~~~~~~~~~~~~~~∈∈~~~~~~~~~~~~~"
     ],
     "warps": [
       {
@@ -135795,8 +135920,8 @@ const MAPS5 = {
         ]
       },
       {
-        "x": 3,
-        "y": 5,
+        "x": 9,
+        "y": 4,
         "name": "MART CLERK",
         "art": "clerk",
         "skin": "#e8b888",
@@ -192351,6 +192476,6 @@ if (typeof Game !== 'undefined') Object.assign(Game.prototype, {
 });
 
 </script>
-<!-- contentHash:2ae8512cb8fde573d46d5d9158d11f11c5f4e78d739f4b5d275308078a0836e1 -->
+<!-- contentHash:86915c6593f4bd31221f159756cdd6c03beacf03f625ebcf3c1167e38a7d4484 -->
 </body>
 </html>
