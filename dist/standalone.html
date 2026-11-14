@@ -2828,6 +2828,49 @@ WD3_KIND_DEFS.forEach(([kind], i) => {
 const WD3_PROP_KINDS = WD3_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
 const WD3_WALL_KINDS = WD3_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
 const WD3_FLOOR_KINDS = WD3_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
+// ---- Wave W-DIFF4 (identity retrofit #4): Cinder Town + Redwood
+// Town, the closest remaining pair where BOTH towns still wear the
+// shared kit (W-DIFF-AUDIT A.3: Cinder ↔ Redwood 0.0517) ----
+// Four new kinds at idx 594-597 (U+2052-U+2055, verified free in
+// TILE_CHARS and unused by every map row; WD3 ends at 593). The
+// audit Phase B rows verbatim: Cinder (azalea) takes the Charcoal
+// & Kiln Brick kit — street 'brickfloor' (staggered kiln-brick
+// courses in burnt terracotta, the charcoal burners' own
+// material), house shapes 'moss timber (th)' built as 'mossroof'
+// (moss-grown timber courses in the KIT_VARIANTS azalea roof
+// tones), ground 'tg + ash accents at kilns' (the existing H3a
+// ashground kind, no new kind owed); Redwood (mahogany) takes
+// the Pine & Lake Gravel kit — street 'gravelfloor' (an
+// uncoursed Wrathmere-shore pebble field), house shapes 'deep
+// pine timber (th)' built as 'pineroof' (sombre pine shingle
+// courses in the KIT_VARIANTS mahogany roof tones), ground
+// 'tg + meadow/pond' (T20's shipped pond + meadow, byte-kept).
+// One kind = one palette, one town (the W-DIFF discipline):
+// brickfloor is Cinder's alone (Signal's avenues are a later
+// wave's own variant) and gravelfloor is authored here for
+// Redwood first. Same rules as the pilots: floors are walkable
+// street materials registered per town in the placement audit's
+// STREET_REGISTRY; roofs are solid wall-class tiles swapped
+// onto house-stamp roof cells only — footprints, doors, warps,
+// NPC posts and the souvenir-shop facade at Pell's post
+// untouched. Authored art: assets/sprites/pix/tiles/
+// tile-brickfloor.pix, tile-mossroof.pix, tile-gravelfloor.pix,
+// tile-pineroof.pix.
+const WD4_KIND_DEFS = [
+  ['brickfloor', 'floor'],
+  ['mossroof', 'wall'],
+  ['gravelfloor', 'floor'],
+  ['pineroof', 'wall'],
+];
+const WD4_KIND_CHARS = {};
+WD4_KIND_DEFS.forEach(([kind], i) => {
+  const ch = String.fromCodePoint(0x1E00 + 594 + i);
+  WD4_KIND_CHARS[kind] = ch;
+  TILE_CHARS[ch] = kind;
+});
+const WD4_PROP_KINDS = WD4_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
+const WD4_WALL_KINDS = WD4_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
+const WD4_FLOOR_KINDS = WD4_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
 const SINNOH_TOWN_GROUND_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg);
 const SINNOH_TOWN_GROUND2_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg2);
 // TX-3: the 8 gym exteriors by town (original type-accent motifs).
@@ -108693,6 +108736,78 @@ const ART = {
     "aaaaaaaaaaabaaaa",
     "dddddddddddddddd",
   ] },
+  "tile-brickfloor": { w: 16, h: 16, pal: {"a":"#9c5540","b":"#6e3524","c":"#c47a58","d":"#33241e","e":"#7a4630"}, rows: [
+    "cacaaacacaaacaca",
+    "aaaadaaabaaadaaa",
+    "aaaadaaaaaaadaab",
+    "dddddddddddddddd",
+    "acacaaaccacaaaca",
+    "aaaaaaaadaaabaaa",
+    "aabaaaaadaaaaaaa",
+    "dddddddddddddddd",
+    "cacacaaacacaaaca",
+    "aaaadaaaaaaadaaa",
+    "aaaadaabaaaadaaa",
+    "dddddddddddddddd",
+    "acaaacacaaaccaca",
+    "aaaaaaaadaaeaaaa",
+    "aaaaaaaadaaaaaab",
+    "dddddddddddddddd",
+  ] },
+  "tile-mossroof": { w: 16, h: 16, pal: {"a":"#5d8a4a","b":"#3c5c2e","c":"#84a866","d":"#6b4a26","e":"#2f4a24"}, rows: [
+    "ccaccacccaccaccc",
+    "aabaaaadaaaaaaaa",
+    "baaccaaadaaccaab",
+    "dddddddddddddddd",
+    "caccacccaccaccca",
+    "aaaaaaadaabaaaaa",
+    "aaccaaadaaccaaaa",
+    "dddddddddddddddd",
+    "ccacccaccacccacc",
+    "aaaadaaaaaaabaaa",
+    "aaccaaadaaaaaaab",
+    "dddddddddddddddd",
+    "caccacccaccacccc",
+    "aaaaaaadaaaaaaaa",
+    "baaccaaadaaccaaa",
+    "dddddddddddddddd",
+  ] },
+  "tile-gravelfloor": { w: 16, h: 16, pal: {"a":"#a8a294","b":"#7e786c","c":"#c9c2b2","d":"#8a927e","e":"#5f594f"}, rows: [
+    "aabaaacaaabaaaca",
+    "aaeaaabaaaaeaaaa",
+    "acaaabaaacaaabaa",
+    "aaabaaeaaaadaaaa",
+    "abaaaaacaaabaaea",
+    "aaacaaabaaacaaaa",
+    "aaeaaaadaaaeabaa",
+    "aabaaacaaabaaaca",
+    "aaaaeaaabaaacaaa",
+    "acaaabaaaaeaaaba",
+    "aaabaaacaaaadaaa",
+    "aaeaaabaaacaaaba",
+    "abaaaadaaaabaaaa",
+    "aaacaaeaaacaaaba",
+    "aaaabaaabaaeaaaa",
+    "aabaaacaaabaaaca",
+  ] },
+  "tile-pineroof": { w: 16, h: 16, pal: {"a":"#476e4e","b":"#2c4632","c":"#648a68","d":"#3a2c1e","e":"#55795c"}, rows: [
+    "ccaccacccaccaccc",
+    "aaaaaaadaaaaaeaa",
+    "aaabaaaadaaaaaaa",
+    "dddddddddddddddd",
+    "cccaccacccaccacc",
+    "aaadaaaaaaadaaaa",
+    "aaaaaaabaaaaaaaa",
+    "dddddddddddddddd",
+    "ccacccaccacccacc",
+    "aaaaaaadaaaabaaa",
+    "aaeaaaaaadaaaaaa",
+    "dddddddddddddddd",
+    "caccacccaccacccc",
+    "aaaadaaaaaaadaaa",
+    "aaaaaaaabaaaaaaa",
+    "dddddddddddddddd",
+  ] },
   "partner-back-bob": { base: "partner-back", w: 64, h: 64, pal: {}, shiftY: 2 },
   "partner-front-bob": { base: "partner-front", w: 64, h: 64, pal: {}, shiftY: 2 },
   "abomasnow-back-bob": { base: "abomasnow-back", w: 64, h: 64, pal: {}, shiftY: 2 },
@@ -113934,6 +114049,10 @@ for (const k of T25_FLOOR_KINDS) TILE_ART[k] = 'tile-' + k;
 for (const k of WD3_PROP_KINDS) TILE_ART[k] = 'tile-prop-' + k;
 for (const k of WD3_WALL_KINDS) TILE_ART[k] = 'tile-' + k;
 for (const k of WD3_FLOOR_KINDS) TILE_ART[k] = 'tile-' + k;
+// Wave W-DIFF4: Cinder's brickfloor/mossroof + Redwood's gravelfloor/pineroof kit kinds.
+for (const k of WD4_PROP_KINDS) TILE_ART[k] = 'tile-prop-' + k;
+for (const k of WD4_WALL_KINDS) TILE_ART[k] = 'tile-' + k;
+for (const k of WD4_FLOOR_KINDS) TILE_ART[k] = 'tile-' + k;
 
 // Premium+ W6 (TX-3/PL-1): door-open frames, authored in TX-3 for every
 // door kind. The warp-fade engine that plays them lands in W7 — W6
@@ -114478,6 +114597,7 @@ function buildArtTileCache(doc) {
   for (const k of S3B_FLOOR_KINDS) cache[k + 'Variants'] = ids(['tile-' + k]);
   for (const k of WD_FLOOR_KINDS) cache[k + 'Variants'] = ids(['tile-' + k]);
   for (const k of WD3_FLOOR_KINDS) cache[k + 'Variants'] = ids(['tile-' + k]);
+  for (const k of WD4_FLOOR_KINDS) cache[k + 'Variants'] = ids(['tile-' + k]);
   cache.foundationVariants = ids(['tile-foundation-1', 'tile-foundation-2', 'tile-foundation-3']);
   // P-1 side walls: the SAME authored art rasterized through a palette
   // swap that darkens every hex by one full shade step (x0.72 — the
@@ -114745,6 +114865,7 @@ for (const k of S3_FLOOR_KINDS) FLOOR_VARIANTS[k] = k + 'Variants';
 for (const k of S3B_FLOOR_KINDS) FLOOR_VARIANTS[k] = k + 'Variants';
 for (const k of WD_FLOOR_KINDS) FLOOR_VARIANTS[k] = k + 'Variants';
 for (const k of WD3_FLOOR_KINDS) FLOOR_VARIANTS[k] = k + 'Variants';
+for (const k of WD4_FLOOR_KINDS) FLOOR_VARIANTS[k] = k + 'Variants';
 // Wave 5a: interior floor kinds are ground families of their own (a prop
 // inside a Center stands on Center floor, never on grass or path), and
 // interior walls cast the shared shadow strip onto the floor below.
@@ -114801,7 +114922,7 @@ function groundFamilyOf(kind) {
   // psand kinds stand on path (props composite over the parent ground).
   if (kind && kind.startsWith('beach-')) return 'tropgrass';
   if (kind && kind.startsWith('psand-')) return 'path';
-  if (kind && (W6_FLOOR_KINDS.includes(kind) || O1_FLOOR_KINDS.includes(kind) || J3_FLOOR_KINDS.includes(kind) || H3_FLOOR_KINDS.includes(kind) || H3B_FLOOR_KINDS.includes(kind) || S3_FLOOR_KINDS.includes(kind) || S3B_FLOOR_KINDS.includes(kind) || WD_FLOOR_KINDS.includes(kind) || WD3_FLOOR_KINDS.includes(kind))) return kind; // W6/O1/J3/H3/H3B/S3/S3B/WD/WD3 floors are own families
+  if (kind && (W6_FLOOR_KINDS.includes(kind) || O1_FLOOR_KINDS.includes(kind) || J3_FLOOR_KINDS.includes(kind) || H3_FLOOR_KINDS.includes(kind) || H3B_FLOOR_KINDS.includes(kind) || S3_FLOOR_KINDS.includes(kind) || S3B_FLOOR_KINDS.includes(kind) || WD_FLOOR_KINDS.includes(kind) || WD3_FLOOR_KINDS.includes(kind) || WD4_FLOOR_KINDS.includes(kind))) return kind; // W6/O1/J3/H3/H3B/S3/S3B/WD/WD3/WD4 floors are own families
   if (kind && (kind.startsWith('tg-') || kind.startsWith('tg2-'))) return kind; // W5: town ground is its own family
   if (kind && (kind.startsWith('tc-') || kind.startsWith('td-') || kind.startsWith('flora-'))) return 'grass';
   if (kind === 'grass' || kind === 'grassground' || kind === 'flower' || kind === 'tree' || kind === 'rock' || kind === 'sign' ||
@@ -122497,6 +122618,13 @@ const WALKABLE = new Set(['.', ',', 'D', 'E', 'C', 'F', 'J', 'K', '1', '2', 'V',
   // walkable street material, swapped 1:1 from the walkable '.'
   // path char in Iris City, so floor stays floor.
   ...[592]
+    .map((i) => String.fromCodePoint(0x1E00 + i)),
+  // Wave W-DIFF4: the brickfloor char (U+1E00+594, tiles.mjs
+  // WD4_KIND_DEFS) is walkable street material, swapped 1:1 from
+  // the walkable '.' path char in Cinder Town, and the
+  // gravelfloor char (U+1E00+596) likewise in Redwood Town, so
+  // floor stays floor in both.
+  ...[594, 596]
     .map((i) => String.fromCodePoint(0x1E00 + i))]);
 
 // Trainer definitions for the slice.
@@ -134005,21 +134133,21 @@ const MAPS6 = {
     "rows": [
       "ệệệỈệệệệệệỈệệệệệệỈệệệệệệỈệệệ",
       "ệễễễễễễễễễễễoễễễễễễầầễễễễễễệ",
-      "ệễỈễễễễễễdeefễịịịễễễễễễễễễịị",
+      "ệễỈễễễễễễdeefễ⁓⁓⁓ễễễễễễễễễ⁓⁓",
       "ệễễễễễễễoP12PṓỌsỌẑễễễễễễễầsỌ",
-      "ệSầ.........................",
-      "ệễễễễjklmễễễ.Sễ.ễễễễễễễễoS.ệ",
-      "ệễễễầAJKAễễễ.ễễ.ễễễễẑỉỉỉỉễ.ệ",
-      "ệễễễễ....ễễễ.....ễễễầUVYUṸ.ệ",
-      ".............nẦn............",
-      ".............Ἂ‽Ἂ............",
-      "ệSầễễễ.ễễễễ...9.Sầễễễễễễễễễệ",
-      "ệṒ‼ṓễễ.ễễễễ.ễ...ễễễ,,,ễễễễễệ",
-      "ệễ‼ễễễ.Sễễễ.ễễễễễễễ,,,ễễễễễệ",
-      "ệ........................ễễệ",
-      "ệ,nẻẻẻẻnnnS.,,ễdeefễịịịịễễễệ",
-      "ệ,nẼsẼẼnn,ễ.,ầễtsttễỌsỌỌễễễệ",
-      "ệễn...................ầễễễễệ",
+      "ệSầ⁒⁒⁒⁒⁒⁒⁒⁒⁒⁒⁒⁒⁒⁒⁒⁒⁒⁒⁒⁒⁒⁒⁒⁒⁒",
+      "ệễễễễjklmễễễ⁒Sễ⁒ễễễễễễễễoS⁒ệ",
+      "ệễễễầAJKAễễễ⁒ễễ⁒ễễễễẑỉỉỉỉễ⁒ệ",
+      "ệễễễễ⁒⁒⁒⁒ễễễ⁒⁒⁒⁒⁒ễễễầUVYUṸ⁒ệ",
+      "⁒⁒⁒⁒⁒⁒⁒⁒⁒⁒⁒⁒⁒nẦn⁒⁒⁒⁒⁒⁒⁒⁒⁒⁒⁒⁒",
+      "⁒⁒⁒⁒⁒⁒⁒⁒⁒⁒⁒⁒⁒Ἂ‽Ἂ⁒⁒⁒⁒⁒⁒⁒⁒⁒⁒⁒⁒",
+      "ệSầễễễ⁒ễễễễ⁒⁒⁒9⁒Sầễễễễễễễễễệ",
+      "ệṒ‼ṓἅἅ⁒ễễễễ⁒ễ⁒⁒⁒ễễễ,,,ễễễễễệ",
+      "ệἅ‼ἅἅễ⁒Sễễễ⁒ễễễễễễễ,,,ễễễễễệ",
+      "ệ⁒⁒⁒⁒⁒⁒⁒⁒⁒⁒⁒⁒⁒⁒⁒⁒⁒⁒⁒⁒⁒⁒⁒⁒ễễệ",
+      "ệ,n⁓⁓⁓⁓nnnS⁒,,ễ⁓⁓⁓⁓ễ⁓⁓⁓⁓ễễễệ",
+      "ệ,nẼsẼẼnn,ễ⁒,ầễtsttễỌsỌỌễễễệ",
+      "ệễn⁒⁒⁒⁒⁒⁒⁒⁒⁒⁒⁒⁒⁒⁒⁒⁒⁒⁒⁒ầễễễễệ",
       "ệệệễệệệệệệễệệệệệệỈệệệệệệễệệệ"
     ],
     "warps": [
@@ -140085,20 +140213,20 @@ const MAPS6 = {
     "name": "Redwood Town",
     "music": "viridian-theme",
     "rows": [
-      "ữữữỰữữữữữữỰữữ..ữữữỰữữữữữữỰữữ",
-      "ữửo......................oửữ",
-      "ữửửjklmửửdeefS.ựựựựửẤỳỳỳửnửữ",
-      "ữoửAJKAửửP12P..UVYUửửỴsỴnửửữ",
-      "ữ..........................ữ",
-      "ữửựựựS.ỳỳỳửửử..ửửửửựựựS.ửửửữ",
-      "ữpỴsỴ..tstửửử..ửửửửxsx..ửửửữ",
-      "ữửp.......ửửử..ửửử.....ửửửửữ",
-      ".....S........S.............",
-      "......................S.....",
-      "ữửửửửửửửửnựựự..ửựựựửnn.ửửửửữ",
-      "ữửẤửửửẄửửprsr..pvsv.ẑẑ.ẍửửửữ",
-      "ữửử~~~~~~....S.............ữ",
-      "ữửử~~~~~~.............S....ữ",
+      "ữữữỰữữữữữữỰữữ⁔⁔ữữữỰữữữữữữỰữữ",
+      "ữửo⁔⁔⁔⁔⁔⁔⁔⁔⁔⁔⁔⁔⁔⁔⁔⁔⁔⁔⁔⁔⁔⁔oửữ",
+      "ữửửjklmửửdeefS⁔ựựựựửẤ⁕⁕⁕ửnửữ",
+      "ữoửAJKAửửP12P⁔⁔UVYUửửỴsỴnửửữ",
+      "ữ⁔⁔⁔⁔⁔⁔⁔⁔⁔⁔⁔⁔⁔⁔⁔⁔⁔⁔⁔⁔⁔⁔⁔⁔⁔⁔ữ",
+      "ữử⁕⁕⁕S⁔⁕⁕⁕ửửử⁔⁔ửửửử⁕⁕⁕S⁔ửửửữ",
+      "ữpỴsỴ⁔⁔tstửửử⁔⁔ửửửửxsx⁔⁔ửửửữ",
+      "ữửp⁔⁔⁔⁔⁔⁔⁔ửửử⁔⁔ửửử⁔⁔⁔⁔⁔ửửửửữ",
+      "⁔⁔⁔⁔⁔S⁔⁔⁔⁔⁔⁔⁔⁔S⁔⁔⁔⁔⁔⁔⁔⁔⁔⁔⁔⁔⁔",
+      "⁔⁔⁔⁔⁔⁔⁔⁔⁔⁔⁔⁔⁔⁔⁔⁔⁔⁔⁔⁔⁔⁔S⁔⁔⁔⁔⁔",
+      "ữửửửửửửửửn⁕⁕⁕⁔⁔ử⁕⁕⁕ửnn⁔ửửửửữ",
+      "ữửẤửửửẄửửprsr⁔⁔pvsv⁔ẑẑ⁔ẍửửửữ",
+      "ữửử~~~~~~⁔⁔⁔⁔S⁔⁔⁔⁔⁔⁔⁔⁔⁔⁔⁔⁔⁔ữ",
+      "ữửử~~~~~~⁔⁔⁔⁔⁔⁔⁔⁔⁔⁔⁔⁔⁔S⁔⁔⁔⁔ữ",
       "ữửử~~~~~~ửửửửửửửửửử,,,,,,ửửữ",
       "ữửửửửửửửửửửửửửửửửửử,,,Ấ,,ửửữ",
       "ữửnnnửửửửnnnửửửửnnn,,,,nnnửữ",
@@ -186678,6 +186806,6 @@ if (typeof Game !== 'undefined') Object.assign(Game.prototype, {
 });
 
 </script>
-<!-- contentHash:a42704deede7780245e01d35b5e7402c04a3d0f7b56533d8cab8b9c9d184e86b -->
+<!-- contentHash:e0086c0a600660e414cfc5b0165c7f86b035b965050c5bafee1ec1e5547356a8 -->
 </body>
 </html>
