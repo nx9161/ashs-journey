@@ -194,8 +194,11 @@ ok('no retired creature names in species flavour text', flavourViolations === 0,
 // one "Dawn" is the time of day and the Dawn Flute / Altar of the Dawn
 // are in-world names built on that same time word, one "May" is the
 // modal verb in a Frontier Brain's blessing, the ASH FIELDS / ASH
-// COLLECTOR / ASHA strings are volcanic-ash places and professions, and
-// "Ash on the windows" / "Ash and empty shelf" are the noun ash.
+// COLLECTOR / ASHA strings are volcanic-ash places and professions,
+// "Ash on the windows" / "Ash and empty shelf" are the noun ash, and
+// "Silver" survives only as the Frontier symbol tier (the rendered
+// SILVER word and Sutter's "Silver is a Brain respecting you") and the
+// Yamato edition trio 'Gold / Silver / Crystal' — the rival is Riven.
 const BLOCK_TERMS = [
   'Ash', 'ASH', 'Pikachu', 'Gary', 'Oak', 'Brock', 'Misty', 'Surge', 'Erika',
   'Koga', 'Janine', 'Sabrina', 'Blaine', 'Giovanni', 'Lorelei', 'Bruno',
@@ -242,6 +245,8 @@ function blockExempt(term, seg) {
   if (T === 'DRAKE' && /DRAKE\\?'S DEN/i.test(seg)) return true;
   if (T === 'MAGMA' && (seg.includes('Magma Stone') || seg.includes('Magma inside') ||
       seg.includes('Magma-red'))) return true;
+  if (T === 'SILVER' && (seg.trim() === 'SILVER' || seg.includes('Brain respecting') ||
+      seg.includes('Gold / Silver / Crystal'))) return true;
   return false;
 }
 const allSrc = execSync('find src -name "*.mjs" | sort', { cwd: ROOT, encoding: 'utf8' })
