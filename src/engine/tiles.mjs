@@ -799,9 +799,12 @@ export const T25_WALL_KINDS = T25_KIND_DEFS.filter(([, c]) => c === 'wall').map(
 export const T25_FLOOR_KINDS = T25_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
 // ---- Wave W-DIFF3 (Iris City identity retrofit): Tower Stone &
 // Maple ----
-// Two new kinds continuing the block at idx 588-589 (T24 ends at
-// 587; U+204C/U+204D, verified free in TILE_CHARS and unused by
-// every map row). Iris City is the last shared-kit member of the
+// Two new kinds at idx 592-593 (U+2050/U+2051, verified free in
+// TILE_CHARS and unused by every map row). The block was authored
+// at 588-589 and RE-INDEXED to 592-593 at merge time: Wave T25
+// (Meadowbrook) landed first and took 588-591 (sageroof, scales,
+// heron, reedbank) — the T24 adaptation pattern, applied by the
+// Director's index ruling. Iris City is the last shared-kit member of the
 // Yamato endgame cluster (W-DIFF-AUDIT A.3: Cragmoor / Lastlight /
 // Iris, the tightest in the game); Cragmoor wears Basalt Sett &
 // Drake-Gable and Lastlight Marble Slab & Parapet, so Iris takes
@@ -824,7 +827,7 @@ export const WD3_KIND_DEFS = [
 ];
 export const WD3_KIND_CHARS = {};
 WD3_KIND_DEFS.forEach(([kind], i) => {
-  const ch = String.fromCodePoint(0x1E00 + 588 + i);
+  const ch = String.fromCodePoint(0x1E00 + 592 + i);
   WD3_KIND_CHARS[kind] = ch;
   TILE_CHARS[ch] = kind;
 });

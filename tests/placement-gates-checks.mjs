@@ -191,7 +191,8 @@
 //     one scoped entry — violet: [violetfloor] — on the same terms
 //     as exceptions seven through ten: Iris City's CLEAN identity
 //     build record (W-DIFF-AUDIT Phase B, Tower Stone & Maple)
-//     authors violetfloor (idx 588) AS the town's street fabric
+//     authors violetfloor (idx 592; re-indexed from 588 at merge
+//     time — Wave T25 took 588-591) AS the town's street fabric
 //     (140 path cells swapped 1:1), and its absence from the
 //     network tier would blind the instrument exactly as in W4.
 //     Violet's pin re-pins on ONE field only: apronMin 0.65 -> 0.60
@@ -206,7 +207,7 @@
 //     by the revert). Pass, conn (156/156), step-offs (9/9),
 //     junctions, strict (0.9083) and fabric (0.9967) are
 //     identical; the same build swapped 20 house-roof cells to
-//     the towerroof kind (idx 589, BUILD classifier), which does
+//     the towerroof kind (idx 593, BUILD classifier), which does
 //     not move the tuple. Re-pinned with the W-DIFF3 build.
 //     Tuple: [pass, connOk, connPairs, stepTouch, stepTot, components,
 //     junctionSites, junctionsBare, apronLow, apronMin, merged,
