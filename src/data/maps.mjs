@@ -449,6 +449,13 @@ export const WALKABLE = new Set(['.', ',', 'D', 'E', 'C', 'F', 'J', 'K', '1', '2
   // walkable street material, swapped 1:1 from the walkable '.'
   // path char in Iris City, so floor stays floor.
   ...[592]
+    .map((i) => String.fromCodePoint(0x1E00 + i)),
+  // Wave W-DIFF4: the brickfloor char (U+1E00+594, tiles.mjs
+  // WD4_KIND_DEFS) is walkable street material, swapped 1:1 from
+  // the walkable '.' path char in Cinder Town, and the
+  // gravelfloor char (U+1E00+596) likewise in Redwood Town, so
+  // floor stays floor in both.
+  ...[594, 596]
     .map((i) => String.fromCodePoint(0x1E00 + i))]);
 
 // Trainer definitions for the slice.

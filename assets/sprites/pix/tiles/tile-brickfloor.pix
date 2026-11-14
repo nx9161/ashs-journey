@@ -1,0 +1,32 @@
+# Wave W-DIFF4: brickfloor — kiln-brick street of Cinder Town
+# (Charcoal & Kiln Brick kit). Staggered kiln-brick courses with
+# charcoal mortar, in burnt terracotta tones — the charcoal
+# burners' own material, fired in the town's twin kilns. NOT
+# Signal's future brick avenues: one kind = one palette, one
+# town (W-DIFF one-kind-one-palette discipline). Full-bleed,
+# walkable street material. Authored art for the W-DIFF identity
+# layer (muse-directive/W-DIFF-AUDIT.md Phase B: Cinder =
+# brickfloor).
+PIX tile-brickfloor 16 16
+cacaaacacaaacaca
+aaaadaaabaaadaaa
+aaaadaaaaaaadaab
+dddddddddddddddd
+acacaaaccacaaaca
+aaaaaaaadaaabaaa
+aabaaaaadaaaaaaa
+dddddddddddddddd
+cacacaaacacaaaca
+aaaadaaaaaaadaaa
+aaaadaabaaaadaaa
+dddddddddddddddd
+acaaacacaaaccaca
+aaaaaaaadaaeaaaa
+aaaaaaaadaaaaaab
+dddddddddddddddd
+PAL
+a #9c5540 kiln-brick
+b #6e3524 burnt-brick
+c #c47a58 kiln-brick-lit
+d #33241e charcoal-mortar
+e #7a4630 kiln-brick-mid

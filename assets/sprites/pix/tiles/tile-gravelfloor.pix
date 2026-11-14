@@ -1,0 +1,32 @@
+# Wave W-DIFF4: gravelfloor — lake-gravel street of Redwood
+# Town (Pine & Lake Gravel kit). A pebble field in Wrathmere
+# shore tones — lit pebbles over shadow, sage accent stones —
+# with no coursing at all: gravel is shovelled, not laid, and
+# that lawlessness is what separates Redwood's streets from
+# every coursed floor in the game at a glance. Full-bleed,
+# walkable street material. Authored art for the W-DIFF
+# identity layer (muse-directive/W-DIFF-AUDIT.md Phase B:
+# Redwood = gravelfloor).
+PIX tile-gravelfloor 16 16
+aabaaacaaabaaaca
+aaeaaabaaaaeaaaa
+acaaabaaacaaabaa
+aaabaaeaaaadaaaa
+abaaaaacaaabaaea
+aaacaaabaaacaaaa
+aaeaaaadaaaeabaa
+aabaaacaaabaaaca
+aaaaeaaabaaacaaa
+acaaabaaaaeaaaba
+aaabaaacaaaadaaa
+aaeaaabaaacaaaba
+abaaaadaaaabaaaa
+aaacaaeaaacaaaba
+aaaabaaabaaeaaaa
+aabaaacaaabaaaca
+PAL
+a #a8a294 lake-gravel
+b #7e786c gravel-dark
+c #c9c2b2 gravel-lit
+d #8a927e sage-pebble
+e #5f594f gravel-shadow

@@ -1,0 +1,31 @@
+# Wave W-DIFF4: pineroof — deep-pine timber roof of Redwood
+# Town (Pine & Lake Gravel kit). Pine shingle courses with
+# dark grain ticks, in the KIT_VARIANTS mahogany roof tones
+# (#476e4e / #2c4632 / #648a68, seam #3a2c1e) — the quiet
+# lakeside timber of JOHTO_TOWN_STYLE mahogany's form line,
+# drawn as sombre pine shingle where Cinder's roofs read as
+# moss-grown plank. Solid wall-class roof tile, swapped onto
+# house-stamp roof cells only (W-DIFF drakeroof precedent).
+PIX tile-pineroof 16 16
+ccaccacccaccaccc
+aaaaaaadaaaaaeaa
+aaabaaaadaaaaaaa
+dddddddddddddddd
+cccaccacccaccacc
+aaadaaaaaaadaaaa
+aaaaaaabaaaaaaaa
+dddddddddddddddd
+ccacccaccacccacc
+aaaaaaadaaaabaaa
+aaeaaaaaadaaaaaa
+dddddddddddddddd
+caccacccaccacccc
+aaaadaaaaaaadaaa
+aaaaaaaabaaaaaaa
+dddddddddddddddd
+PAL
+a #476e4e deep-pine
+b #2c4632 pine-dark
+c #648a68 pine-lit
+d #3a2c1e timber-seam
+e #55795c pine-chip

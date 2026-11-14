@@ -1,0 +1,32 @@
+# Wave W-DIFF4: mossroof — moss-timber roof of Cinder Town
+# (Charcoal & Kiln Brick kit). Horizontal timber courses with
+# moss clumping along the course bottoms, in the KIT_VARIANTS
+# azalea roof tones (#5d8a4a / #3c5c2e / #84a866, timber seam
+# #6b4a26) — the forest-edge timber of JOHTO_TOWN_STYLE azalea's
+# form line, drawn as moss-grown planks rather than shingle so
+# Cinder's houses read as mossy timber where Redwood's read as
+# deep pine. Solid wall-class roof tile, swapped onto
+# house-stamp roof cells only (W-DIFF drakeroof precedent).
+PIX tile-mossroof 16 16
+ccaccacccaccaccc
+aabaaaadaaaaaaaa
+baaccaaadaaccaab
+dddddddddddddddd
+caccacccaccaccca
+aaaaaaadaabaaaaa
+aaccaaadaaccaaaa
+dddddddddddddddd
+ccacccaccacccacc
+aaaadaaaaaaabaaa
+aaccaaadaaaaaaab
+dddddddddddddddd
+caccacccaccacccc
+aaaaaaadaaaaaaaa
+baaccaaadaaccaaa
+dddddddddddddddd
+PAL
+a #5d8a4a moss
+b #3c5c2e moss-deep
+c #84a866 moss-lit
+d #6b4a26 timber-seam
+e #2f4a24 moss-shadow

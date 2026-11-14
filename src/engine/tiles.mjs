@@ -834,6 +834,49 @@ WD3_KIND_DEFS.forEach(([kind], i) => {
 export const WD3_PROP_KINDS = WD3_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
 export const WD3_WALL_KINDS = WD3_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
 export const WD3_FLOOR_KINDS = WD3_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
+// ---- Wave W-DIFF4 (identity retrofit #4): Cinder Town + Redwood
+// Town, the closest remaining pair where BOTH towns still wear the
+// shared kit (W-DIFF-AUDIT A.3: Cinder ↔ Redwood 0.0517) ----
+// Four new kinds at idx 594-597 (U+2052-U+2055, verified free in
+// TILE_CHARS and unused by every map row; WD3 ends at 593). The
+// audit Phase B rows verbatim: Cinder (azalea) takes the Charcoal
+// & Kiln Brick kit — street 'brickfloor' (staggered kiln-brick
+// courses in burnt terracotta, the charcoal burners' own
+// material), house shapes 'moss timber (th)' built as 'mossroof'
+// (moss-grown timber courses in the KIT_VARIANTS azalea roof
+// tones), ground 'tg + ash accents at kilns' (the existing H3a
+// ashground kind, no new kind owed); Redwood (mahogany) takes
+// the Pine & Lake Gravel kit — street 'gravelfloor' (an
+// uncoursed Wrathmere-shore pebble field), house shapes 'deep
+// pine timber (th)' built as 'pineroof' (sombre pine shingle
+// courses in the KIT_VARIANTS mahogany roof tones), ground
+// 'tg + meadow/pond' (T20's shipped pond + meadow, byte-kept).
+// One kind = one palette, one town (the W-DIFF discipline):
+// brickfloor is Cinder's alone (Signal's avenues are a later
+// wave's own variant) and gravelfloor is authored here for
+// Redwood first. Same rules as the pilots: floors are walkable
+// street materials registered per town in the placement audit's
+// STREET_REGISTRY; roofs are solid wall-class tiles swapped
+// onto house-stamp roof cells only — footprints, doors, warps,
+// NPC posts and the souvenir-shop facade at Pell's post
+// untouched. Authored art: assets/sprites/pix/tiles/
+// tile-brickfloor.pix, tile-mossroof.pix, tile-gravelfloor.pix,
+// tile-pineroof.pix.
+export const WD4_KIND_DEFS = [
+  ['brickfloor', 'floor'],
+  ['mossroof', 'wall'],
+  ['gravelfloor', 'floor'],
+  ['pineroof', 'wall'],
+];
+export const WD4_KIND_CHARS = {};
+WD4_KIND_DEFS.forEach(([kind], i) => {
+  const ch = String.fromCodePoint(0x1E00 + 594 + i);
+  WD4_KIND_CHARS[kind] = ch;
+  TILE_CHARS[ch] = kind;
+});
+export const WD4_PROP_KINDS = WD4_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
+export const WD4_WALL_KINDS = WD4_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
+export const WD4_FLOOR_KINDS = WD4_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
 export const SINNOH_TOWN_GROUND_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg);
 export const SINNOH_TOWN_GROUND2_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg2);
 // TX-3: the 8 gym exteriors by town (original type-accent motifs).
