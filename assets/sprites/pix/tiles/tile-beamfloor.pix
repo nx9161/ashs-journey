@@ -1,0 +1,23 @@
+# Wave T42 (Revelry kit): beamfloor — Revelry City's registered street kind (the fleet's street kinds carry the -floor suffix; the desire-path tiers key on it). SIGNAL SLAB: large smooth steel-blue slabs — joints on the top/left edges so the tiling reads as a slab grid, pale rivets inset at the corners, a sparse sheen speckle. Structurally LARGE SMOOTH SLABS in a cool steel register — unlike Fernmere's slatefloor (small grey-green sett cobbles), Farsight's avenuefloor (warm gold slabs), Perennial's plateaufloor (cream marble with a gold vein) and Lilac's gridfloor (bronze lattice). An outdoor studio floor for the city every screen watches. (NO-SAME-KIT law; WAVE-T42-REVELRY-PLAN.md §5.)
+PIX tile-beamfloor 16 16
+jjjjjjjjjjjjjjjj
+jbbbbbbbbbbbbbbb
+jbrbbbbbbbbbbrbb
+jbbbbbbbbbbsbbbb
+jbbbbsbbbbbbbbbb
+jbbbbbbbbbbbbbbb
+jbbbbbbbbbbbbbbb
+jbbbbbbbbbbbbbbb
+jbbbbbbbbbsbbbbb
+jbbbsbbbbbbbbbbb
+jbbbbbbbbbbbbbbb
+jbbbbbbbbbbbbbbb
+jbbbbbbbbbbbbbbs
+jbrbbbbbbsbbbrbb
+jbbsbbbbbbbbbbbb
+jbbbbbbbbbbbbbbb
+PAL
+b #6d87a0 steel-slab base
+j #47617a slab joint
+s #84a6c0 sheen speckle
+r #a8c4da corner rivet

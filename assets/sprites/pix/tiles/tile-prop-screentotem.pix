@@ -1,0 +1,24 @@
+# Wave T42 (Revelry kit): screentotem — a street screen totem: dark post and frame carrying a pale cyan screen with a scanline and the tower's ring glyph — every screen in Borea tuned to one tower, standing on the street. A pair flanks the front lawn beside the town sign and the TV sign. Fully opaque — the town grass is baked in (measured #19841e from the shipped render). (NO-SAME-KIT law; WAVE-T42-REVELRY-PLAN.md §5.)
+PIX tile-prop-screentotem 16 16
+gggggggggggggggg
+ggppppppppppppgg
+ggpccccccccccpgg
+ggpccccddccccpgg
+ggpcccdccdcccpgg
+ggpcccdccdcccpgg
+ggpccccddccccpgg
+ggpsssssssssspgg
+ggpccccccccccpgg
+ggppppppppppppgg
+gggggggppggggggg
+gggggggppggggggg
+gggggggppggggggg
+gggggggppggggggg
+ggggggppppgggggg
+gggggggggggggggg
+PAL
+g #19841e town grass (measured, baked in)
+p #2a2f38 post / frame
+c #bfe6f2 screen face
+s #7fb8cc scanline
+d #385a73 ring glyph

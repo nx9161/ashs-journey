@@ -647,6 +647,18 @@ export const WALKABLE = new Set(['.', ',', 'D', 'E', 'C', 'F', 'J', 'K', '1', '2
   // 720-724 + 732-736 + 744-748; the parallel T40 claim holds
   // 756-759; gaps stay empty.)
   ...[768]
+    .map((i) => String.fromCodePoint(0x1E00 + i)),
+  // Wave T42: the beamfloor char (U+1E00+780, tiles.mjs
+  // T42_KIND_DEFS) is walkable street material — Revelry
+  // City's steel signal slab, swapped onto the town's tg2
+  // street cells (the front street, the east-west avenue, the
+  // gate avenues — all shipped walkable as tg2), so floor
+  // stays floor. (Indices 780-783 per the Director's index
+  // ruling: main's kinds run 594-636 + 645-648 + 660-662 +
+  // 672-675 + 684-687 + 696-699 + 708-711 + 720-724 +
+  // 732-736 + 744-748 (T39) + 756-759 (T40); the parallel
+  // T41 claim holds 768-771; gaps stay empty.)
+  ...[780]
     .map((i) => String.fromCodePoint(0x1E00 + i))]);
 
 // Trainer definitions for the slice.
