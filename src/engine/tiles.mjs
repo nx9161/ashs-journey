@@ -2723,6 +2723,60 @@ W17C_KIND_DEFS.forEach(([kind], i) => {
 export const W17C_PROP_KINDS = W17C_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
 export const W17C_WALL_KINDS = W17C_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
 export const W17C_FLOOR_KINDS = W17C_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
+// Wave W17-D (Route Build Program, Arden Tranche 4): the surf lane,
+// the League road and the cave pair — Routes 20, 22, Mt. Lunestone
+// 1F/B1F and Stonebore Tunnel, each its own kit under the NO-SAME-KIT
+// law. Routes 20/22 convert 1:1 off the generic '_'/'.'/'#' vocabulary
+// like Tranches 1-3; the cave maps convert the generic cave base —
+// char 'L' (cavefloor) to the map's own floor kind, char 'G'
+// (cavewall) to its own wall kind — art layer only: encounter tables,
+// warps (cave mouths + ladder/door cells), NPC posts, sign records,
+// items and hidden items byte-identical, and the shipped cave-
+// encounter trigger chars ('.'/'R', overworld-systems sysEncounterStep)
+// occur in none of these grids before or after. Route 20 "Rime Surf"
+// (idx 1152-1155), Route 22 "League Road" (1156-1159), Lunestone 1F
+// "Lunestone Deep" (1160-1161), Lunestone B1F "Lunestone Dark"
+// (1162-1163), Stonebore "Stonebore Strata" (1164-1165 — a strata-deep
+// extension of the tunnel's own shipped stratafloor/stratwall family,
+// per-route, not shared). Ground kinds deliberately do NOT end in
+// 'floor' (the desire-path audit counts '*floor' as street tier;
+// grounds must never masquerade as street); path kinds DO end in
+// 'floor' so they register as the route's path tier per route
+// (checklist point 3). Cave floor kinds end in 'floor' exactly as
+// cavefloor/stratafloor do, keeping their audit classification.
+// Indices 1152-1165 per the Director's index ruling: Tranches 1-3
+// took 1092-1110, 1112-1131 and 1132-1151 (W17-C lands at merge);
+// 1111 and every earlier documented gap stay empty. Kind names
+// verified unclaimed against origin/main ('moonfloor' is Hushmoor's
+// T7 town floor — Lunestone's floors are 'lunefloor'/'darklunefloor';
+// the plan's path name 'leagueway' becomes 'leaguewayfloor' so it
+// registers as path tier under point 3, the gardenfloor discipline).
+// Chars U+1E00+1152.. (Register: WAVE-W17-ROUTE-PROGRAM-PLAN.md.)
+export const W17D_KIND_DEFS = [
+  ['rimeshore', 'floor'],
+  ['surfloor', 'floor'],
+  ['surfpine', 'wall'],
+  ['coldspring', 'prop'],
+  ['leagueturf', 'floor'],
+  ['leaguewayfloor', 'floor'],
+  ['leagueoak', 'wall'],
+  ['leaguepost', 'prop'],
+  ['lunefloor', 'floor'],
+  ['lunewall', 'wall'],
+  ['darklunefloor', 'floor'],
+  ['darklunewall', 'wall'],
+  ['stratadeepfloor', 'floor'],
+  ['stratadeepwall', 'wall'],
+];
+export const W17D_KIND_CHARS = {};
+W17D_KIND_DEFS.forEach(([kind], i) => {
+  const ch = String.fromCodePoint(0x1E00 + 1152 + i);
+  W17D_KIND_CHARS[kind] = ch;
+  TILE_CHARS[ch] = kind;
+});
+export const W17D_PROP_KINDS = W17D_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
+export const W17D_WALL_KINDS = W17D_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
+export const W17D_FLOOR_KINDS = W17D_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
 export const SINNOH_TOWN_GROUND_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg);
 export const SINNOH_TOWN_GROUND2_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg2);
 // TX-3: the 8 gym exteriors by town (original type-accent motifs).

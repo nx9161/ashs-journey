@@ -1015,6 +1015,21 @@ export const WALKABLE = new Set(['.', ',', 'D', 'E', 'C', 'F', 'J', 'K', '1', '2
   // 1092-1110, W17-B takes 1112-1131 on its parallel branch;
   // 1111 stays empty.)
   ...[1132, 1133, 1136, 1137, 1140, 1141, 1144, 1145, 1148, 1149]
+    .map((i) => String.fromCodePoint(0x1E00 + i)),
+  // Wave W17-D: the Arden tranche-4 ground/path/floor chars
+  // (U+1E00+1152.., tiles.mjs W17D_KIND_DEFS) are walkable —
+  // rimeshore/surfloor (Route 20), leagueturf/leaguewayfloor
+  // (Route 22), each swapped 1:1 from the walkable '_' ground /
+  // '.' path chars on its own route, and the cave floors
+  // lunefloor (Lunestone 1F), darklunefloor (Lunestone B1F),
+  // stratadeepfloor (Stonebore), each swapped 1:1 from the
+  // walkable 'L' cavefloor char in its own cave, so floor stays
+  // floor. The cave wall chars (1161, 1163, 1165) are NOT here:
+  // they swap from 'G' cavewall, which was never walkable.
+  // (Indices 1152-1165 per the Director's index ruling: W17-A
+  // took 1092-1110, W17-B 1112-1131, W17-C 1132-1151 on its
+  // parallel branch; 1111 stays empty.)
+  ...[1152, 1153, 1156, 1157, 1160, 1162, 1164]
     .map((i) => String.fromCodePoint(0x1E00 + i))]);
 
 // Trainer definitions for the slice.

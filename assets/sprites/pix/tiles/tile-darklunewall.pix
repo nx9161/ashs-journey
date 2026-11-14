@@ -1,0 +1,24 @@
+# Wave W17-D (Lunestone B1F): dark lune wall — the lune wall’s deep twin, split from 1F by value, not hue: near-black blue-grey bands with a dim strata seam.
+PIX darklunewall 16 16
+zzzzzzzzzzmzzzzz
+zzzzzzmzzzzzzmzz
+zzzzzzzzzzzzmzzz
+mmczmmmmcmmmmcmm
+mzcmmmmzcmmgmczm
+mmcmmmzzcmmgmczm
+mmmzmmmmmmmgmmmm
+maaaamamammaaaaa
+amaaaaaaaaaaaaaa
+amamaaaaaamaaama
+zzzzzzzzzzzzzzzz
+zzzzzzzzzzzzzzzm
+zzzzzzzzzzzzzzzz
+gggggggggggggmgm
+mggggggggggggggg
+gmgggggggggggggm
+PAL
+z #2e2c40
+m #454359
+a #5d5648
+c #6d6a86
+g #232130
