@@ -3233,6 +3233,40 @@ T43_KIND_DEFS.forEach(([kind], i) => {
 const T43_PROP_KINDS = T43_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
 const T43_WALL_KINDS = T43_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
 const T43_FLOOR_KINDS = T43_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
+
+// Wave T44: Honeyfield Town's own kit — 'Honeycomb & Bloom': the
+// honeyfloor (a hexagonal honeycomb lane in pale amber — the
+// town's registered street), the bloomroof (magenta petal-scale
+// shingles, worn only by the shipped House's th roof cells and
+// the two facade cottages, so the house stops sharing the base
+// roof) and two props: the beehive (a straw skep seated beside
+// the town's honey trees) and the shopsign (the Mart's hanging
+// shop board at its east frontage — the Backstory Sync Audit's
+// shopfront fix). Indices 804-807 per the Director's index
+// ruling (main's kinds run 594-636 + 645-648 + 660-662 +
+// 672-675 + 684-687 + 696-699 + 708-711 + 720-724 + 732-736 +
+// 744-748 + 756-759 (T40) + 768-771 (T41) + 780-783 (T42); the
+// parallel T43 claim holds 792-795; 784-803 + 796-803 stay
+// empty), verified free against origin/main, TILE_CHARS and
+// every map row. Authored art: assets/sprites/pix/tiles/
+// tile-honeyfloor.pix, tile-bloomroof.pix,
+// tile-prop-beehive.pix, tile-prop-shopsign.pix.
+// (WAVE-T44-HONEYFIELD-PLAN.md.)
+const T44_KIND_DEFS = [
+  ['honeyfloor', 'floor'],
+  ['bloomroof', 'wall'],
+  ['beehive', 'prop'],
+  ['shopsign', 'prop'],
+];
+const T44_KIND_CHARS = {};
+T44_KIND_DEFS.forEach(([kind], i) => {
+  const ch = String.fromCodePoint(0x1E00 + 804 + i);
+  T44_KIND_CHARS[kind] = ch;
+  TILE_CHARS[ch] = kind;
+});
+const T44_PROP_KINDS = T44_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
+const T44_WALL_KINDS = T44_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
+const T44_FLOOR_KINDS = T44_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
 const SINNOH_TOWN_GROUND_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg);
 const SINNOH_TOWN_GROUND2_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg2);
 // TX-3: the 8 gym exteriors by town (original type-accent motifs).
@@ -95293,6 +95327,78 @@ const ART = {
     "ggggggppppgggggg",
     "gggggggggggggggg"
   ] },
+  "tile-honeyfloor": { w: 16, h: 16, pal: {"a":"#d8b878","o":"#b8903f","g":"#f4e2a0","s":"#c2a05e"}, rows: [
+    "saaoaaaoaaaoaaao",
+    "ogaooaaooaaooaao",
+    "oaaooaasoaaooaao",
+    "aaaoaaaoaaaoaaao",
+    "aoaaaoaaaoaaaosa",
+    "aoosaooaaooaaoog",
+    "aooaaooaaoogaooa",
+    "aoaaaoaaaosaaoaa",
+    "aaaoaaaoaaaoaaao",
+    "oaaooaaoogaooaao",
+    "oaaoogsooaaooaao",
+    "aaaoaaaoaaaoaaao",
+    "aoaaaoaaaoaaasaa",
+    "aosgaooaaooaaooa",
+    "aooaaooaaooaaooa",
+    "aoaaaoaaasaaaoaa"
+  ] },
+  "tile-bloomroof": { w: 16, h: 16, pal: {"m":"#b84a7d","l":"#e88bb0","d":"#8e3460","c":"#f6e3c8"}, rows: [
+    "cllldllldllldlll",
+    "dmmmdmmmdmmmdmmm",
+    "dmmmdmmmdmmmdmmm",
+    "dddddddddddddcdd",
+    "lldllldclldllldl",
+    "mcdmmmdmmmdmmmdm",
+    "mmdmmmdmmmdmmmdm",
+    "dddddddddddddddd",
+    "dllldllldllldlcl",
+    "dmmmdmmmcmmmdmmm",
+    "dmcmdmmmdmmmdmmm",
+    "dddddddddddddddd",
+    "lldllldllldllldl",
+    "mmdmmmdmmmdmmmdc",
+    "mmdmmmdmmcdmmmdm",
+    "dddcdddddddddddd"
+  ] },
+  "tile-prop-beehive": { w: 16, h: 16, pal: {"g":"#2a8320","s":"#a8762e","S":"#d9a84e","e":"#3a2408","b":"#f4d03f"}, rows: [
+    "gggggggggggggggg",
+    "gggggggssggggggg",
+    "ggggggssssssgggg",
+    "gggggsSSSSSSsggg",
+    "ggggssSSSSSSssgg",
+    "gggssSssssssSssg",
+    "gggssSSSSSSSSssg",
+    "gggsSssssssssSsg",
+    "gggsSSSSSSSSSSsg",
+    "gggssSSSeeSSssgg",
+    "gggssSSSeeSSssgg",
+    "gggsSSSSSSSSSSsg",
+    "gggssssssssssssg",
+    "ggggggbgggbbgggg",
+    "gggggggggggggggg",
+    "gggggggggggggggg"
+  ] },
+  "tile-prop-shopsign": { w: 16, h: 16, pal: {"g":"#2a8320","p":"#6b4a2a","T":"#8a6538","B":"#2e5fa3","c":"#f2e6c8","s":"#c05a3a"}, rows: [
+    "gggggggggggggggg",
+    "ggppggggggggppgg",
+    "ggppTTTTTTTTppgg",
+    "ggppggggggggppgg",
+    "ggppBBBBBBBBppgg",
+    "ggppBccccccBppgg",
+    "ggppBcBBBBcBppgg",
+    "ggppBcBssBcBppgg",
+    "ggppBcBssBcBppgg",
+    "ggppBcBBBBcBppgg",
+    "ggppBccccccBppgg",
+    "ggppBBBBBBBBppgg",
+    "ggppggggggggppgg",
+    "ggppggggggggppgg",
+    "gggggggggggggggg",
+    "gggggggggggggggg"
+  ] },
   "tile-trellisroof": { w: 16, h: 16, pal: {"c":"#f2e7ce","r":"#cf8296","l":"#e2a5b4","d":"#a85f74","b":"#8e3d55","v":"#557f3e"}, rows: [
     "cclrllllcclllvll",
     "cccldllccccbrllc",
@@ -116160,6 +116266,11 @@ for (const k of T42_FLOOR_KINDS) TILE_ART[k] = 'tile-' + k;
 for (const k of T43_PROP_KINDS) TILE_ART[k] = 'tile-prop-' + k;
 for (const k of T43_WALL_KINDS) TILE_ART[k] = 'tile-' + k;
 for (const k of T43_FLOOR_KINDS) TILE_ART[k] = 'tile-' + k;
+// Wave T44: Honeyfield Town's own kit kinds take their authored
+// tiles (assets/sprites/pix/tiles/tile-<kind>.pix).
+for (const k of T44_PROP_KINDS) TILE_ART[k] = 'tile-prop-' + k;
+for (const k of T44_WALL_KINDS) TILE_ART[k] = 'tile-' + k;
+for (const k of T44_FLOOR_KINDS) TILE_ART[k] = 'tile-' + k;
 // Premium+ W6 (TX-3/PL-1): door-open frames, authored in TX-3 for every
 // door kind. The warp-fade engine that plays them lands in W7 — W6
 // wires the frames (this registry + cache.doorOpen + doorOpenCanvas)
@@ -118013,6 +118124,11 @@ function resolveTileLayers(cache, kind, x, y, kindAt, t, phase, mapId) {
     // fully opaque — the town grass is baked in).
     case 'coalcarts':
     case 'fossilskull':
+    // Wave T44: Honeyfield's straw skeps and its Mart shop board
+    // composite over their meadow the same way (both arts are
+    // fully opaque — the town grass is baked in).
+    case 'beehive':
+    case 'shopsign':
     // Wave T17: the radio mast composites over its compound grass too.
     case 'radiomast': {
       // Object tiles carry transparent surrounds (Wave 1): lay the ground
@@ -125044,6 +125160,18 @@ const WALKABLE = new Set(['.', ',', 'D', 'E', 'C', 'F', 'J', 'K', '1', '2', 'V',
   // 744-748 + 756-759 + 768-771; the parallel T42 claim holds
   // 780-783; gaps stay empty.)
   ...[792]
+    .map((i) => String.fromCodePoint(0x1E00 + i)),
+  // Wave T44: the honeyfloor char (U+1E00+804, tiles.mjs
+  // T44_KIND_DEFS) is walkable street material — Honeyfield
+  // Town's honeycomb lane, swapped onto the town's tg2 street
+  // cells (the front street, the through road, the Ruined Path
+  // avenue — all shipped walkable as tg2), so floor stays
+  // floor. (Indices 804-807 per the Director's index ruling:
+  // main's kinds run 594-636 + 645-648 + 660-662 + 672-675 +
+  // 684-687 + 696-699 + 708-711 + 720-724 + 732-736 + 744-748
+  // (T39) + 756-759 (T40) + 768-771 (T41) + 780-783 (T42); the
+  // parallel T43 claim holds 792-795; gaps stay empty.)
+  ...[804]
     .map((i) => String.fromCodePoint(0x1E00 + i))]);
 
 // Trainer definitions for the slice.
@@ -154289,22 +154417,22 @@ const MAPS9 = {
     "rows": [
       "ιιι᾿ιιιιιι᾿ιιᾼᾼιιι᾿ιιιιιιᾼιι",
       "ιᾼᾼᾼᾼᾼᾼᾼᾼᾼᾼᾼᾼᾼᾼᾼᾼᾼᾼᾼᾼᾼFᾼᾼᾼᾼι",
-      "ιᾼᾼjklmᾼᾼdeefᾼᾼῂῂῂᾼᾼᾼ᾿ᾼᾼᾼᾼᾼι",
-      "ιᾘᾼAJKAFᾼP12PᾼᾼῃsῃᾼᾼᾼᾼᾼᾼFᾼᾼι",
-      "ιᾼ᾽᾽᾽᾽᾽᾽᾽᾽᾽᾽᾽᾽᾽᾽᾽᾽᾽᾽᾽᾽᾽᾽᾽᾽᾽ι",
-      "ιᾼS᾽᾽᾽᾽᾽᾽᾽᾽᾽᾽᾽᾽᾽᾽᾽᾽᾽ᾼᾼᾼᾼᾼᾼ᾽ι",
-      "ιᾼ᾽᾽᾽ᾼ᾽ᾼ᾽᾽᾽ᾘF᾽᾽᾽᾽᾽᾽᾽ᾔᾔᾔᾔᾔᾔ᾽ι",
-      "ιᾼ᾽᾽᾽᾽᾽ᾼ᾽ᾼᾼ᾽ᾼ᾽᾽ᾼᾼᾼᾼ᾽ᾔᾔᾔᾔᾔᾔ᾽ι",
-      "ᾼᾼ᾽᾽᾽ᾘ᾽᾽᾽᾽᾽᾽᾽᾽᾽᾽᾽᾽᾽᾽᾽᾽᾽᾽᾽᾽᾽᾽",
-      "ᾼᾼ᾽᾽S᾽᾽᾽᾽᾽᾽᾽᾽᾽᾽᾽᾽᾽᾽᾽᾽᾽᾽᾽᾽᾽᾽᾽",
-      "ιᾘ᾽᾽᾽ᾔᾔᾔ᾽ᾔᾔ᾽ᾼ᾽᾽ᾼᾼᾼᾼ᾽ᾘᾼᾼᾼᾼᾼᾼι",
-      "ιᾼ᾽᾽᾽ᾔᾔᾔ᾽ᾔᾔ᾽ᾼ᾽᾽ᾼᾼᾼᾼ᾽ᾼᾼᾼᾘᾼᾼᾼι",
-      "ι᾿᾽᾽᾽ᾔᾔᾔ᾽ᾔᾔ᾽ᾼ᾽᾽ᾼᾼᾼᾼ᾽ᾼᾼᾼᾘᾼᾼᾼι",
-      "ιᾼ᾽᾽᾽ᾔᾔᾔ᾽ᾔᾔ᾽ᾼ᾽᾽ᾼᾘ᾽᾽ᾼᾼᾼᾼᾼᾼᾼᾼι",
-      "ιẅ᾽᾽᾽ᾔᾔᾔᾔᾔᾔ᾽ᾼ᾽᾽ᾘ᾽᾽ᾼ᾽ᾼᾼᾼᾼᾼᾼẅι",
-      "ιᾼ᾽᾽᾽ᾔᾔᾔ᾽᾽᾽᾽᾽᾽᾽᾽᾽ᾼᾼ᾽ᾼᾼᾼᾼᾼᾼ᾿ι",
-      "ιᾼ᾽᾽᾽᾽᾽᾽᾽᾽᾽᾽᾽᾽᾽᾽᾽᾽᾽᾽ᾼᾼᾼᾼᾘᾼᾼι",
-      "ιιι᾿ιιιιιι᾿ιι᾽᾽ιιι᾿ιιιιιι᾿ιι",
+      "ιᾼᾼjklmᾼᾼdeefᾼ℥℥℥ῂᾼᾼᾼ᾿ᾼᾼᾼᾼᾼι",
+      "ιᾘᾼAJKAFᾼP12P℧ᾼῃsῃᾼᾼᾼᾼᾼᾼFᾼSι",
+      "ιℤℤℤℤℤℤℤℤℤℤℤℤℤℤℤℤℤℤℤℤℤℤℤℤℤℤι",
+      "ιℤSℤℤℤℤℤℤℤℤℤℤℤℤℤℤℤℤℤℤℤℤℤℤℤℤι",
+      "ιᾼ℥℥℥ᾼᾼᾼᾼᾼᾼᾘFℤᾼᾼᾼᾼᾼᾼᾔᾔᾔᾔᾔᾔℤι",
+      "ιᾼῃsῃᾼᾼΩᾼΩᾼᾼᾼℤᾼᾼᾼᾼᾼᾼᾔᾔᾔᾔᾔᾔℤι",
+      "ᾼℤℤℤℤᾘℤℤℤℤℤℤℤℤℤℤℤℤℤℤℤℤℤℤℤℤℤℤ",
+      "ᾼℤℤℤSℤℤℤℤℤℤℤℤℤℤℤℤℤℤℤℤℤℤℤℤℤℤℤ",
+      "ιᾘℤᾼᾼᾔᾔᾔℤᾔᾔℤℤℤᾼSᾼᾼᾼᾼᾘᾼᾼᾼᾼSℤι",
+      "ιᾼℤᾼᾼᾔᾔᾔℤᾔᾔℤℤℤᾼᾼᾼᾼᾼΩᾼ℥℥℥ᾼᾼℤι",
+      "ι᾿ℤᾼᾼᾔᾔᾔℤᾔᾔℤℤℤᾼᾼᾼᾼᾼᾼᾼῃsῃᾼᾼℤι",
+      "ιᾼℤℤᾼᾔᾔᾔℤᾔᾔℤℤℤᾼᾼᾘᾼᾼᾼᾼᾼᾼᾼᾼᾼℤι",
+      "ιẅᾼℤᾼᾔᾔᾔᾔᾔᾔΩℤℤᾼᾘᾼᾼᾼᾼᾼᾼᾼᾼᾼᾼẅι",
+      "ιᾼᾼℤᾼᾔᾔᾔᾼΩΩᾼℤℤᾼᾼᾼᾼᾼᾼᾼSᾼᾼᾼᾼ᾿ι",
+      "ιᾼᾼℤℤℤℤℤℤℤℤℤℤℤℤℤℤℤℤℤℤℤℤℤᾘᾼᾼι",
+      "ιιι᾿ιιιιιι᾿ιιℤℤSιι᾿ιιιιιι᾿ιι",
     ],
     "warps": [
       {"x": 4, "y": 3, "to": {"map": "center", "x": 4, "y": 4}, "via": {"map": "floaroma", "x": 4, "y": 4}},
@@ -154320,9 +154448,14 @@ const MAPS9 = {
     "signs": [
       {"x": 2, "y": 5, "text": "HONEYFIELD TOWN — A town of flowers, honey, and unhurried bees. East: the windworks valley. South: the Ruined Path home."},
       {"x": 4, "y": 9, "text": "THE HONEY TREES — Sweet sap draws rare wings to the meadows. DUSKMOTH drift where the honey trees stand — patient eyes find them."},
+      {"x": 26, "y": 3, "text": "HONEYFIELD TOWN — A town of flowers, honey, and unhurried bees. East: the windworks valley. South: the Ruined Path home."},
+      {"x": 15, "y": 10, "text": "HONEYFIELD TOWN — A town of flowers, honey, and unhurried bees. East: the windworks valley. South: the Ruined Path home."},
+      {"x": 25, "y": 10, "text": "HONEYFIELD TOWN — A town of flowers, honey, and unhurried bees. East: the windworks valley. South: the Ruined Path home."},
+      {"x": 15, "y": 17, "text": "HONEYFIELD TOWN — A town of flowers, honey, and unhurried bees. East: the windworks valley. South: the Ruined Path home."},
+      {"x": 21, "y": 15, "text": "HONEYFIELD TOWN — A town of flowers, honey, and unhurried bees. East: the windworks valley. South: the Ruined Path home."}
     ],
     "npcs": [
-      {"x": 3, "y": 5, "name": "MART CLERK", "art": "clerk", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#4a3a2a", "dialogue": ["Honeyfield Town Mart — stocked for the road ahead."], "mart": {"stock": ["pokeball", "greatball", "superpotion", "hyperpotion", "antidote", "parlyzheal", "revive"]}},
+      {"x": 9, "y": 4, "name": "MART CLERK", "art": "clerk", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#4a3a2a", "dialogue": ["Honeyfield Town Mart — stocked for the road ahead."], "mart": {"stock": ["pokeball", "greatball", "superpotion", "hyperpotion", "antidote", "parlyzheal", "revive"]}},
       {"x": 11, "y": 6, "name": "FLORIST WREN", "art": "lady", "skin": "#d8a878", "shirt": "#7a4a8a", "pants": "#2a2a3a", "hair": "#c0c0c0", "dialogue": ["Every roof in Honeyfield is a garden that got promoted.", "HEXABEE read the flower fields like a newspaper. Today's headline is always the same: more flowers."]},
       {"x": 19, "y": 13, "name": "BEEKEEPER ORIN", "art": "gent", "skin": "#e8b888", "shirt": "#3a6ac0", "pants": "#2a3a4a", "hair": "#1a1a1a", "dialogue": ["Honey sweetens the sap, the sap sweetens the trees, the trees sweeten everything else.", "The windworks turbines east keep the valley's hair combed."]},
       {"x": 8, "y": 14, "name": "MEADOW KID FENN", "art": "kid", "skin": "#f0c8a0", "shirt": "#3a7a4a", "pants": "#4a3a2a", "hair": "#2a1a0a", "dialogue": ["I can name forty flowers and eleven bees. The bees can name me.", "ORCHLET ripen twice as fast when you compliment the tree. Science, probably."]},
