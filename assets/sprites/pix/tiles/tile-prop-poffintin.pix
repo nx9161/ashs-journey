@@ -1,0 +1,30 @@
+# Wave T46 (Inglenook kit): poffintin — a poffin tin stack: two round tins with berry-red lids and a small berry basket at their foot, seated at the Poffin House landing's east shoulder (10,13) and west of POFFIN COOK MASA's post (18,13) — the two ends of the town tale 'Auntie's Poffin Tin' (ROSA gives, MASA stages) and MASA's own words: 'Berries in, poffins out, patience throughout.' Fully opaque: the town grass is baked in (measured #248707, tg-hearthome's rendered flat, #245107 speckle). (NO-SAME-KIT law; WAVE-T46-INGLENOOK-PLAN.md §5.)
+PIX tile-prop-poffintin 16 16
+gggggggggggggggg
+ggGGggggggggGGgg
+gggttttttttttggg
+ggtrRRRRRRRRrtgg
+ggtrrrrrrrrrrtgg
+gggttttttttttggg
+gggTttttttttTggg
+gggttttttttttggg
+gggTttttttttTggg
+gggttttttttttggg
+ggggTTTTTTTTgggg
+gggggbbbbbbggggg
+ggggbbyubuebgggg
+ggggbbbbbbbbgggg
+gggggBBBBBBggggg
+ggGGggggggggGGgg
+PAL
+g #248707 town grass (measured tg-hearthome flat)
+G #245107 grass speckle
+t #c8ccd4 tin silver
+T #8a8f9a tin shade
+r #c03a3a lid berry red
+R #e86a5a lid light
+b #a8763e basket weave
+B #7a5226 basket shade
+y #f4d03f berry gold
+u #3a5ac0 berry blue
+e #d23c2e berry red

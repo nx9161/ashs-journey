@@ -1801,6 +1801,41 @@ T45_KIND_DEFS.forEach(([kind], i) => {
 export const T45_PROP_KINDS = T45_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
 export const T45_WALL_KINDS = T45_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
 export const T45_FLOOR_KINDS = T45_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
+// Wave T46: Inglenook City's own kit — 'Violet Slate & Gilt': the
+// giltfloor (warm gold-ochre setts in a running offset grid —
+// the town's registered street), the domeroof (gold dome
+// segments with violet seams, worn only by the shipped Contest
+// Hall's tr roof cells, so the town sign's 'Contests under the
+// gold dome' becomes true and the Gym + Contest Hall roof share
+// breaks) and two props: the poffintin (a poffin tin stack at
+// the Poffin House landing and MASA's post — the town tale
+// 'Auntie's Poffin Tin' made dressing) and the berrybasket (a
+// berry basket at the Mart's and the Contest Hall's frontages).
+// Indices 828-831 per the Director's index ruling (main's kinds
+// run 594-636 + 645-648 + 660-662 + 672-675 + 684-687 + 696-699 +
+// 708-711 + 720-724 + 732-736 + 744-748 + 756-759 (T40) +
+// 768-771 (T41) + 780-783 (T42) + 792-795 (T43) + 804-807 (T44);
+// the parallel T45 claim holds 816-819; 808-815 + 820-827 stay
+// empty), verified free against origin/main, TILE_CHARS and
+// every map row. Authored art: assets/sprites/pix/tiles/
+// tile-giltfloor.pix, tile-domeroof.pix,
+// tile-prop-poffintin.pix, tile-prop-berrybasket.pix.
+// (WAVE-T46-INGLENOOK-PLAN.md.)
+export const T46_KIND_DEFS = [
+  ['giltfloor', 'floor'],
+  ['domeroof', 'wall'],
+  ['poffintin', 'prop'],
+  ['berrybasket', 'prop'],
+];
+export const T46_KIND_CHARS = {};
+T46_KIND_DEFS.forEach(([kind], i) => {
+  const ch = String.fromCodePoint(0x1E00 + 828 + i);
+  T46_KIND_CHARS[kind] = ch;
+  TILE_CHARS[ch] = kind;
+});
+export const T46_PROP_KINDS = T46_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
+export const T46_WALL_KINDS = T46_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
+export const T46_FLOOR_KINDS = T46_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
 export const SINNOH_TOWN_GROUND_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg);
 export const SINNOH_TOWN_GROUND2_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg2);
 // TX-3: the 8 gym exteriors by town (original type-accent motifs).

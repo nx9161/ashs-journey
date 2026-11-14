@@ -1,0 +1,24 @@
+# Wave T46 (Inglenook kit): domeroof — the GOLD DOME of the Inglenook Contest Hall, worn only by the shipped Contest Hall stamp's tr roof cells (the town sign's own words: 'Contests under the gold dome'). GOLD DOME SEGMENTS: horizontal arc bands of gold with violet shadow seams, offset segment joints and a highlight crest — a dome drawn as tiling. No other fleet roof curves: Heritage's heritageroof is flat teal slate courses, Honeyfield's bloomroof petal scales, Coalseam's ironroof riveted plate. (NO-SAME-KIT law; WAVE-T46-INGLENOOK-PLAN.md §5.)
+PIX tile-domeroof 16 16
+dhhhhhdhhhhhdhhh
+daaaaadaaaaadaaa
+daaaaadaaaaadaaa
+vvvvvvvvvvvvvvvv
+hhhdhhhhhdhhhhhd
+aaadaaaaadaaaaad
+aaadaaaaadaaaaad
+vvvvvvvvvvvvvvvv
+dhhhhhdhhhhhdhhh
+daaaaadaaaaadaaa
+daaaaadaaaaadaaa
+vvvvvvvvvvvvvvvv
+hhhdhhhhhdhhhhhd
+aaadaaaaadaaaaad
+aaadaaaaadaaaaad
+vvvvvvvvvvvvvvvv
+PAL
+a #e3b341 dome gold
+h #f7dc8a dome highlight crest
+v #5a3a7a violet seam
+d #b8892e segment joint shade
+k #fdf0bc dome sparkle

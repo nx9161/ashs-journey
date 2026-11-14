@@ -1,0 +1,24 @@
+# Wave T46 (Inglenook kit): giltfloor — Inglenook City's registered street kind (the fleet's street kinds carry the -floor suffix; the desire-path tiers key on it). WARM GILT SETTS: small rectangular stone setts in warm gold-ochre laid in a running offset grid, bronze grout lines, a fine sparkle fleck — the painting's warm paved streets and the town style line's gold. A SETT-GRID geometry: unlike Honeyfield's honeyfloor (hexagonal comb), Heritage's heritagefloor (large irregular flags), Coalseam's clinkerfloor (fine aggregate), Revelry's beamfloor (steel plates), Shingle's shellfloor (raked shell sand) and Clover's cloverfloor (flecked earth). (NO-SAME-KIT law; WAVE-T46-INGLENOOK-PLAN.md §5.)
+PIX tile-giltfloor 16 16
+jllljllljllljlll
+jaaajaakjaaajsaa
+jjjjjjjjjjjjjjjj
+lljllljllljllljl
+aajaaajaaajaaajs
+jjjjjjjjjjjjjjjj
+jllljllljllljlll
+jaaajaaajaaajaaa
+jjjjjjjjjjjjjjjj
+lljllljllljllljl
+aajaaajakajaaaja
+jjjjjjjjjjjjjjjj
+jllljllljllljlll
+jaaajaaajaaajaaa
+jjjjjjjjjjjjjjjj
+lljllljllljllljl
+PAL
+a #d9ac55 gilt sett
+l #ecc978 sett top light
+j #8a6a2f bronze grout
+k #f7e7ae sparkle fleck
+s #b8893a sett shade fleck
