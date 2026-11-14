@@ -1382,6 +1382,39 @@ T32_KIND_DEFS.forEach(([kind], i) => {
 export const T32_PROP_KINDS = T32_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
 export const T32_WALL_KINDS = T32_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
 export const T32_FLOOR_KINDS = T32_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
+// Wave T33 (Steamspring Town): the 'Rustflag & Steam Terrace'
+// kit — Steamspring's own kit from birth (NO-SAME-KIT law).
+// 'steamroof' (wall) — rust BARREL-TILE: vertical half-round
+// clay tile ridges in the town's volcanic rust register, worn
+// by the House and the town's two facade cottages. 'steamfloor'
+// (floor) — the town's registered street: large irregular rust
+// flagstones (the "spring street" of the town sign's own
+// words). 'terracefloor' (floor) — pale mineral-crust terrace
+// slabs, the hot spring's terrace ring. 'steamvent' (prop) — a
+// stone-capped spring vent with its steam cloud, at the pass
+// street's shoulder and the spring's NE corner. Indices
+// 672-675 per the Director's index ruling (main's kinds run
+// 594-636 + 645-648; T32 Ashfall holds 660-662; 606-607,
+// 637-644, 649-659, 663-671 stay empty), verified free against
+// origin/main, TILE_CHARS and every map row. Authored art:
+// assets/sprites/pix/tiles/tile-steamroof.pix,
+// tile-steamfloor.pix, tile-terracefloor.pix,
+// tile-prop-steamvent.pix. (WAVE-T33-STEAMSPRING-PLAN.md.)
+export const T33_KIND_DEFS = [
+  ['steamroof', 'wall'],
+  ['steamfloor', 'floor'],
+  ['terracefloor', 'floor'],
+  ['steamvent', 'prop'],
+];
+export const T33_KIND_CHARS = {};
+T33_KIND_DEFS.forEach(([kind], i) => {
+  const ch = String.fromCodePoint(0x1E00 + 672 + i);
+  T33_KIND_CHARS[kind] = ch;
+  TILE_CHARS[ch] = kind;
+});
+export const T33_PROP_KINDS = T33_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
+export const T33_WALL_KINDS = T33_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
+export const T33_FLOOR_KINDS = T33_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
 export const SINNOH_TOWN_GROUND_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg);
 export const SINNOH_TOWN_GROUND2_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg2);
 // TX-3: the 8 gym exteriors by town (original type-accent motifs).

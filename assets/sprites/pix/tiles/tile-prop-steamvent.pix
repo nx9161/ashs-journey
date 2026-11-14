@@ -1,0 +1,35 @@
+# Wave T33 (Steamspring kit): steamvent — a stone-capped
+# spring vent: a collar of dark rust rocks at the base, a
+# white steam cloud billowing above it. The approved design's
+# signature — steam over the town — as a placed object.
+# Seats: the pass street's west shoulder (12,2) and the
+# spring's NE corner (26,10). Fully opaque, town grass baked
+# in (measured tg-lavaridge flat #22800d).
+# (WAVE-T33-STEAMSPRING-PLAN.md §5.)
+PIX tile-prop-steamvent 16 16
+gghggggggggLgggg
+ggggggwWgggggggg
+gggggWwWwggggggg
+ggggWWWWWwgggggg
+gggWWwWWWWWggggg
+gggWWWWWWwWwgggg
+gggWWWWWWWWWgggg
+ggggWWWWWWwwgggg
+gggggWWWWWgggggg
+ggggggWWwggggggg
+gggggkRRkggggggg
+ggggRkRRkRgggggg
+gggkRRkkRRkggggg
+gggRRRRRRRRggggg
+ggkRkRRRRkRkgggg
+ggghhhhhhhhggggg
+PAL
+g #22800d
+h #1a660a
+L #2f9420
+W #f4f1e8
+w #e3ded0
+s #c9c2b2
+k #4a2e1c
+r #7d4a2b
+R #96452a

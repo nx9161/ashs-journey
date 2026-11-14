@@ -1,0 +1,32 @@
+# Wave T33 (Steamspring kit): steamroof — RUST BARREL-TILE:
+# vertical half-round clay tile ridges (a light-crest /
+# shadow-flank rhythm) in the town's volcanic rust register,
+# a horizontal course shadow where each tile row ends, pale
+# mineral-crust flecks from the spring air. Rounded ridge
+# relief — unlike Beacon's flat standing-seam metal, Lilac's
+# bronze shingle courses, Fairhaven's stitched canvas,
+# Mistford's split-shake, Wildflower's open lattice.
+# (NO-SAME-KIT law; WAVE-T33-STEAMSPRING-PLAN.md §5.)
+PIX tile-steamroof 16 16
+dlbsdlbsdlbsdlbs
+dlbsdlbsdlbsdlbs
+dlbsdlwsdlbsdlbs
+dlbsdlbsdlbsdlbs
+dlbsdlbsdlbsdlbs
+dlbsdlbsdlbsdlbs
+dlbsdlbsdlbsdlbs
+ssssssssssssssss
+bsdlbsdlbsdlbsdl
+bsdlbsdlbsdlbsdl
+bsdlbsdlwsdlbsdl
+bsdlbsdlbsdlbsdl
+bsdlbsdlbsdlbsdl
+bsdlbsdlbsdlbsdl
+bsdlbsdlbsdlbsdl
+ssssssssssssssss
+PAL
+d #a04e2a
+l #da8f5a
+b #c06a35
+s #7d421f
+w #efe6cc

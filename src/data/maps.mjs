@@ -545,6 +545,16 @@ export const WALKABLE = new Set(['.', ',', 'D', 'E', 'C', 'F', 'J', 'K', '1', '2
   // stays floor. (Indices 660-662: main's ceiling was 636;
   // 637-659 left clear for the parallel T31 Beacon claim.)
   ...[661]
+    .map((i) => String.fromCodePoint(0x1E00 + i)),
+  // Wave T33: the steamfloor char (U+1E00+673, tiles.mjs
+  // T33_KIND_DEFS) is walkable street material — Steamspring
+  // Town's rust flagstone, swapped onto the town's street cells
+  // (which shipped as walkable tg2 mud), and the terracefloor
+  // char (U+1E00+674) likewise on the hot spring's terrace
+  // ring, so floor stays floor. (Indices 672-675 per the
+  // Director's ruling: main's kinds run 594-636 + 645-648;
+  // T32 Ashfall holds 660-662; 606-607 stay empty.)
+  ...[673, 674]
     .map((i) => String.fromCodePoint(0x1E00 + i))]);
 
 // Trainer definitions for the slice.

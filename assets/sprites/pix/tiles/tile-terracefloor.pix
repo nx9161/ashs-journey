@@ -1,0 +1,32 @@
+# Wave T33 (Steamspring kit): terracefloor — the hot spring's
+# terrace ring. PALE MINERAL TERRACE: broad smooth slabs in
+# warm pale stone, rust-tinted joints, white crust patches and
+# a faint turquoise mineral stain at the slab edges — the
+# crust a hot spring lays down. Unlike Lastlight's veined
+# marble (cool white, fine veins), Blossom's inlay slabs
+# (petal motif), Fairhaven's running-bond quay stone.
+# (NO-SAME-KIT law; WAVE-T33-STEAMSPRING-PLAN.md §5.)
+PIX tile-terracefloor 16 16
+lllllllljlllllll
+bbbbbbbbjbbbbbbb
+bbwwbbbbjbbbbbbb
+bbwwbbbbjbbbbtbb
+bbbbbbbbjbbbbbbb
+bbbbdbbbjbbbbbbb
+bbbbbbbbjbbbbbbb
+jjjjjjjjjjjjjjjj
+lllljlllllllllll
+bbbbjbbbbbbbbbbb
+bbbbjbbbbwwbbbbb
+bbbbjbbbbwwbtbbb
+bbbbjbbbbbbbbbbb
+bbdbjbbbbbbbbbbb
+bbbbjbbbbbbbbbbb
+jjjjjjjjjjjjjjjj
+PAL
+b #cfc0a4
+l #ddd0b4
+d #bfae8e
+j #a4713e
+w #f2ecdc
+t #57b8a8

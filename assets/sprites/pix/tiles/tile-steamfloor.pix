@@ -1,0 +1,32 @@
+# Wave T33 (Steamspring kit): steamfloor — Steamspring Town's
+# registered street kind (the fleet's street kinds carry the
+# -floor suffix; the desire-path tiers key on it). RUST
+# FLAGSTONE: large irregular polygonal flags in rust-red
+# volcanic stone, pale mineral grout, white crust flecks where
+# the spring steam settles. Large irregular flags — unlike
+# Cinder's regular brick courses, Cragmoor's small dark setts,
+# Copperton's square quarry flags, Ashfall's fine swept drift.
+# (NO-SAME-KIT law; WAVE-T33-STEAMSPRING-PLAN.md §5.)
+PIX tile-steamfloor 16 16
+lllllglllllgllll
+bbbbbgbbbbbgbbbb
+bdbbbgdbbbbgbbbd
+bbbbbgbbbbbgbbbb
+bbbbbgbbwbbgbbbb
+bbbbbgbbbbbgdbbb
+dddddgdddddgdddd
+gggggggggggggggg
+lllglllllgllllll
+bbbgbbbbbgbbbbbb
+bbbgbbdbbgbbbbbb
+bbbgbbbbbgbbbwbb
+bbbgbbbbbgbbbbbb
+bbbgbbbbbgbbbbbb
+dddgdddddgdddddd
+gggggggggggggggg
+PAL
+b #b85c33
+d #a04e2a
+l #cf7340
+g #d8c8a8
+w #efe6cc
