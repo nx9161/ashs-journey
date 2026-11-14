@@ -1,0 +1,25 @@
+# Wave W-DIFF6: Canopy promenade - pale sage-stone slabs, sunlit edges, green grout (full-bleed, solid).
+PIX tile-promfloor 16 16
+cccccccdcacaaaad
+baaaabadbbaaabbb
+aaabaaabbbabbbad
+baaaaaadbbbbabed
+aeaaaabbbbbbbbad
+abaaabadabbbbbbd
+aaaaaaadbbbbabbd
+dddddddbddbddddd
+acccccabaccccacd
+aaaababdebbbbaad
+aaaabbabbbbbebbd
+ababaaadbbabbbbd
+abaaaaadbbaabbbb
+baaaaaadbbbabaad
+aaaaaabbbabbbbbd
+dbddddddbbdddddd
+
+PAL
+a #a9bda1 promenade-slab
+b #93ab8c slab-shade
+c #c6d8bd slab-lit
+d #71896d grout
+e #b9cbb0 worn-speckle

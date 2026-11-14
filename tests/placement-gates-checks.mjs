@@ -362,6 +362,44 @@
 //     registered 602-606, re-indexed above W-DIFF5's 602-607
 //     block under the Director's ruling, 79 map cells remapped
 //     losslessly.) Re-pinned with the T27 build.
+//     TWENTIETH DOCUMENTED EXCEPTION (W-DIFF6): the registry
+//     grows by one scoped entry — viridian: [slatefloor] — on
+//     identical terms: Fernmere City's CLEAN identity build
+//     record (W-DIFF-AUDIT Phase B, Slate Gable & Evergreen)
+//     authors slatefloor (idx 613) AS the town's street fabric
+//     (90 path cells swapped — every street, avenue and exit
+//     landing). Viridian's pin does NOT move: pass, conn
+//     (240/240), step-offs (7/7), junctions (3 sites, 0 bare),
+//     apronMin (0.643), strict (0.933) and fabric (1) are all
+//     identical — the exception records the registry growth
+//     only. The same build swapped 13 house-roof cells to
+//     the slateroof kind (idx 614, BUILD classifier; the
+//     four houses — Marlow's included; the gym's roof-slate
+//     band, the Center's roof-center, the Mart's tr- stamp,
+//     Marlow's tortoise cell (17,6) and the heavy fence
+//     family byte-kept). Viridian is a drifted triple
+//     definition (map-id registry status D): ONLY the live
+//     maps3 copy was swapped, its registry fingerprint
+//     updated in the same commit per the burn-down rule;
+//     the maps/maps2 copies stay frozen. Re-pinned with
+//     the W-DIFF6 build (registry scope only).
+//     TWENTY-FIRST DOCUMENTED EXCEPTION (W-DIFF6): the
+//     registry grows by one scoped entry — celadon:
+//     [promfloor] — on identical terms: Canopy City's CLEAN
+//     identity build record (W-DIFF-AUDIT Phase B, Glass
+//     Dome & Promenade) authors promfloor (idx 615) AS the
+//     town's street fabric (103 path cells swapped — the
+//     avenues are the promenade). Celadon's pin does NOT
+//     move: pass, conn (156/156), step-offs (10/10),
+//     junctions (3 sites, 0 bare), apronMin (0.611), strict
+//     (0.9725) and fabric (1) are all identical — the
+//     exception records the registry growth only. The same
+//     build swapped 12 house-roof cells to the glassroof
+//     kind (idx 616, BUILD classifier; the Mart's, Center's
+//     and Dept Store's tr- roofs, the Game Corner + Dept
+//     Store tl- frontages, the gym-leaf band and T8's
+//     flowerbed promenade dressing byte-kept). Re-pinned
+//     with the W-DIFF6 build (registry scope only).
 //     Tuple: [pass, connOk, connPairs, stepTouch, stepTot, components,
 //     junctionSites, junctionsBare, apronLow, apronMin, merged,
 //     onFabric, shoulderOrphans, unanchoredAny, strict, fabric].
@@ -391,8 +429,8 @@ async function gateTuple(id, t) {
 }
 
 // 1. registry scope lock
-ok('street registry is exactly { vermilion: [boardwalk], blackthorn: [settfloor], silvertown: [marblefloor], ecruteak: [wornfloor], saffron: [avenuefloor], violet: [violetfloor], azalea: [brickfloor], mahogany: [gravelfloor], rustboro: [cutstonefloor], fuchsia: [marshfloor], cianwood: [driftfloor], dewford: [plankfloor] }',
-  JSON.stringify(STREET_REGISTRY) === '{"vermilion":["boardwalk"],"blackthorn":["settfloor"],"silvertown":["marblefloor"],"ecruteak":["wornfloor"],"saffron":["avenuefloor"],"violet":["violetfloor"],"azalea":["brickfloor"],"mahogany":["gravelfloor"],"rustboro":["cutstonefloor"],"fuchsia":["marshfloor"],"cianwood":["driftfloor"],"dewford":["plankfloor"]}',
+ok('street registry is exactly { vermilion: [boardwalk], blackthorn: [settfloor], silvertown: [marblefloor], ecruteak: [wornfloor], saffron: [avenuefloor], violet: [violetfloor], azalea: [brickfloor], mahogany: [gravelfloor], rustboro: [cutstonefloor], fuchsia: [marshfloor], cianwood: [driftfloor], dewford: [plankfloor], viridian: [slatefloor], celadon: [promfloor] }',
+  JSON.stringify(STREET_REGISTRY) === '{"vermilion":["boardwalk"],"blackthorn":["settfloor"],"silvertown":["marblefloor"],"ecruteak":["wornfloor"],"saffron":["avenuefloor"],"violet":["violetfloor"],"azalea":["brickfloor"],"mahogany":["gravelfloor"],"rustboro":["cutstonefloor"],"fuchsia":["marshfloor"],"cianwood":["driftfloor"],"dewford":["plankfloor"],"viridian":["slatefloor"],"celadon":["promfloor"]}',
   JSON.stringify(STREET_REGISTRY));
 
 // 2. census: the 64 towns of townSetOf (pallet included)

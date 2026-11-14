@@ -1,0 +1,25 @@
+# Wave W-DIFF6: Canopy glass dome - ribbed glass vault, bright crown, deep frame foot (full-bleed, solid).
+PIX tile-glassroof 16 16
+dccacbccccbccccd
+dcecabacccbceccd
+dcccabcecabccacd
+daccebccccbccacd
+dcccabcaccbcccad
+dbbbbbbbbbbbbbbd
+daaaabaaaabaaacd
+daaaabaaaabccacd
+daaaabaaacbcaaad
+daaaabacaabaaacd
+dddddddddddddddd
+daabbbbbaabaabad
+daababbaaabbbabd
+daaaababaabbabbd
+dabaabaaaabbbabd
+dddddddddddddddd
+
+PAL
+a #8fcbb4 glass
+b #5da487 glass-deep
+c #c4e8da glass-crown
+d #3d6b55 dome-frame
+e #f2fbf6 glint

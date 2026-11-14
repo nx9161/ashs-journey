@@ -1,0 +1,25 @@
+# Wave W-DIFF6: Fernmere slate gable - ridge band, offset slate courses, deep eave foot (full-bleed, solid).
+PIX tile-slateroof 16 16
+eeeeeeeceeceeeee
+cccbcccccbacccbc
+aaabaaaaabaaaaba
+bbddbbbbbdbdbbbb
+caccacbcccccbcca
+aaaaaabaaaaabdad
+ddbbbbbbbbdbbbbb
+cbccaaaabacccbca
+abaaaaaabadaabaa
+bbbdddbbdbbbbbdb
+caaccbcccccbccca
+daaadbaaaaabaaaa
+bbbbbbdbbbbbdbbb
+ccbcaccacbcacccb
+bbbbbbbdbddbbbbb
+dddddddddddddddd
+
+PAL
+a #59687a slate
+b #47566b slate-shade
+c #7b8da1 slate-lit
+d #333f52 eave-deep
+e #9db0c4 ridge

@@ -142,7 +142,7 @@ const BASELINE = {
   "tower2": ['D', 'maps2.mjs:67e834db', 'maps3.mjs:209d7be2'],
   "vermilion": ['D', 'maps2.mjs:43c09b02', 'maps4.mjs:a5606dc0', 'maps5.mjs:34c10928', 'maps6.mjs:2ac0d0ec'],
   "victoryroad": ['D', 'maps2.mjs:68ee1404', 'maps3.mjs:4d27c6e3'],
-  "viridian": ['D', 'maps.mjs:5513301d', 'maps2.mjs:c71e86c5', 'maps3.mjs:dd83ca50'],
+  "viridian": ['D', 'maps.mjs:5513301d', 'maps2.mjs:c71e86c5', 'maps3.mjs:ff1930bf'],
 };
 
 const dupNow = new Map([...byId.entries()].filter(([, v]) => v.length > 1));

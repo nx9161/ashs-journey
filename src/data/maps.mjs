@@ -480,6 +480,13 @@ export const WALKABLE = new Set(['.', ',', 'D', 'E', 'C', 'F', 'J', 'K', '1', '2
   // boardwalk, swapped onto the town's street cells (which
   // shipped as walkable tg2 mud), so floor stays floor.
   ...[609]
+    .map((i) => String.fromCodePoint(0x1E00 + i)),
+  // Wave W-DIFF6: the slatefloor char (U+1E00+613, tiles.mjs
+  // WD6_KIND_DEFS) is walkable street material, swapped 1:1
+  // from the walkable '.' path char in Fernmere City, and the
+  // promfloor char (U+1E00+615) likewise in Canopy City,
+  // so floor stays floor in both.
+  ...[613, 615]
     .map((i) => String.fromCodePoint(0x1E00 + i))]);
 
 // Trainer definitions for the slice.

@@ -1,0 +1,25 @@
+# Wave W-DIFF6: Fernmere slate setts - dark blue-grey sett paving, lit edges, deep mortar (full-bleed, solid).
+PIX tile-slatefloor 16 16
+caaccaadaccacacb
+eaaaeaabaaaeaaad
+eaaaaabbaaeaaaad
+aaaaaaedabaeaaad
+aaaabaabaaaaaaab
+aeaaaaadeaaaaaad
+eaaaaaadaaaaaaad
+bdddbbbddddbdddd
+caccaacdcacccccd
+abaaaaabaaaaaaed
+aaaaaeadaeaaaaab
+aaaaaaadaaaaaaab
+aaaaaaabaabaaaab
+baaabeabaebaaaad
+baaaaaadaeaaaaad
+ddddddddddddbddd
+
+PAL
+a #5a6779 slate-sett
+b #48536a sett-shade
+c #77879c sett-lit
+d #39445a mortar
+e #8598ad slate-fleck

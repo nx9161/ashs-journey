@@ -1033,6 +1033,70 @@ T27_KIND_DEFS.forEach(([kind], i) => {
 export const T27_PROP_KINDS = T27_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
 export const T27_WALL_KINDS = T27_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
 export const T27_FLOOR_KINDS = T27_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
+// ---- Wave W-DIFF6 (identity retrofit): Fernmere + Canopy ----
+// Four new kinds at idx 613-616 (U+2065-U+2068, verified free
+// in TILE_CHARS and unused by every map row; the block runs
+// T23 575, W-DIFF 577-580, W-DIFF2 581-584, T24 585-587,
+// T25 588-591, WD3 592-593, W-DIFF4 594-597, T26 598-601,
+// W-DIFF5 602-605, T27 608-612 — 606/607 stand empty). The
+// closest remaining pair where BOTH towns still wear the
+// shared kit (audit A.3 #10, 0.0739; 0.0639 re-measured on the
+// current tree) gets the identity table's own kits (W-DIFF-
+// AUDIT Phase B). Fernmere City (TOWN_STYLE viridian: ground
+// #4f9e57, form 'gabled slate') — 'Slate Gable & Evergreen':
+// 'slatefloor' (floor) — dark slate sett paving, the town's
+// street fabric (STREET_REGISTRY; the fleet's street kinds
+// carry the -floor suffix the desire-path tiers key on),
+// swapped onto every street cell. The table names Redwood's
+// gravelfloor here, but gravelfloor is Redwood's built street
+// (W-DIFF4) — the W-DIFF5 precedent (the table's shared
+// 'boardwalk' became marshfloor/driftfloor) gives Fernmere
+// its own slate sett instead of a second helping of gravel.
+// 'slateroof' (wall) — a true slate GABLE in the KIT_VARIANTS
+// viridian roof tones (ridge band + offset slate courses +
+// deep eave foot), swapped onto the four houses' roofs —
+// Marlow's house included; the gym's roof-slate band, the
+// Center's roof-center and the Mart's tr- stamps keep their
+// shipped roofs entire. The table's ground treatment (tg +
+// deep tc evergreen frame) and its signature (the heavy
+// fence family, 11 runs, with td- posts) are the shipped
+// town's own — byte-kept. Viridian is a drifted triple
+// definition (map-id registry status D): ONLY the live
+// maps3 copy is swapped; the maps/maps2 copies stay frozen
+// under the registry ratchet, their reconciliation the
+// standing dual-copy backlog wave's business. Canopy City
+// (TOWN_STYLE celadon: ground #4fae7e, form 'glass dome') —
+// 'Glass Dome & Promenade': 'promfloor' (floor) — pale
+// sage-stone promenade slabs, the town's street fabric
+// (STREET_REGISTRY), swapped onto every street cell — the
+// avenues ARE the promenade. 'glassroof' (wall) — ribbed
+// glass-dome roofing (mullion ribs, glass gradient, glints,
+// deep frame foot) in the KIT_VARIANTS celadon tones,
+// swapped onto the four houses' th- roofs; the Mart's,
+// Center's and Dept Store's tr- roofs, the Game Corner +
+// Dept Store tl- frontages and the gym-leaf band keep their
+// shipped faces entire. The table's ground treatment (tg +
+// flowerbed promenades) is T8's shipped flowerbed/planter
+// dressing along the Center-Game Corner promenade — byte-
+// kept, the Tidewall herb-garden precedent. Authored art:
+// assets/sprites/pix/tiles/tile-slatefloor.pix,
+// tile-slateroof.pix, tile-promfloor.pix, tile-glassroof.pix
+// (register: your_files/w-diff6/GRADE.md).
+export const WD6_KIND_DEFS = [
+  ['slatefloor', 'floor'],
+  ['slateroof', 'wall'],
+  ['promfloor', 'floor'],
+  ['glassroof', 'wall'],
+];
+export const WD6_KIND_CHARS = {};
+WD6_KIND_DEFS.forEach(([kind], i) => {
+  const ch = String.fromCodePoint(0x1E00 + 613 + i);
+  WD6_KIND_CHARS[kind] = ch;
+  TILE_CHARS[ch] = kind;
+});
+export const WD6_PROP_KINDS = WD6_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
+export const WD6_WALL_KINDS = WD6_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
+export const WD6_FLOOR_KINDS = WD6_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
 export const SINNOH_TOWN_GROUND_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg);
 export const SINNOH_TOWN_GROUND2_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg2);
 // TX-3: the 8 gym exteriors by town (original type-accent motifs).
