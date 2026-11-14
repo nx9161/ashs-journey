@@ -762,6 +762,20 @@ export const WALKABLE = new Set(['.', ',', 'D', 'E', 'C', 'F', 'J', 'K', '1', '2
   // 816-819 + 828-831 + 840-843 + 852-855; the parallel
   // T49 claim holds 864-868; gaps stay empty.)
   ...[876]
+    .map((i) => String.fromCodePoint(0x1E00 + i)),
+  // Wave T51: the moonfloor char (U+1E00+888, tiles.mjs
+  // T51_KIND_DEFS) is walkable street material — Astral
+  // Town's pale moonstone flags, swapped onto the town's tg2
+  // street cells (the front street, the south road, the east
+  // arm and the avenues — all shipped walkable as tg2), so
+  // floor stays floor. (Indices 888-891 per the Director's
+  // index ruling: main's kinds run 594-636 + 645-648 + 660-662 +
+  // 672-675 + 684-687 + 696-699 + 708-711 + 720-724 +
+  // 732-736 + 744-748 + 756-759 + 768-771 + 780-783 +
+  // 792-795 + 804-807 + 816-819 + 828-831 + 840-843 +
+  // 852-855 + 864-868; the parallel T50 claim holds 876-879;
+  // gaps stay empty.)
+  ...[888]
     .map((i) => String.fromCodePoint(0x1E00 + i))]);
 
 // Trainer definitions for the slice.

@@ -1,0 +1,24 @@
+# Wave T51 (Astral kit): duskroof — worn only by the shipped Astral Shrine stamp's tr roof cells, so the town's landmark wears the town's own register: DUSK TIMBER SHINGLES, deep violet ancient-timber shingle courses with pale lit top edges, dark seams and staggered end joints — the approved painting's dusk-violet roofs against the houses' brown timber. Horizontal violet shingle courses: unlike Fenland's boardroof (vertical olive boards), Heritage's heritageroof (teal slate), Shardfall's shardroof (grey checker slate), Inglenook's domeroof (gold dome segments). (NO-SAME-KIT law; WAVE-T51-ASTRAL-PLAN.md §5.)
+PIX tile-duskroof 16 16
+llllslllllllllll
+aaaasaaadaalaaaa
+aaaasaaaaaaaaaaa
+ssssssssssssssss
+lllllllllllsllll
+bbbbbbbbbbbsbbbb
+bbdbbbbblbbsbbbb
+ssssssssssssssss
+llllllslllllllll
+aaadaasaaaaalaaa
+aaaaaasaaaadaaaa
+ssssssssssssssss
+lllllllllllllsll
+bbbbbbbbbbbbdsbb
+bbbbbbbbblbbbsbb
+ssssssssssssssss
+PAL
+a #5b4494 shingle body — dusk violet timber
+b #513c85 shingle body — dusk violet, deep course
+l #7763ad lit top edge / weathered fleck
+d #463271 grain shade
+s #2e2050 course seam / end joint — dark violet

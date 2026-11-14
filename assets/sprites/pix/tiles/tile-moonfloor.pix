@@ -1,0 +1,27 @@
+# Wave T51 (Astral kit): moonfloor — Astral Town's registered street kind (the fleet's street kinds carry the -floor suffix; the desire-path tiers key on it). MOONSTONE FLAGS: large irregular pale-lavender moonstone flags, two by two to a tile, with dark violet grout and a tiny star fleck on each flag face — the oldest streets in Borea, laid for the shrine town in the mountain's lap. A PALE FLAG FIELD: unlike Heritage's heritagefloor (worn teal-green flagstone, cross-hatched), Shardfall's shardfloor (dark cracked slate), Repose's pebblefloor (small rounded pebbles), Inglenook's giltfloor (gold-ochre setts) and Bridgeport's ringfloor (blue-grey quay flags with an iron ring inlay — a harbour register): Astral's flags are lavender moonstone with violet grout and star flecks, a shrine register. (NO-SAME-KIT law; WAVE-T51-ASTRAL-PLAN.md §5.)
+PIX tile-moonfloor 16 16
+gggggggggggggggg
+gaaaaaaggbbbsbbb
+gaasalaabbbsSsbb
+gasSsaaabbbdsbbb
+gaasadaabblbbbbb
+gaaaaaaabbbbbbbb
+gaaaaaaabbbbbbbl
+gggaaaaabbbbbggg
+gggaaaaaccdccggg
+gaaadaalcccccccc
+gaaaaaaggccscccc
+gaaasaaggcsSsccc
+gaasSsaggccscccd
+gaaasaaggdcccccc
+gaadlaaggccccccc
+gaaaaaaggccccccc
+PAL
+a #b3a4d4 flag face — moonstone lavender
+b #c0b1de flag face — moonstone lavender, light
+c #a08ec6 flag face — moonstone lavender, deep
+l #cec2e8 face light fleck
+d #8d7ab4 face shade fleck
+g #43305f grout — dark violet
+s #e6dcf7 star fleck arm
+S #f7f2ff star fleck core

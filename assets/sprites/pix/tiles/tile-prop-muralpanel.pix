@@ -1,0 +1,27 @@
+# Wave T51 (Astral kit): muralpanel — a standing stone panel carved and painted with the shrine murals' glyphs (crescent moon, star, leaf), copied by hand one panel a season: HISTORIAN BLYTHE's own dialogue ('I copy the shrine murals by hand, one panel a season') and the Backstory Sync Audit's Astral row ('mural panels copied one panel a season: design = tale + sign'), realized as dressing at the OLD SHRINE sign's shoulder and beside BLYTHE's post; no actor, no dialogue, no event invented. Fully opaque: the town grass is baked in at the MEASURED tg-celestic colours (#1b812b base, #1b4b2b speckle). (WAVE-T51-ASTRAL-PLAN.md §5.)
+PIX tile-prop-muralpanel 16 16
+GggggssssssgGggg
+gGggssSSSSssgGgg
+ggGsSssssssSsgGg
+gggsSmmwwmmSsggG
+gggsSmwwwwmSsggg
+gggsSsswwssSsggg
+GggsSsSwwSsSsggg
+gGgsSssssssSsGgg
+ggGsSsSllSsSsgGg
+gggsSslSSlsSsggG
+gggsSsSllSsSsggg
+gggsSssssssSsggg
+GgggsSSSSSSgGggg
+gGggssssssssgGgg
+ggGddgggGggddgGg
+gggGgggggGgggggG
+PAL
+g #1b812b town grass — measured tg-celestic base
+G #1b4b2b town grass speckle — measured tg-celestic
+s #7d7296 panel stone — grey violet, shaded edge
+S #9c92b5 panel stone — grey violet face
+m #e9e1f8 mural paint — moon / glyph light
+w #4c3d78 mural paint — carved line, deep violet
+l #bfe3b0 mural paint — leaf glyph green
+d #14532a grass shadow at the panel foot

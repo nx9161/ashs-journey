@@ -1,0 +1,26 @@
+# Wave T51 (Astral kit): ringstone — a weathered standing stone with a carved ring, one of the shrine ring's stones: the OLD SHRINE sign's own words ('Three small shrines in a ring of stones') and the Backstory Sync Audit's Astral row ('moon, star and leaf shrines in their stone ring'), realized as dressing at the shrine plaza's north gate — the pair flanks the plaza avenue's entry; the shipped shrine/stonebell/originstone dressing stands byte-kept where the backend put it, and no shrine figure or event is invented. Fully opaque: the town grass is baked in at the MEASURED tg-celestic colours (#1b812b base, #1b4b2b speckle). (WAVE-T51-ASTRAL-PLAN.md §5.)
+PIX tile-prop-ringstone 16 16
+GgggggssssggGggg
+gGgggssSSssggGgg
+ggGggsSSSSsgggGg
+gggGgsSssSsggggG
+ggggGsSrrSsggggg
+gggggsSrRrSsgggg
+GggggsSrrSsgGggg
+gGgggsSssSsggGgg
+ggGggsSSSSsgggGg
+gggGgssSSssggggG
+ggggGgsssgGggggg
+gggggGssssgGgggg
+GggggssssssgGggg
+gGgddggGgggddGgg
+ggGgggggGgggggGg
+gggGgggggGgggggG
+PAL
+g #1b812b town grass — measured tg-celestic base
+G #1b4b2b town grass speckle — measured tg-celestic
+s #6e6484 standing stone — weathered grey violet, shaded edge
+S #948bad standing stone — weathered grey violet face
+r #57496e carved ring — shadow line
+R #d9d0ee carved ring — lit inner edge
+d #14532a grass shadow at the stone foot
