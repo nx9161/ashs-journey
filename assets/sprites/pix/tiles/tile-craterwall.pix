@@ -1,0 +1,30 @@
+# Wave T37 (Craterlake kit): craterwall — the facade cottages'
+# wall kind. CRATER-WHITE STONE WALL: the ashlar's wall face —
+# a pale trim course at the crown, larger crater-stone blocks
+# (#e6e1d5 body, #b0aa9c seams) in offset courses, a shaded
+# base course at the foot, so a cottage reads as one crater-
+# stone building under its craterroof. (NO-SAME-KIT law;
+# WAVE-T37-CRATERLAKE-PLAN.md.)
+PIX tile-craterwall 16 16
+llllllllllllllll
+lllslllslllsllls
+swwwwwswwwwwswww
+swwwwwswwwwwswww
+swwawwswwwwwswww
+ssssssssssssssss
+wwwswwwwwswwwwws
+wwwswwwwwswwwwws
+wwwswwawwswwwwws
+ssssssssssssssss
+swwwwwswwwwwswww
+swwwwwswwwwwswww
+swwwwwswwawwswww
+ssssssssssssssss
+dddddddddddddddd
+dddddddddddddddd
+PAL
+w #e6e1d5 wall-body
+l #f4f1ea trim-course
+s #b0aa9c wall-seam
+d #a39d8f base-course
+a #8a8478 ash-fleck

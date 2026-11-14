@@ -1507,6 +1507,42 @@ T36_KIND_DEFS.forEach(([kind], i) => {
 export const T36_PROP_KINDS = T36_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
 export const T36_WALL_KINDS = T36_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
 export const T36_FLOOR_KINDS = T36_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
+// Wave T37: Craterlake City's own kit — "Crater Ashlar &
+// Ventstone": the craterroof (coursed crater-white ashlar, worn
+// by the Gym and the town's two facade cottages), the
+// craterfloor (white crater sett with ash-drifted grout — the
+// registered street material of the front street, the cave
+// avenue, the spokes and the lake ring), the craterwall (the
+// cottages' crater-stone wall face), the easel (the painter's
+// easel on the lake's east shore, beside CASPIAN FAN RUE's post)
+// and the ventstone (a crater boulder pierced by a round vent
+// mouth, at the rim ledge's two ends). Indices 720-724 per the
+// Director's index ruling (main's kinds run 594-636 + 645-648 +
+// 660-662 + 672-675 + 684-687 + 696-699; the parallel T36
+// Starfall claim holds 708-711 on its branch; 606-607 + 637-644
+// + 649-659 + 663-671 + 676-683 + 688-695 + 700-707 + 712-719
+// stay empty), verified free against origin/main, TILE_CHARS
+// and every map row. Authored art:
+// assets/sprites/pix/tiles/tile-craterroof.pix,
+// tile-craterfloor.pix, tile-craterwall.pix,
+// tile-prop-painteasel.pix, tile-prop-ventstone.pix.
+// (WAVE-T37-CRATERLAKE-PLAN.md.)
+export const T37_KIND_DEFS = [
+  ['craterroof', 'wall'],
+  ['craterfloor', 'floor'],
+  ['craterwall', 'wall'],
+  ['painteasel', 'prop'],
+  ['ventstone', 'prop'],
+];
+export const T37_KIND_CHARS = {};
+T37_KIND_DEFS.forEach(([kind], i) => {
+  const ch = String.fromCodePoint(0x1E00 + 720 + i);
+  T37_KIND_CHARS[kind] = ch;
+  TILE_CHARS[ch] = kind;
+});
+export const T37_PROP_KINDS = T37_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
+export const T37_WALL_KINDS = T37_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
+export const T37_FLOOR_KINDS = T37_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
 export const SINNOH_TOWN_GROUND_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg);
 export const SINNOH_TOWN_GROUND2_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg2);
 // TX-3: the 8 gym exteriors by town (original type-accent motifs).

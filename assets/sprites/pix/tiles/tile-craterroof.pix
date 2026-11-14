@@ -1,0 +1,33 @@
+# Wave T37 (Craterlake kit): craterroof — Craterlake City's own
+# roof kind. CRATER-WHITE ASHLAR: pale crater-stone blocks
+# (#e6e1d5 body, #f4f1ea lit crowns, #b0aa9c seams — the town
+# style's own roof register) in offset courses of three, ash
+# flecks and a rare dark vent dot in the stone. Coursed ashlar
+# is structurally unlike Lastlight's flat parapet slab, Lotus
+# Cove's scalloped barrel tile, Steamspring's ridged clay
+# barrel and the Gym's banded slab. Worn by the Gym and the
+# town's two facade cottages. (NO-SAME-KIT law;
+# WAVE-T37-CRATERLAKE-PLAN.md.)
+PIX tile-craterroof 16 16
+sllllsllllslllls
+swwwwswwwwswwwws
+ssssssssssssssss
+lllsllllsllllsll
+wwwswwwwswawwsww
+ssssssssssssssss
+sllllsllllslllls
+swwwwswwwwswwwws
+ssssssssssssssss
+lllsllllsllllsll
+wwwswwwwswwwwsww
+ssssssssssssssss
+sllllsllllslllls
+swwwwswwwwswwwas
+ssssssssssssssss
+lllsllllsllllsll
+PAL
+w #e6e1d5 ashlar-body
+l #f4f1ea ashlar-crown
+s #b0aa9c ashlar-seam
+a #8a8478 ash-fleck
+v #6e6a60 vent-dot

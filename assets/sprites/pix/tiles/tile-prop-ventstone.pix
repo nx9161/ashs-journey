@@ -1,0 +1,34 @@
+# Wave T37 (Craterlake kit): ventstone — a crater vent stone:
+# a white crater boulder pierced by one round dark vent
+# mouth, ash flecks in the stone — the approved painting's
+# signature rim geology. Two stand at the rim ledge's ends,
+# flanking the north stamp row at the cliff foot. Fully
+# opaque: the town grass it stands on is baked in (measured
+# #2a9327 off the shipped render). (NO-SAME-KIT law;
+# WAVE-T37-CRATERLAKE-PLAN.md.)
+PIX tile-prop-ventstone 16 16
+ggdggggggggggggg
+ggggggggggdggggg
+gggggggggggggggg
+gggggllllllggggg
+ggggllllllllgggg
+ggglwwwwwwwwsggg
+ggglwwwwawwwsggg
+ggglwwwvvwwwsggg
+ggglwwvkkvwwsggg
+ggglwwwvvwwwsggg
+ggglwawwwwwwsggg
+gggswwwwwwwwsggg
+ggggssssssssgggg
+ggggddddddddgggg
+gggggggggggggggg
+ggggggdggggggggg
+PAL
+g #2a9327 town-grass
+d #257c20 grass-shade
+l #f4f1ea stone-lit
+w #e6e1d5 stone-body
+s #b0aa9c stone-shade
+a #a39d8f ash-fleck
+v #4a463e vent-ring
+k #17150f vent-core

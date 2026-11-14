@@ -587,6 +587,16 @@ export const WALKABLE = new Set(['.', ',', 'D', 'E', 'C', 'F', 'J', 'K', '1', '2
   // 594-636 + 645-648 + 660-662 + 672-675 + 684-687; 606-607
   // stay empty, 688-707 left clear.)
   ...[709, 710]
+    .map((i) => String.fromCodePoint(0x1E00 + i)),
+  // Wave T37: the craterfloor char (U+1E00+721, tiles.mjs
+  // T37_KIND_DEFS) is walkable street material — Craterlake
+  // City's white crater sett, swapped onto the town's street
+  // cells (which shipped as walkable tg2 mud and walkable
+  // ground), so floor stays floor. (Indices 720-724 per the
+  // Director's index ruling: main's kinds run 594-636 +
+  // 645-648 + 660-662 + 672-675 + 684-687 + 696-699; the
+  // parallel T36 claim holds 708-711; 712-719 stay empty.)
+  ...[721]
     .map((i) => String.fromCodePoint(0x1E00 + i))]);
 
 // Trainer definitions for the slice.

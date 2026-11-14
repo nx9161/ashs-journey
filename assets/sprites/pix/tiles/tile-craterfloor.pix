@@ -1,0 +1,33 @@
+# Wave T37 (Craterlake kit): craterfloor — Craterlake City's
+# registered street kind (the fleet's street kinds carry the
+# -floor suffix; the desire-path tiers key on it). WHITE
+# CRATER SETT: rough white crater-stone setts in a tight dark
+# ash grout grid, grey ash drifted into the joints and flecked
+# across the faces — the painting's white ring streets. A
+# rough small-block white sett is structurally unlike
+# Lastlight's smooth veined marble slabs, Cragmoor's dark
+# basalt sett (the same grammar in black) and Blossom's large
+# inlay slabs. (NO-SAME-KIT law; WAVE-T37-CRATERLAKE-PLAN.md.)
+PIX tile-craterfloor 16 16
+awwgwwwawwwgwlwg
+wwwgdlwgwwwgwwwg
+gggaggggggaggggg
+wwagwwwgwwwgdwwa
+wwwgwwwgwwwgwwwg
+ggggaggggggagggg
+wwwgawwgwwwgwwwg
+wwwgwwwawlwgwwwg
+gggggaggggggaggg
+wwdawwagwwwgwwwg
+wwwgwwdgwwwgwwwa
+ggggggaggggggagg
+wwwgwwwgawwawwdg
+ldwgwwwgwwwgwlwg
+aggggggaggggggag
+wwwgwwwgwdagwwwg
+PAL
+w #ddd7c9 sett-body
+l #eae5d8 sett-lit
+d #c4beae sett-shade
+g #8a8478 ash-grout
+a #a39d8f ash-drift

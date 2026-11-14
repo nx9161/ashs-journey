@@ -1,0 +1,37 @@
+# Wave T37 (Craterlake kit): painteasel — the gym leader's painting
+# easel, standing on the crater lake's east shore beside
+# CASPIAN FAN RUE's post (her byte-kept words: 'Our gym
+# leader paints battles the way the lake paints mornings';
+# the approved painting shows it on the shore). A timber
+# A-frame easel holding a pale canvas — a lake-blue horizon
+# stroke and one dark diver's mark — with a paint box at its
+# foot. Fully opaque: the town grass it stands on is baked
+# in (measured #2a9327 off the shipped render).
+# (NO-SAME-KIT law; WAVE-T37-CRATERLAKE-PLAN.md.)
+PIX tile-prop-painteasel 16 16
+ggdgggggggggdggg
+ggggggdggggggggg
+ggggkkkkkkkkgggg
+ggggkcccccckgggg
+ggggkcccccckgggg
+ggggkccnccckgggg
+ggggkcccccckgggg
+ggggkbbbbbbkgggg
+ggggkcccccckgggg
+ggggkcccccckgggg
+ggggkkkkkkkkgggg
+gggggtggtgtggggg
+ggggtgggtggtgggg
+ggggtgrybngtgggg
+ggggtgttttgtgggg
+gggddddddddddggg
+PAL
+g #2a9327 town-grass
+d #257c20 grass-shade
+k #5f4f33 dark-timber
+t #a08b62 timber
+c #f4f1ea canvas
+b #7fa8c8 lake-stroke
+n #33526e deep-stroke
+r #c85a4a paint-red
+y #e8c85a paint-gold
