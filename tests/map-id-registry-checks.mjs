@@ -119,7 +119,7 @@ const BASELINE = {
   "league": ['D', 'maps2.mjs:426a8945', 'maps3.mjs:9388d38b'],
   "mansion": ['D', 'maps2.mjs:6036b681', 'maps3.mjs:0b89e84d'],
   "newisland": ['D', 'maps2.mjs:06f895d7', 'maps3.mjs:87e908ce', 'maps4.mjs:0a2b629f'],
-  "pallet": ['D', 'maps.mjs:d450da1c', 'maps2.mjs:a59018a8', 'maps3.mjs:ac805bba'],
+  "pallet": ['D', 'maps.mjs:d450da1c', 'maps2.mjs:a59018a8', 'maps3.mjs:576cb57e'],
   "pewter": ['D', 'maps.mjs:f1285ecb', 'maps2.mjs:e0c38364'],
   "powerplant": ['D', 'maps2.mjs:7ce38a29', 'maps3.mjs:f19569a9'],
   "rocktunnel": ['D', 'maps2.mjs:474d1700', 'maps3.mjs:a4e228fb'],
