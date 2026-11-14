@@ -619,6 +619,44 @@
 //     (lavender <-> cherrygrove, audit census): 0.2003 ->
 //     0.3597, fleet rank #363 -> #666 of 2,016; control pair
 //     blackthorn <-> silvertown 0.3109 unmoved.
+//     TWENTY-NINTH DOCUMENTED EXCEPTION (WAVE T31): the
+//     registry grows by one scoped entry — olivine:
+//     [harbourfloor, jettyfloor] (the slateport two-material
+//     precedent) — and olivine's pin migrates FAIL -> PASS:
+//     the Beacon City rebuild on the owner's daylight ruling
+//     (WAVE-T31-BEACON-PLAN.md). The shipped town FAILED on
+//     connectivity alone (72/110): the Route 40 crossing's
+//     exits AND landings stood on open water (surf cells,
+//     walk=false, in no tier), so the west door connected to
+//     nothing on foot. The T31 build lays the town's own kit
+//     ('Gleam Lamp & Harbour Plank', idx 645-648: beaconroof
+//     standing-seam roofs, harbourfloor bolted decking,
+//     jettyfloor tarred battens, the lampglass lamp) as its
+//     street fabric — front street, spine, shore road, the
+//     r39 head — and builds the landfall a six-cell jetty at
+//     the bay's east shore plus its shore link: the crossing
+//     lands on the jetty, connectivity 110/110. The 180-cell
+//     tg2 mud web (26.5%) is retired to calm tg; the five
+//     invisible DIRS sign posts gain their tiles (words
+//     byte-identical) + four verbatim copies at the
+//     validator-named junctions; the orphaned MART CLERK
+//     re-seats (3,5) -> (9,4) west of his Mart's west via;
+//     the fleet anchors as four shipped boat props on harbour
+//     water; the storm-night tale, both captains, ADA and
+//     JOSS, all warps, stamps and encounters byte-kept (the
+//     tale is retold through dialogue + signs, per the
+//     ruling — the town itself is built in daylight).
+//     Tuple migration: [0, 72, 110, 7, 7, 1, 9, 0, 0, 0.929,
+//     0, 0, 0, 0, 0.9134, 0.9864] -> [1, 110, 110, 7, 7, 1,
+//     11, 0, 0, 0.857, 0, 0, 0, 0, 0.6186, 0.9819]: conn
+//     72/110 -> 110/110, junctions 9 -> 11 all covered,
+//     strict 0.9134 -> 0.6186 (the tg2 desire web was strict
+//     tier by definition; the deck streets carry the same
+//     lines at the honest CLEAN measure — every CLEAN town
+//     reads 0.62-0.93), fabric 0.9864 -> 0.9819, apron min
+//     0.929 -> 0.857 (the lighthouse ring re-measured with
+//     its lamp crown; no building below 60%, none merged).
+//     NO other town's pin moves.
 
 import { loadMaps, makeTiers, townSetOf, analyzeMap } from '../scripts/audit-desire-paths.mjs';
 import { scoreTown, gateCheck, tiersFor, STREET_REGISTRY } from '../scripts/audit-placement.mjs';
@@ -645,8 +683,8 @@ async function gateTuple(id, t) {
 }
 
 // 1. registry scope lock
-ok('street registry is exactly { vermilion: [boardwalk], blackthorn: [settfloor], silvertown: [marblefloor], ecruteak: [wornfloor], saffron: [avenuefloor], violet: [violetfloor], azalea: [brickfloor], mahogany: [gravelfloor], rustboro: [cutstonefloor], fuchsia: [marshfloor], cianwood: [driftfloor], dewford: [plankfloor], viridian: [slatefloor], celadon: [promfloor], slateport: [quayfloor, boardwalk], cerulean: [pierfloor], mauville: [gridfloor], lavender: [shinglefloor], cherrygrove: [inlayfloor], verdanturf: [petalfloor, cavefloor] }',
-  JSON.stringify(STREET_REGISTRY) === '{"vermilion":["boardwalk"],"blackthorn":["settfloor"],"silvertown":["marblefloor"],"ecruteak":["wornfloor"],"saffron":["avenuefloor"],"violet":["violetfloor"],"azalea":["brickfloor"],"mahogany":["gravelfloor"],"rustboro":["cutstonefloor"],"fuchsia":["marshfloor"],"cianwood":["driftfloor"],"dewford":["plankfloor"],"viridian":["slatefloor"],"celadon":["promfloor"],"slateport":["quayfloor","boardwalk"],"cerulean":["pierfloor"],"mauville":["gridfloor"],"lavender":["shinglefloor"],"cherrygrove":["inlayfloor"],"verdanturf":["petalfloor","cavefloor"]}',
+ok('street registry is exactly { vermilion: [boardwalk], blackthorn: [settfloor], silvertown: [marblefloor], ecruteak: [wornfloor], saffron: [avenuefloor], violet: [violetfloor], azalea: [brickfloor], mahogany: [gravelfloor], rustboro: [cutstonefloor], fuchsia: [marshfloor], cianwood: [driftfloor], dewford: [plankfloor], viridian: [slatefloor], celadon: [promfloor], slateport: [quayfloor, boardwalk], cerulean: [pierfloor], mauville: [gridfloor], lavender: [shinglefloor], cherrygrove: [inlayfloor], verdanturf: [petalfloor, cavefloor], olivine: [harbourfloor, jettyfloor] }',
+  JSON.stringify(STREET_REGISTRY) === '{"vermilion":["boardwalk"],"blackthorn":["settfloor"],"silvertown":["marblefloor"],"ecruteak":["wornfloor"],"saffron":["avenuefloor"],"violet":["violetfloor"],"azalea":["brickfloor"],"mahogany":["gravelfloor"],"rustboro":["cutstonefloor"],"fuchsia":["marshfloor"],"cianwood":["driftfloor"],"dewford":["plankfloor"],"viridian":["slatefloor"],"celadon":["promfloor"],"slateport":["quayfloor","boardwalk"],"cerulean":["pierfloor"],"mauville":["gridfloor"],"lavender":["shinglefloor"],"cherrygrove":["inlayfloor"],"verdanturf":["petalfloor","cavefloor"],"olivine":["harbourfloor","jettyfloor"]}',
   JSON.stringify(STREET_REGISTRY));
 
 // 2. census: the 64 towns of townSetOf (pallet included)
@@ -706,7 +744,7 @@ const PIN = {
   "navel": [0, 30, 90, 6, 6, 1, 5, 0, 1, 0.588, 0, 0, 0, 0, 0.9418, 0.9418],
   "newbark": [1, 72, 72, 7, 7, 1, 5, 0, 0, 0.857, 0, 0, 0, 0, 0.7385, 0.9913],
   "oldale": [1, 110, 110, 5, 5, 1, 11, 0, 0, 0.857, 0, 0, 0, 1, 0.6991, 0.9821],
-  "olivine": [0, 72, 110, 7, 7, 1, 9, 0, 0, 0.929, 0, 0, 0, 0, 0.9134, 0.9864],
+  "olivine": [1, 110, 110, 7, 7, 1, 11, 0, 0, 0.857, 0, 0, 0, 0, 0.6186, 0.9819],
   "oreburgh": [1, 182, 182, 8, 8, 1, 1, 0, 0, 0.714, 0, 0, 0, 0, 0.9985, 1],
   "pacifidlog": [0, 12, 30, 4, 4, 1, 0, 0, 0, 0.75, 0, 0, 0, 0, 0.9367, 0.9367],
   "pallet": [1, 90, 90, 6, 6, 1, 5, 0, 0, 0.643, 0, 0, 0, 0, 0.9463, 0.9945],
