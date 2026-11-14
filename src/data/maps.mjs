@@ -790,6 +790,21 @@ export const WALKABLE = new Set(['.', ',', 'D', 'E', 'C', 'F', 'J', 'K', '1', '2
   // 804-807 + 816-819 + 828-831 + 840-843 + 852-855 + 864-868 +
   // 876-879 + 888-891 (T51); 892-899 stay empty.)
   ...[900]
+    .map((i) => String.fromCodePoint(0x1E00 + i)),
+  // Wave T53: the panelfloor char (U+1E00+912, tiles.mjs
+  // T53_KIND_DEFS) is walkable street material — Brightshore
+  // City's golden solar-panel grid, swapped onto the town's
+  // tg2 street cells (the front street, the north road, the
+  // central avenue, the main street, the shore connector +
+  // shore road, the lighthouse lane and the exit/landing
+  // cells — all shipped walkable as tg2), so floor stays
+  // floor. (Indices 912-915 per the Director's index ruling:
+  // main's kinds run 594-636 + 645-648 + 660-662 + 672-675 +
+  // 684-687 + 696-699 + 708-711 + 720-724 + 732-736 + 744-748 +
+  // 756-759 + 768-771 + 780-783 + 792-795 + 804-807 + 816-819 +
+  // 828-831 + 840-843 + 852-855 + 864-868 + 876-879 + 888-891;
+  // the parallel T52 claim holds 900-903; 904-911 stay empty.)
+  ...[912]
     .map((i) => String.fromCodePoint(0x1E00 + i))]);
 
 // Trainer definitions for the slice.

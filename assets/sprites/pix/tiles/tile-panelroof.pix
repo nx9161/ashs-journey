@@ -1,0 +1,24 @@
+# Wave T53 (Brightshore kit): panelroof — worn by the shipped Brightshore Gym stamp's tr roof cells + the wave's facade cottage, so the town's civic buildings wear the town's own register: AMBER PANEL SHINGLES, offset courses of deep-amber panels seamed in solar blue with sparse glint flecks — the approved painting's panel roofs in the Mart's blue-seamed register. OFFSET COURSES + BLUE SEAMS: unlike the street panelfloor's strict golden grid, Astral's duskroof (violet shingle courses, no panel grid), Fenland's boardroof (vertical board courses), Honeyfield's bloomroof (petal scales). (NO-SAME-KIT law; WAVE-T53-BRIGHTSHORE-PLAN.md §5.)
+PIX tile-panelroof 16 16
+lllllllsllllllls
+aaaaaaasdaaaaaas
+aaaaaaasaaaaaaas
+ssssssssssssssss
+lllslllllllsllll
+aaasaaaaaaasaaaa
+aadsaaaaaaasaaaa
+ssssssssssssssss
+lllllllsllllllls
+awadaaasaaaaaaas
+aaaaaaasaaadaaas
+ssssssssssssssss
+lllslllllllsllll
+aaasaawaaaasdaaa
+aaasaaaaaaasaaaa
+ssssssssssssssss
+PAL
+a #d98a26 panel shingle — deep amber
+d #c1761c panel shingle — grain tone
+l #f0a83e course top — lit edge
+s #2a4a8a solar-blue seam
+w #ffe9a0 glint fleck

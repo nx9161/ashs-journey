@@ -1,0 +1,26 @@
+# Wave T53 (Brightshore kit): coilcradle — the tale's spare coil on its cradle: three copper rings wound on a wooden A-frame cradle at the Lighthouse's east shoulder (7,12). A recorded-beat dressing realization (the T50 bogeyes / T51 mural precedent): tale_sinnoh_sunnyshore 'The Coil in the Lighthouse' + its resolution name the spare coil, tuned to the beacon's new frequency; dressed here as dressing only — no actor, no dialogue, no event. Fully opaque; the town grass is baked in at its measured colours (#2e8f12 / #2e5912). COPPER RINGS ON A CRADLE: unlike any shipped prop (Bridgeport's harbourbell, Repose's eggbasket, Inglenook's poffintin). (NO-SAME-KIT law; WAVE-T53-BRIGHTSHORE-PLAN.md §5.)
+PIX tile-prop-coilcradle 16 16
+GgggggggggggGggg
+gggggggGgggggggg
+ggGgggggggggggGg
+gggggggggGgggwgg
+ggggGggggggggggg
+gggcCkcCkcCkcCgg
+gggckgckgckgkcgg
+gGgCkgCkgCkgkcgg
+gggcCkcCkcCkcCgg
+gggGgggggggggggG
+gggddddddddddggg
+gggdgGggggggdggg
+GgggdggggggdGggg
+ggggdggGgggdgggg
+ggGggdggggdgggGg
+ggdGddGddGddGdgg
+PAL
+g #2e8f12 town grass — measured flat
+G #2e5912 town grass — measured speckle
+d #5a3a20 cradle — wood
+c #b56a32 coil — copper
+C #e09a52 coil — copper highlight
+k #7a4218 coil — bore shadow
+w #fff3b0 hum fleck

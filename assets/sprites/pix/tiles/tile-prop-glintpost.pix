@@ -1,0 +1,26 @@
+# Wave T53 (Brightshore kit): glintpost — a panel-tech marker post: a slim dark post topped with a small tilted solar panel (amber frame, solar-blue face) catching one bright glint. The pair flanks the central avenue at the front street (12,5) + (15,5) — the approved painting's roadside panel posts at PANEL TECH JUNIPER's avenue. Fully opaque; the town grass is baked in at its measured colours (#2e8f12 flat / #2e5912 speckle — tg-sunnyshore's shipped render, NOT the TOWN_STYLE note). A POST WITH A PANEL HEAD: unlike Fenland's bogeyes (eyes at water level), Bridgeport's harbourbell (a bell on a frame), Rimefall's stonelantern (a stone lantern). (NO-SAME-KIT law; WAVE-T53-BRIGHTSHORE-PLAN.md §5.)
+PIX tile-prop-glintpost 16 16
+GgggggggggggGggg
+ggggggffffffffgg
+ggGggfppPppPfgGg
+gggggfpwPppPfggg
+ggggfppPppPfgggg
+ggggffffffffgggg
+ggggggGddggggggg
+gGgggggddggggGgg
+gggggggddggggggg
+gggGgggddggggggG
+gggggggddgGggggg
+gggggGgddggggggg
+GggggggddgggGggg
+gggggggddggggggg
+ggGggggddgggggGg
+gggggGddddGggggg
+PAL
+g #2e8f12 town grass — measured flat
+G #2e5912 town grass — measured speckle
+d #3a2a1a post — dark timber
+f #8a5a16 panel frame — amber-dark
+p #2a4a8a panel face — solar blue
+P #4a7ac0 panel face — cell line
+w #fff3b0 the glint

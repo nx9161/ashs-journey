@@ -1,0 +1,24 @@
+# Wave T53 (Brightshore kit): panelfloor — Brightshore City's registered street kind (the fleet's street kinds carry the -floor suffix; the desire-path tiers key on it). GOLDEN PANEL GRID: strict 8px photovoltaic slabs in amber-gold with dark seams, a lit lip under each seam, fine busbar tones and one bright glint cross per tile — the solar city's roads are panels that permit feet (PANEL TECH JUNIPER's line is the design brief). A RIGID MANUFACTURED GRID: unlike Revelry's beamfloor (grey steel plate), Bridgeport's ringfloor (grey ringed quay stone), Fenland's walkfloor (pegged timber planks), Astral's moonfloor (pale lavender flags), Rimefall's rimefloor (grooved packed snow). (NO-SAME-KIT law; WAVE-T53-BRIGHTSHORE-PLAN.md §5.)
+PIX tile-panelfloor 16 16
+ssssssssssssssss
+slllllllsllllwll
+saabaaabsbbbwwwb
+saabaaabsbbbbwbb
+saabaaabsbbbbbbb
+saabaaabsbbbbbbb
+saabaaabsbbbbbbb
+saabaaabsbbbbbbb
+ssssssssssssssss
+slllllllslllllll
+sbbbbbbbsaabaaab
+sbbbbbbbsaabaaab
+sbbbbbbbsaabaaab
+sbbbbbbbsaabaaab
+sbbbbbbbsaabaaab
+sbbbbbbbsaabaaab
+PAL
+a #f2b63c panel amber — sunlit slab
+b #e3a42c panel amber — busbar tone
+l #ffd166 panel lip — lit edge
+s #8a5a16 panel seam — dark
+w #fff3b0 glint cross — bright

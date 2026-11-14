@@ -2068,6 +2068,48 @@ T52_KIND_DEFS.forEach(([kind], i) => {
 export const T52_PROP_KINDS = T52_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
 export const T52_WALL_KINDS = T52_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
 export const T52_FLOOR_KINDS = T52_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
+// Wave T53 — Brightshore City kit 'Solar Panel & Amber Glint': the
+// panelfloor (a strict golden photovoltaic slab grid with dark
+// seams, a lit lip, busbar tones and one glint cross per tile —
+// the solar city's roads are panels that permit feet; a rigid
+// manufactured grid, unlike Revelry's grey steel beamfloor,
+// Bridgeport's grey ringed quay stone, Fenland's pegged timber
+// planks, Astral's lavender moonstone flags and Rimefall's
+// grooved packed snow), the panelroof (offset courses of
+// deep-amber panels seamed in solar blue with sparse glint
+// flecks — worn by the Gym + the facade cottage, breaking the
+// Gym + Lighthouse tr-sunnyshore roof share; the Lighthouse
+// keeps tr), the glintpost (a slim post topped with a small
+// tilted solar panel catching one glint — the avenue pair) and
+// the coilcradle (the tale's spare coil, three copper rings on
+// a wooden cradle at the Lighthouse's east shoulder — a
+// recorded-beat dressing realization, dressing only).
+// Indices 912-915 per the Director's index ruling (main's kinds
+// run 594-636 + 645-648 + 660-662 + 672-675 + 684-687 + 696-699 +
+// 708-711 + 720-724 + 732-736 + 744-748 + 756-759 (T40) + 768-771
+// (T41) + 780-783 (T42) + 792-795 (T43) + 804-807 (T44) + 816-819
+// (T45) + 828-831 (T46) + 840-843 (T47) + 852-855 (T48) +
+// 864-868 (T49) + 876-879 (T50) + 888-891 (T51) + 900-903 (T52,
+// on its branch awaiting merge); 904-911 stay empty), verified
+// free against origin/main df3b8d33, TILE_CHARS and every map
+// row. Authored art: assets/sprites/pix/tiles/tile-panelfloor.pix,
+// tile-panelroof.pix, tile-prop-glintpost.pix,
+// tile-prop-coilcradle.pix. (WAVE-T53-BRIGHTSHORE-PLAN.md.)
+export const T53_KIND_DEFS = [
+  ['panelfloor', 'floor'],
+  ['panelroof', 'wall'],
+  ['glintpost', 'prop'],
+  ['coilcradle', 'prop'],
+];
+export const T53_KIND_CHARS = {};
+T53_KIND_DEFS.forEach(([kind], i) => {
+  const ch = String.fromCodePoint(0x1E00 + 912 + i);
+  T53_KIND_CHARS[kind] = ch;
+  TILE_CHARS[ch] = kind;
+});
+export const T53_PROP_KINDS = T53_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
+export const T53_WALL_KINDS = T53_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
+export const T53_FLOOR_KINDS = T53_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
 export const SINNOH_TOWN_GROUND_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg);
 export const SINNOH_TOWN_GROUND2_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg2);
 // TX-3: the 8 gym exteriors by town (original type-accent motifs).
