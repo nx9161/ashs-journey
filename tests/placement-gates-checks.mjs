@@ -881,6 +881,38 @@
 //     facade cottages re-measured on their lawns; no
 //     building below 60%, none merged). NO other town's
 //     pin moves.
+//     THIRTY-FIFTH DOCUMENTED EXCEPTION (WAVE T37; the
+//     THIRTY-FOURTH is WAVE T36 Starfall's, landing at its
+//     merge): the registry grows by one scoped entry —
+//     sootopolis: [craterfloor, cavefloor] (the verdanturf
+//     two-material terms: the kit street + the shipped
+//     cave-mouth threshold material) — and sootopolis's pin
+//     migrates FAIL -> PASS: the Craterlake rebuild on its
+//     own kit from birth ('Crater Ashlar & Ventstone', idx
+//     720-724: coursed crater-white ashlar craterroof,
+//     craterwall cottage walls, white crater sett
+//     craterfloor streets, the painteasel on the lake's
+//     east shore, ventstones at the rim ledge's ends) per
+//     WAVE-T37-CRATERLAKE-PLAN.md. The shipped town FAILED
+//     the apron gate alone: [0, 30, 30, 6, 6, 1, 3, 0, 1,
+//     0.588, 0, 0, 0, 0, 0.9831, 0.9834] -> [1, 30, 30, 6,
+//     6, 1, 7, 0, 0, 0.857, 0, 0, 0, 0, 0.7635, 0.981]:
+//     conn 30/30 unmoved, junctions 3 -> 7 sites all
+//     covered (the two shipped invisible DIRS posts gain
+//     tiles; three verbatim copies at validator-named bare
+//     junctions), strict 0.9831 -> 0.7635 (the tg2 web was
+//     strict tier by definition; the crater sett carries
+//     the same lines at the honest CLEAN measure — every
+//     CLEAN town reads 0.62-0.93), fabric 0.9831 -> 0.981
+//     (the mud web's blanket measure against the ring
+//     streets + lawn desire lines, inside the same band),
+//     apron min 0.588 -> 0.857 (the rim ledge: the row-1
+//     rock band behind the stamps becomes crater floor —
+//     the Center's ring 10/17 -> 16/17 on real walkable
+//     cells, the W4 sign-face classifier ruling untouched;
+//     the min is the east facade cottage's ring). The
+//     orphaned MART CLERK re-seats (3,5) -> (9,4); tg2
+//     cells 116 -> 0. NO other town's pin moves.
 
 import { loadMaps, makeTiers, townSetOf, analyzeMap } from '../scripts/audit-desire-paths.mjs';
 import { scoreTown, gateCheck, tiersFor, STREET_REGISTRY } from '../scripts/audit-placement.mjs';
@@ -907,8 +939,8 @@ async function gateTuple(id, t) {
 }
 
 // 1. registry scope lock
-ok('street registry is exactly { vermilion: [boardwalk], blackthorn: [settfloor], silvertown: [marblefloor], ecruteak: [wornfloor], saffron: [avenuefloor], violet: [violetfloor], azalea: [brickfloor], mahogany: [gravelfloor], rustboro: [cutstonefloor], fuchsia: [marshfloor], cianwood: [driftfloor], dewford: [plankfloor], viridian: [slatefloor], celadon: [promfloor], slateport: [quayfloor, boardwalk], cerulean: [pierfloor], mauville: [gridfloor], lavender: [shinglefloor], cherrygrove: [inlayfloor], verdanturf: [petalfloor, cavefloor], olivine: [harbourfloor, jettyfloor], fallarbor: [ashfloor], lavaridge: [steamfloor, terracefloor], fortree: [canopyfloor, boardwalk], lilycove: [cobblefloor, cavefloor], mossdeep: [starfloor, dockfloor] }',
-  JSON.stringify(STREET_REGISTRY) === '{"vermilion":["boardwalk"],"blackthorn":["settfloor"],"silvertown":["marblefloor"],"ecruteak":["wornfloor"],"saffron":["avenuefloor"],"violet":["violetfloor"],"azalea":["brickfloor"],"mahogany":["gravelfloor"],"rustboro":["cutstonefloor"],"fuchsia":["marshfloor"],"cianwood":["driftfloor"],"dewford":["plankfloor"],"viridian":["slatefloor"],"celadon":["promfloor"],"slateport":["quayfloor","boardwalk"],"cerulean":["pierfloor"],"mauville":["gridfloor"],"lavender":["shinglefloor"],"cherrygrove":["inlayfloor"],"verdanturf":["petalfloor","cavefloor"],"olivine":["harbourfloor","jettyfloor"],"fallarbor":["ashfloor"],"lavaridge":["steamfloor","terracefloor"],"fortree":["canopyfloor","boardwalk"],"lilycove":["cobblefloor","cavefloor"],"mossdeep":["starfloor","dockfloor"]}',
+ok('street registry is exactly { vermilion: [boardwalk], blackthorn: [settfloor], silvertown: [marblefloor], ecruteak: [wornfloor], saffron: [avenuefloor], violet: [violetfloor], azalea: [brickfloor], mahogany: [gravelfloor], rustboro: [cutstonefloor], fuchsia: [marshfloor], cianwood: [driftfloor], dewford: [plankfloor], viridian: [slatefloor], celadon: [promfloor], slateport: [quayfloor, boardwalk], cerulean: [pierfloor], mauville: [gridfloor], lavender: [shinglefloor], cherrygrove: [inlayfloor], verdanturf: [petalfloor, cavefloor], olivine: [harbourfloor, jettyfloor], fallarbor: [ashfloor], lavaridge: [steamfloor, terracefloor], fortree: [canopyfloor, boardwalk], lilycove: [cobblefloor, cavefloor], mossdeep: [starfloor, dockfloor], sootopolis: [craterfloor, cavefloor] }',
+  JSON.stringify(STREET_REGISTRY) === '{"vermilion":["boardwalk"],"blackthorn":["settfloor"],"silvertown":["marblefloor"],"ecruteak":["wornfloor"],"saffron":["avenuefloor"],"violet":["violetfloor"],"azalea":["brickfloor"],"mahogany":["gravelfloor"],"rustboro":["cutstonefloor"],"fuchsia":["marshfloor"],"cianwood":["driftfloor"],"dewford":["plankfloor"],"viridian":["slatefloor"],"celadon":["promfloor"],"slateport":["quayfloor","boardwalk"],"cerulean":["pierfloor"],"mauville":["gridfloor"],"lavender":["shinglefloor"],"cherrygrove":["inlayfloor"],"verdanturf":["petalfloor","cavefloor"],"olivine":["harbourfloor","jettyfloor"],"fallarbor":["ashfloor"],"lavaridge":["steamfloor","terracefloor"],"fortree":["canopyfloor","boardwalk"],"lilycove":["cobblefloor","cavefloor"],"mossdeep":["starfloor","dockfloor"],"sootopolis":["craterfloor","cavefloor"]}',
   JSON.stringify(STREET_REGISTRY));
 
 // 2. census: the 64 towns of townSetOf (pallet included)
@@ -985,7 +1017,7 @@ const PIN = {
   "slateport": [1, 90, 90, 6, 6, 1, 10, 0, 0, 0.857, 0, 0, 0, 0, 0.6244, 0.9974],
   "snowpoint": [1, 90, 90, 8, 8, 1, 3, 0, 0, 0.824, 0, 0, 0, 0, 0.998, 0.9983],
   "solaceon": [1, 110, 110, 7, 7, 1, 11, 0, 0, 0.938, 0, 0, 0, 0, 0.9226, 0.9948],
-  "sootopolis": [0, 30, 30, 6, 6, 1, 3, 0, 1, 0.588, 0, 0, 0, 0, 0.9831, 0.9834],
+  "sootopolis": [1, 30, 30, 6, 6, 1, 7, 0, 0, 0.857, 0, 0, 0, 0, 0.7635, 0.981],
   "sunnyshore": [1, 132, 132, 8, 8, 1, 3, 0, 0, 0.875, 0, 0, 0, 0, 0.9967, 0.9967],
   "survival-area": [1, 72, 72, 5, 5, 1, 1, 0, 0, 0.941, 0, 0, 0, 0, 1, 1],
   "trovita": [0, 30, 56, 6, 6, 1, 3, 0, 3, 0.563, 0, 0, 0, 0, 0.9466, 0.9466],
