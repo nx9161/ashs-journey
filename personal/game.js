@@ -3695,6 +3695,46 @@ T55_KIND_DEFS.forEach(([kind], i) => {
 const T55_PROP_KINDS = T55_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
 const T55_WALL_KINDS = T55_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
 const T55_FLOOR_KINDS = T55_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
+// Wave T56 (Palmside kit — Coral Flag & Pearl Stucco): the
+// town's own authored street kind (coralfloor — large fitted
+// coral-rose flags with cream grout on an offset grid, a paler
+// worn sheen at each flag's centre), one authored WALL kind
+// (pearlroof — smooth pearl-stucco slabs in the town style's
+// own family, roof #e8d9c4/#bfae94/#f7ecdc, worn by both villa
+// stamps' th cells + the wave's two facade cottages, breaking
+// the villas out of the sister-town sunnyshore family the whole
+// town shipped in), and two props: the sunlounger (a coral-
+// frame resort lounger with a folded towel — the pair rests on
+// PRIA's lawn, the town sign's 'softest beds' beat) and the
+// palmshade (a shade palm — the painting's palm shade, the
+// town's namesake dressing). Indices 948-951 per the Director's
+// index ruling (main's kinds run 594-636 + 645-648 + 660-662 +
+// 672-675 + 684-687 + 696-699 + 708-711 + 720-724 + 732-736 +
+// 744-748 + 756-759 (T40) + 768-771 (T41) + 780-783 (T42) +
+// 792-795 (T43) + 804-807 (T44) + 816-819 (T45) + 828-831
+// (T46) + 840-843 (T47) + 852-855 (T48) + 864-868 (T49) +
+// 876-879 (T50) + 888-891 (T51) + 900-903 (T52) + 912-915
+// (T53) + 924-927 (T54); the parallel T55 claim holds 936-939;
+// 940-947 stay empty), verified free against origin/main,
+// TILE_CHARS and every map row. Authored art:
+// assets/sprites/pix/tiles/tile-coralfloor.pix,
+// tile-pearlroof.pix, tile-prop-sunlounger.pix,
+// tile-prop-palmshade.pix. (WAVE-T56-PALMSIDE-PLAN.md.)
+const T56_KIND_DEFS = [
+  ['coralfloor', 'floor'],
+  ['pearlroof', 'wall'],
+  ['sunlounger', 'prop'],
+  ['palmshade', 'prop'],
+];
+const T56_KIND_CHARS = {};
+T56_KIND_DEFS.forEach(([kind], i) => {
+  const ch = String.fromCodePoint(0x1E00 + 948 + i);
+  T56_KIND_CHARS[kind] = ch;
+  TILE_CHARS[ch] = kind;
+});
+const T56_PROP_KINDS = T56_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
+const T56_WALL_KINDS = T56_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
+const T56_FLOOR_KINDS = T56_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
 const SINNOH_TOWN_GROUND_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg);
 const SINNOH_TOWN_GROUND2_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg2);
 // TX-3: the 8 gym exteriors by town (original type-accent motifs).
@@ -112152,6 +112192,78 @@ const ART = {
     "ggGgGGgggggGGgGg",
     "gggggggggGgggggg"
   ] },
+  "tile-coralfloor": { w: 16, h: 16, pal: {"a":"#d98a72","b":"#e2a184","c":"#cf7d64","w":"#eec0ab","d":"#c97a5f","g":"#ead9b8","s":"#d9c194"}, rows: [
+    "daaagbbbbbgaaaaa",
+    "aaaagbbbdbgaaaaa",
+    "aawagbbwbbgaaaaa",
+    "adwwgbwwwbsaawaa",
+    "aawasbbwbdgawwwa",
+    "aaaagbbbbbgaawaa",
+    "aadagbbbbbgaaaaa",
+    "sggggggsggggggsg",
+    "cccccccgaaaaagbb",
+    "cccdcccgaaaaagbb",
+    "cccwcccgaaadagwb",
+    "ccwwwccgaawaagww",
+    "cccwdccgawwwagwb",
+    "cccccccgaawadsbb",
+    "cccccccsaaaaagbb",
+    "gsggggggsggggggs"
+  ] },
+  "tile-pearlroof": { w: 16, h: 16, pal: {"a":"#f0e4d0","m":"#e8d9c4","l":"#f7ecdc","d":"#bfae94","p":"#e5b8a4"}, rows: [
+    "llllllllllllllll",
+    "aaaaaaaaapaaaaaa",
+    "aaaaaaaaapaaaaaa",
+    "aaaaaaaaaaalapaa",
+    "aaaaalaaapaaaaaa",
+    "dddddddddddddddd",
+    "mmmmmmmmmmmmmmmm",
+    "aaappaaaaaaaaaaa",
+    "aaaapaaaaalaaaaa",
+    "aaaalaaaaaaaaaaa",
+    "aaaapaaaaaaaaaaa",
+    "dddddddddddddddd",
+    "mmmmmmmmmmmmmmmm",
+    "mmmmpmmmmlmmmmmm",
+    "mmmlpmpmmmmmmmmm",
+    "mmmmmmmmmmmmmmmm"
+  ] },
+  "tile-prop-sunlounger": { w: 16, h: 16, pal: {"g":"#008100","G":"#003f00","f":"#d4695e","c":"#f7ecdc","s":"#e8b09a","t":"#ffffff"}, rows: [
+    "GgggggggggggGggg",
+    "gggggggGgggggggg",
+    "ggGgfctfftcfggGg",
+    "ggggfctcctcfgggg",
+    "ggggfccccccfgggg",
+    "ggggfccccccfgggg",
+    "ggggfccccccfgggg",
+    "gGggfccssccfgGgg",
+    "ggggfccssccfgggg",
+    "gggGfscsscsfgggG",
+    "ggggfccssccfgggg",
+    "ggggfccssccfgggg",
+    "GgggfccssccfGggg",
+    "ggggfccccccfgggg",
+    "ggGgffggggffggGg",
+    "gggggGGggGGggggg"
+  ] },
+  "tile-prop-palmshade": { w: 16, h: 16, pal: {"g":"#008100","G":"#003f00","d":"#1e5e28","m":"#2e7a34","l":"#54a048","t":"#9a7a52","r":"#7a5c38","n":"#6a4a2e"}, rows: [
+    "GgggggggggggGggg",
+    "gggggggGlggggggg",
+    "ggGllgglgggllgGg",
+    "gggggmgdlGmggggg",
+    "ggggmmdgddmmgggg",
+    "gggmggdgtdgGmggg",
+    "gglgggdnrnggglgg",
+    "glgggmgtggmggGlg",
+    "gggglggrGgglgggg",
+    "ggglgggtgggglggG",
+    "ggggggggrgGggggg",
+    "gggggGggtggggggg",
+    "GggGGGggrgggGggg",
+    "gggGGGgGgtgggggg",
+    "ggGggggggrggggGg",
+    "ggggggggrtrggggg"
+  ] },
   "partner-back-bob": { base: "partner-back", w: 64, h: 64, pal: {}, shiftY: 2 },
   "partner-front-bob": { base: "partner-front", w: 64, h: 64, pal: {}, shiftY: 2 },
   "abomasnow-back-bob": { base: "abomasnow-back", w: 64, h: 64, pal: {}, shiftY: 2 },
@@ -117554,6 +117666,9 @@ for (const k of T54_FLOOR_KINDS) TILE_ART[k] = 'tile-' + k;
 for (const k of T55_PROP_KINDS) TILE_ART[k] = 'tile-prop-' + k;
 for (const k of T55_WALL_KINDS) TILE_ART[k] = 'tile-' + k;
 for (const k of T55_FLOOR_KINDS) TILE_ART[k] = 'tile-' + k;
+for (const k of T56_PROP_KINDS) TILE_ART[k] = 'tile-prop-' + k;
+for (const k of T56_WALL_KINDS) TILE_ART[k] = 'tile-' + k;
+for (const k of T56_FLOOR_KINDS) TILE_ART[k] = 'tile-' + k;
 // Premium+ W6 (TX-3/PL-1): door-open frames, authored in TX-3 for every
 // door kind. The warp-fade engine that plays them lands in W7 — W6
 // wires the frames (this registry + cache.doorOpen + doorOpenCanvas)
@@ -119469,6 +119584,12 @@ function resolveTileLayers(cache, kind, x, y, kindAt, t, phase, mapId) {
     // colours).
     case 'cookpot':
     case 'chartstand':
+    // Wave T56: Palmside's sun loungers and its shade palms
+    // composite over their grass the same way (both arts are
+    // fully opaque — the town grass is baked in at its measured
+    // colours).
+    case 'sunlounger':
+    case 'palmshade':
     // Wave T17: the radio mast composites over its compound grass too.
     case 'radiomast': {
       // Object tiles carry transparent surrounds (Wave 1): lay the ground
@@ -126665,6 +126786,22 @@ const WALKABLE = new Set(['.', ',', 'D', 'E', 'C', 'F', 'J', 'K', '1', '2', 'V',
   // 888-891 + 900-903 + 912-915; the parallel T54 claim holds
   // 924-927; 928-935 stay empty.)
   ...[936]
+    .map((i) => String.fromCodePoint(0x1E00 + i)),
+  // Wave T56: the coralfloor char (U+1E00+948, tiles.mjs
+  // T56_KIND_DEFS) is walkable street material — Palmside's
+  // fitted coral-flag street, swapped onto the town's tg2
+  // street cells (the north lane, the front street, the west /
+  // centre / east lanes, the great road, the south lanes +
+  // street and the r226 / r227 / r228 / r229 exit cells — all
+  // shipped walkable as tg2), so floor stays floor. (Indices
+  // 948-951 per the Director's index ruling: main's kinds run
+  // 594-636 + 645-648 + 660-662 + 672-675 + 684-687 + 696-699 +
+  // 708-711 + 720-724 + 732-736 + 744-748 + 756-759 + 768-771 +
+  // 780-783 + 792-795 + 804-807 + 816-819 + 828-831 + 840-843 +
+  // 852-855 + 864-868 + 876-879 + 888-891 + 900-903 (T52) +
+  // 912-915 (T53) + 924-927 (T54); the parallel T55 claim holds
+  // 936-939; 940-947 stay empty.)
+  ...[948]
     .map((i) => String.fromCodePoint(0x1E00 + i))]);
 
 // Trainer definitions for the slice.
@@ -160305,22 +160442,23 @@ const MAPS9 = {
     "music": "viridian-theme",
     "weather": "sun",
     "rows": [
-      "                          ",
-      "                          ",
-      "   jklm  deef             ",
-      "   AJKA  P12P  ​s​  ​s​   ",
-      "                          ",
-      "  S                       ",
-      "                          ",
-      "                          ",
-      "                          ",
-      "                          ",
-      "                          ",
-      "                 ᾔᾔᾔᾔᾔᾔᾔ  ",
-      "                 ᾔᾔᾔᾔᾔᾔᾔ  ",
-      "                 ᾔᾔᾔᾔᾔᾔᾔ  ",
-      "                 ᾔᾔᾔᾔᾔᾔᾔ  ",
-      "                          ",
+      "             ↴↴        ↴↴ ",
+      " ↴↴↴↴↴↴↴↴↴↴↴↴↴↴↴↴↴↴↴↴↴↴↴↴ ",
+      " ↴ jklm SdeefS ↵↵↵ S↵↵↵S↴ ",
+      " ↴ AJKA  P12P  ​s​  ​s​ ↴ ",
+      " ↴↴↴↴↴↴↴↴↴↴↴↴↴↴↴↴↴↴↴↴↴↴↴↴ ",
+      " ↴S  ↷     S↴   ↷     S ↴ ",
+      " ↴   ↵↵↵ ↶↶ ↴      ↵↵↵  ↴ ",
+      " ↴   ​s​    ↴      ​s​  ↴ ",
+      "↴↴↴↴↴↴↴↴↴↴↴↴↴↴↴↴↴↴↴↴↴↴↴↴↴↴",
+      "↴↴↴↴↴↴↴↴↴↴↴↴↴↴↴↴↴↴↴↴↴↴↴↴↴↴",
+      "  ↴   S    ↴ ↴    ↴       ",
+      "  ↴        ↴ ↴   ᾔᾔᾔᾔᾔᾔᾔ  ",
+      "  ↴        ↴S↴   ᾔᾔᾔᾔᾔᾔᾔ↷ ",
+      "  ↴       ↷↴ ↴   ᾔᾔᾔᾔᾔᾔᾔ  ",
+      "  ↴↴↴↴↴↴↴↴↴↴↴↴↴↴↴ᾔᾔᾔᾔᾔᾔᾔ  ",
+      "             ↴↴           "
+
     ],
     "warps": [
       {"x": 4, "y": 3, "to": {"map": "center", "x": 4, "y": 4}, "via": {"map": "resort-area", "x": 4, "y": 4}},
@@ -160343,9 +160481,14 @@ const MAPS9 = {
       {"x": 12, "y": 12, "text": "PALMSIDE — North: ROUTE 226 / ROUTE 228 · East: ROUTE 227 · West: ROUTE 229."},
       {"x": 8, "y": 2, "text": "PALMSIDE — North: ROUTE 226 / ROUTE 228 · East: ROUTE 227 · West: ROUTE 229."},
       {"x": 19, "y": 2, "text": "PALMSIDE — North: ROUTE 226 / ROUTE 228 · East: ROUTE 227 · West: ROUTE 229."},
+      {"x": 13, "y": 2, "text": "PALMSIDE — North: ROUTE 226 / ROUTE 228 · East: ROUTE 227 · West: ROUTE 229."},
+      {"x": 23, "y": 2, "text": "PALMSIDE — North: ROUTE 226 / ROUTE 228 · East: ROUTE 227 · West: ROUTE 229."},
+      {"x": 11, "y": 5, "text": "PALMSIDE — North: ROUTE 226 / ROUTE 228 · East: ROUTE 227 · West: ROUTE 229."},
+      {"x": 22, "y": 5, "text": "PALMSIDE — North: ROUTE 226 / ROUTE 228 · East: ROUTE 227 · West: ROUTE 229."},
+      {"x": 6, "y": 10, "text": "PALMSIDE — North: ROUTE 226 / ROUTE 228 · East: ROUTE 227 · West: ROUTE 229."},
     ],
     "npcs": [
-      {"x": 3, "y": 5, "name": "MART CLERK", "art": "clerk", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#4a3a2a", "dialogue": ["Palmside Mart — stocked for the road ahead."], "mart": {"stock": ["ultraball", "hyperpotion", "maxpotion", "fullheal", "revive", "escaperope"]}},
+      {"x": 9, "y": 4, "name": "MART CLERK", "art": "clerk", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#4a3a2a", "dialogue": ["Palmside Mart — stocked for the road ahead."], "mart": {"stock": ["ultraball", "hyperpotion", "maxpotion", "fullheal", "revive", "escaperope"]}},
       {"x": 11, "y": 7, "name": "VILLA HOSTESS PRIA", "art": "lady", "skin": "#d8a878", "shirt": "#7a4a8a", "pants": "#2a2a3a", "hair": "#c0c0c0", "dialogue": ["Champions rest here between legends. The villas keep their towels folded and their stories unfolded.", "The desert gate is the north-east lane — sand country, storm fence, and SANDPOTAM with seniority."]},
       {"x": 18, "y": 13, "name": "GROUNDSKEEPER TAM", "art": "worker", "skin": "#f0c8a0", "shirt": "#3a7a4a", "pants": "#4a3a2a", "hair": "#2a1a0a", "dialogue": ["I mow around the flower beds and the resting champions both. One of those compliments the work.", "Stark smokes east every clear day. The Palmside pretends not to notice, beautifully."]},
     ],
