@@ -1136,6 +1136,51 @@
 //     MART CLERK re-seats (3,5) -> (9,4); tg2 cells
 //     238 -> 0. NO other town's pin moves.
 
+//     FORTY-SECOND DOCUMENTED EXCEPTION (WAVE T44; the
+//     FORTY-FIRST is WAVE T43 Coalseam's, recorded on its own
+//     branch): the registry grows by one scoped entry —
+//     floaroma: [honeyfloor] (the rebuild-wave registration
+//     the registry's own terms promise each town) — and
+//     floaroma's pin migrates PASS -> PASS: the Honeyfield
+//     Town rebuild on its own kit from birth ('Honeycomb &
+//     Bloom', idx 804-807: hexagonal-comb honeyfloor streets,
+//     magenta petal-scale bloomroof, the beehive prop, the
+//     shopsign prop) per WAVE-T44-HONEYFIELD-PLAN.md.
+//     Honeyfield shipped a mud-carried PASS: 194 of its 504
+//     cells were tg2 and its strict 0.9994 / fabric 0.9994
+//     were the mud sea's figures, not the town's. The build
+//     retires the mud (tg2 194 -> 0), rebuilds the street
+//     graph in honeyfloor (two-row front street and through
+//     road, the x12-13 avenue, east column, south street,
+//     west verge + link, cottage spur, and the SW
+//     flowerfield block threaded on its own two shipped
+//     tg2 desire columns x8/x11 — no encounter cell
+//     touched: flowerfield 41 + flower 4 byte-kept, FENN
+//     still standing in his meadow), marks the
+//     validator-named bare junctions with verbatim
+//     town-sign copies at (26,3), (15,10), (25,10),
+//     (15,17) and (21,15) — the (15,17) copy stands on the
+//     border row beside the Ruined Path exits, the seat
+//     whose pairs all start on the south street — moves
+//     the orphaned MART CLERK (3,5) -> (9,4) at his Mart's
+//     west-front apron, answers the Mart's missing
+//     shopfront (the town pack's one soft grade) with the
+//     shopsign prop at (13,3) on the Mart's east frontage
+//     — the stamp is fleet-shared, so no warp, interior
+//     or stamp cell is touched — dresses the apiary with
+//     six beehive props at the honey trees and the
+//     meadow's desire-line gates, builds the painting's
+//     two facade cottages, and differentiates the
+//     shared-roof House stamp (th -> bloomroof). Gate
+//     STATUS holds: pass 1 -> 1, conn 72/72, step-offs
+//     5/5, components one 161-cell street graph, junctions
+//     1 site (the mud blob's) -> 3 sites, 0 bare, apronMin
+//     0.941 -> 0.857, strict 0.9994 -> 0.7784, fabric
+//     0.9994 -> 0.9811 (the landed figures are carried by
+//     the authored street graph, not the mud; flowerfield
+//     is not a fabric tier, so the meadow crossings price
+//     in honestly). NO other town's pin moves.
+
 import { loadMaps, makeTiers, townSetOf, analyzeMap } from '../scripts/audit-desire-paths.mjs';
 import { scoreTown, gateCheck, tiersFor, STREET_REGISTRY } from '../scripts/audit-placement.mjs';
 
@@ -1161,8 +1206,8 @@ async function gateTuple(id, t) {
 }
 
 // 1. registry scope lock
-ok('street registry is exactly { vermilion: [boardwalk], blackthorn: [settfloor], silvertown: [marblefloor], ecruteak: [wornfloor], saffron: [avenuefloor], violet: [violetfloor], azalea: [brickfloor], mahogany: [gravelfloor], rustboro: [cutstonefloor], fuchsia: [marshfloor], cianwood: [driftfloor], dewford: [plankfloor], viridian: [slatefloor], celadon: [promfloor], slateport: [quayfloor, boardwalk], cerulean: [pierfloor], mauville: [gridfloor], lavender: [shinglefloor], cherrygrove: [inlayfloor], verdanturf: [petalfloor, cavefloor], olivine: [harbourfloor, jettyfloor], fallarbor: [ashfloor], lavaridge: [steamfloor, terracefloor], fortree: [canopyfloor, boardwalk], lilycove: [cobblefloor, cavefloor], mossdeep: [starfloor, dockfloor], sootopolis: [craterfloor, cavefloor], pacifidlog: [raftfloor], evergrande: [plateaufloor, cavefloor], twinleaf: [cloverfloor], sandgem: [shellfloor], jubilife: [beamfloor], oreburgh: [clinkerfloor] }',
-  JSON.stringify(STREET_REGISTRY) === '{"vermilion":["boardwalk"],"blackthorn":["settfloor"],"silvertown":["marblefloor"],"ecruteak":["wornfloor"],"saffron":["avenuefloor"],"violet":["violetfloor"],"azalea":["brickfloor"],"mahogany":["gravelfloor"],"rustboro":["cutstonefloor"],"fuchsia":["marshfloor"],"cianwood":["driftfloor"],"dewford":["plankfloor"],"viridian":["slatefloor"],"celadon":["promfloor"],"slateport":["quayfloor","boardwalk"],"cerulean":["pierfloor"],"mauville":["gridfloor"],"lavender":["shinglefloor"],"cherrygrove":["inlayfloor"],"verdanturf":["petalfloor","cavefloor"],"olivine":["harbourfloor","jettyfloor"],"fallarbor":["ashfloor"],"lavaridge":["steamfloor","terracefloor"],"fortree":["canopyfloor","boardwalk"],"lilycove":["cobblefloor","cavefloor"],"mossdeep":["starfloor","dockfloor"],"sootopolis":["craterfloor","cavefloor"],\"pacifidlog\":[\"raftfloor\"],\"evergrande\":[\"plateaufloor\",\"cavefloor\"],\"twinleaf\":[\"cloverfloor\"],\"sandgem\":[\"shellfloor\"],\"jubilife\":[\"beamfloor\"],\"oreburgh\":[\"clinkerfloor\"]}',
+ok('street registry is exactly { vermilion: [boardwalk], blackthorn: [settfloor], silvertown: [marblefloor], ecruteak: [wornfloor], saffron: [avenuefloor], violet: [violetfloor], azalea: [brickfloor], mahogany: [gravelfloor], rustboro: [cutstonefloor], fuchsia: [marshfloor], cianwood: [driftfloor], dewford: [plankfloor], viridian: [slatefloor], celadon: [promfloor], slateport: [quayfloor, boardwalk], cerulean: [pierfloor], mauville: [gridfloor], lavender: [shinglefloor], cherrygrove: [inlayfloor], verdanturf: [petalfloor, cavefloor], olivine: [harbourfloor, jettyfloor], fallarbor: [ashfloor], lavaridge: [steamfloor, terracefloor], fortree: [canopyfloor, boardwalk], lilycove: [cobblefloor, cavefloor], mossdeep: [starfloor, dockfloor], sootopolis: [craterfloor, cavefloor], pacifidlog: [raftfloor], evergrande: [plateaufloor, cavefloor], twinleaf: [cloverfloor], sandgem: [shellfloor], jubilife: [beamfloor], oreburgh: [clinkerfloor], floaroma: [honeyfloor] }',
+  JSON.stringify(STREET_REGISTRY) === '{"vermilion":["boardwalk"],"blackthorn":["settfloor"],"silvertown":["marblefloor"],"ecruteak":["wornfloor"],"saffron":["avenuefloor"],"violet":["violetfloor"],"azalea":["brickfloor"],"mahogany":["gravelfloor"],"rustboro":["cutstonefloor"],"fuchsia":["marshfloor"],"cianwood":["driftfloor"],"dewford":["plankfloor"],"viridian":["slatefloor"],"celadon":["promfloor"],"slateport":["quayfloor","boardwalk"],"cerulean":["pierfloor"],"mauville":["gridfloor"],"lavender":["shinglefloor"],"cherrygrove":["inlayfloor"],"verdanturf":["petalfloor","cavefloor"],"olivine":["harbourfloor","jettyfloor"],"fallarbor":["ashfloor"],"lavaridge":["steamfloor","terracefloor"],"fortree":["canopyfloor","boardwalk"],"lilycove":["cobblefloor","cavefloor"],"mossdeep":["starfloor","dockfloor"],"sootopolis":["craterfloor","cavefloor"],\"pacifidlog\":[\"raftfloor\"],\"evergrande\":[\"plateaufloor\",\"cavefloor\"],\"twinleaf\":[\"cloverfloor\"],\"sandgem\":[\"shellfloor\"],\"jubilife\":[\"beamfloor\"],\"oreburgh\":[\"clinkerfloor\"],\"floaroma\":[\"honeyfloor\"]}',
   JSON.stringify(STREET_REGISTRY));
 
 // 2. census: the 64 towns of townSetOf (pallet included)
@@ -1201,7 +1246,7 @@ const PIN = {
   "evergrande": [1, 42, 42, 5, 5, 1, 10, 0, 0, 0.938, 0, 0, 0, 0, 0.7554, 0.9928],
   "fallarbor": [1, 90, 90, 6, 6, 1, 3, 0, 0, 0.875, 0, 0, 0, 0, 0.7047, 0.9872],
   "fight-area": [1, 72, 72, 5, 5, 1, 1, 0, 0, 0.941, 0, 0, 0, 0, 1, 1],
-  "floaroma": [1, 72, 72, 5, 5, 1, 1, 0, 0, 0.941, 0, 0, 0, 0, 0.9994, 0.9994],
+  "floaroma": [1, 72, 72, 5, 5, 1, 3, 0, 0, 0.857, 0, 0, 0, 0, 0.7784, 0.9811],
   "fortree": [1, 110, 110, 7, 7, 1, 4, 0, 0, 0.824, 0, 0, 0, 1, 0.6701, 0.9801],
   "frontierhub": [1, 210, 210, 15, 15, 1, 3, 0, 0, 0.85, 0, 0, 0, 0, 0.9829, 0.9829],
   "fuchsia": [1, 182, 182, 9, 9, 1, 3, 0, 0, 0.643, 0, 0, 0, 0, 0.8842, 0.9952],
