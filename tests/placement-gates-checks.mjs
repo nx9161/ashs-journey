@@ -521,6 +521,60 @@
 //     Tuple: [pass, connOk, connPairs, stepTouch, stepTot, components,
 //     junctionSites, junctionsBare, apronLow, apronMin, merged,
 //     onFabric, shoulderOrphans, unanchoredAny, strict, fabric].
+//     TWENTY-SIXTH DOCUMENTED EXCEPTION (W-DIFF8): the registry
+//     grows by one scoped entry — lavender: [shinglefloor] — on
+//     the same terms as the exceptions above, and lavender's pin
+//     is FULLY IDENTICAL to its pre-wave tuple (registry growth
+//     only). The Hushmoor identity retrofit (W-DIFF-AUDIT Phase
+//     B: 'Violet Shingle & Memorial Stone') swapped TILE
+//     MATERIALS ONLY: 56 path cells -> shinglefloor dark
+//     violet-grey gravel (idx 629) and 22 th-lavender cells ->
+//     shingleroof steep dark shingle (idx 630: the north
+//     houses, the mid houses, the Mart's roof row, the tower
+//     block's th- roofline — tl-/tr- edges keep their shipped
+//     faces, the W-DIFF6/7 precedent). The memorialwall row,
+//     the tower geography (doors + wall-gym faces + warps to
+//     tower1), the shipped flora-lavender patches (the table's
+//     ground treatment, already standing) and every warp /
+//     post / sign / encounter cell are byte-kept, snapshot-
+//     verified across all 432 maps. Lavender is an identical
+//     dual definition (map-id registry status I): both copies
+//     (maps2/maps3) were swapped identically and stay
+//     identical, their shared registry fingerprint re-pinned
+//     in the same commit. Gates stay PASS on the registered
+//     tiers with the tuple unmoved: conn 132/132, step-offs
+//     7/7, junctions 2/2, strict 0.7211, fabric 0.9873.
+//     TWENTY-SEVENTH DOCUMENTED EXCEPTION (W-DIFF8): the
+//     registry grows by one scoped entry — cherrygrove:
+//     [inlayfloor] — on the same terms, and cherrygrove's pin
+//     is FULLY IDENTICAL to its pre-wave tuple (registry growth
+//     only). The Blossom identity retrofit (W-DIFF-AUDIT Phase
+//     B: 'Sakura & Harbour Stone') swapped TILE MATERIALS
+//     ONLY: 125 path cells -> inlayfloor (idx 631) and 8
+//     th-cherrygrove cells -> sakuraroof cherry-pink gables
+//     (idx 632: the Guide house + the south-west house). The
+//     identity table names 'harbourstone' as Blossom's street,
+//     but harbourstone is Canalave's dressed stone, sunnyshore
+//     wears it as decorative inlay speckle, and the registry's
+//     standing note holds it 'not registrable as one [a
+//     street]' — so per the W-DIFF6 amendment rule Blossom
+//     takes a distinct variant in the same register: harbour
+//     stone cut as large inlay slabs with a pale cherry-petal
+//     inlay motif. The tide-table plaza's shipped harbourstone
+//     block (21-23, 14-16), every sakura, the Center's
+//     roof-center stamp, the Mart's roof-slate row, the
+//     roof-terra house and every warp / post / sign /
+//     encounter cell are byte-kept, snapshot-verified. The
+//     full west/east gate rows take inlayfloor with the
+//     streets: the T14 west-gate fix is geometry (positions,
+//     never materials), and inlayfloor is the town's
+//     registered street fabric, so both gates stay street.
+//     Gates stay PASS on the registered tiers with the tuple
+//     unmoved: conn 72/72, step-offs 5/5, junctions 5/5,
+//     strict 0.7126, fabric 0.9902. Pair similarity
+//     (lavender <-> cherrygrove, audit census): 0.2003 ->
+//     0.3597, fleet rank #363 -> #666 of 2,016; control pair
+//     blackthorn <-> silvertown 0.3109 unmoved.
 
 import { loadMaps, makeTiers, townSetOf, analyzeMap } from '../scripts/audit-desire-paths.mjs';
 import { scoreTown, gateCheck, tiersFor, STREET_REGISTRY } from '../scripts/audit-placement.mjs';
@@ -547,8 +601,8 @@ async function gateTuple(id, t) {
 }
 
 // 1. registry scope lock
-ok('street registry is exactly { vermilion: [boardwalk], blackthorn: [settfloor], silvertown: [marblefloor], ecruteak: [wornfloor], saffron: [avenuefloor], violet: [violetfloor], azalea: [brickfloor], mahogany: [gravelfloor], rustboro: [cutstonefloor], fuchsia: [marshfloor], cianwood: [driftfloor], dewford: [plankfloor], viridian: [slatefloor], celadon: [promfloor], slateport: [quayfloor, boardwalk], cerulean: [pierfloor], mauville: [gridfloor] }',
-  JSON.stringify(STREET_REGISTRY) === '{"vermilion":["boardwalk"],"blackthorn":["settfloor"],"silvertown":["marblefloor"],"ecruteak":["wornfloor"],"saffron":["avenuefloor"],"violet":["violetfloor"],"azalea":["brickfloor"],"mahogany":["gravelfloor"],"rustboro":["cutstonefloor"],"fuchsia":["marshfloor"],"cianwood":["driftfloor"],"dewford":["plankfloor"],"viridian":["slatefloor"],"celadon":["promfloor"],"slateport":["quayfloor","boardwalk"],"cerulean":["pierfloor"],"mauville":["gridfloor"]}',
+ok('street registry is exactly { vermilion: [boardwalk], blackthorn: [settfloor], silvertown: [marblefloor], ecruteak: [wornfloor], saffron: [avenuefloor], violet: [violetfloor], azalea: [brickfloor], mahogany: [gravelfloor], rustboro: [cutstonefloor], fuchsia: [marshfloor], cianwood: [driftfloor], dewford: [plankfloor], viridian: [slatefloor], celadon: [promfloor], slateport: [quayfloor, boardwalk], cerulean: [pierfloor], mauville: [gridfloor], lavender: [shinglefloor], cherrygrove: [inlayfloor] }',
+  JSON.stringify(STREET_REGISTRY) === '{"vermilion":["boardwalk"],"blackthorn":["settfloor"],"silvertown":["marblefloor"],"ecruteak":["wornfloor"],"saffron":["avenuefloor"],"violet":["violetfloor"],"azalea":["brickfloor"],"mahogany":["gravelfloor"],"rustboro":["cutstonefloor"],"fuchsia":["marshfloor"],"cianwood":["driftfloor"],"dewford":["plankfloor"],"viridian":["slatefloor"],"celadon":["promfloor"],"slateport":["quayfloor","boardwalk"],"cerulean":["pierfloor"],"mauville":["gridfloor"],"lavender":["shinglefloor"],"cherrygrove":["inlayfloor"]}',
   JSON.stringify(STREET_REGISTRY));
 
 // 2. census: the 64 towns of townSetOf (pallet included)

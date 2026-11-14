@@ -115,7 +115,7 @@ const BASELINE = {
   "gym-viridian": ['D', 'maps2.mjs:b91d066d', 'maps3.mjs:11e2b64b'],
   "hideout": ['D', 'maps2.mjs:ce1ebeed', 'maps4.mjs:04c239d9'],
   "indigo": ['I', 'maps2.mjs:d8421648', 'maps3.mjs:d8421648'],
-  "lavender": ['I', 'maps2.mjs:b6496b5b', 'maps3.mjs:b6496b5b'],
+  "lavender": ['I', 'maps2.mjs:ce2dace1', 'maps3.mjs:ce2dace1'],
   "league": ['D', 'maps2.mjs:426a8945', 'maps3.mjs:9388d38b'],
   "mansion": ['D', 'maps2.mjs:6036b681', 'maps3.mjs:0b89e84d'],
   "newisland": ['D', 'maps2.mjs:06f895d7', 'maps3.mjs:87e908ce', 'maps4.mjs:0a2b629f'],
