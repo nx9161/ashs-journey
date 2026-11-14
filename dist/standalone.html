@@ -4282,6 +4282,37 @@ T58_KIND_DEFS.forEach(([kind], i) => {
 const T58_PROP_KINDS = T58_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
 const T58_WALL_KINDS = T58_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
 const T58_FLOOR_KINDS = T58_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
+// ---- Wave T59 (Pomelo Island identity, own kit from birth):
+// "Granite Scree & Peak Slate" — screefloor (idx 984): crushed-
+// granite scree, the peak's own stone ground underfoot, the
+// island's street material (worn by the whole shipped street
+// blob + BOTH surf-exit jetty heads); peakroof (idx 985):
+// blue-grey slate in large staggered courses with a granite
+// ridge cap and an orange pennant-flecked eave — worn by the
+// Gym's four roof cells only, breaking the shipped Gym/Mart
+// roof-slate share; cairn (idx 986): the climbers' cairn, a
+// graduated granite pile at the slope's foot; slopepine (idx
+// 987): a wind-bent slope pine on the tropgrass dirt.
+// (Indices 984-987 per the Director's index ruling: main's
+// kinds run …912-915 + 924-927 + 936-939 + 948-951 + 960-963;
+// the parallel T58 claim holds 972-976; 964-971 + 977-983
+// stay empty. Chars U+1E00+984..)
+// (Register: WAVE-T59-POMELO-PLAN.md §5.)
+const T59_KIND_DEFS = [
+  ['screefloor', 'floor'],
+  ['peakroof', 'wall'],
+  ['cairn', 'prop'],
+  ['slopepine', 'prop'],
+];
+const T59_KIND_CHARS = {};
+T59_KIND_DEFS.forEach(([kind], i) => {
+  const ch = String.fromCodePoint(0x1E00 + 984 + i);
+  T59_KIND_CHARS[kind] = ch;
+  TILE_CHARS[ch] = kind;
+});
+const T59_PROP_KINDS = T59_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
+const T59_WALL_KINDS = T59_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
+const T59_FLOOR_KINDS = T59_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
 const SINNOH_TOWN_GROUND_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg);
 const SINNOH_TOWN_GROUND2_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg2);
 // TX-3: the 8 gym exteriors by town (original type-accent motifs).
@@ -112973,6 +113004,78 @@ const ART = {
     "SsSkSsSsSsSsSsSs",
     "sshhhhssssssssss"
   ] },
+  "tile-screefloor": { w: 16, h: 16, pal: {"g":"#a8a294","G":"#8f8a7c","d":"#6e6a5e","w":"#c4beb0","p":"#b98d7a"}, rows: [
+    "gGgwgGdgGgGwgGgG",
+    "wgGgGgGpgGGgdgGg",
+    "GdgGGwgGgGgGgwdg",
+    "gGgdgGGGgGgwgGGG",
+    "GgGgGdgGpgGGGgGg",
+    "GgGwgGgGdgGgGgGG",
+    "gGgGgGgGgGGwgdGg",
+    "dgGGgdgGgGgGgGgG",
+    "gGgGGwgGgpgGGgdg",
+    "GgGdgGgGGwgGgGgG",
+    "GgGgGgdgGgGgGGgG",
+    "wgGgGgGgGdgGgwgG",
+    "gGdgGGgGgGgGgGgG",
+    "GgGgGgGGwgGpdgGg",
+    "GgGwgGgGgGgGGGgG",
+    "gGgGGdgGgGgGgGgG"
+  ] },
+  "tile-peakroof": { w: 16, h: 16, pal: {"c":"#b9bdc4","C":"#8d929c","s":"#6b7686","S":"#55606f","l":"#7f8a9a","o":"#e07b2a"}, rows: [
+    "cccccccccccccccc",
+    "cCccCccCccCccCcc",
+    "ssssSssssssSssls",
+    "ssslssssSsssssss",
+    "ssssssSssssslsss",
+    "SsssssssssSsssss",
+    "ssssSsssssssSsss",
+    "SSSSSSSSSSSSSSSS",
+    "ssSssssslsssSsss",
+    "ssssssSsssssssss",
+    "slsssSsssssSssls",
+    "ssssssssSsssssss",
+    "SSSSSSSSSSSSSSSS",
+    "sssSssslssssSsss",
+    "ssssssssssSsssss",
+    "ssoossossssoosss"
+  ] },
+  "tile-prop-cairn": { w: 16, h: 16, pal: {"s":"#c6b388","S":"#d4c69c","g":"#8b8b9b","G":"#757585","p":"#b9bcc4","d":"#5d5d6b"}, rows: [
+    "ssssssssssssssss",
+    "ssSssssssSssssss",
+    "sssssssppsssssss",
+    "sssssspGGpssssss",
+    "sssssspgGgssssss",
+    "sssssggGGggsssss",
+    "ssssgGggggGgssss",
+    "ssssgGGggGGgsSss",
+    "sssggggGGggggsss",
+    "ssgGgggGGgggGgss",
+    "ssgGGgggggGGgGss",
+    "sgggggGGGggggggs",
+    "sgGgggGGGGgggGgs",
+    "sggGGggggggGGggs",
+    "ssddddddddddddss",
+    "ssssssssssSsssss"
+  ] },
+  "tile-prop-slopepine": { w: 16, h: 16, pal: {"d":"#71523d","D":"#5d4230","t":"#5fa064","w":"#6e4520","W":"#54331a","g":"#2e6b34","G":"#3f8a44","l":"#57a85c"}, rows: [
+    "dddddddddddddddd",
+    "dddddggggggddddd",
+    "ddddgGGGGlGgdddd",
+    "dddglGGGGGGGgddd",
+    "ddgGGgGGGGlGGgdd",
+    "dddgGGGGGGGgdddd",
+    "ddddgGGgGGgddddd",
+    "dddddgggGgdddddd",
+    "ddddddWwgddddddd",
+    "dddddWwwddddtddd",
+    "dddddWwddddddddd",
+    "ddddWwwddtdddddd",
+    "ddddWwddddddddDd",
+    "dddWwwddtddddddd",
+    "dddWWddddDdddddd",
+    "dddddddddddddddd"
+  ] },
   "partner-back-bob": { base: "partner-back", w: 64, h: 64, pal: {}, shiftY: 2 },
   "partner-front-bob": { base: "partner-front", w: 64, h: 64, pal: {}, shiftY: 2 },
   "abomasnow-back-bob": { base: "abomasnow-back", w: 64, h: 64, pal: {}, shiftY: 2 },
@@ -118384,6 +118487,9 @@ for (const k of T57_FLOOR_KINDS) TILE_ART[k] = 'tile-' + k;
 for (const k of T58_PROP_KINDS) TILE_ART[k] = 'tile-prop-' + k;
 for (const k of T58_WALL_KINDS) TILE_ART[k] = 'tile-' + k;
 for (const k of T58_FLOOR_KINDS) TILE_ART[k] = 'tile-' + k;
+for (const k of T59_PROP_KINDS) TILE_ART[k] = 'tile-prop-' + k;
+for (const k of T59_WALL_KINDS) TILE_ART[k] = 'tile-' + k;
+for (const k of T59_FLOOR_KINDS) TILE_ART[k] = 'tile-' + k;
 // Premium+ W6 (TX-3/PL-1): door-open frames, authored in TX-3 for every
 // door kind. The warp-fade engine that plays them lands in W7 — W6
 // wires the frames (this registry + cache.doorOpen + doorOpenCanvas)
@@ -120318,6 +120424,12 @@ function resolveTileLayers(cache, kind, x, y, kindAt, t, phase, mapId) {
     case 'mikantree':
     case 'pickbasket':
     case 'coralbanner':
+    // Wave T59: Pomelo's cairn and its slope pine composite
+    // over their ground the same way (both arts are fully
+    // opaque — the island sand and the tropgrass dirt are
+    // baked in at their measured colours).
+    case 'cairn':
+    case 'slopepine':
     // Wave T17: the radio mast composites over its compound grass too.
     case 'radiomast': {
       // Object tiles carry transparent surrounds (Wave 1): lay the ground
@@ -127554,6 +127666,22 @@ const WALKABLE = new Set(['.', ',', 'D', 'E', 'C', 'F', 'J', 'K', '1', '2', 'V',
   // kinds run through 948-951 (T56) + 960-963 (the parallel T57
   // claim); 952-959 + 964-971 stay empty.)
   ...[972]
+    .map((i) => String.fromCodePoint(0x1E00 + i)),
+  // Wave T59: the screefloor char (U+1E00+984, tiles.mjs
+  // T59_KIND_DEFS) is walkable street material — Pomelo's
+  // crushed-granite scree, swapped onto the island's whole
+  // shipped street blob (authored as the generic `path`
+  // sand) plus BOTH surf-exit jetty heads, so floor stays
+  // floor. (Indices 984-987 per the Director's index
+  // ruling: main's kinds run 594-636 + 645-648 + 660-662 +
+  // 672-675 + 684-687 + 696-699 + 708-711 + 720-724 +
+  // 732-736 + 744-748 + 756-759 + 768-771 + 780-783 +
+  // 792-795 + 804-807 + 816-819 + 828-831 + 840-843 +
+  // 852-855 + 864-868 + 876-879 + 888-891 + 900-903 +
+  // 912-915 + 924-927 + 936-939 + 948-951 (T56) + 960-963
+  // (T57); the parallel T58 claim holds 972-976; 964-971 +
+  // 977-983 stay empty.)
+  ...[984]
     .map((i) => String.fromCodePoint(0x1E00 + i))]);
 
 // Trainer definitions for the slice.
@@ -133753,24 +133881,25 @@ const MAPS5 = {
     "name": "Pomelo Island",
     "music": "pewter-theme",
     "rows": [
-      "~~~~~~~~~~~~~~~~~~~~~~~~~~",
-      "~~~~~~~~~~~~~~~~~~~~~~~~~~",
-      "~~‖deefẞFjklm..RRRẈRRRRR~~",
-      "~~ẞUVYUFẟAJKA..RẘRRR...S~~",
-      "~~ẞ†...........RRR...RRR~~",
-      "~~‬.....................~~",
-      "~~ẞ‘.n.ẟ....„..R.RRRRRRR~~",
-      "~~ẞ‘...n...‗ẞ†...ṃRRRRRR~~",
-      "~~‥ẟ,,,.....”..ẟ.Ẅẟẟẟ‗ẞẞ~~",
-      "~~ẞ‘,,,..........Ẅẟ‖ẟẟ’ẞ~~",
-      "~~ẞ‘Ẅ......ẘẟ....Ẉ‗ẞ‘ẟ‗ẞ~~",
-      "~~ẞ‘Ẇ.........deefẟ―ẟẟ‗ẞ~~",
-      "~~‥ẟ,,,....oẟ.P12Pẟ,,,‗ẞ~~",
-      "~~ẞ‘,,,....Ẉẟ....ẟẟ,,,‗ẞ~~",
-      "~~―ẟẟ......ẟẟ....‖‖‖‖‖‛ẞ~~",
-      "~~..............Sẞẞẞẞẞẞẞ~~",
-      "~~~~~~~~~~~~~..~~~~~~~~~~~",
-      "~~~~~~~~~~~~~..~~~~~~~~~~~"
+      "~~~~~~~~~~~~⇘⇘~~~~~~~~~~~~",
+      "~~~~ẞFF⇘⇘⇘⇘⇘⇘⇘~~~~~~~~~~~~",
+      "~~‖⇙⇙⇙⇙⇘⇘jklm⇘⇘RRRẈRRRRR~~",
+      "~~ẞUVYU⇘SAJKA⇘⇘RẘRRR⇘⇘⇘S~~",
+      "~~⇘†⇘⇘⇘⇘⇘⇘⇘⇘⇘⇘⇘RRR⇘⇘⇘RRR~~",
+      "~~‬⇘⇘⇘⇘⇘⇘⇘⇘⇘⇘⇘⇘⇘⇘⇘⇘S⇘⇘⇘⇘~~",
+      "~~⇘⇘⇘n⇘⇘⇘⇘⇘⇘„⇘⇘R⇘RRRRRRR~~",
+      "~~⇘⇘⇘⇘⇘n⇘⇘⇘‗⇚†⇘⇘⇘ṃRRRRRR~~",
+      "~~⇘⇘,,,⇘⇘⇘⇘⇘”⇘⇘S⇘Ẅẟẟ⇛‗ẞẞ~~",
+      "~~⇘⇘,,,⇘⇘S⇘⇘⇘⇘⇘⇘⇘Ẅẟ‖ẟẟ’ẞ~~",
+      "~~⇘⇘⇘⇘⇘⇘⇘⇘⇘ẘẟ⇘⇘⇘⇘Ẉ‗ẞ‘ẟ‗ẞ~~",
+      "~~⇘⇘⇘⇘⇘S⇘⇘⇘⇘⇘⇘deefẈ―ẟ⇛‗ẞ~~",
+      "~~⇘⇘,,,⇘⇘⇘⇘ẟ⇘⇘P12Po,,,‗ẞ~~",
+      "~~⇘⇘,,,⇘⇘⇘⇘⇘⇘⇘⇘⇘⇘⇘ẟ,,,‗ẞ~~",
+      "~~⇘S⇘⇘⇘⇘⇘⇘⇘⇘⇘⇘⇘⇘⇘⇘‖Ẇ‖‖‛ẞ~~",
+      "~~⇘⇘⇘⇘⇘⇘⇘⇘⇘⇘⇘⇘⇘⇘S⇘ẞẄẞẞẞẞ~~",
+      "~~⇘⇘~~~~~~~~~⇘⇘~~~~~~~~~~~",
+      "~~⇘⇘~~~~~~~~~⇘⇘~~~~~~~~~~~"
+
     ],
     "warps": [
       {
@@ -133924,12 +134053,17 @@ const MAPS5 = {
         "x": 16,
         "y": 5,
         "text": "POMELO ISLAND — South: AMBER SEA — CENTRAL · North: AMBER SEA — NORTH."
+      },
+      {
+        "x": 3,
+        "y": 14,
+        "text": "POMELO ISLAND — South: AMBER SEA — CENTRAL · North: AMBER SEA — NORTH."
       }
     ],
     "npcs": [
       {
-        "x": 3,
-        "y": 5,
+        "x": 17,
+        "y": 13,
         "name": "MART CLERK",
         "art": "clerk",
         "skin": "#f0c8a0",
@@ -191854,6 +191988,6 @@ if (typeof Game !== 'undefined') Object.assign(Game.prototype, {
 });
 
 </script>
-<!-- contentHash:2dc98b660dffbebcd98b2a95d61be0177d501040b0e1e1a65e3de877b9b351fe -->
+<!-- contentHash:e70c29551b27a91694ca2ab843d5007df64046902d61e2c9e5593912f08f50ed -->
 </body>
 </html>
