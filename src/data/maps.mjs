@@ -495,6 +495,13 @@ export const WALKABLE = new Set(['.', ',', 'D', 'E', 'C', 'F', 'J', 'K', '1', '2
   // floor. (Indices 617-621 per the Director's index ruling:
   // W-DIFF6 holds 613-616.)
   ...[618]
+    .map((i) => String.fromCodePoint(0x1E00 + i)),
+  // Wave W-DIFF7: the pierfloor char (U+1E00+622, tiles.mjs
+  // WD7_KIND_DEFS) is walkable street material — Tidehaven's
+  // pier planks, swapped 1:1 from the walkable '.' path char
+  // (and the walkable boardwalk dock cells) in Tidehaven City,
+  // so floor stays floor.
+  ...[622]
     .map((i) => String.fromCodePoint(0x1E00 + i))]);
 
 // Trainer definitions for the slice.

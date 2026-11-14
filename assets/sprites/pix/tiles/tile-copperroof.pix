@@ -1,0 +1,26 @@
+# Wave W-DIFF7: Arcport copper gable - standing-seam copper courses, bright ridge, verdigris weathering low, deep eave foot.
+PIX tile-copperroof 16 16
+eeeeeeeeceeecece
+caabaaabacabaaad
+aaabbbabaaabcaab
+aaadaaadaaadbaad
+aaabbbbbabbbbbab
+aaabcaabacadaaad
+aacdaacbaaabacad
+baadbaabaaabaaab
+abadaacbaaabacab
+bbbbbbabbabdbbab
+aavbaaabaaabvvbd
+vaadaaabvaabaaab
+aaabvaabavabaaab
+vaadbaabacbbavab
+bbbbbdbbbbbbbddb
+dddddddddddddddd
+
+PAL
+a #a8662f copper
+b #8a5426 copper-shade
+c #cf9455 copper-lit
+d #6b3d17 eave-deep
+e #e8b07e ridge
+v #4fae9d verdigris

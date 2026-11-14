@@ -1,0 +1,26 @@
+# Wave W-DIFF7: Tidehaven pier planks - vertical sea-worn blue-grey boards, dark teal gaps, nail heads (full-bleed, solid).
+PIX tile-pierfloor 16 16
+caadcaadcaadcabd
+anadceadanadcnad
+aaadaaadaaadcaad
+cabdcbadbdddaeed
+aaadcbbdaaadabad
+ddddaaedaaadcaad
+aabdcaadcbadcbad
+aabdcaadaebdcaad
+aaadcaadaaadaaad
+cbadcaadcaadabad
+aaadcaadcaadabbd
+ceadbbddcaadcaad
+cabdcaadaaadaaad
+cabdaaadcaaddddd
+cnadanadcaadcned
+aaadcaadcaadaaed
+
+PAL
+a #71869a pier-plank
+b #5d7185 plank-shade
+c #8fa5b8 plank-lit
+d #3c5563 pier-gap
+e #4c6a75 worn-fleck
+n #2f434c nail

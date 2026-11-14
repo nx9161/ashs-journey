@@ -1,0 +1,25 @@
+# Wave W-DIFF7: Tidehaven mansard roof - cap band, shallow upper slope, steep blue-tile lower slope with dormer glints, deep eave foot.
+PIX tile-mansardroof 16 16
+cccccaacaaacccac
+acaaaaaccaaaaaaa
+aabccacabaaaabaa
+aaaaabaaaccbaaac
+aabaaaaabaaacbaa
+bbbdddddbddddddd
+abceeaabaaacaabc
+aaaeeaaaaabaaaaa
+dbddbdbddddbbdbd
+acaaaabaaaaabaaa
+aabcaaaabaaeebaa
+ddddbdbdddbeeddd
+abccaaabaaaaaaba
+dbbbbbbdbbdbddbd
+bbbbbbdddbddbbbb
+dddddddddddddddd
+
+PAL
+a #2f639e mansard-blue
+b #26537f tile-shade
+c #6392c2 tile-lit
+d #1e4069 eave-deep
+e #a8c8e8 dormer-glint

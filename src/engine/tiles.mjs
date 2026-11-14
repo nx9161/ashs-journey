@@ -1151,6 +1151,81 @@ T28_KIND_DEFS.forEach(([kind], i) => {
 export const T28_PROP_KINDS = T28_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
 export const T28_WALL_KINDS = T28_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
 export const T28_FLOOR_KINDS = T28_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
+// ---- Wave W-DIFF7 (Tidehaven + Arcport identity retrofit) ----
+// Three new kinds at idx 622-624 (U+206E-U+2070, verified free
+// in TILE_CHARS and unused by every map row; the block runs
+// T23 575, W-DIFF 577-580, W-DIFF2 581-584, T24 585-587,
+// T25 588-591, WD3 592-593, W-DIFF4 594-597, T26 598-601,
+// W-DIFF5 602-605, T27 608-612, W-DIFF6 613-616, T28 617-621 —
+// 606/607 stand empty). The two Arden harbour cities get the
+// identity table's own kits (W-DIFF-AUDIT Phase B). Tidehaven
+// City (TOWN_STYLE cerulean: ground #57a8a0, form 'mansard
+// blue-tile') — 'Boardwalk & Mansard': 'pierfloor' (floor) —
+// vertical sea-worn pier planks, the town's street fabric
+// (STREET_REGISTRY), swapped onto every sand-path street
+// cell. The table names 'boardwalk' as Tidehaven's street,
+// but boardwalk is Arcport's registered street material
+// (W4) — the W-DIFF5 precedent (the table's shared
+// 'boardwalk' became marshfloor/driftfloor) gives Tidehaven
+// its own pier timber in the same register instead of a
+// second helping of boardwalk. The town's 11 shipped
+// boardwalk cells (dock edge, south shore, exit aprons)
+// STAY boardwalk — the table's own street/shore split, and
+// a gate-driven trim (converting them grew a second, bare
+// junction at the exit spine and failed the gate; with the
+// split the town's gate tuple is fully identical to its
+// pin). 'mansardroof' (wall)
+// — a true MANSARD in the KIT_VARIANTS cerulean roof tones
+// (cap band + shallow upper slope + steep blue-tile lower
+// slope with dormer glints + deep eave foot), swapped onto
+// the town's th- roofs entire — houses and the Mart's roof
+// row alike (the shipped Mart wears the th- kind, not a
+// stamp roof); the Center's roof-center stamp, the gym's
+// gym-water pool hall and wall-gym faces, every door and
+// sign keep their shipped faces. The table's ground
+// treatment (tg + canal water) and signature (stonebell at
+// the pool, flower borders) are the shipped town's own —
+// byte-kept. Arcport City (TOWN_STYLE vermilion: ground
+// #c98d5a, form 'copper gable') — 'Harbour Boardwalk &
+// Copper (model town)': the street is boardwalk itself,
+// Arcport's registered material since W4 — the retrofit
+// completes it: every remaining sand-path street cell is
+// swapped to boardwalk, so the whole street network (the
+// row-5 avenue, the spines, the dock streets) is the one
+// harbour material. 'copperroof' (wall) — a standing-seam
+// COPPER gable in the KIT_VARIANTS vermilion roof tones
+// (bright ridge + copper courses + verdigris weathering +
+// deep eave foot), swapped onto the town's th- roofs entire
+// (houses and the Mart's roof row, which wears th- as in
+// Tidehaven); the gym's tr- roof row, the Center's
+// roof-center stamp, the harbour props (crane, gull,
+// tidechart) and the tg2- harbour-turf accents keep their
+// shipped faces entire. (Name note: 'coproof' is T26
+// Copperton's roof kind — Arcport's copper takes the
+// distinct name 'copperroof'.) Vermilion is a drifted
+// quadruple definition (map-id registry status D) whose
+// maps4/maps5/maps6 copies are spread-overrides of the
+// maps2 original: ONLY the maps2 rows are swapped, and all
+// four copies' registry fingerprints re-pin in this commit
+// per the burn-down rule — the copies' own npcs/events
+// layers do not move. Authored art:
+// assets/sprites/pix/tiles/tile-pierfloor.pix,
+// tile-mansardroof.pix, tile-copperroof.pix (register:
+// your_files/w-diff7/GRADE.md).
+export const WD7_KIND_DEFS = [
+  ['pierfloor', 'floor'],
+  ['mansardroof', 'wall'],
+  ['copperroof', 'wall'],
+];
+export const WD7_KIND_CHARS = {};
+WD7_KIND_DEFS.forEach(([kind], i) => {
+  const ch = String.fromCodePoint(0x1E00 + 622 + i);
+  WD7_KIND_CHARS[kind] = ch;
+  TILE_CHARS[ch] = kind;
+});
+export const WD7_PROP_KINDS = WD7_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
+export const WD7_WALL_KINDS = WD7_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
+export const WD7_FLOOR_KINDS = WD7_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
 export const SINNOH_TOWN_GROUND_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg);
 export const SINNOH_TOWN_GROUND2_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg2);
 // TX-3: the 8 gym exteriors by town (original type-accent motifs).
