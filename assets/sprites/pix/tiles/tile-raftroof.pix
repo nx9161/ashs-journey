@@ -1,0 +1,24 @@
+# Wave T38 (Driftlog kit): raftroof — RAFT-TIMBER SHINGLE: warm-brown timber shingle courses, staggered shakes, a log ridge read in the lit tops, one coral-trim fleck at the eave (the style table's coral carried to the roof edge). Unlike Ashfall's weatherboard timberroof, Eldergrove's thatch and Steamspring's clay barrel. Worn by Driftlog's three facade boat-houses. (NO-SAME-KIT law; WAVE-T38-DRIFTLOG-PLAN.md §5.)
+PIX tile-raftroof 16 16
+slllllslllllslll
+sbbbdbsbbbbbsbbb
+ssssssssssssssss
+lllslllllsllllls
+bbbsbbbbbsbbbbbs
+ssssssssssssssss
+slllllslllllslll
+sbbbbbsdbbbbsbbb
+ssssssssssssssss
+lllslllllsllllls
+bbbsbbbbbsbbbbbs
+ssssssssssssssss
+slllllslllllslll
+sbbbbbsbbbdbsbbb
+ssssssssssssssss
+lllslllccsllllls
+PAL
+b #9c7648 shingle-body
+l #bd9868 shingle-lit
+s #684a26 shingle-shade
+d #86643a grain-fleck
+c #a34d3f coral-trim

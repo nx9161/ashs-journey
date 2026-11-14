@@ -1,25 +1,23 @@
-# Stage H3b: pacifidlog town ground — signature street/meadow texture (full-bleed, walkable).
+# Wave T38 (Driftlog kit): raft grass — the re-authored tg-pacifidlog ground tile. CALM SPECKLED PALE SAGE: the painting's grass-topped rafts (B2-G9 calm density). The shipped entry was a generated sandy tile used by no map; this authoring replaces it from its own .pix source. (NO-SAME-KIT law; WAVE-T38-DRIFTLOG-PLAN.md §5.)
 PIX tile-tg-pacifidlog 16 16
-aaaaaaaaaaaaaaaa
-aacaaaaaaaabaaaa
-aaaaaabaacaaaaaa
-aaaaaacaaaaaacaa
-aaaaaaaaaaaaaaaa
-aaaaacaaaaaabaaa
-abaaaaaaaaacaaaa
-aaaaaaaaaaaaaaaa
-aaacaaaaaaaaaaaa
-aaaaaaaaaaaaaaca
-aabaaaaaaaaaaaaa
-aaaaaaacaaaaaaaa
-aaaaaaaaabaacaaa
-aaaacaaaaaaaaaba
-aaaaabaaaacaaaaa
-aaaaaaaaaaaaaaaa
+sgggglgdggggggsg
+gggsggggggggsggg
+gsggggggggsggggl
+gggglgdggggggsgg
+ggsggggggggsgggg
+sggggggggsgggglg
+ggglgdggggggsggg
+gsggggggggsggggg
+ggggggggsgggglgd
+gglgdggggggsgggg
+sggggggggsgggggg
+gggggggsgggglgdg
+glgdggggggsggggg
+ggggggggsggggggg
+ggggggsgggglgdgg
+lgdggggggsgggggg
 PAL
-a #b8a17d pacifidlog-ground
-b #a08b6c ground-dark
-c #d4ba90 ground-light
-d #d4ba90 town-accent
-e #a08b6c town-accent-2
-f #a08b6c ground-deep
+g #a9bf87 sage-body
+s #93ad72 sage-speckle
+l #c4d6a4 pale-fleck
+d #7e9c5f deep-blade

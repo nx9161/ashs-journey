@@ -1,0 +1,27 @@
+# Wave T38 (Driftlog kit): coraldoor — the CORAL DOOR face: coral-red planks (#a34d3f, the town style table's own door colour) in a dark timber frame, iron studs, a rope-ring handle, one step stone at the foot. Swapped onto the three boat-houses' shipped facade-panel cells — kind only; the cells stay walkable exactly as facade-panel ships. The painting gives every Driftlog house a coral door. (NO-SAME-KIT law; WAVE-T38-DRIFTLOG-PLAN.md §5.)
+PIX tile-coraldoor 16 16
+ffffffffffffffff
+fddddddddddddddf
+fdlllllllllllldf
+fdcbbbbbbbbbbcdf
+fdcbCbbbCbbbCbdf
+fdcbbbbbbbbbbcdf
+fdcbCbbbCbbbCbdf
+fdcbbbbbbbrrrcdf
+fdcbCbbbbbrrrcdf
+fdcbbbbbbbrrrcdf
+fdcbCbbbCbbbCbdf
+fdcbbbbbbbbbbcdf
+fdcbCbbbCbbbCbdf
+fdcbbbbbbbbbbcdf
+fdttttttttttttdf
+ffffffffffffffff
+PAL
+f #54341a frame-dark
+d #6e4520 frame-shade
+l #a97a3f frame-lit
+b #a34d3f coral-body
+C #7e352a coral-seam
+c #c06a58 coral-lit
+r #d8bd8a rope-ring
+t #9a958c step-stone

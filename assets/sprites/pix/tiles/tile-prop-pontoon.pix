@@ -1,0 +1,30 @@
+# Wave T38 (Driftlog kit): pontoon (prop) — a GROWING PONTOON: a bundle of horizontal logs lashed with rope, one X-lashed upright post, log-end grain at the east face, floating on the sea at Driftlog's west edge — the town still adding logs, three generations on (CORALIE's dialogue). Four float off the west rim. Fully opaque, sea water baked in. (WAVE-T38-DRIFTLOG-PLAN.md §3.7/§5.)
+PIX tile-prop-pontoon 16 16
+wFbswwDwwwwwwwww
+wwbswwwwwwwwwwwF
+wwrRwwwwDwwwwwww
+wwRrwwwwwwwwwwww
+wwrRwFwwwwDwwwww
+wwRrwwwwwwwwwwww
+llllllrRllrRllll
+BBBBBBrRBBrRBBee
+bbbbbbRrbbRrbbEe
+BBBBBBRrBBRrBBeE
+bbbbbbrRbbrRbbee
+ssssssrRssrRssss
+FFwwFFwwFwwwFFww
+wFwFwwDwwFwwwwFw
+wwwwwwwwwwwwwwwF
+wwwFwwwwDwwwwwww
+PAL
+w #3563a8 sea-body
+D #2a4f8c sea-deep
+F #a8c8ec foam
+b #8d5f2b log-body
+B #7d5326 log-low
+l #a97a3f log-lit
+s #6e4520 log-shade
+e #c8a878 end-grain
+E #a08b6c end-ring
+r #d8bd8a rope-lit
+R #b89a64 rope-shade

@@ -597,6 +597,22 @@ export const WALKABLE = new Set(['.', ',', 'D', 'E', 'C', 'F', 'J', 'K', '1', '2
   // 645-648 + 660-662 + 672-675 + 684-687 + 696-699; the
   // parallel T36 claim holds 708-711; 712-719 stay empty.)
   ...[721]
+    .map((i) => String.fromCodePoint(0x1E00 + i)),
+  // Wave T38: the raftfloor char (U+1E00+732, tiles.mjs
+  // T38_KIND_DEFS) is walkable street material — Driftlog
+  // Town's lashed-log street, swapped onto the town's avenue
+  // cells (which shipped as walkable boardwalk) and onto the
+  // two r131 exit cells at the landfall nose (which shipped as
+  // open water — the jetty-head swap of the T31 Beacon
+  // precedent), so floor stays floor; and the coraldoor char
+  // (U+1E00+734) likewise — Driftlog's coral door face, swapped
+  // onto the three boat-houses' facade-panel cells, which
+  // shipped walkable as facade-panel, so the doors stay
+  // walkable. (Indices 732-736 per the Director's index
+  // ruling: main's kinds run 594-636 + 645-648 + 660-662 +
+  // 672-675 + 684-687 + 696-699 + 708-711 + 720-724; the gaps
+  // stay empty.)
+  ...[732, 734]
     .map((i) => String.fromCodePoint(0x1E00 + i))]);
 
 // Trainer definitions for the slice.

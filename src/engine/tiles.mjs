@@ -1543,6 +1543,43 @@ T37_KIND_DEFS.forEach(([kind], i) => {
 export const T37_PROP_KINDS = T37_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
 export const T37_WALL_KINDS = T37_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
 export const T37_FLOOR_KINDS = T37_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
+// Wave T38: Driftlog Town's own kit — "Lashed Log & Coral
+// Door": the raftfloor (lashed-log street — horizontal log
+// courses with staggered end joints and rope lashings, the
+// registered street material of the north avenue and the r131
+// landfall nose), the raftroof (raft-timber shingles worn by
+// the town's three facade boat-houses), the coraldoor (the
+// coral door face of the town style table, swapped onto the
+// houses' shipped facade-panel cells), the anchor (FLOAT KID
+// WREN's anchor fence post) and the pontoon (a lashed log
+// bundle still growing off the town's west edge). Indices
+// 732-736 per the Director's index ruling (main's kinds run
+// 594-636 + 645-648 + 660-662 + 672-675 + 684-687 + 696-699 +
+// 708-711 + 720-724; 606-607 + 637-644 + 649-659 + 663-671 +
+// 676-683 + 688-695 + 700-707 + 712-719 + 725-731 stay empty),
+// verified free against origin/main, TILE_CHARS and every map
+// row. The town's ground is its own re-authored tg-pacifidlog
+// art (no new index — the kind and char U+1F7C already exist).
+// Authored art: assets/sprites/pix/tiles/tile-raftfloor.pix,
+// tile-raftroof.pix, tile-coraldoor.pix, tile-prop-anchor.pix,
+// tile-prop-pontoon.pix, tile-tg-pacifidlog.pix.
+// (WAVE-T38-DRIFTLOG-PLAN.md.)
+export const T38_KIND_DEFS = [
+  ['raftfloor', 'floor'],
+  ['raftroof', 'wall'],
+  ['coraldoor', 'wall'],
+  ['anchor', 'prop'],
+  ['pontoon', 'prop'],
+];
+export const T38_KIND_CHARS = {};
+T38_KIND_DEFS.forEach(([kind], i) => {
+  const ch = String.fromCodePoint(0x1E00 + 732 + i);
+  T38_KIND_CHARS[kind] = ch;
+  TILE_CHARS[ch] = kind;
+});
+export const T38_PROP_KINDS = T38_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
+export const T38_WALL_KINDS = T38_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
+export const T38_FLOOR_KINDS = T38_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
 export const SINNOH_TOWN_GROUND_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg);
 export const SINNOH_TOWN_GROUND2_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg2);
 // TX-3: the 8 gym exteriors by town (original type-accent motifs).
