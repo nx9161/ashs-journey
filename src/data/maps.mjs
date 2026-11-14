@@ -866,6 +866,15 @@ export const WALKABLE = new Set(['.', ',', 'D', 'E', 'C', 'F', 'J', 'K', '1', '2
   // parallel T56 claim holds 948-951; 940-947 + 952-959 stay
   // empty.)
   ...[960]
+    .map((i) => String.fromCodePoint(0x1E00 + i)),
+  // Wave T58: the grovefloor char (U+1E00+972, tiles.mjs
+  // T58_KIND_DEFS) is walkable street material — Tangelo's
+  // furrowed grove-earth street, swapped onto the town's path
+  // street cells + the SW surf jetty head, so floor stays floor.
+  // (Indices 972-976 per the Director's index ruling: main's
+  // kinds run through 948-951 (T56) + 960-963 (the parallel T57
+  // claim); 952-959 + 964-971 stay empty.)
+  ...[972]
     .map((i) => String.fromCodePoint(0x1E00 + i))]);
 
 // Trainer definitions for the slice.

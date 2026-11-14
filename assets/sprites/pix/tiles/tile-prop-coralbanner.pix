@@ -1,0 +1,26 @@
+# Wave T58 (Tangelo): coral banner post, white wave glyph, on island sand.
+PIX tile-prop-coralbanner 16 16
+SsSsSsSsSsSsSsSs
+ssssssssssssssss
+ssskkkkkkkkkksss
+sssksccccccCssss
+sssksccccccCssss
+sssksccccccCssss
+ssskscWWcccCssss
+sSskscccWWcCsSsS
+ssskscWWcccCssss
+ssskscccWWcCssss
+sssksccccccCssss
+sssksccccccCssss
+sssksCCCCCCCssss
+ssskssssssssssss
+SsSkSsSsSsSsSsSs
+sshhhhssssssssss
+PAL
+s #c6b388 island sand
+S #d4c69c sand speckle
+h #b3a075 sand shadow
+k #6b4423 banner post
+c #e58a7a coral cloth
+C #c96a5e coral shade
+W #f7f2e2 wave glyph

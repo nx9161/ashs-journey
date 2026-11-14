@@ -1,0 +1,25 @@
+# Wave T58 (Tangelo): furrowed grove-earth street, citrus-leaf flecks.
+PIX tile-grovefloor 16 16
+Leeeeeeeeeeeeeee
+eeeeeeeeemeeeeee
+emeeeeeeLeeeeeep
+ffffffffffffffff
+llllllllllllllll
+eeeeeeeLeeemeeee
+eeemeeeeeeeeeepe
+ffffffffffffffff
+llllllllllllllll
+eeeeeeeeeeeeemee
+eeeeemeeeeeeepLe
+ffffffffffffffff
+llllllllllllllll
+eeeeeeeeeeeeeLem
+eeeeLeemeeeepeee
+ffffffffffffffff
+PAL
+e #c79f66 packed grove earth
+m #b8905a earth grain shadow
+f #9a7440 furrow shadow
+l #dec084 furrow light lip
+L #4d8a34 fallen citrus leaf
+p #e8862a peel curl

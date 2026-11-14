@@ -1,0 +1,29 @@
+# Wave T58 (Tangelo): woven pick basket brimming with mikan, on grove dirt.
+PIX tile-prop-pickbasket 16 16
+TddddddddTdddddd
+TddddddddTdddtdd
+TddtdddddTdddddd
+TddddddddTdddddd
+TdddddtddTdddddd
+Tddcolooloolcddd
+Tddcolooloolcddd
+TddcOlOOlOOlcddd
+Tddkkkkkkkkkkddd
+TdtwwWWwwWWwwddd
+TddwWWwwWWwwWddt
+TddWWwwWWwwWWddd
+TddWwwWWwwWWwddd
+Tddkkkkkkkkkkddd
+TdddTTTTTTTTdddd
+TddddddddTdtdddd
+PAL
+d #71523d grove dirt
+T #5d4230 dirt shadow
+t #5fa064 grass tuft
+o #e8862a orange
+O #c96a1e orange shade
+l #3f7a2e orange leaf
+c #f2ead2 draped cloth
+w #b0824a basket weave
+W #8a6132 basket weave shade
+k #54331a basket band

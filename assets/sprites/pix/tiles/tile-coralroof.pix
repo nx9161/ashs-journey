@@ -1,0 +1,26 @@
+# Wave T58 (Tangelo): coral-orange clay-tile roof (the Gym).
+PIX tile-coralroof 16 16
+RRRRRRRRRRRRRRRR
+rrrrrrrrrrrrrrrr
+ohoSohoSohoSohoS
+oooSoooSoooSoooS
+oooSoooSoooSoooS
+ssssssssssssssss
+ohoSohoSohoSohoS
+oooSoooSoooSoooS
+oooSoooSoooSoooS
+ssssssssssssssss
+ohoSohoSohoSohoS
+oooSoooSoooSoooS
+oooSoooSoooSoooS
+ssssssssssssssss
+EEEEEEEEEEEEEEEE
+EEEEEEEEEEEEEEEE
+PAL
+o #e07b2a orange clay tile
+h #f2a54a tile highlight
+S #c05f1e tile side shade
+s #a34e18 course shadow
+R #f4d9c8 coral ridge
+r #e8a58c ridge shade
+E #e58a7a coral eave band

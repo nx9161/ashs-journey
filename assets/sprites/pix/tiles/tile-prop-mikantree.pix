@@ -1,0 +1,27 @@
+# Wave T58 (Tangelo): grove citrus tree, fruit-dotted, on grove dirt.
+PIX tile-prop-mikantree 16 16
+TddddddddTdddddd
+TddddddddTdddtdd
+TddtdGGCCggddddd
+TdddGGCCoCCgdddd
+TddGoCCCCCCCgddd
+TddGCCCoCCCogddd
+TddCCCCCCCCCCddd
+TddCCCoCCCCCCddd
+TddgCCCCCCoCgddd
+TdtgoCCCCCCCgddd
+TdddgCCCCoCgdddt
+Tddddokkkkgddddd
+TddddddkkTdddddd
+TddddddkkTdddddd
+TddddddkkTdddddd
+TddddTTTTTTtdddd
+PAL
+d #71523d grove dirt
+T #5d4230 dirt shadow / root shade
+t #5fa064 grass tuft
+C #2e6b26 canopy
+G #4d8a34 canopy light
+g #1f4d1a canopy shade
+o #f08a1e mikan fruit
+k #6b4423 trunk

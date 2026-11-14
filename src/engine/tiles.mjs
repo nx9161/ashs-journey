@@ -2268,6 +2268,26 @@ T57_KIND_DEFS.forEach(([kind], i) => {
 export const T57_PROP_KINDS = T57_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
 export const T57_WALL_KINDS = T57_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
 export const T57_FLOOR_KINDS = T57_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
+// Wave T58 (Tangelo Island): the town's own kit kinds (Grove
+// Furrow & Coral Tile) — indices 972-976 per the Director's index
+// ruling (main's kinds run through T56's 948-951; the parallel
+// T57 claim holds 960-963; 964-971 stay empty).
+export const T58_KIND_CHARS = {};
+export const T58_KIND_DEFS = [
+  ['grovefloor', 'floor'],
+  ['coralroof', 'wall'],
+  ['mikantree', 'prop'],
+  ['pickbasket', 'prop'],
+  ['coralbanner', 'prop'],
+];
+T58_KIND_DEFS.forEach(([kind], i) => {
+  const ch = String.fromCodePoint(0x1E00 + 972 + i);
+  T58_KIND_CHARS[kind] = ch;
+  TILE_CHARS[ch] = kind;
+});
+export const T58_PROP_KINDS = T58_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
+export const T58_WALL_KINDS = T58_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
+export const T58_FLOOR_KINDS = T58_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
 export const SINNOH_TOWN_GROUND_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg);
 export const SINNOH_TOWN_GROUND2_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg2);
 // TX-3: the 8 gym exteriors by town (original type-accent motifs).
