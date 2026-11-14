@@ -1,0 +1,31 @@
+# Wave T39 (Perennial kit): pennant — a bracket-season
+# pennant on the league plateau: one tall pole flying a
+# single crimson pennant with a gold edge, a guy-line pegged
+# to the lawn. A single flying pennant, unlike Highbranch's
+# bunting (a pennant STRAND strung between posts). Fully
+# opaque: the town grass it stands on is baked in (measured
+# #1e8b28 off the shipped render). Seats: the plateau flag
+# fields. (NO-SAME-KIT law; WAVE-T39-PERENNIAL-PLAN.md.)
+PIX tile-prop-pennant 16 16
+gggggggggggggggg
+ggggoggggggggggg
+ggggkoooooooorgg
+ggggkrrrrrrrrggg
+ggggkrrrrrrggggg
+ggggkrrrrggggggg
+gdggkggggggggggg
+ggggkggggggggggd
+ggggkggggggggggg
+ggggkkgggggggggg
+ggggkgkggggggggg
+ggggkggkkggggggg
+ggggkggggkgggggg
+ggggkgggggkkggdg
+ggdgkggggggggggg
+gggggggggdgggggg
+PAL
+g #1e8b28 town-grass
+d #196b20 grass-shade
+k #5f4f33 pole-timber
+o #e8c85a gold
+r #c0392b pennant-crimson

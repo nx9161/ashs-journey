@@ -613,6 +613,17 @@ export const WALKABLE = new Set(['.', ',', 'D', 'E', 'C', 'F', 'J', 'K', '1', '2
   // 672-675 + 684-687 + 696-699 + 708-711 + 720-724; the gaps
   // stay empty.)
   ...[732, 734]
+    .map((i) => String.fromCodePoint(0x1E00 + i)),
+  // Wave T39: the plateaufloor char (U+1E00+744, tiles.mjs
+  // T39_KIND_DEFS) is walkable street material — Perennial
+  // City's parade marble, swapped onto the town's street cells
+  // (which shipped as walkable tg2 mud, walkable ground and two
+  // water exit cells), so floor stays floor. (Indices 744-748
+  // per the Director's index ruling: main's kinds run 594-636 +
+  // 645-648 + 660-662 + 672-675 + 684-687 + 696-699 + 708-711 +
+  // 720-724; the parallel T38 claim holds 732-736; gaps stay
+  // empty.)
+  ...[744]
     .map((i) => String.fromCodePoint(0x1E00 + i))]);
 
 // Trainer definitions for the slice.

@@ -1,0 +1,35 @@
+# Wave T39 (Perennial kit): plateaufloor — Perennial City's
+# registered street kind (the fleet's street kinds carry the
+# -floor suffix; the desire-path tiers key on it). PARADE
+# MARBLE FLAGS: one large ivory marble slab per tile, fine
+# gold veining branching across the face, hairline grout at
+# the slab edges (top + left, so the tiling reads as big
+# flags). Large-format single-slab marble is structurally
+# unlike Craterlake's small white setts in dark grout,
+# Lastlight's smooth grey veined slabs at cottage scale and
+# Blossom's large inlay slabs — this is the league plateau's
+# parade surface, warm ivory with gold in the stone.
+# (NO-SAME-KIT law; WAVE-T39-PERENNIAL-PLAN.md.)
+PIX tile-plateaufloor 16 16
+gggggggggggggggg
+gmmmmmmmmmmmmmmm
+gmmmmmmmmmmmmmmm
+gmmllmmmmmmmmmmv
+gmmlmmmmmmmmmvvm
+gmmmmmmmmmmvvmmm
+gmmmmmmmmvvmmmmm
+gmmmmmmvvmmvmmmm
+gmmmmvvmmmmmmmmm
+gmmvvmvvmmmmsmmm
+gvvmmmmmmmmmmmmm
+gmmmmmmmmllmmmmm
+gmmmmmmmmmlmmlmm
+gmlmmmmmsmmmmmmm
+gmmmmsmmmmmmmmmm
+gmmmmmmmmmmmmmmm
+PAL
+m #ece5d3 marble-body
+l #f7f2e2 marble-lit
+g #b3a888 grout-hairline
+v #c9a227 gold-vein
+s #d8cfb4 marble-cloud

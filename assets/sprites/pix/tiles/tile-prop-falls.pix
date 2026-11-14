@@ -1,0 +1,31 @@
+# Wave T39 (Perennial kit): falls — the Perennial Falls in
+# one tile: dark rim rock at the head, a white-blue cascade
+# sheeting between rock cheeks, foam at the foot. Fully
+# opaque (rock and water — no grass). Seat: (28,7), the
+# rim's east foot beside the falls sign, whose own text
+# names it: 'The falls pour off the league plateau.'
+# (NO-SAME-KIT law; WAVE-T39-PERENNIAL-PLAN.md.)
+PIX tile-prop-falls 16 16
+rkkrkkrkkrkkrkkr
+kkrkkrkkrkkrkkrk
+rrcwccbcwbccbwrr
+rrwbccbwcbccwcrr
+rrcbccwccbcwbcrr
+rrcbcwbccbwcbcrr
+rrcbwcbccwccbcrr
+rrcwccbcwbccbwrr
+rrwbccbwcbccwcrr
+rrcbccwccbcwbcrr
+rrcbcwbccbwcbcrr
+rrcbwcbccwccbcrr
+rrcwccbcwbccbwrr
+fwwfwwfwwfwwfwwf
+fwwfwwfwwfwwfwwf
+ffffffffffffffff
+PAL
+k #3a3a44 rim-rock-dark
+r #5a5a66 rim-rock
+c #a9c6e2 cascade-body
+b #7fa8c8 cascade-blue
+w #f4f8ff white-water
+f #dcecf8 foam

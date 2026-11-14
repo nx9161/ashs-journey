@@ -1580,6 +1580,37 @@ T38_KIND_DEFS.forEach(([kind], i) => {
 export const T38_PROP_KINDS = T38_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
 export const T38_WALL_KINDS = T38_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
 export const T38_FLOOR_KINDS = T38_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
+// Wave T39: Perennial City's own kit kinds (the League Marble &
+// Banner Gold kit): a parade floor of large ivory-gold-veined
+// marble slabs as the town's street; a badge-frieze marble roof
+// for the League hall alone; verdigris standing-seam roofs for
+// its two facade houses; and two fully-opaque props — a
+// bracket-season pennant for the plateau flag fields and the
+// falls at the rim's east foot. Director's index ruling (main's
+// kinds run 594-636 + 645-648 + 660-662 + 672-675 + 684-687 +
+// 696-699 + 708-711 + 720-724; the parallel T38 claim holds
+// 732-736 on its branch; 606-607 + 637-644 + 649-659 + 663-671 +
+// 676-683 + 688-695 + 700-707 + 712-719 + 725-743 stay empty),
+// verified free against origin/main, TILE_CHARS and every map
+// row. Authored art: assets/sprites/pix/tiles/tile-plateaufloor.pix,
+// tile-badgeroof.pix, tile-verdiroof.pix, tile-prop-pennant.pix,
+// tile-prop-falls.pix. (WAVE-T39-PERENNIAL-PLAN.md.)
+export const T39_KIND_DEFS = [
+  ['plateaufloor', 'floor'],
+  ['badgeroof', 'wall'],
+  ['verdiroof', 'wall'],
+  ['pennant', 'prop'],
+  ['falls', 'prop'],
+];
+export const T39_KIND_CHARS = {};
+T39_KIND_DEFS.forEach(([kind], i) => {
+  const ch = String.fromCodePoint(0x1E00 + 744 + i);
+  T39_KIND_CHARS[kind] = ch;
+  TILE_CHARS[ch] = kind;
+});
+export const T39_PROP_KINDS = T39_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
+export const T39_WALL_KINDS = T39_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
+export const T39_FLOOR_KINDS = T39_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
 export const SINNOH_TOWN_GROUND_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg);
 export const SINNOH_TOWN_GROUND2_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg2);
 // TX-3: the 8 gym exteriors by town (original type-accent motifs).
