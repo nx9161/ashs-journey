@@ -4272,6 +4272,58 @@ W17D_KIND_DEFS.forEach(([kind], i) => {
 const W17D_PROP_KINDS = W17D_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
 const W17D_WALL_KINDS = W17D_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
 const W17D_FLOOR_KINDS = W17D_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
+// Wave W17-E (Route Build Program, Arden Tranche 5 — the finale):
+// the Crown Road (victoryroad, maps2 + maps3 DUAL), the last cave
+// before the League, its own kit under the NO-SAME-KIT law. Like
+// Tranche 4's caves it converts the generic cave base — char 'L'
+// (cavefloor) to its own floor kind, char 'G' (cavewall) to its own
+// wall kind — art layer only: encounter tables, warps (the Route 22
+// gate mouth and the Crownspire exit), NPC posts, items and the
+// ev_moltres event record byte-identical in both copies, and the
+// shipped cave-encounter trigger chars ('.'/'R',
+// overworld-systems sysEncounterStep) occur in neither copy's grid
+// before or after. The two copies are registry class D in the
+// strongest form — different sizes (maps2 16x14, maps3 18x12) and
+// drifted records; maps3 is the live copy (the loader census and
+// the W17 plan agree: 18x12, W->route22, E->indigo, the VETERAN at
+// his post with the recorded boulder/second-sun dialogue). Each
+// copy is converted char-for-char on its own rows; the drift —
+// ACE RIN's trainer post and the higher encounter band in the
+// stale maps2 copy included — stays byte-preserved, untouched.
+// "Crown Road Ceremonial" (idx 1166-1167): crownfloor is LAID
+// stone — dark violet-charcoal flags in a running bond, the only
+// cave floor in Arden that was built rather than formed — split
+// from Lunestone's pale/dark moonstone speckle, Stonebore's warm
+// strata speckle, and from Crownspire town's bright veined marble
+// (veinfloor, W-DIFF10) by value: the town is the League's white
+// plaza in daylight, the road is its dark mountain undercroft.
+// crownwall is ashlar masonry — squared block courses with
+// staggered joints — against every other cave's natural bands.
+// The road's signature dressing (bannerwall, torchpost, lavaglow
+// — the second sun — cavelantern, crackedfloor, rubble, the rock
+// boulders) already ships in the grid and stands byte-preserved
+// inside the new register; no props are placed (a cave floor is
+// encounter ground — Tranche 4's cave discipline). Cave floor
+// kinds end in 'floor' exactly as cavefloor/stratafloor do,
+// keeping their audit classification. Indices 1166-1167 per the
+// Director's index ruling: Tranches 1-4 took 1092-1110, 1112-1131,
+// 1132-1151 and 1152-1165 (W17-D lands at merge); 1111 and every
+// earlier documented gap stay empty. Kind names verified
+// unclaimed against origin/main. Chars U+1E00+1166.. (Register:
+// WAVE-W17-ROUTE-PROGRAM-PLAN.md.)
+const W17E_KIND_DEFS = [
+  ['crownfloor', 'floor'],
+  ['crownwall', 'wall'],
+];
+const W17E_KIND_CHARS = {};
+W17E_KIND_DEFS.forEach(([kind], i) => {
+  const ch = String.fromCodePoint(0x1E00 + 1166 + i);
+  W17E_KIND_CHARS[kind] = ch;
+  TILE_CHARS[ch] = kind;
+});
+const W17E_PROP_KINDS = W17E_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
+const W17E_WALL_KINDS = W17E_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
+const W17E_FLOOR_KINDS = W17E_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
 const SINNOH_TOWN_GROUND_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg);
 const SINNOH_TOWN_GROUND2_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg2);
 // TX-3: the 8 gym exteriors by town (original type-accent motifs).
@@ -114097,6 +114149,42 @@ const ART = {
     "aabaaabaaaabaaaa",
     "aaaaabaabaaabbab"
   ] },
+  "tile-crownfloor": { w: 16, h: 16, pal: {"a":"#4b4454","b":"#564e60","d":"#3d3747","s":"#2c2733","h":"#6e637c"}, rows: [
+    "babbbbasaaaaabaa",
+    "baaabbasaaaabaaa",
+    "aaaaaaasbaaddaab",
+    "aaaaaabsabadabaa",
+    "abaahabsaababaab",
+    "baaaaaasbabababb",
+    "aaabaaasaaaahaab",
+    "ssssssssssssssss",
+    "aaasaaabaadsaaaa",
+    "abbsaaaaaaasabab",
+    "aaasaaaaaahsaaab",
+    "abasaaaaaaasbaba",
+    "abasbabdabasaaab",
+    "adasaabadaasaaab",
+    "baasaaabaabsabaa",
+    "ssssssssssssssss"
+  ] },
+  "tile-crownwall": { w: 16, h: 16, pal: {"z":"#2e2a38","m":"#4e4659","a":"#5d5468","h":"#6f6480","c":"#857a99"}, rows: [
+    "ahhhczhaaahczhha",
+    "mmmmczmmammczmmm",
+    "ammmmzzmmammzmaa",
+    "zzzzzzzzzzzzzzzz",
+    "hhzahahhazhhhhhh",
+    "mmzmmmmamzmmmamm",
+    "mmzmmmaaazzammmm",
+    "zzzzzzzzzzzzzzzz",
+    "hahhhhzhhhahhzhh",
+    "ammammzmmammmzmm",
+    "mmamamzmmmazazmm",
+    "zzzzzzzzzzzzzzzz",
+    "aaazhhhhhhzhhahh",
+    "mmmzmmammzzmmmmm",
+    "ammzammmmmzmazmm",
+    "zzzzzzzzzzzzzzzz"
+  ] },
   "tile-trialfloor": { w: 16, h: 16, pal: {"a":"#d8c08a","b":"#cdb481","m":"#bfa87c","f":"#b07a3f","l":"#e2cc9c"}, rows: [
     "aabaaafaaabaaaaa",
     "aaaaaaaaaaabaaaf",
@@ -120449,6 +120537,9 @@ for (const k of W17C_FLOOR_KINDS) TILE_ART[k] = 'tile-' + k;
 for (const k of W17D_PROP_KINDS) TILE_ART[k] = 'tile-prop-' + k;
 for (const k of W17D_WALL_KINDS) TILE_ART[k] = 'tile-' + k;
 for (const k of W17D_FLOOR_KINDS) TILE_ART[k] = 'tile-' + k;
+for (const k of W17E_PROP_KINDS) TILE_ART[k] = 'tile-prop-' + k;
+for (const k of W17E_WALL_KINDS) TILE_ART[k] = 'tile-' + k;
+for (const k of W17E_FLOOR_KINDS) TILE_ART[k] = 'tile-' + k;
 // Premium+ W6 (TX-3/PL-1): door-open frames, authored in TX-3 for every
 // door kind. The warp-fade engine that plays them lands in W7 — W6
 // wires the frames (this registry + cache.doorOpen + doorOpenCanvas)
@@ -121251,14 +121342,21 @@ const CAVE_KINDS = new Set(['cavewall', 'cavefloor', 'caveboulder',
   // Wave W17-D: the Arden cave kits (Lunestone Deep/Dark, Stonebore
   // Strata) are cave family — cave-context detection around rocks
   // and boulders reads them exactly as it reads the generic set.
-  'lunewall', 'lunefloor', 'darklunewall', 'darklunefloor', 'stratadeepwall', 'stratadeepfloor']);
-const CAVE_FLOOR_KINDS = new Set(['cavefloor', 'lunefloor', 'darklunefloor', 'stratadeepfloor']);
-const CAVE_WALL_KINDS = new Set(['cavewall', 'lunewall', 'darklunewall', 'stratadeepwall']);
+  'lunewall', 'lunefloor', 'darklunewall', 'darklunefloor', 'stratadeepwall', 'stratadeepfloor',
+  // Wave W17-E: the Crown Road's ceremonial cave kit is cave family —
+  // cave-context detection around rocks and boulders reads it exactly
+  // as it reads the generic set. (W17-D adds the Lunestone/Stonebore
+  // kinds to this set on its own branch; the merge unions the two.)
+  'crownwall', 'crownfloor']);
+const CAVE_FLOOR_KINDS = new Set(['cavefloor', 'lunefloor', 'darklunefloor', 'stratadeepfloor', 'crownfloor']);
+const CAVE_WALL_KINDS = new Set(['cavewall', 'lunewall', 'darklunewall', 'stratadeepwall', 'crownwall']);
 const DUNGEON_WALLS = new Set(['cavewall', 'towerwall', 'silphwall', 'plantwall',
   // Premium+ W6 (TX-5): the sub-theme wall kinds cast the same strip.
   'icewall', 'iceface', 'stratwall', 'bannerwall', 'cerwall', 'panelwall',
   // Wave W17-D: the Arden cave wall kinds cast the same strip.
-  'lunewall', 'darklunewall', 'stratadeepwall']);
+  'lunewall', 'darklunewall', 'stratadeepwall',
+  // Wave W17-E: the Crown Road's ashlar wall casts the same strip.
+  'crownwall']);
 const FLOOR_VARIANTS = {
   grass: 'grassVariants', path: 'pathVariants', cavefloor: 'caveFloorVariants',
   towerfloor: 'towerFloorVariants', silphfloor: 'silphFloorVariants', plantfloor: 'plantFloorVariants',
@@ -121343,7 +121441,7 @@ function groundFamilyOf(kind) {
   if (kind === 'grass' || kind === 'grassground' || kind === 'flower' || kind === 'tree' || kind === 'rock' || kind === 'sign' ||
       kind === 'fence' || kind === 'lamp' || kind === 'flowerbed') return 'grass';
   if (kind === 'cavefloor' || kind === 'towerfloor' || kind === 'silphfloor' || kind === 'plantfloor') return kind;
-  if (CAVE_FLOOR_KINDS.has(kind)) return kind; // W17-D: the Arden cave floors are own families too
+  if (CAVE_FLOOR_KINDS.has(kind)) return kind; // W17-D + W17-E: the Arden cave floors are own families too
   if (INTERIOR_FLOORS.has(kind)) return kind;
   if (kind === 'path' || isArchKind(kind)) return 'path';
   return null;
@@ -122018,7 +122116,7 @@ function resolveTileLayers(cache, kind, x, y, kindAt, t, phase, mapId) {
       }
       return layers.filter(Boolean);
     }
-    case 'cavewall': case 'lunewall': case 'darklunewall': case 'stratadeepwall': {
+    case 'cavewall': case 'lunewall': case 'darklunewall': case 'stratadeepwall': case 'crownwall': {
       // Strata walls by position hash; an exposed face (floor to the
       // south) wears the stalactite face. Perfection Pass Stage 2 Gate 0
       // (G0-5, standard B3): the face is DETERMINISTIC — 100% of exposed
@@ -122032,6 +122130,10 @@ function resolveTileLayers(cache, kind, x, y, kindAt, t, phase, mapId) {
         // their pix art carries its own hanging points in each
         // cave's register; only the drip overlay below is shared
         // with the generic cavewall treatment.
+        // Wave W17-E: the Crown Road's ashlar wall keeps its own face —
+        // its pix art carries its own hanging points in the ceremonial
+        // register; only the drip overlay below is shared with the
+        // generic cavewall treatment.
         layers.push(cache[kind]);
       }
       // W3: cave drip on exposed faces (slow cadence, phase-offset).
@@ -122045,6 +122147,7 @@ function resolveTileLayers(cache, kind, x, y, kindAt, t, phase, mapId) {
     case 'icefloor': case 'frostfloor': case 'icepool': case 'moonmoss':
     case 'stratafloor': case 'crackedfloor': case 'cerfloor': case 'cerpool':
     case 'lunefloor': case 'darklunefloor': case 'stratadeepfloor':
+    case 'crownfloor':
     case 'gratefloor': case 'cablefloor': {
       const layers = [groundBase(cache, kind, x, y)];
       // A dungeon wall directly north casts the shared shadow strip.
@@ -122509,6 +122612,7 @@ function resolveTileLayers(cache, kind, x, y, kindAt, t, phase, mapId) {
         for (const d of DIRS) { const f = groundFamilyOf(nb[d]); if (f) counts[f] = (counts[f] || 0) + 1; }
         ground = ['grass', 'path', 'cavefloor', 'towerfloor', 'silphfloor', 'plantfloor',
           'lunefloor', 'darklunefloor', 'stratadeepfloor',
+          'crownfloor',
           'centerfloor', 'martfloor', 'housefloor', 'gymfloor', 'labfloor']
           .filter((f) => counts[f]).sort((a, b) => counts[b] - counts[a])[0] || 'grass';
       }
@@ -129888,6 +129992,17 @@ const WALKABLE = new Set(['.', ',', 'D', 'E', 'C', 'F', 'J', 'K', '1', '2', 'V',
   // took 1092-1110, W17-B 1112-1131, W17-C 1132-1151 on its
   // parallel branch; 1111 stays empty.)
   ...[1152, 1153, 1156, 1157, 1160, 1162, 1164]
+    .map((i) => String.fromCodePoint(0x1E00 + i)),
+  // Wave W17-E: the Crown Road's cave floor char (U+1E00+1166,
+  // tiles.mjs W17E_KIND_DEFS) is walkable — crownfloor
+  // (victoryroad), swapped 1:1 from the walkable 'L' cavefloor
+  // char in both copies of the road, so floor stays floor. The
+  // crownwall char (1167) is NOT here: walls stay walls, like
+  // 'G'. (Indices 1166-1167 per the Director's index ruling:
+  // Tranches 1-3 took 1092-1110, 1112-1131 and 1132-1151;
+  // W17-D takes 1152-1165 on its parallel branch; 1111 stays
+  // empty.)
+  ...[1166]
     .map((i) => String.fromCodePoint(0x1E00 + i))]);
 
 // Trainer definitions for the slice.
@@ -132345,20 +132460,20 @@ const MAPS2 = {
   victoryroad: {
     id: 'victoryroad', name: 'Crown Road', music: 'pewter-theme', indoor: true, dark: true,
     rows: rows([
-      'GþGÿþÿGGLLGGGÿGG',
-      'GLLLLLLLLLLLLLLG',
-      'GLLBBLLLLLLBBLLG',
-      'GLLLLLLLLLLLLLLG',
-      'GLLLLNNNNLLLLLLG',
-      'GLLLLLLLLLLLLLLG',
-      'GLLBBLLLLLLBBLLG',
-      'GLLLLLLLLLLLLLLG',
-      'GLLLLLLNNNNLLLLG',
-      'GLLLLLLLLLLLLLLG',
-      'GLLBBLLLLLLBBLLG',
-      'GLLLLLLLLLLLLLLG',
-      'GLLLLLLLLLLLLLLG',
-      'GGGGGGGGLLGGGGGG',
+      '⊏þ⊏ÿþÿ⊏⊏⊎⊎⊏⊏⊏ÿ⊏⊏',
+      '⊏⊎⊎⊎⊎⊎⊎⊎⊎⊎⊎⊎⊎⊎⊎⊏',
+      '⊏⊎⊎BB⊎⊎⊎⊎⊎⊎BB⊎⊎⊏',
+      '⊏⊎⊎⊎⊎⊎⊎⊎⊎⊎⊎⊎⊎⊎⊎⊏',
+      '⊏⊎⊎⊎⊎NNNN⊎⊎⊎⊎⊎⊎⊏',
+      '⊏⊎⊎⊎⊎⊎⊎⊎⊎⊎⊎⊎⊎⊎⊎⊏',
+      '⊏⊎⊎BB⊎⊎⊎⊎⊎⊎BB⊎⊎⊏',
+      '⊏⊎⊎⊎⊎⊎⊎⊎⊎⊎⊎⊎⊎⊎⊎⊏',
+      '⊏⊎⊎⊎⊎⊎⊎NNNN⊎⊎⊎⊎⊏',
+      '⊏⊎⊎⊎⊎⊎⊎⊎⊎⊎⊎⊎⊎⊎⊎⊏',
+      '⊏⊎⊎BB⊎⊎⊎⊎⊎⊎BB⊎⊎⊏',
+      '⊏⊎⊎⊎⊎⊎⊎⊎⊎⊎⊎⊎⊎⊎⊎⊏',
+      '⊏⊎⊎⊎⊎⊎⊎⊎⊎⊎⊎⊎⊎⊎⊎⊏',
+      '⊏⊏⊏⊏⊏⊏⊏⊏⊎⊎⊏⊏⊏⊏⊏⊏',
     ]),
     warps: [
       { x: 8, y: 0, to: { map: 'indigo', x: 9, y: 13 } },
@@ -134204,18 +134319,18 @@ const MAPS3 = {
   victoryroad: {
     id: 'victoryroad', name: 'Crown Road', music: 'pewter-theme', indoor: true, dark: true,
     rows: rows([
-      'GGGÿGþGGÿGGGGþGGÿṸ',
-      'GṶLLLLLLLLLLLLLLLG',
-      'GLLBBLLLLLLBBLLLLG',
-      'GLLLLLLLṶLLLLLLLLG',
-      'GLLLLLLBBBBLLLLLLG',
-      'LLLLṶLLLLLLLLLLLLṸ',
-      'GLLLLṶLLLLLṶLLLṶLG',
-      'GLLBBLLLLLLBBLLṶLG',
-      'GṹLLLLLLLLLLLLLLLG',
-      'GṹLLL~~LLṶLṶLLLLLG',
-      'GṹLLLṷṷṷṷLLLLLLLṶG',
-      'ṸGGGGGGGGGGṸGGGGGG',
+      '⊏⊏⊏ÿ⊏þ⊏⊏ÿ⊏⊏⊏⊏þ⊏⊏ÿṸ',
+      '⊏Ṷ⊎⊎⊎⊎⊎⊎⊎⊎⊎⊎⊎⊎⊎⊎⊎⊏',
+      '⊏⊎⊎BB⊎⊎⊎⊎⊎⊎BB⊎⊎⊎⊎⊏',
+      '⊏⊎⊎⊎⊎⊎⊎⊎Ṷ⊎⊎⊎⊎⊎⊎⊎⊎⊏',
+      '⊏⊎⊎⊎⊎⊎⊎BBBB⊎⊎⊎⊎⊎⊎⊏',
+      '⊎⊎⊎⊎Ṷ⊎⊎⊎⊎⊎⊎⊎⊎⊎⊎⊎⊎Ṹ',
+      '⊏⊎⊎⊎⊎Ṷ⊎⊎⊎⊎⊎Ṷ⊎⊎⊎Ṷ⊎⊏',
+      '⊏⊎⊎BB⊎⊎⊎⊎⊎⊎BB⊎⊎Ṷ⊎⊏',
+      '⊏ṹ⊎⊎⊎⊎⊎⊎⊎⊎⊎⊎⊎⊎⊎⊎⊎⊏',
+      '⊏ṹ⊎⊎⊎~~⊎⊎Ṷ⊎Ṷ⊎⊎⊎⊎⊎⊏',
+      '⊏ṹ⊎⊎⊎ṷṷṷṷ⊎⊎⊎⊎⊎⊎⊎Ṷ⊏',
+      'Ṹ⊏⊏⊏⊏⊏⊏⊏⊏⊏⊏Ṹ⊏⊏⊏⊏⊏⊏',
     ]),
     warps: [
       { x: 0, y: 5, to: { map: 'route22', x: 1, y: 5 } },
