@@ -146,7 +146,27 @@
 //     edited identically; the map-id registry baseline line was
 //     updated in the same commit per its burn-down rule.
 //     Re-pinned with W-DIFF2.
-//     Tuple: [pass, connOk, connPairs, stepTouch, stepTot, components,
+//     ELEVENTH DOCUMENTED EXCEPTION (T24): oldale's pin is its POST-T24
+//     tuple. The Eldergrove rebuild replaced the shipped tg2 field
+//     (198 of 504 cells ἕ mud — the worst Maris share yet) with the
+//     calm dry-meadow + sand-fabric crossroads of the approved
+//     design, the Flower Clock bed + prop at the shipped clock
+//     garden, three thatch-roof facade houses, and the orphaned
+//     MART CLERK re-seated at his Mart's front apron: gate STATUS
+//     flips FAIL -> PASS on honest materials (fabric 0.9665 ->
+//     0.9821 — the shipped number leaned on tg2 counting as network;
+//     the new fabric is streets alone), junctions 4 -> 11 (all
+//     marked; both shipped direction texts stood invisible on plain
+//     grass, re-seated onto S tiles at real junctions; six more
+//     verbatim direction texts at the new junctions, T23 pattern),
+//     strict 0.9301 -> 0.6991 (desire lines get real corners; still
+//     above the 0.60 gate). Conn/step-offs identical (110/110, 5/5),
+//     apronMin identical (0.857), unanchoredAny identical (1 — the
+//     instance moves: the shipped border-frame decor cell is
+//     anchored once the frame reads as meadow, and the clock-
+//     garden's shoulder decor beside the new clockbed kind counts
+//     instead; 1/45, well under the 5% gate). Re-pinned with the
+//     T24 build.//     Tuple: [pass, connOk, connPairs, stepTouch, stepTot, components,
 //     junctionSites, junctionsBare, apronLow, apronMin, merged,
 //     onFabric, shoulderOrphans, unanchoredAny, strict, fabric].
 
@@ -228,7 +248,7 @@ const PIN = {
   "mossdeep": [0, 30, 132, 6, 6, 2, 3, 0, 0, 0.667, 0, 0, 0, 0, 0.9289, 0.9289],
   "navel": [0, 30, 90, 6, 6, 1, 5, 0, 1, 0.588, 0, 0, 0, 0, 0.9418, 0.9418],
   "newbark": [1, 72, 72, 7, 7, 1, 5, 0, 0, 0.857, 0, 0, 0, 0, 0.7385, 0.9913],
-  "oldale": [0, 110, 110, 5, 5, 1, 4, 0, 0, 0.857, 0, 0, 0, 1, 0.9301, 0.9665],
+  "oldale": [1, 110, 110, 5, 5, 1, 11, 0, 0, 0.857, 0, 0, 0, 1, 0.6991, 0.9821],
   "olivine": [0, 72, 110, 7, 7, 1, 9, 0, 0, 0.929, 0, 0, 0, 0, 0.9134, 0.9864],
   "oreburgh": [1, 182, 182, 8, 8, 1, 1, 0, 0, 0.714, 0, 0, 0, 0, 0.9985, 1],
   "pacifidlog": [0, 12, 30, 4, 4, 1, 0, 0, 0, 0.75, 0, 0, 0, 0, 0.9367, 0.9367],
