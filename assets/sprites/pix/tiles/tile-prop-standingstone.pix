@@ -1,0 +1,26 @@
+# Wave T47 (Repose kit): standingstone — a weathered standing stone: grey shaft with lichen patches and two cord-mark grooves (the ledger-stone register of the town tale 'The Day-Care Egg Ledger'), seated as a pair flanking the Route 210 landing at (10,1) and (16,1), three cells each side — the painting's standing stones on the fog road, transferred to the ground the backend leaves free (its own NW stone circle has no backend footprint; the town's shipped tombstones stand byte-kept). Fully opaque: the town grass is baked in (measured #1d8a19, tg-solaceon's rendered flat, #1d5419 speckle). (NO-SAME-KIT law; WAVE-T47-REPOSE-PLAN.md §5.)
+PIX tile-prop-standingstone 16 16
+gggggggggggggggg
+ggGGggggggggGGgg
+ggggggssssgggggg
+gggggsSSSSsggggg
+gggggsSllSsggggg
+gggggsSSSSsggggg
+gggggsSddSsggggg
+gggggssssssggggg
+gggggsSoSSsggggg
+gggggsSSSSsggggg
+gggggsSddSsggggg
+gggggssssssggggg
+gggggsSSSSsggggg
+gggggsSooSsggggg
+ggggggssssgggggg
+ggGGggggggggGGgg
+PAL
+g #1d8a19 town grass (measured tg-solaceon flat)
+G #1d5419 grass speckle
+s #7e878d stone edge shade
+S #a7adb0 weathered stone
+l #ccd1d2 stone light
+d #565e63 cord-mark groove
+o #7d9b4a lichen

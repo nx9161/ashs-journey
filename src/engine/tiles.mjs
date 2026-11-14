@@ -1836,6 +1836,42 @@ T46_KIND_DEFS.forEach(([kind], i) => {
 export const T46_PROP_KINDS = T46_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
 export const T46_WALL_KINDS = T46_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
 export const T46_FLOOR_KINDS = T46_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
+// Wave T47: Repose Town's own kit — 'Olive Shingle & River
+// Pebble': the pebblefloor (rounded river pebbles in offset
+// rows bedded in pale sand mortar — the town's registered
+// street), the oliveroof (olive wood shingle courses, worn
+// only by the shipped Daycare stamp's th roof cells, so the
+// painting's olive roofs land on the town's namesake building
+// and the House + Daycare roof share breaks) and two props:
+// the standingstone (a weathered standing stone with cord-mark
+// grooves — the tale 'The Day-Care Egg Ledger' register —
+// flanking the Route 210 landing) and the eggbasket (a straw
+// nest of eggs at the day-care yard and the Daycare frontage).
+// Indices 840-843 per the Director's index ruling (main's kinds
+// run 594-636 + 645-648 + 660-662 + 672-675 + 684-687 + 696-699 +
+// 708-711 + 720-724 + 732-736 + 744-748 + 756-759 (T40) +
+// 768-771 (T41) + 780-783 (T42) + 792-795 (T43) + 804-807 (T44) +
+// 816-819 (T45); the parallel T46 claim holds 828-831; 808-815 +
+// 820-827 + 832-839 stay empty), verified free against
+// origin/main, TILE_CHARS and every map row. Authored art:
+// assets/sprites/pix/tiles/tile-pebblefloor.pix,
+// tile-oliveroof.pix, tile-prop-standingstone.pix,
+// tile-prop-eggbasket.pix. (WAVE-T47-REPOSE-PLAN.md.)
+export const T47_KIND_DEFS = [
+  ['pebblefloor', 'floor'],
+  ['oliveroof', 'wall'],
+  ['standingstone', 'prop'],
+  ['eggbasket', 'prop'],
+];
+export const T47_KIND_CHARS = {};
+T47_KIND_DEFS.forEach(([kind], i) => {
+  const ch = String.fromCodePoint(0x1E00 + 840 + i);
+  T47_KIND_CHARS[kind] = ch;
+  TILE_CHARS[ch] = kind;
+});
+export const T47_PROP_KINDS = T47_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
+export const T47_WALL_KINDS = T47_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
+export const T47_FLOOR_KINDS = T47_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
 export const SINNOH_TOWN_GROUND_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg);
 export const SINNOH_TOWN_GROUND2_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg2);
 // TX-3: the 8 gym exteriors by town (original type-accent motifs).

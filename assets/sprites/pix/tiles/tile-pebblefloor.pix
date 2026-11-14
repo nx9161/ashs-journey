@@ -1,0 +1,24 @@
+# Wave T47 (Repose kit): pebblefloor — Repose Town's registered street kind (the fleet's street kinds carry the -floor suffix; the desire-path tiers key on it). RIVER-PEBBLE COBBLE: rounded pebbles in offset rows bedded in pale sand mortar, a moss fleck in the joints — the ruin-meadow's weathered stone (TOWN_STYLE: 'ruin-meadow weathered stone') laid as a street. A ROUNDED-COBBLE geometry: unlike Inglenook's giltfloor (rectangular setts), Heritage's heritagefloor (large irregular flags), Honeyfield's honeyfloor (hexagonal comb), Coalseam's clinkerfloor (fine aggregate), Revelry's beamfloor (steel plates), Shingle's shellfloor (raked shell sand) and Clover's cloverfloor (flecked earth). (NO-SAME-KIT law; WAVE-T47-REPOSE-PLAN.md §5.)
+PIX tile-pebblefloor 16 16
+lllmlllmlllmlllm
+laamlaamlaamlsam
+lasmlasmlasmlasm
+mmmmmmmmmmmommmm
+lmlllolllmlllmll
+amlaamlaamlaamla
+smlasmlasmlasmla
+mmmmmmmmmmmmmmmm
+lllmlllmlllmlllm
+laamlasmlaamlaam
+lasmlasmlasmlasm
+mmmmmmmmmmmmmmmm
+lmlllmlllmlllmll
+amlaamlaaolaamla
+smlasmlasmlasmla
+mmmmmmmmmmmmmmmm
+PAL
+a #b4bda1 pebble body
+l #d6dcc4 pebble crown light
+s #8d9678 pebble shade
+m #77775f sand mortar
+o #5f7d3c joint moss

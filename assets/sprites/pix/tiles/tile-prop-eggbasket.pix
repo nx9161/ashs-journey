@@ -1,0 +1,26 @@
+# Wave T47 (Repose kit): eggbasket — a straw nest basket holding three pale eggs, seated at the day-care yard's NW corner (2,12) and on the Daycare's east frontage shoulder (23,5) — the painting's eggs in the straw, at the two seats the backend leaves open (the yard plot itself stands byte-kept). Fully opaque: the town grass is baked in (measured #1d8a19, tg-solaceon's rendered flat, #1d5419 speckle). (NO-SAME-KIT law; WAVE-T47-REPOSE-PLAN.md §5.)
+PIX tile-prop-eggbasket 16 16
+gggggggggggggggg
+ggGGggggggggGGgg
+gggggggggggggggg
+gggggEEggggggggg
+ggggEeeEEggggggg
+gggEEeEEeEEggggg
+gggEeEEeEeEgGGgg
+ggggEEEEEEgggggg
+gggssssssssggggg
+gggswswswswsgggg
+ggggssssssgggggg
+ggggswswswgggggg
+gggggssssggggggg
+ggggggSSgggggggg
+ggGGggggggggGGgg
+gggggggggggggggg
+PAL
+g #1d8a19 town grass (measured tg-solaceon flat)
+G #1d5419 grass speckle
+E #f2ead6 egg shell
+e #d9cbae egg shade
+s #c9a44a straw weave
+w #a37f2c straw shade
+S #8a6a24 basket foot shade

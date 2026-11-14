@@ -705,6 +705,19 @@ export const WALKABLE = new Set(['.', ',', 'D', 'E', 'C', 'F', 'J', 'K', '1', '2
   // 780-783 + 792-795 + 804-807; the parallel T45 claim holds
   // 816-819; gaps stay empty.)
   ...[828]
+    .map((i) => String.fromCodePoint(0x1E00 + i)),
+  // Wave T47: the pebblefloor char (U+1E00+840, tiles.mjs
+  // T47_KIND_DEFS) is walkable street material — Repose
+  // Town's river-pebble cobble, swapped onto the town's tg2
+  // street cells (the front street, the north/south avenues,
+  // the ruins approach — all shipped walkable as tg2), so
+  // floor stays floor. (Indices 840-843 per the Director's
+  // index ruling: main's kinds run 594-636 + 645-648 +
+  // 660-662 + 672-675 + 684-687 + 696-699 + 708-711 +
+  // 720-724 + 732-736 + 744-748 + 756-759 + 768-771 +
+  // 780-783 + 792-795 + 804-807 + 816-819; the parallel
+  // T46 claim holds 828-831; gaps stay empty.)
+  ...[840]
     .map((i) => String.fromCodePoint(0x1E00 + i))]);
 
 // Trainer definitions for the slice.
