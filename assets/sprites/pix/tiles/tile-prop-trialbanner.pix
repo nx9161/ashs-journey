@@ -1,0 +1,29 @@
+# Wave T65 (Trial Grounds): a trial banner — a timber dock post with a bronze finial flying a teal-and-bronze pennant, on trialfloor baked in at its measured colours. Fully opaque. (WAVE-T65-TRIALGROUNDS-PLAN.md §5.)
+PIX tile-prop-trialbanner 16 16
+aaaaaattzaaaaaaa
+aaaaaattzeeeeeea
+aaaaaattzeezzeea
+aaaaaattzeeeeeea
+aaaaaattzEEEEEaa
+aaaaaattzaaaaaaa
+aaaaaattTaaaaaaa
+aaaaaattTaaaaaaa
+aaaaaattTaaaaaaa
+aaaaaattTaaaaaaa
+aaaaaattTaaaaaaa
+aaaaaattTaaaaaaa
+aaaaaattTaaaaaaa
+aaaahhtttthhaaaa
+aaaahhhhhhhhaaaa
+aabaaafaaabaaaaa
+PAL
+a #d8c08a sandstone
+b #cdb481 stone speckle
+f #b07a3f bronze fleck
+t #6a4a2e post timber
+T #54381f timber shade
+z #ad8f52 bronze light
+Z #8a6d3b bronze
+e #2f6e6a pennant teal
+E #265a56 teal shade
+h #bfa87c contact joint

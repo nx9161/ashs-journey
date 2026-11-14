@@ -2455,6 +2455,37 @@ T64_KIND_DEFS.forEach(([kind], i) => {
 export const T64_PROP_KINDS = T64_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
 export const T64_WALL_KINDS = T64_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
 export const T64_FLOOR_KINDS = T64_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
+// Wave T65 (Trial Grounds): "Trial Bronze & Flecked Sandstone"
+// — trialfloor (idx 1056): flecked pale sandstone flags wearing
+// the hub's whole shipped street graph (the generic path kind,
+// the T61/T63 template defect) 1:1; trialroof (idx 1057):
+// standing-seam bronze, worn by the Tower's roof band only,
+// breaking it out of the roof-terra share (Tower/Dome/Palace);
+// streakboard (idx 1058): the painting's blank plaza board,
+// standing on the town-sign record's own cell; trialbanner
+// (idx 1059): a bronze-and-teal pennant standard at the ferry
+// pier. (Indices 1056-1059 per the Director's index ruling:
+// main's kinds run …1032-1035 on this base; the parallel T64
+// claim holds 1044-1047; 1036-1043 + 1048-1055 stay empty.
+// Kind names verified unclaimed — driftroof/standingstone/
+// shellfloor/shellroof/gullpost are taken by other towns.
+// Chars U+1E00+1056..)
+// (Register: WAVE-T65-TRIALGROUNDS-PLAN.md §5.)
+export const T65_KIND_DEFS = [
+  ['trialfloor', 'floor'],
+  ['trialroof', 'wall'],
+  ['streakboard', 'prop'],
+  ['trialbanner', 'prop'],
+];
+export const T65_KIND_CHARS = {};
+T65_KIND_DEFS.forEach(([kind], i) => {
+  const ch = String.fromCodePoint(0x1E00 + 1056 + i);
+  T65_KIND_CHARS[kind] = ch;
+  TILE_CHARS[ch] = kind;
+});
+export const T65_PROP_KINDS = T65_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
+export const T65_WALL_KINDS = T65_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
+export const T65_FLOOR_KINDS = T65_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
 export const SINNOH_TOWN_GROUND_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg);
 export const SINNOH_TOWN_GROUND2_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg2);
 // TX-3: the 8 gym exteriors by town (original type-accent motifs).

@@ -1,0 +1,28 @@
+# Wave T65 (Trial Grounds): the blank streak board — a bronze-framed pale board on two timber posts, face deliberately empty, on trialfloor baked in at its measured colours. Fully opaque. (WAVE-T65-TRIALGROUNDS-PLAN.md §5.)
+PIX tile-prop-streakboard 16 16
+aabaaafaaabaaaaa
+aazzzzzzzzzzzzaa
+aazwwwwwwwwwwzaa
+aazwWWWWWWWWwzaa
+aazwwwwwwwwwwzaa
+aazwwwwwwwwwwzaa
+aazwWWWWWWWWwzaa
+aazwwwwwwwwwwzaa
+aazzzzzzzzzzzzaa
+aaataaaaaaaataaa
+aaataaaaaaaataaa
+aaataaaaaaaataaa
+aaataaaaaaaataaa
+aahhtaaaaaaattha
+aahhhhaaaahhhhha
+aabaaafaaabaaaaa
+PAL
+a #d8c08a sandstone
+b #cdb481 stone speckle
+f #b07a3f bronze fleck
+z #8a6d3b bronze frame
+Z #57431f frame shade
+w #c9a06a board face
+W #b8935e board shade
+t #6a4a2e post timber
+h #bfa87c contact joint

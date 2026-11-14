@@ -949,6 +949,16 @@ export const WALKABLE = new Set(['.', ',', 'D', 'E', 'C', 'F', 'J', 'K', '1', '2
   // kinds run …1020-1023 (T62); the parallel T63 claim holds
   // 1032-1035; 1036-1043 stay empty.)
   ...[1044]
+    .map((i) => String.fromCodePoint(0x1E00 + i)),
+  // Wave T65: the trialfloor char (U+1E00+1056, tiles.mjs
+  // T65_KIND_DEFS) is walkable street material — the Trial
+  // Grounds' flecked sandstone flags, swapped onto the hub's
+  // whole shipped street graph (authored as the generic `path`
+  // dirt track), so floor stays floor. (Indices 1056-1059 per
+  // the Director's index ruling: main's kinds run …1032-1035
+  // on this base; the parallel T64 claim holds 1044-1047;
+  // 1036-1043 + 1048-1055 stay empty.)
+  ...[1056]
     .map((i) => String.fromCodePoint(0x1E00 + i))]);
 
 // Trainer definitions for the slice.

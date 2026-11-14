@@ -1,0 +1,24 @@
+# Wave T65 (Trial Grounds): flecked sandstone flags — large pale sandstone slabs, staggered soft joints, sparse bronze flecks. The Trial Grounds’ street, worn by the whole shipped path graph. (NO-SAME-KIT law; WAVE-T65-TRIALGROUNDS-PLAN.md §5.)
+PIX tile-trialfloor 16 16
+aabaaafaaabaaaaa
+aaaaaaaaaaabaaaf
+aaabaaaaalaaaaaa
+aaaaaabaaaaaaaaa
+faaaaaaaaaabaaaa
+aaaabaaaaaaaabaa
+aaaaaaafaaaaaaaa
+mmmmmmmmmammmaam
+aaabaaaafaaaaaba
+aaaaaaaaaaabaaaa
+aabaaaaaafaaaaaa
+aaaaabaaaaaaaaab
+aaaaaalaaaaaafaa
+aaabaaaaaaaaaaaa
+afaaaaaabaaaaaba
+aaaaaaaafaaaaaaa
+PAL
+a #d8c08a sandstone
+b #cdb481 stone speckle
+m #bfa87c joint
+f #b07a3f bronze fleck
+l #e2cc9c stone light
