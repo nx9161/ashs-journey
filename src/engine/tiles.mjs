@@ -2428,6 +2428,33 @@ T63_KIND_DEFS.forEach(([kind], i) => {
 export const T63_PROP_KINDS = T63_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
 export const T63_WALL_KINDS = T63_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
 export const T63_FLOOR_KINDS = T63_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
+// Wave T64 (Sanctum Island): the town's own kit kinds (Festival
+// Stepping & Vermillion) — indices 1044-1047 per the Director's
+// index ruling (main's kinds run through T62's 1020-1023; the
+// parallel T63 claim holds 1032-1035; 1036-1043 stay empty).
+// stepfloor (idx 1044): large soft stepping discs scattered on
+// warm festival sand — the festival isle's street; shrineroof
+// (idx 1045): horizontal vermillion tile courses with a gold
+// ridge cap, worn only by the Sanctum Shrine stamp; festlantern
+// (idx 1046): a festival lantern post at the plaza's shoulders;
+// fairbanner (idx 1047): a nobori banner pole at the ferry
+// landing. Chars U+1E00+1044..
+// (Register: WAVE-T64-SANCTUM-PLAN.md §5.)
+export const T64_KIND_DEFS = [
+  ['stepfloor', 'floor'],
+  ['shrineroof', 'wall'],
+  ['festlantern', 'prop'],
+  ['fairbanner', 'prop'],
+];
+export const T64_KIND_CHARS = {};
+T64_KIND_DEFS.forEach(([kind], i) => {
+  const ch = String.fromCodePoint(0x1E00 + 1044 + i);
+  T64_KIND_CHARS[kind] = ch;
+  TILE_CHARS[ch] = kind;
+});
+export const T64_PROP_KINDS = T64_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
+export const T64_WALL_KINDS = T64_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
+export const T64_FLOOR_KINDS = T64_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
 export const SINNOH_TOWN_GROUND_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg);
 export const SINNOH_TOWN_GROUND2_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg2);
 // TX-3: the 8 gym exteriors by town (original type-accent motifs).

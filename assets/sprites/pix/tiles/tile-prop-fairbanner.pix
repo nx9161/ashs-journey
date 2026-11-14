@@ -1,0 +1,27 @@
+# Wave T64 (Sanctum): nobori banner pole — tall pole, vertical vermillion banner with a white wave-crest glyph, on sand. The ferry landing, Sanctum. (NO-SAME-KIT law; WAVE-T64-SANCTUM-PLAN.md §5.)
+PIX tile-prop-fairbanner 16 16
+baaaaacbaaadaaba
+aaappppppppaabaa
+aaapcVvvvvVabaca
+adapbVvvvvVbaada
+caapaVvwwvVaadaa
+aabpdVwvvwVaaaaa
+abapaVvwwvVaaaab
+badpaVvvvvVaaabd
+aaapaVvwwvVaabaa
+aaapaVwvvwVabaaa
+aaapbVvwwvVbaaaa
+aaapaVvvvvVaaaaa
+aabpcVvvvvVaaaca
+abapaaaabaadaaab
+baapaaabaacaaaba
+aaddddbaaaaaabaa
+PAL
+a #c6b388 sand
+b #bdab85 sand-shade
+c #d4c69c sand-light
+d #b2a581 sand-pebble
+p #3a2c20 pole dark
+v #b8371d vermillion
+V #cf4a24 vermillion light
+w #f6f1e2 wave white

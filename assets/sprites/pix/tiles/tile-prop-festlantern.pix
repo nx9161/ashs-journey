@@ -1,0 +1,28 @@
+# Wave T64 (Sanctum): festival lantern post — dark pole and crossarm, one round amber paper lantern with vermillion caps, on tropgrass. Plaza shoulders, Sanctum. (NO-SAME-KIT law; WAVE-T64-SANCTUM-PLAN.md §5.)
+PIX tile-prop-festlantern 16 16
+baaaaabaaaadbaaa
+aaaaaaacaaaaaaaa
+daacppppppppcdaa
+aaaaaaapdpppaaaa
+acbaaaapbvvvaaba
+aaaaaacpLLGLLaac
+baaaaabpLGGLLaaa
+aaadcaapLLLLLcaa
+cadaaaapaLLLaaad
+aaaaaaapaavaaaaa
+aabaaadpbavaaaba
+aaacadapaaaacaaa
+baaaaabpadaabaaa
+acaaaaapaacdaaaa
+aaaaaaeeeaaaaaac
+daaaaeeeeeaaadaa
+PAL
+a #5fa064 trop-grass
+b #4c8b4a trop-grass-dark
+c #729e66 grass-light
+d #7fb273 leaf-highlight
+e #458650 trop-grass-deep
+p #3a2c20 pole dark
+L #f2b64c lantern amber
+G #ffd97a lantern glow
+v #b8371d vermillion cap

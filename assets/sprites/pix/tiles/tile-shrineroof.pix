@@ -1,0 +1,23 @@
+# Wave T64 (Sanctum): vermillion shrine roof — horizontal vermillion tile courses with dark ridge lines and a gold ridge cap. Worn only by the Sanctum Shrine stamp. (NO-SAME-KIT law; WAVE-T64-SANCTUM-PLAN.md §5.)
+PIX tile-shrineroof 16 16
+gggggggggggggggg
+dddddddddddddddd
+dVVVVVdVVVVVdVVV
+dvvvvvdvvvvvdvvv
+dvvvvvdvvvvvdvvv
+dddddddddddddddd
+VVVdVVVVVdVVVVVd
+vvvdvvvvvdvvvvvd
+vvvdvvvvvdvvvvvd
+dddddddddddddddd
+dVVVVVdVVVVVdVVV
+dvvvvvdvvvvvdvvv
+dvvvvvdvvvvvdvvv
+dddddddddddddddd
+VVVdVVVVVdVVVVVd
+vvvdvvvvvdvvvvvd
+PAL
+g #e8b64c gold ridge cap
+d #7e2413 ridge dark
+V #cf4a24 vermillion light
+v #b8371d vermillion

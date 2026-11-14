@@ -938,6 +938,17 @@ export const WALKABLE = new Set(['.', ',', 'D', 'E', 'C', 'F', 'J', 'K', '1', '2
   // parallel T62 claim holds 1020-1023; 1012-1019 + 1024-1031
   // stay empty.)
   ...[1032]
+    .map((i) => String.fromCodePoint(0x1E00 + i)),
+  // Wave T64: the stepfloor char (U+1E00+1044, tiles.mjs
+  // T64_KIND_DEFS) is walkable street material — Sanctum's
+  // festival-stepping street, swapped onto the island's whole
+  // shipped street graph (authored as the generic `path` dirt
+  // track) plus the four surf-exit jetty heads + necks, so
+  // floor stays floor.
+  // (Indices 1044-1047 per the Director's index ruling: main's
+  // kinds run …1020-1023 (T62); the parallel T63 claim holds
+  // 1032-1035; 1036-1043 stay empty.)
+  ...[1044]
     .map((i) => String.fromCodePoint(0x1E00 + i))]);
 
 // Trainer definitions for the slice.
