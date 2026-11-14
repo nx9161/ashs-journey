@@ -2972,6 +2972,36 @@ T35_KIND_DEFS.forEach(([kind], i) => {
 const T35_PROP_KINDS = T35_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
 const T35_WALL_KINDS = T35_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
 const T35_FLOOR_KINDS = T35_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
+// Wave T36 (WAVE-T36-STARFALL-PLAN.md): Starfall City's own
+// four-tile kind set (NO-SAME-KIT law — every town its own kit).
+// Kind indices 708-711, verified free against origin/main at
+// dispatch (T34's 684-687 are main's ceiling; 688-707 are left
+// clear, including 696-699 for the parallel T35 Lotus Cove
+// claim). starroof is Starshingle — pale-cyan shingle courses
+// with tiny star flecks, worn by the Space Center facade,
+// Alban's house and the facade cottage (the Gym keeps its
+// banded tr-mossdeep slab — two roof families, one palette);
+// starfloor is the town's star-sand lane, its registered street
+// kind; dockfloor is the horizontal harbour-board pier kind
+// (the second registered street kind, on the r124/r125/r126
+// surf seams + the E bridge); chartboard is the meteor-chart
+// board the Space Center's own sign names, seated east of the
+// Center.
+const T36_KIND_DEFS = [
+  ['starroof', 'wall'],
+  ['starfloor', 'floor'],
+  ['dockfloor', 'floor'],
+  ['chartboard', 'prop'],
+];
+const T36_KIND_CHARS = {};
+T36_KIND_DEFS.forEach(([kind], i) => {
+  const ch = String.fromCodePoint(0x1E00 + 708 + i);
+  T36_KIND_CHARS[kind] = ch;
+  TILE_CHARS[ch] = kind;
+});
+const T36_PROP_KINDS = T36_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
+const T36_WALL_KINDS = T36_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
+const T36_FLOOR_KINDS = T36_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
 const SINNOH_TOWN_GROUND_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg);
 const SINNOH_TOWN_GROUND2_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg2);
 // TX-3: the 8 gym exteriors by town (original type-accent motifs).
@@ -94726,6 +94756,78 @@ const ART = {
     "ggPggggggglggPgg",
     "gsPsgsgslsgsgPgs"
   ] },
+  "tile-starroof": { w: 16, h: 16, pal: {"l":"#bcd4da","t":"#dcebef","d":"#a8c4cc","s":"#84a3ab","g":"#e8c85a","w":"#f4f8f4"}, rows: [
+    "sltttlsltttlsltt",
+    "slllwlslllllslll",
+    "sllldlslwllgslll",
+    "ssssssssssssssss",
+    "ttlsltttlsltttls",
+    "lllslllllslllgls",
+    "lwlsgllllslldlls",
+    "ssssssssssssssss",
+    "sltttlsltttlsltt",
+    "slllllslllllswll",
+    "slllllsdllllslll",
+    "ssssssssssssssss",
+    "ttwsltttgsltttls",
+    "lllsllwllsllllls",
+    "lldslllllswlllls",
+    "ssssssssssssssss"
+  ] },
+  "tile-starfloor": { w: 16, h: 16, pal: {"b":"#d8c08a","l":"#e4d09e","d":"#c2aa72","w":"#f4ecd8","g":"#e8c85a"}, rows: [
+    "gbblbblbblbblbbl",
+    "bbbbgbbbdwbbbbbb",
+    "bbbbbbbbgbbbbbbb",
+    "wlbbldblbblbglbb",
+    "bbbbbbbbbwbbbdbb",
+    "bbdbbbbbbbbbbbbb",
+    "wblbblbblbdlbblb",
+    "bbbbbbbbbwbbbbbb",
+    "bgbbbbbdbbbbbbbb",
+    "wbblbglbblbblbbd",
+    "bbbbdbbbbgbbbbbb",
+    "bbbbbbbbbbbbdgbb",
+    "wdbblbblbblbblbb",
+    "bbbbbbbbbwbbbbbb",
+    "bbbbbbbbbbbbbbbb",
+    "wblbbldblbblbblb"
+  ] },
+  "tile-dockfloor": { w: 16, h: 16, pal: {"p":"#9a8468","l":"#b09a78","d":"#847052","t":"#4a3a28","w":"#d8d4c8"}, rows: [
+    "lpppptppppplpppp",
+    "ppppptpppppppdpp",
+    "ppppptpppdpwpppp",
+    "tttttttttttttttt",
+    "pdppppppplptpppp",
+    "ppppppppppptpwdp",
+    "ppppwpppppdtpppp",
+    "tttttttttttttttt",
+    "ppdpptplpppppppw",
+    "ppppptwppppppppd",
+    "ppppptpppppdpppp",
+    "tttttttttttttttt",
+    "pppdplppwpptpppp",
+    "ppppppppppptpppp",
+    "ppppppppppptdppp",
+    "tttttttttttttttt"
+  ] },
+  "tile-prop-chartboard": { w: 16, h: 16, pal: {"g":"#198b24","d":"#195524","l":"#2a9e33","P":"#6a4a2e","F":"#8a6a42","B":"#e8e2cc","I":"#5a6a7a","S":"#f4f8f4","G":"#e8c85a","C":"#a8825a"}, rows: [
+    "dggggggggdggglgg",
+    "gFFFFFFFFFFFFFFl",
+    "gFBSBBBBBSBBGGFd",
+    "dFBBIIIIIBBIIBFg",
+    "gFBIBBSBBIIBBBFg",
+    "gFBBIIIIIIBBBBFd",
+    "dFBBSBBBIBBSBBFg",
+    "gFBBBBBSBBBBBBFg",
+    "gFFFFFFFFFFFFFFd",
+    "dgPPglgggdggPPgg",
+    "ggPPggglggggPPgg",
+    "ggPPgFCCCCFgPPgd",
+    "dgPPgCFCCFClPPgg",
+    "lgPPgFCCCCFgPPgg",
+    "ggPPggdgggggPPgd",
+    "dggglggggdgggggg"
+  ] },
   "tile-trellisroof": { w: 16, h: 16, pal: {"c":"#f2e7ce","r":"#cf8296","l":"#e2a5b4","d":"#a85f74","b":"#8e3d55","v":"#557f3e"}, rows: [
     "cclrllllcclllvll",
     "cccldllccccbrllc",
@@ -115230,6 +115332,11 @@ for (const k of T34_FLOOR_KINDS) TILE_ART[k] = 'tile-' + k;
 for (const k of T35_PROP_KINDS) TILE_ART[k] = 'tile-prop-' + k;
 for (const k of T35_WALL_KINDS) TILE_ART[k] = 'tile-' + k;
 for (const k of T35_FLOOR_KINDS) TILE_ART[k] = 'tile-' + k;
+// Wave T36: Starfall's meteor-chart board draws its prop tile;
+// its starshingle roofs and star-sand/dock-plank streets draw theirs.
+for (const k of T36_PROP_KINDS) TILE_ART[k] = 'tile-prop-' + k;
+for (const k of T36_WALL_KINDS) TILE_ART[k] = 'tile-' + k;
+for (const k of T36_FLOOR_KINDS) TILE_ART[k] = 'tile-' + k;
 // Premium+ W6 (TX-3/PL-1): door-open frames, authored in TX-3 for every
 // door kind. The warp-fade engine that plays them lands in W7 — W6
 // wires the frames (this registry + cache.doorOpen + doorOpenCanvas)
@@ -117043,6 +117150,10 @@ function resolveTileLayers(cache, kind, x, y, kindAt, t, phase, mapId) {
     // boardwalk is baked in).
     case 'chainbar':
     case 'gullpost':
+    // Wave T36: Starfall's meteor-chart board composites over its
+    // green the same way (its art is fully opaque — the town
+    // grass is baked in).
+    case 'chartboard':
     // Wave T17: the radio mast composites over its compound grass too.
     case 'radiomast': {
       // Object tiles carry transparent surrounds (Wave 1): lay the ground
@@ -123979,6 +124090,18 @@ const WALKABLE = new Set(['.', ',', 'D', 'E', 'C', 'F', 'J', 'K', '1', '2', 'V',
   // 672-675; the parallel T34 claim holds 684-687; 606-607
   // stay empty.)
   ...[697]
+    .map((i) => String.fromCodePoint(0x1E00 + i)),
+  // Wave T36: the starfloor char (U+1E00+709, tiles.mjs
+  // T36_KIND_DEFS) is walkable street material — Starfall
+  // City's star-sand lane, swapped onto the town's street
+  // cells (which shipped as walkable tg2 mud), and the
+  // dockfloor char (U+1E00+710) likewise on the town's three
+  // surf-seam piers and its E bridge (all cells that shipped
+  // as walkable water), so floor stays floor. (Indices
+  // 708-711 per the Director's index ruling: main's kinds run
+  // 594-636 + 645-648 + 660-662 + 672-675 + 684-687; 606-607
+  // stay empty, 688-707 left clear.)
+  ...[709, 710]
     .map((i) => String.fromCodePoint(0x1E00 + i))]);
 
 // Trainer definitions for the slice.
@@ -149811,24 +149934,24 @@ const MAPS7 = {
     "music": "pewter-theme",
     "weather": "clear",
     "rows": [
-      "ὮὮὮὯὮὮὮὮὮὮὯὮὮ~~ὮὮὮὯὮὮὮὮὮὮὯὮὮ",
-      "ὮὬὬὬὬὬὬὬὬὬὬoὬ~~ὬὬὬὬὬὬὬἊὬὬὯὬὮ",
-      "ὮὬὬjklmὬὬdeef~~ὰὰὰὰὬὬὰὰὰὰὬὬὮ",
-      "ὮSὭAJKAὬὬP12P~~UVYUὬὯάάάάὬὬὮ",
-      "ὮἊὭὭὭὭὭὭὭὭὭὭὭ~~ὭὭὭὭḦὬὬὬὬὬὬὯὮ",
-      "ὮὭὭὭὭὭὭὭὭὭὭὭὭ~~ὭὭὭὭὭ~~SὭὬὬὬὮ",
-      "ὮὭὭὭὭὭὭὭὭὭὭὭὭὭὭὭὭḦἊὭ~~ὭὭὬὬḦὮ",
-      "ὮὭὭὭὭὭὭὭὭὭὭὭὭὭὭὭὭὭὭὭ~~ὭὭnὬὬὮ",
-      "~ὭὭὭὭὭὭὭὭὭὭὭὭἊὭὬὬὭὭὬ~~ὭὭὬὬὬὮ",
-      "~ὭὭὭὭὭὭὭὭḦὭὭἊὭὭὭὭὬὭὬ~~ὭὬnὬὬὮ",
-      "ὮὯὭὭὭὭὭὭὭὭὭὭὭὭὭὭὭὭὭὬ~~ὭὭὬὬὬὮ",
-      "ὮὬnὭ....ὭὭὭὭὭὭὭὭὭὭὭὬ~~ὭὭὭSὬὮ",
-      "ὮὬὬ,,,,,.Ὥ...ὭὭὭὭὭὬὬ~~ὭὬὲὲὲὮ",
-      "ὮὬὬ,,,,,..,,,.nnoḶὬὬ~~ὭὬέ—έὮ",
-      "ὮὬὬὬ,Ḧ,,Ὧ.,,,.ὯὬnὬὬḶ~~ὭὬὬὬὬὮ",
-      "ὮὬὬὬὬὬὬὬὬὯ,,,ὬὬὬὬὬὬὬ~~ὭὬḦὬὬὮ",
-      "ὮὬὬὬὬὬὬὬὬὬὬὬὬὬὬὬὬὬὬḶ~~ὭnὬὬὬὮ",
-      "ὮὮὮὬὮὮὮὮὮὮὬὮὮὮὮὮὮὬὮὮ~~ὮὮὮὮὮὮ"
+      "ὮὮὮὯὮὮὮὮὮὮὯὮὮ⃆⃆ὮὮὮὯὮὮὮὮὮὮὯὮὮ",
+      "ὮὬὬὬὬὬὬὬὬὬὬoS⃆⃆ὬὬὬὬὬὬὬἊὬὬὯὬὮ",
+      "ὮὬὬjklmὬὬdeef⃆~ὰὰὰὰὬὬ⃄⃄⃄⃄ὬὬὮ",
+      "ὮSὬAJKAὬὬP12P⃆~UVYUὬὯάάάάὬὬὮ",
+      "ὮἊ⃅⃅⃅⃅⃅⃅⃅⃅⃅⃅⃅⃆~⃅⃅⃅⃅ḦὬὬὬὬὬ⃇ὯὮ",
+      "ὮὬὬS⃅ὬὬὬSὬ⃅ὬὬ⃆~S⃅ὬὬὬ~~SὬὬὬὬὮ",
+      "ὮSὬὬ⃅ὬὬὬὬὬ⃅ὬὬ⃅⃅Ὤ⃅ḦἊ⃅⃆⃆⃅ὬὬὬḦὮ",
+      "Ὦ⃅⃅⃅⃅⃅⃅⃅⃅⃅⃅⃅⃅⃅⃅⃅⃅⃅⃅⃅~~⃅ὬnὬὬὮ",
+      "⃆⃅ὬὬὬὬὬὬὬὬὬὬὬἊὬὬὬὬ⃅Ὤ~~⃅ὬὬὬὬὮ",
+      "⃆⃅⃅⃅⃅⃅⃅⃅⃅ḦὬὬἊὬὬὬὬS⃅Ὤ~~⃅SnὬὬὮ",
+      "ὮὯὬὬὬὬὬS⃅ὬὬὬὬὬὬὬὬὬ⃅Ὤ~~⃅ὬὬὬὬὮ",
+      "ὮὬnὬ....⃅⃅ὬὬὬὬὬὬὬὬ⃅Ὤ~~⃅⃅⃅SὬὮ",
+      "ὮὬὬ,,,,,.⃅...⃅ὬὬὬὬὬὬ~~⃅Ὤ⃄⃄⃄Ὦ",
+      "ὮὬὬ,,,,,..,,,.nnoḶὬὬ~~⃅Ὤέ—έὮ",
+      "ὮὬὬὬ,Ḧ,,Ὧ.,,,.ὯὬnὬὬḶ~~⃅ὬὬὬὬὮ",
+      "ὮὬ⃄⃄⃄ὬὬὬὬὯ,,,ὬὬὬὬὬὬὬ~~⃅SḦὬὬὮ",
+      "ὮὬέsέὬὬὬὬὬὬὬὬὬὬὬὬὬὬḶ⃆⃆⃅nὬὬὬὮ",
+      "ὮὮὮὬὮὮὮὮὮὮὬὮὮὮὮὮὮὬὮὮ⃆⃆ὮὮὮὮὮὮ"
     ],
     "warps": [
       {"x": 4, "y": 3, "to": {"map": "center", "x": 4, "y": 4}, "via": {"map": "mossdeep", "x": 4, "y": 4}},
@@ -149849,13 +149972,20 @@ const MAPS7 = {
       {"x": 1, "y": 3, "text": "STARFALL CITY — The island city that watches the sky for a living. The Space Center tower keeps the north street; the gym keeps the twins’ hours."},
       {"x": 22, "y": 5, "text": "STARFALL SPACE CENTER — Rockets, meteor charts, and a viewing floor that never blinks. Visitor launches are announced by bell."},
       {"x": 17, "y": 9, "text": "STARFALL CITY — West: ROUTE 124 · North: ROUTE 125 · South: ROUTE 126."},
-      {"x": 23, "y": 9, "text": "STARFALL CITY — West: ROUTE 124 · North: ROUTE 125 · South: ROUTE 126."}
+      {"x": 23, "y": 9, "text": "STARFALL CITY — West: ROUTE 124 · North: ROUTE 125 · South: ROUTE 126."},
+      {"x": 12, "y": 1, "text": "STARFALL CITY — West: ROUTE 124 · North: ROUTE 125 · South: ROUTE 126."},
+      {"x": 15, "y": 5, "text": "STARFALL CITY — West: ROUTE 124 · North: ROUTE 125 · South: ROUTE 126."},
+      {"x": 3, "y": 5, "text": "STARFALL CITY — West: ROUTE 124 · North: ROUTE 125 · South: ROUTE 126."},
+      {"x": 8, "y": 5, "text": "STARFALL CITY — West: ROUTE 124 · North: ROUTE 125 · South: ROUTE 126."},
+      {"x": 1, "y": 6, "text": "STARFALL CITY — West: ROUTE 124 · North: ROUTE 125 · South: ROUTE 126."},
+      {"x": 7, "y": 10, "text": "STARFALL CITY — West: ROUTE 124 · North: ROUTE 125 · South: ROUTE 126."},
+      {"x": 23, "y": 15, "text": "STARFALL CITY — West: ROUTE 124 · North: ROUTE 125 · South: ROUTE 126."}
     ],
     "npcs": [
       {"x": 11, "y": 7, "name": "SPACE RESEARCHER ORBIT", "art": "scientist", "skin": "#c89878", "shirt": "#2a7a6a", "pants": "#3a3a4a", "hair": "#7a4a1a", "dialogue": ["We track every rock that falls toward Maris. Most miss. The paperwork never does.", "A collector named Alban dives the trenches east of here for stones the sea keeps. Ask at the shut house."]},
       {"x": 18, "y": 12, "name": "DIVE TUTOR MARA", "art": "lass", "skin": "#d8a878", "shirt": "#7a4a8a", "pants": "#2a2a3a", "hair": "#c0c0c0", "dialogue": ["The trenches have doors, if you know how to look: dark water, a held breath, and down.", "Mind Badge in hand and a partner who knows the way down — that is the whole key, divers say."]},
       {"x": 6, "y": 13, "name": "TWIN FAN SOL", "art": "kid", "skin": "#f0c8a0", "shirt": "#3a7a4a", "pants": "#4a3a2a", "hair": "#2a1a0a", "dialogue": ["Two gym leaders, one gym. Challengers get read twice and battled once, thoroughly.", "Ebbtide Cave north changes with the tide. The island keeps two faces and shows you one."]},
-      {"x": 3, "y": 5, "name": "MART CLERK", "art": "clerk", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#4a3a2a", "dialogue": ["Starfall Mart — island stock, rocket-delivered prices."], "mart": {"stock": ["greatball", "ultraball", "hyperpotion", "fullheal", "revive", "superpotion"]}},
+      {"x": 9, "y": 4, "name": "MART CLERK", "art": "clerk", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#4a3a2a", "dialogue": ["Starfall Mart — island stock, rocket-delivered prices."], "mart": {"stock": ["greatball", "ultraball", "hyperpotion", "fullheal", "revive", "superpotion"]}},
     ],
     "encounters": {"rate": 0.12, "table": [{"species": "wingull", "min": 265, "max": 272, "weight": 24}, {"species": "pelipper", "min": 267, "max": 274, "weight": 12}, {"species": "chimecho", "min": 266, "max": 273, "weight": 8}, {"species": "solrock", "min": 266, "max": 273, "weight": 10}, {"species": "lunatone", "min": 266, "max": 273, "weight": 10}, {"species": "linoone", "min": 266, "max": 272, "weight": 12}], "water": [{"species": "tentacool", "min": 264, "max": 272, "weight": 24}, {"species": "tentacruel", "min": 268, "max": 274, "weight": 6}, {"species": "wingull", "min": 264, "max": 272, "weight": 20}, {"species": "pelipper", "min": 267, "max": 274, "weight": 10}, {"species": "magikarp", "min": 264, "max": 270, "weight": 14}, {"species": "wailmer", "min": 266, "max": 274, "weight": 10}, {"species": "carvanha", "min": 266, "max": 273, "weight": 10}, {"species": "sharpedo", "min": 269, "max": 274, "weight": 5}], "waterRate": 0.08},
     "items": [],
