@@ -503,13 +503,13 @@ export const WALKABLE = new Set(['.', ',', 'D', 'E', 'C', 'F', 'J', 'K', '1', '2
   // so floor stays floor.
   ...[622]
     .map((i) => String.fromCodePoint(0x1E00 + i)),
-  // Wave T29: the gridfloor char (U+1E00+623, tiles.mjs
+  // Wave T29: the gridfloor char (U+1E00+626, tiles.mjs
   // T29_KIND_DEFS) is walkable street material — Lilac City's
   // bronze sett grid, swapped onto the town's street cells
   // (which shipped as walkable tg2 mud), so floor stays
-  // floor. (Indices 622-625 per the Director's index
-  // discipline: main runs to 621, 606-607 stay empty.)
-  ...[623]
+  // floor. (Indices 625-628 after the Director's re-index
+  // ruling: W-DIFF7 holds 622-624; 606-607 stay empty.)
+  ...[626]
     .map((i) => String.fromCodePoint(0x1E00 + i))]);
 
 // Trainer definitions for the slice.

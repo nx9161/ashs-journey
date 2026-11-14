@@ -1227,9 +1227,11 @@ export const WD7_PROP_KINDS = WD7_KIND_DEFS.filter(([, c]) => c === 'prop').map(
 export const WD7_WALL_KINDS = WD7_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
 export const WD7_FLOOR_KINDS = WD7_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
 // Wave T29: Lilac City's own kit — Bronze Grid & Sunlamp
-// (WAVE-T29-LILAC-PLAN.md). Indices 622-625 (the Director's
-// index discipline: main runs 594-605 + 608-621, 606-607 stay
-// empty; this block verified free before registration).
+// (WAVE-T29-LILAC-PLAN.md). Indices 625-628 — RE-INDEXED
+// in-branch under the Director's index ruling of 2026-11-13:
+// W-DIFF7 (Tidehaven + Arcport) registered pierfloor 622,
+// mansardroof 623, copperroof 624 first, so this block moved
+// above that ceiling (606-607 stay empty, as always).
 // 'bronzroof' (wall) — staggered olive-bronze shingle courses
 // on the Gym, the Game Corner and the town's two facade
 // cottages. 'gridfloor' (floor) — the fine bronze sett grid,
@@ -1247,7 +1249,7 @@ export const T29_KIND_DEFS = [
 ];
 export const T29_KIND_CHARS = {};
 T29_KIND_DEFS.forEach(([kind], i) => {
-  const ch = String.fromCodePoint(0x1E00 + 622 + i);
+  const ch = String.fromCodePoint(0x1E00 + 625 + i);
   T29_KIND_CHARS[kind] = ch;
   TILE_CHARS[ch] = kind;
 });
