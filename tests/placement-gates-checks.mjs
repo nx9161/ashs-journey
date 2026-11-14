@@ -1298,6 +1298,60 @@
 //     fabric 0.9948 -> 0.9972 (the landed figures are
 //     carried by the authored street graph, not the mud).
 //     NO other town's pin moves.
+//     sunnyshore's pin, and NO other town's pin moves.
+//     The Brightshore City rebuild on its own kit from
+//     birth ('Solar Panel & Amber Glint', idx 912-915:
+//     golden panel-grid streets, the solar-blue-seamed
+//     amber panelroof, the glintpost prop, the
+//     coilcradle prop) per WAVE-T53-BRIGHTSHORE-PLAN.md.
+//     Brightshore shipped a mud-carried PASS: 178 of its
+//     540 cells were tg2 and its conn 132/132 / strict
+//     0.9967 were the mud sea's figures (its whole
+//     183-cell network was the mud plus the lighthouse
+//     garden's path dots). The build retires the mud
+//     (tg2 178 -> 0), rebuilds the street graph in
+//     panelfloor (the front street, the north road to
+//     the shipped r223 exits, the central avenue, the
+//     main street, the shore connector + shore road,
+//     the west lighthouse lane, the lighthouse step-off
+//     and the plot's dot threading), breaks the Gym +
+//     Lighthouse tr-roof share with the panelroof on
+//     the Gym (the Lighthouse keeps tr-sunnyshore at
+//     its backend SW seat — both the approved painting
+//     and the backend record support the lighthouse
+//     here: a named map, a warp, a sign, a keeper and
+//     the town's tale; the warp decides its ground, the
+//     painting's NE point is not followed), seats the
+//     glintpost pair flanking the avenue at the front
+//     street and the tale's coilcradle at the
+//     Lighthouse's east shoulder, builds the painting's
+//     one facade cottage on the E-mid lawn, tiles its
+//     two invisible DIRS and marks the validator-named
+//     bare junctions with verbatim DIRS copies at
+//     (12,6) and (2,7), and moves the orphaned MART
+//     CLERK (3,5) -> (9,4) at his Mart's west-front
+//     apron. Gate STATUS holds: pass 1 -> 1, conn
+//     132/132, step-offs 8/8, components one 88-cell
+//     street graph, junctions 3 sites -> 2 sites, 0
+//     bare, apronMin 0.875 -> 0.857 (the facade
+//     cottage's ring honestly prices the shipped lamp
+//     (21,7) and the lighthouse sign's corner standing
+//     in it — the fleet's standing cottage figure,
+//     shared with jubilife and hearthome), unanchored
+//     decor 0 -> 0, strict 0.9967 -> 0.78, fabric
+//     0.9967 -> 0.9979 (the landed figures are carried
+//     by the authored street graph, not the mud). NO
+//     other town's pin moves.
+//     FIFTY-FIRST DOCUMENTED EXCEPTION (WAVE T53; the
+//     FIFTIETH is WAVE T52 Rimefall's, recorded below;
+//     the branch carried its own FIFTIETH claim — the
+//     Director renumbered it at merge per standing
+//     practice):
+//     STREET_REGISTRY gains an entry — sunnyshore:
+//     [panelfloor] (the rebuild-wave registration the
+//     registry's own terms promise each town: the
+//     town's authored street, judged by the gates on
+//     its fabric as the fleet's streets are) — and
 //     celestic's pin, and NO other town's pin moves.
 //     The Astral Town rebuild on its own kit from birth
 //     ('Moonstone & Dusk Timber', idx 888-891: pale
@@ -1561,8 +1615,8 @@ async function gateTuple(id, t) {
 }
 
 // 1. registry scope lock
-ok('street registry is exactly { vermilion: [boardwalk], blackthorn: [settfloor], silvertown: [marblefloor], ecruteak: [wornfloor], saffron: [avenuefloor], violet: [violetfloor], azalea: [brickfloor], mahogany: [gravelfloor], rustboro: [cutstonefloor], fuchsia: [marshfloor], cianwood: [driftfloor], dewford: [plankfloor], viridian: [slatefloor], celadon: [promfloor], slateport: [quayfloor, boardwalk], cerulean: [pierfloor], mauville: [gridfloor], lavender: [shinglefloor], cherrygrove: [inlayfloor], verdanturf: [petalfloor, cavefloor], olivine: [harbourfloor, jettyfloor], fallarbor: [ashfloor], lavaridge: [steamfloor, terracefloor], fortree: [canopyfloor, boardwalk], lilycove: [cobblefloor, cavefloor], mossdeep: [starfloor, dockfloor], sootopolis: [craterfloor, cavefloor], pacifidlog: [raftfloor], evergrande: [plateaufloor, cavefloor], twinleaf: [cloverfloor], sandgem: [shellfloor], jubilife: [beamfloor], oreburgh: [clinkerfloor], floaroma: [honeyfloor], eterna: [heritagefloor], hearthome: [giltfloor], solaceon: [pebblefloor], veilstone: [shardfloor], canalave: [ringfloor, boardwalk, harbourstone, trussfloor], pastoria: [walkfloor], celestic: [moonfloor], snowpoint: [rimefloor] }',
-  JSON.stringify(STREET_REGISTRY) === '{"vermilion":["boardwalk"],"blackthorn":["settfloor"],"silvertown":["marblefloor"],"ecruteak":["wornfloor"],"saffron":["avenuefloor"],"violet":["violetfloor"],"azalea":["brickfloor"],"mahogany":["gravelfloor"],"rustboro":["cutstonefloor"],"fuchsia":["marshfloor"],"cianwood":["driftfloor"],"dewford":["plankfloor"],"viridian":["slatefloor"],"celadon":["promfloor"],"slateport":["quayfloor","boardwalk"],"cerulean":["pierfloor"],"mauville":["gridfloor"],"lavender":["shinglefloor"],"cherrygrove":["inlayfloor"],"verdanturf":["petalfloor","cavefloor"],"olivine":["harbourfloor","jettyfloor"],"fallarbor":["ashfloor"],"lavaridge":["steamfloor","terracefloor"],"fortree":["canopyfloor","boardwalk"],"lilycove":["cobblefloor","cavefloor"],"mossdeep":["starfloor","dockfloor"],"sootopolis":["craterfloor","cavefloor"],\"pacifidlog\":[\"raftfloor\"],\"evergrande\":[\"plateaufloor\",\"cavefloor\"],\"twinleaf\":[\"cloverfloor\"],\"sandgem\":[\"shellfloor\"],\"jubilife\":[\"beamfloor\"],\"oreburgh\":[\"clinkerfloor\"],\"floaroma\":[\"honeyfloor\"],\"eterna\":[\"heritagefloor\"],\"hearthome\":[\"giltfloor\"],\"solaceon\":[\"pebblefloor\"],\"veilstone\":[\"shardfloor\"],\"canalave\":[\"ringfloor\",\"boardwalk\",\"harbourstone\",\"trussfloor\"],\"pastoria\":[\"walkfloor\"],\"celestic\":[\"moonfloor\"],\"snowpoint\":[\"rimefloor\"]}',
+ok('street registry is exactly { vermilion: [boardwalk], blackthorn: [settfloor], silvertown: [marblefloor], ecruteak: [wornfloor], saffron: [avenuefloor], violet: [violetfloor], azalea: [brickfloor], mahogany: [gravelfloor], rustboro: [cutstonefloor], fuchsia: [marshfloor], cianwood: [driftfloor], dewford: [plankfloor], viridian: [slatefloor], celadon: [promfloor], slateport: [quayfloor, boardwalk], cerulean: [pierfloor], mauville: [gridfloor], lavender: [shinglefloor], cherrygrove: [inlayfloor], verdanturf: [petalfloor, cavefloor], olivine: [harbourfloor, jettyfloor], fallarbor: [ashfloor], lavaridge: [steamfloor, terracefloor], fortree: [canopyfloor, boardwalk], lilycove: [cobblefloor, cavefloor], mossdeep: [starfloor, dockfloor], sootopolis: [craterfloor, cavefloor], pacifidlog: [raftfloor], evergrande: [plateaufloor, cavefloor], twinleaf: [cloverfloor], sandgem: [shellfloor], jubilife: [beamfloor], oreburgh: [clinkerfloor], floaroma: [honeyfloor], eterna: [heritagefloor], hearthome: [giltfloor], solaceon: [pebblefloor], veilstone: [shardfloor], canalave: [ringfloor, boardwalk, harbourstone, trussfloor], pastoria: [walkfloor], celestic: [moonfloor], snowpoint: [rimefloor], sunnyshore: [panelfloor] }',
+  JSON.stringify(STREET_REGISTRY) === '{"vermilion":["boardwalk"],"blackthorn":["settfloor"],"silvertown":["marblefloor"],"ecruteak":["wornfloor"],"saffron":["avenuefloor"],"violet":["violetfloor"],"azalea":["brickfloor"],"mahogany":["gravelfloor"],"rustboro":["cutstonefloor"],"fuchsia":["marshfloor"],"cianwood":["driftfloor"],"dewford":["plankfloor"],"viridian":["slatefloor"],"celadon":["promfloor"],"slateport":["quayfloor","boardwalk"],"cerulean":["pierfloor"],"mauville":["gridfloor"],"lavender":["shinglefloor"],"cherrygrove":["inlayfloor"],"verdanturf":["petalfloor","cavefloor"],"olivine":["harbourfloor","jettyfloor"],"fallarbor":["ashfloor"],"lavaridge":["steamfloor","terracefloor"],"fortree":["canopyfloor","boardwalk"],"lilycove":["cobblefloor","cavefloor"],"mossdeep":["starfloor","dockfloor"],"sootopolis":["craterfloor","cavefloor"],\"pacifidlog\":[\"raftfloor\"],\"evergrande\":[\"plateaufloor\",\"cavefloor\"],\"twinleaf\":[\"cloverfloor\"],\"sandgem\":[\"shellfloor\"],\"jubilife\":[\"beamfloor\"],\"oreburgh\":[\"clinkerfloor\"],\"floaroma\":[\"honeyfloor\"],\"eterna\":[\"heritagefloor\"],\"hearthome\":[\"giltfloor\"],\"solaceon\":[\"pebblefloor\"],\"veilstone\":[\"shardfloor\"],\"canalave\":[\"ringfloor\",\"boardwalk\",\"harbourstone\",\"trussfloor\"],\"pastoria\":[\"walkfloor\"],\"celestic\":[\"moonfloor\"],\"snowpoint\":[\"rimefloor\"],\"sunnyshore\":[\"panelfloor\"]}',
   JSON.stringify(STREET_REGISTRY));
 
 // 2. census: the 64 towns of townSetOf (pallet included)
@@ -1640,7 +1694,7 @@ const PIN = {
   "snowpoint": [1, 90, 90, 8, 8, 1, 5, 0, 0, 0.813, 0, 0, 0, 0, 0.773, 0.9959],
   "solaceon": [1, 110, 110, 7, 7, 1, 5, 0, 0, 0.786, 0, 0, 0, 0, 0.7077, 0.9972],
   "sootopolis": [1, 30, 30, 6, 6, 1, 7, 0, 0, 0.857, 0, 0, 0, 0, 0.7635, 0.981],
-  "sunnyshore": [1, 132, 132, 8, 8, 1, 3, 0, 0, 0.875, 0, 0, 0, 0, 0.9967, 0.9967],
+  "sunnyshore": [1, 132, 132, 8, 8, 1, 2, 0, 0, 0.857, 0, 0, 0, 0, 0.78, 0.9979],
   "survival-area": [1, 72, 72, 5, 5, 1, 1, 0, 0, 0.941, 0, 0, 0, 0, 1, 1],
   "trovita": [0, 30, 56, 6, 6, 1, 3, 0, 3, 0.563, 0, 0, 0, 0, 0.9466, 0.9466],
   "twinleaf": [1, 90, 90, 6, 6, 1, 3, 0, 0, 0.824, 0, 0, 0, 0, 0.7674, 0.9964],
