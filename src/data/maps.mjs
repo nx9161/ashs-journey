@@ -510,6 +510,13 @@ export const WALKABLE = new Set(['.', ',', 'D', 'E', 'C', 'F', 'J', 'K', '1', '2
   // floor. (Indices 625-628 after the Director's re-index
   // ruling: W-DIFF7 holds 622-624; 606-607 stay empty.)
   ...[626]
+    .map((i) => String.fromCodePoint(0x1E00 + i)),
+  // Wave W-DIFF8: the shinglefloor char (U+1E00+629, tiles.mjs
+  // WD8_KIND_DEFS) is walkable street material — Hushmoor's
+  // dark gravel, swapped 1:1 from the walkable '.' path char
+  // in Hushmoor Town, and the inlayfloor char (U+1E00+631)
+  // likewise in Blossom City, so floor stays floor in both.
+  ...[629, 631]
     .map((i) => String.fromCodePoint(0x1E00 + i))]);
 
 // Trainer definitions for the slice.

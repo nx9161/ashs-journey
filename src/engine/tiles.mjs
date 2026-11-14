@@ -1256,6 +1256,53 @@ T29_KIND_DEFS.forEach(([kind], i) => {
 export const T29_PROP_KINDS = T29_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
 export const T29_WALL_KINDS = T29_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
 export const T29_FLOOR_KINDS = T29_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
+// Wave W-DIFF8: Hushmoor + Blossom kit-identity retrofit
+// (W-DIFF-AUDIT Phase B; pair re-measured 0.2003 on main
+// 8066f86 before building, control pair blackthorn <->
+// silvertown 0.3109 unmoved). Indices 629-632 — verified free
+// in TILE_CHARS and unused by every map row before
+// registering (the ledger runs T23 575 ... T29 625-628, with
+// 606/607 standing empty). Hushmoor (lavender): 'Violet
+// Shingle & Memorial Stone' — 'shinglefloor' (floor), the
+// dark violet-grey gravel the table names for its streets,
+// and 'shingleroof' (wall), the steep dark shingle of its
+// house shapes, violet-black courses. The shipped map's
+// flora-lavender patches (the table's ground treatment)
+// already stand and are byte-kept, as are the memorialwall
+// row and the tower geography entire. Blossom (cherrygrove):
+// 'Sakura & Harbour Stone' — the table names harbourstone
+// for the street, but harbourstone is Canalave's dressed
+// stone (its .pix header says so), sunnyshore wears it as
+// decorative inlay speckle, and the STREET_REGISTRY's
+// standing note holds it 'not registrable as one [a street]'
+// — so per the W-DIFF6 amendment rule Blossom takes a
+// distinct variant in the same register: 'inlayfloor'
+// (floor), harbour stone cut as large inlay slabs with a
+// pale cherry-petal fleck inlaid in the stone. The tide-table
+// plaza's shipped harbourstone block keeps the original
+// stone, byte-kept, as does every sakura. 'sakuraroof'
+// (wall) — the cherry-pink gables of the table's house
+// shapes. TILE SWAPS ONLY: warps, doors, footprints, NPC
+// posts, signs, encounters byte-kept (register:
+// your_files/w-diff8/GRADE.md). Authored art:
+// assets/sprites/pix/tiles/tile-shinglefloor.pix,
+// tile-shingleroof.pix, tile-inlayfloor.pix,
+// tile-sakuraroof.pix.
+export const WD8_KIND_DEFS = [
+  ['shinglefloor', 'floor'],
+  ['shingleroof', 'wall'],
+  ['inlayfloor', 'floor'],
+  ['sakuraroof', 'wall'],
+];
+export const WD8_KIND_CHARS = {};
+WD8_KIND_DEFS.forEach(([kind], i) => {
+  const ch = String.fromCodePoint(0x1E00 + 629 + i);
+  WD8_KIND_CHARS[kind] = ch;
+  TILE_CHARS[ch] = kind;
+});
+export const WD8_PROP_KINDS = WD8_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
+export const WD8_WALL_KINDS = WD8_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
+export const WD8_FLOOR_KINDS = WD8_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
 export const SINNOH_TOWN_GROUND_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg);
 export const SINNOH_TOWN_GROUND2_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg2);
 // TX-3: the 8 gym exteriors by town (original type-accent motifs).

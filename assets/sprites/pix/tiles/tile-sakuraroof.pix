@@ -1,0 +1,25 @@
+# Wave W-DIFF8: Blossom cherry gable - pink shingle courses, staggered ticks, drifted petal flecks, deep eave foot.
+PIX tile-sakuraroof 16 16
+cacaccccccccccaa
+aacabaaaabbacaba
+aaaabaabaaccabbc
+bbdbbdbbbbbbdbbd
+aabaacabaaaaaaaa
+aabaabaaaaabaaaa
+babceaaaaaaabbaa
+dbbbbdbbbbbbbbbb
+baabaacaaabaaaab
+aacaababaabeabaa
+bcaaabaababaaaaa
+bdbbbbddbbbbbddb
+aaababaaaacabaac
+baaaacaabaaaabaa
+bddbbbbbdbdbbbbb
+dddddddddddddddd
+
+PAL
+a #c48a94 cherry-pink
+b #8a5560 gable-shade
+c #dda8ae gable-lit
+d #6e4048 eave-deep
+e #f4d3da petal-fleck

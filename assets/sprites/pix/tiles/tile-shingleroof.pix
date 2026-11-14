@@ -1,0 +1,24 @@
+# Wave W-DIFF8: Hushmoor steep dark shingle - narrow violet-black shingle courses, staggered joints, deep eave foot.
+PIX tile-shingleroof 16 16
+acacabcaaacdaaaa
+aaccadaaaaabbaaa
+bbbdddbbbbbbbbbb
+acbaaaaabaaccada
+aadbacaababababa
+bbbdbdbdbbdbbbdd
+acccabaaacabaaca
+acaaabaaaaabaaaa
+bbbdbbbdbddbbbbb
+acdccaccdaacaaba
+babaaaaabaaaaada
+dbbdbbbbbbdbbbbd
+aacccbcaaacdccaa
+baaaabaaaaadaaaa
+bbbbdbdbbbdbdbbd
+dddddddddddddddd
+
+PAL
+a #4d3d63 shingle-violet
+b #2d2338 shingle-shade
+c #71618c shingle-lit
+d #1d1626 eave-deep

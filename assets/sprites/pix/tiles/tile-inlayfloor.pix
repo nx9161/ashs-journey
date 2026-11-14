@@ -1,0 +1,25 @@
+# Wave W-DIFF8: Blossom inlay stone - large harbour-stone slabs, staggered joints, pale cherry-petal inlay motif (full-bleed, solid).
+PIX tile-inlayfloor 16 16
+aaaaaaabaaaaaaaa
+aaaacaadaacaaaca
+aaaaaaadaaaacbaa
+aaaabaababappaaa
+aacaaaadaaapcpaa
+aaaaaaadaaaapaaa
+aaaaaaabaaaaaaaa
+dddddbddddbdbbdd
+aaabababaabdaaab
+aaabaaaaaaadaaab
+aaadaaaaaaadaaaa
+aaadaabaaaabaaaa
+aabdaaaaaaabaaaa
+aabbabaaaaadaaaa
+aabbaaaaaaabaaaa
+dbddbbddddbddddd
+
+PAL
+a #82929f harbour-stone
+b #6b7c88 stone-shade
+c #97a9b6 stone-light
+d #576672 slab-joint
+p #e3a7b8 petal-inlay
