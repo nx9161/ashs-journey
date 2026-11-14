@@ -562,6 +562,45 @@
 //     630, inlayfloor 631, sakuraroof 632 — no map cells had
 //     landed, so the remap is registration-only and lossless by
 //     construction.) Re-pinned with the T30 build.
+//     THIRTIETH DOCUMENTED EXCEPTION (T32): the registry grows by
+//     one scoped entry — fallarbor: [ashfloor] — on the same
+//     one-town terms, and fallarbor's pin migrates from its
+//     shipped PASS to its POST-T32 PASS. Ashfall shipped the
+//     Lilac pattern: a gate PASS whose fabric WAS the defect —
+//     its single 220-cell network component held 209 cells of
+//     tg2 mud (41.5% of the town), so the mud sea was the street
+//     graph. The T32 build retires the mud (tg2 209 -> 0) and the
+//     town's network becomes its authored streets: ashfloor
+//     swept-ash lane (idx 661) on the front street, the south
+//     road, the contest + south avenues, the east arm and the
+//     field lane; timberroof weathered-timber planks (idx 660)
+//     on the Contest Hall + Ando's House stamps and two facade
+//     cottages; the railfence prop (idx 662) at the ash fields +
+//     the south lawn (also registered in the audit's DECOR_KINDS
+//     so the south planters anchor to the fence line); the
+//     painting's telescope placed from the engine's existing W6
+//     prop at (24,10); all three shipped DIRS records stood
+//     invisible on flat ground — they gained S tiles at their
+//     posts, and two verbatim copies mark the validator-named
+//     junctions at (18,5) and (21,10); the orphaned MART CLERK
+//     re-seated at his Mart's west-front apron (3,5) -> (9,4).
+//     Gate STATUS stays PASS with the pin's meaning changed:
+//     conn 90/90, step-offs 6/6, components 1 (117 cells of
+//     authored street + plot frame, was 220 of mud), junctions
+//     5 sites (the mud blob) -> 3 sites, 0 bare, strict 0.9463
+//     -> 0.7047 (desire lines get real corners; above the 0.60
+//     gate), fabric 0.984 -> 0.9872, apronMin identical (0.875),
+//     unanchoredAny 0 (22 decor). The validator rounds are
+//     recorded in the plan's §9: the street kind is named
+//     *floor because the desire-path tiers key on that suffix
+//     (an 'ashlane' first draft scored strict 0.0983 — the
+//     registry alone does not feed analyzeMap), the plot's
+//     south dot frame threads via (19,14)+(24,14), and the two
+//     south planters anchor to the new fence line. No encounter
+//     cell touched: commas 8, dots 11 byte-kept, BRIN still
+//     standing on his dot. (Kind indices 660-662: main's ceiling
+//     was 636; 637-659 left clear for the parallel T31 Beacon
+//     claim at 645-656.) Re-pinned with the T32 build.
 //     Tuple: [pass, connOk, connPairs, stepTouch, stepTot, components,
 //     junctionSites, junctionsBare, apronLow, apronMin, merged,
 //     onFabric, shoulderOrphans, unanchoredAny, strict, fabric].
@@ -683,8 +722,8 @@ async function gateTuple(id, t) {
 }
 
 // 1. registry scope lock
-ok('street registry is exactly { vermilion: [boardwalk], blackthorn: [settfloor], silvertown: [marblefloor], ecruteak: [wornfloor], saffron: [avenuefloor], violet: [violetfloor], azalea: [brickfloor], mahogany: [gravelfloor], rustboro: [cutstonefloor], fuchsia: [marshfloor], cianwood: [driftfloor], dewford: [plankfloor], viridian: [slatefloor], celadon: [promfloor], slateport: [quayfloor, boardwalk], cerulean: [pierfloor], mauville: [gridfloor], lavender: [shinglefloor], cherrygrove: [inlayfloor], verdanturf: [petalfloor, cavefloor], olivine: [harbourfloor, jettyfloor] }',
-  JSON.stringify(STREET_REGISTRY) === '{"vermilion":["boardwalk"],"blackthorn":["settfloor"],"silvertown":["marblefloor"],"ecruteak":["wornfloor"],"saffron":["avenuefloor"],"violet":["violetfloor"],"azalea":["brickfloor"],"mahogany":["gravelfloor"],"rustboro":["cutstonefloor"],"fuchsia":["marshfloor"],"cianwood":["driftfloor"],"dewford":["plankfloor"],"viridian":["slatefloor"],"celadon":["promfloor"],"slateport":["quayfloor","boardwalk"],"cerulean":["pierfloor"],"mauville":["gridfloor"],"lavender":["shinglefloor"],"cherrygrove":["inlayfloor"],"verdanturf":["petalfloor","cavefloor"],"olivine":["harbourfloor","jettyfloor"]}',
+ok('street registry is exactly { vermilion: [boardwalk], blackthorn: [settfloor], silvertown: [marblefloor], ecruteak: [wornfloor], saffron: [avenuefloor], violet: [violetfloor], azalea: [brickfloor], mahogany: [gravelfloor], rustboro: [cutstonefloor], fuchsia: [marshfloor], cianwood: [driftfloor], dewford: [plankfloor], viridian: [slatefloor], celadon: [promfloor], slateport: [quayfloor, boardwalk], cerulean: [pierfloor], mauville: [gridfloor], lavender: [shinglefloor], cherrygrove: [inlayfloor], verdanturf: [petalfloor, cavefloor], olivine: [harbourfloor, jettyfloor], fallarbor: [ashfloor] }',
+  JSON.stringify(STREET_REGISTRY) === '{"vermilion":["boardwalk"],"blackthorn":["settfloor"],"silvertown":["marblefloor"],"ecruteak":["wornfloor"],"saffron":["avenuefloor"],"violet":["violetfloor"],"azalea":["brickfloor"],"mahogany":["gravelfloor"],"rustboro":["cutstonefloor"],"fuchsia":["marshfloor"],"cianwood":["driftfloor"],"dewford":["plankfloor"],"viridian":["slatefloor"],"celadon":["promfloor"],"slateport":["quayfloor","boardwalk"],"cerulean":["pierfloor"],"mauville":["gridfloor"],"lavender":["shinglefloor"],"cherrygrove":["inlayfloor"],"verdanturf":["petalfloor","cavefloor"],"olivine":["harbourfloor","jettyfloor"],"fallarbor":["ashfloor"]}',
   JSON.stringify(STREET_REGISTRY));
 
 // 2. census: the 64 towns of townSetOf (pallet included)
@@ -721,7 +760,7 @@ const PIN = {
   "ecruteak": [1, 156, 156, 11, 11, 1, 6, 0, 0, 0.625, 0, 0, 0, 0, 0.7992, 0.9937],
   "eterna": [1, 182, 182, 8, 8, 1, 7, 0, 0, 0.813, 0, 0, 0, 0, 0.9593, 0.9921],
   "evergrande": [0, 12, 42, 5, 5, 2, 4, 0, 0, 0.938, 0, 0, 0, 0, 0.9773, 0.9778],
-  "fallarbor": [1, 90, 90, 6, 6, 1, 5, 0, 0, 0.875, 0, 0, 0, 0, 0.9463, 0.984],
+  "fallarbor": [1, 90, 90, 6, 6, 1, 3, 0, 0, 0.875, 0, 0, 0, 0, 0.7047, 0.9872],
   "fight-area": [1, 72, 72, 5, 5, 1, 1, 0, 0, 0.941, 0, 0, 0, 0, 1, 1],
   "floaroma": [1, 72, 72, 5, 5, 1, 1, 0, 0, 0.941, 0, 0, 0, 0, 0.9994, 0.9994],
   "fortree": [0, 72, 110, 7, 7, 1, 2, 0, 0, 0.824, 0, 0, 0, 0, 0.9756, 0.9805],
