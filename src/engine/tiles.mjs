@@ -922,6 +922,61 @@ T26_KIND_DEFS.forEach(([kind], i) => {
 export const T26_PROP_KINDS = T26_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
 export const T26_WALL_KINDS = T26_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
 export const T26_FLOOR_KINDS = T26_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
+// ---- Wave W-DIFF5 (identity retrofit): Bramble + Tidewall ----
+// Four new kinds at idx 602-605 (U+205A-U+205D, verified free
+// in TILE_CHARS and unused by every map row; the block runs
+// T23 575, W-DIFF 577-580, W-DIFF2 581-584, T24 585-587,
+// T25 588-591, WD3 592-593, W-DIFF4 594-597, T26 598-601).
+// The last closest pair where BOTH towns still wear the
+// shared kit (audit A.3 #9, 0.0669; 0.0872 on the current
+// tree) gets the identity table's own kits (W-DIFF-AUDIT
+// Phase B). Bramble City (TOWN_STYLE fuchsia: ground
+// #c47ba4, form 'safari thatch') — 'Thatch & Marsh':
+// 'marshfloor' (floor) — weathered marsh-timber boardwalk
+// sections, the town's street fabric (STREET_REGISTRY; the
+// fleet's street kinds carry the -floor suffix the desire-
+// path tiers key on), swapped onto the street cells; the
+// marsh-landing shore (south row + exits) stays sand path,
+// the table's '+ sand'. 'safariroof' (wall) — bundled
+// safari thatch in the KIT_VARIANTS fuchsia roof tones,
+// swapped onto the house + Preserve gatehouse roofs; the
+// Center/Mart/Gym stamps keep their shipped roofs entire.
+// The table's ground treatment (tg + marshbog patches)
+// rides the existing S3B floor kind: five tg cells along
+// the south pools become marshbog, two marshreed props
+// (existing S3B prop kind) stand at the bog's north edge.
+// Tidewall City (JOHTO_TOWN_STYLE cianwood: ground
+// #b8a878, form 'rustic island stone') — 'Driftwood &
+// Surf Stone': 'driftfloor' (floor) — bleached driftwood
+// pier planks, the inland street fabric (STREET_REGISTRY),
+// swapped onto the street + pier-approach cells; the
+// shore promenade (rows 13-14) stays sand path, the
+// table's '+ sand'. 'surfroof' (wall) — rustic island
+// stone courses in warm grey, swapped onto the house
+// roofs (the pharmacy's included, like every house roof);
+// the gym's tr- roof + terrace, the Center's roof-center
+// and the Mart's roof-slate stamps keep their shipped
+// roofs entire. The table's herb gardens are T19's
+// shipped fenced flowerbed plots flanking the pharmacy —
+// byte-kept. Authored art: assets/sprites/pix/tiles/
+// tile-marshfloor.pix, tile-safariroof.pix,
+// tile-driftfloor.pix, tile-surfroof.pix
+// (register: your_files/w-diff5/GRADE.md).
+export const WD5_KIND_DEFS = [
+  ['marshfloor', 'floor'],
+  ['safariroof', 'wall'],
+  ['driftfloor', 'floor'],
+  ['surfroof', 'wall'],
+];
+export const WD5_KIND_CHARS = {};
+WD5_KIND_DEFS.forEach(([kind], i) => {
+  const ch = String.fromCodePoint(0x1E00 + 602 + i);
+  WD5_KIND_CHARS[kind] = ch;
+  TILE_CHARS[ch] = kind;
+});
+export const WD5_PROP_KINDS = WD5_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
+export const WD5_WALL_KINDS = WD5_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
+export const WD5_FLOOR_KINDS = WD5_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
 export const SINNOH_TOWN_GROUND_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg);
 export const SINNOH_TOWN_GROUND2_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg2);
 // TX-3: the 8 gym exteriors by town (original type-accent motifs).

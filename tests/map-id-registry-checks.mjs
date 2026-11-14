@@ -104,7 +104,7 @@ const BASELINE = {
   "ceruleancave": ['D', 'maps2.mjs:fdc075ab', 'maps3.mjs:46e003ef'],
   "cinnabar": ['I', 'maps2.mjs:a0ef07ac', 'maps3.mjs:a0ef07ac'],
   "dojo": ['D', 'maps2.mjs:767d8216', 'maps3.mjs:97e14c03'],
-  "fuchsia": ['I', 'maps2.mjs:6c9f1853', 'maps3.mjs:6c9f1853'],
+  "fuchsia": ['I', 'maps2.mjs:b9a6140b', 'maps3.mjs:b9a6140b'],
   "gamecorner": ['D', 'maps2.mjs:37481247', 'maps4.mjs:e32d7897'],
   "gym-celadon": ['I', 'maps2.mjs:e34e5a11', 'maps3.mjs:e34e5a11'],
   "gym-cerulean": ['I', 'maps2.mjs:36cf7ab1', 'maps3.mjs:36cf7ab1'],

@@ -1,0 +1,25 @@
+# Wave W-DIFF5: Tidewall surf stone — big warm-grey ashlar courses, staggered joints (full-bleed, solid).
+PIX tile-surfroof 16 16
+cccccbcaaccbaccc
+aaaaabaaaaabaaaa
+aaaaabaaaaabaaaa
+bebeebebeeeeebee
+aabcacaabacacabc
+aabadaaabadaaaba
+babaaaaababaaabb
+eebebeeebbeeebeb
+ccacaabaaaacbcaa
+aaaaaabaaaaabaaa
+aaaaaabaaadabaab
+eeeeebbeeeeeeeee
+accbcacaabcacacb
+aadbbaaaabaaaaab
+aaabaaaaabaaaaab
+eebeeeeeeeebeeee
+
+PAL
+a #7d7468 surf-stone
+b #5d554c stone-joint
+c #9a9084 stone-light
+d #b0a696 stone-trim
+e #4c463f course-shade

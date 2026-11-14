@@ -1,0 +1,25 @@
+# Wave W-DIFF5: Bramble safari thatch — bundled courses, strand ticks, deep eave (full-bleed, solid).
+PIX tile-safariroof 16 16
+bccccbbbcccccccc
+aaaeeabaaaaaeaaa
+ddbdddddbddbdddd
+ccccccccccccbbcc
+bbaaaaaaaaaeaaba
+ddbbdbdddbbddbdb
+bccccccbccbccbcc
+aabaaaaeaaaaaaab
+bddddbddbdbbddbd
+ccbcccccccbccccc
+aaaaaaaeaaaaaaaa
+ddddddddddddbddb
+ccccccccccbbcccc
+eabbaaeaabeaabaa
+dddbbdddddbddddb
+bbbbbbbbbbbbbbbb
+
+PAL
+a #b08d4f thatch
+b #6e5626 thatch-deep
+c #cfa860 thatch-light
+d #8d5f2b eave-log
+e #e0c078 straw-accent

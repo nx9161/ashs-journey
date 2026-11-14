@@ -467,6 +467,13 @@ export const WALKABLE = new Set(['.', ',', 'D', 'E', 'C', 'F', 'J', 'K', '1', '2
   // 598-601 per the Director's index ruling: W-DIFF4 holds
   // 594-597.)
   ...[599, 601]
+    .map((i) => String.fromCodePoint(0x1E00 + i)),
+  // Wave W-DIFF5: the marshfloor char (U+1E00+602, tiles.mjs
+  // WD5_KIND_DEFS) is walkable street material, swapped 1:1
+  // from the walkable '.' path char in Bramble City, and the
+  // driftfloor char (U+1E00+604) likewise in Tidewall City,
+  // so floor stays floor in both.
+  ...[602, 604]
     .map((i) => String.fromCodePoint(0x1E00 + i))]);
 
 // Trainer definitions for the slice.

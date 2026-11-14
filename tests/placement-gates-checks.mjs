@@ -276,6 +276,59 @@
 //     floor), unanchoredAny identical (0). (Indices 598-601 per
 //     the Director's index ruling: W-DIFF4 holds 594-597.)
 //     Re-pinned with the T26 build.
+//     SEVENTEENTH DOCUMENTED EXCEPTION (W-DIFF5): the registry
+//     grows by one scoped entry — fuchsia: [marshfloor] — on
+//     the same terms as exceptions seven through sixteen:
+//     Bramble City's CLEAN identity build record (W-DIFF-AUDIT
+//     Phase B, Thatch & Marsh) authors marshfloor (idx 602)
+//     AS the town's street fabric (87 path cells swapped; the
+//     marsh-landing shore — row 12 x6-10 + the row-13 exits —
+//     stays sand path, the table's boardwalk + sand split),
+//     and its absence from the network tier would blind the
+//     instrument exactly as in W4. Fuchsia's pin re-pins on
+//     ONE field only: strict 0.8625 -> 0.8842 — the build's
+//     two marshreed props seal the tg cells at the east
+//     pool's NW lip ((11,12),(12,11)), and the desire lines
+//     that used to cut the marsh edge now ride the boardwalk
+//     instead, raising the strict-tier share (gate PASS;
+//     pass, conn (182/182), step-offs (9/9), junctions (3/3),
+//     apronMin (0.643) and fabric (0.9952) are identical).
+//     The same build swapped 13 house + Preserve gatehouse
+//     roof cells to the safariroof kind (idx 603, BUILD
+//     classifier; Center/Mart/Gym stamps byte-kept) and
+//     dressed three tg cells at the east pool with the
+//     existing marshbog kind. Two in-build trims on gate
+//     evidence (the W-DIFF3/W-DIFF4 pattern): a five-cell
+//     bog draft was cut to the east three — the west pair
+//     at (5,12),(11,12) sits on the desire lines to the
+//     Preserve gate + south exit and took fabric 0.9952 ->
+//     0.977, under the 0.98 gate — and the reeds' first
+//     seats at (17,11),(18,11) sealed the marsh strip's
+//     only corridor (dead pockets 1132 -> 1139), so they
+//     moved to the pool lip, restoring 1132. Both fuchsia
+//     copies (maps2/maps3) edited identically; the map-id
+//     registry baseline line was updated in the same commit
+//     per its burn-down rule. Re-pinned with the W-DIFF5
+//     build.
+//     EIGHTEENTH DOCUMENTED EXCEPTION (W-DIFF5): the registry
+//     grows by one scoped entry — cianwood: [driftfloor] —
+//     on identical terms: Tidewall City's CLEAN identity
+//     build record (W-DIFF-AUDIT Phase B, Driftwood & Surf
+//     Stone) authors driftfloor (idx 604) AS the town's
+//     street fabric (93 path cells swapped — the inland
+//     streets + the pier approach; the shore promenade rows
+//     13-14 stays sand path, the table's pier + sand split).
+//     Cianwood's pin does NOT move: pass, conn (72/72),
+//     step-offs (7/7), junctions (6/6), apronMin (0.688),
+//     strict (0.7965) and fabric (0.9993) are all identical
+//     — the exception records the registry growth only. The
+//     same build swapped 10 house-roof cells to the
+//     surfroof kind (idx 605, BUILD classifier; the gym's
+//     tr- roof + terrace, the Center/Mart stamps and NOOR's
+//     pinned post cell (24,5) byte-kept), and the table's
+//     herb gardens are T19's shipped pharmacy flowerbeds,
+//     byte-kept. Re-pinned with the W-DIFF5 build (registry
+//     scope only).
 //     Tuple: [pass, connOk, connPairs, stepTouch, stepTot, components,
 //     junctionSites, junctionsBare, apronLow, apronMin, merged,
 //     onFabric, shoulderOrphans, unanchoredAny, strict, fabric].
@@ -305,8 +358,8 @@ async function gateTuple(id, t) {
 }
 
 // 1. registry scope lock
-ok('street registry is exactly { vermilion: [boardwalk], blackthorn: [settfloor], silvertown: [marblefloor], ecruteak: [wornfloor], saffron: [avenuefloor], violet: [violetfloor], azalea: [brickfloor], mahogany: [gravelfloor], rustboro: [cutstonefloor] }',
-  JSON.stringify(STREET_REGISTRY) === '{"vermilion":["boardwalk"],"blackthorn":["settfloor"],"silvertown":["marblefloor"],"ecruteak":["wornfloor"],"saffron":["avenuefloor"],"violet":["violetfloor"],"azalea":["brickfloor"],"mahogany":["gravelfloor"],"rustboro":["cutstonefloor"]}',
+ok('street registry is exactly { vermilion: [boardwalk], blackthorn: [settfloor], silvertown: [marblefloor], ecruteak: [wornfloor], saffron: [avenuefloor], violet: [violetfloor], azalea: [brickfloor], mahogany: [gravelfloor], rustboro: [cutstonefloor], fuchsia: [marshfloor], cianwood: [driftfloor] }',
+  JSON.stringify(STREET_REGISTRY) === '{"vermilion":["boardwalk"],"blackthorn":["settfloor"],"silvertown":["marblefloor"],"ecruteak":["wornfloor"],"saffron":["avenuefloor"],"violet":["violetfloor"],"azalea":["brickfloor"],"mahogany":["gravelfloor"],"rustboro":["cutstonefloor"],"fuchsia":["marshfloor"],"cianwood":["driftfloor"]}',
   JSON.stringify(STREET_REGISTRY));
 
 // 2. census: the 64 towns of townSetOf (pallet included)
@@ -341,7 +394,7 @@ const PIN = {
   "floaroma": [1, 72, 72, 5, 5, 1, 1, 0, 0, 0.941, 0, 0, 0, 0, 0.9994, 0.9994],
   "fortree": [0, 72, 110, 7, 7, 1, 2, 0, 0, 0.824, 0, 0, 0, 0, 0.9756, 0.9805],
   "frontierhub": [1, 210, 210, 15, 15, 1, 3, 0, 0, 0.85, 0, 0, 0, 0, 0.9829, 0.9829],
-  "fuchsia": [1, 182, 182, 9, 9, 1, 3, 0, 0, 0.643, 0, 0, 0, 0, 0.8625, 0.9952],
+  "fuchsia": [1, 182, 182, 9, 9, 1, 3, 0, 0, 0.643, 0, 0, 0, 0, 0.8842, 0.9952],
   "goldenrod": [1, 182, 182, 10, 10, 1, 12, 0, 0, 0.65, 0, 0, 0, 0, 0.8671, 0.9828],
   "hearthome": [1, 272, 272, 9, 9, 1, 3, 0, 0, 0.786, 0, 0, 0, 1, 0.991, 0.9973],
   "indigo": [1, 156, 156, 11, 11, 1, 1, 0, 0, 0.625, 0, 0, 0, 0, 0.9164, 0.988],

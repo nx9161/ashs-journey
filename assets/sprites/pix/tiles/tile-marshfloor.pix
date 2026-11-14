@@ -1,0 +1,25 @@
+# Wave W-DIFF5: Bramble marsh boardwalk — weathered horizontal planks, moss in the gaps (full-bleed, solid).
+PIX tile-marshfloor 16 16
+ccacccacacccaccc
+abaaabaaabadbaab
+aaaaaaabaaadbaaa
+ebbbbdbbbbbbdedb
+cacccccacccccaac
+baaadabaaaaaaaaa
+baaadbaaaaaaabaa
+bbbbbbbbdebbbdbb
+ccccaccccacacaca
+aaaaaaaaaaabadaa
+aaaaaaaaaaaaadba
+edbbbbebbebbbebb
+aaaccaaccaaccacc
+aaabaadaaabaaaaa
+aaaaaadaaaaaaaaa
+ebbbdbedbebebdbb
+
+PAL
+a #8a6f4d marsh-timber
+b #6b543a gap-shadow
+c #a8895f worn-top
+d #54402c deep-gap
+e #7d8b5a marsh-moss

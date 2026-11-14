@@ -1,0 +1,25 @@
+# Wave W-DIFF5: Tidewall driftwood — bleached planks, thin seams, nail pairs at the joints (full-bleed, solid).
+PIX tile-driftfloor 16 16
+cacccccacccccacc
+abaaadeaaeaaaaaa
+aaabadabeaabaaaa
+ddddddddddbddddd
+cccccccccccccccc
+baeaaaaaaaaadaaa
+aaaaaaaaeabadaba
+ddddbdddddddddbd
+caccccccccacacca
+aaadaaaaaabaaaaa
+ebadababaaaaaaaa
+dddddddbdddbdddb
+ccacaccacacccccc
+eaaaaababadaaaaa
+abaaaaaabedabaaa
+bdddddbbdddddddd
+
+PAL
+a #a89a7d driftwood
+b #7e7260 drift-dark
+c #c2b498 bleached-top
+d #655c4c seam
+e #8fa39a sea-worn
