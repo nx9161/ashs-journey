@@ -10,7 +10,7 @@ import { QUESTS } from '../data/quests.mjs';
 // so identity is DERIVED from those posts, never re-authored:
 //
 //   charId = slug(name) + '@' + mapId        e.g. 'mom@pallet'
-//   duplicates on one map take '#2', '#3'... e.g. 'paul@eterna'
+//   duplicates on one map take '#2', '#3'... e.g. 'stellan@eterna'
 //   (occurrence order = loadMap assembly order, so ids are stable
 //   across loads and saves for the same authored world.)
 //
@@ -41,12 +41,12 @@ export function actorCharId(name, mapId) {
 }
 
 // Resting defaults (Wave ACT proofs):
-// - wally@victory-road-maris: Wally's Crown Road post stands EMPTY until
+// - emil@victory-road-maris: Wally's Crown Road post stands EMPTY until
 //   his Meadowbrook departure (the `wally` handler's catch scene is
 //   his farewell; its completion shows him here). Before this wave
 //   both Wallys stood in both places at once, forever.
 export const ACTOR_DEFAULTS = {
-  'wally@victory-road-maris': { hidden: true },
+  'emil@victory-road-maris': { hidden: true },
 };
 
 // Flag-gated resting defaults (Wave W9): a character whose story beat
@@ -57,17 +57,17 @@ export const ACTOR_DEFAULTS = {
 // charId (a saved override always wins), and keyed on flags already
 // in the save shape, so a pre-W9 save resolves correctly on load
 // with no migration and no watcher pass.
-// - jasmine@lighthouse-2: once Lumi is healed (amphy_healed) Jasmine
+// - liora@lighthouse-2: once Lumi is healed (amphy_healed) Jasmine
 //   leaves the lighthouse for her gym, in her own words: "My gym,
 //   when you are ready. I will be there." The gym post is authored
 //   (gym-olivine, kind `jasmine`).
-// - lance@lake-of-rage: once the Red WRATHWYRM is calmed
+// - darian@lake-of-rage: once the Red WRATHWYRM is calmed
 //   (red_gyarados_done) Lance leaves the lake — the aftermath scene
 //   ends "Redwood. Meet me there." His Redwood post is authored
 //   (mahogany, kind `lance_mahogany`).
 export const ACTOR_FLAG_DEFAULTS = {
-  'jasmine@lighthouse-2': { flag: 'amphy_healed', directive: { hidden: true } },
-  'lance@lake-of-rage': { flag: 'red_gyarados_done', directive: { hidden: true } },
+  'liora@lighthouse-2': { flag: 'amphy_healed', directive: { hidden: true } },
+  'darian@lake-of-rage': { flag: 'red_gyarados_done', directive: { hidden: true } },
 };
 
 // The character's effective directive: the saved override when one

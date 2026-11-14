@@ -104,7 +104,7 @@ export const ARCS = [
   },
   {
     id: 'johto', n: 2, label: 'Arc 2', region: 'Yamato', regionKey: 'johto',
-    edition: 'Gold / Riven / Crystal', chapters: [3, 4, 5], dexHorizon: 251,
+    edition: 'Gold / Silver / Crystal', chapters: [3, 4, 5], dexHorizon: 251,
     band: { min: 101, max: 200, bandIndex: 2 },
     badgeSet: 'johto', badgeTotal: 8,
     completionKey: 'johto', completionFlag: 'johto_complete',

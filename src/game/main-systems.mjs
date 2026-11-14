@@ -471,7 +471,7 @@ Object.assign(Game.prototype, {
       const symbols = g.state.badges.symbols || [];
       for (const fid of FACILITY_IDS) {
         const slot = symbols[FACILITY_IDS.indexOf(fid)];
-        const word = slot === 'gold' ? 'GOLD' : slot === 'silver' ? 'RIVEN' : '—';
+        const word = slot === 'gold' ? 'GOLD' : slot === 'silver' ? 'SILVER' : '—';
         items.push({
           label: '· ' + FACILITIES[fid].name + ' — ' + FACILITIES[fid].brain + ' — ' + word,
           value: 'fq:' + fid,
@@ -555,7 +555,7 @@ Object.assign(Game.prototype, {
         const fac = FACILITIES[fid];
         if (fac) {
           const slot = (g.state.badges.symbols || [])[FACILITY_IDS.indexOf(fid)];
-          const word = slot === 'gold' ? 'GOLD' : slot === 'silver' ? 'RIVEN' : 'not yet earned';
+          const word = slot === 'gold' ? 'GOLD' : slot === 'silver' ? 'SILVER' : 'not yet earned';
           g.ui.say([fac.name + ' — Frontier Brain ' + fac.brain + ', ' + fac.brainTitle + '.', 'Your symbol here: ' + word + '. The facility desk books the runs; the Brain keeps the symbol.'], () => g.openQuestLog(), 'Frontier');
         }
       } else if (v.startsWith('sq:')) {

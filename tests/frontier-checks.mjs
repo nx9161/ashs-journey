@@ -220,7 +220,7 @@ const { MAPS3 } = await import(join(ROOT, 'src/data/maps3.mjs'));
 // ================= Part A2: F1 maps (pure) =================
 const { MAPS8 } = await import(join(ROOT, 'src/data/maps8.mjs'));
 const F1_IDS = ['frontierhub', 'frontier-tower', 'frontier-factory', 'frontier-arena', 'frontier-dome', 'frontier-pike', 'frontier-palace', 'frontier-pyramid', 'frontier-pyramid-a', 'frontier-pyramid-b', 'frontier-pyramid-c'];
-const BRAIN = { tower: 'Anabel', factory: 'Noland', arena: 'Greta', dome: 'Tucker', pike: 'Lucy', palace: 'Spencer', pyramid: 'Brandon' };
+const BRAIN = { tower: 'Esme', factory: 'Faber', arena: 'Veda', dome: 'Dorian', pike: 'Selene', palace: 'Ambrose', pyramid: 'Titus' };
 const FAC_NAME = { tower: 'Trial Tower', factory: 'Trial Factory', arena: 'Trial Arena', dome: 'Trial Dome', pike: 'Trial Pike', palace: 'Trial Palace', pyramid: 'Trial Pyramid' };
 {
   ok('A22 MAPS8 exports exactly the 11 F1 maps; merge.mjs folds MAPS8 into MAPS and module-order.json loads maps8.mjs after maps7.mjs (the bundle-side merge is proven live in Part C)',
@@ -228,11 +228,11 @@ const FAC_NAME = { tower: 'Trial Tower', factory: 'Trial Factory', arena: 'Trial
     && readFileSync(join(ROOT, 'src/data/merge.mjs'), 'utf8').includes('MAPS7, MAPS8')
     && (() => { const order = JSON.parse(readFileSync(join(ROOT, 'scripts/module-order.json'), 'utf8')); return order.indexOf('src/data/maps8.mjs') === order.indexOf('src/data/maps7.mjs') + 1; })());
   const hub = MAPS8.frontierhub;
-  ok('A23 hub: 40x24 outdoor, weather clear, NO wild encounters, start (18,21) on the dock pier (boardwalk); CAPT BREAKWATER (ferry pallet, ferryArc frontier) and SCOTT stand on it',
+  ok('A23 hub: 40x24 outdoor, weather clear, NO wild encounters, start (18,21) on the dock pier (boardwalk); CAPT BREAKWATER (ferry pallet, ferryArc frontier) and SUTTER stand on it',
     hub.rows.length === 24 && hub.rows[0].length === 40 && hub.weather === 'clear' && hub.encounters === null
     && hub.start.x === 18 && hub.start.y === 21
     && hub.npcs.some((n) => n.name === 'CAPT BREAKWATER' && n.ferry === 'pallet' && n.ferryArc === 'frontier')
-    && hub.npcs.some((n) => n.name === 'SCOTT' && Array.isArray(n.dialogue) && n.dialogue.length >= 2));
+    && hub.npcs.some((n) => n.name === 'SUTTER' && Array.isArray(n.dialogue) && n.dialogue.length >= 2));
   const doorTo = (mid) => hub.warps.filter((w) => w.to.map === mid);
   ok('A24 hub Center/Mart doors ride the shared interiors WITH via (decision #9): center warps -> center (4,4) via the hub front tiles; mart warps -> mart (5,5) via the hub front tiles',
     doorTo('center').length === 2 && doorTo('center').every((w) => w.to.x === 4 && w.to.y === 4 && w.via && w.via.map === 'frontierhub' && w.via.x === w.x && w.via.y === w.y + 1)
@@ -297,8 +297,8 @@ const MV_ALL = Object.assign({},
   (await import(join(ROOT, 'src/data/moves.mjs'))).MOVES,
   (await import(join(ROOT, 'src/data/moves2.mjs'))).MOVES2);
 {
-  const BRAIN_NAMES = { tower: 'Anabel', factory: 'Noland', arena: 'Greta', dome: 'Tucker', pike: 'Lucy', palace: 'Spencer', pyramid: 'Brandon' };
-  ok('A30 F2 facility defs <-> BADGE_SETS.symbols 1:1: FACILITY_IDS is the slot order, every def carries its Brain (Anabel/Noland/Greta/Tucker/Lucy/Spencer/Brandon), a symbol item, and authored silver+gold Brain teams of 3 roster species',
+  const BRAIN_NAMES = { tower: 'Esme', factory: 'Faber', arena: 'Veda', dome: 'Dorian', pike: 'Selene', palace: 'Ambrose', pyramid: 'Titus' };
+  ok('A30 F2 facility defs <-> BADGE_SETS.symbols 1:1: FACILITY_IDS is the slot order, every def carries its Brain (Esme/Faber/Veda/Dorian/Selene/Ambrose/Titus), a symbol item, and authored silver+gold Brain teams of 3 roster species',
     JSON.stringify(FD.FACILITY_IDS) === JSON.stringify(BADGE_SETS.symbols)
     && FD.FACILITY_IDS.every((id) => FD.FACILITIES[id] && FD.FACILITIES[id].brain === BRAIN_NAMES[id] && ITEMS[FD.SYMBOL_ITEMS[id]])
     && FD.FACILITY_IDS.every((id) => ['silver', 'gold'].every((tier) => FD.BRAIN_TEAMS[id][tier].length === 3
@@ -978,15 +978,15 @@ const driverD = `
   }
   {
     var r = milestoneDrive(7211, 'frontier-tower', 'tower', 33, null, 35, 'silver');
-    ok('D10 Anabel at 35 (streak seeded 33, battles 34-35 driven): battle 35 is Anabel, the win strikes slot SILVER, the OTHER slots stay null, and the streak CONTINUES (run open at 35)',
-      r.brainName === 'Anabel' && slotOf(r.g, 'tower') === 'silver' && !!r.st.frontier.run && r.st.frontier.run.streak === 35
+    ok('D10 Esme at 35 (streak seeded 33, battles 34-35 driven): battle 35 is Esme, the win strikes slot SILVER, the OTHER slots stay null, and the streak CONTINUES (run open at 35)',
+      r.brainName === 'Esme' && slotOf(r.g, 'tower') === 'silver' && !!r.st.frontier.run && r.st.frontier.run.streak === 35
       && FAC_IDS.every(function (id) { return id === 'tower' || slotOf(r.g, id) === null; }),
       'brain=' + r.brainName + ' slot=' + slotOf(r.g, 'tower'));
   }
   {
     var r = milestoneDrive(7212, 'frontier-tower', 'tower', 68, 'silver', 70, 'gold');
-    ok('D11 Anabel at 70 (slot seeded silver, streak seeded 68): the Gold team rematch strikes slot GOLD and the streak continues at 70',
-      r.brainName === 'Anabel' && slotOf(r.g, 'tower') === 'gold' && !!r.st.frontier.run && r.st.frontier.run.streak === 70,
+    ok('D11 Esme at 70 (slot seeded silver, streak seeded 68): the Gold team rematch strikes slot GOLD and the streak continues at 70',
+      r.brainName === 'Esme' && slotOf(r.g, 'tower') === 'gold' && !!r.st.frontier.run && r.st.frontier.run.streak === 70,
       'brain=' + r.brainName + ' slot=' + slotOf(r.g, 'tower'));
   }
 
@@ -1035,8 +1035,8 @@ const driverD = `
     // losable on some seeds (~1 in 4 sampled); the suite's seeds are
     // fixed constants, so a winning seed is deterministic forever.
     var r = milestoneDrive(7216, 'frontier-factory', 'factory', 19, null, 21, 'silver');
-    ok('D15 Noland at 21 (streak seeded 19, battles 20-21 driven): battle 21 is Noland, slot strikes SILVER, streak continues at 21',
-      r.brainName === 'Noland' && slotOf(r.g, 'factory') === 'silver' && !!r.st.frontier.run && r.st.frontier.run.streak === 21,
+    ok('D15 Faber at 21 (streak seeded 19, battles 20-21 driven): battle 21 is Faber, slot strikes SILVER, streak continues at 21',
+      r.brainName === 'Faber' && slotOf(r.g, 'factory') === 'silver' && !!r.st.frontier.run && r.st.frontier.run.streak === 21,
       'brain=' + r.brainName + ' slot=' + slotOf(r.g, 'factory'));
   }
 
@@ -1090,7 +1090,7 @@ const driverD = `
       if (menu.title && menu.title.indexOf('Streak 7') === 0) { var ri = menu.items.findIndex(function (it) { return it.value === 'rest'; }); return ri; }
       return frontierChoose(menu);
     });
-    ok('D17 Arena honest set completes (7 straight, records written, slot still null — Greta waits at 14)',
+    ok('D17 Arena honest set completes (7 straight, records written, slot still null — Veda waits at 14)',
       !!st.frontier.run && st.frontier.run.streak === 7 && st.frontier.records.arena.bestStreak === 7 && slotOf(g, 'arena') === null);
   }
   {
@@ -1156,8 +1156,8 @@ const driverD = `
   }
   {
     var r = milestoneDrive(7222, 'frontier-arena', 'arena', 12, null, 14, 'silver');
-    ok('D19 Greta at 14 (streak seeded 12, battles 13-14 driven): battle 14 is Greta, slot strikes SILVER, streak continues at 14',
-      r.brainName === 'Greta' && slotOf(r.g, 'arena') === 'silver' && !!r.st.frontier.run && r.st.frontier.run.streak === 14,
+    ok('D19 Veda at 14 (streak seeded 12, battles 13-14 driven): battle 14 is Veda, slot strikes SILVER, streak continues at 14',
+      r.brainName === 'Veda' && slotOf(r.g, 'arena') === 'silver' && !!r.st.frontier.run && r.st.frontier.run.streak === 14,
       'brain=' + r.brainName + ' slot=' + slotOf(r.g, 'arena'));
   }
 
@@ -1188,13 +1188,13 @@ const driverD = `
     var r = domeDrive(7223, 0);
     ok('D20 Dome honest tournament: 16 entrants, four player wins, ALL 11 non-player matches simulated into the bracket record, tournament + win recorded, run closed',
       r.st.frontier.records.dome.tournaments === 1 && r.st.frontier.records.dome.tournamentWins === 1
-      && r.maxResults === 11 && r.st.frontier.run === null && r.finalFoe !== 'Tucker',
+      && r.maxResults === 11 && r.st.frontier.run === null && r.finalFoe !== 'Dorian',
       'results=' + r.maxResults + ' finalFoe=' + r.finalFoe);
   }
   {
     var r = domeDrive(7224, 4);
-    ok('D21 Tucker final (tournaments seeded 4 -> this is tournament 5): the FINAL opponent is Tucker himself, the win strikes slot SILVER',
-      r.finalFoe === 'Tucker' && slotOf(r.g, 'dome') === 'silver' && r.st.frontier.records.dome.tournamentWins === 1,
+    ok('D21 Dorian final (tournaments seeded 4 -> this is tournament 5): the FINAL opponent is Dorian himself, the win strikes slot SILVER',
+      r.finalFoe === 'Dorian' && slotOf(r.g, 'dome') === 'silver' && r.st.frontier.records.dome.tournamentWins === 1,
       'finalFoe=' + r.finalFoe + ' slot=' + slotOf(r.g, 'dome'));
   }
 
@@ -1237,8 +1237,8 @@ const driverD = `
   }
   {
     var r = milestoneDrive(7226, 'frontier-palace', 'palace', 19, null, 21, 'silver');
-    ok('D23 Spencer at 21 (streak seeded 19, battles 20-21 driven under autoAlly): battle 21 is Spencer, slot strikes SILVER, streak continues at 21',
-      r.brainName === 'Spencer' && slotOf(r.g, 'palace') === 'silver' && !!r.st.frontier.run && r.st.frontier.run.streak === 21,
+    ok('D23 Ambrose at 21 (streak seeded 19, battles 20-21 driven under autoAlly): battle 21 is Ambrose, slot strikes SILVER, streak continues at 21',
+      r.brainName === 'Ambrose' && slotOf(r.g, 'palace') === 'silver' && !!r.st.frontier.run && r.st.frontier.run.streak === 21,
       'brain=' + r.brainName + ' slot=' + slotOf(r.g, 'palace'));
   }
 
@@ -1348,8 +1348,8 @@ const driverD = `
     pyrWarp(g, ow, 'frontier-pyramid-c', 18, 14);
     pyrWarp(g, ow, 'frontier-pyramid-a', 10, 14);
     var brandon = ow.map.npcs.find(function (n) { return n.frontierBrain === 'pyramid'; });
-    ok('D26a Brandon waits on floor 7 of climb 3 (Silver due): appended near the exit by the loadMap idiom',
-      run.floor === 7 && !!brandon && brandon.name === 'BRANDON', 'floor=' + run.floor + ' brandon=' + !!brandon);
+    ok('D26a Titus waits on floor 7 of climb 3 (Silver due): appended near the exit by the loadMap idiom',
+      run.floor === 7 && !!brandon && brandon.name === 'TITUS', 'floor=' + run.floor + ' brandon=' + !!brandon);
     if (brandon) { ow.sysNpc(brandon); tk(g, 3); drain(g); }
     var brainName = null;
     var guardB = 0;
@@ -1360,8 +1360,8 @@ const driverD = `
       break;
     }
     drain(g);
-    ok('D26b Brandon battle (the authored Regi trio): the win strikes slot SILVER, the other slots stay null, the climb closes in triumph',
-      brainName === 'Brandon' && slotOf(g, 'pyramid') === 'silver' && st.frontier.run === null
+    ok('D26b Titus battle (the authored Regi trio): the win strikes slot SILVER, the other slots stay null, the climb closes in triumph',
+      brainName === 'Titus' && slotOf(g, 'pyramid') === 'silver' && st.frontier.run === null
       && FAC_IDS.every(function (id) { return id === 'pyramid' || slotOf(g, id) === null; }),
       'brain=' + brainName + ' slot=' + slotOf(g, 'pyramid'));
   }
@@ -1429,8 +1429,8 @@ const driverD = `
     }
     ow.doWarp({ map: 'frontier-pike', x: 7, y: 8 }, {}); tk(g, 3); drain(g);
     var lucy = ow.map.npcs.find(function (n) { return n.frontierBrain === 'pike'; });
-    ok('D29a Lucy waits on the dais when the cumulative rooms reach 14 (7 banked + 7 this run): appended by the loadMap idiom',
-      !!lucy && lucy.name === 'LUCY', 'lucy=' + !!lucy);
+    ok('D29a Selene waits on the dais when the cumulative rooms reach 14 (7 banked + 7 this run): appended by the loadMap idiom',
+      !!lucy && lucy.name === 'SELENE', 'lucy=' + !!lucy);
     if (lucy) { ow.sysNpc(lucy); tk(g, 3); drain(g); }
     var brainName = null; var guardB = 0;
     while (guardB++ < 100) {
@@ -1439,8 +1439,8 @@ const driverD = `
       break;
     }
     drain(g);
-    ok('D29b Lucy battle: the win strikes slot SILVER, other slots untouched, run closed',
-      brainName === 'Lucy' && slotOf(g, 'pike') === 'silver' && st.frontier.run === null
+    ok('D29b Selene battle: the win strikes slot SILVER, other slots untouched, run closed',
+      brainName === 'Selene' && slotOf(g, 'pike') === 'silver' && st.frontier.run === null
       && FAC_IDS.every(function (id) { return id === 'pike' || slotOf(g, id) === null; }),
       'brain=' + brainName + ' slot=' + slotOf(g, 'pike'));
   }
@@ -1469,7 +1469,7 @@ const driverD = `
       break;
     }
     drain(g);
-    ok('D30 the seventh GOLD: the Brandon gold team on climb 10 turns the last slot gold — and story.flags.frontier_complete is SET by the award helper (the machine fires the card from the flag alone)',
+    ok('D30 the seventh GOLD: the Titus gold team on climb 10 turns the last slot gold — and story.flags.frontier_complete is SET by the award helper (the machine fires the card from the flag alone)',
       slotOf(g, 'pyramid') === 'gold' && st.badges.symbols.every(function (s) { return s === 'gold'; }) && st.story.flags.frontier_complete === true,
       'slot=' + slotOf(g, 'pyramid') + ' flag=' + st.story.flags.frontier_complete);
   }
@@ -1557,12 +1557,12 @@ const driverD = `
     ow.sysNpc(brandon); tk(g, 3);
     var pv = driveAutoAlly(g);
     drain(g);
-    ok('D32a the POSSESSED battle launches first at due-Silver: autoAlly facility battle (zero command input — no command/move menu ever opens), Brandon\\'s Regi trio at foeLevel + 10 (110), possessed trainer id',
+    ok('D32a the POSSESSED battle launches first at due-Silver: autoAlly facility battle (zero command input — no command/move menu ever opens), Titus\\'s Regi trio at foeLevel + 10 (110), possessed trainer id',
       !!pv.scene && pv.scene.facility.autoAlly === true && pv.cmdMenu === false
       && pv.scene.trainer.id === 'frontier-brain-pyramid-possessed'
       && pv.scene.trainer.team.every(function (t) { return t.level === 110; }),
       'scene=' + (pv.scene && pv.scene.trainer.id) + ' cmdMenu=' + pv.cmdMenu);
-    ok('D32b canon LOSS branch: brandon_possessed_faced set, possession_broken NOT set, NO symbol, the run stays OPEN with Brandon still standing, and the team is tended back to full (the scene\\'s heal)',
+    ok('D32b canon LOSS branch: brandon_possessed_faced set, possession_broken NOT set, NO symbol, the run stays OPEN with Titus still standing, and the team is tended back to full (the scene\\'s heal)',
       st.story.flags.brandon_possessed_faced === true && !st.story.flags.brandon_possession_broken
       && slotOf(g, 'pyramid') === null && !!st.frontier.run && st.frontier.run.facility === 'pyramid'
       && team.every(function (m) { return m.hp === m.maxHp; })
@@ -1634,7 +1634,7 @@ const driverD = `
     var g = mkGame(7248); boot(g); strongParty(g, 100);
     var ow = gotoMap(g, 'frontierhub', 18, 20); drain(g);
     var st = g.state;
-    var scott = ow.map.npcs.find(function (n) { return n.name === 'SCOTT'; });
+    var scott = ow.map.npcs.find(function (n) { return n.name === 'SUTTER'; });
     function talkScott() {
       var lines = [], guard = 0;
       ow.sysNpc(scott); tk(g, 3);
@@ -1654,10 +1654,10 @@ const driverD = `
     st.badges.symbols = ['gold', 'gold', 'gold', 'gold', 'gold', 'gold', 'gold'];
     st.story.flags.frontier_complete = true;
     var sD = talkScott();
-    ok('D34 Scott, deepened: four symbol-state talks give four state-correct voices — (a) first arrival (seven facilities, seven Brains), (b) some silver/no gold (names the count 2 of seven, pushes the Gold standard), (c) all seven silver (the Gold push, Brandon named the last word), (d) frontier_complete (the salute)',
+    ok('D34 Sutter, deepened: four symbol-state talks give four state-correct voices — (a) first arrival (seven facilities, seven Brains), (b) some silver/no gold (names the count 2 of seven, pushes the Gold standard), (c) all seven silver (the Gold push, Titus named the last word), (d) frontier_complete (the salute)',
       sA.indexOf('Seven facilities, seven Frontier Brains') >= 0
       && sB.indexOf('2 of seven Symbols') >= 0 && sB.indexOf('gold, trainer, is the standard') >= 0
-      && sC.indexOf('Seven Symbols.') >= 0 && sC.indexOf('Brandon is the last word') >= 0
+      && sC.indexOf('Seven Symbols.') >= 0 && sC.indexOf('Titus is the last word') >= 0
       && sD.indexOf('all of them gold') >= 0 && sD.indexOf('The Frontier salutes you') >= 0,
       'A=' + sA.slice(0, 60) + ' B=' + sB.slice(0, 60) + ' C=' + sC.slice(0, 60) + ' D=' + sD.slice(0, 60));
   }
@@ -1676,12 +1676,12 @@ const driverD = `
     delete st.story.flags.hook_frontier;
     g.openQuestLog(); tk(g, 2);
     var labels2 = g.ui.menu.items.map(function (i) { return i.label; }).join(' | ');
-    ok('D35 quest log Frontier section: with the Frontier reached, the section renders one informational row per facility from badges.symbols — Tower/GOLD, Factory/SILVER, the unearned rows at — (Arena Greta, Pyramid Brandon by name); with no hook, no crossing and no symbols it does not render',
+    ok('D35 quest log Frontier section: with the Frontier reached, the section renders one informational row per facility from badges.symbols — Tower/GOLD, Factory/SILVER, the unearned rows at — (Arena Veda, Pyramid Titus by name); with no hook, no crossing and no symbols it does not render',
       joined.indexOf('— TRIAL GROUNDS —') >= 0
-      && joined.indexOf('Trial Tower — Anabel — GOLD') >= 0
-      && joined.indexOf('Trial Factory — Noland — SILVER') >= 0
-      && joined.indexOf('Trial Arena — Greta — —') >= 0
-      && joined.indexOf('Trial Pyramid — Brandon — —') >= 0
+      && joined.indexOf('Trial Tower — Esme — GOLD') >= 0
+      && joined.indexOf('Trial Factory — Faber — SILVER') >= 0
+      && joined.indexOf('Trial Arena — Veda — —') >= 0
+      && joined.indexOf('Trial Pyramid — Titus — —') >= 0
       && labels2.indexOf('TRIAL GROUNDS') < 0,
       joined.slice(0, 200));
   }
@@ -1866,7 +1866,7 @@ const driverE = `
     st.frontier.records.pyramid.runs = 9;
     talkFrontier(g, ow, 'pyramid'); enterRun(g);
     var brandon = climbToBrandon(g, ow);
-    ok('E00 capstone setup: climb 10 booked (Gold due) and Brandon waits on floor 7',
+    ok('E00 capstone setup: climb 10 booked (Gold due) and Titus waits on floor 7',
       !!st.frontier.run && st.frontier.run.runNo === 10 && !!brandon,
       'runNo=' + (st.frontier.run && st.frontier.run.runNo) + ' brandon=' + !!brandon);
     if (brandon) { ow.sysNpc(brandon); tk(g, 3); drain(g); }
@@ -1877,7 +1877,7 @@ const driverE = `
       break;
     }
     drain(g);
-    ok('E01 TRUE-PATH Brandon GOLD win: the last slot turns gold, all seven slots gold, and story.flags.frontier_complete is SET by the shared award helper (run closed in triumph)',
+    ok('E01 TRUE-PATH Titus GOLD win: the last slot turns gold, all seven slots gold, and story.flags.frontier_complete is SET by the shared award helper (run closed in triumph)',
       slotOf(g, 'pyramid') === 'gold' && st.badges.symbols.every(function (s) { return s === 'gold'; })
       && st.story.flags.frontier_complete === true && st.frontier.run === null,
       'slot=' + slotOf(g, 'pyramid') + ' flag=' + st.story.flags.frontier_complete);
@@ -1890,14 +1890,14 @@ const driverE = `
     var cardLines = (g.ui.dlg && g.ui.dlg.lines) ? g.ui.dlg.lines.slice() : [];
     var frontierArc = arcById('frontier');
     var sum = arcCompleteSummary(st, frontierArc);
-    ok('E03 next map load fires checkArcCompletion: the ARC COMPLETE card plays — its title names the Battle Frontier, badgeLine reads Badges: 7/7, the registry frontier summaryLines are present verbatim, and the summary forwardLine names Sinnoh and Gary',
+    ok('E03 next map load fires checkArcCompletion: the ARC COMPLETE card plays — its title names the Battle Frontier, badgeLine reads Badges: 7/7, the registry frontier summaryLines are present verbatim, and the summary forwardLine names Borea and Vale',
       cardLines.length > 0 && cardLines[0] === sum.title && sum.title.indexOf('TRIAL GROUNDS') >= 0
       && sum.badgeLine === 'Badges: 7/7' && cardLines.includes('Badges: 7/7')
       && frontierArc.summaryLines.every(function (l) { return cardLines.includes(l); })
-      && sum.forwardLine.indexOf('Borea') >= 0 && sum.forwardLine.indexOf('Gary') >= 0,
+      && sum.forwardLine.indexOf('Borea') >= 0 && sum.forwardLine.indexOf('Vale') >= 0,
       'card=' + cardLines.join(' | ').slice(0, 200));
     drain(g);
-    ok('E04 the machine recorded the card: regionsDone gains frontier EXACTLY once, arc_card_frontier set, the directive is pinned on sinnoh — and Scott has NOT fired on the hub (his beat is Pallet-only)',
+    ok('E04 the machine recorded the card: regionsDone gains frontier EXACTLY once, arc_card_frontier set, the directive is pinned on sinnoh — and Sutter has NOT fired on the hub (his beat is Pallet-only)',
       st.story.regionsDone.filter(function (x) { return x === 'frontier'; }).length === 1
       && st.story.flags.arc_card_frontier === true && st.story.arc_directive === 'sinnoh'
       && !st.story.flags.scott_closing_done,
@@ -1922,16 +1922,16 @@ const driverE = `
     ok('E06 hub ferry return with embark_frontier DELETED still sails (unconditional — the sail menu was offered and the crossing lands on Pallet)',
       menuSeen === true && st.story.position.map === 'pallet' && !st.story.flags.embark_frontier,
       'pos=' + JSON.stringify(st.story.position) + ' menu=' + menuSeen);
-    ok('E07 Scott closing beat fires on the Pallet entry: scott_closing_done set, and his spoken lines salute the conqueror, followed the whole campaign, and point at Hawthorn lab + Gary back from Sinnoh with an VOLTYETI and stories, home first',
+    ok('E07 Sutter closing beat fires on the Pallet entry: scott_closing_done set, and his spoken lines salute the conqueror, followed the whole campaign, and point at Hawthorn lab + Vale back from Borea with an VOLTYETI and stories, home first',
       st.story.flags.scott_closing_done === true
       && seen.some(function (l) { return l.indexOf('salutes its conqueror') >= 0; })
       && seen.some(function (l) { return l.indexOf('followed the whole campaign') >= 0; })
-      && seen.some(function (l) { return l.indexOf('Hawthorn') >= 0 && l.indexOf('Gary') >= 0 && l.indexOf('Borea') >= 0 && l.indexOf('VOLTYETI') >= 0; })
+      && seen.some(function (l) { return l.indexOf('Hawthorn') >= 0 && l.indexOf('Vale') >= 0 && l.indexOf('Borea') >= 0 && l.indexOf('VOLTYETI') >= 0; })
       && seen.some(function (l) { return l.indexOf('Home first') >= 0; }),
       'seen=' + seen.join(' | ').slice(0, 240));
     ow = gotoMap(g, 'viridian', 10, 10); drain(g);
     ow = gotoMap(g, 'pallet', 7, 9); tk(g, 4);
-    ok('E08 leave + re-enter Pallet: Scott does NOT re-fire (quiet load, exactly one closing scene in the UI log)',
+    ok('E08 leave + re-enter Pallet: Sutter does NOT re-fire (quiet load, exactly one closing scene in the UI log)',
       !g.ui.dialogueOpen && scottLogCount(g) === 1 && st.story.flags.scott_closing_done === true,
       'logScenes=' + scottLogCount(g));
 
@@ -1977,7 +1977,7 @@ const driverE = `
   {
     var g = mkGame(7252); boot(g); strongParty(g, 100);
     var ow = gotoMap(g, 'pallet', 7, 9); drain(g);
-    ok('E13 Scott negative: a Pallet entry WITHOUT frontier_complete is quiet — no scott_closing_done, no dialogue (the chain drive earlier Pallet visits stay clean)',
+    ok('E13 Sutter negative: a Pallet entry WITHOUT frontier_complete is quiet — no scott_closing_done, no dialogue (the chain drive earlier Pallet visits stay clean)',
       !g.state.story.flags.scott_closing_done && !g.ui.dialogueOpen);
     var f1 = tryScottClosing(g, 'viridian');
     var quiet1 = !g.ui.dialogueOpen && !g.state.story.flags.scott_closing_done;
@@ -1988,8 +1988,8 @@ const driverE = `
     var speaker = g.ui.dlg ? g.ui.dlg.speaker : null;
     drain(g);
     var f4 = tryScottClosing(g, 'pallet');
-    ok('E14 seam unit: tryScottClosing fires only on Pallet with frontier_complete set (viridian no-fire with and without the flag), fires ONCE on Pallet with speaker SCOTT (flag set at scene start), and never twice',
-      f1 === false && quiet1 && f2 === false && quiet2 && f3 === true && speaker === 'SCOTT'
+    ok('E14 seam unit: tryScottClosing fires only on Pallet with frontier_complete set (viridian no-fire with and without the flag), fires ONCE on Pallet with speaker SUTTER (flag set at scene start), and never twice',
+      f1 === false && quiet1 && f2 === false && quiet2 && f3 === true && speaker === 'SUTTER'
       && g.state.story.flags.scott_closing_done === true && f4 === false && !g.ui.dialogueOpen,
       'f=' + [f1, f2, f3, f4].join(',') + ' speaker=' + speaker);
   }

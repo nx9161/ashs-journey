@@ -544,7 +544,7 @@ export const LEGENDARY_ARCS = {
     hook: 'When the three birds of Arden are gathered, an old melody surfaces — the sea guardian only answers those who have met its storms.',
     steps: [
       { text: 'Catch FULMINIS, PYREHAWK, and GLACIERNE', flag: 'birds_caught' },
-      { text: 'Receive the Riven Wing at the Maelstrom Islands' },
+      { text: 'Receive the Storm Wing at the Maelstrom Islands' },
       { text: 'Descend to the deepest waterfall chamber' },
       { text: 'Face ABYSSORN, level 70', catch: 'lugia' },
     ],

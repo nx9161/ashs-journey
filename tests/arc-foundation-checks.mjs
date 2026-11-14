@@ -366,7 +366,7 @@ const driver = `
     labels5.some(function (l) { return l.includes('ARC 1 · ARDEN') && l.includes('CURRENT'); })
     && labels5.some(function (l) { return l.includes('FUTURE ARCS') && l.includes('SEALED'); })
     && labels5.some(function (l) { return l.includes('Ch.1 — The Crown League'); })
-    && labels5.some(function (l) { return l.includes('Ch.13 — Horizons'); }),
+    && labels5.some(function (l) { return l.includes('Ch.13 — A New Beginning'); }),
     labels5.join(' / ').slice(0, 300));
   g5.state.story.regionsDone = ['kanto'];
   g5.openJourney();

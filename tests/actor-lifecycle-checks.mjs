@@ -17,15 +17,15 @@
 //   the tale-completion watcher are wired in the shipped source.
 //   THE THREE PROOFS — Master Ko's tale-end relocation (tale_saffron
 //   onComplete), the Canopy parley's cinematic entry + departure
-//   (ev_parley_enter + runParleyNpc exits), and Wally's quest-end
+//   (ev_parley_enter + runParleyNpc exits), and Emil's quest-end
 //   relocation (Meadowbrook departure -> Crown Road post, held
 //   empty by ACTOR_DEFAULTS until his farewell scene completes).
 //   W9 PROOFS — Intern Vesk's tale-end relocation to the Revelry TV
 //   door (tale_sinnoh_jubilife onComplete), the off-map completion
 //   application + save-resume resolution (a tale already complete in
 //   the save resolves its actor to the post-completion post), and
-//   the two flag-gated departures (Jasmine leaves the lighthouse
-//   once Lumi is healed; Lance leaves the lake once the WRATHWYRM
+//   the two flag-gated departures (Liora leaves the lighthouse
+//   once Lumi is healed; Darian leaves the lake once the WRATHWYRM
 //   is calmed — ACTOR_FLAG_DEFAULTS, saved overrides still win).
 
 import path from 'node:path';
@@ -119,36 +119,36 @@ for (const mapId of Object.keys(MAPS)) {
 }
 ok('census assembles a real population (>600 posts)', totalPosts > 600, String(totalPosts));
 ok('every census post yields a unique charId on its map', !dupReport, dupReport);
-for (const cid of ['mom@pallet', 'master-ko@dojo', 'wally@petalburg', 'wally@victory-road-maris',
+for (const cid of ['mom@pallet', 'master-ko@dojo', 'emil@petalburg', 'emil@victory-road-maris',
   'rue@celadon', 'cole@celadon', 'harbormaster@vermilion', 'shopkeeper@mart']) {
   const mapId = cid.split('@')[1];
   ok('charId exists: ' + cid, cidsOf(mapId).includes(cid));
 }
 ok('slug derivation is the documented one',
   actorCharId('MASTER KO', 'dojo') === 'master-ko@dojo'
-  && actorCharId("WALLY'S NEIGHBOR UNA", 'petalburg') === 'wally-s-neighbor-una@petalburg'
+  && actorCharId("EMIL'S NEIGHBOR UNA", 'petalburg') === 'emil-s-neighbor-una@petalburg'
   && actorSlug('PROF. ROWAN') === 'prof-rowan');
 
 // ---------- persistence: overrides across save/load ----------
-ok('ACTOR_DEFAULTS holds the Crown Road post empty until Wally departs',
-  ACTOR_DEFAULTS['wally@victory-road-maris'] && ACTOR_DEFAULTS['wally@victory-road-maris'].hidden === true);
+ok('ACTOR_DEFAULTS holds the Crown Road post empty until Emil departs',
+  ACTOR_DEFAULTS['emil@victory-road-maris'] && ACTOR_DEFAULTS['emil@victory-road-maris'].hidden === true);
 ok('directive precedence: default applies with no save', (() => {
   const s = defaultState();
-  const d = actorDirective(s, 'wally@victory-road-maris');
+  const d = actorDirective(s, 'emil@victory-road-maris');
   return !!d && d.hidden === true && actorDirective(s, 'mom@pallet') === null;
 })());
 {
   const s = defaultState();
   ok('new saves start with an empty override store', !!s.story.actors && Object.keys(s.story.actors).length === 0);
   setActorOverride(s, 'master-ko@dojo', { map: 'dojo', x: 5, y: 5, hidden: false });
-  setActorOverride(s, 'wally@petalburg', { hidden: true, map: 'petalburg' });
-  setActorOverride(s, 'wally@victory-road-maris', { hidden: false });
+  setActorOverride(s, 'emil@petalburg', { hidden: true, map: 'petalburg' });
+  setActorOverride(s, 'emil@victory-road-maris', { hidden: false });
   const round = migrate(JSON.parse(JSON.stringify(s)));
   const v = validateSave(round);
   ok('overrides survive JSON round-trip + migrate + validate', v.ok
     && actorDirective(round, 'master-ko@dojo').x === 5
-    && actorDirective(round, 'wally@petalburg').hidden === true
-    && actorDirective(round, 'wally@victory-road-maris').hidden === false,
+    && actorDirective(round, 'emil@petalburg').hidden === true
+    && actorDirective(round, 'emil@victory-road-maris').hidden === false,
     v.errors.join(','));
 }
 {
@@ -164,12 +164,12 @@ ok('directive precedence: default applies with no save', (() => {
   ok('validateSave rejects a malformed actors entry',
     validateSave(s).errors.includes('bad-story-actors-entry'));
   const s2 = defaultState();
-  s2.story.actors = { 'bad key': { hidden: true }, 'wally@petalburg': { hidden: true, x: 3 }, 'master-ko@dojo': { map: 42, x: 'a' } };
+  s2.story.actors = { 'bad key': { hidden: true }, 'emil@petalburg': { hidden: true, x: 3 }, 'master-ko@dojo': { map: 42, x: 'a' } };
   const round = migrate(JSON.parse(JSON.stringify(s2)));
   ok('malformed entries sanitize away on load (character stands home)',
     !('bad key' in round.story.actors)
-    && round.story.actors['wally@petalburg'].hidden === true
-    && round.story.actors['wally@petalburg'].x === undefined
+    && round.story.actors['emil@petalburg'].hidden === true
+    && round.story.actors['emil@petalburg'].x === undefined
     && round.story.actors['master-ko@dojo'].map === undefined);
 }
 
@@ -217,16 +217,16 @@ ok('identity + resolver wired in loadMap',
     SRC_SYS.includes("actorExit: { who: 'rue@celadon'") && SRC_SYS.includes("actorExit: { who: 'cole@celadon'"));
 }
 
-// ---------- proof 3: Wally relocates at his quest's end ----------
+// ---------- proof 3: Emil relocates at his quest's end ----------
 {
-  const wP = hoenn.HOENN_NPCS.find((n) => n.name === 'WALLY' && n.map === 'petalburg');
-  const wV = hoenn.HOENN_NPCS.find((n) => n.name === 'WALLY' && n.map === 'victory-road-maris');
-  ok('both Wally posts are authored (Meadowbrook + Crown Road)',
+  const wP = hoenn.HOENN_NPCS.find((n) => n.name === 'EMIL' && n.map === 'petalburg');
+  const wV = hoenn.HOENN_NPCS.find((n) => n.name === 'EMIL' && n.map === 'victory-road-maris');
+  ok('both Emil posts are authored (Meadowbrook + Crown Road)',
     !!wP && wP.x === 13 && wP.y === 7 && !!wV && wV.x === 11 && wV.y === 6);
-  ok('Wally posts stand on walkable tiles', walkableAt('petalburg', 13, 7) && walkableAt('victory-road-maris', 11, 6));
+  ok('Emil posts stand on walkable tiles', walkableAt('petalburg', 13, 7) && walkableAt('victory-road-maris', 11, 6));
   ok('the departure route east out of Meadowbrook exists', bfsExists('petalburg', 13, 7, 29, 8));
   ok('the farewell scene wires the relocation (exit + show)',
-    SRC_SYS.includes("actorExit: { who: 'wally@petalburg'") && SRC_SYS.includes("actorShow: { who: 'wally@victory-road-maris' }"));
+    SRC_SYS.includes("actorExit: { who: 'emil@petalburg'") && SRC_SYS.includes("actorShow: { who: 'emil@victory-road-maris' }"));
 }
 
 // ---------- W9 proof 4: Intern Vesk relocates when his tale completes ----------
@@ -282,39 +282,39 @@ ok('identity + resolver wired in loadMap',
     !!kd && kd.map === 'dojo' && kd.x === 5 && kd.y === 5, JSON.stringify(kd));
 }
 
-// ---------- W9 proof 6: Jasmine leaves the lighthouse once Lumi is healed ----------
+// ---------- W9 proof 6: Liora leaves the lighthouse once Lumi is healed ----------
 {
-  const jLight = johto.JOHTO_NPCS.find((n) => n.name === 'JASMINE' && n.map === 'lighthouse-2');
-  const jGym = johto.JOHTO_NPCS.find((n) => n.name === 'JASMINE' && n.map === 'gym-olivine');
-  ok('W9: both Jasmine posts are authored (lighthouse (5,4), gym (7,2))',
+  const jLight = johto.JOHTO_NPCS.find((n) => n.name === 'LIORA' && n.map === 'lighthouse-2');
+  const jGym = johto.JOHTO_NPCS.find((n) => n.name === 'LIORA' && n.map === 'gym-olivine');
+  ok('W9: both Liora posts are authored (lighthouse (5,4), gym (7,2))',
     !!jLight && jLight.x === 5 && jLight.y === 4 && !!jGym && jGym.x === 7 && jGym.y === 2);
-  ok('W9: Jasmine charId exists in the census', cidsOf('lighthouse-2').includes('jasmine@lighthouse-2'));
+  ok('W9: Liora charId exists in the census', cidsOf('lighthouse-2').includes('liora@lighthouse-2'));
   const s = defaultState();
-  ok('W9: before the delivery, Jasmine stands at the lighthouse (no directive)',
-    actorDirective(s, 'jasmine@lighthouse-2') === null);
+  ok('W9: before the delivery, Liora stands at the lighthouse (no directive)',
+    actorDirective(s, 'liora@lighthouse-2') === null);
   s.story.flags.amphy_healed = true;
-  const d = actorDirective(s, 'jasmine@lighthouse-2');
+  const d = actorDirective(s, 'liora@lighthouse-2');
   ok('W9: after amphy_healed, the lighthouse post resolves empty (she is at her gym)',
-    !!d && d.hidden === true && ACTOR_FLAG_DEFAULTS['jasmine@lighthouse-2'].flag === 'amphy_healed');
-  setActorOverride(s, 'jasmine@lighthouse-2', { hidden: false });
+    !!d && d.hidden === true && ACTOR_FLAG_DEFAULTS['liora@lighthouse-2'].flag === 'amphy_healed');
+  setActorOverride(s, 'liora@lighthouse-2', { hidden: false });
   ok('W9: a saved override still wins over the flag-gated default',
-    actorDirective(s, 'jasmine@lighthouse-2').hidden === false);
+    actorDirective(s, 'liora@lighthouse-2').hidden === false);
 }
 
-// ---------- W9 proof 7: Lance leaves the lake once the WRATHWYRM is calmed ----------
+// ---------- W9 proof 7: Darian leaves the lake once the WRATHWYRM is calmed ----------
 {
-  const lLake = johto.JOHTO_NPCS.find((n) => n.name === 'LANCE' && n.map === 'lake-of-rage');
-  const lTown = johto.JOHTO_NPCS.find((n) => n.name === 'LANCE' && n.map === 'mahogany');
-  ok('W9: both Lance posts are authored (lake (16,15), Redwood (18,7))',
+  const lLake = johto.JOHTO_NPCS.find((n) => n.name === 'DARIAN' && n.map === 'lake-of-rage');
+  const lTown = johto.JOHTO_NPCS.find((n) => n.name === 'DARIAN' && n.map === 'mahogany');
+  ok('W9: both Darian posts are authored (lake (16,15), Redwood (18,7))',
     !!lLake && lLake.x === 16 && lLake.y === 15 && !!lTown && lTown.x === 18 && lTown.y === 7);
-  ok('W9: Lance charId exists in the census', cidsOf('lake-of-rage').includes('lance@lake-of-rage'));
+  ok('W9: Darian charId exists in the census', cidsOf('lake-of-rage').includes('darian@lake-of-rage'));
   const s = defaultState();
-  ok('W9: before the lake beat, Lance stands at the lake (no directive)',
-    actorDirective(s, 'lance@lake-of-rage') === null);
+  ok('W9: before the lake beat, Darian stands at the lake (no directive)',
+    actorDirective(s, 'darian@lake-of-rage') === null);
   s.story.flags.red_gyarados_done = true;
-  const d = actorDirective(s, 'lance@lake-of-rage');
+  const d = actorDirective(s, 'darian@lake-of-rage');
   ok('W9: after red_gyarados_done, the lake post resolves empty (he is in Redwood), and his Redwood post is untouched',
-    !!d && d.hidden === true && ACTOR_FLAG_DEFAULTS['lance@lake-of-rage'].flag === 'red_gyarados_done'
+    !!d && d.hidden === true && ACTOR_FLAG_DEFAULTS['darian@lake-of-rage'].flag === 'red_gyarados_done'
     && actorDirective(s, 'lance@mahogany') === null);
 }
 

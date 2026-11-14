@@ -2060,7 +2060,7 @@ Object.assign(OverworldScene.prototype, {
             flags.wally_ralts = true;
             g.audio.playSfx('dex-register');
             g.ui.toast('Emil caught a PSYLET!');
-            this.runSteps([{ actorExit: { who: 'wally@petalburg', to: [29, 8] } }, { actorShow: { who: 'wally@victory-road-maris' } }], 0, null);
+            this.runSteps([{ actorExit: { who: 'emil@petalburg', to: [29, 8] } }, { actorShow: { who: 'emil@victory-road-maris' } }], 0, null);
           }, 'EMIL');
         });
         return true;

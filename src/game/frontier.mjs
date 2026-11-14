@@ -203,7 +203,7 @@ export function frontierScottLines(state) {
   if (earned > 0) {
     return [
       'Counted your case on the way in, trainer — ' + earned + ' of seven Symbols in hand: ' + silvers + ' silver, ' + golds + ' gold.',
-      'Riven is a Brain respecting you. Gold is a Brain with nothing left to teach you — and gold, trainer, is the standard I built this island to demand.',
+      'Silver is a Brain respecting you. Gold is a Brain with nothing left to teach you — and gold, trainer, is the standard I built this island to demand.',
       'Keep pushing door to door. The Brains you have only met in silver are keeping their real teams warm for you.',
     ];
   }
