@@ -151,7 +151,7 @@ export const MUSIC = {
   },
 
   'center-theme': {
-    id: 'center-theme', title: 'Healing Light (Pokemon Center, original)', bpm: 88, loop: true,
+    id: 'center-theme', title: 'Healing Light (Center, original)', bpm: 88, loop: true,
     tracks: [
       { wave: 'pulse', duty: 0.5, vol: 0.32, notes: [
         [0,'F5',1],[1,'A5',1],[2,'C6',2],[4,'A5',1],[5,'G5',1],[6,'F5',2],
