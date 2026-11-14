@@ -2857,6 +2857,26 @@ T31_KIND_DEFS.forEach(([kind], i) => {
 const T31_PROP_KINDS = T31_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
 const T31_WALL_KINDS = T31_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
 const T31_FLOOR_KINDS = T31_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
+// Wave T32: Ashfall Town's own kit kinds (NO-SAME-KIT law;
+// WAVE-T32-ASHFALL-PLAN.md). Indices 660-662 — registered above
+// main's ceiling of 636 (594-636 all singly owned, 606-607 stay
+// empty) with 637-659 left clear for the parallel T31 Beacon
+// claim at 645-656; kind names timberroof/ashfloor/railfence
+// verified unclaimed.
+const T32_KIND_DEFS = [
+  ['timberroof', 'wall'],
+  ['ashfloor', 'floor'],
+  ['railfence', 'prop'],
+];
+const T32_KIND_CHARS = {};
+T32_KIND_DEFS.forEach(([kind], i) => {
+  const ch = String.fromCodePoint(0x1E00 + 660 + i);
+  T32_KIND_CHARS[kind] = ch;
+  TILE_CHARS[ch] = kind;
+});
+const T32_PROP_KINDS = T32_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
+const T32_WALL_KINDS = T32_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
+const T32_FLOOR_KINDS = T32_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
 const SINNOH_TOWN_GROUND_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg);
 const SINNOH_TOWN_GROUND2_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg2);
 // TX-3: the 8 gym exteriors by town (original type-accent motifs).
@@ -94485,6 +94505,60 @@ const ART = {
     "gggggggggggggggg",
     "gggggggggggggggg"
   ] },
+  "tile-timberroof": { w: 16, h: 16, pal: {"b":"#a39a90","l":"#bab2a6","d":"#6e675e","w":"#8d8478","a":"#d9d3c5","n":"#4e463c"}, rows: [
+    "llldllllllllllll",
+    "bbbdnwbbbbbbbbbb",
+    "bbbabbbbbbwbabbb",
+    "dddddddddddddddd",
+    "lllllllldlllllll",
+    "bbbbbbbbdnbbwbbb",
+    "abbbwbbbdabbbbbb",
+    "dddddddddddddddd",
+    "llllllllllllldll",
+    "bbbbbbwbbbbbbdnb",
+    "bbbbbbabbbbwbdba",
+    "dddddddddddddddd",
+    "lldlllllllllllll",
+    "wbdnbbbbbbbbbwbb",
+    "bbdabwbbbbbbabbb",
+    "dddddddddddddddd"
+  ] },
+  "tile-ashfloor": { w: 16, h: 16, pal: {"b":"#ded4bd","l":"#eae3cf","d":"#c2b394","p":"#ada184","c":"#57503f"}, rows: [
+    "cbbdbdddbdddpdbp",
+    "dbcddbbbbbbbbbbl",
+    "bbbbcbbblbbbbbbb",
+    "blbbpbcpbddbdddb",
+    "bdddbdddcddbbbbb",
+    "dbbbbbbbblcbbbbb",
+    "bblbbpbbpbbpclpb",
+    "bbbbbblbdddbddcb",
+    "bdddbdddbblbbbbb",
+    "pbblbbpbbpbbpblp",
+    "bbbbbbblbbbbbdbd",
+    "lbbbdddbdddlddbb",
+    "bdddldbpbbpbbpbl",
+    "bbbbbbbblbbbbbbb",
+    "blbbbbbbbbbdddbd",
+    "bcdbdddbdddpbbpb"
+  ] },
+  "tile-prop-railfence": { w: 16, h: 16, pal: {"g":"#1f871a","G":"#1f511a","t":"#7a6a55","l":"#97836a","d":"#5d4f3d","a":"#d9d3c5"}, rows: [
+    "GgggggggGggggggg",
+    "gggGgggggggGgggg",
+    "ggggggGgggggggGg",
+    "gdaagggggGggdaag",
+    "adttllallllldttl",
+    "tdttttttdtttdttt",
+    "ddttdddddddddttd",
+    "gdttgGggggggdttg",
+    "GdttggggGgggdttg",
+    "gdttgggggggGdttg",
+    "adttllallllldttl",
+    "tdttdtttttttdttt",
+    "ddttdddddddddttd",
+    "gdttgggGggggdttG",
+    "gdttggggggGgdttg",
+    "gdttgGggggggdttg"
+  ] },
   "tile-trellisroof": { w: 16, h: 16, pal: {"c":"#f2e7ce","r":"#cf8296","l":"#e2a5b4","d":"#a85f74","b":"#8e3d55","v":"#557f3e"}, rows: [
     "cclrllllcclllvll",
     "cccldllccccbrllc",
@@ -114823,6 +114897,11 @@ for (const k of T30_FLOOR_KINDS) TILE_ART[k] = 'tile-' + k;
 for (const k of T31_PROP_KINDS) TILE_ART[k] = 'tile-prop-' + k;
 for (const k of T31_WALL_KINDS) TILE_ART[k] = 'tile-' + k;
 for (const k of T31_FLOOR_KINDS) TILE_ART[k] = 'tile-' + k;
+// Wave T32: Ashfall's split-rail fences draw their prop tile; its
+// timber roofs and swept-ash lanes draw theirs.
+for (const k of T32_PROP_KINDS) TILE_ART[k] = 'tile-prop-' + k;
+for (const k of T32_WALL_KINDS) TILE_ART[k] = 'tile-' + k;
+for (const k of T32_FLOOR_KINDS) TILE_ART[k] = 'tile-' + k;
 // Premium+ W6 (TX-3/PL-1): door-open frames, authored in TX-3 for every
 // door kind. The warp-fade engine that plays them lands in W7 — W6
 // wires the frames (this registry + cache.doorOpen + doorOpenCanvas)
@@ -116616,6 +116695,10 @@ function resolveTileLayers(cache, kind, x, y, kindAt, t, phase, mapId) {
     // its roof the same way (its art is fully opaque — the
     // tower's harbour-red roof is baked in).
     case 'lampglass':
+    // Wave T32: Ashfall's split-rail fences composite over their
+    // green the same way (their art is fully opaque — the green
+    // is baked in).
+    case 'railfence':
     // Wave T17: the radio mast composites over its compound grass too.
     case 'radiomast': {
       // Object tiles carry transparent surrounds (Wave 1): lay the ground
@@ -123514,6 +123597,14 @@ const WALKABLE = new Set(['.', ',', 'D', 'E', 'C', 'F', 'J', 'K', '1', '2', 'V',
   // W-DIFF8 holds 629-632; T30 claims from 633 in parallel;
   // 606-607 stay empty.)
   ...[646, 647]
+    .map((i) => String.fromCodePoint(0x1E00 + i)),
+  // Wave T32: the ashfloor char (U+1E00+661, tiles.mjs
+  // T32_KIND_DEFS) is walkable street material — Ashfall
+  // Town's swept-ash lane, swapped onto the town's street
+  // cells (which shipped as walkable tg2 mud), so floor
+  // stays floor. (Indices 660-662: main's ceiling was 636;
+  // 637-659 left clear for the parallel T31 Beacon claim.)
+  ...[661]
     .map((i) => String.fromCodePoint(0x1E00 + i))]);
 
 // Trainer definitions for the slice.
@@ -147265,22 +147356,22 @@ const MAPS7 = {
     "rows": [
       "὎὎὎὏὎὎὎὎὎὎὏὎὎὎὎὎὎὏὎὎὎὎὎὎὏὎὎὎",
       "὎ὌὌὌὌὌὌὌὌἉὌὌὌὌὌὌἉὌὌὌὌὌὌὌὌὌὌ὎",
-      "὎ὌὌjklmὌὌdeefὌὌὐὐὐὐὌὌὒὒὒὌὌὌ὎",
+      "὎ὌὌjklmὌὌdeefὌὌₔₔₔₔὌὌₔₔₔὌὌὌ὎",
       "὎ὌὌAJKAὌἉP12PὌὌὑsὑὑὌὌὓsὓὌὌὌ὎",
-      "὎ὌὍὍὍὍὍὍὍὍὍὍὍὍὍὍὍὍὍὍὍὍὍὍὍὍὍ὎",
-      "὎ὌSὍὍὍὍὍὍὍὍὍὍὍὍὍὍὍὍὍὌὌὌὌὌὌὍ὎",
-      "὎ὌἉὍὍὍὍὍὍὍὍὌὍὍὍὍὍὍὍὍὌὌὌὌὌὌὍ὎",
-      "὎ὌὌὍὌὌὍὌἉὌὌὍὌὍὍὌὍὌὌὍὌὌὌὌὌὌὍ὎",
-      "ὌὌὌὍὍὍὍὍὍὍὍὍὍὍὍὍὍὍὍὍὍὍὍὍὍὍὍὍ",
-      "ὌὌὌὍὍὍὍὍὍὍὍὍὍὍὍὍὍὍὍὍὍὍὍὍὍὍὍὍ",
-      "὎ὌὌὍὌὌὍὌὌnὌὍἉὍὍὌὍὌὌὍὌὌὌὌὌὌὍ὎",
-      "὎ὌὌὍὌὌὍἉὌὌὌὍὌὍὍὌὍ὏ὌὍ....ὌὍὍ὎",
-      "὎ὌὌὍὍὍὍὍὍὍὍὍὍὍὍὍSὍὍ.,,,,ἉὍἉ὎",
-      "὎὏ὌὍὍὍὍὍὍὍὍὍὍὍὍὍὍὍὍ.,,,,.ὍὌ὎",
-      "὎ὌὌὍὍὍὍὍὍὍὍὍὌὍὍὌὍὌὍὍ....ὌὍὌ὎",
-      "὎ὌὌἉὌὌὌὌὌ὏ὍὍὌὍὍὌὍὌὍἉὍẑὌὌὌὍὌ὎",
-      "὎ὌὌὌὌὌὌὌẑὌὍὍὍὍὍὍὍὍὍὍὍὍὍὍὍὍὌ὎",
-      "὎὎὎Ὄ὎὎὎὎὎὎὏὎὎ὍὍ὎὎὎὏὎὎὎὎὎὎὏὎὎",
+      "὎ₕₕₕₕₕₕₕₕₕₕₕₕₕₕₕₕₕₕₕₕₕₕₕₕₕₕ὎",
+      "὎ὌSὌὌὌὌὌὌὌὌὌὌὌὌὌₕὌSὌὌₔₔₔὌὌₕ὎",
+      "὎ὌἉὌὌὌὌὌὌὌὌὌὌὌὌὌₕὌὌὌὌὓsὓὌὌₕ὎",
+      "὎ὌὌὌὌὌὌὌἉὌὌὌὌὌὌὌₕὌὌὌὌὌὌὌὌὌₕ὎",
+      "Ὄₕₕₕₕₕₕₕₕₕₕₕₕₕₕₕₕₕₕₕₕₕₕₕₕₕₕₕ",
+      "Ὄₕₕₕₕₕₕₕₕₕₕₕₕₕₕₕₕₕₕₕₕₕₕₕₕₕₕₕ",
+      "὎ὌὌₔₔₔὌὌὌnὌὌἉₕₕὌὌὌὌₕὌSὌὌḦὌὌ὎",
+      "὎ὌὌὓsὓὌἉὌὌὌὌὌₕₕὌὌ὏Ὄₕ....SὌὌ὎",
+      "὎ὌὌὌὌὌὌὌὌὌὌὌὌₕₕὌSὌₖ.,,,,ἉὌἉ὎",
+      "὎὏ὌὌὌὌὌὌὌὌὌὌὌₕₕὌὌὌₖ.,,,,.ὌὌ὎",
+      "὎ὌὌὌὌὌὌὌὌὌὌὌὌₕₕὌὌSὌₕ....ₕὌὌ὎",
+      "὎ὌὌἉὌὌὌὌὌ὏ὌὌὌₕₕὌὌὌὌἉὌẑSὌὌὌὌ὎",
+      "὎ὌὌὌὌὌὌὌẑὌὌὌὌₕₕὌὌὌὌὌₖὌὌὌₖὌὌ὎",
+      "὎὎὎Ὄ὎὎὎὎὎὎὏὎὎ₕₕ὎὎὎὏὎὎὎὎὎὎὏὎὎",
     ],
     "warps": [
       {"x": 4, "y": 3, "to": {"map": "center", "x": 4, "y": 4}, "via": {"map": "fallarbor", "x": 4, "y": 4}},
@@ -147300,12 +147391,14 @@ const MAPS7 = {
       {"x": 17, "y": 14, "text": "ASHFALL TOWN — East: ROUTE 113 · South: ROUTE 114."},
       {"x": 24, "y": 11, "text": "ASHFALL TOWN — East: ROUTE 113 · South: ROUTE 114."},
       {"x": 22, "y": 15, "text": "ASHFALL TOWN — East: ROUTE 113 · South: ROUTE 114."},
+      {"x": 18, "y": 5, "text": "ASHFALL TOWN — East: ROUTE 113 · South: ROUTE 114."},
+      {"x": 21, "y": 10, "text": "ASHFALL TOWN — East: ROUTE 113 · South: ROUTE 114."},
     ],
     "npcs": [
       {"x": 11, "y": 6, "name": "PROF. ANDO’S NEIGHBOR HANA", "art": "lady", "skin": "#d8a878", "shirt": "#7a4a8a", "pants": "#2a2a3a", "hair": "#c0c0c0", "dialogue": ["The Professor watches the sky the way farmers watch weather. Both are right to.", "A meteorite fell on Route 114 once. The town still points at the crater like family."]},
       {"x": 19, "y": 13, "name": "ASH COLLECTOR BRIN", "art": "youngster", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#4a3a2a", "dialogue": ["I sweep ash into sacks for the glassworks. A bottle of Ashfall glass holds a little of every year.", "DIZBEAR on the ash road walk like the mountain is still moving. It isn't. Probably."]},
       {"x": 6, "y": 13, "name": "METEOR WATCHER SOL", "art": "elder", "skin": "#e8b888", "shirt": "#b0503c", "pants": "#2a2a3a", "hair": "#5a3a2a", "dialogue": ["Forty years of falling ash, and the town has never once been buried. It settles gentle.", "South, Route 114 runs down to Comet Falls. Mind the craters; they mind you back."]},
-      {"x": 3, "y": 5, "name": "MART CLERK", "art": "clerk", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#4a3a2a", "dialogue": ["Ashfall Mart — ash-country stock. The brooms are not merchandise; stop asking."], "mart": {"stock": ["greatball", "ultraball", "hyperpotion", "fullheal", "revive", "superpotion"]}},
+      {"x": 9, "y": 4, "name": "MART CLERK", "art": "clerk", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#4a3a2a", "dialogue": ["Ashfall Mart — ash-country stock. The brooms are not merchandise; stop asking."], "mart": {"stock": ["greatball", "ultraball", "hyperpotion", "fullheal", "revive", "superpotion"]}},
     ],
     "encounters": {"rate": 0.12, "table": [{"species": "spinda", "min": 230, "max": 236, "weight": 24}, {"species": "sandshrew", "min": 230, "max": 236, "weight": 20}, {"species": "swablu", "min": 231, "max": 237, "weight": 18}, {"species": "zigzagoon", "min": 230, "max": 236, "weight": 14}, {"species": "skarmory", "min": 232, "max": 238, "weight": 8}, {"species": "slugma", "min": 231, "max": 237, "weight": 10}], "water": [{"species": "tentacool", "min": 202, "max": 210, "weight": 28}, {"species": "magikarp", "min": 202, "max": 208, "weight": 24}, {"species": "wingull", "min": 203, "max": 210, "weight": 20}, {"species": "pelipper", "min": 206, "max": 212, "weight": 8}], "waterRate": 0.08},
     "items": [],
