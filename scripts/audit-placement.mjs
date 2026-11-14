@@ -28,7 +28,10 @@ import { resolve } from 'node:path';
 import { loadMaps, makeTiers, townSetOf, analyzeMap } from './audit-desire-paths.mjs';
 
 const DIRS = [[1, 0], [-1, 0], [0, 1], [0, -1]];
-const DECOR_KINDS = ['lamp', 'fence', 'flowerbed', 'sign', 'flower'];
+const DECOR_KINDS = ['lamp', 'fence', 'flowerbed', 'sign', 'flower', 'railfence'];
+// ('railfence': the T32 Ashfall Town kit prop — a fence is decor by
+// construction; registered so the town's south planters anchor to
+// its fence line, WAVE-T32-ASHFALL-PLAN.md §6 round 2.)
 // FREESTANDING objects (owner rule): independent objects that must
 // stand on the shoulder, never straddled by the fabric. Exempt:
 // 'fence' (runs as borders), composed building units (postbox, stall,
