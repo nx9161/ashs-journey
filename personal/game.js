@@ -3814,6 +3814,25 @@ T59_KIND_DEFS.forEach(([kind], i) => {
 const T59_PROP_KINDS = T59_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
 const T59_WALL_KINDS = T59_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
 const T59_FLOOR_KINDS = T59_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
+// Wave T60 (Bergamot Island): the town's own kit kinds (Ruin
+// Flag & Bone Drift) — indices 996-999 per the Director's index
+// ruling (main's kinds run through T58's 972-976; the parallel
+// T59 claim holds 984-987; 977-983 + 988-995 stay empty).
+const T60_KIND_DEFS = [
+  ['ruinfloor', 'floor'],
+  ['boneroof', 'wall'],
+  ['surfstone', 'prop'],
+  ['wreckrib', 'prop'],
+];
+const T60_KIND_CHARS = {};
+T60_KIND_DEFS.forEach(([kind], i) => {
+  const ch = String.fromCodePoint(0x1E00 + 996 + i);
+  T60_KIND_CHARS[kind] = ch;
+  TILE_CHARS[ch] = kind;
+});
+const T60_PROP_KINDS = T60_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
+const T60_WALL_KINDS = T60_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
+const T60_FLOOR_KINDS = T60_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
 const SINNOH_TOWN_GROUND_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg);
 const SINNOH_TOWN_GROUND2_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg2);
 // TX-3: the 8 gym exteriors by town (original type-accent motifs).
@@ -112415,6 +112434,78 @@ const ART = {
     "SsShWWWCCCWWWhSs",
     "ssssWWWWWWWWWsss"
   ] },
+  "tile-ruinfloor": { w: 16, h: 16, pal: {"f":"#9a958a","l":"#b3ad9f","d":"#7e7a6e","j":"#5d594f","m":"#5f7a4a","w":"#c2bcae"}, rows: [
+    "flffdflljjlfmfdl",
+    "ffwffflfjjfflfff",
+    "flffffljjjflfdfl",
+    "ffffdffljjfffflf",
+    "lflfffffjjlfffff",
+    "ffflwffmjjffffff",
+    "jjjjjjjjjjfjjjjj",
+    "lflffflfjjflffdf",
+    "fflfffffjjffwfff",
+    "ffffffljjjflffff",
+    "dflffflfjjlffffl",
+    "fffffffmjjffffdf",
+    "flfdflffjjfflfff",
+    "fffffflfjjflfwfl",
+    "jjfjjjjjjjjjjfjj",
+    "flffffljdflffffl"
+  ] },
+  "tile-boneroof": { w: 16, h: 16, pal: {"b":"#ddd6c4","B":"#efe9da","s":"#a39a86","w":"#8b98a5","a":"#6f8f6a"}, rows: [
+    "bBBbbBbbbbsbbBbb",
+    "bbBbbBBbbbsbBbbB",
+    "ssssssssssssssss",
+    "BbbbsbBBbbBbbbsb",
+    "sbBbbssbbBsBBbbb",
+    "ssssssswssssssss",
+    "bBbbsbBbbbBsbbbb",
+    "bbsbBbbssbBbbsbB",
+    "ssssssssssssssss",
+    "sbBBbbsbBBbsbBbb",
+    "bbbsbBBssbbbsbBs",
+    "ssssssssssssssss",
+    "bBbbbsbBbbsbBBbs",
+    "sbBbsbBbbssbBbbb",
+    "sssasssssssssass",
+    "bbbbwbbbbbbwbbbb"
+  ] },
+  "tile-prop-surfstone": { w: 16, h: 16, pal: {"s":"#c6b388","S":"#d4c69c","h":"#a69274","g":"#8b8b93","G":"#6e6e78","l":"#a9a9b2","c":"#7a9a5a","n":"#d8d2c0"}, rows: [
+    "ssssssssssssssss",
+    "ssSssssccsssssss",
+    "sssssslgGgssssss",
+    "ssssslgggGgsssss",
+    "ssssslglgGGsssss",
+    "ssssssgggGgsssss",
+    "sssSsslgGgGsssss",
+    "sssssslggggsSsss",
+    "sssssslgGgGsssss",
+    "ssssssggggGsssss",
+    "ssSssslgGgGsssss",
+    "ssssssgggggsnsSs",
+    "sssssngggggnssss",
+    "sssshhgggggghhss",
+    "ssshhhhhhhhhhhhs",
+    "ssssssssssSsssss"
+  ] },
+  "tile-prop-wreckrib": { w: 16, h: 16, pal: {"s":"#c6b388","S":"#d4c69c","h":"#a69274","t":"#cbbfa5","T":"#9a8a6e","d":"#6e5f45","r":"#8a7a5a"}, rows: [
+    "ssssssssssssssss",
+    "ssSssstsssssssss",
+    "sssssstTssstssss",
+    "sssssstTssstTsss",
+    "sssssstTssstTsss",
+    "sssssstTsstTssss",
+    "sssssstTstTssSss",
+    "ssssttttttssssss",
+    "sssssrrrTsssssss",
+    "sssstTttTsssssss",
+    "sssstTtTtsssssss",
+    "sssStTtTtssSssss",
+    "sssstTtTtsssssss",
+    "sshhTTTTTTThhsss",
+    "shhhhhhhhhhhhhhs",
+    "ssssssssssSsssss"
+  ] },
   "tile-grovefloor": { w: 16, h: 16, pal: {"e":"#c79f66","m":"#b8905a","f":"#9a7440","l":"#dec084","L":"#4d8a34","p":"#e8862a"}, rows: [
     "Leeeeeeeeeeeeeee",
     "eeeeeeeeemeeeeee",
@@ -117991,6 +118082,9 @@ for (const k of T58_FLOOR_KINDS) TILE_ART[k] = 'tile-' + k;
 for (const k of T59_PROP_KINDS) TILE_ART[k] = 'tile-prop-' + k;
 for (const k of T59_WALL_KINDS) TILE_ART[k] = 'tile-' + k;
 for (const k of T59_FLOOR_KINDS) TILE_ART[k] = 'tile-' + k;
+for (const k of T60_PROP_KINDS) TILE_ART[k] = 'tile-prop-' + k;
+for (const k of T60_WALL_KINDS) TILE_ART[k] = 'tile-' + k;
+for (const k of T60_FLOOR_KINDS) TILE_ART[k] = 'tile-' + k;
 // Premium+ W6 (TX-3/PL-1): door-open frames, authored in TX-3 for every
 // door kind. The warp-fade engine that plays them lands in W7 — W6
 // wires the frames (this registry + cache.doorOpen + doorOpenCanvas)
@@ -119931,6 +120025,12 @@ function resolveTileLayers(cache, kind, x, y, kindAt, t, phase, mapId) {
     // baked in at their measured colours).
     case 'cairn':
     case 'slopepine':
+    // Wave T60: Bergamot's surf stone and its wreck ribs
+    // composite over their sand the same way (both arts are
+    // fully opaque — the island sand is baked in at its
+    // measured colours).
+    case 'surfstone':
+    case 'wreckrib':
     // Wave T17: the radio mast composites over its compound grass too.
     case 'radiomast': {
       // Object tiles carry transparent surrounds (Wave 1): lay the ground
@@ -127183,6 +127283,21 @@ const WALKABLE = new Set(['.', ',', 'D', 'E', 'C', 'F', 'J', 'K', '1', '2', 'V',
   // (T57); the parallel T58 claim holds 972-976; 964-971 +
   // 977-983 stay empty.)
   ...[984]
+    .map((i) => String.fromCodePoint(0x1E00 + i)),
+  // Wave T60: the ruinfloor char (U+1E00+996, tiles.mjs
+  // T60_KIND_DEFS) is walkable street material — Bergamot's
+  // ruin-flag street, swapped onto the island's whole shipped
+  // street blob (authored as the generic `path` dirt track)
+  // plus the north surf-exit jetty head, so floor stays
+  // floor. (Indices 996-999 per the Director's index ruling:
+  // main's kinds run 594-636 + 645-648 + 660-662 + 672-675 +
+  // 684-687 + 696-699 + 708-711 + 720-724 + 732-736 + 744-748 +
+  // 756-759 + 768-771 + 780-783 + 792-795 + 804-807 + 816-819 +
+  // 828-831 + 840-843 + 852-855 + 864-868 + 876-879 + 888-891 +
+  // 900-903 + 912-915 + 924-927 + 936-939 + 948-951 (T56) +
+  // 960-963 (T57) + 972-976 (T58); the parallel T59 claim
+  // holds 984-987; 964-971 + 977-983 + 988-995 stay empty.)
+  ...[996]
     .map((i) => String.fromCodePoint(0x1E00 + i))]);
 
 // Trainer definitions for the slice.
@@ -133751,22 +133866,23 @@ const MAPS5 = {
     "name": "Bergamot Island",
     "music": "viridian-theme",
     "rows": [
-      "~~~~~~~~~~~~~~~~~~~~~~~~~~",
-      "~~~~~~~~~~~~~~~~~~~~~~~~~~",
-      "~~‖jklm‗ẞẞẄẞẘ.deefẞẞẞẞẞẞ~~",
-      "~~ẞAJKAẈ――ẟ―ẟ.P12P―‥’ẞ ẞ~~",
-      "~~―..............ẟ‗ẞ‘―‗ẞ~~",
-      "~~„„„„.............”...‬~~",
-      "~~ẞẞẞẞ†ẟẟ..ạạ..ạạẟẟẟẄẟ‗ẞ~~",
-      "~~ẞ‚――.ẟẟ..ạ....ạẟẟ‖ẟ‖‗ẞ~~",
-      "~~ẞ‘,,,ẟ.....ṿ...o‗ẞ…ẞ…ẞ~~",
-      "~~ẞ‘,,,ẟ...ẟ..ṿẘ..ẟ―F―‗ẞ~~",
-      "~~ẞ‘,,,F..ẟạ#..ẟạ.o,,,ṿẞ~~",
-      "~~ẞ‘,,,Ẅ....ạ..ạ..‖,,,‗ẞ~~",
-      "~~ẞ“‖‖„„.........‛ẞ‘ẟ‖‖‥~~",
-      "~~ẞẞẞẞẞẞ†.......Sẞẞ‘‗ẞẞẞ~~",
-      "~~~~~~~~~~~~~..~~~~~~~~~~~",
-      "~~~~~~~~~~~~~..~~~~~~~~~~~"
+      "~~~~~~~~~~~~⇤⇤~~~~~~~~~~~~",
+      "~~~~ẞẞẞẞ⇤⇤⇤⇤⇤⇤S~~~~~~~~~~~",
+      "~~‖jklm‗⇤⇤ẞ⇤ẘ⇤⇥⇥⇥⇥Ẅẞẞẞẞẞ~~",
+      "~~ẞAJKAẈ⇤⇤⇤⇤ẟ⇤P12P―‥’ẞ ẞ~~",
+      "~~―⇤⇤⇤⇤⇤⇤⇤⇤⇤⇤⇤⇤⇤⇤⇤‗ẞ‘―‗ẞ~~",
+      "~~„„„„⇤⇤⇤⇤⇤⇤⇤⇤⇤⇤⇤⇤⇤”⇤⇤⇤‬~~",
+      "~~ẞẞẞẞ†⇤⇤⇤⇤ạạ⇤⇤ạạ⇤ẟẟẄẟ‗ẞ~~",
+      "~~ẞ‚――⇤⇤⇤⇤⇤ạ⇤S⇤⇤ạ⇤o‖ẟ‖‗⇦~~",
+      "~~ẞ‘,,,ẟ⇤⇤⇤⇤⇤ṿ⇤⇤⇤ẟ‗ẞ…ẞ…ẞ~~",
+      "~~ẞ‘,,,ẟ⇤⇤⇤ẟ⇤⇤ṿẘ⇤⇤ẟ―F―‗ẞ~~",
+      "~~ẞ‘,,,F⇤⇤Sạ#⇤⇤ẟạ⇤o,,,ṿẞ~~",
+      "~~ẞ‘,,,Ẅ⇤⇤⇤⇤ạ⇤⇤ạ⇤⇤‖,,,‗ẞ~~",
+      "~~ẞ“‖‖„„⇤⇤⇤⇤⇤⇤⇤⇤⇤⇤ẞ‘ẟ‖‖‥~~",
+      "~~ẞẞẞẞẞẞ†⇤⇤⇤⇤⇤⇤⇤S⇤ẞ‘‗⇧ẞẞ~~",
+      "~~~~~~~~~~~~~⇤⇤~~~~~~~~~~~",
+      "~~~~~~~~~~~~~⇤⇤~~~~~~~~~~~"
+
     ],
     "warps": [
       {
@@ -133859,12 +133975,17 @@ const MAPS5 = {
         "x": 10,
         "y": 10,
         "text": "BERGAMOT ISLAND — North: AMBER SEA — CENTRAL."
+      },
+      {
+        "x": 14,
+        "y": 1,
+        "text": "BERGAMOT ISLAND — North: AMBER SEA — CENTRAL."
       }
     ],
     "npcs": [
       {
-        "x": 3,
-        "y": 5,
+        "x": 17,
+        "y": 4,
         "name": "MART CLERK",
         "art": "clerk",
         "skin": "#f0c8a0",
