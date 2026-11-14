@@ -2721,6 +2721,36 @@ WD7_KIND_DEFS.forEach(([kind], i) => {
 const WD7_PROP_KINDS = WD7_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
 const WD7_WALL_KINDS = WD7_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
 const WD7_FLOOR_KINDS = WD7_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
+// Wave T29: Lilac City's own kit — Bronze Grid & Sunlamp
+// (WAVE-T29-LILAC-PLAN.md). Indices 625-628 — RE-INDEXED
+// in-branch under the Director's index ruling of 2026-11-13:
+// W-DIFF7 (Tidehaven + Arcport) registered pierfloor 622,
+// mansardroof 623, copperroof 624 first, so this block moved
+// above that ceiling (606-607 stay empty, as always).
+// 'bronzroof' (wall) — staggered olive-bronze shingle courses
+// on the Gym, the Game Corner and the town's two facade
+// cottages. 'gridfloor' (floor) — the fine bronze sett grid,
+// the crossroads' registered street kind. 'sunlamp' (prop) —
+// the second-sun lamp: a glowing sun-orb on a bronze post; a
+// pair flanks the Game Corner's frontage, one stands at the
+// great crossing, one on the south avenue. 'lilacbush'
+// (prop) — a lilac bush in bloom, the painting's signature
+// planting. Both props fully opaque with the green baked in.
+const T29_KIND_DEFS = [
+  ['bronzroof', 'wall'],
+  ['gridfloor', 'floor'],
+  ['sunlamp', 'prop'],
+  ['lilacbush', 'prop'],
+];
+const T29_KIND_CHARS = {};
+T29_KIND_DEFS.forEach(([kind], i) => {
+  const ch = String.fromCodePoint(0x1E00 + 625 + i);
+  T29_KIND_CHARS[kind] = ch;
+  TILE_CHARS[ch] = kind;
+});
+const T29_PROP_KINDS = T29_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
+const T29_WALL_KINDS = T29_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
+const T29_FLOOR_KINDS = T29_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
 const SINNOH_TOWN_GROUND_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg);
 const SINNOH_TOWN_GROUND2_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg2);
 // TX-3: the 8 gym exteriors by town (original type-accent motifs).
@@ -94277,6 +94307,78 @@ const ART = {
     "gGgggggggggggGgg",
     "gggggggggggggggg"
   ] },
+  "tile-bronzroof": { w: 16, h: 16, pal: {"b":"#98913f","l":"#bab45e","d":"#605c22","s":"#4a4416"}, rows: [
+    "dldldldldldldldl",
+    "sbbblbbbsbbbbbbb",
+    "sbbbbbbbsbbblbbb",
+    "sbbbbbblsbbbbbbb",
+    "dddddddddddddddd",
+    "bbbsbbbbbbbsbbbl",
+    "lbbbsbbbblbsbbbb",
+    "bbbbsbbbbbbsbbbb",
+    "dddddddddddddddd",
+    "sbbbblbbsbbbbbbb",
+    "sbbbbbbbsblbbbbb",
+    "sbbbbbbbsbbbbblb",
+    "dddddddddddddddd",
+    "bbblsbbbbbbsbbbb",
+    "bbbbsbbbblbsbbbl",
+    "dddddddddddddddd"
+  ] },
+  "tile-gridfloor": { w: 16, h: 16, pal: {"p":"#c9b183","l":"#dcc79c","s":"#a68a5c","d":"#6e5a3e","t":"#3f7d7a"}, rows: [
+    "pppdpppdpppdpppd",
+    "plpdpppdpppspppd",
+    "pppdpppdpppdpppd",
+    "dddddddddddddddd",
+    "pppdsppdpppdpppd",
+    "pppdpppdplpdpppd",
+    "pppdpppdpppdsppd",
+    "dddddddddddddddd",
+    "pppdtttdpppdpppd",
+    "pppdtltdpppdpppd",
+    "pppdtttdpppdpppd",
+    "dddddddddddddddd",
+    "pppdpppdpppdplpd",
+    "sppdpppdpppdpppd",
+    "pppdpppdsppdpppd",
+    "dddddddddddddddd"
+  ] },
+  "tile-prop-sunlamp": { w: 16, h: 16, pal: {"g":"#1d8713","G":"#2c9619","h":"#14630c","o":"#d9a83f","y":"#f2d06b","w":"#fdf3d0","d":"#605c22"}, rows: [
+    "gggggggggggggggg",
+    "ggGggggggGgggggg",
+    "ggggggoooogggggg",
+    "gggggoywwyoggggg",
+    "ggggoywwwwyogggg",
+    "ggggoywwwwyogggg",
+    "gggggoywwyoggggg",
+    "ggggggoooogggggg",
+    "gggggggddggggggg",
+    "gggggggddggggggg",
+    "gggggggddggggggg",
+    "gggggggddggggggg",
+    "gggggggddggggggg",
+    "ggggggddddgggggg",
+    "ggggghhhhhhhgggg",
+    "ggGggggggggggGgg"
+  ] },
+  "tile-prop-lilacbush": { w: 16, h: 16, pal: {"g":"#1d8713","G":"#2c9619","h":"#14630c","F":"#2e7d1e","B":"#14590c","p":"#8b6ba5","P":"#b79fd6"}, rows: [
+    "gggggggggggggggg",
+    "ggGggggggggggGgg",
+    "ggggggFFFFgggggg",
+    "ggggFpPFFpFFgggg",
+    "gggFFpPFFPpFFggg",
+    "gggFPFFpFFpFFggg",
+    "ggFFFpFFFPFFFFgg",
+    "ggFFpFFFFpPFFBgg",
+    "ggFFFPFpFFFFFBgg",
+    "gggFFFFpFFFBgggg",
+    "gggBFFFFFFBBgggg",
+    "ggggBBBBBBgggggg",
+    "ggggghhhhggggggg",
+    "ggGggggggggggGgg",
+    "gggggggggggggggg",
+    "gggggggggggggggg"
+  ] },
   "tile-thatchroof": { w: 16, h: 16, pal: {"g":"#c2a054","L":"#d9bc76","S":"#856830","D":"#6e5626"}, rows: [
     "gLggLgLggLggLgLg",
     "ggLggSgLgggLggLg",
@@ -114380,6 +114482,11 @@ for (const k of T28_FLOOR_KINDS) TILE_ART[k] = 'tile-' + k;
 for (const k of WD7_PROP_KINDS) TILE_ART[k] = 'tile-prop-' + k;
 for (const k of WD7_WALL_KINDS) TILE_ART[k] = 'tile-' + k;
 for (const k of WD7_FLOOR_KINDS) TILE_ART[k] = 'tile-' + k;
+// Wave T29: Lilac City's sunlamps + lilac bushes draw their prop
+// art; its bronze roofs + sett grid kit kinds theirs.
+for (const k of T29_PROP_KINDS) TILE_ART[k] = 'tile-prop-' + k;
+for (const k of T29_WALL_KINDS) TILE_ART[k] = 'tile-' + k;
+for (const k of T29_FLOOR_KINDS) TILE_ART[k] = 'tile-' + k;
 // Premium+ W6 (TX-3/PL-1): door-open frames, authored in TX-3 for every
 // door kind. The warp-fade engine that plays them lands in W7 — W6
 // wires the frames (this registry + cache.doorOpen + doorOpenCanvas)
@@ -116157,6 +116264,11 @@ function resolveTileLayers(cache, kind, x, y, kindAt, t, phase, mapId) {
     case 'marketstall':
     case 'tideboard':
     case 'shiphull':
+    // Wave T29: Lilac City's second-sun lamps and lilac bushes
+    // composite over their green the same way (their art is
+    // fully opaque — the green is baked in).
+    case 'sunlamp':
+    case 'lilacbush':
     // Wave T17: the radio mast composites over its compound grass too.
     case 'radiomast': {
       // Object tiles carry transparent surrounds (Wave 1): lay the ground
@@ -123020,6 +123132,14 @@ const WALKABLE = new Set(['.', ',', 'D', 'E', 'C', 'F', 'J', 'K', '1', '2', 'V',
   // (and the walkable boardwalk dock cells) in Tidehaven City,
   // so floor stays floor.
   ...[622]
+    .map((i) => String.fromCodePoint(0x1E00 + i)),
+  // Wave T29: the gridfloor char (U+1E00+626, tiles.mjs
+  // T29_KIND_DEFS) is walkable street material — Lilac City's
+  // bronze sett grid, swapped onto the town's street cells
+  // (which shipped as walkable tg2 mud), so floor stays
+  // floor. (Indices 625-628 after the Director's re-index
+  // ruling: W-DIFF7 holds 622-624; 606-607 stay empty.)
+  ...[626]
     .map((i) => String.fromCodePoint(0x1E00 + i))]);
 
 // Trainer definitions for the slice.
@@ -146641,24 +146761,24 @@ const MAPS7 = {
     "music": "pewter-theme",
     "weather": "clear",
     "rows": [
-      "ἾἾἾἿἾἾἾἾἾἾἿἾἾἾἾἾἾἿἾἾἽἽἾἾἾἿἾἾἾἾ",
-      "ἾἼἽἽἽἽἽἽἽἽἽἽἽἽἽἽἽἽἽἽἽἽἼἼἼἼἼἼἼἾ",
-      "ἾἼἽjklmἽἽdeefἽἽὀὀὀὀἽἽἽὀὀὀἼἼἼἼἾ",
-      "ἾἿἽAJKAἽἽP12PἽἽUVYUἽἽἽsὁὁἼἼἼἼἾ",
-      "ἾἽἽἽἽἽἽἽἽἽἽἽἽἽἽἽἽἽἽἽἽἽἽἽSἼoἼṅἾ",
-      "ἾἽSἽἽἽἽἽἽἽἽἽἽἽἽἽἽἽἽἽἽἽἽἽἽἽἽἽἽἾ",
-      "ἾἽἽἽἽἽἽἽἽṅἼἽἼἼἽἽἼἼἽἼἽἽἼἽẋἽἼṆἽἾ",
-      "ἾἽἽṆἽἽἽἽἽἽἽἼἽἽἽἽἽἽἽἽἽἽἼἽἼἽἼἼἽἾ",
-      "ἾἽἽἽἽἽἽἽἽἼἼἽἼἼἽἽἼἼἽẋἽἽἼἽἼἽἿἼἽἾ",
-      "ἽἽἽἽἽἽἽἽἽἽἽἽἽἽἽἽἽἽἽἽἽἽἽἽἽἽἽἽἽἽ",
-      "ἽἽἽἽἽἽἽἽἽἽἽἽἽἽἽἽἽἽἽἽἽἽἽἽἽἽἽἽἽἽ",
-      "ἾἽἽoἼἽἼἽἼἽἼἽἼἼἽἽἼἼἽἼἽἽἼἽṅoἽἼἽἾ",
-      "ἾἽἽἼ..Ἵ.ἽἽἽἽἽἽἽἽἽἽἼἼἽἽἼ.ẋṅ.ἽἽἾ",
-      "ἾἽἽ.,,.,.ἿἼἽἼἼἽἽἼἼἽἼἽἽἿ,,,,.ἽἾ",
-      "ἾἽἽ.,,,ṅἼἼἼἽἼἼἽἽoἼἽἼἽἽ.,,.,.ἽἾ",
-      "ἾἽἽἽ...ἽἽἽἼἽἼἼἽἽἼἼἽἼἽἽἼ..Ἵ.ἼἽἾ",
-      "ἾἼἼἼἼἼἼṆṆἽἽἽἽἽἽἽἽἽἽἽἽἽἽἽἽἽἽἽἽἾ",
-      "ἾἾἾἿἾἾἾἾἾἾἿἾἾἾἽἽἾἾἾἿἾἾἾἾἾἾἿἾἾἾ",
+      "ἾἾἾἿἾἾἾἾἾἾἿἾἾἾἾἾἾἿἾἾ⁲⁲ἾἾἾἿἾἾἾἾ",
+      "ἾἼἼἼἼἼἼἼἼἼἼἼἼἼἼἼἼἼἼS⁲⁲ἼἼἼἼἼἼἼἾ",
+      "ἾἼἼjklmἼἼdeefἼἼⁱⁱⁱⁱἼ⁲ἼⁱⁱⁱἼἼἼἼἾ",
+      "ἾἿἼAJKAἼSP12PἼἼUVYUἼ⁲⁲sὁὁἼἼἼἼἾ",
+      "ἾἼ⁲⁲⁲⁲⁲⁲⁲⁲⁲⁲⁲⁲⁲⁲⁲⁲⁲⁲⁲⁲⁲⁲S⁲oἼṅἾ",
+      "ἾἼSἼἼ⁴ἼἼ⁲ἼἼἼἼἼ⁲⁲⁲⁲Ἴ⁴Ἴ⁳⁲Ἴ⁲⁲⁲ἼἼἾ",
+      "ἾἼ⁴ἼἼⁱⁱⁱ⁲ṅἼἼἼἼ⁲⁲S⁲ἼἼἼἼ⁲⁳ẋ⁲⁲ṆἼἾ",
+      "ἾἼἼṆἼὃsὃ⁲ἼἼἼἼἼ⁲⁲ἼἼἼἼἼἼ⁲Ἴ⁲⁲ἼἼἼἾ",
+      "ἾἼἼἼἼἼ⁲⁲⁲ἼἼἼἼἼ⁲⁲⁳ἼἼẋἼἼ⁲Ἴ⁲ἼἿἼἼἾ",
+      "⁲⁲⁲⁲⁲⁲⁲⁲⁲⁲⁲⁲⁲⁲⁲⁲⁲⁲⁲⁲⁲⁲⁲⁲⁲⁲⁲⁲⁲⁲",
+      "⁲⁲⁲⁲⁲⁲⁲⁲⁲⁲⁲⁲⁲⁲⁲⁲⁲⁲⁲⁲⁲⁲⁲⁲⁲⁲⁲⁲⁲⁲",
+      "ἾἼἼo⁲Ἴ⁲S⁲ἼἼἼἼἼ⁲⁲⁳ἼἼἼἼἼἼ⁲ṅo⁲Ἴ⁲Ἶ",
+      "ἾἼἼἼ..⁲.⁲ἼⁱⁱⁱἼ⁲⁲ἼἼἼἼἼἼἼ.ẋṅ.Ἴ⁲Ἶ",
+      "ἾἼἼ.,,.,.ἿὃsὃἼ⁲⁲⁲⁲⁲ἼἼἼἿ,,,,.⁲Ἶ",
+      "ἾἼ⁲.,,,ṅἼS⁲⁲ἼἼ⁲⁲oS⁲⁲⁲⁲.,,.,.⁲Ἶ",
+      "ἾἼ⁲S...⁲⁲⁲Ἴ⁲ἼἼ⁲⁲ἼἼἼἼἼἼS..⁲.S⁲Ἶ",
+      "ἾἼ⁲⁲⁲⁲⁲ṆṆ⁲⁲⁲⁲⁲⁲⁲⁲⁲⁲⁲⁲⁲⁲⁲⁲⁲⁲⁲⁲Ἶ",
+      "ἾἾἾἿἾἾἾἾἾἾἿἾἾἾ⁲⁲ἾἾἾἿἾἾἾἾἾἾἿἾἾἾ",
     ],
     "warps": [
       {"x": 4, "y": 3, "to": {"map": "center", "x": 4, "y": 4}, "via": {"map": "mauville", "x": 4, "y": 4}},
@@ -146684,12 +146804,17 @@ const MAPS7 = {
       {"x": 27, "y": 15, "text": "LILAC CITY — South: ROUTE 110 · West: ROUTE 117 · East: ROUTE 118 · North: ROUTE 111."},
       {"x": 16, "y": 6, "text": "LILAC CITY — South: ROUTE 110 · West: ROUTE 117 · East: ROUTE 118 · North: ROUTE 111."},
       {"x": 17, "y": 14, "text": "LILAC CITY — South: ROUTE 110 · West: ROUTE 117 · East: ROUTE 118 · North: ROUTE 111."},
+      {"x": 19, "y": 1, "text": "LILAC CITY — South: ROUTE 110 · West: ROUTE 117 · East: ROUTE 118 · North: ROUTE 111."},
+      {"x": 8, "y": 3, "text": "LILAC CITY — South: ROUTE 110 · West: ROUTE 117 · East: ROUTE 118 · North: ROUTE 111."},
+      {"x": 7, "y": 11, "text": "LILAC CITY — South: ROUTE 110 · West: ROUTE 117 · East: ROUTE 118 · North: ROUTE 111."},
+      {"x": 3, "y": 15, "text": "LILAC CITY — South: ROUTE 110 · West: ROUTE 117 · East: ROUTE 118 · North: ROUTE 111."},
+      {"x": 22, "y": 15, "text": "LILAC CITY — South: ROUTE 110 · West: ROUTE 117 · East: ROUTE 118 · North: ROUTE 111."},
     ],
     "npcs": [
       {"x": 11, "y": 7, "name": "RYDEL’S MECHANIC JUNO", "art": "worker", "skin": "#f0c8a0", "shirt": "#3a7a4a", "pants": "#4a3a2a", "hair": "#2a1a0a", "dialogue": ["Rydel's Cycles, north street: first bike's a loaner if your legs look honest.", "The cycling road south is my commute and my religion."]},
       {"x": 18, "y": 12, "name": "VOLT FANATIC PELL", "art": "youngster", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#4a3a2a", "dialogue": ["The gym leader built half this city's grid by hand. The humming is him, saying hello.", "PLUSQUEAK and MINUSQUEAK hold hands on Route 110. Science cannot explain it. Olin can."]},
       {"x": 7, "y": 14, "name": "CORNER REGULAR VEDA", "art": "lady", "skin": "#d8a878", "shirt": "#7a4a8a", "pants": "#2a2a3a", "hair": "#c0c0c0", "dialogue": ["I come for the lights and stay for the company. The coins are a rumor.", "Wildflower's contest hall is a walk west through Route 117's flower fields. Prettier than winning."]},
-      {"x": 3, "y": 5, "name": "MART CLERK", "art": "clerk", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#4a3a2a", "dialogue": ["Lilac Mart — crossroads stock. If the region sells it, it passes through us."], "mart": {"stock": ["pokeball", "greatball", "superpotion", "hyperpotion", "antidote", "parlyzheal", "revive"]}},
+      {"x": 9, "y": 4, "name": "MART CLERK", "art": "clerk", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#4a3a2a", "dialogue": ["Lilac Mart — crossroads stock. If the region sells it, it passes through us."], "mart": {"stock": ["pokeball", "greatball", "superpotion", "hyperpotion", "antidote", "parlyzheal", "revive"]}},
     ],
     "encounters": {"rate": 0.12, "table": [{"species": "zigzagoon", "min": 216, "max": 222, "weight": 22}, {"species": "poochyena", "min": 216, "max": 222, "weight": 18}, {"species": "electrike", "min": 217, "max": 223, "weight": 18}, {"species": "plusle", "min": 217, "max": 223, "weight": 10}, {"species": "minun", "min": 217, "max": 223, "weight": 10}, {"species": "gulpin", "min": 218, "max": 223, "weight": 12}, {"species": "roselia", "min": 218, "max": 223, "weight": 10}], "water": [{"species": "tentacool", "min": 212, "max": 220, "weight": 26}, {"species": "magikarp", "min": 212, "max": 218, "weight": 20}, {"species": "wingull", "min": 213, "max": 220, "weight": 20}, {"species": "pelipper", "min": 216, "max": 222, "weight": 10}, {"species": "wailmer", "min": 215, "max": 222, "weight": 8}], "waterRate": 0.08},
     "items": [],
