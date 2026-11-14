@@ -4449,6 +4449,37 @@ T64_KIND_DEFS.forEach(([kind], i) => {
 const T64_PROP_KINDS = T64_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
 const T64_WALL_KINDS = T64_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
 const T64_FLOOR_KINDS = T64_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
+// Wave T65 (Trial Grounds): "Trial Bronze & Flecked Sandstone"
+// — trialfloor (idx 1056): flecked pale sandstone flags wearing
+// the hub's whole shipped street graph (the generic path kind,
+// the T61/T63 template defect) 1:1; trialroof (idx 1057):
+// standing-seam bronze, worn by the Tower's roof band only,
+// breaking it out of the roof-terra share (Tower/Dome/Palace);
+// streakboard (idx 1058): the painting's blank plaza board,
+// standing on the town-sign record's own cell; trialbanner
+// (idx 1059): a bronze-and-teal pennant standard at the ferry
+// pier. (Indices 1056-1059 per the Director's index ruling:
+// main's kinds run …1032-1035 on this base; the parallel T64
+// claim holds 1044-1047; 1036-1043 + 1048-1055 stay empty.
+// Kind names verified unclaimed — driftroof/standingstone/
+// shellfloor/shellroof/gullpost are taken by other towns.
+// Chars U+1E00+1056..)
+// (Register: WAVE-T65-TRIALGROUNDS-PLAN.md §5.)
+const T65_KIND_DEFS = [
+  ['trialfloor', 'floor'],
+  ['trialroof', 'wall'],
+  ['streakboard', 'prop'],
+  ['trialbanner', 'prop'],
+];
+const T65_KIND_CHARS = {};
+T65_KIND_DEFS.forEach(([kind], i) => {
+  const ch = String.fromCodePoint(0x1E00 + 1056 + i);
+  T65_KIND_CHARS[kind] = ch;
+  TILE_CHARS[ch] = kind;
+});
+const T65_PROP_KINDS = T65_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
+const T65_WALL_KINDS = T65_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
+const T65_FLOOR_KINDS = T65_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
 const SINNOH_TOWN_GROUND_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg);
 const SINNOH_TOWN_GROUND2_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg2);
 // TX-3: the 8 gym exteriors by town (original type-accent motifs).
@@ -113572,6 +113603,78 @@ const ART = {
     "sshhhhhhhhhhhsss",
     "ssssssssssSsssss"
   ] },
+  "tile-trialfloor": { w: 16, h: 16, pal: {"a":"#d8c08a","b":"#cdb481","m":"#bfa87c","f":"#b07a3f","l":"#e2cc9c"}, rows: [
+    "aabaaafaaabaaaaa",
+    "aaaaaaaaaaabaaaf",
+    "aaabaaaaalaaaaaa",
+    "aaaaaabaaaaaaaaa",
+    "faaaaaaaaaabaaaa",
+    "aaaabaaaaaaaabaa",
+    "aaaaaaafaaaaaaaa",
+    "mmmmmmmmmammmaam",
+    "aaabaaaafaaaaaba",
+    "aaaaaaaaaaabaaaa",
+    "aabaaaaaafaaaaaa",
+    "aaaaabaaaaaaaaab",
+    "aaaaaalaaaaaafaa",
+    "aaabaaaaaaaaaaaa",
+    "afaaaaaabaaaaaba",
+    "aaaaaaaafaaaaaaa"
+  ] },
+  "tile-trialroof": { w: 16, h: 16, pal: {"l":"#ad8f52","b":"#8a6d3b","d":"#57431f","e":"#3f2f16"}, rows: [
+    "lbddlbddlbddlbdd",
+    "lbddlbddlbddlbdd",
+    "lbddlbddlbddlbdd",
+    "lbddlbddlbddlbdd",
+    "lbddlbddlbddlbdd",
+    "lbddlbddlbddlbdd",
+    "lbddlbddlbddlbdd",
+    "lbddlbddlbddlbdd",
+    "lbddlbddlbddlbdd",
+    "lbddlbddlbddlbdd",
+    "lbddlbddlbddlbdd",
+    "lbddlbddlbddlbdd",
+    "lbddlbddlbddlbdd",
+    "lbddlbddlbddlbdd",
+    "lbddlbddlbddlbdd",
+    "eeeeeeeeeeeeeeee"
+  ] },
+  "tile-prop-streakboard": { w: 16, h: 16, pal: {"a":"#d8c08a","b":"#cdb481","f":"#b07a3f","z":"#8a6d3b","Z":"#57431f","w":"#c9a06a","W":"#b8935e","t":"#6a4a2e","h":"#bfa87c"}, rows: [
+    "aabaaafaaabaaaaa",
+    "aazzzzzzzzzzzzaa",
+    "aazwwwwwwwwwwzaa",
+    "aazwWWWWWWWWwzaa",
+    "aazwwwwwwwwwwzaa",
+    "aazwwwwwwwwwwzaa",
+    "aazwWWWWWWWWwzaa",
+    "aazwwwwwwwwwwzaa",
+    "aazzzzzzzzzzzzaa",
+    "aaataaaaaaaataaa",
+    "aaataaaaaaaataaa",
+    "aaataaaaaaaataaa",
+    "aaataaaaaaaataaa",
+    "aahhtaaaaaaattha",
+    "aahhhhaaaahhhhha",
+    "aabaaafaaabaaaaa"
+  ] },
+  "tile-prop-trialbanner": { w: 16, h: 16, pal: {"a":"#d8c08a","b":"#cdb481","f":"#b07a3f","t":"#6a4a2e","T":"#54381f","z":"#ad8f52","Z":"#8a6d3b","e":"#2f6e6a","E":"#265a56","h":"#bfa87c"}, rows: [
+    "aaaaaattzaaaaaaa",
+    "aaaaaattzeeeeeea",
+    "aaaaaattzeezzeea",
+    "aaaaaattzeeeeeea",
+    "aaaaaattzEEEEEaa",
+    "aaaaaattzaaaaaaa",
+    "aaaaaattTaaaaaaa",
+    "aaaaaattTaaaaaaa",
+    "aaaaaattTaaaaaaa",
+    "aaaaaattTaaaaaaa",
+    "aaaaaattTaaaaaaa",
+    "aaaaaattTaaaaaaa",
+    "aaaaaattTaaaaaaa",
+    "aaaahhtttthhaaaa",
+    "aaaahhhhhhhhaaaa",
+    "aabaaafaaabaaaaa"
+  ] },
   "partner-back-bob": { base: "partner-back", w: 64, h: 64, pal: {}, shiftY: 2 },
   "partner-front-bob": { base: "partner-front", w: 64, h: 64, pal: {}, shiftY: 2 },
   "abomasnow-back-bob": { base: "abomasnow-back", w: 64, h: 64, pal: {}, shiftY: 2 },
@@ -119001,6 +119104,9 @@ for (const k of T63_FLOOR_KINDS) TILE_ART[k] = 'tile-' + k;
 for (const k of T64_PROP_KINDS) TILE_ART[k] = 'tile-prop-' + k;
 for (const k of T64_WALL_KINDS) TILE_ART[k] = 'tile-' + k;
 for (const k of T64_FLOOR_KINDS) TILE_ART[k] = 'tile-' + k;
+for (const k of T65_PROP_KINDS) TILE_ART[k] = 'tile-prop-' + k;
+for (const k of T65_WALL_KINDS) TILE_ART[k] = 'tile-' + k;
+for (const k of T65_FLOOR_KINDS) TILE_ART[k] = 'tile-' + k;
 // Premium+ W6 (TX-3/PL-1): door-open frames, authored in TX-3 for every
 // door kind. The warp-fade engine that plays them lands in W7 — W6
 // wires the frames (this registry + cache.doorOpen + doorOpenCanvas)
@@ -120971,6 +121077,12 @@ function resolveTileLayers(cache, kind, x, y, kindAt, t, phase, mapId) {
     // island sand are baked in at their measured colours).
     case 'festlantern':
     case 'fairbanner':
+    // Wave T65: the Trial Grounds' streak board and its dock
+    // banner composite over their ground the same way (both
+    // arts are fully opaque — the trialfloor base is baked in
+    // at its measured colours).
+    case 'streakboard':
+    case 'trialbanner':
     // Wave T17: the radio mast composites over its compound grass too.
     case 'radiomast': {
       // Object tiles carry transparent surrounds (Wave 1): lay the ground
@@ -128281,6 +128393,16 @@ const WALKABLE = new Set(['.', ',', 'D', 'E', 'C', 'F', 'J', 'K', '1', '2', 'V',
   // kinds run …1020-1023 (T62); the parallel T63 claim holds
   // 1032-1035; 1036-1043 stay empty.)
   ...[1044]
+    .map((i) => String.fromCodePoint(0x1E00 + i)),
+  // Wave T65: the trialfloor char (U+1E00+1056, tiles.mjs
+  // T65_KIND_DEFS) is walkable street material — the Trial
+  // Grounds' flecked sandstone flags, swapped onto the hub's
+  // whole shipped street graph (authored as the generic `path`
+  // dirt track), so floor stays floor. (Indices 1056-1059 per
+  // the Director's index ruling: main's kinds run …1032-1035
+  // on this base; the parallel T64 claim holds 1044-1047;
+  // 1036-1043 + 1048-1055 stay empty.)
+  ...[1056]
     .map((i) => String.fromCodePoint(0x1E00 + i))]);
 
 // Trainer definitions for the slice.
@@ -155941,24 +156063,24 @@ const MAPS8 = {
     "rows": [
       "########################################",
       "#__T___,___#F_________,T______________,#",
-      "#_abXbbc_de3eef_ghhhhi_abbXbbbc,jklllm##",
+      "#_∡∡X∡∡∡_de3eef_ghhhhi_abbXbbbc,jklllm##",
       "#_UUVYUU_Z6456Z_UUVYUU_UUUVYUUU_AAJKAA_#",
-      "#......................................#",
-      "#opF.............,............,..,..o_o#",
-      "#__o.._.........................._..,__#",
-      "#__F.....,_..___,....._,_......_._..p__#",
-      "........................................",
-      "........................................",
-      "#___..p____..p__oo..pp..........._..p__#",
-      "#_deeeef,abbbbc_MMMMMM_deOeef.._._..p__#",
-      "#oxxyxxxorrrsrroMMDMMMoPP12PP...._..p_o#",
-      "#......................................#",
-      "#__.............................._..oẄ_#",
-      "#_FF..........F,.............,p.__ḣ.Ẅ_p#",
-      "#F._...p_.....FF,......,.....Fp.._..___#",
-      "#_.....,.............,...........,.._ẅ_#",
-      "#‖....__.....................nnnnẎ.ẏnnn#",
-      "#ẞ†.........................‟ẞẞẞẞẞ†‟ẞẞẞ#",
+      "#∠∠∠∠∠∠∠∠∠∠∠∠∠∠∠∠∠∠∠∠∠∠∠∠∠∠∠∠∠∠∠∠∠∠∠∠∠∠#",
+      "#opF∠∠∠∠∠∠∠∠∠∠∠∠∠,∠∠S∠∠∠∠∠∠∠∠∠,∠∠,∠∠o_o#",
+      "#__o∠∠_∠∠∠∠∠∠∠∠∠∠∠∠∠∠∠∠∠∠∠∠∠∠∠∠∠∠_∠∠,__#",
+      "#__F∠∠∠∠∠,_∠∠___,∠∠∠∠∠_,_∠∠∠∠∠∠_∠_∠∠p__#",
+      "∠∠∠∠∠∠∠∠∠∠∠∠∠∠∠∠∠∠∠∠∠∠∠∠∠∠∠∠∠∠∠∠∠∠∠∠∠∠∠∠",
+      "∠∠∠∠∠∠∠∠∠∠∠∠∠∠∠∠∠∠∠∠∠∠∠∠∠∠∠∠∠∠∠∠∠∠∠∠∠∠∠∠",
+      "#___∠∠p____∠∠p__oo∠∠pp∠∢∠∠∠∠∠∠∠∠∠_∠∠p__#",
+      "#_deeeef,abbbbc_MMMMMM_deOeef∠∠_∠_∠∠p__#",
+      "#oxxyxxxorrrsrroMMDMMMoPP12PP∠∠∠∠_∠∠p_o#",
+      "#∠∠∠∠∠∠∠∠∠∠∠∠∠∠∠∠∠∠∠∠∠∠∠∠∠∠∠∠∠∠∠∠∠∠∠∠∠∠#",
+      "#_S∠∠∠∠∠∠S∠∠∠∠∠∠∠∠∠∠∠∠∠∠∠∠∠∠∠∠∠∠∠_∠∠oẄ_#",
+      "#_FF∠∠∠∠∠∠∠∠∠∠F,∠∠∠∠∠∠∠∠∠∠∠∠∠,p∠S_ḣ∠Ẅ_p#",
+      "#F∠S∠∠∠pS∠∠∠∠∠FF,∠∠∠∠∠∠,∠∠∠∠∠Fp∠∠_∠∠___#",
+      "#_∠∠∠∠∠,∠∠∠∠∠∠∠∠∠∠∠∠∠,∠S∠∠∠∠∠∠∠∠∠,∠∠_ẅ_#",
+      "#‖∠∠∠∠__∠∠∠∠∠∠∠∠∠∠∠∠∠∠∠∠∠∠∠∠∠nnnnẎ∠ẏnnn#",
+      "#ẞ†∠∠∠∠∠∠S∠∠∠∠∠∠∠∠∠∠∣∠∠∠∠∠∠∠‟ẞẞẞẞẞ†‟ẞẞẞ#",
       "~~~~~~~~~~~~~~~~~ἇἇἇ~~~~~~~~~~~~~~~~~~~~",
       "~~~~~~~~~~~~~~~~~ἇἇἇ~~~~~~~~~~~~~~~~~~~~",
       "~~~~~~~~~~~~~~~~~ἇἇἇ~~~~~~~~~~~~~~~~~~~~",
@@ -156170,8 +156292,8 @@ const MAPS8 = {
     ],
     "npcs": [
       {
-        "x": 3,
-        "y": 5,
+        "x": 24,
+        "y": 13,
         "name": "MART CLERK",
         "art": "clerk",
         "skin": "#f0c8a0",
@@ -192610,6 +192732,6 @@ if (typeof Game !== 'undefined') Object.assign(Game.prototype, {
 });
 
 </script>
-<!-- contentHash:92ec88a8602f174e178ad4beed3e9ca928a77fd095a0bc780594baa499de0432 -->
+<!-- contentHash:ec1345d388a727efc028837fd0d96d47a07c7375c4378161ee55a6c78f05c4fa -->
 </body>
 </html>
