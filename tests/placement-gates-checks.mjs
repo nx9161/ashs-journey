@@ -1861,6 +1861,87 @@
 //     encounter plot's grass standing on
 //     genuinely-shortest desire lines, the plot itself
 //     byte-preserved. NO other town's pin moves.
+//     FIFTY-NINTH DOCUMENTED EXCEPTION (WAVE T61; the
+//     FIFTY-EIGHTH is the parallel WAVE T60 Bergamot
+//     claim on its branch, per the Director's allocation
+//     — the two land in order at merge, so the registry
+//     order at merge is …valencia, mikan, navel, moro,
+//     trovita; the FIFTY-SEVENTH is WAVE T59 Pomelo's,
+//     recorded above):
+//     STREET_REGISTRY gains an entry — trovita:
+//     [reeffloor] (the rebuild-wave registration the
+//     registry's own terms promise each town: the
+//     town's authored street, judged by the gates on its
+//     fabric as the fleet's streets are) — and
+//     trovita's pin migrates to its post-T61 measured
+//     tuple (below), and NO other town's pin moves.
+//     UNLIKE the sibling rebuild waves, THIS PIN STAYS
+//     pass 0 — DISCLOSED, NOT HIDDEN: every strict gate
+//     passes on the landed build (conn 56/56, exactly 1
+//     fabric component, apron PASS min 0.813, junctions
+//     2/2 covered / bare 0, step-offs 6/6, onFabric 0,
+//     orphans 0) EXCEPT fabric, which measures 0.9767
+//     against the 0.98 gate — and that shortfall is a
+//     STRUCTURAL FACT of the shipped town, not a build
+//     defect. The cause, measured on the real audit
+//     code (plan §9): the byte-preserved WEST encounter
+//     plot shadows CAPT DUNE-BERGAMOT's post at (5,13),
+//     which stands directly south of the plot, so every
+//     northern POI's shortest line to the dock crosses
+//     its grass — 13 desire pairs are Manhattan-optimal
+//     through the plot (exactly 4 grass cells each),
+//     and 3 of those pairs (sign@3,7 <-> CAPT, and both
+//     gym-door <-> CAPT pairs) have NO all-fabric
+//     optimal route at all: the captain's access cell
+//     (5,12) is simply 2 steps closer via the plot than
+//     any fabric goal. Insensitivity is PROVEN, not
+//     asserted: 72 legitimate micro-variants (clerk
+//     seats (15,4)/(17,4)/(18,4), spike seats, gull
+//     seat, (3,8) as spike/sand, rim-lane subsets) all
+//     score EXACTLY 0.9767 or worse; clerk (15,4) is
+//     the best seat measured. The honest alternatives
+//     were all considered and REFUSED — paving the
+//     plot breaks byte-preservation fleet law, moving
+//     the captain's post rewrites a shipped record to
+//     satisfy a metric, and blocking a street cell
+//     severs the fabric it claims to protect. The
+//     Director approved this exception (#59, 2026-11-14)
+//     and the audit's fabric gate stays VISIBLY FAILED
+//     for trovita in this pin. The Reefside build on
+//     its own kit from birth ('Reef Shell & Spike
+//     Stone', idx 1008-1011: pink shell-sand reeffloor
+//     streets, the scalloped shell-shingle scalloproof
+//     gym crown, the reef-spike and gull-rock props) per
+//     WAVE-T61-REEFSIDE-PLAN.md. Reefside shipped an
+//     outright FAIL — its two surf exits stood ON WATER
+//     at the north edge (conn 30/56, every failing pair
+//     touching an exit), its whole street graph was the
+//     GENERIC path kind, all three north stamps backed
+//     onto the sea (apronLow 3, Gym 0.563), and two of
+//     its four sign records stood invisible on non-sign
+//     tiles. The build rebuilds the street graph 1:1 in
+//     reeffloor, lands the exits on a reeffloor jetty
+//     head, rims the north shore in the island's own
+//     sand behind the stamps (the (2,1),(3,1) surf
+//     LANDINGS stay water), gives the Gym the
+//     scalloproof (breaking the shipped Gym/Mart
+//     roof-slate share; the BUILD classifier gains
+//     'scalloproof' on the same kit-roof terms), tiles
+//     both invisible DIRS records (the (3,8) shore cell
+//     converts to reeffloor as the (3,7) DIRS line's own
+//     lane cell, holding its psand neighbour on the
+//     network), seats the reef spikes at both shores
+//     and the gull rock at the ferry dock, and re-seats
+//     the orphaned MART CLERK (3,5) -> (15,4). Both
+//     encounter plots stay byte-for-byte; the sea stays
+//     unpaved. trovita's pin migrates [0, 30, 56, 6, 6,
+//     1, 3, 0, 3, 0.563, 0, 0, 0, 0, 0.9466, 0.9466] ->
+//     [0, 56, 56, 6, 6, 1, 2, 0, 0, 0.813, 0, 0, 0, 0,
+//     0.9767, 0.9767]: pass 0 -> 0 (DISCLOSED structural
+//     exception — fabric only), conn 30/56 -> 56/56,
+//     junctions 3 -> 2 all covered, apronLow 3 -> 0,
+//     apronMin 0.563 -> 0.813, strict/fabric 0.9466 ->
+//     0.9767. NO other town's pin moves.
 
 import { loadMaps, makeTiers, townSetOf, analyzeMap } from '../scripts/audit-desire-paths.mjs';
 import { scoreTown, gateCheck, tiersFor, STREET_REGISTRY } from '../scripts/audit-placement.mjs';
@@ -1887,8 +1968,8 @@ async function gateTuple(id, t) {
 }
 
 // 1. registry scope lock
-ok('street registry is exactly { vermilion: [boardwalk], blackthorn: [settfloor], silvertown: [marblefloor], ecruteak: [wornfloor], saffron: [avenuefloor], violet: [violetfloor], azalea: [brickfloor], mahogany: [gravelfloor], rustboro: [cutstonefloor], fuchsia: [marshfloor], cianwood: [driftfloor], dewford: [plankfloor], viridian: [slatefloor], celadon: [promfloor], slateport: [quayfloor, boardwalk], cerulean: [pierfloor], mauville: [gridfloor], lavender: [shinglefloor], cherrygrove: [inlayfloor], verdanturf: [petalfloor, cavefloor], olivine: [harbourfloor, jettyfloor], fallarbor: [ashfloor], lavaridge: [steamfloor, terracefloor], fortree: [canopyfloor, boardwalk], lilycove: [cobblefloor, cavefloor], mossdeep: [starfloor, dockfloor], sootopolis: [craterfloor, cavefloor], pacifidlog: [raftfloor], evergrande: [plateaufloor, cavefloor], twinleaf: [cloverfloor], sandgem: [shellfloor], jubilife: [beamfloor], oreburgh: [clinkerfloor], floaroma: [honeyfloor], eterna: [heritagefloor], hearthome: [giltfloor], solaceon: [pebblefloor], veilstone: [shardfloor], canalave: [ringfloor, boardwalk, harbourstone, trussfloor], pastoria: [walkfloor], celestic: [moonfloor], snowpoint: [rimefloor], sunnyshore: [panelfloor], fight-area: [basaltfloor], survival-area: [hardpanfloor], resort-area: [coralfloor], valencia: [dunefloor], mikan: [grovefloor], navel: [screefloor], moro: [ruinfloor] }',
-  JSON.stringify(STREET_REGISTRY) === '{"vermilion":["boardwalk"],"blackthorn":["settfloor"],"silvertown":["marblefloor"],"ecruteak":["wornfloor"],"saffron":["avenuefloor"],"violet":["violetfloor"],"azalea":["brickfloor"],"mahogany":["gravelfloor"],"rustboro":["cutstonefloor"],"fuchsia":["marshfloor"],"cianwood":["driftfloor"],"dewford":["plankfloor"],"viridian":["slatefloor"],"celadon":["promfloor"],"slateport":["quayfloor","boardwalk"],"cerulean":["pierfloor"],"mauville":["gridfloor"],"lavender":["shinglefloor"],"cherrygrove":["inlayfloor"],"verdanturf":["petalfloor","cavefloor"],"olivine":["harbourfloor","jettyfloor"],"fallarbor":["ashfloor"],"lavaridge":["steamfloor","terracefloor"],"fortree":["canopyfloor","boardwalk"],"lilycove":["cobblefloor","cavefloor"],"mossdeep":["starfloor","dockfloor"],"sootopolis":["craterfloor","cavefloor"],\"pacifidlog\":[\"raftfloor\"],\"evergrande\":[\"plateaufloor\",\"cavefloor\"],\"twinleaf\":[\"cloverfloor\"],\"sandgem\":[\"shellfloor\"],\"jubilife\":[\"beamfloor\"],\"oreburgh\":[\"clinkerfloor\"],\"floaroma\":[\"honeyfloor\"],\"eterna\":[\"heritagefloor\"],\"hearthome\":[\"giltfloor\"],\"solaceon\":[\"pebblefloor\"],\"veilstone\":[\"shardfloor\"],\"canalave\":[\"ringfloor\",\"boardwalk\",\"harbourstone\",\"trussfloor\"],\"pastoria\":[\"walkfloor\"],\"celestic\":[\"moonfloor\"],\"snowpoint\":[\"rimefloor\"],\"sunnyshore\":[\"panelfloor\"],\"fight-area\":[\"basaltfloor\"],\"survival-area\":[\"hardpanfloor\"],\"resort-area\":[\"coralfloor\"],\"valencia\":[\"dunefloor\"],\"mikan\":[\"grovefloor\"],\"navel\":[\"screefloor\"],\"moro\":[\"ruinfloor\"]}',
+ok('street registry is exactly { vermilion: [boardwalk], blackthorn: [settfloor], silvertown: [marblefloor], ecruteak: [wornfloor], saffron: [avenuefloor], violet: [violetfloor], azalea: [brickfloor], mahogany: [gravelfloor], rustboro: [cutstonefloor], fuchsia: [marshfloor], cianwood: [driftfloor], dewford: [plankfloor], viridian: [slatefloor], celadon: [promfloor], slateport: [quayfloor, boardwalk], cerulean: [pierfloor], mauville: [gridfloor], lavender: [shinglefloor], cherrygrove: [inlayfloor], verdanturf: [petalfloor, cavefloor], olivine: [harbourfloor, jettyfloor], fallarbor: [ashfloor], lavaridge: [steamfloor, terracefloor], fortree: [canopyfloor, boardwalk], lilycove: [cobblefloor, cavefloor], mossdeep: [starfloor, dockfloor], sootopolis: [craterfloor, cavefloor], pacifidlog: [raftfloor], evergrande: [plateaufloor, cavefloor], twinleaf: [cloverfloor], sandgem: [shellfloor], jubilife: [beamfloor], oreburgh: [clinkerfloor], floaroma: [honeyfloor], eterna: [heritagefloor], hearthome: [giltfloor], solaceon: [pebblefloor], veilstone: [shardfloor], canalave: [ringfloor, boardwalk, harbourstone, trussfloor], pastoria: [walkfloor], celestic: [moonfloor], snowpoint: [rimefloor], sunnyshore: [panelfloor], fight-area: [basaltfloor], survival-area: [hardpanfloor], resort-area: [coralfloor], valencia: [dunefloor], mikan: [grovefloor], navel: [screefloor], moro: [ruinfloor], trovita: [reeffloor] }',
+  JSON.stringify(STREET_REGISTRY) === '{"vermilion":["boardwalk"],"blackthorn":["settfloor"],"silvertown":["marblefloor"],"ecruteak":["wornfloor"],"saffron":["avenuefloor"],"violet":["violetfloor"],"azalea":["brickfloor"],"mahogany":["gravelfloor"],"rustboro":["cutstonefloor"],"fuchsia":["marshfloor"],"cianwood":["driftfloor"],"dewford":["plankfloor"],"viridian":["slatefloor"],"celadon":["promfloor"],"slateport":["quayfloor","boardwalk"],"cerulean":["pierfloor"],"mauville":["gridfloor"],"lavender":["shinglefloor"],"cherrygrove":["inlayfloor"],"verdanturf":["petalfloor","cavefloor"],"olivine":["harbourfloor","jettyfloor"],"fallarbor":["ashfloor"],"lavaridge":["steamfloor","terracefloor"],"fortree":["canopyfloor","boardwalk"],"lilycove":["cobblefloor","cavefloor"],"mossdeep":["starfloor","dockfloor"],"sootopolis":["craterfloor","cavefloor"],\"pacifidlog\":[\"raftfloor\"],\"evergrande\":[\"plateaufloor\",\"cavefloor\"],\"twinleaf\":[\"cloverfloor\"],\"sandgem\":[\"shellfloor\"],\"jubilife\":[\"beamfloor\"],\"oreburgh\":[\"clinkerfloor\"],\"floaroma\":[\"honeyfloor\"],\"eterna\":[\"heritagefloor\"],\"hearthome\":[\"giltfloor\"],\"solaceon\":[\"pebblefloor\"],\"veilstone\":[\"shardfloor\"],\"canalave\":[\"ringfloor\",\"boardwalk\",\"harbourstone\",\"trussfloor\"],\"pastoria\":[\"walkfloor\"],\"celestic\":[\"moonfloor\"],\"snowpoint\":[\"rimefloor\"],\"sunnyshore\":[\"panelfloor\"],\"fight-area\":[\"basaltfloor\"],\"survival-area\":[\"hardpanfloor\"],\"resort-area\":[\"coralfloor\"],\"valencia\":[\"dunefloor\"],\"mikan\":[\"grovefloor\"],\"navel\":[\"screefloor\"],\"moro\":[\"ruinfloor\"],\"trovita\":[\"reeffloor\"]}',
   JSON.stringify(STREET_REGISTRY));
 
 // 2. census: the 64 towns of townSetOf (pallet included)
@@ -1968,7 +2049,7 @@ const PIN = {
   "sootopolis": [1, 30, 30, 6, 6, 1, 7, 0, 0, 0.857, 0, 0, 0, 0, 0.7635, 0.981],
   "sunnyshore": [1, 132, 132, 8, 8, 1, 2, 0, 0, 0.857, 0, 0, 0, 0, 0.78, 0.9979],
   "survival-area": [1, 72, 72, 5, 5, 1, 3, 0, 0, 0.929, 0, 0, 0, 0, 0.7473, 1],
-  "trovita": [0, 30, 56, 6, 6, 1, 3, 0, 3, 0.563, 0, 0, 0, 0, 0.9466, 0.9466],
+  "trovita": [0, 56, 56, 6, 6, 1, 2, 0, 0, 0.813, 0, 0, 0, 0, 0.9767, 0.9767],
   "twinleaf": [1, 90, 90, 6, 6, 1, 3, 0, 0, 0.824, 0, 0, 0, 0, 0.7674, 0.9964],
   "valencia": [1, 72, 72, 7, 7, 1, 2, 0, 0, 0.929, 0, 0, 0, 0, 0.9808, 0.9808],
   "veilstone": [1, 132, 132, 8, 8, 1, 8, 0, 0, 0.765, 0, 0, 0, 0, 0.6733, 0.9965],
