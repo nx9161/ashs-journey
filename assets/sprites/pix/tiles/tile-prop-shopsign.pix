@@ -1,0 +1,25 @@
+# Wave T44 (Honeyfield kit): shopsign — the Mart's hanging shop board, seated at the Mart stamp's east frontage (13,3). Built for the Backstory Sync Audit's Honeyfield build note: the design's Mart reads soft with no clear shopfront, so the build gives the shop its full shopfront sign (no stamp cell, warp or interior touched). Two posts, a crossbar, a blue board with a cream satchel glyph. Fully opaque: the town grass is baked in (measured #2a8320). (NO-SAME-KIT law; WAVE-T44-HONEYFIELD-PLAN.md §5.)
+PIX tile-prop-shopsign 16 16
+gggggggggggggggg
+ggppggggggggppgg
+ggppTTTTTTTTppgg
+ggppggggggggppgg
+ggppBBBBBBBBppgg
+ggppBccccccBppgg
+ggppBcBBBBcBppgg
+ggppBcBssBcBppgg
+ggppBcBssBcBppgg
+ggppBcBBBBcBppgg
+ggppBccccccBppgg
+ggppBBBBBBBBppgg
+ggppggggggggppgg
+ggppggggggggppgg
+gggggggggggggggg
+gggggggggggggggg
+PAL
+g #2a8320 town grass (measured tg-floaroma flat)
+p #6b4a2a post timber
+T #8a6538 crossbar
+B #2e5fa3 mart blue board
+c #f2e6c8 cream glyph ground
+s #c05a3a satchel glyph

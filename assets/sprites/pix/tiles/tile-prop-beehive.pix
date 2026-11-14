@@ -1,0 +1,24 @@
+# Wave T44 (Honeyfield kit): beehive — a straw skep hive, seated beside the town's honey trees (the honey-trees sign's beat made visible). Coiled straw bands, a dark entry notch, two bee dots at the entry. Fully opaque: the town grass is baked in (measured #2a8320, tg-floaroma's rendered flat). (NO-SAME-KIT law; WAVE-T44-HONEYFIELD-PLAN.md §5.)
+PIX tile-prop-beehive 16 16
+gggggggggggggggg
+gggggggssggggggg
+ggggggssssssgggg
+gggggsSSSSSSsggg
+ggggssSSSSSSssgg
+gggssSssssssSssg
+gggssSSSSSSSSssg
+gggsSssssssssSsg
+gggsSSSSSSSSSSsg
+gggssSSSeeSSssgg
+gggssSSSeeSSssgg
+gggsSSSSSSSSSSsg
+gggssssssssssssg
+ggggggbgggbbgggg
+gggggggggggggggg
+gggggggggggggggg
+PAL
+g #2a8320 town grass (measured tg-floaroma flat)
+s #a8762e straw band shade
+S #d9a84e coiled straw
+e #3a2408 hive entry
+b #f4d03f bee dot

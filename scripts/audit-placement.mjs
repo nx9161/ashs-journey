@@ -58,7 +58,7 @@ const ROUTE_FURNITURE = (k) => ['lamp', 'signpost', 'barrel', 'crates', 'sandcra
 // counting it as structure would credit a floating sign as a bridge —
 // Craterlake's Center sign sits in its building's ring and would lift
 // that ring 0.588 -> 0.625 without a single tile moving (W4 probe).
-const BUILD = (k) => k.startsWith('roof') || k.startsWith('wall') || k.startsWith('door') || k.startsWith('th-') || k.startsWith('tr-') || k.startsWith('tl-') || k.startsWith('tw-') || ['house', 'gymwall', 'gymdoor', 'centerdoor', 'gym-rock', 'gym-volt', 'fossildisplay', 'dresswindow', 'ancientpillar', 'drakeroof', 'parapetroof', 'slabroof', 'cedarroof', 'thatchroof', 'sageroof', 'towerroof', 'mossroof', 'pineroof', 'coproof', 'safariroof', 'surfroof', 'shackroof', 'slateroof', 'glassroof', 'canvasroof', 'mansardroof', 'copperroof', 'bronzroof', 'shingleroof', 'sakuraroof', 'trellisroof', 'beaconroof', 'timberroof', 'steamroof', 'leafroof', 'lotusroof', 'starroof', 'craterroof', 'craterwall', 'raftroof', 'badgeroof', 'verdiroof', 'battenroof', 'shellroof', 'beamroof', 'condoroof', 'ironroof'].includes(k);// ('drakeroof'/'parapetroof': the W-DIFF kit-identity roof kinds —
+const BUILD = (k) => k.startsWith('roof') || k.startsWith('wall') || k.startsWith('door') || k.startsWith('th-') || k.startsWith('tr-') || k.startsWith('tl-') || k.startsWith('tw-') || ['house', 'gymwall', 'gymdoor', 'centerdoor', 'gym-rock', 'gym-volt', 'fossildisplay', 'dresswindow', 'ancientpillar', 'drakeroof', 'parapetroof', 'slabroof', 'cedarroof', 'thatchroof', 'sageroof', 'towerroof', 'mossroof', 'pineroof', 'coproof', 'safariroof', 'surfroof', 'shackroof', 'slateroof', 'glassroof', 'canvasroof', 'mansardroof', 'copperroof', 'bronzroof', 'shingleroof', 'sakuraroof', 'trellisroof', 'beaconroof', 'timberroof', 'steamroof', 'leafroof', 'lotusroof', 'starroof', 'craterroof', 'craterwall', 'raftroof', 'badgeroof', 'verdiroof', 'battenroof', 'shellroof', 'beamroof', 'condoroof', 'ironroof', 'bloomroof'].includes(k);// ('drakeroof'/'parapetroof': the W-DIFF kit-identity roof kinds —
 // wall-class roofs that don't carry the roof-/th- prefixes; registered
 // here so house footprints/aprons measure whole, W-DIFF-AUDIT Phase C.
 // 'slabroof'/'cedarroof': the W-DIFF2 pair's roof kinds, same terms.)
@@ -130,7 +130,7 @@ const BUILD = (k) => k.startsWith('roof') || k.startsWith('wall') || k.startsWit
 // as one. tests/placement-gates-checks.mjs pins this registry's exact
 // contents and every unregistered town's baseline gate tuple, so the
 // registration can neither leak nor silently widen.
-export const STREET_REGISTRY = { vermilion: ['boardwalk'], blackthorn: ['settfloor'], silvertown: ['marblefloor'], ecruteak: ['wornfloor'], saffron: ['avenuefloor'], violet: ['violetfloor'], azalea: ['brickfloor'], mahogany: ['gravelfloor'], rustboro: ['cutstonefloor'], fuchsia: ['marshfloor'], cianwood: ['driftfloor'], dewford: ['plankfloor'], viridian: ['slatefloor'], celadon: ['promfloor'] , slateport: ['quayfloor', 'boardwalk'], cerulean: ['pierfloor'], mauville: ['gridfloor'], lavender: ['shinglefloor'], cherrygrove: ['inlayfloor'], verdanturf: ['petalfloor', 'cavefloor'], olivine: ['harbourfloor', 'jettyfloor'], fallarbor: ['ashfloor'], lavaridge: ['steamfloor', 'terracefloor'], fortree: ['canopyfloor', 'boardwalk'], lilycove: ['cobblefloor', 'cavefloor'], mossdeep: ['starfloor', 'dockfloor'], sootopolis: ['craterfloor', 'cavefloor'], pacifidlog: ['raftfloor'], evergrande: ['plateaufloor', 'cavefloor'], twinleaf: ['cloverfloor'], sandgem: ['shellfloor'], jubilife: ['beamfloor'], oreburgh: ['clinkerfloor'] };// W-DIFF pilot extension (2026-11-13, documented exception #6/#7 in the
+export const STREET_REGISTRY = { vermilion: ['boardwalk'], blackthorn: ['settfloor'], silvertown: ['marblefloor'], ecruteak: ['wornfloor'], saffron: ['avenuefloor'], violet: ['violetfloor'], azalea: ['brickfloor'], mahogany: ['gravelfloor'], rustboro: ['cutstonefloor'], fuchsia: ['marshfloor'], cianwood: ['driftfloor'], dewford: ['plankfloor'], viridian: ['slatefloor'], celadon: ['promfloor'] , slateport: ['quayfloor', 'boardwalk'], cerulean: ['pierfloor'], mauville: ['gridfloor'], lavender: ['shinglefloor'], cherrygrove: ['inlayfloor'], verdanturf: ['petalfloor', 'cavefloor'], olivine: ['harbourfloor', 'jettyfloor'], fallarbor: ['ashfloor'], lavaridge: ['steamfloor', 'terracefloor'], fortree: ['canopyfloor', 'boardwalk'], lilycove: ['cobblefloor', 'cavefloor'], mossdeep: ['starfloor', 'dockfloor'], sootopolis: ['craterfloor', 'cavefloor'], pacifidlog: ['raftfloor'], evergrande: ['plateaufloor', 'cavefloor'], twinleaf: ['cloverfloor'], sandgem: ['shellfloor'], jubilife: ['beamfloor'], oreburgh: ['clinkerfloor'], floaroma: ['honeyfloor'] };// W-DIFF pilot extension (2026-11-13, documented exception #6/#7 in the
 // guard): blackthorn's settfloor and silvertown's marblefloor are the
 // first two kit-level identity street materials (owner ruling: "Every
 // town kit should be different" — muse-directive/W-DIFF-AUDIT.md Phase
@@ -364,6 +364,18 @@ export const STREET_REGISTRY = { vermilion: ['boardwalk'], blackthorn: ['settflo
 // the mine sign's foot and the RAMOSAUR skull at the Museum's
 // shoulder, and re-seats the orphaned MART CLERK (3,5) -> (9,4).
 // (Register: WAVE-T43-COALSEAM-PLAN.md §5/§7.)
+// T44 extension (FORTY-SECOND documented exception in the guard;
+// #41 is the parallel T43 Coalseam claim on its branch, per the
+// Director's allocation): floaroma registers 'honeyfloor'
+// (Honeycomb & Bloom), Honeyfield Town's hexagonal honeycomb
+// lane, on the same one-material one-town terms. floaroma
+// shipped a mud-carried PASS — 194 of its 504 cells were tg2 and
+// its conn 72/72 + strict 0.9994 were the mud sea's figures; the
+// wave retires the mud, rebuilds the street graph in
+// honeyfloor, answers the Backstory Audit's shopfront note with
+// a shopsign at the Mart's east frontage, and re-seats the
+// orphaned MART CLERK from (3,5) to the Mart's west-front apron
+// (9,4). (Register: WAVE-T44-HONEYFIELD-PLAN.md §5/§7.)
 export function tiersFor(id, tiers) {
   const extra = STREET_REGISTRY[id];
   if (!extra || !extra.length) return tiers;

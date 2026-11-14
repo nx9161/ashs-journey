@@ -1,0 +1,23 @@
+# Wave T44 (Honeyfield kit): bloomroof — Honeyfield's own roof, worn by the shipped House's th cells and both facade cottages. BLOOM-PETAL SHINGLE: magenta-pink petal scales in overlapping courses with petal-tip highlights and cream blossom flecks — 'every roof a garden that got promoted' (the town's own dialogue). Overlapping organic SCALES: unlike Blossom's sakuraroof (pale slabs), Hushmoor's shingleroof (dark violet shingle) and Wildflower's trellisroof (open lattice). (NO-SAME-KIT law; WAVE-T44-HONEYFIELD-PLAN.md §5.)
+PIX tile-bloomroof 16 16
+cllldllldllldlll
+dmmmdmmmdmmmdmmm
+dmmmdmmmdmmmdmmm
+dddddddddddddcdd
+lldllldclldllldl
+mcdmmmdmmmdmmmdm
+mmdmmmdmmmdmmmdm
+dddddddddddddddd
+dllldllldllldlcl
+dmmmdmmmcmmmdmmm
+dmcmdmmmdmmmdmmm
+dddddddddddddddd
+lldllldllldllldl
+mmdmmmdmmmdmmmdc
+mmdmmmdmmcdmmmdm
+dddcdddddddddddd
+PAL
+m #b84a7d petal scale mid
+l #e88bb0 petal-tip light
+d #8e3460 scale shadow
+c #f6e3c8 cream blossom fleck

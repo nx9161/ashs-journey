@@ -670,6 +670,18 @@ export const WALKABLE = new Set(['.', ',', 'D', 'E', 'C', 'F', 'J', 'K', '1', '2
   // 744-748 + 756-759 + 768-771; the parallel T42 claim holds
   // 780-783; gaps stay empty.)
   ...[792]
+    .map((i) => String.fromCodePoint(0x1E00 + i)),
+  // Wave T44: the honeyfloor char (U+1E00+804, tiles.mjs
+  // T44_KIND_DEFS) is walkable street material — Honeyfield
+  // Town's honeycomb lane, swapped onto the town's tg2 street
+  // cells (the front street, the through road, the Ruined Path
+  // avenue — all shipped walkable as tg2), so floor stays
+  // floor. (Indices 804-807 per the Director's index ruling:
+  // main's kinds run 594-636 + 645-648 + 660-662 + 672-675 +
+  // 684-687 + 696-699 + 708-711 + 720-724 + 732-736 + 744-748
+  // (T39) + 756-759 (T40) + 768-771 (T41) + 780-783 (T42); the
+  // parallel T43 claim holds 792-795; gaps stay empty.)
+  ...[804]
     .map((i) => String.fromCodePoint(0x1E00 + i))]);
 
 // Trainer definitions for the slice.

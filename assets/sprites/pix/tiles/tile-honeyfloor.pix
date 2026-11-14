@@ -1,0 +1,23 @@
+# Wave T44 (Honeyfield kit): honeyfloor — Honeyfield Town's registered street kind (the fleet's street kinds carry the -floor suffix; the desire-path tiers key on it). HONEYCOMB LANE: pale amber gravel laid as a fine hexagonal comb — comb-cell outlines in deeper amber, a soft honey glint at scattered cell hearts. A closed HEXAGONAL geometry: unlike Wildflower's petalfloor (loose petal scatter), Clover's cloverfloor (flecked earth) and Lilac's gridfloor (square bronze lattice). (NO-SAME-KIT law; WAVE-T44-HONEYFIELD-PLAN.md §5.)
+PIX tile-honeyfloor 16 16
+saaoaaaoaaaoaaao
+ogaooaaooaaooaao
+oaaooaasoaaooaao
+aaaoaaaoaaaoaaao
+aoaaaoaaaoaaaosa
+aoosaooaaooaaoog
+aooaaooaaoogaooa
+aoaaaoaaaosaaoaa
+aaaoaaaoaaaoaaao
+oaaooaaoogaooaao
+oaaoogsooaaooaao
+aaaoaaaoaaaoaaao
+aoaaaoaaaoaaasaa
+aosgaooaaooaaooa
+aooaaooaaooaaooa
+aoaaaoaaasaaaoaa
+PAL
+a #d8b878 pale amber gravel
+o #b8903f comb outline amber
+g #f4e2a0 honey glint
+s #c2a05e gravel shade fleck
