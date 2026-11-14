@@ -1760,6 +1760,36 @@
 //     threads the validator-printed grove lanes, and
 //     re-seats the orphaned MART CLERK (3,5) -> (15,4).
 //     NO other town's pin moves.
+//     FIFTY-EIGHTH DOCUMENTED EXCEPTION (WAVE T60; the
+//     FIFTY-SEVENTH is the parallel WAVE T59 Pomelo claim
+//     on its branch, per the Director's allocation — the
+//     two land in order at merge; the FIFTY-SIXTH is
+//     WAVE T58's, recorded above):
+//     STREET_REGISTRY gains an entry — moro: [ruinfloor]
+//     (the rebuild-wave registration the registry's own
+//     terms promise each town: the town's authored street,
+//     judged by the gates on its fabric as the fleet's
+//     streets are) — and moro's pin migrates [0, 12, 30,
+//     4, 4, 1, 1, 0, 1, 0.529, 0, 0, 0, 0, 0.9402,
+//     0.9402] -> [1, 30, 30, 4, 4, 1, 3, 0, 0, 0.625, 0,
+//     0, 0, 0, 0.9856, 0.9856]: the shipped town FAILED
+//     outright — its north surf exits stood ON WATER
+//     (conn 12/30), its Center backed onto open sea
+//     (apronLow 1, min 0.529), and TWO of its three sign
+//     records stood on non-sign tiles, invisible. The
+//     wave rebuilds the street graph in ruinfloor, lands
+//     the exits on a ruinfloor jetty head, rims the north
+//     shore in the island's own sand behind the stamps,
+//     breaks the Mart out of the generic roof-slate
+//     family with the bone-drift boneroof, seats the surf
+//     stone + the wreck ribs, tiles both invisible signs
+//     plus one verbatim DIRS copy at the jetty junction,
+//     threads the validator-printed shore lanes, re-seats
+//     the bench + lamp the lanes straddled, and re-seats
+//     the orphaned MART CLERK (3,5) -> (17,4). The town
+//     has ZERO unique interiors — exteriors only, no
+//     story invented (no tale is recorded for Bergamot).
+//     NO other town's pin moves.
 
 //     FIFTY-SEVENTH DOCUMENTED EXCEPTION (WAVE T59; the
 //     FIFTY-SIXTH is the parallel WAVE T58 Tangelo
@@ -1857,8 +1887,8 @@ async function gateTuple(id, t) {
 }
 
 // 1. registry scope lock
-ok('street registry is exactly { vermilion: [boardwalk], blackthorn: [settfloor], silvertown: [marblefloor], ecruteak: [wornfloor], saffron: [avenuefloor], violet: [violetfloor], azalea: [brickfloor], mahogany: [gravelfloor], rustboro: [cutstonefloor], fuchsia: [marshfloor], cianwood: [driftfloor], dewford: [plankfloor], viridian: [slatefloor], celadon: [promfloor], slateport: [quayfloor, boardwalk], cerulean: [pierfloor], mauville: [gridfloor], lavender: [shinglefloor], cherrygrove: [inlayfloor], verdanturf: [petalfloor, cavefloor], olivine: [harbourfloor, jettyfloor], fallarbor: [ashfloor], lavaridge: [steamfloor, terracefloor], fortree: [canopyfloor, boardwalk], lilycove: [cobblefloor, cavefloor], mossdeep: [starfloor, dockfloor], sootopolis: [craterfloor, cavefloor], pacifidlog: [raftfloor], evergrande: [plateaufloor, cavefloor], twinleaf: [cloverfloor], sandgem: [shellfloor], jubilife: [beamfloor], oreburgh: [clinkerfloor], floaroma: [honeyfloor], eterna: [heritagefloor], hearthome: [giltfloor], solaceon: [pebblefloor], veilstone: [shardfloor], canalave: [ringfloor, boardwalk, harbourstone, trussfloor], pastoria: [walkfloor], celestic: [moonfloor], snowpoint: [rimefloor], sunnyshore: [panelfloor], fight-area: [basaltfloor], survival-area: [hardpanfloor], resort-area: [coralfloor], valencia: [dunefloor], mikan: [grovefloor], navel: [screefloor] }',
-  JSON.stringify(STREET_REGISTRY) === '{"vermilion":["boardwalk"],"blackthorn":["settfloor"],"silvertown":["marblefloor"],"ecruteak":["wornfloor"],"saffron":["avenuefloor"],"violet":["violetfloor"],"azalea":["brickfloor"],"mahogany":["gravelfloor"],"rustboro":["cutstonefloor"],"fuchsia":["marshfloor"],"cianwood":["driftfloor"],"dewford":["plankfloor"],"viridian":["slatefloor"],"celadon":["promfloor"],"slateport":["quayfloor","boardwalk"],"cerulean":["pierfloor"],"mauville":["gridfloor"],"lavender":["shinglefloor"],"cherrygrove":["inlayfloor"],"verdanturf":["petalfloor","cavefloor"],"olivine":["harbourfloor","jettyfloor"],"fallarbor":["ashfloor"],"lavaridge":["steamfloor","terracefloor"],"fortree":["canopyfloor","boardwalk"],"lilycove":["cobblefloor","cavefloor"],"mossdeep":["starfloor","dockfloor"],"sootopolis":["craterfloor","cavefloor"],\"pacifidlog\":[\"raftfloor\"],\"evergrande\":[\"plateaufloor\",\"cavefloor\"],\"twinleaf\":[\"cloverfloor\"],\"sandgem\":[\"shellfloor\"],\"jubilife\":[\"beamfloor\"],\"oreburgh\":[\"clinkerfloor\"],\"floaroma\":[\"honeyfloor\"],\"eterna\":[\"heritagefloor\"],\"hearthome\":[\"giltfloor\"],\"solaceon\":[\"pebblefloor\"],\"veilstone\":[\"shardfloor\"],\"canalave\":[\"ringfloor\",\"boardwalk\",\"harbourstone\",\"trussfloor\"],\"pastoria\":[\"walkfloor\"],\"celestic\":[\"moonfloor\"],\"snowpoint\":[\"rimefloor\"],\"sunnyshore\":[\"panelfloor\"],\"fight-area\":[\"basaltfloor\"],\"survival-area\":[\"hardpanfloor\"],\"resort-area\":[\"coralfloor\"],\"valencia\":[\"dunefloor\"],\"mikan\":[\"grovefloor\"],\"navel\":[\"screefloor\"]}',
+ok('street registry is exactly { vermilion: [boardwalk], blackthorn: [settfloor], silvertown: [marblefloor], ecruteak: [wornfloor], saffron: [avenuefloor], violet: [violetfloor], azalea: [brickfloor], mahogany: [gravelfloor], rustboro: [cutstonefloor], fuchsia: [marshfloor], cianwood: [driftfloor], dewford: [plankfloor], viridian: [slatefloor], celadon: [promfloor], slateport: [quayfloor, boardwalk], cerulean: [pierfloor], mauville: [gridfloor], lavender: [shinglefloor], cherrygrove: [inlayfloor], verdanturf: [petalfloor, cavefloor], olivine: [harbourfloor, jettyfloor], fallarbor: [ashfloor], lavaridge: [steamfloor, terracefloor], fortree: [canopyfloor, boardwalk], lilycove: [cobblefloor, cavefloor], mossdeep: [starfloor, dockfloor], sootopolis: [craterfloor, cavefloor], pacifidlog: [raftfloor], evergrande: [plateaufloor, cavefloor], twinleaf: [cloverfloor], sandgem: [shellfloor], jubilife: [beamfloor], oreburgh: [clinkerfloor], floaroma: [honeyfloor], eterna: [heritagefloor], hearthome: [giltfloor], solaceon: [pebblefloor], veilstone: [shardfloor], canalave: [ringfloor, boardwalk, harbourstone, trussfloor], pastoria: [walkfloor], celestic: [moonfloor], snowpoint: [rimefloor], sunnyshore: [panelfloor], fight-area: [basaltfloor], survival-area: [hardpanfloor], resort-area: [coralfloor], valencia: [dunefloor], mikan: [grovefloor], navel: [screefloor], moro: [ruinfloor] }',
+  JSON.stringify(STREET_REGISTRY) === '{"vermilion":["boardwalk"],"blackthorn":["settfloor"],"silvertown":["marblefloor"],"ecruteak":["wornfloor"],"saffron":["avenuefloor"],"violet":["violetfloor"],"azalea":["brickfloor"],"mahogany":["gravelfloor"],"rustboro":["cutstonefloor"],"fuchsia":["marshfloor"],"cianwood":["driftfloor"],"dewford":["plankfloor"],"viridian":["slatefloor"],"celadon":["promfloor"],"slateport":["quayfloor","boardwalk"],"cerulean":["pierfloor"],"mauville":["gridfloor"],"lavender":["shinglefloor"],"cherrygrove":["inlayfloor"],"verdanturf":["petalfloor","cavefloor"],"olivine":["harbourfloor","jettyfloor"],"fallarbor":["ashfloor"],"lavaridge":["steamfloor","terracefloor"],"fortree":["canopyfloor","boardwalk"],"lilycove":["cobblefloor","cavefloor"],"mossdeep":["starfloor","dockfloor"],"sootopolis":["craterfloor","cavefloor"],\"pacifidlog\":[\"raftfloor\"],\"evergrande\":[\"plateaufloor\",\"cavefloor\"],\"twinleaf\":[\"cloverfloor\"],\"sandgem\":[\"shellfloor\"],\"jubilife\":[\"beamfloor\"],\"oreburgh\":[\"clinkerfloor\"],\"floaroma\":[\"honeyfloor\"],\"eterna\":[\"heritagefloor\"],\"hearthome\":[\"giltfloor\"],\"solaceon\":[\"pebblefloor\"],\"veilstone\":[\"shardfloor\"],\"canalave\":[\"ringfloor\",\"boardwalk\",\"harbourstone\",\"trussfloor\"],\"pastoria\":[\"walkfloor\"],\"celestic\":[\"moonfloor\"],\"snowpoint\":[\"rimefloor\"],\"sunnyshore\":[\"panelfloor\"],\"fight-area\":[\"basaltfloor\"],\"survival-area\":[\"hardpanfloor\"],\"resort-area\":[\"coralfloor\"],\"valencia\":[\"dunefloor\"],\"mikan\":[\"grovefloor\"],\"navel\":[\"screefloor\"],\"moro\":[\"ruinfloor\"]}',
   JSON.stringify(STREET_REGISTRY));
 
 // 2. census: the 64 towns of townSetOf (pallet included)
@@ -1913,7 +1943,7 @@ const PIN = {
   "mahogany": [1, 156, 156, 7, 7, 1, 5, 0, 0, 0.786, 0, 0, 0, 0, 0.9332, 1],
   "mauville": [1, 210, 210, 7, 7, 1, 11, 0, 0, 0.857, 0, 0, 0, 0, 0.7977, 0.9919],
   "mikan": [1, 72, 72, 7, 7, 1, 2, 0, 0, 0.875, 0, 0, 0, 0, 0.9809, 0.9809],
-  "moro": [0, 12, 30, 4, 4, 1, 1, 0, 1, 0.529, 0, 0, 0, 0, 0.9402, 0.9402],
+  "moro": [1, 30, 30, 4, 4, 1, 3, 0, 0, 0.625, 0, 0, 0, 0, 0.9856, 0.9856],
   "mossdeep": [1, 132, 132, 6, 6, 1, 14, 0, 0, 0.643, 0, 0, 0, 0, 0.7436, 0.9944],
   "navel": [1, 90, 90, 6, 6, 1, 5, 0, 0, 0.813, 0, 0, 0, 0, 0.9801, 0.9801],
   "newbark": [1, 72, 72, 7, 7, 1, 5, 0, 0, 0.857, 0, 0, 0, 0, 0.7385, 0.9913],
