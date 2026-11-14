@@ -1135,6 +1135,37 @@
 //     0.9994, apron min 0.714 unmoved. The orphaned
 //     MART CLERK re-seats (3,5) -> (9,4); tg2 cells
 //     238 -> 0. NO other town's pin moves.
+//     FORTY-THIRD DOCUMENTED EXCEPTION (WAVE T45; the
+//     FORTY-SECOND is WAVE T44 Honeyfield's, landing at
+//     its merge ahead of this wave): the registry grows
+//     by one scoped entry — eterna: [heritagefloor] —
+//     and eterna's pin migrates on metrics while staying
+//     PASS: the Heritage City rebuild on its own kit from
+//     birth ('Historic Stone & Leaf-Shadow', idx
+//     816-819: worn flagstone heritagefloor streets, the
+//     cut-stone heritageroof breaking the Gym + Combine
+//     building tr-roof share, the tale's old statue
+//     realized in its garden, flower urns at the gates)
+//     per WAVE-T45-HERITAGE-PLAN.md. The shipped town
+//     PASSED only as a mud artefact — its whole 232-cell
+//     network was the tg2 sea (221 tg2 cells, one
+//     148-cell junction mega-site): [1, 182, 182, 8, 8,
+//     1, 7, 0, 0, 0.813, 0, 0, 0, 0, 0.9593, 0.9921] ->
+//     [1, 182, 182, 8, 8, 1, 2, 0, 0, 0.813, 0, 0, 0, 0,
+//     0.7361, 0.992]: conn 182/182 unmoved, components 1
+//     (the flagstone graph threads the statue garden's
+//     path ring on lanes at its corners, never on
+//     encounter cells), junctions 7 -> 2 real sites all
+//     covered (the three shipped DIRS records gain sign
+//     tiles; one verbatim copy of the town sign at the
+//     validator-named bare crossing), strict 0.9593 ->
+//     0.7361 (the tg2 web was strict tier by definition;
+//     the flagstone streets carry the same lines at the
+//     honest CLEAN measure — every CLEAN town reads
+//     0.62-0.93), fabric 0.9921 -> 0.992, apron min
+//     0.813 unmoved. The orphaned MART CLERK re-seats
+//     (3,5) -> (9,4); tg2 cells 221 -> 0. NO other
+//     town's pin moves.
 
 //     FORTY-SECOND DOCUMENTED EXCEPTION (WAVE T44; the
 //     FORTY-FIRST is WAVE T43 Coalseam's, recorded on its own
@@ -1206,8 +1237,8 @@ async function gateTuple(id, t) {
 }
 
 // 1. registry scope lock
-ok('street registry is exactly { vermilion: [boardwalk], blackthorn: [settfloor], silvertown: [marblefloor], ecruteak: [wornfloor], saffron: [avenuefloor], violet: [violetfloor], azalea: [brickfloor], mahogany: [gravelfloor], rustboro: [cutstonefloor], fuchsia: [marshfloor], cianwood: [driftfloor], dewford: [plankfloor], viridian: [slatefloor], celadon: [promfloor], slateport: [quayfloor, boardwalk], cerulean: [pierfloor], mauville: [gridfloor], lavender: [shinglefloor], cherrygrove: [inlayfloor], verdanturf: [petalfloor, cavefloor], olivine: [harbourfloor, jettyfloor], fallarbor: [ashfloor], lavaridge: [steamfloor, terracefloor], fortree: [canopyfloor, boardwalk], lilycove: [cobblefloor, cavefloor], mossdeep: [starfloor, dockfloor], sootopolis: [craterfloor, cavefloor], pacifidlog: [raftfloor], evergrande: [plateaufloor, cavefloor], twinleaf: [cloverfloor], sandgem: [shellfloor], jubilife: [beamfloor], oreburgh: [clinkerfloor], floaroma: [honeyfloor] }',
-  JSON.stringify(STREET_REGISTRY) === '{"vermilion":["boardwalk"],"blackthorn":["settfloor"],"silvertown":["marblefloor"],"ecruteak":["wornfloor"],"saffron":["avenuefloor"],"violet":["violetfloor"],"azalea":["brickfloor"],"mahogany":["gravelfloor"],"rustboro":["cutstonefloor"],"fuchsia":["marshfloor"],"cianwood":["driftfloor"],"dewford":["plankfloor"],"viridian":["slatefloor"],"celadon":["promfloor"],"slateport":["quayfloor","boardwalk"],"cerulean":["pierfloor"],"mauville":["gridfloor"],"lavender":["shinglefloor"],"cherrygrove":["inlayfloor"],"verdanturf":["petalfloor","cavefloor"],"olivine":["harbourfloor","jettyfloor"],"fallarbor":["ashfloor"],"lavaridge":["steamfloor","terracefloor"],"fortree":["canopyfloor","boardwalk"],"lilycove":["cobblefloor","cavefloor"],"mossdeep":["starfloor","dockfloor"],"sootopolis":["craterfloor","cavefloor"],\"pacifidlog\":[\"raftfloor\"],\"evergrande\":[\"plateaufloor\",\"cavefloor\"],\"twinleaf\":[\"cloverfloor\"],\"sandgem\":[\"shellfloor\"],\"jubilife\":[\"beamfloor\"],\"oreburgh\":[\"clinkerfloor\"],\"floaroma\":[\"honeyfloor\"]}',
+ok('street registry is exactly { vermilion: [boardwalk], blackthorn: [settfloor], silvertown: [marblefloor], ecruteak: [wornfloor], saffron: [avenuefloor], violet: [violetfloor], azalea: [brickfloor], mahogany: [gravelfloor], rustboro: [cutstonefloor], fuchsia: [marshfloor], cianwood: [driftfloor], dewford: [plankfloor], viridian: [slatefloor], celadon: [promfloor], slateport: [quayfloor, boardwalk], cerulean: [pierfloor], mauville: [gridfloor], lavender: [shinglefloor], cherrygrove: [inlayfloor], verdanturf: [petalfloor, cavefloor], olivine: [harbourfloor, jettyfloor], fallarbor: [ashfloor], lavaridge: [steamfloor, terracefloor], fortree: [canopyfloor, boardwalk], lilycove: [cobblefloor, cavefloor], mossdeep: [starfloor, dockfloor], sootopolis: [craterfloor, cavefloor], pacifidlog: [raftfloor], evergrande: [plateaufloor, cavefloor], twinleaf: [cloverfloor], sandgem: [shellfloor], jubilife: [beamfloor], oreburgh: [clinkerfloor], floaroma: [honeyfloor], eterna: [heritagefloor] }',
+  JSON.stringify(STREET_REGISTRY) === '{"vermilion":["boardwalk"],"blackthorn":["settfloor"],"silvertown":["marblefloor"],"ecruteak":["wornfloor"],"saffron":["avenuefloor"],"violet":["violetfloor"],"azalea":["brickfloor"],"mahogany":["gravelfloor"],"rustboro":["cutstonefloor"],"fuchsia":["marshfloor"],"cianwood":["driftfloor"],"dewford":["plankfloor"],"viridian":["slatefloor"],"celadon":["promfloor"],"slateport":["quayfloor","boardwalk"],"cerulean":["pierfloor"],"mauville":["gridfloor"],"lavender":["shinglefloor"],"cherrygrove":["inlayfloor"],"verdanturf":["petalfloor","cavefloor"],"olivine":["harbourfloor","jettyfloor"],"fallarbor":["ashfloor"],"lavaridge":["steamfloor","terracefloor"],"fortree":["canopyfloor","boardwalk"],"lilycove":["cobblefloor","cavefloor"],"mossdeep":["starfloor","dockfloor"],"sootopolis":["craterfloor","cavefloor"],\"pacifidlog\":[\"raftfloor\"],\"evergrande\":[\"plateaufloor\",\"cavefloor\"],\"twinleaf\":[\"cloverfloor\"],\"sandgem\":[\"shellfloor\"],\"jubilife\":[\"beamfloor\"],\"oreburgh\":[\"clinkerfloor\"],\"floaroma\":[\"honeyfloor\"],\"eterna\":[\"heritagefloor\"]}',
   JSON.stringify(STREET_REGISTRY));
 
 // 2. census: the 64 towns of townSetOf (pallet included)
@@ -1242,7 +1273,7 @@ const PIN = {
   "cinnabar": [1, 90, 90, 9, 9, 1, 3, 0, 0, 0.769, 0, 0, 0, 0, 0.8694, 1],
   "dewford": [1, 110, 110, 7, 7, 1, 8, 0, 0, 0.625, 0, 0, 0, 0, 0.6945, 0.9864],
   "ecruteak": [1, 156, 156, 11, 11, 1, 6, 0, 0, 0.625, 0, 0, 0, 0, 0.7992, 0.9937],
-  "eterna": [1, 182, 182, 8, 8, 1, 7, 0, 0, 0.813, 0, 0, 0, 0, 0.9593, 0.9921],
+  "eterna": [1, 182, 182, 8, 8, 1, 2, 0, 0, 0.813, 0, 0, 0, 0, 0.7361, 0.992],
   "evergrande": [1, 42, 42, 5, 5, 1, 10, 0, 0, 0.938, 0, 0, 0, 0, 0.7554, 0.9928],
   "fallarbor": [1, 90, 90, 6, 6, 1, 3, 0, 0, 0.875, 0, 0, 0, 0, 0.7047, 0.9872],
   "fight-area": [1, 72, 72, 5, 5, 1, 1, 0, 0, 0.941, 0, 0, 0, 0, 1, 1],
