@@ -1,0 +1,27 @@
+# Wave T54 (Clashfield kit): coilbollard — a squat harbour bollard: a dark timber post with an iron cap band and a rope coil wound at its foot, the rope's tail loose on the grass. The pair flanks the harbour lane beside the ferry captain NORTHSTAR at (12,13) + (15,13) — harbour dressing on shipped ground; no pier is built and no water is paved (the coast water is Route 230's). Fully opaque; the town grass is baked in at its measured colours (#2e8f12 / #2e5912). A TIMBER POST WITH A ROPE COIL: unlike Bridgeport's mooringpost (a tall plain post), Rimefall's ironbollard (iron, snow-capped), T53's coilcradle (copper rings on a cradle — this is rope on a post). (NO-SAME-KIT law; WAVE-T54-CLASHFIELD-PLAN.md §5.)
+PIX tile-prop-coilbollard 16 16
+GgggggggggggGggg
+gggggggGgggggggg
+ggGgggggggggggGg
+ggggggiiiigggggg
+ggggGgIIIIgggggg
+ggggggDddDgGgggg
+ggggggDddDgggggg
+gGggggDddDgggGgg
+ggggggDddDgggggg
+gggGggDddDgggggG
+ggggggDddDGggggg
+ggggRRDddDRRgggg
+GgggRrRrrRrRGggg
+ggggRRrrRrrRrrgg
+ggGgRRRRRRRRggGg
+gggggGGGGGGggggg
+PAL
+g #2e8f12 town grass — measured flat
+G #2e5912 town grass — measured speckle
+d #5e4630 bollard post — town log timber
+D #463322 bollard post — shadow side
+i #3a3f4a iron cap — dark
+I #6a7280 iron cap band — lit
+r #b09468 rope coil — hemp
+R #cbb083 rope coil — twist light

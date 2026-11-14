@@ -1,0 +1,26 @@
+# Wave T54 (Clashfield kit): basaltfloor — Clashfield's registered street kind (the fleet's street kinds carry the -floor suffix; the desire-path tiers key on it). FITTED BASALT SLABS: large dark basalt slabs (blue-grey faces, tone-varied) set in pale grout with offset jittered joints and sparse rust-red weather flecks — the hard coast's hard road. A FITTED-SLAB FIELD: unlike Shardfall's shardfloor (a regular blue-grey checker), Coalseam's clinkerfloor (fine dark ash), Bridgeport's ringfloor (ringed quay stone), Brightshore's panelfloor (a rigid golden grid). (NO-SAME-KIT law; WAVE-T54-CLASHFIELD-PLAN.md §5.)
+PIX tile-basaltfloor 16 16
+laaaaaapblbbbbbb
+aaaaadaplbbbbbbr
+aaaaaaapbbdbbbbb
+aaraaaapbbbbbbbl
+aaadalapbbbbbblb
+aaaalaapdbbbblbb
+aaaaraapbbbbldbb
+ppppppppbbbbbbbb
+alaaaadapppppppp
+laaaaaraplcdcccp
+aaaaaaaapccccccp
+aaaadaaapccccccp
+aaaaaalapdcccccp
+aaaaalaapcccccdp
+aadaaaaapccccccp
+pppppppppppppppp
+PAL
+a #4c4c55 basalt slab — face
+b #55555f basalt slab — light face
+c #43434c basalt slab — dark face
+d #3b3b44 basalt slab — grain
+l #6a6a72 basalt slab — worn spot
+p #a39c8d grout — pale
+r #a83f2a rust fleck — roof-family red

@@ -1,0 +1,27 @@
+# Wave T54 (Clashfield kit): listboard — the Zone registrar's notice board: two dark timber posts and a wide board pinned with three pale list papers, their writing ruled in fine dark lines. It stands at the registrar OKTAVIA's shoulder (9,7) — her post made visible. A recorded-beat dressing realization (the T50 bogeyes / T53 coilcradle precedent): OKTAVIA's dialogue ('Clashfield keeps the Zone's lists'), her house's host dialogue ('Lists on the wall: ferries, tides, and who owes whom a rematch') and the Backstory Sync Audit row ('registrar's post with its lists in the windows') — dressed here as dressing only; no actor, no dialogue, no event. Fully opaque; the town grass is baked in at its measured colours (#2e8f12 flat / #2e5912 speckle — tg-sunnyshore's shipped render). A PINNED-LIST BOARD: unlike any shipped prop (Bridgeport's harbourbell, Astral's muralpanel — stone, carved; this is timber and paper). (NO-SAME-KIT law; WAVE-T54-CLASHFIELD-PLAN.md §5.)
+PIX tile-prop-listboard 16 16
+GgggggggggggGggg
+gggggggGgggggggg
+ggffffffffffffGg
+ggfbbbbbbbbbbfgg
+ggfwnwwnwbnwwfgg
+ggfttwttwbtwtfgg
+ggfttwttwbtwtfgg
+gGfwwwwwwbwwwfgg
+ggfbbbbbbbbbbfgg
+ggffffffffffffgG
+gggddgggggGddggg
+gggddGgggggddggg
+Gggddggggggddggg
+gggddggGgggddggg
+ggGddggggggddgGg
+ggdGddGddGddGdgg
+PAL
+g #2e8f12 town grass — measured flat
+G #2e5912 town grass — measured speckle
+d #5e4630 posts — town log timber
+f #3e2c1c board frame — dark timber
+b #8a6a42 board face — sign timber
+w #e8dfc8 list paper — pale
+t #5a5148 list writing — ruled lines
+n #a83f2a pin head — door red

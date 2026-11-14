@@ -1,0 +1,23 @@
+# Wave T54 (Clashfield kit): basaltroof — worn by the shipped Clashfield House stamp's th roof cells + the wave's two facade cottages, so the town's homes wear the town's own register: BASALT-RED SHINGLE COURSES in the town-style palette (#63322c body, #83503f lit tops, #3e201c seams), horizontal courses with offset vertical joints — the approved painting's dark basalt-red roofs. HORIZONTAL RED COURSES: unlike Astral's duskroof (violet timber courses), Fenland's boardroof (vertical board courses), Rimefall's driftroof (snow-capped dark slate), Brightshore's panelroof (amber panels, blue seams). (NO-SAME-KIT law; WAVE-T54-CLASHFIELD-PLAN.md §5.)
+PIX tile-basaltroof 16 16
+lllllllsllllllls
+aaaaaaasadaaaaas
+aaaaaaasaaaaaaas
+ssssssssssssssss
+lllslllllllsllll
+aaasaaadaaasaaaa
+aaasaaaaaaasaaaa
+ssssssssssssssss
+lllllllsllllllls
+aaaaadasaaaaaaas
+aaaaaaasaaaaaads
+ssssssssssssssss
+lllslllllllsllll
+aaasaaaaaaasaaaa
+aaasaaaaaaasdaaa
+ssssssssssssssss
+PAL
+a #63322c basalt shingle — body
+d #57302a basalt shingle — grain
+l #83503f course top — lit edge
+s #3e201c course seam — shadow
