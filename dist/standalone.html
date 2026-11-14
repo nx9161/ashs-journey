@@ -4717,6 +4717,60 @@ W17C_KIND_DEFS.forEach(([kind], i) => {
 const W17C_PROP_KINDS = W17C_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
 const W17C_WALL_KINDS = W17C_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
 const W17C_FLOOR_KINDS = W17C_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
+// Wave W17-D (Route Build Program, Arden Tranche 4): the surf lane,
+// the League road and the cave pair — Routes 20, 22, Mt. Lunestone
+// 1F/B1F and Stonebore Tunnel, each its own kit under the NO-SAME-KIT
+// law. Routes 20/22 convert 1:1 off the generic '_'/'.'/'#' vocabulary
+// like Tranches 1-3; the cave maps convert the generic cave base —
+// char 'L' (cavefloor) to the map's own floor kind, char 'G'
+// (cavewall) to its own wall kind — art layer only: encounter tables,
+// warps (cave mouths + ladder/door cells), NPC posts, sign records,
+// items and hidden items byte-identical, and the shipped cave-
+// encounter trigger chars ('.'/'R', overworld-systems sysEncounterStep)
+// occur in none of these grids before or after. Route 20 "Rime Surf"
+// (idx 1152-1155), Route 22 "League Road" (1156-1159), Lunestone 1F
+// "Lunestone Deep" (1160-1161), Lunestone B1F "Lunestone Dark"
+// (1162-1163), Stonebore "Stonebore Strata" (1164-1165 — a strata-deep
+// extension of the tunnel's own shipped stratafloor/stratwall family,
+// per-route, not shared). Ground kinds deliberately do NOT end in
+// 'floor' (the desire-path audit counts '*floor' as street tier;
+// grounds must never masquerade as street); path kinds DO end in
+// 'floor' so they register as the route's path tier per route
+// (checklist point 3). Cave floor kinds end in 'floor' exactly as
+// cavefloor/stratafloor do, keeping their audit classification.
+// Indices 1152-1165 per the Director's index ruling: Tranches 1-3
+// took 1092-1110, 1112-1131 and 1132-1151 (W17-C lands at merge);
+// 1111 and every earlier documented gap stay empty. Kind names
+// verified unclaimed against origin/main ('moonfloor' is Hushmoor's
+// T7 town floor — Lunestone's floors are 'lunefloor'/'darklunefloor';
+// the plan's path name 'leagueway' becomes 'leaguewayfloor' so it
+// registers as path tier under point 3, the gardenfloor discipline).
+// Chars U+1E00+1152.. (Register: WAVE-W17-ROUTE-PROGRAM-PLAN.md.)
+const W17D_KIND_DEFS = [
+  ['rimeshore', 'floor'],
+  ['surfloor', 'floor'],
+  ['surfpine', 'wall'],
+  ['coldspring', 'prop'],
+  ['leagueturf', 'floor'],
+  ['leaguewayfloor', 'floor'],
+  ['leagueoak', 'wall'],
+  ['leaguepost', 'prop'],
+  ['lunefloor', 'floor'],
+  ['lunewall', 'wall'],
+  ['darklunefloor', 'floor'],
+  ['darklunewall', 'wall'],
+  ['stratadeepfloor', 'floor'],
+  ['stratadeepwall', 'wall'],
+];
+const W17D_KIND_CHARS = {};
+W17D_KIND_DEFS.forEach(([kind], i) => {
+  const ch = String.fromCodePoint(0x1E00 + 1152 + i);
+  W17D_KIND_CHARS[kind] = ch;
+  TILE_CHARS[ch] = kind;
+});
+const W17D_PROP_KINDS = W17D_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
+const W17D_WALL_KINDS = W17D_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
+const W17D_FLOOR_KINDS = W17D_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
 const SINNOH_TOWN_GROUND_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg);
 const SINNOH_TOWN_GROUND2_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg2);
 // TX-3: the 8 gym exteriors by town (original type-accent motifs).
@@ -115190,6 +115244,258 @@ const ART = {
     "aaaaaaaaaaaaaabb",
     "aabaaaabaaaaaaaa"
   ] },
+  "tile-rimeshore": { w: 16, h: 16, pal: {"a":"#7d9b8a","b":"#6d8a7a","d":"#5b7a6e","w":"#eef4f2","s":"#cfd8ce"}, rows: [
+    "abdbawaaaaabaaas",
+    "aaabaaababaaaaab",
+    "aaabaaaadaaaaaba",
+    "ababaaaaadadaaaa",
+    "baaaaababsaaawba",
+    "aaadaaaaaaaadwaa",
+    "abaabaasaasaaaaa",
+    "asaabaaaaaabawaa",
+    "aababaaadaaawaaa",
+    "bbaaaaaaababsabb",
+    "aaabaaaaaaaaaaaa",
+    "aaaabbaabwaabaaa",
+    "abawaabaaaababba",
+    "ababaaaadaaasbaa",
+    "aaaaabaaaaaaaaaa",
+    "baabaaaaaaaaaaba"
+  ] },
+  "tile-surfloor": { w: 16, h: 16, pal: {"a":"#d8cdb2","b":"#c8bb9c","d":"#b3a37f","w":"#f4f6f0"}, rows: [
+    "babaaaaaaabawaaa",
+    "aaaaabaaaaaabaab",
+    "ababaadaaaaabaaa",
+    "baabbwaaaaaadaaa",
+    "bddabaabaaaaaaaa",
+    "abaaabbaaaaaabba",
+    "wbbbbadaabaaaaaa",
+    "aaaaaabaabaaaada",
+    "aaawbaaaaaawaaba",
+    "abaadaabaaabaaaa",
+    "adadbaaaabaaaaaa",
+    "aaabadaaabwadaaa",
+    "aaaaaaaabaabaaba",
+    "aaaaaawaaaadaawa",
+    "aaaabaawaaaawaaa",
+    "aaabadaaaabaaaad"
+  ] },
+  "tile-surfpine": { w: 16, h: 16, pal: {"a":"#7d9b8a","b":"#6d8a7a","t":"#3e6b57","u":"#2f5545","h":"#5d8a72","f":"#dcebe4","k":"#5d4a38"}, rows: [
+    "baaaaaaaaaabaaaa",
+    "aaaaaabtfaaaaaaa",
+    "abaaaatuuuaabaaa",
+    "aaaaaautufaaaaaa",
+    "aabaaftufttaabaa",
+    "aaaaathuufuaaaaa",
+    "aaabtuuttutuaaba",
+    "aaaatthtuuutaaaa",
+    "aaatttuuttuttaab",
+    "aaaththttththaaa",
+    "aaaaabakkaaaaaaa",
+    "baaaaaakkaabaaaa",
+    "aaaaaabkkaaaaaaa",
+    "abaaaaakkaaabaaa",
+    "aaaaaauuuuaaaaaa",
+    "aabaaaaaaaaaabaa"
+  ] },
+  "tile-prop-coldspring": { w: 16, h: 16, pal: {"a":"#7d9b8a","b":"#6d8a7a","w":"#eef4f2","c":"#a8d4de","D":"#7fb2c4","t":"#5d8a72"}, rows: [
+    "aaabaaaawaaaaaaa",
+    "aaaaawaaabaaaaaa",
+    "aaaaabaabaaaaaaa",
+    "aaaabaabaaaabaaa",
+    "aabtaaaaaaaaaaaw",
+    "aaaaawwwwwwaaaaa",
+    "aaaawwccccwwaaaa",
+    "aaaawwcDDcwwabaa",
+    "aaaabwwccwwaabba",
+    "awabaaaaaabawaaa",
+    "aaaaaaabbaaaaaab",
+    "aataaaabaaaaaaaa",
+    "baaaaaabaaaaataa",
+    "aaaaabaaabawawaa",
+    "aaaaawaabaaabaaa",
+    "aaaaaaabbawabwaa"
+  ] },
+  "tile-leagueturf": { w: 16, h: 16, pal: {"a":"#79a95c","b":"#6a9850","d":"#59823f","g":"#e5c65c"}, rows: [
+    "aaaaabbabaaabaaa",
+    "aaaaabaaaaabaaaa",
+    "babaabadadaaaaaa",
+    "bdabgabbaaaabaaa",
+    "aaaaaababgaaaaag",
+    "aaaabbaaaaadaaaa",
+    "baaaaaaaaabbaaaa",
+    "bbaaadaabbbaaaaa",
+    "aaaaabbaaaabaabd",
+    "aaaabaadbaaaaaag",
+    "aaaaaaaaaaabaada",
+    "aaaaaaaaaaaaabba",
+    "bddabgaabaabaaga",
+    "daadabaaabaaabab",
+    "aaaaaaaaaaaaaaaa",
+    "bdaaaaabaaaaaaab"
+  ] },
+  "tile-leaguewayfloor": { w: 16, h: 16, pal: {"a":"#d9d2ba","b":"#c9c0a4","s":"#b3a888","h":"#e8e2cc"}, rows: [
+    "aaaaaaasaaaaabaa",
+    "aaaababsabababaa",
+    "aaaaaaasaaaaaaaa",
+    "aaaaahasaaaaabab",
+    "aaaabaasaaaaaaaa",
+    "bbaaaaasbbaaaaaa",
+    "aaaaaabsaaaaaaab",
+    "ssssssssssssssss",
+    "abashaaaaabsaaab",
+    "aaasaaaaaaasbaaa",
+    "aaasaabaaaasaaba",
+    "baashbaaabasabba",
+    "aaasaahaahasaaaa",
+    "aaasababaaasaaaa",
+    "baasabaaaabsaaaa",
+    "ssssssssssssssss"
+  ] },
+  "tile-leagueoak": { w: 16, h: 16, pal: {"a":"#79a95c","b":"#6a9850","t":"#4f7d38","u":"#3f652c","h":"#6f9c4c","k":"#6e4c34"}, rows: [
+    "baaaaaaaaaabaaaa",
+    "aaaaahhhhttaaaaa",
+    "abahhhhhhuhutaaa",
+    "aahhhhhhthhhhtaa",
+    "aattuhhtthuttuaa",
+    "aauuhuuhthtttuaa",
+    "aaahhhtuthtttaba",
+    "aaahhuutuhhthaaa",
+    "aaaahuhuttttaaab",
+    "aaaaatuttuhaaaaa",
+    "aaaaabakkaaaaaaa",
+    "baaaaaakkaabaaaa",
+    "aaaaaabkkaaaaaaa",
+    "abaaaaakkaaabaaa",
+    "aaaaaauuuuaaaaaa",
+    "aabaaaaaaaaaabaa"
+  ] },
+  "tile-prop-leaguepost": { w: 16, h: 16, pal: {"a":"#79a95c","b":"#6a9850","g":"#e5c65c","s":"#b9b2a0","d":"#8f8875","c":"#d9d2ba"}, rows: [
+    "bbaaaaaaaabaaaga",
+    "aabbaaaaaaaaaaaa",
+    "aaaaaccccccaaaab",
+    "aaaaaassssbabaaa",
+    "aaaaabssssaaaaaa",
+    "aaaaaassssbaaaaa",
+    "aabaaaggggabaaaa",
+    "aaaaaassssaagbab",
+    "aaaaaassssaaabab",
+    "aaaaaasdssaaaaga",
+    "aaaabassdsaaaaaa",
+    "abaaaassssaaaaga",
+    "baaabgssssaababa",
+    "aaaaaddddddaaaaa",
+    "abaaaddddddaaaba",
+    "aaaaabaaaaaaaaab"
+  ] },
+  "tile-lunefloor": { w: 16, h: 16, pal: {"a":"#a89cc0","b":"#bcb0d2","d":"#978bb2","g":"#8478a0","s":"#e9e2f7"}, rows: [
+    "aadaaaabbaaaaaad",
+    "abaaaaggaaaaaggb",
+    "adaaaaadaabbaaaa",
+    "baabbaaabaabaaba",
+    "abaaaaaabaaabada",
+    "dadbaaaaabbabaab",
+    "aaggbdaadaaaggaa",
+    "aadabaaaaadaaaaa",
+    "aaaaaaaadaabaaaa",
+    "aaggaaaaaaaaaaba",
+    "basaaaaaaaabaabb",
+    "adaggdaaaaaaaaab",
+    "aaaaaadaadbababa",
+    "bbababaaggaaaaaa",
+    "adaadggdbaggasaa",
+    "baabbasggaaabgga"
+  ] },
+  "tile-lunewall": { w: 16, h: 16, pal: {"z":"#6f6584","m":"#9890ad","a":"#b3a58e","c":"#cfc6de","g":"#565064"}, rows: [
+    "zmzzzzmzmzzzzzzm",
+    "zmzzzzzzzzzzzzzz",
+    "zzzzzzzzzmzzzzzz",
+    "mmcmmmmmcmmmmcmm",
+    "mmczmmmmcmmgmczm",
+    "mmczmmmzczmgmcmm",
+    "zmmmmzmmmmmgmmzm",
+    "aaaaaaaaaaaaaaaa",
+    "aaamaaamaaaaamma",
+    "aaaaaaamaaaaaaam",
+    "zzzzzzzzmmzmzmmz",
+    "zzzzzmmzzzmmzzzz",
+    "zzzzzmzzzzzzzzzz",
+    "gggggggggggggggm",
+    "gmgggggggggggmgg",
+    "gggggggggggggggg"
+  ] },
+  "tile-darklunefloor": { w: 16, h: 16, pal: {"a":"#4c4a63","b":"#5a5872","g":"#35334a","s":"#8f8fb5"}, rows: [
+    "aggaabaaaabbggaa",
+    "aaabaababaaababb",
+    "aaaaaabaaaaaabaa",
+    "babaaabbaaaabaas",
+    "aabgggaabaaaaaaa",
+    "aaaaabaaaaaaaaba",
+    "abaggabaaaaaaaaa",
+    "baaaaaabasaaaaaa",
+    "abaaaaaaaaaggaaa",
+    "baggaaaaaaabaaaa",
+    "aaaaabggsabaaaaa",
+    "baaaabaaaaaaaaab",
+    "aaaaaaaaaaaaaaaa",
+    "aaaaaaaaaaaaabbb",
+    "baababaaaggggaaa",
+    "aggbabaasabaggaa"
+  ] },
+  "tile-darklunewall": { w: 16, h: 16, pal: {"z":"#2e2c40","m":"#454359","a":"#5d5648","c":"#6d6a86","g":"#232130"}, rows: [
+    "zzzzzzzzzzmzzzzz",
+    "zzzzzzmzzzzzzmzz",
+    "zzzzzzzzzzzzmzzz",
+    "mmczmmmmcmmmmcmm",
+    "mzcmmmmzcmmgmczm",
+    "mmcmmmzzcmmgmczm",
+    "mmmzmmmmmmmgmmmm",
+    "maaaamamammaaaaa",
+    "amaaaaaaaaaaaaaa",
+    "amamaaaaaamaaama",
+    "zzzzzzzzzzzzzzzz",
+    "zzzzzzzzzzzzzzzm",
+    "zzzzzzzzzzzzzzzz",
+    "gggggggggggggmgm",
+    "mggggggggggggggg",
+    "gmgggggggggggggm"
+  ] },
+  "tile-stratadeepfloor": { w: 16, h: 16, pal: {"B":"#77664c","D":"#5d4f3a","A":"#8a795c"}, rows: [
+    "DBBDBBABBBBBDBDD",
+    "BABBBDBABBBBBABA",
+    "AABDDDBBBBDDBADB",
+    "BDABDBBBBBBDBABB",
+    "DBBBDBBBBBBBBBBB",
+    "BBABBDBDDBADBBDD",
+    "BABBBBDDBBBDDBDB",
+    "DBBDBDBADADBADDB",
+    "BBDDBADDBBBBDBBD",
+    "BDABBDDBBBBBBDDB",
+    "BBDBDBDBDDBBBDDB",
+    "BDDDBBDBDBDDBDBD",
+    "BBDABBDBBDBDDBDB",
+    "DBBDDBBBBBBDBBBD",
+    "DBBBDDBDDADDBDDB",
+    "DDBDBBBBBDBBBDBB"
+  ] },
+  "tile-stratadeepwall": { w: 16, h: 16, pal: {"B":"#6b5f45","D":"#4e4433","A":"#7d6f52"}, rows: [
+    "BBDBBBBDBBBBBBBB",
+    "DABBBBBBBBBBBBBB",
+    "DDBBBBBBBBBBBBBD",
+    "DDADABBDBDBDBABB",
+    "DDDDDDDDDDDDDDDD",
+    "BBBBDBBBBDBBABAB",
+    "BABDABDBBBDDDBBB",
+    "BBDBDDAADBBBBBBD",
+    "DDDBDBBDDBBBDBBD",
+    "DDDDDDDDDDDDDDDD",
+    "ABBDABDBDABDBBBB",
+    "BBBBBBBDABDDBBBB",
+    "DBBBBDBDBBBBBBBA",
+    "BABBBDDBBBDBBBDD",
+    "DBBDBBBBDBDDBBBB",
+    "BBBDBBDBDDBBBBBA"
+  ] },
   "partner-back-bob": { base: "partner-back", w: 64, h: 64, pal: {}, shiftY: 2 },
   "partner-front-bob": { base: "partner-front", w: 64, h: 64, pal: {}, shiftY: 2 },
   "abomasnow-back-bob": { base: "abomasnow-back", w: 64, h: 64, pal: {}, shiftY: 2 },
@@ -120639,6 +120945,9 @@ for (const k of W17B_FLOOR_KINDS) TILE_ART[k] = 'tile-' + k;
 for (const k of W17C_PROP_KINDS) TILE_ART[k] = 'tile-prop-' + k;
 for (const k of W17C_WALL_KINDS) TILE_ART[k] = 'tile-' + k;
 for (const k of W17C_FLOOR_KINDS) TILE_ART[k] = 'tile-' + k;
+for (const k of W17D_PROP_KINDS) TILE_ART[k] = 'tile-prop-' + k;
+for (const k of W17D_WALL_KINDS) TILE_ART[k] = 'tile-' + k;
+for (const k of W17D_FLOOR_KINDS) TILE_ART[k] = 'tile-' + k;
 // Premium+ W6 (TX-3/PL-1): door-open frames, authored in TX-3 for every
 // door kind. The warp-fade engine that plays them lands in W7 — W6
 // wires the frames (this registry + cache.doorOpen + doorOpenCanvas)
@@ -121437,10 +121746,18 @@ function pickAnim(frames, t, x, y, cadence, salt) {
 // ---- Wave 4: nature & dungeon helpers ----
 // Kind families for the Wave 4 sets (used for ground compositing under
 // object tiles and for cave-context detection around rocks/boulders).
-const CAVE_KINDS = new Set(['cavewall', 'cavefloor', 'caveboulder']);
+const CAVE_KINDS = new Set(['cavewall', 'cavefloor', 'caveboulder',
+  // Wave W17-D: the Arden cave kits (Lunestone Deep/Dark, Stonebore
+  // Strata) are cave family — cave-context detection around rocks
+  // and boulders reads them exactly as it reads the generic set.
+  'lunewall', 'lunefloor', 'darklunewall', 'darklunefloor', 'stratadeepwall', 'stratadeepfloor']);
+const CAVE_FLOOR_KINDS = new Set(['cavefloor', 'lunefloor', 'darklunefloor', 'stratadeepfloor']);
+const CAVE_WALL_KINDS = new Set(['cavewall', 'lunewall', 'darklunewall', 'stratadeepwall']);
 const DUNGEON_WALLS = new Set(['cavewall', 'towerwall', 'silphwall', 'plantwall',
   // Premium+ W6 (TX-5): the sub-theme wall kinds cast the same strip.
-  'icewall', 'iceface', 'stratwall', 'bannerwall', 'cerwall', 'panelwall']);
+  'icewall', 'iceface', 'stratwall', 'bannerwall', 'cerwall', 'panelwall',
+  // Wave W17-D: the Arden cave wall kinds cast the same strip.
+  'lunewall', 'darklunewall', 'stratadeepwall']);
 const FLOOR_VARIANTS = {
   grass: 'grassVariants', path: 'pathVariants', cavefloor: 'caveFloorVariants',
   towerfloor: 'towerFloorVariants', silphfloor: 'silphFloorVariants', plantfloor: 'plantFloorVariants',
@@ -121525,6 +121842,7 @@ function groundFamilyOf(kind) {
   if (kind === 'grass' || kind === 'grassground' || kind === 'flower' || kind === 'tree' || kind === 'rock' || kind === 'sign' ||
       kind === 'fence' || kind === 'lamp' || kind === 'flowerbed') return 'grass';
   if (kind === 'cavefloor' || kind === 'towerfloor' || kind === 'silphfloor' || kind === 'plantfloor') return kind;
+  if (CAVE_FLOOR_KINDS.has(kind)) return kind; // W17-D: the Arden cave floors are own families too
   if (INTERIOR_FLOORS.has(kind)) return kind;
   if (kind === 'path' || isArchKind(kind)) return 'path';
   return null;
@@ -122199,16 +122517,24 @@ function resolveTileLayers(cache, kind, x, y, kindAt, t, phase, mapId) {
       }
       return layers.filter(Boolean);
     }
-    case 'cavewall': {
+    case 'cavewall': case 'lunewall': case 'darklunewall': case 'stratadeepwall': {
       // Strata walls by position hash; an exposed face (floor to the
       // south) wears the stalactite face. Perfection Pass Stage 2 Gate 0
       // (G0-5, standard B3): the face is DETERMINISTIC — 100% of exposed
       // faces render it (was hash-gated at <45%).
       const layers = [];
-      if (nb.s === 'cavefloor' && cache.stalactite) layers.push(cache.stalactite);
-      else layers.push(pickVariantSpread(cache.caveWallVariants, x, y, 51) || cache.cavewall);
+      if (kind === 'cavewall') {
+        if (nb.s === 'cavefloor' && cache.stalactite) layers.push(cache.stalactite);
+        else layers.push(pickVariantSpread(cache.caveWallVariants, x, y, 51) || cache.cavewall);
+      } else {
+        // Wave W17-D: the Arden cave walls keep their own face —
+        // their pix art carries its own hanging points in each
+        // cave's register; only the drip overlay below is shared
+        // with the generic cavewall treatment.
+        layers.push(cache[kind]);
+      }
       // W3: cave drip on exposed faces (slow cadence, phase-offset).
-      if (nb.s === 'cavefloor' && hashTileSpread(x, y, 83) < 0.5) {
+      if (CAVE_FLOOR_KINDS.has(nb.s) && hashTileSpread(x, y, 83) < 0.5) {
         const drip = pickAnim(cache.dripFrames, tt, x, y, CAD_SLOW, 83);
         if (drip) layers.push(drip);
       }
@@ -122217,6 +122543,7 @@ function resolveTileLayers(cache, kind, x, y, kindAt, t, phase, mapId) {
     case 'cavefloor': case 'towerfloor': case 'silphfloor': case 'plantfloor':
     case 'icefloor': case 'frostfloor': case 'icepool': case 'moonmoss':
     case 'stratafloor': case 'crackedfloor': case 'cerfloor': case 'cerpool':
+    case 'lunefloor': case 'darklunefloor': case 'stratadeepfloor':
     case 'gratefloor': case 'cablefloor': {
       const layers = [groundBase(cache, kind, x, y)];
       // A dungeon wall directly north casts the shared shadow strip.
@@ -122229,7 +122556,7 @@ function resolveTileLayers(cache, kind, x, y, kindAt, t, phase, mapId) {
         if (d) layers.push(d);
       }
       // W3: glow-crystal clusters pulse on cave floors near walls.
-      if (kind === 'cavefloor' && DIRS.some((d) => nb[d] === 'cavewall') && hashTileSpread(x, y, 81) < 0.14) {
+      if (CAVE_FLOOR_KINDS.has(kind) && DIRS.some((d) => CAVE_WALL_KINDS.has(nb[d])) && hashTileSpread(x, y, 81) < 0.14) {
         const cry = pickAnim(cache.crystalFrames, tt, x, y, CAD_MED, 81);
         if (cry) layers.push(cry);
       }
@@ -122660,6 +122987,14 @@ function resolveTileLayers(cache, kind, x, y, kindAt, t, phase, mapId) {
     case 'sloperail':
     case 'beachpalm':
     case 'shoredrift':
+    // Wave W17-D: the Arden tranche-4 route trees and signature
+    // props composite over their ground the same way (all arts
+    // are fully opaque — each route's own ground is baked in at
+    // its measured colours).
+    case 'surfpine':
+    case 'coldspring':
+    case 'leagueoak':
+    case 'leaguepost':
     // Wave T17: the radio mast composites over its compound grass too.
     case 'radiomast': {
       // Object tiles carry transparent surrounds (Wave 1): lay the ground
@@ -122672,6 +123007,7 @@ function resolveTileLayers(cache, kind, x, y, kindAt, t, phase, mapId) {
         const counts = {};
         for (const d of DIRS) { const f = groundFamilyOf(nb[d]); if (f) counts[f] = (counts[f] || 0) + 1; }
         ground = ['grass', 'path', 'cavefloor', 'towerfloor', 'silphfloor', 'plantfloor',
+          'lunefloor', 'darklunefloor', 'stratadeepfloor',
           'centerfloor', 'martfloor', 'housefloor', 'gymfloor', 'labfloor']
           .filter((f) => counts[f]).sort((a, b) => counts[b] - counts[a])[0] || 'grass';
       }
@@ -122724,7 +123060,7 @@ function resolveTileLayers(cache, kind, x, y, kindAt, t, phase, mapId) {
           : (kind === 'labmachine' || kind === 'slotmachine' || kind === 'pcdesk') ? CAD_FAST : CAD_MED;
         layers.push(pickAnim(cache.propFrames[kind], tt, x, y, cad, 61) || cache[kind]);
       } else if (kind === 'rock') {
-        const cave = ground === 'cavefloor' || DIRS.some((d) => CAVE_KINDS.has(nb[d]));
+        const cave = CAVE_FLOOR_KINDS.has(ground) || DIRS.some((d) => CAVE_KINDS.has(nb[d]));
         layers.push(boulderCanvasFor(cache, x, y, cave));
       } else if (kind === 'caveboulder') {
         layers.push(boulderCanvasFor(cache, x, y, true));
@@ -130036,6 +130372,21 @@ const WALKABLE = new Set(['.', ',', 'D', 'E', 'C', 'F', 'J', 'K', '1', '2', 'V',
   // 1092-1110, W17-B takes 1112-1131 on its parallel branch;
   // 1111 stays empty.)
   ...[1132, 1133, 1136, 1137, 1140, 1141, 1144, 1145, 1148, 1149]
+    .map((i) => String.fromCodePoint(0x1E00 + i)),
+  // Wave W17-D: the Arden tranche-4 ground/path/floor chars
+  // (U+1E00+1152.., tiles.mjs W17D_KIND_DEFS) are walkable —
+  // rimeshore/surfloor (Route 20), leagueturf/leaguewayfloor
+  // (Route 22), each swapped 1:1 from the walkable '_' ground /
+  // '.' path chars on its own route, and the cave floors
+  // lunefloor (Lunestone 1F), darklunefloor (Lunestone B1F),
+  // stratadeepfloor (Stonebore), each swapped 1:1 from the
+  // walkable 'L' cavefloor char in its own cave, so floor stays
+  // floor. The cave wall chars (1161, 1163, 1165) are NOT here:
+  // they swap from 'G' cavewall, which was never walkable.
+  // (Indices 1152-1165 per the Director's index ruling: W17-A
+  // took 1092-1110, W17-B 1112-1131, W17-C 1132-1151 on its
+  // parallel branch; 1111 stays empty.)
+  ...[1152, 1153, 1156, 1157, 1160, 1162, 1164]
     .map((i) => String.fromCodePoint(0x1E00 + i))]);
 
 // Trainer definitions for the slice.
@@ -130271,18 +130622,18 @@ const MAPS2 = {
   moon1: {
     id: 'moon1', name: 'Mt. Lunestone — 1F', music: 'pewter-theme', indoor: true, dark: true,
     rows: rows([
-      'GGGýGýGGýGGGGýGG',
-      'GṮṮṯṯṰLLLLLLLLLG',
-      'GṱLNNLLLLNNLLṭLG',
-      'GLLLṭLLLLLLLLLLG',
-      'GLLLLNNNNLṭṭLLLG',
-      'ṭLṭLLLLLLLNNLLLG',
-      'GLLLLLLṭLLLLLLLG',
-      'GLLNNLLLLLLNNLLG',
-      'GṭLLLLLLLLLLLLLG',
-      'GLLLLLLDDLṭLLLLG',
-      'GṰLLLLṭLLLLLLLṮG',
-      'GGGGGGGGGGGGGGGG',
+      '⊉⊉⊉ý⊉ý⊉⊉ý⊉⊉⊉⊉ý⊉⊉',
+      '⊉ṮṮṯṯṰ⊈⊈⊈⊈⊈⊈⊈⊈⊈⊉',
+      '⊉ṱ⊈NN⊈⊈⊈⊈NN⊈⊈ṭ⊈⊉',
+      '⊉⊈⊈⊈ṭ⊈⊈⊈⊈⊈⊈⊈⊈⊈⊈⊉',
+      '⊉⊈⊈⊈⊈NNNN⊈ṭṭ⊈⊈⊈⊉',
+      'ṭ⊈ṭ⊈⊈⊈⊈⊈⊈⊈NN⊈⊈⊈⊉',
+      '⊉⊈⊈⊈⊈⊈⊈ṭ⊈⊈⊈⊈⊈⊈⊈⊉',
+      '⊉⊈⊈NN⊈⊈⊈⊈⊈⊈NN⊈⊈⊉',
+      '⊉ṭ⊈⊈⊈⊈⊈⊈⊈⊈⊈⊈⊈⊈⊈⊉',
+      '⊉⊈⊈⊈⊈⊈⊈DD⊈ṭ⊈⊈⊈⊈⊉',
+      '⊉Ṱ⊈⊈⊈⊈ṭ⊈⊈⊈⊈⊈⊈⊈Ṯ⊉',
+      '⊉⊉⊉⊉⊉⊉⊉⊉⊉⊉⊉⊉⊉⊉⊉⊉',
     ]),
     warps: [
       { x: 0, y: 5, to: { map: 'route3', x: 16, y: 5 } },
@@ -130318,18 +130669,18 @@ const MAPS2 = {
   moon2: {
     id: 'moon2', name: 'Mt. Lunestone — B1F', music: 'pewter-theme', indoor: true, dark: true,
     rows: rows([
-      'GýGýGýGGGGGGGýGG',
-      'GṮṮLLLLDDLLLLLLG',
-      'GṰLṭLLLLLLLLLṭLG',
-      'GLLNNLLLLLLNNLLG',
-      'GLLLLLLLLLṭṭLLLG',
-      'GLṭLLNNNNNNLLLLG',
-      'GLLLLLLṭLLLLLLLG',
-      'GLLNNLLLLLLNNLLG',
-      'GṭLLLLLLLLLLLLLG',
-      'GṯṱLLLLṭLLṭLLLLL',
-      'GṯṰLLLṭLLLLLLLṮG',
-      'GGGGGGGGGGGGGGGG',
+      '⊋ý⊋ý⊋ý⊋⊋⊋⊋⊋⊋⊋ý⊋⊋',
+      '⊋ṮṮ⊊⊊⊊⊊DD⊊⊊⊊⊊⊊⊊⊋',
+      '⊋Ṱ⊊ṭ⊊⊊⊊⊊⊊⊊⊊⊊⊊ṭ⊊⊋',
+      '⊋⊊⊊NN⊊⊊⊊⊊⊊⊊NN⊊⊊⊋',
+      '⊋⊊⊊⊊⊊⊊⊊⊊⊊⊊ṭṭ⊊⊊⊊⊋',
+      '⊋⊊ṭ⊊⊊NNNNNN⊊⊊⊊⊊⊋',
+      '⊋⊊⊊⊊⊊⊊⊊ṭ⊊⊊⊊⊊⊊⊊⊊⊋',
+      '⊋⊊⊊NN⊊⊊⊊⊊⊊⊊NN⊊⊊⊋',
+      '⊋ṭ⊊⊊⊊⊊⊊⊊⊊⊊⊊⊊⊊⊊⊊⊋',
+      '⊋ṯṱ⊊⊊⊊⊊ṭ⊊⊊ṭ⊊⊊⊊⊊⊊',
+      '⊋ṯṰ⊊⊊⊊ṭ⊊⊊⊊⊊⊊⊊⊊Ṯ⊋',
+      '⊋⊋⊋⊋⊋⊋⊋⊋⊋⊋⊋⊋⊋⊋⊋⊋',
     ]),
     warps: [
       { x: 7, y: 1, to: { map: 'moon1', x: 7, y: 8 } },
@@ -131467,19 +131818,19 @@ const MAPS2 = {
   rocktunnel: {
     id: 'rocktunnel', name: 'Stonebore Tunnel', music: 'pewter-theme', indoor: true, dark: true,
     rows: rows([
-      'GþṲþGþGGLLGGGþGG',
-      'GṶLLLLLLLṳLLLLṳG',
-      'GLLNNLLLLLLNNLLṲ',
-      'GLLLLLLLṶLLLLLLG',
-      'ṲLLLLNNNNLLLLLLG',
-      'GLLṳṶLLLLLṳLLLLG',
-      'GLLNNṶLLLLLNNLLG',
-      'GLLLLLLLṳLLLLLLG',
-      'GLLLLLLNNNNLLLṳG',
-      'GLṳṳLLLLLṶLṶṳLṳṲ',
-      'ṲLLNNLLLLLLNNLLG',
-      'GLLṴṴLLṳLṳLṵṴLṵG',
-      'GGGGGGGGLLGGGGṲG',
+      '⊍þṲþ⊍þ⊍⊍⊌⊌⊍⊍⊍þ⊍⊍',
+      '⊍Ṷ⊌⊌⊌⊌⊌⊌⊌ṳ⊌⊌⊌⊌ṳ⊍',
+      '⊍⊌⊌NN⊌⊌⊌⊌⊌⊌NN⊌⊌Ṳ',
+      '⊍⊌⊌⊌⊌⊌⊌⊌Ṷ⊌⊌⊌⊌⊌⊌⊍',
+      'Ṳ⊌⊌⊌⊌NNNN⊌⊌⊌⊌⊌⊌⊍',
+      '⊍⊌⊌ṳṶ⊌⊌⊌⊌⊌ṳ⊌⊌⊌⊌⊍',
+      '⊍⊌⊌NNṶ⊌⊌⊌⊌⊌NN⊌⊌⊍',
+      '⊍⊌⊌⊌⊌⊌⊌⊌ṳ⊌⊌⊌⊌⊌⊌⊍',
+      '⊍⊌⊌⊌⊌⊌⊌NNNN⊌⊌⊌ṳ⊍',
+      '⊍⊌ṳṳ⊌⊌⊌⊌⊌Ṷ⊌Ṷṳ⊌ṳṲ',
+      'Ṳ⊌⊌NN⊌⊌⊌⊌⊌⊌NN⊌⊌⊍',
+      '⊍⊌⊌ṴṴ⊌⊌ṳ⊌ṳ⊌ṵṴ⊌ṵ⊍',
+      '⊍⊍⊍⊍⊍⊍⊍⊍⊌⊌⊍⊍⊍⊍Ṳ⊍',
     ]),
     warps: [
       { x: 8, y: 0, to: { map: 'route10', x: 7, y: 12 } },
@@ -132068,17 +132419,17 @@ const MAPS2 = {
   route20: {
     id: 'route20', name: 'Route 20', music: 'route1-theme',
     rows: rows([
-      '##..##############',
-      '#.__ẕ~~~~~~~~~~~~#',
-      '#.___~~WWWWWW~~ẓẗ#',
-      '...._~~WWWWWW~~...',
-      '#.__.~~~~~~~~~~._#',
-      '#ẖ......._.......#',
-      '#Ẍ_,,,,.___._...Ẓ#',
-      '#..,,,,____S.....#',
-      '#ẏ...__.__.......#',
-      '#..Ẇ.__..__...ẅ..#',
-      '##################',
+      '⊂⊂⊁⊁⊂⊂⊂⊂⊂⊂⊂⊂⊂⊂⊂⊂⊂⊂',
+      '⊂⊁⊃⊀ẕ~~~~~~~~~~~~⊂',
+      '⊂⊁⊀⊀⊃~~WWWWWW~~ẓẗ⊂',
+      '⊁⊁⊁⊁⊀~~WWWWWW~~⊁⊁⊁',
+      '⊂⊁⊀⊀⊁~~~~~~~~~~⊁⊀⊂',
+      '⊂ẖ⊁⊁⊁⊁⊁⊁⊁⊀⊁⊁⊁⊁⊁⊁⊁⊂',
+      '⊂Ẍ⊀,,,,⊁⊀⊀⊀⊁⊀⊁⊁⊁Ẓ⊂',
+      '⊂⊁⊁,,,,⊀⊀⊀⊀S⊁⊁⊁⊁⊁⊂',
+      '⊂ẏ⊁⊁⊁⊀⊀⊁⊀⊀⊁⊁⊁⊁⊁⊁⊁⊂',
+      '⊂⊁⊁Ẇ⊁⊀⊀⊁⊁⊀⊀⊁⊁⊁ẅ⊁⊁⊂',
+      '⊂⊂⊂⊂⊂⊂⊂⊂⊂⊂⊂⊂⊂⊂⊂⊂⊂⊂',
     ]),
     warps: [
       { x: 2, y: 0, to: { map: 'route19', x: 7, y: 11 } },
@@ -132447,17 +132798,17 @@ const MAPS2 = {
   route22: {
     id: 'route22', name: 'Route 22', music: 'route1-theme',
     rows: rows([
-      '##################',
-      '#__ẋ...ẇ.._.ẑ_..ẅ#',
-      '#._,,,,_.._.._...#',
-      '#..,,,,_.__RR_._Ẕ#',
-      '#ẕ._.__....._.___#',
-      '......._._....__..',
-      '#._..._____,,,,,,#',
-      '#.._.S_____,,,,,,#',
-      '#....__.__.,,,,,,#',
-      '#ẅ.ẈẄ__Ẏ._____...#',
-      '##################',
+      '⊆⊆⊆⊆⊆⊆⊆⊆⊆⊆⊆⊆⊆⊆⊆⊆⊆⊆',
+      '⊆⊄⊇ẋ⊅⊅⊅ẇ⊅⊅⊄⊅ẑ⊇⊅⊅ẅ⊆',
+      '⊆⊅⊄,,,,⊄⊅⊅⊄⊅⊅⊄⊅⊅⊅⊆',
+      '⊆⊅⊅,,,,⊄⊅⊄⊄RR⊄⊅⊄Ẕ⊆',
+      '⊆ẕ⊅⊄⊅⊄⊄⊅⊅⊅⊅⊅⊄⊅⊄⊄⊄⊆',
+      '⊅⊅⊅⊅⊅⊅⊅⊄⊅⊄⊅⊅⊅⊅⊄⊄⊅⊅',
+      '⊆⊅⊄⊅⊅⊅⊄⊄⊄⊄⊄,,,,,,⊆',
+      '⊆⊅⊅⊄⊅S⊄⊄⊄⊄⊄,,,,,,⊆',
+      '⊆⊅⊅⊅⊅⊄⊄⊅⊄⊄⊅,,,,,,⊆',
+      '⊆ẅ⊅ẈẄ⊄⊄Ẏ⊅⊄⊄⊄⊄⊄⊅⊅⊅⊆',
+      '⊆⊆⊆⊆⊆⊆⊆⊆⊆⊆⊆⊆⊆⊆⊆⊆⊆⊆',
     ]),
     warps: [
       { x: 17, y: 5, to: { map: 'viridian', x: 1, y: 5 } },
@@ -133306,19 +133657,19 @@ const MAPS3 = {
   rocktunnel: {
     id: 'rocktunnel', name: 'Stonebore Tunnel', music: 'pewter-theme', indoor: true, dark: true,
     rows: rows([
-      'GþṲþGþGGLLGGGþGG',
-      'GṶLLLLLLLṳLLLLṳG',
-      'GLLNNLLLLLLNNLLṲ',
-      'GLLLLLLLṶLLLLLLG',
-      'ṲLLLLNNNNLLLLLLG',
-      'GLLṳṶLLLLLṳLLLLG',
-      'GLLNNṶLLLLLNNLLG',
-      'GLLLLLLLṳLLLLLLG',
-      'GLLLLLLNNNNLLLṳG',
-      'GLṳṳLLLLLṶLṶṳLṳṲ',
-      'ṲLLNNLLLLLLNNLLG',
-      'GLLṴṴLLṳLṳLṵṴLṵG',
-      'GGGGGGGGLLGGGGṲG',
+      '⊍þṲþ⊍þ⊍⊍⊌⊌⊍⊍⊍þ⊍⊍',
+      '⊍Ṷ⊌⊌⊌⊌⊌⊌⊌ṳ⊌⊌⊌⊌ṳ⊍',
+      '⊍⊌⊌NN⊌⊌⊌⊌⊌⊌NN⊌⊌Ṳ',
+      '⊍⊌⊌⊌⊌⊌⊌⊌Ṷ⊌⊌⊌⊌⊌⊌⊍',
+      'Ṳ⊌⊌⊌⊌NNNN⊌⊌⊌⊌⊌⊌⊍',
+      '⊍⊌⊌ṳṶ⊌⊌⊌⊌⊌ṳ⊌⊌⊌⊌⊍',
+      '⊍⊌⊌NNṶ⊌⊌⊌⊌⊌NN⊌⊌⊍',
+      '⊍⊌⊌⊌⊌⊌⊌⊌ṳ⊌⊌⊌⊌⊌⊌⊍',
+      '⊍⊌⊌⊌⊌⊌⊌NNNN⊌⊌⊌ṳ⊍',
+      '⊍⊌ṳṳ⊌⊌⊌⊌⊌Ṷ⊌Ṷṳ⊌ṳṲ',
+      'Ṳ⊌⊌NN⊌⊌⊌⊌⊌⊌NN⊌⊌⊍',
+      '⊍⊌⊌ṴṴ⊌⊌ṳ⊌ṳ⊌ṵṴ⊌ṵ⊍',
+      '⊍⊍⊍⊍⊍⊍⊍⊍⊌⊌⊍⊍⊍⊍Ṳ⊍',
     ]),
     warps: [
       { x: 8, y: 0, to: { map: 'route10', x: 7, y: 12 } },
@@ -133939,17 +134290,17 @@ const MAPS3 = {
   route20: {
     id: 'route20', name: 'Route 20', music: 'route1-theme',
     rows: rows([
-      '##..##############',
-      '#.__ẕ~~~~~~~~~~~~#',
-      '#.___~~WWWWWW~~ẓẗ#',
-      '...._~~WWWWWW~~...',
-      '#.__.~~~~~~~~~~._#',
-      '#ẖ......._.......#',
-      '#Ẍ_,,,,.___._...Ẓ#',
-      '#..,,,,____S.....#',
-      '#ẏ...__.__.......#',
-      '#..Ẇ.__..__...ẅ..#',
-      '##################',
+      '⊂⊂⊁⊁⊂⊂⊂⊂⊂⊂⊂⊂⊂⊂⊂⊂⊂⊂',
+      '⊂⊁⊃⊀ẕ~~~~~~~~~~~~⊂',
+      '⊂⊁⊀⊀⊃~~WWWWWW~~ẓẗ⊂',
+      '⊁⊁⊁⊁⊀~~WWWWWW~~⊁⊁⊁',
+      '⊂⊁⊀⊀⊁~~~~~~~~~~⊁⊀⊂',
+      '⊂ẖ⊁⊁⊁⊁⊁⊁⊁⊀⊁⊁⊁⊁⊁⊁⊁⊂',
+      '⊂Ẍ⊀,,,,⊁⊀⊀⊀⊁⊀⊁⊁⊁Ẓ⊂',
+      '⊂⊁⊁,,,,⊀⊀⊀⊀S⊁⊁⊁⊁⊁⊂',
+      '⊂ẏ⊁⊁⊁⊀⊀⊁⊀⊀⊁⊁⊁⊁⊁⊁⊁⊂',
+      '⊂⊁⊁Ẇ⊁⊀⊀⊁⊁⊀⊀⊁⊁⊁ẅ⊁⊁⊂',
+      '⊂⊂⊂⊂⊂⊂⊂⊂⊂⊂⊂⊂⊂⊂⊂⊂⊂⊂',
     ]),
     warps: [
       { x: 2, y: 0, to: { map: 'route19', x: 7, y: 11 } },
@@ -134299,17 +134650,17 @@ const MAPS3 = {
   route22: {
     id: 'route22', name: 'Route 22', music: 'route1-theme',
     rows: rows([
-      '##################',
-      '#__ẋ...ẇ.._.ẑ_..ẅ#',
-      '#._,,,,_.._.._...#',
-      '#..,,,,_.__RR_._Ẕ#',
-      '#ẕ._.__....._.___#',
-      '......._._....__..',
-      '#._..._____,,,,,,#',
-      '#.._.S_____,,,,,,#',
-      '#....__.__.,,,,,,#',
-      '#ẅ.ẈẄ__Ẏ._____...#',
-      '##################',
+      '⊆⊆⊆⊆⊆⊆⊆⊆⊆⊆⊆⊆⊆⊆⊆⊆⊆⊆',
+      '⊆⊄⊇ẋ⊅⊅⊅ẇ⊅⊅⊄⊅ẑ⊇⊅⊅ẅ⊆',
+      '⊆⊅⊄,,,,⊄⊅⊅⊄⊅⊅⊄⊅⊅⊅⊆',
+      '⊆⊅⊅,,,,⊄⊅⊄⊄RR⊄⊅⊄Ẕ⊆',
+      '⊆ẕ⊅⊄⊅⊄⊄⊅⊅⊅⊅⊅⊄⊅⊄⊄⊄⊆',
+      '⊅⊅⊅⊅⊅⊅⊅⊄⊅⊄⊅⊅⊅⊅⊄⊄⊅⊅',
+      '⊆⊅⊄⊅⊅⊅⊄⊄⊄⊄⊄,,,,,,⊆',
+      '⊆⊅⊅⊄⊅S⊄⊄⊄⊄⊄,,,,,,⊆',
+      '⊆⊅⊅⊅⊅⊄⊄⊅⊄⊄⊅,,,,,,⊆',
+      '⊆ẅ⊅ẈẄ⊄⊄Ẏ⊅⊄⊄⊄⊄⊄⊅⊅⊅⊆',
+      '⊆⊆⊆⊆⊆⊆⊆⊆⊆⊆⊆⊆⊆⊆⊆⊆⊆⊆',
     ]),
     warps: [
       { x: 17, y: 5, to: { map: 'viridian', x: 1, y: 8 } },
@@ -194365,6 +194716,6 @@ if (typeof Game !== 'undefined') Object.assign(Game.prototype, {
 });
 
 </script>
-<!-- contentHash:bcd99949746c39ce57cd6671e8aa982c821a229ddf4203d1e0bc090f1cc6760e -->
+<!-- contentHash:9002ef0441aa483d0592da8baa73d50e3a9994fe4e00dca7e7a46d00a491dbc7 -->
 </body>
 </html>
