@@ -1,0 +1,32 @@
+# Wave W-DIFF3: violetfloor — grey-violet sett street of Iris City
+# (Tower Stone & Maple kit). The sett family of Cragmoor's settfloor
+# in Iris's grey-violet (JOHTO_TOWN_STYLE violet ground #9a94a6,
+# KIT_VARIANTS violet roof tones), its own kind and speckle so the
+# two sett towns never share a street. Full-bleed, walkable street
+# material. Authored art for the W-DIFF identity layer
+# (muse-directive/W-DIFF-AUDIT.md Phase B: Iris = settfloor
+# (grey-violet), built as its own kind per the W-DIFF/W-DIFF2
+# one-kind-one-palette discipline).
+PIX tile-violetfloor 16 16
+cecacdaccacdecac
+aaabaaaaedaaaaaa
+aadaaaabaaaaadba
+dddddddddddddddd
+ccacdaccecacdaca
+aabaaaadaaaaabaa
+aaaaedaaaaabaaaa
+dddddddddddddddd
+caccecacdcacacda
+aaadaaaabaaadaaa
+baaaaedaaaaaaaeb
+dddddddddddddddd
+cdacacaccadcacac
+aaaabaaaaaadaaaa
+aadaaaaedbaaaaba
+dddddddddddddddd
+PAL
+a #655e7d violet-sett
+b #4a4460 violet-sett-dark
+c #7f7699 violet-sett-lit
+d #332e47 violet-mortar
+e #948cae violet-chip

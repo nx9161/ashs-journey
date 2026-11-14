@@ -797,6 +797,40 @@ T25_KIND_DEFS.forEach(([kind], i) => {
 export const T25_PROP_KINDS = T25_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
 export const T25_WALL_KINDS = T25_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
 export const T25_FLOOR_KINDS = T25_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
+// ---- Wave W-DIFF3 (Iris City identity retrofit): Tower Stone &
+// Maple ----
+// Two new kinds continuing the block at idx 588-589 (T24 ends at
+// 587; U+204C/U+204D, verified free in TILE_CHARS and unused by
+// every map row). Iris City is the last shared-kit member of the
+// Yamato endgame cluster (W-DIFF-AUDIT A.3: Cragmoor / Lastlight /
+// Iris, the tightest in the game); Cragmoor wears Basalt Sett &
+// Drake-Gable and Lastlight Marble Slab & Parapet, so Iris takes
+// the audit Phase B row verbatim: street 'settfloor (grey-violet)'
+// built as its own kind 'violetfloor' (one kind = one palette, the
+// W-DIFF/W-DIFF2 discipline — the sett family in Iris's grey-violet,
+// JOHTO_TOWN_STYLE violet ground #9a94a6), house shapes
+// 'tower-town stone (th)' built as 'towerroof' (dressed stone-slab
+// courses in the KIT_VARIANTS violet roof tones, swapped onto
+// house-stamp roof cells only — footprints, doors and warps
+// untouched, W-DIFF drakeroof precedent). The table's 'maple ring'
+// ground treatment rides the existing J3 'maple' prop kind (already
+// fully registered; Iris's shipped maples ring the Newleaf Tower's
+// north side and the ring is completed on its flanks). Authored
+// art: assets/sprites/pix/tiles/tile-violetfloor.pix and
+// tile-towerroof.pix.
+export const WD3_KIND_DEFS = [
+  ['violetfloor', 'floor'],
+  ['towerroof', 'wall'],
+];
+export const WD3_KIND_CHARS = {};
+WD3_KIND_DEFS.forEach(([kind], i) => {
+  const ch = String.fromCodePoint(0x1E00 + 588 + i);
+  WD3_KIND_CHARS[kind] = ch;
+  TILE_CHARS[ch] = kind;
+});
+export const WD3_PROP_KINDS = WD3_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
+export const WD3_WALL_KINDS = WD3_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
+export const WD3_FLOOR_KINDS = WD3_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
 export const SINNOH_TOWN_GROUND_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg);
 export const SINNOH_TOWN_GROUND2_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg2);
 // TX-3: the 8 gym exteriors by town (original type-accent motifs).

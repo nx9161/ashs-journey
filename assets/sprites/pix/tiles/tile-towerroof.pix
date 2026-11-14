@@ -1,0 +1,32 @@
+# Wave W-DIFF3: towerroof — dressed stone-slab roof of Iris City
+# (Tower Stone & Maple kit). Wide ashlar courses with a lit top
+# edge and a deep seam line, in the KIT_VARIANTS violet roof tones
+# (#8d84a0 / #5b5470 / #aba2bc) — the tower-town stone of
+# JOHTO_TOWN_STYLE violet's form line, drawn as masonry rather
+# than shingle so Iris's houses read as stone-built where
+# Cragmoor's read as drake-shingle and Eldergrove's as thatch.
+# Solid wall-class roof tile, swapped onto house-stamp roof cells
+# only (W-DIFF drakeroof precedent).
+PIX tile-towerroof 16 16
+ccaccacccaccaccc
+aaaaaaadaaaaaeaa
+aabaaaaadaaaaaaa
+dddddddddddddddd
+cccaccacccaccacc
+aaadaaaaaaadaaaa
+aaaaaaabaaaaaaaa
+dddddddddddddddd
+ccacccaccacccacc
+aaaaaaaadaaaabaa
+aaeaaaaaadaaaaaa
+dddddddddddddddd
+caccacccaccacccc
+aaaaadaaaaaadaaa
+aaaaaaaaaaabaaaa
+dddddddddddddddd
+PAL
+a #8d84a0 tower-stone
+b #5b5470 tower-stone-dark
+c #aba2bc tower-stone-lit
+d #463f58 tower-seam
+e #776d90 tower-stone-chip
