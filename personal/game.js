@@ -2255,6 +2255,43 @@ T24_KIND_DEFS.forEach(([kind], i) => {
 const T24_PROP_KINDS = T24_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
 const T24_WALL_KINDS = T24_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
 const T24_FLOOR_KINDS = T24_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
+// ---- Wave T25 (Meadowbrook build): sage stone roofs + the gym's
+// Balance Scales crown + the pond heron + reed banks ----
+// Four new kinds continuing the block at idx 588-591 (T24 ends at
+// 587; idx 576 stays the held merge buffer; U+204C-U+204F, verified
+// free in TILE_CHARS and unused by every map row). Owner ruling
+// 2026-11-13 (NO-SAME-KIT law): Meadowbrook's own kit is the
+// park-pond balanced-stone form its HOENN_TOWN_STYLE names —
+// 'sageroof' is a wall-class roof kind (staggered sage stone
+// courses, structurally unlike Eldergrove's thatch bands and
+// Rootlet's cedar shingle) swapped onto house-stamp + gym roof
+// cells only; 'scales' is a class 'prop' (solid object composited
+// over the ground it stands on, art.mjs resolver): the brass
+// balance crowning the gym roof's centre cell, its art fully
+// opaque with the sageroof shingle baked in (it stands ON the
+// roof). 'heron' is a class 'prop': the grey heron standing at
+// the east pond's NW bank, a designed resident of the approved
+// painting — no NPC record exists and none is invented. 'reedbank'
+// is a floor-class bank dressing swapped 1:1 from the ponds'
+// walkable 'F' flower-bank cells, so floor stays floor. Authored
+// art: assets/sprites/pix/tiles/tile-sageroof.pix,
+// tile-prop-scales.pix, tile-prop-heron.pix, tile-reedbank.pix
+// (Wave T25 register in WAVE-T25-MEADOWBROOK-PLAN.md, Kit).
+const T25_KIND_DEFS = [
+  ['sageroof', 'wall'],
+  ['scales', 'prop'],
+  ['heron', 'prop'],
+  ['reedbank', 'floor'],
+];
+const T25_KIND_CHARS = {};
+T25_KIND_DEFS.forEach(([kind], i) => {
+  const ch = String.fromCodePoint(0x1E00 + 588 + i);
+  T25_KIND_CHARS[kind] = ch;
+  TILE_CHARS[ch] = kind;
+});
+const T25_PROP_KINDS = T25_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
+const T25_WALL_KINDS = T25_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
+const T25_FLOOR_KINDS = T25_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
 const SINNOH_TOWN_GROUND_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg);
 const SINNOH_TOWN_GROUND2_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg2);
 // TX-3: the 8 gym exteriors by town (original type-accent motifs).
@@ -93577,6 +93614,78 @@ const ART = {
     "LggLgggLggLgLggg",
     "DgDgDgDgDgDgDgDg"
   ] },
+  "tile-sageroof": { w: 16, h: 16, pal: {"s":"#75997c","L":"#9ab89e","D":"#4a6b52","o":"#c9d6a8"}, rows: [
+    "LLLDLLLLDLLLDLLL",
+    "sssDssssDsssDsss",
+    "ssosDssosDsossDs",
+    "DDDDsDDDDDDsDDDD",
+    "LLDLLLDLLLLDLLLD",
+    "ssDsssoDsssDssDs",
+    "sssDsssDssosDsss",
+    "DDsDDDDDDsDDDDDD",
+    "LLLDLLLLDLLLDLLL",
+    "sssDssosDsssDsss",
+    "ssDsossDsssDssos",
+    "DDDDDDsDDDDsDDDD",
+    "LLDLLLDLLLLDLLLD",
+    "ssDsssDssosDsssD",
+    "sssDssosDsssDsss",
+    "DsDDDDsDDDDDDsDD"
+  ] },
+  "tile-prop-scales": { w: 16, h: 16, pal: {"s":"#75997c","D":"#4a6b52","B":"#d9a441","b":"#8a6420","W":"#f2d98c"}, rows: [
+    "ssDssssssDssssss",
+    "sssssDDDssssssss",
+    "sDsssDWDsssDsDss",
+    "ssDssBWBssDsssss",
+    "ssssBBBBBBBBssss",
+    "ssDsbBsssbBbDsss",
+    "ssssbssssbsBssss",
+    "sssDbsDssbsBDsss",
+    "ssssWbbWWbbWsDss",
+    "ssDssBWWWBssDsss",
+    "ssssDsBBBDssssss",
+    "sDsssssBssDsssss",
+    "sssssDDBBDssssDs",
+    "ssDssssBBssDssss",
+    "ssssDssDDsDsssss",
+    "sDsssssDDssDsDss"
+  ] },
+  "tile-prop-heron": { w: 16, h: 16, pal: {"m":"#168919","G":"#9aa7b1","g":"#66727d","L":"#d7dee5","B":"#232a2f","Y":"#e8b23f","W":"#cfeeda","b":"#7fb3c8"}, rows: [
+    "mmmmmmmmmmmmmmmm",
+    "mmmmmmBBYYmmmmmm",
+    "mmmmmBGGGYYmmmmm",
+    "mmmmLGmmmmmmmmmm",
+    "mmmLGmmmmmmmmmmm",
+    "mmmmGGmmmmmmmmmm",
+    "mmmmmGGGmmmmmmmm",
+    "mmmGGGGGGGmmmmmm",
+    "mmGLGGGGGgGmmmmm",
+    "mmLGGGGggggGmmmm",
+    "mmmGGGGGGgGmmmmm",
+    "mmmmGGGGGmmmmmmm",
+    "mmmmYmmYmmmmmmmm",
+    "mmmmYmmYmmmmmmmm",
+    "mmmmYmmYmmmmmmmm",
+    "mmmYYbWWbYYmmmmm"
+  ] },
+  "tile-reedbank": { w: 16, h: 16, pal: {"M":"#9a8a68","d":"#7d6f52","p":"#b3a37f","R":"#4a7a3a","r":"#69a34e","C":"#7a4a28"}, rows: [
+    "MMpMMMMMdMMpMMMM",
+    "MRCpMMRMdMMpMMCM",
+    "MRrMMMRrMMpMRrMM",
+    "MMpMdMMpMMdMMpMd",
+    "pMMMpMMMpMdMMpMM",
+    "MMdMMpMMMpMMMdMp",
+    "MMMpMMdMMpMpMMMd",
+    "dMMpMMMpMMMdMMpM",
+    "MMMpMdMMpMMMpMMd",
+    "MpMMMpMMdMMpMMMp",
+    "dMMpMMMpMdMMpMMd",
+    "MMdMMpMMMpMMdMMp",
+    "ddMMdMMpdMMdMMpd",
+    "dddMMdddddMMdddd",
+    "pddddpdddpddddpd",
+    "dddddddddddddddd"
+  ] },
 "tile-clockbed": {"w":16,"h":16,"pal":{"s":"#4a3626","d":"#38281c","p":"#e88bb0","v":"#9a7fd0","c":"#ffe9a8","g":"#f2c53d"},"rows":["ssssssssssssssss","sdsspssssdsssssv","ssssdsssssssdsss","sscssssgssssssss","ssdsssssdsspssss","sssssvsssssssdss","sssssssscsssssgs","sssdssssssdsssss","sssspsssssssssss","sssssdssssvsssss","sscsssssssssdssg","sdssssspssssssss","ssssvssdsssscsss","ssssssssgsssssds","ssssdspsssssssss","sssssssssdsvssss"]},
   "tile-prop-mapdesk": { w: 16, h: 16, pal: {"B":"#b99b74","D":"#726648","L":"#d7bd97","A":"#916a47","C":"#6a5c47"}, rows: [
     "................",
@@ -113246,6 +113355,10 @@ for (const k of T23_PROP_KINDS) TILE_ART[k] = 'tile-prop-' + k;
 for (const k of T24_PROP_KINDS) TILE_ART[k] = 'tile-prop-' + k;
 for (const k of T24_WALL_KINDS) TILE_ART[k] = 'tile-' + k;
 for (const k of T24_FLOOR_KINDS) TILE_ART[k] = 'tile-' + k;
+// Wave T25: Meadowbrook's scales + heron props and sageroof/reedbank kit kinds.
+for (const k of T25_PROP_KINDS) TILE_ART[k] = 'tile-prop-' + k;
+for (const k of T25_WALL_KINDS) TILE_ART[k] = 'tile-' + k;
+for (const k of T25_FLOOR_KINDS) TILE_ART[k] = 'tile-' + k;
 
 // Premium+ W6 (TX-3/PL-1): door-open frames, authored in TX-3 for every
 // door kind. The warp-fade engine that plays them lands in W7 — W6
@@ -114103,7 +114216,9 @@ const PROP_KINDS = new Set(['counter', 'healmachine', 'pcdesk', 'bed', 'table',
   // Wave T23: Rootlet's notched fence post composites too.
   ...T23_PROP_KINDS,
   // Wave T24: Eldergrove's Flower Clock composites too.
-  ...T24_PROP_KINDS]);
+  ...T24_PROP_KINDS,
+  // Wave T25: Meadowbrook's scales crown + pond heron composite too.
+  ...T25_PROP_KINDS]);
 function groundFamilyOf(kind) {
   // Perfection Pass Stage 2 Gate 2 (G2): beach kinds stand on tropgrass,
   // psand kinds stand on path (props composite over the parent ground).
@@ -114990,6 +115105,11 @@ function resolveTileLayers(cache, kind, x, y, kindAt, t, phase, mapId) {
     case 'notchpost':
     // Wave T24: the Flower Clock composites over its flower bed too.
     case 'flowerclock':
+    // Wave T25: the gym's scales crown composites over its arch too
+    // (its art is fully opaque — the sage stone is baked in); the
+    // pond heron composites over its meadow bank the same way.
+    case 'scales':
+    case 'heron':
     // Wave T17: the radio mast composites over its compound grass too.
     case 'radiomast': {
       // Object tiles carry transparent surrounds (Wave 1): lay the ground
@@ -121789,6 +121909,11 @@ const WALKABLE = new Set(['.', ',', 'D', 'E', 'C', 'F', 'J', 'K', '1', '2', 'V',
   // ground — the Flower Clock's petal-soil bed in Eldergrove, swapped
   // 1:1 from walkable 'F' flower cells, so floor stays floor.
   ...[587]
+    .map((i) => String.fromCodePoint(0x1E00 + i)),
+  // Wave T25: the reedbank char (U+1E00+591, tiles.mjs T25_KIND_DEFS)
+  // is walkable ground — Meadowbrook's dressed pond banks, swapped
+  // 1:1 from walkable 'F' flower cells, so floor stays floor.
+  ...[591]
     .map((i) => String.fromCodePoint(0x1E00 + i))]);
 
 // Trainer definitions for the slice.
@@ -145151,23 +145276,23 @@ const MAPS7 = {
     "music": "viridian-theme",
     "weather": "clear",
     "rows": [
-      "἞἞἞἟἞἞἞἞἞἞἟἞἞἞ἝἝ἞἞἞἟἞἞἞἞἞἞἟἞἞἞",
-      "἞ἜἝἝἝἝἝἝἝἝἝἝἝἝἝἝἝἝἝἝἝἝἝἝἝἝἝἝἜ἞",
-      "἞ἜἝjklmἝἜdeefἝἝἝἠἠἠἝnἢἢἢἜἜἜἝẄ἞",
-      "἞ἜἝAJKAἝἜP12PἝἝἝVYUἝἝἣsἣἜἜoἝἝ἞",
-      "἞ἜἝἝἝἝἝἝἝἝἝἝἝἝἝἝἝἝἝἝἝἝἝἝ἟ἜἜἜἝ἞",
-      "἞ἜSἝἝἝἝἝἝἝἝἝἝἝἝἝἝἝἝἝἝἜἜἝἝἝἝἝἝ἞",
-      "἞ἜἝἝἝἝἝἝἝἝἝἝἝἝἝἝἝἝἝἝἜἜἜἜẄẅἜἜἝ἞",
-      "἞ἜἝἝἜἜἜἜἜnἝἝἜἜἜἜἝἜἜἜἝἜἜἜἜἜἜἜἝ἞",
-      "ἜἜἝἝἝἝἝἝἝἝἝἝἝἝἝἝἝἝἝἝἝἝἝἝἝἝἝἝἝἝ",
-      "ἜἜἝἝἝἝἝἝἝἝἝἝἝἝἝἝἝἝἝἝἝἝἝἝἝἝἝἝἝἝ",
-      "἞ἜoἝἝἜἜἜἜἜἝἝἜἜἜἜἝἜἝἝἝἜἜἜἜnἜἜἜ἞",
-      "἞ἜnẄFFFFFFἝἝἝἝἝἝSἝἝnἜFFFFFFἜἜ἞",
-      "἞ἜἜἜ~~~~~~ἝἜ.....ἝἜἜἜ~~~~~~ἜἜ἞",
-      "἞ἜἜἜ~~~~~~Ἕ.,,,,,.἟ἜἜ~~~~~~ἜἜ἞",
-      "἞ἜἜἜ~~~~~~o.,,,,,.ἜἜἜ~~~~~~ἜἜ἞",
-      "἞ἜἜἜ~~~~~~ἜἝ..Ἕ..ẄἜἜἜ~~~~~~ἜἜ἞",
-      "἞ἜἜἜἜἜẓἜἜἜἜἜoἝἝἝoἜἜἜἜἜἜἜἜἜἜἜἜ἞",
+      "἞἞἞἟἞἞἞἞἞἞἟἞἞἞..἞἞἞἟἞἞἞἞἟἞἞἞἞἞",
+      "἞ἜἜἜἜἜἜἜἜἜἜἜἜS..ἜἜἜἜἜἜἜἜἜἜἜἜἜ἞",
+      "἞ἜἜjklmἜἜdeefἜ..⁌⁍⁌Ἔn⁌⁌⁌ἜἜἜἜἜ἞",
+      "἞ἜἜAJKAἜἜP12PἜ..VYUἜἜἣsἣẄἜoἜἜ἞",
+      "἞............................἞",
+      "἞ἜSἜ.ἜἜἜἜS.ἜἜSἜἜ.ἜἜἜ.SἜἜἜἜἜἜἜ἞",
+      "἞⁌⁌⁌.ἜἜἜἜἜ.ἜἜἜἜἜ.ἜἜἜ.ἜἜἜẄẅ⁌⁌⁌἞",
+      "἞ἣsἣ.SἜἜἜn.ἜἜἜἜἜ.ἜἜἜ.ἜἜἜἜSἣsἣ἞",
+      "Ἔ.....ἜἜἜἜἜἜἜἜἜἜ.ἜἜἜ..........",
+      "ἜἜ.ἜἜἜἜἜἜἜἜἜἜἜἜἜ.ἜἜἜ..........",
+      "἞ἜoἜἜἜἜἜἜἜἜἜἜἜἜἜ.....ἜἜἜἜnἜἜἜ἞",
+      "἞ἜnἜ⁏⁏⁏⁏⁏⁏ἜἜSἜἜἜS.ἜnἜ⁏⁏⁏⁏⁏⁏ἜἜ἞",
+      "἞ἜἜἜ~~~~~~Ẅ.......ἜἜ⁎~~~~~~ἜἜ἞",
+      "἞ἜἜἜ~~~~~~..,,,,,.἟ἜἜ~~~~~~ἜἜ἞",
+      "἞ἜἜἜ~~~~~~o.,,,,,..ἜἜ~~~~~~ἜἜ἞",
+      "἞ἜἜἜ~~~~~~Ἔ......ẄἜἜἜ~~~~~~ἜἜ἞",
+      "἞ἜἜἜἜἜẓἜἜἜἜἜoἜSἜoἜἜἜἜἜἜἜἜἜἜἜἜ἞",
       "἞἞἞Ἔ἞἞἞἞἞἞἟἞἞἞἞἞἞἟἞἞἞἞἞἞἟἞἞἞἞἞",
     ],
     "warps": [
@@ -145186,16 +145311,20 @@ const MAPS7 = {
     "signs": [
       {"x": 2, "y": 5, "text": "MEADOWBROOK CITY — A pleasant place that moves at a balanced pace. The gym keeps the same hours as the ponds: always."},
       {"x": 16, "y": 11, "text": "MEADOWBROOK PONDS — Two ponds, one on each side of the road, kept level to the drop. Nobody admits to checking. Everybody checks."},
-      {"x": 8, "y": 2, "text": "MEADOWBROOK CITY — North: ROUTE 104 · East: ROUTE 102."},
-      {"x": 26, "y": 4, "text": "MEADOWBROOK CITY — North: ROUTE 104 · East: ROUTE 102."},
-      {"x": 11, "y": 16, "text": "MEADOWBROOK CITY — North: ROUTE 104 · East: ROUTE 102."},
-      {"x": 19, "y": 1, "text": "MEADOWBROOK CITY — North: ROUTE 104 · East: ROUTE 102."},
+      {"x": 13, "y": 1, "text": "MEADOWBROOK CITY — North: ROUTE 104 · East: ROUTE 102."},
+      {"x": 13, "y": 5, "text": "MEADOWBROOK CITY — North: ROUTE 104 · East: ROUTE 102."},
+      {"x": 25, "y": 7, "text": "MEADOWBROOK CITY — North: ROUTE 104 · East: ROUTE 102."},
+      {"x": 14, "y": 16, "text": "MEADOWBROOK CITY — North: ROUTE 104 · East: ROUTE 102."},
+      {"x": 21, "y": 5, "text": "MEADOWBROOK CITY — North: ROUTE 104 · East: ROUTE 102."},
+      {"x": 12, "y": 11, "text": "MEADOWBROOK CITY — North: ROUTE 104 · East: ROUTE 102."},
+      {"x": 9, "y": 5, "text": "MEADOWBROOK CITY — North: ROUTE 104 · East: ROUTE 102."},
+      {"x": 5, "y": 7, "text": "MEADOWBROOK CITY — North: ROUTE 104 · East: ROUTE 102."}
     ],
     "npcs": [
       {"x": 11, "y": 6, "name": "EMIL’S NEIGHBOR UNA", "art": "lady", "skin": "#d8a878", "shirt": "#7a4a8a", "pants": "#2a2a3a", "hair": "#c0c0c0", "dialogue": ["A shy boy from this street went out with a borrowed Kin and came back standing taller.", "The gym leader's family keeps the ponds. Balance is a household habit here."]},
       {"x": 20, "y": 6, "name": "BALANCE KEEPER ORIN", "art": "gent", "skin": "#e8b888", "shirt": "#3a6ac0", "pants": "#2a3a4a", "hair": "#1a1a1a", "dialogue": ["I trim the pond reeds to the same height on both banks. It matters. It does.", "Route 104's woods begin north of town. Mind the DOZSLOTH — they mind nothing."]},
       {"x": 10, "y": 14, "name": "FISHER LIO", "art": "fisher", "skin": "#c89878", "shirt": "#2a7a6a", "pants": "#3a3a4a", "hair": "#7a4a1a", "dialogue": ["Pond fishing is patience practice. The gym is the exam.", "STRIDLET walk the surface here like it owes them money."]},
-      {"x": 3, "y": 5, "name": "MART CLERK", "art": "clerk", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#4a3a2a", "dialogue": ["Meadowbrook Mart — woods-ready stock. Bug spray is a state of mind; we sell the other kind too."], "mart": {"stock": ["pokeball", "greatball", "potion", "superpotion", "antidote", "awakening"]}},
+      {"x": 9, "y": 4, "name": "MART CLERK", "art": "clerk", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#4a3a2a", "dialogue": ["Meadowbrook Mart — woods-ready stock. Bug spray is a state of mind; we sell the other kind too."], "mart": {"stock": ["pokeball", "greatball", "potion", "superpotion", "antidote", "awakening"]}},
     ],
     "encounters": {"rate": 0.12, "table": [{"species": "zigzagoon", "min": 203, "max": 207, "weight": 24}, {"species": "poochyena", "min": 203, "max": 207, "weight": 20}, {"species": "wurmple", "min": 203, "max": 207, "weight": 16}, {"species": "taillow", "min": 204, "max": 208, "weight": 16}, {"species": "lotad", "min": 203, "max": 207, "weight": 12}, {"species": "surskit", "min": 204, "max": 208, "weight": 12}], "water": [{"species": "tentacool", "min": 202, "max": 210, "weight": 28}, {"species": "magikarp", "min": 202, "max": 208, "weight": 24}, {"species": "wingull", "min": 203, "max": 210, "weight": 20}, {"species": "pelipper", "min": 206, "max": 212, "weight": 8}], "waterRate": 0.08},
     "items": [],
