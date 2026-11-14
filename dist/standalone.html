@@ -3901,6 +3901,49 @@ T48_KIND_DEFS.forEach(([kind], i) => {
 const T48_PROP_KINDS = T48_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
 const T48_WALL_KINDS = T48_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
 const T48_FLOOR_KINDS = T48_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
+// Wave T49: Bridgeport City's own kit from birth — 'Ring Quay &
+// Rivet Iron': the ringfloor (large blue-grey harbour flags with
+// a dark iron mooring ring inlaid in the flags — the town's
+// registered street), the rivetroof (riveted pale iron plate
+// courses carrying a bold badge roundel, worn only by the
+// shipped Gym stamp's tr roof cells, so the Gym + Library
+// tr-roof share breaks and the town's unmarked gym hall — the
+// Backstory-Sync-Audit's Bridgeport flag — is marked by its
+// roof emblem), the trussfloor (a dark iron truss deck, worn
+// only by the shipped canal span's four boardwalk cells at
+// rows 8-9: the town sign's 'one iron bridge' made deck; also
+// registered street material for canalave), and two props: the
+// mooringpost (an iron mooring bollard with a rope coil — the
+// canal head and the east shore) and the harbourbell (the brass
+// ferry bell on its iron post, at the pier's land side).
+// Indices 864-868 per the Director's index ruling (main's kinds
+// run 594-636 + 645-648 + 660-662 + 672-675 + 684-687 + 696-699 +
+// 708-711 + 720-724 + 732-736 + 744-748 + 756-759 (T40) +
+// 768-771 (T41) + 780-783 (T42) + 792-795 (T43) + 804-807 (T44) +
+// 816-819 (T45) + 828-831 (T46) + 840-843 (T47); the parallel
+// T48 claim holds 852-855; 808-815 + 820-827 + 832-839 +
+// 844-851 + 856-863 stay empty), verified free against
+// origin/main, TILE_CHARS and every map row. Authored art:
+// assets/sprites/pix/tiles/tile-ringfloor.pix,
+// tile-rivetroof.pix, tile-trussfloor.pix,
+// tile-prop-mooringpost.pix, tile-prop-harbourbell.pix.
+// (WAVE-T49-BRIDGEPORT-PLAN.md.)
+const T49_KIND_DEFS = [
+  ['ringfloor', 'floor'],
+  ['rivetroof', 'wall'],
+  ['mooringpost', 'prop'],
+  ['harbourbell', 'prop'],
+  ['trussfloor', 'floor'],
+];
+const T49_KIND_CHARS = {};
+T49_KIND_DEFS.forEach(([kind], i) => {
+  const ch = String.fromCodePoint(0x1E00 + 864 + i);
+  T49_KIND_CHARS[kind] = ch;
+  TILE_CHARS[ch] = kind;
+});
+const T49_PROP_KINDS = T49_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
+const T49_WALL_KINDS = T49_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
+const T49_FLOOR_KINDS = T49_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
 const SINNOH_TOWN_GROUND_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg);
 const SINNOH_TOWN_GROUND2_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg2);
 // TX-3: the 8 gym exteriors by town (original type-accent motifs).
@@ -111836,6 +111879,96 @@ const ART = {
     "ggGGggggggggGGgg",
     "gggggggggggggggg"
   ] },
+  "tile-ringfloor": { w: 16, h: 16, pal: {"a":"#71808e","l":"#8b99a6","d":"#5a6773","s":"#46525e","i":"#525f6b","r":"#333b44","R":"#59636e"}, rows: [
+    "lllllllsllllllls",
+    "daaaaaasdaaaaaas",
+    "ddaRrRasdaaaaaas",
+    "daRiiiRsdaaaaaas",
+    "dariiirsdaaaaaas",
+    "daRiiiRsdaaaaaas",
+    "daaRrRasdaaaaaas",
+    "ssssssssssssssss",
+    "lllllllsllllllls",
+    "daaaaaasdaaaaaas",
+    "daaaadasdaaaaaas",
+    "daaaaaasdaaaaaas",
+    "daaaaadsdaaaaaas",
+    "daaaaaasdaaaaarr",
+    "daaaaaasdaaaarar",
+    "sssssssssssssrrr"
+  ] },
+  "tile-rivetroof": { w: 16, h: 16, pal: {"a":"#a7b4c0","l":"#c3cedb","d":"#8794a1","s":"#626e7a","r":"#525d68","R":"#4a545f","m":"#8b98a5","C":"#e8eef5"}, rows: [
+    "llllllllllllllll",
+    "araaaradaraaarad",
+    "aaaaaaadaaaaaaad",
+    "ssssssssssssssss",
+    "llllllllllllllll",
+    "aradaraRRRadaraa",
+    "aaadaaRmmmRdaaaa",
+    "sssssRmmCmmRssss",
+    "lllllRmCCCmRllll",
+    "araaaRmmCmmRarad",
+    "aaaaaaRmmmRaaaad",
+    "sssssssRRRssssss",
+    "llllllllllllllll",
+    "aradaraaaradaraa",
+    "aaadaaaaaaadaaaa",
+    "ssssssssssssssss"
+  ] },
+  "tile-trussfloor": { w: 16, h: 16, pal: {"a":"#59626d","d":"#39414a","s":"#272d34","t":"#2e343b","l":"#7e8894","r":"#aeb9c4"}, rows: [
+    "llllllllllllllll",
+    "aaasaaasaaasaaas",
+    "aaasaaasaaasaaas",
+    "trtttrtttrtttrtt",
+    "tttttttttttttttt",
+    "aaattaasaaattaas",
+    "aattaaasaattaaas",
+    "attsdaasattsaaas",
+    "ttasaaasttasaaas",
+    "taasaaattaasaaat",
+    "aaasaattadasaatt",
+    "tttttttttttttttt",
+    "trtttrtttrtttrtt",
+    "aaasaaasaaasaads",
+    "aaasaaasdaasaaas",
+    "llllllllllllllll"
+  ] },
+  "tile-prop-mooringpost": { w: 16, h: 16, pal: {"g":"#0d8420","i":"#3a4149","l":"#6a7480","L":"#8b96a1","r":"#c9a86a","R":"#a8874e","s":"#0a6b1c"}, rows: [
+    "gggggggggggggggg",
+    "gggggggggggggggg",
+    "gggggggggggggggg",
+    "gggggggggggggggg",
+    "gggggggLLggggggg",
+    "ggggggLiiLgggggg",
+    "ggggggiiiiiggggg",
+    "ggggggiliigggggg",
+    "ggggggiiiigggggg",
+    "gggggiiiiigggggg",
+    "gggggrrrrggggggg",
+    "gggggrRRrrgggggg",
+    "gggggssssggggggg",
+    "gggggggggggggggg",
+    "gggggggggggggggg",
+    "gggggggggggggggg"
+  ] },
+  "tile-prop-harbourbell": { w: 16, h: 16, pal: {"g":"#0d8420","i":"#3a4149","b":"#a87c28","B":"#d8a83c","s":"#5a6773"}, rows: [
+    "gggggggggggggggg",
+    "gggggggggggggggg",
+    "gggggiiiiiiigggg",
+    "ggggggiigiiggggg",
+    "gggggggBBggggggg",
+    "ggggggBbbBgggggg",
+    "ggggggBbbBgggggg",
+    "gggggggBBggggggg",
+    "ggggggibiggggggg",
+    "gggggggiiggggggg",
+    "gggggggiiigggggg",
+    "gggggggiiigggggg",
+    "ggggggissigggggg",
+    "ggggggsssssggggg",
+    "gggggggggggggggg",
+    "gggggggggggggggg"
+  ] },
   "partner-back-bob": { base: "partner-back", w: 64, h: 64, pal: {}, shiftY: 2 },
   "partner-front-bob": { base: "partner-front", w: 64, h: 64, pal: {}, shiftY: 2 },
   "abomasnow-back-bob": { base: "abomasnow-back", w: 64, h: 64, pal: {}, shiftY: 2 },
@@ -117214,6 +117347,9 @@ for (const k of T47_FLOOR_KINDS) TILE_ART[k] = 'tile-' + k;
 for (const k of T48_PROP_KINDS) TILE_ART[k] = 'tile-prop-' + k;
 for (const k of T48_WALL_KINDS) TILE_ART[k] = 'tile-' + k;
 for (const k of T48_FLOOR_KINDS) TILE_ART[k] = 'tile-' + k;
+for (const k of T49_PROP_KINDS) TILE_ART[k] = 'tile-prop-' + k;
+for (const k of T49_WALL_KINDS) TILE_ART[k] = 'tile-' + k;
+for (const k of T49_FLOOR_KINDS) TILE_ART[k] = 'tile-' + k;
 // Premium+ W6 (TX-3/PL-1): door-open frames, authored in TX-3 for every
 // door kind. The warp-fade engine that plays them lands in W7 — W6
 // wires the frames (this registry + cache.doorOpen + doorOpenCanvas)
@@ -119091,6 +119227,11 @@ function resolveTileLayers(cache, kind, x, y, kindAt, t, phase, mapId) {
     // arts are fully opaque — the town grass is baked in).
     case 'starcrate':
     case 'meteorcore':
+    // Wave T49: Bridgeport's mooring bollards and its ferry bell
+    // composite over their grass the same way (both arts are
+    // fully opaque — the town grass is baked in).
+    case 'mooringpost':
+    case 'harbourbell':
     // Wave T17: the radio mast composites over its compound grass too.
     case 'radiomast': {
       // Object tiles carry transparent surrounds (Wave 1): lay the ground
@@ -126182,6 +126323,25 @@ const WALKABLE = new Set(['.', ',', 'D', 'E', 'C', 'F', 'J', 'K', '1', '2', 'V',
   // 816-819 + 828-831; the parallel T47 claim holds 840-843;
   // gaps stay empty.)
   ...[852]
+    .map((i) => String.fromCodePoint(0x1E00 + i)),
+  // Wave T49: the ringfloor char (U+1E00+864, tiles.mjs
+  // T49_KIND_DEFS) is walkable street material — Bridgeport
+  // City's ring-inset quay flags, swapped onto the town's tg2
+  // street cells (the front street, the library lane, the
+  // bridge avenue — all shipped walkable as tg2), so floor
+  // stays floor. (Indices 864-868 per the Director's index
+  // ruling: main's kinds run 594-636 + 645-648 + 660-662 +
+  // 672-675 + 684-687 + 696-699 + 708-711 + 720-724 +
+  // 732-736 + 744-748 + 756-759 + 768-771 + 780-783 +
+  // 792-795 + 804-807 + 816-819 + 828-831 + 840-843; the
+  // parallel T48 claim holds 852-855; gaps stay empty.)
+  ...[864]
+    .map((i) => String.fromCodePoint(0x1E00 + i)),
+  // Wave T49: the trussfloor char (U+1E00+868, tiles.mjs
+  // T49_KIND_DEFS) is walkable street material — the iron
+  // truss deck of Bridgeport's one bridge, swapped onto the
+  // shipped span's four boardwalk cells at rows 8-9.
+  ...[868]
     .map((i) => String.fromCodePoint(0x1E00 + i))]);
 
 // Trainer definitions for the slice.
@@ -155735,23 +155895,24 @@ const MAPS9 = {
     "weather": "clear",
     "rows": [
       "ῦῦῦῧῦῦῦῦῦῦῧῦῦῦῦῦῦῧῦῦῦῦῦῦῧῦῦῦῦῦ",
-      "ῦῤῤῤῤῤῤῤῤῤῤῤῤῤῤῤῤῤῤῤῤ~~ῤῤῤῤῤῤῦ",
-      "ῦῤῤjklmῤῤdeefῧῤῨῨῨῨῤῤ~~Ὺẇῤῤῤῤῦ",
+      "ῦῤῤῤῤῤῤῤῤῤῤῤῤῤῤῤῤῤῤῤⅢ~ῤῤῤῤῤῤῤῦ",
+      "ῦῤῤjklmῤῤdeefῧῤⅡⅡⅡⅡῤῤ~ῤῪSẇῤῤῤῦ",
       "ῦῤῤAJKAῤῤP12PῧῤUVYUῤῤ~sΎῤῤῤῤῤῦ",
-      "ῦSῥῥῥῥῥῥῥῥῥῥῥῥῥῥῥῥῥῥῤ~ῥῥṃῤῤῤῤῦ",
-      "ῦῥῥῥῥῥῥῥῥῥῥῥῥῥῥῥῥῥῥῥῤ~~ῥῥῥῥῥῥῦ",
-      "ῦῥᾚῥῥῤῥῥῥῥῥῥῥῥῥῥῥῥῤῥῤ~~ῥῤῤῤῤῥῦ",
-      "ῦῥῤῥῥῤῥῥῤῥṃῥῥῥῥῤᾚῤῥῥᾚ~~ῥῥῤῤῤῥῦ",
-      "ῧῥῥῥῥῥῥῥῥῥῥῥῥῥῥῥῥῥῥῥῥἇἇῥῥῥῥῥῥῥ",
-      "ῥῥῥῥῥῥῥῥῥῥῥῥῥῥῥῥῥῥῥῥῥἇἇῥῥῥῥῥῥῥ",
-      "ῦῥῥῥῥṃῥῥẇῧῥῤῥῥῥῤῤῤῥῥῥ~~ᾚῤῤῤῤoῦ",
-      "ῦῥᾕῨῨῨῨᾕᾕᾕᾕᾕῥῥῥῥῥῥῥῥῥ~~ῧῤῤẇῤῤῦ",
-      "ῦῥᾕῩsῩῩᾕᾕᾕSᾕῥῥῥẆῤῤῥῥῥ~~ῤῤῤῧῤῤῦ",
-      "ῦῥᾕῥῥῥῥᾕᾕᾕᾕᾕἇἇἇἇῥῥῥῥῥ~~ῤῤῤῤῤῤῦ",
+      "ῦSⅠⅠⅠⅠⅠⅠⅠⅠⅠⅠⅠⅠⅠⅠⅠⅠⅠⅠⅠ~ⅠⅠἇῤῤῤῤῦ",
+      "ῦῤῤSⅠῤῤῤῤῤῤῤῤῤῤῤῤῤⅠSῤ~~Ⅰṃῤῤῤῤῦ",
+      "ῦῤᾚῤⅠῤῤῤῤῤῤῤῤῤῤῤῤῤⅠῤῤ~~ⅠSῪῪῪῤῦ",
+      "ῦῤῤῤⅠῤῤῤῤῤṃῤῤῤῤῤᾚῤⅠῤᾚ~~ⅠῤΎsΎῤῦ",
+      "SῤῤῤⅠῤῤῤῤῤῤῤῤῤῤῤῤῤⅠⅠⅠⅤⅤⅠⅠⅠⅠⅠⅠⅠ",
+      "ῤῤῤῤⅠῤῤῤῤῤῤῤῤῤῤῤῤῤῤⅠⅠⅤⅤⅠⅠⅠⅠⅠⅠⅠ",
+      "ῦⅠⅠⅠⅠṃⅠⅠẇῧῤῤῤῤῤῤῪῪῪῤῤ~~ᾚῤⅢῤῤoῦ",
+      "ῦⅠᾕῨῨῨῨᾕᾕᾕᾕᾕῤῤῤῤΎsΎSῤ~~ῧῤῤẇῤῤῦ",
+      "ῦⅠᾕῩsῩῩᾕᾕᾕSᾕⅠⅠⅠẆⅣῤῤῤῤ~~ῤῤῤῧῤῤῦ",
+      "ῦⅠᾕⅠⅠⅠⅠᾕᾕᾕᾕᾕἇἇἇἇῤῤῤῤῤ~~ῤῤῤῤῤῤῦ",
       "ῦ~~~~~~~~~~~ἇἇἇἇ~~~~ῤ~~ῤῤῤᾚῤῤῦ",
       "ῦ~~~~~~~~~~~ἇἇἇἇ~~~~ῤ~~ῤῤῤῤῤῤῦ",
       "ῦ~~~~~~~~~~~ἇἇἇἇ~~~~ῤ~~ṃῤῤῤῤῤῦ",
       "ῦῦῦῤῦῦῦῦῦῦῤῦῦῦῦῦῦῤῦῦῦῦῦῦῤῦῦῦῦῦ"
+
     ],
     "warps": [
       {"x": 4, "y": 3, "to": {"map": "center", "x": 4, "y": 4}, "via": {"map": "canalave", "x": 4, "y": 4}},
@@ -155770,10 +155931,13 @@ const MAPS9 = {
       {"x": 10, "y": 12, "text": "BRIDGEPORT HARBOUR — The ferry captain keeps the long crossings at the pier. The library keeps everything else."},
       {"x": 24, "y": 6, "text": "BRIDGEPORT CITY — East: ROUTE 218."},
       {"x": 19, "y": 11, "text": "BRIDGEPORT CITY — East: ROUTE 218."},
-      {"x": 0, "y": 8, "text": "BRIDGEPORT CITY — East: ROUTE 218."}
+      {"x": 0, "y": 8, "text": "BRIDGEPORT CITY — East: ROUTE 218."},
+      {"x": 24, "y": 2, "text": "HARBOUR INN — the best room has been kept locked these fifty years. Sailors' dreams are local; mind them."},
+      {"x": 3, "y": 5, "text": "BRIDGEPORT CITY — East: ROUTE 218."},
+      {"x": 19, "y": 5, "text": "BRIDGEPORT CITY — East: ROUTE 218."}
     ],
     "npcs": [
-      {"x": 3, "y": 5, "name": "MART CLERK", "art": "clerk", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#4a3a2a", "dialogue": ["Bridgeport City Mart — stocked for the road ahead."], "mart": {"stock": ["ultraball", "hyperpotion", "maxpotion", "fullheal", "revive", "escaperope"]}},
+      {"x": 9, "y": 4, "name": "MART CLERK", "art": "clerk", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#4a3a2a", "dialogue": ["Bridgeport City Mart — stocked for the road ahead."], "mart": {"stock": ["ultraball", "hyperpotion", "maxpotion", "fullheal", "revive", "escaperope"]}},
       {"x": 13, "y": 13, "name": "CAPT WESTWIND", "art": "sailor", "skin": "#e8b888", "shirt": "#3a6ac0", "pants": "#2a3a4a", "hair": "#1a1a1a", "dialogue": ["The Bridgeport run is the long crossing home — Arcport, straight across the weather.", "Once this port knows you, the whole ferry network does. Step aboard when you're ready."], "ferry": "vermilion", "ferryArc": "sinnoh"},
       {"x": 18, "y": 6, "name": "LIBRARIAN MIRA", "art": "lady", "skin": "#d8a878", "shirt": "#7a4a8a", "pants": "#2a2a3a", "hair": "#c0c0c0", "dialogue": ["Our library holds Borea's oldest stories, including the ones about this harbour's first bridge.", "Doran's gym is all iron and certainty. The bridge approves; it is also iron."]},
       {"x": 6, "y": 10, "name": "SAILOR KETT", "art": "sailor", "skin": "#c89878", "shirt": "#2a7a6a", "pants": "#3a3a4a", "hair": "#7a4a1a", "dialogue": ["Foundry Isle boats leave from the north pier when the weather allows. The weather is a negotiator.", "East causeway runs to Revelry over the water. Gulls audit every crossing."]},
@@ -190442,6 +190606,6 @@ if (typeof Game !== 'undefined') Object.assign(Game.prototype, {
 });
 
 </script>
-<!-- contentHash:79f0f55e7682a04e19175e34b97f0ba4bcf7130abb90c31de3df9d39a580de42 -->
+<!-- contentHash:cedd49c9c478193a5b17eb73a50f662902708c89b58004987360a63256921324 -->
 </body>
 </html>
