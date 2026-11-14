@@ -1,0 +1,24 @@
+# Wave W17-B (Route 7): fence run — three posts and two rails of weathered fence on fence turf (fully opaque, ground baked in). Name avoids the shipped gatepost dressing kind.
+PIX tile-prop-fencepost 16 16
+aaaaaaaaabbaabaa
+baaaaaaaaabaaaaa
+aaaaaabaaabaaaaa
+aaaaaaabaaaabaab
+aaaaaaaabaaaaaba
+aadaaaadaaaadaba
+rrdrrrrdrrrrdrrr
+aawaabawaabbwaaa
+aawaaaawaabawaaa
+aawaaaawbaaawaaa
+rrdrrrrdrrrrdrrr
+aawaaaawaaaawaaa
+bawaaaawaaaawaaa
+abbaabaaaaaaaaab
+aaaaaaaaabaaaaaa
+baabaabaabaaaaba
+PAL
+a #79ad63
+b #6da257
+w #8a6a44
+r #a07c50
+d #6e5233

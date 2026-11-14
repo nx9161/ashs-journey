@@ -1,0 +1,24 @@
+# Wave W17-B (Route 10): pylon base — the steel lattice foot of a line pylon, cross-braced with copper bolts, on conduct turf (fully opaque, ground baked in).
+PIX tile-prop-pylonbase 16 16
+aaaaaaaaabaaaaaa
+aaaaaaaaaaabaaaa
+aaaaaaaabaaaaaab
+baaacsssssscaaaa
+abbbssaaaassaabb
+aaaasbsaasasbaab
+aaaasaassaasaaaa
+aaaasaassaasaaaa
+aaaasasaasbsaaaa
+aaaassaaaassaaaa
+babassaaaassaaaa
+aaaasasaasasaabb
+aaaacsssssscaaaa
+baaddddddddddaab
+aaaaaaaaaaaaaabb
+aabaaaabaaaaaaaa
+PAL
+a #7d8a52
+b #6d7a46
+s #8b93a0
+c #c47f4a
+d #59663a

@@ -1,0 +1,24 @@
+# Wave W17-B (Route 9): field boulder — a large warm-grey boulder cluster on boulder turf (fully opaque, ground baked in).
+PIX tile-prop-fieldboulder 16 16
+abaabaaaaaaaabaa
+sabaaaabaabaaaaa
+aabaaaabaaabbbaa
+aaabbababaasaabb
+aaaaaaaaaaaaaaaa
+abasaaaaabaaabbb
+abaabaaaaaaaaaaa
+aaaabbaaaaaaasaa
+aasaallllaababaa
+aabssslssssssaaa
+aabsssslssssssaa
+aaadssssssssdaaa
+aaaadssssssdaabb
+aaaaaaaaaaabaaaa
+aaabaaaabaaabaaa
+abbaaaabaaaaabaa
+PAL
+a #8a8a5e
+b #7a7a50
+s #a39a86
+l #c0b8a2
+d #7d7460

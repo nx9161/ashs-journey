@@ -1,0 +1,25 @@
+# Wave W17-B (Route 6): pond pads — lily pads with one pink blossom at the pond shore on pond turf (fully opaque, ground baked in). Name avoids Fenland’s registered lilypad kind.
+PIX tile-prop-pondpad 16 16
+aabaaaaabaaaaaaa
+aaaaaaaaaaaaaaab
+aaaaaaabaaaaaaaa
+aabaaabababaaaaa
+aaaapbaaaaaaaaaa
+aabpldaaabbaaaaa
+baapppbaaaaabaaa
+aaaaabaaaaaaaaba
+aaaaaaaaaafaaaaa
+abaaaaabaplpaaaa
+aaaaababappdbaaa
+aaaaaappaaaaaaba
+aabbaappaaaaaaaa
+aaaaaaaaaaaaaaaa
+aabaaaaaaaaaaaaa
+aaaaaaaaaaaaabba
+PAL
+a #6da266
+b #5f955c
+p #4e8a4f
+l #79b877
+d #3c6e3e
+f #e8a0bf
