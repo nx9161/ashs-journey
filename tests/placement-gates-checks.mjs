@@ -745,6 +745,48 @@
 //     Tuple: [pass, connOk, connPairs, stepTouch, stepTot, components,
 //     junctionSites, junctionsBare, apronLow, apronMin, merged,
 //     onFabric, shoulderOrphans, unanchoredAny, strict, fabric].
+//     THIRTY-EIGHTH DOCUMENTED EXCEPTION (WAVE T40; the
+//     THIRTY-SEVENTH is WAVE T39 Perennial's, recorded on its
+//     own branch): the registry grows by one scoped entry —
+//     twinleaf: [cloverfloor] (the rebuild-wave registration
+//     the registry's own terms promise each town) — and
+//     twinleaf's pin migrates PASS -> PASS: the Clover Town
+//     rebuild on its own kit from birth ('Clover Earth &
+//     Batten Timber', idx 756-759: clover-flecked packed-earth
+//     cloverfloor streets, board-and-batten battenroof, the
+//     two-leaf sapling pair, cloverbed mounds) per
+//     WAVE-T40-CLOVER-PLAN.md. Clover shipped a mud-carried
+//     PASS: its entire 184-cell network was the tg2 sea — the
+//     front street (row 4), the through road (rows 8-9) and
+//     the patches between them — so strict 0.9833 / fabric
+//     0.994 were the mud's figures, not the town's. The build
+//     retires the mud (tg2 184 -> 0), rebuilds the street
+//     graph in cloverfloor (front street, through road, main
+//     lane, west arm, south lane, DIRS spur, plot lane +
+//     pinches threading the encounter plot's dot clusters —
+//     the T30 threading lesson), gives the invisible (7,12)
+//     DIRS record its sign tile, moves the orphaned MART
+//     CLERK (3,5) -> (19,4) at his Mart's west-front apron,
+//     marks the (13,4) junction with a verbatim DIRS copy at
+//     (15,5), and dresses the two shipped houses plus two
+//     facade cottages in battenroof (facade doors carry no
+//     warps, so step-offs stay 6/6 and conn stays 90/90 —
+//     the audit's nodes are the town's ten warp cells).
+//     No encounter cell touched: commas 8 + dots 11
+//     byte-kept, TAM still standing on his plot-frame dot;
+//     stamps, warps, posts and all three shipped sign texts
+//     byte-kept (the start cell (13,15) takes cloverfloor —
+//     the T29 exit-cell precedent; its coordinate and the
+//     warp records are untouched). Gate STATUS holds: pass
+//     1 -> 1, conn 90/90, junctions 3 (0 bare), apronMin
+//     0.824 unchanged, strict 0.9833 -> 0.7674 (the landed
+//     figure is carried by the authored street graph, not
+//     the mud), fabric 0.994 -> 0.9964. NO other town's pin
+//     moves.
+//     THIRTY-EIGHTH (cont.): the tuple fields are
+//     [pass, connOk, connPairs, stepTouch, stepTot, components,
+//     junctionSites, junctionsBare, apronLow, apronMin, merged,
+//     onFabric, shoulderOrphans, unanchoredAny, strict, fabric].
 //     TWENTY-SIXTH DOCUMENTED EXCEPTION (W-DIFF8): the registry
 //     grows by one scoped entry — lavender: [shinglefloor] — on
 //     the same terms as the exceptions above, and lavender's pin
@@ -1015,8 +1057,8 @@ async function gateTuple(id, t) {
 }
 
 // 1. registry scope lock
-ok('street registry is exactly { vermilion: [boardwalk], blackthorn: [settfloor], silvertown: [marblefloor], ecruteak: [wornfloor], saffron: [avenuefloor], violet: [violetfloor], azalea: [brickfloor], mahogany: [gravelfloor], rustboro: [cutstonefloor], fuchsia: [marshfloor], cianwood: [driftfloor], dewford: [plankfloor], viridian: [slatefloor], celadon: [promfloor], slateport: [quayfloor, boardwalk], cerulean: [pierfloor], mauville: [gridfloor], lavender: [shinglefloor], cherrygrove: [inlayfloor], verdanturf: [petalfloor, cavefloor], olivine: [harbourfloor, jettyfloor], fallarbor: [ashfloor], lavaridge: [steamfloor, terracefloor], fortree: [canopyfloor, boardwalk], lilycove: [cobblefloor, cavefloor], mossdeep: [starfloor, dockfloor], sootopolis: [craterfloor, cavefloor], pacifidlog: [raftfloor], evergrande: [plateaufloor, cavefloor] }',
-  JSON.stringify(STREET_REGISTRY) === '{"vermilion":["boardwalk"],"blackthorn":["settfloor"],"silvertown":["marblefloor"],"ecruteak":["wornfloor"],"saffron":["avenuefloor"],"violet":["violetfloor"],"azalea":["brickfloor"],"mahogany":["gravelfloor"],"rustboro":["cutstonefloor"],"fuchsia":["marshfloor"],"cianwood":["driftfloor"],"dewford":["plankfloor"],"viridian":["slatefloor"],"celadon":["promfloor"],"slateport":["quayfloor","boardwalk"],"cerulean":["pierfloor"],"mauville":["gridfloor"],"lavender":["shinglefloor"],"cherrygrove":["inlayfloor"],"verdanturf":["petalfloor","cavefloor"],"olivine":["harbourfloor","jettyfloor"],"fallarbor":["ashfloor"],"lavaridge":["steamfloor","terracefloor"],"fortree":["canopyfloor","boardwalk"],"lilycove":["cobblefloor","cavefloor"],"mossdeep":["starfloor","dockfloor"],"sootopolis":["craterfloor","cavefloor"],\"pacifidlog\":[\"raftfloor\"],\"evergrande\":[\"plateaufloor\",\"cavefloor\"]}',
+ok('street registry is exactly { vermilion: [boardwalk], blackthorn: [settfloor], silvertown: [marblefloor], ecruteak: [wornfloor], saffron: [avenuefloor], violet: [violetfloor], azalea: [brickfloor], mahogany: [gravelfloor], rustboro: [cutstonefloor], fuchsia: [marshfloor], cianwood: [driftfloor], dewford: [plankfloor], viridian: [slatefloor], celadon: [promfloor], slateport: [quayfloor, boardwalk], cerulean: [pierfloor], mauville: [gridfloor], lavender: [shinglefloor], cherrygrove: [inlayfloor], verdanturf: [petalfloor, cavefloor], olivine: [harbourfloor, jettyfloor], fallarbor: [ashfloor], lavaridge: [steamfloor, terracefloor], fortree: [canopyfloor, boardwalk], lilycove: [cobblefloor, cavefloor], mossdeep: [starfloor, dockfloor], sootopolis: [craterfloor, cavefloor], pacifidlog: [raftfloor], evergrande: [plateaufloor, cavefloor], twinleaf: [cloverfloor] }',
+  JSON.stringify(STREET_REGISTRY) === '{"vermilion":["boardwalk"],"blackthorn":["settfloor"],"silvertown":["marblefloor"],"ecruteak":["wornfloor"],"saffron":["avenuefloor"],"violet":["violetfloor"],"azalea":["brickfloor"],"mahogany":["gravelfloor"],"rustboro":["cutstonefloor"],"fuchsia":["marshfloor"],"cianwood":["driftfloor"],"dewford":["plankfloor"],"viridian":["slatefloor"],"celadon":["promfloor"],"slateport":["quayfloor","boardwalk"],"cerulean":["pierfloor"],"mauville":["gridfloor"],"lavender":["shinglefloor"],"cherrygrove":["inlayfloor"],"verdanturf":["petalfloor","cavefloor"],"olivine":["harbourfloor","jettyfloor"],"fallarbor":["ashfloor"],"lavaridge":["steamfloor","terracefloor"],"fortree":["canopyfloor","boardwalk"],"lilycove":["cobblefloor","cavefloor"],"mossdeep":["starfloor","dockfloor"],"sootopolis":["craterfloor","cavefloor"],\"pacifidlog\":[\"raftfloor\"],\"evergrande\":[\"plateaufloor\",\"cavefloor\"],\"twinleaf\":[\"cloverfloor\"]}',
   JSON.stringify(STREET_REGISTRY));
 
 // 2. census: the 64 towns of townSetOf (pallet included)
@@ -1097,7 +1139,7 @@ const PIN = {
   "sunnyshore": [1, 132, 132, 8, 8, 1, 3, 0, 0, 0.875, 0, 0, 0, 0, 0.9967, 0.9967],
   "survival-area": [1, 72, 72, 5, 5, 1, 1, 0, 0, 0.941, 0, 0, 0, 0, 1, 1],
   "trovita": [0, 30, 56, 6, 6, 1, 3, 0, 3, 0.563, 0, 0, 0, 0, 0.9466, 0.9466],
-  "twinleaf": [1, 90, 90, 6, 6, 1, 3, 0, 0, 0.824, 0, 0, 0, 0, 0.9833, 0.994],
+  "twinleaf": [1, 90, 90, 6, 6, 1, 3, 0, 0, 0.824, 0, 0, 0, 0, 0.7674, 0.9964],
   "valencia": [0, 42, 72, 7, 7, 1, 2, 0, 2, 0.429, 0, 0, 0, 0, 0.9654, 0.9654],
   "veilstone": [1, 132, 132, 8, 8, 1, 9, 0, 0, 0.765, 0, 0, 0, 0, 0.94, 0.9965],
   "verdanturf": [1, 90, 90, 6, 6, 1, 4, 0, 0, 0.875, 0, 0, 0, 1, 0.8056, 0.9829],
