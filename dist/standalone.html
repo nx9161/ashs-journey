@@ -3501,6 +3501,42 @@ T36_KIND_DEFS.forEach(([kind], i) => {
 const T36_PROP_KINDS = T36_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
 const T36_WALL_KINDS = T36_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
 const T36_FLOOR_KINDS = T36_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
+// Wave T37: Craterlake City's own kit — "Crater Ashlar &
+// Ventstone": the craterroof (coursed crater-white ashlar, worn
+// by the Gym and the town's two facade cottages), the
+// craterfloor (white crater sett with ash-drifted grout — the
+// registered street material of the front street, the cave
+// avenue, the spokes and the lake ring), the craterwall (the
+// cottages' crater-stone wall face), the easel (the painter's
+// easel on the lake's east shore, beside CASPIAN FAN RUE's post)
+// and the ventstone (a crater boulder pierced by a round vent
+// mouth, at the rim ledge's two ends). Indices 720-724 per the
+// Director's index ruling (main's kinds run 594-636 + 645-648 +
+// 660-662 + 672-675 + 684-687 + 696-699; the parallel T36
+// Starfall claim holds 708-711 on its branch; 606-607 + 637-644
+// + 649-659 + 663-671 + 676-683 + 688-695 + 700-707 + 712-719
+// stay empty), verified free against origin/main, TILE_CHARS
+// and every map row. Authored art:
+// assets/sprites/pix/tiles/tile-craterroof.pix,
+// tile-craterfloor.pix, tile-craterwall.pix,
+// tile-prop-painteasel.pix, tile-prop-ventstone.pix.
+// (WAVE-T37-CRATERLAKE-PLAN.md.)
+const T37_KIND_DEFS = [
+  ['craterroof', 'wall'],
+  ['craterfloor', 'floor'],
+  ['craterwall', 'wall'],
+  ['painteasel', 'prop'],
+  ['ventstone', 'prop'],
+];
+const T37_KIND_CHARS = {};
+T37_KIND_DEFS.forEach(([kind], i) => {
+  const ch = String.fromCodePoint(0x1E00 + 720 + i);
+  T37_KIND_CHARS[kind] = ch;
+  TILE_CHARS[ch] = kind;
+});
+const T37_PROP_KINDS = T37_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
+const T37_WALL_KINDS = T37_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
+const T37_FLOOR_KINDS = T37_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
 const SINNOH_TOWN_GROUND_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg);
 const SINNOH_TOWN_GROUND2_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg2);
 // TX-3: the 8 gym exteriors by town (original type-accent motifs).
@@ -110518,6 +110554,96 @@ const ART = {
     "pppprrrPPppppppp",
     "ssssRRRPPsssssss"
   ] },
+  "tile-craterroof": { w: 16, h: 16, pal: {"w":"#e6e1d5","l":"#f4f1ea","s":"#b0aa9c","a":"#8a8478","v":"#6e6a60"}, rows: [
+    "sllllsllllslllls",
+    "swwwwswwwwswwwws",
+    "ssssssssssssssss",
+    "lllsllllsllllsll",
+    "wwwswwwwswawwsww",
+    "ssssssssssssssss",
+    "sllllsllllslllls",
+    "swwwwswwwwswwwws",
+    "ssssssssssssssss",
+    "lllsllllsllllsll",
+    "wwwswwwwswwwwsww",
+    "ssssssssssssssss",
+    "sllllsllllslllls",
+    "swwwwswwwwswwwas",
+    "ssssssssssssssss",
+    "lllsllllsllllsll"
+  ] },
+  "tile-craterfloor": { w: 16, h: 16, pal: {"w":"#ddd7c9","l":"#eae5d8","d":"#c4beae","g":"#8a8478","a":"#a39d8f"}, rows: [
+    "awwgwwwawwwgwlwg",
+    "wwwgdlwgwwwgwwwg",
+    "gggaggggggaggggg",
+    "wwagwwwgwwwgdwwa",
+    "wwwgwwwgwwwgwwwg",
+    "ggggaggggggagggg",
+    "wwwgawwgwwwgwwwg",
+    "wwwgwwwawlwgwwwg",
+    "gggggaggggggaggg",
+    "wwdawwagwwwgwwwg",
+    "wwwgwwdgwwwgwwwa",
+    "ggggggaggggggagg",
+    "wwwgwwwgawwawwdg",
+    "ldwgwwwgwwwgwlwg",
+    "aggggggaggggggag",
+    "wwwgwwwgwdagwwwg"
+  ] },
+  "tile-craterwall": { w: 16, h: 16, pal: {"w":"#e6e1d5","l":"#f4f1ea","s":"#b0aa9c","d":"#a39d8f","a":"#8a8478"}, rows: [
+    "llllllllllllllll",
+    "lllslllslllsllls",
+    "swwwwwswwwwwswww",
+    "swwwwwswwwwwswww",
+    "swwawwswwwwwswww",
+    "ssssssssssssssss",
+    "wwwswwwwwswwwwws",
+    "wwwswwwwwswwwwws",
+    "wwwswwawwswwwwws",
+    "ssssssssssssssss",
+    "swwwwwswwwwwswww",
+    "swwwwwswwwwwswww",
+    "swwwwwswwawwswww",
+    "ssssssssssssssss",
+    "dddddddddddddddd",
+    "dddddddddddddddd"
+  ] },
+  "tile-prop-painteasel": { w: 16, h: 16, pal: {"g":"#2a9327","d":"#257c20","k":"#5f4f33","t":"#a08b62","c":"#f4f1ea","b":"#7fa8c8","n":"#33526e","r":"#c85a4a","y":"#e8c85a"}, rows: [
+    "ggdgggggggggdggg",
+    "ggggggdggggggggg",
+    "ggggkkkkkkkkgggg",
+    "ggggkcccccckgggg",
+    "ggggkcccccckgggg",
+    "ggggkccnccckgggg",
+    "ggggkcccccckgggg",
+    "ggggkbbbbbbkgggg",
+    "ggggkcccccckgggg",
+    "ggggkcccccckgggg",
+    "ggggkkkkkkkkgggg",
+    "gggggtggtgtggggg",
+    "ggggtgggtggtgggg",
+    "ggggtgrybngtgggg",
+    "ggggtgttttgtgggg",
+    "gggddddddddddggg"
+  ] },
+  "tile-prop-ventstone": { w: 16, h: 16, pal: {"g":"#2a9327","d":"#257c20","l":"#f4f1ea","w":"#e6e1d5","s":"#b0aa9c","a":"#a39d8f","v":"#4a463e","k":"#17150f"}, rows: [
+    "ggdggggggggggggg",
+    "ggggggggggdggggg",
+    "gggggggggggggggg",
+    "gggggllllllggggg",
+    "ggggllllllllgggg",
+    "ggglwwwwwwwwsggg",
+    "ggglwwwwawwwsggg",
+    "ggglwwwvvwwwsggg",
+    "ggglwwvkkvwwsggg",
+    "ggglwwwvvwwwsggg",
+    "ggglwawwwwwwsggg",
+    "gggswwwwwwwwsggg",
+    "ggggssssssssgggg",
+    "ggggddddddddgggg",
+    "gggggggggggggggg",
+    "ggggggdggggggggg"
+  ] },
   "partner-back-bob": { base: "partner-back", w: 64, h: 64, pal: {}, shiftY: 2 },
   "partner-front-bob": { base: "partner-front", w: 64, h: 64, pal: {}, shiftY: 2 },
   "abomasnow-back-bob": { base: "abomasnow-back", w: 64, h: 64, pal: {}, shiftY: 2 },
@@ -115836,6 +115962,11 @@ for (const k of T35_FLOOR_KINDS) TILE_ART[k] = 'tile-' + k;
 for (const k of T36_PROP_KINDS) TILE_ART[k] = 'tile-prop-' + k;
 for (const k of T36_WALL_KINDS) TILE_ART[k] = 'tile-' + k;
 for (const k of T36_FLOOR_KINDS) TILE_ART[k] = 'tile-' + k;
+// Wave T37: Craterlake City's own kit kinds take their authored
+// crater-white stone tiles (the Crater Ashlar & Ventstone kit).
+for (const k of T37_PROP_KINDS) TILE_ART[k] = 'tile-prop-' + k;
+for (const k of T37_WALL_KINDS) TILE_ART[k] = 'tile-' + k;
+for (const k of T37_FLOOR_KINDS) TILE_ART[k] = 'tile-' + k;
 // Premium+ W6 (TX-3/PL-1): door-open frames, authored in TX-3 for every
 // door kind. The warp-fade engine that plays them lands in W7 — W6
 // wires the frames (this registry + cache.doorOpen + doorOpenCanvas)
@@ -117653,6 +117784,12 @@ function resolveTileLayers(cache, kind, x, y, kindAt, t, phase, mapId) {
     // green the same way (its art is fully opaque — the town
     // grass is baked in).
     case 'chartboard':
+    // Wave T37: Craterlake's painter's easel and its crater vent
+    // stones composite over their shore / rim-ledge green the
+    // same way (their art is fully opaque — the town grass is
+    // baked in).
+    case 'painteasel':
+    case 'ventstone':
     // Wave T17: the radio mast composites over its compound grass too.
     case 'radiomast': {
       // Object tiles carry transparent surrounds (Wave 1): lay the ground
@@ -124601,6 +124738,16 @@ const WALKABLE = new Set(['.', ',', 'D', 'E', 'C', 'F', 'J', 'K', '1', '2', 'V',
   // 594-636 + 645-648 + 660-662 + 672-675 + 684-687; 606-607
   // stay empty, 688-707 left clear.)
   ...[709, 710]
+    .map((i) => String.fromCodePoint(0x1E00 + i)),
+  // Wave T37: the craterfloor char (U+1E00+721, tiles.mjs
+  // T37_KIND_DEFS) is walkable street material — Craterlake
+  // City's white crater sett, swapped onto the town's street
+  // cells (which shipped as walkable tg2 mud and walkable
+  // ground), so floor stays floor. (Indices 720-724 per the
+  // Director's index ruling: main's kinds run 594-636 +
+  // 645-648 + 660-662 + 672-675 + 684-687 + 696-699; the
+  // parallel T36 claim holds 708-711; 712-719 stay empty.)
+  ...[721]
     .map((i) => String.fromCodePoint(0x1E00 + i))]);
 
 // Trainer definitions for the slice.
@@ -150499,22 +150646,22 @@ const MAPS7 = {
     "weather": "clear",
     "rows": [
       "ὶὶὶίὶὶὶὶὶὶίὶὶὶὶὶὶίὶὶὶὶὶὶίὶὶὶ",
-      "ὶRRRRRRRRRRRRLLRRRRRRRRRRRRὶ",
-      "ὶὴὴjklmὴὴdeefήήὸὸὸὸὴὴὴίὴὴḚὴὶ",
-      "ὶὴὴAJKAὴὴP12PήήUVYUὴὴὴὴὴὴὴḚὶ",
-      "ὶὴήήήήήήήήήήήήήήήήήήSὴὴὴὴὴὴὶ",
-      "ὶὴSήήήήήήήήήήήήήήήήήoὴὴὴὴὴὴὶ",
-      "ὶὴὴήὴὴήὴήὴὴήὴὴὴήὴήὴήὴὴnὴὴὴὴὶ",
-      "ὶίὴήήήήήήήήὴήήήήήήήήoὴὴὴὴὴḚὶ",
-      "ὶὴὴήήήήήήήήήήήήήήήήήὴὴὴὴὴὴẅὶ",
-      "ὶὴὴήήὴήήήήήḚήήήὴήήήήὴὴὴὴὴὴὴὶ",
-      "ὶὴὴoήὴήẄὴ~~~~~~~~~~ήẅὴὴὴὴὴὴὶ",
-      "ὶὴὴὴ...ὴὴ~~~~~~~~~~ήὴ,ẅ,ὴὴὴὶ",
-      "ὶὴὴ,,,,,ὴ~~~~WW~~~~ή.,,,,ὴὴὶ",
-      "ὶὴὴ,,,,,ὴ~~~~~~~~~~ὴ.,,,,ὴὴὶ",
-      "ὶὴὴὴ...ὴὴ~~~~~~~~~~ήή,,,ẅὴὴὶ",
-      "ὶὴὴὴẅὴήὴὴὴḚήήήήήήήήήὴὴὴὴὴὴὴὶ",
-      "ὶὴίὴὴὴήήήήήήὴoὴὴὴὴὴὴὴὴὴὴὴὴὴὶ",
+      "ὶ⃔ὴὴὴὴὴὴὴὴὴὴὴLLὴὴὴὴὴὴὴὴὴὴὴ⃔ὶ",
+      "ὶὴὴjklmὴὴdeefLL⃐⃐⃐⃐ὴὴὴίὴὴḚὴὶ",
+      "ὶὴὴAJKAὴὴP12PLLUVYUὴὴὴὴὴὴὴḚὶ",
+      "ὶ⃑⃑⃑⃑⃑⃑⃑⃑⃑⃑⃑⃑⃑⃑⃑⃑⃑⃑⃑Sὴὴὴὴὴὴὶ",
+      "ὶ⃑S⃑⃑⃑⃑⃑⃑⃑⃑⃑⃑⃑⃑⃑⃑⃑⃑⃑oὴὴ⃐⃐⃐ὴὶ",
+      "ὶὴὴὴὴὴὴ⃑ὴὴὴὴ⃑ὴὴὴὴὴὴ⃑ὴὴn⃒s⃒ὴὶ",
+      "ὶίὴ⃐⃐⃐ὴ⃑ὴὴὴὴ⃑ὴὴὴὴὴὴ⃑oὴὴὴὴὴḚὶ",
+      "ὶὴὴ⃒s⃒ὴ⃑Sὴὴὴ⃑ὴὴὴὴSὴ⃑ὴὴὴὴὴὴẅὶ",
+      "ὶὴὴὴὴ⃑⃑⃑⃑⃑⃑Ḛ⃑⃑⃑⃑⃑⃑⃑⃑⃑ὴὴὴὴὴὴὶ",
+      "ὶὴὴoS⃑ὴẄ⃑~~~~~~~~~~ὴẅὴὴὴὴὴὴὶ",
+      "ὶὴὴὴ...ὴ⃑~~~~~~~~~~S⃑,ẅ,ὴὴὴὶ",
+      "ὶὴὴ,,,,,⃑~~~~WW~~~~⃑.,,,,ὴὴὶ",
+      "ὶὴὴ,,,,,⃑~~~~~~~~~~ὴ.,,,,ὴὴὶ",
+      "ὶὴὴὴ...ὴ⃑~~~~~~~~~~⃓⃑,,,ẅὴὴὶ",
+      "ὶὴὴὴẅ⃑⃑⃑⃑⃑Ḛ⃑⃑⃑⃑⃑⃑⃑⃑⃑⃑ὴὴὴὴὴὴὶ",
+      "ὶὴίὴὴὴὴὴS⃑⃑⃑ὴoὴὴὴὴὴὴὴὴὴὴὴὴὴὶ",
       "ὶὶὶὴὶὶὶὶὶὶίὶὶὶὶὶὶίὶὶὶὶὶὶὴὶὶὶ"
     ],
     "warps": [
@@ -150535,13 +150682,16 @@ const MAPS7 = {
       {"x": 2, "y": 5, "text": "CRATERLAKE CITY — A city inside a dead volcano’s crater, reached by sea and sky. The lake is the crater’s heart; the cave in the north wall is its memory."},
       {"x": 20, "y": 4, "text": "THE CRATER LAKE — Divers go down from the dark water at the lake’s centre and come up in the trench outside. The city keeps no other gate at water level."},
       {"x": 8, "y": 8, "text": "CRATERLAKE CITY — North: WORLDROOT CAVE."},
-      {"x": 17, "y": 8, "text": "CRATERLAKE CITY — North: WORLDROOT CAVE."}
+      {"x": 17, "y": 8, "text": "CRATERLAKE CITY — North: WORLDROOT CAVE."},
+      {"x": 19, "y": 11, "text": "CRATERLAKE CITY — North: WORLDROOT CAVE."},
+      {"x": 8, "y": 16, "text": "CRATERLAKE CITY — North: WORLDROOT CAVE."},
+      {"x": 4, "y": 10, "text": "CRATERLAKE CITY — North: WORLDROOT CAVE."}
     ],
     "npcs": [
       {"x": 11, "y": 7, "name": "CAVE KEEPER ANTHEA", "art": "elder", "skin": "#e8b888", "shirt": "#b0503c", "pants": "#2a2a3a", "hair": "#5a3a2a", "dialogue": ["The Worldroot Cave is not locked. It is listened to. There is a difference, and the city knows it.", "Two great sleeps meet in stories of this crater. The lake keeps both their dreams polite."]},
       {"x": 19, "y": 13, "name": "CASPIAN FAN RUE", "art": "lass", "skin": "#c89878", "shirt": "#2a7a6a", "pants": "#3a3a4a", "hair": "#7a4a1a", "dialogue": ["Our gym leader paints battles the way the lake paints mornings: on purpose, beautifully.", "When the sky over the crater changes its mind, the whole city watches the lake first."]},
       {"x": 6, "y": 14, "name": "FISHER ONEN", "art": "fisher", "skin": "#e8b888", "shirt": "#3a6ac0", "pants": "#2a3a4a", "hair": "#1a1a1a", "dialogue": ["I fish a lake inside a volcano on an island in the sea. Geography gave up; I didn’t.", "Something old circles the deep trench outside the crater wall. The divers wave at it. Carefully."]},
-      {"x": 3, "y": 5, "name": "MART CLERK", "art": "clerk", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#4a3a2a", "dialogue": ["Craterlake Mart — crater stock. Everything arrived by air or by nerve."], "mart": {"stock": ["ultraball", "hyperpotion", "fullheal", "revive", "maxpotion", "superpotion"]}},
+      {"x": 9, "y": 4, "name": "MART CLERK", "art": "clerk", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#4a3a2a", "dialogue": ["Craterlake Mart — crater stock. Everything arrived by air or by nerve."], "mart": {"stock": ["ultraball", "hyperpotion", "fullheal", "revive", "maxpotion", "superpotion"]}},
     ],
     "encounters": {"rate": 0.12, "table": [{"species": "wingull", "min": 272, "max": 279, "weight": 24}, {"species": "pelipper", "min": 274, "max": 281, "weight": 12}, {"species": "azurill", "min": 272, "max": 279, "weight": 12}, {"species": "surskit", "min": 273, "max": 280, "weight": 10}, {"species": "masquerain", "min": 275, "max": 281, "weight": 8}, {"species": "linoone", "min": 273, "max": 280, "weight": 10}], "water": [{"species": "tentacool", "min": 270, "max": 278, "weight": 24}, {"species": "tentacruel", "min": 274, "max": 280, "weight": 6}, {"species": "wingull", "min": 270, "max": 278, "weight": 20}, {"species": "pelipper", "min": 273, "max": 280, "weight": 10}, {"species": "magikarp", "min": 270, "max": 276, "weight": 14}, {"species": "wailmer", "min": 272, "max": 280, "weight": 10}, {"species": "carvanha", "min": 272, "max": 279, "weight": 10}, {"species": "sharpedo", "min": 275, "max": 280, "weight": 5}], "waterRate": 0.08},
     "items": [],
@@ -188826,6 +188976,6 @@ if (typeof Game !== 'undefined') Object.assign(Game.prototype, {
 });
 
 </script>
-<!-- contentHash:d966b3b8ade9831d76df4c3d5c448bd4a91c606d955df459fcd4333da527faa0 -->
+<!-- contentHash:6053a0acdfc2b6f3b9068c74ea237e81eaf18d15983ead6a7d25e409964e769f -->
 </body>
 </html>
