@@ -7,7 +7,7 @@ import { parsePix } from '/home/hatch/workspace/ashs-journey-t41/assets/sprites/
 
 const ROOT = '/home/hatch/workspace/ashs-journey-t41/';
 const NAMES = ['tile-shellfloor', 'tile-shellroof', 'tile-prop-tideslug', 'tile-prop-tidelog'];
-const ANCHOR = '"tile-prop-pontoon"';
+const ANCHOR = '"tile-prop-falls"';
 
 function entry(name) {
   const pix = parsePix(fs.readFileSync(ROOT + 'assets/sprites/pix/tiles/' + name + '.pix', 'utf8'), name);
