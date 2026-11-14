@@ -197,8 +197,8 @@ ok('no retired creature names in species flavour text', flavourViolations === 0,
 // COLLECTOR / ASHA strings are volcanic-ash places and professions,
 // "Ash on the windows" / "Ash and empty shelf" are the noun ash, and
 // "Silver" survives only as the Frontier symbol tier (the rendered
-// SILVER word and Sutter's "Silver is a Brain respecting you") and the
-// Yamato edition trio 'Gold / Silver / Crystal' — the rival is Riven.
+// SILVER word and Sutter's "Silver is a Brain respecting you") — the
+// rival is Riven.
 //
 // W-SCRUB2 (2026-11-13) adds two terms the first scrub's segment scan
 // missed: 'Platinum' (the dex-horizon / diploma display copy now reads
@@ -208,13 +208,20 @@ ok('no retired creature names in species flavour text', flavourViolations === 0,
 // literals under src/ only, so the tests/ Track B integration-gate
 // infrastructure (tests/track-b, run-checks labels) is never scanned
 // and keeps its codename. 'Platinum' exemptions (in blockExempt below)
-// cover only NON-display segments: the arcs table's governing-edition
-// data label — the same documented keep class as the 'Gold / Silver /
-// Crystal' edition trio — and the HM_GRANTS source-provenance strings
-// in items.mjs, a data field no game code renders (only .item/.badge/
-// .move are read). Internal identifiers (PLATINUM_DEX_HORIZON,
-// platinum_diploma, checkPlatinumDiploma) are code, not literals, and
-// stay untouched by design.
+// cover only the HM_GRANTS source-provenance strings in items.mjs, a
+// data field no game code renders (only .item/.badge/.move are read).
+// Internal identifiers (PLATINUM_DEX_HORIZON, platinum_diploma,
+// checkPlatinumDiploma) are code, not literals, and stay untouched by
+// design.
+//
+// W-SCRUB3 (2026-11-13) REMOVED the W-SCRUB2 edition exemption: the
+// arcs table's governing-edition labels are display copy after all
+// (main-systems renders them into the quest log), and franchise game
+// titles are not edition labels. Every arc edition in
+// src/data/arcs.mjs is now an original label derived from the arc's own
+// region and story, pinned exactly by the W-SCRUB3 check at the bottom
+// of this suite; the blocklist scan has NO edition exemption anymore,
+// so an old title returning as a string literal fails both checks.
 const BLOCK_TERMS = [
   'Ash', 'ASH', 'Pikachu', 'Gary', 'Oak', 'Brock', 'Misty', 'Surge', 'Erika',
   'Koga', 'Janine', 'Sabrina', 'Blaine', 'Giovanni', 'Lorelei', 'Bruno',
@@ -262,13 +269,13 @@ function blockExempt(term, seg) {
   if (T === 'DRAKE' && /DRAKE\\?'S DEN/i.test(seg)) return true;
   if (T === 'MAGMA' && (seg.includes('Magma Stone') || seg.includes('Magma inside') ||
       seg.includes('Magma-red'))) return true;
-  if (T === 'SILVER' && (seg.trim() === 'SILVER' || seg.includes('Brain respecting') ||
-      seg.includes('Gold / Silver / Crystal'))) return true;
+  if (T === 'SILVER' && (seg.trim() === 'SILVER' || seg.includes('Brain respecting'))) return true;
   // W-SCRUB2 non-display keeps for 'Platinum' (see the header note):
-  // the arcs governing-edition data label (whole-literal segment) and
   // the two HM_GRANTS source-provenance strings, which no code renders.
-  if (T === 'PLATINUM' && (seg.trim() === 'Platinum' ||
-      seg === 'Repose Ruins (Platinum)' || seg === 'Route 217 (Platinum)')) return true;
+  // (The W-SCRUB2 arcs-edition keep was removed by W-SCRUB3 — edition
+  // labels are display copy, pinned to originals by the check below.)
+  if (T === 'PLATINUM' && (seg === 'Repose Ruins (Platinum)' ||
+      seg === 'Route 217 (Platinum)')) return true;
   return false;
 }
 const allSrc = execSync('find src -name "*.mjs" | sort', { cwd: ROOT, encoding: 'utf8' })
@@ -292,6 +299,43 @@ for (const rel of allSrc) {
 }
 ok('no franchise names in display string literals (W-SCRUB blocklist)', blockViolations === 0,
   blockViolations + ' violation(s) over ' + blockScanned + ' scanned segments');
+
+// ---- W-SCRUB3: arc edition labels pinned to the approved originals ----
+// The quest log renders each arc's `edition` verbatim (main-systems:
+// "Arc 4 — Borea (<edition>)"), so edition labels are display copy.
+// W-SCRUB3 replaced every franchise game title with an original label
+// derived from the arc's own region and story theme. This pin is
+// exact: an arc added, removed, or re-labelled fails here BY NAME
+// until the new label is reviewed and entered in the approved set.
+import { ARCS } from '../src/data/arcs.mjs';
+const APPROVED_EDITIONS = {
+  kanto: 'The First Light',
+  orange: 'The Amber Crossing',
+  johto: 'The Tower Bells',
+  hoenn: 'The Warring Tides',
+  frontier: 'The Seven Trials',
+  sinnoh: 'The Sleeping North',
+  unova: 'The Bright Bridges',
+  kalos: 'The Discipline of Beauty',
+  alola: 'Under Twin Lights',
+  journeys: 'The Whole World',
+  horizons: 'The Next Traveler',
+};
+const editionProblems = [];
+if (ARCS.length !== Object.keys(APPROVED_EDITIONS).length) {
+  editionProblems.push('arc count ' + ARCS.length +
+    ' != approved edition count ' + Object.keys(APPROVED_EDITIONS).length);
+}
+for (const arc of ARCS) {
+  if (!(arc.id in APPROVED_EDITIONS)) {
+    editionProblems.push(arc.id + ": unapproved arc, edition '" + arc.edition + "'");
+  } else if (arc.edition !== APPROVED_EDITIONS[arc.id]) {
+    editionProblems.push(arc.id + ": edition '" + arc.edition +
+      "' != approved '" + APPROVED_EDITIONS[arc.id] + "'");
+  }
+}
+ok('arc edition labels are the approved W-SCRUB3 originals', editionProblems.length === 0,
+  editionProblems.join('; '));
 
 console.log(`\nbranding-checks: ${pass} pass, ${fail} fail`);
 process.exit(fail ? 1 : 0);

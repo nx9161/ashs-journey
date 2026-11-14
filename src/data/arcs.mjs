@@ -23,7 +23,7 @@
 //   label          'Arc 1', 'Arc 1.5', ...
 //   region         display name of the region
 //   regionKey      the story.region value while this arc is current
-//   edition        the governing edition era (Platinum governs Borea)
+//   edition        the governing edition era (The Sleeping North governs Borea)
 //   chapters       ADR-015 chapter numbers inside this arc
 //   dexHorizon     cumulative national-dex horizon at this arc
 //   band           { min, max, bandIndex } or null (open level)
@@ -38,7 +38,7 @@
 //   status         'shipped' (playable in this build) | 'next' (the road
 //                  ahead: homecoming arms its embark) | 'sealed' (drawn
 //                  on the map, not yet walkable — honest, never faked)
-//   future         true for the sealed post-Platinum rows (ch 9-13)
+//   future         true for the sealed later rows (ch 9-13)
 //   hookGiver      who delivers this arc's hook at the homecoming
 //                  (a BOND_NPC_IDS-style id; display names below)
 //   embarkPort     map id of the port the embark sails from (null: origin
@@ -67,7 +67,7 @@ export const ARC_GIVER_NAMES = {
 export const ARCS = [
   {
     id: 'kanto', n: 1, label: 'Arc 1', region: 'Arden', regionKey: 'kanto',
-    edition: 'Yellow', chapters: [1], dexHorizon: 151,
+    edition: 'The First Light', chapters: [1], dexHorizon: 151,
     band: { min: 1, max: 100, bandIndex: 1 },
     badgeSet: 'kanto', badgeTotal: 8,
     completionKey: 'kanto', completionFlag: 'champion',
@@ -82,7 +82,7 @@ export const ARCS = [
   },
   {
     id: 'orange', n: 1.5, label: 'Arc 1.5', region: 'Amber Isles', regionKey: 'orange',
-    edition: 'Anime-original', chapters: [2], dexHorizon: 151,
+    edition: 'The Amber Crossing', chapters: [2], dexHorizon: 151,
     band: { min: 1, max: 100, bandIndex: 1 }, // shares Arden's band (Amendment 2)
     badgeSet: 'orange', badgeTotal: 4,
     completionKey: 'orange', completionFlag: 'orange_champion',
@@ -104,7 +104,7 @@ export const ARCS = [
   },
   {
     id: 'johto', n: 2, label: 'Arc 2', region: 'Yamato', regionKey: 'johto',
-    edition: 'Gold / Silver / Crystal', chapters: [3, 4, 5], dexHorizon: 251,
+    edition: 'The Tower Bells', chapters: [3, 4, 5], dexHorizon: 251,
     band: { min: 101, max: 200, bandIndex: 2 },
     badgeSet: 'johto', badgeTotal: 8,
     completionKey: 'johto', completionFlag: 'johto_complete',
@@ -126,7 +126,7 @@ export const ARCS = [
   },
   {
     id: 'hoenn', n: 3, label: 'Arc 3', region: 'Maris', regionKey: 'hoenn',
-    edition: 'Ruby / Sapphire / Emerald', chapters: [6], dexHorizon: 386,
+    edition: 'The Warring Tides', chapters: [6], dexHorizon: 386,
     band: { min: 201, max: 300, bandIndex: 3 },
     badgeSet: 'hoenn', badgeTotal: 8,
     completionKey: 'hoenn', completionFlag: 'hoenn_complete',
@@ -148,7 +148,7 @@ export const ARCS = [
   },
   {
     id: 'frontier', n: 3.5, label: 'Arc 3.5', region: 'Trial Grounds', regionKey: 'kanto',
-    edition: 'Emerald', chapters: [7], dexHorizon: 386,
+    edition: 'The Seven Trials', chapters: [7], dexHorizon: 386,
     band: null, // open level (Amendment 2): facilities match the entrant
     badgeSet: 'symbols', badgeTotal: 7,
     completionKey: 'frontier', completionFlag: 'frontier_complete',
@@ -170,7 +170,7 @@ export const ARCS = [
   },
   {
     id: 'sinnoh', n: 4, label: 'Arc 4', region: 'Borea', regionKey: 'sinnoh',
-    edition: 'Platinum', chapters: [8], dexHorizon: 493,
+    edition: 'The Sleeping North', chapters: [8], dexHorizon: 493,
     band: { min: 301, max: 400, bandIndex: 4 },
     badgeSet: 'sinnoh', badgeTotal: 8,
     completionKey: 'sinnoh', completionFlag: 'sinnoh_complete',
@@ -190,13 +190,13 @@ export const ARCS = [
       'The air sharpens mile by mile. Ahead: snow on the peaks, and Borea.',
     ],
   },
-  // ---- Sealed future arcs (post-Platinum; ADR-027 Decision 2) ----
+  // ---- Sealed future arcs (beyond Borea; ADR-027 Decision 2) ----
   // Designed skeleton per ADR-015 ch 9-13: rows exist so the Journey menu,
   // the dex frame and the finale's forward line can point at them honestly.
   // Unbuilt, undeleted. Bands continue the Amendment-2 pattern as data.
   {
     id: 'unova', n: 5, label: 'Arc 5', region: 'Vespera', regionKey: 'unova',
-    edition: 'Black & White', chapters: [9], dexHorizon: 1025,
+    edition: 'The Bright Bridges', chapters: [9], dexHorizon: 1025,
     band: { min: 401, max: 500, bandIndex: 5 },
     badgeSet: 'unova', badgeTotal: 8,
     completionKey: 'unova', completionFlag: 'unova_complete',
@@ -208,7 +208,7 @@ export const ARCS = [
   },
   {
     id: 'kalos', n: 6, label: 'Arc 6', region: 'Aurelia', regionKey: 'kalos',
-    edition: 'XY & XYZ', chapters: [10], dexHorizon: 1025,
+    edition: 'The Discipline of Beauty', chapters: [10], dexHorizon: 1025,
     band: { min: 501, max: 600, bandIndex: 6 },
     badgeSet: 'kalos', badgeTotal: 8,
     completionKey: 'kalos', completionFlag: 'kalos_complete',
@@ -220,7 +220,7 @@ export const ARCS = [
   },
   {
     id: 'alola', n: 7, label: 'Arc 7', region: 'Solana', regionKey: 'alola',
-    edition: 'Sun & Moon', chapters: [11], dexHorizon: 1025,
+    edition: 'Under Twin Lights', chapters: [11], dexHorizon: 1025,
     band: { min: 601, max: 700, bandIndex: 7 },
     badgeSet: 'alola', badgeTotal: 0, // the island challenge awards no badges
     completionKey: 'alola', completionFlag: 'alola_complete',
@@ -232,7 +232,7 @@ export const ARCS = [
   },
   {
     id: 'journeys', n: 8, label: 'Arc 8', region: 'World', regionKey: 'journeys',
-    edition: 'Journeys', chapters: [12], dexHorizon: 1025,
+    edition: 'The Whole World', chapters: [12], dexHorizon: 1025,
     band: { min: 701, max: 800, bandIndex: 8 },
     badgeSet: 'journeys', badgeTotal: 0,
     completionKey: 'journeys', completionFlag: 'journeys_complete',
@@ -244,7 +244,7 @@ export const ARCS = [
   },
   {
     id: 'horizons', n: 9, label: 'Arc 9', region: 'World', regionKey: 'horizons',
-    edition: 'Horizons', chapters: [13], dexHorizon: 1025,
+    edition: 'The Next Traveler', chapters: [13], dexHorizon: 1025,
     band: { min: 801, max: 900, bandIndex: 9 },
     badgeSet: 'horizons', badgeTotal: 0,
     completionKey: 'horizons', completionFlag: 'horizons_complete',
