@@ -4104,6 +4104,49 @@ T53_KIND_DEFS.forEach(([kind], i) => {
 const T53_PROP_KINDS = T53_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
 const T53_WALL_KINDS = T53_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
 const T53_FLOOR_KINDS = T53_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
+// Wave T54 — Clashfield kit 'Basalt Slab & Harbour Timber': the
+// basaltfloor (large fitted dark basalt slabs, tone-varied faces
+// in pale jittered grout with sparse rust-red weather flecks —
+// the hard coast's hard road; a fitted-slab field, unlike
+// Shardfall's regular shard checker, Coalseam's fine clinker ash,
+// Bridgeport's ringed quay stone, Brightshore's rigid golden
+// panel grid), the basaltroof (basalt-red shingle courses in the
+// town-style palette, horizontal courses with offset joints —
+// worn by the shipped House stamp's th cells + the wave's two
+// facade cottages, breaking the House out of the sister-town
+// sunnyshore family it shipped in), and two props: the listboard
+// (the Zone registrar's pinned-list notice board at OKTAVIA's
+// shoulder — her recorded lists beat as dressing only) and the
+// coilbollard (a timber harbour bollard with an iron cap band
+// and a rope coil at its foot — the pair flanks the harbour lane
+// beside NORTHSTAR). Indices 924-927 per the Director's index
+// ruling (main's kinds run 594-636 + 645-648 + 660-662 +
+// 672-675 + 684-687 + 696-699 + 708-711 + 720-724 + 732-736 +
+// 744-748 + 756-759 (T40) + 768-771 (T41) + 780-783 (T42) +
+// 792-795 (T43) + 804-807 (T44) + 816-819 (T45) + 828-831
+// (T46) + 840-843 (T47) + 852-855 (T48) + 864-868 (T49) +
+// 876-879 (T50) + 888-891 (T51) + 900-903 (T52); the parallel
+// T53 claim holds 912-915; 904-911 + 916-923 stay empty),
+// verified free against origin/main, TILE_CHARS and every map
+// row. Authored art: assets/sprites/pix/tiles/
+// tile-basaltfloor.pix, tile-basaltroof.pix,
+// tile-prop-listboard.pix, tile-prop-coilbollard.pix.
+// (WAVE-T54-CLASHFIELD-PLAN.md.)
+const T54_KIND_DEFS = [
+  ['basaltfloor', 'floor'],
+  ['basaltroof', 'wall'],
+  ['listboard', 'prop'],
+  ['coilbollard', 'prop'],
+];
+const T54_KIND_CHARS = {};
+T54_KIND_DEFS.forEach(([kind], i) => {
+  const ch = String.fromCodePoint(0x1E00 + 924 + i);
+  T54_KIND_CHARS[kind] = ch;
+  TILE_CHARS[ch] = kind;
+});
+const T54_PROP_KINDS = T54_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
+const T54_WALL_KINDS = T54_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
+const T54_FLOOR_KINDS = T54_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
 const SINNOH_TOWN_GROUND_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg);
 const SINNOH_TOWN_GROUND2_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg2);
 // TX-3: the 8 gym exteriors by town (original type-accent motifs).
@@ -96524,6 +96567,78 @@ const ART = {
     "ggggSSSSSSSSgggg",
     "gggggggggggggggg"
   ] },
+  "tile-basaltfloor": { w: 16, h: 16, pal: {"a":"#4c4c55","b":"#55555f","c":"#43434c","d":"#3b3b44","l":"#6a6a72","p":"#a39c8d","r":"#a83f2a"}, rows: [
+    "laaaaaapblbbbbbb",
+    "aaaaadaplbbbbbbr",
+    "aaaaaaapbbdbbbbb",
+    "aaraaaapbbbbbbbl",
+    "aaadalapbbbbbblb",
+    "aaaalaapdbbbblbb",
+    "aaaaraapbbbbldbb",
+    "ppppppppbbbbbbbb",
+    "alaaaadapppppppp",
+    "laaaaaraplcdcccp",
+    "aaaaaaaapccccccp",
+    "aaaadaaapccccccp",
+    "aaaaaalapdcccccp",
+    "aaaaalaapcccccdp",
+    "aadaaaaapccccccp",
+    "pppppppppppppppp"
+  ] },
+  "tile-basaltroof": { w: 16, h: 16, pal: {"a":"#63322c","d":"#57302a","l":"#83503f","s":"#3e201c"}, rows: [
+    "lllllllsllllllls",
+    "aaaaaaasadaaaaas",
+    "aaaaaaasaaaaaaas",
+    "ssssssssssssssss",
+    "lllslllllllsllll",
+    "aaasaaadaaasaaaa",
+    "aaasaaaaaaasaaaa",
+    "ssssssssssssssss",
+    "lllllllsllllllls",
+    "aaaaadasaaaaaaas",
+    "aaaaaaasaaaaaads",
+    "ssssssssssssssss",
+    "lllslllllllsllll",
+    "aaasaaaaaaasaaaa",
+    "aaasaaaaaaasdaaa",
+    "ssssssssssssssss"
+  ] },
+  "tile-prop-listboard": { w: 16, h: 16, pal: {"g":"#2e8f12","G":"#2e5912","d":"#5e4630","f":"#3e2c1c","b":"#8a6a42","w":"#e8dfc8","t":"#5a5148","n":"#a83f2a"}, rows: [
+    "GgggggggggggGggg",
+    "gggggggGgggggggg",
+    "ggffffffffffffGg",
+    "ggfbbbbbbbbbbfgg",
+    "ggfwnwwnwbnwwfgg",
+    "ggfttwttwbtwtfgg",
+    "ggfttwttwbtwtfgg",
+    "gGfwwwwwwbwwwfgg",
+    "ggfbbbbbbbbbbfgg",
+    "ggffffffffffffgG",
+    "gggddgggggGddggg",
+    "gggddGgggggddggg",
+    "Gggddggggggddggg",
+    "gggddggGgggddggg",
+    "ggGddggggggddgGg",
+    "ggdGddGddGddGdgg"
+  ] },
+  "tile-prop-coilbollard": { w: 16, h: 16, pal: {"g":"#2e8f12","G":"#2e5912","d":"#5e4630","D":"#463322","i":"#3a3f4a","I":"#6a7280","r":"#b09468","R":"#cbb083"}, rows: [
+    "GgggggggggggGggg",
+    "gggggggGgggggggg",
+    "ggGgggggggggggGg",
+    "ggggggiiiigggggg",
+    "ggggGgIIIIgggggg",
+    "ggggggDddDgGgggg",
+    "ggggggDddDgggggg",
+    "gGggggDddDgggGgg",
+    "ggggggDddDgggggg",
+    "gggGggDddDgggggG",
+    "ggggggDddDGggggg",
+    "ggggRRDddDRRgggg",
+    "GgggRrRrrRrRGggg",
+    "ggggRRrrRrrRrrgg",
+    "ggGgRRRRRRRRggGg",
+    "gggggGGGGGGggggg"
+  ] },
   "tile-trellisroof": { w: 16, h: 16, pal: {"c":"#f2e7ce","r":"#cf8296","l":"#e2a5b4","d":"#a85f74","b":"#8e3d55","v":"#557f3e"}, rows: [
     "cclrllllcclllvll",
     "cccldllccccbrllc",
@@ -117813,6 +117928,9 @@ for (const k of T52_FLOOR_KINDS) TILE_ART[k] = 'tile-' + k;
 for (const k of T53_PROP_KINDS) TILE_ART[k] = 'tile-prop-' + k;
 for (const k of T53_WALL_KINDS) TILE_ART[k] = 'tile-' + k;
 for (const k of T53_FLOOR_KINDS) TILE_ART[k] = 'tile-' + k;
+for (const k of T54_PROP_KINDS) TILE_ART[k] = 'tile-prop-' + k;
+for (const k of T54_WALL_KINDS) TILE_ART[k] = 'tile-' + k;
+for (const k of T54_FLOOR_KINDS) TILE_ART[k] = 'tile-' + k;
 // Premium+ W6 (TX-3/PL-1): door-open frames, authored in TX-3 for every
 // door kind. The warp-fade engine that plays them lands in W7 — W6
 // wires the frames (this registry + cache.doorOpen + doorOpenCanvas)
@@ -119716,6 +119834,12 @@ function resolveTileLayers(cache, kind, x, y, kindAt, t, phase, mapId) {
     // colours).
     case 'glintpost':
     case 'coilcradle':
+    // Wave T54: Clashfield's registrar list board and its rope-
+    // coil harbour bollards composite over their grass the same
+    // way (both arts are fully opaque — the town grass is baked
+    // in).
+    case 'listboard':
+    case 'coilbollard':
     // Wave T17: the radio mast composites over its compound grass too.
     case 'radiomast': {
       // Object tiles carry transparent surrounds (Wave 1): lay the ground
@@ -126882,6 +127006,21 @@ const WALKABLE = new Set(['.', ',', 'D', 'E', 'C', 'F', 'J', 'K', '1', '2', 'V',
   // 828-831 + 840-843 + 852-855 + 864-868 + 876-879 + 888-891;
   // the parallel T52 claim holds 900-903; 904-911 stay empty.)
   ...[912]
+    .map((i) => String.fromCodePoint(0x1E00 + i)),
+  // Wave T54: the basaltfloor char (U+1E00+924, tiles.mjs
+  // T54_KIND_DEFS) is walkable street material — Clashfield's
+  // fitted basalt-slab street, swapped onto the town's tg2
+  // street cells (the front street, the main street / hard
+  // road, the harbour lane, the west + registrar arms and the
+  // r225 / r230 exit cells — all shipped walkable as tg2), so
+  // floor stays floor. (Indices 924-927 per the Director's
+  // index ruling: main's kinds run 594-636 + 645-648 + 660-662 +
+  // 672-675 + 684-687 + 696-699 + 708-711 + 720-724 +
+  // 732-736 + 744-748 + 756-759 + 768-771 + 780-783 + 792-795 +
+  // 804-807 + 816-819 + 828-831 + 840-843 + 852-855 + 864-868 +
+  // 876-879 + 888-891 + 900-903 (T52); the parallel T53 claim
+  // holds 912-915; 904-911 + 916-923 stay empty.)
+  ...[924]
     .map((i) => String.fromCodePoint(0x1E00 + i))]);
 
 // Trainer definitions for the slice.
@@ -160420,20 +160559,21 @@ const MAPS9 = {
     "rows": [
       "                          ",
       "                          ",
-      "   jklm  deef             ",
+      "   jklm  deef  ↝↝↝        ",
       "   AJKA  P12P  ​s​        ",
-      "                          ",
-      "  S                       ",
-      "                          ",
-      "                          ",
-      "                          ",
-      "                          ",
-      "                          ",
-      "                  ἅἅἅἅἅἅἅ ",
-      "                  ἅἅἅἅἅἅἅ ",
-      "                  ἅἅἅἅἅἅἅ ",
-      "                          ",
-      "                          ",
+      "  ↜↜↜↜↜↜↜↜↜↜↜↜↜↜↜↜↜↜↜↜↜↜↜ ",
+      "  S↜   S↜   S↜↜    ↝↝↝    ",
+      "   ↜    ↜    ↜↜    ​s​    ",
+      "   ↜    ↜↞   ↜↜     ↜     ",
+      "  ↜↜↜↜↜↜↜↜↜↜↜↜↜↜↜↜↜↜↜↜↜↜↜↜",
+      "  ↜↜↜↜↜↜↜↜↜↜↜↜↜↜↜↜↜↜↜↜↜↜↜↜",
+      "   ↜    ↜    ↜↜           ",
+      "   ↜    ↜↝↝↝ ↜↜   ἅἅἅἅἅἅἅ ",
+      "   ↜   S↜​s​ ↜↜   ἅἅἅἅἅἅἅ ",
+      "   ↜    ↜↜↜ ↟↜↜↟  ἅἅἅἅἅἅἅ ",
+      "   ↜    ↜ ↜  ↜↜           ",
+      "             ↜↜           "
+
     ],
     "warps": [
       {"x": 4, "y": 3, "to": {"map": "center", "x": 4, "y": 4}, "via": {"map": "fight-area", "x": 4, "y": 4}},
@@ -160448,9 +160588,12 @@ const MAPS9 = {
     ],
     "signs": [
       {"x": 2, "y": 5, "text": "CLASHFIELD — The Battle Zone’s port town. The harbour lane runs south to the coast water, the hard road east, and every conversation here is at least partly a scouting report."},
+      {"x": 7, "y": 5, "text": "CLASHFIELD — The Battle Zone’s port town. The harbour lane runs south to the coast water, the hard road east, and every conversation here is at least partly a scouting report."},
+      {"x": 12, "y": 5, "text": "CLASHFIELD — The Battle Zone’s port town. The harbour lane runs south to the coast water, the hard road east, and every conversation here is at least partly a scouting report."},
+      {"x": 7, "y": 12, "text": "CLASHFIELD — The Battle Zone’s port town. The harbour lane runs south to the coast water, the hard road east, and every conversation here is at least partly a scouting report."},
     ],
     "npcs": [
-      {"x": 3, "y": 5, "name": "MART CLERK", "art": "clerk", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#4a3a2a", "dialogue": ["Clashfield Mart — stocked for the road ahead."], "mart": {"stock": ["ultraball", "hyperpotion", "maxpotion", "fullheal", "revive", "escaperope"]}},
+      {"x": 9, "y": 4, "name": "MART CLERK", "art": "clerk", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#4a3a2a", "dialogue": ["Clashfield Mart — stocked for the road ahead."], "mart": {"stock": ["ultraball", "hyperpotion", "maxpotion", "fullheal", "revive", "escaperope"]}},
       {"x": 13, "y": 13, "name": "CAPT NORTHSTAR", "art": "sailor", "skin": "#e8b888", "shirt": "#3a6ac0", "pants": "#2a3a4a", "hair": "#1a1a1a", "dialogue": ["Rimefall, when you're ready. The northern run, ice permitting — and the ice usually permits me.", "You have the look of the island already. It does that fast."], "ferry": "snowpoint"},
       {"x": 8, "y": 7, "name": "ZONE REGISTRAR OKTAVIA", "art": "clerk", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#4a3a2a", "dialogue": ["Clashfield keeps the Zone's lists: who is training, who is resting, who is lying about both.", "Wildreach east, Palmside south around the water, Stark smoking over all of it. Welcome to the hard island."]},
     ],
@@ -191161,6 +191304,6 @@ if (typeof Game !== 'undefined') Object.assign(Game.prototype, {
 });
 
 </script>
-<!-- contentHash:6f0830e05eb951a5cef1e6a0419e331a2604aad863cbea2649d7897c3f28d109 -->
+<!-- contentHash:e1ae3e595bbfb9809afcbdb28dc2c86a578469062f9244843e43147446b68b1b -->
 </body>
 </html>
