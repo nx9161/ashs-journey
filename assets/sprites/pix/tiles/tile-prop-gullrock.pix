@@ -1,0 +1,29 @@
+# Wave T61 (Reefside): a flat reef rock with a white gull standing on it — the ferry-shore gull, on the island sand baked in at its measured colours (#c6b388/#d4c69c). Fully opaque. (WAVE-T61-REEFSIDE-PLAN.md §5.)
+PIX tile-prop-gullrock 16 16
+ssssssssssssssss
+ssSsssssssssssss
+sssssssswwssssss
+ssssssswkwwossss
+sssssssswwwwssss
+sssssswwwwwwssss
+sssssvwwwwwwssss
+ssssssvvvvvvssss
+sssssssswwssssss
+sssssssswwssssss
+sssllgggggggglls
+ssslgggGGGGgggls
+ssggggGGGGGGgggs
+sshhgggggggghhss
+sshhhhhhhhhhhhhs
+ssssssssssSsssss
+PAL
+s #c6b388 island sand
+S #d4c69c sand speckle
+h #a69274 contact shadow
+g #8f8f96 rock
+G #6e6e76 rock shade
+l #a9a9b2 rock light
+w #f4f2ec gull white
+v #cfd4d8 gull shade
+o #e8963c gull beak
+k #2a2a2a gull eye

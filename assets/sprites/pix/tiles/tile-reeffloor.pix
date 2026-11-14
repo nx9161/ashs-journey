@@ -1,0 +1,25 @@
+# Wave T61 (Reefside): pink shell sand — pale shell-pink packed shore sand, fine shell grit in three pinks, white shell shards as short strokes, sparse rose flecks. The spike-shell coast’s own ground. (NO-SAME-KIT law; WAVE-T61-REEFSIDE-PLAN.md §5.)
+PIX tile-reeffloor 16 16
+plpppdplppppwppp
+ppppplpppppdplpp
+pwpprppppplppppp
+pppplppgppppplpd
+pdppppplpppppppp
+pppplppppwppprpp
+plpppppdplpppppp
+ppppplppppplppgp
+pppdppppplpppppp
+plpppwpppdplprpp
+ppppplpppppppplp
+ppgpppplppwppppp
+plpppdppppplppdp
+ppppplprpppplppp
+ppplppppgpppwppp
+pdpppplppppplppl
+PAL
+p #e6c4b4 shell-pink sand
+l #f0d8cc sand light
+d #d2a08e sand shade
+r #cf8a76 rose fleck
+w #f8f1e6 shell shard
+g #bd7f68 grit

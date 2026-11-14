@@ -906,6 +906,17 @@ export const WALKABLE = new Set(['.', ',', 'D', 'E', 'C', 'F', 'J', 'K', '1', '2
   // 960-963 (T57) + 972-976 (T58); the parallel T59 claim
   // holds 984-987; 964-971 + 977-983 + 988-995 stay empty.)
   ...[996]
+    .map((i) => String.fromCodePoint(0x1E00 + i)),
+  // Wave T61: the reeffloor char (U+1E00+1008, tiles.mjs
+  // T61_KIND_DEFS) is walkable street material — Reefside's
+  // pink shell sand, swapped onto the island's whole shipped
+  // street blob (authored as the generic `path` sand) plus the
+  // north surf-exit jetty head, so floor stays floor.
+  // (Indices 1008-1011 per the Director's index ruling: main's
+  // kinds run …948-951 + 960-963 + 972-976 + 984-987; the
+  // parallel T60 claim holds 996-999; 988-995 + 1000-1007
+  // stay empty.)
+  ...[1008]
     .map((i) => String.fromCodePoint(0x1E00 + i))]);
 
 // Trainer definitions for the slice.

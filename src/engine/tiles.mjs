@@ -2338,6 +2338,36 @@ T60_KIND_DEFS.forEach(([kind], i) => {
 export const T60_PROP_KINDS = T60_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
 export const T60_WALL_KINDS = T60_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
 export const T60_FLOOR_KINDS = T60_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
+// "Reef Shell & Spike Stone" — reeffloor (idx 1008): pink shell
+// sand, a loose shell-grit scatter in three pinks with white
+// shell shards (worn by the whole shipped street blob + the
+// north surf-exit jetty head); scalloproof (idx 1009): staggered
+// courses of scallop-shell shingles — worn by the Gym's four
+// roof cells only, breaking the shipped Gym/Mart roof-slate
+// share; rockspike (idx 1010): a jagged reef spike on the island
+// sand; gullrock (idx 1011): a flat reef rock with a gull
+// standing on it, at the ferry shore.
+// (Indices 1008-1011 per the Director's index ruling: main's
+// kinds run …948-951 + 960-963 + 972-976 + 984-987; the parallel
+// T60 claim holds 996-999; 988-995 + 1000-1007 stay empty. Kind
+// names verified unclaimed — shellfloor/shellroof/gullpost are
+// taken by other towns. Chars U+1E00+1008..)
+// (Register: WAVE-T61-REEFSIDE-PLAN.md §5.)
+export const T61_KIND_DEFS = [
+  ['reeffloor', 'floor'],
+  ['scalloproof', 'wall'],
+  ['rockspike', 'prop'],
+  ['gullrock', 'prop'],
+];
+export const T61_KIND_CHARS = {};
+T61_KIND_DEFS.forEach(([kind], i) => {
+  const ch = String.fromCodePoint(0x1E00 + 1008 + i);
+  T61_KIND_CHARS[kind] = ch;
+  TILE_CHARS[ch] = kind;
+});
+export const T61_PROP_KINDS = T61_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
+export const T61_WALL_KINDS = T61_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
+export const T61_FLOOR_KINDS = T61_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
 export const SINNOH_TOWN_GROUND_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg);
 export const SINNOH_TOWN_GROUND2_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg2);
 // TX-3: the 8 gym exteriors by town (original type-accent motifs).

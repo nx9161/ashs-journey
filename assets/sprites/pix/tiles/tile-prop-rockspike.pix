@@ -1,0 +1,27 @@
+# Wave T61 (Reefside): a jagged reef spike — two grey-pink stone shards rising from a barnacled foot, on the island sand baked in at its measured colours (#c6b388/#d4c69c). Fully opaque. (WAVE-T61-REEFSIDE-PLAN.md §5.)
+PIX tile-prop-rockspike 16 16
+ssssssssssssssss
+ssSssslgssssssss
+sssssslgGsssssss
+sssssllgGgssssss
+ssssslpgGGssssss
+ssssslgGGGsslgss
+sssSllgGGGsslgGs
+sssslgGGGGsslgGs
+sssslgGGgGsssgGs
+sssslgggGGsssggs
+sssslgGGGGGssgGs
+sssnlgGGGGgnsgGs
+sssssggGGggngggs
+ssshhgggggggghhs
+sshhhhhhhhhhhhhs
+ssssssssssSsssss
+PAL
+s #c6b388 island sand
+S #d4c69c sand speckle
+h #a69274 contact shadow
+g #9a8d90 spike stone
+G #77686e stone shade
+l #c0b2ac stone light
+p #c9a49b stone pink
+n #e3dcc9 barnacle

@@ -1,0 +1,24 @@
+# Wave T61 (Reefside): scalloped shell shingle — staggered courses of scallop shells, shell-pink faces, rose scalloped eave edges, cream rim highlights. Worn by the Gym only. (NO-SAME-KIT law; WAVE-T61-REEFSIDE-PLAN.md §5.)
+PIX tile-scalloproof 16 16
+wssslssswssslsss
+slssslssslssslss
+ssessesssessesse
+dddddddddddddddd
+ssslssswssslsssw
+lssslssslssslsss
+sessesssessesses
+dddddddddddddddd
+wssslssswssslsss
+slssslssslssslss
+ssessesssessesse
+dddddddddddddddd
+ssslssswssslsssw
+lssslssslssslsss
+sessesssessesses
+dddddddddddddddd
+PAL
+s #dda08e shell face
+l #f0c4b2 shell light
+d #b97a66 course shadow
+e #a05f4c eave rose
+w #f8e8dc shell rim
