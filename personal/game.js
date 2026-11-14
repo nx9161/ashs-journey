@@ -2372,6 +2372,51 @@ WD4_KIND_DEFS.forEach(([kind], i) => {
 const WD4_PROP_KINDS = WD4_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
 const WD4_WALL_KINDS = WD4_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
 const WD4_FLOOR_KINDS = WD4_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
+// ---- Wave T26 (Copperton City build): Cut-Stone & Copper ----
+// Four new kinds at idx 598-601 (U+2056-U+2059, verified free
+// in TILE_CHARS and unused by every map row; the block runs
+// T23 575, W-DIFF 577-580, W-DIFF2 581-584, T24 585-587,
+// T25 588-591, WD3 592-593, W-DIFF4 594-597 — brickfloor,
+// mossroof, gravelfloor, pineroof for Cinder + Redwood;
+// Copperton takes the next block up per the Director's index
+// ruling, 2026-11-13). Copperton is Maris's company
+// city (HOENN_TOWN_STYLE rustboro: ground #a39684, form
+// 'company-city cut stone'); its shipped ground was 46.1%
+// tg2 mud — the worst share yet — under a PASS that leaned on
+// mud-as-network. Its own kit (NO-SAME-KIT law): 'coproof'
+// (wall) — warm-grey cut-stone roof slabs with copper seams
+// and verdigris at the joints, in the KIT_VARIANTS rustboro
+// roof tones; structurally wide-slab + metal seam, not
+// Meadowbrook's small staggered sage shingles, Eldergrove's
+// banded thatch or Rootlet's flat cedar shingle. 'cutstonefloor'
+// (floor) — big square-cut quarry flags, the town's avenue
+// stone and registered street kind (STREET_REGISTRY; the
+// fleet's street kinds carry the -floor suffix the desire-
+// path tiers key on), swapped onto every street/exit/landing
+// cell. 'travstone' (prop) —
+// the Trainer School's travelling stone home on its plinth
+// (tale_rustboro), fully opaque with the court baked in, at
+// (23,11) between the two shipped fossil displays. 'gardenfloor'
+// (floor) — the Norwick HQ forecourt's formal beds, dark soil
+// + clipped rows + copper edging, on the empty north lot's
+// west strip. Authored art: assets/sprites/pix/tiles/
+// tile-coproof.pix, tile-cutstonefloor.pix, tile-prop-travstone.pix,
+// tile-gardenfloor.pix (register: WAVE-T26-COPPERTON-PLAN.md).
+const T26_KIND_DEFS = [
+  ['coproof', 'wall'],
+  ['cutstonefloor', 'floor'],
+  ['travstone', 'prop'],
+  ['gardenfloor', 'floor'],
+];
+const T26_KIND_CHARS = {};
+T26_KIND_DEFS.forEach(([kind], i) => {
+  const ch = String.fromCodePoint(0x1E00 + 598 + i);
+  T26_KIND_CHARS[kind] = ch;
+  TILE_CHARS[ch] = kind;
+});
+const T26_PROP_KINDS = T26_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
+const T26_WALL_KINDS = T26_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
+const T26_FLOOR_KINDS = T26_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
 const SINNOH_TOWN_GROUND_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg);
 const SINNOH_TOWN_GROUND2_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg2);
 // TX-3: the 8 gym exteriors by town (original type-accent motifs).
@@ -87810,6 +87855,24 @@ const ART = {
     "aacaaabaaaaaaaaa",
     "bbbbbbbbbbbbbbbb",
   ] },
+  "tile-coproof": { w: 16, h: 16, pal: {"s":"#84776a","L":"#a29885","D":"#52453a","C":"#b87333","c":"#7a4a22","v":"#4f8a6a"}, rows: [
+    "LLLLLLLLLLLLLLLL",
+    "sssssDsssssDsssv",
+    "sscssDsssssDssss",
+    "sssssDssvssDssss",
+    "sssssDsssssDsscs",
+    "ssvssDsssssDssss",
+    "sssssDsssssDssss",
+    "CcCcCcCcCcCcCcCc",
+    "LLLLLLLLLLLLLLLL",
+    "sssDsssssDssssss",
+    "sssDscsvsDssssss",
+    "sssDsssssDssvsss",
+    "sssDsscssDssssss",
+    "sssDsssssDssssss",
+    "sssDsssssDssscss",
+    "DDDDDDDDDDDDDDDD"
+  ] },
   "tile-coronetfloor": { w: 16, h: 16, pal: {"a":"#a19e95","b":"#89837b","c":"#bcb3a1","d":"#929ba9"}, rows: [
     "aaaaabcaaaabaaac",
     "aaaacaaaaaaabaaa",
@@ -87917,6 +87980,24 @@ const ART = {
     "baaaaaccaaaaabcc",
     "adaaccaaaaaaccaa",
     "aaccaaaaaaccaaaa",
+  ] },
+  "tile-cutstonefloor": { w: 16, h: 16, pal: {"s":"#9a9184","L":"#b3a797","D":"#6e6355","d":"#84776a","c":"#a06838"}, rows: [
+    "LLLLLLLDLLLLLLLD",
+    "LssdsssDLssssssD",
+    "LssssssDLsscsssD",
+    "LssdsssDLssssssD",
+    "LssssssDLssssdsD",
+    "LssssssDLssssssD",
+    "sDDDDDDDsDDDDDDD",
+    "DDDDDDDDDDDDDDDD",
+    "LLLLLLLDLLLLLLLD",
+    "LssssssDLssdsssD",
+    "LscdsssDLssssssD",
+    "LssssssDLssssssD",
+    "LssssssDLssdsssD",
+    "LssdsssDLssssssD",
+    "sDDDDDDDsDDDDDDD",
+    "DDDDDDDDDDDDDDDD"
   ] },
   "tile-decor-basket": { w: 16, h: 16, pal: {"w":"#b99b74","d":"#a18461","f":"#ca7897","a":"#c16a61"}, rows: [
     "................",
@@ -90281,6 +90362,24 @@ const ART = {
     "BBLLLLLLLLBBBLLL",
     "LLLLLLBBLBBLBBLL",
     "LLLLLLBBLLLLLBLL",
+  ] },
+  "tile-gardenfloor": { w: 16, h: 16, pal: {"s":"#4a3826","D":"#38291a","d":"#5e4630","G":"#4a7a3a","g":"#6a9a4a","C":"#b87333"}, rows: [
+    "CCCCCCCCCCCCCCCC",
+    "CsdsdsdsdsdsdsdC",
+    "CsdsdsdsdsdsdsdC",
+    "CDDDDDDDDDDDDDDC",
+    "CgGGgGGgGGgGGgGC",
+    "CGgGGgGGgGGgGGDC",
+    "CDDDDDDDDDDDDDDC",
+    "CssdsdsdsdsdsdsC",
+    "CsdsdsdsdsdsdsdC",
+    "CDDDDDDDDDDDDDDC",
+    "CgGGgGGgGGgGGgGC",
+    "CGgGGgGGgGGgGGDC",
+    "CDDDDDDDDDDDDDDC",
+    "CsdsdsdsdsdsdsdC",
+    "CssdsdsdsdsdsdsC",
+    "CCCCCCCCCCCCCCCC"
   ] },
   "tile-glowpool-1": { w: 16, h: 16, pal: {"g":"#ffd873"}, rows: [
     "................",
@@ -93675,6 +93774,24 @@ const ART = {
     ".......Ww.......",
     "......GWwG......",
     "................"
+  ] },
+  "tile-prop-travstone": { w: 16, h: 16, pal: {"s":"#9a9184","D":"#6e6355","G":"#8a8d90","g":"#a8adb0","h":"#5f6266","P":"#84776a","p":"#52453a","B":"#d9a441"}, rows: [
+    "ssDssssssssDssss",
+    "ssssssssssssssss",
+    "ssssssggggssssss",
+    "sssssgGGGGgsssss",
+    "ssssgGGGGGGgssss",
+    "ssssgGGGGGGgssss",
+    "ssssgGGGGGGgssss",
+    "sssssgGGGGgsssss",
+    "sssssshhhhssssss",
+    "ssssPPPPPPPPssss",
+    "ssssPppppppPssss",
+    "ssssPppBBppPssss",
+    "ssssPppppppPssss",
+    "ssspppppppppssss",
+    "ssDssssssssDssss",
+    "ssssssssssssssss"
   ] },
   "tile-thatchroof": { w: 16, h: 16, pal: {"g":"#c2a054","L":"#d9bc76","S":"#856830","D":"#6e5626"}, rows: [
     "gLggLgLggLggLgLg",
@@ -113554,6 +113671,11 @@ for (const k of WD3_FLOOR_KINDS) TILE_ART[k] = 'tile-' + k;
 for (const k of WD4_PROP_KINDS) TILE_ART[k] = 'tile-prop-' + k;
 for (const k of WD4_WALL_KINDS) TILE_ART[k] = 'tile-' + k;
 for (const k of WD4_FLOOR_KINDS) TILE_ART[k] = 'tile-' + k;
+// Wave T26: Copperton's travelling stone draws its prop art;
+// its copper-seamed roofs + cutstone/gardenbed kit kinds theirs.
+for (const k of T26_PROP_KINDS) TILE_ART[k] = 'tile-prop-' + k;
+for (const k of T26_WALL_KINDS) TILE_ART[k] = 'tile-' + k;
+for (const k of T26_FLOOR_KINDS) TILE_ART[k] = 'tile-' + k;
 
 // Premium+ W6 (TX-3/PL-1): door-open frames, authored in TX-3 for every
 // door kind. The warp-fade engine that plays them lands in W7 — W6
@@ -115309,6 +115431,10 @@ function resolveTileLayers(cache, kind, x, y, kindAt, t, phase, mapId) {
     // pond heron composites over its meadow bank the same way.
     case 'scales':
     case 'heron':
+    // Wave T26: the travelling stone composites over its court
+    // the same way (its art is fully opaque — the cutstone
+    // court is baked in).
+    case 'travstone':
     // Wave T17: the radio mast composites over its compound grass too.
     case 'radiomast': {
       // Object tiles carry transparent surrounds (Wave 1): lay the ground
@@ -122126,6 +122252,17 @@ const WALKABLE = new Set(['.', ',', 'D', 'E', 'C', 'F', 'J', 'K', '1', '2', 'V',
   // gravelfloor char (U+1E00+596) likewise in Redwood Town, so
   // floor stays floor in both.
   ...[594, 596]
+    .map((i) => String.fromCodePoint(0x1E00 + i)),
+  // Wave T26: the cutstonefloor char (U+1E00+599, tiles.mjs
+  // T26_KIND_DEFS) is walkable street material — Copperton's
+  // avenue stone, swapped onto the town's street cells (which
+  // shipped as walkable tg2 mud), so floor stays floor. The
+  // gardenfloor char (U+1E00+601) is walkable ground — the HQ
+  // forecourt's formal beds, swapped 1:1 from walkable tg2,
+  // so floor stays floor (T24 clockbed precedent). (Indices
+  // 598-601 per the Director's index ruling: W-DIFF4 holds
+  // 594-597.)
+  ...[599, 601]
     .map((i) => String.fromCodePoint(0x1E00 + i))]);
 
 // Trainer definitions for the slice.
@@ -145550,24 +145687,24 @@ const MAPS7 = {
     "music": "pewter-theme",
     "weather": "clear",
     "rows": [
-      "ἦἦἦἧἦἦἦἦἦἦἧἦἦἦἦἦἦἧἦἦἥἥἦἦἦἧἦἦἦἦ",
-      "ἦἤἤἤἤἤἤẊẆἤἤἤἤoἤἤἤἤṕἥἥἥἤἤἤἤἤἤἤἦ",
-      "ἦἤἤjklmἤἤdeefἤἤἨἨἨἨἥἥἥἨἨἨἤἤἤἤἦ",
-      "ἦἤἤAJKAἤἤP12PἤἤUVYUἥἥἥsἩἩἤἤἤἤἦ",
-      "ἦἤἥἥἥἥἥἥἥἥἥἥἥἥἥἥἥἥἥἥἥἥἥἥSἤἤἤἤἦ",
-      "ἦἤSἥἥἥἥἥἥἥἥἥἥἥἥἥἥἥἥἥἥἥἥἥἥἥἥἥἥἦ",
-      "ἦἤἥἥἥἥἥṕἥἤἤἥἤἤἥἥἤἤἥἥἥἥoἤἥἤἤἤἥἦ",
-      "ἦἤἥἥἤἥἥἥἥἥἥἤἥἥἥἥἥἥἥἤἥἥἤἤἥἤἤἤἥἦ",
-      "ἤἤἥἥἥἥἥἥἥἥἥἥἥἥἥἥἥἥἥἥἥἥἥἥἥἥἥἥἥἥ",
-      "ἤoἥἥἥἥἥἥἥἥἥἥἥἥἥἥἥἥἥἥἥἥἥἥἥἥἥἥἥἥ",
-      "ἦἤἥἥἤἤἥἥoẊἥἥἤἤἥἥἤἤἥἤἥἥἤἥἥἤἤἤἥἦ",
-      "ἦἤἥἥἥἥἥἥἧoἥἥἥἥἥἥἥἥἤἤἥἥṕἥṕἤἤἥἥἦ",
-      "ἦἤἥἥἥ.Ẋ.ἥἥἥἥἤἤἥἥἤἤἥἤἥἥἤ...ἤἥnἦ",
-      "ἦἤἥ.,,,,.ἤἤἥἤἤἥἥἤἤἥἥἥἥẆ,,,.ἥἤἦ",
-      "ἦoἥo,,,.ἤἤoἥἤἤἥἥἤἤἥἥẆẊ.,,.,.ἤἦ",
-      "ἦἤἥἤ...ἥἤἤἤἥἤἤἥἥἤἤἥἥἤoἥ.ἥἥ.ἥἤἦ",
-      "ἦἤἥἥἥἥἥἥἥἥἥἥἥἥἥἥἥἥἥἥἥἥἥἥἥἥἥἥἤἦ",
-      "ἦἦἦἧἦἦἦἦἦἦἧἦἦἦἥἥἦἦἦἧἦἦἦἦἦἦἧἦἦἦ",
+      "ἦἦἦἧἦἦἦἦἦἦἧἦἦἦἦἦἦἧἦἦ⁗⁗ἦἦἦἧἦἦἦἦ",
+      "ἦἤἤἤἤἤἤẊẆἤἤἤἤoἤἤἤἤṕ⁙⁗⁗ἤἤἤἤἤἤἤἦ",
+      "ἦἤἤjklmἤἤdeefἤἤ⁖⁖⁖⁖⁙⁗⁗⁖⁖⁖ἤἤἤἤἦ",
+      "ἦἤἤAJKAἤἤP12PἤἤUVYU⁙⁗⁗sἩἩἤἤἤἤἦ",
+      "ἦ⁗⁗⁗⁗⁗⁗⁗⁗⁗⁗⁗⁗⁗⁗⁗⁗⁗⁗⁗⁗⁗⁗⁗⁗⁗⁗⁗⁗ἦ",
+      "ἦἤSἤἤἤἤἤἤἤἤἤἤS⁗⁗ἤἤἤSἤἤἤἤSἤἤἤἤἦ",
+      "ἦ⁖⁖⁖ἤἤἤṕἤἤἤἤἤἤ⁗⁗ἤἤἤἤἤἤoἤἤἤἤἤἤἦ",
+      "ἦἩsἩἤἤἤἤἤἤἤἤἤἤ⁗⁗ἤἤἤἤἤἤἤἤἤἤἤἤἤἦ",
+      "ἤ⁗⁗⁗⁗⁗⁗⁗⁗⁗⁗⁗⁗⁗⁗⁗⁗⁗⁗⁗⁗⁗⁗⁗⁗⁗⁗⁗⁗⁗",
+      "ἤoἤἤἤἤἤἤἤἤἤἤἤἤ⁗⁗⁗⁗⁗⁗⁗⁗⁗⁗⁗⁗⁗⁗⁗⁗",
+      "ἦἤἤἤἤἤἤἤoẊἤἤἤἤ⁗⁗⁗⁗⁗⁗⁗⁗⁗⁗⁗ἤἤἤἤἦ",
+      "ἦἤἤἤἤἤἤἤἧoἤἤἤἤ⁗⁗ἤἤἤἤἤἤṕ⁘ṕἤSἤἤἦ",
+      "ἦἤἤἤἤἤẊἤἤἤἤἤἤἤ⁗⁗⁗⁗⁗⁗⁗⁗⁗⁗⁗⁗⁗⁗nἦ",
+      "ἦἤἤἤ,,,,ἤἤἤἤἤἤ⁗⁗ἤἤἤἤἤἤẆ,,,.⁗Sἦ",
+      "ἦoἤo,,,ἤἤἤoἤἤS⁗⁗ἤ⁖⁖⁖ẆẊἤ,,ἤ,.ἤἦ",
+      "ἦ⁗⁗⁗⁗⁗⁗⁗⁗⁗⁗⁗⁗⁗⁗⁗ἤἩsἩἤoS.ἤἤ.⁗ἤἦ",
+      "ἦἤἤἤἤἤἤἤἤἤἤἤἤ⁗⁗⁗⁗⁗⁗⁗⁗⁗⁗⁗⁗⁗⁗⁗⁗ἦ",
+      "ἦἦἦἧἦἦἦἦἦἦἧἦἦἦ⁗⁗ἦἦἦἧἦἦἦἦἦἦἧἦἦἦ"
     ],
     "warps": [
       {"x": 4, "y": 3, "to": {"map": "center", "x": 4, "y": 4}, "via": {"map": "rustboro", "x": 4, "y": 4}},
@@ -145586,15 +145723,19 @@ const MAPS7 = {
     ],
     "signs": [
       {"x": 2, "y": 5, "text": "COPPERTON CITY — The city that probes the integration of nature and science. Norwick Corporation keeps its headquarters on the north street."},
-      {"x": 24, "y": 4, "text": "NORWICK CORPORATION HQ — Makers of the KinNav and half the instruments in Maris. Visitors mind the prototypes."},
+      {"x": 24, "y": 5, "text": "NORWICK CORPORATION HQ — Makers of the KinNav and half the instruments in Maris. Visitors mind the prototypes."},
       {"x": 28, "y": 13, "text": "COPPERTON CITY — South: ROUTE 104 · East: ROUTE 116 · North: ROUTE 115."},
-      {"x": 9, "y": 14, "text": "COPPERTON CITY — South: ROUTE 104 · East: ROUTE 116 · North: ROUTE 115."},
+      {"x": 13, "y": 14, "text": "COPPERTON CITY — South: ROUTE 104 · East: ROUTE 116 · North: ROUTE 115."},
+      {"x": 13, "y": 5, "text": "COPPERTON CITY — South: ROUTE 104 · East: ROUTE 116 · North: ROUTE 115."},
+      {"x": 26, "y": 11, "text": "COPPERTON CITY — South: ROUTE 104 · East: ROUTE 116 · North: ROUTE 115."},
+      {"x": 19, "y": 5, "text": "COPPERTON CITY — South: ROUTE 104 · East: ROUTE 116 · North: ROUTE 115."},
+      {"x": 22, "y": 15, "text": "COPPERTON CITY — South: ROUTE 104 · East: ROUTE 116 · North: ROUTE 115."}
     ],
     "npcs": [
       {"x": 11, "y": 7, "name": "NORWICK RESEARCHER PELL", "art": "scientist", "skin": "#c89878", "shirt": "#2a7a6a", "pants": "#3a3a4a", "hair": "#7a4a1a", "dialogue": ["We turned a fossil into a living Kin in this building. Twice. The paperwork was the hard part.", "Mr. Castellan collects rare stones the way other presidents collect ties."]},
       {"x": 18, "y": 11, "name": "CUTTER’S APPRENTICE RUE", "art": "youngster", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#4a3a2a", "dialogue": ["The Cutter's house hands out field craft to anyone who asks nicely.", "Route 116 east ends at a tunnel the HUSHLET own. Bring earplugs and respect."]},
       {"x": 7, "y": 14, "name": "TRAINER SCHOOL KID MOSS", "art": "kid", "skin": "#f0c8a0", "shirt": "#3a7a4a", "pants": "#4a3a2a", "hair": "#2a1a0a", "dialogue": ["Our teacher makes us battle the gym leader's portrait. It has never lost.", "Rock types run this town's gym AND its quarries. Copperton is honest about its geology."]},
-      {"x": 3, "y": 5, "name": "MART CLERK", "art": "clerk", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#4a3a2a", "dialogue": ["Copperton Mart — company-town stock, company-town prices. The fossils are display only."], "mart": {"stock": ["pokeball", "greatball", "superpotion", "hyperpotion", "antidote", "parlyzheal", "revive"]}},
+      {"x": 9, "y": 4, "name": "MART CLERK", "art": "clerk", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#4a3a2a", "dialogue": ["Copperton Mart — company-town stock, company-town prices. The fossils are display only."], "mart": {"stock": ["pokeball", "greatball", "superpotion", "hyperpotion", "antidote", "parlyzheal", "revive"]}},
     ],
     "encounters": {"rate": 0.12, "table": [{"species": "zigzagoon", "min": 207, "max": 212, "weight": 24}, {"species": "poochyena", "min": 207, "max": 212, "weight": 20}, {"species": "taillow", "min": 208, "max": 213, "weight": 18}, {"species": "nincada", "min": 208, "max": 213, "weight": 14}, {"species": "whismur", "min": 209, "max": 213, "weight": 12}, {"species": "skitty", "min": 208, "max": 212, "weight": 12}], "water": [{"species": "tentacool", "min": 202, "max": 210, "weight": 28}, {"species": "magikarp", "min": 202, "max": 208, "weight": 24}, {"species": "wingull", "min": 203, "max": 210, "weight": 20}, {"species": "pelipper", "min": 206, "max": 212, "weight": 8}], "waterRate": 0.08},
     "items": [],
