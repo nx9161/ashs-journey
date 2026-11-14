@@ -329,6 +329,39 @@
 //     herb gardens are T19's shipped pharmacy flowerbeds,
 //     byte-kept. Re-pinned with the W-DIFF5 build (registry
 //     scope only).
+//     NINETEENTH DOCUMENTED EXCEPTION (T27): the registry grows by
+//     one scoped entry — dewford: [plankfloor] — on the same terms
+//     as the exceptions above, and dewford's pin is its POST-T27
+//     tuple. The Mistford rebuild replaced the shipped tg2 field
+//     (182 of 504 cells Ἥ mud — 36.1%) with the calm ground +
+//     boardwalk fabric of the approved design: shackroof surf-teal
+//     shakes (idx 608), plankfloor boardwalk streets (idx 609; the
+//     -floor suffix the desire-path tiers key on), the barbells
+//     prop (idx 610) outside Enzo's gym, the chalkboard prop
+//     (idx 611) beside TRENDWATCHER IO — chalk marks, no text: the
+//     backstory audit's proposed board line was never backend
+//     data — and the barrels prop (idx 612) beside the Mart, two
+//     facade cottages, and the orphaned MART CLERK re-seated at
+//     his Mart's front apron (9,4). Gate STATUS flips FAIL -> PASS
+//     — the shipped town failed outright (fabric 0.9625, conn
+//     72/110 leaning on the mud, one starved apron at 0.588); the
+//     new fabric is streets alone (conn 110/110, junctions 8/8
+//     marked — all five shipped DIRS records stood invisible on
+//     plain ground or surf shallows; they gained S tiles at their
+//     posts and four verbatim copies mark the new junctions,
+//     T23-T26 pattern; the west DIRS post re-seated one cell SE
+//     to (2,10) so its tile does not seal the west-edge meadow
+//     into a dead pocket — reachability holds the fleet baseline
+//     1132), strict 0.9625 -> 0.6945 (desire lines get real
+//     corners; above the 0.60 gate), apronMin 0.588 -> 0.625
+//     (one cliff-foot flower cell lifts the Center's ring over
+//     the line), unanchoredAny identical (0), and the wet-sand
+//     beach kind (67 cells of brown striping) retired to the
+//     shipped pale psand — one cell kept under the beach lamp so
+//     the lamp is not straddled. (Kind indices 608-612: first
+//     registered 602-606, re-indexed above W-DIFF5's 602-607
+//     block under the Director's ruling, 79 map cells remapped
+//     losslessly.) Re-pinned with the T27 build.
 //     Tuple: [pass, connOk, connPairs, stepTouch, stepTot, components,
 //     junctionSites, junctionsBare, apronLow, apronMin, merged,
 //     onFabric, shoulderOrphans, unanchoredAny, strict, fabric].
@@ -358,8 +391,8 @@ async function gateTuple(id, t) {
 }
 
 // 1. registry scope lock
-ok('street registry is exactly { vermilion: [boardwalk], blackthorn: [settfloor], silvertown: [marblefloor], ecruteak: [wornfloor], saffron: [avenuefloor], violet: [violetfloor], azalea: [brickfloor], mahogany: [gravelfloor], rustboro: [cutstonefloor], fuchsia: [marshfloor], cianwood: [driftfloor] }',
-  JSON.stringify(STREET_REGISTRY) === '{"vermilion":["boardwalk"],"blackthorn":["settfloor"],"silvertown":["marblefloor"],"ecruteak":["wornfloor"],"saffron":["avenuefloor"],"violet":["violetfloor"],"azalea":["brickfloor"],"mahogany":["gravelfloor"],"rustboro":["cutstonefloor"],"fuchsia":["marshfloor"],"cianwood":["driftfloor"]}',
+ok('street registry is exactly { vermilion: [boardwalk], blackthorn: [settfloor], silvertown: [marblefloor], ecruteak: [wornfloor], saffron: [avenuefloor], violet: [violetfloor], azalea: [brickfloor], mahogany: [gravelfloor], rustboro: [cutstonefloor], fuchsia: [marshfloor], cianwood: [driftfloor], dewford: [plankfloor] }',
+  JSON.stringify(STREET_REGISTRY) === '{"vermilion":["boardwalk"],"blackthorn":["settfloor"],"silvertown":["marblefloor"],"ecruteak":["wornfloor"],"saffron":["avenuefloor"],"violet":["violetfloor"],"azalea":["brickfloor"],"mahogany":["gravelfloor"],"rustboro":["cutstonefloor"],"fuchsia":["marshfloor"],"cianwood":["driftfloor"],"dewford":["plankfloor"]}',
   JSON.stringify(STREET_REGISTRY));
 
 // 2. census: the 64 towns of townSetOf (pallet included)
@@ -385,7 +418,7 @@ const PIN = {
   "cherrygrove": [1, 72, 72, 5, 5, 1, 5, 0, 0, 0.688, 0, 0, 0, 0, 0.7126, 0.9902],
   "cianwood": [1, 72, 72, 7, 7, 1, 6, 0, 0, 0.688, 0, 0, 0, 0, 0.7965, 0.9993],
   "cinnabar": [1, 90, 90, 9, 9, 1, 3, 0, 0, 0.769, 0, 0, 0, 0, 0.8694, 1],
-  "dewford": [0, 72, 110, 7, 7, 1, 6, 0, 1, 0.588, 0, 0, 0, 0, 0.9625, 0.9625],
+  "dewford": [1, 110, 110, 7, 7, 1, 8, 0, 0, 0.625, 0, 0, 0, 0, 0.6945, 0.9864],
   "ecruteak": [1, 156, 156, 11, 11, 1, 6, 0, 0, 0.625, 0, 0, 0, 0, 0.7992, 0.9937],
   "eterna": [1, 182, 182, 8, 8, 1, 7, 0, 0, 0.813, 0, 0, 0, 0, 0.9593, 0.9921],
   "evergrande": [0, 12, 42, 5, 5, 2, 4, 0, 0, 0.938, 0, 0, 0, 0, 0.9773, 0.9778],
