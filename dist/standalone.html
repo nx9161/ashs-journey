@@ -3297,6 +3297,35 @@ WD8_KIND_DEFS.forEach(([kind], i) => {
 const WD8_PROP_KINDS = WD8_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
 const WD8_WALL_KINDS = WD8_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
 const WD8_FLOOR_KINDS = WD8_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
+// Wave T30: Wildflower Town's own kit — Rose Trellis & Petal Lane
+// (WAVE-T30-WILDFLOWER-PLAN.md). Indices 633-636 — RE-INDEXED
+// in-branch under the Director's index ruling of 2026-11-13:
+// W-DIFF8 (Hushmoor + Blossom) registered shinglefloor 629,
+// shingleroof 630, inlayfloor 631, sakuraroof 632 first, so this
+// block moved above that ceiling (606-607 stay empty, as
+// always). 'trellisroof' (wall) — a cream diamond lattice
+// over a rose bed, worn by the Contest Hall, the House and the
+// town's two facade cottages. 'petalfloor' (floor) — the
+// petal-flecked garden lane, the town's registered street kind.
+// 'trellis' (prop) — a climbing-rose garden trellis; a pair
+// flanks the Contest Hall's front walk. 'rosebush' (prop) — a
+// clipped rose bush in bloom at the town's three open corners.
+// Both props fully opaque with the green baked in.
+const T30_KIND_DEFS = [
+  ['trellisroof', 'wall'],
+  ['petalfloor', 'floor'],
+  ['trellis', 'prop'],
+  ['rosebush', 'prop'],
+];
+const T30_KIND_CHARS = {};
+T30_KIND_DEFS.forEach(([kind], i) => {
+  const ch = String.fromCodePoint(0x1E00 + 633 + i);
+  T30_KIND_CHARS[kind] = ch;
+  TILE_CHARS[ch] = kind;
+});
+const T30_PROP_KINDS = T30_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
+const T30_WALL_KINDS = T30_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
+const T30_FLOOR_KINDS = T30_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
 const SINNOH_TOWN_GROUND_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg);
 const SINNOH_TOWN_GROUND2_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg2);
 // TX-3: the 8 gym exteriors by town (original type-accent motifs).
@@ -94925,6 +94954,78 @@ const ART = {
     "gggggggggggggggg",
     "gggggggggggggggg"
   ] },
+  "tile-trellisroof": { w: 16, h: 16, pal: {"c":"#f2e7ce","r":"#cf8296","l":"#e2a5b4","d":"#a85f74","b":"#8e3d55","v":"#557f3e"}, rows: [
+    "cclrllllcclllvll",
+    "cccldllccccbrllc",
+    "bvccllccdlccllcc",
+    "bllcccclvlrccccr",
+    "blvlcclllrlbccrv",
+    "bllcccclrvlccccl",
+    "blccllccllccrlcc",
+    "ccclllrccccblllc",
+    "ccllvrllccrbllld",
+    "ccclrllccccbllrc",
+    "blcclvccrlcclrcc",
+    "blrccccrlldccccl",
+    "brllccvllllbccdl",
+    "bdlcccclllrccccr",
+    "blccrdcclrccllcc",
+    "cccrlllccccblrvc"
+  ] },
+  "tile-petalfloor": { w: 16, h: 16, pal: {"g":"#d9c48e","s":"#c3aa72","l":"#ecdcae","p":"#e59cae","w":"#f5efdd","y":"#eac95e"}, rows: [
+    "pgglgglsglgglwsl",
+    "gggggsgyggggsggg",
+    "gpgsggggggsgggwg",
+    "gsgglgglyglgglgs",
+    "ggpgggsggggggsgw",
+    "ggggsggggygsgggg",
+    "ggspglgglsglgglg",
+    "sggggggsggygggsg",
+    "ggggpsggggggsggg",
+    "lggsgglgglsylggl",
+    "gsgggpggsggggggs",
+    "ggggggsgggggysgg",
+    "glggsgplgglsglgg",
+    "wgsggggggsgggygg",
+    "sgggpggpgyggggwg",
+    "pwlggygglgwlsgyp"
+  ] },
+  "tile-prop-trellis": { w: 16, h: 16, pal: {"g":"#198e15","h":"#195815","w":"#8a6844","W":"#6e5233","t":"#a8834f","l":"#2f7a24","b":"#e59cae"}, rows: [
+    "hgggggggghgggggg",
+    "gggggghggggggggh",
+    "ggghgggggggghggg",
+    "hwwwwwwwwwwwwwwg",
+    "gWwgWghWggWggwgh",
+    "ggwtgtgtgtgtbwgg",
+    "hgwgbbtgghtglwgg",
+    "ggwtgthtgtgtgwgh",
+    "ggwhtgggtggbbwgg",
+    "hgwtgtgtgtgtgwgg",
+    "ggwblgtgggtggwgh",
+    "ggwtgtbtgtgthwgg",
+    "hgwgtglgthggtwgg",
+    "ggwtgthtgtgtgwgh",
+    "ggwhgggggggghwgg",
+    "hhwhhhhhhhhhhwhg"
+  ] },
+  "tile-prop-rosebush": { w: 16, h: 16, pal: {"g":"#198e15","h":"#195815","l":"#2c7a22","L":"#3f9c31","d":"#1f5c18","b":"#e88bab","w":"#f2ead8","R":"#c94f63","W":"#6e5233"}, rows: [
+    "hgggggggghgggggg",
+    "gggggghggggggggh",
+    "ggghgggggggghggg",
+    "hgggggggghgggggg",
+    "ggggggllllgggggh",
+    "ggghlLllllbLhggg",
+    "hggllbblllblLggg",
+    "gglllllLwllllLgh",
+    "ggLlllllLlllllgg",
+    "hglLlllblLllllgg",
+    "ggllLlRlllLbllgh",
+    "gglllblllllLllgg",
+    "hgglllLlllllLggg",
+    "ggggddddddddgggh",
+    "ggghggddddgghggg",
+    "hgggggggghgggggg"
+  ] },
   "tile-thatchroof": { w: 16, h: 16, pal: {"g":"#c2a054","L":"#d9bc76","S":"#856830","D":"#6e5626"}, rows: [
     "gLggLgLggLggLgLg",
     "ggLggSgLgggLggLg",
@@ -115109,6 +115210,11 @@ for (const k of T29_FLOOR_KINDS) TILE_ART[k] = 'tile-' + k;
 for (const k of WD8_PROP_KINDS) TILE_ART[k] = 'tile-prop-' + k;
 for (const k of WD8_WALL_KINDS) TILE_ART[k] = 'tile-' + k;
 for (const k of WD8_FLOOR_KINDS) TILE_ART[k] = 'tile-' + k;
+// Wave T30: Wildflower's trellises + rose bushes draw their prop
+// tiles; its trellis roofs and petal lanes draw theirs.
+for (const k of T30_PROP_KINDS) TILE_ART[k] = 'tile-prop-' + k;
+for (const k of T30_WALL_KINDS) TILE_ART[k] = 'tile-' + k;
+for (const k of T30_FLOOR_KINDS) TILE_ART[k] = 'tile-' + k;
 // Premium+ W6 (TX-3/PL-1): door-open frames, authored in TX-3 for every
 // door kind. The warp-fade engine that plays them lands in W7 — W6
 // wires the frames (this registry + cache.doorOpen + doorOpenCanvas)
@@ -116893,6 +116999,11 @@ function resolveTileLayers(cache, kind, x, y, kindAt, t, phase, mapId) {
     // fully opaque — the green is baked in).
     case 'sunlamp':
     case 'lilacbush':
+    // Wave T30: Wildflower's climbing-rose trellises and rose
+    // bushes composite over their green the same way (their art
+    // is fully opaque — the green is baked in).
+    case 'trellis':
+    case 'rosebush':
     // Wave T17: the radio mast composites over its compound grass too.
     case 'radiomast': {
       // Object tiles carry transparent surrounds (Wave 1): lay the ground
@@ -123771,6 +123882,14 @@ const WALKABLE = new Set(['.', ',', 'D', 'E', 'C', 'F', 'J', 'K', '1', '2', 'V',
   // in Hushmoor Town, and the inlayfloor char (U+1E00+631)
   // likewise in Blossom City, so floor stays floor in both.
   ...[629, 631]
+    .map((i) => String.fromCodePoint(0x1E00 + i)),
+  // Wave T30: the petalfloor char (U+1E00+634, tiles.mjs
+  // T30_KIND_DEFS) is walkable street material — Wildflower
+  // Town's petal-flecked garden lane, swapped onto the town's
+  // street cells (which shipped as walkable tg2 mud), so
+  // floor stays floor. (Indices 633-636 after the Director's
+  // re-index ruling: W-DIFF8 holds 629-632; 606-607 stay empty.)
+  ...[634]
     .map((i) => String.fromCodePoint(0x1E00 + i))]);
 
 // Trainer definitions for the slice.
@@ -147461,19 +147580,19 @@ const MAPS7 = {
     "rows": [
       "὆὆὆὇὆὆὆὆὆὆὇὆὆὆὆὆὆὇὆὆὆὆὆὆ὄ὆὆὆",
       "὆FὄὄὄFὄFὄὄ὇ὄὄẏὄὄὄὄὄὄὄὄẏὄὄὄὄ὆",
-      "὆ὄὄjklmὄFὈὈὈὈὄὄὊὊὊὄὄὄὄdeefὄ὆",
-      "὆SὅAJKAὄὄὉsὉὉὄὄὋsὋὄFὄ὇P12Pὄ὆",
-      "὆ὅὅὅὅὅὅὅὅὅὅὅὅὅὅὅὅὅὅὅὅὅὅὅὅὅὅ὆",
-      "὆ὅὄὅὅὅὅὅὅὅὅὅὅὅὅὅὅὅὅὅὅὅὅὅὅὅὅ὆",
-      "὆ὅὅἋὅὄὄὄὅὅὅὅὄὅὅὅὅὅὅὅὅẏFὄὄὄὅ὆",
-      "Rὅὅὅὅὅὅὅὅὅὅὅὅὅẅὄὄὅὄὄὅὅὄὄὄὄὅ὆",
-      "Lὅὅὅὅὅὅὅὅὅὅὅὅὅὅὅὅὅὅὅὅὅὅὅὅὅὅὅ",
-      "Lὅὅὅὅὅὅὅὅὅὅὅὅὅὅὅὅὅὅὅὅὅὅὅὅὅὅὅ",
-      "RSὅὅὅὅ὇ὄὅFὄὄὅὅὅὅὅὅὅ὇ὄὅὄὄὄὄὄ὆",
-      "὆ὄὄFFFFFFFὅὅὅὅὅἋὅὄὅFF..FὄἋὄ὆",
-      "὆ὄὄFFFFFFFὅὅὅὅὅὅὅὅ.,,,,,ẏFὄ὆",
-      "὆ὄὄFFFFFFFẅὅὅὅὅὅὅὅ.,,,,,,ὄὄ὆",
-      "὆ὄὄFFFFFFFὅὅὅὅFὄὄὄ.,,,,,,ὄὄ὆",
+      "὆ὄ⁼jklmὄF⁹⁹⁹⁹ὄὄ⁹⁹⁹ὄὄ⁼ὄdeefὄ὆",
+      "὆SὄAJKAὄὄὉsὉὉὄὄὋsὋὄFὄ὇P12Pὄ὆",
+      "὆⁺⁺⁺⁺⁺⁺⁺⁺⁺⁺⁺⁺⁺⁺⁺⁺⁺⁺⁺⁺⁺⁺⁺⁺⁺⁺὆",
+      "὆⁺ὄὄ⁹⁹⁹ὄὄ⁻⁺⁻Sὄὄὄὄὄ⁹⁹⁹ὄὄὄὄὄ⁺὆",
+      "὆⁺ὄἋὋsὋὄὄὄ⁺ὄὄὄὄὄὄὄὋsὋẏὄὄὄὄ⁺὆",
+      "R⁺ὄὄὄ⁺ὄὄὄὄ⁺ὄὄὄẅὄὄὄὄ⁺ὄὄὄὄὄὄ⁺὆",
+      "L⁺⁺⁺⁺⁺⁺⁺⁺⁺⁺⁺⁺⁺⁺⁺⁺⁺⁺⁺⁺⁺⁺⁺⁺⁺⁺⁺",
+      "L⁺⁺⁺⁺⁺⁺⁺⁺⁺⁺⁺⁺⁺⁺⁺⁺⁺⁺⁺⁺⁺⁺⁺⁺⁺⁺⁺",
+      "RSὄὄὄὄ὇ὄὄF⁺ὄὄὄὄὄὄὄ⁺὇ὄὄ⁺ὄὄὄ⁼὆",
+      "὆ὄὄFFὄὄὄὄὄ⁺⁺⁺⁺⁺ἋὄS⁺ὄὄ..ὄὄἋὄ὆",
+      "὆ὄὄ⁺⁺⁺⁺⁺⁺⁺⁺ὄὄSὄὄὄὄ.,,,,,ẏFὄ὆",
+      "὆ὄὄFFFFF⁺Sẅὄὄὄὄὄὄὄ.,,,,,,ὄὄ὆",
+      "὆ὄὄFFFFFFFὄὄὄὄFὄὄὄ.,,,,,,ὄὄ὆",
       "὆ὄὄFFFFFFFὄFὄὄὄFὄ὇ὄ,,,,,ὄFὄ὆",
       "὆ὄὄὄὄὄὄὄẏὄὄὄὄὄὄὄὄὄὄὄὄὄὄὄὄὄὄ὆",
       "὆὆὆὇὆὆὆὆὆὆὇὆὆὆὆὆὆὇὆὆὆὆὆὆὇὆὆὆"
@@ -147494,10 +147613,12 @@ const MAPS7 = {
       {"x": 1, "y": 10, "text": "COPPERBORE TUNNEL — Through the hill to Route 116 and Copperton. The HUSHLET were here first; walk gentle."},
       {"x": 1, "y": 3, "text": "WILDFLOWER TOWN — A small town bathed in pure, sweet air. The contest hall keeps the greenest lawn in Maris."},
       {"x": 17, "y": 11, "text": "WILDFLOWER TOWN — West: COPPERBORE TUNNEL · East: ROUTE 117."},
-      {"x": 13, "y": 12, "text": "WILDFLOWER TOWN — West: COPPERBORE TUNNEL · East: ROUTE 117."}
+      {"x": 13, "y": 12, "text": "WILDFLOWER TOWN — West: COPPERBORE TUNNEL · East: ROUTE 117."},
+      {"x": 12, "y": 5, "text": "WILDFLOWER TOWN — West: COPPERBORE TUNNEL · East: ROUTE 117."},
+      {"x": 9, "y": 13, "text": "WILDFLOWER TOWN — West: COPPERBORE TUNNEL · East: ROUTE 117."}
     ],
     "npcs": [
-      {"x": 3, "y": 5, "name": "MART CLERK", "art": "clerk", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#4a3a2a", "dialogue": ["Wildflower Mart — contest-town shelves, ribbon not included."], "mart": {"stock": ["pokeball", "greatball", "superpotion", "hyperpotion", "antidote", "parlyzheal", "revive"]}},
+      {"x": 22, "y": 4, "name": "MART CLERK", "art": "clerk", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#4a3a2a", "dialogue": ["Wildflower Mart — contest-town shelves, ribbon not included."], "mart": {"stock": ["pokeball", "greatball", "superpotion", "hyperpotion", "antidote", "parlyzheal", "revive"]}},
       {"x": 12, "y": 6, "name": "CONTEST AUNTIE ROSA", "art": "lady", "skin": "#d8a878", "shirt": "#7a4a8a", "pants": "#2a2a3a", "hair": "#c0c0c0", "dialogue": ["A ribbon is just a judge admitting, in writing, that your Kin shone.", "My ROSEFAE has opinions about the hall's lighting. All of them correct."]},
       {"x": 21, "y": 13, "name": "EMIL’S UNCLE PIOTR", "art": "gent", "skin": "#e8b888", "shirt": "#3a6ac0", "pants": "#2a3a4a", "hair": "#1a1a1a", "dialogue": ["My nephew went out to catch his first Kin and came back a trainer. This town's air, I say.", "The tunnel air does my lungs good. The fresh side of the hill is this one."]},
       {"x": 8, "y": 14, "name": "GARDENER FENN", "art": "worker", "skin": "#f0c8a0", "shirt": "#3a7a4a", "pants": "#4a3a2a", "hair": "#2a1a0a", "dialogue": ["I mow around the wildflowers. The wildflowers were the point.", "Battle Tent hopefuls train on the north lawn at dawn. Quietly. It's Wildflower."]},
@@ -187971,6 +188092,6 @@ if (typeof Game !== 'undefined') Object.assign(Game.prototype, {
 });
 
 </script>
-<!-- contentHash:bed84f107df215cb69e4b8f6485012719403df9e90362f8f532049d4c40765b9 -->
+<!-- contentHash:ecb3c3e60289672217444faf5b49873eacd5994b39b1413a007d9bb16f31fc2b -->
 </body>
 </html>
