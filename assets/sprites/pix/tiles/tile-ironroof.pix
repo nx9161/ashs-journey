@@ -1,0 +1,25 @@
+# Wave T43 (Coalseam kit): ironroof — the Coalseam Gym's and Museum's own roof (the two stamps the backend left sharing tr-oreburgh). RIVETED SOOT-IRON PLATE: horizontal plate bands in the town's TOWN_STYLE roof palette (light top course, mid field, shadow seam courses) with offset vertical seams, a pale rivet row along each seam course, and rust weep under two seams in the town's rust door tone. Plate-and-rivet construction — unlike Revelry's beamroof (glass bands), Copperton's coproof (copper-seamed slabs) and Cragmoor's drakeroof (shingles). (NO-SAME-KIT law; WAVE-T43-COALSEAM-PLAN.md §5.)
+PIX tile-ironroof 16 16
+llllllllllllllll
+mmmmmsmmmmmmmmmm
+mmmmmsmmmmmmmmmm
+mmmmmsmmmmmmmmdm
+mmmmmsmmmdmmmmmm
+srssrssrssrssrss
+mmmmmwmmmmmsmmmm
+mmmmmwmmmmmsmmmm
+mmmmmmmmmmmsmmmm
+mmmmmmmmmmmsmdmm
+srssrssrssrssrss
+mmmsmmmmmmmwmmmm
+mmmsmmmmmmmmmmmm
+mmmsmmmmmmmmmmmm
+mmmsmmmmmmmmmmmm
+ssssssssssssssss
+PAL
+m #5e564e iron plate mid (TOWN_STYLE roof)
+l #7d766c plate light course
+s #38332e seam / shadow course
+d #4c463f plate shade fleck
+r #a89880 rivet
+w #8a4a2a rust weep (TOWN_STYLE door)

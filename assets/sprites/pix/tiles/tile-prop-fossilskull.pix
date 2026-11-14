@@ -1,0 +1,25 @@
+# Wave T43 (Coalseam kit): fossilskull — the museum's RAMOSAUR skull on a low stone plinth at the Coalseam Museum's east shoulder: bone-white cranium in profile, hollow eye, and the grin APPRENTICE RUE polishes every morning carried in a row of teeth. It stands beside the backend's own fossildisplay cells at the east rim. Fully opaque — the town grass is baked in (measured #1c7c0c from the shipped render). (NO-SAME-KIT law; WAVE-T43-COALSEAM-PLAN.md §5.)
+PIX tile-prop-fossilskull 16 16
+gggggggggggggggg
+gggggggggggggggg
+gggggggggggggggg
+gggggbbbbbbggggg
+ggggbbbbbbbbgggg
+gggbbbbbbbbbbggg
+gggbbddbbbbbBggg
+gggbbbbbbbbbBggg
+ggggbbbbbbbbgggg
+ggggbdbdbdbgBggg
+gggggBBBBBBggggg
+gggssssssssssggg
+gggssSssssSssggg
+gggssssssssssggg
+gggggggggggggggg
+gggggggggggggggg
+PAL
+g #1c7c0c town grass (measured, baked in)
+b #e8e0cc fossil bone
+B #c9bda0 bone shade
+d #2c2622 hollow / tooth gap
+s #7a766e plinth stone
+S #57534c plinth joint

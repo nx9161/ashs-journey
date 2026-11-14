@@ -1,0 +1,24 @@
+# Wave T43 (Coalseam kit): clinkerfloor — Coalseam City's registered street kind (the fleet's street kinds carry the -floor suffix; the desire-path tiers key on it). CLINKER-ASH CARTWAY: packed near-black ash with a dense fine clinker aggregate — pale ash-grey and warm tan flecks, a sparse rust spark. Structurally a FINE DARK AGGREGATE: unlike Cragmoor's settfloor (large basalt blocks in a grid), Hushmoor's shinglefloor (daylight violet gravel) and Lilac's gridfloor (bronze lattice). No other town walks on black ground. (NO-SAME-KIT law; WAVE-T43-COALSEAM-PLAN.md §5.)
+PIX tile-clinkerfloor 16 16
+raapataapataapat
+ataapataapatarpa
+pataapataapataap
+apataapataapataa
+adpataapatarpata
+taapatadpataapat
+ataapataapatadpa
+pataapatarpataap
+apdtaapataapataa
+aapataapdtaapata
+taapatarpataapdt
+ataapataapataapa
+patdapataapataap
+apatarpatdapataa
+aapataapataapatd
+taapataapataapat
+PAL
+a #463c34 packed clinker ash
+t #6e5a44 tan clinker fleck
+p #8a7a66 pale ash fleck
+d #3a322b compaction shade
+r #a85a30 rust spark

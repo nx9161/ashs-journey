@@ -1713,6 +1713,31 @@ T42_KIND_DEFS.forEach(([kind], i) => {
 export const T42_PROP_KINDS = T42_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
 export const T42_WALL_KINDS = T42_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
 export const T42_FLOOR_KINDS = T42_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
+// ---- Wave T43: Coalseam City's own kit from birth (NO-SAME-KIT
+// law): 'Soot Iron & Clinker Ash' — idx 792-795 per the Director's
+// index ruling (main's kinds run 594-636 + 645-648 + 660-662 +
+// 672-675 + 684-687 + 696-699 + 708-711 + 720-724 + 732-736 +
+// 744-748 + 756-759 + 768-771; the parallel T42 claim holds
+// 780-783; the gaps stay empty). clinkerfloor is the packed
+// black-ash street; ironroof is the riveted soot-iron plate worn
+// by the Gym's and Museum's roof cells (the two stamps the
+// backend left sharing tr-oreburgh); coalcarts stands at the
+// mine sign's foot; fossilskull at the Museum's east shoulder.
+export const T43_KIND_DEFS = [
+  ['clinkerfloor', 'floor'],
+  ['ironroof', 'wall'],
+  ['coalcarts', 'prop'],
+  ['fossilskull', 'prop'],
+];
+export const T43_KIND_CHARS = {};
+T43_KIND_DEFS.forEach(([kind], i) => {
+  const ch = String.fromCodePoint(0x1E00 + 792 + i);
+  T43_KIND_CHARS[kind] = ch;
+  TILE_CHARS[ch] = kind;
+});
+export const T43_PROP_KINDS = T43_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
+export const T43_WALL_KINDS = T43_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
+export const T43_FLOOR_KINDS = T43_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
 export const SINNOH_TOWN_GROUND_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg);
 export const SINNOH_TOWN_GROUND2_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg2);
 // TX-3: the 8 gym exteriors by town (original type-accent motifs).

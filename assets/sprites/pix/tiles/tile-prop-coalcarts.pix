@@ -1,0 +1,28 @@
+# Wave T43 (Coalseam kit): coalcarts — a timber mine cart banded in iron, heaped with black coal (pale glints on the facets), standing on a short rail stub with sleepers. It stands at the foot of the Coalseam Mine sign ('Mind the carts; they do not mind you') — the singing cart line of MINER BRAM's tale, carried as dressing beside the backend's own miningcart cells. Fully opaque — the town grass is baked in (measured #1c7c0c from the shipped render). (NO-SAME-KIT law; WAVE-T43-COALSEAM-PLAN.md §5.)
+PIX tile-prop-coalcarts 16 16
+gggggggggggggggg
+gggggggggggggggg
+gggggggggggggggg
+gggggggggggggggg
+ggggggccCcgggggg
+gggggccCccccgggg
+ggiiiiiiiiiiiigg
+ggTttttttttttTgg
+ggTttttttttttTgg
+ggiiiiiiiiiiiigg
+ggTttttttttttTgg
+ggggwwggggwwgggg
+ggggwwggggwwgggg
+ggSggSggSggSgggg
+ggRRRRRRRRRRgggg
+gggggggggggggggg
+PAL
+g #1c7c0c town grass (measured, baked in)
+c #1c1a18 coal lump
+C #7a828c coal glint
+i #38332e iron band
+T #4e3823 cart post
+t #6e5136 cart timber (TOWN_STYLE log)
+w #2c2622 wheel
+S #5a4632 sleeper
+R #9a938a rail

@@ -659,6 +659,17 @@ export const WALKABLE = new Set(['.', ',', 'D', 'E', 'C', 'F', 'J', 'K', '1', '2
   // 732-736 + 744-748 (T39) + 756-759 (T40); the parallel
   // T41 claim holds 768-771; gaps stay empty.)
   ...[780]
+    .map((i) => String.fromCodePoint(0x1E00 + i)),
+  // Wave T43: the clinkerfloor char (U+1E00+792, tiles.mjs
+  // T43_KIND_DEFS) is walkable street material — Coalseam
+  // City's packed clinker-ash cartway, swapped onto the
+  // town's street cells (which shipped as walkable tg2 mud),
+  // so floor stays floor. (Indices 792-795 per the Director's
+  // index ruling: main's kinds run 594-636 + 645-648 + 660-662 +
+  // 672-675 + 684-687 + 696-699 + 708-711 + 720-724 + 732-736 +
+  // 744-748 + 756-759 + 768-771; the parallel T42 claim holds
+  // 780-783; gaps stay empty.)
+  ...[792]
     .map((i) => String.fromCodePoint(0x1E00 + i))]);
 
 // Trainer definitions for the slice.
