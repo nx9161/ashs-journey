@@ -1,0 +1,27 @@
+# Wave W17-A (Route 5): bloom bed — a fenced flower bed of bloom rows on garden meadow (fully opaque, ground baked in).
+PIX tile-prop-bloombed 16 16
+aaaaaabaabbabbab
+aaaaaaabaaaaaaaa
+aaaaaaaaaaabaaaa
+aaabababaaaaaaab
+aattttttttttttaa
+aatsssssssssstaa
+aatgfswsygfsgtaa
+aatssgssgssgstaa
+aatswsygfswsstab
+aatgssgssgssgtab
+aatsygfswsygstab
+aatsssssssssstba
+aattttttttttttab
+aaabbababaaaaaaa
+abaaabaaaaabaaaa
+baabaaaaaaaaaaaa
+PAL
+a #82b163
+b #74a257
+t #8a6a44
+s #5d7a43
+g #6d8f52
+f #e8a0bf
+w #f2f0e0
+y #eed97a

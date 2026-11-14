@@ -1,0 +1,24 @@
+# Wave W17-A (Route 3): scree boulder — a fallen grey boulder pile on scree grit (fully opaque, ground baked in).
+PIX tile-prop-screeboulder 16 16
+ababababbbdaaaaa
+ababaaabaaabaaaa
+daaaabaaabaaaaaa
+aaaabadaadaaaaaa
+abbbaaaaaaaaaaaa
+aaadaabaaababaaa
+aaaababbbaabadaa
+abaaaaaaaabaaaaa
+adaaabaadabaaaab
+aaaaaalllaaaaaba
+aaaassslssssdaaa
+adaadssslssdaaaa
+abaaadssssddaaaa
+aaabbaabaaaaaaaa
+baaabaaaaaaabaaa
+abaabbabaaaaaaba
+PAL
+a #8f8b74
+b #7d7a66
+d #6b6858
+s #9d9d9d
+l #bcbcbc

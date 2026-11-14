@@ -1,0 +1,24 @@
+# Wave W17-A (Route 4): ledge cairn — a stacked-stone cairn at the ledge lip on terrace turf (fully opaque, ground baked in).
+PIX tile-prop-ledgecairn 16 16
+aaababaabaabaaaa
+baaaaaabaaaaaaaa
+aaaaaaaaaaaaaaaa
+bbaaaaaaaabaaaaa
+bbaaaaaaaaaaaaaa
+aaabbaaaaaaabaaa
+aaaaaabaaaaaabab
+aaaabaaaaaaaaaaa
+aabaabaaaaabaaaa
+abaaaaaslaabaaab
+aaaaabslsaaaaaaa
+aaaaaassssababaa
+aaaaadssssdaaaaa
+aaaaaaaaaaababaa
+aaaaaaaaaabaabaa
+aaabaabaabaaabaa
+PAL
+a #6f9c5f
+b #63914f
+s #a8a294
+l #c2bcab
+d #847e6e

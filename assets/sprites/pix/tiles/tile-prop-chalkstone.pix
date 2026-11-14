@@ -1,0 +1,25 @@
+# Wave W17-A (Route 1): chalkstone — pale chalk boulders on chalk turf (fully opaque, ground baked in).
+PIX tile-prop-chalkstone 16 16
+bbaaabaabaaaaaba
+baaaaaaaabaaaaaa
+aaaaabaaababbaaa
+aabbaaaaaaaabaab
+ababaaabfaaaabaa
+aaaaaaaaaaaaaaaa
+abbfafbaaaafaaaa
+aaaaaaaaaababaaa
+abaaaalllabaaaaa
+aaaaasslssaaaabb
+abbaassslssbaaaf
+aabbadssssdaaaba
+baaaaaddddaaaaba
+aabbaaabfaaaaaaa
+aabaaaababaaaaaa
+aaaaaaababaaabaa
+PAL
+a #74a267
+b #68985d
+f #e8e4c8
+s #cfc9b4
+l #e6e1cd
+d #a49e88

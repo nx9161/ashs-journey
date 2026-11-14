@@ -1,0 +1,23 @@
+# Wave W17-A (Route 4): ledge-step path — stone-sand slabs with a step line every four rows (the one-way descent, drawn).
+PIX tile-ledgefloor 16 16
+alaaababaalaaaab
+aaalaaababaabaaa
+aaaabaaaaaaablaa
+mmmmmmmmmmmmmmmm
+llllllllllllllll
+aabbbaaaaaaaaaaa
+aaaaabaaaabaaaaa
+mmmmmmmmmmmmmmmm
+llllllllllllllll
+abaaabaaaaaalaaa
+aabaaabaabaaabaa
+mmmmmmmmmmmmmmmm
+llllllllllllllll
+aaaaaaalaaaaaaba
+baaaaabaaaaabbaa
+mmmmmmmmmmmmmmmm
+PAL
+a #c9b78f
+b #b3a077
+l #ddd0a8
+m #a89468
