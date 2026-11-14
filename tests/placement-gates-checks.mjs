@@ -1031,6 +1031,36 @@
 //     apron min 0.938 unmoved. The orphaned MART CLERK
 //     re-seats (3,5) -> (9,12); tg2 cells 181 -> 0. NO
 //     other town's pin moves.
+//     THIRTY-NINTH DOCUMENTED EXCEPTION (WAVE T41; the
+//     THIRTY-EIGHTH is WAVE T40 Clover's, landing at its
+//     merge): the registry grows by one scoped entry —
+//     sandgem: [shellfloor] — and sandgem's pin migrates
+//     on metrics while staying PASS: the Shingle Town
+//     rebuild on its own kit from birth ('Shell Shingle
+//     & Raked Shingle-Sand', idx 768-771: raked shell-sand
+//     shellfloor streets, scalloped pale shellroof on the
+//     Lab/Mart share broken + the Shingle House eaves,
+//     the TIDESLUG prop one cell west of ANA's post, the
+//     bleached tidelog on the west beach) per
+//     WAVE-T41-SHINGLE-PLAN.md. The shipped town PASSED
+//     only as a mud-and-beach artefact: [1, 156, 156, 7,
+//     7, 1, 1, 0, 0, 0.833, 0, 0, 0, 0, 1, 1] -> [1, 156,
+//     156, 7, 7, 1, 9, 0, 0, 0.824, 0, 0, 0, 0, 0.6668,
+//     0.9888]: conn 156/156 unmoved, junctions 1 -> 9
+//     sites all covered (the four shipped invisible DIRS
+//     posts gain tiles; seven verbatim copies at
+//     validator-named bare junctions), strict 1 -> 0.6668
+//     (the tg2 web was strict tier by definition; the
+//     shell-sand streets carry the same lines at the
+//     honest CLEAN measure — every CLEAN town reads
+//     0.62-0.93), fabric 1 -> 0.9888, apron min 0.833 ->
+//     0.824 (the Center's ring: the north-throat copy
+//     post takes a ring cell, beside the shipped td ding
+//     and the stamp's own sign tile). The Center's
+//     missing east half is restored to the stamp's own
+//     chars (the K door fired from a mud cell); the
+//     orphaned MART CLERK re-seats (3,5) -> (17,4); tg2
+//     cells 173 -> 0. NO other town's pin moves.
 
 import { loadMaps, makeTiers, townSetOf, analyzeMap } from '../scripts/audit-desire-paths.mjs';
 import { scoreTown, gateCheck, tiersFor, STREET_REGISTRY } from '../scripts/audit-placement.mjs';
@@ -1057,8 +1087,8 @@ async function gateTuple(id, t) {
 }
 
 // 1. registry scope lock
-ok('street registry is exactly { vermilion: [boardwalk], blackthorn: [settfloor], silvertown: [marblefloor], ecruteak: [wornfloor], saffron: [avenuefloor], violet: [violetfloor], azalea: [brickfloor], mahogany: [gravelfloor], rustboro: [cutstonefloor], fuchsia: [marshfloor], cianwood: [driftfloor], dewford: [plankfloor], viridian: [slatefloor], celadon: [promfloor], slateport: [quayfloor, boardwalk], cerulean: [pierfloor], mauville: [gridfloor], lavender: [shinglefloor], cherrygrove: [inlayfloor], verdanturf: [petalfloor, cavefloor], olivine: [harbourfloor, jettyfloor], fallarbor: [ashfloor], lavaridge: [steamfloor, terracefloor], fortree: [canopyfloor, boardwalk], lilycove: [cobblefloor, cavefloor], mossdeep: [starfloor, dockfloor], sootopolis: [craterfloor, cavefloor], pacifidlog: [raftfloor], evergrande: [plateaufloor, cavefloor], twinleaf: [cloverfloor] }',
-  JSON.stringify(STREET_REGISTRY) === '{"vermilion":["boardwalk"],"blackthorn":["settfloor"],"silvertown":["marblefloor"],"ecruteak":["wornfloor"],"saffron":["avenuefloor"],"violet":["violetfloor"],"azalea":["brickfloor"],"mahogany":["gravelfloor"],"rustboro":["cutstonefloor"],"fuchsia":["marshfloor"],"cianwood":["driftfloor"],"dewford":["plankfloor"],"viridian":["slatefloor"],"celadon":["promfloor"],"slateport":["quayfloor","boardwalk"],"cerulean":["pierfloor"],"mauville":["gridfloor"],"lavender":["shinglefloor"],"cherrygrove":["inlayfloor"],"verdanturf":["petalfloor","cavefloor"],"olivine":["harbourfloor","jettyfloor"],"fallarbor":["ashfloor"],"lavaridge":["steamfloor","terracefloor"],"fortree":["canopyfloor","boardwalk"],"lilycove":["cobblefloor","cavefloor"],"mossdeep":["starfloor","dockfloor"],"sootopolis":["craterfloor","cavefloor"],\"pacifidlog\":[\"raftfloor\"],\"evergrande\":[\"plateaufloor\",\"cavefloor\"],\"twinleaf\":[\"cloverfloor\"]}',
+ok('street registry is exactly { vermilion: [boardwalk], blackthorn: [settfloor], silvertown: [marblefloor], ecruteak: [wornfloor], saffron: [avenuefloor], violet: [violetfloor], azalea: [brickfloor], mahogany: [gravelfloor], rustboro: [cutstonefloor], fuchsia: [marshfloor], cianwood: [driftfloor], dewford: [plankfloor], viridian: [slatefloor], celadon: [promfloor], slateport: [quayfloor, boardwalk], cerulean: [pierfloor], mauville: [gridfloor], lavender: [shinglefloor], cherrygrove: [inlayfloor], verdanturf: [petalfloor, cavefloor], olivine: [harbourfloor, jettyfloor], fallarbor: [ashfloor], lavaridge: [steamfloor, terracefloor], fortree: [canopyfloor, boardwalk], lilycove: [cobblefloor, cavefloor], mossdeep: [starfloor, dockfloor], sootopolis: [craterfloor, cavefloor], pacifidlog: [raftfloor], evergrande: [plateaufloor, cavefloor], twinleaf: [cloverfloor], sandgem: [shellfloor] }',
+  JSON.stringify(STREET_REGISTRY) === '{"vermilion":["boardwalk"],"blackthorn":["settfloor"],"silvertown":["marblefloor"],"ecruteak":["wornfloor"],"saffron":["avenuefloor"],"violet":["violetfloor"],"azalea":["brickfloor"],"mahogany":["gravelfloor"],"rustboro":["cutstonefloor"],"fuchsia":["marshfloor"],"cianwood":["driftfloor"],"dewford":["plankfloor"],"viridian":["slatefloor"],"celadon":["promfloor"],"slateport":["quayfloor","boardwalk"],"cerulean":["pierfloor"],"mauville":["gridfloor"],"lavender":["shinglefloor"],"cherrygrove":["inlayfloor"],"verdanturf":["petalfloor","cavefloor"],"olivine":["harbourfloor","jettyfloor"],"fallarbor":["ashfloor"],"lavaridge":["steamfloor","terracefloor"],"fortree":["canopyfloor","boardwalk"],"lilycove":["cobblefloor","cavefloor"],"mossdeep":["starfloor","dockfloor"],"sootopolis":["craterfloor","cavefloor"],\"pacifidlog\":[\"raftfloor\"],\"evergrande\":[\"plateaufloor\",\"cavefloor\"],\"twinleaf\":[\"cloverfloor\"],\"sandgem\":[\"shellfloor\"]}',
   JSON.stringify(STREET_REGISTRY));
 
 // 2. census: the 64 towns of townSetOf (pallet included)
@@ -1129,7 +1159,7 @@ const PIN = {
   "resort-area": [1, 182, 182, 6, 6, 1, 5, 0, 0, 0.941, 0, 0, 0, 0, 0.944, 0.9846],
   "rustboro": [1, 156, 156, 7, 7, 1, 5, 0, 0, 0.714, 0, 0, 0, 0, 0.7274, 0.9828],
   "saffron": [1, 156, 156, 10, 10, 1, 2, 0, 0, 0.857, 0, 0, 0, 0, 0.8655, 1],
-  "sandgem": [1, 156, 156, 7, 7, 1, 1, 0, 0, 0.833, 0, 0, 0, 0, 1, 1],
+  "sandgem": [1, 156, 156, 7, 7, 1, 9, 0, 0, 0.824, 0, 0, 0, 0, 0.6668, 0.9888],
   "shamouti": [0, 30, 182, 6, 6, 1, 4, 0, 1, 0.588, 0, 0, 0, 0, 0.912, 0.912],
   "silvertown": [1, 90, 90, 6, 6, 1, 15, 0, 0, 0.706, 0, 0, 0, 0, 0.6654, 0.9896],
   "slateport": [1, 90, 90, 6, 6, 1, 10, 0, 0, 0.857, 0, 0, 0, 0, 0.6244, 0.9974],
