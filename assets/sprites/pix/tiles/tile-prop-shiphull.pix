@@ -1,37 +1,32 @@
-# Wave T28 (Fairhaven kit): shiphull — Captain Merrick's hull on
-# the stocks at the Fairhaven shipyard (MANIFEST row 42: "shipyard
-# E with a hull on the stocks"; BACKSTORY-SYNC-AUDIT Fairhaven,
-# synced. The yard is pinned by MERRICK'S APPRENTICE LIO's post
-# (24,7) + both NPC dialogues — the hull stands at (27,5) beside
-# him, WAVE-T28-FAIRHAVEN-PLAN.md §3.4). A ribbed hull FRAME —
-# keel + curved ribs, one plank band being fitted — standing on
-# two timber stock blocks, a scaffold pole at its east side; the
-# frame is open by design (a hull under construction). FULLY
-# OPAQUE by design: tg-slateport (measured flat #248917, with its
-# shading derivatives) is baked in as its ground, never
-# transparency (the T27 precedent).
+# tile-prop-shiphull - Fairhaven (Wave T28): Merrick's hull on its
+# stocks in the shipyard yard at (27,5) - a ribbed wooden hull
+# under construction, stepped mast, resting on stock blocks.
+# Fully opaque (the green is baked in; the composite lays the
+# town ground beneath regardless). Redrawn after the first
+# draft read as a bare gantry frame at town scale.
 PIX tile-prop-shiphull 16 16
 gggggggggggggggg
-ggGgggggggggggGg
-gggdwwwwwwwwdddg
-ggdwggwggwggwddg
-ggdwggwggwggwddg
-gggWWwgwggwdggdg
-ggggdwggwgdgggdg
-gggggwkkkkwgggdg
-ggggddggggddggdg
-ggggWWggggWWggdg
-ggghhhgggggghhhg
-ggggggggggggggdg
+ggggggwggggggggg
+ggggggwgggggggWg
+ggggggwggggggWWg
+gDDDDDDDDDDDhWWg
+gDhWhhWhhWhhDWgg
+gDhWhhWhhWhhDWgg
+gDDDDDDDDDDDWDgg
+ggDhWhhWhDDWgggg
+gggDhWhhWDkggggg
+ggggkDhhDkgggggg
+gggggsgggsgggggg
+ggggsssgsssggggg
 gggggggggggggggg
-gGgggggggggggggg
-gggggggggGgggggg
+gGgggggggggggGgg
 gggggggggggggggg
 PAL
-g #248917 ground
-G #2d9c1e ground-light
-h #1a6b10 ground-shadow
-d #8d6a3a rib-dark
-w #b0874f rib-wood
-W #96703f plank-shade
-k #6e4a26 keel
+g #248917
+G #2d9c1e
+D #4a2f1d
+h #7d4a26
+W #b0874f
+w #96703f
+s #5e4630
+k #33241a
