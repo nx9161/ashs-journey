@@ -433,11 +433,11 @@ export const WALKABLE = new Set(['.', ',', 'D', 'E', 'C', 'F', 'J', 'K', '1', '2
   // Lantern City.
   ...[577, 578, 581, 582]
     .map((i) => String.fromCodePoint(0x1E00 + i)),
-  // Wave T24: the clockbed char (U+1E00+583, tiles.mjs T24_KIND_DEFS)
-  // is walkable ground — the Flower Clock's petal-soil bed in
-  // Eldergrove, swapped 1:1 from walkable 'F' flower cells, so
-  // floor stays floor.
-  ...[583]
+  // Wave T24: the clockbed char (U+1E00+587, tiles.mjs T24_KIND_DEFS;
+  // authored at 583, re-indexed to 587 at the T24 merge) is walkable
+  // ground — the Flower Clock's petal-soil bed in Eldergrove, swapped
+  // 1:1 from walkable 'F' flower cells, so floor stays floor.
+  ...[587]
     .map((i) => String.fromCodePoint(0x1E00 + i))]);
 
 // Trainer definitions for the slice.

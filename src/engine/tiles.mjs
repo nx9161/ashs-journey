@@ -730,9 +730,11 @@ WD_KIND_DEFS.forEach(([kind], i) => {
 export const WD_FLOOR_KINDS = WD_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
 export const WD_WALL_KINDS = WD_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
 // ---- Wave T24 (Eldergrove build): the Flower Clock + thatch roof ----
-// Two new kinds continuing the block at idx 581-582 (W-DIFF ends at
-// 580; idx 576 stays the held merge buffer; U+2045/U+2046, verified
-// free in TILE_CHARS and unused by every map row). Owner ruling
+// Three new kinds continuing the block at idx 585-587 (W-DIFF ends
+// at 580, W-DIFF2 took 581-584; idx 576 stays the held merge buffer;
+// U+2049/U+204A/U+204B, verified free in TILE_CHARS and unused by
+// every map row; T24 authored them at 581-583 and the Director
+// re-indexed at merge). Owner ruling
 // 2026-11-13 (NO-SAME-KIT law): Eldergrove's own kit is dry-meadow
 // ground + THATCH-textured straw-gold roofs + the Flower Clock —
 // 'flowerclock' is a class 'prop' (solid object composited over
@@ -751,7 +753,7 @@ export const T24_KIND_DEFS = [
 ];
 export const T24_KIND_CHARS = {};
 T24_KIND_DEFS.forEach(([kind], i) => {
-  const ch = String.fromCodePoint(0x1E00 + 581 + i);
+  const ch = String.fromCodePoint(0x1E00 + 585 + i);
   T24_KIND_CHARS[kind] = ch;
   TILE_CHARS[ch] = kind;
 });
