@@ -1835,8 +1835,7 @@ T46_KIND_DEFS.forEach(([kind], i) => {
 });
 export const T46_PROP_KINDS = T46_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
 export const T46_WALL_KINDS = T46_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
-export const T46_FLOOR_KINDS = T46_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
-// Wave T47: Repose Town's own kit — 'Olive Shingle & River
+export const T46_FLOOR_KINDS = T46_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);// Wave T47: Repose Town's own kit — 'Olive Shingle & River
 // Pebble': the pebblefloor (rounded river pebbles in offset
 // rows bedded in pale sand mortar — the town's registered
 // street), the oliveroof (olive wood shingle courses, worn
@@ -1872,6 +1871,42 @@ T47_KIND_DEFS.forEach(([kind], i) => {
 export const T47_PROP_KINDS = T47_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
 export const T47_WALL_KINDS = T47_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
 export const T47_FLOOR_KINDS = T47_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
+// Wave T48: Shardfall City's own kit — 'Shard Slate & Star Crate':
+// the shardfloor (dark cracked meteor-slate flags with crystal
+// shard inlay — the town's registered street), the shardroof
+// (checker slate — the gym's checkered puzzle floor spilled onto
+// its roof, worn only by the shipped Gym stamp's tr roof cells,
+// so the Gym + Dept Store + HQ three-way roof share breaks) and
+// two props: the starcrate (a heavy star-marked shipping crate at
+// the HQ landing's doorstep and the warehouse hand's shoulder —
+// the HQ sign's 'deliveries come and go' made dressing) and the
+// meteorcore (the tale's warm fallen shard, in the watcher's
+// crater garden east and one transferred seat on the north lawn).
+// Indices 852-855 per the Director's index ruling (main's kinds
+// run 594-636 + 645-648 + 660-662 + 672-675 + 684-687 + 696-699 +
+// 708-711 + 720-724 + 732-736 + 744-748 + 756-759 (T40) +
+// 768-771 (T41) + 780-783 (T42) + 792-795 (T43) + 804-807 (T44) +
+// 816-819 (T45) + 828-831 (T46); the parallel T47 claim holds
+// 840-843; 808-815 + 820-827 + 832-839 + 844-851 stay empty),
+// verified free against origin/main, TILE_CHARS and every map
+// row. Authored art: assets/sprites/pix/tiles/tile-shardfloor.pix,
+// tile-shardroof.pix, tile-prop-starcrate.pix,
+// tile-prop-meteorcore.pix. (WAVE-T48-SHARDFALL-PLAN.md.)
+export const T48_KIND_DEFS = [
+  ['shardfloor', 'floor'],
+  ['shardroof', 'wall'],
+  ['starcrate', 'prop'],
+  ['meteorcore', 'prop'],
+];
+export const T48_KIND_CHARS = {};
+T48_KIND_DEFS.forEach(([kind], i) => {
+  const ch = String.fromCodePoint(0x1E00 + 852 + i);
+  T48_KIND_CHARS[kind] = ch;
+  TILE_CHARS[ch] = kind;
+});
+export const T48_PROP_KINDS = T48_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
+export const T48_WALL_KINDS = T48_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
+export const T48_FLOOR_KINDS = T48_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
 export const SINNOH_TOWN_GROUND_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg);
 export const SINNOH_TOWN_GROUND2_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg2);
 // TX-3: the 8 gym exteriors by town (original type-accent motifs).

@@ -1,0 +1,25 @@
+# Wave T48 (Shardfall kit): shardroof — the CHECKER SLATE of the Shardfall Gym, worn only by the shipped Gym stamp's tr roof cells, so the painting's checkered puzzle floor spills onto the roof and the Gym + Department Store + HQ three-way tr-roof share breaks. A 4px checkerboard of dark and pale meteor slate, crystal flecks in the pale checks. No other fleet roof is a checkerboard: Inglenook's domeroof is gold dome segments, Honeyfield's bloomroof petal scales, Heritage's heritageroof teal slate courses, Repose's oliveroof olive wood shingle. (NO-SAME-KIT law; WAVE-T48-SHARDFALL-PLAN.md §5.)
+PIX tile-shardroof 16 16
+llllbbbbllllbbbb
+aaaabbbbaacabbbb
+aaaabbbbaaaabbbb
+ddddDDDDddddDDDD
+bbbbllllbbbbllll
+bbbbaaaabbbbaaaa
+bbbbaaaabbbbaaaa
+DDDDddddDDDDdddd
+llllbbbbllllbbbb
+aaaabbbbaaaabbbb
+aaaabbbbaaaabbbb
+ddddDDDDddddDDDD
+bbbbllllbbbbllll
+bbbbaaaabbbbaaaa
+bbbbaaaabbbbaaaa
+DDDDddddDDDDdddd
+PAL
+a #98a0ae pale slate check
+l #b6bdc9 pale check lip light
+d #767e8c pale check foot shade
+b #565e6c dark slate check
+D #3f454f dark check foot shade
+c #dbe4f2 crystal fleck

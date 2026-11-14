@@ -1,0 +1,25 @@
+# Wave T48 (Shardfall kit): shardfloor — Shardfall City's registered street kind (the fleet's street kinds carry the -floor suffix; the desire-path tiers key on it). CRACKED SHARD FLAGS: large dark meteor-slate flags split by diagonal crack seams, pale crystal shard triangles inlaid at the cracks — the town form 'department-store meteor slate' (TOWN_STYLE) laid as a street. A DARK, ANGULAR, CRACK-SEAMED geometry: unlike Repose's pebblefloor (rounded pebbles in pale mortar), Heritage's heritagefloor (pale worn teal flags), Inglenook's giltfloor (rectangular gilt setts), Honeyfield's honeyfloor (hexagonal comb), Coalseam's clinkerfloor (fine aggregate), Revelry's beamfloor (steel plates), Shingle's shellfloor (raked shell sand) and Clover's cloverfloor (flecked earth). (NO-SAME-KIT law; WAVE-T48-SHARDFALL-PLAN.md §5.)
+PIX tile-shardfloor 16 16
+lllllllsllllllls
+daaaaaasdaasaaas
+daaCcaasdsaaaaas
+daacaaasdaaaadas
+daaaasasdaaaaaas
+ddasaaasdaaaaaas
+dsaaaaasdaaCcass
+ssssssssssscssss
+lllslllllllsllll
+aaasdaaasaasdaaa
+aadsdasaaaasdaaa
+aaasdaaaaaasdaaa
+aassdacCaaasdaas
+saasdaCaaaasdsad
+aaasdaaaadasdaaa
+ssssssssssssssss
+PAL
+a #6e7686 meteor slate flag
+l #8b93a5 flag top light
+d #4a505c flag side shade
+s #33383f crack seam
+c #cfd8ea crystal shard light
+C #9fb6d9 crystal shard shade

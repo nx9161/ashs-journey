@@ -1,0 +1,25 @@
+# Wave T48 (Shardfall kit): meteorcore — a fallen meteor shard: dark cracked rock with warm amber crystal veins (the fallen stone of the town tale 'The Clerk's Meteor' — 'faintly WARM ever since… a heart that has not decided to wake'), seated in watcher SOL's crater garden at (24,15) beside the shipped meteorstone and at (19,1) on the north lawn (the painting's northern craters, transferred; the tale puts the stone east and the backend's own meteorstones stand byte-kept). Fully opaque: the town grass is baked in (measured #17821b, tg-veilstone's rendered flat, #174c1b speckle). (NO-SAME-KIT law; WAVE-T48-SHARDFALL-PLAN.md §5.)
+PIX tile-prop-meteorcore 16 16
+gggggggggggggggg
+ggGGggggggggGGgg
+gggggggggggggggg
+gggggggLLggggggg
+ggggggLrrLgggggg
+ggggggrOrrLggggg
+gggggrrrrOrrgggg
+gggggrOrrrrrgggg
+ggggrrrrOrrLrggg
+ggggrrrrrrrrgggg
+gggRrOrrrrOrrggg
+gggRRrrrrrrRRggg
+ggggRRRRRRRRgggg
+gggggggggggggggg
+ggGGggggggggGGgg
+gggggggggggggggg
+PAL
+g #17821b town grass (measured tg-veilstone flat)
+G #174c1b grass speckle
+r #3d4149 meteor rock
+R #2c2f36 rock foot shade
+L #5a606c rock light
+O #e8a33d warm crystal vein

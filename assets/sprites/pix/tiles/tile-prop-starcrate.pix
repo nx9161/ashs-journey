@@ -1,0 +1,26 @@
+# Wave T48 (Shardfall kit): starcrate — a heavy star-marked shipping crate: planked wood, iron bands, the star-sign company's mark painted on the face (the HQ sign's own words made dressing: 'Deliveries come and go at all hours; questions do not'), seated at the HQ landing's west shoulder (3,13) and at warehouse hand BRIN's shoulder (7,12) — the painting's stacks of heavy star-marked crates at the HQ dock, at the two seats the backend leaves open. Fully opaque: the town grass is baked in (measured #17821b, tg-veilstone's rendered flat, #174c1b speckle). (NO-SAME-KIT law; WAVE-T48-SHARDFALL-PLAN.md §5.)
+PIX tile-prop-starcrate 16 16
+gggggggggggggggg
+ggGGggggggggGGgg
+gggggggggggggggg
+gggggggggggggggg
+gggwwwwwwwwwwggg
+gggwiLLLLLLiwggg
+gggwwWwwwwWwwggg
+gggwwWwSSwWwwggg
+gggwiLSSSSLiwggg
+gggwwWwSSwWwwggg
+gggwwWwwwwWwwggg
+gggwiLLLLLLiwggg
+gggwwwwwwwwwwggg
+gggggggggggggggg
+ggGGggggggggGGgg
+gggggggggggggggg
+PAL
+g #17821b town grass (measured tg-veilstone flat)
+G #174c1b grass speckle
+w #a97c46 crate plank
+L #c49a5c plank light
+W #8a6234 plank shade
+i #4a4f58 iron band
+S #e8e3d0 painted star sign
