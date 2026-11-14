@@ -1776,7 +1776,7 @@ const KIT_PROP_KINDS = new Set(['lamp', 'crates', 'signpost', 'postbox', 'stall'
   'birdbath', 'bikestand', 'pottedtree', 'sundial', 'gatepost', 'gatearch',
   // Wave B: Yamato/Maris regional props (J3/H3/H3B kinds + the W6 props
   // those towns use) — same kit-ground treatment as the Arden set.
-  'maple', 'podnut', 'jwell', 'stonebell', 'leaguefountain', 'snackmachine',
+  'maple', 'apricorn', 'jwell', 'stonebell', 'leaguefountain', 'snackmachine',
   'fossildisplay', 'lifering', 'divingtank', 'coil', 'batterypack',
   'contestarch', 'ashshrub', 'forge', 'meteorstone', 'telescope',
   'starglobe', 'column', 'coral', 'bonsai',

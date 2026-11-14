@@ -94,7 +94,7 @@ const VAL = await import(join(ROOT, 'api/_lib/validator.mjs'));
 
 // -- the quintet: server validator pair + gen-tables + bag cap --
 {
-  const cloud = (mut) => { const s = clone(defaultState()); s.player.name = 'ASH'; s.player.rivalName = 'GARY'; if (mut) mut(s); return s; };
+  const cloud = (mut) => { const s = clone(defaultState()); s.player.name = 'ASH'; s.player.rivalName = 'VALE'; if (mut) mut(s); return s; };
   ok('A08 server validator accepts the same prefixes ([], first two, full eight)',
     VAL.validateSave(cloud((s) => { s.badges.sinnoh = []; })).ok
     && VAL.validateSave(cloud((s) => { s.badges.sinnoh = SINNOH_ORDER.slice(0, 2); })).ok
@@ -212,7 +212,7 @@ const VAL = await import(join(ROOT, 'api/_lib/validator.mjs'));
 
 // -- F-1: the dedicated meta.location charset (server validator) --
 {
-  const cloud = (mut) => { const s = clone(defaultState()); s.player.name = 'ASH'; s.player.rivalName = 'GARY'; if (mut) mut(s); return s; };
+  const cloud = (mut) => { const s = clone(defaultState()); s.player.name = 'ASH'; s.player.rivalName = 'VALE'; if (mut) mut(s); return s; };
   ok('A23 F-1: an em-dash meta.location validates server-side with ZERO errors, and an en-dash location validates too (the dedicated charset = SAFE_TEXT + U+2014 + U+2013)',
     (() => { const rr = VAL.validateSave(cloud((s) => { s.meta.location = 'Pewter City — House'; })); return rr.ok && rr.errors.length === 0; })()
     && VAL.validateSave(cloud((s) => { s.meta.location = 'Pewter City – House'; })).ok);
@@ -731,7 +731,7 @@ const VAL = await import(join(ROOT, 'api/_lib/validator.mjs'));
     return { mon, before, swapped };
   };
   const gp = formeProbe('giratina', 'giratinaorigin');
-  ok('S4-07 Giratina swap (pure): altered -> origin succeeds; nickname/level/moves preserved verbatim; stats recompute from the origin base (atk rises: base 100 -> 120); HP carries by the max-delta rule (same base HP 150, so maxHp and hp are unchanged)',
+  ok('S4-07 VOIDARCH swap (pure): altered -> origin succeeds; nickname/level/moves preserved verbatim; stats recompute from the origin base (atk rises: base 100 -> 120); HP carries by the max-delta rule (same base HP 150, so maxHp and hp are unchanged)',
     gp.swapped && gp.mon.speciesId === 'giratinaorigin' && gp.mon.nickname === 'PROBE' && gp.mon.level === 360
     && JSON.stringify(gp.mon.moves) === gp.before.moves && gp.mon.stats.atk > gp.before.atk
     && gp.mon.maxHp === gp.before.maxHp && gp.mon.hp === gp.before.hp);
@@ -752,7 +752,7 @@ const VAL = await import(join(ROOT, 'api/_lib/validator.mjs'));
   const ALL_FORMES = ['giratina', 'giratinaorigin', 'shaymin', 'shayminsky', 'rotom', 'rotomheat', 'rotomwash', 'rotomfrost', 'rotomfan', 'rotommow'];
   const formeSave = (fid) => {
     const s = clone(defaultState());
-    s.player.name = 'ASH'; s.player.rivalName = 'GARY';
+    s.player.name = 'ASH'; s.player.rivalName = 'VALE';
     s.story.arc = 'sinnoh'; s.story.region = 'sinnoh';
     const mon = mkMon(fid, 360, rosterS4, ALLMV);
     mon.nickname = 'FORME';
@@ -770,7 +770,7 @@ const VAL = await import(join(ROOT, 'api/_lib/validator.mjs'));
     shippedMaps.every(([, m]) => m.weather !== 'fog' && !(m.rows || []).some((r) => r.includes(climbCh4)))
     && ['r217', 'victory-road', 'mt-coronet-north'].every((id) => M9S4[id].rows.some((r) => r.includes(climbCh4))));
   ok('S4-12 ribbon persistence rides the H5 quintet unchanged: a save holding all four Hearthome rank ribbons validates client + server, and save-fill preserves them (no new persisted state was minted for S4 — fog lives in story.flags, the Marsh in session, formes in speciesId)',
-    (() => { const s = clone(defaultState()); s.player.name = 'ASH'; s.player.rivalName = 'GARY';
+    (() => { const s = clone(defaultState()); s.player.name = 'ASH'; s.player.rivalName = 'VALE';
       s.contest.ribbons = ['hearthome-normal', 'hearthome-great', 'hearthome-ultra', 'hearthome-master'];
       return SCH.validateSave(clone(s)).ok && VAL.validateSave(clone(s)).ok
         && JSON.stringify(SCH.migrate(clone(s)).contest.ribbons) === JSON.stringify(s.contest.ribbons); })());
@@ -1119,7 +1119,7 @@ const driver = `
   var girSwitched = gir.speciesId === 'giratinaorigin' && gir.nickname === 'RENE';
   ow3.tryInteract(); tk(g2, 2); drain(g2); tk(g2, 2);
   pickS(g2, 'giratina'); drain(g2);
-  ok('S4B-12 Giratina at the Griseous Orb (Turnback Cave chamber sign): altered -> origin -> altered, the individual preserved (nickname RENE rides both ways)',
+  ok('S4B-12 VOIDARCH at the Griseous Orb (Turnback Cave chamber sign): altered -> origin -> altered, the individual preserved (nickname RENE rides both ways)',
     girSwitched && gir.speciesId === 'giratina');
   var ow4 = gotoMap(g2, 'old-chateau', 9, 12); drain(g2);
   ow4.player.tx = 16; ow4.player.ty = 5; ow4.player.fx = 16; ow4.player.fy = 5;

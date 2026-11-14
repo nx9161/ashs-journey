@@ -58,20 +58,20 @@ const { WALKABLE } = await import(join(ROOT, 'src/data/maps.mjs'));
     JSON.stringify(BADGE_SETS.johto) === JSON.stringify(JOHTO_ORDER)
     && JOHTO_ORDER.every((id) => ITEMS[id] && ITEMS[id].pocket === 'key'));
   const team = (id) => JOHTO_TRAINERS[id].team.map((m) => m.species + ':' + m.level + (m.keepsake ? '+' + m.keepsake : '')).join(',');
-  ok('A04 leader teams in the band, aces keep the Classic keepsake (Falkner 108/111/114 sparrowfeather, Bugsy 120/123/126 ironacorn)',
+  ok('A04 leader teams in the band, aces keep the Classic keepsake (Aven 108/111/114 sparrowfeather, Bex 120/123/126 ironacorn)',
     team('falkner') === 'pidgeotto:108,noctowl:111,pidgeot:114+sparrowfeather'
     && team('bugsy') === 'ariados:120,heracross:123,scizor:126+ironacorn');
-  ok('A05 leader teams II (Whitney 131/134/138 MOOBELLE tortoisecharm, Morty 140/143/145/148 spectrebell); every leader badgeSet johto + its badge; every species exists',
+  ok('A05 leader teams II (Willa 131/134/138 MOOBELLE tortoisecharm, Silas 140/143/145/148 spectrebell); every leader badgeSet johto + its badge; every species exists',
     team('whitney') === 'clefairy:131,snubbull:134,miltank:138+tortoisecharm'
     && team('morty') === 'gastly:140,haunter:143,misdreavus:145,gengar:148+spectrebell'
     && ['falkner', 'bugsy', 'whitney', 'morty'].every((id) => JOHTO_TRAINERS[id].badgeSet === 'johto' && JOHTO_ORDER.includes(JOHTO_TRAINERS[id].badge))
     && Object.values(JOHTO_TRAINERS).every((t) => t.team.every((m) => SPECIES[m.species])));
-  ok('A06 Silver r30: NOT a leader (no badge), the stolen starter at band floor + Zubat (zubat 104, croconaw 106)',
+  ok('A06 Riven r30: NOT a leader (no badge), the stolen starter at band floor + Zubat (zubat 104, croconaw 106)',
     !JOHTO_TRAINERS.silver_r30.badge && team('silver_r30') === 'zubat:104,croconaw:106');
   ok('A07 well Rockets inside the band (118-124 across three defs); Sprout monks at tower levels (106-109)',
     ['rocket_well_1', 'rocket_well_2', 'rocket_well_3'].every((id) => JOHTO_TRAINERS[id].team.every((m) => m.level >= 118 && m.level <= 124))
     && ['sprout_monk_1', 'sprout_monk_2'].every((id) => JOHTO_TRAINERS[id].team.every((m) => m.level >= 106 && m.level <= 109)));
-  ok('A08 event shapes: arrival sets johto_arrival; the Silver event rides battleAny (win/lose branch flags) before silver_r30_done; the well event sets kurt_well_plea only',
+  ok('A08 event shapes: arrival sets johto_arrival; the Riven event rides battleAny (win/lose branch flags) before silver_r30_done; the well event sets kurt_well_plea only',
     JOHTO_EVENTS.ev_johto_arrival.some((s) => s.flag === 'johto_arrival')
     && (() => { const ev = JOHTO_EVENTS.ev_johto_silver_r30; const bi = ev.findIndex((s) => s.battleAny); const fi = ev.findIndex((s) => s.flag === 'silver_r30_done');
       return bi >= 0 && ev[bi].battleAny.trainer === 'silver_r30' && ev[bi].battleAny.winFlag === 'silver_r30_won' && ev[bi].battleAny.loseFlag === 'silver_r30_lost' && fi > bi; })()
@@ -105,7 +105,7 @@ const { WALKABLE } = await import(join(ROOT, 'src/data/maps.mjs'));
     && SCH.validateSave(reversed).errors.includes('bad-badges-johto'),
     JSON.stringify(SCH.validateSave(full).errors));
   const cloud = clone(defaultState());
-  cloud.player.name = 'ASH'; cloud.player.rivalName = 'GARY';
+  cloud.player.name = 'ASH'; cloud.player.rivalName = 'VALE';
   cloud.story.arc = 'johto'; cloud.story.region = 'johto';
   cloud.badges.kanto = [...BADGE_SETS.kanto]; cloud.badges.orange = [...BADGE_SETS.orange];
   cloud.badges.johto = JOHTO_ORDER.slice(0, 4);
@@ -176,18 +176,18 @@ const { WALKABLE } = await import(join(ROOT, 'src/data/maps.mjs'));
 // ================= Part A2: J4b east units =================
 {
   const team = (id) => JOHTO_TRAINERS[id].team.map((m) => m.species + ':' + m.level + (m.keepsake ? '+' + m.keepsake : '')).join(',');
-  ok('A19 east leader teams in the band (Chuck 148/151/154 secondwindribbon stormbadge, Jasmine 154/157/160 fossilspur mineralbadge, Pryce 162/165/168 tortoisecharm glacierbadge); all badgeSet johto',
+  ok('A19 east leader teams in the band (Rourke 148/151/154 secondwindribbon stormbadge, Liora 154/157/160 fossilspur mineralbadge, Albin 162/165/168 tortoisecharm glacierbadge); all badgeSet johto',
     team('chuck') === 'primeape:148,poliwrath:151,machamp:154+secondwindribbon'
     && team('jasmine') === 'magnemite:154,magneton:157,steelix:160+fossilspur'
     && team('pryce') === 'seel:162,dewgong:165,piloswine:168+tortoisecharm'
     && ['chuck', 'jasmine', 'pryce'].every((id) => JOHTO_TRAINERS[id].badgeSet === 'johto' && JOHTO_ORDER.includes(JOHTO_TRAINERS[id].badge)));
-  ok('A20 Clair carries NO badge (the Rising Badge is the den\'s to give): team 172/174/175/178 tidepearl, and the shrine keeper battles at ~176 (dragonair 174, kingdra 177)',
+  ok('A20 Rhea carries NO badge (the Rising Badge is the den\'s to give): team 172/174/175/178 tidepearl, and the shrine keeper battles at ~176 (dragonair 174, kingdra 177)',
     !JOHTO_TRAINERS.clair.badge && JOHTO_TRAINERS.clair.badgeSet === 'johto'
     && team('clair') === 'dragonair:172,dragonair:174,gyarados:175,kingdra:178+tidepearl'
     && team('den_shrine') === 'dragonair:174,kingdra:177');
   ok('A21 Secret Potion is a key-pocket ITEMS row; the Card Key is the shipped cardkey row (one representation, Silph -> Radio Tower)',
     ITEMS.secretpotion && ITEMS.secretpotion.pocket === 'key' && ITEMS.cardkey && ITEMS.cardkey.pocket === 'key');
-  ok('A22 Silver east teams: ilex 128-134 with the stolen starter grown (golbat/sneasel/croconaw), route 178-184 fully evolved (crobat/sneasel/magneton/feraligatr); neither is a leader',
+  ok('A22 Riven east teams: ilex 128-134 with the stolen starter grown (golbat/sneasel/croconaw), route 178-184 fully evolved (crobat/sneasel/magneton/feraligatr); neither is a leader',
     team('silver_ilex') === 'golbat:128,sneasel:131,croconaw:134'
     && team('silver_route') === 'crobat:178,sneasel:180,magneton:182,feraligatr:184'
     && !JOHTO_TRAINERS.silver_ilex.badge && !JOHTO_TRAINERS.silver_route.badge);
@@ -210,7 +210,7 @@ const { WALKABLE } = await import(join(ROOT, 'src/data/maps.mjs'));
     && JOHTO_EVENTS.ev_johto_director.some((s) => s.flag === 'radio_director_rescued')
     && JOHTO_EVENTS.ev_johto_radio_top.some((s) => s.battle === 'rocket_director_fake')
     && JOHTO_EVENTS.ev_johto_radio_top.some((s) => s.flag === 'radio_tower_cleared'));
-  ok('A26 Gary centrepiece team (Blastoise-anchored 186-193, tidepearl ace, smart AI, NO badge — a league battle, not a gym) + Harrison (192-198, sneasel/hypno/steelix/miltank/houndoom core) + qualifiers 180-186',
+  ok('A26 Vale centrepiece team (Blastoise-anchored 186-193, tidepearl ace, smart AI, NO badge — a league battle, not a gym) + Harrison (192-198, sneasel/hypno/steelix/miltank/houndoom core) + qualifiers 180-186',
     team('gary_johto') === 'pidgeot:186,alakazam:188,arcanine:189,gengar:190,umbreon:191,blastoise:193+tidepearl'
     && JOHTO_TRAINERS.gary_johto.ai === 'smart' && !JOHTO_TRAINERS.gary_johto.badge
     && team('harrison') === 'sneasel:192,xatu:193,hypno:194,steelix:195,miltank:196,houndoom:198'
@@ -224,7 +224,7 @@ const { WALKABLE } = await import(join(ROOT, 'src/data/maps.mjs'));
     && MAP_GROUND['dragons-den'] === 'grave' && MAP_GROUND['radio-tower-3'] === 'storm'
     && MAP_GROUND['silver-stadium'] === 'open' && MAP_GROUND['mt-silver-cave'] === 'frost'
     && MAP_GROUND['lake-of-rage'] === 'tide' && MAP_GROUND['lighthouse-2'] === 'tide');
-  ok('A29 route-silver gate event: dialogue + a warp back to Blackthorn\'s east edge (28,8) — turned back, never stuck; the third Silver clash rides battleAny with branch flags and closes on silver_route_done',
+  ok('A29 route-silver gate event: dialogue + a warp back to Blackthorn\'s east edge (28,8) — turned back, never stuck; the third Riven clash rides battleAny with branch flags and closes on silver_route_done',
     (() => { const g8 = JOHTO_EVENTS.ev_johto_silver_gate; const w = g8[g8.length - 1].warp;
       const ev = JOHTO_EVENTS.ev_johto_silver_route; const bi = ev.findIndex((s) => s.battleAny);
       return w && w.map === 'blackthorn' && w.x === 28 && w.y === 8
@@ -251,7 +251,7 @@ const { WALKABLE } = await import(join(ROOT, 'src/data/maps.mjs'));
     && KANTO_FILE_ARCS.arc_hooh.steps[0].flag === 'hooh_history' && KANTO_FILE_ARCS.arc_hooh.steps[1].flag === 'hooh_bell_received'
     && KANTO_FILE_ARCS.arc_hooh.steps[2].flag === 'hooh_summit' && KANTO_FILE_ARCS.arc_hooh.steps[3].catch === 'hooh'
     && KANTO_FILE_ARCS.arc_hooh.steps[3].text.includes('182'));
-  ok('A32 Clear Bell is a key-pocket ITEMS row; the GS Ball stays an ordinary bag item (its post-arc memento state needs no data change)',
+  ok('A32 Clear Bell is a key-pocket ITEMS row; the Sealed Orb stays an ordinary bag item (its post-arc memento state needs no data change)',
     ITEMS.clearbell && ITEMS.clearbell.pocket === 'key' && ITEMS.gsball && ITEMS.gsball.pocket === 'items');
   const faceShape = (evId, species, level, doneFlag) => {
     const ev = JOHTO_EVENTS[evId];
@@ -502,15 +502,15 @@ const driver = `
   var arrivalOpen = g.ui.dialogueOpen === true;
   pump(g);
   var arrivalText = seenLines.join(' | ');
-  ok('B03 New Bark arrival scene fires on first elm-lab entry: Elm registers the journey and tells the stolen-starter incident (johto_arrival + elm_registered)',
-    arrivalOpen && arrivalText.includes('Professor Elm') && arrivalText.includes('CROCLET')
+  ok('B03 New Bark arrival scene fires on first elm-lab entry: Linden registers the journey and tells the stolen-starter incident (johto_arrival + elm_registered)',
+    arrivalOpen && arrivalText.includes('Professor Linden') && arrivalText.includes('CROCLET')
     && st.story.flags.johto_arrival === true && st.story.flags.elm_registered === true,
     arrivalText.slice(0, 140));
   var owL2 = gotoMap(g, 'elm-lab', 8, 10);
   ok('B04 arrival scene fires once: re-entry is quiet', !g.ui.dialogueOpen);
 
   gotoMap(g, 'r30', 11, 16); pump(g);
-  ok('B05 Route 30: the first Silver clash fires after Elm, the branch flag records the honest outcome, and the story continues (silver_r30_done)',
+  ok('B05 Route 30: the first Riven clash fires after Linden, the branch flag records the honest outcome, and the story continues (silver_r30_done)',
     st.story.flags.silver_r30_done === true
     && (!!st.story.flags.silver_r30_won !== !!st.story.flags.silver_r30_lost),
     JSON.stringify({ won: st.story.flags.silver_r30_won, lost: st.story.flags.silver_r30_lost }));
@@ -518,8 +518,8 @@ const driver = `
   var owL3 = gotoMap(g, 'elm-lab', 8, 10);
   seenLines = [];
   talkKind(g, owL3, 'elm'); pump(g);
-  ok('B06 report back: Elm names the thief SILVER from the dropped registration and silver_reported completes the thief quest row',
-    st.story.flags.silver_reported === true && seenLines.join(' | ').includes('Silver'),
+  ok('B06 report back: Linden names the thief RIVEN from the dropped registration and silver_reported completes the thief quest row',
+    st.story.flags.silver_reported === true && seenLines.join(' | ').includes('Riven'),
     seenLines.join(' | ').slice(0, 120));
 
   // ---- a Town Tale rides the same save (New Bark) ----
@@ -547,7 +547,7 @@ const driver = `
 
   var owF = gotoMap(g, 'gym-violet', 7, 8);
   talkKind(g, owF, 'falkner'); pump(g);
-  ok('B09 Falkner through the real leader runner: Zephyr Badge in badges.johto + badge_zephyr + beat flags',
+  ok('B09 Aven through the real leader runner: Zephyr Badge in badges.johto + badge_zephyr + beat flags',
     st.badges.johto.includes('zephyrbadge') && st.story.flags.badge_zephyr === true && st.story.flags.beat_falkner === true,
     JSON.stringify(st.badges.johto));
 
@@ -555,7 +555,7 @@ const driver = `
   var owW = gotoMap(g, 'slowpoke-well', 9, 12);
   var pleaOpen = g.ui.dialogueOpen === true;
   pump(g);
-  ok('B10 first well entry fires Kurt plea (hurt back, three Rockets named) — kurt_well_plea set',
+  ok('B10 first well entry fires Hendrik plea (hurt back, three Rockets named) — kurt_well_plea set',
     pleaOpen && st.story.flags.kurt_well_plea === true);
   talkKind(g, owW, 'rocket_well_1'); pump(g);
   talkKind(g, owW, 'rocket_well_2'); pump(g);
@@ -567,20 +567,20 @@ const driver = `
 
   var owK = gotoMap(g, 'kurt-house', 6, 8);
   talkKind(g, owK, 'kurt'); pump(g);
-  ok('B12 GS Ball delivery at kurt-house: the ball leaves the bag, gsball_delivered + kurt_has_ball + gsball_at_kurt_house record its whereabouts for J5',
+  ok('B12 Sealed Orb delivery at kurt-house: the ball leaves the bag, gsball_delivered + kurt_has_ball + gsball_at_kurt_house record its whereabouts for J5',
     st.story.flags.gsball_delivered === true && st.story.flags.kurt_has_ball === true
     && st.story.flags.gsball_at_kurt_house === true && !(st.bag.gsball > 0),
     JSON.stringify({ bag: st.bag.gsball, d: st.story.flags.gsball_delivered }));
 
   var owB = gotoMap(g, 'gym-azalea', 7, 8);
   talkKind(g, owB, 'bugsy'); pump(g);
-  ok('B13 Bugsy through the real leader runner: Hive Badge (badges.johto prefix grows in earn order)',
+  ok('B13 Bex through the real leader runner: Hive Badge (badges.johto prefix grows in earn order)',
     JSON.stringify(st.badges.johto) === JSON.stringify(['zephyrbadge', 'hivebadge']) && st.story.flags.badge_hive === true,
     JSON.stringify(st.badges.johto));
 
   var owG = gotoMap(g, 'gym-goldenrod', 7, 8);
   talkKind(g, owG, 'whitney'); pump(g);
-  ok('B14 Whitney through the real leader runner: Plain Badge (MOOBELLE faced and beaten)',
+  ok('B14 Willa through the real leader runner: Plain Badge (MOOBELLE faced and beaten)',
     st.badges.johto.includes('plainbadge') && st.story.flags.badge_plain === true && st.story.flags.beat_whitney === true,
     JSON.stringify(st.badges.johto));
 
@@ -591,13 +591,13 @@ const driver = `
 
   var owM = gotoMap(g, 'gym-ecruteak', 7, 8);
   talkKind(g, owM, 'morty'); pump(g);
-  ok('B16 Morty through the real leader runner: Fog Badge — west set complete in earn order (4/8)',
+  ok('B16 Silas through the real leader runner: Fog Badge — west set complete in earn order (4/8)',
     JSON.stringify(st.badges.johto) === JSON.stringify(['zephyrbadge', 'hivebadge', 'plainbadge', 'fogbadge'])
     && st.story.flags.badge_fog === true,
     JSON.stringify(st.badges.johto));
   seenLines = [];
   talkKind(g, owM, 'morty'); pump(g);
-  ok('B17 Morty post-badge names what woke (VOLTIGRIS / MAGMALION / BOREPARD) — the J5 arming dialogue',
+  ok('B17 Silas post-badge names what woke (VOLTIGRIS / MAGMALION / BOREPARD) — the J5 arming dialogue',
     seenLines.join(' | ').includes('VOLTIGRIS') && seenLines.join(' | ').includes('BOREPARD'),
     seenLines.join(' | ').slice(0, 120));
 
@@ -616,7 +616,7 @@ const driver = `
   var owF2 = gotoMap(g2, 'gym-violet', 7, 8);
   seenLines = [];
   talkKind(g2, owF2, 'falkner'); pump(g2);
-  ok('B19 Falkner gate: without the Sprout blessing he sends the challenger to the tower first — no battle, no badge',
+  ok('B19 Aven gate: without the Sprout blessing he sends the challenger to the tower first — no battle, no badge',
     seenLines.join(' | ').includes('Newleaf Tower first') && !(g2.scenes.top instanceof BattleScene) && g2.state.badges.johto.length === 0,
     seenLines.join(' | ').slice(0, 120));
 
@@ -626,7 +626,7 @@ const driver = `
   g3.state.party = [makeMon('rattata', 5, SPECIES, MOVES)];
   g3.state.story.flags.johto_arrival = true;
   var owS = gotoMap(g3, 'r30', 11, 16); pump(g3);
-  ok('B20 Silver loss branch: silver_r30_lost (not won) + silver_r30_done, and the player is still standing on Route 30',
+  ok('B20 Riven loss branch: silver_r30_lost (not won) + silver_r30_done, and the player is still standing on Route 30',
     g3.state.story.flags.silver_r30_lost === true && !g3.state.story.flags.silver_r30_won
     && g3.state.story.flags.silver_r30_done === true && owS.mapId === 'r30',
     JSON.stringify({ lost: g3.state.story.flags.silver_r30_lost, map: owS.mapId }));
@@ -647,18 +647,18 @@ const driver = `
   var stE = westComplete(gE);
 
   gotoMap(gE, 'ilex-forest', 26, 9); pump(gE);
-  ok('E01 Silver, second clash (Ilex Forest, won-branch staging after the Route 30 win): battleAny advances win-or-lose, the branch flag records the outcome, silver_ilex_done set',
+  ok('E01 Riven, second clash (Ilex Forest, won-branch staging after the Route 30 win): battleAny advances win-or-lose, the branch flag records the outcome, silver_ilex_done set',
     stE.story.flags.silver_ilex_done === true
     && (!!stE.story.flags.silver_ilex_won !== !!stE.story.flags.silver_ilex_lost),
     JSON.stringify({ won: stE.story.flags.silver_ilex_won, lost: stE.story.flags.silver_ilex_lost }));
 
   var owLH = gotoMap(gE, 'lighthouse-2', 13, 9);
   talkKind(gE, owLH, 'jasmine_light'); pump(gE);
-  ok('E02 the errand opens: Jasmine at Lumi’s side asks for the Cianwood Secret Potion (jasmine_asked) — she will not battle yet',
+  ok('E02 the errand opens: Liora at Lumi’s side asks for the Cianwood Secret Potion (jasmine_asked) — she will not battle yet',
     stE.story.flags.jasmine_asked === true && !stE.story.flags.amphy_healed);
   var owJG = gotoMap(gE, 'gym-olivine', 7, 8);
   talkKind(gE, owJG, 'jasmine'); pump(gE);
-  ok('E03 Jasmine’s BATTLE is gated on the potion delivery and nothing else: no battle, no Mineral Badge before it',
+  ok('E03 Liora’s BATTLE is gated on the potion delivery and nothing else: no battle, no Mineral Badge before it',
     !stE.badges.johto.includes('mineralbadge') && !(gE.scenes.top instanceof BattleScene));
 
   var owPH = gotoMap(gE, 'house-cianwood', 6, 8);
@@ -667,7 +667,7 @@ const driver = `
     (stE.bag.secretpotion || 0) === 1 && stE.story.flags.secret_potion_got === true);
   var owC = gotoMap(gE, 'gym-cianwood', 7, 8);
   talkKind(gE, owC, 'chuck'); pump(gE);
-  ok('E05 Chuck through the real leader runner: Storm Badge — badges.johto prefix grows to 5',
+  ok('E05 Rourke through the real leader runner: Storm Badge — badges.johto prefix grows to 5',
     JSON.stringify(stE.badges.johto) === JSON.stringify(['zephyrbadge', 'hivebadge', 'plainbadge', 'fogbadge', 'stormbadge'])
     && stE.story.flags.badge_storm === true, JSON.stringify(stE.badges.johto));
 
@@ -677,7 +677,7 @@ const driver = `
     stE.story.flags.amphy_healed === true && !(stE.bag.secretpotion > 0));
   var owJG2 = gotoMap(gE, 'gym-olivine', 7, 8);
   talkKind(gE, owJG2, 'jasmine'); pump(gE);
-  ok('E07 Jasmine through the real leader runner after the delivery: Mineral Badge — 6/8 in earn order',
+  ok('E07 Liora through the real leader runner after the delivery: Mineral Badge — 6/8 in earn order',
     stE.badges.johto.includes('mineralbadge') && stE.story.flags.badge_mineral === true && stE.badges.johto.length === 6,
     JSON.stringify(stE.badges.johto));
 
@@ -705,13 +705,13 @@ const driver = `
   strongTeam(gE, 178);
   var owLM = gotoMap(gE, 'mahogany', 14, 10);
   talkKind(gE, owLM, 'lance_mahogany'); pump(gE, 600);
-  ok('E11 the Rocket Hideout gauntlet (grunts + Electrode core + Executive Vey) clears from Lance’s descent: johto_hideout_cleared',
+  ok('E11 the Vanta Hideout gauntlet (grunts + Electrode core + Executive Vey) clears from Darian’s descent: johto_hideout_cleared',
     stE.story.flags.johto_hideout_cleared === true
     && stE.story.flags.beat_rocket_hideout_1 === true && stE.story.flags.beat_rocket_hideout_exec === true,
     JSON.stringify({ cleared: stE.story.flags.johto_hideout_cleared }));
   var owP = gotoMap(gE, 'gym-mahogany', 7, 8);
   talkKind(gE, owP, 'pryce'); pump(gE);
-  ok('E12 Pryce through the real leader runner once the occupation ends: Glacier Badge — 7/8',
+  ok('E12 Albin through the real leader runner once the occupation ends: Glacier Badge — 7/8',
     stE.badges.johto.includes('glacierbadge') && stE.story.flags.badge_glacier === true && stE.badges.johto.length === 7,
     JSON.stringify(stE.badges.johto));
 
@@ -730,14 +730,14 @@ const driver = `
   ok('E16 with the key, floor 2’s gauntlet runs and clears (radio_f2_cleared)',
     stE.story.flags.radio_f2_cleared === true);
   gotoMap(gE, 'radio-tower-3', 2, 9); pump(gE);
-  ok('E17 the fake Director falls on the top floor: Rocket leaves Johto (radio_tower_cleared)',
+  ok('E17 the fake Director falls on the top floor: Vanta leaves Johto (radio_tower_cleared)',
     stE.story.flags.radio_tower_cleared === true && stE.story.flags.beat_rocket_director_fake === true);
 
   // ---- Clair + the Den: 7 after the gym, 8 after the den ----
   var owCL = gotoMap(gE, 'gym-blackthorn', 7, 8);
   talkKind(gE, owCL, 'clair'); pump(gE);
   var afterGym = stE.badges.johto.length;
-  ok('E18 Clair beaten in the gym — and the badge count is STILL 7 (clair_beaten set, badge_rising NOT set, no risingbadge held)',
+  ok('E18 Rhea beaten in the gym — and the badge count is STILL 7 (clair_beaten set, badge_rising NOT set, no risingbadge held)',
     stE.story.flags.clair_beaten === true && afterGym === 7 && !stE.story.flags.badge_rising && !stE.badges.johto.includes('risingbadge'),
     JSON.stringify({ afterGym: afterGym }));
   var owDE = gotoMap(gE, 'dragons-den', 9, 12);
@@ -750,7 +750,7 @@ const driver = `
   // ---- the road north: Silver's third clash ----
   strongTeam(gE, 198);
   gotoMap(gE, 'route-silver', 1, 8); pump(gE, 600);
-  ok('E20 Silver, third clash, past the (now-open) badge gate: the rivalry closes — silver_route_done with an honest branch flag',
+  ok('E20 Riven, third clash, past the (now-open) badge gate: the rivalry closes — silver_route_done with an honest branch flag',
     stE.story.flags.silver_route_done === true
     && (!!stE.story.flags.silver_route_won !== !!stE.story.flags.silver_route_lost),
     JSON.stringify({ won: stE.story.flags.silver_route_won, lost: stE.story.flags.silver_route_lost }));
@@ -777,7 +777,7 @@ const driver = `
     JSON.stringify({ reg: registered, q1: q1, q2: stE.story.flags.beat_conference_q2 }));
   strongTeam(gE, 200);
   talkKind(gE, owS1, 'gary_stadium'); pump(gE, 800);
-  ok('E23 THE GARY BATTLE: won on the real battle path — beat_gary_johto (Blastoise faced and beaten)',
+  ok('E23 THE VALE BATTLE: won on the real battle path — beat_gary_johto (Blastoise faced and beaten)',
     stE.story.flags.beat_gary_johto === true,
     JSON.stringify({ beat: stE.story.flags.beat_gary_johto }));
   talkKind(gE, owS1, 'harrison'); pump(gE, 800);
@@ -804,7 +804,7 @@ const driver = `
     var owR = gotoMap(gE, 'mt-silver-cave', 8, 10);
     talkKind(gE, owR, 'red'); pump(gE, 900);
   }
-  ok('E27 Red on the Mt. Silver dais: beaten post-completion (red_defeated) — an honours row, a gate on nothing',
+  ok('E27 Red on the Mt. Riven dais: beaten post-completion (red_defeated) — an honours row, a gate on nothing',
     stE.story.flags.red_defeated === true, 'tries=' + redTries);
   gE.openQuestLog();
   var eLabels = gE.ui.menu.items.map(function (i) { return i.label; });
@@ -826,7 +826,7 @@ const driver = `
   talkKind(g5, ow5c, 'jasmine_light'); pump(g5);
   var ow5d = gotoMap(g5, 'gym-olivine', 7, 8);
   talkKind(g5, ow5d, 'jasmine'); pump(g5);
-  ok('E29 either-order proof (Cianwood first): the pharmacy serves a trainer who never asked Jasmine, Storm lands 5th, the delivery still heals Lumi, and Jasmine battles on the delivery alone — Mineral 6th, prefix intact',
+  ok('E29 either-order proof (Cianwood first): the pharmacy serves a trainer who never asked Liora, Storm lands 5th, the delivery still heals Lumi, and Liora battles on the delivery alone — Mineral 6th, prefix intact',
     st5.story.flags.badge_storm === true && st5.story.flags.amphy_healed === true && !st5.story.flags.jasmine_asked
     && JSON.stringify(st5.badges.johto) === JSON.stringify(['zephyrbadge', 'hivebadge', 'plainbadge', 'fogbadge', 'stormbadge', 'mineralbadge']),
     JSON.stringify(st5.badges.johto));
@@ -853,7 +853,7 @@ const driver = `
   strongTeam(g7, 200);
   var ow7b = gotoMap(g7, 'silver-stadium', 11, 14);
   talkKind(g7, ow7b, 'gary_stadium'); pump(g7, 800);
-  ok('E31 Gary is a REAL must-win: a loss leaves beat_gary_johto unset (blackout, no advance), and the re-challenge after healing wins it — no soft-lock',
+  ok('E31 Vale is a REAL must-win: a loss leaves beat_gary_johto unset (blackout, no advance), and the re-challenge after healing wins it — no soft-lock',
     garyUnbeaten && st7.story.flags.beat_gary_johto === true,
     JSON.stringify({ unbeaten: garyUnbeaten, beat: st7.story.flags.beat_gary_johto }));
 
@@ -888,7 +888,7 @@ const driver = `
   st10.story.flags.silver_r30_won = false; st10.story.flags.silver_r30_lost = true;
   seenLines = [];
   gotoMap(g10, 'ilex-forest', 26, 9); pump(g10);
-  ok('E34 Silver Ilex branches on the J4a flag: with silver_r30_lost the LOST staging plays (his "practice partner" lines) and the clash still completes',
+  ok('E34 Riven Ilex branches on the J4a flag: with silver_r30_lost the LOST staging plays (his "practice partner" lines) and the clash still completes',
     seenLines.join(' | ').includes('practice partner') && st10.story.flags.silver_ilex_done === true,
     seenLines.join(' | ').slice(0, 120));
 
@@ -897,7 +897,7 @@ const driver = `
   var st11 = westComplete(g11);
   var ow11 = gotoMap(g11, 'gym-mahogany', 7, 8);
   talkKind(g11, ow11, 'pryce'); pump(g11);
-  ok('E35 Pryce’s gate: before the hideout clears he sends the challenger to Lance and the lake — no battle, no Glacier Badge',
+  ok('E35 Albin’s gate: before the hideout clears he sends the challenger to Darian and the lake — no battle, no Glacier Badge',
     !st11.badges.johto.includes('glacierbadge') && !(g11.scenes.top instanceof BattleScene));
 
   // The Radio Tower is quiet before the hideout (staging order).
@@ -1080,7 +1080,7 @@ const driver = `
     owF8c.tryInteract();
     var metC2 = drainToBattle(gF8);
     catchWithBall(gF8);
-    ok('F08 CHRONOFAE: the shrine is inert until Kurt RETURNS the ball (whereabouts chain exact: delivered stands, kurt_has_ball / at_kurt_house clear, back_with_player set) — then the ball opens, flee re-fires, the catch (Lv 170) completes and the empty GS Ball stays in the bag',
+    ok('F08 CHRONOFAE: the shrine is inert until Hendrik RETURNS the ball (whereabouts chain exact: delivered stands, kurt_has_ball / at_kurt_house clear, back_with_player set) — then the ball opens, flee re-fires, the catch (Lv 170) completes and the empty Sealed Orb stays in the bag',
       shrineLocked && returned && fledC && metC2 && stF8.story.flags.arc_celebi_done === true
       && stF8.story.quests.arc_celebi === 'complete' && (stF8.bag.gsball || 0) === 1 && stF8.story.flags.celebi_shrine_opened === true);
   }
@@ -1115,7 +1115,7 @@ const driver = `
     if (mortyMenu) { gG1.ui.debugChoose(0); }
     var metM = drainToBattle(gG1);
     driveBattle(gG1); pump(gG1);
-    ok('F10a badge-order gate: Morty REFUSES at 2 badges, naming the missing road (Whitney, Goldenrod City) with no battle — and at 3 badges the challenge opens and the Fog Badge is earned',
+    ok('F10a badge-order gate: Silas REFUSES at 2 badges, naming the missing road (Willa, Goldenrod City) with no battle — and at 3 badges the challenge opens and the Fog Badge is earned',
       mortyRefuses && mortyMenu && metM && stG1.badges.johto.includes('fogbadge'));
   }
   {
@@ -1132,7 +1132,7 @@ const driver = `
     if (jasmineMenu) { gG2.ui.debugChoose(0); }
     var metJ = drainToBattle(gG2);
     driveBattle(gG2); pump(gG2);
-    ok('F10b badge-order gate: Jasmine refuses before Chuck (her line sends you to Cianwood’s gym) even though her errand gates are story-side — after the Storm Badge + Lumi healed, the Mineral Badge battle opens and is won',
+    ok('F10b badge-order gate: Liora refuses before Rourke (her line sends you to Cianwood’s gym) even though her errand gates are story-side — after the Storm Badge + Lumi healed, the Mineral Badge battle opens and is won',
       jasmineRefuses && jasmineMenu && metJ && stG2.badges.johto.includes('mineralbadge'));
   }
   {
@@ -1152,7 +1152,7 @@ const driver = `
     talkKind(gG3, owG3b, 'clair'); drain(gG3);
     var clairMenu = gG3.ui.menuOpen === true;
     if (clairMenu) { gG3.ui.debugChoose(gG3.ui.menu.items.length - 1); drain(gG3); }
-    ok('F10c badge-order gate: Falkner is open at 0 badges; Clair refuses at 6 (missing Glacier — Pryce, Mahogany Town) and offers her challenge at 7',
+    ok('F10c badge-order gate: Aven is open at 0 badges; Rhea refuses at 6 (missing Glacier — Albin, Mahogany Town) and offers her challenge at 7',
       falknerOpen && clairRefuses && clairMenu);
   }
 

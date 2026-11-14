@@ -98,7 +98,7 @@ const O3_EVENTS = ['ev_orange_2000_storm', 'ev_orange_2000_moltres', 'ev_orange_
 // -- legacy save-fill: O3 state is story flags + story.quests only --
 {
   const mid = clone(defaultState());
-  mid.player.name = 'ASH'; mid.player.rivalName = 'GARY';
+  mid.player.name = 'ASH'; mid.player.rivalName = 'VALE';
   mid.badges.orange = ['coraleyebadge', 'searubybadge'];
   mid.story.flags.orange_gsball = true;
   const filled = SCH.migrate(clone(mid));
@@ -106,7 +106,7 @@ const O3_EVENTS = ['ev_orange_2000_storm', 'ev_orange_2000_moltres', 'ev_orange_
     SCH.validateSave(filled).ok && JSON.stringify(filled.badges.orange) === JSON.stringify(['coraleyebadge', 'searubybadge'])
     && filled.story.flags.orange_gsball === true, JSON.stringify(SCH.validateSave(filled).errors));
   const done = clone(defaultState());
-  done.player.name = 'ASH'; done.player.rivalName = 'GARY';
+  done.player.name = 'ASH'; done.player.rivalName = 'VALE';
   done.story.arc = 'orange'; done.story.region = 'orange';
   done.badges.orange = ['coraleyebadge', 'searubybadge', 'spikeshellbadge', 'jadestarbadge'];
   done.badges.kanto = ['boulderbadge', 'cascadebadge', 'thunderbadge', 'rainbowbadge', 'soulbadge', 'marshbadge', 'volcanobadge', 'earthbadge'];
@@ -497,8 +497,8 @@ const driver = `
   stB.badges.orange = ['coraleyebadge', 'searubybadge', 'spikeshellbadge', 'jadestarbadge'];
   stB.story.flags.orange_crew_done = true;
   var owB = gotoMap(gB, 'pummelo-stadium', 11, 12);
-  talk(gB, owB, 'DRAKE'); pump(gB, 500);
-  ok('B21 order independence I: League first — Drake victory fires the machine exactly as O2 left it (orange_champion + card + Johto directive), storm untouched',
+  talk(gB, owB, 'BARROW'); pump(gB, 500);
+  ok('B21 order independence I: League first — Barrow victory fires the machine exactly as O2 left it (orange_champion + card + Johto directive), storm untouched',
     stB.story.flags.orange_champion === true && stB.story.flags.arc_card_orange === true
     && stB.story.arc_directive === 'johto' && !stB.story.flags.orange_2000_active,
     JSON.stringify({ champ: stB.story.flags.orange_champion, dir: stB.story.arc_directive }));
@@ -534,8 +534,8 @@ const driver = `
   gotoMap(gC, 'shamouti-shrine', 7, 10); pump(gC, 400);
   var stormDoneEarly = stC.story.flags.orange_2000_storm_stilled === true && stC.badges.orange.length === 2;
   var owC = gotoMap(gC, 'trovita-gym', 7, 8);
-  talk(gC, owC, 'RUDY'); pump(gC, 400);
-  ok('B24 storm BEFORE badges 3/4: the whole climax completes at 2 badges, and the Rudy gym then plays + awards the Spike Shell Badge normally (never a gym blocker)',
+  talk(gC, owC, 'RENZO'); pump(gC, 400);
+  ok('B24 storm BEFORE badges 3/4: the whole climax completes at 2 badges, and the Renzo gym then plays + awards the Spike Shell Badge normally (never a gym blocker)',
     stormDoneEarly && stC.badges.orange.includes('spikeshellbadge') && stC.story.flags.badge_spikeshell === true,
     JSON.stringify({ early: stormDoneEarly, badges: stC.badges.orange }));
 

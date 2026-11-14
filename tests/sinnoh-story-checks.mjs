@@ -106,13 +106,13 @@ const CHAIN = [
     ['roark_miner1', 'roark_miner2', 'gardenia_adept1', 'gardenia_adept2', 'fantina_ace1', 'fantina_ace2', 'maylene_belt1', 'maylene_belt2']
       .every((id) => { const t = SINNOH_TRAINERS[id]; return t && !t.badge && t.team.every((m) => m.level >= 301 && m.level <= 344 && speciesAll[m.species]); }));
   const p1 = SINNOH_TRAINERS.paul_sandgem, p2 = SINNOH_TRAINERS.paul_veilstone;
-  ok('A05 the Paul curve: intro battle ace 312 (elekid, starshard), Veilstone audit 342-348 with the torterra ace at 348 — in band, strictly escalating, no Paul team member above 348 this half',
+  ok('A05 the Stellan curve: intro battle ace 312 (elekid, starshard), Veilstone audit 342-348 with the torterra ace at 348 — in band, strictly escalating, no Stellan team member above 348 this half',
     Math.max(...p1.team.map((m) => m.level)) === 312 && p1.team[p1.team.length - 1].species === 'elekid'
     && p2.team.every((m) => m.level >= 342 && m.level <= 348)
     && p2.team[p2.team.length - 1].species === 'torterra' && p2.team[p2.team.length - 1].level === 348
     && p1.team.concat(p2.team).every((m) => speciesAll[m.species]));
   const mars = SINNOH_TRAINERS.mars_windworks, jup = SINNOH_TRAINERS.jupiter_eterna;
-  ok('A06 Galactic first half: Mars (purugly ace 318) + Jupiter (skuntank ace 330) in band with real species; Saturn has NO trainer def this half (presence only — the HQ raid is S5b\'s, the recorded pacing call)',
+  ok('A06 Combine first half: Vesper (purugly ace 318) + Nova (skuntank ace 330) in band with real species; Sorin has NO trainer def this half (presence only — the HQ raid is S5b\'s, the recorded pacing call)',
     Math.max(...mars.team.map((m) => m.level)) === 318 && mars.team[mars.team.length - 1].species === 'purugly'
     && Math.max(...jup.team.map((m) => m.level)) === 330 && jup.team[jup.team.length - 1].species === 'skuntank'
     && !SINNOH_TRAINERS.saturn);
@@ -126,7 +126,7 @@ const CHAIN = [
     && owSysSrc.includes("id === 'sandgem'") && owSysSrc.includes("id === 'rowan-lab'")
     && owSysSrc.includes("id === 'lake-verity'") && owSysSrc.includes("id === 'valley-windworks'")
     && owSysSrc.includes("id === 'galactic-eterna'") && owSysSrc.includes("id === 'solaceon-ruins'"));
-  ok('A08 the lab event IS the Paul introduction: it sets rowan_registered, fights paul_sandgem as battleAny (win/lose branch flags), then sets paul1_done — the arrival event sets sinnoh_arrival and warps nowhere (no new-starter fiction)',
+  ok('A08 the lab event IS the Stellan introduction: it sets rowan_registered, fights paul_sandgem as battleAny (win/lose branch flags), then sets paul1_done — the arrival event sets sinnoh_arrival and warps nowhere (no new-starter fiction)',
     hasStep('ev_sinnoh_lab', (s) => s.flag === 'rowan_registered')
     && hasStep('ev_sinnoh_lab', (s) => s.battleAny && s.battleAny.trainer === 'paul_sandgem' && s.battleAny.winFlag === 'paul1_won' && s.battleAny.loseFlag === 'paul1_lost')
     && hasStep('ev_sinnoh_lab', (s) => s.flag === 'paul1_done')
@@ -167,7 +167,7 @@ const CHAIN = [
     }
     return false;
   };
-  ok('A12 every SINNOH_NPCS actor (' + SINNOH_NPCS.length + ') stands on a walkable tile with a reachable talk-adjacent tile (S5a: leaders, rosters, Rowan, Dawn x2, Barry, Paul x3, the commanders, Reggie; S5b supersedes the count 23 -> 41: +4 leaders, +8 rosters, Paul at Acuity, Dawn at Valor, the Canalave sailor, the Conference registrar + Paul + Tobias; S6 supersedes 41 -> 43: Buck at the Survival Area + Traveller Maren on Route 209)',
+  ok('A12 every SINNOH_NPCS actor (' + SINNOH_NPCS.length + ') stands on a walkable tile with a reachable talk-adjacent tile (S5a: leaders, rosters, Sorrel, Dara x2, Barry, Stellan x3, the commanders, Reggie; S5b supersedes the count 23 -> 41: +4 leaders, +8 rosters, Stellan at Acuity, Dara at Valor, the Canalave sailor, the Conference registrar + Stellan + Cassian; S6 supersedes 41 -> 43: Birk at the Survival Area + Traveller Maren on Route 209)',
     SINNOH_NPCS.length === 43 && SINNOH_NPCS.every((n) => {
       const m = ALL_MAPS[n.map]; if (!m) return false;
       const row = m.rows[n.y]; if (!row || !WALKABLE.has(row[n.x])) return false;
@@ -215,7 +215,7 @@ const CHAIN = [
   let checkOut = '';
   try { checkOut = execFileSync('node', [join(ROOT, 'tools/api-scripts/gen-tables.mjs'), '--check'], { cwd: ROOT, encoding: 'utf8', stdio: ['ignore', 'pipe', 'pipe'] }); } catch (e) { checkOut = String(e.stdout || '') + String(e.stderr || ''); }
   const t = JSON.parse(readFileSync(join(ROOT, 'api/_lib/data/tables.json'), 'utf8'));
-  ok('A18 tables.json in sync (gen-tables --check, regenerated via the tool only); items 200 (199 + the Azure Flute key item, Arc 4 Stage S7 — supersedes the S6 count); the quest vocabulary carries every q_sinnoh_* chain id (all 30) + all thirteen tale ids; keepsakes table carries the ten Sinnoh pieces; items table carries the Lunar Wing',
+  ok('A18 tables.json in sync (gen-tables --check, regenerated via the tool only); items 200 (199 + the Zenith Flute key item, Arc 4 Stage S7 — supersedes the S6 count); the quest vocabulary carries every q_sinnoh_* chain id (all 30) + all thirteen tale ids; keepsakes table carries the ten Sinnoh pieces; items table carries the Lunar Wing',
     checkOut.includes('tables.json OK') && t.items.length === 200
     && SINNOH_QUESTS.every((q) => t.quests.includes(q.id))
     && Object.keys(SINNOH_TALES).every((id) => t.quests.includes(id))
@@ -245,7 +245,7 @@ const CHAIN = [
     ['wake_fisher1', 'wake_fisher2', 'byron_miner1', 'byron_miner2', 'candice_skier1', 'candice_skier2', 'volkner_tech1', 'volkner_tech2']
       .every((id) => { const t = SINNOH_TRAINERS[id]; return t && !t.badge && t.team.every((m) => m.level >= 301 && m.level <= 385 && speciesAll[m.species]); }));
   const pa = SINNOH_TRAINERS.paul_acuity, pc = SINNOH_TRAINERS.paul_conference;
-  ok('A22 the Paul curve completes: the Acuity full battle is a true 6v6 at 378-384 (electivire ace 384, starshard), the Conference settlement a 6v6 at 392-398 with the ace at 398 (band-cap vicinity), strictly escalating over Acuity, no badge/badgeSet on either (rival battles, not leaders)',
+  ok('A22 the Stellan curve completes: the Acuity full battle is a true 6v6 at 378-384 (electivire ace 384, starshard), the Conference settlement a 6v6 at 392-398 with the ace at 398 (band-cap vicinity), strictly escalating over Acuity, no badge/badgeSet on either (rival battles, not leaders)',
     pa.team.length === 6 && pa.team.every((m) => m.level >= 378 && m.level <= 384)
     && pa.team[pa.team.length - 1].species === 'electivire' && pa.team[pa.team.length - 1].level === 384
     && pc.team.length === 6 && pc.team.every((m) => m.level >= 392 && m.level <= 398)
@@ -272,12 +272,12 @@ const CHAIN = [
     const damaging = mv.filter((id) => ALL_MOVES_A[id] && (ALL_MOVES_A[id].power || 0) > 0).length;
     return mv.length >= 2 && mv.every((id) => !!ALL_MOVES_A[id] && pool.has(id)) && damaging >= 2;
   };
-  ok('A23 Tobias, per the coordinator ruling\'s data shape: Act 1 is Darkrai ALONE at 390 (authored beatable in-band); Act 2 is Latios ALONE at 392; neither carries a badge. S6 RIDER (pinned): both aces carry explicitly authored move sets, every move in the species\' legal in-table pool (band learnset + TM list), each with >= 2 damaging moves — Darkrai: hypnosis/dreameater/fireblast/hyperbeam; Latios: psychic/icebeam/thunderbolt/recover',
+  ok('A23 Cassian, per the coordinator ruling\'s data shape: Act 1 is NOCTARCH ALONE at 390 (authored beatable in-band); Act 2 is AZURAVIS ALONE at 392; neither carries a badge. S6 RIDER (pinned): both aces carry explicitly authored move sets, every move in the species\' legal in-table pool (band learnset + TM list), each with >= 2 damaging moves — NOCTARCH: hypnosis/dreameater/fireblast/hyperbeam; AZURAVIS: psychic/icebeam/thunderbolt/recover',
     td.team.length === 1 && td.team[0].species === 'darkrai' && td.team[0].level === 390 && !td.badge
     && tl.team.length === 1 && tl.team[0].species === 'latios' && tl.team[0].level === 392 && !tl.badge
     && riderOk(td, 'darkrai', 390) && riderOk(tl, 'latios', 392));
   const sat = SINNOH_TRAINERS.saturn_hq, csp = SINNOH_TRAINERS.cyrus_spear, cfi = SINNOH_TRAINERS.cyrus_final;
-  ok('A24 Galactic second half + Cyrus: Saturn\'s raid team (toxicroak ace 358), Cyrus at Spear Pillar (weavile ace 388) and at the platform (weavile ace 392) — all in band with real species',
+  ok('A24 Combine second half + Severin: Sorin\'s raid team (toxicroak ace 358), Severin at Spear Pillar (weavile ace 388) and at the platform (weavile ace 392) — all in band with real species',
     Math.max(...sat.team.map((m) => m.level)) === 358 && sat.team[sat.team.length - 1].species === 'toxicroak'
     && Math.max(...csp.team.map((m) => m.level)) === 388 && csp.team[csp.team.length - 1].species === 'weavile'
     && Math.max(...cfi.team.map((m) => m.level)) === 392 && cfi.team[cfi.team.length - 1].species === 'weavile'
@@ -300,7 +300,7 @@ const CHAIN = [
       .every((f) => hasStep('ev_sinnoh_distortion_climax', (x) => x.flag === f))
     && Object.entries(ev).every(([id, steps]) => id === 'ev_sinnoh_distortion_climax'
       || !steps.some((x) => x.flag === 'sinnoh_climax_resolved' || x.flag === 'dialga_unlocked' || x.flag === 'palkia_unlocked' || x.flag === 'giratina_unlocked')));
-  ok('A28 the glimpse law holds across the second half: Valor/Acuity/Verity-pressure/Gracidea/Fullmoon/Zoroark stage NO battle, NO catch, NO gift-mon (Fullmoon\'s only give is the Lunar Wing item) — Azelf/Uxie/Mesprit/Shaymin/Cresselia glimpse flags set, Shaymin\'s + Darkrai\'s S6 flavour unlocks wired (shaymin_unlocked in the Gracidea event; the sailor handler owns darkrai_unlocked)',
+  ok('A28 the glimpse law holds across the second half: Valor/Acuity/Verity-pressure/Gracidea/Fullmoon/Zoroark stage NO battle, NO catch, NO gift-mon (Fullmoon\'s only give is the Lunar Wing item) — Azelf/Uxie/Mesprit/Shaymin/Cresselia glimpse flags set, Shaymin\'s + NOCTARCH\'s S6 flavour unlocks wired (shaymin_unlocked in the Gracidea event; the sailor handler owns darkrai_unlocked)',
     ['ev_sinnoh_valor', 'ev_sinnoh_acuity_glimpse', 'ev_sinnoh_verity_pressure', 'ev_sinnoh_gracidea', 'ev_sinnoh_fullmoon', 'ev_sinnoh_zoroark']
       .every((id) => !(ev[id] || []).some((x) => x.battle || x.battleAny || x.wildBattle || x.wildBattleCatch || x.giveMon || x.giftCapSafe))
     && hasStep('ev_sinnoh_valor', (x) => x.flag === 'azelf_glimpsed')
@@ -322,7 +322,7 @@ const CHAIN = [
     ['wake', 'byron', 'candice', 'volkner', 'paul_acuity', 'dawn_festival', 'sailor_eldric', 'sinnoh_conference', 'paul_conference', 'tobias']
       .every((k) => SINNOH_NPCS.some((n) => n.sinnoh === k))
     && ['sinnoh_conference', 'paul_conference', 'tobias'].every((k) => SINNOH_NPCS.some((n) => n.sinnoh === k && n.map === 'league-lobby')));
-  ok('A32 the Tobias handler wiring matches the ruling in the shipped source: Act 1 rides startSinnohBattle(\'tobias_darkrai\') (the rechallenge idiom — not friendly, not faced) and its win callback sets tobias_darkrai_felled; sinnoh_complete is set exactly once in overworld-systems and immediately rides checkArcCompletion(g) (the machine fires — no hand-rolled ending, no regionsDone write in the handler)',
+  ok('A32 the Cassian handler wiring matches the ruling in the shipped source: Act 1 rides startSinnohBattle(\'tobias_darkrai\') (the rechallenge idiom — not friendly, not faced) and its win callback sets tobias_darkrai_felled; sinnoh_complete is set exactly once in overworld-systems and immediately rides checkArcCompletion(g) (the machine fires — no hand-rolled ending, no regionsDone write in the handler)',
     owSysSrc.includes("startSinnohBattle('tobias_darkrai'")
     && owSysSrc.includes('flags.tobias_darkrai_felled = true')
     && (owSysSrc.match(/flags\.sinnoh_complete = true/g) || []).length === 1
@@ -413,10 +413,10 @@ const { LEGENDARY_ARCS: DESIGNED_ARCS7 } = await import(join(ROOT, 'src/data/sto
   const arc7 = SINNOH_LEGENDARY_ARCS.arc_arceus;
   const evArc = storyMod.SINNOH_EVENTS.ev_sinnoh_arceus, evStairs = storyMod.SINNOH_EVENTS.ev_sinnoh_arceus_stairs;
   const bi7 = (evArc || []).findIndex((s) => s.wildBattleCatch);
-  ok('A38 the Arceus capstone data: the live arc\u2019s steps spell the requirements (finale flag -> the flute at Spear Pillar -> the stairs -> the catch), its lair is the shipped Hall of Origin map; the stairs event is dialogue-only and opens the stairs; the face rides the catch-only chain at band cap 400 with arc-complete + done flag strictly after; the story-kanto designed stub pre-registers the id for the validator vocabulary',
+  ok('A38 the PRIMARCH capstone data: the live arc\u2019s steps spell the requirements (finale flag -> the flute at Spear Pillar -> the stairs -> the catch), its lair is the shipped Hall of Origin map; the stairs event is dialogue-only and opens the stairs; the face rides the catch-only chain at band cap 400 with arc-complete + done flag strictly after; the story-kanto designed stub pre-registers the id for the validator vocabulary',
     !!arc7 && !arc7.designedOnly && arc7.prereq === 'arceus_unlocked' && arc7.lair === 'hall-of-origin' && !!ALL_MAPS['hall-of-origin']
     && arc7.steps.length === 3 && arc7.steps[0].flag === 'arceus_unlocked' && arc7.steps[1].flag === 'arceus_stairs_open'
-    && arc7.steps[2].catch === 'arceus' && /Azure Flute/.test(arc7.steps[1].text) && /Zenith Spire/.test(arc7.steps[1].text) && /Hall of Dawning/.test(arc7.steps[2].text)
+    && arc7.steps[2].catch === 'arceus' && /Zenith Flute/.test(arc7.steps[1].text) && /Zenith Spire/.test(arc7.steps[1].text) && /Hall of Dawning/.test(arc7.steps[2].text)
     && Array.isArray(evStairs) && evStairs.every((s) => !s.wildBattleCatch && !s.battle && !s.battleAny) && evStairs.some((s) => s.flag === 'arceus_stairs_open')
     && bi7 >= 0 && evArc[bi7].wildBattleCatch.species === 'arceus' && evArc[bi7].wildBattleCatch.level === 400 && evArc[bi7].wildBattleCatch.legendary === true
     && evArc.slice(bi7 + 1).some((s) => s.arc === 'arc_arceus' && s.stage === 'complete') && evArc.slice(bi7 + 1).some((s) => s.flag === 'arc_arceus_done')
@@ -569,21 +569,21 @@ const driver = `
   pump(g, 300);
   // ===== the lab: Rowan + Paul 1 =====
   ow = gotoMap(g, 'rowan-lab', 8, 10); pump(g, 900);
-  ok('B03 the lab scene fires on entry: Rowan registers the veteran (rowan_registered) and Paul\\'s first measure resolves either way (paul1_done + a branch flag — battleAny)',
+  ok('B03 the lab scene fires on entry: Sorrel registers the veteran (rowan_registered) and Stellan\\'s first measure resolves either way (paul1_done + a branch flag — battleAny)',
     !!st.story.flags.rowan_registered && !!st.story.flags.paul1_done
     && (!!st.story.flags.paul1_won || !!st.story.flags.paul1_lost),
     'won=' + !!st.story.flags.paul1_won + ' lost=' + !!st.story.flags.paul1_lost);
   var rowan = ow.map.npcs.find(function (n) { return n.sinnoh === 'rowan'; });
-  ok('B04 PROF. ROWAN stands in his lab as a Sinnoh actor', !!rowan);
+  ok('B04 PROF. SORREL stands in his lab as a Sinnoh actor', !!rowan);
   // ===== Twinleaf: Dawn + the tale; Lake Verity =====
   ow = gotoMap(g, 'twinleaf', 13, 12); pump(g);
   var dawnNpc = talkKind(g, ow, 'dawn_twinleaf'); pump(g);
-  ok('B05 Dawn is met in Twinleaf (dawn_met — the contest co-spine opens)', !!dawnNpc && !!st.story.flags.dawn_met);
+  ok('B05 Dara is met in Twinleaf (dawn_met — the contest co-spine opens)', !!dawnNpc && !!st.story.flags.dawn_met);
   var asha = talkName(g, ow, 'MOM\\u2019S NEIGHBOR ASHA'); pump(g);
   var taleActive = st.story.quests.tale_sinnoh_twinleaf !== undefined;
   var tam = talkName(g, ow, 'YOUNGSTER TAM'); pump(g);
   var asha2 = talkName(g, ow, 'MOM\\u2019S NEIGHBOR ASHA'); pump(g);
-  ok('B06 a Sinnoh Town Tale runs end-to-end on the shipped tale machine (Asha offers -> Tam advances -> Asha finishes): tale complete, the Dawn Ribbon paid into the bag',
+  ok('B06 a Sinnoh Town Tale runs end-to-end on the shipped tale machine (Asha offers -> Tam advances -> Asha finishes): tale complete, the Daybreak Ribbon paid into the bag',
     !!asha && !!tam && taleActive && st.story.quests.tale_sinnoh_twinleaf === 'complete' && (st.bag.dawnribbon || 0) >= 1,
     'quest=' + st.story.quests.tale_sinnoh_twinleaf + ' bag=' + (st.bag.dawnribbon || 0));
   ow = gotoMap(g, 'lake-verity', 20, 9); pump(g, 400);
@@ -592,7 +592,7 @@ const driver = `
   // ===== the badge-skip refusal (prefix law) =====
   ow = gotoMap(g, 'gym-eterna', 7, 9); pump(g);
   var gard = talkKind(g, ow, 'gardenia'); pump(g, 400);
-  ok('B08 BADGE-SKIP REFUSAL: Gardenia, challenged with zero Sinnoh badges, refuses by the prefix law (no battle, badges.sinnoh still empty — the refusal reads badges.sinnoh)',
+  ok('B08 BADGE-SKIP REFUSAL: Tansy, challenged with zero Sinnoh badges, refuses by the prefix law (no battle, badges.sinnoh still empty — the refusal reads badges.sinnoh)',
     !!gard && (st.badges.sinnoh || []).length === 0 && !(g.scenes.top instanceof BattleScene));
   // ===== Roark =====
   function gym(mapId, kind, badge, flag) {
@@ -604,7 +604,7 @@ const driver = `
   ow = gotoMap(g, 'gym-oreburgh', 7, 9); pump(g);
   var cole = talkName(g, ow, 'MINER COLE'); pump(g, 900);
   ok('B09 a shipped-roster gym trainer battles through the generic trainer path (beat_roark_miner1)', !!cole && !!st.story.flags.beat_roark_miner1);
-  ok('B10 Gym 1: Roark awards the Coal Badge in order (badges.sinnoh [coal], badge_coal)', gym('gym-oreburgh', 'roark', 'coalbadge', 'badge_coal') && st.badges.sinnoh.join(',') === 'coalbadge');
+  ok('B10 Gym 1: Ronan awards the Coal Badge in order (badges.sinnoh [coal], badge_coal)', gym('gym-oreburgh', 'roark', 'coalbadge', 'badge_coal') && st.badges.sinnoh.join(',') === 'coalbadge');
   ok('B11 the HUD objective now leads with the Windworks row of the Sinnoh chain', (function () { var o2 = g.scenes.top; return o2.sysObjective && o2.sysObjective().indexOf('Galeworks') >= 0; })());
   // ===== Barry =====
   ow = gotoMap(g, 'jubilife', 13, 12); pump(g);
@@ -613,19 +613,19 @@ const driver = `
   // ===== Windworks: Mars =====
   healUp(g);
   ow = gotoMap(g, 'valley-windworks', 8, 10); pump(g, 900);
-  ok('B13 the Valley Windworks hostage beat fires with the Coal Badge held and Mars is driven off in a must-win battle (windworks_cleared)',
+  ok('B13 the Valley Windworks hostage beat fires with the Coal Badge held and Vesper is driven off in a must-win battle (windworks_cleared)',
     !!st.story.flags.windworks_cleared && !!st.story.flags.beat_mars_windworks);
   // ===== Gardenia + Eterna Galactic + Paul's assessment =====
-  ok('B14 Gym 2: Gardenia awards the Forest Badge in order', gym('gym-eterna', 'gardenia', 'forestbadge', 'badge_forest') && st.badges.sinnoh.join(',') === 'coalbadge,forestbadge');
+  ok('B14 Gym 2: Tansy awards the Forest Badge in order', gym('gym-eterna', 'gardenia', 'forestbadge', 'badge_forest') && st.badges.sinnoh.join(',') === 'coalbadge,forestbadge');
   healUp(g);
   ow = gotoMap(g, 'galactic-eterna', 8, 10); pump(g, 900);
-  ok('B15 the Eterna Galactic building raid fires with the Forest Badge held: Jupiter driven off (galactic_eterna_done)',
+  ok('B15 the Eterna Combine building raid fires with the Forest Badge held: Nova driven off (galactic_eterna_done)',
     !!st.story.flags.galactic_eterna_done && !!st.story.flags.beat_jupiter_eterna);
   ow = gotoMap(g, 'eterna', 13, 10); pump(g);
   var paulE = talkKind(g, ow, 'paul_eterna'); pump(g);
-  ok('B16 Paul\\'s Eterna assessment beat fires (paul_eterna_seen — the cold audit continues)', !!paulE && !!st.story.flags.paul_eterna_seen);
+  ok('B16 Stellan\\'s Eterna assessment beat fires (paul_eterna_seen — the cold audit continues)', !!paulE && !!st.story.flags.paul_eterna_seen);
   // ===== Fantina, Dawn's contest beat, the Chimchar =====
-  ok('B17 Gym 3: Fantina awards the Relic Badge in order', gym('gym-hearthome', 'fantina', 'relicbadge', 'badge_relic') && st.badges.sinnoh.join(',') === 'coalbadge,forestbadge,relicbadge');
+  ok('B17 Gym 3: Odile awards the Relic Badge in order', gym('gym-hearthome', 'fantina', 'relicbadge', 'badge_relic') && st.badges.sinnoh.join(',') === 'coalbadge,forestbadge,relicbadge');
   ow = gotoMap(g, 'contest-hearthome', 8, 10); pump(g);
   ow.sysInteract(9, 2); tk(g, 2); drain(g); tk(g, 2);
   var rankMenu = g.ui.menu ? g.ui.menu.items : [];
@@ -634,12 +634,12 @@ const driver = `
   if (g.ui.menuOpen) { var ci = rankMenu.findIndex(function (i) { return i.value === 'no'; }); if (ci >= 0) g.ui.debugChoose(ci); tk(g, 3); }
   drain(g);
   var dawnC = talkKind(g, ow, 'dawn_contest'); pump(g);
-  ok('B18 Dawn\\'s first Super Contest beat at Hearthome (dawn_hearthome_done + dawn_ribbon_hearthome) — and the player\\'s own ranked entry stands open beside it (the rank menu gates Great behind Normal, S4\\'s ladder)',
+  ok('B18 Dara\\'s first Super Contest beat at Hearthome (dawn_hearthome_done + dawn_ribbon_hearthome) — and the player\\'s own ranked entry stands open beside it (the rank menu gates Great behind Normal, S4\\'s ladder)',
     !!dawnC && !!st.story.flags.dawn_hearthome_done && !!st.story.flags.dawn_ribbon_hearthome && rankGateOk,
     'rankGate=' + rankGateOk);
   ow = gotoMap(g, 'hearthome', 13, 10); pump(g);
   var paulH = talkKind(g, ow, 'paul_hearthome'); pump(g, 600);
-  ok('B19 THE CHIMCHAR BEAT: Paul discards, the player takes it in — chimchar_beat_done + chimchar_taken, and a Chimchar (Lv 320, in band) stands in the party or a PC box, dex-registered caught',
+  ok('B19 THE CHIMCHAR BEAT: Stellan discards, the player takes it in — chimchar_beat_done + chimchar_taken, and a Chimchar (Lv 320, in band) stands in the party or a PC box, dex-registered caught',
     !!paulH && !!st.story.flags.chimchar_beat_done && !!st.story.flags.chimchar_taken
     && (st.party.some(function (m) { return m.speciesId === 'chimchar' && m.level === 320; })
       || Object.values(st.boxes || {}).some(function (b) { return b.some(function (m) { return m.speciesId === 'chimchar'; }); }))
@@ -652,17 +652,17 @@ const driver = `
     !!st.story.flags.defog_received && (st.bag.hm06 || 0) === hm06before + (hm06before ? 0 : 1) && (st.bag.hm06 || 0) >= 1,
     'hm06=' + (st.bag.hm06 || 0));
   // ===== Maylene, Saturn's door, Reggie, Paul's audit =====
-  ok('B21 Gym 4: Maylene awards the Cobble Badge in order — badges.sinnoh = the S5a prefix of four', gym('gym-veilstone', 'maylene', 'cobblebadge', 'badge_cobble') && st.badges.sinnoh.join(',') === 'coalbadge,forestbadge,relicbadge,cobblebadge');
+  ok('B21 Gym 4: Maren awards the Cobble Badge in order — badges.sinnoh = the S5a prefix of four', gym('gym-veilstone', 'maylene', 'cobblebadge', 'badge_cobble') && st.badges.sinnoh.join(',') === 'coalbadge,forestbadge,relicbadge,cobblebadge');
   ow = gotoMap(g, 'galactic-hq', 9, 12); pump(g);
   var saturn = talkKind(g, ow, 'saturn'); pump(g);
-  ok('B22 Veilstone HQ presence: Saturn holds the door (saturn_met) and NO raid fires this half (no HQ battle, no raid flag — the recorded S5b pacing call)',
+  ok('B22 Veilstone HQ presence: Sorin holds the door (saturn_met) and NO raid fires this half (no HQ battle, no raid flag — the recorded S5b pacing call)',
     !!saturn && !!st.story.flags.saturn_met && !st.story.flags.galactic_hq_done && !st.story.flags.beat_saturn);
   ow = gotoMap(g, 'veilstone', 13, 10); pump(g);
   var reggie = talkKind(g, ow, 'reggie'); pump(g);
-  ok('B23 Reggie, the Veilstone breeder, is met (reggie_met — Paul\\'s eleven-word letter)', !!reggie && !!st.story.flags.reggie_met);
+  ok('B23 Reggie, the Veilstone breeder, is met (reggie_met — Stellan\\'s eleven-word letter)', !!reggie && !!st.story.flags.reggie_met);
   healUp(g);
   var paulV = talkKind(g, ow, 'paul_veilstone'); pump(g, 1200);
-  ok('B24 Paul\\'s Veilstone audit resolves on his home turf (paul_veilstone_done + the honest branch flag — the first-half spine closes at ~348)',
+  ok('B24 Stellan\\'s Veilstone audit resolves on his home turf (paul_veilstone_done + the honest branch flag — the first-half spine closes at ~348)',
     !!paulV && !!st.story.flags.paul_veilstone_done
     && (!!st.story.flags.paul_veilstone_won || !!st.story.flags.paul_veilstone_lost),
     'won=' + !!st.story.flags.paul_veilstone_won + ' lost=' + !!st.story.flags.paul_veilstone_lost);
@@ -675,11 +675,11 @@ const driver = `
   var logLabels = logItems.map(function (i) { return i.label; }).join(' | ');
   var hasSinnohSection = logLabels.indexOf('— BOREA —') >= 0
     && logLabels.indexOf('★ Sail to Borea') >= 0
-    && logLabels.indexOf('★ Shardfall — Paul') >= 0;
+    && logLabels.indexOf('★ Shardfall — Stellan') >= 0;
   if (g.ui.menuOpen) { var li = logItems.findIndex(function (i) { return i.value === 'close'; }); if (li >= 0) g.ui.debugChoose(li); tk(g, 3); }
   drain(g);
   ok('B26 the Quest Log renders the SINNOH section with the completed first-half rows starred', hasSinnohSection, logLabels.slice(0, 200));
-  ok('B27 the merge fold landed in the bundle (TRAINERS carries the leaders + Paul + the commanders; EVENTS carries the six scenes; QUESTS carries the nine tales)',
+  ok('B27 the merge fold landed in the bundle (TRAINERS carries the leaders + Stellan + the commanders; EVENTS carries the six scenes; QUESTS carries the nine tales)',
     !!TRAINERS.roark && !!TRAINERS.maylene && !!TRAINERS.paul_veilstone && !!TRAINERS.jupiter_eterna
     && !!EVENTS.ev_sinnoh_arrival && !!EVENTS.ev_sinnoh_lab && !!EVENTS.ev_sinnoh_defog
     && !!QUESTS.tale_sinnoh_twinleaf && !!QUESTS.tale_sinnoh_veilstone);
@@ -725,21 +725,21 @@ const driver = `
   // ===== the HQ raid: Saturn's door opens =====
   healUp(g);
   ow = gotoMap(g, 'galactic-hq', 9, 12); pump(g, 1200);
-  ok('B31 the Veilstone HQ raid fires on entry with the Fen Badge held: Saturn beaten in a must-win battle (galactic_hq_done + beat_saturn_hq — the S5a door, opened)',
+  ok('B31 the Veilstone HQ raid fires on entry with the Fen Badge held: Sorin beaten in a must-win battle (galactic_hq_done + beat_saturn_hq — the S5a door, opened)',
     !!st.story.flags.galactic_hq_done && !!st.story.flags.beat_saturn_hq);
   // ===== Byron =====
-  ok('B32 Gym 6: Byron awards the Mine Badge in order', gym2('gym-canalave', 'byron', 'minebadge') && st.badges.sinnoh.join(',') === 'coalbadge,forestbadge,relicbadge,cobblebadge,fenbadge,minebadge');
+  ok('B32 Gym 6: Doran awards the Mine Badge in order', gym2('gym-canalave', 'byron', 'minebadge') && st.badges.sinnoh.join(',') === 'coalbadge,forestbadge,relicbadge,cobblebadge,fenbadge,minebadge');
   // ===== the Darkrai beat: plea -> Fullmoon -> the waking =====
   ow = gotoMap(g, 'canalave', 20, 10); pump(g);
   var eldric = talkKind(g, ow, 'sailor_eldric'); pump(g);
-  ok('B33 the Darkrai beat opens: the sailor\\'s plea is taken (darkrai_beat_started — no wing yet, no waking)',
+  ok('B33 the NOCTARCH beat opens: the sailor\\'s plea is taken (darkrai_beat_started — no wing yet, no waking)',
     !!eldric && !!st.story.flags.darkrai_beat_started && !st.story.flags.darkrai_beat_done && !st.story.flags.lunar_wing_received);
   ow = gotoMap(g, 'fullmoon-island', 18, 12); pump(g, 500);
   ok('B34 Fullmoon Island: Cresselia\\'s glimpse provides (cresselia_glimpsed + lunar_wing_received; the Lunar Wing rides in the bag\\'s key pocket)',
     !!st.story.flags.cresselia_glimpsed && !!st.story.flags.lunar_wing_received && (st.bag.lunarwing || 0) >= 1);
   ow = gotoMap(g, 'canalave', 20, 10); pump(g);
   talkKind(g, ow, 'sailor_eldric'); pump(g);
-  ok('B35 the boy wakes: the beat completes at the sailor (darkrai_beat_done) and Darkrai\\'s S6 flavour unlock stands (darkrai_unlocked — the catch arc itself is S6\\'s, not staged here)',
+  ok('B35 the boy wakes: the beat completes at the sailor (darkrai_beat_done) and NOCTARCH\\'s S6 flavour unlock stands (darkrai_unlocked — the catch arc itself is S6\\'s, not staged here)',
     !!st.story.flags.darkrai_beat_done && !!st.story.flags.darkrai_unlocked);
   // ===== the Gracidea beat at Floaroma =====
   ow = gotoMap(g, 'floaroma', 13, 12); pump(g, 500);
@@ -750,13 +750,13 @@ const driver = `
   ok('B37 the Snowpoint Town Tale runs end-to-end: tale complete, the Frost Petal paid',
     st.story.quests.tale_sinnoh_snowpoint === 'complete' && (st.bag.frostpetal || 0) >= 1,
     'quest=' + st.story.quests.tale_sinnoh_snowpoint);
-  ok('B38 Gym 7: Candice awards the Icicle Badge in order', gym2('gym-snowpoint', 'candice', 'iciclebadge') && st.badges.sinnoh.join(',') === 'coalbadge,forestbadge,relicbadge,cobblebadge,fenbadge,minebadge,iciclebadge');
+  ok('B38 Gym 7: Neve awards the Icicle Badge in order', gym2('gym-snowpoint', 'candice', 'iciclebadge') && st.badges.sinnoh.join(',') === 'coalbadge,forestbadge,relicbadge,cobblebadge,fenbadge,minebadge,iciclebadge');
   ow = gotoMap(g, 'lake-acuity', 14, 10); pump(g, 500);
   ok('B39 Lake Acuity: Uxie\\'s glimpse fires under Galactic pressure (uxie_glimpse — pressure and a shadow: no battle on the ice)',
     !!st.story.flags.uxie_glimpse && !(g.scenes.top instanceof BattleScene));
   healUp(g);
   var paulA = talkKind(g, ow, 'paul_acuity'); pump(g, 2000);
-  ok('B40 THE ACUITY MIDPOINT: Paul\\'s full battle resolves FACED (paul_acuity_done + the honest branch flag — win or lose, the story continues; no progression gate reads the result)',
+  ok('B40 THE ACUITY MIDPOINT: Stellan\\'s full battle resolves FACED (paul_acuity_done + the honest branch flag — win or lose, the story continues; no progression gate reads the result)',
     !!paulA && !!st.story.flags.paul_acuity_done
     && (!!st.story.flags.paul_acuity_won || !!st.story.flags.paul_acuity_lost),
     'won=' + !!st.story.flags.paul_acuity_won + ' lost=' + !!st.story.flags.paul_acuity_lost);
@@ -771,12 +771,12 @@ const driver = `
   ok('B42 the Sunyshore Town Tale runs end-to-end: tale complete, the Beacon Coil paid',
     st.story.quests.tale_sinnoh_sunnyshore === 'complete' && (st.bag.beaconcoil || 0) >= 1,
     'quest=' + st.story.quests.tale_sinnoh_sunnyshore);
-  ok('B43 Gym 8: Volkner awards the Beacon Badge — badges.sinnoh is the full Platinum eight, in order',
+  ok('B43 Gym 8: Rainer awards the Beacon Badge — badges.sinnoh is the full Platinum eight, in order',
     gym2('gym-sunnyshore', 'volkner', 'beaconbadge')
     && st.badges.sinnoh.join(',') === 'coalbadge,forestbadge,relicbadge,cobblebadge,fenbadge,minebadge,iciclebadge,beaconbadge');
   ow = gotoMap(g, 'lake-valor', 20, 9); pump(g);
   var dawnF = talkKind(g, ow, 'dawn_festival'); pump(g);
-  ok('B44 Dawn\\'s co-spine concludes at the Grand Festival on Lake Valor (dawn_grand_festival_done + dawn_festival_ribbon — her arc resolves in the beat; the player\\'s own contest ladder is untouched by it)',
+  ok('B44 Dara\\'s co-spine concludes at the Grand Festival on Lake Valor (dawn_grand_festival_done + dawn_festival_ribbon — her arc resolves in the beat; the player\\'s own contest ladder is untouched by it)',
     !!dawnF && !!st.story.flags.dawn_grand_festival_done && !!st.story.flags.dawn_festival_ribbon);
   ow = gotoMap(g, 'lake-verity', 20, 9); pump(g, 500);
   ok('B45 Lake Verity under pressure: Mesprit slips the net (mesprit_glimpse — the third glimpse; the trio\\'s catch arcs remain S6\\'s)',
@@ -794,7 +794,7 @@ const driver = `
   ok('B48 the Coronet climb beat fires in the north galleries (coronet_climb_done — the rearguard stands aside)',
     !!st.story.flags.coronet_climb_done);
   ow = gotoMap(g, 'spear-pillar', 13, 12); pump(g, 2500);
-  ok('B49 SPEAR PILLAR: Cyrus is FACED over the chained gods (spear_pillar_done + the honest branch flag), the sky tears, and the scene warps the player into distortion-entrance',
+  ok('B49 SPEAR PILLAR: Severin is FACED over the chained gods (spear_pillar_done + the honest branch flag), the sky tears, and the scene warps the player into distortion-entrance',
     !!st.story.flags.spear_pillar_done
     && (!!st.story.flags.cyrus_spear_won || !!st.story.flags.cyrus_spear_lost)
     && st.story.position.map === 'distortion-entrance',
@@ -807,7 +807,7 @@ const driver = `
   ok('B50 the Distortion World traversal walks the S3b six-map chain (entrance -> depths -> isles -> falls -> abyss) with no soft lock', dwOk && st.story.position.map === 'distortion-abyss');
   healUp(g);
   ow = gotoMap(g, 'distortion-platform', 20, 10); pump(g, 2500);
-  ok('B51 THE CLIMAX RESOLVES on Giratina\\'s platform: Cyrus FACED + ended (cyrus_end_done + distortion_cleared + a branch flag), sinnoh_climax_resolved stands, and the freed titans\\' S6 unlock flags stand with it (dialga_unlocked / palkia_unlocked / giratina_unlocked)',
+  ok('B51 THE CLIMAX RESOLVES on VOIDARCH\\'s platform: Cyrus FACED + ended (cyrus_end_done + distortion_cleared + a branch flag), sinnoh_climax_resolved stands, and the freed titans\\' S6 unlock flags stand with it (dialga_unlocked / palkia_unlocked / giratina_unlocked)',
     !!st.story.flags.sinnoh_climax_resolved && !!st.story.flags.cyrus_end_done && !!st.story.flags.distortion_cleared
     && !!st.story.flags.dialga_unlocked && !!st.story.flags.palkia_unlocked && !!st.story.flags.giratina_unlocked
     && (!!st.story.flags.cyrus_final_won || !!st.story.flags.cyrus_final_lost));
@@ -826,13 +826,13 @@ const driver = `
     talkKind(g, ow, 'paul_conference'); pump(g, 2500);
     paulSettled = !!st.story.flags.paul_conference_done;
   }
-  ok('B54 THE PAUL SETTLEMENT: the quarter-final is won at full strength (paul_conference_done + paul_conference_won — must-win-with-rechallenge: the rivalry resolves with the win, the engine never hard-locked)',
+  ok('B54 THE STELLAN SETTLEMENT: the quarter-final is won at full strength (paul_conference_done + paul_conference_won — must-win-with-rechallenge: the rivalry resolves with the win, the engine never hard-locked)',
     paulSettled && !!st.story.flags.paul_conference_won);
   // Tobias proof (i): a full wipe BEFORE the felling is a rematch.
   weakTeam();
   ow = gotoMap(g, 'league-lobby', 8, 10); pump(g);
   talkKind(g, ow, 'tobias'); pump(g, 1500);
-  ok('B55 TOBIAS PROOF (i): a full team wipe before Darkrai falls concludes NOTHING — no felling flag, no tobias_faced, no sinnoh_complete, no arc card (a rematch, per the ruling)',
+  ok('B55 CASSIAN PROOF (i): a full team wipe before NOCTARCH falls concludes NOTHING — no felling flag, no tobias_faced, no sinnoh_complete, no arc card (a rematch, per the ruling)',
     !st.story.flags.tobias_darkrai_felled && !st.story.flags.tobias_faced
     && !st.story.flags.sinnoh_complete && !st.story.flags.arc_card_sinnoh
     && st.story.regionsDone.filter(function (r) { return r === 'sinnoh'; }).length === 0);
@@ -841,14 +841,14 @@ const driver = `
   strongTeam(g, 395); healUp(g);
   ow = gotoMap(g, 'league-lobby', 8, 10); pump(g);
   talkKind(g, ow, 'tobias'); pump(g, 2500);
-  ok('B56 TOBIAS PROOF (ii-a): Darkrai FALLS to a full-strength team — tobias_darkrai_felled stands, and the conference has NOT concluded yet (the Latios act is still owed: no tobias_faced, no sinnoh_complete)',
+  ok('B56 CASSIAN PROOF (ii-a): NOCTARCH FALLS to a full-strength team — tobias_darkrai_felled stands, and the conference has NOT concluded yet (the AZURAVIS act is still owed: no tobias_faced, no sinnoh_complete)',
     !!st.story.flags.tobias_darkrai_felled && !st.story.flags.tobias_faced && !st.story.flags.sinnoh_complete);
   weakTeam();
   talkKind(g, ow, 'tobias'); pump(g, 2500);
-  ok('B57 TOBIAS PROOF (ii-b): with the felling standing, Latios concludes the match WIN-OR-LOSE — the canon loss path (tobias_faced + tobias_lost) still concludes the Conference with the honour intact (sinnoh_complete set by the handler)',
+  ok('B57 CASSIAN PROOF (ii-b): with the felling standing, AZURAVIS concludes the match WIN-OR-LOSE — the canon loss path (tobias_faced + tobias_lost) still concludes the Conference with the honour intact (sinnoh_complete set by the handler)',
     !!st.story.flags.tobias_faced && !!st.story.flags.tobias_lost && !!st.story.flags.sinnoh_complete);
   // Tobias proof (iii): the machine fires — exactly once.
-  ok('B58 TOBIAS PROOF (iii): the machine fired on sinnoh_complete — arc_card_sinnoh stands, regionsDone gained sinnoh EXACTLY once, and the directive is pinned on the next arc (unova, sealed)',
+  ok('B58 CASSIAN PROOF (iii): the machine fired on sinnoh_complete — arc_card_sinnoh stands, regionsDone gained sinnoh EXACTLY once, and the directive is pinned on the next arc (unova, sealed)',
     !!st.story.flags.arc_card_sinnoh
     && st.story.regionsDone.filter(function (r) { return r === 'sinnoh'; }).length === 1
     && st.story.arc_directive === 'unova',
@@ -870,7 +870,7 @@ const driver = `
   if (g.ui.menuOpen) { var li2 = logItems2.findIndex(function (i) { return i.value === 'close'; }); if (li2 >= 0) g.ui.debugChoose(li2); tk(g, 3); }
   drain(g);
   ok('B61 the Quest Log renders the SINNOH section with the second-half rows starred complete (the Distortion World + the semi-final rows)', hasFinalRows, logLabels2.slice(0, 200));
-  ok('B62 the merge fold landed in the bundle (TRAINERS carries Wake/Volkner/Paul\\'s settlement/Tobias\\'s two acts; EVENTS carries the Spear Pillar + platform scenes; QUESTS carries the second-half tales)',
+  ok('B62 the merge fold landed in the bundle (TRAINERS carries Wake/Rainer/Stellan\\'s settlement/Tobias\\'s two acts; EVENTS carries the Spear Pillar + platform scenes; QUESTS carries the second-half tales)',
     !!TRAINERS.wake && !!TRAINERS.volkner && !!TRAINERS.paul_conference && !!TRAINERS.tobias_darkrai && !!TRAINERS.tobias_latios
     && !!EVENTS.ev_sinnoh_spear_pillar && !!EVENTS.ev_sinnoh_distortion_climax && !!EVENTS.ev_sinnoh_hq_raid
     && !!QUESTS.tale_sinnoh_pastoria && !!QUESTS.tale_sinnoh_sunnyshore);
@@ -982,9 +982,9 @@ const driver = `
     st.story.regionsDone.length === 6 && presentedEchoes.length === 6
     && st.story.regionsDone.every(function (key, i) { return presentedEchoes[i] === ARC_FINALE_ECHOES[key]; }),
     'echoes=' + presentedEchoes.length + ' done=' + st.story.regionsDone.join(','));
-  ok('C06 THE ENTRUSTING: Oak\\'s rating beat reads the 493 horizon (492 of 493 at the doorstep) and the finale — not completion — grants the Azure Flute (key pocket, exactly one) and sets arceus_unlocked',
+  ok('C06 THE ENTRUSTING: Hawthorn\\'s rating beat reads the 493 horizon (492 of 493 at the doorstep) and the finale — not completion — grants the Zenith Flute (key pocket, exactly one) and sets arceus_unlocked',
     finLines.some(function (l) { return l.indexOf('492 of 493') >= 0; })
-    && finLines.some(function (l) { return l.indexOf('AZURE FLUTE') >= 0; })
+    && finLines.some(function (l) { return l.indexOf('ZENITH FLUTE') >= 0; })
     && st.bag.azureflute === 1 && !!st.story.flags.arceus_unlocked);
   ok('C07 MASTER HALL OF FAME: the finale wrote the seventh entry, flagged master, with the walking party as its team (alongside the six per-arc entries, none of them master)',
     st.story.hof.length === 7 && st.story.hof.filter(function (e) { return e.master; }).length === 1
@@ -1028,11 +1028,11 @@ const driver = `
   ow = gotoMap(g, 'hall-of-origin', 10, 12);
   var faced = toBattle7();
   var foe7 = (g.scenes.top instanceof BattleScene) ? g.scenes.top.foe : null;
-  ok('C12 THE CAPSTONE FACES: Arceus stands in the Hall of Origin at the band cap, level 400',
+  ok('C12 THE CAPSTONE FACES: PRIMARCH stands in the Hall of Origin at the band cap, level 400',
     faced && !!foe7 && foe7.speciesId === 'arceus' && foe7.level === 400,
     foe7 ? foe7.speciesId + '@' + foe7.level : 'no battle');
   flee7(); pump(g, 200);
-  ok('C13 FLEE RE-FIRES (the catch law, even here): fleeing Arceus completes nothing — no done flag, no dex, the arc stays open',
+  ok('C13 FLEE RE-FIRES (the catch law, even here): fleeing PRIMARCH completes nothing — no done flag, no dex, the arc stays open',
     !st.story.flags.arc_arceus_done && !st.dex.caught[493] && st.story.quests.arc_arceus !== 'complete');
   healUp(g);
   ow = gotoMap(g, 'hall-of-origin', 10, 12);

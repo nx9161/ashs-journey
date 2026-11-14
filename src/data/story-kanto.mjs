@@ -825,7 +825,7 @@ export const LEGENDARY_ARCS = {
     id: 'arc_victini', title: 'The Victory in the Lighthouse', species: 'victini', region: 'Vespera', designedOnly: true,
     hook: 'Liberty Garden’s lighthouse has been sealed for two centuries, and the keeper’s log ends mid-sentence: "It brought us luck. Then it hid."',
     steps: [
-      { text: 'Earn the Keeper's Pass' },
+      { text: 'Earn the Keeper\'s Pass' },
       { text: 'Open the lighthouse basement' },
       { text: 'Meet TRIUMPHARE, level 50', catch: 'victini' },
     ],
@@ -836,7 +836,7 @@ export const LEGENDARY_ARCS = {
     hook: 'Three old soldiers of Vespera keep glancing at an empty fourth place at their glade — the student who ran ahead of the lesson.',
     steps: [
       { text: 'Earn the respect of SABERHART, BOULDHORN, and VERDANTLER' },
-      { text: 'Bring the three to the the Bladesmoor' },
+      { text: 'Bring the three to the Bladesmoor' },
       { text: 'Witness RILLFOAL take up the sword', catch: 'keldeo' },
     ],
     lair: 'pledgegrove',

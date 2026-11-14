@@ -76,13 +76,13 @@ export const ITEMS = {
   // Stage J6: apricorns (pocket 'items') — picked from apricorn trees
   // across Yamato (src/game/johto-systems.mjs APRICORN_TREES); Kurt in
   // Cinder crafts one into its matching ball. No price: never mart stock.
-  redapricorn: { id: 'redpodnut', name: 'Red Podnut', pocket: 'items', desc: 'A ripe red podnut. Hendrik of Cinder can work it into a Level Ball.' },
-  blueapricorn: { id: 'bluepodnut', name: 'Blue Podnut', pocket: 'items', desc: 'A ripe blue podnut. Hendrik of Cinder can work it into a Lure Ball.' },
-  yellowapricorn: { id: 'yellowpodnut', name: 'Yellow Podnut', pocket: 'items', desc: 'A ripe yellow podnut. Hendrik of Cinder can work it into a Moon Ball.' },
-  greenapricorn: { id: 'greenpodnut', name: 'Green Podnut', pocket: 'items', desc: 'A ripe green podnut. Hendrik of Cinder can work it into a Friend Ball.' },
-  pinkapricorn: { id: 'pinkpodnut', name: 'Pink Podnut', pocket: 'items', desc: 'A ripe pink podnut. Hendrik of Cinder can work it into a Love Ball.' },
-  whiteapricorn: { id: 'whitepodnut', name: 'White Podnut', pocket: 'items', desc: 'A ripe white podnut. Hendrik of Cinder can work it into a Fast Ball.' },
-  blackapricorn: { id: 'blackpodnut', name: 'Black Podnut', pocket: 'items', desc: 'A ripe black podnut. Hendrik of Cinder can work it into a Heavy Ball.' },
+  redapricorn: { id: 'redapricorn', name: 'Red Podnut', pocket: 'items', desc: 'A ripe red podnut. Hendrik of Cinder can work it into a Level Ball.' },
+  blueapricorn: { id: 'blueapricorn', name: 'Blue Podnut', pocket: 'items', desc: 'A ripe blue podnut. Hendrik of Cinder can work it into a Lure Ball.' },
+  yellowapricorn: { id: 'yellowapricorn', name: 'Yellow Podnut', pocket: 'items', desc: 'A ripe yellow podnut. Hendrik of Cinder can work it into a Moon Ball.' },
+  greenapricorn: { id: 'greenapricorn', name: 'Green Podnut', pocket: 'items', desc: 'A ripe green podnut. Hendrik of Cinder can work it into a Friend Ball.' },
+  pinkapricorn: { id: 'pinkapricorn', name: 'Pink Podnut', pocket: 'items', desc: 'A ripe pink podnut. Hendrik of Cinder can work it into a Love Ball.' },
+  whiteapricorn: { id: 'whiteapricorn', name: 'White Podnut', pocket: 'items', desc: 'A ripe white podnut. Hendrik of Cinder can work it into a Fast Ball.' },
+  blackapricorn: { id: 'blackapricorn', name: 'Black Podnut', pocket: 'items', desc: 'A ripe black podnut. Hendrik of Cinder can work it into a Heavy Ball.' },
   // Medicine
   potion: { id: 'potion', name: 'Potion', pocket: 'medicine', price: 300, heal: 20, desc: 'Restores 20 HP.' },
   superpotion: { id: 'superpotion', name: 'Super Potion', pocket: 'medicine', price: 700, heal: 50, desc: 'Restores 50 HP.' },

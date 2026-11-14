@@ -112,7 +112,7 @@ export const CHAPTERS = [
 export const BONUS_SHELF = [
   'The First Bond',
   'The Power of the Coast',
-  'The Jungle's Secret',
+  'The Jungle\'s Secret',
   'Detective VOLTIK',
   'OMNIGEN Strikes Back: Evolution',
   'Origins',

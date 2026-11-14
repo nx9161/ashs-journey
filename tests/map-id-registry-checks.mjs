@@ -100,27 +100,27 @@ ok('chain: victory-road -> r223 + pokemon-league (4 returns)',
 // Burn-down rule: a commit that reconciles or deliberately edits a copy
 // updates that id's line here in the same commit. Nothing else may move it.
 const BASELINE = {
-  "center": ['D', 'maps.mjs:bb3ce9d4', 'maps3.mjs:779a3d3e'],
+  "center": ['D', 'maps.mjs:bb3ce9d4', 'maps3.mjs:a8032bc0'],
   "ceruleancave": ['D', 'maps2.mjs:fdc075ab', 'maps3.mjs:46e003ef'],
-  "cinnabar": ['I', 'maps2.mjs:3b9e0f64', 'maps3.mjs:3b9e0f64'],
-  "dojo": ['D', 'maps2.mjs:d5bd6555', 'maps3.mjs:164b72a8'],
-  "fuchsia": ['I', 'maps2.mjs:c4a97f15', 'maps3.mjs:c4a97f15'],
+  "cinnabar": ['I', 'maps2.mjs:a0ef07ac', 'maps3.mjs:a0ef07ac'],
+  "dojo": ['D', 'maps2.mjs:767d8216', 'maps3.mjs:97e14c03'],
+  "fuchsia": ['I', 'maps2.mjs:6c9f1853', 'maps3.mjs:6c9f1853'],
   "gamecorner": ['D', 'maps2.mjs:37481247', 'maps4.mjs:e32d7897'],
-  "gym-celadon": ['I', 'maps2.mjs:b35a031f', 'maps3.mjs:b35a031f'],
-  "gym-cerulean": ['I', 'maps2.mjs:2b5ba67b', 'maps3.mjs:2b5ba67b'],
-  "gym-cinnabar": ['D', 'maps2.mjs:10d6a21c', 'maps3.mjs:10d6a21c', 'maps4.mjs:14befa4b'],
-  "gym-fuchsia": ['I', 'maps2.mjs:6e7a3bac', 'maps3.mjs:6e7a3bac'],
-  "gym-saffron": ['D', 'maps2.mjs:fd33dceb', 'maps3.mjs:fd33dceb', 'maps4.mjs:9c869a6b'],
-  "gym-vermilion": ['I', 'maps2.mjs:c9bc48c8', 'maps3.mjs:c9bc48c8'],
-  "gym-viridian": ['D', 'maps2.mjs:0ffee92f', 'maps3.mjs:cccc62bf'],
+  "gym-celadon": ['I', 'maps2.mjs:e34e5a11', 'maps3.mjs:e34e5a11'],
+  "gym-cerulean": ['I', 'maps2.mjs:36cf7ab1', 'maps3.mjs:36cf7ab1'],
+  "gym-cinnabar": ['D', 'maps2.mjs:0ca7ca05', 'maps3.mjs:0ca7ca05', 'maps4.mjs:f579cd03'],
+  "gym-fuchsia": ['I', 'maps2.mjs:05d08fb4', 'maps3.mjs:05d08fb4'],
+  "gym-saffron": ['D', 'maps2.mjs:967597a7', 'maps3.mjs:967597a7', 'maps4.mjs:69814494'],
+  "gym-vermilion": ['I', 'maps2.mjs:03a2c9bf', 'maps3.mjs:03a2c9bf'],
+  "gym-viridian": ['D', 'maps2.mjs:b91d066d', 'maps3.mjs:11e2b64b'],
   "hideout": ['D', 'maps2.mjs:ce1ebeed', 'maps4.mjs:04c239d9'],
   "indigo": ['I', 'maps2.mjs:d8421648', 'maps3.mjs:d8421648'],
   "lavender": ['I', 'maps2.mjs:b6496b5b', 'maps3.mjs:b6496b5b'],
-  "league": ['D', 'maps2.mjs:d1bda1de', 'maps3.mjs:45ee82be'],
+  "league": ['D', 'maps2.mjs:426a8945', 'maps3.mjs:9388d38b'],
   "mansion": ['D', 'maps2.mjs:6036b681', 'maps3.mjs:0b89e84d'],
   "newisland": ['D', 'maps2.mjs:06f895d7', 'maps3.mjs:87e908ce', 'maps4.mjs:0a2b629f'],
-  "pallet": ['D', 'maps.mjs:4b19b4ef', 'maps2.mjs:e32d3d85', 'maps3.mjs:9797c889'],
-  "pewter": ['D', 'maps.mjs:c6fbbbdb', 'maps2.mjs:34f2aafe'],
+  "pallet": ['D', 'maps.mjs:d450da1c', 'maps2.mjs:a59018a8', 'maps3.mjs:ac805bba'],
+  "pewter": ['D', 'maps.mjs:f1285ecb', 'maps2.mjs:e0c38364'],
   "powerplant": ['D', 'maps2.mjs:7ce38a29', 'maps3.mjs:f19569a9'],
   "rocktunnel": ['D', 'maps2.mjs:474d1700', 'maps3.mjs:a4e228fb'],
   "route10": ['I', 'maps2.mjs:d1f5b22e', 'maps3.mjs:d1f5b22e'],
@@ -133,16 +133,16 @@ const BASELINE = {
   "route8": ['D', 'maps2.mjs:720445b3', 'maps3.mjs:b69ace77'],
   "route9": ['D', 'maps2.mjs:bbff285f', 'maps3.mjs:8dd0c280'],
   "safari": ['D', 'maps2.mjs:a840460d', 'maps3.mjs:2a374dee'],
-  "saffron": ['I', 'maps2.mjs:58e6e12d', 'maps3.mjs:58e6e12d'],
+  "saffron": ['I', 'maps2.mjs:86574441', 'maps3.mjs:86574441'],
   "seafoam": ['D', 'maps2.mjs:e1621a14', 'maps3.mjs:00bf11b4'],
   "silph1": ['D', 'maps2.mjs:33bf502b', 'maps3.mjs:de66dcd1', 'maps4.mjs:b46c0ad2'],
   "silph2": ['D', 'maps2.mjs:21068e6c', 'maps3.mjs:a3e6994c', 'maps4.mjs:c666a5eb'],
-  "stanne": ['D', 'maps2.mjs:24fa77c5', 'maps4.mjs:9c9e452f'],
-  "tower1": ['I', 'maps2.mjs:008f0030', 'maps3.mjs:008f0030'],
+  "stanne": ['D', 'maps2.mjs:24a81714', 'maps4.mjs:99facee4'],
+  "tower1": ['I', 'maps2.mjs:a29e8705', 'maps3.mjs:a29e8705'],
   "tower2": ['D', 'maps2.mjs:67e834db', 'maps3.mjs:209d7be2'],
-  "vermilion": ['D', 'maps2.mjs:95f01316', 'maps4.mjs:3ea316ac', 'maps5.mjs:b04ae76c', 'maps6.mjs:d97cdbc0'],
+  "vermilion": ['D', 'maps2.mjs:43c09b02', 'maps4.mjs:a5606dc0', 'maps5.mjs:34c10928', 'maps6.mjs:2ac0d0ec'],
   "victoryroad": ['D', 'maps2.mjs:68ee1404', 'maps3.mjs:4d27c6e3'],
-  "viridian": ['D', 'maps.mjs:ee32a92d', 'maps2.mjs:2de2d36f', 'maps3.mjs:af6d11d0'],
+  "viridian": ['D', 'maps.mjs:5513301d', 'maps2.mjs:c71e86c5', 'maps3.mjs:dd83ca50'],
 };
 
 const dupNow = new Map([...byId.entries()].filter(([, v]) => v.length > 1));
@@ -196,8 +196,8 @@ ok(`references: all ${locN} narrative-db chapter locations are defined maps`, ba
 // pinned here because this gate owns the split):
 {
   const hoenn = await D('story-hoenn.mjs');
-  const wally = asArr(hoenn.HOENN_NPCS).find((n) => n.name === 'WALLY' && n.hoenn === 'wally_final');
-  ok('split: Wally finale post stands on victory-road-maris (11,6)',
+  const wally = asArr(hoenn.HOENN_NPCS).find((n) => n.name === 'EMIL' && n.hoenn === 'wally_final');
+  ok('split: Emil finale post stands on victory-road-maris (11,6)',
     !!wally && wally.map === 'victory-road-maris' && wally.x === 11 && wally.y === 6,
     wally ? `${wally.map}@${wally.x},${wally.y}` : 'post not found');
 }

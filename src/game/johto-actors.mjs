@@ -116,12 +116,12 @@ Object.assign(OverworldScene.prototype, {
       } else {
         const ownedApricorns = APRICORN_IDS.filter((id) => (st.bag[id] || 0) > 0);
         if (ownedApricorns.length) {
-          say(['Forty years I have worked Capture Orbs by hand, trainer — and my eyes still catch an podnut in a bag before the bag is even open. You are carrying ripe ones.',
+          say(['Forty years I have worked Capture Orbs by hand, trainer — and my eyes still catch a podnut in a bag before the bag is even open. You are carrying ripe ones.',
             'One ball at a time — that is the workbench law — and it settles over 250 steps of your walking. Shall I work one for you?'], () => {
             const items = ownedApricorns.map((id) => ({ label: 'Craft: ' + ITEMS[id].name + ' -> ' + ITEMS[APRICORN_TO_BALL[id]].name, value: id }));
             items.push({ label: 'Just talk', value: '__talk' });
             items.push({ label: 'Leave', value: null });
-            g.ui.showMenu('Hand Hendrik an podnut?', items, (v) => {
+            g.ui.showMenu('Hand Hendrik a podnut?', items, (v) => {
               if (v === '__talk') { st.session.kurtTalkOnce = true; this.runJohtoNpc(npc); return; }
               if (!v) return;
               const res = kurtPlaceOrder(st, v);

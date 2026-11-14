@@ -52,7 +52,7 @@ export const APRICORN_REGROW_STEPS = 200;
 export const KURT_CRAFT_STEPS = 250;
 export const DAYCARE_CAP = 2;
 export const STORY_EGG_POOL = ['pichu', 'cleffa', 'igglybuff', 'togepi', 'magby', 'elekid', 'smoochum', 'tyrogue'];
-export const APRICORN_IDS = ['redpodnut', 'bluepodnut', 'yellowpodnut', 'greenpodnut', 'pinkpodnut', 'whitepodnut', 'blackpodnut'];
+export const APRICORN_IDS = ['redapricorn', 'blueapricorn', 'yellowapricorn', 'greenapricorn', 'pinkapricorn', 'whiteapricorn', 'blackapricorn'];
 export const APRICORN_TO_BALL = {
   redapricorn: 'levelball', blueapricorn: 'lureball', yellowapricorn: 'moonball',
   greenapricorn: 'friendball', pinkapricorn: 'loveball', whiteapricorn: 'fastball',

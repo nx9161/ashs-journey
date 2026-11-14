@@ -4958,7 +4958,7 @@ export const MAPS6 = {
         "pants": "#2a2a3a",
         "hair": "#4a3a2a",
         "dialogue": [
-          "Mr. Hendrik can hear whether an podnut is ripe. I am on year three of learning how.",
+          "Mr. Hendrik can hear whether a podnut is ripe. I am on year three of learning how.",
           "One ball at a time. The workbench has rules and I am not one of them."
         ]
       }

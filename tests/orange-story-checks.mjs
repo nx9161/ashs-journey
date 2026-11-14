@@ -48,17 +48,17 @@ const ORANGE_ORDER = ['coraleyebadge', 'searubybadge', 'spikeshellbadge', 'jades
     JSON.stringify(BADGE_SETS.orange) === JSON.stringify(ORANGE_ORDER)
     && ORANGE_ORDER.every((id) => ITEMS[id] && ITEMS[id].pocket === 'key')
     && ITEMS.winnerstrophy && ITEMS.winnerstrophy.collectible === true);
-  ok('A03 the GS Ball story item is the Cheat Shop collectible (one id: gsball, collectible-flagged)',
+  ok('A03 the Sealed Orb story item is the Cheat Shop collectible (one id: gsball, collectible-flagged)',
     ITEMS.gsball && ITEMS.gsball.collectible === true && ORANGE_EVENTS.ev_orange_ivy.some((s) => s.gsBall));
   const team = (id) => ORANGE_TRAINERS[id].team.map((m) => m.species + ':' + m.level).join(',');
-  ok('A04 Crew teams match the mission (Cissy 38/40, Danny 41/42/44, Rudy 44/45/47)',
+  ok('A04 Crew teams match the mission (Sela 38/40, Oren 41/42/44, Renzo 44/45/47)',
     team('cissy') === 'seadra:38,starmie:40'
     && team('danny') === 'nidoqueen:41,machoke:42,scyther:44'
     && team('rudy') === 'electabuzz:44,exeggutor:45,starmie:47');
-  ok('A05 Luana adaptation: two defs, Alakazam pair first (48) then Marowak pair (50), badge ONLY on stage B',
+  ok('A05 Alba adaptation: two defs, Alakazam pair first (48) then Marowak pair (50), badge ONLY on stage B',
     team('luana_a') === 'alakazam:48,hypno:46' && team('luana_b') === 'marowak:50,gengar:48'
     && !ORANGE_TRAINERS.luana_a.badge && ORANGE_TRAINERS.luana_b.badge === 'jadestarbadge');
-  ok('A06 Drake: 6v6 in order, Dragonite Lv58 ace, no badge on the def (the trophy path awards it)',
+  ok('A06 Barrow: 6v6 in order, Dragonite Lv58 ace, no badge on the def (the trophy path awards it)',
     team('drake') === 'ditto:52,onix:53,gengar:54,venusaur:55,electabuzz:56,dragonite:58' && !ORANGE_TRAINERS.drake.badge);
   ok('A07 every Crew def carries badgeSet orange + its badge; every team species exists',
     ['cissy', 'danny', 'rudy', 'luana_b'].every((id) => ORANGE_TRAINERS[id].badgeSet === 'orange' && ORANGE_ORDER.includes(ORANGE_TRAINERS[id].badge))
@@ -78,7 +78,7 @@ const ORANGE_ORDER = ['coraleyebadge', 'searubybadge', 'spikeshellbadge', 'jades
   const legacy = clone(defaultState());
   delete legacy.badges.orange;
   legacy.badges.kanto = ['boulderbadge'];
-  legacy.player.name = 'ASH'; legacy.player.rivalName = 'GARY';
+  legacy.player.name = 'ASH'; legacy.player.rivalName = 'VALE';
   const filled = SCH.migrate(legacy);
   ok('A10 legacy save (no badges.orange) fills to [] with zero loss (kanto badge + name intact) and validates client-side',
     Array.isArray(filled.badges.orange) && filled.badges.orange.length === 0
@@ -93,7 +93,7 @@ const ORANGE_ORDER = ['coraleyebadge', 'searubybadge', 'spikeshellbadge', 'jades
     && SCH.validateSave(reversed).errors.includes('bad-badges-orange'));
   // The cloud round-trip: 4 orange badges + trophy + orange_champion.
   const cloud = clone(defaultState());
-  cloud.player.name = 'ASH'; cloud.player.rivalName = 'GARY';
+  cloud.player.name = 'ASH'; cloud.player.rivalName = 'VALE';
   cloud.story.arc = 'orange'; cloud.story.region = 'orange';
   cloud.badges.orange = [...ORANGE_ORDER];
   cloud.badges.kanto = [...BADGE_SETS.kanto];
@@ -134,7 +134,7 @@ const ORANGE_ORDER = ['coraleyebadge', 'searubybadge', 'spikeshellbadge', 'jades
   const ALL = Object.assign({}, MAPS, MAPS2, MAPS3, MAPS4, MAPS5);
   const { WALKABLE } = await import(join(ROOT, 'src/data/maps.mjs'));
   const expect = { 'ivy-lab': 'ivy', 'mikan-gym': 'cissy', 'navel-gym': 'danny', 'trovita-gym': 'rudy', 'kumquat-gym': 'luana', 'pummelo-stadium': 'drake' };
-  ok('A16 Orange actors placed in O1 maps (Ivy + 4 leaders + Drake + stadium official)',
+  ok('A16 Orange actors placed in O1 maps (Isla + 4 leaders + Barrow + stadium official)',
     Object.entries(expect).every(([mid, kind]) => (ALL[mid].npcs || []).some((n) => n.orange === kind))
     && (ALL['pummelo-stadium'].npcs || []).some((n) => n.orange === 'stadium-official'));
   // Walk-to-leader: BFS from each gym's entry warp tiles to a tile
@@ -301,11 +301,11 @@ const driver = `
   var ivyIntroOpen = g1.ui.dialogueOpen === true;
   pump(g1);
   var ivyIntro = seenLines.join(' | ');
-  ok('B01 first entry to ivy-lab fires Ivy intro; GS Ball granted (bag gsball = 1) and orange_gsball flag set',
-    ivyIntroOpen && ivyIntro.includes('Professor Ivy') && g1.state.bag.gsball === 1 && g1.state.story.flags.orange_gsball === true,
+  ok('B01 first entry to ivy-lab fires Isla intro; Sealed Orb granted (bag gsball = 1) and orange_gsball flag set',
+    ivyIntroOpen && ivyIntro.includes('Professor Isla') && g1.state.bag.gsball === 1 && g1.state.story.flags.orange_gsball === true,
     ivyIntro.slice(0, 120) + ' bag=' + g1.state.bag.gsball);
   var ow1b = gotoMap(g1, 'ivy-lab', 8, 10);
-  ok('B02 Ivy intro fires once: re-entry is quiet, no second grant',
+  ok('B02 Isla intro fires once: re-entry is quiet, no second grant',
     !g1.ui.dialogueOpen && g1.state.bag.gsball === 1);
 
   var g2 = mkGame(302); boot(g2);
@@ -314,7 +314,7 @@ const driver = `
   var ow2 = gotoMap(g2, 'ivy-lab', 8, 10);
   pump(g2);
   var variantSeen = seenLines.some(function (l) { return l.includes('already carrying one'); });
-  ok('B03 cheat-owned GS Ball: scene still plays with the variant line, NO duplicate grant (still 5), flag set',
+  ok('B03 cheat-owned Sealed Orb: scene still plays with the variant line, NO duplicate grant (still 5), flag set',
     variantSeen && g2.state.bag.gsball === 5 && g2.state.story.flags.orange_gsball === true,
     'bag=' + g2.state.bag.gsball + ' variant=' + variantSeen);
 
@@ -358,22 +358,22 @@ const driver = `
     pump(g);
     return g;
   }
-  var gc = crewRun(305, 'mikan-gym', 'CISSY', 'coraleyebadge', 'coraleye');
-  ok('B08 Cissy: target challenge -> battle -> Coral-Eye Badge in badges.orange + badge_coraleye flag + beat flag',
+  var gc = crewRun(305, 'mikan-gym', 'SELA', 'coraleyebadge', 'coraleye');
+  ok('B08 Sela: target challenge -> battle -> Coral-Eye Badge in badges.orange + badge_coraleye flag + beat flag',
     gc.state.badges.orange.includes('coraleyebadge') && gc.state.story.flags.badge_coraleye === true && gc.state.story.flags.beat_cissy === true,
     JSON.stringify(gc.state.badges.orange));
   var owc = gotoMap(gc, 'mikan-gym', 7, 8);
-  talk(gc, owc, 'CISSY'); var postC = gc.ui.dlg ? gc.ui.dlg.lines.join(' ') : ''; drain(gc);
+  talk(gc, owc, 'SELA'); var postC = gc.ui.dlg ? gc.ui.dlg.lines.join(' ') : ''; drain(gc);
   ok('B09 beaten leader talks post-badge dialogue (no re-battle)', postC.includes('Coral-Eye holder') && !(gc.scenes.top instanceof BattleScene), postC.slice(0, 80));
 
-  var gd = crewRun(306, 'navel-gym', 'DANNY', 'searubybadge', 'searuby');
-  ok('B10 Danny: summit battle -> Sea Ruby Badge (sled ceremony follows the win)',
+  var gd = crewRun(306, 'navel-gym', 'OREN', 'searubybadge', 'searuby');
+  ok('B10 Oren: summit battle -> Sea Ruby Badge (sled ceremony follows the win)',
     gd.state.badges.orange.includes('searubybadge') && gd.state.story.flags.badge_searuby === true
     && seenLines.some(function (l) { return l.includes('ceremony'); }),
     JSON.stringify(gd.state.badges.orange));
 
-  var gr = crewRun(307, 'trovita-gym', 'RUDY', 'spikeshellbadge', 'spikeshell');
-  ok('B11 Rudy: type drill -> battle -> Spike Shell Badge',
+  var gr = crewRun(307, 'trovita-gym', 'RENZO', 'spikeshellbadge', 'spikeshell');
+  ok('B11 Renzo: type drill -> battle -> Spike Shell Badge',
     gr.state.badges.orange.includes('spikeshellbadge') && gr.state.story.flags.badge_spikeshell === true,
     JSON.stringify(gr.state.badges.orange));
 
@@ -382,13 +382,13 @@ const driver = `
   g5.state.party.forEach(function (m) { m.hp = Math.floor(m.maxHp * 0.6); }); // pre-damaged: any heal between stages would top this up
   var ow5 = gotoMap(g5, 'kumquat-gym', 7, 8);
   stageBCapture.hp = null;
-  talk(g5, ow5, 'LUANA');
+  talk(g5, ow5, 'ALBA');
   pump(g5, 400);
   var stageBHp = stageBCapture.hp;
   var stageBCarried = stageBHp !== null && stageBHp.split(',').every(function (s) { var p = s.split('/'); return Number(p[0]) < Number(p[1]); });
-  ok('B12 Luana: stage B (luana_b) was reached and party damage CARRIED into it (every mon below full at stage-B start — no heal)',
+  ok('B12 Alba: stage B (luana_b) was reached and party damage CARRIED into it (every mon below full at stage-B start — no heal)',
     stageBHp !== null && stageBCarried, 'stageB=' + stageBHp);
-  ok('B13 Luana: clearing both stages awards the Jade Star Badge once (badges.orange) + crew-complete flag NOT yet implied by one badge',
+  ok('B13 Alba: clearing both stages awards the Jade Star Badge once (badges.orange) + crew-complete flag NOT yet implied by one badge',
     g5.state.badges.orange.filter(function (b) { return b === 'jadestarbadge'; }).length === 1
     && g5.state.story.flags.badge_jadestar === true && g5.state.story.flags.beat_luana_b === true,
     JSON.stringify(g5.state.badges.orange));
@@ -399,9 +399,9 @@ const driver = `
   var ow6 = gotoMap(g6, 'pummelo-stadium', 11, 12);
   talk(g6, ow6, 'LEAGUE OFFICIAL');
   var offLines = g6.ui.dlg ? g6.ui.dlg.lines.join(' | ') : ''; drain(g6);
-  talk(g6, ow6, 'DRAKE');
+  talk(g6, ow6, 'BARROW');
   var drakeRefusal = g6.ui.dlg ? g6.ui.dlg.lines.join(' | ') : ''; drain(g6);
-  ok('B14 Drake gate refuses at 3 badges: official AND Drake name the count held (3 of the 4), no battle starts',
+  ok('B14 Barrow gate refuses at 3 badges: official AND Barrow name the count held (3 of the 4), no battle starts',
     offLines.includes('3 of the 4') && drakeRefusal.includes('3 of the 4')
     && !(g6.scenes.top instanceof BattleScene) && !g6.state.story.flags.orange_champion,
     offLines.slice(0, 90) + ' // ' + drakeRefusal.slice(0, 90));
@@ -417,10 +417,10 @@ const driver = `
   var hofBefore = st7.story.hof.length;
   seenLines = [];
   var ow7 = gotoMap(g7, 'pummelo-stadium', 11, 12);
-  talk(g7, ow7, 'DRAKE');
+  talk(g7, ow7, 'BARROW');
   pump(g7, 500);
   var lastHof = st7.story.hof[st7.story.hof.length - 1];
-  ok('B15 Drake victory: orange_champion set, Winner Trophy granted once, HoF entry recorded with the winning team snapshot',
+  ok('B15 Barrow victory: orange_champion set, Winner Trophy granted once, HoF entry recorded with the winning team snapshot',
     st7.story.flags.orange_champion === true && st7.bag.winnerstrophy === 1
     && st7.story.hof.length === hofBefore + 1 && !!lastHof && lastHof.badges === 4
     && lastHof.team.length === 6 && lastHof.team[0].speciesId === 'partner',
@@ -467,7 +467,7 @@ ok('B00 driver completed with no internal failures', Q.failures === 0, Q.failure
   const s = globalThis.__ORANGESAVE__;
   const rv = VAL.validateSave(clone(s));
   const cv = SCH.validateSave(clone(s));
-  ok('B20 Drake-victory bundle save validates SERVER-side and client-side (round-trip)',
+  ok('B20 Barrow-victory bundle save validates SERVER-side and client-side (round-trip)',
     !!s && rv.ok && cv.ok, JSON.stringify({ server: rv.errors, client: cv.errors }));
 }
 

@@ -974,7 +974,7 @@ Object.assign(OverworldScene.prototype, {
     // reported honestly.
     {
       const facedKind = TILE_CHARS[this.tileAt(fx, fy)];
-      if (facedKind === 'podnut') {
+      if (facedKind === 'apricorn') {
         const tree = apricornTreeAt(this.mapId, fx, fy);
         if (tree) {
           const res = pickApricorn(g.state, tree);

@@ -68,7 +68,7 @@ const FACE = {
 };
 
 {
-  ok('A01 the live register carries the thirteen S6 arcs PLUS the S7 Arceus capstone (fourteen, supersedes the S6 exactly-thirteen count), none designedOnly, every species real (dex 442 + 480-488 + 490 + 492 + 493); the designed register in story-kanto carries the arc_spiritomb stub S6 added AND the arc_arceus stub S7 added (the validator-vocabulary pre-registration, Hoenn/Johto precedent)',
+  ok('A01 the live register carries the thirteen S6 arcs PLUS the S7 PRIMARCH capstone (fourteen, supersedes the S6 exactly-thirteen count), none designedOnly, every species real (dex 442 + 480-488 + 490 + 492 + 493); the designed register in story-kanto carries the arc_spiritomb stub S6 added AND the arc_arceus stub S7 added (the validator-vocabulary pre-registration, Hoenn/Johto precedent)',
     JSON.stringify(Object.keys(SINNOH_LEGENDARY_ARCS).sort()) === JSON.stringify(FOURTEEN.slice().sort())
     && FOURTEEN.every((id) => { const a = SINNOH_LEGENDARY_ARCS[id]; return a && !a.designedOnly && a.region === 'Borea' && SPECIES[a.species]; })
     && JSON.stringify(FOURTEEN.map((id) => SPECIES[SINNOH_LEGENDARY_ARCS[id].species].dexNo).sort((x, y) => x - y)) === JSON.stringify([442, 480, 481, 482, 483, 484, 485, 486, 487, 488, 490, 491, 492, 493])
@@ -94,7 +94,7 @@ const FACE = {
       && ev.every((s) => !s.wildBattle && !s.battle && !s.battleAny)
       && level >= 301 && level <= 400;
   };
-  ok('A04 the twelve wild faces ride the catch-only chain at their band levels (Spiritomb 365, lake trio 370, Cresselia 372, Shaymin 374, Heatran 375, Darkrai 378, Regigigas 380, Dialga/Palkia 388, Giratina 392), arc-complete + done flags strictly AFTER the battle step; Darkrai\'s inn event carries the same face after its Canalave sleep + the warp to Newmoon Island, with darkrai_inn_done set BEFORE the warp (the re-fire face is ev_sinnoh_darkrai)',
+  ok('A04 the twelve wild faces ride the catch-only chain at their band levels (Spiritomb 365, lake trio 370, Cresselia 372, Shaymin 374, Heatran 375, NOCTARCH 378, Regigigas 380, CHRONARCH/COSMARCH 388, VOIDARCH 392), arc-complete + done flags strictly AFTER the battle step; NOCTARCH\'s inn event carries the same face after its Canalave sleep + the warp to Newmoon Island, with darkrai_inn_done set BEFORE the warp (the re-fire face is ev_sinnoh_darkrai)',
     Object.entries(FACE).every(([id, [evId, sp, lv]]) => faceShape(evId, id, sp, lv, id + '_done'))
     && (() => { const ev = SINNOH_EVENTS.ev_sinnoh_darkrai_inn; if (!ev) return false;
       const wi = ev.findIndex((s) => s.warp && s.warp.map === 'newmoon-island');
@@ -125,14 +125,14 @@ const FACE = {
     return mv.length >= 2 && mv.every((id) => !!ALL_MOVES[id] && pool.has(id))
       && mv.filter((id) => (ALL_MOVES[id].power || 0) > 0).length >= 2;
   };
-  ok('A07 the RIDER, data side: Tobias\'s Darkrai (390) + Latios (392) carry explicitly authored move sets; every authored move is in its species\' legal in-table pool (band learnset + TM list) and each ace carries >= 2 damaging moves (the sinnoh-story A23 pin reads the same law)',
+  ok('A07 the RIDER, data side: Cassian\'s NOCTARCH (390) + AZURAVIS (392) carry explicitly authored move sets; every authored move is in its species\' legal in-table pool (band learnset + TM list) and each ace carries >= 2 damaging moves (the sinnoh-story A23 pin reads the same law)',
     riderOk(SINNOH_TRAINERS.tobias_darkrai, 'darkrai', 390) && riderOk(SINNOH_TRAINERS.tobias_latios, 'latios', 392)
     && JSON.stringify(SINNOH_TRAINERS.tobias_darkrai.team[0].moves) === JSON.stringify(['hypnosis', 'dreameater', 'fireblast', 'hyperbeam'])
     && JSON.stringify(SINNOH_TRAINERS.tobias_latios.team[0].moves) === JSON.stringify(['psychic', 'icebeam', 'thunderbolt', 'recover']));
   const t6 = JSON.parse(readFileSync(join(ROOT, 'api/_lib/data/tables.json'), 'utf8'));
   let checkOut = '';
   try { checkOut = execFileSync('node', [join(ROOT, 'tools/api-scripts/gen-tables.mjs'), '--check'], { encoding: 'utf8' }); } catch (e) { checkOut = String(e.stdout || ''); }
-  ok('A08 the two new key items exist (oddkeystone + oaksletter, key pocket, never consumed); tables.json in sync via the tool (items 200 — 199 + the Azure Flute, Arc 4 Stage S7; the quest vocabulary carries arc_spiritomb + arc_arceus); NO member-card/magma-stone item was invented for Darkrai/Heatran',
+  ok('A08 the two new key items exist (oddkeystone + oaksletter, key pocket, never consumed); tables.json in sync via the tool (items 200 — 199 + the Azure Flute, Arc 4 Stage S7; the quest vocabulary carries arc_spiritomb + arc_arceus); NO member-card/magma-stone item was invented for NOCTARCH/Heatran',
     ITEMS.oddkeystone && ITEMS.oddkeystone.pocket === 'key' && ITEMS.oaksletter && ITEMS.oaksletter.pocket === 'key'
     && Object.keys(ITEMS).length === 200 && t6.items.length === 200 && t6.quests.includes('arc_spiritomb') && t6.quests.includes('arc_arceus') && t6.items.includes('azureflute')
     && checkOut.includes('tables.json OK') && !ITEMS.membercard && !ITEMS.magmastone);
@@ -141,7 +141,7 @@ const FACE = {
   ok('A10 the Manaphy -> Phione breeding data (the S1 assumption, corrected by S6): manaphy declares eggSpecies phione (its eggs hatch Phione, canon), phione is a real dex-489 entry, and manaphy is genuinely breedable (egg groups water1/fairy, not no-eggs)',
     SPECIES_SINNOH.manaphy.eggSpecies === 'phione' && SPECIES_SINNOH.phione && SPECIES_SINNOH.phione.dexNo === 489
     && SPECIES_SINNOH.manaphy.dexNo === 490 && !SPECIES_SINNOH.manaphy.eggGroups.includes('no-eggs'));
-  ok('A11 a Sinnoh save carrying the new items + an arc_spiritomb quest state + in-band one-of-ones (Giratina 392, Manaphy 301, Phione 301) validates client + server',
+  ok('A11 a Sinnoh save carrying the new items + an arc_spiritomb quest state + in-band one-of-ones (VOIDARCH 392, Manaphy 301, Phione 301) validates client + server',
     (() => { const st = clone(defaultState());
       st.story.arc = 'sinnoh'; st.story.regionsDone = ['kanto', 'orange', 'johto', 'hoenn'];
       st.story.quests.arc_spiritomb = 'active';
@@ -326,7 +326,7 @@ const driver = `
     return [gg, ss];
   }
 
-  ok('B01 the merge fold landed in the bundle: all thirteen LEGENDARY_ARCS entries are LIVE (no designedOnly), the stubs superseded (Giratina lair is the shipped turnback-cave, Regigigas the temple depths, Spiritomb r209)',
+  ok('B01 the merge fold landed in the bundle: all thirteen LEGENDARY_ARCS entries are LIVE (no designedOnly), the stubs superseded (VOIDARCH lair is the shipped turnback-cave, Regigigas the temple depths, Spiritomb r209)',
     ['arc_uxie','arc_mesprit','arc_azelf','arc_dialga','arc_palkia','arc_giratina','arc_heatran','arc_regigigas','arc_cresselia','arc_darkrai','arc_manaphy','arc_shaymin','arc_spiritomb'].every(function (id) {
       var a = LEGENDARY_ARCS[id]; return a && !a.designedOnly && a.region === 'Borea';
     }) && LEGENDARY_ARCS.arc_giratina.lair === 'turnback-cave' && LEGENDARY_ARCS.arc_regigigas.lair === 'snowpoint-temple-depths' && LEGENDARY_ARCS.arc_spiritomb.lair === 'r209');
@@ -391,7 +391,7 @@ const driver = `
     ow = gotoMap(g, 'r210');
     var met2 = drainToBattle(g);
     catchWithBall(g); pump(g);
-    ok('B04 Mesprit ROAMS (the Latias precedent): no face anywhere before the Verity Cavern meeting; the meeting sets her roaming (no battle); stepsTotal 0 -> she holds r201; flee; stepsTotal 100 -> r205 is empty and r210 holds her; the catch completes the arc + dex',
+    ok('B04 Mesprit ROAMS (the RUBIAVIS precedent): no face anywhere before the Verity Cavern meeting; the meeting sets her roaming (no battle); stepsTotal 0 -> she holds r201; flee; stepsTotal 100 -> r205 is empty and r210 holds her; the catch completes the arc + dex',
       noFaceYet && met0 && met && fledOk && wrongLanding && met2
       && st.story.flags.arc_mesprit_done === true && !!st.dex.caught[SPECIES.mesprit.dexNo],
       'pre=' + noFaceYet + ' meet=' + met0 + ' met=' + met + ' fled=' + fledOk + ' wrong=' + wrongLanding + ' met2=' + met2);
@@ -419,7 +419,7 @@ const driver = `
     var met3 = drainToBattle(g);
     var thenPalkia = foeIs(g, 'palkia', 388);
     catchWithBall(g); pump(g);
-    ok('B05 Dialga + Palkia (Spear Pillar, Lv 388): nothing before the climax flag; Dialga faces first, flee re-fires Dialga (Palkia never jumps the order); after Dialga\\'s catch, Palkia keeps the second appointment; both arcs complete + dex',
+    ok('B05 CHRONARCH + COSMARCH (Spear Pillar, Lv 388): nothing before the climax flag; CHRONARCH faces first, flee re-fires CHRONARCH (COSMARCH never jumps the order); after CHRONARCH\\'s catch, Palkia keeps the second appointment; both arcs complete + dex',
       locked && met && firstIsDialga && met2 && stillDialga && dialgaDone && met3 && thenPalkia
       && st.story.flags.arc_palkia_done === true && !!st.dex.caught[SPECIES.palkia.dexNo]);
   }
@@ -439,7 +439,7 @@ const driver = `
     ow = gotoMap(g, 'turnback-cave');
     var met2 = drainToBattle(g);
     catchWithBall(g); pump(g);
-    ok('B06 Giratina (Turnback Cave, Lv 392 — the recorded lair call): no face without the climax\\'s giratina_unlocked; the face fires with it; flee re-fires; the catch completes the arc + dex',
+    ok('B06 VOIDARCH (Turnback Cave, Lv 392 — the recorded lair call): no face without the climax\\'s giratina_unlocked; the face fires with it; flee re-fires; the catch completes the arc + dex',
       locked && met && fledOk && met2 && st.story.flags.arc_giratina_done === true && !!st.dex.caught[SPECIES.giratina.dexNo]);
   }
 
@@ -447,13 +447,13 @@ const driver = `
   {
     var [g, st] = legendGame(806);
     var ow = gotoMap(g, 'survival-area'); pump(g);
-    talkName(g, ow, 'BUCK'); pump(g);
+    talkName(g, ow, 'BIRK'); pump(g);
     var preClimax = !st.story.flags.buck_met;
     st.story.flags.sinnoh_climax_resolved = true;
     ow = gotoMap(g, 'stark-interior'); pump(g);
     var noStoneYet = !st.story.flags.magma_stone_returned && !(g.scenes.top instanceof BattleScene);
     ow = gotoMap(g, 'survival-area'); pump(g);
-    talkName(g, ow, 'BUCK'); pump(g);
+    talkName(g, ow, 'BIRK'); pump(g);
     var buckOk = st.story.flags.buck_met === true && st.story.quests.arc_heatran === 'discovered';
     ow = gotoMap(g, 'stark-interior'); pump(g);
     var stoneOk = st.story.flags.magma_stone_returned === true && !(g.scenes.top instanceof BattleScene) && st.story.quests.arc_heatran === 'active';
@@ -466,7 +466,7 @@ const driver = `
     ow = gotoMap(g, 'stark-interior');
     var met2 = drainToBattle(g);
     catchWithBall(g); pump(g);
-    ok('B07 Heatran (Stark Mountain, Lv 375): Buck is flavour-only pre-climax and the Crater Hall is inert before him; meeting Buck discovers the arc; the first climb RETURNS THE MAGMA STONE with him (dialogue, no battle); the REVISIT wakes Heatran; flee re-fires; the catch completes',
+    ok('B07 Heatran (Stark Mountain, Lv 375): Birk is flavour-only pre-climax and the Crater Hall is inert before him; meeting Birk discovers the arc; the first climb RETURNS THE MAGMA STONE with him (dialogue, no battle); the REVISIT wakes Heatran; flee re-fires; the catch completes',
       preClimax && noStoneYet && buckOk && stoneOk && met && fledOk && met2
       && st.story.flags.arc_heatran_done === true && !!st.dex.caught[SPECIES.heatran.dexNo],
       'pre=' + preClimax + ' noStone=' + noStoneYet + ' buck=' + buckOk + ' stone=' + stoneOk + ' met=' + met + ' fled=' + fledOk);
@@ -541,7 +541,7 @@ const driver = `
     ow = gotoMap(g, 'newmoon-island');
     var met3 = drainToBattle(g);
     catchWithBall(g); pump(g);
-    ok('B10 Darkrai (Newmoon Island, Lv 378): the Canalave inn stays shut without sinnoh_complete; the sleep event (no distribution item — the unlocked boy + the finished Conference are the key) warps the dreamer to Newmoon and the face fires IN the dream; flee leaves the player on the island and the standalone face re-fires; KO re-fires; the catch completes the arc + dex',
+    ok('B10 NOCTARCH (Newmoon Island, Lv 378): the Canalave inn stays shut without sinnoh_complete; the sleep event (no distribution item — the unlocked boy + the finished Conference are the key) warps the dreamer to Newmoon and the face fires IN the dream; flee leaves the player on the island and the standalone face re-fires; KO re-fires; the catch completes the arc + dex',
       lockedInn && met && onNewmoon && fledOk && koOk && met3
       && st.story.flags.arc_darkrai_done === true && st.story.quests.arc_darkrai === 'complete' && !!st.dex.caught[SPECIES.darkrai.dexNo],
       'locked=' + lockedInn + ' met=' + met + ' foe=' + foeOk + ' newmoon=' + onNewmoon + ' fled=' + fledOk + ' ko=' + koOk);
@@ -552,7 +552,7 @@ const driver = `
     var [g, st] = legendGame(810);
     st.story.flags.sinnoh_complete = true;
     var ow = gotoMap(g, 'rowan-lab'); pump(g);
-    talkName(g, ow, 'PROF. ROWAN'); pump(g);
+    talkName(g, ow, 'PROF. SORREL'); pump(g);
     var egg = st.party.find(function (m) { return m && m.egg && m.speciesId === 'manaphy'; });
     if (!egg) Object.values(st.boxes || {}).forEach(function (b) { (b || []).forEach(function (m) { if (m && m.egg && m.speciesId === 'manaphy') egg = m; }); });
     var eggOk = !!egg && egg.eggSteps === 250 && st.story.flags.manaphy_egg_received === true && st.story.quests.arc_manaphy === 'active';
@@ -562,7 +562,7 @@ const driver = `
       Object.values(st.boxes || {}).forEach(function (b) { var i = (b || []).indexOf(egg); if (i >= 0) b.splice(i, 1); });
       st.party = st.party.slice(0, 5); st.party.push(egg);
     }
-    talkName(g, ow, 'PROF. ROWAN'); pump(g);
+    talkName(g, ow, 'PROF. SORREL'); pump(g);
     var letterOk = st.story.flags.oaks_letter_received === true && (st.bag.oaksletter || 0) === 1 && st.story.quests.arc_shaymin === 'discovered';
     var ticks = 0;
     while (!st.dex.caught[SPECIES.manaphy.dexNo] && ticks < 400) { johtoStepTick(st); ticks++; }
@@ -586,7 +586,7 @@ const driver = `
     var phione = null;
     st.party.forEach(function (m) { if (m && m.speciesId === 'phione') phione = m; });
     Object.values(st.boxes || {}).forEach(function (b) { (b || []).forEach(function (m) { if (m && m.speciesId === 'phione') phione = m; }); });
-    ok('B11 Manaphy (the Egg): Rowan hands over the Ranger-delivered blue Egg post-Conference (party, 250 steps) and Oak\\'s Letter on the second talk; the REAL step hook hatches Manaphy at the band floor 301 (dex 490) and the arc completes on the hatch; Manaphy + Ditto at the Day-Care produce an egg whose species is PHIONE, and it hatches Phione at 301 (dex 489) — the shipped breeding, data-corrected',
+    ok('B11 Manaphy (the Egg): Sorrel hands over the Ranger-delivered blue Egg post-Conference (party, 250 steps) and Hawthorn\\'s Letter on the second talk; the REAL step hook hatches Manaphy at the band floor 301 (dex 490) and the arc completes on the hatch; Manaphy + Ditto at the Day-Care produce an egg whose species is PHIONE, and it hatches Phione at 301 (dex 489) — the shipped breeding, data-corrected',
       eggOk && letterOk && hatchOk && arcOk && phioneEggOk && gotOk && !!phione && phione.level === 301 && !!st.dex.caught[SPECIES.phione.dexNo],
       'egg=' + eggOk + ' letter=' + letterOk + ' hatch=' + hatchOk + ' arc=' + arcOk + ' phioneEgg=' + phioneEggOk + ' got=' + gotOk);
   }
@@ -619,7 +619,7 @@ const driver = `
     g.useBagItem('gracidea'); tk(g, 2);
     if (g.ui.menuOpen) { var gj = g.ui.menu.items.findIndex(function (it) { return !it.disabled && it.value === 0; }); if (gj >= 0) g.ui.debugChoose(gj); tk(g, 3); }
     drain(g);
-    ok('B12 Shaymin (Flower Paradise, Lv 374): the meadow is inert without Oak\\'s Letter; with it the face fires; flee re-fires; the catch completes the arc + dex — and the S4 Gracidea switch works on the caught Shaymin (land -> sky -> land, flower never consumed)',
+    ok('B12 Shaymin (Flower Paradise, Lv 374): the meadow is inert without Hawthorn\\'s Letter; with it the face fires; flee re-fires; the catch completes the arc + dex — and the S4 Gracidea switch works on the caught Shaymin (land -> sky -> land, flower never consumed)',
       locked && met && fledOk && met2 && caughtOk && skyOk && shay.speciesId === 'shaymin' && st.bag.gracidea === 1,
       'locked=' + locked + ' met=' + met + ' fled=' + fledOk + ' caught=' + caughtOk + ' sky=' + skyOk);
   }
@@ -685,7 +685,7 @@ const driver = `
     };
     var dm = readFoe(TRAINERS.tobias_darkrai);
     var lm = readFoe(TRAINERS.tobias_latios);
-    ok('B15 the RIDER, live: BattleScene builds Tobias\\'s Darkrai with the AUTHORED set [hypnosis, dreameater, fireblast, hyperbeam] and his Latios with [psychic, icebeam, thunderbolt, recover] — the engine reads the defs\\' moves lists (not the learnset last-4)',
+    ok('B15 the RIDER, live: BattleScene builds Cassian\\'s Darkrai with the AUTHORED set [hypnosis, dreameater, fireblast, hyperbeam] and his Latios with [psychic, icebeam, thunderbolt, recover] — the engine reads the defs\\' moves lists (not the learnset last-4)',
       JSON.stringify(dm) === JSON.stringify(['hypnosis', 'dreameater', 'fireblast', 'hyperbeam'])
       && JSON.stringify(lm) === JSON.stringify(['psychic', 'icebeam', 'thunderbolt', 'recover']),
       'darkrai=' + JSON.stringify(dm) + ' latios=' + JSON.stringify(lm));
