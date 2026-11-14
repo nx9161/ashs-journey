@@ -1,0 +1,26 @@
+# Wave T56 (Palmside kit): coralfloor — Palmside's registered street kind (the fleet's street kinds carry the -floor suffix; the desire-path tiers key on it). CORAL FLAGSTONE: large fitted flags in warm coral-rose stone with cream grout on an offset grid, sand speckle in the grout and a paler worn sheen at each flag's centre — the painting's hard roads in the game's one pixel family. A FITTED-FLAG GRID IN A WARM ROSE REGISTER: unlike Brightshore's panelfloor (a rigid golden photovoltaic grid — the sister family this town shipped as), Clashfield's basaltfloor (dark fitted slabs, rust flecks), Bridgeport's ringfloor (ringed quay stone), Heritage's heritagefloor (teal flags). (NO-SAME-KIT law; WAVE-T56-PALMSIDE-PLAN.md §5.)
+PIX tile-coralfloor 16 16
+daaagbbbbbgaaaaa
+aaaagbbbdbgaaaaa
+aawagbbwbbgaaaaa
+adwwgbwwwbsaawaa
+aawasbbwbdgawwwa
+aaaagbbbbbgaawaa
+aadagbbbbbgaaaaa
+sggggggsggggggsg
+cccccccgaaaaagbb
+cccdcccgaaaaagbb
+cccwcccgaaadagwb
+ccwwwccgaawaagww
+cccwdccgawwwagwb
+cccccccgaawadsbb
+cccccccsaaaaagbb
+gsggggggsggggggs
+PAL
+a #d98a72 coral flag — face
+b #e2a184 coral flag — light face
+c #cf7d64 coral flag — deep face
+w #eec0ab coral flag — worn sheen
+d #c97a5f coral flag — stone grain
+g #ead9b8 grout — cream
+s #d9c194 grout — sand speckle

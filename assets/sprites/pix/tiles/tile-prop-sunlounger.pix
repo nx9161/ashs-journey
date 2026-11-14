@@ -1,0 +1,25 @@
+# Wave T56 (Palmside kit): sunlounger — a resort lounger with a coral frame (the town door colour), a cream cushion with a coral centre stripe and a folded towel at its head. Stands as a pair on VILLA HOSTESS PRIA's lawn — the town sign's 'softest beds' and the painting's rest-terrace loungers realized at the hostess's own ground; her dialogue is the beat ('Champions rest here between legends. The villas keep their towels folded'). Fully opaque; the town grass is baked in at its measured colours (tg-sunnyshore #008100/#003f00). (NO-SAME-KIT law; WAVE-T56-PALMSIDE-PLAN.md §3.3/§5.)
+PIX tile-prop-sunlounger 16 16
+GgggggggggggGggg
+gggggggGgggggggg
+ggGgfctfftcfggGg
+ggggfctcctcfgggg
+ggggfccccccfgggg
+ggggfccccccfgggg
+ggggfccccccfgggg
+gGggfccssccfgGgg
+ggggfccssccfgggg
+gggGfscsscsfgggG
+ggggfccssccfgggg
+ggggfccssccfgggg
+GgggfccssccfGggg
+ggggfccccccfgggg
+ggGgffggggffggGg
+gggggGGggGGggggg
+PAL
+g #008100 town grass — flat (measured tg-sunnyshore)
+G #003f00 town grass — speckle / contact shadow
+f #d4695e lounger frame — coral (town door colour)
+c #f7ecdc cushion — cream
+s #e8b09a cushion — coral stripe shade
+t #ffffff folded towel — white

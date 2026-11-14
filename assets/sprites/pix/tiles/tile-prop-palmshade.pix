@@ -1,0 +1,27 @@
+# Wave T56 (Palmside kit): palmshade — a shade palm: a curved ringed trunk rising to a full frond crown with two coconuts at its base, its shadow pooled on the grass south-west. The painting's palm shade and the town's own namesake dressing, at the front lawn's two shoulders, east of the flower plot and on the south-west lawn. Fully opaque; the town grass is baked in at its measured colours (tg-sunnyshore #008100/#003f00). (NO-SAME-KIT law; WAVE-T56-PALMSIDE-PLAN.md §5.)
+PIX tile-prop-palmshade 16 16
+GgggggggggggGggg
+gggggggGlggggggg
+ggGllgglgggllgGg
+gggggmgdlGmggggg
+ggggmmdgddmmgggg
+gggmggdgtdgGmggg
+gglgggdnrnggglgg
+glgggmgtggmggGlg
+gggglggrGgglgggg
+ggglgggtgggglggG
+ggggggggrgGggggg
+gggggGggtggggggg
+GggGGGggrgggGggg
+gggGGGgGgtgggggg
+ggGggggggrggggGg
+ggggggggrtrggggg
+PAL
+g #008100 town grass — flat (measured tg-sunnyshore)
+G #003f00 town grass — speckle / crown shadow
+d #1e5e28 frond — dark underside
+m #2e7a34 frond — mid green
+l #54a048 frond — light tip
+t #9a7a52 trunk — bark (town log)
+r #7a5c38 trunk — ring / root
+n #6a4a2e coconut
