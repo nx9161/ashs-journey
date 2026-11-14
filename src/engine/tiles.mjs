@@ -1304,10 +1304,12 @@ export const WD8_PROP_KINDS = WD8_KIND_DEFS.filter(([, c]) => c === 'prop').map(
 export const WD8_WALL_KINDS = WD8_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
 export const WD8_FLOOR_KINDS = WD8_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
 // Wave T30: Wildflower Town's own kit — Rose Trellis & Petal Lane
-// (WAVE-T30-WILDFLOWER-PLAN.md). Indices 629-632, registered
-// above the fleet ceiling after verifying 629-640 free on
-// origin/main (594-605 and 608-628 taken; 606-607 stay empty,
-// as always). 'trellisroof' (wall) — a cream diamond lattice
+// (WAVE-T30-WILDFLOWER-PLAN.md). Indices 633-636 — RE-INDEXED
+// in-branch under the Director's index ruling of 2026-11-13:
+// W-DIFF8 (Hushmoor + Blossom) registered shinglefloor 629,
+// shingleroof 630, inlayfloor 631, sakuraroof 632 first, so this
+// block moved above that ceiling (606-607 stay empty, as
+// always). 'trellisroof' (wall) — a cream diamond lattice
 // over a rose bed, worn by the Contest Hall, the House and the
 // town's two facade cottages. 'petalfloor' (floor) — the
 // petal-flecked garden lane, the town's registered street kind.
@@ -1323,7 +1325,7 @@ export const T30_KIND_DEFS = [
 ];
 export const T30_KIND_CHARS = {};
 T30_KIND_DEFS.forEach(([kind], i) => {
-  const ch = String.fromCodePoint(0x1E00 + 629 + i);
+  const ch = String.fromCodePoint(0x1E00 + 633 + i);
   T30_KIND_CHARS[kind] = ch;
   TILE_CHARS[ch] = kind;
 });
