@@ -1,0 +1,25 @@
+# Wave W-DIFF10: Flintridge cut-stone flags - large chiselled stone slabs, offset courses (full-bleed, solid).
+PIX tile-flagfloor 16 16
+dddddddddddddddd
+aaaaaaacabaaaaac
+aaabaaacaaabaaac
+aaaaaaacaaaaaaac
+aaaaaabcbaaaaaac
+cccccccccccccccc
+dddddddddddddddd
+aaacaabaaaacabaa
+aabcaaaaaaacabaa
+aaacaaaeaaacaaab
+cccccccccccccccc
+dddddddddddddddd
+baaaaaacaaaaaaac
+aabaaabcaaaaaaac
+eaababacaaabaaac
+cccccccccccccccc
+
+PAL
+a #a89c84 cut-stone
+b #978a72 stone-wear
+c #7c7059 flag-joint
+d #c0b398 edge-light
+e #bfb094 dust-fleck

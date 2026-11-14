@@ -969,6 +969,18 @@ export const WALKABLE = new Set(['.', ',', 'D', 'E', 'C', 'F', 'J', 'K', '1', '2
   // index ruling: main's kinds run through T65's 1056-1059;
   // 1048-1055 + 1060-1067 stay empty.)
   ...[1068, 1070]
+    .map((i) => String.fromCodePoint(0x1E00 + i)),
+  // Wave W-DIFF10: the flagfloor char (U+1E00+1080, tiles.mjs
+  // WD10_KIND_DEFS) is walkable street material — Flintridge's
+  // cut-stone flags, swapped 1:1 from the walkable '.' path
+  // char in Flintridge, and the veinfloor char (U+1E00+1083)
+  // likewise in Crownspire and the lakefloor char
+  // (U+1E00+1085) likewise in Galefield, so floor stays floor
+  // in all three. (Indices 1080-1086 per the Director's index
+  // ruling: main's kinds run through T65's 1056-1059 and
+  // W-DIFF9's 1068-1072 on its parallel branch; 1048-1055 +
+  // 1060-1067 + 1073-1079 stay empty.)
+  ...[1080, 1083, 1085]
     .map((i) => String.fromCodePoint(0x1E00 + i))]);
 
 // Trainer definitions for the slice.

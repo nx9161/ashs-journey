@@ -1,0 +1,25 @@
+# Wave W-DIFF10: Crownspire marble crest roof - white marble courses, indigo crest ridge (full-bleed, solid).
+PIX tile-crestroof 16 16
+eeeeeeeeeeeeeeee
+eeeeeeeeeeeeeeee
+cccccccccccccccc
+bbbbbbbbbbbbbbbb
+aaaaaaaaaaaaaaaa
+aaabadabaaabaaab
+aaaaaaaaadadaaaa
+bbbbbbbbbbbbbbbb
+daaaaaaaaaadaaaa
+aadbaaabaaabaaab
+aaaaadaaaadaaaaa
+bbbbbbbbbbbbbbbb
+aaaadaaaaaaaaaaa
+ddabaaabaaabaaab
+aaaaaaaaaaaaaaaa
+cccccccccccccccc
+
+PAL
+a #dde0ea crest-marble
+b #b9becf course-line
+c #8f96ac crest-shadow
+d #f2f4fa marble-glint
+e #5a6aa2 crest-ridge

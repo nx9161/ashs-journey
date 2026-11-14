@@ -2529,6 +2529,57 @@ WD9_KIND_DEFS.forEach(([kind], i) => {
 export const WD9_PROP_KINDS = WD9_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
 export const WD9_WALL_KINDS = WD9_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
 export const WD9_FLOOR_KINDS = WD9_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
+// Wave W-DIFF10 (identity retrofit, FINAL wave): Flintridge
+// (pewter) + Crownspire (indigo) + Galefield (newbark) — the
+// last three shared-kit towns. Census re-run on main 3443ca0d:
+// indigo<->newbark 0.1889 (the pair), pewter<->indigo 0.2881,
+// pewter<->newbark 0.3037 (plan WAVE-WDIFF10-PLAN.md §1).
+// Flintridge: 'Cut-Stone & Parapet' — the table names settfloor
+// for the street, but settfloor is Cragmoor's basalt sett
+// (registered to blackthorn), so per the W-DIFF6 amendment rule
+// Flintridge takes a distinct variant in the same register:
+// 'flagfloor' (idx 1080): large cut-stone flags with chiselled
+// edges; 'caproof' (idx 1081): flat stone parapet cap for the
+// roof-slate house rows (TOWN_STYLE pewter form literally
+// reads 'flat stone parapet'); 'tilecap' (idx 1082): warm
+// cut-stone cap tiles for the roof-terra rows incl. chimneys.
+// Crownspire: 'League Marble & Crest' — the table names
+// marblefloor, but marblefloor is Lastlight's (registered to
+// silvertown), so the same amendment rule gives 'veinfloor'
+// (idx 1083): league marble slabs with deep indigo veins;
+// 'crestroof' (idx 1084): white-marble crest roof with an
+// indigo crest ridge for the League hall's th-indigo band
+// (TOWN_STYLE form 'marble league crest'). League interiors
+// untouched (W16 owns them). Galefield: 'Lakeside Sand & Lab
+// Modern' — the table's sand street realised as a new kind in
+// its own register (the W-DIFF9 Dawnwick precedent):
+// 'lakefloor' (idx 1085): swept pale lake sand with pebble
+// flecks; 'tealslate' (idx 1086): pale teal slate house roofs
+// for the th-newbark houses. The lab's roof-slate rows, the
+// lake, the dock and the boat stay exactly as shipped.
+// Indices 1080-1086 per the Director's index ruling: main's
+// kinds run through T65's 1056-1059 and W-DIFF9's 1068-1072
+// (parallel branch); gaps 1048-1055 + 1060-1067 + 1073-1079
+// stay empty. Kind names verified unclaimed. Chars
+// U+1E00+1080..
+export const WD10_KIND_DEFS = [
+  ['flagfloor', 'floor'],
+  ['caproof', 'wall'],
+  ['tilecap', 'wall'],
+  ['veinfloor', 'floor'],
+  ['crestroof', 'wall'],
+  ['lakefloor', 'floor'],
+  ['tealslate', 'wall'],
+];
+export const WD10_KIND_CHARS = {};
+WD10_KIND_DEFS.forEach(([kind], i) => {
+  const ch = String.fromCodePoint(0x1E00 + 1080 + i);
+  WD10_KIND_CHARS[kind] = ch;
+  TILE_CHARS[ch] = kind;
+});
+export const WD10_PROP_KINDS = WD10_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
+export const WD10_WALL_KINDS = WD10_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
+export const WD10_FLOOR_KINDS = WD10_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
 export const SINNOH_TOWN_GROUND_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg);
 export const SINNOH_TOWN_GROUND2_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg2);
 // TX-3: the 8 gym exteriors by town (original type-accent motifs).

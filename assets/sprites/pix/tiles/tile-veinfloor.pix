@@ -1,0 +1,25 @@
+# Wave W-DIFF10: Crownspire league marble - large veined marble slabs, indigo veins (full-bleed, solid).
+PIX tile-veinfloor 16 16
+eaaaaaacaabeaeac
+aeabaaacaabaeabc
+aaeadaacaaaeaeac
+aaaebaacaaeaaaec
+abaaebacaeaaaadc
+aaaadeaceaaaaaac
+aaaaaaecdaaaaabc
+cccccccccccccccc
+aaaaaeaceaaaaaac
+aaaaeaacaedaaaac
+aaaedaacbaeaaaac
+eaeaaabcadbeaaac
+aeaaaaacabbaeaec
+eaeaaabcaaaaaeac
+abaeaaacaaaaeaec
+cccccccccccccccc
+
+PAL
+a #d5d8e2 league-marble
+b #c2c6d4 marble-cloud
+c #9aa0b4 slab-joint
+d #eef0f6 polish-glint
+e #6a7ab0 indigo-vein

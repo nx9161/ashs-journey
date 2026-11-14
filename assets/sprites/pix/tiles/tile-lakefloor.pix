@@ -1,0 +1,25 @@
+# Wave W-DIFF10: Galefield swept lake sand - shore-worn grain, pebble flecks, waterline sheen (full-bleed, solid).
+PIX tile-lakefloor 16 16
+aaaaaaabbbdbbbba
+bbabaabbabbaabaa
+babaaaaaabbbaaab
+bbaaaaabbbababba
+aaaaaabaaabbabab
+baaaaabbaabbaeba
+bbabbebabbabbaaa
+baaccaaaccccabcc
+acaacbabcabbaaca
+aaeabbbbabbbaaba
+aabbabbaabbbabab
+babaabaabbbdbbbb
+ababababbaaaabba
+baaaababbebaadab
+aabaaaaaababbdbd
+baaabadaaaabbaab
+
+PAL
+a #dccfa2 lake-sand
+b #cfbf92 swept-shade
+c #e8dfba waterline-sheen
+d #a8a294 pebble-grey
+e #7fa8a0 pebble-teal

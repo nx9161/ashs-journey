@@ -1,0 +1,24 @@
+# Wave W-DIFF10: Flintridge warm cut-stone cap tiles - staggered small cap tiles (full-bleed, solid).
+PIX tile-tilecap 16 16
+dddcdddcdddcdddc
+baacaaacaaacbbbc
+aaacabacaaacabbc
+cccccccccccccccc
+dcdddcdddcdddcdd
+acaabcabbcaaacba
+acaaacaaacabacaa
+cccccccccccccccc
+dddcdddcdddcdddc
+aaacbaacaaacaabc
+aaacaaacaaacaaac
+cccccccccccccccc
+dcdddcdddcdddcdd
+acaaacaaacaaacaa
+acabacaaacaabcaa
+cccccccccccccccc
+
+PAL
+a #b3a184 cap-tile
+b #a08c6c tile-shade
+c #87755a course-shadow
+d #cbb693 course-light

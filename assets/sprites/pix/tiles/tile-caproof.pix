@@ -1,0 +1,24 @@
+# Wave W-DIFF10: Flintridge flat stone parapet cap - parapet lip, cap joints, shadow line (full-bleed, solid).
+PIX tile-caproof 16 16
+dddddddddddddddd
+bbbbbbbbbbbbbbbb
+cccccccccccccccc
+aaabbaabaaababab
+aaabaaabaaabaaab
+ababaaabaaabaaab
+baabaabbaaababab
+aaabbbabbbabaaab
+aaabaaabbaabbbab
+aaabaaabaaabaaab
+bbabaaabaaabaabb
+aaabababaaabaaab
+aaabaaabababaabb
+aabbbaabaaabaaab
+baabaaabaaabaaab
+cccccccccccccccc
+
+PAL
+a #9d968a parapet-stone
+b #8a8478 cap-joint
+c #6f6a5e lip-shadow
+d #c2bcb0 parapet-lip

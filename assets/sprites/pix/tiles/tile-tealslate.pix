@@ -1,0 +1,24 @@
+# Wave W-DIFF10: Galefield pale teal slate - pitched slate courses, lake-light teal (full-bleed, solid).
+PIX tile-tealslate 16 16
+dddddddddddddddd
+aaacaaacaaacaaac
+aaacbbacbabcaaac
+cccccccccccccccc
+dddddddddddddddd
+acbaacaabcaaacba
+acbaacbabcabacba
+cccccccccccccccc
+dddddddddddddddd
+aabcabbcbaacaaac
+abacaaacaabcbaac
+cccccccccccccccc
+dddddddddddddddd
+acaabcbaacaaacba
+acaaacaabcaabcaa
+cccccccccccccccc
+
+PAL
+a #7fa8a0 teal-slate
+b #6d968e slate-shade
+c #557a72 course-shadow
+d #a4c4ba course-light
