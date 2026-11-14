@@ -875,6 +875,22 @@ export const WALKABLE = new Set(['.', ',', 'D', 'E', 'C', 'F', 'J', 'K', '1', '2
   // kinds run through 948-951 (T56) + 960-963 (the parallel T57
   // claim); 952-959 + 964-971 stay empty.)
   ...[972]
+    .map((i) => String.fromCodePoint(0x1E00 + i)),
+  // Wave T59: the screefloor char (U+1E00+984, tiles.mjs
+  // T59_KIND_DEFS) is walkable street material — Pomelo's
+  // crushed-granite scree, swapped onto the island's whole
+  // shipped street blob (authored as the generic `path`
+  // sand) plus BOTH surf-exit jetty heads, so floor stays
+  // floor. (Indices 984-987 per the Director's index
+  // ruling: main's kinds run 594-636 + 645-648 + 660-662 +
+  // 672-675 + 684-687 + 696-699 + 708-711 + 720-724 +
+  // 732-736 + 744-748 + 756-759 + 768-771 + 780-783 +
+  // 792-795 + 804-807 + 816-819 + 828-831 + 840-843 +
+  // 852-855 + 864-868 + 876-879 + 888-891 + 900-903 +
+  // 912-915 + 924-927 + 936-939 + 948-951 (T56) + 960-963
+  // (T57); the parallel T58 claim holds 972-976; 964-971 +
+  // 977-983 stay empty.)
+  ...[984]
     .map((i) => String.fromCodePoint(0x1E00 + i))]);
 
 // Trainer definitions for the slice.

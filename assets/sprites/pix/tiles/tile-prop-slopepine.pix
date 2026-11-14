@@ -1,0 +1,27 @@
+# Wave T59 (Pomelo): a wind-bent slope pine — short leaning trunk, layered canopy swept east, on the tropgrass dirt baked in at its measured colours (#71523d/#5d4230/#5fa064). Fully opaque. (WAVE-T59-POMELO-PLAN.md §5.)
+PIX tile-prop-slopepine 16 16
+dddddddddddddddd
+dddddggggggddddd
+ddddgGGGGlGgdddd
+dddglGGGGGGGgddd
+ddgGGgGGGGlGGgdd
+dddgGGGGGGGgdddd
+ddddgGGgGGgddddd
+dddddgggGgdddddd
+ddddddWwgddddddd
+dddddWwwddddtddd
+dddddWwddddddddd
+ddddWwwddtdddddd
+ddddWwddddddddDd
+dddWwwddtddddddd
+dddWWddddDdddddd
+dddddddddddddddd
+PAL
+d #71523d slope dirt
+D #5d4230 dirt shadow
+t #5fa064 grass tuft
+w #6e4520 trunk
+W #54331a trunk shade
+g #2e6b34 pine dark
+G #3f8a44 pine mid
+l #57a85c pine light

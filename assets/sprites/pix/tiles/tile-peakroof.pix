@@ -1,0 +1,25 @@
+# Wave T59 (Pomelo): peak slate — blue-grey slate in large staggered courses, granite ridge cap, orange pennant flecks at the eave. Worn by the Gym only. (NO-SAME-KIT law; WAVE-T59-POMELO-PLAN.md §5.)
+PIX tile-peakroof 16 16
+cccccccccccccccc
+cCccCccCccCccCcc
+ssssSssssssSssls
+ssslssssSsssssss
+ssssssSssssslsss
+SsssssssssSsssss
+ssssSsssssssSsss
+SSSSSSSSSSSSSSSS
+ssSssssslsssSsss
+ssssssSsssssssss
+slsssSsssssSssls
+ssssssssSsssssss
+SSSSSSSSSSSSSSSS
+sssSssslssssSsss
+ssssssssssSsssss
+ssoossossssoosss
+PAL
+c #b9bdc4 granite ridge cap
+C #8d929c cap shadow
+s #6b7686 slate face
+S #55606f slate shade
+l #7f8a9a slate light
+o #e07b2a pennant orange

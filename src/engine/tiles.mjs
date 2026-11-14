@@ -2288,6 +2288,37 @@ T58_KIND_DEFS.forEach(([kind], i) => {
 export const T58_PROP_KINDS = T58_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
 export const T58_WALL_KINDS = T58_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
 export const T58_FLOOR_KINDS = T58_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
+// ---- Wave T59 (Pomelo Island identity, own kit from birth):
+// "Granite Scree & Peak Slate" — screefloor (idx 984): crushed-
+// granite scree, the peak's own stone ground underfoot, the
+// island's street material (worn by the whole shipped street
+// blob + BOTH surf-exit jetty heads); peakroof (idx 985):
+// blue-grey slate in large staggered courses with a granite
+// ridge cap and an orange pennant-flecked eave — worn by the
+// Gym's four roof cells only, breaking the shipped Gym/Mart
+// roof-slate share; cairn (idx 986): the climbers' cairn, a
+// graduated granite pile at the slope's foot; slopepine (idx
+// 987): a wind-bent slope pine on the tropgrass dirt.
+// (Indices 984-987 per the Director's index ruling: main's
+// kinds run …912-915 + 924-927 + 936-939 + 948-951 + 960-963;
+// the parallel T58 claim holds 972-976; 964-971 + 977-983
+// stay empty. Chars U+1E00+984..)
+// (Register: WAVE-T59-POMELO-PLAN.md §5.)
+export const T59_KIND_DEFS = [
+  ['screefloor', 'floor'],
+  ['peakroof', 'wall'],
+  ['cairn', 'prop'],
+  ['slopepine', 'prop'],
+];
+export const T59_KIND_CHARS = {};
+T59_KIND_DEFS.forEach(([kind], i) => {
+  const ch = String.fromCodePoint(0x1E00 + 984 + i);
+  T59_KIND_CHARS[kind] = ch;
+  TILE_CHARS[ch] = kind;
+});
+export const T59_PROP_KINDS = T59_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
+export const T59_WALL_KINDS = T59_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
+export const T59_FLOOR_KINDS = T59_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
 export const SINNOH_TOWN_GROUND_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg);
 export const SINNOH_TOWN_GROUND2_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg2);
 // TX-3: the 8 gym exteriors by town (original type-accent motifs).

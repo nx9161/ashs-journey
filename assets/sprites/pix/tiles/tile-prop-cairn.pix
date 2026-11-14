@@ -1,0 +1,25 @@
+# Wave T59 (Pomelo): the climbers’ cairn — graduated granite stones stacked at the slope’s foot, on the island sand baked in at its measured colours (#c6b388/#d4c69c). Fully opaque. (WAVE-T59-POMELO-PLAN.md §5.)
+PIX tile-prop-cairn 16 16
+ssssssssssssssss
+ssSssssssSssssss
+sssssssppsssssss
+sssssspGGpssssss
+sssssspgGgssssss
+sssssggGGggsssss
+ssssgGggggGgssss
+ssssgGGggGGgsSss
+sssggggGGggggsss
+ssgGgggGGgggGgss
+ssgGGgggggGGgGss
+sgggggGGGggggggs
+sgGgggGGGGgggGgs
+sggGGggggggGGggs
+ssddddddddddddss
+ssssssssssSsssss
+PAL
+s #c6b388 island sand
+S #d4c69c sand speckle
+g #8b8b9b granite stone
+G #757585 stone shade
+p #b9bcc4 pale capstone
+d #5d5d6b contact shadow

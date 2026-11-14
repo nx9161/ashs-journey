@@ -58,7 +58,7 @@ const ROUTE_FURNITURE = (k) => ['lamp', 'signpost', 'barrel', 'crates', 'sandcra
 // counting it as structure would credit a floating sign as a bridge —
 // Craterlake's Center sign sits in its building's ring and would lift
 // that ring 0.588 -> 0.625 without a single tile moving (W4 probe).
-const BUILD = (k) => k.startsWith('roof') || k.startsWith('wall') || k.startsWith('door') || k.startsWith('th-') || k.startsWith('tr-') || k.startsWith('tl-') || k.startsWith('tw-') || ['house', 'gymwall', 'gymdoor', 'centerdoor', 'gym-rock', 'gym-volt', 'fossildisplay', 'dresswindow', 'ancientpillar', 'drakeroof', 'parapetroof', 'slabroof', 'cedarroof', 'thatchroof', 'sageroof', 'towerroof', 'mossroof', 'pineroof', 'coproof', 'safariroof', 'surfroof', 'shackroof', 'slateroof', 'glassroof', 'canvasroof', 'mansardroof', 'copperroof', 'bronzroof', 'shingleroof', 'sakuraroof', 'trellisroof', 'beaconroof', 'timberroof', 'steamroof', 'leafroof', 'lotusroof', 'starroof', 'craterroof', 'craterwall', 'raftroof', 'badgeroof', 'verdiroof', 'battenroof', 'shellroof', 'beamroof', 'condoroof', 'ironroof', 'bloomroof', 'heritageroof', 'domeroof', 'oliveroof', 'shardroof', 'rivetroof', 'boardroof', 'duskroof', 'driftroof', 'panelroof', 'basaltroof', 'adoberoof', 'pearlroof', 'kelproof', 'coralroof'].includes(k);// ('drakeroof'/'parapetroof': the W-DIFF kit-identity roof kinds —
+const BUILD = (k) => k.startsWith('roof') || k.startsWith('wall') || k.startsWith('door') || k.startsWith('th-') || k.startsWith('tr-') || k.startsWith('tl-') || k.startsWith('tw-') || ['house', 'gymwall', 'gymdoor', 'centerdoor', 'gym-rock', 'gym-volt', 'fossildisplay', 'dresswindow', 'ancientpillar', 'drakeroof', 'parapetroof', 'slabroof', 'cedarroof', 'thatchroof', 'sageroof', 'towerroof', 'mossroof', 'pineroof', 'coproof', 'safariroof', 'surfroof', 'shackroof', 'slateroof', 'glassroof', 'canvasroof', 'mansardroof', 'copperroof', 'bronzroof', 'shingleroof', 'sakuraroof', 'trellisroof', 'beaconroof', 'timberroof', 'steamroof', 'leafroof', 'lotusroof', 'starroof', 'craterroof', 'craterwall', 'raftroof', 'badgeroof', 'verdiroof', 'battenroof', 'shellroof', 'beamroof', 'condoroof', 'ironroof', 'bloomroof', 'heritageroof', 'domeroof', 'oliveroof', 'shardroof', 'rivetroof', 'boardroof', 'duskroof', 'driftroof', 'panelroof', 'basaltroof', 'adoberoof', 'pearlroof', 'kelproof', 'coralroof', 'peakroof'].includes(k);// ('drakeroof'/'parapetroof': the W-DIFF kit-identity roof kinds —
 // wall-class roofs that don't carry the roof-/th- prefixes; registered
 // here so house footprints/aprons measure whole, W-DIFF-AUDIT Phase C.
 // 'slabroof'/'cedarroof': the W-DIFF2 pair's roof kinds, same terms.)
@@ -130,7 +130,7 @@ const BUILD = (k) => k.startsWith('roof') || k.startsWith('wall') || k.startsWit
 // as one. tests/placement-gates-checks.mjs pins this registry's exact
 // contents and every unregistered town's baseline gate tuple, so the
 // registration can neither leak nor silently widen.
-export const STREET_REGISTRY = { vermilion: ['boardwalk'], blackthorn: ['settfloor'], silvertown: ['marblefloor'], ecruteak: ['wornfloor'], saffron: ['avenuefloor'], violet: ['violetfloor'], azalea: ['brickfloor'], mahogany: ['gravelfloor'], rustboro: ['cutstonefloor'], fuchsia: ['marshfloor'], cianwood: ['driftfloor'], dewford: ['plankfloor'], viridian: ['slatefloor'], celadon: ['promfloor'] , slateport: ['quayfloor', 'boardwalk'], cerulean: ['pierfloor'], mauville: ['gridfloor'], lavender: ['shinglefloor'], cherrygrove: ['inlayfloor'], verdanturf: ['petalfloor', 'cavefloor'], olivine: ['harbourfloor', 'jettyfloor'], fallarbor: ['ashfloor'], lavaridge: ['steamfloor', 'terracefloor'], fortree: ['canopyfloor', 'boardwalk'], lilycove: ['cobblefloor', 'cavefloor'], mossdeep: ['starfloor', 'dockfloor'], sootopolis: ['craterfloor', 'cavefloor'], pacifidlog: ['raftfloor'], evergrande: ['plateaufloor', 'cavefloor'], twinleaf: ['cloverfloor'], sandgem: ['shellfloor'], jubilife: ['beamfloor'], oreburgh: ['clinkerfloor'], floaroma: ['honeyfloor'], eterna: ['heritagefloor'], hearthome: ['giltfloor'], solaceon: ['pebblefloor'], veilstone: ['shardfloor'], canalave: ['ringfloor', 'boardwalk', 'harbourstone', 'trussfloor'], pastoria: ['walkfloor'], celestic: ['moonfloor'], snowpoint: ['rimefloor'], sunnyshore: ['panelfloor'], 'fight-area': ['basaltfloor'], 'survival-area': ['hardpanfloor'], 'resort-area': ['coralfloor'], valencia: ['dunefloor'], mikan: ['grovefloor'] };// W-DIFF pilot extension (2026-11-13, documented exception #6/#7 in the
+export const STREET_REGISTRY = { vermilion: ['boardwalk'], blackthorn: ['settfloor'], silvertown: ['marblefloor'], ecruteak: ['wornfloor'], saffron: ['avenuefloor'], violet: ['violetfloor'], azalea: ['brickfloor'], mahogany: ['gravelfloor'], rustboro: ['cutstonefloor'], fuchsia: ['marshfloor'], cianwood: ['driftfloor'], dewford: ['plankfloor'], viridian: ['slatefloor'], celadon: ['promfloor'] , slateport: ['quayfloor', 'boardwalk'], cerulean: ['pierfloor'], mauville: ['gridfloor'], lavender: ['shinglefloor'], cherrygrove: ['inlayfloor'], verdanturf: ['petalfloor', 'cavefloor'], olivine: ['harbourfloor', 'jettyfloor'], fallarbor: ['ashfloor'], lavaridge: ['steamfloor', 'terracefloor'], fortree: ['canopyfloor', 'boardwalk'], lilycove: ['cobblefloor', 'cavefloor'], mossdeep: ['starfloor', 'dockfloor'], sootopolis: ['craterfloor', 'cavefloor'], pacifidlog: ['raftfloor'], evergrande: ['plateaufloor', 'cavefloor'], twinleaf: ['cloverfloor'], sandgem: ['shellfloor'], jubilife: ['beamfloor'], oreburgh: ['clinkerfloor'], floaroma: ['honeyfloor'], eterna: ['heritagefloor'], hearthome: ['giltfloor'], solaceon: ['pebblefloor'], veilstone: ['shardfloor'], canalave: ['ringfloor', 'boardwalk', 'harbourstone', 'trussfloor'], pastoria: ['walkfloor'], celestic: ['moonfloor'], snowpoint: ['rimefloor'], sunnyshore: ['panelfloor'], 'fight-area': ['basaltfloor'], 'survival-area': ['hardpanfloor'], 'resort-area': ['coralfloor'], valencia: ['dunefloor'], mikan: ['grovefloor'], navel: ['screefloor'] };// W-DIFF pilot extension (2026-11-13, documented exception #6/#7 in the
 // guard): blackthorn's settfloor and silvertown's marblefloor are the
 // first two kit-level identity street materials (owner ruling: "Every
 // town kit should be different" — muse-directive/W-DIFF-AUDIT.md Phase
@@ -606,6 +606,29 @@ export const STREET_REGISTRY = { vermilion: ['boardwalk'], blackthorn: ['settflo
 // invisible DIRS records, and re-seats the orphaned MART
 // CLERK (3,5) -> (15,4). Both encounter plots stay
 // byte-for-byte. (Register: WAVE-T58-TANGELO-PLAN.md §5/§7.)
+// T59 extension (FIFTY-SEVENTH documented exception in the
+// guard; T58's mikan holds #56 — it lands ahead of this wave
+// at merge, so the registry order at merge is …valencia,
+// mikan, navel): navel registers 'screefloor' (Granite Scree
+// & Peak Slate), Pomelo Island's own crushed-granite street,
+// on the same one-material one-town terms. navel shipped an
+// outright gate FAIL — the Amber Isles set was authored
+// without gate discipline: BOTH surf-exit pairs stood on
+// open water (connectivity 30/90), its desire routes
+// shortcut the shore and slope dressing (fabric 0.9418),
+// its north-row stamps backed onto the sea (apronLow 1,
+// Center 0.588), and six of its eight sign records stood
+// invisible on non-sign tiles. The wave rebuilds the
+// shipped street blob in screefloor, stands BOTH exit pairs
+// on screefloor jetty heads, gives the Gym the peak-slate
+// peakroof (breaking the shipped Gym/Mart roof-slate
+// share), completes the north shore's sand beach rim behind
+// the Gym and the Center, tiles the six invisible signs,
+// seats the climbers' cairn and the slope pines, and
+// re-seats the orphaned MART CLERK (3,5) -> (17,13). The
+// BUILD classifier gains 'peakroof' on the same kit-roof
+// terms.
+// (Register: WAVE-T59-POMELO-PLAN.md §5/§7.)
 export function tiersFor(id, tiers) {
   const extra = STREET_REGISTRY[id];
   if (!extra || !extra.length) return tiers;
