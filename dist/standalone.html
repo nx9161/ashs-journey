@@ -3605,6 +3605,39 @@ T39_KIND_DEFS.forEach(([kind], i) => {
 const T39_PROP_KINDS = T39_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
 const T39_WALL_KINDS = T39_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
 const T39_FLOOR_KINDS = T39_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
+// Wave T40: Clover Town's own kit — "Clover Earth & Batten
+// Timber": the cloverfloor (packed-earth lane strewn with
+// three-lobe clover marks — the registered street material of
+// the front street, the through road, the main lane and the
+// south lane), the battenroof (board-and-batten green timber
+// worn by the town's two houses and two facade cottages), the
+// sapling (a two-leaf sapling in a timber guard ring; a pair
+// flanks the Center's frontage) and the cloverbed (a clipped
+// clover mound on the town's open corners). Indices 756-759
+// per the Director's index ruling (main's kinds run 594-636 +
+// 645-648 + 660-662 + 672-675 + 684-687 + 696-699 + 708-711 +
+// 720-724 + 732-736 + 744-748 (T39); 606-607 + 637-644 +
+// 649-659 + 663-671 + 676-683 + 688-695 + 700-707 + 712-719 +
+// 725-731 + 737-743 + 749-755 stay empty), verified free
+// against origin/main, TILE_CHARS and every map row.
+// Authored art: assets/sprites/pix/tiles/tile-cloverfloor.pix,
+// tile-battenroof.pix, tile-prop-sapling.pix,
+// tile-prop-cloverbed.pix. (WAVE-T40-CLOVER-PLAN.md.)
+const T40_KIND_DEFS = [
+  ['cloverfloor', 'floor'],
+  ['battenroof', 'wall'],
+  ['sapling', 'prop'],
+  ['cloverbed', 'prop'],
+];
+const T40_KIND_CHARS = {};
+T40_KIND_DEFS.forEach(([kind], i) => {
+  const ch = String.fromCodePoint(0x1E00 + 756 + i);
+  T40_KIND_CHARS[kind] = ch;
+  TILE_CHARS[ch] = kind;
+});
+const T40_PROP_KINDS = T40_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
+const T40_WALL_KINDS = T40_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
+const T40_FLOOR_KINDS = T40_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
 const SINNOH_TOWN_GROUND_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg);
 const SINNOH_TOWN_GROUND2_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg2);
 // TX-3: the 8 gym exteriors by town (original type-accent motifs).
@@ -95521,6 +95554,78 @@ const ART = {
     "wwwwwwwwwwwwwwwF",
     "wwwFwwwwDwwwwwww"
   ] },
+  "tile-cloverfloor": { w: 16, h: 16, pal: {"e":"#cbb28a","E":"#bfa87c","l":"#dcc79e","c":"#4f7d3a","C":"#6da34c","w":"#f2f0e4"}, rows: [
+    "eEeeeleeeeeEeele",
+    "eeeCeeeeeeeeeeee",
+    "eeCcCeeleeeeeEee",
+    "eeeceeeeeeeewEee",
+    "eleeeeeEeeeeeeee",
+    "eeeeeeeeeeeCeeEe",
+    "eleeeeeeeCcCeeee",
+    "eeeeEeeeeeeceele",
+    "eweeeeeleeeeeEee",
+    "eeeeeeEeeeeeeeee",
+    "eeeeeeeCeeleeeee",
+    "eeeeeeCcCeeeeEee",
+    "eeeeeeeceeeeeeCe",
+    "eeleeeeeeeeeeCcC",
+    "eeeeewEeeeeeeece",
+    "eeeeeeeeleeeEeee"
+  ] },
+  "tile-battenroof": { w: 16, h: 16, pal: {"b":"#5d7d3a","L":"#7a9a4d","s":"#4f6b2f","t":"#3d5526","n":"#2e421c","o":"#7d5a30","d":"#54381c"}, rows: [
+    "LsLLLsLLLsLLLsLL",
+    "bLstbLstbLstbLst",
+    "bbstbLstbbstbLst",
+    "bLstbbstbLstbbst",
+    "bbstbLstbLstbLst",
+    "bLstbLstbbstbLst",
+    "bbstbbstbLstbbst",
+    "bLstbLstbLstbLst",
+    "bbstbLstbbstbLst",
+    "bLstbbstbLstbbst",
+    "bbstbLstbLstbLst",
+    "bLstbLstbbstbLst",
+    "bbstbbstbLstbbst",
+    "bLstbLstbLstbbst",
+    "ooonooonooonooon",
+    "ddndddndddndddnd"
+  ] },
+  "tile-prop-sapling": { w: 16, h: 16, pal: {"g":"#178913","d":"#11600b","l":"#2f9e22","t":"#7d5a30","T":"#65481f","L":"#6da34c","M":"#4f7d3a","D":"#3a5f2a","o":"#a97a3f","O":"#8d5f2b"}, rows: [
+    "gggggggggggggggg",
+    "gggggggggLLMgggg",
+    "gggLLgggLMMMDggg",
+    "ggLMMMDgMMMDMggg",
+    "ggMMMDMgggDMgggg",
+    "gggDMggggggggggg",
+    "gggggggtgggggggg",
+    "ggdggggtgggdgggg",
+    "gggggggTtggglggg",
+    "gggggggTtggggggg",
+    "ggglgggTtgggdggg",
+    "gggggggTtggggggg",
+    "gggggggTtgggdggg",
+    "gggogggTtggogggg",
+    "gggoOOOTtOOOoggg",
+    "ggdggggggggggdgg"
+  ] },
+  "tile-prop-cloverbed": { w: 16, h: 16, pal: {"g":"#178913","d":"#11600b","l":"#2f9e22","L":"#6da34c","M":"#4f7d3a","D":"#3a5f2a","E":"#2c4a20","c":"#8fbf6a","w":"#f2f0e4"}, rows: [
+    "gggggggggggggggg",
+    "ggdgggggggglgggg",
+    "gggggggggggggggg",
+    "ggggggLLgggggggg",
+    "gggggLMMLggggggg",
+    "ggggMLMMMLMggggg",
+    "gggMLMcMMMLMgggg",
+    "ggMLMMMLMcMMLggg",
+    "ggLMMwMMMLMMMDgg",
+    "gMLMMMLMMwMMMLgg",
+    "gLMDMMMLMMMLMDgg",
+    "ggLMMMMMwMMMLggg",
+    "gggDMMMLMMDEgggg",
+    "ggggEDDDDEEggdgg",
+    "gggggggggggggggg",
+    "ggglggggdggggggg"
+  ] },
   "tile-trellisroof": { w: 16, h: 16, pal: {"c":"#f2e7ce","r":"#cf8296","l":"#e2a5b4","d":"#a85f74","b":"#8e3d55","v":"#557f3e"}, rows: [
     "cclrllllcclllvll",
     "cccldllccccbrllc",
@@ -116226,6 +116331,11 @@ for (const k of T38_FLOOR_KINDS) TILE_ART[k] = 'tile-' + k;
 for (const k of T39_PROP_KINDS) TILE_ART[k] = 'tile-prop-' + k;
 for (const k of T39_WALL_KINDS) TILE_ART[k] = 'tile-' + k;
 for (const k of T39_FLOOR_KINDS) TILE_ART[k] = 'tile-' + k;
+// Wave T40: Clover Town's own kit kinds take their authored
+// tiles (assets/sprites/pix/tiles/tile-<kind>.pix).
+for (const k of T40_PROP_KINDS) TILE_ART[k] = 'tile-prop-' + k;
+for (const k of T40_WALL_KINDS) TILE_ART[k] = 'tile-' + k;
+for (const k of T40_FLOOR_KINDS) TILE_ART[k] = 'tile-' + k;
 // Premium+ W6 (TX-3/PL-1): door-open frames, authored in TX-3 for every
 // door kind. The warp-fade engine that plays them lands in W7 — W6
 // wires the frames (this registry + cache.doorOpen + doorOpenCanvas)
@@ -118061,6 +118171,11 @@ function resolveTileLayers(cache, kind, x, y, kindAt, t, phase, mapId) {
     // rock and water end to end and composites identically.
     case 'pennant':
     case 'falls':
+    // Wave T40: Clover's two-leaf saplings and its clover
+    // mounds composite over their lawn the same way (both arts
+    // are fully opaque — the town grass is baked in).
+    case 'sapling':
+    case 'cloverbed':
     // Wave T17: the radio mast composites over its compound grass too.
     case 'radiomast': {
       // Object tiles carry transparent surrounds (Wave 1): lay the ground
@@ -125046,6 +125161,18 @@ const WALKABLE = new Set(['.', ',', 'D', 'E', 'C', 'F', 'J', 'K', '1', '2', 'V',
   // 720-724; the parallel T38 claim holds 732-736; gaps stay
   // empty.)
   ...[744]
+    .map((i) => String.fromCodePoint(0x1E00 + i)),
+  // Wave T40: the cloverfloor char (U+1E00+756, tiles.mjs
+  // T40_KIND_DEFS) is walkable street material — Clover
+  // Town's clover-flecked packed-earth lane, swapped onto
+  // the town's tg2 street cells (the front street, the
+  // through road, the main lane — all shipped walkable as
+  // tg2), so floor stays floor. (Indices 756-759 per the
+  // Director's index ruling: main's kinds run 594-636 +
+  // 645-648 + 660-662 + 672-675 + 684-687 + 696-699 +
+  // 708-711 + 720-724 + 732-736 + 744-748 (T39); the gaps
+  // stay empty.)
+  ...[756]
     .map((i) => String.fromCodePoint(0x1E00 + i))]);
 
 // Trainer definitions for the slice.
@@ -154039,22 +154166,22 @@ const MAPS9 = {
     "weather": "clear",
     "rows": [
       "ᾞᾞᾞᾟᾞᾞᾞᾞᾞᾞᾟᾞᾞᾞᾞᾞᾞᾟᾞᾞᾞᾞᾞᾞᾟᾞᾞᾞ",
-      "ᾞᾜᾜᾜᾜᾜᾜᾜᾜᾜẄᾜẅᾜẄᾜᾜᾜᾜᾜᾜᾜᾟᾜᾜᾜᾜᾞ",
-      "ᾞᾜᾜᾢᾢᾢᾜᾜᾢᾢᾢᾜᾜjklmᾜᾜdeefᾜᾜᾜᾜᾞ",
+      "ᾞᾜᾜᾜᾜᾜᾜᾜᾜᾜẄᾜẅᾜẄᾜᾜᾜᾜᾜᾜᾜᾟᾜ⃷ᾜᾜᾞ",
+      "ᾞᾜᾜ⃵⃵⃵ᾜᾜ⃵⃵⃵ᾜᾜjklmᾜᾜdeefᾜᾜᾜᾜᾞ",
       "ᾞᾜᾜᾣsᾣᾜᾜᾣsᾣᾜFAJKAᾜᾜP12Pᾜᾜᾜᾜᾞ",
-      "ᾞᾝᾝᾝᾝᾝᾝᾝᾝᾝᾝᾝᾝᾝᾝᾝᾝᾝᾝᾝᾝᾝᾝᾝᾝᾝoᾞ",
-      "ᾞᾝSᾝᾝᾝᾝᾝᾝᾝᾝᾝᾝᾝᾝᾝᾝᾝᾝᾝFᾜᾜᾜᾜᾝᾝᾞ",
-      "ᾞᾝᾝᾝẄᾜᾝᾝᾝᾝᾝᾝᾝᾝᾝᾝᾝᾝᾝᾝᾜᾜᾜᾜᾜᾜᾝᾞ",
-      "ᾞᾝᾝᾝᾜᾜᾝᾝᾜᾝᾝᾝᾝᾝᾝᾝᾝᾜnᾝᾜFᾜᾜᾜᾜᾝᾞ",
-      "ᾝᾝᾝᾝᾝᾝᾝᾝᾝᾝᾝᾝᾝᾝᾝᾝᾝᾝᾝᾝᾝᾝᾝᾝᾝᾝᾝᾝ",
-      "ᾝᾝᾝᾝᾝᾝᾝᾝᾝᾝᾝᾝᾝᾝᾝᾝᾝᾝᾝᾝᾝᾝᾝᾝᾝᾝᾝᾝ",
-      "ᾞᾜᾜᾝᾝᾝᾝᾜᾝᾜᾜᾜᾝᾜᾝᾝᾜẄᾜᾝᾜẄᾜooẄᾜᾞ",
-      "ᾞᾜᾜᾜnᾝᾝẅᾝᾜᾜoᾝᾝᾝᾝᾜᾜoᾝᾜᾜᾜᾜᾜᾜᾜᾞ",
-      "ᾞᾜᾜoᾜᾝᾝᾜᾝᾜᾜᾜᾝᾝᾝᾝᾜᾜᾜᾝᾜᾜᾜᾜᾜᾜᾜᾞ",
-      "ᾞᾜᾝ....ᾜᾝᾜᾜᾜᾜᾝᾜᾝᾜᾜᾜᾝᾜᾜᾜᾜᾜᾜᾜᾞ",
-      "ᾞᾜ.,,,,.ᾝᾜᾜᾜᾜᾝᾝᾝᾝᾝᾝᾝᾜᾜᾜᾜᾜᾜᾜᾞ",
-      "ᾞᾜ.,,,,.ᾝᾝᾝᾝᾝᾝᾝSᾝᾝᾝᾝᾜᾜᾜᾜᾜᾟᾜᾞ",
-      "ᾞᾜᾜn...ᾝᾜᾜᾜᾜnᾜᾜᾜᾜᾜᾜᾜᾜᾜᾜᾜᾜᾜᾜᾞ",
+      "ᾞ⃴⃴⃴⃴⃴⃴⃴⃴⃴⃴⃴⃴⃴⃴⃴⃴⃴⃴⃴⃴⃴⃴⃴⃴⃴⃴ᾞ",
+      "ᾞ⃴Sᾜᾜᾜᾜᾜᾜᾜᾜ⃶ᾜ⃴ᾜS⃶ᾜᾜᾜF⃵⃵⃵ᾜᾜᾜᾞ",
+      "ᾞ⃴ᾜᾜẄᾜᾜᾜᾜᾜᾜᾜᾜ⃴ᾜᾜᾜᾜᾜᾜᾜᾣsᾣᾜᾜᾜᾞ",
+      "ᾞ⃴ᾜᾜᾜᾜᾜᾜᾜᾜᾜᾜᾜ⃴ᾜᾜᾜᾜnᾜᾜF⃴ᾜᾜᾜᾜᾞ",
+      "⃴⃴⃴⃴⃴⃴⃴⃴⃴⃴⃴⃴⃴⃴⃴⃴⃴⃴⃴⃴⃴⃴⃴⃴⃴⃴⃴⃴",
+      "⃴⃴⃴⃴⃴⃴⃴⃴⃴⃴⃴⃴⃴⃴⃴⃴⃴⃴⃴⃴⃴⃴⃴⃴⃴⃴⃴⃴",
+      "ᾞᾜᾜᾜᾜ⃴ᾜ⃴⃴ᾜᾜᾜᾜ⃴ᾜᾜᾜẄᾜᾜᾜẄᾜooẄᾜᾞ",
+      "ᾞᾜᾜᾜn⃴ᾜẅ⃴ᾜᾜoᾜ⃴ᾜᾜᾜᾜoᾜᾜᾜᾜᾜᾜᾜᾜᾞ",
+      "ᾞᾜᾜoᾜ⃴ᾜS⃴ᾜᾜᾜᾜ⃴ᾜᾜᾜᾜᾜᾜᾜᾜᾜᾜᾜᾜᾜᾞ",
+      "ᾞᾜ⃴....⃴ᾜᾜᾜᾜᾜ⃴ᾜᾜᾜᾜᾜᾜᾜᾜᾜᾜᾜ⃷ᾜᾞ",
+      "ᾞᾜ.,,,,.ᾜᾜᾜᾜᾜ⃴ᾜᾜᾜ⃵⃵⃵ᾜᾜᾜᾜᾜᾜᾜᾞ",
+      "ᾞᾜ.,,,,.ᾜᾜᾜᾜᾜ⃴ᾜSᾜᾣsᾣᾜᾜᾜᾜᾜᾟᾜᾞ",
+      "ᾞᾜ⃷n...⃴ᾜᾜᾜᾜn⃴⃴⃴⃴⃴⃴ᾜᾜᾜᾜᾜᾜᾜᾜᾞ",
       "ᾞᾞᾞᾟᾞᾞᾞᾞᾞᾞᾟᾞᾞᾞᾞᾞᾞᾟᾞᾞᾞᾞᾞᾞᾟᾞᾞᾞ",
     ],
     "warps": [
@@ -154073,9 +154200,10 @@ const MAPS9 = {
       {"x": 2, "y": 5, "text": "CLOVER TOWN — Fresh and free, a town at the very start of the road. Shingle lies east; Lake Candor sleeps west."},
       {"x": 15, "y": 15, "text": "LAKE CANDOR — West, through the trees. The lake keeps its own counsel and one small cave."},
       {"x": 7, "y": 12, "text": "CLOVER TOWN — East: ROUTE 201 · West: LAKE CANDOR."},
+      {"x": 15, "y": 5, "text": "CLOVER TOWN — East: ROUTE 201 · West: LAKE CANDOR."}
     ],
     "npcs": [
-      {"x": 3, "y": 5, "name": "MART CLERK", "art": "clerk", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#4a3a2a", "dialogue": ["Clover Town Mart — stocked for the road ahead."], "mart": {"stock": ["pokeball", "greatball", "potion", "superpotion", "antidote", "awakening"]}},
+      {"x": 19, "y": 4, "name": "MART CLERK", "art": "clerk", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#4a3a2a", "dialogue": ["Clover Town Mart — stocked for the road ahead."], "mart": {"stock": ["pokeball", "greatball", "potion", "superpotion", "antidote", "awakening"]}},
       {"x": 8, "y": 7, "name": "MOM’S NEIGHBOR ASHA", "art": "lady", "skin": "#d8a878", "shirt": "#7a4a8a", "pants": "#2a2a3a", "hair": "#c0c0c0", "dialogue": ["Two kids in this town dream louder than the lake birds. The whole street can hear them growing.", "Professor Sorrel's lab is one town east. The road there is short; the road back always feels shorter."]},
       {"x": 19, "y": 6, "name": "PIP ELDER", "art": "elder", "skin": "#e8b888", "shirt": "#b0503c", "pants": "#2a2a3a", "hair": "#5a3a2a", "dialogue": ["I have watched forty springs come to Clover. Each one brings a trainer out of it.", "Mind the lake mist at dawn. It has opinions."]},
       {"x": 6, "y": 13, "name": "YOUNGSTER TAM", "art": "kid", "skin": "#f0c8a0", "shirt": "#3a7a4a", "pants": "#4a3a2a", "hair": "#2a1a0a", "dialogue": ["When I start, I'm going EAST first. East is where journeys live. Then west. Then everywhere.", "The lake cave smells like rain that never left."]},
@@ -189280,6 +189408,6 @@ if (typeof Game !== 'undefined') Object.assign(Game.prototype, {
 });
 
 </script>
-<!-- contentHash:f1a71031a3a6de19ce3f1034d79934a7222df6867f61fc48fc5b764144adf3b9 -->
+<!-- contentHash:bcd1b0d5a5ca3c436ee2e7c54ee4ea1b454c22a8e35d58c91e6eaf97666aab30 -->
 </body>
 </html>
