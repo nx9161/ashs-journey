@@ -166,7 +166,27 @@
 //     anchored once the frame reads as meadow, and the clock-
 //     garden's shoulder decor beside the new clockbed kind counts
 //     instead; 1/45, well under the 5% gate). Re-pinned with the
-//     T24 build.//     Tuple: [pass, connOk, connPairs, stepTouch, stepTot, components,
+//     T24 build.
+//     TWELFTH DOCUMENTED EXCEPTION (T25): petalburg's pin is its
+//     POST-T25 tuple. The Meadowbrook rebuild replaced the shipped
+//     tg2 field (197 of 540 cells Ἕ mud — 36.5%) with the calm
+//     meadow + street fabric of the approved design: sageroof stone
+//     courses, the gym's scales crown, the east pond's heron prop,
+//     reedbank pond edges, two sage facade houses, and the orphaned
+//     MART CLERK re-seated at his Mart's front apron (9,4). Gate
+//     STATUS holds PASS — the shipped pass leaned on tg2 counting
+//     as network; the new fabric is streets alone (0.9944 -> 0.9896,
+//     now honest), conn/step-offs identical (110/110, 7/7),
+//     junctions 6 -> 10 with 1 bare (all four shipped direction
+//     texts stood invisible on plain ground/mud; re-seated onto S
+//     tiles at real junctions, four more verbatim copies at the new
+//     junctions, T23/T24 pattern), strict 0.9611 -> 0.6643 (desire
+//     lines get real corners; above the 0.60 gate), apronMin
+//     0.857 -> 0.643 (sage facades stand at the town frame; above
+//     the 0.60 floor), unanchoredAny identical (1 — the shipped
+//     border-frame decor at (24,17), as shipped). Re-pinned with
+//     the T25 build.
+//     Tuple: [pass, connOk, connPairs, stepTouch, stepTot, components,
 //     junctionSites, junctionsBare, apronLow, apronMin, merged,
 //     onFabric, shoulderOrphans, unanchoredAny, strict, fabric].
 
@@ -254,7 +274,7 @@ const PIN = {
   "pacifidlog": [0, 12, 30, 4, 4, 1, 0, 0, 0, 0.75, 0, 0, 0, 0, 0.9367, 0.9367],
   "pallet": [1, 90, 90, 6, 6, 1, 5, 0, 0, 0.643, 0, 0, 0, 0, 0.9463, 0.9945],
   "pastoria": [1, 182, 182, 8, 8, 1, 8, 0, 0, 0.824, 0, 0, 0, 0, 0.9582, 0.9945],
-  "petalburg": [1, 110, 110, 7, 7, 1, 6, 0, 0, 0.857, 0, 0, 0, 1, 0.9611, 0.9944],
+  "petalburg": [1, 110, 110, 7, 7, 1, 10, 1, 0, 0.643, 0, 0, 0, 1, 0.6643, 0.9896],
   "pewter": [1, 110, 110, 8, 8, 1, 6, 0, 0, 0.824, 0, 0, 0, 0, 0.8602, 1],
   "pummelo": [0, 30, 56, 6, 6, 1, 3, 0, 1, 0.529, 0, 0, 0, 0, 0.9639, 0.9639],
   "resort-area": [1, 182, 182, 6, 6, 1, 5, 0, 0, 0.941, 0, 0, 0, 0, 0.944, 0.9846],
