@@ -1644,6 +1644,38 @@ T40_KIND_DEFS.forEach(([kind], i) => {
 export const T40_PROP_KINDS = T40_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
 export const T40_WALL_KINDS = T40_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
 export const T40_FLOOR_KINDS = T40_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
+// Wave T42: Revelry City's own kit — "Broadcast Steel & Signal
+// Slab": the beamfloor (large smooth steel-blue signal slabs with
+// riveted corners — the registered street material of the front
+// street, the east-west avenue and the gate avenues), the beamroof
+// (a horizontal steel-glass beam panel worn only by the TV
+// station's roof cells), the condoroof (a lit-window frieze worn
+// only by the Condo's roof cells, so the condo stops sharing the
+// base house roof) and the screentotem (a standing street screen;
+// a pair flanks the front lawn). Indices 780-783 per the
+// Director's index ruling (main's kinds run 594-636 + 645-648 +
+// 660-662 + 672-675 + 684-687 + 696-699 + 708-711 + 720-724 +
+// 732-736 + 744-748 + 756-759 (T40) + 768-771 (T41, parallel
+// branch); 760-767 + 772-779 stay empty), verified free against
+// origin/main, TILE_CHARS and every map row. Authored art:
+// assets/sprites/pix/tiles/tile-beamfloor.pix,
+// tile-beamroof.pix, tile-condoroof.pix,
+// tile-prop-screentotem.pix. (WAVE-T42-REVELRY-PLAN.md.)
+export const T42_KIND_DEFS = [
+  ['beamfloor', 'floor'],
+  ['beamroof', 'wall'],
+  ['condoroof', 'wall'],
+  ['screentotem', 'prop'],
+];
+export const T42_KIND_CHARS = {};
+T42_KIND_DEFS.forEach(([kind], i) => {
+  const ch = String.fromCodePoint(0x1E00 + 780 + i);
+  T42_KIND_CHARS[kind] = ch;
+  TILE_CHARS[ch] = kind;
+});
+export const T42_PROP_KINDS = T42_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
+export const T42_WALL_KINDS = T42_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
+export const T42_FLOOR_KINDS = T42_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
 export const SINNOH_TOWN_GROUND_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg);
 export const SINNOH_TOWN_GROUND2_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg2);
 // TX-3: the 8 gym exteriors by town (original type-accent motifs).

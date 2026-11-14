@@ -1,0 +1,23 @@
+# Wave T42 (Revelry kit): condoroof — the Revelry Condo's own roof. WINDOW FRIEZE: a warm log-brown band (the TOWN_STYLE log tone) carrying a row of small lit windows — the painting's hundred-window condo towers carried on the roofline, worn only by the condo's roof cells so the condo stops sharing the base house roof with the House. Structurally a frieze band, unlike every shingle/shake/thatch/slate roof in the fleet. (NO-SAME-KIT law; WAVE-T42-REVELRY-PLAN.md §5.)
+PIX tile-condoroof 16 16
+kkkkkkkkkkkkkkkk
+kkkkkkkkkkkkkkkk
+gggggggggggggggg
+gggggggggggggggg
+gtgggggggggggggg
+gggggggggtgggggg
+gkkkggkkkggkkkgg
+gwwwggwwwggwwwgg
+gwwwggwwwggwwwgg
+gwwwggwwwgtwwwgg
+gkkkggkkkggkkkgg
+gggggggggggggggg
+gggtgggggggggggg
+gggggggggggtgggg
+kkkkkkkkkkkkkkkk
+kkkkkkkkkkkkkkkk
+PAL
+g #77644a log-brown band (TOWN_STYLE log)
+k #5d4c36 band course / window frame
+t #8a7554 band speckle
+w #f2e3b3 lit window pane

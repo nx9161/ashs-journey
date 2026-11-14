@@ -1,0 +1,23 @@
+# Wave T42 (Revelry kit): beamroof — the Revelry TV station's own roof. BEAM PANEL: horizontal steel-glass bands in the town's TOWN_STYLE roof palette (light top course, mid glass field with dark mullions, shadow course) with one pale diamond stud — a flat broadcast panel, worn only by the station's roof cells. No other roof in the fleet is horizontal glass banding (Canopy's glassroof is a dome register on houses). (NO-SAME-KIT law; WAVE-T42-REVELRY-PLAN.md §5.)
+PIX tile-beamroof 16 16
+llllllllllllllll
+llllllllllllllll
+dmmmmdmmmmdmmmmd
+dmmmmdmmmmdmmmmd
+dmmmmdmmmmdmmmmd
+dmmmmdmmwmdmmmmd
+dmmmmdmwmwdmmmmd
+dmmmmdwwwwwmmmmd
+dmmmmdmwmwdmmmmd
+dmmmmdmmwmdmmmmd
+dmmmmdmmmmdmmmmd
+dmmmmdmmmmdmmmmd
+dmmmmdmmmmdmmmmd
+dddddddddddddddd
+dddddddddddddddd
+dddddddddddddddd
+PAL
+m #5d8aa8 glass mid (TOWN_STYLE roof)
+l #84aec9 glass light course
+d #385a73 mullion / shadow course
+w #dceef8 diamond stud
