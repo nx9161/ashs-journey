@@ -1,0 +1,38 @@
+# Wave T39 (Perennial kit): badgeroof — the Perennial League
+# hall's roof kind, worn by its four tr cells only. Pale
+# marble shingle courses carrying a FRIEZE BAND near the
+# crown: eight coloured gem studs in a line on gold — the
+# Conference's eight badges as abstract studs of colour (no
+# iconography copied). No other roof in the fleet carries a
+# frieze; the marble courses keep the town style's own roof
+# register (marble blues and ivory). (NO-SAME-KIT law;
+# WAVE-T39-PERENNIAL-PLAN.md.)
+PIX tile-badgeroof 16 16
+mmmmmsmmmmmmmmmm
+orotoyoeobopowok
+orotoyoeobopowok
+ssssssssssssssss
+mmmmmmmmmmmsmmmm
+mmmmmmmmmmmsmmmm
+mmmmmmmmmmmsmmmm
+ssssssssssssssss
+mmmmmsmmmmmmmmmm
+mmmmmsmmmmmmmmmm
+mmmmmsmmmmmmmmmm
+ssssssssssssssss
+mmmmmmmmmmmsmmmm
+mmmmmmmmmmmsmmmm
+mmmmmmmmmmmsmmmm
+ssssssssssssssss
+PAL
+m #dfe4ee marble-course
+s #969fb5 course-seam
+o #c9a227 frieze-gold
+r #c0392b gem-red
+t #e08a2e gem-amber
+y #e8c85a gem-yellow
+e #3f9a5f gem-green
+b #3f6fc0 gem-blue
+p #8a5fc0 gem-violet
+w #f4f1ea gem-pearl
+k #3a3a44 gem-onyx

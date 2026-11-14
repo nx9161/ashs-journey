@@ -1,0 +1,31 @@
+# Wave T39 (Perennial kit): verdiroof — Perennial's house
+# roof kind, worn by the two facade houses' th cells.
+# VERDIGRIS STANDING SEAM: patinated copper-green metal
+# panels, a raised seam every four pixels (highlight west,
+# shadow east), pale patina speckle in the faces — the
+# evergreen roof of the town that never fades. Standing-seam
+# metal is a different grammar from Cinder's organic moss
+# mat, Highbranch's leaf scales and Canopy's glass panels.
+# (NO-SAME-KIT law; WAVE-T39-PERENNIAL-PLAN.md.)
+PIX tile-verdiroof 16 16
+mmhsmmhsmmhsmmhs
+mmhsmmhsmmhsmmhs
+mmhsmmhsmphsmmhs
+mphsmmhsmmhsmmhs
+mmhsmmhsmmhsmmhs
+mmhsmmhsmmhsmmps
+mmhsmmhsmmpsmmhs
+mmhsmmhsmmhsmmhs
+mmhsmmhsmmhsmmhs
+mmhsmmpsmmhsmmhs
+mmhsmmhsmmhsmmhs
+mmpsmmhsmmhsmmhs
+mmhsmmhsmmhsmphs
+mmhsmmhsmmhsmmhs
+mmhsmphsmmhsmmhs
+mmhsmmhsmmhsmmhs
+PAL
+m #3f9a86 verdigris-body
+h #5cbfa9 seam-light
+s #2e7263 seam-shade
+p #a8d8c8 patina-speckle
