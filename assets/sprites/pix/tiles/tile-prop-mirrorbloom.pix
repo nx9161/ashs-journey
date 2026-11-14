@@ -1,0 +1,25 @@
+# Wave W17-C (Route 15): mirror bloom — two mirrored bloom clumps, rose and its paler copy side by side, on copy turf (fully opaque, ground baked in).
+PIX tile-prop-mirrorbloom 16 16
+aaaaaaabbababaaa
+ababaaaaaaaaaaaa
+aaababaaaaaaaaaa
+aaaaabaaabaaaaab
+aaaabaaaaaaaabaa
+aaabpaaaaaaeaaaa
+aaapwgaaaaewgaaa
+aaaggpbabaggeaab
+aabaaaaaaaaaaaaa
+aaaaaaaaaabababa
+aaaababaabaababa
+aaabaaaaaaaaaaaa
+aaaaaaaaaabaaaab
+aaaaaaaaaaaaaaba
+aaaaaaaaabaaaaaa
+aaaaabaaaaaaaaaa
+PAL
+a #74a75e
+b #659452
+g #4e7d43
+p #e39ec4
+e #eec6dc
+w #f2eee2

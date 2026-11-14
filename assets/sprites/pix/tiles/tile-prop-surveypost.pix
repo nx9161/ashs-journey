@@ -1,0 +1,26 @@
+# Wave W17-C (Route 11): survey post — a striped survey stake with a red flag and a pale map sheet pinned at its base, on hollow turf (fully opaque, ground baked in).
+PIX tile-prop-surveypost 16 16
+aaaabaaabaaaaaba
+aaaaaaaaabaabbba
+aaaaaaaaaaabbaba
+aaaaaaaaaaaaaaba
+aaaaaaarfffbaaaa
+babbabawffaaaaaa
+aabaaaaraabaabaa
+aaaaaaawaaaaaaaa
+aabaabaraaaaaaaa
+aaaaaaawaaaaaaaa
+bababaarbaaaaaaa
+abaaaaawaaaaaaaa
+aaaamtmraaaaabaa
+aabammmbaaaaaaaa
+aabbaaaaaaaabaaa
+aaaaaaaaaaaabbaa
+PAL
+a #77a860
+b #689655
+w #e8e2d2
+r #c0453a
+f #d84a3e
+m #efe8d4
+t #8a9a6a

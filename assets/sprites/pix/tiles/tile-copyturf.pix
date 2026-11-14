@@ -1,0 +1,24 @@
+# Wave W17-C (Route 15): copy turf — meadow turf whose pale tuft flecks land in near-duplicate pairs, the copying grass drawn at texture scale. Route 15’s own ground.
+PIX copyturf 16 16
+aaaaaaaapeaaaaaa
+aadbaaaaaaaaaaab
+baaabbaaaaaaaaaa
+aababaaaaaaabaaa
+aaaaaaaaaadaabad
+aaaaaaaadaaaaaaa
+aaaaabdaaaaaadaa
+aaapeaaaaabapeea
+aabbaaadabaaaaba
+aaabaaaaaaaaaaba
+aabbbpeapebaaaaa
+dbaaaapeapeaaaaa
+abbaaaaaadaaaaaa
+aaapeaaaaaaabaaa
+abaaaaabaabaaabb
+aabadaaaaaaabaab
+PAL
+a #74a75e
+b #659452
+d #567f46
+p #a9cc8d
+e #c2deb0

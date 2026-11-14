@@ -1,0 +1,23 @@
+# Wave W17-C (Route 15): copy sand — pale sand with a faint offset echo speckle, every dark fleck shadowed by a paler twin (design-authorised sand, own texture).
+PIX copyfloor 16 16
+aaabaaaabadaabaa
+aaaaaaaaaaaeaaaa
+baaaaaaaaaabdaaa
+aaaaaaaaaaaaaeab
+aaaaaabaaaaaaaba
+abaaadabaaaaaaaa
+aaaaaaeaadaaaaaa
+aaaaaadaaaeaabaa
+aaaaaaaeaaaaabba
+abaaaaaabaaaaaaa
+abbddbbbaaaaaaab
+aaaaeeaabbaabdaa
+aaaaaababbadabea
+aaaaaaaaaaaadabb
+aaaaaaaaaaaaaeaa
+aaaaaabaaaaabaaa
+PAL
+a #dbd0a8
+b #cbbd93
+d #a8946c
+e #e9e1c2

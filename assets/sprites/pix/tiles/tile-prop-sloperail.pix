@@ -1,0 +1,24 @@
+# Wave W17-C (Route 16): slope rail — a steel guardrail run on posts along the descent, on slope turf (fully opaque, ground baked in).
+PIX tile-prop-sloperail 16 16
+aaaaaaaaaaaaaaaa
+ababaaaabaaaaaaa
+abaaabbabaaaaaaa
+aaaaaaaaaaaaabaa
+aaaabbaaaaaaaaaa
+aaaaaaabaaaaaaaa
+apaabaapaaaaapaa
+rrrrrrrrrrrrrrrr
+hhhhhhhhhhhhhhhh
+apaaaaapaaabapaa
+bpbaabapaaaaapab
+rrrrrrrrrrrrrrrr
+bpaaabbpaaabapbb
+apaabaapaaaabpaa
+aaaaaaaaaaaaaaaa
+abaaaaabaaaabaab
+PAL
+a #71a45c
+b #639251
+p #6e5233
+r #9aa0a8
+h #c2c8ce

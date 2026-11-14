@@ -1,0 +1,22 @@
+# Wave W17-C (Route 16): slope turf — hillside green with diagonal mow stripes running down the grade. Route 16’s own ground.
+PIX slopeturf 16 16
+adaabbbbaaaabbbb
+daabbbbaaaabbbba
+aabbbbaaaabbbdaa
+abbbbaaaabbbbaaa
+bbbbaaaabbbbaaaa
+bdbaaaabbbbaaaab
+bbaaaabbbbaaaabb
+baaaabbbbaaaadbb
+aaaabbbbaaaabbbb
+daabbbbaaaabbbba
+aabbbbaaaabbbbaa
+abbbdaaaabbbbaaa
+bbbbaaaabbbbaaaa
+bbbaaaabbbbaaaab
+bbaaaabbbdaaaabb
+baaaabbbbaaaabbb
+PAL
+a #71a45c
+b #639251
+d #547e44

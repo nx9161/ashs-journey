@@ -2675,6 +2675,54 @@ W17B_KIND_DEFS.forEach(([kind], i) => {
 export const W17B_PROP_KINDS = W17B_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
 export const W17B_WALL_KINDS = W17B_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
 export const W17B_FLOOR_KINDS = W17B_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
+// Wave W17-C (Route Build Program, Arden Tranche 3): the third
+// route-kit tranche under the NO-SAME-KIT law — Routes 11, 12, 15,
+// 16, 19, each converted 1:1 off the generic '_'/'.'/'#'
+// vocabulary. Route 11 "Sleeper Meadow" (idx 1132-1135), Route 12
+// "Reed Boardwalk" (1136-1139), Route 15 "Copycat Grass"
+// (1140-1143), Route 16 "Cycling Slope" (1144-1147), Route 19
+// "Bramble Beach" (1148-1151). Ground kinds deliberately do NOT
+// end in 'floor' (the desire-path audit counts '*floor' as street
+// tier; grounds must never masquerade as street); path kinds DO
+// end in 'floor' so they register as the route's path tier per
+// route (checklist point 3). Indices 1132-1151 per the Director's
+// index ruling: W17-A took 1092-1110 and W17-B takes 1112-1131 on
+// its parallel branch; 1111 and every earlier documented gap stay
+// empty. Kind names verified unclaimed against origin/main
+// ('slopepine' is Pomelo's T59 prop, idx 987 — Route 16's tree is
+// 'slopefir'). Chars U+1E00+1132.. (Register:
+// WAVE-W17-ROUTE-PROGRAM-PLAN.md.)
+export const W17C_KIND_DEFS = [
+  ['hollowturf', 'floor'],
+  ['trenchfloor', 'floor'],
+  ['hollowoak', 'wall'],
+  ['surveypost', 'prop'],
+  ['reedturf', 'floor'],
+  ['reedfloor', 'floor'],
+  ['reedwillow', 'wall'],
+  ['railpost', 'prop'],
+  ['copyturf', 'floor'],
+  ['copyfloor', 'floor'],
+  ['copyelm', 'wall'],
+  ['mirrorbloom', 'prop'],
+  ['slopeturf', 'floor'],
+  ['asphaltfloor', 'floor'],
+  ['slopefir', 'wall'],
+  ['sloperail', 'prop'],
+  ['beachturf', 'floor'],
+  ['shorefloor', 'floor'],
+  ['beachpalm', 'wall'],
+  ['shoredrift', 'prop'],
+];
+export const W17C_KIND_CHARS = {};
+W17C_KIND_DEFS.forEach(([kind], i) => {
+  const ch = String.fromCodePoint(0x1E00 + 1132 + i);
+  W17C_KIND_CHARS[kind] = ch;
+  TILE_CHARS[ch] = kind;
+});
+export const W17C_PROP_KINDS = W17C_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
+export const W17C_WALL_KINDS = W17C_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
+export const W17C_FLOOR_KINDS = W17C_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
 export const SINNOH_TOWN_GROUND_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg);
 export const SINNOH_TOWN_GROUND2_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg2);
 // TX-3: the 8 gym exteriors by town (original type-accent motifs).

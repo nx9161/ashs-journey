@@ -1003,6 +1003,18 @@ export const WALKABLE = new Set(['.', ',', 'D', 'E', 'C', 'F', 'J', 'K', '1', '2
   // (Indices 1112-1131 per the Director's index ruling: W17-A
   // took 1092-1110 on its parallel branch; 1111 stays empty.)
   ...[1112, 1113, 1116, 1117, 1120, 1121, 1124, 1125, 1128, 1129]
+    .map((i) => String.fromCodePoint(0x1E00 + i)),
+  // Wave W17-C: the Arden tranche-3 route ground/path chars
+  // (U+1E00+1132.., tiles.mjs W17C_KIND_DEFS) are walkable —
+  // hollowturf/trenchfloor (Route 11), reedturf/reedfloor
+  // (Route 12), copyturf/copyfloor (Route 15), slopeturf/
+  // asphaltfloor (Route 16), beachturf/shorefloor (Route 19),
+  // each swapped 1:1 from the walkable '_' ground / '.' path
+  // chars on its own route, so floor stays floor. (Indices
+  // 1132-1151 per the Director's index ruling: W17-A took
+  // 1092-1110, W17-B takes 1112-1131 on its parallel branch;
+  // 1111 stays empty.)
+  ...[1132, 1133, 1136, 1137, 1140, 1141, 1144, 1145, 1148, 1149]
     .map((i) => String.fromCodePoint(0x1E00 + i))]);
 
 // Trainer definitions for the slice.
