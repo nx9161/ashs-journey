@@ -400,6 +400,43 @@
 //     Store tl- frontages, the gym-leaf band and T8's
 //     flowerbed promenade dressing byte-kept). Re-pinned
 //     with the W-DIFF6 build (registry scope only).
+//     TWENTY-SECOND DOCUMENTED EXCEPTION (T28): the registry grows by
+//     one scoped entry — slateport: [quayfloor, boardwalk] — on
+//     the same terms as the exceptions above (boardwalk on the
+//     vermilion terms: slateport was one of the three towns the
+//     registry comment names as deliberately unregistered, its
+//     pier fabric-invisible until its rebuild wave; this is that
+//     wave), and slateport's pin is its POST-T28 tuple. The
+//     Fairhaven rebuild replaced the shipped tg2 field (282 of
+//     600 cells ἵ mud — 47.0%, the worst share yet) with the calm
+//     ground + quay-stone fabric of the approved design:
+//     canvasroof stitched-canvas roofs (idx 617), quayfloor
+//     running-bond streets (idx 618; the -floor suffix the
+//     desire-path tiers key on), the marketstall prop (idx 619,
+//     eight stalls in two rows on the shipped market ground),
+//     the tideboard prop (idx 620, wave/sun/moon glyphs, no
+//     text) at the quay, the shiphull prop (idx 621, Merrick's
+//     hull on its stocks — redrawn once after the first draft
+//     read as a gantry frame), two facade cottages, and the
+//     orphaned MART CLERK re-seated at his Mart's front apron
+//     (9,4). Gate STATUS flips FAIL -> PASS — the shipped town
+//     failed outright (conn 56/90: the unregistered pier cut
+//     the r109 exits off from every door; fabric 0.9972 leaning
+//     on the mud); the new fabric is streets + the registered
+//     pier alone (conn 90/90, junctions 10/10 marked — all six
+//     shipped DIRS records stood invisible on the mud; they
+//     gained S tiles at their posts and six verbatim copies
+//     mark the new junctions, T23-T27 pattern; the yard lane
+//     drops east of the shipped (23,10) lamp so the lamp is
+//     never straddled, and the pier's (18,16) boardwalk lip is
+//     byte-kept), strict 0.9972 -> 0.6244 (desire lines get
+//     real corners; above the 0.60 gate), apronMin 0.875 ->
+//     0.857, unanchoredAny identical (0), reachability holds
+//     the fleet baseline 1132. (Kind indices 617-621: first
+//     planned 613-617, re-assigned above W-DIFF6's 613-616
+//     block under the Director's index ruling of 2026-11-13 —
+//     before any registration existed, so no cells were
+//     remapped.) Re-pinned with the T28 build.
 //     Tuple: [pass, connOk, connPairs, stepTouch, stepTot, components,
 //     junctionSites, junctionsBare, apronLow, apronMin, merged,
 //     onFabric, shoulderOrphans, unanchoredAny, strict, fabric].
@@ -429,8 +466,8 @@ async function gateTuple(id, t) {
 }
 
 // 1. registry scope lock
-ok('street registry is exactly { vermilion: [boardwalk], blackthorn: [settfloor], silvertown: [marblefloor], ecruteak: [wornfloor], saffron: [avenuefloor], violet: [violetfloor], azalea: [brickfloor], mahogany: [gravelfloor], rustboro: [cutstonefloor], fuchsia: [marshfloor], cianwood: [driftfloor], dewford: [plankfloor], viridian: [slatefloor], celadon: [promfloor] }',
-  JSON.stringify(STREET_REGISTRY) === '{"vermilion":["boardwalk"],"blackthorn":["settfloor"],"silvertown":["marblefloor"],"ecruteak":["wornfloor"],"saffron":["avenuefloor"],"violet":["violetfloor"],"azalea":["brickfloor"],"mahogany":["gravelfloor"],"rustboro":["cutstonefloor"],"fuchsia":["marshfloor"],"cianwood":["driftfloor"],"dewford":["plankfloor"],"viridian":["slatefloor"],"celadon":["promfloor"]}',
+ok('street registry is exactly { vermilion: [boardwalk], blackthorn: [settfloor], silvertown: [marblefloor], ecruteak: [wornfloor], saffron: [avenuefloor], violet: [violetfloor], azalea: [brickfloor], mahogany: [gravelfloor], rustboro: [cutstonefloor], fuchsia: [marshfloor], cianwood: [driftfloor], dewford: [plankfloor], viridian: [slatefloor], celadon: [promfloor], slateport: [quayfloor, boardwalk] }',
+  JSON.stringify(STREET_REGISTRY) === '{"vermilion":["boardwalk"],"blackthorn":["settfloor"],"silvertown":["marblefloor"],"ecruteak":["wornfloor"],"saffron":["avenuefloor"],"violet":["violetfloor"],"azalea":["brickfloor"],"mahogany":["gravelfloor"],"rustboro":["cutstonefloor"],"fuchsia":["marshfloor"],"cianwood":["driftfloor"],"dewford":["plankfloor"],"viridian":["slatefloor"],"celadon":["promfloor"],"slateport":["quayfloor","boardwalk"]}',
   JSON.stringify(STREET_REGISTRY));
 
 // 2. census: the 64 towns of townSetOf (pallet included)
@@ -497,7 +534,7 @@ const PIN = {
   "sandgem": [1, 156, 156, 7, 7, 1, 1, 0, 0, 0.833, 0, 0, 0, 0, 1, 1],
   "shamouti": [0, 30, 182, 6, 6, 1, 4, 0, 1, 0.588, 0, 0, 0, 0, 0.912, 0.912],
   "silvertown": [1, 90, 90, 6, 6, 1, 15, 0, 0, 0.706, 0, 0, 0, 0, 0.6654, 0.9896],
-  "slateport": [0, 56, 90, 6, 6, 1, 1, 0, 0, 0.875, 0, 0, 0, 0, 0.9972, 0.9972],
+  "slateport": [1, 90, 90, 6, 6, 1, 10, 0, 0, 0.857, 0, 0, 0, 0, 0.6244, 0.9974],
   "snowpoint": [1, 90, 90, 8, 8, 1, 3, 0, 0, 0.824, 0, 0, 0, 0, 0.998, 0.9983],
   "solaceon": [1, 110, 110, 7, 7, 1, 11, 0, 0, 0.938, 0, 0, 0, 0, 0.9226, 0.9948],
   "sootopolis": [0, 30, 30, 6, 6, 1, 3, 0, 1, 0.588, 0, 0, 0, 0, 0.9831, 0.9834],
