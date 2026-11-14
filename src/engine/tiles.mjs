@@ -2153,6 +2153,53 @@ T54_KIND_DEFS.forEach(([kind], i) => {
 export const T54_PROP_KINDS = T54_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
 export const T54_WALL_KINDS = T54_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
 export const T54_FLOOR_KINDS = T54_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
+// Wave T55 — Wildreach kit 'Hardpan & Adobe': the hardpanfloor
+// (hard-packed sand-and-gravel — pale khaki-tan packed earth with
+// fine gravel speckle, sparse pale pebbles and faint wind streaks;
+// the painting's pale sand roads. A fine organic packed-earth
+// scatter, unlike Fenland's walkfloor pegged timber planks,
+// Clashfield's basaltfloor fitted dark slabs, Bridgeport's
+// ringfloor ringed quay stone and Brightshore's panelfloor rigid
+// golden grid), the adoberoof (large flat sun-baked khaki clay
+// slabs with wide dark joints offset per band and bleached top
+// edges — worn by the House + both facade cottages; large flat
+// slabs, unlike Lilac's bronzroof shingle courses, Fairhaven's
+// canvasroof stitched canvas and Fenland's boardroof vertical
+// boards), the cookpot (the outpost kitchen's iron pot on a
+// tripod over a fire, steam curling — at TRAIL COOK BORIN's west
+// shoulder, a recorded-beat dressing realization, dressing only)
+// and the chartstand (CARTOGRAPHER WREN's easel chart with its
+// coastline, route dashes and compass rose — at her north
+// shoulder, dressing only).
+// Indices 936-939 per the Director's index ruling (main's kinds
+// run 594-636 + 645-648 + 660-662 + 672-675 + 684-687 + 696-699 +
+// 708-711 + 720-724 + 732-736 + 744-748 + 756-759 (T40) + 768-771
+// (T41) + 780-783 (T42) + 792-795 (T43) + 804-807 (T44) + 816-819
+// (T45) + 828-831 (T46) + 840-843 (T47) + 852-855 (T48) +
+// 864-868 (T49) + 876-879 (T50) + 888-891 (T51) + 900-903 (T52) +
+// 912-915 (T53) + 924-927 (T54, on its branch awaiting merge);
+// 928-935 stay empty), verified free against origin/main,
+// TILE_CHARS and every map row. Kind name note: 'chartboard' is
+// already claimed elsewhere in the fleet; the prop is
+// 'chartstand'. Authored art:
+// assets/sprites/pix/tiles/tile-hardpanfloor.pix,
+// tile-adoberoof.pix, tile-prop-cookpot.pix,
+// tile-prop-chartstand.pix. (WAVE-T55-WILDREACH-PLAN.md.)
+export const T55_KIND_DEFS = [
+  ['hardpanfloor', 'floor'],
+  ['adoberoof', 'wall'],
+  ['cookpot', 'prop'],
+  ['chartstand', 'prop'],
+];
+export const T55_KIND_CHARS = {};
+T55_KIND_DEFS.forEach(([kind], i) => {
+  const ch = String.fromCodePoint(0x1E00 + 936 + i);
+  T55_KIND_CHARS[kind] = ch;
+  TILE_CHARS[ch] = kind;
+});
+export const T55_PROP_KINDS = T55_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
+export const T55_WALL_KINDS = T55_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
+export const T55_FLOOR_KINDS = T55_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
 export const SINNOH_TOWN_GROUND_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg);
 export const SINNOH_TOWN_GROUND2_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg2);
 // TX-3: the 8 gym exteriors by town (original type-accent motifs).

@@ -1,0 +1,30 @@
+# Wave T55 (Wildreach kit): cookpot — the outpost kitchen's pot: a black iron pot on a tripod over a small fire, steam curling up, a ladle resting at its side. Stands at TRAIL COOK BORIN's west shoulder — the painting's steaming pots and the town sign's kitchen realized at the cook's own post (his dialogue is the kitchen: 'I feed everyone who walks in standing up'). Fully opaque; the town grass is baked in at its measured colours (tg-pastoria #008100/#003f00). (NO-SAME-KIT law; WAVE-T55-WILDREACH-PLAN.md §3.2/§5.)
+PIX tile-prop-cookpot 16 16
+GgggggggggggGggg
+gggggggwgggggggg
+ggGgggggwgwgggGg
+gggggggwgwgggggg
+ggggGgggwgwggggg
+gggggggwgwgGgggg
+ggggggGgggggghgg
+gGggrrrrrrrrrGgg
+gggggiliiiiihggg
+gggGiiiliiiiiggG
+ggggiiliiiiiiggg
+gggggiiiiiiigggg
+GggggtggfggtGggg
+ggggtggfefggtggg
+ggGgtggegeggtgGg
+gggggGGggGGGgggg
+PAL
+g #008100 town grass — flat (measured tg-pastoria)
+G #003f00 town grass — speckle / contact shadow
+w #dfe8dd steam
+i #26262b iron pot — body
+r #3d3d44 iron pot — rim
+l #4a4a52 iron pot — highlight
+t #2a2a2e tripod leg
+f #f2a541 fire — flame
+e #e07b24 fire — ember orange
+h #6e5230 ladle — wooden handle (town log)
+m #8a8a92 ladle — metal bowl

@@ -1,0 +1,25 @@
+# Wave T55 (Wildreach kit): hardpanfloor — Wildreach's registered street kind (the fleet's street kinds carry the -floor suffix; the desire-path tiers key on it). HARD-PACKED SAND-AND-GRAVEL: pale khaki-tan packed earth with fine gravel speckle, sparse pale pebbles and faint wind streaks — the painting's pale sand roads in the game's one pixel family. A FINE ORGANIC PACKED-EARTH SCATTER: unlike Fenland's walkfloor (pegged timber planks), Clashfield's basaltfloor (fitted dark slabs), Bridgeport's ringfloor (ringed quay stone), Brightshore's panelfloor (rigid golden grid). (NO-SAME-KIT law; WAVE-T55-WILDREACH-PLAN.md §5.)
+PIX tile-hardpanfloor 16 16
+laaaaaaaaaaadaaa
+aalaaaadaaaavaaa
+avsslaaaasssaada
+aaaaaalaadaaapaa
+aavadaaalaaaaaaa
+aaaaaaaapaldaava
+aaavaadaaaaalaaa
+adsssaaaasssadlv
+aaaavaaadaaaaaaa
+aaadaaaaaaaaaaad
+aaaaavaaaadaaaaa
+aaaaadaaaaaaaaaa
+dasssavaasssdaaa
+aaaaaaadaaaaaaaa
+aadaaapvaaaaaada
+alaaaaaaadaaaaaa
+PAL
+a #c9b183 hardpan — packed earth face
+l #d8c49a hardpan — sun-bleached patch
+d #b39b6d hardpan — grain
+v #a68d5f hardpan — gravel speckle
+p #e3d3ab hardpan — pale pebble
+s #bfa87c hardpan — wind streak

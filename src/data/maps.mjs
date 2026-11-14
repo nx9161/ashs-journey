@@ -820,6 +820,21 @@ export const WALKABLE = new Set(['.', ',', 'D', 'E', 'C', 'F', 'J', 'K', '1', '2
   // 876-879 + 888-891 + 900-903 (T52); the parallel T53 claim
   // holds 912-915; 904-911 + 916-923 stay empty.)
   ...[924]
+    .map((i) => String.fromCodePoint(0x1E00 + i)),
+  // Wave T55: the hardpanfloor char (U+1E00+936, tiles.mjs
+  // T55_KIND_DEFS) is walkable street material — Wildreach's
+  // hard-packed sand-and-gravel, swapped onto the town's tg2
+  // street cells (the front street, the hard road, the Palmside
+  // road, the cook's lane, Wren's spur, the cottage step-offs
+  // and the exit/landing cells — all shipped walkable as tg2),
+  // so floor stays floor. (Indices 936-939 per the Director's
+  // index ruling: main's kinds run 594-636 + 645-648 + 660-662 +
+  // 672-675 + 684-687 + 696-699 + 708-711 + 720-724 + 732-736 +
+  // 744-748 + 756-759 + 768-771 + 780-783 + 792-795 + 804-807 +
+  // 816-819 + 828-831 + 840-843 + 852-855 + 864-868 + 876-879 +
+  // 888-891 + 900-903 + 912-915; the parallel T54 claim holds
+  // 924-927; 928-935 stay empty.)
+  ...[936]
     .map((i) => String.fromCodePoint(0x1E00 + i))]);
 
 // Trainer definitions for the slice.

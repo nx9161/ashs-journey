@@ -1,0 +1,27 @@
+# Wave T55 (Wildreach kit): chartstand — CARTOGRAPHER WREN's chart stand: a wooden easel bearing a pale chart with a teal coastline, rust route dashes, a compass rose and the crater dot. Stands at WREN's north shoulder — her re-charting of the island made visible at her post ('I am re-charting this island at walking pace'). Fully opaque; the town grass is baked in at its measured colours (tg-pastoria #008100/#003f00). (NO-SAME-KIT law; WAVE-T55-WILDREACH-PLAN.md §5.)
+PIX tile-prop-chartstand 16 16
+GgggggggggggGggg
+gggggggGgggggggg
+ggGbbbbbbbbbbbGg
+gggfcscccccncfgg
+gggfcsccccnnnfgg
+gggfccscuucncfgg
+gggfccscccuucfgg
+gGgfcscccccccfgg
+gggfccscnucccfgg
+gggfccsccccccfgG
+gggfffffffffffgg
+gggggbggbggbgggg
+Ggggbgggbgggbggg
+ggggbggGggggbggg
+ggGgGGgggggGGgGg
+gggggggggGgggggg
+PAL
+g #008100 town grass — flat (measured tg-pastoria)
+G #003f00 town grass — speckle / contact shadow
+f #6e5230 easel frame — town log brown
+b #5a4028 easel — dark wood / clip bar / legs
+c #e8dcbb chart — pale face
+s #3a7d8c chart — coastline teal
+u #b34a1e chart — route dash rust
+n #2a3a4a chart — ink / compass rose
