@@ -156525,7 +156525,7 @@ function lockedChapters() {
 //   label          'Arc 1', 'Arc 1.5', ...
 //   region         display name of the region
 //   regionKey      the story.region value while this arc is current
-//   edition        the governing edition era (Platinum governs Borea)
+//   edition        the governing edition era (The Sleeping North governs Borea)
 //   chapters       ADR-015 chapter numbers inside this arc
 //   dexHorizon     cumulative national-dex horizon at this arc
 //   band           { min, max, bandIndex } or null (open level)
@@ -156540,7 +156540,7 @@ function lockedChapters() {
 //   status         'shipped' (playable in this build) | 'next' (the road
 //                  ahead: homecoming arms its embark) | 'sealed' (drawn
 //                  on the map, not yet walkable — honest, never faked)
-//   future         true for the sealed post-Platinum rows (ch 9-13)
+//   future         true for the sealed later rows (ch 9-13)
 //   hookGiver      who delivers this arc's hook at the homecoming
 //                  (a BOND_NPC_IDS-style id; display names below)
 //   embarkPort     map id of the port the embark sails from (null: origin
@@ -156568,7 +156568,7 @@ const ARC_GIVER_NAMES = {
 const ARCS = [
   {
     id: 'kanto', n: 1, label: 'Arc 1', region: 'Arden', regionKey: 'kanto',
-    edition: 'Yellow', chapters: [1], dexHorizon: 151,
+    edition: 'The First Light', chapters: [1], dexHorizon: 151,
     band: { min: 1, max: 100, bandIndex: 1 },
     badgeSet: 'kanto', badgeTotal: 8,
     completionKey: 'kanto', completionFlag: 'champion',
@@ -156583,7 +156583,7 @@ const ARCS = [
   },
   {
     id: 'orange', n: 1.5, label: 'Arc 1.5', region: 'Amber Isles', regionKey: 'orange',
-    edition: 'Anime-original', chapters: [2], dexHorizon: 151,
+    edition: 'The Amber Crossing', chapters: [2], dexHorizon: 151,
     band: { min: 1, max: 100, bandIndex: 1 }, // shares Arden's band (Amendment 2)
     badgeSet: 'orange', badgeTotal: 4,
     completionKey: 'orange', completionFlag: 'orange_champion',
@@ -156605,7 +156605,7 @@ const ARCS = [
   },
   {
     id: 'johto', n: 2, label: 'Arc 2', region: 'Yamato', regionKey: 'johto',
-    edition: 'Gold / Silver / Crystal', chapters: [3, 4, 5], dexHorizon: 251,
+    edition: 'The Tower Bells', chapters: [3, 4, 5], dexHorizon: 251,
     band: { min: 101, max: 200, bandIndex: 2 },
     badgeSet: 'johto', badgeTotal: 8,
     completionKey: 'johto', completionFlag: 'johto_complete',
@@ -156627,7 +156627,7 @@ const ARCS = [
   },
   {
     id: 'hoenn', n: 3, label: 'Arc 3', region: 'Maris', regionKey: 'hoenn',
-    edition: 'Ruby / Sapphire / Emerald', chapters: [6], dexHorizon: 386,
+    edition: 'The Warring Tides', chapters: [6], dexHorizon: 386,
     band: { min: 201, max: 300, bandIndex: 3 },
     badgeSet: 'hoenn', badgeTotal: 8,
     completionKey: 'hoenn', completionFlag: 'hoenn_complete',
@@ -156649,7 +156649,7 @@ const ARCS = [
   },
   {
     id: 'frontier', n: 3.5, label: 'Arc 3.5', region: 'Trial Grounds', regionKey: 'kanto',
-    edition: 'Emerald', chapters: [7], dexHorizon: 386,
+    edition: 'The Seven Trials', chapters: [7], dexHorizon: 386,
     band: null, // open level (Amendment 2): facilities match the entrant
     badgeSet: 'symbols', badgeTotal: 7,
     completionKey: 'frontier', completionFlag: 'frontier_complete',
@@ -156671,7 +156671,7 @@ const ARCS = [
   },
   {
     id: 'sinnoh', n: 4, label: 'Arc 4', region: 'Borea', regionKey: 'sinnoh',
-    edition: 'Platinum', chapters: [8], dexHorizon: 493,
+    edition: 'The Sleeping North', chapters: [8], dexHorizon: 493,
     band: { min: 301, max: 400, bandIndex: 4 },
     badgeSet: 'sinnoh', badgeTotal: 8,
     completionKey: 'sinnoh', completionFlag: 'sinnoh_complete',
@@ -156691,13 +156691,13 @@ const ARCS = [
       'The air sharpens mile by mile. Ahead: snow on the peaks, and Borea.',
     ],
   },
-  // ---- Sealed future arcs (post-Platinum; ADR-027 Decision 2) ----
+  // ---- Sealed future arcs (beyond Borea; ADR-027 Decision 2) ----
   // Designed skeleton per ADR-015 ch 9-13: rows exist so the Journey menu,
   // the dex frame and the finale's forward line can point at them honestly.
   // Unbuilt, undeleted. Bands continue the Amendment-2 pattern as data.
   {
     id: 'unova', n: 5, label: 'Arc 5', region: 'Vespera', regionKey: 'unova',
-    edition: 'Black & White', chapters: [9], dexHorizon: 1025,
+    edition: 'The Bright Bridges', chapters: [9], dexHorizon: 1025,
     band: { min: 401, max: 500, bandIndex: 5 },
     badgeSet: 'unova', badgeTotal: 8,
     completionKey: 'unova', completionFlag: 'unova_complete',
@@ -156709,7 +156709,7 @@ const ARCS = [
   },
   {
     id: 'kalos', n: 6, label: 'Arc 6', region: 'Aurelia', regionKey: 'kalos',
-    edition: 'XY & XYZ', chapters: [10], dexHorizon: 1025,
+    edition: 'The Discipline of Beauty', chapters: [10], dexHorizon: 1025,
     band: { min: 501, max: 600, bandIndex: 6 },
     badgeSet: 'kalos', badgeTotal: 8,
     completionKey: 'kalos', completionFlag: 'kalos_complete',
@@ -156721,7 +156721,7 @@ const ARCS = [
   },
   {
     id: 'alola', n: 7, label: 'Arc 7', region: 'Solana', regionKey: 'alola',
-    edition: 'Sun & Moon', chapters: [11], dexHorizon: 1025,
+    edition: 'Under Twin Lights', chapters: [11], dexHorizon: 1025,
     band: { min: 601, max: 700, bandIndex: 7 },
     badgeSet: 'alola', badgeTotal: 0, // the island challenge awards no badges
     completionKey: 'alola', completionFlag: 'alola_complete',
@@ -156733,7 +156733,7 @@ const ARCS = [
   },
   {
     id: 'journeys', n: 8, label: 'Arc 8', region: 'World', regionKey: 'journeys',
-    edition: 'Journeys', chapters: [12], dexHorizon: 1025,
+    edition: 'The Whole World', chapters: [12], dexHorizon: 1025,
     band: { min: 701, max: 800, bandIndex: 8 },
     badgeSet: 'journeys', badgeTotal: 0,
     completionKey: 'journeys', completionFlag: 'journeys_complete',
@@ -156745,7 +156745,7 @@ const ARCS = [
   },
   {
     id: 'horizons', n: 9, label: 'Arc 9', region: 'World', regionKey: 'horizons',
-    edition: 'Horizons', chapters: [13], dexHorizon: 1025,
+    edition: 'The Next Traveler', chapters: [13], dexHorizon: 1025,
     band: { min: 801, max: 900, bandIndex: 9 },
     badgeSet: 'horizons', badgeTotal: 0,
     completionKey: 'horizons', completionFlag: 'horizons_complete',
@@ -169263,20 +169263,20 @@ class UI {
     };
     // LOG IN pane (disabled — honest stub)
     const lp = mkPane('login');
-    lp.innerHTML = '<div class="login-note">Accounts arrive in Track B.<br>Your trainer ID lives on this device for now.</div>'
+    lp.innerHTML = '<div class="login-note">Accounts arrive in a later update.<br>Your trainer ID lives on this device for now.</div>'
       + '<label>Trainer name<input class="login-in" disabled aria-label="Trainer name (disabled)"></label>'
       + '<label>Password<input class="login-in" type="password" disabled aria-label="Password (disabled)"></label>'
-      + '<button class="login-go" disabled>LOG IN (Track B)</button>';
+      + '<button class="login-go" disabled>LOG IN</button>';
     // REGISTER pane (disabled — honest stub)
     const rp = mkPane('register');
-    rp.innerHTML = '<div class="login-note">Accounts arrive in Track B.<br>No credentials are collected or sent anywhere.</div>'
+    rp.innerHTML = '<div class="login-note">Accounts arrive in a later update.<br>No credentials are collected or sent anywhere.</div>'
       + '<label>Trainer name<input class="login-in" disabled aria-label="Trainer name (disabled)"></label>'
       + '<label>Password<input class="login-in" type="password" disabled aria-label="Password (disabled)"></label>'
-      + '<button class="login-go" disabled>REGISTER (Track B)</button>';
+      + '<button class="login-go" disabled>REGISTER</button>';
     // GUEST pane (functional, zero network)
     const gp = mkPane('guest');
     const gnote = this.el('div', 'login-note', gp);
-    gnote.textContent = 'Play right now — no account needed. Progress stays on this device until cloud saves arrive in Track B.';
+    gnote.textContent = 'Play right now — no account needed. Progress stays on this device until cloud saves arrive in a later update.';
     const go = this.el('button', 'login-go active', gp);
     go.textContent = 'PLAY AS GUEST';
     go.addEventListener('pointerdown', (e) => { e.preventDefault(); this._loginGuestGo(); });
@@ -177873,7 +177873,7 @@ class OverworldScene {
     // Terminal); a null row is filtered out of the menu list below.
     const authEnabled = (typeof AUTH_ENABLED !== 'undefined' && AUTH_ENABLED);
     const accountRow = !authEnabled
-      ? { label: 'Account — coming in Track B', value: 'account', disabled: true }
+      ? { label: 'Account — coming in a later update', value: 'account', disabled: true }
       : g.authUser
         ? { label: 'Account', value: 'account' }
         : null;
@@ -184276,7 +184276,7 @@ class Game {
       ...((g.state.meta.ngPlus || 0) > 0
         ? [{ label: '★ Second Journey — Journey ' + (g.state.meta.ngPlus + 1), value: null, disabled: true }] : []),
       { label: 'Last saved: ' + when, value: null, disabled: true },
-      { label: 'Sync: guest-local (Track B: cloud)', value: null, disabled: true },
+      { label: 'Sync: guest-local (cloud in a later update)', value: null, disabled: true },
       { label: 'Save now', value: 'save' },
       { label: 'Close', value: 'close' },
     ], (v) => {
@@ -184603,7 +184603,7 @@ Object.assign(Game.prototype, {
     const regCaught = caughtNos.filter((n) => n >= span.lo && n <= span.hi).length;
     const natCaught = caughtNos.filter((n) => n >= 1 && n <= PLATINUM_DEX_HORIZON).length;
     const natPct = Math.floor((100 * natCaught) / PLATINUM_DEX_HORIZON);
-    items.unshift({ label: 'National — Platinum horizon: ' + natCaught + '/' + PLATINUM_DEX_HORIZON + ' (' + natPct + '%)', value: null, disabled: true });
+    items.unshift({ label: 'National — Grand horizon: ' + natCaught + '/' + PLATINUM_DEX_HORIZON + ' (' + natPct + '%)', value: null, disabled: true });
     items.unshift({ label: 'Regional — ' + arcNow.region + ': ' + regCaught + '/' + (span.hi - span.lo + 1), value: null, disabled: true });
     // D2: arc progression surfaced in the Dex — current chapter header row.
     const curCh = chapterOf((g.state.story.chapter || 0) + 1);
@@ -185506,10 +185506,10 @@ Object.assign(Game.prototype, {
     // honor and is never un-awarded.
     if (g.state.story.flags.platinum_diploma) {
       const escP = (s) => String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;');
-      const htmlP = '<div class="diploma"><div class="diplomatitle">PLATINUM DIPLOMA</div>'
-        + '<div class="diplomabody">This certifies that ' + escP(g.state.player.name) + ' completed the Platinum KinDex:</div>'
-        + '<div class="diplomabody">all ' + PLATINUM_DEX_HORIZON + ' species of the Platinum horizon, caught in a single journey. Sealed by Prof. Hawthorn, with enormous pride.</div></div>';
-      g.ui.showSummary({ name: 'Diploma', tabs: [{ id: 'diploma', label: 'PLATINUM DIPLOMA', bodyHtml: htmlP }] }, null);
+      const htmlP = '<div class="diploma"><div class="diplomatitle">GRAND DIPLOMA</div>'
+        + '<div class="diplomabody">This certifies that ' + escP(g.state.player.name) + ' completed the Grand KinDex:</div>'
+        + '<div class="diplomabody">all ' + PLATINUM_DEX_HORIZON + ' species of the Grand horizon, caught in a single journey. Sealed by Prof. Hawthorn, with enormous pride.</div></div>';
+      g.ui.showSummary({ name: 'Diploma', tabs: [{ id: 'diploma', label: 'GRAND DIPLOMA', bodyHtml: htmlP }] }, null);
       return;
     }
     // Form entries share their base species' dexNo — excluded so the
@@ -185604,9 +185604,9 @@ Object.assign(Game.prototype, {
     if (n < 25) return 'Hmm. ' + n + ' caught. The journey is young — walk the grass, meet them all.';
     if (n < 100) return n + ' caught! You are learning what a KinDex is for. Keep going!';
     if (n < 151) return n + ' caught! A genuine collector\'s eye. The rare ones hide well — patience.';
-    if (n < 300) return n + ' caught! Past the Arden horizon entirely — and the book still has pages. The Platinum horizon is ' + PLATINUM_DEX_HORIZON + '.';
+    if (n < 300) return n + ' caught! Past the Arden horizon entirely — and the book still has pages. The Grand horizon is ' + PLATINUM_DEX_HORIZON + '.';
     if (n < PLATINUM_DEX_HORIZON) return n + ' caught! Nearly there. The last pages are always the hardest.';
-    return 'ALL ' + PLATINUM_DEX_HORIZON + '! The full Platinum KinDex, in one journey. This is a historic KinDex!';
+    return 'ALL ' + PLATINUM_DEX_HORIZON + '! The full Grand KinDex, in one journey. This is a historic KinDex!';
   },
 
   // ADR-027 D5 (Stage F): the Platinum Diploma — the 493 honor, keyed
@@ -185622,8 +185622,8 @@ Object.assign(Game.prototype, {
     g.state.story.flags.platinum_diploma = true;
     g.audio.playSfx('badge');
     g.ui.say([
-      'PLATINUM DIPLOMA — This certifies that ' + g.state.player.name + ' completed the Platinum KinDex:',
-      'all ' + PLATINUM_DEX_HORIZON + ' species of the Platinum horizon, caught in a single journey. Sealed by Prof. Hawthorn, with enormous pride.',
+      'GRAND DIPLOMA — This certifies that ' + g.state.player.name + ' completed the Grand KinDex:',
+      'all ' + PLATINUM_DEX_HORIZON + ' species of the Grand horizon, caught in a single journey. Sealed by Prof. Hawthorn, with enormous pride.',
     ], null, 'Prof. Hawthorn');
   },
 
