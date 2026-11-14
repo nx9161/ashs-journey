@@ -3409,6 +3409,39 @@ T33_KIND_DEFS.forEach(([kind], i) => {
 const T33_PROP_KINDS = T33_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
 const T33_WALL_KINDS = T33_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
 const T33_FLOOR_KINDS = T33_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
+// Wave T34: Highbranch City's own kit — "Leafscale & Lashed Plank"
+// (WAVE-T34-HIGHBRANCH-PLAN.md). Indices 684-687 — verified against
+// origin/main at registration: in-tree kinds end at 662 (T32);
+// 663-683 unclaimed in-tree, with 672-675 held by T33 Steamspring's
+// parallel claim per the Director's allocation, so this block
+// registers ABOVE that claim (606-607 stay empty, as always; kind
+// names leafroof/canopyfloor/camoleon/bunting verified unclaimed).
+// 'leafroof' (wall) — overlapping leaf scales in canopy greens,
+// worn by the Gym, the House and the town's two facade cottages.
+// 'canopyfloor' (floor) — the town's registered street kind:
+// sun-bleached vertical planks bound by rope-lashing bands and
+// flecked with fallen leaves (the shipped boardwalk decks stay in
+// the south as the Long Walkway — registered, not re-paved).
+// 'camoleon' (prop) — a CAMOLEON napping on the east deck, where
+// the town's own sign and the approved painting both put it; the
+// boardwalk it stands on is baked into its tile. 'bunting' (prop)
+// — a pennant strand dressing the gym's approach (the painting's
+// 'bunting hall'), grass baked in. Both props fully opaque.
+const T34_KIND_DEFS = [
+  ['leafroof', 'wall'],
+  ['canopyfloor', 'floor'],
+  ['camoleon', 'prop'],
+  ['bunting', 'prop'],
+];
+const T34_KIND_CHARS = {};
+T34_KIND_DEFS.forEach(([kind], i) => {
+  const ch = String.fromCodePoint(0x1E00 + 684 + i);
+  T34_KIND_CHARS[kind] = ch;
+  TILE_CHARS[ch] = kind;
+});
+const T34_PROP_KINDS = T34_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
+const T34_WALL_KINDS = T34_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
+const T34_FLOOR_KINDS = T34_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
 const SINNOH_TOWN_GROUND_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg);
 const SINNOH_TOWN_GROUND2_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg2);
 // TX-3: the 8 gym exteriors by town (original type-accent motifs).
@@ -95091,6 +95124,78 @@ const ART = {
     "gdttggggggGgdttg",
     "gdttgGggggggdttg"
   ] },
+  "tile-leafroof": { w: 16, h: 16, pal: {"l":"#3f7a2e","t":"#57a047","d":"#2c5a20","s":"#1e4020","v":"#79bc63"}, rows: [
+    "dllttllddllttvld",
+    "dllllllddlllllld",
+    "dvlllllddlllllvd",
+    "ssssssssssssssss",
+    "tlvddllttllddllt",
+    "lllddllllvlddlll",
+    "lllddllllllddlll",
+    "ssssssssssssssss",
+    "dllttllddllttlld",
+    "dllllllddllvllld",
+    "dllllvlddlllllld",
+    "ssssssssssssssss",
+    "tllddlvttllddllt",
+    "vllddllllllddvll",
+    "lllddllvlllddlll",
+    "ssssssssssssssss"
+  ] },
+  "tile-canopyfloor": { w: 16, h: 16, pal: {"p":"#b59a6d","l":"#c8ae7f","s":"#8a6f47","r":"#6e5133","w":"#96754e","f":"#4d7d33"}, rows: [
+    "fppspppspppsppls",
+    "pppsflpspppslpps",
+    "pppspppsfplsppps",
+    "wrrwrrwrrwrrwrrw",
+    "rrwrrwrrwrrwrrwr",
+    "pppslppspppsppps",
+    "pplspppsplpsppps",
+    "lppspppspppsppls",
+    "pppsplpspppslpps",
+    "ppfspppspplsppps",
+    "plpsppfslppsppps",
+    "rwrrwrrwrrwrrwrr",
+    "wrrwrrwrrwrrwrrw",
+    "pflspppsplpsppps",
+    "lppspfpspppsppls",
+    "pppsplpspfpslpps"
+  ] },
+  "tile-prop-camoleon": { w: 16, h: 16, pal: {"p":"#997e5b","l":"#a8906a","s":"#7d6547","B":"#4d9a4d","b":"#3a7d3a","L":"#a8d888","c":"#66bb55","E":"#1e4620","t":"#3a7d3a"}, rows: [
+    "lpplpplpplpplppl",
+    "pppppppppppppppp",
+    "pppppppppppppppp",
+    "ssssssssssssssss",
+    "pppppppppppppppp",
+    "pppppppppcccpppp",
+    "pplpplpBBBBBcplp",
+    "sssssBBBBBBEEsss",
+    "ppppBBBBBBBBBppp",
+    "lpplBbBBBBBbBppl",
+    "pppBBBBBBBBBpppp",
+    "sssbLLLLLLbsssss",
+    "plppbpplppbpplpp",
+    "ppttpppppppppppp",
+    "ptpptppppppppppp",
+    "ssttssssssssssss"
+  ] },
+  "tile-prop-bunting": { w: 16, h: 16, pal: {"g":"#118612","s":"#115012","l":"#1a9e1a","P":"#6b4a26","W":"#8a6a42","S":"#3a2c1c","R":"#d8544a","G":"#e8b23a","U":"#3a6ac0"}, rows: [
+    "sgsgsgsgsgsgsgsg",
+    "gggggggggggggggg",
+    "gggggggggggggggl",
+    "gsgsgsgsgsgsgsgs",
+    "ggSgggggggglgSgg",
+    "ggWSSgggglgSSWgg",
+    "sgPgsSSSSSUUsPsg",
+    "ggPgRRgGGgUggPgg",
+    "ggPlRggGgggggPgg",
+    "gsPsgsgsgsgsgPgs",
+    "ggPggggggggggPgg",
+    "ggPggggggggggPgg",
+    "sgPgsgsgsgsgsPsg",
+    "ggPggggggggglPgg",
+    "ggPggggggglggPgg",
+    "gsPsgsgslsgsgPgs"
+  ] },
   "tile-trellisroof": { w: 16, h: 16, pal: {"c":"#f2e7ce","r":"#cf8296","l":"#e2a5b4","d":"#a85f74","b":"#8e3d55","v":"#557f3e"}, rows: [
     "cclrllllcclllvll",
     "cccldllccccbrllc",
@@ -115511,6 +115616,12 @@ for (const k of T32_FLOOR_KINDS) TILE_ART[k] = 'tile-' + k;
 for (const k of T33_PROP_KINDS) TILE_ART[k] = 'tile-prop-' + k;
 for (const k of T33_WALL_KINDS) TILE_ART[k] = 'tile-' + k;
 for (const k of T33_FLOOR_KINDS) TILE_ART[k] = 'tile-' + k;
+// Wave T34: Highbranch's napping camoleon and bunting strands draw
+// their prop tiles; its leafscale roofs and lashed-plank walkways
+// draw theirs.
+for (const k of T34_PROP_KINDS) TILE_ART[k] = 'tile-prop-' + k;
+for (const k of T34_WALL_KINDS) TILE_ART[k] = 'tile-' + k;
+for (const k of T34_FLOOR_KINDS) TILE_ART[k] = 'tile-' + k;
 // Premium+ W6 (TX-3/PL-1): door-open frames, authored in TX-3 for every
 // door kind. The warp-fade engine that plays them lands in W7 — W6
 // wires the frames (this registry + cache.doorOpen + doorOpenCanvas)
@@ -117312,6 +117423,12 @@ function resolveTileLayers(cache, kind, x, y, kindAt, t, phase, mapId) {
     // green the same way (their art is fully opaque — the town
     // grass is baked in).
     case 'steamvent':
+    // Wave T34: Highbranch's napping camoleon composites over its
+    // walkway the same way (its art is fully opaque — the
+    // boardwalk it sleeps on is baked in), and its bunting
+    // strands composite over their green (grass baked in).
+    case 'camoleon':
+    case 'bunting':
     // Wave T17: the radio mast composites over its compound grass too.
     case 'radiomast': {
       // Object tiles carry transparent surrounds (Wave 1): lay the ground
@@ -124228,6 +124345,14 @@ const WALKABLE = new Set(['.', ',', 'D', 'E', 'C', 'F', 'J', 'K', '1', '2', 'V',
   // Director's ruling: main's kinds run 594-636 + 645-648;
   // T32 Ashfall holds 660-662; 606-607 stay empty.)
   ...[673, 674]
+    .map((i) => String.fromCodePoint(0x1E00 + i)),
+  // Wave T34: the canopyfloor char (U+1E00+685, tiles.mjs
+  // T34_KIND_DEFS) is walkable street material — Highbranch
+  // City's lashed-plank walkway, swapped onto the town's street
+  // cells (which shipped as walkable tg2 mud), so floor stays
+  // floor. (Indices 684-687, above T33's parallel 672-675 claim;
+  // 606-607 stay empty.)
+  ...[685]
     .map((i) => String.fromCodePoint(0x1E00 + i))]);
 
 // Trainer definitions for the slice.
@@ -148095,21 +148220,21 @@ const MAPS7 = {
     "rows": [
       "὞὞὞Ὗ὞὞὞὞὞὞Ὗ὞὞὞὞὞὞Ὗ὞὞὞὞὞὞Ὗ὞὞὞὞὞",
       "὞὜὜὜὜὜὜὜Ẓ὜὜὜὜὜὜὜὜὜὜὜὜὜὜F὜὜὜὜὜὞",
-      "὞὜὜jklmẏ὜deefF὜ὠὠὠὠ὜ẏὠὠὠὠ὜὜὜὜὞",
-      "὞὜὜AJKAẏ὜P12P὜὞UVYU὜὜ὡsὡὡὝFS὜὞",
-      "὞SὝὝὝὝὝὝὝὝὝὝὝὝὝὝὝὝὝὝẏὝὝὝὝὝὝὝὝ὞",
-      "὞ὝὝὝὝὝὝὝὝὝὝὝὝὝἇἇὝὝὝὝὝὝὝὝὝὝὝὝὝ὞",
-      "὞ὝὝὝ὜὜὜ὝẏὝὝ὜ὝὝἇἇὝὝὝὝὝ὜Ὕ὜Ὗ὜὜ὝὝ὞",
-      "὞ὝὝὝὝὝὝὝὝὝὝF὜ὝἇἇὝὝὝὝὝὝὝὝ὜ὝὝὝὝ὞",
-      "὞ὝὝὝὝὝὝὝὝὝὝὝὝὝὝὝὝὝὝὝὝὝὝὝὝὝὝὝὝὝ",
-      "὞ὝὝὝὝὝὝὝὝὝὝὝὝὝὝὝὝὝὝὝὝὝὝὝὝὝὝὝὝὝ",
-      "὞ὝὝἇἇἇἇἇἇ὜὜὜ẏὝἇἇὝ὜ὝὝὝἇἇἇἇἇἇὝὝ὞",
-      "὞ὝὝἇἇἇἇἇἇὝ....ἇἇ὜ὝὝẏὝἇἇἇἇἇἇὝὝ὞",
-      "὞ὝὝἇἇἇἇἇἇ.,,,,ἇἇὝὝὝὝὝἇἇἇἇἇἇὝὝ὞",
-      "὞ὝὝἇἇἇἇἇἇ.,,,,ἇἇὝ὞FFSἇἇἇἇἇἇὝὝ὞",
-      "὞ὝὝἇἇἇἇἇἇὝ....ἇἇὝὝFὟὝἇἇἇἇἇἇὝẒ὞",
-      "὞ὝὝἇἇἇἇἇἇ὞὜὜὜ὝἇἇὝ὜F὜ὝἇἇἇἇἇἇẒ὜὞",
-      "὞ὝὝἇἇἇἇἇἇὝὝὝὝὝἇἇὝὝὝὝὝἇἇἇἇἇἇ὜὜὞",
+      "὞὜὜jklmẏ὜deefF὜€€€€὜ẏ€€€€὜὜὜὜὞",
+      "὞὜὜AJKAẏ὜P12P὜὞UVYU὜὜ὡsὡὡ὜FS὜὞",
+      "὞S₭₭₭₭₭₭₭₭₭₭₭₭₭₭₭₭₭₭ẏ₭₭₭₭₭₭₭₭὞",
+      "὞὜὜὜὜὜὜὜὜὜὜὜὜₯ἇἇ὜὜₯₭₭₭὜὜὜὜὜὜₭὞",
+      "὞὜὜὜὜὜὜὜ẏ὜὜὜὜὜ἇἇ὜὜὜὜὜὜὜὜Ὗ὜὜὜₭὞",
+      "὞὜὜὜὜὜὜὜὜὜὜F὜὜ἇἇ὜὜὜὜὜὜὜὜὜὜὜S₭὞",
+      "὞὜὜὜€€€὜὜὜὜὜὜὜₭₭὜὜὜὜὜὜὜€€€὜὜₭₭",
+      "὞὜὜὜ὣsὣ὜὜὜὜὜὜὜₭₭὜὜὜὜὜὜὜ὣsὣ὜὜₭₭",
+      "὞὜Sἇἇἇἇἇἇ὜὜὜ẏ὜ἇἇ₭₭₭₭₭ἇἇἇἇἇἇ὜὜὞",
+      "὞὜὜ἇἇἇἇἇἇ₭....ἇἇ὜὜὜ẏ὜ἇἇἇ₮ἇἇ὜὜὞",
+      "὞὜὜ἇἇἇἇἇἇ.,,,,ἇἇ὜὜὜὜὜ἇἇἇἇἇἇ὜὜὞",
+      "὞὜὜ἇἇἇἇἇἇ.,,,,ἇἇ὜὞FFSἇἇἇἇἇἇ὜὜὞",
+      "὞὜὜ἇἇἇἇἇἇ὜....ἇἇ὜὜FὟ὜ἇἇἇἇἇἇ὜Ẓ὞",
+      "὞὜὜ἇἇἇἇἇἇ὞὜὜὜὜ἇἇ὜SF὜὜ἇἇἇἇἇἇẒ὜὞",
+      "὞὜὜ἇἇἇἇἇἇ὜὜὜὜὜ἇἇ὜὜὜὜὜ἇἇἇἇἇἇ὜὜὞",
       "὞὞὞Ὗ὞὞὞὞὞὞Ὗ὞὞὞ἇἇ὞὞὞Ὗ὞὞὞὞὞὞὜὞὞὞",
     ],
     "warps": [
@@ -148130,12 +148255,14 @@ const MAPS7 = {
       {"x": 20, "y": 13, "text": "THE LONG WALKWAY — Highbranch’s high street, strung tree to tree. CAMOLEON nap on the warm planks; step politely."},
       {"x": 27, "y": 3, "text": "THE EAST ROAD — Route 120 runs east through the rain to the Lotus Cove road. The canopy ends; the weather does not."},
       {"x": 17, "y": 15, "text": "HIGHBRANCH CITY — South: ROUTE 119 · East: ROUTE 120."},
+      {"x": 27, "y": 7, "text": "HIGHBRANCH CITY — South: ROUTE 119 · East: ROUTE 120."},
+      {"x": 2, "y": 10, "text": "HIGHBRANCH CITY — South: ROUTE 119 · East: ROUTE 120."},
     ],
     "npcs": [
       {"x": 12, "y": 7, "name": "CANOPY WARDEN SORA", "art": "ranger", "skin": "#e8b888", "shirt": "#3a6ac0", "pants": "#2a3a4a", "hair": "#1a1a1a", "dialogue": ["Every roof here is also a floor for somebody smaller. Mind your step in both directions.", "The gym leader reads the wind in the walkways before she reads a challenger."]},
       {"x": 22, "y": 12, "name": "TREEHOUSE KID WREN", "art": "kid", "skin": "#f0c8a0", "shirt": "#3a7a4a", "pants": "#4a3a2a", "hair": "#2a1a0a", "dialogue": ["My house has a rope bridge and a PALMSAUR. Your move, ground towns.", "When it rains, the whole city sounds like a drum made of leaves."]},
       {"x": 7, "y": 13, "name": "WEATHER WATCHER ILSE", "art": "lady", "skin": "#d8a878", "shirt": "#7a4a8a", "pants": "#2a2a3a", "hair": "#c0c0c0", "dialogue": ["Route 119's rain is a resident, not a visitor. It pays rent in mushrooms.", "The Weather Institute west of the river keeps the region's sky in ledgers."]},
-      {"x": 3, "y": 5, "name": "MART CLERK", "art": "clerk", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#4a3a2a", "dialogue": ["Highbranch Mart — canopy stock, hauled up one basket at a time. The rope discount is real."], "mart": {"stock": ["greatball", "ultraball", "hyperpotion", "fullheal", "revive", "superpotion"]}},
+      {"x": 9, "y": 4, "name": "MART CLERK", "art": "clerk", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#4a3a2a", "dialogue": ["Highbranch Mart — canopy stock, hauled up one basket at a time. The rope discount is real."], "mart": {"stock": ["greatball", "ultraball", "hyperpotion", "fullheal", "revive", "superpotion"]}},
     ],
     "encounters": {"rate": 0.12, "table": [{"species": "kecleon", "min": 246, "max": 252, "weight": 22}, {"species": "tropius", "min": 246, "max": 252, "weight": 16}, {"species": "swablu", "min": 246, "max": 252, "weight": 20}, {"species": "zigzagoon", "min": 246, "max": 251, "weight": 16}, {"species": "linoone", "min": 248, "max": 254, "weight": 10}, {"species": "altaria", "min": 249, "max": 255, "weight": 6}, {"species": "oddish", "min": 246, "max": 252, "weight": 10}], "water": [{"species": "tentacool", "min": 222, "max": 230, "weight": 22}, {"species": "magikarp", "min": 222, "max": 228, "weight": 18}, {"species": "wingull", "min": 223, "max": 230, "weight": 16}, {"species": "carvanha", "min": 224, "max": 231, "weight": 14}, {"species": "sharpedo", "min": 227, "max": 233, "weight": 6}, {"species": "wailmer", "min": 224, "max": 231, "weight": 10}], "waterRate": 0.08},
     "items": [],
@@ -188439,6 +188566,6 @@ if (typeof Game !== 'undefined') Object.assign(Game.prototype, {
 });
 
 </script>
-<!-- contentHash:1cf4ad81ad6b1a117058feeb9f9c74c00970b179a5ff020b92c698cf21066e91 -->
+<!-- contentHash:60039bb622188c6d4065380bed2d6c367efaf323793dd0e3df48ff38e04ce798 -->
 </body>
 </html>
