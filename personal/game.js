@@ -2877,6 +2877,39 @@ T32_KIND_DEFS.forEach(([kind], i) => {
 const T32_PROP_KINDS = T32_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
 const T32_WALL_KINDS = T32_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
 const T32_FLOOR_KINDS = T32_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
+// Wave T33 (Steamspring Town): the 'Rustflag & Steam Terrace'
+// kit — Steamspring's own kit from birth (NO-SAME-KIT law).
+// 'steamroof' (wall) — rust BARREL-TILE: vertical half-round
+// clay tile ridges in the town's volcanic rust register, worn
+// by the House and the town's two facade cottages. 'steamfloor'
+// (floor) — the town's registered street: large irregular rust
+// flagstones (the "spring street" of the town sign's own
+// words). 'terracefloor' (floor) — pale mineral-crust terrace
+// slabs, the hot spring's terrace ring. 'steamvent' (prop) — a
+// stone-capped spring vent with its steam cloud, at the pass
+// street's shoulder and the spring's NE corner. Indices
+// 672-675 per the Director's index ruling (main's kinds run
+// 594-636 + 645-648; T32 Ashfall holds 660-662; 606-607,
+// 637-644, 649-659, 663-671 stay empty), verified free against
+// origin/main, TILE_CHARS and every map row. Authored art:
+// assets/sprites/pix/tiles/tile-steamroof.pix,
+// tile-steamfloor.pix, tile-terracefloor.pix,
+// tile-prop-steamvent.pix. (WAVE-T33-STEAMSPRING-PLAN.md.)
+const T33_KIND_DEFS = [
+  ['steamroof', 'wall'],
+  ['steamfloor', 'floor'],
+  ['terracefloor', 'floor'],
+  ['steamvent', 'prop'],
+];
+const T33_KIND_CHARS = {};
+T33_KIND_DEFS.forEach(([kind], i) => {
+  const ch = String.fromCodePoint(0x1E00 + 672 + i);
+  T33_KIND_CHARS[kind] = ch;
+  TILE_CHARS[ch] = kind;
+});
+const T33_PROP_KINDS = T33_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
+const T33_WALL_KINDS = T33_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
+const T33_FLOOR_KINDS = T33_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
 const SINNOH_TOWN_GROUND_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg);
 const SINNOH_TOWN_GROUND2_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg2);
 // TX-3: the 8 gym exteriors by town (original type-accent motifs).
@@ -109606,6 +109639,78 @@ const ART = {
     "eeeeeeeeeeeeeeee",
     "eeeeeeeeeeeeeeee"
   ] },
+  "tile-steamroof": { w: 16, h: 16, pal: {"d":"#a04e2a","l":"#da8f5a","b":"#c06a35","s":"#7d421f","w":"#efe6cc"}, rows: [
+    "dlbsdlbsdlbsdlbs",
+    "dlbsdlbsdlbsdlbs",
+    "dlbsdlwsdlbsdlbs",
+    "dlbsdlbsdlbsdlbs",
+    "dlbsdlbsdlbsdlbs",
+    "dlbsdlbsdlbsdlbs",
+    "dlbsdlbsdlbsdlbs",
+    "ssssssssssssssss",
+    "bsdlbsdlbsdlbsdl",
+    "bsdlbsdlbsdlbsdl",
+    "bsdlbsdlwsdlbsdl",
+    "bsdlbsdlbsdlbsdl",
+    "bsdlbsdlbsdlbsdl",
+    "bsdlbsdlbsdlbsdl",
+    "bsdlbsdlbsdlbsdl",
+    "ssssssssssssssss"
+  ] },
+  "tile-steamfloor": { w: 16, h: 16, pal: {"b":"#b85c33","d":"#a04e2a","l":"#cf7340","g":"#d8c8a8","w":"#efe6cc"}, rows: [
+    "lllllglllllgllll",
+    "bbbbbgbbbbbgbbbb",
+    "bdbbbgdbbbbgbbbd",
+    "bbbbbgbbbbbgbbbb",
+    "bbbbbgbbwbbgbbbb",
+    "bbbbbgbbbbbgdbbb",
+    "dddddgdddddgdddd",
+    "gggggggggggggggg",
+    "lllglllllgllllll",
+    "bbbgbbbbbgbbbbbb",
+    "bbbgbbdbbgbbbbbb",
+    "bbbgbbbbbgbbbwbb",
+    "bbbgbbbbbgbbbbbb",
+    "bbbgbbbbbgbbbbbb",
+    "dddgdddddgdddddd",
+    "gggggggggggggggg"
+  ] },
+  "tile-terracefloor": { w: 16, h: 16, pal: {"b":"#cfc0a4","l":"#ddd0b4","d":"#bfae8e","j":"#a4713e","w":"#f2ecdc","t":"#57b8a8"}, rows: [
+    "lllllllljlllllll",
+    "bbbbbbbbjbbbbbbb",
+    "bbwwbbbbjbbbbbbb",
+    "bbwwbbbbjbbbbtbb",
+    "bbbbbbbbjbbbbbbb",
+    "bbbbdbbbjbbbbbbb",
+    "bbbbbbbbjbbbbbbb",
+    "jjjjjjjjjjjjjjjj",
+    "lllljlllllllllll",
+    "bbbbjbbbbbbbbbbb",
+    "bbbbjbbbbwwbbbbb",
+    "bbbbjbbbbwwbtbbb",
+    "bbbbjbbbbbbbbbbb",
+    "bbdbjbbbbbbbbbbb",
+    "bbbbjbbbbbbbbbbb",
+    "jjjjjjjjjjjjjjjj"
+  ] },
+  "tile-prop-steamvent": { w: 16, h: 16, pal: {"g":"#22800d","h":"#1a660a","L":"#2f9420","W":"#f4f1e8","w":"#e3ded0","s":"#c9c2b2","k":"#4a2e1c","r":"#7d4a2b","R":"#96452a"}, rows: [
+    "gghggggggggLgggg",
+    "ggggggwWgggggggg",
+    "gggggWwWwggggggg",
+    "ggggWWWWWwgggggg",
+    "gggWWwWWWWWggggg",
+    "gggWWWWWWwWwgggg",
+    "gggWWWWWWWWWgggg",
+    "ggggWWWWWWwwgggg",
+    "gggggWWWWWgggggg",
+    "ggggggWWwggggggg",
+    "gggggkRRkggggggg",
+    "ggggRkRRkRgggggg",
+    "gggkRRkkRRkggggg",
+    "gggRRRRRRRRggggg",
+    "ggkRkRRRRkRkgggg",
+    "ggghhhhhhhhggggg"
+  ] },
   "partner-back-bob": { base: "partner-back", w: 64, h: 64, pal: {}, shiftY: 2 },
   "partner-front-bob": { base: "partner-front", w: 64, h: 64, pal: {}, shiftY: 2 },
   "abomasnow-back-bob": { base: "abomasnow-back", w: 64, h: 64, pal: {}, shiftY: 2 },
@@ -114902,6 +115007,11 @@ for (const k of T31_FLOOR_KINDS) TILE_ART[k] = 'tile-' + k;
 for (const k of T32_PROP_KINDS) TILE_ART[k] = 'tile-prop-' + k;
 for (const k of T32_WALL_KINDS) TILE_ART[k] = 'tile-' + k;
 for (const k of T32_FLOOR_KINDS) TILE_ART[k] = 'tile-' + k;
+// Wave T33: Steamspring's steam vents draw their prop art; its
+// barrel-tile roofs + rust flag / mineral terrace kit kinds theirs.
+for (const k of T33_PROP_KINDS) TILE_ART[k] = 'tile-prop-' + k;
+for (const k of T33_WALL_KINDS) TILE_ART[k] = 'tile-' + k;
+for (const k of T33_FLOOR_KINDS) TILE_ART[k] = 'tile-' + k;
 // Premium+ W6 (TX-3/PL-1): door-open frames, authored in TX-3 for every
 // door kind. The warp-fade engine that plays them lands in W7 — W6
 // wires the frames (this registry + cache.doorOpen + doorOpenCanvas)
@@ -116699,6 +116809,10 @@ function resolveTileLayers(cache, kind, x, y, kindAt, t, phase, mapId) {
     // green the same way (their art is fully opaque — the green
     // is baked in).
     case 'railfence':
+    // Wave T33: Steamspring's steam vents composite over their
+    // green the same way (their art is fully opaque — the town
+    // grass is baked in).
+    case 'steamvent':
     // Wave T17: the radio mast composites over its compound grass too.
     case 'radiomast': {
       // Object tiles carry transparent surrounds (Wave 1): lay the ground
@@ -123605,6 +123719,16 @@ const WALKABLE = new Set(['.', ',', 'D', 'E', 'C', 'F', 'J', 'K', '1', '2', 'V',
   // stays floor. (Indices 660-662: main's ceiling was 636;
   // 637-659 left clear for the parallel T31 Beacon claim.)
   ...[661]
+    .map((i) => String.fromCodePoint(0x1E00 + i)),
+  // Wave T33: the steamfloor char (U+1E00+673, tiles.mjs
+  // T33_KIND_DEFS) is walkable street material — Steamspring
+  // Town's rust flagstone, swapped onto the town's street cells
+  // (which shipped as walkable tg2 mud), and the terracefloor
+  // char (U+1E00+674) likewise on the hot spring's terrace
+  // ring, so floor stays floor. (Indices 672-675 per the
+  // Director's ruling: main's kinds run 594-636 + 645-648;
+  // T32 Ashfall holds 660-662; 606-607 stay empty.)
+  ...[673, 674]
     .map((i) => String.fromCodePoint(0x1E00 + i))]);
 
 // Trainer definitions for the slice.
@@ -147412,23 +147536,23 @@ const MAPS7 = {
     "music": "pewter-theme",
     "weather": "sun",
     "rows": [
-      "ὖὖὖὗὖὖὖὖὖὖὗὖὖὕὕὖὖὖὗὖὖὖὖὖὖὗὖὖ",
-      "ὖὔὕὕὕὕὕὕὕὕὕὕὕὕὕὕὕὕὕὕὔὔὔὔἉὔὔὖ",
-      "ὖὔὕjklmὕὕdeefὕὕ὘὘὘὘ὕὔ὚὚὚ὔὔὔὖ",
-      "ὖὔὕAJKAὕὕP12PὕὕUVYUὕὔὛsὛὔὔὔὖ",
-      "ὖὔὕὕὕὕὕὕὕὕὕὕὕὕὕὕὕὕὕὕὕὕὕὔὔὔὔὖ",
-      "ὖὔSὕὕὕὕὕὕὕὕὕὕὕὕὕὕὕὕὕὔὕὕὔὔὔὔὖ",
-      "ὖὔṑὕὕὕὕὕὕὕὕὕὔὔὔὔὔὔὕὕẐὕὕὔὔὔὔὖ",
-      "ὖὔὔRὕὔὔẐὕὕὕὕὕὕὕὕὕὕὕὕὕὕὕὔẐὔὔὖ",
-      "ὖṑẐὔὕὔὔὔὕὕὕὕὔὔὔṑὔὔὕὕὕὕὕὔὔὔὔὖ",
-      "ὖὔὔὔὕὕὕὕὕὕὕὕὕὕὕὕὕὕὕὕSὔὕὕὕὕὕὖ",
-      "ὖὔὔὔὕὕὕὕὕὕὕὕὕὕὕὕὕὕὕὕRRRRRRὕὖ",
-      "ὖὔὔὔ....ὕRὕὕὕὕὕὕὕὕὕὕĀĀĀĀĀĀὕὖ",
-      "ὖὔὔ,,,,,.ὕὕὕὕὕὔὔὔὔṑὔĀĀĀĀĀĀὗὖ",
-      "ὖὔὔ,,,,,.ὕὔẐṑὕὕὕὕὕὕὕĀĀĀĀĀĀὔὖ",
-      "ὖὔὔὔ....ὕὕὕὕὕὕὗὔὔὔὔὔĀĀĀĀĀĀὔὖ",
-      "ὖὔὔὔὔoὔὔὔὔὔoὔὔὔὔὔὔὔὔὔὔὔὔἉὔὔὖ",
-      "ὖὗὔὔὔὔὔὔoὔὔὔὔὔὔὔὔὔὔὔὔὔὔὔὔὔὔὖ",
+      "ὖὖὖὗὖὖὖὖὖὖὗὖὖ₡₡ὖὖὖὗὖὖὖὖὖὖὗὖὖ",
+      "ὖὔὔὔὔὔὔὔὔὔὔὔ₣₡₡ὔὔὔὔὔὔὔὔὔἉὔὔὖ",
+      "ὖὔὔjklmὔὔdeef₡₡὘὘὘὘ὔὔ₠₠₠ὔὔὔὖ",
+      "ὖὔὔAJKAὔὔP12P₡₡UVYUὔὔὛsὛὔὔὔὖ",
+      "ὖ₡₡₡₡₡₡₡₡₡₡₡₡₡₡₡₡₡₡₡₡₡₡₡₡₡₡ὖ",
+      "ὖὔSὔ₡₠₠₠ὔὔὔSὔ₡ὔὔὔὔὔὔὔὔ₠₠₠ὔὔὖ",
+      "ὖὔṑὔ₡ὛsὛὔὔὔὔὔ₡ὔὔὔὔὔὔẐὔὛsὛὔὔὖ",
+      "ὖὔὔR₡₡₡Ẑὔὔὔὔὔ₡ὔὔὔὔὔὔὔὔὔ₡Ẑὔὔὖ",
+      "ὖṑẐὔ₡ὔὔὔὔὔὔὔὔ₡ὔṑὔὔὔ₡₡₡₡₡ὔὔὔὖ",
+      "ὖὔὔὔ₡ὔὔS₡S₡₡₡₡₡₡₡₡₡₡Sὔὔὔὔὔὔὖ",
+      "ὖὔὔὔ₡ὔὔὔ₡ὔὔὔὔ₡ὔὔὔὔὔ₢RRRRRR₣ὖ",
+      "ὖὔὔὔ....₡RὔSὔ₡ὔὔὔὔὔ₣ĀĀĀĀĀĀὔὖ",
+      "ὖὔὔ,,,,,.ὔὔὔὔ₡ὔὔὔὔṑ₢ĀĀĀĀĀĀὗὖ",
+      "ὖὔὔ,,,,,.ὔSẐṑ₡ὔὔὔὔὔ₢ĀĀĀĀĀĀ₢ὖ",
+      "ὖὔὔὔ....₡ὔὔὔὔ₡ὗὔὔὔὔ₢ĀĀĀĀĀĀ₢ὖ",
+      "ὖὔὔὔὔo₡₡₡₡₡oὔ₡₡₡₡₡₡₡₢₢₢₢Ἁὔ₢ὖ",
+      "ὖὗὔὔὔὔὔὔoὔὔὔὔὔὔὔὔὔSὔὔὔὔ₢₢₢₢ὖ",
       "ὖὖὖὗὖὖὖὖὖὖὗὖὖὖὖὖὖὔὖὖὖὖὖὖὔὖὖὖ"
     ],
     "warps": [
@@ -147447,13 +147571,16 @@ const MAPS7 = {
       {"x": 2, "y": 5, "text": "STEAMSPRING TOWN — An excellent place for a long soak and a short, hot gym battle. Ragged Pass climbs north from the spring street."},
       {"x": 9, "y": 9, "text": "STEAMSPRING TOWN — North: RAGGED PASS."},
       {"x": 11, "y": 11, "text": "STEAMSPRING TOWN — North: RAGGED PASS."},
-      {"x": 10, "y": 13, "text": "STEAMSPRING TOWN — North: RAGGED PASS."}
+      {"x": 10, "y": 13, "text": "STEAMSPRING TOWN — North: RAGGED PASS."},
+      {"x": 11, "y": 5, "text": "STEAMSPRING TOWN — North: RAGGED PASS."},
+      {"x": 7, "y": 9, "text": "STEAMSPRING TOWN — North: RAGGED PASS."},
+      {"x": 18, "y": 16, "text": "STEAMSPRING TOWN — North: RAGGED PASS."}
     ],
     "npcs": [
       {"x": 11, "y": 7, "name": "SPRINGKEEPER MASA", "art": "elder", "skin": "#e8b888", "shirt": "#b0503c", "pants": "#2a2a3a", "hair": "#5a3a2a", "dialogue": ["The spring water fixes everything except impatience. It makes that worse, briefly.", "The gym leader's grandfather ran this spring. Fire runs in that family like water in this one."]},
       {"x": 22, "y": 13, "name": "SOAKER VEDA", "art": "lady", "skin": "#d8a878", "shirt": "#7a4a8a", "pants": "#2a2a3a", "hair": "#c0c0c0", "dialogue": ["I have been in this spring for one hour or eleven years. The steam decides.", "MAGMALET nap on the pass like the mountain owes them rent."]},
       {"x": 8, "y": 13, "name": "HERB SELLER KIO", "art": "worker", "skin": "#f0c8a0", "shirt": "#3a7a4a", "pants": "#4a3a2a", "hair": "#2a1a0a", "dialogue": ["Bitter herbs, hot sand, hotter springs — Steamspring cures by conviction.", "Sand baths by the spring wall. Ten minutes and your back forgives you everything."]},
-      {"x": 3, "y": 5, "name": "MART CLERK", "art": "clerk", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#4a3a2a", "dialogue": ["Steamspring Mart — spring-town stock. The lava cookies are a food, legally."], "mart": {"stock": ["greatball", "ultraball", "hyperpotion", "fullheal", "revive", "superpotion"]}},
+      {"x": 9, "y": 4, "name": "MART CLERK", "art": "clerk", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#4a3a2a", "dialogue": ["Steamspring Mart — spring-town stock. The lava cookies are a food, legally."], "mart": {"stock": ["greatball", "ultraball", "hyperpotion", "fullheal", "revive", "superpotion"]}},
     ],
     "encounters": {"rate": 0.12, "table": [{"species": "numel", "min": 228, "max": 234, "weight": 26}, {"species": "spoink", "min": 229, "max": 235, "weight": 20}, {"species": "torkoal", "min": 230, "max": 236, "weight": 12}, {"species": "zigzagoon", "min": 228, "max": 234, "weight": 16}, {"species": "slugma", "min": 229, "max": 235, "weight": 14}, {"species": "camerupt", "min": 232, "max": 238, "weight": 6}], "water": [{"species": "tentacool", "min": 202, "max": 210, "weight": 28}, {"species": "magikarp", "min": 202, "max": 208, "weight": 24}, {"species": "wingull", "min": 203, "max": 210, "weight": 20}, {"species": "pelipper", "min": 206, "max": 212, "weight": 8}], "waterRate": 0.08},
     "items": [],
