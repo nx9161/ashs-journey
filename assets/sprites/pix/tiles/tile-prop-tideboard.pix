@@ -1,0 +1,38 @@
+# Wave T28 (Fairhaven kit): tideboard — the tide-table board at
+# the quay (MANIFEST row 42; BACKSTORY-SYNC-AUDIT Fairhaven:
+# "tide-table board at the quay" — the market has priced by the
+# tide for a hundred years). A harbour-blue board on two posts:
+# pale wave lines, a sun glyph and a moon glyph, chalk tide
+# ticks — MARKS, NOT WORDS (the Mistford chalkboard ruling: no
+# invented text; the tide-pricing story is the harbour sign's +
+# ANA's shipped words). FULLY OPAQUE by design: tg-slateport
+# (measured flat #248917, with its shading derivatives) is baked
+# in as its ground, never transparency (the T27 precedent).
+# Stands at (16,15), paired with the shipped HARBOR sign.
+PIX tile-prop-tideboard 16 16
+gggggggggggggggg
+ggGgggggggggGggg
+ggddddddddddddgg
+ggdBBBBBBBBBBdgg
+ggdBoBBBBBBmBdgg
+ggdBppBBppBBBdgg
+ggdBwBBwBBwBBdgg
+ggdBBppBBppBBdgg
+ggddddddddddddgg
+ggggdggggggdgggg
+ggggdggggggdgggg
+ggggdggggggdgggg
+ggggdggggggdgggg
+ggggdggggggdgggg
+gggghgggggghgggg
+ggGgggggggggggGg
+PAL
+g #248917 ground
+G #2d9c1e ground-light
+h #1a6b10 ground-shadow
+d #8d6a3a frame-wood
+B #2a5a8c board-blue
+p #bcd8ea wave-pale
+o #e8c85a sun-glyph
+m #d8d8e0 moon-glyph
+w #e8e8e0 chalk-tick

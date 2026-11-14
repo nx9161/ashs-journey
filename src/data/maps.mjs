@@ -487,6 +487,14 @@ export const WALKABLE = new Set(['.', ',', 'D', 'E', 'C', 'F', 'J', 'K', '1', '2
   // promfloor char (U+1E00+615) likewise in Canopy City,
   // so floor stays floor in both.
   ...[613, 615]
+    .map((i) => String.fromCodePoint(0x1E00 + i)),
+  // Wave T28: the quayfloor char (U+1E00+618, tiles.mjs
+  // T28_KIND_DEFS) is walkable street material — Fairhaven's
+  // running-bond quay stone, swapped onto the town's street
+  // cells (which shipped as walkable tg2 mud), so floor stays
+  // floor. (Indices 617-621 per the Director's index ruling:
+  // W-DIFF6 holds 613-616.)
+  ...[618]
     .map((i) => String.fromCodePoint(0x1E00 + i))]);
 
 // Trainer definitions for the slice.

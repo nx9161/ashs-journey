@@ -1097,6 +1097,60 @@ WD6_KIND_DEFS.forEach(([kind], i) => {
 export const WD6_PROP_KINDS = WD6_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
 export const WD6_WALL_KINDS = WD6_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
 export const WD6_FLOOR_KINDS = WD6_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
+// ---- Wave T28 (Fairhaven City build): Canvas Market & Quay Stone ----
+// Five new kinds at idx 617-621 (U+2069-U+206D, verified free
+// in TILE_CHARS and unused by every map row; the block runs
+// T23 575, W-DIFF 577-580, W-DIFF2 581-584, T24 585-587,
+// T25 588-591, WD3 592-593, W-DIFF4 594-597, T26 598-601,
+// W-DIFF5 602-605, T27 608-612 — and 613-616 belong to
+// W-DIFF6 (slatefloor, slateroof, promfloor, glassroof for
+// Fernmere + Canopy), which finished first. Fairhaven was
+// first planned at 613-617 and RE-INDEXED to 617-621 under
+// the Director's index ruling of 2026-11-13 — before any
+// registration or map edit existed, so no cells were remapped;
+// 606-607 remain reserved-empty). Fairhaven is Maris's harbour
+// market city (HOENN_TOWN_STYLE slateport: ground #c6ad7d,
+// form 'harbor market canvas + tile'); its shipped ground was
+// 47.0% tg2 mud — the worst share yet — under a placement-
+// gates FAIL (the boardwalk pier fabric-invisible, conn
+// 56/90). Its own kit (NO-SAME-KIT law): 'canvasroof' (wall)
+// — stitched cream canvas panels over a tile ridge, in the
+// KIT_VARIANTS slateport roof tones; structurally canvas
+// sheets + ridge, not Mistford's vertical-split shakes,
+// Copperton's copper-seamed slabs or Meadowbrook's staggered
+// stone shingles. 'quayfloor' (floor) — running-bond quay
+// stone (half-offset long slabs, tar seams), the town's
+// street fabric and registered street kind (STREET_REGISTRY;
+// the fleet's street kinds carry the -floor suffix the
+// desire-path tiers key on), swapped onto every street/exit/
+// landing cell. 'marketstall' (prop) — a canvas-awning market
+// stall, eight in two rows on the shipped market ground (the
+// painting's north-street market transferred to the FAIRHAVEN
+// MARKET sign + VESK's post). 'tideboard' (prop) — the quay's
+// tide-table board (wave/sun/moon glyphs, no text), at (16,15)
+// beside the HARBOR sign. 'shiphull' (prop) — Merrick's ribbed
+// hull on its stocks at (27,5) in LIO's shipyard yard. All
+// three props fully opaque with the green baked in.
+// Authored art: assets/sprites/pix/tiles/tile-canvasroof.pix,
+// tile-quayfloor.pix, tile-prop-marketstall.pix,
+// tile-prop-tideboard.pix, tile-prop-shiphull.pix (register:
+// WAVE-T28-FAIRHAVEN-PLAN.md).
+export const T28_KIND_DEFS = [
+  ['canvasroof', 'wall'],
+  ['quayfloor', 'floor'],
+  ['marketstall', 'prop'],
+  ['tideboard', 'prop'],
+  ['shiphull', 'prop'],
+];
+export const T28_KIND_CHARS = {};
+T28_KIND_DEFS.forEach(([kind], i) => {
+  const ch = String.fromCodePoint(0x1E00 + 617 + i);
+  T28_KIND_CHARS[kind] = ch;
+  TILE_CHARS[ch] = kind;
+});
+export const T28_PROP_KINDS = T28_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
+export const T28_WALL_KINDS = T28_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
+export const T28_FLOOR_KINDS = T28_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
 export const SINNOH_TOWN_GROUND_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg);
 export const SINNOH_TOWN_GROUND2_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg2);
 // TX-3: the 8 gym exteriors by town (original type-accent motifs).

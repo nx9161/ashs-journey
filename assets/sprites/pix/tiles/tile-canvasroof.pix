@@ -1,0 +1,35 @@
+# Wave T28 (Fairhaven kit): canvasroof — Fairhaven's own roof kind.
+# STITCHED CANVAS panels over a tile ridge: horizontal canvas
+# sheets with seam rows and stitch ticks, a darker tile cap row
+# along the top — the market's own material carried onto the
+# Contest Hall, the Maritime Museum and the town's cottages. In
+# the KIT_VARIANTS slateport roof tones (#d9c096/#a68a5c/#ecd9ae,
+# log #8d6a3a, door #b0874f). Structurally canvas sheets + ridge,
+# not a recolour: Mistford wears vertical-split wood shakes,
+# Copperton wide slabs with copper seams, Meadowbrook small
+# staggered stone shingles, Eldergrove banded thatch.
+# (NO-SAME-KIT law; WAVE-T28-FAIRHAVEN-PLAN.md.)
+PIX tile-canvasroof 16 16
+tTtTtTtTtTtTtTtT
+TtTtTtTtTtTtTtTt
+lccccccccccccccc
+cccccccccscccccc
+ccclcccccccccccc
+cccccccccccccccl
+ccsccccccccccccc
+dldldldldldldldl
+lccccccccccccccc
+ccccccsccccccccc
+ccccccccccclcccc
+clcccccccccccccc
+ccccccccccccsccc
+lccccccccccccccc
+dldldldldldldldl
+ssssssssssssssss
+PAL
+c #d9c096 canvas
+l #ecd9ae canvas-light
+s #a68a5c canvas-shade
+d #8d6a3a seam
+t #b0874f ridge-tile
+T #96703f ridge-shade

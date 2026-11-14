@@ -1,0 +1,40 @@
+# Wave T28 (Fairhaven kit): marketstall — one of the canvas market
+# stalls of the approved design (MANIFEST row 42: "canvas market
+# over the north street in two rows"; transferred to the shipped
+# market ground at the FAIRHAVEN MARKET sign + MARKET CRIER VESK's
+# post — WAVE-T28-FAIRHAVEN-PLAN.md §3.1). A cream striped canvas
+# awning on two posts, a counter with the crier's goods (berry
+# bowls, jars — "Berries! Stones!"). FULLY OPAQUE by design: it
+# stands on the town green, whose tg-slateport tone (measured flat
+# #248917, with its shading derivatives) is baked in as its
+# ground, never transparency (the T25 scales / T26 travstone /
+# T27 barbells precedent).
+PIX tile-prop-marketstall 16 16
+gggggggggggggggg
+glccscclccscclcg
+gccccccccccccccg
+gccscclccscclccg
+gdcdcdcdcdcdcdcg
+ggdggggggggggdgg
+ggdggggggggggdgg
+ggdggggggggggdgg
+ggdgbbgggrrggdgg
+ggdgrrrggbbbgdgg
+ggwwwwwwwwwwwwgg
+ggwWwwWwwWwwWwgg
+ggWWWWWWWWWWWWgg
+gghhhhhhhhhhgggg
+gGggggggggggggGg
+ggggggGggggggggg
+PAL
+g #248917 ground
+G #2d9c1e ground-light
+h #1a6b10 ground-shadow
+c #d9c096 canvas
+l #ecd9ae canvas-light
+s #a68a5c canvas-stripe
+d #8d6a3a post-wood
+w #b0874f counter-wood
+W #96703f counter-shade
+r #c0392b berries
+b #3a6ac0 jar-blue

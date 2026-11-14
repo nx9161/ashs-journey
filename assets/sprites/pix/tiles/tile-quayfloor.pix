@@ -1,0 +1,33 @@
+# Wave T28 (Fairhaven kit): quayfloor — Fairhaven's registered street
+# kind (the fleet's street kinds carry the -floor suffix; the
+# desire-path tiers key on it). RUNNING-BOND quay stone: two courses
+# of long sandstone slabs, half-offset (course joints at x8, then
+# x4/x12), tar-dark seams, pale worn faces — a harbour quay, not a
+# plaza grid. Structurally offset bond + tar seams, not a recolour:
+# Copperton's are big SQUARE quarry flags in a grid, Mistford's are
+# long timber planks, Cinder's small brick, Redwood's gravel
+# speckle. The bond offset reads at screenshot scale.
+# (NO-SAME-KIT law; WAVE-T28-FAIRHAVEN-PLAN.md.)
+PIX tile-quayfloor 16 16
+lpppspppdppspppl
+pppwppppdppppppp
+pppppppldplpppsp
+spppppppdppwpppp
+ppplpppsdppppppp
+ppppppppdlppppsp
+pppspppwdppppplp
+dddddddddddddddd
+pppldpppspppdppp
+ppppdpppppppdlpp
+sppwdplpppppdppp
+ppppdppppwppdpsp
+lppsdpppppppdppp
+ppppdspppppldwpp
+ppwpdpppppppdplp
+dddddddddddddddd
+PAL
+p #d8c49c slab-face
+l #ecd9ae slab-light
+d #6e5a3e tar-seam
+s #b39b6e speckle
+w #c2a87c worn
