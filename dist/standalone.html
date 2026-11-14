@@ -2723,6 +2723,37 @@ WD_KIND_DEFS.forEach(([kind], i) => {
 });
 const WD_FLOOR_KINDS = WD_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
 const WD_WALL_KINDS = WD_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
+// ---- Wave T24 (Eldergrove build): the Flower Clock + thatch roof ----
+// Three new kinds continuing the block at idx 585-587 (W-DIFF ends
+// at 580, W-DIFF2 took 581-584; idx 576 stays the held merge buffer;
+// U+2049/U+204A/U+204B, verified free in TILE_CHARS and unused by
+// every map row; T24 authored them at 581-583 and the Director
+// re-indexed at merge). Owner ruling
+// 2026-11-13 (NO-SAME-KIT law): Eldergrove's own kit is dry-meadow
+// ground + THATCH-textured straw-gold roofs + the Flower Clock —
+// 'flowerclock' is a class 'prop' (solid object composited over
+// the ground it stands on, art.mjs resolver): the petal-ring clock
+// face at the heart of the town's shipped clock garden, where its
+// sign has always stood. 'thatchroof' is a wall-class roof kind
+// swapped onto house-stamp roof cells only — footprints, doors
+// and warps untouched (W-DIFF drakeroof precedent). Authored art:
+// assets/sprites/pix/tiles/tile-prop-flowerclock.pix and
+// tile-thatchroof.pix (Wave T24 register in
+// WAVE-T24-ELDERGROVE-PLAN.md, Kit register).
+const T24_KIND_DEFS = [
+  ['flowerclock', 'prop'],
+  ['thatchroof', 'wall'],
+  ['clockbed', 'floor'],
+];
+const T24_KIND_CHARS = {};
+T24_KIND_DEFS.forEach(([kind], i) => {
+  const ch = String.fromCodePoint(0x1E00 + 585 + i);
+  T24_KIND_CHARS[kind] = ch;
+  TILE_CHARS[ch] = kind;
+});
+const T24_PROP_KINDS = T24_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
+const T24_WALL_KINDS = T24_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
+const T24_FLOOR_KINDS = T24_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
 const SINNOH_TOWN_GROUND_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg);
 const SINNOH_TOWN_GROUND2_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg2);
 // TX-3: the 8 gym exteriors by town (original type-accent motifs).
@@ -94009,6 +94040,43 @@ const ART = {
     ".....ppppp......",
     "................"
   ] },
+  "tile-prop-flowerclock": { w: 16, h: 16, pal: {"k":"#3a2a1a","P":"#e88bb0","V":"#9a7fd0","Y":"#f2c53d","C":"#ffe9a8","W":"#7a5a34","w":"#5d4126","G":"#4a7a3a"}, rows: [
+    "................",
+    ".....PVPVPV.....",
+    "...PVYYYYYYVP...",
+    "..VYYCCCCYYVP...",
+    "..PYCCkCCCCYP...",
+    ".PVCCCCkCCCCVP..",
+    ".PVCCCkkkkCCVP..",
+    ".PVCCCCCCCCCVP..",
+    "..PYCCCCCCCYP...",
+    "..VYYCCCCCYYV...",
+    "...PVYYYYYYVP...",
+    ".....PVPVPV.....",
+    ".......WW.......",
+    ".......Ww.......",
+    "......GWwG......",
+    "................"
+  ] },
+  "tile-thatchroof": { w: 16, h: 16, pal: {"g":"#c2a054","L":"#d9bc76","S":"#856830","D":"#6e5626"}, rows: [
+    "gLggLgLggLggLgLg",
+    "ggLggSgLgggLggLg",
+    "LggLgggLggLgLggg",
+    "SgSSgSSgSSgSSgSS",
+    "gLggLgLggLggLgLg",
+    "ggLggSgLgggLggLg",
+    "LggLgggLggLgLggg",
+    "SgSSgSSgSSgSSgSS",
+    "gLggLgLggLggLgLg",
+    "ggLggSgLgggLggLg",
+    "LggLgggLggLgLggg",
+    "SgSSgSSgSSgSSgSS",
+    "gLggLgLggLggLgLg",
+    "ggLggSgLgggLggLg",
+    "LggLgggLggLgLggg",
+    "DgDgDgDgDgDgDgDg"
+  ] },
+"tile-clockbed": {"w":16,"h":16,"pal":{"s":"#4a3626","d":"#38281c","p":"#e88bb0","v":"#9a7fd0","c":"#ffe9a8","g":"#f2c53d"},"rows":["ssssssssssssssss","sdsspssssdsssssv","ssssdsssssssdsss","sscssssgssssssss","ssdsssssdsspssss","sssssvsssssssdss","sssssssscsssssgs","sssdssssssdsssss","sssspsssssssssss","sssssdssssvsssss","sscsssssssssdssg","sdssssspssssssss","ssssvssdsssscsss","ssssssssgsssssds","ssssdspsssssssss","sssssssssdsvssss"]},
   "tile-prop-mapdesk": { w: 16, h: 16, pal: {"B":"#b99b74","D":"#726648","L":"#d7bd97","A":"#916a47","C":"#6a5c47"}, rows: [
     "................",
     "................",
@@ -113673,6 +113741,10 @@ for (const k of T15_PROP_KINDS) TILE_ART[k] = 'tile-prop-' + k;
 for (const k of T17_PROP_KINDS) TILE_ART[k] = 'tile-prop-' + k;
 // Wave T23: Rootlet's notched fence post draws its prop art.
 for (const k of T23_PROP_KINDS) TILE_ART[k] = 'tile-prop-' + k;
+// Wave T24: Eldergrove's Flower Clock prop + thatchroof kit kinds.
+for (const k of T24_PROP_KINDS) TILE_ART[k] = 'tile-prop-' + k;
+for (const k of T24_WALL_KINDS) TILE_ART[k] = 'tile-' + k;
+for (const k of T24_FLOOR_KINDS) TILE_ART[k] = 'tile-' + k;
 
 // Premium+ W6 (TX-3/PL-1): door-open frames, authored in TX-3 for every
 // door kind. The warp-fade engine that plays them lands in W7 — W6
@@ -114528,7 +114600,9 @@ const PROP_KINDS = new Set(['counter', 'healmachine', 'pcdesk', 'bed', 'table',
   // Wave T17: Signal's radio mast composites too.
   ...T17_PROP_KINDS,
   // Wave T23: Rootlet's notched fence post composites too.
-  ...T23_PROP_KINDS]);
+  ...T23_PROP_KINDS,
+  // Wave T24: Eldergrove's Flower Clock composites too.
+  ...T24_PROP_KINDS]);
 function groundFamilyOf(kind) {
   // Perfection Pass Stage 2 Gate 2 (G2): beach kinds stand on tropgrass,
   // psand kinds stand on path (props composite over the parent ground).
@@ -115413,6 +115487,8 @@ function resolveTileLayers(cache, kind, x, y, kindAt, t, phase, mapId) {
     case 'lurepost':
     // Wave T23: the notched fence post composites over its roadside grass too.
     case 'notchpost':
+    // Wave T24: the Flower Clock composites over its flower bed too.
+    case 'flowerclock':
     // Wave T17: the radio mast composites over its compound grass too.
     case 'radiomast': {
       // Object tiles carry transparent surrounds (Wave 1): lay the ground
@@ -122206,6 +122282,12 @@ const WALKABLE = new Set(['.', ',', 'D', 'E', 'C', 'F', 'J', 'K', '1', '2', 'V',
   // wornfloor — idx 581,582) join on the same terms for Farsight /
   // Lantern City.
   ...[577, 578, 581, 582]
+    .map((i) => String.fromCodePoint(0x1E00 + i)),
+  // Wave T24: the clockbed char (U+1E00+587, tiles.mjs T24_KIND_DEFS;
+  // authored at 583, re-indexed to 587 at the T24 merge) is walkable
+  // ground — the Flower Clock's petal-soil bed in Eldergrove, swapped
+  // 1:1 from walkable 'F' flower cells, so floor stays floor.
+  ...[587]
     .map((i) => String.fromCodePoint(0x1E00 + i))]);
 
 // Trainer definitions for the slice.
@@ -145506,24 +145588,24 @@ const MAPS7 = {
     "music": "viridian-theme",
     "weather": "clear",
     "rows": [
-      "἖἖἖἗἖἖἖἖἖἖἗἖἖἖἖἖἖἗἖἖ἕἕ἖἖἖἖἖἖",
-      "἖ἔἔἔἔἔἔἔἔἔἔἔnἕἕἕἕἕἕἕἕἕFFἔἔἔ἖",
-      "἖ἔἔjklmἔἔdeefἕnἚἚἚἕἕἕἕFἔFἔἔ἖",
-      "἖ἔἔAJKAFἔP12Pἕ἗ἛsἛἕἕἕἕFἔἔἔἔ἖",
-      "἖ἕἕἕἕἕἕἕἕἕἕἕἕἕἕἕἕἕἕἕἕἕἔἔἔFἔ἖",
-      "἖ἕSἕἕἕἕἕἕἕἕἕἕἕἕἕἕἕἔἕἕἕἔἔἔἔἔ἖",
-      "἖ἕἕἕἕἕἔἕnnἕἕἕἕἕἕFἔἔἕἕἕἔἔἔἔἔ἖",
-      "἖ἕἕnἕἕἔἕἕἕἕἕἕἕἕἔoἕἔἕἕἕἔἔἔἔἔ἖",
-      "ἕἕἕἕἕἕἕἕἕἕἕἕἕἕἕἕἕἕἕἕἕἕἔἔἔἔἔἔ",
-      "ἕἕἕἕἕἕἕἕἕἕἕἕἕἕἕἕἕἕἕἕἕἕἔἔἔἔἔἔ",
-      "἖ἕἕἔἕἕἔἔἔἔἔἕἔἕἕἔἔἕἔἕἕἕἔἔἔἔἔ἖",
-      "἖ἕἕ....ἕἕἕἕἔἕἕἕἕἕἕἔἕἕnἔἔἔἔἔ἖",
-      "἖ἕ.,,,,.ἕ..ἕἕἕἕἕἕἕἕSFFFFFἔἔ἖",
-      "἖ἕ.,,,,..,,,.ἕἕoἔἕἔἕFFἔFFἔἔ἖",
-      "἖ἕἕ....ἕ.,,,.ἕἕἔἔἕἔἕFFFFFἔἔ἖",
-      "἖FἔἔἔἔἔoFἔF.ἕἕἕἔFἕἕἕἕἔἔἔἔἔἔ἖",
-      "἖ἔἔἔἔἔἔFἔἔnẏἕἕἕἕἕἕ἗ἔἔἔFἔἔἔἔ἖",
-      "἖἖἖἗἖἖἖἖἖἖἗἖἖ἕἕ἖἖἖἗἖἖἖἖἖἖἗἖἖",
+      "἖἖἖἗἖἖἖἖἖἖἗἖἖἖἖἖἖἗἖἖..἖἖἖἖἖἖",
+      "἖ἔἔἔἔἔἔἔἔἔἔἔnἔἔἔἔἔἔἔ..ἔἔἔFἔ἖",
+      "἖ἔἔjklmἔἔdeefἔn⁊⁊⁊ἔἔ..FἔFἔF἖",
+      "἖ἔἔAJKAFἔP12PF἗ἛsἛἔS..Fἔἔἔἔ἖",
+      "἖..........................἖",
+      "἖.Sἔἔἔἔἔἔἔἔ⁊⁊⁊.Sἔἔ.ἔἔ⁊⁊⁊ἔἔἔ἖",
+      "἖.ἔἔἔἔἔἔnnἔἛsἛ.ἔFἔ.ἔἔἛsἛἔἔἔ἖",
+      "἖.ἔnἔἔἔἔἔἔ.....ἔoἔ.ἔἔ...Sἔἔ἖",
+      "...........................ἔ",
+      "..Sἔἔἔἔἔἔἔἔ.S..ἔἔS.ἔἔ.⁊⁊⁊ἔἔἔ",
+      "἖.ἔἔἔἔἔἔἔἔἔ.ἔ..ἔἔἔ.ἔἔ.ἛsἛFF἖",
+      "἖......Sἔἔἔἔ...............἖",
+      "἖..,,,,........ἔἔἔSS⁋.⁋⁋⁋nἔ἖",
+      "἖..,,,,..,,,...oἔἔἔἔ⁋.⁉⁋⁋ἔἔ἖",
+      "἖ἔ.......,,,...ἔἔἔἔἔ⁋.⁋⁋⁋ἔἔ἖",
+      "἖FἔἔἔἔFo.......ἔFἔἔἔἔ.⁋⁋ἔἔἔ἖",
+      "἖ἔἔἔἔἔἔFἔFnẏἔ..ἔἔἔ἗ἔἔἔFἔἔἔἔ἖",
+      "἖἖἖἗἖἖἖἖἖἖἗἖἖..἖἖἖἗἖἖἖἖἖἖἗἖἖"
     ],
     "warps": [
       {"x": 4, "y": 3, "to": {"map": "center", "x": 4, "y": 4}, "via": {"map": "oldale", "x": 4, "y": 4}},
@@ -145539,16 +145621,22 @@ const MAPS7 = {
       {"x": 21, "y": 0, "to": {"map": "r103", "x": 7, "y": 14}},
     ],
     "signs": [
-      {"x": 19, "y": 12, "text": "THE FLOWER CLOCK — Eldergrove keeps time in petals. It is never late and never early; it is in bloom."},
-      {"x": 2, "y": 5, "text": "ELDERGROVE TOWN — Where every road out of Rootlet first pauses. West: Route 102. North: the Route 103 shore."},
-      {"x": 18, "y": 13, "text": "ELDERGROVE TOWN — South: ROUTE 101 · West: ROUTE 102 · North: ROUTE 103."},
-      {"x": 6, "y": 10, "text": "ELDERGROVE TOWN — South: ROUTE 101 · West: ROUTE 102 · North: ROUTE 103."},
+      {"x":19,"y":12,"text":"THE FLOWER CLOCK — Eldergrove keeps time in petals. It is never late and never early; it is in bloom."},
+      {"x":2,"y":5,"text":"ELDERGROVE TOWN — Where every road out of Rootlet first pauses. West: Route 102. North: the Route 103 shore."},
+      {"x":18,"y":12,"text":"ELDERGROVE TOWN — South: ROUTE 101 · West: ROUTE 102 · North: ROUTE 103."},
+      {"x":2,"y":9,"text":"ELDERGROVE TOWN — South: ROUTE 101 · West: ROUTE 102 · North: ROUTE 103."},
+      {"x":19,"y":3,"text":"ELDERGROVE TOWN — South: ROUTE 101 · West: ROUTE 102 · North: ROUTE 103."},
+      {"x":15,"y":5,"text":"ELDERGROVE TOWN — South: ROUTE 101 · West: ROUTE 102 · North: ROUTE 103."},
+      {"x":12,"y":9,"text":"ELDERGROVE TOWN — South: ROUTE 101 · West: ROUTE 102 · North: ROUTE 103."},
+      {"x":17,"y":9,"text":"ELDERGROVE TOWN — South: ROUTE 101 · West: ROUTE 102 · North: ROUTE 103."},
+      {"x":24,"y":7,"text":"ELDERGROVE TOWN — South: ROUTE 101 · West: ROUTE 102 · North: ROUTE 103."},
+      {"x":7,"y":11,"text":"ELDERGROVE TOWN — South: ROUTE 101 · West: ROUTE 102 · North: ROUTE 103."}
     ],
     "npcs": [
       {"x": 11, "y": 11, "name": "TRACKER ODO", "art": "hiker", "skin": "#e8b888", "shirt": "#3a6ac0", "pants": "#2a3a4a", "hair": "#1a1a1a", "dialogue": ["Footprints tell you who passed, what they carried, and whether they were running.", "Something rare-footed crossed the north shore last week. Four toes. I said nothing to anyone but you."]},
       {"x": 17, "y": 6, "name": "MIRA", "art": "lass", "skin": "#c89878", "shirt": "#2a7a6a", "pants": "#3a3a4a", "hair": "#7a4a1a", "dialogue": ["The flower clock blooms on the hour. The whole town sets its heart by it.", "Eldergrove is small because the roads took the rest. We don't mind."]},
       {"x": 5, "y": 13, "name": "OLD SETH", "art": "elder", "skin": "#e8b888", "shirt": "#b0503c", "pants": "#2a2a3a", "hair": "#5a3a2a", "dialogue": ["Every trainer in Maris has stood where you're standing, deciding.", "Decide slow, walk fast. That's the whole secret, and it isn't one."]},
-      {"x": 3, "y": 5, "name": "MART CLERK", "art": "clerk", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#4a3a2a", "dialogue": ["Eldergrove Mart — first supplies on the road north. The flower seeds are not for sale. Again."], "mart": {"stock": ["pokeball", "greatball", "potion", "superpotion", "antidote", "awakening"]}},
+      {"x": 8, "y": 4, "name": "MART CLERK", "art": "clerk", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#4a3a2a", "dialogue": ["Eldergrove Mart — first supplies on the road north. The flower seeds are not for sale. Again."], "mart": {"stock": ["pokeball", "greatball", "potion", "superpotion", "antidote", "awakening"]}},
     ],
     "encounters": {"rate": 0.12, "table": [{"species": "zigzagoon", "min": 201, "max": 205, "weight": 28}, {"species": "poochyena", "min": 201, "max": 205, "weight": 26}, {"species": "wurmple", "min": 202, "max": 205, "weight": 20}, {"species": "lotad", "min": 202, "max": 206, "weight": 12}, {"species": "seedot", "min": 202, "max": 206, "weight": 12}], "water": [{"species": "tentacool", "min": 202, "max": 210, "weight": 28}, {"species": "magikarp", "min": 202, "max": 208, "weight": 24}, {"species": "wingull", "min": 203, "max": 210, "weight": 20}, {"species": "pelipper", "min": 206, "max": 212, "weight": 8}], "waterRate": 0.08},
     "items": [],
@@ -186377,6 +186465,6 @@ if (typeof Game !== 'undefined') Object.assign(Game.prototype, {
 });
 
 </script>
-<!-- contentHash:cd7ac85d31a46e83534a9e6cdebabafc8578b4aa96c33eac81a8b6c6cc2f3688 -->
+<!-- contentHash:e3b84838afb0325a6c6c05ee391f160fd2bd0221459c211ff8219a72a8ed7b66 -->
 </body>
 </html>
