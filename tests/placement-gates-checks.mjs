@@ -518,6 +518,50 @@
 //     map cells had landed, so the remap is registration-only
 //     and lossless by construction.) Re-pinned with the T29
 //     build.
+//     TWENTY-EIGHTH DOCUMENTED EXCEPTION (T30): the registry grows by
+//     one scoped entry — verdanturf: [petalfloor, cavefloor] — on
+//     the slateport two-material terms, and verdanturf's pin flips
+//     from the shipped FAIL to its POST-T30 PASS. Wildflower shipped
+//     the fleet's only outright placement FAIL whose root cause sat
+//     in the registry itself: its Copperbore Tunnel exits stand on
+//     cavefloor, a kind no network tier counts, so the west door
+//     could never join the town's connectivity (conn 56/90) no
+//     matter how the town was dressed; the wave registers the
+//     tunnel mouth's shipped threshold material rather than paving
+//     the cave mouth in petal gravel (WAVE-T30-WILDFLOWER-PLAN.md
+//     §3.6). The rebuild also replaced the tg2 field (178 of 504
+//     cells mud — 35.3%) with calm ground + petal-lane fabric:
+//     trellisroof cream diamond lattice over rose (idx 633) on the
+//     Contest Hall + House stamps and two facade cottages,
+//     petalfloor petal-flecked garden lane (idx 634), the trellis
+//     prop (idx 635, a pair at the hall's front walk), the
+//     rosebush prop (idx 636, x3), and the orphaned MART CLERK
+//     re-seated at his Mart's west-front apron (3,5) -> (22,4).
+//     Gate STATUS flips FAIL -> PASS: conn 56/90 -> 90/90,
+//     step-offs 6/6, junctions 1 site (the mud sea) -> 4 sites,
+//     0 bare (both shipped DIRS records stood invisible — on flat
+//     ground and on mud; they gained S tiles at their posts and
+//     two verbatim copies mark the validator-named junctions at
+//     (12,5) and in the garden at (9,13)), strict 0.9444 ->
+//     0.8056 (desire lines get real corners; above the 0.60
+//     gate), fabric 0.9553 -> 0.9829, apronMin identical
+//     (0.875), unanchoredAny 0 -> 1 (the plot's east frame stray
+//     flower@25,12 loses its cheb-2 decor anchor when the frame's
+//     west cells become the desire-line grass; 1/50 = 2%, inside
+//     the gate's 5% tolerance, pinned here honestly). The
+//     desire-path rounds are recorded in the plan's §6: a petal
+//     through-lane at garden row 12, FENN's north step (8,13) in
+//     the lane, and grass pinches on the row-11 desire line, the
+//     plot frame and the east column (tg is fabric tier; street
+//     on those lines straddled the (6,10)/(19,10) planters both
+//     ways). No encounter cell touched: commas 22, dots 5
+//     byte-kept, PIOTR still standing on his comma. (Kind
+//     indices 633-636: first registered at 629-632, re-indexed
+//     in-branch under the Director's index ruling of 2026-11-13
+//     after W-DIFF8 registered shinglefloor 629, shingleroof
+//     630, inlayfloor 631, sakuraroof 632 — no map cells had
+//     landed, so the remap is registration-only and lossless by
+//     construction.) Re-pinned with the T30 build.
 //     Tuple: [pass, connOk, connPairs, stepTouch, stepTot, components,
 //     junctionSites, junctionsBare, apronLow, apronMin, merged,
 //     onFabric, shoulderOrphans, unanchoredAny, strict, fabric].
@@ -601,8 +645,8 @@ async function gateTuple(id, t) {
 }
 
 // 1. registry scope lock
-ok('street registry is exactly { vermilion: [boardwalk], blackthorn: [settfloor], silvertown: [marblefloor], ecruteak: [wornfloor], saffron: [avenuefloor], violet: [violetfloor], azalea: [brickfloor], mahogany: [gravelfloor], rustboro: [cutstonefloor], fuchsia: [marshfloor], cianwood: [driftfloor], dewford: [plankfloor], viridian: [slatefloor], celadon: [promfloor], slateport: [quayfloor, boardwalk], cerulean: [pierfloor], mauville: [gridfloor], lavender: [shinglefloor], cherrygrove: [inlayfloor] }',
-  JSON.stringify(STREET_REGISTRY) === '{"vermilion":["boardwalk"],"blackthorn":["settfloor"],"silvertown":["marblefloor"],"ecruteak":["wornfloor"],"saffron":["avenuefloor"],"violet":["violetfloor"],"azalea":["brickfloor"],"mahogany":["gravelfloor"],"rustboro":["cutstonefloor"],"fuchsia":["marshfloor"],"cianwood":["driftfloor"],"dewford":["plankfloor"],"viridian":["slatefloor"],"celadon":["promfloor"],"slateport":["quayfloor","boardwalk"],"cerulean":["pierfloor"],"mauville":["gridfloor"],"lavender":["shinglefloor"],"cherrygrove":["inlayfloor"]}',
+ok('street registry is exactly { vermilion: [boardwalk], blackthorn: [settfloor], silvertown: [marblefloor], ecruteak: [wornfloor], saffron: [avenuefloor], violet: [violetfloor], azalea: [brickfloor], mahogany: [gravelfloor], rustboro: [cutstonefloor], fuchsia: [marshfloor], cianwood: [driftfloor], dewford: [plankfloor], viridian: [slatefloor], celadon: [promfloor], slateport: [quayfloor, boardwalk], cerulean: [pierfloor], mauville: [gridfloor], lavender: [shinglefloor], cherrygrove: [inlayfloor], verdanturf: [petalfloor, cavefloor] }',
+  JSON.stringify(STREET_REGISTRY) === '{"vermilion":["boardwalk"],"blackthorn":["settfloor"],"silvertown":["marblefloor"],"ecruteak":["wornfloor"],"saffron":["avenuefloor"],"violet":["violetfloor"],"azalea":["brickfloor"],"mahogany":["gravelfloor"],"rustboro":["cutstonefloor"],"fuchsia":["marshfloor"],"cianwood":["driftfloor"],"dewford":["plankfloor"],"viridian":["slatefloor"],"celadon":["promfloor"],"slateport":["quayfloor","boardwalk"],"cerulean":["pierfloor"],"mauville":["gridfloor"],"lavender":["shinglefloor"],"cherrygrove":["inlayfloor"],"verdanturf":["petalfloor","cavefloor"]}',
   JSON.stringify(STREET_REGISTRY));
 
 // 2. census: the 64 towns of townSetOf (pallet included)
@@ -686,7 +730,7 @@ const PIN = {
   "twinleaf": [1, 90, 90, 6, 6, 1, 3, 0, 0, 0.824, 0, 0, 0, 0, 0.9833, 0.994],
   "valencia": [0, 42, 72, 7, 7, 1, 2, 0, 2, 0.429, 0, 0, 0, 0, 0.9654, 0.9654],
   "veilstone": [1, 132, 132, 8, 8, 1, 9, 0, 0, 0.765, 0, 0, 0, 0, 0.94, 0.9965],
-  "verdanturf": [0, 56, 90, 6, 6, 1, 1, 0, 0, 0.875, 0, 0, 0, 0, 0.9444, 0.9553],
+  "verdanturf": [1, 90, 90, 6, 6, 1, 4, 0, 0, 0.875, 0, 0, 0, 1, 0.8056, 0.9829],
   "vermilion": [1, 110, 110, 7, 7, 1, 7, 0, 0, 0.8, 0, 0, 0, 0, 0.8378, 0.9961],
   "violet": [1, 156, 156, 9, 9, 1, 4, 0, 0, 0.6, 0, 0, 0, 0, 0.9083, 0.9967],
   "viridian": [1, 240, 240, 7, 7, 1, 3, 0, 0, 0.643, 0, 0, 0, 0, 0.933, 1],};
