@@ -4147,6 +4147,53 @@ T54_KIND_DEFS.forEach(([kind], i) => {
 const T54_PROP_KINDS = T54_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
 const T54_WALL_KINDS = T54_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
 const T54_FLOOR_KINDS = T54_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
+// Wave T55 — Wildreach kit 'Hardpan & Adobe': the hardpanfloor
+// (hard-packed sand-and-gravel — pale khaki-tan packed earth with
+// fine gravel speckle, sparse pale pebbles and faint wind streaks;
+// the painting's pale sand roads. A fine organic packed-earth
+// scatter, unlike Fenland's walkfloor pegged timber planks,
+// Clashfield's basaltfloor fitted dark slabs, Bridgeport's
+// ringfloor ringed quay stone and Brightshore's panelfloor rigid
+// golden grid), the adoberoof (large flat sun-baked khaki clay
+// slabs with wide dark joints offset per band and bleached top
+// edges — worn by the House + both facade cottages; large flat
+// slabs, unlike Lilac's bronzroof shingle courses, Fairhaven's
+// canvasroof stitched canvas and Fenland's boardroof vertical
+// boards), the cookpot (the outpost kitchen's iron pot on a
+// tripod over a fire, steam curling — at TRAIL COOK BORIN's west
+// shoulder, a recorded-beat dressing realization, dressing only)
+// and the chartstand (CARTOGRAPHER WREN's easel chart with its
+// coastline, route dashes and compass rose — at her north
+// shoulder, dressing only).
+// Indices 936-939 per the Director's index ruling (main's kinds
+// run 594-636 + 645-648 + 660-662 + 672-675 + 684-687 + 696-699 +
+// 708-711 + 720-724 + 732-736 + 744-748 + 756-759 (T40) + 768-771
+// (T41) + 780-783 (T42) + 792-795 (T43) + 804-807 (T44) + 816-819
+// (T45) + 828-831 (T46) + 840-843 (T47) + 852-855 (T48) +
+// 864-868 (T49) + 876-879 (T50) + 888-891 (T51) + 900-903 (T52) +
+// 912-915 (T53) + 924-927 (T54, on its branch awaiting merge);
+// 928-935 stay empty), verified free against origin/main,
+// TILE_CHARS and every map row. Kind name note: 'chartboard' is
+// already claimed elsewhere in the fleet; the prop is
+// 'chartstand'. Authored art:
+// assets/sprites/pix/tiles/tile-hardpanfloor.pix,
+// tile-adoberoof.pix, tile-prop-cookpot.pix,
+// tile-prop-chartstand.pix. (WAVE-T55-WILDREACH-PLAN.md.)
+const T55_KIND_DEFS = [
+  ['hardpanfloor', 'floor'],
+  ['adoberoof', 'wall'],
+  ['cookpot', 'prop'],
+  ['chartstand', 'prop'],
+];
+const T55_KIND_CHARS = {};
+T55_KIND_DEFS.forEach(([kind], i) => {
+  const ch = String.fromCodePoint(0x1E00 + 936 + i);
+  T55_KIND_CHARS[kind] = ch;
+  TILE_CHARS[ch] = kind;
+});
+const T55_PROP_KINDS = T55_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
+const T55_WALL_KINDS = T55_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
+const T55_FLOOR_KINDS = T55_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
 const SINNOH_TOWN_GROUND_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg);
 const SINNOH_TOWN_GROUND2_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg2);
 // TX-3: the 8 gym exteriors by town (original type-accent motifs).
@@ -112532,6 +112579,78 @@ const ART = {
     "ggGggdggggdgggGg",
     "ggdGddGddGddGdgg"
   ] },
+  "tile-hardpanfloor": { w: 16, h: 16, pal: {"a":"#c9b183","l":"#d8c49a","d":"#b39b6d","v":"#a68d5f","p":"#e3d3ab","s":"#bfa87c"}, rows: [
+    "laaaaaaaaaaadaaa",
+    "aalaaaadaaaavaaa",
+    "avsslaaaasssaada",
+    "aaaaaalaadaaapaa",
+    "aavadaaalaaaaaaa",
+    "aaaaaaaapaldaava",
+    "aaavaadaaaaalaaa",
+    "adsssaaaasssadlv",
+    "aaaavaaadaaaaaaa",
+    "aaadaaaaaaaaaaad",
+    "aaaaavaaaadaaaaa",
+    "aaaaadaaaaaaaaaa",
+    "dasssavaasssdaaa",
+    "aaaaaaadaaaaaaaa",
+    "aadaaapvaaaaaada",
+    "alaaaaaaadaaaaaa"
+  ] },
+  "tile-adoberoof": { w: 16, h: 16, pal: {"a":"#b3a06e","b":"#bcae7c","c":"#a8945f","d":"#9c8a56","l":"#cfc096","j":"#6e6240","k":"#8a7a4c"}, rows: [
+    "lllllllljllllllj",
+    "aaaaaaaajdbbbbbj",
+    "aaakaaaajbbbbbbj",
+    "aaaaaaaajbbbbbbj",
+    "jjjjjjjjjjjjjjjj",
+    "llllljlllllllllj",
+    "aaaaajccckcccccj",
+    "aaaaajdccccccccj",
+    "aaaaajcccccckccj",
+    "jjjjjjjjjjjjjjjj",
+    "llllllllllljlllj",
+    "bbbbdbbbbbbjaaaj",
+    "bbbbbbbbbbbjadaj",
+    "bbbdbbbbbbbjaaaj",
+    "bbbbbbbbbbbjdaaj",
+    "jjjjjjjjjjjjjjjj"
+  ] },
+  "tile-prop-cookpot": { w: 16, h: 16, pal: {"g":"#008100","G":"#003f00","w":"#dfe8dd","i":"#26262b","r":"#3d3d44","l":"#4a4a52","t":"#2a2a2e","f":"#f2a541","e":"#e07b24","h":"#6e5230","m":"#8a8a92"}, rows: [
+    "GgggggggggggGggg",
+    "gggggggwgggggggg",
+    "ggGgggggwgwgggGg",
+    "gggggggwgwgggggg",
+    "ggggGgggwgwggggg",
+    "gggggggwgwgGgggg",
+    "ggggggGgggggghgg",
+    "gGggrrrrrrrrrGgg",
+    "gggggiliiiiihggg",
+    "gggGiiiliiiiiggG",
+    "ggggiiliiiiiiggg",
+    "gggggiiiiiiigggg",
+    "GggggtggfggtGggg",
+    "ggggtggfefggtggg",
+    "ggGgtggegeggtgGg",
+    "gggggGGggGGGgggg"
+  ] },
+  "tile-prop-chartstand": { w: 16, h: 16, pal: {"g":"#008100","G":"#003f00","f":"#6e5230","b":"#5a4028","c":"#e8dcbb","s":"#3a7d8c","u":"#b34a1e","n":"#2a3a4a"}, rows: [
+    "GgggggggggggGggg",
+    "gggggggGgggggggg",
+    "ggGbbbbbbbbbbbGg",
+    "gggfcscccccncfgg",
+    "gggfcsccccnnnfgg",
+    "gggfccscuucncfgg",
+    "gggfccscccuucfgg",
+    "gGgfcscccccccfgg",
+    "gggfccscnucccfgg",
+    "gggfccsccccccfgG",
+    "gggfffffffffffgg",
+    "gggggbggbggbgggg",
+    "Ggggbgggbgggbggg",
+    "ggggbggGggggbggg",
+    "ggGgGGgggggGGgGg",
+    "gggggggggGgggggg"
+  ] },
   "partner-back-bob": { base: "partner-back", w: 64, h: 64, pal: {}, shiftY: 2 },
   "partner-front-bob": { base: "partner-front", w: 64, h: 64, pal: {}, shiftY: 2 },
   "abomasnow-back-bob": { base: "abomasnow-back", w: 64, h: 64, pal: {}, shiftY: 2 },
@@ -117931,6 +118050,9 @@ for (const k of T53_FLOOR_KINDS) TILE_ART[k] = 'tile-' + k;
 for (const k of T54_PROP_KINDS) TILE_ART[k] = 'tile-prop-' + k;
 for (const k of T54_WALL_KINDS) TILE_ART[k] = 'tile-' + k;
 for (const k of T54_FLOOR_KINDS) TILE_ART[k] = 'tile-' + k;
+for (const k of T55_PROP_KINDS) TILE_ART[k] = 'tile-prop-' + k;
+for (const k of T55_WALL_KINDS) TILE_ART[k] = 'tile-' + k;
+for (const k of T55_FLOOR_KINDS) TILE_ART[k] = 'tile-' + k;
 // Premium+ W6 (TX-3/PL-1): door-open frames, authored in TX-3 for every
 // door kind. The warp-fade engine that plays them lands in W7 — W6
 // wires the frames (this registry + cache.doorOpen + doorOpenCanvas)
@@ -119840,6 +119962,12 @@ function resolveTileLayers(cache, kind, x, y, kindAt, t, phase, mapId) {
     // in).
     case 'listboard':
     case 'coilbollard':
+    // Wave T55: Wildreach's cook pot and its chart stand
+    // composite over their grass the same way (both arts are
+    // fully opaque — the town grass is baked in at its measured
+    // colours).
+    case 'cookpot':
+    case 'chartstand':
     // Wave T17: the radio mast composites over its compound grass too.
     case 'radiomast': {
       // Object tiles carry transparent surrounds (Wave 1): lay the ground
@@ -127021,6 +127149,21 @@ const WALKABLE = new Set(['.', ',', 'D', 'E', 'C', 'F', 'J', 'K', '1', '2', 'V',
   // 876-879 + 888-891 + 900-903 (T52); the parallel T53 claim
   // holds 912-915; 904-911 + 916-923 stay empty.)
   ...[924]
+    .map((i) => String.fromCodePoint(0x1E00 + i)),
+  // Wave T55: the hardpanfloor char (U+1E00+936, tiles.mjs
+  // T55_KIND_DEFS) is walkable street material — Wildreach's
+  // hard-packed sand-and-gravel, swapped onto the town's tg2
+  // street cells (the front street, the hard road, the Palmside
+  // road, the cook's lane, Wren's spur, the cottage step-offs
+  // and the exit/landing cells — all shipped walkable as tg2),
+  // so floor stays floor. (Indices 936-939 per the Director's
+  // index ruling: main's kinds run 594-636 + 645-648 + 660-662 +
+  // 672-675 + 684-687 + 696-699 + 708-711 + 720-724 + 732-736 +
+  // 744-748 + 756-759 + 768-771 + 780-783 + 792-795 + 804-807 +
+  // 816-819 + 828-831 + 840-843 + 852-855 + 864-868 + 876-879 +
+  // 888-891 + 900-903 + 912-915; the parallel T54 claim holds
+  // 924-927; 928-935 stay empty.)
+  ...[936]
     .map((i) => String.fromCodePoint(0x1E00 + i))]);
 
 // Trainer definitions for the slice.
@@ -160611,20 +160754,21 @@ const MAPS9 = {
     "rows": [
       "΅΅΅`΅΅΅΅΅΅`΅΅ῬῬ΅΅΅`΅΅΅΅΅",
       "΅ῬῬῬῬῬῬῬῬῬῬῬῬῬῬῬῬῬῬῬῬῬῬ΅",
-      "΅ῬῬjklmῬῬdeefῬῬῲῲῲῬῬῬῬῬ΅",
+      "΅ῬῬjklmῬῬdeefῬῬ↩↩↩ῬῬῬῬῬ΅",
       "΅ῬῬAJKAῬῬP12PῬῬῳsῳῬῬῬῬῬ΅",
-      "΅῭῭῭῭῭῭῭῭῭῭῭῭῭῭῭῭῭῭ῬῬῬῬ΅",
-      "΅῭S῭῭῭῭῭῭῭῭῭῭῭῭῭῭῭῭ῬῬῬῬ΅",
-      "΅῭῭῭ῬῬῬῬῬῬῬ῭῭῭῭ῬῬῬ῭ῬῬῬῬ΅",
-      "΅῭῭῭ῬῬῬῬῬῬῬῬ῭῭῭῭῭῭῭ῬῬῬῬ΅",
-      "῭῭῭῭῭῭῭῭῭῭῭῭῭῭῭῭῭῭῭ῬῬῬῬῬ",
-      "῭῭῭῭῭῭῭῭῭῭῭῭῭῭῭῭῭῭῭ῬῬῬῬῬ",
-      "΅Ῥ῭῭ῬῬῬῬῬῬῬ῭῭῭῭ῬῬῬ῭ῬῬῬῬ΅",
-      "΅Ῥ῭῭ῬῬῬῬῬῬῬ῭῭῭῭ῬῬῬ῭ῬῬῬῬ΅",
-      "΅Ῥ῭῭ῬῬῬῬῬῬῬ῭῭῭῭ῬῬῬῬῬῬῬῬ΅",
-      "΅Ῥ῭῭ῬῬῬῬῬῬῬ῭῭῭῭ῬῬῬ῭ῬῬῬῬ΅",
-      "΅Ῥ῭῭῭῭῭῭῭῭῭῭῭῭῭῭῭῭῭ῬῬῬῬ΅",
-      "΅΅΅`΅΅΅΅΅΅`΅΅῭῭΅΅΅`΅΅΅΅΅",
+      "΅↨↨↨↨↨↨↨↨↨↨↨↨↨↨↨↨↨↨↨↨↨↨΅",
+      "΅ῬSῬῬῬῬῬῬῬῬ↨SῬῬῬῬῬῬ↩↩↩Ῥ΅",
+      "΅ῬῬῬῬῬῬῬῬῬῬ↨ῬῬῬῬῬῬῬῳsῳῬ΅",
+      "΅ῬῬSῬῬῬῬῬῬ↪↨ῬῬῬῬῬῬῬῬ↨ῬῬ΅",
+      "↨↨↨↨↨↨↨↨↨↨↨↨↨↨↨↨↨↨↨↨↨↨↨Ῥ",
+      "↨↨↨↨↨↨↨↨↨↨↨↨↨↨↨↨↨↨↨↨↨↨↨Ῥ",
+      "΅ῬῬῬῬῬῬῬῬῬῬῬῬ↨↨ῬῬῬ↨ῬῬῬῬ΅",
+      "΅ῬῬῬῬ↩↩↩ῬῬῬῬῬ↨↨ῬῬ↫↨ῬῬῬῬ΅",
+      "΅ῬῬῬῬῳsῳῬῬῬῬῬ↨↨ῬῬῬῬῬῬῬῬ΅",
+      "΅ῬῬῬῬS↨ῬῬῬῬῬῬ↨↨ῬῬῬῬῬῬῬῬ΅",
+      "΅ῬῬῬ↨↨↨↨↨↨↨↨↨↨↨↨↨↨ῬῬῬῬῬ΅",
+      "΅΅΅`΅΅΅΅΅΅`΅΅↨↨΅΅΅`΅΅΅΅΅"
+
     ],
     "warps": [
       {"x": 4, "y": 3, "to": {"map": "center", "x": 4, "y": 4}, "via": {"map": "survival-area", "x": 4, "y": 4}},
@@ -160639,9 +160783,12 @@ const MAPS9 = {
     ],
     "signs": [
       {"x": 2, "y": 5, "text": "WILDREACH — A working town at the Zone’s waist. The hard road west, the island water south, and a Stark-shaped shadow over the roofs at noon."},
+      {"x": 12, "y": 5, "text": "WILDREACH — A working town at the Zone’s waist. The hard road west, the island water south, and a Stark-shaped shadow over the roofs at noon."},
+      {"x": 3, "y": 7, "text": "WILDREACH — A working town at the Zone’s waist. The hard road west, the island water south, and a Stark-shaped shadow over the roofs at noon."},
+      {"x": 5, "y": 13, "text": "WILDREACH — A working town at the Zone’s waist. The hard road west, the island water south, and a Stark-shaped shadow over the roofs at noon."},
     ],
     "npcs": [
-      {"x": 3, "y": 5, "name": "MART CLERK", "art": "clerk", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#4a3a2a", "dialogue": ["Wildreach Mart — stocked for the road ahead."], "mart": {"stock": ["ultraball", "hyperpotion", "maxpotion", "fullheal", "revive", "escaperope"]}},
+      {"x": 9, "y": 4, "name": "MART CLERK", "art": "clerk", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#4a3a2a", "dialogue": ["Wildreach Mart — stocked for the road ahead."], "mart": {"stock": ["ultraball", "hyperpotion", "maxpotion", "fullheal", "revive", "escaperope"]}},
       {"x": 11, "y": 7, "name": "TRAIL COOK BORIN", "art": "worker", "skin": "#f0c8a0", "shirt": "#3a7a4a", "pants": "#4a3a2a", "hair": "#2a1a0a", "dialogue": ["I feed everyone who walks in standing up. The Zone sends me the rest by stretcher, joking. Mostly joking.", "The Palmside road runs by water — cliffs make the land way a rumour. Sail it or swim it; the town recommends the first."]},
       {"x": 18, "y": 12, "name": "CARTOGRAPHER WREN", "art": "scientist", "skin": "#c89878", "shirt": "#2a7a6a", "pants": "#3a3a4a", "hair": "#7a4a1a", "dialogue": ["I am re-charting this island at walking pace. It keeps being bigger than the charts, rudely.", "Stark's crater stone is the island's first fact. Everything else is commentary."]},
     ],
@@ -191304,6 +191451,6 @@ if (typeof Game !== 'undefined') Object.assign(Game.prototype, {
 });
 
 </script>
-<!-- contentHash:e1ae3e595bbfb9809afcbdb28dc2c86a578469062f9244843e43147446b68b1b -->
+<!-- contentHash:f5f51c82a534851fe0bfac3308ed1c92686ab404ceb7540209417453796717e5 -->
 </body>
 </html>
