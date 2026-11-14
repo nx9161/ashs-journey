@@ -486,7 +486,7 @@ body.desktop.showtouch .rtmoves{display:flex}
 .veil-plate{background-color:var(--paper);background-image:var(--rivets);border:2px solid var(--frame);outline:2px solid var(--frame2);outline-offset:-5px;border-radius:3px;padding:26px 38px 20px;text-align:center}
 .veil-title{font-family:var(--font-display);font-size:28px;font-weight:bold;letter-spacing:1px;color:var(--navy)}
 .veil-rule{height:3px;background:var(--gold);margin:10px 6px 12px}
-.veil-sub{font-size:13px;font-weight:bold;letter-spacing:4px;color:var(--lcdink);background:var(--lcd);border:2px solid #46543a;border-radius:2px;padding:3px 10px 3px 14px;display:inline-block}
+.veil-sub{font-size:14px;font-weight:bold;letter-spacing:4px;color:var(--lcdink);background:var(--lcd);border:2px solid #46543a;border-radius:2px;padding:3px 10px 3px 14px;display:inline-block}
 /* W-UI: thin frame-coloured scrollbars — long menus (main menu, KinDex)
    used to scroll with no visible affordance at all. */
 .menu,.sumcols,.pcpanel{scrollbar-width:thin;scrollbar-color:var(--frame2) transparent}
