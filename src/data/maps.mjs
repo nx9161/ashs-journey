@@ -456,6 +456,7 @@ export const WALKABLE = new Set(['.', ',', 'D', 'E', 'C', 'F', 'J', 'K', '1', '2
   // gravelfloor char (U+1E00+596) likewise in Redwood Town, so
   // floor stays floor in both.
   ...[594, 596]
+    .map((i) => String.fromCodePoint(0x1E00 + i)),
   // Wave T26: the cutstonefloor char (U+1E00+599, tiles.mjs
   // T26_KIND_DEFS) is walkable street material — Copperton's
   // avenue stone, swapped onto the town's street cells (which
