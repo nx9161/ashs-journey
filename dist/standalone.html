@@ -3638,6 +3638,43 @@ T40_KIND_DEFS.forEach(([kind], i) => {
 const T40_PROP_KINDS = T40_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
 const T40_WALL_KINDS = T40_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
 const T40_FLOOR_KINDS = T40_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
+// Wave T41: Shingle Town's own kit — "Shell Shingle & Raked
+// Shingle-Sand": the shellfloor (raked shell-sand street — pale
+// sand combed into fine grooves and strewn with shell chips,
+// the registered street material), the shellroof (scalloped
+// pale shell-shingle courses worn by the House and the town's
+// two facade cottages), the tideslug (the TIDESLUG of Shingle
+// Beach beside ANA's post — her dialogue is its caption) and
+// the tidelog (a bleached driftwood log on the west beach —
+// the beach sign's own driftwood). Indices 768-771 per the
+// Director's index ruling (main's kinds run 594-636 + 645-648 +
+// 660-662 + 672-675 + 684-687 + 696-699 + 708-711 + 720-724 +
+// 732-736 + 744-748; the parallel T40 claim holds 756-759 on
+// its branch; 606-607 + 637-644 + 649-659 + 663-671 + 676-683 +
+// 688-695 + 700-707 + 712-719 + 725-731 + 737-743 + 749-767
+// stay empty), verified free against origin/main, TILE_CHARS
+// and every map row. The wave also RESTORES the Center stamp's
+// missing east half (l/m/K/A — shipped as bare tg2 mud, its
+// K-door warp firing from a mud cell; no new index — the stamp
+// chars already exist). Authored art:
+// assets/sprites/pix/tiles/tile-shellfloor.pix,
+// tile-shellroof.pix, tile-prop-tideslug.pix,
+// tile-prop-tidelog.pix. (WAVE-T41-SHINGLE-PLAN.md.)
+const T41_KIND_DEFS = [
+  ['shellfloor', 'floor'],
+  ['shellroof', 'wall'],
+  ['tideslug', 'prop'],
+  ['tidelog', 'prop'],
+];
+const T41_KIND_CHARS = {};
+T41_KIND_DEFS.forEach(([kind], i) => {
+  const ch = String.fromCodePoint(0x1E00 + 768 + i);
+  T41_KIND_CHARS[kind] = ch;
+  TILE_CHARS[ch] = kind;
+});
+const T41_PROP_KINDS = T41_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
+const T41_WALL_KINDS = T41_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
+const T41_FLOOR_KINDS = T41_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
 const SINNOH_TOWN_GROUND_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg);
 const SINNOH_TOWN_GROUND2_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg2);
 // TX-3: the 8 gym exteriors by town (original type-accent motifs).
@@ -110997,6 +111034,78 @@ const ART = {
     "fwwfwwfwwfwwfwwf",
     "ffffffffffffffff"
   ] },
+  "tile-shellfloor": { w: 16, h: 16, pal: {"p":"#d9c491","g":"#b4a17e","w":"#f2ead6","k":"#e3a48f","s":"#8d8272","n":"#e6d7ac"}, rows: [
+    "wppppppppppppnpp",
+    "pppppnpppppppppp",
+    "pppppwpspknppppp",
+    "ggggpggggggggggn",
+    "pppppppnppwpppsp",
+    "pppsppppppppnppp",
+    "ppppnppppppppppw",
+    "ggpggggggggggpgg",
+    "pnppppppppppppnp",
+    "ppwpppnkpppppppp",
+    "ppppppsppppnpppp",
+    "pggggggggggpgggg",
+    "ppppppppnppppspp",
+    "npspppppppppwnpp",
+    "pppppnpppppppppp",
+    "gggggggggsgggggg"
+  ] },
+  "tile-shellroof": { w: 16, h: 16, pal: {"p":"#d9c491","l":"#e8dcbc","g":"#b4a17e","d":"#a08b62","w":"#f2ead6"}, rows: [
+    "llllllllllllllll",
+    "gpppgpwpgpppgppp",
+    "gpppgpppgpppgppp",
+    "gddggddggddggddg",
+    "llllllllllllllll",
+    "ppgpppgpppgpppgp",
+    "ppgpppgpppgpppgp",
+    "dggddggddggddggd",
+    "llllllllllllllll",
+    "gpppgppwgpppgppp",
+    "gpppgpppgpppgwpp",
+    "gddggddggddggddg",
+    "llllllllllllllll",
+    "ppgpppgpppgpppgp",
+    "ppgpppgpppgpppgp",
+    "dggddggddggddggd"
+  ] },
+  "tile-prop-tideslug": { w: 16, h: 16, pal: {"p":"#c6b388","b":"#a69274","n":"#d7c699","t":"#3f8f8a","l":"#7fb8ad","o":"#2a5f5c","k":"#e8875a","w":"#f2ead6"}, rows: [
+    "bppppppbppppppbp",
+    "pppppbnpppppbppp",
+    "pppbppppppbpnppp",
+    "pbppppppbppppppb",
+    "pppppkbkpkpppkpp",
+    "ppppbopopopbtopp",
+    "ppbppoooooopoppp",
+    "bpppottttttpppbp",
+    "pppottttttttoppp",
+    "pnpttttttttttopp",
+    "pbpltttttttttppb",
+    "pppplllllllllbwp",
+    "ppwpbppppwpbpppp",
+    "ppbppppppbpppppp",
+    "bppppppbppppppbp",
+    "pppppbppppppbppp"
+  ] },
+  "tile-prop-tidelog": { w: 16, h: 16, pal: {"p":"#c6b388","b":"#a69274","n":"#d7c699","w":"#b39b7d","l":"#cdb69a","g":"#8a7358","r":"#71523d","s":"#f2ead6"}, rows: [
+    "bppppppbppppppbp",
+    "pppppbnpppppbppp",
+    "pppbppppppbpnppp",
+    "pbppppppbppppppb",
+    "ppppppbppppppbpp",
+    "ppppbppppppbpppp",
+    "ppbppppppbpppppp",
+    "blllllllllllllgp",
+    "pwwggwrwgggwwgrp",
+    "pgwwwgrwwwwgwgrp",
+    "pgwwwwwwwwwwwwgb",
+    "ppbbbbbbbbbbbbpp",
+    "pppssppppppnpppp",
+    "ppbppppppbpppppp",
+    "bppppppbppppppbp",
+    "pppppbppppppbppp"
+  ] },
   "partner-back-bob": { base: "partner-back", w: 64, h: 64, pal: {}, shiftY: 2 },
   "partner-front-bob": { base: "partner-front", w: 64, h: 64, pal: {}, shiftY: 2 },
   "abomasnow-back-bob": { base: "abomasnow-back", w: 64, h: 64, pal: {}, shiftY: 2 },
@@ -116336,6 +116445,11 @@ for (const k of T39_FLOOR_KINDS) TILE_ART[k] = 'tile-' + k;
 for (const k of T40_PROP_KINDS) TILE_ART[k] = 'tile-prop-' + k;
 for (const k of T40_WALL_KINDS) TILE_ART[k] = 'tile-' + k;
 for (const k of T40_FLOOR_KINDS) TILE_ART[k] = 'tile-' + k;
+// Wave T41: Shingle Town's own kit kinds take their authored
+// shell tiles (the Shell Shingle & Raked Shingle-Sand kit).
+for (const k of T41_PROP_KINDS) TILE_ART[k] = 'tile-prop-' + k;
+for (const k of T41_WALL_KINDS) TILE_ART[k] = 'tile-' + k;
+for (const k of T41_FLOOR_KINDS) TILE_ART[k] = 'tile-' + k;
 // Premium+ W6 (TX-3/PL-1): door-open frames, authored in TX-3 for every
 // door kind. The warp-fade engine that plays them lands in W7 — W6
 // wires the frames (this registry + cache.doorOpen + doorOpenCanvas)
@@ -118176,6 +118290,11 @@ function resolveTileLayers(cache, kind, x, y, kindAt, t, phase, mapId) {
     // are fully opaque — the town grass is baked in).
     case 'sapling':
     case 'cloverbed':
+    // Wave T41: Shingle's tideslug and its bleached driftwood
+    // log composite over their beach the same way (both arts
+    // are fully opaque — the beach sand is baked in).
+    case 'tideslug':
+    case 'tidelog':
     // Wave T17: the radio mast composites over its compound grass too.
     case 'radiomast': {
       // Object tiles carry transparent surrounds (Wave 1): lay the ground
@@ -125173,6 +125292,17 @@ const WALKABLE = new Set(['.', ',', 'D', 'E', 'C', 'F', 'J', 'K', '1', '2', 'V',
   // 708-711 + 720-724 + 732-736 + 744-748 (T39); the gaps
   // stay empty.)
   ...[756]
+    .map((i) => String.fromCodePoint(0x1E00 + i)),
+  // Wave T41: the shellfloor char (U+1E00+768, tiles.mjs
+  // T41_KIND_DEFS) is walkable street material — Shingle
+  // Town's raked shell-sand, swapped onto the town's street
+  // cells (which shipped as walkable tg2 mud or walkable
+  // ground), so floor stays floor. (Indices 768-771 per the
+  // Director's index ruling: main's kinds run 594-636 +
+  // 645-648 + 660-662 + 672-675 + 684-687 + 696-699 + 708-711 +
+  // 720-724 + 732-736 + 744-748; the parallel T40 claim holds
+  // 756-759; gaps stay empty.)
+  ...[768]
     .map((i) => String.fromCodePoint(0x1E00 + i))]);
 
 // Trainer definitions for the slice.
@@ -154220,24 +154350,24 @@ const MAPS9 = {
     "music": "viridian-theme",
     "weather": "clear",
     "rows": [
-      "ᾦᾦᾦᾧᾦᾦᾦᾦᾦᾦᾧᾦᾦᾥᾥᾦᾦᾦᾧᾦᾦᾦᾦᾦᾦᾧᾦᾦ",
-      "ᾦẅᾤᾤᾤᾤᾤᾤᾤᾤᾧᾤᾤᾥᾥᾥᾥoᾤᾤᾤᾤᾤᾤᾧᾤᾤᾦ",
-      "ᾦᾤᾤdeeeefᾤᾤjkᾥᾥᾥᾥdeefᾤᾤᾤᾤᾤᾤᾦ",
-      "ᾦSᾥZZ45ZZᾤᾤAJᾥᾥᾥᾥP12Pᾤᾤᾤᾤᾤᾤᾦ",
-      "ᾦᾥᾥᾥᾥᾥᾥᾥᾥᾥᾥᾥᾥᾥᾥᾥᾥᾥᾥᾥᾤnᾤᾤᾤᾤᾤᾦ",
-      "ᾦᾥᾤᾥᾥᾥᾥᾥᾥᾥᾥᾥᾥᾥᾥᾥᾥᾥᾥᾥFᾤᾤᾤᾤᾤᾤᾦ",
-      "ᾦᾥᾥᾥᾤᾥᾥᾥoᾤᾥᾥᾤᾥᾥᾥᾥᾤᾥᾥᾤᾤnᾤᾤᾤᾤᾦ",
-      "ᾦᾥᾥᾥᾤᾥᾥᾥnᾥᾥᾤᾥᾥᾥᾥᾥᾥᾥᾥᾤᾤᾤᾤᾤᾤᾤᾦ",
-      "ᾥᾥᾥᾥᾥᾥᾥᾥᾥᾥᾥᾥᾥᾥᾥᾥᾥᾥᾥᾥoᾤᾤᾤᾤᾤᾤᾤ",
-      "ᾥᾥᾥᾥᾥᾥᾥᾥᾥᾥᾥᾥᾥᾥᾥᾥᾥᾥᾥᾥᾤᾤᾤᾤᾤᾤᾤᾤ",
-      "ᾦᾥᾥᾥᾥᾥᾥᾥᾤᾤᾥᾥᾤᾥᾥᾥᾥnᾥᾥᾤᾤᾤᾤᾤᾤᾤᾦ",
-      "ᾦᾥᾥᾪᾪᾪᾥᾥᾥᾥᾥᾥᾥᾥᾥᾥᾥᾥᾥᾥFᾤᾤᾤᾤᾤᾤᾦ",
-      "ᾦᾥᾥᾫsᾫᾥᾥᾥᾥᾥᾥᾥᾥᾥᾥSᾥᾥᾥᾧFoᾤᾤᾤᾤᾦ",
-      "ᾦ„„„„„„„„„„„„ᾥᾥ„„„„„„„„„„„„ᾦ",
+      "ᾦᾦᾦᾧᾦᾦᾦᾦᾦᾦᾧᾦᾦ℀℀ᾦᾦᾦᾧᾦᾦᾦᾦᾦᾦᾧᾦᾦ",
+      "ᾦẅᾤᾤᾤᾤᾤᾤᾤᾤᾧᾤᾤ℀℀℀℀oᾤᾤᾤᾤᾤᾤᾧᾤᾤᾦ",
+      "ᾦᾤᾤdeeeefᾤᾤjklmS℀deefᾤᾤᾤᾤᾤᾤᾦ",
+      "ᾦSᾤZZ45ZZᾤᾤAJKAᾤ℀P12Pᾤᾤᾤᾤᾤᾤᾦ",
+      "ᾦ℀℀℀℀℀℀℀℀℀℀℀℀℀℀℀℀℀℀℀℀℀℀℀℀℀℀ᾦ",
+      "ᾦ℀ᾤᾤᾤᾤ℀S℀ᾤS℀ᾤᾤᾤSᾤᾤᾤᾤFᾤᾤᾤᾤᾤᾤᾦ",
+      "ᾦ℀℁℁℁ᾤ℀ᾤ℀ᾤᾤ℀ᾤᾤᾤᾤᾤᾤᾤᾤᾤᾤn℁℁℁ᾤᾦ",
+      "ᾦ℀ᾫsᾫᾤ℀ᾤ℀ᾤᾤᾤᾤᾤᾤᾤᾤᾤᾤᾤᾤᾤᾤᾫsᾫᾤᾦ",
+      "℀℀℀℀ᾤᾤ℀ᾤᾤᾤᾤᾤᾤᾤᾤᾤᾤᾤᾤᾤo℀℀℀℀ᾤᾤᾤ",
+      "℀℀Sᾤᾤᾤ℀ᾤᾤᾤᾤᾤᾤᾤᾤᾤᾤᾤᾤᾤᾤᾤᾤᾤ℀ᾤᾤᾤ",
+      "ᾦ℀ᾤᾤᾤᾤᾤᾤᾤᾤᾤᾤᾤᾤᾤᾤᾤnᾤᾤᾤᾤᾤᾤ℀ᾤᾤᾦ",
+      "ᾦ℀ᾤ℁℁℁ᾤSᾤᾤSᾤᾤᾤᾤᾤᾤᾤSᾤFᾤᾤᾤ℀ᾤᾤᾦ",
+      "ᾦ℀ᾤᾫs℀℀℀℀℀℀℀℀℀℀℀S℀℀℀ᾧFoS℀ᾤᾤᾦ",
+      "ᾦ„„S„„„℃„„„„„„„„„„ℂ„„„„„„„„ᾦ",
       "ᾦ„„ẞẞẞ„„ẞẞ„„ẞ†‟„„ẞ„„ẞẞẞẞẞẞẞᾦ",
-      "ᾦ„„ẞẞẞ„„„„„„„†ᾥᾤ„„„„ẞẞẞẞẞẞẞᾦ",
+      "ᾦ„„ẞẞẞ„„„„„„„†‟S„„„„ẞẞẞẞẞẞẞᾦ",
       "ᾦ„„„„„„„„„„„„†‟„„„„„ẞẞẞẞẞẞẞᾦ",
-      "ᾦᾦᾦᾧᾦᾦᾦᾦᾦᾦᾧᾦᾦᾥᾥᾦᾦᾦᾧᾦᾦᾦᾦᾦᾦᾤᾦᾦ"
+      "ᾦᾦᾦᾧᾦᾦᾦᾦᾦᾦᾧᾦᾦ℀℀ᾦᾦᾦᾧᾦᾦᾦᾦᾦᾦᾤᾦᾦ"
     ],
     "warps": [
       {"x": 5, "y": 3, "to": {"map": "rowan-lab", "x": 8, "y": 10}},
@@ -154260,10 +154390,17 @@ const MAPS9 = {
       {"x": 7, "y": 11, "text": "SHINGLE TOWN — West: ROUTE 201 · North: ROUTE 202 · South: ROUTE 219."},
       {"x": 10, "y": 11, "text": "SHINGLE TOWN — West: ROUTE 201 · North: ROUTE 202 · South: ROUTE 219."},
       {"x": 18, "y": 11, "text": "SHINGLE TOWN — West: ROUTE 201 · North: ROUTE 202 · South: ROUTE 219."},
-      {"x": 15, "y": 15, "text": "SHINGLE TOWN — West: ROUTE 201 · North: ROUTE 202 · South: ROUTE 219."}
+      {"x": 15, "y": 15, "text": "SHINGLE TOWN — West: ROUTE 201 · North: ROUTE 202 · South: ROUTE 219."},
+      {"x": 15, "y": 2, "text": "SHINGLE TOWN — West: ROUTE 201 · North: ROUTE 202 · South: ROUTE 219."},
+      {"x": 15, "y": 5, "text": "SHINGLE TOWN — West: ROUTE 201 · North: ROUTE 202 · South: ROUTE 219."},
+      {"x": 2, "y": 9, "text": "SHINGLE TOWN — West: ROUTE 201 · North: ROUTE 202 · South: ROUTE 219."},
+      {"x": 3, "y": 13, "text": "SHINGLE TOWN — West: ROUTE 201 · North: ROUTE 202 · South: ROUTE 219."},
+      {"x": 23, "y": 12, "text": "SHINGLE TOWN — West: ROUTE 201 · North: ROUTE 202 · South: ROUTE 219."},
+      {"x": 7, "y": 5, "text": "SHINGLE TOWN — West: ROUTE 201 · North: ROUTE 202 · South: ROUTE 219."},
+      {"x": 10, "y": 5, "text": "SHINGLE TOWN — West: ROUTE 201 · North: ROUTE 202 · South: ROUTE 219."}
     ],
     "npcs": [
-      {"x": 3, "y": 5, "name": "MART CLERK", "art": "clerk", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#4a3a2a", "dialogue": ["Shingle Town Mart — stocked for the road ahead."], "mart": {"stock": ["pokeball", "greatball", "potion", "superpotion", "antidote", "awakening"]}},
+      {"x": 17, "y": 4, "name": "MART CLERK", "art": "clerk", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#4a3a2a", "dialogue": ["Shingle Town Mart — stocked for the road ahead."], "mart": {"stock": ["pokeball", "greatball", "potion", "superpotion", "antidote", "awakening"]}},
       {"x": 11, "y": 7, "name": "LAB AIDE FERN", "art": "aide", "skin": "#e8b888", "shirt": "#3a6ac0", "pants": "#2a3a4a", "hair": "#1a1a1a", "dialogue": ["The Professor's bark is worse than his fieldwork, and his fieldwork once involved a STRAPTOR.", "Revelry's towers are a walk north. The city never sleeps; it broadcasts."]},
       {"x": 19, "y": 13, "name": "BEACHCOMBER ANA", "art": "lady", "skin": "#d8a878", "shirt": "#7a4a8a", "pants": "#2a2a3a", "hair": "#c0c0c0", "dialogue": ["TIDESLUG change colour with the coast here. The lab writes it down; the beach just does it.", "Clover is west, past the first grass of the journey."]},
       {"x": 6, "y": 10, "name": "YOUNGSTER RUE", "art": "youngster", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#4a3a2a", "dialogue": ["I race the BRINEGULL along the shore. The BRINEGULL are winning on points.", "Route 202's grass rustles at knee height. That's the sound of starting."]},
@@ -189408,6 +189545,6 @@ if (typeof Game !== 'undefined') Object.assign(Game.prototype, {
 });
 
 </script>
-<!-- contentHash:bcd1b0d5a5ca3c436ee2e7c54ee4ea1b454c22a8e35d58c91e6eaf97666aab30 -->
+<!-- contentHash:b77b41b2391e3663a32a41a7dbe68ee0d482aa13bb63a670238769e76d0f6bde -->
 </body>
 </html>
