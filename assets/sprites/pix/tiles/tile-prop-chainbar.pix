@@ -1,0 +1,36 @@
+# Wave T35 (Lotus Cove kit): chainbar — the harbour chain barrier: two
+# black iron posts, a sagging iron chain, and a small nailed notice
+# board at the dip. The town's own HARBOUR CAVES sign says the mouths
+# are 'both chained and notice-boarded' — this is that dressing made
+# visible on the north cliff brow, flanking the cave mouths at (25,1)
+# and (27,1). Fully opaque: the cliff rock is baked in (measured
+# #8b8b9b / #71523d from the shipped render).
+# (NO-SAME-KIT law; WAVE-T35-LOTUSCOVE-PLAN.md.)
+PIX tile-prop-chainbar 16 16
+drrrrrrdrrrrrldr
+rrrrrdrrrrrrdrrr
+rrrdrrrrrrdrrrrr
+rdlrrrrrdrrrrrrd
+rrrrrrdlrrrrrdrr
+rrCrdrrrrrrdlCrr
+rCkrlrrrrdrrrgCr
+drigrrrdrlrrkidr
+rlirkgrrrrkgdilr
+rridrrkgkgdrrirr
+rdirrrnwwnrlrird
+rrilrrwppwrrrirr
+rrirdrwppwrdrirr
+lrirrrwwwwrrrirr
+drirrlrdrrrrridr
+rrirrdrrrrlrdirr
+PAL
+r #8b8b9b rock-face
+d #71523d rock-shade
+l #a5a5b5 rock-light
+i #2e2a33 iron-post
+C #4a4450 post-cap
+k #1e1a22 chain-dark
+g #6a6472 chain-light
+w #8a6a42 board-wood
+p #e8ddc0 notice-paper
+n #3a2c1c nail

@@ -1,0 +1,33 @@
+# Wave T35 (Lotus Cove kit): lotusroof — Lotus Cove City's own roof kind.
+# LAVENDER BARREL TILE: overlapping courses of half-round tiles in the
+# town style's own lavender (#9a7fb8 body, #bfa8d4 lit crowns, #66538a
+# seams), courses scalloping every 4px, tile ends staggered course to
+# course. Half-round scalloped courses are structurally unlike every
+# shipped roof: Hushmoor's flat shingle rectangles, Blossom's sakura
+# shingles, Copperton's copper-seamed slabs, Eldergrove's banded
+# thatch, Fairhaven's stitched canvas, Wildflower's open trellis,
+# Highbranch's leaf scales. Worn by the Contest Hall, the Department
+# Store and the town's two facade cottages.
+# (NO-SAME-KIT law; WAVE-T35-LOTUSCOVE-PLAN.md.)
+PIX tile-lotusroof 16 16
+sltlsltlsltlsltl
+sltlsltlsltlsltl
+sdllsdllsdllsdll
+ssssssssssssssss
+tlsltlsltlsltlsl
+tlsltlsltlsltlsl
+llsdllsdllsddlsd
+ssssssssssssssss
+sltlsltlsltlsltl
+sdtlsltlsltlsltl
+sdldsdllsdllsdll
+ssssssssssssssss
+tlsltlsdtlsltlsl
+tlsltlsltdsltlsl
+llsdllsdllsdllsd
+ssssssssssssssss
+PAL
+l #9a7fb8 tile-body
+t #bfa8d4 tile-crown
+d #8a6fae tile-shade
+s #66538a tile-seam

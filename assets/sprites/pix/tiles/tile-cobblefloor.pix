@@ -1,0 +1,32 @@
+# Wave T35 (Lotus Cove kit): cobblefloor — Lotus Cove City's registered
+# street kind (the fleet's street kinds carry the -floor suffix; the
+# desire-path tiers key on it). COBBLE HARBOUR STONE: a mosaic of small
+# rounded river cobbles — warm grey and lavender-grey stones in pale
+# sand joints, sparse shell flecks. A round-stone mosaic is structurally
+# unlike Fairhaven's running-bond quay slabs, Blossom's large inlay
+# slabs, Copperton's square quarry flags, Lilac's bronze lattice grid,
+# Mistford's planks and Beacon's bolted decking.
+# (NO-SAME-KIT law; WAVE-T35-LOTUSCOVE-PLAN.md.)
+PIX tile-cobblefloor 16 16
+jvhvvjchccjchccj
+jvvvvjccccjccccj
+jvvvvjccccjccccj
+jjjjjjjjjjjjjjjj
+hccjchccjchccjvh
+cccjecccjccccjvv
+cccjccccjccccjev
+jjjjjjjjjjjjjjjj
+jchccjchccjehvvj
+jccccjccccjvvvvj
+jccccjccecjvvvvj
+jjjjjjjjjjjjjjjj
+hccjvhvvjchccjch
+cccjvvvvjccccjce
+ccejvvvvjccccjcc
+jjjjjjjjjjjjjjjj
+PAL
+c #a8a29a cobble-grey
+v #9d94a6 cobble-lavender
+h #d8d0c0 cobble-crown
+j #b8a888 sand-joint
+e #e8e0d0 shell-fleck

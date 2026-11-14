@@ -1448,6 +1448,35 @@ T34_KIND_DEFS.forEach(([kind], i) => {
 export const T34_PROP_KINDS = T34_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
 export const T34_WALL_KINDS = T34_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
 export const T34_FLOOR_KINDS = T34_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
+// Wave T35: Lotus Cove City's own kit kinds (Lavender Tile &
+// Cobble Harbour): the scalloped lavender barrel-tile roof on
+// its Contest Hall + Department Store stamps and facade
+// cottages, the round-cobble harbour street, the chained
+// notice-board barrier on its harbour-cave brow, and the
+// brinegull mooring post at its pier head. Indices 696-699 per
+// the Director's index ruling (main's kinds run 594-636 +
+// 645-648 + 660-662 + 672-675; the parallel T34 Highbranch
+// claim holds 684-687 on its branch; 676-683 + 688-695 stay
+// empty), verified free against origin/main, TILE_CHARS and
+// every map row. Authored art:
+// assets/sprites/pix/tiles/tile-lotusroof.pix,
+// tile-cobblefloor.pix, tile-prop-chainbar.pix,
+// tile-prop-gullpost.pix. (WAVE-T35-LOTUSCOVE-PLAN.md.)
+export const T35_KIND_DEFS = [
+  ['lotusroof', 'wall'],
+  ['cobblefloor', 'floor'],
+  ['chainbar', 'prop'],
+  ['gullpost', 'prop'],
+];
+export const T35_KIND_CHARS = {};
+T35_KIND_DEFS.forEach(([kind], i) => {
+  const ch = String.fromCodePoint(0x1E00 + 696 + i);
+  T35_KIND_CHARS[kind] = ch;
+  TILE_CHARS[ch] = kind;
+});
+export const T35_PROP_KINDS = T35_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
+export const T35_WALL_KINDS = T35_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
+export const T35_FLOOR_KINDS = T35_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
 export const SINNOH_TOWN_GROUND_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg);
 export const SINNOH_TOWN_GROUND2_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg2);
 // TX-3: the 8 gym exteriors by town (original type-accent motifs).

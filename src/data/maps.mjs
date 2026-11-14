@@ -563,6 +563,18 @@ export const WALKABLE = new Set(['.', ',', 'D', 'E', 'C', 'F', 'J', 'K', '1', '2
   // floor. (Indices 684-687, above T33's parallel 672-675 claim;
   // 606-607 stay empty.)
   ...[685]
+    .map((i) => String.fromCodePoint(0x1E00 + i)),
+  // Wave T35: the cobblefloor char (U+1E00+697, tiles.mjs
+  // T35_KIND_DEFS) is walkable street material — Lotus Cove
+  // City's round-cobble harbour stone, swapped onto the town's
+  // street cells (which shipped as walkable tg2 mud, walkable
+  // ground and — at the Route 124 surf exits — open water, the
+  // jetty-head swap of the T31 Beacon precedent), so floor
+  // stays floor. (Indices 696-699 per the Director's index
+  // ruling: main's kinds run 594-636 + 645-648 + 660-662 +
+  // 672-675; the parallel T34 claim holds 684-687; 606-607
+  // stay empty.)
+  ...[697]
     .map((i) => String.fromCodePoint(0x1E00 + i))]);
 
 // Trainer definitions for the slice.
