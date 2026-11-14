@@ -2592,6 +2592,60 @@ WD6_KIND_DEFS.forEach(([kind], i) => {
 const WD6_PROP_KINDS = WD6_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
 const WD6_WALL_KINDS = WD6_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
 const WD6_FLOOR_KINDS = WD6_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
+// ---- Wave T28 (Fairhaven City build): Canvas Market & Quay Stone ----
+// Five new kinds at idx 617-621 (U+2069-U+206D, verified free
+// in TILE_CHARS and unused by every map row; the block runs
+// T23 575, W-DIFF 577-580, W-DIFF2 581-584, T24 585-587,
+// T25 588-591, WD3 592-593, W-DIFF4 594-597, T26 598-601,
+// W-DIFF5 602-605, T27 608-612 — and 613-616 belong to
+// W-DIFF6 (slatefloor, slateroof, promfloor, glassroof for
+// Fernmere + Canopy), which finished first. Fairhaven was
+// first planned at 613-617 and RE-INDEXED to 617-621 under
+// the Director's index ruling of 2026-11-13 — before any
+// registration or map edit existed, so no cells were remapped;
+// 606-607 remain reserved-empty). Fairhaven is Maris's harbour
+// market city (HOENN_TOWN_STYLE slateport: ground #c6ad7d,
+// form 'harbor market canvas + tile'); its shipped ground was
+// 47.0% tg2 mud — the worst share yet — under a placement-
+// gates FAIL (the boardwalk pier fabric-invisible, conn
+// 56/90). Its own kit (NO-SAME-KIT law): 'canvasroof' (wall)
+// — stitched cream canvas panels over a tile ridge, in the
+// KIT_VARIANTS slateport roof tones; structurally canvas
+// sheets + ridge, not Mistford's vertical-split shakes,
+// Copperton's copper-seamed slabs or Meadowbrook's staggered
+// stone shingles. 'quayfloor' (floor) — running-bond quay
+// stone (half-offset long slabs, tar seams), the town's
+// street fabric and registered street kind (STREET_REGISTRY;
+// the fleet's street kinds carry the -floor suffix the
+// desire-path tiers key on), swapped onto every street/exit/
+// landing cell. 'marketstall' (prop) — a canvas-awning market
+// stall, eight in two rows on the shipped market ground (the
+// painting's north-street market transferred to the FAIRHAVEN
+// MARKET sign + VESK's post). 'tideboard' (prop) — the quay's
+// tide-table board (wave/sun/moon glyphs, no text), at (16,15)
+// beside the HARBOR sign. 'shiphull' (prop) — Merrick's ribbed
+// hull on its stocks at (27,5) in LIO's shipyard yard. All
+// three props fully opaque with the green baked in.
+// Authored art: assets/sprites/pix/tiles/tile-canvasroof.pix,
+// tile-quayfloor.pix, tile-prop-marketstall.pix,
+// tile-prop-tideboard.pix, tile-prop-shiphull.pix (register:
+// WAVE-T28-FAIRHAVEN-PLAN.md).
+const T28_KIND_DEFS = [
+  ['canvasroof', 'wall'],
+  ['quayfloor', 'floor'],
+  ['marketstall', 'prop'],
+  ['tideboard', 'prop'],
+  ['shiphull', 'prop'],
+];
+const T28_KIND_CHARS = {};
+T28_KIND_DEFS.forEach(([kind], i) => {
+  const ch = String.fromCodePoint(0x1E00 + 617 + i);
+  T28_KIND_CHARS[kind] = ch;
+  TILE_CHARS[ch] = kind;
+});
+const T28_PROP_KINDS = T28_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
+const T28_WALL_KINDS = T28_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
+const T28_FLOOR_KINDS = T28_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
 const SINNOH_TOWN_GROUND_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg);
 const SINNOH_TOWN_GROUND2_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg2);
 // TX-3: the 8 gym exteriors by town (original type-accent motifs).
@@ -94058,6 +94112,96 @@ const ART = {
     "ttlttdtttttttdtt",
     "dddddddddddddddd"
   ] },
+  "tile-canvasroof": { w: 16, h: 16, pal: {"c":"#d9c096","l":"#ecd9ae","s":"#a68a5c","d":"#8d6a3a","t":"#b0874f","T":"#96703f"}, rows: [
+    "tTtTtTtTtTtTtTtT",
+    "TtTtTtTtTtTtTtTt",
+    "lccccccccccccccc",
+    "cccccccccscccccc",
+    "ccclcccccccccccc",
+    "cccccccccccccccl",
+    "ccsccccccccccccc",
+    "dldldldldldldldl",
+    "lccccccccccccccc",
+    "ccccccsccccccccc",
+    "ccccccccccclcccc",
+    "clcccccccccccccc",
+    "ccccccccccccsccc",
+    "lccccccccccccccc",
+    "dldldldldldldldl",
+    "ssssssssssssssss"
+  ] },
+  "tile-quayfloor": { w: 16, h: 16, pal: {"p":"#d8c49c","l":"#ecd9ae","d":"#6e5a3e","s":"#b39b6e","w":"#c2a87c"}, rows: [
+    "lpppspppdppspppl",
+    "pppwppppdppppppp",
+    "pppppppldplpppsp",
+    "spppppppdppwpppp",
+    "ppplpppsdppppppp",
+    "ppppppppdlppppsp",
+    "pppspppwdppppplp",
+    "dddddddddddddddd",
+    "pppldpppspppdppp",
+    "ppppdpppppppdlpp",
+    "sppwdplpppppdppp",
+    "ppppdppppwppdpsp",
+    "lppsdpppppppdppp",
+    "ppppdspppppldwpp",
+    "ppwpdpppppppdplp",
+    "dddddddddddddddd"
+  ] },
+  "tile-prop-marketstall": { w: 16, h: 16, pal: {"g":"#248917","G":"#2d9c1e","h":"#1a6b10","c":"#d9c096","l":"#ecd9ae","s":"#a68a5c","d":"#8d6a3a","w":"#b0874f","W":"#96703f","r":"#c0392b","b":"#3a6ac0"}, rows: [
+    "gggggggggggggggg",
+    "glccscclccscclcg",
+    "gccccccccccccccg",
+    "gccscclccscclccg",
+    "gdcdcdcdcdcdcdcg",
+    "ggdggggggggggdgg",
+    "ggdggggggggggdgg",
+    "ggdggggggggggdgg",
+    "ggdgbbgggrrggdgg",
+    "ggdgrrrggbbbgdgg",
+    "ggwwwwwwwwwwwwgg",
+    "ggwWwwWwwWwwWwgg",
+    "ggWWWWWWWWWWWWgg",
+    "gghhhhhhhhhhgggg",
+    "gGggggggggggggGg",
+    "ggggggGggggggggg"
+  ] },
+  "tile-prop-tideboard": { w: 16, h: 16, pal: {"g":"#248917","G":"#2d9c1e","h":"#1a6b10","d":"#8d6a3a","B":"#2a5a8c","p":"#bcd8ea","o":"#e8c85a","m":"#d8d8e0","w":"#e8e8e0"}, rows: [
+    "gggggggggggggggg",
+    "ggGgggggggggGggg",
+    "ggddddddddddddgg",
+    "ggdBBBBBBBBBBdgg",
+    "ggdBoBBBBBBmBdgg",
+    "ggdBppBBppBBBdgg",
+    "ggdBwBBwBBwBBdgg",
+    "ggdBBppBBppBBdgg",
+    "ggddddddddddddgg",
+    "ggggdggggggdgggg",
+    "ggggdggggggdgggg",
+    "ggggdggggggdgggg",
+    "ggggdggggggdgggg",
+    "ggggdggggggdgggg",
+    "gggghgggggghgggg",
+    "ggGgggggggggggGg"
+  ] },
+  "tile-prop-shiphull": { w: 16, h: 16, pal: {"g":"#248917","G":"#2d9c1e","D":"#4a2f1d","h":"#7d4a26","W":"#b0874f","w":"#96703f","s":"#5e4630","k":"#33241a"}, rows: [
+    "gggggggggggggggg",
+    "ggggggwggggggggg",
+    "ggggggwgggggggWg",
+    "ggggggwggggggWWg",
+    "gDDDDDDDDDDDhWWg",
+    "gDhWhhWhhWhhDWgg",
+    "gDhWhhWhhWhhDWgg",
+    "gDDDDDDDDDDDWDgg",
+    "ggDhWhhWhDDWgggg",
+    "gggDhWhhWDkggggg",
+    "ggggkDhhDkgggggg",
+    "gggggsgggsgggggg",
+    "ggggsssgsssggggg",
+    "gggggggggggggggg",
+    "gGgggggggggggGgg",
+    "gggggggggggggggg"
+  ] },
   "tile-thatchroof": { w: 16, h: 16, pal: {"g":"#c2a054","L":"#d9bc76","S":"#856830","D":"#6e5626"}, rows: [
     "gLggLgLggLggLgLg",
     "ggLggSgLgggLggLg",
@@ -114098,7 +114242,11 @@ for (const k of T27_FLOOR_KINDS) TILE_ART[k] = 'tile-' + k;
 for (const k of WD6_PROP_KINDS) TILE_ART[k] = 'tile-prop-' + k;
 for (const k of WD6_WALL_KINDS) TILE_ART[k] = 'tile-' + k;
 for (const k of WD6_FLOOR_KINDS) TILE_ART[k] = 'tile-' + k;
-
+// Wave T28: Fairhaven's market stalls + tideboard + ship hull draw
+// their prop art; its canvas roofs + quay stone kit kinds theirs.
+for (const k of T28_PROP_KINDS) TILE_ART[k] = 'tile-prop-' + k;
+for (const k of T28_WALL_KINDS) TILE_ART[k] = 'tile-' + k;
+for (const k of T28_FLOOR_KINDS) TILE_ART[k] = 'tile-' + k;
 // Premium+ W6 (TX-3/PL-1): door-open frames, authored in TX-3 for every
 // door kind. The warp-fade engine that plays them lands in W7 — W6
 // wires the frames (this registry + cache.doorOpen + doorOpenCanvas)
@@ -115867,6 +116015,13 @@ function resolveTileLayers(cache, kind, x, y, kindAt, t, phase, mapId) {
     case 'barbells':
     case 'chalkboard':
     case 'barrels':
+    // Wave T28: Fairhaven's market stalls, the quay's tideboard
+    // and Merrick's hull on its stocks composite over their
+    // green the same way (their art is fully opaque — the
+    // green is baked in).
+    case 'marketstall':
+    case 'tideboard':
+    case 'shiphull':
     // Wave T17: the radio mast composites over its compound grass too.
     case 'radiomast': {
       // Object tiles carry transparent surrounds (Wave 1): lay the ground
@@ -122715,6 +122870,14 @@ const WALKABLE = new Set(['.', ',', 'D', 'E', 'C', 'F', 'J', 'K', '1', '2', 'V',
   // promfloor char (U+1E00+615) likewise in Canopy City,
   // so floor stays floor in both.
   ...[613, 615]
+    .map((i) => String.fromCodePoint(0x1E00 + i)),
+  // Wave T28: the quayfloor char (U+1E00+618, tiles.mjs
+  // T28_KIND_DEFS) is walkable street material — Fairhaven's
+  // running-bond quay stone, swapped onto the town's street
+  // cells (which shipped as walkable tg2 mud), so floor stays
+  // floor. (Indices 617-621 per the Director's index ruling:
+  // W-DIFF6 holds 613-616.)
+  ...[618]
     .map((i) => String.fromCodePoint(0x1E00 + i))]);
 
 // Trainer definitions for the slice.
@@ -146267,26 +146430,26 @@ const MAPS7 = {
     "music": "viridian-theme",
     "weather": "clear",
     "rows": [
-      "ἶἶἶἷἶἶἶἶἶἶἷἶἶἶἵἵἶἶἶἷἶἶἶἶἶἶἷἶἶἶ",
-      "ἶἴἴἴἴἴἴἴἴἴẆἴἴἴἵἵἵἵἵἵἵἴἴἴἴἴἴἴἴἶ",
-      "ἶἴἴjklmἴἴdeefἴἵἵἸἸἸἵἵἸἸἸἸἴἴἴἴἶ",
-      "ἶἴἴAJKAἴἴP12PἷἵἵsἹἹἵἵἹsἹἹἴἴἴἴἶ",
-      "ἶSἵἵἵἵἵnἵἵἵἵἵἵἵἵἵἵἵἵἵἵἵἵἵἴἴἴἴἶ",
-      "ἶἵἵἵἵἵἵἵἵἵἵἵἵἵἵἵἵἵἵἵἵἵἵἵἵἴἴἴἴἶ",
-      "ἶἵἵἵἵἵἵἵἵἵἵἵἵἵἵἵἵἵἵἵἵἵἵἵἵἴἴἴἴἶ",
-      "ἶἵἵἵἵἵἵἵἵἵἵἵἵἵἵἵἵἵἵἵἵἵἵἵἴἴẊἴἴἶ",
-      "ἶnἵἵἵἵἵἵἵἵἵἵἵἵἵἵἵἵἵἵἵἵἵἵἵἴἴἴἴἶ",
-      "ἶẆἵἵἴἵἵἵἵἵἵἵἵἵἵἵἵἵἵἵἵἵἵἵἵἴἴnἴἶ",
-      "ἶẇἵἵἴἵἴἵἵἵἵἵἵἵἵἵἵἵἵἵἵἵẇoἵἴἴἴἴἶ",
-      "ἶoἵἵἵἵἵἵἵSnἵἵἴἵἵἵἵἵἴἵἵoἴ....ἴἶ",
-      "ἶἴἵἵἵἵἵἵἵἵἵἵἵἵἵἵἵἵἵἵἵἵἵ.,,,,,ἶ",
-      "ἶἴἵἵἵἵἵἵἵἵἵἵἵἵἵἵἵἵἵἵἵἵἵ.,,,,,ἶ",
-      "ἶἴἵἵἵἵἵἵἵἵἵἵἵἵἵἵἵἵἵἇἇἇἇἵ....ἴἶ",
-      "ἶἴἵἵἵἵἵἵἵἵἵἵἵἵἵSἵἵἵἇἇἇἇἵἵἴἴἴἴἶ",
-      "ἶἴoonἵἵἵἵἵἵἵἵἵἵἵἵἵἇἇἇἇἇἵoἴἴἴἴἶ",
+      "ἶἶἶἷἶἶἶἶἶἶἷἶἶἶ⁪⁪ἶἶἶἷἶἶἶἶἶἶἷἶἶἶ",
+      "ἶἴἴἴἴἴἴἴἴἴẆἴἴἴ⁪⁪ἴἴἴἴἴἴἴἴἴἴἴἴἴἶ",
+      "ἶἴἴjklmἴἴdeefἴ⁪⁪⁩⁩⁩ἴἴ⁩⁩⁩⁩ἴἴἴἴἶ",
+      "ἶἴἴAJKAἴἴP12Pἷ⁪⁪sἹἹἴἴἹsἹἹἴἴἴἴἶ",
+      "ἶS⁪⁪⁪⁪⁪n⁪⁪⁪⁪⁪⁪⁪⁪⁪⁪⁪⁪⁪⁪⁪⁪⁪⁪⁪⁪⁪ἶ",
+      "ἶἴ⁪ἴἴἴ⁪⁪⁪ἴἴἴSἴ⁪ἴἴἴἴἴἴἴἴἴ⁩⁩⁩⁭ἴἶ",
+      "ἶἴ⁪ἴἴἴἴSἴἴἴἴἴἴ⁪SἴἴἴἴἴἴἴἴἻsἻἴἴἶ",
+      "ἶἴ⁪Sἴἴἴἴἴἴἴἴἴἴ⁪ἴἴἴἴἴἴἴἴἴἴἴẊἴἴἶ",
+      "ἶn⁪⁪⁪⁪⁪⁪⁪⁪⁪⁪S⁪⁪⁪⁪⁪⁪⁪⁪⁪S⁪⁪⁪⁪⁪ἴἶ",
+      "ἶẆ⁪ἴἴἴἴἴἴἴἴ⁪ἴἴ⁪ἴἴἴἴἴἴἴἴἴ⁪ἴἴnἴἶ",
+      "ἶẇἴἴἴἴἴἴἴἴἴ⁪ἴἴ⁪ἴἴἴἴἴἴἴẇo⁪ἴἴἴἴἶ",
+      "ἶo⁪Sἴ⁫ἴ⁫ἴSn⁪S⁫⁪⁫ἴἴἴἴἴἴo⁪....ἴἶ",
+      "ἶἴ⁪⁪⁪⁪⁪⁪⁪⁪⁪⁪⁪⁪⁪⁪⁪⁪⁪⁪⁪⁪⁪.,,,,,ἶ",
+      "ἶἴ⁪ἴ⁫⁩⁩⁩ἴἴ⁫ἴἴ⁫⁪⁫ἴἴἴἴἴSἴ.,,,,,ἶ",
+      "ἶἴ⁪ἴἴἻsἻἴSἴἴἴἴ⁪ἴἴἴἴἇἇἇἇ⁪....ἴἶ",
+      "ἶἴ⁪⁪⁪ἴἴSἴἴἴἴἴἴ⁪S⁬ἴSἇἇἇἇἴἴἴἴἴἴἶ",
+      "ἶἴoon⁪⁪⁪⁪⁪⁪⁪⁪⁪⁪⁪⁪⁪ἇἇἇἇἇἴoἴἴἴἴἶ",
       "ἶ~~~~~~~~~~~~~~~~~~ἇἇἇἇ~~~~~~ἶ",
       "ἶ~~~~~~~~~~~~~~~~~~ἇἇἇἇ~~~~~~ἶ",
-      "ἶ~~~~~~~~~~~~~~~~~~ἇἇἇἇ~~~~~~ἶ"
+      "ἶ~~~~~~~~~~~~~~~~~~ἇἇἇἇ~~~~~~ἶ",
     ],
     "warps": [
       {"x": 4, "y": 3, "to": {"map": "center", "x": 4, "y": 4}, "via": {"map": "slateport", "x": 4, "y": 4}},
@@ -146309,14 +146472,20 @@ const MAPS7 = {
       {"x": 22, "y": 8, "text": "FAIRHAVEN CITY — North: ROUTE 110 · South: ROUTE 109."},
       {"x": 7, "y": 15, "text": "FAIRHAVEN CITY — North: ROUTE 110 · South: ROUTE 109."},
       {"x": 15, "y": 6, "text": "FAIRHAVEN CITY — North: ROUTE 110 · South: ROUTE 109."},
-      {"x": 9, "y": 14, "text": "FAIRHAVEN CITY — North: ROUTE 110 · South: ROUTE 109."}
+      {"x": 9, "y": 14, "text": "FAIRHAVEN CITY — North: ROUTE 110 · South: ROUTE 109."},
+      {"x": 12, "y": 5, "text": "FAIRHAVEN CITY — North: ROUTE 110 · South: ROUTE 109."},
+      {"x": 12, "y": 11, "text": "FAIRHAVEN CITY — North: ROUTE 110 · South: ROUTE 109."},
+      {"x": 18, "y": 15, "text": "FAIRHAVEN CITY — North: ROUTE 110 · South: ROUTE 109."},
+      {"x": 21, "y": 13, "text": "FAIRHAVEN CITY — North: ROUTE 110 · South: ROUTE 109."},
+      {"x": 3, "y": 7, "text": "FAIRHAVEN CITY — North: ROUTE 110 · South: ROUTE 109."},
+      {"x": 3, "y": 11, "text": "FAIRHAVEN CITY — North: ROUTE 110 · South: ROUTE 109."},
     ],
     "npcs": [
       {"x": 20, "y": 16, "name": "CAPT MERIDIAN", "art": "sailor", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#4a3a2a", "dialogue": ["The Fairhaven run is the long crossing home — Arcport, straight across the weather.", "Once this port knows you, the whole ferry network does. Step aboard when you're ready."], "ferry": "vermilion", "ferryArc": "hoenn"},
       {"x": 11, "y": 13, "name": "MARKET CRIER VESK", "art": "worker", "skin": "#f0c8a0", "shirt": "#3a7a4a", "pants": "#4a3a2a", "hair": "#2a1a0a", "dialogue": ["Berries! Stones! A chair shaped like a SPOUTLET! The market provides!", "Captain Merrick's shipyard builds hulls at the north end. Fine work, slow varnish."]},
       {"x": 24, "y": 7, "name": "MERRICK’S APPRENTICE LIO", "art": "youngster", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#4a3a2a", "dialogue": ["The Captain's new submersible part went missing between the dock and the museum. Again.", "Maritime Museum's queue is longest at opening. The exhibits don't mind."]},
       {"x": 5, "y": 15, "name": "BEACHCOMBER ANA", "art": "lady", "skin": "#d8a878", "shirt": "#7a4a8a", "pants": "#2a2a3a", "hair": "#c0c0c0", "dialogue": ["The tide delivers the market half its stock and all of its gossip.", "Route 110's cycling road runs north to Lilac, humming the whole way."]},
-      {"x": 3, "y": 5, "name": "MART CLERK", "art": "clerk", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#4a3a2a", "dialogue": ["Fairhaven Mart — harbor stock. Everything smells faintly of rope and triumph."], "mart": {"stock": ["pokeball", "greatball", "superpotion", "hyperpotion", "antidote", "parlyzheal", "revive"]}},
+      {"x": 9, "y": 4, "name": "MART CLERK", "art": "clerk", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#4a3a2a", "dialogue": ["Fairhaven Mart — harbor stock. Everything smells faintly of rope and triumph."], "mart": {"stock": ["pokeball", "greatball", "superpotion", "hyperpotion", "antidote", "parlyzheal", "revive"]}},
     ],
     "encounters": {"rate": 0.12, "table": [{"species": "wingull", "min": 213, "max": 219, "weight": 26}, {"species": "tentacool", "min": 213, "max": 219, "weight": 22}, {"species": "zigzagoon", "min": 213, "max": 219, "weight": 16}, {"species": "pelipper", "min": 215, "max": 220, "weight": 10}, {"species": "minun", "min": 215, "max": 220, "weight": 6}, {"species": "plusle", "min": 215, "max": 220, "weight": 6}], "water": [{"species": "tentacool", "min": 212, "max": 220, "weight": 26}, {"species": "magikarp", "min": 212, "max": 218, "weight": 20}, {"species": "wingull", "min": 213, "max": 220, "weight": 20}, {"species": "pelipper", "min": 216, "max": 222, "weight": 10}, {"species": "wailmer", "min": 215, "max": 222, "weight": 8}], "waterRate": 0.08},
     "items": [],
