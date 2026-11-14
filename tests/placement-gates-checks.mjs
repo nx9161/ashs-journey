@@ -186,6 +186,28 @@
 //     the 0.60 floor), unanchoredAny identical (1 — the shipped
 //     border-frame decor at (24,17), as shipped). Re-pinned with
 //     the T25 build.
+//
+//     THIRTEENTH DOCUMENTED EXCEPTION (W-DIFF3): the registry grows by
+//     one scoped entry — violet: [violetfloor] — on the same terms
+//     as exceptions seven through ten: Iris City's CLEAN identity
+//     build record (W-DIFF-AUDIT Phase B, Tower Stone & Maple)
+//     authors violetfloor (idx 588) AS the town's street fabric
+//     (140 path cells swapped 1:1), and its absence from the
+//     network tier would blind the instrument exactly as in W4.
+//     Violet's pin re-pins on ONE field only: apronMin 0.65 -> 0.60
+//     — the Newleaf Tower's apron ring now carries the two new
+//     shoulder maples at (11,2),(19,2) that complete the table's
+//     maple ring; two further pairs were tested in-build and
+//     reverted on gate evidence (the W-DIFF apron-trim pattern):
+//     a door-row pair at (11,3),(19,3) took the tower apron to
+//     0.55, under the 60% gate, and a frame-row pair at
+//     (10,1),(20,1) sealed the lawn cells at (11,1),(19,1)
+//     (reachability dead pockets 1132 -> 1134, restored to 1132
+//     by the revert). Pass, conn (156/156), step-offs (9/9),
+//     junctions, strict (0.9083) and fabric (0.9967) are
+//     identical; the same build swapped 20 house-roof cells to
+//     the towerroof kind (idx 589, BUILD classifier), which does
+//     not move the tuple. Re-pinned with the W-DIFF3 build.
 //     Tuple: [pass, connOk, connPairs, stepTouch, stepTot, components,
 //     junctionSites, junctionsBare, apronLow, apronMin, merged,
 //     onFabric, shoulderOrphans, unanchoredAny, strict, fabric].
@@ -215,8 +237,8 @@ async function gateTuple(id, t) {
 }
 
 // 1. registry scope lock
-ok('street registry is exactly { vermilion: [boardwalk], blackthorn: [settfloor], silvertown: [marblefloor], ecruteak: [wornfloor], saffron: [avenuefloor] }',
-  JSON.stringify(STREET_REGISTRY) === '{"vermilion":["boardwalk"],"blackthorn":["settfloor"],"silvertown":["marblefloor"],"ecruteak":["wornfloor"],"saffron":["avenuefloor"]}',
+ok('street registry is exactly { vermilion: [boardwalk], blackthorn: [settfloor], silvertown: [marblefloor], ecruteak: [wornfloor], saffron: [avenuefloor], violet: [violetfloor] }',
+  JSON.stringify(STREET_REGISTRY) === '{"vermilion":["boardwalk"],"blackthorn":["settfloor"],"silvertown":["marblefloor"],"ecruteak":["wornfloor"],"saffron":["avenuefloor"],"violet":["violetfloor"]}',
   JSON.stringify(STREET_REGISTRY));
 
 // 2. census: the 64 towns of townSetOf (pallet included)
@@ -295,7 +317,7 @@ const PIN = {
   "veilstone": [1, 132, 132, 8, 8, 1, 9, 0, 0, 0.765, 0, 0, 0, 0, 0.94, 0.9965],
   "verdanturf": [0, 56, 90, 6, 6, 1, 1, 0, 0, 0.875, 0, 0, 0, 0, 0.9444, 0.9553],
   "vermilion": [1, 110, 110, 7, 7, 1, 7, 0, 0, 0.8, 0, 0, 0, 0, 0.8378, 0.9961],
-  "violet": [1, 156, 156, 9, 9, 1, 4, 0, 0, 0.65, 0, 0, 0, 0, 0.9083, 0.9967],
+  "violet": [1, 156, 156, 9, 9, 1, 4, 0, 0, 0.6, 0, 0, 0, 0, 0.9083, 0.9967],
   "viridian": [1, 240, 240, 7, 7, 1, 3, 0, 0, 0.643, 0, 0, 0, 0, 0.933, 1],};
 for (const id of ids) {
   const { tuple } = await gateTuple(id, tiersFor(id, tiers));
