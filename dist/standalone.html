@@ -3537,6 +3537,43 @@ T37_KIND_DEFS.forEach(([kind], i) => {
 const T37_PROP_KINDS = T37_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
 const T37_WALL_KINDS = T37_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
 const T37_FLOOR_KINDS = T37_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
+// Wave T38: Driftlog Town's own kit — "Lashed Log & Coral
+// Door": the raftfloor (lashed-log street — horizontal log
+// courses with staggered end joints and rope lashings, the
+// registered street material of the north avenue and the r131
+// landfall nose), the raftroof (raft-timber shingles worn by
+// the town's three facade boat-houses), the coraldoor (the
+// coral door face of the town style table, swapped onto the
+// houses' shipped facade-panel cells), the anchor (FLOAT KID
+// WREN's anchor fence post) and the pontoon (a lashed log
+// bundle still growing off the town's west edge). Indices
+// 732-736 per the Director's index ruling (main's kinds run
+// 594-636 + 645-648 + 660-662 + 672-675 + 684-687 + 696-699 +
+// 708-711 + 720-724; 606-607 + 637-644 + 649-659 + 663-671 +
+// 676-683 + 688-695 + 700-707 + 712-719 + 725-731 stay empty),
+// verified free against origin/main, TILE_CHARS and every map
+// row. The town's ground is its own re-authored tg-pacifidlog
+// art (no new index — the kind and char U+1F7C already exist).
+// Authored art: assets/sprites/pix/tiles/tile-raftfloor.pix,
+// tile-raftroof.pix, tile-coraldoor.pix, tile-prop-anchor.pix,
+// tile-prop-pontoon.pix, tile-tg-pacifidlog.pix.
+// (WAVE-T38-DRIFTLOG-PLAN.md.)
+const T38_KIND_DEFS = [
+  ['raftfloor', 'floor'],
+  ['raftroof', 'wall'],
+  ['coraldoor', 'wall'],
+  ['anchor', 'prop'],
+  ['pontoon', 'prop'],
+];
+const T38_KIND_CHARS = {};
+T38_KIND_DEFS.forEach(([kind], i) => {
+  const ch = String.fromCodePoint(0x1E00 + 732 + i);
+  T38_KIND_CHARS[kind] = ch;
+  TILE_CHARS[ch] = kind;
+});
+const T38_PROP_KINDS = T38_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
+const T38_WALL_KINDS = T38_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
+const T38_FLOOR_KINDS = T38_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
 const SINNOH_TOWN_GROUND_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg);
 const SINNOH_TOWN_GROUND2_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg2);
 // TX-3: the 8 gym exteriors by town (original type-accent motifs).
@@ -95363,6 +95400,96 @@ const ART = {
     "ggPPggdgggggPPgd",
     "dggglggggdgggggg"
   ] },
+  "tile-raftfloor": { w: 16, h: 16, pal: {"b":"#8d5f2b","l":"#a97a3f","s":"#6e4520","j":"#6e4520","k":"#54341a","r":"#d8bd8a","R":"#b89a64"}, rows: [
+    "llllRrlllllRrlll",
+    "bbbbRrbjbbbRrbbb",
+    "bbbbrRbjbbkrRbbb",
+    "ssssrRsssssrRsss",
+    "llllRrlllllRrlll",
+    "bbbbRrkbbbbRrbjb",
+    "bbbbrRbbbbbrRbjb",
+    "ssssrRsssssrRsss",
+    "llllRrlllllRrlll",
+    "bbjbRrbbbbbRrbbb",
+    "bbjbrRbbbkbrRbbb",
+    "ssssrRsssssrRsss",
+    "llllRrlllllRrlll",
+    "bbbbRrbbbjbRrbbb",
+    "bbbbrRbbbjbrRbbb",
+    "ssssrRsssssrRsss"
+  ] },
+  "tile-raftroof": { w: 16, h: 16, pal: {"b":"#9c7648","l":"#bd9868","s":"#684a26","d":"#86643a","c":"#a34d3f"}, rows: [
+    "slllllslllllslll",
+    "sbbbdbsbbbbbsbbb",
+    "ssssssssssssssss",
+    "lllslllllsllllls",
+    "bbbsbbbbbsbbbbbs",
+    "ssssssssssssssss",
+    "slllllslllllslll",
+    "sbbbbbsdbbbbsbbb",
+    "ssssssssssssssss",
+    "lllslllllsllllls",
+    "bbbsbbbbbsbbbbbs",
+    "ssssssssssssssss",
+    "slllllslllllslll",
+    "sbbbbbsbbbdbsbbb",
+    "ssssssssssssssss",
+    "lllslllccsllllls"
+  ] },
+  "tile-coraldoor": { w: 16, h: 16, pal: {"f":"#54341a","d":"#6e4520","l":"#a97a3f","b":"#a34d3f","C":"#7e352a","c":"#c06a58","r":"#d8bd8a","t":"#9a958c"}, rows: [
+    "ffffffffffffffff",
+    "fddddddddddddddf",
+    "fdlllllllllllldf",
+    "fdcbbbbbbbbbbcdf",
+    "fdcbCbbbCbbbCbdf",
+    "fdcbbbbbbbbbbcdf",
+    "fdcbCbbbCbbbCbdf",
+    "fdcbbbbbbbrrrcdf",
+    "fdcbCbbbbbrrrcdf",
+    "fdcbbbbbbbrrrcdf",
+    "fdcbCbbbCbbbCbdf",
+    "fdcbbbbbbbbbbcdf",
+    "fdcbCbbbCbbbCbdf",
+    "fdcbbbbbbbbbbcdf",
+    "fdttttttttttttdf",
+    "ffffffffffffffff"
+  ] },
+  "tile-prop-anchor": { w: 16, h: 16, pal: {"g":"#248816","d":"#1c6b10","i":"#3a3f4a","I":"#5a6272","w":"#8d5f2b","W":"#6e4520","r":"#d8bd8a","R":"#b89a64"}, rows: [
+    "gggggggggggggggg",
+    "gggggggiiggggggg",
+    "ggggggiIgigggggg",
+    "ggdgggigIigggggg",
+    "gggggggiiggggggg",
+    "gggIwwwiIwwwIggg",
+    "gggWWWWiIWWWWggg",
+    "gggggggiIggggggg",
+    "gggggggiIggggggg",
+    "gggggggiIggggggg",
+    "ggIIggiiIiggIIgg",
+    "ggIgiigiIgiigIgg",
+    "ggiigggiIgggiigg",
+    "ggggdggiigrRrggg",
+    "gggggggggrRrrggg",
+    "gggggggggggggggg"
+  ] },
+  "tile-prop-pontoon": { w: 16, h: 16, pal: {"w":"#5677bd","D":"#44639f","F":"#c6d8e9","b":"#8d5f2b","B":"#7d5326","l":"#a97a3f","s":"#6e4520","e":"#c8a878","E":"#a08b6c","r":"#d8bd8a","R":"#b89a64"}, rows: [
+    "wFbswwDwwwwwwwww",
+    "wwbswwwwwwwwwwwF",
+    "wwrRwwwwDwwwwwww",
+    "wwRrwwwwwwwwwwww",
+    "wwrRwFwwwwDwwwww",
+    "wwRrwwwwwwwwwwww",
+    "llllllrRllrRllll",
+    "BBBBBBrRBBrRBBee",
+    "bbbbbbRrbbRrbbEe",
+    "BBBBBBRrBBRrBBeE",
+    "bbbbbbrRbbrRbbee",
+    "ssssssrRssrRssss",
+    "FFwwFFwwFwwwFFww",
+    "wFwFwwDwwFwwwwFw",
+    "wwwwwwwwwwwwwwwF",
+    "wwwFwwwwDwwwwwww"
+  ] },
   "tile-trellisroof": { w: 16, h: 16, pal: {"c":"#f2e7ce","r":"#cf8296","l":"#e2a5b4","d":"#a85f74","b":"#8e3d55","v":"#557f3e"}, rows: [
     "cclrllllcclllvll",
     "cccldllccccbrllc",
@@ -101872,23 +101999,23 @@ const ART = {
     "aaaaaaaaaaaaaaaa",
     "affaaaafaaaaaaaa",
   ] },
-  "tile-tg-pacifidlog": { w: 16, h: 16, pal: {"a":"#b8a17d","b":"#a08b6c","c":"#d4ba90","d":"#d4ba90","e":"#a08b6c","f":"#a08b6c"}, rows: [
-    "aaaaaaaaaaaaaaaa",
-    "aacaaaaaaaabaaaa",
-    "aaaaaabaacaaaaaa",
-    "aaaaaacaaaaaacaa",
-    "aaaaaaaaaaaaaaaa",
-    "aaaaacaaaaaabaaa",
-    "abaaaaaaaaacaaaa",
-    "aaaaaaaaaaaaaaaa",
-    "aaacaaaaaaaaaaaa",
-    "aaaaaaaaaaaaaaca",
-    "aabaaaaaaaaaaaaa",
-    "aaaaaaacaaaaaaaa",
-    "aaaaaaaaabaacaaa",
-    "aaaacaaaaaaaaaba",
-    "aaaaabaaaacaaaaa",
-    "aaaaaaaaaaaaaaaa",
+  "tile-tg-pacifidlog": { w: 16, h: 16, pal: {"g":"#a9bf87","s":"#93ad72","l":"#c4d6a4","d":"#7e9c5f"}, rows: [
+    "sgggglgdggggggsg",
+    "gggsggggggggsggg",
+    "gsggggggggsggggl",
+    "gggglgdggggggsgg",
+    "ggsggggggggsgggg",
+    "sggggggggsgggglg",
+    "ggglgdggggggsggg",
+    "gsggggggggsggggg",
+    "ggggggggsgggglgd",
+    "gglgdggggggsgggg",
+    "sggggggggsgggggg",
+    "gggggggsgggglgdg",
+    "glgdggggggsggggg",
+    "ggggggggsggggggg",
+    "ggggggsgggglgdgg",
+    "lgdggggggsgggggg"
   ] },
   "tile-tg-pallet": { w: 16, h: 16, pal: {"g":"#6f9e63","m":"#6f9e63","l":"#8ab877","d":"#5d8a52","a":"#8ab877","x":"#6f9e63","z":"#9cc184"}, rows: [
     "mmmmmmmmmmmmmmmm",
@@ -115967,6 +116094,12 @@ for (const k of T36_FLOOR_KINDS) TILE_ART[k] = 'tile-' + k;
 for (const k of T37_PROP_KINDS) TILE_ART[k] = 'tile-prop-' + k;
 for (const k of T37_WALL_KINDS) TILE_ART[k] = 'tile-' + k;
 for (const k of T37_FLOOR_KINDS) TILE_ART[k] = 'tile-' + k;
+// Wave T38: Driftlog Town's own kit kinds take their authored
+// lashed-log / raft-timber / coral tiles (the Lashed Log &
+// Coral Door kit).
+for (const k of T38_PROP_KINDS) TILE_ART[k] = 'tile-prop-' + k;
+for (const k of T38_WALL_KINDS) TILE_ART[k] = 'tile-' + k;
+for (const k of T38_FLOOR_KINDS) TILE_ART[k] = 'tile-' + k;
 // Premium+ W6 (TX-3/PL-1): door-open frames, authored in TX-3 for every
 // door kind. The warp-fade engine that plays them lands in W7 — W6
 // wires the frames (this registry + cache.doorOpen + doorOpenCanvas)
@@ -117790,6 +117923,12 @@ function resolveTileLayers(cache, kind, x, y, kindAt, t, phase, mapId) {
     // baked in).
     case 'painteasel':
     case 'ventstone':
+    // Wave T38: Driftlog's anchor fence posts composite over
+    // their raft grass the same way, and its growing pontoons
+    // over their sea (both arts are fully opaque — the grass /
+    // the water is baked in).
+    case 'anchor':
+    case 'pontoon':
     // Wave T17: the radio mast composites over its compound grass too.
     case 'radiomast': {
       // Object tiles carry transparent surrounds (Wave 1): lay the ground
@@ -124748,6 +124887,22 @@ const WALKABLE = new Set(['.', ',', 'D', 'E', 'C', 'F', 'J', 'K', '1', '2', 'V',
   // 645-648 + 660-662 + 672-675 + 684-687 + 696-699; the
   // parallel T36 claim holds 708-711; 712-719 stay empty.)
   ...[721]
+    .map((i) => String.fromCodePoint(0x1E00 + i)),
+  // Wave T38: the raftfloor char (U+1E00+732, tiles.mjs
+  // T38_KIND_DEFS) is walkable street material — Driftlog
+  // Town's lashed-log street, swapped onto the town's avenue
+  // cells (which shipped as walkable boardwalk) and onto the
+  // two r131 exit cells at the landfall nose (which shipped as
+  // open water — the jetty-head swap of the T31 Beacon
+  // precedent), so floor stays floor; and the coraldoor char
+  // (U+1E00+734) likewise — Driftlog's coral door face, swapped
+  // onto the three boat-houses' facade-panel cells, which
+  // shipped walkable as facade-panel, so the doors stay
+  // walkable. (Indices 732-736 per the Director's index
+  // ruling: main's kinds run 594-636 + 645-648 + 660-662 +
+  // 672-675 + 684-687 + 696-699 + 708-711 + 720-724; the gaps
+  // stay empty.)
+  ...[732, 734]
     .map((i) => String.fromCodePoint(0x1E00 + i))]);
 
 // Trainer definitions for the slice.
@@ -150705,23 +150860,23 @@ const MAPS7 = {
     "music": "viridian-theme",
     "weather": "sun",
     "rows": [
-      "ẙ~~~~~~~~~~~~~~~~~~~~~~~~~~~",
-      "~~~~~~ẙ~~~Ā~~ἇἇ~~~~~~~~~~~~~",
-      "~~~ἇἇἇἇἇἇἇἇἇἇἇἇἇἇἇἇἇἇἇἇἇἇ~~~",
-      "~~~ἇἇἇἇἇἇἇἇἇἇἇἇἇἇἇἇἇἇἇἇἇἇĀ~~",
-      "Ā~~ἇἇἇἇἇἇἇἇἇἇἇἇἇἇἇἇἇἇἇἇἇἇ~~~",
-      "~~~ἇἇἇἇἇἇἇἇ὿ἇἇἇἇἇἇἇἇἇdeef~~~",
-      "~~~ἇἇἇἇἇἇἇἇἇἇἇἇἇἇἇἇἇἇP12P~~ẙ",
-      "~~~ἇἇἇjklmἇἇᾂᾂᾂἇἇᾂᾂᾂFἇ..ἇ~~~",
-      "~~~ἇἇἇAJKAἇἇᾃ—ᾃἇἇᾃ—ᾃἇἇ.ἇἇ~~~",
-      "~~~ἇἇἇἇ................ἇἇ~~ẙ",
-      "~~~ἇἇSἇẇḷἇἇṃFẐḷἇἇἇἇἇἇᾂᾂᾂἇ~~~",
-      "~~~ἇἇἇἇἇἇἇἇἇἇἇἇἇἇἇἇἇἇᾃ—ᾃἇ~~~",
-      "~~~ἇἇἇἇἇἇἇἇἇἇἇἇἇἇἇἇSἇἇἇἇἇ~~~",
-      "~ẙ~ἇἇ,,,ἇἇἇἇἇἇἇἇἇἇ,,,,ἇἇἇ~~~",
-      "~Ā~ἇἇ,,,ἇἇἇἇḷἇἇἇἇἇ,,,,ἇἇἇ~ẙ~",
-      "~~~ἇἇẐἇἇἇἇἇἇἇἇἇἇἇἇἇἇἇṃἇἇἇ~~~",
-      "~~~ἇἇἇἇἇἇἇἇἇἇἇἇἇἇἇἇἇἇἇἇἇἇ~~~",
+      "ẙ~~~~~~~~~~~~⃜⃜~~~~~~~~~~~~~",
+      "~~~~~~ẙ~~~Ā~~⃜⃜~~~~~~~~~~~~~",
+      "~~~ὼὼὼὼὼὼὼὼὼὼ⃜⃜ὼὼὼὼὼὼὼὼὼὼ~~~",
+      "~~⃠ὼὼὼὼὼὼὼὼὼS⃜⃜ὼὼὼὼὼὼὼὼὼὼĀ~~",
+      "Ā~~ὼὼὼὼὼὼὼὼὼὼ⃜⃜ὼὼὼὼὼὼὼὼὼὼ~~~",
+      "~~~ὼὼὼὼὼὼὼὼ὿ὼ⃜⃜ὼὼὼὼὼὼdeef~~~",
+      "~~⃠ὼὼὼὼὼὼὼὼὼὼ⃜⃜⃜ὼὼὼὼὼP12P~~ẙ",
+      "~~~ὼὼὼjklmὼὼ⃝⃝⃝⃜ὼ⃝⃝⃝Fὼ..ὼ~~~",
+      "~~~ὼὼὼAJKAὼSᾃ⃞ᾃ⃜Sᾃ⃞ᾃὼὼ.ὼὼ~~~",
+      "~~~ὼὼὼ⃜................ὼὼ~~ẙ",
+      "~~⃠ὼὼS⃜ẇḷ⃜⃜ṃFẐḷ⃜ὼὼὼὼὼ⃝⃝⃝ὼ~~~",
+      "~~~ὼὼὼ⃜ὼ⃜⃜⃜⃜ὼ⃜⃜⃜⃜⃜⃜⃜ὼᾃ⃞ᾃὼ~~~",
+      "~~~ὼὼὼ⃟⃟ὼ⃟ὼὼὼSὼὼὼὼὼSὼὼὼὼὼ~~~",
+      "~ẙ⃠ὼὼ,,,ὼὼὼὼὼὼὼὼὼὼ,,,,ὼὼὼ~~~",
+      "~Ā~ὼὼ,,,ὼὼὼὼḷὼὼὼὼὼ,,,,ὼὼὼ~ẙ~",
+      "~~~ὼὼẐὼὼὼὼὼὼὼὼὼὼὼὼὼὼὼṃὼὼὼ~~~",
+      "~~~ὼὼὼὼὼὼὼὼὼὼὼὼὼὼὼὼὼὼὼὼὼὼ~~~",
       "~~Ā~~~~~~~~~Ā~~~ẙ~~~~~~~~~~~",
     ],
     "warps": [
@@ -150735,9 +150890,13 @@ const MAPS7 = {
     "signs": [
       {"x": 5, "y": 10, "text": "DRIFTLOG TOWN — A town that floats on rafts and logs, riding the western currents. The houses are boats that decided to stay."},
       {"x": 19, "y": 12, "text": "THE CURRENT ROADS — East of the rafts the sea runs in rivers: Routes 132 to 134, all one-way opinions and fast water, up to Perennial."},
+      {"x": 12, "y": 3, "text": "THE CURRENT ROADS — East of the rafts the sea runs in rivers: Routes 132 to 134, all one-way opinions and fast water, up to Perennial."},
+      {"x": 11, "y": 8, "text": "THE CURRENT ROADS — East of the rafts the sea runs in rivers: Routes 132 to 134, all one-way opinions and fast water, up to Perennial."},
+      {"x": 16, "y": 8, "text": "THE CURRENT ROADS — East of the rafts the sea runs in rivers: Routes 132 to 134, all one-way opinions and fast water, up to Perennial."},
+      {"x": 13, "y": 12, "text": "THE CURRENT ROADS — East of the rafts the sea runs in rivers: Routes 132 to 134, all one-way opinions and fast water, up to Perennial."}
     ],
     "npcs": [
-      {"x": 3, "y": 5, "name": "MART CLERK", "art": "clerk", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#4a3a2a", "dialogue": ["Driftlog Mart — current-proof stock, lashed down tight."], "mart": {"stock": ["ultraball", "hyperpotion", "fullheal", "revive", "maxpotion", "superpotion"]}},
+      {"x": 21, "y": 7, "name": "MART CLERK", "art": "clerk", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#4a3a2a", "dialogue": ["Driftlog Mart — current-proof stock, lashed down tight."], "mart": {"stock": ["ultraball", "hyperpotion", "fullheal", "revive", "maxpotion", "superpotion"]}},
       {"x": 10, "y": 11, "name": "RAFT ELDER CORALIE", "art": "elder", "skin": "#e8b888", "shirt": "#b0503c", "pants": "#2a2a3a", "hair": "#5a3a2a", "dialogue": ["Three generations my family has added logs to this town and subtracted none. It grows like we do: sideways, cheerfully.", "Tempest Tower stands east on its island. On clear mornings the top of it says hello first."]},
       {"x": 16, "y": 12, "name": "CURRENT RIDER PIKE", "art": "sailor", "skin": "#e8b888", "shirt": "#3a6ac0", "pants": "#2a3a4a", "hair": "#1a1a1a", "dialogue": ["Ride the fast water east and it will carry you to Perennial’s shore faster than any sail.", "Miss your stop and the current files you under ‘later’. It always delivers, eventually."]},
       {"x": 8, "y": 12, "name": "FLOAT KID WREN", "art": "kid", "skin": "#f0c8a0", "shirt": "#3a7a4a", "pants": "#4a3a2a", "hair": "#2a1a0a", "dialogue": ["My house has an anchor instead of a fence. When I grow up I’m untying it.", "CORALET hold up half the rafts. We hold up the other half. It’s fair."]},
@@ -188976,6 +189135,6 @@ if (typeof Game !== 'undefined') Object.assign(Game.prototype, {
 });
 
 </script>
-<!-- contentHash:6053a0acdfc2b6f3b9068c74ea237e81eaf18d15983ead6a7d25e409964e769f -->
+<!-- contentHash:a172dff67fe256d40b51b8fccd19c15617d02ac9e565350b9da91a0b2291572c -->
 </body>
 </html>
