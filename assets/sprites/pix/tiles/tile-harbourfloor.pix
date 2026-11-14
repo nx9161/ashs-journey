@@ -1,0 +1,32 @@
+# Wave T31 (Beacon kit): harbourfloor — Beacon City's
+# registered street kind (the fleet's street kinds carry the
+# -floor suffix; the desire-path tiers key on it). HARBOUR
+# PLANK DECKING: wide weathered deck planks, iron bolt heads
+# at the seams, salt-pale wear along the plank centres. A
+# bolted harbour deck — unlike Tidewall's driftfloor shore
+# boards, Arcport's boardwalk (kept for Arcport alone),
+# Mistford's bleached planks, Fairhaven's quay stone.
+# (NO-SAME-KIT law; WAVE-T31-BEACON-PLAN.)
+PIX tile-harbourfloor 16 16
+bbbbbbbbbbbbbbbb
+bbbbbbbbbwbbbbbb
+bbibbbbbbbbbbibb
+ssssssssssssssss
+dddddddddddddddd
+dwddddddddddwddd
+ddiddddddddddidd
+ssssssssssssssss
+bbbbbbbbbbbbbbbb
+bbbbwbbbbbbbbbbw
+bbibbbbbbbbbbibb
+ssssssssssssssss
+dddddddddddddddd
+dddddddwdddddddd
+ddiddddddddddidd
+ssssssssssssssss
+PAL
+b #9a8a68
+d #8a7a58
+s #5f5138
+i #3a3a40
+w #c9bd9e

@@ -1,0 +1,29 @@
+# Wave T31 (Beacon kit): jettyfloor — the harbour deck's
+# rougher sibling for the Route 40 landfall jetty: tarred
+# boards under two nailed cross-battens, tar-dark edges.
+# Registered with harbourfloor (the slateport two-material
+# precedent). (WAVE-T31-BEACON-PLAN §4.4.)
+PIX tile-jettyfloor 16 16
+eeeeeeeeeeeeeeee
+bbbttbbbbbbttbbb
+bbbttbbbbbbttbbb
+sssttssssssttsss
+dddnnddddddnnddd
+dddttddddddttddd
+dddttddddddttddd
+sssttssssssttsss
+bbbttbbbbbbttbbb
+bbbttbbbbbbttbbb
+bbbttbbbbbbttbbb
+sssnnssssssnnsss
+dddttddddddttddd
+dddttddddddttddd
+dddttddddddttddd
+eeeeeeeeeeeeeeee
+PAL
+b #6a5638
+d #5a4830
+s #46351f
+t #7d6844
+n #2e2a26
+e #332716

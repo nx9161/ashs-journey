@@ -525,6 +525,18 @@ export const WALKABLE = new Set(['.', ',', 'D', 'E', 'C', 'F', 'J', 'K', '1', '2
   // floor stays floor. (Indices 633-636 after the Director's
   // re-index ruling: W-DIFF8 holds 629-632; 606-607 stay empty.)
   ...[634]
+    .map((i) => String.fromCodePoint(0x1E00 + i)),
+  // Wave T31: the harbourfloor char (U+1E00+646, tiles.mjs
+  // T31_KIND_DEFS) is walkable street material — Beacon City's
+  // harbour plank decking, swapped onto the town's street cells
+  // (shipped as walkable tg2 mud / tg), and the jettyfloor char
+  // (U+1E00+647) likewise at the Route 40 landfall jetty
+  // (swapped from water at the crossing seam — the jetty is the
+  // crossing's landing, so floor replaces surf there), so floor
+  // stays floor. (Indices 645-648 per the Director's ruling:
+  // W-DIFF8 holds 629-632; T30 claims from 633 in parallel;
+  // 606-607 stay empty.)
+  ...[646, 647]
     .map((i) => String.fromCodePoint(0x1E00 + i))]);
 
 // Trainer definitions for the slice.

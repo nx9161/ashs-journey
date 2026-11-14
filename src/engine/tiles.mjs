@@ -1332,6 +1332,36 @@ T30_KIND_DEFS.forEach(([kind], i) => {
 export const T30_PROP_KINDS = T30_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
 export const T30_WALL_KINDS = T30_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
 export const T30_FLOOR_KINDS = T30_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
+// Wave T31 (Beacon City): the 'Gleam Lamp & Harbour Plank' kit —
+// Beacon's own kit from birth (NO-SAME-KIT law). 'beaconroof'
+// (wall) — harbour-red STANDING SEAM metal, worn by the Gleam
+// Lighthouse, the House and the facade cottages. 'harbourfloor'
+// (floor) — the town's street: bolted harbour plank decking.
+// 'jettyfloor' (floor) — tarred cross-batten planks at the
+// Route 40 landfall jetty. 'lampglass' (prop) — the lighthouse's
+// lit lamp, brass housing + warm glass on the tower's own roof.
+// Indices 645-648 per the Director's index ruling (main's kinds
+// run to 632; T30 Wildflower claims from 633 in parallel; this
+// block registers at 645+, verified free against origin/main,
+// TILE_CHARS and every map row; 606-607 stay empty). Authored
+// art: assets/sprites/pix/tiles/tile-beaconroof.pix,
+// tile-harbourfloor.pix, tile-jettyfloor.pix,
+// tile-prop-lampglass.pix. (WAVE-T31-BEACON-PLAN.md.)
+export const T31_KIND_DEFS = [
+  ['beaconroof', 'wall'],
+  ['harbourfloor', 'floor'],
+  ['jettyfloor', 'floor'],
+  ['lampglass', 'prop'],
+];
+export const T31_KIND_CHARS = {};
+T31_KIND_DEFS.forEach(([kind], i) => {
+  const ch = String.fromCodePoint(0x1E00 + 645 + i);
+  T31_KIND_CHARS[kind] = ch;
+  TILE_CHARS[ch] = kind;
+});
+export const T31_PROP_KINDS = T31_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
+export const T31_WALL_KINDS = T31_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
+export const T31_FLOOR_KINDS = T31_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
 export const SINNOH_TOWN_GROUND_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg);
 export const SINNOH_TOWN_GROUND2_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg2);
 // TX-3: the 8 gym exteriors by town (original type-accent motifs).

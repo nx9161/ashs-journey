@@ -1,0 +1,33 @@
+# Wave T31 (Beacon kit): lampglass — THE LIT LAMP of the
+# Gleam Lighthouse: a brass housing with a warm lit glass
+# core, drawn on the tower's own harbour-red roof (baked
+# opaque, the T26 landmark-prop precedent). One cell crowns
+# the lighthouse roof — the daylight-lit lamp the owner's
+# ruling names. (WAVE-T31-BEACON-PLAN §5.)
+PIX tile-prop-lampglass 16 16
+bbbhsbbhsbbhsbbh
+bbbhsbbhsbbhsbbh
+bbbhskkkkkkhsbbh
+bbbhsbbkkbbhsbbh
+bbbhkkkkkkkksbbh
+bbbhkaaaaaaksbbh
+bbbhkagWggaksbbh
+bbbhkagWogaksbbh
+bbbhkagoogaksbbh
+bbbhkaggggaksbbh
+bbbhkaaaaaaksbbh
+bbbhkkkkkkkksbbh
+bbbhskkkkkkhsbbh
+bbbhsbbhsbbhsbbh
+eeeeeeeeeeeeeeee
+eeeeeeeeeeeeeeee
+PAL
+b #b04a3c
+h #cc7263
+s #74302a
+e #5f241d
+k #2e2a26
+a #c9a227
+g #ffd98a
+o #f5a623
+W #fff6d8

@@ -1,0 +1,29 @@
+# Wave T31 (Beacon kit): beaconroof — the HARBOUR-RED STANDING
+# SEAM roof: deep harbour-red metal panels crossed by pale
+# standing seams every 4 px with a dark eave line. Seam metal,
+# structurally unlike every shipped roof (gable/shingle/glass/
+# bronze/trellis). Worn by the Gleam Lighthouse, the House and
+# the facade cottages. (NO-SAME-KIT law; WAVE-T31-BEACON-PLAN.)
+PIX tile-beaconroof 16 16
+bbbhsbbhsbbhsbbh
+BBBhsBBhsBBhsBBh
+bbbhsbbhsbbhsbbh
+BBBhsBBhsBBhsBBh
+bbbhsbbhsbbhsbbh
+BBBhsBBhsBBhsBBh
+bbbhsbbhsbbhsbbh
+BBBhsBBhsBBhsBBh
+bbbhsbbhsbbhsbbh
+BBBhsBBhsBBhsBBh
+bbbhsbbhsbbhsbbh
+BBBhsBBhsBBhsBBh
+bbbhsbbhsbbhsbbh
+BBBhsBBhsBBhsBBh
+eeeeeeeeeeeeeeee
+eeeeeeeeeeeeeeee
+PAL
+b #b04a3c
+B #a64434
+h #cc7263
+s #74302a
+e #5f241d
