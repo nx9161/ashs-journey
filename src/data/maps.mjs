@@ -927,6 +927,17 @@ export const WALKABLE = new Set(['.', ',', 'D', 'E', 'C', 'F', 'J', 'K', '1', '2
   // kinds run …996-999 (T60); the parallel T61 claim holds
   // 1008-1011; 1000-1007 + 1012-1019 stay empty.)
   ...[1020]
+    .map((i) => String.fromCodePoint(0x1E00 + i)),
+  // Wave T63: the leaguefloor char (U+1E00+1032, tiles.mjs
+  // T63_KIND_DEFS) is walkable street material — Grapefruit's
+  // herringbone clay pavers, swapped onto the island's whole
+  // shipped street graph (authored as the generic `path` dirt
+  // track) plus the west surf-exit jetty head, so floor stays
+  // floor. (Indices 1032-1035 per the Director's index ruling:
+  // main's kinds run …996-999 + 1008-1011 on this base; the
+  // parallel T62 claim holds 1020-1023; 1012-1019 + 1024-1031
+  // stay empty.)
+  ...[1032]
     .map((i) => String.fromCodePoint(0x1E00 + i))]);
 
 // Trainer definitions for the slice.

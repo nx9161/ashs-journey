@@ -1,0 +1,27 @@
+# Wave T63 (Grapefruit): a ferry banner post — a timber post flying a crimson-and-gold pennant, on the island sand baked in at its measured colours (#c6b388/#d4c69c). Fully opaque. (WAVE-T63-GRAPEFRUIT-PLAN.md §5.)
+PIX tile-prop-bannerpost 16 16
+ssssssttssssssss
+ssssssttrrrrrrrs
+ssssssttRrrorrrs
+ssssssttrrrrrrrs
+ssssssttssssssss
+ssssssttssssssss
+ssssssttssssssss
+ssssssttssssssss
+ssssssttssssssss
+ssssssttssssssss
+ssssssttssssssss
+ssssssttssssssss
+ssssssttssssssss
+sssshhtttthhssss
+sshhhhhhhhhhhsss
+ssssssssssSsssss
+PAL
+s #c6b388 island sand
+S #d4c69c sand speckle
+h #a69274 contact shadow
+t #8a6844 post timber
+T #6e5234 timber shade
+r #a8232a pennant crimson
+o #e8a83c pennant gold
+R #c03340 pennant light

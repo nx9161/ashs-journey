@@ -1,0 +1,24 @@
+# Wave T63 (Grapefruit): herringbone clay pavers — rectangular bricks in a 45° herringbone bond, crimson-tan faces, dark mortar joints, worn light edges. The League island’s forecourt street. (NO-SAME-KIT law; WAVE-T63-GRAPEFRUIT-PLAN.md §5.)
+PIX tile-leaguefloor 16 16
+aallbbmmccmmbbll
+allbbmmccmmbbaal
+llbbmmccmmbbaacc
+bbmmccmmbbaaccmm
+mmccmmbbaaccmmll
+ccmmbbaaccmmllbb
+mmbbaaccmmllbbmm
+bbaaccmmllbbmmcc
+aaccmmllbbmmccaa
+ccmmllbbmmccaall
+mmllbbmmccaallbb
+llbbmmccaallbbmm
+bbmmccaallbbmmcc
+mmccaallbbmmccmm
+ccaallbbmmccmmll
+aallbbmmccmmbbll
+PAL
+a #c98a68 paver tan
+b #d8a078 paver light
+c #b87a5c paver shade
+m #7a4a38 mortar
+l #e8bc96 worn edge

@@ -2395,6 +2395,39 @@ T62_KIND_DEFS.forEach(([kind], i) => {
 export const T62_PROP_KINDS = T62_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
 export const T62_WALL_KINDS = T62_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
 export const T62_FLOOR_KINDS = T62_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
+// "League Herringbone & Crimson Rib" — leaguefloor (idx 1032):
+// herringbone clay pavers, rectangular bricks in a 45° bond,
+// crimson-tan faces with dark mortar (worn by the whole shipped
+// street graph + the west surf-exit jetty head); crimsonroof
+// (idx 1033): vertical standing ribs of deep crimson — worn by
+// the Stadium's twelve front-band cells only, breaking the
+// shipped Stadium/Mart roof-slate share; badgepillar (idx
+// 1034): a stone pillar with a crimson-and-gold badge plaque,
+// at the Stadium's sand shoulders; bannerpost (idx 1035): a
+// timber post flying a crimson-and-gold pennant, at the ferry
+// dock.
+// (Indices 1032-1035 per the Director's index ruling: main's
+// kinds run …996-999 + 1008-1011 on this base; the parallel
+// T62 claim holds 1020-1023; 1012-1019 + 1024-1031 stay empty.
+// Kind names verified unclaimed — driftroof/standingstone/
+// shellfloor/shellroof/gullpost/badgeroof/brickfloor are taken
+// by other towns. Chars U+1E00+1032..)
+// (Register: WAVE-T63-GRAPEFRUIT-PLAN.md §5.)
+export const T63_KIND_DEFS = [
+  ['leaguefloor', 'floor'],
+  ['crimsonroof', 'wall'],
+  ['badgepillar', 'prop'],
+  ['bannerpost', 'prop'],
+];
+export const T63_KIND_CHARS = {};
+T63_KIND_DEFS.forEach(([kind], i) => {
+  const ch = String.fromCodePoint(0x1E00 + 1032 + i);
+  T63_KIND_CHARS[kind] = ch;
+  TILE_CHARS[ch] = kind;
+});
+export const T63_PROP_KINDS = T63_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
+export const T63_WALL_KINDS = T63_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
+export const T63_FLOOR_KINDS = T63_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
 export const SINNOH_TOWN_GROUND_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg);
 export const SINNOH_TOWN_GROUND2_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg2);
 // TX-3: the 8 gym exteriors by town (original type-accent motifs).

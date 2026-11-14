@@ -1,0 +1,28 @@
+# Wave T63 (Grapefruit): a badge pillar — a squared stone pillar with a round crimson-and-gold badge plaque, on the island sand baked in at its measured colours (#c6b388/#d4c69c). Fully opaque. (WAVE-T63-GRAPEFRUIT-PLAN.md §5.)
+PIX tile-prop-badgepillar 16 16
+ssssssssssssssss
+ssSsssssssssssss
+ssssssLLLLssssss
+sssssLooooLsssss
+sssssLorroLsssss
+sssssLorwroLssss
+sssssLorroLsssss
+ssssssLooLssssss
+ssssssggggssssss
+sssssggGGggsssss
+sssssggGGggsssss
+sssssggGGggsssss
+sssssggGGggsssss
+ssshgggggggghhss
+sshhhhhhhhhhhhss
+ssssssssssSsssss
+PAL
+s #c6b388 island sand
+S #d4c69c sand speckle
+h #a69274 contact shadow
+g #9a97a0 stone
+G #74717c stone shade
+L #c4c1ca stone light
+r #a8232a badge crimson
+o #e8a83c badge gold
+w #f4f2ec badge light
