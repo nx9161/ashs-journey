@@ -3537,6 +3537,37 @@ T37_KIND_DEFS.forEach(([kind], i) => {
 const T37_PROP_KINDS = T37_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
 const T37_WALL_KINDS = T37_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
 const T37_FLOOR_KINDS = T37_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
+// Wave T39: Perennial City's own kit kinds (the League Marble &
+// Banner Gold kit): a parade floor of large ivory-gold-veined
+// marble slabs as the town's street; a badge-frieze marble roof
+// for the League hall alone; verdigris standing-seam roofs for
+// its two facade houses; and two fully-opaque props — a
+// bracket-season pennant for the plateau flag fields and the
+// falls at the rim's east foot. Director's index ruling (main's
+// kinds run 594-636 + 645-648 + 660-662 + 672-675 + 684-687 +
+// 696-699 + 708-711 + 720-724; the parallel T38 claim holds
+// 732-736 on its branch; 606-607 + 637-644 + 649-659 + 663-671 +
+// 676-683 + 688-695 + 700-707 + 712-719 + 725-743 stay empty),
+// verified free against origin/main, TILE_CHARS and every map
+// row. Authored art: assets/sprites/pix/tiles/tile-plateaufloor.pix,
+// tile-badgeroof.pix, tile-verdiroof.pix, tile-prop-pennant.pix,
+// tile-prop-falls.pix. (WAVE-T39-PERENNIAL-PLAN.md.)
+const T39_KIND_DEFS = [
+  ['plateaufloor', 'floor'],
+  ['badgeroof', 'wall'],
+  ['verdiroof', 'wall'],
+  ['pennant', 'prop'],
+  ['falls', 'prop'],
+];
+const T39_KIND_CHARS = {};
+T39_KIND_DEFS.forEach(([kind], i) => {
+  const ch = String.fromCodePoint(0x1E00 + 744 + i);
+  T39_KIND_CHARS[kind] = ch;
+  TILE_CHARS[ch] = kind;
+});
+const T39_PROP_KINDS = T39_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
+const T39_WALL_KINDS = T39_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
+const T39_FLOOR_KINDS = T39_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
 const SINNOH_TOWN_GROUND_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg);
 const SINNOH_TOWN_GROUND2_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg2);
 // TX-3: the 8 gym exteriors by town (original type-accent motifs).
@@ -110644,6 +110675,96 @@ const ART = {
     "gggggggggggggggg",
     "ggggggdggggggggg"
   ] },
+  "tile-plateaufloor": { w: 16, h: 16, pal: {"m":"#ece5d3","l":"#f7f2e2","g":"#b3a888","v":"#c9a227","s":"#d8cfb4"}, rows: [
+    "gggggggggggggggg",
+    "gmmmmmmmmmmmmmmm",
+    "gmmmmmmmmmmmmmmm",
+    "gmmllmmmmmmmmmmv",
+    "gmmlmmmmmmmmmvvm",
+    "gmmmmmmmmmmvvmmm",
+    "gmmmmmmmmvvmmmmm",
+    "gmmmmmmvvmmvmmmm",
+    "gmmmmvvmmmmmmmmm",
+    "gmmvvmvvmmmmsmmm",
+    "gvvmmmmmmmmmmmmm",
+    "gmmmmmmmmllmmmmm",
+    "gmmmmmmmmmlmmlmm",
+    "gmlmmmmmsmmmmmmm",
+    "gmmmmsmmmmmmmmmm",
+    "gmmmmmmmmmmmmmmm"
+  ] },
+  "tile-badgeroof": { w: 16, h: 16, pal: {"m":"#dfe4ee","s":"#969fb5","o":"#c9a227","r":"#c0392b","t":"#e08a2e","y":"#e8c85a","e":"#3f9a5f","b":"#3f6fc0","p":"#8a5fc0","w":"#f4f1ea","k":"#3a3a44"}, rows: [
+    "mmmmmsmmmmmmmmmm",
+    "orotoyoeobopowok",
+    "orotoyoeobopowok",
+    "ssssssssssssssss",
+    "mmmmmmmmmmmsmmmm",
+    "mmmmmmmmmmmsmmmm",
+    "mmmmmmmmmmmsmmmm",
+    "ssssssssssssssss",
+    "mmmmmsmmmmmmmmmm",
+    "mmmmmsmmmmmmmmmm",
+    "mmmmmsmmmmmmmmmm",
+    "ssssssssssssssss",
+    "mmmmmmmmmmmsmmmm",
+    "mmmmmmmmmmmsmmmm",
+    "mmmmmmmmmmmsmmmm",
+    "ssssssssssssssss"
+  ] },
+  "tile-verdiroof": { w: 16, h: 16, pal: {"m":"#3f9a86","h":"#5cbfa9","s":"#2e7263","p":"#a8d8c8"}, rows: [
+    "mmhsmmhsmmhsmmhs",
+    "mmhsmmhsmmhsmmhs",
+    "mmhsmmhsmphsmmhs",
+    "mphsmmhsmmhsmmhs",
+    "mmhsmmhsmmhsmmhs",
+    "mmhsmmhsmmhsmmps",
+    "mmhsmmhsmmpsmmhs",
+    "mmhsmmhsmmhsmmhs",
+    "mmhsmmhsmmhsmmhs",
+    "mmhsmmpsmmhsmmhs",
+    "mmhsmmhsmmhsmmhs",
+    "mmpsmmhsmmhsmmhs",
+    "mmhsmmhsmmhsmphs",
+    "mmhsmmhsmmhsmmhs",
+    "mmhsmphsmmhsmmhs",
+    "mmhsmmhsmmhsmmhs"
+  ] },
+  "tile-prop-pennant": { w: 16, h: 16, pal: {"g":"#1e8b28","d":"#196b20","k":"#5f4f33","o":"#e8c85a","r":"#c0392b"}, rows: [
+    "gggggggggggggggg",
+    "ggggoggggggggggg",
+    "ggggkoooooooorgg",
+    "ggggkrrrrrrrrggg",
+    "ggggkrrrrrrggggg",
+    "ggggkrrrrggggggg",
+    "gdggkggggggggggg",
+    "ggggkggggggggggd",
+    "ggggkggggggggggg",
+    "ggggkkgggggggggg",
+    "ggggkgkggggggggg",
+    "ggggkggkkggggggg",
+    "ggggkggggkgggggg",
+    "ggggkgggggkkggdg",
+    "ggdgkggggggggggg",
+    "gggggggggdgggggg"
+  ] },
+  "tile-prop-falls": { w: 16, h: 16, pal: {"k":"#3a3a44","r":"#5a5a66","c":"#a9c6e2","b":"#7fa8c8","w":"#f4f8ff","f":"#dcecf8"}, rows: [
+    "rkkrkkrkkrkkrkkr",
+    "kkrkkrkkrkkrkkrk",
+    "rrcwccbcwbccbwrr",
+    "rrwbccbwcbccwcrr",
+    "rrcbccwccbcwbcrr",
+    "rrcbcwbccbwcbcrr",
+    "rrcbwcbccwccbcrr",
+    "rrcwccbcwbccbwrr",
+    "rrwbccbwcbccwcrr",
+    "rrcbccwccbcwbcrr",
+    "rrcbcwbccbwcbcrr",
+    "rrcbwcbccwccbcrr",
+    "rrcwccbcwbccbwrr",
+    "fwwfwwfwwfwwfwwf",
+    "fwwfwwfwwfwwfwwf",
+    "ffffffffffffffff"
+  ] },
   "partner-back-bob": { base: "partner-back", w: 64, h: 64, pal: {}, shiftY: 2 },
   "partner-front-bob": { base: "partner-front", w: 64, h: 64, pal: {}, shiftY: 2 },
   "abomasnow-back-bob": { base: "abomasnow-back", w: 64, h: 64, pal: {}, shiftY: 2 },
@@ -115967,6 +116088,11 @@ for (const k of T36_FLOOR_KINDS) TILE_ART[k] = 'tile-' + k;
 for (const k of T37_PROP_KINDS) TILE_ART[k] = 'tile-prop-' + k;
 for (const k of T37_WALL_KINDS) TILE_ART[k] = 'tile-' + k;
 for (const k of T37_FLOOR_KINDS) TILE_ART[k] = 'tile-' + k;
+// Wave T39: Perennial City's own kit kinds take their authored
+// league-marble tiles (the League Marble & Banner Gold kit).
+for (const k of T39_PROP_KINDS) TILE_ART[k] = 'tile-prop-' + k;
+for (const k of T39_WALL_KINDS) TILE_ART[k] = 'tile-' + k;
+for (const k of T39_FLOOR_KINDS) TILE_ART[k] = 'tile-' + k;
 // Premium+ W6 (TX-3/PL-1): door-open frames, authored in TX-3 for every
 // door kind. The warp-fade engine that plays them lands in W7 — W6
 // wires the frames (this registry + cache.doorOpen + doorOpenCanvas)
@@ -117790,6 +117916,12 @@ function resolveTileLayers(cache, kind, x, y, kindAt, t, phase, mapId) {
     // baked in).
     case 'painteasel':
     case 'ventstone':
+    // Wave T39: Perennial's bracket-season pennant composites
+    // over its plateau grass the same way (its art is fully
+    // opaque — the town grass is baked in); its falls prop is
+    // rock and water end to end and composites identically.
+    case 'pennant':
+    case 'falls':
     // Wave T17: the radio mast composites over its compound grass too.
     case 'radiomast': {
       // Object tiles carry transparent surrounds (Wave 1): lay the ground
@@ -124748,6 +124880,17 @@ const WALKABLE = new Set(['.', ',', 'D', 'E', 'C', 'F', 'J', 'K', '1', '2', 'V',
   // 645-648 + 660-662 + 672-675 + 684-687 + 696-699; the
   // parallel T36 claim holds 708-711; 712-719 stay empty.)
   ...[721]
+    .map((i) => String.fromCodePoint(0x1E00 + i)),
+  // Wave T39: the plateaufloor char (U+1E00+744, tiles.mjs
+  // T39_KIND_DEFS) is walkable street material — Perennial
+  // City's parade marble, swapped onto the town's street cells
+  // (which shipped as walkable tg2 mud, walkable ground and two
+  // water exit cells), so floor stays floor. (Indices 744-748
+  // per the Director's index ruling: main's kinds run 594-636 +
+  // 645-648 + 660-662 + 672-675 + 684-687 + 696-699 + 708-711 +
+  // 720-724; the parallel T38 claim holds 732-736; gaps stay
+  // empty.)
+  ...[744]
     .map((i) => String.fromCodePoint(0x1E00 + i))]);
 
 // Trainer definitions for the slice.
@@ -150756,19 +150899,19 @@ const MAPS7 = {
     "rows": [
       "ᾆᾆᾆᾄᾆᾆᾆᾆᾆᾆᾇᾆᾆᾆᾆᾆᾆᾇᾆᾆᾆᾆᾆᾆᾄᾆᾆᾆᾆᾆ",
       "ᾆᾄᾄᾄᾄᾄᾄᾄᾄᾄᾄᾄᾄᾄᾄᾄᾄḚᾄᾄᾄᾄᾄᾄᾄᾄᾄᾄᾄᾆ",
-      "ᾆᾄᾄᾄᾄᾄᾄᾄᾄᾄᾄᾄᾈᾈᾈᾈᾄᾄᾄᾄᾄᾄᾄᾄᾄᾄᾄᾄᾄᾆ",
-      "ᾆᾄᾇᾄᾄᾄᾄᾄᾄᾄᾄᾄᾉsᾉᾉᾅᾅSᾅᾅᾇᾄᾄᾄᾄᾄᾄᾄᾆ",
-      "ᾆᾄᾅᾅᾅᾅᾅᾅᾅᾅᾅᾅᾅᾅᾅᾅᾅᾅᾅᾅᾅᾅᾄᾄᾄᾄᾄᾄᾄᾆ",
-      "ᾆᾄSᾅᾅᾅᾅᾅᾅᾅᾅᾅᾅᾅᾅᾅᾅᾅᾅᾅᾅᾅᾄᾄᾄRᾄᾄᾄᾆ",
+      "ᾆᾄᾄᾄ⃫ᾄᾄᾄᾄ⃫ᾄᾄ⃩⃩⃩⃩ᾄᾄᾄᾄ⃫ᾄᾄᾄᾄ⃫ᾄᾄᾄᾆ",
+      "ᾆᾄᾇᾄᾄᾄᾄᾄᾄᾄᾄᾄᾉsᾉᾉᾄᾄSᾄᾄᾇᾄᾄᾄᾄᾄᾄᾄᾆ",
+      "ᾆᾄᾄᾄᾄᾄᾄᾄᾄᾄᾄᾄ⃨⃨⃨⃨⃨ᾄᾄᾄᾄᾄᾄᾄᾄᾄᾄ⃫ᾄᾆ",
+      "ᾆᾄS⃨⃨⃨⃨⃨⃨⃨⃨⃨⃨⃨⃨⃨⃨⃨⃨⃨⃨⃨⃨ᾄᾄRᾄᾄᾄᾆ",
       "ᾆRRRRRRRRRRRRRLLRRRRLLRRRRRRRᾆ",
-      "ᾆᾄᾄḣᾅᾅᾅᾅᾅᾅᾅᾅᾅᾅᾅᾅᾅᾅᾅᾅᾅᾅᾅḚᾄRSᾄᾄᾆ",
-      "ᾆoFoᾅᾄᾄᾅᾅᾅᾅᾅᾅᾅᾅᾅᾅᾅᾅᾅᾅᾅᾅᾅᾅᾅᾅẄᾄᾆ",
-      "ᾆᾅᾅᾅᾅᾅᾅᾅᾅᾅᾅᾅᾅḚᾅᾅᾄᾄᾄᾅᾅᾅᾅᾅᾅᾄᾅᾄᾄᾆ",
-      "ᾆᾅᾅjklmᾅᾅdeefᾅᾅᾊᾊᾊᾄᾅᾊᾊᾊᾅᾄᾅᾅᾄᾇᾆ",
-      "ᾆᾅᾅAJKAᾅᾅP12Pᾅᾅᾋ—ᾋᾄᾅᾋ—ᾋᾅᾅᾄᾅᾄᾄᾆ",
-      "~ᾅᾅᾅᾅᾅᾅᾅᾅᾅᾅᾅᾅᾅᾅᾅᾅᾅᾅᾅᾅᾅᾅᾅᾅᾅᾅᾄᾄᾆ",
-      "~ᾅᾅᾅᾅ.ᾅ..ᾅᾅᾅᾅᾅᾅᾅᾅᾅᾅᾅᾅᾅᾅ....ᾄᾄᾆ",
-      "ᾆᾄᾄᾇ.,,,,.ᾅᾅᾅᾅᾅᾅᾅᾅᾅᾅᾅᾅ.,,,,,ᾄᾆ",
+      "ᾆᾄᾄḣᾄᾄᾄᾄᾄᾄᾄᾄ⃨⃨⃨⃨⃨⃨⃨⃨⃨⃨⃨Ḛ⃨RSᾄ⃬ᾆ",
+      "ᾆoFoᾄᾄSᾄᾄᾄᾄᾄᾄᾄ⃨ᾄᾄᾄᾄᾄᾄᾄ⃨⃨⃨⃨⃨Ẅᾄᾆ",
+      "ᾆᾄᾄᾄᾄᾄᾄᾄᾄᾄᾄᾄᾄḚ⃨ᾄᾄᾄᾄᾄᾄᾄᾄᾄ⃫ᾄᾄᾄᾄᾆ",
+      "ᾆᾄᾄjklmᾄᾄdeefᾄ⃪⃪⃪⃨ᾄᾄ⃪⃪⃪ᾄSᾄᾄᾄᾇᾆ",
+      "ᾆᾄᾄAJKAᾄᾄP12Pᾄ⃨ᾋ—ᾋᾄᾄᾋ—ᾋᾄᾄᾄᾄᾄᾄᾆ",
+      "⃨⃨⃨⃨⃨⃨⃨⃨⃨⃨⃨⃨⃨⃨⃨⃨⃨⃨⃨⃨⃨⃨⃨⃨⃨⃨⃨⃨ᾄᾆ",
+      "⃨⃨Sᾄ..S...ᾄᾄᾄᾄᾄᾄSᾄ⃨ᾄᾄᾄ.....ᾄᾄᾆ",
+      "ᾆᾄᾄᾇ.,,,,.ᾄᾄᾄᾄ⃨⃨⃨⃨⃨⃨⃨ᾄ.,,,,,ᾄᾆ",
       "ᾆᾄᾄᾄ.,,,,.ᾄḚᾄFẄᾇᾄᾄFᾄᾄᾇḣ,,,,,ᾄᾆ",
       "ᾆᾄᾄᾄᾄ,,,,ᾄᾄᾄᾄᾄᾄᾄᾄᾄᾄᾄᾄᾄᾄḚ,,,ᾄᾄᾆ",
       "ᾆᾆᾆᾇᾆᾆᾆᾆᾆᾆᾇᾆᾆᾆᾆᾆᾆᾄᾆᾆᾆᾆᾆᾆᾄᾆᾆᾆᾆᾆ"
@@ -150792,10 +150935,12 @@ const MAPS7 = {
       {"x": 18, "y": 3, "text": "PERENNIAL LEAGUE — The Conference hall. Bracket boards inside carry the road to the final; the falls keep the minutes."},
       {"x": 6, "y": 8, "text": "PERENNIAL CITY — West: ROUTE 134."},
       {"x": 24, "y": 10, "text": "PERENNIAL CITY — West: ROUTE 134."},
-      {"x": 6, "y": 13, "text": "PERENNIAL CITY — West: ROUTE 134."}
+      {"x": 6, "y": 13, "text": "PERENNIAL CITY — West: ROUTE 134."},
+      {"x": 2, "y": 13, "text": "PERENNIAL CITY — West: ROUTE 134."},
+      {"x": 16, "y": 13, "text": "PERENNIAL CITY — The league city at the end of every Maris road. Eight badges open Crown Road; the Conference waits on the plateau above."}
     ],
     "npcs": [
-      {"x": 3, "y": 5, "name": "MART CLERK", "art": "clerk", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#4a3a2a", "dialogue": ["Perennial Mart — league-grade stock for the Conference road."], "mart": {"stock": ["ultraball", "maxpotion", "fullrestore", "maxrevive", "fullheal"]}},
+      {"x": 9, "y": 12, "name": "MART CLERK", "art": "clerk", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#4a3a2a", "dialogue": ["Perennial Mart — league-grade stock for the Conference road."], "mart": {"stock": ["ultraball", "maxpotion", "fullrestore", "maxrevive", "fullheal"]}},
       {"x": 8, "y": 14, "name": "CONFERENCE HERALD VOSS", "art": "gent", "skin": "#d8a878", "shirt": "#7a4a8a", "pants": "#2a2a3a", "hair": "#c0c0c0", "dialogue": ["Bracket season, the plateau fills with flags and the falls applaud everything.", "Win or lose, a Conference run here ends the same way: one match the whole region remembers."]},
       {"x": 22, "y": 12, "name": "ELITE GREETER SABLE", "art": "lady", "skin": "#c89878", "shirt": "#2a7a6a", "pants": "#3a3a4a", "hair": "#7a4a1a", "dialogue": ["I have checked eight badges at this gate more times than the falls have fish. Show me yours when you’re ready.", "A man from the Trial Grounds scouted last year’s final from the back row. He took notes. Pages of them."]},
       {"x": 26, "y": 14, "name": "FINALIST’S SISTER KIT", "art": "kid", "skin": "#f0c8a0", "shirt": "#3a7a4a", "pants": "#4a3a2a", "hair": "#2a1a0a", "dialogue": ["My brother lost in the semi-final and calls it the best week of his life. Grown-ups are strange.", "The champion’s road is through the mountain. The mountain grades harder than any gym."]},
@@ -188976,6 +189121,6 @@ if (typeof Game !== 'undefined') Object.assign(Game.prototype, {
 });
 
 </script>
-<!-- contentHash:6053a0acdfc2b6f3b9068c74ea237e81eaf18d15983ead6a7d25e409964e769f -->
+<!-- contentHash:b1d29b1ec4f7785e9b5a4e15f7ce498975361feea16698964da3ead1d6b3bfce -->
 </body>
 </html>
