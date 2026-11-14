@@ -3763,6 +3763,26 @@ T57_KIND_DEFS.forEach(([kind], i) => {
 const T57_PROP_KINDS = T57_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
 const T57_WALL_KINDS = T57_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
 const T57_FLOOR_KINDS = T57_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
+// Wave T58 (Tangelo Island): the town's own kit kinds (Grove
+// Furrow & Coral Tile) — indices 972-976 per the Director's index
+// ruling (main's kinds run through T56's 948-951; the parallel
+// T57 claim holds 960-963; 964-971 stay empty).
+const T58_KIND_CHARS = {};
+const T58_KIND_DEFS = [
+  ['grovefloor', 'floor'],
+  ['coralroof', 'wall'],
+  ['mikantree', 'prop'],
+  ['pickbasket', 'prop'],
+  ['coralbanner', 'prop'],
+];
+T58_KIND_DEFS.forEach(([kind], i) => {
+  const ch = String.fromCodePoint(0x1E00 + 972 + i);
+  T58_KIND_CHARS[kind] = ch;
+  TILE_CHARS[ch] = kind;
+});
+const T58_PROP_KINDS = T58_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
+const T58_WALL_KINDS = T58_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
+const T58_FLOOR_KINDS = T58_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
 const SINNOH_TOWN_GROUND_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg);
 const SINNOH_TOWN_GROUND2_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg2);
 // TX-3: the 8 gym exteriors by town (original type-accent motifs).
@@ -112364,6 +112384,96 @@ const ART = {
     "SsShWWWCCCWWWhSs",
     "ssssWWWWWWWWWsss"
   ] },
+  "tile-grovefloor": { w: 16, h: 16, pal: {"e":"#c79f66","m":"#b8905a","f":"#9a7440","l":"#dec084","L":"#4d8a34","p":"#e8862a"}, rows: [
+    "Leeeeeeeeeeeeeee",
+    "eeeeeeeeemeeeeee",
+    "emeeeeeeLeeeeeep",
+    "ffffffffffffffff",
+    "llllllllllllllll",
+    "eeeeeeeLeeemeeee",
+    "eeemeeeeeeeeeepe",
+    "ffffffffffffffff",
+    "llllllllllllllll",
+    "eeeeeeeeeeeeemee",
+    "eeeeemeeeeeeepLe",
+    "ffffffffffffffff",
+    "llllllllllllllll",
+    "eeeeeeeeeeeeeLem",
+    "eeeeLeemeeeepeee",
+    "ffffffffffffffff"
+  ] },
+  "tile-coralroof": { w: 16, h: 16, pal: {"o":"#e07b2a","h":"#f2a54a","S":"#c05f1e","s":"#a34e18","R":"#f4d9c8","r":"#e8a58c","E":"#e58a7a"}, rows: [
+    "RRRRRRRRRRRRRRRR",
+    "rrrrrrrrrrrrrrrr",
+    "ohoSohoSohoSohoS",
+    "oooSoooSoooSoooS",
+    "oooSoooSoooSoooS",
+    "ssssssssssssssss",
+    "ohoSohoSohoSohoS",
+    "oooSoooSoooSoooS",
+    "oooSoooSoooSoooS",
+    "ssssssssssssssss",
+    "ohoSohoSohoSohoS",
+    "oooSoooSoooSoooS",
+    "oooSoooSoooSoooS",
+    "ssssssssssssssss",
+    "EEEEEEEEEEEEEEEE",
+    "EEEEEEEEEEEEEEEE"
+  ] },
+  "tile-prop-mikantree": { w: 16, h: 16, pal: {"d":"#71523d","T":"#5d4230","t":"#5fa064","C":"#2e6b26","G":"#4d8a34","g":"#1f4d1a","o":"#f08a1e","k":"#6b4423"}, rows: [
+    "TddddddddTdddddd",
+    "TddddddddTdddtdd",
+    "TddtdGGCCggddddd",
+    "TdddGGCCoCCgdddd",
+    "TddGoCCCCCCCgddd",
+    "TddGCCCoCCCogddd",
+    "TddCCCCCCCCCCddd",
+    "TddCCCoCCCCCCddd",
+    "TddgCCCCCCoCgddd",
+    "TdtgoCCCCCCCgddd",
+    "TdddgCCCCoCgdddt",
+    "Tddddokkkkgddddd",
+    "TddddddkkTdddddd",
+    "TddddddkkTdddddd",
+    "TddddddkkTdddddd",
+    "TddddTTTTTTtdddd"
+  ] },
+  "tile-prop-pickbasket": { w: 16, h: 16, pal: {"d":"#71523d","T":"#5d4230","t":"#5fa064","o":"#e8862a","O":"#c96a1e","l":"#3f7a2e","c":"#f2ead2","w":"#b0824a","W":"#8a6132","k":"#54331a"}, rows: [
+    "TddddddddTdddddd",
+    "TddddddddTdddtdd",
+    "TddtdddddTdddddd",
+    "TddddddddTdddddd",
+    "TdddddtddTdddddd",
+    "Tddcolooloolcddd",
+    "Tddcolooloolcddd",
+    "TddcOlOOlOOlcddd",
+    "Tddkkkkkkkkkkddd",
+    "TdtwwWWwwWWwwddd",
+    "TddwWWwwWWwwWddt",
+    "TddWWwwWWwwWWddd",
+    "TddWwwWWwwWWwddd",
+    "Tddkkkkkkkkkkddd",
+    "TdddTTTTTTTTdddd",
+    "TddddddddTdtdddd"
+  ] },
+  "tile-prop-coralbanner": { w: 16, h: 16, pal: {"s":"#c6b388","S":"#d4c69c","h":"#b3a075","k":"#6b4423","c":"#e58a7a","C":"#c96a5e","W":"#f7f2e2"}, rows: [
+    "SsSsSsSsSsSsSsSs",
+    "ssssssssssssssss",
+    "ssskkkkkkkkkksss",
+    "sssksccccccCssss",
+    "sssksccccccCssss",
+    "sssksccccccCssss",
+    "ssskscWWcccCssss",
+    "sSskscccWWcCsSsS",
+    "ssskscWWcccCssss",
+    "ssskscccWWcCssss",
+    "sssksccccccCssss",
+    "sssksccccccCssss",
+    "sssksCCCCCCCssss",
+    "ssskssssssssssss",
+    "SsSkSsSsSsSsSsSs",
+    "sshhhhssssssssss"
+  ] },
   "partner-back-bob": { base: "partner-back", w: 64, h: 64, pal: {}, shiftY: 2 },
   "partner-front-bob": { base: "partner-front", w: 64, h: 64, pal: {}, shiftY: 2 },
   "abomasnow-back-bob": { base: "abomasnow-back", w: 64, h: 64, pal: {}, shiftY: 2 },
@@ -117772,6 +117882,9 @@ for (const k of T56_FLOOR_KINDS) TILE_ART[k] = 'tile-' + k;
 for (const k of T57_PROP_KINDS) TILE_ART[k] = 'tile-prop-' + k;
 for (const k of T57_WALL_KINDS) TILE_ART[k] = 'tile-' + k;
 for (const k of T57_FLOOR_KINDS) TILE_ART[k] = 'tile-' + k;
+for (const k of T58_PROP_KINDS) TILE_ART[k] = 'tile-prop-' + k;
+for (const k of T58_WALL_KINDS) TILE_ART[k] = 'tile-' + k;
+for (const k of T58_FLOOR_KINDS) TILE_ART[k] = 'tile-' + k;
 // Premium+ W6 (TX-3/PL-1): door-open frames, authored in TX-3 for every
 // door kind. The warp-fade engine that plays them lands in W7 — W6
 // wires the frames (this registry + cache.doorOpen + doorOpenCanvas)
@@ -119699,6 +119812,13 @@ function resolveTileLayers(cache, kind, x, y, kindAt, t, phase, mapId) {
     // measured colours).
     case 'orangecrate':
     case 'coralbranch':
+    // Wave T58: Tangelo's citrus tree, pick basket and coral
+    // banner composite over their ground the same way (all three
+    // arts are fully opaque — the grove dirt / island sand is
+    // baked in at its measured colours).
+    case 'mikantree':
+    case 'pickbasket':
+    case 'coralbanner':
     // Wave T17: the radio mast composites over its compound grass too.
     case 'radiomast': {
       // Object tiles carry transparent surrounds (Wave 1): lay the ground
@@ -126926,6 +127046,15 @@ const WALKABLE = new Set(['.', ',', 'D', 'E', 'C', 'F', 'J', 'K', '1', '2', 'V',
   // parallel T56 claim holds 948-951; 940-947 + 952-959 stay
   // empty.)
   ...[960]
+    .map((i) => String.fromCodePoint(0x1E00 + i)),
+  // Wave T58: the grovefloor char (U+1E00+972, tiles.mjs
+  // T58_KIND_DEFS) is walkable street material — Tangelo's
+  // furrowed grove-earth street, swapped onto the town's path
+  // street cells + the SW surf jetty head, so floor stays floor.
+  // (Indices 972-976 per the Director's index ruling: main's
+  // kinds run through 948-951 (T56) + 960-963 (the parallel T57
+  // claim); 952-959 + 964-971 stay empty.)
+  ...[972]
     .map((i) => String.fromCodePoint(0x1E00 + i))]);
 
 // Trainer definitions for the slice.
@@ -132781,21 +132910,22 @@ const MAPS5 = {
     "music": "viridian-theme",
     "rows": [
       "~~~~~~~~~~~~~~~~~~~~~~~~~~",
-      "~~~~~~~~~~~~~~~~~~~~~~~~~~",
-      "~~ẞdeefẞẞjklm..deefẞẞabc~~",
-      "~~ẞUVYUS”AJKA..P12P――rst~~",
-      "~~ẞ†....................~~",
-      "~~”...................„„~~",
-      "~~o.ẟ.....„....‖.‖ẟẟẟ‗ẞẞ~~",
-      "~~ẞ†.ẟ...‟ẞ†ẟ.‟ẞ‭ẞ‘ẟẟẟ’ẞ~~",
-      "~~ẞ†,,,...―.ẟ..―.―ẟẟẟẟ#ẞ~~",
-      "~~ẞ†,,,.ẟ......ẟ.ẟẟẟẟẟ‗ẞ~~",
-      "~~‥.,,,........ẟ.ẟẟ,,,‗ẞ~~",
-      "~~ẞ†,,,...„ẟṃ....nẟ,,,‗ẞ~~",
-      "~~―..ẟ...‟ẞ†...ẟ.ẟẟ‖‖‖‛ẞ~~",
-      "~~........”.....Sẟẘẞẞẞẞẞ~~",
-      "~~~~~~~~~~~~~..~~~~~~~~~~~",
-      "~~~~~~~~~~~~~..~~~~~~~~~~~"
+      "~~ẞẞẞẞẞẞẞẞẞẞẞẞẞẞẞẞẞẞẞẞẞẞ~~",
+      "~~ẞ⇍⇍⇍⇍ẞẞjklm⇌⇌deefẞẞabcẞ~",
+      "~~ẞUVYUS⇐AJKA⇌⇌P12P――rstẞ~",
+      "~~⇐†⇌⇌⇌⇌⇌⇌⇌⇌⇌⇌⇌⇌⇌⇌⇌⇌⇌⇌⇌⇌ẞ~",
+      "~~”⇌⇌⇌⇌⇌⇌⇌⇌⇌⇌⇌⇌⇌⇌⇌⇌⇌⇌⇌„„~~",
+      "~~o⇌S⇌⇌⇌⇌⇌„⇌⇌⇌⇌⇌⇌‖ẟ⇎ẟ‗ẞẞ~~",
+      "~~ẞ†⇌⇎⇌⇌⇌‟ẞ†ẟ⇌‟⇌‭ẞ‘ẟẟẟ’ẞ~~",
+      "~~⇌†,,,⇌⇌⇌―⇌ẟ⇌⇌⇌⇌―ẟẟẟ⇎#ẞ~~",
+      "~~⇌†,,,⇌S⇌⇌⇌⇌⇌⇌⇌⇌ẟẟẟẟẟ‗ẞ~~",
+      "~~⇌⇌,,,⇌⇌⇌⇌⇌⇌⇌⇌⇌⇌⇏ẟ,,,‗ẞ~~",
+      "~~⇌†,,,⇌⇌⇌„Sṃ⇌⇌⇌⇌n⇎,,,‗ẞ~~",
+      "~~⇌⇌⇌⇌⇌⇌⇌‟⇌†⇌⇌⇌⇌⇌ẟẟ‖‖‖‛ẞ~~",
+      "~~⇌S⇌⇌⇌⇌⇌⇌”⇌⇌⇌⇌⇌S⇏ẘẞẞẞẞẞ~~",
+      "~~⇌⇌~~~S~~~~~⇌⇌~~~~~~~~~~~",
+      "~~⇌⇌~~~~~~~~~⇌⇌~~~~~~~~~~~"
+
     ],
     "warps": [
       {
@@ -132997,8 +133127,8 @@ const MAPS5 = {
         ]
       },
       {
-        "x": 3,
-        "y": 5,
+        "x": 15,
+        "y": 4,
         "name": "MART CLERK",
         "art": "clerk",
         "skin": "#e8b888",
