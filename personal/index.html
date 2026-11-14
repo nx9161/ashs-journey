@@ -92,8 +92,9 @@ body.reduced-motion .menu.menu-open{animation:none}
 /* party screen (Platinum layout): full-frame blue field, 2-col slot plates */
 .menu.plate-full{left:0;right:0;top:0;bottom:0;transform:none;width:auto;max-width:none;max-height:none;border:0;border-radius:0;outline:0;background-color:#46689f;background-image:repeating-linear-gradient(45deg,rgba(255,255,255,.06) 0 12px,rgba(0,0,0,.05) 12px 24px),repeating-linear-gradient(-45deg,rgba(255,255,255,.06) 0 12px,rgba(0,0,0,.05) 12px 24px)}
 .menu.plate-full .menu-title{background:linear-gradient(#33549c,#223c78);color:#fff;border-bottom:2px solid #dfe7f5}
-.menu.plate-full .menu-list{display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:10px;align-content:start}
-.menu.plate-full .menu-row{background:var(--paper);border:2px solid var(--frame);border-radius:3px;border-bottom:2px solid var(--frame);min-height:76px;padding:8px 10px}
+.menu.plate-full .menu-list{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:8px;padding:10px;align-content:start}
+.menu.plate-full .menu-row{background:var(--paper);border:2px solid var(--frame);border-radius:3px;border-bottom:2px solid var(--frame);min-height:76px;padding:8px 10px;min-width:0;overflow:hidden}
+.menu.plate-full .phpbar{width:48px}
 .menu.plate-full .picon{width:44px;height:44px;background:rgba(255,255,255,.7)}
 .menu.plate-full .pball{width:22px;height:22px;flex:none;image-rendering:pixelated}
 .menu.plate-full .menu-row.disabled{background:#aebadd;border:2px solid var(--frame);border-radius:3px;color:#4a5878;font-style:normal}
@@ -207,7 +208,25 @@ body.desktop.showtouch .rtmoves{display:flex}
 @media (pointer:coarse){body.desktop .rtmoves{display:flex}}
 /* toasts — Platinum mini-frames; HUD toasts in system blue */
 .toasts{position:absolute;left:0;right:0;bottom:12px;display:flex;flex-direction:column;align-items:center;gap:6px;padding:0 8px;pointer-events:none}
-.toast{background:var(--paper);color:var(--ink);border:2px solid var(--frame);outline:2px solid var(--frame2);outline-offset:-5px;font-size:16px;font-weight:700;line-height:1.4;padding:10px 16px;border-radius:3px;pointer-events:none;max-width:min(520px,92%);text-align:center;box-shadow:0 4px 18px rgba(0,0,0,.35);-webkit-text-stroke:.8px currentColor;letter-spacing:-.3px}
+.toast{background:var(--paper);color:var(--ink);border:2px solid var(--frame);outline:2px solid var(--frame2);outline-offset:-5px;font-size:16px;font-weight:700;line-height:1.4;padding:10px 16px;border-radius:3px;pointer-events:none;max-width:min(520px,92%);text-align:center;box-shadow:0 4px 18px rgba(0,0,0,.35);-webkit-text-stroke:.8px currentColor;letter-spacing:-.3px;animation:toastin .18s steps(3)}
+@keyframes toastin{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+/* W-UI boot veil: the link's first frame. Covers the bundle's font swap
+   (the legal card used to flash in a fallback face) behind the game's own
+   window; the shell script hides it once fonts are ready, and this CSS
+   animation is a no-JS failsafe that retires it at ~4.2s regardless. */
+#bootveil{position:fixed;inset:0;z-index:200;background:#141821;display:flex;align-items:center;justify-content:center;animation:veilhide .5s steps(5) 4.2s forwards}
+#bootveil.hide{opacity:0;visibility:hidden;transition:opacity .45s steps(6),visibility 0s linear .45s}
+@keyframes veilhide{to{opacity:0;visibility:hidden}}
+.veil-plate{background-color:var(--paper);background-image:var(--rivets);border:2px solid var(--frame);outline:2px solid var(--frame2);outline-offset:-5px;border-radius:3px;padding:26px 38px 20px;text-align:center}
+.veil-title{font-family:var(--font-display);font-size:28px;font-weight:bold;letter-spacing:1px;color:var(--navy)}
+.veil-rule{height:3px;background:var(--gold);margin:10px 6px 12px}
+.veil-sub{font-size:13px;font-weight:bold;letter-spacing:4px;color:var(--lcdink);background:var(--lcd);border:2px solid #46543a;border-radius:2px;padding:3px 10px 3px 14px;display:inline-block}
+/* W-UI: thin frame-coloured scrollbars — long menus (main menu, KinDex)
+   used to scroll with no visible affordance at all. */
+.menu,.sumcols,.pcpanel{scrollbar-width:thin;scrollbar-color:var(--frame2) transparent}
+.menu::-webkit-scrollbar,.sumcols::-webkit-scrollbar,.pcpanel::-webkit-scrollbar{width:8px;height:8px}
+.menu::-webkit-scrollbar-thumb,.sumcols::-webkit-scrollbar-thumb,.pcpanel::-webkit-scrollbar-thumb{background:var(--frame2);border-radius:4px}
+.menu::-webkit-scrollbar-track,.sumcols::-webkit-scrollbar-track,.pcpanel::-webkit-scrollbar-track{background:transparent}
 .hudtoast{background:linear-gradient(#4a7dd0,#2a4d9c);color:#fff;font-weight:bold}
 /* controls — emulator pad in deep navy/silver to sit under the Pt chrome.
    UI v2.5: the pad renders INSIDE #ctlband (page flow), not as a viewport
@@ -330,15 +349,16 @@ body.flip.landscape .sysbtns{grid-column:1}
 .hudchips{position:absolute;top:8px;left:8px;display:flex;flex-direction:column;gap:6px;z-index:14;pointer-events:none;max-width:calc(100% - 296px)}
 .hudchip{pointer-events:none}
 .locchip{align-self:flex-start;max-width:100%;background-color:var(--paper);background-image:var(--rivets);color:var(--ink);font-size:14px;font-weight:bold;letter-spacing:.4px;padding:6px 12px;border:2px solid var(--frame);outline:2px solid var(--frame2);outline-offset:-5px;border-radius:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.objchip{background-color:var(--paper);background-image:var(--rivets);color:var(--ink);border:2px solid var(--frame);outline:2px solid var(--frame2);outline-offset:-5px;border-radius:3px;padding:7px 12px;max-width:min(300px,72%)}
-.obj-kicker{display:block;font-family:var(--font-display);font-size:14px;font-weight:bold;letter-spacing:2px;color:var(--navy);margin-bottom:2px}
+.objchip{background-color:var(--paper);background-image:var(--rivets);color:var(--ink);border:2px solid var(--frame);outline:2px solid var(--frame2);outline-offset:-5px;border-radius:3px;padding:7px 12px;max-width:min(300px,100%)}
+.obj-kicker{display:block;font-family:var(--font-display);font-size:14px;font-weight:bold;letter-spacing:2px;color:var(--navy);margin-bottom:2px;white-space:nowrap}
 .obj-text{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;font-size:16px;font-weight:700;line-height:1.4;-webkit-text-stroke:.8px currentColor;letter-spacing:-.3px}
 .dexchip{align-self:flex-start;background-color:var(--paper);background-image:var(--rivets);border:2px solid var(--frame);outline:2px solid var(--frame2);outline-offset:-5px;border-radius:3px;padding:4px}
 .dexchip-text{display:block;background:var(--lcd);color:var(--lcdink);font-size:14px;font-weight:bold;letter-spacing:1px;padding:2px 8px;border:2px solid #46543a;border-radius:2px;white-space:nowrap}
 .nohud .hudchips{display:none}
+.nohud .moodpip,.nohud .hintcard{display:none}
 body.menu-full .hudchips,body.menu-full .hudstrip,body.menu-full .moodpip,body.menu-full .syncdot{display:none}
 .inbattle .hudchips{display:none}
-@media (max-width:560px){.hudchips{top:84px;max-width:calc(100% - 72px)}.objchip{max-width:min(300px,calc(100% - 72px))}}
+@media (max-width:560px){.hudchips{top:84px;max-width:calc(100% - 72px)}.objchip{max-width:min(300px,100%)}}
 /* HUD quick-strip — one light Platinum frame rail with the 4 buttons.
    UI v2.5 QA D-1: the strip is width-capped to the frame and its buttons
    may flex-shrink, so when a very short viewport snaps the canvas down
@@ -375,7 +395,12 @@ body.landscape .moodpip{display:none}
    .nohud/.inbattle live on the #ui root (not a band ancestor), so
    ui.mjs mirrors both classes onto the band and these rules hide the
    HUD in the band exactly as the frame rules hide it in-frame. */
-#hudband .hudchips{position:static;max-width:44%;margin-right:auto}
+/* W-UI: the chips column used to shrink-wrap to the location chip, so the
+   OBJECTIVE kicker (~130px) spilled past the objective chip's border on
+   desktop and the chip collapsed to an unreadable sliver at portrait.
+   A floor under the column + a full-width objective chip fixes both. */
+#hudband .hudchips{position:static;max-width:44%;min-width:184px;margin-right:auto}
+#hudband .objchip{max-width:300px}
 #hudband .hudstrip{position:static}
 #hudband .moodpip{position:static;flex:0 0 auto}
 /* UI v2.7 (Wave W8-F1): landscape band geometry. The chips COLUMN is
@@ -394,7 +419,7 @@ body.landscape #hudband .hudchips{flex-direction:row;max-width:none}
 body.landscape #hudband .locchip,body.landscape #hudband .dexchip{flex:none}
 body.landscape #hudband .objchip{flex:0 1 auto;min-width:0}
 body.landscape #hudband .moodpip{display:flex}
-#hudband.nohud .hudchips,#hudband.nohud .hudstrip{display:none}
+#hudband.nohud .hudchips,#hudband.nohud .hudstrip,#hudband.nohud .moodpip{display:none}
 #hudband.inbattle .hudchips,#hudband.inbattle .hudstrip{display:none}
 /* desktop keyboard-hint card — Platinum mini-frame */
 .hintcard{position:absolute;left:50%;transform:translateX(-50%);bottom:8px;display:flex;align-items:center;gap:10px;background-color:var(--paper);background-image:var(--rivets);border:2px solid var(--frame);outline:2px solid var(--frame2);outline-offset:-5px;border-radius:3px;color:var(--ink);font-family:var(--font);font-size:16px;font-weight:700;padding:8px 8px 8px 16px;pointer-events:auto;z-index:25;max-width:92vw;box-shadow:0 4px 18px rgba(0,0,0,.35);-webkit-text-stroke:.8px currentColor;letter-spacing:-.3px}
@@ -467,9 +492,11 @@ body.desktop.showtouch .controls{display:flex}
 </style>
 </head>
 <body>
+<div id="bootveil"><div class="veil-plate"><div class="veil-title">KIAN'S JOURNEY</div><div class="veil-rule"></div><div class="veil-sub">LOADING</div></div></div>
+<script>(function(){var v=document.getElementById("bootveil");if(!v)return;var done=false;function hide(){if(done)return;done=true;v.classList.add("hide");setTimeout(function(){if(v.parentNode)v.parentNode.removeChild(v);},700);}function arm(){var t=setTimeout(hide,2500);if(document.fonts&&document.fonts.ready){document.fonts.ready.then(function(){clearTimeout(t);setTimeout(hide,350);});}}if(document.readyState==="complete")arm();else addEventListener("load",arm);})();</script>
 <div id="stage"><div id="hudband"></div><div id="screenwrap"><canvas id="game"></canvas></div><div id="ctlband"></div></div>
 <div id="ui"></div>
 <script src="game.js"></script>
-<!-- contentHash:712d14e1839cac11b1931b92c09de35ba5ced5cb7fbf9a425074570e2e90a04d -->
+<!-- contentHash:8df896c8d59ac93a081abfeb060e1210d39b7a49da0f6d6ec00d95a77a1c46e6 -->
 </body>
 </html>
