@@ -3829,8 +3829,7 @@ T46_KIND_DEFS.forEach(([kind], i) => {
 });
 const T46_PROP_KINDS = T46_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
 const T46_WALL_KINDS = T46_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
-const T46_FLOOR_KINDS = T46_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
-// Wave T47: Repose Town's own kit — 'Olive Shingle & River
+const T46_FLOOR_KINDS = T46_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);// Wave T47: Repose Town's own kit — 'Olive Shingle & River
 // Pebble': the pebblefloor (rounded river pebbles in offset
 // rows bedded in pale sand mortar — the town's registered
 // street), the oliveroof (olive wood shingle courses, worn
@@ -3866,6 +3865,42 @@ T47_KIND_DEFS.forEach(([kind], i) => {
 const T47_PROP_KINDS = T47_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
 const T47_WALL_KINDS = T47_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
 const T47_FLOOR_KINDS = T47_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
+// Wave T48: Shardfall City's own kit — 'Shard Slate & Star Crate':
+// the shardfloor (dark cracked meteor-slate flags with crystal
+// shard inlay — the town's registered street), the shardroof
+// (checker slate — the gym's checkered puzzle floor spilled onto
+// its roof, worn only by the shipped Gym stamp's tr roof cells,
+// so the Gym + Dept Store + HQ three-way roof share breaks) and
+// two props: the starcrate (a heavy star-marked shipping crate at
+// the HQ landing's doorstep and the warehouse hand's shoulder —
+// the HQ sign's 'deliveries come and go' made dressing) and the
+// meteorcore (the tale's warm fallen shard, in the watcher's
+// crater garden east and one transferred seat on the north lawn).
+// Indices 852-855 per the Director's index ruling (main's kinds
+// run 594-636 + 645-648 + 660-662 + 672-675 + 684-687 + 696-699 +
+// 708-711 + 720-724 + 732-736 + 744-748 + 756-759 (T40) +
+// 768-771 (T41) + 780-783 (T42) + 792-795 (T43) + 804-807 (T44) +
+// 816-819 (T45) + 828-831 (T46); the parallel T47 claim holds
+// 840-843; 808-815 + 820-827 + 832-839 + 844-851 stay empty),
+// verified free against origin/main, TILE_CHARS and every map
+// row. Authored art: assets/sprites/pix/tiles/tile-shardfloor.pix,
+// tile-shardroof.pix, tile-prop-starcrate.pix,
+// tile-prop-meteorcore.pix. (WAVE-T48-SHARDFALL-PLAN.md.)
+const T48_KIND_DEFS = [
+  ['shardfloor', 'floor'],
+  ['shardroof', 'wall'],
+  ['starcrate', 'prop'],
+  ['meteorcore', 'prop'],
+];
+const T48_KIND_CHARS = {};
+T48_KIND_DEFS.forEach(([kind], i) => {
+  const ch = String.fromCodePoint(0x1E00 + 852 + i);
+  T48_KIND_CHARS[kind] = ch;
+  TILE_CHARS[ch] = kind;
+});
+const T48_PROP_KINDS = T48_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
+const T48_WALL_KINDS = T48_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
+const T48_FLOOR_KINDS = T48_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
 const SINNOH_TOWN_GROUND_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg);
 const SINNOH_TOWN_GROUND2_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg2);
 // TX-3: the 8 gym exteriors by town (original type-accent motifs).
@@ -96070,6 +96105,78 @@ const ART = {
     "ggGGggggggggGGgg",
     "gggggggggggggggg"
   ] },
+  "tile-shardfloor": { w: 16, h: 16, pal: {"a":"#6e7686","l":"#8b93a5","d":"#4a505c","s":"#33383f","c":"#cfd8ea","C":"#9fb6d9"}, rows: [
+    "lllllllsllllllls",
+    "daaaaaasdaasaaas",
+    "daaCcaasdsaaaaas",
+    "daacaaasdaaaadas",
+    "daaaasasdaaaaaas",
+    "ddasaaasdaaaaaas",
+    "dsaaaaasdaaCcass",
+    "ssssssssssscssss",
+    "lllslllllllsllll",
+    "aaasdaaasaasdaaa",
+    "aadsdasaaaasdaaa",
+    "aaasdaaaaaasdaaa",
+    "aassdacCaaasdaas",
+    "saasdaCaaaasdsad",
+    "aaasdaaaadasdaaa",
+    "ssssssssssssssss"
+  ] },
+  "tile-shardroof": { w: 16, h: 16, pal: {"a":"#98a0ae","l":"#b6bdc9","d":"#767e8c","b":"#565e6c","D":"#3f454f","c":"#dbe4f2"}, rows: [
+    "llllbbbbllllbbbb",
+    "aaaabbbbaacabbbb",
+    "aaaabbbbaaaabbbb",
+    "ddddDDDDddddDDDD",
+    "bbbbllllbbbbllll",
+    "bbbbaaaabbbbaaaa",
+    "bbbbaaaabbbbaaaa",
+    "DDDDddddDDDDdddd",
+    "llllbbbbllllbbbb",
+    "aaaabbbbaaaabbbb",
+    "aaaabbbbaaaabbbb",
+    "ddddDDDDddddDDDD",
+    "bbbbllllbbbbllll",
+    "bbbbaaaabbbbaaaa",
+    "bbbbaaaabbbbaaaa",
+    "DDDDddddDDDDdddd"
+  ] },
+  "tile-prop-starcrate": { w: 16, h: 16, pal: {"g":"#17821b","G":"#174c1b","w":"#a97c46","L":"#c49a5c","W":"#8a6234","i":"#4a4f58","S":"#e8e3d0"}, rows: [
+    "gggggggggggggggg",
+    "ggGGggggggggGGgg",
+    "gggggggggggggggg",
+    "gggggggggggggggg",
+    "gggwwwwwwwwwwggg",
+    "gggwiLLLLLLiwggg",
+    "gggwwWwwwwWwwggg",
+    "gggwwWwSSwWwwggg",
+    "gggwiLSSSSLiwggg",
+    "gggwwWwSSwWwwggg",
+    "gggwwWwwwwWwwggg",
+    "gggwiLLLLLLiwggg",
+    "gggwwwwwwwwwwggg",
+    "gggggggggggggggg",
+    "ggGGggggggggGGgg",
+    "gggggggggggggggg"
+  ] },
+  "tile-prop-meteorcore": { w: 16, h: 16, pal: {"g":"#17821b","G":"#174c1b","r":"#3d4149","R":"#2c2f36","L":"#5a606c","O":"#e8a33d"}, rows: [
+    "gggggggggggggggg",
+    "ggGGggggggggGGgg",
+    "gggggggggggggggg",
+    "gggggggLLggggggg",
+    "ggggggLrrLgggggg",
+    "ggggggrOrrLggggg",
+    "gggggrrrrOrrgggg",
+    "gggggrOrrrrrgggg",
+    "ggggrrrrOrrLrggg",
+    "ggggrrrrrrrrgggg",
+    "gggRrOrrrrOrrggg",
+    "gggRRrrrrrrRRggg",
+    "ggggRRRRRRRRgggg",
+    "gggggggggggggggg",
+    "ggGGggggggggGGgg",
+    "gggggggggggggggg"
+  ] },
   "tile-trellisroof": { w: 16, h: 16, pal: {"c":"#f2e7ce","r":"#cf8296","l":"#e2a5b4","d":"#a85f74","b":"#8e3d55","v":"#557f3e"}, rows: [
     "cclrllllcclllvll",
     "cccldllccccbrllc",
@@ -117096,12 +117203,17 @@ for (const k of T45_FLOOR_KINDS) TILE_ART[k] = 'tile-' + k;
 // poffin tin stack and the berry basket.
 for (const k of T46_PROP_KINDS) TILE_ART[k] = 'tile-prop-' + k;
 for (const k of T46_WALL_KINDS) TILE_ART[k] = 'tile-' + k;
-for (const k of T46_FLOOR_KINDS) TILE_ART[k] = 'tile-' + k;
-// Wave T47: Repose Town's own kit kinds take their authored
+for (const k of T46_FLOOR_KINDS) TILE_ART[k] = 'tile-' + k;// Wave T47: Repose Town's own kit kinds take their authored
 // tiles (assets/sprites/pix/tiles/tile-<kind>.pix).
 for (const k of T47_PROP_KINDS) TILE_ART[k] = 'tile-prop-' + k;
 for (const k of T47_WALL_KINDS) TILE_ART[k] = 'tile-' + k;
 for (const k of T47_FLOOR_KINDS) TILE_ART[k] = 'tile-' + k;
+// Wave T48: Shardfall City's own kit kinds take their authored
+// art: shardfloor cracked slate, the Gym's checker shardroof,
+// the star-marked crate and the warm meteorcore.
+for (const k of T48_PROP_KINDS) TILE_ART[k] = 'tile-prop-' + k;
+for (const k of T48_WALL_KINDS) TILE_ART[k] = 'tile-' + k;
+for (const k of T48_FLOOR_KINDS) TILE_ART[k] = 'tile-' + k;
 // Premium+ W6 (TX-3/PL-1): door-open frames, authored in TX-3 for every
 // door kind. The warp-fade engine that plays them lands in W7 — W6
 // wires the frames (this registry + cache.doorOpen + doorOpenCanvas)
@@ -118969,12 +119081,16 @@ function resolveTileLayers(cache, kind, x, y, kindAt, t, phase, mapId) {
     // composite over their lawn the same way (both arts are
     // fully opaque — the town grass is baked in).
     case 'poffintin':
-    case 'berrybasket':
-    // Wave T47: Repose's standing stones and its egg baskets
+    case 'berrybasket':    // Wave T47: Repose's standing stones and its egg baskets
     // composite over their meadow the same way (both arts are
     // fully opaque — the town grass is baked in).
     case 'standingstone':
     case 'eggbasket':
+    // Wave T48: Shardfall's star-marked crates and its warm
+    // meteor shard composite over their lawn the same way (both
+    // arts are fully opaque — the town grass is baked in).
+    case 'starcrate':
+    case 'meteorcore':
     // Wave T17: the radio mast composites over its compound grass too.
     case 'radiomast': {
       // Object tiles carry transparent surrounds (Wave 1): lay the ground
@@ -126041,8 +126157,7 @@ const WALKABLE = new Set(['.', ',', 'D', 'E', 'C', 'F', 'J', 'K', '1', '2', 'V',
   // 780-783 + 792-795 + 804-807; the parallel T45 claim holds
   // 816-819; gaps stay empty.)
   ...[828]
-    .map((i) => String.fromCodePoint(0x1E00 + i)),
-  // Wave T47: the pebblefloor char (U+1E00+840, tiles.mjs
+    .map((i) => String.fromCodePoint(0x1E00 + i)),  // Wave T47: the pebblefloor char (U+1E00+840, tiles.mjs
   // T47_KIND_DEFS) is walkable street material — Repose
   // Town's river-pebble cobble, swapped onto the town's tg2
   // street cells (the front street, the north/south avenues,
@@ -126054,6 +126169,19 @@ const WALKABLE = new Set(['.', ',', 'D', 'E', 'C', 'F', 'J', 'K', '1', '2', 'V',
   // 780-783 + 792-795 + 804-807 + 816-819; the parallel
   // T46 claim holds 828-831; gaps stay empty.)
   ...[840]
+    .map((i) => String.fromCodePoint(0x1E00 + i)),
+  // Wave T48: the shardfloor char (U+1E00+852, tiles.mjs
+  // T48_KIND_DEFS) is walkable street material — Shardfall
+  // City's cracked meteor-slate flags, swapped onto the town's
+  // tg2 street cells (the front street, the two south avenues,
+  // the row-13 boulevard — all shipped walkable as tg2), so
+  // floor stays floor. (Indices 852-855 per the Director's
+  // index ruling: main's kinds run 594-636 + 645-648 + 660-662 +
+  // 672-675 + 684-687 + 696-699 + 708-711 + 720-724 + 732-736 +
+  // 744-748 + 756-759 + 768-771 + 780-783 + 792-795 + 804-807 +
+  // 816-819 + 828-831; the parallel T47 claim holds 840-843;
+  // gaps stay empty.)
+  ...[852]
     .map((i) => String.fromCodePoint(0x1E00 + i))]);
 
 // Trainer definitions for the slice.
@@ -155545,23 +155673,23 @@ const MAPS9 = {
     "weather": "clear",
     "rows": [
       "῞῞῞῟῞῞῞῞῞῞῟῞῞῜῜῞῞῞῞῜῜῞῞῞῟῞῞῞῞῞",
-      "῞῜o῜῜῜῜῜῜῜῜῜῜῜῜῜῜῜῜῜῜῜῜῜῜῜῜῜῜῞",
-      "῞῜ojklm῜῜deef῜῜ῠῠῠῠ῜῜ῠῠῠῠ῜ḙ῜῜῞",
+      "῞῜o῜῜῜῜῜῜῜῜῜῜῜῜῜῜῜῜⅗῜῜῜῜῜῜῜῜῜῞",
+      "῞῜ojklm῜῜deef῜῜⅕⅕⅕⅕῜῜ῠῠῠῠ῜ḙ῜῜῞",
       "῞῜ḙAJKA῜῜P12P῜῜UVYU῜῜ῡsῡῡ῜o῜῜῞",
-      "῞῜῝῝῝῝῝῝ḙ῝῝῝῝῝῝῝῝῝῝῝῝῝῝῝S῜῜῜῜῞",
-      "῞῜S῝῝῝῝῝῝῝῝῝῝῝῝῝῝῝῝῝῝῝῝῝῝῜῜῜῜῞",
-      "῞῜῝῝῝῜῜῝῜῜῜῝῜῝῝῜῜῝῜῝῝῜῜῜῝῜῜῜῜῞",
-      "῞῜῝῝῝῜῜῝῝῝῝῜o῝῝῜o῝῜῝῝῜῜῜῝῜ḒẆ῜῞",
-      "῞῜῝῝῝῟῜῝῜Ḓ῜῝῝῝῝oḙ῝῝῝῝῜῜῜῝῜῜῜῜῞",
-      "῞῜῝῝῝῝῝῝῜῜῜῝Ḓ῝῝Ẇo῝῜῝῝῜῜῜῝ẆḙẊ῜῞",
-      "῞῜῝῝῝῝῝῝῜῜῜῝῜῝῝῝῝῝῜῝῝῜῜῜῝῜῜῜῜῞",
-      "῞῜῝ῠῠῠῠ῝῜῜῜῝῜῝῝῝῝῝Ḓ῝῝῜῝῝῝῜῜῜῜῞",
-      "῞῜῝ῡsῡῡ῝῜Ḓ῝῝῝῝῝῝῝῝῝῝῝῝῝῝῝῜῜῜῜῞",
-      "῞῜῝῝῝.῝῝῝῝῝῝Ẋ῝῝῜o῜῝῝῝῜῟῜῝῜῜῜῜῞",
-      "῞῜῝῜.,Ἂ῝῝῝῝῝῝῝῝῝Ḓḙ῝῝῝ḙἊ῜῝o῜῜῜῞",
-      "῞῜῝῜῜.,.῜Ἂ῝῝῝῝῝῝῝῝῝῝῝῝῝῝῝Ἂ῜῜῜῞",
-      "῞῜῝῝῝῝.῝῝῝῝῝῝῝῝῝῝῝Ḓ῝῝῝῝῟῜῜῜῜῜῞",
-      "῞῞῞῟῞῞῞῞῞῞῟῞῞῝῝῞῞῞῞῝῝῞῞῞῟῞῞῞῞῞",
+      "῞῜⅔⅔⅔⅔⅔⅔ḙ⅔⅔⅔⅔⅔⅔⅔⅔⅔⅔⅔⅔⅔⅔⅔S῜῜῜῜῞",
+      "῞῜S῜῜῜῜⅔⅔⅔῜⅔S⅔⅔῜῜῜῜⅔⅔῜῜῜῜῜῜῜῜῞",
+      "῞῜῜῜῜S῜῜῜῜῜⅔῜⅔⅔S῜῜῜⅔⅔ῢῢῢ῜῜῜῜῜῞",
+      "῞῜῜῜῜῜῜῜῜῜῜῜o⅔⅔῜o῜῜⅔⅔ΰsΰ῜῜ḒẆ῜῞",
+      "῞῜῜῜῜῟῜῜῜Ḓ῜῜῜⅔⅔oḙ῜῜⅔⅔῜⅔῜῜῜῜῜῜῞",
+      "῞῜῜῜῜῜῜῜῜῜῜῜Ḓ⅔⅔Ẇo῜῜⅔S῜⅔῜῜ẆḙẊ῜῞",
+      "῞῜῜῜῜῜῜῜῜῜῜῜῜⅔⅔῜῜῜῜⅔⅔῜⅔῜῜ῢῢῢ῜῞",
+      "῞῜῜ῠῠῠῠ῜῜῜῜῜῜⅔⅔῜῜῜Ḓ⅔⅔῜⅔῜῜ΰsΰ῜῞",
+      "῞῜῜ῡsῡῡ⅖῜Ḓ⅔⅔⅔⅔⅔⅔⅔⅔⅔⅔⅔⅔⅔⅔⅔⅔⅔⅔⅔῞",
+      "῞῜῜⅖⅔.⅔⅔⅔⅔⅔⅔Ẋ⅔⅔῜o῜῜⅔⅔῜῟S῜⅔῜῜῜῞",
+      "῞῜῜S.,Ἂ⅔῜῜῜῜῜⅔⅔῜Ḓḙ῜⅔⅔ḙἊ῜῜o῜῜῜῞",
+      "῞῜῜῜῜.,.SἊ῜῜῜⅔⅔῜῜῜῜⅔⅔῜῜῜⅗Ἂ῜῜῜῞",
+      "῞῜῜῜῜⅔.⅔῜῜῜῜῜⅔⅔῜῜῜Ḓ⅔⅔῜῜῟῜῜῜῜῜῞",
+      "῞῞῞῟῞῞῞῞῞῞῟῞῞⅔⅔῞῞῞῞⅔⅔῞῞῞῟῞῞῞῞῞",
     ],
     "warps": [
       {"x": 4, "y": 3, "to": {"map": "center", "x": 4, "y": 4}, "via": {"map": "veilstone", "x": 4, "y": 4}},
@@ -155583,11 +155711,13 @@ const MAPS9 = {
       {"x": 3, "y": 14, "text": "SHARDFALL CITY — South: ROUTE 215 / ROUTE 214."},
       {"x": 5, "y": 6, "text": "SHARDFALL CITY — South: ROUTE 215 / ROUTE 214."},
       {"x": 15, "y": 6, "text": "SHARDFALL CITY — South: ROUTE 215 / ROUTE 214."},
-      {"x": 21, "y": 9, "text": "SHARDFALL CITY — South: ROUTE 215 / ROUTE 214."},
+      {"x": 20, "y": 9, "text": "SHARDFALL CITY — South: ROUTE 215 / ROUTE 214."},
       {"x": 8, "y": 15, "text": "SHARDFALL CITY — South: ROUTE 215 / ROUTE 214."},
+      {"x": 12, "y": 5, "text": "SHARDFALL CITY — South: ROUTE 215 / ROUTE 214."},
+      {"x": 23, "y": 13, "text": "SHARDFALL CITY — South: ROUTE 215 / ROUTE 214."}
     ],
     "npcs": [
-      {"x": 3, "y": 5, "name": "MART CLERK", "art": "clerk", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#4a3a2a", "dialogue": ["Shardfall City Mart — stocked for the road ahead."], "mart": {"stock": ["ultraball", "hyperpotion", "maxpotion", "fullheal", "revive", "escaperope"]}},
+      {"x": 9, "y": 4, "name": "MART CLERK", "art": "clerk", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#4a3a2a", "dialogue": ["Shardfall City Mart — stocked for the road ahead."], "mart": {"stock": ["ultraball", "hyperpotion", "maxpotion", "fullheal", "revive", "escaperope"]}},
       {"x": 11, "y": 7, "name": "DEPT CLERK VEE", "art": "clerk", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#4a3a2a", "dialogue": ["Four floors of shelves and I still run out of the one thing everyone wants. It's a gift.", "Maren's gym rearranges itself for challengers. The vegetables in the market do not; stand your ground there."]},
       {"x": 18, "y": 12, "name": "METEOR WATCHER SOL", "art": "scientist", "skin": "#c89878", "shirt": "#2a7a6a", "pants": "#3a3a4a", "hair": "#7a4a1a", "dialogue": ["The rocks north of town fell within living memory of the stones themselves. They hum at certain hours.", "Game corner coins, meteor dust, fighting mats — Shardfall collects intense hobbies."]},
       {"x": 7, "y": 13, "name": "WAREHOUSE HAND BRIN", "art": "worker", "skin": "#f0c8a0", "shirt": "#3a7a4a", "pants": "#4a3a2a", "hair": "#2a1a0a", "dialogue": ["Crates in, crates out. The star-sign crates are heavier and nobody says why.", "South road runs down to the tower country and Repose beyond."]},
@@ -190312,6 +190442,6 @@ if (typeof Game !== 'undefined') Object.assign(Game.prototype, {
 });
 
 </script>
-<!-- contentHash:8d7597c97e797fe682308d7d29934a98d68906b0165365fbd35114993b450460 -->
+<!-- contentHash:79f0f55e7682a04e19175e34b97f0ba4bcf7130abb90c31de3df9d39a580de42 -->
 </body>
 </html>
