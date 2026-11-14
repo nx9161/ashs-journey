@@ -1,0 +1,27 @@
+# Wave T60 (Bergamot): a barnacled standing stone — grey megalith, lichen cap, barnacle ring at its foot, on the island sand baked in at its measured colours (#c6b388/#d4c69c). Fully opaque. (WAVE-T60-BERGAMOT-PLAN.md §5.)
+PIX tile-prop-surfstone 16 16
+ssssssssssssssss
+ssSssssccsssssss
+sssssslgGgssssss
+ssssslgggGgsssss
+ssssslglgGGsssss
+ssssssgggGgsssss
+sssSsslgGgGsssss
+sssssslggggsSsss
+sssssslgGgGsssss
+ssssssggggGsssss
+ssSssslgGgGsssss
+ssssssgggggsnsSs
+sssssngggggnssss
+sssshhgggggghhss
+ssshhhhhhhhhhhhs
+ssssssssssSsssss
+PAL
+s #c6b388 island sand
+S #d4c69c sand speckle
+h #a69274 contact shadow
+g #8b8b93 stone
+G #6e6e78 stone shade
+l #a9a9b2 stone light
+c #7a9a5a lichen
+n #d8d2c0 barnacle

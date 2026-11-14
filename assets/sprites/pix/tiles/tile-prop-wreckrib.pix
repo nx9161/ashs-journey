@@ -1,0 +1,26 @@
+# Wave T60 (Bergamot): the wreck ribs — three curved bleached hull timbers rising from the sand, a rope-frayed cross spar, on the island sand baked in at its measured colours (#c6b388/#d4c69c). Fully opaque. (WAVE-T60-BERGAMOT-PLAN.md §5.)
+PIX tile-prop-wreckrib 16 16
+ssssssssssssssss
+ssSssstsssssssss
+sssssstTssstssss
+sssssstTssstTsss
+sssssstTssstTsss
+sssssstTsstTssss
+sssssstTstTssSss
+ssssttttttssssss
+sssssrrrTsssssss
+sssstTttTsssssss
+sssstTtTtsssssss
+sssStTtTtssSssss
+sssstTtTtsssssss
+sshhTTTTTTThhsss
+shhhhhhhhhhhhhhs
+ssssssssssSsssss
+PAL
+s #c6b388 island sand
+S #d4c69c sand speckle
+h #a69274 contact shadow
+t #cbbfa5 bleached timber
+T #9a8a6e timber shade
+d #6e5f45 timber dark
+r #8a7a5a rope

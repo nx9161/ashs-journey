@@ -1,0 +1,25 @@
+# Wave T60 (Bergamot): ruin flags — large fitted harbour slabs, cracked dark joints, moss in the seams, worn pale centres. The drowned town’s own paving. (NO-SAME-KIT law; WAVE-T60-BERGAMOT-PLAN.md §5.)
+PIX tile-ruinfloor 16 16
+flffdflljjlfmfdl
+ffwffflfjjfflfff
+flffffljjjflfdfl
+ffffdffljjfffflf
+lflfffffjjlfffff
+ffflwffmjjffffff
+jjjjjjjjjjfjjjjj
+lflffflfjjflffdf
+fflfffffjjffwfff
+ffffffljjjflffff
+dflffflfjjlffffl
+fffffffmjjffffdf
+flfdflffjjfflfff
+fffffflfjjflfwfl
+jjfjjjjjjjjjjfjj
+flffffljdflffffl
+PAL
+f #9a958a flag face
+l #b3ad9f flag light
+d #7e7a6e flag shade
+j #5d594f joint
+m #5f7a4a seam moss
+w #c2bcae worn centre

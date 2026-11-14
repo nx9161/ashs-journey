@@ -891,6 +891,21 @@ export const WALKABLE = new Set(['.', ',', 'D', 'E', 'C', 'F', 'J', 'K', '1', '2
   // (T57); the parallel T58 claim holds 972-976; 964-971 +
   // 977-983 stay empty.)
   ...[984]
+    .map((i) => String.fromCodePoint(0x1E00 + i)),
+  // Wave T60: the ruinfloor char (U+1E00+996, tiles.mjs
+  // T60_KIND_DEFS) is walkable street material — Bergamot's
+  // ruin-flag street, swapped onto the island's whole shipped
+  // street blob (authored as the generic `path` dirt track)
+  // plus the north surf-exit jetty head, so floor stays
+  // floor. (Indices 996-999 per the Director's index ruling:
+  // main's kinds run 594-636 + 645-648 + 660-662 + 672-675 +
+  // 684-687 + 696-699 + 708-711 + 720-724 + 732-736 + 744-748 +
+  // 756-759 + 768-771 + 780-783 + 792-795 + 804-807 + 816-819 +
+  // 828-831 + 840-843 + 852-855 + 864-868 + 876-879 + 888-891 +
+  // 900-903 + 912-915 + 924-927 + 936-939 + 948-951 (T56) +
+  // 960-963 (T57) + 972-976 (T58); the parallel T59 claim
+  // holds 984-987; 964-971 + 977-983 + 988-995 stay empty.)
+  ...[996]
     .map((i) => String.fromCodePoint(0x1E00 + i))]);
 
 // Trainer definitions for the slice.

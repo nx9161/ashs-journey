@@ -1,0 +1,24 @@
+# Wave T60 (Bergamot): bone-drift shingle — bleached driftwood shingle courses, bone-white faces, blue-grey weather shadow in the gaps, algae flecks at the eave. Worn by the Mart only. (NO-SAME-KIT law; WAVE-T60-BERGAMOT-PLAN.md §5.)
+PIX tile-boneroof 16 16
+bBBbbBbbbbsbbBbb
+bbBbbBBbbbsbBbbB
+ssssssssssssssss
+BbbbsbBBbbBbbbsb
+sbBbbssbbBsBBbbb
+ssssssswssssssss
+bBbbsbBbbbBsbbbb
+bbsbBbbssbBbbsbB
+ssssssssssssssss
+sbBBbbsbBBbsbBbb
+bbbsbBBssbbbsbBs
+ssssssssssssssss
+bBbbbsbBbbsbBBbs
+sbBbsbBbbssbBbbb
+sssasssssssssass
+bbbbwbbbbbbwbbbb
+PAL
+b #ddd6c4 bone face
+B #efe9da bone light
+s #a39a86 course shadow
+w #8b98a5 weather blue-grey
+a #6f8f6a algae fleck

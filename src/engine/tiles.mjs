@@ -2319,6 +2319,25 @@ T59_KIND_DEFS.forEach(([kind], i) => {
 export const T59_PROP_KINDS = T59_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
 export const T59_WALL_KINDS = T59_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
 export const T59_FLOOR_KINDS = T59_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
+// Wave T60 (Bergamot Island): the town's own kit kinds (Ruin
+// Flag & Bone Drift) — indices 996-999 per the Director's index
+// ruling (main's kinds run through T58's 972-976; the parallel
+// T59 claim holds 984-987; 977-983 + 988-995 stay empty).
+export const T60_KIND_DEFS = [
+  ['ruinfloor', 'floor'],
+  ['boneroof', 'wall'],
+  ['surfstone', 'prop'],
+  ['wreckrib', 'prop'],
+];
+export const T60_KIND_CHARS = {};
+T60_KIND_DEFS.forEach(([kind], i) => {
+  const ch = String.fromCodePoint(0x1E00 + 996 + i);
+  T60_KIND_CHARS[kind] = ch;
+  TILE_CHARS[ch] = kind;
+});
+export const T60_PROP_KINDS = T60_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
+export const T60_WALL_KINDS = T60_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
+export const T60_FLOOR_KINDS = T60_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
 export const SINNOH_TOWN_GROUND_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg);
 export const SINNOH_TOWN_GROUND2_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg2);
 // TX-3: the 8 gym exteriors by town (original type-accent motifs).
