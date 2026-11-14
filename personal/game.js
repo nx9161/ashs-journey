@@ -3267,6 +3267,35 @@ T44_KIND_DEFS.forEach(([kind], i) => {
 const T44_PROP_KINDS = T44_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
 const T44_WALL_KINDS = T44_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
 const T44_FLOOR_KINDS = T44_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
+// ---- Wave T45: Heritage City's own kit from birth (NO-SAME-KIT
+// law): 'Historic Stone & Leaf-Shadow' — idx 816-819 per the
+// Director's index ruling (main's kinds run 594-636 + 645-648 +
+// 660-662 + 672-675 + 684-687 + 696-699 + 708-711 + 720-724 +
+// 732-736 + 744-748 + 756-759 + 768-771 + 780-783 + 792-795;
+// the parallel T44 claim holds 804-807; the gaps stay empty,
+// 808-815 included). heritagefloor is the worn teal-green
+// flagstone street; heritageroof is the cut-stone teal slate
+// worn by the Gym's roof cells (breaking the Gym + Combine
+// building tr-eterna share); oldstatue stands in the statue
+// garden; flowerurn spills at the town's gates. Art:
+// assets/sprites/pix/tiles/tile-heritagefloor.pix,
+// tile-heritageroof.pix, tile-prop-oldstatue.pix,
+// tile-prop-flowerurn.pix. (WAVE-T45-HERITAGE-PLAN.md.)
+const T45_KIND_DEFS = [
+  ['heritagefloor', 'floor'],
+  ['heritageroof', 'wall'],
+  ['oldstatue', 'prop'],
+  ['flowerurn', 'prop'],
+];
+const T45_KIND_CHARS = {};
+T45_KIND_DEFS.forEach(([kind], i) => {
+  const ch = String.fromCodePoint(0x1E00 + 816 + i);
+  T45_KIND_CHARS[kind] = ch;
+  TILE_CHARS[ch] = kind;
+});
+const T45_PROP_KINDS = T45_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
+const T45_WALL_KINDS = T45_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
+const T45_FLOOR_KINDS = T45_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
 const SINNOH_TOWN_GROUND_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg);
 const SINNOH_TOWN_GROUND2_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg2);
 // TX-3: the 8 gym exteriors by town (original type-accent motifs).
@@ -110914,6 +110943,78 @@ const ART = {
     "gggggggggggggggg",
     "gggggggggggggggg"
   ] },
+  "tile-heritagefloor": { w: 16, h: 16, pal: {"a":"#57755f","j":"#33503f","w":"#83a18b","l":"#42604c","s":"#4a6854"}, rows: [
+    "laaajaaaaaajaaaa",
+    "aaaajaaaasajaala",
+    "aawajlaaaaajawaa",
+    "awwwjaaawaajwwwa",
+    "aawajaawwwljawaa",
+    "alaajaaawaajaaaa",
+    "aaaajaaaaaajaaal",
+    "jjjjjjjjjjjjjjjj",
+    "aaaaaaajaaaaaaja",
+    "aaaaaaajaaalaaja",
+    "aalwaaajaaaaaajw",
+    "aawwwaajaawasaww",
+    "aaawaaajawwwaajw",
+    "asaaaaajaawaaaja",
+    "aaaaaaajaasalaja",
+    "jjjjjjjjjjjjjjjj"
+  ] },
+  "tile-heritageroof": { w: 16, h: 16, pal: {"m":"#2e6f6a","l":"#4b9791","d":"#1d4a47","o":"#7fae56","w":"#9fc4bd"}, rows: [
+    "wllllldllllldlll",
+    "dmmmmmdmmommdmmm",
+    "dmmmmmdmmwmmdmmm",
+    "dddddddddddddddd",
+    "llldllllldllllld",
+    "mmwdmmmmodmmmmmd",
+    "mmmdmmmmmdmmmmmd",
+    "dddddddddddwdddd",
+    "dllllldllllldlll",
+    "dmmmmmdommmmdmmm",
+    "dmmmwmdmmmmmdmmm",
+    "dddddddddddddddd",
+    "llldllllldlllwld",
+    "mmmdmmommdmmmmmd",
+    "mmmdmmmmmdmmmmmo",
+    "ddddddwddddddddd"
+  ] },
+  "tile-prop-oldstatue": { w: 16, h: 16, pal: {"g":"#0e7f08","S":"#a8aea0","s":"#79816f","d":"#59614f","m":"#4a7a3a","f":"#e88bb0"}, rows: [
+    "gggggggggggggggg",
+    "ggggggSSSSggSggg",
+    "ggggggSSSSggSggg",
+    "ggggggSSssggSggg",
+    "gggggSSSSsSSgggg",
+    "gggggSssSSsggggg",
+    "gggggSSSSSSggggg",
+    "gggggSSmmSSggggg",
+    "ggggggSSSSgggggg",
+    "ggggggSssSgggggg",
+    "ggggggSSSSgggggg",
+    "gggggSSSSSSggggg",
+    "ggggSSSSSSSSgggg",
+    "ggggSddSSddSgggg",
+    "gggSSSSSSSSSSggg",
+    "gggffggggggffggg"
+  ] },
+  "tile-prop-flowerurn": { w: 16, h: 16, pal: {"g":"#0e7f08","S":"#9aa294","s":"#6e7768","G":"#3f7a2e","F":"#e88bb0","f":"#f6e3c8","y":"#f4d03f"}, rows: [
+    "gggggggggggggggg",
+    "gggggfyffygggggg",
+    "ggggFFfGGfFFgggg",
+    "gggggGGGGGGggggg",
+    "ggggSSSSSSSSgggg",
+    "gggggSssssSggggg",
+    "gggggSSSSSSggggg",
+    "ggggggSssSgggggg",
+    "gggggggSSggggggg",
+    "ggggggSSSSgggggg",
+    "gggggSSSSSSggggg",
+    "gggggggggggggggg",
+    "gggggggggggggggg",
+    "gggggggggggggggg",
+    "gggggggggggggggg",
+    "gggggggggggggggg"
+  ] },
   "partner-back-bob": { base: "partner-back", w: 64, h: 64, pal: {}, shiftY: 2 },
   "partner-front-bob": { base: "partner-front", w: 64, h: 64, pal: {}, shiftY: 2 },
   "abomasnow-back-bob": { base: "abomasnow-back", w: 64, h: 64, pal: {}, shiftY: 2 },
@@ -116271,6 +116372,11 @@ for (const k of T43_FLOOR_KINDS) TILE_ART[k] = 'tile-' + k;
 for (const k of T44_PROP_KINDS) TILE_ART[k] = 'tile-prop-' + k;
 for (const k of T44_WALL_KINDS) TILE_ART[k] = 'tile-' + k;
 for (const k of T44_FLOOR_KINDS) TILE_ART[k] = 'tile-' + k;
+// Wave T45: Heritage City's own kit kinds take their authored
+// tiles (assets/sprites/pix/tiles/tile-<kind>.pix).
+for (const k of T45_PROP_KINDS) TILE_ART[k] = 'tile-prop-' + k;
+for (const k of T45_WALL_KINDS) TILE_ART[k] = 'tile-' + k;
+for (const k of T45_FLOOR_KINDS) TILE_ART[k] = 'tile-' + k;
 // Premium+ W6 (TX-3/PL-1): door-open frames, authored in TX-3 for every
 // door kind. The warp-fade engine that plays them lands in W7 — W6
 // wires the frames (this registry + cache.doorOpen + doorOpenCanvas)
@@ -118129,6 +118235,11 @@ function resolveTileLayers(cache, kind, x, y, kindAt, t, phase, mapId) {
     // fully opaque — the town grass is baked in).
     case 'beehive':
     case 'shopsign':
+    // Wave T45: Heritage's statue and its flower urns composite
+    // over their lawn the same way (both arts are fully opaque —
+    // the town grass is baked in).
+    case 'oldstatue':
+    case 'flowerurn':
     // Wave T17: the radio mast composites over its compound grass too.
     case 'radiomast': {
       // Object tiles carry transparent surrounds (Wave 1): lay the ground
@@ -125172,6 +125283,17 @@ const WALKABLE = new Set(['.', ',', 'D', 'E', 'C', 'F', 'J', 'K', '1', '2', 'V',
   // (T39) + 756-759 (T40) + 768-771 (T41) + 780-783 (T42); the
   // parallel T43 claim holds 792-795; gaps stay empty.)
   ...[804]
+    .map((i) => String.fromCodePoint(0x1E00 + i)),
+  // Wave T45: the heritagefloor char (U+1E00+816, tiles.mjs
+  // T45_KIND_DEFS) is walkable street material — Heritage
+  // City's worn flagstone street, swapped onto the town's
+  // street cells (which shipped as walkable tg2 mud), so floor
+  // stays floor. (Indices 816-819 per the Director's index
+  // ruling: main's kinds run 594-636 + 645-648 + 660-662 +
+  // 672-675 + 684-687 + 696-699 + 708-711 + 720-724 + 732-736 +
+  // 744-748 + 756-759 + 768-771 + 780-783 + 792-795; the
+  // parallel T44 claim holds 804-807; gaps stay empty.)
+  ...[816]
     .map((i) => String.fromCodePoint(0x1E00 + i))]);
 
 // Trainer definitions for the slice.
@@ -154474,22 +154596,22 @@ const MAPS9 = {
     "rows": [
       "ῆῆῆῇῆῆῆῆῆῆῇῆῆῄῄῆῆῆῇῆῆῆῆῆῆῇῆῆῆῆ",
       "ῆῄῄῇῄῄῄῄḡῄῄῄῄῄῄῄẅῄῄῄῄῄḚῄῄῄῄῄῄῆ",
-      "ῆῄῄjklmῄῄdeefῄῄῈῈῈῈῄῄῈῈῈῈῄῄῄῄῆ",
+      "ῆῄῄjklmῄῄdeefῄῄℱℱℱℱῄῄῈῈῈῈῄῄῄῄῆ",
       "ῆῄῄAJKAῄῄP12PῄῄUVYUῄῇΈsΈΈῄῄῄῄῆ",
-      "ῆῄo῅῅῅῅῅῅῅῅῅῅῅῅῅῅῅῅῅῅῅῅῅Sῄῄῄῄῆ",
-      "ῆῄS῅῅῅῅῅῅῅῅῅῅῅῅῅῅῅῅῅῅῅῅῅῅῅῅῅ῄῆ",
-      "ῆ῅῅῅῅῅῅῅ῄῄῄ῅ῄ῅῅ῄῄῄ῅ῄῄῄῄῄ῅ῄῄ῅ῄῆ",
-      "ῆ῅῅῅῅῅῅῅῅῅῅ῄ῅῅῅Ṁῄῄ῅ῄῄῄῄῄ῅ῄῄ῅ḡῆ",
-      "῅῅῅῅῅῅῅῅῅῅῅῅῅῅῅῅῅῅῅῅῅῅῅῅῅῅῅῅῅῅",
-      "῅῅῅῅῅῅῅῅῅῅῅῅῅῅῅῅῅῅῅῅῅῅῅῅῅῅῅῅῅῅",
-      "ῆ῅῅῅῅῅῅῅ῄῄῄ῅ῄ῅῅ῄṀῄ῅ῄẅῄ῅ẅῇῄῄῄῄῆ",
-      "ῆ῅῅ῊῊῊ῅῅ῄῄῄ῅ῄ῅῅ῄῄῄ῅ῄ῅῅῅ῄẅῄῄῄῄῆ",
-      "ῆ῅῅ΉsΉ῅῅῅῅῅῅῅῅῅῅῅῅῅῅῅῅῅ῄῄῄῄῄῄῆ",
-      "ῆ῅῅῅...῅῅῅῅῅ḡ῅῅ῄῄῄ῅ῄoῇ῅ῄῄῄῄῄῄῆ",
-      "ῆ῅Ḛ.,,,.ῄῄῄ῅῅῅῅ῄῄῄ῅ῄῄῄ῅ῄῄῄṀῄῄῆ",
-      "ῆ῅.,,,,.ῄῄῄ῅ῄ῅῅ῄ῅῅῅῅῅῅῅Ṁῄῄῄῄῄῆ",
-      "ῆ῅῅....῅῅῅῅῅῅῅῅῅῅ῇῄῄῄῄῄῄῄῄῄῄῄῆ",
-      "ῆῆῆῇῆῆῆῆῆῆῇῆῆ῅῅ῆῆῆῇῆῆῆῆῆῆῄῆῆῆῆ",
+      "ῆῄoℰℰℰℰℰℰℰℰℰℰℰℰℰℰℰℰℰℰℰℰℰSῄῄῄῄῆ",
+      "ῆῄSῄῄῄῄῄῄῄῄῄℳℰℰῄῄῄῄῄῄῄῄῄℱℱℱῄῄῆ",
+      "ῆῄῄῄῄῄῄῄῄῄῄῄῄℰℰῄῄῄῄῄῄῄῄῄΉsΉῄῄῆ",
+      "ῆῄῄῄῄῄῄῄῄῄῄῄῄℰℰṀSῄῄῄῄῄῄῄῄℰῄῄḡῆ",
+      "ℰℰℰℰℰℰℰℰℰℰℰℰℰℰℰℰℰℰℰℰℰℰℰℰℰℰℰℰℰℰ",
+      "ℰℰℰℰℰℰℰℰℰℰℰℰℰℰℰℰℰℰℰℰℰℰℰℰℰℰℰℰℰℰ",
+      "ῆῄῄῄῄῄῄℰῄℱℱℱῄℰℰῄṀῄῄῄẅῄῄẅῇῄῄῄῄῆ",
+      "ῆῄῄῊῊῊῄℰῄΉsΉῄℰℰῄῄῄῄῄῄῄῄῄẅῄῄῄῄῆ",
+      "ῆῄῄΉsΉῄℰℰℰℰῄῄℰℰῄῄῄῄῄῄῄῄῄῄῄῄῄῄῆ",
+      "ῆῄῄℰ...ℰῄῄῄῄḡℰℰῄῄῄῄSoῇῄῄῄῄῄῄῄῆ",
+      "ῆῄℲ.,,,.ℳSῄῄῄℰℰῄῄῄῄῄῄῄῄῄῄῄṀῄῄῆ",
+      "ῆS.,,,,.ῄῄῄῄῄℰℰῄῄῄῄῄῄῄῄṀῄῄῄῄῄῆ",
+      "ῆῄℰ....ℰῄῄℰℰℰℰℰῄῄῇῄῄῄῄῄῄῄῄῄῄῄῆ",
+      "ῆῆῆῇῆῆῆῆῆῆῇῆῆℰℰῆῆῆῇῆῆῆῆῆῆῄῆῆῆῆ",
     ],
     "warps": [
       {"x": 4, "y": 3, "to": {"map": "center", "x": 4, "y": 4}, "via": {"map": "eterna", "x": 4, "y": 4}},
@@ -154513,9 +154635,10 @@ const MAPS9 = {
       {"x": 19, "y": 13, "text": "HERITAGE CITY — West: HERITAGE FOREST · East: ROUTE 211 · South: ROUTE 206."},
       {"x": 9, "y": 14, "text": "HERITAGE CITY — West: HERITAGE FOREST · East: ROUTE 211 · South: ROUTE 206."},
       {"x": 1, "y": 15, "text": "HERITAGE CITY — West: HERITAGE FOREST · East: ROUTE 211 · South: ROUTE 206."},
+      {"x": 16, "y": 7, "text": "HERITAGE CITY — The historic city, kept in stone and leaf-shadow. The old statue watches the crossroads; the forest keeps the west gate."}
     ],
     "npcs": [
-      {"x": 3, "y": 5, "name": "MART CLERK", "art": "clerk", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#4a3a2a", "dialogue": ["Heritage City Mart — stocked for the road ahead."], "mart": {"stock": ["greatball", "ultraball", "hyperpotion", "fullheal", "revive", "superpotion"]}},
+      {"x": 9, "y": 4, "name": "MART CLERK", "art": "clerk", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#4a3a2a", "dialogue": ["Heritage City Mart — stocked for the road ahead."], "mart": {"stock": ["greatball", "ultraball", "hyperpotion", "fullheal", "revive", "superpotion"]}},
       {"x": 11, "y": 7, "name": "HISTORIAN ILSE", "art": "lady", "skin": "#d8a878", "shirt": "#7a4a8a", "pants": "#2a2a3a", "hair": "#c0c0c0", "dialogue": ["Heritage was old when the roads were young. The statue in the square is older than the square.", "The forest west breathes through this city. Tansy's gym smells of it."]},
       {"x": 18, "y": 12, "name": "CYCLING COACH BO", "art": "youngster", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#4a3a2a", "dialogue": ["South, the cycling road runs over Stray Cave to Coalseam. The cave keeps SHARKLET; the road keeps everyone else honest.", "East, Route 211 climbs to Mt. Apex's heart."]},
       {"x": 7, "y": 14, "name": "STATUE KEEPER SOL", "art": "elder", "skin": "#e8b888", "shirt": "#b0503c", "pants": "#2a2a3a", "hair": "#5a3a2a", "dialogue": ["Travellers leave flowers at the statue for journeys past and coming.", "A team in star-sign shirts photographs the statue weekly. I sweep around them and say nothing."]},
