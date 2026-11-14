@@ -474,6 +474,12 @@ export const WALKABLE = new Set(['.', ',', 'D', 'E', 'C', 'F', 'J', 'K', '1', '2
   // driftfloor char (U+1E00+604) likewise in Tidewall City,
   // so floor stays floor in both.
   ...[602, 604]
+    .map((i) => String.fromCodePoint(0x1E00 + i)),
+  // Wave T27: the plankfloor char (U+1E00+609, tiles.mjs
+  // T27_KIND_DEFS) is walkable street material — Mistford's
+  // boardwalk, swapped onto the town's street cells (which
+  // shipped as walkable tg2 mud), so floor stays floor.
+  ...[609]
     .map((i) => String.fromCodePoint(0x1E00 + i))]);
 
 // Trainer definitions for the slice.

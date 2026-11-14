@@ -1,0 +1,32 @@
+# Wave T27 (Mistford kit): shackroof — Mistford's own roof kind.
+# Weathered surf-teal WOOD SHAKES: irregular vertical splits, bleached
+# streaks, a driftwood ridge along the top. In the KIT_VARIANTS dewford
+# roof tones (#4fa3a5/#2f6e70/#79c2c0). Structurally shake + ridge, not
+# a recolour: Meadowbrook wears small staggered sage stone shingles,
+# Copperton wide slabs with copper seams, Eldergrove banded thatch,
+# Rootlet flat cedar shingle; shakes read as surf-shack timber at
+# screenshot scale. (NO-SAME-KIT law.)
+PIX tile-shackroof 16 16
+rRrrRrrrrrrrRrRr
+dddddddddddddddd
+ltlttttltlttlttt
+tttdttttltldtttt
+tttdltltttldltlt
+ltldttttttldtttt
+tttdltltltldtttt
+tttdttttttldtttt
+ssssddddssssdddd
+ltttlttlttlttltt
+tttttdtttttttdtt
+ltlttdttttlttdtt
+tttttdttlttttdtt
+lttttdtttttttdtl
+ttlttdtttttttdtt
+dddddddddddddddd
+PAL
+t #4fa3a5 shake-teal
+l #79c2c0 bleached-teal
+d #2f6e70 split-shadow
+s #1f4a4c course-shade
+r #8a6f4d driftwood-ridge
+R #6b543a ridge-shade

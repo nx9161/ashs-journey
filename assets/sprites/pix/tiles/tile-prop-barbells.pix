@@ -1,0 +1,33 @@
+# Wave T27 (Mistford kit): barbells — Enzo's irons, the gym's
+# outdoor warm-up gear (BACKSTORY-SYNC-AUDIT Mistford: "the design's
+# barbells outside" the gym; the backstory audit's prescription,
+# built at the shipped gym's front). A steel bar resting low on the
+# meadow, plate stacks at both ends. FULLY OPAQUE by design: it
+# stands on the town meadow, whose tg-dewford tone is baked in as
+# its ground, never transparency (the T25 scales / T26 travstone
+# precedent). (WAVE-T27-MISTFORD-PLAN.md, Kit.)
+PIX tile-prop-barbells 16 16
+gGgggggggGgggggg
+gggggGgggggggGgg
+gGggggggggggGggg
+gggggggggGgggggg
+gggggGgggggggggg
+gGggggggggGggggg
+gggggggggggggGgg
+gppggggggggggppg
+pPPpggggggggpPPp
+pPPpsssssssspPPp
+pPPpsrrrrrrspPPp
+pPPpggggggggpPPp
+gppghhhhhhhhgppg
+gggghhhhhhhhgggg
+gGgggggggggggGgg
+gggggGgggGgggggg
+PAL
+g #15891e meadow
+G #1a9622 meadow-speckle
+h #0e7016 ground-shadow
+s #3a3f44 steel-bar
+p #23262a plate
+P #565c62 plate-face
+r #9aa0a4 plate-rim

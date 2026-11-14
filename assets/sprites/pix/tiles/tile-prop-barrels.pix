@@ -1,0 +1,30 @@
+# Wave T27 (Mistford kit): barrels — the approved painting's Mart
+# dressing ("Mart NE (awning, barrels)"): two stave barrels with
+# steel hoops stacked beside the Mart stamp (the awning itself is
+# stamp art and is not built; BACKSTORY compass ruling, plan S3.4).
+# FULLY OPAQUE: the tg-dewford meadow they stand on is baked in
+# (T25/T26 prop precedent). (WAVE-T27-MISTFORD-PLAN.md, Kit.)
+PIX tile-prop-barrels 16 16
+gGgggggggggggGgg
+ggggggGggggggggg
+gggggggggGgggggg
+gggggggggttttggg
+gggggggggwwwwwwg
+ggttttgggwwwWwwg
+ggwwwwgggwwwWwwg
+ggwwwWgggwwwWwwg
+gghhhhggghhhhhhg
+ggwwwwgggwwwWwwg
+ggwwwWgggwwwWwwg
+ggwwwwggghhhhhhg
+ggwwwwgggggggggg
+gghhhhgggggggggg
+gggggGggggggggGg
+gGggggggGggggggg
+PAL
+g #15891e meadow
+G #1a9622 meadow-speckle
+w #a97c50 stave
+W #7d5a36 stave-shade
+h #4a4d52 hoop
+t #c49a68 barrel-top

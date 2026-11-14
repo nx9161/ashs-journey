@@ -1,0 +1,33 @@
+# Wave T27 (Mistford kit): plankfloor — Mistford's registered street
+# kind (the fleet's street kinds carry the -floor suffix; the
+# desire-path tiers key on it). Salt-bleached boardwalk planks: long
+# horizontal boards, butt joints offset between planks, sparse knots
+# and one worn teal paint remnant — the island's street fabric from
+# the Centre north jetty to the east surf road. Structurally long
+# planks + seams, not a recolour: Copperton's are big square quarry
+# flags, Redwood's gravel speckle, Cinder's small brick, the marble
+# and sett slabs are stone. Planks read as pier timber at screenshot
+# scale. (NO-SAME-KIT law.)
+PIX tile-plankfloor 16 16
+lppplppplppplppp
+ppppppnpptpppppp
+ppdppppppppppdpp
+dddddddddddddddd
+lppplppplpplpppl
+pppppptpppppppnp
+ppppppdppppppppp
+dddddddddddddddd
+lppplppplppplppp
+ppnppppptppppppp
+ppppppppppdppppp
+dddddddddddddddd
+lpplppplppplpplp
+pppptpppppppppnp
+ppdppppppppppdpp
+dddddddddddddddd
+PAL
+p #c2b294 bleached-plank
+l #d6c8a8 plank-light
+d #8a7a5c seam
+n #6e5f45 knot
+t #4fa3a5 teal-paint-remnant

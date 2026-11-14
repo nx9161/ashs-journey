@@ -1,0 +1,35 @@
+# Wave T27 (Mistford kit): chalkboard — the hall's trendy-phrase
+# board (TOWN-PROMPTS: "The hall posts what is trendy; the island
+# decides what is true."). A driftwood A-frame board with a dark
+# slate-teal face and pale chalk scribbles — marks and a chalk wave,
+# NO words: the backstory audit's suggested board line was never
+# backend data, so no text is invented; the phrase itself is
+# TRENDWATCHER IO's shipped dialogue, and the board stands beside
+# her post on the civic green. FULLY OPAQUE: the tg-dewford meadow
+# it stands on is baked in (T25/T26 prop precedent).
+# (WAVE-T27-MISTFORD-PLAN.md, Kit.)
+PIX tile-prop-chalkboard 16 16
+gGggggggGggggggg
+ggggggGggggggGgg
+ggggffffffffgggg
+ggggfbbbbbbbfggg
+ggggfbccccccbfgg
+ggggfbcccCccbfgg
+ggggfbcCccccbfgg
+ggggfbccccCcbfgg
+ggggfbccccccbfgg
+ggggfbbbbbbbfggg
+ggggffffffffgggg
+gggFFggggggFFggg
+ggFFggggggggFFgg
+gFFggggggggggFFg
+gGggggggGggggggg
+ggggggGggggggGgg
+PAL
+g #15891e meadow
+G #1a9622 meadow-speckle
+f #8a6f4d driftwood-frame
+F #6b543a frame-shade
+b #2e3a3a board-face
+c #e8e4da chalk
+C #b9c4bd chalk-dim

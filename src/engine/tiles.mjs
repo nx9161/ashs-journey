@@ -977,6 +977,62 @@ WD5_KIND_DEFS.forEach(([kind], i) => {
 export const WD5_PROP_KINDS = WD5_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
 export const WD5_WALL_KINDS = WD5_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
 export const WD5_FLOOR_KINDS = WD5_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
+// ---- Wave T27 (Mistford Town build): Surf-Teal Island ----
+// Five new kinds at idx 608-612 (U+2060-U+2064, verified free
+// in TILE_CHARS and unused by every map row; the block runs
+// T23 575, W-DIFF 577-580, W-DIFF2 581-584, T24 585-587,
+// T25 588-591, WD3 592-593, W-DIFF4 594-597, T26 598-601,
+// W-DIFF5 602-607 — marshfloor, safariroof, driftfloor,
+// surfroof, marshbog, marshreed for Bramble + Tidewall.
+// Mistford was first registered at 602-606 and RE-INDEXED to
+// 608-612 under the Director's index ruling of 2026-11-13
+// (W-DIFF5 finished first); the dewford map cells were
+// remapped losslessly, 79 cells, counts verified per kind —
+// the W-DIFF3/T24 precedent). Mistford is Maris's surf
+// island (HOENN_TOWN_STYLE dewford: ground #74aca4, form
+// 'island surf shack'); its shipped ground was 36.1% tg2 mud
+// (the twenty-first mud town) under a placement-gates FAIL, its
+// wet-sand beach kind rendered as brown striping, its MART
+// CLERK orphaned again and five direction signs invisible.
+// Its own kit (NO-SAME-KIT law): 'shackroof' (wall) — weathered
+// surf-teal wood shakes with irregular splits, bleached streaks
+// and a driftwood ridge, in the KIT_VARIANTS dewford roof
+// tones; structurally shake + ridge, not Meadowbrook's small
+// staggered sage stone shingles, Copperton's copper-seamed
+// slabs or Eldergrove's thatch. 'plankfloor' (floor) — salt-
+// bleached boardwalk planks, the town's street fabric and
+// registered street kind (STREET_REGISTRY; the fleet's street
+// kinds carry the -floor suffix the desire-path tiers key on),
+// swapped onto every street/exit/landing cell. 'barbells'
+// (prop) — Enzo's irons outside the gym (the backstory audit's
+// prescription), fully opaque with the meadow baked in, at
+// (15,5) and (18,5). 'chalkboard' (prop) — the hall's trendy-
+// phrase board, chalk marks and NO text (the audit's proposed
+// board line was never backend data; the phrase itself is
+// TRENDWATCHER IO's dialogue), fully opaque with the meadow
+// baked in, at (9,11) beside IO's post. 'barrels' (prop) — the
+// approved painting's Mart barrels, fully opaque with the
+// meadow baked in, at (8,3) beside the Mart stamp. Authored
+// art: assets/sprites/pix/tiles/tile-shackroof.pix,
+// tile-plankfloor.pix, tile-prop-barbells.pix,
+// tile-prop-chalkboard.pix, tile-prop-barrels.pix (register:
+// WAVE-T27-MISTFORD-PLAN.md).
+export const T27_KIND_DEFS = [
+  ['shackroof', 'wall'],
+  ['plankfloor', 'floor'],
+  ['barbells', 'prop'],
+  ['chalkboard', 'prop'],
+  ['barrels', 'prop'],
+];
+export const T27_KIND_CHARS = {};
+T27_KIND_DEFS.forEach(([kind], i) => {
+  const ch = String.fromCodePoint(0x1E00 + 608 + i);
+  T27_KIND_CHARS[kind] = ch;
+  TILE_CHARS[ch] = kind;
+});
+export const T27_PROP_KINDS = T27_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
+export const T27_WALL_KINDS = T27_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
+export const T27_FLOOR_KINDS = T27_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
 export const SINNOH_TOWN_GROUND_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg);
 export const SINNOH_TOWN_GROUND2_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg2);
 // TX-3: the 8 gym exteriors by town (original type-accent motifs).
