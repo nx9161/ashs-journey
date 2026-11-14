@@ -3445,6 +3445,43 @@ T49_KIND_DEFS.forEach(([kind], i) => {
 const T49_PROP_KINDS = T49_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
 const T49_WALL_KINDS = T49_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
 const T49_FLOOR_KINDS = T49_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
+// Wave T50: Fenland City's own kit — "Marsh Boardwalk & Bog
+// Eyes": one street (the marsh boardwalk itself: horizontal
+// weathered-olive planks, pegged joints, a pale worn centre),
+// one roof (steep vertical board courses, worn by the Gym —
+// whose shipped tr-pastoria wash it replaces — and the two
+// facade cottages; the Gatehouse keeps tr), and two props:
+// the bogeyes (the MUDGILL's eyes and fin at water level in
+// the south pool — the GREAT MIRE sign's own words and ODO's
+// tenancy, realized as dressing per the Backstory Sync Audit;
+// no actor invented) and the lilypad (two pads and the
+// BOGNEWT, a tiny frog, beside it). Indices 876-879 per the
+// Director's index ruling (main's kinds run 594-636 + 645-648 +
+// 660-662 + 672-675 + 684-687 + 696-699 + 708-711 + 720-724 +
+// 732-736 + 744-748 + 756-759 (T40) + 768-771 (T41) + 780-783
+// (T42) + 792-795 (T43) + 804-807 (T44) + 816-819 (T45) +
+// 828-831 (T46) + 840-843 (T47) + 852-855 (T48); the parallel
+// T49 claim holds 864-868; 808-815 + 820-827 + 832-839 +
+// 844-851 + 856-863 + 869-875 stay empty), verified free
+// against origin/main, TILE_CHARS and every map row.
+// Authored art: assets/sprites/pix/tiles/tile-walkfloor.pix,
+// tile-boardroof.pix, tile-prop-bogeyes.pix,
+// tile-prop-lilypad.pix. (WAVE-T50-FENLAND-PLAN.md.)
+const T50_KIND_DEFS = [
+  ['walkfloor', 'floor'],
+  ['boardroof', 'wall'],
+  ['bogeyes', 'prop'],
+  ['lilypad', 'prop'],
+];
+const T50_KIND_CHARS = {};
+T50_KIND_DEFS.forEach(([kind], i) => {
+  const ch = String.fromCodePoint(0x1E00 + 876 + i);
+  T50_KIND_CHARS[kind] = ch;
+  TILE_CHARS[ch] = kind;
+});
+const T50_PROP_KINDS = T50_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
+const T50_WALL_KINDS = T50_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
+const T50_FLOOR_KINDS = T50_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
 const SINNOH_TOWN_GROUND_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg);
 const SINNOH_TOWN_GROUND2_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg2);
 // TX-3: the 8 gym exteriors by town (original type-accent motifs).
@@ -95721,6 +95758,78 @@ const ART = {
     "ggGGggggggggGGgg",
     "gggggggggggggggg"
   ] },
+  "tile-walkfloor": { w: 16, h: 16, pal: {"a":"#6e8a4f","l":"#8aa863","d":"#55703c","s":"#2f4423","p":"#3d5a2e"}, rows: [
+    "llallllallslalll",
+    "aaaaaaaadpspaaaa",
+    "aaaaaaaaaasaaaaa",
+    "ssssssssssssssss",
+    "llallslallllalll",
+    "aaaapspaaaaaaaaa",
+    "lalllsallllallll",
+    "ssssssssssssssss",
+    "llallllallllslll",
+    "aaadaaaaaaapspaa",
+    "aaaaaaaaaaadsaaa",
+    "ssssssssssssssss",
+    "llaslllallllalll",
+    "aapspaaaaaaadaaa",
+    "aaasaaaaalaaaaaa",
+    "ssssssssssssssss"
+  ] },
+  "tile-boardroof": { w: 16, h: 16, pal: {"a":"#6e8a4f","l":"#7d9c5c","d":"#49632f","s":"#2f4423"}, rows: [
+    "ssssssssssssssss",
+    "dddsdddsdddsddds",
+    "ladsladsladslads",
+    "ladsladsladslads",
+    "lddsladsladslads",
+    "ladsladslddslads",
+    "ladsladsladslads",
+    "ladsladsladslads",
+    "ladsladsladslads",
+    "ladsladsladslads",
+    "ladsladsladslads",
+    "ladsladsladslads",
+    "ladsladsladslads",
+    "ladsladsladslads",
+    "ladsladsladslads",
+    "dddsdddsdddsddds"
+  ] },
+  "tile-prop-bogeyes": { w: 16, h: 16, pal: {"b":"#6c8358","w":"#526a7b","h":"#7c9469","f":"#44543a","F":"#5d7350","e":"#e8e4c8","k":"#1c2416"}, rows: [
+    "wbbbbbbbbbbbbwbb",
+    "bbbbwbbbbbbbbhbb",
+    "bbbbbbbbwhbbbbbb",
+    "bbbbbhbbbbbbwbbb",
+    "bhbwbbbbbbbbbbbb",
+    "bbbbbbbFFbbbbbhb",
+    "bbbbbbFffFhwbbbb",
+    "bbwbbbfffffbbbbw",
+    "bbhbbbwfffbwbbbb",
+    "bbbbewbbbbwebbbh",
+    "bwbekebbbbekebwb",
+    "bbbwwwbhbbwwwbbb",
+    "bbbhwbwbbwwbwbbb",
+    "wbbbbbbbbbbbbwbb",
+    "bbbbwbbbbbbbhbbb",
+    "bbbbbbbbwbbbbbbb"
+  ] },
+  "tile-prop-lilypad": { w: 16, h: 16, pal: {"b":"#6c8358","w":"#526a7b","h":"#7c9469","g":"#4a7a3a","G":"#5d9148","F":"#7a9a4a","e":"#e8e4c8","k":"#1c2416","P":"#c88aa0"}, rows: [
+    "wbbbbbbbbbbbbwbb",
+    "bbbbwbbbbbbbbhbb",
+    "bbbbbbbbwhbbbbbb",
+    "bbbbbhbbbbbbGbbb",
+    "bhbwbbbbbbbGPGbb",
+    "bbbbbbbwbbGggbhb",
+    "bbbbebebbbhGgGbb",
+    "bbwbFFFbbbbbGbbw",
+    "bbhFFkFFbbbbbbbb",
+    "bbbGFFFGbbwbbbbh",
+    "bwGgggbbbbbhbbwb",
+    "bbbGgggGbbbbbbbb",
+    "bbbGGgGGbwbbbbbb",
+    "wbbbbGbbbbbbbwbb",
+    "bbbbwbbbbbbbhbbb",
+    "bbbbbbbbwbbbbbbb"
+  ] },
   "tile-trellisroof": { w: 16, h: 16, pal: {"c":"#f2e7ce","r":"#cf8296","l":"#e2a5b4","d":"#a85f74","b":"#8e3d55","v":"#557f3e"}, rows: [
     "cclrllllcclllvll",
     "cccldllccccbrllc",
@@ -116851,6 +116960,9 @@ for (const k of T48_FLOOR_KINDS) TILE_ART[k] = 'tile-' + k;
 for (const k of T49_PROP_KINDS) TILE_ART[k] = 'tile-prop-' + k;
 for (const k of T49_WALL_KINDS) TILE_ART[k] = 'tile-' + k;
 for (const k of T49_FLOOR_KINDS) TILE_ART[k] = 'tile-' + k;
+for (const k of T50_PROP_KINDS) TILE_ART[k] = 'tile-prop-' + k;
+for (const k of T50_WALL_KINDS) TILE_ART[k] = 'tile-' + k;
+for (const k of T50_FLOOR_KINDS) TILE_ART[k] = 'tile-' + k;
 // Premium+ W6 (TX-3/PL-1): door-open frames, authored in TX-3 for every
 // door kind. The warp-fade engine that plays them lands in W7 — W6
 // wires the frames (this registry + cache.doorOpen + doorOpenCanvas)
@@ -118733,6 +118845,11 @@ function resolveTileLayers(cache, kind, x, y, kindAt, t, phase, mapId) {
     // fully opaque — the town grass is baked in).
     case 'mooringpost':
     case 'harbourbell':
+    // Wave T50: Fenland's bog eyes and its lily pad composite
+    // over their pool the same way (both arts are fully opaque
+    // — the marshbog pool is baked in at its measured colours).
+    case 'bogeyes':
+    case 'lilypad':
     // Wave T17: the radio mast composites over its compound grass too.
     case 'radiomast': {
       // Object tiles carry transparent surrounds (Wave 1): lay the ground
@@ -125843,6 +125960,19 @@ const WALKABLE = new Set(['.', ',', 'D', 'E', 'C', 'F', 'J', 'K', '1', '2', 'V',
   // truss deck of Bridgeport's one bridge, swapped onto the
   // shipped span's four boardwalk cells at rows 8-9.
   ...[868]
+    .map((i) => String.fromCodePoint(0x1E00 + i)),
+  // Wave T50: the walkfloor char (U+1E00+876, tiles.mjs
+  // T50_KIND_DEFS) is walkable street material — Fenland
+  // City's marsh boardwalk, swapped onto the town's tg2
+  // street cells (the front street, the avenues, the marsh
+  // road, the south road — all shipped walkable as tg2), so
+  // floor stays floor. (Indices 876-879 per the Director's
+  // index ruling: main's kinds run 594-636 + 645-648 + 660-662 +
+  // 672-675 + 684-687 + 696-699 + 708-711 + 720-724 + 732-736 +
+  // 744-748 + 756-759 + 768-771 + 780-783 + 792-795 + 804-807 +
+  // 816-819 + 828-831 + 840-843 + 852-855; the parallel
+  // T49 claim holds 864-868; gaps stay empty.)
+  ...[876]
     .map((i) => String.fromCodePoint(0x1E00 + i))]);
 
 // Trainer definitions for the slice.
@@ -157396,24 +157526,25 @@ const MAPS9 = {
     "music": "viridian-theme",
     "weather": "clear",
     "rows": [
-      "΅΅΅`΅΅΅΅΅΅`΅΅῭῭΅΅΅`΅΅΅΅΅΅`΅΅",
-      "΅oῬῬῬῬῬῬ῭῭῭῭῭῭῭῭῭῭῭῭῭῭῭῭῭῭῭΅",
-      "΅ῬῬjklmῬ῭deef῭῭῰῰῰῰῭Ῥῲῲῲ῭Ῥ῭΅",
-      "΅ῬῬAJKAῬ῭P12P῭῭UVYU῭Ῥῳsῳ῭Ῥ῭΅",
-      "΅Ῥo῭῭῭῭‑῭῭῭῭῭῭῭῭῭῭῭῭῭῭῭῭῭῭῭΅",
-      "΅ῬS῭῭῭῭῭῭῭῭῭῭῭῭῭῭῭῭῭῭῭῭῭῭῭῭΅",
-      "΅‑῭῭῭Ῥ῭῭῭ῬῬ῭Ῥ῭῭‑῭῭῭ῬῬῬῬῬ῭Ῥ῭΅",
-      "΅Ῥ῭῭῭Ῥ῭῭῭῭῭῭῭῭῭῭῭῭῭῭`ῬῬῬ῭Ῥ῭΅",
-      "ῬῬ῭῭῭῭῭῭῭῭῭῭῭῭῭῭῭῭῭῭῭῭῭῭῭῭῭῭",
-      "ῬῬ῭῭῭῭῭῭῭῭῭῭῭῭῭῭῭῭῭῭῭῭῭῭῭῭῭῭",
-      "΅Ῥ῭῭῭῭῭῭῭῭῭῭῭῭῭῭ῬῬῬ῭ῬῬῬῬ῭Ῥ῭΅",
-      "΅Ῥ῭῰῰῰῰῭ῬoF῭Ẍ῭῭῭῭῭῭῭῭῭‌‌῭‌῭΅",
-      "΅Ῥ῭῱s῱῱῭ῬFo῭Ῥ῭῭῭ῬῬ‌῭‑῭῭῭S‌῭΅",
-      "΅Ῥ῭῭῭῭῭῭῭῭῭῭῭῭῭῭῭῭῭῭῭῭῭῭῭῭῭΅",
-      "΅o῭‌‌‑‌῭‌‌Ῥ῭῭῭῭ῬῬῬ‌῭‌‌‌῭‑‌‌΅",
-      "΅Ῥ῭῭῭῭῭῭῭῭῭῭῭῭῭῭῭῭῭῭῭῭῭῭‌‌‌΅",
-      "΅ῬẌῬῬn῭῭῭῭῭῭῭῭῭῭῭῭῭῭῭῭‑‌‌‌‌΅",
-      "΅΅΅`΅΅΅΅΅΅`΅΅῭῭΅΅΅`΅΅΅΅΅΅`΅΅",
+      "΅΅΅`΅΅΅΅΅΅`΅΅ⅬⅬ΅΅΅`΅΅΅΅΅΅`΅΅",
+      "΅oῬῬῬῬῬῬῬῬῬῬῬⅬⅬῬῬῬῬῬῬῬῬῬῬῬῬ΅",
+      "΅ῬῬjklmῬῬdeefⅬⅬⅭⅭⅭⅭῬSῲῲῲῬSῬ΅",
+      "΅ῬῬAJKAῬῬP12PⅬⅬUVYUῬῬῳsῳῬῬῬ΅",
+      "΅ῬoⅬⅬⅬⅬ‑ⅬⅬⅬⅬⅬⅬⅬⅬⅬⅬⅬⅬⅬⅬⅬⅬⅬⅬⅬ΅",
+      "΅ῬSⅬῬῬⅬⅬⅬῬῬῬῬⅬⅬῬῬῬῬῬῬῬῬῬῬῬⅬ΅",
+      "΅‑ῬⅬῬῬῬῬῬῬῬῬῬⅬⅬ‑ῬῬῬῬῬⅭⅭⅭῬῬⅬ΅",
+      "΅ῬῬⅬῬῬῬῬῬῬῬῬⅬⅬⅬⅭⅭⅭῬῬ`ῳsῳSῬⅬ΅",
+      "ῬῬῬⅬῬῬῬῬῬῬῬῬῬⅬⅬῳsῳῬῬῬῬῬῬῬῬⅬⅬ",
+      "ῬῬῬⅬῬῬῬῬῬῬῬῬῬⅬⅬῬῬῬῬῬῬῬῬῬῬῬⅬⅬ",
+      "΅ῬⅬⅬῬῬῬⅬⅬⅬⅬⅬⅬⅬⅬⅬⅬⅬⅬⅬⅬⅬⅬⅬⅬⅬⅬ΅",
+      "΅SⅬ῰῰῰῰ⅬSoFῬẌⅬⅬῬSῬῬῬῬῬ‌‌Ῥ‌Ῥ΅",
+      "΅ῬⅬ῱s῱῱ⅬⅬFoῬῬⅬⅬῬῬS‌Ῥ‑ῬῬῬS‌Ῥ΅",
+      "΅ῬⅬⅬⅬⅬⅬⅬⅬⅬⅬⅬⅬⅬⅬⅬⅬⅬⅬⅬⅬⅬⅬⅬⅬⅬⅬ΅",
+      "΅oῬ‌‌‑‌Ῥ‌‌ῬῬῬⅬⅬῬῬῬ‌Ⅼ‌‌‌Ῥ‑‌‌΅",
+      "΅ῬῬῬῬῬῬῬῬῬῬῬῬⅬⅬῬῬῬῬⅬⅬⅬⅬⅬⅯⅮ‌΅",
+      "΅ῬẌῬῬnῬῬῬῬῬⅬⅬⅬⅬⅬⅬⅬⅬῬῬῬ‑‌‌‌‌΅",
+      "΅΅΅`΅΅΅΅΅΅`΅΅ⅬⅬ΅΅΅`΅΅΅΅΅΅`΅΅"
+
     ],
     "warps": [
       {"x": 4, "y": 3, "to": {"map": "center", "x": 4, "y": 4}, "via": {"map": "pastoria", "x": 4, "y": 4}},
@@ -157439,9 +157570,11 @@ const MAPS9 = {
       {"x": 25, "y": 2, "text": "FENLAND CITY — North: ROUTE 212 — SOUTH · East: ROUTE 213 · South: ROUTE 221."},
       {"x": 1, "y": 11, "text": "FENLAND CITY — North: ROUTE 212 — SOUTH · East: ROUTE 213 · South: ROUTE 221."},
       {"x": 8, "y": 11, "text": "FENLAND CITY — North: ROUTE 212 — SOUTH · East: ROUTE 213 · South: ROUTE 221."},
+      {"x": 16, "y": 11, "text": "FENLAND CITY — North: ROUTE 212 — SOUTH · East: ROUTE 213 · South: ROUTE 221."},
+      {"x": 24, "y": 7, "text": "FENLAND CITY — North: ROUTE 212 — SOUTH · East: ROUTE 213 · South: ROUTE 221."},
     ],
     "npcs": [
-      {"x": 3, "y": 5, "name": "MART CLERK", "art": "clerk", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#4a3a2a", "dialogue": ["Fenland City Mart — stocked for the road ahead."], "mart": {"stock": ["greatball", "ultraball", "hyperpotion", "fullheal", "revive", "superpotion"]}},
+      {"x": 9, "y": 4, "name": "MART CLERK", "art": "clerk", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#4a3a2a", "dialogue": ["Fenland City Mart — stocked for the road ahead."], "mart": {"stock": ["greatball", "ultraball", "hyperpotion", "fullheal", "revive", "superpotion"]}},
       {"x": 11, "y": 7, "name": "MARSH GUIDE SOLENNE", "art": "ranger", "skin": "#e8b888", "shirt": "#3a6ac0", "pants": "#2a3a4a", "hair": "#1a1a1a", "dialogue": ["The marsh keeps what it catches, including afternoons. Mind the deep bog — it minds you back.", "Wake's gym is half arena, half pond. The water types approve; the floor does not."]},
       {"x": 19, "y": 6, "name": "FEN FISHER ODO", "art": "fisher", "skin": "#f0c8a0", "shirt": "#3a7a4a", "pants": "#4a3a2a", "hair": "#2a1a0a", "dialogue": ["MUDGILL own the south pools and sublet to the BOGNEWT. I pay rent in patience.", "East road runs to the Gallant lakefront. West of the lake, the hotels; east, the sea road to Brightshore."]},
       {"x": 6, "y": 10, "name": "BOG KID MIRE", "art": "kid", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#4a3a2a", "dialogue": ["I can name thirty marsh sounds and eleven of them are VENOFROG. The rest are also VENOFROG, lying.", "The gatehouse tram — I mean, the gatehouse MARSH — is the whole world before breakfast."]},
