@@ -1477,6 +1477,36 @@ T35_KIND_DEFS.forEach(([kind], i) => {
 export const T35_PROP_KINDS = T35_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
 export const T35_WALL_KINDS = T35_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
 export const T35_FLOOR_KINDS = T35_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
+// Wave T36 (WAVE-T36-STARFALL-PLAN.md): Starfall City's own
+// four-tile kind set (NO-SAME-KIT law — every town its own kit).
+// Kind indices 708-711, verified free against origin/main at
+// dispatch (T34's 684-687 are main's ceiling; 688-707 are left
+// clear, including 696-699 for the parallel T35 Lotus Cove
+// claim). starroof is Starshingle — pale-cyan shingle courses
+// with tiny star flecks, worn by the Space Center facade,
+// Alban's house and the facade cottage (the Gym keeps its
+// banded tr-mossdeep slab — two roof families, one palette);
+// starfloor is the town's star-sand lane, its registered street
+// kind; dockfloor is the horizontal harbour-board pier kind
+// (the second registered street kind, on the r124/r125/r126
+// surf seams + the E bridge); chartboard is the meteor-chart
+// board the Space Center's own sign names, seated east of the
+// Center.
+export const T36_KIND_DEFS = [
+  ['starroof', 'wall'],
+  ['starfloor', 'floor'],
+  ['dockfloor', 'floor'],
+  ['chartboard', 'prop'],
+];
+export const T36_KIND_CHARS = {};
+T36_KIND_DEFS.forEach(([kind], i) => {
+  const ch = String.fromCodePoint(0x1E00 + 708 + i);
+  T36_KIND_CHARS[kind] = ch;
+  TILE_CHARS[ch] = kind;
+});
+export const T36_PROP_KINDS = T36_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
+export const T36_WALL_KINDS = T36_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
+export const T36_FLOOR_KINDS = T36_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
 export const SINNOH_TOWN_GROUND_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg);
 export const SINNOH_TOWN_GROUND2_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg2);
 // TX-3: the 8 gym exteriors by town (original type-accent motifs).

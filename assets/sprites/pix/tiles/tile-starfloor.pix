@@ -1,0 +1,33 @@
+# Wave T36 (Starfall kit): starfloor — Starfall City's registered
+# street kind (the fleet's street kinds carry the -floor suffix;
+# the desire-path tiers key on it). STAR-SAND LANE: pale warm sand
+# in the path family strewn with fine star sparkle — tiny pale
+# flecks and sparse gold motes over quiet sand grain. A sparkle
+# scatter on open sand is structurally unlike every shipped
+# street: Lotus Cove's round-cobble mosaic, Lilac's bronze
+# lattice grid, Fairhaven's running-bond quay slabs, Copperton's
+# square quarry flags and Beacon's bolted decking.
+# (NO-SAME-KIT law; WAVE-T36-STARFALL-PLAN.md.)
+PIX tile-starfloor 16 16
+gbblbblbblbblbbl
+bbbbgbbbdwbbbbbb
+bbbbbbbbgbbbbbbb
+wlbbldblbblbglbb
+bbbbbbbbbwbbbdbb
+bbdbbbbbbbbbbbbb
+wblbblbblbdlbblb
+bbbbbbbbbwbbbbbb
+bgbbbbbdbbbbbbbb
+wbblbglbblbblbbd
+bbbbdbbbbgbbbbbb
+bbbbbbbbbbbbdgbb
+wdbblbblbblbblbb
+bbbbbbbbbwbbbbbb
+bbbbbbbbbbbbbbbb
+wblbbldblbblbblb
+PAL
+b #d8c08a sand-body
+l #e4d09e sand-lit
+d #c2aa72 sand-shade
+w #f4ecd8 sparkle-pale
+g #e8c85a sparkle-gold

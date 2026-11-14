@@ -1,0 +1,38 @@
+# Wave T36 (Starfall kit): chartboard — the meteor-chart board:
+# two posts, a broad pale board ruled with orbit ellipses and a
+# comet curve in slate ink, gold comet head and star dots, a
+# small crate ledge at its foot. The Space Center's own sign
+# names it ('Rockets, meteor charts, and a viewing floor that
+# never blinks') and the approved painting seats it east of the
+# Center. Fully opaque: the town grass is baked in (measured
+# #198b24 / #195524 from the shipped render). One seat: (25,4),
+# east of the Space Center facade.
+# (NO-SAME-KIT law; WAVE-T36-STARFALL-PLAN.md.)
+PIX tile-prop-chartboard 16 16
+dggggggggdggglgg
+gFFFFFFFFFFFFFFl
+gFBSBBBBBSBBGGFd
+dFBBIIIIIBBIIBFg
+gFBIBBSBBIIBBBFg
+gFBBIIIIIIBBBBFd
+dFBBSBBBIBBSBBFg
+gFBBBBBSBBBBBBFg
+gFFFFFFFFFFFFFFd
+dgPPglgggdggPPgg
+ggPPggglggggPPgg
+ggPPgFCCCCFgPPgd
+dgPPgCFCCFClPPgg
+lgPPgFCCCCFgPPgg
+ggPPggdgggggPPgd
+dggglggggdgggggg
+PAL
+g #198b24 grass-baked
+d #195524 grass-speckle-dark
+l #2a9e33 grass-speckle-light
+P #6a4a2e post-wood
+F #8a6a42 board-frame
+B #e8e2cc board-face
+I #5a6a7a chart-ink
+S #f4f8f4 chart-star
+G #e8c85a comet-gold
+C #a8825a crate

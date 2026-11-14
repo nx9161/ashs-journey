@@ -1,0 +1,34 @@
+# Wave T36 (Starfall kit): starroof — Starfall City's own roof kind.
+# STARSHINGLE: overlapping shingle courses in the town style's own
+# pale cyan (#bcd4da body, #dcebef lit crowns, #84a3ab seams),
+# staggered course to course, strewn with sparse tiny star flecks
+# in pale gold and white. Shingled courses are structurally unlike
+# the Gym's banded tr-mossdeep slab (kept), the Mart's flat
+# roof-slate, Lotus Cove's lavender barrel tile, Highbranch's leaf
+# scales, Copperton's copper-seamed slabs and Wildflower's open
+# trellis. Worn by the Space Center, Alban's house and the town's
+# facade cottage. (NO-SAME-KIT law; WAVE-T36-STARFALL-PLAN.md.)
+PIX tile-starroof 16 16
+sltttlsltttlsltt
+slllwlslllllslll
+sllldlslwllgslll
+ssssssssssssssss
+ttlsltttlsltttls
+lllslllllslllgls
+lwlsgllllslldlls
+ssssssssssssssss
+sltttlsltttlsltt
+slllllslllllswll
+slllllsdllllslll
+ssssssssssssssss
+ttwsltttgsltttls
+lllsllwllsllllls
+lldslllllswlllls
+ssssssssssssssss
+PAL
+l #bcd4da shingle-body
+t #dcebef shingle-crown
+d #a8c4cc shingle-shade
+s #84a3ab shingle-seam
+g #e8c85a star-gold
+w #f4f8f4 star-pale

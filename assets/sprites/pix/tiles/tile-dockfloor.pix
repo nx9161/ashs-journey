@@ -1,0 +1,34 @@
+# Wave T36 (Starfall kit): dockfloor — Starfall City's second
+# registered street kind (the pier material, slateport/olivine
+# two-material terms). HARBOUR DOCK FLOOR: HORIZONTAL weathered
+# harbour boards, pale grey-brown faces with dark tar seams,
+# staggered end joints and sparse whitewash flecks. Long
+# horizontal boards differ from Beacon's vertical tarred-batten
+# jettyfloor, Tidehaven's vertical pier timber, Highbranch's
+# rope-lashed vertical planks and the shipped horizontal
+# boardwalk (plain seams, no tar, no whitewash — and not used
+# here). Lands the r124/r125/r126 surf seams and the E bridge.
+# (NO-SAME-KIT law; WAVE-T36-STARFALL-PLAN.md.)
+PIX tile-dockfloor 16 16
+lpppptppppplpppp
+ppppptpppppppdpp
+ppppptpppdpwpppp
+tttttttttttttttt
+pdppppppplptpppp
+ppppppppppptpwdp
+ppppwpppppdtpppp
+tttttttttttttttt
+ppdpptplpppppppw
+ppppptwppppppppd
+ppppptpppppdpppp
+tttttttttttttttt
+pppdplppwpptpppp
+ppppppppppptpppp
+ppppppppppptdppp
+tttttttttttttttt
+PAL
+p #9a8468 plank-face
+l #b09a78 plank-light
+d #847052 plank-shade
+t #4a3a28 tar-seam
+w #d8d4c8 whitewash
