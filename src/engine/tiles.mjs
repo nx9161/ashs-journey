@@ -1611,6 +1611,39 @@ T39_KIND_DEFS.forEach(([kind], i) => {
 export const T39_PROP_KINDS = T39_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
 export const T39_WALL_KINDS = T39_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
 export const T39_FLOOR_KINDS = T39_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
+// Wave T40: Clover Town's own kit — "Clover Earth & Batten
+// Timber": the cloverfloor (packed-earth lane strewn with
+// three-lobe clover marks — the registered street material of
+// the front street, the through road, the main lane and the
+// south lane), the battenroof (board-and-batten green timber
+// worn by the town's two houses and two facade cottages), the
+// sapling (a two-leaf sapling in a timber guard ring; a pair
+// flanks the Center's frontage) and the cloverbed (a clipped
+// clover mound on the town's open corners). Indices 756-759
+// per the Director's index ruling (main's kinds run 594-636 +
+// 645-648 + 660-662 + 672-675 + 684-687 + 696-699 + 708-711 +
+// 720-724 + 732-736 + 744-748 (T39); 606-607 + 637-644 +
+// 649-659 + 663-671 + 676-683 + 688-695 + 700-707 + 712-719 +
+// 725-731 + 737-743 + 749-755 stay empty), verified free
+// against origin/main, TILE_CHARS and every map row.
+// Authored art: assets/sprites/pix/tiles/tile-cloverfloor.pix,
+// tile-battenroof.pix, tile-prop-sapling.pix,
+// tile-prop-cloverbed.pix. (WAVE-T40-CLOVER-PLAN.md.)
+export const T40_KIND_DEFS = [
+  ['cloverfloor', 'floor'],
+  ['battenroof', 'wall'],
+  ['sapling', 'prop'],
+  ['cloverbed', 'prop'],
+];
+export const T40_KIND_CHARS = {};
+T40_KIND_DEFS.forEach(([kind], i) => {
+  const ch = String.fromCodePoint(0x1E00 + 756 + i);
+  T40_KIND_CHARS[kind] = ch;
+  TILE_CHARS[ch] = kind;
+});
+export const T40_PROP_KINDS = T40_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
+export const T40_WALL_KINDS = T40_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
+export const T40_FLOOR_KINDS = T40_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
 export const SINNOH_TOWN_GROUND_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg);
 export const SINNOH_TOWN_GROUND2_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg2);
 // TX-3: the 8 gym exteriors by town (original type-accent motifs).

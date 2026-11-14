@@ -1,0 +1,28 @@
+# Wave T40 (Clover kit): cloverbed (prop) — a clipped clover mound: dense three-lobe leaves in layered greens with white blossom dots, a low dome standing on the lawn. Seats on Clover's open corners — the painting's clover-flecked lawns carried to garden mounds. Fully opaque, town grass baked in (measured engine tg #178913). (NO-SAME-KIT law; WAVE-T40-CLOVER-PLAN.md §5.)
+PIX tile-prop-cloverbed 16 16
+gggggggggggggggg
+ggdgggggggglgggg
+gggggggggggggggg
+ggggggLLgggggggg
+gggggLMMLggggggg
+ggggMLMMMLMggggg
+gggMLMcMMMLMgggg
+ggMLMMMLMcMMLggg
+ggLMMwMMMLMMMDgg
+gMLMMMLMMwMMMLgg
+gLMDMMMLMMMLMDgg
+ggLMMMMMwMMMLggg
+gggDMMMLMMDEgggg
+ggggEDDDDEEggdgg
+gggggggggggggggg
+ggglggggdggggggg
+PAL
+g #178913 lawn-flat (measured engine tg)
+d #11600b blade-tick dark
+l #2f9e22 blade-tick light
+L #6da34c leaf-light
+M #4f7d3a leaf-mid
+D #3a5f2a leaf-deep
+E #2c4a20 mound-shade
+c #8fbf6a leaf-pale
+w #f2f0e4 blossom-white

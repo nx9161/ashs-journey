@@ -1,0 +1,25 @@
+# Wave T40 (Clover kit): cloverfloor — Clover Town's registered street kind (the fleet's street kinds carry the -floor suffix; the desire-path tiers key on it). CLOVER-FLECKED PACKED EARTH: a warm pale-earth lane (path family base #cbb28a, measured) strewn with bold three-lobe clover marks in two greens and tiny white blossom dots. Structurally a loose organic scatter on EARTH — unlike Wildflower's petalfloor (petal flecks on cream gravel: different base, different motif) and Lilac's bronze lattice grid. (NO-SAME-KIT law; WAVE-T40-CLOVER-PLAN.md §5.)
+PIX tile-cloverfloor 16 16
+eEeeeleeeeeEeele
+eeeCeeeeeeeeeeee
+eeCcCeeleeeeeEee
+eeeceeeeeeeewEee
+eleeeeeEeeeeeeee
+eeeeeeeeeeeCeeEe
+eleeeeeeeCcCeeee
+eeeeEeeeeeeceele
+eweeeeeleeeeeEee
+eeeeeeEeeeeeeeee
+eeeeeeeCeeleeeee
+eeeeeeCcCeeeeEee
+eeeeeeeceeeeeeCe
+eeleeeeeeeeeeCcC
+eeeeewEeeeeeeece
+eeeeeeeeleeeEeee
+PAL
+e #cbb28a earth-base (measured path family)
+E #bfa87c earth-shade speckle
+l #dcc79e earth-light speckle
+c #4f7d3a clover-deep
+C #6da34c clover-light
+w #f2f0e4 blossom-white

@@ -1,0 +1,26 @@
+# Wave T40 (Clover kit): battenroof — BOARD-AND-BATTEN GREEN TIMBER roof: vertical timber boards in the town-style greens (the shipped twinleaf roof palette #7a9a4d/#5d7d3a/#4f6b2f) with darker batten strips over the seams, a lit top edge, and a wooden eaves beam along the foot. A vertical board course is structurally unlike every shipped roof family — no shingle courses, no scales, no thatch, no canvas, no slabs. Worn by Clover's two houses and its two facade cottages. (NO-SAME-KIT law; WAVE-T40-CLOVER-PLAN.md §5.)
+PIX tile-battenroof 16 16
+LsLLLsLLLsLLLsLL
+bLstbLstbLstbLst
+bbstbLstbbstbLst
+bLstbbstbLstbbst
+bbstbLstbLstbLst
+bLstbLstbbstbLst
+bbstbbstbLstbbst
+bLstbLstbLstbLst
+bbstbLstbbstbLst
+bLstbbstbLstbbst
+bbstbLstbLstbLst
+bLstbLstbbstbLst
+bbstbbstbLstbbst
+bLstbLstbLstbbst
+ooonooonooonooon
+ddndddndddndddnd
+PAL
+b #5d7d3a board-body
+L #7a9a4d board-lit
+s #4f6b2f board-shade
+t #3d5526 batten-dark
+n #2e421c nail-shadow
+o #7d5a30 eaves-beam
+d #54381c beam-shade

@@ -624,6 +624,18 @@ export const WALKABLE = new Set(['.', ',', 'D', 'E', 'C', 'F', 'J', 'K', '1', '2
   // 720-724; the parallel T38 claim holds 732-736; gaps stay
   // empty.)
   ...[744]
+    .map((i) => String.fromCodePoint(0x1E00 + i)),
+  // Wave T40: the cloverfloor char (U+1E00+756, tiles.mjs
+  // T40_KIND_DEFS) is walkable street material — Clover
+  // Town's clover-flecked packed-earth lane, swapped onto
+  // the town's tg2 street cells (the front street, the
+  // through road, the main lane — all shipped walkable as
+  // tg2), so floor stays floor. (Indices 756-759 per the
+  // Director's index ruling: main's kinds run 594-636 +
+  // 645-648 + 660-662 + 672-675 + 684-687 + 696-699 +
+  // 708-711 + 720-724 + 732-736 + 744-748 (T39); the gaps
+  // stay empty.)
+  ...[756]
     .map((i) => String.fromCodePoint(0x1E00 + i))]);
 
 // Trainer definitions for the slice.
