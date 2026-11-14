@@ -517,6 +517,13 @@ export const WALKABLE = new Set(['.', ',', 'D', 'E', 'C', 'F', 'J', 'K', '1', '2
   // in Hushmoor Town, and the inlayfloor char (U+1E00+631)
   // likewise in Blossom City, so floor stays floor in both.
   ...[629, 631]
+    .map((i) => String.fromCodePoint(0x1E00 + i)),
+  // Wave T30: the petalfloor char (U+1E00+630, tiles.mjs
+  // T30_KIND_DEFS) is walkable street material — Wildflower
+  // Town's petal-flecked garden lane, swapped onto the town's
+  // street cells (which shipped as walkable tg2 mud), so
+  // floor stays floor. (Indices 629-632; 606-607 stay empty.)
+  ...[630]
     .map((i) => String.fromCodePoint(0x1E00 + i))]);
 
 // Trainer definitions for the slice.

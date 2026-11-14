@@ -1303,6 +1303,33 @@ WD8_KIND_DEFS.forEach(([kind], i) => {
 export const WD8_PROP_KINDS = WD8_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
 export const WD8_WALL_KINDS = WD8_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
 export const WD8_FLOOR_KINDS = WD8_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
+// Wave T30: Wildflower Town's own kit — Rose Trellis & Petal Lane
+// (WAVE-T30-WILDFLOWER-PLAN.md). Indices 629-632, registered
+// above the fleet ceiling after verifying 629-640 free on
+// origin/main (594-605 and 608-628 taken; 606-607 stay empty,
+// as always). 'trellisroof' (wall) — a cream diamond lattice
+// over a rose bed, worn by the Contest Hall, the House and the
+// town's two facade cottages. 'petalfloor' (floor) — the
+// petal-flecked garden lane, the town's registered street kind.
+// 'trellis' (prop) — a climbing-rose garden trellis; a pair
+// flanks the Contest Hall's front walk. 'rosebush' (prop) — a
+// clipped rose bush in bloom at the town's three open corners.
+// Both props fully opaque with the green baked in.
+export const T30_KIND_DEFS = [
+  ['trellisroof', 'wall'],
+  ['petalfloor', 'floor'],
+  ['trellis', 'prop'],
+  ['rosebush', 'prop'],
+];
+export const T30_KIND_CHARS = {};
+T30_KIND_DEFS.forEach(([kind], i) => {
+  const ch = String.fromCodePoint(0x1E00 + 629 + i);
+  T30_KIND_CHARS[kind] = ch;
+  TILE_CHARS[ch] = kind;
+});
+export const T30_PROP_KINDS = T30_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
+export const T30_WALL_KINDS = T30_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
+export const T30_FLOOR_KINDS = T30_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
 export const SINNOH_TOWN_GROUND_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg);
 export const SINNOH_TOWN_GROUND2_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg2);
 // TX-3: the 8 gym exteriors by town (original type-accent motifs).

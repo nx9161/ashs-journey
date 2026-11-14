@@ -1,0 +1,34 @@
+# Wave T30 (Wildflower kit): trellis prop — a garden trellis: two
+# wooden posts, a crossbar, a diamond lattice panel, climbing
+# roses in bloom. A pair flanks the Contest Hall's front walk —
+# the painting's gardeners-at-the-trellises beat, with ROSA at her
+# post beside them. Fully opaque: a prop standing on grass over
+# the engine's grey-green underlay flashes at its edges, so the
+# town grass is baked in — tg-verdanturf measured from the shipped
+# render (flat #198e15, speckle #195815). (NO-SAME-KIT law;
+# WAVE-T30-WILDFLOWER-PLAN.md.)
+PIX tile-prop-trellis 16 16
+hgggggggghgggggg
+gggggghggggggggh
+ggghgggggggghggg
+hwwwwwwwwwwwwwwg
+gWwgWghWggWggwgh
+ggwtgtgtgtgtbwgg
+hgwgbbtgghtglwgg
+ggwtgthtgtgtgwgh
+ggwhtgggtggbbwgg
+hgwtgtgtgtgtgwgg
+ggwblgtgggtggwgh
+ggwtgtbtgtgthwgg
+hgwgtglgthggtwgg
+ggwtgthtgtgtgwgh
+ggwhgggggggghwgg
+hhwhhhhhhhhhhwhg
+PAL
+g #198e15 town-grass (tg-verdanturf, measured)
+h #195815 grass-speckle (measured)
+w #8a6844 trellis-wood
+W #6e5233 wood-shade
+t #a8834f lattice-wood
+l #2f7a24 leaf
+b #e59cae rose-bloom

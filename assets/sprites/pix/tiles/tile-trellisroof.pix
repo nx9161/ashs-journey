@@ -1,0 +1,35 @@
+# Wave T30 (Wildflower kit): trellisroof — Wildflower's own roof kind.
+# ROSE-TRELLIS LATTICE: a cream diamond lattice (diagonal bars
+# crossing every 8px) laid over a rose-pink bed, vine-green flecks
+# and deep rosebuds caught in the lattice cells. An open diamond
+# trellis is structurally unlike every shipped roof: Lilac's bronze
+# shingle courses, Fairhaven's stitched canvas sheets, Mistford's
+# split wood shakes, Copperton's copper-seamed slabs, Eldergrove's
+# banded thatch, Meadowbrook's sage stone courses. Worn by the
+# Contest Hall, the House and the town's two facade cottages — the
+# painting's signature register. (NO-SAME-KIT law;
+# WAVE-T30-WILDFLOWER-PLAN.md.)
+PIX tile-trellisroof 16 16
+cclrllllcclllvll
+cccldllccccbrllc
+bvccllccdlccllcc
+bllcccclvlrccccr
+blvlcclllrlbccrv
+bllcccclrvlccccl
+blccllccllccrlcc
+ccclllrccccblllc
+ccllvrllccrbllld
+ccclrllccccbllrc
+blcclvccrlcclrcc
+blrccccrlldccccl
+brllccvllllbccdl
+bdlcccclllrccccr
+blccrdcclrccllcc
+cccrlllccccblrvc
+PAL
+c #f2e7ce lattice-cream
+r #cf8296 rose-bed
+l #e2a5b4 rose-light
+d #a85f74 rose-shade
+b #8e3d55 rosebud
+v #557f3e vine
