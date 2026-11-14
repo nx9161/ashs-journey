@@ -3208,6 +3208,31 @@ T42_KIND_DEFS.forEach(([kind], i) => {
 const T42_PROP_KINDS = T42_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
 const T42_WALL_KINDS = T42_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
 const T42_FLOOR_KINDS = T42_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
+// ---- Wave T43: Coalseam City's own kit from birth (NO-SAME-KIT
+// law): 'Soot Iron & Clinker Ash' — idx 792-795 per the Director's
+// index ruling (main's kinds run 594-636 + 645-648 + 660-662 +
+// 672-675 + 684-687 + 696-699 + 708-711 + 720-724 + 732-736 +
+// 744-748 + 756-759 + 768-771; the parallel T42 claim holds
+// 780-783; the gaps stay empty). clinkerfloor is the packed
+// black-ash street; ironroof is the riveted soot-iron plate worn
+// by the Gym's and Museum's roof cells (the two stamps the
+// backend left sharing tr-oreburgh); coalcarts stands at the
+// mine sign's foot; fossilskull at the Museum's east shoulder.
+const T43_KIND_DEFS = [
+  ['clinkerfloor', 'floor'],
+  ['ironroof', 'wall'],
+  ['coalcarts', 'prop'],
+  ['fossilskull', 'prop'],
+];
+const T43_KIND_CHARS = {};
+T43_KIND_DEFS.forEach(([kind], i) => {
+  const ch = String.fromCodePoint(0x1E00 + 792 + i);
+  T43_KIND_CHARS[kind] = ch;
+  TILE_CHARS[ch] = kind;
+});
+const T43_PROP_KINDS = T43_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
+const T43_WALL_KINDS = T43_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
+const T43_FLOOR_KINDS = T43_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
 const SINNOH_TOWN_GROUND_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg);
 const SINNOH_TOWN_GROUND2_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg2);
 // TX-3: the 8 gym exteriors by town (original type-accent motifs).
@@ -110711,6 +110736,78 @@ const ART = {
     "bppppppbppppppbp",
     "pppppbppppppbppp"
   ] },
+  "tile-clinkerfloor": { w: 16, h: 16, pal: {"a":"#463c34","t":"#6e5a44","p":"#8a7a66","d":"#3a322b","r":"#a85a30"}, rows: [
+    "raapataapataapat",
+    "ataapataapatarpa",
+    "pataapataapataap",
+    "apataapataapataa",
+    "adpataapatarpata",
+    "taapatadpataapat",
+    "ataapataapatadpa",
+    "pataapatarpataap",
+    "apdtaapataapataa",
+    "aapataapdtaapata",
+    "taapatarpataapdt",
+    "ataapataapataapa",
+    "patdapataapataap",
+    "apatarpatdapataa",
+    "aapataapataapatd",
+    "taapataapataapat"
+  ] },
+  "tile-ironroof": { w: 16, h: 16, pal: {"m":"#5e564e","l":"#7d766c","s":"#38332e","d":"#4c463f","r":"#a89880","w":"#8a4a2a"}, rows: [
+    "llllllllllllllll",
+    "mmmmmsmmmmmmmmmm",
+    "mmmmmsmmmmmmmmmm",
+    "mmmmmsmmmmmmmmdm",
+    "mmmmmsmmmdmmmmmm",
+    "srssrssrssrssrss",
+    "mmmmmwmmmmmsmmmm",
+    "mmmmmwmmmmmsmmmm",
+    "mmmmmmmmmmmsmmmm",
+    "mmmmmmmmmmmsmdmm",
+    "srssrssrssrssrss",
+    "mmmsmmmmmmmwmmmm",
+    "mmmsmmmmmmmmmmmm",
+    "mmmsmmmmmmmmmmmm",
+    "mmmsmmmmmmmmmmmm",
+    "ssssssssssssssss"
+  ] },
+  "tile-prop-coalcarts": { w: 16, h: 16, pal: {"g":"#1c7c0c","c":"#1c1a18","C":"#7a828c","i":"#38332e","T":"#4e3823","t":"#6e5136","w":"#2c2622","S":"#5a4632","R":"#9a938a"}, rows: [
+    "gggggggggggggggg",
+    "gggggggggggggggg",
+    "gggggggggggggggg",
+    "gggggggggggggggg",
+    "ggggggccCcgggggg",
+    "gggggccCccccgggg",
+    "ggiiiiiiiiiiiigg",
+    "ggTttttttttttTgg",
+    "ggTttttttttttTgg",
+    "ggiiiiiiiiiiiigg",
+    "ggTttttttttttTgg",
+    "ggggwwggggwwgggg",
+    "ggggwwggggwwgggg",
+    "ggSggSggSggSgggg",
+    "ggRRRRRRRRRRgggg",
+    "gggggggggggggggg"
+  ] },
+  "tile-prop-fossilskull": { w: 16, h: 16, pal: {"g":"#1c7c0c","b":"#e8e0cc","B":"#c9bda0","d":"#2c2622","s":"#7a766e","S":"#57534c"}, rows: [
+    "gggggggggggggggg",
+    "gggggggggggggggg",
+    "gggggggggggggggg",
+    "gggggbbbbbbggggg",
+    "ggggbbbbbbbbgggg",
+    "gggbbbbbbbbbbggg",
+    "gggbbddbbbbbBggg",
+    "gggbbbbbbbbbBggg",
+    "ggggbbbbbbbbgggg",
+    "ggggbdbdbdbgBggg",
+    "gggggBBBBBBggggg",
+    "gggssssssssssggg",
+    "gggssSssssSssggg",
+    "gggssssssssssggg",
+    "gggggggggggggggg",
+    "gggggggggggggggg"
+  ] },
   "partner-back-bob": { base: "partner-back", w: 64, h: 64, pal: {}, shiftY: 2 },
   "partner-front-bob": { base: "partner-front", w: 64, h: 64, pal: {}, shiftY: 2 },
   "abomasnow-back-bob": { base: "abomasnow-back", w: 64, h: 64, pal: {}, shiftY: 2 },
@@ -116060,6 +116157,9 @@ for (const k of T41_FLOOR_KINDS) TILE_ART[k] = 'tile-' + k;
 for (const k of T42_PROP_KINDS) TILE_ART[k] = 'tile-prop-' + k;
 for (const k of T42_WALL_KINDS) TILE_ART[k] = 'tile-' + k;
 for (const k of T42_FLOOR_KINDS) TILE_ART[k] = 'tile-' + k;
+for (const k of T43_PROP_KINDS) TILE_ART[k] = 'tile-prop-' + k;
+for (const k of T43_WALL_KINDS) TILE_ART[k] = 'tile-' + k;
+for (const k of T43_FLOOR_KINDS) TILE_ART[k] = 'tile-' + k;
 // Premium+ W6 (TX-3/PL-1): door-open frames, authored in TX-3 for every
 // door kind. The warp-fade engine that plays them lands in W7 — W6
 // wires the frames (this registry + cache.doorOpen + doorOpenCanvas)
@@ -117908,6 +118008,11 @@ function resolveTileLayers(cache, kind, x, y, kindAt, t, phase, mapId) {
     // Wave T42: Revelry's screen totems composite over their
     // lawn the same way (art fully opaque — grass baked in).
     case 'screentotem':
+    // Wave T43: Coalseam's coal cart and its museum skull
+    // composite over their lawn the same way (both arts are
+    // fully opaque — the town grass is baked in).
+    case 'coalcarts':
+    case 'fossilskull':
     // Wave T17: the radio mast composites over its compound grass too.
     case 'radiomast': {
       // Object tiles carry transparent surrounds (Wave 1): lay the ground
@@ -124928,6 +125033,17 @@ const WALKABLE = new Set(['.', ',', 'D', 'E', 'C', 'F', 'J', 'K', '1', '2', 'V',
   // 732-736 + 744-748 (T39) + 756-759 (T40); the parallel
   // T41 claim holds 768-771; gaps stay empty.)
   ...[780]
+    .map((i) => String.fromCodePoint(0x1E00 + i)),
+  // Wave T43: the clinkerfloor char (U+1E00+792, tiles.mjs
+  // T43_KIND_DEFS) is walkable street material — Coalseam
+  // City's packed clinker-ash cartway, swapped onto the
+  // town's street cells (which shipped as walkable tg2 mud),
+  // so floor stays floor. (Indices 792-795 per the Director's
+  // index ruling: main's kinds run 594-636 + 645-648 + 660-662 +
+  // 672-675 + 684-687 + 696-699 + 708-711 + 720-724 + 732-736 +
+  // 744-748 + 756-759 + 768-771; the parallel T42 claim holds
+  // 780-783; gaps stay empty.)
+  ...[792]
     .map((i) => String.fromCodePoint(0x1E00 + i))]);
 
 // Trainer definitions for the slice.
@@ -154112,23 +154228,23 @@ const MAPS9 = {
     "music": "pewter-theme",
     "weather": "sun",
     "rows": [
-      "ᾶᾶᾶᾷᾶᾶᾶᾶᾶᾶᾷᾶᾶ᾵᾵ᾶᾶᾶᾷᾶᾶᾶᾶᾶᾶᾷᾶᾶᾶᾶ",
-      "ᾶᾴᾴᾴᾴᾴᾴṁ᾵᾵᾵᾵᾵᾵᾵ᾴᾴᾴᾴẆᾴᾴᾴᾴᾴᾴᾴᾴᾴᾶ",
-      "ᾶᾴᾴjklm᾵᾵deef᾵᾵ᾸᾸᾸᾸᾴᾴᾸᾸᾸᾸᾴᾴᾴᾴᾶ",
-      "ᾶᾴoAJKA᾵᾵P12P᾵᾵UVYUᾴᾴᾹsᾹᾹᾴᾴᾴṕᾶ",
-      "ᾶᾴ᾵᾵᾵᾵᾵᾵᾵᾵᾵᾵᾵᾵᾵᾵᾵᾵᾵᾵᾵᾵᾵᾵᾵᾵᾵᾵Ṗᾶ",
-      "ᾶᾴS᾵᾵᾵᾵᾵᾵᾵᾵᾵᾵᾵᾵᾵᾵᾵᾵᾵᾵᾵᾵᾵᾵ᾴᾴ᾵᾵ᾶ",
-      "ᾶṖ᾵᾵᾵ᾴ᾵᾵᾵ᾷᾴ᾵ᾴ᾵᾵ᾴᾴᾴ᾵ᾴᾴᾴᾴᾴ᾵ᾴᾴᾴ᾵ᾶ",
-      "ᾶ᾵᾵᾵᾵ᾴ᾵᾵᾵ᾷoᾴ᾵᾵᾵᾵᾵᾵᾵ᾴᾴᾴᾴᾴ᾵ᾴᾴᾴ᾵ᾶ",
-      "᾵᾵᾵᾵᾵᾵᾵᾵᾵᾵᾵᾵᾵᾵᾵᾵᾵᾵᾵᾵᾵᾵᾵᾵᾵᾵᾵᾵᾵᾵",
-      "᾵᾵᾵᾵᾵᾵᾵᾵᾵᾵᾵᾵᾵᾵᾵᾵᾵᾵᾵᾵᾵᾵᾵᾵᾵᾵᾵᾵᾵᾵",
-      "ᾶ᾵᾵Ṗ᾵᾵᾵᾵᾵᾵ᾴ᾵ᾴ᾵᾵ᾴᾴᾴ᾵ᾴ᾵᾵᾵᾵᾵᾵᾵᾵ṕᾶ",
-      "ᾶ᾵᾵ᾗᾗᾗᾗ᾵R᾵᾵᾵᾵᾵᾵᾵᾵᾵᾵᾵᾵᾵ᾴᾴ᾵ᾴᾴᾴᾴᾶ",
-      "ᾶ᾵᾵ᾹsᾹᾹ᾵᾵᾵᾵᾵ṁ᾵᾵᾵᾵᾵᾵᾵᾵᾵᾵᾵Sᾴᾴᾴᾴᾶ",
-      "ᾶ᾵᾵....᾵᾵ṁ᾵᾵᾵᾵᾵᾵᾵᾵᾵᾵᾵᾵᾵᾵᾵ᾷᾴᾴᾴᾶ",
-      "ᾶᾴ.,,,,.᾵᾵᾵᾵᾵᾵᾵᾵ᾷᾷᾴᾷᾴᾴᾴᾴᾴᾴᾴᾴᾴᾶ",
-      "ᾶᾴᾴR,,,.ᾷᾴRᾴᾴᾴᾴᾴᾴᾴᾴṖᾴᾴRᾴᾴᾴᾴᾴᾴᾶ",
-      "ᾶᾴᾴᾴ...᾵ᾴᾴᾴᾴᾴᾴᾴᾴᾴRᾴᾴᾴᾴᾴᾴᾴᾴᾴᾴᾴᾶ",
+      "ᾶᾶᾶᾷᾶᾶᾶᾶᾶᾶᾷᾶᾶ℘℘ᾶᾶᾶᾷᾶᾶᾶᾶᾶᾶᾷᾶᾶᾶᾶ",
+      "ᾶᾴᾴᾴᾴᾴᾴṁᾴᾴᾴᾴᾴ℘℘ᾴᾴᾴᾴẆᾴᾴᾴᾴᾴᾴᾴᾴᾴᾶ",
+      "ᾶᾴᾴjklmᾴᾴdeef℘℘ℙℙℙℙᾴᾴℙℙℙℙᾴᾴᾴᾴᾶ",
+      "ᾶᾴoAJKAᾴᾴP12P℘℘UVYUᾴᾴᾹsᾹᾹℛᾴᾴṕᾶ",
+      "ᾶᾴ℘℘℘℘℘℘℘℘℘℘℘℘℘℘℘℘℘℘℘℘℘℘℘℘℘℘Ṗᾶ",
+      "ᾶᾴS℘ᾴᾴᾴᾴᾴᾴᾴᾴᾴ℘℘Sᾴᾴᾴᾴᾴᾴᾴᾴᾴᾴᾴ℘℘ᾶ",
+      "ᾶṖᾴ℘ᾴᾴᾴᾴᾴᾷᾴᾴᾴ℘℘ᾴᾴᾴᾴᾴᾴᾴᾴᾴᾴᾴᾴ℘℘ᾶ",
+      "ᾶᾴᾴ℘ᾴᾴᾴᾴᾴᾷoᾴᾴ℘℘ᾴᾴᾴᾴᾴᾴᾴᾴᾴᾴᾴᾴ℘℘ᾶ",
+      "℘℘℘℘℘℘℘℘℘℘℘℘℘℘℘℘℘℘℘℘℘℘℘℘℘℘℘℘℘℘",
+      "℘℘℘℘℘℘℘℘℘℘℘℘℘℘℘℘℘℘℘℘℘℘℘℘℘℘℘℘℘℘",
+      "ᾶᾴ℘Ṗᾴᾴᾴ℘ᾴᾴᾴᾴᾴᾴᾴᾴᾴᾴᾴᾴᾴᾴᾴᾴᾴᾴᾴᾴṕᾶ",
+      "ᾶᾴ℘ᾗᾗᾗᾗ℘Rᾴᾴᾴᾴᾴᾴᾴᾴᾴᾴᾴᾴᾴᾴᾴᾴᾴᾴᾴᾴᾶ",
+      "ᾶᾴ℘ᾹsᾹᾹ℘℘ᾴᾴᾴṁᾴᾴᾴᾴᾴᾴᾴᾴᾴᾴᾴSᾴᾴᾴᾴᾶ",
+      "ᾶS℘....ᾴ℘ṁᾴᾴᾴᾴᾴᾴᾴᾴᾴᾴᾴᾴᾴᾴℚᾷᾴᾴᾴᾶ",
+      "ᾶᾴ.,,,,.℘ᾴᾴᾴᾴᾴᾴᾴᾷᾷᾴᾷᾴᾴᾴᾴᾴᾴᾴᾴᾴᾶ",
+      "ᾶᾴ℘R,,,.ᾷᾴRᾴᾴᾴᾴᾴᾴᾴᾴṖᾴᾴRᾴᾴᾴᾴᾴᾴᾶ",
+      "ᾶᾴ℘℘...ᾴᾴᾴᾴᾴᾴᾴᾴᾴᾴRᾴᾴᾴᾴᾴᾴᾴᾴᾴᾴᾴᾶ",
       "ᾶᾶᾶᾷᾶᾶᾶᾶᾶᾶᾴᾶᾶᾴᾴᾶᾶᾶᾴᾶᾶᾶᾶᾶᾶᾴᾶᾶᾶᾶ",
     ],
     "warps": [
@@ -154150,9 +154266,11 @@ const MAPS9 = {
     "signs": [
       {"x": 2, "y": 5, "text": "COALSEAM CITY — The coal town. The mine runs under it, the museum remembers over it, and the gym sorts the strong from the stubborn."},
       {"x": 24, "y": 12, "text": "COALSEAM MINE — The working face is open to respectful visitors. Mind the carts; they do not mind you."},
+      {"x": 15, "y": 5, "text": "COALSEAM CITY — The coal town. The mine runs under it, the museum remembers over it, and the gym sorts the strong from the stubborn."},
+      {"x": 1, "y": 13, "text": "COALSEAM CITY — The coal town. The mine runs under it, the museum remembers over it, and the gym sorts the strong from the stubborn."}
     ],
     "npcs": [
-      {"x": 3, "y": 5, "name": "MART CLERK", "art": "clerk", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#4a3a2a", "dialogue": ["Coalseam City Mart — stocked for the road ahead."], "mart": {"stock": ["pokeball", "greatball", "superpotion", "hyperpotion", "antidote", "parlyzheal", "revive"]}},
+      {"x": 9, "y": 4, "name": "MART CLERK", "art": "clerk", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#4a3a2a", "dialogue": ["Coalseam City Mart — stocked for the road ahead."], "mart": {"stock": ["pokeball", "greatball", "superpotion", "hyperpotion", "antidote", "parlyzheal", "revive"]}},
       {"x": 11, "y": 7, "name": "MINER BRAM", "art": "worker", "skin": "#f0c8a0", "shirt": "#3a7a4a", "pants": "#4a3a2a", "hair": "#2a1a0a", "dialogue": ["Forty carts a day come up out of that dark, and every one of them sings on the rails.", "The gym leader is a miner first. His Rock types have calluses."]},
       {"x": 18, "y": 13, "name": "MUSEUM GUIDE SOL", "art": "scientist", "skin": "#c89878", "shirt": "#2a7a6a", "pants": "#3a3a4a", "hair": "#7a4a1a", "dialogue": ["We revive fossils in the museum lab — old stone into living proof.", "North road climbs to the Heritage side of the mountain country. East: Mt. Apex's own door."]},
       {"x": 7, "y": 10, "name": "APPRENTICE RUE", "art": "youngster", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#4a3a2a", "dialogue": ["I polish the museum's RAMOSAUR skull every morning. It grins. I grin back.", "MUSCLING carry what the carts can't. Nobody here lifts alone."]},
