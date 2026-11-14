@@ -2686,22 +2686,23 @@ export const MAPS9 = {
     "rows": [
       "ῶῶῶῷῶῶῶῶῶῶῷῶῶῶῶῶῶῷῶῶῶῶῶῶῷῶῶῶ",
       "ῶῴῴῴῴῴῴῴῴῴῴḡῴῴῴῴῴῴῴῴῴṀῴῴῴῴῴῶ",
-      "ῶῴῴjklmῴῴdeefῴῴῺῺῺῴῴῸῸῸῸᾖᾖῴῶ",
+      "ῶῴῴjklmῴῴdeefῴῴῺῺῺῴῴⅹⅹⅹⅹᾖᾖῴῶ",
       "ῶῴῴAJKAṀῴP12PῴῴΏsΏῴῴΌsΌΌᾖᾖoῶ",
-      "ῶS῵῵῵῵῵῵῵῵῵῵῵῵῵῵῵῵῵῵῵῵῵῵ᾖᾖ῵ῶ",
-      "ῶ῵ῴ῵῵῵῵῵῵῵῵῵῵῵῵῵῵῵῵῵ῷῴῴῴῴῴ῵ῶ",
-      "ῶ῵῵῵ῴῴῴ῵ῴῴῴ῵ῴ῵ῴ῵ῴῴῴ῵ῴῴῴῴῴῴ῵ῶ",
-      "ῶ῵Ṁ῵ῴῴ–῵ḡ῵῵ῴ῵῵῵῵῵῵῵῵ῴῴῴῴῴῴ῵ῶ",
-      "ῴ῵῵῵῵῵῵῵῵῵῵῵῵῵῵῵῵῵῵῵῵῵῵῵῵῵῵῵",
-      "ῴ῵῵῵῵῵῵῵῵῵῵῵῵῵῵῵῵῵῵῵῵῵῵῵῵῵῵῵",
-      "ῶῴῴ῵῵῵῵῵῵῵῵῵῵ῴ῵῵῵῵῵῵ῴḡῷῴῴῴῴῶ",
-      "ῶῴῴẠẠẠẠẠẠẠẠẠῴẅ῵῵ῴῴῴ῵ῴṀῴῴῴῴῴῶ",
-      "ῶῴῴẠẠẠẠẠẠẠẠẠ῵῵῵῵῵῵῵ῴῴῴῴῴῴῴḡῶ",
-      "ῶῴῴẠẠẠẠẠẠẠẠẠ῵ῴ῵῵ῴῴῴ῵ῷ–ῴῴῴῴῴῶ",
-      "ῶῴῴẠẠẠẠẠẠẠẠẠ῵῵῵῵῵῵῵῵ῴῴῴῴῴῴῴῶ",
-      "ῶῴῴẠẠẠẠẠẠẠẠẠῷ῵῵S–ῴῷῴῴῴῴῴῴῴῴῶ",
+      "ῶSⅸⅸⅸⅸⅸⅸⅸⅸⅸⅸⅸⅸⅸⅸⅸⅸⅸⅸⅸⅸⅸⅸᾖᾖῴῶ",
+      "ῶῴῴῴῴῴῴῴῴῴⅸῴῴῴῴῴῴῴῴῴῷῴῺῺῺῴⅸῶ",
+      "ῶῴῴῴῴῴSῴῴῴⅸῴSῴῴῴῴῴῴῴῴῴΏsΏῴⅸῶ",
+      "ῶῴṀῴῴῴ–ῴḡῴⅸῴῴῴῴῴῴῴῴῴῴSῴῴSῴⅸῶ",
+      "ῴⅸⅸⅸⅸⅸⅸⅸⅸⅸⅸⅸⅸⅸⅸⅸⅸⅸⅸⅸⅸⅸⅸⅸⅸⅸⅸⅸ",
+      "ῴῴῴῴῴῴῴⅸῴῴῴῴῴῴῴῴῴῴῴⅸῴῴῴῴῴῴⅸⅸ",
+      "ῶῴῴⅻῴῴῴⅸῴῴῴⅻῴSῴῴῴῴῴⅸῴḡῷῴῴῴῴῶ",
+      "ῶῴῴẠẠẠẠẠẠẠẠẠῴẅῴῴῴῴῴⅸῴṀῴῴῴῴῴῶ",
+      "ῶῴῴẠẠẠẠẠẠẠẠẠῴῴῴῴῴῴῴῴⅺῴῴῴῴῴḡῶ",
+      "ῶῴῴẠẠẠẠẠẠẠẠẠῴῴῴῴῴῴῴῴῷ–ῴῴῴῴῴῶ",
+      "ῶῴῴẠẠẠẠẠẠẠẠẠῴῴῴῴῴῴῴῴῴῴῺῺῺῴῴῶ",
+      "ῶῴῴẠẠẠẠẠẠẠẠẠῷῴⅺS–ῴῷῴῴῴΏsΏῴῴῶ",
       "ῶῴῴῷῴῴῴῴῴῴῴῴῴῴῴῴῴῴῴῴῴῴῴῴῴῴῴῶ",
       "ῶῶῶῷῶῶῶῶῶῶῷῶῶῶῶῶῶῷῶῶῶῶῶῶῴῶῶῶ"
+
     ],
     "warps": [
       {"x": 4, "y": 3, "to": {"map": "center", "x": 4, "y": 4}, "via": {"map": "celestic", "x": 4, "y": 4}},
@@ -2716,10 +2717,14 @@ export const MAPS9 = {
     "signs": [
       {"x": 1, "y": 4, "text": "ASTRAL TOWN — The shrine town in the mountain’s lap. The oldest stories in Borea are kept here, and they are kept carefully."},
       {"x": 15, "y": 15, "text": "THE OLD SHRINE — Three small shrines in a ring of stones. What they commemorate, the town remembers so you do not have to ask twice."},
-      {"x": 13, "y": 10, "text": "ASTRAL TOWN — East: ROUTE 210 — NORTH."}
+      {"x": 13, "y": 10, "text": "ASTRAL TOWN — East: ROUTE 210 — NORTH."},
+      {"x": 12, "y": 6, "text": "ASTRAL TOWN — East: ROUTE 210 — NORTH."},
+      {"x": 6, "y": 6, "text": "ASTRAL TOWN — East: ROUTE 210 — NORTH."},
+      {"x": 21, "y": 7, "text": "ASTRAL TOWN — East: ROUTE 210 — NORTH."},
+      {"x": 24, "y": 7, "text": "ASTRAL TOWN — East: ROUTE 210 — NORTH."}
     ],
     "npcs": [
-      {"x": 3, "y": 5, "name": "MART CLERK", "art": "clerk", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#4a3a2a", "dialogue": ["Astral Town Mart — stocked for the road ahead."], "mart": {"stock": ["greatball", "ultraball", "hyperpotion", "fullheal", "revive", "superpotion"]}},
+      {"x": 9, "y": 4, "name": "MART CLERK", "art": "clerk", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#4a3a2a", "dialogue": ["Astral Town Mart — stocked for the road ahead."], "mart": {"stock": ["greatball", "ultraball", "hyperpotion", "fullheal", "revive", "superpotion"]}},
       {"x": 11, "y": 7, "name": "SHRINE ELDER UME", "art": "elder", "skin": "#e8b888", "shirt": "#b0503c", "pants": "#2a2a3a", "hair": "#5a3a2a", "dialogue": ["Astral was old when the lakes were young, child. Walk softly; the stones are listening out of habit.", "The cave paintings in the shrine tell of three lake spirits and the beings above them. Told, not explained."]},
       {"x": 19, "y": 12, "name": "HISTORIAN BLYTHE", "art": "scientist", "skin": "#c89878", "shirt": "#2a7a6a", "pants": "#3a3a4a", "hair": "#7a4a1a", "dialogue": ["I copy the shrine murals by hand, one panel a season. Some panels copy back, I swear it.", "East, the fog road drops to Route 210. West of the mountain, everything is somebody else's story."]},
       {"x": 7, "y": 14, "name": "FOG RUNNER KESTREL", "art": "youngster", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#4a3a2a", "dialogue": ["I run the fog road to Repose and back before lunch. The fog lets me. It likes the company.", "On clear days you can see Zenith Spire from the shrine steps. On fog days, it sees you."]},
