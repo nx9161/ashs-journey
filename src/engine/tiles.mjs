@@ -760,6 +760,43 @@ T24_KIND_DEFS.forEach(([kind], i) => {
 export const T24_PROP_KINDS = T24_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
 export const T24_WALL_KINDS = T24_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
 export const T24_FLOOR_KINDS = T24_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
+// ---- Wave T25 (Meadowbrook build): sage stone roofs + the gym's
+// Balance Scales crown + the pond heron + reed banks ----
+// Four new kinds continuing the block at idx 588-591 (T24 ends at
+// 587; idx 576 stays the held merge buffer; U+204C-U+204F, verified
+// free in TILE_CHARS and unused by every map row). Owner ruling
+// 2026-11-13 (NO-SAME-KIT law): Meadowbrook's own kit is the
+// park-pond balanced-stone form its HOENN_TOWN_STYLE names —
+// 'sageroof' is a wall-class roof kind (staggered sage stone
+// courses, structurally unlike Eldergrove's thatch bands and
+// Rootlet's cedar shingle) swapped onto house-stamp + gym roof
+// cells only; 'scales' is a class 'prop' (solid object composited
+// over the ground it stands on, art.mjs resolver): the brass
+// balance crowning the gym roof's centre cell, its art fully
+// opaque with the sageroof shingle baked in (it stands ON the
+// roof). 'heron' is a class 'prop': the grey heron standing at
+// the east pond's NW bank, a designed resident of the approved
+// painting — no NPC record exists and none is invented. 'reedbank'
+// is a floor-class bank dressing swapped 1:1 from the ponds'
+// walkable 'F' flower-bank cells, so floor stays floor. Authored
+// art: assets/sprites/pix/tiles/tile-sageroof.pix,
+// tile-prop-scales.pix, tile-prop-heron.pix, tile-reedbank.pix
+// (Wave T25 register in WAVE-T25-MEADOWBROOK-PLAN.md, Kit).
+export const T25_KIND_DEFS = [
+  ['sageroof', 'wall'],
+  ['scales', 'prop'],
+  ['heron', 'prop'],
+  ['reedbank', 'floor'],
+];
+export const T25_KIND_CHARS = {};
+T25_KIND_DEFS.forEach(([kind], i) => {
+  const ch = String.fromCodePoint(0x1E00 + 588 + i);
+  T25_KIND_CHARS[kind] = ch;
+  TILE_CHARS[ch] = kind;
+});
+export const T25_PROP_KINDS = T25_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
+export const T25_WALL_KINDS = T25_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
+export const T25_FLOOR_KINDS = T25_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
 export const SINNOH_TOWN_GROUND_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg);
 export const SINNOH_TOWN_GROUND2_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg2);
 // TX-3: the 8 gym exteriors by town (original type-accent motifs).

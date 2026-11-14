@@ -1,0 +1,32 @@
+# Wave T25 (Meadowbrook register): the Balance Scales — the
+# gym's crown, mounted on the roof centre where the painting
+# and the town's own sign put them ("the gym keeps the same
+# hours as the ponds: always"). A brass balance: finial knob,
+# beam, two chain-hung pans, centre post and splay feet.
+# FULLY OPAQUE by design: it composites over the gym door
+# arch, whose ground family is 'path' — the sage stone of the
+# roof it crowns is baked in, never transparency.
+# (WAVE-T25-MEADOWBROOK-PLAN.md, Prop register.)
+PIX tile-prop-scales 16 16
+ssDssssssDssssss
+sssssDDDssssssss
+sDsssDWDsssDsDss
+ssDssBWBssDsssss
+ssssBBBBBBBBssss
+ssDsbBsssbBbDsss
+ssssbssssbsBssss
+sssDbsDssbsBDsss
+ssssWbbWWbbWsDss
+ssDssBWWWBssDsss
+ssssDsBBBDssssss
+sDsssssBssDsssss
+sssssDDBBDssssDs
+ssDssssBBssDssss
+ssssDssDDsDsssss
+sDsssssDDssDsDss
+PAL
+s #75997c sage-stone
+D #4a6b52 sage-shade
+B #d9a441 brass
+b #8a6420 brass-dark
+W #f2d98c brass-light

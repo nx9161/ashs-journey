@@ -1,0 +1,41 @@
+# Wave T25 (Meadowbrook register): the Heron — the designed
+# resident of the east pond, standing in the shallows at the
+# path end on its north-west bank, judging the water the way
+# the approved painting and the BACKSTORY-SYNC row put it
+# ("a trainer's stance is judged the way a heron judges
+# water — by what does not ripple"). Rendered as a PROP: the
+# backend records no heron NPC, so it gets no name, no
+# dialogue, no quest — it simply stands there, level-eyed.
+# Grey body, folded dark wing, S-neck, ochre beak and legs,
+# a ripple arc at its feet. FULLY OPAQUE with the town's
+# rendered meadow baked in: the engine's tg- underlay base
+# (tile-tg-petalburg's sage) does not match the meadow as
+# this town renders it, so — exactly like the scales crown —
+# the ground it stands on is baked, never transparency.
+# (WAVE-T25-MEADOWBROOK-PLAN.md, Prop register.)
+PIX tile-prop-heron 16 16
+mmmmmmmmmmmmmmmm
+mmmmmmBBYYmmmmmm
+mmmmmBGGGYYmmmmm
+mmmmLGmmmmmmmmmm
+mmmLGmmmmmmmmmmm
+mmmmGGmmmmmmmmmm
+mmmmmGGGmmmmmmmm
+mmmGGGGGGGmmmmmm
+mmGLGGGGGgGmmmmm
+mmLGGGGggggGmmmm
+mmmGGGGGGgGmmmmm
+mmmmGGGGGmmmmmmm
+mmmmYmmYmmmmmmmm
+mmmmYmmYmmmmmmmm
+mmmmYmmYmmmmmmmm
+mmmYYbWWbYYmmmmm
+PAL
+m #168919 meadow
+G #9aa7b1 heron-grey
+g #66727d heron-wing
+L #d7dee5 heron-breast
+B #232a2f heron-dark
+Y #e8b23f ochre
+W #cfeeda ripple-foam
+b #7fb3c8 ripple-blue

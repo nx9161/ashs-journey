@@ -438,6 +438,11 @@ export const WALKABLE = new Set(['.', ',', 'D', 'E', 'C', 'F', 'J', 'K', '1', '2
   // ground — the Flower Clock's petal-soil bed in Eldergrove, swapped
   // 1:1 from walkable 'F' flower cells, so floor stays floor.
   ...[587]
+    .map((i) => String.fromCodePoint(0x1E00 + i)),
+  // Wave T25: the reedbank char (U+1E00+591, tiles.mjs T25_KIND_DEFS)
+  // is walkable ground — Meadowbrook's dressed pond banks, swapped
+  // 1:1 from walkable 'F' flower cells, so floor stays floor.
+  ...[591]
     .map((i) => String.fromCodePoint(0x1E00 + i))]);
 
 // Trainer definitions for the slice.

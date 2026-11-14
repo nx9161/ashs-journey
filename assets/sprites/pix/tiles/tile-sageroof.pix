@@ -1,0 +1,31 @@
+# Wave T25 (Meadowbrook kit): sageroof — Meadowbrook's own roof
+# kind. Staggered sage STONE courses: each course is a light-
+# topped stone row, two face rows with offset vertical joints,
+# and a dark shade line at the foot; pale lichen speckles the
+# faces. TOWN_STYLE petalburg sage palette as fixed art (only
+# Meadowbrook wears this kind). Structurally coursed stone,
+# not a recolour: Eldergrove wears banded thatch, Rootlet flat
+# cedar shingle; these courses read as cut stone at screenshot
+# scale. (NO-SAME-KIT law.)
+PIX tile-sageroof 16 16
+LLLDLLLLDLLLDLLL
+sssDssssDsssDsss
+ssosDssosDsossDs
+DDDDsDDDDDDsDDDD
+LLDLLLDLLLLDLLLD
+ssDsssoDsssDssDs
+sssDsssDssosDsss
+DDsDDDDDDsDDDDDD
+LLLDLLLLDLLLDLLL
+sssDssosDsssDsss
+ssDsossDsssDssos
+DDDDDDsDDDDsDDDD
+LLDLLLDLLLLDLLLD
+ssDsssDssosDsssD
+sssDssosDsssDsss
+DsDDDDsDDDDDDsDD
+PAL
+s #75997c sage-stone
+L #9ab89e sage-light
+D #4a6b52 sage-shade
+o #c9d6a8 lichen

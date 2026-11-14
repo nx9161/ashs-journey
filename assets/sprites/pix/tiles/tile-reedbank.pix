@@ -1,0 +1,34 @@
+# Wave T25 (Meadowbrook kit): reedbank — the ponds' dressed
+# edge. Wet sand and damp mud underfoot, pebble speckle, and
+# reed tufts with two cattail heads standing along the bank;
+# the bottom rows darken to the waterline (the ponds lie
+# south of every bank cell in town). Swaps 1:1 from the
+# shipped flower-bank cells on both ponds' north banks —
+# Orin trims the reeds to the same height on both banks;
+# the banks now say so. A floor kind: walkable, encounter-
+# free, no table change. (NO-SAME-KIT law: no other town's
+# bank reads like this one.)
+PIX tile-reedbank 16 16
+MMpMMMMMdMMpMMMM
+MRCpMMRMdMMpMMCM
+MRrMMMRrMMpMRrMM
+MMpMdMMpMMdMMpMd
+pMMMpMMMpMdMMpMM
+MMdMMpMMMpMMMdMp
+MMMpMMdMMpMpMMMd
+dMMpMMMpMMMdMMpM
+MMMpMdMMpMMMpMMd
+MpMMMpMMdMMpMMMp
+dMMpMMMpMdMMpMMd
+MMdMMpMMMpMMdMMp
+ddMMdMMpdMMdMMpd
+dddMMdddddMMdddd
+pddddpdddpddddpd
+dddddddddddddddd
+PAL
+M #9a8a68 wet-sand
+d #7d6f52 damp-mud
+p #b3a37f pebble-sand
+R #4a7a3a reed
+r #69a34e reed-light
+C #7a4a28 cattail
