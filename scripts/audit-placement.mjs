@@ -165,7 +165,7 @@ export const STREET_REGISTRY = { vermilion: ['boardwalk'], blackthorn: ['settflo
 // retrofit completes the W4 registration, swapping its
 // remaining sand-path street cells to the boardwalk material
 // it already owns.
-// T29 extension (TWENTY-THIRD documented exception in the guard):
+// T29 extension (TWENTY-FIFTH documented exception in the guard):
 // mauville registers ONE material on the same one-town terms —
 // 'gridfloor' (Bronze Grid & Sunlamp), Lilac City's new kit street
 // authored in the T29 build: the fine bronze sett grid the

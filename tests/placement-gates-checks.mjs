@@ -480,6 +480,44 @@
 //     registry re-pins all four vermilion fingerprints in the same
 //     commit per the burn-down rule; the copies' own npcs/events
 //     layers do not move.
+//     TWENTY-FIFTH DOCUMENTED EXCEPTION (T29): the registry grows by
+//     one scoped entry — mauville: [gridfloor] — on the same
+//     terms as the exceptions above, and mauville's pin is its
+//     POST-T29 tuple. The Lilac City rebuild replaced the
+//     shipped tg2 field (289 of 540 cells mud — 53.5%, the
+//     worst share yet) with the calm ground + bronze sett
+//     fabric of the approved design: bronzroof staggered
+//     olive-bronze shingles (idx 625) on the Gym + Game Corner
+//     stamps and two facade cottages, gridfloor fine bronze
+//     sett lattice with a teal-glass accent sett (idx 626),
+//     the sunlamp prop (idx 627, x4: the Corner pair + the
+//     great crossing north and south), the lilacbush prop
+//     (idx 628, x3), and the orphaned MART CLERK re-seated at
+//     his Mart's front apron (3,5) -> (9,4). Gate STATUS stays
+//     PASS — but the shipped pass leaned on the mud sea as the
+//     fabric (308 cells = 289 tg2 + the plots' 19 path cells);
+//     the new fabric is streets + the plots' own path cells
+//     alone, the scattered path cells threaded to the streets
+//     through plain-ground cells only (no encounter cell
+//     touched: commas 13, dots 19 byte-kept). Conn 210/210,
+//     step-offs 7/7, junctions 9 sites -> 11 sites, 0 bare
+//     (the four shipped DIRS records stood invisible on flat
+//     green; they gained S tiles at their posts and five
+//     verbatim copies mark the new junctions, T23-T28 pattern;
+//     the front street stops west of the (26,4) lamp and the
+//     north-east yard skips (26,7) so neither the lamp nor the
+//     (26,8) planter is ever straddled), strict 0.9382 ->
+//     0.7977 (desire lines get real corners; above the 0.60
+//     gate), fabric 0.9931 -> 0.9919, apronMin 0.929 -> 0.857,
+//     unanchoredAny identical (0), reachability holds the
+//     fleet baseline 1132. (Kind indices 625-628: first
+//     registered at 622-625, re-indexed in-branch under the
+//     Director's index ruling of 2026-11-13 after W-DIFF7
+//     registered pierfloor 622, mansardroof 623, copperroof
+//     624 — the chars are computed from the block base and no
+//     map cells had landed, so the remap is registration-only
+//     and lossless by construction.) Re-pinned with the T29
+//     build.
 //     Tuple: [pass, connOk, connPairs, stepTouch, stepTot, components,
 //     junctionSites, junctionsBare, apronLow, apronMin, merged,
 //     onFabric, shoulderOrphans, unanchoredAny, strict, fabric].
@@ -509,8 +547,8 @@ async function gateTuple(id, t) {
 }
 
 // 1. registry scope lock
-ok('street registry is exactly { vermilion: [boardwalk], blackthorn: [settfloor], silvertown: [marblefloor], ecruteak: [wornfloor], saffron: [avenuefloor], violet: [violetfloor], azalea: [brickfloor], mahogany: [gravelfloor], rustboro: [cutstonefloor], fuchsia: [marshfloor], cianwood: [driftfloor], dewford: [plankfloor], viridian: [slatefloor], celadon: [promfloor], slateport: [quayfloor, boardwalk], cerulean: [pierfloor] }',
-  JSON.stringify(STREET_REGISTRY) === '{"vermilion":["boardwalk"],"blackthorn":["settfloor"],"silvertown":["marblefloor"],"ecruteak":["wornfloor"],"saffron":["avenuefloor"],"violet":["violetfloor"],"azalea":["brickfloor"],"mahogany":["gravelfloor"],"rustboro":["cutstonefloor"],"fuchsia":["marshfloor"],"cianwood":["driftfloor"],"dewford":["plankfloor"],"viridian":["slatefloor"],"celadon":["promfloor"],"slateport":["quayfloor","boardwalk"],"cerulean":["pierfloor"]}',
+ok('street registry is exactly { vermilion: [boardwalk], blackthorn: [settfloor], silvertown: [marblefloor], ecruteak: [wornfloor], saffron: [avenuefloor], violet: [violetfloor], azalea: [brickfloor], mahogany: [gravelfloor], rustboro: [cutstonefloor], fuchsia: [marshfloor], cianwood: [driftfloor], dewford: [plankfloor], viridian: [slatefloor], celadon: [promfloor], slateport: [quayfloor, boardwalk], cerulean: [pierfloor], mauville: [gridfloor] }',
+  JSON.stringify(STREET_REGISTRY) === '{"vermilion":["boardwalk"],"blackthorn":["settfloor"],"silvertown":["marblefloor"],"ecruteak":["wornfloor"],"saffron":["avenuefloor"],"violet":["violetfloor"],"azalea":["brickfloor"],"mahogany":["gravelfloor"],"rustboro":["cutstonefloor"],"fuchsia":["marshfloor"],"cianwood":["driftfloor"],"dewford":["plankfloor"],"viridian":["slatefloor"],"celadon":["promfloor"],"slateport":["quayfloor","boardwalk"],"cerulean":["pierfloor"],"mauville":["gridfloor"]}',
   JSON.stringify(STREET_REGISTRY));
 
 // 2. census: the 64 towns of townSetOf (pallet included)
@@ -563,7 +601,7 @@ const PIN = {
   "lilycove": [0, 42, 72, 5, 5, 1, 8, 0, 0, 0.706, 0, 0, 0, 0, 0.9249, 0.9687],
   "littleroot": [1, 90, 90, 8, 8, 1, 15, 0, 0, 0.714, 0, 0, 0, 1, 0.674, 0.9848],
   "mahogany": [1, 156, 156, 7, 7, 1, 5, 0, 0, 0.786, 0, 0, 0, 0, 0.9332, 1],
-  "mauville": [1, 210, 210, 7, 7, 1, 9, 0, 0, 0.929, 0, 0, 0, 0, 0.9382, 0.9931],
+  "mauville": [1, 210, 210, 7, 7, 1, 11, 0, 0, 0.857, 0, 0, 0, 0, 0.7977, 0.9919],
   "mikan": [0, 42, 72, 7, 7, 1, 4, 0, 3, 0.429, 0, 0, 0, 0, 0.9717, 0.9717],
   "moro": [0, 12, 30, 4, 4, 1, 1, 0, 1, 0.529, 0, 0, 0, 0, 0.9402, 0.9402],
   "mossdeep": [0, 30, 132, 6, 6, 2, 3, 0, 0, 0.667, 0, 0, 0, 0, 0.9289, 0.9289],
