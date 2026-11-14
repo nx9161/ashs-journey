@@ -2646,6 +2646,81 @@ T28_KIND_DEFS.forEach(([kind], i) => {
 const T28_PROP_KINDS = T28_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
 const T28_WALL_KINDS = T28_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
 const T28_FLOOR_KINDS = T28_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
+// ---- Wave W-DIFF7 (Tidehaven + Arcport identity retrofit) ----
+// Three new kinds at idx 622-624 (U+206E-U+2070, verified free
+// in TILE_CHARS and unused by every map row; the block runs
+// T23 575, W-DIFF 577-580, W-DIFF2 581-584, T24 585-587,
+// T25 588-591, WD3 592-593, W-DIFF4 594-597, T26 598-601,
+// W-DIFF5 602-605, T27 608-612, W-DIFF6 613-616, T28 617-621 —
+// 606/607 stand empty). The two Arden harbour cities get the
+// identity table's own kits (W-DIFF-AUDIT Phase B). Tidehaven
+// City (TOWN_STYLE cerulean: ground #57a8a0, form 'mansard
+// blue-tile') — 'Boardwalk & Mansard': 'pierfloor' (floor) —
+// vertical sea-worn pier planks, the town's street fabric
+// (STREET_REGISTRY), swapped onto every sand-path street
+// cell. The table names 'boardwalk' as Tidehaven's street,
+// but boardwalk is Arcport's registered street material
+// (W4) — the W-DIFF5 precedent (the table's shared
+// 'boardwalk' became marshfloor/driftfloor) gives Tidehaven
+// its own pier timber in the same register instead of a
+// second helping of boardwalk. The town's 11 shipped
+// boardwalk cells (dock edge, south shore, exit aprons)
+// STAY boardwalk — the table's own street/shore split, and
+// a gate-driven trim (converting them grew a second, bare
+// junction at the exit spine and failed the gate; with the
+// split the town's gate tuple is fully identical to its
+// pin). 'mansardroof' (wall)
+// — a true MANSARD in the KIT_VARIANTS cerulean roof tones
+// (cap band + shallow upper slope + steep blue-tile lower
+// slope with dormer glints + deep eave foot), swapped onto
+// the town's th- roofs entire — houses and the Mart's roof
+// row alike (the shipped Mart wears the th- kind, not a
+// stamp roof); the Center's roof-center stamp, the gym's
+// gym-water pool hall and wall-gym faces, every door and
+// sign keep their shipped faces. The table's ground
+// treatment (tg + canal water) and signature (stonebell at
+// the pool, flower borders) are the shipped town's own —
+// byte-kept. Arcport City (TOWN_STYLE vermilion: ground
+// #c98d5a, form 'copper gable') — 'Harbour Boardwalk &
+// Copper (model town)': the street is boardwalk itself,
+// Arcport's registered material since W4 — the retrofit
+// completes it: every remaining sand-path street cell is
+// swapped to boardwalk, so the whole street network (the
+// row-5 avenue, the spines, the dock streets) is the one
+// harbour material. 'copperroof' (wall) — a standing-seam
+// COPPER gable in the KIT_VARIANTS vermilion roof tones
+// (bright ridge + copper courses + verdigris weathering +
+// deep eave foot), swapped onto the town's th- roofs entire
+// (houses and the Mart's roof row, which wears th- as in
+// Tidehaven); the gym's tr- roof row, the Center's
+// roof-center stamp, the harbour props (crane, gull,
+// tidechart) and the tg2- harbour-turf accents keep their
+// shipped faces entire. (Name note: 'coproof' is T26
+// Copperton's roof kind — Arcport's copper takes the
+// distinct name 'copperroof'.) Vermilion is a drifted
+// quadruple definition (map-id registry status D) whose
+// maps4/maps5/maps6 copies are spread-overrides of the
+// maps2 original: ONLY the maps2 rows are swapped, and all
+// four copies' registry fingerprints re-pin in this commit
+// per the burn-down rule — the copies' own npcs/events
+// layers do not move. Authored art:
+// assets/sprites/pix/tiles/tile-pierfloor.pix,
+// tile-mansardroof.pix, tile-copperroof.pix (register:
+// your_files/w-diff7/GRADE.md).
+const WD7_KIND_DEFS = [
+  ['pierfloor', 'floor'],
+  ['mansardroof', 'wall'],
+  ['copperroof', 'wall'],
+];
+const WD7_KIND_CHARS = {};
+WD7_KIND_DEFS.forEach(([kind], i) => {
+  const ch = String.fromCodePoint(0x1E00 + 622 + i);
+  WD7_KIND_CHARS[kind] = ch;
+  TILE_CHARS[ch] = kind;
+});
+const WD7_PROP_KINDS = WD7_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
+const WD7_WALL_KINDS = WD7_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
+const WD7_FLOOR_KINDS = WD7_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
 const SINNOH_TOWN_GROUND_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg);
 const SINNOH_TOWN_GROUND2_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg2);
 // TX-3: the 8 gym exteriors by town (original type-accent motifs).
@@ -108979,6 +109054,60 @@ const ART = {
     "dabaabaaaabbbabd",
     "dddddddddddddddd",
   ] },
+  "tile-pierfloor": { w: 16, h: 16, pal: {"a":"#71869a","b":"#5d7185","c":"#8fa5b8","d":"#3c5563","e":"#4c6a75","n":"#2f434c"}, rows: [
+    "caadcaadcaadcabd",
+    "anadceadanadcnad",
+    "aaadaaadaaadcaad",
+    "cabdcbadbdddaeed",
+    "aaadcbbdaaadabad",
+    "ddddaaedaaadcaad",
+    "aabdcaadcbadcbad",
+    "aabdcaadaebdcaad",
+    "aaadcaadaaadaaad",
+    "cbadcaadcaadabad",
+    "aaadcaadcaadabbd",
+    "ceadbbddcaadcaad",
+    "cabdcaadaaadaaad",
+    "cabdaaadcaaddddd",
+    "cnadanadcaadcned",
+    "aaadcaadcaadaaed",
+  ] },
+  "tile-mansardroof": { w: 16, h: 16, pal: {"a":"#2f639e","b":"#26537f","c":"#6392c2","d":"#1e4069","e":"#a8c8e8"}, rows: [
+    "cccccaacaaacccac",
+    "acaaaaaccaaaaaaa",
+    "aabccacabaaaabaa",
+    "aaaaabaaaccbaaac",
+    "aabaaaaabaaacbaa",
+    "bbbdddddbddddddd",
+    "abceeaabaaacaabc",
+    "aaaeeaaaaabaaaaa",
+    "dbddbdbddddbbdbd",
+    "acaaaabaaaaabaaa",
+    "aabcaaaabaaeebaa",
+    "ddddbdbdddbeeddd",
+    "abccaaabaaaaaaba",
+    "dbbbbbbdbbdbddbd",
+    "bbbbbbdddbddbbbb",
+    "dddddddddddddddd",
+  ] },
+  "tile-copperroof": { w: 16, h: 16, pal: {"a":"#a8662f","b":"#8a5426","c":"#cf9455","d":"#6b3d17","e":"#e8b07e","v":"#4fae9d"}, rows: [
+    "eeeeeeeeceeecece",
+    "caabaaabacabaaad",
+    "aaabbbabaaabcaab",
+    "aaadaaadaaadbaad",
+    "aaabbbbbabbbbbab",
+    "aaabcaabacadaaad",
+    "aacdaacbaaabacad",
+    "baadbaabaaabaaab",
+    "abadaacbaaabacab",
+    "bbbbbbabbabdbbab",
+    "aavbaaabaaabvvbd",
+    "vaadaaabvaabaaab",
+    "aaabvaabavabaaab",
+    "vaadbaabacbbavab",
+    "bbbbbdbbbbbbbddb",
+    "dddddddddddddddd",
+  ] },
   "partner-back-bob": { base: "partner-back", w: 64, h: 64, pal: {}, shiftY: 2 },
   "partner-front-bob": { base: "partner-front", w: 64, h: 64, pal: {}, shiftY: 2 },
   "abomasnow-back-bob": { base: "abomasnow-back", w: 64, h: 64, pal: {}, shiftY: 2 },
@@ -114247,6 +114376,10 @@ for (const k of WD6_FLOOR_KINDS) TILE_ART[k] = 'tile-' + k;
 for (const k of T28_PROP_KINDS) TILE_ART[k] = 'tile-prop-' + k;
 for (const k of T28_WALL_KINDS) TILE_ART[k] = 'tile-' + k;
 for (const k of T28_FLOOR_KINDS) TILE_ART[k] = 'tile-' + k;
+// Wave W-DIFF7: Tidehaven's pierfloor/mansardroof + Arcport's copperroof kit kinds.
+for (const k of WD7_PROP_KINDS) TILE_ART[k] = 'tile-prop-' + k;
+for (const k of WD7_WALL_KINDS) TILE_ART[k] = 'tile-' + k;
+for (const k of WD7_FLOOR_KINDS) TILE_ART[k] = 'tile-' + k;
 // Premium+ W6 (TX-3/PL-1): door-open frames, authored in TX-3 for every
 // door kind. The warp-fade engine that plays them lands in W7 — W6
 // wires the frames (this registry + cache.doorOpen + doorOpenCanvas)
@@ -114793,6 +114926,7 @@ function buildArtTileCache(doc) {
   for (const k of WD4_FLOOR_KINDS) cache[k + 'Variants'] = ids(['tile-' + k]);
   for (const k of WD5_FLOOR_KINDS) cache[k + 'Variants'] = ids(['tile-' + k]);
   for (const k of WD6_FLOOR_KINDS) cache[k + 'Variants'] = ids(['tile-' + k]);
+  for (const k of WD7_FLOOR_KINDS) cache[k + 'Variants'] = ids(['tile-' + k]);
   cache.foundationVariants = ids(['tile-foundation-1', 'tile-foundation-2', 'tile-foundation-3']);
   // P-1 side walls: the SAME authored art rasterized through a palette
   // swap that darkens every hex by one full shade step (x0.72 — the
@@ -115063,6 +115197,7 @@ for (const k of WD3_FLOOR_KINDS) FLOOR_VARIANTS[k] = k + 'Variants';
 for (const k of WD4_FLOOR_KINDS) FLOOR_VARIANTS[k] = k + 'Variants';
 for (const k of WD5_FLOOR_KINDS) FLOOR_VARIANTS[k] = k + 'Variants';
 for (const k of WD6_FLOOR_KINDS) FLOOR_VARIANTS[k] = k + 'Variants';
+for (const k of WD7_FLOOR_KINDS) FLOOR_VARIANTS[k] = k + 'Variants';
 // Wave 5a: interior floor kinds are ground families of their own (a prop
 // inside a Center stands on Center floor, never on grass or path), and
 // interior walls cast the shared shadow strip onto the floor below.
@@ -115119,7 +115254,7 @@ function groundFamilyOf(kind) {
   // psand kinds stand on path (props composite over the parent ground).
   if (kind && kind.startsWith('beach-')) return 'tropgrass';
   if (kind && kind.startsWith('psand-')) return 'path';
-  if (kind && (W6_FLOOR_KINDS.includes(kind) || O1_FLOOR_KINDS.includes(kind) || J3_FLOOR_KINDS.includes(kind) || H3_FLOOR_KINDS.includes(kind) || H3B_FLOOR_KINDS.includes(kind) || S3_FLOOR_KINDS.includes(kind) || S3B_FLOOR_KINDS.includes(kind) || WD_FLOOR_KINDS.includes(kind) || WD3_FLOOR_KINDS.includes(kind) || WD4_FLOOR_KINDS.includes(kind) || WD5_FLOOR_KINDS.includes(kind) || WD6_FLOOR_KINDS.includes(kind))) return kind; // W6/O1/J3/H3/H3B/S3/S3B/WD/WD3/WD4/WD5/WD6 floors are own families
+  if (kind && (W6_FLOOR_KINDS.includes(kind) || O1_FLOOR_KINDS.includes(kind) || J3_FLOOR_KINDS.includes(kind) || H3_FLOOR_KINDS.includes(kind) || H3B_FLOOR_KINDS.includes(kind) || S3_FLOOR_KINDS.includes(kind) || S3B_FLOOR_KINDS.includes(kind) || WD_FLOOR_KINDS.includes(kind) || WD3_FLOOR_KINDS.includes(kind) || WD4_FLOOR_KINDS.includes(kind) || WD5_FLOOR_KINDS.includes(kind) || WD6_FLOOR_KINDS.includes(kind) || WD7_FLOOR_KINDS.includes(kind))) return kind; // W6/O1/J3/H3/H3B/S3/S3B/WD/WD3/WD4/WD5/WD6/WD7 floors are own families
   if (kind && (kind.startsWith('tg-') || kind.startsWith('tg2-'))) return kind; // W5: town ground is its own family
   if (kind && (kind.startsWith('tc-') || kind.startsWith('td-') || kind.startsWith('flora-'))) return 'grass';
   if (kind === 'grass' || kind === 'grassground' || kind === 'flower' || kind === 'tree' || kind === 'rock' || kind === 'sign' ||
@@ -122878,6 +123013,13 @@ const WALKABLE = new Set(['.', ',', 'D', 'E', 'C', 'F', 'J', 'K', '1', '2', 'V',
   // floor. (Indices 617-621 per the Director's index ruling:
   // W-DIFF6 holds 613-616.)
   ...[618]
+    .map((i) => String.fromCodePoint(0x1E00 + i)),
+  // Wave W-DIFF7: the pierfloor char (U+1E00+622, tiles.mjs
+  // WD7_KIND_DEFS) is walkable street material — Tidehaven's
+  // pier planks, swapped 1:1 from the walkable '.' path char
+  // (and the walkable boardwalk dock cells) in Tidehaven City,
+  // so floor stays floor.
+  ...[622]
     .map((i) => String.fromCodePoint(0x1E00 + i))]);
 
 // Trainer definitions for the slice.
@@ -123260,20 +123402,20 @@ const MAPS2 = {
   cerulean: {
     id: 'cerulean', name: 'Tidehaven City', music: 'viridian-theme',
     rows: rows([
-      'ÎGÙÎ~~~ἇ..ἇ~ÃÃÃÃÃÙ~~',
-      'Ã..ÃÃÃÃÃ..ÃÃÃÃÃFÃÃÃ~',
-      'Ã.ÃÃÃÃÃÃ..ĉOĉĉẑÃÃÃÃ~',
-      'Ã.ÃÃÃÃÃÃ..P12PÃÃÃÃÃ~',
-      '~ķ...........ĉĉĉĉĉÃ~',
-      '........ĉĉXĉÃḂḂḂḂḂÃ~',
-      '~jklmÃ..ḂḂḂḂÃUU—UUķ~',
-      'ἇAJKAÃ..UVYUṀo.....~',
-      'ἇ..................~',
-      '″nnFÃÃṆÃ......~~~~.~',
-      '~ĉĉĉĉÃÃø..ĉĉĉ..ṃ~~.~',
-      '~ġġwġÃÃÃ..xyz.ĉĉĉF.~',
-      '~.............ġwġF.~',
-      '~~~~~~~ἇ..o~~ἇἇἇἇἇἇ″',
+      'ÎGÙÎ~~~ἇ⁮⁮ἇ~ÃÃÃÃÃÙ~~',
+      'Ã⁮⁮ÃÃÃÃÃ⁮⁮ÃÃÃÃÃFÃÃÃ~',
+      'Ã⁮ÃÃÃÃÃÃ⁮⁮⁯O⁯⁯ẑÃÃÃÃ~',
+      'Ã⁮ÃÃÃÃÃÃ⁮⁮P12PÃÃÃÃÃ~',
+      '~ķ⁮⁮⁮⁮⁮⁮⁮⁮⁮⁮⁮⁯⁯⁯⁯⁯Ã~',
+      '⁮⁮⁮⁮⁮⁮⁮⁮⁯⁯X⁯ÃḂḂḂḂḂÃ~',
+      '~jklmÃ⁮⁮ḂḂḂḂÃUU—UUķ~',
+      'ἇAJKAÃ⁮⁮UVYUṀo⁮⁮⁮⁮⁮~',
+      'ἇ⁮⁮⁮⁮⁮⁮⁮⁮⁮⁮⁮⁮⁮⁮⁮⁮⁮⁮~',
+      '″nnFÃÃṆÃ⁮⁮⁮⁮⁮⁮~~~~⁮~',
+      '~⁯⁯⁯⁯ÃÃø⁮⁮⁯⁯⁯⁮⁮ṃ~~⁮~',
+      '~ġġwġÃÃÃ⁮⁮xyz⁮⁯⁯⁯F⁮~',
+      '~⁮⁮⁮⁮⁮⁮⁮⁮⁮⁮⁮⁮⁮ġwġF⁮~',
+      '~~~~~~~ἇ⁮⁮o~~ἇἇἇἇἇἇ″',
     ]),
     warps: [
       { x: 9, y: 7, to: { map: 'gym-cerulean', x: 5, y: 7 } },
@@ -123484,19 +123626,19 @@ const MAPS2 = {
   vermilion: {
     id: 'vermilion', name: 'Arcport City', music: 'viridian-theme',
     rows: rows([
-      'ÏÏÏÏÏÏÏÏ..ÏÏÏÏÏÏÏBB~',
-      'ĸÄÄÄÄÄÄÄ..ÄÄÄÄÄÄÄBB~',
-      'ĸjjlmÄÄÄĸĸċOċċÄÄÄBB~',
+      'ÏÏÏÏÏÏÏÏἇἇÏÏÏÏÏÏÏBB~',
+      'ĸÄÄÄÄÄÄÄἇἇÄÄÄÄÄÄÄBB~',
+      'ĸjjlmÄÄÄĸĸ⁰O⁰⁰ÄÄÄBB~',
       'ĸAJKAÄÄÄĸĸP12PÄååååå',
-      'ĸÄ..ÄoÄÄ..Ä..ÄÄģģ—ģģ',
-      '....................',
-      'ĸċċċÄÄÄÄÄĸÄÄÄÄÄÄÄÄÄ~',
-      'ĸģwģÄåååå.ċċċÄḃḃḃḃÄ‸',
-      'ĸĸĸĸÄģģģw.ģ—ģẆḃVYḃἇ~',
-      'ĸĸĸĸĸĸĸĸ..ἇἇἇἇἇἇἇἇἇ~',
-      'ĸċċċἇἇ‶ἇἇ.ἇἇἇἇἇἇἇ‷ἇ~',
-      'ĸģwģÄÄÄÄ..ἇἇἇἇἇἇἇἇἇ~',
-      '........ἇἇἇἇἇἇἇἇἇἇo~',
+      'ĸÄἇἇÄoÄÄἇἇÄἇἇÄÄģģ—ģģ',
+      'ἇἇἇἇἇἇἇἇἇἇἇἇἇἇἇἇἇἇἇἇ',
+      'ĸ⁰⁰⁰ÄÄÄÄÄĸÄÄÄÄÄÄÄÄÄ~',
+      'ĸģwģÄååååἇ⁰⁰⁰ÄḃḃḃḃÄ‸',
+      'ĸĸĸĸÄģģģwἇģ—ģẆḃVYḃἇ~',
+      'ĸĸĸĸĸĸĸĸἇἇἇἇἇἇἇἇἇἇἇ~',
+      'ĸ⁰⁰⁰ἇἇ‶ἇἇἇἇἇἇἇἇἇἇ‷ἇ~',
+      'ĸģwģÄÄÄÄἇἇἇἇἇἇἇἇἇἇἇ~',
+      'ἇἇἇἇἇἇἇἇἇἇἇἇἇἇἇἇἇἇo~',
       '~~~‸~~~~ἇo~″~~~~~~~~',
     ]),
     warps: [
