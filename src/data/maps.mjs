@@ -432,6 +432,12 @@ export const WALKABLE = new Set(['.', ',', 'D', 'E', 'C', 'F', 'J', 'K', '1', '2
   // wornfloor — idx 581,582) join on the same terms for Farsight /
   // Lantern City.
   ...[577, 578, 581, 582]
+    .map((i) => String.fromCodePoint(0x1E00 + i)),
+  // Wave T24: the clockbed char (U+1E00+583, tiles.mjs T24_KIND_DEFS)
+  // is walkable ground — the Flower Clock's petal-soil bed in
+  // Eldergrove, swapped 1:1 from walkable 'F' flower cells, so
+  // floor stays floor.
+  ...[583]
     .map((i) => String.fromCodePoint(0x1E00 + i))]);
 
 // Trainer definitions for the slice.

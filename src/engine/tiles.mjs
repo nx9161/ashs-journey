@@ -729,6 +729,35 @@ WD_KIND_DEFS.forEach(([kind], i) => {
 });
 export const WD_FLOOR_KINDS = WD_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
 export const WD_WALL_KINDS = WD_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
+// ---- Wave T24 (Eldergrove build): the Flower Clock + thatch roof ----
+// Two new kinds continuing the block at idx 581-582 (W-DIFF ends at
+// 580; idx 576 stays the held merge buffer; U+2045/U+2046, verified
+// free in TILE_CHARS and unused by every map row). Owner ruling
+// 2026-11-13 (NO-SAME-KIT law): Eldergrove's own kit is dry-meadow
+// ground + THATCH-textured straw-gold roofs + the Flower Clock —
+// 'flowerclock' is a class 'prop' (solid object composited over
+// the ground it stands on, art.mjs resolver): the petal-ring clock
+// face at the heart of the town's shipped clock garden, where its
+// sign has always stood. 'thatchroof' is a wall-class roof kind
+// swapped onto house-stamp roof cells only — footprints, doors
+// and warps untouched (W-DIFF drakeroof precedent). Authored art:
+// assets/sprites/pix/tiles/tile-prop-flowerclock.pix and
+// tile-thatchroof.pix (Wave T24 register in
+// WAVE-T24-ELDERGROVE-PLAN.md, Kit register).
+export const T24_KIND_DEFS = [
+  ['flowerclock', 'prop'],
+  ['thatchroof', 'wall'],
+  ['clockbed', 'floor'],
+];
+export const T24_KIND_CHARS = {};
+T24_KIND_DEFS.forEach(([kind], i) => {
+  const ch = String.fromCodePoint(0x1E00 + 581 + i);
+  T24_KIND_CHARS[kind] = ch;
+  TILE_CHARS[ch] = kind;
+});
+export const T24_PROP_KINDS = T24_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
+export const T24_WALL_KINDS = T24_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
+export const T24_FLOOR_KINDS = T24_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
 export const SINNOH_TOWN_GROUND_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg);
 export const SINNOH_TOWN_GROUND2_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg2);
 // TX-3: the 8 gym exteriors by town (original type-accent motifs).

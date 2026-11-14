@@ -1,0 +1,29 @@
+# Wave T24 (Eldergrove kit): thatchroof — Eldergrove's own roof
+# kind. Horizontal straw bands with a shade line under each
+# course and a fringe teeth edge at the foot; TOWN_STYLE oldale
+# straw golds as fixed art (only Eldergrove wears this kind).
+# Structurally thatch, not a recolour: Rootlet's houses wear
+# flat cedar shingle (th-littleroot); these courses read as
+# bundled straw at screenshot scale. (NO-SAME-KIT law.)
+PIX tile-thatchroof 16 16
+gLggLgLggLggLgLg
+ggLggSgLgggLggLg
+LggLgggLggLgLggg
+SgSSgSSgSSgSSgSS
+gLggLgLggLggLgLg
+ggLggSgLgggLggLg
+LggLgggLggLgLggg
+SgSSgSSgSSgSSgSS
+gLggLgLggLggLgLg
+ggLggSgLgggLggLg
+LggLgggLggLgLggg
+SgSSgSSgSSgSSgSS
+gLggLgLggLggLgLg
+ggLggSgLgggLggLg
+LggLgggLggLgLggg
+DgDgDgDgDgDgDgDg
+PAL
+g #c2a054 straw
+L #d9bc76 straw-light
+S #856830 straw-shade
+D #6e5626 straw-dark

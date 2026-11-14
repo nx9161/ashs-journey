@@ -14,7 +14,7 @@ import { ART } from '../../assets/sprites/art-data.mjs';
 import { KIT_ART } from '../../assets/sprites/kit-art-data.mjs';
 import { KITACC } from '../../assets/sprites/kitacc-data.mjs';
 import { forgeSprite, forgeHumanoid } from './sprites.mjs';
-import { paintTile, W6_PROP_KINDS, W6_RUG_KINDS, W6_FLOOR_KINDS, W6_WALL_KINDS, W7_PROP_KINDS, O1_PROP_KINDS, O1_FLOOR_KINDS, O1_WALL_KINDS, J3_PROP_KINDS, J3_FLOOR_KINDS, J3_WALL_KINDS, JOHTO_TOWN_ORDER, H3_PROP_KINDS, H3_FLOOR_KINDS, H3_WALL_KINDS, H3B_PROP_KINDS, H3B_FLOOR_KINDS, H3B_WALL_KINDS, HOENN_TOWN_ORDER, S3_PROP_KINDS, S3_FLOOR_KINDS, S3_WALL_KINDS, S3B_PROP_KINDS, S3B_FLOOR_KINDS, S3B_WALL_KINDS, SINNOH_TOWN_ORDER, G2_KINDS, T1_PROP_KINDS, T3_PROP_KINDS, T6_PROP_KINDS, T6_RUG_KINDS, T7_PROP_KINDS, T9_PROP_KINDS, T14_PROP_KINDS, T15_PROP_KINDS, T17_PROP_KINDS, T23_PROP_KINDS, WD_FLOOR_KINDS, WD_WALL_KINDS, TOWN_STYLE, JOHTO_TOWN_STYLE, HOENN_TOWN_STYLE, SINNOH_TOWN_STYLE } from './tiles.mjs';
+import { paintTile, W6_PROP_KINDS, W6_RUG_KINDS, W6_FLOOR_KINDS, W6_WALL_KINDS, W7_PROP_KINDS, O1_PROP_KINDS, O1_FLOOR_KINDS, O1_WALL_KINDS, J3_PROP_KINDS, J3_FLOOR_KINDS, J3_WALL_KINDS, JOHTO_TOWN_ORDER, H3_PROP_KINDS, H3_FLOOR_KINDS, H3_WALL_KINDS, H3B_PROP_KINDS, H3B_FLOOR_KINDS, H3B_WALL_KINDS, HOENN_TOWN_ORDER, S3_PROP_KINDS, S3_FLOOR_KINDS, S3_WALL_KINDS, S3B_PROP_KINDS, S3B_FLOOR_KINDS, S3B_WALL_KINDS, SINNOH_TOWN_ORDER, G2_KINDS, T1_PROP_KINDS, T3_PROP_KINDS, T6_PROP_KINDS, T6_RUG_KINDS, T7_PROP_KINDS, T9_PROP_KINDS, T14_PROP_KINDS, T15_PROP_KINDS, T17_PROP_KINDS, T23_PROP_KINDS, WD_FLOOR_KINDS, WD_WALL_KINDS, T24_PROP_KINDS, T24_WALL_KINDS, T24_FLOOR_KINDS, TOWN_STYLE, JOHTO_TOWN_STYLE, HOENN_TOWN_STYLE, SINNOH_TOWN_STYLE } from './tiles.mjs';
 import { BATTLER_DRAW_SIZE } from './render.mjs';
 import { battlerDrawSize } from '../data/battler-tiers.mjs';
 
@@ -823,6 +823,10 @@ for (const k of T15_PROP_KINDS) TILE_ART[k] = 'tile-prop-' + k;
 for (const k of T17_PROP_KINDS) TILE_ART[k] = 'tile-prop-' + k;
 // Wave T23: Rootlet's notched fence post draws its prop art.
 for (const k of T23_PROP_KINDS) TILE_ART[k] = 'tile-prop-' + k;
+// Wave T24: Eldergrove's Flower Clock prop + thatchroof kit kinds.
+for (const k of T24_PROP_KINDS) TILE_ART[k] = 'tile-prop-' + k;
+for (const k of T24_WALL_KINDS) TILE_ART[k] = 'tile-' + k;
+for (const k of T24_FLOOR_KINDS) TILE_ART[k] = 'tile-' + k;
 
 // Premium+ W6 (TX-3/PL-1): door-open frames, authored in TX-3 for every
 // door kind. The warp-fade engine that plays them lands in W7 — W6
@@ -1678,7 +1682,9 @@ const PROP_KINDS = new Set(['counter', 'healmachine', 'pcdesk', 'bed', 'table',
   // Wave T17: Signal's radio mast composites too.
   ...T17_PROP_KINDS,
   // Wave T23: Rootlet's notched fence post composites too.
-  ...T23_PROP_KINDS]);
+  ...T23_PROP_KINDS,
+  // Wave T24: Eldergrove's Flower Clock composites too.
+  ...T24_PROP_KINDS]);
 export function groundFamilyOf(kind) {
   // Perfection Pass Stage 2 Gate 2 (G2): beach kinds stand on tropgrass,
   // psand kinds stand on path (props composite over the parent ground).
@@ -2563,6 +2569,8 @@ export function resolveTileLayers(cache, kind, x, y, kindAt, t, phase, mapId) {
     case 'lurepost':
     // Wave T23: the notched fence post composites over its roadside grass too.
     case 'notchpost':
+    // Wave T24: the Flower Clock composites over its flower bed too.
+    case 'flowerclock':
     // Wave T17: the radio mast composites over its compound grass too.
     case 'radiomast': {
       // Object tiles carry transparent surrounds (Wave 1): lay the ground

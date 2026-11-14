@@ -1,0 +1,30 @@
+# Wave T24 (Eldergrove kit): clockbed — the Flower Clock's bed.
+# Dark petal soil scattered with fallen petals in the clock's
+# own colours (pink / violet / cream / gold). Reads as a planted
+# flower bed at screenshot scale where the shared F flower tile
+# reads as plain green tufts; swapped 1:1 from walkable F cells
+# in Eldergrove's clock garden only.
+PIX tile-clockbed 16 16
+ssssssssssssssss
+sdsspssssdsssssv
+ssssdsssssssdsss
+sscssssgssssssss
+ssdsssssdsspssss
+sssssvsssssssdss
+sssssssscsssssgs
+sssdssssssdsssss
+sssspsssssssssss
+sssssdssssvsssss
+sscsssssssssdssg
+sdssssspssssssss
+ssssvssdsssscsss
+ssssssssgsssssds
+ssssdspsssssssss
+sssssssssdsvssss
+PAL
+s #4a3626 soil
+d #38281c soil-dark
+p #e88bb0 petal-pink
+v #9a7fd0 petal-violet
+c #ffe9a8 petal-cream
+g #f2c53d petal-gold
