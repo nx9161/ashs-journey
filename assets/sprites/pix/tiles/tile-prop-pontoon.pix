@@ -17,9 +17,9 @@ wFwFwwDwwFwwwwFw
 wwwwwwwwwwwwwwwF
 wwwFwwwwDwwwwwww
 PAL
-w #3563a8 sea-body
-D #2a4f8c sea-deep
-F #a8c8ec foam
+w #5677bd sea-body (measured engine water)
+D #44639f sea-deep
+F #c6d8e9 foam
 b #8d5f2b log-body
 B #7d5326 log-low
 l #a97a3f log-lit

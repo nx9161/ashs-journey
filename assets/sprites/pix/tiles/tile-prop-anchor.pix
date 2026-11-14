@@ -1,26 +1,24 @@
 # Wave T38 (Driftlog kit): anchor (prop) — FLOAT KID WREN's fence: a wrought-iron anchor standing upright in the raft grass, stock across, flukes buried, a rope coil at its foot. Three stand in a row flanking his post — the fence his own dialogue records ("My house has an anchor instead of a fence"). Fully opaque, town grass baked in. (WAVE-T38-DRIFTLOG-PLAN.md §3.6/§5.)
 PIX tile-prop-anchor 16 16
-sgggglgdggggggsg
-gggsgggiigggsggg
-gsggggiIgisggggl
-gggglgigIigggsgg
-ggsggggiiggsgggg
-sggIwwwiIwwwIglg
+gggggggggggggggg
+gggggggiiggggggg
+ggggggiIgigggggg
+ggdgggigIigggggg
+gggggggiiggggggg
+gggIwwwiIwwwIggg
 gggWWWWiIWWWWggg
-gsgggggiIgsggggg
-gggggggiIgggglgd
-gglgdggiIggsgggg
-sgIIggiiIiggIIgg
-ggIgiigiIgiilIdg
-gliigggiIgsgiigg
-gggggggiigrRrggg
-ggggggsggrRrrdgg
-lgdggggggsgggggg
+gggggggiIggggggg
+gggggggiIggggggg
+gggggggiIggggggg
+ggIIggiiIiggIIgg
+ggIgiigiIgiigIgg
+ggiigggiIgggiigg
+ggggdggiigrRrggg
+gggggggggrRrrggg
+gggggggggggggggg
 PAL
-g #a9bf87 sage-body
-s #93ad72 sage-speckle
-l #c4d6a4 pale-fleck
-d #7e9c5f deep-blade
+g #248816 lawn-flat (measured engine tg)
+d #1c6b10 blade-tick
 i #3a3f4a iron-body
 I #5a6272 iron-lit
 w #8d5f2b stock-wood

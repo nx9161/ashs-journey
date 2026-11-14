@@ -1,26 +1,26 @@
 # Wave T38 (Driftlog kit): raftfloor — Driftlog Town's registered street kind (the fleet's street kinds carry the -floor suffix; the desire-path tiers key on it). LASHED-LOG STREET: horizontal log courses with staggered end joints, rope lashings wrapping the courses, peg knots — a raft's deck built as a street. Structurally unlike boardwalk's plain parallel planks and Highbranch's lashed plank decks: log courses + rope, at sea level. (NO-SAME-KIT law; WAVE-T38-DRIFTLOG-PLAN.md §5.)
 PIX tile-raftfloor 16 16
-llllRrljlllRrlll
+llllRrlllllRrlll
 bbbbRrbjbbbRrbbb
 bbbbrRbjbbkrRbbb
-ssssrRsjsssrRsss
-llllRrlllllRrljl
+ssssrRsssssrRsss
+llllRrlllllRrlll
 bbbbRrkbbbbRrbjb
 bbbbrRbbbbbrRbjb
-ssssrRsssssrRsjs
-lljlRrlllllRrlll
+ssssrRsssssrRsss
+llllRrlllllRrlll
 bbjbRrbbbbbRrbbb
 bbjbrRbbbkbrRbbb
-ssjsrRsssssrRsss
-llllRrllljlRrlll
+ssssrRsssssrRsss
+llllRrlllllRrlll
 bbbbRrbbbjbRrbbb
 bbbbrRbbbjbrRbbb
-ssssrRsssjsrRsss
+ssssrRsssssrRsss
 PAL
 b #8d5f2b log-body
 l #a97a3f log-lit
 s #6e4520 log-shade
-j #54341a joint-seam
+j #6e4520 joint-seam
 k #54341a knot
 r #d8bd8a rope-lit
 R #b89a64 rope-shade

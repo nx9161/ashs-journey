@@ -91581,23 +91581,23 @@ export const ART = {
     "ggPPggdgggggPPgd",
     "dggglggggdgggggg"
   ] },
-  "tile-raftfloor": { w: 16, h: 16, pal: {"b":"#8d5f2b","l":"#a97a3f","s":"#6e4520","j":"#54341a","k":"#54341a","r":"#d8bd8a","R":"#b89a64"}, rows: [
-    "llllRrljlllRrlll",
+  "tile-raftfloor": { w: 16, h: 16, pal: {"b":"#8d5f2b","l":"#a97a3f","s":"#6e4520","j":"#6e4520","k":"#54341a","r":"#d8bd8a","R":"#b89a64"}, rows: [
+    "llllRrlllllRrlll",
     "bbbbRrbjbbbRrbbb",
     "bbbbrRbjbbkrRbbb",
-    "ssssrRsjsssrRsss",
-    "llllRrlllllRrljl",
+    "ssssrRsssssrRsss",
+    "llllRrlllllRrlll",
     "bbbbRrkbbbbRrbjb",
     "bbbbrRbbbbbrRbjb",
-    "ssssrRsssssrRsjs",
-    "lljlRrlllllRrlll",
+    "ssssrRsssssrRsss",
+    "llllRrlllllRrlll",
     "bbjbRrbbbbbRrbbb",
     "bbjbrRbbbkbrRbbb",
-    "ssjsrRsssssrRsss",
-    "llllRrllljlRrlll",
+    "ssssrRsssssrRsss",
+    "llllRrlllllRrlll",
     "bbbbRrbbbjbRrbbb",
     "bbbbrRbbbjbrRbbb",
-    "ssssrRsssjsrRsss"
+    "ssssrRsssssrRsss"
   ] },
   "tile-raftroof": { w: 16, h: 16, pal: {"b":"#9c7648","l":"#bd9868","s":"#684a26","d":"#86643a","c":"#a34d3f"}, rows: [
     "slllllslllllslll",
@@ -91635,25 +91635,25 @@ export const ART = {
     "fdttttttttttttdf",
     "ffffffffffffffff"
   ] },
-  "tile-prop-anchor": { w: 16, h: 16, pal: {"g":"#a9bf87","s":"#93ad72","l":"#c4d6a4","d":"#7e9c5f","i":"#3a3f4a","I":"#5a6272","w":"#8d5f2b","W":"#6e4520","r":"#d8bd8a","R":"#b89a64"}, rows: [
-    "sgggglgdggggggsg",
-    "gggsgggiigggsggg",
-    "gsggggiIgisggggl",
-    "gggglgigIigggsgg",
-    "ggsggggiiggsgggg",
-    "sggIwwwiIwwwIglg",
+  "tile-prop-anchor": { w: 16, h: 16, pal: {"g":"#248816","d":"#1c6b10","i":"#3a3f4a","I":"#5a6272","w":"#8d5f2b","W":"#6e4520","r":"#d8bd8a","R":"#b89a64"}, rows: [
+    "gggggggggggggggg",
+    "gggggggiiggggggg",
+    "ggggggiIgigggggg",
+    "ggdgggigIigggggg",
+    "gggggggiiggggggg",
+    "gggIwwwiIwwwIggg",
     "gggWWWWiIWWWWggg",
-    "gsgggggiIgsggggg",
-    "gggggggiIgggglgd",
-    "gglgdggiIggsgggg",
-    "sgIIggiiIiggIIgg",
-    "ggIgiigiIgiilIdg",
-    "gliigggiIgsgiigg",
-    "gggggggiigrRrggg",
-    "ggggggsggrRrrdgg",
-    "lgdggggggsgggggg"
+    "gggggggiIggggggg",
+    "gggggggiIggggggg",
+    "gggggggiIggggggg",
+    "ggIIggiiIiggIIgg",
+    "ggIgiigiIgiigIgg",
+    "ggiigggiIgggiigg",
+    "ggggdggiigrRrggg",
+    "gggggggggrRrrggg",
+    "gggggggggggggggg"
   ] },
-  "tile-prop-pontoon": { w: 16, h: 16, pal: {"w":"#3563a8","D":"#2a4f8c","F":"#a8c8ec","b":"#8d5f2b","B":"#7d5326","l":"#a97a3f","s":"#6e4520","e":"#c8a878","E":"#a08b6c","r":"#d8bd8a","R":"#b89a64"}, rows: [
+  "tile-prop-pontoon": { w: 16, h: 16, pal: {"w":"#5677bd","D":"#44639f","F":"#c6d8e9","b":"#8d5f2b","B":"#7d5326","l":"#a97a3f","s":"#6e4520","e":"#c8a878","E":"#a08b6c","r":"#d8bd8a","R":"#b89a64"}, rows: [
     "wFbswwDwwwwwwwww",
     "wwbswwwwwwwwwwwF",
     "wwrRwwwwDwwwwwww",
