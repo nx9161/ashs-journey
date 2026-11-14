@@ -2751,6 +2751,53 @@ T29_KIND_DEFS.forEach(([kind], i) => {
 const T29_PROP_KINDS = T29_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
 const T29_WALL_KINDS = T29_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
 const T29_FLOOR_KINDS = T29_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
+// Wave W-DIFF8: Hushmoor + Blossom kit-identity retrofit
+// (W-DIFF-AUDIT Phase B; pair re-measured 0.2003 on main
+// 8066f86 before building, control pair blackthorn <->
+// silvertown 0.3109 unmoved). Indices 629-632 — verified free
+// in TILE_CHARS and unused by every map row before
+// registering (the ledger runs T23 575 ... T29 625-628, with
+// 606/607 standing empty). Hushmoor (lavender): 'Violet
+// Shingle & Memorial Stone' — 'shinglefloor' (floor), the
+// dark violet-grey gravel the table names for its streets,
+// and 'shingleroof' (wall), the steep dark shingle of its
+// house shapes, violet-black courses. The shipped map's
+// flora-lavender patches (the table's ground treatment)
+// already stand and are byte-kept, as are the memorialwall
+// row and the tower geography entire. Blossom (cherrygrove):
+// 'Sakura & Harbour Stone' — the table names harbourstone
+// for the street, but harbourstone is Canalave's dressed
+// stone (its .pix header says so), sunnyshore wears it as
+// decorative inlay speckle, and the STREET_REGISTRY's
+// standing note holds it 'not registrable as one [a street]'
+// — so per the W-DIFF6 amendment rule Blossom takes a
+// distinct variant in the same register: 'inlayfloor'
+// (floor), harbour stone cut as large inlay slabs with a
+// pale cherry-petal fleck inlaid in the stone. The tide-table
+// plaza's shipped harbourstone block keeps the original
+// stone, byte-kept, as does every sakura. 'sakuraroof'
+// (wall) — the cherry-pink gables of the table's house
+// shapes. TILE SWAPS ONLY: warps, doors, footprints, NPC
+// posts, signs, encounters byte-kept (register:
+// your_files/w-diff8/GRADE.md). Authored art:
+// assets/sprites/pix/tiles/tile-shinglefloor.pix,
+// tile-shingleroof.pix, tile-inlayfloor.pix,
+// tile-sakuraroof.pix.
+const WD8_KIND_DEFS = [
+  ['shinglefloor', 'floor'],
+  ['shingleroof', 'wall'],
+  ['inlayfloor', 'floor'],
+  ['sakuraroof', 'wall'],
+];
+const WD8_KIND_CHARS = {};
+WD8_KIND_DEFS.forEach(([kind], i) => {
+  const ch = String.fromCodePoint(0x1E00 + 629 + i);
+  WD8_KIND_CHARS[kind] = ch;
+  TILE_CHARS[ch] = kind;
+});
+const WD8_PROP_KINDS = WD8_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
+const WD8_WALL_KINDS = WD8_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
+const WD8_FLOOR_KINDS = WD8_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
 const SINNOH_TOWN_GROUND_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg);
 const SINNOH_TOWN_GROUND2_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg2);
 // TX-3: the 8 gym exteriors by town (original type-accent motifs).
@@ -109210,6 +109257,78 @@ const ART = {
     "bbbbbdbbbbbbbddb",
     "dddddddddddddddd",
   ] },
+  "tile-shinglefloor": { w: 16, h: 16, pal: {"a":"#463e52","b":"#332c3e","c":"#8a7ca8","e":"#574d68"}, rows: [
+    "beacbaeaeecaabae",
+    "ebeacaabaaaaaaec",
+    "ebbacabbaaaaaeea",
+    "abacabbaebaaeaaa",
+    "eaecaabaaaaebbba",
+    "ebaaaebaeeabaeaa",
+    "aabeaabbabaaabee",
+    "eacaeebeaecaabcb",
+    "eaabcbabeeeeeaaa",
+    "aeaeaeabebaaaaae",
+    "aeabbeaaaabaebab",
+    "aabbcababaabebab",
+    "baeaabaeeaabbeee",
+    "baaaeaeabeebbeab",
+    "abacecaaccbeeabe",
+    "aabbbaabaeaaebae",
+  ] },
+  "tile-shingleroof": { w: 16, h: 16, pal: {"a":"#4d3d63","b":"#2d2338","c":"#71618c","d":"#1d1626"}, rows: [
+    "acacabcaaacdaaaa",
+    "aaccadaaaaabbaaa",
+    "bbbdddbbbbbbbbbb",
+    "acbaaaaabaaccada",
+    "aadbacaababababa",
+    "bbbdbdbdbbdbbbdd",
+    "acccabaaacabaaca",
+    "acaaabaaaaabaaaa",
+    "bbbdbbbdbddbbbbb",
+    "acdccaccdaacaaba",
+    "babaaaaabaaaaada",
+    "dbbdbbbbbbdbbbbd",
+    "aacccbcaaacdccaa",
+    "baaaabaaaaadaaaa",
+    "bbbbdbdbbbdbdbbd",
+    "dddddddddddddddd",
+  ] },
+  "tile-inlayfloor": { w: 16, h: 16, pal: {"a":"#82929f","b":"#6b7c88","c":"#97a9b6","d":"#576672","p":"#e3a7b8"}, rows: [
+    "aaaaaaabaaaaaaaa",
+    "aaaacaadaacaaaca",
+    "aaaaaaadaaaacbaa",
+    "aaaabaababappaaa",
+    "aacaaaadaaapcpaa",
+    "aaaaaaadaaaapaaa",
+    "aaaaaaabaaaaaaaa",
+    "dddddbddddbdbbdd",
+    "aaabababaabdaaab",
+    "aaabaaaaaaadaaab",
+    "aaadaaaaaaadaaaa",
+    "aaadaabaaaabaaaa",
+    "aabdaaaaaaabaaaa",
+    "aabbabaaaaadaaaa",
+    "aabbaaaaaaabaaaa",
+    "dbddbbddddbddddd",
+  ] },
+  "tile-sakuraroof": { w: 16, h: 16, pal: {"a":"#c48a94","b":"#8a5560","c":"#dda8ae","d":"#6e4048","e":"#f4d3da"}, rows: [
+    "cacaccccccccccaa",
+    "aacabaaaabbacaba",
+    "aaaabaabaaccabbc",
+    "bbdbbdbbbbbbdbbd",
+    "aabaacabaaaaaaaa",
+    "aabaabaaaaabaaaa",
+    "babceaaaaaaabbaa",
+    "dbbbbdbbbbbbbbbb",
+    "baabaacaaabaaaab",
+    "aacaababaabeabaa",
+    "bcaaabaababaaaaa",
+    "bdbbbbddbbbbbddb",
+    "aaababaaaacabaac",
+    "baaaacaabaaaabaa",
+    "bddbbbbbdbdbbbbb",
+    "dddddddddddddddd",
+  ] },
   "partner-back-bob": { base: "partner-back", w: 64, h: 64, pal: {}, shiftY: 2 },
   "partner-front-bob": { base: "partner-front", w: 64, h: 64, pal: {}, shiftY: 2 },
   "abomasnow-back-bob": { base: "abomasnow-back", w: 64, h: 64, pal: {}, shiftY: 2 },
@@ -114487,6 +114606,10 @@ for (const k of WD7_FLOOR_KINDS) TILE_ART[k] = 'tile-' + k;
 for (const k of T29_PROP_KINDS) TILE_ART[k] = 'tile-prop-' + k;
 for (const k of T29_WALL_KINDS) TILE_ART[k] = 'tile-' + k;
 for (const k of T29_FLOOR_KINDS) TILE_ART[k] = 'tile-' + k;
+// Wave W-DIFF8: Hushmoor's shinglefloor/shingleroof + Blossom's inlayfloor/sakuraroof kit kinds.
+for (const k of WD8_PROP_KINDS) TILE_ART[k] = 'tile-prop-' + k;
+for (const k of WD8_WALL_KINDS) TILE_ART[k] = 'tile-' + k;
+for (const k of WD8_FLOOR_KINDS) TILE_ART[k] = 'tile-' + k;
 // Premium+ W6 (TX-3/PL-1): door-open frames, authored in TX-3 for every
 // door kind. The warp-fade engine that plays them lands in W7 — W6
 // wires the frames (this registry + cache.doorOpen + doorOpenCanvas)
@@ -115034,6 +115157,7 @@ function buildArtTileCache(doc) {
   for (const k of WD5_FLOOR_KINDS) cache[k + 'Variants'] = ids(['tile-' + k]);
   for (const k of WD6_FLOOR_KINDS) cache[k + 'Variants'] = ids(['tile-' + k]);
   for (const k of WD7_FLOOR_KINDS) cache[k + 'Variants'] = ids(['tile-' + k]);
+  for (const k of WD8_FLOOR_KINDS) cache[k + 'Variants'] = ids(['tile-' + k]);
   cache.foundationVariants = ids(['tile-foundation-1', 'tile-foundation-2', 'tile-foundation-3']);
   // P-1 side walls: the SAME authored art rasterized through a palette
   // swap that darkens every hex by one full shade step (x0.72 — the
@@ -115305,6 +115429,7 @@ for (const k of WD4_FLOOR_KINDS) FLOOR_VARIANTS[k] = k + 'Variants';
 for (const k of WD5_FLOOR_KINDS) FLOOR_VARIANTS[k] = k + 'Variants';
 for (const k of WD6_FLOOR_KINDS) FLOOR_VARIANTS[k] = k + 'Variants';
 for (const k of WD7_FLOOR_KINDS) FLOOR_VARIANTS[k] = k + 'Variants';
+for (const k of WD8_FLOOR_KINDS) FLOOR_VARIANTS[k] = k + 'Variants';
 // Wave 5a: interior floor kinds are ground families of their own (a prop
 // inside a Center stands on Center floor, never on grass or path), and
 // interior walls cast the shared shadow strip onto the floor below.
@@ -115361,7 +115486,7 @@ function groundFamilyOf(kind) {
   // psand kinds stand on path (props composite over the parent ground).
   if (kind && kind.startsWith('beach-')) return 'tropgrass';
   if (kind && kind.startsWith('psand-')) return 'path';
-  if (kind && (W6_FLOOR_KINDS.includes(kind) || O1_FLOOR_KINDS.includes(kind) || J3_FLOOR_KINDS.includes(kind) || H3_FLOOR_KINDS.includes(kind) || H3B_FLOOR_KINDS.includes(kind) || S3_FLOOR_KINDS.includes(kind) || S3B_FLOOR_KINDS.includes(kind) || WD_FLOOR_KINDS.includes(kind) || WD3_FLOOR_KINDS.includes(kind) || WD4_FLOOR_KINDS.includes(kind) || WD5_FLOOR_KINDS.includes(kind) || WD6_FLOOR_KINDS.includes(kind) || WD7_FLOOR_KINDS.includes(kind))) return kind; // W6/O1/J3/H3/H3B/S3/S3B/WD/WD3/WD4/WD5/WD6/WD7 floors are own families
+  if (kind && (W6_FLOOR_KINDS.includes(kind) || O1_FLOOR_KINDS.includes(kind) || J3_FLOOR_KINDS.includes(kind) || H3_FLOOR_KINDS.includes(kind) || H3B_FLOOR_KINDS.includes(kind) || S3_FLOOR_KINDS.includes(kind) || S3B_FLOOR_KINDS.includes(kind) || WD_FLOOR_KINDS.includes(kind) || WD3_FLOOR_KINDS.includes(kind) || WD4_FLOOR_KINDS.includes(kind) || WD5_FLOOR_KINDS.includes(kind) || WD6_FLOOR_KINDS.includes(kind) || WD7_FLOOR_KINDS.includes(kind) || WD8_FLOOR_KINDS.includes(kind))) return kind; // W6/O1/J3/H3/H3B/S3/S3B/WD/WD3/WD4/WD5/WD6/WD7/WD8 floors are own families
   if (kind && (kind.startsWith('tg-') || kind.startsWith('tg2-'))) return kind; // W5: town ground is its own family
   if (kind && (kind.startsWith('tc-') || kind.startsWith('td-') || kind.startsWith('flora-'))) return 'grass';
   if (kind === 'grass' || kind === 'grassground' || kind === 'flower' || kind === 'tree' || kind === 'rock' || kind === 'sign' ||
@@ -123140,6 +123265,13 @@ const WALKABLE = new Set(['.', ',', 'D', 'E', 'C', 'F', 'J', 'K', '1', '2', 'V',
   // floor. (Indices 625-628 after the Director's re-index
   // ruling: W-DIFF7 holds 622-624; 606-607 stay empty.)
   ...[626]
+    .map((i) => String.fromCodePoint(0x1E00 + i)),
+  // Wave W-DIFF8: the shinglefloor char (U+1E00+629, tiles.mjs
+  // WD8_KIND_DEFS) is walkable street material — Hushmoor's
+  // dark gravel, swapped 1:1 from the walkable '.' path char
+  // in Hushmoor Town, and the inlayfloor char (U+1E00+631)
+  // likewise in Blossom City, so floor stays floor in both.
+  ...[629, 631]
     .map((i) => String.fromCodePoint(0x1E00 + i))]);
 
 // Trainer definitions for the slice.
@@ -124618,20 +124750,20 @@ const MAPS2 = {
   lavender: {
     id: 'lavender', name: 'Hushmoor Town', music: 'viridian-theme',
     rows: rows([
-      'ÒÒÒÒÒÒÒÒÒÒ..ÒÒÒÒÒÒÒÒ',
-      'ÒÇÇÇÇÇÇÇ...ÇÇÇÇÇÇÇÇÒ',
-      'ÒđđđÇđđđ.đóđđÇđđđđÇÒ',
-      'ÒĩsĩÇĩwĩ.UUUUÇĩwĩĩÇÒ',
-      'ÒÇ...úúẅ.UUUUÇúúẅÇÇÒ',
-      '...Ç.nnn.UVYUÇnnnnÇÒ',
-      'Òđđđ.....ṵ..ṵÇÇÇđđđÇ',
-      'ÒĩwĩÇFp.....pÇẄÇĩwĩÇ',
-      'ÒÇÇÇÇÇÇ.ÇÇ..ÇÇÇFFÇÇÒ',
-      'ÒÇèèèèÇ‹‹‹..‹‹‹đđOđÒ',
-      'ÒÇAJKAÇÇFÇ..ÇÇÇó12óÒ',
-      'ÒÇÇ..ÇoÇÇÇ..ÇoÇÇ..ÇÒ',
-      'ÒÇÇú.............úÇÒ',
-      'ÒÒÒÒÒÒÒÒÒÒ..ÒÒÒÒÒÒÒÒ',
+      'ÒÒÒÒÒÒÒÒÒÒ⁵⁵ÒÒÒÒÒÒÒÒ',
+      'ÒÇÇÇÇÇÇÇ⁵⁵⁵ÇÇÇÇÇÇÇÇÒ',
+      'Ò⁶⁶⁶Ç⁶⁶⁶⁵⁶ó⁶⁶Ç⁶⁶⁶⁶ÇÒ',
+      'ÒĩsĩÇĩwĩ⁵UUUUÇĩwĩĩÇÒ',
+      'ÒÇ⁵⁵⁵úúẅ⁵UUUUÇúúẅÇÇÒ',
+      '⁵⁵⁵Ç⁵nnn⁵UVYUÇnnnnÇÒ',
+      'Ò⁶⁶⁶⁵⁵⁵⁵⁵ṵ⁵⁵ṵÇÇÇ⁶⁶⁶Ç',
+      'ÒĩwĩÇFp⁵⁵⁵⁵⁵pÇẄÇĩwĩÇ',
+      'ÒÇÇÇÇÇÇ⁵ÇÇ⁵⁵ÇÇÇFFÇÇÒ',
+      'ÒÇèèèèÇ‹‹‹⁵⁵‹‹‹⁶⁶O⁶Ò',
+      'ÒÇAJKAÇÇFÇ⁵⁵ÇÇÇó12óÒ',
+      'ÒÇÇ⁵⁵ÇoÇÇÇ⁵⁵ÇoÇÇ⁵⁵ÇÒ',
+      'ÒÇÇú⁵⁵⁵⁵⁵⁵⁵⁵⁵⁵⁵⁵⁵úÇÒ',
+      'ÒÒÒÒÒÒÒÒÒÒ⁵⁵ÒÒÒÒÒÒÒÒ',
     ]),
     warps: [
       { x: 10, y: 5, to: { map: 'tower1', x: 3, y: 8 } },
@@ -126456,20 +126588,20 @@ const MAPS3 = {
   lavender: {
     id: 'lavender', name: 'Hushmoor Town', music: 'viridian-theme',
     rows: rows([
-      'ÒÒÒÒÒÒÒÒÒÒ..ÒÒÒÒÒÒÒÒ',
-      'ÒÇÇÇÇÇÇÇ...ÇÇÇÇÇÇÇÇÒ',
-      'ÒđđđÇđđđ.đóđđÇđđđđÇÒ',
-      'ÒĩsĩÇĩwĩ.UUUUÇĩwĩĩÇÒ',
-      'ÒÇ...úúẅ.UUUUÇúúẅÇÇÒ',
-      '...Ç.nnn.UVYUÇnnnnÇÒ',
-      'Òđđđ.....ṵ..ṵÇÇÇđđđÇ',
-      'ÒĩwĩÇFp.....pÇẄÇĩwĩÇ',
-      'ÒÇÇÇÇÇÇ.ÇÇ..ÇÇÇFFÇÇÒ',
-      'ÒÇèèèèÇ‹‹‹..‹‹‹đđOđÒ',
-      'ÒÇAJKAÇÇFÇ..ÇÇÇó12óÒ',
-      'ÒÇÇ..ÇoÇÇÇ..ÇoÇÇ..ÇÒ',
-      'ÒÇÇú.............úÇÒ',
-      'ÒÒÒÒÒÒÒÒÒÒ..ÒÒÒÒÒÒÒÒ',
+      'ÒÒÒÒÒÒÒÒÒÒ⁵⁵ÒÒÒÒÒÒÒÒ',
+      'ÒÇÇÇÇÇÇÇ⁵⁵⁵ÇÇÇÇÇÇÇÇÒ',
+      'Ò⁶⁶⁶Ç⁶⁶⁶⁵⁶ó⁶⁶Ç⁶⁶⁶⁶ÇÒ',
+      'ÒĩsĩÇĩwĩ⁵UUUUÇĩwĩĩÇÒ',
+      'ÒÇ⁵⁵⁵úúẅ⁵UUUUÇúúẅÇÇÒ',
+      '⁵⁵⁵Ç⁵nnn⁵UVYUÇnnnnÇÒ',
+      'Ò⁶⁶⁶⁵⁵⁵⁵⁵ṵ⁵⁵ṵÇÇÇ⁶⁶⁶Ç',
+      'ÒĩwĩÇFp⁵⁵⁵⁵⁵pÇẄÇĩwĩÇ',
+      'ÒÇÇÇÇÇÇ⁵ÇÇ⁵⁵ÇÇÇFFÇÇÒ',
+      'ÒÇèèèèÇ‹‹‹⁵⁵‹‹‹⁶⁶O⁶Ò',
+      'ÒÇAJKAÇÇFÇ⁵⁵ÇÇÇó12óÒ',
+      'ÒÇÇ⁵⁵ÇoÇÇÇ⁵⁵ÇoÇÇ⁵⁵ÇÒ',
+      'ÒÇÇú⁵⁵⁵⁵⁵⁵⁵⁵⁵⁵⁵⁵⁵úÇÒ',
+      'ÒÒÒÒÒÒÒÒÒÒ⁵⁵ÒÒÒÒÒÒÒÒ',
     ]),
     warps: [
       { x: 10, y: 5, to: { map: 'tower1', x: 3, y: 8 } },
@@ -133988,21 +134120,21 @@ const MAPS6 = {
     "rows": [
       "ặặặặặặặặặặặặặặặặặặặặặặặặặặặặ",
       "ặẵẵẵẵẵ※ẵẵẵẵẵẵẵẵẵẵẵẵẵ※ẵẵẵẵẵẵ~",
-      "ặẵẵjklmẵẵẵẵẻẻẻẻẵẵẵẵẵabbc,,~~",
+      "ặẵẵjklmẵẵẵẵ⁸⁸⁸⁸ẵẵẵẵẵabbc,,~~",
       "ặẵẵAJKAẵẵẵẵẼsẼẼẵẵẵẵẵzyzz,,~~",
-      "ặẵẸ....ẵẵẵnp.pẏnẵẵẵẵẵ.ẵẵ,F~~",
-      "ặẵẵẵ..ẵẵẵẵnẵ.ẵẵnẵẵẵẵẵ.ẵẵẵ″~~",
-      "ặẵặặ..ẵẵẵẵẵẵ.ẵẵẵẵẵặặẵ.ẵẵẵẵ~~",
-      "ặẵSẵ..oẵ.ẵẵẵ.ppẵẵ.oẵẵ.※ẵẞἇἇ~",
-      "............................",
-      "............................",
-      "ặẵẵẵẵpẵẵ.oẵẵ.ẵẵẵo.ẵẵpẵẵẵẞẞ~~",
-      "ặẵẻẻẻẻẵẵ.ẵẵẵ.ặặẵẵ.ẵẵẵẵẵẵẞẞ″~",
-      "ặẵẼwẼẼẵẵ.pẵẵ.ẵẵẵẵ.pẵẞẞẞẞẞẞ~~",
-      "ặ.......................″″~~",
-      "ặṔdeefẵẵ.ẵSẵẵẵdeefS.ẵᾕᾕᾕẞẞ~~",
-      "ặẵP12Pẵẵ.ẵẵẵẵẵtsttẵ.Sᾕᾕᾕẞẞ~~",
-      "ặẸ.......ẵẵ※ẵẵ......ẵᾕᾕᾕẞẞ~~",
+      "ặẵẸ⁷⁷⁷⁷ẵẵẵnp⁷pẏnẵẵẵẵẵ⁷ẵẵ,F~~",
+      "ặẵẵẵ⁷⁷ẵẵẵẵnẵ⁷ẵẵnẵẵẵẵẵ⁷ẵẵẵ″~~",
+      "ặẵặặ⁷⁷ẵẵẵẵẵẵ⁷ẵẵẵẵẵặặẵ⁷ẵẵẵẵ~~",
+      "ặẵSẵ⁷⁷oẵ⁷ẵẵẵ⁷ppẵẵ⁷oẵẵ⁷※ẵẞἇἇ~",
+      "⁷⁷⁷⁷⁷⁷⁷⁷⁷⁷⁷⁷⁷⁷⁷⁷⁷⁷⁷⁷⁷⁷⁷⁷⁷⁷⁷⁷",
+      "⁷⁷⁷⁷⁷⁷⁷⁷⁷⁷⁷⁷⁷⁷⁷⁷⁷⁷⁷⁷⁷⁷⁷⁷⁷⁷⁷⁷",
+      "ặẵẵẵẵpẵẵ⁷oẵẵ⁷ẵẵẵo⁷ẵẵpẵẵẵẞẞ~~",
+      "ặẵ⁸⁸⁸⁸ẵẵ⁷ẵẵẵ⁷ặặẵẵ⁷ẵẵẵẵẵẵẞẞ″~",
+      "ặẵẼwẼẼẵẵ⁷pẵẵ⁷ẵẵẵẵ⁷pẵẞẞẞẞẞẞ~~",
+      "ặ⁷⁷⁷⁷⁷⁷⁷⁷⁷⁷⁷⁷⁷⁷⁷⁷⁷⁷⁷⁷⁷⁷⁷″″~~",
+      "ặṔdeefẵẵ⁷ẵSẵẵẵdeefS⁷ẵᾕᾕᾕẞẞ~~",
+      "ặẵP12Pẵẵ⁷ẵẵẵẵẵtsttẵ⁷Sᾕᾕᾕẞẞ~~",
+      "ặẸ⁷⁷⁷⁷⁷⁷⁷ẵẵ※ẵẵ⁷⁷⁷⁷⁷⁷ẵᾕᾕᾕẞẞ~~",
       "ặặặặặặặặặặặặặặặặặặặặặặặặặặặặ"
     ],
     "warps": [
