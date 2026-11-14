@@ -3482,6 +3482,45 @@ T50_KIND_DEFS.forEach(([kind], i) => {
 const T50_PROP_KINDS = T50_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
 const T50_WALL_KINDS = T50_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
 const T50_FLOOR_KINDS = T50_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
+// Wave T51: Astral Town's own kit from birth — 'Moonstone &
+// Dusk Timber': the moonfloor (large irregular pale-lavender
+// moonstone flags with dark violet grout and a star fleck on
+// each flag face — the town's registered street), the duskroof
+// (deep violet ancient-timber shingle courses, worn only by
+// the shipped Shrine stamp's tr roof cells, so the town's
+// landmark wears the town's own register against the houses'
+// brown timber), and two props: the muralpanel (a standing
+// stone panel with the hand-copied mural glyphs — moon, star,
+// leaf — at the OLD SHRINE sign's shoulder and beside the
+// mural copyist's post) and the ringstone (a weathered
+// standing stone with a carved ring — the pair flanks the
+// shrine plaza's north gate). Indices 888-891 per the
+// Director's index ruling (main's kinds run 594-636 + 645-648 +
+// 660-662 + 672-675 + 684-687 + 696-699 + 708-711 + 720-724 +
+// 732-736 + 744-748 + 756-759 (T40) + 768-771 (T41) + 780-783
+// (T42) + 792-795 (T43) + 804-807 (T44) + 816-819 (T45) +
+// 828-831 (T46) + 840-843 (T47) + 852-855 (T48) + 864-868
+// (T49); the parallel T50 claim holds 876-879; 880-887 stay
+// empty), verified free against origin/main, TILE_CHARS and
+// every map row. Authored art: assets/sprites/pix/tiles/
+// tile-moonfloor.pix, tile-duskroof.pix,
+// tile-prop-muralpanel.pix, tile-prop-ringstone.pix.
+// (WAVE-T51-ASTRAL-PLAN.md.)
+const T51_KIND_DEFS = [
+  ['moonfloor', 'floor'],
+  ['duskroof', 'wall'],
+  ['muralpanel', 'prop'],
+  ['ringstone', 'prop'],
+];
+const T51_KIND_CHARS = {};
+T51_KIND_DEFS.forEach(([kind], i) => {
+  const ch = String.fromCodePoint(0x1E00 + 888 + i);
+  T51_KIND_CHARS[kind] = ch;
+  TILE_CHARS[ch] = kind;
+});
+const T51_PROP_KINDS = T51_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
+const T51_WALL_KINDS = T51_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
+const T51_FLOOR_KINDS = T51_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
 const SINNOH_TOWN_GROUND_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg);
 const SINNOH_TOWN_GROUND2_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg2);
 // TX-3: the 8 gym exteriors by town (original type-accent motifs).
@@ -111579,6 +111618,78 @@ const ART = {
     "gggggggggggggggg",
     "gggggggggggggggg"
   ] },
+  "tile-moonfloor": { w: 16, h: 16, pal: {"a":"#b3a4d4","b":"#c0b1de","c":"#a08ec6","l":"#cec2e8","d":"#8d7ab4","g":"#43305f","s":"#e6dcf7","S":"#f7f2ff"}, rows: [
+    "gggggggggggggggg",
+    "gaaaaaaggbbbsbbb",
+    "gaasalaabbbsSsbb",
+    "gasSsaaabbbdsbbb",
+    "gaasadaabblbbbbb",
+    "gaaaaaaabbbbbbbb",
+    "gaaaaaaabbbbbbbl",
+    "gggaaaaabbbbbggg",
+    "gggaaaaaccdccggg",
+    "gaaadaalcccccccc",
+    "gaaaaaaggccscccc",
+    "gaaasaaggcsSsccc",
+    "gaasSsaggccscccd",
+    "gaaasaaggdcccccc",
+    "gaadlaaggccccccc",
+    "gaaaaaaggccccccc"
+  ] },
+  "tile-duskroof": { w: 16, h: 16, pal: {"a":"#5b4494","b":"#513c85","l":"#7763ad","d":"#463271","s":"#2e2050"}, rows: [
+    "llllslllllllllll",
+    "aaaasaaadaalaaaa",
+    "aaaasaaaaaaaaaaa",
+    "ssssssssssssssss",
+    "lllllllllllsllll",
+    "bbbbbbbbbbbsbbbb",
+    "bbdbbbbblbbsbbbb",
+    "ssssssssssssssss",
+    "llllllslllllllll",
+    "aaadaasaaaaalaaa",
+    "aaaaaasaaaadaaaa",
+    "ssssssssssssssss",
+    "lllllllllllllsll",
+    "bbbbbbbbbbbbdsbb",
+    "bbbbbbbbblbbbsbb",
+    "ssssssssssssssss"
+  ] },
+  "tile-prop-muralpanel": { w: 16, h: 16, pal: {"g":"#1b812b","G":"#1b4b2b","s":"#7d7296","S":"#9c92b5","m":"#e9e1f8","w":"#4c3d78","l":"#bfe3b0","d":"#14532a"}, rows: [
+    "GggggssssssgGggg",
+    "gGggssSSSSssgGgg",
+    "ggGsSssssssSsgGg",
+    "gggsSmmwwmmSsggG",
+    "gggsSmwwwwmSsggg",
+    "gggsSsswwssSsggg",
+    "GggsSsSwwSsSsggg",
+    "gGgsSssssssSsGgg",
+    "ggGsSsSllSsSsgGg",
+    "gggsSslSSlsSsggG",
+    "gggsSsSllSsSsggg",
+    "gggsSssssssSsggg",
+    "GgggsSSSSSSgGggg",
+    "gGggssssssssgGgg",
+    "ggGddgggGggddgGg",
+    "gggGgggggGgggggG"
+  ] },
+  "tile-prop-ringstone": { w: 16, h: 16, pal: {"g":"#1b812b","G":"#1b4b2b","s":"#6e6484","S":"#948bad","r":"#57496e","R":"#d9d0ee","d":"#14532a"}, rows: [
+    "GgggggssssggGggg",
+    "gGgggssSSssggGgg",
+    "ggGggsSSSSsgggGg",
+    "gggGgsSssSsggggG",
+    "ggggGsSrrSsggggg",
+    "gggggsSrRrSsgggg",
+    "GggggsSrrSsgGggg",
+    "gGgggsSssSsggGgg",
+    "ggGggsSSSSsgggGg",
+    "gggGgssSSssggggG",
+    "ggggGgsssgGggggg",
+    "gggggGssssgGgggg",
+    "GggggssssssgGggg",
+    "gGgddggGgggddGgg",
+    "ggGgggggGgggggGg",
+    "gggGgggggGgggggG"
+  ] },
   "partner-back-bob": { base: "partner-back", w: 64, h: 64, pal: {}, shiftY: 2 },
   "partner-front-bob": { base: "partner-front", w: 64, h: 64, pal: {}, shiftY: 2 },
   "abomasnow-back-bob": { base: "abomasnow-back", w: 64, h: 64, pal: {}, shiftY: 2 },
@@ -116963,6 +117074,12 @@ for (const k of T49_FLOOR_KINDS) TILE_ART[k] = 'tile-' + k;
 for (const k of T50_PROP_KINDS) TILE_ART[k] = 'tile-prop-' + k;
 for (const k of T50_WALL_KINDS) TILE_ART[k] = 'tile-' + k;
 for (const k of T50_FLOOR_KINDS) TILE_ART[k] = 'tile-' + k;
+// Wave T51: Astral Town's own kit kinds take their authored
+// art: moonfloor moonstone flags, the Shrine's duskroof,
+// the mural panel and the ring stone.
+for (const k of T51_PROP_KINDS) TILE_ART[k] = 'tile-prop-' + k;
+for (const k of T51_WALL_KINDS) TILE_ART[k] = 'tile-' + k;
+for (const k of T51_FLOOR_KINDS) TILE_ART[k] = 'tile-' + k;
 // Premium+ W6 (TX-3/PL-1): door-open frames, authored in TX-3 for every
 // door kind. The warp-fade engine that plays them lands in W7 — W6
 // wires the frames (this registry + cache.doorOpen + doorOpenCanvas)
@@ -118850,6 +118967,11 @@ function resolveTileLayers(cache, kind, x, y, kindAt, t, phase, mapId) {
     // — the marshbog pool is baked in at its measured colours).
     case 'bogeyes':
     case 'lilypad':
+    // Wave T51: Astral's mural panels and ring stones composite
+    // over their grass the same way (both arts are fully opaque
+    // — the town grass is baked in).
+    case 'muralpanel':
+    case 'ringstone':
     // Wave T17: the radio mast composites over its compound grass too.
     case 'radiomast': {
       // Object tiles carry transparent surrounds (Wave 1): lay the ground
@@ -125973,6 +126095,20 @@ const WALKABLE = new Set(['.', ',', 'D', 'E', 'C', 'F', 'J', 'K', '1', '2', 'V',
   // 816-819 + 828-831 + 840-843 + 852-855; the parallel
   // T49 claim holds 864-868; gaps stay empty.)
   ...[876]
+    .map((i) => String.fromCodePoint(0x1E00 + i)),
+  // Wave T51: the moonfloor char (U+1E00+888, tiles.mjs
+  // T51_KIND_DEFS) is walkable street material — Astral
+  // Town's pale moonstone flags, swapped onto the town's tg2
+  // street cells (the front street, the south road, the east
+  // arm and the avenues — all shipped walkable as tg2), so
+  // floor stays floor. (Indices 888-891 per the Director's
+  // index ruling: main's kinds run 594-636 + 645-648 + 660-662 +
+  // 672-675 + 684-687 + 696-699 + 708-711 + 720-724 +
+  // 732-736 + 744-748 + 756-759 + 768-771 + 780-783 +
+  // 792-795 + 804-807 + 816-819 + 828-831 + 840-843 +
+  // 852-855 + 864-868; the parallel T50 claim holds 876-879;
+  // gaps stay empty.)
+  ...[888]
     .map((i) => String.fromCodePoint(0x1E00 + i))]);
 
 // Trainer definitions for the slice.
@@ -157593,22 +157729,23 @@ const MAPS9 = {
     "rows": [
       "ῶῶῶῷῶῶῶῶῶῶῷῶῶῶῶῶῶῷῶῶῶῶῶῶῷῶῶῶ",
       "ῶῴῴῴῴῴῴῴῴῴῴḡῴῴῴῴῴῴῴῴῴṀῴῴῴῴῴῶ",
-      "ῶῴῴjklmῴῴdeefῴῴῺῺῺῴῴῸῸῸῸᾖᾖῴῶ",
+      "ῶῴῴjklmῴῴdeefῴῴῺῺῺῴῴⅹⅹⅹⅹᾖᾖῴῶ",
       "ῶῴῴAJKAṀῴP12PῴῴΏsΏῴῴΌsΌΌᾖᾖoῶ",
-      "ῶS῵῵῵῵῵῵῵῵῵῵῵῵῵῵῵῵῵῵῵῵῵῵ᾖᾖ῵ῶ",
-      "ῶ῵ῴ῵῵῵῵῵῵῵῵῵῵῵῵῵῵῵῵῵ῷῴῴῴῴῴ῵ῶ",
-      "ῶ῵῵῵ῴῴῴ῵ῴῴῴ῵ῴ῵ῴ῵ῴῴῴ῵ῴῴῴῴῴῴ῵ῶ",
-      "ῶ῵Ṁ῵ῴῴ–῵ḡ῵῵ῴ῵῵῵῵῵῵῵῵ῴῴῴῴῴῴ῵ῶ",
-      "ῴ῵῵῵῵῵῵῵῵῵῵῵῵῵῵῵῵῵῵῵῵῵῵῵῵῵῵῵",
-      "ῴ῵῵῵῵῵῵῵῵῵῵῵῵῵῵῵῵῵῵῵῵῵῵῵῵῵῵῵",
-      "ῶῴῴ῵῵῵῵῵῵῵῵῵῵ῴ῵῵῵῵῵῵ῴḡῷῴῴῴῴῶ",
-      "ῶῴῴẠẠẠẠẠẠẠẠẠῴẅ῵῵ῴῴῴ῵ῴṀῴῴῴῴῴῶ",
-      "ῶῴῴẠẠẠẠẠẠẠẠẠ῵῵῵῵῵῵῵ῴῴῴῴῴῴῴḡῶ",
-      "ῶῴῴẠẠẠẠẠẠẠẠẠ῵ῴ῵῵ῴῴῴ῵ῷ–ῴῴῴῴῴῶ",
-      "ῶῴῴẠẠẠẠẠẠẠẠẠ῵῵῵῵῵῵῵῵ῴῴῴῴῴῴῴῶ",
-      "ῶῴῴẠẠẠẠẠẠẠẠẠῷ῵῵S–ῴῷῴῴῴῴῴῴῴῴῶ",
+      "ῶSⅸⅸⅸⅸⅸⅸⅸⅸⅸⅸⅸⅸⅸⅸⅸⅸⅸⅸⅸⅸⅸⅸᾖᾖῴῶ",
+      "ῶῴῴῴῴῴῴῴῴῴⅸῴῴῴῴῴῴῴῴῴῷῴῺῺῺῴⅸῶ",
+      "ῶῴῴῴῴῴSῴῴῴⅸῴSῴῴῴῴῴῴῴῴῴΏsΏῴⅸῶ",
+      "ῶῴṀῴῴῴ–ῴḡῴⅸῴῴῴῴῴῴῴῴῴῴSῴῴSῴⅸῶ",
+      "ῴⅸⅸⅸⅸⅸⅸⅸⅸⅸⅸⅸⅸⅸⅸⅸⅸⅸⅸⅸⅸⅸⅸⅸⅸⅸⅸⅸ",
+      "ῴῴῴῴῴῴῴⅸῴῴῴῴῴῴῴῴῴῴῴⅸῴῴῴῴῴῴⅸⅸ",
+      "ῶῴῴⅻῴῴῴⅸῴῴῴⅻῴSῴῴῴῴῴⅸῴḡῷῴῴῴῴῶ",
+      "ῶῴῴẠẠẠẠẠẠẠẠẠῴẅῴῴῴῴῴⅸῴṀῴῴῴῴῴῶ",
+      "ῶῴῴẠẠẠẠẠẠẠẠẠῴῴῴῴῴῴῴῴⅺῴῴῴῴῴḡῶ",
+      "ῶῴῴẠẠẠẠẠẠẠẠẠῴῴῴῴῴῴῴῴῷ–ῴῴῴῴῴῶ",
+      "ῶῴῴẠẠẠẠẠẠẠẠẠῴῴῴῴῴῴῴῴῴῴῺῺῺῴῴῶ",
+      "ῶῴῴẠẠẠẠẠẠẠẠẠῷῴⅺS–ῴῷῴῴῴΏsΏῴῴῶ",
       "ῶῴῴῷῴῴῴῴῴῴῴῴῴῴῴῴῴῴῴῴῴῴῴῴῴῴῴῶ",
       "ῶῶῶῷῶῶῶῶῶῶῷῶῶῶῶῶῶῷῶῶῶῶῶῶῴῶῶῶ"
+
     ],
     "warps": [
       {"x": 4, "y": 3, "to": {"map": "center", "x": 4, "y": 4}, "via": {"map": "celestic", "x": 4, "y": 4}},
@@ -157623,10 +157760,14 @@ const MAPS9 = {
     "signs": [
       {"x": 1, "y": 4, "text": "ASTRAL TOWN — The shrine town in the mountain’s lap. The oldest stories in Borea are kept here, and they are kept carefully."},
       {"x": 15, "y": 15, "text": "THE OLD SHRINE — Three small shrines in a ring of stones. What they commemorate, the town remembers so you do not have to ask twice."},
-      {"x": 13, "y": 10, "text": "ASTRAL TOWN — East: ROUTE 210 — NORTH."}
+      {"x": 13, "y": 10, "text": "ASTRAL TOWN — East: ROUTE 210 — NORTH."},
+      {"x": 12, "y": 6, "text": "ASTRAL TOWN — East: ROUTE 210 — NORTH."},
+      {"x": 6, "y": 6, "text": "ASTRAL TOWN — East: ROUTE 210 — NORTH."},
+      {"x": 21, "y": 7, "text": "ASTRAL TOWN — East: ROUTE 210 — NORTH."},
+      {"x": 24, "y": 7, "text": "ASTRAL TOWN — East: ROUTE 210 — NORTH."}
     ],
     "npcs": [
-      {"x": 3, "y": 5, "name": "MART CLERK", "art": "clerk", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#4a3a2a", "dialogue": ["Astral Town Mart — stocked for the road ahead."], "mart": {"stock": ["greatball", "ultraball", "hyperpotion", "fullheal", "revive", "superpotion"]}},
+      {"x": 9, "y": 4, "name": "MART CLERK", "art": "clerk", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#4a3a2a", "dialogue": ["Astral Town Mart — stocked for the road ahead."], "mart": {"stock": ["greatball", "ultraball", "hyperpotion", "fullheal", "revive", "superpotion"]}},
       {"x": 11, "y": 7, "name": "SHRINE ELDER UME", "art": "elder", "skin": "#e8b888", "shirt": "#b0503c", "pants": "#2a2a3a", "hair": "#5a3a2a", "dialogue": ["Astral was old when the lakes were young, child. Walk softly; the stones are listening out of habit.", "The cave paintings in the shrine tell of three lake spirits and the beings above them. Told, not explained."]},
       {"x": 19, "y": 12, "name": "HISTORIAN BLYTHE", "art": "scientist", "skin": "#c89878", "shirt": "#2a7a6a", "pants": "#3a3a4a", "hair": "#7a4a1a", "dialogue": ["I copy the shrine murals by hand, one panel a season. Some panels copy back, I swear it.", "East, the fog road drops to Route 210. West of the mountain, everything is somebody else's story."]},
       {"x": 7, "y": 14, "name": "FOG RUNNER KESTREL", "art": "youngster", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#4a3a2a", "dialogue": ["I run the fog road to Repose and back before lunch. The fog lets me. It likes the company.", "On clear days you can see Zenith Spire from the shrine steps. On fog days, it sees you."]},
