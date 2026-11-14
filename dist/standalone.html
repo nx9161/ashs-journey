@@ -4480,6 +4480,49 @@ T65_KIND_DEFS.forEach(([kind], i) => {
 const T65_PROP_KINDS = T65_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
 const T65_WALL_KINDS = T65_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
 const T65_FLOOR_KINDS = T65_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
+// Wave W-DIFF9 (identity retrofit, pair 9): Dawnwick (pallet) +
+// Signal City (goldenrod) — the closest pair among the five
+// remaining shared-kit towns on the W-DIFF census re-run on main
+// 3443ca0d (composite 0.1098; plan WAVE-WDIFF9-PLAN.md §1).
+// Dawnwick: 'Shore-Sand & Terracotta Hip' (the identity table's
+// own entry) realised as NEW kinds — 'strandfloor' (idx 1068):
+// shore sand laid as swept strand bands with shell flecks, the
+// starting town's street, distinct in texture from the generic
+// path sand it replaces and from every registered sand family;
+// 'hiproof' (idx 1069): a true hipped terracotta roof slope (hip
+// ridge + eave foot) for the town's th- house roofs (TOWN_STYLE
+// pallet form literally reads 'hipped terracotta'). The dock's
+// boardwalk, the shore sand and the sea — the reference elements
+// — stay exactly as shipped, as do the T1 chalkmap barn door and
+// every warp/post/sign. Signal City: 'Urban Brick & Mast' — the
+// table names brickfloor for the street, but brickfloor is
+// Cinder Town's kiln brick (W-DIFF4, registered to azalea), so
+// per the W-DIFF6 amendment rule Signal takes a distinct variant
+// in the same register: 'tramfloor' (idx 1070): broad avenue
+// flags of dark brick-asphalt with a worn pale centre dash;
+// 'mastlroof' (idx 1071) / 'mastrroof' (idx 1072): the matched
+// left/right pair of flat urban-brick slab roofs with parapet
+// lip, worn by the tl-/tr-goldenrod rooflines (Signal's
+// buildings carry no th- kind). Indices 1068-1072 per the
+// Director's index ruling: main's kinds run through T65's
+// 1056-1059; gaps 1048-1055 + 1060-1067 stay empty. Kind names
+// verified unclaimed. Chars U+1E00+1068..
+const WD9_KIND_DEFS = [
+  ['strandfloor', 'floor'],
+  ['hiproof', 'wall'],
+  ['tramfloor', 'floor'],
+  ['mastlroof', 'wall'],
+  ['mastrroof', 'wall'],
+];
+const WD9_KIND_CHARS = {};
+WD9_KIND_DEFS.forEach(([kind], i) => {
+  const ch = String.fromCodePoint(0x1E00 + 1068 + i);
+  WD9_KIND_CHARS[kind] = ch;
+  TILE_CHARS[ch] = kind;
+});
+const WD9_PROP_KINDS = WD9_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
+const WD9_WALL_KINDS = WD9_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
+const WD9_FLOOR_KINDS = WD9_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
 const SINNOH_TOWN_GROUND_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg);
 const SINNOH_TOWN_GROUND2_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg2);
 // TX-3: the 8 gym exteriors by town (original type-accent motifs).
@@ -113639,6 +113682,96 @@ const ART = {
     "lbddlbddlbddlbdd",
     "eeeeeeeeeeeeeeee"
   ] },
+  "tile-strandfloor": { w: 16, h: 16, pal: {"a":"#d9c28c","b":"#cdb37e","c":"#b89e66","d":"#f2e6c4","e":"#e3b7a0"}, rows: [
+    "caaabbabcabaebaa",
+    "aaababcbaabbbbca",
+    "abbbcbaaaabacbaa",
+    "bacabaababcaabba",
+    "cbbbbeaecbabaabb",
+    "babaabcabbdbaacb",
+    "baaacbabbbabcbaa",
+    "bbcbdaaaabcbbbba",
+    "cbabadabcbaababb",
+    "bababbcabaaaaacb",
+    "aadbcbdbabaacbbb",
+    "abcabbabbacaaabb",
+    "cbbbbbaacabababa",
+    "abbbbbcaaaababca",
+    "bbbadaabababcbaa",
+    "bbcbaababacabbba",
+  ] },
+  "tile-hiproof": { w: 16, h: 16, pal: {"a":"#b5623f","b":"#a55436","c":"#8a4230","d":"#d18a5f"}, rows: [
+    "dddddddddddddddd",
+    "caaacaabcaaacaab",
+    "cbbbcaaacaabcaba",
+    "cccccccccccccccc",
+    "dddddddddddddddd",
+    "caabcaaacabacbab",
+    "cbaacabacaaacabb",
+    "cccccccccccccccc",
+    "dddddddddddddddd",
+    "caaacaaacaaacbaa",
+    "cbaacaabcaaacaaa",
+    "cccccccccccccccc",
+    "dddddddddddddddd",
+    "cabacaaacbbacaaa",
+    "cbaacaaacbabcaaa",
+    "cccccccccccccccc",
+  ] },
+  "tile-tramfloor": { w: 16, h: 16, pal: {"a":"#6a4a42","b":"#59403a","c":"#45322e","d":"#cbb59a","e":"#7d584c"}, rows: [
+    "abbaaebcaaaaaaac",
+    "aaabbaacaabaabac",
+    "baaaabbcbaaaaaac",
+    "aaabaaaceaabaabc",
+    "aaaabaacaababaac",
+    "eaeaaaacaabaaaac",
+    "aaaaaaacbeaaaabc",
+    "cccccddddddccccc",
+    "abaaaddddddaebbc",
+    "abaaaaacaaaeaaac",
+    "eaabeabcabaabaac",
+    "aaabaaacaaaaabac",
+    "aaaaabbcabaaaaac",
+    "eaaaeaacabaaaaac",
+    "aabaaaacaaaaaaec",
+    "cccccccccccccccc",
+  ] },
+  "tile-mastlroof": { w: 16, h: 16, pal: {"a":"#9a4a3a","b":"#8a4034","c":"#6e3229","d":"#c47a5c"}, rows: [
+    "dcbaababbaaaaaaa",
+    "dcbaaaaaaabaaaab",
+    "dcbaaaaaaabaaaba",
+    "dcabbaabababbaaa",
+    "dcbabbaaabaabaaa",
+    "dcbaabaaaabaaaaa",
+    "dcbabbbaaaaaaaab",
+    "dcaaaaaaaaaaabaa",
+    "dcaaaaabbabaaaaa",
+    "dcabbbabbbbaaaaa",
+    "dcaaaaaababbaaaa",
+    "dcababbbaaaaaaba",
+    "dcaaaaaaaaabbaaa",
+    "dcaaaaabaabaaaba",
+    "dcaabbababaaaabb",
+    "dcaaaaaaaaaacccc",
+  ] },
+  "tile-mastrroof": { w: 16, h: 16, pal: {"a":"#9a4a3a","b":"#8a4034","c":"#6e3229","d":"#c47a5c"}, rows: [
+    "aaaaaabbbaaaaacd",
+    "baaaaaaaaaaaaacd",
+    "babaaaaabaaaaacd",
+    "abbaaaaaaabbaacd",
+    "bbbababbabbaabcd",
+    "baaababaaaaaaacd",
+    "aaaaaaaaaaaabacd",
+    "abaabaabbaaabbcd",
+    "aaaaaaaaaaaaaacd",
+    "bbabbbabbaabbacd",
+    "aaabaaaaaaaaaacd",
+    "aaaabbaaaaababcd",
+    "abaaaaaaaaaabbcd",
+    "bbbaaaaaaabbabcd",
+    "babbbbbbaabbbacd",
+    "ccccaaaaaaaaaacd",
+  ] },
   "tile-prop-streakboard": { w: 16, h: 16, pal: {"a":"#d8c08a","b":"#cdb481","f":"#b07a3f","z":"#8a6d3b","Z":"#57431f","w":"#c9a06a","W":"#b8935e","t":"#6a4a2e","h":"#bfa87c"}, rows: [
     "aabaaafaaabaaaaa",
     "aazzzzzzzzzzzzaa",
@@ -119107,6 +119240,10 @@ for (const k of T64_FLOOR_KINDS) TILE_ART[k] = 'tile-' + k;
 for (const k of T65_PROP_KINDS) TILE_ART[k] = 'tile-prop-' + k;
 for (const k of T65_WALL_KINDS) TILE_ART[k] = 'tile-' + k;
 for (const k of T65_FLOOR_KINDS) TILE_ART[k] = 'tile-' + k;
+// Wave W-DIFF9: Dawnwick's strandfloor/hiproof + Signal City's tramfloor/mastlroof/mastrroof kit kinds.
+for (const k of WD9_PROP_KINDS) TILE_ART[k] = 'tile-prop-' + k;
+for (const k of WD9_WALL_KINDS) TILE_ART[k] = 'tile-' + k;
+for (const k of WD9_FLOOR_KINDS) TILE_ART[k] = 'tile-' + k;
 // Premium+ W6 (TX-3/PL-1): door-open frames, authored in TX-3 for every
 // door kind. The warp-fade engine that plays them lands in W7 — W6
 // wires the frames (this registry + cache.doorOpen + doorOpenCanvas)
@@ -119655,6 +119792,7 @@ function buildArtTileCache(doc) {
   for (const k of WD6_FLOOR_KINDS) cache[k + 'Variants'] = ids(['tile-' + k]);
   for (const k of WD7_FLOOR_KINDS) cache[k + 'Variants'] = ids(['tile-' + k]);
   for (const k of WD8_FLOOR_KINDS) cache[k + 'Variants'] = ids(['tile-' + k]);
+  for (const k of WD9_FLOOR_KINDS) cache[k + 'Variants'] = ids(['tile-' + k]);
   cache.foundationVariants = ids(['tile-foundation-1', 'tile-foundation-2', 'tile-foundation-3']);
   // P-1 side walls: the SAME authored art rasterized through a palette
   // swap that darkens every hex by one full shade step (x0.72 — the
@@ -119927,6 +120065,7 @@ for (const k of WD5_FLOOR_KINDS) FLOOR_VARIANTS[k] = k + 'Variants';
 for (const k of WD6_FLOOR_KINDS) FLOOR_VARIANTS[k] = k + 'Variants';
 for (const k of WD7_FLOOR_KINDS) FLOOR_VARIANTS[k] = k + 'Variants';
 for (const k of WD8_FLOOR_KINDS) FLOOR_VARIANTS[k] = k + 'Variants';
+for (const k of WD9_FLOOR_KINDS) FLOOR_VARIANTS[k] = k + 'Variants';
 // Wave 5a: interior floor kinds are ground families of their own (a prop
 // inside a Center stands on Center floor, never on grass or path), and
 // interior walls cast the shared shadow strip onto the floor below.
@@ -119983,7 +120122,7 @@ function groundFamilyOf(kind) {
   // psand kinds stand on path (props composite over the parent ground).
   if (kind && kind.startsWith('beach-')) return 'tropgrass';
   if (kind && kind.startsWith('psand-')) return 'path';
-  if (kind && (W6_FLOOR_KINDS.includes(kind) || O1_FLOOR_KINDS.includes(kind) || J3_FLOOR_KINDS.includes(kind) || H3_FLOOR_KINDS.includes(kind) || H3B_FLOOR_KINDS.includes(kind) || S3_FLOOR_KINDS.includes(kind) || S3B_FLOOR_KINDS.includes(kind) || WD_FLOOR_KINDS.includes(kind) || WD3_FLOOR_KINDS.includes(kind) || WD4_FLOOR_KINDS.includes(kind) || WD5_FLOOR_KINDS.includes(kind) || WD6_FLOOR_KINDS.includes(kind) || WD7_FLOOR_KINDS.includes(kind) || WD8_FLOOR_KINDS.includes(kind))) return kind; // W6/O1/J3/H3/H3B/S3/S3B/WD/WD3/WD4/WD5/WD6/WD7/WD8 floors are own families
+  if (kind && (W6_FLOOR_KINDS.includes(kind) || O1_FLOOR_KINDS.includes(kind) || J3_FLOOR_KINDS.includes(kind) || H3_FLOOR_KINDS.includes(kind) || H3B_FLOOR_KINDS.includes(kind) || S3_FLOOR_KINDS.includes(kind) || S3B_FLOOR_KINDS.includes(kind) || WD_FLOOR_KINDS.includes(kind) || WD3_FLOOR_KINDS.includes(kind) || WD4_FLOOR_KINDS.includes(kind) || WD5_FLOOR_KINDS.includes(kind) || WD6_FLOOR_KINDS.includes(kind) || WD7_FLOOR_KINDS.includes(kind) || WD8_FLOOR_KINDS.includes(kind) || WD9_FLOOR_KINDS.includes(kind))) return kind; // W6/O1/J3/H3/H3B/S3/S3B/WD/WD3/WD4/WD5/WD6/WD7/WD8/WD9 floors are own families
   if (kind && (kind.startsWith('tg-') || kind.startsWith('tg2-'))) return kind; // W5: town ground is its own family
   if (kind && (kind.startsWith('tc-') || kind.startsWith('td-') || kind.startsWith('flora-'))) return 'grass';
   if (kind === 'grass' || kind === 'grassground' || kind === 'flower' || kind === 'tree' || kind === 'rock' || kind === 'sign' ||
@@ -128403,6 +128542,16 @@ const WALKABLE = new Set(['.', ',', 'D', 'E', 'C', 'F', 'J', 'K', '1', '2', 'V',
   // on this base; the parallel T64 claim holds 1044-1047;
   // 1036-1043 + 1048-1055 stay empty.)
   ...[1056]
+    .map((i) => String.fromCodePoint(0x1E00 + i)),
+  // Wave W-DIFF9: the strandfloor char (U+1E00+1068, tiles.mjs
+  // WD9_KIND_DEFS) is walkable street material — Dawnwick's
+  // swept shore-strand bands, swapped 1:1 from the walkable
+  // '.' path char in Dawnwick, and the tramfloor char
+  // (U+1E00+1070) likewise in Signal City, so floor stays
+  // floor in both. (Indices 1068-1072 per the Director's
+  // index ruling: main's kinds run through T65's 1056-1059;
+  // 1048-1055 + 1060-1067 stay empty.)
+  ...[1068, 1070]
     .map((i) => String.fromCodePoint(0x1E00 + i))]);
 
 // Trainer definitions for the slice.
@@ -132974,18 +133123,18 @@ const MAPS3 = {
     rows: rows([
       'ËËËËÖËËËËËËËËËËÖËËËË',
       'ËÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀËËË',
-      'ËÀáá3áááÀıāāāÀdefËËË',
+      'ËÀáá3áááÀı∭∭∭ÀdefËËË',
       'ËÀZZ06ZZÀıęsęÀx—zËËË',
-      'Ëo..............oËËË',
-      'ËÀFı.ÀıÀ..ıÀÀËÀı÷ÀÀË',
-      'Ëāìā.ẊıÀ..ıÀÀÀÀabbcË',
-      'Ërsv.jklm.dOefÀv——vË',
-      'Ën.ı.AJKA.P12PÀ...‴Ë',
-      'Ë..................Ë',
-      'ËÀ.ÀÀı.....ẄẉoÀghiÀË',
-      'Ëẞ.........ẞẞẘẘt—uÀË',
-      'ËẘẞẆẞ″ἇἇ~...″~ẞẞẞẞẞË',
-      'Ë~R~~~ἇἇ....~~~~~~RË',
+      'Ëo∬∬∬∬∬∬∬∬∬∬∬∬∬∬oËËË',
+      'ËÀFı∬ÀıÀ∬∬ıÀÀËÀı÷ÀÀË',
+      'Ë∭ì∭∬ẊıÀ∬∬ıÀÀÀÀabbcË',
+      'Ërsv∬jklm∬dOefÀv——vË',
+      'Ën∬ı∬AJKA∬P12PÀ∬∬∬‴Ë',
+      'Ë∬∬∬∬∬∬∬∬∬∬∬∬∬∬∬∬∬∬Ë',
+      'ËÀ∬ÀÀı∬∬∬∬∬ẄẉoÀghiÀË',
+      'Ëẞ∬∬∬∬∬∬∬∬∬ẞẞẘẘt—uÀË',
+      'ËẘẞẆẞ″ἇἇ~∬∬∬″~ẞẞẞẞẞË',
+      'Ë~R~~~ἇἇ∬∬∬∬~~~~~~RË',
     ]),
     warps: [
       { x: 8, y: 13, to: { map: 'route1', x: 6, y: 14 } },
@@ -140319,26 +140468,26 @@ const MAPS6 = {
     "name": "Signal City",
     "music": "pewter-theme",
     "rows": [
-      "ỏỏỏỐỏỏỏỏỏỏỐỏỏỏỏỏ..ỏỏỏỏỏỏỐỏỏỏỏỏỏỐỏỏ",
-      "ỏọoọ............................oỏ",
-      "ỏọọjklmọ.deefọốốXốốốốốốốố‾Ṇốốốốốốỏ",
-      "ỏọọAJKAọ.P12PọUUVYUUỒỒssỒọnỒsỒỒỒỒỏ",
-      "ỏ................................ỏ",
-      "ỏ........................ọọSọọọSọỏ",
-      "ỏỏọốốốốọ.Ẋốốốốẋọ..ḋpFọọọọọọốốốố.ỏỏ",
-      "ỏỏọỒsỒỒọ.ọỒỒsỒọọ..ọọọọọọọọọỒsỒỒ.ỏỏ",
-      "ỏ................................ỏ",
-      "ỏọọọọọọọ.ọọọọọọọ..ọọọọọ.ọpoọFọẊ.ọỏ",
-      "ỏ.......................ốốốốốố...ỏ",
-      "ỏ......................nỒỒỒsỒỒn..ỏ",
-      "ỏḋẌẌọọọọ.ọốốốốọṀ..Ṁpọọọ.........ẋỏ",
-      "ỏ........ọỒsỒỒoọ..ọṀọọo.....,ẋẋ,,ỏ",
-      "ỏ........ọn.,nọọ..ọọWWọ.....,,,,,ỏ",
-      "ỏ................................ỏ",
-      "ỏỏFọọọọo.ọ,p,,ọọ..ọoọẤẤọốốốốốốF.ọỏ",
-      "ỏỏpọọọpọ.ọ,,p,So..opọẤpọỒỒsỒỒỒọ.ọỏ",
-      "ỏọọọo...........................ọỏ",
-      "ỏỏỏỐỏỏỏỏỏỏỐỏỏỏỏỏ..ỏỏỏỏỏỏỐỏỏỏỏỏỏỐỏỏ"
+      "ỏỏỏỐỏỏỏỏỏỏỐỏỏỏỏỏ∮∮ỏỏỏỏỏỏỐỏỏỏỏỏỏỐỏỏ",
+      "ỏọoọ∮∮∮∮∮∮∮∮∮∮∮∮∮∮∮∮∮∮∮∮∮∮∮∮∮∮∮∮oỏ",
+      "ỏọọjklmọ∮deefọ∰∰X∰∰∰∰∰∰∰∰‾Ṇ∰∰∰∰∰∰ỏ",
+      "ỏọọAJKAọ∮P12PọUUVYUU∯∯ss∯ọn∯s∯∯∯∯ỏ",
+      "ỏ∮∮∮∮∮∮∮∮∮∮∮∮∮∮∮∮∮∮∮∮∮∮∮∮∮∮∮∮∮∮∮∮ỏ",
+      "ỏ∮∮∮∮∮∮∮∮∮∮∮∮∮∮∮∮∮∮∮∮∮∮∮∮ọọSọọọSọỏ",
+      "ỏỏọ∰∰∰∰ọ∮Ẋ∰∰∰∰ẋọ∮∮ḋpFọọọọọọ∰∰∰∰∮ỏỏ",
+      "ỏỏọ∯s∯∯ọ∮ọ∯∯s∯ọọ∮∮ọọọọọọọọọ∯s∯∯∮ỏỏ",
+      "ỏ∮∮∮∮∮∮∮∮∮∮∮∮∮∮∮∮∮∮∮∮∮∮∮∮∮∮∮∮∮∮∮∮ỏ",
+      "ỏọọọọọọọ∮ọọọọọọọ∮∮ọọọọọ∮ọpoọFọẊ∮ọỏ",
+      "ỏ∮∮∮∮∮∮∮∮∮∮∮∮∮∮∮∮∮∮∮∮∮∮∮∰∰∰∰∰∰∮∮∮ỏ",
+      "ỏ∮∮∮∮∮∮∮∮∮∮∮∮∮∮∮∮∮∮∮∮∮∮n∯∯∯s∯∯n∮∮ỏ",
+      "ỏḋẌẌọọọọ∮ọ∰∰∰∰ọṀ∮∮Ṁpọọọ∮∮∮∮∮∮∮∮∮ẋỏ",
+      "ỏ∮∮∮∮∮∮∮∮ọ∯s∯∯oọ∮∮ọṀọọo∮∮∮∮∮,ẋẋ,,ỏ",
+      "ỏ∮∮∮∮∮∮∮∮ọn∮,nọọ∮∮ọọWWọ∮∮∮∮∮,,,,,ỏ",
+      "ỏ∮∮∮∮∮∮∮∮∮∮∮∮∮∮∮∮∮∮∮∮∮∮∮∮∮∮∮∮∮∮∮∮ỏ",
+      "ỏỏFọọọọo∮ọ,p,,ọọ∮∮ọoọẤẤọ∰∰∰∰∰∰F∮ọỏ",
+      "ỏỏpọọọpọ∮ọ,,p,So∮∮opọẤpọ∯∯s∯∯∯ọ∮ọỏ",
+      "ỏọọọo∮∮∮∮∮∮∮∮∮∮∮∮∮∮∮∮∮∮∮∮∮∮∮∮∮∮∮ọỏ",
+      "ỏỏỏỐỏỏỏỏỏỏỐỏỏỏỏỏ∮∮ỏỏỏỏỏỏỐỏỏỏỏỏỏỐỏỏ"
     ],
     "warps": [
       {
@@ -192732,6 +192881,6 @@ if (typeof Game !== 'undefined') Object.assign(Game.prototype, {
 });
 
 </script>
-<!-- contentHash:ec1345d388a727efc028837fd0d96d47a07c7375c4378161ee55a6c78f05c4fa -->
+<!-- contentHash:4fd0ef79ca1c159229c54f7c8926e1a95be7b2979c5b57a6befe5283542eae65 -->
 </body>
 </html>
