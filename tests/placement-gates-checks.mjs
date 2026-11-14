@@ -209,6 +209,45 @@
 //     identical; the same build swapped 20 house-roof cells to
 //     the towerroof kind (idx 593, BUILD classifier), which does
 //     not move the tuple. Re-pinned with the W-DIFF3 build.
+//
+//     FOURTEENTH DOCUMENTED EXCEPTION (W-DIFF4): the registry
+//     grows by one scoped entry — azalea: [brickfloor] — on the
+//     same terms as exceptions seven through thirteen: Cinder
+//     Town's CLEAN identity build record (W-DIFF-AUDIT Phase B,
+//     Charcoal & Kiln Brick) authors brickfloor (idx 594) AS the
+//     town's street fabric (148 path cells swapped 1:1), and its
+//     absence from the network tier would blind the instrument
+//     exactly as in W4. Azalea's pin re-pins on ONE field only:
+//     fabric 0.9977 -> 0.9923 — the identity table's ground
+//     treatment ('tg + ash accents at kilns') dresses five
+//     tg-azalea cells at the twin kilns' mouths ((4,11),(5,11),
+//     (1,12),(3,12),(4,12)) with the existing H3a ashground
+//     kind; tg counts in the fabric tier and ashground does not,
+//     so the fabric share falls by exactly those five cells
+//     (CHARCOAL KID's footing at (5,12) byte-kept). Pass, conn
+//     (132/132), step-offs (8/8), junctions, apronMin (0.688)
+//     and strict (0.7723) are identical; the same build swapped
+//     17 house-roof cells to the mossroof kind (idx 595, BUILD
+//     classifier; Center/Mart/Gym stamps byte-kept), which does
+//     not move the tuple. Re-pinned with the W-DIFF4 build.
+//
+//     FIFTEENTH DOCUMENTED EXCEPTION (W-DIFF4): the registry
+//     grows by one scoped entry — mahogany: [gravelfloor] — on
+//     identical terms: Redwood Town's CLEAN identity build
+//     record (W-DIFF-AUDIT Phase B, Pine & Lake Gravel) authors
+//     gravelfloor (idx 596) AS the town's street fabric (171
+//     path cells swapped 1:1). Mahogany's pin does NOT move:
+//     pass, conn (156/156), step-offs (7/7), junctions (5/5),
+//     apronMin (0.786), strict (0.9332) and fabric (1) are all
+//     identical — the exception records the registry growth
+//     only. The same build swapped 18 house-roof cells to the
+//     pineroof kind (idx 597, BUILD classifier; Center/Mart/Gym
+//     stamps byte-kept; the souvenir-shop facade at Pell's post
+//     (20,6) unmoved — its roof row wears the town kit like
+//     every house roof), and the table's ground treatment
+//     ('tg + meadow/pond') is T20's shipped pond + meadow at
+//     encounter parity, byte-kept. Re-pinned with the W-DIFF4
+//     build (registry scope only).
 //     Tuple: [pass, connOk, connPairs, stepTouch, stepTot, components,
 //     junctionSites, junctionsBare, apronLow, apronMin, merged,
 //     onFabric, shoulderOrphans, unanchoredAny, strict, fabric].
@@ -238,8 +277,8 @@ async function gateTuple(id, t) {
 }
 
 // 1. registry scope lock
-ok('street registry is exactly { vermilion: [boardwalk], blackthorn: [settfloor], silvertown: [marblefloor], ecruteak: [wornfloor], saffron: [avenuefloor], violet: [violetfloor] }',
-  JSON.stringify(STREET_REGISTRY) === '{"vermilion":["boardwalk"],"blackthorn":["settfloor"],"silvertown":["marblefloor"],"ecruteak":["wornfloor"],"saffron":["avenuefloor"],"violet":["violetfloor"]}',
+ok('street registry is exactly { vermilion: [boardwalk], blackthorn: [settfloor], silvertown: [marblefloor], ecruteak: [wornfloor], saffron: [avenuefloor], violet: [violetfloor], azalea: [brickfloor], mahogany: [gravelfloor] }',
+  JSON.stringify(STREET_REGISTRY) === '{"vermilion":["boardwalk"],"blackthorn":["settfloor"],"silvertown":["marblefloor"],"ecruteak":["wornfloor"],"saffron":["avenuefloor"],"violet":["violetfloor"],"azalea":["brickfloor"],"mahogany":["gravelfloor"]}',
   JSON.stringify(STREET_REGISTRY));
 
 // 2. census: the 64 towns of townSetOf (pallet included)
@@ -256,7 +295,7 @@ ok('gate census covers 64 towns', ids.length === 64, `${ids.length} ids`);
 
 // 4. per-town pins on the production path (targets use post-W4 pins)
 const PIN = {
-  "azalea": [1, 132, 132, 8, 8, 1, 8, 0, 0, 0.688, 0, 0, 0, 0, 0.7723, 0.9977],
+  "azalea": [1, 132, 132, 8, 8, 1, 8, 0, 0, 0.688, 0, 0, 0, 0, 0.7723, 0.9923],
   "blackthorn": [1, 156, 156, 7, 7, 1, 6, 0, 0, 0.813, 0, 0, 0, 0, 0.7915, 0.988],
   "canalave": [0, 36, 90, 8, 8, 3, 3, 0, 1, 0.417, 0, 0, 0, 0, 1, 1],
   "celadon": [1, 156, 156, 10, 10, 1, 3, 0, 0, 0.611, 0, 0, 0, 0, 0.9725, 1],
