@@ -1772,6 +1772,35 @@ T44_KIND_DEFS.forEach(([kind], i) => {
 export const T44_PROP_KINDS = T44_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
 export const T44_WALL_KINDS = T44_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
 export const T44_FLOOR_KINDS = T44_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
+// ---- Wave T45: Heritage City's own kit from birth (NO-SAME-KIT
+// law): 'Historic Stone & Leaf-Shadow' — idx 816-819 per the
+// Director's index ruling (main's kinds run 594-636 + 645-648 +
+// 660-662 + 672-675 + 684-687 + 696-699 + 708-711 + 720-724 +
+// 732-736 + 744-748 + 756-759 + 768-771 + 780-783 + 792-795;
+// the parallel T44 claim holds 804-807; the gaps stay empty,
+// 808-815 included). heritagefloor is the worn teal-green
+// flagstone street; heritageroof is the cut-stone teal slate
+// worn by the Gym's roof cells (breaking the Gym + Combine
+// building tr-eterna share); oldstatue stands in the statue
+// garden; flowerurn spills at the town's gates. Art:
+// assets/sprites/pix/tiles/tile-heritagefloor.pix,
+// tile-heritageroof.pix, tile-prop-oldstatue.pix,
+// tile-prop-flowerurn.pix. (WAVE-T45-HERITAGE-PLAN.md.)
+export const T45_KIND_DEFS = [
+  ['heritagefloor', 'floor'],
+  ['heritageroof', 'wall'],
+  ['oldstatue', 'prop'],
+  ['flowerurn', 'prop'],
+];
+export const T45_KIND_CHARS = {};
+T45_KIND_DEFS.forEach(([kind], i) => {
+  const ch = String.fromCodePoint(0x1E00 + 816 + i);
+  T45_KIND_CHARS[kind] = ch;
+  TILE_CHARS[ch] = kind;
+});
+export const T45_PROP_KINDS = T45_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
+export const T45_WALL_KINDS = T45_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
+export const T45_FLOOR_KINDS = T45_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
 export const SINNOH_TOWN_GROUND_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg);
 export const SINNOH_TOWN_GROUND2_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg2);
 // TX-3: the 8 gym exteriors by town (original type-accent motifs).

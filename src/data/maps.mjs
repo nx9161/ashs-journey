@@ -682,6 +682,17 @@ export const WALKABLE = new Set(['.', ',', 'D', 'E', 'C', 'F', 'J', 'K', '1', '2
   // (T39) + 756-759 (T40) + 768-771 (T41) + 780-783 (T42); the
   // parallel T43 claim holds 792-795; gaps stay empty.)
   ...[804]
+    .map((i) => String.fromCodePoint(0x1E00 + i)),
+  // Wave T45: the heritagefloor char (U+1E00+816, tiles.mjs
+  // T45_KIND_DEFS) is walkable street material — Heritage
+  // City's worn flagstone street, swapped onto the town's
+  // street cells (which shipped as walkable tg2 mud), so floor
+  // stays floor. (Indices 816-819 per the Director's index
+  // ruling: main's kinds run 594-636 + 645-648 + 660-662 +
+  // 672-675 + 684-687 + 696-699 + 708-711 + 720-724 + 732-736 +
+  // 744-748 + 756-759 + 768-771 + 780-783 + 792-795; the
+  // parallel T44 claim holds 804-807; gaps stay empty.)
+  ...[816]
     .map((i) => String.fromCodePoint(0x1E00 + i))]);
 
 // Trainer definitions for the slice.

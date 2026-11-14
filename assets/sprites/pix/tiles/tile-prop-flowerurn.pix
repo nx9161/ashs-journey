@@ -1,0 +1,26 @@
+# Wave T45 (Heritage kit): flowerurn — a stone urn spilling flowers, seated at the avenue's head (12,5) and the statue garden's east gate (8,14) beside the statue keeper's post — the travellers'-flowers dressing of the town tale carried to the town's gates. Weathered stone, a green spill, blossom flecks in pink, cream and gold. Fully opaque: the town grass is baked in (measured #0e7f08). (NO-SAME-KIT law; WAVE-T45-HERITAGE-PLAN.md §5.)
+PIX tile-prop-flowerurn 16 16
+gggggggggggggggg
+gggggfyffygggggg
+ggggFFfGGfFFgggg
+gggggGGGGGGggggg
+ggggSSSSSSSSgggg
+gggggSssssSggggg
+gggggSSSSSSggggg
+ggggggSssSgggggg
+gggggggSSggggggg
+ggggggSSSSgggggg
+gggggSSSSSSggggg
+gggggggggggggggg
+gggggggggggggggg
+gggggggggggggggg
+gggggggggggggggg
+gggggggggggggggg
+PAL
+g #0e7f08 town grass (measured tg-eterna flat)
+S #9aa294 weathered urn stone
+s #6e7768 urn shade
+G #3f7a2e leaf spill
+F #e88bb0 blossom pink
+f #f6e3c8 blossom cream
+y #f4d03f blossom gold

@@ -1,0 +1,24 @@
+# Wave T45 (Heritage kit): heritagefloor — Heritage City's registered street kind (the fleet's street kinds carry the -floor suffix; the desire-path tiers key on it). WORN FLAGSTONE STREET: large irregular flags in deep teal-green stone — broad flag joints in dark moss-green, worn pale centres, a fine leaf-shadow speckle. A FLAGSTONE geometry: unlike Coalseam's clinkerfloor (fine black-ash aggregate), Revelry's beamfloor (steel plate grid), Clover's cloverfloor (flecked earth), Shingle's shellfloor (raked shell sand) and Honeyfield's honeyfloor (hexagonal comb). (NO-SAME-KIT law; WAVE-T45-HERITAGE-PLAN.md §5.)
+PIX tile-heritagefloor 16 16
+laaajaaaaaajaaaa
+aaaajaaaasajaala
+aawajlaaaaajawaa
+awwwjaaawaajwwwa
+aawajaawwwljawaa
+alaajaaawaajaaaa
+aaaajaaaaaajaaal
+jjjjjjjjjjjjjjjj
+aaaaaaajaaaaaaja
+aaaaaaajaaalaaja
+aalwaaajaaaaaajw
+aawwwaajaawasaww
+aaawaaajawwwaajw
+asaaaaajaawaaaja
+aaaaaaajaasalaja
+jjjjjjjjjjjjjjjj
+PAL
+a #57755f worn flagstone
+j #33503f moss-green flag joint
+w #83a18b worn pale centre
+l #42604c leaf-shadow speckle
+s #4a6854 stone shade fleck

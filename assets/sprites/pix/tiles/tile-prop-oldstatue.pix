@@ -1,0 +1,25 @@
+# Wave T45 (Heritage kit): oldstatue — the OLD STATUE of the town tale 'The Statue's Shadow', realized at the statue garden's west edge (2,14) in the shipped column cell's place (WAVE-T45-HERITAGE-PLAN.md §3.3: a declared dressing realization — the tale's named centerpiece, same cell, same non-walkable dressing class). A weathered stone figure on a low plinth, one arm raised, moss in the joints, travellers' flower flecks at its foot. Fully opaque: the town grass is baked in (measured #0e7f08, tg-eterna's rendered flat). (NO-SAME-KIT law; WAVE-T45-HERITAGE-PLAN.md §5.)
+PIX tile-prop-oldstatue 16 16
+gggggggggggggggg
+ggggggSSSSggSggg
+ggggggSSSSggSggg
+ggggggSSssggSggg
+gggggSSSSsSSgggg
+gggggSssSSsggggg
+gggggSSSSSSggggg
+gggggSSmmSSggggg
+ggggggSSSSgggggg
+ggggggSssSgggggg
+ggggggSSSSgggggg
+gggggSSSSSSggggg
+ggggSSSSSSSSgggg
+ggggSddSSddSgggg
+gggSSSSSSSSSSggg
+gggffggggggffggg
+PAL
+g #0e7f08 town grass (measured tg-eterna flat)
+S #a8aea0 weathered stone light
+s #79816f stone shade
+d #59614f plinth joint shadow
+m #4a7a3a moss in the joints
+f #e88bb0 travellers flowers

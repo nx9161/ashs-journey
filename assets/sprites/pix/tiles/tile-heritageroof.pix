@@ -1,0 +1,24 @@
+# Wave T45 (Heritage kit): heritageroof — Heritage City's own roof, worn by the shipped Gym's tr cells and both facade cottages. TEAL STONE SLATE: deep teal-green stone slates in offset courses, moss flecks in the joints, a pale worn slate here and there — the painting's teal-green stone roofs drawn as CUT STONE courses: unlike Shingle's shellroof (pale shell shingles), Coalseam's ironroof (riveted plate), Revelry's beamroof/condoroof (glass steel) and Honeyfield's bloomroof (petal scales). (NO-SAME-KIT law; WAVE-T45-HERITAGE-PLAN.md §5.)
+PIX tile-heritageroof 16 16
+wllllldllllldlll
+dmmmmmdmmommdmmm
+dmmmmmdmmwmmdmmm
+dddddddddddddddd
+llldllllldllllld
+mmwdmmmmodmmmmmd
+mmmdmmmmmdmmmmmd
+dddddddddddwdddd
+dllllldllllldlll
+dmmmmmdommmmdmmm
+dmmmwmdmmmmmdmmm
+dddddddddddddddd
+llldllllldlllwld
+mmmdmmommdmmmmmd
+mmmdmmmmmdmmmmmo
+ddddddwddddddddd
+PAL
+m #2e6f6a teal slate mid
+l #4b9791 slate top light
+d #1d4a47 slate joint shadow
+o #7fae56 moss fleck
+w #9fc4bd worn pale slate
