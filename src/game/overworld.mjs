@@ -96,6 +96,9 @@ export class OverworldScene {
     g.ui.onMoodTap = () => this.petPartner();
     g.ui.showMoodPip(true);
     g.ui.setBattleMode(false);
+    // W-UI: BootScene hid the HUD chrome for the title flow; the overworld
+    // is where gameplay chrome belongs, so restore it on entry.
+    if (g.ui.setHudVisible) g.ui.setHudVisible(true);
     g.audio.playMusic(this.map.music || 'route1-theme'); // per-map original score (maps.mjs `music`)
   }
 
