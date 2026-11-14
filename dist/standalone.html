@@ -4332,6 +4332,36 @@ T60_KIND_DEFS.forEach(([kind], i) => {
 const T60_PROP_KINDS = T60_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
 const T60_WALL_KINDS = T60_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
 const T60_FLOOR_KINDS = T60_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
+// "Reef Shell & Spike Stone" — reeffloor (idx 1008): pink shell
+// sand, a loose shell-grit scatter in three pinks with white
+// shell shards (worn by the whole shipped street blob + the
+// north surf-exit jetty head); scalloproof (idx 1009): staggered
+// courses of scallop-shell shingles — worn by the Gym's four
+// roof cells only, breaking the shipped Gym/Mart roof-slate
+// share; rockspike (idx 1010): a jagged reef spike on the island
+// sand; gullrock (idx 1011): a flat reef rock with a gull
+// standing on it, at the ferry shore.
+// (Indices 1008-1011 per the Director's index ruling: main's
+// kinds run …948-951 + 960-963 + 972-976 + 984-987; the parallel
+// T60 claim holds 996-999; 988-995 + 1000-1007 stay empty. Kind
+// names verified unclaimed — shellfloor/shellroof/gullpost are
+// taken by other towns. Chars U+1E00+1008..)
+// (Register: WAVE-T61-REEFSIDE-PLAN.md §5.)
+const T61_KIND_DEFS = [
+  ['reeffloor', 'floor'],
+  ['scalloproof', 'wall'],
+  ['rockspike', 'prop'],
+  ['gullrock', 'prop'],
+];
+const T61_KIND_CHARS = {};
+T61_KIND_DEFS.forEach(([kind], i) => {
+  const ch = String.fromCodePoint(0x1E00 + 1008 + i);
+  T61_KIND_CHARS[kind] = ch;
+  TILE_CHARS[ch] = kind;
+});
+const T61_PROP_KINDS = T61_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
+const T61_WALL_KINDS = T61_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
+const T61_FLOOR_KINDS = T61_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
 const SINNOH_TOWN_GROUND_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg);
 const SINNOH_TOWN_GROUND2_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg2);
 // TX-3: the 8 gym exteriors by town (original type-accent motifs).
@@ -113167,6 +113197,78 @@ const ART = {
     "dddWWddddDdddddd",
     "dddddddddddddddd"
   ] },
+  "tile-reeffloor": { w: 16, h: 16, pal: {"p":"#e6c4b4","l":"#f0d8cc","d":"#d2a08e","r":"#cf8a76","w":"#f8f1e6","g":"#bd7f68"}, rows: [
+    "plpppdplppppwppp",
+    "ppppplpppppdplpp",
+    "pwpprppppplppppp",
+    "pppplppgppppplpd",
+    "pdppppplpppppppp",
+    "pppplppppwppprpp",
+    "plpppppdplpppppp",
+    "ppppplppppplppgp",
+    "pppdppppplpppppp",
+    "plpppwpppdplprpp",
+    "ppppplpppppppplp",
+    "ppgpppplppwppppp",
+    "plpppdppppplppdp",
+    "ppppplprpppplppp",
+    "ppplppppgpppwppp",
+    "pdpppplppppplppl"
+  ] },
+  "tile-scalloproof": { w: 16, h: 16, pal: {"s":"#dda08e","l":"#f0c4b2","d":"#b97a66","e":"#a05f4c","w":"#f8e8dc"}, rows: [
+    "wssslssswssslsss",
+    "slssslssslssslss",
+    "ssessesssessesse",
+    "dddddddddddddddd",
+    "ssslssswssslsssw",
+    "lssslssslssslsss",
+    "sessesssessesses",
+    "dddddddddddddddd",
+    "wssslssswssslsss",
+    "slssslssslssslss",
+    "ssessesssessesse",
+    "dddddddddddddddd",
+    "ssslssswssslsssw",
+    "lssslssslssslsss",
+    "sessesssessesses",
+    "dddddddddddddddd"
+  ] },
+  "tile-prop-rockspike": { w: 16, h: 16, pal: {"s":"#c6b388","S":"#d4c69c","h":"#a69274","g":"#9a8d90","G":"#77686e","l":"#c0b2ac","p":"#c9a49b","n":"#e3dcc9"}, rows: [
+    "ssssssssssssssss",
+    "ssSssslgssssssss",
+    "sssssslgGsssssss",
+    "sssssllgGgssssss",
+    "ssssslpgGGssssss",
+    "ssssslgGGGsslgss",
+    "sssSllgGGGsslgGs",
+    "sssslgGGGGsslgGs",
+    "sssslgGGgGsssgGs",
+    "sssslgggGGsssggs",
+    "sssslgGGGGGssgGs",
+    "sssnlgGGGGgnsgGs",
+    "sssssggGGggngggs",
+    "ssshhgggggggghhs",
+    "sshhhhhhhhhhhhhs",
+    "ssssssssssSsssss"
+  ] },
+  "tile-prop-gullrock": { w: 16, h: 16, pal: {"s":"#c6b388","S":"#d4c69c","h":"#a69274","g":"#8f8f96","G":"#6e6e76","l":"#a9a9b2","w":"#f4f2ec","v":"#cfd4d8","o":"#e8963c","k":"#2a2a2a"}, rows: [
+    "ssssssssssssssss",
+    "ssSsssssssssssss",
+    "sssssssswwssssss",
+    "ssssssswkwwossss",
+    "sssssssswwwwssss",
+    "sssssswwwwwwssss",
+    "sssssvwwwwwwssss",
+    "ssssssvvvvvvssss",
+    "sssssssswwssssss",
+    "sssssssswwssssss",
+    "sssllgggggggglls",
+    "ssslgggGGGGgggls",
+    "ssggggGGGGGGgggs",
+    "sshhgggggggghhss",
+    "sshhhhhhhhhhhhhs",
+    "ssssssssssSsssss"
+  ] },
   "partner-back-bob": { base: "partner-back", w: 64, h: 64, pal: {}, shiftY: 2 },
   "partner-front-bob": { base: "partner-front", w: 64, h: 64, pal: {}, shiftY: 2 },
   "abomasnow-back-bob": { base: "abomasnow-back", w: 64, h: 64, pal: {}, shiftY: 2 },
@@ -118584,6 +118686,9 @@ for (const k of T59_FLOOR_KINDS) TILE_ART[k] = 'tile-' + k;
 for (const k of T60_PROP_KINDS) TILE_ART[k] = 'tile-prop-' + k;
 for (const k of T60_WALL_KINDS) TILE_ART[k] = 'tile-' + k;
 for (const k of T60_FLOOR_KINDS) TILE_ART[k] = 'tile-' + k;
+for (const k of T61_PROP_KINDS) TILE_ART[k] = 'tile-prop-' + k;
+for (const k of T61_WALL_KINDS) TILE_ART[k] = 'tile-' + k;
+for (const k of T61_FLOOR_KINDS) TILE_ART[k] = 'tile-' + k;
 // Premium+ W6 (TX-3/PL-1): door-open frames, authored in TX-3 for every
 // door kind. The warp-fade engine that plays them lands in W7 — W6
 // wires the frames (this registry + cache.doorOpen + doorOpenCanvas)
@@ -120530,6 +120635,12 @@ function resolveTileLayers(cache, kind, x, y, kindAt, t, phase, mapId) {
     // measured colours).
     case 'surfstone':
     case 'wreckrib':
+    // Wave T61: Reefside's reef spike and its gull rock composite
+    // over their ground the same way (both arts are fully
+    // opaque — the island sand is baked in at its measured
+    // colours).
+    case 'rockspike':
+    case 'gullrock':
     // Wave T17: the radio mast composites over its compound grass too.
     case 'radiomast': {
       // Object tiles carry transparent surrounds (Wave 1): lay the ground
@@ -127797,6 +127908,17 @@ const WALKABLE = new Set(['.', ',', 'D', 'E', 'C', 'F', 'J', 'K', '1', '2', 'V',
   // 960-963 (T57) + 972-976 (T58); the parallel T59 claim
   // holds 984-987; 964-971 + 977-983 + 988-995 stay empty.)
   ...[996]
+    .map((i) => String.fromCodePoint(0x1E00 + i)),
+  // Wave T61: the reeffloor char (U+1E00+1008, tiles.mjs
+  // T61_KIND_DEFS) is walkable street material — Reefside's
+  // pink shell sand, swapped onto the island's whole shipped
+  // street blob (authored as the generic `path` sand) plus the
+  // north surf-exit jetty head, so floor stays floor.
+  // (Indices 1008-1011 per the Director's index ruling: main's
+  // kinds run …948-951 + 960-963 + 972-976 + 984-987; the
+  // parallel T60 claim holds 996-999; 988-995 + 1000-1007
+  // stay empty.)
+  ...[1008]
     .map((i) => String.fromCodePoint(0x1E00 + i))]);
 
 // Trainer definitions for the slice.
@@ -134669,22 +134791,23 @@ const MAPS5 = {
     "name": "Reefside Island",
     "music": "viridian-theme",
     "rows": [
-      "~~~~~~~~~~~~~~~~~~~~~~~~~~",
-      "~~~~~~~~~~~~~~~~~~~~~~~~~~",
-      "~~ẞdeefẞẞjklm..deefẞẞFẞ“~~",
-      "~~ẞUVYUS”AJKA..P12Pn―ẟ’ẞ~~",
-      "~~ẞ†...............ẟẟẟ‗ẞ~~",
-      "~~‬...............„..„.‬~~",
-      "~~ẞ†ẟ.....ẟẟẟ..ẟ.‗ẞ‘‗ẞ…ẞ~~",
-      "~~ẞ†...........ẟ.‗ẞ‘ẟ―ẟ#~~",
-      "~~ẞ†,,,........‖.Ẇ―ẟẟ#ẟ‖~~",
-      "~~ẞẘ,,,....ẟF.‟ẞ†ẟẟẟẟẟ‗ẞ~~",
-      "~~ẞ‘,,,.....ẟ..―.ẟR,,,ẘ‥~~",
-      "~~ẞ‘,,,...ẘ......ẟẟ,,,‗ẞ~~",
-      "~~ẞ“....ẟ......ẟ.ẟẘ‖R‖‛ẞ~~",
-      "~~ẞẞ†...........S‗ẞẞẞẞẞẞ~~",
-      "~~~~~~~~~~~~~..~~~~~~~~~~~",
-      "~~~~~~~~~~~~~..~~~~~~~~~~~"
+      "~~~~~~~~~~~~⇰⇰~~~~~~~~~~~~",
+      "~~~~ẞẞẞ⇰⇰⇰⇰⇰⇰⇰⇰ẞẞẞẞẞ~~~~~~",
+      "~~ẞ⇱⇱⇱⇱⇰⇰jklm⇰⇰deefẞẞFẞ“~~",
+      "~~ẞUVYUS”AJKA⇰⇰P12Pn―ẟ’ẞ~~",
+      "~~ẞ†⇰⇰⇰⇰⇰⇰⇰⇰⇰⇰⇰⇰⇰⇰⇰ẟẟẟ‗ẞ~~",
+      "~~‬⇰⇰⇰⇰⇰⇰⇰⇰⇰⇰⇰⇰⇰⇰⇰„⇰⇰„⇰‬~~",
+      "~~ẞ†ẟ⇰⇰⇰⇰⇰ẟẟẟ⇰⇰⇰⇰‗ẞ‘‗ẞ…ẞ~~",
+      "~~ẞS⇰⇰⇰⇰⇰⇰⇰⇰⇰⇰⇰⇰⇰‗ẞ‘ẟ―ẟ#~~",
+      "~~ẞ⇲,,,⇰⇰⇰⇰⇰⇰⇰⇰⇰⇰Ẇ―ẟẟ#ẟ‖~~",
+      "~~⇲ẘ,,,⇰⇰⇰⇰ẟF⇰‟⇰†ẟẟẟẟẟ‗⇲~~",
+      "~~ẞ‘,,,⇰⇰⇰⇰⇰ẟ⇰⇰⇰⇰ẟR,,,ẘ‥~~",
+      "~~ẞ‘,,,⇰⇰⇰ẘ⇰⇰⇰⇰⇰⇰ẟẟ,,,‗ẞ~~",
+      "~~ẞ“⇰⇰⇰⇰S⇰⇰⇰⇰⇰⇰⇰⇰ẟẘ‖R‖‛ẞ~~",
+      "~~ẞ⇳†⇰⇰⇰⇰⇰⇰⇰⇰⇰⇰⇰S‗ẞẞẞẞẞẞ~~",
+      "~~~~~~~~~~~~~⇰⇰~~~~~~~~~~~",
+      "~~~~~~~~~~~~~⇰⇰~~~~~~~~~~~"
+
     ],
     "warps": [
       {
@@ -134877,8 +135000,8 @@ const MAPS5 = {
         ]
       },
       {
-        "x": 3,
-        "y": 5,
+        "x": 15,
+        "y": 4,
         "name": "MART CLERK",
         "art": "clerk",
         "skin": "#e8b888",
@@ -192109,6 +192232,6 @@ if (typeof Game !== 'undefined') Object.assign(Game.prototype, {
 });
 
 </script>
-<!-- contentHash:17c4cfd5936a61d6046a5fb8e7396c0e04de34d627f9778be6803d81ed3bb7b5 -->
+<!-- contentHash:d36eb4a3b4e8c3ffd855cc1509790acfedfe2013f36f649eee381f9e0e93c360 -->
 </body>
 </html>
