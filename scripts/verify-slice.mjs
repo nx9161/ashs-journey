@@ -105,17 +105,17 @@ const driver = `
   const boot = game.scenes.top;
   ok('boot scene pushed', boot instanceof BootScene);
   ok('legal phase first', boot.phase === 'legal');
-  ok('disclaimer title verbatim', DISCLAIMER_BOOT[0] === "ASH'S JOURNEY");
+  ok('disclaimer title verbatim', DISCLAIMER_BOOT[0] === "KIAN'S JOURNEY");
   ok('disclaimer non-affiliation verbatim',
     DISCLAIMER_BOOT.join('\\n').indexOf('Not affiliated with, endorsed by, or connected to') >= 0);
   ok('disclaimer non-commercial verbatim',
-    DISCLAIMER_BOOT.join('\\n').indexOf('free, non-commercial fan project') >= 0);
+    DISCLAIMER_BOOT.join('\\n').indexOf('free, non-commercial project') >= 0);
   ok('not interactive before dwell', (function () { pressA(1); return boot.phase === 'legal'; })());
   loop.stepMs(3100); tick(2);
   ok('interactive after 3s dwell', boot.ready === true);
   pressA(1);
   ok('title phase', boot.phase === 'title');
-  ok('game title line', GAME_TITLE === "ASH'S JOURNEY");
+  ok('game title line', GAME_TITLE === "KIAN'S JOURNEY");
 
   // ----- 2. new game -> intro -----
   pressA(1); // New Game
