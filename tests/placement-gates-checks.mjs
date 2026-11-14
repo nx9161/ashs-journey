@@ -1395,6 +1395,50 @@
 //     figures are carried by the authored street graph,
 //     not the mud). NO other town's pin moves.
 
+//     FORTY-EIGHTH DOCUMENTED EXCEPTION (WAVE T50; the
+//     FORTY-SEVENTH is WAVE T49 Bridgeport's, recorded
+//     on its own branch — the two land in order at
+//     merge): the registry grows by one scoped entry —
+//     pastoria: [walkfloor] (the rebuild-wave
+//     registration the registry's own terms promise
+//     each town) — and pastoria's pin migrates
+//     PASS -> PASS: the Fenland City rebuild on its own
+//     kit from birth ('Marsh Boardwalk & Bog Eyes', idx
+//     876-879: pegged weathered-olive plank streets,
+//     the vertical-board boardroof, the bogeyes prop,
+//     the lilypad prop) per WAVE-T50-FENLAND-PLAN.md.
+//     Fenland shipped a mud-carried PASS: 280 of its
+//     504 cells were tg2 — 55.6%, the fleet's worst
+//     share — and its conn 182/182 / strict 0.9582 were
+//     the mud sea's figures, not the town's. The build
+//     retires the mud (tg2 280 -> 0), rebuilds the
+//     street graph in walkfloor (the front street, the
+//     north avenue, the centre avenue, the west lane,
+//     the marsh road, the east lane and the r213 exit
+//     cells, the Mire connector, the Solenne spur, the
+//     south fans and the pool deck along the south
+//     pool's west shore), breaks the Gym + Gatehouse
+//     tr-roof share with the vertical-board boardroof
+//     on the Gym (the Gatehouse keeps tr), builds the
+//     painting's two facade cottages, tiles the five
+//     invisible DIRS, marks the validator-named bare
+//     junctions with verbatim DIRS copies at (16,11)
+//     and (24,7), realizes the recorded MUDGILL beat
+//     as bogeyes + lilypad dressing in the south pool
+//     (marshbog 23 -> 21 walkable seats; the water
+//     encounter table is byte-kept and the dormant
+//     land table untouched), and moves the orphaned
+//     MART CLERK (3,5) -> (9,4) at his Mart's
+//     west-front apron. Gate STATUS holds: pass 1 -> 1,
+//     conn 182/182, step-offs 8/8, components 1 (a
+//     133-cell street graph), junctions 8 mud sites ->
+//     4 real sites, 0 bare, apronMin 0.824 unmoved
+//     (the Center's byte-kept ring), unanchored decor
+//     0 -> 0, strict 0.9582 -> 0.6288, fabric
+//     0.9945 -> 0.994 (the landed figures are carried
+//     by the authored street graph, not the mud).
+//     NO other town's pin moves.
+
 import { loadMaps, makeTiers, townSetOf, analyzeMap } from '../scripts/audit-desire-paths.mjs';
 import { scoreTown, gateCheck, tiersFor, STREET_REGISTRY } from '../scripts/audit-placement.mjs';
 
@@ -1420,8 +1464,8 @@ async function gateTuple(id, t) {
 }
 
 // 1. registry scope lock
-ok('street registry is exactly { vermilion: [boardwalk], blackthorn: [settfloor], silvertown: [marblefloor], ecruteak: [wornfloor], saffron: [avenuefloor], violet: [violetfloor], azalea: [brickfloor], mahogany: [gravelfloor], rustboro: [cutstonefloor], fuchsia: [marshfloor], cianwood: [driftfloor], dewford: [plankfloor], viridian: [slatefloor], celadon: [promfloor], slateport: [quayfloor, boardwalk], cerulean: [pierfloor], mauville: [gridfloor], lavender: [shinglefloor], cherrygrove: [inlayfloor], verdanturf: [petalfloor, cavefloor], olivine: [harbourfloor, jettyfloor], fallarbor: [ashfloor], lavaridge: [steamfloor, terracefloor], fortree: [canopyfloor, boardwalk], lilycove: [cobblefloor, cavefloor], mossdeep: [starfloor, dockfloor], sootopolis: [craterfloor, cavefloor], pacifidlog: [raftfloor], evergrande: [plateaufloor, cavefloor], twinleaf: [cloverfloor], sandgem: [shellfloor], jubilife: [beamfloor], oreburgh: [clinkerfloor], floaroma: [honeyfloor], eterna: [heritagefloor], hearthome: [giltfloor], solaceon: [pebblefloor], veilstone: [shardfloor], canalave: [ringfloor, boardwalk, harbourstone, trussfloor] }',
-  JSON.stringify(STREET_REGISTRY) === '{"vermilion":["boardwalk"],"blackthorn":["settfloor"],"silvertown":["marblefloor"],"ecruteak":["wornfloor"],"saffron":["avenuefloor"],"violet":["violetfloor"],"azalea":["brickfloor"],"mahogany":["gravelfloor"],"rustboro":["cutstonefloor"],"fuchsia":["marshfloor"],"cianwood":["driftfloor"],"dewford":["plankfloor"],"viridian":["slatefloor"],"celadon":["promfloor"],"slateport":["quayfloor","boardwalk"],"cerulean":["pierfloor"],"mauville":["gridfloor"],"lavender":["shinglefloor"],"cherrygrove":["inlayfloor"],"verdanturf":["petalfloor","cavefloor"],"olivine":["harbourfloor","jettyfloor"],"fallarbor":["ashfloor"],"lavaridge":["steamfloor","terracefloor"],"fortree":["canopyfloor","boardwalk"],"lilycove":["cobblefloor","cavefloor"],"mossdeep":["starfloor","dockfloor"],"sootopolis":["craterfloor","cavefloor"],\"pacifidlog\":[\"raftfloor\"],\"evergrande\":[\"plateaufloor\",\"cavefloor\"],\"twinleaf\":[\"cloverfloor\"],\"sandgem\":[\"shellfloor\"],\"jubilife\":[\"beamfloor\"],\"oreburgh\":[\"clinkerfloor\"],\"floaroma\":[\"honeyfloor\"],\"eterna\":[\"heritagefloor\"],\"hearthome\":[\"giltfloor\"],\"solaceon\":[\"pebblefloor\"],\"veilstone\":[\"shardfloor\"],\"canalave\":[\"ringfloor\",\"boardwalk\",\"harbourstone\",\"trussfloor\"]}',
+ok('street registry is exactly { vermilion: [boardwalk], blackthorn: [settfloor], silvertown: [marblefloor], ecruteak: [wornfloor], saffron: [avenuefloor], violet: [violetfloor], azalea: [brickfloor], mahogany: [gravelfloor], rustboro: [cutstonefloor], fuchsia: [marshfloor], cianwood: [driftfloor], dewford: [plankfloor], viridian: [slatefloor], celadon: [promfloor], slateport: [quayfloor, boardwalk], cerulean: [pierfloor], mauville: [gridfloor], lavender: [shinglefloor], cherrygrove: [inlayfloor], verdanturf: [petalfloor, cavefloor], olivine: [harbourfloor, jettyfloor], fallarbor: [ashfloor], lavaridge: [steamfloor, terracefloor], fortree: [canopyfloor, boardwalk], lilycove: [cobblefloor, cavefloor], mossdeep: [starfloor, dockfloor], sootopolis: [craterfloor, cavefloor], pacifidlog: [raftfloor], evergrande: [plateaufloor, cavefloor], twinleaf: [cloverfloor], sandgem: [shellfloor], jubilife: [beamfloor], oreburgh: [clinkerfloor], floaroma: [honeyfloor], eterna: [heritagefloor], hearthome: [giltfloor], solaceon: [pebblefloor], veilstone: [shardfloor], canalave: [ringfloor, boardwalk, harbourstone, trussfloor], pastoria: [walkfloor] }',
+  JSON.stringify(STREET_REGISTRY) === '{"vermilion":["boardwalk"],"blackthorn":["settfloor"],"silvertown":["marblefloor"],"ecruteak":["wornfloor"],"saffron":["avenuefloor"],"violet":["violetfloor"],"azalea":["brickfloor"],"mahogany":["gravelfloor"],"rustboro":["cutstonefloor"],"fuchsia":["marshfloor"],"cianwood":["driftfloor"],"dewford":["plankfloor"],"viridian":["slatefloor"],"celadon":["promfloor"],"slateport":["quayfloor","boardwalk"],"cerulean":["pierfloor"],"mauville":["gridfloor"],"lavender":["shinglefloor"],"cherrygrove":["inlayfloor"],"verdanturf":["petalfloor","cavefloor"],"olivine":["harbourfloor","jettyfloor"],"fallarbor":["ashfloor"],"lavaridge":["steamfloor","terracefloor"],"fortree":["canopyfloor","boardwalk"],"lilycove":["cobblefloor","cavefloor"],"mossdeep":["starfloor","dockfloor"],"sootopolis":["craterfloor","cavefloor"],\"pacifidlog\":[\"raftfloor\"],\"evergrande\":[\"plateaufloor\",\"cavefloor\"],\"twinleaf\":[\"cloverfloor\"],\"sandgem\":[\"shellfloor\"],\"jubilife\":[\"beamfloor\"],\"oreburgh\":[\"clinkerfloor\"],\"floaroma\":[\"honeyfloor\"],\"eterna\":[\"heritagefloor\"],\"hearthome\":[\"giltfloor\"],\"solaceon\":[\"pebblefloor\"],\"veilstone\":[\"shardfloor\"],\"canalave\":[\"ringfloor\",\"boardwalk\",\"harbourstone\",\"trussfloor\"],\"pastoria\":[\"walkfloor\"]}',
   JSON.stringify(STREET_REGISTRY));
 
 // 2. census: the 64 towns of townSetOf (pallet included)
@@ -1485,7 +1529,7 @@ const PIN = {
   "oreburgh": [1, 182, 182, 8, 8, 1, 3, 0, 0, 0.714, 0, 0, 0, 0, 0.7912, 0.9994],
   "pacifidlog": [1, 30, 30, 4, 4, 1, 4, 0, 0, 0.75, 0, 0, 0, 0, 0.6569, 0.9807],
   "pallet": [1, 90, 90, 6, 6, 1, 5, 0, 0, 0.643, 0, 0, 0, 0, 0.9463, 0.9945],
-  "pastoria": [1, 182, 182, 8, 8, 1, 8, 0, 0, 0.824, 0, 0, 0, 0, 0.9582, 0.9945],
+  "pastoria": [1, 182, 182, 8, 8, 1, 4, 0, 0, 0.824, 0, 0, 0, 0, 0.6288, 0.994],
   "petalburg": [1, 110, 110, 7, 7, 1, 10, 1, 0, 0.643, 0, 0, 0, 1, 0.6643, 0.9896],
   "pewter": [1, 110, 110, 8, 8, 1, 6, 0, 0, 0.824, 0, 0, 0, 0, 0.8602, 1],
   "pummelo": [0, 30, 56, 6, 6, 1, 3, 0, 1, 0.529, 0, 0, 0, 0, 0.9639, 0.9639],
