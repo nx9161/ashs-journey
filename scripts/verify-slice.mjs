@@ -421,7 +421,7 @@ const emojiHits = [];
 for (const f of srcFiles) { if (emojiPat.test(fs.readFileSync(f, 'utf8'))) emojiHits.push(path.relative(HROOT, f)); }
 qaOk('qa s1 no emoji in UI strings (slop blacklist)', emojiHits.length === 0, emojiHits.join(','));
 qaOk('qa s1 no placeholder/coming-soon screens in src', !/coming soon|placeholder|lorem ipsum/i.test(codeSrc));
-qaOk('qa s1 account row is a disabled stub, not a placeholder screen', /Account — coming in Track B', value: 'account', disabled: true/.test(codeSrc));
+qaOk('qa s1 account row is a disabled stub, not a placeholder screen', /Account — coming in a later update', value: 'account', disabled: true/.test(codeSrc));
 const shadows = [...css.matchAll(/box-shadow:\s*([^;}]+)/g)].map((m) => m[1].trim());
 qaOk('qa s1 exactly one drop-shadow style (gameux §6)', new Set(shadows).size === 1, JSON.stringify([...new Set(shadows)]));
 // microtext census — blacklist: "text < 14 logical px in a shipped screen"

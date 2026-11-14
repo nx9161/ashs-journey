@@ -734,10 +734,10 @@ Object.assign(Game.prototype, {
     // honor and is never un-awarded.
     if (g.state.story.flags.platinum_diploma) {
       const escP = (s) => String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;');
-      const htmlP = '<div class="diploma"><div class="diplomatitle">PLATINUM DIPLOMA</div>'
-        + '<div class="diplomabody">This certifies that ' + escP(g.state.player.name) + ' completed the Platinum KinDex:</div>'
-        + '<div class="diplomabody">all ' + PLATINUM_DEX_HORIZON + ' species of the Platinum horizon, caught in a single journey. Sealed by Prof. Hawthorn, with enormous pride.</div></div>';
-      g.ui.showSummary({ name: 'Diploma', tabs: [{ id: 'diploma', label: 'PLATINUM DIPLOMA', bodyHtml: htmlP }] }, null);
+      const htmlP = '<div class="diploma"><div class="diplomatitle">GRAND DIPLOMA</div>'
+        + '<div class="diplomabody">This certifies that ' + escP(g.state.player.name) + ' completed the Grand KinDex:</div>'
+        + '<div class="diplomabody">all ' + PLATINUM_DEX_HORIZON + ' species of the Grand horizon, caught in a single journey. Sealed by Prof. Hawthorn, with enormous pride.</div></div>';
+      g.ui.showSummary({ name: 'Diploma', tabs: [{ id: 'diploma', label: 'GRAND DIPLOMA', bodyHtml: htmlP }] }, null);
       return;
     }
     // Form entries share their base species' dexNo — excluded so the
@@ -832,9 +832,9 @@ Object.assign(Game.prototype, {
     if (n < 25) return 'Hmm. ' + n + ' caught. The journey is young — walk the grass, meet them all.';
     if (n < 100) return n + ' caught! You are learning what a KinDex is for. Keep going!';
     if (n < 151) return n + ' caught! A genuine collector\'s eye. The rare ones hide well — patience.';
-    if (n < 300) return n + ' caught! Past the Arden horizon entirely — and the book still has pages. The Platinum horizon is ' + PLATINUM_DEX_HORIZON + '.';
+    if (n < 300) return n + ' caught! Past the Arden horizon entirely — and the book still has pages. The Grand horizon is ' + PLATINUM_DEX_HORIZON + '.';
     if (n < PLATINUM_DEX_HORIZON) return n + ' caught! Nearly there. The last pages are always the hardest.';
-    return 'ALL ' + PLATINUM_DEX_HORIZON + '! The full Platinum KinDex, in one journey. This is a historic KinDex!';
+    return 'ALL ' + PLATINUM_DEX_HORIZON + '! The full Grand KinDex, in one journey. This is a historic KinDex!';
   },
 
   // ADR-027 D5 (Stage F): the Platinum Diploma — the 493 honor, keyed
@@ -850,8 +850,8 @@ Object.assign(Game.prototype, {
     g.state.story.flags.platinum_diploma = true;
     g.audio.playSfx('badge');
     g.ui.say([
-      'PLATINUM DIPLOMA — This certifies that ' + g.state.player.name + ' completed the Platinum KinDex:',
-      'all ' + PLATINUM_DEX_HORIZON + ' species of the Platinum horizon, caught in a single journey. Sealed by Prof. Hawthorn, with enormous pride.',
+      'GRAND DIPLOMA — This certifies that ' + g.state.player.name + ' completed the Grand KinDex:',
+      'all ' + PLATINUM_DEX_HORIZON + ' species of the Grand horizon, caught in a single journey. Sealed by Prof. Hawthorn, with enormous pride.',
     ], null, 'Prof. Hawthorn');
   },
 

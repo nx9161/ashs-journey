@@ -49,7 +49,7 @@ Object.assign(Game.prototype, {
     const regCaught = caughtNos.filter((n) => n >= span.lo && n <= span.hi).length;
     const natCaught = caughtNos.filter((n) => n >= 1 && n <= PLATINUM_DEX_HORIZON).length;
     const natPct = Math.floor((100 * natCaught) / PLATINUM_DEX_HORIZON);
-    items.unshift({ label: 'National — Platinum horizon: ' + natCaught + '/' + PLATINUM_DEX_HORIZON + ' (' + natPct + '%)', value: null, disabled: true });
+    items.unshift({ label: 'National — Grand horizon: ' + natCaught + '/' + PLATINUM_DEX_HORIZON + ' (' + natPct + '%)', value: null, disabled: true });
     items.unshift({ label: 'Regional — ' + arcNow.region + ': ' + regCaught + '/' + (span.hi - span.lo + 1), value: null, disabled: true });
     // D2: arc progression surfaced in the Dex — current chapter header row.
     const curCh = chapterOf((g.state.story.chapter || 0) + 1);

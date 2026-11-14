@@ -968,20 +968,20 @@ export class UI {
     };
     // LOG IN pane (disabled — honest stub)
     const lp = mkPane('login');
-    lp.innerHTML = '<div class="login-note">Accounts arrive in Track B.<br>Your trainer ID lives on this device for now.</div>'
+    lp.innerHTML = '<div class="login-note">Accounts arrive in a later update.<br>Your trainer ID lives on this device for now.</div>'
       + '<label>Trainer name<input class="login-in" disabled aria-label="Trainer name (disabled)"></label>'
       + '<label>Password<input class="login-in" type="password" disabled aria-label="Password (disabled)"></label>'
-      + '<button class="login-go" disabled>LOG IN (Track B)</button>';
+      + '<button class="login-go" disabled>LOG IN</button>';
     // REGISTER pane (disabled — honest stub)
     const rp = mkPane('register');
-    rp.innerHTML = '<div class="login-note">Accounts arrive in Track B.<br>No credentials are collected or sent anywhere.</div>'
+    rp.innerHTML = '<div class="login-note">Accounts arrive in a later update.<br>No credentials are collected or sent anywhere.</div>'
       + '<label>Trainer name<input class="login-in" disabled aria-label="Trainer name (disabled)"></label>'
       + '<label>Password<input class="login-in" type="password" disabled aria-label="Password (disabled)"></label>'
-      + '<button class="login-go" disabled>REGISTER (Track B)</button>';
+      + '<button class="login-go" disabled>REGISTER</button>';
     // GUEST pane (functional, zero network)
     const gp = mkPane('guest');
     const gnote = this.el('div', 'login-note', gp);
-    gnote.textContent = 'Play right now — no account needed. Progress stays on this device until cloud saves arrive in Track B.';
+    gnote.textContent = 'Play right now — no account needed. Progress stays on this device until cloud saves arrive in a later update.';
     const go = this.el('button', 'login-go active', gp);
     go.textContent = 'PLAY AS GUEST';
     go.addEventListener('pointerdown', (e) => { e.preventDefault(); this._loginGuestGo(); });

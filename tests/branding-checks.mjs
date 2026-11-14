@@ -199,6 +199,22 @@ ok('no retired creature names in species flavour text', flavourViolations === 0,
 // "Silver" survives only as the Frontier symbol tier (the rendered
 // SILVER word and Sutter's "Silver is a Brain respecting you") and the
 // Yamato edition trio 'Gold / Silver / Crystal' — the rival is Riven.
+//
+// W-SCRUB2 (2026-11-13) adds two terms the first scrub's segment scan
+// missed: 'Platinum' (the dex-horizon / diploma display copy now reads
+// "Grand") and 'Track B' (the internal account-system codename that
+// leaked into the Trainer ID Terminal stub and two menu labels; player
+// copy now says "a later update"). Scoping: this suite scans string
+// literals under src/ only, so the tests/ Track B integration-gate
+// infrastructure (tests/track-b, run-checks labels) is never scanned
+// and keeps its codename. 'Platinum' exemptions (in blockExempt below)
+// cover only NON-display segments: the arcs table's governing-edition
+// data label — the same documented keep class as the 'Gold / Silver /
+// Crystal' edition trio — and the HM_GRANTS source-provenance strings
+// in items.mjs, a data field no game code renders (only .item/.badge/
+// .move are read). Internal identifiers (PLATINUM_DEX_HORIZON,
+// platinum_diploma, checkPlatinumDiploma) are code, not literals, and
+// stay untouched by design.
 const BLOCK_TERMS = [
   'Ash', 'ASH', 'Pikachu', 'Gary', 'Oak', 'Brock', 'Misty', 'Surge', 'Erika',
   'Koga', 'Janine', 'Sabrina', 'Blaine', 'Giovanni', 'Lorelei', 'Bruno',
@@ -229,6 +245,7 @@ const BLOCK_TERMS = [
   'Nebel', 'Liberty Pass', 'Azure Flute', 'Odd Keystone', 'Hallowed Tower',
   'Sun Flute', 'Altar of the Sunne', 'Prison Bottle', 'Diamond Domain',
   'Terminus Cave', 'P2 Laboratory', 'Moor of Icirrus',
+  'Platinum', 'Track B',
 ];
 const blockForms = new Set();
 for (const t of BLOCK_TERMS) { blockForms.add(t); if (/^[A-Z][a-z]+$/.test(t)) blockForms.add(t.toUpperCase()); }
@@ -247,6 +264,11 @@ function blockExempt(term, seg) {
       seg.includes('Magma-red'))) return true;
   if (T === 'SILVER' && (seg.trim() === 'SILVER' || seg.includes('Brain respecting') ||
       seg.includes('Gold / Silver / Crystal'))) return true;
+  // W-SCRUB2 non-display keeps for 'Platinum' (see the header note):
+  // the arcs governing-edition data label (whole-literal segment) and
+  // the two HM_GRANTS source-provenance strings, which no code renders.
+  if (T === 'PLATINUM' && (seg.trim() === 'Platinum' ||
+      seg === 'Repose Ruins (Platinum)' || seg === 'Route 217 (Platinum)')) return true;
   return false;
 }
 const allSrc = execSync('find src -name "*.mjs" | sort', { cwd: ROOT, encoding: 'utf8' })

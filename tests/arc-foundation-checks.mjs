@@ -354,7 +354,7 @@ const driver = `
   ok('B14 dex header: chapter row still first, Regional + National (Platinum 493) lines present, sealed divider before Close',
     labels4[0].indexOf('Journey — Ch.') === 0
     && labels4.some(function (l) { return l === 'Regional — Arden: 2/151'; })
-    && labels4.some(function (l) { return l === 'National — Platinum horizon: 2/493 (0%)'; })
+    && labels4.some(function (l) { return l === 'National — Grand horizon: 2/493 (0%)'; })
     && labels4[labels4.length - 2].includes('future arcs') && labels4[labels4.length - 1] === 'Close',
     labels4.slice(0, 6).join(' / '));
 

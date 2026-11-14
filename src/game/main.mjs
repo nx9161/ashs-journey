@@ -818,7 +818,7 @@ export class Game {
       ...((g.state.meta.ngPlus || 0) > 0
         ? [{ label: '★ Second Journey — Journey ' + (g.state.meta.ngPlus + 1), value: null, disabled: true }] : []),
       { label: 'Last saved: ' + when, value: null, disabled: true },
-      { label: 'Sync: guest-local (Track B: cloud)', value: null, disabled: true },
+      { label: 'Sync: guest-local (cloud in a later update)', value: null, disabled: true },
       { label: 'Save now', value: 'save' },
       { label: 'Close', value: 'close' },
     ], (v) => {

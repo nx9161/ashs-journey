@@ -1170,7 +1170,7 @@ export class OverworldScene {
     // Terminal); a null row is filtered out of the menu list below.
     const authEnabled = (typeof AUTH_ENABLED !== 'undefined' && AUTH_ENABLED);
     const accountRow = !authEnabled
-      ? { label: 'Account — coming in Track B', value: 'account', disabled: true }
+      ? { label: 'Account — coming in a later update', value: 'account', disabled: true }
       : g.authUser
         ? { label: 'Account', value: 'account' }
         : null;

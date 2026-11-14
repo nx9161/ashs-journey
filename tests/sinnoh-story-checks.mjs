@@ -1048,8 +1048,8 @@ const driver = `
   g.openDiploma(); tk(g, 2);
   var dipHtml = (g.ui.summary && g.ui.summary.data && g.ui.summary.data.tabs[0].bodyHtml) || '';
   if (g.ui.closeSummary) g.ui.closeSummary();
-  ok('C16 the Diploma viewer presents the PLATINUM plate (all 493 species of the Platinum horizon)',
-    dipHtml.indexOf('PLATINUM DIPLOMA') >= 0 && dipHtml.indexOf('493') >= 0, dipHtml.slice(0, 120));
+  ok('C16 the Diploma viewer presents the GRAND plate (all 493 species of the Grand horizon)',
+    dipHtml.indexOf('GRAND DIPLOMA') >= 0 && dipHtml.indexOf('493') >= 0, dipHtml.slice(0, 120));
 
   // ---- C17-C20: post-game integrity ----
   ow = gotoMap(g, 'house-pallet-ash', 4, 4); pump(g, 300);
