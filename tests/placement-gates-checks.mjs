@@ -1298,6 +1298,60 @@
 //     fabric 0.9948 -> 0.9972 (the landed figures are
 //     carried by the authored street graph, not the mud).
 //     NO other town's pin moves.
+//     FORTY-SEVENTH DOCUMENTED EXCEPTION (WAVE T49; the
+//     FORTY-SIXTH is WAVE T48 Shardfall's, recorded on its
+//     branch and landed ahead of this one at merge):
+//     STREET_REGISTRY gains an entry — canalave:
+//     [ringfloor, boardwalk, harbourstone, trussfloor] (the
+//     rebuild-wave registers: the town's own kit street
+//     plus its shipped walkable paving the raw tiers cannot
+//     see — boardwalk, the canal span and the ferry-pier
+//     deck, on the W4 Arcport instrument precedent, and
+//     harbourstone, the library terrace; trussfloor is the
+//     kit's iron truss deck on the span) — and canalave's
+//     pin migrates FAIL -> PASS: [0, 36, 90, 8, 8, 3, 3,
+//     0, 1, 0.417, 0, 0, 0, 0, 1, 1] -> [1, 90, 90, 8, 8,
+//     1, 7, 0, 0, 0.667, 0, 0, 0, 0, 0.6783, 1].
+//     Bridgeport City shipped FAILING the gates outright:
+//     173 of its 540 cells were tg2-canalave mud (the 35th
+//     tg2 town), its conn was 36/90 over THREE network
+//     components (the west mud field, the east pier field,
+//     and the library's own 4-cell frontage strip severed
+//     by its unregistered harbourstone terrace), and the
+//     pier-head inn's apron stood at 0.417 with the canal
+//     in its ring. The wave retires the mud, rebuilds the
+//     street graph in ringfloor (the front street, the
+//     library lane and frontage, the west shore lane, the
+//     pier link, the bridge avenue, the east field), joins
+//     the banks over the span — its four boardwalk cells
+//     take the kit's trussfloor, the town sign's 'one iron
+//     bridge' made deck — breaks the Gym + Library
+//     tr-roof share with the riveted rivetroof carrying a
+//     badge roundel on the Gym (the Backstory-Sync-Audit's
+//     unmarked-gym flag, marked by roof emblem; no sign
+//     text invented), repairs the inn's apron to 0.667
+//     with a grass bank on its water flank (a deck there
+//     formed a phantom 2-cell fabric component, measured
+//     in validation; the canal itself is never paved) and
+//     its barrel and lifering re-seated inside the ring,
+//     identifies the harbour inn with ONE new sign at
+//     (24,2) on the NOCTARCH arc's own record
+//     (ev_sinnoh_darkrai_inn: 'the harbour inn at
+//     Bridgeport', the quest objective's 'the house by the
+//     pier' — house-canalave, kept by HOSTESS ANA, where
+//     the inn event is staged), tiles its three invisible
+//     DIRS records, marks the two validator-named bare
+//     junctions with verbatim DIRS copies at (3,5) and
+//     (19,5), builds two facade cottages, seats the
+//     mooring posts and the ferry bell, and moves the
+//     orphaned MART CLERK (3,5) -> (9,4) at his Mart's
+//     west-front apron. Gate STATUS flips: pass 0 -> 1,
+//     conn 36/90 -> 90/90, components 3 -> 1, junctions
+//     3 -> 7 sites, 0 bare, apronMin 0.417 -> 0.667 (the
+//     inn's own ring, honestly pricing the canal at its
+//     west flank and its new sign), strict 1 -> 0.6783
+//     (the shipped 1 was the mud sea's figure), fabric
+//     1 -> 1. NO other town's pin moves.
 
 //     FORTY-SIXTH DOCUMENTED EXCEPTION (WAVE T48; the
 //     FORTY-FIFTH is WAVE T47 Repose's, recorded on its
@@ -1366,8 +1420,8 @@ async function gateTuple(id, t) {
 }
 
 // 1. registry scope lock
-ok('street registry is exactly { vermilion: [boardwalk], blackthorn: [settfloor], silvertown: [marblefloor], ecruteak: [wornfloor], saffron: [avenuefloor], violet: [violetfloor], azalea: [brickfloor], mahogany: [gravelfloor], rustboro: [cutstonefloor], fuchsia: [marshfloor], cianwood: [driftfloor], dewford: [plankfloor], viridian: [slatefloor], celadon: [promfloor], slateport: [quayfloor, boardwalk], cerulean: [pierfloor], mauville: [gridfloor], lavender: [shinglefloor], cherrygrove: [inlayfloor], verdanturf: [petalfloor, cavefloor], olivine: [harbourfloor, jettyfloor], fallarbor: [ashfloor], lavaridge: [steamfloor, terracefloor], fortree: [canopyfloor, boardwalk], lilycove: [cobblefloor, cavefloor], mossdeep: [starfloor, dockfloor], sootopolis: [craterfloor, cavefloor], pacifidlog: [raftfloor], evergrande: [plateaufloor, cavefloor], twinleaf: [cloverfloor], sandgem: [shellfloor], jubilife: [beamfloor], oreburgh: [clinkerfloor], floaroma: [honeyfloor], eterna: [heritagefloor], hearthome: [giltfloor], solaceon: [pebblefloor], veilstone: [shardfloor] }',
-  JSON.stringify(STREET_REGISTRY) === '{"vermilion":["boardwalk"],"blackthorn":["settfloor"],"silvertown":["marblefloor"],"ecruteak":["wornfloor"],"saffron":["avenuefloor"],"violet":["violetfloor"],"azalea":["brickfloor"],"mahogany":["gravelfloor"],"rustboro":["cutstonefloor"],"fuchsia":["marshfloor"],"cianwood":["driftfloor"],"dewford":["plankfloor"],"viridian":["slatefloor"],"celadon":["promfloor"],"slateport":["quayfloor","boardwalk"],"cerulean":["pierfloor"],"mauville":["gridfloor"],"lavender":["shinglefloor"],"cherrygrove":["inlayfloor"],"verdanturf":["petalfloor","cavefloor"],"olivine":["harbourfloor","jettyfloor"],"fallarbor":["ashfloor"],"lavaridge":["steamfloor","terracefloor"],"fortree":["canopyfloor","boardwalk"],"lilycove":["cobblefloor","cavefloor"],"mossdeep":["starfloor","dockfloor"],"sootopolis":["craterfloor","cavefloor"],\"pacifidlog\":[\"raftfloor\"],\"evergrande\":[\"plateaufloor\",\"cavefloor\"],\"twinleaf\":[\"cloverfloor\"],\"sandgem\":[\"shellfloor\"],\"jubilife\":[\"beamfloor\"],\"oreburgh\":[\"clinkerfloor\"],\"floaroma\":[\"honeyfloor\"],\"eterna\":[\"heritagefloor\"],\"hearthome\":[\"giltfloor\"],\"solaceon\":[\"pebblefloor\"],\"veilstone\":[\"shardfloor\"]}',
+ok('street registry is exactly { vermilion: [boardwalk], blackthorn: [settfloor], silvertown: [marblefloor], ecruteak: [wornfloor], saffron: [avenuefloor], violet: [violetfloor], azalea: [brickfloor], mahogany: [gravelfloor], rustboro: [cutstonefloor], fuchsia: [marshfloor], cianwood: [driftfloor], dewford: [plankfloor], viridian: [slatefloor], celadon: [promfloor], slateport: [quayfloor, boardwalk], cerulean: [pierfloor], mauville: [gridfloor], lavender: [shinglefloor], cherrygrove: [inlayfloor], verdanturf: [petalfloor, cavefloor], olivine: [harbourfloor, jettyfloor], fallarbor: [ashfloor], lavaridge: [steamfloor, terracefloor], fortree: [canopyfloor, boardwalk], lilycove: [cobblefloor, cavefloor], mossdeep: [starfloor, dockfloor], sootopolis: [craterfloor, cavefloor], pacifidlog: [raftfloor], evergrande: [plateaufloor, cavefloor], twinleaf: [cloverfloor], sandgem: [shellfloor], jubilife: [beamfloor], oreburgh: [clinkerfloor], floaroma: [honeyfloor], eterna: [heritagefloor], hearthome: [giltfloor], solaceon: [pebblefloor], veilstone: [shardfloor], canalave: [ringfloor, boardwalk, harbourstone, trussfloor] }',
+  JSON.stringify(STREET_REGISTRY) === '{"vermilion":["boardwalk"],"blackthorn":["settfloor"],"silvertown":["marblefloor"],"ecruteak":["wornfloor"],"saffron":["avenuefloor"],"violet":["violetfloor"],"azalea":["brickfloor"],"mahogany":["gravelfloor"],"rustboro":["cutstonefloor"],"fuchsia":["marshfloor"],"cianwood":["driftfloor"],"dewford":["plankfloor"],"viridian":["slatefloor"],"celadon":["promfloor"],"slateport":["quayfloor","boardwalk"],"cerulean":["pierfloor"],"mauville":["gridfloor"],"lavender":["shinglefloor"],"cherrygrove":["inlayfloor"],"verdanturf":["petalfloor","cavefloor"],"olivine":["harbourfloor","jettyfloor"],"fallarbor":["ashfloor"],"lavaridge":["steamfloor","terracefloor"],"fortree":["canopyfloor","boardwalk"],"lilycove":["cobblefloor","cavefloor"],"mossdeep":["starfloor","dockfloor"],"sootopolis":["craterfloor","cavefloor"],\"pacifidlog\":[\"raftfloor\"],\"evergrande\":[\"plateaufloor\",\"cavefloor\"],\"twinleaf\":[\"cloverfloor\"],\"sandgem\":[\"shellfloor\"],\"jubilife\":[\"beamfloor\"],\"oreburgh\":[\"clinkerfloor\"],\"floaroma\":[\"honeyfloor\"],\"eterna\":[\"heritagefloor\"],\"hearthome\":[\"giltfloor\"],\"solaceon\":[\"pebblefloor\"],\"veilstone\":[\"shardfloor\"],\"canalave\":[\"ringfloor\",\"boardwalk\",\"harbourstone\",\"trussfloor\"]}',
   JSON.stringify(STREET_REGISTRY));
 
 // 2. census: the 64 towns of townSetOf (pallet included)
@@ -1393,7 +1447,7 @@ ok('gate census covers 64 towns', ids.length === 64, `${ids.length} ids`);
 const PIN = {
   "azalea": [1, 132, 132, 8, 8, 1, 8, 0, 0, 0.688, 0, 0, 0, 0, 0.7723, 0.9923],
   "blackthorn": [1, 156, 156, 7, 7, 1, 6, 0, 0, 0.813, 0, 0, 0, 0, 0.7915, 0.988],
-  "canalave": [0, 36, 90, 8, 8, 3, 3, 0, 1, 0.417, 0, 0, 0, 0, 1, 1],
+  "canalave": [1, 90, 90, 8, 8, 1, 7, 0, 0, 0.667, 0, 0, 0, 0, 0.6783, 1],
   "celadon": [1, 156, 156, 10, 10, 1, 3, 0, 0, 0.611, 0, 0, 0, 0, 0.9725, 1],
   "celestic": [1, 56, 56, 6, 6, 1, 3, 0, 0, 0.882, 0, 0, 0, 0, 1, 1],
   "cerulean": [1, 132, 132, 7, 7, 1, 1, 0, 0, 0.625, 0, 0, 0, 0, 0.7314, 0.9839],
