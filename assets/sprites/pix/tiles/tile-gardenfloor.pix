@@ -1,0 +1,32 @@
+# Wave T26 (Copperton kit): gardenfloor — the Norwick HQ
+# forecourt's formal company-garden bed. Dark tended soil,
+# two clipped green rows, and a copper edging line on every
+# side: the painting's company gardens at town scale, in the
+# lot the shipped map left bare between the gym and the
+# Norwick Residence. Floor class: it is ground dressing on
+# the forecourt, swapped from walkable tg2 mud, so floor
+# stays floor. (NO-SAME-KIT law; WAVE-T26-COPPERTON-PLAN.md.)
+PIX tile-gardenfloor 16 16
+CCCCCCCCCCCCCCCC
+CsdsdsdsdsdsdsdC
+CsdsdsdsdsdsdsdC
+CDDDDDDDDDDDDDDC
+CgGGgGGgGGgGGgGC
+CGgGGgGGgGGgGGDC
+CDDDDDDDDDDDDDDC
+CssdsdsdsdsdsdsC
+CsdsdsdsdsdsdsdC
+CDDDDDDDDDDDDDDC
+CgGGgGGgGGgGGgGC
+CGgGGgGGgGGgGGDC
+CDDDDDDDDDDDDDDC
+CsdsdsdsdsdsdsdC
+CssdsdsdsdsdsdsC
+CCCCCCCCCCCCCCCC
+PAL
+s #4a3826 soil
+D #38291a soil-dark
+d #5e4630 soil-light
+G #4a7a3a clipped-green
+g #6a9a4a green-light
+C #b87333 copper

@@ -877,6 +877,51 @@ WD4_KIND_DEFS.forEach(([kind], i) => {
 export const WD4_PROP_KINDS = WD4_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
 export const WD4_WALL_KINDS = WD4_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
 export const WD4_FLOOR_KINDS = WD4_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
+// ---- Wave T26 (Copperton City build): Cut-Stone & Copper ----
+// Four new kinds at idx 598-601 (U+2056-U+2059, verified free
+// in TILE_CHARS and unused by every map row; the block runs
+// T23 575, W-DIFF 577-580, W-DIFF2 581-584, T24 585-587,
+// T25 588-591, WD3 592-593, W-DIFF4 594-597 — brickfloor,
+// mossroof, gravelfloor, pineroof for Cinder + Redwood;
+// Copperton takes the next block up per the Director's index
+// ruling, 2026-11-13). Copperton is Maris's company
+// city (HOENN_TOWN_STYLE rustboro: ground #a39684, form
+// 'company-city cut stone'); its shipped ground was 46.1%
+// tg2 mud — the worst share yet — under a PASS that leaned on
+// mud-as-network. Its own kit (NO-SAME-KIT law): 'coproof'
+// (wall) — warm-grey cut-stone roof slabs with copper seams
+// and verdigris at the joints, in the KIT_VARIANTS rustboro
+// roof tones; structurally wide-slab + metal seam, not
+// Meadowbrook's small staggered sage shingles, Eldergrove's
+// banded thatch or Rootlet's flat cedar shingle. 'cutstonefloor'
+// (floor) — big square-cut quarry flags, the town's avenue
+// stone and registered street kind (STREET_REGISTRY; the
+// fleet's street kinds carry the -floor suffix the desire-
+// path tiers key on), swapped onto every street/exit/landing
+// cell. 'travstone' (prop) —
+// the Trainer School's travelling stone home on its plinth
+// (tale_rustboro), fully opaque with the court baked in, at
+// (23,11) between the two shipped fossil displays. 'gardenfloor'
+// (floor) — the Norwick HQ forecourt's formal beds, dark soil
+// + clipped rows + copper edging, on the empty north lot's
+// west strip. Authored art: assets/sprites/pix/tiles/
+// tile-coproof.pix, tile-cutstonefloor.pix, tile-prop-travstone.pix,
+// tile-gardenfloor.pix (register: WAVE-T26-COPPERTON-PLAN.md).
+export const T26_KIND_DEFS = [
+  ['coproof', 'wall'],
+  ['cutstonefloor', 'floor'],
+  ['travstone', 'prop'],
+  ['gardenfloor', 'floor'],
+];
+export const T26_KIND_CHARS = {};
+T26_KIND_DEFS.forEach(([kind], i) => {
+  const ch = String.fromCodePoint(0x1E00 + 598 + i);
+  T26_KIND_CHARS[kind] = ch;
+  TILE_CHARS[ch] = kind;
+});
+export const T26_PROP_KINDS = T26_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
+export const T26_WALL_KINDS = T26_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
+export const T26_FLOOR_KINDS = T26_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
 export const SINNOH_TOWN_GROUND_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg);
 export const SINNOH_TOWN_GROUND2_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg2);
 // TX-3: the 8 gym exteriors by town (original type-accent motifs).

@@ -1,0 +1,34 @@
+# Wave T26 (Copperton kit): cutstonefloor — Copperton's
+# avenue stone and registered street kind (the fleet's street
+# kinds carry the -floor suffix: settfloor, marblefloor,
+# wornfloor, avenuefloor, violetfloor — the desire-path tiers
+# key on it). Big square-cut quarry flags, two by two per
+# tile: bevelled light top/left edges, copper-brown joint
+# shadow, sparse stone speckle and one faint copper stain.
+# Warm grey, in the rustboro ground tones (#a39684 family).
+# Not Farsight's gold avenue slabs and not pale sand: quarry
+# flags read as company-city stone at screenshot scale.
+# (NO-SAME-KIT law.)
+PIX tile-cutstonefloor 16 16
+LLLLLLLDLLLLLLLD
+LssdsssDLssssssD
+LssssssDLsscsssD
+LssdsssDLssssssD
+LssssssDLssssdsD
+LssssssDLssssssD
+sDDDDDDDsDDDDDDD
+DDDDDDDDDDDDDDDD
+LLLLLLLDLLLLLLLD
+LssssssDLssdsssD
+LscdsssDLssssssD
+LssssssDLssssssD
+LssssssDLssdsssD
+LssdsssDLssssssD
+sDDDDDDDsDDDDDDD
+DDDDDDDDDDDDDDDD
+PAL
+s #9a9184 flag
+L #b3a797 flag-light
+D #6e6355 joint
+d #84776a speckle
+c #a06838 copper-stain

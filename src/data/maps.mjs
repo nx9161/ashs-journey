@@ -456,6 +456,16 @@ export const WALKABLE = new Set(['.', ',', 'D', 'E', 'C', 'F', 'J', 'K', '1', '2
   // gravelfloor char (U+1E00+596) likewise in Redwood Town, so
   // floor stays floor in both.
   ...[594, 596]
+  // Wave T26: the cutstonefloor char (U+1E00+599, tiles.mjs
+  // T26_KIND_DEFS) is walkable street material — Copperton's
+  // avenue stone, swapped onto the town's street cells (which
+  // shipped as walkable tg2 mud), so floor stays floor. The
+  // gardenfloor char (U+1E00+601) is walkable ground — the HQ
+  // forecourt's formal beds, swapped 1:1 from walkable tg2,
+  // so floor stays floor (T24 clockbed precedent). (Indices
+  // 598-601 per the Director's index ruling: W-DIFF4 holds
+  // 594-597.)
+  ...[599, 601]
     .map((i) => String.fromCodePoint(0x1E00 + i))]);
 
 // Trainer definitions for the slice.

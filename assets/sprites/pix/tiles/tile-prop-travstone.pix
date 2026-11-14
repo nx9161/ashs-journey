@@ -1,0 +1,36 @@
+# Wave T26 (Copperton register): the Travelling Stone — the
+# Trainer School's stone, home on its plinth in its court
+# between the two shipped fossil displays (tale_rustboro,
+# "The Stone That Travels": carried out of Copperton and
+# brought home by forty years of departing students). A
+# smooth grey river stone on a cut-stone plinth with a small
+# brass plaque band. FULLY OPAQUE by design: it stands on
+# the cutstone court, whose flags are baked in as its
+# ground, never transparency (the T25 scales precedent).
+# (WAVE-T26-COPPERTON-PLAN.md, Kit.)
+PIX tile-prop-travstone 16 16
+ssDssssssssDssss
+ssssssssssssssss
+ssssssggggssssss
+sssssgGGGGgsssss
+ssssgGGGGGGgssss
+ssssgGGGGGGgssss
+ssssgGGGGGGgssss
+sssssgGGGGgsssss
+sssssshhhhssssss
+ssssPPPPPPPPssss
+ssssPppppppPssss
+ssssPppBBppPssss
+ssssPppppppPssss
+ssspppppppppssss
+ssDssssssssDssss
+ssssssssssssssss
+PAL
+s #9a9184 flag
+D #6e6355 joint
+G #8a8d90 river-stone
+g #a8adb0 stone-light
+h #5f6266 stone-shade
+P #84776a plinth
+p #52453a plinth-shade
+B #d9a441 brass

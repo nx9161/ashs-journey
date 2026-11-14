@@ -14,7 +14,7 @@ import { ART } from '../../assets/sprites/art-data.mjs';
 import { KIT_ART } from '../../assets/sprites/kit-art-data.mjs';
 import { KITACC } from '../../assets/sprites/kitacc-data.mjs';
 import { forgeSprite, forgeHumanoid } from './sprites.mjs';
-import { paintTile, W6_PROP_KINDS, W6_RUG_KINDS, W6_FLOOR_KINDS, W6_WALL_KINDS, W7_PROP_KINDS, O1_PROP_KINDS, O1_FLOOR_KINDS, O1_WALL_KINDS, J3_PROP_KINDS, J3_FLOOR_KINDS, J3_WALL_KINDS, JOHTO_TOWN_ORDER, H3_PROP_KINDS, H3_FLOOR_KINDS, H3_WALL_KINDS, H3B_PROP_KINDS, H3B_FLOOR_KINDS, H3B_WALL_KINDS, HOENN_TOWN_ORDER, S3_PROP_KINDS, S3_FLOOR_KINDS, S3_WALL_KINDS, S3B_PROP_KINDS, S3B_FLOOR_KINDS, S3B_WALL_KINDS, SINNOH_TOWN_ORDER, G2_KINDS, T1_PROP_KINDS, T3_PROP_KINDS, T6_PROP_KINDS, T6_RUG_KINDS, T7_PROP_KINDS, T9_PROP_KINDS, T14_PROP_KINDS, T15_PROP_KINDS, T17_PROP_KINDS, T23_PROP_KINDS, WD_FLOOR_KINDS, WD_WALL_KINDS, T24_PROP_KINDS, T24_WALL_KINDS, T24_FLOOR_KINDS, T25_PROP_KINDS, T25_WALL_KINDS, T25_FLOOR_KINDS, WD3_PROP_KINDS, WD3_WALL_KINDS, WD3_FLOOR_KINDS, WD4_PROP_KINDS, WD4_WALL_KINDS, WD4_FLOOR_KINDS, TOWN_STYLE, JOHTO_TOWN_STYLE, HOENN_TOWN_STYLE, SINNOH_TOWN_STYLE } from './tiles.mjs';
+import { paintTile, W6_PROP_KINDS, W6_RUG_KINDS, W6_FLOOR_KINDS, W6_WALL_KINDS, W7_PROP_KINDS, O1_PROP_KINDS, O1_FLOOR_KINDS, O1_WALL_KINDS, J3_PROP_KINDS, J3_FLOOR_KINDS, J3_WALL_KINDS, JOHTO_TOWN_ORDER, H3_PROP_KINDS, H3_FLOOR_KINDS, H3_WALL_KINDS, H3B_PROP_KINDS, H3B_FLOOR_KINDS, H3B_WALL_KINDS, HOENN_TOWN_ORDER, S3_PROP_KINDS, S3_FLOOR_KINDS, S3_WALL_KINDS, S3B_PROP_KINDS, S3B_FLOOR_KINDS, S3B_WALL_KINDS, SINNOH_TOWN_ORDER, G2_KINDS, T1_PROP_KINDS, T3_PROP_KINDS, T6_PROP_KINDS, T6_RUG_KINDS, T7_PROP_KINDS, T9_PROP_KINDS, T14_PROP_KINDS, T15_PROP_KINDS, T17_PROP_KINDS, T23_PROP_KINDS, WD_FLOOR_KINDS, WD_WALL_KINDS, T24_PROP_KINDS, T24_WALL_KINDS, T24_FLOOR_KINDS, T25_PROP_KINDS, T25_WALL_KINDS, T25_FLOOR_KINDS, WD3_PROP_KINDS, WD3_WALL_KINDS, WD3_FLOOR_KINDS, WD4_PROP_KINDS, WD4_WALL_KINDS, WD4_FLOOR_KINDS, T26_PROP_KINDS, T26_WALL_KINDS, T26_FLOOR_KINDS, TOWN_STYLE, JOHTO_TOWN_STYLE, HOENN_TOWN_STYLE, SINNOH_TOWN_STYLE } from './tiles.mjs';
 import { BATTLER_DRAW_SIZE } from './render.mjs';
 import { battlerDrawSize } from '../data/battler-tiers.mjs';
 
@@ -838,6 +838,11 @@ for (const k of WD3_FLOOR_KINDS) TILE_ART[k] = 'tile-' + k;
 for (const k of WD4_PROP_KINDS) TILE_ART[k] = 'tile-prop-' + k;
 for (const k of WD4_WALL_KINDS) TILE_ART[k] = 'tile-' + k;
 for (const k of WD4_FLOOR_KINDS) TILE_ART[k] = 'tile-' + k;
+// Wave T26: Copperton's travelling stone draws its prop art;
+// its copper-seamed roofs + cutstone/gardenbed kit kinds theirs.
+for (const k of T26_PROP_KINDS) TILE_ART[k] = 'tile-prop-' + k;
+for (const k of T26_WALL_KINDS) TILE_ART[k] = 'tile-' + k;
+for (const k of T26_FLOOR_KINDS) TILE_ART[k] = 'tile-' + k;
 
 // Premium+ W6 (TX-3/PL-1): door-open frames, authored in TX-3 for every
 // door kind. The warp-fade engine that plays them lands in W7 — W6
@@ -2593,6 +2598,10 @@ export function resolveTileLayers(cache, kind, x, y, kindAt, t, phase, mapId) {
     // pond heron composites over its meadow bank the same way.
     case 'scales':
     case 'heron':
+    // Wave T26: the travelling stone composites over its court
+    // the same way (its art is fully opaque — the cutstone
+    // court is baked in).
+    case 'travstone':
     // Wave T17: the radio mast composites over its compound grass too.
     case 'radiomast': {
       // Object tiles carry transparent surrounds (Wave 1): lay the ground

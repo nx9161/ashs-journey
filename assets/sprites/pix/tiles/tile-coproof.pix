@@ -1,0 +1,34 @@
+# Wave T26 (Copperton kit): coproof — Copperton's own roof
+# kind. Warm-grey CUT-STONE roof slabs with COPPER seams: two
+# wide ashlar courses per tile, offset vertical joints, a
+# bright copper flashing line along each course foot, and
+# verdigris speckle at the joints. KIT_VARIANTS rustboro roof
+# tones as fixed art (only Copperton wears this kind).
+# Structurally wide-slab + metal seam, not a recolour:
+# Meadowbrook wears small staggered sage shingles, Eldergrove
+# banded thatch, Rootlet flat cedar shingle; these slabs read
+# as quarry stone at screenshot scale. (NO-SAME-KIT law.)
+PIX tile-coproof 16 16
+LLLLLLLLLLLLLLLL
+sssssDsssssDsssv
+sscssDsssssDssss
+sssssDssvssDssss
+sssssDsssssDsscs
+ssvssDsssssDssss
+sssssDsssssDssss
+CcCcCcCcCcCcCcCc
+LLLLLLLLLLLLLLLL
+sssDsssssDssssss
+sssDscsvsDssssss
+sssDsssssDssvsss
+sssDsscssDssssss
+sssDsssssDssssss
+sssDsssssDssscss
+DDDDDDDDDDDDDDDD
+PAL
+s #84776a stone
+L #a29885 stone-light
+D #52453a stone-shade
+C #b87333 copper
+c #7a4a22 copper-dark
+v #4f8a6a verdigris
