@@ -133,7 +133,7 @@ const BASELINE = {
   "route8": ['D', 'maps2.mjs:720445b3', 'maps3.mjs:b69ace77'],
   "route9": ['D', 'maps2.mjs:bbff285f', 'maps3.mjs:8dd0c280'],
   "safari": ['D', 'maps2.mjs:a840460d', 'maps3.mjs:2a374dee'],
-  "saffron": ['I', 'maps2.mjs:86574441', 'maps3.mjs:86574441'],
+  "saffron": ['I', 'maps2.mjs:8f8387c9', 'maps3.mjs:8f8387c9'],
   "seafoam": ['D', 'maps2.mjs:e1621a14', 'maps3.mjs:00bf11b4'],
   "silph1": ['D', 'maps2.mjs:33bf502b', 'maps3.mjs:de66dcd1', 'maps4.mjs:b46c0ad2'],
   "silph2": ['D', 'maps2.mjs:21068e6c', 'maps3.mjs:a3e6994c', 'maps4.mjs:c666a5eb'],

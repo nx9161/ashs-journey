@@ -122,6 +122,30 @@
 //     (all marked), strict 0.6299 -> 0.6654, fabric 0.9886 -> 0.9896.
 //     Gate STATUS unchanged (PASS); conn/step-offs/apronMin identical
 //     (90/90, 6/6, 0.706). Re-pinned with the W-DIFF pilot.
+//     NINTH DOCUMENTED EXCEPTION (W-DIFF2): ecruteak's pin is its
+//     POST-W-DIFF2 tuple. Lantern City got the Cedar & Ashen Stone
+//     kit (owner ruling 2026-11-13, W-DIFF-AUDIT Phase B): sand
+//     path -> wornfloor (registered street material), house roofs
+//     -> cedarroof, charred tg2 patches at the Ashen (west) tower
+//     yard, the 9 street lamps -> lanternpost props. Only the
+//     strict mean moved: 0.7915 -> 0.7992 (desire paths cross the
+//     charred strict-tier yard at the tower). Gate STATUS unchanged
+//     (PASS); conn/step-offs/junctions/apronMin/fabric identical
+//     (156/156, 11/11, 6 sites all marked, 0.625, 0.9937).
+//     Re-pinned with W-DIFF2.
+//     TENTH DOCUMENTED EXCEPTION (W-DIFF2): saffron's pin is its
+//     POST-W-DIFF2 tuple. Farsight City got the Gold Spire & Avenue
+//     Slab kit: sand path -> avenuefloor (registered), house + HQ
+//     roof rows -> slabroof (gold trim), two planted flowerbed
+//     grids, five avenue lamps added on tg shoulders. Strict
+//     0.7649 -> 0.8655 (desire paths ride the avenue grid), apronMin
+//     0.875 -> 0.857 (still well above the 0.6 gate). Gate STATUS
+//     unchanged (PASS);
+//     conn/step-offs/junctions/fabric identical (156/156, 10/10,
+//     2 sites all marked, 1.0). Both saffron copies (maps2/maps3)
+//     edited identically; the map-id registry baseline line was
+//     updated in the same commit per its burn-down rule.
+//     Re-pinned with W-DIFF2.
 //     Tuple: [pass, connOk, connPairs, stepTouch, stepTot, components,
 //     junctionSites, junctionsBare, apronLow, apronMin, merged,
 //     onFabric, shoulderOrphans, unanchoredAny, strict, fabric].
@@ -151,8 +175,8 @@ async function gateTuple(id, t) {
 }
 
 // 1. registry scope lock
-ok('street registry is exactly { vermilion: [boardwalk], blackthorn: [settfloor], silvertown: [marblefloor] }',
-  JSON.stringify(STREET_REGISTRY) === '{"vermilion":["boardwalk"],"blackthorn":["settfloor"],"silvertown":["marblefloor"]}',
+ok('street registry is exactly { vermilion: [boardwalk], blackthorn: [settfloor], silvertown: [marblefloor], ecruteak: [wornfloor], saffron: [avenuefloor] }',
+  JSON.stringify(STREET_REGISTRY) === '{"vermilion":["boardwalk"],"blackthorn":["settfloor"],"silvertown":["marblefloor"],"ecruteak":["wornfloor"],"saffron":["avenuefloor"]}',
   JSON.stringify(STREET_REGISTRY));
 
 // 2. census: the 64 towns of townSetOf (pallet included)
@@ -179,7 +203,7 @@ const PIN = {
   "cianwood": [1, 72, 72, 7, 7, 1, 6, 0, 0, 0.688, 0, 0, 0, 0, 0.7965, 0.9993],
   "cinnabar": [1, 90, 90, 9, 9, 1, 3, 0, 0, 0.769, 0, 0, 0, 0, 0.8694, 1],
   "dewford": [0, 72, 110, 7, 7, 1, 6, 0, 1, 0.588, 0, 0, 0, 0, 0.9625, 0.9625],
-  "ecruteak": [1, 156, 156, 11, 11, 1, 6, 0, 0, 0.625, 0, 0, 0, 0, 0.7915, 0.9937],
+  "ecruteak": [1, 156, 156, 11, 11, 1, 6, 0, 0, 0.625, 0, 0, 0, 0, 0.7992, 0.9937],
   "eterna": [1, 182, 182, 8, 8, 1, 7, 0, 0, 0.813, 0, 0, 0, 0, 0.9593, 0.9921],
   "evergrande": [0, 12, 42, 5, 5, 2, 4, 0, 0, 0.938, 0, 0, 0, 0, 0.9773, 0.9778],
   "fallarbor": [1, 90, 90, 6, 6, 1, 5, 0, 0, 0.875, 0, 0, 0, 0, 0.9463, 0.984],
@@ -215,7 +239,7 @@ const PIN = {
   "pummelo": [0, 30, 56, 6, 6, 1, 3, 0, 1, 0.529, 0, 0, 0, 0, 0.9639, 0.9639],
   "resort-area": [1, 182, 182, 6, 6, 1, 5, 0, 0, 0.941, 0, 0, 0, 0, 0.944, 0.9846],
   "rustboro": [1, 156, 156, 7, 7, 1, 5, 0, 0, 0.833, 0, 0, 0, 0, 0.9566, 0.9877],
-  "saffron": [1, 156, 156, 10, 10, 1, 2, 0, 0, 0.875, 0, 0, 0, 0, 0.7649, 1],
+  "saffron": [1, 156, 156, 10, 10, 1, 2, 0, 0, 0.857, 0, 0, 0, 0, 0.8655, 1],
   "sandgem": [1, 156, 156, 7, 7, 1, 1, 0, 0, 0.833, 0, 0, 0, 0, 1, 1],
   "shamouti": [0, 30, 182, 6, 6, 1, 4, 0, 1, 0.588, 0, 0, 0, 0, 0.912, 0.912],
   "silvertown": [1, 90, 90, 6, 6, 1, 15, 0, 0, 0.706, 0, 0, 0, 0, 0.6654, 0.9896],
