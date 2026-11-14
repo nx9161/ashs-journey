@@ -4234,6 +4234,34 @@ T56_KIND_DEFS.forEach(([kind], i) => {
 const T56_PROP_KINDS = T56_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
 const T56_WALL_KINDS = T56_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
 const T56_FLOOR_KINDS = T56_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
+// ---- Wave T57 (Marisol Island identity, own kit from birth):
+// "Dune Ripple & Kelp Glass" — dunefloor (idx 960): wind-rippled
+// coral sand, the island's street material (worn by the whole
+// shipped street blob + the surf-exit jetty head); kelproof (idx
+// 961): kelp-green marine-glass panels with brass seams, the
+// painting's domed lab read as a roof — worn by the Lab's six
+// roof cells only, breaking the shipped Lab/Mart roof-slate
+// share; orangecrate (idx 962): the orange trade's slatted
+// shipping crate; coralbranch (idx 963): a staghorn coral on the
+// shore sand. (Indices 960-963 per the Director's index ruling:
+// main's kinds run …924-927 + 936-939; the parallel T56 claim
+// holds 948-951; 940-947 + 952-959 stay empty. Chars U+1E00+960..)
+// (Register: WAVE-T57-MARISOL-PLAN.md §5.)
+const T57_KIND_DEFS = [
+  ['dunefloor', 'floor'],
+  ['kelproof', 'wall'],
+  ['orangecrate', 'prop'],
+  ['coralbranch', 'prop'],
+];
+const T57_KIND_CHARS = {};
+T57_KIND_DEFS.forEach(([kind], i) => {
+  const ch = String.fromCodePoint(0x1E00 + 960 + i);
+  T57_KIND_CHARS[kind] = ch;
+  TILE_CHARS[ch] = kind;
+});
+const T57_PROP_KINDS = T57_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
+const T57_WALL_KINDS = T57_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
+const T57_FLOOR_KINDS = T57_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
 const SINNOH_TOWN_GROUND_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg);
 const SINNOH_TOWN_GROUND2_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg2);
 // TX-3: the 8 gym exteriors by town (original type-accent motifs).
@@ -112763,6 +112791,78 @@ const ART = {
     "ggGggggggrggggGg",
     "ggggggggrtrggggg"
   ] },
+  "tile-dunefloor": { w: 16, h: 16, pal: {"s":"#c1b184","m":"#b3a075","d":"#a89468","l":"#ded0ad","c":"#e8907c","g":"#f2ead2"}, rows: [
+    "ddddllllssssssss",
+    "ssssgcsssmssssss",
+    "smssssssgscsdddd",
+    "ssssddddllllgssc",
+    "llllssssssssssss",
+    "sscssssssssmssss",
+    "sssmssscddddllll",
+    "ddddllllsssscsss",
+    "sssgmsssssssssss",
+    "sssssssgssssdddd",
+    "ssssddddllllssss",
+    "llllssssscssssmg",
+    "ssssssmssssssscs",
+    "ssssssssddddllll",
+    "ddddllllssssssss",
+    "ssgssscsssssssss"
+  ] },
+  "tile-kelproof": { w: 16, h: 16, pal: {"g":"#1f6f6a","G":"#3d9c8f","D":"#14424a","b":"#b08d3e","B":"#7d5f24","w":"#bfe8d8"}, rows: [
+    "BbbBbbBbbBbbBbbB",
+    "bGGgggggbGGggggg",
+    "bGwgggggbGwggggg",
+    "bgggggggbggggggg",
+    "bggggggDbggggggD",
+    "bgggggDDbgggggDD",
+    "bggggDDDBggggDDD",
+    "bgggDDDDbgggDDDD",
+    "bbbbbbbbbbbbbbbb",
+    "BGGgggggbGGggggg",
+    "bGwgggggbGwggggg",
+    "bgggggggbggggggg",
+    "bggggggDbggggggD",
+    "bgggggDDbgggggDD",
+    "bggggDDDbggggDDD",
+    "bgggDDDDBgggDDDD"
+  ] },
+  "tile-prop-orangecrate": { w: 16, h: 16, pal: {"s":"#c6b388","S":"#d4c69c","o":"#e8862a","O":"#c96a1e","l":"#3f7a2e","w":"#a06a34","W":"#7d4f24","k":"#54331a","r":"#d9c9a0"}, rows: [
+    "SsSsSsSsSsSsSsSs",
+    "ssssssssssssssss",
+    "ssssssssssssssss",
+    "ssssssssssssssss",
+    "sssoolooolooosss",
+    "ssooolooolooolss",
+    "ssOOOlOOOlOOOlss",
+    "sSWwwwwWwwwwWWsS",
+    "ssWwwwwWwwwwWrss",
+    "ssWkkkkWkkkkWrss",
+    "ssWwwwwWwwwwWrss",
+    "ssWwwwwWwwwwWrss",
+    "ssWkkkkWkkkkWWss",
+    "ssWwwwwWwwwwWWss",
+    "SsSsSsSsSsSsSsSs",
+    "ssssssssssssssss"
+  ] },
+  "tile-prop-coralbranch": { w: 16, h: 16, pal: {"s":"#c6b388","S":"#d4c69c","W":"#b3a075","c":"#e58a7a","C":"#c96a5e","t":"#f4d9c8","h":"#f2ead2"}, rows: [
+    "SsSsSsSsSsSsSsSs",
+    "ssssssssssssssss",
+    "ssssssssssssssss",
+    "sssssssssstsssss",
+    "sssstssssscCstss",
+    "ssssCcstsssccCss",
+    "ssssscCcssscCsss",
+    "sSsSsCcSsScCsSsS",
+    "sssssscCssCcssss",
+    "sssssssccCcsssss",
+    "ssssssscCcssssss",
+    "ssssssssccssssss",
+    "sssssssscCssssss",
+    "ssssWWWWCcWWWsss",
+    "SsShWWWCCCWWWhSs",
+    "ssssWWWWWWWWWsss"
+  ] },
   "partner-back-bob": { base: "partner-back", w: 64, h: 64, pal: {}, shiftY: 2 },
   "partner-front-bob": { base: "partner-front", w: 64, h: 64, pal: {}, shiftY: 2 },
   "abomasnow-back-bob": { base: "abomasnow-back", w: 64, h: 64, pal: {}, shiftY: 2 },
@@ -118168,6 +118268,9 @@ for (const k of T55_FLOOR_KINDS) TILE_ART[k] = 'tile-' + k;
 for (const k of T56_PROP_KINDS) TILE_ART[k] = 'tile-prop-' + k;
 for (const k of T56_WALL_KINDS) TILE_ART[k] = 'tile-' + k;
 for (const k of T56_FLOOR_KINDS) TILE_ART[k] = 'tile-' + k;
+for (const k of T57_PROP_KINDS) TILE_ART[k] = 'tile-prop-' + k;
+for (const k of T57_WALL_KINDS) TILE_ART[k] = 'tile-' + k;
+for (const k of T57_FLOOR_KINDS) TILE_ART[k] = 'tile-' + k;
 // Premium+ W6 (TX-3/PL-1): door-open frames, authored in TX-3 for every
 // door kind. The warp-fade engine that plays them lands in W7 — W6
 // wires the frames (this registry + cache.doorOpen + doorOpenCanvas)
@@ -120089,6 +120192,12 @@ function resolveTileLayers(cache, kind, x, y, kindAt, t, phase, mapId) {
     // colours).
     case 'sunlounger':
     case 'palmshade':
+    // Wave T57: Marisol's orange crate and its shore coral
+    // composite over their sand the same way (both arts are
+    // fully opaque — the island sand is baked in at its
+    // measured colours).
+    case 'orangecrate':
+    case 'coralbranch':
     // Wave T17: the radio mast composites over its compound grass too.
     case 'radiomast': {
       // Object tiles carry transparent surrounds (Wave 1): lay the ground
@@ -127301,6 +127410,21 @@ const WALKABLE = new Set(['.', ',', 'D', 'E', 'C', 'F', 'J', 'K', '1', '2', 'V',
   // 912-915 (T53) + 924-927 (T54); the parallel T55 claim holds
   // 936-939; 940-947 stay empty.)
   ...[948]
+    .map((i) => String.fromCodePoint(0x1E00 + i)),
+  // Wave T57: the dunefloor char (U+1E00+960, tiles.mjs
+  // T57_KIND_DEFS) is walkable street material — Marisol's
+  // wind-rippled coral sand, swapped onto the island's whole
+  // shipped street blob (authored as the generic `path` sand)
+  // plus the surf-exit jetty head at the east edge, so floor
+  // stays floor. (Indices 960-963 per the Director's index
+  // ruling: main's kinds run 594-636 + 645-648 + 660-662 +
+  // 672-675 + 684-687 + 696-699 + 708-711 + 720-724 + 732-736 +
+  // 744-748 + 756-759 + 768-771 + 780-783 + 792-795 + 804-807 +
+  // 816-819 + 828-831 + 840-843 + 852-855 + 864-868 + 876-879 +
+  // 888-891 + 900-903 + 912-915 + 924-927 + 936-939; the
+  // parallel T56 claim holds 948-951; 940-947 + 952-959 stay
+  // empty.)
+  ...[960]
     .map((i) => String.fromCodePoint(0x1E00 + i))]);
 
 // Trainer definitions for the slice.
@@ -132807,23 +132931,24 @@ const MAPS5 = {
     "music": "viridian-theme",
     "rows": [
       "~~~~~~~~~~~~~~~~~~~~~~~~~~~~",
-      "~~~~~~~~~~~~~~~~~~~~~~~~~~~~",
-      "~~ẞdeeeefẞẞjklm‟ẞdeefẞẞabc~~",
-      "~~ẞZZ45ZZ―”AJKA.―P12P’ẞrst~~",
-      "~~ẞ†..................”...~~",
-      "~~‬.„........„............~~",
-      "~~ẞ‭ẞ†...n..‗ẞ†..ẟ...ẟẟẟẘ.~~",
-      "~~ẞ†”........ẘ...ẟ...ẟẟoẟ.~~",
-      "~~ẞ†,,,..ṃ.......ẟ...ẟẟẟẟ.~~",
-      "~~ẞ†,,,..........ẟ...oẟn‖.~~",
-      "~~ẞo..ẅ.....Fẟ...‖...ẟẟRẞ“~~",
-      "~~ẞẞṃ.....ẘ.ẟF..‟ẞ†..ẟẟẟ’ẞ~~",
-      "~~ẞ‚,,,..........”.S.,,,ẟẅ~~",
-      "~~ẞ‘,,,......„...ẟ..ẟ,,,‗ẞ~~",
-      "~~ẞ“‖....ṃ..‗ẞ†..ẘ..ẟ‖‖ẟ‛ẞ~~",
-      "~~ẞẞẞ†..oẞR..”......‗ẞẞ#ẞẞ~~",
-      "~~~~~~~~~~~~~~..~~~~~~~~~~~~",
-      "~~~~~~~~~~~~~~..~~~~~~~~~~~~"
+      "~~ẞẞẞẞẞẞẞẞẞẞẞẞẞẞẞẞẞẞẞẞẞẞẞẞẞ~",
+      "~~ẞ⇁⇁⇁⇁⇁⇁ẞẞjklm‟ẞdeefẞ⇂abcẞ~",
+      "~~ẞZZ45ZZS”AJKA⇀―P12P’ẞrstẞ~",
+      "~~ẞ†⇀⇀⇀⇀⇀⇀⇀⇀⇀⇀⇀⇀⇀⇀⇀⇀⇀⇀”⇀⇀⇀ẞ~",
+      "~~‬⇀„⇀⇀⇀⇀⇀⇀⇀⇀„⇀⇀⇀⇀⇀⇀⇀⇀⇀⇀⇀⇀~~",
+      "~~⇃‭ẞ†⇀⇀⇀n⇀⇀‗ẞ†⇀⇀⇀⇀⇀⇀ẟẟFẘ⇀~~",
+      "~~ẞS”⇀⇀⇀⇀⇀⇀⇀⇀ẘ⇀⇀⇀⇀⇀⇀⇀ẟFoS⇀~~",
+      "~~ẞẞ,,,⇀⇀ṃ⇀⇀⇀⇀⇀⇀⇀⇀⇀⇀⇀⇀⇀⇀⇀⇀⇀⇀",
+      "~~ẞẞ,,,⇀⇀⇀⇀⇀⇀⇀⇀⇀⇀⇀⇀⇀⇀oẟn⇀⇀⇀⇀",
+      "~~ẞo⇀⇀ẅ⇀⇀⇀⇀⇀⇀ẟ⇀⇀⇀⇀⇀⇀⇀ẟẟR⇃⇀~~",
+      "~~ẞẞṃ⇀⇀⇀⇀⇀ẘ⇀⇀⇀⇀⇀‟⇀†⇀⇀⇀⇀⇀⇀⇀~~",
+      "~~ẞ‚,,,⇀⇀⇀⇀⇀⇀⇀⇀⇀⇀”⇀S⇀,,,ẟẅ~~",
+      "~~ẞ‘,,,⇀⇀⇀⇀⇀⇀„⇀⇀⇀⇀⇀⇀ẟ,,,‗ẞ~~",
+      "~~ẞ“‖⇀⇀⇀⇀ṃ⇀⇀‗ẞ†⇀⇀ẘ⇀⇀ẟ‖‖ẟ‛ẞ~~",
+      "~~ẞẞẞ†⇀⇀oẞR⇀⇀”⇀⇀⇀⇀⇀⇀‗⇂ẞ#ẞẞ~~",
+      "~~~~~~~~~~~~~~⇀⇀~~~~~~~~~~~~",
+      "~~~~~~~~~~~~~~⇀⇀~~~~~~~~~~~~"
+
     ],
     "warps": [
       {
@@ -132943,6 +133068,11 @@ const MAPS5 = {
         "x": 3,
         "y": 7,
         "text": "MARISOL ISLAND — East: AMBER SEA — WEST."
+      },
+      {
+        "x": 24,
+        "y": 7,
+        "text": "MARISOL ISLAND — East: AMBER SEA — WEST."
       }
     ],
     "npcs": [
@@ -133021,8 +133151,8 @@ const MAPS5 = {
         ]
       },
       {
-        "x": 3,
-        "y": 5,
+        "x": 17,
+        "y": 4,
         "name": "MART CLERK",
         "art": "clerk",
         "skin": "#e8b888",
@@ -191594,6 +191724,6 @@ if (typeof Game !== 'undefined') Object.assign(Game.prototype, {
 });
 
 </script>
-<!-- contentHash:5666a608f880f07d0639acdb96cb43113f80b733a58ca6120212c58b27db5cc6 -->
+<!-- contentHash:cf5663b5274e09cfc0c12b613be027f6d614478f9574428b0a6e4c25d571af7f -->
 </body>
 </html>
