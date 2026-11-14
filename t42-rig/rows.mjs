@@ -1,17 +1,17 @@
-// Wave T40 rig: candidate twinleaf grid — the shipped rows plus
-// the declared change set of WAVE-T40-CLOVER-PLAN.md §6. Built
+// Wave T42 rig: candidate jubilife grid — the shipped rows plus
+// the declared change set of WAVE-T42-REVELRY-PLAN.md §6. Built
 // programmatically so no exotic char is ever transcribed by hand:
-// explicit overrides first (streets, roofs, cottages, sign tile,
-// props), then the blanket tg2 -> tg over every unclaimed cell.
+// explicit overrides first (streets, roofs, sign tiles, props),
+// then the blanket tg2 -> tg over every unclaimed cell.
 import { MAPS9 } from '../src/data/maps9.mjs';
-import { T40_KIND_CHARS, SINNOH_TOWN_CHARS } from '../src/engine/tiles.mjs';
+import { T42_KIND_CHARS, SINNOH_TOWN_CHARS } from '../src/engine/tiles.mjs';
 
-const shipped = MAPS9['twinleaf'];
-const TC = SINNOH_TOWN_CHARS['twinleaf'];
-const CF = T40_KIND_CHARS['cloverfloor'];
-const BR = T40_KIND_CHARS['battenroof'];
-const SAP = T40_KIND_CHARS['sapling'];
-const BED = T40_KIND_CHARS['cloverbed'];
+const shipped = MAPS9['jubilife'];
+const TC = SINNOH_TOWN_CHARS['jubilife'];
+const BF = T42_KIND_CHARS['beamfloor'];
+const BR = T42_KIND_CHARS['beamroof'];
+const CR = T42_KIND_CHARS['condoroof'];
+const ST = T42_KIND_CHARS['screentotem'];
 
 const grid = shipped.rows.map((r) => [...r]);
 export const CHANGES = [];
@@ -20,41 +20,47 @@ function set(x, y, ch, kind) {
   claimed.add(x + ',' + y);
   if (grid[y][x] !== ch) { grid[y][x] = ch; CHANGES.push({ x, y, to: kind }); }
 }
-const street = (x, y) => set(x, y, CF, 'cloverfloor');
+// street(): only shipped tg2 cells take the slab (dressing cells
+// inside a street range — the bikestand (19,4), the fence (14,12)
+// — are never claimed by a range).
+function street(x, y) { if (grid[y][x] === TC.tg2) set(x, y, BF, 'beamfloor'); }
 
-// --- streets (cloverfloor) ---
-for (let x = 1; x <= 26; x++) street(x, 4);              // front street
-for (let x = 0; x <= 27; x++) { street(x, 8); street(x, 9); } // through road
-for (const y of [5, 6, 7]) { street(1, y); street(13, y); }   // west arm + main lane N
-for (let y = 10; y <= 16; y++) street(13, y);            // main lane S (start cell (13,15) incl.)
-for (let x = 14; x <= 18; x++) street(x, 16);            // south lane
-street(7, 10);                                           // DIRS shoulder (road -> sign corner)
-street(8, 10); street(8, 11); street(8, 12);             // DIRS spur (x7,11 is a shipped planter — byte-kept)
-street(5, 10); street(5, 11); street(5, 12);             // plot lane: road -> the plot's north dot row
-street(2, 13); street(7, 13); street(7, 16);             // plot pinches: thread the W/E/S dot clusters (T30 threading lesson)
-street(22, 7);                                           // cottage A step-off
+// --- streets (beamfloor) ---
+for (let x = 2; x <= 23; x++) street(x, 4);                 // front street
+for (const [x, y] of [[13, 0], [14, 0], [13, 1], [14, 1], [13, 2], [14, 2], [13, 3], [14, 3]]) street(x, y); // north avenue + exits
+for (let x = 0; x <= 29; x++) { street(x, 8); street(x, 9); } // east-west avenue (exits incl.)
+for (let y = 5; y <= 19; y++) { street(13, y); street(14, y); } // south avenue + exits (13,19),(14,19)
+for (let x = 4; x <= 12; x++) street(x, 13);                // row 13 lateral W (condo landing)
+for (let x = 15; x <= 17; x++) street(x, 13);               // row 13 lateral E (MOSS row)
+street(11, 5); street(11, 6);                               // VESK lane (Mart via -> his post)
+for (let x = 3; x <= 24; x++) street(x, 18);                // south frontage street (anchors the south planters; threads the plot's south dots)
+set(23, 5, BF, 'beamfloor'); set(23, 6, BF, 'beamfloor'); set(23, 7, BF, 'beamfloor'); // house lane: the (20,4)-(23,4) strip is walled off the front street by the bikestand (19,4) + TV sign (24,4) — it joins the E-W avenue down x23 (tg cells paved as a lane)
+// plot threading (T30 lesson — the dots are network-tier; unthreaded clusters are islands):
+street(7, 14);                                              // east dot column (7,15),(7,16) -> cluster A via (6,14)
+street(3, 13); street(3, 14);                               // dot (3,15) -> row 13 lateral
+street(1, 14); street(2, 14); street(1, 15); street(1, 16); // west plot lane: dot (2,16) -> (3,14)
+street(5, 17);                                              // south dots (3,17),(4,17),(6,17) -> row 18 street
 
-// --- roofs (battenroof): the two houses' th cells + cottage roofs ---
-for (const x of [3, 4, 5, 8, 9, 10]) set(x, 2, BR, 'battenroof');
-for (const x of [21, 22, 23]) set(x, 5, BR, 'battenroof');   // cottage A roof
-for (const x of [17, 18, 19]) set(x, 14, BR, 'battenroof');  // cottage B roof
+// --- roofs: station tr -> beamroof; condo th -> condoroof ---
+for (const x of [15, 16, 17, 18]) set(x, 2, BR, 'beamroof');
+for (const x of [3, 4, 5]) set(x, 11, CR, 'condoroof');
 
-// --- cottage walls + doors (tw-twinleaf / door-house, no warps) ---
-set(21, 6, TC.tw, 'tw-twinleaf'); set(22, 6, 's', 'door-house'); set(23, 6, TC.tw, 'tw-twinleaf');
-set(17, 15, TC.tw, 'tw-twinleaf'); set(18, 15, 's', 'door-house'); set(19, 15, TC.tw, 'tw-twinleaf');
+// --- the seven invisible DIRS records gain their sign tiles ---
+for (const [x, y] of [[16, 12], [2, 17], [20, 2], [8, 16], [10, 16], [15, 16], [21, 16]]) set(x, y, 'S', 'sign');
 
-// --- the DIRS sign gains its tile ---
-set(7, 12, 'S', 'sign');
-// --- verbatim DIRS copy seat (validator round 1: junction (13,4) BARE) ---
-set(15, 5, 'S', 'sign');
+// --- verbatim DIRS copy tiles (validator-named bare junctions;
+// shoulders only — a sign ON the street punches the fabric, T22) ---
+set(12, 5, 'S', 'sign');
+set(6, 12, 'S', 'sign');
+set(2, 13, 'S', 'sign');
 
-// --- props ---
-set(11, 5, SAP, 'sapling'); set(16, 5, SAP, 'sapling');
-set(24, 1, BED, 'cloverbed'); set(2, 16, BED, 'cloverbed'); set(25, 13, BED, 'cloverbed');
+// --- props: the screen totem pair on the front lawn ---
+set(2, 4, ST, 'screentotem');
+set(25, 4, ST, 'screentotem');
 
 // --- blanket: every unclaimed tg2 cell -> tg ---
-for (let y = 0; y < 18; y++) for (let x = 0; x < 28; x++) {
-  if (!claimed.has(x + ',' + y) && grid[y][x] === TC.tg2) set(x, y, TC.tg, 'tg-twinleaf');
+for (let y = 0; y < 20; y++) for (let x = 0; x < 30; x++) {
+  if (!claimed.has(x + ',' + y) && grid[y][x] === TC.tg2) set(x, y, TC.tg, 'tg-jubilife');
 }
 
 export const ROWS = grid.map((r) => r.join(''));
