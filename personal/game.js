@@ -3863,6 +3863,33 @@ T61_KIND_DEFS.forEach(([kind], i) => {
 const T61_PROP_KINDS = T61_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
 const T61_WALL_KINDS = T61_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
 const T61_FLOOR_KINDS = T61_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
+// Wave T62 (Calamondin Island): the town's own kit kinds (Pool
+// Mosaic & Aqua Glaze) — indices 1020-1023 per the Director's
+// index ruling (main's kinds run through T60's 996-999; the
+// parallel T61 claim holds 1008-1011; 1000-1007 + 1012-1019
+// stay empty). mosaicfloor (idx 1020): a strict 4px lattice of
+// aqua-white pool tiles with aqua grout — the resort isle's
+// pool-terrace street; aquaroof (idx 1021): flat staggered
+// aqua-glaze slabs, worn by the Gym only, breaking the shipped
+// Gym/Mart roof-slate share; jadestar (idx 1022): the jade star
+// marker at the arena's flank; sunshade (idx 1023): a striped
+// resort sunshade on the dock row. Chars U+1E00+1020..
+// (Register: WAVE-T62-CALAMONDIN-PLAN.md §5.)
+const T62_KIND_DEFS = [
+  ['mosaicfloor', 'floor'],
+  ['aquaroof', 'wall'],
+  ['jadestar', 'prop'],
+  ['sunshade', 'prop'],
+];
+const T62_KIND_CHARS = {};
+T62_KIND_DEFS.forEach(([kind], i) => {
+  const ch = String.fromCodePoint(0x1E00 + 1020 + i);
+  T62_KIND_CHARS[kind] = ch;
+  TILE_CHARS[ch] = kind;
+});
+const T62_PROP_KINDS = T62_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
+const T62_WALL_KINDS = T62_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
+const T62_FLOOR_KINDS = T62_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
 const SINNOH_TOWN_GROUND_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg);
 const SINNOH_TOWN_GROUND2_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg2);
 // TX-3: the 8 gym exteriors by town (original type-accent motifs).
@@ -112536,6 +112563,78 @@ const ART = {
     "shhhhhhhhhhhhhhs",
     "ssssssssssSsssss"
   ] },
+  "tile-mosaicfloor": { w: 16, h: 16, pal: {"w":"#eef4f0","a":"#d8ece4","b":"#f2ecdc","g":"#6fae9f","A":"#57b8a6","d":"#a8d4c4"}, rows: [
+    "wwwgaaagbbbgaaag",
+    "wwwgaaagbbbgaaag",
+    "wdwgaaagbbbgaaag",
+    "gggggggggggggggg",
+    "aaagbbbgwwwgaaag",
+    "aaagbbbgwwwgaaag",
+    "aaagbbbgwwwgaaag",
+    "gggggggggggggggg",
+    "bbbgwwwgaaagAAAg",
+    "bbbgwwwgaaagAAAg",
+    "bbbgwwwgaaagAAAg",
+    "gggggggggggggggg",
+    "aaagaaagbbbgwwwg",
+    "aaagaaagbbbgwwwg",
+    "aaagaaagbbdgwwwg",
+    "gggggggggggggggg"
+  ] },
+  "tile-aquaroof": { w: 16, h: 16, pal: {"a":"#4aa8c0","l":"#8fd0dd","d":"#2a6a80","m":"#3d8fae"}, rows: [
+    "llllllllllllllll",
+    "aaaaadaaaadaaaaa",
+    "aaaaadaaaadaaaaa",
+    "aaaaadaaaadaaaaa",
+    "dddddddddddddddd",
+    "llllllllllllllll",
+    "aadaaaaaadaaaaad",
+    "aadaaaaaadaaaaad",
+    "aadaaaaaadaaaaad",
+    "dddddddddddddddd",
+    "llllllllllllllll",
+    "aaaaadaaaaadaaaa",
+    "aaaaadaaaaadaaaa",
+    "aaaaadaaaaadaaaa",
+    "dddddddddddddddd",
+    "mmmmmmmmmmmmmmmm"
+  ] },
+  "tile-prop-jadestar": { w: 16, h: 16, pal: {"s":"#c6b388","S":"#d4c69c","h":"#a69274","g":"#8f8f96","G":"#6e6e76","j":"#2fae72","J":"#1d7a4e","L":"#7fe0ae"}, rows: [
+    "ssssssssssssssss",
+    "ssSsssssssssssss",
+    "sssssssjjsssssss",
+    "ssssssjLLjssssss",
+    "sssssjjjjjjsssss",
+    "ssssssjjjjssssss",
+    "sssssjjJJjjsssss",
+    "sssssjjjjjjsssss",
+    "sssssssggsssssss",
+    "sssssssggsssssss",
+    "ssssssgGGgssssss",
+    "ssssssgGGgssssss",
+    "ssssssgGGgssssss",
+    "ssshhgggggghhsss",
+    "sshhhhhhhhhhhhss",
+    "ssssssssssSsssss"
+  ] },
+  "tile-prop-sunshade": { w: 16, h: 16, pal: {"s":"#c6b388","S":"#d4c69c","h":"#a69274","a":"#4aa8c0","w":"#f4f2ec","d":"#2a6a80","t":"#a8825a","l":"#8fd0dd"}, rows: [
+    "ssssssssssssssss",
+    "ssssaaaaaaaassss",
+    "saawwaawwaawwaas",
+    "aawwaawwaawwaaww",
+    "sdddddddddddddds",
+    "ssssssssasssssss",
+    "ssssssssasssssss",
+    "ssssssssasssssss",
+    "sssttttttttttsss",
+    "ssstwlwlwlwltsss",
+    "sssttttttttttsss",
+    "ssstssssssstssss",
+    "ssshhhhhhhhhhsss",
+    "sshhhhhhhhhhhhss",
+    "ssssssssssssssss",
+    "sssssssSssssssss"
+  ] },
   "tile-grovefloor": { w: 16, h: 16, pal: {"e":"#c79f66","m":"#b8905a","f":"#9a7440","l":"#dec084","L":"#4d8a34","p":"#e8862a"}, rows: [
     "Leeeeeeeeeeeeeee",
     "eeeeeeeeemeeeeee",
@@ -118190,6 +118289,9 @@ for (const k of T60_FLOOR_KINDS) TILE_ART[k] = 'tile-' + k;
 for (const k of T61_PROP_KINDS) TILE_ART[k] = 'tile-prop-' + k;
 for (const k of T61_WALL_KINDS) TILE_ART[k] = 'tile-' + k;
 for (const k of T61_FLOOR_KINDS) TILE_ART[k] = 'tile-' + k;
+for (const k of T62_PROP_KINDS) TILE_ART[k] = 'tile-prop-' + k;
+for (const k of T62_WALL_KINDS) TILE_ART[k] = 'tile-' + k;
+for (const k of T62_FLOOR_KINDS) TILE_ART[k] = 'tile-' + k;
 // Premium+ W6 (TX-3/PL-1): door-open frames, authored in TX-3 for every
 // door kind. The warp-fade engine that plays them lands in W7 — W6
 // wires the frames (this registry + cache.doorOpen + doorOpenCanvas)
@@ -120142,6 +120244,12 @@ function resolveTileLayers(cache, kind, x, y, kindAt, t, phase, mapId) {
     // colours).
     case 'rockspike':
     case 'gullrock':
+    // Wave T62: Calamondin's jade star and its resort sunshade
+    // composite over their sand the same way (both arts are
+    // fully opaque — the island sand is baked in at its
+    // measured colours).
+    case 'jadestar':
+    case 'sunshade':
     // Wave T17: the radio mast composites over its compound grass too.
     case 'radiomast': {
       // Object tiles carry transparent surrounds (Wave 1): lay the ground
@@ -127420,6 +127528,16 @@ const WALKABLE = new Set(['.', ',', 'D', 'E', 'C', 'F', 'J', 'K', '1', '2', 'V',
   // parallel T60 claim holds 996-999; 988-995 + 1000-1007
   // stay empty.)
   ...[1008]
+    .map((i) => String.fromCodePoint(0x1E00 + i)),
+  // Wave T62: the mosaicfloor char (U+1E00+1020, tiles.mjs
+  // T62_KIND_DEFS) is walkable street material — Calamondin's
+  // pool-mosaic street, swapped onto the island's whole shipped
+  // street graph (authored as the generic `path` dirt track)
+  // plus the SW surf-exit jetty root, so floor stays floor.
+  // (Indices 1020-1023 per the Director's index ruling: main's
+  // kinds run …996-999 (T60); the parallel T61 claim holds
+  // 1008-1011; 1000-1007 + 1012-1019 stay empty.)
+  ...[1020]
     .map((i) => String.fromCodePoint(0x1E00 + i))]);
 
 // Trainer definitions for the slice.
@@ -134629,21 +134747,22 @@ const MAPS5 = {
     "music": "viridian-theme",
     "rows": [
       "~~~~~~~~~~~~~~~~~~~~~~~~~~~~",
-      "~~~~~~~~~~~~~~~~~~~~~~~~~~~~",
-      "~~ẞdeefẞẞjklmẞ†deefẞẞabcẞẞ~~",
+      "~~ẞẞẞẞẞẞẞẞẞẞẞẞẞẞẞẞẞẞẞẞẞẞẞ~~~",
+      "~~ẞ⇽⇽⇽⇽ẞẞjklmẞ†deefẞẞabcẞẞ~~",
       "~~ẘUVYUS”AJKAẞ†P12P―ẘrst’ẞ~~",
-      "~~ẞ†.........”..........‗ẞ~~",
-      "~~‬...............„...„..”~~",
-      "~~ẞ†ẟ......„„...ẟ‟ẞ‘n‗ẞ‘ẟR~~",
-      "~~ẞ†.ẟ..nẟ‟ẞẞ‘..ẟ.―ẟẟ‗ẞ‘‗ẞ~~",
-      "~~ẞ†,,,....――Ẅ..ẟ.ẟẟẟẟ―ẟ‗ẞ~~",
-      "~~ẞ†,,,.ẚ..ẟẟ‖..‖.ẟẟẟẟẟẟ‗ẞ~~",
-      "~~ẞ†,,,..ẛ.ẟ‗ẞ†‟ẞ†ẟẛẟ,,,‗ẞ~~",
-      "~~―.,,,......”..”.ẛẟẟ,,,‗ẞ~~",
-      "~~..„.„......ẚ..ẟ.‖‖‖#ẟ‖‗ẞ~~",
-      "~~.‟ẞoẞẘ...ẚ.....Sẞẞẞẞ…ẞẛẞ~~",
-      "~~~~~~~~~~~~~~..~~~~~~~~~~~~",
-      "~~~~~~~~~~~~~~..~~~~~~~~~~~~"
+      "~~⇾†⇼⇼⇼⇼⇼⇼⇼⇼⇼”⇼⇼⇼⇼⇼⇼⇼⇼⇼⇼‗ẞ~~",
+      "~~‬⇼⇼⇼⇼⇼⇼⇼⇼⇼⇼⇼⇼⇼⇼⇼„⇼⇼⇼„⇼⇼”~~",
+      "~~⇼†S⇼⇼⇼⇼⇼⇼„„⇼⇼⇼ẟ‟ẞ‘n‗ẞ‘ẟR~~",
+      "~~⇼†⇼⇼⇼⇼nẟ‟ẞẞ‘⇼⇼ẟ⇼―ẟẟ‗ẞ‘‗ẞ~~",
+      "~~⇼†,,,⇼⇼⇼⇼――Ẅ⇼⇼ẟ⇼ẟẟẟẟ―ẟ‗ẞ~~",
+      "~~⇼†,,,⇼ẚ⇼⇼ẟẟ‖⇼⇼‖⇼ẟẟẟẟẟẟ‗ẞ~~",
+      "~~⇼†,,,⇼⇼ẛ⇼ẟ‗ẞ†‟ẞ†ẟẛẟ,,,‗ẞ~~",
+      "~~⇼⇼,,,⇼⇼S⇼⇼⇼”⇼⇼”⇼ẛẟẟ,,,‗ẞ~~",
+      "~~⇼⇼„⇼„⇼⇼⇼⇼⇼⇼ẚ⇼⇼ẟ⇼‖‖‖#ẟ‖‗ẞ~~",
+      "~~⇼‟⇼oẞẘ⇼⇼⇼ẚ⇼⇼⇼⇼⇼Sẞẞẞẞ…ẞẛ⇿~~",
+      "~~⇼⇼~~~~~~~~~~⇼⇼~~~~~~~~~~~~",
+      "~~⇼⇼~~~~~~~~~~⇼⇼~~~~~~~~~~~~"
+
     ],
     "warps": [
       {
@@ -134835,8 +134954,8 @@ const MAPS5 = {
         ]
       },
       {
-        "x": 3,
-        "y": 5,
+        "x": 15,
+        "y": 4,
         "name": "MART CLERK",
         "art": "clerk",
         "skin": "#e8b888",
