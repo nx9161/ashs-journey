@@ -537,6 +537,13 @@ export const WALKABLE = new Set(['.', ',', 'D', 'E', 'C', 'F', 'J', 'K', '1', '2
   // W-DIFF8 holds 629-632; T30 claims from 633 in parallel;
   // 606-607 stay empty.)
   ...[646, 647]
+  // Wave T32: the ashfloor char (U+1E00+661, tiles.mjs
+  // T32_KIND_DEFS) is walkable street material — Ashfall
+  // Town's swept-ash lane, swapped onto the town's street
+  // cells (which shipped as walkable tg2 mud), so floor
+  // stays floor. (Indices 660-662: main's ceiling was 636;
+  // 637-659 left clear for the parallel T31 Beacon claim.)
+  ...[661]
     .map((i) => String.fromCodePoint(0x1E00 + i))]);
 
 // Trainer definitions for the slice.

@@ -1362,6 +1362,26 @@ T31_KIND_DEFS.forEach(([kind], i) => {
 export const T31_PROP_KINDS = T31_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
 export const T31_WALL_KINDS = T31_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
 export const T31_FLOOR_KINDS = T31_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
+// Wave T32: Ashfall Town's own kit kinds (NO-SAME-KIT law;
+// WAVE-T32-ASHFALL-PLAN.md). Indices 660-662 — registered above
+// main's ceiling of 636 (594-636 all singly owned, 606-607 stay
+// empty) with 637-659 left clear for the parallel T31 Beacon
+// claim at 645-656; kind names timberroof/ashfloor/railfence
+// verified unclaimed.
+export const T32_KIND_DEFS = [
+  ['timberroof', 'wall'],
+  ['ashfloor', 'floor'],
+  ['railfence', 'prop'],
+];
+export const T32_KIND_CHARS = {};
+T32_KIND_DEFS.forEach(([kind], i) => {
+  const ch = String.fromCodePoint(0x1E00 + 660 + i);
+  T32_KIND_CHARS[kind] = ch;
+  TILE_CHARS[ch] = kind;
+});
+export const T32_PROP_KINDS = T32_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
+export const T32_WALL_KINDS = T32_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
+export const T32_FLOOR_KINDS = T32_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
 export const SINNOH_TOWN_GROUND_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg);
 export const SINNOH_TOWN_GROUND2_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg2);
 // TX-3: the 8 gym exteriors by town (original type-accent motifs).

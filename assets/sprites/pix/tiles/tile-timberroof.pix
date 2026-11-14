@@ -1,0 +1,35 @@
+# Wave T32 (Ashfall kit): timberroof — Ashfall's own roof kind.
+# WEATHERED-TIMBER PLANK ROOF: long horizontal grey-timber boards
+# (four planks per tile, end seams staggered, nail dots at the
+# seams) with pale ash settled in the board grooves. A plank roof
+# is structurally unlike every shipped roof: Lilac's/Fernmere's/
+# Mistford's shingle courses, Copperton's/Farsight's slabs,
+# Wildflower's rose lattice, Fairhaven's stitched canvas,
+# Eldergrove's banded thatch. Worn by the Contest Hall, Ando's
+# House and the town's two facade cottages — the painting's
+# ash-grey timber register. (NO-SAME-KIT law;
+# WAVE-T32-ASHFALL-PLAN.md.)
+PIX tile-timberroof 16 16
+llldllllllllllll
+bbbdnwbbbbbbbbbb
+bbbabbbbbbwbabbb
+dddddddddddddddd
+lllllllldlllllll
+bbbbbbbbdnbbwbbb
+abbbwbbbdabbbbbb
+dddddddddddddddd
+llllllllllllldll
+bbbbbbwbbbbbbdnb
+bbbbbbabbbbwbdba
+dddddddddddddddd
+lldlllllllllllll
+wbdnbbbbbbbbbwbb
+bbdabwbbbbbbabbb
+dddddddddddddddd
+PAL
+b #a39a90 timber-base
+l #bab2a6 timber-light
+d #6e675e groove
+w #8d8478 grain
+a #d9d3c5 settled-ash
+n #4e463c nail

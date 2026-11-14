@@ -1,0 +1,32 @@
+# Wave T32 (Ashfall kit): ashfloor — Ashfall's own street kind.
+# SWEPT ASH LANE: pale ash-cream gravel combed into long
+# wind-drift streaks running the tile's length, sparse dark
+# cinder flecks. A combed-drift surface: unlike Lilac's bronze
+# lattice grid, Wildflower's loose petal scatter, Fairhaven's
+# running-bond quay slabs, Copperton's square quarry flags,
+# Mistford's timber plank floor. The painting's pale paths,
+# drawn as the ash itself swept clean. (NO-SAME-KIT law;
+# WAVE-T32-ASHFALL-PLAN.md.)
+PIX tile-ashfloor 16 16
+cbbdbdddbdddpdbp
+dbcddbbbbbbbbbbl
+bbbbcbbblbbbbbbb
+blbbpbcpbddbdddb
+bdddbdddcddbbbbb
+dbbbbbbbblcbbbbb
+bblbbpbbpbbpclpb
+bbbbbblbdddbddcb
+bdddbdddbblbbbbb
+pbblbbpbbpbbpblp
+bbbbbbblbbbbbdbd
+lbbbdddbdddlddbb
+bdddldbpbbpbbpbl
+bbbbbbbblbbbbbbb
+blbbbbbbbbbdddbd
+bcdbdddbdddpbbpb
+PAL
+b #ded4bd ash-base
+l #eae3cf drift-crest
+d #c2b394 drift-shade
+p #ada184 pebble
+c #57503f cinder

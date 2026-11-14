@@ -1,0 +1,32 @@
+# Wave T32 (Ashfall kit): railfence — Ashfall's own prop kind.
+# SPLIT-RAIL FENCE segment: two weathered posts, two horizontal
+# split rails with ash dust settled on the top rail, standing on
+# the town's ground (measured kit lawn #1f871a baked in, the
+# T29/T30 prop method). The painting's most repeated dressing
+# element — fences around every house and field. Fully opaque.
+# Seats: the ash fields' west frame, beside the collector's
+# gate. (NO-SAME-KIT law; WAVE-T32-ASHFALL-PLAN.md.)
+PIX tile-prop-railfence 16 16
+GgggggggGggggggg
+gggGgggggggGgggg
+ggggggGgggggggGg
+gdaagggggGggdaag
+adttllallllldttl
+tdttttttdtttdttt
+ddttdddddddddttd
+gdttgGggggggdttg
+GdttggggGgggdttg
+gdttgggggggGdttg
+adttllallllldttl
+tdttdtttttttdttt
+ddttdddddddddttd
+gdttgggGggggdttG
+gdttggggggGgdttg
+gdttgGggggggdttg
+PAL
+g #1f871a ground
+G #1f511a ground-speckle
+t #7a6a55 timber
+l #97836a timber-light
+d #5d4f3d timber-shade
+a #d9d3c5 settled-ash
