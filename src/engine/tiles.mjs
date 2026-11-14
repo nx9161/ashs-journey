@@ -2368,6 +2368,33 @@ T61_KIND_DEFS.forEach(([kind], i) => {
 export const T61_PROP_KINDS = T61_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
 export const T61_WALL_KINDS = T61_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
 export const T61_FLOOR_KINDS = T61_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
+// Wave T62 (Calamondin Island): the town's own kit kinds (Pool
+// Mosaic & Aqua Glaze) — indices 1020-1023 per the Director's
+// index ruling (main's kinds run through T60's 996-999; the
+// parallel T61 claim holds 1008-1011; 1000-1007 + 1012-1019
+// stay empty). mosaicfloor (idx 1020): a strict 4px lattice of
+// aqua-white pool tiles with aqua grout — the resort isle's
+// pool-terrace street; aquaroof (idx 1021): flat staggered
+// aqua-glaze slabs, worn by the Gym only, breaking the shipped
+// Gym/Mart roof-slate share; jadestar (idx 1022): the jade star
+// marker at the arena's flank; sunshade (idx 1023): a striped
+// resort sunshade on the dock row. Chars U+1E00+1020..
+// (Register: WAVE-T62-CALAMONDIN-PLAN.md §5.)
+export const T62_KIND_DEFS = [
+  ['mosaicfloor', 'floor'],
+  ['aquaroof', 'wall'],
+  ['jadestar', 'prop'],
+  ['sunshade', 'prop'],
+];
+export const T62_KIND_CHARS = {};
+T62_KIND_DEFS.forEach(([kind], i) => {
+  const ch = String.fromCodePoint(0x1E00 + 1020 + i);
+  T62_KIND_CHARS[kind] = ch;
+  TILE_CHARS[ch] = kind;
+});
+export const T62_PROP_KINDS = T62_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
+export const T62_WALL_KINDS = T62_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
+export const T62_FLOOR_KINDS = T62_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
 export const SINNOH_TOWN_GROUND_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg);
 export const SINNOH_TOWN_GROUND2_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg2);
 // TX-3: the 8 gym exteriors by town (original type-accent motifs).

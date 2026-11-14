@@ -1,0 +1,27 @@
+# Wave T62 (Calamondin): a striped aqua-and-white resort sunshade with a lounger beneath, on the island sand baked in at its measured colours (#c6b388/#d4c69c). Fully opaque. (WAVE-T62-CALAMONDIN-PLAN.md §5.)
+PIX tile-prop-sunshade 16 16
+ssssssssssssssss
+ssssaaaaaaaassss
+saawwaawwaawwaas
+aawwaawwaawwaaww
+sdddddddddddddds
+ssssssssasssssss
+ssssssssasssssss
+ssssssssasssssss
+sssttttttttttsss
+ssstwlwlwlwltsss
+sssttttttttttsss
+ssstssssssstssss
+ssshhhhhhhhhhsss
+sshhhhhhhhhhhhss
+ssssssssssssssss
+sssssssSssssssss
+PAL
+s #c6b388 island sand
+S #d4c69c sand speckle
+h #a69274 contact shadow
+a #4aa8c0 shade aqua
+w #f4f2ec shade white
+d #2a6a80 shade teal
+t #a8825a lounger wood
+l #8fd0dd lounger stripe

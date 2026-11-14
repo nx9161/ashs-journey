@@ -1,0 +1,23 @@
+# Wave T62 (Calamondin): aqua glaze slab — flat staggered slabs of pool-aqua ceramic, pale glaze top edges, deep teal joints. Worn by the Gym only. (NO-SAME-KIT law; WAVE-T62-CALAMONDIN-PLAN.md §5.)
+PIX tile-aquaroof 16 16
+llllllllllllllll
+aaaaadaaaadaaaaa
+aaaaadaaaadaaaaa
+aaaaadaaaadaaaaa
+dddddddddddddddd
+llllllllllllllll
+aadaaaaaadaaaaad
+aadaaaaaadaaaaad
+aadaaaaaadaaaaad
+dddddddddddddddd
+llllllllllllllll
+aaaaadaaaaadaaaa
+aaaaadaaaaadaaaa
+aaaaadaaaaadaaaa
+dddddddddddddddd
+mmmmmmmmmmmmmmmm
+PAL
+a #4aa8c0 aqua slab
+l #8fd0dd glaze light
+d #2a6a80 joint teal
+m #3d8fae slab shade

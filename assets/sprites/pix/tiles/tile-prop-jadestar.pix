@@ -1,0 +1,27 @@
+# Wave T62 (Calamondin): the jade star marker — a jade-green star plaque on a short stone post, on the island sand baked in at its measured colours (#c6b388/#d4c69c). Fully opaque. (WAVE-T62-CALAMONDIN-PLAN.md §5.)
+PIX tile-prop-jadestar 16 16
+ssssssssssssssss
+ssSsssssssssssss
+sssssssjjsssssss
+ssssssjLLjssssss
+sssssjjjjjjsssss
+ssssssjjjjssssss
+sssssjjJJjjsssss
+sssssjjjjjjsssss
+sssssssggsssssss
+sssssssggsssssss
+ssssssgGGgssssss
+ssssssgGGgssssss
+ssssssgGGgssssss
+ssshhgggggghhsss
+sshhhhhhhhhhhhss
+ssssssssssSsssss
+PAL
+s #c6b388 island sand
+S #d4c69c sand speckle
+h #a69274 contact shadow
+g #8f8f96 stone
+G #6e6e76 stone shade
+j #2fae72 jade
+J #1d7a4e jade shade
+L #7fe0ae jade light

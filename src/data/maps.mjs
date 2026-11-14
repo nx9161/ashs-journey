@@ -917,6 +917,16 @@ export const WALKABLE = new Set(['.', ',', 'D', 'E', 'C', 'F', 'J', 'K', '1', '2
   // parallel T60 claim holds 996-999; 988-995 + 1000-1007
   // stay empty.)
   ...[1008]
+    .map((i) => String.fromCodePoint(0x1E00 + i)),
+  // Wave T62: the mosaicfloor char (U+1E00+1020, tiles.mjs
+  // T62_KIND_DEFS) is walkable street material — Calamondin's
+  // pool-mosaic street, swapped onto the island's whole shipped
+  // street graph (authored as the generic `path` dirt track)
+  // plus the SW surf-exit jetty root, so floor stays floor.
+  // (Indices 1020-1023 per the Director's index ruling: main's
+  // kinds run …996-999 (T60); the parallel T61 claim holds
+  // 1008-1011; 1000-1007 + 1012-1019 stay empty.)
+  ...[1020]
     .map((i) => String.fromCodePoint(0x1E00 + i))]);
 
 // Trainer definitions for the slice.

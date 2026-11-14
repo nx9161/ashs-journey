@@ -1,0 +1,25 @@
+# Wave T62 (Calamondin): pool mosaic — a strict 4px lattice of small pool tiles, pale aqua-white faces in three tints, aqua grout, one deep aqua accent block. The resort isle’s pool-terrace street. (NO-SAME-KIT law; WAVE-T62-CALAMONDIN-PLAN.md §5.)
+PIX tile-mosaicfloor 16 16
+wwwgaaagbbbgaaag
+wwwgaaagbbbgaaag
+wdwgaaagbbbgaaag
+gggggggggggggggg
+aaagbbbgwwwgaaag
+aaagbbbgwwwgaaag
+aaagbbbgwwwgaaag
+gggggggggggggggg
+bbbgwwwgaaagAAAg
+bbbgwwwgaaagAAAg
+bbbgwwwgaaagAAAg
+gggggggggggggggg
+aaagaaagbbbgwwwg
+aaagaaagbbbgwwwg
+aaagaaagbbdgwwwg
+gggggggggggggggg
+PAL
+w #eef4f0 pool white
+a #d8ece4 aqua white
+b #f2ecdc sand white
+g #6fae9f aqua grout
+A #57b8a6 accent aqua
+d #a8d4c4 face shade
