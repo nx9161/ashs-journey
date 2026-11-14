@@ -2417,6 +2417,61 @@ T26_KIND_DEFS.forEach(([kind], i) => {
 const T26_PROP_KINDS = T26_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
 const T26_WALL_KINDS = T26_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
 const T26_FLOOR_KINDS = T26_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
+// ---- Wave W-DIFF5 (identity retrofit): Bramble + Tidewall ----
+// Four new kinds at idx 602-605 (U+205A-U+205D, verified free
+// in TILE_CHARS and unused by every map row; the block runs
+// T23 575, W-DIFF 577-580, W-DIFF2 581-584, T24 585-587,
+// T25 588-591, WD3 592-593, W-DIFF4 594-597, T26 598-601).
+// The last closest pair where BOTH towns still wear the
+// shared kit (audit A.3 #9, 0.0669; 0.0872 on the current
+// tree) gets the identity table's own kits (W-DIFF-AUDIT
+// Phase B). Bramble City (TOWN_STYLE fuchsia: ground
+// #c47ba4, form 'safari thatch') — 'Thatch & Marsh':
+// 'marshfloor' (floor) — weathered marsh-timber boardwalk
+// sections, the town's street fabric (STREET_REGISTRY; the
+// fleet's street kinds carry the -floor suffix the desire-
+// path tiers key on), swapped onto the street cells; the
+// marsh-landing shore (south row + exits) stays sand path,
+// the table's '+ sand'. 'safariroof' (wall) — bundled
+// safari thatch in the KIT_VARIANTS fuchsia roof tones,
+// swapped onto the house + Preserve gatehouse roofs; the
+// Center/Mart/Gym stamps keep their shipped roofs entire.
+// The table's ground treatment (tg + marshbog patches)
+// rides the existing S3B floor kind: five tg cells along
+// the south pools become marshbog, two marshreed props
+// (existing S3B prop kind) stand at the bog's north edge.
+// Tidewall City (JOHTO_TOWN_STYLE cianwood: ground
+// #b8a878, form 'rustic island stone') — 'Driftwood &
+// Surf Stone': 'driftfloor' (floor) — bleached driftwood
+// pier planks, the inland street fabric (STREET_REGISTRY),
+// swapped onto the street + pier-approach cells; the
+// shore promenade (rows 13-14) stays sand path, the
+// table's '+ sand'. 'surfroof' (wall) — rustic island
+// stone courses in warm grey, swapped onto the house
+// roofs (the pharmacy's included, like every house roof);
+// the gym's tr- roof + terrace, the Center's roof-center
+// and the Mart's roof-slate stamps keep their shipped
+// roofs entire. The table's herb gardens are T19's
+// shipped fenced flowerbed plots flanking the pharmacy —
+// byte-kept. Authored art: assets/sprites/pix/tiles/
+// tile-marshfloor.pix, tile-safariroof.pix,
+// tile-driftfloor.pix, tile-surfroof.pix
+// (register: your_files/w-diff5/GRADE.md).
+const WD5_KIND_DEFS = [
+  ['marshfloor', 'floor'],
+  ['safariroof', 'wall'],
+  ['driftfloor', 'floor'],
+  ['surfroof', 'wall'],
+];
+const WD5_KIND_CHARS = {};
+WD5_KIND_DEFS.forEach(([kind], i) => {
+  const ch = String.fromCodePoint(0x1E00 + 602 + i);
+  WD5_KIND_CHARS[kind] = ch;
+  TILE_CHARS[ch] = kind;
+});
+const WD5_PROP_KINDS = WD5_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
+const WD5_WALL_KINDS = WD5_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
+const WD5_FLOOR_KINDS = WD5_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
 const SINNOH_TOWN_GROUND_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg);
 const SINNOH_TOWN_GROUND2_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg2);
 // TX-3: the 8 gym exteriors by town (original type-accent motifs).
@@ -108426,6 +108481,78 @@ const ART = {
     "aaaaaaaabaaaaaaa",
     "dddddddddddddddd",
   ] },
+  "tile-marshfloor": { w: 16, h: 16, pal: {"a":"#8a6f4d","b":"#6b543a","c":"#a8895f","d":"#54402c","e":"#7d8b5a"}, rows: [
+    "ccacccacacccaccc",
+    "abaaabaaabadbaab",
+    "aaaaaaabaaadbaaa",
+    "ebbbbdbbbbbbdedb",
+    "cacccccacccccaac",
+    "baaadabaaaaaaaaa",
+    "baaadbaaaaaaabaa",
+    "bbbbbbbbdebbbdbb",
+    "ccccaccccacacaca",
+    "aaaaaaaaaaabadaa",
+    "aaaaaaaaaaaaadba",
+    "edbbbbebbebbbebb",
+    "aaaccaaccaaccacc",
+    "aaabaadaaabaaaaa",
+    "aaaaaadaaaaaaaaa",
+    "ebbbdbedbebebdbb",
+  ] },
+  "tile-safariroof": { w: 16, h: 16, pal: {"a":"#b08d4f","b":"#6e5626","c":"#cfa860","d":"#8d5f2b","e":"#e0c078"}, rows: [
+    "bccccbbbcccccccc",
+    "aaaeeabaaaaaeaaa",
+    "ddbdddddbddbdddd",
+    "ccccccccccccbbcc",
+    "bbaaaaaaaaaeaaba",
+    "ddbbdbdddbbddbdb",
+    "bccccccbccbccbcc",
+    "aabaaaaeaaaaaaab",
+    "bddddbddbdbbddbd",
+    "ccbcccccccbccccc",
+    "aaaaaaaeaaaaaaaa",
+    "ddddddddddddbddb",
+    "ccccccccccbbcccc",
+    "eabbaaeaabeaabaa",
+    "dddbbdddddbddddb",
+    "bbbbbbbbbbbbbbbb",
+  ] },
+  "tile-driftfloor": { w: 16, h: 16, pal: {"a":"#a89a7d","b":"#7e7260","c":"#c2b498","d":"#655c4c","e":"#8fa39a"}, rows: [
+    "cacccccacccccacc",
+    "abaaadeaaeaaaaaa",
+    "aaabadabeaabaaaa",
+    "ddddddddddbddddd",
+    "cccccccccccccccc",
+    "baeaaaaaaaaadaaa",
+    "aaaaaaaaeabadaba",
+    "ddddbdddddddddbd",
+    "caccccccccacacca",
+    "aaadaaaaaabaaaaa",
+    "ebadababaaaaaaaa",
+    "dddddddbdddbdddb",
+    "ccacaccacacccccc",
+    "eaaaaababadaaaaa",
+    "abaaaaaabedabaaa",
+    "bdddddbbdddddddd",
+  ] },
+  "tile-surfroof": { w: 16, h: 16, pal: {"a":"#7d7468","b":"#5d554c","c":"#9a9084","d":"#b0a696","e":"#4c463f"}, rows: [
+    "cccccbcaaccbaccc",
+    "aaaaabaaaaabaaaa",
+    "aaaaabaaaaabaaaa",
+    "bebeebebeeeeebee",
+    "aabcacaabacacabc",
+    "aabadaaabadaaaba",
+    "babaaaaababaaabb",
+    "eebebeeebbeeebeb",
+    "ccacaabaaaacbcaa",
+    "aaaaaabaaaaabaaa",
+    "aaaaaabaaadabaab",
+    "eeeeebbeeeeeeeee",
+    "accbcacaabcacacb",
+    "aadbbaaaabaaaaab",
+    "aaabaaaaabaaaaab",
+    "eebeeeeeeeebeeee",
+  ] },
   "partner-back-bob": { base: "partner-back", w: 64, h: 64, pal: {}, shiftY: 2 },
   "partner-front-bob": { base: "partner-front", w: 64, h: 64, pal: {}, shiftY: 2 },
   "abomasnow-back-bob": { base: "abomasnow-back", w: 64, h: 64, pal: {}, shiftY: 2 },
@@ -113676,6 +113803,10 @@ for (const k of WD4_FLOOR_KINDS) TILE_ART[k] = 'tile-' + k;
 for (const k of T26_PROP_KINDS) TILE_ART[k] = 'tile-prop-' + k;
 for (const k of T26_WALL_KINDS) TILE_ART[k] = 'tile-' + k;
 for (const k of T26_FLOOR_KINDS) TILE_ART[k] = 'tile-' + k;
+// Wave W-DIFF5: Bramble's marshfloor/safariroof + Tidewall's driftfloor/surfroof kit kinds.
+for (const k of WD5_PROP_KINDS) TILE_ART[k] = 'tile-prop-' + k;
+for (const k of WD5_WALL_KINDS) TILE_ART[k] = 'tile-' + k;
+for (const k of WD5_FLOOR_KINDS) TILE_ART[k] = 'tile-' + k;
 
 // Premium+ W6 (TX-3/PL-1): door-open frames, authored in TX-3 for every
 // door kind. The warp-fade engine that plays them lands in W7 — W6
@@ -114221,6 +114352,7 @@ function buildArtTileCache(doc) {
   for (const k of WD_FLOOR_KINDS) cache[k + 'Variants'] = ids(['tile-' + k]);
   for (const k of WD3_FLOOR_KINDS) cache[k + 'Variants'] = ids(['tile-' + k]);
   for (const k of WD4_FLOOR_KINDS) cache[k + 'Variants'] = ids(['tile-' + k]);
+  for (const k of WD5_FLOOR_KINDS) cache[k + 'Variants'] = ids(['tile-' + k]);
   cache.foundationVariants = ids(['tile-foundation-1', 'tile-foundation-2', 'tile-foundation-3']);
   // P-1 side walls: the SAME authored art rasterized through a palette
   // swap that darkens every hex by one full shade step (x0.72 — the
@@ -114489,6 +114621,7 @@ for (const k of S3B_FLOOR_KINDS) FLOOR_VARIANTS[k] = k + 'Variants';
 for (const k of WD_FLOOR_KINDS) FLOOR_VARIANTS[k] = k + 'Variants';
 for (const k of WD3_FLOOR_KINDS) FLOOR_VARIANTS[k] = k + 'Variants';
 for (const k of WD4_FLOOR_KINDS) FLOOR_VARIANTS[k] = k + 'Variants';
+for (const k of WD5_FLOOR_KINDS) FLOOR_VARIANTS[k] = k + 'Variants';
 // Wave 5a: interior floor kinds are ground families of their own (a prop
 // inside a Center stands on Center floor, never on grass or path), and
 // interior walls cast the shared shadow strip onto the floor below.
@@ -114545,7 +114678,7 @@ function groundFamilyOf(kind) {
   // psand kinds stand on path (props composite over the parent ground).
   if (kind && kind.startsWith('beach-')) return 'tropgrass';
   if (kind && kind.startsWith('psand-')) return 'path';
-  if (kind && (W6_FLOOR_KINDS.includes(kind) || O1_FLOOR_KINDS.includes(kind) || J3_FLOOR_KINDS.includes(kind) || H3_FLOOR_KINDS.includes(kind) || H3B_FLOOR_KINDS.includes(kind) || S3_FLOOR_KINDS.includes(kind) || S3B_FLOOR_KINDS.includes(kind) || WD_FLOOR_KINDS.includes(kind) || WD3_FLOOR_KINDS.includes(kind) || WD4_FLOOR_KINDS.includes(kind))) return kind; // W6/O1/J3/H3/H3B/S3/S3B/WD/WD3/WD4 floors are own families
+  if (kind && (W6_FLOOR_KINDS.includes(kind) || O1_FLOOR_KINDS.includes(kind) || J3_FLOOR_KINDS.includes(kind) || H3_FLOOR_KINDS.includes(kind) || H3B_FLOOR_KINDS.includes(kind) || S3_FLOOR_KINDS.includes(kind) || S3B_FLOOR_KINDS.includes(kind) || WD_FLOOR_KINDS.includes(kind) || WD3_FLOOR_KINDS.includes(kind) || WD4_FLOOR_KINDS.includes(kind) || WD5_FLOOR_KINDS.includes(kind))) return kind; // W6/O1/J3/H3/H3B/S3/S3B/WD/WD3/WD4/WD5 floors are own families
   if (kind && (kind.startsWith('tg-') || kind.startsWith('tg2-'))) return kind; // W5: town ground is its own family
   if (kind && (kind.startsWith('tc-') || kind.startsWith('td-') || kind.startsWith('flora-'))) return 'grass';
   if (kind === 'grass' || kind === 'grassground' || kind === 'flower' || kind === 'tree' || kind === 'rock' || kind === 'sign' ||
@@ -122263,6 +122396,13 @@ const WALKABLE = new Set(['.', ',', 'D', 'E', 'C', 'F', 'J', 'K', '1', '2', 'V',
   // 598-601 per the Director's index ruling: W-DIFF4 holds
   // 594-597.)
   ...[599, 601]
+    .map((i) => String.fromCodePoint(0x1E00 + i)),
+  // Wave W-DIFF5: the marshfloor char (U+1E00+602, tiles.mjs
+  // WD5_KIND_DEFS) is walkable street material, swapped 1:1
+  // from the walkable '.' path char in Bramble City, and the
+  // driftfloor char (U+1E00+604) likewise in Tidewall City,
+  // so floor stays floor in both.
+  ...[602, 604]
     .map((i) => String.fromCodePoint(0x1E00 + i))]);
 
 // Trainer definitions for the slice.
@@ -124005,19 +124145,19 @@ const MAPS2 = {
   fuchsia: {
     id: 'fuchsia', name: 'Bramble City', music: 'viridian-theme',
     rows: rows([
-      'ÓÓÓÓÓÓÓÓ..ÓÓÓÓÓÓÓÓÓÓ',
-      'ÓÈÈÈÈÈÈÈ..ÈÈÈÈÈÈÈÈÈÓ',
-      'ÓÈēēēÈÈẉ..ÈûḆḆḆḆûÈÈÓ',
-      'ÓÈīwīÈÈÈ..ÈÈḆVYḆÈÈÈÓ',
-      'Ó..................Ó',
-      'Ó...................',
-      'ÓÈÈÈÈ.ééééÈ.ēôēÈÈÈÈÓ',
-      'ÓÈÈÈÈ.AJKAÈ.P12ÈÈÈÈÓ',
-      'Ó...............ẌÈÈÓ',
-      'Ó..................Ó',
-      'Ópēēē.ēēēē›.ÈēēēẍÈÈÓ',
-      'Ópīīw.ī78ī..ÈīwīÈÈÈÓ',
-      'Óp~~ûÈ.....È~~ûÈûÈÈÓ',
+      'ÓÓÓÓÓÓÓÓ⁚⁚ÓÓÓÓÓÓÓÓÓÓ',
+      'ÓÈÈÈÈÈÈÈ⁚⁚ÈÈÈÈÈÈÈÈÈÓ',
+      'ÓÈ⁛⁛⁛ÈÈẉ⁚⁚ÈûḆḆḆḆûÈÈÓ',
+      'ÓÈīwīÈÈÈ⁚⁚ÈÈḆVYḆÈÈÈÓ',
+      'Ó⁚⁚⁚⁚⁚⁚⁚⁚⁚⁚⁚⁚⁚⁚⁚⁚⁚⁚Ó',
+      'Ó⁚⁚⁚⁚⁚⁚⁚⁚⁚⁚⁚⁚⁚⁚⁚⁚⁚⁚⁚',
+      'ÓÈÈÈÈ⁚ééééÈ⁚ēôēÈÈÈÈÓ',
+      'ÓÈÈÈÈ⁚AJKAÈ⁚P12ÈÈÈÈÓ',
+      'Ó⁚⁚⁚⁚⁚⁚⁚⁚⁚⁚⁚⁚⁚⁚⁚ẌÈÈÓ',
+      'Ó⁚⁚⁚⁚⁚⁚⁚⁚⁚⁚⁚⁚⁚⁚⁚⁚⁚⁚Ó',
+      'Óp⁛⁛⁛⁚⁛⁛⁛⁛›⁚È⁛⁛⁛ẍÈÈÓ',
+      'Ópīīw⁚ī78ī⁚⁚‑īwīÈÈÈÓ',
+      'Óp~~ûÈ.....‑~~û‌û‌‌Ó',
       'Ó~~~~~~~..~~~~~~~~~Ó'
     ]),
     warps: [
@@ -125862,19 +126002,19 @@ const MAPS3 = {
   fuchsia: {
     id: 'fuchsia', name: 'Bramble City', music: 'viridian-theme',
     rows: rows([
-      'ÓÓÓÓÓÓÓÓ..ÓÓÓÓÓÓÓÓÓÓ',
-      'ÓÈÈÈÈÈÈÈ..ÈÈÈÈÈÈÈÈÈÓ',
-      'ÓÈēēēÈÈẉ..ÈûḆḆḆḆûÈÈÓ',
-      'ÓÈīwīÈÈÈ..ÈÈḆVYḆÈÈÈÓ',
-      'Ó..................Ó',
-      'Ó...................',
-      'ÓÈÈÈÈ.ééééÈ.ēôēÈÈÈÈÓ',
-      'ÓÈÈÈÈ.AJKAÈ.P12ÈÈÈÈÓ',
-      'Ó...............ẌÈÈÓ',
-      'Ó..................Ó',
-      'Ópēēē.ēēēē›.ÈēēēẍÈÈÓ',
-      'Ópīīw.ī78ī..ÈīwīÈÈÈÓ',
-      'Óp~~ûÈ.....È~~ûÈûÈÈÓ',
+      'ÓÓÓÓÓÓÓÓ⁚⁚ÓÓÓÓÓÓÓÓÓÓ',
+      'ÓÈÈÈÈÈÈÈ⁚⁚ÈÈÈÈÈÈÈÈÈÓ',
+      'ÓÈ⁛⁛⁛ÈÈẉ⁚⁚ÈûḆḆḆḆûÈÈÓ',
+      'ÓÈīwīÈÈÈ⁚⁚ÈÈḆVYḆÈÈÈÓ',
+      'Ó⁚⁚⁚⁚⁚⁚⁚⁚⁚⁚⁚⁚⁚⁚⁚⁚⁚⁚Ó',
+      'Ó⁚⁚⁚⁚⁚⁚⁚⁚⁚⁚⁚⁚⁚⁚⁚⁚⁚⁚⁚',
+      'ÓÈÈÈÈ⁚ééééÈ⁚ēôēÈÈÈÈÓ',
+      'ÓÈÈÈÈ⁚AJKAÈ⁚P12ÈÈÈÈÓ',
+      'Ó⁚⁚⁚⁚⁚⁚⁚⁚⁚⁚⁚⁚⁚⁚⁚ẌÈÈÓ',
+      'Ó⁚⁚⁚⁚⁚⁚⁚⁚⁚⁚⁚⁚⁚⁚⁚⁚⁚⁚Ó',
+      'Óp⁛⁛⁛⁚⁛⁛⁛⁛›⁚È⁛⁛⁛ẍÈÈÓ',
+      'Ópīīw⁚ī78ī⁚⁚‑īwīÈÈÈÓ',
+      'Óp~~ûÈ.....‑~~û‌û‌‌Ó',
       'Ó~~~~~~~..~~~~~~~~~Ó'
     ]),
     warps: [
@@ -139530,21 +139670,21 @@ const MAPS6 = {
     "music": "viridian-theme",
     "rows": [
       "ủủủỨủủủủủủỨủủủủủủủủủủủủủỨủủủ",
-      "ủụụụụụụụụụụụụụụụụụụụ.......ủ",
-      "ủụabcụnpừừừnpụụụụụụụ..ứXứứ.ủ",
-      "ủụrstụnpỬsỬnpụụụụụụụ..UVYU.ủ",
-      "ủ..........................ủ",
-      "ủụụụS.oụụụụụụụụụoụụS.9.9ụRRủ",
-      "ủụụụụ.ụụụụụụụụụụụụụụ.9.9oRRủ",
-      "ủụdef.jklmụdeefụabcn.......ủ",
-      "ủụxyz.AJKAụP12PụtsrpụụụụS...",
-      "ủ...........................",
-      "ủụụụụS.ụụoụụụụụủủụụoẍ,,,,.ụủ",
-      "ủụụừừừ.ụụụabcụụủủừừừừ,,,ụ.ụủ",
-      "ủụnỬsỬ.ụẄụvwvụụụẄỬsỬỬụụụụ.ụủ",
+      "ủụụụụụụụụụụụụụụụụụụụ⁜⁜⁜⁜⁜⁜⁜ủ",
+      "ủụabcụnp⁝⁝⁝npụụụụụụụ⁜⁜ứXứứ⁜ủ",
+      "ủụrstụnpỬsỬnpụụụụụụụ⁜⁜UVYU⁜ủ",
+      "ủ⁜⁜⁜⁜⁜⁜⁜⁜⁜⁜⁜⁜⁜⁜⁜⁜⁜⁜⁜⁜⁜⁜⁜⁜⁜⁜ủ",
+      "ủụụụS⁜oụụụụụụụụụoụụS⁜9⁜9ụRRủ",
+      "ủụụụụ⁜ụụụụụụụụụụụụụụ⁜9⁜9oRRủ",
+      "ủụdef⁜jklmụdeefụabcn⁜⁜⁜⁜⁜⁜⁜ủ",
+      "ủụxyz⁜AJKAụP12PụtsrpụụụụS⁜⁜⁜",
+      "ủ⁜⁜⁜⁜⁜⁜⁜⁜⁜⁜⁜⁜⁜⁜⁜⁜⁜⁜⁜⁜⁜⁜⁜⁜⁜⁜⁜",
+      "ủụụụụS⁜ụụoụụụụụủủụụoẍ,,,,⁜ụủ",
+      "ủụụ⁝⁝⁝⁜ụụụabcụụủủ⁝⁝⁝⁝,,,ụ⁜ụủ",
+      "ủụnỬsỬ⁜ụẄụvwvụụụẄỬsỬỬụụụụ⁜ụủ",
       "ủ..........................ủ",
       "ủR.........................ủ",
-      "ủ~R~~~~~~~~...S~~~~~~~~~~~~ủ",
+      "ủ~R~~~~~~~~⁜⁜⁜S~~~~~~~~~~~~ủ",
       "ủ~~~~~~~~~~~ἇἇ~~~~~~~~~~~~~ủ",
       "ủ~~~~~~~~~~″ἇἇ~~~~~~~~~~~~~ủ"
     ],
