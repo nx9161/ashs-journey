@@ -1,0 +1,25 @@
+# Wave W-DIFF9: Signal City avenue flags - dark brick-asphalt flags, worn pale centre dash (full-bleed, solid).
+PIX tile-tramfloor 16 16
+abbaaebcaaaaaaac
+aaabbaacaabaabac
+baaaabbcbaaaaaac
+aaabaaaceaabaabc
+aaaabaacaababaac
+eaeaaaacaabaaaac
+aaaaaaacbeaaaabc
+cccccddddddccccc
+abaaaddddddaebbc
+abaaaaacaaaeaaac
+eaabeabcabaabaac
+aaabaaacaaaaabac
+aaaaabbcabaaaaac
+eaaaeaacabaaaaac
+aabaaaacaaaaaaec
+cccccccccccccccc
+
+PAL
+a #6a4a42 brick-asphalt
+b #59403a asphalt-fleck
+c #45322e flag-joint
+d #cbb59a centre-dash
+e #7d584c brick-glint

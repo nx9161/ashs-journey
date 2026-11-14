@@ -1,0 +1,24 @@
+# Wave W-DIFF9: Signal City urban-brick slab roof, LEFT of pair - parapet lip on the west edge (full-bleed, solid).
+PIX tile-mastlroof 16 16
+dcbaababbaaaaaaa
+dcbaaaaaaabaaaab
+dcbaaaaaaabaaaba
+dcabbaabababbaaa
+dcbabbaaabaabaaa
+dcbaabaaaabaaaaa
+dcbabbbaaaaaaaab
+dcaaaaaaaaaaabaa
+dcaaaaabbabaaaaa
+dcabbbabbbbaaaaa
+dcaaaaaababbaaaa
+dcababbbaaaaaaba
+dcaaaaaaaaabbaaa
+dcaaaaabaabaaaba
+dcaabbababaaaabb
+dcaaaaaaaaaacccc
+
+PAL
+a #9a4a3a brick-slab
+b #8a4034 slab-course
+c #6e3229 lip-shadow
+d #c47a5c parapet-lip

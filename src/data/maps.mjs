@@ -959,6 +959,16 @@ export const WALKABLE = new Set(['.', ',', 'D', 'E', 'C', 'F', 'J', 'K', '1', '2
   // on this base; the parallel T64 claim holds 1044-1047;
   // 1036-1043 + 1048-1055 stay empty.)
   ...[1056]
+    .map((i) => String.fromCodePoint(0x1E00 + i)),
+  // Wave W-DIFF9: the strandfloor char (U+1E00+1068, tiles.mjs
+  // WD9_KIND_DEFS) is walkable street material — Dawnwick's
+  // swept shore-strand bands, swapped 1:1 from the walkable
+  // '.' path char in Dawnwick, and the tramfloor char
+  // (U+1E00+1070) likewise in Signal City, so floor stays
+  // floor in both. (Indices 1068-1072 per the Director's
+  // index ruling: main's kinds run through T65's 1056-1059;
+  // 1048-1055 + 1060-1067 stay empty.)
+  ...[1068, 1070]
     .map((i) => String.fromCodePoint(0x1E00 + i))]);
 
 // Trainer definitions for the slice.

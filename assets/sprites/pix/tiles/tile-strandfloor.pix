@@ -1,0 +1,25 @@
+# Wave W-DIFF9: Dawnwick shore-strand - swept sand bands with shell flecks (full-bleed, solid).
+PIX tile-strandfloor 16 16
+caaabbabcabaebaa
+aaababcbaabbbbca
+abbbcbaaaabacbaa
+bacabaababcaabba
+cbbbbeaecbabaabb
+babaabcabbdbaacb
+baaacbabbbabcbaa
+bbcbdaaaabcbbbba
+cbabadabcbaababb
+bababbcabaaaaacb
+aadbcbdbabaacbbb
+abcabbabbacaaabb
+cbbbbbaacabababa
+abbbbbcaaaababca
+bbbadaabababcbaa
+bbcbaababacabbba
+
+PAL
+a #d9c28c strand-sand
+b #cdb37e strand-shade
+c #b89e66 sweep-edge
+d #f2e6c4 shell-pale
+e #e3b7a0 shell-pink

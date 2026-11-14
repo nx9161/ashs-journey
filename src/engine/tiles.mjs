@@ -2486,6 +2486,49 @@ T65_KIND_DEFS.forEach(([kind], i) => {
 export const T65_PROP_KINDS = T65_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
 export const T65_WALL_KINDS = T65_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
 export const T65_FLOOR_KINDS = T65_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
+// Wave W-DIFF9 (identity retrofit, pair 9): Dawnwick (pallet) +
+// Signal City (goldenrod) — the closest pair among the five
+// remaining shared-kit towns on the W-DIFF census re-run on main
+// 3443ca0d (composite 0.1098; plan WAVE-WDIFF9-PLAN.md §1).
+// Dawnwick: 'Shore-Sand & Terracotta Hip' (the identity table's
+// own entry) realised as NEW kinds — 'strandfloor' (idx 1068):
+// shore sand laid as swept strand bands with shell flecks, the
+// starting town's street, distinct in texture from the generic
+// path sand it replaces and from every registered sand family;
+// 'hiproof' (idx 1069): a true hipped terracotta roof slope (hip
+// ridge + eave foot) for the town's th- house roofs (TOWN_STYLE
+// pallet form literally reads 'hipped terracotta'). The dock's
+// boardwalk, the shore sand and the sea — the reference elements
+// — stay exactly as shipped, as do the T1 chalkmap barn door and
+// every warp/post/sign. Signal City: 'Urban Brick & Mast' — the
+// table names brickfloor for the street, but brickfloor is
+// Cinder Town's kiln brick (W-DIFF4, registered to azalea), so
+// per the W-DIFF6 amendment rule Signal takes a distinct variant
+// in the same register: 'tramfloor' (idx 1070): broad avenue
+// flags of dark brick-asphalt with a worn pale centre dash;
+// 'mastlroof' (idx 1071) / 'mastrroof' (idx 1072): the matched
+// left/right pair of flat urban-brick slab roofs with parapet
+// lip, worn by the tl-/tr-goldenrod rooflines (Signal's
+// buildings carry no th- kind). Indices 1068-1072 per the
+// Director's index ruling: main's kinds run through T65's
+// 1056-1059; gaps 1048-1055 + 1060-1067 stay empty. Kind names
+// verified unclaimed. Chars U+1E00+1068..
+export const WD9_KIND_DEFS = [
+  ['strandfloor', 'floor'],
+  ['hiproof', 'wall'],
+  ['tramfloor', 'floor'],
+  ['mastlroof', 'wall'],
+  ['mastrroof', 'wall'],
+];
+export const WD9_KIND_CHARS = {};
+WD9_KIND_DEFS.forEach(([kind], i) => {
+  const ch = String.fromCodePoint(0x1E00 + 1068 + i);
+  WD9_KIND_CHARS[kind] = ch;
+  TILE_CHARS[ch] = kind;
+});
+export const WD9_PROP_KINDS = WD9_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
+export const WD9_WALL_KINDS = WD9_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
+export const WD9_FLOOR_KINDS = WD9_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
 export const SINNOH_TOWN_GROUND_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg);
 export const SINNOH_TOWN_GROUND2_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg2);
 // TX-3: the 8 gym exteriors by town (original type-accent motifs).

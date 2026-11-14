@@ -1,0 +1,24 @@
+# Wave W-DIFF9: Dawnwick hipped terracotta roof - rounded courses, hip ridge cap, deep eave foot (full-bleed, solid).
+PIX tile-hiproof 16 16
+dddddddddddddddd
+caaacaabcaaacaab
+cbbbcaaacaabcaba
+cccccccccccccccc
+dddddddddddddddd
+caabcaaacabacbab
+cbaacabacaaacabb
+cccccccccccccccc
+dddddddddddddddd
+caaacaaacaaacbaa
+cbaacaabcaaacaaa
+cccccccccccccccc
+dddddddddddddddd
+cabacaaacbbacaaa
+cbaacaaacbabcaaa
+cccccccccccccccc
+
+PAL
+a #b5623f terracotta
+b #a55436 terracotta-deep
+c #8a4230 course-shadow
+d #d18a5f course-light
