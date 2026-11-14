@@ -2472,6 +2472,62 @@ WD5_KIND_DEFS.forEach(([kind], i) => {
 const WD5_PROP_KINDS = WD5_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
 const WD5_WALL_KINDS = WD5_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
 const WD5_FLOOR_KINDS = WD5_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
+// ---- Wave T27 (Mistford Town build): Surf-Teal Island ----
+// Five new kinds at idx 608-612 (U+2060-U+2064, verified free
+// in TILE_CHARS and unused by every map row; the block runs
+// T23 575, W-DIFF 577-580, W-DIFF2 581-584, T24 585-587,
+// T25 588-591, WD3 592-593, W-DIFF4 594-597, T26 598-601,
+// W-DIFF5 602-607 — marshfloor, safariroof, driftfloor,
+// surfroof, marshbog, marshreed for Bramble + Tidewall.
+// Mistford was first registered at 602-606 and RE-INDEXED to
+// 608-612 under the Director's index ruling of 2026-11-13
+// (W-DIFF5 finished first); the dewford map cells were
+// remapped losslessly, 79 cells, counts verified per kind —
+// the W-DIFF3/T24 precedent). Mistford is Maris's surf
+// island (HOENN_TOWN_STYLE dewford: ground #74aca4, form
+// 'island surf shack'); its shipped ground was 36.1% tg2 mud
+// (the twenty-first mud town) under a placement-gates FAIL, its
+// wet-sand beach kind rendered as brown striping, its MART
+// CLERK orphaned again and five direction signs invisible.
+// Its own kit (NO-SAME-KIT law): 'shackroof' (wall) — weathered
+// surf-teal wood shakes with irregular splits, bleached streaks
+// and a driftwood ridge, in the KIT_VARIANTS dewford roof
+// tones; structurally shake + ridge, not Meadowbrook's small
+// staggered sage stone shingles, Copperton's copper-seamed
+// slabs or Eldergrove's thatch. 'plankfloor' (floor) — salt-
+// bleached boardwalk planks, the town's street fabric and
+// registered street kind (STREET_REGISTRY; the fleet's street
+// kinds carry the -floor suffix the desire-path tiers key on),
+// swapped onto every street/exit/landing cell. 'barbells'
+// (prop) — Enzo's irons outside the gym (the backstory audit's
+// prescription), fully opaque with the meadow baked in, at
+// (15,5) and (18,5). 'chalkboard' (prop) — the hall's trendy-
+// phrase board, chalk marks and NO text (the audit's proposed
+// board line was never backend data; the phrase itself is
+// TRENDWATCHER IO's dialogue), fully opaque with the meadow
+// baked in, at (9,11) beside IO's post. 'barrels' (prop) — the
+// approved painting's Mart barrels, fully opaque with the
+// meadow baked in, at (8,3) beside the Mart stamp. Authored
+// art: assets/sprites/pix/tiles/tile-shackroof.pix,
+// tile-plankfloor.pix, tile-prop-barbells.pix,
+// tile-prop-chalkboard.pix, tile-prop-barrels.pix (register:
+// WAVE-T27-MISTFORD-PLAN.md).
+const T27_KIND_DEFS = [
+  ['shackroof', 'wall'],
+  ['plankfloor', 'floor'],
+  ['barbells', 'prop'],
+  ['chalkboard', 'prop'],
+  ['barrels', 'prop'],
+];
+const T27_KIND_CHARS = {};
+T27_KIND_DEFS.forEach(([kind], i) => {
+  const ch = String.fromCodePoint(0x1E00 + 608 + i);
+  T27_KIND_CHARS[kind] = ch;
+  TILE_CHARS[ch] = kind;
+});
+const T27_PROP_KINDS = T27_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
+const T27_WALL_KINDS = T27_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
+const T27_FLOOR_KINDS = T27_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
 const SINNOH_TOWN_GROUND_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg);
 const SINNOH_TOWN_GROUND2_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg2);
 // TX-3: the 8 gym exteriors by town (original type-accent motifs).
@@ -91930,6 +91986,24 @@ const ART = {
     "pppppppppppppppp",
     "pppppppppppppppp",
   ] },
+  "tile-plankfloor": { w: 16, h: 16, pal: {"p":"#c2b294","l":"#d6c8a8","d":"#8a7a5c","n":"#6e5f45","t":"#4fa3a5"}, rows: [
+    "lppplppplppplppp",
+    "ppppppnpptpppppp",
+    "ppdppppppppppdpp",
+    "dddddddddddddddd",
+    "lppplppplpplpppl",
+    "pppppptpppppppnp",
+    "ppppppdppppppppp",
+    "dddddddddddddddd",
+    "lppplppplppplppp",
+    "ppnppppptppppppp",
+    "ppppppppppdppppp",
+    "dddddddddddddddd",
+    "lpplppplppplpplp",
+    "pppptpppppppppnp",
+    "ppdppppppppppdpp",
+    "dddddddddddddddd"
+  ] },
   "tile-plantfloor-1": { w: 16, h: 16, pal: {"g":"#373f4b","z":"#373f4b","c":"#89909d","m":"#6b6b76"}, rows: [
     "gggggggggggggggg",
     "gggggggggggggggg",
@@ -92144,6 +92218,24 @@ const ART = {
     "................",
     "................",
   ] },
+  "tile-prop-barbells": { w: 16, h: 16, pal: {"g":"#15891e","G":"#1a9622","h":"#0e7016","s":"#3a3f44","p":"#23262a","P":"#565c62","r":"#9aa0a4"}, rows: [
+    "gGgggggggGgggggg",
+    "gggggGgggggggGgg",
+    "gGggggggggggGggg",
+    "gggggggggGgggggg",
+    "gggggGgggggggggg",
+    "gGggggggggGggggg",
+    "gggggggggggggGgg",
+    "gppggggggggggppg",
+    "pPPpggggggggpPPp",
+    "pPPpsssssssspPPp",
+    "pPPpsrrrrrrspPPp",
+    "pPPpggggggggpPPp",
+    "gppghhhhhhhhgppg",
+    "gggghhhhhhhhgggg",
+    "gGgggggggggggGgg",
+    "gggggGgggGgggggg"
+  ] },
   "tile-prop-barrel": { w: 16, h: 16, pal: {"W":"#726648","w":"#71523d","L":"#8e755b","k":"#3f3f49"}, rows: [
     "................",
     "................",
@@ -92161,6 +92253,24 @@ const ART = {
     ".....WWWWWW.....",
     ".....wwwwww.....",
     "................",
+  ] },
+  "tile-prop-barrels": { w: 16, h: 16, pal: {"g":"#15891e","G":"#1a9622","w":"#a97c50","W":"#7d5a36","h":"#4a4d52","t":"#c49a68"}, rows: [
+    "gGgggggggggggGgg",
+    "ggggggGggggggggg",
+    "gggggggggGgggggg",
+    "gggggggggttttggg",
+    "gggggggggwwwwwwg",
+    "ggttttgggwwwWwwg",
+    "ggwwwwgggwwwWwwg",
+    "ggwwwWgggwwwWwwg",
+    "gghhhhggghhhhhhg",
+    "ggwwwwgggwwwWwwg",
+    "ggwwwWgggwwwWwwg",
+    "ggwwwwggghhhhhhg",
+    "ggwwwwgggggggggg",
+    "gghhhhgggggggggg",
+    "gggggGggggggggGg",
+    "gGggggggGggggggg"
   ] },
   "tile-prop-basketstack": { w: 16, h: 16, pal: {"B":"#b99b74","D":"#8e755b","L":"#d7bd97","A":"#a96152","C":"#5681bd"}, rows: [
     "................",
@@ -92535,6 +92645,24 @@ const ART = {
     "....bb....bb....",
     "................",
     "................",
+  ] },
+  "tile-prop-chalkboard": { w: 16, h: 16, pal: {"g":"#15891e","G":"#1a9622","f":"#8a6f4d","F":"#6b543a","b":"#2e3a3a","c":"#e8e4da","C":"#b9c4bd"}, rows: [
+    "gGggggggGggggggg",
+    "ggggggGggggggGgg",
+    "ggggffffffffgggg",
+    "ggggfbbbbbbbfggg",
+    "ggggfbccccccbfgg",
+    "ggggfbcccCccbfgg",
+    "ggggfbcCccccbfgg",
+    "ggggfbccccCcbfgg",
+    "ggggfbccccccbfgg",
+    "ggggfbbbbbbbfggg",
+    "ggggffffffffgggg",
+    "gggFFggggggFFggg",
+    "ggFFggggggggFFgg",
+    "gFFggggggggggFFg",
+    "gGggggggGggggggg",
+    "ggggggGggggggGgg"
   ] },
   "tile-prop-chalkmap": { w: 16, h: 16, pal: {"k":"#202028","w":"#71523d","c":"#3a4149","h":"#e8e8e0","p":"#5a3a24","s":"#4a4a3a"}, rows: [
     "................",
@@ -93847,6 +93975,24 @@ const ART = {
     "ssspppppppppssss",
     "ssDssssssssDssss",
     "ssssssssssssssss"
+  ] },
+  "tile-shackroof": { w: 16, h: 16, pal: {"t":"#4fa3a5","l":"#79c2c0","d":"#2f6e70","s":"#1f4a4c","r":"#8a6f4d","R":"#6b543a"}, rows: [
+    "rRrrRrrrrrrrRrRr",
+    "dddddddddddddddd",
+    "ltlttttltlttlttt",
+    "tttdttttltldtttt",
+    "tttdltltttldltlt",
+    "ltldttttttldtttt",
+    "tttdltltltldtttt",
+    "tttdttttttldtttt",
+    "ssssddddssssdddd",
+    "ltttlttlttlttltt",
+    "tttttdtttttttdtt",
+    "ltlttdttttlttdtt",
+    "tttttdttlttttdtt",
+    "lttttdtttttttdtl",
+    "ttlttdtttttttdtt",
+    "dddddddddddddddd"
   ] },
   "tile-thatchroof": { w: 16, h: 16, pal: {"g":"#c2a054","L":"#d9bc76","S":"#856830","D":"#6e5626"}, rows: [
     "gLggLgLggLggLgLg",
@@ -113807,6 +113953,11 @@ for (const k of T26_FLOOR_KINDS) TILE_ART[k] = 'tile-' + k;
 for (const k of WD5_PROP_KINDS) TILE_ART[k] = 'tile-prop-' + k;
 for (const k of WD5_WALL_KINDS) TILE_ART[k] = 'tile-' + k;
 for (const k of WD5_FLOOR_KINDS) TILE_ART[k] = 'tile-' + k;
+// Wave T27: Mistford's barbells + chalkboard + barrels draw their
+// prop art; its shake roofs + boardwalk kit kinds theirs.
+for (const k of T27_PROP_KINDS) TILE_ART[k] = 'tile-prop-' + k;
+for (const k of T27_WALL_KINDS) TILE_ART[k] = 'tile-' + k;
+for (const k of T27_FLOOR_KINDS) TILE_ART[k] = 'tile-' + k;
 
 // Premium+ W6 (TX-3/PL-1): door-open frames, authored in TX-3 for every
 // door kind. The warp-fade engine that plays them lands in W7 — W6
@@ -115568,6 +115719,12 @@ function resolveTileLayers(cache, kind, x, y, kindAt, t, phase, mapId) {
     // the same way (its art is fully opaque — the cutstone
     // court is baked in).
     case 'travstone':
+    // Wave T27: Mistford's gym barbells, the hall's chalkboard and
+    // the Mart's barrels composite over their green the same way
+    // (their art is fully opaque — the meadow is baked in).
+    case 'barbells':
+    case 'chalkboard':
+    case 'barrels':
     // Wave T17: the radio mast composites over its compound grass too.
     case 'radiomast': {
       // Object tiles carry transparent surrounds (Wave 1): lay the ground
@@ -122403,6 +122560,12 @@ const WALKABLE = new Set(['.', ',', 'D', 'E', 'C', 'F', 'J', 'K', '1', '2', 'V',
   // driftfloor char (U+1E00+604) likewise in Tidewall City,
   // so floor stays floor in both.
   ...[602, 604]
+    .map((i) => String.fromCodePoint(0x1E00 + i)),
+  // Wave T27: the plankfloor char (U+1E00+609, tiles.mjs
+  // T27_KIND_DEFS) is walkable street material — Mistford's
+  // boardwalk, swapped onto the town's street cells (which
+  // shipped as walkable tg2 mud), so floor stays floor.
+  ...[609]
     .map((i) => String.fromCodePoint(0x1E00 + i))]);
 
 // Trainer definitions for the slice.
@@ -145889,23 +146052,23 @@ const MAPS7 = {
     "music": "viridian-theme",
     "weather": "clear",
     "rows": [
-      "ἮἮἮἯἮἮἮἮἮἮἯἮἮ~~ἮἮἮἯἮἮἮἮἮἮἯἮἮ",
-      "RRRRRRRRRRRRRἭἭRRRRRRRRRLLRR",
-      "ἮἬFjklmἬἬdeefἭἭἰἰἰἰἯἬἲἲἲἭἭSἮ",
-      "ἮἬἬAJKAἬἬP12PἭἭUVYUἬἬἳsἳἭἭἭἮ",
-      "ἮFἭἭἭἭἭἭἭἭἭἭἭἭἭἭἭἭἭἭἭἭἭἭἭἭἭἮ",
-      "ἮἬἭἭἭἭἭἭἭἭἭἭἭἭἭἭἭἭἭἭἭἭἭἭἬἬἭἮ",
-      "ἮoἭἭἭἭFFFἭṃἭἭἭἭἭἭἭἭἭἭἭἭἬἬἯἭἮ",
-      "ἮSἭṃἭἭἯooἭἭἭἭἭἭἭἭἭἭἭἭἭἭἭFἯἭἮ",
-      "ἬoἭἭἭἭἭἭἭἭἭἭἭἭἭἭἭἭἭἭἭἭἭἭἭἭἭἭ",
-      "ἬἬἭἭἭἭἭἭἭἭἭἭἭἭἭἭἭἭἭἭἭἭἭἭἭἭἭἭ",
-      "ἮFἭἬ....ἭἭἭἭἬἭἭἭἭἭẐἭἭἭἬἭἬFἭἮ",
-      "ἮἭἭ.,,,,.ἭἭἭἭἭἭἭἭἭἭἭἭἭἭἭἭἬἭἮ",
+      "ἮἮἮἯἮἮἮἮἮἮἯἮἮ⁡⁡ἮἮἮἯἮἮἮἮἮἮἯἮἮ",
+      "RRFRRRRRRRRRR⁡⁡RRRRRRRRRLLRR",
+      "ἮἬFjklmἬἬdeef⁡⁡⁠⁠⁠⁠ἯἬ⁠⁠⁠⁡⁡SἮ",
+      "ἮἬἬAJKAἬ⁤P12P⁡⁡UVYUἬἬἳsἳ⁡⁡ἬἮ",
+      "Ἦ⁡⁡⁡⁡⁡⁡⁡⁡⁡⁡⁡⁡⁡⁡⁡⁡⁡⁡⁡⁡⁡⁡⁡⁡⁡⁡Ἦ",
+      "ἮἬἬἬἬ⁡SἬἬἬἬἬS⁡Ἤ⁢ἬἬ⁢ἬἬἬἬἬἬ⁡ἬἮ",
+      "ἮoἬἬἬ⁡⁡⁡⁡ἬṃἬἬ⁡ἬἬἬἬἬἬἬἬἬἬἬ⁡ἬἮ",
+      "ἮSἬṃἬ⁡ἯooἬἬἬἬ⁡ἬἬἬἬἬἬἬἬἬἬS⁡⁡Ἦ",
+      "Ἤo⁠⁠⁠⁡ἬἬἬἬἬἬἬ⁡ἬἬἬἬἬἬἬἬἬ⁠⁠⁠⁡⁡",
+      "ἬἬἳsἳ⁡ἬSἬἬἬἬἬ⁡ἬἬἬἬἬἬἬἬἬἳsἳ⁡⁡",
+      "ἮFSἬ....⁡ἬἬἬἬ⁡ἬἬἬἬẐἬἬἬSἬἬFἬἮ",
+      "ἮἬἬ.,,,,.⁣ἬἬἬ⁡ἬἬἬἬἬἬἬἬἬἬἬἬἬἮ",
       "Ἦ„Ἤ„,,,,o„„„„„„„„Ẑ„„S„ṃṄ„Ἤ„Ἦ",
-      "Ἦẞẞẞ“‖‖‛ẞẞ„„„„„„„„„ẞẞ„ẞẞẞẞẞἮ",
-      "Ἦẞẞẞ„„ẞẞẞẞ„ẞẞẞẞẞẞẞ„ẞẞ„ẞẞẞẞẞἮ",
-      "Ἦẞẞẞ„„„„„„„„„„„„„„„„„„ẞẞẞẞẞἮ",
-      "ἮẞẞẞẞẞẞẞẞẞẞẞẞẞẞẞẞẞẞẞẞẞẞẞẞẞẞἮ",
+      "Ἦ„„„“‖‖‛ẞ„„„„„„„„„„„„„„„„„„Ἦ",
+      "Ἦ„„„„„„„„„„„„„„„„„„„„„„„„„„Ἦ",
+      "Ἦ„„„„S„„„„S„„„„„„S„„„„„„„„„Ἦ",
+      "Ἦ„„„„„„„„„„„„„„„„„„„„„„„„„„Ἦ",
       "ἮἮἮἯἮἮἮἮἮἮἯἮἮἮἮἮἮἯἮἮἮἮἮἮἬἮἮἮ"
     ],
     "warps": [
@@ -145927,17 +146090,21 @@ const MAPS7 = {
       {"x": 26, "y": 2, "text": "CAIRN CAVE — The island’s dark heart, north of town. What glitters in there is not all stone."},
       {"x": 1, "y": 7, "text": "MISTFORD TOWN — A tiny island community with a fighting spirit. The hall posts what is trendy; the island decides what is true."},
       {"x": 20, "y": 12, "text": "MISTFORD BEACH — The boat from Route 104 ties up along this shore, and the surf road east runs to Fairhaven."},
-      {"x": 1, "y": 9, "text": "MISTFORD TOWN — North: ROUTE 106 · East: ROUTE 107."},
+      {"x": 2, "y": 10, "text": "MISTFORD TOWN — North: ROUTE 106 · East: ROUTE 107."},
       {"x": 22, "y": 10, "text": "MISTFORD TOWN — North: ROUTE 106 · East: ROUTE 107."},
       {"x": 10, "y": 15, "text": "MISTFORD TOWN — North: ROUTE 106 · East: ROUTE 107."},
       {"x": 17, "y": 15, "text": "MISTFORD TOWN — North: ROUTE 106 · East: ROUTE 107."},
-      {"x": 5, "y": 15, "text": "MISTFORD TOWN — North: ROUTE 106 · East: ROUTE 107."}
+      {"x": 5, "y": 15, "text": "MISTFORD TOWN — North: ROUTE 106 · East: ROUTE 107."},
+      {"x": 12, "y": 5, "text": "MISTFORD TOWN — North: ROUTE 106 · East: ROUTE 107."},
+      {"x": 24, "y": 7, "text": "MISTFORD TOWN — North: ROUTE 106 · East: ROUTE 107."},
+      {"x": 6, "y": 5, "text": "MISTFORD TOWN — North: ROUTE 106 · East: ROUTE 107."},
+      {"x": 7, "y": 9, "text": "MISTFORD TOWN — North: ROUTE 106 · East: ROUTE 107."}
     ],
     "npcs": [
       {"x": 18, "y": 15, "name": "BOATMAN SULA", "art": "sailor", "skin": "#e8b888", "shirt": "#3a6ac0", "pants": "#2a3a4a", "hair": "#1a1a1a", "dialogue": ["My run is the Fairhaven crossing by way of the surf roads — or straight across my bow, your choice.", "No tickets, no fuss. The island provides."], "ferry": "slateport"},
       {"x": 10, "y": 11, "name": "TRENDWATCHER IO", "art": "lass", "skin": "#c89878", "shirt": "#2a7a6a", "pants": "#3a3a4a", "hair": "#7a4a1a", "dialogue": ["Today's trendy phrase is 'GRANITE BREAKFAST.' Tomorrow it will be something else. It is always something else.", "The gym leader surfs before dawn. The whole island sets its watch by his board."]},
       {"x": 23, "y": 6, "name": "FISHERMAN KETT", "art": "fisher", "skin": "#d8a878", "shirt": "#7a4a8a", "pants": "#2a2a3a", "hair": "#c0c0c0", "dialogue": ["Cave dark, sea bright — Mistford lives between the two.", "STINGEL own the east road. Swim polite."]},
-      {"x": 3, "y": 5, "name": "MART CLERK", "art": "clerk", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#4a3a2a", "dialogue": ["Mistford Mart — island stock, ferried in. If the boat's late, so are we."], "mart": {"stock": ["pokeball", "greatball", "superpotion", "hyperpotion", "antidote", "parlyzheal", "revive"]}},
+      {"x": 9, "y": 4, "name": "MART CLERK", "art": "clerk", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#4a3a2a", "dialogue": ["Mistford Mart — island stock, ferried in. If the boat's late, so are we."], "mart": {"stock": ["pokeball", "greatball", "superpotion", "hyperpotion", "antidote", "parlyzheal", "revive"]}},
     ],
     "encounters": {"rate": 0.12, "table": [{"species": "wingull", "min": 209, "max": 214, "weight": 26}, {"species": "tentacool", "min": 209, "max": 214, "weight": 20}, {"species": "zigzagoon", "min": 209, "max": 214, "weight": 16}, {"species": "azurill", "min": 210, "max": 215, "weight": 12}, {"species": "pelipper", "min": 211, "max": 215, "weight": 10}], "water": [{"species": "tentacool", "min": 208, "max": 216, "weight": 28}, {"species": "magikarp", "min": 208, "max": 214, "weight": 22}, {"species": "wingull", "min": 209, "max": 216, "weight": 20}, {"species": "pelipper", "min": 212, "max": 218, "weight": 10}], "waterRate": 0.08},
     "items": [],
