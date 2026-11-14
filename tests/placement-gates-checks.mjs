@@ -437,6 +437,49 @@
 //     block under the Director's index ruling of 2026-11-13 —
 //     before any registration existed, so no cells were
 //     remapped.) Re-pinned with the T28 build.
+//     TWENTY-THIRD DOCUMENTED EXCEPTION (W-DIFF7): the registry grows by
+//     one scoped entry — cerulean: [pierfloor] — on the same terms as the
+//     exceptions above: Tidehaven City's CLEAN identity retrofit
+//     (Boardwalk & Mansard, W-DIFF-AUDIT Phase B) authors pierfloor
+//     (idx 622) AS the town's street fabric — vertical sea-worn pier
+//     planks swapped onto all 90 sand-path street cells. The identity
+//     table names 'boardwalk' as Tidehaven's street, but boardwalk is
+//     vermilion's registered material (W4): the W-DIFF5 precedent (the
+//     table's shared 'boardwalk' became Bramble's marshfloor and
+//     Tidewall's driftfloor) gives Tidehaven its own pier timber in the
+//     same register. The town's 11 shipped boardwalk cells (dock edge,
+//     south shore, exit aprons) STAY boardwalk — the table's own
+//     street/shore split, and a gate-driven trim: converting them
+//     created a second, bare junction where the shore strip meets the
+//     exit spine (junctions 1 -> 2, bare 0 -> 1, gate FAIL); with the
+//     split cerulean's pin is FULLY IDENTICAL to its pre-wave tuple
+//     (conn 132/132, strict 0.7314, fabric 0.9839). The retrofit also
+//     swapped the town's 21 th- roof cells to mansardroof (idx 623,
+//     BUILD classifier; a true mansard in the KIT_VARIANTS cerulean
+//     tones — houses and the Mart's roof row alike, the shipped Mart
+//     wearing th- rather than a stamp roof; the Center's roof-center
+//     stamp, the gym pool hall, every door/sign byte-kept).
+//     TWENTY-FOURTH DOCUMENTED EXCEPTION (W-DIFF7): vermilion's
+//     NEGATIVE raw-tier pins re-pin (section 3 below) — and nothing
+//     else of vermilion's moves. Arcport's retrofit completes the W4
+//     registration: its last 45 sand-path street cells swap to the
+//     boardwalk material it already owns, and its 12 th- roof cells
+//     swap to copperroof (idx 624, BUILD classifier; a standing-seam
+//     copper gable in the KIT_VARIANTS vermilion tones — 'coproof' is
+//     Copperton's T26 kind, so Arcport's takes the distinct name).
+//     On the production path (tiersFor, boardwalk registered)
+//     vermilion's pin is FULLY IDENTICAL to its pre-wave tuple (conn
+//     110/110, strict 0.8378, fabric 0.9961) and its registry entry is
+//     unchanged; only the raw-tier negatives move, because raw tiers
+//     cannot see boardwalk and the town no longer has a single path
+//     cell for them to score (72/110 -> 0/110, step-offs 5/7 -> 1/7,
+//     components 1 -> 4; the gate still FAILS on raw tiers — the
+//     blindness the negative exists to prove, now total). Vermilion's
+//     rows live only in maps2 (its maps4/maps5/maps6 registry copies
+//     are spread-overrides of the maps2 original), so the map-id
+//     registry re-pins all four vermilion fingerprints in the same
+//     commit per the burn-down rule; the copies' own npcs/events
+//     layers do not move.
 //     Tuple: [pass, connOk, connPairs, stepTouch, stepTot, components,
 //     junctionSites, junctionsBare, apronLow, apronMin, merged,
 //     onFabric, shoulderOrphans, unanchoredAny, strict, fabric].
@@ -466,20 +509,27 @@ async function gateTuple(id, t) {
 }
 
 // 1. registry scope lock
-ok('street registry is exactly { vermilion: [boardwalk], blackthorn: [settfloor], silvertown: [marblefloor], ecruteak: [wornfloor], saffron: [avenuefloor], violet: [violetfloor], azalea: [brickfloor], mahogany: [gravelfloor], rustboro: [cutstonefloor], fuchsia: [marshfloor], cianwood: [driftfloor], dewford: [plankfloor], viridian: [slatefloor], celadon: [promfloor], slateport: [quayfloor, boardwalk] }',
-  JSON.stringify(STREET_REGISTRY) === '{"vermilion":["boardwalk"],"blackthorn":["settfloor"],"silvertown":["marblefloor"],"ecruteak":["wornfloor"],"saffron":["avenuefloor"],"violet":["violetfloor"],"azalea":["brickfloor"],"mahogany":["gravelfloor"],"rustboro":["cutstonefloor"],"fuchsia":["marshfloor"],"cianwood":["driftfloor"],"dewford":["plankfloor"],"viridian":["slatefloor"],"celadon":["promfloor"],"slateport":["quayfloor","boardwalk"]}',
+ok('street registry is exactly { vermilion: [boardwalk], blackthorn: [settfloor], silvertown: [marblefloor], ecruteak: [wornfloor], saffron: [avenuefloor], violet: [violetfloor], azalea: [brickfloor], mahogany: [gravelfloor], rustboro: [cutstonefloor], fuchsia: [marshfloor], cianwood: [driftfloor], dewford: [plankfloor], viridian: [slatefloor], celadon: [promfloor], slateport: [quayfloor, boardwalk], cerulean: [pierfloor] }',
+  JSON.stringify(STREET_REGISTRY) === '{"vermilion":["boardwalk"],"blackthorn":["settfloor"],"silvertown":["marblefloor"],"ecruteak":["wornfloor"],"saffron":["avenuefloor"],"violet":["violetfloor"],"azalea":["brickfloor"],"mahogany":["gravelfloor"],"rustboro":["cutstonefloor"],"fuchsia":["marshfloor"],"cianwood":["driftfloor"],"dewford":["plankfloor"],"viridian":["slatefloor"],"celadon":["promfloor"],"slateport":["quayfloor","boardwalk"],"cerulean":["pierfloor"]}',
   JSON.stringify(STREET_REGISTRY));
 
 // 2. census: the 64 towns of townSetOf (pallet included)
 ok('gate census covers 64 towns', ids.length === 64, `${ids.length} ids`);
 
-// 3. negative: raw tiers reproduce the pre-W4 vermilion blindness
+// 3. negative: raw tiers reproduce the vermilion blindness
+// (W-DIFF7 re-pin, documented exception #24 below: the
+// retrofit swapped Arcport's last 45 sand-path cells to its
+// registered boardwalk, so raw tiers — which cannot see
+// boardwalk at all — now score the town at 0/110 with 1/7
+// step-offs over 4 components; the negative still proves the
+// same blindness, harder. The W4-era values 72/110, 5/7, 1
+// were the pre-retrofit measurements.)
 {
   const { r, gate } = await gateTuple('vermilion', tiers);
   ok('negative: vermilion on raw tiers still FAILS the gates', gate.pass === false);
-  ok('negative: raw-tiers connectivity is the pre-W4 72/110', r.connOk === 72 && r.connPairs === 110, `${r.connOk}/${r.connPairs}`);
-  ok('negative: raw-tiers step-offs are the pre-W4 5/7', r.stepTouch === 5 && r.stepTot === 7, `${r.stepTouch}/${r.stepTot}`);
-  ok('negative: raw-tiers components pin at 1 (split shore cell retired by the lamp re-seat)', r.netComponents === 1, `${r.netComponents}`);
+  ok('negative: raw-tiers connectivity is the post-W-DIFF7 0/110', r.connOk === 0 && r.connPairs === 110, `${r.connOk}/${r.connPairs}`);
+  ok('negative: raw-tiers step-offs are the post-W-DIFF7 1/7', r.stepTouch === 1 && r.stepTot === 7, `${r.stepTouch}/${r.stepTot}`);
+  ok('negative: raw-tiers components pin at 4 (post-W-DIFF7: no path cells remain for raw tiers to join)', r.netComponents === 4, `${r.netComponents}`);
 }
 
 // 4. per-town pins on the production path (targets use post-W4 pins)
