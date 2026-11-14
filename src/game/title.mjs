@@ -193,6 +193,10 @@ export class BootScene {
     this.ready = false;  // interactive only after dwell
     this.menuIdx = 0;
     this.game.ui.log.push({ ui: 'boot' });
+    // W-UI: the boot/title surfaces carry no gameplay chrome — hide the HUD
+    // strip, chips, mood pip and hint card until the overworld enters and
+    // restores them (OverworldScene.enter). Presentation state only.
+    if (this.game.ui && this.game.ui.setHudVisible) this.game.ui.setHudVisible(false);
   }
   update(dt) {
     this.t += dt;
@@ -448,15 +452,26 @@ export class BootScene {
     const w = r.viewW, h = r.viewH;
     r.panel(6, 6, w - 12, h - 12, '#101018', '#e8c832');
     const page = this.t >= 1.5 ? 1 : 0; // P1/A5: paginated 14px legal copy
+    // W-UI: the pre-wrapped lines were drawn at a fixed 14px and the widest
+    // line on page 2 crossed the panel's right border. Fit the page: shrink
+    // the draw size (floor 11px) until the widest line fits inside the
+    // panel. Layout only — the legal wording is untouched.
+    let size = 14;
+    let maxW = 0;
+    for (const line of LEGAL_PAGES[page]) {
+      const lw = measureText(r, line, 14, false);
+      if (lw > maxW) maxW = lw;
+    }
+    if (maxW > w - 28) size = Math.max(11, Math.floor(14 * (w - 28) / maxW));
     let y = 18;
     for (const line of LEGAL_PAGES[page]) {
       const isTitle = page === 0 && line === "KIAN'S JOURNEY";
       if (isTitle) {
-        r.text(line, w / 2, y, { size: 14, bold: true, align: 'center', color: '#e8c832' });
+        r.text(line, w / 2, y, { size, bold: true, align: 'center', color: '#e8c832' });
       } else {
-        r.text(line, 14, y, { size: 14, color: '#f0f0f0' });
+        r.text(line, 14, y, { size, color: '#f0f0f0' });
       }
-      y += 18;
+      y += Math.round(size * 1.285);
     }
     if (this.ready) {
       const pulse = Math.floor(this.t * 2) % 2 === 0;
