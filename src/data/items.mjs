@@ -238,7 +238,7 @@ export const ITEMS = {
   // in the shop, with no effects of any kind.
   gsball: { id: 'gsball', name: 'Sealed Orb', pocket: 'items', collectible: true, desc: 'COLLECTIBLE — A gold-and-silver orb no machine can open. It hums near old shrines.' },
   pinkanberry: { id: 'pinkanberry', name: 'Pinkan Berry', pocket: 'items', collectible: true, desc: 'COLLECTIBLE — A rosy island berry. One bite blushes fur and feathers pink for a day.' },
-  minimistylure: { id: 'minimistylure', name: 'Mini-Marina Lure', pocket: 'items', collectible: true, desc: 'COLLECTIBLE — A hand-painted fishing lure, a tiny redhead in a yellow top. Fish approve.' },
+  minimistylure: { id: 'minimistylure', name: 'Mini-Marina Lure', pocket: 'items', collectible: true, desc: 'COLLECTIBLE — A hand-painted fishing lure in Leader Marina\'s likeness. Fish approve.' },
   rainbowwing: { id: 'rainbowwing', name: 'Rainbow Wing', pocket: 'items', collectible: true, desc: 'COLLECTIBLE — A single feather in every color at once. It is warm, as if just flown in.' },
 };
 
