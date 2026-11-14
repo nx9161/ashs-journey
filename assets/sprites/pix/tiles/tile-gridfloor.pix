@@ -1,0 +1,36 @@
+# Wave T29 (Lilac kit): gridfloor — Lilac City's registered
+# street kind (the fleet's street kinds carry the -floor suffix;
+# the desire-path tiers key on it). The BRONZE SETT GRID: a fine
+# 4x4 lattice of small bronze setts, grout-dark seams, worn pale
+# faces, and ONE teal-glass accent sett per tile — the electric
+# grid PELL says the gym leader built by hand, humming under
+# the crossroads. Structurally a fine sett lattice + accent,
+# not a recolour: Copperton's flags are big SQUARE quarry
+# slabs (a 2x2 flag grid, four times coarser, no accent),
+# Fairhaven's are long running-bond slabs, Mistford's timber
+# planks, Redwood's gravel speckle. The lattice fineness reads
+# at screenshot scale.
+# (NO-SAME-KIT law; WAVE-T29-LILAC-PLAN.md.)
+PIX tile-gridfloor 16 16
+pppdpppdpppdpppd
+plpdpppdpppspppd
+pppdpppdpppdpppd
+dddddddddddddddd
+pppdsppdpppdpppd
+pppdpppdplpdpppd
+pppdpppdpppdsppd
+dddddddddddddddd
+pppdtttdpppdpppd
+pppdtltdpppdpppd
+pppdtttdpppdpppd
+dddddddddddddddd
+pppdpppdpppdplpd
+sppdpppdpppdpppd
+pppdpppdsppdpppd
+dddddddddddddddd
+PAL
+p #c9b183 sett-face
+l #dcc79c sett-light
+s #a68a5c sett-shade
+d #6e5a3e grout
+t #3f7d7a accent-teal

@@ -1226,6 +1226,34 @@ WD7_KIND_DEFS.forEach(([kind], i) => {
 export const WD7_PROP_KINDS = WD7_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
 export const WD7_WALL_KINDS = WD7_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
 export const WD7_FLOOR_KINDS = WD7_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
+// Wave T29: Lilac City's own kit — Bronze Grid & Sunlamp
+// (WAVE-T29-LILAC-PLAN.md). Indices 622-625 (the Director's
+// index discipline: main runs 594-605 + 608-621, 606-607 stay
+// empty; this block verified free before registration).
+// 'bronzroof' (wall) — staggered olive-bronze shingle courses
+// on the Gym, the Game Corner and the town's two facade
+// cottages. 'gridfloor' (floor) — the fine bronze sett grid,
+// the crossroads' registered street kind. 'sunlamp' (prop) —
+// the second-sun lamp: a glowing sun-orb on a bronze post; a
+// pair flanks the Game Corner's frontage, one stands at the
+// great crossing, one on the south avenue. 'lilacbush'
+// (prop) — a lilac bush in bloom, the painting's signature
+// planting. Both props fully opaque with the green baked in.
+export const T29_KIND_DEFS = [
+  ['bronzroof', 'wall'],
+  ['gridfloor', 'floor'],
+  ['sunlamp', 'prop'],
+  ['lilacbush', 'prop'],
+];
+export const T29_KIND_CHARS = {};
+T29_KIND_DEFS.forEach(([kind], i) => {
+  const ch = String.fromCodePoint(0x1E00 + 622 + i);
+  T29_KIND_CHARS[kind] = ch;
+  TILE_CHARS[ch] = kind;
+});
+export const T29_PROP_KINDS = T29_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
+export const T29_WALL_KINDS = T29_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
+export const T29_FLOOR_KINDS = T29_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
 export const SINNOH_TOWN_GROUND_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg);
 export const SINNOH_TOWN_GROUND2_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg2);
 // TX-3: the 8 gym exteriors by town (original type-accent motifs).

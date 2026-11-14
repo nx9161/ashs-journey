@@ -1,0 +1,36 @@
+# Wave T29 (Lilac kit): sunlamp — the second-sun lamp. The town
+# sign's own words: "The Game Corner's lights are the second
+# sun." A bronze post topped with a glowing sun-orb (pale gold
+# halo, bright core) — the Corner's marquee glow carried onto
+# the street furniture: a pair flanks the Game Corner's
+# frontage, one stands at the great crossing's north-east
+# corner, one on the south avenue's shoulder. MARKS OF LIGHT,
+# NOT WORDS. FULLY OPAQUE by design: tg-mauville (measured flat
+# #1d8713, with its shading derivatives) is baked in as its
+# ground, never transparency (the T27/T28 precedent).
+# (NO-SAME-KIT law; WAVE-T29-LILAC-PLAN.md.)
+PIX tile-prop-sunlamp 16 16
+gggggggggggggggg
+ggGggggggGgggggg
+ggggggoooogggggg
+gggggoywwyoggggg
+ggggoywwwwyogggg
+ggggoywwwwyogggg
+gggggoywwyoggggg
+ggggggoooogggggg
+gggggggddggggggg
+gggggggddggggggg
+gggggggddggggggg
+gggggggddggggggg
+gggggggddggggggg
+ggggggddddgggggg
+ggggghhhhhhhgggg
+ggGggggggggggGgg
+PAL
+g #1d8713 ground
+G #2c9619 ground-light
+h #14630c ground-shadow
+o #d9a83f halo
+y #f2d06b orb
+w #fdf3d0 core
+d #605c22 post

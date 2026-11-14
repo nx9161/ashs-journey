@@ -1,0 +1,35 @@
+# Wave T29 (Lilac kit): lilacbush — a lilac bush in bloom, the
+# approved painting's signature planting (lilac bushes at the
+# houses and halls throughout) and the town's name in flowers:
+# deep-green foliage mounds crowded with purple lilac flower
+# clusters and pale highlights. Dressing only — no text, no
+# story invented. FULLY OPAQUE by design: tg-mauville
+# (measured flat #1d8713, with its shading derivatives) is
+# baked in as its ground, never transparency (the T27/T28
+# precedent).
+# (NO-SAME-KIT law; WAVE-T29-LILAC-PLAN.md.)
+PIX tile-prop-lilacbush 16 16
+gggggggggggggggg
+ggGggggggggggGgg
+ggggggFFFFgggggg
+ggggFpPFFpFFgggg
+gggFFpPFFPpFFggg
+gggFPFFpFFpFFggg
+ggFFFpFFFPFFFFgg
+ggFFpFFFFpPFFBgg
+ggFFFPFpFFFFFBgg
+gggFFFFpFFFBgggg
+gggBFFFFFFBBgggg
+ggggBBBBBBgggggg
+ggggghhhhggggggg
+ggGggggggggggGgg
+gggggggggggggggg
+gggggggggggggggg
+PAL
+g #1d8713 ground
+G #2c9619 ground-light
+h #14630c ground-shadow
+F #2e7d1e foliage
+B #14590c foliage-deep
+p #8b6ba5 lilac
+P #b79fd6 lilac-pale

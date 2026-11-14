@@ -1,0 +1,34 @@
+# Wave T29 (Lilac kit): bronzroof — Lilac City's own roof kind.
+# OLIVE-BRONZE SHINGLE courses: staggered bronze shingles (8px
+# shingles, half-offset every course), deep shade line closing
+# each course, a dark ridge cap along the top. In the
+# KIT_VARIANTS mauville roof tones (#98913f / #605c22 / #bab45e,
+# log #7a6a3a). Structurally staggered shingle courses, not a
+# recolour: Fairhaven wears stitched canvas sheets, Mistford
+# vertical-split wood shakes, Copperton wide slabs with copper
+# seams, Meadowbrook small staggered STONE courses (sage, no
+# ridge cap, no bronze). The shingle stagger + ridge cap read
+# at screenshot scale.
+# (NO-SAME-KIT law; WAVE-T29-LILAC-PLAN.md.)
+PIX tile-bronzroof 16 16
+dldldldldldldldl
+sbbblbbbsbbbbbbb
+sbbbbbbbsbbblbbb
+sbbbbbblsbbbbbbb
+dddddddddddddddd
+bbbsbbbbbbbsbbbl
+lbbbsbbbblbsbbbb
+bbbbsbbbbbbsbbbb
+dddddddddddddddd
+sbbbblbbsbbbbbbb
+sbbbbbbbsblbbbbb
+sbbbbbbbsbbbbblb
+dddddddddddddddd
+bbblsbbbbbbsbbbb
+bbbbsbbbblbsbbbl
+dddddddddddddddd
+PAL
+b #98913f bronze-face
+l #bab45e bronze-light
+d #605c22 bronze-shade
+s #4a4416 seam
