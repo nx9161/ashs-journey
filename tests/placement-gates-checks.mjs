@@ -696,6 +696,45 @@
 //     0.929 -> 0.857 (the lighthouse ring re-measured with
 //     its lamp crown; no building below 60%, none merged).
 //     NO other town's pin moves.
+//     THIRTY-FIRST DOCUMENTED EXCEPTION (WAVE T33; the
+//     THIRTIETH is reserved to WAVE T32 Ashfall at its merge,
+//     ahead of this one): the registry grows by one scoped
+//     entry — lavaridge: [steamfloor, terracefloor] (the
+//     slateport / olivine two-material precedent) — and
+//     lavaridge's pin migrates FAIL -> PASS: the Steamspring
+//     rebuild on its own kit from birth ('Rustflag & Steam
+//     Terrace', idx 672-675: rust barrel-tile steamroof,
+//     rust-flag steamfloor streets, pale mineral terracefloor
+//     ring, the steamvent prop) per WAVE-T33-STEAMSPRING-PLAN.md.
+//     The shipped town was a mud-leaning fabric-only FAIL:
+//     its one 190-cell 'component' WAS the tg2 web (35.7% of
+//     the town), which the audit counts as fabric — the build
+//     retires tg2 to zero and lays the kit's streets (front
+//     street, pass spine, spring street, west avenue, south
+//     street, the spring's terrace ring with its row-16
+//     return). The three invisible DIRS sign posts gain their
+//     tiles (words byte-identical) + three verbatim copies at
+//     the validator-named junctions (11,5), (7,9), (18,16);
+//     the orphaned MART CLERK re-seats (3,5) -> (9,4) west of
+//     his Mart's west via; a third steamvent stands on the
+//     spring's own west terrace (19,11), breaking the
+//     desire-line's dive across the pool's north-west water —
+//     SOAKER VEDA's pairs swim 2 water cells, not 4 (her
+//     spring, its waterglow rectangle, the rock rim and the
+//     encounter plot byte-kept). The house stamp + two facade
+//     cottages wear the town's barrel-tile roof; the gym
+//     keeps its shipped tr roof (the T31 precedent); spring
+//     sign, town sign, warps, stamps and encounters
+//     byte-preserved. Tuple migration: [0, 72, 72, 7, 7, 1,
+//     1, 0, 0, 0.929, 0, 0, 0, 0, 0.9715, 0.9715] -> [1, 72,
+//     72, 7, 7, 1, 8, 0, 0, 0.929, 0, 0, 0, 0, 0.6726,
+//     0.9879]: shipped FAIL was fabric alone; junctions
+//     1 -> 8 sites, all covered; strict 0.9715 -> 0.6726
+//     (the tg2 web was strict tier by definition; the
+//     flagstone streets carry the same lines at the honest
+//     CLEAN measure — every CLEAN town reads 0.62-0.93);
+//     fabric 0.9715 -> 0.9879; apron min 0.929 unmoved.
+//     NO other town's pin moves.
 
 import { loadMaps, makeTiers, townSetOf, analyzeMap } from '../scripts/audit-desire-paths.mjs';
 import { scoreTown, gateCheck, tiersFor, STREET_REGISTRY } from '../scripts/audit-placement.mjs';
@@ -722,8 +761,8 @@ async function gateTuple(id, t) {
 }
 
 // 1. registry scope lock
-ok('street registry is exactly { vermilion: [boardwalk], blackthorn: [settfloor], silvertown: [marblefloor], ecruteak: [wornfloor], saffron: [avenuefloor], violet: [violetfloor], azalea: [brickfloor], mahogany: [gravelfloor], rustboro: [cutstonefloor], fuchsia: [marshfloor], cianwood: [driftfloor], dewford: [plankfloor], viridian: [slatefloor], celadon: [promfloor], slateport: [quayfloor, boardwalk], cerulean: [pierfloor], mauville: [gridfloor], lavender: [shinglefloor], cherrygrove: [inlayfloor], verdanturf: [petalfloor, cavefloor], olivine: [harbourfloor, jettyfloor], fallarbor: [ashfloor] }',
-  JSON.stringify(STREET_REGISTRY) === '{"vermilion":["boardwalk"],"blackthorn":["settfloor"],"silvertown":["marblefloor"],"ecruteak":["wornfloor"],"saffron":["avenuefloor"],"violet":["violetfloor"],"azalea":["brickfloor"],"mahogany":["gravelfloor"],"rustboro":["cutstonefloor"],"fuchsia":["marshfloor"],"cianwood":["driftfloor"],"dewford":["plankfloor"],"viridian":["slatefloor"],"celadon":["promfloor"],"slateport":["quayfloor","boardwalk"],"cerulean":["pierfloor"],"mauville":["gridfloor"],"lavender":["shinglefloor"],"cherrygrove":["inlayfloor"],"verdanturf":["petalfloor","cavefloor"],"olivine":["harbourfloor","jettyfloor"],"fallarbor":["ashfloor"]}',
+ok('street registry is exactly { vermilion: [boardwalk], blackthorn: [settfloor], silvertown: [marblefloor], ecruteak: [wornfloor], saffron: [avenuefloor], violet: [violetfloor], azalea: [brickfloor], mahogany: [gravelfloor], rustboro: [cutstonefloor], fuchsia: [marshfloor], cianwood: [driftfloor], dewford: [plankfloor], viridian: [slatefloor], celadon: [promfloor], slateport: [quayfloor, boardwalk], cerulean: [pierfloor], mauville: [gridfloor], lavender: [shinglefloor], cherrygrove: [inlayfloor], verdanturf: [petalfloor, cavefloor], olivine: [harbourfloor, jettyfloor], fallarbor: [ashfloor], lavaridge: [steamfloor, terracefloor] }',
+  JSON.stringify(STREET_REGISTRY) === '{"vermilion":["boardwalk"],"blackthorn":["settfloor"],"silvertown":["marblefloor"],"ecruteak":["wornfloor"],"saffron":["avenuefloor"],"violet":["violetfloor"],"azalea":["brickfloor"],"mahogany":["gravelfloor"],"rustboro":["cutstonefloor"],"fuchsia":["marshfloor"],"cianwood":["driftfloor"],"dewford":["plankfloor"],"viridian":["slatefloor"],"celadon":["promfloor"],"slateport":["quayfloor","boardwalk"],"cerulean":["pierfloor"],"mauville":["gridfloor"],"lavender":["shinglefloor"],"cherrygrove":["inlayfloor"],"verdanturf":["petalfloor","cavefloor"],"olivine":["harbourfloor","jettyfloor"],"fallarbor":["ashfloor"],"lavaridge":["steamfloor","terracefloor"]}',
   JSON.stringify(STREET_REGISTRY));
 
 // 2. census: the 64 towns of townSetOf (pallet included)
@@ -771,7 +810,7 @@ const PIN = {
   "indigo": [1, 156, 156, 11, 11, 1, 1, 0, 0, 0.625, 0, 0, 0, 0, 0.9164, 0.988],
   "jubilife": [1, 210, 210, 7, 7, 1, 11, 0, 0, 0.813, 0, 0, 0, 0, 0.9336, 0.9978],
   "kumquat": [0, 42, 72, 7, 7, 1, 6, 0, 3, 0.5, 0, 0, 0, 0, 0.9742, 0.9742],
-  "lavaridge": [0, 72, 72, 7, 7, 1, 1, 0, 0, 0.929, 0, 0, 0, 0, 0.9715, 0.9715],
+  "lavaridge": [1, 72, 72, 7, 7, 1, 8, 0, 0, 0.929, 0, 0, 0, 0, 0.6726, 0.9879],
   "lavender": [1, 132, 132, 7, 7, 1, 2, 0, 0, 0.643, 0, 0, 0, 0, 0.7211, 0.9873],
   "lilycove": [0, 42, 72, 5, 5, 1, 8, 0, 0, 0.706, 0, 0, 0, 0, 0.9249, 0.9687],
   "littleroot": [1, 90, 90, 8, 8, 1, 15, 0, 0, 0.714, 0, 0, 0, 1, 0.674, 0.9848],
