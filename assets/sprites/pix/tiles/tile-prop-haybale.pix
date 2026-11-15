@@ -1,0 +1,24 @@
+# Wave W17-H (Route 38): hay bale — a round hay bale standing end-on in the pasture, its spiral roll drawn in golds, on farm turf (fully opaque, ground baked in). The design names the hay bales.
+PIX tile-prop-haybale 16 16
+aaaaaabaaabaaaaa
+aaaayaaaaaaaaaba
+aaaaaybaaaaaaaaa
+aybaaaaaaaaabaaa
+aabaaaaggabaaaaa
+baayyygggggayaaa
+abyaaggddgyaaaaa
+yaabggddddggaaaa
+aaaaggdyydggaaaa
+aaabggddddggaaaa
+aaaaaggddgyaaaab
+baaaagyggggaaaab
+aaaabaaggaaaaaaa
+aabbaaaaaaaaaabb
+abyabaaaaaababaa
+aaayabaaaaaaaaaa
+PAL
+a #79ad60
+b #689a50
+y #e6cd85
+g #d9b968
+d #b8944a

@@ -1071,6 +1071,22 @@ export const WALKABLE = new Set(['.', ',', 'D', 'E', 'C', 'F', 'J', 'K', '1', '2
   // walkable. (Indices 1186-1204 per the program plan: W17-F
   // took 1168-1185 on its parallel branch; 1111 stays empty.)
   ...[1186, 1187, 1190, 1191, 1194, 1195, 1198, 1199, 1202, 1203]
+    .map((i) => String.fromCodePoint(0x1E00 + i)),
+  // Wave W17-H: the Yamato tranche-3 ground/path chars
+  // (U+1E00+1205.., tiles.mjs W17H_KIND_DEFS) are walkable —
+  // crossturf/crossfloor (Route 36), podturf/podfloor (Route 37),
+  // farmturf/farmfloor (Route 38), hillturf/hillfloor (Route 39),
+  // each swapped 1:1 from the walkable '_' ground / '.' path chars
+  // on its own route, and harbourturf (Route 40), swapped 1:1 from
+  // the walkable '_' shore cells of the surf lane, so ground stays
+  // ground and path stays path. The tree chars (1207, 1211, 1215,
+  // 1219), prop chars (1208, 1212, 1216, 1220) and the harbour
+  // rock char (1222) are NOT here: trees/props were never walkable,
+  // and harbourrock swaps from 'R' rock, which was never walkable.
+  // (Indices 1205-1222 per the program plan: W17-F took 1168-1185
+  // and W17-G takes 1186-1204 on its parallel branch; 1111 stays
+  // empty.)
+  ...[1205, 1206, 1209, 1210, 1213, 1214, 1217, 1218, 1221]
     .map((i) => String.fromCodePoint(0x1E00 + i))]);
 
 // Trainer definitions for the slice.

@@ -2940,6 +2940,65 @@ W17G_KIND_DEFS.forEach(([kind], i) => {
 export const W17G_PROP_KINDS = W17G_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
 export const W17G_WALL_KINDS = W17G_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
 export const W17G_FLOOR_KINDS = W17G_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
+// Wave W17-H (Route Build Program, Yamato Tranche 3): crossroads ->
+// farm country -> the harbour lanes — Route 36, Route 37, Route 38,
+// Route 39 and Route 40, each its own kit under the NO-SAME-KIT law.
+// All five are defined once in maps6.mjs (no dual copies in Yamato,
+// so no registry re-pins arise). Routes convert 1:1 off the generic
+// grassground/path/tree vocabulary by KIND (maps6 trees stand on
+// both '#' and 'T' chars — the W17-B lesson); art layer only:
+// encounter tables, warps, NPC posts, sign records, items and every
+// shipped dressing kind (Route 36's maple and fence; Route 37's 2
+// apricorn dressing trees; Route 38's fenced pastures; Route 39's
+// fences and maples; Route 40's 394 water cells entire) stay
+// byte-identical. Route 36 "Crossroads Meadow" (idx 1205-1208),
+// Route 37 "Podnut Road" (1209-1212), Route 38 "Farm Road"
+// (1213-1216), Route 39 "Harbour Hill" (1217-1220), Route 40
+// "Harbour Lane" (1221-1222 — a surf lane with NO path/ground/tree
+// vocabulary: only its 5 shore grassground cells and 16 rock cells
+// convert; the rock conversion is gated on the trigger census —
+// r40's encounter config has enc.cave=false and an EMPTY land
+// table, its surf branch fires only on '~'/'W' water chars, and
+// the grid holds no '.' or ',' cells, so no encounter trigger can
+// move; the spec-presence exception for path/tree is recorded in
+// the program plan in advance). Ground kinds deliberately do NOT
+// end in 'floor' (the desire-path audit counts '*floor' as street
+// tier; grounds must never masquerade as street); path kinds DO
+// end in 'floor' so they register as the route's path tier per
+// route (checklist point 3). Indices 1205-1222 per the program
+// plan (WAVE-W17-YAMATO-ROUTE-PROGRAM-PLAN.md): W17-F took
+// 1168-1185 and W17-G takes 1186-1204 on its parallel branch; 1111
+// and every earlier documented gap stay empty. Kind names verified
+// unclaimed against origin/main. Chars U+1E00+1205..
+export const W17H_KIND_DEFS = [
+  ['crossturf', 'floor'],
+  ['crossfloor', 'floor'],
+  ['crossoak', 'wall'],
+  ['forkpost', 'prop'],
+  ['podturf', 'floor'],
+  ['podfloor', 'floor'],
+  ['oldpodnut', 'wall'],
+  ['bellpost', 'prop'],
+  ['farmturf', 'floor'],
+  ['farmfloor', 'floor'],
+  ['farmoak', 'wall'],
+  ['haybale', 'prop'],
+  ['hillturf', 'floor'],
+  ['hillfloor', 'floor'],
+  ['hillpine', 'wall'],
+  ['hillcairn', 'prop'],
+  ['harbourturf', 'floor'],
+  ['harbourrock', 'wall'],
+];
+export const W17H_KIND_CHARS = {};
+W17H_KIND_DEFS.forEach(([kind], i) => {
+  const ch = String.fromCodePoint(0x1E00 + 1205 + i);
+  W17H_KIND_CHARS[kind] = ch;
+  TILE_CHARS[ch] = kind;
+});
+export const W17H_PROP_KINDS = W17H_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
+export const W17H_WALL_KINDS = W17H_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
+export const W17H_FLOOR_KINDS = W17H_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
 export const SINNOH_TOWN_GROUND_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg);
 export const SINNOH_TOWN_GROUND2_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg2);
 // TX-3: the 8 gym exteriors by town (original type-accent motifs).

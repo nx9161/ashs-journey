@@ -1,0 +1,24 @@
+# Wave W17-H (Route 36): fork post — a signposted fork post of the crossroads, one post carrying two arrow boards pointing the two ways, on cross turf (fully opaque, ground baked in). The design names the signposted forks.
+PIX tile-prop-forkpost 16 16
+waaaaaaabaabbaaa
+aabaaaabaaaaawba
+aaaaaaaaaaabaaaa
+baaaaaaaabaaaaaa
+aaaaaaaaaabaaaaa
+baawaaakdaabaaab
+bbawwwwwdaaaaaaa
+abawaaakdaaaaaaa
+bbaaaabkdaaawaaa
+aaaaaaakwwwwwaba
+abaaaaakdaaawbaa
+aaaaaaakdbbaabab
+aaaaabakdaaababb
+baaaaaddddaaaaaa
+abaaaaaaaaaaaaab
+baabababaabbaaaa
+PAL
+a #74a85e
+b #639450
+w #b08d57
+d #7d5a34
+k #8a6844
