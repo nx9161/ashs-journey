@@ -34,7 +34,7 @@ import { CHAPTERS } from '../data/story.mjs';
 import { PANELS } from '../data/panels.mjs';
 import { statValue, hpValue } from '../engine/formulas.mjs';
 import { levelCapFor, HOME_MAP_ID, currentArcOf } from '../data/arcs.mjs';
-import { checkArcCompletion, tryHomecoming, arcFerryAllowed, arcFerryGateLine } from './arcs.mjs';
+import { checkArcCompletion, tryHomecoming, arcFerryAllowed, arcFerryGateLine, arcEnRoutePanel } from './arcs.mjs';
 import {
   ensureJohtoSystems, johtoStepTick, apricornTreeAt, pickApricorn, tradeEvolutionsOf,
   depositToDaycare, withdrawFromDaycare, collectDaycareEgg, giveStoryEgg, pairCompatible, deliverEggCapSafe,
@@ -1671,8 +1671,16 @@ Object.assign(OverworldScene.prototype, {
             if (v !== 'yes') return;
             if (chk.arc) g.state.story.flags['reachedarc_' + chk.arc.id] = true;
             const enRoute = chk.arc && chk.arc.enRouteLines ? chk.arc.enRouteLines : [];
-            if (enRoute.length) g.ui.say(enRoute.slice(), () => landFerry(), '');
-            else landFerry();
+            // W10-C seam (dormant until T1 sets enRoutePanel fields):
+            // the crossing panel plays after the en-route card,
+            // before landing; no field = land directly, as shipped.
+            const afterCard = () => {
+              const p = arcEnRoutePanel(chk.arc);
+              if (p && g.ui.showPanel) { g.ui.showPanel(p.art, () => landFerry()); return; }
+              landFerry();
+            };
+            if (enRoute.length) g.ui.say(enRoute.slice(), afterCard, '');
+            else afterCard();
           });
           return;
         }

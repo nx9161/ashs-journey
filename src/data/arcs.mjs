@@ -306,6 +306,12 @@ export const FINALE_END_CARD = [
   'Thank you for walking it. When the next road opens — and roads always open — it will find you exactly where this one left you: ready, rested, and already lacing your shoes.',
 ];
 
+// W10-C: the finale's closing panel moment (a PANELS id), resolved by
+// arcFinalePanel in src/game/arcs.mjs and shown after the credits.
+// null = dormant (the shipped state until W10-C T3 lands the panel):
+// the credits then end exactly as they always have.
+export const FINALE_PANEL = null;
+
 // The committed national horizon: Platinum (ADR-027 Decision 5). Derived
 // from the Borea row so a registry edit moves every presentation at once.
 export const PLATINUM_DEX_HORIZON = (ARCS.find((a) => a.id === 'sinnoh') || { dexHorizon: 493 }).dexHorizon;

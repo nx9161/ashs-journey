@@ -5,6 +5,7 @@
 // (default OFF); hold START 1s during the intro offers a skip confirm.
 
 import { INTRO_SCRIPT } from '../data/dialogue.mjs';
+import { PANELS } from '../data/panels.mjs';
 import { makeMon, dexRegister, grantPartnerMon } from './state.mjs';
 import { houseRule } from './rules.mjs';
 import { SPECIES } from '../data/species.mjs';
@@ -79,7 +80,13 @@ export class IntroScene {
   starterMoment() {
     const g = this.game;
     const lines = INTRO_SCRIPT.starterMoment.map((l) => l.replace('{player}', this.name));
+    // W10-C seam (dormant until T3 sets INTRO_SCRIPT.starterPanel):
+    // the partner panel plays after the starter lines, before the
+    // grant; no field = grant directly, as shipped. Skip paths never
+    // traverse this callback, so none can be panel-blocked.
     g.ui.say(lines, () => {
+      const p = INTRO_SCRIPT.starterPanel ? PANELS[INTRO_SCRIPT.starterPanel] : null;
+      if (p && g.ui.showPanel) { g.ui.showPanel(p.art, () => { this.grantPartner(); this.finishIntro(); }); return; }
       this.grantPartner();
       this.finishIntro();
     }, INTRO_SCRIPT.professor);

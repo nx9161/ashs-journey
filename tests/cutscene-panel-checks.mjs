@@ -19,6 +19,14 @@
 // non-panel ui log are IDENTICAL: a panel step is presentation only.
 // W10-B T4 adds the Class B representative drive (ev_zapdos, a
 // wildBattle reveal) under the same parity contract (B7–B11).
+// W10-C T0 growth (statics only, seams dormant): PANELS moments can
+// also be referenced from DATA FIELDS (arc enRoutePanel / cardPanel,
+// FINALE_PANEL, INTRO_SCRIPT.starterPanel) instead of step lists.
+// The PANEL_FIELD_REFS pin counts those references (0 at T0) and the
+// entries identity PANELS_ENTRIES == PANEL_STEPS + PANEL_FIELD_REFS
+// keeps the class counted; A1/A2 extend over the union, and A9 unit-
+// tests the resolution helpers. The surface parity drives land with
+// their art tranches (T1 ferry, T2 card, T3 finale + intro).
 
 import fs from 'node:fs';
 import os from 'node:os';
@@ -68,6 +76,39 @@ ok('A2 every PANELS entry is used by at least one panel step (no orphan panels)'
   Object.keys(PANELS).every((k) => panelSteps.some(({ panel }) => panel === k)));
 ok('A2 every PANELS art id exists in ART (no orphan art)',
   Object.values(PANELS).every(({ art }) => !!ART[art]));
+
+// ---------- W10-C T0: surface-attach statics (dormant seams) ----------
+const { ARCS, FINALE_PANEL } = await D('arcs.mjs');
+const { INTRO_SCRIPT } = await D('dialogue.mjs');
+const GA = await import(path.join(ROOT, 'src/game/arcs.mjs'));
+const fieldRefs = [];
+for (const arc of ARCS) {
+  if (arc.enRoutePanel) fieldRefs.push(arc.enRoutePanel);
+  if (arc.cardPanel) fieldRefs.push(arc.cardPanel);
+}
+if (FINALE_PANEL) fieldRefs.push(FINALE_PANEL);
+if (INTRO_SCRIPT.starterPanel) fieldRefs.push(INTRO_SCRIPT.starterPanel);
+// W10-C ratchet pin (moves only in-commit with its tranche:
+// 0 at T0 -> 5 T1 -> 11 T2 -> 13 T3).
+const PANEL_FIELD_REFS = 0;
+ok('A1 PANEL_FIELD_REFS ratchet: data-field panel references == pin (0 at W10-C T0 — seams dormant)',
+  fieldRefs.length === PANEL_FIELD_REFS);
+ok('A1 every data-field panel reference resolves through PANELS (A1 extension)',
+  fieldRefs.every((id) => !!PANELS[id]));
+ok('A1 PANELS_ENTRIES identity: entries == panel steps + field references',
+  Object.keys(PANELS).length === panelSteps.length + fieldRefs.length);
+ok('A2 no orphan panels over the union: every PANELS entry is used by a panel step or a data field (A2 extension)',
+  Object.keys(PANELS).every((k) => panelSteps.some(({ panel }) => panel === k) || fieldRefs.includes(k)));
+ok('A9 helper units: arcEnRoutePanel — null for absent field / unknown id, the PANELS entry for a known id',
+  GA.arcEnRoutePanel(null) === null && GA.arcEnRoutePanel({}) === null
+  && GA.arcEnRoutePanel({ enRoutePanel: 'no-such-moment' }) === null
+  && GA.arcEnRoutePanel({ enRoutePanel: 'shrine-chronofae' }) === PANELS['shrine-chronofae']);
+ok('A9 helper units: arcCardPanel — null for absent field / unknown id, the PANELS entry for a known id',
+  GA.arcCardPanel(null) === null && GA.arcCardPanel({}) === null
+  && GA.arcCardPanel({ cardPanel: 'no-such-moment' }) === null
+  && GA.arcCardPanel({ cardPanel: 'shrine-chronofae' }) === PANELS['shrine-chronofae']);
+ok('A9 helper units: arcFinalePanel resolves the dormant FINALE_PANEL const (null at T0) to null',
+  FINALE_PANEL === null && GA.arcFinalePanel() === null);
 ok('A3 panel art obeys the gate: <=16 colors, 128x80 canvas standard, full row set',
   Object.values(PANELS).every(({ art }) => {
     const e = ART[art];

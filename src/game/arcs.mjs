@@ -14,8 +14,9 @@ import {
   ARCS, arcById, nextArcOf, currentArcOf, arcCompletionMet, badgeCountFor,
   ARC_GIVER_NAMES, HOME_MAP_ID,
   ARC_FINALE_ECHOES, FINALE_CREDITS_OPEN, FINALE_CREDITS_CLOSE, FINALE_END_CARD,
-  FINALE_GRANT_ITEM_ID, FINALE_UNLOCK_FLAG,
+  FINALE_GRANT_ITEM_ID, FINALE_UNLOCK_FLAG, FINALE_PANEL,
 } from '../data/arcs.mjs';
+import { PANELS } from '../data/panels.mjs';
 import { dexCaughtCount } from './state.mjs';
 import { SPECIES } from '../data/species.mjs';
 import { ITEMS } from '../data/items.mjs';
@@ -76,7 +77,12 @@ export function showArcCompleteCard(g, arc, done) {
   const lines = [s.title, s.badgeLine, ...s.leagueLines, s.dexLine];
   if (s.teamLine) lines.push(s.teamLine);
   lines.push(s.playtimeLine, s.forwardLine);
-  g.ui.say(lines, () => { if (done) done(); }, '');
+  // W10-C seam (dormant until T2 sets cardPanel fields): the arc's
+  // closing panel plays BEFORE the card's text; absent field = the
+  // card exactly as shipped.
+  const play = () => g.ui.say(lines, () => { if (done) done(); }, '');
+  const p = arcCardPanel(arc);
+  if (p && g.ui.showPanel) g.ui.showPanel(p.art, play); else play();
 }
 
 // The finale check (roadmap §2.2 steps 1-2). When the current arc's
@@ -206,6 +212,14 @@ function playFinaleHomecoming(g, next, finish) {
     '"One thing remains in my keeping, and it was never really mine." From a cloth older than the lab he unwraps a flute of clear blue glass. "The ' + itemName + '. It answers at the top of the world, where the first room is. Every other trainer I ever sent out, I sent with a beginning. You are the first I am sending with an ending — go and see what it opens."',
     'Received the ' + itemName.toUpperCase() + '!',
   ];
+  // W10-C seam (dormant until T3 sets FINALE_PANEL): after the full
+  // credits — state already committed by finish() at every site —
+  // the finale panel is the game's closing image. Null resolution =
+  // the credits end exactly as shipped.
+  const afterCredits = () => {
+    const p = arcFinalePanel();
+    if (p && g.ui.showPanel) g.ui.showPanel(p.art, null);
+  };
   g.ui.say(momLines, () => {
     if (echoLines.length) {
       g.ui.say(echoLines, () => {
@@ -213,18 +227,18 @@ function playFinaleHomecoming(g, next, finish) {
           if (next.hookLines && next.hookLines.length) {
             g.ui.say(next.hookLines.slice(), () => {
               finish();
-              g.ui.say(finaleCreditsLines(g.state), null, '');
+              g.ui.say(finaleCreditsLines(g.state), afterCredits, '');
             }, giverName(next));
           } else {
             finish();
-            g.ui.say(finaleCreditsLines(g.state), null, '');
+            g.ui.say(finaleCreditsLines(g.state), afterCredits, '');
           }
         }, 'PROF. HAWTHORN');
       }, 'MOM');
     } else {
       g.ui.say(oakLines, () => {
         finish();
-        g.ui.say(finaleCreditsLines(g.state), null, '');
+        g.ui.say(finaleCreditsLines(g.state), afterCredits, '');
       }, 'PROF. HAWTHORN');
     }
   }, 'MOM');
@@ -319,6 +333,26 @@ export function arcFerryAllowed(state, npc) {
   if (flags['reachedarc_' + arc.id]) return { allowed: true, arc };
   if (arc.arrivalMap && flags['reached_' + arc.arrivalMap]) return { allowed: true, arc };
   return { allowed: false, arc };
+}
+
+// W10-C surface-panel resolution (the embark / card / finale seams).
+// One shape for every surface attach in the wave: an optional data
+// field names a PANELS moment; the helper returns the PANELS entry,
+// or null when the field is absent or the id unknown — and null
+// always means "today's behaviour, byte-identical" at the call site.
+export function arcEnRoutePanel(arc) {
+  if (!arc || !arc.enRoutePanel) return null;
+  return PANELS[arc.enRoutePanel] || null;
+}
+
+export function arcCardPanel(arc) {
+  if (!arc || !arc.cardPanel) return null;
+  return PANELS[arc.cardPanel] || null;
+}
+
+export function arcFinalePanel() {
+  if (!FINALE_PANEL) return null;
+  return PANELS[FINALE_PANEL] || null;
 }
 
 export function arcFerryGateLine(arc) {
