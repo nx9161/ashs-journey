@@ -4899,6 +4899,40 @@ GYMID1_KIND_DEFS.forEach(([kind]) => {
 export const GYMID1_PROP_KINDS = GYMID1_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
 export const GYMID1_WALL_KINDS = GYMID1_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
 export const GYMID1_FLOOR_KINDS = GYMID1_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
+// Gym Identity T2 (Yamato): the eight Yamato gyms' own floor kinds —
+// gustfloor (Iris), hivefloor (Cinder), pasturefloor (Signal),
+// ashenfloor (Lantern), breakfloor (Tidewall), steelfloor (Beacon),
+// glacierfloor (Redwood), scalefloor (Cragmoor) — indices 1572-1579
+// per WAVE-GYM-IDENTITY-PLAN §8 (continuing T1's 1564-1571), verified
+// free against TILE_CHARS and every map row. Name discipline: the
+// concepts' first words bellfloor/ashfloor/shorefloor/harbourfloor/
+// rimefloor are all taken by existing kinds, so each kind takes its
+// concept's own next word. Each is 'floor' class: swapped 1:1 from
+// the walkable '+' gymfloor char inside its own gym ONLY, so floor
+// stays floor (the WALKABLE spread lands in maps.mjs beside the other
+// waves'). The shared 'gymfloor' keeps its other 20 gyms until their
+// tranches land. Authored art: assets/sprites/pix/tiles/tile-<kind>.pix,
+// spliced into art-data.mjs by entry (generator-faithful, additions-only).
+export const GYMID2_KIND_DEFS = [
+  ['gustfloor', 'floor'],
+  ['hivefloor', 'floor'],
+  ['pasturefloor', 'floor'],
+  ['ashenfloor', 'floor'],
+  ['breakfloor', 'floor'],
+  ['steelfloor', 'floor'],
+  ['glacierfloor', 'floor'],
+  ['scalefloor', 'floor'],
+];
+export const GYMID2_KIND_INDEX = { gustfloor: 1572, hivefloor: 1573, pasturefloor: 1574, ashenfloor: 1575, breakfloor: 1576, steelfloor: 1577, glacierfloor: 1578, scalefloor: 1579 };
+export const GYMID2_KIND_CHARS = {};
+GYMID2_KIND_DEFS.forEach(([kind]) => {
+  const ch = String.fromCodePoint(0x1E00 + GYMID2_KIND_INDEX[kind]);
+  GYMID2_KIND_CHARS[kind] = ch;
+  TILE_CHARS[ch] = kind;
+});
+export const GYMID2_PROP_KINDS = GYMID2_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
+export const GYMID2_WALL_KINDS = GYMID2_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
+export const GYMID2_FLOOR_KINDS = GYMID2_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
 export const SINNOH_TOWN_GROUND_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg);
 export const SINNOH_TOWN_GROUND2_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg2);
 // TX-3: the 8 gym exteriors by town (original type-accent motifs).

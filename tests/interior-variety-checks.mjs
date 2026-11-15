@@ -712,7 +712,7 @@ const PINS = {
   }
  },
  "gym-olivine": {
-  "grid": "d33f7fdce0f2512d646f51b9a15e164e0f00f2d076b8c3d24beb7b513402019a",
+  "grid": "eb00c7f13a990f57af39d8defac167bd2b310f6103e38118e5f767a6ee65a3d0",
   "data": "a529b7876674ff9ec0ef6d757f434b1497ba6dd68f57e6527a56013d07f6f487",
   "reach": 108,
   "pos": {
@@ -735,7 +735,7 @@ const PINS = {
   }
  },
  "gym-violet": {
-  "grid": "34182ffdb33bca6a602004ec628b2b8e2b5b8d03757b4862b304b50d6842aa33",
+  "grid": "ac1e72b52b48013b619a0bb18a7671f31d98860d9a135e71740bf93d880f30ce",
   "data": "2d63908d7112d46c6570a8e1274eacc615a39e5bf9065eaba43d8b0d5096136d",
   "reach": 108,
   "pos": {
@@ -896,11 +896,17 @@ const PINS = {
   }
  }
 };
+// Gym Identity T2 re-pin (Director ruling, disclosed): the gym-olivine
+// pair-template value below is gym-violet's grid sha; violet took its
+// own gustfloor at T2, so the pin moved to violet's NEW grid (the pair
+// is deliberately split by the wave — violet keeps its own pin, and
+// olivine's steelfloor grid stays off it). PINS grids for both gyms
+// moved the same way, floor swap only, nothing else.
 const TEMPLATES = {
  "lab": "b139fdde0a9ffcdd666ae962fd686139e1d6b973a92bd73a02359abb2dac4c78",
  "contest": "d3d5a5b03543d6cc69bd06da4d76e15fc69e8e0b4c97afbe424133e721a9088b",
  "chamber": "14470350f7bd8c30c3b88ce432d95d12e321ac8b8f491cff1878245f4ca0e54a",
- "gym-olivine": "34182ffdb33bca6a602004ec628b2b8e2b5b8d03757b4862b304b50d6842aa33",
+ "gym-olivine": "ac1e72b52b48013b619a0bb18a7671f31d98860d9a135e71740bf93d880f30ce",
  "gym-oreburgh": "48cd5e613f3560949025a0823b6e07ef20d68942ef0b78ba9c0bd05a1e692b64",
  "gym-veilstone": "dda2c53e9a565df760744175f16bf7c92b600a5c689172e5ae4fb767059eea3a",
  "gym-fortree": "f485674de851a43b264a553a42ad01ef2eae9688823cdeeae1074fda27674d92"
@@ -963,7 +969,12 @@ for (const id of SCOPED) {
       'got ' + got.join(' ') + ' want ' + PINS[id].pos[k].join(' '));
   }
 }
-const FLOOR_OF = (id) => id.includes('lab') ? 'labfloor' : id.includes('contest') ? 'silphfloor' : 'gymfloor';
+// Gym Identity T2 re-pin (Director ruling, disclosed): gym-violet and
+// gym-olivine took their own floor kinds (gustfloor / steelfloor), so
+// the floor kind under their posts is their own — the posts themselves
+// never moved. Later tranches add their W16-B gyms here the same way.
+const FLOOR_OVERRIDES = { 'gym-violet': 'gustfloor', 'gym-olivine': 'steelfloor' };
+const FLOOR_OF = (id) => FLOOR_OVERRIDES[id] || (id.includes('lab') ? 'labfloor' : id.includes('contest') ? 'silphfloor' : 'gymfloor');
 // map-npc post cells keep their floor kind
 for (const id of SCOPED) for (const n of MAPS[id].npcs || [])
   ok('W16B3 ' + id + ' post cell (' + n.x + ',' + n.y + ') floor intact', kindOf(MAPS[id].rows[n.y][n.x]) === FLOOR_OF(id));
@@ -973,7 +984,7 @@ const APPENDED = [
   ['elm-lab', 'PROF. LINDEN', 8, 4, 'labfloor'],
   ['contest-fallarbor', 'MAIA', 8, 6, 'battlemat'], ['contest-lilycove', 'MAIA', 8, 6, 'battlemat'],
   ['contest-slateport', 'MAIA', 8, 6, 'battlemat'], ['contest-verdanturf', 'MAIA', 8, 6, 'battlemat'],
-  ['gym-olivine', 'LIORA', 7, 2, 'gymfloor'], ['gym-violet', 'AVEN', 7, 2, 'gymfloor'],
+  ['gym-olivine', 'LIORA', 7, 2, 'steelfloor'], ['gym-violet', 'AVEN', 7, 2, 'gustfloor'],
   ['gym-oreburgh', 'RONAN', 7, 2, 'gymfloor'], ['gym-rustboro', 'SAXA', 7, 2, 'gymfloor'],
   ['gym-veilstone', 'MAREN', 7, 2, 'gymfloor'], ['gym-dewford', 'ENZO', 7, 2, 'gymfloor'],
   ['gym-fortree', 'ARIA', 7, 2, 'gymfloor'], ['gym-eterna', 'TANSY', 7, 2, 'gymfloor'],

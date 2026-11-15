@@ -1,0 +1,23 @@
+# Gym Identity T2 (Cinder): honeycomb amber floor — Hive-toned cells dotted in seam brown over amber. Cinder's own floor — the forest gym's hive register underfoot.
+PIX hivefloor 16 16
+aaabaaaaaabacaaa
+ababbaaaaaaaabaa
+badaaadabadbaadb
+abaaacaaaaaacaab
+aaababaababbaaaa
+aababaaaabacacab
+daaadaaadaaadaaa
+aacaaacaccaaaaba
+aacaaabaaababbaa
+aabaaaaaaaaaaaaa
+cadbcbdaaadaaada
+caaabbacaacaaaab
+aaaacaacaaaaabaa
+caaaaaaaabaaabab
+dabadaaadaaadaaa
+bcbaaacaaaaaaaac
+PAL
+a #c89838
+b #a87c28
+c #e8b84c
+d #7c5c1c

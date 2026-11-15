@@ -1,0 +1,23 @@
+# Gym Identity T2 (Cragmoor): dragon-scale stone floor — scalloped scale rows in dark maroon, one lava glint. Cragmoor's own floor — the den's scale register underfoot.
+PIX scalefloor 16 16
+aacbaacaaacacaca
+ababbaaaaaaaabaa
+aaaaaaaabaabaaca
+bbbbbbbbbbbbbbbb
+caabcbaacaaacaaa
+aaaabaaaabaaaaab
+aaaaaaaaaaaaaaaa
+bbbbbbbbbbbbbbbb
+aacaaacaaacaabca
+aaaaaaaaaaaaaaaa
+cacbcbaaadaaaaaa
+bbbbbbbbbbbbbbbb
+caaacaaccaaacaaa
+caaaaaaaabaaabab
+aaaaaaaabaaaaaaa
+bbbbbbbbbbbbbbbb
+PAL
+a #4a3436
+b #3a282a
+c #5c4244
+d #ff7a1a

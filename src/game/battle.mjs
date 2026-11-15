@@ -226,6 +226,32 @@ const GYM_ARENA_ART = {
   // corporate gold; reads heavier than Flintridge's quarry (its
   // skeleton twin), as the final gym should.
   'gym-viridian': { sky: ['#6a6488', '#746f96', '#7e7aa4', '#8885b2', '#928fc0', '#9c99ce'], ground: ['#6e5a44', '#64503c', '#5a4634', '#50402e', '#463826', '#3c3020'], dark: '#2a2016', light: '#f2e8d0', accent: '#e8c832', motif: 'tombs', tex: 'chunk', amb: { kind: 'mote', n: 10, speed: 4 } },
+  // T2 Yamato (WAVE-GYM-IDENTITY-PLAN §5): same discipline — palette/
+  // motif/tex/amb only, layered over each gym's frozen Ground.
+  // Iris: sky-gym storm — a dusk-violet tempest, bell-gold lightning;
+  // the storm base's grey-green is the open route's weather, not this.
+  'gym-violet': { sky: ['#5a4a78', '#665488', '#72609a', '#7e6ca6', '#8a78b2', '#9684be'], ground: ['#6a7a68', '#61715f', '#586856', '#4f5f4d', '#465644', '#3d4d3b'], dark: '#2e2a44', light: '#fff0a8', accent: '#f0b429', motif: 'storm', tex: 'spark', amb: { kind: 'rain', n: 14, speed: 120 } },
+  // Cinder: forest-floor bloom — canopy-deep greens, mossy litter,
+  // Hive amber where the bloom base wears pink.
+  'gym-azalea': { sky: ['#5da872', '#68b37e', '#73be8a', '#7ec996', '#89d4a2', '#94dfae'], ground: ['#8a9a58', '#7f904f', '#748646', '#697c3d', '#5e7234', '#53682b'], dark: '#3a4a26', light: '#f8e9a8', accent: '#f0a018', motif: 'flowers', tex: 'petal', amb: { kind: 'petal', n: 12, speed: 8 } },
+  // Signal: plain-by-design — Willa's Open identity kept honest: warm
+  // dairy-pasture palette over frozen Open rules, no spectacle.
+  'gym-goldenrod': { sky: ['#7fb2e8', '#8dbcf0', '#9bc6f4', '#a9d0f7', '#b7daf9', '#c5e4fb'], ground: ['#b5d878', '#aad06e', '#9fc864', '#94c05a', '#89b850', '#7eae46'], dark: '#5d8a3c', light: '#fdf6c8', accent: '#e8a83c', motif: 'trees', tex: 'tuft', haze: true, amb: { kind: 'mote', n: 8, speed: 4 } },
+  // Lantern: Burned-Tower ash — smoke-dark sky, ashen ground, bell
+  // bronze and candlelight where the grave base wears lavender.
+  'gym-ecruteak': { sky: ['#3e3648', '#463e52', '#4e465c', '#564e66', '#5e5670', '#665e7a'], ground: ['#5c564e', '#544e46', '#4c463e', '#443e36', '#3c362e', '#342e26'], dark: '#241e20', light: '#ffd9a0', accent: '#c88a3a', motif: 'tombs', tex: 'fleck', amb: { kind: 'mote', n: 10, speed: 4 } },
+  // Tidewall: shore-break rubble — sea-grey sky, wet-sand ground, foam
+  // light and sea-teal where Flintridge's rubble is dry quarry tan.
+  'gym-cianwood': { sky: ['#7a9ab2', '#86a6be', '#92b2ca', '#9ebed6', '#aacade', '#b6d6e6'], ground: ['#a89878', '#9d8d6e', '#928264', '#877758', '#7c6c4c', '#716140'], dark: '#5c4c30', light: '#f4f8ec', accent: '#3aa8a0', motif: 'waves', tex: 'foam', amb: { kind: 'bubble', n: 10, speed: 7 } },
+  // Beacon: harbour steel over Tide — plate-grey ground, harbour-
+  // morning sky, beacon-amber lamps on the new 'steel' girder motif.
+  'gym-olivine': { sky: ['#6a86a0', '#7592ac', '#80a0b8', '#8baec4', '#96bad0', '#a1c6dc'], ground: ['#8a97a3', '#7f8c98', '#747f8a', '#69727c', '#5e656e', '#535860'], dark: '#2c3844', light: '#ffe9a8', accent: '#f8b828', motif: 'steel', tex: 'chunk', amb: { kind: 'spark', n: 10, speed: 0 } },
+  // Redwood: fifty-winters frost — winter-dusk indigo snowfields,
+  // glacier cyan, heavier slower snowfall than the bright frost base.
+  'gym-mahogany': { sky: ['#7a9cc4', '#86a8ce', '#92b4d8', '#9ec0e2', '#aaccec', '#b6d8f6'], ground: ['#d8e6f4', '#cbdaf0', '#becfe8', '#b1c3e0', '#a4b7d8', '#97abd0'], dark: '#4a6a9a', light: '#ffffff', accent: '#5ab8e8', motif: 'snow', tex: 'spark', haze: true, amb: { kind: 'snow', n: 18, speed: 9 } },
+  // Cragmoor: the den's lava-hearted dark — maroon-black sky, the new
+  // 'dragon' scale-ridge motif with lava glints, dense embers.
+  'gym-blackthorn': { sky: ['#3a2426', '#422a2c', '#4a3032', '#523638', '#5a3c3e', '#624244'], ground: ['#3c2c28', '#352722', '#2e211e', '#271c1a', '#201716', '#191212'], dark: '#140c0c', light: '#ffc478', accent: '#ff7a1a', motif: 'dragon', tex: 'chunk', amb: { kind: 'ember', n: 16, speed: 18 } },
 };
 
 function gymArenaFor(field) {
@@ -3042,6 +3068,29 @@ export class BattleScene {
           const fh = 6 + Math.floor(arenaHash(i, 67) * 10);
           F(A, x, horizon - fh, 3, fh); F(L, x + 1, horizon - fh, 1, 3); F(A, x - 2, horizon - fh + 3, 7, 2);
           F(L, x + 1, horizon - fh - 3, 2, 3);
+        }
+        F(D, 0, horizon, w, 2);
+      } else if (M === 'dragon') {
+        // Gym Identity T2 (Cragmoor): a horned scale-ridge — hashed
+        // columns with stepped horn tips and accent scale glints; the
+        // rocks/spires rows paint plain teeth, this ridge is crested.
+        for (let x = 0, i = 0; x < w - 4; x += 10, i++) {
+          const th = 5 + Math.floor(arenaHash(i, 43) * 9);
+          F(D, x, horizon - th, 7, th);
+          F(D, x + 2, horizon - th - 3, 3, 3);
+          if (i % 2 === 0) F(A, x + 1, horizon - Math.max(2, th - 3), 2, 2);
+          if (i % 3 === 0) F(L, x + 4, horizon - 2, 2, 1);
+        }
+        F(D, 0, horizon, w, 2);
+      } else if (M === 'steel') {
+        // Gym Identity T2 (Beacon; Bridgeport reuses it at T4): a
+        // riveted girder row — twin chords, posts, light rivets and
+        // accent lamp blocks standing on the horizon.
+        F(D, 0, horizon - 10, w, 3); F(D, 0, horizon - 4, w, 2);
+        for (let x = 4, i = 0; x < w - 8; x += 22, i++) {
+          F(D, x, horizon - 10, 3, 10);
+          F(L, x + 1, horizon - 8, 1, 1); F(L, x + 1, horizon - 5, 1, 1);
+          if (i % 2 === 0) F(A, x + 10, horizon - 9, 4, 2);
         }
         F(D, 0, horizon, w, 2);
       } else { // snow

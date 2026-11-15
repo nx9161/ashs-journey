@@ -1337,6 +1337,14 @@ export const WALKABLE = new Set(['.', ',', 'D', 'E', 'C', 'F', 'J', 'K', '1', '2
   // (Caldera), loamfloor (Fernmere) — each swapped 1:1 from the walkable
   // '+' gymfloor char inside its own gym, so floor stays floor.
   ...[1564, 1565, 1566, 1567, 1568, 1569, 1570, 1571]
+    .map((i) => String.fromCodePoint(0x1E00 + i)),
+  // Gym Identity T2: the eight Yamato gym floor chars (U+1E00+1572..1579,
+  // tiles.mjs GYMID2_KIND_DEFS) are walkable — gustfloor (Iris),
+  // hivefloor (Cinder), pasturefloor (Signal), ashenfloor (Lantern),
+  // breakfloor (Tidewall), steelfloor (Beacon), glacierfloor
+  // (Redwood), scalefloor (Cragmoor) — each swapped 1:1 from the
+  // walkable '+' gymfloor char inside its own gym, so floor stays floor.
+  ...[1572, 1573, 1574, 1575, 1576, 1577, 1578, 1579]
     .map((i) => String.fromCodePoint(0x1E00 + i))]);
 
 // Trainer definitions for the slice.
