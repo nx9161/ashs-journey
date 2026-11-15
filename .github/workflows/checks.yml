@@ -23,6 +23,10 @@
 # T2 adds the entry/redaction/paging sections);
 # interior-variety added by W16-T1 (G1-G3 group retirement + invariant
 # pins; T2/B extend it to G4-G10 and the labs/contests/chambers/gyms);
+# gym-identity added by Gym-Identity T0 (mechanism + ratchet guard:
+# GYM_ARENA_COVERED 0, GYM_FLOOR_OWNED 0, GYMFLOOR_DOMINANT 36,
+# INTERIOR_TUPLES_DISTINCT 35; rules-freeze + per-gym data pins;
+# T1-T5 burn the ratchets to 36/36/0/36 region by region);
 # W16-T2 merged its whole chartered scope into the same suite
 # (A data/cell/reach/open pins x28, B group retirement x10, C layout
 # quality x8; B for G1-G3 turns green when W16-T1 merges ahead of T2)):
