@@ -1135,6 +1135,20 @@ export const WALKABLE = new Set(['.', ',', 'D', 'E', 'C', 'F', 'J', 'K', '1', '2
   // W17-H 1205-1222, W17-I 1223-1236 and W17-J takes 1237-1250
   // on its parallel branch; 1111 stays empty.)
   ...[1251, 1253, 1254]
+    .map((i) => String.fromCodePoint(0x1E00 + i)),
+  // Wave W17-L: the Maris tranche-1 ground/path chars
+  // (U+1E00+1257.., tiles.mjs W17L_KIND_DEFS) are walkable —
+  // campturf/firstfloor (Route 101), stillturf/stillfloor
+  // (Route 102), wadeturf/wadefloor (Route 103), bedturf/bedfloor
+  // (Route 104) and shadeturf/shadefloor (Meadowbrook Woods),
+  // each swapped 1:1 from the walkable '_' ground / '.' path
+  // chars on its own route, so ground stays ground and path
+  // stays path. The tree chars (1259, 1263, 1267, 1271, 1275)
+  // and prop chars (1260, 1264, 1268, 1272, 1276) are NOT here:
+  // trees and props were never walkable. (Indices 1257-1276 per
+  // the Maris program plan; the Yamato allocation ended at
+  // 1256; 1111 stays empty.)
+  ...[1257, 1258, 1261, 1262, 1265, 1266, 1269, 1270, 1273, 1274]
     .map((i) => String.fromCodePoint(0x1E00 + i))]);
 
 // Trainer definitions for the slice.

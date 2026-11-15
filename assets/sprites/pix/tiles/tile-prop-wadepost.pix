@@ -1,0 +1,24 @@
+# Wave W17-L (Route 103): wade post — a wade marker post on the shore, banded white at the waterline height so walkers can read the crossing, on wade turf (fully opaque, ground baked in). The design’s crossing keeps its markers on both shores.
+PIX tile-prop-wadepost 16 16
+waaaaaaaaaababab
+aaaaaaabaaaaaaaa
+aabaabaaaaaaaaaa
+aabaaaaaaaaaaaaa
+aaabaaakdaaaawaa
+baaaaaakdbaaabaa
+aaaaaaawwbaaaaab
+wbaaabawwbabawaa
+baaawabwwaaabaaa
+baaaaaakdaaaaaaa
+aabaaaakdabaaaaa
+aaaabaakdaaaaaaa
+aaaabaakdaaawaaa
+aaaabddddddaaaaa
+aaabbaawabaaaaaa
+aaaaaaaaaaaaaaab
+PAL
+a #6f9e5f
+b #5f8c50
+w #f0ead2
+d #7d5a34
+k #8a6844

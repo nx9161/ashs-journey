@@ -3166,6 +3166,78 @@ W17K_KIND_DEFS.forEach(([kind], i) => {
 export const W17K_PROP_KINDS = W17K_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
 export const W17K_WALL_KINDS = W17K_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
 export const W17K_FLOOR_KINDS = W17K_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
+// Wave W17-L (Route Build Program, Maris Tranche 1 — the first
+// roads): Rootlet -> Eldergrove -> Meadowbrook + the Woods, the
+// program's opening walk. All five maps are defined once in
+// maps7.mjs (no dual copies in Maris, so no registry re-pins
+// arise). Conversions are char-for-char kind swaps on
+// grassground/path/tree only (maps7 trees stand on the 'T' char);
+// encounter cells/tables, warps, NPC posts, sign records/texts and
+// every shipped dressing kind stay byte-identical. Route 101
+// "First Road" (1257-1260): campturf is a young camp-meadow green
+// with seed-head flecks, firstfloor the first road's pale sand
+// (design-authorised), campelm a young camp elm, fieldkit Birch's
+// field kit (specimen crate + jar box) x2 off the west grass.
+// Route 102 "Pond Road" (1261-1264): stillturf a deep calm
+// still-pond meadow, stillfloor pond-threaded pale sand,
+// pondalder a leaning-crown pond alder, netstand the bug catcher's
+// net stand + bucket x2 by the east path; the five ponds stay
+// byte-identical. Route 103 "Wade Shore" (1265-1268): wadeturf a
+// salt-flecked bluff-shore turf, wadefloor the wade sand the path
+// itself runs on through the shallows (design-authorised),
+// wadepine a shore pine, wadepost wade marker posts x2 on the two
+// shores; the 192 water cells and the shipped beach family
+// (sand/beach-n/beach-ew/psand-w) stay byte-identical entire.
+// Route 104 "Flower Road" (1269-1272): bedturf a bloom-flecked
+// flower-bed meadow, bedfloor petal pale sand, bedelm a flower-road
+// elm, bloombox planter bloom boxes x2 flanking the Pretty Petal
+// shop sign; the shop dressing, the boatman's boardwalk and the
+// surf warps stay byte-identical. Meadowbrook Woods "Silk Shade"
+// (1273-1276): shadeturf a deep shade green with coin-light flecks,
+// shadefloor canopy forest sand, silkoak a silk oak with a
+// cascoon-hung crown drawn in the tree art, silkstrand a fallen
+// silk-strung log section x2 on verified ground cells (the design's
+// strung silk lines are creature-layer dressing — no shipped silk
+// kind, nothing strung). Ground kinds deliberately do NOT end in
+// 'floor' (the desire-path audit counts '*floor' as street tier;
+// grounds must never masquerade as street); path kinds DO end in
+// 'floor' so they register as the route's path tier per route
+// (checklist point 3). Indices 1257-1276 per the program plan
+// (WAVE-W17-MARIS-ROUTE-PROGRAM-PLAN.md): the Yamato allocation
+// ended at 1256; 1111 and every earlier documented gap stay empty.
+// Kind names verified unclaimed against origin/main. Chars
+// U+1E00+1257..
+export const W17L_KIND_DEFS = [
+  ['campturf', 'floor'],
+  ['firstfloor', 'floor'],
+  ['campelm', 'wall'],
+  ['fieldkit', 'prop'],
+  ['stillturf', 'floor'],
+  ['stillfloor', 'floor'],
+  ['pondalder', 'wall'],
+  ['netstand', 'prop'],
+  ['wadeturf', 'floor'],
+  ['wadefloor', 'floor'],
+  ['wadepine', 'wall'],
+  ['wadepost', 'prop'],
+  ['bedturf', 'floor'],
+  ['bedfloor', 'floor'],
+  ['bedelm', 'wall'],
+  ['bloombox', 'prop'],
+  ['shadeturf', 'floor'],
+  ['shadefloor', 'floor'],
+  ['silkoak', 'wall'],
+  ['silkstrand', 'prop'],
+];
+export const W17L_KIND_CHARS = {};
+W17L_KIND_DEFS.forEach(([kind], i) => {
+  const ch = String.fromCodePoint(0x1E00 + 1257 + i);
+  W17L_KIND_CHARS[kind] = ch;
+  TILE_CHARS[ch] = kind;
+});
+export const W17L_PROP_KINDS = W17L_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
+export const W17L_WALL_KINDS = W17L_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
+export const W17L_FLOOR_KINDS = W17L_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
 export const SINNOH_TOWN_GROUND_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg);
 export const SINNOH_TOWN_GROUND2_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg2);
 // TX-3: the 8 gym exteriors by town (original type-accent motifs).
