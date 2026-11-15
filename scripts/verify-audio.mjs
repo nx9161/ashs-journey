@@ -326,6 +326,90 @@ if (B.ctx.resumeCalls !== 2) bad('resume:scheduler', 'scheduler pass did not att
 else ok('music scheduler attempts resume when it finds the ctx suspended');
 B.stopMusic();
 
+console.log('[8] region charter: merged-map music assignment coverage (W12 / NO-SAME-KIT audio)');
+// The merged map table, folded in merge.mjs order, each map charged to the
+// region of the file whose definition wins. Every region owns its area
+// themes; a region caught playing another region's theme (or an unchartered
+// one) fails by map id. Tranches update this charter in the commit that
+// changes the assignments (the W3 registry burn-down pattern).
+const MAP_FILES = ['maps.mjs', 'maps2.mjs', 'maps3.mjs', 'maps4.mjs', 'maps5.mjs', 'maps6.mjs', 'maps7.mjs', 'maps8.mjs', 'maps9.mjs'];
+const MAP_EXPORTS = ['MAPS', 'MAPS2', 'MAPS3', 'MAPS4', 'MAPS5', 'MAPS6', 'MAPS7', 'MAPS8', 'MAPS9'];
+const FILE_REGION = { 'maps.mjs': 'arden', 'maps2.mjs': 'arden', 'maps3.mjs': 'arden', 'maps4.mjs': 'arden', 'maps5.mjs': 'amber', 'maps6.mjs': 'yamato', 'maps7.mjs': 'maris', 'maps8.mjs': 'trial', 'maps9.mjs': 'borea' };
+const LEGACY_POOL = ['pallet-theme', 'viridian-theme', 'pewter-theme', 'route1-theme']; // Arden's authored set
+const REGION_CHARTER = {
+  arden: LEGACY_POOL, // Ruling 1: the legacy four were composed for Arden places; they are Arden's identity
+  amber: ['amber-town-theme', 'amber-route-theme'],
+  yamato: ['yamato-town-theme', 'yamato-route-theme'],
+  maris: ['maris-town-theme', 'maris-route-theme'],
+  trial: LEGACY_POOL, // burn-down: re-pointed by W12-T3
+  borea: LEGACY_POOL, // burn-down: re-pointed by W12-T3
+};
+// Service themes follow the shared service, not the region (the law's own
+// code-fact exception): one gym system (Ruling 2), one Center map, the
+// title/front-door map.
+const SERVICE_THEMES = ['gym-theme', 'center-theme', 'title-theme'];
+// Declared inheritance exceptions: vermilion (Arcport) is defined in the
+// Arden files; the maps5/maps6 entries are spread overrides that replace
+// npcs/events only, so its music is inherited from the Arden definition.
+// Charge it to Arden's charter, not to the file that happens to win.
+const MUSIC_REGION_OVERRIDE = { vermilion: 'arden' };
+{
+  const f8 = failures;
+  const merged = new Map();
+  for (let i = 0; i < MAP_FILES.length; i++) {
+    const mod = await import(path.join(ROOT, 'src', 'data', MAP_FILES[i]));
+    for (const [id, m] of Object.entries(mod[MAP_EXPORTS[i]])) merged.set(id, { file: MAP_FILES[i], map: m });
+  }
+  let chartered = 0;
+  for (const [id, { file, map }] of merged) {
+    const region = MUSIC_REGION_OVERRIDE[id] || FILE_REGION[file];
+    if (!map.music) { bad('charter:' + id, 'no music field (engine would fall back to route1-theme)'); continue; }
+    if (!MUSIC[map.music]) { bad('charter:' + id, 'music id ' + map.music + ' not in score'); continue; }
+    if (!REGION_CHARTER[region].includes(map.music) && !SERVICE_THEMES.includes(map.music)) {
+      bad('charter:' + id, map.music + ' is outside the ' + region + ' charter (winning def in ' + file + ')');
+      continue;
+    }
+    chartered++;
+  }
+  if (failures === f8) ok('all ' + chartered + ' merged maps play inside their region charter (amber/yamato/maris on their own pairs; trial/borea legacy burn-down until W12-T3)');
+  // Code-selected contexts: every '-theme' literal named outside the data
+  // tables (battle/title/contest call sites, engine fallback) must resolve.
+  const themeLits = new Map();
+  for (const f of walkMjs(path.join(ROOT, 'src'))) {
+    const rel = path.relative(ROOT, f);
+    if (rel.startsWith(path.join('src', 'data'))) continue;
+    const text = fs.readFileSync(f, 'utf8');
+    for (const m of text.matchAll(/'([a-z0-9]+(?:-[a-z0-9]+)*-theme)'/g)) if (!themeLits.has(m[1])) themeLits.set(m[1], rel);
+  }
+  let danglingThemes = 0;
+  for (const [t, rel] of themeLits) if (!MUSIC[t]) { danglingThemes++; bad('context-theme:' + t, 'named in ' + rel + ' but not in MUSIC'); }
+  if (!danglingThemes) ok('all ' + themeLits.size + ' code-selected theme ids resolve in MUSIC (' + [...themeLits.keys()].sort().join(', ') + ')');
+}
+
+console.log('[9] loop distinctness: lead-melody interval fingerprints (W12)');
+// A transposed copy has the SAME interval sequence as its source, so
+// pairwise-distinct lead interval fingerprints ban variants-by-transposition
+// by construction. Lead = tracks[0] (the contract's melody track).
+{
+  const f9 = failures;
+  const NOTE_BASE = { C: 0, D: 2, E: 4, F: 5, G: 7, A: 9, B: 11 };
+  const semiOf = (p) => { const m = /^([A-G])([#b]?)(\d)$/.exec(p); return (+m[3] + 1) * 12 + NOTE_BASE[m[1]] + (m[2] === '#' ? 1 : m[2] === 'b' ? -1 : 0); };
+  const hashOf = (s) => { let h = 5381; for (let i = 0; i < s.length; i++) h = ((h * 33) ^ s.charCodeAt(i)) >>> 0; return h.toString(16).padStart(8, '0'); };
+  const prints = new Map();
+  const spread = [];
+  for (const [id, t] of Object.entries(MUSIC)) {
+    const lead = t.tracks[0];
+    const notes = [...lead.notes].sort((a, b) => a[0] - b[0]);
+    if (notes.length < 2 || notes.some((n) => n[1] === null)) { bad('fingerprint:' + id, 'lead track is not a pitched melody'); continue; }
+    const semis = notes.map((n) => semiOf(n[1]));
+    const fp = semis.slice(1).map((s, i) => s - semis[i]).join(',');
+    if (prints.has(fp)) bad('fingerprint:' + id, 'lead interval sequence identical to ' + prints.get(fp) + ' (transposed-copy class)');
+    else prints.set(fp, id);
+    spread.push(id + ' bpm' + t.bpm + ' lead-from ' + notes[0][1] + ' fp ' + hashOf(fp));
+  }
+  if (failures === f9) ok('all ' + prints.size + ' loops carry pairwise-distinct lead interval fingerprints');
+  console.log('       spread: ' + spread.join(' · '));
+}
 console.log('[10] cry coverage + distinctness: every species resolves its own cry (W12-T1)');
 const sp1 = await import(path.join(ROOT, 'src', 'data', 'species.mjs'));
 const sp2 = await import(path.join(ROOT, 'src', 'data', 'species2.mjs'));

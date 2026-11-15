@@ -32,7 +32,7 @@ export const MAPS6 = {
   "newbark": {
     "id": "newbark",
     "name": "Galefield Town",
-    "music": "pallet-theme",
+    "music": "yamato-town-theme",
     "rows": [
       "~~~~~~~~~~~~~~~~~~~~~~~~~~~~",
       "~~~″ἇἇ~~~~~~~~~~~~~~~~~~~~~~",
@@ -350,7 +350,7 @@ export const MAPS6 = {
   "cherrygrove": {
     "id": "cherrygrove",
     "name": "Blossom City",
-    "music": "viridian-theme",
+    "music": "yamato-town-theme",
     "rows": [
       "ặặặặặặặặặặặặặặặặặặặặặặặặặặặặ",
       "ặẵẵẵẵẵ※ẵẵẵẵẵẵẵẵẵẵẵẵẵ※ẵẵẵẵẵẵ~",
@@ -654,7 +654,7 @@ export const MAPS6 = {
   "violet": {
     "id": "violet",
     "name": "Iris City",
-    "music": "viridian-theme",
+    "music": "yamato-town-theme",
     "rows": [
       "ếếếỀếếếếếếỀếếếếếếỀếếếếếếỀếếếếế",
       "ếẽẽẽẽẽẽẽẽẽẽẽoẤếếếếẤẽẽẽẽẽẽẽẽRẽế",
@@ -1010,7 +1010,7 @@ export const MAPS6 = {
   "azalea": {
     "id": "azalea",
     "name": "Cinder Town",
-    "music": "viridian-theme",
+    "music": "yamato-town-theme",
     "rows": [
       "ệệệỈệệệệệệỈệệệệệệỈệệệệệệỈệệệ",
       "ệễễễễễễễễễễễoễễễễễễầầễễễễễễệ",
@@ -1384,7 +1384,7 @@ export const MAPS6 = {
   "goldenrod": {
     "id": "goldenrod",
     "name": "Signal City",
-    "music": "pewter-theme",
+    "music": "yamato-town-theme",
     "rows": [
       "ỏỏỏỐỏỏỏỏỏỏỐỏỏỏỏỏ∮∮ỏỏỏỏỏỏỐỏỏỏỏỏỏỐỏỏ",
       "ỏọoọ∮∮∮∮∮∮∮∮∮∮∮∮∮∮∮∮∮∮∮∮∮∮∮∮∮∮∮∮oỏ",
@@ -1777,7 +1777,7 @@ export const MAPS6 = {
   "ecruteak": {
     "id": "ecruteak",
     "name": "Lantern City",
-    "music": "pewter-theme",
+    "music": "yamato-town-theme",
     "rows": [
       "ỗỗỗỗỘỗỗỗỗỗỗỘỗỗỗỗỗỗỗỘỗỗỗỗỗỗỘỗỗỗ",
       "ỗổổổổổổổổổổổổổổổổổổổổẤỗỗỗỗẤổổỗ",
@@ -2159,7 +2159,7 @@ export const MAPS6 = {
   "r29": {
     "id": "r29",
     "name": "Route 29",
-    "music": "route1-theme",
+    "music": "yamato-route-theme",
     "rows": [
       "⊒⊒⊒⊒⊒⊒⊒⊒⊒⊒⊒⊒⊒⊒⊒⊒⊒⊒⊑⊑⊒⊒⊒⊒⊒⊒",
       "⊒⊐⊐⊐,⊐⊐⊐⊐⊐⊐⊐⊐⊐⊐,,F⊑⊑⊐,⊐F⊐⊒",
@@ -2348,7 +2348,7 @@ export const MAPS6 = {
   "r30": {
     "id": "r30",
     "name": "Route 30",
-    "music": "route1-theme",
+    "music": "yamato-route-theme",
     "rows": [
       "⊖⊖⊖⊖⊖⊖⊖⊖⊖⊖⊖⊕⊕⊖⊖⊖⊖⊖⊖⊖⊖⊖⊖⊖",
       "⊖⊔F,⊔,⊔⊔⊔⊔⊔⊕⊕⊔⊔,⊔⊔⊔⊔,⊔⊔⊖",
@@ -2547,7 +2547,7 @@ export const MAPS6 = {
   "r31": {
     "id": "r31",
     "name": "Route 31",
-    "music": "route1-theme",
+    "music": "yamato-route-theme",
     "rows": [
       "⊚⊚⊚⊚⊚⊚⊚⊚⊚⊚⊚⊚⊚⊚⊚⊚⊚⊚⊚⊚⊚⊚⊚⊚⊚⊚",
       "⊚⊘⊘⊘F⊘⊘⊘,⊘,⊘⊘,⊘⊘,F,⊘,⊘⊘,⊘⊚",
@@ -2691,7 +2691,7 @@ export const MAPS6 = {
   "r32": {
     "id": "r32",
     "name": "Route 32",
-    "music": "route1-theme",
+    "music": "yamato-route-theme",
     "rows": [
       "⊞⊞⊞⊞⊞⊞⊞⊞⊞⊞⊞⊝⊝⊞⊞⊞⊞⊞⊞⊞⊞⊞⊞⊞",
       "⊞⊜⊜⊜F⊜⊜⊜⊜⊜⊜⊝⊝⊜⊜,⊜⊜⊜,⊜,⊜⊞",
@@ -2934,7 +2934,7 @@ export const MAPS6 = {
   "union-cave": {
     "id": "union-cave",
     "name": "Junction Cave",
-    "music": "pewter-theme",
+    "music": "yamato-route-theme",
     "rows": [
       "⊡⊡⊠⊠⊡⊡⊡⊡⊡⊡⊡⊡⊡⊡⊡⊡⊡⊡⊡⊡⊡⊡⊡⊡⊡⊡",
       "⊡⊠⊠⊠⊠⊠⊠⊠⊠⊠⊠⊠⊠⊠⊠⊠⊠⊠ý⊠⊠⊠⊠þ⊠⊡",
@@ -3073,7 +3073,7 @@ export const MAPS6 = {
   "r33": {
     "id": "r33",
     "name": "Route 33",
-    "music": "route1-theme",
+    "music": "yamato-route-theme",
     "rows": [
       "⊤⊤⊤⊤⊤⊤⊤⊤⊤⊤⊤⊤⊤⊤⊤⊤⊤⊤⊤⊤⊤⊤⊤⊤",
       "⊤⊢,⊢⊢⊢⊢⊢⊢⊢⊢⊢,⊢⊢⊢⊢⊢⊢⊢F⊢⊢⊤",
@@ -3268,7 +3268,7 @@ export const MAPS6 = {
   "ilex-forest": {
     "id": "ilex-forest",
     "name": "Holly Forest",
-    "music": "viridian-theme",
+    "music": "yamato-route-theme",
     "rows": [
       "⊨⊨⊨⊨⊨⊨⊨⊨⊨⊨⊨⊨⊨⊨⊨⊨⊨⊨⊨⊨⊨⊨⊨⊨⊨⊨⊨⊨",
       "⊨,⊦⊦⊦⊦F⊨⊦⊦⊦,⊦⊦⊦⊦⊦⊦⊦⊦⊦F⊦⊨F⊦,⊨",
@@ -3433,7 +3433,7 @@ export const MAPS6 = {
   "r34": {
     "id": "r34",
     "name": "Route 34",
-    "music": "route1-theme",
+    "music": "yamato-route-theme",
     "rows": [
       "⊬⊬⊬⊬⊬⊬⊬⊬⊬⊬⊬⊫⊫⊬⊬⊬⊬⊬⊬⊬⊬⊬⊬⊬",
       "⊬F⊪⊪,⊪⊪⊪⊪,⊪⊫⊫⊪,F⊪⊬⊪⊪⊪,⊪⊬",
@@ -3639,7 +3639,7 @@ export const MAPS6 = {
   "r35": {
     "id": "r35",
     "name": "Route 35",
-    "music": "route1-theme",
+    "music": "yamato-route-theme",
     "rows": [
       "⊰⊰⊰⊰⊰⊰⊰⊰⊰⊰⊰⊯⊯⊰⊰⊰⊰⊰⊰⊰⊰⊰⊰⊰",
       "⊰⊮⊮⊮,⊮,⊮⊮,⊱⊯⊯⊯⊱,F⊮⊮⊮,⊮⊮⊰",
@@ -3848,7 +3848,7 @@ export const MAPS6 = {
   "national-park": {
     "id": "national-park",
     "name": "National Park",
-    "music": "viridian-theme",
+    "music": "yamato-route-theme",
     "rows": [
       "ỏỏỏỏỏỏỏỏỏỏỏỏỏ⊳⊳ỏỏỏỏỏỏỏỏỏỏỏỏỏ",
       "ỏ⊲⊲⊲⊲⊲⊲⊲⊲⊲⊲⊲⊲⊳⊳⊳⊲⊲⊲Ẅ⊲⊲⊲⊲⊲⊲⊲ỏ",
@@ -4073,7 +4073,7 @@ export const MAPS6 = {
   "r36": {
     "id": "r36",
     "name": "Route 36",
-    "music": "route1-theme",
+    "music": "yamato-route-theme",
     "rows": [
       "⊷⊷⊷⊷⊷⊷⊷⊷⊷⊷⊷⊷⊷⊷⊷⊷⊷⊷⊷⊷⊶⊶⊷⊷⊷⊷⊷⊷",
       "⊷⊵⊵⊵⊵⊵⊵⊵⊵⊵R⊵⊵F⊵⊵⊷⊵⊵⊵⊶⊶⊵,⊵⊵F⊷",
@@ -4286,7 +4286,7 @@ export const MAPS6 = {
   "r37": {
     "id": "r37",
     "name": "Route 37",
-    "music": "route1-theme",
+    "music": "yamato-route-theme",
     "rows": [
       "⊻⊻⊻⊻⊻⊻⊻⊻⊻⊻⊻⊺⊺⊻⊻⊻⊻⊻⊻⊻⊻⊻⊻⊻",
       "⊻⊹⊹⊹⊹⊹Ấ,⊹⊹⊹⊺⊺ẤF,⊹⊹Fn⊹⊹,⊻",
@@ -4444,7 +4444,7 @@ export const MAPS6 = {
   "house-newbark": {
     "id": "house-newbark",
     "name": "Galefield House",
-    "music": "viridian-theme",
+    "music": "yamato-town-theme",
     "rows": [
       "<<<<<<<<<<<<<<",
       "<*δ**ε***η*θ*<",
@@ -4507,7 +4507,7 @@ export const MAPS6 = {
   "house-cherrygrove": {
     "id": "house-cherrygrove",
     "name": "Blossom House",
-    "music": "viridian-theme",
+    "music": "yamato-town-theme",
     "rows": [
       "<<<<<<<<<<<<<<",
       "<*δ**ε***η*θ*<",
@@ -4570,7 +4570,7 @@ export const MAPS6 = {
   "house-violet": {
     "id": "house-violet",
     "name": "Iris House",
-    "music": "viridian-theme",
+    "music": "yamato-town-theme",
     "rows": [
       "<<<<<<<<<<<<<<",
       "<*δ**ε***η*θ*<",
@@ -4633,7 +4633,7 @@ export const MAPS6 = {
   "house-azalea": {
     "id": "house-azalea",
     "name": "Cinder House",
-    "music": "viridian-theme",
+    "music": "yamato-town-theme",
     "rows": [
       "<<<<<<<<<<<<<<",
       "<*δ**ε***η*θ*<",
@@ -4696,7 +4696,7 @@ export const MAPS6 = {
   "house-goldenrod": {
     "id": "house-goldenrod",
     "name": "Signal House",
-    "music": "viridian-theme",
+    "music": "yamato-town-theme",
     "rows": [
       "<<<<<<<<<<<<<<",
       "<*δ**ε***η*θ*<",
@@ -4759,7 +4759,7 @@ export const MAPS6 = {
   "house-ecruteak": {
     "id": "house-ecruteak",
     "name": "Lantern House",
-    "music": "viridian-theme",
+    "music": "yamato-town-theme",
     "rows": [
       "<<<<<<<<<<<<<<",
       "<*δḟ*ε***η*θ*<",
@@ -4822,7 +4822,7 @@ export const MAPS6 = {
   "elm-lab": {
     "id": "elm-lab",
     "name": "Linden Lab",
-    "music": "viridian-theme",
+    "music": "yamato-town-theme",
     "rows": [
       ">>>>>>>>>>>>>>>>>>",
       ">--ξ--ο---π--ξ-η->",
@@ -4907,7 +4907,7 @@ export const MAPS6 = {
   "kurt-house": {
     "id": "kurt-house",
     "name": "Hendrik's House",
-    "music": "viridian-theme",
+    "music": "yamato-town-theme",
     "rows": [
       "<<<<<<<<<<<<<<",
       "<**ḻ**Ḽ**ầ***<",
@@ -5228,7 +5228,7 @@ export const MAPS6 = {
   "sprout-tower-1": {
     "id": "sprout-tower-1",
     "name": "Newleaf Tower 1F",
-    "music": "pewter-theme",
+    "music": "yamato-route-theme",
     "rows": [
       "MMMMMMMMMMMMMMMM",
       "MQQQQQQQQQQQQ9QM",
@@ -5336,7 +5336,7 @@ export const MAPS6 = {
   "sprout-tower-2": {
     "id": "sprout-tower-2",
     "name": "Newleaf Tower 2F",
-    "music": "pewter-theme",
+    "music": "yamato-route-theme",
     "rows": [
       "MMMMMMMMMMMMMMMM",
       "MQQQQQQQQQQQQQQM",
@@ -5432,7 +5432,7 @@ export const MAPS6 = {
   "slowpoke-well": {
     "id": "slowpoke-well",
     "name": "DOZPOTAM Well",
-    "music": "pewter-theme",
+    "music": "yamato-route-theme",
     "rows": [
       "GGGGGGGGGGGGGGGGGGGG",
       "GLLLLNLLLLLLLLNLLLLG",
@@ -5530,7 +5530,7 @@ export const MAPS6 = {
   "radio-tower-1": {
     "id": "radio-tower-1",
     "name": "Radio Tower 1F",
-    "music": "pewter-theme",
+    "music": "yamato-route-theme",
     "rows": [
       "IIIIIIIIIIIIIIIIII",
       "I%%ḛ%ḛ%%%%%%ṇ%%9%I",
@@ -5610,7 +5610,7 @@ export const MAPS6 = {
   "radio-tower-2": {
     "id": "radio-tower-2",
     "name": "Radio Tower 2F",
-    "music": "pewter-theme",
+    "music": "yamato-route-theme",
     "rows": [
       "IIIIIIIIIIIIIIIIII",
       "I%9%%%ḛ%%%ṇ%%%%%%I",
@@ -5675,7 +5675,7 @@ export const MAPS6 = {
   "radio-tower-3": {
     "id": "radio-tower-3",
     "name": "Radio Tower 3F",
-    "music": "pewter-theme",
+    "music": "yamato-route-theme",
     "rows": [
       "IIIIIIIIIIIIIIIIII",
       "I%%%%%%%%%%%%%%%%I",
@@ -5737,7 +5737,7 @@ export const MAPS6 = {
   "goldenrod-underground-1": {
     "id": "goldenrod-underground-1",
     "name": "Signal Underground",
-    "music": "pewter-theme",
+    "music": "yamato-route-theme",
     "rows": [
       "GGGṲṲṲṲṲṲGGGGGGGGGGGGG",
       "GLLLLLẆLLẁLLLLLLṴLL9LG",
@@ -5817,7 +5817,7 @@ export const MAPS6 = {
   "goldenrod-underground-2": {
     "id": "goldenrod-underground-2",
     "name": "Underground — South Passage",
-    "music": "pewter-theme",
+    "music": "yamato-route-theme",
     "rows": [
       "GGGGGGGGGGṲṲṲṲṲṲGGGGGG",
       "GLLLLLLLLLLLLẑLLLẁLLLG",
@@ -5873,7 +5873,7 @@ export const MAPS6 = {
   "burned-tower-1": {
     "id": "burned-tower-1",
     "name": "Ashen Tower 1F",
-    "music": "pewter-theme",
+    "music": "yamato-route-theme",
     "rows": [
       "ẫẫẫẫẫẫẫẫẫẫẫẫẫẫẫẫẫẫ",
       "ẫẪ9ẪẪẪẪẪẪẪẪẪẪẪẪẪẪẫ",
@@ -5978,7 +5978,7 @@ export const MAPS6 = {
   "burned-tower-2": {
     "id": "burned-tower-2",
     "name": "Ashen Tower B1F",
-    "music": "pewter-theme",
+    "music": "yamato-route-theme",
     "rows": [
       "GGGGGGGGGGGGGGGGGGGG",
       "GLLLLLLLLLLLLLLLLLLG",
@@ -6067,7 +6067,7 @@ export const MAPS6 = {
   "bell-tower-1": {
     "id": "bell-tower-1",
     "name": "Chime Tower 1F",
-    "music": "pewter-theme",
+    "music": "yamato-route-theme",
     "rows": [
       "ẫẫẫẫẫẫẫẫẫẫẫẫẫẫẫẫ",
       "ẫẪẪẪẪẪẪẪẪẪẪẪẪ9Ẫẫ",
@@ -6175,7 +6175,7 @@ export const MAPS6 = {
   "bell-tower-2": {
     "id": "bell-tower-2",
     "name": "Chime Tower — Summit",
-    "music": "pewter-theme",
+    "music": "yamato-route-theme",
     "rows": [
       "ẫẫẫẫẫẫẫẫẫẫẫẫẫẫẫẫ",
       "ẫẪẪẪẪẪẪẪẪẪẪẪẪẪẪẫ",
@@ -6256,7 +6256,7 @@ export const MAPS6 = {
   "dance-theater": {
     "id": "dance-theater",
     "name": "Dance Theater",
-    "music": "viridian-theme",
+    "music": "yamato-town-theme",
     "rows": [
       "<<<<<<<<<<<<<<<<<<",
       "<****************<",
@@ -6335,7 +6335,7 @@ export const MAPS6 = {
   "daycare": {
     "id": "daycare",
     "name": "Day-Care",
-    "music": "viridian-theme",
+    "music": "yamato-town-theme",
     "rows": [
       "<<<<<<<<<<<<<<",
       "<*δ********ḫ*<",
@@ -6404,7 +6404,7 @@ export const MAPS6 = {
   "olivine": {
     "id": "olivine",
     "name": "Beacon City",
-    "music": "viridian-theme",
+    "music": "yamato-town-theme",
     "rows": [
       "ởởởỠởởởởởởỠởởởởởởỠởởởởởởỠ₆₆ởởởỠởởở",
       "ởờờờờờờờờờờờờờờờờờờờờờờờ₆₆₆SỠờờờờở",
@@ -6774,7 +6774,7 @@ export const MAPS6 = {
   "cianwood": {
     "id": "cianwood",
     "name": "Tidewall City",
-    "music": "viridian-theme",
+    "music": "yamato-town-theme",
     "rows": [
       "ủủủỨủủủủủủỨủủủủủủủủủủủủủỨủủủ",
       "ủụụụụụụụụụụụụụụụụụụụ⁜⁜⁜⁜⁜⁜⁜ủ",
@@ -7096,7 +7096,7 @@ export const MAPS6 = {
   "mahogany": {
     "id": "mahogany",
     "name": "Redwood Town",
-    "music": "viridian-theme",
+    "music": "yamato-town-theme",
     "rows": [
       "ữữữỰữữữữữữỰữữ⁔⁔ữữữỰữữữữữữỰữữ",
       "ữửo⁔⁔⁔⁔⁔⁔⁔⁔⁔⁔⁔⁔⁔⁔⁔⁔⁔⁔⁔⁔⁔⁔oửữ",
@@ -7435,7 +7435,7 @@ export const MAPS6 = {
   "blackthorn": {
     "id": "blackthorn",
     "name": "Cragmoor City",
-    "music": "pewter-theme",
+    "music": "yamato-town-theme",
     "rows": [
       "ỷỷỷỸỷỷỷỷỷỷỸỷỷỷỷỷỷỸỷỷỷỷỷỷỸỷRRỷỷ",
       "ỷỸỵỵẤỵRỵỵỵỵỵỵỵẤỵỵỵỵỸỵỵỵỵỵRRRRỷ",
@@ -7782,7 +7782,7 @@ export const MAPS6 = {
   "silvertown": {
     "id": "silvertown",
     "name": "Lastlight Town",
-    "music": "pewter-theme",
+    "music": "yamato-town-theme",
     "rows": [
       "ỿỿỿἀỿỿỿỿỿỿἀỿỿ⁂⁂ỿỿỿἀỿỿỿỿỿỿἀỿỿỿỿ",
       "ỿỽỾỾỾỾỾỽỾỾỾỾỾS⁂ỾỾỾỾỾỽỽỽỽỽỽỽỽỽỿ",
@@ -8086,7 +8086,7 @@ export const MAPS6 = {
   "r38": {
     "id": "r38",
     "name": "Route 38",
-    "music": "route1-theme",
+    "music": "yamato-route-theme",
     "rows": [
       "⊿⊿⊿⊿⊿⊿⊿⊿⊿⊿⊿⊿⊿⊿⊿⊿⊿⊿⊿⊿⊿⊿⊿⊿⊿⊿⊿⊿",
       "⊿,⊽⊽⊽⊽⊽,⊽F,⊽⊽⊽⊽⊽,⊽⊽⊽F⊽⊽F⊽,,⊿",
@@ -8281,7 +8281,7 @@ export const MAPS6 = {
   "r39": {
     "id": "r39",
     "name": "Route 39",
-    "music": "route1-theme",
+    "music": "yamato-route-theme",
     "rows": [
       "⋃⋃⋃⋃⋃⋃⋃⋃⋃⋃⋃⋂⋂⋃⋃⋃⋃⋃⋃⋃⋃⋃⋃⋃",
       "⋃,,⋁F⋁⋁⋁⋁n⋁⋂⋂⋁F⋁⋁⋁⋁,⋁F⋁⋃",
@@ -8478,7 +8478,7 @@ export const MAPS6 = {
   "r40": {
     "id": "r40",
     "name": "Route 40",
-    "music": "route1-theme",
+    "music": "yamato-route-theme",
     "rows": [
       "~~~~~~~~~~~~~~~~~~~~~~~~~~",
       "~~~~~~~~~~~~~~~~⋆~~~~~~~~~",
@@ -8603,7 +8603,7 @@ export const MAPS6 = {
   "r41": {
     "id": "r41",
     "name": "Route 41",
-    "music": "route1-theme",
+    "music": "yamato-route-theme",
     "rows": [
       "~~~~~~~~~~~~~~~~~~~~~~~~~~",
       "~~~~~~~~~~~~⋈~~~~~~~~~~~~~",
@@ -8749,7 +8749,7 @@ export const MAPS6 = {
   "whirl-islands-1": {
     "id": "whirl-islands-1",
     "name": "Maelstrom Islands — Outer Cave",
-    "music": "pewter-theme",
+    "music": "yamato-route-theme",
     "rows": [
       "GGGGGGGGGGGGGGGGGGGGGG",
       "GLLLLLLLLLLLLLLýLL9LLG",
@@ -8901,7 +8901,7 @@ export const MAPS6 = {
   "whirl-islands-2": {
     "id": "whirl-islands-2",
     "name": "Maelstrom Islands — Deep Chamber",
-    "music": "pewter-theme",
+    "music": "yamato-route-theme",
     "rows": [
       "GGGGGGGGGGGGGGGGGGGGGG",
       "GLLLLLLLLLLLLLLLLLLLLG",
@@ -9050,7 +9050,7 @@ export const MAPS6 = {
   "r42": {
     "id": "r42",
     "name": "Route 42",
-    "music": "route1-theme",
+    "music": "yamato-route-theme",
     "rows": [
       "⋋⋋⋋⋋⋋⋋⋋⋋⋋⋋⋋⋋⋋⋋⋋⋋⋋⋋⋋⋋⋋⋋⋋⋋",
       "⋋⋉,,⋉⋉⋉⋉⋉⋉n,⋉⋉,,⋉,⋉,⋉F⋋⋋",
@@ -9286,7 +9286,7 @@ export const MAPS6 = {
   "mt-mortar-1": {
     "id": "mt-mortar-1",
     "name": "Mt. Millstone — Lower Halls",
-    "music": "pewter-theme",
+    "music": "yamato-route-theme",
     "rows": [
       "⋎⋎⋎⋎⋎⋎⋎⋎⋎⋎⋎⋎⋎⋎⋎⋎⋎⋎⋎⋎⋎⋎",
       "⋎⋍⋍⋍⋍⋍⋍⋍⋍⋍⋍⋍⋍⋍⋍⋍⋍⋍9⋍⋍⋎",
@@ -9447,7 +9447,7 @@ export const MAPS6 = {
   "mt-mortar-2": {
     "id": "mt-mortar-2",
     "name": "Mt. Millstone — Upper Halls",
-    "music": "pewter-theme",
+    "music": "yamato-route-theme",
     "rows": [
       "⋐⋐⋐⋐⋐⋐⋐⋐⋐⋐⋐⋐⋐⋐⋐⋐⋐⋐⋐⋐⋐⋐",
       "⋐⋏⋏⋏9ý⋏⋏⋏⋏⋏⋏⋏⋏⋏⋏⋏⋏⋏⋏⋏⋐",
@@ -9599,7 +9599,7 @@ export const MAPS6 = {
   "r43": {
     "id": "r43",
     "name": "Route 43",
-    "music": "route1-theme",
+    "music": "yamato-route-theme",
     "rows": [
       "⋓⋓⋓⋓⋓⋓⋓⋓⋓⋓⋓⋒⋒⋓⋓⋓⋓⋓⋓⋓⋓⋓⋓⋓",
       "⋓⋑,⋑⋑⋑,⋑⋑⋑⋑⋒⋒⋑⋑⋑⋑⋑⋑⋑⋑⋑F⋓",
@@ -9796,7 +9796,7 @@ export const MAPS6 = {
   "lake-of-rage": {
     "id": "lake-of-rage",
     "name": "Wrathmere Lake",
-    "music": "route1-theme",
+    "music": "yamato-route-theme",
     "rows": [
       "############################",
       "#R~~~~~~~~~~~~~~~~~~~~~~~~~#",
@@ -9963,7 +9963,7 @@ export const MAPS6 = {
   "r44": {
     "id": "r44",
     "name": "Route 44",
-    "music": "route1-theme",
+    "music": "yamato-route-theme",
     "rows": [
       "⋗⋗⋗⋗⋗⋗⋗⋗⋗⋗⋗⋗⋗⋗⋗⋗⋗⋗⋗⋗⋗⋗⋗⋗",
       "⋗F⋕⋕F⋕F⋕,,⋕⋕⋕⋕⋕⋗,⋕⋕⋕⋕,⋕⋗",
@@ -10158,7 +10158,7 @@ export const MAPS6 = {
   "ice-path-1": {
     "id": "ice-path-1",
     "name": "Frost Path — West Hall",
-    "music": "pewter-theme",
+    "music": "yamato-route-theme",
     "rows": [
       "⋙⋙⋙⋙⋙⋙⋙⋙⋙⋙⋙⋙⋙⋙⋙⋙⋙⋙⋙⋙⋙⋙⋙⋙⋙⋙",
       "⋙ṧṧṧṧýṧṧṧýṧṧṧṧṧṧṧṧṧṧṧṧṧṧṧ⋙",
@@ -10306,7 +10306,7 @@ export const MAPS6 = {
   "ice-path-2": {
     "id": "ice-path-2",
     "name": "Frost Path — East Hall",
-    "music": "pewter-theme",
+    "music": "yamato-route-theme",
     "rows": [
       "⋚⋚⋚⋚⋚⋚⋚⋚⋚⋚⋚⋚⋚⋚⋚⋚⋚⋚⋚⋚⋚⋚⋚⋚⋚⋚",
       "⋚ṧṧṧṧṧṧṧṧṧṧṧṧṧýṧṧṧṧNṧṧṧṧṧ⋚",
@@ -10454,7 +10454,7 @@ export const MAPS6 = {
   "dragons-den": {
     "id": "dragons-den",
     "name": "Drake's Den",
-    "music": "pewter-theme",
+    "music": "yamato-route-theme",
     "rows": [
       "GGGGGGGGGGGGGGGGGGGG",
       "GLLLLLLLLLLLLLLLLLLG",
@@ -10564,7 +10564,7 @@ export const MAPS6 = {
   "r45": {
     "id": "r45",
     "name": "Route 45",
-    "music": "route1-theme",
+    "music": "yamato-route-theme",
     "rows": [
       "⋝⋝⋝⋝⋝⋝⋝⋝⋝⋝⋝⋜⋜⋝⋝⋝⋝⋝⋝⋝⋝⋝⋝⋝",
       "⋝⋛⋛,⋛⋛⋛⋛⋛⋛⋛⋜⋜⋛⋛⋛⋛⋛⋛⋛⋛,⋛⋝",
@@ -10734,7 +10734,7 @@ export const MAPS6 = {
   "r46": {
     "id": "r46",
     "name": "Route 46",
-    "music": "route1-theme",
+    "music": "yamato-route-theme",
     "rows": [
       "⋡⋡⋡⋡⋡⋡⋡⋡⋡⋡⋡⋡⋡⋡⋡⋡⋡⋡⋡⋡⋡⋡⋡⋡⋡⋡⋡⋡",
       "⋡,⋟,⋟⋟⋟,⋟⋟⋟⋟F⋟⋟⋟,⋟⋟⋟⋟⋟⋟⋟⋟⋟⋟⋡",
@@ -10937,7 +10937,7 @@ export const MAPS6 = {
   "dark-cave": {
     "id": "dark-cave",
     "name": "Gloom Cave",
-    "music": "pewter-theme",
+    "music": "yamato-route-theme",
     "rows": [
       "⋤⋤⋤⋤⋤⋤⋤⋤⋤⋤⋤⋤⋤⋤⋤⋤⋤⋤⋤⋤⋣⋣⋤⋤",
       "⋤⋣N⋣⋣N⋣⋣⋣⋣⋣⋣⋣⋣⋣⋣⋣⋣N⋣⋣⋣⋣⋤",
@@ -11103,7 +11103,7 @@ export const MAPS6 = {
   "route-silver": {
     "id": "route-silver",
     "name": "Lastlight Pass",
-    "music": "route1-theme",
+    "music": "yamato-route-theme",
     "rows": [
       "⋧⋧⋧⋧⋧⋧⋧⋧⋧⋧⋧⋧⋧⋧⋧⋧⋧⋧⋧⋧⋧⋧⋧⋧⋧⋧⋧⋧",
       "⋧⋥⋥⋥⋥⋥⋥⋥⋥,⋥,,,⋥⋥FF,⋥F,⋥⋥⋥,⋥⋧",
@@ -11253,7 +11253,7 @@ export const MAPS6 = {
   "mt-silver": {
     "id": "mt-silver",
     "name": "Mt. Lastlight — Slopes",
-    "music": "route1-theme",
+    "music": "yamato-route-theme",
     "rows": [
       "RRRRRRRRRRRRRRRRRRRRRRRRRRRR",
       "RR_____#,_______R____##____R",
@@ -11417,7 +11417,7 @@ export const MAPS6 = {
   "mt-silver-cave": {
     "id": "mt-silver-cave",
     "name": "Mt. Lastlight — Summit Cave",
-    "music": "pewter-theme",
+    "music": "yamato-route-theme",
     "rows": [
       "GGGGGGGGGGGGGGGGGG",
       "GLLLLLLLLLLLLLLLLG",
@@ -11525,7 +11525,7 @@ export const MAPS6 = {
   "house-olivine": {
     "id": "house-olivine",
     "name": "Beacon House",
-    "music": "viridian-theme",
+    "music": "yamato-town-theme",
     "rows": [
       "<<<<<<<<<<<<<<",
       "<*δ**ε***η*θ*<",
@@ -11588,7 +11588,7 @@ export const MAPS6 = {
   "house-cianwood": {
     "id": "house-cianwood",
     "name": "Tidewall House",
-    "music": "viridian-theme",
+    "music": "yamato-town-theme",
     "rows": [
       "<<<<<<<<<<<<<<",
       "<*δ**ε***η*θ*<",
@@ -11651,7 +11651,7 @@ export const MAPS6 = {
   "house-mahogany": {
     "id": "house-mahogany",
     "name": "Redwood House",
-    "music": "viridian-theme",
+    "music": "yamato-town-theme",
     "rows": [
       "<<<<<<<<<<<<<<",
       "<*δ**ε***η*θ*<",
@@ -11714,7 +11714,7 @@ export const MAPS6 = {
   "house-blackthorn": {
     "id": "house-blackthorn",
     "name": "Cragmoor House",
-    "music": "viridian-theme",
+    "music": "yamato-town-theme",
     "rows": [
       "<<<<<<<<<<<<<<",
       "<*δḟ*ε***η*θ*<",
@@ -11777,7 +11777,7 @@ export const MAPS6 = {
   "house-silvertown": {
     "id": "house-silvertown",
     "name": "Lastlight Town House",
-    "music": "viridian-theme",
+    "music": "yamato-town-theme",
     "rows": [
       "<<<<<<<<<<<<<<",
       "<*δ**ε***η*θ*<",
@@ -12092,7 +12092,7 @@ export const MAPS6 = {
   "lighthouse-1": {
     "id": "lighthouse-1",
     "name": "Gleam Lighthouse 1F",
-    "music": "pewter-theme",
+    "music": "yamato-route-theme",
     "rows": [
       "ẫẫẫẫẫẫẫẫẫẫẫẫẫẫẫẫ",
       "ẫẪδẪẪεẪẪẪẪθẪẪ9Ẫẫ",
@@ -12172,7 +12172,7 @@ export const MAPS6 = {
   "lighthouse-2": {
     "id": "lighthouse-2",
     "name": "Gleam Lighthouse — Lamp Room",
-    "music": "pewter-theme",
+    "music": "yamato-route-theme",
     "rows": [
       "ẫẫẫẫẫẫẫẫẫẫẫẫẫẫẫẫ",
       "ẫẪẪẪẪẪẪẪẪẪẪẪẪẪẪẫ",
@@ -12323,7 +12323,7 @@ export const MAPS6 = {
   "rocket-hideout": {
     "id": "rocket-hideout",
     "name": "Redwood Hideout",
-    "music": "pewter-theme",
+    "music": "yamato-route-theme",
     "rows": [
       "GGGGGGGGGGGGGGGGGGGGGGGGGG",
       "GLLLLNLLLLLLLLýLNLLLLLLLLG",

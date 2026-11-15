@@ -200,6 +200,125 @@ export const MUSIC = {
         KICKS([0,4,8,12]).concat([[4,null,0.25],[12,null,0.25]]).concat(HATS(0,16,0.5,0.125)) },
     ],
   },
+
+  // ---- W12 region pairs I: one town+route identity per region (NO-SAME-KIT
+  // audio charter). Original melodies, each with its own interval fingerprint
+  // (verify-audio [9] proves no two leads share an interval sequence). ----
+  'amber-town-theme': {
+    id: 'amber-town-theme', title: 'Salt & Citrus (Amber town, original)', bpm: 104, loop: true,
+    tracks: [
+      { wave: 'pulse', duty: 0.25, vol: 0.42, notes: [
+        [0,'G4',1],[1,'C5',1],[2,'E5',1.5],[3.5,'D5',0.5],
+        [4,'C5',1],[5,'A4',1],[6,'G4',2],
+        [8,'A4',1],[9,'C5',1],[10,'D5',1.5],[11.5,'E5',0.5],
+        [12,'G5',1],[13,'E5',1],[14,'D5',1],[15,'C5',1],
+      ]},
+      { wave: 'pulse', duty: 0.5, vol: 0.18, notes: [
+        [0,'E4',2],[2,'G4',2],[4,'A4',2],[6,'E4',2],
+        [8,'F4',2],[10,'A4',2],[12,'G4',2],[14,'E4',2],
+      ]},
+      { wave: 'triangle', vol: 0.5, notes: [
+        [0,'C3',2],[2,'G2',2],[4,'A2',2],[6,'E2',2],
+        [8,'F2',2],[10,'C3',2],[12,'G2',2],[14,'C3',2],
+      ]},
+      { wave: 'noise', vol: 0.15, notes: HATS(0, 16, 1, 0.125).concat(KICKS([0, 8])) },
+    ],
+  },
+
+  'amber-route-theme': {
+    id: 'amber-route-theme', title: 'Trade Wind Run (Amber route, original)', bpm: 122, loop: true,
+    tracks: [
+      { wave: 'pulse', duty: 0.125, vol: 0.45, notes: [
+        [0,'A4',0.75],[0.75,'C5',0.75],[1.5,'E5',0.75],[2.25,'A5',0.75],[3,'G5',1],
+        [4,'E5',1],[5,'D5',0.5],[5.5,'E5',0.5],[6,'C5',2],
+        [8,'D5',0.75],[8.75,'E5',0.75],[9.5,'G5',0.75],[10.25,'E5',0.75],[11,'A5',1],
+        [12,'G5',1],[13,'E5',1],[14,'A4',2],
+      ]},
+      { wave: 'pulse', duty: 0.5, vol: 0.18, notes: [
+        [0,'E4',1],[2,'A4',1],[4,'C5',1],[6,'G4',1],
+        [8,'F4',1],[10,'A4',1],[12,'B4',1],[14,'E4',1],
+      ]},
+      { wave: 'triangle', vol: 0.55, notes:
+        PUMP(0,4,'A1','A2').concat(PUMP(4,8,'G1','G2')).concat(PUMP(8,12,'F1','F2')).concat(PUMP(12,16,'E1','E2')) },
+      { wave: 'noise', vol: 0.25, notes: HATS(0, 16, 0.5, 0.125).concat(KICKS([0, 4, 8, 12])) },
+    ],
+  },
+
+  'yamato-town-theme': {
+    id: 'yamato-town-theme', title: 'Temple Bell Morning (Yamato town, original)', bpm: 92, loop: true,
+    tracks: [
+      { wave: 'pulse', duty: 0.5, vol: 0.4, notes: [
+        [0,'A4',1.5],[1.5,'D5',1.5],[3,'F#5',1],[4,'E5',2],[6,'D5',1],[7,'C#5',1],
+        [8,'D5',1.5],[9.5,'F#5',1.5],[11,'A5',1],[12,'G5',1.5],[13.5,'F#5',0.5],[14,'E5',1],[15,'D5',1],
+      ]},
+      { wave: 'pulse', duty: 0.25, vol: 0.15, notes: [
+        [0,'F#4',1],[4,'A4',1],[8,'F#4',1],[12,'E4',1],
+      ]},
+      { wave: 'triangle', vol: 0.5, notes: [
+        [0,'D3',4],[4,'G2',4],[8,'D3',4],[12,'A2',4],
+      ]},
+      { wave: 'noise', vol: 0.1, notes: [[3.5,null,0.25],[7.5,null,0.25],[11.5,null,0.25],[15.5,null,0.25]] },
+    ],
+  },
+
+  'yamato-route-theme': {
+    id: 'yamato-route-theme', title: 'Pilgrim Road (Yamato route, original)', bpm: 132, loop: true,
+    tracks: [
+      { wave: 'pulse', duty: 0.25, vol: 0.45, notes: [
+        [0,'E5',0.5],[0.5,'B4',0.5],[1,'E5',0.5],[1.5,'G5',0.5],[2,'A5',1],[3,'G5',1],
+        [4,'E5',0.5],[4.5,'D5',0.5],[5,'B4',0.5],[5.5,'D5',0.5],[6,'E5',2],
+        [8,'G5',0.5],[8.5,'A5',0.5],[9,'B5',1],[10,'A5',0.5],[10.5,'G5',0.5],[11,'E5',1],
+        [12,'D5',0.5],[12.5,'E5',0.5],[13,'G5',0.5],[13.5,'A5',0.5],[14,'B5',2],
+      ]},
+      { wave: 'pulse', duty: 0.5, vol: 0.16, notes: [
+        [0,'B3',1],[2,'G3',1],[4,'C4',1],[6,'D4',1],
+        [8,'E4',1],[10,'D4',1],[12,'B3',1],[14,'G3',1],
+      ]},
+      { wave: 'triangle', vol: 0.55, notes:
+        PUMP(0,4,'E1','E2').concat(PUMP(4,8,'G1','G2')).concat(PUMP(8,12,'A1','A2')).concat(PUMP(12,16,'B1','B2')) },
+      { wave: 'noise', vol: 0.22, notes: HATS(0, 16, 0.5, 0.125).concat(KICKS([0, 4, 8, 12])) },
+    ],
+  },
+
+  'maris-town-theme': {
+    id: 'maris-town-theme', title: 'Harbour Lights (Maris town, original)', bpm: 118, loop: true,
+    tracks: [
+      { wave: 'pulse', duty: 0.125, vol: 0.44, notes: [
+        [0,'F5',0.5],[0.5,'A5',1],[1.5,'G5',0.5],[2,'F5',1],[3,'E5',0.5],[3.5,'F5',0.5],
+        [4,'C5',1.5],[5.5,'D5',0.5],[6,'E5',1],[7,'F5',1],
+        [8,'A5',0.5],[8.5,'G5',1],[9.5,'F5',0.5],[10,'E5',1],[11,'D5',1],
+        [12,'E5',0.5],[12.5,'C5',0.5],[13,'D5',1],[14,'F5',2],
+      ]},
+      { wave: 'pulse', duty: 0.5, vol: 0.16, notes: [
+        [0,'C4',2],[2,'A3',2],[4,'Bb3',2],[6,'C4',2],
+        [8,'A3',2],[10,'F3',2],[12,'G3',2],[14,'A3',2],
+      ]},
+      { wave: 'triangle', vol: 0.55, notes: [
+        [0,'F2',1],[1,'C3',1],[2,'F2',1],[3,'C3',1],[4,'Bb1',1],[5,'F2',1],[6,'C2',1],[7,'G2',1],
+        [8,'F2',1],[9,'C3',1],[10,'D2',1],[11,'A2',1],[12,'Bb1',1],[13,'F2',1],[14,'C2',2],
+      ]},
+      { wave: 'noise', vol: 0.2, notes: HATS(0, 16, 0.5, 0.125).concat(KICKS([0, 4, 8, 12])) },
+    ],
+  },
+
+  'maris-route-theme': {
+    id: 'maris-route-theme', title: 'Open Water Road (Maris route, original)', bpm: 140, loop: true,
+    tracks: [
+      { wave: 'pulse', duty: 0.25, vol: 0.46, notes: [
+        [0,'D5',0.5],[0.5,'D5',0.5],[1,'G5',0.5],[1.5,'A5',0.5],[2,'B5',1],[3,'A5',1],
+        [4,'G5',0.5],[4.5,'F#5',0.5],[5,'E5',0.5],[5.5,'D5',0.5],[6,'E5',1],[7,'F#5',1],
+        [8,'G5',0.5],[8.5,'G5',0.5],[9,'B5',0.5],[9.5,'D6',0.5],[10,'B5',1],[11,'A5',1],
+        [12,'B5',0.5],[12.5,'A5',0.5],[13,'G5',0.5],[13.5,'F#5',0.5],[14,'G5',2],
+      ]},
+      { wave: 'pulse', duty: 0.5, vol: 0.15, notes: [
+        [0,'B3',1],[1,'D4',1],[2,'G3',1],[3,'D4',1],[4,'E4',1],[5,'B3',1],[6,'A3',1],[7,'D4',1],
+        [8,'G3',1],[9,'B3',1],[10,'D4',1],[11,'A3',1],[12,'B3',1],[13,'D4',1],[14,'G3',2],
+      ]},
+      { wave: 'triangle', vol: 0.55, notes:
+        PUMP(0,4,'G1','G2').concat(PUMP(4,8,'E1','E2')).concat(PUMP(8,12,'D1','D2')).concat(PUMP(12,16,'G1','G2')) },
+      { wave: 'noise', vol: 0.3, notes: KICKS([0, 2, 4, 6, 8, 10, 12, 14]).concat(HATS(0, 16, 0.5, 0.125)) },
+    ],
+  },
 };
 
 // ============================================================ SFX ====

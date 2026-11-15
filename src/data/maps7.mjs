@@ -50,7 +50,7 @@ export const MAPS7 = {
   "littleroot": {
     "id": "littleroot",
     "name": "Rootlet Town",
-    "music": "pallet-theme",
+    "music": "maris-town-theme",
     "weather": "clear",
     "rows": [
       "ἎἎἎἏἎἎἎἎἎἎἏἎἎ..ἎἎἎἏἎἎἎἎἎἎἏἎἎ",
@@ -396,7 +396,7 @@ export const MAPS7 = {
   "oldale": {
     "id": "oldale",
     "name": "Eldergrove Town",
-    "music": "viridian-theme",
+    "music": "maris-town-theme",
     "weather": "clear",
     "rows": [
       "἖἖἖἗἖἖἖἖἖἖἗἖἖἖἖἖἖἗἖἖..἖἖἖἖἖἖",
@@ -458,7 +458,7 @@ export const MAPS7 = {
   "petalburg": {
     "id": "petalburg",
     "name": "Meadowbrook City",
-    "music": "viridian-theme",
+    "music": "maris-town-theme",
     "weather": "clear",
     "rows": [
       "἞἞἞἟἞἞἞἞἞἞἟἞἞἞..἞἞἞἟἞἞἞἞἟἞἞἞἞἞",
@@ -520,7 +520,7 @@ export const MAPS7 = {
   "rustboro": {
     "id": "rustboro",
     "name": "Copperton City",
-    "music": "pewter-theme",
+    "music": "maris-town-theme",
     "weather": "clear",
     "rows": [
       "ἦἦἦἧἦἦἦἦἦἦἧἦἦἦἦἦἦἧἦἦ⁗⁗ἦἦἦἧἦἦἦἦ",
@@ -582,7 +582,7 @@ export const MAPS7 = {
   "dewford": {
     "id": "dewford",
     "name": "Mistford Town",
-    "music": "viridian-theme",
+    "music": "maris-town-theme",
     "weather": "clear",
     "rows": [
       "ἮἮἮἯἮἮἮἮἮἮἯἮἮ⁡⁡ἮἮἮἯἮἮἮἮἮἮἯἮἮ",
@@ -648,7 +648,7 @@ export const MAPS7 = {
   "slateport": {
     "id": "slateport",
     "name": "Fairhaven City",
-    "music": "viridian-theme",
+    "music": "maris-town-theme",
     "weather": "clear",
     "rows": [
       "ἶἶἶἷἶἶἶἶἶἶἷἶἶἶ⁪⁪ἶἶἶἷἶἶἶἶἶἶἷἶἶἶ",
@@ -717,7 +717,7 @@ export const MAPS7 = {
   "mauville": {
     "id": "mauville",
     "name": "Lilac City",
-    "music": "pewter-theme",
+    "music": "maris-town-theme",
     "weather": "clear",
     "rows": [
       "ἾἾἾἿἾἾἾἾἾἾἿἾἾἾἾἾἾἿἾἾ⁲⁲ἾἾἾἿἾἾἾἾ",
@@ -784,7 +784,7 @@ export const MAPS7 = {
   "verdanturf": {
     "id": "verdanturf",
     "name": "Wildflower Town",
-    "music": "viridian-theme",
+    "music": "maris-town-theme",
     "weather": "clear",
     "rows": [
       "὆὆὆὇὆὆὆὆὆὆὇὆὆὆὆὆὆὇὆὆὆὆὆὆ὄ὆὆὆",
@@ -841,7 +841,7 @@ export const MAPS7 = {
   "fallarbor": {
     "id": "fallarbor",
     "name": "Ashfall Town",
-    "music": "viridian-theme",
+    "music": "maris-town-theme",
     "weather": "ash",
     "rows": [
       "὎὎὎὏὎὎὎὎὎὎὏὎὎὎὎὎὎὏὎὎὎὎὎὎὏὎὎὎",
@@ -899,7 +899,7 @@ export const MAPS7 = {
   "lavaridge": {
     "id": "lavaridge",
     "name": "Steamspring Town",
-    "music": "pewter-theme",
+    "music": "maris-town-theme",
     "weather": "sun",
     "rows": [
       "ὖὖὖὗὖὖὖὖὖὖὗὖὖ₡₡ὖὖὖὗὖὖὖὖὖὖὗὖὖ",
@@ -957,7 +957,7 @@ export const MAPS7 = {
   "fortree": {
     "id": "fortree",
     "name": "Highbranch City",
-    "music": "viridian-theme",
+    "music": "maris-town-theme",
     "weather": "rain",
     "rows": [
       "὞὞὞Ὗ὞὞὞὞὞὞Ὗ὞὞὞὞὞὞Ὗ὞὞὞὞὞὞Ὗ὞὞὞὞὞",
@@ -1015,7 +1015,7 @@ export const MAPS7 = {
   "r101": {
     "id": "r101",
     "name": "Route 101",
-    "music": "route1-theme",
+    "music": "maris-route-theme",
     "weather": "clear",
     "rows": [
       "⋫⋫⋫⋫⋫⋫⋫⋫⋫⋫⋫⋪⋪⋫⋫⋫⋫⋫⋫⋫⋫⋫⋫⋫",
@@ -1056,7 +1056,7 @@ export const MAPS7 = {
   "r102": {
     "id": "r102",
     "name": "Route 102",
-    "music": "route1-theme",
+    "music": "maris-route-theme",
     "weather": "clear",
     "rows": [
       "⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯",
@@ -1098,7 +1098,7 @@ export const MAPS7 = {
   "r103": {
     "id": "r103",
     "name": "Route 103",
-    "music": "route1-theme",
+    "music": "maris-route-theme",
     "weather": "clear",
     "rows": [
       "⋳~~~~~~~~~~~~~~~~~~~~~~~~⋳",
@@ -1139,7 +1139,7 @@ export const MAPS7 = {
   "r104": {
     "id": "r104",
     "name": "Route 104",
-    "music": "route1-theme",
+    "music": "maris-route-theme",
     "weather": "clear",
     "rows": [
       "⋷⋷⋷⋷⋷⋷⋷⋷⋷⋷⋷⋷⋶⋶⋷⋷⋷⋷⋷⋷⋷⋷⋷⋷⋷⋷",
@@ -1192,7 +1192,7 @@ export const MAPS7 = {
   "petalburg-woods": {
     "id": "petalburg-woods",
     "name": "Meadowbrook Woods",
-    "music": "viridian-theme",
+    "music": "maris-route-theme",
     "weather": "clear",
     "rows": [
       "⋻⋻⋻⋻⋻⋻⋻⋻⋻⋻⋻⋻⋺⋺⋻⋻⋻⋻⋺⋺⋻⋻⋻⋻⋻⋻",
@@ -1235,7 +1235,7 @@ export const MAPS7 = {
   "r105": {
     "id": "r105",
     "name": "Route 105",
-    "music": "route1-theme",
+    "music": "maris-route-theme",
     "weather": "clear",
     "rows": [
       "~~~~~~~~~~~~~~~~~~~~~~~~",
@@ -1277,7 +1277,7 @@ export const MAPS7 = {
   "r106": {
     "id": "r106",
     "name": "Route 106",
-    "music": "route1-theme",
+    "music": "maris-route-theme",
     "weather": "clear",
     "rows": [
       "~~~~~~~~~~~~~~~~~~~~~~~~",
@@ -1317,7 +1317,7 @@ export const MAPS7 = {
   "r107": {
     "id": "r107",
     "name": "Route 107",
-    "music": "route1-theme",
+    "music": "maris-route-theme",
     "weather": "clear",
     "rows": [
       "~~~~~~~~~~~~~~~~~~~~~~~~",
@@ -1357,7 +1357,7 @@ export const MAPS7 = {
   "r108": {
     "id": "r108",
     "name": "Route 108",
-    "music": "route1-theme",
+    "music": "maris-route-theme",
     "weather": "clear",
     "rows": [
       "~~~~~~~~~~~~~~~~~~~~~~~~~~",
@@ -1397,7 +1397,7 @@ export const MAPS7 = {
   "r109": {
     "id": "r109",
     "name": "Route 109",
-    "music": "route1-theme",
+    "music": "maris-route-theme",
     "weather": "clear",
     "rows": [
       "~~~~~~~~~~~~~~~~~~~~~~~~~~",
@@ -1437,7 +1437,7 @@ export const MAPS7 = {
   "r110": {
     "id": "r110",
     "name": "Route 110",
-    "music": "route1-theme",
+    "music": "maris-route-theme",
     "weather": "clear",
     "rows": [
       "⌉⌉⌉⌉⌉⌉⌉⌉⌉⌉⌉⌈⌈⌉⌉⌉⌉⌉⌉⌉⌉⌉⌉⌉",
@@ -1485,7 +1485,7 @@ export const MAPS7 = {
   "r111": {
     "id": "r111",
     "name": "Route 111",
-    "music": "route1-theme",
+    "music": "maris-route-theme",
     "weather": "sun",
     "rows": [
       "⌍⌍⌍⌍⌍⌍⌍⌍⌍⌍⌍⌍⌌⌌⌍⌍⌍⌍⌍⌍⌍⌍⌍⌍⌍⌍",
@@ -1539,7 +1539,7 @@ export const MAPS7 = {
   "r112": {
     "id": "r112",
     "name": "Route 112",
-    "music": "route1-theme",
+    "music": "maris-route-theme",
     "weather": "sun",
     "rows": [
       "⌑⌑⌑⌑⌑⌑⌑⌑⌑⌑⌑⌑⌑⌑⌑⌑⌑⌑⌑⌑⌑⌑⌑⌑⌑⌑",
@@ -1585,7 +1585,7 @@ export const MAPS7 = {
   "fiery-path": {
     "id": "fiery-path",
     "name": "Scorch Path",
-    "music": "pewter-theme",
+    "music": "maris-route-theme",
     "indoor": true,
     "rows": [
       "⌔⌔⌔⌔⌔⌔⌔⌔⌔⌔⌔⌔⌔⌔⌔⌔⌔⌔⌔⌔⌔⌔⌔⌔",
@@ -1623,7 +1623,7 @@ export const MAPS7 = {
   "mt-chimney": {
     "id": "mt-chimney",
     "name": "Mt. Smokestack",
-    "music": "pewter-theme",
+    "music": "maris-route-theme",
     "weather": "ash",
     "rows": [
       "ἈἈἈἈἈἈἈἈἈἈἈἈ⌖⌖ἈἈἈἈἈἈἈἈἈἈἈἈ",
@@ -1666,7 +1666,7 @@ export const MAPS7 = {
   "jagged-pass": {
     "id": "jagged-pass",
     "name": "Ragged Pass",
-    "music": "route1-theme",
+    "music": "maris-route-theme",
     "weather": "sun",
     "rows": [
       "⌚⌚⌚⌚⌚⌚⌚⌚⌚⌚⌚⌙⌙⌚⌚⌚⌚⌚⌚⌚⌚⌚⌚⌚",
@@ -1709,7 +1709,7 @@ export const MAPS7 = {
   "r113": {
     "id": "r113",
     "name": "Route 113",
-    "music": "route1-theme",
+    "music": "maris-route-theme",
     "weather": "ash",
     "rows": [
       "⌞⌞⌞⌞⌞⌞⌞⌞⌞⌞⌞⌞⌞⌞⌞⌞⌞⌞⌞⌞⌞⌞⌞⌞⌞⌞⌞⌞",
@@ -1751,7 +1751,7 @@ export const MAPS7 = {
   "r114": {
     "id": "r114",
     "name": "Route 114",
-    "music": "route1-theme",
+    "music": "maris-route-theme",
     "weather": "clear",
     "rows": [
       "⌢⌢⌢⌢⌢⌢⌢⌢⌢⌢⌢⌡⌡⌢⌢⌢⌢⌢⌢⌢⌢⌢⌢⌢",
@@ -1795,7 +1795,7 @@ export const MAPS7 = {
   "meteor-falls": {
     "id": "meteor-falls",
     "name": "Comet Falls",
-    "music": "pewter-theme",
+    "music": "maris-route-theme",
     "indoor": true,
     "rows": [
       "⌥⌥⌥⌥⌥⌥⌥⌥⌥⌥⌥⌥⌥⌥⌥⌥⌥⌥⌥⌤⌤⌥⌥⌥⌥⌥",
@@ -1836,7 +1836,7 @@ export const MAPS7 = {
   "r115": {
     "id": "r115",
     "name": "Route 115",
-    "music": "route1-theme",
+    "music": "maris-route-theme",
     "weather": "clear",
     "rows": [
       "⌨⌨⌨⌨⌨⌨⌨⌨⌨⌨⌨⌨⌨⌨⌨⌨⌨⌨⌨~~~~~",
@@ -1878,7 +1878,7 @@ export const MAPS7 = {
   "r116": {
     "id": "r116",
     "name": "Route 116",
-    "music": "route1-theme",
+    "music": "maris-route-theme",
     "weather": "clear",
     "rows": [
       "⌬⌬⌬⌬⌬⌬⌬⌬⌬⌬⌬⌬⌬⌬⌬⌬⌬⌬⌬⌬⌬⌬⌬⌬⌬⌬",
@@ -1920,7 +1920,7 @@ export const MAPS7 = {
   "rusturf-tunnel": {
     "id": "rusturf-tunnel",
     "name": "Copperbore Tunnel",
-    "music": "pewter-theme",
+    "music": "maris-route-theme",
     "indoor": true,
     "rows": [
       "⌯⌯⌯⌯⌯⌯⌯⌯⌯⌯⌯⌯⌯⌯⌯⌯⌯⌯⌯⌯⌯⌯⌯⌯",
@@ -1959,7 +1959,7 @@ export const MAPS7 = {
   "granite-cave": {
     "id": "granite-cave",
     "name": "Cairn Cave",
-    "music": "pewter-theme",
+    "music": "maris-route-theme",
     "indoor": true,
     "rows": [
       "GGGGGGGGGGGGGGGGGGGGGGGG",
@@ -1997,7 +1997,7 @@ export const MAPS7 = {
   "r117": {
     "id": "r117",
     "name": "Route 117",
-    "music": "route1-theme",
+    "music": "maris-route-theme",
     "weather": "clear",
     "rows": [
       "⌲⌲⌲⌲⌲⌲⌲⌲⌲⌲⌲⌲⌲⌲⌲⌲⌲⌲⌲⌲⌲⌲⌲⌲⌲⌲",
@@ -2038,7 +2038,7 @@ export const MAPS7 = {
   "r118": {
     "id": "r118",
     "name": "Route 118",
-    "music": "route1-theme",
+    "music": "maris-route-theme",
     "weather": "clear",
     "rows": [
       "⌶⌶⌶⌶⌶⌶⌶⌶⌶⌶⌶⌶⌶⌶⌶⌶⌶⌶⌶⌶⌶⌶⌶⌶⌶⌶",
@@ -2081,7 +2081,7 @@ export const MAPS7 = {
   "r119": {
     "id": "r119",
     "name": "Route 119",
-    "music": "route1-theme",
+    "music": "maris-route-theme",
     "weather": "rain",
     "rows": [
       "⌺⌺⌺⌺⌺⌺⌺⌺⌺⌺⌺⌹⌹⌺⌺⌺⌺⌺⌺⌺⌺⌺⌺⌺",
@@ -2129,7 +2129,7 @@ export const MAPS7 = {
   "house-littleroot": {
     "id": "house-littleroot",
     "name": "Rootlet House",
-    "music": "viridian-theme",
+    "music": "maris-town-theme",
     "indoor": true,
     "rows": [
       "<<<<<<<<<<<<<<",
@@ -2161,7 +2161,7 @@ export const MAPS7 = {
   "house-littleroot-rival": {
     "id": "house-littleroot-rival",
     "name": "Neighbor's House",
-    "music": "viridian-theme",
+    "music": "maris-town-theme",
     "indoor": true,
     "rows": [
       "<<<<<<<<<<<<<<",
@@ -2193,7 +2193,7 @@ export const MAPS7 = {
   "house-oldale": {
     "id": "house-oldale",
     "name": "Eldergrove House",
-    "music": "viridian-theme",
+    "music": "maris-town-theme",
     "indoor": true,
     "rows": [
       "<<<<<<<<<<<<<<",
@@ -2225,7 +2225,7 @@ export const MAPS7 = {
   "house-petalburg": {
     "id": "house-petalburg",
     "name": "Meadowbrook House",
-    "music": "viridian-theme",
+    "music": "maris-town-theme",
     "indoor": true,
     "rows": [
       "<<<<<<<<<<<<<<",
@@ -2257,7 +2257,7 @@ export const MAPS7 = {
   "house-rustboro": {
     "id": "house-rustboro",
     "name": "Norwick Residence",
-    "music": "viridian-theme",
+    "music": "maris-town-theme",
     "indoor": true,
     "rows": [
       "<<<<<<<<<<<<<<",
@@ -2289,7 +2289,7 @@ export const MAPS7 = {
   "house-dewford": {
     "id": "house-dewford",
     "name": "Mistford House",
-    "music": "viridian-theme",
+    "music": "maris-town-theme",
     "indoor": true,
     "rows": [
       "<<<<<<<<<<<<<<",
@@ -2321,7 +2321,7 @@ export const MAPS7 = {
   "house-slateport": {
     "id": "house-slateport",
     "name": "Maritime Museum",
-    "music": "viridian-theme",
+    "music": "maris-town-theme",
     "indoor": true,
     "rows": [
       "<<<<<<<<<<<<<<",
@@ -2353,7 +2353,7 @@ export const MAPS7 = {
   "house-mauville": {
     "id": "house-mauville",
     "name": "Game Corner",
-    "music": "viridian-theme",
+    "music": "maris-town-theme",
     "indoor": true,
     "rows": [
       "<<<<<<<<<<<<<<",
@@ -2385,7 +2385,7 @@ export const MAPS7 = {
   "house-verdanturf": {
     "id": "house-verdanturf",
     "name": "Wildflower House",
-    "music": "viridian-theme",
+    "music": "maris-town-theme",
     "indoor": true,
     "rows": [
       "<<<<<<<<<<<<<<",
@@ -2417,7 +2417,7 @@ export const MAPS7 = {
   "house-fallarbor": {
     "id": "house-fallarbor",
     "name": "Ando Residence",
-    "music": "viridian-theme",
+    "music": "maris-town-theme",
     "indoor": true,
     "rows": [
       "<<<<<<<<<<<<<<",
@@ -2449,7 +2449,7 @@ export const MAPS7 = {
   "house-lavaridge": {
     "id": "house-lavaridge",
     "name": "Steamspring House",
-    "music": "viridian-theme",
+    "music": "maris-town-theme",
     "indoor": true,
     "rows": [
       "<<<<<<<<<<<<<<",
@@ -2481,7 +2481,7 @@ export const MAPS7 = {
   "house-fortree": {
     "id": "house-fortree",
     "name": "Highbranch Treehouse",
-    "music": "viridian-theme",
+    "music": "maris-town-theme",
     "indoor": true,
     "rows": [
       "<<<<<<<<<<<<<<",
@@ -2513,7 +2513,7 @@ export const MAPS7 = {
   "birch-lab": {
     "id": "birch-lab",
     "name": "Aspen Lab",
-    "music": "viridian-theme",
+    "music": "maris-town-theme",
     "indoor": true,
     "rows": [
       ">>>>>>>>>>>>>>>>>>",
@@ -2753,7 +2753,7 @@ export const MAPS7 = {
   "contest-verdanturf": {
     "id": "contest-verdanturf",
     "name": "Wildflower Contest Hall",
-    "music": "viridian-theme",
+    "music": "maris-town-theme",
     "contestHall": "verdanturf",
     "indoor": true,
     "rows": [
@@ -2788,7 +2788,7 @@ export const MAPS7 = {
   "contest-fallarbor": {
     "id": "contest-fallarbor",
     "name": "Ashfall Contest Hall",
-    "music": "viridian-theme",
+    "music": "maris-town-theme",
     "contestHall": "fallarbor",
     "indoor": true,
     "rows": [
@@ -2823,7 +2823,7 @@ export const MAPS7 = {
   "contest-slateport": {
     "id": "contest-slateport",
     "name": "Fairhaven Contest Hall",
-    "music": "viridian-theme",
+    "music": "maris-town-theme",
     "contestHall": "slateport",
     "indoor": true,
     "rows": [
@@ -2858,7 +2858,7 @@ export const MAPS7 = {
   "lilycove": {
     "id": "lilycove",
     "name": "Lotus Cove City",
-    "music": "viridian-theme",
+    "music": "maris-town-theme",
     "weather": "clear",
     "rows": [
       "ὦὦὦὧὦὦὦὦὦὦὧὦὦὦὦὦὦὧὦὦὦὦὦὦὧὦὦὦὦὦ",
@@ -2924,7 +2924,7 @@ export const MAPS7 = {
   "mossdeep": {
     "id": "mossdeep",
     "name": "Starfall City",
-    "music": "pewter-theme",
+    "music": "maris-town-theme",
     "weather": "clear",
     "rows": [
       "ὮὮὮὯὮὮὮὮὮὮὯὮὮ⃆⃆ὮὮὮὯὮὮὮὮὮὮὯὮὮ",
@@ -2989,7 +2989,7 @@ export const MAPS7 = {
   "sootopolis": {
     "id": "sootopolis",
     "name": "Craterlake City",
-    "music": "viridian-theme",
+    "music": "maris-town-theme",
     "weather": "clear",
     "rows": [
       "ὶὶὶίὶὶὶὶὶὶίὶὶὶὶὶὶίὶὶὶὶὶὶίὶὶὶ",
@@ -3049,7 +3049,7 @@ export const MAPS7 = {
   "pacifidlog": {
     "id": "pacifidlog",
     "name": "Driftlog Town",
-    "music": "viridian-theme",
+    "music": "maris-town-theme",
     "weather": "sun",
     "rows": [
       "ẙ~~~~~~~~~~~~⃜⃜~~~~~~~~~~~~~",
@@ -3102,7 +3102,7 @@ export const MAPS7 = {
   "evergrande": {
     "id": "evergrande",
     "name": "Perennial City",
-    "music": "pewter-theme",
+    "music": "maris-town-theme",
     "weather": "sun",
     "rows": [
       "ᾆᾆᾆᾄᾆᾆᾆᾆᾆᾆᾇᾆᾆᾆᾆᾆᾆᾇᾆᾆᾆᾆᾆᾆᾄᾆᾆᾆᾆᾆ",
@@ -3162,7 +3162,7 @@ export const MAPS7 = {
   "r120": {
     "id": "r120",
     "name": "Route 120",
-    "music": "route1-theme",
+    "music": "maris-route-theme",
     "weather": "rain",
     "rows": [
       "⌾⌾⌾⌾⌾⌾⌾⌾⌾⌾⌾⌾⌾⌾⌾⌾⌾⌾⌾⌾⌾⌾⌾⌾",
@@ -3215,7 +3215,7 @@ export const MAPS7 = {
   "r121": {
     "id": "r121",
     "name": "Route 121",
-    "music": "route1-theme",
+    "music": "maris-route-theme",
     "weather": "rain",
     "rows": [
       "⍂⍂⍂⍂⍂⍂⍂⍂⍂⍂⍂⍁⍁⍂⍂⍂⍂⍂⍂⍂⍂⍂⍂⍂⍂⍂⍂⍂⍂⍂",
@@ -3260,7 +3260,7 @@ export const MAPS7 = {
   "r123": {
     "id": "r123",
     "name": "Route 123",
-    "music": "route1-theme",
+    "music": "maris-route-theme",
     "weather": "clear",
     "rows": [
       "⍈⍈⍈⍈⍈⍈⍈⍈⍈⍈⍈⍈⍈⍈⍈⍈⍈⍈⍈⍈⍈⍈⍈⍈⍈⍈",
@@ -3301,7 +3301,7 @@ export const MAPS7 = {
   "r122": {
     "id": "r122",
     "name": "Route 122",
-    "music": "route1-theme",
+    "music": "maris-route-theme",
     "weather": "clear",
     "rows": [
       "~~~~~~~~~~~~~~~~~~~~~~~~~~~~",
@@ -3344,7 +3344,7 @@ export const MAPS7 = {
   "r124": {
     "id": "r124",
     "name": "Route 124",
-    "music": "route1-theme",
+    "music": "maris-route-theme",
     "weather": "clear",
     "rows": [
       "~~~~~~~~~~~~~~~~~~~~~~~~~~~~",
@@ -3388,7 +3388,7 @@ export const MAPS7 = {
   "r125": {
     "id": "r125",
     "name": "Route 125",
-    "music": "route1-theme",
+    "music": "maris-route-theme",
     "weather": "clear",
     "rows": [
       "~~~~~~~~~~~~~~~~~~~~~~~~~~~~",
@@ -3429,7 +3429,7 @@ export const MAPS7 = {
   "r126": {
     "id": "r126",
     "name": "Route 126",
-    "music": "route1-theme",
+    "music": "maris-route-theme",
     "weather": "clear",
     "rows": [
       "~~~~~~~~~~~~~~~~~~~~~~~~~~~~",
@@ -3475,7 +3475,7 @@ export const MAPS7 = {
   "r127": {
     "id": "r127",
     "name": "Route 127",
-    "music": "route1-theme",
+    "music": "maris-route-theme",
     "weather": "clear",
     "rows": [
       "~~~~~~~~~~~~~~~~~~~~~~~~~~~~",
@@ -3519,7 +3519,7 @@ export const MAPS7 = {
   "r128": {
     "id": "r128",
     "name": "Route 128",
-    "music": "route1-theme",
+    "music": "maris-route-theme",
     "weather": "sun",
     "rows": [
       "~~~~~~~~~~~~~~~~~~~~~~~~~~~~",
@@ -3563,7 +3563,7 @@ export const MAPS7 = {
   "r129": {
     "id": "r129",
     "name": "Route 129",
-    "music": "route1-theme",
+    "music": "maris-route-theme",
     "weather": "clear",
     "rows": [
       "~~~~~~~~~~~~~~~~~~~~~~~~~~~~",
@@ -3603,7 +3603,7 @@ export const MAPS7 = {
   "r130": {
     "id": "r130",
     "name": "Route 130",
-    "music": "route1-theme",
+    "music": "maris-route-theme",
     "weather": "clear",
     "rows": [
       "~~~~~~~~~~~~~~~~~~~~~~~~~~~~",
@@ -3643,7 +3643,7 @@ export const MAPS7 = {
   "r131": {
     "id": "r131",
     "name": "Route 131",
-    "music": "route1-theme",
+    "music": "maris-route-theme",
     "weather": "clear",
     "rows": [
       "~~~~~~~~~~~~~~~~~~~~~~~~~~~~",
@@ -3688,7 +3688,7 @@ export const MAPS7 = {
   "r132": {
     "id": "r132",
     "name": "Route 132",
-    "music": "route1-theme",
+    "music": "maris-route-theme",
     "weather": "sun",
     "rows": [
       "~~~~~~~~~~~~~~~~~~~~~~~~~~~~",
@@ -3728,7 +3728,7 @@ export const MAPS7 = {
   "r133": {
     "id": "r133",
     "name": "Route 133",
-    "music": "route1-theme",
+    "music": "maris-route-theme",
     "weather": "sun",
     "rows": [
       "~~~~~~~~~~~~~~~~~~~~~~~~~~~~",
@@ -3768,7 +3768,7 @@ export const MAPS7 = {
   "r134": {
     "id": "r134",
     "name": "Route 134",
-    "music": "route1-theme",
+    "music": "maris-route-theme",
     "weather": "sun",
     "rows": [
       "~~~~~~~~~~~~~~~~~~~~~~~~~~~~",
@@ -3810,7 +3810,7 @@ export const MAPS7 = {
   "r124-underwater": {
     "id": "r124-underwater",
     "name": "Route 124 Trench",
-    "music": "pewter-theme",
+    "music": "maris-route-theme",
     "underwater": true,
     "rows": [
       "⍍⍍⍍⍍⍍⍍⍍⍍⍍⍍⍍⍍⍍⍍⍍⍍⍍⍍⍍⍍⍍⍍⍍⍍⍍⍍",
@@ -3850,7 +3850,7 @@ export const MAPS7 = {
   "r126-underwater": {
     "id": "r126-underwater",
     "name": "Route 126 Trench",
-    "music": "pewter-theme",
+    "music": "maris-route-theme",
     "underwater": true,
     "rows": [
       "⍓⍓⍓⍓⍓⍓⍓⍓⍓⍓⍓⍓⍓⍓⍓⍓⍓⍓⍓⍓⍓⍓⍓⍓⍓⍓",
@@ -3893,7 +3893,7 @@ export const MAPS7 = {
   "r127-underwater": {
     "id": "r127-underwater",
     "name": "Route 127 Trench",
-    "music": "pewter-theme",
+    "music": "maris-route-theme",
     "underwater": true,
     "rows": [
       "⍗⍗⍗⍗⍗⍗⍗⍗⍗⍗⍗⍗⍗⍗⍗⍗⍗⍗⍗⍗⍗⍗⍗⍗⍗⍗",
@@ -3933,7 +3933,7 @@ export const MAPS7 = {
   "r128-underwater": {
     "id": "r128-underwater",
     "name": "Route 128 Trench",
-    "music": "pewter-theme",
+    "music": "maris-route-theme",
     "underwater": true,
     "rows": [
       "⍛⍛⍛⍛⍛⍛⍛⍛⍛⍛⍛⍛⍛⍛⍛⍛⍛⍛⍛⍛⍛⍛⍛⍛⍛⍛",
@@ -3976,7 +3976,7 @@ export const MAPS7 = {
   "mt-pyre": {
     "id": "mt-pyre",
     "name": "Mt. Requiem",
-    "music": "pewter-theme",
+    "music": "maris-route-theme",
     "indoor": true,
     "rows": [
       "GGGGGGGGGGGGGGGGGGGGGGGG",
@@ -4017,7 +4017,7 @@ export const MAPS7 = {
   "seafloor-cavern": {
     "id": "seafloor-cavern",
     "name": "Sunken Cavern",
-    "music": "pewter-theme",
+    "music": "maris-route-theme",
     "indoor": true,
     "rows": [
       "GGGGGGGGGGGGGGGGGGGGGGGG",
@@ -4053,7 +4053,7 @@ export const MAPS7 = {
   "cave-of-origin": {
     "id": "cave-of-origin",
     "name": "Worldroot Cave",
-    "music": "pewter-theme",
+    "music": "maris-route-theme",
     "indoor": true,
     "rows": [
       "ṺṺṺṺṺṺṺṺṺṺṺṺṺṺṺṺṺṺṺṺṺṺ",
@@ -4089,7 +4089,7 @@ export const MAPS7 = {
   "shoal-cave": {
     "id": "shoal-cave",
     "name": "Ebbtide Cave",
-    "music": "pewter-theme",
+    "music": "maris-route-theme",
     "indoor": true,
     "rows": [
       "ṥṥṥṥṥṥṥṥṥṥṥṥṥṥṥṥṥṥṥṥṥṥṥṥ",
@@ -4125,7 +4125,7 @@ export const MAPS7 = {
   "sky-pillar": {
     "id": "sky-pillar",
     "name": "Tempest Tower",
-    "music": "pewter-theme",
+    "music": "maris-route-theme",
     "indoor": true,
     "rows": [
       "ṲṲṲṲṲṲṲṲṲṲṲṲṲṲṲṲṲṲṲṲ",
@@ -4165,7 +4165,7 @@ export const MAPS7 = {
   "victory-road-maris": {
     "id": "victory-road-maris",
     "name": "Crown Road",
-    "music": "pewter-theme",
+    "music": "maris-route-theme",
     "indoor": true,
     "rows": [
       "GGGGGGGGGGGGGGGGGGLLGGGGGG",
@@ -4205,7 +4205,7 @@ export const MAPS7 = {
   "desert-ruins": {
     "id": "desert-ruins",
     "name": "Dune Tomb",
-    "music": "pewter-theme",
+    "music": "maris-route-theme",
     "indoor": true,
     "rows": [
       "ṲṲṲṲṲṲṲṲṲṲṲṲṲṲṲṲṲṲ",
@@ -4241,7 +4241,7 @@ export const MAPS7 = {
   "island-cave": {
     "id": "island-cave",
     "name": "Sea Tomb",
-    "music": "pewter-theme",
+    "music": "maris-route-theme",
     "indoor": true,
     "rows": [
       "GGGGGGGGGGGGGGGGGG",
@@ -4277,7 +4277,7 @@ export const MAPS7 = {
   "ancient-tomb": {
     "id": "ancient-tomb",
     "name": "Iron Tomb",
-    "music": "pewter-theme",
+    "music": "maris-route-theme",
     "indoor": true,
     "rows": [
       "ṲṲṲṲṲṲṲṲṲṲṲṲṲṲṲṲṲṲ",
@@ -4313,7 +4313,7 @@ export const MAPS7 = {
   "scorched-slab": {
     "id": "scorched-slab",
     "name": "Cinderslab",
-    "music": "pewter-theme",
+    "music": "maris-route-theme",
     "indoor": true,
     "rows": [
       "GGGGGGGGGGGGGGGG",
@@ -4415,7 +4415,7 @@ export const MAPS7 = {
   "contest-lilycove": {
     "id": "contest-lilycove",
     "name": "Lotus Cove Contest Hall",
-    "music": "viridian-theme",
+    "music": "maris-town-theme",
     "contestHall": "lilycove",
     "indoor": true,
     "rows": [
@@ -4490,7 +4490,7 @@ export const MAPS7 = {
   "magma-hideout": {
     "id": "magma-hideout",
     "name": "Ember Hideout",
-    "music": "pewter-theme",
+    "music": "maris-route-theme",
     "indoor": true,
     "rows": [
       "@@@@@@@@@@@@@@@@@@@@@@@@",
@@ -4526,7 +4526,7 @@ export const MAPS7 = {
   "aqua-hideout": {
     "id": "aqua-hideout",
     "name": "Tide Hideout",
-    "music": "pewter-theme",
+    "music": "maris-route-theme",
     "indoor": true,
     "rows": [
       "@@@@@@@@@@@@@@@@@@@@@@@@",

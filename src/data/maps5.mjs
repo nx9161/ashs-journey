@@ -16,7 +16,7 @@ export const MAPS5 = {
   "valencia": {
     "id": "valencia",
     "name": "Marisol Island",
-    "music": "viridian-theme",
+    "music": "amber-town-theme",
     "rows": [
       "~~~~~~~~~~~~~~~~~~~~~~~~~~~~",
       "~~ẞẞẞẞẞẞẞẞẞẞẞẞẞẞẞẞẞẞẞẞẞẞẞẞẞ~",
@@ -365,7 +365,7 @@ export const MAPS5 = {
   "mikan": {
     "id": "mikan",
     "name": "Tangelo Island",
-    "music": "viridian-theme",
+    "music": "amber-town-theme",
     "rows": [
       "~~~~~~~~~~~~~~~~~~~~~~~~~~",
       "~~ẞẞẞẞẞẞẞẞẞẞẞẞẞẞẞẞẞẞẞẞẞẞ~~",
@@ -710,7 +710,7 @@ export const MAPS5 = {
   "navel": {
     "id": "navel",
     "name": "Pomelo Island",
-    "music": "pewter-theme",
+    "music": "amber-town-theme",
     "rows": [
       "~~~~~~~~~~~~⇘⇘~~~~~~~~~~~~",
       "~~~~ẞFF⇘⇘⇘⇘⇘⇘⇘~~~~~~~~~~~~",
@@ -1079,7 +1079,7 @@ export const MAPS5 = {
   "moro": {
     "id": "moro",
     "name": "Bergamot Island",
-    "music": "viridian-theme",
+    "music": "amber-town-theme",
     "rows": [
       "~~~~~~~~~~~~⇤⇤~~~~~~~~~~~~",
       "~~~~ẞẞẞẞ⇤⇤⇤⇤⇤⇤S~~~~~~~~~~~",
@@ -1383,7 +1383,7 @@ export const MAPS5 = {
   "trovita": {
     "id": "trovita",
     "name": "Reefside Island",
-    "music": "viridian-theme",
+    "music": "amber-town-theme",
     "rows": [
       "~~~~~~~~~~~~⇰⇰~~~~~~~~~~~~",
       "~~~~ẞẞẞ⇰⇰⇰⇰⇰⇰⇰⇰ẞẞẞẞẞ~~~~~~",
@@ -1719,7 +1719,7 @@ export const MAPS5 = {
   "kumquat": {
     "id": "kumquat",
     "name": "Calamondin Island",
-    "music": "viridian-theme",
+    "music": "amber-town-theme",
     "rows": [
       "~~~~~~~~~~~~~~~~~~~~~~~~~~~~",
       "~~ẞẞẞẞẞẞẞẞẞẞẞẞẞẞẞẞẞẞẞẞẞẞẞ~~~",
@@ -2054,7 +2054,7 @@ export const MAPS5 = {
   "pummelo": {
     "id": "pummelo",
     "name": "Grapefruit Island",
-    "music": "viridian-theme",
+    "music": "amber-town-theme",
     "rows": [
       "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~",
       "~~ẞẞẞẞẞẞẞẞẞẞẞẞẞẞẞẞẞẞẞẞẞẞẞẞẞẞ~~",
@@ -2396,7 +2396,7 @@ export const MAPS5 = {
   "shamouti": {
     "id": "shamouti",
     "name": "Sanctum Island",
-    "music": "pewter-theme",
+    "music": "amber-town-theme",
     "rows": [
       "~~~~~~~~~~~~~∔∔~~~~~~~~~~~~~",
       "~~~~ẞẞẞ∔∔∔∔∔∔∔∔∔∔∔∔∔∔∔∔∔∔∔~~",
@@ -2884,7 +2884,7 @@ export const MAPS5 = {
   "fire-isle": {
     "id": "fire-isle",
     "name": "Ember Isle",
-    "music": "pewter-theme",
+    "music": "amber-town-theme",
     "rows": [
       "~~~~~~~~~~~~~~~~~~~~~~~~",
       "~~~~~~~~~~~~~~~~~~~~~~~~",
@@ -3052,7 +3052,7 @@ export const MAPS5 = {
   "ice-isle": {
     "id": "ice-isle",
     "name": "Rime Isle",
-    "music": "pewter-theme",
+    "music": "amber-town-theme",
     "rows": [
       "~~~~~~~~~~~~~~~~~~~~~~~~",
       "~~~~~~~~~~~~~~~~~~~~~~~~",
@@ -3220,7 +3220,7 @@ export const MAPS5 = {
   "lightning-isle": {
     "id": "lightning-isle",
     "name": "Storm Isle",
-    "music": "pewter-theme",
+    "music": "amber-town-theme",
     "rows": [
       "~~~~~~~~~~~~~~~~~~~~~~~~",
       "~~~~~~~~~~~~~~~~~~~~~~~~",
@@ -3394,7 +3394,7 @@ export const MAPS5 = {
   "orange-sea-west": {
     "id": "orange-sea-west",
     "name": "Amber Sea — West",
-    "music": "route1-theme",
+    "music": "amber-route-theme",
     "rows": [
       "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~",
       "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~",
@@ -3534,7 +3534,7 @@ export const MAPS5 = {
   "orange-sea-central": {
     "id": "orange-sea-central",
     "name": "Amber Sea — Central",
-    "music": "route1-theme",
+    "music": "amber-route-theme",
     "rows": [
       "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~",
       "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~",
@@ -3692,7 +3692,7 @@ export const MAPS5 = {
   "orange-sea-east": {
     "id": "orange-sea-east",
     "name": "Amber Sea — East",
-    "music": "route1-theme",
+    "music": "amber-route-theme",
     "rows": [
       "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~",
       "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~",
@@ -3850,7 +3850,7 @@ export const MAPS5 = {
   "orange-sea-north": {
     "id": "orange-sea-north",
     "name": "Amber Sea — North",
-    "music": "route1-theme",
+    "music": "amber-route-theme",
     "rows": [
       "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~",
       "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~",
@@ -3972,7 +3972,7 @@ export const MAPS5 = {
   "ivy-lab": {
     "id": "ivy-lab",
     "name": "Prof. Isla's Lab",
-    "music": "viridian-theme",
+    "music": "amber-town-theme",
     "indoor": true,
     "rows": [
       ">>>>>>>>>>>>>>>>>>",
@@ -4473,7 +4473,7 @@ export const MAPS5 = {
   "shamouti-shrine": {
     "id": "shamouti-shrine",
     "name": "Sanctum Shrine",
-    "music": "pewter-theme",
+    "music": "amber-route-theme",
     "indoor": true,
     "rows": [
       "ạạạạạạạạạạạạạạạạ",
@@ -4580,7 +4580,7 @@ export const MAPS5 = {
   "shamouti-deep": {
     "id": "shamouti-deep",
     "name": "Sanctum Deep Shrine",
-    "music": "pewter-theme",
+    "music": "amber-route-theme",
     "indoor": true,
     "rows": [
       "ṺṺṺṺṺṺṺṺṺṺṺṺṺṺṺṺ",
@@ -4633,7 +4633,7 @@ export const MAPS5 = {
   "fire-cave": {
     "id": "fire-cave",
     "name": "Ember Isle Shrine Cave",
-    "music": "pewter-theme",
+    "music": "amber-route-theme",
     "indoor": true,
     "rows": [
       "GGGGÿGGGGÿGGGG",
@@ -4687,7 +4687,7 @@ export const MAPS5 = {
   "ice-cave": {
     "id": "ice-cave",
     "name": "Rime Isle Shrine Cave",
-    "music": "pewter-theme",
+    "music": "amber-route-theme",
     "indoor": true,
     "rows": [
       "GGGGGGGGGGGGGG",
@@ -4741,7 +4741,7 @@ export const MAPS5 = {
   "lightning-cave": {
     "id": "lightning-cave",
     "name": "Storm Isle Shrine Cave",
-    "music": "pewter-theme",
+    "music": "amber-route-theme",
     "indoor": true,
     "rows": [
       "GGGGGGGGGGGGGG",
@@ -4795,7 +4795,7 @@ export const MAPS5 = {
   "house-valencia": {
     "id": "house-valencia",
     "name": "Marisol Island — House",
-    "music": "viridian-theme",
+    "music": "amber-town-theme",
     "indoor": true,
     "rows": [
       "ṡ<<<<<<<<<",
@@ -4852,7 +4852,7 @@ export const MAPS5 = {
   "house-mikan": {
     "id": "house-mikan",
     "name": "Tangelo Island — House",
-    "music": "viridian-theme",
+    "music": "amber-town-theme",
     "indoor": true,
     "rows": [
       "Ṟ<<<<<<<<<",
@@ -4909,7 +4909,7 @@ export const MAPS5 = {
   "house-kumquat": {
     "id": "house-kumquat",
     "name": "Calamondin Island — House",
-    "music": "viridian-theme",
+    "music": "amber-town-theme",
     "indoor": true,
     "rows": [
       "ṙ<<<<<<<<<",
@@ -4966,7 +4966,7 @@ export const MAPS5 = {
   "house-shamouti": {
     "id": "house-shamouti",
     "name": "Sanctum Island — House",
-    "music": "viridian-theme",
+    "music": "amber-town-theme",
     "indoor": true,
     "rows": [
       "ṡ<<<<<<<<<",
