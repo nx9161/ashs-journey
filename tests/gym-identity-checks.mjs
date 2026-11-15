@@ -72,10 +72,13 @@ const sha = (s) => crypto.createHash('sha256').update(s).digest('hex');
 const sha16 = (s) => sha(s).slice(0, 16);
 const sha12 = (s) => sha(s).slice(0, 12);
 
-// ---------------- ratchet pins (T0) ------------------------------------
-const GYM_ARENA_COVERED = 0;
-const GYM_FLOOR_OWNED = 0;
-const GYMFLOOR_DOMINANT = 36;
+// ---------------- ratchet pins (T0; burned down per tranche) -----------
+// T1 (Arden): COVERED 0->8, FLOOR_OWNED 0->8, GYMFLOOR_DOMINANT 36->28.
+// INTERIOR_TUPLES_DISTINCT stays 35 — the mauville/sunnyshore shared
+// tuple is untouched; every Arden tuple is unique by its own floor kind.
+const GYM_ARENA_COVERED = 8;
+const GYM_FLOOR_OWNED = 8;
+const GYMFLOOR_DOMINANT = 28;
 const INTERIOR_TUPLES_DISTINCT = 35;
 
 // ---------------- the gym census (plan §1 enumeration) -----------------

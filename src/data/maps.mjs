@@ -146,13 +146,13 @@ export const MAPS = {
     id: 'gym', name: 'Flintridge Gym', music: 'gym-theme', indoor: true,
     rows: rows([
       'Ṛ===========',
-      '=νḿṀλṁλ++Ḙθ=',
-      '=ḙμṢ+++++μḗ=',
-      '=++++++++++=',
-      '=++++//++++=',
-      '=++++//++++=',
-      '=++++//++++=',
-      '=+++)++)+++=',
+      '=νḿṀλṁλ␜␜Ḙḿ=',
+      '=ḙμṢ␜␜␜␜␜μḗ=',
+      '=␜␜␜␜␜␜␜␜␜␜=',
+      '=␜␜␜␜//␜␜␜␜=',
+      '=␜␜␜␜//␜␜␜␜=',
+      '=␜␜␜␜//␜␜␜␜=',
+      '=␜␜␜)␜␜)␜␜␜=',
       '=====DD=====',
     ]),
     warps: [
@@ -1329,6 +1329,14 @@ export const WALKABLE = new Set(['.', ',', 'D', 'E', 'C', 'F', 'J', 'K', '1', '2
   // route program's last allocation: the program closes at
   // 451 kinds over 1092-1543; 1111 stays empty.)
   ...[1536, 1538, 1540, 1542]
+    .map((i) => String.fromCodePoint(0x1E00 + i)),
+  // Gym Identity T1: the eight Arden gym floor chars (U+1E00+1564..1571,
+  // tiles.mjs GYMID1_KIND_DEFS) are walkable — quarryfloor (Flintridge),
+  // lagoonfloor (Tidehaven), deckfloor (Arcport), glassfloor (Canopy),
+  // astrofloor (Farsight), shadowfloor (Bramble), obsidianfloor
+  // (Caldera), loamfloor (Fernmere) — each swapped 1:1 from the walkable
+  // '+' gymfloor char inside its own gym, so floor stays floor.
+  ...[1564, 1565, 1566, 1567, 1568, 1569, 1570, 1571]
     .map((i) => String.fromCodePoint(0x1E00 + i))]);
 
 // Trainer definitions for the slice.

@@ -1,0 +1,23 @@
+# Gym Identity T1 (Arcport): naval signal-deck floor — grey deck plates in 8px seams with signal-yellow rivets at the corners, the Thunder gym's pylon register underfoot. Arcport's own floor — split from Lilac's volt family by material entire: riveted plate vs bare ground.
+PIX deckfloor 16 16
+aaaaaaabaaaaaaab
+adaaaadbadacacdb
+aaaaaaabaaaaaaab
+caaacacbaacaaaab
+aaaaababaaaacaab
+baaaaaabaaacaaab
+bdccaadbadaaaadb
+bbbbbbbbbbbbbbbb
+aaaacbcbcaaaaacb
+adacaadbcdaaaadb
+aaaaaaabbaaaacab
+aaaaaaabaacaaacb
+aaaaaaabababaaab
+aaaaaaabbaaaaaab
+cdaaaadbadaaacdb
+bbbbbbbbbbbbbbbb
+PAL
+a #6a6e7d
+b #565a68
+c #82868f
+d #f8d030

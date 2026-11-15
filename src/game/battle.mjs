@@ -198,6 +198,34 @@ const ARENA_AMBIENT = {
 // Ground's ARENA_ART / ARENA_AMBIENT treatment, byte-identical to the
 // pre-wave render.
 const GYM_ARENA_ART = {
+  // T1 Arden (WAVE-GYM-IDENTITY-PLAN §5): each entry layers over the
+  // gym's existing Ground — palette/motif/tex/amb only, rules frozen.
+  // Flintridge: quarry-cut stone, Boulder browns over Rubble — darker
+  // and warmer than the base treatment, dust motes for spark.
+  'gym': { sky: ['#6f8aa5', '#7d99b2', '#8ba7bf', '#99b4c9', '#a7c0d2', '#b5ccdc'], ground: ['#b28a58', '#a87f52', '#9e744c', '#947046', '#8a6440', '#7f5c3a'], dark: '#5f4a2c', light: '#f0e2bc', accent: '#d89a3a', motif: 'rocks', tex: 'chunk', amb: { kind: 'mote', n: 8, speed: 3 } },
+  // Tidehaven: pool-tile lagoon, Cascade blues over Tide — a tiled
+  // pool, not open sea: deeper lagoon ground, bubbles rising.
+  'gym-cerulean': { sky: ['#5fb2e8', '#6fbdef', '#7fc7f3', '#8fd0f6', '#9fd9f9', '#afe2fb'], ground: ['#3fa8d8', '#389ed0', '#3194c8', '#2a8ac0', '#237fb5', '#1c74ab'], dark: '#1d5f8a', light: '#e8fbff', accent: '#2fd4c4', motif: 'waves', tex: 'foam', haze: true, amb: { kind: 'bubble', n: 10, speed: 7 } },
+  // Arcport: naval signal-deck over Volt — deep navy sky, grey deck
+  // ground, signal amber; the pylon register is volt's own seed.
+  'gym-vermilion': { sky: ['#2c2c4c', '#36365c', '#403f6b', '#4a487a', '#544f89', '#5e5898'], ground: ['#7a7d8a', '#6f7280', '#646776', '#595c6a', '#4e515e', '#434652'], dark: '#26262e', light: '#ffe98a', accent: '#ffb020', motif: 'storm', tex: 'spark', pylon: true, amb: { kind: 'spark', n: 16, speed: 0 } },
+  // Canopy: greenhouse glass and leaf-light over Marsh — flowers
+  // under glass, brighter than the open reed-bed base.
+  'gym-celadon': { sky: ['#8fd0a0', '#9ad6aa', '#a5dcb4', '#b0e2be', '#bbe8c8', '#c6eed2'], ground: ['#7fae52', '#76a44c', '#6d9a46', '#649040', '#5b863a', '#527c34'], dark: '#2c4c26', light: '#eaffb0', accent: '#f28ac0', motif: 'flowers', tex: 'petal', haze: true, amb: { kind: 'petal', n: 14, speed: 8 } },
+  // Farsight: observatory dark over Mind — night indigo, star-gold
+  // accent, slow motes; the base's bright magenta is another gym's.
+  'gym-saffron': { sky: ['#2e2a55', '#38336a', '#423c7f', '#4c4594', '#564ea9', '#6057be'], ground: ['#4a3a6e', '#43345f', '#3c2e56', '#35284d', '#2e2244', '#271c3b'], dark: '#1c1430', light: '#e8e0ff', accent: '#ffd76a', motif: 'runes', tex: 'spark', amb: { kind: 'mote', n: 14, speed: 4 } },
+  // Bramble: ninja-shadow indigo over Venom — pushed blue-dark, the
+  // venom-lime fleck kept as the family mark, faster bubbles.
+  'gym-fuchsia': { sky: ['#343a5e', '#3c4268', '#444a72', '#4c527c', '#545a86', '#5c6290'], ground: ['#3d3260', '#372c56', '#31264c', '#2b2042', '#251a38', '#1f142e'], dark: '#17102a', light: '#c8f09a', accent: '#9ae85a', motif: 'shrooms', tex: 'bubble', amb: { kind: 'bubble', n: 14, speed: 9 } },
+  // Caldera: volcanic glass over Pyre — where the base is bright
+  // ember-orange, this is black glass under ash-smoke: near-black
+  // ground, greyed sky, dim amber glints, flame vents at the horizon.
+  'gym-cinnabar': { sky: ['#33272b', '#3d2d30', '#473336', '#51393c', '#5b4042', '#654748'], ground: ['#1c171c', '#181318', '#141014', '#100c10', '#0d090d', '#0a060a'], dark: '#05040a', light: '#e8a04c', accent: '#ff5a14', motif: 'flames', tex: 'chunk', amb: { kind: 'ember', n: 18, speed: 22 } },
+  // Fernmere: corporate earth over Spirit — deep umber, tombs,
+  // corporate gold; reads heavier than Flintridge's quarry (its
+  // skeleton twin), as the final gym should.
+  'gym-viridian': { sky: ['#6a6488', '#746f96', '#7e7aa4', '#8885b2', '#928fc0', '#9c99ce'], ground: ['#6e5a44', '#64503c', '#5a4634', '#50402e', '#463826', '#3c3020'], dark: '#2a2016', light: '#f2e8d0', accent: '#e8c832', motif: 'tombs', tex: 'chunk', amb: { kind: 'mote', n: 10, speed: 4 } },
 };
 
 function gymArenaFor(field) {
