@@ -5649,6 +5649,79 @@ W17Q_KIND_DEFS.forEach(([kind], i) => {
 const W17Q_PROP_KINDS = W17Q_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
 const W17Q_WALL_KINDS = W17Q_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
 const W17Q_FLOOR_KINDS = W17Q_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
+// Wave W17-R (Route Build Program, Maris Tranche 7 — under the
+// trench crossing, the north bay, the Craterlake water, under
+// the crater): the program's first full dive-pair tranche. All
+// four maps are defined once in maps7.mjs (no dual copies in
+// Maris, so no registry re-pins arise). UNDERWATER METHOD
+// (Director ruling #1): the two trench maps convert by the
+// cave-method analogue — seasand -> own floor kind, uwrock ->
+// own wall kind, art layer only, NO props; the dive-pair
+// mechanic tiles are byte-preserved and censused on BOTH maps
+// of each pair (surface 'W' dive tiles + diveSpots records;
+// trench waterglow return tiles + surfaceSpots records).
+// Route 124 Trench "Lit Shafts" (1356-1357): shaftfloor a
+// bright pale light-shaft sand (the lit pools drawn in the
+// floor's own art where the surface doors land), shaftwall a
+// blue-grey jointed shaft rock. Route 125 "North Bay"
+// (1358-1359): ebbsand a tide-banded bay sand (the tide lines
+// drawn in the kind, per the design), ebbrock an ice-fringed
+// cave-isle rock (pale frost edges per the design's glinting
+// ice falls); water 383 + waterglow 17 byte-preserved entire,
+// the 2 'L' Ebbtide mouth cells standing on cavefloor are
+// warp cells — byte-preserved, never converted; coral 5
+// byte-preserved. Route 126 "Craterlake Water" (1360-1361):
+// cratersand a grey-warm crater-bay sand, craterrock a
+// crater-wall rock with massive joint drawing (split from
+// Craterlake town's craterfloor street by register: wild wall
+// vs city floor); water 398 + waterglow 21 byte-preserved
+// entire, lifering 3 + coral 1 byte-preserved; its 2 dive
+// tiles on 'W' cells + diveSpots records are mechanic data —
+// byte-preserved, censused (Craterlake sootopolis also
+// dive-pairs into the same trench; its pair records stand on
+// the town map, byte-preserved entire, the town not touched).
+// Route 126 Trench "Crater Door" (1362-1363): doorfloor a
+// volcanic-grey trench sand with runway-lit flecks (the
+// design's LUMIFIN rows drawn in the floor art, art layer
+// only), doorwall an arched crater rock, darker than 124's
+// shaft rock. Each trench is twin-split from its pair-sibling
+// by value/hue (the Lunestone 1F/B1F discipline): 124 is the
+// bright lit crossing, 126 the volcanic drowned doorway.
+// Shipped trench dressing (kelpbed, moonmoss, cerpool,
+// uwcoral, kelp, crystalcluster, starrock, cavelantern, plain
+// sand patches and every other non-seasand/uwrock kind)
+// stands byte-preserved inside the new registers; encounter
+// tables (0.13, clamperl set) and the maps' underwater flags
+// are byte-identical. Sand kinds are 'floor' class (the
+// shipped sand char was walkable; the swaps are 1:1), trench
+// floor kinds 'floor' class (swapped 1:1 from the walkable
+// seasand), rock/wall kinds 'wall' class (never walkable).
+// Indices 1356-1363 per the program plan
+// (WAVE-W17-MARIS-ROUTE-PROGRAM-PLAN.md): W17-L took
+// 1257-1276, W17-M 1277-1286, W17-N 1287-1303, W17-O
+// 1304-1321, W17-P 1322-1339, and W17-Q takes 1340-1355 on
+// its parallel branch; 1111 and every earlier documented gap
+// stay empty. Kind names verified unclaimed against
+// origin/main. Chars U+1E00+1356..
+const W17R_KIND_DEFS = [
+  ['shaftfloor', 'floor'],
+  ['shaftwall', 'wall'],
+  ['ebbsand', 'floor'],
+  ['ebbrock', 'wall'],
+  ['cratersand', 'floor'],
+  ['craterrock', 'wall'],
+  ['doorfloor', 'floor'],
+  ['doorwall', 'wall'],
+];
+const W17R_KIND_CHARS = {};
+W17R_KIND_DEFS.forEach(([kind], i) => {
+  const ch = String.fromCodePoint(0x1E00 + 1356 + i);
+  W17R_KIND_CHARS[kind] = ch;
+  TILE_CHARS[ch] = kind;
+});
+const W17R_PROP_KINDS = W17R_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
+const W17R_WALL_KINDS = W17R_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
+const W17R_FLOOR_KINDS = W17R_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
 const SINNOH_TOWN_GROUND_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg);
 const SINNOH_TOWN_GROUND2_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg2);
 // TX-3: the 8 gym exteriors by town (original type-accent motifs).
@@ -119794,6 +119867,150 @@ const ART = {
     "abaaaaaaaaaaabaa",
     "baaaaabaaaaaaaaa"
   ] },
+  "tile-shaftfloor": { w: 16, h: 16, pal: {"a":"#dccda6","b":"#c9b586","d":"#b3a075","p":"#f2e8c8"}, rows: [
+    "aaabpaaaaaaaaada",
+    "baaaaabaapaaaaba",
+    "aabbaaaaaaddaaaa",
+    "aaadbaaaabdbaaaa",
+    "aaaabaaaaaaaabpp",
+    "ppapaaabbbaaaaaa",
+    "aaaaabaaadbbaaba",
+    "aaapaaaaaaaaaaba",
+    "abaaaaabaapaaaaa",
+    "daaaabaababbaaaa",
+    "aaaaaaaaaabbaaaa",
+    "aaaapbbabaaapaaa",
+    "aaabbaaaaaaaaaaa",
+    "aaaaadaaaaaadaad",
+    "baaaaaaabaaaaaab",
+    "aaaaaaaaapaabbad"
+  ] },
+  "tile-shaftwall": { w: 16, h: 16, pal: {"a":"#5d6d7c","b":"#46525e","c":"#8b9aa4","d":"#333d47"}, rows: [
+    "babacaababacaaaa",
+    "aaaaaaaaaaaaaaaa",
+    "aabacaaaaaaaaaaa",
+    "aababaabaabaabaa",
+    "aaaaaaaaacaaaaaa",
+    "aaaaabaaaaabaaaa",
+    "aaaaaaaaaabaaaaa",
+    "bbbbbbbbbbbbbbbb",
+    "aaaaaaacaaaaacab",
+    "aaaaabaaaaaacbaa",
+    "aaaaaaacababaaaa",
+    "baaaaaaabaaaaaaa",
+    "abaaaaaaaaaaaaaa",
+    "aababaaaaaaaaaab",
+    "aaabbaabaaaaaaaa",
+    "dddddddddddddddd"
+  ] },
+  "tile-ebbsand": { w: 16, h: 16, pal: {"a":"#e6d5a5","b":"#d5c08c","w":"#b39b62","s":"#f4ead0"}, rows: [
+    "aaaaaaaabasaaaaa",
+    "aabaaaaaabaaaaaa",
+    "aaaaaaaaaaaaaaaa",
+    "wwawawawwwwwawww",
+    "aaaabaaaaaaaaaaa",
+    "asaaaasbaaabaaaa",
+    "aabaaaaaababaaaa",
+    "saaaabaaaasaaaaa",
+    "aaaaaaaasaaaaaaa",
+    "waaawwwaaaaawsaa",
+    "aaaaaaaaaaaaabaa",
+    "aaabaaaaaaaaaaaa",
+    "aaasaaabaaabaaaa",
+    "aaaabaaaasabaaaa",
+    "wawawawwwwwawaba",
+    "aaabaaaaaaaaaaaa"
+  ] },
+  "tile-ebbrock": { w: 16, h: 16, pal: {"w":"#567cbd","x":"#476baa","y":"#7093c7","z":"#5f6a75","c":"#97a3ad","m":"#78838e","f":"#c6d6e9","i":"#e6f0f4"}, rows: [
+    "wwwwwwwxwwywwwww",
+    "wwwwwwwwwwwwwwww",
+    "wwwwwywwwwywcwww",
+    "wwwwwyiziiwxwwwx",
+    "wwwwciiimzizwwww",
+    "wwwmmimzmciiiwww",
+    "wwmcmiccczicmmcw",
+    "wwmmmmzmzmcmzzyw",
+    "ywmmzcmzmzcmzcww",
+    "wwwzcmcmcmzmmyww",
+    "wwwmzzzzzccmcwcw",
+    "wwwwmcmcmzmcwxwx",
+    "wwfffwfxcwfwffwx",
+    "wwwwwfwwwwfwywww",
+    "wwwwwwcwywwwwwww",
+    "wwwxwwcwwwwwwwww"
+  ] },
+  "tile-cratersand": { w: 16, h: 16, pal: {"a":"#c9bda4","b":"#b5a78c","d":"#9d9077","r":"#a8895e"}, rows: [
+    "baaaaaaaaaaaabda",
+    "aaaaaaaaaaaabaab",
+    "baabaaaababaadaa",
+    "aaaababadaraaaba",
+    "abaaaarabaabrbra",
+    "aabaababbaaaadab",
+    "aaaaaaabbbaraaab",
+    "baaaabbabaaaaaba",
+    "aaaaaaaaaabaaaaa",
+    "aaraaabaaaabbadb",
+    "aaaadaabbaaaabaa",
+    "daaaadaaaaaabaaa",
+    "aaaaabbaaaaaaaaa",
+    "aaaaaaaaaaaaabba",
+    "aabaaaabaabaaaab",
+    "baababaabaabbaaa"
+  ] },
+  "tile-craterrock": { w: 16, h: 16, pal: {"w":"#567cbd","x":"#476baa","y":"#7093c7","z":"#4f463f","c":"#8d8175","m":"#6e6359","f":"#c6d6e9","j":"#38312b"}, rows: [
+    "wwwwwwwwwwwwwwyw",
+    "xwwwxwwcxywwwwww",
+    "wwwwwxwwwwwwwwww",
+    "wwywwmzmmzmwwwww",
+    "wwwczzjmzcjcmwww",
+    "wwmmmmjcmcjzcmwx",
+    "wwzmzzjmzmjzmzww",
+    "wwjjjjjjjjjjjjwy",
+    "wwzcmzmmjzmzmzww",
+    "wwwmzzmcjmcmcwwy",
+    "wwwmmmmmjmmzmxww",
+    "wwwwmczmmczmwwww",
+    "wwffwffffyffffww",
+    "ccwwwfwwxwfywwcw",
+    "wwwwwxwwcwwwwwww",
+    "wwwwwwwwwwwywwxy"
+  ] },
+  "tile-doorfloor": { w: 16, h: 16, pal: {"a":"#8f867a","b":"#7a7266","d":"#655d52","g":"#e8a84c"}, rows: [
+    "baadaaaaaaaaaaaa",
+    "abaaaabaaaaaaaaa",
+    "aaaaaaaaaaaaaaaa",
+    "bdaaadabaaaaaaba",
+    "ababbaaabbbaabaa",
+    "agabgabgabgaagaa",
+    "abbaaaabbaaaadba",
+    "aaaaaaaaaaaabaaa",
+    "aaaaaadaaaaaaaba",
+    "aabdaaaaaaaaaaaa",
+    "aadagaagaaaaagaa",
+    "addaadaaaabaabaa",
+    "adaabaaabbabadaa",
+    "aaaaaaaaabaabaaa",
+    "aabaaaaaaaaaaaaa",
+    "aaaaadaaaabaaaaa"
+  ] },
+  "tile-doorwall": { w: 16, h: 16, pal: {"a":"#554e4a","b":"#403a37","c":"#6e645c","d":"#2e2a28"}, rows: [
+    "abaaaaaaaaaadaaa",
+    "aaaaaaaaaaaaaaaa",
+    "ccbccbccbccbccbc",
+    "ccbccbccbccbccbc",
+    "ccbccbccbccbccbc",
+    "bbbbbbbbbbbbbbbb",
+    "aaaaababaaabbaba",
+    "bbbbbbbbbbbbbbbb",
+    "aabaaaaaaabaaaad",
+    "baaaaababaaaaaab",
+    "aaaaaabaaabaaaaa",
+    "aaaaaabaaadaaaaa",
+    "aaaaaaaaaaaaabad",
+    "acaaaccaaaabaaaa",
+    "abaabaaabaaadaaa",
+    "dddddddddddddddd"
+  ] },
   "partner-back-bob": { base: "partner-back", w: 64, h: 64, pal: {}, shiftY: 2 },
   "partner-front-bob": { base: "partner-front", w: 64, h: 64, pal: {}, shiftY: 2 },
   "abomasnow-back-bob": { base: "abomasnow-back", w: 64, h: 64, pal: {}, shiftY: 2 },
@@ -125285,6 +125502,9 @@ for (const k of W17P_FLOOR_KINDS) TILE_ART[k] = 'tile-' + k;
 for (const k of W17Q_PROP_KINDS) TILE_ART[k] = 'tile-prop-' + k;
 for (const k of W17Q_WALL_KINDS) TILE_ART[k] = 'tile-' + k;
 for (const k of W17Q_FLOOR_KINDS) TILE_ART[k] = 'tile-' + k;
+for (const k of W17R_PROP_KINDS) TILE_ART[k] = 'tile-prop-' + k;
+for (const k of W17R_WALL_KINDS) TILE_ART[k] = 'tile-' + k;
+for (const k of W17R_FLOOR_KINDS) TILE_ART[k] = 'tile-' + k;
 // Premium+ W6 (TX-3/PL-1): door-open frames, authored in TX-3 for every
 // door kind. The warp-fade engine that plays them lands in W7 — W6
 // wires the frames (this registry + cache.doorOpen + doorOpenCanvas)
@@ -126110,9 +126330,14 @@ const CAVE_KINDS = new Set(['cavewall', 'cavefloor', 'caveboulder',
   // Wave W17-O: Comet Falls' kit (Comet Deep) is cave family too.
   'cometwall', 'cometfloor',
   // Wave W17-P: Copperbore Tunnel's kit (Copperbore) is cave family too.
-  'borewall', 'borefloor']);
-const CAVE_FLOOR_KINDS = new Set(['cavefloor', 'lunefloor', 'darklunefloor', 'stratadeepfloor', 'crownfloor', 'junctionfloor', 'wetmillfloor', 'sprayfloor', 'gloomfloor', 'scorchfloor', 'cometfloor', 'borefloor']);
-const CAVE_WALL_KINDS = new Set(['cavewall', 'lunewall', 'darklunewall', 'stratadeepwall', 'crownwall', 'junctionwall', 'wetmillwall', 'spraywall', 'frostwall', 'thawwall', 'gloomwall', 'scorchrock', 'cometwall', 'borewall']);
+  'borewall', 'borefloor',
+  // Wave W17-R: the two Maris trench kits (Lit Shafts, Crater
+  // Door) are cave family too — the underwater method is the
+  // cave method's analogue, and cave-context detection around
+  // the trenches' shipped boulders/rocks reads them the same.
+  'shaftwall', 'shaftfloor', 'doorwall', 'doorfloor']);
+const CAVE_FLOOR_KINDS = new Set(['cavefloor', 'lunefloor', 'darklunefloor', 'stratadeepfloor', 'crownfloor', 'junctionfloor', 'wetmillfloor', 'sprayfloor', 'gloomfloor', 'scorchfloor', 'cometfloor', 'borefloor', 'shaftfloor', 'doorfloor']);
+const CAVE_WALL_KINDS = new Set(['cavewall', 'lunewall', 'darklunewall', 'stratadeepwall', 'crownwall', 'junctionwall', 'wetmillwall', 'spraywall', 'frostwall', 'thawwall', 'gloomwall', 'scorchrock', 'cometwall', 'borewall', 'shaftwall', 'doorwall']);
 const DUNGEON_WALLS = new Set(['cavewall', 'towerwall', 'silphwall', 'plantwall',
   // Premium+ W6 (TX-5): the sub-theme wall kinds cast the same strip.
   'icewall', 'iceface', 'stratwall', 'bannerwall', 'cerwall', 'panelwall',
@@ -126133,7 +126358,9 @@ const DUNGEON_WALLS = new Set(['cavewall', 'towerwall', 'silphwall', 'plantwall'
   // Wave W17-O: Comet Falls' wall kind casts the same strip.
   'cometwall',
   // Wave W17-P: Copperbore Tunnel's wall kind casts the same strip.
-  'borewall']);
+  'borewall',
+  // Wave W17-R: the two Maris trench wall kinds cast the same strip.
+  'shaftwall', 'doorwall']);
 const FLOOR_VARIANTS = {
   grass: 'grassVariants', path: 'pathVariants', cavefloor: 'caveFloorVariants',
   towerfloor: 'towerFloorVariants', silphfloor: 'silphFloorVariants', plantfloor: 'plantFloorVariants',
@@ -126893,7 +127120,7 @@ function resolveTileLayers(cache, kind, x, y, kindAt, t, phase, mapId) {
       }
       return layers.filter(Boolean);
     }
-    case 'cavewall': case 'lunewall': case 'darklunewall': case 'stratadeepwall': case 'crownwall': case 'junctionwall': case 'wetmillwall': case 'spraywall': case 'frostwall': case 'thawwall': case 'gloomwall': case 'scorchrock': case 'cometwall': case 'borewall': {
+    case 'cavewall': case 'lunewall': case 'darklunewall': case 'stratadeepwall': case 'crownwall': case 'junctionwall': case 'wetmillwall': case 'spraywall': case 'frostwall': case 'thawwall': case 'gloomwall': case 'scorchrock': case 'cometwall': case 'borewall': case 'shaftwall': case 'doorwall': {
       // Strata walls by position hash; an exposed face (floor to the
       // south) wears the stalactite face. Perfection Pass Stage 2 Gate 0
       // (G0-5, standard B3): the face is DETERMINISTIC — 100% of exposed
@@ -127515,6 +127742,11 @@ function resolveTileLayers(cache, kind, x, y, kindAt, t, phase, mapId) {
     case 'standstone':
     case 'masterelm':
     case 'berryrow':
+    // Wave W17-R: the Maris tranche-7 sea rocks composite over
+    // their ground the same way (all arts are fully opaque —
+    // each lane's rock bakes in the sea it stands in).
+    case 'ebbrock':
+    case 'craterrock':
     // Wave T17: the radio mast composites over its compound grass too.
     case 'radiomast': {
       // Object tiles carry transparent surrounds (Wave 1): lay the ground
@@ -135107,6 +135339,22 @@ const WALKABLE = new Set(['.', ',', 'D', 'E', 'C', 'F', 'J', 'K', '1', '2', 'V',
   // 1304-1321 and W17-P takes 1322-1339 on its parallel
   // branch; 1111 stays empty.)
   ...[1340, 1341, 1344, 1345, 1348, 1350, 1351, 1354]
+    .map((i) => String.fromCodePoint(0x1E00 + i)),
+  // Wave W17-R: the Maris tranche-7 floor chars (U+1E00+1356..,
+  // tiles.mjs W17R_KIND_DEFS) are walkable — shaftfloor (Route
+  // 124 Trench, swapped 1:1 from the walkable seasand swim
+  // surface), ebbsand (Route 125) and cratersand (Route 126),
+  // each swapped 1:1 from the walkable shipped sand char, and
+  // doorfloor (Route 126 Trench, swapped 1:1 from seasand), so
+  // floor stays floor. The wall chars (1357 shaftwall, 1363
+  // doorwall, swapped from the 'uwrock' wall char) and the rock
+  // chars (1359 ebbrock, 1361 craterrock, swapped from the 'R'
+  // rock char) are NOT here: walls and rocks were never
+  // walkable. (Indices 1356-1363 per the Maris program plan;
+  // W17-L took 1257-1276, W17-M 1277-1286, W17-N 1287-1303,
+  // W17-O 1304-1321, W17-P 1322-1339 and W17-Q takes 1340-1355
+  // on its parallel branch; 1111 stays empty.)
+  ...[1356, 1358, 1360, 1362]
     .map((i) => String.fromCodePoint(0x1E00 + i))]);
 
 // Trainer definitions for the slice.
@@ -161442,18 +161690,18 @@ const MAPS7 = {
       "~~~~~~~~~~~~~~~~~~~~~~~~~~~~",
       "~~~~~~~~~~~~~~~~~~~~~~~~~~~~",
       "~~~~~~~~~Ā~Ā~~~~~~~~~~~~~~Ā~",
-      "~Ā~Ā~~~~~~R~~~~~~~~~~~~~~~~~",
-      "~~~~~~ẞ~~Āẞ~~ẞ~~~~~~~Ā~R~~R~",
-      "~ẙ~S~~ẞ~~~~ẞ~~~~Ā~R~~~~~ẞ~~~",
-      "~~Ā~~~~~~~~~ẞẞẞẞẞẞ~~R~~~~Ā~~",
-      "~~~R~~~~~~Ā~ẞLLẞẞẞ~~~~~~~~~~",
-      "~~~~~~~R~~~~ẞẞẞSẞẞ~~~~~~~~~~",
-      "~~~~R~~R~~~~~~~~~~R~~~~ĀĀ~~~",
-      "~~~~~~~~~~~~~~~~~~~~~~~R~Ā~~",
-      "~~~~~ẙ~~~~~ẙ~~~~~Ā~~~ẞ~~~~~~",
-      "~~~ẙẞ~~ẞ~~Rẞ~~~~~~~~~~~~~~~~",
-      "~~~~~~~~~RĀ~~~~~~~~~~~~~~~Ā~",
-      "~~~~~~~~~~R~~~~~ẙ~~~~~~~~~~~",
+      "~Ā~Ā~~~~~~⍏~~~~~~~~~~~~~~~~~",
+      "~~~~~~⍎~~Ā⍎~~⍎~~~~~~~Ā~⍏~~⍏~",
+      "~ẙ~S~~⍎~~~~⍎~~~~Ā~⍏~~~~~⍎~~~",
+      "~~Ā~~~~~~~~~⍎⍎⍎⍎⍎⍎~~⍏~~~~Ā~~",
+      "~~~⍏~~~~~~Ā~⍎LL⍎⍎⍎~~~~~~~~~~",
+      "~~~~~~~⍏~~~~⍎⍎⍎S⍎⍎~~~~~~~~~~",
+      "~~~~⍏~~⍏~~~~~~~~~~⍏~~~~ĀĀ~~~",
+      "~~~~~~~~~~~~~~~~~~~~~~~⍏~Ā~~",
+      "~~~~~ẙ~~~~~ẙ~~~~~Ā~~~⍎~~~~~~",
+      "~~~ẙ⍎~~⍎~~⍏⍎~~~~~~~~~~~~~~~~",
+      "~~~~~~~~~⍏Ā~~~~~~~~~~~~~~~Ā~",
+      "~~~~~~~~~~⍏~~~~~ẙ~~~~~~~~~~~",
       "~~~~~~~~~~~~~~~~~~~~~~~~~~~~",
     ],
     "warps": [
@@ -161481,20 +161729,20 @@ const MAPS7 = {
     "weather": "clear",
     "rows": [
       "~~~~~~~~~~~~~~~~~~~~~~~~~~~~",
-      "~~~~~~~~~~~~Ā~R~~~~~~~~~~~~~",
-      "~~~~~~~~~Ā~~~~~~~~~~R~~~~~~~",
-      "~~ṃRẞ~R~~~~Ā~~~~~~~~~~~~~Ā~~",
-      "~~~~~~~~~~~Ā~ẞ~~~~~~~ẞ~~~~~~",
-      "~~~SĀ~~~~~~~~~~~ẞ~~~~~Ā~~~~~",
-      "~~~~ĀĀ~~ẞ~Ā~ẞ~~ẞ~~~~~~~R~~~~",
-      "~~R~~~~~~Ā~ĀĀWW~~~~~~~~R~~ẞ~",
-      "~~~Ā~~~~~~~ṃ~~~~~R~~~~~ẞ~~~~",
-      "~~~~~~~~~~~~~Ā~~~~ẞ~~~Ā~~~~~",
+      "~~~~~~~~~~~~Ā~⍑~~~~~~~~~~~~~",
+      "~~~~~~~~~Ā~~~~~~~~~~⍑~~~~~~~",
+      "~~ṃ⍑⍐~⍑~~~~Ā~~~~~~~~~~~~~Ā~~",
+      "~~~~~~~~~~~Ā~⍐~~~~~~~⍐~~~~~~",
+      "~~~SĀ~~~~~~~~~~~⍐~~~~~Ā~~~~~",
+      "~~~~ĀĀ~~⍐~Ā~⍐~~⍐~~~~~~~⍑~~~~",
+      "~~⍑~~~~~~Ā~ĀĀWW~~~~~~~~⍑~~⍐~",
+      "~~~Ā~~~~~~~ṃ~~~~~⍑~~~~~⍐~~~~",
+      "~~~~~~~~~~~~~Ā~~~~⍐~~~Ā~~~~~",
       "~~~~~~~~~~~~~~~~~~~~~~~~Ā~~~",
       "~~~~~~~~~~~~~~~~~~~~~~~~~~~~",
-      "~~~~~~~R~~R~~~~Ā~~~R~~~~ṃ~~~",
-      "~ĀĀ~Ā~~~~~Rẞ~~~~~~ẙ~~~~~~~~~",
-      "~~~~~~~~~~~~~~~~~~~~~~~ẞ~~~~",
+      "~~~~~~~⍑~~⍑~~~~Ā~~~⍑~~~~ṃ~~~",
+      "~ĀĀ~Ā~~~~~⍑⍐~~~~~~ẙ~~~~~~~~~",
+      "~~~~~~~~~~~~~~~~~~~~~~~⍐~~~~",
       "~~~~~~~~~~~~~~~~~~~~~~~~~~~~",
     ],
     "warps": [
@@ -161861,22 +162109,22 @@ const MAPS7 = {
     "music": "pewter-theme",
     "underwater": true,
     "rows": [
-      "ᾏᾏᾏᾏᾏᾏᾏᾏᾏᾏᾏᾏᾏᾏᾏᾏᾏᾏᾏᾏᾏᾏᾏᾏᾏᾏ",
-      "ᾏᾌþᾌᾌᾐᾌᾌᾌᾌᾌᾌᾌᾌᾌᾌᾌᾌᾌᾌᾌᾌᾌᾌᾌᾏ",
-      "ᾏᾌᾌᾌᾌᾌᾌᾌᾌᾌṰᾌᾌᾌᾌᾌᾌṭṭṭṭṭᾌᾌᾌᾏ",
-      "ᾏᾌᾌᾍᾍᾍᾍþᾍᾌᾌᾌᾌĀṰᾌᾌṭṭṭṭṭᾌᾌᾌᾏ",
-      "ᾏᾌᾌᾍᾍᾍᾍᾍᾍᾌᾌṼṼṼṼĀᾌṭṭṭṭṭᾌᾌᾌᾏ",
-      "ᾏᾌᾌýᾍᾍᾍᾍᾐᾌᾌṼṼṼṼᾌᾌRᾌᾌᾌᾌᾌᾌᾌᾏ",
-      "ᾏᾑṮᾐṮRᾐĀĀᾌᾌṼṼṼṼᾌᾌᾑᾌᾌᾌᾌᾌᾌᾌᾏ",
-      "ᾏᾌᾌᾌᾌᾌṰᾌᾌᾌᾌᾌᾌᾌᾌᾌᾌᾌᾌᾌĀᾌᾌþᾌᾏ",
-      "ᾏᾌᾌᾌᾌᾌᾌᾌᾌĀᾌᾌᾌᾌṰᾌᾌᾌᾌᾌᾌᾌᾌᾌᾌᾏ",
-      "ᾏᾌᾌᾌᾌṰᾌᾌᾌᾌᾌᾌᾌþᾌᾌᾍᾍᾍᾍᾍᾍýᾌᾌᾏ",
-      "ᾏᾌṭRṭṭṭᾌᾌᾌᾌRᾌᾌᾌᾌᾍᾍᾍᾍᾍᾍᾌᾌᾌᾏ",
-      "ᾏᾌṭṭṭṭᾑᾌᾌᾌᾍᾍᾍᾍᾍᾌᾍᾍᾍᾍᾍᾍᾌᾌĀᾏ",
-      "ᾏᾌṭṭṭṭṰᾌᾌᾌᾍᾍᾍᾍᾐᾌᾍṰᾍᾍṮᾍᾌᾌᾌᾏ",
-      "ᾏᾌᾌSᾌᾌᾌᾌᾌᾌᾍᾍẞẞẞẞẞĀᾌᾌᾌᾌᾌᾌᾌᾏ",
-      "ᾏᾌᾌᾌᾌᾌᾌᾌᾌᾌᾌᾌẞẞẞẞẞᾌĀṰᾌᾌᾌᾌᾌᾏ",
-      "ᾏᾏᾏᾏᾏᾏᾏᾏᾏᾏᾏᾏᾏᾏᾏᾏᾏᾏᾏᾏᾏᾏᾏᾏᾏᾏ",
+      "⍍⍍⍍⍍⍍⍍⍍⍍⍍⍍⍍⍍⍍⍍⍍⍍⍍⍍⍍⍍⍍⍍⍍⍍⍍⍍",
+      "⍍⍌þ⍌⍌ᾐ⍌⍌⍌⍌⍌⍌⍌⍌⍌⍌⍌⍌⍌⍌⍌⍌⍌⍌⍌⍍",
+      "⍍⍌⍌⍌⍌⍌⍌⍌⍌⍌Ṱ⍌⍌⍌⍌⍌⍌ṭṭṭṭṭ⍌⍌⍌⍍",
+      "⍍⍌⍌ᾍᾍᾍᾍþᾍ⍌⍌⍌⍌ĀṰ⍌⍌ṭṭṭṭṭ⍌⍌⍌⍍",
+      "⍍⍌⍌ᾍᾍᾍᾍᾍᾍ⍌⍌ṼṼṼṼĀ⍌ṭṭṭṭṭ⍌⍌⍌⍍",
+      "⍍⍌⍌ýᾍᾍᾍᾍᾐ⍌⍌ṼṼṼṼ⍌⍌R⍌⍌⍌⍌⍌⍌⍌⍍",
+      "⍍ᾑṮᾐṮRᾐĀĀ⍌⍌ṼṼṼṼ⍌⍌ᾑ⍌⍌⍌⍌⍌⍌⍌⍍",
+      "⍍⍌⍌⍌⍌⍌Ṱ⍌⍌⍌⍌⍌⍌⍌⍌⍌⍌⍌⍌⍌Ā⍌⍌þ⍌⍍",
+      "⍍⍌⍌⍌⍌⍌⍌⍌⍌Ā⍌⍌⍌⍌Ṱ⍌⍌⍌⍌⍌⍌⍌⍌⍌⍌⍍",
+      "⍍⍌⍌⍌⍌Ṱ⍌⍌⍌⍌⍌⍌⍌þ⍌⍌ᾍᾍᾍᾍᾍᾍý⍌⍌⍍",
+      "⍍⍌ṭRṭṭṭ⍌⍌⍌⍌R⍌⍌⍌⍌ᾍᾍᾍᾍᾍᾍ⍌⍌⍌⍍",
+      "⍍⍌ṭṭṭṭᾑ⍌⍌⍌ᾍᾍᾍᾍᾍ⍌ᾍᾍᾍᾍᾍᾍ⍌⍌Ā⍍",
+      "⍍⍌ṭṭṭṭṰ⍌⍌⍌ᾍᾍᾍᾍᾐ⍌ᾍṰᾍᾍṮᾍ⍌⍌⍌⍍",
+      "⍍⍌⍌S⍌⍌⍌⍌⍌⍌ᾍᾍẞẞẞẞẞĀ⍌⍌⍌⍌⍌⍌⍌⍍",
+      "⍍⍌⍌⍌⍌⍌⍌⍌⍌⍌⍌⍌ẞẞẞẞẞ⍌ĀṰ⍌⍌⍌⍌⍌⍍",
+      "⍍⍍⍍⍍⍍⍍⍍⍍⍍⍍⍍⍍⍍⍍⍍⍍⍍⍍⍍⍍⍍⍍⍍⍍⍍⍍",
     ],
     "warps": [
     ],
@@ -161901,22 +162149,22 @@ const MAPS7 = {
     "music": "pewter-theme",
     "underwater": true,
     "rows": [
-      "ᾏᾏᾏᾏᾏᾏᾏᾏᾏᾏᾏᾏᾏᾏᾏᾏᾏᾏᾏᾏᾏᾏᾏᾏᾏᾏ",
-      "ᾏᾌᾌᾌᾌᾌᾌᾌRᾌRýᾌᾌᾌᾌᾌᾌᾌᾌᾌRᾌᾌᾌᾏ",
-      "ᾏᾌᾌᾌᾌᾌᾌᾌᾌᾌᾌᾌᾌᾌᾌᾌᾌṭṭṭṭṭᾌᾌᾌᾏ",
-      "ᾏᾌᾌᾍᾍᾍᾍᾍᾍᾌᾌᾌᾌᾌᾌᾌᾌṭṭṭṭṭᾌᾌᾌᾏ",
-      "ᾏᾌᾌṱᾍᾍᾍᾍᾍᾌᾌṼṼṼṼᾌᾌṮṭṭᾑṭᾌᾌᾌᾏ",
-      "ᾏᾌRᾍᾍᾍᾍᾍᾍᾌRṼṼṼṼᾌᾌᾌᾌᾌᾌᾌᾌᾌᾌᾏ",
-      "ᾏᾌᾌᾍᾍᾍṰĀĀᾌᾌṼṼṼṼᾌþᾌṱᾌĀĀᾌᾌᾌᾏ",
-      "ᾏᾌᾌᾌᾌᾌᾌᾌᾌᾌᾌᾌᾌᾌᾌᾌᾌᾐᾌᾌᾌᾌᾌṱᾌᾏ",
-      "ᾏᾌᾌᾌᾌᾌᾑᾌᾌĀᾌᾌᾌᾌᾌᾌᾌᾌᾌᾌᾌᾌᾌᾌᾌᾏ",
-      "ᾏᾌᾌᾌᾌĀᾌᾌþᾌᾌᾌᾐᾌᾌᾌᾍᾍᾍSᾍᾍᾌᾌᾌᾏ",
-      "ᾏᾌṭṭṭṭṭᾌᾌᾌᾌᾌᾌᾌᾌᾌᾍᾍᾍᾍᾍᾍᾌᾌᾌᾏ",
-      "ᾏᾌṭṭṭṭṭᾌᾌᾌᾍᾍᾍRᾍᾌᾍᾍᾍᾍᾍᾍṱᾌᾌᾏ",
-      "ᾏᾌṭṭṭṭṭᾌᾌᾌþᾍᾍᾍᾍᾌᾍᾍᾍᾍᾍᾍᾌṱᾌᾏ",
-      "ᾏᾌRSᾌᾌᾌᾌᾌᾌᾍᾍẞẞẞẞẞᾌṰᾌᾌᾌᾌᾌᾌᾏ",
-      "ᾏᾌᾌᾌᾌᾌþᾌᾌᾌᾌᾌẞẞẞẞẞᾌýᾌᾌᾌᾌĀᾌᾏ",
-      "ᾏᾏᾏᾏᾏᾏᾏᾏᾏᾏᾏᾏᾏᾏᾏᾏᾏᾏᾏᾏᾏᾏᾏᾏᾏᾏ",
+      "⍓⍓⍓⍓⍓⍓⍓⍓⍓⍓⍓⍓⍓⍓⍓⍓⍓⍓⍓⍓⍓⍓⍓⍓⍓⍓",
+      "⍓⍒⍒⍒⍒⍒⍒⍒R⍒Rý⍒⍒⍒⍒⍒⍒⍒⍒⍒R⍒⍒⍒⍓",
+      "⍓⍒⍒⍒⍒⍒⍒⍒⍒⍒⍒⍒⍒⍒⍒⍒⍒ṭṭṭṭṭ⍒⍒⍒⍓",
+      "⍓⍒⍒ᾍᾍᾍᾍᾍᾍ⍒⍒⍒⍒⍒⍒⍒⍒ṭṭṭṭṭ⍒⍒⍒⍓",
+      "⍓⍒⍒ṱᾍᾍᾍᾍᾍ⍒⍒ṼṼṼṼ⍒⍒Ṯṭṭᾑṭ⍒⍒⍒⍓",
+      "⍓⍒Rᾍᾍᾍᾍᾍᾍ⍒RṼṼṼṼ⍒⍒⍒⍒⍒⍒⍒⍒⍒⍒⍓",
+      "⍓⍒⍒ᾍᾍᾍṰĀĀ⍒⍒ṼṼṼṼ⍒þ⍒ṱ⍒ĀĀ⍒⍒⍒⍓",
+      "⍓⍒⍒⍒⍒⍒⍒⍒⍒⍒⍒⍒⍒⍒⍒⍒⍒ᾐ⍒⍒⍒⍒⍒ṱ⍒⍓",
+      "⍓⍒⍒⍒⍒⍒ᾑ⍒⍒Ā⍒⍒⍒⍒⍒⍒⍒⍒⍒⍒⍒⍒⍒⍒⍒⍓",
+      "⍓⍒⍒⍒⍒Ā⍒⍒þ⍒⍒⍒ᾐ⍒⍒⍒ᾍᾍᾍSᾍᾍ⍒⍒⍒⍓",
+      "⍓⍒ṭṭṭṭṭ⍒⍒⍒⍒⍒⍒⍒⍒⍒ᾍᾍᾍᾍᾍᾍ⍒⍒⍒⍓",
+      "⍓⍒ṭṭṭṭṭ⍒⍒⍒ᾍᾍᾍRᾍ⍒ᾍᾍᾍᾍᾍᾍṱ⍒⍒⍓",
+      "⍓⍒ṭṭṭṭṭ⍒⍒⍒þᾍᾍᾍᾍ⍒ᾍᾍᾍᾍᾍᾍ⍒ṱ⍒⍓",
+      "⍓⍒RS⍒⍒⍒⍒⍒⍒ᾍᾍẞẞẞẞẞ⍒Ṱ⍒⍒⍒⍒⍒⍒⍓",
+      "⍓⍒⍒⍒⍒⍒þ⍒⍒⍒⍒⍒ẞẞẞẞẞ⍒ý⍒⍒⍒⍒Ā⍒⍓",
+      "⍓⍓⍓⍓⍓⍓⍓⍓⍓⍓⍓⍓⍓⍓⍓⍓⍓⍓⍓⍓⍓⍓⍓⍓⍓⍓",
     ],
     "warps": [
     ],
@@ -199436,6 +199684,6 @@ if (typeof Game !== 'undefined') Object.assign(Game.prototype, {
 });
 
 </script>
-<!-- contentHash:15f1cc5e2b2dd6b0608b7569cd4c947ebf64833d2124dbfa006a4376339cd2af -->
+<!-- contentHash:f1161776fea03cd269fc46fd3bfec3a7b1ef82c5af8a2c330ad5bd4cf39549f3 -->
 </body>
 </html>
