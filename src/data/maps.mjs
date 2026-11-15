@@ -1149,6 +1149,18 @@ export const WALKABLE = new Set(['.', ',', 'D', 'E', 'C', 'F', 'J', 'K', '1', '2
   // the Maris program plan; the Yamato allocation ended at
   // 1256; 1111 stays empty.)
   ...[1257, 1258, 1261, 1262, 1265, 1266, 1269, 1270, 1273, 1274]
+    .map((i) => String.fromCodePoint(0x1E00 + i)),
+  // Wave W17-M: the Maris tranche-2 sea-lane sand chars
+  // (U+1E00+1277.., tiles.mjs W17M_KIND_DEFS) are walkable —
+  // tombsand (Route 105), cairnsand (Route 106), swellsand
+  // (Route 107), wrecksand (Route 108) and baysand (Route 109),
+  // each swapped 1:1 from the walkable sand char on its own
+  // lane, so shore stays shore. The rock chars (1278, 1280,
+  // 1282, 1284, 1286) are NOT here: they swap from the 'R'
+  // rock char, which was never walkable. (Indices 1277-1286
+  // per the Maris program plan; W17-L takes 1257-1276 on its
+  // parallel branch; 1111 stays empty.)
+  ...[1277, 1279, 1281, 1283, 1285]
     .map((i) => String.fromCodePoint(0x1E00 + i))]);
 
 // Trainer definitions for the slice.

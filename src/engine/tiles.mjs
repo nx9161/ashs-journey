@@ -3238,6 +3238,63 @@ W17L_KIND_DEFS.forEach(([kind], i) => {
 export const W17L_PROP_KINDS = W17L_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
 export const W17L_WALL_KINDS = W17L_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
 export const W17L_FLOOR_KINDS = W17L_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
+// Wave W17-M (Route Build Program, Maris Tranche 2 — the Mistford
+// surf arc): five sea lanes west and east of Mistford, each its
+// own shore register under the NO-SAME-KIT law. All five maps are
+// defined once in maps7.mjs (no dual copies in Maris, so no
+// registry re-pins arise). Sea-lane discipline (the R40/R41
+// precedent): the water is byte-preserved entire — conversions
+// are sand -> own sand + rock -> own rock only, after the
+// trigger-char census ('R' counts equal the shipped rock counts
+// exactly on all five lanes: 14/13/5/22/5; enc.cave=false
+// everywhere, so no encounter trigger can move). Route 105 "Sea
+// Tomb Lane" (1277-1278): tombsand a stone-pale tomb-shore sand,
+// tombrock the drowned colonnade rock with column-joint drawing;
+// its 2 'L' Sea Tomb mouth cells are warp cells standing on
+// cavefloor — byte-preserved, never converted. Route 106 "Last
+// Shallows" (1279-1280): cairnsand a bright town-shore sand,
+// cairnrock the dark crag rock — the cave-dark register against
+// the bright little town it guards. Route 107 "Open Swell"
+// (1281-1282): swellsand swell-shore sand flecks, nearly awash,
+// swellrock a reef-shadow rock barely breaking the surface; the
+// lane is open swell (5+5 convertible cells — the spec-presence
+// exception is pre-recorded in the program plan, R40 precedent).
+// Route 108 "Wreck Water" (1283-1284): wrecksand a foam-combed
+// wreck sand, wreckrock the rib-reef rock with a long rib-joint
+// drawing — the wreck herself is design dressing over the reef
+// (no shipped hull kind; the rock conversion carries her).
+// Route 109 "Fairhaven Beach" (1285-1286): baysand the warm bay
+// beach sand of the great curved beach, swimmer-bright, bayrock
+// the harbour-mouth rock; the harbour pier is Fairhaven's own
+// town-side dressing, byte-preserved. Sand kinds are 'floor'
+// class (the shipped sand char was walkable; the swaps are 1:1),
+// rock kinds 'wall' class (the shipped 'R' rock char was never
+// walkable). Indices 1277-1286 per the program plan
+// (WAVE-W17-MARIS-ROUTE-PROGRAM-PLAN.md): W17-L took 1257-1276
+// on its parallel branch; 1111 and every earlier documented gap
+// stay empty. Kind names verified unclaimed against origin/main.
+// Chars U+1E00+1277..
+export const W17M_KIND_DEFS = [
+  ['tombsand', 'floor'],
+  ['tombrock', 'wall'],
+  ['cairnsand', 'floor'],
+  ['cairnrock', 'wall'],
+  ['swellsand', 'floor'],
+  ['swellrock', 'wall'],
+  ['wrecksand', 'floor'],
+  ['wreckrock', 'wall'],
+  ['baysand', 'floor'],
+  ['bayrock', 'wall'],
+];
+export const W17M_KIND_CHARS = {};
+W17M_KIND_DEFS.forEach(([kind], i) => {
+  const ch = String.fromCodePoint(0x1E00 + 1277 + i);
+  W17M_KIND_CHARS[kind] = ch;
+  TILE_CHARS[ch] = kind;
+});
+export const W17M_PROP_KINDS = W17M_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
+export const W17M_WALL_KINDS = W17M_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
+export const W17M_FLOOR_KINDS = W17M_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
 export const SINNOH_TOWN_GROUND_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg);
 export const SINNOH_TOWN_GROUND2_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg2);
 // TX-3: the 8 gym exteriors by town (original type-accent motifs).
