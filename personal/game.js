@@ -5483,6 +5483,100 @@ W17U_KIND_DEFS.forEach(([kind], i) => {
 const W17U_PROP_KINDS = W17U_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
 const W17U_WALL_KINDS = W17U_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
 const W17U_FLOOR_KINDS = W17U_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
+// Wave W17-V (Route Build Program, Borea Tranche 2 — the
+// valley, the forest, the road above, the climb: Honeyfield ->
+// Heritage -> Mt. Apex's doors): Route 205 -> Heritage Forest
+// -> Route 206 -> Route 207 -> Route 208. All five maps are
+// defined once in maps9.mjs (no dual copies in Borea, so no
+// registry re-pins arise). Conversions are char-for-char kind
+// swaps on grassground/path/tree; encounter cells/tables,
+// warps, NPC posts, sign records/texts and every shipped
+// biome/dressing kind stay byte-identical. Route 205 "Valley
+// Road" (1402-1405): galeturf is wind-valley grass with swirl
+// flecks, galefloor valley-road pale sand (design-authorised),
+// galepine a ridge pine with a wind-bent crown drawn in the
+// tree art, hivebox hive-yard boxes x2 on verified grassground
+// cells flanking the shipped honeytree in the flower grass;
+// the river water (15), the honeytree (1), flower (16), rock
+// (9), fence (4) and the Galeworks + Ironworks footprint pieces
+// (roofs/walls/doors, windmill 2) standing on this map stay
+// byte-identical entire. Twin: Route 206 — R205 is the open
+// honey valley, R206 the cycleway's shadow. Heritage Forest
+// "Manor Shade" (1406-1409): deepturf is deep shade green with
+// coin-light flecks, deepfloor canopy forest sand leaf-flecked,
+// manoroak a manor oak with an ancient spread crown, silklog a
+// fallen silk-strung log section x2 on verified grassground
+// cells (split from Maris's silkstrand by register: Borea's log
+// lies in manor shade, Maris's in bright silk shade); the
+// honeytrees (3), flower (25) and the Ruined Manor's footprint
+// pieces stay byte-identical. Twin: Meadowbrook Woods (Maris)
+// — the Woods are bright silk shade, Heritage Forest is dark
+// manor shade; in-region twin: Route 205. Route 206 "Pillar
+// Road" (1410-1413): pillarturf is pillar-shadow meadow with
+// cool flecks, pillarwayfloor the walking road's pale sand
+// under the pillars (design-authorised), pillarpine a shadow
+// pine, straypost cave-mouth marker posts x2 flanking the Stray
+// Cave mouths; the cycleway's pillar stone (rock 20), the two
+// 'L' cave-mouth warp cells, flower (28), fence (3) and
+// signposts (4) stay byte-identical (the cave itself is out of
+// program). Twin: Route 110 (Maris) — the fleet's closest
+// concept pair, named honestly: both are roads under a
+// cycleway; R206 splits by register — Borea's climbs north on
+// stone pillars with a cave in its shadow, Maris's keeps ponds
+// and a shore spur under its pillars. Route 207 "Switchback
+// Climb" (1414-1417): climbturf is foothill turf with
+// ring-glint flecks (the design's RELICT rings scattered in the
+// grass), switchfloor switchback sand (design-authorised; the
+// zigzag tread is drawn in the kind, the fallfloor discipline),
+// climbpine a climb pine, relicpost relic-ring marker posts x2
+// at the bends; pond water (12), fence (5) and rock (2) stay
+// byte-identical. Twin: Route 208 — R207 is the switchback
+// climb from Coalseam, R208 the rest-rock road from Inglenook.
+// Route 208 "Rest Road" (1418-1421): restturf is rest-meadow
+// turf with warm flecks, restfloor rest-road pale sand
+// (design-authorised), restpine a rest pine, reststone foothill
+// rest rocks x2 on verified grassground cells where the file of
+// travellers stretches; fence (6) and rock (4) stay
+// byte-identical. Twin: Route 207. Ground kinds deliberately do
+// NOT end in 'floor' (the desire-path audit counts '*floor' as
+// street tier; grounds must never masquerade as street); path
+// kinds DO end in 'floor' so they register as the route's path
+// tier per route (checklist point 3). Indices 1402-1421 per the
+// program plan (WAVE-W17-BOREA-ROUTE-PROGRAM-PLAN.md): the
+// Borea allocation opened at 1384 (W17-U); 1111 and every
+// earlier documented gap stay empty. Kind names verified
+// unclaimed against origin/main.
+const W17V_KIND_DEFS = [
+  ['galeturf', 'floor'],
+  ['galefloor', 'floor'],
+  ['galepine', 'wall'],
+  ['hivebox', 'prop'],
+  ['deepturf', 'floor'],
+  ['deepfloor', 'floor'],
+  ['manoroak', 'wall'],
+  ['silklog', 'prop'],
+  ['pillarturf', 'floor'],
+  ['pillarwayfloor', 'floor'],
+  ['pillarpine', 'wall'],
+  ['straypost', 'prop'],
+  ['climbturf', 'floor'],
+  ['switchfloor', 'floor'],
+  ['climbpine', 'wall'],
+  ['relicpost', 'prop'],
+  ['restturf', 'floor'],
+  ['restfloor', 'floor'],
+  ['restpine', 'wall'],
+  ['reststone', 'prop'],
+];
+const W17V_KIND_CHARS = {};
+W17V_KIND_DEFS.forEach(([kind], i) => {
+  const ch = String.fromCodePoint(0x1E00 + 1402 + i);
+  W17V_KIND_CHARS[kind] = ch;
+  TILE_CHARS[ch] = kind;
+});
+const W17V_PROP_KINDS = W17V_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
+const W17V_WALL_KINDS = W17V_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
+const W17V_FLOOR_KINDS = W17V_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
 const SINNOH_TOWN_GROUND_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg);
 const SINNOH_TOWN_GROUND2_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg2);
 // TX-3: the 8 gym exteriors by town (original type-accent motifs).
@@ -120456,6 +120550,366 @@ const ART = {
     "gggggggggggggggg",
     "gggggggggggggggg"
   ] },
+  "tile-galeturf": { w: 16, h: 16, pal: {"a":"#6fae54","b":"#5d9845","s":"#a8c46a","d":"#4f8438"}, rows: [
+    "aaaadaaaaaaaaaab",
+    "saabaaaasaaaaaaa",
+    "asaaaaaabaabsaaa",
+    "aaaaddabaaaaaaab",
+    "abaaaadaaaaaaaaa",
+    "aaabbaaabaabbaaa",
+    "ddaasabaaaaasbaa",
+    "aaaadaadaaaaaaaa",
+    "aaaaaaaaaaaaaaaa",
+    "daaaaaaaaaabadaa",
+    "aaaaaabaaaabasbd",
+    "aaaaaaaaaaasaaaa",
+    "aababsaabdaaaaas",
+    "asaasaaaaaaaaaab",
+    "abaaaaaaaadabsaa",
+    "baaaddaabaaabsaa"
+  ] },
+  "tile-galefloor": { w: 16, h: 16, pal: {"a":"#e6d5a6","b":"#d0ba85","d":"#b39c66"}, rows: [
+    "adaaaaaaabaaaaaa",
+    "aaaaadaaaabaaaaa",
+    "abbaaaaaaaababaa",
+    "aaabaaaaadaabaaa",
+    "bdaabaaaaaaaaaab",
+    "aaabaaaaaaaaaaaa",
+    "aaaaaaaaaadbaaaa",
+    "aaaaabaaaaaaaaaa",
+    "abaaaaaaaaaaaaad",
+    "aaaaaaaaaaabaaaa",
+    "aaadaaaaaaaaaaaa",
+    "aaaaabaabaaaaaaa",
+    "aaaaaababbaabaaa",
+    "aaaaaabaaaaaaaaa",
+    "aaaaaabaddaaaaaa",
+    "aadaabaaaabaaaaa"
+  ] },
+  "tile-galepine": { w: 16, h: 16, pal: {"a":"#6fae54","b":"#5d9845","t":"#47703c","u":"#37592f","h":"#84b364","k":"#5e4630"}, rows: [
+    "baaaaaaaaaabaaaa",
+    "aaaaaabaahhhhaaa",
+    "abaaaaahhhhhhaaa",
+    "aaaaaauthuutuuaa",
+    "aabaaaahuthhubaa",
+    "aaaaattthhuhutua",
+    "aaabauuhtttttaba",
+    "aaaathuhhutuhtaa",
+    "aaaabhttuhhttaab",
+    "aautuututtthttaa",
+    "aaautuuhtuhutaaa",
+    "baaaaaakkaabaaaa",
+    "aaaaaabkkaaaaaaa",
+    "abaaaaakkaaabaaa",
+    "aaaaaauuuuaaaaaa",
+    "aabaaaaaaaaaabaa"
+  ] },
+  "tile-prop-hivebox": { w: 16, h: 16, pal: {"a":"#6fae54","b":"#5d9845","s":"#a8c46a","k":"#a87f4e","w":"#e9e2c8","d":"#7d5a34","z":"#3a2c1c"}, rows: [
+    "aaaaabbaaaaabaab",
+    "aaaasbaaaaaaabba",
+    "aaaaaaaaaaabaasb",
+    "baabbabaaaaabaaa",
+    "aaaaaaabbaaaaaaa",
+    "aaabaaaabaasaaaa",
+    "aaaaawwwwwwaaasa",
+    "abaaakkkkkkaabaa",
+    "aaaaakkkkkkaaaaa",
+    "aaaaawwwwwwaaaaa",
+    "saaaakkkkkkaaaab",
+    "aaaaakkzzkkaaaaa",
+    "ssaabkkkkkkaaaaa",
+    "abaaddddddddaaaa",
+    "aaaaabaaaaabaaab",
+    "aaasaaaaaaaaaaaa"
+  ] },
+  "tile-deepturf": { w: 16, h: 16, pal: {"a":"#4d7a44","b":"#406639","w":"#cfe08a","d":"#35552c"}, rows: [
+    "aaabaabaaaaaaaaa",
+    "aaaaaabaaaabaada",
+    "adbaaaaaaaaaaaba",
+    "abdaaabaaaaaaaba",
+    "aabaaaabbaaaaabb",
+    "adaaaaaadaadaaaw",
+    "aaaabawaaawaaaaa",
+    "abaadabaaaaaaabw",
+    "aabaaaaaaaaaaaaa",
+    "aaaaaaaaabaaaaaa",
+    "aaaaaabaaabaaada",
+    "aabwaaabaaabdaba",
+    "aaaaaaaaaabaaaaa",
+    "baaaaaaaaaaaaaab",
+    "abaaaaaaddaabaaa",
+    "aaaaaaaaaaaaaaaa"
+  ] },
+  "tile-deepfloor": { w: 16, h: 16, pal: {"a":"#c9b183","b":"#b2986c","l":"#7a8448","d":"#9a7f52"}, rows: [
+    "baadaadbaabldaaa",
+    "aaaaaaaabaaalaaa",
+    "aaaaaababaaaaaba",
+    "baabaaaalldabbaa",
+    "aaaaaalaaaaaaaaa",
+    "aabalaaaaaaaaaaa",
+    "bbbaaaaaaaabbaba",
+    "abaaabaabaaaaaad",
+    "aaaaababdaaaaaaa",
+    "abaaaaaaaabaabbl",
+    "babaaaaaaaabaala",
+    "baaaaadbaaaaabaa",
+    "aaaaaaaaaalaaada",
+    "aaaabbaabababaab",
+    "aaaaaalabaaaabba",
+    "abaaaabbaaabaadd"
+  ] },
+  "tile-manoroak": { w: 16, h: 16, pal: {"a":"#4d7a44","b":"#406639","t":"#3c6634","u":"#2c4f27","h":"#6f9a52","k":"#503a26"}, rows: [
+    "baaaahhhuhubaaaa",
+    "aaahhhhhhthtuaaa",
+    "ahhhhhhhuttttuta",
+    "hhhhhhhhtttuthut",
+    "uthhuttutuhttutu",
+    "uhuhhthhtttttuht",
+    "ahhtutututttuuta",
+    "atutttuhtthhhhua",
+    "aauhuuutthhtutab",
+    "aahuhthtututtuaa",
+    "aaahuttthuuhtaaa",
+    "baaaaaakkaabaaaa",
+    "aaaaaabkkaaaaaaa",
+    "abaaaaakkaaabaaa",
+    "aaaaaauuuuaaaaaa",
+    "aabaaaaaaaaaabaa"
+  ] },
+  "tile-prop-silklog": { w: 16, h: 16, pal: {"a":"#4d7a44","b":"#406639","w":"#eef0da","k":"#6e5233","r":"#c8a878","s":"#e8ecd2","d":"#5e4630"}, rows: [
+    "aaaaaawaaaabaaaa",
+    "aaaaaawaaaabaaaa",
+    "aabaaaaaaaaaaaaa",
+    "bbaaaaaaaaaaaaaa",
+    "aaababaaaaaaaaab",
+    "aaaabaaaaaaaaaba",
+    "aaabwaaaaaaaabaa",
+    "aaaaasaasaasaaaa",
+    "aarkkskkskkskraa",
+    "aarwkkkkkkkkkraa",
+    "aarkkkkkkkkkwraa",
+    "aarkkkkkkkkkkraa",
+    "aaaddddddddddaba",
+    "aaabbaaabaaaaaaw",
+    "aaaaaaaawaaaaaba",
+    "abaaaaaaaabaaaba"
+  ] },
+  "tile-pillarturf": { w: 16, h: 16, pal: {"a":"#67955c","b":"#57814e","c":"#7fae8e","d":"#476b3e"}, rows: [
+    "aaacaadaaacabaaa",
+    "ababaaaacaabbaaa",
+    "aaaaaabaaaadbcaa",
+    "aaaaaaabaaaaaaba",
+    "caaaabaaaaabaacd",
+    "aabaabaaaaacaabb",
+    "caaaaadaaaaaacaa",
+    "aabaaaaadaaaaaaa",
+    "aaabaaaabaaaaaaa",
+    "bbaaababcaaaaaaa",
+    "aaaababaaaabaaab",
+    "aaaaaaaaaaaabaaa",
+    "baaaaaaaabaaaaaa",
+    "aaaaabaaaaaaaaaa",
+    "bbacaabaaaabcaaa",
+    "aaabcbacaaaaaaaa"
+  ] },
+  "tile-pillarwayfloor": { w: 16, h: 16, pal: {"a":"#ded2ac","b":"#c8b586","g":"#9a9a8c","d":"#a68e5e"}, rows: [
+    "baaaaabaaaaaaaba",
+    "abaaaaaaaaaaaaab",
+    "abgbaaaaaaabgaaa",
+    "babaaaaaaaaaaaaa",
+    "abaaababaagaadba",
+    "aaabbaaaaaabbaaa",
+    "aaaaaaaaggaabaaa",
+    "daaaaaabbbaaaaaa",
+    "daaaaaaaaaaaaaaa",
+    "daaaaaaaaaaabaag",
+    "baaaaaabaabaabaa",
+    "aaggaabaadaaaaaa",
+    "abaabaaaaaaaaaaa",
+    "abaaaababaabaaaa",
+    "baabaaadabgaagab",
+    "aaabaagaaaaaabaa"
+  ] },
+  "tile-pillarpine": { w: 16, h: 16, pal: {"a":"#67955c","b":"#57814e","t":"#3f6242","u":"#2f4d33","h":"#6f9a6a","k":"#4c3a28"}, rows: [
+    "baaaaaaaaaabaaaa",
+    "aaaaaahhhhaaaaaa",
+    "abaaahhhhhhabaaa",
+    "aaaahuuttuhuaaaa",
+    "aabaauuhtthaabaa",
+    "aaauuuuhhuhuhaaa",
+    "aaabtthttttuaaba",
+    "aaauhhtuttuhtaaa",
+    "aaaauhtttuhtaaab",
+    "aauhthhttuthttaa",
+    "aaahhhuttutuhaaa",
+    "baaaaaakkaabaaaa",
+    "aaaaaabkkaaaaaaa",
+    "abaaaaakkaaabaaa",
+    "aaaaaauuuuaaaaaa",
+    "aabaaaaaaaaaabaa"
+  ] },
+  "tile-prop-straypost": { w: 16, h: 16, pal: {"a":"#67955c","b":"#57814e","w":"#ece7d2","z":"#26221c","d":"#6e5233","k":"#7d5f3a"}, rows: [
+    "aaaaaaabbabaaaaa",
+    "aaaaaawaaaaabaaa",
+    "abaaaaaaaaaaaaaa",
+    "aaaaaaawaabbabaa",
+    "abaabaawwabaaaaa",
+    "aaaaaaakdaaaaaaa",
+    "waaabaazzabaaaaa",
+    "aaaababzzbaaabaa",
+    "baaaaabkdaabaaaa",
+    "baaaaabkdbabawaa",
+    "bbabaaakdabaaaaa",
+    "aaaaabakdaaaaaab",
+    "aaaaaaakdaaababa",
+    "aaaaaaddddaaaaaa",
+    "aaaaabaaaaaawaaa",
+    "aaaaabaabaaaaaaa"
+  ] },
+  "tile-climbturf": { w: 16, h: 16, pal: {"a":"#77a75e","b":"#659251","g":"#e3cf8e","d":"#557c40"}, rows: [
+    "aaaaadabaaabaaaa",
+    "aaaabaaabbaaaaad",
+    "aaaabagaaaaadgba",
+    "bbaaaaaagaaaaaaa",
+    "aabaaaaaaaaaadaa",
+    "abgadbaadaaaaaaa",
+    "dbaaaaaaabgbaaaa",
+    "daabaaaaadaaabab",
+    "aaaaadaadgaaaaaa",
+    "aaaaaaagbagaaaad",
+    "aabaaaaaaadaaabb",
+    "aaaaaaabgaaaaaaa",
+    "aaaaaaaaaabaaaaa",
+    "aaaaaaaaaabaaaaa",
+    "aaagbaaaabaaaaab",
+    "aaadaaaabaaabaaa"
+  ] },
+  "tile-switchfloor": { w: 16, h: 16, pal: {"a":"#e0cfa0","b":"#c9b27e","d":"#ab9260","t":"#b39a68"}, rows: [
+    "abaaaabaaaaaaaaa",
+    "aaaaaaabaaaaaaaa",
+    "aaabaaaabbaaaaaa",
+    "ttbaaadaaaaaaaaa",
+    "attaaaaaaaaaadda",
+    "aattaabbadaaaaaa",
+    "aaattbaaaaaaaaba",
+    "baaattaaaaaaaaaa",
+    "aabbattbabaaaaaa",
+    "aaaaaattaattaaaa",
+    "baaabaattaattaaa",
+    "bbaaaaaabaaattaa",
+    "adaadaaababadtta",
+    "bbaaaaaaaaaaaatt",
+    "aaaabaabababaaaa",
+    "aaaaaaaaaabaaaaa"
+  ] },
+  "tile-climbpine": { w: 16, h: 16, pal: {"a":"#77a75e","b":"#659251","t":"#486e3e","u":"#38582f","h":"#7fae62","k":"#5e4630"}, rows: [
+    "baaaaaaaaaabaaaa",
+    "aaaaaahhhhaaaaaa",
+    "abaaahhhhhhabaaa",
+    "aaaauhhtttutaaaa",
+    "aabaahuhttuaabaa",
+    "aaattthhtttutaaa",
+    "aaabhhutththaaba",
+    "aaattutuhththaaa",
+    "aaaautttutuuaaab",
+    "aauuuhuththtutaa",
+    "aaahtthhuhhuhaaa",
+    "baaaaaakkaabaaaa",
+    "aaaaaabkkaaaaaaa",
+    "abaaaaakkaaabaaa",
+    "aaaaaauuuuaaaaaa",
+    "aabaaaaaaaaaabaa"
+  ] },
+  "tile-prop-relicpost": { w: 16, h: 16, pal: {"a":"#77a75e","b":"#659251","w":"#f0e8ce","d":"#7d5a34","k":"#8a6844"}, rows: [
+    "aaaaaaaaawbbaaba",
+    "aaaaaaaaaaaaabaa",
+    "abaaaaaaaabaaaab",
+    "aabaaaaabaaaaaba",
+    "abaabaakdaababaa",
+    "aaaaaaawwabaaaaa",
+    "aaaaaaakdabaaaba",
+    "aaaaaaawwaaaaaaa",
+    "aaaaaaakdaaaaaaa",
+    "ababwaakdaaaaaab",
+    "aabaaaakdaabaaab",
+    "aaaaaabkdaaaaaaa",
+    "aaaaaaakdaaaaaaa",
+    "baaaaaddddabaaab",
+    "waaaaaaaaaaaaaaa",
+    "abaaaababaaaawab"
+  ] },
+  "tile-restturf": { w: 16, h: 16, pal: {"a":"#71a758","b":"#5f9149","w":"#c8d89a","d":"#4f7d3a"}, rows: [
+    "dwaaadabaabaabba",
+    "aaaawabaaabbbaaa",
+    "abbaaaaaabawaada",
+    "aaaaaabababbaaaa",
+    "aaaaaaaaaaaabaab",
+    "aabaaaaaaaaabaaa",
+    "awaaaaaaaaaaaaaa",
+    "aaaaabaaaabaaaaa",
+    "awaaaaaaabbaaaaa",
+    "aaaaaabaaaaaaaad",
+    "aaaaaaaaaaaaaaaa",
+    "aaaaaaaaaabaaaaa",
+    "aaaaaaaaawaaabaw",
+    "aadabaaaaaaaaaba",
+    "aaaaaaabaaaabaab",
+    "aaawaaadadaaaaaa"
+  ] },
+  "tile-restfloor": { w: 16, h: 16, pal: {"a":"#e3d0a0","b":"#cdb381","d":"#b0965f"}, rows: [
+    "aaaabbabbaaadaab",
+    "aaaabbaaaaaaaaab",
+    "baabaaaaaaadaaaa",
+    "aabaabbaaaaabaaa",
+    "aaaabaaaabadaaaa",
+    "adabdbaaaabaaaaa",
+    "abaaaaadaaaaaaaa",
+    "baaaaabaaaababaa",
+    "aaaaaaaaaaaaaabb",
+    "aaadbaaaaaaababa",
+    "aaaabaaaaaaaaaba",
+    "aaaaaaabaaaaaaaa",
+    "aaabaaaaaaaadaba",
+    "aaaaaaaaaaaaaaba",
+    "aaabaaaaaaaaaaaa",
+    "aaaaaaaaaaabaaaa"
+  ] },
+  "tile-restpine": { w: 16, h: 16, pal: {"a":"#71a758","b":"#5f9149","t":"#4a7040","u":"#3a5c33","h":"#86b06a","k":"#62482e"}, rows: [
+    "baaaaaaaaaabaaaa",
+    "aaaaaahhhhaaaaaa",
+    "abaaahhhhhhabaaa",
+    "aaaahuuututtaaaa",
+    "aabaauhtuttaabaa",
+    "aaathtttuthtuaaa",
+    "aaabhhhtthttaaba",
+    "aaauhhttutuuhaaa",
+    "aaaattthtuthaaab",
+    "aatttttttutthhaa",
+    "aaahuhtttutuhaaa",
+    "baaaaaakkaabaaaa",
+    "aaaaaabkkaaaaaaa",
+    "abaaaaakkaaabaaa",
+    "aaaaaauuuuaaaaaa",
+    "aabaaaaaaaaaabaa"
+  ] },
+  "tile-prop-reststone": { w: 16, h: 16, pal: {"a":"#71a758","b":"#5f9149","w":"#c8d89a","g":"#9a968a","l":"#c2beb0","h":"#d8d4c4","d":"#7e7a6e"}, rows: [
+    "baaaaaaaaaaaaaaa",
+    "baaaaaaaabaaaaaa",
+    "aaaaaabaaabaaaaa",
+    "bwbaaaawaawaabaa",
+    "aaaaaaabbawaaaaa",
+    "aabaaabbabaaaaaa",
+    "aaaaaaaaaaaaaaaa",
+    "aaabhhhhhhhhaaaa",
+    "aaagllllllllgabb",
+    "aaaggggggggggaaa",
+    "aaaggggggggggaaa",
+    "aaaggggggggggaba",
+    "awaddddddddddaab",
+    "aaaaaaaaabaaaaaa",
+    "aabaaababbaaaaaa",
+    "aaaaaaabbaaabaaa"
+  ] },
   "partner-back-bob": { base: "partner-back", w: 64, h: 64, pal: {}, shiftY: 2 },
   "partner-front-bob": { base: "partner-front", w: 64, h: 64, pal: {}, shiftY: 2 },
   "abomasnow-back-bob": { base: "abomasnow-back", w: 64, h: 64, pal: {}, shiftY: 2 },
@@ -125959,6 +126413,9 @@ for (const k of W17T_FLOOR_KINDS) TILE_ART[k] = 'tile-' + k;
 for (const k of W17U_PROP_KINDS) TILE_ART[k] = 'tile-prop-' + k;
 for (const k of W17U_WALL_KINDS) TILE_ART[k] = 'tile-' + k;
 for (const k of W17U_FLOOR_KINDS) TILE_ART[k] = 'tile-' + k;
+for (const k of W17V_PROP_KINDS) TILE_ART[k] = 'tile-prop-' + k;
+for (const k of W17V_WALL_KINDS) TILE_ART[k] = 'tile-' + k;
+for (const k of W17V_FLOOR_KINDS) TILE_ART[k] = 'tile-' + k;
 // Premium+ W6 (TX-3/PL-1): door-open frames, authored in TX-3 for every
 // door kind. The warp-fade engine that plays them lands in W7 — W6
 // wires the frames (this registry + cache.doorOpen + doorOpenCanvas)
@@ -128240,6 +128697,20 @@ function resolveTileLayers(cache, kind, x, y, kindAt, t, phase, mapId) {
     case 'cartpost':
     case 'bluffpine':
     case 'screepost':
+    // Wave W17-V: the Borea tranche-2 route trees and signature
+    // props composite over their ground the same way (all arts are
+    // fully opaque — each route's own ground is baked in at its
+    // measured colours).
+    case 'galepine':
+    case 'hivebox':
+    case 'manoroak':
+    case 'silklog':
+    case 'pillarpine':
+    case 'straypost':
+    case 'climbpine':
+    case 'relicpost':
+    case 'restpine':
+    case 'reststone':
     // Wave T17: the radio mast composites over its compound grass too.
     case 'radiomast': {
       // Object tiles carry transparent surrounds (Wave 1): lay the ground
@@ -135900,6 +136371,21 @@ const WALKABLE = new Set(['.', ',', 'D', 'E', 'C', 'F', 'J', 'K', '1', '2', 'V',
   // allocation closed at 1383 (W17-L..W17-T); 1111 stays
   // empty.)
   ...[1384, 1385, 1388, 1389, 1392, 1393, 1396, 1397, 1400]
+    .map((i) => String.fromCodePoint(0x1E00 + i)),
+  // Wave W17-V: the Borea tranche-2 ground/path chars
+  // (U+1E00+1402.., tiles.mjs W17V_KIND_DEFS) are walkable —
+  // galeturf/galefloor (Route 205), deepturf/deepfloor
+  // (Heritage Forest), pillarturf/pillarwayfloor (Route 206),
+  // climbturf/switchfloor (Route 207) and restturf/restfloor
+  // (Route 208), each swapped 1:1 from the walkable '_'
+  // ground / '.' path chars on its own route, so ground stays
+  // ground and path stays path. The tree chars (1404, 1408,
+  // 1412, 1416, 1420) and prop chars (1405, 1409, 1413, 1417,
+  // 1421) are NOT here: trees and props were never walkable.
+  // (Indices 1402-1421 per the Borea program plan; the Borea
+  // allocation opened at 1384 (W17-U takes 1384-1401 on its
+  // parallel branch); 1111 stays empty.)
+  ...[1402, 1403, 1406, 1407, 1410, 1411, 1414, 1415, 1418, 1419]
     .map((i) => String.fromCodePoint(0x1E00 + i))]);
 
 // Trainer definitions for the slice.
@@ -165718,22 +166204,22 @@ const MAPS9 = {
     "music": "route1-theme",
     "weather": "clear",
     "rows": [
-      "##########################",
-      "#____R_Ẉ__F__F__,,n___F__#",
-      "#__deef__R,,῀῀῀῀______,F_#",
-      "#__P12P__,Ẉ,῁s῁῁__ᾙ______#",
-      "#F_....S_,__...._,_____Fn#",
-      "#,RF___,ᾘ,_,_S,_,__,,_,F_#",
-      "#__,___,___,_,________,__#",
-      "#__,S________F_,,_____,__#",
-      "..........................",
-      "..........................",
-      "#R___,F,,____n__,__FR_,__#",
-      "#__Ẉ___,_____,_____~~~~~_#",
-      "#_F__ᾙ____R___F,___~~~~~,#",
-      "#F__________R___F,,~~~~~_#",
-      "#R_____R______,_,__,_,n_F#",
-      "##########################",
+      "⍼⍼⍼⍼⍼⍼⍼⍼⍼⍼⍼⍼⍼⍼⍼⍼⍼⍼⍼⍼⍼⍼⍼⍼⍼⍼",
+      "⍼⍺⍺⍺⍺R⍺Ẉ⍺⍺F⍺⍺F⍺⍺,,n⍺⍺⍺F⍺⍺⍼",
+      "⍼⍺⍺deef⍺⍺R,,῀῀῀῀⍺⍺⍺⍺⍺⍺,F⍺⍼",
+      "⍼⍺⍺P12P⍺⍺,Ẉ,῁s῁῁⍺⍺ᾙ⍺⍺⍺⍺⍺⍺⍼",
+      "⍼F⍺⍻⍻⍻⍻S⍺,⍺⍺⍻⍻⍻⍻⍺,⍺⍺⍺⍺⍺Fn⍼",
+      "⍼,RF⍺⍺⍽,ᾘ,⍽,⍺S,⍺,⍺⍺,,⍺,F⍺⍼",
+      "⍼⍺⍺,⍺⍺⍺,⍺⍺⍺,⍺,⍺⍺⍺⍺⍺⍺⍺⍺,⍺⍺⍼",
+      "⍼⍺⍺,S⍺⍺⍺⍺⍺⍺⍺⍺F⍺,,⍺⍺⍺⍺⍺,⍺⍺⍼",
+      "⍻⍻⍻⍻⍻⍻⍻⍻⍻⍻⍻⍻⍻⍻⍻⍻⍻⍻⍻⍻⍻⍻⍻⍻⍻⍻",
+      "⍻⍻⍻⍻⍻⍻⍻⍻⍻⍻⍻⍻⍻⍻⍻⍻⍻⍻⍻⍻⍻⍻⍻⍻⍻⍻",
+      "⍼R⍺⍺⍺,F,,⍺⍺⍺⍺n⍺⍺,⍺⍺FR⍺,⍺⍺⍼",
+      "⍼⍺⍺Ẉ⍺⍺⍺,⍺⍺⍺⍺⍺,⍺⍺⍺⍺⍺~~~~~⍺⍼",
+      "⍼⍺F⍺⍺ᾙ⍺⍺⍺⍺R⍺⍺⍺F,⍺⍺⍺~~~~~,⍼",
+      "⍼F⍺⍺⍺⍺⍺⍺⍺⍺⍺⍺R⍺⍺⍺F,,~~~~~⍺⍼",
+      "⍼R⍺⍺⍺⍺⍺R⍺⍺⍺⍺⍺⍺,⍺,⍺⍺,⍺,n⍺F⍼",
+      "⍼⍼⍼⍼⍼⍼⍼⍼⍼⍼⍼⍼⍼⍼⍼⍼⍼⍼⍼⍼⍼⍼⍼⍼⍼⍼",
     ],
     "warps": [
       {"x": 0, "y": 8, "to": {"map": "floaroma", "x": 26, "y": 8}},
@@ -165764,24 +166250,24 @@ const MAPS9 = {
     "music": "route1-theme",
     "weather": "clear",
     "rows": [
-      "###########..###########",
-      "#_,RF__F_,,.._______R__#",
-      "#__R,______..__________#",
-      "#_,RR__,___..,,___RẈ___#",
-      "#,,R,_,#__F.._,_____,__#",
-      "#__R____F#_..____,_____#",
-      "#__R___F___..__F,R,___,#",
-      "#__R_S_,,__..,_,Ẉ______#",
-      "#F_L._n,n#F.._FF____,_R#",
-      "#_,L._F____..______F_,_#",
-      "#_FR,_,_,__..F____F__F_#",
-      "#,FR_F____,..#_,,___F_,#",
-      "#__R_____,_..__________#",
-      "#_FR_F,_,FẈ..F_#n__,_F,#",
-      "#,_R,___,,_..____F,____#",
-      "#__R,F,____.._R_____,_F#",
-      "#__R___,__F.._Ẉ________#",
-      "###########..###########",
+      "⎄⎄⎄⎄⎄⎄⎄⎄⎄⎄⎄⎃⎃⎄⎄⎄⎄⎄⎄⎄⎄⎄⎄⎄",
+      "⎄⎂,RF⎂⎂F⎂,,⎃⎃⎂⎂⎂⎂⎂⎂⎂R⎂⎂⎄",
+      "⎄⎂⎂R,⎂⎂⎂⎂⎂⎂⎃⎃⎂⎂⎂⎂⎂⎂⎂⎂⎂⎂⎄",
+      "⎄⎂,RR⎂⎂,⎂⎂⎂⎃⎃,,⎂⎂⎂RẈ⎂⎂⎂⎄",
+      "⎄,,R,⎂,⎄⎂⎂F⎃⎃⎂,⎂⎂⎂⎂⎂,⎂⎂⎄",
+      "⎄⎂⎂R⎂⎂⎂⎂F⎄⎂⎃⎃⎂⎂⎂⎂,⎂⎂⎂⎂⎂⎄",
+      "⎄⎂⎂R⎂⎂⎂F⎂⎂⎂⎃⎃⎂⎂F,R,⎂⎂⎂,⎄",
+      "⎄⎂⎂R⎂S⎂,,⎂⎂⎃⎃,⎂,Ẉ⎂⎂⎂⎂⎂⎂⎄",
+      "⎄F⎅L⎃⎅n,n⎄F⎃⎃⎂FF⎂⎂⎂⎂,⎂R⎄",
+      "⎄⎂,L⎃⎂F⎂⎂⎂⎂⎃⎃⎂⎂⎂⎂⎂⎂F⎂,⎂⎄",
+      "⎄⎂FR,⎂,⎂,⎂⎂⎃⎃F⎂⎂⎂⎂F⎂⎂F⎂⎄",
+      "⎄,FR⎂F⎂⎂⎂⎂,⎃⎃⎄⎂,,⎂⎂⎂F⎂,⎄",
+      "⎄⎂⎂R⎂⎂⎂⎂⎂,⎂⎃⎃⎂⎂⎂⎂⎂⎂⎂⎂⎂⎂⎄",
+      "⎄⎂FR⎂F,⎂,FẈ⎃⎃F⎂⎄n⎂⎂,⎂F,⎄",
+      "⎄,⎂R,⎂⎂⎂,,⎂⎃⎃⎂⎂⎂⎂F,⎂⎂⎂⎂⎄",
+      "⎄⎂⎂R,F,⎂⎂⎂⎂⎃⎃⎂R⎂⎂⎂⎂⎂,⎂F⎄",
+      "⎄⎂⎂R⎂⎂⎂,⎂⎂F⎃⎃⎂Ẉ⎂⎂⎂⎂⎂⎂⎂⎂⎄",
+      "⎄⎄⎄⎄⎄⎄⎄⎄⎄⎄⎄⎃⎃⎄⎄⎄⎄⎄⎄⎄⎄⎄⎄⎄",
     ],
     "warps": [
       {"x": 11, "y": 17, "to": {"map": "oreburgh", "x": 13, "y": 1}},
@@ -165809,22 +166295,22 @@ const MAPS9 = {
     "music": "route1-theme",
     "weather": "sun",
     "rows": [
-      "##########################",
-      "#,__,_______F,____,,_,___#",
-      "#_____,________#_#___,___#",
-      "#_,,,~~~~__,_,___,__,____#",
-      "#,___~~~~_________F______#",
-      "#,__,~~~~_______,,____n__#",
-      "#____,___________________#",
-      "#_,,____F,F,S___,n_____n_#",
-      "..........................",
-      "..........................",
-      "#,F__________F_F,_,_F,_,,#",
-      "#,___,__,________________#",
-      "##__F__nF__F_F_____n__F_F#",
-      "#_,__,FF_Ẉ__R__R___,_,,,_#",
-      "#_____,_,________,_____,_#",
-      "##########################",
+      "⎈⎈⎈⎈⎈⎈⎈⎈⎈⎈⎈⎈⎈⎈⎈⎈⎈⎈⎈⎈⎈⎈⎈⎈⎈⎈",
+      "⎈,⎆⎆,⎆⎆⎆⎆⎆⎆⎆F,⎆⎆⎆⎆,,⎆,⎆⎆⎆⎈",
+      "⎈⎆⎆⎆⎆⎆,⎆⎆⎆⎆⎆⎆⎆⎆⎈⎆⎈⎆⎆⎆,⎆⎆⎆⎈",
+      "⎈⎆,,,~~~~⎆⎆,⎆,⎆⎆⎆,⎆⎆,⎆⎆⎆⎆⎈",
+      "⎈,⎆⎆⎆~~~~⎆⎆⎆⎆⎆⎆⎆⎆⎆F⎆⎆⎆⎆⎆⎆⎈",
+      "⎈,⎆⎆,~~~~⎆⎆⎆⎆⎆⎆⎆,,⎆⎆⎆⎆n⎆⎆⎈",
+      "⎈⎆⎆⎆⎆,⎆⎆⎆⎆⎆⎆⎆⎆⎆⎆⎆⎆⎆⎆⎆⎆⎆⎆⎆⎈",
+      "⎈⎆,,⎆⎆⎉⎆F,F,S⎆⎆⎆,n⎆⎆⎆⎆⎆n⎆⎈",
+      "⎇⎇⎇⎇⎇⎇⎇⎇⎇⎇⎇⎇⎇⎇⎇⎇⎇⎇⎇⎇⎇⎇⎇⎇⎇⎇",
+      "⎇⎇⎇⎇⎇⎇⎇⎇⎇⎇⎇⎇⎇⎇⎇⎇⎇⎇⎇⎇⎇⎇⎇⎇⎇⎇",
+      "⎈,F⎆⎆⎆⎆⎆⎆⎆⎆⎆⎆F⎆F,⎆,⎉F,⎆,,⎈",
+      "⎈,⎆⎆⎆,⎆⎆,⎆⎆⎆⎆⎆⎆⎆⎆⎆⎆⎆⎆⎆⎆⎆⎆⎈",
+      "⎈⎈⎆⎆F⎆⎆nF⎆⎆F⎆F⎆⎆⎆⎆⎆n⎆⎆F⎆F⎈",
+      "⎈⎆,⎆⎆,FF⎆Ẉ⎆⎆R⎆⎆R⎆⎆⎆,⎆,,,⎆⎈",
+      "⎈⎆⎆⎆⎆⎆,⎆,⎆⎆⎆⎆⎆⎆⎆⎆,⎆⎆⎆⎆⎆,⎆⎈",
+      "⎈⎈⎈⎈⎈⎈⎈⎈⎈⎈⎈⎈⎈⎈⎈⎈⎈⎈⎈⎈⎈⎈⎈⎈⎈⎈",
     ],
     "warps": [
       {"x": 0, "y": 8, "to": {"map": "oreburgh", "x": 28, "y": 8}},
@@ -165850,22 +166336,22 @@ const MAPS9 = {
     "music": "route1-theme",
     "weather": "clear",
     "rows": [
-      "##########################",
-      "#F____,,__,_F___F___#_,F_#",
-      "#,_,__F_,,__n,____,,,_n_,#",
-      "#_______,__,___,_ẈR__#___#",
-      "#F,,_,_________,F________#",
-      "#__,______nF_____________#",
-      "#_,___FF__R__,___n___F#n##",
-      "##__F,______S_,__,,______#",
-      "..........................",
-      "..........................",
-      "#,__________RF__,,_,_____#",
-      "#_#,R_,____F___,_,#___F__#",
-      "#_F_,_,_,_____,n_,,__,___#",
-      "#_____,,_,_______________#",
-      "#_______,__,________,F___#",
-      "##########################",
+      "⎌⎌⎌⎌⎌⎌⎌⎌⎌⎌⎌⎌⎌⎌⎌⎌⎌⎌⎌⎌⎌⎌⎌⎌⎌⎌",
+      "⎌F⎊⎊⎊⎊,,⎊⎊,⎊F⎊⎊⎊F⎊⎊⎊⎌⎊,F⎊⎌",
+      "⎌,⎊,⎊⎊F⎊,,⎊⎊n,⎊⎊⎊⎊,,,⎊n⎊,⎌",
+      "⎌⎊⎊⎊⎊⎊⎊⎊,⎊⎊,⎊⎊⎊,⎊ẈR⎊⎊⎌⎊⎊⎊⎌",
+      "⎌F,,⎊,⎊⎊⎊⎊⎊⎊⎊⎊⎊,F⎊⎊⎊⎊⎊⎊⎊⎊⎌",
+      "⎌⎊⎊,⎊⎊⎊⎊⎊⎊nF⎊⎊⎊⎊⎊⎊⎊⎊⎊⎊⎊⎊⎊⎌",
+      "⎌⎊,⎊⎊⎊FF⎊⎊R⎊⎊,⎊⎊⎊n⎊⎊⎊F⎌n⎌⎌",
+      "⎌⎌⎊⎊F,⎊⎍⎊⎊⎊⎊S⎊,⎊⎊,,⎊⎊⎊⎊⎊⎊⎌",
+      "⎋⎋⎋⎋⎋⎋⎋⎋⎋⎋⎋⎋⎋⎋⎋⎋⎋⎋⎋⎋⎋⎋⎋⎋⎋⎋",
+      "⎋⎋⎋⎋⎋⎋⎋⎋⎋⎋⎋⎋⎋⎋⎋⎋⎋⎋⎋⎋⎋⎋⎋⎋⎋⎋",
+      "⎌,⎊⎊⎊⎊⎊⎊⎊⎊⎊⎊RF⎊⎊,,⎍,⎊⎊⎊⎊⎊⎌",
+      "⎌⎊⎌,R⎊,⎊⎊⎊⎊F⎊⎊⎊,⎊,⎌⎊⎊⎊F⎊⎊⎌",
+      "⎌⎊F⎊,⎊,⎊,⎊⎊⎊⎊⎊,n⎊,,⎊⎊,⎊⎊⎊⎌",
+      "⎌⎊⎊⎊⎊⎊,,⎊,⎊⎊⎊⎊⎊⎊⎊⎊⎊⎊⎊⎊⎊⎊⎊⎌",
+      "⎌⎊⎊⎊⎊⎊⎊⎊,⎊⎊,⎊⎊⎊⎊⎊⎊⎊⎊,F⎊⎊⎊⎌",
+      "⎌⎌⎌⎌⎌⎌⎌⎌⎌⎌⎌⎌⎌⎌⎌⎌⎌⎌⎌⎌⎌⎌⎌⎌⎌⎌",
     ],
     "warps": [
       {"x": 0, "y": 8, "to": {"map": "hearthome", "x": 1, "y": 8}},
@@ -166333,24 +166819,24 @@ const MAPS9 = {
     "music": "viridian-theme",
     "weather": "rain",
     "rows": [
-      "############################",
-      "#___,_,_#___ῈῈῈῈ,F_,,,#F___#",
-      "#,#_,_______ΈsΈΈ#____#,__#_#",
-      "#_____,_____....__,_F__,_,,#",
-      "##,_,__,__#_,.SF#_#,,,#,_F_#",
-      "#,____ᾘ______..____,,,,,#F_#",
-      "#F#,___#__F__..#,__#,,,,_FF#",
-      "#_,____,__,__.S___,_,_F,_,,#",
-      "............................",
-      "............................",
-      "#__#__,___,__#__F__#___##,,#",
-      "#,_,____#_#_____##_________#",
-      "#__F,F,,,_,F,#__F_,__ᾘ_,__F#",
-      "#___,,,,,ᾘ,#_,_,,,#_,,__#F##",
-      "#__,,,,,,,____,__F__,_F_F__#",
-      "#_F__F_,_,_#__##___#,_,____#",
-      "#_,__#,_F,,_____,,F,___,___#",
-      "############################",
+      "⎀⎀⎀⎀⎀⎀⎀⎀⎀⎀⎀⎀⎀⎀⎀⎀⎀⎀⎀⎀⎀⎀⎀⎀⎀⎀⎀⎀",
+      "⎀⍾⍾⍾,⍾,⍾⎀⍾⍾⍾ῈῈῈῈ,F⍾,,,⎀F⍾⍾⍾⎀",
+      "⎀,⎀⍾,⍾⍾⍾⍾⍾⍾⍾ΈsΈΈ⎀⍾⍾⍾⍾⎀,⍾⍾⎀⍾⎀",
+      "⎀⍾⍾⍾⍾⍾,⍾⍾⍾⍾⍾⍿⍿⍿⍿⍾⍾,⍾F⍾⍾,⍾,,⎀",
+      "⎀⎀,⍾,⍾⍾,⍾⍾⎀⍾,⍿SF⎀⍾⎀,,,⎀,⍾F⍾⎀",
+      "⎀,⍾⍾⍾⍾ᾘ⍾⍾⍾⍾⍾⍾⍿⍿⍾⍾⍾⍾,,,,,⎀F⍾⎀",
+      "⎀F⎀,⍾⍾⍾⎀⍾⍾F⍾⍾⍿⍿⎀,⍾⍾⎀,,,,⍾FF⎀",
+      "⎀⍾,⍾⍾⍾⍾,⍾⍾,⍾⍾⍿S⍾⍾⍾,⍾,⍾F,⍾,,⎀",
+      "⍿⍿⍿⍿⍿⍿⍿⍿⍿⍿⍿⍿⍿⍿⍿⍿⍿⍿⍿⍿⍿⍿⍿⍿⍿⍿⍿⍿",
+      "⍿⍿⍿⍿⍿⍿⍿⍿⍿⍿⍿⍿⍿⍿⍿⍿⍿⍿⍿⍿⍿⍿⍿⍿⍿⍿⍿⍿",
+      "⎀⍾⍾⎀⍾⍾,⍾⍾⍾,⍾⍾⎀⍾⍾F⍾⍾⎀⍾⍾⍾⎀⎀,,⎀",
+      "⎀,⍾,⍾⎁⍾⍾⎀⍾⎀⍾⍾⍾⍾⍾⎀⎀⍾⍾⍾⍾⎁⍾⍾⍾⍾⎀",
+      "⎀⍾⍾F,F,,,⍾,F,⎀⍾⍾F⍾,⍾⍾ᾘ⍾,⍾⍾F⎀",
+      "⎀⍾⍾⍾,,,,,ᾘ,⎀⍾,⍾,,,⎀⍾,,⍾⍾⎀F⎀⎀",
+      "⎀⍾⍾,,,,,,,⍾⍾⍾⍾,⍾⍾F⍾⍾,⍾F⍾F⍾⍾⎀",
+      "⎀⍾F⍾⍾F⍾,⍾,⍾⎀⍾⍾⎀⎀⍾⍾⍾⎀,⍾,⍾⍾⍾⍾⎀",
+      "⎀⍾,⍾⍾⎀,⍾F,,⍾⍾⍾⍾⍾,,F,⍾⍾⍾,⍾⍾⍾⎀",
+      "⎀⎀⎀⎀⎀⎀⎀⎀⎀⎀⎀⎀⎀⎀⎀⎀⎀⎀⎀⎀⎀⎀⎀⎀⎀⎀⎀⎀",
     ],
     "warps": [
       {"x": 0, "y": 8, "to": {"map": "r205", "x": 24, "y": 8}},
