@@ -853,7 +853,7 @@ export const MAPS6 = {
         "name": "MONK SAGE",
         "art": "monk",
         "skin": "#e8b888",
-        "shirt": "#3a6ac0",
+        "shirt": "#b85c2a",
         "pants": "#2a3a4a",
         "hair": "#1a1a1a",
         "dialogue": [

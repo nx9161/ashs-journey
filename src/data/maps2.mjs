@@ -198,7 +198,7 @@ export const MAPS2 = {
       { x: 5, y: 8, name: 'GRUNT REX', art: 'grunt', skin: '#d8a878', shirt: '#2a2a3a', pants: '#1a1a2a', hair: '#3a2a1a',
         trainer: 'moon_grunt', sight: { dir: 'right', range: 3 },
         dialogue: ["This cave's fossils belong to the Team now, brat. Scram!", "Tch! The boss'll hear about this..."] },
-      { x: 10, y: 3, name: 'SCIENTIST', art: 'scientist', skin: '#f0c8a0', shirt: '#f0f0f0', pants: '#4a4a5a', hair: '#1a1a1a',
+      { x: 10, y: 3, name: 'SCIENTIST', art: 'scientist', skin: '#f0c8a0', shirt: '#f0f0f0', pants: '#4a4a5a', hair: '#8a8a8a',
         dialogue: ["Two fossils sleep in this chamber — a helix and a dome, older than the mountain itself.", "Take ONE, trainer, and leave the other for the next dreamer. Science is not greed."] },
     ],
     encounters: {

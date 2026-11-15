@@ -93,7 +93,7 @@ const PIN = {
   GENERIC_DUP_POSTS: 0,
   GENERIC_MAX_DESIGN_POSTS: 1,
   GENERIC_TOWN_REPEAT_PAIRS: 0,
-  GENERIC_CROSS_REGISTER_COLLISIONS: 2, // W3 T0 reading; the 2 palette variants re-pin this to 0 in the closure commit
+  GENERIC_CROSS_REGISTER_COLLISIONS: 0, // W3 T0 measured 2; burned to 0 by the 2 palette variants in this closure (FINAL)
 };
 // C4: cast-*/service-region kinds in use, pinned. T1: the 14 service
 // kinds (clerk/attendant/host × region; Trial Grounds is the game's
@@ -125,6 +125,12 @@ const PINNED_CAST_KINDS = ['attendant-amber', 'attendant-borea', 'attendant-mari
 // T4 adds 15 keys: the 15 repointed tail posts (BUG MANIAC FERN's
 // two posts both listed). No palette splits in T4; the census diff
 // vs main measured exactly these 15 changes and zero side effects.
+// W-CHAR3 adds 2 keys: the 2 generic cross-register colliders,
+// palette-varianted design-fields-only (moon2#1 SCIENTIST hair →
+// grey #8a8a8a — the scientist kind force-fixes the lab-coat shirt
+// in KIT_CAST_SPEC, so hair is the free visible field; violet#0
+// MONK SAGE shirt → saffron-rust robe #b85c2a). No kind changes,
+// no other fields touched.
 const SPEC_DESIGN_EXCEPTIONS = [
   'amity-square#0',
   'azalea#0',
@@ -351,6 +357,7 @@ const SPEC_DESIGN_EXCEPTIONS = [
   'mikan#1',
   'mikan#4',
   'mikan-gym#1',
+  'moon2#1',
   'moro#0',
   'moro#1',
   'moro#2',
@@ -560,6 +567,7 @@ const SPEC_DESIGN_EXCEPTIONS = [
   'vermilion#0',
   'vermilion#3',
   'vermilion#4',
+  'violet#0',
   'violet#1',
   'violet#2',
   'violet#3',
