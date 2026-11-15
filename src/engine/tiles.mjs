@@ -4137,6 +4137,76 @@ W17W_KIND_DEFS.forEach(([kind], i) => {
 export const W17W_PROP_KINDS = W17W_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
 export const W17W_WALL_KINDS = W17W_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
 export const W17W_FLOOR_KINDS = W17W_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
+// Wave W17-X (Borea Tranche 4 — Inglenook's roads: the tower
+// road, the ranch, the fog, the marsh descent): Route 209
+// takes the Tower Road register — towerturf (suffix-free
+// ground, muted sage with petal-drift flecks), bellfloor
+// (the path tier, *floor per checklist point 3), bellpine
+// (wall class, as every route tree) and the pilgrimpost prop
+// (two pilgrim marker posts where the flower drifts bank the
+// fence); the Forsaken Tower's footprint stands on the map
+// as shipped dressing, byte-preserved entire. Route 210
+// takes the Ranch Road register — ranchturf (the tranche's
+// deepest green, hay-gold flecks), ranchfloor, ranchpine and
+// the paddockpost prop (two paddock posts flanking the north
+// fence, the herd's fence). Route 210 — North takes the Fog
+// Road register — fogturf (grey-green murk), fogfloor
+// (luminous pale sand; the appearing-and-vanishing is the
+// map's permanent fog weather field, not the kind), fogpine
+// (frosted crown drawn in the tree) and the waybell prop
+// (two bell frames at the fog road's mouths — walk by ear).
+// Route 212 — North takes the Drowning Road register —
+// poolturf (wet-edge flecks), poolfloor, poolwillow (the
+// fleet's second willow, split from Maris's fordwillow by
+// register: bog pools vs river ford) and the reedpost prop
+// (two reed posts where the path gives up). Route 212 —
+// South takes the Bog Road register — bogturf (olive, reed
+// flecks), bogfloor (the dry-line sand; the design's
+// full-length boardwalk is painting dressing — no boardwalk
+// kind ships on this map, per the program plan), bogpine
+// and the lilypost prop (two lily-pad posts at the loudest
+// pools); the shipped bog biome (marshbog/marshreed) stands
+// byte-preserved by spec (Ruling #3). Ground kinds
+// deliberately do NOT end in 'floor' (the desire-path audit
+// keys its street tier on that suffix; grounds must never
+// masquerade as street); the path kinds DO end in 'floor'.
+// Indices 1432-1451 per the program plan
+// (WAVE-W17-BOREA-ROUTE-PROGRAM-PLAN.md): the Borea
+// allocation runs 1384-1535 (W17-U took 1384-1401, W17-V
+// 1402-1421, W17-W takes 1422-1431 on its parallel branch);
+// 1111 and every earlier documented gap stay empty. Kind
+// names verified unclaimed against origin/main.
+export const W17X_KIND_DEFS = [
+  ['towerturf', 'floor'],
+  ['bellfloor', 'floor'],
+  ['bellpine', 'wall'],
+  ['pilgrimpost', 'prop'],
+  ['ranchturf', 'floor'],
+  ['ranchfloor', 'floor'],
+  ['ranchpine', 'wall'],
+  ['paddockpost', 'prop'],
+  ['fogturf', 'floor'],
+  ['fogfloor', 'floor'],
+  ['fogpine', 'wall'],
+  ['waybell', 'prop'],
+  ['poolturf', 'floor'],
+  ['poolfloor', 'floor'],
+  ['poolwillow', 'wall'],
+  ['reedpost', 'prop'],
+  ['bogturf', 'floor'],
+  ['bogfloor', 'floor'],
+  ['bogpine', 'wall'],
+  ['lilypost', 'prop'],
+];
+export const W17X_KIND_CHARS = {};
+W17X_KIND_DEFS.forEach(([kind], i) => {
+  const ch = String.fromCodePoint(0x1E00 + 1432 + i);
+  W17X_KIND_CHARS[kind] = ch;
+  TILE_CHARS[ch] = kind;
+});
+export const W17X_PROP_KINDS = W17X_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
+export const W17X_WALL_KINDS = W17X_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
+export const W17X_FLOOR_KINDS = W17X_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
 export const SINNOH_TOWN_GROUND_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg);
 export const SINNOH_TOWN_GROUND2_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg2);
 // TX-3: the 8 gym exteriors by town (original type-accent motifs).

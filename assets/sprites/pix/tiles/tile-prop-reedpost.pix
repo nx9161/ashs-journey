@@ -1,0 +1,26 @@
+# Wave W17-X (Route 212 — North): reed post — a reed marker post where the path gives up: a weathered post with a single cattail standing at its shoulder, marking the last dry footing before the pools take the road (design: boardwalk sections starting where the path gives up in the painting — no boardwalk kind ships on the segment maps; the posts carry the giving-up instead). On pool turf (fully opaque, ground baked in) — split from Route 212 — South’s lily posts by the cattail entire: the North marks footing, the South marks water.
+PIX tile-prop-reedpost 16 16
+aaaaaaaaaaabaaba
+aabaabaaaaabaaaa
+aabbaaaaaabbabaa
+aaaabaaaabaaaaaa
+aaaaaaakdacaaaba
+aaaaaaakdacabaaa
+aaaaaaakdacaaaaa
+aaaaaaakdataabaa
+aaaaaaakdatabaab
+aaaaaaakdataaaaa
+baaaaaakdataaaba
+aaaaaaakdataaaab
+aaaaaaakdatbaaaa
+aaaaabddddaaaaab
+aababaaaaaaawaaa
+abaaaaaaaaaabwaa
+PAL
+a #6f9e57
+b #5c8a48
+w #b9d9c9
+c #8a6238
+t #477c3a
+d #6e5c40
+k #8a7a5c

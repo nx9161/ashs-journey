@@ -1,0 +1,25 @@
+# Wave W17-X (Route 210 — North): waybell — a fog waybell at the road’s mouth: two posts and a crossbar carrying one small brass bell, rung by the wind off the mountain so walkers navigate by ear (design: waybells standing in the murk; in fog, walk by ear: the grass keeps talking). On fog turf (fully opaque, ground baked in) — split from the fleet’s single posts by the frame entire: a post marks a place, a waybell marks a way through weather.
+PIX tile-prop-waybell 16 16
+aasaaaasaaaaaaba
+aaabaaaaabaaasab
+baabaaasaaaaaaba
+aaaaaaaaaaaaaaba
+abaakkkkkkkkaaba
+abaaakaddadbaaas
+aaaaskbggadaaaaa
+aaaaakaggadaaaba
+aaabakadabdaaaaa
+aaaaakaaaadbsaaa
+aaaabkaaaadabaaa
+aaaabkaaaadbaaaa
+aaaaakaaasdabaaa
+aaaaddddddddaaba
+aaaaaabaaaaaaaba
+abaaaaaabaaaaaaa
+PAL
+a #8b9a7d
+b #77866a
+s #c2cdbd
+g #c9a44a
+d #5f5138
+k #7d6a4a
