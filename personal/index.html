@@ -176,6 +176,36 @@ body.reduced-motion .menu.menu-open{animation:none}
 .entrypanel{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:min(560px,94%);max-height:92%;overflow:auto;background:var(--paper);border:2px solid var(--frame);outline:2px solid var(--frame2);outline-offset:-5px;border-radius:3px;pointer-events:auto;box-shadow:0 4px 18px rgba(0,0,0,.35);z-index:26}
 .entryhead{font-family:var(--font-display);background:#d7e1f2;color:var(--ink);font-size:15px;font-weight:bold;letter-spacing:1px;padding:10px 12px;border-bottom:2px solid var(--frame);text-align:center;cursor:pointer}
 .entrybody{padding:12px 14px 14px}
+/* KinDex list plates (W14-T1): species rows are plate-full — the sprite
+   sits on its own framed plate at exactly 64x64, the native battle-art
+   canvas at 1x (B2-G5 integer scale; the entry panel's 96px/1.5x is not
+   repeated here). Hub rows keep the plain renderer and take the
+   silver-blue band treatment in place. No dex element is positioned:
+   the list stays inside the centered .menu overlay geometry. */
+.menu.dexlist .menu-row.disabled{background:#d7e1f2;border-bottom:2px solid var(--frame);font-style:normal;color:var(--ink)}
+.menu.dexlist .menu-row:has(.dexplate){padding-top:8px;padding-bottom:8px}
+.dexplate{display:flex;align-items:center;gap:10px;flex:1;min-width:0}
+.dexcell{width:64px;height:64px;flex:none;display:flex;align-items:center;justify-content:center;background:#dfe7f5;border:2px solid var(--frame);border-radius:3px;overflow:hidden}
+.dexsprite{width:64px;height:64px;object-fit:contain;image-rendering:pixelated}
+.dexcell-empty{background:#e8edf6;border-color:#9aa7c4;color:#8a93a8;font-weight:bold;letter-spacing:1px}
+.dexmain{display:flex;flex-direction:column;gap:2px;flex:1;min-width:0}
+.dexl1{display:flex;gap:8px;align-items:baseline}
+.dexno{font-family:var(--font-display);font-size:15px;color:#4a5878}
+.dexname{font-family:var(--font-display);font-size:16px;font-weight:bold;color:var(--ink);min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.dexl2{font-size:15px;color:#4a5878;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.dexstate{flex:none;font-size:14px;font-weight:bold;letter-spacing:1px;padding:3px 8px;background:#fff;color:#4a5878;border:2px solid var(--frame);border-radius:3px}
+.dexstate.is-caught{background:var(--lcd);color:var(--lcdink);border-color:#46543a}
+.dexstate.is-unseen{background:#e8edf6;color:#8a93a8;border-color:#9aa7c4}
+/* Narrow menu boxes (the shell's own 560px breakpoint, as
+   .menu.plate-full — plus short landscape viewports, whose letterboxed
+   view box is just as narrow): the plate row reflows to a grid — the
+   plate still spans exactly 64x64 at 1x; name/types take the first row
+   beside it and the state chip drops to a second row under them, so
+   nothing overlaps or truncates at 390/360px or 844x390. */
+@media (max-width:560px),(max-height:500px){.dexplate{display:grid;grid-template-columns:64px minmax(0,1fr);grid-template-rows:auto auto;column-gap:10px;row-gap:2px}
+.dexcell{grid-row:1/3}
+.dexmain{grid-column:2;grid-row:1}
+.dexstate{grid-column:2;grid-row:2;justify-self:start}}
 /* Hall of Fame + Diploma ceremony plates (Elevation B2): flat paper
    plates with a gold trim — no gradients. */
 .hofplate{border:3px solid var(--gold);background:#fdfdff;border-radius:3px;padding:12px}
@@ -502,6 +532,6 @@ body.desktop.showtouch .controls{display:flex}
 <div id="stage"><div id="hudband"></div><div id="screenwrap"><canvas id="game"></canvas></div><div id="ctlband"></div></div>
 <div id="ui"></div>
 <script src="game.js"></script>
-<!-- contentHash:db7a42741558a2d7489481569c9cc7556c0cb46cae8dbf138d37894f51403736 -->
+<!-- contentHash:a603427d94e72e0689b00ed7e3ffee3ee6a722d1304e5e9584f6b7fdb569ef55 -->
 </body>
 </html>
