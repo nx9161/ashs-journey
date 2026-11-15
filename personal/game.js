@@ -5702,6 +5702,80 @@ W17X_KIND_DEFS.forEach(([kind], i) => {
 const W17X_PROP_KINDS = W17X_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
 const W17X_WALL_KINDS = W17X_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
 const W17X_FLOOR_KINDS = W17X_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
+// Wave W17-Y (Borea Tranche 5 — the Gallant lakefront:
+// Fenland to the lake to the Vernal lane): Route 213 takes
+// the Lakefront Approach register — saltturf (suffix-free
+// ground, dry olive-khaki with pale salt-crust flecks),
+// saltfloor (the path tier, *floor per checklist point 3),
+// saltpine (wall class, as every route tree) and the
+// rackpost prop (two painted-boat rack posts flanking the
+// shore water); shore water 18, flower 14, signpost 3 and
+// fence 2 stand byte-preserved. Lake Gallant takes its own
+// register — gallantturf (bright tended lakefront green,
+// embankment flecks), gallantfloor, gallantelm (broad
+// lakefront elm) and the lightpost prop (two shore-light
+// posts at the lake's north corners — the lake's own
+// lights, split from the shipped lanternpost dressing kind
+// by register, per the program plan); the lake (water 78),
+// rock 26 and the two `L` cavern-mouth warp cells stand
+// byte-preserved. Gallant Cavern builds by the cave method
+// — keepfloor (warm dressed shore-stone flags) takes
+// cavefloor, keepwall (dressed shore stone) takes cavewall;
+// pool water 15, caveboulder 3 and cavecrystal 2 stand
+// byte-preserved; no props (cave discipline). Route 214
+// takes the Meadow Road register — vergeturf (fresh
+// yellow-green meadow), vergefloor, vergepine and the
+// meteorpost prop (two fallen-shard posts flanking the
+// Shardfall road at the north end, where the design's
+// crater field begins beyond the fence); lake-shore water
+// 15, fence 6 and signpost 4 stand byte-preserved. The
+// Vernal Path takes the Vernal Lane register — bloomturf
+// (soft olive lane turf, petal flecks), vernalfloor (the
+// hushed lane's pale sand; renamed in-plan — the draft
+// bloomfloor is a shipped kind), bloomelm (blossom-flecked
+// lane elm) and the petalpost prop (two petal-drift posts
+// along the banks); the shipped flower banks (flower 16)
+// and tall grass (62) stand byte-preserved and the ground
+// converts around them (the Maris R117 discipline).
+// Ground kinds deliberately do NOT end in 'floor' (the
+// desire-path audit keys its street tier on that suffix;
+// grounds must never masquerade as street); the path kinds
+// DO end in 'floor'. Indices 1452-1469 per the program
+// plan (WAVE-W17-BOREA-ROUTE-PROGRAM-PLAN.md): the Borea
+// allocation runs 1384-1535 (W17-U took 1384-1401, W17-V
+// 1402-1421, W17-W 1422-1431, W17-X takes 1432-1451 on its
+// parallel branch); 1111 and every earlier documented gap
+// stay empty. Kind names verified unclaimed against
+// origin/main.
+const W17Y_KIND_DEFS = [
+  ['saltturf', 'floor'],
+  ['saltfloor', 'floor'],
+  ['saltpine', 'wall'],
+  ['rackpost', 'prop'],
+  ['gallantturf', 'floor'],
+  ['gallantfloor', 'floor'],
+  ['gallantelm', 'wall'],
+  ['lightpost', 'prop'],
+  ['keepfloor', 'floor'],
+  ['keepwall', 'wall'],
+  ['vergeturf', 'floor'],
+  ['vergefloor', 'floor'],
+  ['vergepine', 'wall'],
+  ['meteorpost', 'prop'],
+  ['bloomturf', 'floor'],
+  ['vernalfloor', 'floor'],
+  ['bloomelm', 'wall'],
+  ['petalpost', 'prop'],
+];
+const W17Y_KIND_CHARS = {};
+W17Y_KIND_DEFS.forEach(([kind], i) => {
+  const ch = String.fromCodePoint(0x1E00 + 1452 + i);
+  W17Y_KIND_CHARS[kind] = ch;
+  TILE_CHARS[ch] = kind;
+});
+const W17Y_PROP_KINDS = W17Y_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
+const W17Y_WALL_KINDS = W17Y_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
+const W17Y_FLOOR_KINDS = W17Y_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
 const SINNOH_TOWN_GROUND_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg);
 const SINNOH_TOWN_GROUND2_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg2);
 // TX-3: the 8 gym exteriors by town (original type-accent motifs).
@@ -121575,6 +121649,330 @@ const ART = {
     "aaaabaabaaabaaaa",
     "aaaaaaaaaaaaabbb"
   ] },
+  "tile-saltturf": { w: 16, h: 16, pal: {"a":"#8f955c","b":"#7d844c","s":"#ccd2ba","d":"#6b713f"}, rows: [
+    "aaaaaaaaaaasabaa",
+    "sdaaaaaaaaaaaaaa",
+    "aaaaabaaaaaaaaaa",
+    "aaaaaaaabbaaaaaa",
+    "abasaabasabbaaaa",
+    "aaabadaaddaaaaaa",
+    "aabbaaaaaaaaaaaa",
+    "ssababaasababdab",
+    "daaaaaaaaaaaabaa",
+    "babaaasaabaaaaaa",
+    "aaaaaaadaabdadab",
+    "aaabaaaaaasaaaaa",
+    "aasaaabaaaaaaaas",
+    "aaaaaaabbaaaaaaa",
+    "daabbbbsbbsaaasa",
+    "aaaaaaaaaaaaaaaa"
+  ] },
+  "tile-saltfloor": { w: 16, h: 16, pal: {"a":"#e6d9b4","b":"#d3c298","d":"#b3a075"}, rows: [
+    "aaaabaaaadaadaaa",
+    "aabaaaaaabaaadaa",
+    "abaaaaaaaaaaaaaa",
+    "aadaaaaaaabaaaaa",
+    "aaaaaaaababaaaaa",
+    "abaaaaaaaaaaaaaa",
+    "aaaaaaaaaaaaaaaa",
+    "aaaaabbaaaaaaaaa",
+    "daaaaaadaaaaaaab",
+    "abaaaaaaaaaaaaab",
+    "aaaaaaaaaaaaabaa",
+    "aaaaaaabbaababaa",
+    "aaaaaaaaaaaaaaba",
+    "aaaaaabaaadadaaa",
+    "aaaaaaaaaaabaaaa",
+    "aaaaaadabaaaabba"
+  ] },
+  "tile-saltpine": { w: 16, h: 16, pal: {"a":"#8f955c","b":"#7d844c","t":"#35603c","u":"#264a2e","h":"#6da368","k":"#5a4630"}, rows: [
+    "baaaaaaaaaabaaaa",
+    "aaaaaahhhhaaaaaa",
+    "abaaahhhhhhabaaa",
+    "aaaauhtutttuaaaa",
+    "aabaattuuthaabaa",
+    "aaahhutttutttaaa",
+    "aaabututthtuaaba",
+    "aaauhtutttuutaaa",
+    "aaaatuuthhhhaaab",
+    "aathtutttuhuttaa",
+    "aaautthhthhhuaaa",
+    "baaaaaakkaabaaaa",
+    "aaaaaabkkaaaaaaa",
+    "abaaaaakkaaabaaa",
+    "aaaaaauuuuaaaaaa",
+    "aabaaaaaaaaaabaa"
+  ] },
+  "tile-prop-rackpost": { w: 16, h: 16, pal: {"a":"#8f955c","b":"#7d844c","s":"#ccd2ba","t":"#3e7d84","r":"#b0523c","d":"#6e5c40","k":"#8a7a5c"}, rows: [
+    "aaaabbbaaaaaaaba",
+    "aaaaaabbaaaaaaaa",
+    "aaaaaaaaaaaaaaaa",
+    "aaabttttttttbaab",
+    "aaatbrrrrrrataaa",
+    "aaakkkkkkkkkkaaa",
+    "aabskabaaaadaaab",
+    "aasakaaaaaadaaba",
+    "aaaakaaaaaadaaaa",
+    "aaaakaaaaaadaaaa",
+    "abaakbaaaaadaaaa",
+    "aaaaksaaaabdaaaa",
+    "aabakaabaaadaaba",
+    "aaaddddddddddbsa",
+    "aaaaaaaaaaaaaaaa",
+    "aaaaaaaaababaaab"
+  ] },
+  "tile-gallantturf": { w: 16, h: 16, pal: {"a":"#74a854","b":"#639846","w":"#d9e4b2","d":"#548239"}, rows: [
+    "aaabawaaaaaaaaaa",
+    "aaabaaabaaaaaaba",
+    "aaaaaaabaabwaaaa",
+    "aaaaaabdabbaabaa",
+    "wdaawaabbaaaaaaa",
+    "aaaababbaaaaaaaa",
+    "aaawabaaaaaaaaaa",
+    "aaaaaaaaabadaaab",
+    "aaaaaaabaaaaaaaa",
+    "daabaabadaaababa",
+    "aaaaaaaaaaaaawaa",
+    "aaaawaabaaaaaaaa",
+    "daaaaaaaaaaaawad",
+    "aaaaaabbaadbaaaa",
+    "aaabaabdaaababaa",
+    "aabaabaaaaaawaaa"
+  ] },
+  "tile-gallantfloor": { w: 16, h: 16, pal: {"a":"#ead9ae","b":"#dbc491","d":"#bda26e"}, rows: [
+    "aaaaaaadaaaaaaaa",
+    "aaaaaabaaaaaaaaa",
+    "aaaaaaaaabaaaaba",
+    "aaaabdaaaaaaadaa",
+    "aabaaaaaaaaabaaa",
+    "baaaaaaaaaaababa",
+    "aadabaaaaaaabbaa",
+    "aaaaabaaaaabaaaa",
+    "aaaaaaaaaaaaabab",
+    "baaaaaaaaabaaaab",
+    "aaaaababaaaaaaad",
+    "aaaaaaaaaaadaaaa",
+    "aaaaaabaaaadbdaa",
+    "aabaaaaaaaaaaaab",
+    "baadaaaaaaaaaaaa",
+    "abaaaaaddaaaaaaa"
+  ] },
+  "tile-gallantelm": { w: 16, h: 16, pal: {"a":"#74a854","b":"#639846","t":"#3f7038","u":"#2e552b","h":"#84b96a","k":"#5e4630"}, rows: [
+    "baaaaahhutabaaaa",
+    "aaaahhhhthuhaaaa",
+    "abhhhhhhhhtthuaa",
+    "ahhhhhhhhthuthha",
+    "atutuuhttttuhhha",
+    "atthtthttthhhtta",
+    "aahhhtuththhthba",
+    "aahuuuhtutuutuaa",
+    "aaauuuhuthuttaab",
+    "aaattutthtthuaaa",
+    "aaaauuhuhuutaaaa",
+    "baaaaaakkaabaaaa",
+    "aaaaaabkkaaaaaaa",
+    "abaaaaakkaaabaaa",
+    "aaaaaauuuuaaaaaa",
+    "aabaaaaaaaaaabaa"
+  ] },
+  "tile-prop-lightpost": { w: 16, h: 16, pal: {"a":"#74a854","b":"#639846","w":"#d9e4b2","g":"#f2c14e","d":"#6e5c40","k":"#7d6a4a"}, rows: [
+    "baaaaaaaaaaaaaaa",
+    "aaaaaaaaaaaaaaaa",
+    "aaaaaaddddabbaaa",
+    "aaaaaaaggaaaaaaa",
+    "aaaaaaakdaaaaaaa",
+    "aaaaaaakdaaaaaaa",
+    "aaaaaaakdaaabaaa",
+    "abaabaakdaaaaaaa",
+    "aaaaaaakdaaabaaa",
+    "baaaaaakdaaaaaaa",
+    "aaaaaaakdabaaaba",
+    "aaaabaakdwaaaaaa",
+    "aaaaaaakdaaabbaa",
+    "aaaaaaddddaaabaa",
+    "baaaaaaaaaaaaaaa",
+    "aabaaaaaaaaaaaaa"
+  ] },
+  "tile-keepfloor": { w: 16, h: 16, pal: {"a":"#97826a","b":"#77664e","c":"#a8906f","e":"#66563f"}, rows: [
+    "aaaaeacebaacaaaa",
+    "aaaaaaaabaaacaaa",
+    "aaaaacaabaaaaeaa",
+    "aaaaaaeabeaebbaa",
+    "aaaaaaaabaaaccaa",
+    "aaacacaebaaaaaca",
+    "acaaaaaabaceaaaa",
+    "bbbbbbbbbbbbbbbb",
+    "aaeabaaacacaaaca",
+    "caaabaaacaaaaaca",
+    "aaaabaaaaaaaaaaa",
+    "aaaabaaaabcaaaaa",
+    "aaaabaaaaaaaacaa",
+    "aaaabaaaacaaaaaa",
+    "caaabaaaaaaaaaae",
+    "bbbbbbbbbbbbbbbb"
+  ] },
+  "tile-keepwall": { w: 16, h: 16, pal: {"z":"#4a3d2e","m":"#5f4d38","a":"#6f5a40","g":"#3a2f24","e":"#cbb694"}, rows: [
+    "zzzzzzzzzzzzzzzz",
+    "zzzzzzzzzzzezzzz",
+    "memmmmmmmmmmmmmm",
+    "mmmmmmmemmmmmmme",
+    "aaaaaaaaaaaaaaaa",
+    "aaaaeaaaaaaaaaaa",
+    "aaaaaaaaaaaaaaaa",
+    "aaaaaaaaaaaaaaaa",
+    "mmmmmmmmmmmmmmmm",
+    "mmmmmmemmmmmmemm",
+    "zzzzzzzzzzzzzzez",
+    "zzzzzzzzzzzzzzzz",
+    "gggggggggggggggg",
+    "ggggggggggeggggg",
+    "gggggggggggggggg",
+    "gggggggggggggggg"
+  ] },
+  "tile-vergeturf": { w: 16, h: 16, pal: {"a":"#7fae52","b":"#6d9a45","s":"#dfe6ac","w":"#f2ecd8","d":"#5d8839"}, rows: [
+    "adaaawabaabwbaba",
+    "baadbaaaaaaaaaaa",
+    "aaabaabababaaaaa",
+    "aaabaaaaaaadaaba",
+    "aaaaaabaabaadaaa",
+    "aaaaababaaaaaaba",
+    "aasdaabadaaaaaaa",
+    "abwaaaabaaaaaaaa",
+    "waaaaaaasaaaaaaa",
+    "aabadaaaaaaaaaaa",
+    "aaaassabaasaabab",
+    "aaaabaaaabaaaaaa",
+    "aaaaaaaaaaabaaaa",
+    "abaaaaaaaaaaaada",
+    "abbaaaaabaaaaasa",
+    "aabababaaaaaaaaa"
+  ] },
+  "tile-vergefloor": { w: 16, h: 16, pal: {"a":"#ecdcb0","b":"#dec996","d":"#c0a96f"}, rows: [
+    "aaaaabaabaaaabaa",
+    "bdaaabaabbaaaaaa",
+    "baabaabaaaaaaaba",
+    "baaaaaaaaaaabbaa",
+    "aaabaaaaaaaababa",
+    "aaaaaaabaabaaaaa",
+    "aabaaaaaaaaaadaa",
+    "aaaaaaaaaddbbaaa",
+    "bdaadaaaabaadaaa",
+    "aabaaaaaaaaabaaa",
+    "aaaaaaaaaaabaaaa",
+    "aaaaabbaaaaaaaaa",
+    "aaabaaaaaabaaaba",
+    "aaabadbaaabaaaab",
+    "baaaaaaaaaadbaab",
+    "adaaaaaaaaaaaaaa"
+  ] },
+  "tile-vergepine": { w: 16, h: 16, pal: {"a":"#7fae52","b":"#6d9a45","t":"#3c6c36","u":"#2b5229","h":"#7fb069","k":"#5e4630"}, rows: [
+    "baaaaaaaaaabaaaa",
+    "aaaaaahhhhaaaaaa",
+    "abaahhhhhhhhbaaa",
+    "aaattthththhhaaa",
+    "aabatuutthttabaa",
+    "aaahthtttthuhaaa",
+    "aaattutuuhthtaba",
+    "aaaathtthttuaaaa",
+    "aaatuthuuuuutaab",
+    "aahhhtttutuhtuaa",
+    "aaatuhtthhthtaaa",
+    "baaaaaakkaabaaaa",
+    "aaaaaabkkaaaaaaa",
+    "abaaaaakkaaabaaa",
+    "aaaaaauuuuaaaaaa",
+    "aabaaaaaaaaaabaa"
+  ] },
+  "tile-prop-meteorpost": { w: 16, h: 16, pal: {"a":"#7fae52","b":"#6d9a45","w":"#dfe6ac","v":"#7a6cc4","p":"#b7aee0","d":"#6e5c40","k":"#8a7a5c"}, rows: [
+    "aaaaaabaaaaaabaa",
+    "aaaaaaapbbaaaaaa",
+    "abaaaaavvaaabaaa",
+    "aaaaaaavpawaaaaa",
+    "aaaaaaakdaaaaaab",
+    "abaabaakdaaaaabb",
+    "aaaaaaakdbaaaaab",
+    "baaaaaakdaaaaaaa",
+    "bawaaaakdaaababa",
+    "aaaaaaakdaabaabb",
+    "aaaabaakdaaaaaaa",
+    "aaabbaakdababaaa",
+    "aaabaaakdabaabaa",
+    "baaaaaddddaaaaaa",
+    "aaaaabaaaaabwaaa",
+    "aaaaaaaaaaawaaaa"
+  ] },
+  "tile-bloomturf": { w: 16, h: 16, pal: {"a":"#7d9a58","b":"#6b874b","p":"#e8b7cc","w":"#f2ecd8","d":"#5a763e"}, rows: [
+    "waaaaaabaaawaaaa",
+    "abaaaaaaabbaaaad",
+    "aaaaabbaaaabaaba",
+    "baaaaaabaaaaabaa",
+    "aaaaaaabaaaaaaaa",
+    "bbaaaaaaaababaaa",
+    "aaaaaapaaaaaaaab",
+    "aaaaaaaaaaaabaaa",
+    "baaaaaabaaaaabaa",
+    "ababaaaaaaaaaaad",
+    "aaaaaadaaaaaaaaa",
+    "aaaaaaaaaaaaaaaa",
+    "aabdaawaaabaaaba",
+    "apbbaaaaaaabwaab",
+    "aaabaaabaaaaaaab",
+    "aaaaaaaaaabaaaaa"
+  ] },
+  "tile-vernalfloor": { w: 16, h: 16, pal: {"a":"#eee0ba","b":"#dfcd9e","d":"#c2af80"}, rows: [
+    "abaaaaaaaadaaaaa",
+    "aaaaaaaaaaaaabaa",
+    "aaabbaaaaaaadaab",
+    "aadaaaaaaaaaaaaa",
+    "aaabaaaaaaaaadba",
+    "aaadaaaaaaaaaaaa",
+    "aaaaaaaaaaabaaab",
+    "aaaaaaaabdaaaaab",
+    "aaaaaaaaaaaaaaad",
+    "aaaaabaaaaabaaba",
+    "adabaaabaaaababb",
+    "aaaaaaaaaaaaaaba",
+    "aaaaaabaaaaaaaaa",
+    "aaadaaaaaaaabaaa",
+    "aaaaadaaaaaabaab",
+    "aaaaabdaaaaaaaba"
+  ] },
+  "tile-bloomelm": { w: 16, h: 16, pal: {"a":"#7d9a58","b":"#6b874b","t":"#4a7a3e","u":"#375e2f","h":"#8fbc72","p":"#eec2d4","w":"#f6eef2","k":"#5e4630"}, rows: [
+    "baaaaahhtuabaaaa",
+    "aaaahhppuuutaaaa",
+    "abhppwhhhttuttaa",
+    "ahphhhhpttutthta",
+    "athtphhutwppttta",
+    "atpthtthwthhhwta",
+    "aawtuuttttpuwpba",
+    "aatttthpptuhuhaa",
+    "aaapttuutththaab",
+    "aaatuptupttuuaaa",
+    "aaaauttuphutaaaa",
+    "baaaaaakkaabaaaa",
+    "aaaaaabkkaaaaaaa",
+    "abaaaaakkaaabaaa",
+    "aaaaaauupuaaaaaa",
+    "aabaaaaaaaaaabaa"
+  ] },
+  "tile-prop-petalpost": { w: 16, h: 16, pal: {"a":"#7d9a58","b":"#6b874b","w":"#f2ecd8","p":"#e8b7cc","d":"#5f5138","k":"#8a7a5c"}, rows: [
+    "aaaaaaaaaaaaaaaa",
+    "aaaaaaaaaaaaaaaa",
+    "aaaaabaaabaaaaaa",
+    "aaaaaaaabbaaaaba",
+    "bbbbaaakdaaaaaaa",
+    "aaaaaaakdaaaaaaa",
+    "aaaaaaakdaaaaaaa",
+    "aaaaabakdaaabaaa",
+    "abaabaakdaaaabaw",
+    "aabaaaakdaaaaaaa",
+    "aaaaaabkdaabaaaa",
+    "aaaaapakdaabaaaa",
+    "aaaappwkdppwaaaa",
+    "baawaaddddbaaaaa",
+    "aaaaaaaaaaaabaab",
+    "aaaaaaaaaaaaaaaw"
+  ] },
   "partner-back-bob": { base: "partner-back", w: 64, h: 64, pal: {}, shiftY: 2 },
   "partner-front-bob": { base: "partner-front", w: 64, h: 64, pal: {}, shiftY: 2 },
   "abomasnow-back-bob": { base: "abomasnow-back", w: 64, h: 64, pal: {}, shiftY: 2 },
@@ -127087,6 +127485,9 @@ for (const k of W17W_FLOOR_KINDS) TILE_ART[k] = 'tile-' + k;
 for (const k of W17X_PROP_KINDS) TILE_ART[k] = 'tile-prop-' + k;
 for (const k of W17X_WALL_KINDS) TILE_ART[k] = 'tile-' + k;
 for (const k of W17X_FLOOR_KINDS) TILE_ART[k] = 'tile-' + k;
+for (const k of W17Y_PROP_KINDS) TILE_ART[k] = 'tile-prop-' + k;
+for (const k of W17Y_WALL_KINDS) TILE_ART[k] = 'tile-' + k;
+for (const k of W17Y_FLOOR_KINDS) TILE_ART[k] = 'tile-' + k;
 // Premium+ W6 (TX-3/PL-1): door-open frames, authored in TX-3 for every
 // door kind. The warp-fade engine that plays them lands in W7 — W6
 // wires the frames (this registry + cache.doorOpen + doorOpenCanvas)
@@ -127934,8 +128335,8 @@ const CAVE_KINDS = new Set(['cavewall', 'cavefloor', 'caveboulder',
   // the same.
   'stepsrock', 'stepsfloor', 'spinerock', 'spinefloor',
   'zenithrock', 'zenithfloor']);
-const CAVE_FLOOR_KINDS = new Set(['cavefloor', 'lunefloor', 'darklunefloor', 'stratadeepfloor', 'crownfloor', 'junctionfloor', 'wetmillfloor', 'sprayfloor', 'gloomfloor', 'scorchfloor', 'cometfloor', 'borefloor', 'shaftfloor', 'doorfloor', 'kelpfloor', 'breathfloor', 'oldroadfloor', 'stepsfloor', 'spinefloor', 'zenithfloor']);
-const CAVE_WALL_KINDS = new Set(['cavewall', 'lunewall', 'darklunewall', 'stratadeepwall', 'crownwall', 'junctionwall', 'wetmillwall', 'spraywall', 'frostwall', 'thawwall', 'gloomwall', 'scorchrock', 'cometwall', 'borewall', 'shaftwall', 'doorwall', 'kelpwall', 'breathwall', 'ruinwall', 'stepsrock', 'spinerock', 'zenithrock']);
+const CAVE_FLOOR_KINDS = new Set(['cavefloor', 'lunefloor', 'darklunefloor', 'stratadeepfloor', 'crownfloor', 'junctionfloor', 'wetmillfloor', 'sprayfloor', 'gloomfloor', 'scorchfloor', 'cometfloor', 'borefloor', 'shaftfloor', 'doorfloor', 'kelpfloor', 'breathfloor', 'oldroadfloor', 'stepsfloor', 'spinefloor', 'zenithfloor', 'keepfloor']);
+const CAVE_WALL_KINDS = new Set(['cavewall', 'lunewall', 'darklunewall', 'stratadeepwall', 'crownwall', 'junctionwall', 'wetmillwall', 'spraywall', 'frostwall', 'thawwall', 'gloomwall', 'scorchrock', 'cometwall', 'borewall', 'shaftwall', 'doorwall', 'kelpwall', 'breathwall', 'ruinwall', 'stepsrock', 'spinerock', 'zenithrock', 'keepwall']);
 const DUNGEON_WALLS = new Set(['cavewall', 'towerwall', 'silphwall', 'plantwall',
   // Premium+ W6 (TX-5): the sub-theme wall kinds cast the same strip.
   'icewall', 'iceface', 'stratwall', 'bannerwall', 'cerwall', 'panelwall',
@@ -127964,7 +128365,9 @@ const DUNGEON_WALLS = new Set(['cavewall', 'towerwall', 'silphwall', 'plantwall'
   // Wave W17-U: the Ruined Path's wall kind casts the same strip.
   'ruinwall',
   // Wave W17-W: the Apex trilogy's wall kinds cast the same strip.
-  'stepsrock', 'spinerock', 'zenithrock']);
+  'stepsrock', 'spinerock', 'zenithrock',
+  // Wave W17-Y: Gallant Cavern's keep wall casts the same strip.
+  'keepwall']);
 const FLOOR_VARIANTS = {
   grass: 'grassVariants', path: 'pathVariants', cavefloor: 'caveFloorVariants',
   towerfloor: 'towerFloorVariants', silphfloor: 'silphFloorVariants', plantfloor: 'plantFloorVariants',
@@ -128724,7 +129127,7 @@ function resolveTileLayers(cache, kind, x, y, kindAt, t, phase, mapId) {
       }
       return layers.filter(Boolean);
     }
-    case 'cavewall': case 'lunewall': case 'darklunewall': case 'stratadeepwall': case 'crownwall': case 'junctionwall': case 'wetmillwall': case 'spraywall': case 'frostwall': case 'thawwall': case 'gloomwall': case 'scorchrock': case 'cometwall': case 'borewall': case 'shaftwall': case 'doorwall': case 'kelpwall': case 'breathwall': case 'ruinwall': case 'stepsrock': case 'spinerock': case 'zenithrock': {
+    case 'cavewall': case 'lunewall': case 'darklunewall': case 'stratadeepwall': case 'crownwall': case 'junctionwall': case 'wetmillwall': case 'spraywall': case 'frostwall': case 'thawwall': case 'gloomwall': case 'scorchrock': case 'cometwall': case 'borewall': case 'shaftwall': case 'doorwall': case 'kelpwall': case 'breathwall': case 'ruinwall': case 'stepsrock': case 'spinerock': case 'zenithrock': case 'keepwall': {
       // Strata walls by position hash; an exposed face (floor to the
       // south) wears the stalactite face. Perfection Pass Stage 2 Gate 0
       // (G0-5, standard B3): the face is DETERMINISTIC — 100% of exposed
@@ -129411,6 +129814,18 @@ function resolveTileLayers(cache, kind, x, y, kindAt, t, phase, mapId) {
     case 'reedpost':
     case 'bogpine':
     case 'lilypost':
+    // Wave W17-Y: the Borea tranche-5 route trees and signature
+    // props composite over their ground the same way (all arts are
+    // fully opaque — each route's own ground is baked in at its
+    // measured colours).
+    case 'saltpine':
+    case 'rackpost':
+    case 'gallantelm':
+    case 'lightpost':
+    case 'vergepine':
+    case 'meteorpost':
+    case 'bloomelm':
+    case 'petalpost':
     // Wave T17: the radio mast composites over its compound grass too.
     case 'radiomast': {
       // Object tiles carry transparent surrounds (Wave 1): lay the ground
@@ -137118,6 +137533,24 @@ const WALKABLE = new Set(['.', ',', 'D', 'E', 'C', 'F', 'J', 'K', '1', '2', 'V',
   // 1422-1431 on their parallel branches); 1111 stays
   // empty.)
   ...[1432, 1433, 1436, 1437, 1440, 1441, 1444, 1445, 1448, 1449]
+    .map((i) => String.fromCodePoint(0x1E00 + i)),
+  // Wave W17-Y: the Borea tranche-5 ground/path chars
+  // (U+1E00+1452.., tiles.mjs W17Y_KIND_DEFS) are walkable —
+  // saltturf/saltfloor (Route 213), gallantturf/gallantfloor
+  // (Lake Gallant), keepfloor (Gallant Cavern, swapped 1:1
+  // from the walkable cavefloor char), vergeturf/vergefloor
+  // (Route 214) and bloomturf/vernalfloor (Vernal Path),
+  // each swapped 1:1 from the walkable '_' ground / '.'
+  // path chars on its own route, so ground stays ground and
+  // path stays path. The tree chars (1454, 1458, 1464,
+  // 1468), prop chars (1455, 1459, 1465, 1469) and the
+  // keepwall char (1461, swapped from cavewall) are NOT
+  // here: trees, props and walls were never walkable.
+  // (Indices 1452-1469 per the Borea program plan; the
+  // Borea allocation opened at 1384 (W17-U takes 1384-1401,
+  // W17-V 1402-1421, W17-W 1422-1431 and W17-X 1432-1451 on
+  // their parallel branches); 1111 stays empty.)
+  ...[1452, 1453, 1456, 1457, 1460, 1462, 1463, 1466, 1467]
     .map((i) => String.fromCodePoint(0x1E00 + i))]);
 
 // Trainer definitions for the slice.
@@ -169078,22 +169511,22 @@ const MAPS9 = {
     "music": "route1-theme",
     "weather": "clear",
     "rows": [
-      "##########################",
-      "#,_____,______F________,Ẉ#",
-      "#,____,F______,,__F___,__#",
-      "#____F,______Ẉ___~~~~~~F_#",
-      "#_,__________Ẉ___~~~~~~__#",
-      "#_,_,__,_#_______~~~~~~__#",
-      "#,n____,____________,____#",
-      "#___,_______S,__F__,R____#",
-      "..........................",
-      "..........................",
-      "#_F__F_F_,F___,n___,__,__#",
-      "#_______,,_R,_,__,F,__,_,#",
-      "#__,_,,_,_,______,_______#",
-      "#_,_,____F___,_,__F______#",
-      "#_,,_,_,___,_,_F___,____,#",
-      "##########################",
+      "⎮⎮⎮⎮⎮⎮⎮⎮⎮⎮⎮⎮⎮⎮⎮⎮⎮⎮⎮⎮⎮⎮⎮⎮⎮⎮",
+      "⎮,⎬⎬⎬⎬⎬,⎬⎬⎬⎬⎬⎬F⎬⎬⎬⎬⎬⎬⎬⎬,Ẉ⎮",
+      "⎮,⎬⎬⎬⎬,F⎬⎬⎬⎬⎬⎬,,⎬⎬F⎬⎬⎬,⎬⎬⎮",
+      "⎮⎬⎬⎬⎬F,⎬⎬⎬⎬⎬⎬Ẉ⎬⎬⎬~~~~~~F⎬⎮",
+      "⎮⎬,⎬⎬⎬⎬⎬⎬⎬⎬⎬⎬Ẉ⎬⎬⎯~~~~~~⎯⎬⎮",
+      "⎮⎬,⎬,⎬⎬,⎬⎮⎬⎬⎬⎬⎬⎬⎬~~~~~~⎬⎬⎮",
+      "⎮,n⎬⎬⎬⎬,⎬⎬⎬⎬⎬⎬⎬⎬⎬⎬⎬⎬,⎬⎬⎬⎬⎮",
+      "⎮⎬⎬⎬,⎬⎬⎬⎬⎬⎬⎬S,⎬⎬F⎬⎬,R⎬⎬⎬⎬⎮",
+      "⎭⎭⎭⎭⎭⎭⎭⎭⎭⎭⎭⎭⎭⎭⎭⎭⎭⎭⎭⎭⎭⎭⎭⎭⎭⎭",
+      "⎭⎭⎭⎭⎭⎭⎭⎭⎭⎭⎭⎭⎭⎭⎭⎭⎭⎭⎭⎭⎭⎭⎭⎭⎭⎭",
+      "⎮⎬F⎬⎬F⎬F⎬,F⎬⎬⎬,n⎬⎬⎬,⎬⎬,⎬⎬⎮",
+      "⎮⎬⎬⎬⎬⎬⎬⎬,,⎬R,⎬,⎬⎬,F,⎬⎬,⎬,⎮",
+      "⎮⎬⎬,⎬,,⎬,⎬,⎬⎬⎬⎬⎬⎬,⎬⎬⎬⎬⎬⎬⎬⎮",
+      "⎮⎬,⎬,⎬⎬⎬⎬F⎬⎬⎬,⎬,⎬⎬F⎬⎬⎬⎬⎬⎬⎮",
+      "⎮⎬,,⎬,⎬,⎬⎬⎬,⎬,⎬F⎬⎬⎬,⎬⎬⎬⎬,⎮",
+      "⎮⎮⎮⎮⎮⎮⎮⎮⎮⎮⎮⎮⎮⎮⎮⎮⎮⎮⎮⎮⎮⎮⎮⎮⎮⎮",
     ],
     "warps": [
       {"x": 0, "y": 8, "to": {"map": "pastoria", "x": 26, "y": 8}},
@@ -169119,24 +169552,24 @@ const MAPS9 = {
     "music": "route1-theme",
     "weather": "clear",
     "rows": [
-      "###########..###########",
-      "#___,__F___..,________F#",
-      "#,__,___Ẉ__..#,_____R,,#",
-      "#__,______,..__F__n_F,,#",
-      "#__F_______.._,__R_nn__#",
-      "#___,_____R..____F#,___#",
-      "#_,,__,__,_.._,__,_F___#",
-      "#_,,_,_Ẉ_,,.._______S,_#",
-      "#_,_______F.............",
-      "#,______,__.............",
-      "#__,__,_,__..__,F______#",
-      "#,__~~~~~,F.._________n#",
-      "#__F~~~~~_,..,,F____,__#",
-      "#_,_~~~~~__..Ẉ__F_____F#",
-      "#_nn___,___.._,___FẈ___#",
-      "#_,_,R_____..S____,,___#",
-      "#_R_______,.._,______R_#",
-      "###########..###########",
+      "⎸⎸⎸⎸⎸⎸⎸⎸⎸⎸⎸⎷⎷⎸⎸⎸⎸⎸⎸⎸⎸⎸⎸⎸",
+      "⎸⎶⎶⎶,⎶⎶F⎶⎶⎹⎷⎷,⎹⎶⎶⎶⎶⎶⎶⎶F⎸",
+      "⎸,⎶⎶,⎶⎶⎶Ẉ⎶⎶⎷⎷⎸,⎶⎶⎶⎶⎶R,,⎸",
+      "⎸⎶⎶,⎶⎶⎶⎶⎶⎶,⎷⎷⎶⎶F⎶⎶n⎶F,,⎸",
+      "⎸⎶⎶F⎶⎶⎶⎶⎶⎶⎶⎷⎷⎶,⎶⎶R⎶nn⎶⎶⎸",
+      "⎸⎶⎶⎶,⎶⎶⎶⎶⎶R⎷⎷⎶⎶⎶⎶F⎸,⎶⎶⎶⎸",
+      "⎸⎶,,⎶⎶,⎶⎶,⎶⎷⎷⎶,⎶⎶,⎶F⎶⎶⎶⎸",
+      "⎸⎶,,⎶,⎶Ẉ⎶,,⎷⎷⎶⎶⎶⎶⎶⎶⎶S,⎶⎸",
+      "⎸⎶,⎶⎶⎶⎶⎶⎶⎶F⎷⎷⎷⎷⎷⎷⎷⎷⎷⎷⎷⎷⎷",
+      "⎸,⎶⎶⎶⎶⎶⎶,⎶⎶⎷⎷⎷⎷⎷⎷⎷⎷⎷⎷⎷⎷⎷",
+      "⎸⎶⎶,⎶⎶,⎶,⎶⎶⎷⎷⎶⎶,F⎶⎶⎶⎶⎶⎶⎸",
+      "⎸,⎶⎶~~~~~,F⎷⎷⎶⎶⎶⎶⎶⎶⎶⎶⎶n⎸",
+      "⎸⎶⎶F~~~~~⎶,⎷⎷,,F⎶⎶⎶⎶,⎶⎶⎸",
+      "⎸⎶,⎶~~~~~⎶⎶⎷⎷Ẉ⎶⎶F⎶⎶⎶⎶⎶F⎸",
+      "⎸⎶nn⎶⎶⎶,⎶⎶⎶⎷⎷⎶,⎶⎶⎶FẈ⎶⎶⎶⎸",
+      "⎸⎶,⎶,R⎶⎶⎶⎶⎶⎷⎷S⎶⎶⎶⎶,,⎶⎶⎶⎸",
+      "⎸⎶R⎶⎶⎶⎶⎶⎶⎶,⎷⎷⎶,⎶⎶⎶⎶⎶⎶R⎶⎸",
+      "⎸⎸⎸⎸⎸⎸⎸⎸⎸⎸⎸⎷⎷⎸⎸⎸⎸⎸⎸⎸⎸⎸⎸⎸",
     ],
     "warps": [
       {"x": 11, "y": 17, "to": {"map": "lake-valor", "x": 13, "y": 1}},
@@ -169165,22 +169598,22 @@ const MAPS9 = {
     "music": "route1-theme",
     "weather": "clear",
     "rows": [
-      "##########################",
-      "#_,,R___,_F_,________,___#",
-      "#___#____________________#",
-      "#___F,,,,,F_____,_,__#,_,#",
-      "#____,,,,,,____,___,_____#",
-      "#___,,,,,,,_F___,,_______#",
-      "#______,____,____,,_____,#",
-      "#FFF__,____,S,__F_,______#",
-      "..........................",
-      "..........................",
-      "#_,F_,___,_______,R,,__,,#",
-      "#_____,_____,__n_F______F#",
-      "#___,F__,___________,____#",
-      "#__,_F,____,________,,_,_#",
-      "#_________,___F_F,_,___F_#",
-      "##########################",
+      "⎼⎼⎼⎼⎼⎼⎼⎼⎼⎼⎼⎼⎼⎼⎼⎼⎼⎼⎼⎼⎼⎼⎼⎼⎼⎼",
+      "⎼⎺,,R⎺⎺⎺,⎺F⎺,⎺⎺⎺⎺⎺⎺⎺⎺,⎺⎺⎺⎼",
+      "⎼⎺⎺⎺⎼⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎼",
+      "⎼⎺⎺⎺F,,,,,F⎺⎺⎺⎺⎺,⎺,⎺⎺⎼,⎺,⎼",
+      "⎼⎺⎺⎺⎺,,,,,,⎺⎺⎺⎺,⎺⎺⎺,⎺⎺⎺⎺⎺⎼",
+      "⎼⎺⎺⎺,,,,,,,⎺F⎺⎺⎺,,⎺⎺⎺⎺⎺⎺⎺⎼",
+      "⎼⎺⎺⎺⎺⎺⎺,⎺⎺⎺⎺,⎺⎺⎺⎺,,⎺⎺⎺⎺⎺,⎼",
+      "⎼FFF⎽⎺,⎺⎺⎺⎺,S,⎺⎺F⎽,⎺⎺⎺⎺⎺⎺⎼",
+      "⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻",
+      "⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻⎻",
+      "⎼⎺,F⎺,⎺⎺⎺,⎺⎺⎺⎺⎺⎺⎺,R,,⎺⎺,,⎼",
+      "⎼⎺⎺⎺⎺⎺,⎺⎺⎺⎺⎺,⎺⎺n⎺F⎺⎺⎺⎺⎺⎺F⎼",
+      "⎼⎺⎺⎺,F⎺⎺,⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺,⎺⎺⎺⎺⎼",
+      "⎼⎺⎺,⎺F,⎺⎺⎺⎺,⎺⎺⎺⎺⎺⎺⎺⎺,,⎺,⎺⎼",
+      "⎼⎺⎺⎺⎺⎺⎺⎺⎺⎺,⎺⎺⎺F⎺F,⎺,⎺⎺⎺F⎺⎼",
+      "⎼⎼⎼⎼⎼⎼⎼⎼⎼⎼⎼⎼⎼⎼⎼⎼⎼⎼⎼⎼⎼⎼⎼⎼⎼⎼",
     ],
     "warps": [
       {"x": 0, "y": 8, "to": {"map": "r214", "x": 22, "y": 8}},
@@ -169825,24 +170258,24 @@ const MAPS9 = {
     "music": "viridian-theme",
     "weather": "clear",
     "rows": [
-      "#############..#############",
-      "#,_,,_______,..____,___,___#",
-      "#_________FF_..____________#",
-      "#,_,_R_,_____..__,Fn_____,,#",
-      "#RRRRRRRRRRRRLLRRRRRRRRRRRR#",
-      "#_________R__..S,,________,#",
-      "#_________F__..____________#",
-      "#_____S_,__F_..____,_____,##",
-      "............................",
-      "............................",
-      "#____,_~~~~~~~~~~~~~_______#",
-      "#_F#__F~~~~~~~~~~~~~_______#",
-      "#,_____~~~~~~~~~~~~~#______#",
-      "#______~~~~~~~~~~~~~_______#",
-      "#,,F___~~~~~~~~~~~~~_F__F__#",
-      "#,,__,_~~~~~~~~~~~~~_______#",
-      "#___,,,__F___,___#_______,_#",
-      "############################",
+      "⎲⎲⎲⎲⎲⎲⎲⎲⎲⎲⎲⎲⎲⎱⎱⎲⎲⎲⎲⎲⎲⎲⎲⎲⎲⎲⎲⎲",
+      "⎲,⎰,,⎰⎰⎰⎰⎰⎰⎰,⎱⎱⎰⎰⎰⎰,⎰⎰⎰,⎰⎰⎰⎲",
+      "⎲⎰⎰⎰⎰⎰⎰⎰⎰⎰FF⎰⎱⎱⎰⎰⎰⎰⎰⎰⎰⎰⎰⎰⎰⎰⎲",
+      "⎲,⎰,⎰R⎰,⎰⎰⎰⎰⎰⎱⎱⎰⎰,Fn⎰⎰⎰⎰⎰,,⎲",
+      "⎲RRRRRRRRRRRRLLRRRRRRRRRRRR⎲",
+      "⎲⎰⎰⎰⎰⎰⎰⎰⎰⎰R⎰⎰⎱⎱S,,⎰⎰⎰⎰⎰⎰⎰⎰,⎲",
+      "⎲⎰⎰⎰⎰⎰⎰⎰⎰⎰F⎰⎰⎱⎱⎰⎰⎰⎰⎰⎰⎰⎰⎰⎰⎰⎰⎲",
+      "⎲⎰⎰⎰⎰⎰S⎰,⎰⎰F⎰⎱⎱⎰⎰⎰⎰,⎰⎰⎰⎰⎰,⎲⎲",
+      "⎱⎱⎱⎱⎱⎱⎱⎱⎱⎱⎱⎱⎱⎱⎱⎱⎱⎱⎱⎱⎱⎱⎱⎱⎱⎱⎱⎱",
+      "⎱⎱⎱⎱⎱⎱⎱⎱⎱⎱⎱⎱⎱⎱⎱⎱⎱⎱⎱⎱⎱⎱⎱⎱⎱⎱⎱⎱",
+      "⎲⎰⎰⎰⎰,⎳~~~~~~~~~~~~~⎳⎰⎰⎰⎰⎰⎰⎲",
+      "⎲⎰F⎲⎰⎰F~~~~~~~~~~~~~⎰⎰⎰⎰⎰⎰⎰⎲",
+      "⎲,⎰⎰⎰⎰⎰~~~~~~~~~~~~~⎲⎰⎰⎰⎰⎰⎰⎲",
+      "⎲⎰⎰⎰⎰⎰⎰~~~~~~~~~~~~~⎰⎰⎰⎰⎰⎰⎰⎲",
+      "⎲,,F⎰⎰⎰~~~~~~~~~~~~~⎰F⎰⎰F⎰⎰⎲",
+      "⎲,,⎰⎰,⎰~~~~~~~~~~~~~⎰⎰⎰⎰⎰⎰⎰⎲",
+      "⎲⎰⎰⎰,,,⎰⎰F⎰⎰⎰,⎰⎰⎰⎲⎰⎰⎰⎰⎰⎰⎰,⎰⎲",
+      "⎲⎲⎲⎲⎲⎲⎲⎲⎲⎲⎲⎲⎲⎲⎲⎲⎲⎲⎲⎲⎲⎲⎲⎲⎲⎲⎲⎲",
     ],
     "warps": [
       {"x": 0, "y": 8, "to": {"map": "r213", "x": 24, "y": 8}},
@@ -169873,16 +170306,16 @@ const MAPS9 = {
     "music": "pewter-theme",
     "indoor": true,
     "rows": [
-      "GGGGGGGGGGGGGGGG",
-      "GLLLLLLLLLLLLLLG",
-      "GLL~~~~~SLLLLLLG",
-      "GLL~~~~~LLLLLLLG",
-      "GLý~~~~~NNLLLLLG",
-      "GLLLLLLLLLLLLLLG",
-      "GLLLLLLLLLLLLLLG",
-      "GLLýLLLLLLLLLLLG",
-      "GLLLLLLLLLLLLNLG",
-      "GGGGGGGLLGGGGGGG",
+      "⎵⎵⎵⎵⎵⎵⎵⎵⎵⎵⎵⎵⎵⎵⎵⎵",
+      "⎵⎴⎴⎴⎴⎴⎴⎴⎴⎴⎴⎴⎴⎴⎴⎵",
+      "⎵⎴⎴~~~~~S⎴⎴⎴⎴⎴⎴⎵",
+      "⎵⎴⎴~~~~~⎴⎴⎴⎴⎴⎴⎴⎵",
+      "⎵⎴ý~~~~~NN⎴⎴⎴⎴⎴⎵",
+      "⎵⎴⎴⎴⎴⎴⎴⎴⎴⎴⎴⎴⎴⎴⎴⎵",
+      "⎵⎴⎴⎴⎴⎴⎴⎴⎴⎴⎴⎴⎴⎴⎴⎵",
+      "⎵⎴⎴ý⎴⎴⎴⎴⎴⎴⎴⎴⎴⎴⎴⎵",
+      "⎵⎴⎴⎴⎴⎴⎴⎴⎴⎴⎴⎴⎴N⎴⎵",
+      "⎵⎵⎵⎵⎵⎵⎵⎴⎴⎵⎵⎵⎵⎵⎵⎵",
     ],
     "warps": [
       {"x": 7, "y": 9, "to": {"map": "lake-valor", "x": 13, "y": 5}},
