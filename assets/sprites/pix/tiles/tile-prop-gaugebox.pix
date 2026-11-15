@@ -1,0 +1,27 @@
+# Wave W17-P (Route 119): gauge box — a Weather Institute rain-gauge box on its post: a lidded instrument box with a pale funnel at its head and fine measurement lines ruled down its face, logging every drop that falls on this route (design: the Institute keeps the ledgers; its gauge boxes stand along the rain road like small patient clerks). On gauge turf (fully opaque, ground baked in) — split from Route 118’s hand-cut ford posts by instrument: the river’s gauge is read by eye, the Institute’s by ledger.
+PIX tile-prop-gaugebox 16 16
+baaaaabbbbaaaaaa
+aaaaaaababaaaaaa
+aaaaaaabaaaaaaaa
+aabbaaawwababaaa
+aabaaaassaaaaaaa
+aabaawwwwwwaaaaa
+bbaaaxwwxxxaaaaa
+aamaaxwwxxxaaaaa
+aaaaaxwwxxxaaaaa
+aaaaaxxxxxxaaaaa
+aaaaaaakdaaaaaba
+aaaaaaakdabaaaba
+baaaaaakdamaabab
+baaabaddddbbabaa
+abaaaaaaaaaaabaa
+baaaaabaaaaaaaaa
+PAL
+a #5d8f52
+b #4d7c44
+m #d8d2b8
+x #8a6f4d
+w #e8e4d2
+s #b9ccd4
+d #7d5a34
+k #6e5233

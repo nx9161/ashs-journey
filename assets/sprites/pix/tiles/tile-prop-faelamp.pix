@@ -1,0 +1,26 @@
+# Wave W17-P (Route 117): fae lamp — a ROSEFAE lantern post of the flower fields: a slim post carrying a slow green lamp globe at its head, the light the fields’ keepers swear burns a little greener when the ROSEFAE are near (design: lantern posts along the flower road, their green lamp heads drawn slow and alive). On day turf (fully opaque, ground baked in) — the fleet’s only lamp post: split from every marker post by the glowing green head, which marks nothing but the fields themselves.
+PIX tile-prop-faelamp 16 16
+aaaaaabaaaaaaaba
+aaaaaaaaaaaabaaa
+aaaaaaaaaaaaaabw
+aawaaabppabawbaa
+aaaaaaplppaabaaa
+abaaaapplpaaaaba
+awaaaaappbbaaaaa
+aaaaaaakdaabaaaw
+abbaaaakdaaaaaaa
+aaaaaabkdaaabaaa
+abwaaaakdaaaaaaa
+aaaaaabkdaabaaaa
+aaaabaakdaaaaaaa
+abaaaaddddaaaaab
+aaabaaaaaaaaaaba
+aabaaaabaabaaaab
+PAL
+a #79b45e
+b #67a04e
+w #eef3d4
+p #79c98a
+l #d8f2c8
+d #7d5a34
+k #8a6844

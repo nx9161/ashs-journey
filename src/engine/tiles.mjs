@@ -3463,6 +3463,96 @@ W17O_KIND_DEFS.forEach(([kind], i) => {
 export const W17O_PROP_KINDS = W17O_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
 export const W17O_WALL_KINDS = W17O_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
 export const W17O_FLOOR_KINDS = W17O_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
+// Wave W17-P (Route Build Program, Maris Tranche 5 — tunnel
+// hill, flower fields, the river road, the rain begins):
+// Route 116 -> Copperbore Tunnel -> Route 117 -> Route 118 ->
+// Route 119. All five maps are defined once in maps7.mjs (no
+// dual copies in Maris, so no registry re-pins arise).
+// Conversions are char-for-char kind swaps on grassground/
+// path/tree (land routes) or cavefloor/cavewall (Copperbore,
+// cave method); encounter cells/tables, warps, NPC posts,
+// sign records/texts and every shipped biome/dressing kind
+// stay byte-identical. Route 116 "Tunnel Hill" (1322-1325):
+// echoturf is quiet hill grass with hushed pale flecks,
+// echofloor tunnel-hill sand (design-authorised), echopine a
+// thickening hill pine, echopost echo marker posts x2 at the
+// tunnel mouth approach; pond water (15), rock dressing (18)
+// and the 2 'L' tunnel-mouth warp cells standing on cavefloor
+// stay byte-identical. Twin: Route 117 — R116 is the quiet
+// hill, R117 the loud flower fields. Copperbore Tunnel
+// "Copperbore" (1326-1327) converts by the cave method:
+// borefloor takes the generic cavefloor (tidy dug-bore flags,
+// tool-marked) and borewall takes the cavewall (chalk-X
+// inspection wall, the design's lamps/X-marks drawn in the
+// wall kind's art, art layer only); water (15), cavecrystal
+// (7) and caveboulder (5) stay byte-identical, the trigger
+// census is taken before/after, and NO props are placed
+// (cave discipline). Twin: Scorch Path — Copperbore is the
+// tidy cool bore, Scorch the hot lit heart. Route 117
+// "Flower Fields" (1328-1331): dayturf is field green under
+// the flower beds, dayfloor flower-road pale sand
+// (design-authorised), dayelm a broad field elm, faelamp
+// ROSEFAE lantern posts x2 (slow green lamp heads); the
+// shipped flower beds (62) are the route's dressing —
+// byte-preserved entire, the ground converts around them —
+// and the Day-Care fence (3) + haycarts (2) stay
+// byte-identical. Route 118 "River Road" (1332-1335):
+// fordturf is river-bank turf with wet-edge flecks,
+// fordfloor bank-road sand (design-authorised), fordwillow
+// the fleet's only willow (drooping crown drawn in the tree
+// art), fordpost ford-end depth-gauge posts x2 flanking the
+// plank crossing; river water (48) and the ford planks
+// themselves — the shipped boardwalk kind (8) — stay
+// byte-identical BY SPEC (Director ruling #3: the planks are
+// older than the road and prouder; the route's own path kind
+// runs the banks). Route 119 "Rain Road (Maris)"
+// (1336-1339): gaugeturf is rain-soaked deep green with
+// mushroom-pale flecks, gaugefloor rain-road sand — darker,
+// puddle-polished (split from Yamato's rainfloor by the gorge
+// register + gauge dressing), gaugepine a drip-crowned rain
+// pine, gaugebox Weather Institute rain-gauge boxes x2;
+// river gorge water (96), boardwalk (8) and leafplanters (3)
+// stay byte-identical; weather: rain (permanent). Twin:
+// Route 120 — R119 climbs in rain, R120 holds the long-rain
+// secrets. Ground kinds deliberately do NOT end in 'floor'
+// (the desire-path audit counts '*floor' as street tier;
+// grounds must never masquerade as street); path kinds DO
+// end in 'floor' so they register as the route's path tier
+// per route (checklist point 3). Indices 1322-1339 per the
+// program plan (WAVE-W17-MARIS-ROUTE-PROGRAM-PLAN.md): W17-L
+// took 1257-1276, W17-M 1277-1286, W17-N 1287-1303, and
+// W17-O takes 1304-1321 on its parallel branch; 1111 and
+// every earlier documented gap stay empty. Kind names
+// verified unclaimed against origin/main. Chars U+1E00+1322..
+export const W17P_KIND_DEFS = [
+  ['echoturf', 'floor'],
+  ['echofloor', 'floor'],
+  ['echopine', 'wall'],
+  ['echopost', 'prop'],
+  ['borefloor', 'floor'],
+  ['borewall', 'wall'],
+  ['dayturf', 'floor'],
+  ['dayfloor', 'floor'],
+  ['dayelm', 'wall'],
+  ['faelamp', 'prop'],
+  ['fordturf', 'floor'],
+  ['fordfloor', 'floor'],
+  ['fordwillow', 'wall'],
+  ['fordpost', 'prop'],
+  ['gaugeturf', 'floor'],
+  ['gaugefloor', 'floor'],
+  ['gaugepine', 'wall'],
+  ['gaugebox', 'prop'],
+];
+export const W17P_KIND_CHARS = {};
+W17P_KIND_DEFS.forEach(([kind], i) => {
+  const ch = String.fromCodePoint(0x1E00 + 1322 + i);
+  W17P_KIND_CHARS[kind] = ch;
+  TILE_CHARS[ch] = kind;
+});
+export const W17P_PROP_KINDS = W17P_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
+export const W17P_WALL_KINDS = W17P_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
+export const W17P_FLOOR_KINDS = W17P_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
 export const SINNOH_TOWN_GROUND_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg);
 export const SINNOH_TOWN_GROUND2_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg2);
 // TX-3: the 8 gym exteriors by town (original type-accent motifs).

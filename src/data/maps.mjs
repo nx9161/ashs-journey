@@ -1194,6 +1194,23 @@ export const WALKABLE = new Set(['.', ',', 'D', 'E', 'C', 'F', 'J', 'K', '1', '2
   // and W17-N takes 1287-1303 on its parallel branch; 1111
   // stays empty.)
   ...[1304, 1305, 1308, 1309, 1312, 1313, 1316, 1318, 1319]
+    .map((i) => String.fromCodePoint(0x1E00 + i)),
+  // Wave W17-P: the Maris tranche-5 ground/path chars
+  // (U+1E00+1322.., tiles.mjs W17P_KIND_DEFS) are walkable —
+  // echoturf/echofloor (Route 116), borefloor (Copperbore
+  // Tunnel, swapped 1:1 from the walkable 'L' cavefloor),
+  // dayturf/dayfloor (Route 117), fordturf/fordfloor
+  // (Route 118) and gaugeturf/gaugefloor (Route 119), each
+  // swapped 1:1 from the walkable '_' ground / '.' path chars
+  // on its own route, so ground stays ground and path stays
+  // path. The tree chars (1324, 1330, 1334, 1338), prop chars
+  // (1325, 1331, 1335, 1339) and the borewall wall char (1327,
+  // swapped from the 'G' cavewall, never walkable) are NOT
+  // here: trees, props and walls were never walkable.
+  // (Indices 1322-1339 per the Maris program plan; W17-L took
+  // 1257-1276, W17-M 1277-1286, W17-N 1287-1303 and W17-O
+  // takes 1304-1321 on its parallel branch; 1111 stays empty.)
+  ...[1322, 1323, 1326, 1328, 1329, 1332, 1333, 1336, 1337]
     .map((i) => String.fromCodePoint(0x1E00 + i))]);
 
 // Trainer definitions for the slice.
