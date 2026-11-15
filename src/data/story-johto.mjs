@@ -918,7 +918,7 @@ export const JOHTO_NPCS = [
     dialogue: ['Two towers, one skyline, and a story older than both. Ask, if you have the time it deserves.'] },
   { map: 'dance-theater', x: 5, y: 8, name: 'KIMONO SISTER MOEKO', art: 'kimono', dir: 'down', johto: 'kimono_bell',
     dialogue: ['We dance the tower\'s seasons. The eldest of us keeps something for the tower, too.'] },
-  { map: 'mahogany', x: 20, y: 6, name: 'SHOPKEEPER PELL', art: 'clerk', dir: 'down', johto: 'hideout_stairs', hideoutWarp: 'rocket-hideout',
+  { map: 'mahogany', x: 20, y: 6, name: 'SHOPKEEPER PELL', art: 'clerk-yamato', dir: 'down', johto: 'hideout_stairs', hideoutWarp: 'rocket-hideout',
     dialogue: ['Souvenirs above. Storage below. Mind the stairs — they are steeper than they look, and they look steep.'] },
   // ---- Stage J6: the Day-Care couple. The keeper already stands in
   // the maps6 interior (stamped johto:'daycare' by JOHTO_NPC_PATCHES

@@ -261,7 +261,7 @@ export const MAPS7 = {
         "x": 18,
         "y": 12,
         "name": "MART CLERK",
-        "art": "clerk",
+        "art": "clerk-maris",
         "skin": "#f0c8a0",
         "shirt": "#c05a3a",
         "pants": "#2a2a3a",
@@ -447,7 +447,7 @@ export const MAPS7 = {
       {"x": 11, "y": 11, "name": "TRACKER ODO", "art": "hiker", "skin": "#e8b888", "shirt": "#3a6ac0", "pants": "#2a3a4a", "hair": "#1a1a1a", "dialogue": ["Footprints tell you who passed, what they carried, and whether they were running.", "Something rare-footed crossed the north shore last week. Four toes. I said nothing to anyone but you."]},
       {"x": 17, "y": 6, "name": "MIRA", "art": "lass", "skin": "#c89878", "shirt": "#2a7a6a", "pants": "#3a3a4a", "hair": "#7a4a1a", "dialogue": ["The flower clock blooms on the hour. The whole town sets its heart by it.", "Eldergrove is small because the roads took the rest. We don't mind."]},
       {"x": 5, "y": 13, "name": "OLD SETH", "art": "elder", "skin": "#e8b888", "shirt": "#b0503c", "pants": "#2a2a3a", "hair": "#5a3a2a", "dialogue": ["Every trainer in Maris has stood where you're standing, deciding.", "Decide slow, walk fast. That's the whole secret, and it isn't one."]},
-      {"x": 8, "y": 4, "name": "MART CLERK", "art": "clerk", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#4a3a2a", "dialogue": ["Eldergrove Mart — first supplies on the road north. The flower seeds are not for sale. Again."], "mart": {"stock": ["pokeball", "greatball", "potion", "superpotion", "antidote", "awakening"]}},
+      {"x": 8, "y": 4, "name": "MART CLERK", "art": "clerk-maris", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#4a3a2a", "dialogue": ["Eldergrove Mart — first supplies on the road north. The flower seeds are not for sale. Again."], "mart": {"stock": ["pokeball", "greatball", "potion", "superpotion", "antidote", "awakening"]}},
     ],
     "encounters": {"rate": 0.12, "table": [{"species": "zigzagoon", "min": 201, "max": 205, "weight": 28}, {"species": "poochyena", "min": 201, "max": 205, "weight": 26}, {"species": "wurmple", "min": 202, "max": 205, "weight": 20}, {"species": "lotad", "min": 202, "max": 206, "weight": 12}, {"species": "seedot", "min": 202, "max": 206, "weight": 12}], "water": [{"species": "tentacool", "min": 202, "max": 210, "weight": 28}, {"species": "magikarp", "min": 202, "max": 208, "weight": 24}, {"species": "wingull", "min": 203, "max": 210, "weight": 20}, {"species": "pelipper", "min": 206, "max": 212, "weight": 8}], "waterRate": 0.08},
     "items": [],
@@ -509,7 +509,7 @@ export const MAPS7 = {
       {"x": 11, "y": 6, "name": "EMIL’S NEIGHBOR UNA", "art": "lady", "skin": "#d8a878", "shirt": "#7a4a8a", "pants": "#2a2a3a", "hair": "#c0c0c0", "dialogue": ["A shy boy from this street went out with a borrowed Kin and came back standing taller.", "The gym leader's family keeps the ponds. Balance is a household habit here."]},
       {"x": 20, "y": 6, "name": "BALANCE KEEPER ORIN", "art": "gent", "skin": "#e8b888", "shirt": "#3a6ac0", "pants": "#2a3a4a", "hair": "#1a1a1a", "dialogue": ["I trim the pond reeds to the same height on both banks. It matters. It does.", "Route 104's woods begin north of town. Mind the DOZSLOTH — they mind nothing."]},
       {"x": 10, "y": 14, "name": "FISHER LIO", "art": "fisher", "skin": "#c89878", "shirt": "#2a7a6a", "pants": "#3a3a4a", "hair": "#7a4a1a", "dialogue": ["Pond fishing is patience practice. The gym is the exam.", "STRIDLET walk the surface here like it owes them money."]},
-      {"x": 9, "y": 4, "name": "MART CLERK", "art": "clerk", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#4a3a2a", "dialogue": ["Meadowbrook Mart — woods-ready stock. Bug spray is a state of mind; we sell the other kind too."], "mart": {"stock": ["pokeball", "greatball", "potion", "superpotion", "antidote", "awakening"]}},
+      {"x": 9, "y": 4, "name": "MART CLERK", "art": "clerk-maris", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#4a3a2a", "dialogue": ["Meadowbrook Mart — woods-ready stock. Bug spray is a state of mind; we sell the other kind too."], "mart": {"stock": ["pokeball", "greatball", "potion", "superpotion", "antidote", "awakening"]}},
     ],
     "encounters": {"rate": 0.12, "table": [{"species": "zigzagoon", "min": 203, "max": 207, "weight": 24}, {"species": "poochyena", "min": 203, "max": 207, "weight": 20}, {"species": "wurmple", "min": 203, "max": 207, "weight": 16}, {"species": "taillow", "min": 204, "max": 208, "weight": 16}, {"species": "lotad", "min": 203, "max": 207, "weight": 12}, {"species": "surskit", "min": 204, "max": 208, "weight": 12}], "water": [{"species": "tentacool", "min": 202, "max": 210, "weight": 28}, {"species": "magikarp", "min": 202, "max": 208, "weight": 24}, {"species": "wingull", "min": 203, "max": 210, "weight": 20}, {"species": "pelipper", "min": 206, "max": 212, "weight": 8}], "waterRate": 0.08},
     "items": [],
@@ -571,7 +571,7 @@ export const MAPS7 = {
       {"x": 11, "y": 7, "name": "NORWICK RESEARCHER PELL", "art": "scientist", "skin": "#c89878", "shirt": "#2a7a6a", "pants": "#3a3a4a", "hair": "#7a4a1a", "dialogue": ["We turned a fossil into a living Kin in this building. Twice. The paperwork was the hard part.", "Mr. Castellan collects rare stones the way other presidents collect ties."]},
       {"x": 18, "y": 11, "name": "CUTTER’S APPRENTICE RUE", "art": "youngster", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#4a3a2a", "dialogue": ["The Cutter's house hands out field craft to anyone who asks nicely.", "Route 116 east ends at a tunnel the HUSHLET own. Bring earplugs and respect."]},
       {"x": 7, "y": 14, "name": "TRAINER SCHOOL KID MOSS", "art": "kid", "skin": "#f0c8a0", "shirt": "#3a7a4a", "pants": "#4a3a2a", "hair": "#2a1a0a", "dialogue": ["Our teacher makes us battle the gym leader's portrait. It has never lost.", "Rock types run this town's gym AND its quarries. Copperton is honest about its geology."]},
-      {"x": 9, "y": 4, "name": "MART CLERK", "art": "clerk", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#4a3a2a", "dialogue": ["Copperton Mart — company-town stock, company-town prices. The fossils are display only."], "mart": {"stock": ["pokeball", "greatball", "superpotion", "hyperpotion", "antidote", "parlyzheal", "revive"]}},
+      {"x": 9, "y": 4, "name": "MART CLERK", "art": "clerk-maris", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#2a1a0a", "dialogue": ["Copperton Mart — company-town stock, company-town prices. The fossils are display only."], "mart": {"stock": ["pokeball", "greatball", "superpotion", "hyperpotion", "antidote", "parlyzheal", "revive"]}},
     ],
     "encounters": {"rate": 0.12, "table": [{"species": "zigzagoon", "min": 207, "max": 212, "weight": 24}, {"species": "poochyena", "min": 207, "max": 212, "weight": 20}, {"species": "taillow", "min": 208, "max": 213, "weight": 18}, {"species": "nincada", "min": 208, "max": 213, "weight": 14}, {"species": "whismur", "min": 209, "max": 213, "weight": 12}, {"species": "skitty", "min": 208, "max": 212, "weight": 12}], "water": [{"species": "tentacool", "min": 202, "max": 210, "weight": 28}, {"species": "magikarp", "min": 202, "max": 208, "weight": 24}, {"species": "wingull", "min": 203, "max": 210, "weight": 20}, {"species": "pelipper", "min": 206, "max": 212, "weight": 8}], "waterRate": 0.08},
     "items": [],
@@ -637,7 +637,7 @@ export const MAPS7 = {
       {"x": 18, "y": 15, "name": "BOATMAN SULA", "art": "sailor", "skin": "#e8b888", "shirt": "#3a6ac0", "pants": "#2a3a4a", "hair": "#1a1a1a", "dialogue": ["My run is the Fairhaven crossing by way of the surf roads — or straight across my bow, your choice.", "No tickets, no fuss. The island provides."], "ferry": "slateport"},
       {"x": 10, "y": 11, "name": "TRENDWATCHER IO", "art": "lass", "skin": "#c89878", "shirt": "#2a7a6a", "pants": "#3a3a4a", "hair": "#7a4a1a", "dialogue": ["Today's trendy phrase is 'GRANITE BREAKFAST.' Tomorrow it will be something else. It is always something else.", "The gym leader surfs before dawn. The whole island sets its watch by his board."]},
       {"x": 23, "y": 6, "name": "FISHERMAN KETT", "art": "fisher", "skin": "#d8a878", "shirt": "#7a4a8a", "pants": "#2a2a3a", "hair": "#c0c0c0", "dialogue": ["Cave dark, sea bright — Mistford lives between the two.", "STINGEL own the east road. Swim polite."]},
-      {"x": 9, "y": 4, "name": "MART CLERK", "art": "clerk", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#4a3a2a", "dialogue": ["Mistford Mart — island stock, ferried in. If the boat's late, so are we."], "mart": {"stock": ["pokeball", "greatball", "superpotion", "hyperpotion", "antidote", "parlyzheal", "revive"]}},
+      {"x": 9, "y": 4, "name": "MART CLERK", "art": "clerk-maris", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#1a2a4a", "dialogue": ["Mistford Mart — island stock, ferried in. If the boat's late, so are we."], "mart": {"stock": ["pokeball", "greatball", "superpotion", "hyperpotion", "antidote", "parlyzheal", "revive"]}},
     ],
     "encounters": {"rate": 0.12, "table": [{"species": "wingull", "min": 209, "max": 214, "weight": 26}, {"species": "tentacool", "min": 209, "max": 214, "weight": 20}, {"species": "zigzagoon", "min": 209, "max": 214, "weight": 16}, {"species": "azurill", "min": 210, "max": 215, "weight": 12}, {"species": "pelipper", "min": 211, "max": 215, "weight": 10}], "water": [{"species": "tentacool", "min": 208, "max": 216, "weight": 28}, {"species": "magikarp", "min": 208, "max": 214, "weight": 22}, {"species": "wingull", "min": 209, "max": 216, "weight": 20}, {"species": "pelipper", "min": 212, "max": 218, "weight": 10}], "waterRate": 0.08},
     "items": [],
@@ -706,7 +706,7 @@ export const MAPS7 = {
       {"x": 11, "y": 13, "name": "MARKET CRIER VESK", "art": "worker", "skin": "#f0c8a0", "shirt": "#3a7a4a", "pants": "#4a3a2a", "hair": "#2a1a0a", "dialogue": ["Berries! Stones! A chair shaped like a SPOUTLET! The market provides!", "Captain Merrick's shipyard builds hulls at the north end. Fine work, slow varnish."]},
       {"x": 24, "y": 7, "name": "MERRICK’S APPRENTICE LIO", "art": "youngster", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#4a3a2a", "dialogue": ["The Captain's new submersible part went missing between the dock and the museum. Again.", "Maritime Museum's queue is longest at opening. The exhibits don't mind."]},
       {"x": 5, "y": 15, "name": "BEACHCOMBER ANA", "art": "lady", "skin": "#d8a878", "shirt": "#7a4a8a", "pants": "#2a2a3a", "hair": "#c0c0c0", "dialogue": ["The tide delivers the market half its stock and all of its gossip.", "Route 110's cycling road runs north to Lilac, humming the whole way."]},
-      {"x": 9, "y": 4, "name": "MART CLERK", "art": "clerk", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#4a3a2a", "dialogue": ["Fairhaven Mart — harbor stock. Everything smells faintly of rope and triumph."], "mart": {"stock": ["pokeball", "greatball", "superpotion", "hyperpotion", "antidote", "parlyzheal", "revive"]}},
+      {"x": 9, "y": 4, "name": "MART CLERK", "art": "clerk-maris", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#1a2a4a", "dialogue": ["Fairhaven Mart — harbor stock. Everything smells faintly of rope and triumph."], "mart": {"stock": ["pokeball", "greatball", "superpotion", "hyperpotion", "antidote", "parlyzheal", "revive"]}},
     ],
     "encounters": {"rate": 0.12, "table": [{"species": "wingull", "min": 213, "max": 219, "weight": 26}, {"species": "tentacool", "min": 213, "max": 219, "weight": 22}, {"species": "zigzagoon", "min": 213, "max": 219, "weight": 16}, {"species": "pelipper", "min": 215, "max": 220, "weight": 10}, {"species": "minun", "min": 215, "max": 220, "weight": 6}, {"species": "plusle", "min": 215, "max": 220, "weight": 6}], "water": [{"species": "tentacool", "min": 212, "max": 220, "weight": 26}, {"species": "magikarp", "min": 212, "max": 218, "weight": 20}, {"species": "wingull", "min": 213, "max": 220, "weight": 20}, {"species": "pelipper", "min": 216, "max": 222, "weight": 10}, {"species": "wailmer", "min": 215, "max": 222, "weight": 8}], "waterRate": 0.08},
     "items": [],
@@ -773,7 +773,7 @@ export const MAPS7 = {
       {"x": 11, "y": 7, "name": "RYDEL’S MECHANIC JUNO", "art": "worker", "skin": "#f0c8a0", "shirt": "#3a7a4a", "pants": "#4a3a2a", "hair": "#2a1a0a", "dialogue": ["Rydel's Cycles, north street: first bike's a loaner if your legs look honest.", "The cycling road south is my commute and my religion."]},
       {"x": 18, "y": 12, "name": "VOLT FANATIC PELL", "art": "youngster", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#4a3a2a", "dialogue": ["The gym leader built half this city's grid by hand. The humming is him, saying hello.", "PLUSQUEAK and MINUSQUEAK hold hands on Route 110. Science cannot explain it. Olin can."]},
       {"x": 7, "y": 14, "name": "CORNER REGULAR VEDA", "art": "lady", "skin": "#d8a878", "shirt": "#7a4a8a", "pants": "#2a2a3a", "hair": "#c0c0c0", "dialogue": ["I come for the lights and stay for the company. The coins are a rumor.", "Wildflower's contest hall is a walk west through Route 117's flower fields. Prettier than winning."]},
-      {"x": 9, "y": 4, "name": "MART CLERK", "art": "clerk", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#4a3a2a", "dialogue": ["Lilac Mart — crossroads stock. If the region sells it, it passes through us."], "mart": {"stock": ["pokeball", "greatball", "superpotion", "hyperpotion", "antidote", "parlyzheal", "revive"]}},
+      {"x": 9, "y": 4, "name": "MART CLERK", "art": "clerk-maris", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#1a2a4a", "dialogue": ["Lilac Mart — crossroads stock. If the region sells it, it passes through us."], "mart": {"stock": ["pokeball", "greatball", "superpotion", "hyperpotion", "antidote", "parlyzheal", "revive"]}},
     ],
     "encounters": {"rate": 0.12, "table": [{"species": "zigzagoon", "min": 216, "max": 222, "weight": 22}, {"species": "poochyena", "min": 216, "max": 222, "weight": 18}, {"species": "electrike", "min": 217, "max": 223, "weight": 18}, {"species": "plusle", "min": 217, "max": 223, "weight": 10}, {"species": "minun", "min": 217, "max": 223, "weight": 10}, {"species": "gulpin", "min": 218, "max": 223, "weight": 12}, {"species": "roselia", "min": 218, "max": 223, "weight": 10}], "water": [{"species": "tentacool", "min": 212, "max": 220, "weight": 26}, {"species": "magikarp", "min": 212, "max": 218, "weight": 20}, {"species": "wingull", "min": 213, "max": 220, "weight": 20}, {"species": "pelipper", "min": 216, "max": 222, "weight": 10}, {"species": "wailmer", "min": 215, "max": 222, "weight": 8}], "waterRate": 0.08},
     "items": [],
@@ -827,7 +827,7 @@ export const MAPS7 = {
       {"x": 9, "y": 13, "text": "WILDFLOWER TOWN — West: COPPERBORE TUNNEL · East: ROUTE 117."}
     ],
     "npcs": [
-      {"x": 22, "y": 4, "name": "MART CLERK", "art": "clerk", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#4a3a2a", "dialogue": ["Wildflower Mart — contest-town shelves, ribbon not included."], "mart": {"stock": ["pokeball", "greatball", "superpotion", "hyperpotion", "antidote", "parlyzheal", "revive"]}},
+      {"x": 22, "y": 4, "name": "MART CLERK", "art": "clerk-maris", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#1a1a2a", "dialogue": ["Wildflower Mart — contest-town shelves, ribbon not included."], "mart": {"stock": ["pokeball", "greatball", "superpotion", "hyperpotion", "antidote", "parlyzheal", "revive"]}},
       {"x": 12, "y": 6, "name": "CONTEST AUNTIE ROSA", "art": "lady", "skin": "#d8a878", "shirt": "#7a4a8a", "pants": "#2a2a3a", "hair": "#c0c0c0", "dialogue": ["A ribbon is just a judge admitting, in writing, that your Kin shone.", "My ROSEFAE has opinions about the hall's lighting. All of them correct."]},
       {"x": 21, "y": 13, "name": "EMIL’S UNCLE PIOTR", "art": "gent", "skin": "#e8b888", "shirt": "#3a6ac0", "pants": "#2a3a4a", "hair": "#1a1a1a", "dialogue": ["My nephew went out to catch his first Kin and came back a trainer. This town's air, I say.", "The tunnel air does my lungs good. The fresh side of the hill is this one."]},
       {"x": 8, "y": 14, "name": "GARDENER FENN", "art": "worker", "skin": "#f0c8a0", "shirt": "#3a7a4a", "pants": "#4a3a2a", "hair": "#2a1a0a", "dialogue": ["I mow around the wildflowers. The wildflowers were the point.", "Battle Tent hopefuls train on the north lawn at dawn. Quietly. It's Wildflower."]},
@@ -888,7 +888,7 @@ export const MAPS7 = {
       {"x": 11, "y": 6, "name": "PROF. ANDO’S NEIGHBOR HANA", "art": "lady", "skin": "#d8a878", "shirt": "#7a4a8a", "pants": "#2a2a3a", "hair": "#c0c0c0", "dialogue": ["The Professor watches the sky the way farmers watch weather. Both are right to.", "A meteorite fell on Route 114 once. The town still points at the crater like family."]},
       {"x": 19, "y": 13, "name": "ASH COLLECTOR BRIN", "art": "youngster", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#4a3a2a", "dialogue": ["I sweep ash into sacks for the glassworks. A bottle of Ashfall glass holds a little of every year.", "DIZBEAR on the ash road walk like the mountain is still moving. It isn't. Probably."]},
       {"x": 6, "y": 13, "name": "METEOR WATCHER SOL", "art": "elder", "skin": "#e8b888", "shirt": "#b0503c", "pants": "#2a2a3a", "hair": "#5a3a2a", "dialogue": ["Forty years of falling ash, and the town has never once been buried. It settles gentle.", "South, Route 114 runs down to Comet Falls. Mind the craters; they mind you back."]},
-      {"x": 9, "y": 4, "name": "MART CLERK", "art": "clerk", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#4a3a2a", "dialogue": ["Ashfall Mart — ash-country stock. The brooms are not merchandise; stop asking."], "mart": {"stock": ["greatball", "ultraball", "hyperpotion", "fullheal", "revive", "superpotion"]}},
+      {"x": 9, "y": 4, "name": "MART CLERK", "art": "clerk-maris", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#1a1a2a", "dialogue": ["Ashfall Mart — ash-country stock. The brooms are not merchandise; stop asking."], "mart": {"stock": ["greatball", "ultraball", "hyperpotion", "fullheal", "revive", "superpotion"]}},
     ],
     "encounters": {"rate": 0.12, "table": [{"species": "spinda", "min": 230, "max": 236, "weight": 24}, {"species": "sandshrew", "min": 230, "max": 236, "weight": 20}, {"species": "swablu", "min": 231, "max": 237, "weight": 18}, {"species": "zigzagoon", "min": 230, "max": 236, "weight": 14}, {"species": "skarmory", "min": 232, "max": 238, "weight": 8}, {"species": "slugma", "min": 231, "max": 237, "weight": 10}], "water": [{"species": "tentacool", "min": 202, "max": 210, "weight": 28}, {"species": "magikarp", "min": 202, "max": 208, "weight": 24}, {"species": "wingull", "min": 203, "max": 210, "weight": 20}, {"species": "pelipper", "min": 206, "max": 212, "weight": 8}], "waterRate": 0.08},
     "items": [],
@@ -946,7 +946,7 @@ export const MAPS7 = {
       {"x": 11, "y": 7, "name": "SPRINGKEEPER MASA", "art": "elder", "skin": "#e8b888", "shirt": "#b0503c", "pants": "#2a2a3a", "hair": "#5a3a2a", "dialogue": ["The spring water fixes everything except impatience. It makes that worse, briefly.", "The gym leader's grandfather ran this spring. Fire runs in that family like water in this one."]},
       {"x": 22, "y": 13, "name": "SOAKER VEDA", "art": "lady", "skin": "#d8a878", "shirt": "#7a4a8a", "pants": "#2a2a3a", "hair": "#c0c0c0", "dialogue": ["I have been in this spring for one hour or eleven years. The steam decides.", "MAGMALET nap on the pass like the mountain owes them rent."]},
       {"x": 8, "y": 13, "name": "HERB SELLER KIO", "art": "worker", "skin": "#f0c8a0", "shirt": "#3a7a4a", "pants": "#4a3a2a", "hair": "#2a1a0a", "dialogue": ["Bitter herbs, hot sand, hotter springs — Steamspring cures by conviction.", "Sand baths by the spring wall. Ten minutes and your back forgives you everything."]},
-      {"x": 9, "y": 4, "name": "MART CLERK", "art": "clerk", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#4a3a2a", "dialogue": ["Steamspring Mart — spring-town stock. The lava cookies are a food, legally."], "mart": {"stock": ["greatball", "ultraball", "hyperpotion", "fullheal", "revive", "superpotion"]}},
+      {"x": 9, "y": 4, "name": "MART CLERK", "art": "clerk-maris", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#1a1a2a", "dialogue": ["Steamspring Mart — spring-town stock. The lava cookies are a food, legally."], "mart": {"stock": ["greatball", "ultraball", "hyperpotion", "fullheal", "revive", "superpotion"]}},
     ],
     "encounters": {"rate": 0.12, "table": [{"species": "numel", "min": 228, "max": 234, "weight": 26}, {"species": "spoink", "min": 229, "max": 235, "weight": 20}, {"species": "torkoal", "min": 230, "max": 236, "weight": 12}, {"species": "zigzagoon", "min": 228, "max": 234, "weight": 16}, {"species": "slugma", "min": 229, "max": 235, "weight": 14}, {"species": "camerupt", "min": 232, "max": 238, "weight": 6}], "water": [{"species": "tentacool", "min": 202, "max": 210, "weight": 28}, {"species": "magikarp", "min": 202, "max": 208, "weight": 24}, {"species": "wingull", "min": 203, "max": 210, "weight": 20}, {"species": "pelipper", "min": 206, "max": 212, "weight": 8}], "waterRate": 0.08},
     "items": [],
@@ -1004,7 +1004,7 @@ export const MAPS7 = {
       {"x": 12, "y": 7, "name": "CANOPY WARDEN SORA", "art": "ranger", "skin": "#e8b888", "shirt": "#3a6ac0", "pants": "#2a3a4a", "hair": "#1a1a1a", "dialogue": ["Every roof here is also a floor for somebody smaller. Mind your step in both directions.", "The gym leader reads the wind in the walkways before she reads a challenger."]},
       {"x": 22, "y": 12, "name": "TREEHOUSE KID WREN", "art": "kid", "skin": "#f0c8a0", "shirt": "#3a7a4a", "pants": "#4a3a2a", "hair": "#2a1a0a", "dialogue": ["My house has a rope bridge and a PALMSAUR. Your move, ground towns.", "When it rains, the whole city sounds like a drum made of leaves."]},
       {"x": 7, "y": 13, "name": "WEATHER WATCHER ILSE", "art": "lady", "skin": "#d8a878", "shirt": "#7a4a8a", "pants": "#2a2a3a", "hair": "#c0c0c0", "dialogue": ["Route 119's rain is a resident, not a visitor. It pays rent in mushrooms.", "The Weather Institute west of the river keeps the region's sky in ledgers."]},
-      {"x": 9, "y": 4, "name": "MART CLERK", "art": "clerk", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#4a3a2a", "dialogue": ["Highbranch Mart — canopy stock, hauled up one basket at a time. The rope discount is real."], "mart": {"stock": ["greatball", "ultraball", "hyperpotion", "fullheal", "revive", "superpotion"]}},
+      {"x": 9, "y": 4, "name": "MART CLERK", "art": "clerk-maris", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#1a1a1a", "dialogue": ["Highbranch Mart — canopy stock, hauled up one basket at a time. The rope discount is real."], "mart": {"stock": ["greatball", "ultraball", "hyperpotion", "fullheal", "revive", "superpotion"]}},
     ],
     "encounters": {"rate": 0.12, "table": [{"species": "kecleon", "min": 246, "max": 252, "weight": 22}, {"species": "tropius", "min": 246, "max": 252, "weight": 16}, {"species": "swablu", "min": 246, "max": 252, "weight": 20}, {"species": "zigzagoon", "min": 246, "max": 251, "weight": 16}, {"species": "linoone", "min": 248, "max": 254, "weight": 10}, {"species": "altaria", "min": 249, "max": 255, "weight": 6}, {"species": "oddish", "min": 246, "max": 252, "weight": 10}], "water": [{"species": "tentacool", "min": 222, "max": 230, "weight": 22}, {"species": "magikarp", "min": 222, "max": 228, "weight": 18}, {"species": "wingull", "min": 223, "max": 230, "weight": 16}, {"species": "carvanha", "min": 224, "max": 231, "weight": 14}, {"species": "sharpedo", "min": 227, "max": 233, "weight": 6}, {"species": "wailmer", "min": 224, "max": 231, "weight": 10}], "waterRate": 0.08},
     "items": [],
@@ -2278,7 +2278,7 @@ export const MAPS7 = {
     "signs": [
     ],
     "npcs": [
-      {"x": 7, "y": 3, "name": "NORWICK HOSTESS VEE", "art": "lady", "skin": "#e8b888", "shirt": "#b0503c", "pants": "#2a2a3a", "hair": "#5a3a2a", "dialogue": ["The residence hosts Norwick's visiting researchers. The fossils in the hall are not decoration; they're colleagues.", "Copperton runs on stone and schedules. I keep both polished."]},
+      {"x": 7, "y": 3, "name": "NORWICK HOSTESS VEE", "art": "host-maris", "skin": "#e8b888", "shirt": "#b0503c", "pants": "#2a2a3a", "hair": "#5a3a2a", "dialogue": ["The residence hosts Norwick's visiting researchers. The fossils in the hall are not decoration; they're colleagues.", "Copperton runs on stone and schedules. I keep both polished."]},
     ],
     "encounters": null,
     "items": [],
@@ -2470,7 +2470,7 @@ export const MAPS7 = {
     "signs": [
     ],
     "npcs": [
-      {"x": 7, "y": 3, "name": "SPRING HOSTESS YUI", "art": "lady", "skin": "#e8b888", "shirt": "#3a6ac0", "pants": "#2a3a4a", "hair": "#1a1a1a", "dialogue": ["Towels by the door, herbs on the beam. A Steamspring house is a spring with a roof.", "The old gym leader took his tea here every morning for thirty years. The cup is still warm, spiritually."]},
+      {"x": 7, "y": 3, "name": "SPRING HOSTESS YUI", "art": "host-maris", "skin": "#e8b888", "shirt": "#3a6ac0", "pants": "#2a3a4a", "hair": "#1a1a1a", "dialogue": ["Towels by the door, herbs on the beam. A Steamspring house is a spring with a roof.", "The old gym leader took his tea here every morning for thirty years. The cup is still warm, spiritually."]},
     ],
     "encounters": null,
     "items": [],
@@ -2572,7 +2572,7 @@ export const MAPS7 = {
     "signs": [
     ],
     "npcs": [
-      {"x": 4, "y": 8, "name": "GYM ATTENDANT PETRA", "art": "youngster", "skin": "#e8b888", "shirt": "#b0503c", "pants": "#2a2a3a", "hair": "#5a3a2a", "dialogue": ["Cut stone underfoot, cut stone overhead. The leader's Geology is a contact sport.", "Challengers sign the quarry book first. The leader reads every name, then checks their boots."]},
+      {"x": 4, "y": 8, "name": "GYM ATTENDANT PETRA", "art": "attendant-maris", "skin": "#e8b888", "shirt": "#b0503c", "pants": "#2a2a3a", "hair": "#5a3a2a", "dialogue": ["Cut stone underfoot, cut stone overhead. The leader's Geology is a contact sport.", "Challengers sign the quarry book first. The leader reads every name, then checks their boots."]},
     ],
     "encounters": null,
     "items": [],
@@ -2606,7 +2606,7 @@ export const MAPS7 = {
     "signs": [
     ],
     "npcs": [
-      {"x": 4, "y": 8, "name": "GYM ATTENDANT KAI", "art": "youngster", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#4a3a2a", "dialogue": ["The mats are swept like a beach at low tide. The leader notices footprints and character.", "In the dark this gym is a different country. The leader prefers it that way."]},
+      {"x": 4, "y": 8, "name": "GYM ATTENDANT KAI", "art": "attendant-maris", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#4a3a2a", "dialogue": ["The mats are swept like a beach at low tide. The leader notices footprints and character.", "In the dark this gym is a different country. The leader prefers it that way."]},
     ],
     "encounters": null,
     "items": [],
@@ -2640,7 +2640,7 @@ export const MAPS7 = {
     "signs": [
     ],
     "npcs": [
-      {"x": 4, "y": 8, "name": "GYM ATTENDANT VOLTA", "art": "youngster", "skin": "#e8b888", "shirt": "#b0503c", "pants": "#2a2a3a", "hair": "#5a3a2a", "dialogue": ["Mind the barriers — they hum in the leader's favorite key.", "The leader built this gym's grid himself and still apologizes to it when it trips."]},
+      {"x": 4, "y": 8, "name": "GYM ATTENDANT VOLTA", "art": "attendant-maris", "skin": "#e8b888", "shirt": "#b0503c", "pants": "#2a2a3a", "hair": "#5a3a2a", "dialogue": ["Mind the barriers — they hum in the leader's favorite key.", "The leader built this gym's grid himself and still apologizes to it when it trips."]},
     ],
     "encounters": null,
     "items": [],
@@ -2674,7 +2674,7 @@ export const MAPS7 = {
     "signs": [
     ],
     "npcs": [
-      {"x": 4, "y": 8, "name": "GYM ATTENDANT EMBER", "art": "youngster", "skin": "#c89878", "shirt": "#2a7a6a", "pants": "#3a3a4a", "hair": "#7a4a1a", "dialogue": ["The floor grates breathe spring steam. Footing is a local tradition and a local test.", "The leader's grandfather watches from the portrait. Challengers swear he nods. Slowly."]},
+      {"x": 4, "y": 8, "name": "GYM ATTENDANT EMBER", "art": "attendant-maris", "skin": "#c89878", "shirt": "#2a7a6a", "pants": "#3a3a4a", "hair": "#7a4a1a", "dialogue": ["The floor grates breathe spring steam. Footing is a local tradition and a local test.", "The leader's grandfather watches from the portrait. Challengers swear he nods. Slowly."]},
     ],
     "encounters": null,
     "items": [],
@@ -2708,7 +2708,7 @@ export const MAPS7 = {
     "signs": [
     ],
     "npcs": [
-      {"x": 4, "y": 8, "name": "GYM ATTENDANT REYES", "art": "youngster", "skin": "#f0c8a0", "shirt": "#3a7a4a", "pants": "#4a3a2a", "hair": "#2a1a0a", "dialogue": ["The rooms beyond sort challengers by the shape of their confidence. The leader's word, not mine.", "Balance is not standing still. The leader will demonstrate, personally."]},
+      {"x": 4, "y": 8, "name": "GYM ATTENDANT REYES", "art": "attendant-maris", "skin": "#f0c8a0", "shirt": "#3a7a4a", "pants": "#4a3a2a", "hair": "#2a1a0a", "dialogue": ["The rooms beyond sort challengers by the shape of their confidence. The leader's word, not mine.", "Balance is not standing still. The leader will demonstrate, personally."]},
     ],
     "encounters": null,
     "items": [],
@@ -2742,7 +2742,7 @@ export const MAPS7 = {
     "signs": [
     ],
     "npcs": [
-      {"x": 4, "y": 8, "name": "GYM ATTENDANT WREN", "art": "youngster", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#4a3a2a", "dialogue": ["The perch rails sway on purpose. Altitude is a Flying-type virtue.", "Speak up on the mat — the canopy eats quiet voices, and the leader hunts by ear."]},
+      {"x": 4, "y": 8, "name": "GYM ATTENDANT WREN", "art": "attendant-maris", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#4a3a2a", "dialogue": ["The perch rails sway on purpose. Altitude is a Flying-type virtue.", "Speak up on the mat — the canopy eats quiet voices, and the leader hunts by ear."]},
     ],
     "encounters": null,
     "items": [],
@@ -2913,7 +2913,7 @@ export const MAPS7 = {
       {"x": 12, "y": 13, "name": "CONTEST FAN YUKI", "art": "lass", "skin": "#c89878", "shirt": "#2a7a6a", "pants": "#3a3a4a", "hair": "#7a4a1a", "dialogue": ["Four halls, four ribbons — and this is the grandest stage of the four, everyone agrees.", "I practise my appeals on the pier. The BRINEGULL are brutal judges."]},
       {"x": 18, "y": 11, "name": "HARBOURMASTER DOSS", "art": "sailor", "skin": "#e8b888", "shirt": "#3a6ac0", "pants": "#2a3a4a", "hair": "#1a1a1a", "dialogue": ["Ships, subs, and things that are neither — this harbour has berthed them all and logged half.", "East is open sea to Starfall. Mind the trench on 124; the divers talk about it like a door."]},
       {"x": 7, "y": 14, "name": "SHOPPER MIREL", "art": "lady", "skin": "#d8a878", "shirt": "#7a4a8a", "pants": "#2a2a3a", "hair": "#c0c0c0", "dialogue": ["The department store's top floor sells what the marts dream about. I dream back, politely.", "A team in red was seen at the west cave mouth. A team in blue at the east. The gulls saw both first."]},
-      {"x": 9, "y": 4, "name": "MART CLERK", "art": "clerk", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#4a3a2a", "dialogue": ["Lotus Cove Mart — port stock, contest ribbons not included."], "mart": {"stock": ["greatball", "ultraball", "hyperpotion", "fullheal", "revive", "superpotion"]}},
+      {"x": 9, "y": 4, "name": "MART CLERK", "art": "clerk-maris", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#1a1a1a", "dialogue": ["Lotus Cove Mart — port stock, contest ribbons not included."], "mart": {"stock": ["greatball", "ultraball", "hyperpotion", "fullheal", "revive", "superpotion"]}},
     ],
     "encounters": {"rate": 0.12, "table": [{"species": "wingull", "min": 258, "max": 265, "weight": 24}, {"species": "kecleon", "min": 258, "max": 265, "weight": 18}, {"species": "linoone", "min": 260, "max": 267, "weight": 12}, {"species": "shuppet", "min": 259, "max": 266, "weight": 12}, {"species": "pelipper", "min": 261, "max": 268, "weight": 10}, {"species": "roselia", "min": 259, "max": 265, "weight": 12}], "water": [{"species": "tentacool", "min": 258, "max": 266, "weight": 24}, {"species": "tentacruel", "min": 262, "max": 268, "weight": 6}, {"species": "wingull", "min": 258, "max": 266, "weight": 20}, {"species": "pelipper", "min": 261, "max": 268, "weight": 10}, {"species": "magikarp", "min": 258, "max": 264, "weight": 14}, {"species": "wailmer", "min": 260, "max": 268, "weight": 10}, {"species": "carvanha", "min": 260, "max": 267, "weight": 10}, {"species": "sharpedo", "min": 263, "max": 268, "weight": 5}], "waterRate": 0.08},
     "items": [],
@@ -2978,7 +2978,7 @@ export const MAPS7 = {
       {"x": 11, "y": 7, "name": "SPACE RESEARCHER ORBIT", "art": "scientist", "skin": "#c89878", "shirt": "#2a7a6a", "pants": "#3a3a4a", "hair": "#7a4a1a", "dialogue": ["We track every rock that falls toward Maris. Most miss. The paperwork never does.", "A collector named Alban dives the trenches east of here for stones the sea keeps. Ask at the shut house."]},
       {"x": 18, "y": 12, "name": "DIVE TUTOR MARA", "art": "lass", "skin": "#d8a878", "shirt": "#7a4a8a", "pants": "#2a2a3a", "hair": "#c0c0c0", "dialogue": ["The trenches have doors, if you know how to look: dark water, a held breath, and down.", "Mind Badge in hand and a partner who knows the way down — that is the whole key, divers say."]},
       {"x": 6, "y": 13, "name": "TWIN FAN SOL", "art": "kid", "skin": "#f0c8a0", "shirt": "#3a7a4a", "pants": "#4a3a2a", "hair": "#2a1a0a", "dialogue": ["Two gym leaders, one gym. Challengers get read twice and battled once, thoroughly.", "Ebbtide Cave north changes with the tide. The island keeps two faces and shows you one."]},
-      {"x": 9, "y": 4, "name": "MART CLERK", "art": "clerk", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#4a3a2a", "dialogue": ["Starfall Mart — island stock, rocket-delivered prices."], "mart": {"stock": ["greatball", "ultraball", "hyperpotion", "fullheal", "revive", "superpotion"]}},
+      {"x": 9, "y": 4, "name": "MART CLERK", "art": "clerk-maris", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#1a1a1a", "dialogue": ["Starfall Mart — island stock, rocket-delivered prices."], "mart": {"stock": ["greatball", "ultraball", "hyperpotion", "fullheal", "revive", "superpotion"]}},
     ],
     "encounters": {"rate": 0.12, "table": [{"species": "wingull", "min": 265, "max": 272, "weight": 24}, {"species": "pelipper", "min": 267, "max": 274, "weight": 12}, {"species": "chimecho", "min": 266, "max": 273, "weight": 8}, {"species": "solrock", "min": 266, "max": 273, "weight": 10}, {"species": "lunatone", "min": 266, "max": 273, "weight": 10}, {"species": "linoone", "min": 266, "max": 272, "weight": 12}], "water": [{"species": "tentacool", "min": 264, "max": 272, "weight": 24}, {"species": "tentacruel", "min": 268, "max": 274, "weight": 6}, {"species": "wingull", "min": 264, "max": 272, "weight": 20}, {"species": "pelipper", "min": 267, "max": 274, "weight": 10}, {"species": "magikarp", "min": 264, "max": 270, "weight": 14}, {"species": "wailmer", "min": 266, "max": 274, "weight": 10}, {"species": "carvanha", "min": 266, "max": 273, "weight": 10}, {"species": "sharpedo", "min": 269, "max": 274, "weight": 5}], "waterRate": 0.08},
     "items": [],
@@ -3038,7 +3038,7 @@ export const MAPS7 = {
       {"x": 11, "y": 7, "name": "CAVE KEEPER ANTHEA", "art": "elder", "skin": "#e8b888", "shirt": "#b0503c", "pants": "#2a2a3a", "hair": "#5a3a2a", "dialogue": ["The Worldroot Cave is not locked. It is listened to. There is a difference, and the city knows it.", "Two great sleeps meet in stories of this crater. The lake keeps both their dreams polite."]},
       {"x": 19, "y": 13, "name": "CASPIAN FAN RUE", "art": "lass", "skin": "#c89878", "shirt": "#2a7a6a", "pants": "#3a3a4a", "hair": "#7a4a1a", "dialogue": ["Our gym leader paints battles the way the lake paints mornings: on purpose, beautifully.", "When the sky over the crater changes its mind, the whole city watches the lake first."]},
       {"x": 6, "y": 14, "name": "FISHER ONEN", "art": "fisher", "skin": "#e8b888", "shirt": "#3a6ac0", "pants": "#2a3a4a", "hair": "#1a1a1a", "dialogue": ["I fish a lake inside a volcano on an island in the sea. Geography gave up; I didn’t.", "Something old circles the deep trench outside the crater wall. The divers wave at it. Carefully."]},
-      {"x": 9, "y": 4, "name": "MART CLERK", "art": "clerk", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#4a3a2a", "dialogue": ["Craterlake Mart — crater stock. Everything arrived by air or by nerve."], "mart": {"stock": ["ultraball", "hyperpotion", "fullheal", "revive", "maxpotion", "superpotion"]}},
+      {"x": 9, "y": 4, "name": "MART CLERK", "art": "clerk-maris", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#1a1a0a", "dialogue": ["Craterlake Mart — crater stock. Everything arrived by air or by nerve."], "mart": {"stock": ["ultraball", "hyperpotion", "fullheal", "revive", "maxpotion", "superpotion"]}},
     ],
     "encounters": {"rate": 0.12, "table": [{"species": "wingull", "min": 272, "max": 279, "weight": 24}, {"species": "pelipper", "min": 274, "max": 281, "weight": 12}, {"species": "azurill", "min": 272, "max": 279, "weight": 12}, {"species": "surskit", "min": 273, "max": 280, "weight": 10}, {"species": "masquerain", "min": 275, "max": 281, "weight": 8}, {"species": "linoone", "min": 273, "max": 280, "weight": 10}], "water": [{"species": "tentacool", "min": 270, "max": 278, "weight": 24}, {"species": "tentacruel", "min": 274, "max": 280, "weight": 6}, {"species": "wingull", "min": 270, "max": 278, "weight": 20}, {"species": "pelipper", "min": 273, "max": 280, "weight": 10}, {"species": "magikarp", "min": 270, "max": 276, "weight": 14}, {"species": "wailmer", "min": 272, "max": 280, "weight": 10}, {"species": "carvanha", "min": 272, "max": 279, "weight": 10}, {"species": "sharpedo", "min": 275, "max": 280, "weight": 5}], "waterRate": 0.08},
     "items": [],
@@ -3088,7 +3088,7 @@ export const MAPS7 = {
       {"x": 13, "y": 12, "text": "THE CURRENT ROADS — East of the rafts the sea runs in rivers: Routes 132 to 134, all one-way opinions and fast water, up to Perennial."}
     ],
     "npcs": [
-      {"x": 21, "y": 7, "name": "MART CLERK", "art": "clerk", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#4a3a2a", "dialogue": ["Driftlog Mart — current-proof stock, lashed down tight."], "mart": {"stock": ["ultraball", "hyperpotion", "fullheal", "revive", "maxpotion", "superpotion"]}},
+      {"x": 21, "y": 7, "name": "MART CLERK", "art": "clerk-maris", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#1a1a0a", "dialogue": ["Driftlog Mart — current-proof stock, lashed down tight."], "mart": {"stock": ["ultraball", "hyperpotion", "fullheal", "revive", "maxpotion", "superpotion"]}},
       {"x": 10, "y": 11, "name": "RAFT ELDER CORALIE", "art": "elder", "skin": "#e8b888", "shirt": "#b0503c", "pants": "#2a2a3a", "hair": "#5a3a2a", "dialogue": ["Three generations my family has added logs to this town and subtracted none. It grows like we do: sideways, cheerfully.", "Tempest Tower stands east on its island. On clear mornings the top of it says hello first."]},
       {"x": 16, "y": 12, "name": "CURRENT RIDER PIKE", "art": "sailor", "skin": "#e8b888", "shirt": "#3a6ac0", "pants": "#2a3a4a", "hair": "#1a1a1a", "dialogue": ["Ride the fast water east and it will carry you to Perennial’s shore faster than any sail.", "Miss your stop and the current files you under ‘later’. It always delivers, eventually."]},
       {"x": 8, "y": 12, "name": "FLOAT KID WREN", "art": "kid", "skin": "#f0c8a0", "shirt": "#3a7a4a", "pants": "#4a3a2a", "hair": "#2a1a0a", "dialogue": ["My house has an anchor instead of a fence. When I grow up I’m untying it.", "CORALET hold up half the rafts. We hold up the other half. It’s fair."]},
@@ -3148,7 +3148,7 @@ export const MAPS7 = {
       {"x": 16, "y": 13, "text": "PERENNIAL CITY — The league city at the end of every Maris road. Eight badges open Crown Road; the Conference waits on the plateau above."}
     ],
     "npcs": [
-      {"x": 9, "y": 12, "name": "MART CLERK", "art": "clerk", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#4a3a2a", "dialogue": ["Perennial Mart — league-grade stock for the Conference road."], "mart": {"stock": ["ultraball", "maxpotion", "fullrestore", "maxrevive", "fullheal"]}},
+      {"x": 9, "y": 12, "name": "MART CLERK", "art": "clerk-maris", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#1a1a0a", "dialogue": ["Perennial Mart — league-grade stock for the Conference road."], "mart": {"stock": ["ultraball", "maxpotion", "fullrestore", "maxrevive", "fullheal"]}},
       {"x": 8, "y": 14, "name": "CONFERENCE HERALD VOSS", "art": "gent", "skin": "#d8a878", "shirt": "#7a4a8a", "pants": "#2a2a3a", "hair": "#c0c0c0", "dialogue": ["Bracket season, the plateau fills with flags and the falls applaud everything.", "Win or lose, a Conference run here ends the same way: one match the whole region remembers."]},
       {"x": 22, "y": 12, "name": "ELITE GREETER SABLE", "art": "lady", "skin": "#c89878", "shirt": "#2a7a6a", "pants": "#3a3a4a", "hair": "#7a4a1a", "dialogue": ["I have checked eight badges at this gate more times than the falls have fish. Show me yours when you’re ready.", "A man from the Trial Grounds scouted last year’s final from the back row. He took notes. Pages of them."]},
       {"x": 26, "y": 14, "name": "FINALIST’S SISTER KIT", "art": "kid", "skin": "#f0c8a0", "shirt": "#3a7a4a", "pants": "#4a3a2a", "hair": "#2a1a0a", "dialogue": ["My brother lost in the semi-final and calls it the best week of his life. Grown-ups are strange.", "The champion’s road is through the mountain. The mountain grades harder than any gym."]},
@@ -4370,7 +4370,7 @@ export const MAPS7 = {
     "signs": [
     ],
     "npcs": [
-      {"x": 4, "y": 8, "name": "GYM ATTENDANT IO", "art": "youngster", "skin": "#e8b888", "shirt": "#b0503c", "pants": "#2a2a3a", "hair": "#5a3a2a", "dialogue": ["Two leaders, one mat, and a room that thinks in stereo. Challengers are read twice here.", "The focus lamps are older than the Space Center and twice as honest."]},
+      {"x": 4, "y": 8, "name": "GYM ATTENDANT IO", "art": "attendant-maris", "skin": "#e8b888", "shirt": "#b0503c", "pants": "#2a2a3a", "hair": "#5a3a2a", "dialogue": ["Two leaders, one mat, and a room that thinks in stereo. Challengers are read twice here.", "The focus lamps are older than the Space Center and twice as honest."]},
     ],
     "encounters": null,
     "items": [],
@@ -4404,7 +4404,7 @@ export const MAPS7 = {
     "signs": [
     ],
     "npcs": [
-      {"x": 4, "y": 8, "name": "GYM ATTENDANT MARIS", "art": "youngster", "skin": "#e8b888", "shirt": "#3a6ac0", "pants": "#2a3a4a", "hair": "#1a1a1a", "dialogue": ["The pool lanes are the leader’s brushstrokes. Mind you don’t smudge them.", "Every challenger is a painting started. The leader finishes all of them, one way or another."]},
+      {"x": 4, "y": 8, "name": "GYM ATTENDANT MARIS", "art": "attendant-maris", "skin": "#e8b888", "shirt": "#3a6ac0", "pants": "#2a3a4a", "hair": "#1a1a1a", "dialogue": ["The pool lanes are the leader’s brushstrokes. Mind you don’t smudge them.", "Every challenger is a painting started. The leader finishes all of them, one way or another."]},
     ],
     "encounters": null,
     "items": [],

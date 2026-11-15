@@ -216,7 +216,7 @@ export const MAPS3 = {
         give: { flag: 'seer_tm', items: { tm29: 1 }, text: 'TM29 Psychic' } },
       { x: 2, y: 11, name: 'COPYCAT', art: 'twin', skin: '#f0c8a0', shirt: '#e86a5a', pants: '#3a3a4a', hair: '#7a4a1a',
         dialogue: ["Copycat's my name — I mimic every word you say... starting now, retroactively.", "Your TWINBEAK impression? Flawless. Wait. That was ME. Ugh, I've confused myself again."] },
-      { x: 5, y: 8, name: 'MART CLERK', art: 'clerk', skin: '#f0c8a0', shirt: '#3a6ac0', pants: '#2a2a3a', hair: '#2a1a0a',
+      { x: 5, y: 8, name: 'MART CLERK', art: 'clerk-arden', skin: '#f0c8a0', shirt: '#3a6ac0', pants: '#2a2a3a', hair: '#1a2a4a',
         mart: { stock: ['pokeball', 'greatball', 'superpotion', 'hyperpotion', 'fullheal', 'revive'] },
         dialogue: ["Farsight Mart, ground floor, everything a traveling trainer needs. The big city's prices, the small town's smile."] },
     ],
@@ -289,7 +289,7 @@ export const MAPS3 = {
         dialogue: ["Vantage is under new management, kid — ours. Show yourself out.", "Management's gonna dock my pay for this..."] },
       { x: 13, y: 8, name: 'EMPLOYEE', art: 'lady', skin: '#f0c8a0', shirt: '#3a6ac0', pants: '#2a2a3a', hair: '#a05a2a',
         dialogue: ["They stormed the president's office upstairs. Someone dropped a Card Key in the lobby rush — check the corner by the plants!", "Please — my POLYCRANE project is up there. And, uh. My lunch. Mostly the project."] },
-      { x: 3, y: 8, name: 'RECEPTIONIST', art: 'lady', skin: '#f0c8a0', shirt: '#e86a5a', pants: '#2a2a3a', hair: '#1a1a1a',
+      { x: 3, y: 8, name: 'RECEPTIONIST', art: 'host-arden', skin: '#f0c8a0', shirt: '#e86a5a', pants: '#2a2a3a', hair: '#1a1a1a',
         dialogue: ["Welcome to Vantage Co.! ...Is what I would say, on a normal day. Today the lobby belongs to men in black.", "The lift doors upstairs only answer to the Card Key. Company policy. Criminal policy too, apparently."] },
     ],
     encounters: null,
@@ -559,7 +559,7 @@ export const MAPS3 = {
         dialogue: ["I volunteer at the Kin House. Mr. Fuji takes in every orphan the roads leave behind.", "Lately the tower's restless — a mother's spirit, the channelers say, searching for her child."] },
       { x: 9, y: 10, name: 'CHILD', art: 'kid', skin: '#f0c8a0', shirt: '#3a9ac0', pants: '#2a3a4a', hair: '#6a4a2a',
         dialogue: ["My grandma says the tower ghosts are just Kin who loved us too much to leave.", "Do you believe her? I do. It makes the tower feel less scary. Mostly."] },
-      { x: 15, y: 11, name: 'MART CLERK', art: 'clerk', skin: '#f0c8a0', shirt: '#3a6ac0', pants: '#2a2a3a', hair: '#2a1a0a',
+      { x: 15, y: 11, name: 'MART CLERK', art: 'clerk-arden', skin: '#f0c8a0', shirt: '#3a6ac0', pants: '#2a2a3a', hair: '#1a1a2a',
         mart: { stock: ['pokeball', 'greatball', 'superpotion', 'hyperpotion', 'antidote', 'awakening'] },
         dialogue: ["Hushmoor Mart. Quiet shelves, honest prices. Travelers heading south stock up on Antidotes — the fishing road is all fangs."] },
     ],
@@ -844,7 +844,7 @@ export const MAPS3 = {
         dialogue: ["Mmh — pardon the mumbling, lost my Gold Teeth to the Bramble Preserve mud again.", "Step through the south gatehouse for the Safari, mmh. Find my teeth in there and I'll teach your Kin to push boulders like foam. Mmh!"] },
       { x: 3, y: 9, name: 'ZOO FAN', art: 'lady', skin: '#f0c8a0', shirt: '#e08a3a', pants: '#2c3049', hair: '#7a4a1a',
         dialogue: ["The zoo's NURSELING waved at me once. WAVED. I think about it every day.", "Marek's gym is full of invisible walls. Ninjas, man. Ninjas."] },
-      { x: 15, y: 8, name: 'MART CLERK', art: 'clerk', skin: '#f0c8a0', shirt: '#3a6ac0', pants: '#2a2a3a', hair: '#2a1a0a',
+      { x: 15, y: 8, name: 'MART CLERK', art: 'clerk-arden', skin: '#f0c8a0', shirt: '#3a6ac0', pants: '#2a2a3a', hair: '#1a1a2a',
         mart: { stock: ['greatball', 'ultraball', 'hyperpotion', 'fullheal', 'revive', 'antidote'] },
         dialogue: ["Bramble Mart! Safari-goers, take note: Ultra Balls and Full Heals, right here, no mud required."] },
       // Wave 5b: AUNTIE MOSS moved into her house (house-fuchsia in
@@ -1264,7 +1264,7 @@ export const MAPS3 = {
         dialogue: ["My MEGACELL, Dorry, rolls downhill faster than gossip. I adore her; my ankles do not.", "Trade you for a GALVAMUS? Something with legs, for once. Please. My shins beg you."] },
       { x: 12, y: 8, name: 'DR. EMBER', art: 'scientist', skin: '#f0c8a0', shirt: '#f0f0f0', pants: '#4a4a5a', hair: '#e07830', revive: true,
         dialogue: ["The lab behind me coaxes life out of stone — bring a fossil, any fossil, and our machines will do the rest.", "Helix, dome, even amber older than the island. Stone remembers, trainer. We just remind it how."] },
-      { x: 14, y: 11, name: 'MART CLERK', art: 'clerk', skin: '#f0c8a0', shirt: '#3a6ac0', pants: '#2a2a3a', hair: '#2a1a0a',
+      { x: 14, y: 11, name: 'MART CLERK', art: 'clerk-arden', skin: '#f0c8a0', shirt: '#3a6ac0', pants: '#2a2a3a', hair: '#1a1a2a',
         mart: { stock: ['ultraball', 'hyperpotion', 'maxpotion', 'fullrestore', 'revive', 'firestone', 'waterstone', 'thunderstone', 'leafstone'] },
         dialogue: ["Caldera Mart — last proper shop before the League road turns north. Stones, balls, and burn insurance."] }
     ],
@@ -1384,7 +1384,7 @@ export const MAPS3 = {
     npcs: [
       { x: 2, y: 8, name: 'HIKER', art: 'hiker', skin: '#d8a878', shirt: '#50368e', pants: '#4a4a5a', hair: '#3a2a1a',
         dialogue: ["Heading north? Route 2's grass is thicker — I saw a FUSSAPE up there yesterday.", "Fighting-types crack rock wide open. A FUSSAPE that knows Low Kick will humble Garran's PEBBLET."] },
-      { x: 10, y: 4, name: 'GYM GUIDE', art: 'clerk', skin: '#e8b888', shirt: '#c03a3a', pants: '#2a2a3a', hair: '#1a1a1a',
+      { x: 10, y: 4, name: 'GYM GUIDE', art: 'clerk-arden', skin: '#e8b888', shirt: '#c03a3a', pants: '#2a2a3a', hair: '#1a1a1a',
         dialogue: ["That gym slept for years, doors chained, paint peeling. Then HE came back and the lights came on in one night.", "Word is the League won't even look at you without all eight. Knock when you're carrying seven, trainer."] },
     ],
     encounters: null,
@@ -1571,10 +1571,10 @@ export const MAPS3 = {
       { x: 12, y: 14, text: 'CROWNSPIRE — South: CROWN ROAD.' }
     ],
     npcs: [
-      { x: 14, y: 11, name: 'MART CLERK', art: 'clerk', skin: '#f0c8a0', shirt: '#3a6ac0', pants: '#2a2a3a', hair: '#2a1a0a',
+      { x: 14, y: 11, name: 'MART CLERK', art: 'clerk-arden', skin: '#f0c8a0', shirt: '#3a6ac0', pants: '#2a2a3a', hair: '#1a1a1a',
         mart: { stock: ['ultraball', 'maxpotion', 'fullrestore', 'maxrevive', 'fullheal'] },
         dialogue: ["Last shop on the mountain, trainer. Whatever you're missing, you're missing it all the way down."] },
-      { x: 9, y: 7, name: 'LEAGUE GUIDE', art: 'clerk', skin: '#e8b888', shirt: '#6a5a8a', pants: '#2a2a3a', hair: '#c0c0c0',
+      { x: 9, y: 7, name: 'LEAGUE GUIDE', art: 'clerk-arden', skin: '#e8b888', shirt: '#6a5a8a', pants: '#2a2a3a', hair: '#c0c0c0',
         dialogue: ["Four elites, one champion, zero exits once the first door shuts. Heal here. Save here. Breathe here.", "Win, and the Hall of Fame takes your team's names forever. Lose, and the mountain walk is... educational."] },
     ],
     encounters: null,
@@ -1776,7 +1776,7 @@ export const MAPS3 = {
     npcs: [
       // Wave T1: the Mart's own clerk, re-seated from the west field
       // to the main street at his shop's east corner.
-      { x: 14, y: 9, name: 'MART CLERK', art: 'clerk', skin: '#f0c8a0', shirt: '#3a6ac0', pants: '#2a2a3a', hair: '#2a1a0a',
+      { x: 14, y: 9, name: 'MART CLERK', art: 'clerk-arden', skin: '#f0c8a0', shirt: '#3a6ac0', pants: '#2a2a3a', hair: '#1a1a1a',
         mart: { stock: ['pokeball', 'greatball', 'potion', 'superpotion', 'antidote', 'awakening'] },
         dialogue: ["Dawnwick Mart — small shelves, honest prices. Everything a first road needs."] },
       { x: 10, y: 4, name: 'VALE', art: 'gary', skin: '#f0c8a0', shirt: '#3a5a9a', pants: '#2a2a3a', hair: '#6a4a2a',

@@ -65,20 +65,153 @@ const PIN = {
   NAMED_POSTS: 594,
   NAMED_DESIGNS: 271,
   SERVICE_POSTS: 131,
-  SERVICE_DESIGNS: 34,
+  SERVICE_DESIGNS: 69,
   SCOPE_POSTS: 725,
   NAMED_DUP_GROUPS: 50,
   NAMED_DUP_POSTS: 354,
-  SERVICE_DUP_POSTS: 116,
-  SERVICE_MAX_DESIGN_POSTS: 50,
+  SERVICE_DUP_POSTS: 99,
+  SERVICE_MAX_DESIGN_POSTS: 3,
   SERVICE_TOWN_REPEAT_PAIRS: 0,
 };
-// C4: cast-*/service-region kinds in use, pinned. T0: none yet.
-const PINNED_CAST_KINDS = [];
+// C4: cast-*/service-region kinds in use, pinned. T1: the 14 service
+// kinds (clerk/attendant/host × region; Trial Grounds is the game's
+// sixth region block — T0's region list predated the service census
+// isolating its 8 clerk posts, so CAST_KIND_RE below carries 'trial'
+// from T1, disclosed in the T1 checklist).
+const PINNED_CAST_KINDS = ['attendant-amber', 'attendant-borea', 'attendant-maris', 'attendant-yamato', 'clerk-amber', 'clerk-arden', 'clerk-borea', 'clerk-maris', 'clerk-trial', 'clerk-yamato', 'host-arden', 'host-borea', 'host-maris', 'host-yamato'];
 // C5: post keys (map#ordinal) whose DESIGN fields may differ from the
 // T0 snapshot. T0: none — any design-field change fails. Tranches add
 // their spec-listed posts here in-commit, disclosed in the checklist.
-const SPEC_DESIGN_EXCEPTIONS = [];
+const SPEC_DESIGN_EXCEPTIONS = [
+  'azalea#3',
+  'blackthorn#2',
+  'canalave#0',
+  'celadon#1',
+  'celadon#3',
+  'celestic#0',
+  'cerulean#0',
+  'cherrygrove#3',
+  'cianwood#0',
+  'cinnabar#4',
+  'dewford#3',
+  'ecruteak#3',
+  'eterna#0',
+  'evergrande#0',
+  'fallarbor#3',
+  'fight-area#0',
+  'fight-area#2',
+  'floaroma#0',
+  'fortree#3',
+  'frontier-arena#0',
+  'frontier-dome#0',
+  'frontier-factory#0',
+  'frontier-palace#0',
+  'frontier-pike#0',
+  'frontier-pyramid#0',
+  'frontier-tower#0',
+  'frontierhub#0',
+  'fuchsia#2',
+  'galactic-eterna#0',
+  'galactic-hq#0',
+  'gamecorner#0',
+  'gamecorner#1',
+  'gamecorner#2',
+  'goldenrod#4',
+  'gym-azalea#0',
+  'gym-blackthorn#0',
+  'gym-canalave#0',
+  'gym-cianwood#0',
+  'gym-dewford#0',
+  'gym-ecruteak#0',
+  'gym-eterna#0',
+  'gym-fortree#0',
+  'gym-goldenrod#0',
+  'gym-hearthome#0',
+  'gym-lavaridge#0',
+  'gym-mahogany#0',
+  'gym-mauville#0',
+  'gym-mossdeep#0',
+  'gym-olivine#0',
+  'gym-oreburgh#0',
+  'gym-pastoria#0',
+  'gym-petalburg#0',
+  'gym-rustboro#0',
+  'gym-snowpoint#0',
+  'gym-sootopolis#0',
+  'gym-sunnyshore#0',
+  'gym-veilstone#0',
+  'gym-violet#0',
+  'hearthome#0',
+  'house-canalave#0',
+  'house-cianwood#0',
+  'house-ecruteak#0',
+  'house-fight#0',
+  'house-hearthome#0',
+  'house-lavaridge#0',
+  'house-pastoria#0',
+  'house-rustboro#0',
+  'house-sandgem#0',
+  'house-snowpoint#0',
+  'house-veilstone#0',
+  'indigo#0',
+  'indigo#1',
+  'jubilife#0',
+  'kumquat#4',
+  'kumquat-gym#1',
+  'lake-valor#0',
+  'lavaridge#3',
+  'lavender#2',
+  'league-evergrande#2',
+  'league-lobby#0',
+  'league-lobby#1',
+  'lilycove#3',
+  'littleroot#0',
+  'mahogany#2',
+  'mahogany#4',
+  'mauville#3',
+  'mikan#4',
+  'mikan-gym#1',
+  'moro#0',
+  'mossdeep#3',
+  'navel#0',
+  'navel-gym#1',
+  'newbark#0',
+  'oldale#3',
+  'olivine#4',
+  'oreburgh#0',
+  'pacifidlog#0',
+  'pallet#0',
+  'pastoria#0',
+  'petalburg#3',
+  'pewter#0',
+  'pummelo#5',
+  'radio-tower-1#0',
+  'resort-area#0',
+  'resort-area#1',
+  'rustboro#3',
+  'saffron#2',
+  'sandgem#0',
+  'shamouti#0',
+  'silph1#2',
+  'silvertown#2',
+  'slateport#4',
+  'snowpoint#1',
+  'solaceon#0',
+  'sootopolis#3',
+  'sunnyshore#0',
+  'survival-area#0',
+  'trovita#5',
+  'trovita-gym#1',
+  'twinleaf#0',
+  'valencia#5',
+  'valley-windworks#0',
+  'veilstone#0',
+  'veilstone#1',
+  'verdanturf#0',
+  'vermilion#0',
+  'violet#3',
+  'viridian#1',
+];
 
 // ---------- census, assembled per map in loadMap order ----------
 const { MAPS } = await imp('src/data/maps.mjs');
@@ -144,7 +277,12 @@ function classify(n) {
   const kind = npcArtKind(n);
   if (kind === 'pc' || KIT_CAST_EXCEPTIONS.has(kind)) return 'exempt';
   const name = (n.name || '').toUpperCase().trim();
-  if (kind === 'nurse' || kind === 'clerk' || SERVICE_NAME_RE.test(name)) return 'service';
+  // T1: the per-region service kinds are the 'clerk' kind's successors
+  // — posts T0 classified by kind==='clerk' whose names carry no
+  // counter-role word (GYM GUIDE, LEAGUE GUIDE, DEPT MANAGER VEE,
+  // SHOPKEEPER PELL) stay SERVICE on their region kinds, so the T0
+  // classification (and every named pin) is preserved exactly.
+  if (kind === 'nurse' || kind === 'clerk' || /^(clerk|attendant|host)-/.test(kind) || SERVICE_NAME_RE.test(name)) return 'service';
   if (!name) return 'generic';
   let rest = name;
   let stripped = true;
@@ -285,7 +423,7 @@ const swapBlock = tableBlock(artSrc, 'const NPC_SWAP_KEYS =');
 const specBlock = tableBlock(artSrc, 'const KIT_CAST_SPEC =');
 ok(!!swapBlock && !!specBlock, 'C4: NPC_SWAP_KEYS and KIT_CAST_SPEC blocks found in art.mjs');
 const inTable = (block, kind) => new RegExp(`['"]?${kind.replace(/[-]/g, '\\-')}['"]?\\s*:`).test(block);
-const CAST_KIND_RE = /^cast-|^(clerk|attendant|host)-(arden|yamato|maris|borea|amber)$/;
+const CAST_KIND_RE = /^cast-|^(clerk|attendant|host)-(arden|yamato|maris|borea|amber|trial)$/;
 const usedCastKinds = [...new Set(scope.map((p) => p._kind).filter((k) => CAST_KIND_RE.test(k)))].sort();
 for (const k of usedCastKinds) {
   ok(inTable(swapBlock, k), `C4 ${k}: registered in NPC_SWAP_KEYS`);

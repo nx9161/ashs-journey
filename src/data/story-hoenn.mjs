@@ -1063,7 +1063,7 @@ export const HOENN_NPCS = [
     dialogue: ['The cave keeps the first argument. The sky keeps its answer.'] },
   { map: 'petalburg-woods', x: 12, y: 9, name: 'AURA KEEPER', art: 'elder', skin: '#d8a878', shirt: '#6b2941', pants: '#2a2a3a', hair: '#e8e8e8', hoenn: 'lucario_keeper',
     dialogue: ['The old tree remembers an aura that walked like a friend.'] },
-  { map: 'league-evergrande', x: 9, y: 5, name: 'LEAGUE REGISTRAR', art: 'scientist', skin: '#e8b888', shirt: '#3a4a6a', pants: '#2a2a3a', hair: '#4a3a2a', hoenn: 'hoenn_conference',
+  { map: 'league-evergrande', x: 9, y: 5, name: 'LEAGUE REGISTRAR', art: 'clerk-maris', skin: '#e8b888', shirt: '#3a4a6a', pants: '#2a2a3a', hair: '#4a3a2a', hoenn: 'hoenn_conference',
     dialogue: ['Eight badges open this bracket, trainer.'] },
   { map: 'league-evergrande', x: 13, y: 8, name: 'MORRISON', art: 'youngster', skin: '#f0c8a0', shirt: '#c85a2a', pants: '#2a304a', hair: '#7a3a1a', hoenn: 'morrison',
     dialogue: ['No holding back, either of us. That IS the friendship.'] },

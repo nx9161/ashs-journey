@@ -59,7 +59,7 @@ export const MAPS2 = {
       { x: 6, y: 12, text: 'THE CENTER — Rest your Kin inside. The Museum square lies north; Route 2 south.' },
     ],
     npcs: [
-      { x: 13, y: 11, name: 'MART CLERK', art: 'clerk', skin: '#f0c8a0', shirt: '#3a6ac0', pants: '#2a2a3a', hair: '#2a1a0a',
+      { x: 13, y: 11, name: 'MART CLERK', art: 'clerk-arden', skin: '#f0c8a0', shirt: '#3a6ac0', pants: '#2a2a3a', hair: '#2a1a0a',
         mart: { stock: ['pokeball', 'greatball', 'potion', 'superpotion', 'antidote', 'awakening'] },
         dialogue: ["Flintridge Mart — stone-country stock. The Lunestone road eats potions; plan ahead."] },
       { x: 10, y: 4, name: 'COACH', art: 'coach', skin: '#d8a878', shirt: '#c03a3a', pants: '#2a2a3a', hair: '#1a1a1a',
@@ -312,7 +312,7 @@ export const MAPS2 = {
       { x: 13, y: 1, text: 'TIDEHAVEN MART — Supplies for the bridge road, the river, and everything north of both.' },
     ],
     npcs: [
-      { x: 14, y: 3, name: 'MART CLERK', art: 'clerk', skin: '#f0c8a0', shirt: '#3a6ac0', pants: '#2a2a3a', hair: '#2a1a0a',
+      { x: 14, y: 3, name: 'MART CLERK', art: 'clerk-arden', skin: '#f0c8a0', shirt: '#3a6ac0', pants: '#2a2a3a', hair: '#2a1a0a',
         mart: { stock: ['pokeball', 'greatball', 'superpotion', 'hyperpotion', 'antidote', 'parlyzheal', 'revive'] },
         dialogue: ["Tidehaven Mart — bridge-and-river stock, waterproofed twice over."] },
       { x: 17, y: 1, name: 'ODO', art: 'scientist', skin: '#f0c8a0', shirt: '#5d3fa5', pants: '#3a3a4a', hair: '#a05a2a',
@@ -503,7 +503,7 @@ export const MAPS2 = {
       { x: 18, y: 7, text: "ARCPORT DOCKS — Cranes, crates and the captains' row. Ferries for every sea leave from the dock street." },
     ],
     npcs: [
-      { x: 13, y: 4, name: 'MART CLERK', art: 'clerk', skin: '#f0c8a0', shirt: '#3a6ac0', pants: '#2a2a3a', hair: '#2a1a0a',
+      { x: 13, y: 4, name: 'MART CLERK', art: 'clerk-arden', skin: '#f0c8a0', shirt: '#3a6ac0', pants: '#2a2a3a', hair: '#2a1a0a',
         mart: { stock: ['pokeball', 'greatball', 'superpotion', 'hyperpotion', 'antidote', 'parlyzheal', 'revive'] },
         dialogue: ["Arcport Mart — harbour stock. Everything ferry-proof, gull-proof, and salt-proof."] },
       { x: 3, y: 9, name: 'OFFICER RAE', art: 'officer', skin: '#d8a878', shirt: '#3a6ac0', pants: '#2a2a3a', hair: '#1a1a1a',
@@ -707,7 +707,7 @@ export const MAPS2 = {
       { x: 5, y: 12, name: 'ELIAS', art: 'elder', skin: '#e8b888', shirt: '#50368e', pants: '#4a4a5a', hair: '#c0c0c0',
         giveMon: { species: 'eevee', level: 25 },
         dialogue: ["Atop the old condo I kept a PRISMKIT — bright little thing, brimming with possible futures.", "My traveling days are done. Take PRISMKIT, and let it become whatever your journey needs."] },
-      { x: 11, y: 8, name: 'HOSTESS', art: 'lady', skin: '#f0c8a0', shirt: '#e86a5a', pants: '#2a2a3a', hair: '#1a1a1a',
+      { x: 11, y: 8, name: 'HOSTESS', art: 'host-arden', skin: '#f0c8a0', shirt: '#e86a5a', pants: '#2a2a3a', hair: '#1a1a1a',
         dialogue: ["Welcome to the Game Corner, hon! Coins, prizes, and absolutely no funny business by the poster. None. Ever.", "The boss counts the slot tokens twice a night. Paranoid? In THIS city? Ha."] },
       { x: 4, y: 8, name: 'PERFUMER', art: 'lady', skin: '#f0c8a0', shirt: '#5d3fa5', pants: '#3a3a4a', hair: '#a05a2a',
         dialogue: ["Verna's perfume is distilled from her own garden. One whiff and even a SOMNIBEAR sighs.", "Careful — her gym smells sweet right up until the Sleep Powder."] },
@@ -716,7 +716,7 @@ export const MAPS2 = {
       // Cole parley, bond-gated to Phase 5). The ribbon's stock is
       // "late": ITEMS.secondwindribbon.minBadges = 7 gates the row in
       // openMart until the player carries seven badges.
-      { x: 17, y: 12, name: 'MART CLERK', art: 'clerk', skin: '#f0c8a0', shirt: '#3a6ac0', pants: '#2a2a3a', hair: '#2a1a0a',
+      { x: 17, y: 12, name: 'MART CLERK', art: 'clerk-arden', skin: '#f0c8a0', shirt: '#3a6ac0', pants: '#2a2a3a', hair: '#1a2a4a',
         mart: { stock: ['greatball', 'ultraball', 'superpotion', 'hyperpotion', 'secondwindribbon'] },
         dialogue: ["Canopy Atelier — ribbons, charms, and the odd heirloom. Our Second-Wind Ribbon? Reserved for proven trainers. Seven badges, hon."] },
     ],
@@ -757,13 +757,13 @@ export const MAPS2 = {
       { x: 12, y: 2, text: 'SLOT MACHINE — Someone carved tiny letters here: R WAS HERE.' },
     ],
     npcs: [
-      { x: 5, y: 3, name: 'PRIZE CLERK', art: 'clerk', skin: '#f0c8a0', shirt: '#6a5a8a', pants: '#2a2a3a', hair: '#1a1a1a',
+      { x: 5, y: 3, name: 'PRIZE CLERK', art: 'clerk-arden', skin: '#f0c8a0', shirt: '#6a5a8a', pants: '#2a2a3a', hair: '#1a1a1a',
         prize: { species: 'porygon', coins: 6500 },
         dialogue: ["Six thousand five hundred coins buys you the future, friend — a POLYCRANE, fresh from the lab.", "Digital, loyal, and it never eats. Best deal on this floor."] },
-      { x: 11, y: 3, name: 'COIN CLERK', art: 'clerk', skin: '#e8b888', shirt: '#6a5a8a', pants: '#2a2a3a', hair: '#4a3a2a',
+      { x: 11, y: 3, name: 'COIN CLERK', art: 'clerk-arden', skin: '#e8b888', shirt: '#6a5a8a', pants: '#2a2a3a', hair: '#4a3a2a',
         prize: { species: 'abra', coins: 180 },
         dialogue: ["One eighty gets you an NAPSEER. It'll teleport from strangers — but you're not a stranger, are you?", "Five hundred, a MOONLET. Sweet as the perfume upstairs, twice as stubborn."] },
-      { x: 14, y: 5, name: 'FAIRY CLERK', art: 'clerk', skin: '#f0c8a0', shirt: '#e86a5a', pants: '#3a3a4a', hair: '#c0a03a',
+      { x: 14, y: 5, name: 'FAIRY CLERK', art: 'clerk-arden', skin: '#f0c8a0', shirt: '#e86a5a', pants: '#3a3a4a', hair: '#c0a03a',
         prize: { species: 'clefairy', coins: 500 },
         dialogue: ["MOONLET, five hundred coins, final offer. It dances on moonlit nights, you know.", "No refunds. The moon doesn't do refunds either."] },
       { x: 2, y: 9, name: 'REGULAR', art: 'gent', skin: '#d8a878', shirt: '#50368e', pants: '#4a4a5a', hair: '#3a2a1a',

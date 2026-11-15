@@ -224,25 +224,31 @@ ok('F the 15 base ARENA_AMBIENT treatments hash unchanged',
 // signs, items, hidden, events, encounters — sha-pinned per gym at
 // T0 on main f35a51c7. A dressing change that needs one of these
 // re-pins here in its own commit, disclosed per gym.
+// W-CHAR2 T1 re-pin (disclosed): the 28 gyms hosting GYM ATTENDANT
+// posts (Yamato/Maris/Borea 8 each + the 4 Amber gyms) moved to their
+// new values — the npcs component's DESIGN fields only (attendant
+// art kind youngster/ranger -> attendant-<region>, names/palettes
+// kept), proven per-post by char-design C5 (invariant hash unchanged
+// on every post). Positions, warps, signs, items, events untouched.
 const DATA_PINS = {
-  'gym': 'a3ffbe5217078854', 'gym-azalea': '9926ccbdfd69ad85',
-  'gym-blackthorn': '3d3863f0916eb3ff', 'gym-canalave': 'ac8714fd27d51663',
+  'gym': 'a3ffbe5217078854', 'gym-azalea': 'e6baf7d42f5e3f02',
+  'gym-blackthorn': '8edf083f3877611a', 'gym-canalave': '395587c6b5c4d279',
   'gym-celadon': '06812833d205cd72', 'gym-cerulean': '2e9ecd0148931275',
-  'gym-cianwood': 'f41186b1fbe99039', 'gym-cinnabar': 'ed18a27b80bb0ca1',
-  'gym-dewford': '2f59e62cfa054987', 'gym-ecruteak': 'a80e1ea87fdd3e79',
-  'gym-eterna': '524cdf7ce5989a65', 'gym-fortree': '4388cba2e39ec5a1',
-  'gym-fuchsia': 'b72b008b7adeeac8', 'gym-goldenrod': '01cf37aa2d9cfd86',
-  'gym-hearthome': '235257917429676e', 'gym-lavaridge': '709e704e412ec503',
-  'gym-mahogany': '5d326656d20aab43', 'gym-mauville': 'dc0c527c2343becc',
-  'gym-mossdeep': '5e074d76ac6bb172', 'gym-olivine': '45eb2efd0ba9fd3b',
-  'gym-oreburgh': '43eaade16334c69a', 'gym-pastoria': '2e152943721f235e',
-  'gym-petalburg': '4e4439e7dd99f879', 'gym-rustboro': 'afbfb4034814cfbe',
-  'gym-saffron': '482cfe81a0c76152', 'gym-snowpoint': '8f431598419d15b4',
-  'gym-sootopolis': '9003f4a99962caa2', 'gym-sunnyshore': 'd73097a3b385bfdf',
-  'gym-veilstone': '51bce8a057103f7e', 'gym-vermilion': '31bd6c63bd6fa004',
-  'gym-violet': '5e894dbd5c4ee4d3', 'gym-viridian': '3bc44acfb2ca1a66',
-  'kumquat-gym': 'ef705fa981d4ff23', 'mikan-gym': '47d211de1a606ab2',
-  'navel-gym': '24906ec4dbcbe789', 'trovita-gym': '8600c7b837f3656e',
+  'gym-cianwood': 'b51478f7d94b183a', 'gym-cinnabar': 'ed18a27b80bb0ca1',
+  'gym-dewford': 'f836fbf25152f97f', 'gym-ecruteak': 'dd81823d2ece564c',
+  'gym-eterna': '7a688eb5eca57527', 'gym-fortree': '2ecf6d26ffd4716e',
+  'gym-fuchsia': 'b72b008b7adeeac8', 'gym-goldenrod': 'c3574be89b4b1a21',
+  'gym-hearthome': '0a546e8c31088540', 'gym-lavaridge': 'cd200524a5251a0c',
+  'gym-mahogany': '75dc05b36dcca946', 'gym-mauville': '0571cefcb84cd89b',
+  'gym-mossdeep': '9a8de5e6c813c5c8', 'gym-olivine': '89e3c46cf5b64d65',
+  'gym-oreburgh': 'd409a211377d003e', 'gym-pastoria': 'b603f57d4c6265a4',
+  'gym-petalburg': '1f324dcfca7d537e', 'gym-rustboro': 'f22fc36a100bfd1d',
+  'gym-saffron': '482cfe81a0c76152', 'gym-snowpoint': '6b2d7fd9e44729ea',
+  'gym-sootopolis': '9c5f4963fa358881', 'gym-sunnyshore': '465093a4e0a6845f',
+  'gym-veilstone': 'debcdc8177394759', 'gym-vermilion': '31bd6c63bd6fa004',
+  'gym-violet': '12f7e012231e0e5f', 'gym-viridian': '3bc44acfb2ca1a66',
+  'kumquat-gym': '7eb138c02bc9010b', 'mikan-gym': '55adcf88f20b12c1',
+  'navel-gym': '497f294e919354a6', 'trovita-gym': 'd68980a4fe792d62',
 };
 for (const id of GYM_IDS) {
   const m = MAPS[id];

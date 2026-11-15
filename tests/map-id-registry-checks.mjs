@@ -141,11 +141,16 @@ ok('chain: victory-road -> r223 + pokemon-league (4 returns)',
 // id: [status 'I'|'D', 'file:fnv8', ...] — copies in merge order, winner last.
 // Burn-down rule: a commit that reconciles or deliberately edits a copy
 // updates that id's line here in the same commit. Nothing else may move it.
+// W-CHAR2 T1 (deliberate edit, disclosed): gamecorner / silph1 /
+// vermilion lines moved — service posts standing on those maps took
+// per-region service kinds (art field only; the frozen layer structure
+// is untouched, every layer's fingerprint moved only because the
+// resolved NPC data carries the new art value).
 const BASELINE = {
   // Reconcile R3: maps2 is NOT a dead copy — maps4.mjs derives its winner
   // from it ({...MAPS2.gamecorner, warps + the poster entrance}), so the
   // pair is frozen as a two-layer single definition.
-  "gamecorner": ['D', 'maps2.mjs:37481247', 'maps4.mjs:e32d7897'],
+  "gamecorner": ['D', 'maps2.mjs:b030ed1c', 'maps4.mjs:19c55a0c'],
   // Reconcile R3: maps2 is NOT a dead copy — maps4.mjs derives its winner
   // from it ({...MAPS2.hideout, warps re-pointed at the Game Corner poster
   // entrance, + the entry event}), so the pair is frozen as a two-layer
@@ -158,7 +163,7 @@ const BASELINE = {
   // Reconcile R3: maps2's corpse retired; maps3 is NOT a dead copy —
   // maps4.mjs derives its winner from it ({...MAPS3.silph1, events + the
   // rival ambush}), so the pair is frozen as a two-layer single definition.
-  "silph1": ['D', 'maps3.mjs:de66dcd1', 'maps4.mjs:b46c0ad2'],
+  "silph1": ['D', 'maps3.mjs:78f6b844', 'maps4.mjs:e3b8c1cd'],
   // Reconcile R3: maps2 is NOT a dead copy — maps4.mjs derives its winner
   // from it ({...MAPS2.stanne, start} — the boarding patch), so the pair
   // is frozen as a two-layer single definition.
@@ -169,7 +174,7 @@ const BASELINE = {
   // MAPS6 spreads maps5 (+CAPT EASTBOUND) and wins the fold. The earlier
   // copies are load-bearing layers, not dead duplicates; do not delete
   // them without materializing the chain first.
-  "vermilion": ['D', 'maps2.mjs:481e21e1', 'maps4.mjs:65ebc25b', 'maps5.mjs:8da66e0f', 'maps6.mjs:f9470985'],
+  "vermilion": ['D', 'maps2.mjs:bb3a1cf6', 'maps4.mjs:b3365ecc', 'maps5.mjs:7e80e24c', 'maps6.mjs:2267d920'],
 };
 
 const dupNow = new Map([...byId.entries()].filter(([, v]) => v.length > 1));
