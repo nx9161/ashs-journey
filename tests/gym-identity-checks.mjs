@@ -346,8 +346,8 @@ const VENUE_IDS = [
 // Ratchets (Arenas T0 measured; burn down per tranche, in-commit only):
 // T1 +14 sovereigns/finales -> 14, T2 +11 league/stadiums -> 25,
 // T3 +18 remaining legendary -> 43, T4 +10 frontier -> 53 (closure).
-const VENUE_ARENA_COVERED = 0;
-const VENUE_TUPLES_DISTINCT = 0;
+const VENUE_ARENA_COVERED = 14;
+const VENUE_TUPLES_DISTINCT = 14;
 
 ok('V1 venue census is exactly the pinned 53 and every venue id is a merged map',
   VENUE_IDS.length === 53 && new Set(VENUE_IDS).size === 53
