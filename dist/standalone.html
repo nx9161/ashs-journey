@@ -7253,6 +7253,38 @@ W15CH_KIND_DEFS.forEach(([kind], i) => {
 const W15CH_PROP_KINDS = W15CH_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
 const W15CH_WALL_KINDS = W15CH_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
 const W15CH_FLOOR_KINDS = W15CH_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
+// ---- Wave W15-T3 (the Light Pair): Signal's tall mast + the Gleam
+// Lighthouse's tall caps. Indices per WAVE-W15-LANDMARKS-PLAN §2
+// (the wave's claims interleave by design: T1 1544-1551, T2
+// 1552-1554 + 1556-1558, T3 1555 + 1562-1563, T4 1559-1561).
+// 'radiomast-tall' (prop, idx 1555): the Radio Tower's lattice at
+// its real height — a 16x48 cross-braced iron mast with side dish
+// and red beacon, bottom-anchored (Premium+ W6 TX-3) on the SAME
+// compound cell (goldenrod (25,2)) the 16x16 'radiomast' stood on;
+// the short kind stays registered for its other cells.
+// 'gleamcap-l'/'gleamcap-r' (wall, idx 1562-1563): the Gleam
+// Lighthouse's 16x48 lamp-tower caps — olivine stone shaft,
+// gallery + wraparound lamp room, harbour-red standing-seam
+// skirt — swapped onto the lighthouse's existing roof row only
+// (olivine y=2, x=21-24: l,l,r,r, the mirrored pair x2). Doors,
+// warps, posts, ground: zero cells touched. Authored art:
+// assets/sprites/pix/tiles/tile-prop-radiomast-tall.pix,
+// tile-gleamcap-l.pix, tile-gleamcap-r.pix.
+const W15T3_KIND_DEFS = [
+  ['radiomast-tall', 'prop'],
+  ['gleamcap-l', 'wall'],
+  ['gleamcap-r', 'wall'],
+];
+const W15T3_KIND_INDEX = { 'radiomast-tall': 1555, 'gleamcap-l': 1562, 'gleamcap-r': 1563 };
+const W15T3_KIND_CHARS = {};
+W15T3_KIND_DEFS.forEach(([kind]) => {
+  const ch = String.fromCodePoint(0x1E00 + W15T3_KIND_INDEX[kind]);
+  W15T3_KIND_CHARS[kind] = ch;
+  TILE_CHARS[ch] = kind;
+});
+const W15T3_PROP_KINDS = W15T3_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
+const W15T3_WALL_KINDS = W15T3_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
+const W15T3_FLOOR_KINDS = W15T3_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
 const SINNOH_TOWN_GROUND_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg);
 const SINNOH_TOWN_GROUND2_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg2);
 // TX-3: the 8 gym exteriors by town (original type-accent motifs).
@@ -126010,6 +126042,156 @@ const ART = {
   "zapdos-back-bob": { base: "zapdos-back", w: 64, h: 64, pal: {}, shiftY: 2 },
   "zigzagoon-back-bob": { base: "zigzagoon-back", w: 64, h: 64, pal: {}, shiftY: 2 },
   "zubat-back-bob": { base: "zubat-back", w: 64, h: 64, pal: {}, shiftY: 2 },
+  "tile-prop-radiomast-tall": { w: 16, h: 48, pal: {"k":"#3a3f47","W":"#aeb6bd","R":"#e8402c","r":"#8f1f14"}, rows: [
+    ".......Rr.......",
+    ".......kk.......",
+    "......kkkk......",
+    ".......kk.......",
+    ".....WkkkkW.....",
+    "...WW..kk.......",
+    "..WW.kkkk.......",
+    ".WW..kk..k......",
+    "..WW..k..k......",
+    "......k..k......",
+    "......k..k......",
+    "......kkkk......",
+    "......kk.k......",
+    "......kkkk......",
+    "......k.kk......",
+    "......kkkk......",
+    "......kk.k......",
+    "......kkkk......",
+    ".....k.kk.k.....",
+    ".....k.kk.k.....",
+    ".....k.kk.k.....",
+    ".....kk..kk.....",
+    ".....kk..kk.....",
+    ".....kkkkkk.....",
+    "....k.k..k.k....",
+    "....k..kk..k....",
+    "....k..kk..k....",
+    "....k.k..k.k....",
+    "....kk....kk....",
+    "....kkkkkkkk....",
+    "...k.k....k.k...",
+    "...k...kk...k...",
+    "...k...kk...k...",
+    "...k..k..k..k...",
+    "...kk......kk...",
+    "...kkkkkkkkkk...",
+    "..k..k....k..k..",
+    "..k...k..k...k..",
+    "..k....kk....k..",
+    "..k..k....k..k..",
+    "..k.k......k.k..",
+    "..kkkkkkkkkkkk..",
+    ".k..k......k..k.",
+    ".k.....kk.....k.",
+    ".k....k..k....k.",
+    ".k.k........k.k.",
+    ".kkkkkkkkkkkkkk.",
+    ".k............k.",
+  ] },
+  "tile-gleamcap-l": { w: 16, h: 48, pal: {"R":"#b04a3c","D":"#a64434","H":"#cc7263","S":"#74302a","e":"#5f241d","A":"#6c8791","T":"#657e87","L":"#8fa8b3","N":"#c19960","K":"#2e2a26","G":"#c9a227","g":"#ffd98a","o":"#f5a623","W":"#fff6d8"}, rows: [
+    "KKKKKKKKKKKKKKKK",
+    "KKKGKKKGKKKGKKKG",
+    "GGGGGGGGGGGGGGGG",
+    "KKKKKKKKKKKKKKKK",
+    "KoooKoooKoooKooo",
+    "KgggKgggKgggKggg",
+    "KWWWKWWWKWWWKWWW",
+    "KWWWKWWWKWWWKWWW",
+    "KWWWKWWWKWWWKWWW",
+    "KgggKgggKgggKggg",
+    "KgggKgggKgggKggg",
+    "KoooKoooKoooKooo",
+    "KKKKKKKKKKKKKKKK",
+    "GGGGGGGGGGGGGGGG",
+    "K.K.K.K.K.K.K.K.",
+    "KKKKKKKKKKKKKKKK",
+    "TTTTTTTTTTTTTTTT",
+    "TTTTTTTTTTTTTTTT",
+    "TTTAAAAAAAALLLLL",
+    "TTTAAAAAAAALLLLL",
+    "TTTAAAAAKKKLLLLL",
+    "TTTAAAAAKgKLLLLL",
+    "TTTAAAAAKKKLLLLL",
+    "TTTTTTTTTTTTTTTT",
+    "TTTAAAAAAAALLLLL",
+    "TTTAAAAAAAALLLLL",
+    "TTTAAAAAAAALLLLL",
+    "TTTAAAAAAAALLLLL",
+    "TTTAAAAAAAALLLLL",
+    "TTTTTTTTTTTTTTTT",
+    "NNNNNNNNNNNNNNNN",
+    "NNNNNNNNNNNNNNNN",
+    "TTTTTTTTTTTTTTTT",
+    "TTTAAAAAAAALLLLL",
+    "TTTAAAAAAAALLLLL",
+    "TTTTTTTTTTTTTTTT",
+    "TTTAAAAAAAALLLLL",
+    "TTTAAAAAAAALLLLL",
+    "RRRHSRRHSRRHSRRH",
+    "DDDHSDDHSDDHSDDH",
+    "RRRHSRRHSRRHSRRH",
+    "DDDHSDDHSDDHSDDH",
+    "RRRHSRRHSRRHSRRH",
+    "DDDHSDDHSDDHSDDH",
+    "RRRHSRRHSRRHSRRH",
+    "DDDHSDDHSDDHSDDH",
+    "eeeeeeeeeeeeeeee",
+    "eeeeeeeeeeeeeeee",
+  ] },
+  "tile-gleamcap-r": { w: 16, h: 48, pal: {"R":"#b04a3c","D":"#a64434","H":"#cc7263","S":"#74302a","e":"#5f241d","A":"#6c8791","T":"#657e87","L":"#8fa8b3","N":"#c19960","K":"#2e2a26","G":"#c9a227","g":"#ffd98a","o":"#f5a623","W":"#fff6d8"}, rows: [
+    "KKKKKKKKKKKKKKKK",
+    "GKKKGKKKGKKKGKKK",
+    "GGGGGGGGGGGGGGGG",
+    "KKKKKKKKKKKKKKKK",
+    "oooKoooKoooKoooK",
+    "gggKgggKgggKgggK",
+    "WWWKWWWKWWWKWWWK",
+    "WWWKWWWKWWWKWWWK",
+    "WWWKWWWKWWWKWWWK",
+    "gggKgggKgggKgggK",
+    "gggKgggKgggKgggK",
+    "oooKoooKoooKoooK",
+    "KKKKKKKKKKKKKKKK",
+    "GGGGGGGGGGGGGGGG",
+    ".K.K.K.K.K.K.K.K",
+    "KKKKKKKKKKKKKKKK",
+    "TTTTTTTTTTTTTTTT",
+    "TTTTTTTTTTTTTTTT",
+    "LLLLLAAAAAAAATTT",
+    "LLLLLAAAAAAAATTT",
+    "LLLLLKKKAAAAATTT",
+    "LLLLLKgKAAAAATTT",
+    "LLLLLKKKAAAAATTT",
+    "TTTTTTTTTTTTTTTT",
+    "LLLLLAAAAAAAATTT",
+    "LLLLLAAAAAAAATTT",
+    "LLLLLAAAAAAAATTT",
+    "LLLLLAAAAAAAATTT",
+    "LLLLLAAAAAAAATTT",
+    "TTTTTTTTTTTTTTTT",
+    "NNNNNNNNNNNNNNNN",
+    "NNNNNNNNNNNNNNNN",
+    "TTTTTTTTTTTTTTTT",
+    "LLLLLAAAAAAAATTT",
+    "LLLLLAAAAAAAATTT",
+    "TTTTTTTTTTTTTTTT",
+    "LLLLLAAAAAAAATTT",
+    "LLLLLAAAAAAAATTT",
+    "HRRSHRRSHRRSHRRR",
+    "HDDSHDDSHDDSHDDD",
+    "HRRSHRRSHRRSHRRR",
+    "HDDSHDDSHDDSHDDD",
+    "HRRSHRRSHRRSHRRR",
+    "HDDSHDDSHDDSHDDD",
+    "HRRSHRRSHRRSHRRR",
+    "HDDSHDDSHDDSHDDD",
+    "eeeeeeeeeeeeeeee",
+    "eeeeeeeeeeeeeeee",
+  ] },
 };
 const ART_META = {
   "families": [
@@ -131046,6 +131228,10 @@ for (const k of W15NL_FLOOR_KINDS) TILE_ART[k] = 'tile-' + k;
 for (const k of W15CH_PROP_KINDS) TILE_ART[k] = 'tile-prop-' + k;
 for (const k of W15CH_WALL_KINDS) TILE_ART[k] = 'tile-' + k;
 for (const k of W15CH_FLOOR_KINDS) TILE_ART[k] = 'tile-' + k;
+// Wave W15-T3: the tall mast draws its prop art; the Gleam caps theirs.
+for (const k of W15T3_PROP_KINDS) TILE_ART[k] = 'tile-prop-' + k;
+for (const k of W15T3_WALL_KINDS) TILE_ART[k] = 'tile-' + k;
+for (const k of W15T3_FLOOR_KINDS) TILE_ART[k] = 'tile-' + k;
 // Premium+ W6 (TX-3/PL-1): door-open frames, authored in TX-3 for every
 // door kind. The warp-fade engine that plays them lands in W7 — W6
 // wires the frames (this registry + cache.doorOpen + doorOpenCanvas)
@@ -133444,7 +133630,9 @@ function resolveTileLayers(cache, kind, x, y, kindAt, t, phase, mapId) {
     case 'looprock':
     case 'palmrock':
     // Wave T17: the radio mast composites over its compound grass too.
-    case 'radiomast': {
+    case 'radiomast':
+    // Wave W15-T3: the tall mast composites over its compound grass too.
+    case 'radiomast-tall': {
       // Object tiles carry transparent surrounds (Wave 1): lay the ground
       // the object stands on beneath it — south neighbour's family first
       // (the contact edge), else the neighbour majority, else grass.
@@ -153702,7 +153890,7 @@ const MAPS6 = {
     "rows": [
       "ỏỏỏỐỏỏỏỏỏỏỐỏỏỏỏỏ∮∮ỏỏỏỏỏỏỐỏỏỏỏỏỏỐỏỏ",
       "ỏọoọ∮∮∮∮∮∮∮∮∮∮∮∮∮∮∮∮∮∮∮∮∮∮∮∮∮∮∮∮oỏ",
-      "ỏọọjklmọ∮deefọ∰∰X∰∰∰∰∰∰∰∰‾Ṇ∰∰∰∰∰∰ỏ",
+      "ỏọọjklmọ∮deefọ∰∰X∰∰∰∰∰∰∰∰␓Ṇ∰∰∰∰∰∰ỏ",
       "ỏọọAJKAọ∮P12PọUUVYUU∯∯ss∯ọn∯s∯∯∯∯ỏ",
       "ỏ∮∮∮∮∮∮∮∮∮∮∮∮∮∮∮∮∮∮∮∮∮∮∮∮∮∮∮∮∮∮∮∮ỏ",
       "ỏ∮∮∮∮∮∮∮∮∮∮∮∮∮∮∮∮∮∮∮∮∮∮∮∮ọọSọọọSọỏ",
@@ -158722,7 +158910,7 @@ const MAPS6 = {
     "rows": [
       "ởởởỠởởởởởởỠởởởởởởỠởởởởởởỠ₆₆ởởởỠởởở",
       "ởờờờờờờờờờờờờờờờờờờờờờờờ₆₆₆SỠờờờờở",
-      "ởFờjklmờờdeefờờỡỡỡỡờS₅₈₅₅₆₆₅₅₅ờờờở",
+      "ởFờjklmờờdeefờờỡỡỡỡờS␚␚␛␛₆₆₅₅₅ờờờở",
       "ởờờAJKAờờP12PờờUVYUờờỢỢỢỢ₆₆ỤsỤờờờở",
       "ở₆₆₆₆₆₆₆₆₆₆₆₆₆₆₆₆₆₆₆₆₆₆₆₆₆₆₆₆₆₆₆₆ở",
       "ởờS₆ờờờờờờờờờờờờ₆ờSờờờờờờ₆oờờờờờờở",
@@ -206336,6 +206524,6 @@ if (typeof Game !== 'undefined') Object.assign(Game.prototype, {
 });
 
 </script>
-<!-- contentHash:95145285441b0a3772c9a0ca49915500e59d49071061767e6905bbb090f36951 -->
+<!-- contentHash:cdd2925870685d15a075e13b713d9bb1b61cb9150190cc86a8f40f12d37a9b8b -->
 </body>
 </html>
