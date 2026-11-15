@@ -7349,6 +7349,40 @@ GYMID1_KIND_DEFS.forEach(([kind]) => {
 const GYMID1_PROP_KINDS = GYMID1_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
 const GYMID1_WALL_KINDS = GYMID1_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
 const GYMID1_FLOOR_KINDS = GYMID1_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
+// Gym Identity T2 (Yamato): the eight Yamato gyms' own floor kinds —
+// gustfloor (Iris), hivefloor (Cinder), pasturefloor (Signal),
+// ashenfloor (Lantern), breakfloor (Tidewall), steelfloor (Beacon),
+// glacierfloor (Redwood), scalefloor (Cragmoor) — indices 1572-1579
+// per WAVE-GYM-IDENTITY-PLAN §8 (continuing T1's 1564-1571), verified
+// free against TILE_CHARS and every map row. Name discipline: the
+// concepts' first words bellfloor/ashfloor/shorefloor/harbourfloor/
+// rimefloor are all taken by existing kinds, so each kind takes its
+// concept's own next word. Each is 'floor' class: swapped 1:1 from
+// the walkable '+' gymfloor char inside its own gym ONLY, so floor
+// stays floor (the WALKABLE spread lands in maps.mjs beside the other
+// waves'). The shared 'gymfloor' keeps its other 20 gyms until their
+// tranches land. Authored art: assets/sprites/pix/tiles/tile-<kind>.pix,
+// spliced into art-data.mjs by entry (generator-faithful, additions-only).
+const GYMID2_KIND_DEFS = [
+  ['gustfloor', 'floor'],
+  ['hivefloor', 'floor'],
+  ['pasturefloor', 'floor'],
+  ['ashenfloor', 'floor'],
+  ['breakfloor', 'floor'],
+  ['steelfloor', 'floor'],
+  ['glacierfloor', 'floor'],
+  ['scalefloor', 'floor'],
+];
+const GYMID2_KIND_INDEX = { gustfloor: 1572, hivefloor: 1573, pasturefloor: 1574, ashenfloor: 1575, breakfloor: 1576, steelfloor: 1577, glacierfloor: 1578, scalefloor: 1579 };
+const GYMID2_KIND_CHARS = {};
+GYMID2_KIND_DEFS.forEach(([kind]) => {
+  const ch = String.fromCodePoint(0x1E00 + GYMID2_KIND_INDEX[kind]);
+  GYMID2_KIND_CHARS[kind] = ch;
+  TILE_CHARS[ch] = kind;
+});
+const GYMID2_PROP_KINDS = GYMID2_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
+const GYMID2_WALL_KINDS = GYMID2_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
+const GYMID2_FLOOR_KINDS = GYMID2_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
 const SINNOH_TOWN_GROUND_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg);
 const SINNOH_TOWN_GROUND2_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg2);
 // TX-3: the 8 gym exteriors by town (original type-accent motifs).
@@ -12004,6 +12038,150 @@ const ART = {
     "acccbabacaaaaaaa",
     "baaacaaaaaaaacaa",
     "abaabaaaacbbabca"
+  ] },
+  "tile-gustfloor": { w: 16, h: 16, pal: {"a":"#8a7a5c","b":"#77684e","c":"#a08c68","d":"#5c4c38"}, rows: [
+    "aaabaaaaaabaaaaa",
+    "ababbaaaaaaaabaa",
+    "aaaaaaaabaabaaaa",
+    "dddddddddddddddd",
+    "aaababaababaaaaa",
+    "aababaaaabaaaaab",
+    "aaaaaaaaaaaaaaaa",
+    "dddddddddddddddd",
+    "aaaaaabaaabaabaa",
+    "aaaaaaaaaaaaaaaa",
+    "aaababaaaaaaaaaa",
+    "dddddddddddddddd",
+    "aaaaaaaaaaaaabaa",
+    "caaaaaaaabaaabab",
+    "aaaaaaaabaaaaaaa",
+    "dddddddddddddddd"
+  ] },
+  "tile-hivefloor": { w: 16, h: 16, pal: {"a":"#c89838","b":"#a87c28","c":"#e8b84c","d":"#7c5c1c"}, rows: [
+    "aaabaaaaaabacaaa",
+    "ababbaaaaaaaabaa",
+    "badaaadabadbaadb",
+    "abaaacaaaaaacaab",
+    "aaababaababbaaaa",
+    "aababaaaabacacab",
+    "daaadaaadaaadaaa",
+    "aacaaacaccaaaaba",
+    "aacaaabaaababbaa",
+    "aabaaaaaaaaaaaaa",
+    "cadbcbdaaadaaada",
+    "caaabbacaacaaaab",
+    "aaaacaacaaaaabaa",
+    "caaaaaaaabaaabab",
+    "dabadaaadaaadaaa",
+    "bcbaaacaaaaaaaac"
+  ] },
+  "tile-pasturefloor": { w: 16, h: 16, pal: {"a":"#a5c86a","b":"#94b45c","c":"#bcd87e","d":"#7c9c48"}, rows: [
+    "aaabaaaaaabacaaa",
+    "ababbaaaadaaabaa",
+    "aaaaaaaabaaaaaca",
+    "aaaaacaaaaaaaaab",
+    "aaababaabdaaaaaa",
+    "aaaaaaaaaaaaaaaa",
+    "aaaaaaaaaaaaaaaa",
+    "aacaaaaaaaaaaaba",
+    "aacaaaaaadbaabaa",
+    "aaaaaadaaaaaaaaa",
+    "cacbcaaaaaaaaaaa",
+    "aaaabbacaacaaaaa",
+    "aaaaaaacaaaaaaaa",
+    "caaaaaaaabaaabab",
+    "aaaaaaaabaaaaaaa",
+    "bcaaaacdaaaaaaaa"
+  ] },
+  "tile-ashenfloor": { w: 16, h: 16, pal: {"a":"#8a8578","b":"#767165","c":"#9c968a","d":"#5c574c"}, rows: [
+    "aaabaaaaaabacaba",
+    "bbabbaaaaaaaabaa",
+    "bbaaaaaabaabaacb",
+    "abaaacaaaaabaaab",
+    "aaababaababbaaab",
+    "aababaaaabacacab",
+    "aabaaaaaaaaaaaaa",
+    "aacaaaaacaaaaaba",
+    "adcaaabaaababbaa",
+    "aabdaaaabaabaaaa",
+    "cacbcbaaaaaaaaba",
+    "caaabbdcaacaaaab",
+    "aadacaacaabaabaa",
+    "caaaaaaaabdaabab",
+    "aabaaaaabaaaaaaa",
+    "bcbadacaaaabaaaa"
+  ] },
+  "tile-breakfloor": { w: 16, h: 16, pal: {"a":"#9a8a6a","b":"#857453","c":"#b3a37e","d":"#6a5a3e"}, rows: [
+    "aaabaaaaaabacaaa",
+    "ababbaaaaaaaabaa",
+    "baaaaaaabaabaacb",
+    "abaaacaaaaaacaab",
+    "aaababaababbaaab",
+    "aababaaaabacacab",
+    "aabaaaaaaaaaaaaa",
+    "aacaaaaaccaaaaba",
+    "aacaaabaadbabbaa",
+    "aabdaaaaaaabaaaa",
+    "cacbcbaaaaaaaaaa",
+    "caaabbacaacaaaab",
+    "aaaacaacaabaabaa",
+    "caaaaaaaabaaabab",
+    "aabaaaaabaaaaaaa",
+    "bcbadacaaaaaaaaa"
+  ] },
+  "tile-steelfloor": { w: 16, h: 16, pal: {"a":"#7d8894","b":"#68727e","c":"#939ea9","d":"#4c565f"}, rows: [
+    "aaabaaadaabacaad",
+    "adabbaadadaaabad",
+    "aaaaaaadbaaaaacd",
+    "aaaaacadaaaaaaad",
+    "aaababadbaaaaaad",
+    "aaaaaaadaaaaaaad",
+    "aaaaaaadaaaaaaad",
+    "dddddddddddddddd",
+    "aacaaaadaabaabad",
+    "adaaaaadadaaaaad",
+    "cacbcaadaaaaaaad",
+    "caaabbadaacaaaad",
+    "aaaacaadaaaaaaad",
+    "caaaaaadabaaabad",
+    "aaaaaaadbaaaaaad",
+    "dddddddddddddddd"
+  ] },
+  "tile-glacierfloor": { w: 16, h: 16, pal: {"a":"#cfe2f2","b":"#b8cfe8","c":"#eef8ff","d":"#8fb0d8"}, rows: [
+    "aaabaaaaaabacaaa",
+    "abaabaaaaaaaabaa",
+    "aaadaaaabaaaaaca",
+    "aaadacaaaaaaaaab",
+    "aaadaaaaaaaaaaaa",
+    "aaadaaaaaaacacaa",
+    "aaaddaaaaaaaaaaa",
+    "aacaaaaacaaaaaba",
+    "aacaaaaaaabaabaa",
+    "aaaaaaaaaaddaaaa",
+    "cacbcaaaaaadaaaa",
+    "caaabbacaacdaaaa",
+    "aaaacaacaaadaaaa",
+    "caaaaaaaabadabab",
+    "aaaaaaaaaaaaaaaa",
+    "acaaaacaaaaaaaaa"
+  ] },
+  "tile-scalefloor": { w: 16, h: 16, pal: {"a":"#4a3436","b":"#3a282a","c":"#5c4244","d":"#ff7a1a"}, rows: [
+    "aacbaacaaacacaca",
+    "ababbaaaaaaaabaa",
+    "aaaaaaaabaabaaca",
+    "bbbbbbbbbbbbbbbb",
+    "caabcbaacaaacaaa",
+    "aaaabaaaabaaaaab",
+    "aaaaaaaaaaaaaaaa",
+    "bbbbbbbbbbbbbbbb",
+    "aacaaacaaacaabca",
+    "aaaaaaaaaaaaaaaa",
+    "cacbcbaaadaaaaaa",
+    "bbbbbbbbbbbbbbbb",
+    "caaacaaccaaacaaa",
+    "caaaaaaaabaaabab",
+    "aaaaaaaabaaaaaaa",
+    "bbbbbbbbbbbbbbbb"
   ] },
   "tile-obsidianfloor": { w: 16, h: 16, pal: {"a":"#2a2024","b":"#1e161a","c":"#453238","d":"#ff6a1e"}, rows: [
     "acaaabaaaaabaaaa",
@@ -131599,6 +131777,9 @@ for (const k of W15T4_FLOOR_KINDS) TILE_ART[k] = 'tile-' + k;
 // Gym Identity T1 (Arden): the eight gyms' own floor kinds draw their
 // authored tiles (assets/sprites/pix/tiles/tile-<kind>.pix).
 for (const k of GYMID1_FLOOR_KINDS) TILE_ART[k] = 'tile-' + k;
+// Gym Identity T2 (Yamato): the eight gyms' own floor kinds draw their
+// authored tiles (assets/sprites/pix/tiles/tile-<kind>.pix).
+for (const k of GYMID2_FLOOR_KINDS) TILE_ART[k] = 'tile-' + k;
 // Premium+ W6 (TX-3/PL-1): door-open frames, authored in TX-3 for every
 // door kind. The warp-fade engine that plays them lands in W7 — W6
 // wires the frames (this registry + cache.doorOpen + doorOpenCanvas)
@@ -142207,6 +142388,14 @@ const WALKABLE = new Set(['.', ',', 'D', 'E', 'C', 'F', 'J', 'K', '1', '2', 'V',
   // (Caldera), loamfloor (Fernmere) — each swapped 1:1 from the walkable
   // '+' gymfloor char inside its own gym, so floor stays floor.
   ...[1564, 1565, 1566, 1567, 1568, 1569, 1570, 1571]
+    .map((i) => String.fromCodePoint(0x1E00 + i)),
+  // Gym Identity T2: the eight Yamato gym floor chars (U+1E00+1572..1579,
+  // tiles.mjs GYMID2_KIND_DEFS) are walkable — gustfloor (Iris),
+  // hivefloor (Cinder), pasturefloor (Signal), ashenfloor (Lantern),
+  // breakfloor (Tidewall), steelfloor (Beacon), glacierfloor
+  // (Redwood), scalefloor (Cragmoor) — each swapped 1:1 from the
+  // walkable '+' gymfloor char inside its own gym, so floor stays floor.
+  ...[1572, 1573, 1574, 1575, 1576, 1577, 1578, 1579]
     .map((i) => String.fromCodePoint(0x1E00 + i))]);
 
 // Trainer definitions for the slice.
@@ -155849,14 +156038,14 @@ const MAPS6 = {
     "music": "gym-theme",
     "rows": [
       "================",
-      "=++++++λλ++++++=",
-      "=++Ḛ++++++++Ḛ++=",
-      "=++++++++++++++=",
-      "=++++++//++++++=",
-      "=++++++//++++++=",
-      "=++ḗ++++++++ḙ++=",
-      "=++++++++++++++=",
-      "=++++++++++++++=",
+      "=␤␤␤␤␤␤λλ␤␤␤␤␤␤=",
+      "=␤␤Ḛ␤␤␤␤␤␤␤␤Ḛ␤␤=",
+      "=␤␤␤␤␤␤␤␤␤␤␤␤␤␤=",
+      "=␤␤␤␤␤␤//␤␤␤␤␤␤=",
+      "=␤␤␤␤␤␤//␤␤␤␤␤␤=",
+      "=␤␤ḗ␤␤␤␤␤␤␤␤ḙ␤␤=",
+      "=␤␤␤␤␤␤␤␤␤␤␤␤␤␤=",
+      "=␤␤␤␤␤␤␤␤␤␤␤␤␤␤=",
       "=======DD======="
     ],
     "warps": [
@@ -155912,14 +156101,14 @@ const MAPS6 = {
     "music": "gym-theme",
     "rows": [
       "================",
-      "=++++++λλ++++++=",
-      "=++Ṉ++++++++Ṋ++=",
-      "=++++++++++++++=",
-      "=++++++//++++++=",
-      "=++++++//++++++=",
-      "=++Ṉ++++++++ṉ++=",
-      "=++++++++++++++=",
-      "=++++++++++++++=",
+      "=␥␥␥␥␥␥λλ␥␥␥␥␥␥=",
+      "=␥␥Ṉ␥␥␥␥␥␥␥␥Ṋ␥␥=",
+      "=␥␥␥␥␥␥␥␥␥␥␥␥␥␥=",
+      "=␥␥␥␥␥␥//␥␥␥␥␥␥=",
+      "=␥␥␥␥␥␥//␥␥␥␥␥␥=",
+      "=␥␥Ṉ␥␥␥␥␥␥␥␥ṉ␥␥=",
+      "=␥␥␥␥␥␥␥␥␥␥␥␥␥␥=",
+      "=␥␥␥␥␥␥␥␥␥␥␥␥␥␥=",
       "=======DD======="
     ],
     "warps": [
@@ -155975,14 +156164,14 @@ const MAPS6 = {
     "music": "gym-theme",
     "rows": [
       "================",
-      "=++++++λλ++++++=",
-      "=++ḋ++++++++Ḋ++=",
-      "=++++++++++++++=",
-      "=++++++//++++++=",
-      "=++++++//++++++=",
-      "=++ḙ++++++++Ḋ++=",
-      "=++++++++++++++=",
-      "=++++++++++++++=",
+      "=␦␦␦␦␦␦λλ␦␦␦␦␦␦=",
+      "=␦␦ḋ␦␦␦␦␦␦␦␦Ḋ␦␦=",
+      "=␦␦␦␦␦␦␦␦␦␦␦␦␦␦=",
+      "=␦␦␦␦␦␦//␦␦␦␦␦␦=",
+      "=␦␦␦␦␦␦//␦␦␦␦␦␦=",
+      "=␦␦ḙ␦␦␦␦␦␦␦␦Ḋ␦␦=",
+      "=␦␦␦␦␦␦␦␦␦␦␦␦␦␦=",
+      "=␦␦␦␦␦␦␦␦␦␦␦␦␦␦=",
       "=======DD======="
     ],
     "warps": [
@@ -156038,14 +156227,14 @@ const MAPS6 = {
     "music": "gym-theme",
     "rows": [
       "================",
-      "=++++++λλ++++++=",
-      "=++ḟ++++++++Ḡ++=",
-      "=++++++++++++++=",
-      "=++++++//++++++=",
-      "=++++++//++++++=",
-      "=++ḟ++++++++ḡ++=",
-      "=++++++++++++++=",
-      "=++++++++++++++=",
+      "=␧␧␧␧␧␧λλ␧␧␧␧␧␧=",
+      "=␧␧ḟ␧␧␧␧␧␧␧␧Ḡ␧␧=",
+      "=␧␧␧␧␧␧␧␧␧␧␧␧␧␧=",
+      "=␧␧␧␧␧␧//␧␧␧␧␧␧=",
+      "=␧␧␧␧␧␧//␧␧␧␧␧␧=",
+      "=␧␧ḟ␧␧␧␧␧␧␧␧ḡ␧␧=",
+      "=␧␧␧␧␧␧␧␧␧␧␧␧␧␧=",
+      "=␧␧␧␧␧␧␧␧␧␧␧␧␧␧=",
       "=======DD======="
     ],
     "warps": [
@@ -162713,14 +162902,14 @@ const MAPS6 = {
     "music": "gym-theme",
     "rows": [
       "================",
-      "=++++++λλ++++++=",
-      "=++ṃ++++++++ṃ++=",
-      "=++++++++++++++=",
-      "=++++++//++++++=",
-      "=++++++//++++++=",
-      "=++ṅ++++++++Ṇ++=",
-      "=++++++++++++++=",
-      "=++++++++++++++=",
+      "=␩␩␩␩␩␩λλ␩␩␩␩␩␩=",
+      "=␩␩ṃ␩␩␩␩␩␩␩␩ṃ␩␩=",
+      "=␩␩␩␩␩␩␩␩␩␩␩␩␩␩=",
+      "=␩␩␩␩␩␩//␩␩␩␩␩␩=",
+      "=␩␩␩␩␩␩//␩␩␩␩␩␩=",
+      "=␩␩ṅ␩␩␩␩␩␩␩␩Ṇ␩␩=",
+      "=␩␩␩␩␩␩␩␩␩␩␩␩␩␩=",
+      "=␩␩␩␩␩␩␩␩␩␩␩␩␩␩=",
       "=======DD======="
     ],
     "warps": [
@@ -162776,14 +162965,14 @@ const MAPS6 = {
     "music": "gym-theme",
     "rows": [
       "================",
-      "=++++++λλ++++++=",
-      "=++ḗ++++++++ḗ++=",
-      "=++++++++++++++=",
-      "=++++++//++++++=",
-      "=++++++//++++++=",
-      "=++Ḛ++++++++ḙ++=",
-      "=++++++++++++++=",
-      "=++++++++++++++=",
+      "=␨␨␨␨␨␨λλ␨␨␨␨␨␨=",
+      "=␨␨ḗ␨␨␨␨␨␨␨␨ḗ␨␨=",
+      "=␨␨␨␨␨␨␨␨␨␨␨␨␨␨=",
+      "=␨␨␨␨␨␨//␨␨␨␨␨␨=",
+      "=␨␨␨␨␨␨//␨␨␨␨␨␨=",
+      "=␨␨Ḛ␨␨␨␨␨␨␨␨ḙ␨␨=",
+      "=␨␨␨␨␨␨␨␨␨␨␨␨␨␨=",
+      "=␨␨␨␨␨␨␨␨␨␨␨␨␨␨=",
       "=======DD======="
     ],
     "warps": [
@@ -162839,14 +163028,14 @@ const MAPS6 = {
     "music": "gym-theme",
     "rows": [
       "================",
-      "=++++++λλ++++++=",
-      "=++ḟ++++++++Ḡ++=",
-      "=++++++++++++++=",
-      "=++++++//++++++=",
-      "=++++++//++++++=",
-      "=++Ḋ++++++++ḙ++=",
-      "=++++++++++++++=",
-      "=++++++++++++++=",
+      "=␪␪␪␪␪␪λλ␪␪␪␪␪␪=",
+      "=␪␪ḟ␪␪␪␪␪␪␪␪Ḡ␪␪=",
+      "=␪␪␪␪␪␪␪␪␪␪␪␪␪␪=",
+      "=␪␪␪␪␪␪//␪␪␪␪␪␪=",
+      "=␪␪␪␪␪␪//␪␪␪␪␪␪=",
+      "=␪␪Ḋ␪␪␪␪␪␪␪␪ḙ␪␪=",
+      "=␪␪␪␪␪␪␪␪␪␪␪␪␪␪=",
+      "=␪␪␪␪␪␪␪␪␪␪␪␪␪␪=",
       "=======DD======="
     ],
     "warps": [
@@ -162902,14 +163091,14 @@ const MAPS6 = {
     "music": "gym-theme",
     "rows": [
       "================",
-      "=++++++λλ++++++=",
-      "=++Ḛ++++++++ḡ++=",
-      "=++++++++++++++=",
-      "=++++++//++++++=",
-      "=++++++//++++++=",
-      "=++ḗ++++++++ḙ++=",
-      "=++++++++++++++=",
-      "=++++++++++++++=",
+      "=␫␫␫␫␫␫λλ␫␫␫␫␫␫=",
+      "=␫␫Ḛ␫␫␫␫␫␫␫␫ḡ␫␫=",
+      "=␫␫␫␫␫␫␫␫␫␫␫␫␫␫=",
+      "=␫␫␫␫␫␫//␫␫␫␫␫␫=",
+      "=␫␫␫␫␫␫//␫␫␫␫␫␫=",
+      "=␫␫ḗ␫␫␫␫␫␫␫␫ḙ␫␫=",
+      "=␫␫␫␫␫␫␫␫␫␫␫␫␫␫=",
+      "=␫␫␫␫␫␫␫␫␫␫␫␫␫␫=",
       "=======DD======="
     ],
     "warps": [
@@ -190111,6 +190300,32 @@ const GYM_ARENA_ART = {
   // corporate gold; reads heavier than Flintridge's quarry (its
   // skeleton twin), as the final gym should.
   'gym-viridian': { sky: ['#6a6488', '#746f96', '#7e7aa4', '#8885b2', '#928fc0', '#9c99ce'], ground: ['#6e5a44', '#64503c', '#5a4634', '#50402e', '#463826', '#3c3020'], dark: '#2a2016', light: '#f2e8d0', accent: '#e8c832', motif: 'tombs', tex: 'chunk', amb: { kind: 'mote', n: 10, speed: 4 } },
+  // T2 Yamato (WAVE-GYM-IDENTITY-PLAN §5): same discipline — palette/
+  // motif/tex/amb only, layered over each gym's frozen Ground.
+  // Iris: sky-gym storm — a dusk-violet tempest, bell-gold lightning;
+  // the storm base's grey-green is the open route's weather, not this.
+  'gym-violet': { sky: ['#5a4a78', '#665488', '#72609a', '#7e6ca6', '#8a78b2', '#9684be'], ground: ['#6a7a68', '#61715f', '#586856', '#4f5f4d', '#465644', '#3d4d3b'], dark: '#2e2a44', light: '#fff0a8', accent: '#f0b429', motif: 'storm', tex: 'spark', amb: { kind: 'rain', n: 14, speed: 120 } },
+  // Cinder: forest-floor bloom — canopy-deep greens, mossy litter,
+  // Hive amber where the bloom base wears pink.
+  'gym-azalea': { sky: ['#5da872', '#68b37e', '#73be8a', '#7ec996', '#89d4a2', '#94dfae'], ground: ['#8a9a58', '#7f904f', '#748646', '#697c3d', '#5e7234', '#53682b'], dark: '#3a4a26', light: '#f8e9a8', accent: '#f0a018', motif: 'flowers', tex: 'petal', amb: { kind: 'petal', n: 12, speed: 8 } },
+  // Signal: plain-by-design — Willa's Open identity kept honest: warm
+  // dairy-pasture palette over frozen Open rules, no spectacle.
+  'gym-goldenrod': { sky: ['#7fb2e8', '#8dbcf0', '#9bc6f4', '#a9d0f7', '#b7daf9', '#c5e4fb'], ground: ['#b5d878', '#aad06e', '#9fc864', '#94c05a', '#89b850', '#7eae46'], dark: '#5d8a3c', light: '#fdf6c8', accent: '#e8a83c', motif: 'trees', tex: 'tuft', haze: true, amb: { kind: 'mote', n: 8, speed: 4 } },
+  // Lantern: Burned-Tower ash — smoke-dark sky, ashen ground, bell
+  // bronze and candlelight where the grave base wears lavender.
+  'gym-ecruteak': { sky: ['#3e3648', '#463e52', '#4e465c', '#564e66', '#5e5670', '#665e7a'], ground: ['#5c564e', '#544e46', '#4c463e', '#443e36', '#3c362e', '#342e26'], dark: '#241e20', light: '#ffd9a0', accent: '#c88a3a', motif: 'tombs', tex: 'fleck', amb: { kind: 'mote', n: 10, speed: 4 } },
+  // Tidewall: shore-break rubble — sea-grey sky, wet-sand ground, foam
+  // light and sea-teal where Flintridge's rubble is dry quarry tan.
+  'gym-cianwood': { sky: ['#7a9ab2', '#86a6be', '#92b2ca', '#9ebed6', '#aacade', '#b6d6e6'], ground: ['#a89878', '#9d8d6e', '#928264', '#877758', '#7c6c4c', '#716140'], dark: '#5c4c30', light: '#f4f8ec', accent: '#3aa8a0', motif: 'waves', tex: 'foam', amb: { kind: 'bubble', n: 10, speed: 7 } },
+  // Beacon: harbour steel over Tide — plate-grey ground, harbour-
+  // morning sky, beacon-amber lamps on the new 'steel' girder motif.
+  'gym-olivine': { sky: ['#6a86a0', '#7592ac', '#80a0b8', '#8baec4', '#96bad0', '#a1c6dc'], ground: ['#8a97a3', '#7f8c98', '#747f8a', '#69727c', '#5e656e', '#535860'], dark: '#2c3844', light: '#ffe9a8', accent: '#f8b828', motif: 'steel', tex: 'chunk', amb: { kind: 'spark', n: 10, speed: 0 } },
+  // Redwood: fifty-winters frost — winter-dusk indigo snowfields,
+  // glacier cyan, heavier slower snowfall than the bright frost base.
+  'gym-mahogany': { sky: ['#7a9cc4', '#86a8ce', '#92b4d8', '#9ec0e2', '#aaccec', '#b6d8f6'], ground: ['#d8e6f4', '#cbdaf0', '#becfe8', '#b1c3e0', '#a4b7d8', '#97abd0'], dark: '#4a6a9a', light: '#ffffff', accent: '#5ab8e8', motif: 'snow', tex: 'spark', haze: true, amb: { kind: 'snow', n: 18, speed: 9 } },
+  // Cragmoor: the den's lava-hearted dark — maroon-black sky, the new
+  // 'dragon' scale-ridge motif with lava glints, dense embers.
+  'gym-blackthorn': { sky: ['#3a2426', '#422a2c', '#4a3032', '#523638', '#5a3c3e', '#624244'], ground: ['#3c2c28', '#352722', '#2e211e', '#271c1a', '#201716', '#191212'], dark: '#140c0c', light: '#ffc478', accent: '#ff7a1a', motif: 'dragon', tex: 'chunk', amb: { kind: 'ember', n: 16, speed: 18 } },
 };
 
 function gymArenaFor(field) {
@@ -192927,6 +193142,29 @@ class BattleScene {
           const fh = 6 + Math.floor(arenaHash(i, 67) * 10);
           F(A, x, horizon - fh, 3, fh); F(L, x + 1, horizon - fh, 1, 3); F(A, x - 2, horizon - fh + 3, 7, 2);
           F(L, x + 1, horizon - fh - 3, 2, 3);
+        }
+        F(D, 0, horizon, w, 2);
+      } else if (M === 'dragon') {
+        // Gym Identity T2 (Cragmoor): a horned scale-ridge — hashed
+        // columns with stepped horn tips and accent scale glints; the
+        // rocks/spires rows paint plain teeth, this ridge is crested.
+        for (let x = 0, i = 0; x < w - 4; x += 10, i++) {
+          const th = 5 + Math.floor(arenaHash(i, 43) * 9);
+          F(D, x, horizon - th, 7, th);
+          F(D, x + 2, horizon - th - 3, 3, 3);
+          if (i % 2 === 0) F(A, x + 1, horizon - Math.max(2, th - 3), 2, 2);
+          if (i % 3 === 0) F(L, x + 4, horizon - 2, 2, 1);
+        }
+        F(D, 0, horizon, w, 2);
+      } else if (M === 'steel') {
+        // Gym Identity T2 (Beacon; Bridgeport reuses it at T4): a
+        // riveted girder row — twin chords, posts, light rivets and
+        // accent lamp blocks standing on the horizon.
+        F(D, 0, horizon - 10, w, 3); F(D, 0, horizon - 4, w, 2);
+        for (let x = 4, i = 0; x < w - 8; x += 22, i++) {
+          F(D, x, horizon - 10, 3, 10);
+          F(L, x + 1, horizon - 8, 1, 1); F(L, x + 1, horizon - 5, 1, 1);
+          if (i % 2 === 0) F(A, x + 10, horizon - 9, 4, 2);
         }
         F(D, 0, horizon, w, 2);
       } else { // snow
@@ -204947,6 +205185,6 @@ if (typeof Game !== 'undefined') Object.assign(Game.prototype, {
 });
 
 </script>
-<!-- contentHash:26a60c98b2a0d197ad6f04d695087b11854555411ad100c0079aad082204639d -->
+<!-- contentHash:2a6494da1b79677e2c2df2de8dddf73f9f9530a22e8b4f0a1f994b2e1a2943be -->
 </body>
 </html>
