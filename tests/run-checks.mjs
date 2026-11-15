@@ -31,7 +31,7 @@ const GROUPS = {
     T('battle-model-checks.mjs'), T('battle-ground-checks.mjs'),
     T('branding-checks.mjs'),
     T('cheat-shop-checks.mjs'), T('cutscene-panel-checks.mjs'),
-    T('fidelity-checks.mjs'),
+    T('design-depth-checks.mjs'), T('fidelity-checks.mjs'),
     T('frontier-checks.mjs'), T('hoenn-contest-checks.mjs'),
     T('hoenn-legendary-checks.mjs'), T('hoenn-story-checks.mjs'),
     T('input-checks.mjs'), T('johto-story-checks.mjs'),

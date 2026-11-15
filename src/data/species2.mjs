@@ -65,6 +65,7 @@ export const SPECIES2 = {
     eggGroups: ['bug'], hatchCounter: 15,
     learnset: { 1: ['harden'] },
     flavor: 'Still as a leaf, dreaming of wings it cannot yet feel.',
+    design: { inspired: 'insect', kind: 'class', note: 'jade hanging chrysalis, leaf-vein pattern, gold rim' },
     evo: { to: 'butterfree', method: 'level', level: 10 }, tm: [],
   },
   butterfree: {
@@ -74,6 +75,7 @@ export const SPECIES2 = {
     eggGroups: ['bug'], hatchCounter: 15,
     learnset: { 1: ['confusion'], 12: ['poisonpowder'], 13: ['stunspore'], 14: ['sleeppowder'], 16: ['supersonic'], 21: ['gust'], 26: ['psybeam'] },
     flavor: 'It rides spring thermals, scattering sleepy dust over meadows.',
+    design: { inspired: 'butterfly', kind: 'animal', note: 'butterfly, stained-glass prism wing panels, indigo body' },
     tm: [2, 4, 6, 15, 21, 22, 29, 30, 31, 32, 33, 34, 42, 44, 46, 50, 105],
   },
   kakuna: {
@@ -83,6 +85,7 @@ export const SPECIES2 = {
     eggGroups: ['bug'], hatchCounter: 15,
     learnset: { 1: ['harden'] },
     flavor: 'It waits in bark shadow, saving every scrap of strength.',
+    design: { inspired: 'insect', kind: 'class', note: 'golden spiked cocoon, black band seams' },
     evo: { to: 'beedrill', method: 'level', level: 10 }, tm: [],
   },
   beedrill: {
@@ -92,6 +95,7 @@ export const SPECIES2 = {
     eggGroups: ['bug'], hatchCounter: 15,
     learnset: { 1: ['furyattack'], 12: ['focusenergy'], 16: ['twineedle'], 20: ['rage'], 25: ['pinmissile'], 30: ['agility'] },
     flavor: 'Three lances and no patience. Hear the swarm before you see it.',
+    design: { inspired: 'wasp', kind: 'animal', note: 'sleek wasp, lance forearms, amber/black, needle tail' },
     tm: [3, 6, 9, 10, 15, 20, 31, 32, 33, 34, 44, 50, 101],
   },
   pidgeotto: {
@@ -101,6 +105,7 @@ export const SPECIES2 = {
     eggGroups: ['flying'], hatchCounter: 15,
     learnset: { 1: ['tackle', 'gust', 'sandattack'], 5: ['quickattack'], 12: ['wingattack'], 27: ['agility'] },
     flavor: 'It patrols a wide territory and knows every fence post in it.',
+    design: { inspired: 'bird', kind: 'class', note: 'russet raptor-bird, swept two-part crest' },
     evo: { to: 'pidgeot', method: 'level', level: 36 }, tm: [2, 4, 6, 9, 10, 31, 32, 33, 34, 39, 44, 50, 102],
   },
   pidgeot: {
@@ -110,6 +115,7 @@ export const SPECIES2 = {
     eggGroups: ['flying'], hatchCounter: 15,
     learnset: { 1: ['tackle', 'gust', 'sandattack', 'quickattack'], 12: ['wingattack'], 27: ['agility'] },
     flavor: 'Crest streaming, it outruns storm fronts for the fun of it.',
+    design: { inspired: 'hawk', kind: 'animal', note: 'majestic sky bird, flowing head plumes, cream/russet' },
     tm: [2, 4, 6, 9, 10, 15, 31, 32, 33, 34, 39, 44, 50, 102],
   },
   raticate: {
@@ -119,6 +125,7 @@ export const SPECIES2 = {
     eggGroups: ['ground'], hatchCounter: 15,
     learnset: { 1: ['tackle', 'tailwhip', 'quickattack'], 14: ['focusenergy'], 27: ['takedown'] },
     flavor: 'Its fangs can worry through fence wire and old timber alike.',
+    design: { inspired: 'rat', kind: 'animal', note: 'bulky brute rat, massive incisors, scarred ear' },
     tm: [6, 9, 10, 11, 12, 13, 14, 15, 24, 25, 28, 31, 32, 34, 39, 44, 50],
   },
   fearow: {
@@ -128,6 +135,7 @@ export const SPECIES2 = {
     eggGroups: ['flying'], hatchCounter: 15,
     learnset: { 1: ['peck', 'growl', 'leer', 'furyattack'], 15: ['drillpeck'], 26: ['agility'] },
     flavor: 'A spear of a bird. It stoops before its shadow arrives.',
+    design: { inspired: 'hawk', kind: 'animal', note: 'long-necked glare hawk, spear beak, gold eyes' },
     tm: [2, 4, 6, 9, 10, 15, 31, 32, 33, 34, 39, 44, 50, 102],
   },
   ekans: {
@@ -137,6 +145,7 @@ export const SPECIES2 = {
     eggGroups: ['ground', 'dragon'], hatchCounter: 20,
     learnset: { 1: ['wrap', 'leer'], 10: ['poisonsting'], 17: ['bite'], 24: ['glare'], 31: ['acid'], 38: ['haze'] },
     flavor: 'It unhinges its jaw around meals bigger than its head.',
+    design: { inspired: 'viper', kind: 'animal', note: 'small violet vine-viper, leaf-diamond bands' },
     evo: { to: 'arbok', method: 'level', level: 22 }, tm: [6, 9, 10, 20, 21, 26, 27, 28, 31, 32, 34, 44, 48, 50],
   },
   arbok: {
@@ -146,6 +155,7 @@ export const SPECIES2 = {
     eggGroups: ['ground', 'dragon'], hatchCounter: 20,
     learnset: { 1: ['wrap', 'leer', 'poisonsting', 'bite'], 17: ['bite'], 27: ['glare'], 36: ['acid'], 47: ['haze'] },
     flavor: 'The pattern on its hood never repeats between two DREADHOOD.',
+    design: { inspired: 'cobra', kind: 'animal', note: 'great hooded cobra, concentric-diamond chest glyph' },
     tm: [6, 9, 10, 15, 20, 21, 26, 27, 28, 31, 32, 34, 44, 48, 50, 104],
   },
   pikachu: {
@@ -164,6 +174,7 @@ export const SPECIES2 = {
     eggGroups: ['ground', 'fairy'], hatchCounter: 10,
     learnset: { 1: ['thundershock', 'growl', 'tailwhip', 'thunderwave'] },
     flavor: 'Surplus charge spills from its cheeks on humid nights.',
+    design: { inspired: 'hare', kind: 'animal', note: 'hefty amber electric hare, coiled copper tail, prong ears' },
     tm: [1, 5, 6, 9, 10, 15, 16, 19, 24, 25, 31, 32, 33, 34, 39, 40, 44, 45, 50, 105],
   },
   sandshrew: {
@@ -173,6 +184,7 @@ export const SPECIES2 = {
     eggGroups: ['ground'], hatchCounter: 20,
     learnset: { 1: ['scratch'], 6: ['sandattack'], 12: ['poisonsting'], 20: ['slash'], 28: ['swift'] },
     flavor: 'It curls into a brick-hard ball when the desert wind turns.',
+    design: { inspired: 'armadillo', kind: 'animal', note: 'sand armadillo, ridged dune plates, curled pose' },
     evo: { to: 'sandslash', method: 'level', level: 22 }, tm: [3, 6, 8, 9, 10, 17, 19, 20, 26, 27, 28, 31, 32, 34, 39, 44, 48, 50, 101],
   },
   sandslash: {
@@ -182,6 +194,7 @@ export const SPECIES2 = {
     eggGroups: ['ground'], hatchCounter: 20,
     learnset: { 1: ['scratch', 'sandattack', 'poisonsting'], 12: ['poisonsting'], 24: ['slash'], 36: ['swift'] },
     flavor: 'Spines up, it rolls downhill faster than gossip travels.',
+    design: { inspired: 'pangolin', kind: 'animal', note: 'great spined dune pangolin, sand quills' },
     tm: [3, 6, 8, 9, 10, 15, 17, 19, 20, 26, 27, 28, 31, 32, 34, 39, 44, 48, 50, 101, 104],
   },
   nidoranf: {
@@ -191,6 +204,7 @@ export const SPECIES2 = {
     eggGroups: ['monster', 'ground'], hatchCounter: 20,
     learnset: { 1: ['scratch', 'growl'], 8: ['tailwhip'], 14: ['doubleslap'], 21: ['bite'], 30: ['bodyslam'] },
     flavor: 'Gentle until cornered. Her horn carries a quiet warning.',
+    design: { inspired: 'cat', kind: 'animal', note: 'small lilac poison kit, single brow thorn, big ears' },
     evo: { to: 'nidorina', method: 'level', level: 16 }, tm: [6, 8, 9, 10, 11, 12, 24, 25, 31, 32, 33, 34, 44, 50],
   },
   nidorina: {
@@ -200,6 +214,7 @@ export const SPECIES2 = {
     eggGroups: ['no-eggs'], hatchCounter: 20,
     learnset: { 1: ['scratch', 'growl', 'tailwhip'], 14: ['doubleslap'], 23: ['bite'], 36: ['bodyslam'] },
     flavor: 'She herds her young with soft calls and a ready stance.',
+    design: { inspired: 'rabbit', kind: 'animal', note: 'lilac guardian, twin thorn ears, plated back' },
     evo: { to: 'nidoqueen', method: 'stone', stone: 'moonstone' }, tm: [6, 8, 9, 10, 11, 12, 13, 14, 24, 25, 31, 32, 33, 34, 44, 50],
   },
   nidoqueen: {
@@ -209,6 +224,7 @@ export const SPECIES2 = {
     eggGroups: ['no-eggs'], hatchCounter: 20,
     learnset: { 1: ['scratch', 'tailwhip', 'doubleslap', 'bodyslam'] },
     flavor: 'Armor-plated and maternal. Nothing gets past her guard.',
+    design: { inspired: 'deer', kind: 'animal', note: 'regal armored poison matriarch, crown horns, teal plates' },
     tm: [1, 5, 6, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 24, 25, 26, 27, 28, 31, 32, 33, 34, 38, 39, 44, 48, 50, 103, 104],
   },
   nidorino: {
@@ -218,6 +234,7 @@ export const SPECIES2 = {
     eggGroups: ['monster', 'ground'], hatchCounter: 20,
     learnset: { 1: ['leer', 'peck'], 8: ['focusenergy'], 14: ['doubleslap'], 23: ['furyattack'], 36: ['horndrill'] },
     flavor: 'Quick to charge. Its horn finds gaps in any defense.',
+    design: { inspired: 'buck', kind: 'animal', note: 'violet buck, twin horns, thorn spines' },
     evo: { to: 'nidoking', method: 'stone', stone: 'moonstone' }, tm: [6, 8, 9, 10, 11, 12, 13, 14, 24, 25, 31, 32, 33, 34, 44, 50],
   },
   nidoking: {
@@ -227,6 +244,7 @@ export const SPECIES2 = {
     eggGroups: ['monster', 'ground'], hatchCounter: 20,
     learnset: { 1: ['tackle', 'peck', 'focusenergy', 'doubleslap'] },
     flavor: 'Its tail sweep can level saplings. It knows it, too.',
+    design: { inspired: 'bird', kind: 'class', note: 'crowned thorn tyrant, heavy plates, club tail' },
     tm: [1, 5, 6, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 24, 25, 26, 27, 28, 31, 32, 33, 34, 38, 39, 44, 48, 50, 103, 104],
   },
   clefairy: {
@@ -236,6 +254,7 @@ export const SPECIES2 = {
     eggGroups: ['fairy'], hatchCounter: 10,
     learnset: { 1: ['pound', 'growl', 'sing'], 13: ['doubleslap'], 18: ['minimize'], 24: ['metronome'], 31: ['lightscreen'], 40: ['defensecurl'] },
     flavor: 'It dances on moonlit clearings and giggles at the stars.',
+    design: { inspired: 'moon-sprite', kind: 'cosmic', note: 'plump cream moon-sprite, crescent curl, tiny wings' },
     evo: { to: 'clefable', method: 'stone', stone: 'moonstone' }, tm: [1, 5, 6, 8, 9, 10, 11, 12, 13, 14, 17, 18, 19, 24, 25, 29, 30, 31, 32, 33, 34, 35, 38, 39, 40, 41, 42, 44, 45, 46, 49, 50, 104, 105],
   },
   clefable: {
@@ -245,6 +264,7 @@ export const SPECIES2 = {
     eggGroups: ['fairy'], hatchCounter: 10,
     learnset: { 1: ['pound', 'sing', 'doubleslap', 'minimize', 'metronome'] },
     flavor: 'Shy and moon-touched. It hears footsteps a valley away.',
+    design: { inspired: 'moon fairy', kind: 'cosmic', note: 'graceful moon fairy, big crescent wings, veil tail' },
     tm: [1, 5, 6, 8, 9, 10, 11, 12, 13, 14, 15, 17, 18, 19, 24, 25, 29, 30, 31, 32, 33, 34, 35, 38, 39, 40, 41, 42, 44, 45, 46, 49, 50, 104, 105],
   },
   vulpix: {
@@ -263,6 +283,7 @@ export const SPECIES2 = {
     eggGroups: ['ground'], hatchCounter: 20,
     learnset: { 1: ['ember', 'tailwhip', 'quickattack', 'confuseray'] },
     flavor: 'Old stories say its tails carry nine different grudges.',
+    design: { inspired: 'fox', kind: 'animal', note: 'elegant ember fox, nine flame-tipped tail plumes (VULCANIS line, grand register)' },
     tm: [6, 8, 9, 10, 15, 20, 28, 31, 32, 33, 34, 38, 39, 44, 50],
   },
   jigglypuff: {
@@ -272,6 +293,7 @@ export const SPECIES2 = {
     eggGroups: ['fairy'], hatchCounter: 10,
     learnset: { 1: ['sing', 'pound'], 9: ['disable'], 14: ['defensecurl'], 19: ['doubleslap'], 24: ['bodyslam'], 34: ['doubleedge'], 39: ['rest'] },
     flavor: 'Its lullaby has ended more arguments than any referee.',
+    design: { inspired: 'pufferfish', kind: 'animal', note: 'round rose balloon-sprite, singer\'s swirl curl' },
     evo: { to: 'wigglytuff', method: 'stone', stone: 'moonstone' }, tm: [1, 5, 6, 8, 9, 10, 11, 12, 13, 14, 17, 18, 19, 20, 24, 25, 29, 31, 32, 33, 34, 35, 38, 39, 40, 41, 42, 44, 45, 46, 49, 50, 105],
   },
   wigglytuff: {
@@ -281,6 +303,7 @@ export const SPECIES2 = {
     eggGroups: ['fairy'], hatchCounter: 10,
     learnset: { 1: ['sing', 'disable', 'defensecurl', 'doubleslap'] },
     flavor: 'Soft as fresh dough. Hugging one is a contact sport.',
+    design: { inspired: 'flower sprite', kind: 'plant', note: 'large soft diva sprite, flower curl, kind eyes' },
     tm: [1, 5, 6, 8, 9, 10, 11, 12, 13, 14, 15, 17, 18, 19, 20, 24, 25, 29, 31, 32, 33, 34, 35, 38, 39, 40, 41, 42, 44, 45, 46, 49, 50, 104, 105],
   },
   golbat: {
@@ -290,6 +313,7 @@ export const SPECIES2 = {
     eggGroups: ['flying'], hatchCounter: 15,
     learnset: { 1: ['leechlife', 'supersonic', 'screech', 'bite'], 10: ['confuseray'], 15: ['wingattack'], 21: ['haze'] },
     flavor: 'It drinks its fill, then vanishes before feathers settle.',
+    design: { inspired: 'bat', kind: 'animal', note: 'hulking cave bat, cavernous fang mouth, curled ears' },
     evo: { to: 'crobat', method: 'level', level: 40 }, tm: [2, 4, 6, 9, 10, 15, 20, 21, 31, 32, 34, 39, 44, 50, 102],
   },
   oddish: {
@@ -299,6 +323,7 @@ export const SPECIES2 = {
     eggGroups: ['plant'], hatchCounter: 20,
     learnset: { 1: ['absorb'], 15: ['poisonpowder'], 17: ['stunspore'], 19: ['sleeppowder'], 24: ['acid'], 33: ['petaldance'], 39: ['solarbeam'] },
     flavor: 'By day it buries itself. By night it wanders, leaves first.',
+    design: { inspired: 'sprout', kind: 'plant', note: 'blue nocturnal bulb-sprout, five moon leaves' },
     evo: { to: 'gloom', method: 'level', level: 21 }, tm: [3, 6, 9, 10, 20, 21, 22, 31, 32, 33, 34, 44, 50, 101],
   },
   gloom: {
@@ -308,6 +333,7 @@ export const SPECIES2 = {
     eggGroups: ['plant'], hatchCounter: 20,
     learnset: { 1: ['absorb', 'poisonpowder', 'stunspore', 'sleeppowder'], 24: ['acid'], 28: ['petaldance'], 38: ['solarbeam'] },
     flavor: 'Its drool smells like a swamp arguing with a flower shop.',
+    design: { inspired: 'flower sprite', kind: 'plant', note: 'drooping dusk flower, heavy spotted petals, sleepy' },
     evo: { to: 'vileplume', method: 'stone', stone: 'leafstone' },
     evos: [
       { to: 'vileplume', method: 'stone', stone: 'leafstone' },
@@ -321,6 +347,7 @@ export const SPECIES2 = {
     eggGroups: ['plant'], hatchCounter: 20,
     learnset: { 1: ['absorb', 'stunspore', 'sleeppowder', 'acid', 'petaldance'] },
     flavor: 'Each step sheds pollen thick enough to dim the sun.',
+    design: { inspired: 'flower sprite', kind: 'plant', note: 'vast spotted carrion-bloom, toxic perfume wisps' },
     tm: [3, 6, 9, 10, 15, 20, 21, 22, 31, 32, 33, 34, 44, 50, 101],
   },
   paras: {
@@ -330,6 +357,7 @@ export const SPECIES2 = {
     eggGroups: ['bug', 'plant'], hatchCounter: 20,
     learnset: { 1: ['scratch'], 9: ['stunspore'], 17: ['leechlife'], 25: ['spore'], 33: ['growth'], 41: ['slash'] },
     flavor: 'Mushrooms ride its back, steering it toward damp shade.',
+    design: { inspired: 'crab', kind: 'animal', note: 'small russet crab, twin cap mushrooms on back' },
     evo: { to: 'parasect', method: 'level', level: 24 }, tm: [3, 6, 9, 10, 20, 21, 22, 28, 31, 32, 34, 44, 50, 101],
   },
   parasect: {
@@ -339,6 +367,7 @@ export const SPECIES2 = {
     eggGroups: ['bug', 'plant'], hatchCounter: 20,
     learnset: { 1: ['scratch', 'stunspore', 'leechlife'], 25: ['spore'], 39: ['growth'], 48: ['slash'] },
     flavor: 'The cap does the thinking now. The eyes look far away.',
+    design: { inspired: 'crab', kind: 'animal', note: 'great mushroom-crab, shelf-fungus canopy, dull eyes' },
     tm: [3, 6, 9, 10, 15, 20, 21, 22, 28, 31, 32, 34, 44, 50, 101],
   },
   venonat: {
@@ -348,6 +377,7 @@ export const SPECIES2 = {
     eggGroups: ['bug'], hatchCounter: 20,
     learnset: { 1: ['tackle', 'disable', 'confusion'], 13: ['supersonic'], 19: ['poisonpowder'], 24: ['leechlife'], 27: ['stunspore'], 30: ['psybeam'], 38: ['sleeppowder'], 41: ['psychic'] },
     flavor: 'Its radar eyes track moths through pitch-black thickets.',
+    design: { inspired: 'mite', kind: 'animal', note: 'round violet fuzz-mite, feathery feelers, big eyes' },
     evo: { to: 'venomoth', method: 'level', level: 31 }, tm: [6, 9, 10, 20, 22, 29, 31, 32, 33, 34, 44, 46, 50, 105],
   },
   venomoth: {
@@ -357,6 +387,7 @@ export const SPECIES2 = {
     eggGroups: ['bug'], hatchCounter: 20,
     learnset: { 1: ['tackle', 'disable', 'confusion', 'supersonic'], 19: ['poisonpowder'], 24: ['leechlife'], 27: ['stunspore'], 30: ['psybeam'], 38: ['gust'], 47: ['sleeppowder'], 52: ['psychic'] },
     flavor: 'Scale-dust drifts from its wings like slow, patient snow.',
+    design: { inspired: 'moth', kind: 'animal', note: 'powder-winged night moth, scaled veil wings' },
     tm: [2, 4, 6, 9, 10, 15, 20, 22, 29, 31, 32, 33, 34, 44, 46, 50, 105],
   },
   diglett: {
@@ -366,6 +397,7 @@ export const SPECIES2 = {
     eggGroups: ['ground'], hatchCounter: 20,
     learnset: { 1: ['scratch'], 15: ['sandattack'], 19: ['dig'], 24: ['slash'], 31: ['earthquake'] },
     flavor: 'Farms love it. Its tunnels turn soil better than any plow.',
+    design: { inspired: 'pup', kind: 'animal', note: 'tiny brown mole pup, pink nose, half-buried in mound' },
     evo: { to: 'dugtrio', method: 'level', level: 26 }, tm: [6, 8, 9, 10, 20, 26, 27, 28, 31, 32, 34, 44, 48, 50],
   },
   dugtrio: {
@@ -375,6 +407,7 @@ export const SPECIES2 = {
     eggGroups: ['ground'], hatchCounter: 20,
     learnset: { 1: ['scratch', 'sandattack', 'dig'], 19: ['dig'], 24: ['slash'], 35: ['earthquake'], 41: ['fissure'] },
     flavor: 'Three heads, one temper. The ground answers when it calls.',
+    design: { inspired: 'mole', kind: 'animal', note: 'three mole brothers in a row on one mound' },
     tm: [6, 8, 9, 10, 15, 20, 26, 27, 28, 31, 32, 34, 44, 48, 50],
   },
   meowth: {
@@ -384,6 +417,7 @@ export const SPECIES2 = {
     eggGroups: ['ground'], hatchCounter: 20,
     learnset: { 1: ['scratch', 'growl'], 12: ['bite'], 17: ['payday'], 24: ['screech'], 33: ['furyattack'], 44: ['slash'] },
     flavor: 'It naps all day to prowl all night for shiny things.',
+    design: { inspired: 'tom', kind: 'animal', note: 'cream alley tom, big brass bell collar, sly grin' },
     evo: { to: 'persian', method: 'level', level: 28 }, tm: [6, 9, 10, 11, 12, 16, 24, 25, 31, 32, 34, 39, 44, 50],
   },
   persian: {
@@ -393,6 +427,7 @@ export const SPECIES2 = {
     eggGroups: ['ground'], hatchCounter: 20,
     learnset: { 1: ['scratch', 'growl', 'bite', 'payday'], 24: ['screech'], 37: ['furyattack'], 51: ['slash'] },
     flavor: 'All grace and grievance. It forgives nothing, elegantly.',
+    design: { inspired: 'cat', kind: 'animal', note: 'sleek ivory majesty-cat, long tail, calm glare' },
     tm: [6, 9, 10, 11, 12, 15, 16, 20, 24, 25, 31, 32, 34, 39, 44, 50],
   },
   psyduck: {
@@ -402,6 +437,7 @@ export const SPECIES2 = {
     eggGroups: ['water1', 'ground'], hatchCounter: 20,
     learnset: { 1: ['scratch'], 15: ['tailwhip'], 22: ['disable'], 28: ['confusion'], 31: ['furyattack'], 36: ['hydropump'], 43: ['amnesia'] },
     flavor: 'Its headache is a loaded spring. Best not to wind it.',
+    design: { inspired: 'duck', kind: 'animal', note: 'vacant teal duck clutching its head, dizzy eyes' },
     evo: { to: 'golduck', method: 'level', level: 33 }, tm: [1, 6, 8, 9, 10, 11, 12, 13, 14, 17, 18, 19, 28, 31, 32, 34, 44, 50, 103, 104],
   },
   golduck: {
@@ -411,6 +447,7 @@ export const SPECIES2 = {
     eggGroups: ['water1', 'ground'], hatchCounter: 20,
     learnset: { 1: ['scratch', 'tailwhip', 'disable', 'confusion'], 28: ['confusion'], 31: ['furyattack'], 39: ['hydropump'], 48: ['amnesia'] },
     flavor: 'It cuts through rapids like the river made way for it.',
+    design: { inspired: 'duck', kind: 'animal', note: 'sleek torrent swimmer duck, crest fin, webbed claws' },
     tm: [1, 5, 6, 8, 9, 10, 11, 12, 13, 14, 15, 17, 18, 19, 28, 31, 32, 34, 44, 50, 103, 104],
   },
   primeape: {
@@ -420,6 +457,7 @@ export const SPECIES2 = {
     eggGroups: ['ground'], hatchCounter: 20,
     learnset: { 1: ['scratch', 'leer', 'lowkick', 'karatechop'], 15: ['rage'], 21: ['seismictoss'], 27: ['screech'], 37: ['submission'] },
     flavor: 'It stays angry through sleep, meals, and mild weather.',
+    design: { inspired: 'ape', kind: 'animal', note: 'hulking wrath-ape, white bristle mane, bare knuckles' },
     tm: [1, 5, 6, 8, 9, 10, 16, 17, 18, 19, 20, 24, 25, 28, 31, 32, 34, 39, 44, 48, 50, 104],
   },
   growlithe: {
@@ -429,6 +467,7 @@ export const SPECIES2 = {
     eggGroups: ['ground'], hatchCounter: 20,
     learnset: { 1: ['bite', 'ember'], 18: ['leer'], 23: ['takedown'], 30: ['agility'], 36: ['flamethrower'] },
     flavor: 'Loyal to a fault. It barks at threats ten times its size.',
+    design: { inspired: 'pup', kind: 'animal', note: 'orange cinder pup, smoky ruff, loyal stance' },
     evo: { to: 'arcanine', method: 'stone', stone: 'firestone' }, tm: [6, 8, 9, 10, 20, 28, 31, 32, 33, 34, 38, 39, 44, 50],
   },
   arcanine: {
@@ -438,6 +477,7 @@ export const SPECIES2 = {
     eggGroups: ['ground'], hatchCounter: 20,
     learnset: { 1: ['bite', 'takedown', 'leer', 'ember'] },
     flavor: 'Old murals show it running beside emperors and messengers.',
+    design: { inspired: 'hound', kind: 'animal', note: 'great maned ember hound, wind-striped coat' },
     tm: [6, 8, 9, 10, 15, 20, 28, 30, 31, 32, 33, 34, 38, 39, 44, 50, 104],
   },
   poliwag: {
@@ -447,6 +487,7 @@ export const SPECIES2 = {
     eggGroups: ['water1'], hatchCounter: 20,
     learnset: { 1: ['bubble'], 16: ['hypnosis'], 19: ['watergun'], 25: ['doubleslap'], 31: ['bodyslam'], 38: ['amnesia'], 40: ['hydropump'] },
     flavor: 'Its spiral belly shows through skin thin as wet paper.',
+    design: { inspired: 'fish', kind: 'class', note: 'blue tadlet, translucent curled tail fin, big eyes' },
     evo: { to: 'poliwhirl', method: 'level', level: 25 }, tm: [6, 9, 10, 11, 12, 13, 14, 31, 32, 34, 44, 46, 50, 103],
   },
   poliwhirl: {
@@ -456,6 +497,7 @@ export const SPECIES2 = {
     eggGroups: ['water1'], hatchCounter: 20,
     learnset: { 1: ['bubble', 'hypnosis', 'watergun'], 19: ['watergun'], 26: ['doubleslap'], 33: ['bodyslam'], 41: ['amnesia'], 49: ['hydropump'] },
     flavor: 'Watch its spiral too long and the room starts to tilt.',
+    design: { inspired: 'frog', kind: 'animal', note: 'stocky bog frog, whirlpool-marked BACK, curled toes' },
     evo: { to: 'poliwrath', method: 'stone', stone: 'waterstone' },
     evos: [
       { to: 'poliwrath', method: 'stone', stone: 'waterstone' },
@@ -469,6 +511,7 @@ export const SPECIES2 = {
     eggGroups: ['water1'], hatchCounter: 20,
     learnset: { 1: ['bubble', 'hypnosis', 'watergun', 'doubleslap', 'submission'] },
     flavor: 'A swimmer and a brawler. Rivers respect it; so do rivals.',
+    design: { inspired: 'toad', kind: 'animal', note: 'muscle-bound marsh toad, wrapped forearms' },
     tm: [1, 5, 6, 8, 9, 10, 11, 12, 13, 14, 15, 17, 18, 19, 26, 27, 28, 31, 32, 34, 44, 46, 50, 103, 104],
   },
   abra: {
@@ -478,6 +521,7 @@ export const SPECIES2 = {
     eggGroups: ['humanshape'], hatchCounter: 20,
     learnset: { 1: ['teleport'] },
     flavor: 'It sleeps eighteen hours a day and vanishes mid-snore.',
+    design: { inspired: 'seer-kit', kind: 'animal', note: 'dozing amber seer-kit, folded ears, curled tail' },
     evo: { to: 'kadabra', method: 'level', level: 16 }, tm: [1, 5, 6, 9, 10, 17, 18, 19, 29, 30, 31, 32, 33, 34, 40, 42, 44, 45, 46, 49, 50, 105],
   },
   kadabra: {
@@ -487,6 +531,7 @@ export const SPECIES2 = {
     eggGroups: ['humanshape'], hatchCounter: 20,
     learnset: { 1: ['teleport', 'confusion', 'disable'], 20: ['psybeam'], 25: ['recover'], 31: ['reflect'], 38: ['psychic'] },
     flavor: 'Its spoon bends a little more every time it concentrates.',
+    design: { inspired: 'oracle', kind: 'cosmic', note: 'lanky oracle, pendulum crystal on a cord (no spoon)' },
     evo: { to: 'alakazam', method: 'trade' }, tm: [1, 5, 6, 9, 10, 17, 18, 19, 28, 29, 30, 31, 32, 33, 34, 35, 40, 42, 44, 45, 46, 49, 50, 105],
   },
   alakazam: {
@@ -496,6 +541,7 @@ export const SPECIES2 = {
     eggGroups: ['humanshape'], hatchCounter: 20,
     learnset: { 1: ['teleport', 'confusion', 'disable'], 20: ['psybeam'], 25: ['recover'], 31: ['reflect'], 38: ['psychic'] },
     flavor: 'It forgets nothing. Every battle is a solved problem.',
+    design: { inspired: 'sage', kind: 'cosmic', note: 'levitating sage, three orbiting thought-orbs' },
     tm: [1, 5, 6, 9, 10, 15, 17, 18, 19, 28, 29, 30, 31, 32, 33, 34, 35, 40, 42, 44, 45, 46, 49, 50, 105],
   },
   machop: {
@@ -505,6 +551,7 @@ export const SPECIES2 = {
     eggGroups: ['humanshape'], hatchCounter: 20,
     learnset: { 1: ['lowkick', 'leer'], 10: ['karatechop'], 20: ['seismictoss'], 25: ['focusenergy'], 32: ['submission'] },
     flavor: 'It trains by lifting boulders, then apologizes to them.',
+    design: { inspired: 'brawler toddler', kind: 'cosmic', note: 'slate-blue brawler toddler, bandage-wrapped fists' },
     evo: { to: 'machoke', method: 'level', level: 28 }, tm: [1, 5, 6, 8, 9, 10, 17, 18, 19, 20, 26, 27, 28, 31, 32, 34, 38, 44, 48, 50, 104],
   },
   machoke: {
@@ -514,6 +561,7 @@ export const SPECIES2 = {
     eggGroups: ['humanshape'], hatchCounter: 20,
     learnset: { 1: ['lowkick', 'leer', 'karatechop'], 20: ['seismictoss'], 27: ['focusenergy'], 36: ['submission'] },
     flavor: 'Its belt keeps its own strength from running wild.',
+    design: { inspired: 'strongman', kind: 'cosmic', note: 'hefty slate strongman, wrapped knuckles, broad belt-free torso' },
     evo: { to: 'machamp', method: 'trade' }, tm: [1, 5, 6, 8, 9, 10, 17, 18, 19, 20, 26, 27, 28, 31, 32, 34, 38, 44, 48, 50, 104],
   },
   machamp: {
@@ -523,6 +571,7 @@ export const SPECIES2 = {
     eggGroups: ['humanshape'], hatchCounter: 20,
     learnset: { 1: ['lowkick', 'leer', 'karatechop'], 20: ['seismictoss'], 27: ['focusenergy'], 36: ['submission'] },
     flavor: 'Four arms, zero hesitation. It can tie knots and win.',
+    design: { inspired: 'titan', kind: 'cosmic', note: 'four-armed quarry titan, teal, massive shoulders' },
     tm: [1, 5, 6, 8, 9, 10, 15, 17, 18, 19, 20, 26, 27, 28, 31, 32, 34, 38, 44, 48, 50, 104],
   },
   bellsprout: {
@@ -532,6 +581,7 @@ export const SPECIES2 = {
     eggGroups: ['plant'], hatchCounter: 20,
     learnset: { 1: ['vinewhip', 'growth'], 10: ['wrap'], 13: ['poisonpowder'], 15: ['sleeppowder'], 18: ['stunspore'], 21: ['acid'], 26: ['razorleaf'], 33: ['solarbeam'] },
     flavor: 'It sways like laundry on a line, roots barely holding.',
+    design: { inspired: 'plant sprite', kind: 'plant', note: 'sprout with a pitcher-cup head, root feet' },
     evo: { to: 'weepinbell', method: 'level', level: 21 }, tm: [3, 6, 9, 10, 20, 21, 22, 31, 32, 33, 34, 44, 50, 101],
   },
   weepinbell: {
@@ -541,6 +591,7 @@ export const SPECIES2 = {
     eggGroups: ['plant'], hatchCounter: 20,
     learnset: { 1: ['vinewhip', 'growth', 'wrap', 'poisonpowder'], 15: ['sleeppowder'], 18: ['stunspore'], 23: ['acid'], 29: ['razorleaf'], 38: ['solarbeam'] },
     flavor: 'It hangs from branches, a bell that rings for dinner.',
+    design: { inspired: 'plant sprite', kind: 'plant', note: 'hanging cup-plant, vine arms, spotted cup' },
     evo: { to: 'victreebel', method: 'stone', stone: 'leafstone' }, tm: [3, 6, 9, 10, 20, 21, 22, 31, 32, 33, 34, 44, 50, 101],
   },
   victreebel: {
@@ -550,6 +601,7 @@ export const SPECIES2 = {
     eggGroups: ['plant'], hatchCounter: 20,
     learnset: { 1: ['vinewhip', 'growth', 'wrap', 'sleeppowder', 'stunspore', 'acid', 'razorleaf'] },
     flavor: 'Its sweet scent writes invitations nothing should accept.',
+    design: { inspired: 'plant sprite', kind: 'plant', note: 'huge pitcher lord, lid canopy, fang rim' },
     tm: [3, 6, 9, 10, 15, 20, 21, 22, 31, 32, 33, 34, 44, 50, 101],
   },
   tentacool: {
@@ -559,6 +611,7 @@ export const SPECIES2 = {
     eggGroups: ['water3'], hatchCounter: 20,
     learnset: { 1: ['acid', 'supersonic'], 7: ['wrap'], 12: ['poisonsting'], 18: ['constrict'], 22: ['barrier'], 27: ['screech'], 33: ['hydropump'] },
     flavor: 'It drifts like a dropped lantern beneath the waves.',
+    design: { inspired: 'jellyfish', kind: 'animal', note: 'pale bell jelly, frilled arms, teal glow spots (no gem orbs)' },
     evo: { to: 'tentacruel', method: 'level', level: 30 }, tm: [3, 6, 9, 10, 11, 12, 13, 14, 20, 31, 32, 34, 44, 50, 101, 103],
   },
   tentacruel: {
@@ -568,6 +621,7 @@ export const SPECIES2 = {
     eggGroups: ['water3'], hatchCounter: 20,
     learnset: { 1: ['acid', 'supersonic', 'wrap', 'poisonsting'], 18: ['constrict'], 22: ['barrier'], 27: ['screech'], 36: ['hydropump'] },
     flavor: 'Eighty arms of bad news. Sailors cross themselves twice.',
+    design: { inspired: 'bell jelly', kind: 'animal', note: 'vast dark bell jelly, many lashing arms' },
     tm: [3, 6, 9, 10, 11, 12, 13, 14, 15, 20, 21, 22, 31, 32, 34, 44, 50, 101, 103],
   },
   graveler: {
@@ -577,6 +631,7 @@ export const SPECIES2 = {
     eggGroups: ['mineral'], hatchCounter: 15,
     learnset: { 1: ['tackle', 'defensecurl', 'rockthrow'], 11: ['rockthrow'], 16: ['selfdestruct'], 21: ['harden'], 29: ['earthquake'], 36: ['explosion'] },
     flavor: 'It rolls downhill for travel and stops by hitting things.',
+    design: { inspired: 'crag brute', kind: 'construct', note: 'multi-armed crag brute, rolling pose' },
     evo: { to: 'golem', method: 'trade' }, tm: [1, 6, 8, 9, 10, 17, 18, 19, 20, 26, 27, 28, 31, 32, 34, 36, 38, 44, 47, 48, 50, 104],
   },
   golem: {
@@ -586,6 +641,7 @@ export const SPECIES2 = {
     eggGroups: ['mineral'], hatchCounter: 15,
     learnset: { 1: ['tackle', 'defensecurl', 'rockthrow'], 16: ['selfdestruct'], 21: ['harden'], 29: ['earthquake'], 36: ['explosion'] },
     flavor: 'Once a year it sheds its whole shell and starts heavier.',
+    design: { inspired: 'golem', kind: 'construct', note: 'plated tectonic golem, crater core glow' },
     tm: [1, 5, 6, 8, 9, 10, 15, 17, 18, 19, 20, 26, 27, 28, 31, 32, 34, 36, 38, 44, 47, 48, 50, 104],
   },
   ponyta: {
@@ -595,6 +651,7 @@ export const SPECIES2 = {
     eggGroups: ['ground'], hatchCounter: 20,
     learnset: { 1: ['ember'], 12: ['tailwhip'], 19: ['stomp'], 26: ['growl'], 32: ['takedown'], 38: ['agility'], 44: ['firespin'] },
     flavor: 'Its mane flames up when it runs and settles when it rests.',
+    design: { inspired: 'foal', kind: 'animal', note: 'cream foal, flame mane + tail, gentle' },
     evo: { to: 'rapidash', method: 'level', level: 40 }, tm: [6, 8, 9, 10, 20, 31, 32, 33, 34, 38, 39, 44, 50],
   },
   rapidash: {
@@ -604,6 +661,7 @@ export const SPECIES2 = {
     eggGroups: ['ground'], hatchCounter: 20,
     learnset: { 1: ['ember', 'tailwhip', 'stomp', 'growl'], 32: ['takedown'], 38: ['agility'], 47: ['firespin'] },
     flavor: 'At full gallop its hooves barely bother touching ground.',
+    design: { inspired: 'mare', kind: 'animal', note: 'blazing galloper mare, flame fetlocks, NO horn' },
     tm: [6, 8, 9, 10, 15, 20, 31, 32, 33, 34, 38, 39, 44, 50],
   },
   slowpoke: {
@@ -613,6 +671,7 @@ export const SPECIES2 = {
     eggGroups: ['monster', 'water1'], hatchCounter: 20,
     learnset: { 1: ['confusion', 'disable'], 18: ['growl'], 22: ['watergun'], 27: ['headbutt'], 33: ['amnesia'], 40: ['psychic'] },
     flavor: 'It fishes with its tail and forgets why it sat down.',
+    design: { inspired: 'calf', kind: 'animal', note: 'chubby rosy river-calf, curled tail, dopey grin' },
     evo: { to: 'slowbro', method: 'level', level: 37 },
     evos: [
       { to: 'slowbro', method: 'level', level: 37 },
@@ -626,6 +685,7 @@ export const SPECIES2 = {
     eggGroups: ['monster', 'water1'], hatchCounter: 20,
     learnset: { 1: ['confusion', 'disable', 'growl', 'watergun'], 27: ['headbutt'], 33: ['withdraw'], 40: ['amnesia'], 48: ['psychic'] },
     flavor: 'The shell on its tail does the reacting for both of them.',
+    design: { inspired: 'calf', kind: 'animal', note: 'doze-calf with a shell-plate BACK shell (worn, not bitten)' },
     tm: [1, 5, 6, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 26, 27, 28, 29, 30, 31, 32, 33, 34, 38, 39, 42, 44, 45, 46, 50, 103, 104, 105],
   },
   magnemite: {
@@ -635,6 +695,7 @@ export const SPECIES2 = {
     eggGroups: ['mineral'], hatchCounter: 20,
     learnset: { 1: ['tackle'], 21: ['thundershock'], 25: ['supersonic'], 29: ['thunderwave'], 35: ['swift'], 41: ['screech'] },
     flavor: 'It hovers on static and complains loudly in thunderstorms.',
+    design: { inspired: 'orb being', kind: 'construct', note: 'floating copper coil-orb, horseshoe magnet prongs' },
     evo: { to: 'magneton', method: 'level', level: 30 }, tm: [6, 9, 10, 20, 24, 25, 30, 31, 32, 33, 34, 39, 44, 45, 50, 105],
   },
   magneton: {
@@ -644,6 +705,7 @@ export const SPECIES2 = {
     eggGroups: ['mineral'], hatchCounter: 20,
     learnset: { 1: ['tackle', 'thundershock', 'supersonic'], 25: ['supersonic'], 35: ['thunderwave'], 43: ['swift'], 50: ['screech'], 54: ['triattack'] },
     flavor: 'Three magnets in an argument that never quite resolves.',
+    design: { inspired: 'coil-orb', kind: 'construct', note: 'three fused coil-orbs, crackling arcs' },
     evo: { to: 'magnezone', method: 'level', level: 310 }, tm: [6, 9, 10, 15, 20, 24, 25, 30, 31, 32, 33, 34, 39, 44, 45, 49, 50, 105],
   },
   farfetchd: {
@@ -653,6 +715,7 @@ export const SPECIES2 = {
     eggGroups: ['flying', 'ground'], hatchCounter: 20,
     learnset: { 1: ['peck', 'sandattack'], 7: ['leer'], 15: ['furyattack'], 23: ['swordsdance'], 31: ['agility'], 39: ['slash'] },
     flavor: 'It guards its leek like a family heirloom with edges.',
+    design: { inspired: 'duck', kind: 'animal', note: 'plump teal courier duck, mail satchel, crest cap' },
     tm: [2, 3, 4, 6, 8, 9, 10, 20, 31, 32, 33, 34, 39, 44, 50, 101, 102],
   },
   doduo: {
@@ -662,6 +725,7 @@ export const SPECIES2 = {
     eggGroups: ['flying'], hatchCounter: 20,
     learnset: { 1: ['peck'], 9: ['growl'], 14: ['furyattack'], 20: ['drillpeck'], 24: ['rage'], 30: ['triattack'], 36: ['agility'] },
     flavor: 'Two heads take turns sleeping so one always watches.',
+    design: { inspired: 'bird', kind: 'class', note: 'two-headed downy runner, twin beaks, shared legs' },
     evo: { to: 'dodrio', method: 'level', level: 31 }, tm: [4, 6, 8, 9, 10, 20, 31, 32, 33, 34, 39, 44, 49, 50, 102],
   },
   dodrio: {
@@ -671,6 +735,7 @@ export const SPECIES2 = {
     eggGroups: ['flying'], hatchCounter: 20,
     learnset: { 1: ['peck', 'growl', 'furyattack'], 20: ['drillpeck'], 24: ['rage'], 30: ['triattack'], 38: ['agility'] },
     flavor: 'Three heads, three moods, one very fast set of legs.',
+    design: { inspired: 'bird', kind: 'class', note: 'three-headed runner, crest feathers, long strides' },
     tm: [4, 6, 8, 9, 10, 15, 20, 31, 32, 33, 34, 39, 44, 49, 50, 102],
   },
   seel: {
@@ -680,6 +745,7 @@ export const SPECIES2 = {
     eggGroups: ['water1', 'ground'], hatchCounter: 20,
     learnset: { 1: ['headbutt', 'growl'], 15: ['aurorabeam'], 25: ['rest'], 30: ['takedown'], 35: ['icebeam'] },
     flavor: 'It naps on drifting ice, one eye always on the water.',
+    design: { inspired: 'pup', kind: 'animal', note: 'white floof seal pup, big flippers, snow-spot coat' },
     evo: { to: 'dewgong', method: 'level', level: 34 }, tm: [6, 8, 9, 10, 11, 12, 13, 14, 16, 20, 31, 32, 34, 44, 50, 103],
   },
   dewgong: {
@@ -689,6 +755,7 @@ export const SPECIES2 = {
     eggGroups: ['water1', 'ground'], hatchCounter: 20,
     learnset: { 1: ['headbutt', 'growl', 'aurorabeam'], 25: ['rest'], 44: ['takedown'], 56: ['icebeam'] },
     flavor: 'It stores warmth in thick blubber and glides like silk.',
+    design: { inspired: 'seal', kind: 'animal', note: 'elegant frost manatee-seal, flowing fins, serene' },
     tm: [6, 8, 9, 10, 11, 12, 13, 14, 15, 16, 20, 31, 32, 34, 44, 50, 103],
   },
   grimer: {
@@ -698,6 +765,7 @@ export const SPECIES2 = {
     eggGroups: ['indeterminate'], hatchCounter: 20,
     learnset: { 1: ['pound', 'disable'], 20: ['acidarmor'], 25: ['minimize'], 30: ['sludge'], 37: ['harden'], 42: ['screech'], 48: ['acid'] },
     flavor: 'Born of dockside sludge. It oozes toward anything warm.',
+    design: { inspired: 'sludge blob', kind: 'cosmic', note: 'violet-black sludge blob, drippy arms' },
     evo: { to: 'muk', method: 'level', level: 38 }, tm: [6, 9, 10, 15, 20, 24, 25, 31, 32, 34, 36, 38, 44, 47, 50],
   },
   muk: {
@@ -707,6 +775,7 @@ export const SPECIES2 = {
     eggGroups: ['indeterminate'], hatchCounter: 20,
     learnset: { 1: ['pound', 'disable', 'acidarmor', 'sludge'], 25: ['minimize'], 45: ['screech'], 53: ['acid'] },
     flavor: 'Footprints it leaves behind stay toxic for a full year.',
+    design: { inspired: 'mire mass', kind: 'cosmic', note: 'vast mire mass, toxic fume wisps, heavy arms' },
     tm: [6, 9, 10, 15, 20, 24, 25, 31, 32, 34, 36, 38, 44, 47, 50],
   },
   shellder: {
@@ -716,6 +785,7 @@ export const SPECIES2 = {
     eggGroups: ['water3'], hatchCounter: 20,
     learnset: { 1: ['tackle', 'withdraw'], 18: ['supersonic'], 23: ['clamp'], 30: ['aurorabeam'], 39: ['leer'], 50: ['icebeam'] },
     flavor: 'Its tongue lolls out even when its shell slams shut.',
+    design: { inspired: 'clam', kind: 'animal', note: 'violet scallop, eye stalks inside the shell' },
     evo: { to: 'cloyster', method: 'stone', stone: 'waterstone' }, tm: [6, 9, 10, 11, 12, 13, 14, 20, 31, 32, 33, 34, 39, 44, 49, 50, 103],
   },
   cloyster: {
@@ -725,6 +795,7 @@ export const SPECIES2 = {
     eggGroups: ['water3'], hatchCounter: 20,
     learnset: { 1: ['tackle', 'withdraw', 'supersonic', 'clamp', 'aurorabeam'] },
     flavor: 'Nothing short of a torpedo gets through that shell.',
+    design: { inspired: 'shellfish', kind: 'animal', note: 'fortress scallop, ice spikes, dark pearl core' },
     tm: [6, 9, 10, 11, 12, 13, 14, 15, 20, 31, 32, 33, 34, 39, 44, 49, 50, 103],
   },
   gastly: {
@@ -734,6 +805,7 @@ export const SPECIES2 = {
     eggGroups: ['indeterminate'], hatchCounter: 20,
     learnset: { 1: ['lick', 'confuseray', 'nightshade'], 15: ['hypnosis'], 27: ['dreameater'] },
     flavor: 'Mostly gas and mischief. Strong wind is its worst enemy.',
+    design: { inspired: 'bird', kind: 'class', note: 'wispy violet gas sprite, ember eyes, fanged grin' },
     evo: { to: 'haunter', method: 'level', level: 25 }, tm: [6, 20, 21, 24, 25, 29, 31, 32, 34, 36, 42, 44, 46, 47, 50],
   },
   haunter: {
@@ -743,6 +815,7 @@ export const SPECIES2 = {
     eggGroups: ['indeterminate'], hatchCounter: 20,
     learnset: { 1: ['lick', 'confuseray', 'nightshade'], 15: ['hypnosis'], 29: ['dreameater'] },
     flavor: 'It hides in walls and practices its scariest face.',
+    design: { inspired: 'phantom', kind: 'cosmic', note: 'clawed vapor phantom, floating claws, wild grin' },
     evo: { to: 'gengar', method: 'trade' }, tm: [6, 20, 21, 24, 25, 29, 31, 32, 34, 36, 42, 44, 46, 47, 50],
   },
   gengar: {
@@ -752,6 +825,7 @@ export const SPECIES2 = {
     eggGroups: ['indeterminate'], hatchCounter: 20,
     learnset: { 1: ['lick', 'confuseray', 'nightshade', 'hypnosis'], 29: ['dreameater'] },
     flavor: 'Your shadow, but grinning. It was never your shadow.',
+    design: { inspired: 'shade', kind: 'cosmic', note: 'plump shadow imp, crescent grin, back spines' },
     tm: [1, 5, 6, 9, 10, 15, 17, 18, 19, 20, 21, 24, 25, 29, 31, 32, 34, 35, 36, 42, 44, 46, 47, 50, 104],
   },
   drowzee: {
@@ -761,6 +835,7 @@ export const SPECIES2 = {
     eggGroups: ['humanshape'], hatchCounter: 20,
     learnset: { 1: ['pound', 'hypnosis'], 12: ['disable'], 17: ['confusion'], 24: ['headbutt'], 29: ['meditate'], 34: ['psychic'] },
     flavor: 'It can smell a good dream from three streets away.',
+    design: { inspired: 'tapir', kind: 'animal', note: 'drowsy tapir, striped sleep-coat, long snout' },
     evo: { to: 'hypno', method: 'level', level: 26 }, tm: [1, 5, 6, 8, 9, 10, 17, 18, 19, 29, 30, 31, 32, 33, 34, 35, 40, 42, 44, 45, 46, 49, 50, 105],
   },
   hypno: {
@@ -770,6 +845,7 @@ export const SPECIES2 = {
     eggGroups: ['humanshape'], hatchCounter: 20,
     learnset: { 1: ['pound', 'hypnosis', 'disable', 'confusion'], 24: ['headbutt'], 31: ['meditate'], 37: ['psychic'] },
     flavor: 'Its pendulum swings at the tempo of a slowing heart.',
+    design: { inspired: 'tapir', kind: 'animal', note: 'sleep-sage tapir, swinging lantern (no pendulum)' },
     tm: [1, 5, 6, 8, 9, 10, 15, 17, 18, 19, 29, 30, 31, 32, 33, 34, 35, 40, 42, 44, 45, 46, 49, 50, 105],
   },
   krabby: {
@@ -779,6 +855,7 @@ export const SPECIES2 = {
     eggGroups: ['water3'], hatchCounter: 20,
     learnset: { 1: ['bubble', 'leer'], 20: ['harden'], 25: ['stomp'], 30: ['bubblebeam'], 35: ['haze'] },
     flavor: 'It blows foam when nervous, which is nearly always.',
+    design: { inspired: 'crab', kind: 'animal', note: 'foam-bubble crab, one big claw, stalk eyes' },
     evo: { to: 'kingler', method: 'level', level: 28 }, tm: [3, 6, 8, 9, 10, 11, 12, 13, 14, 19, 31, 32, 34, 44, 50, 101, 103, 104],
   },
   kingler: {
@@ -788,6 +865,7 @@ export const SPECIES2 = {
     eggGroups: ['water3'], hatchCounter: 20,
     learnset: { 1: ['bubble', 'leer', 'harden'], 25: ['stomp'], 34: ['bubblebeam'], 42: ['haze'] },
     flavor: 'One claw does the crushing. The other does the waving.',
+    design: { inspired: 'crab', kind: 'animal', note: 'massive pincher monarch crab, crown spikes' },
     tm: [3, 6, 8, 9, 10, 11, 12, 13, 14, 15, 19, 31, 32, 34, 44, 50, 101, 103, 104],
   },
   voltorb: {
@@ -797,6 +875,7 @@ export const SPECIES2 = {
     eggGroups: ['mineral'], hatchCounter: 20,
     learnset: { 1: ['tackle', 'screech'], 17: ['swift'], 22: ['selfdestruct'], 29: ['lightscreen'], 36: ['explosion'] },
     flavor: 'It appeared the same year the first Ball factory opened.',
+    design: { inspired: 'orb being', kind: 'construct', note: 'copper battery orb, terminal caps, angry eyes' },
     evo: { to: 'electrode', method: 'level', level: 30 }, tm: [6, 9, 10, 20, 24, 25, 31, 32, 33, 34, 36, 39, 44, 50, 105],
   },
   electrode: {
@@ -806,6 +885,7 @@ export const SPECIES2 = {
     eggGroups: ['mineral'], hatchCounter: 20,
     learnset: { 1: ['tackle', 'screech', 'swift'], 22: ['selfdestruct'], 29: ['lightscreen'], 40: ['explosion'] },
     flavor: 'It stores storm energy and spends it all at once.',
+    design: { inspired: 'battery orb', kind: 'construct', note: 'huge grinning battery orb, crackling terminals' },
     tm: [6, 9, 10, 15, 20, 24, 25, 31, 32, 33, 34, 36, 39, 44, 47, 50, 105],
   },
   exeggcute: {
@@ -815,6 +895,7 @@ export const SPECIES2 = {
     eggGroups: ['plant'], hatchCounter: 20,
     learnset: { 1: ['hypnosis', 'leechseed'], 25: ['stunspore'], 28: ['poisonpowder'], 32: ['sleeppowder'], 37: ['solarbeam'], 42: ['reflect'] },
     flavor: 'Six minds, one cluster. They finish each others thoughts.',
+    design: { inspired: 'plant sprite', kind: 'plant', note: 'six bickering seed-pods in a cluster, leaf sprouts' },
     evo: { to: 'exeggutor', method: 'stone', stone: 'leafstone' }, tm: [6, 9, 10, 20, 21, 22, 29, 30, 31, 32, 33, 34, 36, 42, 44, 46, 47, 50],
   },
   exeggutor: {
@@ -824,6 +905,7 @@ export const SPECIES2 = {
     eggGroups: ['plant'], hatchCounter: 20,
     learnset: { 1: ['hypnosis', 'leechseed', 'stomp', 'eggbomb'] },
     flavor: 'Each head argues for a different direction to walk.',
+    design: { inspired: 'plant sprite', kind: 'plant', note: 'shambling tree, three HANGING gourd heads' },
     tm: [6, 9, 10, 15, 20, 21, 22, 29, 30, 31, 32, 33, 34, 36, 37, 42, 44, 46, 47, 50, 104],
   },
   cubone: {
@@ -833,6 +915,7 @@ export const SPECIES2 = {
     eggGroups: ['monster'], hatchCounter: 20,
     learnset: { 1: ['boneclub', 'growl'], 13: ['leer'], 18: ['focusenergy'], 25: ['rage'], 31: ['bonemerang'], 38: ['takedown'] },
     flavor: 'Its cries echo inside the skull it never takes off.',
+    design: { inspired: 'ammonite', kind: 'animal', note: 'small ground lizard, ammonite-shell hood, river-stone keepsake' },
     evo: { to: 'marowak', method: 'level', level: 28 }, tm: [1, 6, 8, 9, 10, 11, 12, 13, 14, 17, 18, 19, 20, 26, 27, 28, 31, 32, 34, 38, 44, 50, 104],
   },
   marowak: {
@@ -842,6 +925,7 @@ export const SPECIES2 = {
     eggGroups: ['monster'], hatchCounter: 20,
     learnset: { 1: ['boneclub', 'growl', 'leer', 'focusenergy'], 25: ['rage'], 33: ['bonemerang'], 41: ['takedown'] },
     flavor: 'It spins its bone club in slow, practiced funeral arcs.',
+    design: { inspired: 'fossil guardian', kind: 'cosmic', note: 'shell-hooded fossil guardian, smooth stone club' },
     tm: [1, 5, 6, 8, 9, 10, 11, 12, 13, 14, 15, 17, 18, 19, 20, 26, 27, 28, 31, 32, 34, 38, 44, 50, 104],
   },
   hitmonlee: {
@@ -851,6 +935,7 @@ export const SPECIES2 = {
     eggGroups: ['humanshape'], hatchCounter: 25,
     learnset: { 1: ['doubleslap', 'meditate'], 28: ['megakick'], 33: ['submission'] },
     flavor: 'Its legs stretch mid-kick. Distance is a suggestion.',
+    design: { inspired: 'kick fighter', kind: 'cosmic', note: 'elastic-legged kick fighter, boot feet, coiled legs' },
     tm: [1, 5, 6, 8, 9, 10, 17, 18, 19, 20, 31, 32, 34, 35, 44, 50, 104],
   },
   hitmonchan: {
@@ -860,6 +945,7 @@ export const SPECIES2 = {
     eggGroups: ['humanshape'], hatchCounter: 25,
     learnset: { 1: ['cometpunch', 'agility'], 28: ['firepunch'], 30: ['icepunch'], 32: ['thunderpunch'], 38: ['counter'], 43: ['submission'] },
     flavor: 'It jabs faster than the eye files the paperwork.',
+    design: { inspired: 'punch-brute', kind: 'cosmic', note: 'boxy punch-brute, glove mitts, guard stance' },
     tm: [1, 5, 6, 8, 9, 10, 17, 18, 19, 20, 31, 32, 34, 35, 44, 50, 104],
   },
   lickitung: {
@@ -869,6 +955,7 @@ export const SPECIES2 = {
     eggGroups: ['monster'], hatchCounter: 20,
     learnset: { 1: ['lick', 'supersonic'], 7: ['stomp'], 15: ['disable'], 23: ['defensecurl'], 31: ['bodyslam'], 39: ['screech'] },
     flavor: 'Its tongue runs twice its body length and misses nothing.',
+    design: { inspired: 'lizard', kind: 'animal', note: 'chubby curl-tail lizard, long ribbon tongue' },
     evo: { to: 'lickilicky', method: 'level', level: 310 }, tm: [1, 5, 6, 8, 9, 10, 11, 12, 13, 14, 15, 17, 18, 19, 20, 24, 25, 26, 27, 28, 31, 32, 34, 36, 38, 39, 40, 44, 47, 50, 101, 103, 104],
   },
   koffing: {
@@ -878,6 +965,7 @@ export const SPECIES2 = {
     eggGroups: ['indeterminate'], hatchCounter: 20,
     learnset: { 1: ['tackle', 'smog'], 30: ['sludge'], 37: ['haze'], 44: ['selfdestruct'], 48: ['explosion'] },
     flavor: 'Thin skin, thick fumes. Handle like a loaded balloon.',
+    design: { inspired: 'orb being', kind: 'construct', note: 'cratered fume orb, vent wisps, NO skull mark' },
     evo: { to: 'weezing', method: 'level', level: 35 }, tm: [6, 9, 10, 20, 24, 25, 31, 32, 34, 36, 38, 44, 47, 50],
   },
   weezing: {
@@ -887,6 +975,7 @@ export const SPECIES2 = {
     eggGroups: ['indeterminate'], hatchCounter: 20,
     learnset: { 1: ['tackle', 'smog', 'sludge'], 37: ['haze'], 46: ['selfdestruct'], 51: ['explosion'] },
     flavor: 'Two heads trading fumes, each convinced theirs is finer.',
+    design: { inspired: 'crater-orb', kind: 'construct', note: 'twin crater-orbs, belching smog plumes' },
     tm: [6, 9, 10, 15, 20, 24, 25, 31, 32, 34, 36, 38, 44, 47, 50],
   },
   rhyhorn: {
@@ -896,6 +985,7 @@ export const SPECIES2 = {
     eggGroups: ['monster', 'ground'], hatchCounter: 20,
     learnset: { 1: ['tackle'], 19: ['stomp'], 25: ['tailwhip'], 30: ['furyattack'], 35: ['leer'], 40: ['takedown'], 45: ['horndrill'] },
     flavor: 'It charges in straight lines and lets the world dodge.',
+    design: { inspired: 'calf', kind: 'animal', note: 'plated grey rhino-calf, pebble horn' },
     evo: { to: 'rhydon', method: 'level', level: 42 }, tm: [6, 8, 9, 10, 15, 20, 24, 25, 26, 27, 28, 31, 32, 34, 38, 44, 48, 50, 104],
   },
   rhydon: {
@@ -905,6 +995,7 @@ export const SPECIES2 = {
     eggGroups: ['monster', 'ground'], hatchCounter: 20,
     learnset: { 1: ['tackle', 'stomp', 'tailwhip', 'furyattack'], 35: ['leer'], 40: ['takedown'], 48: ['horndrill'] },
     flavor: 'Its drill horn can punch through solid diamond seams.',
+    design: { inspired: 'titan', kind: 'cosmic', note: 'upright plated titan, blunt battering cone horn' },
     evo: { to: 'rhyperior', method: 'trade' }, tm: [1, 5, 6, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 24, 25, 26, 27, 28, 31, 32, 34, 38, 44, 48, 50, 103, 104],
   },
   chansey: {
@@ -914,6 +1005,7 @@ export const SPECIES2 = {
     eggGroups: ['fairy'], hatchCounter: 40,
     learnset: { 1: ['pound', 'doubleslap'], 8: ['sing'], 16: ['growl'], 23: ['minimize'], 30: ['defensecurl'], 38: ['lightscreen'], 44: ['eggbomb'], 50: ['softboiled'] },
     flavor: 'It shares its egg with the hurt and the hungry alike.',
+    design: { inspired: 'bird', kind: 'class', note: 'round rosy nurse bird, herb-bundle carrier (no egg)' },
     evo: { to: 'blissey', method: 'level', level: 40 }, tm: [1, 5, 6, 8, 9, 10, 11, 12, 13, 14, 17, 18, 19, 20, 24, 25, 29, 30, 31, 32, 33, 34, 35, 37, 38, 39, 40, 41, 42, 44, 45, 46, 49, 50, 103, 105],
   },
   tangela: {
@@ -923,6 +1015,7 @@ export const SPECIES2 = {
     eggGroups: ['plant'], hatchCounter: 20,
     learnset: { 1: ['constrict', 'absorb'], 25: ['poisonpowder'], 27: ['stunspore'], 30: ['growth'], 33: ['megadrain'], 37: ['sleeppowder'], 40: ['bind'] },
     flavor: 'Nobody has seen its face. The vines prefer it that way.',
+    design: { inspired: 'vine sprite', kind: 'plant', note: 'shambling vine mass, shy eyes in the tangle' },
     evo: { to: 'tangrowth', method: 'level', level: 310 }, tm: [3, 6, 9, 10, 15, 20, 21, 22, 31, 32, 34, 39, 44, 50, 101],
   },
   kangaskhan: {
@@ -932,6 +1025,7 @@ export const SPECIES2 = {
     eggGroups: ['monster'], hatchCounter: 20,
     learnset: { 1: ['cometpunch', 'leer'], 19: ['bite'], 26: ['tailwhip'], 34: ['megapunch'], 40: ['rage'] },
     flavor: 'The pouch is a nursery, a fortress, and a promise.',
+    design: { inspired: 'roo', kind: 'animal', note: 'boxing kangaroo matriarch, joey peeking from pouch' },
     tm: [1, 5, 6, 8, 9, 10, 11, 12, 13, 14, 15, 17, 18, 19, 20, 24, 25, 26, 27, 28, 31, 32, 34, 36, 38, 39, 40, 44, 47, 48, 50, 104],
   },
   horsea: {
@@ -941,6 +1035,7 @@ export const SPECIES2 = {
     eggGroups: ['water1', 'dragon'], hatchCounter: 20,
     learnset: { 1: ['bubble'], 8: ['smokescreen'], 19: ['leer'], 27: ['watergun'], 35: ['agility'], 44: ['hydropump'] },
     flavor: 'It anchors to coral in currents that would scatter shells.',
+    design: { inspired: 'seahorse', kind: 'animal', note: 'tiny curled seahorse, bubble snout, fin crown' },
     evo: { to: 'seadra', method: 'level', level: 32 }, tm: [6, 9, 10, 11, 12, 13, 14, 20, 31, 32, 34, 39, 44, 50, 103],
   },
   seadra: {
@@ -950,6 +1045,7 @@ export const SPECIES2 = {
     eggGroups: ['water1', 'dragon'], hatchCounter: 20,
     learnset: { 1: ['bubble', 'smokescreen', 'leer', 'watergun'], 27: ['watergun'], 35: ['agility'], 44: ['hydropump'] },
     flavor: 'Its spines carry venom. Even its shed skin stays sharp.',
+    design: { inspired: 'seahorse', kind: 'animal', note: 'spiny coral drake seahorse, curled tail' },
     evo: { to: 'kingdra', method: 'trade' }, tm: [6, 9, 10, 11, 12, 13, 14, 15, 20, 31, 32, 34, 39, 44, 50, 103],
   },
   goldeen: {
@@ -959,6 +1055,7 @@ export const SPECIES2 = {
     eggGroups: ['water2'], hatchCounter: 20,
     learnset: { 1: ['peck', 'tailwhip'], 10: ['supersonic'], 19: ['furyattack'], 24: ['watergun'], 30: ['agility'], 38: ['horndrill'] },
     flavor: 'A flash of white and gold under still pond water.',
+    design: { inspired: 'goldfish', kind: 'animal', note: 'veil-finned royal goldfish, flowing fins, NO horn' },
     evo: { to: 'seaking', method: 'level', level: 33 }, tm: [6, 9, 10, 11, 12, 13, 14, 20, 31, 32, 34, 44, 50, 103],
   },
   seaking: {
@@ -968,6 +1065,7 @@ export const SPECIES2 = {
     eggGroups: ['water2'], hatchCounter: 20,
     learnset: { 1: ['peck', 'tailwhip', 'supersonic', 'furyattack'], 24: ['watergun'], 30: ['agility'], 41: ['horndrill'] },
     flavor: 'In autumn it swims upstream wearing brighter colors.',
+    design: { inspired: 'fish', kind: 'class', note: 'majestic veiled koi, crown fins' },
     tm: [6, 9, 10, 11, 12, 13, 14, 15, 20, 31, 32, 34, 44, 50, 103],
   },
   staryu: {
@@ -977,6 +1075,7 @@ export const SPECIES2 = {
     eggGroups: ['water3'], hatchCounter: 20,
     learnset: { 1: ['tackle', 'watergun'], 13: ['harden'], 18: ['recover'], 23: ['swift'], 28: ['minimize'], 33: ['lightscreen'], 38: ['hydropump'] },
     flavor: 'Its core blinks in rhythm with the stars overhead.',
+    design: { inspired: 'starfish', kind: 'animal', note: 'golden starlet starfish, plain core (no gem)' },
     evo: { to: 'starmie', method: 'stone', stone: 'waterstone' }, tm: [6, 9, 10, 11, 12, 13, 14, 20, 24, 25, 29, 30, 31, 32, 33, 34, 39, 42, 44, 45, 46, 49, 50, 103, 105],
   },
   starmie: {
@@ -986,6 +1085,7 @@ export const SPECIES2 = {
     eggGroups: ['water3'], hatchCounter: 20,
     learnset: { 1: ['tackle', 'watergun', 'harden'] },
     flavor: 'People once read its flashing core as a signal from space.',
+    design: { inspired: 'star', kind: 'cosmic', note: 'violet many-armed star, ring core (no jewel)' },
     tm: [6, 9, 10, 11, 12, 13, 14, 15, 20, 24, 25, 29, 30, 31, 32, 33, 34, 39, 42, 44, 45, 46, 49, 50, 103, 105],
   },
   mrmime: {
@@ -995,6 +1095,7 @@ export const SPECIES2 = {
     eggGroups: ['humanshape'], hatchCounter: 25,
     learnset: { 1: ['confusion', 'barrier'], 15: ['doubleslap'], 21: ['meditate'], 27: ['lightscreen'], 33: ['substitute'] },
     flavor: 'It builds real walls out of pantomime and pure cheek.',
+    design: { inspired: 'cat', kind: 'animal', note: 'harlequin jester, bell shoes, white gloves, silent pose' },
     tm: [1, 5, 6, 8, 9, 10, 15, 17, 18, 19, 20, 29, 30, 31, 32, 33, 34, 35, 40, 42, 44, 45, 46, 49, 50, 105],
   },
   scyther: {
@@ -1004,6 +1105,7 @@ export const SPECIES2 = {
     eggGroups: ['bug'], hatchCounter: 25,
     learnset: { 1: ['quickattack'], 17: ['leer'], 20: ['focusenergy'], 24: ['doubleslap'], 29: ['slash'], 39: ['swordsdance'], 44: ['agility'], 50: ['wingattack'] },
     flavor: 'Its scythes part tall grass and arguments with equal ease.',
+    design: { inspired: 'ant', kind: 'animal', note: 'green reaper mantis, blade arms, poised' },
     evo: { to: 'scizor', method: 'trade' }, tm: [3, 6, 9, 10, 15, 20, 31, 32, 34, 39, 44, 50, 101, 102],
   },
   jynx: {
@@ -1013,6 +1115,7 @@ export const SPECIES2 = {
     eggGroups: ['humanshape'], hatchCounter: 25,
     learnset: { 1: ['pound', 'lovelykiss', 'lick'], 12: ['doubleslap'], 18: ['icepunch'], 23: ['bodyslam'], 31: ['blizzard'], 39: ['psychic'] },
     flavor: 'It sways as it walks, humming in a language of weather.',
+    design: { inspired: 'ice crone', kind: 'cosmic', note: 'aurora ice crone, icicle hair, swirling shawl (not a diva)' },
     tm: [1, 5, 6, 8, 9, 10, 11, 12, 13, 14, 15, 17, 18, 19, 29, 30, 31, 32, 33, 34, 35, 40, 42, 44, 45, 46, 49, 50, 103],
   },
   electabuzz: {
@@ -1022,6 +1125,7 @@ export const SPECIES2 = {
     eggGroups: ['humanshape'], hatchCounter: 25,
     learnset: { 1: ['quickattack', 'leer', 'thundershock'], 29: ['lightscreen'], 34: ['thunderpunch'], 37: ['thunderbolt'], 42: ['thunder'] },
     flavor: 'Power plants post guards. It treats blackouts as buffets.',
+    design: { inspired: 'tiger', kind: 'animal', note: 'storm brawler, black/amber stripes, coil fists' },
     evo: { to: 'electivire', method: 'trade' }, tm: [1, 5, 6, 8, 9, 10, 15, 17, 18, 19, 20, 24, 25, 29, 31, 32, 33, 34, 35, 39, 40, 42, 44, 45, 46, 49, 50, 104, 105],
   },
   magmar: {
@@ -1031,6 +1135,7 @@ export const SPECIES2 = {
     eggGroups: ['humanshape'], hatchCounter: 25,
     learnset: { 1: ['ember', 'leer'], 26: ['smokescreen'], 30: ['firepunch'], 34: ['confuseray'], 39: ['flamethrower'], 44: ['firespin'] },
     flavor: 'It bathes in lava to mend its wounds and its mood.',
+    design: { inspired: 'salamander', kind: 'animal', note: 'magma salamander, furnace crest, ember claws (no bill)' },
     evo: { to: 'magmortar', method: 'trade' }, tm: [1, 5, 6, 8, 9, 10, 15, 17, 18, 19, 20, 29, 31, 32, 33, 34, 35, 38, 39, 40, 42, 44, 46, 49, 50, 104],
   },
   pinsir: {
@@ -1040,6 +1145,7 @@ export const SPECIES2 = {
     eggGroups: ['bug'], hatchCounter: 25,
     learnset: { 1: ['focusenergy'], 25: ['seismictoss'], 31: ['slash'], 37: ['swordsdance'], 43: ['submission'] },
     flavor: 'Its horns can snap a log or flip a careless boulder.',
+    design: { inspired: 'beetle', kind: 'animal', note: 'massive stag beetle, oak-bark armor plates' },
     tm: [3, 6, 8, 9, 10, 15, 17, 19, 20, 31, 32, 34, 44, 50, 101, 104],
   },
   tauros: {
@@ -1049,6 +1155,7 @@ export const SPECIES2 = {
     eggGroups: ['ground'], hatchCounter: 20,
     learnset: { 1: ['tackle'], 21: ['stomp'], 26: ['leer'], 33: ['rage'], 42: ['takedown'] },
     flavor: 'It whips its own flanks with three tails, then charges.',
+    design: { inspired: 'bull', kind: 'animal', note: 'prairie bull, huge shoulder hump, ONE tail' },
     tm: [6, 8, 9, 10, 13, 14, 15, 20, 24, 25, 26, 27, 28, 31, 32, 34, 38, 44, 50, 104],
   },
   magikarp: {
@@ -1058,6 +1165,7 @@ export const SPECIES2 = {
     eggGroups: ['water2', 'dragon'], hatchCounter: 5,
     learnset: { 1: ['splash'], 15: ['tackle'] },
     flavor: 'Patient, splashy, and quietly plotting a waterfall.',
+    design: { inspired: 'carp', kind: 'animal', note: 'dull rusty carp, droopy whiskers, flop pose' },
     evo: { to: 'gyarados', method: 'level', level: 20 }, tm: [],
   },
   gyarados: {
@@ -1067,6 +1175,7 @@ export const SPECIES2 = {
     eggGroups: ['water2', 'dragon'], hatchCounter: 5,
     learnset: { 1: ['bite', 'leer', 'hydropump'], 25: ['rage'], 32: ['hyperbeam'] },
     flavor: 'Old maps mark its lakes with a simple warning: no.',
+    design: { inspired: 'wyrm', kind: 'cosmic', note: 'tempest sea wyrm, fin-sails, roaring' },
     tm: [6, 8, 9, 10, 11, 12, 13, 14, 15, 20, 24, 25, 28, 31, 32, 34, 38, 39, 44, 50, 103, 104],
   },
   lapras: {
@@ -1076,6 +1185,7 @@ export const SPECIES2 = {
     eggGroups: ['monster', 'water1'], hatchCounter: 40,
     learnset: { 1: ['watergun', 'growl', 'sing'], 16: ['mist'], 20: ['bodyslam'], 25: ['confuseray'], 32: ['icebeam'], 38: ['hydropump'] },
     flavor: 'It ferries travelers across cold bays, singing under stars.',
+    design: { inspired: 'plesiosaur', kind: 'animal', note: 'kelp-maned plesiosaur, smooth shell, gentle' },
     tm: [6, 8, 9, 10, 11, 12, 13, 14, 15, 20, 29, 31, 32, 34, 39, 42, 44, 46, 50, 103, 104],
   },
   ditto: {
@@ -1085,6 +1195,7 @@ export const SPECIES2 = {
     eggGroups: ['ditto'], hatchCounter: 20,
     learnset: { 1: ['transform'] },
     flavor: 'A puddle with ambitions. Every shape is a borrowed suit.',
+    design: { inspired: 'goo blob', kind: 'cosmic', note: 'teal goo blob, stretchy grin, dot eyes' },
     tm: [],
   },
   eevee: {
@@ -1139,6 +1250,7 @@ export const SPECIES2 = {
     eggGroups: ['mineral'], hatchCounter: 20,
     learnset: { 1: ['tackle', 'psybeam', 'conversion'], 12: ['disable'], 18: ['agility'], 24: ['recover'], 30: ['triattack'], 36: ['psychic'] },
     flavor: 'Built from code and corners. It prefers cyberspace weather.',
+    design: { inspired: 'crane', kind: 'animal', note: 'low-poly origami data-crane, faceted wings (not a duck)' },
     evo: { to: 'porygon2', method: 'trade' }, tm: [6, 9, 10, 11, 12, 13, 14, 15, 24, 25, 29, 30, 31, 32, 33, 34, 39, 42, 44, 45, 46, 49, 50, 105],
   },
   omanyte: {
@@ -1148,6 +1260,7 @@ export const SPECIES2 = {
     eggGroups: ['water1', 'water3'], hatchCounter: 30,
     learnset: { 1: ['watergun', 'withdraw'], 22: ['leer'], 29: ['bubblebeam'], 36: ['hydropump'] },
     flavor: 'A fossil that woke up and decided to keep swimming.',
+    design: { inspired: 'ammonite', kind: 'animal', note: 'small ammonite, shy tentacles' },
     evo: { to: 'omastar', method: 'level', level: 40 }, tm: [6, 8, 9, 10, 11, 12, 13, 14, 20, 31, 32, 34, 44, 50, 103],
   },
   omastar: {
@@ -1157,6 +1270,7 @@ export const SPECIES2 = {
     eggGroups: ['water1', 'water3'], hatchCounter: 30,
     learnset: { 1: ['watergun', 'withdraw', 'leer'], 36: ['hydropump'] },
     flavor: 'Its spiral shell is a library older than the coastline.',
+    design: { inspired: 'ammonite', kind: 'animal', note: 'great ammonite, crown tentacles, spiked rim' },
     tm: [6, 8, 9, 10, 11, 12, 13, 14, 15, 20, 31, 32, 34, 44, 50, 103, 104],
   },
   kabuto: {
@@ -1166,6 +1280,7 @@ export const SPECIES2 = {
     eggGroups: ['water1', 'water3'], hatchCounter: 30,
     learnset: { 1: ['scratch', 'harden'], 28: ['absorb'], 34: ['leer'], 39: ['slash'], 44: ['hydropump'] },
     flavor: 'It hid under its dome for three hundred million years.',
+    design: { inspired: 'trilobite', kind: 'animal', note: 'dome-shelled trilobite, eyes under the rim' },
     evo: { to: 'kabutops', method: 'level', level: 40 }, tm: [6, 8, 9, 10, 11, 12, 13, 14, 20, 31, 32, 34, 44, 50, 103],
   },
   kabutops: {
@@ -1175,6 +1290,7 @@ export const SPECIES2 = {
     eggGroups: ['water1', 'water3'], hatchCounter: 30,
     learnset: { 1: ['scratch', 'harden', 'absorb', 'slash'], 34: ['leer'], 46: ['hydropump'] },
     flavor: 'Scythe arms, ancient patience. The shallows were its court.',
+    design: { inspired: 'dome-reaper', kind: 'cosmic', note: 'upright dome-reaper, blade arms, lean hunter' },
     tm: [3, 6, 8, 9, 10, 11, 12, 13, 14, 15, 20, 28, 31, 32, 34, 39, 44, 50, 101, 103, 104],
   },
   aerodactyl: {
@@ -1184,6 +1300,7 @@ export const SPECIES2 = {
     eggGroups: ['flying'], hatchCounter: 35,
     learnset: { 1: ['wingattack', 'agility'], 28: ['bite'], 33: ['supersonic'], 38: ['takedown'], 45: ['hyperbeam'] },
     flavor: 'The old sky had teeth. Amber kept the memory safe.',
+    design: { inspired: 'pterosaur', kind: 'animal', note: 'grey pterosaur, crest fin, talons (generic fossil bird)' },
     tm: [2, 4, 6, 9, 10, 15, 20, 28, 31, 32, 34, 38, 39, 44, 50, 102],
   },
   snorlax: {
@@ -1193,6 +1310,7 @@ export const SPECIES2 = {
     eggGroups: ['monster'], hatchCounter: 40,
     learnset: { 1: ['tackle', 'headbutt'], 10: ['amnesia'], 17: ['rest'], 24: ['bodyslam'], 31: ['harden'], 38: ['doubleedge'], 45: ['hyperbeam'] },
     flavor: 'A roadblock with a heartbeat. Bring snacks or detour.',
+    design: { inspired: 'bear', kind: 'animal', note: 'hibernating giant, moss-blanket belly, curled up' },
     tm: [1, 5, 6, 8, 9, 10, 11, 12, 13, 14, 15, 17, 18, 19, 20, 24, 25, 26, 27, 28, 29, 31, 32, 34, 36, 38, 39, 40, 42, 44, 46, 47, 50, 103, 104],
   },
   articuno: {
@@ -1229,6 +1347,7 @@ export const SPECIES2 = {
     eggGroups: ['water1', 'dragon'], hatchCounter: 40,
     learnset: { 1: ['wrap', 'leer'], 10: ['thunderwave'], 20: ['agility'], 30: ['takedown'], 40: ['hyperbeam'] },
     flavor: 'It sheds its skin in hidden pools and grows bolder.',
+    design: { inspired: 'wyrm', kind: 'cosmic', note: 'pearl-blue wyrmling, fin ears, gentle' },
     evo: { to: 'dragonair', method: 'level', level: 30 }, tm: [6, 9, 10, 11, 12, 13, 14, 20, 24, 25, 31, 32, 34, 38, 39, 44, 50, 103],
   },
   dragonair: {
@@ -1238,6 +1357,7 @@ export const SPECIES2 = {
     eggGroups: ['water1', 'dragon'], hatchCounter: 40,
     learnset: { 1: ['wrap', 'leer', 'thunderwave'], 20: ['agility'], 30: ['takedown'], 45: ['hyperbeam'] },
     flavor: 'Weather shifts when it swims. Fishermen watch its pearls.',
+    design: { inspired: 'wyrm', kind: 'cosmic', note: 'serene sky-serpent, crescent fin-wings (no orbs)' },
     evo: { to: 'dragonite', method: 'level', level: 55 }, tm: [6, 9, 10, 11, 12, 13, 14, 15, 20, 24, 25, 31, 32, 34, 38, 39, 44, 50, 103],
   },
   dragonite: {
@@ -1247,6 +1367,7 @@ export const SPECIES2 = {
     eggGroups: ['water1', 'dragon'], hatchCounter: 40,
     learnset: { 1: ['wrap', 'leer', 'thunderwave', 'agility'], 30: ['takedown'], 45: ['hyperbeam'] },
     flavor: 'It guides lost ships home, then vanishes into the gale.',
+    design: { inspired: 'wyrm', kind: 'cosmic', note: 'grand kind dragon, broad wings' },
     tm: [1, 5, 6, 8, 9, 10, 11, 12, 13, 14, 15, 20, 24, 25, 28, 31, 32, 33, 34, 38, 39, 40, 44, 45, 50, 102, 103, 104, 105],
   },
   mewtwo: {
@@ -1265,6 +1386,7 @@ export const SPECIES2 = {
     eggGroups: ['no-eggs'], hatchCounter: 120,
     learnset: { 1: ['pound'], 10: ['transform'], 20: ['megapunch'], 30: ['metronome'], 40: ['psychic'], 50: ['softboiled'] },
     flavor: 'It plays hide and seek with history itself.',
+    design: { inspired: 'primordial sprite', kind: 'cosmic', note: 'tiny opal primordial sprite, ribbon tail, floating' },
     tm: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 44, 45, 46, 47, 48, 49, 50, 101, 102, 103, 104, 105],
   },
   // ===== Cheat Shop canon expansion (owner order 2026-10-28) =====
@@ -1285,6 +1407,7 @@ export const SPECIES2 = {
     eggGroups: ['mineral'], hatchCounter: 25,
     learnset: { 1: ['tackle', 'harden'], 8: ['rockthrow'], 20: ['icebeam'] },
     flavor: 'Its crystal segments chime softly when rain is coming.',
+    design: { inspired: 'dragon', kind: 'cosmic', note: 'same design, ice-crystal palette' },
     form: true, baseSpecies: 'onix',
   },
   pinkbutterfree: {
@@ -1294,6 +1417,7 @@ export const SPECIES2 = {
     eggGroups: ['bug'], hatchCounter: 15,
     learnset: { 1: ['confusion'], 12: ['poisonpowder'], 13: ['stunspore'], 14: ['sleeppowder'], 16: ['supersonic'], 21: ['gust'], 26: ['psybeam'] },
     flavor: 'Blush-pink wings, dusted by the island fruit it loves.',
+    design: { inspired: 'bird', kind: 'class', note: 'same design, rose-pink palette' },
     form: true, baseSpecies: 'butterfree',
   },
   surfingpikachu: {
@@ -1323,6 +1447,7 @@ export const SPECIES2 = {
     eggGroups: ['water1', 'dragon'], hatchCounter: 40,
     learnset: { 1: ['wrap', 'leer', 'thunderwave', 'agility'], 30: ['takedown'], 45: ['hyperbeam'] },
     flavor: 'Its song crosses whole seas. Ships steer home by its shadow.',
+    design: { inspired: 'dragon', kind: 'cosmic', note: 'same design, colossal framing' },
     form: true, baseSpecies: 'dragonite',
   },
   // Five FULL SPECIES (National dex only — dexNo > 151, so the Arden

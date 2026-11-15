@@ -16,7 +16,9 @@
 # HARD GATE — job `suites` (30 entries, all green at W2 baseline;
 # map-id-registry added by W3 with its own 60/0 baseline;
 # placement-gates added by W4 with its own 70/0 baseline;
-# legal-screen added by W5 with its own 18/0 baseline):
+# legal-screen added by W5 with its own 18/0 baseline;
+# design-depth added by W13-T0 with its own ratchet baseline
+# (373 design units lacking; burns down per-tranche to 0)):
 #   actor-lifecycle 37/0 · arc-foundation 47/47 · battle-model 45/45 ·
 #   branding 12/0 · cheat-shop 44/44 · fidelity 35/35 · frontier 136/136 ·
 #   hoenn-contest 28/0 · hoenn-legendary 24/0 · hoenn-story 88/0 ·

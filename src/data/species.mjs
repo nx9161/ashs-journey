@@ -21,6 +21,7 @@ export const SPECIES = {
     eggGroups: ['flying'], hatchCounter: 15,
     learnset: { 1: ['tackle'], 3: ['gust'], 5: ['quickattack'] },
     flavor: 'Common on quiet routes. Gusts up dust when it takes off.',
+    design: { inspired: 'sparrow', kind: 'animal', note: 'plump dun sparrow-bird, neat plume crest, sandy wings' },
   },
   rattata: {
     id: 'rattata', name: 'SCURRAT', dexNo: 19, types: ['normal'],
@@ -29,6 +30,7 @@ export const SPECIES = {
     eggGroups: ['ground'], hatchCounter: 15,
     learnset: { 1: ['tackle', 'tailwhip'], 4: ['quickattack'] },
     flavor: 'Quick teeth, quicker feet. Nibbles anything left unattended.',
+    design: { inspired: 'rat', kind: 'animal', note: 'teal burrow-rat, big ears, cream belly, quick pose' },
   },
   caterpie: {
     id: 'caterpie', name: 'GRUBLET', dexNo: 10, types: ['bug'],
@@ -37,6 +39,7 @@ export const SPECIES = {
     eggGroups: ['bug'], hatchCounter: 15,
     learnset: { 1: ['tackle', 'stringshot'] },
     flavor: 'Gentle and green. Its antennae taste the air for friends.',
+    design: { inspired: 'larva', kind: 'animal', note: 'mint larva in a curled fern-frond cloak, amber eyes' },
   },
   weedle: {
     id: 'weedle', name: 'STINGRUB', dexNo: 13, types: ['bug', 'poison'],
@@ -45,6 +48,7 @@ export const SPECIES = {
     eggGroups: ['bug'], hatchCounter: 15,
     learnset: { 1: ['poisonsting', 'stringshot'] },
     flavor: 'Mind the stinger. It only uses it when startled.',
+    design: { inspired: 'larva', kind: 'animal', note: 'cream larva, single rose-thorn horn, blush cheeks' },
   },
   spearow: {
     id: 'spearow', name: 'KEENBEAK', dexNo: 21, types: ['normal', 'flying'],
@@ -53,6 +57,7 @@ export const SPECIES = {
     eggGroups: ['flying'], hatchCounter: 15,
     learnset: { 1: ['peck', 'growl'] },
     flavor: 'Territorial and loud. Best admired from a respectful distance.',
+    design: { inspired: 'bird', kind: 'class', note: 'sharp-beaked russet hawklet, angry brow ridge' },
   },
   zubat: {
     id: 'zubat', name: 'SKREEBAT', dexNo: 41, types: ['poison', 'flying'],
@@ -61,6 +66,7 @@ export const SPECIES = {
     eggGroups: ['flying'], hatchCounter: 15,
     learnset: { 1: ['leechlife', 'supersonic'] },
     flavor: 'Navigates by sound. Startles easily in dark tunnels.',
+    design: { inspired: 'bat', kind: 'animal', note: 'tiny indigo cave bat, huge sonar ears, no eyes' },
   },
   geodude: {
     id: 'geodude', name: 'PEBBLET', dexNo: 74, types: ['rock', 'ground'],
@@ -69,6 +75,7 @@ export const SPECIES = {
     eggGroups: ['mineral'], hatchCounter: 15,
     learnset: { 1: ['tackle', 'defensecurl'], 6: ['rockthrow'] },
     flavor: 'Arms of living stone. Often mistaken for an ordinary boulder.',
+    design: { inspired: 'pup', kind: 'animal', note: 'round boulder-pup, stubby stone arms' },
   },
   onix: {
     id: 'onix', name: 'ROCKWYRM', dexNo: 95, types: ['rock', 'ground'],
@@ -77,6 +84,7 @@ export const SPECIES = {
     eggGroups: ['mineral'], hatchCounter: 25,
     learnset: { 1: ['tackle', 'harden'], 8: ['rockthrow'] },
     flavor: 'A chain of boulders given will. The gym leader\u2019s ace.',
+    design: { inspired: 'wyrm', kind: 'cosmic', note: 'chain of strata boulders, hornless crest ridge' },
     evo: { to: 'steelix', method: 'trade' },
   },
   bulbasaur: {
@@ -110,6 +118,7 @@ export const SPECIES = {
     eggGroups: ['monster', 'ground'], hatchCounter: 20,
     learnset: { 1: ['scratch', 'growl'] },
     flavor: 'Ears always up. Hears a trainer\u2019s step long before seeing one.',
+    design: { inspired: 'rabbit', kind: 'animal', note: 'violet poison buck-rabbit, one long horn' },
   },
   mankey: {
     id: 'mankey', name: 'FUSSAPE', dexNo: 56, types: ['fighting'],
@@ -118,6 +127,7 @@ export const SPECIES = {
     eggGroups: ['ground'], hatchCounter: 20,
     learnset: { 1: ['scratch', 'leer', 'lowkick'] },
     flavor: 'Angers fast, forgives faster — usually after a good battle.',
+    design: { inspired: 'ape', kind: 'animal', note: 'round furious ape-ball, steam ears, tantrum pose' },
   },
 };
 
