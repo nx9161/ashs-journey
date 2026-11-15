@@ -60,6 +60,33 @@ Object.assign(Game.prototype, {
     // undiscovered species render today: ??? rows under this line.
     items.push({ label: '— More Kin are known to exist. Their regions are future arcs. —', value: null, disabled: true });
     items.push({ label: 'Close', value: 'close' });
+    // W14-T1: plate-full list rows. Species rows render through rowHtml
+    // as plates — the sprite on its own framed 64x64 plate at exact 1x,
+    // bold name, type line, state chip (the .dexlist CSS in build.mjs).
+    // Hub/divider/Close rows keep the plain renderer (the bag rowHtml
+    // precedent: non-plate items return the bare label span). Item label
+    // strings are unchanged — headless consumers read labels, not HTML.
+    // Caught/seen semantics are FROZEN: a sprite is emitted only for a
+    // seen/caught species (the entry panel's own rule); an unseen row
+    // carries NO <img> at all, only the dimmed empty plate — no unseen
+    // species' sprite, name, or types can leak through the list.
+    const dexRowHtml = (it) => {
+      const sp = it.value && it.value !== 'partner' ? SPECIES[it.value] : null;
+      if (!sp || sp.form) return '<span>' + it.label + '</span>';
+      const c = !!g.state.dex.caught[sp.dexNo], s = !!g.state.dex.seen[sp.dexNo];
+      const known = c || s;
+      const cell = known
+        ? '<span class="dexcell"><img class="dexsprite" src="' + g.spriteDataUrl(it.value) + '" alt=""></span>'
+        : '<span class="dexcell dexcell-empty">???</span>';
+      const chip = c ? '<span class="dexstate is-caught">CAUGHT</span>'
+        : s ? '<span class="dexstate is-seen">SEEN</span>'
+        : '<span class="dexstate is-unseen">———</span>';
+      return '<span class="dexplate">' + cell
+        + '<span class="dexmain"><span class="dexl1"><span class="dexno">No.' + sp.dexNo + '</span>'
+        + '<b class="dexname">' + (known ? sp.name : '???') + '</b></span>'
+        + '<span class="dexl2">' + (known ? sp.types.join(' / ') : '???') + '</span></span>'
+        + chip + '</span>';
+    };
     g.ui.showMenu('KinDex', items, (v) => {
       if (!v || v === 'close') return;
       if (v === 'rating') { g.ui.say([g.oakRating()], () => g.openDex(filter), 'Prof. Hawthorn'); return; }
@@ -69,7 +96,7 @@ Object.assign(Game.prototype, {
       const c = g.state.dex.caught[sp.dexNo], s = g.state.dex.seen[sp.dexNo];
       if (!c && !s) { g.openDex(filter); return; }
       g.openDexEntry(v, filter);
-    }, { remember: 'dex' });
+    }, { remember: 'dex', rowHtml: dexRowHtml, menuClass: 'dexlist' });
   },
 
   // Elevation B5: the dex entry as its own plate, pageable in place —
