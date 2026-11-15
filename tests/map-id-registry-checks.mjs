@@ -146,6 +146,12 @@ ok('chain: victory-road -> r223 + pokemon-league (4 returns)',
 // per-region service kinds (art field only; the frozen layer structure
 // is untouched, every layer's fingerprint moved only because the
 // resolved NPC data carries the new art value).
+// W-CHAR2 T2 (deliberate edit, disclosed): newisland + vermilion lines
+// moved again — named posts standing on those frozen maps took
+// per-person cast kinds (newisland's WRECKED LOG -> cast-wrecked-log;
+// vermilion's CHAIRMAN -> cast-chairman). Art field only; the frozen
+// layer structure is untouched, every layer's fingerprint moved only
+// because the resolved NPC data carries the new art value.
 const BASELINE = {
   // Reconcile R3: maps2 is NOT a dead copy — maps4.mjs derives its winner
   // from it ({...MAPS2.gamecorner, warps + the poster entrance}), so the
@@ -159,7 +165,7 @@ const BASELINE = {
   // Reconcile R2: maps2's alternate island retired; maps3 is NOT a dead copy —
   // maps4.mjs derives its winner from it ({...MAPS3.newisland, events, warps}),
   // so the pair is frozen as a two-layer single definition.
-  "newisland": ['D', 'maps3.mjs:87e908ce', 'maps4.mjs:0a2b629f'],
+  "newisland": ['D', 'maps3.mjs:426de976', 'maps4.mjs:717e5237'],
   // Reconcile R3: maps2's corpse retired; maps3 is NOT a dead copy —
   // maps4.mjs derives its winner from it ({...MAPS3.silph1, events + the
   // rival ambush}), so the pair is frozen as a two-layer single definition.
@@ -174,7 +180,7 @@ const BASELINE = {
   // MAPS6 spreads maps5 (+CAPT EASTBOUND) and wins the fold. The earlier
   // copies are load-bearing layers, not dead duplicates; do not delete
   // them without materializing the chain first.
-  "vermilion": ['D', 'maps2.mjs:bb3a1cf6', 'maps4.mjs:b3365ecc', 'maps5.mjs:7e80e24c', 'maps6.mjs:2267d920'],
+  "vermilion": ['D', 'maps2.mjs:022cc4b9', 'maps4.mjs:1d07ae83', 'maps5.mjs:b01cd767', 'maps6.mjs:2476ce7d'],
 };
 
 const dupNow = new Map([...byId.entries()].filter(([, v]) => v.length > 1));
