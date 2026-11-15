@@ -5110,6 +5110,56 @@ W17J_KIND_DEFS.forEach(([kind], i) => {
 const W17J_PROP_KINDS = W17J_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
 const W17J_WALL_KINDS = W17J_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
 const W17J_FLOOR_KINDS = W17J_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
+// Wave W17-K (Route Build Program, Yamato Tranche 6 — the Yamato
+// finale): the Gloom gut + the Conference road, the program's
+// endgame pair. Both are defined once in maps6.mjs (no dual copies
+// in Yamato, so no registry re-pins arise). Gloom Cave "Gloom Deep"
+// (idx 1251-1252) converts by the cave method (art layer only:
+// cavefloor -> own floor, cavewall -> own wall; the trigger census
+// '.'/'R'/',' is 0 -> 0, and its warm pools, caveboulders,
+// cavecrystals and sign stay byte-identical; NO props are placed —
+// cave discipline): gloomfloor is near-black WARM earth flags,
+// split from Junction Deep's lit warm-grey road flags by value and
+// hue and from the Crown Road's violet-charcoal ceremonial flags
+// by hue; gloomwall is near-black torch-warmed bands, split from
+// Junction's banded warm grey by value. Lastlight Pass "the
+// Conference road" (1253-1256) converts grassground/path/tree by
+// KIND (maps6 trees stand on both '#' and 'T' chars — the W17-B
+// lesson); its encounter grass, flowers, fences, rocks, maple and
+// sign stay byte-identical, and VETERAN HALD's post stands
+// untouched: passturf is thin pale high-pass grass (paler and
+// thinner than Route 46's wind-combed ridge grass), passfloor is
+// Conference-road stone-sand — light and worn, split from the
+// Crown Road's dark crownfloor by value and register — passpine
+// is a stern grey-green tiered pine, and memorialstone is the
+// design's memorial cairn, placed x2 at the road's bends. Ground
+// kinds deliberately do NOT end in 'floor' (the desire-path audit
+// counts '*floor' as street tier; grounds must never masquerade
+// as street); path kinds DO end in 'floor' so they register as
+// the route's path tier per route (checklist point 3). Indices
+// 1251-1256 per the program plan
+// (WAVE-W17-YAMATO-ROUTE-PROGRAM-PLAN.md): W17-F took 1168-1185,
+// W17-G 1186-1204, W17-H 1205-1222, W17-I 1223-1236 and W17-J
+// takes 1237-1250 on its parallel branch; 1111 and every earlier
+// documented gap stay empty. Kind names verified unclaimed
+// against origin/main. Chars U+1E00+1251..
+const W17K_KIND_DEFS = [
+  ['gloomfloor', 'floor'],
+  ['gloomwall', 'wall'],
+  ['passturf', 'floor'],
+  ['passfloor', 'floor'],
+  ['passpine', 'wall'],
+  ['memorialstone', 'prop'],
+];
+const W17K_KIND_CHARS = {};
+W17K_KIND_DEFS.forEach(([kind], i) => {
+  const ch = String.fromCodePoint(0x1E00 + 1251 + i);
+  W17K_KIND_CHARS[kind] = ch;
+  TILE_CHARS[ch] = kind;
+});
+const W17K_PROP_KINDS = W17K_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
+const W17K_WALL_KINDS = W17K_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
+const W17K_FLOOR_KINDS = W17K_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
 const SINNOH_TOWN_GROUND_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg);
 const SINNOH_TOWN_GROUND2_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg2);
 // TX-3: the 8 gym exteriors by town (original type-accent motifs).
@@ -115565,6 +115615,114 @@ const ART = {
     "aaaaaabbaabaaaaa",
     "bbaaaaaaaaabaaba"
   ] },
+  "tile-gloomfloor": { w: 16, h: 16, pal: {"a":"#33241a","b":"#1d130c","c":"#413025","w":"#8a5a30","p":"#150d08"}, rows: [
+    "pwaaaaaabacaaaaa",
+    "acaaccacbaaaacca",
+    "aaaaaaaabaaaaaaa",
+    "aaaaaacabcaaaaaa",
+    "aaacaaaabaaaaaaa",
+    "acaaacaabaaaacaa",
+    "caaaacaabaaaaaaa",
+    "bbbbbbbbbbbbbbbb",
+    "caaabcaaaaaaaaaa",
+    "aaaabcaaaaaacaaa",
+    "aaacbaacaacaaaaa",
+    "aaacbaaaaaacaaac",
+    "aaaabaaaaaaaaccc",
+    "capabaaaaaaaacac",
+    "caaabaaaaaaapaaa",
+    "bbbbbbbbbbbbbbbb"
+  ] },
+  "tile-gloomwall": { w: 16, h: 16, pal: {"z":"#241811","m":"#2e2015","a":"#1c120b","g":"#17100a","w":"#a06a34"}, rows: [
+    "zzzzzzzzzzzzzzzz",
+    "zzzzzzzzzzzzzzzz",
+    "zzzzzzzzzzzzzzzz",
+    "mmmmmwmmmmmmmmmm",
+    "mwwmwmmwmmmwmmwm",
+    "mmmmmmmmmmmmmmmm",
+    "mmmmmmmmmmmmmmmm",
+    "aaaaaaaaaaaaaaaa",
+    "aaaaaaaaaaaaaaaa",
+    "aaaaaaaaaaaaaaaa",
+    "zzzzzzzzzzzzzzzz",
+    "zzzzzzzzzzzzzzzz",
+    "zzzzzzzzzzzzzzzz",
+    "gggmgmgggggggggg",
+    "mmmmmmmmmmmmmmmm",
+    "mggggggmggggggmg"
+  ] },
+  "tile-passturf": { w: 16, h: 16, pal: {"a":"#8fa873","b":"#7d9862","y":"#c9bd8f","e":"#a08b62"}, rows: [
+    "aaaaaaaaaaabaaaa",
+    "aaaabaaaabaaaaby",
+    "aaaaaeaaaabaaaaa",
+    "aaaaaaaaaaaaayaa",
+    "aaaaabaaabaaaaaa",
+    "aaayaabbbbaaaaaa",
+    "aaabaaaaaeaayaaa",
+    "aaaaaaaaaabybaaa",
+    "aaaaaaaaabaabaaa",
+    "abaabeyaaabaaaaa",
+    "aabaaaaaaaaayaya",
+    "aaaaaabyayaaaabb",
+    "abaaaaaaaaaayaay",
+    "baaabaaaaaaaaaay",
+    "aaaaaaaaaaaaaaaa",
+    "aaaaaaaaaaaaaaaa"
+  ] },
+  "tile-passfloor": { w: 16, h: 16, pal: {"a":"#d8c49a","b":"#c6ae7f","d":"#a98f5f","s":"#a89a7c","l":"#c0b28c"}, rows: [
+    "abaaaaaabbaaaaaa",
+    "aaaaabaaaabaabba",
+    "aaaaaaaaabaaaaaa",
+    "aallllaaabaaabab",
+    "bbssssbababallll",
+    "adssssaaaabdssss",
+    "abbaaadabaaassss",
+    "abaaabbabbabaaaa",
+    "daaaaaaaaaaabaaa",
+    "baaabaaaabaaaaaa",
+    "aaaaaaaaallllaaa",
+    "bababaaaassssbab",
+    "adaababaassssaaa",
+    "aaababbabaadabaa",
+    "ababdaaabaaaaaad",
+    "aabaaaabaaaaaaaa"
+  ] },
+  "tile-passpine": { w: 16, h: 16, pal: {"a":"#8fa873","b":"#7d9862","t":"#5a7260","u":"#44584a","h":"#87a184","k":"#5e4630"}, rows: [
+    "baaaaaaaaaabaaaa",
+    "aaaaaahhhhaaaaaa",
+    "abaaahhhhhhabaaa",
+    "aaaathhtuttuaaaa",
+    "aabaauhhtttaabaa",
+    "aaathttttttttaaa",
+    "aaabthhhhthtaaba",
+    "aaattttttthttaaa",
+    "aaaahtutttutaaab",
+    "aauhuhtuuuutthaa",
+    "aaahhuhuutttuaaa",
+    "baaaaaakkaabaaaa",
+    "aaaaaabkkaaaaaaa",
+    "abaaaaakkaaabaaa",
+    "aaaaaauuuuaaaaaa",
+    "aabaaaaaaaaaabaa"
+  ] },
+  "tile-prop-memorialstone": { w: 16, h: 16, pal: {"a":"#8fa873","b":"#7d9862","y":"#c9bd8f","s":"#9a958a","d":"#7e786c","c":"#c2bcab"}, rows: [
+    "aaaaaaaaaaaaaaab",
+    "aaaayaabaaaaaaaa",
+    "abbayyaaaaaaaaaa",
+    "aaaaaaabaaaaaaba",
+    "aaaaabbaayaaaaab",
+    "aabaabaaaaabaaba",
+    "aaabaccccccaaaaa",
+    "aaaaaaccccaaaaba",
+    "abbaaassssabayaa",
+    "aaybaddddddaaaaa",
+    "aaaaassssssabaaa",
+    "aaaaddddddddaaaa",
+    "aaaassssssssaaaa",
+    "aaaddddddddddaaa",
+    "abaaaaaabababaab",
+    "abaaaayaaaaaayaa"
+  ] },
   "tile-trialfloor": { w: 16, h: 16, pal: {"a":"#d8c08a","b":"#cdb481","m":"#bfa87c","f":"#b07a3f","l":"#e2cc9c"}, rows: [
     "aabaaafaaabaaaaa",
     "aaaaaaaaaaabaaaf",
@@ -122835,6 +122993,9 @@ for (const k of W17I_FLOOR_KINDS) TILE_ART[k] = 'tile-' + k;
 for (const k of W17J_PROP_KINDS) TILE_ART[k] = 'tile-prop-' + k;
 for (const k of W17J_WALL_KINDS) TILE_ART[k] = 'tile-' + k;
 for (const k of W17J_FLOOR_KINDS) TILE_ART[k] = 'tile-' + k;
+for (const k of W17K_PROP_KINDS) TILE_ART[k] = 'tile-prop-' + k;
+for (const k of W17K_WALL_KINDS) TILE_ART[k] = 'tile-' + k;
+for (const k of W17K_FLOOR_KINDS) TILE_ART[k] = 'tile-' + k;
 // Premium+ W6 (TX-3/PL-1): door-open frames, authored in TX-3 for every
 // door kind. The warp-fade engine that plays them lands in W7 — W6
 // wires the frames (this registry + cache.doorOpen + doorOpenCanvas)
@@ -123652,9 +123813,11 @@ const CAVE_KINDS = new Set(['cavewall', 'cavefloor', 'caveboulder',
   // frostwall, Frost East's thawwall) are cave family too — walls
   // only: the halls' floors are the shipped icefloor/frostfloor,
   // which stay exactly as they are.
-  'frostwall', 'thawwall']);
-const CAVE_FLOOR_KINDS = new Set(['cavefloor', 'lunefloor', 'darklunefloor', 'stratadeepfloor', 'crownfloor', 'junctionfloor', 'wetmillfloor', 'sprayfloor']);
-const CAVE_WALL_KINDS = new Set(['cavewall', 'lunewall', 'darklunewall', 'stratadeepwall', 'crownwall', 'junctionwall', 'wetmillwall', 'spraywall', 'frostwall', 'thawwall']);
+  'frostwall', 'thawwall',
+  // Wave W17-K: Gloom Cave's kit (Gloom Deep) is cave family too.
+  'gloomwall', 'gloomfloor']);
+const CAVE_FLOOR_KINDS = new Set(['cavefloor', 'lunefloor', 'darklunefloor', 'stratadeepfloor', 'crownfloor', 'junctionfloor', 'wetmillfloor', 'sprayfloor', 'gloomfloor']);
+const CAVE_WALL_KINDS = new Set(['cavewall', 'lunewall', 'darklunewall', 'stratadeepwall', 'crownwall', 'junctionwall', 'wetmillwall', 'spraywall', 'frostwall', 'thawwall', 'gloomwall']);
 const DUNGEON_WALLS = new Set(['cavewall', 'towerwall', 'silphwall', 'plantwall',
   // Premium+ W6 (TX-5): the sub-theme wall kinds cast the same strip.
   'icewall', 'iceface', 'stratwall', 'bannerwall', 'cerwall', 'panelwall',
@@ -123667,7 +123830,9 @@ const DUNGEON_WALLS = new Set(['cavewall', 'towerwall', 'silphwall', 'plantwall'
   // Wave W17-I: the Millstone halls' wall kinds cast the same strip.
   'wetmillwall', 'spraywall',
   // Wave W17-J: the Frost Path halls' wall kinds cast the same strip.
-  'frostwall', 'thawwall']);
+  'frostwall', 'thawwall',
+  // Wave W17-K: Gloom Cave's wall kind casts the same strip.
+  'gloomwall']);
 const FLOOR_VARIANTS = {
   grass: 'grassVariants', path: 'pathVariants', cavefloor: 'caveFloorVariants',
   towerfloor: 'towerFloorVariants', silphfloor: 'silphFloorVariants', plantfloor: 'plantFloorVariants',
@@ -124427,7 +124592,7 @@ function resolveTileLayers(cache, kind, x, y, kindAt, t, phase, mapId) {
       }
       return layers.filter(Boolean);
     }
-    case 'cavewall': case 'lunewall': case 'darklunewall': case 'stratadeepwall': case 'crownwall': case 'junctionwall': case 'wetmillwall': case 'spraywall': case 'frostwall': case 'thawwall': {
+    case 'cavewall': case 'lunewall': case 'darklunewall': case 'stratadeepwall': case 'crownwall': case 'junctionwall': case 'wetmillwall': case 'spraywall': case 'frostwall': case 'thawwall': case 'gloomwall': {
       // Strata walls by position hash; an exposed face (floor to the
       // south) wears the stalactite face. Perfection Pass Stage 2 Gate 0
       // (G0-5, standard B3): the face is DETERMINISTIC — 100% of exposed
@@ -124469,6 +124634,7 @@ function resolveTileLayers(cache, kind, x, y, kindAt, t, phase, mapId) {
     case 'lunefloor': case 'darklunefloor': case 'stratadeepfloor':
     case 'crownfloor': case 'junctionfloor':
     case 'wetmillfloor': case 'sprayfloor':
+    case 'gloomfloor':
     case 'gratefloor': case 'cablefloor': {
       const layers = [groundBase(cache, kind, x, y)];
       // A dungeon wall directly north casts the shared shadow strip.
@@ -124979,6 +125145,8 @@ function resolveTileLayers(cache, kind, x, y, kindAt, t, phase, mapId) {
     case 'scrubthorn':
     case 'highpine':
     case 'ridgepost':
+    case 'passpine':
+    case 'memorialstone':
     // Wave T17: the radio mast composites over its compound grass too.
     case 'radiomast': {
       // Object tiles carry transparent surrounds (Wave 1): lay the ground
@@ -124992,7 +125160,7 @@ function resolveTileLayers(cache, kind, x, y, kindAt, t, phase, mapId) {
         for (const d of DIRS) { const f = groundFamilyOf(nb[d]); if (f) counts[f] = (counts[f] || 0) + 1; }
         ground = ['grass', 'path', 'cavefloor', 'towerfloor', 'silphfloor', 'plantfloor',
           'lunefloor', 'darklunefloor', 'stratadeepfloor',
-          'crownfloor', 'junctionfloor', 'wetmillfloor', 'sprayfloor',
+          'crownfloor', 'junctionfloor', 'wetmillfloor', 'sprayfloor', 'gloomfloor',
           'centerfloor', 'martfloor', 'housefloor', 'gymfloor', 'labfloor']
           .filter((f) => counts[f]).sort((a, b) => counts[b] - counts[a])[0] || 'grass';
       }
@@ -132462,6 +132630,21 @@ const WALKABLE = new Set(['.', ',', 'D', 'E', 'C', 'F', 'J', 'K', '1', '2', 'V',
   // 1205-1222 and W17-I takes 1223-1236 on its parallel branch;
   // 1111 stays empty.)
   ...[1237, 1238, 1243, 1244, 1247, 1248]
+    .map((i) => String.fromCodePoint(0x1E00 + i)),
+  // Wave W17-K: the Yamato tranche-6 ground/path/cave-floor chars
+  // (U+1E00+1251.., tiles.mjs W17K_KIND_DEFS) are walkable —
+  // gloomfloor (Gloom Cave), swapped 1:1 from the walkable 'L'
+  // cavefloor char in its own cave, so floor stays floor, and
+  // passturf/passfloor (Lastlight Pass), swapped 1:1 from the
+  // walkable '_' ground / '.' path chars on its own route, so
+  // ground stays ground and path stays path. The cave wall char
+  // (1252), tree char (1255) and prop char (1256) are NOT here:
+  // the wall swaps from 'G' cavewall, which was never walkable,
+  // and trees/props were never walkable. (Indices 1251-1256 per
+  // the program plan: W17-F took 1168-1185, W17-G 1186-1204,
+  // W17-H 1205-1222, W17-I 1223-1236 and W17-J takes 1237-1250
+  // on its parallel branch; 1111 stays empty.)
+  ...[1251, 1253, 1254]
     .map((i) => String.fromCodePoint(0x1E00 + i))]);
 
 // Trainer definitions for the slice.
@@ -153931,22 +154114,22 @@ const MAPS6 = {
     "name": "Gloom Cave",
     "music": "pewter-theme",
     "rows": [
-      "GGGGGGGGGGGGGGGGGGGGLLGG",
-      "GLNLLNLLLLLLLLLLLLNLLLLG",
-      "GLLLLLLLLLLLLLLLLLLLLNLG",
-      "GLLLLLLLLLLLLLLLLLLLLLLG",
-      "GLLLLLLLLLLLLLLLLLLýLLLG",
-      "GLLLýLLLLLLLLLLLLLLLLLLG",
-      "GLLLLLLLL~~~~~~LLLLNLLLG",
-      "GLLLLLLLL~~~~~~LLLLLLLýG",
-      "GLLLLLLLL~~~~~~LLLLLLLLG",
-      "GLLLLLLLL~~~~~~LLýLLLLLG",
-      "GLLLLLLLLLLLLLLLLLLLLLLG",
-      "GLLLLLLLLLLLLNLLLLLLýLLG",
-      "GLLLLLLLNLLLLLLLLLLýLLLG",
-      "GLLLLLLLLLLLSLLLLLLLLLLG",
-      "GLLLLLLLLLLLLLLLýLLLLLLG",
-      "GGGLLGGGGGGGGGGGGGGGGGGG"
+      "⋤⋤⋤⋤⋤⋤⋤⋤⋤⋤⋤⋤⋤⋤⋤⋤⋤⋤⋤⋤⋣⋣⋤⋤",
+      "⋤⋣N⋣⋣N⋣⋣⋣⋣⋣⋣⋣⋣⋣⋣⋣⋣N⋣⋣⋣⋣⋤",
+      "⋤⋣⋣⋣⋣⋣⋣⋣⋣⋣⋣⋣⋣⋣⋣⋣⋣⋣⋣⋣⋣N⋣⋤",
+      "⋤⋣⋣⋣⋣⋣⋣⋣⋣⋣⋣⋣⋣⋣⋣⋣⋣⋣⋣⋣⋣⋣⋣⋤",
+      "⋤⋣⋣⋣⋣⋣⋣⋣⋣⋣⋣⋣⋣⋣⋣⋣⋣⋣⋣ý⋣⋣⋣⋤",
+      "⋤⋣⋣⋣ý⋣⋣⋣⋣⋣⋣⋣⋣⋣⋣⋣⋣⋣⋣⋣⋣⋣⋣⋤",
+      "⋤⋣⋣⋣⋣⋣⋣⋣⋣~~~~~~⋣⋣⋣⋣N⋣⋣⋣⋤",
+      "⋤⋣⋣⋣⋣⋣⋣⋣⋣~~~~~~⋣⋣⋣⋣⋣⋣⋣ý⋤",
+      "⋤⋣⋣⋣⋣⋣⋣⋣⋣~~~~~~⋣⋣⋣⋣⋣⋣⋣⋣⋤",
+      "⋤⋣⋣⋣⋣⋣⋣⋣⋣~~~~~~⋣⋣ý⋣⋣⋣⋣⋣⋤",
+      "⋤⋣⋣⋣⋣⋣⋣⋣⋣⋣⋣⋣⋣⋣⋣⋣⋣⋣⋣⋣⋣⋣⋣⋤",
+      "⋤⋣⋣⋣⋣⋣⋣⋣⋣⋣⋣⋣⋣N⋣⋣⋣⋣⋣⋣ý⋣⋣⋤",
+      "⋤⋣⋣⋣⋣⋣⋣⋣N⋣⋣⋣⋣⋣⋣⋣⋣⋣⋣ý⋣⋣⋣⋤",
+      "⋤⋣⋣⋣⋣⋣⋣⋣⋣⋣⋣⋣S⋣⋣⋣⋣⋣⋣⋣⋣⋣⋣⋤",
+      "⋤⋣⋣⋣⋣⋣⋣⋣⋣⋣⋣⋣⋣⋣⋣⋣ý⋣⋣⋣⋣⋣⋣⋤",
+      "⋤⋤⋤⋣⋣⋤⋤⋤⋤⋤⋤⋤⋤⋤⋤⋤⋤⋤⋤⋤⋤⋤⋤⋤"
     ],
     "warps": [
       {
@@ -154097,22 +154280,22 @@ const MAPS6 = {
     "name": "Lastlight Pass",
     "music": "route1-theme",
     "rows": [
-      "############################",
-      "#________,_,,,__FF,_F,___,_#",
-      "#_,_R_,,,__,____,_,,_,,_,__#",
-      "#_____,_____n______,__,____#",
-      "#__,F,_______,,_,____,F___,#",
-      "#_________,,,,n_____,______#",
-      "#_,_,#_,__F____n_,_________#",
-      "#__S___________,________,#_#",
-      "............................",
-      "............................",
-      "#F,______,_n_F____,____FFn,#",
-      "#_R_,_____,_,__,_,__R______#",
-      "#__,F____n_,_____R___ẤF____#",
-      "#__FF_,,_________,___,,___F#",
-      "#____F_,___,___F_FR,____F__#",
-      "############################"
+      "⋧⋧⋧⋧⋧⋧⋧⋧⋧⋧⋧⋧⋧⋧⋧⋧⋧⋧⋧⋧⋧⋧⋧⋧⋧⋧⋧⋧",
+      "⋧⋥⋥⋥⋥⋥⋥⋥⋥,⋥,,,⋥⋥FF,⋥F,⋥⋥⋥,⋥⋧",
+      "⋧⋥,⋥R⋥,,,⋥⋥,⋥⋥⋥⋥,⋥,,⋥,,⋥,⋥⋥⋧",
+      "⋧⋥⋥⋥⋥⋥,⋥⋥⋥⋥⋥n⋥⋥⋥⋥⋥⋥,⋥⋥,⋥⋥⋥⋥⋧",
+      "⋧⋥⋥,F,⋥⋥⋥⋥⋥⋥⋥,,⋥,⋥⋥⋥⋥,F⋥⋥⋥,⋧",
+      "⋧⋥⋥⋥⋥⋥⋥⋥⋥⋥,,,,n⋥⋥⋥⋥⋥,⋥⋥⋥⋥⋥⋥⋧",
+      "⋧⋥,⋥,⋧⋥,⋥⋥F⋥⋥⋥⋥n⋥,⋥⋥⋥⋥⋥⋥⋥⋥⋥⋧",
+      "⋧⋥⋥S⋥⋨⋥⋥⋥⋥⋥⋥⋥⋥⋥,⋥⋥⋥⋥⋥⋥⋥⋥,⋧⋥⋧",
+      "⋦⋦⋦⋦⋦⋦⋦⋦⋦⋦⋦⋦⋦⋦⋦⋦⋦⋦⋦⋦⋦⋦⋦⋦⋦⋦⋦⋦",
+      "⋦⋦⋦⋦⋦⋦⋦⋦⋦⋦⋦⋦⋦⋦⋦⋦⋦⋦⋦⋦⋦⋦⋦⋦⋦⋦⋦⋦",
+      "⋧F,⋥⋥⋥⋥⋥⋥,⋥n⋥F⋥⋥⋥⋥,⋥⋥⋥⋨FFn,⋧",
+      "⋧⋥R⋥,⋥⋥⋥⋥⋥,⋥,⋥⋥,⋥,⋥⋥R⋥⋥⋥⋥⋥⋥⋧",
+      "⋧⋥⋥,F⋥⋥⋥⋥n⋥,⋥⋥⋥⋥⋥R⋥⋥⋥ẤF⋥⋥⋥⋥⋧",
+      "⋧⋥⋥FF⋥,,⋥⋥⋥⋥⋥⋥⋥⋥⋥,⋥⋥⋥,,⋥⋥⋥F⋧",
+      "⋧⋥⋥⋥⋥F⋥,⋥⋥⋥,⋥⋥⋥F⋥FR,⋥⋥⋥⋥F⋥⋥⋧",
+      "⋧⋧⋧⋧⋧⋧⋧⋧⋧⋧⋧⋧⋧⋧⋧⋧⋧⋧⋧⋧⋧⋧⋧⋧⋧⋧⋧⋧"
     ],
     "warps": [
       {
@@ -196791,6 +196974,6 @@ if (typeof Game !== 'undefined') Object.assign(Game.prototype, {
 });
 
 </script>
-<!-- contentHash:cbfcca6a1a182bd4757db27640256c0df7166e0f33cf296eac384e454e939162 -->
+<!-- contentHash:197c59dd4b7dcc9591d24430131c66376c2e3ee7791dbe69ef48cb2e340fa3a5 -->
 </body>
 </html>
