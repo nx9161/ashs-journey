@@ -57,7 +57,7 @@ function ok(name, cond, extra) {
   else { fail++; console.log('FAIL  ' + name + (extra ? ' — ' + extra : '')); }
 }
 
-const DEEP_MISSING = 373;
+const DEEP_MISSING = 256;
 const KINDS = new Set(['animal', 'class', 'plant', 'construct', 'cosmic', 'object']);
 const BODY_PLAN = /(creature|body plan)/i;
 
