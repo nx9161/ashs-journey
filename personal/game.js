@@ -180067,6 +180067,12 @@ const FINALE_END_CARD = [
   'Thank you for walking it. When the next road opens — and roads always open — it will find you exactly where this one left you: ready, rested, and already lacing your shoes.',
 ];
 
+// W10-C: the finale's closing panel moment (a PANELS id), resolved by
+// arcFinalePanel in src/game/arcs.mjs and shown after the credits.
+// null = dormant (the shipped state until W10-C T3 lands the panel):
+// the credits then end exactly as they always have.
+const FINALE_PANEL = null;
+
 // The committed national horizon: Platinum (ADR-027 Decision 5). Derived
 // from the Borea row so a registry edit moves every presentation at once.
 const PLATINUM_DEX_HORIZON = (ARCS.find((a) => a.id === 'sinnoh') || { dexHorizon: 493 }).dexHorizon;
@@ -189989,7 +189995,12 @@ function showArcCompleteCard(g, arc, done) {
   const lines = [s.title, s.badgeLine, ...s.leagueLines, s.dexLine];
   if (s.teamLine) lines.push(s.teamLine);
   lines.push(s.playtimeLine, s.forwardLine);
-  g.ui.say(lines, () => { if (done) done(); }, '');
+  // W10-C seam (dormant until T2 sets cardPanel fields): the arc's
+  // closing panel plays BEFORE the card's text; absent field = the
+  // card exactly as shipped.
+  const play = () => g.ui.say(lines, () => { if (done) done(); }, '');
+  const p = arcCardPanel(arc);
+  if (p && g.ui.showPanel) g.ui.showPanel(p.art, play); else play();
 }
 
 // The finale check (roadmap §2.2 steps 1-2). When the current arc's
@@ -190119,6 +190130,14 @@ function playFinaleHomecoming(g, next, finish) {
     '"One thing remains in my keeping, and it was never really mine." From a cloth older than the lab he unwraps a flute of clear blue glass. "The ' + itemName + '. It answers at the top of the world, where the first room is. Every other trainer I ever sent out, I sent with a beginning. You are the first I am sending with an ending — go and see what it opens."',
     'Received the ' + itemName.toUpperCase() + '!',
   ];
+  // W10-C seam (dormant until T3 sets FINALE_PANEL): after the full
+  // credits — state already committed by finish() at every site —
+  // the finale panel is the game's closing image. Null resolution =
+  // the credits end exactly as shipped.
+  const afterCredits = () => {
+    const p = arcFinalePanel();
+    if (p && g.ui.showPanel) g.ui.showPanel(p.art, null);
+  };
   g.ui.say(momLines, () => {
     if (echoLines.length) {
       g.ui.say(echoLines, () => {
@@ -190126,18 +190145,18 @@ function playFinaleHomecoming(g, next, finish) {
           if (next.hookLines && next.hookLines.length) {
             g.ui.say(next.hookLines.slice(), () => {
               finish();
-              g.ui.say(finaleCreditsLines(g.state), null, '');
+              g.ui.say(finaleCreditsLines(g.state), afterCredits, '');
             }, giverName(next));
           } else {
             finish();
-            g.ui.say(finaleCreditsLines(g.state), null, '');
+            g.ui.say(finaleCreditsLines(g.state), afterCredits, '');
           }
         }, 'PROF. HAWTHORN');
       }, 'MOM');
     } else {
       g.ui.say(oakLines, () => {
         finish();
-        g.ui.say(finaleCreditsLines(g.state), null, '');
+        g.ui.say(finaleCreditsLines(g.state), afterCredits, '');
       }, 'PROF. HAWTHORN');
     }
   }, 'MOM');
@@ -190232,6 +190251,26 @@ function arcFerryAllowed(state, npc) {
   if (flags['reachedarc_' + arc.id]) return { allowed: true, arc };
   if (arc.arrivalMap && flags['reached_' + arc.arrivalMap]) return { allowed: true, arc };
   return { allowed: false, arc };
+}
+
+// W10-C surface-panel resolution (the embark / card / finale seams).
+// One shape for every surface attach in the wave: an optional data
+// field names a PANELS moment; the helper returns the PANELS entry,
+// or null when the field is absent or the id unknown — and null
+// always means "today's behaviour, byte-identical" at the call site.
+function arcEnRoutePanel(arc) {
+  if (!arc || !arc.enRoutePanel) return null;
+  return PANELS[arc.enRoutePanel] || null;
+}
+
+function arcCardPanel(arc) {
+  if (!arc || !arc.cardPanel) return null;
+  return PANELS[arc.cardPanel] || null;
+}
+
+function arcFinalePanel() {
+  if (!FINALE_PANEL) return null;
+  return PANELS[FINALE_PANEL] || null;
 }
 
 function arcFerryGateLine(arc) {
@@ -194117,7 +194156,13 @@ class IntroScene {
   starterMoment() {
     const g = this.game;
     const lines = INTRO_SCRIPT.starterMoment.map((l) => l.replace('{player}', this.name));
+    // W10-C seam (dormant until T3 sets INTRO_SCRIPT.starterPanel):
+    // the partner panel plays after the starter lines, before the
+    // grant; no field = grant directly, as shipped. Skip paths never
+    // traverse this callback, so none can be panel-blocked.
     g.ui.say(lines, () => {
+      const p = INTRO_SCRIPT.starterPanel ? PANELS[INTRO_SCRIPT.starterPanel] : null;
+      if (p && g.ui.showPanel) { g.ui.showPanel(p.art, () => { this.grantPartner(); this.finishIntro(); }); return; }
       this.grantPartner();
       this.finishIntro();
     }, INTRO_SCRIPT.professor);
@@ -203798,8 +203843,16 @@ Object.assign(OverworldScene.prototype, {
             if (v !== 'yes') return;
             if (chk.arc) g.state.story.flags['reachedarc_' + chk.arc.id] = true;
             const enRoute = chk.arc && chk.arc.enRouteLines ? chk.arc.enRouteLines : [];
-            if (enRoute.length) g.ui.say(enRoute.slice(), () => landFerry(), '');
-            else landFerry();
+            // W10-C seam (dormant until T1 sets enRoutePanel fields):
+            // the crossing panel plays after the en-route card,
+            // before landing; no field = land directly, as shipped.
+            const afterCard = () => {
+              const p = arcEnRoutePanel(chk.arc);
+              if (p && g.ui.showPanel) { g.ui.showPanel(p.art, () => landFerry()); return; }
+              landFerry();
+            };
+            if (enRoute.length) g.ui.say(enRoute.slice(), afterCard, '');
+            else afterCard();
           });
           return;
         }
