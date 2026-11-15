@@ -1,0 +1,62 @@
+# Wave W15-T2: Chime Tower cap R — mirror register of the L cap.
+PIX tile-chimecap-r 16 48
+bbaaabaaaaaaaaab
+baaabbababababaa
+dddddddddddddddd
+eeeeeeeeeeeeeeee
+aaaabaabaaaaaaba
+aaababaaabaaaaaa
+aaabaaabbbaaaaab
+dddddddddddddddd
+bbbbaaababaaaabb
+aaababbaabaaabaa
+aaaaababaabbabab
+dddddddddddddddd
+dddddddddddddddd
+eeeeeeeeeeeeeeee
+bbbbbbbbbbbbbbbb
+wwwwwwkkkkwwwwww
+wwwwwwkggkwwwwww
+wwwwwwkggkwwwwww
+wwwwwwkkkkwwwwww
+bbbbbbbbbbbbbbbb
+aabbaabbbbaabaab
+aaabaabaabababba
+aabaaabbabbbabaa
+dddddddddddddddd
+baaaaaabaaaababa
+aababaaabbaabaaa
+aaaabaaabaaaaaaa
+dddddddddddddddd
+dddddddddddddddd
+eeeeeeeeeeeeeeee
+bbbbbbbbbbbbbbbb
+bbbbbbbbbbbbbbbb
+aaabaaabaaabaaab
+aaabaaabaaabaaab
+aaabaaabaaabaaab
+rrrrrrrrrrrrrrrr
+aaabaaabaaabaaab
+aaabaaabaaabaaab
+aaabaaabaaabaaab
+aaabaaabaaabaaab
+bbbbbbbbbbbbbbbb
+bbbbbbbbbbbbbbbb
+aaabaababbbaaaaa
+abaaaabababaaabb
+aaaaabbbabaaaaab
+dddddddddddddddd
+dddddddddddddddd
+eeeeeeeeeeeeeeee
+PAL
+k #241811 chamber-deep
+d #38241a cedar-shadow
+b #54352a cedar-deep
+a #6e4530 cedar
+c #8a5f3d cedar-lit
+e #97754e cedar-weathered
+r #b45246 lantern-band
+G #b98a2e bell-brass
+g #d9b84a brass-light
+s #7a5a1e brass-shadow
+w #9b7659 landmark-wall

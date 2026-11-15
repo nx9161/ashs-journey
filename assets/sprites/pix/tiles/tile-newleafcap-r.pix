@@ -1,0 +1,61 @@
+# Wave W15-T2: Newleaf Tower cap R — mirror register of the L cap.
+PIX tile-newleafcap-r 16 48
+aaaaaadaaadadddd
+aaaaadaaddaadddd
+dddddddddddddddd
+ttttttttttttdddd
+aaadddadaaadaddd
+aaaaaaaaaaaaaadd
+aadaaaaadaaaaadd
+adaaaadddddaaddd
+aaaadaaaaadaaadd
+adaaaaaaaadddadd
+dddddddddddddddd
+ttttttttttttttdd
+bbbbbbbbbbbbbWbb
+bwwbwwwbwwwbbWbb
+wbkkkwwbwwwbbWbb
+wwkhkwwbwwwbbWbb
+wwghgwwbwwwbbWbb
+wwwbbwwbwwwbbWbb
+wwwbwbwbwwbbbWbb
+bbbbbbbbbbbbbWbb
+daaddaaaadaaaada
+adadaaaadddaaaad
+aaadadaaaaaaaaad
+daadadaadaadaaad
+aaadaaaaadaadddd
+daaaaaaaaadadaaa
+dddddddddddddddd
+tttttttttttttttt
+bbbbbbbbbbbbbWbb
+bwwbwwwbwwwbbWbb
+wbwbwwwbwwwbbWbb
+wwbbwwwbwwwbbWbb
+wwwbwwwbwwwbbWbb
+wwwbbwwbwwwbbWbb
+wwwbwbwbwwbbbWbb
+bbbbbbbbbbbbbWbb
+aadaaaaaaaadaaaa
+addaaaaaaaddaadd
+aadaaadaaaaadaaa
+daaaaaaadaaaadad
+dadaaaaaadaaadad
+addaaadaaaddaaaa
+daaadadadadadaaa
+addaaaaaaadaaaad
+aaaaaaaadaaaaaaa
+ddaaaaadaaaaaddd
+dddddddddddddddd
+tttttttttttttttt
+PAL
+k #2b2320 outline-deep
+d #4d596a slate-dark
+a #5e6d82 violet-slate
+c #718198 slate-light
+t #748aaa slate-trim
+w #6b5138 weathered-wood
+W #82664a wood-light
+b #463322 wood-beam
+g #d1bc88 lantern-gold
+h #f0dfa8 lantern-core

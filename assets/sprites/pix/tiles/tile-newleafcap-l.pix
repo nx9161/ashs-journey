@@ -1,0 +1,61 @@
+# Wave W15-T2: Newleaf Tower cap L — wooden pagoda tiers, violet slate, great-pillar post (Premium+ W6 TX-3 tall art, bottom-anchored on the existing roof cell).
+PIX tile-newleafcap-l 16 48
+dddddaaaaaddddda
+ddddaaddaaaaaada
+dddddddddddddddd
+ddddtttttttttttt
+ddaadaadadaaaaad
+ddddaddadaaaddaa
+ddadadaaadaaddaa
+ddadadaaaddddaaa
+ddaaaaadaaaddadd
+ddddaadaddaaaaaa
+dddddddddddddddd
+ddtttttttttttttt
+bbWbbbbbbbbbbbbb
+bbWbwwwbwwwbwwwb
+wbWbwwwbwwwkkkbb
+wbWbwwwbwwwkhkwb
+wbWbwwwbwwwghgwb
+wbWbbwwbwwwbwwwb
+wbWbwbwbwwbbwwwb
+bbWbbbbbbbbbbbbb
+aaaadadaaaadaada
+adaaadadaadaadaa
+daddddaddaaaaadd
+aaadaaaaaaddaaaa
+dddaddaaaaadaada
+aaadaadaaadaaaaa
+dddddddddddddddd
+tttttttttttttttt
+bbWbbbbbbbbbbbbb
+bbWbwwwbwwwbwwwb
+wbWbwwwbwwwbwwbb
+wbWbwwwbwwwbwbwb
+wbWbwwwbwwwbbwwb
+wbWbbwwbwwwbwwwb
+wbWbwbwbwwbbwwwb
+bbWbbbbbbbbbbbbb
+aaaaaaaddadaaddd
+aadaaaaddaaaaada
+aaaaadddadadaaaa
+ddaadaaaaaadadad
+daddaddaaaaaadaa
+aaaadaaaadadaaaa
+daddaaadaadaaada
+daaaaadaaaaadaaa
+addaaaaaaaadddda
+aadaddaddddadaaa
+dddddddddddddddd
+tttttttttttttttt
+PAL
+k #2b2320 outline-deep
+d #4d596a slate-dark
+a #5e6d82 violet-slate
+c #718198 slate-light
+t #748aaa slate-trim
+w #6b5138 weathered-wood
+W #82664a wood-light
+b #463322 wood-beam
+g #d1bc88 lantern-gold
+h #f0dfa8 lantern-core

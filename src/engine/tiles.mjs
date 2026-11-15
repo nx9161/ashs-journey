@@ -4759,6 +4759,50 @@ W15T1_KIND_DEFS.forEach(([kind], i) => {
 export const W15T1_PROP_KINDS = W15T1_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
 export const W15T1_WALL_KINDS = W15T1_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
 export const W15T1_FLOOR_KINDS = W15T1_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
+// Wave W15-T2 (Kit-Height Landmarks — Yamato towers): the two
+// standing Yamato towers rendered at house height (32px) while
+// ordinary houses render ~64px on 16x48 th- art. Each landmark
+// gets its own 16x48 cap kinds (Premium+ W6 TX-3 bottom-anchored
+// tall art) swapped onto its EXISTING roof row only — doors,
+// warps, posts, ground: zero cells touched; the caps are 'wall'
+// class and never enter WALKABLE, so placement gates and dead
+// pockets cannot move. Newleaf Tower (Iris, idx 1552-1554):
+// wooden pagoda tiers in violet slate, the single great pillar
+// reading as a post colonnade through the wall bands, lit
+// lanterns — drawn in Iris's own register, no other town's kit.
+// Chime Tower (Lantern, idx 1556-1558): cedar tiers in Lantern
+// City's own cedar register, an open bell chamber with a brass
+// bell in each centre tile, the landmark red band on the flanks.
+// (Idx 1555 is W15-T3's radiomast-tall claim; the Ashen Tower
+// stays a ruin by design — W15 plan §1.6.) Chars U+1E00+1552..
+export const W15NL_KIND_DEFS = [
+  ['newleafcap-l', 'wall'],
+  ['newleafcap-c', 'wall'],
+  ['newleafcap-r', 'wall'],
+];
+export const W15NL_KIND_CHARS = {};
+W15NL_KIND_DEFS.forEach(([kind], i) => {
+  const ch = String.fromCodePoint(0x1E00 + 1552 + i);
+  W15NL_KIND_CHARS[kind] = ch;
+  TILE_CHARS[ch] = kind;
+});
+export const W15NL_PROP_KINDS = W15NL_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
+export const W15NL_WALL_KINDS = W15NL_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
+export const W15NL_FLOOR_KINDS = W15NL_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
+export const W15CH_KIND_DEFS = [
+  ['chimecap-l', 'wall'],
+  ['chimecap-c', 'wall'],
+  ['chimecap-r', 'wall'],
+];
+export const W15CH_KIND_CHARS = {};
+W15CH_KIND_DEFS.forEach(([kind], i) => {
+  const ch = String.fromCodePoint(0x1E00 + 1556 + i);
+  W15CH_KIND_CHARS[kind] = ch;
+  TILE_CHARS[ch] = kind;
+});
+export const W15CH_PROP_KINDS = W15CH_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
+export const W15CH_WALL_KINDS = W15CH_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
+export const W15CH_FLOOR_KINDS = W15CH_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
 export const SINNOH_TOWN_GROUND_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg);
 export const SINNOH_TOWN_GROUND2_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg2);
 // TX-3: the 8 gym exteriors by town (original type-accent motifs).

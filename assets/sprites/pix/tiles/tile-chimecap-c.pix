@@ -1,0 +1,62 @@
+# Wave W15-T2: Chime Tower cap C — open bell chamber, brass bell hung from the beam.
+PIX tile-chimecap-c 16 48
+aaaaaaaggaaaaaab
+abaaababbbaaabaa
+dddddddddddddddd
+eeeeeeeeeeeeeeee
+bababbaaabaabaab
+aaaabaaabbaabaaa
+baaabbbabbababba
+dddddddddddddddd
+aaaabbaaabbaaaaa
+aababaabbbaababa
+baaaaaabbabaaabb
+dddddddddddddddd
+dddddddddddddddd
+eeeeeeeeeeeeeeee
+bbbbbbbbbbbbbbbb
+wwwwwwwwwwwwwwww
+wwwwwwwwwwwwwwww
+wwwwwwwwwwwwwwww
+wwwwwwwwwwwwwwww
+bbbbbbbbbbbbbbbb
+aaabaaaabababaaa
+aaaaabaaabaaaaaa
+bbbbaaaaaaaaaaab
+dddddddddddddddd
+bbaaaaaaabaaaaaa
+aaaaabaaabaaaabb
+babaaaaaabaaabaa
+dddddddddddddddd
+dddddddddddddddd
+eeeeeeeeeeeeeeee
+bbbbbbbbbbbbbbbb
+bbbbbbbbbbbbbbbb
+bbkkkkksskkkkkbb
+bbkkkkGGGGkkkkbb
+bbkkkgGGGGskkkbb
+bbkkkgGGGGskkkbb
+bbkkkgGGGGskkkbb
+bbkkkgGGGGskkkbb
+bbkkgGGGGGGskkbb
+bbkksssssssskkbb
+bbkkkkkkGkkkkkbb
+bbkkkkkkkkkkkkbb
+babaaaaabbbaaaaa
+bababaabbbbabaab
+baaababbaabbbaaa
+dddddddddddddddd
+dddddddddddddddd
+eeeeeeeeeeeeeeee
+PAL
+k #241811 chamber-deep
+d #38241a cedar-shadow
+b #54352a cedar-deep
+a #6e4530 cedar
+c #8a5f3d cedar-lit
+e #97754e cedar-weathered
+r #b45246 lantern-band
+G #b98a2e bell-brass
+g #d9b84a brass-light
+s #7a5a1e brass-shadow
+w #9b7659 landmark-wall

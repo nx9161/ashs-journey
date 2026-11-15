@@ -1,0 +1,78 @@
+pallet: doors=6 weak=0 noWalk=0 int=0 lamps=3 unlit=0.538 comps=1(78) step=6/6 conn=90/90 junc=5/5 unanchAny=0/7 onFab=0 shoulderOrph=0 apronLow=0 merged=0 tight=5 isoTrees=1 | strict=0.9463 fabric=0.9945 | GATES PASS
+viridian: doors=7 weak=0 noWalk=0 int=4 lamps=2 unlit=0.67 comps=1(103) step=7/7 conn=240/240 junc=3/3 unanchAny=0/20 onFab=0 shoulderOrph=0 apronLow=0 merged=0 tight=2 isoTrees=0 | strict=0.933 fabric=1 | GATES PASS
+pewter: doors=8 weak=0 noWalk=0 int=0 lamps=2 unlit=0.72 comps=1(75) step=8/8 conn=110/110 junc=6/6 unanchAny=0/10 onFab=0 shoulderOrph=0 apronLow=0 merged=0 tight=0 isoTrees=0 | strict=0.8602 fabric=1 | GATES PASS
+cerulean: doors=7 weak=0 noWalk=0 int=0 lamps=2 unlit=0.554 comps=1(92) step=7/7 conn=132/132 junc=1/1 unanchAny=0/10 onFab=0 shoulderOrph=0 apronLow=0 merged=0 tight=1 isoTrees=0 | strict=0.7314 fabric=0.9839 | GATES PASS
+vermilion: doors=7 weak=0 noWalk=0 int=0 lamps=3 unlit=0.339 comps=1(112) step=7/7 conn=110/110 junc=7/7 unanchAny=0/3 onFab=0 shoulderOrph=0 apronLow=0 merged=0 tight=5 isoTrees=0 | strict=0.8378 fabric=0.9961 | GATES PASS
+celadon: doors=10 weak=0 noWalk=0 int=0 lamps=5 unlit=0.097 comps=1(103) step=10/10 conn=156/156 junc=3/3 unanchAny=0/10 onFab=0 shoulderOrph=0 apronLow=0 merged=0 tight=5 isoTrees=0 | strict=0.9725 fabric=1 | GATES PASS
+saffron: doors=10 weak=0 noWalk=0 int=0 lamps=8 unlit=0.075 comps=1(67) step=10/10 conn=156/156 junc=2/2 unanchAny=0/20 onFab=0 shoulderOrph=0 apronLow=0 merged=0 tight=2 isoTrees=0 | strict=0.8655 fabric=1 | GATES PASS
+lavender: doors=7 weak=0 noWalk=0 int=0 lamps=2 unlit=0.411 comps=1(56) step=7/7 conn=132/132 junc=2/2 unanchAny=0/15 onFab=0 shoulderOrph=0 apronLow=0 merged=0 tight=5 isoTrees=0 | strict=0.7211 fabric=0.9873 | GATES PASS
+fuchsia: doors=9 weak=1 noWalk=0 int=0 lamps=0 unlit=null comps=1(94) step=9/9 conn=182/182 junc=3/3 unanchAny=0/3 onFab=0 shoulderOrph=0 apronLow=0 merged=0 tight=1 isoTrees=0 | strict=0.8842 fabric=0.9952 | GATES PASS
+    door->mart step-off@14,8 route-to-exit strict 0.44
+cinnabar: doors=9 weak=0 noWalk=0 int=0 lamps=3 unlit=0.351 comps=1(74) step=9/9 conn=90/90 junc=3/3 unanchAny=0/9 onFab=0 shoulderOrph=0 apronLow=0 merged=0 tight=7 isoTrees=0 | strict=0.8694 fabric=1 | GATES PASS
+indigo: doors=11 weak=0 noWalk=0 int=0 lamps=5 unlit=0.219 comps=1(96) step=11/11 conn=156/156 junc=1/1 unanchAny=0/9 onFab=0 shoulderOrph=0 apronLow=0 merged=0 tight=7 isoTrees=0 | strict=0.9164 fabric=0.988 | GATES PASS
+valencia: doors=7 weak=0 noWalk=0 int=2 lamps=4 unlit=0.517 comps=1(209) step=7/7 conn=72/72 junc=2/2 unanchAny=0/12 onFab=0 shoulderOrph=0 apronLow=0 merged=0 tight=0 isoTrees=0 | strict=0.9808 fabric=0.9808 | GATES PASS
+mikan: doors=7 weak=0 noWalk=0 int=4 lamps=1 unlit=0.84 comps=1(150) step=7/7 conn=72/72 junc=2/2 unanchAny=0/9 onFab=0 shoulderOrph=0 apronLow=0 merged=0 tight=0 isoTrees=1 | strict=0.9809 fabric=0.9809 | GATES PASS
+navel: doors=6 weak=0 noWalk=0 int=9 lamps=1 unlit=0.941 comps=1(186) step=6/6 conn=90/90 junc=5/5 unanchAny=0/13 onFab=0 shoulderOrph=0 apronLow=0 merged=0 tight=0 isoTrees=0 | strict=0.9801 fabric=0.9801 | GATES PASS
+moro: doors=4 weak=0 noWalk=0 int=3 lamps=2 unlit=0.758 comps=1(124) step=4/4 conn=30/30 junc=3/3 unanchAny=0/8 onFab=0 shoulderOrph=0 apronLow=0 merged=0 tight=0 isoTrees=1 | strict=0.9856 fabric=0.9856 | GATES PASS
+trovita: doors=6 weak=0 noWalk=0 int=2 lamps=0 unlit=null comps=1(142) step=6/6 conn=56/56 junc=2/2 unanchAny=0/7 onFab=0 shoulderOrph=0 apronLow=0 merged=0 tight=0 isoTrees=1 | strict=0.9767 fabric=0.9767 | GATES FAIL: fabric>=0.98 (fabric=0.9767)
+kumquat: doors=7 weak=0 noWalk=0 int=3 lamps=1 unlit=0.796 comps=1(142) step=7/7 conn=72/72 junc=4/4 unanchAny=0/7 onFab=0 shoulderOrph=0 apronLow=0 merged=0 tight=0 isoTrees=1 | strict=0.9839 fabric=0.9839 | GATES PASS
+pummelo: doors=6 weak=0 noWalk=0 int=5 lamps=2 unlit=0.851 comps=1(194) step=6/6 conn=56/56 junc=4/4 unanchAny=0/9 onFab=0 shoulderOrph=0 apronLow=0 merged=0 tight=1 isoTrees=0 | strict=0.9527 fabric=0.9527 | GATES FAIL: fabric>=0.98 (fabric=0.9527)
+shamouti: doors=6 weak=0 noWalk=0 int=7 lamps=2 unlit=0.702 comps=1(272) step=6/6 conn=182/182 junc=3/3 unanchAny=0/10 onFab=0 shoulderOrph=0 apronLow=0 merged=0 tight=1 isoTrees=3 | strict=0.9683 fabric=0.9683 | GATES FAIL: fabric>=0.98 (fabric=0.9683)
+newbark: doors=7 weak=0 noWalk=0 int=0 lamps=4 unlit=0.515 comps=1(103) step=7/7 conn=72/72 junc=5/5 unanchAny=0/38 onFab=0 shoulderOrph=0 apronLow=0 merged=0 tight=2 isoTrees=0 | strict=0.7385 fabric=0.9913 | GATES PASS
+cherrygrove: doors=5 weak=1 noWalk=0 int=0 lamps=4 unlit=0.312 comps=1(125) step=5/5 conn=72/72 junc=5/5 unanchAny=0/23 onFab=0 shoulderOrph=0 apronLow=0 merged=0 tight=1 isoTrees=5 | strict=0.7126 fabric=0.9902 | GATES PASS
+    door->center step-off@4,4 route-to-exit strict 0.44
+violet: doors=9 weak=0 noWalk=0 int=3 lamps=5 unlit=0.521 comps=1(140) step=9/9 conn=156/156 junc=4/4 unanchAny=0/24 onFab=0 shoulderOrph=0 apronLow=0 merged=0 tight=1 isoTrees=0 | strict=0.9083 fabric=0.9967 | GATES PASS
+azalea: doors=8 weak=0 noWalk=0 int=0 lamps=3 unlit=0.824 comps=1(148) step=8/8 conn=132/132 junc=8/8 unanchAny=0/26 onFab=0 shoulderOrph=0 apronLow=0 merged=0 tight=3 isoTrees=0 | strict=0.7723 fabric=0.9923 | GATES PASS
+goldenrod: doors=10 weak=0 noWalk=0 int=3 lamps=10 unlit=0.464 comps=1(295) step=10/10 conn=182/182 junc=12/12 unanchAny=0/39 onFab=0 shoulderOrph=0 apronLow=0 merged=0 tight=1 isoTrees=0 | strict=0.8671 fabric=0.9828 | GATES PASS
+ecruteak: doors=11 weak=0 noWalk=0 int=1 lamps=0 unlit=null comps=1(137) step=11/11 conn=156/156 junc=6/6 unanchAny=0/22 onFab=0 shoulderOrph=0 apronLow=0 merged=0 tight=4 isoTrees=0 | strict=0.7992 fabric=0.9937 | GATES PASS
+olivine: doors=7 weak=0 noWalk=0 int=1 lamps=5 unlit=0.303 comps=1(132) step=7/7 conn=110/110 junc=11/11 unanchAny=0/33 onFab=0 shoulderOrph=0 apronLow=0 merged=0 tight=0 isoTrees=0 | strict=0.6186 fabric=0.9819 | GATES PASS
+cianwood: doors=7 weak=0 noWalk=0 int=1 lamps=5 unlit=0.382 comps=1(144) step=7/7 conn=72/72 junc=6/6 unanchAny=0/24 onFab=0 shoulderOrph=0 apronLow=0 merged=0 tight=3 isoTrees=0 | strict=0.7965 fabric=0.9993 | GATES PASS
+mahogany: doors=7 weak=0 noWalk=0 int=8 lamps=3 unlit=0.877 comps=1(171) step=7/7 conn=156/156 junc=5/5 unanchAny=0/40 onFab=0 shoulderOrph=0 apronLow=0 merged=0 tight=5 isoTrees=0 | strict=0.9332 fabric=1 | GATES PASS
+blackthorn: doors=7 weak=0 noWalk=0 int=7 lamps=2 unlit=0.506 comps=1(162) step=7/7 conn=156/156 junc=6/6 unanchAny=0/43 onFab=0 shoulderOrph=0 apronLow=0 merged=0 tight=0 isoTrees=0 | strict=0.7915 fabric=0.988 | GATES PASS
+silvertown: doors=6 weak=0 noWalk=0 int=4 lamps=7 unlit=0.463 comps=1(203) step=6/6 conn=90/90 junc=15/15 unanchAny=0/54 onFab=0 shoulderOrph=0 apronLow=0 merged=0 tight=4 isoTrees=0 | strict=0.6654 fabric=0.9896 | GATES PASS
+littleroot: doors=8 weak=0 noWalk=0 int=4 lamps=3 unlit=0.6 comps=1(145) step=8/8 conn=90/90 junc=15/15 unanchAny=1/35 onFab=0 shoulderOrph=0 apronLow=0 merged=0 tight=0 isoTrees=0 | strict=0.674 fabric=0.9848 | GATES PASS
+    td-littleroot@24,17 unanchored (no building/fabric/decor unit within 2)
+oldale: doors=5 weak=0 noWalk=0 int=1 lamps=3 unlit=0.471 comps=1(153) step=5/5 conn=110/110 junc=11/11 unanchAny=1/45 onFab=0 shoulderOrph=0 apronLow=0 merged=0 tight=2 isoTrees=0 | strict=0.6991 fabric=0.9821 | GATES PASS
+    td-oldale@25,17 unanchored (no building/fabric/decor unit within 2)
+petalburg: doors=7 weak=0 noWalk=0 int=1 lamps=5 unlit=0.624 comps=1(101) step=7/7 conn=110/110 junc=9/10 unanchAny=1/28 onFab=0 shoulderOrph=0 apronLow=0 merged=0 tight=0 isoTrees=0 | strict=0.6643 fabric=0.9896 | GATES PASS
+    td-petalburg@24,17 unanchored (no building/fabric/decor unit within 2)
+rustboro: doors=7 weak=0 noWalk=0 int=0 lamps=9 unlit=0.389 comps=1(157) step=7/7 conn=156/156 junc=5/5 unanchAny=0/27 onFab=0 shoulderOrph=0 apronLow=0 merged=0 tight=0 isoTrees=0 | strict=0.7274 fabric=0.9828 | GATES PASS
+dewford: doors=7 weak=0 noWalk=0 int=5 lamps=5 unlit=0.62 comps=1(179) step=7/7 conn=110/110 junc=8/8 unanchAny=0/30 onFab=0 shoulderOrph=0 apronLow=0 merged=0 tight=0 isoTrees=0 | strict=0.6945 fabric=0.9864 | GATES PASS
+slateport: doors=6 weak=0 noWalk=0 int=4 lamps=6 unlit=0.545 comps=1(156) step=6/6 conn=90/90 junc=10/10 unanchAny=0/31 onFab=0 shoulderOrph=0 apronLow=0 merged=0 tight=1 isoTrees=0 | strict=0.6244 fabric=0.9974 | GATES PASS
+mauville: doors=7 weak=0 noWalk=0 int=6 lamps=4 unlit=0.419 comps=1(203) step=7/7 conn=210/210 junc=11/11 unanchAny=0/27 onFab=0 shoulderOrph=0 apronLow=0 merged=0 tight=0 isoTrees=0 | strict=0.7977 fabric=0.9919 | GATES PASS
+verdanturf: doors=6 weak=0 noWalk=0 int=0 lamps=0 unlit=null comps=1(116) step=6/6 conn=90/90 junc=4/4 unanchAny=1/50 onFab=0 shoulderOrph=0 apronLow=0 merged=0 tight=3 isoTrees=0 | strict=0.8056 fabric=0.9829 | GATES PASS
+    flower@25,12 unanchored (no building/fabric/decor unit within 2)
+fallarbor: doors=6 weak=0 noWalk=0 int=1 lamps=0 unlit=null comps=1(117) step=6/6 conn=90/90 junc=3/3 unanchAny=0/22 onFab=0 shoulderOrph=0 apronLow=0 merged=0 tight=1 isoTrees=0 | strict=0.7047 fabric=0.9872 | GATES PASS
+lavaridge: doors=7 weak=0 noWalk=0 int=1 lamps=3 unlit=0.741 comps=1(108) step=7/7 conn=72/72 junc=8/8 unanchAny=0/20 onFab=0 shoulderOrph=0 apronLow=0 merged=0 tight=3 isoTrees=0 | strict=0.6726 fabric=0.9879 | GATES PASS
+fortree: doors=7 weak=0 noWalk=0 int=0 lamps=0 unlit=null comps=1(161) step=7/7 conn=110/110 junc=4/4 unanchAny=1/23 onFab=0 shoulderOrph=0 apronLow=0 merged=0 tight=0 isoTrees=2 | strict=0.6701 fabric=0.9801 | GATES PASS
+    flower@11,7 unanchored (no building/fabric/decor unit within 2)
+lilycove: doors=5 weak=0 noWalk=0 int=5 lamps=5 unlit=0.459 comps=1(159) step=5/5 conn=72/72 junc=9/9 unanchAny=0/27 onFab=0 shoulderOrph=0 apronLow=0 merged=0 tight=0 isoTrees=0 | strict=0.724 fabric=0.9898 | GATES PASS
+mossdeep: doors=6 weak=0 noWalk=0 int=1 lamps=2 unlit=0.903 comps=1(103) step=6/6 conn=132/132 junc=14/14 unanchAny=0/32 onFab=0 shoulderOrph=0 apronLow=0 merged=0 tight=0 isoTrees=0 | strict=0.7436 fabric=0.9944 | GATES PASS
+sootopolis: doors=6 weak=0 noWalk=0 int=1 lamps=4 unlit=0.559 comps=1(102) step=6/6 conn=30/30 junc=7/7 unanchAny=0/21 onFab=0 shoulderOrph=0 apronLow=0 merged=0 tight=0 isoTrees=0 | strict=0.7635 fabric=0.981 | GATES PASS
+pacifidlog: doors=4 weak=0 noWalk=0 int=0 lamps=0 unlit=null comps=1(53) step=4/4 conn=30/30 junc=4/4 unanchAny=0/9 onFab=0 shoulderOrph=0 apronLow=0 merged=0 tight=2 isoTrees=0 | strict=0.6569 fabric=0.9807 | GATES PASS
+evergrande: doors=5 weak=1 noWalk=0 int=2 lamps=2 unlit=0.942 comps=1(103) step=5/5 conn=42/42 junc=10/10 unanchAny=0/23 onFab=0 shoulderOrph=0 apronLow=0 merged=0 tight=0 isoTrees=0 | strict=0.7554 fabric=0.9928 | GATES PASS
+    door->league-evergrande step-off@13,4 route-to-exit strict 0.38
+frontierhub: doors=15 weak=0 noWalk=0 int=7 lamps=12 unlit=0.426 comps=1(427) step=15/15 conn=210/210 junc=3/3 unanchAny=0/50 onFab=0 shoulderOrph=0 apronLow=0 merged=0 tight=5 isoTrees=0 | strict=0.9811 fabric=0.9811 | GATES PASS
+twinleaf: doors=6 weak=0 noWalk=0 int=0 lamps=5 unlit=0.344 comps=1(122) step=6/6 conn=90/90 junc=3/3 unanchAny=0/26 onFab=0 shoulderOrph=0 apronLow=0 merged=0 tight=1 isoTrees=0 | strict=0.7674 fabric=0.9964 | GATES PASS
+sandgem: doors=7 weak=0 noWalk=0 int=4 lamps=3 unlit=0.745 comps=1(149) step=7/7 conn=156/156 junc=9/9 unanchAny=0/31 onFab=0 shoulderOrph=0 apronLow=0 merged=0 tight=0 isoTrees=0 | strict=0.6668 fabric=0.9888 | GATES PASS
+jubilife: doors=7 weak=2 noWalk=0 int=2 lamps=7 unlit=0.407 comps=1(167) step=7/7 conn=210/210 junc=6/6 unanchAny=0/36 onFab=0 shoulderOrph=0 apronLow=0 merged=0 tight=0 isoTrees=0 | strict=0.6796 fabric=0.9925 | GATES PASS
+    door->center step-off@4,4 route-to-exit strict 0.44
+    door->house-jubilife step-off@22,4 route-to-exit strict 0.42
+oreburgh: doors=8 weak=0 noWalk=0 int=0 lamps=2 unlit=0.674 comps=1(132) step=8/8 conn=182/182 junc=3/3 unanchAny=0/18 onFab=0 shoulderOrph=0 apronLow=0 merged=0 tight=0 isoTrees=0 | strict=0.7912 fabric=0.9994 | GATES PASS
+floaroma: doors=5 weak=0 noWalk=0 int=2 lamps=0 unlit=null comps=1(161) step=5/5 conn=72/72 junc=3/3 unanchAny=0/21 onFab=0 shoulderOrph=0 apronLow=0 merged=0 tight=1 isoTrees=0 | strict=0.7784 fabric=0.9811 | GATES PASS
+eterna: doors=8 weak=2 noWalk=0 int=0 lamps=2 unlit=0.844 comps=1(128) step=8/8 conn=182/182 junc=2/2 unanchAny=0/20 onFab=0 shoulderOrph=0 apronLow=0 merged=0 tight=1 isoTrees=0 | strict=0.7361 fabric=0.992 | GATES PASS
+    door->center step-off@4,4 route-to-exit strict 0.44
+    door->house-eterna step-off@4,13 route-to-exit strict 0.44
+hearthome: doors=9 weak=0 noWalk=0 int=1 lamps=6 unlit=0.414 comps=1(145) step=9/9 conn=272/272 junc=5/5 unanchAny=0/30 onFab=0 shoulderOrph=0 apronLow=0 merged=0 tight=0 isoTrees=0 | strict=0.6723 fabric=0.9952 | GATES PASS
+solaceon: doors=7 weak=0 noWalk=0 int=1 lamps=0 unlit=null comps=1(130) step=7/7 conn=110/110 junc=5/5 unanchAny=0/18 onFab=0 shoulderOrph=0 apronLow=0 merged=0 tight=3 isoTrees=0 | strict=0.7077 fabric=0.9972 | GATES PASS
+veilstone: doors=8 weak=0 noWalk=0 int=2 lamps=9 unlit=0.268 comps=1(112) step=8/8 conn=132/132 junc=8/8 unanchAny=0/27 onFab=0 shoulderOrph=0 apronLow=0 merged=0 tight=0 isoTrees=0 | strict=0.6733 fabric=0.9965 | GATES PASS
+canalave: doors=8 weak=1 noWalk=0 int=1 lamps=1 unlit=0.876 comps=1(105) step=8/8 conn=90/90 junc=7/7 unanchAny=0/18 onFab=0 shoulderOrph=0 apronLow=0 merged=0 tight=0 isoTrees=0 | strict=0.6783 fabric=1 | GATES PASS
+    door->house-canalave step-off@22,4 route-to-exit strict 0.42
+pastoria: doors=8 weak=0 noWalk=0 int=1 lamps=5 unlit=0.624 comps=1(133) step=8/8 conn=182/182 junc=4/4 unanchAny=0/26 onFab=0 shoulderOrph=0 apronLow=0 merged=0 tight=0 isoTrees=0 | strict=0.6288 fabric=0.994 | GATES PASS
+celestic: doors=6 weak=0 noWalk=0 int=0 lamps=1 unlit=0.839 comps=1(62) step=6/6 conn=56/56 junc=5/5 unanchAny=0/21 onFab=0 shoulderOrph=0 apronLow=0 merged=0 tight=1 isoTrees=0 | strict=0.719 fabric=1 | GATES PASS
+snowpoint: doors=8 weak=0 noWalk=0 int=1 lamps=4 unlit=0.636 comps=1(110) step=8/8 conn=90/90 junc=5/5 unanchAny=0/21 onFab=0 shoulderOrph=0 apronLow=0 merged=0 tight=1 isoTrees=0 | strict=0.773 fabric=0.9959 | GATES PASS
+sunnyshore: doors=8 weak=0 noWalk=0 int=0 lamps=6 unlit=0.295 comps=1(88) step=8/8 conn=132/132 junc=2/2 unanchAny=0/23 onFab=0 shoulderOrph=0 apronLow=0 merged=0 tight=1 isoTrees=0 | strict=0.78 fabric=0.9979 | GATES PASS
+fight-area: doors=5 weak=0 noWalk=0 int=0 lamps=0 unlit=null comps=1(109) step=5/5 conn=72/72 junc=4/4 unanchAny=0/10 onFab=0 shoulderOrph=0 apronLow=0 merged=0 tight=1 isoTrees=0 | strict=0.8295 fabric=1 | GATES PASS
+survival-area: doors=5 weak=0 noWalk=0 int=0 lamps=0 unlit=null comps=1(99) step=5/5 conn=72/72 junc=3/3 unanchAny=0/10 onFab=0 shoulderOrph=0 apronLow=0 merged=0 tight=1 isoTrees=0 | strict=0.7473 fabric=1 | GATES PASS
+resort-area: doors=6 weak=0 noWalk=0 int=1 lamps=0 unlit=null comps=1(147) step=6/6 conn=182/182 junc=8/8 unanchAny=0/15 onFab=0 shoulderOrph=0 apronLow=0 merged=0 tight=0 isoTrees=0 | strict=0.8323 fabric=0.9829 | GATES PASS
+pallet: doors=6 weak=0 noWalk=0 int=0 lamps=3 unlit=0.538 comps=1(78) step=6/6 conn=90/90 junc=5/5 unanchAny=0/7 onFab=0 shoulderOrph=0 apronLow=0 merged=0 tight=5 isoTrees=1 | strict=0.9463 fabric=0.9945 | GATES PASS

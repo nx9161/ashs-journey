@@ -1,0 +1,61 @@
+# Wave W15-T2: Newleaf Tower cap C — centre module: great pillar trunk through the wall bands, lit lantern.
+PIX tile-newleafcap-c 16 48
+aadaadaggdadaaaa
+daadaaabbdaaaddd
+dddddddddddddddd
+tttttttttttttttt
+adadadaddaadadaa
+aadaaaaaaddaadaa
+aaadadddaaaaadaa
+aaaaadadaaaaaaad
+aaaaadadaaaddaaa
+aaaaaaaaaadaaaaa
+dddddddddddddddd
+tttttttttttttttt
+bbbbbbWWwwbbbbbb
+bwwbwbWWwwbbwwwb
+wbwbwbWWwwbbwwbb
+wwbbwbWWwwbbwbwb
+wwwbwbWWwwbbbwwb
+wwwbwbWWwwbbwwwb
+wwwbwbWWwwbbwwwb
+bbbbbbWWwwbbbbbb
+addaaaaaaaadaada
+ddaaddaaaadadaaa
+aaaadaaadaaaaaaa
+dadaaadaaaaaaada
+daadadaddaaaaaad
+aaaaddaaddadadaa
+dddddddddddddddd
+tttttttttttttttt
+bbbbbbWWwwbbbbbb
+bwwbwbWWwwbbwwwb
+wbwbwbWWwwbbkkkb
+wwbbwbWWwwbbkhkb
+wwwbwbWWwwbbghgb
+wwwbwbWWwwbbwwwb
+wwwbwbWWwwbbwwwb
+bbbbbbWWwwbbbbbb
+aaaaaadddaaaaadd
+addaaaddaaadaaaa
+daaaaadadaaaaaad
+aadaaaadddaaaada
+aaaadadadaaddadd
+ddaaadaaddaaaaaa
+aaaadaaaaaaddaaa
+aadadadaddadddaa
+dadadaddaaaaaaaa
+dddadaaadaadadad
+dddddddddddddddd
+tttttttttttttttt
+PAL
+k #2b2320 outline-deep
+d #4d596a slate-dark
+a #5e6d82 violet-slate
+c #718198 slate-light
+t #748aaa slate-trim
+w #6b5138 weathered-wood
+W #82664a wood-light
+b #463322 wood-beam
+g #d1bc88 lantern-gold
+h #f0dfa8 lantern-core
