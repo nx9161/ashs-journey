@@ -1,0 +1,26 @@
+# Wave W17-AA (Route 221): ring post — a tide-ring marker post at the rock-ringed pools: a weathered post with a ring of small pale stones laid at its foot, marking the pools that keep their tiny worlds (design: rock-ringed tide pools along the shore — the rings are the coast’s own punctuation, the posts stand where the pools begin). On tide turf (fully opaque, ground baked in) — split from the fleet’s marker posts by the ring entire: posts mark a road, this one marks a pool’s edge.
+PIX tile-prop-ringpost 16 16
+aaaaaaaaaaaaaaaa
+abbaabaaaabaaaba
+baaabbbaaaoaaaaa
+aaaaaabaaabaaaab
+aaaabaakdaaaaaaa
+aaabaaakdaaaaaaa
+aaaaaabkdaaaabaa
+aabaaaakdaaaaaba
+aaaaaaakdbaabbaa
+aaaaaaakdabaaaba
+aaaasaakdasaaaaa
+aaaswaakdawsaaaa
+aaasaaakdaasabaa
+aaaasaddddsaaaaa
+aaaaababaaaaaaab
+aababaaabaaaabaa
+PAL
+a #74ac58
+b #5f9647
+o #6a7a3c
+s #a9a294
+w #cfc8b8
+d #6e5c40
+k #8a7a5c

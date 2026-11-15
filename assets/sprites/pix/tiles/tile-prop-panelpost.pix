@@ -1,0 +1,27 @@
+# Wave W17-AA (Route 222): panel post — a tilted solar-panel post flanking the beach road: a weathered post carrying one tilted dark panel at its head, its face catching a single glint — the design’s signature standing in the prop register (design: tilted solar panels flank the road a mile out from Brightshore; the panels themselves are the city’s, the posts mark where they begin). On solar turf (fully opaque, ground baked in) — split from the fleet’s marker posts by the panel entire: posts mark a road, this one carries the city’s light on its face.
+PIX tile-prop-panelpost 16 16
+aaabaafppppppppa
+aabaaapppggpppaa
+aaaaapppgppppaaa
+aaaappppppppafab
+aaaaaaakdaaaabaa
+aaasaaakdbabaaaa
+baaaaaakdaaaaaaa
+aaaaaaakdbabbaaa
+aaaaaaakdaaaaaaa
+asaaaaakdaabaaaa
+aaaaaaakdbabaaba
+abaaabakdaaaaaaa
+abaaaaakdaaaaaba
+aaaaabddddbaaaba
+abaababaaaaaaaas
+aaaaabaaaaaaaaaa
+PAL
+a #7fb45a
+b #6aa34b
+s #eef2b0
+p #33506e
+g #cfe8f4
+f #22384e
+d #6e5c40
+k #8a7a5c

@@ -4396,6 +4396,85 @@ W17Z_KIND_DEFS.forEach(([kind], i) => {
 export const W17Z_PROP_KINDS = W17Z_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
 export const W17Z_WALL_KINDS = W17Z_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
 export const W17Z_FLOOR_KINDS = W17Z_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
+// Wave W17-AA (Borea Tranche 7 — the beach road, the
+// causeway, the south sea): Route 222 takes the Brightshore
+// Beach Road register — solarturf (suffix-free ground,
+// beach-road turf with glint flecks), solarfloor (the path
+// tier, *floor per checklist point 3 — the straight beach
+// road's pale sand), solarpine (wall class, as every route
+// tree) and the panelpost prop (two tilted solar-panel posts
+// flanking the road on verified grassground cells — the
+// design's signature, standing as posts with panel heads
+// drawn in the prop art); beach water 18, flower 12, rock 5,
+// fence 2 and signpost 1 stand byte-preserved. Route 218
+// takes the Bridgeport Causeway register by THE CAUSEWAY
+// METHOD (the program plan's Tranche-7 charter, Ruling #4 —
+// the one deliberate deviation from the Maris boardwalk
+// preservation, Director-approved at plan review): the
+// causeway ships boardwalk as its ENTIRE path (52 cells)
+// with water on both sides and no land register at all, so
+// boardwalk converts to causefloor (lamp-lit plank floor —
+// long plank joints, the design's lamps drawn in the kind's
+// own art, art layer only), the shore-end trees to causepine
+// and the footing rocks to causerock; NO ground register
+// ships on this map — recorded, not invented; water 327 and
+// coral 3 stand byte-preserved, weather stays rain (the
+// map's own field). Route 219 takes the South Sea Road
+// register — brightsand (bright turquoise-shallows sand,
+// gold flecks) and brightrock (jetty-foot rock); Route 220
+// takes the Long Sea register — longsand (open-sea sand
+// flecks, sparse) and longrock (swell-shadow rock); both
+// lanes' water (365/347), current cells (11/6 — MECHANIC
+// DATA, byte-identical counts and positions) and kelpbed /
+// uwcoral / coral / kelp dressing stand byte-preserved
+// entire, and the lanes' low convertible counts (seasand
+// 18+9, rock 11+11) are the pre-recorded R40-class
+// spec-presence exception — declared, never fixed by paving
+// water (Ruling #5). Route 221 takes the Pal Coast register
+// — tideturf (tide-pool coast turf, bog-creep flecks toward
+// the north end), tidefloor (the coast path's pale sand),
+// tidepine and the ringpost prop (two tide-ring marker posts
+// on verified grassground cells at the rock-ringed pools);
+// shore water 18, flower 19, rock 4 and fence 3 stand
+// byte-preserved. Ground kinds deliberately do NOT end in
+// 'floor' (the desire-path audit keys its street tier on
+// that suffix; grounds must never masquerade as street); the
+// path kinds DO end in 'floor'. Sea-lane sand kinds carry
+// the 'floor' class as every Maris lane sand before them
+// (swapped 1:1 from the walkable seasand char). Indices
+// 1492-1506 per the program plan
+// (WAVE-W17-BOREA-ROUTE-PROGRAM-PLAN.md): the Borea
+// allocation runs 1384-1535 (W17-U took 1384-1401, W17-V
+// 1402-1421, W17-W 1422-1431, W17-X 1432-1451, W17-Y
+// 1452-1469; W17-Z takes 1470-1491 on its parallel branch);
+// 1111 and every earlier documented gap stay empty. Kind
+// names verified unclaimed against origin/main.
+export const W17AA_KIND_DEFS = [
+  ['solarturf', 'floor'],
+  ['solarfloor', 'floor'],
+  ['solarpine', 'wall'],
+  ['panelpost', 'prop'],
+  ['causefloor', 'floor'],
+  ['causepine', 'wall'],
+  ['causerock', 'wall'],
+  ['brightsand', 'floor'],
+  ['brightrock', 'wall'],
+  ['longsand', 'floor'],
+  ['longrock', 'wall'],
+  ['tideturf', 'floor'],
+  ['tidefloor', 'floor'],
+  ['tidepine', 'wall'],
+  ['ringpost', 'prop'],
+];
+export const W17AA_KIND_CHARS = {};
+W17AA_KIND_DEFS.forEach(([kind], i) => {
+  const ch = String.fromCodePoint(0x1E00 + 1492 + i);
+  W17AA_KIND_CHARS[kind] = ch;
+  TILE_CHARS[ch] = kind;
+});
+export const W17AA_PROP_KINDS = W17AA_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
+export const W17AA_WALL_KINDS = W17AA_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
+export const W17AA_FLOOR_KINDS = W17AA_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
 export const SINNOH_TOWN_GROUND_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg);
 export const SINNOH_TOWN_GROUND2_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg2);
 // TX-3: the 8 gym exteriors by town (original type-accent motifs).
