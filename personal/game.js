@@ -6145,6 +6145,82 @@ W17AC_KIND_DEFS.forEach(([kind], i) => {
 const W17AC_PROP_KINDS = W17AC_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
 const W17AC_WALL_KINDS = W17AC_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
 const W17AC_FLOOR_KINDS = W17AC_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
+// Wave W17-AD (Route Build Program — THE AMBER SEA LANES,
+// the program finale): all four lanes are defined once in
+// maps5.mjs (no dual copies, no registry re-pins). All four
+// are SEA LANES with NO recorded backstory — dressing only,
+// nothing invented: sand -> own lane sand, rock -> own lane
+// rock ONLY (the R40/R41 discipline); every water cell and
+// warp pair stands byte-preserved, and the census proves
+// ZERO current cells, ZERO 'L' mouths, ZERO mechanic cells,
+// ZERO signs/NPCs/trainers/items/events on any lane; the
+// land encounter table is EMPTY and the 8-species surf table
+// is byte-identical across the four and byte-preserved.
+// Amber Sea — West "First Ferry Water" (1536-1537): wakesand
+// a warm gold-green shallows sand carrying the ferry wake as
+// pale streak flecks, wakerock a low rounded wake-washed
+// boulder; water 435 + coral 10 byte-preserved entire.
+// Amber Sea — Central "The Crossing Heart" (1538-1539):
+// gardensand a bright garden sand with coral-pink flecks,
+// gardenrock a taller bright-faced garden boulder; water
+// 434 + coral 11 byte-preserved entire; the only four-way
+// lane (four warp pairs). Amber Sea — East "Resort Water"
+// (1540-1541): resortsand the fleet's brightest warm harbour
+// sand, shell-flecked, resortrock a clean pale worked-face
+// boulder; water 435 + coral 10 byte-preserved entire.
+// Amber Sea — North "Pilgrim Water" (1542-1543): shrinesand
+// the fleet's darkest sand value (deep-channel olive-brown,
+// sparse flecks), shrinerock a deep-shadow boulder with a
+// lantern-warm glint at its top register (art layer only);
+// water 433 + coral 11 byte-preserved entire; the only
+// two-pair lane. DIRECTOR RULING #1 (islet variance): the
+// three sand islets + palms stood at byte-identical
+// coordinates on all four lanes (one shared template) — each
+// lane's clusters are repositioned as units (translate /
+// vertical flip) under strict parity: per-lane cell-class
+// counts identical, warp cells untouched (all stand on
+// water), surf tables byte-identical, per-lane dead pockets
+// proven identical (25/lane, the islet cells themselves);
+// any lane whose pockets would move would have kept the
+// template — none did. DIRECTOR RULING #2: the islet
+// dressing register (palm 4, tropgrass 3, grass 1, tree 1,
+// flower 1 per lane — the archipelago's shared shore
+// register) stands byte-preserved entire; only sand + rock
+// convert. Twin pairs: West <-> Central (the warm coral
+// pair — gold-green wake water vs garden-bright still
+// water) and East <-> North (the far-shore pair — the
+// brightest resort shallows vs the deep quiet channel).
+// Sand kinds are 'floor' class (the shipped sand char was
+// walkable; the swaps are 1:1), rock kinds 'wall' class
+// (never walkable). Spec-presence is the pre-recorded
+// R40-class thin-lane exception (sand 20 + rock 5-6 per
+// lane), declared at plan time, never fixed by paving
+// water. Indices 1536-1543 per the program plan
+// (WAVE-W17-AD-AMBER-LANES-PLAN.md) — THE ROUTE BUILD
+// PROGRAM CLOSES at 451 kinds over 1092-1543 (Arden
+// 1092-1167, Yamato 1168-1256, Maris 1257-1383, Borea
+// 1384-1535, Amber 1536-1543); 1111 and every earlier
+// documented gap stay empty. Kind names verified unclaimed
+// against origin/main. Chars U+1E00+1536..
+const W17AD_KIND_DEFS = [
+  ['wakesand', 'floor'],
+  ['wakerock', 'wall'],
+  ['gardensand', 'floor'],
+  ['gardenrock', 'wall'],
+  ['resortsand', 'floor'],
+  ['resortrock', 'wall'],
+  ['shrinesand', 'floor'],
+  ['shrinerock', 'wall'],
+];
+const W17AD_KIND_CHARS = {};
+W17AD_KIND_DEFS.forEach(([kind], i) => {
+  const ch = String.fromCodePoint(0x1E00 + 1536 + i);
+  W17AD_KIND_CHARS[kind] = ch;
+  TILE_CHARS[ch] = kind;
+});
+const W17AD_PROP_KINDS = W17AD_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
+const W17AD_WALL_KINDS = W17AD_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
+const W17AD_FLOOR_KINDS = W17AD_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
 const SINNOH_TOWN_GROUND_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg);
 const SINNOH_TOWN_GROUND2_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg2);
 // TX-3: the 8 gym exteriors by town (original type-accent motifs).
@@ -123530,6 +123606,150 @@ const ART = {
     "wwwwwwwxxwwwxwww",
     "wwxwwwwwwwwwwwww"
   ] },
+  "tile-wakesand": { w: 16, h: 16, pal: {"a":"#c8bf7d","b":"#a89e5e","s":"#f6f2d8"}, rows: [
+    "assaaaaaaaaaaaaa",
+    "aabaasaaaassaaaa",
+    "aaaaasssaabaasaa",
+    "aaabaaassbaaabaa",
+    "aasssssabaaaaaaa",
+    "aaaaaaaaaasaabaa",
+    "aaaaaaaabaaaaaaa",
+    "aaaabssaaaaaaaaa",
+    "aaaaaaaaaabaaaaa",
+    "abaaaaaaabaasaaa",
+    "aabaaasabbaaaaaa",
+    "aaaaaabbaaaaaaab",
+    "aaabaaassssabaab",
+    "abbaaaaaaaaaabba",
+    "aaasaaaaaaaabbaa",
+    "aaaaaaababaaaaaa"
+  ] },
+  "tile-wakerock": { w: 16, h: 16, pal: {"w":"#567cbd","x":"#476baa","y":"#7093c7","f":"#eef2e6","z":"#7d7462","c":"#c6bda8","m":"#9a8f7a","p":"#e6dfc8"}, rows: [
+    "wwwywwwwywwwxwyx",
+    "xwwwwwwywxwywxww",
+    "wwwwwwwwwwxwwwxw",
+    "wwwwwwwwwyxwwwxw",
+    "wwwwwxwwwwwwwxww",
+    "wxxwwmcppcmwwwwx",
+    "wxwwzcczzmmmwxww",
+    "wwwmmmmmmcmmcwww",
+    "wxwmzmmccmmcmwww",
+    "ywwwmmzcmmmcwwww",
+    "wwwxcmmcmmmmwwwy",
+    "wwwwwmmmmccwwwwy",
+    "wxwwwmmmcfcfwwww",
+    "wwwwwwfffffffwww",
+    "wwwwwyxwywwyxwxw",
+    "xwwwyxwwwwwywwwx"
+  ] },
+  "tile-gardensand": { w: 16, h: 16, pal: {"a":"#ead9a4","b":"#d3ba7f","p":"#e59a8c","s":"#f8f1dc"}, rows: [
+    "aaaapaaaaaaabaaa",
+    "aababaabaaaaaaaa",
+    "aaaaababapaabaaa",
+    "aaabapaaaaaapaab",
+    "abaaaaaaaaaaaaaa",
+    "aasbasbaaapaaaaa",
+    "sbaaaababaaaabba",
+    "asaaaaaabaaaasab",
+    "aaabaaaaaaaaaaaa",
+    "aaaapappaaaaaaaa",
+    "aaaaaaaaaaaaaaab",
+    "aaabaabaabaaapaa",
+    "aaaaaaaaaaaaaaaa",
+    "aaaaaaaaaaaaaaaa",
+    "aaaaaaaaabaaaapa",
+    "aaaaaaaabasaaaaa"
+  ] },
+  "tile-gardenrock": { w: 16, h: 16, pal: {"w":"#567cbd","x":"#476baa","y":"#7093c7","f":"#eef2e6","z":"#6e685c","c":"#d0c9b4","m":"#8f8a7c","p":"#f2eedd"}, rows: [
+    "wwwxwwwxwwxwxwww",
+    "wwywwwywwwwwwwww",
+    "xxwwwwmczmwwwwww",
+    "wwwwwczppmmwwwyw",
+    "wwwwmzzmmzmmwwww",
+    "wwwxzmmczmmmwwww",
+    "wwwmmmmmmcmmcwwy",
+    "wwxzmmzmmmmzmwww",
+    "wwwmmmmmmmmzcwww",
+    "wwxwzmmmzmcmwwww",
+    "xwwwcmzmmcmmwwww",
+    "wwwywmmzmmcwwxww",
+    "wwwwffmcffmfwyww",
+    "wwwfffffwffffwww",
+    "wwxwwxxwwwwwwwwx",
+    "wxwwwwwwwwwwwwww"
+  ] },
+  "tile-resortsand": { w: 16, h: 16, pal: {"a":"#f0deb0","b":"#dec894","s":"#faf3e2","p":"#eec9b8"}, rows: [
+    "aaasaabaaaapaaas",
+    "aaaaaaasbaabaaaa",
+    "aaaaaaaaaaabaaas",
+    "baaasbaabaababaa",
+    "aaaaaaaabbbaaaaa",
+    "baaabaaaaaaababa",
+    "aaaaasaaaapaasaa",
+    "aasaaaaaabsaaaas",
+    "aaaaaasaaaapaaaa",
+    "aaasaaabaaaaaaaa",
+    "baaaaaaaaaaaaaaa",
+    "aaaaasaaaasaaaaa",
+    "aabaaaaaaaaaaaaa",
+    "aaaaaabbaasaaaaa",
+    "aaaaabaaaaaaaaaa",
+    "aabsaabaaaaaaaaa"
+  ] },
+  "tile-resortrock": { w: 16, h: 16, pal: {"w":"#567cbd","x":"#476baa","y":"#7093c7","f":"#eef2e6","z":"#86806f","c":"#d9d3c1","m":"#a8a294","p":"#f6f1e2"}, rows: [
+    "wwwwwwwwwwwywwww",
+    "wwxwwwxwwwxywxww",
+    "wwwwwwwwwwwwwwxw",
+    "ywwxwwmppcwwwwww",
+    "wyxxwppccmmwwxww",
+    "xwwxmmmmmmmmwwwx",
+    "wwwwcmzmczmmwwww",
+    "wwwmzmmmcmmmmwww",
+    "wwwmmmcmmmmmmwyw",
+    "wwxwzmccmmmmwwww",
+    "wwwxmmcmmmmcwwww",
+    "wywxxmmcmcmwwwww",
+    "wwwwwmcfmfcfwwww",
+    "wxwfffffffwwywww",
+    "wwwwwwwywwwxwxwx",
+    "wwwwwwwwxwxwwwww"
+  ] },
+  "tile-shrinesand": { w: 16, h: 16, pal: {"a":"#a4936e","b":"#877650","d":"#77683f","s":"#c9bb96"}, rows: [
+    "aaaaasaaaaaaaaba",
+    "abaaaaaaabsdabab",
+    "daaaabbaaaaaaaaa",
+    "aaaaaaaaaaaaaaaa",
+    "baaaaaaaaaaaaaaa",
+    "baaabaabaasaabad",
+    "saaaaaaaababaaaa",
+    "abasdaadbaaadaab",
+    "aaaabadabaaababa",
+    "aaaaaaaaabdaaaas",
+    "aaaaaaaaasbbdbas",
+    "aaaaaaaaaabaaaad",
+    "dasaaaaaabaabaaa",
+    "aaaaaaaaadaaaaaa",
+    "abaaaaabaaaaaaaa",
+    "aaaaaaaaaaaaaaas"
+  ] },
+  "tile-shrinerock": { w: 16, h: 16, pal: {"w":"#567cbd","x":"#476baa","y":"#7093c7","f":"#eef2e6","z":"#3f3d37","c":"#8a867c","m":"#5e5c55","p":"#77736a","g":"#e8b25a"}, rows: [
+    "xwwyxwwwxwxwwwww",
+    "wwwwwywwwwwwwwww",
+    "wwwwwwxwywwxwxwy",
+    "wwwwwwgppcwwwwww",
+    "wwwwwcgppccwwwwx",
+    "wwwwmczgmmmmwwwx",
+    "wwwxczzmmmzmwwww",
+    "wwwmmzmmmmcmmwww",
+    "wxxmmcmzccczmwxw",
+    "wxwwmcmmmmmmwwww",
+    "xwwwcmccmmczwxww",
+    "wwwwwmmmzzmwxwww",
+    "ywwwfmmffmmfwwxw",
+    "wxwfffffwwwfxxyx",
+    "wwwwwwwwwxwwwwww",
+    "wwwwwwywwwwxxxww"
+  ] },
   "partner-back-bob": { base: "partner-back", w: 64, h: 64, pal: {}, shiftY: 2 },
   "partner-front-bob": { base: "partner-front", w: 64, h: 64, pal: {}, shiftY: 2 },
   "abomasnow-back-bob": { base: "abomasnow-back", w: 64, h: 64, pal: {}, shiftY: 2 },
@@ -129057,6 +129277,12 @@ for (const k of W17AB_FLOOR_KINDS) TILE_ART[k] = 'tile-' + k;
 for (const k of W17AC_PROP_KINDS) TILE_ART[k] = 'tile-prop-' + k;
 for (const k of W17AC_WALL_KINDS) TILE_ART[k] = 'tile-' + k;
 for (const k of W17AC_FLOOR_KINDS) TILE_ART[k] = 'tile-' + k;
+// Wave W17-AD: the Amber Sea lanes' own kit kinds take their
+// authored tiles (assets/sprites/pix/tiles/tile-<kind>.pix) —
+// the route build program's last kit block.
+for (const k of W17AD_PROP_KINDS) TILE_ART[k] = 'tile-prop-' + k;
+for (const k of W17AD_WALL_KINDS) TILE_ART[k] = 'tile-' + k;
+for (const k of W17AD_FLOOR_KINDS) TILE_ART[k] = 'tile-' + k;
 // Premium+ W6 (TX-3/PL-1): door-open frames, authored in TX-3 for every
 // door kind. The warp-fade engine that plays them lands in W7 — W6
 // wires the frames (this registry + cache.doorOpen + doorOpenCanvas)
@@ -139268,6 +139494,24 @@ const WALKABLE = new Set(['.', ',', 'D', 'E', 'C', 'F', 'J', 'K', '1', '2', 'V',
   // parallel branches; W17-AB takes 1507-1519 on its own);
   // 1111 stays empty.)
   ...[1520, 1521, 1524, 1525, 1528, 1529, 1532, 1534]
+    .map((i) => String.fromCodePoint(0x1E00 + i)),
+  // Wave W17-AD: the Amber Sea lane sand chars (U+1E00+1536..,
+  // tiles.mjs W17AD_KIND_DEFS) are walkable — wakesand (West),
+  // gardensand (Central), resortsand (East) and shrinesand
+  // (North), each swapped 1:1 from the walkable shipped sand
+  // char on its own lane, so shore stays shore. The rock chars
+  // (1537, 1539, 1541, 1543, swapped from the 'R' rock char)
+  // are NOT here: rocks were never walkable. The islet
+  // dressing register (palm/tropgrass/grass/tree/flower) and
+  // coral stand byte-preserved entire (Director Ruling #2);
+  // the Ruling #1 islet repositioning moved sand cells as
+  // clusters with per-lane class counts identical, so this
+  // set's membership — and the lanes' dead-pocket census —
+  // cannot move. (Indices 1536-1543 per the Amber lanes
+  // program plan, WAVE-W17-AD-AMBER-LANES-PLAN.md — the
+  // route program's last allocation: the program closes at
+  // 451 kinds over 1092-1543; 1111 stays empty.)
+  ...[1536, 1538, 1540, 1542]
     .map((i) => String.fromCodePoint(0x1E00 + i))]);
 
 // Trainer definitions for the slice.
@@ -148154,17 +148398,17 @@ const MAPS5 = {
       "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~",
       "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~",
       "~~~~~~~~~~~~~~~~~~~~~~~~~~ẙ~~~",
-      "~~~~~~~~~~~~~~~~~~~~~~~~ẞẘẞ~~~",
-      "~~~~~~~ẞẘẞR~~~~~~~~~~~~~ẞẞẞ~~~",
-      "~~~~~~~ẞẞẞ~~~~~~~~~~~~~~~~~~~~",
-      "~~~~~~~~~~~~~~ẙ~~~~R~~~~~~~~~~",
-      "~~~ẙ~ẙ~~R~~~~~R~~~~~~~~~~~~~~~",
+      "~~~~~~~~~~~~~~~~~~~~~~~~␀ẘ␀~~~",
+      "~~~~~~~␀ẘ␀␁~~~~~~~~~~~~~␀␀␀~~~",
+      "~~~~~~~␀␀␀~~~~~~~~~~~~~~~~~~~~",
+      "~~~~~~~~~~~~~~ẙ~~~~␁~~~~~~~~~~",
+      "~~~ẙ~ẙ~~␁~~~~~␁~~~~~~~~~~~~~~~",
       "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~",
       "~~~~~~~~~~~~~~~~~~~~~~~~ẙ~~~~~",
       "~~~~~~~~~~~~ẙ~~~~~~~~~~~~~~~~~",
-      "~~~~~Fẟẟ~~~~~~~~~~~~~~ẞẘẞ~~~~~",
-      "~~~~~ẟ,#~~~~~ẙẞẘẞ~~~~~ẞẞẞ~~~~~",
-      "~~ẙ~~~ẙ~~~~~~~ẞẞẞ~ẙ~~~~~~~R~~~",
+      "~~~~~Fẟẟ~~~~~~~~~~␀␀␀~~~~~~~~~",
+      "~~~~~ẟ,#~~~~~ẙ␀␀␀~␀ẘ␀~~~~~~~~~",
+      "~~ẙ~~~ẙ~~~~~~~␀ẘ␀~ẙ~~~~~~~␁~~~",
       "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~",
       "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
     ],
@@ -148293,18 +148537,18 @@ const MAPS5 = {
     "rows": [
       "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~",
       "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~",
-      "~~~~ẙ~~~ẙ~~~~~~~~~~~~~~~~~~~~~",
-      "~~~~~~~R~R~~~~~~~~~~~~~~ẞẘẞ~~~",
-      "~~~~~~~ẞẘẞẙ~~~~~ẙ~~~~~~~ẞẞẞ~~~",
-      "~~~~~~~ẞẞẞ~~~~ẙ~~~~~~~~~~~~~~~",
-      "~~~~~~~~~~~~~~~~~~~~~~~~~R~~~~",
+      "~~~~ẙ~~~ẙ~~~~~~~~~␂␂␂~~~~~~~~~",
+      "~~~~~~~␃~␃~~~~~~~~␂ẘ␂~~~~~~~~~",
+      "~~~~~~~~~~ẙ~~~~~ẙ~~~~~~~~~~~~~",
+      "~~~~~~~~~~~~~~ẙ~~␂ẘ␂~~~~~~~~~~",
+      "~~~~~~~~~~~~~~~~~␂␂␂~~~~~␃~~~~",
       "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~",
       "~~~~~~~~~~~ẙ~~~~~~~~~~~~~~~~~~",
       "~~~~~~Fẟẟ~~~~~~~~~~~~~~~~~~ẙ~~",
-      "~~~~~Rẟ,#~~~~~~~~~~~~~~~~~~~~~",
-      "~~~~~R~~~~~~~~ẙ~~~~~~~ẞẘẞ~~~~~",
-      "~~ẙẙ~~~~~~~~~~ẞẘẞ~~~~~ẞẞẞ~~~~~",
-      "~~~~~~~~~ẙ~~~~ẞẞẞ~~~~~~~~~~~~~",
+      "~~~~~␃ẟ,#~~~~~~~~~~~~~~~~~~~~~",
+      "~~~~~␃~~~~~~~~ẙ~~~~~~~~~~~~~~~",
+      "~~ẙẙ~~~~~~~~~~~~~␂ẘ␂~~~~␂␂␂~~~",
+      "~~~~~~~~~ẙ~~~~~~~␂␂␂~~~~␂ẘ␂~~~",
       "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~",
       "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
     ],
@@ -148451,18 +148695,18 @@ const MAPS5 = {
     "rows": [
       "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~",
       "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~",
+      "~~~~~~~~~~~~~~~~~~~␄␄␄~~~~~~~~",
+      "~~~~~~~~~~~~~~~~~~~␄ẘ␄~~~~~~~~",
+      "~~~~~~~~~~␅~␄ẘ␄~~~~~~~~~~~~~~~",
+      "~~~~~~~~~~␅~␄␄␄~~~~~~~~~~~~~~~",
       "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~",
-      "~~~~~~~~~~~~~~~~~~~~~~~~ẞẘẞ~~~",
-      "~~~~~~~ẞẘẞR~~~~~~~~~~~~~ẞẞẞ~~~",
-      "~~~~~~~ẞẞẞR~~~~~~~~~~~~~~~~~~~",
-      "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~",
-      "~~~~~~~~R~~~ẙ~~~~ẙ~~~~~~~~~~~~",
+      "~~~~~~~~␅~~~ẙ~~~~ẙ~~~~~~~~~~~~",
       "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~",
       "~~~~Fẟẟ~~~~~~~~~~~~~~~~~ẙ~ẙ~~~",
-      "~~~~ẟ,#~~~~R~~~~ẙR~ẙ~~~~~~~~~~",
-      "~~~ẙ~~~~~~~~~~~~~~~~~~ẞẘẞ~~~~~",
-      "~~~~~~~~~~~~~~ẞẘẞ~ẙ~~~ẞẞẞ~~~~~",
-      "~~~~~~~~~~~~~ẙẞẞẞ~~~~~ẙ~~~~~~~",
+      "~~~~ẟ,#~~~~␅~~~~ẙ␅~ẙ~~~~~~~~~~",
+      "~~~ẙ~~~~~~~~~~~~~~~␄␄␄~~~~~~~~",
+      "~~~~~~~~␄ẘ␄~~~~~~~ẙ␄ẘ␄~~~~~~~~",
+      "~~~~~~~~␄␄␄~~ẙ~~~~~~~~ẙ~~~~~~~",
       "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~",
       "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
     ],
@@ -148609,18 +148853,18 @@ const MAPS5 = {
     "rows": [
       "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~",
       "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~",
-      "~~~~~~~~~~~~R~~~~~~~~~~ẙ~~~~~~",
-      "~~~~~~~~~~~~~~~~~~~~~~~~ẞẘẞ~~~",
-      "~~~~~~~ẞẘẞ~~~~~~R~~~~~~ẙẞẞẞ~~~",
-      "~~~~~~~ẞẞẞ~~~~~~~~~ẙ~ẙ~~~~~~~~",
+      "~~~~~~~~~~~~␇~~~~~~~~~~ẙ~~~~~~",
+      "~~~~~~~~~~~~~~~~~~␆␆␆~~~~~~~~~",
+      "~~~~~~~~~~~␆ẘ␆~~␇~␆ẘ␆~~ẙ~~~~~~",
+      "~~~~~~~~~~~␆␆␆~~~~~ẙ~ẙ~~~~~~~~",
       "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~",
       "~~~~~~~~~ẙ~ẙ~ẙ~~~~~ẙ~~~~~~~~~~",
       "~~~~~~~~~~~~~ẙ~~ẙ~~~~~~~~~~~~~",
-      "~~R~~~~~~~~~~~~~~~~~~~~~~~~~~~",
-      "~~~~Fẟẟ~~~~~~~~~~~~~~~~~~~~~~~",
-      "~~~~ẟ,#~~~~~~~~~~~~~~~ẞẘẞ~~~~~",
-      "~~~R~~~~~~~ẙ~~ẞẘẞ~~~~~ẞẞẞ~R~~~",
-      "~~~~~~~~~~~~~~ẞẞẞ~~~~~~~~~~R~~",
+      "~~␇~~~~~~~~~~~~~~~~~~~~~~~~~~~",
+      "~~~~Fẟẟ~~~~~~~~~~~~~~~~~␆␆␆~~~",
+      "~~~~ẟ,#~~~~~~~~~~~~~~~~~␆ẘ␆~~~",
+      "~~~␇~~~␆ẘ␆~ẙ~~~~~~~~~~~~~~␇~~~",
+      "~~~~~~~␆␆␆~~~~~~~~~~~~~~~~~␇~~",
       "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~",
       "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
     ],
