@@ -1312,6 +1312,21 @@ export const WALKABLE = new Set(['.', ',', 'D', 'E', 'C', 'F', 'J', 'K', '1', '2
   // allocation opened at 1384 (W17-U takes 1384-1401 on its
   // parallel branch); 1111 stays empty.)
   ...[1402, 1403, 1406, 1407, 1410, 1411, 1414, 1415, 1418, 1419]
+    .map((i) => String.fromCodePoint(0x1E00 + i)),
+  // Wave W17-W: the Borea tranche-3 floor chars (U+1E00+1422..,
+  // tiles.mjs W17W_KIND_DEFS) are walkable — stepsfloor (Mt.
+  // Apex — South), spinefloor (Mt. Apex — Central) and
+  // zenithfloor (Mt. Apex — North), each swapped 1:1 from the
+  // walkable coronetfloor char in its own hall, and lotusturf/
+  // lotusfloor (Route 211), swapped 1:1 from the walkable '_'
+  // ground / '.' path chars, so floor stays floor and path
+  // stays path. The wall chars (1423, 1425, 1427, swapped from
+  // coronetrock, never walkable), the lotuspine tree char
+  // (1430) and the lotuspost prop char (1431) are NOT here:
+  // walls, trees and props were never walkable. (Indices
+  // 1422-1431 per the Borea program plan; W17-V takes
+  // 1402-1421 on its parallel branch; 1111 stays empty.)
+  ...[1422, 1424, 1426, 1428, 1429]
     .map((i) => String.fromCodePoint(0x1E00 + i))]);
 
 // Trainer definitions for the slice.

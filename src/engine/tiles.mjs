@@ -4082,6 +4082,61 @@ W17V_KIND_DEFS.forEach(([kind], i) => {
 export const W17V_PROP_KINDS = W17V_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
 export const W17V_WALL_KINDS = W17V_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
 export const W17V_FLOOR_KINDS = W17V_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
+// Wave W17-W (Borea Tranche 3 — the Apex spine + Route 211):
+// Mt. Apex's three floors each take their own dressed-stone
+// register off the shipped coronet pair — South's step flags /
+// step stone (Front Hall: tiered treads, door-jamb banding),
+// Central's spine flags / spine stone (The Spine: cruciform
+// joints, deeper seam shadow), North's zenith flags / zenith
+// stone (Open Sky: the trilogy's brightest floor, frost-rimmed
+// joints and frost struck into the east wall's art) — the cave
+// method on a dressed-stone register, twin-split floor by
+// floor by value + dressing (the Lunestone 1F/B1F discipline).
+// The shipped dressing inside each register (water pools,
+// cavecrystal, caveboulder, lanternpost, Central's step seam)
+// stands byte-preserved; North's 6 climbwall gate tiles are
+// MECHANIC data, byte-preserved and censused. NO props stand
+// in the mountain (cave discipline). The excluded Summit Road
+// and the League exterior keep coronetfloor/coronetrock
+// untouched. Route 211 (the west-door road) takes the bluff-
+// top register: lotusturf (suffix-free ground, still-air petal
+// flecks), lotusfloor (the path tier, *floor per checklist
+// point 3), lotuspine (wall class, as every route tree), and
+// the lotuspost prop — two meditation-circle marker posts on
+// verified grassground at the bluff clearing's approach; the
+// circle itself is design dressing, no stones invented beyond
+// the posts. Ground kinds deliberately do NOT end in 'floor'
+// (the desire-path audit keys its street tier on that suffix;
+// grounds must never masquerade as street); the cave/path
+// floor kinds DO end in 'floor' exactly as cavefloor/
+// coronetfloor do, keeping their audit classification.
+// Indices 1422-1431 per the program plan
+// (WAVE-W17-BOREA-ROUTE-PROGRAM-PLAN.md): the Borea
+// allocation runs 1384-1535 (W17-U took 1384-1401, W17-V
+// takes 1402-1421 on its parallel branch); 1111 and every
+// earlier documented gap stay empty. Kind names verified
+// unclaimed against origin/main.
+export const W17W_KIND_DEFS = [
+  ['stepsfloor', 'floor'],
+  ['stepsrock', 'wall'],
+  ['spinefloor', 'floor'],
+  ['spinerock', 'wall'],
+  ['zenithfloor', 'floor'],
+  ['zenithrock', 'wall'],
+  ['lotusturf', 'floor'],
+  ['lotusfloor', 'floor'],
+  ['lotuspine', 'wall'],
+  ['lotuspost', 'prop'],
+];
+export const W17W_KIND_CHARS = {};
+W17W_KIND_DEFS.forEach(([kind], i) => {
+  const ch = String.fromCodePoint(0x1E00 + 1422 + i);
+  W17W_KIND_CHARS[kind] = ch;
+  TILE_CHARS[ch] = kind;
+});
+export const W17W_PROP_KINDS = W17W_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
+export const W17W_WALL_KINDS = W17W_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
+export const W17W_FLOOR_KINDS = W17W_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
 export const SINNOH_TOWN_GROUND_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg);
 export const SINNOH_TOWN_GROUND2_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg2);
 // TX-3: the 8 gym exteriors by town (original type-accent motifs).
