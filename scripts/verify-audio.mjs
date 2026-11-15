@@ -6,6 +6,10 @@
 // W6 added [6] a call-site cross-check (every SFX key the game plays must
 // resolve in SFXSET — the audit D1 dead-key guard) and [7] audible proof
 // that the fixed keys schedule voices + suspended-context recovery.
+// W12-T1 added [10] cry coverage/distinctness (509/509 resolve through the
+// engine's own resolution path; pairwise-distinct over independent
+// identities; authored precedence + partner alias pinned) and [11] the
+// 55,000 B audio byte budget.
 // Exit 0 = all pass. Run: node scripts/verify-audio.mjs
 
 import { execFileSync } from 'node:child_process';
@@ -321,6 +325,86 @@ B.playMusic('title-theme'); // the scheduler's first pass runs synchronously
 if (B.ctx.resumeCalls !== 2) bad('resume:scheduler', 'scheduler pass did not attempt resume');
 else ok('music scheduler attempts resume when it finds the ctx suspended');
 B.stopMusic();
+
+console.log('[10] cry coverage + distinctness: every species resolves its own cry (W12-T1)');
+const sp1 = await import(path.join(ROOT, 'src', 'data', 'species.mjs'));
+const sp2 = await import(path.join(ROOT, 'src', 'data', 'species2.mjs'));
+const sp3 = await import(path.join(ROOT, 'src', 'data', 'species3.mjs'));
+const sp4 = await import(path.join(ROOT, 'src', 'data', 'species4.mjs'));
+const sp5 = await import(path.join(ROOT, 'src', 'data', 'species5.mjs'));
+// Fold the expansion rosters into the base SPECIES object — the same object
+// the engine imported, folded in merge.mjs's order, exactly as the bundle
+// does at load. Only after this fold does the engine see all 509 records.
+Object.assign(sp1.SPECIES, sp2.SPECIES2, sp3.SPECIES_JOHTO, sp4.SPECIES_HOENN, sp5.SPECIES_SINNOH);
+const ROSTER = sp1.SPECIES;
+const rosterIds = Object.keys(ROSTER);
+if (rosterIds.length !== 509) bad('cry-roster', 'folded roster has ' + rosterIds.length + ' records, expected 509');
+else ok('roster folds to 509 records (merge.mjs order)');
+const canonCry = (t) => JSON.stringify([t.wave, t.duty || 0, t.vol, t.env, t.notes]);
+const resolved = {};
+let unresolved = 0;
+for (const id of rosterIds) {
+  const t = engine.resolveCry(id);
+  if (!t || !Array.isArray(t.notes) || !t.notes.length) { unresolved++; bad('cry-resolve:' + id, 'no cry resolved — would hit the legacy fallback'); }
+  else resolved[id] = t;
+}
+if (!unresolved) ok('coverage: 509/509 records resolve a non-empty cry (legacy fallback reached by zero roster ids)');
+// Every resolved table (authored + derived) must satisfy the §2 schema.
+const schemaFailuresBefore = failures;
+for (const id of rosterIds) if (resolved[id]) checkTable(resolved[id], 'cry-resolved:' + id, false);
+if (failures === schemaFailuresBefore) ok('all 509 resolved cry tables pass the SFX schema');
+// Authored precedence (Ruling 3): the 14 authored tables are never shadowed.
+let precedenceBad = 0;
+for (const id of Object.keys(CRIES)) if (engine.resolveCry(id) !== CRIES[id]) { precedenceBad++; bad('cry-precedence:' + id, 'authored table shadowed by derivation'); }
+if (!precedenceBad) ok('authored precedence: all ' + Object.keys(CRIES).length + ' authored cries resolve to their own tables');
+// Partner alias (Ruling 4): one creature, one voice.
+if (engine.resolveCry('partner') !== CRIES.pikachu) bad('cry-partner', 'partner does not resolve to the authored pikachu table');
+else ok('partner resolves to the authored VOLTIK (pikachu) cry');
+// Formes share their base species' cry (plan §3.2 step 3).
+const formeIds = rosterIds.filter((id) => ROSTER[id].form && ROSTER[id].baseSpecies);
+let formeBad = 0;
+for (const id of formeIds) {
+  if (!resolved[id] || canonCry(resolved[id]) !== canonCry(engine.resolveCry(ROSTER[id].baseSpecies))) { formeBad++; bad('cry-forme:' + id, 'does not share its base species\' cry'); }
+}
+if (!formeBad) ok('all ' + formeIds.length + ' formes share their base species\' cry');
+// Distinctness over the independent cry identities: every record except the
+// partner (aliased by Ruling 4) and the formes (base-sharing by design).
+// Those sharings are pinned by the equality checks above; here, any two
+// distinct creatures must never sound alike — a collision fails by pair.
+const identities = rosterIds.filter((id) => id !== 'partner' && !(ROSTER[id].form && ROSTER[id].baseSpecies));
+const hashSeen = new Map();
+let collisions = 0;
+for (const id of identities) {
+  const h = canonCry(resolved[id]);
+  if (hashSeen.has(h)) { collisions++; bad('cry-distinct:' + id, 'resolved cry collides with ' + hashSeen.get(h)); }
+  else hashSeen.set(h, id);
+}
+if (!collisions) ok('pairwise-distinct cries: ' + identities.length + '/' + identities.length + ' independent identities, 0 collisions');
+// Determinism: re-resolution reproduces every table exactly.
+let detBad = 0;
+for (const id of identities) if (canonCry(engine.resolveCry(id)) !== canonCry(resolved[id])) detBad++;
+if (!detBad) ok('derivation is deterministic (re-resolution reproduces all tables)');
+// Engine-level scheduling through the fake AC: the partner must schedule the
+// authored VOLTIK notes, and a derived species its derived notes.
+EVENTS.length = 0; A._live = []; // voices ended (fake clock is frozen)
+A.playCry('partner');
+const partnerFreqs = EVENTS.map((e) => Math.round(e.node.frequency.value));
+const authoredFreqs = CRIES.pikachu.notes.map(([, p]) => Math.round(engine.freqOf(p)));
+if (JSON.stringify(partnerFreqs) !== JSON.stringify(authoredFreqs)) bad('cry-sched:partner', 'scheduled ' + partnerFreqs.join('/') + ' != authored ' + authoredFreqs.join('/'));
+else ok('playCry(\'partner\') schedules the authored VOLTIK notes through the engine');
+const derivedId = identities.find((id) => !CRIES[id]);
+EVENTS.length = 0; A._live = []; // voices ended (fake clock is frozen)
+A.playCry(derivedId);
+const derivedFreqs = EVENTS.map((e) => Math.round(e.node.frequency.value));
+const derivedWant = resolved[derivedId].notes.map(([, p]) => Math.round(engine.freqOf(p)));
+if (JSON.stringify(derivedFreqs) !== JSON.stringify(derivedWant)) bad('cry-sched:derived', derivedId + ' scheduled ' + derivedFreqs.join('/') + ' != derived ' + derivedWant.join('/'));
+else ok('playCry(\'' + derivedId + '\') schedules its derived cry (' + derivedWant.length + ' notes) through the engine');
+
+console.log('[11] audio byte budget: note-tables + engine <= 55,000 B (W12 Ruling 5)');
+const audioBytes = fs.statSync(path.join(ROOT, 'audio', 'note-tables.mjs')).size
+  + fs.statSync(path.join(ROOT, 'src', 'engine', 'audio.mjs')).size;
+if (audioBytes > 55000) bad('audio-budget', audioBytes + ' B exceeds the 55,000 B cap');
+else ok('audio module total ' + audioBytes + ' B <= 55,000 B cap');
 
 console.log(failures ? '\nAUDIO VERIFY: ' + failures + ' FAILURES' : '\nAUDIO VERIFY: ALL PASS');
 process.exit(failures ? 1 : 0);

@@ -6,7 +6,8 @@
 // unavailable (headless / SSR). Persisted mute + volume via applySettings.
 // Every gameplay-critical cue keeps a visual twin (see audio/SCORE.md).
 
-import { MUSIC, SFXSET, CRIES } from '../../audio/note-tables.mjs';
+import { MUSIC, SFXSET, CRIES, CRY_ALIASES, deriveCry } from '../../audio/note-tables.mjs';
+import { SPECIES } from '../data/species.mjs';
 
 export const CHANNELS = ['pulse1', 'pulse2', 'triangle', 'noise'];
 export const VOICE_BUDGET = 6; // hard cap on concurrent live voices (polyphony discipline)
@@ -26,6 +27,48 @@ export function freqOf(pitch) {
 
 export const MUSIC_TRACKS = MUSIC;
 export const CRY_TABLE = CRIES;
+
+// ---- cry resolution (W12-T1, plan §3.2) ----
+// SPECIES is the base roster object; src/data/merge.mjs folds every
+// expansion roster into that same object at load, so by cry time this
+// binding sees all 509 records. Evo stage = evo-graph chain depth (0/1/2),
+// computed lazily, rebuilt if the roster size changes (late test folds).
+let _cryStageCache = null;
+let _cryStageSize = -1;
+function cryStageOf(id) {
+  const size = Object.keys(SPECIES).length;
+  if (!_cryStageCache || _cryStageSize !== size) {
+    const depth = {};
+    for (const k of Object.keys(SPECIES)) depth[k] = 0;
+    let changed = true;
+    while (changed) {
+      changed = false;
+      for (const [k, sp] of Object.entries(SPECIES)) {
+        const to = sp.evo && sp.evo.to;
+        if (to && depth[to] !== undefined && depth[to] < depth[k] + 1) { depth[to] = depth[k] + 1; changed = true; }
+      }
+    }
+    _cryStageCache = depth;
+    _cryStageSize = size;
+  }
+  return _cryStageCache[id] || 0;
+}
+
+// Resolution order (Director Rulings 3 + 4): authored CRIES always win;
+// then the alias map (partner -> the authored VOLTIK cry); then formes
+// resolve to their base record (which may itself be authored); then the
+// deterministic derivation. Returns undefined for unknown ids — playCry's
+// legacy fallback is the safety net for those, and for those only.
+export function resolveCry(speciesId) {
+  if (CRIES[speciesId]) return CRIES[speciesId];
+  const alias = CRY_ALIASES[speciesId];
+  if (alias && CRIES[alias]) return CRIES[alias];
+  let rec = SPECIES[speciesId];
+  if (!rec) return undefined;
+  if (rec.form && rec.baseSpecies) rec = SPECIES[rec.baseSpecies] || rec;
+  if (CRIES[rec.id]) return CRIES[rec.id];
+  return deriveCry(rec, cryStageOf(rec.id));
+}
 // Legacy key compatibility for existing call sites: blip/tick/back/fanfare/heal/
 // error/throw_/rattle/click/dex/lowhp/encounter all exist in SFXSET.
 export const SFX = SFXSET;
@@ -205,7 +248,10 @@ export class AudioEngine {
   encounter() { this.playSfx('encounter-sting'); this.playSfx('encounter-sting-melody'); }
   transition() { this.playSfx(this.reducedMotion ? 'transition-fade' : 'transition-whoosh'); }
   playCry(speciesId) {
-    const cry = CRIES[speciesId];
+    // W12-T1: every roster species resolves via resolveCry (authored ->
+    // alias -> forme-base -> derived). The table below is now only a
+    // defensive default for ids outside the roster (e.g. 'missingno').
+    const cry = resolveCry(speciesId);
     this.playSfx(cry || { wave: 'pulse', duty: 0.25, vol: 0.35, env: [0.004, 0.15], notes: [[0, 'E5', 1], [1, 'C5', 1]] });
   }
   // Battle impact theater: sound picks the effectiveness tier.
