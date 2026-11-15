@@ -1,3 +1,12 @@
+// W10-C T1 growth: the five embark crossings attach by DATA FIELD
+// (arc enRoutePanel) through the T0 ferry seam — PANELS_ENTRIES and
+// PANEL_FIELD_REFS ratchet (44->49, 0->5), PANEL_ART_BYTES re-pins to
+// the measured cumulative, and Part H parity-drives the ferry surface
+// in the built bundle (shipped orange leg vs its field-stripped twin
+// vs the field-less kanto leg). A2 note: the pre-T0 step-only orphan
+// assertion is superseded here by T0's union A2 (step OR data field)
+// — the union check below is the operative orphan gate; nothing is
+// orphaned under it that the old form would have caught.
 // tests/cutscene-panel-checks.mjs — Wave W10: the cutscene panel
 // pipeline's integrity gate. Standalone suite in the repo's checks style:
 //   node tests/cutscene-panel-checks.mjs
@@ -60,10 +69,11 @@ for (const [id, steps] of stepLists) steps.forEach((s, i) => { if (s && s.panel)
 // re-pinned by the merge coordinator against the MERGED tree:
 // W10 proof panel + T1's 8 sovereigns + T2's 9 Yamato+Maris panels
 // + T3's 11 Borea/rest panels + T4's 10 Class B battle reveals
-// + T5's 5 glimpse/set-piece panels).
+// + T5's 5 glimpse/set-piece panels; W10-C T1 adds 5 ENTRIES by
+// data field (the embark crossings) — PANEL_STEPS stays 44).
 const PANEL_STEPS = 44;
-const PANELS_ENTRIES = 44;
-const PANEL_ART_BYTES = 488885;
+const PANELS_ENTRIES = 49;
+const PANEL_ART_BYTES = 544623;
 const PANEL_ART_BASELINE_W10 = 11171; // the W10 proof panel alone
 
 ok('A1 shipped data carries at least one panel step', panelSteps.length >= 1);
@@ -72,8 +82,11 @@ ok('A1 PANELS_ENTRIES ratchet: PANELS entries == pin', Object.keys(PANELS).lengt
 ok('A1 every panel step resolves through PANELS to a built ART entry',
   panelSteps.every(({ panel }) => PANELS[panel] && ART[PANELS[panel].art]),
   );
-ok('A2 every PANELS entry is used by at least one panel step (no orphan panels)',
-  Object.keys(PANELS).every((k) => panelSteps.some(({ panel }) => panel === k)));
+// (The step-only form of this A2 assertion was superseded at W10-C
+// T1 by the T0 A2 extension below: since surface attach landed, a
+// PANELS entry is "used" iff referenced by a panel step OR a data
+// field — the union check is the operative orphan gate, and it
+// still fails on any entry referenced by neither.)
 ok('A2 every PANELS art id exists in ART (no orphan art)',
   Object.values(PANELS).every(({ art }) => !!ART[art]));
 
@@ -90,8 +103,8 @@ if (FINALE_PANEL) fieldRefs.push(FINALE_PANEL);
 if (INTRO_SCRIPT.starterPanel) fieldRefs.push(INTRO_SCRIPT.starterPanel);
 // W10-C ratchet pin (moves only in-commit with its tranche:
 // 0 at T0 -> 5 T1 -> 11 T2 -> 13 T3).
-const PANEL_FIELD_REFS = 0;
-ok('A1 PANEL_FIELD_REFS ratchet: data-field panel references == pin (0 at W10-C T0 — seams dormant)',
+const PANEL_FIELD_REFS = 5;
+ok('A1 PANEL_FIELD_REFS ratchet: data-field panel references == pin (5 at W10-C T1 — the five enRoutePanel fields)',
   fieldRefs.length === PANEL_FIELD_REFS);
 ok('A1 every data-field panel reference resolves through PANELS (A1 extension)',
   fieldRefs.every((id) => !!PANELS[id]));
@@ -124,8 +137,8 @@ for (const { art } of Object.values(PANELS)) {
   if (start >= 0 && end > start) panelBytes += Buffer.byteLength(artDataText.slice(start, end + 7));
 }
 // W10-B ratchet pins (measured; move only in-commit with their tranche).
-const PANEL_ART_BYTES_PIN = PANEL_ART_BYTES;   // cumulative panel art after W10-B T1+T2+T3+T4+T5 (merge re-pin: 488885)
-const PANEL_ART_BYTES_PREV = 433218;  // cumulative after W10-B T1+T2+T3+T4 — the latest tranche (T5) delta is measured from here
+const PANEL_ART_BYTES_PIN = PANEL_ART_BYTES;   // cumulative panel art after W10-C T1 (merge re-pin: 544623)
+const PANEL_ART_BYTES_PREV = 488885;  // cumulative after W10-B T1+T2+T3+T4+T5 — the latest tranche (W10-C T1) delta is measured from here
 console.log('  panel art cumulative: ' + panelBytes + ' B (pin ' + PANEL_ART_BYTES_PIN + ' B; this tranche delta ' + (panelBytes - PANEL_ART_BYTES_PREV) + ' B of the 153600 B per-tranche cap)');
 ok('A8 PANEL_ART_BYTES pin: cumulative panel art equals the ratchet pin (measured)', panelBytes === PANEL_ART_BYTES_PIN);
 ok('A8 per-tranche budget: the latest tranche\'s panel art is within 150 KB (Director ruling, W10-B)',
@@ -434,6 +447,65 @@ const driver = `
     n2.panels.length === 0 && n2.done && n2.unlocked, 'panels=' + n2.panels.length + ' done=' + n2.done + ' unlocked=' + n2.unlocked);
   ok('N4 PARITY: end state identical with and without the glimpse panel step', n1.snap === n2.snap);
   ok('N5 PARITY: the ui log minus panel entries is identical across both glimpse drives', n1.logNoPanel === n2.logNoPanel);
+
+  // ---- Class H (W10-C T1): embark parity drive, the ferry surface ----
+  // The T0 seam chains the crossing panel off the en-route card's
+  // continuation: card say -> panel -> landFerry. Three legs on the
+  // shipped bundle: (1) orange as shipped (enRoutePanel set); (2) the
+  // same orange ride with the field stripped at runtime — the parity
+  // twin: no panel, identical end state, identical ui log minus the
+  // panel entry; (3) kanto, whose record carries no field and no
+  // en-route lines (the plan's field-less leg): no card, no panel,
+  // lands — the absent-field path proven inside the shipped bundle.
+  function pickValH(g, value) {
+    if (!g.ui.menuOpen) return false;
+    var i = g.ui.menu.items.findIndex(function (it) { return !it.disabled && it.value === value; });
+    if (i < 0) return false;
+    g.ui.debugChoose(i); tk(g, 3);
+    return true;
+  }
+  function runFerry(seed, arcId, preFlags) {
+    var g = mkGame(seed); var ow = boot(g);
+    for (var k in preFlags) g.state.story.flags[k] = preFlags[k];
+    var npc = { name: 'FERRY TEST', dialogue: ['Test ferry, one crossing.'], ferry: 'vermilion', ferryArc: arcId, x: 0, y: 0 };
+    ow.sysNpc(npc); drain(g);
+    var picked = pickValH(g, 'yes'); drain(g); tk(g, 3);
+    var st = (MAPS['vermilion'] && MAPS['vermilion'].start) || { x: 7, y: 7 };
+    return {
+      g: g, picked: picked,
+      panels: g.ui.log.filter(function (e) { return e.ui === 'panel'; }),
+      cardIdx: g.ui.log.findIndex(function (e) { return canon(e).indexOf('days at sea') >= 0; }),
+      logNoPanel: canon(g.ui.log.filter(function (e) { return e.ui !== 'panel'; })),
+      logText: canon(g.ui.log),
+      snap: snap(g),
+      mapId: ow.mapId,
+      atStart: g.state.story.position.map === 'vermilion' && g.state.story.position.x === st.x && g.state.story.position.y === st.y,
+    };
+  }
+  var h1 = runFerry(777, 'orange', { embark_orange: true });
+  ok('H1 shipped (Class H): the crossing panel fired exactly once, naming panel-crossing-orange',
+    h1.panels.length === 1 && h1.panels[0].art === 'panel-crossing-orange', JSON.stringify(h1.panels));
+  var hPanelIdx = h1.g.ui.log.findIndex(function (e) { return e.ui === 'panel'; });
+  ok('H2 shipped (Class H): order — the en-route card plays before the panel, the panel before the landing',
+    h1.cardIdx >= 0 && hPanelIdx > h1.cardIdx && h1.mapId === 'vermilion',
+    'cardIdx=' + h1.cardIdx + ' panelIdx=' + hPanelIdx + ' map=' + h1.mapId);
+  ok('H3 shipped (Class H): reachedarc_orange stamped and the ferry landed at the vermilion start',
+    h1.g.state.story.flags.reachedarc_orange === true && h1.atStart,
+    'reached=' + h1.g.state.story.flags.reachedarc_orange + ' atStart=' + h1.atStart);
+  var arcOrange = null;
+  for (var ai = 0; ai < ARCS.length; ai++) if (ARCS[ai].id === 'orange') arcOrange = ARCS[ai];
+  var savedPanelField = arcOrange ? arcOrange.enRoutePanel : undefined;
+  if (arcOrange) delete arcOrange.enRoutePanel;
+  var h2 = runFerry(777, 'orange', { embark_orange: true });
+  if (arcOrange) arcOrange.enRoutePanel = savedPanelField;
+  ok('H4 stripped (Class H): no panel fired, and the en-route card still played',
+    h2.panels.length === 0 && h2.cardIdx >= 0, 'panels=' + h2.panels.length + ' cardIdx=' + h2.cardIdx);
+  ok('H5 PARITY (Class H): end state identical with and without the enRoutePanel field', h1.snap === h2.snap);
+  ok('H5 PARITY (Class H): the ui log minus panel entries is identical across both ferry drives', h1.logNoPanel === h2.logNoPanel);
+  var h3 = runFerry(777, 'kanto', { reachedarc_kanto: true });
+  ok('H6 field-less (Class H): the kanto leg fires no panel and no en-route card, stamps reachedarc_kanto, and lands',
+    h3.panels.length === 0 && h3.logText.indexOf('days at sea') < 0 && h3.g.state.story.flags.reachedarc_kanto === true && h3.mapId === 'vermilion' && h3.atStart,
+    'panels=' + h3.panels.length + ' map=' + h3.mapId);
 
   globalThis.__W10Q__ = Q;
 })();`;
