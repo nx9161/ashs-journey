@@ -1,0 +1,26 @@
+# Wave W17-Y (Route 213): rack post — a painted-boat rack post along the shore: two posts and a crossbar carrying one small painted hull, teal over red, the beachcomber’s boats kept off the wet sand (design: boats on racks all along the shore under the hotels). On salt turf (fully opaque, ground baked in) — split from the fleet’s single posts by the rack entire: a post marks a place, a rack keeps a boat.
+PIX tile-prop-rackpost 16 16
+aaaabbbaaaaaaaba
+aaaaaabbaaaaaaaa
+aaaaaaaaaaaaaaaa
+aaabttttttttbaab
+aaatbrrrrrrataaa
+aaakkkkkkkkkkaaa
+aabskabaaaadaaab
+aasakaaaaaadaaba
+aaaakaaaaaadaaaa
+aaaakaaaaaadaaaa
+abaakbaaaaadaaaa
+aaaaksaaaabdaaaa
+aabakaabaaadaaba
+aaaddddddddddbsa
+aaaaaaaaaaaaaaaa
+aaaaaaaaababaaab
+PAL
+a #8f955c
+b #7d844c
+s #ccd2ba
+t #3e7d84
+r #b0523c
+d #6e5c40
+k #8a7a5c

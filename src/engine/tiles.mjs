@@ -4207,6 +4207,80 @@ W17X_KIND_DEFS.forEach(([kind], i) => {
 export const W17X_PROP_KINDS = W17X_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
 export const W17X_WALL_KINDS = W17X_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
 export const W17X_FLOOR_KINDS = W17X_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
+// Wave W17-Y (Borea Tranche 5 — the Gallant lakefront:
+// Fenland to the lake to the Vernal lane): Route 213 takes
+// the Lakefront Approach register — saltturf (suffix-free
+// ground, dry olive-khaki with pale salt-crust flecks),
+// saltfloor (the path tier, *floor per checklist point 3),
+// saltpine (wall class, as every route tree) and the
+// rackpost prop (two painted-boat rack posts flanking the
+// shore water); shore water 18, flower 14, signpost 3 and
+// fence 2 stand byte-preserved. Lake Gallant takes its own
+// register — gallantturf (bright tended lakefront green,
+// embankment flecks), gallantfloor, gallantelm (broad
+// lakefront elm) and the lightpost prop (two shore-light
+// posts at the lake's north corners — the lake's own
+// lights, split from the shipped lanternpost dressing kind
+// by register, per the program plan); the lake (water 78),
+// rock 26 and the two `L` cavern-mouth warp cells stand
+// byte-preserved. Gallant Cavern builds by the cave method
+// — keepfloor (warm dressed shore-stone flags) takes
+// cavefloor, keepwall (dressed shore stone) takes cavewall;
+// pool water 15, caveboulder 3 and cavecrystal 2 stand
+// byte-preserved; no props (cave discipline). Route 214
+// takes the Meadow Road register — vergeturf (fresh
+// yellow-green meadow), vergefloor, vergepine and the
+// meteorpost prop (two fallen-shard posts flanking the
+// Shardfall road at the north end, where the design's
+// crater field begins beyond the fence); lake-shore water
+// 15, fence 6 and signpost 4 stand byte-preserved. The
+// Vernal Path takes the Vernal Lane register — bloomturf
+// (soft olive lane turf, petal flecks), vernalfloor (the
+// hushed lane's pale sand; renamed in-plan — the draft
+// bloomfloor is a shipped kind), bloomelm (blossom-flecked
+// lane elm) and the petalpost prop (two petal-drift posts
+// along the banks); the shipped flower banks (flower 16)
+// and tall grass (62) stand byte-preserved and the ground
+// converts around them (the Maris R117 discipline).
+// Ground kinds deliberately do NOT end in 'floor' (the
+// desire-path audit keys its street tier on that suffix;
+// grounds must never masquerade as street); the path kinds
+// DO end in 'floor'. Indices 1452-1469 per the program
+// plan (WAVE-W17-BOREA-ROUTE-PROGRAM-PLAN.md): the Borea
+// allocation runs 1384-1535 (W17-U took 1384-1401, W17-V
+// 1402-1421, W17-W 1422-1431, W17-X takes 1432-1451 on its
+// parallel branch); 1111 and every earlier documented gap
+// stay empty. Kind names verified unclaimed against
+// origin/main.
+export const W17Y_KIND_DEFS = [
+  ['saltturf', 'floor'],
+  ['saltfloor', 'floor'],
+  ['saltpine', 'wall'],
+  ['rackpost', 'prop'],
+  ['gallantturf', 'floor'],
+  ['gallantfloor', 'floor'],
+  ['gallantelm', 'wall'],
+  ['lightpost', 'prop'],
+  ['keepfloor', 'floor'],
+  ['keepwall', 'wall'],
+  ['vergeturf', 'floor'],
+  ['vergefloor', 'floor'],
+  ['vergepine', 'wall'],
+  ['meteorpost', 'prop'],
+  ['bloomturf', 'floor'],
+  ['vernalfloor', 'floor'],
+  ['bloomelm', 'wall'],
+  ['petalpost', 'prop'],
+];
+export const W17Y_KIND_CHARS = {};
+W17Y_KIND_DEFS.forEach(([kind], i) => {
+  const ch = String.fromCodePoint(0x1E00 + 1452 + i);
+  W17Y_KIND_CHARS[kind] = ch;
+  TILE_CHARS[ch] = kind;
+});
+export const W17Y_PROP_KINDS = W17Y_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
+export const W17Y_WALL_KINDS = W17Y_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
+export const W17Y_FLOOR_KINDS = W17Y_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
 export const SINNOH_TOWN_GROUND_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg);
 export const SINNOH_TOWN_GROUND2_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg2);
 // TX-3: the 8 gym exteriors by town (original type-accent motifs).

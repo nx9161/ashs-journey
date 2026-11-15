@@ -1,0 +1,26 @@
+# Wave W17-Y (Route 214): meteor post — a fallen-shard marker post toward the Shardfall end: a weathered post carrying one small purple meteor shard at its head, marking where the crater field begins beyond the fence (design: the design’s crater field and its fallen purple shards at the road’s north end — the field itself is beyond the fence, the posts stand on the road). On verge turf (fully opaque, ground baked in) — split from Route 215’s shard posts ahead by the single head shard entire: these mark a beginning, those mark a fall zone.
+PIX tile-prop-meteorpost 16 16
+aaaaaabaaaaaabaa
+aaaaaaapbbaaaaaa
+abaaaaavvaaabaaa
+aaaaaaavpawaaaaa
+aaaaaaakdaaaaaab
+abaabaakdaaaaabb
+aaaaaaakdbaaaaab
+baaaaaakdaaaaaaa
+bawaaaakdaaababa
+aaaaaaakdaabaabb
+aaaabaakdaaaaaaa
+aaabbaakdababaaa
+aaabaaakdabaabaa
+baaaaaddddaaaaaa
+aaaaabaaaaabwaaa
+aaaaaaaaaaawaaaa
+PAL
+a #7fae52
+b #6d9a45
+w #dfe6ac
+v #7a6cc4
+p #b7aee0
+d #6e5c40
+k #8a7a5c
