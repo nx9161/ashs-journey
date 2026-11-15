@@ -54,4 +54,10 @@ export const PANELS = {
   'cageice-glacierne': { art: 'panel-cageice-glacierne' },
   'deep-abyssorn': { art: 'panel-deep-abyssorn' },
   'altar-abyssorn': { art: 'panel-altar-abyssorn' },
+  // W10-B T5 — glimpses (Class C) + set-pieces (Class D)
+  'underice-loracle': { art: 'panel-underice-loracle' },
+  'surfaced-empathis': { art: 'panel-surfaced-empathis' },
+  'gracidea-grathog': { art: 'panel-gracidea-grathog' },
+  'storm-sanctum': { art: 'panel-storm-sanctum' },
+  'parley-plaza': { art: 'panel-parley-plaza' },
 };

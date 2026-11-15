@@ -51,10 +51,11 @@ for (const [id, steps] of stepLists) steps.forEach((s, i) => { if (s && s.panel)
 // W10-B ratchet pins (move only in-commit with their tranche;
 // re-pinned by the merge coordinator against the MERGED tree:
 // W10 proof panel + T1's 8 sovereigns + T2's 9 Yamato+Maris panels
-// + T3's 11 Borea/rest panels + T4's 10 Class B battle reveals).
-const PANEL_STEPS = 39;
-const PANELS_ENTRIES = 39;
-const PANEL_ART_BYTES = 433218;
+// + T3's 11 Borea/rest panels + T4's 10 Class B battle reveals
+// + T5's 5 glimpse/set-piece panels).
+const PANEL_STEPS = 44;
+const PANELS_ENTRIES = 44;
+const PANEL_ART_BYTES = 488885;
 const PANEL_ART_BASELINE_W10 = 11171; // the W10 proof panel alone
 
 ok('A1 shipped data carries at least one panel step', panelSteps.length >= 1);
@@ -82,8 +83,8 @@ for (const { art } of Object.values(PANELS)) {
   if (start >= 0 && end > start) panelBytes += Buffer.byteLength(artDataText.slice(start, end + 7));
 }
 // W10-B ratchet pins (measured; move only in-commit with their tranche).
-const PANEL_ART_BYTES_PIN = PANEL_ART_BYTES;   // cumulative panel art after W10-B T1+T2+T3+T4 (merge re-pin: 433218)
-const PANEL_ART_BYTES_PREV = 322126;  // cumulative after W10-B T1+T2+T3 — the latest tranche (T4) delta is measured from here
+const PANEL_ART_BYTES_PIN = PANEL_ART_BYTES;   // cumulative panel art after W10-B T1+T2+T3+T4+T5 (merge re-pin: 488885)
+const PANEL_ART_BYTES_PREV = 433218;  // cumulative after W10-B T1+T2+T3+T4 — the latest tranche (T5) delta is measured from here
 console.log('  panel art cumulative: ' + panelBytes + ' B (pin ' + PANEL_ART_BYTES_PIN + ' B; this tranche delta ' + (panelBytes - PANEL_ART_BYTES_PREV) + ' B of the 153600 B per-tranche cap)');
 ok('A8 PANEL_ART_BYTES pin: cumulative panel art equals the ratchet pin (measured)', panelBytes === PANEL_ART_BYTES_PIN);
 ok('A8 per-tranche budget: the latest tranche\'s panel art is within 150 KB (Director ruling, W10-B)',
@@ -340,6 +341,58 @@ const driver = `
     q2.panels.length === 0 && q2.done && q2.caught, 'panels=' + q2.panels.length + ' done=' + q2.done + ' caught=' + q2.caught);
   ok('B10 PARITY (Class B): end state identical with and without the panel step', q1.snap === q2.snap);
   ok('B11 PARITY (Class B): the ui log minus panel entries is identical across both drives', q1.logNoPanel === q2.logNoPanel);
+
+  // W10-B T5 — Class C non-battle parity drive (ev_sinnoh_gracidea):
+  // a say-only glimpse event; the same parity contract as the proof
+  // drive — the panel is presentation only, the chain completes
+  // identically with and without it.
+  function runGlimpse(seed, strip) {
+    var g = mkGame(seed); boot(g);
+    var mk = function (id, level) { return makeMon(id, level, SPECIES, MOVES); };
+    g.state.party = [mk('partner', 50)];
+    var ow = gotoMap(g, 'ilex-forest', 14, 5);
+    drain(g); tk(g, 3);
+    var steps = EVENTS.ev_sinnoh_gracidea;
+    var removed = [];
+    if (strip) {
+      for (var i = steps.length - 1; i >= 0; i--) if (steps[i].panel) { removed.unshift({ i: i, s: steps[i] }); steps.splice(i, 1); }
+    }
+    ow.runEvent('ev_sinnoh_gracidea');
+    var guard = 0;
+    while (!g.state.story.flags.gracidea_beat_done && guard++ < 300) {
+      if (g.ui.dialogueOpen) { drain(g); continue; }
+      tk(g, 2);
+    }
+    drain(g); tk(g, 3);
+    for (var k = 0; k < removed.length; k++) steps.splice(removed[k].i, 0, removed[k].s);
+    return {
+      g: g,
+      done: !!g.state.story.flags.gracidea_beat_done,
+      unlocked: !!g.state.story.flags.shaymin_unlocked,
+      panels: g.ui.log.filter(function (e) { return e.ui === 'panel'; }),
+      logNoPanel: canon(g.ui.log.filter(function (e) { return e.ui !== 'panel'; })),
+      snap: snap(g),
+    };
+  }
+  var gSteps = EVENTS.ev_sinnoh_gracidea;
+  var gpi = gSteps.findIndex(function (s) { return !!s.panel; });
+  var gLastSay = -1;
+  gSteps.forEach(function (s, i) { if (s.say) gLastSay = i; });
+  var gfi = gSteps.findIndex(function (s) { return !!s.flag; });
+  ok('N1 bundle: ev_sinnoh_gracidea panel step sits after the final say and before the sealing flag',
+    gSteps.filter(function (s) { return !!s.panel; }).length === 1 && gpi > gLastSay && gpi < gfi);
+  ok('N1 bundle: the gracidea panel step names gracidea-grathog and PANELS resolves it to the panel art',
+    gpi >= 0 && gSteps[gpi].panel === 'gracidea-grathog' && PANELS['gracidea-grathog'] && PANELS['gracidea-grathog'].art === 'panel-gracidea-grathog');
+  var n1 = runGlimpse(555, false);
+  ok('N2 as shipped: the glimpse panel fired exactly once, naming the panel art',
+    n1.panels.length === 1 && n1.panels[0].art === 'panel-gracidea-grathog', JSON.stringify(n1.panels));
+  ok('N2 as shipped: the chain completed — gracidea beat done and GRATHOG unlocked',
+    n1.done && n1.unlocked, 'done=' + n1.done + ' unlocked=' + n1.unlocked);
+  var n2 = runGlimpse(555, true);
+  ok('N3 stripped: no panel fired, and the chain still completed identically (done + unlocked)',
+    n2.panels.length === 0 && n2.done && n2.unlocked, 'panels=' + n2.panels.length + ' done=' + n2.done + ' unlocked=' + n2.unlocked);
+  ok('N4 PARITY: end state identical with and without the glimpse panel step', n1.snap === n2.snap);
+  ok('N5 PARITY: the ui log minus panel entries is identical across both glimpse drives', n1.logNoPanel === n2.logNoPanel);
 
   globalThis.__W10Q__ = Q;
 })();`;

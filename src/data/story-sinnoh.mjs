@@ -513,6 +513,7 @@ export const SINNOH_EVENTS = {
   // Galactic pressure (pressure and a shadow — S6 owns the catch).
   ev_sinnoh_acuity_glimpse: [
     { say: ['Lake Insight is frozen hard enough to hold the sky, and the far shore is wrong: grey boats on the ice, grey figures measuring the lake like a room they intend to empty. Combine has come for the north lake — slower here, and warier. The ice is old, and it is watching them.', 'Under the ice at the lake\'s heart, something small and gold turns in its sleep — one slow revolution, like a thought deciding whether to surface. It does not surface. The figures on the far shore pack their instruments with the care of men told, precisely, not to hurry a god.', 'LORACLE. The being of knowledge. It knows they are there. It knows you are here. It is letting both facts ripen.'], who: '' },
+    { panel: 'underice-loracle' },
     { flag: 'uxie_glimpse' },
     { toast: 'Something turned beneath Lake Insight\'s ice...' },
   ],
@@ -520,6 +521,7 @@ export const SINNOH_EVENTS = {
   // the last glimpse before the mountain (S6 owns the catch).
   ev_sinnoh_verity_pressure: [
     { say: ['Lake Candor again — and not as you left it. Grey hulls quarter the water in a slow grid, instruments trailing like fingers feeling for a pulse. The Combine has come back for the first lake last, and it is being thorough.', 'Then the water at the shore simply... changes its mind about being empty. Small. Crowned. Pink as a held breath let go — EMPATHIS rises a hand\'s breadth above the surface, looks at the boats, looks at you, and chooses, with ancient courtesy, to be elsewhere. The grid closes on a reflection.', 'The being of emotion, uncaught and unbothered, gone over the pines. Whatever Severin counts on taking from this lake, he will count without it — for now. The mountain is calling louder. Answer the mountain.'], who: '' },
+    { panel: 'surfaced-empathis' },
     { flag: 'mesprit_glimpse' },
     { toast: 'EMPATHIS slipped the net at Lake Candor.' },
   ],
@@ -528,6 +530,7 @@ export const SINNOH_EVENTS = {
   ev_sinnoh_gracidea: [
     { say: ['Honeyfield\'s meadow has done something the florists will talk about for a decade: overnight, in the wrong season, the Gracidea have opened — all of them, a whole field standing in pink-white bloom like the meadow is holding a celebration it forgot to announce.', 'The beekeepers say the flowers open like this only in gratitude, and only all at once. Gratitude for what, nobody can agree — until the bloom at the field\'s heart moves against the wind, and a small green shape with a flower on either ear lifts its head out of the blossom, considers you with total unafraid calm... and settles back down into the flowers, the way a guest settles into a house that is partly theirs.'], who: '' },
     { say: ['GRATHOG. The Gratitude Kin, in its own flower field, at its own celebration. It is not yours to disturb today, and it knows you know it. Some meetings are appointments. This one is a promise.'], who: '' },
+    { panel: 'gracidea-grathog' },
     { flag: 'gracidea_beat_done' },
     { flag: 'shaymin_glimpsed' },
     { flag: 'shaymin_unlocked' },

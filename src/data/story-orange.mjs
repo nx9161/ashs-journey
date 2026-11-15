@@ -192,6 +192,7 @@ export const ORANGE_EVENTS = {
     { say: ['The barge lifts away toward Ember Isle, unhurried as snowfall. On the west shore, unmoving on its rock through all of it, the island\'s oldest resident watches you approach — and, for the first time in living memory, the ORAPOTAM speaks first.'], who: 'NARRATOR' },
     { say: ['Slow... king. King. ORAPOTAM slow, king — slow.'], who: 'ORAPOTAM' },
     { say: ['It turns its great head toward the three isles, one by one. Fire. Lightning. Ice. Then toward the shrine above the plaza, and down — deep down — with a patience like the bottom of the sea. The meaning arrives the way its speech does: slowly, and all at once. Free the shrines. Calm the titans. Then the guardian will decide what the sea does next.'], who: 'NARRATOR' },
+    { panel: 'storm-sanctum' },
     { flag: 'orange_2000_active' },
     { toast: 'The Storm over Sanctum has begun!' },
   ],

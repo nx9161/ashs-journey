@@ -448,6 +448,7 @@ export const EVENTS = {
   ev_parley_enter: [
     { say: ['The Game Corner doors spill light across the plaza — and two figures cross to the corner post, unhurried, like they hold the lease on it.'], who: 'NARRATOR' },
     { say: ['RUE and COLE. The parley, in person. They are waiting on YOU.'], who: 'NARRATOR' },
+    { panel: 'parley-plaza' },
     { actorEnter: { who: 'rue@celadon', x: 12, y: 7, path: [[12, 8], [12, 9], [11, 9], [10, 9], [9, 9], [8, 9], [8, 8]], face: 'down' } },
     { actorEnter: { who: 'cole@celadon', x: 13, y: 7, path: [[13, 8], [13, 9], [12, 9], [11, 9], [10, 9], [9, 9], [9, 8]], face: 'down' } },
   ],
