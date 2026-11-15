@@ -1354,6 +1354,15 @@ export const WALKABLE = new Set(['.', ',', 'D', 'E', 'C', 'F', 'J', 'K', '1', '2
   // from the walkable '+' gymfloor char inside its own gym, so floor
   // stays floor.
   ...[1580, 1581, 1582, 1583, 1584, 1585, 1586, 1587]
+    .map((i) => String.fromCodePoint(0x1E00 + i)),
+  // Gym Identity T4: the eight Borea gym floor chars (U+1E00+1588..1595,
+  // tiles.mjs GYMID4_KIND_DEFS) are walkable — shalefloor (Coalseam),
+  // hothousefloor (Heritage), theatrefloor (Inglenook), tatamifloor
+  // (Shardfall), fenfloor (Fenland), rivetfloor (Bridgeport),
+  // iciclefloor (Rimefall), beaconfloor (Brightshore) — each swapped 1:1
+  // from the walkable '+' gymfloor char inside its own gym, so floor
+  // stays floor.
+  ...[1588, 1589, 1590, 1591, 1592, 1593, 1594, 1595]
     .map((i) => String.fromCodePoint(0x1E00 + i))]);
 
 // Trainer definitions for the slice.

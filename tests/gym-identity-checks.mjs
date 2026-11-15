@@ -81,9 +81,13 @@ const sha12 = (s) => sha(s).slice(0, 12);
 // 20->12. INTERIOR_TUPLES_DISTINCT 35->36, MEASURED at T3: Mauville
 // taking dynamofloor breaks the mauville/sunnyshore shared tuple, so
 // all 36 gyms now hold distinct interior tuples.
-const GYM_ARENA_COVERED = 24;
-const GYM_FLOOR_OWNED = 24;
-const GYMFLOOR_DOMINANT = 12;
+// T4 (Borea): COVERED 24->32, FLOOR_OWNED 24->32, GYMFLOOR_DOMINANT
+// 12->4 (the four Amber gyms still stand on gymfloor until T5).
+// INTERIOR_TUPLES_DISTINCT stays 36, MEASURED at T4: every Borea tuple
+// was already distinct and each gym takes a unique floor kind.
+const GYM_ARENA_COVERED = 32;
+const GYM_FLOOR_OWNED = 32;
+const GYMFLOOR_DOMINANT = 4;
 const INTERIOR_TUPLES_DISTINCT = 36;
 
 // ---------------- the gym census (plan §1 enumeration) -----------------

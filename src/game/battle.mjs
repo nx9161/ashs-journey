@@ -279,6 +279,31 @@ const GYM_ARENA_ART = {
   // Craterlake: conducted water — grey-teal crater sky, deep dark
   // water, haze on, the Rain badge's own rain over the Tide.
   'gym-sootopolis': { sky: ['#5a7a84', '#68868e', '#769298', '#84a0a2', '#92aeac', '#a0bcb6'], ground: ['#2e5a66', '#29525e', '#244a56', '#1f424e', '#1a3a46', '#15323e'], dark: '#0e2830', light: '#d8f8f0', accent: '#5ae0c8', motif: 'waves', tex: 'foam', haze: true, amb: { kind: 'rain', n: 16, speed: 110 } },
+  // Gym Identity T4 (Borea): the region's eight own treatments.
+  // Coalseam: working mine — soot-dark sky over coal-black ground,
+  // lamp-amber accent, slow coal-dust motes over the Rubble.
+  'gym-oreburgh': { sky: ['#3a3630', '#443e36', '#4e463c', '#584e42', '#625648', '#6c5e4e'], ground: ['#4a3a28', '#433324', '#3c2c20', '#35251c', '#2e1e18', '#271714'], dark: '#1a120a', light: '#ffd9a0', accent: '#ffb020', motif: 'rocks', tex: 'chunk', amb: { kind: 'mote', n: 12, speed: 2 } },
+  // Heritage: greenhouse bloom — glass-green sky over deep forest
+  // ground, pollen-gold accent, dense petal drift in the haze.
+  'gym-eterna': { sky: ['#4a7a52', '#57875e', '#64946a', '#71a176', '#7eae82', '#8bbb8e'], ground: ['#4a7d33', '#437431', '#3c6b2f', '#356228', '#2f5926', '#294f22'], dark: '#24401c', light: '#eaffb0', accent: '#f2c14e', motif: 'flowers', tex: 'petal', haze: true, amb: { kind: 'petal', n: 16, speed: 6 } },
+  // Inglenook: theatre of the unseen — violet-black sky over plush
+  // plum, candle-gold accent, slow candle-smoke motes over the Grave.
+  'gym-hearthome': { sky: ['#241c38', '#2c2344', '#342a50', '#3c315c', '#443868', '#4c3f74'], ground: ['#4a3450', '#43304a', '#3c2c44', '#35283e', '#2e2438', '#271f32'], dark: '#160f22', light: '#ffe9b0', accent: '#ffc94d', motif: 'tombs', tex: 'fleck', amb: { kind: 'mote', n: 14, speed: 3 } },
+  // Shardfall: bare-knuckle dojo — pale dawn sky over tatami-tan
+  // ground, dojo-red accent, sparse quiet dust over the Mind.
+  'gym-veilstone': { sky: ['#c8b8b0', '#d0c2ba', '#d8ccc4', '#e0d6ce', '#e8e0d8', '#f0eae2'], ground: ['#b89a6a', '#ac8f60', '#a08456', '#94794c', '#887042', '#7c6740'], dark: '#5c4630', light: '#fff6e0', accent: '#e0483c', motif: 'rocks', tex: 'chunk', amb: { kind: 'mote', n: 6, speed: 2 } },
+  // Fenland: marsh tide — brackish green-brown sky over fen-green
+  // ground, reeds in the mist, slow fen bubbles over the Tide.
+  'gym-pastoria': { sky: ['#6a7a52', '#75845c', '#808e66', '#8b9870', '#96a27a', '#a1ac84'], ground: ['#5a6b3a', '#526334', '#4a5a2e', '#425128', '#394922', '#31411c'], dark: '#2c3a1c', light: '#f0e8c0', accent: '#d8a03c', motif: 'reeds', tex: 'foam', haze: true, amb: { kind: 'bubble', n: 8, speed: 5 } },
+  // Bridgeport: steel mine — shaft-dark sky over rust-tinged rivet
+  // ground, the T2 'steel' girder motif, furnace-orange accent.
+  'gym-canalave': { sky: ['#2e3138', '#363a42', '#3e434c', '#464c56', '#4e5560', '#565e6a'], ground: ['#6a6258', '#61594f', '#585046', '#4f4740', '#463e37', '#3d352e'], dark: '#1e1c18', light: '#ffd9a8', accent: '#ff8a3c', motif: 'steel', tex: 'chunk', amb: { kind: 'spark', n: 8, speed: 0 } },
+  // Rimefall: icicle glass — cyan-pale sky over glass-pale ground,
+  // icicle-cyan accent, wind-driven snow over the Frost.
+  'gym-snowpoint': { sky: ['#8fc8e4', '#9cd2ea', '#a9dcf0', '#b6e6f4', '#c3eef8', '#d0f6fc'], ground: ['#e2f4f8', '#d8eef4', '#cee8f2', '#c4e0ee', '#b8d6ea', '#acd0e6'], dark: '#5a94b8', light: '#ffffff', accent: '#7ae0f0', motif: 'snow', tex: 'spark', haze: true, amb: { kind: 'snow', n: 12, speed: 14 } },
+  // Brightshore: lighthouse volt — bright coastal day over sunlit
+  // sand-gold, waves under the light, beam-yellow accent, no pylon.
+  'gym-sunnyshore': { sky: ['#4a90d8', '#5c9de2', '#6ea9e8', '#80b5ee', '#92c1f2', '#a4cdf6'], ground: ['#a89a58', '#9e9050', '#948648', '#8a7c40', '#807238', '#76682e'], dark: '#4a4020', light: '#fff8c8', accent: '#ffe93c', motif: 'waves', tex: 'spark', amb: { kind: 'spark', n: 12, speed: 0 } },
 };
 
 function gymArenaFor(field) {

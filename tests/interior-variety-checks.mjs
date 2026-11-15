@@ -758,7 +758,7 @@ const PINS = {
   }
  },
  "gym-oreburgh": {
-  "grid": "768c39b7655e890826db899e5af5d084eb42a98b517f7a30a33b705de3464106",
+  "grid": "6eff10ec8462b4d13d6a724e63b578b2473d9bd90a96f73f1fe8c8b5d99af1ab",
   "data": "3a61186eb1d5b10dcffe2cae0da88ef56fd66d119b5c12c60d894a6efc831cdc",
   "reach": 136,
   "pos": {
@@ -804,7 +804,7 @@ const PINS = {
   }
  },
  "gym-veilstone": {
-  "grid": "fa8cb1a65c40b6e51c9fc2e197570b02af1f3cbdfd6ef3969d68df3286a08c92",
+  "grid": "848c4eea45f3368f7b4a99957bdfb39ea246ad0ab84174bf35490b071784df71",
   "data": "37a0aab89c769f6dd92a98f3382740e78b5af620a6824f3bc7b788ac336a2e43",
   "reach": 136,
   "pos": {
@@ -873,7 +873,7 @@ const PINS = {
   }
  },
  "gym-eterna": {
-  "grid": "f485674de851a43b264a553a42ad01ef2eae9688823cdeeae1074fda27674d92",
+  "grid": "8c93837161cc1eb5799adc2541840bd2a278bf1051acc19ffbffcf19ba6b7141",
   "data": "6420b8c9819c06e033764927c2d40995923d3672650454dd31795b18d73142c1",
   "reach": 136,
   "pos": {
@@ -913,6 +913,18 @@ const PINS = {
 // template value is gym-eterna's grid and does NOT move. PINS grid for
 // gym-dewford moved dda2c53e… -> 817fadec… the same way. Floor swaps
 // only; posts, warps, data and reach pins untouched.
+// Gym Identity T4 re-pin (same ruling, disclosed): the three Borea
+// W16-B gyms took their own floors (gym-oreburgh shalefloor,
+// gym-veilstone tatamifloor, gym-eterna hothousefloor), so their PINS
+// grids moved to the post-swap shas (768c39b7… -> 6eff10ec…,
+// fa8cb1a6… -> 848c4eea…, f485674d… -> 8c938371…). gym-eterna is the
+// KEEPER of its pair, so the gym-fortree template value — eterna's
+// grid — moved with it (f485674d… -> 8c938371…), the T3 keeper
+// precedent run the other way. gym-oreburgh's and gym-veilstone's
+// template values point at their keepers' T3 grids and do NOT move.
+// gym-eterna keeps the grass kit (its identity); the floor swap does
+// not touch a single dressing cell. Floor swaps only; posts, warps,
+// data and reach pins untouched.
 const TEMPLATES = {
  "lab": "b139fdde0a9ffcdd666ae962fd686139e1d6b973a92bd73a02359abb2dac4c78",
  "contest": "d3d5a5b03543d6cc69bd06da4d76e15fc69e8e0b4c97afbe424133e721a9088b",
@@ -920,7 +932,7 @@ const TEMPLATES = {
  "gym-olivine": "ac1e72b52b48013b619a0bb18a7671f31d98860d9a135e71740bf93d880f30ce",
  "gym-oreburgh": "6d69105717800124b254fd2ca1039da498b831a7900d41821fd709b614eacdab",
  "gym-veilstone": "817fadec1587f37d0ad7325c65cc80f514cfa3a47aeb5edea129ee7571fc4077",
- "gym-fortree": "f485674de851a43b264a553a42ad01ef2eae9688823cdeeae1074fda27674d92"
+ "gym-fortree": "8c93837161cc1eb5799adc2541840bd2a278bf1051acc19ffbffcf19ba6b7141"
 };
 const LABS = ['birch-lab', 'elm-lab', 'rowan-lab'];
 const CONTESTS = ['contest-fallarbor', 'contest-lilycove', 'contest-slateport', 'contest-verdanturf'];
@@ -986,7 +998,9 @@ for (const id of SCOPED) {
 // never moved. Later tranches add their W16-B gyms here the same way.
 // Gym Identity T3 (same ruling): gym-rustboro / gym-dewford /
 // gym-fortree took ochrefloor / swashfloor / roostfloor.
-const FLOOR_OVERRIDES = { 'gym-violet': 'gustfloor', 'gym-olivine': 'steelfloor', 'gym-rustboro': 'ochrefloor', 'gym-dewford': 'swashfloor', 'gym-fortree': 'roostfloor' };
+// Gym Identity T4 (same ruling): gym-oreburgh / gym-veilstone /
+// gym-eterna took shalefloor / tatamifloor / hothousefloor.
+const FLOOR_OVERRIDES = { 'gym-violet': 'gustfloor', 'gym-olivine': 'steelfloor', 'gym-rustboro': 'ochrefloor', 'gym-dewford': 'swashfloor', 'gym-fortree': 'roostfloor', 'gym-oreburgh': 'shalefloor', 'gym-veilstone': 'tatamifloor', 'gym-eterna': 'hothousefloor' };
 const FLOOR_OF = (id) => FLOOR_OVERRIDES[id] || (id.includes('lab') ? 'labfloor' : id.includes('contest') ? 'silphfloor' : 'gymfloor');
 // map-npc post cells keep their floor kind
 for (const id of SCOPED) for (const n of MAPS[id].npcs || [])
@@ -998,15 +1012,15 @@ const APPENDED = [
   ['contest-fallarbor', 'MAIA', 8, 6, 'battlemat'], ['contest-lilycove', 'MAIA', 8, 6, 'battlemat'],
   ['contest-slateport', 'MAIA', 8, 6, 'battlemat'], ['contest-verdanturf', 'MAIA', 8, 6, 'battlemat'],
   ['gym-olivine', 'LIORA', 7, 2, 'steelfloor'], ['gym-violet', 'AVEN', 7, 2, 'gustfloor'],
-  ['gym-oreburgh', 'RONAN', 7, 2, 'gymfloor'], ['gym-rustboro', 'SAXA', 7, 2, 'ochrefloor'],
-  ['gym-veilstone', 'MAREN', 7, 2, 'gymfloor'], ['gym-dewford', 'ENZO', 7, 2, 'swashfloor'],
-  ['gym-fortree', 'ARIA', 7, 2, 'roostfloor'], ['gym-eterna', 'TANSY', 7, 2, 'gymfloor'],
+  ['gym-oreburgh', 'RONAN', 7, 2, 'shalefloor'], ['gym-rustboro', 'SAXA', 7, 2, 'ochrefloor'],
+  ['gym-veilstone', 'MAREN', 7, 2, 'tatamifloor'], ['gym-dewford', 'ENZO', 7, 2, 'swashfloor'],
+  ['gym-fortree', 'ARIA', 7, 2, 'roostfloor'], ['gym-eterna', 'TANSY', 7, 2, 'hothousefloor'],
   ['gym-rustboro', 'YOUNGSTER BRAM', 4, 5, 'ochrefloor'], ['gym-rustboro', 'HIKER SELLA', 11, 5, 'ochrefloor'],
   ['gym-dewford', 'BLACKBELT ROOK', 4, 5, 'swashfloor'], ['gym-dewford', 'BATTLE GIRL SANA', 11, 5, 'swashfloor'],
   ['gym-fortree', 'BIRD KEEPER ANSEL', 4, 5, 'roostfloor'], ['gym-fortree', 'PICNICKER WREN', 11, 5, 'roostfloor'],
-  ['gym-oreburgh', 'MINER COLE', 4, 5, 'gymfloor'], ['gym-oreburgh', 'MINER FENN', 11, 5, 'gymfloor'],
-  ['gym-eterna', 'AROMA ADEPT LIA', 4, 5, 'gymfloor'], ['gym-eterna', 'AROMA ADEPT ROSALIE', 11, 5, 'gymfloor'],
-  ['gym-veilstone', 'BLACK BELT JON', 4, 5, 'gymfloor'], ['gym-veilstone', 'BLACK BELT RUE', 11, 5, 'gymfloor'],
+  ['gym-oreburgh', 'MINER COLE', 4, 5, 'shalefloor'], ['gym-oreburgh', 'MINER FENN', 11, 5, 'shalefloor'],
+  ['gym-eterna', 'AROMA ADEPT LIA', 4, 5, 'hothousefloor'], ['gym-eterna', 'AROMA ADEPT ROSALIE', 11, 5, 'hothousefloor'],
+  ['gym-veilstone', 'BLACK BELT JON', 4, 5, 'tatamifloor'], ['gym-veilstone', 'BLACK BELT RUE', 11, 5, 'tatamifloor'],
 ];
 {
   const { HOENN_NPCS } = await D('story-hoenn.mjs');
