@@ -17,6 +17,8 @@
 // its panel steps stripped — asserting the panel fired (ui log), the
 // chain completed (done flag + catch), and the end state and the
 // non-panel ui log are IDENTICAL: a panel step is presentation only.
+// W10-B T4 adds the Class B representative drive (ev_zapdos, a
+// wildBattle reveal) under the same parity contract (B7–B11).
 
 import fs from 'node:fs';
 import os from 'node:os';
@@ -49,10 +51,10 @@ for (const [id, steps] of stepLists) steps.forEach((s, i) => { if (s && s.panel)
 // W10-B ratchet pins (move only in-commit with their tranche;
 // re-pinned by the merge coordinator against the MERGED tree:
 // W10 proof panel + T1's 8 sovereigns + T2's 9 Yamato+Maris panels
-// + T3's 11 Borea/rest panels).
-const PANEL_STEPS = 29;
-const PANELS_ENTRIES = 29;
-const PANEL_ART_BYTES = 322126;
+// + T3's 11 Borea/rest panels + T4's 10 Class B battle reveals).
+const PANEL_STEPS = 39;
+const PANELS_ENTRIES = 39;
+const PANEL_ART_BYTES = 433218;
 const PANEL_ART_BASELINE_W10 = 11171; // the W10 proof panel alone
 
 ok('A1 shipped data carries at least one panel step', panelSteps.length >= 1);
@@ -80,8 +82,8 @@ for (const { art } of Object.values(PANELS)) {
   if (start >= 0 && end > start) panelBytes += Buffer.byteLength(artDataText.slice(start, end + 7));
 }
 // W10-B ratchet pins (measured; move only in-commit with their tranche).
-const PANEL_ART_BYTES_PIN = PANEL_ART_BYTES;   // cumulative panel art after W10-B T1+T2+T3 (merge re-pin: 322126)
-const PANEL_ART_BYTES_PREV = 199856;  // cumulative after W10-B T1+T2 — the latest tranche (T3) delta is measured from here
+const PANEL_ART_BYTES_PIN = PANEL_ART_BYTES;   // cumulative panel art after W10-B T1+T2+T3+T4 (merge re-pin: 433218)
+const PANEL_ART_BYTES_PREV = 322126;  // cumulative after W10-B T1+T2+T3 — the latest tranche (T4) delta is measured from here
 console.log('  panel art cumulative: ' + panelBytes + ' B (pin ' + PANEL_ART_BYTES_PIN + ' B; this tranche delta ' + (panelBytes - PANEL_ART_BYTES_PREV) + ' B of the 153600 B per-tranche cap)');
 ok('A8 PANEL_ART_BYTES pin: cumulative panel art equals the ratchet pin (measured)', panelBytes === PANEL_ART_BYTES_PIN);
 ok('A8 per-tranche budget: the latest tranche\'s panel art is within 150 KB (Director ruling, W10-B)',
@@ -279,6 +281,65 @@ const driver = `
     r2.panels.length === 0 && r2.done && r2.caught, 'panels=' + r2.panels.length + ' done=' + r2.done + ' caught=' + r2.caught);
   ok('B4 PARITY: end state identical with and without the panel step', r1.snap === r2.snap);
   ok('B5 PARITY: the ui log minus panel entries is identical across both drives', r1.logNoPanel === r2.logNoPanel);
+
+  // ---- Class B (W10-B T4): battle-reveal parity drive, ev_zapdos ----
+  // Same contract as the Class A proof drive, on a wildBattle event:
+  // the chain advances on a won battle (the masterball catch here),
+  // runEvent writes ev_zapdos_done only when the chain runs off the
+  // end, and the panel step must change nothing but the panel firing.
+  function runProofB(seed, strip) {
+    var g = mkGame(seed); boot(g);
+    var mk = function (id, level) { return makeMon(id, level, SPECIES, MOVES); };
+    g.state.party = [mk('partner', 190), mk('venusaur', 190)];
+    g.state.bag.masterball = 9;
+    var ow = gotoMap(g, 'powerplant', 2, 5);
+    drain(g); tk(g, 3);
+    var steps = EVENTS.ev_zapdos;
+    var removed = [];
+    if (strip) {
+      for (var i = steps.length - 1; i >= 0; i--) if (steps[i].panel) { removed.unshift({ i: i, s: steps[i] }); steps.splice(i, 1); }
+    }
+    ow.runEvent('ev_zapdos');
+    var guard = 0;
+    while (!g.state.story.flags.ev_zapdos_done && guard++ < 900) {
+      if (g.ui.dialogueOpen) { drain(g); continue; }
+      if (g.scenes.top instanceof BattleScene) { attemptBall(g, 'masterball'); continue; }
+      tk(g, 2);
+    }
+    drain(g); tk(g, 3);
+    for (var k = 0; k < removed.length; k++) steps.splice(removed[k].i, 0, removed[k].s);
+    var dexNo = SPECIES.zapdos.dexNo;
+    return {
+      g: g,
+      done: !!g.state.story.flags.ev_zapdos_done,
+      caught: !!(g.state.dex && g.state.dex.caught && g.state.dex.caught[dexNo]),
+      panels: g.ui.log.filter(function (e) { return e.ui === 'panel'; }),
+      logNoPanel: canon(g.ui.log.filter(function (e) { return e.ui !== 'panel'; })),
+      snap: snap(g),
+    };
+  }
+
+  var evB = EVENTS.ev_zapdos;
+  var pbi = evB.findIndex(function (s) { return !!s.panel; });
+  var bbi = evB.findIndex(function (s) { return !!s.wildBattle; });
+  var lastSayB = -1;
+  for (var j = 0; j < bbi; j++) if (evB[j].say) lastSayB = j;
+  ok('B7 bundle: ev_zapdos panel step sits after the final build-up say and before the battle step',
+    evB.filter(function (s) { return !!s.panel; }).length === 1 && pbi > lastSayB && pbi < bbi);
+  ok('B7 bundle: the panel step names plant-fulminis and PANELS resolves it to the panel art',
+    pbi >= 0 && evB[pbi].panel === 'plant-fulminis' && PANELS['plant-fulminis'] && PANELS['plant-fulminis'].art === 'panel-plant-fulminis');
+
+  var q1 = runProofB(777, false);
+  ok('B8 as shipped (Class B): the panel fired exactly once, naming the panel art',
+    q1.panels.length === 1 && q1.panels[0].art === 'panel-plant-fulminis', JSON.stringify(q1.panels));
+  ok('B8 as shipped (Class B): the chain completed — done flag set and FULMINIS caught',
+    q1.done && q1.caught, 'done=' + q1.done + ' caught=' + q1.caught);
+
+  var q2 = runProofB(777, true);
+  ok('B9 stripped (Class B): no panel fired, and the chain still completed identically (done + caught)',
+    q2.panels.length === 0 && q2.done && q2.caught, 'panels=' + q2.panels.length + ' done=' + q2.done + ' caught=' + q2.caught);
+  ok('B10 PARITY (Class B): end state identical with and without the panel step', q1.snap === q2.snap);
+  ok('B11 PARITY (Class B): the ui log minus panel entries is identical across both drives', q1.logNoPanel === q2.logNoPanel);
 
   globalThis.__W10Q__ = Q;
 })();`;
