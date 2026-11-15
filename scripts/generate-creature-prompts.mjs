@@ -78,7 +78,7 @@ const LEGACY_SEAM_IDS = new Set([
   'tauros', 'ditto', 'kabutops', 'mew',
 ]);
 
-const HEADER = `# Ash’s Journey — Creature Prompt Pack (the Kin roster)
+const HEADER = `# Kian’s Journey — Creature Prompt Pack (the Kin roster)
 
 **How to use this pack (3 lines):**
 1. Paste ONE prompt per image generation — each prompt is fully self-contained, so every creature can be generated on its own.
