@@ -1,0 +1,20 @@
+# shared PITCHLET pair palette (W11-T2): shipped front palette verbatim.
+PAL
+O #2a1800 kit outline
+A #52773d
+B #98b860
+C #8ba26b
+E #b8b838
+F #65863e
+G #71815c
+H #6e9241
+I #769656
+J #9fba79
+K #b1c492
+L #8d9a33
+M #8ca751
+N #dcc73e
+P #f0cf3f
+
+PIX shared-pitchlet 1 1
+.
