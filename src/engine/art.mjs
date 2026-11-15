@@ -636,6 +636,22 @@ const NPC_SWAP_KEYS = {
   'cast-dara': { S: 'skin', H: 'hair', J: 'shirt', P: 'pants' },
   'cast-mire': { S: 'skin', H: 'hair', J: 'shirt', P: 'pants' },
   'cast-sola-sun': { S: 'skin', H: 'hair', J: 'shirt', P: 'pants' },
+  // W-CHAR2 T4 (named tail): the last 14 per-character kinds — the
+  // monk/bugcatcher/aide/grunt/camper/officer/swimmer duplicate tail.
+  'cast-vex': { S: 'skin', H: 'hair', J: 'shirt', P: 'pants' },
+  'cast-lio-camper': { S: 'skin', H: 'hair', J: 'shirt', P: 'pants' },
+  'cast-gateguard': { S: 'skin', H: 'hair', J: 'shirt', P: 'pants' },
+  'cast-bo-swimmer': { S: 'skin', H: 'hair', J: 'shirt', P: 'pants' },
+  'cast-frostkeeper': { S: 'skin', H: 'hair', J: 'shirt', P: 'pants' },
+  'cast-voltakeeper': { S: 'skin', H: 'hair', J: 'shirt', P: 'pants' },
+  'cast-theo': { S: 'skin', H: 'hair', J: 'shirt', P: 'pants' },
+  'cast-anselm-tower': { S: 'skin', H: 'hair', J: 'shirt', P: 'pants' },
+  'cast-deepkeeper': { S: 'skin', H: 'hair', J: 'shirt', P: 'pants' },
+  'cast-wren-catcher': { S: 'skin', H: 'hair', J: 'shirt', P: 'pants' },
+  'cast-fern-maniac': { S: 'skin', H: 'hair', J: 'shirt', P: 'pants' },
+  'cast-fern-aide': { S: 'skin', H: 'hair', J: 'shirt', P: 'pants' },
+  'cast-fern-lab': { S: 'skin', H: 'hair', J: 'shirt', P: 'pants' },
+  'cast-sorrel-aide': { S: 'skin', H: 'hair', J: 'shirt', P: 'pants' },
   gym1: { S: 'skin', H: 'hair', J: 'shirt', P: 'pants' },
   gym2: { S: 'skin', H: 'hair', J: 'shirt', P: 'pants' },
   gym3: { S: 'skin', H: 'hair', J: 'shirt', P: 'pants' },
@@ -1059,6 +1075,23 @@ const KIT_CAST_SPEC = {
   'cast-dara': { acc: [['hair-long', {}], ['skirt', { C: '#c83a2a', c: '#6e2017' }]] },
   'cast-mire': { acc: [['cap', { C: '#c83a2a', c: '#6e2017', X: '#f4f4f0' }]] },
   'cast-sola-sun': { acc: [['headband', { C: '#2a7a6a', c: '#17433a' }]] },
+  // W-CHAR2 T4 (named tail): signatures traced to each person's role
+  // in the live cast data + CHARACTER-PROMPTS.md entry; existing
+  // overlays only, zero new overlay ids, zero palette splits.
+  'cast-vex': { acc: [['cap', { C: '#2a2a33', c: '#101014', X: '#101014' }], ['glasses', {}]] },
+  'cast-lio-camper': { acc: [['bandana', { C: '#e8c832', c: '#806e1c' }]] },
+  'cast-gateguard': { force: { shirt: '#2a3a6a', pants: '#22304f' }, acc: [['cap', { C: '#2a3a6a', c: '#141f38', X: '#f4f4f0' }], ['glasses', {}]] },
+  'cast-bo-swimmer': { force: { shirt: '@skin' }, acc: [['bandana', { C: '#c83a2a', c: '#6e2017' }]] },
+  'cast-frostkeeper': { force: { hair: '@skin' }, acc: [['headband', { C: '#5a8ac0', c: '#324c6a' }]] },
+  'cast-voltakeeper': { force: { hair: '@skin' }, acc: [['headband', { C: '#e8c832', c: '#806e1c' }]] },
+  'cast-theo': { force: { hair: '@skin' }, acc: [['headband', { C: '#3a7a4a', c: '#204329' }]] },
+  'cast-anselm-tower': { force: { hair: '@skin' }, acc: [['glasses', {}]] },
+  'cast-deepkeeper': { force: { hair: '@skin' }, acc: [['lantern', { C: '#5a8ac0', c: '#324c6a', X: '#cfe8ff' }]] },
+  'cast-wren-catcher': { acc: [['cap', { C: '#3a7a4a', c: '#204329', X: '#204329' }]] },
+  'cast-fern-maniac': { acc: [['bandana', { C: '#7a4a8a', c: '#43294c' }]] },
+  'cast-fern-aide': { acc: [['glasses', {}], ['headband', { C: '#3a7a4a', c: '#204329' }]] },
+  'cast-fern-lab': { acc: [['glasses', {}], ['cap', { C: '#5a8ac0', c: '#324c6a', X: '#f4f4f0' }]] },
+  'cast-sorrel-aide': { acc: [['glasses', {}], ['headband', { C: '#c83a2a', c: '#6e2017' }]] },
   // W-CHAR1 class closure — the remaining palette-ignored kinds get
   // class specs so NO posted NPC can fall through to the forge
   // placeholder again (guarded by tests/leader-cast-checks.mjs). The
