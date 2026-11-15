@@ -58,6 +58,23 @@
 // maps2 corpse was retired leaving its maps3 base + maps4 patch pair
 // frozen. Folded view proven byte-identical across the change
 // (your_files/reconcile-r3).
+// Reconcile R4 (2026-11-15): the identical-14 (cinnabar, fuchsia, indigo,
+// lavender, route10, route15, route16, route20, saffron, tower1,
+// gym-celadon, gym-cerulean, gym-fuchsia, gym-vermilion) reconciled —
+// each pair was byte-identical literals in maps2+maps3, and a full sweep
+// (intra-pack derivations + pinned direct reads) found no derivation
+// base and no pack-specific reader for any of them, so the fold-
+// discarded maps2 copy was deleted and the maps3 copy stands as the
+// single definition: 440 definitions, 6 duplicated ids (0 identical /
+// 6 drifted, all frozen layered). Folded view proven byte-identical
+// across the change (your_files/reconcile-r4).
+// PROGRAM CLOSED: with R4 the dual-copy reconciliation is complete —
+// the only duplicated ids left on the books are the six sanctioned
+// frozen layered definitions: vermilion (4-layer derivation chain, R1),
+// newisland (maps3 base + maps4 patch, R2), and stanne, gamecorner,
+// hideout (maps2 base + maps4 patch) and silph1 (maps3 base + maps4
+// patch) from R3 — each a single definition by construction, not a
+// duplicate. The true-duplicate count is 0.
 
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -88,7 +105,7 @@ const fnv = (s) => { let h = 0x811c9dc5; for (let i = 0; i < s.length; i++) { h 
 
 // ---------- 1. census ----------
 const totalDefs = [...byId.values()].reduce((a, v) => a + v.length, 0);
-ok('census: 454 map definitions across maps.mjs…maps9.mjs', totalDefs === 454, `got ${totalDefs} — a wave that adds/removes a definition updates this line in the same commit`);
+ok('census: 440 map definitions across maps.mjs…maps9.mjs', totalDefs === 440, `got ${totalDefs} — a wave that adds/removes a definition updates this line in the same commit`);
 ok('census: 432 unique map ids after the split', byId.size === 432, `got ${byId.size}`);
 
 // ---------- 2. the victory-road split is permanent ----------
@@ -125,32 +142,19 @@ ok('chain: victory-road -> r223 + pokemon-league (4 returns)',
 // Burn-down rule: a commit that reconciles or deliberately edits a copy
 // updates that id's line here in the same commit. Nothing else may move it.
 const BASELINE = {
-  "cinnabar": ['I', 'maps2.mjs:a0ef07ac', 'maps3.mjs:a0ef07ac'],
-  "fuchsia": ['I', 'maps2.mjs:b9a6140b', 'maps3.mjs:b9a6140b'],
   // Reconcile R3: maps2 is NOT a dead copy — maps4.mjs derives its winner
   // from it ({...MAPS2.gamecorner, warps + the poster entrance}), so the
   // pair is frozen as a two-layer single definition.
   "gamecorner": ['D', 'maps2.mjs:37481247', 'maps4.mjs:e32d7897'],
-  "gym-celadon": ['I', 'maps2.mjs:e34e5a11', 'maps3.mjs:e34e5a11'],
-  "gym-cerulean": ['I', 'maps2.mjs:36cf7ab1', 'maps3.mjs:36cf7ab1'],
-  "gym-fuchsia": ['I', 'maps2.mjs:05d08fb4', 'maps3.mjs:05d08fb4'],
-  "gym-vermilion": ['I', 'maps2.mjs:03a2c9bf', 'maps3.mjs:03a2c9bf'],
   // Reconcile R3: maps2 is NOT a dead copy — maps4.mjs derives its winner
   // from it ({...MAPS2.hideout, warps re-pointed at the Game Corner poster
   // entrance, + the entry event}), so the pair is frozen as a two-layer
   // single definition.
   "hideout": ['D', 'maps2.mjs:ce1ebeed', 'maps4.mjs:04c239d9'],
-  "indigo": ['I', 'maps2.mjs:7f68717e', 'maps3.mjs:7f68717e'],
-  "lavender": ['I', 'maps2.mjs:86ed9785', 'maps3.mjs:86ed9785'],
   // Reconcile R2: maps2's alternate island retired; maps3 is NOT a dead copy —
   // maps4.mjs derives its winner from it ({...MAPS3.newisland, events, warps}),
   // so the pair is frozen as a two-layer single definition.
   "newisland": ['D', 'maps3.mjs:87e908ce', 'maps4.mjs:0a2b629f'],
-  "route10": ['I', 'maps2.mjs:99d8bd20', 'maps3.mjs:99d8bd20'],
-  "route15": ['I', 'maps2.mjs:acb066e0', 'maps3.mjs:acb066e0'],
-  "route16": ['I', 'maps2.mjs:43aae40f', 'maps3.mjs:43aae40f'],
-  "route20": ['I', 'maps2.mjs:0fcaa6d0', 'maps3.mjs:0fcaa6d0'],
-  "saffron": ['I', 'maps2.mjs:5ec9dead', 'maps3.mjs:5ec9dead'],
   // Reconcile R3: maps2's corpse retired; maps3 is NOT a dead copy —
   // maps4.mjs derives its winner from it ({...MAPS3.silph1, events + the
   // rival ambush}), so the pair is frozen as a two-layer single definition.
@@ -159,7 +163,6 @@ const BASELINE = {
   // from it ({...MAPS2.stanne, start} — the boarding patch), so the pair
   // is frozen as a two-layer single definition.
   "stanne": ['D', 'maps2.mjs:24a81714', 'maps4.mjs:99facee4'],
-  "tower1": ['I', 'maps2.mjs:a29e8705', 'maps3.mjs:a29e8705'],
   // vermilion: FROZEN DERIVATION CHAIN (Reconcile R1, Director ruling) —
   // maps2's literal is the derivation base: MAPS4.vermilion spreads it
   // (+SAILOR BRINE, +ev_movie_arrive), MAPS5 spreads maps4 (+CAPT AMBER),
@@ -170,7 +173,7 @@ const BASELINE = {
 };
 
 const dupNow = new Map([...byId.entries()].filter(([, v]) => v.length > 1));
-ok('ratchet: duplicated-id set is exactly the baseline (20 ids after Reconcile R1 + R2 + R3)',
+ok('ratchet: duplicated-id set is exactly the baseline (6 ids after Reconcile R1 + R2 + R3 + R4 — all frozen layered definitions)',
   eq([...dupNow.keys()].sort(), Object.keys(BASELINE).sort()),
   `added: ${[...dupNow.keys()].filter((id) => !BASELINE[id]).join(',') || 'none'} · removed: ${Object.keys(BASELINE).filter((id) => !dupNow.has(id)).join(',') || 'none'}`);
 const identicalNow = [];
@@ -182,7 +185,7 @@ for (const [id, [status, ...want]] of Object.entries(BASELINE)) {
     eq(got, want), `want ${want.join(' ')} · got ${got.join(' ')} — if this edit was deliberate, update the baseline line in this commit`);
   if (v.every((x) => x.json === v[0].json)) identicalNow.push(id);
 }
-ok('identical set: the 14 byte-identical duplicates are exactly the baseline I-set',
+ok('identical set: no byte-identical duplicates remain — the identical set is empty after Reconcile R4',
   eq(identicalNow.sort(), Object.entries(BASELINE).filter(([, [s]]) => s === 'I').map(([id]) => id).sort()),
   identicalNow.join(','));
 console.log(`  registry: ${identicalNow.length} identical duplicates (tolerated, byte-identical): ${identicalNow.join(', ')}`);
