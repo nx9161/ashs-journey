@@ -1,0 +1,24 @@
+# Wave W17-Z (Insight Cavern): glint floor — frost cavern floor, icicle-glint flecks: a pale ice-stone floor laid in faint cool joints, carrying white glints where the cavern’s ice crystals catch what light the mouth lets in (design: the lake’s cold heart; breath fogs, the stone answers in a lower register). Insight Cavern’s own floor — converts the shipped frostfloor register on this map only (the adapted cave method); split from its twin Gallant Cavern’s keep floor by temperature entire (frost and glint vs warm dressed shore stone) and from the snow grounds above it by enclosure: this is the same cold, roofed.
+PIX glintfloor 16 16
+aaacaaeabaaaaaaa
+aaaaacaabcacaaaa
+caaaaaaabaaaaaca
+aaaaaaaabaaaacac
+aaaaacaabascaaaa
+aaacaacabaacaaaa
+aasaaaaabcaaaaee
+bbbbbbbbbbbbbbbb
+aaaabaecaaasaccc
+aacabaaaaaaaaaaa
+caaabaaaacaaaaaa
+aaaebaaaaaaaaaaa
+aaaabaaaaaaaaaaa
+aaaebaaaaaaaaaaa
+aaaabaaaaaaaaaaa
+bbbbbbbbbbbbbbbb
+PAL
+a #b7c8ce
+b #8fa6ae
+c #c9dade
+e #9db2ba
+s #ffffff

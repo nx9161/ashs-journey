@@ -1,0 +1,23 @@
+# Wave W17-Z (Route 216): pack turf — packed-snow ground, bridge-white, wind-scoured: a hard white pack carrying blue-grey scour flecks and short wind streaks carved across it, the snow the mountain’s north door opens onto (design: wind-scoured snowfields, the drifts carved into waves; the wind here has a long memory and short patience). Route 216’s own snow ground — split from its twin Route 217’s white turf by texture entire (scoured pack vs smooth bench snow) and from Lake Insight’s calm turf by temper: this snow is worked by wind, that one is kept by stillness. Pale, cold, unbroken — the winter form of the ground law.
+PIX packturf 16 16
+aaaabaaaaadaaaaa
+badssssaaaaaaaaa
+aaaababssaabaaaa
+aadasssaaaaaaaad
+abaaaaassaaaaaaa
+aabssssaaaaaaaaa
+aaaaaadaaaaaaaaa
+abaaaabaaaaaaaaa
+abaaaaaaaaaaaaaa
+aaaabaaaabaaaaaa
+aaaaaaaaaaassaaa
+ababaadaaaaaaaaa
+aaaaaabaaaaaaaba
+aabbbaaaaassssaa
+aaaaaadaaaaaaaaa
+aabaaabaaaaabaaa
+PAL
+a #e9eff3
+b #c3d5df
+s #d5e3ea
+d #a7c0cf

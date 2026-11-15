@@ -4281,6 +4281,121 @@ W17Y_KIND_DEFS.forEach(([kind], i) => {
 export const W17Y_PROP_KINDS = W17Y_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
 export const W17Y_WALL_KINDS = W17Y_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
 export const W17Y_FLOOR_KINDS = W17Y_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
+// Wave W17-Z (Borea Tranche 6 — the winter tranche: the
+// spring, the meteor road, the snow climb): Farewell Spring
+// takes its own register — fareturf (suffix-free ground,
+// spring-meadow turf with still flecks), farefloor (the
+// path tier, *floor per checklist point 3 — the design's
+// three paved S-bends drawn in the kind's tread), farepine
+// (wall class, as every route tree) and the poolpost prop
+// (two still-pool marker posts flanking the spring pool on
+// verified grassground cells); the spring pool (water 36),
+// the shipped flowerfield dressing (16) and the two `L`
+// Reversal mouths stand byte-preserved entire. Route 215
+// takes the Shardfall Road register — puddleturf (rain-slick
+// turf, puddle-polish flecks), puddlefloor, puddlepine and
+// the shardpost prop (two fallen-shard posts flanking the
+// Shardfall road's north mouth, where the shards rise);
+// weather stays clear (the rain is a story biome in the
+// design, not a weather field — no rain register invented).
+// THE SNOW METHOD (the program plan's Tranche-6 charter,
+// Ruling #1): Borea's snow country ships frostfloor as its
+// regional ground; each snow map converts frostfloor to its
+// OWN snow ground kind, generic path to its own path, tree
+// to its own tree — while icefloor and icepool (the mechanic
+// surfaces) and icewall (the shared wall dressing) stand
+// byte-identical entire, census-proven. Route 216 takes the
+// Snow Bridge register — packturf (packed-snow ground,
+// bridge-white, wind-scoured flecks and streaks drawn in the
+// kind, split from Route 217's whiteturf by texture: scoured
+// pack vs smooth bench snow), bridgefloor (the causeway's
+// paved run — packed snow becoming stone bridge, the
+// design's stone bridge over the chasm drawn in the kind's
+// own art, art layer only), bridgepine (snow pine at the
+// road's edges, heavy snow load) and the driftpost prop (two
+// drift markers on verified frostfloor cells where the
+// drifts carve into waves); icefloor 47 + icewall 25 stand
+// byte-preserved. Route 217 takes the Long White Road
+// register — whiteturf (long-road snow ground, bench-pale,
+// unbroken value), whitefloor (the lakeside path's packed
+// sand-snow), whitepine (bench snow pine) and the gearpost
+// prop (two climbing-gear marker posts on verified
+// frostfloor cells below the climb face — the design's
+// picks, ropes and pitons sleeping along the path);
+// icefloor 44, icewall 25, the climbwall 7 gate tiles
+// (mechanic — the climb face's holds are gate data, never
+// converted) and the frozen lake's shore water 15 stand
+// byte-preserved. Lake Insight takes the frozen-lake
+// register — calmturf (frozen-shore snow turf, honest-white
+// flecks, the brightest of the three snow grounds, split
+// from Route 217's whiteturf by temperature: lake-calm
+// green-white vs bench blue-white), calmfloor (the shore
+// path's packed sand-snow), calmpine (bank snow pine — the
+// design's SNOWFIR stand in tree register) and the
+// wardenpost prop (two warden's marker posts on verified
+// frostfloor cells flanking the frozen lake at the
+// honest-ice crossing's shore); icepool 78 (the frozen lake
+// surface — the warden's footprint tracks cross it in the
+// design, drawn on the preserved surface's own art register;
+// the cells do not move), icefloor 34, icewall 24, open
+// water 18 and the two `L` cavern-mouth warp cells stand
+// byte-preserved. Insight Cavern takes the Glint Deep
+// register by the adapted cave method (the Scorch Path
+// adaptation): glintfloor converts the frostfloor register
+// on this map only (frost cavern floor, icicle-glint flecks)
+// and glintwall converts the icewall register on this map
+// only, where it is the wall — a shipped kind converts where
+// it is the wall; the mouth register (cavefloor 12), water 9,
+// cavecrystal 3, icecrystal 1, frostrock 1, starrock 1,
+// iceboulder 1 and lanternpost 1 stand byte-preserved. Twin
+// to Gallant Cavern (W17-Y, warm dressed stone): Insight's
+// cavern is frost and glint — the two lakes' caverns must
+// not read as twins. Ground kinds deliberately do NOT end
+// in 'floor' (the desire-path audit keys its street tier on
+// that suffix; grounds must never masquerade as street); the
+// path kinds DO end in 'floor'. Snow grounds are graded in
+// their own renders: pale, cold, unbroken — a snow ground
+// reading as grey-brown mud fails (the tg2 lesson, winter
+// form). Indices 1470-1491 per the program plan
+// (WAVE-W17-BOREA-ROUTE-PROGRAM-PLAN.md): the Borea
+// allocation runs 1384-1535 (W17-U took 1384-1401, W17-V
+// 1402-1421, W17-W 1422-1431, W17-X 1432-1451; W17-Y takes
+// 1452-1469 on its parallel branch); 1111 and every earlier
+// documented gap stay empty. Kind names verified unclaimed
+// against origin/main.
+export const W17Z_KIND_DEFS = [
+  ['fareturf', 'floor'],
+  ['farefloor', 'floor'],
+  ['farepine', 'wall'],
+  ['poolpost', 'prop'],
+  ['puddleturf', 'floor'],
+  ['puddlefloor', 'floor'],
+  ['puddlepine', 'wall'],
+  ['shardpost', 'prop'],
+  ['packturf', 'floor'],
+  ['bridgefloor', 'floor'],
+  ['bridgepine', 'wall'],
+  ['driftpost', 'prop'],
+  ['whiteturf', 'floor'],
+  ['whitefloor', 'floor'],
+  ['whitepine', 'wall'],
+  ['gearpost', 'prop'],
+  ['calmturf', 'floor'],
+  ['calmfloor', 'floor'],
+  ['calmpine', 'wall'],
+  ['wardenpost', 'prop'],
+  ['glintfloor', 'floor'],
+  ['glintwall', 'wall'],
+];
+export const W17Z_KIND_CHARS = {};
+W17Z_KIND_DEFS.forEach(([kind], i) => {
+  const ch = String.fromCodePoint(0x1E00 + 1470 + i);
+  W17Z_KIND_CHARS[kind] = ch;
+  TILE_CHARS[ch] = kind;
+});
+export const W17Z_PROP_KINDS = W17Z_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
+export const W17Z_WALL_KINDS = W17Z_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
+export const W17Z_FLOOR_KINDS = W17Z_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
 export const SINNOH_TOWN_GROUND_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg);
 export const SINNOH_TOWN_GROUND2_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg2);
 // TX-3: the 8 gym exteriors by town (original type-accent motifs).

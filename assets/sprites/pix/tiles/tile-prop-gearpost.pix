@@ -1,0 +1,26 @@
+# Wave W17-Z (Route 217): gear post — a climbing-gear marker post below the climb face: a snow-capped post with a coiled rope and a piton resting at its foot, where the design’s picks, ropes and pitons sleep along the path under the holds (the climb face itself — climbwall 7 — stands byte-preserved above it, gate data entire). On white turf (fully opaque, ground baked in) — split from Route 216’s drift posts behind it by purpose entire: those mark moving snow, these mark the climbers’ rest.
+PIX tile-prop-gearpost 16 16
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+aaaaadaabaaaaaaa
+aaaaaaassaaaaaaa
+baaaaaakdaaaaaaa
+aaaadaakdaaaaaaa
+aaaaaaakdadaaaaa
+aaaaaaakdaaaaaaa
+aaaaaaakdaabaaab
+baaaaabkdaaaaaaa
+aaaaaaakdaaaaabb
+aaaaooakdagaaaaa
+baaaooakdaaaaaaa
+aaaaaaddddaabaaa
+aaaaaaaaaaaaaaaa
+aaabaaaaaaaaaaaa
+PAL
+a #eef4f6
+b #dce8ec
+s #f7fbfc
+o #c49a58
+g #9aa4a8
+d #5f5138
+k #7d6a4a

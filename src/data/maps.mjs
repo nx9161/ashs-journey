@@ -1362,6 +1362,29 @@ export const WALKABLE = new Set(['.', ',', 'D', 'E', 'C', 'F', 'J', 'K', '1', '2
   // W17-V 1402-1421, W17-W 1422-1431 and W17-X 1432-1451 on
   // their parallel branches); 1111 stays empty.)
   ...[1452, 1453, 1456, 1457, 1460, 1462, 1463, 1466, 1467]
+    .map((i) => String.fromCodePoint(0x1E00 + i)),
+  // Wave W17-Z: the Borea tranche-6 ground/path/floor chars
+  // (U+1E00+1470.., tiles.mjs W17Z_KIND_DEFS) are walkable —
+  // fareturf/farefloor (Farewell Spring), puddleturf/
+  // puddlefloor (Route 215), packturf/bridgefloor (Route
+  // 216) and whiteturf/whitefloor (Route 217), each swapped
+  // 1:1 from the walkable '_' ground / '.' path chars on its
+  // own route (the snow routes from the walkable frostfloor
+  // ground char), calmturf/calmfloor (Lake Insight), and
+  // glintfloor (Insight Cavern), swapped 1:1 from the
+  // walkable frostfloor char in the cavern, so ground stays
+  // ground and floor stays floor. The tree chars (1472,
+  // 1476, 1480, 1484, 1488), the prop chars (1473, 1477,
+  // 1481, 1485, 1489) and the glintwall wall char (1491,
+  // swapped from icewall, never walkable) are NOT here:
+  // trees, props and walls were never walkable. The mechanic
+  // chars (icefloor, icepool, climbwall) are untouched by
+  // this wave entire. (Indices 1470-1491 per the Borea
+  // program plan; the Borea allocation opened at 1384
+  // (W17-U takes 1384-1401, W17-V 1402-1421, W17-W
+  // 1422-1431, W17-X 1432-1451 and W17-Y 1452-1469 on their
+  // parallel branches); 1111 stays empty.)
+  ...[1470, 1471, 1474, 1475, 1478, 1479, 1482, 1483, 1486, 1487, 1490]
     .map((i) => String.fromCodePoint(0x1E00 + i))]);
 
 // Trainer definitions for the slice.

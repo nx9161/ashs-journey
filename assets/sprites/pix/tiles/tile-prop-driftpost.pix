@@ -1,0 +1,24 @@
+# Wave W17-Z (Route 216): drift post — a drift marker post where the drifts carve into waves: a snow-capped post with one carved drift mound banked at its foot, marking the causeway’s edge where the wind piles the pack (design: drifts carved into waves all along the snow bridge road). On pack turf (fully opaque, ground baked in) — split from the fleet’s marker posts by the mound entire and from Route 217’s gear posts ahead by purpose: these mark where the snow moves, those mark where the climbers rest.
+PIX tile-prop-driftpost 16 16
+daaaaaaaaababaaa
+baaaaaaaaaaadaaa
+aaaabaaaabaaaaaa
+aaaaaabssaaaaaaa
+aaaaaaakdaaaaaaa
+aabaabakdaaaaaaa
+aaaaaabkdaaaaaab
+aaababakdaaaaaaa
+aaaaabdkdaaaaaaa
+adaabaakdaaaaada
+aaabaaakdaaaaaaa
+aabssbakdaaaaaaa
+aabsbbakdaaaaaaa
+aadaadddddaaaaab
+aaaabaaaaaaaaaba
+aaaaaaaaaaaaaabb
+PAL
+a #e9eff3
+b #c3d5df
+s #f7fbfc
+d #5f5138
+k #7d6a4a

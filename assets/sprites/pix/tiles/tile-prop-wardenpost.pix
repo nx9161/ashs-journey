@@ -1,0 +1,25 @@
+# Wave W17-Z (Lake Insight): warden post — a warden’s marker post at the honest-ice crossing’s shore: a snow-capped post flying one small rust pennant, the ice warden’s mark where the crossing is honest (design: the warden keeps the crossing; his tracks cross the preserved ice to this shore). On calm turf (fully opaque, ground baked in) — split from Lake Gallant’s light posts by the pennant entire (those carry a lamp for open water; this carries a flag for ice) and from Route 217’s gear posts behind it by office: those serve climbers, this one serves the lake.
+PIX tile-prop-wardenpost 16 16
+aaaaaaaaaaaaaaaa
+baaaaaabaabaadaa
+aaaaaaaaaaaabaaa
+aaaadaassabaaaaa
+aaaaaabkdrraaaba
+aaaaaaakdraaaaaa
+aaaaaaakdadaaaaa
+aaaaaaakdaaddaaa
+abaaaaakdaaabaaa
+baaaaaakdababaaa
+abaaaaakdaabaaaa
+aaaaaaakddaaabaa
+adaaaabkdaaabaaa
+aaaaaaddddaaaaaa
+aaaaaaaaaaaaaaaa
+aaaaaaaaabaaaaaa
+PAL
+a #f2f7f3
+b #e0ede3
+s #f7fcf9
+r #c4553b
+d #5f5138
+k #7d6a4a

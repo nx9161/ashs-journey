@@ -1,0 +1,26 @@
+# Wave W17-Z (Route 215): shard post — a fallen-shard marker post at the Shardfall road’s north mouth: a weathered post carrying a fan of three small purple meteor shards at its head, marking where the crater field’s falls begin (design: fallen purple shards rising through the grass at the road’s Shardfall end — the field itself is beyond the posts, the posts stand on the road). On puddle turf (fully opaque, ground baked in) — split from Route 214’s meteor posts behind it by the fan entire: those carry one shard for a beginning, these carry three for a fall zone.
+PIX tile-prop-shardpost 16 16
+aaaaaaaaaaaaaaba
+aaaaaaapaasaaaaa
+aaaabavavaaabaaa
+bbaaaapvpbaaaaab
+aaaaaaakdaasaaaa
+aaaaaaakdaaaaaaa
+aaaaaaakdabaaaaa
+bbsaaaskdbaabaaa
+abaaaaakdaaaaaba
+aaaaaaakdaaaaaaa
+aaabaaakdaaaaaas
+sbaaaaakdbaaaaaa
+aaaaaaakdaaaaaaa
+abaaaaddddaaaaba
+aaaaaaababaabbaa
+aaasbabaababbaaa
+PAL
+a #679c4c
+b #578a3e
+s #cfe4b0
+v #7a6cc4
+p #b7aee0
+d #6e5c40
+k #8a7a5c
