@@ -169,10 +169,9 @@ const VAL = await import(join(ROOT, 'api/_lib/validator.mjs'));
 }
 
 // -- CAPT FRONTIER placement + Pallet connectivity (pure, sweep-style) --
-// W1 resync: A20/A21 must probe the SHIPPED Dawnwick. The raw MAPS import
-// above is maps.mjs's stale 16x11 pallet copy; the game folds MAPS2/MAPS3
-// over it (src/data/merge.mjs, module-order), so maps3's 20x14 pallet is
-// the merge winner the bundle actually ships.
+// W1 resync: A20/A21 must probe the SHIPPED Dawnwick. (Reconcile R1 later
+// retired maps.mjs's stale 16x11 pallet copy outright; maps3's 20x14 pallet
+// is now the single definition — the merge winner the bundle ships.)
 const { MAPS3 } = await import(join(ROOT, 'src/data/maps3.mjs'));
 {
   const capt = TALE_NPCS.find((n) => n.name === 'CAPT FRONTIER');

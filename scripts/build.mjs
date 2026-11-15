@@ -215,6 +215,16 @@ function fail(msg) { console.error('BUILD FAIL: ' + msg); process.exit(1); }
 export function validateData() {
   // Import the raw modules directly (node ESM) for validation.
   return import(path.join(SRC, 'data', 'maps.mjs')).then(async ({ MAPS, TRAINERS, WALKABLE }) => {
+    // Warp targets resolve against the FOLDED map universe (the same
+    // Object.assign fold merge.mjs performs), not maps.mjs alone:
+    // Reconcile R1 retired the maps.mjs corpses of pallet/viridian/
+    // pewter/center, whose single definitions now live in later packs —
+    // a maps.mjs-only target table reports them unknown.
+    const FOLDED = { ...MAPS };
+    for (let i = 2; i <= 9; i++) {
+      const mod = await import(path.join(SRC, 'data', `maps${i}.mjs`));
+      Object.assign(FOLDED, mod[`MAPS${i}`]);
+    }
     const { SPECIES } = await import(path.join(SRC, 'data', 'species.mjs'));
     const { MOVES } = await import(path.join(SRC, 'data', 'moves.mjs'));
     const { ITEMS } = await import(path.join(SRC, 'data', 'items.mjs'));
@@ -232,7 +242,7 @@ export function validateData() {
       for (const r of m.rows) if (r.length !== w) fail('map ' + id + ': ragged rows');
       // warp targets exist and land on walkable tiles
       for (const wp of m.warps) {
-        const to = MAPS[wp.to.map];
+        const to = FOLDED[wp.to.map];
         if (!to) fail('map ' + id + ': warp to unknown map ' + wp.to.map);
         const ch = to.rows[wp.to.y] && to.rows[wp.to.y][wp.to.x];
         if (!WALKABLE.has(ch)) fail('map ' + id + ': warp lands on non-walkable tile ' + ch + ' in ' + wp.to.map);

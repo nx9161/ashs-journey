@@ -33,6 +33,14 @@
 //
 // Census at W3 baseline (post-split): 484 definitions, 432 unique ids,
 // 43 duplicated ids (14 identical / 29 drifted).
+// Reconcile R1 (2026-11-15): league, pallet, viridian, pewter and center
+// reconciled to single definitions — 477 definitions, 38 duplicated ids
+// (14 identical / 24 drifted). vermilion was found to be a spread-
+// derivation chain (maps2 base -> maps4/maps5 patches -> maps6 winner),
+// so under the Director's derivation-base ruling (R2/newisland precedent)
+// it stands as a frozen layered definition, pinned below — NOT deleted.
+// Folded view proven byte-identical across the change
+// (your_files/reconcile-r1).
 
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -63,7 +71,7 @@ const fnv = (s) => { let h = 0x811c9dc5; for (let i = 0; i < s.length; i++) { h 
 
 // ---------- 1. census ----------
 const totalDefs = [...byId.values()].reduce((a, v) => a + v.length, 0);
-ok('census: 484 map definitions across maps.mjs…maps9.mjs', totalDefs === 484, `got ${totalDefs} — a wave that adds/removes a definition updates this line in the same commit`);
+ok('census: 477 map definitions across maps.mjs…maps9.mjs', totalDefs === 477, `got ${totalDefs} — a wave that adds/removes a definition updates this line in the same commit`);
 ok('census: 432 unique map ids after the split', byId.size === 432, `got ${byId.size}`);
 
 // ---------- 2. the victory-road split is permanent ----------
@@ -100,7 +108,6 @@ ok('chain: victory-road -> r223 + pokemon-league (4 returns)',
 // Burn-down rule: a commit that reconciles or deliberately edits a copy
 // updates that id's line here in the same commit. Nothing else may move it.
 const BASELINE = {
-  "center": ['D', 'maps.mjs:bb3ce9d4', 'maps3.mjs:a8032bc0'],
   "ceruleancave": ['D', 'maps2.mjs:fdc075ab', 'maps3.mjs:46e003ef'],
   "cinnabar": ['I', 'maps2.mjs:a0ef07ac', 'maps3.mjs:a0ef07ac'],
   "dojo": ['D', 'maps2.mjs:767d8216', 'maps3.mjs:97e14c03'],
@@ -116,11 +123,8 @@ const BASELINE = {
   "hideout": ['D', 'maps2.mjs:ce1ebeed', 'maps4.mjs:04c239d9'],
   "indigo": ['I', 'maps2.mjs:7f68717e', 'maps3.mjs:7f68717e'],
   "lavender": ['I', 'maps2.mjs:86ed9785', 'maps3.mjs:86ed9785'],
-  "league": ['D', 'maps2.mjs:426a8945', 'maps3.mjs:9388d38b'],
   "mansion": ['D', 'maps2.mjs:6036b681', 'maps3.mjs:0b89e84d'],
   "newisland": ['D', 'maps2.mjs:06f895d7', 'maps3.mjs:87e908ce', 'maps4.mjs:0a2b629f'],
-  "pallet": ['D', 'maps.mjs:d450da1c', 'maps2.mjs:a59018a8', 'maps3.mjs:576cb57e'],
-  "pewter": ['D', 'maps.mjs:f1285ecb', 'maps2.mjs:5f07e365'],
   "powerplant": ['D', 'maps2.mjs:7ce38a29', 'maps3.mjs:f19569a9'],
   "rocktunnel": ['D', 'maps2.mjs:d9f17c08', 'maps3.mjs:3ede7ad3'],
   "route10": ['I', 'maps2.mjs:99d8bd20', 'maps3.mjs:99d8bd20'],
@@ -140,13 +144,18 @@ const BASELINE = {
   "stanne": ['D', 'maps2.mjs:24a81714', 'maps4.mjs:99facee4'],
   "tower1": ['I', 'maps2.mjs:a29e8705', 'maps3.mjs:a29e8705'],
   "tower2": ['D', 'maps2.mjs:67e834db', 'maps3.mjs:209d7be2'],
+  // vermilion: FROZEN DERIVATION CHAIN (Reconcile R1, Director ruling) —
+  // maps2's literal is the derivation base: MAPS4.vermilion spreads it
+  // (+SAILOR BRINE, +ev_movie_arrive), MAPS5 spreads maps4 (+CAPT AMBER),
+  // MAPS6 spreads maps5 (+CAPT EASTBOUND) and wins the fold. The earlier
+  // copies are load-bearing layers, not dead duplicates; do not delete
+  // them without materializing the chain first.
   "vermilion": ['D', 'maps2.mjs:481e21e1', 'maps4.mjs:65ebc25b', 'maps5.mjs:8da66e0f', 'maps6.mjs:f9470985'],
   "victoryroad": ['D', 'maps2.mjs:908dcf3c', 'maps3.mjs:835ebd37'],
-  "viridian": ['D', 'maps.mjs:5513301d', 'maps2.mjs:c71e86c5', 'maps3.mjs:ff1930bf'],
 };
 
 const dupNow = new Map([...byId.entries()].filter(([, v]) => v.length > 1));
-ok('ratchet: duplicated-id set is exactly the W3 baseline (43 ids)',
+ok('ratchet: duplicated-id set is exactly the baseline (38 ids after Reconcile R1)',
   eq([...dupNow.keys()].sort(), Object.keys(BASELINE).sort()),
   `added: ${[...dupNow.keys()].filter((id) => !BASELINE[id]).join(',') || 'none'} · removed: ${Object.keys(BASELINE).filter((id) => !dupNow.has(id)).join(',') || 'none'}`);
 const identicalNow = [];
