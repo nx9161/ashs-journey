@@ -68,4 +68,15 @@ export const PANELS = {
   'crossing-hoenn': { art: 'panel-crossing-hoenn' },
   'crossing-frontier': { art: 'panel-crossing-frontier' },
   'crossing-sinnoh': { art: 'panel-crossing-sinnoh' },
+  // W10-C T2 — endings (Class F): the champion seal panel (a {panel}
+  // step in ev_champion) + the six ARC COMPLETE card panels (named
+  // from data fields — each playable arc record's cardPanel — and
+  // resolved by arcCardPanel at the showArcCompleteCard seam).
+  'champion-chamber': { art: 'panel-champion-chamber' },
+  'card-kanto': { art: 'panel-card-kanto' },
+  'card-orange': { art: 'panel-card-orange' },
+  'card-johto': { art: 'panel-card-johto' },
+  'card-hoenn': { art: 'panel-card-hoenn' },
+  'card-frontier': { art: 'panel-card-frontier' },
+  'card-sinnoh': { art: 'panel-card-sinnoh' },
 };

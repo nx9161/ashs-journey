@@ -73,6 +73,7 @@ export const ARCS = [
     completionKey: 'kanto', completionFlag: 'champion',
     status: 'shipped', future: false,
     hookGiver: null, embarkPort: null, arrivalMap: null, home: 'pallet',
+    cardPanel: 'card-kanto',
     summaryLines: [
       'Crown League — CHAMPION.',
       'Eight badges, one storm over Exile Isle, and a final against the rival who started it all. The Plateau wrote your team into its light.',
@@ -88,6 +89,7 @@ export const ARCS = [
     completionKey: 'orange', completionFlag: 'orange_champion',
     status: 'next', future: false,
     hookGiver: 'hawthorn', embarkPort: 'vermilion', arrivalMap: 'valencia', home: 'pallet',
+    cardPanel: 'card-orange',
     summaryLines: [
       'Amber League — WINNER.',
       'Four island badges and a champion\'s battle under southern stars. The Winner\'s Trophy is yours — and so is the strange ball that started the voyage.',
@@ -111,6 +113,7 @@ export const ARCS = [
     completionKey: 'johto', completionFlag: 'johto_complete',
     status: 'shipped', future: false,
     hookGiver: 'hawthorn', embarkPort: 'pallet', arrivalMap: 'newbark', home: 'pallet',
+    cardPanel: 'card-johto',
     summaryLines: [
       'Lastlight Conference — HONOURS.',
       'Eight badges, the beasts woken and quieted, and the rivalry settled at last in the conference fire. The road home feels shorter than the road out.',
@@ -134,6 +137,7 @@ export const ARCS = [
     completionKey: 'hoenn', completionFlag: 'hoenn_complete',
     status: 'shipped', future: false,
     hookGiver: 'hawthorn', embarkPort: 'vermilion', arrivalMap: 'littleroot', home: 'pallet',
+    cardPanel: 'card-hoenn',
     summaryLines: [
       'Perennial Conference — HONOURS.',
       'Two storms called and answered, eight badges earned, and a conference run that ended narrow and proud. The sea air follows you home.',
@@ -157,6 +161,7 @@ export const ARCS = [
     completionKey: 'frontier', completionFlag: 'frontier_complete',
     status: 'shipped', future: false,
     hookGiver: 'scott', embarkPort: 'pallet', arrivalMap: 'frontierhub', home: 'pallet',
+    cardPanel: 'card-frontier',
     summaryLines: [
       'Trial Grounds — CONQUERED.',
       'Seven Symbols at the Gold standard, and a rematch years in the making finally won. The Frontier salutes you.',
@@ -180,6 +185,7 @@ export const ARCS = [
     completionKey: 'sinnoh', completionFlag: 'sinnoh_complete',
     status: 'shipped', future: false,
     hookGiver: 'gary', embarkPort: 'vermilion', arrivalMap: 'sandgem', home: 'pallet',
+    cardPanel: 'card-sinnoh',
     summaryLines: [
       'Lily of the Valley Conference — HONOURS.',
       'Eight badges, a god unchained and answered, and the only victory anyone took from the conference\'s darkest trainer. History will remember the attempt — and the NOCTARCH that fell.',

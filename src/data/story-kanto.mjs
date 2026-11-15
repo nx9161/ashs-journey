@@ -377,6 +377,7 @@ export const EVENTS = {
     { battle: 'gary_champion' },
     { say: ['...Yeah. Yeah, okay. It had to be you, did it not. Champion. Ha! Say it back to me when we are old, {player}. I will still be one win behind, and twice as loud about it.'], who: 'VALE' },
     { sayVar: { npc: 'gary', scene: 'championAfter', who: 'VALE' } },
+    { panel: 'champion-chamber' },
     { flag: 'champion' },
     { questDone: 'q_champion' },
     { ending: true },
