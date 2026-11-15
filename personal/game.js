@@ -5312,6 +5312,82 @@ W17S_KIND_DEFS.forEach(([kind], i) => {
 const W17S_PROP_KINDS = W17S_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
 const W17S_WALL_KINDS = W17S_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
 const W17S_FLOOR_KINDS = W17S_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
+// Wave W17-T (Route Build Program, Maris Tranche 9 — the last
+// quiet water, the Driftlog corridor, the current roads home):
+// the Maris finale. All five maps are defined once in
+// maps7.mjs (no dual copies in Maris, so no registry re-pins
+// arise). All five are SEA LANES: sand -> own shore sand, rock
+// -> own rock ONLY (the R40/R41 discipline), NO props; every
+// water cell, landing and waterglow stands byte-preserved.
+// Route 130 "Quiet Water" (1374-1375): quietsand a
+// glass-clear shallows sand (garden flecks — the CORALET
+// gardens show through the water in the design, water
+// dressing, nothing planted), quietrock a confluence rock;
+// water 404 + waterglow 21 byte-preserved entire, coral 5 +
+// lifering 1 byte-preserved; only sand 7 + rock 9 convert.
+// Route 131 "Driftlog Corridor" (1376-1377): moorsand a
+// mooring-shore sand (rope-worn flecks), moorrock a tower-isle
+// rock; water 390 + waterglow 19 byte-preserved entire, coral
+// 1 byte-preserved; the 2 Tempest Tower mouth cells stand on
+// cavefloor ('L' char) + ancientpillar 2 — the tower isle's
+// shipped dressing, byte-preserved, never converted; only
+// sand 24 + rock 8 convert. Route 132 "First Current"
+// (1378-1379): streamsand a current-edge sand (foam-streak
+// flecks), streamrock a channel-edge rock; water 329 +
+// waterglow 16 byte-preserved entire and the CURRENT BANDS
+// (82 cells) byte-identical entire — `current` is a movement
+// mechanic, the Frost Path slide-floor precedent in water
+// (Director ruling #3); coral 7 byte-preserved; only sand 9 +
+// rock 4 convert. Route 133 "Middle Current" (1380-1381):
+// rapidsand a rapid-edge sand (harder foam flecks),
+// rapidrock a rapid channel rock (longer joints); water 328 +
+// waterglow 19 + current 77 byte-identical entire; coral 5 +
+// lifering 1 byte-preserved; only sand 6 + rock 11 convert.
+// Route 134 "Last Current" (1382-1383): gatesand a
+// delivery-channel sand, gaterock a gate rock at the falls'
+// foot register (Perennial's falls are the town-side frame,
+// byte-preserved); water 327 + waterglow 20 + current 75
+// byte-identical entire; coral 5 + lifering 1 byte-preserved;
+// only sand 7 + rock 12 convert. The three current roads
+// split by shore register + speed read (the plan's twin
+// discipline): 132 first (foam-streaked, gentle), 133 fiercer
+// (harder foam, longer joints), 134 converging (the delivery
+// channel at the falls' foot); R130 is the last quiet water
+// and R131 the moored corridor — five lanes, five registers,
+// none a twin of any of the 82 prior route kits. Encounter
+// tables (0.10 surf set) are byte-identical. Sand kinds are
+// 'floor' class (the shipped sand char was walkable; the
+// swaps are 1:1), rock kinds 'wall' class (never walkable).
+// Indices 1374-1383 per the program plan
+// (WAVE-W17-MARIS-ROUTE-PROGRAM-PLAN.md) — the Maris
+// allocation closes at 1383 (program total 127 kinds,
+// 1257-1383): W17-L took 1257-1276, W17-M 1277-1286, W17-N
+// 1287-1303, W17-O 1304-1321, W17-P 1322-1339, W17-Q
+// 1340-1355, W17-R 1356-1363, and W17-S takes 1364-1373 on
+// its parallel branch; 1111 and every earlier documented gap
+// stay empty. Kind names verified unclaimed against
+// origin/main. Chars U+1E00+1374..
+const W17T_KIND_DEFS = [
+  ['quietsand', 'floor'],
+  ['quietrock', 'wall'],
+  ['moorsand', 'floor'],
+  ['moorrock', 'wall'],
+  ['streamsand', 'floor'],
+  ['streamrock', 'wall'],
+  ['rapidsand', 'floor'],
+  ['rapidrock', 'wall'],
+  ['gatesand', 'floor'],
+  ['gaterock', 'wall'],
+];
+const W17T_KIND_CHARS = {};
+W17T_KIND_DEFS.forEach(([kind], i) => {
+  const ch = String.fromCodePoint(0x1E00 + 1374 + i);
+  W17T_KIND_CHARS[kind] = ch;
+  TILE_CHARS[ch] = kind;
+});
+const W17T_PROP_KINDS = W17T_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
+const W17T_WALL_KINDS = W17T_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
+const W17T_FLOOR_KINDS = W17T_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
 const SINNOH_TOWN_GROUND_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg);
 const SINNOH_TOWN_GROUND2_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg2);
 // TX-3: the 8 gym exteriors by town (original type-accent motifs).
@@ -119781,6 +119857,186 @@ const ART = {
     "abaabaaabaaadaaa",
     "dddddddddddddddd"
   ] },
+  "tile-quietsand": { w: 16, h: 16, pal: {"a":"#e6d9ae","b":"#d3c28e","g":"#8fae6d","p":"#d99a8a"}, rows: [
+    "aaaaagaaaaaaaaaa",
+    "aaaaaaaaaaaaabba",
+    "apaaaaaaaaaabaga",
+    "aaaaaaaaaaaaaaaa",
+    "gbgaaaaaabaaabaa",
+    "ababaaaaaaaaapaa",
+    "aaapaaaaaaagaaap",
+    "aaaaaaaaaapaaaaa",
+    "aaaaaaaaaaaaaaaa",
+    "aabaaaaaaaaagaaa",
+    "aaaaabaabgabbgaa",
+    "aaaaaaaababaaaba",
+    "aaaaaaaababaaaaa",
+    "agaaaaaaaaaaaaaa",
+    "aaabgababaaaaaaa",
+    "aaaaaaaaaaaaaaaa"
+  ] },
+  "tile-quietrock": { w: 16, h: 16, pal: {"w":"#567cbd","x":"#476baa","y":"#7093c7","z":"#4e4a44","c":"#948b7f","m":"#6e675e","f":"#c6d6e9"}, rows: [
+    "wwwwywwwwwwwwwww",
+    "wwcxwwwwwywwcwww",
+    "wwwwwwwywwxwwyww",
+    "wwywwwmmzcwwxwww",
+    "wxwwzcmcmczmwwww",
+    "wwwcmmmccmzzcwwx",
+    "wwmmcmmmzzcmmmww",
+    "wwzmcmmczzzmczww",
+    "wwzmccmmmzmzzcxw",
+    "wwwmmccmzmmcmwww",
+    "wwwzczcmcmzzzwww",
+    "wwwwmcmmmzzmwwwy",
+    "wwffffffffffffww",
+    "wwwwwfwwwwfwxwww",
+    "xwwwwwwwwwwwwwww",
+    "wwywwwywwwwwwwww"
+  ] },
+  "tile-moorsand": { w: 16, h: 16, pal: {"a":"#dcc493","b":"#c6ab74","d":"#a8895a"}, rows: [
+    "aaaaaadaaaaaaaaa",
+    "aabaaaaababaaaba",
+    "baaaaaaaaaabbaaa",
+    "baaaadaabbaaaaaa",
+    "aaaaaaaaaaadaaaa",
+    "dddddaddddddaaaa",
+    "aaaaaaabaaabbaab",
+    "aaaaaaaaaaaabaaa",
+    "aaaaaabdaaababab",
+    "aabaaaaaaaaaaaad",
+    "aaaddaddddaaddba",
+    "aaaaaaaaaaabaaab",
+    "aaaaaabaabaaadad",
+    "aaaaaaaaaaaaaaaa",
+    "aabaaaaaaaabaaaa",
+    "aaaaabaaaaaaaaaa"
+  ] },
+  "tile-moorrock": { w: 16, h: 16, pal: {"w":"#567cbd","x":"#476baa","y":"#7093c7","z":"#454850","c":"#878d96","m":"#5f646d","f":"#c6d6e9"}, rows: [
+    "wwwwwywwwwxwwwww",
+    "wxwwwwwwwwwwwwww",
+    "wwwwwwwwwwywwcww",
+    "ywwwwwzzcmwwwwwy",
+    "xwywmzzzmmmmwwww",
+    "wwwcmzzczmzmmwww",
+    "wwmmmcmcmmmcmmww",
+    "wxcmzmmzmmzzmmww",
+    "wwczzczzmmmmmmww",
+    "wwwmzcmzzmmzmwyw",
+    "ywwczmzmzmmmmwyw",
+    "ywwwzmmmmmmmwwww",
+    "wwffffffffffffww",
+    "wwwwwfwwwwfwwwwc",
+    "wwwwwcwxwwwwwwww",
+    "xcxwwwwwwwwwwwww"
+  ] },
+  "tile-streamsand": { w: 16, h: 16, pal: {"a":"#e0d0a0","b":"#cbb582","s":"#f4eedd"}, rows: [
+    "aaaaaaaaaaaababa",
+    "asaaaaaabbabaaaa",
+    "aaaaaaaaaaaaaasa",
+    "aaaaaaabaaaaaaaa",
+    "ssssssaassssssaa",
+    "aaaaaaaabaaaaaaa",
+    "aaaaaaaaababaaaa",
+    "aaaasaaaaaaaaaaa",
+    "aaaaaaaaabbaaaba",
+    "ssaaassbssassssa",
+    "basaaaaaaaaabbaa",
+    "aaasaaaaaabaaabb",
+    "bbbsaaaaaaaaasas",
+    "ssssssaaaaassaba",
+    "aaabaasaasaaaaas",
+    "aaaabaaaaaaaaaaa"
+  ] },
+  "tile-streamrock": { w: 16, h: 16, pal: {"w":"#567cbd","x":"#476baa","y":"#7093c7","z":"#4c4c48","c":"#8f8f83","m":"#6a6a62","f":"#c6d6e9"}, rows: [
+    "wwwwwxwwwxwwwwww",
+    "cywwwwyywwywwwwc",
+    "wwxwwwwwwwwywwww",
+    "wwwwywzmczwywwww",
+    "xwwxmmzcmzmmwwwx",
+    "ywwmczcmmzmmzcww",
+    "wxczczczmzcmzzww",
+    "wwmmmmmzzmmczcww",
+    "xwmmmczmmmzzmzww",
+    "wwwcmzmmzmzmcwyw",
+    "wwxmmcmmmmzmzwww",
+    "wywwmmmmmcccwwww",
+    "wxffxfffffffffww",
+    "wwxwwfwwwwfwwwxw",
+    "xwwwwxwwwxwwwwww",
+    "wwwwwwwwwwwwwwyw"
+  ] },
+  "tile-rapidsand": { w: 16, h: 16, pal: {"a":"#e4d6ac","b":"#cdbb8a","s":"#f8f3e4"}, rows: [
+    "abasaaaaaaaaasas",
+    "aaabaaabaaaaaaab",
+    "ssaaaabaaaaaaaaa",
+    "ssssasssassssaas",
+    "aaaaaaaaaaaaabaa",
+    "aaasaabbaaabaaaa",
+    "aaaaasaaaabaaaaa",
+    "saabssssssaasssa",
+    "aaaaaabaaaaabaaa",
+    "aaaabaaaaaababas",
+    "aaaaaaaasaaaaaaa",
+    "saaasaaassssaasa",
+    "aaaaaaaaaaaaaaab",
+    "aaabaabbaabaaaaa",
+    "saasbasasassaasb",
+    "aaaaaaaaaaaaaaaa"
+  ] },
+  "tile-rapidrock": { w: 16, h: 16, pal: {"w":"#567cbd","x":"#476baa","y":"#7093c7","z":"#3f444c","c":"#7d848d","m":"#596068","f":"#c6d6e9"}, rows: [
+    "wwwwwwwwwwwwxwww",
+    "wwwywwwwwwwwwwww",
+    "wwwwwwwwwcwwwwww",
+    "wcwwxwzmmmwwwwww",
+    "wwwwmzmmmmmcwwww",
+    "cwwmmmmzccmcmwww",
+    "xwmzzmcmzzzmzcyw",
+    "wwzzzzzzzzzzzzww",
+    "wwzmzzmzcmzcmzwx",
+    "wwwzczzzcmmmmwww",
+    "wwwzzzzzzzzzzwww",
+    "wwwwmmmmmczzwwww",
+    "wwffffwwfffywfww",
+    "wwwwwfwwwwfwwwww",
+    "wywwwwwwywwwwwwx",
+    "wwwwwwwwwwwcwwww"
+  ] },
+  "tile-gatesand": { w: 16, h: 16, pal: {"a":"#e8d5a4","b":"#d2ba80","p":"#f6ecd2"}, rows: [
+    "aaaaaaaapabpaaaa",
+    "baaaaaaaaaaaabpa",
+    "aaaaaaaaaaaaabaa",
+    "bpaaaaaaaaabbaaa",
+    "aaaaaaaaaababbab",
+    "apaaaaaaaaaaabba",
+    "abaaaaaaaaaaaaaa",
+    "aaaaaaabpbapaaaa",
+    "aaaaaaaaaabbbbap",
+    "abaaabaaabaaapba",
+    "aaaaaaaapabbbaba",
+    "aaaaaaaaaaaaaaaa",
+    "aabaaaapaaabpaaa",
+    "apaaaaaaaababaaa",
+    "aaaaaaaaababaaaa",
+    "aaaaaabbaaaaaaba"
+  ] },
+  "tile-gaterock": { w: 16, h: 16, pal: {"w":"#567cbd","x":"#476baa","y":"#7093c7","z":"#55534e","c":"#a09c90","m":"#76736b","f":"#c6d6e9","p":"#eef0e6"}, rows: [
+    "ywwwxywwwwwwwwww",
+    "ywwwwwwwwwwwywww",
+    "wwwwwcwwwwwxwwww",
+    "wwwwwwzppcwwwwww",
+    "wwwwpppppppzwpww",
+    "wwwmmmpcmzzzmwww",
+    "ycmmmmcmmzmmzmww",
+    "yxmmcmmczmmzmzww",
+    "wwmzmmzzmmmmzzww",
+    "wwwzmmzcmmzcmwww",
+    "wwwzzmmzmmmzzwww",
+    "wwwwmzmmzmczwwww",
+    "wwfffffwwfwwffww",
+    "wwwwwfwwwwfwwwww",
+    "wwwwwwwwwwwxwwyw",
+    "wwwwwywwwwxxwwww"
+  ] },
   "partner-back-bob": { base: "partner-back", w: 64, h: 64, pal: {}, shiftY: 2 },
   "partner-front-bob": { base: "partner-front", w: 64, h: 64, pal: {}, shiftY: 2 },
   "abomasnow-back-bob": { base: "abomasnow-back", w: 64, h: 64, pal: {}, shiftY: 2 },
@@ -125278,6 +125534,9 @@ for (const k of W17R_FLOOR_KINDS) TILE_ART[k] = 'tile-' + k;
 for (const k of W17S_PROP_KINDS) TILE_ART[k] = 'tile-prop-' + k;
 for (const k of W17S_WALL_KINDS) TILE_ART[k] = 'tile-' + k;
 for (const k of W17S_FLOOR_KINDS) TILE_ART[k] = 'tile-' + k;
+for (const k of W17T_PROP_KINDS) TILE_ART[k] = 'tile-prop-' + k;
+for (const k of W17T_WALL_KINDS) TILE_ART[k] = 'tile-' + k;
+for (const k of W17T_FLOOR_KINDS) TILE_ART[k] = 'tile-' + k;
 // Premium+ W6 (TX-3/PL-1): door-open frames, authored in TX-3 for every
 // door kind. The warp-fade engine that plays them lands in W7 — W6
 // wires the frames (this registry + cache.doorOpen + doorOpenCanvas)
@@ -127534,6 +127793,14 @@ function resolveTileLayers(cache, kind, x, y, kindAt, t, phase, mapId) {
     case 'kelprock':
     case 'sunkrock':
     case 'leerock':
+    // Wave W17-T: the Maris tranche-9 sea rocks composite over
+    // their ground the same way (all arts are fully opaque —
+    // each lane's rock bakes in the sea it stands in).
+    case 'quietrock':
+    case 'moorrock':
+    case 'streamrock':
+    case 'rapidrock':
+    case 'gaterock':
     // Wave T17: the radio mast composites over its compound grass too.
     case 'radiomast': {
       // Object tiles carry transparent surrounds (Wave 1): lay the ground
@@ -135159,6 +135426,24 @@ const WALKABLE = new Set(['.', ',', 'D', 'E', 'C', 'F', 'J', 'K', '1', '2', 'V',
   // 1304-1321, W17-P 1322-1339, W17-Q 1340-1355 and W17-R
   // takes 1356-1363 on its parallel branch; 1111 stays empty.)
   ...[1364, 1366, 1368, 1370, 1372]
+    .map((i) => String.fromCodePoint(0x1E00 + i)),
+  // Wave W17-T: the Maris tranche-9 shore chars (U+1E00+1374..,
+  // tiles.mjs W17T_KIND_DEFS) are walkable — quietsand (Route
+  // 130), moorsand (Route 131), streamsand (Route 132),
+  // rapidsand (Route 133) and gatesand (Route 134), each
+  // swapped 1:1 from the walkable shipped sand char, so shore
+  // stays shore. The rock chars (1375 quietrock, 1377
+  // moorrock, 1379 streamrock, 1381 rapidrock, 1383 gaterock,
+  // swapped from the 'R' rock char) are NOT here: rocks were
+  // never walkable. The current bands on Routes 132-134 are
+  // the shipped `current` kind — mechanic data, byte-identical,
+  // untouched by this wave. (Indices 1374-1383 per the Maris
+  // program plan — the Maris allocation closes at 1383;
+  // W17-L took 1257-1276, W17-M 1277-1286, W17-N 1287-1303,
+  // W17-O 1304-1321, W17-P 1322-1339, W17-Q 1340-1355, W17-R
+  // 1356-1363 and W17-S takes 1364-1373 on its parallel
+  // branch; 1111 stays empty.)
+  ...[1374, 1376, 1378, 1380, 1382]
     .map((i) => String.fromCodePoint(0x1E00 + i))]);
 
 // Trainer definitions for the slice.
@@ -161708,19 +161993,19 @@ const MAPS7 = {
     "rows": [
       "~~~~~~~~~~~~~~~~~~~~~~~~~~~~",
       "~~~~~~~Ā~~~~~~~~Ā~~~~~~~~~~~",
-      "~R~~Ā~~~~Ā~~~~R~R~~~Ā~~~~ẙ~~",
-      "~~ẙ~ṃ~~~~~~~~~~ẞ~~~~Ā~~~~~~~",
-      "~~Ā~~~ẞ~~~ẞ~~~~~~~~~Ā~~~~~~~",
-      "~~~S~~~~R~ẞ~~~~ẙ~R~~~~~~~~~~",
+      "~⍟~~Ā~~~~Ā~~~~⍟~⍟~~~Ā~~~~ẙ~~",
+      "~~ẙ~ṃ~~~~~~~~~~⍞~~~~Ā~~~~~~~",
+      "~~Ā~~~⍞~~~⍞~~~~~~~~~Ā~~~~~~~",
+      "~~~S~~~~⍟~⍞~~~~ẙ~⍟~~~~~~~~~~",
       "~~~~~~~~~~~~~~~~~~~~~~Ā~ẙ~ẙ~",
       "~~~~~~~~~~~~~~~~~~~~Ā~~~~~~~",
-      "~~Ā~~~~~~~~~~~~~~~ĀR~~~~~~~~",
-      "~~~~~~Ā~~~~~Ā~~~~~~~~~R~ĀĀ~~",
-      "~~~~~~~~~~~~~ẞ~~~R~~~~~~~~~~",
-      "~~ẞ~~~~~~~~~~~~~~~~~~~~~~~~~",
-      "~~~ẞ~~~~~~~~~Ā~~~~~~~~~~~~Ā~",
+      "~~Ā~~~~~~~~~~~~~~~Ā⍟~~~~~~~~",
+      "~~~~~~Ā~~~~~Ā~~~~~~~~~⍟~ĀĀ~~",
+      "~~~~~~~~~~~~~⍞~~~⍟~~~~~~~~~~",
+      "~~⍞~~~~~~~~~~~~~~~~~~~~~~~~~",
+      "~~~⍞~~~~~~~~~Ā~~~~~~~~~~~~Ā~",
       "~~~~~~~~~~~~~~~~~~~~~~~~~~~~",
-      "~~~~~~~Ā~~R~~~~~~Ā~~Ā~~~~~~~",
+      "~~~~~~~Ā~~⍟~~~~~~Ā~~Ā~~~~~~~",
       "~~~~~~~~~~~~~~~~~~~~~~~~~~~~",
     ],
     "warps": [
@@ -161747,20 +162032,20 @@ const MAPS7 = {
     "weather": "clear",
     "rows": [
       "~~~~~~~~~~~~~~~~~~~~~~~~~~~~",
-      "~~~Ā~~~~R~~~~~~~~~~~~~~~~~~~",
-      "~ẞ~~~~~R~~~~~~~~~~~ẙ~~~~~~~~",
-      "~Ā~~~~R~~~~~~~~R~~~~~~~~~~~~",
-      "~~~~Ā~~~~~~~ĀĀẞ~~~~ẞẞẞẞẞẞ~~~",
-      "~~~S~~~~~~~~~~Ā~~~~ẞẞLLẞẞ~~~",
-      "~~~~~~~~~~~~Ā~~~~~~ẞᾓẞẞᾓẞĀ~~",
-      "~Ā~~~~~~Ā~~~~~~~~~~ẞSẞẞẞẞ~~~",
-      "~~~~~~~~~~~~~~~R~~ẞ~~~~~~~~~",
-      "~~~~~~~~~~~~~~~~~~~~~~~~~R~~",
-      "~~~Ā~~~~~~~~~~~~~~~~~~~~~~ẞ~",
-      "~~R~~~~~~~~~~~~ĀĀ~~~~~~~~~~~",
+      "~~~Ā~~~~⍡~~~~~~~~~~~~~~~~~~~",
+      "~⍠~~~~~⍡~~~~~~~~~~~ẙ~~~~~~~~",
+      "~Ā~~~~⍡~~~~~~~~⍡~~~~~~~~~~~~",
+      "~~~~Ā~~~~~~~ĀĀ⍠~~~~⍠⍠⍠⍠⍠⍠~~~",
+      "~~~S~~~~~~~~~~Ā~~~~⍠⍠LL⍠⍠~~~",
+      "~~~~~~~~~~~~Ā~~~~~~⍠ᾓ⍠⍠ᾓ⍠Ā~~",
+      "~Ā~~~~~~Ā~~~~~~~~~~⍠S⍠⍠⍠⍠~~~",
+      "~~~~~~~~~~~~~~~⍡~~⍠~~~~~~~~~",
+      "~~~~~~~~~~~~~~~~~~~~~~~~~⍡~~",
+      "~~~Ā~~~~~~~~~~~~~~~~~~~~~~⍠~",
+      "~~⍡~~~~~~~~~~~~ĀĀ~~~~~~~~~~~",
       "~Ā~~~~~~~~~~~~~~~~~~Ā~~~~~~~",
-      "~Ā~Ā~~~~~~~~~~Ā~~~~~~~R~~~~~",
-      "~~~~~~~~~~~~ẞ~~~~~~~~~~Ā~~~~",
+      "~Ā~Ā~~~~~~~~~~Ā~~~~~~~⍡~~~~~",
+      "~~~~~~~~~~~~⍠~~~~~~~~~~Ā~~~~",
       "~~~~~~~~~~~~~~~~~~~~~~~~~~~~",
     ],
     "warps": [
@@ -161792,20 +162077,20 @@ const MAPS7 = {
     "weather": "sun",
     "rows": [
       "~~~~~~~~~~~~~~~~~~~~~~~~~~~~",
-      "~~~~~~~~Ā~~~~Ā~ẞ~~~~~Ā~~~ẙẙ~",
+      "~~~~~~~~Ā~~~~Ā~⍢~~~~~Ā~~~ẙẙ~",
       "~~Ā~~~Ā~~~~~~~~Ā~~~~~~~~~~~~",
-      "~~~~~~~ĀĀ~~ẞ~~~~~~~~~~~~~~~~",
+      "~~~~~~~ĀĀ~~⍢~~~~~~~~~~~~~~~~",
       "~~~~ẙ~~~~~~~~~~~~~~~~~~~~~~~",
       "~~~S~~~~~~~~~~~~~~~~~~~~~~Ā~",
-      "~~~ᾎᾎᾎᾎᾎᾎᾎᾎᾎᾎᾎᾎᾎᾎᾎĀᾎᾎẞẙᾎᾎ~~~",
-      "~~Rᾎᾎᾎᾎᾎᾎᾎᾎᾎẞᾎᾎᾎᾎᾎᾎᾎᾎᾎᾎᾎᾎ~~~",
-      "~~~~~~~~~ẞĀ~~~~~~~~~~~~~~~~~",
+      "~~~ᾎᾎᾎᾎᾎᾎᾎᾎᾎᾎᾎᾎᾎᾎᾎĀᾎᾎ⍢ẙᾎᾎ~~~",
+      "~~⍣ᾎᾎᾎᾎᾎᾎᾎᾎᾎ⍢ᾎᾎᾎᾎᾎᾎᾎᾎᾎᾎᾎᾎ~~~",
+      "~~~~~~~~~⍢Ā~~~~~~~~~~~~~~~~~",
       "~~~ᾎᾎᾎᾎᾎᾎᾎᾎᾎẙᾎᾎᾎᾎᾎᾎᾎᾎᾎᾎᾎᾎ~~~",
       "~~~ᾎĀᾎᾎᾎᾎᾎᾎᾎᾎᾎᾎᾎᾎᾎᾎᾎᾎᾎᾎᾎᾎ~~~",
-      "~~Āẞ~~~~~~~~~~~~~~~ẞ~~~~~~~~",
-      "~~~~~~~~R~~~~~Ā~~~~~~~~ẙ~~~~",
+      "~~Ā⍢~~~~~~~~~~~~~~~⍢~~~~~~~~",
+      "~~~~~~~~⍣~~~~~Ā~~~~~~~~ẙ~~~~",
       "~ẙ~~~~~~~~~~~~~~~~~~~~~~~~~~",
-      "~~~~Ā~ĀRẞ~ẞ~~~~~~~~~~~~~~R~~",
+      "~~~~Ā~Ā⍣⍢~⍢~~~~~~~~~~~~~~⍣~~",
       "~~~~~~~~~~~~~~~~~~~~~~~~~~~~",
     ],
     "warps": [
@@ -161834,18 +162119,18 @@ const MAPS7 = {
       "~~~~~~~~~~~~~~~~~~~~~~~~~~~~",
       "~~~~~~~~Ā~~~~~~~~~~Ā~~~~~~~~",
       "~~~~~Ā~~Ā~~~~~~~~Ā~~~~~~~~~~",
-      "~~~ẙ~~~~~~~~~RĀ~~~R~~~ẞ~~~~~",
-      "~~~~~~~Ā~~~~~~~~~R~~ẙ~~~~~~~",
-      "~Ā~SᾎᾎᾎᾎᾎᾎᾎᾎᾎRᾎᾎᾎᾎᾎᾎᾎᾎᾎᾎᾎ~~~",
-      "~~~ᾎᾎᾎẙᾎᾎᾎᾎᾎᾎRᾎᾎᾎᾎṃᾎᾎᾎᾎᾎẞ~~~",
+      "~~~ẙ~~~~~~~~~⍥Ā~~~⍥~~~⍤~~~~~",
+      "~~~~~~~Ā~~~~~~~~~⍥~~ẙ~~~~~~~",
+      "~Ā~Sᾎᾎᾎᾎᾎᾎᾎᾎᾎ⍥ᾎᾎᾎᾎᾎᾎᾎᾎᾎᾎᾎ~~~",
+      "~~~ᾎᾎᾎẙᾎᾎᾎᾎᾎᾎ⍥ᾎᾎᾎᾎṃᾎᾎᾎᾎᾎ⍤~~~",
       "~~~~~~~~~~~~~~~~~~~~~~~~~~~~",
-      "~~~~~~~Ā~~Ā~R~~ẞ~~~ẙ~~~~~Ā~~",
-      "~~~~~~~~~R~~~~~~~~~~~~~~~~~~",
-      "~~ẞᾎᾎRᾎᾎᾎᾎᾎᾎĀᾎᾎᾎᾎᾎᾎĀᾎᾎᾎᾎᾎ~~~",
-      "~~~ẞᾎᾎᾎᾎᾎᾎᾎRᾎᾎᾎᾎᾎᾎᾎᾎᾎᾎᾎᾎᾎ~~~",
-      "~~~~~~~~~~~Ā~R~~ẞ~~~~~~~~~~~",
+      "~~~~~~~Ā~~Ā~⍥~~⍤~~~ẙ~~~~~Ā~~",
+      "~~~~~~~~~⍥~~~~~~~~~~~~~~~~~~",
+      "~~⍤ᾎᾎ⍥ᾎᾎᾎᾎᾎᾎĀᾎᾎᾎᾎᾎᾎĀᾎᾎᾎᾎᾎ~~~",
+      "~~~⍤ᾎᾎᾎᾎᾎᾎᾎ⍥ᾎᾎᾎᾎᾎᾎᾎᾎᾎᾎᾎᾎᾎ~~~",
+      "~~~~~~~~~~~Ā~⍥~~⍤~~~~~~~~~~~",
       "~~~~~~~~~~Ā~~~~~~~~~~~~~ẙ~Ā~",
-      "~~~~~R~~~~~~~~~~~~~~~~~ĀĀ~Ā~",
+      "~~~~~⍥~~~~~~~~~~~~~~~~~ĀĀ~Ā~",
       "~~~~~~~~~~~~~~~~~~~~~~~~~~~~",
     ],
     "warps": [
@@ -161872,20 +162157,20 @@ const MAPS7 = {
     "weather": "sun",
     "rows": [
       "~~~~~~~~~~~~~~~~~~~~~~~~~~~~",
-      "~~~~~~~~~~~Rẞ~~~~~~~~~~R~Ā~~",
-      "~~~~~~~~~~~~~~~Ā~~~~ĀR~~~~~~",
-      "~~~~~~~~~R~~~~~~~~~~ẞ~~~~~~~",
+      "~~~~~~~~~~~⍧⍦~~~~~~~~~~⍧~Ā~~",
+      "~~~~~~~~~~~~~~~Ā~~~~Ā⍧~~~~~~",
+      "~~~~~~~~~⍧~~~~~~~~~~⍦~~~~~~~",
       "~~~~~~~~~~Ā~~~~~~~~~Āṃ~~~~~~",
-      "~~~S~~~~RĀ~~~~~~~~~~~~~~~~~~",
-      "~~~ᾎRᾎᾎĀᾎᾎᾎᾎᾎᾎᾎᾎᾎᾎᾎᾎᾎᾎĀᾎĀ~~~",
-      "~~~ᾎᾎĀRᾎᾎᾎᾎᾎᾎᾎᾎᾎᾎᾎᾎᾎᾎẞᾎᾎᾎ~~~",
-      "~~~~~~~~~~~~~~~~~ẞ~~~~~~~~~~",
-      "~~~ᾎᾎᾎẙᾎᾎᾎẙᾎᾎᾎᾎᾎᾎẞᾎᾎRᾎᾎᾎᾎ~~~",
+      "~~~S~~~~⍧Ā~~~~~~~~~~~~~~~~~~",
+      "~~~ᾎ⍧ᾎᾎĀᾎᾎᾎᾎᾎᾎᾎᾎᾎᾎᾎᾎᾎᾎĀᾎĀ~~~",
+      "~~~ᾎᾎĀ⍧ᾎᾎᾎᾎᾎᾎᾎᾎᾎᾎᾎᾎᾎᾎ⍦ᾎᾎᾎ~~~",
+      "~~~~~~~~~~~~~~~~~⍦~~~~~~~~~~",
+      "~~~ᾎᾎᾎẙᾎᾎᾎẙᾎᾎᾎᾎᾎᾎ⍦ᾎᾎ⍧ᾎᾎᾎᾎ~~~",
       "~ẙ~ᾎᾎᾎĀᾎᾎᾎĀᾎᾎᾎᾎᾎᾎᾎᾎᾎᾎᾎᾎᾎᾎẙ~~",
       "~~~~~~~~~~~~~Ā~~~~Ā~~~~~~~~~",
-      "~~R~R~Ā~~~ẞ~~~~~~~~~~~~~~~~~",
-      "~~~Ā~~~~~~Ā~~~ĀĀ~~~~~R~~~~~~",
-      "~~~~Ā~~~~~~ẞ~~~ẙ~~~~R~~~~~~~",
+      "~~⍧~⍧~Ā~~~⍦~~~~~~~~~~~~~~~~~",
+      "~~~Ā~~~~~~Ā~~~ĀĀ~~~~~⍧~~~~~~",
+      "~~~~Ā~~~~~~⍦~~~ẙ~~~~⍧~~~~~~~",
       "~~~~~~~~~~~~~~~~~~~~~~~~~~~~",
     ],
     "warps": [
