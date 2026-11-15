@@ -3295,6 +3295,88 @@ W17M_KIND_DEFS.forEach(([kind], i) => {
 export const W17M_PROP_KINDS = W17M_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
 export const W17M_WALL_KINDS = W17M_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
 export const W17M_FLOOR_KINDS = W17M_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
+// Wave W17-N (Route Build Program, Maris Tranche 3 — two roads,
+// the desert, the chimney): Lilac -> desert -> Smokestack. All
+// five maps are defined once in maps7.mjs (no dual copies in
+// Maris, so no registry re-pins arise). Conversions are
+// char-for-char kind swaps on grassground/path/tree (land
+// routes) or cavefloor/volcrock (Scorch Path); encounter
+// cells/tables, warps, NPC posts, sign records/texts and every
+// shipped biome/dressing kind stay byte-identical. Route 110
+// "Two Roads" (1287-1290): underturf is under-way meadow with
+// pillar-shadow flecks (the elevated cycleway crosses as shipped
+// boardwalk dressing, byte-preserved entire), underfloor the
+// walking road's pale sand (design-authorised), underelm a
+// two-roads elm, spurpost spur marker posts x2 at the Trick
+// House shore turning. Route 111 "Desert Road" (1291-1294):
+// duneturf is failing grass with sand-creep flecks toward the
+// dune line, dunewayfloor the desert track — worn pale sand over
+// stone (design-authorised), dunethorn a sparse pale desert
+// thorn tree (honest sparse crown, by design), dunepost track
+// marker posts x2 where the grass gives up; the shipped
+// desertsand (82 cells) is the route's signature biome kind —
+// byte-preserved by spec (the Frost Path precedent) — and the 2
+// 'L' Dune Tomb mouth cells are warp cells, byte-preserved.
+// Route 112 "Chimney Road" (1295-1298): fumeturf is warm slope
+// grass with ash-dust flecks, fumefloor chimney-road sand
+// (design-authorised), fumepine a warm-slope pine, gondolapost
+// cable-car post bases x2 (the design's wires are dressing — no
+// shipped wire kind, nothing strung); volcrock dressing and both
+// Scorch Path mouth pairs stay byte-identical. Scorch Path
+// "Scorch Heart" (1299-1300) converts by the adapted cave
+// method: scorchfloor takes the generic cavefloor (warm tiled
+// through-road flags, the design's glowing fissures drawn as
+// fissure-lit flecks in the floor's own art, art layer only) and
+// scorchrock takes the volcrock WALL register (heat-darkened
+// banded rock) — on this map volcrock is the wall, not dressing;
+// lavaglow, waterglow, caveboulders and the sign stay
+// byte-identical, the trigger census is taken before/after, and
+// NO props are placed (cave discipline). Twin: Copperbore
+// Tunnel — Scorch is the hot lit heart, Copperbore the tidy cool
+// bore. Mt. Smokestack "Smokestack Summit" (1301-1303): NO tree
+// cells ship on the summit, so the kit is ground + path + prop
+// only (the National Park precedent): smoketurf is ash-dusted
+// summit grass with grey creep at the edges, smokefloor the
+// summit road's pale ash-sand (design-authorised), camppost the
+// ash researchers' logger posts x2 beside their camp; volcrock
+// (118), ashground (11) and ashshrub (2) stay byte-identical by
+// spec. Ground kinds deliberately do NOT end in 'floor' (the
+// desire-path audit counts '*floor' as street tier; grounds must
+// never masquerade as street); path kinds DO end in 'floor' so
+// they register as the route's path tier per route (checklist
+// point 3). Indices 1287-1303 per the program plan
+// (WAVE-W17-MARIS-ROUTE-PROGRAM-PLAN.md): W17-L took 1257-1276
+// and W17-M takes 1277-1286 on its parallel branch; 1111 and
+// every earlier documented gap stay empty. Kind names verified
+// unclaimed against origin/main. Chars U+1E00+1287..
+export const W17N_KIND_DEFS = [
+  ['underturf', 'floor'],
+  ['underfloor', 'floor'],
+  ['underelm', 'wall'],
+  ['spurpost', 'prop'],
+  ['duneturf', 'floor'],
+  ['dunewayfloor', 'floor'],
+  ['dunethorn', 'wall'],
+  ['dunepost', 'prop'],
+  ['fumeturf', 'floor'],
+  ['fumefloor', 'floor'],
+  ['fumepine', 'wall'],
+  ['gondolapost', 'prop'],
+  ['scorchfloor', 'floor'],
+  ['scorchrock', 'wall'],
+  ['smoketurf', 'floor'],
+  ['smokefloor', 'floor'],
+  ['camppost', 'prop'],
+];
+export const W17N_KIND_CHARS = {};
+W17N_KIND_DEFS.forEach(([kind], i) => {
+  const ch = String.fromCodePoint(0x1E00 + 1287 + i);
+  W17N_KIND_CHARS[kind] = ch;
+  TILE_CHARS[ch] = kind;
+});
+export const W17N_PROP_KINDS = W17N_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
+export const W17N_WALL_KINDS = W17N_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
+export const W17N_FLOOR_KINDS = W17N_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
 export const SINNOH_TOWN_GROUND_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg);
 export const SINNOH_TOWN_GROUND2_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg2);
 // TX-3: the 8 gym exteriors by town (original type-accent motifs).

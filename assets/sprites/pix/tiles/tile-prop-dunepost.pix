@@ -1,0 +1,25 @@
+# Wave W17-N (Route 111): dune post — a desert track marker post where the grass gives up: a tall post with its top band painted white against the dunes so the track can be read from the last grass (design: the track crossing the failing grass into the sands keeps its markers). On dune turf (fully opaque, ground baked in) — split from Route 110’s spur post by the white cap band and the taller shaft.
+PIX tile-prop-dunepost 16 16
+aaaaaaaaaasaaaaa
+aaabaaaabaaaaasa
+aabsaaaaaaaaaaaa
+aaaaaaawwaasaaaa
+aaaaaaawwaaaaaaa
+aaaaabskdaabaabs
+aabbabakdsaaaaas
+aabaaabkdaaaaaas
+assaaabkdaabaaaa
+aaaaaaakdaaaaaaa
+abbaasakdaaaabba
+baabaaakdaaabaaa
+aaaaaaakdaaaaaaa
+ababaaddddaaaaaa
+aaaaaaaaaaaaaaaa
+sasaaaaaaaaaaaaa
+PAL
+a #9aa055
+b #8a8f47
+s #d9c48f
+w #f2ecd8
+d #7d5a34
+k #8a6844

@@ -1161,6 +1161,22 @@ export const WALKABLE = new Set(['.', ',', 'D', 'E', 'C', 'F', 'J', 'K', '1', '2
   // per the Maris program plan; W17-L takes 1257-1276 on its
   // parallel branch; 1111 stays empty.)
   ...[1277, 1279, 1281, 1283, 1285]
+    .map((i) => String.fromCodePoint(0x1E00 + i)),
+  // Wave W17-N: the Maris tranche-3 ground/path chars
+  // (U+1E00+1287.., tiles.mjs W17N_KIND_DEFS) are walkable —
+  // underturf/underfloor (Route 110), duneturf/dunewayfloor
+  // (Route 111), fumeturf/fumefloor (Route 112), scorchfloor
+  // (Scorch Path, swapped 1:1 from the walkable 'L' cavefloor)
+  // and smoketurf/smokefloor (Mt. Smokestack), each swapped 1:1
+  // from the walkable '_' ground / '.' path chars on its own
+  // route, so ground stays ground and path stays path. The tree
+  // chars (1289, 1293, 1297), prop chars (1290, 1294, 1298,
+  // 1303) and the scorchrock wall char (1300, swapped from the
+  // volcrock wall register, never walkable) are NOT here: trees,
+  // props and walls were never walkable. (Indices 1287-1303 per
+  // the Maris program plan; W17-L took 1257-1276 and W17-M takes
+  // 1277-1286 on its parallel branch; 1111 stays empty.)
+  ...[1287, 1288, 1291, 1292, 1295, 1296, 1299, 1301, 1302]
     .map((i) => String.fromCodePoint(0x1E00 + i))]);
 
 // Trainer definitions for the slice.

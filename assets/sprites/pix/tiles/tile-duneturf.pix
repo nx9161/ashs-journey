@@ -1,0 +1,23 @@
+# Wave W17-N (Route 111): dune turf — failing grass at the desert’s edge: dry olive-green going thin, with the dune sand already creeping through it in pale flecks toward the dune line (design: calm speckled grass failing into open desert sand; picnickers eating exactly where the grass gives up). Route 111’s own ground — the grass still holds the west of the route; the shipped desertsand biome east of it stands byte-preserved by spec, and this turf is drawn to fail INTO it.
+PIX duneturf 16 16
+ababssadasbsassa
+aaasaababdbaaaaa
+aaabaaaaasbdssaa
+daaassbbaaaaasbd
+asaasaaaaasssbaa
+abaabsaaabaasaaa
+aasasddsaaaaasad
+sasaaaasaaasaaaa
+adsaaababbaadaaa
+sabaaaabssaadadb
+asaaaaaaaababaas
+asssaasaasaaadsa
+aadassasasabsdsa
+ssabsssasabaaasa
+bbbaaaaaaasasssb
+aaaasasasaasaaaa
+PAL
+a #9aa055
+b #8a8f47
+s #d9c48f
+d #767c3a

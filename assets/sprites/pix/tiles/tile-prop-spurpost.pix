@@ -1,0 +1,24 @@
+# Wave W17-N (Route 110): spur post — a spur marker post at the Trick House shore turning: one post, one short arrow board pointing down the west spur, on under turf (fully opaque, ground baked in). The design runs the spur west toward the Trick House shore; the road marks its turning.
+PIX tile-prop-spurpost 16 16
+aabaaaaaaabaaaba
+aaaaaaaaaabaaaaa
+aaaaaaaabaabaaaa
+aaaaaaaaaaaaaabb
+aaaaaabaaaaaabaa
+aaawaaaakdaabaaa
+aaawwwwwwdaaaaaa
+aaawabaakdaababw
+aabbaaaakdaaaaaa
+aaaaaaabkdabaaaa
+aaabaaabkdaaaaaa
+aaaaaaaakdaaaaaa
+bawabaaakdawaaba
+aaaaabdddddaaaaa
+aaaaaaaaaaaaaaaa
+baaaaaaaaaaabaaa
+PAL
+a #6fa854
+b #5d9046
+w #b08d57
+d #7d5a34
+k #8a6844
