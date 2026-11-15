@@ -12,4 +12,13 @@
 // end state is identical with and without its panel steps.
 export const PANELS = {
   'shrine-chronofae': { art: 'panel-shrine-chronofae' },
+  // W10-B T1 — sovereigns & finales (Class A catch reveals)
+  'hall-primarch': { art: 'panel-hall-primarch' },
+  'spire-chronarch': { art: 'panel-spire-chronarch' },
+  'spire-cosmarch': { art: 'panel-spire-cosmarch' },
+  'reversal-voidarch': { art: 'panel-reversal-voidarch' },
+  'pillar-stratowyrm': { art: 'panel-pillar-stratowyrm' },
+  'magma-terratitan': { art: 'panel-magma-terratitan' },
+  'trench-abyssorca': { art: 'panel-trench-abyssorca' },
+  'darkmoon-noctarch': { art: 'panel-darkmoon-noctarch' },
 };

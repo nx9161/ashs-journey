@@ -631,6 +631,7 @@ export const SINNOH_EVENTS = {
   ],
   ev_sinnoh_dialga: [
     { say: ['Zenith Spire, after everything: the broken pillars, the whole sky, and a stillness with a heartbeat in it — slow, enormous, older than the mountain it stands on. The heartbeat resolves into a shape. Blue steel. A crest like a sundial made of decisions.', 'CHRONARCH regards you out of the deep places of time it returned to when the chain broke — free, alive, and, in the way of gods who owe a trainer a debt, findable. The debt is not paid by kneeling. It is paid by standing. Stand, then.'], who: '' },
+    { panel: 'spire-chronarch' },
     { arc: 'arc_dialga', stage: 'active' },
     { wildBattleCatch: { species: 'dialga', level: 388, legendary: true } },
     { arc: 'arc_dialga', stage: 'complete' },
@@ -639,6 +640,7 @@ export const SINNOH_EVENTS = {
   ],
   ev_sinnoh_palkia: [
     { say: ['The pillar keeps its appointments in order, and the second appointment makes the sky feel... roomy. Space takes a breath and steps aside in the middle, and COSMARCH is standing in the space it stepped out of — pearl-bright, patient, enormous in a way that has nothing to do with size.', 'It came back to the pillar the way its twin did: unchained, unhurried, curious about the one pair of hands that broke red light. The examination is the same. The examiner is not. Answer it.'], who: '' },
+    { panel: 'spire-cosmarch' },
     { arc: 'arc_palkia', stage: 'active' },
     { wildBattleCatch: { species: 'palkia', level: 388, legendary: true } },
     { arc: 'arc_palkia', stage: 'complete' },
@@ -651,6 +653,7 @@ export const SINNOH_EVENTS = {
   // is NOT a second trigger for the same one-of-one).
   ev_sinnoh_giratina: [
     { say: ['Reversal Cave leans its silence toward you harder than it ever has — because today the silence has a shape in it. Beyond the Griseous chamber, where the floor is not entirely floor, the dark stands up in gold and smoke and six-legged patience.', 'VOIDARCH did not forget the platform, trainer. Gods of banished places keep excellent ledgers, and yours is the only name in this one written in anything but grievance. It settles, and waits to see whether the answer you gave Severin was the whole of you. Show it the rest.'], who: '' },
+    { panel: 'reversal-voidarch' },
     { arc: 'arc_giratina', stage: 'active' },
     { wildBattleCatch: { species: 'giratina', level: 392, legendary: true } },
     { arc: 'arc_giratina', stage: 'complete' },
@@ -717,6 +720,7 @@ export const SINNOH_EVENTS = {
   // night (the entry gate stands on darkrai_inn_done).
   ev_sinnoh_darkrai: [
     { say: ['The pond that reflects nothing has company, and the company has been waiting with the patience of the place itself. NOCTARCH unfolds out of the island\u2019s own dark — not attacking, not fleeing: presenting itself, the way a debt presents itself. Here to be settled.'], who: '' },
+    { panel: 'darkmoon-noctarch' },
     { arc: 'arc_darkrai', stage: 'active' },
     { wildBattleCatch: { species: 'darkrai', level: 378, legendary: true } },
     { arc: 'arc_darkrai', stage: 'complete' },
@@ -752,6 +756,7 @@ export const SINNOH_EVENTS = {
   ],
   ev_sinnoh_arceus: [
     { say: ['The Hall of Dawning is not grand the way temples are grand. It is quiet the way the moment before a first word is quiet — a floor of pale light above all the weather there is, and at its centre, the shape every creation story starts with and none of them finish describing.', 'PRIMARCH regards you the way the sea regards a swimmer who crossed it honestly: without surprise, and without rescue. Everything on the road below — the lakes, the chains, the world behind the world — was, in some old sense, this one\u2019s to lend. It has come to see what the borrower made of the loan. Show it the whole road, trainer. All of it. It will know if you leave any out.'], who: '' },
+    { panel: 'hall-primarch' },
     { arc: 'arc_arceus', stage: 'active' },
     { wildBattleCatch: { species: 'arceus', level: 400, legendary: true } },
     { arc: 'arc_arceus', stage: 'complete' },

@@ -4,10 +4,14 @@
 // Part A (pure): every {panel} step in shipped event data resolves
 // through PANELS (src/data/panels.mjs) to a built ART entry; no orphan
 // PANELS entries or panel art; panel art obeys the gate (<=16 colors,
-// the 128x80 canvas standard); the wave's panel-art byte total is
-// reported against the W10 art budget (<=150 KB, Director ruling 5);
-// the --scene converter is deterministic and gate-clean on a synthetic
-// fixture.
+// the 128x80 canvas standard); the --scene converter is deterministic
+// and gate-clean on a synthetic fixture.
+// W10-B growth (ratchet form, pins move only in-commit with their
+// tranche): PANEL_STEPS / PANELS_ENTRIES pins, the PANEL_ART_BYTES
+// cumulative pin, A7 generalized attach geometry (every panel step,
+// not just the proof scene), and A8's per-tranche budget (<=150 KB of
+// shipped panel art per tranche, Director ruling W10-B — superseding
+// W10's wave-total reading of the same cap).
 // Part B (bundle): boots the built game headlessly and PARITY-DRIVES
 // the proof event (ev_johto_celebi) twice — once as shipped, once with
 // its panel steps stripped — asserting the panel fired (ui log), the
@@ -43,6 +47,8 @@ const panelSteps = [];
 for (const [id, steps] of stepLists) steps.forEach((s, i) => { if (s && s.panel) panelSteps.push({ id, i, panel: s.panel }); });
 
 ok('A1 shipped data carries at least one panel step', panelSteps.length >= 1);
+ok('A1 pin: PANEL_STEPS == 9 (W10-B ratchet: 1 proof + 8 T1 sovereigns)', panelSteps.length === 9);
+ok('A2 pin: PANELS_ENTRIES == 9 (one entry per moment, no sharing)', Object.keys(PANELS).length === 9);
 ok('A1 every panel step resolves through PANELS to a built ART entry',
   panelSteps.every(({ panel }) => PANELS[panel] && ART[PANELS[panel].art]),
   );
@@ -64,8 +70,34 @@ for (const { art } of Object.values(PANELS)) {
   const end = start < 0 ? -1 : artDataText.indexOf('\n  ] },\n', start);
   if (start >= 0 && end > start) panelBytes += Buffer.byteLength(artDataText.slice(start, end + 7));
 }
-console.log('  W10 panel art total: ' + panelBytes + ' B (budget 153600 B)');
-ok('A4 panel art byte total within the W10 budget (<=150 KB)', panelBytes > 0 && panelBytes <= 150 * 1024);
+// W10-B ratchet pins (measured; move only in-commit with their tranche).
+const PANEL_ART_BYTES_PIN = 99976;   // cumulative panel art after W10-B T1
+const PANEL_ART_BYTES_PREV = 11171;  // W10 proof-wave total (the T0 baseline)
+console.log('  panel art cumulative: ' + panelBytes + ' B (pin ' + PANEL_ART_BYTES_PIN + ' B; this tranche delta ' + (panelBytes - PANEL_ART_BYTES_PREV) + ' B of the 153600 B per-tranche cap)');
+ok('A8 PANEL_ART_BYTES pin: cumulative panel art equals the ratchet pin (measured)', panelBytes === PANEL_ART_BYTES_PIN);
+ok('A8 per-tranche budget: the latest tranche\'s panel art is within 150 KB (Director ruling, W10-B)',
+  panelBytes - PANEL_ART_BYTES_PREV > 0 && panelBytes - PANEL_ART_BYTES_PREV <= 150 * 1024);
+
+// A7 attach geometry, generalized from the A5 proof-scene pin: every
+// panel step in a battle event sits after the event's final build-up
+// say and before its battle step; in a non-battle event, after a say.
+{
+  const BATTLE_KEYS = ['wildBattleCatch', 'wildBattle', 'battleAny', 'battle'];
+  const bad = [];
+  for (const [id, steps] of stepLists) {
+    steps.forEach((s, i) => {
+      if (!s || !s.panel) return;
+      const bi = steps.findIndex((t) => t && BATTLE_KEYS.some((k) => t[k] !== undefined));
+      if (bi >= 0) {
+        let lastSay = -1;
+        for (let j = 0; j < bi; j++) if (steps[j] && steps[j].say) lastSay = j;
+        if (!(i > lastSay && i < bi)) bad.push(id + '@' + i);
+      } else if (!steps.slice(0, i).some((t) => t && t.say)) bad.push(id + '@' + i);
+    });
+  }
+  if (bad.length) console.log('  A7 violations: ' + bad.join(', '));
+  ok('A7 attach geometry (generalized): every panel step sits after the final build-up say, before the battle step', bad.length === 0);
+}
 
 // proof-scene attach geometry at source level
 {

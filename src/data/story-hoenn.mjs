@@ -725,6 +725,7 @@ export const HOENN_EVENTS = {
   ],
   ev_hoenn_groudon: [
     { say: ['The hideout\'s foundry floors are cold. Its owners are gone. But the magma pool at the back of the deep chamber is NOT cold, and it is not still, and as you come down the last slope it begins, unmistakably, to rise.', 'It withdrew here when the sky settled its argument — back to the earth\'s own heat, to sleep the way continents sleep. It is not asleep now. The pool stands up in red-black armour, and the whole mountain remembers whose house this actually is.'], who: 'NARRATOR' },
+    { panel: 'magma-terratitan' },
     { arc: 'arc_groudon', stage: 'active' },
     { wildBattleCatch: { species: 'groudon', level: 298, legendary: true } },
     { arc: 'arc_groudon', stage: 'complete' },
@@ -733,6 +734,7 @@ export const HOENN_EVENTS = {
   ],
   ev_hoenn_kyogre: [
     { say: ['The trench water below the dive light is doing something water should not do: it is holding a shape. A vast shape. The shape opens one eye the size of a porthole in the blue dark, and the pressure of its attention arrives a half-second before the sight of it does.', 'It sleeps here, in the deep it nearly drowned the world with — and it has decided, in the unhurried way of tides, to see what the trainer who ended the deluge actually is. The trench holds its breath. So does everything in it.'], who: 'NARRATOR' },
+    { panel: 'trench-abyssorca' },
     { arc: 'arc_kyogre', stage: 'active' },
     { wildBattleCatch: { species: 'kyogre', level: 298, legendary: true } },
     { arc: 'arc_kyogre', stage: 'complete' },
@@ -743,6 +745,7 @@ export const HOENN_EVENTS = {
   // appearance, an uncatchable descent). This is the return ascent.
   ev_hoenn_rayquaza_face: [
     { say: ['The pillar is quieter than your first climb — no argument below for its sleeper to settle, only wind, coming home to roost. At the summit the ring of old stone is empty for exactly one heartbeat.', 'Then the sky folds, green as deep water seen from above, and STRATOWYRM is coiled in its ring again, considering you with the total, courteous attention of the oldest thing in Maris\'s sky. It descended once for the world. This time, it has come down for you.'], who: 'NARRATOR' },
+    { panel: 'pillar-stratowyrm' },
     { arc: 'arc_rayquaza', stage: 'active' },
     { wildBattleCatch: { species: 'rayquaza', level: 300, legendary: true } },
     { arc: 'arc_rayquaza', stage: 'complete' },
