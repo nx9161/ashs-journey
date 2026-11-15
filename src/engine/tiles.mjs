@@ -3817,6 +3817,82 @@ W17S_KIND_DEFS.forEach(([kind], i) => {
 export const W17S_PROP_KINDS = W17S_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
 export const W17S_WALL_KINDS = W17S_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
 export const W17S_FLOOR_KINDS = W17S_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
+// Wave W17-T (Route Build Program, Maris Tranche 9 — the last
+// quiet water, the Driftlog corridor, the current roads home):
+// the Maris finale. All five maps are defined once in
+// maps7.mjs (no dual copies in Maris, so no registry re-pins
+// arise). All five are SEA LANES: sand -> own shore sand, rock
+// -> own rock ONLY (the R40/R41 discipline), NO props; every
+// water cell, landing and waterglow stands byte-preserved.
+// Route 130 "Quiet Water" (1374-1375): quietsand a
+// glass-clear shallows sand (garden flecks — the CORALET
+// gardens show through the water in the design, water
+// dressing, nothing planted), quietrock a confluence rock;
+// water 404 + waterglow 21 byte-preserved entire, coral 5 +
+// lifering 1 byte-preserved; only sand 7 + rock 9 convert.
+// Route 131 "Driftlog Corridor" (1376-1377): moorsand a
+// mooring-shore sand (rope-worn flecks), moorrock a tower-isle
+// rock; water 390 + waterglow 19 byte-preserved entire, coral
+// 1 byte-preserved; the 2 Tempest Tower mouth cells stand on
+// cavefloor ('L' char) + ancientpillar 2 — the tower isle's
+// shipped dressing, byte-preserved, never converted; only
+// sand 24 + rock 8 convert. Route 132 "First Current"
+// (1378-1379): streamsand a current-edge sand (foam-streak
+// flecks), streamrock a channel-edge rock; water 329 +
+// waterglow 16 byte-preserved entire and the CURRENT BANDS
+// (82 cells) byte-identical entire — `current` is a movement
+// mechanic, the Frost Path slide-floor precedent in water
+// (Director ruling #3); coral 7 byte-preserved; only sand 9 +
+// rock 4 convert. Route 133 "Middle Current" (1380-1381):
+// rapidsand a rapid-edge sand (harder foam flecks),
+// rapidrock a rapid channel rock (longer joints); water 328 +
+// waterglow 19 + current 77 byte-identical entire; coral 5 +
+// lifering 1 byte-preserved; only sand 6 + rock 11 convert.
+// Route 134 "Last Current" (1382-1383): gatesand a
+// delivery-channel sand, gaterock a gate rock at the falls'
+// foot register (Perennial's falls are the town-side frame,
+// byte-preserved); water 327 + waterglow 20 + current 75
+// byte-identical entire; coral 5 + lifering 1 byte-preserved;
+// only sand 7 + rock 12 convert. The three current roads
+// split by shore register + speed read (the plan's twin
+// discipline): 132 first (foam-streaked, gentle), 133 fiercer
+// (harder foam, longer joints), 134 converging (the delivery
+// channel at the falls' foot); R130 is the last quiet water
+// and R131 the moored corridor — five lanes, five registers,
+// none a twin of any of the 82 prior route kits. Encounter
+// tables (0.10 surf set) are byte-identical. Sand kinds are
+// 'floor' class (the shipped sand char was walkable; the
+// swaps are 1:1), rock kinds 'wall' class (never walkable).
+// Indices 1374-1383 per the program plan
+// (WAVE-W17-MARIS-ROUTE-PROGRAM-PLAN.md) — the Maris
+// allocation closes at 1383 (program total 127 kinds,
+// 1257-1383): W17-L took 1257-1276, W17-M 1277-1286, W17-N
+// 1287-1303, W17-O 1304-1321, W17-P 1322-1339, W17-Q
+// 1340-1355, W17-R 1356-1363, and W17-S takes 1364-1373 on
+// its parallel branch; 1111 and every earlier documented gap
+// stay empty. Kind names verified unclaimed against
+// origin/main. Chars U+1E00+1374..
+export const W17T_KIND_DEFS = [
+  ['quietsand', 'floor'],
+  ['quietrock', 'wall'],
+  ['moorsand', 'floor'],
+  ['moorrock', 'wall'],
+  ['streamsand', 'floor'],
+  ['streamrock', 'wall'],
+  ['rapidsand', 'floor'],
+  ['rapidrock', 'wall'],
+  ['gatesand', 'floor'],
+  ['gaterock', 'wall'],
+];
+export const W17T_KIND_CHARS = {};
+W17T_KIND_DEFS.forEach(([kind], i) => {
+  const ch = String.fromCodePoint(0x1E00 + 1374 + i);
+  W17T_KIND_CHARS[kind] = ch;
+  TILE_CHARS[ch] = kind;
+});
+export const W17T_PROP_KINDS = W17T_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
+export const W17T_WALL_KINDS = W17T_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
+export const W17T_FLOOR_KINDS = W17T_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
 export const SINNOH_TOWN_GROUND_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg);
 export const SINNOH_TOWN_GROUND2_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg2);
 // TX-3: the 8 gym exteriors by town (original type-accent motifs).

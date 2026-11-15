@@ -1262,6 +1262,24 @@ export const WALKABLE = new Set(['.', ',', 'D', 'E', 'C', 'F', 'J', 'K', '1', '2
   // 1304-1321, W17-P 1322-1339, W17-Q 1340-1355 and W17-R
   // takes 1356-1363 on its parallel branch; 1111 stays empty.)
   ...[1364, 1366, 1368, 1370, 1372]
+    .map((i) => String.fromCodePoint(0x1E00 + i)),
+  // Wave W17-T: the Maris tranche-9 shore chars (U+1E00+1374..,
+  // tiles.mjs W17T_KIND_DEFS) are walkable — quietsand (Route
+  // 130), moorsand (Route 131), streamsand (Route 132),
+  // rapidsand (Route 133) and gatesand (Route 134), each
+  // swapped 1:1 from the walkable shipped sand char, so shore
+  // stays shore. The rock chars (1375 quietrock, 1377
+  // moorrock, 1379 streamrock, 1381 rapidrock, 1383 gaterock,
+  // swapped from the 'R' rock char) are NOT here: rocks were
+  // never walkable. The current bands on Routes 132-134 are
+  // the shipped `current` kind — mechanic data, byte-identical,
+  // untouched by this wave. (Indices 1374-1383 per the Maris
+  // program plan — the Maris allocation closes at 1383;
+  // W17-L took 1257-1276, W17-M 1277-1286, W17-N 1287-1303,
+  // W17-O 1304-1321, W17-P 1322-1339, W17-Q 1340-1355, W17-R
+  // 1356-1363 and W17-S takes 1364-1373 on its parallel
+  // branch; 1111 stays empty.)
+  ...[1374, 1376, 1378, 1380, 1382]
     .map((i) => String.fromCodePoint(0x1E00 + i))]);
 
 // Trainer definitions for the slice.
