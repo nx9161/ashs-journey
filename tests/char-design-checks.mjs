@@ -1,5 +1,6 @@
 // char-design-checks.mjs — the NAMED & SERVICE CHARACTER guard
-// (War Room Wave W-CHAR2, NO-SAME-KIT fix sequence #7). Run:
+// (War Room Wave W-CHAR2, NO-SAME-KIT fix sequence #7; C6 townsfolk
+// section added by W-CHAR3, fix sequence #8). Run:
 //   node tests/char-design-checks.mjs                  (exit 1 on failure)
 //   node tests/char-design-checks.mjs --write-snapshot (T0 only: regenerate
 //                                                       the invariant baseline)
@@ -40,6 +41,18 @@
 //      (ACTOR_DEFAULTS + ACTOR_FLAG_DEFAULTS) are hash-pinned too.
 //   R  registers (Director rulings, 2026-11-15) — ferry captains
 //      (CAPT …) classify NAMED; gym attendants classify SERVICE.
+//   C6 townsfolk (W-CHAR3 closure) — the GENERIC register (posts in
+//      neither W2 register: no personal name after class-prefix
+//      stripping, no service function) pinned at its measured final
+//      form: 10 posts / 10 designs, no duplicate groups, max 1 post
+//      per design, no design repeated within one map, and — the hole
+//      C2/C3 could not see — no generic design key equal to any named
+//      or service design key (GENERIC_CROSS_REGISTER_COLLISIONS,
+//      measured 2 at W3 T0: moon2#1 SCIENTIST ≡ cinnabar#1 TOM and
+//      violet#0 MONK SAGE ≡ ecruteak#0 SAGE OF THE BELLS; burned to 0
+//      by palette-varianting the two generic posts, design fields
+//      only). The C5 snapshot covers the 10 generic posts from W3 T0
+//      on, under the same hash discipline and exceptions list.
 //
 // Census assembly is byte-for-byte the leader-cast assembly (merged
 // MAPS via maps.mjs + maps2–9 in merge order, + JOHTO/HOENN/SINNOH_NPCS
@@ -72,6 +85,15 @@ const PIN = {
   SERVICE_DUP_POSTS: 99,
   SERVICE_MAX_DESIGN_POSTS: 3,
   SERVICE_TOWN_REPEAT_PAIRS: 0,
+  // W-CHAR3 C6 townsfolk pins (measured on main aaae0042):
+  GENERIC_POSTS: 10,
+  GENERIC_DESIGNS: 10,
+  EXEMPT_POSTS: 7, // count-only — exempt designs belong to the Kin/furniture guards
+  GENERIC_DUP_GROUPS: 0,
+  GENERIC_DUP_POSTS: 0,
+  GENERIC_MAX_DESIGN_POSTS: 1,
+  GENERIC_TOWN_REPEAT_PAIRS: 0,
+  GENERIC_CROSS_REGISTER_COLLISIONS: 2, // W3 T0 reading; the 2 palette variants re-pin this to 0 in the closure commit
 };
 // C4: cast-*/service-region kinds in use, pinned. T1: the 14 service
 // kinds (clerk/attendant/host × region; Trial Grounds is the game's
@@ -636,6 +658,8 @@ for (const n of posts) {
 const named = posts.filter((p) => p._class === 'named');
 const service = posts.filter((p) => p._class === 'service');
 const scope = posts.filter((p) => p._class === 'named' || p._class === 'service');
+const generic = posts.filter((p) => p._class === 'generic'); // W-CHAR3 scope (C6)
+const exempt = posts.filter((p) => p._class === 'exempt');
 
 function dupGroups(list, samePersonOk) {
   const g = new Map();
@@ -682,10 +706,10 @@ const actorHash = sha(stable({ ACTOR_DEFAULTS, ACTOR_FLAG_DEFAULTS }));
 const SNAP_PATH = join(ROOT, 'tests', 'char-design-snapshot.json');
 
 if (process.argv.includes('--write-snapshot')) {
-  const snap = { wave: 'W-CHAR2 T0', base: '49463353', actorHash, posts: {} };
-  for (const n of scope) snap.posts[n._key] = { name: n.name || '', ...postHashes(n) };
+  const snap = { wave: 'W-CHAR2 T0 + W-CHAR3 T0', base: '49463353', actorHash, posts: {} };
+  for (const n of [...scope, ...generic]) snap.posts[n._key] = { name: n.name || '', ...postHashes(n) };
   fs.writeFileSync(SNAP_PATH, JSON.stringify(snap, null, 1) + '\n');
-  console.log(`char-design snapshot written: ${scope.length} scoped posts, actorHash ${actorHash.slice(0, 12)}…`);
+  console.log(`char-design snapshot written: ${scope.length + generic.length} posts (W2 scope + W3 generic), actorHash ${actorHash.slice(0, 12)}…`);
   process.exit(0);
 }
 
@@ -704,6 +728,9 @@ ok(new Set(named.map((p) => p._design)).size === PIN.NAMED_DESIGNS, `census pin:
 ok(service.length === PIN.SERVICE_POSTS, `census pin: service posts ${PIN.SERVICE_POSTS} (got ${service.length})`);
 ok(new Set(service.map((p) => p._design)).size === PIN.SERVICE_DESIGNS, `census pin: service designs ${PIN.SERVICE_DESIGNS} (got ${new Set(service.map((p) => p._design)).size})`);
 ok(scope.length === PIN.SCOPE_POSTS, `census pin: scope posts ${PIN.SCOPE_POSTS} (got ${scope.length})`);
+ok(generic.length === PIN.GENERIC_POSTS, `census pin: generic posts ${PIN.GENERIC_POSTS} (got ${generic.length})`);
+ok(new Set(generic.map((p) => p._design)).size === PIN.GENERIC_DESIGNS, `census pin: generic designs ${PIN.GENERIC_DESIGNS} (got ${new Set(generic.map((p) => p._design)).size})`);
+ok(exempt.length === PIN.EXEMPT_POSTS, `census pin: exempt posts ${PIN.EXEMPT_POSTS} (got ${exempt.length})`);
 ok(brainPosts.length === 2, `census: expected 2 Frontier Brain posts extracted, got ${brainPosts.length}`);
 
 // C1 closure
@@ -736,6 +763,26 @@ for (const p of service) {
 const townRepeats = [...svcTown.values()].filter((v) => v >= 2).length;
 ok(townRepeats === PIN.SERVICE_TOWN_REPEAT_PAIRS, `C3: service designs repeated within one map ${PIN.SERVICE_TOWN_REPEAT_PAIRS} (measured ${townRepeats})`);
 
+// C6 townsfolk uniqueness + cross-register collisions (W-CHAR3 ratchet)
+const gGroups = dupGroups(generic, false);
+const gDupPosts = gGroups.reduce((a, g) => a + g.posts, 0);
+const gDesignCounts = new Map();
+for (const p of generic) gDesignCounts.set(p._design, (gDesignCounts.get(p._design) || 0) + 1);
+const gMax = Math.max(0, ...gDesignCounts.values());
+ok(gGroups.length === PIN.GENERIC_DUP_GROUPS, `C6 ratchet: GENERIC_DUP_GROUPS ${PIN.GENERIC_DUP_GROUPS} (measured ${gGroups.length})`);
+ok(gDupPosts === PIN.GENERIC_DUP_POSTS, `C6 ratchet: GENERIC_DUP_POSTS ${PIN.GENERIC_DUP_POSTS} (measured ${gDupPosts})`);
+ok(gMax === PIN.GENERIC_MAX_DESIGN_POSTS, `C6 ratchet: GENERIC_MAX_DESIGN_POSTS ${PIN.GENERIC_MAX_DESIGN_POSTS} (measured ${gMax})`);
+const genTown = new Map();
+for (const p of generic) {
+  const k = p._design + ' @ ' + p.map;
+  genTown.set(k, (genTown.get(k) || 0) + 1);
+}
+const genTownRepeats = [...genTown.values()].filter((v) => v >= 2).length;
+ok(genTownRepeats === PIN.GENERIC_TOWN_REPEAT_PAIRS, `C6: generic designs repeated within one map ${PIN.GENERIC_TOWN_REPEAT_PAIRS} (measured ${genTownRepeats})`);
+const nsDesignKeys = new Set([...named, ...service].map((p) => p._design));
+const crossHits = generic.filter((p) => nsDesignKeys.has(p._design));
+ok(crossHits.length === PIN.GENERIC_CROSS_REGISTER_COLLISIONS, `C6 ratchet: GENERIC_CROSS_REGISTER_COLLISIONS ${PIN.GENERIC_CROSS_REGISTER_COLLISIONS} (measured ${crossHits.length}${crossHits.length ? ': ' + crossHits.map((p) => p._key).join(', ') : ''})`);
+
 // C4 cast registry — registration is verified against the art.mjs
 // source tables (NPC_SWAP_KEYS / KIT_CAST_SPEC are module-const, not
 // exported; both are single literal blocks).
@@ -767,11 +814,11 @@ ok(JSON.stringify(usedCastKinds) === JSON.stringify([...PINNED_CAST_KINDS].sort(
 const snap = JSON.parse(fs.readFileSync(SNAP_PATH, 'utf8'));
 ok(snap.actorHash === actorHash, 'C5: actor-lifecycle default tables hash-identical to T0');
 const snapKeys = Object.keys(snap.posts);
-ok(snapKeys.length === PIN.SCOPE_POSTS, `C5: snapshot holds ${PIN.SCOPE_POSTS} scoped posts (got ${snapKeys.length})`);
+ok(snapKeys.length === PIN.SCOPE_POSTS + PIN.GENERIC_POSTS, `C5: snapshot holds ${PIN.SCOPE_POSTS + PIN.GENERIC_POSTS} posts (${PIN.SCOPE_POSTS} W2 scope + ${PIN.GENERIC_POSTS} W3 generic; got ${snapKeys.length})`);
 const exceptions = new Set(SPEC_DESIGN_EXCEPTIONS);
 let invBad = 0, designBad = 0, missing = 0;
 const seenKeys = new Set();
-for (const n of scope) {
+for (const n of [...scope, ...generic]) {
   seenKeys.add(n._key);
   const s = snap.posts[n._key];
   if (!s) { missing++; ok(false, `C5 post missing from snapshot: ${n._key} (${n.name || ''})`); continue; }
@@ -781,7 +828,7 @@ for (const n of scope) {
 }
 ok(invBad === 0, `C5: ${invBad} scoped posts drifted in invariant fields`);
 ok(designBad === 0, `C5: ${designBad} scoped posts changed design fields off-spec`);
-ok(missing === 0 && snapKeys.every((k) => seenKeys.has(k)), 'C5: snapshot key set == live scoped-post key set (no post added, removed, or re-keyed)');
+ok(missing === 0 && snapKeys.every((k) => seenKeys.has(k)), 'C5: snapshot key set == live post key set (W2 scope + W3 generic; no post added, removed, or re-keyed)');
 
 // R registers (Director rulings)
 const capts = scope.filter((p) => /^CAPT\s/.test((p.name || '').toUpperCase()));
@@ -789,7 +836,7 @@ ok(capts.length > 0 && capts.every((p) => p._class === 'named'), `R1: all ${capt
 const attendants = scope.filter((p) => /ATTENDANT/.test((p.name || '').toUpperCase()));
 ok(attendants.length > 0 && attendants.every((p) => p._class === 'service'), `R2: all ${attendants.length} gym attendants classify SERVICE`);
 
-console.log(`char-design census: ${posts.length} posts · named ${named.length}/${new Set(named.map((p) => p._design)).size} designs · service ${service.length}/${new Set(service.map((p) => p._design)).size} designs · dup named ${nDupPosts} posts in ${nGroups.length} groups · dup service ${sDupPosts} posts, max design ${sMax}`);
+console.log(`char-design census: ${posts.length} posts · named ${named.length}/${new Set(named.map((p) => p._design)).size} designs · service ${service.length}/${new Set(service.map((p) => p._design)).size} designs · generic ${generic.length}/${new Set(generic.map((p) => p._design)).size} designs · dup named ${nDupPosts} posts in ${nGroups.length} groups · dup service ${sDupPosts} posts, max design ${sMax} · dup generic ${gDupPosts} posts, cross-register collisions ${crossHits.length}`);
 for (const f of failures.slice(0, 20)) console.log('FAIL', f);
 console.log(`char-design-checks: ${pass} pass, ${fail} fail`);
 process.exit(fail ? 1 : 0);

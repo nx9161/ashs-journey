@@ -1,5 +1,5 @@
 {
- "wave": "W-CHAR2 T0",
+ "wave": "W-CHAR2 T0 + W-CHAR3 T0",
  "base": "49463353",
  "actorHash": "b4e747a2542443ea1eaeeda6cdac3b17ab72d75c9dd1c66beb10f2c4b4446a2a",
  "posts": {
@@ -3627,6 +3627,56 @@
    "name": "TITUS",
    "inv": "52c5386a709f3b521dad5630a28493d7ff9872f9a8c6b25f5079b47d4beb1220",
    "design": "738b0f4ed7b5127306a50a989a15ce035b85cf4898fdb4becbe982b51d311f9b"
+  },
+  "route1#0": {
+   "name": "AIDE",
+   "inv": "6d5466c035c27dc344d94b5ba3a04984592b2a2914b1547a497c4a2a29bedde9",
+   "design": "ad8dc20164dae35a66efa25d39129bc63d57f85b442bb3e7947d725ed2114bf8"
+  },
+  "pewter#1": {
+   "name": "COACH",
+   "inv": "e75f9d10eb1b7d791c5ec7653c6b3f6a8ac312f43619b56e29e821e6d8abc5db",
+   "design": "c273671720ab20695730c24752deeffe94c10c2f7ea0a2196ebbd1227ce79670"
+  },
+  "moon2#1": {
+   "name": "SCIENTIST",
+   "inv": "a74f47fe19f37d64b386703068355bb7c9941bec5ae5413b34bd9a366a7784f4",
+   "design": "c11516229b64ca1d6040c140a3c8579c34d702b7987abf04b0f2ae35766cca87"
+  },
+  "cerulean#5": {
+   "name": "FAN",
+   "inv": "4e8a748ab84a79006ea83f672b1d7931787cb59210fc1a11ff671b9911aba34b",
+   "design": "2b3195423d3d51865b3aeb82a413055659797d8b219823d223895742a841d4e1"
+  },
+  "stanne#3": {
+   "name": "CAPTAIN",
+   "inv": "5d56ce7ab0ea05f21d59e89be380942e84b74b281edd888c9ab3f1618a519c6b",
+   "design": "97a61383bc4b005391dda634db00b8b7891a7237c80963b85d17749a1a2f05f0"
+  },
+  "route11#1": {
+   "name": "ENGINEER",
+   "inv": "ad7201a2220610055c972637eeeeee5d09b0b7e89e5d41c472f79ee153d53fb4",
+   "design": "1aa2b73db8c594b1a578be042895c11f9fd7e83ec24bef4e747599659b1b34da"
+  },
+  "tower1#1": {
+   "name": "CHANNELER",
+   "inv": "273db8d520b0e653f995b787947671200f7745c9cfdbb4f3e28107b528fa2fdf",
+   "design": "a11558be3c2bebd4fbb0803471e49beaba6f0add49661a4f1243ffccdf3c984b"
+  },
+  "safari#0": {
+   "name": "RANGER",
+   "inv": "28079488a9cb5a8104de2c70a2de35a2e1d3b7860e00bf819526ca347339e9c3",
+   "design": "290048fc70cde9f526404678bbb95dcd5ed5d3c78881d121078c6e38d06c8dfa"
+  },
+  "viridian#0": {
+   "name": "HIKER",
+   "inv": "088cd6e7afce7de4317562d2d501b42d98d0e464559f57f0ac6945fd288d0a2e",
+   "design": "1b1827c4663005040c466b599e9538d0a1ef041c5314666fe82f259b64172ff2"
+  },
+  "violet#0": {
+   "name": "MONK SAGE",
+   "inv": "81f8dc48df7f0efac42402832c8fe5bfa29e6161310c3bbb7ac0c36d4de81040",
+   "design": "43e934e58b2960f113b3f7a23ec7fd136c54a3ba5b1ba5af85e4d82ec539b7ab"
   }
  }
 }
