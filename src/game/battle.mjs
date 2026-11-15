@@ -194,7 +194,7 @@ const ARENA_AMBIENT = {
 // table ships EMPTY at T0: the mechanism + the gym-identity guard land
 // first, tranches T1–T5 fill one region at a time under the guard's
 // ratchet (tests/gym-identity-checks.mjs). With no entry for a map,
-// gymArenaFor returns null and every read site falls back to the
+// the resolver returns null and every read site falls back to the
 // Ground's ARENA_ART / ARENA_AMBIENT treatment, byte-identical to the
 // pre-wave render.
 const GYM_ARENA_ART = {
@@ -321,9 +321,37 @@ const GYM_ARENA_ART = {
   'kumquat-gym': { sky: ['#3f6a58', '#48765f', '#518266', '#5a8e6d', '#63a074', '#6cb27d'], ground: ['#3d5c46', '#37543f', '#314c38', '#2b4431', '#253c2a', '#1f3423'], dark: '#14231a', light: '#eaffdc', accent: '#2fe07c', motif: 'runes', tex: 'fleck', amb: { kind: 'petal', n: 12, speed: 5 } },
 };
 
-function gymArenaFor(field) {
+// Legendary Arenas wave (NO-SAME-KIT fix #10), T0: per-VENUE arena
+// treatments for the 53 special battle venues outside the gyms — the
+// legendary/mythical face venues, the league interiors, the two
+// stadiums and the Frontier facility maps (census: WAVE-ARENAS-PLAN
+// §1) — keyed by MAP ID, the gym precedent (two faces sharing one map,
+// meteor-falls and spear-pillar, prove the place is the key, not the
+// face; roamers are out — a roaming battle reads as the place it found
+// you). An entry carries the same ARENA_ART + `amb` shape and layers
+// over the venue's existing Ground exactly as a gym entry does:
+// Ground rules, name, banner and tint are NOT in this table and never
+// change, and no MAP_GROUND entry moves in this wave — identity is
+// art only. The seam is ONE resolver, arenaOverrideFor: GYM_ARENA_ART
+// first (the table above, byte-untouched — the key sets are disjoint
+// by construction and the arena-identity guard pins it), then this
+// table, then the read site's Ground fallback. The table ships EMPTY
+// at T0: the mechanism + the guard (the VENUE section of
+// tests/gym-identity-checks.mjs) land first, tranches T1–T4 fill one
+// group at a time under the guard's ratchet. With no entry for a map
+// the resolver returns null and every read site falls back to the
+// Ground's ARENA_ART / ARENA_AMBIENT treatment, byte-identical to the
+// pre-wave render.
+const VENUE_ARENA_ART = {
+};
+
+// The one arena-override seam (Gym Identity T0's gymArenaFor,
+// generalized by Legendary Arenas T0): a map's own treatment from
+// GYM_ARENA_ART or VENUE_ARENA_ART, else null — every read site then
+// falls back to the Ground's ARENA_ART / ARENA_AMBIENT treatment.
+function arenaOverrideFor(field) {
   if (!field || !field.mapId) return null;
-  return GYM_ARENA_ART[field.mapId] || null;
+  return GYM_ARENA_ART[field.mapId] || VENUE_ARENA_ART[field.mapId] || null;
 }
 
 // Darken/lighten a #rrggbb hex by a factor (arena layer palette steps).
@@ -2844,7 +2872,7 @@ export class BattleScene {
     // dark base, accent rim line) instead of one beige disc on all 15
     // Grounds. Legacy no-field battles keep the shipped beige disc.
     const gid = this.field ? (this.field.id || this.field.groundId) : null;
-    const ga = gymArenaFor(this.field) || (gid ? (ARENA_ART[gid] || null) : null);
+    const ga = arenaOverrideFor(this.field) || (gid ? (ARENA_ART[gid] || null) : null);
     const cols = ga
       ? [ga.light, ga.ground[1], ga.ground[3], ga.ground[4], ga.dark]
       : ['#f2ecd8', '#ddd2ac', '#ddd2ac', '#ddd2ac', '#b3a586'];
@@ -2988,7 +3016,7 @@ export class BattleScene {
     // over its Ground's when one exists; empty at T0, so this reduces
     // to the Wave 6c read for every battle.
     const gid = this.field ? (this.field.id || this.field.groundId) : null;
-    const ga = gymArenaFor(this.field) || (gid ? (ARENA_ART[gid] || null) : null);
+    const ga = arenaOverrideFor(this.field) || (gid ? (ARENA_ART[gid] || null) : null);
 
     // ---- upper field: per-Ground bands, else sky (grass/water) or wall (cave/gym) ----
     if (ga) {
