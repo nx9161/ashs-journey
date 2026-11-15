@@ -142715,44 +142715,6 @@ const MAPS2 = {
     start: null,
   },
 
-  silph2: {
-    id: 'silph2', name: 'Vantage Co. — Top Floor', music: 'gym-theme', indoor: true,
-    rows: rows([
-      'ṛṠIIIIIIIIIIIIIIẀI',
-      'Iθḛ%%%%%%%%%%%%%θI',
-      'IḞ%ẃẃ%%SSSS%%%%%%I',
-      'I%%%%%%%%%%%%%%%%I',
-      'Ẁ%%%%%ẃ%%%%%%%%%%I',
-      'I%%ξḜψζ%ẃ%%%%%ξ%%I',
-      'Iẃ%%%%%%ε%%%%%%%%I',
-      'I%%%%%%%%%%%%%%%%I',
-      'I%%ξ%%%%%%%%γ%ξ%ẃI',
-      'I%ẃ%%%%%%%%%%%%%%I',
-      'Ẁ%%%%%%ẃ%%%%%%%%ḝẀ',
-      'IIIIIIẀIIIIIIẀIIII',
-    ]),
-    warps: [
-      { x: 8, y: 2, to: { map: 'silph1', x: 8, y: 6 } },
-      { x: 9, y: 2, to: { map: 'silph1', x: 9, y: 6 } },
-    ],
-    signs: [],
-    npcs: [
-      { x: 15, y: 2, name: 'PRESIDENT', art: 'gent', skin: '#e8b888', shirt: '#4a4a5a', pants: '#2a2a3a', hair: '#c0c0c0',
-        dialogue: ["You drove them out of my building?! Vantage owes you a debt no bonus could cover.", "My researchers insisted you take their KELPSAIL — she carried our crew through every storm at sea."] },
-      { x: 13, y: 9, name: 'RESEARCHER', art: 'scientist', skin: '#f0c8a0', shirt: '#f0f0f0', pants: '#4a4a5a', hair: '#1a1a1a',
-        giveMon: { species: 'lapras', level: 25 },
-        dialogue: ["This KELPSAIL ferried our survey team for years — gentle, wise, unsinkable.", "She's yours now, with the president's blessing. The seas of Arden are open to you."] },
-    ],
-    encounters: null,
-    items: [
-      { x: 16, y: 10, item: 'cardkey', n: 1 },
-    ],
-    hidden: [],
-    events: [
-      { id: 'ev_silph_boss', x: 9, y: 5, when: { flagNot: 'ev_silph_boss_done' } },
-    ],
-    start: null,
-  },
 
   route9: {
     id: 'route9', name: 'Route 9', music: 'route1-theme',
@@ -143110,74 +143072,6 @@ const MAPS2 = {
     start: null,
   },
 
-  route12: {
-    id: 'route12', name: 'Route 12', music: 'route1-theme',
-    rows: rows([
-      '≲≲≲≲≲≲≲≲≱≱≲≲≲≲≲≲',
-      '≲≱≰≰≰≰≱≱≱≱≰~~≳≱≲',
-      '≲≱≰,,,,≰≱≱≰~~≳≱≲',
-      '≲≰≱,,,,≰≱≰≰~~≰≱≲',
-      '≲≱≰≰≱≱≰≱≱≱≱≰≰≱≰≲',
-      '≲≱≱,,,,≰≱≰≱≰≱≱≰≲',
-      '≲≱≰,,,,≰≰≰≰S≰≰≱≲',
-      '≲≱≱≰≱≱≰≰≱≰≰≰≱≱≰≲',
-      '≲≱≱,,,,≱≰≰≱~~≱≱≲',
-      '≲≱≱,,,,≱≱≰≰~~≰≰≲',
-      '≲≰≰≱≱≱≰≱≰≱≱≱≱≰≱≲',
-      '≲≱≰FF≰≰≰≱≱≱≰≱≰≰≲',
-      '≲≱≰≱≱≱≱≰≱≱≰≱≱≰≰≲',
-      '≲≲≲≲≲≲≲≲≱≱≲≲≲≲≲≲',
-    ]),
-    warps: [
-      { x: 8, y: 0, to: { map: 'lavender', x: 10, y: 12 } },
-      { x: 9, y: 0, to: { map: 'lavender', x: 11, y: 12 } },
-      { x: 8, y: 13, to: { map: 'route15', x: 2, y: 1 } },
-      { x: 9, y: 13, to: { map: 'route15', x: 3, y: 1 } },
-    ],
-    signs: [
-      { x: 11, y: 6, text: 'ROUTE 12 — The quiet fishing road. Mind the sleeper on the bridge; everyone does, eventually.' },
-    ],
-    npcs: [
-      { x: 5, y: 4, name: 'FISHER ED', art: 'fisher', skin: '#d8a878', shirt: '#3a6ac0', pants: '#2a3a4a', hair: '#4a3a2a',
-        trainer: 'r12_fisher', sight: { dir: 'right', range: 3 },
-        dialogue: ["Shh! You'll scare the — oh, forget it. Battle me, loudmouth!", "The big one got away. The BIG big one. It was THIS — never mind."] },
-    ],
-    encounters: {
-      rate: 0.12, waterRate: 0.1,
-      table: [
-        { species: 'oddish', min: 24, max: 28, weight: 20 },
-        { species: 'bellsprout', min: 24, max: 28, weight: 20 },
-        { species: 'gloom', min: 25, max: 28, weight: 15 },
-        { species: 'weepinbell', min: 25, max: 28, weight: 15 },
-        { species: 'venonat', min: 24, max: 28, weight: 20 },
-        { species: 'pidgey', min: 24, max: 28, weight: 10 },
-      ],
-      water: [
-        { species: 'tentacool', min: 25, max: 30, weight: 60 },
-        { species: 'goldeen', min: 25, max: 30, weight: 40 },
-      ],
-      fish: {
-        old: [
-          { species: 'magikarp', min: 10, max: 15, weight: 70 },
-          { species: 'poliwag', min: 10, max: 15, weight: 30 },
-        ],
-        good: [
-          { species: 'poliwag', min: 20, max: 25, weight: 50 },
-          { species: 'goldeen', min: 20, max: 25, weight: 50 },
-        ],
-        super: [
-          { species: 'goldeen', min: 25, max: 30, weight: 60 },
-          { species: 'krabby', min: 25, max: 30, weight: 40 },
-        ],
-      },
-    },
-    items: [],
-    hidden: [],
-    events: [
-      { id: 'ev_snorlax_east', x: 8, y: 7, when: { flagNot: 'ev_snorlax_east_done' } },
-    ],
-    start: null,
-  },
 
   route15: {
     id: 'route15', name: 'Route 15', music: 'route1-theme',
@@ -143774,39 +143668,6 @@ const MAPS2 = {
 
   // ---------- FERNMERE override: gym west side (locked), Route 22 exit ----------
 
-  'gym-viridian': {
-    id: 'gym-viridian', name: 'Fernmere Gym', music: 'gym-theme', indoor: true,
-    rows: rows([
-      '================',
-      '=ν++λ+λ+++θ++++=',
-      '=+μ++++++μ+++++=',
-      '=+++RR++++RR+++=',
-      '=++++//++++++++=',
-      '=++++//++++++++=',
-      '=++++//++++++++=',
-      '=+++)++)+++++++=',
-      '=++++++++++++++=',
-      '=====++DD++=====',
-    ]),
-    warps: [
-      { x: 7, y: 9, to: { map: 'viridian', x: 3, y: 4 } },
-      { x: 8, y: 9, to: { map: 'viridian', x: 4, y: 4 } },
-    ],
-    signs: [],
-    npcs: [
-      { x: 8, y: 2, name: 'VANE', art: 'giovanni', skin: '#d8a878', shirt: '#2a2a3a', pants: '#1a1a2a', hair: '#1a1a1a',
-        trainer: 'giovanni',
-        dialogue: ["So! The League's rising star darkens MY gym. I am Vane — leader here, and... other things, elsewhere.", "Impossible... beaten, in my own house. Take the Earth Badge. And forget you ever understood me."] },
-      { x: 4, y: 6, name: 'VEX', art: 'grunt', skin: '#e8b888', shirt: '#2a2a3a', pants: '#1a1a2a', hair: '#7a1a1a',
-        trainer: 'gym_viridian_1', sight: { dir: 'right', range: 3 },
-        dialogue: ["The boss only takes challengers who've earned seven badges. His standards are... organizational.", "Standards met, apparently. He's waiting. Try to survive the small talk."] },
-    ],
-    encounters: null,
-    items: [],
-    hidden: [],
-    events: [],
-    start: null,
-  },
 
   route22: {
     id: 'route22', name: 'Route 22', music: 'route1-theme',
@@ -143854,57 +143715,6 @@ const MAPS2 = {
     start: null,
   },
 
-  victoryroad: {
-    id: 'victoryroad', name: 'Crown Road', music: 'pewter-theme', indoor: true, dark: true,
-    rows: rows([
-      '⊏þ⊏ÿþÿ⊏⊏⊎⊎⊏⊏⊏ÿ⊏⊏',
-      '⊏⊎⊎⊎⊎⊎⊎⊎⊎⊎⊎⊎⊎⊎⊎⊏',
-      '⊏⊎⊎BB⊎⊎⊎⊎⊎⊎BB⊎⊎⊏',
-      '⊏⊎⊎⊎⊎⊎⊎⊎⊎⊎⊎⊎⊎⊎⊎⊏',
-      '⊏⊎⊎⊎⊎NNNN⊎⊎⊎⊎⊎⊎⊏',
-      '⊏⊎⊎⊎⊎⊎⊎⊎⊎⊎⊎⊎⊎⊎⊎⊏',
-      '⊏⊎⊎BB⊎⊎⊎⊎⊎⊎BB⊎⊎⊏',
-      '⊏⊎⊎⊎⊎⊎⊎⊎⊎⊎⊎⊎⊎⊎⊎⊏',
-      '⊏⊎⊎⊎⊎⊎⊎NNNN⊎⊎⊎⊎⊏',
-      '⊏⊎⊎⊎⊎⊎⊎⊎⊎⊎⊎⊎⊎⊎⊎⊏',
-      '⊏⊎⊎BB⊎⊎⊎⊎⊎⊎BB⊎⊎⊏',
-      '⊏⊎⊎⊎⊎⊎⊎⊎⊎⊎⊎⊎⊎⊎⊎⊏',
-      '⊏⊎⊎⊎⊎⊎⊎⊎⊎⊎⊎⊎⊎⊎⊎⊏',
-      '⊏⊏⊏⊏⊏⊏⊏⊏⊎⊎⊏⊏⊏⊏⊏⊏',
-    ]),
-    warps: [
-      { x: 8, y: 0, to: { map: 'indigo', x: 9, y: 13 } },
-      { x: 9, y: 0, to: { map: 'indigo', x: 10, y: 13 } },
-      { x: 8, y: 13, to: { map: 'route22', x: 1, y: 5 } },
-      { x: 9, y: 13, to: { map: 'route22', x: 1, y: 5 } },
-    ],
-    signs: [],
-    npcs: [
-      { x: 4, y: 5, name: 'ACE RIN', art: 'acetrainer', skin: '#f0c8a0', shirt: '#c03a3a', pants: '#2a2a3a', hair: '#1a1a2a',
-        trainer: 'vr_cool', sight: { dir: 'right', range: 3 },
-        dialogue: ["Only badge-bearers walk this road. Show me yours were earned, not inherited!", "Earned. Every single one. The plateau will taste your name soon."] },
-    ],
-    encounters: {
-      rate: 0.12, cave: true,
-      table: [
-        { species: 'graveler', min: 42, max: 48, weight: 25 },
-        { species: 'onix', min: 42, max: 48, weight: 20 },
-        { species: 'machoke', min: 42, max: 48, weight: 15 },
-        { species: 'arbok', min: 42, max: 48, weight: 12 },
-        { species: 'sandslash', min: 42, max: 48, weight: 12 },
-        { species: 'golbat', min: 42, max: 48, weight: 16 },
-      ],
-    },
-    items: [
-      { x: 14, y: 12, item: 'rarecandy', n: 1 },
-      { x: 2, y: 1, item: 'fullrestore', n: 1 },
-    ],
-    hidden: [],
-    events: [
-      { id: 'ev_moltres', x: 13, y: 11, when: { flagNot: 'ev_moltres_done' } },
-    ],
-    start: null,
-  },
 
   indigo: {
     id: 'indigo', name: 'Crownspire', music: 'viridian-theme',
@@ -143961,97 +143771,7 @@ const MAPS2 = {
   },
 
 
-  ceruleancave: {
-    id: 'ceruleancave', name: 'Tidehaven Cave', music: 'pewter-theme', indoor: true, dark: true,
-    rows: rows([
-      'GGGýGGGGýGGGGýGGýG',
-      'GLLLLLLLLLLLLLLLLG',
-      'GLLNNLLWWWWLLNNLLG',
-      'GLLLLLLWWWWLLLLLLG',
-      'GLLLLLLLLLLLLLLLLG',
-      'GLLNNLLLLLLLLNNLLG',
-      'GLLLLLLLLLLLLLLLLG',
-      'GLLLLLLWWWWLLLLLLG',
-      'GLLNNLLWWWWLLNNLLG',
-      'GLLLLLLLLLLLLLLLLG',
-      'GLLLLLLLLLLLLLLLLG',
-      'GLLLLLLLDDLLLLLLLG',
-      'GGGGGGGGGGGGGGGGGG',
-    ]),
-    warps: [
-      { x: 8, y: 11, to: { map: 'cerulean', x: 2, y: 2 } },
-      { x: 9, y: 11, to: { map: 'cerulean', x: 2, y: 2 } },
-    ],
-    signs: [],
-    npcs: [
-      { x: 3, y: 10, name: 'SURVIVOR', art: 'elder', skin: '#c89878', shirt: '#50368e', pants: '#4a4a5a', hair: '#c0c0c0',
-        dialogue: ["Locals call this the Unknown Dungeon. Only League champions are permitted past the rope.", "At its heart, something the labs made — and unmade themselves fearing. It waits. It REMEMBERS."] },
-    ],
-    encounters: {
-      rate: 0.12, cave: true, waterRate: 0.1,
-      table: [
-        { species: 'raichu', min: 55, max: 65, weight: 12 },
-        { species: 'electrode', min: 55, max: 65, weight: 12 },
-        { species: 'chansey', min: 55, max: 65, weight: 8 },
-        { species: 'ditto', min: 55, max: 65, weight: 10 },
-        { species: 'wigglytuff', min: 55, max: 65, weight: 12 },
-        { species: 'venomoth', min: 55, max: 65, weight: 12 },
-        { species: 'kadabra', min: 55, max: 65, weight: 12 },
-        { species: 'rhydon', min: 58, max: 65, weight: 10 },
-        { species: 'graveler', min: 55, max: 65, weight: 12 },
-      ],
-      water: [
-        { species: 'slowbro', min: 55, max: 65, weight: 30 },
-        { species: 'seadra', min: 55, max: 65, weight: 30 },
-        { species: 'psyduck', min: 55, max: 65, weight: 40 },
-      ],
-    },
-    items: [
-      { x: 16, y: 1, item: 'ultraball', n: 1 },
-      { x: 1, y: 10, item: 'rarecandy', n: 1 },
-    ],
-    hidden: [],
-    events: [
-      { id: 'ev_mewtwo', x: 8, y: 4, when: { flagNot: 'ev_mewtwo_done' } },
-    ],
-    start: null,
-  },
 
-  newisland: {
-    id: 'newisland', name: 'Exile Isle', music: 'pewter-theme',
-    rows: rows([
-      '~~~~~~~~~~~~~~~~~~',
-      '~................~',
-      '~..HHHHHH........~',
-      '~..HHHHHH....~~..~',
-      '~..HHDDHH........~',
-      '~................~',
-      '~....RRRR........~',
-      '~................~',
-      '~..S.............~',
-      '~................~',
-      '~................~',
-      '~~~~~~~~~~~~~~~~~~',
-    ]),
-    warps: [],
-    signs: [
-      { x: 3, y: 8, text: 'A storm-bent sign: EXILE ISLE RESEARCH STATION. Below, fresher paint: NO ONE WAS SUPPOSED TO COME BACK.' },
-    ],
-    npcs: [
-      { x: 12, y: 7, name: 'DR. ASHE', art: 'scientist', skin: '#e8b888', shirt: '#f0f0f0', pants: '#4a4a5a', hair: '#c0c0c0',
-        dialogue: ["We built this place to answer one question: can a copy love the original back?", "The storm that took the lab was no storm, child. It was a refusal. Remember that, whatever calls you here."] },
-      { x: 4, y: 10, name: 'SAILOR GHOST', art: 'sailor', skin: '#f0c8a0', shirt: '#3a6ac0', pants: '#2a2a3a', hair: '#1a1a1a',
-        dialogue: ["Ferry came in on a sea flat as glass. No wind. No birds. Just... an invitation, humming.", "You felt it too, didn't you? That's why your boat knew the way."] },
-    ],
-    encounters: null,
-    items: [],
-    hidden: [],
-    events: [
-      { id: 'ev_movie_arrive', x: 9, y: 10, when: { flagNot: 'ev_movie_arrive_done' } },
-      { id: 'ev_movie_climax', x: 5, y: 5, when: { flagNot: 'ev_movie_climax_done' } },
-    ],
-    start: null,
-  },
 };
 
 
@@ -144393,44 +144113,6 @@ const MAPS3 = {
     start: null,
   },
 
-  silph2: {
-    id: 'silph2', name: 'Vantage Co. — Top Floor', music: 'gym-theme', indoor: true,
-    rows: rows([
-      'ṛṠIIIIIIIIIIIIIIẀI',
-      'Iθḛ%%%%%%%%%%%%%θI',
-      'IḞ%ẃẃ%%SSSS%%%%%%I',
-      'I%%%%%%%%%%%%%%%%I',
-      'Ẁ%%%%%ẃ%%%%%%%%%%I',
-      'I%%ξḜψζ%ẃ%%%%%ξ%%I',
-      'Iẃ%%%%%%ε%%%%%%%%I',
-      'I%%%%%%%%%%%%%%%%I',
-      'I%%ξ%%%%%%%%γ%ξ%ẃI',
-      'I%ẃ%%%%%%%%%%%%%%I',
-      'Ẁ%%%%%%ẃ%%%%%%%%ḝẀ',
-      'IIIIIIẀIIIIIIẀIIII',
-    ]),
-    warps: [
-      { x: 8, y: 2, to: { map: 'silph1', x: 8, y: 6 } },
-      { x: 9, y: 2, to: { map: 'silph1', x: 9, y: 6 } },
-    ],
-    signs: [],
-    npcs: [
-      { x: 15, y: 2, name: 'PRESIDENT', art: 'gent', skin: '#e8b888', shirt: '#4a4a5a', pants: '#2a2a3a', hair: '#c0c0c0',
-        dialogue: ["You drove them out of my building?! Vantage owes you a debt no bonus could cover.", "Take our prototype — the Master Orb. It has never failed, and after today, I trust no hands but yours."],
-        give: { flag: 'pres_masterball', items: { masterball: 1 }, text: 'Master Orb' } },
-      { x: 13, y: 9, name: 'RESEARCHER', art: 'scientist', skin: '#f0c8a0', shirt: '#f0f0f0', pants: '#4a4a5a', hair: '#1a1a1a',
-        giveMon: { species: 'lapras', level: 25 },
-        dialogue: ["This KELPSAIL ferried our survey team for years — gentle, wise, unsinkable.", "She's yours now, with the president's blessing. The seas of Arden are open to you."] },
-    ],
-    encounters: null,
-    items: [],
-    hidden: [],
-    events: [
-      { id: 'ev_silph_rival', x: 9, y: 7, when: { flagNot: 'ev_silph_rival_done' } },
-      { id: 'ev_silph_boss', x: 9, y: 5, when: { flagNot: 'ev_silph_boss_done' } },
-    ],
-    start: null,
-  },
 
   // ================= CHUNK 2 — east block ==============================
   route9: {
