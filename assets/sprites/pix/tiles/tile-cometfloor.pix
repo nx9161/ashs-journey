@@ -1,0 +1,24 @@
+# Wave W17-O (Comet Falls): comet floor — star-stone cave flags: wet grey stone flags with sunk joints, and the fallen sky still in them — pale star-flecks scattered through the stone where the meteor’s fragments ground into the floor (design: torch-lit crater caverns filled with falling water; star-stone fragments in the rock, drawn in the floor’s own art, art layer only — the falls water and the shipped meteorstone stand byte-preserved beside it). Comet Deep’s own floor — split from Scorch Path’s ember-brown flags by hue (wet grey, not ember) and from Gloom Deep’s near-black earth by value and material (stone flags, not earth).
+PIX cometfloor 16 16
+aaaaaacabaaaaaaa
+aaaaccaabaaaaaaa
+caacaaaabacaaaca
+aaaaceaabaeaaaaa
+aaaaaaaabaaaaaaa
+aaaaaaacbacaaaaa
+acacaacabaaaaaca
+bbbbbbbbbbbbbbbb
+eaaabcaaaaaaaaaa
+aaaabcaaaaaeaaaa
+eaaabaacaeaaaaca
+aaaabacaaaaaaaaa
+aaaabaaaaaaaaaaa
+aafabaaafaeaaaaa
+aaaabaaaaaaaeaac
+bbbbbbbbbbbbbbbb
+PAL
+a #8d8578
+b #6b6455
+c #9d968a
+e #dfe9e4
+f #f2f7ee

@@ -1,0 +1,25 @@
+# Wave W17-O (Route 113): ash drift — a banked drift of Smokestack ash standing on the road’s verge where the fall collects: a smooth grey mound in the snowdrift form, soft-shaded, its crest pale where the light takes it and its foot already spilling back onto the grass (design: ash drifts banked along the road; the shipped map carries no fence kind, so the drifts bank on the verge grass against the ashground patches — recorded honestly in the checklist). On sweep turf (fully opaque, ground baked in) — the fleet’s only drift prop in the ash register, split from Yamato’s snowdrift by hue (warm grey ash, not snow).
+PIX tile-prop-ashdrift 16 16
+aaaaaaaaaaabaaaa
+aaaabaaaaaaagaaa
+aaaaaaaaaabbaaaa
+gaabagaaaaaaaaaa
+baaaaaabaaaaaaaa
+aabaaaaaaaaaaaga
+aaaabaaaaaabaaaa
+aagabaabaaaagbaa
+bbaabbaaaabaaaaa
+aaaaaapaaabaaaaa
+baaabaaaapaaaaaa
+agabawwpwwwbgbaa
+aaaamwwwwwwmaaaa
+baamgmmgmmmgmaaa
+aaababaaabaaaaaa
+abgaaabaaabaaaag
+PAL
+a #8a9a72
+b #7c8c64
+g #b5b8a6
+m #aeb09e
+w #c6c8b8
+p #dcdcc9

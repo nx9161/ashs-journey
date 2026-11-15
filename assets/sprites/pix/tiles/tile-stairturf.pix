@@ -1,0 +1,23 @@
+# Wave W17-O (Ragged Pass): stair turf — ledge grass on the mountain’s broken stair: warm grass worn thin at the ledge lips, pale stone-dust flecks where a thousand knees and boots have scuffed the edges (design: calm speckled grass on a broken ledged stair down a mountainside, warm earthy palette). The Pass’s own ground — warmer and more olive than Route 112’s ash-flecked slope grass, and split from it by the worn-lip register: this grass is STAIR-worn, not ash-dusted.
+PIX stairturf 16 16
+aaabaaabaaaaaaaa
+aaaawbababaaaada
+aaaaaaaawaaaaaad
+baaaabaaaaaaaaaa
+aaaaaawaaaaaaabd
+abaaaaaabaaaabaa
+aaaawaaaaaabwaaa
+abaawaaaaaaaaaaa
+badabaaaaabaaaaa
+aaaaaaaaaaaaaabb
+abaabaaaaaaabaaa
+adaaaaaabaabaaba
+aaabaaadaaaaaaaa
+awaaaabaawaadaaa
+aaadaaabwbaaaaaa
+aaabaaaaaaaaaaaa
+PAL
+a #7fa04f
+b #6b8c42
+w #e3d9ae
+d #5d7c38

@@ -3377,6 +3377,92 @@ W17N_KIND_DEFS.forEach(([kind], i) => {
 export const W17N_PROP_KINDS = W17N_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
 export const W17N_WALL_KINDS = W17N_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
 export const W17N_FLOOR_KINDS = W17N_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
+// Wave W17-O (Route Build Program, Maris Tranche 4 — the broken
+// stair, the ash road, the crater road, the fallen sky): Ragged
+// Pass -> Route 113 -> Route 114 -> Comet Falls -> Route 115.
+// All five maps are defined once in maps7.mjs (no dual copies in
+// Maris, so no registry re-pins arise). Conversions are
+// char-for-char kind swaps on grassground/path/tree (land
+// routes) or cavefloor/cavewall (Comet Falls); encounter
+// cells/tables, warps, NPC posts, sign records/texts and every
+// shipped biome/dressing kind stay byte-identical. Ragged Pass
+// "the broken stair" (1304-1307): stairturf is ledge grass with
+// worn-lip stone-dust flecks, stairfloor broken-stair sand —
+// the design's cut stair flights drawn as stepped lip edges in
+// the path kind's own art (the fallfloor discipline) —
+// stairpine a compact ledge pine, springpost spring-terrace
+// marker posts x2 on the lower steps; volcrock dressing (5)
+// stays byte-identical. Route 113 "Ash Road" (1308-1311):
+// sweepturf is ash-dulled grass with swept-clean patches,
+// sweepfloor the swept pale road with broom streaks drawn in
+// the kind, sweeppine an ash-pale pine, ashdrift banked ash
+// drifts x2 on the road's verge (the shipped map carries no
+// fence kind, so the drifts bank against the ashground
+// patches — recorded in the checklist); the shipped ashground
+// (26) + ashshrub (7) are the route's permanent ash biome —
+// byte-preserved by spec (Director ruling #3, the Frost Path
+// precedent). Route 114 "Crater Road" (1312-1315): impacturf
+// is crater-field grass with stone-dust flecks, impactfloor
+// crater-road sand with fallen stone chips in the tread,
+// impactpine a sturdy crater pine, hunterpost fossil hunters'
+// marker posts x2 among the craters; meteorstone (3) and the
+// 2 'L' falls-mouth warp cells stay byte-identical. Comet
+// Falls "Comet Deep" (1316-1317) converts by the cave method:
+// cometfloor takes the generic cavefloor (star-stone cave
+// flags, the design's fallen-sky fragments drawn as star
+// flecks in the floor's own art, art layer only) and
+// cometwall takes the cavewall (breached cavern wall, the
+// broken sky-roof drawn as a pale star-stone seam band);
+// falls water (59), meteorstone (3), cavecrystal (3) and
+// caveboulder (1) stay byte-identical, the trigger census is
+// taken before/after, and NO props are placed (cave
+// discipline). Twin: Scorch Path — Comet is the wet
+// fallen-sky cave, Scorch the hot heart. Route 115 "Falls
+// Shore" (1318-1321): mistturf is spray-fresh shore grass,
+// mistfloor falls-foot pale sand (design-authorised),
+// mistpine a spray-fresh shore pine, swimpost swimmer's
+// marker posts x2 at the falls' foot pool; shore water (60),
+// the rock falls-foot boulders (30 — falls dressing, NOT a
+// lane conversion) and the 2 'L' north-mouth warp cells stay
+// byte-identical. Ground kinds deliberately do NOT end in
+// 'floor' (the desire-path audit counts '*floor' as street
+// tier; grounds must never masquerade as street); path kinds
+// DO end in 'floor' so they register as the route's path tier
+// per route (checklist point 3). Indices 1304-1321 per the
+// program plan (WAVE-W17-MARIS-ROUTE-PROGRAM-PLAN.md): W17-L
+// took 1257-1276, W17-M 1277-1286, and W17-N takes 1287-1303
+// on its parallel branch; 1111 and every earlier documented
+// gap stay empty. Kind names verified unclaimed against
+// origin/main. Chars U+1E00+1304..
+export const W17O_KIND_DEFS = [
+  ['stairturf', 'floor'],
+  ['stairfloor', 'floor'],
+  ['stairpine', 'wall'],
+  ['springpost', 'prop'],
+  ['sweepturf', 'floor'],
+  ['sweepfloor', 'floor'],
+  ['sweeppine', 'wall'],
+  ['ashdrift', 'prop'],
+  ['impacturf', 'floor'],
+  ['impactfloor', 'floor'],
+  ['impactpine', 'wall'],
+  ['hunterpost', 'prop'],
+  ['cometfloor', 'floor'],
+  ['cometwall', 'wall'],
+  ['mistturf', 'floor'],
+  ['mistfloor', 'floor'],
+  ['mistpine', 'wall'],
+  ['swimpost', 'prop'],
+];
+export const W17O_KIND_CHARS = {};
+W17O_KIND_DEFS.forEach(([kind], i) => {
+  const ch = String.fromCodePoint(0x1E00 + 1304 + i);
+  W17O_KIND_CHARS[kind] = ch;
+  TILE_CHARS[ch] = kind;
+});
+export const W17O_PROP_KINDS = W17O_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
+export const W17O_WALL_KINDS = W17O_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
+export const W17O_FLOOR_KINDS = W17O_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
 export const SINNOH_TOWN_GROUND_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg);
 export const SINNOH_TOWN_GROUND2_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg2);
 // TX-3: the 8 gym exteriors by town (original type-accent motifs).
