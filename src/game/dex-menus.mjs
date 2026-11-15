@@ -99,31 +99,138 @@ Object.assign(Game.prototype, {
     }, { remember: 'dex', rowHtml: dexRowHtml, menuClass: 'dexlist' });
   },
 
-  // Elevation B5: the dex entry as its own plate, pageable in place —
-  // Left/Right (and Q/E, the PC box-switch convention) walk the whole
-  // Arden dex in dex order without returning to the list. Unseen
-  // neighbours render redacted, exactly as the list shows them (???).
-  openDexEntry(speciesId, filter) {
+  // Elevation B5 + W14-T2: the dex entry helpers and panel.
+  // W14-T2: the order the entry panel pages through. Opened from a
+  // filtered list, it is that list's own species order (the exact
+  // subsequence openDex builds, same predicate); otherwise the full
+  // 493 in dexNo order. The W14 census defect this replaces: the old
+  // order hard-capped dexNo at 151, so every Yamato/Maris/Borea entry
+  // (342 of 493) opened on the dexNo-1 entry instead of its own.
+  dexEntryOrder(filter) {
     const g = this;
-    const order = Object.keys(SPECIES)
-      .filter((id) => id !== 'partner' && !SPECIES[id].form && SPECIES[id].dexNo >= 1 && SPECIES[id].dexNo <= 151)
-      .sort((a, b) => SPECIES[a].dexNo - SPECIES[b].dexNo);
-    let idx = order.indexOf(speciesId);
-    if (idx < 0) idx = 0;
-    const render = () => {
-      const id = order[idx];
+    filter = filter || {};
+    const active = !!(filter.status || filter.type || filter.q);
+    if (!active) {
+      return Object.keys(SPECIES)
+        .filter((id) => id !== 'partner' && !SPECIES[id].form)
+        .sort((a, b) => SPECIES[a].dexNo - SPECIES[b].dexNo);
+    }
+    const matchSpecies = (id) => {
       const sp = SPECIES[id];
       const c = !!g.state.dex.caught[sp.dexNo], s = !!g.state.dex.seen[sp.dexNo];
-      const known = c || s;
-      const title = '◀ No.' + sp.dexNo + ' ' + (known ? sp.name : '???') + ' ▶';
-      const body = '<div class="sumhead"><img class="sumsprite" src="' + (known ? g.spriteDataUrl(id) : '') + '" alt="">'
-        + '<div><div class="sumname">' + (known ? sp.name : '???') + '</div>'
-        + '<div class="sumsub">' + (known ? sp.types.join(' / ') : '???') + '</div>'
-        + '<div class="sumsub">Status: ' + (c ? 'CAUGHT' : s ? 'SEEN' : 'UNSEEN') + '</div></div></div>'
-        + '<div class="sumflavor">' + (known ? sp.flavor : 'No data yet — this Kin has not been seen.') + '</div>'
-        + '<div class="sumsub">◀ ▶ : previous / next entry</div>';
-      return { title, bodyHtml: body };
+      if (filter.status === 'caught' && !c) return false;
+      if (filter.status === 'seen' && !(s && !c)) return false;
+      if (filter.status === 'unseen' && (s || c)) return false;
+      if (filter.type && !sp.types.includes(filter.type)) return false;
+      if (filter.q && sp.name.toLowerCase().indexOf(filter.q.toLowerCase()) < 0) return false;
+      return true;
     };
+    return Object.keys(SPECIES).filter((id) => id !== 'partner' && !SPECIES[id].form && matchSpecies(id));
+  },
+
+  // The dex unit an id belongs to: formes resolve to their base
+  // species, the partner to the wild VOLTIK record (the design-depth
+  // D6 fold — one creature, one entry). Units resolve to themselves.
+  dexUnitOf(id) {
+    const sp = SPECIES[id];
+    if (!sp) return null;
+    if (id !== 'partner' && !sp.form) return id;
+    if (sp.form && sp.baseSpecies && SPECIES[sp.baseSpecies]) return sp.baseSpecies;
+    return Object.keys(SPECIES).find((k) => k !== 'partner' && !SPECIES[k].form && SPECIES[k].dexNo === sp.dexNo) || null;
+  },
+
+  // W14-T2: habitat derivation — the area names whose encounter tables
+  // hold this species (the same tables openDexAreas reads), deduped by
+  // display name in table order. Empty when the species is in no
+  // encounter table (starters, gifts, legendaries, event Kin): the
+  // entry then carries no Areas line at all — absence makes no claim.
+  dexAreasOf(id) {
+    const names = [];
+    for (const mapId of Object.keys(MAPS)) {
+      const m = MAPS[mapId];
+      if (m.encounters && m.encounters.table.some((e) => e.species === id) && !names.includes(m.name)) names.push(m.name);
+    }
+    return names;
+  },
+
+  // W14-T2: the evolution line, derived from the records at render
+  // time — pre-evolution by inverting the evo graph, outbound from the
+  // record's own evo/evos. Chain members the player has not seen are
+  // redacted to ??? under the same rule as the list rows; levels print
+  // as recorded (each arc's levels are band-local by design). Returns
+  // null when the record has no chain links — no line, no claim.
+  dexEvoText(id) {
+    const g = this;
+    const sp = SPECIES[id];
+    const nameOf = (rec) => (g.state.dex.caught[rec.dexNo] || g.state.dex.seen[rec.dexNo]) ? rec.name : '???';
+    const outsOf = (rec) => (rec.evos && rec.evos.length ? rec.evos : (rec.evo ? [rec.evo] : []));
+    const parts = [];
+    const preNos = new Set();
+    for (const other of Object.values(SPECIES)) {
+      if (other.id === id || preNos.has(other.dexNo)) continue;
+      if (outsOf(other).some((e) => e.to === id)) { preNos.add(other.dexNo); parts.push('← ' + nameOf(other)); }
+    }
+    for (const e of outsOf(sp)) {
+      const t = SPECIES[e.to];
+      if (!t) continue;
+      parts.push('→ ' + nameOf(t) + (e.method === 'level' && e.level ? ' at Lv ' + e.level : ' by ' + e.method));
+    }
+    return parts.length ? parts.join(' · ') : null;
+  },
+
+  // W14-T2: the ONE composition path for a dex entry — openDexEntry
+  // renders through it and the kindex guard composes through it, so
+  // what the guard proves is byte-identical to what the panel shows.
+  // Known (seen/caught) entries gain the three lines the records have
+  // always held: Design (the W13 design feed), Areas and Evolves
+  // (each omitted entirely when the record has none). Unseen entries
+  // keep the full redaction — no name, flavor, design or sprite leaks.
+  dexEntryRender(id) {
+    const g = this;
+    const sp = SPECIES[id];
+    const c = !!g.state.dex.caught[sp.dexNo], s = !!g.state.dex.seen[sp.dexNo];
+    const known = c || s;
+    const title = '◀ No.' + sp.dexNo + ' ' + (known ? sp.name : '???') + ' ▶';
+    let body = '<div class="sumhead"><img class="sumsprite" src="' + (known ? g.spriteDataUrl(id) : '') + '" alt="">'
+      + '<div><div class="sumname">' + (known ? sp.name : '???') + '</div>'
+      + '<div class="sumsub">' + (known ? sp.types.join(' / ') : '???') + '</div>'
+      + '<div class="sumsub">Status: ' + (c ? 'CAUGHT' : s ? 'SEEN' : 'UNSEEN') + '</div></div></div>'
+      + '<div class="sumflavor">' + (known ? sp.flavor : 'No data yet — this Kin has not been seen.') + '</div>';
+    if (known) {
+      if (sp.design) body += '<div class="sumsub dexdesign">Design: ' + sp.design.inspired + ' — ' + sp.design.note + '</div>';
+      const areas = g.dexAreasOf(id);
+      if (areas.length) body += '<div class="sumsub dexareas">Areas: ' + areas.slice(0, 3).join(' · ') + (areas.length > 3 ? ' +' + (areas.length - 3) + ' more' : '') + '</div>';
+      const evo = g.dexEvoText(id);
+      if (evo) body += '<div class="sumsub dexevo">Evolves: ' + evo + '</div>';
+    }
+    body += '<div class="sumsub">◀ ▶ : previous / next entry</div>';
+    return { title, bodyHtml: body };
+  },
+
+  // Elevation B5: the dex entry as its own plate, pageable in place —
+  // Left/Right (and Q/E, the PC box-switch convention) walk the
+  // originating list's order (W14-T2: the full 493 in dexNo order, or
+  // the filtered list's own order) without returning to the list.
+  // Unseen neighbours render redacted, exactly as the list shows
+  // them (???).
+  openDexEntry(speciesId, filter) {
+    const g = this;
+    let order = g.dexEntryOrder(filter);
+    let idx = order.indexOf(speciesId);
+    if (idx < 0) {
+      // Not a unit of the originating list (a forme, the partner, or a
+      // filtered-out species): resolve to its dex unit and, if the
+      // unit is outside this filter too, page the full dex instead —
+      // the requested entry still opens on itself, never on dexNo 1.
+      const unit = g.dexUnitOf(speciesId);
+      idx = unit ? order.indexOf(unit) : -1;
+      if (idx < 0) {
+        order = g.dexEntryOrder(null);
+        idx = unit ? order.indexOf(unit) : -1;
+      }
+      if (idx < 0) idx = 0;
+    }
+    const render = () => g.dexEntryRender(order[idx]);
     g.ui.showEntryPanel(render(), (act, d) => {
       if (act === 'page') {
         idx = (idx + d + order.length) % order.length;
