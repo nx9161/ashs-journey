@@ -52,19 +52,19 @@
 // graded at merge by the Director's eye, the same split as every wave.
 //
 // Legendary Arenas wave (NO-SAME-KIT fix #10) extends this suite into
-// the ARENA-IDENTITY guard: the §V section below holds the 53 non-gym
-// special venues (WAVE-ARENAS-PLAN §1 census — 32 legendary face
-// venues, 9 league interiors, 2 stadiums, 10 Frontier facility maps)
-// to the same discipline. Arenas T0 generalizes the seam: gymArenaFor
+// the ARENA-IDENTITY guard: the §V section below holds the non-gym
+// special battle venues (WAVE-ARENAS-PLAN §1 census — 32 legendary
+// face venues, 9 league interiors, 2 stadiums, 10 Frontier facility
+// maps; census 48 since the T2 merge — 5 Borea chamber maps moved to
+// the VENUE_EXCLUDED list in §V on proof they host no battle) to the
+// same discipline. Arenas T0 generalizes the seam: gymArenaFor
 // becomes arenaOverrideFor, consulting GYM_ARENA_ART first (untouched)
 // then the new VENUE_ARENA_ART (ships EMPTY), Ground fallback last;
 // the M-section needles were re-cut to the generalized wiring in the
 // T0 commit, at the same strength, disclosed here. Venue ratchets:
-//   VENUE_ARENA_COVERED      venues with a VENUE_ARENA_ART entry  0 -> 53
-//                            (T2 measured path: -> 48 of 53, the 5
-//                            Borea chamber maps out on proof — §V)
+//   VENUE_ARENA_COVERED      venues with a VENUE_ARENA_ART entry  0 -> 48
 //   VENUE_TUPLES_DISTINCT    distinct arena signatures over the
-//                            covered venues                       0 -> 53
+//                            covered venues                       0 -> 48
 // The freeze extends to the venues explicitly: each venue's
 // MAP_GROUND value is pinned per map in §V, and a whole-table
 // MAP_GROUND hash (all 432 assignments) is pinned there too — the §F
@@ -321,12 +321,12 @@ ok(`S5 ratchet: INTERIOR_TUPLES_DISTINCT = pin ${INTERIOR_TUPLES_DISTINCT} over 
   `measured ${new Set(allTuples).size}`);
 
 // ---------------- V: venues (Legendary Arenas wave, fix #10) -----------
-// The 53 special battle venues outside the gyms (WAVE-ARENAS-PLAN §1):
-// 32 legendary/mythical face venues, 9 league interiors, 2 stadiums,
-// 10 Frontier facility maps. Roamers are OUT (Director ruling: the
-// map-keyed law — a roaming battle reads as the place it found you);
-// two faces sharing one map (meteor-falls, spear-pillar) take ONE
-// treatment per map. The pinned list IS the census — a new
+// The special battle venues outside the gyms (WAVE-ARENAS-PLAN §1):
+// 32 legendary/mythical face venues, 4 league interiors, 2 stadiums,
+// 10 Frontier facility maps = census 48. Roamers are OUT (Director
+// ruling: the map-keyed law — a roaming battle reads as the place it
+// found you); two faces sharing one map (meteor-falls, spear-pillar)
+// take ONE treatment per map. The pinned list IS the census — a new
 // venue-shaped map fails here by name until a tranche charters it.
 const VENUE_IDS = [
   'ancient-tomb', 'bell-tower-1', 'bell-tower-2', 'ceruleancave',
@@ -335,9 +335,8 @@ const VENUE_IDS = [
   'frontier-pike', 'frontier-pyramid', 'frontier-pyramid-a',
   'frontier-pyramid-b', 'frontier-pyramid-c', 'frontier-tower',
   'hall-of-origin', 'ice-cave', 'ilex-forest', 'island-cave',
-  'lake-acuity-cave', 'lake-valor-cave', 'league', 'league-chamber-1',
-  'league-chamber-2', 'league-chamber-3', 'league-chamber-4',
-  'league-champion', 'league-evergrande', 'league-lobby',
+  'lake-acuity-cave', 'lake-valor-cave', 'league',
+  'league-evergrande', 'league-lobby',
   'lightning-cave', 'magma-hideout', 'meteor-falls', 'mt-mortar-2',
   'national-park', 'newisland', 'newmoon-island', 'powerplant',
   'pokemon-league', 'pummelo-stadium', 'r125', 'r127-underwater',
@@ -345,28 +344,48 @@ const VENUE_IDS = [
   'snowpoint-temple-depths', 'spear-pillar', 'stark-interior',
   'turnback-cave', 'victoryroad',
 ];
+// EXCLUDED from the venue census (Director ruling at the T2 merge,
+// 2026-11-15): the five Borea league chamber maps are NOT battle
+// venues. Proof (T2 build, verified against the game's own data):
+// no trainer post, no map event, no story post, no system handler
+// and no encounter table exists for any of them anywhere in the
+// shipped game; each chamber's own sign defers its keeper to "the
+// League's season", and Borea's campaign completes at the Conference
+// in the lobby (q_sinnoh_tobias -> sinnoh_complete) — no battle can
+// ever render on these maps, so an arena treatment for them would
+// be dead code. The exclusion is the tripwire: if a future season
+// wires battles into a chamber, its name must move back into
+// VENUE_IDS above and take a chartered treatment — the checks below
+// fail while it sits here carrying an entry, and the MAP_GROUND
+// freeze pins at the bottom of this section keep covering all five.
+const VENUE_EXCLUDED = [
+  'league-chamber-1', 'league-chamber-2', 'league-chamber-3',
+  'league-chamber-4', 'league-champion',
+];
 // Ratchets (Arenas T0 measured; burn down per tranche, in-commit only):
 // T1 +14 sovereigns/finales -> 14. T2 +6 league/stadiums -> 20 (11
-// chartered; league-chamber-1..4 + league-champion came OUT on
-// build-time proof — they host no battle in the shipped game: no
-// trainer post, event, story post, handler or encounter table, and
-// their signs defer their keepers to "the League's season"; they
-// stay in the census above UNCOVERED). T3 +18 remaining legendary
-// -> 38, T4 +10 frontier -> 48 of 53 — whether the census itself
-// drops 53 -> 48 is the Director's call at the T2 merge, flagged in
-// the T2 SPEC; the pins here record only what T2 measured.
+// chartered; the 5 chambers excluded per the ruling above — census
+// corrected 53 -> 48 as a labeled merge-side step at the T2 merge).
+// T3 +18 remaining legendary -> 38, T4 +10 frontier -> 48 of 48.
 const VENUE_ARENA_COVERED = 20;
 const VENUE_TUPLES_DISTINCT = 20;
 
-ok('V1 venue census is exactly the pinned 53 and every venue id is a merged map',
-  VENUE_IDS.length === 53 && new Set(VENUE_IDS).size === 53
+ok('V1 venue census is exactly the pinned 48 and every venue id is a merged map',
+  VENUE_IDS.length === 48 && new Set(VENUE_IDS).size === 48
   && VENUE_IDS.every((id) => !!MAPS[id]),
   'missing from MAPS: ' + VENUE_IDS.filter((id) => !MAPS[id]).join(','));
 ok('V2 venue census is disjoint from the gym census (no map is both a gym and a venue)',
   VENUE_IDS.every((id) => !GYM_IDS.includes(id)),
   VENUE_IDS.filter((id) => GYM_IDS.includes(id)).join(','));
+ok('V2b excluded list is exactly the 5 proof-excluded chamber maps, disjoint from the census, all real maps',
+  VENUE_EXCLUDED.length === 5 && new Set(VENUE_EXCLUDED).size === 5
+  && VENUE_EXCLUDED.every((id) => !!MAPS[id] && !VENUE_IDS.includes(id)),
+  VENUE_EXCLUDED.filter((id) => !MAPS[id] || VENUE_IDS.includes(id)).join(','));
+ok('V2c tripwire: no excluded chamber map carries a VENUE_ARENA_ART entry (a wired battle must re-charter it into the census first)',
+  VENUE_EXCLUDED.every((id) => !(VENUE_ARENA_ART && VENUE_ARENA_ART[id])),
+  VENUE_EXCLUDED.filter((id) => VENUE_ARENA_ART && VENUE_ARENA_ART[id]).join(','));
 const venueCovered = VENUE_IDS.filter((id) => VENUE_ARENA_ART && VENUE_ARENA_ART[id]);
-ok(`V3 ratchet: VENUE_ARENA_COVERED = pin ${VENUE_ARENA_COVERED} (T1 +14, T2 +6 of 11 — 5 chambers out on proof, T3 +18, T4 +10)`,
+ok(`V3 ratchet: VENUE_ARENA_COVERED = pin ${VENUE_ARENA_COVERED} (T1 +14, T2 +6 — census 48 after the chamber exclusion, T3 +18, T4 +10)`,
   venueCovered.length === VENUE_ARENA_COVERED,
   venueCovered.length > VENUE_ARENA_COVERED
     ? `measured ${venueCovered.length} — coverage grew outside a pin move (unrecorded claim)`
@@ -428,8 +447,8 @@ const VENUE_GROUND_PINS = {
   'spear-pillar': 'spirit', 'stark-interior': 'ember',
   'turnback-cave': 'grave', 'victoryroad': 'rubble',
 };
-for (const id of VENUE_IDS) {
-  ok(`V ${id} MAP_GROUND stays '${VENUE_GROUND_PINS[id]}' (freeze extended to venues)`,
+for (const id of [...VENUE_IDS, ...VENUE_EXCLUDED]) {
+  ok(`V ${id} MAP_GROUND stays '${VENUE_GROUND_PINS[id]}' (freeze extended to venues; excluded chambers stay pinned)`,
     MAP_GROUND[id] === VENUE_GROUND_PINS[id], String(MAP_GROUND[id]));
 }
 ok('V9 the whole MAP_GROUND table (all 432 assignments) hashes unchanged',
