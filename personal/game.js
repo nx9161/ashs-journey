@@ -5970,6 +5970,80 @@ W17AA_KIND_DEFS.forEach(([kind], i) => {
 const W17AA_PROP_KINDS = W17AA_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
 const W17AA_WALL_KINDS = W17AA_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
 const W17AA_FLOOR_KINDS = W17AA_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
+// Wave W17-AB (Borea Tranche 8 — the League sea road, the
+// stone coast, the Foamline, the hard road): Route 223 takes
+// the League Sea Road register — leaguesand (deep-lane sand,
+// cliff-shadow flecks) and leaguerock (cliff-foot rock,
+// vertical joint drawing); the lane's water 366, current 8
+// (MECHANIC DATA, byte-identical counts and positions),
+// kelpbed 22, coral 9, kelp 7 and uwcoral 5 stand
+// byte-preserved entire, and the lane's low convertible
+// count (seasand 8 + rock 6) is the pre-recorded R40-class
+// spec-presence exception — declared, never fixed by paving
+// water (Ruling #5). Summit Road (victory-road) is EXCLUDED
+// from this program — its side of the r223 warp pair is not
+// edited. Route 224 takes the Stone Coast register —
+// headturf (suffix-free ground, stone-coast turf with flower
+// flecks), headfloor (the path tier, *floor per checklist
+// point 3 — the champion's road pale sand), headpine (wall
+// class, as every route tree) and the headpost prop (two
+// headstone marker posts on verified grassground cells —
+// the design's white stones standing in the prop register);
+// encounter grass 45, flower 17, shore water 15, rock 4,
+// signpost 4 and fence 3 stand byte-preserved. Foamline Path
+// takes its own register by THE CAUSEWAY METHOD (Ruling #4,
+// second use after Route 218): boardwalk converts entire to
+// foamfloor (foam-flecked plank floor — bright joints, foam
+// flecks drawn in the kind's own art), the shore-end trees
+// to foampine and the footing rocks to foamrock; NO ground
+// register ships on this map — recorded, not invented;
+// water 332 stands byte-preserved, and flower-paradise's
+// side of the east warp pair is not edited (out of
+// program). Route 225 takes the Hard Road register —
+// scorchturf (suffix-free ground, scorched hardpan turf
+// with crater-dust flecks), zonefloor (the hard road's worn
+// sand), zonepine (wall class — a tough sparse crown that
+// still reads as a tree) and the zonepost prop (two
+// training-ground marker posts on verified grassground
+// cells); encounter grass 46, flower 21, pond water 15,
+// rock 6 and signpost 2 stand byte-preserved. Ground kinds
+// deliberately do NOT end in 'floor' (the desire-path audit
+// keys its street tier on that suffix; grounds must never
+// masquerade as street); the path kinds DO end in 'floor'.
+// Sea-lane sand kinds carry the 'floor' class as every
+// Maris lane sand before them (swapped 1:1 from the
+// walkable seasand char). Indices 1507-1519 per the program
+// plan (WAVE-W17-BOREA-ROUTE-PROGRAM-PLAN.md): the Borea
+// allocation runs 1384-1535 (W17-U took 1384-1401, W17-V
+// 1402-1421, W17-W 1422-1431, W17-X 1432-1451, W17-Y
+// 1452-1469, W17-Z 1470-1491; W17-AA takes 1492-1506 on its
+// parallel branch); 1111 and every earlier documented gap
+// stay empty. Kind names verified unclaimed against
+// origin/main.
+const W17AB_KIND_DEFS = [
+  ['leaguesand', 'floor'],
+  ['leaguerock', 'wall'],
+  ['headturf', 'floor'],
+  ['headfloor', 'floor'],
+  ['headpine', 'wall'],
+  ['headpost', 'prop'],
+  ['foamfloor', 'floor'],
+  ['foampine', 'wall'],
+  ['foamrock', 'wall'],
+  ['scorchturf', 'floor'],
+  ['zonefloor', 'floor'],
+  ['zonepine', 'wall'],
+  ['zonepost', 'prop'],
+];
+const W17AB_KIND_CHARS = {};
+W17AB_KIND_DEFS.forEach(([kind], i) => {
+  const ch = String.fromCodePoint(0x1E00 + 1507 + i);
+  W17AB_KIND_CHARS[kind] = ch;
+  TILE_CHARS[ch] = kind;
+});
+const W17AB_PROP_KINDS = W17AB_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
+const W17AB_WALL_KINDS = W17AB_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
+const W17AB_FLOOR_KINDS = W17AB_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
 const SINNOH_TOWN_GROUND_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg);
 const SINNOH_TOWN_GROUND2_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg2);
 // TX-3: the 8 gym exteriors by town (original type-accent motifs).
@@ -122563,6 +122637,240 @@ const ART = {
     "aaaaaaaaaaaabaab",
     "aaaaaaaaaaaaaaaw"
   ] },
+  "tile-leaguesand": { w: 16, h: 16, pal: {"a":"#7fa6b8","d":"#5d8296","s":"#a9c9d6","e":"#4c6e82"}, rows: [
+    "adaaaasdaaaaaaaa",
+    "aaaaaaaadaaaaaaa",
+    "aaaadaaaaaaaaaad",
+    "aaaaadsaaaaaadda",
+    "aaaaaaaadaaaaaaa",
+    "aaaaaaaddaadddaa",
+    "aaaadadaaaadasaa",
+    "aaaeaaaaadaaaaaa",
+    "asaasaaaadaaaaaa",
+    "aaaaaeaaasaaaaaa",
+    "aaaaaaaaaaaasaaa",
+    "daaaaaaaaaadaaaa",
+    "aaaaddaaaaaadasa",
+    "daaaaaaaadaaaaaa",
+    "aaadaaaadadaadaa",
+    "aaaaaaaadaaaaaaa"
+  ] },
+  "tile-leaguerock": { w: 16, h: 16, pal: {"w":"#567cbd","x":"#476baa","y":"#7093c7","z":"#494650","c":"#9d98a4","m":"#6a6770","p":"#d5d0da","f":"#e8f0ee"}, rows: [
+    "ywwwwwwwxwwwwwww",
+    "wxwwwwwwwwwwwwww",
+    "xwwwwwwwwwyxwwww",
+    "wwwwwppppmwywxyw",
+    "wwwxppppzmmwxwww",
+    "wwwwcppzcmzmwwww",
+    "wwwxmmcmmmczywxw",
+    "xwymmccmmmzmmwww",
+    "wwwmzmzzcmzmcwww",
+    "wwwwmzzzmmccwwww",
+    "wwwwmmzmmmzzwwww",
+    "wxwxwczmmmzwwwww",
+    "wwwwffmfmmfwxwww",
+    "wwwfffwwfffffwwx",
+    "wwwwwwwwwwwwwwww",
+    "xwwwxywwwxwwxyww"
+  ] },
+  "tile-headturf": { w: 16, h: 16, pal: {"a":"#7cab62","b":"#689a52","s":"#a3a08e","w":"#f4f1de","y":"#eed98c"}, rows: [
+    "ayaaabababaaaaaa",
+    "aaaaayabaaaaaaab",
+    "aasaasaaasbaabaa",
+    "aaaaaaaabaayaaaa",
+    "aaaaaaaaaaaaaaaa",
+    "aaaaaaaaaabasaab",
+    "aaaaaaaaaayaaaaa",
+    "aaaaabaaaaaaabaa",
+    "asaaaaabaaabaaba",
+    "babaaaaaaaaababa",
+    "abaabaaabbaaaaaa",
+    "aaaaabaaaaaaaasa",
+    "aababbbaaaaaabaa",
+    "aaaaaaaaababbaaa",
+    "aaybabaawaaaaaba",
+    "aaaaaaaaaaaaaaaa"
+  ] },
+  "tile-headfloor": { w: 16, h: 16, pal: {"a":"#e6d9ba","b":"#d3c199","p":"#f4ecd8","g":"#ac9a72"}, rows: [
+    "aaaapbaabpagbaaa",
+    "paabaabgabaaabab",
+    "apaaaaaaaaaaaaaa",
+    "aaaaaaaabbaaaaaa",
+    "aaaabaaabaaaaaaa",
+    "abaabapaaabaaapa",
+    "baagpaapaaaabaab",
+    "aaabaaaaaaabaaaa",
+    "bapbabaappaapaaa",
+    "ababappaaapaaaaa",
+    "aaaabaagaabbaaaa",
+    "aaaaabaaaaabaaab",
+    "aabaaaabaaaaabaa",
+    "baaaaaaaaaaaabba",
+    "aaaaaaaaabaaaaba",
+    "aaaaaabaaaaaaaab"
+  ] },
+  "tile-headpine": { w: 16, h: 16, pal: {"a":"#7cab62","b":"#689a52","t":"#437f4e","u":"#2f5e3c","h":"#8cc084","k":"#5a4630"}, rows: [
+    "baaaaaaaaaabaaaa",
+    "aaaaaahhhhaaaaaa",
+    "abaaahhhhhhabaaa",
+    "aaaatutuuuuhaaaa",
+    "aabaauttthtaabaa",
+    "aaattutuhuhutaaa",
+    "aaabhuuttutuaaba",
+    "aaattututthhhaaa",
+    "aaaauuuththhaaab",
+    "aattthtuhttttuaa",
+    "aaatutuuttthtaaa",
+    "baaaaaakkaabaaaa",
+    "aaaaaabkkaaaaaaa",
+    "abaaaaakkaaabaaa",
+    "aaaaaauuuuaaaaaa",
+    "aabaaaaaaaaaabaa"
+  ] },
+  "tile-prop-headpost": { w: 16, h: 16, pal: {"a":"#7cab62","b":"#689a52","s":"#c6c0ac","w":"#f2efe4","d":"#5d4c34","k":"#7d6a4c"}, rows: [
+    "babaaaawwaaabaaa",
+    "aaaaabwwwsababaa",
+    "asaaaawwwsaaaaaa",
+    "baabaawwwsaababb",
+    "aaaaaaakdaaaaaaa",
+    "baabaaakdaaabbaa",
+    "aaaaabakdaaaaaaa",
+    "baaabaakdaaaaaab",
+    "aaaababkdaaaaaaa",
+    "aaabaaakdaaasaaa",
+    "saaabaakdaaaaaaa",
+    "aaaaaaakdabaaaaa",
+    "aaaaaaakdaaaaaaa",
+    "aaaaasddddsaaaaa",
+    "aaaaaaaaaaaaaaaa",
+    "aaaaaaaaaaaaaaaa"
+  ] },
+  "tile-foamfloor": { w: 16, h: 16, pal: {"a":"#c79f66","c":"#dbb87e","j":"#7d5c33","f":"#f8f4e4","n":"#a37c46"}, rows: [
+    "aacaafajaaaaaaaa",
+    "faaaaaajaacaccaa",
+    "aaaaaaajfaaacaaa",
+    "jjjjjjjjjjjjjjjj",
+    "acajacaaaaaaaaaa",
+    "faajaaaaaaaacaac",
+    "aanjaaaacacafaac",
+    "jjjjjjjjjjjjjjjj",
+    "faaaaaccaaaajaca",
+    "caaaaaaaafaajaca",
+    "aaaafaaaaaaajcaa",
+    "jjjjjjjjjjjjjjjj",
+    "aaaaaajaafaafaaa",
+    "anaaaajaaanaaaaa",
+    "aaaaaajaaaacacac",
+    "jjjjjjjjjjjjjjjj"
+  ] },
+  "tile-foampine": { w: 16, h: 16, pal: {"a":"#8ab860","b":"#77a54d","t":"#478236","u":"#2f6129","h":"#a5d97e","k":"#5e4630"}, rows: [
+    "baaaaaaaaaabaaaa",
+    "aaaaaahhhhaaaaaa",
+    "abaaahhhhhhabaaa",
+    "aaaattthuhttaaaa",
+    "aabaauhtuuuaabaa",
+    "aaauuhuhhuhthaaa",
+    "aaabuuuthutuaaba",
+    "aaahthuthuuhuaaa",
+    "aaaattttuuhhaaab",
+    "aahthttuttuuuuaa",
+    "aaahtttutttttaaa",
+    "baaaaaakkaabaaaa",
+    "aaaaaabkkaaaaaaa",
+    "abaaaaakkaaabaaa",
+    "aaaaaauuuuaaaaaa",
+    "aabaaaaaaaaaabaa"
+  ] },
+  "tile-foamrock": { w: 16, h: 16, pal: {"w":"#567cbd","x":"#476baa","y":"#7093c7","z":"#7e7466","c":"#c9bfa9","m":"#a79c8c","p":"#f4efe0","f":"#f2f7ee"}, rows: [
+    "wwwwxwxwwwwwwwww",
+    "wwxwwwwxwwxwwwwx",
+    "wwwwwwxwwwwwxwww",
+    "wwwwwppppzwwwwww",
+    "wwwwppppmzcwwwww",
+    "wwwycppmzcccwwxw",
+    "wxwwmmzmzcmcwwww",
+    "wwwmmzmmmmcmcwxw",
+    "wxwmmmcmmmmmmwxw",
+    "xwwwcmcmzmmmwwww",
+    "wwwwmmcmccmcwwxw",
+    "wwxwwmcmczmwwwww",
+    "wxwxwfmmmcmfwwxx",
+    "wwwfffyffffffwww",
+    "xwwwwwwwxwwwwwww",
+    "ywwwwwxxxwwwxwww"
+  ] },
+  "tile-scorchturf": { w: 16, h: 16, pal: {"a":"#a87c46","d":"#c9ad7d","k":"#7d5a33","c":"#5f4630"}, rows: [
+    "aadaadkaaaaaaaad",
+    "akadaaaaaacaaaaa",
+    "aaadaaaaakaaaaak",
+    "aaaaaaaaacaaacad",
+    "aaaaaaakaaacaaaa",
+    "aaaaaaaaaaaaaaaa",
+    "caaaaacaacaaaada",
+    "aaaaadacakaadaaa",
+    "adaadaacaaaadaaa",
+    "ccaaakacaaddaaaa",
+    "aaaakdaaadaaaaaa",
+    "aacakaaaaaaaaaaa",
+    "aaaaaaaaaaaaaaac",
+    "aaaadcaadaaaaaaa",
+    "acaaaaaaaaadkaaa",
+    "aaaaaaaadaadddad"
+  ] },
+  "tile-zonefloor": { w: 16, h: 16, pal: {"a":"#d6bc8f","b":"#c2a878","w":"#ab905f","s":"#6e5136"}, rows: [
+    "awsaaaaaaaabaaaa",
+    "aaaabbabaaabbaaa",
+    "aaaaaaasaaaawaaa",
+    "aaaababaaaaaabaa",
+    "aaaaaasaabaawaaa",
+    "aababaaaaaaaaaab",
+    "aaaaaaaaaaaaaaaa",
+    "aabbaaaaaaaaaaab",
+    "aaawaaaaabaaaaaw",
+    "aawaababaaababbw",
+    "aaaabaaaaaaaaaab",
+    "baaaaaaaaaaaaaaa",
+    "aaaaaaaaabaabaaa",
+    "abaaaaaabaaaaaaa",
+    "aaaaaaaabaaabaaa",
+    "wabbabaaaaaaaaaa"
+  ] },
+  "tile-zonepine": { w: 16, h: 16, pal: {"a":"#a87c46","b":"#7d5a33","t":"#617349","u":"#47543a","h":"#9aa873","k":"#54402a"}, rows: [
+    "baaaaaaaaaabaaaa",
+    "aaaaaabhhaaaaaaa",
+    "abaaaahhhhaabaaa",
+    "aaaaaautthaaaaaa",
+    "aabaathututaabaa",
+    "aaaaaathttaaaaaa",
+    "aaabattttthaaaba",
+    "aaaaaatuutaaaaaa",
+    "aaaabuhuhutaaaab",
+    "aaaatuttthhtaaaa",
+    "aaaaatututtaaaaa",
+    "baaaaaakkaabaaaa",
+    "aaaaaabkkaaaaaaa",
+    "abaaaaakkaaabaaa",
+    "aaaaaauuuuaaaaaa",
+    "aabaaaaaaaaaabaa"
+  ] },
+  "tile-prop-zonepost": { w: 16, h: 16, pal: {"a":"#a87c46","u":"#c9ad7d","c":"#5f4630","k":"#6e5136","d":"#4e3823"}, rows: [
+    "acaaaaaaaaaaaacc",
+    "auacaaaaaaaaaaau",
+    "auaaukkkkkkaaaaa",
+    "aaaauddddddaucaa",
+    "accaaaukdaaauaaa",
+    "aaaaaaakduaaaaaa",
+    "aaaacaakdaaauaaa",
+    "aauaaaakdaaaaaau",
+    "cuauaackdaaaaaaa",
+    "aaaaauakdaaaaauu",
+    "aaaaaaakdaaaauaa",
+    "aaaaaaakdcaaacaa",
+    "aaaadaakdaadaaaa",
+    "aaaaaaddddaaaaaa",
+    "aaaaaaaaauaaaaaa",
+    "acaacacaaaaaaaaa"
+  ] },
   "tile-solarturf": { w: 16, h: 16, pal: {"a":"#7fb45a","b":"#6aa34b","s":"#eef2b0","d":"#598c3e"}, rows: [
     "aaaaaababadaadaa",
     "aaaaababaaaaadad",
@@ -128354,6 +128662,9 @@ for (const k of W17Z_FLOOR_KINDS) TILE_ART[k] = 'tile-' + k;
 for (const k of W17AA_PROP_KINDS) TILE_ART[k] = 'tile-prop-' + k;
 for (const k of W17AA_WALL_KINDS) TILE_ART[k] = 'tile-' + k;
 for (const k of W17AA_FLOOR_KINDS) TILE_ART[k] = 'tile-' + k;
+for (const k of W17AB_PROP_KINDS) TILE_ART[k] = 'tile-prop-' + k;
+for (const k of W17AB_WALL_KINDS) TILE_ART[k] = 'tile-' + k;
+for (const k of W17AB_FLOOR_KINDS) TILE_ART[k] = 'tile-' + k;
 // Premium+ W6 (TX-3/PL-1): door-open frames, authored in TX-3 for every
 // door kind. The warp-fade engine that plays them lands in W7 — W6
 // wires the frames (this registry + cache.doorOpen + doorOpenCanvas)
@@ -130728,6 +131039,17 @@ function resolveTileLayers(cache, kind, x, y, kindAt, t, phase, mapId) {
     case 'longrock':
     case 'tidepine':
     case 'ringpost':
+    // Wave W17-AB: the Borea tranche-8 route trees, signature
+    // props and sea rocks composite over their ground the same
+    // way (all arts are fully opaque — each route's own ground
+    // or sea is baked in at its measured colours).
+    case 'leaguerock':
+    case 'headpine':
+    case 'headpost':
+    case 'foampine':
+    case 'foamrock':
+    case 'zonepine':
+    case 'zonepost':
     // Wave T17: the radio mast composites over its compound grass too.
     case 'radiomast': {
       // Object tiles carry transparent surrounds (Wave 1): lay the ground
@@ -138497,6 +138819,27 @@ const WALKABLE = new Set(['.', ',', 'D', 'E', 'C', 'F', 'J', 'K', '1', '2', 'V',
   // 1432-1451, W17-Y 1452-1469 and W17-Z 1470-1491 on their
   // parallel branches); 1111 stays empty.)
   ...[1492, 1493, 1496, 1499, 1501, 1503, 1504]
+    .map((i) => String.fromCodePoint(0x1E00 + i)),
+  // Wave W17-AB: the Borea tranche-8 ground/path/sand chars
+  // (U+1E00+1507.., tiles.mjs W17AB_KIND_DEFS) are walkable —
+  // leaguesand (Route 223), swapped 1:1 from the walkable
+  // seasand char in its own lane; headturf/headfloor (Route
+  // 224) and scorchturf/zonefloor (Route 225), each swapped
+  // 1:1 from the walkable '_' ground / '.' path chars on its
+  // own route; foamfloor (Foamline Path), swapped 1:1 from
+  // the walkable boardwalk char by the causeway method, so
+  // ground stays ground and floor stays floor. The tree
+  // chars (1511, 1514, 1518), the prop chars (1512, 1519)
+  // and the rock chars (1508, 1515, swapped from rock, never
+  // walkable) are NOT here: trees, props and rocks were never
+  // walkable. The mechanic current chars are untouched by
+  // this wave entire. (Indices 1507-1519 per the Borea
+  // program plan; the Borea allocation opened at 1384
+  // (W17-U takes 1384-1401, W17-V 1402-1421, W17-W
+  // 1422-1431, W17-X 1432-1451, W17-Y 1452-1469, W17-Z
+  // 1470-1491 and W17-AA 1492-1506 on their parallel
+  // branches); 1111 stays empty.)
+  ...[1507, 1509, 1510, 1513, 1516, 1517]
     .map((i) => String.fromCodePoint(0x1E00 + i))]);
 
 // Trainer definitions for the slice.
@@ -170837,19 +171180,19 @@ const MAPS9 = {
       "~~~~~~~~~~~~~~~~~~~~~~~~",
       "~~~~~~~~~~~~~~~~~~~~~~~~",
       "~~ᾍ~~~~~~ᾑ~~~~~~ẙ~~ᾍ~~~~",
-      "~~~Rᾐ~ᾐᾎ~~~~ẙ~~~ᾍR~~ẙᾍ~~",
-      "~~~~ᾍ~~ᾎᾑ~ᾍ~~~ᾎ~ᾌ~~ẙᾍ~~R",
-      "~~~~~~~~~~~ᾌ~~~~~~~~~ᾍ~ᾑ",
-      "~~~~~R~ᾍ~~~~~ᾍ~~ᾑᾌ~~~ᾎ~~",
-      "~~~~ᾎ~~ᾍ~~R~~~ẙ~~ᾌ~~~ᾎ~~",
+      "~~~⏤ᾐ~ᾐᾎ~~~~ẙ~~~ᾍ⏤~~ẙᾍ~~",
+      "~~~~ᾍ~~ᾎᾑ~ᾍ~~~ᾎ~⏣~~ẙᾍ~~⏤",
+      "~~~~~~~~~~~⏣~~~~~~~~~ᾍ~ᾑ",
+      "~~~~~⏤~ᾍ~~~~~ᾍ~~ᾑ⏣~~~ᾎ~~",
+      "~~~~ᾎ~~ᾍ~~⏤~~~ẙ~~⏣~~~ᾎ~~",
       "~ẙ~~~~~~~~~~ᾍ~~~~~~~~~~~",
       "~~~~~~~~~~~~~S~~~~~~~ᾍ~~",
-      "~~~~~~ᾎẙ~~~~~~~~~~Rᾍᾍ~~~",
+      "~~~~~~ᾎẙ~~~~~~~~~~⏤ᾍᾍ~~~",
       "~~~~ᾍ~~ᾍ~~~~ᾐ~~~ᾐ~~ᾍ~~~~",
-      "~~~~~~~ᾍᾍ~~~~~~~~~ᾌᾐ~~~~",
-      "~ẙ~~~ᾑ~~~~~~~~ᾌᾌ~~~~~~~~",
+      "~~~~~~~ᾍᾍ~~~~~~~~~⏣ᾐ~~~~",
+      "~ẙ~~~ᾑ~~~~~~~~⏣⏣~~~~~~~~",
       "~~~~~~~~~~~~ᾍ~~~~~~~~~~~",
-      "~~~~ᾌ~~~~~~ᾐ~~~~ẙ~ᾎ~ᾐᾍ~~",
+      "~~~~⏣~~~~~~ᾐ~~~~ẙ~ᾎ~ᾐᾍ~~",
       "~~~~~~~~~~~~~~~~~~~~~~~~",
       "~~~~~~~~~~~~~~~~~~~~~~~~",
     ],
@@ -170876,22 +171219,22 @@ const MAPS9 = {
     "music": "route1-theme",
     "weather": "clear",
     "rows": [
-      "##########################",
-      "##,__,______________F___F#",
-      "#___,__F______,,___,_____#",
-      "#,__,~~~~~_R,Ẉ,____,,,,_R#",
-      "#____~~~~~_,F_____,_,_,Ẉ_#",
-      "#_R__~~~~~,______,__,,F_F#",
-      "#_F____,__,_nF____,__,___#",
-      "#__,_____F,nS,,_,________#",
-      "..........................",
-      "..........................",
-      "#___Ẉ_,________F____,____#",
-      "#,,_,#_F__F_,____FnF____##",
-      "#___,_______F,___,_#___,_#",
-      "#____,Ẉ______FF____#_____#",
-      "#___,__,_______,____R____#",
-      "##########################",
+      "⏧⏧⏧⏧⏧⏧⏧⏧⏧⏧⏧⏧⏧⏧⏧⏧⏧⏧⏧⏧⏧⏧⏧⏧⏧⏧",
+      "⏧⏧,⏥⏥,⏥⏥⏥⏥⏥⏥⏥⏥⏥⏥⏥⏥⏥⏥F⏥⏥⏥F⏧",
+      "⏧⏥⏥⏥,⏥⏥F⏥⏥⏥⏥⏥⏥,,⏥⏥⏥,⏥⏥⏥⏥⏥⏧",
+      "⏧,⏥⏥,~~~~~⏥R,Ẉ,⏥⏥⏥⏥,,,,⏥R⏧",
+      "⏧⏥⏥⏥⏥~~~~~⏥,F⏥⏥⏥⏥⏥,⏥,⏥,Ẉ⏥⏧",
+      "⏧⏥R⏥⏥~~~~~,⏥⏥⏥⏥⏥⏥,⏥⏥,,F⏥F⏧",
+      "⏧⏥F⏥⏥⏥⏥,⏥⏥,⏥nF⏥⏥⏥⏥,⏥⏥,⏥⏥⏥⏧",
+      "⏧⏥⏨,⏥⏥⏥⏥⏥F,nS,,⏥,⏥⏥⏥⏥⏥⏥⏥⏥⏧",
+      "⏦⏦⏦⏦⏦⏦⏦⏦⏦⏦⏦⏦⏦⏦⏦⏦⏦⏦⏦⏦⏦⏦⏦⏦⏦⏦",
+      "⏦⏦⏦⏦⏦⏦⏦⏦⏦⏦⏦⏦⏦⏦⏦⏦⏦⏦⏦⏦⏦⏦⏦⏦⏦⏦",
+      "⏧⏥⏥⏥Ẉ⏥,⏥⏥⏥⏥⏥⏥⏥⏥F⏥⏥⏥⏥,⏥⏥⏨⏥⏧",
+      "⏧,,⏥,⏧⏥F⏥⏥F⏥,⏥⏥⏥⏥FnF⏥⏥⏥⏥⏧⏧",
+      "⏧⏥⏥⏥,⏥⏥⏥⏥⏥⏥⏥F,⏥⏥⏥,⏥⏧⏥⏥⏥,⏥⏧",
+      "⏧⏥⏥⏥⏥,Ẉ⏥⏥⏥⏥⏥⏥FF⏥⏥⏥⏥⏧⏥⏥⏥⏥⏥⏧",
+      "⏧⏥⏥⏥,⏥⏥,⏥⏥⏥⏥⏥⏥⏥,⏥⏥⏥⏥R⏥⏥⏥⏥⏧",
+      "⏧⏧⏧⏧⏧⏧⏧⏧⏧⏧⏧⏧⏧⏧⏧⏧⏧⏧⏧⏧⏧⏧⏧⏧⏧⏧",
     ],
     "warps": [
       {"x": 0, "y": 8, "to": {"map": "pokemon-league", "x": 26, "y": 8}},
@@ -170917,22 +171260,22 @@ const MAPS9 = {
     "music": "route1-theme",
     "weather": "sun",
     "rows": [
-      "#~~~~~~~~~~~~~~~~~~~~~~~~#",
-      "#~~~~~~~~~~~~~~~~~~~~~~~~#",
-      "#~~~~~~~~~~~~~~~~~~~~~~~~#",
-      "#~~~~~~~~~~~~~~~~~~~~~~~~#",
-      "#~~~~~R~~~~~~~~~~~~~~~~~~#",
-      "#~~~~~~~~~~~~~~~~~~~R~~~~#",
-      "#~~~~~~~~~~~~~~~~~~~~~~~~#",
-      "#~~~~~~~~~~~S~~~~~~~~~~~~#",
-      "ἇἇἇἇἇἇἇἇἇἇἇἇἇἇἇἇἇἇἇἇἇἇἇἇἇἇ",
-      "ἇἇἇἇἇἇἇἇἇἇἇἇἇἇἇἇἇἇἇἇἇἇἇἇἇἇ",
-      "#~~~~~~~~~~~~~~~~~~~~~~~~#",
-      "#~~~~~~~~~~~~~~~~~~~~~~~~#",
-      "#~~~~~~~~~~~~~R~~~~~~~~~~#",
-      "#~~~~~~~~~~~~~~~~~~~~~~~~#",
-      "#~~~~~~~~~~~~~~~~~~~~~~~~#",
-      "#~~~~~~~~~~~~~~~~~~~~~~~~#",
+      "⏪~~~~~~~~~~~~~~~~~~~~~~~~⏪",
+      "⏪~~~~~~~~~~~~~~~~~~~~~~~~⏪",
+      "⏪~~~~~~~~~~~~~~~~~~~~~~~~⏪",
+      "⏪~~~~~~~~~~~~~~~~~~~~~~~~⏪",
+      "⏪~~~~~⏫~~~~~~~~~~~~~~~~~~⏪",
+      "⏪~~~~~~~~~~~~~~~~~~~⏫~~~~⏪",
+      "⏪~~~~~~~~~~~~~~~~~~~~~~~~⏪",
+      "⏪~~~~~~~~~~~S~~~~~~~~~~~~⏪",
+      "⏩⏩⏩⏩⏩⏩⏩⏩⏩⏩⏩⏩⏩⏩⏩⏩⏩⏩⏩⏩⏩⏩⏩⏩⏩⏩",
+      "⏩⏩⏩⏩⏩⏩⏩⏩⏩⏩⏩⏩⏩⏩⏩⏩⏩⏩⏩⏩⏩⏩⏩⏩⏩⏩",
+      "⏪~~~~~~~~~~~~~~~~~~~~~~~~⏪",
+      "⏪~~~~~~~~~~~~~~~~~~~~~~~~⏪",
+      "⏪~~~~~~~~~~~~~⏫~~~~~~~~~~⏪",
+      "⏪~~~~~~~~~~~~~~~~~~~~~~~~⏪",
+      "⏪~~~~~~~~~~~~~~~~~~~~~~~~⏪",
+      "⏪~~~~~~~~~~~~~~~~~~~~~~~~⏪",
     ],
     "warps": [
       {"x": 0, "y": 8, "to": {"map": "r224", "x": 24, "y": 8}},
@@ -170957,22 +171300,22 @@ const MAPS9 = {
     "music": "route1-theme",
     "weather": "clear",
     "rows": [
-      "##########################",
-      "#,___,___,_______,___F,_,#",
-      "#RF__F___F_F_______R_,___#",
-      "#___,#______,,,F__~~~~~F_#",
-      "#_____#__,____,___~~~~~,,#",
-      "#______F,_,,__,___~~~~~_F#",
-      "#__,,____F,,_____,,_Ẉ___,#",
-      "#___R_______SR,__________#",
-      "..........................",
-      "..........................",
-      "#_,FF__F___#___F______Ẉ_,#",
-      "#__,R_______,_,F__,___,_R#",
-      "#_,,___,____,_____,F___,##",
-      "#_________F___,F_#F,_,___#",
-      "#_F__,_____,__F_______,__#",
-      "##########################",
+      "⏮⏮⏮⏮⏮⏮⏮⏮⏮⏮⏮⏮⏮⏮⏮⏮⏮⏮⏮⏮⏮⏮⏮⏮⏮⏮",
+      "⏮,⏬⏬⏬,⏬⏬⏬,⏬⏬⏬⏬⏬⏬⏬,⏬⏬⏬F,⏬,⏮",
+      "⏮RF⏬⏬F⏬⏬⏬F⏬F⏬⏬⏬⏬⏬⏬⏬R⏬,⏬⏬⏬⏮",
+      "⏮⏬⏬⏬,⏮⏬⏬⏬⏬⏬⏬,,,F⏬⏬~~~~~F⏬⏮",
+      "⏮⏬⏬⏬⏬⏬⏮⏬⏬,⏬⏬⏬⏬,⏬⏬⏬~~~~~,,⏮",
+      "⏮⏬⏬⏬⏬⏬⏬F,⏬,,⏬⏬,⏬⏬⏬~~~~~⏬F⏮",
+      "⏮⏬⏬,,⏬⏬⏬⏬F,,⏬⏬⏬⏬⏬,,⏬Ẉ⏬⏬⏬,⏮",
+      "⏮⏬⏬⏬R⏬⏬⏬⏬⏬⏬⏬SR,⏯⏬⏬⏬⏬⏬⏬⏬⏬⏬⏮",
+      "⏭⏭⏭⏭⏭⏭⏭⏭⏭⏭⏭⏭⏭⏭⏭⏭⏭⏭⏭⏭⏭⏭⏭⏭⏭⏭",
+      "⏭⏭⏭⏭⏭⏭⏭⏭⏭⏭⏭⏭⏭⏭⏭⏭⏭⏭⏭⏭⏭⏭⏭⏭⏭⏭",
+      "⏮⏬,FF⏬⏬F⏬⏬⏬⏮⏬⏬⏬F⏬⏬⏬⏯⏬⏬Ẉ⏬,⏮",
+      "⏮⏬⏬,R⏬⏬⏬⏬⏬⏬⏬,⏬,F⏬⏬,⏬⏬⏬,⏬R⏮",
+      "⏮⏬,,⏬⏬⏬,⏬⏬⏬⏬,⏬⏬⏬⏬⏬,F⏬⏬⏬,⏮⏮",
+      "⏮⏬⏬⏬⏬⏬⏬⏬⏬⏬F⏬⏬⏬,F⏬⏮F,⏬,⏬⏬⏬⏮",
+      "⏮⏬F⏬⏬,⏬⏬⏬⏬⏬,⏬⏬F⏬⏬⏬⏬⏬⏬⏬,⏬⏬⏮",
+      "⏮⏮⏮⏮⏮⏮⏮⏮⏮⏮⏮⏮⏮⏮⏮⏮⏮⏮⏮⏮⏮⏮⏮⏮⏮⏮",
     ],
     "warps": [
       {"x": 0, "y": 8, "to": {"map": "fight-area", "x": 24, "y": 8}},
