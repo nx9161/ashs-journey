@@ -1,0 +1,25 @@
+# Wave W17-J (Frost Path — East Hall): thaw wall — a thawing ice-cave wall in the cavewall idiom, one value up from the West Hall’s frost wall, meltwater threads drawn running down its own stone where the daylight side of the mountain warms it (design: ice thinning toward the exit light, meltwater threads in the stone). The East Hall’s own wall, twin-split from the West by value + the threads; its floor is the shipped icefloor, byte-preserved.
+PIX thawwall 16 16
+zzzzzzzzzzzzzzzz
+zzzzzzzzzzzzzzzz
+zzzzzzzzzzzzzzzz
+cmmtmmcmtmcmtmcc
+mmtmcmmmtcmtcccc
+mmtmmcmmtmmtmmmm
+mmtmmmmmtmctmmmm
+aataaaaataataaaa
+aataaaaataaataaa
+ataaaaaataaataaa
+ztzzzzzztzztzzzz
+ztzzzzzztzztzzzz
+ztzzzzzztztzzzzz
+ggggmgmgggggggmg
+mmmtmttmtmmtmmmm
+ggmgggggggmmmggg
+PAL
+z #3d4856
+m #57667a
+a #6e8199
+g #333e4a
+c #aec4da
+t #bfe0f4

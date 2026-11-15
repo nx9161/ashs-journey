@@ -1,0 +1,26 @@
+# Wave W17-J (Frost Path — West Hall): frost wall — a dark ice-cave wall in the cavewall idiom, near-black blue bands carrying icicle points in its own face, hung where the hall’s breath froze on the stone (design: mirror-ice floors with old slide-marks, icicle pillars, the sliding dark). The West Hall’s own wall; its floor is the shipped icefloor, byte-preserved.
+PIX frostwall 16 16
+zzzzzzzzzzzzzzzz
+zzzzzzzzzzzzzzzz
+zzzzzzzzzzzzzzzz
+mmimmmimmmimmmim
+mmimmmimmmimmmim
+mmpmmmimmmpmmmim
+mmmmmmpmmmmmmmim
+aaaaaaaaaaaacapa
+aaaacaaaaaaaaaaa
+aaaaaaaacaaaaaaa
+zzzzzzzzzzzzzzzz
+zzzzzzzzzzzzzzzz
+zzzzzzzzzzzzzzzz
+gmgggmggggggmggg
+mmmmmmmmmmmmmmmm
+gggggmggggmggggg
+PAL
+z #2b333f
+m #414c5b
+a #55647a
+g #232a34
+c #93a7ba
+i #cfe2f2
+p #eef6fd

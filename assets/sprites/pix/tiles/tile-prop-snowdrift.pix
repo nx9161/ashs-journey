@@ -1,0 +1,24 @@
+# Wave W17-J (Route 44): snow drift — the cave-mouth snow drift, a smooth banked drift of settled snow with a blue-shadowed foot and a sparkle on its crest, on cold turf (fully opaque, ground baked in). The design names the drift at the Frost Path mouth; the road’s snow keeps the shape the cave breath gives it.
+PIX tile-prop-snowdrift 16 16
+aaaaaabnaaaaaaaa
+aaaaaaaaaaaaaaaa
+aabaaaaaaaanaaaa
+aaaaaabbbaaabaaa
+baaaaaaaaabaaaaa
+aabbaaaaaaaaabab
+abaaaaaabaaaaaaa
+aaaaaabaanpnnbba
+aaaaaabnpnnnnnaa
+aaaannpnsnnnnnna
+aaaassnnnnnpnnna
+aaannpnnnnnnnnnn
+aannnnnnnnnnnnnn
+annsssssnsssssns
+aassssssssssssss
+aaaaaaaaaaaababb
+PAL
+a #7f9a68
+b #6d8759
+n #f4f8f2
+s #c9d8e2
+p #ffffff

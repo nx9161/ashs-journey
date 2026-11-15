@@ -3059,6 +3059,63 @@ W17I_KIND_DEFS.forEach(([kind], i) => {
 export const W17I_PROP_KINDS = W17I_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
 export const W17I_WALL_KINDS = W17I_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
 export const W17I_FLOOR_KINDS = W17I_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
+// Wave W17-J (Route Build Program, Yamato Tranche 5): the cold
+// shoulder -> the Frost Path -> falling road -> high road — Route
+// 44, the Frost Path West + East Halls, Route 45 and Route 46,
+// each its own kit under the NO-SAME-KIT law. All five are defined
+// once in maps6.mjs (no dual copies in Yamato, so no registry
+// re-pins arise). Route 44 "Cold Shoulder" (idx 1237-1240)
+// converts grassground/path/tree by KIND (maps6 trees stand on
+// both '#' and 'T' chars — the W17-B lesson); its 2 cavefloor
+// mouth cells and pond water stay byte-identical. The Frost Path
+// halls are the program's floor-exception: their floors ALREADY
+// ship as signature kinds (icefloor 280/284 + frostfloor 24 per
+// hall — the halls' own biome, byte-preserved by spec, slide
+// mechanics untouched), so only the generic cavewall converts —
+// West "Frost West" (1241, dark ice-cave wall, icicle points in
+// its own face) and East "Frost East" (1242, thaw wall —
+// meltwater threads in the stone, brighter value; the twin split
+// is by value + the threads, the Lunestone/Millstone discipline).
+// Their meltwater/pool water, caveboulders, cavecrystals and step
+// cells stay byte-identical, and the trigger census '.'/'R'/',' is
+// 0 -> 0 on both halls. Route 45 "Falling Road" (1243-1246) and
+// Route 46 "High Road" (1247-1250) convert by KIND the same way;
+// both routes' cavefloor Gloom mouths, rock and fences stay
+// byte-identical. Ground kinds deliberately do NOT end in 'floor'
+// (the desire-path audit counts '*floor' as street tier; grounds
+// must never masquerade as street); path kinds DO end in 'floor'
+// so they register as the route's path tier per route (checklist
+// point 3). Indices 1237-1250 per the program plan
+// (WAVE-W17-YAMATO-ROUTE-PROGRAM-PLAN.md): W17-F took 1168-1185,
+// W17-G 1186-1204, W17-H 1205-1222 and W17-I takes 1223-1236 on
+// its parallel branch; 1111 and every earlier documented gap stay
+// empty. Kind names verified unclaimed against origin/main.
+// Chars U+1E00+1237..
+export const W17J_KIND_DEFS = [
+  ['coldturf', 'floor'],
+  ['coldfloor', 'floor'],
+  ['frostpine', 'wall'],
+  ['snowdrift', 'prop'],
+  ['frostwall', 'wall'],
+  ['thawwall', 'wall'],
+  ['fallturf', 'floor'],
+  ['fallfloor', 'floor'],
+  ['fallpine', 'wall'],
+  ['scrubthorn', 'prop'],
+  ['highturf', 'floor'],
+  ['highfloor', 'floor'],
+  ['highpine', 'wall'],
+  ['ridgepost', 'prop'],
+];
+export const W17J_KIND_CHARS = {};
+W17J_KIND_DEFS.forEach(([kind], i) => {
+  const ch = String.fromCodePoint(0x1E00 + 1237 + i);
+  W17J_KIND_CHARS[kind] = ch;
+  TILE_CHARS[ch] = kind;
+});
+export const W17J_PROP_KINDS = W17J_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
+export const W17J_WALL_KINDS = W17J_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
+export const W17J_FLOOR_KINDS = W17J_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
 export const SINNOH_TOWN_GROUND_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg);
 export const SINNOH_TOWN_GROUND2_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg2);
 // TX-3: the 8 gym exteriors by town (original type-accent motifs).

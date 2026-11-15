@@ -1103,6 +1103,23 @@ export const WALKABLE = new Set(['.', ',', 'D', 'E', 'C', 'F', 'J', 'K', '1', '2
   // 1168-1185, W17-G 1186-1204 and W17-H takes 1205-1222 on its
   // parallel branch; 1111 stays empty.)
   ...[1223, 1225, 1226, 1229, 1231, 1233, 1234]
+    .map((i) => String.fromCodePoint(0x1E00 + i)),
+  // Wave W17-J: the Yamato tranche-5 ground/path chars
+  // (U+1E00+1237.., tiles.mjs W17J_KIND_DEFS) are walkable —
+  // coldturf/coldfloor (Route 44), fallturf/fallfloor (Route 45),
+  // highturf/highfloor (Route 46), each swapped 1:1 from the
+  // walkable '_' ground / '.' path chars on its own route, so
+  // ground stays ground and path stays path. The Frost Path
+  // halls add NO walkable char: their floors are the shipped
+  // icefloor/frostfloor (byte-preserved, already walkable) and
+  // their new wall chars (1241, 1242) swap from 'G' cavewall,
+  // which was never walkable. The tree chars (1239, 1245, 1249)
+  // and prop chars (1240, 1246, 1250) are NOT here either:
+  // trees/props were never walkable. (Indices 1237-1250 per the
+  // program plan: W17-F took 1168-1185, W17-G 1186-1204, W17-H
+  // 1205-1222 and W17-I takes 1223-1236 on its parallel branch;
+  // 1111 stays empty.)
+  ...[1237, 1238, 1243, 1244, 1247, 1248]
     .map((i) => String.fromCodePoint(0x1E00 + i))]);
 
 // Trainer definitions for the slice.
