@@ -191,11 +191,11 @@ export const MAPS4 = {
     id: 'house-viridian', name: 'Fernmere City — House', music: 'viridian-theme', indoor: true,
     rows: [
       'ṡ<<<<<<<<<',
-      '<ηḏḩθḐḢṢη<',
-      '<δḪ******<',
-      '<*(*εζ***<',
-      '<*****))*<',
-      '<***DD**ζ<',
+      '<γḽηṛ***η<',
+      '<δ******Ḕ<',
+      '<ω(*****ḓ<',
+      '<*****))Ḣ<',
+      '<*εζDD***<',
       '<<<<<<<<<<',
     ],
     warps: [
@@ -324,11 +324,11 @@ export const MAPS4 = {
     id: 'house-lavender', name: 'Hushmoor Town — House', music: 'viridian-theme', indoor: true,
     rows: [
       'ṙ<<<<<<<<<',
-      '<ηḏḷθḑḒḓη<',
-      '<δḸ******<',
-      '<*(*εζ***<',
-      '<*****))*<',
-      '<***DD**ζ<',
+      '<ηḟḥḟṛḾḓη<',
+      '<δḸ*****Ḕ<',
+      '<ω******θ<',
+      '<Ḣ****))*<',
+      '<***DD***<',
       '<<<<<<<<<<',
     ],
     warps: [
