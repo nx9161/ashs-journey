@@ -252,6 +252,33 @@ const GYM_ARENA_ART = {
   // Cragmoor: the den's lava-hearted dark — maroon-black sky, the new
   // 'dragon' scale-ridge motif with lava glints, dense embers.
   'gym-blackthorn': { sky: ['#3a2426', '#422a2c', '#4a3032', '#523638', '#5a3c3e', '#624244'], ground: ['#3c2c28', '#352722', '#2e211e', '#271c1a', '#201716', '#191212'], dark: '#140c0c', light: '#ffc478', accent: '#ff7a1a', motif: 'dragon', tex: 'chunk', amb: { kind: 'ember', n: 16, speed: 18 } },
+  // Gym Identity T3 (Maris): the region's eight own treatments.
+  // Copperton: quarry ochre — pale quarry-dust sky, saturated ochre
+  // strata, copper accent, slow dust motes over the Rubble.
+  'gym-rustboro': { sky: ['#93a8b8', '#a0b2c0', '#adc0c9', '#baccd2', '#c7d6da', '#d4e0e2'], ground: ['#c49a5e', '#ba9057', '#b08650', '#a67c49', '#9c7242', '#92683b'], dark: '#6e4f2a', light: '#f4e6c4', accent: '#c46a2a', motif: 'rocks', tex: 'chunk', amb: { kind: 'mote', n: 10, speed: 2 } },
+  // Mistford: surf-shore rubble — mist-pale sky over dark wet rock,
+  // foam crests, sea-green accent, surf bubbles.
+  'gym-dewford': { sky: ['#8fa8b0', '#9ab2b8', '#a5bcc0', '#b0c6c8', '#bbd0d0', '#c6dad8'], ground: ['#6a7a72', '#61716a', '#586862', '#4f5f5c', '#465654', '#3d4d4e'], dark: '#2e4038', light: '#eef8f0', accent: '#2a9a7a', motif: 'waves', tex: 'foam', amb: { kind: 'bubble', n: 12, speed: 8 } },
+  // Lilac: dynamo carnival — indigo-violet sky over warm brass,
+  // pylon storm, carnival-orange accent, dense blinking sparks.
+  'gym-mauville': { sky: ['#4a3a6e', '#55467c', '#604f8a', '#6b5898', '#7661a6', '#816ab4'], ground: ['#8a854e', '#7f7c47', '#747040', '#69643a', '#5e5834', '#534c2e'], dark: '#38341e', light: '#fff3a0', accent: '#ff9a1f', motif: 'storm', tex: 'spark', pylon: true, amb: { kind: 'spark', n: 18, speed: 0 } },
+  // Steamspring: hot-spring steam — pale steam-rose sky, terracotta
+  // bath stone, haze on, steam motes drifting over the flames.
+  'gym-lavaridge': { sky: ['#c8a49a', '#d0afa4', '#d8baae', '#e0c5b8', '#e8d0c2', '#f0dbcc'], ground: ['#b87a5c', '#ac6f52', '#a06448', '#94593e', '#884e34', '#7c432a'], dark: '#4a2c1c', light: '#ffe8d8', accent: '#ff8a5a', motif: 'flames', tex: 'spark', haze: true, amb: { kind: 'mote', n: 16, speed: 6 } },
+  // Meadowbrook: plain by design (Director ruling, Signal precedent) —
+  // Alden's honest-weight Open keeps the Open rules; the identity is a
+  // warm afternoon meadow: flowers, gold accent, falling petals.
+  'gym-petalburg': { sky: ['#6aa8e0', '#79b4e6', '#88c0ec', '#97ccf2', '#a6d8f6', '#b5e4fa'], ground: ['#7fae56', '#76a34e', '#6d9846', '#64903e', '#5b8436', '#52782e'], dark: '#40622a', light: '#f2f8c8', accent: '#e8b83c', motif: 'flowers', tex: 'tuft', haze: true, amb: { kind: 'petal', n: 10, speed: 6 } },
+  // Highbranch: canopy storm — dark canopy-green sky, mossy branch
+  // ground, leaf-litter texture and falling leaves, not rain.
+  'gym-fortree': { sky: ['#3a4a3a', '#43543f', '#4c5e44', '#556849', '#607254', '#6b7c5f'], ground: ['#6a5a3c', '#615234', '#584a2c', '#4f4224', '#463a1c', '#3d3214'], dark: '#26301e', light: '#e8f8b0', accent: '#a8e85a', motif: 'storm', tex: 'petal', amb: { kind: 'petal', n: 12, speed: 7 } },
+  // Starfall: the twins' shared Mind — ONE arena, two signatures
+  // mirrored: sky descends dark to light while the ground ascends
+  // light to dark; runes in twin-cyan over deep teal-navy night.
+  'gym-mossdeep': { sky: ['#2a2a55', '#343462', '#3e3e6f', '#48487c', '#525289', '#5c5c96'], ground: ['#3a3a6a', '#34325e', '#2e2c52', '#282646', '#222040', '#1c1a3a'], dark: '#16142e', light: '#d8f4ff', accent: '#7ae8e0', motif: 'runes', tex: 'fleck', amb: { kind: 'mote', n: 12, speed: 3 } },
+  // Craterlake: conducted water — grey-teal crater sky, deep dark
+  // water, haze on, the Rain badge's own rain over the Tide.
+  'gym-sootopolis': { sky: ['#5a7a84', '#68868e', '#769298', '#84a0a2', '#92aeac', '#a0bcb6'], ground: ['#2e5a66', '#29525e', '#244a56', '#1f424e', '#1a3a46', '#15323e'], dark: '#0e2830', light: '#d8f8f0', accent: '#5ae0c8', motif: 'waves', tex: 'foam', haze: true, amb: { kind: 'rain', n: 16, speed: 110 } },
 };
 
 function gymArenaFor(field) {

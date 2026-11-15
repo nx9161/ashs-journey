@@ -1345,6 +1345,15 @@ export const WALKABLE = new Set(['.', ',', 'D', 'E', 'C', 'F', 'J', 'K', '1', '2
   // (Redwood), scalefloor (Cragmoor) — each swapped 1:1 from the
   // walkable '+' gymfloor char inside its own gym, so floor stays floor.
   ...[1572, 1573, 1574, 1575, 1576, 1577, 1578, 1579]
+    .map((i) => String.fromCodePoint(0x1E00 + i)),
+  // Gym Identity T3: the eight Maris gym floor chars (U+1E00+1580..1587,
+  // tiles.mjs GYMID3_KIND_DEFS) are walkable — ochrefloor (Copperton),
+  // swashfloor (Mistford), dynamofloor (Lilac), springfloor
+  // (Steamspring), meadowfloor (Meadowbrook), roostfloor (Highbranch),
+  // mirrorfloor (Starfall), delugefloor (Craterlake) — each swapped 1:1
+  // from the walkable '+' gymfloor char inside its own gym, so floor
+  // stays floor.
+  ...[1580, 1581, 1582, 1583, 1584, 1585, 1586, 1587]
     .map((i) => String.fromCodePoint(0x1E00 + i))]);
 
 // Trainer definitions for the slice.

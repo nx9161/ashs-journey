@@ -781,7 +781,7 @@ const PINS = {
   }
  },
  "gym-rustboro": {
-  "grid": "48cd5e613f3560949025a0823b6e07ef20d68942ef0b78ba9c0bd05a1e692b64",
+  "grid": "6d69105717800124b254fd2ca1039da498b831a7900d41821fd709b614eacdab",
   "data": "8944b388c3ce97916c6870bf81d44982b69609e3797ff144849c34ef29cdc839",
   "reach": 136,
   "pos": {
@@ -827,7 +827,7 @@ const PINS = {
   }
  },
  "gym-dewford": {
-  "grid": "dda2c53e9a565df760744175f16bf7c92b600a5c689172e5ae4fb767059eea3a",
+  "grid": "817fadec1587f37d0ad7325c65cc80f514cfa3a47aeb5edea129ee7571fc4077",
   "data": "72143ef61b271bf035ee079f51b1f81619032cb0be80c19dcf4a719b8d49667a",
   "reach": 136,
   "pos": {
@@ -850,7 +850,7 @@ const PINS = {
   }
  },
  "gym-fortree": {
-  "grid": "c97e9eff0960ee5faff8ccf6f86c7bb0ea24e031cfc576f32305bed8abfdea41",
+  "grid": "5a29169e19ece65b205adda3cb43e7e9acaa2fec9a205c096bb84f118064ffc6",
   "data": "15c26edec2f612de53994e2c6c1bd8fc3e68fd488c8dee5deea658cf043d479b",
   "reach": 136,
   "pos": {
@@ -902,13 +902,24 @@ const PINS = {
 // is deliberately split by the wave — violet keeps its own pin, and
 // olivine's steelfloor grid stays off it). PINS grids for both gyms
 // moved the same way, floor swap only, nothing else.
+// Gym Identity T3 re-pin (same ruling, disclosed): gym-rustboro and
+// gym-dewford are the KEEPERS of their pairs and took their own floors
+// (ochrefloor / swashfloor), so the gym-oreburgh and gym-veilstone
+// template values moved to the keepers' NEW grids (48cd5e61… ->
+// 6d691057…, dda2c53e… -> 817fadec…); oreburgh's and veilstone's own
+// PINS grids stay at the old values (their floors land at T4).
+// gym-fortree is the re-dressed side of its pair — its PINS grid moved
+// to its roostfloor grid (c97e9eff… -> 5a29169e…); the gym-fortree
+// template value is gym-eterna's grid and does NOT move. PINS grid for
+// gym-dewford moved dda2c53e… -> 817fadec… the same way. Floor swaps
+// only; posts, warps, data and reach pins untouched.
 const TEMPLATES = {
  "lab": "b139fdde0a9ffcdd666ae962fd686139e1d6b973a92bd73a02359abb2dac4c78",
  "contest": "d3d5a5b03543d6cc69bd06da4d76e15fc69e8e0b4c97afbe424133e721a9088b",
  "chamber": "14470350f7bd8c30c3b88ce432d95d12e321ac8b8f491cff1878245f4ca0e54a",
  "gym-olivine": "ac1e72b52b48013b619a0bb18a7671f31d98860d9a135e71740bf93d880f30ce",
- "gym-oreburgh": "48cd5e613f3560949025a0823b6e07ef20d68942ef0b78ba9c0bd05a1e692b64",
- "gym-veilstone": "dda2c53e9a565df760744175f16bf7c92b600a5c689172e5ae4fb767059eea3a",
+ "gym-oreburgh": "6d69105717800124b254fd2ca1039da498b831a7900d41821fd709b614eacdab",
+ "gym-veilstone": "817fadec1587f37d0ad7325c65cc80f514cfa3a47aeb5edea129ee7571fc4077",
  "gym-fortree": "f485674de851a43b264a553a42ad01ef2eae9688823cdeeae1074fda27674d92"
 };
 const LABS = ['birch-lab', 'elm-lab', 'rowan-lab'];
@@ -973,7 +984,9 @@ for (const id of SCOPED) {
 // gym-olivine took their own floor kinds (gustfloor / steelfloor), so
 // the floor kind under their posts is their own — the posts themselves
 // never moved. Later tranches add their W16-B gyms here the same way.
-const FLOOR_OVERRIDES = { 'gym-violet': 'gustfloor', 'gym-olivine': 'steelfloor' };
+// Gym Identity T3 (same ruling): gym-rustboro / gym-dewford /
+// gym-fortree took ochrefloor / swashfloor / roostfloor.
+const FLOOR_OVERRIDES = { 'gym-violet': 'gustfloor', 'gym-olivine': 'steelfloor', 'gym-rustboro': 'ochrefloor', 'gym-dewford': 'swashfloor', 'gym-fortree': 'roostfloor' };
 const FLOOR_OF = (id) => FLOOR_OVERRIDES[id] || (id.includes('lab') ? 'labfloor' : id.includes('contest') ? 'silphfloor' : 'gymfloor');
 // map-npc post cells keep their floor kind
 for (const id of SCOPED) for (const n of MAPS[id].npcs || [])
@@ -985,12 +998,12 @@ const APPENDED = [
   ['contest-fallarbor', 'MAIA', 8, 6, 'battlemat'], ['contest-lilycove', 'MAIA', 8, 6, 'battlemat'],
   ['contest-slateport', 'MAIA', 8, 6, 'battlemat'], ['contest-verdanturf', 'MAIA', 8, 6, 'battlemat'],
   ['gym-olivine', 'LIORA', 7, 2, 'steelfloor'], ['gym-violet', 'AVEN', 7, 2, 'gustfloor'],
-  ['gym-oreburgh', 'RONAN', 7, 2, 'gymfloor'], ['gym-rustboro', 'SAXA', 7, 2, 'gymfloor'],
-  ['gym-veilstone', 'MAREN', 7, 2, 'gymfloor'], ['gym-dewford', 'ENZO', 7, 2, 'gymfloor'],
-  ['gym-fortree', 'ARIA', 7, 2, 'gymfloor'], ['gym-eterna', 'TANSY', 7, 2, 'gymfloor'],
-  ['gym-rustboro', 'YOUNGSTER BRAM', 4, 5, 'gymfloor'], ['gym-rustboro', 'HIKER SELLA', 11, 5, 'gymfloor'],
-  ['gym-dewford', 'BLACKBELT ROOK', 4, 5, 'gymfloor'], ['gym-dewford', 'BATTLE GIRL SANA', 11, 5, 'gymfloor'],
-  ['gym-fortree', 'BIRD KEEPER ANSEL', 4, 5, 'gymfloor'], ['gym-fortree', 'PICNICKER WREN', 11, 5, 'gymfloor'],
+  ['gym-oreburgh', 'RONAN', 7, 2, 'gymfloor'], ['gym-rustboro', 'SAXA', 7, 2, 'ochrefloor'],
+  ['gym-veilstone', 'MAREN', 7, 2, 'gymfloor'], ['gym-dewford', 'ENZO', 7, 2, 'swashfloor'],
+  ['gym-fortree', 'ARIA', 7, 2, 'roostfloor'], ['gym-eterna', 'TANSY', 7, 2, 'gymfloor'],
+  ['gym-rustboro', 'YOUNGSTER BRAM', 4, 5, 'ochrefloor'], ['gym-rustboro', 'HIKER SELLA', 11, 5, 'ochrefloor'],
+  ['gym-dewford', 'BLACKBELT ROOK', 4, 5, 'swashfloor'], ['gym-dewford', 'BATTLE GIRL SANA', 11, 5, 'swashfloor'],
+  ['gym-fortree', 'BIRD KEEPER ANSEL', 4, 5, 'roostfloor'], ['gym-fortree', 'PICNICKER WREN', 11, 5, 'roostfloor'],
   ['gym-oreburgh', 'MINER COLE', 4, 5, 'gymfloor'], ['gym-oreburgh', 'MINER FENN', 11, 5, 'gymfloor'],
   ['gym-eterna', 'AROMA ADEPT LIA', 4, 5, 'gymfloor'], ['gym-eterna', 'AROMA ADEPT ROSALIE', 11, 5, 'gymfloor'],
   ['gym-veilstone', 'BLACK BELT JON', 4, 5, 'gymfloor'], ['gym-veilstone', 'BLACK BELT RUE', 11, 5, 'gymfloor'],

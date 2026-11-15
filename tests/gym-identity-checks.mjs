@@ -77,10 +77,14 @@ const sha12 = (s) => sha(s).slice(0, 12);
 // T2 (Yamato): COVERED 8->16, FLOOR_OWNED 8->16, GYMFLOOR_DOMINANT 28->20.
 // INTERIOR_TUPLES_DISTINCT stays 35 — the mauville/sunnyshore shared
 // tuple is untouched; every Arden/Yamato tuple is unique by its floor.
-const GYM_ARENA_COVERED = 16;
-const GYM_FLOOR_OWNED = 16;
-const GYMFLOOR_DOMINANT = 20;
-const INTERIOR_TUPLES_DISTINCT = 35;
+// T3 (Maris): COVERED 16->24, FLOOR_OWNED 16->24, GYMFLOOR_DOMINANT
+// 20->12. INTERIOR_TUPLES_DISTINCT 35->36, MEASURED at T3: Mauville
+// taking dynamofloor breaks the mauville/sunnyshore shared tuple, so
+// all 36 gyms now hold distinct interior tuples.
+const GYM_ARENA_COVERED = 24;
+const GYM_FLOOR_OWNED = 24;
+const GYMFLOOR_DOMINANT = 12;
+const INTERIOR_TUPLES_DISTINCT = 36;
 
 // ---------------- the gym census (plan §1 enumeration) -----------------
 // Exactly the badge gyms: map ids matching /(^|-)gym(-|$)/ over the
