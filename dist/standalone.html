@@ -131732,6 +131732,22 @@ const NPC_SWAP_KEYS = {
   'cast-dara': { S: 'skin', H: 'hair', J: 'shirt', P: 'pants' },
   'cast-mire': { S: 'skin', H: 'hair', J: 'shirt', P: 'pants' },
   'cast-sola-sun': { S: 'skin', H: 'hair', J: 'shirt', P: 'pants' },
+  // W-CHAR2 T4 (named tail): the last 14 per-character kinds — the
+  // monk/bugcatcher/aide/grunt/camper/officer/swimmer duplicate tail.
+  'cast-vex': { S: 'skin', H: 'hair', J: 'shirt', P: 'pants' },
+  'cast-lio-camper': { S: 'skin', H: 'hair', J: 'shirt', P: 'pants' },
+  'cast-gateguard': { S: 'skin', H: 'hair', J: 'shirt', P: 'pants' },
+  'cast-bo-swimmer': { S: 'skin', H: 'hair', J: 'shirt', P: 'pants' },
+  'cast-frostkeeper': { S: 'skin', H: 'hair', J: 'shirt', P: 'pants' },
+  'cast-voltakeeper': { S: 'skin', H: 'hair', J: 'shirt', P: 'pants' },
+  'cast-theo': { S: 'skin', H: 'hair', J: 'shirt', P: 'pants' },
+  'cast-anselm-tower': { S: 'skin', H: 'hair', J: 'shirt', P: 'pants' },
+  'cast-deepkeeper': { S: 'skin', H: 'hair', J: 'shirt', P: 'pants' },
+  'cast-wren-catcher': { S: 'skin', H: 'hair', J: 'shirt', P: 'pants' },
+  'cast-fern-maniac': { S: 'skin', H: 'hair', J: 'shirt', P: 'pants' },
+  'cast-fern-aide': { S: 'skin', H: 'hair', J: 'shirt', P: 'pants' },
+  'cast-fern-lab': { S: 'skin', H: 'hair', J: 'shirt', P: 'pants' },
+  'cast-sorrel-aide': { S: 'skin', H: 'hair', J: 'shirt', P: 'pants' },
   gym1: { S: 'skin', H: 'hair', J: 'shirt', P: 'pants' },
   gym2: { S: 'skin', H: 'hair', J: 'shirt', P: 'pants' },
   gym3: { S: 'skin', H: 'hair', J: 'shirt', P: 'pants' },
@@ -132155,6 +132171,23 @@ const KIT_CAST_SPEC = {
   'cast-dara': { acc: [['hair-long', {}], ['skirt', { C: '#c83a2a', c: '#6e2017' }]] },
   'cast-mire': { acc: [['cap', { C: '#c83a2a', c: '#6e2017', X: '#f4f4f0' }]] },
   'cast-sola-sun': { acc: [['headband', { C: '#2a7a6a', c: '#17433a' }]] },
+  // W-CHAR2 T4 (named tail): signatures traced to each person's role
+  // in the live cast data + CHARACTER-PROMPTS.md entry; existing
+  // overlays only, zero new overlay ids, zero palette splits.
+  'cast-vex': { acc: [['cap', { C: '#2a2a33', c: '#101014', X: '#101014' }], ['glasses', {}]] },
+  'cast-lio-camper': { acc: [['bandana', { C: '#e8c832', c: '#806e1c' }]] },
+  'cast-gateguard': { force: { shirt: '#2a3a6a', pants: '#22304f' }, acc: [['cap', { C: '#2a3a6a', c: '#141f38', X: '#f4f4f0' }], ['glasses', {}]] },
+  'cast-bo-swimmer': { force: { shirt: '@skin' }, acc: [['bandana', { C: '#c83a2a', c: '#6e2017' }]] },
+  'cast-frostkeeper': { force: { hair: '@skin' }, acc: [['headband', { C: '#5a8ac0', c: '#324c6a' }]] },
+  'cast-voltakeeper': { force: { hair: '@skin' }, acc: [['headband', { C: '#e8c832', c: '#806e1c' }]] },
+  'cast-theo': { force: { hair: '@skin' }, acc: [['headband', { C: '#3a7a4a', c: '#204329' }]] },
+  'cast-anselm-tower': { force: { hair: '@skin' }, acc: [['glasses', {}]] },
+  'cast-deepkeeper': { force: { hair: '@skin' }, acc: [['lantern', { C: '#5a8ac0', c: '#324c6a', X: '#cfe8ff' }]] },
+  'cast-wren-catcher': { acc: [['cap', { C: '#3a7a4a', c: '#204329', X: '#204329' }]] },
+  'cast-fern-maniac': { acc: [['bandana', { C: '#7a4a8a', c: '#43294c' }]] },
+  'cast-fern-aide': { acc: [['glasses', {}], ['headband', { C: '#3a7a4a', c: '#204329' }]] },
+  'cast-fern-lab': { acc: [['glasses', {}], ['cap', { C: '#5a8ac0', c: '#324c6a', X: '#f4f4f0' }]] },
+  'cast-sorrel-aide': { acc: [['glasses', {}], ['headband', { C: '#c83a2a', c: '#6e2017' }]] },
   // W-CHAR1 class closure — the remaining palette-ignored kinds get
   // class specs so NO posted NPC can fall through to the forge
   // placeholder again (guarded by tests/leader-cast-checks.mjs). The
@@ -144741,7 +144774,7 @@ const MAPS3 = {
     ],
     signs: [],
     npcs: [
-      { x: 4, y: 4, name: 'GUARD VEX', art: 'grunt', skin: '#d8a878', shirt: '#2a2a3a', pants: '#1a1a2a', hair: '#3a2a1a',
+      { x: 4, y: 4, name: 'GUARD VEX', art: 'cast-vex', skin: '#d8a878', shirt: '#2a2a3a', pants: '#1a1a2a', hair: '#3a2a1a',
         dialogue: ["Vantage is under new management, kid — ours. Show yourself out.", "Management's gonna dock my pay for this..."] },
       { x: 13, y: 8, name: 'EMPLOYEE', art: 'lady', skin: '#f0c8a0', shirt: '#3a6ac0', pants: '#2a2a3a', hair: '#a05a2a',
         dialogue: ["They stormed the president's office upstairs. Someone dropped a Card Key in the lobby rush — check the corner by the plants!", "Please — my POLYCRANE project is up there. And, uh. My lunch. Mostly the project."] },
@@ -144785,7 +144818,7 @@ const MAPS3 = {
       { x: 13, y: 9, name: 'HIKER BRANT', art: 'cast-brant', skin: '#c89878', shirt: '#9a603a', pants: '#3a3a3a', hair: '#4a3a2a',
         trainer: 'r9_hiker', sight: { dir: 'up', range: 3 },
         dialogue: ["Every stone on this route has met my boots. Now my team wants to meet YOU!", "Boots: scuffed. Team: scuffed-er. Well fought!"] },
-      { x: 4, y: 8, name: 'CAMPER LIO', art: 'camper', skin: '#f0c8a0', shirt: '#5d3fa5', pants: '#3a3a4a', hair: '#2a1a0a',
+      { x: 4, y: 8, name: 'CAMPER LIO', art: 'cast-lio-camper', skin: '#f0c8a0', shirt: '#5d3fa5', pants: '#3a3a4a', hair: '#2a1a0a',
         trainer: 'r9_camper', sight: { dir: 'right', range: 3 },
         dialogue: ["I pitched my tent on the best battling spot on the route. Coincidence? Never.", "Tent's yours if you want it. The view's great; the company was better."] },
     ],
@@ -145584,7 +145617,7 @@ const MAPS3 = {
       { x: 11, y: 7, text: 'ROUTE 20 — Rime Isles west, Caldera east. The caves breathe cold air in summer.' },
     ],
     npcs: [
-      { x: 12, y: 8, name: 'SWIMMER BO', art: 'swimmer', skin: '#d8a878', shirt: '#3a9ac0', pants: '#2a3a4a', hair: '#1a1a1a',
+      { x: 12, y: 8, name: 'SWIMMER BO', art: 'cast-bo-swimmer', skin: '#d8a878', shirt: '#3a9ac0', pants: '#2a3a4a', hair: '#1a1a1a',
         dialogue: ["Something huge and blue nests in the Rime caves. The cold near its chamber isn't weather — it's presence.", "Push the boulders into the sea holes if you go. Slows the current. Old swimmer's trick."] },
     ],
     encounters: {
@@ -145909,7 +145942,7 @@ const MAPS3 = {
       { x: 5, y: 7, text: 'ROUTE 22 — The League road. Beyond the gate, only badge-bearers pass. No exceptions. Ever.' },
     ],
     npcs: [
-      { x: 2, y: 4, name: 'GATE GUARD', art: 'officer', skin: '#d8a878', shirt: '#3a6ac0', pants: '#2a2a3a', hair: '#1a1a1a',
+      { x: 2, y: 4, name: 'GATE GUARD', art: 'cast-gateguard', skin: '#d8a878', shirt: '#3a6ac0', pants: '#2a2a3a', hair: '#1a1a1a',
         dialogue: ["League checkpoint. Eight badges open the mountain; seven open a long walk home.", "I've turned away champions-in-waiting for thirty years. The mountain doesn't grade on effort, kid."] },
     ],
     encounters: {
@@ -150243,7 +150276,7 @@ const MAPS5 = {
         "x": 12,
         "y": 9,
         "name": "FROST KEEPER",
-        "art": "monk",
+        "art": "cast-frostkeeper",
         "skin": "#e8b888",
         "shirt": "#3a9ac0",
         "pants": "#2a3a4a",
@@ -150411,7 +150444,7 @@ const MAPS5 = {
         "x": 12,
         "y": 9,
         "name": "VOLTA KEEPER",
-        "art": "monk",
+        "art": "cast-voltakeeper",
         "skin": "#e8b888",
         "shirt": "#3a9ac0",
         "pants": "#2a3a4a",
@@ -157434,7 +157467,7 @@ const MAPS6 = {
         "x": 5,
         "y": 3,
         "name": "MONK THEO",
-        "art": "monk",
+        "art": "cast-theo",
         "skin": "#e8b888",
         "shirt": "#3a6ac0",
         "pants": "#2a3a4a",
@@ -158273,7 +158306,7 @@ const MAPS6 = {
         "x": 7,
         "y": 4,
         "name": "TOWER SAGE ANSELM",
-        "art": "monk",
+        "art": "cast-anselm-tower",
         "skin": "#e8b888",
         "shirt": "#3a6ac0",
         "pants": "#2a3a4a",
@@ -161097,7 +161130,7 @@ const MAPS6 = {
         "x": 11,
         "y": 8,
         "name": "KEEPER OF THE DEEP",
-        "art": "monk",
+        "art": "cast-deepkeeper",
         "skin": "#e8b888",
         "shirt": "#3a6ac0",
         "pants": "#2a3a4a",
@@ -165653,7 +165686,7 @@ const MAPS7 = {
       {"x": 12, "y": 7, "text": "ROUTE 102 — Eldergrove Town to Meadowbrook City. The ponds belong to the LILIPOLE; the road merely borrows them."},
     ],
     "npcs": [
-      {"x": 12, "y": 11, "name": "BUG CATCHER WREN", "art": "bugcatcher", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#4a3a2a", "dialogue": ["SILKWURM by day, and the ponds keep their own hours.", "A PSYLET crossed here once. Once. I check every morning."]},
+      {"x": 12, "y": 11, "name": "BUG CATCHER WREN", "art": "cast-wren-catcher", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#4a3a2a", "dialogue": ["SILKWURM by day, and the ponds keep their own hours.", "A PSYLET crossed here once. Once. I check every morning."]},
       {"x": 20, "y": 6, "name": "LASS MIRA", "art": "cast-mira-lass", "skin": "#d8a878", "shirt": "#7a4a8a", "pants": "#2a2a3a", "hair": "#c0c0c0", "dialogue": ["Meadowbrook's gym leader is the calmest man in Maris. His Kin are not.", "First ponds, first ripples. Route 102 is where journeys get their feet wet."]},
     ],
     "encounters": {"rate": 0.13, "table": [{"species": "zigzagoon", "min": 202, "max": 206, "weight": 24}, {"species": "poochyena", "min": 202, "max": 206, "weight": 22}, {"species": "wurmple", "min": 202, "max": 206, "weight": 18}, {"species": "lotad", "min": 203, "max": 207, "weight": 14}, {"species": "seedot", "min": 203, "max": 207, "weight": 10}, {"species": "surskit", "min": 203, "max": 207, "weight": 8}, {"species": "ralts", "min": 204, "max": 207, "weight": 4}], "water": [{"species": "tentacool", "min": 202, "max": 210, "weight": 28}, {"species": "magikarp", "min": 202, "max": 208, "weight": 24}, {"species": "wingull", "min": 203, "max": 210, "weight": 20}, {"species": "pelipper", "min": 206, "max": 212, "weight": 8}], "waterRate": 0.08},
@@ -165791,7 +165824,7 @@ const MAPS7 = {
       {"x": 14, "y": 7, "text": "MEADOWBROOK WOODS — Deep shade, soft ground. The forest keeps a spare of everything: light, sound, and directions."},
     ],
     "npcs": [
-      {"x": 9, "y": 12, "name": "BUG MANIAC FERN", "art": "bugcatcher", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#4a3a2a", "dialogue": ["Both SILKWURM roads run through this forest, if your eyes are patient: silk and cascoon alike.", "Rarest thing here sheds its own skin and leaves it watching. HUSKCADA. Once a season, maybe."]},
+      {"x": 9, "y": 12, "name": "BUG MANIAC FERN", "art": "cast-fern-maniac", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#4a3a2a", "dialogue": ["Both SILKWURM roads run through this forest, if your eyes are patient: silk and cascoon alike.", "Rarest thing here sheds its own skin and leaves it watching. HUSKCADA. Once a season, maybe."]},
     ],
     "encounters": {"rate": 0.14, "table": [{"species": "wurmple", "min": 206, "max": 211, "weight": 20}, {"species": "silcoon", "min": 207, "max": 212, "weight": 12}, {"species": "cascoon", "min": 207, "max": 212, "weight": 12}, {"species": "shroomish", "min": 207, "max": 212, "weight": 18}, {"species": "slakoth", "min": 207, "max": 212, "weight": 12}, {"species": "taillow", "min": 206, "max": 211, "weight": 10}, {"species": "beautifly", "min": 208, "max": 212, "weight": 6}, {"species": "dustox", "min": 208, "max": 212, "weight": 6}, {"species": "shedinja", "min": 209, "max": 212, "weight": 2}]},
     "items": [],
@@ -167104,7 +167137,7 @@ const MAPS7 = {
       {"x": 8, "y": 2, "text": "ASPEN'S FIELD BOARD — 'A Kin is not fully known until you have been muddy in its company.'"},
     ],
     "npcs": [
-      {"x": 9, "y": 4, "name": "AIDE FERN", "art": "aide", "skin": "#e8b888", "shirt": "#3a6ac0", "pants": "#2a3a4a", "hair": "#1a1a1a", "dialogue": ["The Professor does fieldwork the way weather does rain: personally and everywhere.", "Habitat charts on every wall. The mud on the floor is also a chart, unofficially."]},
+      {"x": 9, "y": 4, "name": "AIDE FERN", "art": "cast-fern-aide", "skin": "#e8b888", "shirt": "#3a6ac0", "pants": "#2a3a4a", "hair": "#1a1a1a", "dialogue": ["The Professor does fieldwork the way weather does rain: personally and everywhere.", "Habitat charts on every wall. The mud on the floor is also a chart, unofficially."]},
       {"x": 5, "y": 8, "name": "AIDE COLM", "art": "cast-colm", "skin": "#c89878", "shirt": "#2a7a6a", "pants": "#3a3a4a", "hair": "#7a4a1a", "dialogue": ["Rootlet doctrine: the lab coat is optional; the notebook is not.", "Mind the specimen jars. The LILIPOLE inside is conducting its own study of you."]},
     ],
     "encounters": null,
@@ -170760,7 +170793,7 @@ const MAPS9 = {
     ],
     "npcs": [
       {"x": 17, "y": 4, "name": "MART CLERK", "art": "clerk-borea", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#4a3a2a", "dialogue": ["Shingle Town Mart — stocked for the road ahead."], "mart": {"stock": ["pokeball", "greatball", "potion", "superpotion", "antidote", "awakening"]}},
-      {"x": 11, "y": 7, "name": "LAB AIDE FERN", "art": "aide", "skin": "#e8b888", "shirt": "#3a6ac0", "pants": "#2a3a4a", "hair": "#1a1a1a", "dialogue": ["The Professor's bark is worse than his fieldwork, and his fieldwork once involved a STRAPTOR.", "Revelry's towers are a walk north. The city never sleeps; it broadcasts."]},
+      {"x": 11, "y": 7, "name": "LAB AIDE FERN", "art": "cast-fern-lab", "skin": "#e8b888", "shirt": "#3a6ac0", "pants": "#2a3a4a", "hair": "#1a1a1a", "dialogue": ["The Professor's bark is worse than his fieldwork, and his fieldwork once involved a STRAPTOR.", "Revelry's towers are a walk north. The city never sleeps; it broadcasts."]},
       {"x": 19, "y": 13, "name": "BEACHCOMBER ANA", "art": "cast-ana", "skin": "#d8a878", "shirt": "#7a4a8a", "pants": "#2a2a3a", "hair": "#c0c0c0", "dialogue": ["TIDESLUG change colour with the coast here. The lab writes it down; the beach just does it.", "Clover is west, past the first grass of the journey."]},
       {"x": 6, "y": 10, "name": "YOUNGSTER RUE", "art": "cast-rue-youngster", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#4a3a2a", "dialogue": ["I race the BRINEGULL along the shore. The BRINEGULL are winning on points.", "Route 202's grass rustles at knee height. That's the sound of starting."]},
     ],
@@ -172090,7 +172123,7 @@ const MAPS9 = {
       {"x": 14, "y": 4, "text": "THE RUINED MANOR — The forest’s one house, long empty. The garden statue watches the path; the windows watch everything else."},
     ],
     "npcs": [
-      {"x": 9, "y": 10, "name": "BUG MANIAC FERN", "art": "bugcatcher", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#4a3a2a", "dialogue": ["Both Wurmple roads run through this forest, silk and cascoon alike, if your eyes are patient.", "DUSKMOTH drift down from the honey trees at dusk. The chateau garden is their ballroom."]},
+      {"x": 9, "y": 10, "name": "BUG MANIAC FERN", "art": "cast-fern-maniac", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#4a3a2a", "dialogue": ["Both Wurmple roads run through this forest, silk and cascoon alike, if your eyes are patient.", "DUSKMOTH drift down from the honey trees at dusk. The chateau garden is their ballroom."]},
     ],
     "encounters": {"rate": 0.14, "table": [{"species": "buneary", "min": 319, "max": 325, "weight": 18}, {"species": "burmy", "min": 319, "max": 325, "weight": 16}, {"species": "wurmple", "min": 319, "max": 324, "weight": 14}, {"species": "silcoon", "min": 320, "max": 325, "weight": 8}, {"species": "cascoon", "min": 320, "max": 325, "weight": 8}, {"species": "beautifly", "min": 321, "max": 326, "weight": 6}, {"species": "dustox", "min": 321, "max": 326, "weight": 6}, {"species": "mothim", "min": 320, "max": 326, "weight": 6}, {"species": "gastly", "min": 320, "max": 326, "weight": 8}, {"species": "hoothoot", "min": 319, "max": 325, "weight": 10}]},
     "items": [],
@@ -172888,7 +172921,7 @@ const MAPS9 = {
       {"x": 8, "y": 2, "text": "SORREL'S FIELD BOARD — 'A Kin is not fully known until you have been muddy in its company. Evolution is not an ending; it is a question.'"},
     ],
     "npcs": [
-      {"x": 9, "y": 4, "name": "PROF. SORREL’S AIDE", "art": "aide", "skin": "#e8b888", "shirt": "#3a6ac0", "pants": "#2a3a4a", "hair": "#1a1a1a", "dialogue": ["The Professor is in the field. The Professor is always in the field. The field is wherever he is standing.", "Ninety-three percent of Borea's species, catalogued from this room. The other seven percent are being difficult on purpose."]},
+      {"x": 9, "y": 4, "name": "PROF. SORREL’S AIDE", "art": "cast-sorrel-aide", "skin": "#e8b888", "shirt": "#3a6ac0", "pants": "#2a3a4a", "hair": "#1a1a1a", "dialogue": ["The Professor is in the field. The Professor is always in the field. The field is wherever he is standing.", "Ninety-three percent of Borea's species, catalogued from this room. The other seven percent are being difficult on purpose."]},
       {"x": 5, "y": 8, "name": "AIDE COLM", "art": "cast-colm", "skin": "#c89878", "shirt": "#2a7a6a", "pants": "#3a3a4a", "hair": "#7a4a1a", "dialogue": ["Shingle doctrine: boots by the door, notebook in hand, opinions in pencil.", "Mind the specimen jars. The TIDESLUG inside is conducting its own study of you."]},
     ],
     "encounters": null,
@@ -206349,6 +206382,6 @@ if (typeof Game !== 'undefined') Object.assign(Game.prototype, {
 });
 
 </script>
-<!-- contentHash:c2e047cd92e86d05c5e1ad1e4e86977262fc6a6d8e578f562b916167d1f5007c -->
+<!-- contentHash:0b030287276eeaf425a5ebabb8d006c974f0531e513d31ae073ce83677d7a056 -->
 </body>
 </html>
