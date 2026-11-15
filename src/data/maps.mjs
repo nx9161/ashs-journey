@@ -1229,6 +1229,22 @@ export const WALKABLE = new Set(['.', ',', 'D', 'E', 'C', 'F', 'J', 'K', '1', '2
   // 1304-1321 and W17-P takes 1322-1339 on its parallel
   // branch; 1111 stays empty.)
   ...[1340, 1341, 1344, 1345, 1348, 1350, 1351, 1354]
+    .map((i) => String.fromCodePoint(0x1E00 + i)),
+  // Wave W17-R: the Maris tranche-7 floor chars (U+1E00+1356..,
+  // tiles.mjs W17R_KIND_DEFS) are walkable — shaftfloor (Route
+  // 124 Trench, swapped 1:1 from the walkable seasand swim
+  // surface), ebbsand (Route 125) and cratersand (Route 126),
+  // each swapped 1:1 from the walkable shipped sand char, and
+  // doorfloor (Route 126 Trench, swapped 1:1 from seasand), so
+  // floor stays floor. The wall chars (1357 shaftwall, 1363
+  // doorwall, swapped from the 'uwrock' wall char) and the rock
+  // chars (1359 ebbrock, 1361 craterrock, swapped from the 'R'
+  // rock char) are NOT here: walls and rocks were never
+  // walkable. (Indices 1356-1363 per the Maris program plan;
+  // W17-L took 1257-1276, W17-M 1277-1286, W17-N 1287-1303,
+  // W17-O 1304-1321, W17-P 1322-1339 and W17-Q takes 1340-1355
+  // on its parallel branch; 1111 stays empty.)
+  ...[1356, 1358, 1360, 1362]
     .map((i) => String.fromCodePoint(0x1E00 + i))]);
 
 // Trainer definitions for the slice.

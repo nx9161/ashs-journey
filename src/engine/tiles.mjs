@@ -3655,6 +3655,79 @@ W17Q_KIND_DEFS.forEach(([kind], i) => {
 export const W17Q_PROP_KINDS = W17Q_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
 export const W17Q_WALL_KINDS = W17Q_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
 export const W17Q_FLOOR_KINDS = W17Q_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
+// Wave W17-R (Route Build Program, Maris Tranche 7 — under the
+// trench crossing, the north bay, the Craterlake water, under
+// the crater): the program's first full dive-pair tranche. All
+// four maps are defined once in maps7.mjs (no dual copies in
+// Maris, so no registry re-pins arise). UNDERWATER METHOD
+// (Director ruling #1): the two trench maps convert by the
+// cave-method analogue — seasand -> own floor kind, uwrock ->
+// own wall kind, art layer only, NO props; the dive-pair
+// mechanic tiles are byte-preserved and censused on BOTH maps
+// of each pair (surface 'W' dive tiles + diveSpots records;
+// trench waterglow return tiles + surfaceSpots records).
+// Route 124 Trench "Lit Shafts" (1356-1357): shaftfloor a
+// bright pale light-shaft sand (the lit pools drawn in the
+// floor's own art where the surface doors land), shaftwall a
+// blue-grey jointed shaft rock. Route 125 "North Bay"
+// (1358-1359): ebbsand a tide-banded bay sand (the tide lines
+// drawn in the kind, per the design), ebbrock an ice-fringed
+// cave-isle rock (pale frost edges per the design's glinting
+// ice falls); water 383 + waterglow 17 byte-preserved entire,
+// the 2 'L' Ebbtide mouth cells standing on cavefloor are
+// warp cells — byte-preserved, never converted; coral 5
+// byte-preserved. Route 126 "Craterlake Water" (1360-1361):
+// cratersand a grey-warm crater-bay sand, craterrock a
+// crater-wall rock with massive joint drawing (split from
+// Craterlake town's craterfloor street by register: wild wall
+// vs city floor); water 398 + waterglow 21 byte-preserved
+// entire, lifering 3 + coral 1 byte-preserved; its 2 dive
+// tiles on 'W' cells + diveSpots records are mechanic data —
+// byte-preserved, censused (Craterlake sootopolis also
+// dive-pairs into the same trench; its pair records stand on
+// the town map, byte-preserved entire, the town not touched).
+// Route 126 Trench "Crater Door" (1362-1363): doorfloor a
+// volcanic-grey trench sand with runway-lit flecks (the
+// design's LUMIFIN rows drawn in the floor art, art layer
+// only), doorwall an arched crater rock, darker than 124's
+// shaft rock. Each trench is twin-split from its pair-sibling
+// by value/hue (the Lunestone 1F/B1F discipline): 124 is the
+// bright lit crossing, 126 the volcanic drowned doorway.
+// Shipped trench dressing (kelpbed, moonmoss, cerpool,
+// uwcoral, kelp, crystalcluster, starrock, cavelantern, plain
+// sand patches and every other non-seasand/uwrock kind)
+// stands byte-preserved inside the new registers; encounter
+// tables (0.13, clamperl set) and the maps' underwater flags
+// are byte-identical. Sand kinds are 'floor' class (the
+// shipped sand char was walkable; the swaps are 1:1), trench
+// floor kinds 'floor' class (swapped 1:1 from the walkable
+// seasand), rock/wall kinds 'wall' class (never walkable).
+// Indices 1356-1363 per the program plan
+// (WAVE-W17-MARIS-ROUTE-PROGRAM-PLAN.md): W17-L took
+// 1257-1276, W17-M 1277-1286, W17-N 1287-1303, W17-O
+// 1304-1321, W17-P 1322-1339, and W17-Q takes 1340-1355 on
+// its parallel branch; 1111 and every earlier documented gap
+// stay empty. Kind names verified unclaimed against
+// origin/main. Chars U+1E00+1356..
+export const W17R_KIND_DEFS = [
+  ['shaftfloor', 'floor'],
+  ['shaftwall', 'wall'],
+  ['ebbsand', 'floor'],
+  ['ebbrock', 'wall'],
+  ['cratersand', 'floor'],
+  ['craterrock', 'wall'],
+  ['doorfloor', 'floor'],
+  ['doorwall', 'wall'],
+];
+export const W17R_KIND_CHARS = {};
+W17R_KIND_DEFS.forEach(([kind], i) => {
+  const ch = String.fromCodePoint(0x1E00 + 1356 + i);
+  W17R_KIND_CHARS[kind] = ch;
+  TILE_CHARS[ch] = kind;
+});
+export const W17R_PROP_KINDS = W17R_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
+export const W17R_WALL_KINDS = W17R_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
+export const W17R_FLOOR_KINDS = W17R_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
 export const SINNOH_TOWN_GROUND_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg);
 export const SINNOH_TOWN_GROUND2_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg2);
 // TX-3: the 8 gym exteriors by town (original type-accent motifs).
