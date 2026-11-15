@@ -10,9 +10,12 @@
 //             x28, B group retirement x10, C layout quality for the
 //             8 T2 layouts), embedded verbatim from the T2 file.
 // Each part keeps its own loader, pins and check names; the parts
-// share only the exit code. Merged total: 325 checks.
-// W16-B room pins (labs / contests / chambers / gym pairs) extend
-// this file when W16-B merges.
+// share only the exit code. Merged total: 616 checks.
+//   Part III — W16-B's sections W16B1..W16B6 (291 checks: labs /
+//             contests / league chambers / gym pairs), added at the
+//             W16-T3 merge; T3's original 'B' labels are relabeled
+//             W16B* because Part II already owns 'B' for house-group
+//             retirement. Body otherwise verbatim.
 
 import { buildGameJs } from '../scripts/build.mjs';
 import { TILE_CHARS } from '../src/engine/tiles.mjs';
@@ -20,6 +23,7 @@ import vm from 'node:vm';
 import crypto from 'node:crypto';
 import { createHash } from 'node:crypto';
 import { dirname, join } from 'node:path';
+import path from 'node:path'; // for Part III (W16-B)
 import { fileURLToPath } from 'node:url';
 
 let PASS = 0, FAIL = 0;
@@ -378,6 +382,654 @@ for (const id of T2) {
 }
   PASS += pass; FAIL += fail;
   console.log('interior-variety [Part II — W16-T2 A/B/C sections]: ' + pass + ' pass / ' + fail + ' fail');
+})();
+
+
+// =====================================================================
+// Part III — W16-B sections W16B1..W16B6 (verbatim; original header kept,
+// labels relabeled B* -> W16B* at the W16-T3 merge: Part II owns 'B').
+// =====================================================================
+// tests/interior-variety-checks.mjs — Wave W16 (War Room E2E Phase 2):
+// the INTERIOR VARIETY guard, W16-B tranche (labs, contests, chambers,
+// gym pairs). WHY: the NO-SAME-KIT audit (sec.4) measured the labs trio /
+// contest quartet / league chambers each on ONE grid, and 4 gym pairs
+// wearing one grid (and one type kit) per pair. W16-B retires every one.
+//
+//   W16B1 SET RETIREMENT — within each B set every member grid is
+//      pairwise distinct; the named keeper alone still sits on the
+//      frozen template hash; chambers (dressing-level) sit on NO
+//      template. Includes the Fortree freeze: gym-fortree wears NO
+//      grass kit (leafplanter/vinepost/seedvault gone) and wears the
+//      roost register (birdcage/telescope/mapdesk); gym-eterna keeps
+//      the grass kit as the pair keeper.
+//   W16B2 INVARIANT DATA — per scoped map, sha256 of the serialized
+//      {warps, start, npcs, signs, items, hidden, events, encounters}
+//      equals the plan-time pin.
+//   W16B3 INVARIANT CELLS — the coordinate sets carrying door / sign /
+//      podium / counter / battlemat kinds equal the pins, and every
+//      post — map npc or story-appended (professors, MAIA x4, gym
+//      leaders + trainers, stewards, aides) — still stands on its
+//      recorded floor kind at its recorded cell.
+//   W16B4 REACHABILITY — BFS reach from the landing equals the baseline
+//      for every scoped map (global dead pockets == 1069 held by
+//      scripts/audit-reachability.mjs in the audits group).
+//   W16B5 STANDARD METRICS — open floor >= 60% in every scoped room;
+//      at most one rug accent run (<=2 adjacent cells, one row).
+//   W16B6 LAYOUT FREEZE — every scoped map's grid hash equals its
+//      post-wave pin (burn-down rule: a future layout change updates
+//      the pin in the SAME commit).
+
+await (async () => {
+let pass = 0; const failures = [];
+function ok(name, cond, detail = '') { if (cond) { pass++; } else { failures.push(name); console.log('  FAIL: ' + name + (detail ? ' — ' + detail : '')); } }
+
+const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
+const D = (f) => import(path.join(ROOT, 'src/data', f));
+const packs = [];
+{
+  const base = await D('maps.mjs');
+  packs.push(base.MAPS);
+  for (let i = 2; i <= 9; i++) { const mod = await D('maps' + i + '.mjs'); packs.push(mod['MAPS' + i]); }
+}
+const MAPS = {};
+for (const obj of packs) Object.assign(MAPS, obj);
+const { TILE_CHARS } = await import(path.join(ROOT, 'src/engine/tiles.mjs'));
+const { buildGameJs } = await import(path.join(ROOT, 'scripts/build.mjs'));
+const ctx = vm.createContext({ console, Math, JSON, Object, Array, Set, Map });
+vm.runInContext(buildGameJs({ auth: true }) + '\n;this.__W = [...WALKABLE];', ctx);
+const WALK = new Set(ctx.__W);
+const kindOf = (ch) => TILE_CHARS[ch];
+const sha = (s) => crypto.createHash('sha256').update(s).digest('hex');
+const gridSha = (m) => sha(m.rows.join('\n'));
+const dataSha = (m) => sha(JSON.stringify({ warps: m.warps, start: m.start, npcs: m.npcs, signs: m.signs, items: m.items, hidden: m.hidden, events: m.events, encounters: m.encounters }));
+
+const PINS = {
+ "birch-lab": {
+  "grid": "914e613ee828ca3384634352688465e767af5f770271d07a624e70647241ef1d",
+  "data": "053853c1ce81b2bc215d9d038316bb3a73ffd8bad730ae70ea0b978c0316f0ab",
+  "reach": 153,
+  "pos": {
+   "door": [
+    "8,11",
+    "9,11"
+   ],
+   "sign": [
+    "8,2"
+   ],
+   "podium": [],
+   "counter": [],
+   "battlemat": []
+  }
+ },
+ "elm-lab": {
+  "grid": "b139fdde0a9ffcdd666ae962fd686139e1d6b973a92bd73a02359abb2dac4c78",
+  "data": "033a7dc881d2037a181b74989b02310131e8f410503bcaf4385009225a383a96",
+  "reach": 153,
+  "pos": {
+   "door": [
+    "8,11",
+    "9,11"
+   ],
+   "sign": [
+    "8,2"
+   ],
+   "podium": [],
+   "counter": [],
+   "battlemat": []
+  }
+ },
+ "rowan-lab": {
+  "grid": "fa74c6db08bd695fa29a0e2c2891219c5e63c61886fe6eaecdb4b6cc2377fa53",
+  "data": "7951d61db557d4db20ac8cd7d4adff65e3cba692db202a849b4fdde382cf5734",
+  "reach": 153,
+  "pos": {
+   "door": [
+    "8,11",
+    "9,11"
+   ],
+   "sign": [
+    "8,2"
+   ],
+   "podium": [],
+   "counter": [],
+   "battlemat": []
+  }
+ },
+ "contest-fallarbor": {
+  "grid": "df63fbf0b220fd301b1423ad74384da004c00fbc6a2d1c7eaf404703894513ae",
+  "data": "bcaa029547ce104e1d308414d80bb3936fbda8b1de85cb5ccf1c2cdd31b315d5",
+  "reach": 151,
+  "pos": {
+   "door": [
+    "8,11",
+    "9,11"
+   ],
+   "sign": [
+    "8,3"
+   ],
+   "podium": [],
+   "counter": [
+    "8,2",
+    "9,2"
+   ],
+   "battlemat": [
+    "7,5",
+    "8,5",
+    "9,5",
+    "10,5",
+    "7,6",
+    "8,6",
+    "9,6",
+    "10,6"
+   ]
+  }
+ },
+ "contest-lilycove": {
+  "grid": "6457f7aef6a8803911a4beab2ee17a9bed7a9a00b4e7abfceac87703f1bd7a64",
+  "data": "01f96c433c3ab4142cbf417a16963c42a10cc53bd9ba18128b0a3c2d8c3d0c60",
+  "reach": 151,
+  "pos": {
+   "door": [
+    "8,11",
+    "9,11"
+   ],
+   "sign": [
+    "8,3"
+   ],
+   "podium": [],
+   "counter": [
+    "8,2",
+    "9,2"
+   ],
+   "battlemat": [
+    "7,5",
+    "8,5",
+    "9,5",
+    "10,5",
+    "7,6",
+    "8,6",
+    "9,6",
+    "10,6"
+   ]
+  }
+ },
+ "contest-slateport": {
+  "grid": "d3d5a5b03543d6cc69bd06da4d76e15fc69e8e0b4c97afbe424133e721a9088b",
+  "data": "603eab38bcd7dd777c90086b3c22387b4e8114a40c2cb5e9fe58cadf443fd32f",
+  "reach": 151,
+  "pos": {
+   "door": [
+    "8,11",
+    "9,11"
+   ],
+   "sign": [
+    "8,3"
+   ],
+   "podium": [],
+   "counter": [
+    "8,2",
+    "9,2"
+   ],
+   "battlemat": [
+    "7,5",
+    "8,5",
+    "9,5",
+    "10,5",
+    "7,6",
+    "8,6",
+    "9,6",
+    "10,6"
+   ]
+  }
+ },
+ "contest-verdanturf": {
+  "grid": "7cc98e8958fb066abdedbdd6ec75c722c5892db01776ec69b34bff961519643d",
+  "data": "af3c8b039f9a8d9f86341e3329228ed54b8742fc7f4c64d9d9f2fcb57f828eac",
+  "reach": 151,
+  "pos": {
+   "door": [
+    "8,11",
+    "9,11"
+   ],
+   "sign": [
+    "8,3"
+   ],
+   "podium": [],
+   "counter": [
+    "8,2",
+    "9,2"
+   ],
+   "battlemat": [
+    "7,5",
+    "8,5",
+    "9,5",
+    "10,5",
+    "7,6",
+    "8,6",
+    "9,6",
+    "10,6"
+   ]
+  }
+ },
+ "league-chamber-1": {
+  "grid": "415c42f629636e827426df9ea1e0071e096f2ace5d85ca5799a2f117be41bb7a",
+  "data": "96d350992d212b80732044190d0c6da4753ef0be1b55c93901e3fc3223693a89",
+  "reach": 141,
+  "pos": {
+   "door": [
+    "7,11",
+    "8,11"
+   ],
+   "sign": [
+    "7,3"
+   ],
+   "podium": [
+    "7,2",
+    "8,2"
+   ],
+   "counter": [],
+   "battlemat": [
+    "7,5",
+    "8,5",
+    "7,6",
+    "8,6"
+   ]
+  }
+ },
+ "league-chamber-2": {
+  "grid": "800fb3519b47870d9dddcf03f3bce05c92b6e63d9713fb9ccdaef30f2595422e",
+  "data": "5bf7a5494cca2228a8ae26392532ba7695e9e3d514b254373ca4d304ae6b67e7",
+  "reach": 141,
+  "pos": {
+   "door": [
+    "7,11",
+    "8,11"
+   ],
+   "sign": [
+    "7,3"
+   ],
+   "podium": [
+    "7,2",
+    "8,2"
+   ],
+   "counter": [],
+   "battlemat": [
+    "7,5",
+    "8,5",
+    "7,6",
+    "8,6"
+   ]
+  }
+ },
+ "league-chamber-3": {
+  "grid": "7a9493d252b2525e9ee390c681f92d524aa1bddbf57cf6c83f9333a1234092ed",
+  "data": "bd817617c8ac7fb14977d97b8b109812fe7287c812970890490b935e6b972e55",
+  "reach": 141,
+  "pos": {
+   "door": [
+    "7,11",
+    "8,11"
+   ],
+   "sign": [
+    "7,3"
+   ],
+   "podium": [
+    "7,2",
+    "8,2"
+   ],
+   "counter": [],
+   "battlemat": [
+    "7,5",
+    "8,5",
+    "7,6",
+    "8,6"
+   ]
+  }
+ },
+ "league-chamber-4": {
+  "grid": "f149b5515265e6b0a40ac2193ca2dd0ca0ec2408c302d0d0f8feeb667282b2dc",
+  "data": "e122fa2162af93f62416b5cb203b311181d6cb26b44744eb6018499cf1fcd809",
+  "reach": 141,
+  "pos": {
+   "door": [
+    "7,11",
+    "8,11"
+   ],
+   "sign": [
+    "7,3"
+   ],
+   "podium": [
+    "7,2",
+    "8,2"
+   ],
+   "counter": [],
+   "battlemat": [
+    "7,5",
+    "8,5",
+    "7,6",
+    "8,6"
+   ]
+  }
+ },
+ "gym-olivine": {
+  "grid": "d33f7fdce0f2512d646f51b9a15e164e0f00f2d076b8c3d24beb7b513402019a",
+  "data": "a529b7876674ff9ec0ef6d757f434b1497ba6dd68f57e6527a56013d07f6f487",
+  "reach": 108,
+  "pos": {
+   "door": [
+    "7,9",
+    "8,9"
+   ],
+   "sign": [],
+   "podium": [
+    "7,1",
+    "8,1"
+   ],
+   "counter": [],
+   "battlemat": [
+    "7,4",
+    "8,4",
+    "7,5",
+    "8,5"
+   ]
+  }
+ },
+ "gym-violet": {
+  "grid": "34182ffdb33bca6a602004ec628b2b8e2b5b8d03757b4862b304b50d6842aa33",
+  "data": "2d63908d7112d46c6570a8e1274eacc615a39e5bf9065eaba43d8b0d5096136d",
+  "reach": 108,
+  "pos": {
+   "door": [
+    "7,9",
+    "8,9"
+   ],
+   "sign": [],
+   "podium": [
+    "7,1",
+    "8,1"
+   ],
+   "counter": [],
+   "battlemat": [
+    "7,4",
+    "8,4",
+    "7,5",
+    "8,5"
+   ]
+  }
+ },
+ "gym-oreburgh": {
+  "grid": "768c39b7655e890826db899e5af5d084eb42a98b517f7a30a33b705de3464106",
+  "data": "3a61186eb1d5b10dcffe2cae0da88ef56fd66d119b5c12c60d894a6efc831cdc",
+  "reach": 136,
+  "pos": {
+   "door": [
+    "7,11",
+    "8,11"
+   ],
+   "sign": [],
+   "podium": [
+    "7,1",
+    "8,1"
+   ],
+   "counter": [],
+   "battlemat": [
+    "7,5",
+    "8,5",
+    "7,6",
+    "8,6"
+   ]
+  }
+ },
+ "gym-rustboro": {
+  "grid": "48cd5e613f3560949025a0823b6e07ef20d68942ef0b78ba9c0bd05a1e692b64",
+  "data": "8944b388c3ce97916c6870bf81d44982b69609e3797ff144849c34ef29cdc839",
+  "reach": 136,
+  "pos": {
+   "door": [
+    "7,11",
+    "8,11"
+   ],
+   "sign": [],
+   "podium": [
+    "7,1",
+    "8,1"
+   ],
+   "counter": [],
+   "battlemat": [
+    "7,5",
+    "8,5",
+    "7,6",
+    "8,6"
+   ]
+  }
+ },
+ "gym-veilstone": {
+  "grid": "fa8cb1a65c40b6e51c9fc2e197570b02af1f3cbdfd6ef3969d68df3286a08c92",
+  "data": "37a0aab89c769f6dd92a98f3382740e78b5af620a6824f3bc7b788ac336a2e43",
+  "reach": 136,
+  "pos": {
+   "door": [
+    "7,11",
+    "8,11"
+   ],
+   "sign": [],
+   "podium": [
+    "7,1",
+    "8,1"
+   ],
+   "counter": [],
+   "battlemat": [
+    "7,5",
+    "8,5",
+    "7,6",
+    "8,6"
+   ]
+  }
+ },
+ "gym-dewford": {
+  "grid": "dda2c53e9a565df760744175f16bf7c92b600a5c689172e5ae4fb767059eea3a",
+  "data": "72143ef61b271bf035ee079f51b1f81619032cb0be80c19dcf4a719b8d49667a",
+  "reach": 136,
+  "pos": {
+   "door": [
+    "7,11",
+    "8,11"
+   ],
+   "sign": [],
+   "podium": [
+    "7,1",
+    "8,1"
+   ],
+   "counter": [],
+   "battlemat": [
+    "7,5",
+    "8,5",
+    "7,6",
+    "8,6"
+   ]
+  }
+ },
+ "gym-fortree": {
+  "grid": "c97e9eff0960ee5faff8ccf6f86c7bb0ea24e031cfc576f32305bed8abfdea41",
+  "data": "15c26edec2f612de53994e2c6c1bd8fc3e68fd488c8dee5deea658cf043d479b",
+  "reach": 136,
+  "pos": {
+   "door": [
+    "7,11",
+    "8,11"
+   ],
+   "sign": [],
+   "podium": [
+    "7,1",
+    "8,1"
+   ],
+   "counter": [],
+   "battlemat": [
+    "7,5",
+    "8,5",
+    "7,6",
+    "8,6"
+   ]
+  }
+ },
+ "gym-eterna": {
+  "grid": "f485674de851a43b264a553a42ad01ef2eae9688823cdeeae1074fda27674d92",
+  "data": "6420b8c9819c06e033764927c2d40995923d3672650454dd31795b18d73142c1",
+  "reach": 136,
+  "pos": {
+   "door": [
+    "7,11",
+    "8,11"
+   ],
+   "sign": [],
+   "podium": [
+    "7,1",
+    "8,1"
+   ],
+   "counter": [],
+   "battlemat": [
+    "7,5",
+    "8,5",
+    "7,6",
+    "8,6"
+   ]
+  }
+ }
+};
+const TEMPLATES = {
+ "lab": "b139fdde0a9ffcdd666ae962fd686139e1d6b973a92bd73a02359abb2dac4c78",
+ "contest": "d3d5a5b03543d6cc69bd06da4d76e15fc69e8e0b4c97afbe424133e721a9088b",
+ "chamber": "14470350f7bd8c30c3b88ce432d95d12e321ac8b8f491cff1878245f4ca0e54a",
+ "gym-olivine": "34182ffdb33bca6a602004ec628b2b8e2b5b8d03757b4862b304b50d6842aa33",
+ "gym-oreburgh": "48cd5e613f3560949025a0823b6e07ef20d68942ef0b78ba9c0bd05a1e692b64",
+ "gym-veilstone": "dda2c53e9a565df760744175f16bf7c92b600a5c689172e5ae4fb767059eea3a",
+ "gym-fortree": "f485674de851a43b264a553a42ad01ef2eae9688823cdeeae1074fda27674d92"
+};
+const LABS = ['birch-lab', 'elm-lab', 'rowan-lab'];
+const CONTESTS = ['contest-fallarbor', 'contest-lilycove', 'contest-slateport', 'contest-verdanturf'];
+const CHAMBERS = ['league-chamber-1', 'league-chamber-2', 'league-chamber-3', 'league-chamber-4'];
+const GYM_PAIRS = [ // [re-dressed, keeper]
+  ['gym-olivine', 'gym-violet'], ['gym-oreburgh', 'gym-rustboro'],
+  ['gym-veilstone', 'gym-dewford'], ['gym-fortree', 'gym-eterna'],
+];
+const SCOPED = [...LABS, ...CONTESTS, ...CHAMBERS, ...GYM_PAIRS.flat()];
+
+// ---------------- W16B1: set retirement -----------------------------------
+function distinct(name, ids) {
+  const hs = ids.map((id) => gridSha(MAPS[id]));
+  ok(name, new Set(hs).size === ids.length, hs.join(' '));
+}
+distinct('W16B1 labs trio pairwise distinct', LABS);
+ok('W16B1 elm-lab keeps the lab template', gridSha(MAPS['elm-lab']) === TEMPLATES.lab);
+ok('W16B1 birch-lab off the lab template', gridSha(MAPS['birch-lab']) !== TEMPLATES.lab);
+ok('W16B1 rowan-lab off the lab template', gridSha(MAPS['rowan-lab']) !== TEMPLATES.lab);
+distinct('W16B1 contest quartet pairwise distinct', CONTESTS);
+ok('W16B1 contest-slateport keeps the contest template', gridSha(MAPS['contest-slateport']) === TEMPLATES.contest);
+for (const id of CONTESTS.filter((c) => c !== 'contest-slateport'))
+  ok('W16B1 ' + id + ' off the contest template', gridSha(MAPS[id]) !== TEMPLATES.contest);
+distinct('W16B1 league chambers pairwise distinct (dressing)', CHAMBERS);
+for (const id of CHAMBERS)
+  ok('W16B1 ' + id + ' off the chamber template', gridSha(MAPS[id]) !== TEMPLATES.chamber);
+for (const [changed, keeper] of GYM_PAIRS) {
+  ok('W16B1 ' + keeper + ' keeps its pair template', gridSha(MAPS[keeper]) === TEMPLATES[changed]);
+  ok('W16B1 ' + changed + ' off its pair template', gridSha(MAPS[changed]) !== TEMPLATES[changed]);
+  ok('W16B1 pair ' + changed + '/' + keeper + ' distinct', gridSha(MAPS[changed]) !== gridSha(MAPS[keeper]));
+}
+// Fortree correctness: the flying gym wears no grass kit.
+{
+  const kinds = new Set();
+  MAPS['gym-fortree'].rows.forEach((r) => [...r].forEach((ch) => kinds.add(kindOf(ch))));
+  ok('W16B1 gym-fortree wears no grass kit (leafplanter/vinepost/seedvault gone)',
+    !kinds.has('leafplanter') && !kinds.has('vinepost') && !kinds.has('seedvault'));
+  ok('W16B1 gym-fortree wears the roost register (birdcage/telescope/mapdesk)',
+    kinds.has('birdcage') && kinds.has('telescope') && kinds.has('mapdesk'));
+  const ek = new Set();
+  MAPS['gym-eterna'].rows.forEach((r) => [...r].forEach((ch) => ek.add(kindOf(ch))));
+  ok('W16B1 gym-eterna keeps the grass kit (keeper)', ek.has('leafplanter') && ek.has('vinepost') && ek.has('seedvault'));
+}
+
+// ---------------- W16B2: invariant data pins -------------------------------
+for (const id of SCOPED)
+  ok('W16B2 ' + id + ' invariant data (warps/start/npcs/signs/items/hidden/events/encounters)', dataSha(MAPS[id]) === PINS[id].data);
+
+// ---------------- W16B3: invariant cells + posts ---------------------------
+const PIN_KINDS = ['door', 'sign', 'podium', 'counter', 'battlemat'];
+for (const id of SCOPED) {
+  const m = MAPS[id];
+  for (const k of PIN_KINDS) {
+    const got = [];
+    m.rows.forEach((row, y) => [...row].forEach((ch, x) => { if (kindOf(ch) === k) got.push(x + ',' + y); }));
+    ok('W16B3 ' + id + ' ' + k + ' cells pinned', JSON.stringify(got) === JSON.stringify(PINS[id].pos[k]),
+      'got ' + got.join(' ') + ' want ' + PINS[id].pos[k].join(' '));
+  }
+}
+const FLOOR_OF = (id) => id.includes('lab') ? 'labfloor' : id.includes('contest') ? 'silphfloor' : 'gymfloor';
+// map-npc post cells keep their floor kind
+for (const id of SCOPED) for (const n of MAPS[id].npcs || [])
+  ok('W16B3 ' + id + ' post cell (' + n.x + ',' + n.y + ') floor intact', kindOf(MAPS[id].rows[n.y][n.x]) === FLOOR_OF(id));
+// story-appended posts: coordinate pins + floor kind under the post
+const APPENDED = [
+  ['birch-lab', 'PROF. ASPEN', 7, 3, 'labfloor'], ['rowan-lab', 'PROF. SORREL', 8, 3, 'labfloor'],
+  ['elm-lab', 'PROF. LINDEN', 8, 4, 'labfloor'],
+  ['contest-fallarbor', 'MAIA', 8, 6, 'battlemat'], ['contest-lilycove', 'MAIA', 8, 6, 'battlemat'],
+  ['contest-slateport', 'MAIA', 8, 6, 'battlemat'], ['contest-verdanturf', 'MAIA', 8, 6, 'battlemat'],
+  ['gym-olivine', 'LIORA', 7, 2, 'gymfloor'], ['gym-violet', 'AVEN', 7, 2, 'gymfloor'],
+  ['gym-oreburgh', 'RONAN', 7, 2, 'gymfloor'], ['gym-rustboro', 'SAXA', 7, 2, 'gymfloor'],
+  ['gym-veilstone', 'MAREN', 7, 2, 'gymfloor'], ['gym-dewford', 'ENZO', 7, 2, 'gymfloor'],
+  ['gym-fortree', 'ARIA', 7, 2, 'gymfloor'], ['gym-eterna', 'TANSY', 7, 2, 'gymfloor'],
+  ['gym-rustboro', 'YOUNGSTER BRAM', 4, 5, 'gymfloor'], ['gym-rustboro', 'HIKER SELLA', 11, 5, 'gymfloor'],
+  ['gym-dewford', 'BLACKBELT ROOK', 4, 5, 'gymfloor'], ['gym-dewford', 'BATTLE GIRL SANA', 11, 5, 'gymfloor'],
+  ['gym-fortree', 'BIRD KEEPER ANSEL', 4, 5, 'gymfloor'], ['gym-fortree', 'PICNICKER WREN', 11, 5, 'gymfloor'],
+  ['gym-oreburgh', 'MINER COLE', 4, 5, 'gymfloor'], ['gym-oreburgh', 'MINER FENN', 11, 5, 'gymfloor'],
+  ['gym-eterna', 'AROMA ADEPT LIA', 4, 5, 'gymfloor'], ['gym-eterna', 'AROMA ADEPT ROSALIE', 11, 5, 'gymfloor'],
+  ['gym-veilstone', 'BLACK BELT JON', 4, 5, 'gymfloor'], ['gym-veilstone', 'BLACK BELT RUE', 11, 5, 'gymfloor'],
+];
+{
+  const { HOENN_NPCS } = await D('story-hoenn.mjs');
+  const { JOHTO_NPCS } = await D('story-johto.mjs');
+  const { SINNOH_NPCS } = await D('story-sinnoh.mjs');
+  const cast = [...HOENN_NPCS, ...JOHTO_NPCS, ...SINNOH_NPCS];
+  for (const [map, name, x, y, floor] of APPENDED) {
+    const hit = cast.find((n) => n.map === map && n.name === name);
+    ok('W16B3 appended post ' + name + ' @ ' + map + ' (' + x + ',' + y + ')', !!hit && hit.x === x && hit.y === y,
+      hit ? 'at ' + hit.x + ',' + hit.y : 'not found');
+    ok('W16B3 floor under ' + name + ' @ ' + map, kindOf(MAPS[map].rows[y][x]) === floor);
+  }
+}
+
+// ---------------- W16B4: reachability --------------------------------------
+function reach(m) {
+  const H = m.rows.length, W = m.rows[0].length;
+  const seen = new Set(); const q = [[m.start.x, m.start.y]];
+  while (q.length) { const [x, y] = q.pop(); const k = x + ',' + y;
+    if (seen.has(k) || x < 0 || y < 0 || x >= W || y >= H || !WALK.has(m.rows[y][x])) continue;
+    seen.add(k); q.push([x + 1, y], [x - 1, y], [x, y + 1], [x, y - 1]); }
+  return seen.size;
+}
+for (const id of SCOPED)
+  ok('W16B4 ' + id + ' reach == baseline ' + PINS[id].reach, reach(MAPS[id]) === PINS[id].reach, 'got ' + reach(MAPS[id]));
+
+// ---------------- W16B5: standard metrics ----------------------------------
+const RUG_KINDS = new Set(['rug', 'rug2', 'rug3']);
+for (const id of SCOPED) {
+  const m = MAPS[id];
+  let tot = 0, open = 0; const rugs = [];
+  m.rows.forEach((row, y) => { if (y === 0 || y === m.rows.length - 1) return;
+    [...row].forEach((ch, x) => { if (x === 0 || x === row.length - 1) return; tot++;
+      if (WALK.has(ch)) open++;
+      if (RUG_KINDS.has(kindOf(ch))) rugs.push([x, y]); }); });
+  ok('W16B5 ' + id + ' open floor >= 60%', open / tot >= 0.6, (100 * open / tot).toFixed(1) + '%');
+  const oneRun = rugs.length <= 2 && (rugs.length < 2 || Math.abs(rugs[0][0] - rugs[1][0]) + Math.abs(rugs[0][1] - rugs[1][1]) === 1);
+  ok('W16B5 ' + id + ' at most one rug accent run', oneRun, rugs.length + ' rug cells');
+}
+
+// ---------------- W16B6: layout freeze -------------------------------------
+for (const id of SCOPED)
+  ok('W16B6 ' + id + ' layout pin', gridSha(MAPS[id]) === PINS[id].grid);
+
+PASS += pass; FAIL += failures.length;
+  console.log('interior-variety [Part III — W16-B W16B sections]: ' + pass + ' pass / ' + failures.length + ' fail');
+
 })();
 
 console.log(`\ninterior-variety: ${PASS} pass / ${FAIL} fail`);
