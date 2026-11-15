@@ -4381,6 +4381,60 @@ W17F_KIND_DEFS.forEach(([kind], i) => {
 const W17F_PROP_KINDS = W17F_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
 const W17F_WALL_KINDS = W17F_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
 const W17F_FLOOR_KINDS = W17F_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
+// Wave W17-G (Route Build Program, Yamato Tranche 2): the wet west
+// arc — Route 33, Holly Forest, Route 34, Route 35 and the National
+// Park, each its own kit under the NO-SAME-KIT law. All five are
+// defined once in maps6.mjs (no dual copies in Yamato, so no
+// registry re-pins arise). Routes convert 1:1 off the generic
+// grassground/path/tree vocabulary by KIND (maps6 trees stand on
+// both '#' and 'T' chars — the W17-B lesson); art layer only:
+// encounter tables, warps, NPC posts, sign records, items and every
+// shipped dressing kind (apricorn trees on Route 33; the forest's
+// jshrine and 19 maple; Route 34's Day-Care house stamp; the park's
+// tc-/td-goldenrod carpet, leaguefountain, lamps, benches) stay
+// byte-identical. Route 33 "Rain Road" (idx 1186-1189), Holly
+// Forest "Holly Deep" (1190-1193), Route 34 "Day-Care Coast"
+// (1194-1197), Route 35 "Park Road" (1198-1201), National Park
+// "The Front Garden" (1202-1204 — no tree cells ship in the park,
+// so its kit is ground + path + prop only). Ground kinds
+// deliberately do NOT end in 'floor' (the desire-path audit counts
+// '*floor' as street tier; grounds must never masquerade as
+// street); path kinds DO end in 'floor' so they register as the
+// route's path tier per route (checklist point 3). Indices
+// 1186-1204 per the program plan (WAVE-W17-YAMATO-ROUTE-PROGRAM-
+// PLAN.md): W17-F took 1168-1185 on its parallel branch; 1111 and
+// every earlier documented gap stay empty. Kind names verified
+// unclaimed against origin/main. Chars U+1E00+1186..
+const W17G_KIND_DEFS = [
+  ['rainturf', 'floor'],
+  ['rainfloor', 'floor'],
+  ['driptree', 'wall'],
+  ['puddlepool', 'prop'],
+  ['hollyturf', 'floor'],
+  ['hollyfloor', 'floor'],
+  ['hollytree', 'wall'],
+  ['logstack', 'prop'],
+  ['coastturf', 'floor'],
+  ['coastfloor', 'floor'],
+  ['coastelm', 'wall'],
+  ['carefence', 'prop'],
+  ['parkturf', 'floor'],
+  ['parkfloor', 'floor'],
+  ['parkelm', 'wall'],
+  ['parkpost', 'prop'],
+  ['frontlawn', 'floor'],
+  ['frontfloor', 'floor'],
+  ['lawnbed', 'prop'],
+];
+const W17G_KIND_CHARS = {};
+W17G_KIND_DEFS.forEach(([kind], i) => {
+  const ch = String.fromCodePoint(0x1E00 + 1186 + i);
+  W17G_KIND_CHARS[kind] = ch;
+  TILE_CHARS[ch] = kind;
+});
+const W17G_PROP_KINDS = W17G_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
+const W17G_WALL_KINDS = W17G_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
+const W17G_FLOOR_KINDS = W17G_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
 const SINNOH_TOWN_GROUND_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg);
 const SINNOH_TOWN_GROUND2_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg2);
 // TX-3: the 8 gym exteriors by town (original type-accent motifs).
@@ -114242,6 +114296,348 @@ const ART = {
     "ammzammmmmzmazmm",
     "zzzzzzzzzzzzzzzz"
   ] },
+  "tile-rainturf": { w: 16, h: 16, pal: {"a":"#63995a","b":"#548550","d":"#456f42","s":"#3f6340","w":"#cfe3c2"}, rows: [
+    "aaaaaabaaasaaaaa",
+    "adaaadbaaaaaaaaa",
+    "waawaabaaaawaada",
+    "aaaabadaaaaabbbs",
+    "abbbasadbabaaada",
+    "aabaaaabaaaasdaa",
+    "aaasaaaaaabbabaa",
+    "bbaabbaabaaaaaab",
+    "daaaaaaababaaaaa",
+    "aaaaaaaaaabaaaaa",
+    "abaaaabaaaaaabaa",
+    "aaaaaaaaaaaaaaab",
+    "awbbasbbaaaaabaa",
+    "aabaaaaaaaassabb",
+    "aawbaaabaaaaaaaa",
+    "abaabaabbabaaaaa"
+  ] },
+  "tile-rainfloor": { w: 16, h: 16, pal: {"a":"#c4b28a","b":"#b09c72","d":"#937e58","p":"#7e97a8","h":"#b9cbd6"}, rows: [
+    "aaaaaaaaaaaadaaa",
+    "bbabaaaaaaaadaba",
+    "aaabaaabbaaaaaab",
+    "aappphpbbaaaaaaa",
+    "apphppppaaabadaa",
+    "dapppppabdabaaaa",
+    "aaaaaababaaaadaa",
+    "aaaaaaaaaaaaabaa",
+    "abaaaabaaaaaaaaa",
+    "aaaabbdabdaaabab",
+    "aaadabaabpppppba",
+    "aaabaaabpphppppa",
+    "baabaabaapppppaa",
+    "aaaababaaaaadaaa",
+    "aabaaaaaabdaabba",
+    "adaaaaadaaaaaaaa"
+  ] },
+  "tile-driptree": { w: 16, h: 16, pal: {"a":"#63995a","b":"#548550","t":"#47804a","u":"#2f5c33","h":"#5f9257","w":"#cfe3c2","k":"#57422e"}, rows: [
+    "baaaaahhttabaaaa",
+    "aaaahhhhhwhtaaaa",
+    "abhhhhhhhuhtthaa",
+    "ahhwhhhhttttttha",
+    "aththuuttuttttta",
+    "auututtttuuuutha",
+    "aautthhtutthhuba",
+    "aahwhtuhtttuwhaa",
+    "aaatuutututhtaab",
+    "aaahhthuuthttaaa",
+    "aaaaththutttaaaa",
+    "bawaaaakkaabawaa",
+    "aaaaawbkkaaaaaaa",
+    "abaaaaakkaaabaaa",
+    "aaaaaauuuuaaaaaa",
+    "aabaaaaaaaaaabaa"
+  ] },
+  "tile-prop-puddlepool": { w: 16, h: 16, pal: {"a":"#63995a","b":"#548550","s":"#3f6340","p":"#7e97a8","d":"#5b7a8c","h":"#b9cbd6"}, rows: [
+    "aaabaabaabasaasa",
+    "aaaaaaaaaaaaaaaa",
+    "aaaaaaaaabaaaaaa",
+    "aaaabaaaaaababaa",
+    "abaabaaaaaaaaaba",
+    "aaaaaddddddaaaab",
+    "aaadppppppppdsab",
+    "aadpphpppppppdaa",
+    "aadpppppphpppdab",
+    "aadppphppppppdaa",
+    "abbdppppppppdbaa",
+    "aaaabddddddaaaaa",
+    "babbaaaaaabababa",
+    "aasaaabaaaaaaabb",
+    "aaaaaaaaaaabaaaa",
+    "aaaaaaaaaaaaaaab"
+  ] },
+  "tile-hollyturf": { w: 16, h: 16, pal: {"a":"#527a48","b":"#44683c","d":"#37572f","l":"#6d8f57","r":"#b04038"}, rows: [
+    "baaaaaaabaaabbaa",
+    "aaaaaabbbbabbaar",
+    "abaaaaabaaaaabal",
+    "aaadaabadadaaaaa",
+    "abalaaaaadaaaaab",
+    "baaaaaabaaaaaada",
+    "aaabaaaalaabaaab",
+    "adalaalaaaaaaaaa",
+    "aaaabaaabbalrbaa",
+    "babaaaaabaaaabaa",
+    "baaaaaabbbaaaaaa",
+    "abaaaaabaaaaabaa",
+    "aaadbaaaaaaadaba",
+    "laaaaababbaadaaa",
+    "aabbaaabaaaabbad",
+    "adaaaaaaabaaabal"
+  ] },
+  "tile-hollyfloor": { w: 16, h: 16, pal: {"a":"#cfc09c","b":"#bcae84","d":"#a08d64","l":"#6d8f57"}, rows: [
+    "aaadbaaaaabaabba",
+    "aaaaldaaabaaabaa",
+    "lbaaabbbaaaaaaaa",
+    "aaaaaabbaaabdaaa",
+    "balaaaabaaaaaaaa",
+    "aaaababbalaaaaaa",
+    "abaaabaaaaaaaabd",
+    "aaaaabdaaaabaaaa",
+    "adbaaaaabaabaaaa",
+    "aadaaaaaaaaaaaaa",
+    "baaaaaaaalabdaad",
+    "aabaaaadbaaaaaaa",
+    "abaaaaaaaaaaaaad",
+    "babaabaaaaaaabaa",
+    "aaaabaaaaaaaaaal",
+    "aaadaaaaaaaaaalb"
+  ] },
+  "tile-hollytree": { w: 16, h: 16, pal: {"a":"#527a48","b":"#44683c","t":"#3a663c","u":"#2c5230","h":"#4c7a48","r":"#c0453c","k":"#4e3826"}, rows: [
+    "baaaaaaaaaabaaaa",
+    "aaaaahhhuuuaaaaa",
+    "abahhrhhtturuaaa",
+    "aarhhhhhthutruaa",
+    "aauuuttutttuhtaa",
+    "aatttttutthuuuaa",
+    "aaauuhuuthhhuaba",
+    "aaauttuurthutaaa",
+    "aaaauhtrthruaaab",
+    "aaaaartrturaaaaa",
+    "aaaaabakkaaaaaaa",
+    "baaaaaakkaabaaaa",
+    "aaaaaabkkaaaaaaa",
+    "abaaaaakkaaabaaa",
+    "aaaaaauuuuaaaaaa",
+    "aabaaaaaaaaaabaa"
+  ] },
+  "tile-prop-logstack": { w: 16, h: 16, pal: {"a":"#527a48","b":"#44683c","l":"#6d8f57","w":"#8a6844","e":"#c8a878","d":"#7d5a34"}, rows: [
+    "aaaaaaaaabaaaaba",
+    "aaaaaaaaaaaabaaa",
+    "laaaabaaaaaaaaaa",
+    "aaaaabaabaabaaal",
+    "aaaabaaaaaaaaaab",
+    "aaalaaaabaaabaaa",
+    "aaaalaaaabaabaaa",
+    "aablaaabaalaaaaa",
+    "aaaeawwwwwwaeaaa",
+    "aaaewwwwwwwweaaa",
+    "aaadwwwwwwwweaaa",
+    "abbewwwwwwwwdaba",
+    "aaadwwwwwwwweaaa",
+    "aaaddddddddddaaa",
+    "aaaaababaaaaaabb",
+    "aaaaabaaaaaaabaa"
+  ] },
+  "tile-coastturf": { w: 16, h: 16, pal: {"a":"#7cab60","b":"#6b9a52","d":"#5b8745","w":"#eef3e2"}, rows: [
+    "abaaaabaaaaaaaaa",
+    "aaaaadaaabaaaaaa",
+    "aaawbaadawaaaaaa",
+    "baaaaabbaadaadda",
+    "dawaaabaaaaabaaa",
+    "baaaaaaaabaadaaa",
+    "waaaaaaabaabaaaa",
+    "aaaaadwwbabaaaaa",
+    "adabaadawdaddabb",
+    "aaawadaaaabaaaaa",
+    "baawwbaaaaabbaaa",
+    "aaaaabbwbaaaaaaa",
+    "baaabaaaabbaaaba",
+    "aaawaaaaaaaaaaab",
+    "abbaabadaaabaaba",
+    "aaaaaaaaaadbaaaw"
+  ] },
+  "tile-coastfloor": { w: 16, h: 16, pal: {"a":"#ded1ac","b":"#cdbd93","d":"#b3a077","p":"#e7dcbc"}, rows: [
+    "aaaaaaaaaabaaaba",
+    "aaaaaaaaaaaaaabd",
+    "aaaaababaaaaabaa",
+    "aaaabaaaaaaadaaa",
+    "aaaaaaaaababaaaa",
+    "aaaaaaaaaaaaaaaa",
+    "baaaaaabaabaaaaa",
+    "apppaaaaapapappp",
+    "paapppaaapbaaaap",
+    "aaaaaaaaaaaaadba",
+    "aabaaaaabaaaabaa",
+    "abaaaaaabaabaaaa",
+    "aaabaaabbaaaaaaa",
+    "aaababaaaaaaabaa",
+    "aaaaabbaaaaaaaaa",
+    "aaaaabaaabaabada"
+  ] },
+  "tile-coastelm": { w: 16, h: 16, pal: {"a":"#7cab60","b":"#6b9a52","t":"#4d8142","u":"#3d6a34","h":"#639551","k":"#6e4c34"}, rows: [
+    "baaaaaaaaaabaaaa",
+    "aaaaahhhuhtaaaaa",
+    "abahhhhhututhaaa",
+    "aahhhhhhuuuhutaa",
+    "aaththttutthutaa",
+    "aauuthututuhuuaa",
+    "aaatuutthhtuuaba",
+    "aaautththtthhaaa",
+    "aaaatuttttutaaab",
+    "aaaaahuttuhaaaaa",
+    "aaaaabakkaaaaaaa",
+    "baaaaaakkaabaaaa",
+    "aaaaaabkkaaaaaaa",
+    "abaaaaakkaaabaaa",
+    "aaaaaauuuuaaaaaa",
+    "aabaaaaaaaaaabaa"
+  ] },
+  "tile-prop-carefence": { w: 16, h: 16, pal: {"a":"#7cab60","b":"#6b9a52","w":"#a97c4c","d":"#7d5a34","k":"#7d5a34","f":"#d97b9a","l":"#5b8745"}, rows: [
+    "aaaabawwaaaaaaaa",
+    "babaaaaaaaaaaaba",
+    "aaaaaaaaaaabaaaa",
+    "aaaaaaaaaaaaaaab",
+    "abaaaaabbababaaa",
+    "baaaaaaawaaaaaaa",
+    "aabdaaabaabadaaa",
+    "aaakbaaaaaaakaaa",
+    "aaawwwwwwwwwwaaa",
+    "aaakaaaaaaaakaaa",
+    "aaakaaaaaaaakaaa",
+    "abawwwwwwwwwwaaa",
+    "aaakaaafaaafkabb",
+    "aaaklffalflakaaa",
+    "abaaaaaaabaawaaa",
+    "aabaaaaaaaabaaaa"
+  ] },
+  "tile-parkturf": { w: 16, h: 16, pal: {"a":"#77b364","b":"#68a355","d":"#58914a","w":"#eef3e2"}, rows: [
+    "aaababaabaaaaaaa",
+    "aaaaababdaabaaaa",
+    "adbabaaabaaaabaa",
+    "aaaaaawabaadaaaa",
+    "aaaabaaaaaaaaaaa",
+    "aaabaaaaaaaaaadb",
+    "aaaaaaaaawaaaaaa",
+    "baaabaaaaabaabaa",
+    "aaabaaadbaaaaaaa",
+    "aababaaaaadaaaaa",
+    "baaaaaaaaaabaaaa",
+    "baaaaaaaaaaaaaaa",
+    "baaaaaabaaaaadab",
+    "aaadaaadaaaaaaaa",
+    "adaaabaaaadaaaab",
+    "aaaaaaaaaaaabaaa"
+  ] },
+  "tile-parkfloor": { w: 16, h: 16, pal: {"a":"#e0d3ae","b":"#d2c29c","d":"#b7a67f","w":"#f2ecd8"}, rows: [
+    "aaaaaaaaaaaaaaaa",
+    "babaaaaaaaaaaaaa",
+    "aadaaaaabaaaaaab",
+    "aaabbadbaaaaaaab",
+    "aaaaaaaaaaaaaaaa",
+    "aadaaaaaabaaaaaa",
+    "abaabaaaaaaaaaaa",
+    "aaaaaaaaaaabaaaa",
+    "adbaaaaaaaaaadba",
+    "aaaaabaaaaaaaaaa",
+    "abaaabaaaaaaaawa",
+    "aawdawaaaaaadabw",
+    "babaaaaaaaaaabaa",
+    "aaaaabaaaaaababa",
+    "bbbbaaaaabaaaaba",
+    "aaaaaaaaaaaaaaaa"
+  ] },
+  "tile-parkelm": { w: 16, h: 16, pal: {"a":"#77b364","b":"#68a355","t":"#54904a","u":"#437a3c","h":"#679e58","k":"#6e4c34"}, rows: [
+    "baaaaaaaaaabaaaa",
+    "aaaaahhhtttaaaaa",
+    "abahhhhhuhuttaaa",
+    "aahhhhhhhtttthaa",
+    "aauhhtttutttthaa",
+    "aahttththuthutaa",
+    "aaauhthuhutttaba",
+    "aaatutttttuuuaaa",
+    "aaaauthttthhaaab",
+    "aaaaattuuuhaaaaa",
+    "aaaaabakkaaaaaaa",
+    "baaaaaakkaabaaaa",
+    "aaaaaabkkaaaaaaa",
+    "abaaaaakkaaabaaa",
+    "aaaaaauuuuaaaaaa",
+    "aabaaaaaaaaaabaa"
+  ] },
+  "tile-prop-parkpost": { w: 16, h: 16, pal: {"a":"#77b364","b":"#68a355","s":"#a9a294","d":"#8a8474","c":"#c2bcab"}, rows: [
+    "aaaaaaaaaabaaaaa",
+    "aaaabbbaaabaaaaa",
+    "aabaabccccaaaaaa",
+    "aaaaaaccccaaaaaa",
+    "abaaaaassaaaaaab",
+    "abaaaaassaabaaaa",
+    "baabaabssaaaaaaa",
+    "ababaabssaaaaaba",
+    "aaaaaaaddaaabbaa",
+    "baabaabssaaaaaaa",
+    "aaaaaaassaaabaaa",
+    "aabaaaassaaaaaaa",
+    "aaabaaassaabaaaa",
+    "aaaaabddddaaaaaa",
+    "aaaaaaaaaaaaabaa",
+    "aaaaabaaaaaaabba"
+  ] },
+  "tile-frontlawn": { w: 16, h: 16, pal: {"a":"#7cb866","b":"#6da757","d":"#5d9248","m":"#8cc673"}, rows: [
+    "mmmmaaaamammbbda",
+    "ammaaaaamammaaaa",
+    "mmaabaaammmmadba",
+    "mamaaaaammbaaaaa",
+    "mabmdaaamamdaada",
+    "aamaaaaadmamaaba",
+    "aaamaaaamaamaaaa",
+    "mmmmaaaammmaaaaa",
+    "mmmmaaaammmmaaaa",
+    "mmmmaaaaaamaabba",
+    "bmamaaabaaamdaaa",
+    "amamaaabmaamaaaa",
+    "aammaaaaamaaaaaa",
+    "maambbaammmmabaa",
+    "mmmaaaaaamaaaaab",
+    "bmmmabaammmmaaab"
+  ] },
+  "tile-frontfloor": { w: 16, h: 16, pal: {"a":"#e2d5b0","b":"#d4c49e","d":"#baa87f","w":"#f4efe0"}, rows: [
+    "aaabaadaaawaaaaa",
+    "abaaabbaaaabaaaa",
+    "dbaaaaaaaaaaaada",
+    "aaaaaaaaaadaaaaa",
+    "bbadababaaababda",
+    "badbaaaaabdbabaa",
+    "aaaaabbaaaaaaaaa",
+    "aaaaaabaaaaaaaab",
+    "abbaaabbabaaaaaa",
+    "baaaaaaaaadbaaaa",
+    "waaaabaadaaaadab",
+    "aaaaaaaaaaawbaaa",
+    "aabbaaaaaaaaadaa",
+    "aabaaaaabaaaaaaa",
+    "abaaaadaabbaaaaa",
+    "aabbaabaaabaaaaa"
+  ] },
+  "tile-prop-lawnbed": { w: 16, h: 16, pal: {"a":"#7cb866","b":"#6da757","m":"#8cc673","s":"#6e5136","e":"#b8b2a2","f":"#d97b9a","g":"#f0ead8","v":"#9a7bc0","l":"#4c7c3a"}, rows: [
+    "aaaaaaaambaaaaaa",
+    "mmaaaabaaabbaaab",
+    "abaaaaaaaaabaaba",
+    "aaaaamaabamaaaaa",
+    "aaaabbmaaaaambab",
+    "aaaaaaaaabaababa",
+    "aaeeeeeeeeeeeeba",
+    "absvflvvvgvlvsaa",
+    "aasvggffflvffsaa",
+    "aasvlvflfffvgsab",
+    "aasvgglgflfflsma",
+    "aaeeeeeeeeeeeeaa",
+    "aaabaabaamaaaama",
+    "aaaaaabbaaaaaaaa",
+    "aaaaaaaaaaaaaaaa",
+    "amabaaaaaaaaaaba"
+  ] },
   "tile-trialfloor": { w: 16, h: 16, pal: {"a":"#d8c08a","b":"#cdb481","m":"#bfa87c","f":"#b07a3f","l":"#e2cc9c"}, rows: [
     "aabaaafaaabaaaaa",
     "aaaaaaaaaaabaaaf",
@@ -120924,6 +121320,9 @@ for (const k of W17E_FLOOR_KINDS) TILE_ART[k] = 'tile-' + k;
 for (const k of W17F_PROP_KINDS) TILE_ART[k] = 'tile-prop-' + k;
 for (const k of W17F_WALL_KINDS) TILE_ART[k] = 'tile-' + k;
 for (const k of W17F_FLOOR_KINDS) TILE_ART[k] = 'tile-' + k;
+for (const k of W17G_PROP_KINDS) TILE_ART[k] = 'tile-prop-' + k;
+for (const k of W17G_WALL_KINDS) TILE_ART[k] = 'tile-' + k;
+for (const k of W17G_FLOOR_KINDS) TILE_ART[k] = 'tile-' + k;
 // Premium+ W6 (TX-3/PL-1): door-open frames, authored in TX-3 for every
 // door kind. The warp-fade engine that plays them lands in W7 — W6
 // wires the frames (this registry + cache.doorOpen + doorOpenCanvas)
@@ -122999,6 +123398,19 @@ function resolveTileLayers(cache, kind, x, y, kindAt, t, phase, mapId) {
     case 'towerstone':
     case 'cliffpine':
     case 'flagcairn':
+    // Wave W17-G: the Yamato tranche-2 route trees and signature
+    // props composite over their ground the same way (all arts
+    // are fully opaque — each route's own ground is baked in at
+    // its measured colours).
+    case 'driptree':
+    case 'puddlepool':
+    case 'hollytree':
+    case 'logstack':
+    case 'coastelm':
+    case 'carefence':
+    case 'parkelm':
+    case 'parkpost':
+    case 'lawnbed':
     // Wave T17: the radio mast composites over its compound grass too.
     case 'radiomast': {
       // Object tiles carry transparent surrounds (Wave 1): lay the ground
@@ -130420,6 +130832,19 @@ const WALKABLE = new Set(['.', ',', 'D', 'E', 'C', 'F', 'J', 'K', '1', '2', 'V',
   // took 1092-1110, 1112-1131, 1132-1151, 1152-1165 and
   // 1166-1167 on its parallel branch; 1111 stays empty.)
   ...[1168, 1169, 1172, 1173, 1176, 1177, 1180, 1181, 1184]
+    .map((i) => String.fromCodePoint(0x1E00 + i)),
+  // Wave W17-G: the Yamato tranche-2 ground/path chars
+  // (U+1E00+1186.., tiles.mjs W17G_KIND_DEFS) are walkable —
+  // rainturf/rainfloor (Route 33), hollyturf/hollyfloor (Holly
+  // Forest), coastturf/coastfloor (Route 34), parkturf/parkfloor
+  // (Route 35), frontlawn/frontfloor (National Park), each
+  // swapped 1:1 from the walkable '_' ground / '.' path chars on
+  // its own map, so ground stays ground and path stays path. The
+  // tree chars (1188, 1192, 1196, 1200) and prop chars (1189,
+  // 1193, 1197, 1201, 1204) are NOT here: trees/props were never
+  // walkable. (Indices 1186-1204 per the program plan: W17-F
+  // took 1168-1185 on its parallel branch; 1111 stays empty.)
+  ...[1186, 1187, 1190, 1191, 1194, 1195, 1198, 1199, 1202, 1203]
     .map((i) => String.fromCodePoint(0x1E00 + i))]);
 
 // Trainer definitions for the slice.
@@ -144025,22 +144450,22 @@ const MAPS6 = {
     "name": "Route 33",
     "music": "route1-theme",
     "rows": [
-      "########################",
-      "#_,_________,_______F__#",
-      "#___F_##____F__ầ,__ầ,,ầ#",
-      "#___~~~~~_____,F__,____#",
-      "#,,_~~~~~___,_,___,____#",
-      "#__,~~~~~,#__#_,_,__,_F#",
-      "#__,____F___#ầ_______,,#",
-      "#_,_____,_F_____F___S_F#",
-      "........................",
-      "........................",
-      "#,,____________n___,___#",
-      "#____,____,F,F,________#",
-      "#_R,_______F________,__#",
-      "#_Fầ___,,_______,____,,#",
-      "#F____,_____F_______,_ầ#",
-      "########################"
+      "⊤⊤⊤⊤⊤⊤⊤⊤⊤⊤⊤⊤⊤⊤⊤⊤⊤⊤⊤⊤⊤⊤⊤⊤",
+      "⊤⊢,⊢⊢⊢⊢⊢⊢⊢⊢⊢,⊢⊢⊢⊢⊢⊢⊢F⊢⊢⊤",
+      "⊤⊢⊢⊢F⊢⊤⊤⊢⊢⊢⊢F⊢⊢ầ,⊢⊢ầ,,ầ⊤",
+      "⊤⊢⊢⊢~~~~~⊥⊢⊢⊢⊢,F⊢⊢,⊢⊢⊢⊢⊤",
+      "⊤,,⊢~~~~~⊢⊢⊢,⊢,⊢⊢⊢,⊢⊢⊢⊢⊤",
+      "⊤⊢⊢,~~~~~,⊤⊢⊢⊤⊢,⊢,⊢⊢,⊢F⊤",
+      "⊤⊢⊢,⊢⊢⊢⊢F⊢⊢⊢⊤ầ⊢⊢⊢⊢⊢⊢⊢,,⊤",
+      "⊤⊢,⊥⊢⊢⊢⊢,⊢F⊢⊢⊢⊢⊢F⊢⊢⊢S⊢F⊤",
+      "⊣⊣⊣⊣⊣⊣⊣⊣⊣⊣⊣⊣⊣⊣⊣⊣⊣⊣⊣⊣⊣⊣⊣⊣",
+      "⊣⊣⊣⊣⊣⊣⊣⊣⊣⊣⊣⊣⊣⊣⊣⊣⊣⊣⊣⊣⊣⊣⊣⊣",
+      "⊤,,⊢⊢⊢⊢⊢⊢⊢⊢⊢⊢⊢⊢n⊢⊢⊢,⊢⊢⊢⊤",
+      "⊤⊢⊢⊢⊢,⊢⊢⊢⊢,F,F,⊢⊢⊢⊢⊢⊢⊢⊢⊤",
+      "⊤⊢R,⊢⊢⊢⊢⊢⊢⊢F⊢⊢⊢⊢⊢⊢⊢⊢,⊢⊢⊤",
+      "⊤⊢Fầ⊢⊢⊢,,⊢⊢⊢⊢⊢⊢⊢,⊢⊢⊢⊢,,⊤",
+      "⊤F⊢⊢⊢⊢,⊢⊢⊢⊢⊢F⊢⊢⊢⊢⊢⊢⊢,⊢ầ⊤",
+      "⊤⊤⊤⊤⊤⊤⊤⊤⊤⊤⊤⊤⊤⊤⊤⊤⊤⊤⊤⊤⊤⊤⊤⊤"
     ],
     "warps": [
       {
@@ -144220,24 +144645,24 @@ const MAPS6 = {
     "name": "Holly Forest",
     "music": "viridian-theme",
     "rows": [
-      "############################",
-      "#,____F#___,_________F_#F_,#",
-      "##,,,F_F,,,___##,#____F_,__#",
-      "##__,___,_____ấ____,___##_F#",
-      "#_F,,,Ấ,,___FF_F__,____F_F_#",
-      "##__,Ấ__#_#F___S__F##______#",
-      "#__F,,F__ẤF___.___#____,_,,#",
-      "#,_#_,F,,___#F.F##,_F_,__SẤ#",
-      "#_,F_ẤẤF_,_,__.,_F_F#_Ấ____#",
-      "............................",
-      "............................",
-      "#Ấ_#F_,#_Ấ,,F_Ấ,#_,_##__,__#",
-      "#_F__#F_,_,_,FẤ,___#F#_____#",
-      "#__F_,,,_____F_______,_ẤẤ__#",
-      "#Ấ___,_,_,___F__,Ấ_F__,F___#",
-      "#F_,Ấ_,,,__#__Ấ#_#Ấ_FẤ,_,,_#",
-      "#_F,__#,__,_,_#_,_F________#",
-      "############################"
+      "⊨⊨⊨⊨⊨⊨⊨⊨⊨⊨⊨⊨⊨⊨⊨⊨⊨⊨⊨⊨⊨⊨⊨⊨⊨⊨⊨⊨",
+      "⊨,⊦⊦⊦⊦F⊨⊦⊦⊦,⊦⊦⊦⊦⊦⊦⊦⊦⊦F⊦⊨F⊦,⊨",
+      "⊨⊨,,,F⊦F,,,⊦⊦⊦⊨⊨,⊨⊦⊦⊦⊦F⊦,⊦⊦⊨",
+      "⊨⊨⊦⊦,⊦⊦⊦,⊦⊦⊦⊦⊦ấ⊦⊦⊦⊦,⊦⊦⊦⊨⊨⊦F⊨",
+      "⊨⊦F,,,Ấ,,⊦⊦⊦FF⊦F⊦⊦,⊦⊦⊦⊦F⊦F⊦⊨",
+      "⊨⊨⊦⊦,Ấ⊦⊦⊨⊦⊨F⊩⊦⊦S⊦⊦F⊨⊨⊩⊦⊦⊦⊦⊦⊨",
+      "⊨⊦⊦F,,F⊦⊦ẤF⊦⊦⊦⊧⊦⊦⊦⊨⊦⊦⊦⊦,⊦,,⊨",
+      "⊨,⊦⊨⊦,F,,⊦⊦⊦⊨F⊧F⊨⊨,⊦F⊦,⊦⊦SẤ⊨",
+      "⊨⊦,F⊦ẤẤF⊦,⊦,⊦⊦⊧,⊦F⊦F⊨⊦Ấ⊦⊦⊦⊦⊨",
+      "⊧⊧⊧⊧⊧⊧⊧⊧⊧⊧⊧⊧⊧⊧⊧⊧⊧⊧⊧⊧⊧⊧⊧⊧⊧⊧⊧⊧",
+      "⊧⊧⊧⊧⊧⊧⊧⊧⊧⊧⊧⊧⊧⊧⊧⊧⊧⊧⊧⊧⊧⊧⊧⊧⊧⊧⊧⊧",
+      "⊨Ấ⊦⊨F⊦,⊨⊦Ấ,,F⊦Ấ,⊨⊦,⊦⊨⊨⊦⊦,⊦⊦⊨",
+      "⊨⊦F⊦⊦⊨F⊦,⊦,⊦,FẤ,⊦⊦⊦⊨F⊨⊦⊦⊦⊦⊦⊨",
+      "⊨⊦⊦F⊦,,,⊦⊦⊦⊦⊦F⊦⊦⊦⊦⊦⊦⊦,⊦ẤẤ⊦⊦⊨",
+      "⊨Ấ⊦⊦⊦,⊦,⊦,⊦⊦⊦F⊦⊦,Ấ⊦F⊦⊦,F⊦⊦⊦⊨",
+      "⊨F⊦,Ấ⊦,,,⊦⊦⊨⊦⊦Ấ⊨⊦⊨Ấ⊦FẤ,⊦,,⊦⊨",
+      "⊨⊦F,⊦⊦⊨,⊦⊦,⊦,⊦⊨⊦,⊦F⊦⊦⊦⊦⊦⊦⊦⊦⊨",
+      "⊨⊨⊨⊨⊨⊨⊨⊨⊨⊨⊨⊨⊨⊨⊨⊨⊨⊨⊨⊨⊨⊨⊨⊨⊨⊨⊨⊨"
     ],
     "warps": [
       {
@@ -144385,24 +144810,24 @@ const MAPS6 = {
     "name": "Route 34",
     "music": "route1-theme",
     "rows": [
-      "###########..###########",
-      "#F__,____,_.._,F_#___,_#",
-      "#__,_____R_..____F_____#",
-      "#__________..______,F__#",
-      "#_,_____,__..F_,,R,,__Ấ#",
-      "#_____,____.._F_#______#",
-      "#_F________..____,_____#",
-      "#_________F..___ồồồ____#",
-      "#_________,.._,_ỔsỔ___R#",
-      "#_,__F____F..__S....,__#",
-      "#F#_______,..___Ấ_,_R__#",
-      "#__,_______..___nnnnn,_#",
-      "#,,~~~~~_,_.._F,,__F__F#",
-      "#__~~~~~_ẈF.._F__F_____#",
-      "#_,~~~~~_,,.._,,__,____#",
-      "#_,~~~~~_F_..,,_______,#",
-      "#_#____,F__..#FF__Ấ____#",
-      "###########..###########"
+      "⊬⊬⊬⊬⊬⊬⊬⊬⊬⊬⊬⊫⊫⊬⊬⊬⊬⊬⊬⊬⊬⊬⊬⊬",
+      "⊬F⊪⊪,⊪⊪⊪⊪,⊪⊫⊫⊪,F⊪⊬⊪⊪⊪,⊪⊬",
+      "⊬⊪⊪,⊪⊪⊪⊪⊪R⊪⊫⊫⊪⊪⊪⊪F⊪⊪⊪⊪⊪⊬",
+      "⊬⊪⊪⊪⊪⊪⊪⊪⊪⊪⊪⊫⊫⊪⊪⊪⊪⊪⊪,F⊪⊪⊬",
+      "⊬⊪,⊪⊪⊪⊪⊪,⊪⊪⊫⊫F⊪,,R,,⊪⊪Ấ⊬",
+      "⊬⊪⊪⊪⊪⊪,⊪⊪⊪⊪⊫⊫⊪F⊪⊬⊪⊪⊪⊪⊪⊪⊬",
+      "⊬⊪F⊪⊪⊪⊪⊪⊪⊪⊪⊫⊫⊪⊪⊪⊪,⊪⊪⊪⊪⊪⊬",
+      "⊬⊪⊪⊪⊪⊪⊪⊪⊪⊪F⊫⊫⊪⊭⊪ồồồ⊪⊪⊪⊪⊬",
+      "⊬⊪⊪⊪⊪⊪⊪⊪⊪⊪,⊫⊫⊪,⊪ỔsỔ⊭⊪⊪R⊬",
+      "⊬⊪,⊪⊪F⊪⊪⊪⊪F⊫⊫⊪⊪S⊫⊫⊫⊫,⊪⊪⊬",
+      "⊬F⊬⊪⊪⊪⊪⊪⊪⊪,⊫⊫⊪⊪⊪Ấ⊪,⊪R⊪⊪⊬",
+      "⊬⊪⊪,⊪⊪⊪⊪⊪⊪⊪⊫⊫⊪⊪⊪nnnnn,⊪⊬",
+      "⊬,,~~~~~⊪,⊪⊫⊫⊪F,,⊪⊪F⊪⊪F⊬",
+      "⊬⊪⊪~~~~~⊪ẈF⊫⊫⊪F⊪⊪F⊪⊪⊪⊪⊪⊬",
+      "⊬⊪,~~~~~⊪,,⊫⊫⊪,,⊪⊪,⊪⊪⊪⊪⊬",
+      "⊬⊪,~~~~~⊪F⊪⊫⊫,,⊪⊪⊪⊪⊪⊪⊪,⊬",
+      "⊬⊪⊬⊪⊪⊪⊪,F⊪⊪⊫⊫⊬FF⊪⊪Ấ⊪⊪⊪⊪⊬",
+      "⊬⊬⊬⊬⊬⊬⊬⊬⊬⊬⊬⊫⊫⊬⊬⊬⊬⊬⊬⊬⊬⊬⊬⊬"
     ],
     "warps": [
       {
@@ -144591,22 +145016,22 @@ const MAPS6 = {
     "name": "Route 35",
     "music": "route1-theme",
     "rows": [
-      "###########..###########",
-      "#___,_,__,_..._,F___,__#",
-      "#F_,_F____Ẉ..,___,,__,_#",
-      "#Fn,,__F_,_.._,__~~~~_F#",
-      "#__,_______..F__,~~~~__#",
-      "#__________..____~~~~__#",
-      "#_____,_F__.._R________#",
-      "#__F_,___,_..__________#",
-      "#n_F,_,_,__.._,,_______#",
-      "#_,_,__,___.._,,n_____,#",
-      "#___ẈF_____..#,_______,#",
-      "#_F,_,_____.._F_,,__Ấ_F#",
-      "#F___,__,__..____,__n,n#",
-      "#__________..S_______Ấ_#",
-      "#,#_,____Ẉ_.._#__,,_,,_#",
-      "###########..###########"
+      "⊰⊰⊰⊰⊰⊰⊰⊰⊰⊰⊰⊯⊯⊰⊰⊰⊰⊰⊰⊰⊰⊰⊰⊰",
+      "⊰⊮⊮⊮,⊮,⊮⊮,⊱⊯⊯⊯⊱,F⊮⊮⊮,⊮⊮⊰",
+      "⊰F⊮,⊮F⊮⊮⊮⊮Ẉ⊯⊯,⊮⊮⊮,,⊮⊮,⊮⊰",
+      "⊰Fn,,⊮⊮F⊮,⊮⊯⊯⊮,⊮⊮~~~~⊮F⊰",
+      "⊰⊮⊮,⊮⊮⊮⊮⊮⊮⊮⊯⊯F⊮⊮,~~~~⊮⊮⊰",
+      "⊰⊮⊮⊮⊮⊮⊮⊮⊮⊮⊮⊯⊯⊮⊮⊮⊮~~~~⊮⊮⊰",
+      "⊰⊮⊮⊮⊮⊮,⊮F⊮⊮⊯⊯⊮R⊮⊮⊮⊮⊮⊮⊮⊮⊰",
+      "⊰⊮⊮F⊮,⊮⊮⊮,⊮⊯⊯⊮⊮⊮⊮⊮⊮⊮⊮⊮⊮⊰",
+      "⊰n⊮F,⊮,⊮,⊮⊮⊯⊯⊮,,⊮⊮⊮⊮⊮⊮⊮⊰",
+      "⊰⊮,⊮,⊮⊮,⊮⊮⊮⊯⊯⊮,,n⊮⊮⊮⊮⊮,⊰",
+      "⊰⊮⊮⊮ẈF⊮⊮⊮⊮⊮⊯⊯⊰,⊮⊮⊮⊮⊮⊮⊮,⊰",
+      "⊰⊮F,⊮,⊮⊮⊮⊮⊮⊯⊯⊮F⊮,,⊮⊮Ấ⊮F⊰",
+      "⊰F⊮⊮⊮,⊮⊮,⊮⊮⊯⊯⊮⊮⊮⊮,⊮⊮n,n⊰",
+      "⊰⊮⊮⊮⊮⊮⊮⊮⊮⊮⊮⊯⊯S⊮⊮⊮⊮⊮⊮⊮Ấ⊮⊰",
+      "⊰,⊰⊮,⊮⊮⊮⊮Ẉ⊮⊯⊯⊮⊰⊮⊮,,⊮,,⊮⊰",
+      "⊰⊰⊰⊰⊰⊰⊰⊰⊰⊰⊰⊯⊯⊰⊰⊰⊰⊰⊰⊰⊰⊰⊰⊰"
     ],
     "warps": [
       {
@@ -144800,24 +145225,24 @@ const MAPS6 = {
     "name": "National Park",
     "music": "viridian-theme",
     "rows": [
-      "ỏỏỏỏỏỏỏỏỏỏỏỏỏ..ỏỏỏỏỏỏỏỏỏỏỏỏỏ",
-      "ỏ____________...___Ẅ_______ỏ",
-      "ỏ_____o______..______o____Ốỏ",
-      "ỏ__~~~~~_____..___,,,,,,___ỏ",
-      "ỏ__~~~~~_____..___,,,,,,___ỏ",
-      "ỏ__~~~~~_o___..o__,,,,,,___ỏ",
-      "ỏ_o~~~~~_____..____________ỏ",
-      "ỏ____________ḣḣF___________ỏ",
-      "ỏ________o___..____Ẅ______Ẅỏ",
-      "ỏ__________________________ỏ",
-      "ỏ____________..S___________ỏ",
-      "ỏ_Ố______Ố___..o___________ỏ",
-      "ỏ___,,,,,,_F_..____,,,,,___ỏ",
-      "ỏ___,,,,,,___..____,,,,,___ỏ",
-      "ỏ___,,,,,,___..____,,,,,___ỏ",
-      "ỏ___ẅ________..___ẅo_______ỏ",
-      "ỏ_______o____.._______o____ỏ",
-      "ỏỏỏỏỏỏỏỏỏỏỏỏỏ..ỏỏỏỏỏỏỏỏỏỏỏỏỏ"
+      "ỏỏỏỏỏỏỏỏỏỏỏỏỏ⊳⊳ỏỏỏỏỏỏỏỏỏỏỏỏỏ",
+      "ỏ⊲⊲⊲⊲⊲⊲⊲⊲⊲⊲⊲⊲⊳⊳⊳⊲⊲⊲Ẅ⊲⊲⊲⊲⊲⊲⊲ỏ",
+      "ỏ⊲⊲⊲⊲⊲o⊲⊲⊲⊲⊲⊲⊳⊳⊲⊲⊲⊲⊲⊲o⊲⊲⊲⊲Ốỏ",
+      "ỏ⊲⊲~~~~~⊲⊲⊲⊲⊲⊳⊳⊲⊲⊲,,,,,,⊲⊲⊲ỏ",
+      "ỏ⊲⊲~~~~~⊲⊲⊲⊲⊲⊳⊳⊲⊲⊲,,,,,,⊲⊲⊲ỏ",
+      "ỏ⊲⊲~~~~~⊲o⊲⊲⊲⊳⊳o⊲⊲,,,,,,⊲⊲⊲ỏ",
+      "ỏ⊲o~~~~~⊲⊲⊲⊲⊲⊳⊳⊲⊲⊲⊲⊲⊲⊲⊲⊲⊲⊲⊲ỏ",
+      "ỏ⊲⊲⊲⊲⊲⊲⊲⊲⊲⊲⊲⊲ḣḣF⊲⊲⊲⊲⊲⊲⊲⊲⊲⊲⊲ỏ",
+      "ỏ⊲⊲⊲⊲⊲⊲⊲⊲o⊲⊲⊲⊳⊳⊲⊲⊲⊲Ẅ⊲⊲⊲⊲⊲⊲Ẅỏ",
+      "ỏ⊲⊲⊴⊲⊲⊲⊲⊲⊲⊲⊲⊲⊲⊲⊲⊲⊲⊲⊲⊲⊲⊲⊲⊴⊲⊲ỏ",
+      "ỏ⊲⊲⊲⊲⊲⊲⊲⊲⊲⊲⊲⊲⊳⊳S⊲⊲⊲⊲⊲⊲⊲⊲⊲⊲⊲ỏ",
+      "ỏ⊲Ố⊲⊲⊲⊲⊲⊲Ố⊲⊲⊲⊳⊳o⊲⊲⊲⊲⊲⊲⊲⊲⊲⊲⊲ỏ",
+      "ỏ⊲⊲⊲,,,,,,⊲F⊲⊳⊳⊲⊲⊲⊲,,,,,⊲⊲⊲ỏ",
+      "ỏ⊲⊲⊲,,,,,,⊲⊲⊲⊳⊳⊲⊲⊲⊲,,,,,⊲⊲⊲ỏ",
+      "ỏ⊲⊲⊲,,,,,,⊲⊲⊲⊳⊳⊲⊲⊲⊲,,,,,⊲⊲⊲ỏ",
+      "ỏ⊲⊲⊲ẅ⊲⊲⊲⊲⊲⊲⊲⊲⊳⊳⊲⊲⊲ẅo⊲⊲⊲⊲⊲⊲⊲ỏ",
+      "ỏ⊲⊲⊲⊲⊲⊲⊲o⊲⊲⊲⊲⊳⊳⊲⊲⊲⊲⊲⊲⊲o⊲⊲⊲⊲ỏ",
+      "ỏỏỏỏỏỏỏỏỏỏỏỏỏ⊳⊳ỏỏỏỏỏỏỏỏỏỏỏỏỏ"
     ],
     "warps": [
       {
