@@ -189345,6 +189345,30 @@ const ARENA_AMBIENT = {
   pyre:   { kind: 'ember', n: 16, speed: 20 },
   spirit: { kind: 'mote',  n: 12, speed: 5 },
 };
+
+// Gym Identity wave (NO-SAME-KIT fix #6), T0: per-gym arena treatments,
+// keyed by GYM MAP ID (Director ruling: map id, not leader — every battle
+// fought in the gym, leader and gym trainers alike, reads as the gym).
+// An entry carries the ARENA_ART shape (sky/ground bands, dark/light/
+// accent, motif, tex, optional haze/pylon) PLUS its own `amb` (the
+// ARENA_AMBIENT shape: kind/n/speed), and layers over the gym's existing
+// Ground: Ground rules, name, banner and tint are NOT in this table and
+// never change — identity here is art only (the two Open gyms, Signal
+// and Meadowbrook, take art over Open rules exactly this way). The
+// table ships EMPTY at T0: the mechanism + the gym-identity guard land
+// first, tranches T1–T5 fill one region at a time under the guard's
+// ratchet (tests/gym-identity-checks.mjs). With no entry for a map,
+// gymArenaFor returns null and every read site falls back to the
+// Ground's ARENA_ART / ARENA_AMBIENT treatment, byte-identical to the
+// pre-wave render.
+const GYM_ARENA_ART = {
+};
+
+function gymArenaFor(field) {
+  if (!field || !field.mapId) return null;
+  return GYM_ARENA_ART[field.mapId] || null;
+}
+
 // Darken/lighten a #rrggbb hex by a factor (arena layer palette steps).
 function arenaShade(hex, f) {
   const n = parseInt(hex.slice(1), 16);
@@ -191863,7 +191887,7 @@ class BattleScene {
     // dark base, accent rim line) instead of one beige disc on all 15
     // Grounds. Legacy no-field battles keep the shipped beige disc.
     const gid = this.field ? (this.field.id || this.field.groundId) : null;
-    const ga = gid ? (ARENA_ART[gid] || null) : null;
+    const ga = gymArenaFor(this.field) || (gid ? (ARENA_ART[gid] || null) : null);
     const cols = ga
       ? [ga.light, ga.ground[1], ga.ground[3], ga.ground[4], ga.dark]
       : ['#f2ecd8', '#ddd2ac', '#ddd2ac', '#ddd2ac', '#b3a586'];
@@ -191932,7 +191956,7 @@ class BattleScene {
   // same elements render as a static scatter at their phase positions.
   drawArenaAmbient(r, ga, gid, w, h, horizon) {
     if (!ga || !gid) return;
-    const amb = ARENA_AMBIENT[gid];
+    const amb = (ga && ga.amb) || ARENA_AMBIENT[gid];
     if (!amb) return;
     const g = this.game;
     const F = (col, x, y, fw, fh) => g.ctx2dfill(col, x, y, fw, fh);
@@ -192003,8 +192027,11 @@ class BattleScene {
     // Wave 6c: the per-Ground treatment for battle.field (null when a
     // minimal/legacy caller has no field — the legacy kind backdrop
     // below then serves unchanged).
+    // Gym Identity T0: a gym map's own treatment (GYM_ARENA_ART) wins
+    // over its Ground's when one exists; empty at T0, so this reduces
+    // to the Wave 6c read for every battle.
     const gid = this.field ? (this.field.id || this.field.groundId) : null;
-    const ga = gid ? (ARENA_ART[gid] || null) : null;
+    const ga = gymArenaFor(this.field) || (gid ? (ARENA_ART[gid] || null) : null);
 
     // ---- upper field: per-Ground bands, else sky (grass/water) or wall (cave/gym) ----
     if (ga) {
