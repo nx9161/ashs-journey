@@ -191139,6 +191139,118 @@ const VENUE_ARENA_ART = {
   // lastlight register over Open: mauve dusk going silver, silvered
   // turf, slow dusk motes.
   'silver-stadium': { sky: ['#4a4460', '#584f6c', '#665a78', '#746584', '#827090', '#907b9c'], ground: ['#7a8a76', '#707f6c', '#667462', '#5c6958', '#525e4e', '#484f44'], dark: '#2e3440', light: '#f2f4ff', accent: '#c8d4e8', motif: 'trees', tex: 'fleck', amb: { kind: 'mote', n: 10, speed: 3 } },
+  // T3 Remaining legendary venues (WAVE-ARENAS-PLAN §3/§4): the 18
+  // fixed legendary venues left after T1's sovereigns. Every venue's
+  // battle-hosting was verified at build time from the game's own
+  // data (SPEC: ~/workspace/your_files/arenas-t3-legendary/SPEC.md)
+  // — an entry gate, step gate, shrine/tower interact or map event
+  // in the shipped systems fires the face's battle on this map;
+  // none came out on proof. Concepts trace to the face's W13 design
+  // field + arc title, quoted per entry. One treatment per map:
+  // meteor-falls serves both its faces. No new painters (the
+  // allowance was spent on dawnring in T1).
+  // Chime Tower foot / BOREPARD — "blue northern wolf, wave-crest
+  // mane, curled surf tail" [The North Wind's Errand]: frost-still
+  // tower foot over Spirit — cold north sky, blue-grey tower stone,
+  // snow standing where the summit (bell-tower-2) burns prism.
+  'bell-tower-1': { sky: ['#2e3c5c', '#384a6e', '#425880', '#4e6892', '#5c7aa4', '#6c8cb6'], ground: ['#7a8aa0', '#6e7e94', '#627288', '#56667c', '#4a5a70', '#3e4e64'], dark: '#1c283e', light: '#eaf4ff', accent: '#4ac8e8', motif: 'snow', tex: 'fleck', amb: { kind: 'snow', n: 10, speed: 12 } },
+  // Holly Forest shrine / CHRONOFAE — "tiny time fae, petal wings,
+  // flower crown, orb" [arc_celebi; the shrine event's own words:
+  // the forest "is its own age again — all of its ages"]: younger-
+  // forest light over Bloom — saturated new-leaf green, the crown's
+  // pink as accent, petals on the air.
+  'ilex-forest': { sky: ['#7ab85e', '#86c468', '#92d072', '#9edc7e', '#aae88a', '#b6f496'], ground: ['#4a8a3a', '#427f34', '#3a742e', '#326928', '#2a5e22', '#22531c'], dark: '#1c4416', light: '#f4ffd8', accent: '#f28ab8', motif: 'flowers', tex: 'petal', amb: { kind: 'petal', n: 12, speed: 5 } },
+  // Exile Isle / PRIMARA — "tiny opal primordial sprite, ribbon
+  // tail, floating" [The Blessing in the Rain]: opal rain-light over
+  // Tide — pearl-opal sky bands through the storm, wet shore slate,
+  // the blessing's gentle rain (national-park's is the hard kind).
+  'newisland': { sky: ['#cfa8cc', '#d8b4d2', '#e0c2d4', '#e6cfd2', '#ecdcce', '#f2e9ce'], ground: ['#8a97a3', '#7f8c98', '#74818d', '#697682', '#5e6b77', '#53606c'], dark: '#3c4750', light: '#fdf4ff', accent: '#f0a8e0', motif: 'waves', tex: 'foam', haze: true, amb: { kind: 'rain', n: 10, speed: 90 } },
+  // Dune Tomb / PETRAGOLEM — "brown rock golem, mossy shoulders,
+  // amber core cracks" [The Tomb in the Sand]: sealed-sand tomb over
+  // Spirit — sandstone dark, the core's amber the one warm light,
+  // sealed still air.
+  'desert-ruins': { sky: ['#4a3420', '#554026', '#604c2c', '#6b5832', '#766438', '#81703e'], ground: ['#8a6a40', '#7d6139', '#705832', '#634f2b', '#564624', '#493d1d'], dark: '#2e2110', light: '#ffe8b8', accent: '#f0a828', motif: 'tombs', tex: 'chunk', amb: { kind: 'mote', n: 8, speed: 2 } },
+  // Sea Tomb / CRYOGOLEM — "pale ice golem, jagged crystal limbs,
+  // frozen core" [The Tomb in the Ice]: crystal dark over Frost —
+  // near-black blue chamber, crystal spires, the frozen core's
+  // static glints; nothing moves, as a frozen core does not.
+  'island-cave': { sky: ['#0c1a2e', '#102238', '#142a42', '#18324c', '#1c3a56', '#204260'], ground: ['#1c3448', '#182c3e', '#142434', '#101c2a', '#0c1420', '#080c16'], dark: '#04080f', light: '#dcf6ff', accent: '#6ad8f0', motif: 'spires', tex: 'spark', amb: { kind: 'spark', n: 10, speed: 0 } },
+  // Iron Tomb / SIDEROGOLEM — "black iron golem, red stud lights,
+  // massive slab arms" [The Tomb in the Ruin]: iron dark over
+  // Spirit — black-iron bands, slab stones whose caps carry the
+  // red stud lights, stud glints in the still air.
+  'ancient-tomb': { sky: ['#17181c', '#1d1e23', '#23242a', '#292a31', '#2f3038', '#35363f'], ground: ['#2c2c30', '#27272b', '#222226', '#1d1d21', '#18181c', '#131317'], dark: '#08080a', light: '#f0dcc8', accent: '#e03028', motif: 'tombs', tex: 'chunk', amb: { kind: 'spark', n: 8, speed: 0 } },
+  // Route 125 shore apron / AZURAVIS — "azure bird, sleek crest,
+  // flowing blue tail ribbons" [The Jet Over the Water]: jet-stream
+  // shore over Tide — the jet's own saturated azure, pale apron
+  // sand where it slows and waits, spray on the wind.
+  'r125': { sky: ['#2a6ac8', '#3878d2', '#4686dc', '#5494e6', '#62a2ef', '#70b0f8'], ground: ['#c8b490', '#bca67f', '#b0986e', '#a48a5d', '#987c4c', '#8c6e3b'], dark: '#6a5636', light: '#f4feff', accent: '#2070e8', motif: 'waves', tex: 'foam', amb: { kind: 'mote', n: 10, speed: 6 } },
+  // Comet Falls / ASTRAEON + XENOGENE — "cream star sprite, gold
+  // star crest, ribbon arms" / "violet alien, tentacle limbs,
+  // glowing core heart" [The Thousand-Year Wish / The Triangle
+  // That Moves]: ONE fallen-star treatment for the shared map —
+  // violet falls dark, the star's cream as the light register,
+  // fallen stones under star glints.
+  'meteor-falls': { sky: ['#2c1e4a', '#36255a', '#402c6a', '#4a337a', '#543a8a', '#5e419a'], ground: ['#4a3450', '#42304a', '#3a2c44', '#322838', '#2a2432', '#221e2c'], dark: '#150e20', light: '#fdf2c8', accent: '#a878f0', motif: 'rocks', tex: 'spark', amb: { kind: 'spark', n: 12, speed: 0 } },
+  // Insight Cavern / LORACLE — "grey sprite, gold helmet, red brow
+  // gem, closed eyes" [The Lake That Knows]: still knowledge-dark
+  // over Frost — grey on grey, the helmet's gold the one accent,
+  // the slowest dust in the wave for the closed eyes.
+  'lake-acuity-cave': { sky: ['#23272c', '#2b3036', '#333940', '#3b424a', '#434b54', '#4b545e'], ground: ['#4c5258', '#454b51', '#3e444a', '#373d43', '#30363c', '#292f35'], dark: '#14181c', light: '#f8ecd0', accent: '#d8a820', motif: 'rocks', tex: 'fleck', amb: { kind: 'mote', n: 8, speed: 2 } },
+  // Gallant Cavern / VOLITAR — "blue sprite, angular helmet,
+  // raised fists, ribbon tails" [The Lake That Wills]: resolve-blue
+  // depths over Tide — saturated will-blue, ribbon cyan, lake
+  // bubbles rising where its twin cavern (Insight) holds still.
+  'lake-valor-cave': { sky: ['#14406e', '#184a7e', '#1d548e', '#22609e', '#276cae', '#2c78be'], ground: ['#1d4a70', '#1a4264', '#173a58', '#14324c', '#112a40', '#0e2234'], dark: '#081a2c', light: '#e8f8ff', accent: '#58c8f0', motif: 'waves', tex: 'foam', amb: { kind: 'bubble', n: 10, speed: 5 } },
+  // Grim Mountain Crater Hall / MAGMARCH — "iron furnace tortoise,
+  // lava-seamed shell, cross mask" [The Mountain's Furnace]:
+  // furnace interior over Ember — iron-dark walls, the furnace
+  // frame standing as girders, lava-seam orange, ember air.
+  'stark-interior': { sky: ['#1e1a18', '#262019', '#2e261a', '#362c1c', '#3e3220', '#463824'], ground: ['#33302c', '#2d2a26', '#272420', '#211e1a', '#1b1814', '#15120e'], dark: '#0c0a08', light: '#ffd9a8', accent: '#ff7a26', motif: 'steel', tex: 'chunk', amb: { kind: 'ember', n: 14, speed: 16 } },
+  // Rimefall Temple Depths / COLOSSOR — "white stone colossus,
+  // moss-grown cracks, gold crown" [The One Who Moved Continents]:
+  // mossed white stone over Frost — pale colossal stone under the
+  // depths' cold slate, moss in the cracks as the accent, tomb
+  // blocks for the colossus's own masonry.
+  'snowpoint-temple-depths': { sky: ['#3c4a56', '#46545f', '#505e68', '#5a6871', '#64727a', '#6e7c83'], ground: ['#e8ece6', '#dbe0d8', '#ced4ca', '#c1c8bc', '#b4bcb0', '#a7b0a4'], dark: '#4a5a42', light: '#ffffff', accent: '#7aa84e', motif: 'tombs', tex: 'chunk', amb: { kind: 'mote', n: 10, speed: 3 } },
+  // Darkmoon Island / NOCTARCH — "black smoke shade, one blue eye,
+  // red crystal collar" [The Nightmare at the Inn]: one-eyed
+  // nightmare dark over Grave — blue-black smoke haze, isle stone,
+  // the single blue eye as the accent; nothing else is bright.
+  'newmoon-island': { sky: ['#0a0e1c', '#0e1426', '#121a30', '#16203a', '#1a2644', '#1e2c4e'], ground: ['#141a2a', '#111624', '#0e121e', '#0b0e18', '#080a12', '#05060c'], dark: '#02030a', light: '#d8e4f8', accent: '#4a90f8', motif: 'rocks', tex: 'fleck', haze: true, amb: { kind: 'mote', n: 12, speed: 3 } },
+  // Petal Paradise / GRATHOG — "cream hedgehog, grassy back, pink
+  // blooms" [The Gratitude Bloom]: gratitude bloom-field over
+  // Bloom — cream-pink dawn, bright gratitude green, blooms
+  // drifting at the field's own pace.
+  'flower-paradise': { sky: ['#e8b8c4', '#ecc2c6', '#f0ccc8', '#f4d6ca', '#f8e0cc', '#fcead0'], ground: ['#6aa84e', '#619c47', '#589040', '#4f8439', '#467832', '#3d6c2b'], dark: '#2c5222', light: '#fffce8', accent: '#f278a8', motif: 'flowers', tex: 'petal', haze: true, amb: { kind: 'petal', n: 14, speed: 5 } },
+  // Route 209, the Hallowed Tower road / CENTWISP — "violet spirit
+  // vortex, faces in the smoke, chained keystone" [The Hundred and
+  // Eight]: keystone violet over Bloom — dusk violet over the road
+  // green gone grey, the ruined tower's stones on the horizon,
+  // smoke wisps for the faces in it.
+  'r209': { sky: ['#4a3a5e', '#55446c', '#604e7a', '#6b5888', '#766296', '#8170a4'], ground: ['#5a5a4c', '#52523f', '#4a4a38', '#424231', '#3a3a2a', '#323223'], dark: '#26241c', light: '#ecdcff', accent: '#b478f0', motif: 'tombs', tex: 'fleck', haze: true, amb: { kind: 'mote', n: 12, speed: 4 } },
+  // Ember Isle Shrine Cave / PYREHAWK (the Sanctum titan shrine;
+  // the quell — ev_orange_2000_moltres, fought uncatchable at the
+  // altar) — "ember hawk, flame-feathered wings, fierce crest"
+  // [The Last Ember]: ember shrine over Ember — smoky umber shrine
+  // stone, deliberately kin to Crown Road's ceremonial treatment
+  // (victoryroad) but a chamber, not a road: darker, closer, chunk
+  // where the road is pale.
+  'fire-cave': { sky: ['#4a2418', '#57301c', '#643c20', '#714826', '#7e5430', '#8a603a'], ground: ['#5c3423', '#532e1e', '#4a2819', '#412214', '#381c0f', '#2f160a'], dark: '#1e0c04', light: '#fff2d8', accent: '#ffb020', motif: 'flames', tex: 'chunk', amb: { kind: 'ember', n: 12, speed: 16 } },
+  // Rime Isle Shrine Cave / GLACIERNE (the Sanctum titan shrine;
+  // the quell — ev_orange_2000_articuno) — "great ice sea-eagle,
+  // frost crest, glacier-blue wings" [Where the Sea Forgot to
+  // Move]: frost shrine over Frost — the event's own "rimes of
+  // black ice": deep rime-blue chamber, ice spires, rime dust
+  // falling where Seafoam's open sea holds still and bright.
+  'ice-cave': { sky: ['#0e2038', '#122a48', '#163458', '#1a3e68', '#1e4878', '#225288'], ground: ['#16324e', '#132b43', '#102438', '#0d1d2d', '#0a1622', '#070f17'], dark: '#030910', light: '#eafcff', accent: '#a8e8ff', motif: 'spires', tex: 'spark', haze: true, amb: { kind: 'snow', n: 8, speed: 8 } },
+  // Storm Isle Shrine Cave / FULMINIS (the Sanctum titan shrine;
+  // the quell — ev_orange_2000_zapdos) — "great brown eagle, navy
+  // flight feathers, sparking wingtips" [The Storm That Stayed]:
+  // storm shrine over Storm — copper-fused shrine stone (the
+  // event's fused copper offerings), storm clouds WITHOUT the
+  // Coilworks' pylon: the shrine is stone, not plant.
+  'lightning-cave': { sky: ['#2c2c34', '#363640', '#403f4a', '#4a4854', '#54525e', '#5e5c68'], ground: ['#4c3a2c', '#443428', '#3c2e24', '#342820', '#2c221c', '#241c18'], dark: '#17110c', light: '#ffeec9', accent: '#e88a3c', motif: 'storm', tex: 'spark', amb: { kind: 'spark', n: 14, speed: 0 } },
   // OUT on build-time proof (T2): league-chamber-1..4 and
   // league-champion host NO battle in the shipped game — no trainer
   // post, no map event, no story post, no system handler, no
