@@ -271,10 +271,10 @@ const FAC_NAME = { tower: 'Trial Tower', factory: 'Trial Factory', arena: 'Trial
         && m.warps.length === 1 && m.warps[0].to.map === nxt && m.warps[0].to.x === MAPS8[nxt].start.x && m.warps[0].to.y === MAPS8[nxt].start.y; })
     && MAPS8['frontier-pyramid'].warps.filter((w) => w.to.map === 'frontier-pyramid-a')
       .every((w) => w.to.x === MAPS8['frontier-pyramid-a'].start.x && w.to.y === MAPS8['frontier-pyramid-a'].start.y));
-  ok('A29 music mirrors shipped interiors: hub pallet-theme; the seven facility interiors gym-theme; the dark floors pewter-theme (existing theme ids only)',
-    hub.music === 'pallet-theme'
+  ok('A29 music mirrors shipped interiors: hub trial-town-theme (W12-T3 charter); the seven facility interiors gym-theme; the dark floors trial-route-theme (existing theme ids only)',
+    hub.music === 'trial-town-theme'
     && ['frontier-tower', 'frontier-factory', 'frontier-arena', 'frontier-dome', 'frontier-pike', 'frontier-palace', 'frontier-pyramid'].every((id) => MAPS8[id].music === 'gym-theme')
-    && ['frontier-pyramid-a', 'frontier-pyramid-b', 'frontier-pyramid-c'].every((id) => MAPS8[id].music === 'pewter-theme'));
+    && ['frontier-pyramid-a', 'frontier-pyramid-b', 'frontier-pyramid-c'].every((id) => MAPS8[id].music === 'trial-route-theme'));
 }
 
 // ================= Part A3: F2 pure units (defs, run-state persistence, judge) =================

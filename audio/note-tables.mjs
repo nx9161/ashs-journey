@@ -319,6 +319,86 @@ export const MUSIC = {
       { wave: 'noise', vol: 0.3, notes: KICKS([0, 2, 4, 6, 8, 10, 12, 14]).concat(HATS(0, 16, 0.5, 0.125)) },
     ],
   },
+
+  // ---- W12 region pairs II: Borea + Trial Grounds complete the charter —
+  // after this block every region owns its town+route pair and no region
+  // draws from Arden's legacy pool. Original melodies, each with its own
+  // interval fingerprint (verify-audio [9]). ----
+  'borea-town-theme': {
+    id: 'borea-town-theme', title: 'First Snow Hush (Borea town, original)', bpm: 84, loop: true,
+    tracks: [
+      { wave: 'pulse', duty: 0.5, vol: 0.4, notes: [
+        [0,'E5',2],[2,'A5',1.5],[3.5,'G5',0.5],[4,'E5',2],[6,'D5',1],[7,'C5',1],
+        [8,'A4',2],[10,'B4',1],[11,'D5',1],[12,'E5',1.5],[13.5,'G5',0.5],[14,'A5',2],
+      ]},
+      { wave: 'pulse', duty: 0.25, vol: 0.14, notes: [
+        [0,'A4',2],[2,'C5',2],[4,'F4',2],[6,'A4',2],
+        [8,'D4',2],[10,'F4',2],[12,'E4',2],[14,'A4',2],
+      ]},
+      { wave: 'triangle', vol: 0.5, notes: [
+        [0,'A2',4],[4,'F2',4],[8,'D2',4],[12,'E2',4],
+      ]},
+      { wave: 'noise', vol: 0.08, notes: HATS(0, 16, 2, 0.125).concat([[7.5,null,0.25],[15.5,null,0.25]]) },
+    ],
+  },
+
+  'borea-route-theme': {
+    id: 'borea-route-theme', title: 'Long White Road (Borea route, original)', bpm: 148, loop: true,
+    tracks: [
+      { wave: 'pulse', duty: 0.25, vol: 0.46, notes: [
+        [0,'A5',0.5],[0.5,'F5',0.5],[1,'D5',0.5],[1.5,'F5',0.5],[2,'A5',1],[3,'G5',0.5],[3.5,'F5',0.5],
+        [4,'E5',0.5],[4.5,'F5',0.5],[5,'G5',0.5],[5.5,'A5',0.5],[6,'D6',1],[7,'C6',1],
+        [8,'A5',0.5],[8.5,'G5',0.5],[9,'F5',0.5],[9.5,'E5',0.5],[10,'F5',1],[11,'D5',1],
+        [12,'E5',0.5],[12.5,'F5',0.5],[13,'G5',0.5],[13.5,'A5',0.5],[14,'F5',2],
+      ]},
+      { wave: 'pulse', duty: 0.5, vol: 0.15, notes: [
+        [0,'F4',1],[2,'D4',1],[4,'Bb3',1],[6,'A3',1],
+        [8,'F4',1],[10,'D4',1],[12,'C4',1],[14,'A3',1],
+      ]},
+      { wave: 'triangle', vol: 0.55, notes:
+        PUMP(0,4,'D1','D2').concat(PUMP(4,8,'Bb1','Bb2')).concat(PUMP(8,12,'F1','F2')).concat(PUMP(12,16,'A1','A2')) },
+      { wave: 'noise', vol: 0.28, notes: KICKS([0, 2, 4, 6, 8, 10, 12, 14]).concat(HATS(0, 16, 0.5, 0.125)) },
+    ],
+  },
+
+  'trial-town-theme': {
+    id: 'trial-town-theme', title: 'Bronze & Banner (Trial hub, original)', bpm: 100, loop: true,
+    tracks: [
+      { wave: 'pulse', duty: 0.125, vol: 0.44, notes: [
+        [0,'C5',1],[1,'E5',1],[2,'G5',1],[3,'C6',1],[4,'B5',1.5],[5.5,'G5',0.5],[6,'A5',1],[7,'G5',1],
+        [8,'E5',1],[9,'F5',1],[10,'A5',1],[11,'G5',1],[12,'E5',1.5],[13.5,'D5',0.5],[14,'C5',2],
+      ]},
+      { wave: 'pulse', duty: 0.5, vol: 0.18, notes: [
+        [0,'G4',2],[2,'E4',2],[4,'D4',2],[6,'B4',2],
+        [8,'C5',2],[10,'F4',2],[12,'G4',2],[14,'E4',2],
+      ]},
+      { wave: 'triangle', vol: 0.55, notes: [
+        [0,'C3',2],[2,'G2',2],[4,'C3',2],[6,'G2',2],
+        [8,'F2',2],[10,'A2',2],[12,'G2',2],[14,'C3',2],
+      ]},
+      { wave: 'noise', vol: 0.3, notes:
+        KICKS([0, 4, 8, 12]).concat([[2,null,0.25],[6,null,0.25],[10,null,0.25],[14,null,0.25],[15,null,0.25],[15.5,null,0.25]]) },
+    ],
+  },
+
+  'trial-route-theme': {
+    id: 'trial-route-theme', title: 'The Seven Trials (Trial island, original)', bpm: 128, loop: true,
+    tracks: [
+      { wave: 'pulse', duty: 0.25, vol: 0.46, notes: [
+        [0,'G5',0.5],[0.5,'D5',0.5],[1,'G5',0.5],[1.5,'Bb5',0.5],[2,'A5',1],[3,'G5',0.5],[3.5,'F5',0.5],
+        [4,'D5',1],[5,'F5',0.5],[5.5,'G5',0.5],[6,'D5',2],
+        [8,'Eb5',0.5],[8.5,'D5',0.5],[9,'C5',0.5],[9.5,'D5',0.5],[10,'Bb4',1],[11,'D5',1],
+        [12,'F5',0.5],[12.5,'G5',0.5],[13,'A5',0.5],[13.5,'Bb5',0.5],[14,'G5',2],
+      ]},
+      { wave: 'pulse', duty: 0.5, vol: 0.16, notes: [
+        [0,'Bb3',1],[2,'G3',1],[4,'F3',1],[6,'D4',1],
+        [8,'Eb4',1],[10,'C4',1],[12,'D4',1],[14,'G3',1],
+      ]},
+      { wave: 'triangle', vol: 0.55, notes:
+        PUMP(0,4,'G1','G2').concat(PUMP(4,8,'Eb1','Eb2')).concat(PUMP(8,12,'F1','F2')).concat(PUMP(12,16,'D1','D2')) },
+      { wave: 'noise', vol: 0.26, notes: KICKS([0, 4, 8, 12]).concat(HATS(0, 16, 0.5, 0.125)) },
+    ],
+  },
 };
 
 // ============================================================ SFX ====

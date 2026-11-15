@@ -23,7 +23,7 @@ export const MAPS8 = {
   "frontierhub": {
     "id": "frontierhub",
     "name": "Trial Grounds",
-    "music": "pallet-theme",
+    "music": "trial-town-theme",
     "weather": "clear",
     "rows": [
       "########################################",
@@ -1140,7 +1140,7 @@ export const MAPS8 = {
   "frontier-pyramid-a": {
     "id": "frontier-pyramid-a",
     "name": "Trial Pyramid — AF",
-    "music": "pewter-theme",
+    "music": "trial-route-theme",
     "indoor": true,
     "dark": true,
     "rows": [
@@ -1205,7 +1205,7 @@ export const MAPS8 = {
   "frontier-pyramid-b": {
     "id": "frontier-pyramid-b",
     "name": "Trial Pyramid — BF",
-    "music": "pewter-theme",
+    "music": "trial-route-theme",
     "indoor": true,
     "dark": true,
     "rows": [
@@ -1270,7 +1270,7 @@ export const MAPS8 = {
   "frontier-pyramid-c": {
     "id": "frontier-pyramid-c",
     "name": "Trial Pyramid — CF",
-    "music": "pewter-theme",
+    "music": "trial-route-theme",
     "indoor": true,
     "dark": true,
     "rows": [

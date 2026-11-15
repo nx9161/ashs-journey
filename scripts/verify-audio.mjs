@@ -341,8 +341,8 @@ const REGION_CHARTER = {
   amber: ['amber-town-theme', 'amber-route-theme'],
   yamato: ['yamato-town-theme', 'yamato-route-theme'],
   maris: ['maris-town-theme', 'maris-route-theme'],
-  trial: LEGACY_POOL, // burn-down: re-pointed by W12-T3
-  borea: LEGACY_POOL, // burn-down: re-pointed by W12-T3
+  trial: ['trial-town-theme', 'trial-route-theme'], // W12-T3: burn-down closed
+  borea: ['borea-town-theme', 'borea-route-theme'], // W12-T3: burn-down closed
 };
 // Service themes follow the shared service, not the region (the law's own
 // code-fact exception): one gym system (Ruling 2), one Center map, the
@@ -371,7 +371,7 @@ const MUSIC_REGION_OVERRIDE = { vermilion: 'arden' };
     }
     chartered++;
   }
-  if (failures === f8) ok('all ' + chartered + ' merged maps play inside their region charter (amber/yamato/maris on their own pairs; trial/borea legacy burn-down until W12-T3)');
+  if (failures === f8) ok('all ' + chartered + ' merged maps play inside their region charter (every region on its own town+route pair; the legacy pool is Arden\'s charter only — burn-down closed by W12-T3)');
   // Code-selected contexts: every '-theme' literal named outside the data
   // tables (battle/title/contest call sites, engine fallback) must resolve.
   const themeLits = new Map();
