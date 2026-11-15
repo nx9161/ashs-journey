@@ -45,6 +45,24 @@
 // ev_champion by an A5-style anchor, and Part F-card parity-drives
 // showArcCompleteCard at src level (panel before the card text;
 // a field-less arc card is byte-identical in flow).
+// W10-C T3 growth (finale + intro; merged here — the wave closes):
+// FINALE_PANEL and INTRO_SCRIPT.starterPanel are set (PANEL_FIELD_
+// REFS 11 -> 13 merged; PANELS_ENTRIES 56 -> 58; PANEL_ART_BYTES
+// 622397 -> 644703, T3 delta 22306 B). The pre-T0 step-only A2
+// orphan assertion is retired in favour of the union A2 (step OR
+// field) — with field-referenced entries live it false-fires by
+// construction; the union check still catches every true orphan
+// and A1's field resolution catches dangling refs (the same
+// disclosed supersession as T1/T2). Part F-finale (FF) and Part E
+// intro (IN) parity drives land below. NOTE for every Part B
+// drive: boot() now plays the intro, so the intro panel fires once
+// inside every drive's boot — the pre-existing drives therefore
+// count panel entries by their OWN art (the assertion is unchanged
+// in strength: their panel fires exactly once as shipped, never
+// when stripped); the intro panel's own firing is IN1's surface.
+// (Merge reconciliation: Part H's ferry drive, written at T1
+// before the intro panel existed, is counted by its own crossing
+// art under the same rule — same assertions, same strength.)
 
 import fs from 'node:fs';
 import os from 'node:os';
@@ -81,10 +99,12 @@ for (const [id, steps] of stepLists) steps.forEach((s, i) => { if (s && s.panel)
 // + T5's 5 glimpse/set-piece panels; W10-C T1 adds 5 ENTRIES by
 // data field (the embark crossings) and W10-C T2 adds the
 // champion seal step (+1 STEP) and 6 card entries — merge
-// reconciliation on T1+T2: 45 steps / 56 entries / 622397 B).
+// reconciliation on T1+T2: 45 steps / 56 entries / 622397 B;
+// W10-C T3 adds the finale + intro panels (2 ENTRIES by data
+// field) — wave-close reconciliation: 45 / 58 / 644703 B).
 const PANEL_STEPS = 45;
-const PANELS_ENTRIES = 56;
-const PANEL_ART_BYTES = 622397;
+const PANELS_ENTRIES = 58;
+const PANEL_ART_BYTES = 644703;
 const PANEL_ART_BASELINE_W10 = 11171; // the W10 proof panel alone
 
 ok('A1 shipped data carries at least one panel step', panelSteps.length >= 1);
@@ -97,7 +117,9 @@ ok('A1 every panel step resolves through PANELS to a built ART entry',
 // T1 by the T0 A2 extension below: since surface attach landed, a
 // PANELS entry is "used" iff referenced by a panel step OR a data
 // field — the union check is the operative orphan gate, and it
-// still fails on any entry referenced by neither.)
+// still fails on any entry referenced by neither. The step-only
+// orphan assertion that stood here is retired at W10-C T3 in
+// favour of the union A2 below — see the header note.)
 ok('A2 every PANELS art id exists in ART (no orphan art)',
   Object.values(PANELS).every(({ art }) => !!ART[art]));
 
@@ -113,9 +135,11 @@ for (const arc of ARCS) {
 if (FINALE_PANEL) fieldRefs.push(FINALE_PANEL);
 if (INTRO_SCRIPT.starterPanel) fieldRefs.push(INTRO_SCRIPT.starterPanel);
 // W10-C ratchet pin (moves only in-commit with its tranche:
-// 0 at T0 -> 5 T1 -> 11 T2 -> 13 T3).
-const PANEL_FIELD_REFS = 11;
-ok('A1 PANEL_FIELD_REFS ratchet: data-field panel references == pin (11 at W10-C T1+T2 merged — five enRoutePanel + six cardPanel fields)',
+// 0 at T0 -> 5 T1 -> 11 T2 -> 13 T3; the merged wave-close pin is
+// 13 — five enRoutePanel + six cardPanel + FINALE_PANEL +
+// INTRO_SCRIPT.starterPanel).
+const PANEL_FIELD_REFS = 13;
+ok('A1 PANEL_FIELD_REFS ratchet: data-field panel references == pin (13 at W10-C wave close — five enRoutePanel + six cardPanel + FINALE_PANEL + starterPanel)',
   fieldRefs.length === PANEL_FIELD_REFS);
 ok('A1 every data-field panel reference resolves through PANELS (A1 extension)',
   fieldRefs.every((id) => !!PANELS[id]));
@@ -131,8 +155,10 @@ ok('A9 helper units: arcCardPanel — null for absent field / unknown id, the PA
   GA.arcCardPanel(null) === null && GA.arcCardPanel({}) === null
   && GA.arcCardPanel({ cardPanel: 'no-such-moment' }) === null
   && GA.arcCardPanel({ cardPanel: 'shrine-chronofae' }) === PANELS['shrine-chronofae']);
-ok('A9 helper units: arcFinalePanel resolves the dormant FINALE_PANEL const (null at T0) to null',
-  FINALE_PANEL === null && GA.arcFinalePanel() === null);
+ok('A9 helper units: arcFinalePanel resolves FINALE_PANEL (finale-road at W10-C T3) to its PANELS entry',
+  FINALE_PANEL === 'finale-road' && GA.arcFinalePanel() === PANELS['finale-road']);
+ok('A9 intro seam: INTRO_SCRIPT.starterPanel names intro-partner and resolves through PANELS to its art',
+  INTRO_SCRIPT.starterPanel === 'intro-partner' && PANELS['intro-partner'] && PANELS['intro-partner'].art === 'panel-intro-partner');
 ok('A3 panel art obeys the gate: <=16 colors, 128x80 canvas standard, full row set',
   Object.values(PANELS).every(({ art }) => {
     const e = ART[art];
@@ -192,8 +218,8 @@ for (const { art } of Object.values(PANELS)) {
   if (start >= 0 && end > start) panelBytes += Buffer.byteLength(artDataText.slice(start, end + 7));
 }
 // W10-B ratchet pins (measured; move only in-commit with their tranche).
-const PANEL_ART_BYTES_PIN = PANEL_ART_BYTES;   // cumulative panel art after W10-C T1+T2 merged (merge re-pin: 622397)
-const PANEL_ART_BYTES_PREV = 544623;  // cumulative after W10-C T1 — the latest tranche (W10-C T2) delta is measured from here
+const PANEL_ART_BYTES_PIN = PANEL_ART_BYTES;   // cumulative panel art at W10-C wave close (merge re-pin: 644703)
+const PANEL_ART_BYTES_PREV = 622397;  // cumulative after W10-C T1+T2 merged — the latest tranche (W10-C T3) delta is measured from here
 console.log('  panel art cumulative: ' + panelBytes + ' B (pin ' + PANEL_ART_BYTES_PIN + ' B; this tranche delta ' + (panelBytes - PANEL_ART_BYTES_PREV) + ' B of the 153600 B per-tranche cap)');
 ok('A8 PANEL_ART_BYTES pin: cumulative panel art equals the ratchet pin (measured)', panelBytes === PANEL_ART_BYTES_PIN);
 ok('A8 per-tranche budget: the latest tranche\'s panel art is within 150 KB (Director ruling, W10-B)',
@@ -394,7 +420,7 @@ const driver = `
       g: g,
       done: !!g.state.story.flags.ev_johto_celebi_done,
       caught: !!(g.state.dex && g.state.dex.caught && g.state.dex.caught[dexNo]),
-      panels: g.ui.log.filter(function (e) { return e.ui === 'panel'; }),
+      panels: g.ui.log.filter(function (e) { return e.ui === 'panel' && e.art === 'panel-shrine-chronofae'; }),
       logNoPanel: canon(g.ui.log.filter(function (e) { return e.ui !== 'panel'; })),
       snap: snap(g),
     };
@@ -453,7 +479,7 @@ const driver = `
       g: g,
       done: !!g.state.story.flags.ev_zapdos_done,
       caught: !!(g.state.dex && g.state.dex.caught && g.state.dex.caught[dexNo]),
-      panels: g.ui.log.filter(function (e) { return e.ui === 'panel'; }),
+      panels: g.ui.log.filter(function (e) { return e.ui === 'panel' && e.art === 'panel-plant-fulminis'; }),
       logNoPanel: canon(g.ui.log.filter(function (e) { return e.ui !== 'panel'; })),
       snap: snap(g),
     };
@@ -508,7 +534,7 @@ const driver = `
       g: g,
       done: !!g.state.story.flags.gracidea_beat_done,
       unlocked: !!g.state.story.flags.shaymin_unlocked,
-      panels: g.ui.log.filter(function (e) { return e.ui === 'panel'; }),
+      panels: g.ui.log.filter(function (e) { return e.ui === 'panel' && e.art === 'panel-gracidea-grathog'; }),
       logNoPanel: canon(g.ui.log.filter(function (e) { return e.ui !== 'panel'; })),
       snap: snap(g),
     };
@@ -558,7 +584,7 @@ const driver = `
     var st = (MAPS['vermilion'] && MAPS['vermilion'].start) || { x: 7, y: 7 };
     return {
       g: g, picked: picked,
-      panels: g.ui.log.filter(function (e) { return e.ui === 'panel'; }),
+      panels: g.ui.log.filter(function (e) { return e.ui === 'panel' && e.art === 'panel-crossing-' + arcId; }),
       cardIdx: g.ui.log.findIndex(function (e) { return canon(e).indexOf('days at sea') >= 0; }),
       logNoPanel: canon(g.ui.log.filter(function (e) { return e.ui !== 'panel'; })),
       logText: canon(g.ui.log),
@@ -570,7 +596,7 @@ const driver = `
   var h1 = runFerry(777, 'orange', { embark_orange: true });
   ok('H1 shipped (Class H): the crossing panel fired exactly once, naming panel-crossing-orange',
     h1.panels.length === 1 && h1.panels[0].art === 'panel-crossing-orange', JSON.stringify(h1.panels));
-  var hPanelIdx = h1.g.ui.log.findIndex(function (e) { return e.ui === 'panel'; });
+  var hPanelIdx = h1.g.ui.log.findIndex(function (e) { return e.ui === 'panel' && e.art === 'panel-crossing-orange'; });
   ok('H2 shipped (Class H): order — the en-route card plays before the panel, the panel before the landing',
     h1.cardIdx >= 0 && hPanelIdx > h1.cardIdx && h1.mapId === 'vermilion',
     'cardIdx=' + h1.cardIdx + ' panelIdx=' + hPanelIdx + ' map=' + h1.mapId);
@@ -604,6 +630,140 @@ const driver = `
     cSteps.filter(function (s) { return !!s.panel; }).length === 1 && cpi === 7 && cpi > cLastSay && cSeal >= 0 && cpi < cSeal);
   ok('C1 bundle: the seal step names champion-chamber and PANELS resolves it to the panel art',
     cpi >= 0 && cSteps[cpi].panel === 'champion-chamber' && PANELS['champion-chamber'] && PANELS['champion-chamber'].art === 'panel-champion-chamber');
+
+  // ---- Class F8 (W10-C T3): finale parity drive ----
+  // The plan's Part F-finale, on the arc-foundation homecoming
+  // pattern: a state with all six arcs in regionsDone and the
+  // directive on the future row (unova) enters Mom's house — the
+  // finale homecoming plays Mom, the six bond echoes, the
+  // entrusting and the full credits, and the panel is the game's
+  // closing image: fired exactly once, AFTER the credits say. The
+  // stripped leg deletes the PANELS entry (arcFinalePanel resolves
+  // null — the dormant path) and must land on identical state and
+  // an identical non-panel ui log.
+  function finaleSnap(g) {
+    return canon({
+      flags: g.state.story.flags, bag: g.state.bag, hof: g.state.story.hof,
+      regionsDone: g.state.story.regionsDone, arc: g.state.story.arc,
+      dir: g.state.story.arc_directive,
+      party: g.state.party.map(function (m) { return [m.speciesId, m.level]; }),
+      dex: g.state.dex,
+    });
+  }
+  function runFinale(seed, strip) {
+    var g = mkGame(seed); boot(g);
+    var mk = function (id, level) { return makeMon(id, level, SPECIES, MOVES); };
+    g.state.party = [mk('partner', 65), mk('venusaur', 63)];
+    g.state.dex.caught = { 1: true, 25: true, 150: true, 493: true };
+    g.state.player.playtimeSec = 36000;
+    g.state.story.arc = 'sinnoh';
+    g.state.story.regionsDone = ['kanto', 'orange', 'johto', 'hoenn', 'frontier', 'sinnoh'];
+    g.state.story.arc_directive = 'unova';
+    var saved = null;
+    if (strip) { saved = PANELS['finale-road']; delete PANELS['finale-road']; }
+    gotoMap(g, 'house-pallet-ash', 4, 4);
+    for (var i = 0; i < 14; i++) { drain(g); tk(g, 2); if (!g.ui.dialogueOpen) break; }
+    drain(g); tk(g, 3);
+    if (strip) PANELS['finale-road'] = saved;
+    var log = g.ui.log;
+    var panelIdx = -1, endIdx = -1;
+    log.forEach(function (e, i) {
+      if (e.ui === 'panel' && e.art === 'panel-finale-road') panelIdx = i;
+      if (e.ui === 'dialogue' && e.lines && e.lines.some(function (l) { return l.indexOf('THE END') >= 0; })) endIdx = i;
+    });
+    return {
+      g: g,
+      panels: log.filter(function (e) { return e.ui === 'panel' && e.art === 'panel-finale-road'; }),
+      panelIdx: panelIdx, endIdx: endIdx,
+      creditsPlayed: endIdx >= 0,
+      done: !!g.state.story.flags.finale_done,
+      flute: (g.state.bag.azureflute || 0) >= 1,
+      unlocked: !!g.state.story.flags.arceus_unlocked,
+      master: (g.state.story.hof || []).some(function (e) { return e && e.master; }),
+      homed: !!g.state.story.flags.homecoming_unova && g.state.story.arc_directive === null,
+      logNoPanel: canon(log.filter(function (e) { return e.ui !== 'panel'; })),
+      snap: finaleSnap(g),
+    };
+  }
+  var f1 = runFinale(777, false);
+  ok('FF1 as shipped (finale): the panel fired exactly once, naming the finale art',
+    f1.panels.length === 1 && f1.panels[0].art === 'panel-finale-road', JSON.stringify(f1.panels));
+  ok('FF2 as shipped (finale): the panel fired AFTER the credits say (the end card played first)',
+    f1.creditsPlayed && f1.panelIdx > f1.endIdx, 'panelIdx=' + f1.panelIdx + ' endIdx=' + f1.endIdx);
+  ok('FF3 as shipped (finale): the finale state committed (finale_done, Azure Flute, unlock, master HoF, homecoming)',
+    f1.done && f1.flute && f1.unlocked && f1.master && f1.homed,
+    JSON.stringify({ done: f1.done, flute: f1.flute, unlocked: f1.unlocked, master: f1.master, homed: f1.homed }));
+  var f2 = runFinale(777, true);
+  ok('FF4 stripped (finale): no panel fired, and the finale still completed (done + flute + master HoF)',
+    f2.panels.length === 0 && f2.done && f2.flute && f2.master, 'panels=' + f2.panels.length);
+  ok('FF5 PARITY (finale): end state + non-panel ui log identical with and without the panel',
+    f1.snap === f2.snap && f1.logNoPanel === f2.logNoPanel);
+
+  // ---- Class E2 (W10-C T3): intro parity drive ----
+  // The plan's Part E: the game's own two doors. Watched flow: boot
+  // into a New Game and play the intro through — the panel fires
+  // exactly once at the starter moment, after the starter lines and
+  // BEFORE the partner grant (its log entry precedes the join
+  // toast). Skip flow: the headless canSkip door (skipIntroVeteran
+  // -> finishIntro() directly) — no panel, partner granted, and the
+  // end state identical to the watched flow's.
+  function driveIntroToEnd(g) {
+    var n = 0;
+    while (n++ < 80) {
+      if (g.ui.dialogueOpen) { drain(g); continue; }
+      if (g.ui.menuOpen) { g.ui.debugChoose(0); tk(g, 3); continue; }
+      if (g.state.story.flags.introDone) break;
+      tk(g, 2);
+    }
+    drain(g); tk(g, 3);
+  }
+  function runIntroWatched(seed) {
+    var g = mkGame(seed); boot(g); driveIntroToEnd(g);
+    var log = g.ui.log;
+    var panelIdx = -1, toastIdx = -1;
+    log.forEach(function (e, i) {
+      if (e.ui === 'panel') panelIdx = i;
+      if (e.ui === 'toast' && e.text && e.text.indexOf('joined your party') >= 0) toastIdx = i;
+    });
+    return {
+      g: g,
+      panels: log.filter(function (e) { return e.ui === 'panel'; }),
+      panelIdx: panelIdx, toastIdx: toastIdx,
+      partner: g.state.party.some(function (m) { return m.speciesId === 'partner'; }),
+      introDone: !!g.state.story.flags.introDone,
+      snap: snap(g),
+    };
+  }
+  function runIntroSkip(seed) {
+    var g = mkGame(seed);
+    // The headless canSkip door, honestly armed: newGame() derives
+    // skipIntroVeteran from store.exists(), so a prior save must
+    // exist in the store when New Game is chosen (its content is
+    // never loaded — New Game starts fresh). enter() then calls
+    // finishIntro() directly and the starter moment never plays.
+    localStorage.setItem(SAVE_KEY, '{"v":1}');
+    boot(g); driveIntroToEnd(g);
+    return {
+      g: g,
+      panels: g.ui.log.filter(function (e) { return e.ui === 'panel'; }),
+      partner: g.state.party.some(function (m) { return m.speciesId === 'partner'; }),
+      introDone: !!g.state.story.flags.introDone,
+      snap: snap(g),
+    };
+  }
+  var i1 = runIntroWatched(777);
+  ok('IN1 watched intro: the panel fired exactly once, naming the intro art',
+    i1.panels.length === 1 && i1.panels[0].art === 'panel-intro-partner', JSON.stringify(i1.panels));
+  ok('IN2 watched intro: the panel fired BEFORE the partner grant (panel precedes the join toast)',
+    i1.panelIdx >= 0 && i1.toastIdx > i1.panelIdx, 'panelIdx=' + i1.panelIdx + ' toastIdx=' + i1.toastIdx);
+  ok('IN3 watched intro: partner granted and introDone set',
+    i1.partner && i1.introDone, 'partner=' + i1.partner + ' introDone=' + i1.introDone);
+  var i2 = runIntroSkip(777);
+  ok('IN4 skip intro (canSkip door): no panel fired, partner granted, introDone set',
+    i2.panels.length === 0 && i2.partner && i2.introDone,
+    'panels=' + i2.panels.length + ' partner=' + i2.partner + ' introDone=' + i2.introDone);
+  ok('IN5 PARITY (intro): end state identical across the watched and skip doors',
+    i1.snap === i2.snap);
 
   globalThis.__W10Q__ = Q;
 })();`;
