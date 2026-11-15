@@ -7317,6 +7317,38 @@ W15T4_KIND_DEFS.forEach(([kind], i) => {
 const W15T4_PROP_KINDS = W15T4_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
 const W15T4_WALL_KINDS = W15T4_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
 const W15T4_FLOOR_KINDS = W15T4_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
+// Gym Identity T1 (Arden): the eight Arden gyms' own floor kinds —
+// quarryfloor (Flintridge), lagoonfloor (Tidehaven), deckfloor
+// (Arcport), glassfloor (Canopy), astrofloor (Farsight), shadowfloor
+// (Bramble), obsidianfloor (Caldera), loamfloor (Fernmere) — indices
+// 1564-1571 per WAVE-GYM-IDENTITY-PLAN §8 (next free after W15's
+// 1544-1563), verified free against TILE_CHARS and every map row.
+// Each is 'floor' class: swapped 1:1 from the walkable '+' gymfloor
+// char inside its own gym ONLY, so floor stays floor (the WALKABLE
+// spread lands in maps.mjs beside the other waves'). The shared
+// 'gymfloor' keeps its other 28 gyms until their tranches land.
+// Authored art: assets/sprites/pix/tiles/tile-<kind>.pix, spliced
+// into art-data.mjs by entry (generator-faithful, additions-only).
+const GYMID1_KIND_DEFS = [
+  ['quarryfloor', 'floor'],
+  ['lagoonfloor', 'floor'],
+  ['deckfloor', 'floor'],
+  ['glassfloor', 'floor'],
+  ['astrofloor', 'floor'],
+  ['shadowfloor', 'floor'],
+  ['obsidianfloor', 'floor'],
+  ['loamfloor', 'floor'],
+];
+const GYMID1_KIND_INDEX = { quarryfloor: 1564, lagoonfloor: 1565, deckfloor: 1566, glassfloor: 1567, astrofloor: 1568, shadowfloor: 1569, obsidianfloor: 1570, loamfloor: 1571 };
+const GYMID1_KIND_CHARS = {};
+GYMID1_KIND_DEFS.forEach(([kind]) => {
+  const ch = String.fromCodePoint(0x1E00 + GYMID1_KIND_INDEX[kind]);
+  GYMID1_KIND_CHARS[kind] = ch;
+  TILE_CHARS[ch] = kind;
+});
+const GYMID1_PROP_KINDS = GYMID1_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
+const GYMID1_WALL_KINDS = GYMID1_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
+const GYMID1_FLOOR_KINDS = GYMID1_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
 const SINNOH_TOWN_GROUND_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg);
 const SINNOH_TOWN_GROUND2_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg2);
 // TX-3: the 8 gym exteriors by town (original type-accent motifs).
@@ -11882,6 +11914,150 @@ const ART = {
     "..............OBBBBBBBO...OBBBBBBBO.............",
     "...............OOOBOOO.....OOOBOOO..............",
     "..................O...........O.................",
+  ] },
+  "tile-astrofloor": { w: 16, h: 16, pal: {"a":"#463a6e","b":"#3a2f5c","c":"#5a4c8a","d":"#ffd76a"}, rows: [
+    "aaaaaaaaaaaaaaaa",
+    "aaaaaccaaabcaaca",
+    "aaaaabaaaaaaaaaa",
+    "aaaaadcaddabaaaa",
+    "aaaaaaaaaaacabac",
+    "aaaaaaaaaadaaaaa",
+    "baaaaaaaaaacaaaa",
+    "aabaabaaaaaaaaaa",
+    "baaaacaacaaaaaaa",
+    "aaaacaaaaaaaaaaa",
+    "aaaaaaaaacaaaaaa",
+    "aabaacdaaaaaaacb",
+    "aacaaacaaaaaaaaa",
+    "aaaacaaaaaaabaaa",
+    "acacaaaaacaaaacc",
+    "aacaaacaaaaabaaa"
+  ] },
+  "tile-deckfloor": { w: 16, h: 16, pal: {"a":"#6a6e7d","b":"#565a68","c":"#82868f","d":"#f8d030"}, rows: [
+    "aaaaaaabaaaaaaab",
+    "adaaaadbadacacdb",
+    "aaaaaaabaaaaaaab",
+    "caaacacbaacaaaab",
+    "aaaaababaaaacaab",
+    "baaaaaabaaacaaab",
+    "bdccaadbadaaaadb",
+    "bbbbbbbbbbbbbbbb",
+    "aaaacbcbcaaaaacb",
+    "adacaadbcdaaaadb",
+    "aaaaaaabbaaaacab",
+    "aaaaaaabaacaaacb",
+    "aaaaaaabababaaab",
+    "aaaaaaabbaaaaaab",
+    "cdaaaadbadaaacdb",
+    "bbbbbbbbbbbbbbbb"
+  ] },
+  "tile-glassfloor": { w: 16, h: 16, pal: {"a":"#79a852","b":"#679644","c":"#8fbc66","d":"#f2a7c3"}, rows: [
+    "dacaaaabacaaaaaa",
+    "cacaaacbababaaca",
+    "caaaababaaacaaaa",
+    "acaaaaabaaaadaaa",
+    "abaaaaabaaaaacca",
+    "acacaaababaaacaa",
+    "aaaaaaabaaacacaa",
+    "bbbbbbbbbbbbbbbb",
+    "aaccaadbaacaaaac",
+    "ccabcaabcaaaacac",
+    "abcaaacbcaaaaacc",
+    "aaccaaabaaabbacc",
+    "caaaacabacbbaaac",
+    "ccaaacabacacaabb",
+    "bcaacaabcaacacaa",
+    "aaacaaabacbaccac"
+  ] },
+  "tile-lagoonfloor": { w: 16, h: 16, pal: {"a":"#3f9fd0","b":"#2f83b4","c":"#5cb8e4","d":"#dff4ff"}, rows: [
+    "caadaaadbbbdaaad",
+    "aaadaaadbbbdaaad",
+    "aaadaaadbbbdaaad",
+    "dddddddddddddddd",
+    "aaadbbbdaacdbbbd",
+    "aaadbbbdaaadbcbd",
+    "aaadbbbdaaadbbbd",
+    "dddddddddddddddd",
+    "aacdaaadaaadaaad",
+    "aaadaaadaaadaaad",
+    "aaadcaadacadaaad",
+    "dddddddddddddddd",
+    "bbbdaaadacadaaad",
+    "cbbdacadaaadaaad",
+    "bbbdaaadaaadaacd",
+    "dddddddddddddddd"
+  ] },
+  "tile-loamfloor": { w: 16, h: 16, pal: {"a":"#6e5a44","b":"#5c4a38","c":"#82705a","d":"#e8c832"}, rows: [
+    "aaaaaacabbbaaaaa",
+    "acaabaaabaaaaaaa",
+    "aaababbaabcaaaaa",
+    "cacaccaababaaaad",
+    "acaacacaaaaaaccc",
+    "cabaaaabaaaadaac",
+    "aacaaaaabccacbaa",
+    "cbaaaabaadaaaaaa",
+    "bcaaaaaaaabababa",
+    "aaaaaabbaccacaaa",
+    "aacacbcaaaaaaaaa",
+    "acaaabaabacadcbb",
+    "bbbaabbaaaaaaaba",
+    "acccbabacaaaaaaa",
+    "baaacaaaaaaaacaa",
+    "abaabaaaacbbabca"
+  ] },
+  "tile-obsidianfloor": { w: 16, h: 16, pal: {"a":"#2a2024","b":"#1e161a","c":"#453238","d":"#ff6a1e"}, rows: [
+    "acaaabaaaaabaaaa",
+    "caaaabacaaabaaac",
+    "adaaabaaacabaaaa",
+    "baaaabaaaacbaaaa",
+    "aaaacbdabbabaaaa",
+    "bbbbbbbbbbbbbbbb",
+    "aaaaabacbaabaaaa",
+    "bcacabaaadabaaaa",
+    "aaacababaaabaaaa",
+    "aaaaabcaaaabaaaa",
+    "baaaabaaaaabaaaa",
+    "bbbbbbbbbbbbbbbb",
+    "aaaaabaaaaabaaac",
+    "aaaaabaaaabbaaaa",
+    "acaaabaaababaaab",
+    "aaaaabaadabbaaab"
+  ] },
+  "tile-quarryfloor": { w: 16, h: 16, pal: {"a":"#b08c5a","b":"#9a784a","c":"#c4a26c","d":"#7d6742"}, rows: [
+    "bcbabacdaaaaaaad",
+    "aabaaaadaacacaad",
+    "caaaaaadaaaacabd",
+    "ccaaaacdaaaaaaad",
+    "aacaaaadaacaaacd",
+    "aaaaaaadacaabaad",
+    "aaaaaacdaaaaabcd",
+    "dddddddddddddddd",
+    "aaadaacaaaadaaaa",
+    "caadaaaaabadaaaa",
+    "cbadabaaaaadaaaa",
+    "aaadaaaacaadacaa",
+    "acadacccacadbaaa",
+    "cacdaacabbadaaaa",
+    "aaadaaaaaaadaaca",
+    "dddddddddddddddd"
+  ] },
+  "tile-shadowfloor": { w: 16, h: 16, pal: {"a":"#3d3260","b":"#312850","c":"#4c4072","d":"#9ae85a"}, rows: [
+    "aaacaaabaaaaaabb",
+    "aaaaaaaaacaaaaac",
+    "aaaaabdbabaaacaa",
+    "aaaaaaaccccacaaa",
+    "caaacbbaaaaabbaa",
+    "caaaaaadaabaaaba",
+    "cacaaccaaacbdaab",
+    "aaaaaaaabaccacaa",
+    "aaaccabbcabaaaca",
+    "baaaababacabacaa",
+    "abaaaaaacbabaaaa",
+    "aaaabaabaaaabaaa",
+    "caaacaaabaaacbaa",
+    "aaaaaaaccbccbcca",
+    "baacaaaccaaaccca",
+    "adaadaabcaaabaca"
   ] },
   "trainer-acetrainer-battle": { w: 48, h: 64, pal: {"O":"#241a20","W":"#ffffff","k":"#7a2020","S":"#eec39c","s":"#d4a276","H":"#1e2a38","J":"#c8352c","j":"#9c241e","P":"#2e3a4e","K":"#f0f0f0"}, rows: [
     "................................................",
@@ -131420,6 +131596,9 @@ for (const k of W15T3_FLOOR_KINDS) TILE_ART[k] = 'tile-' + k;
 for (const k of W15T4_PROP_KINDS) TILE_ART[k] = 'tile-prop-' + k;
 for (const k of W15T4_WALL_KINDS) TILE_ART[k] = 'tile-' + k;
 for (const k of W15T4_FLOOR_KINDS) TILE_ART[k] = 'tile-' + k;
+// Gym Identity T1 (Arden): the eight gyms' own floor kinds draw their
+// authored tiles (assets/sprites/pix/tiles/tile-<kind>.pix).
+for (const k of GYMID1_FLOOR_KINDS) TILE_ART[k] = 'tile-' + k;
 // Premium+ W6 (TX-3/PL-1): door-open frames, authored in TX-3 for every
 // door kind. The warp-fade engine that plays them lands in W7 — W6
 // wires the frames (this registry + cache.doorOpen + doorOpenCanvas)
@@ -140837,13 +141016,13 @@ const MAPS = {
     id: 'gym', name: 'Flintridge Gym', music: 'gym-theme', indoor: true,
     rows: rows([
       'Ṛ===========',
-      '=νḿṀλṁλ++Ḙθ=',
-      '=ḙμṢ+++++μḗ=',
-      '=++++++++++=',
-      '=++++//++++=',
-      '=++++//++++=',
-      '=++++//++++=',
-      '=+++)++)+++=',
+      '=νḿṀλṁλ␜␜Ḙḿ=',
+      '=ḙμṢ␜␜␜␜␜μḗ=',
+      '=␜␜␜␜␜␜␜␜␜␜=',
+      '=␜␜␜␜//␜␜␜␜=',
+      '=␜␜␜␜//␜␜␜␜=',
+      '=␜␜␜␜//␜␜␜␜=',
+      '=␜␜␜)␜␜)␜␜␜=',
       '=====DD=====',
     ]),
     warps: [
@@ -142020,6 +142199,14 @@ const WALKABLE = new Set(['.', ',', 'D', 'E', 'C', 'F', 'J', 'K', '1', '2', 'V',
   // route program's last allocation: the program closes at
   // 451 kinds over 1092-1543; 1111 stays empty.)
   ...[1536, 1538, 1540, 1542]
+    .map((i) => String.fromCodePoint(0x1E00 + i)),
+  // Gym Identity T1: the eight Arden gym floor chars (U+1E00+1564..1571,
+  // tiles.mjs GYMID1_KIND_DEFS) are walkable — quarryfloor (Flintridge),
+  // lagoonfloor (Tidehaven), deckfloor (Arcport), glassfloor (Canopy),
+  // astrofloor (Farsight), shadowfloor (Bramble), obsidianfloor
+  // (Caldera), loamfloor (Fernmere) — each swapped 1:1 from the walkable
+  // '+' gymfloor char inside its own gym, so floor stays floor.
+  ...[1564, 1565, 1566, 1567, 1568, 1569, 1570, 1571]
     .map((i) => String.fromCodePoint(0x1E00 + i))]);
 
 // Trainer definitions for the slice.
@@ -143007,15 +143194,15 @@ const MAPS3 = {
     id: 'gym-cerulean', name: 'Tidehaven Gym', music: 'gym-theme', indoor: true,
     rows: rows([
       'Ṛ===============',
-      '=νṂḘ++Ṣλṃλ+++Ṅθ=',
-      '=ḗμ++++++++++μḙ=',
-      '=+++~~++++~~+++=',
-      '=+++~~++++~~+++=',
-      '=++++++//++++++=',
-      '=++++++//++++++=',
-      '=++++++++++++++=',
-      '=+++)++++++)+++=',
-      '=====++DD++=====',
+      '=νṂḘ␝␝Ṣλṃλ␝␝␝Ṅṃ=',
+      '=ḗμ␝␝␝␝␝␝␝␝␝␝μḙ=',
+      '=␝␝␝~~␝␝␝␝~~␝␝␝=',
+      '=␝␝␝~~␝␝␝␝~~␝␝␝=',
+      '=␝␝␝␝␝␝//␝␝␝␝␝␝=',
+      '=␝␝␝␝␝␝//␝␝␝␝␝␝=',
+      '=␝␝␝␝␝␝␝␝␝␝␝␝␝␝=',
+      '=␝␝␝)␝␝␝␝␝␝)␝␝␝=',
+      '=====␝␝DD␝␝=====',
     ]),
     warps: [
       { x: 7, y: 9, to: { map: 'cerulean', x: 9, y: 8 } },
@@ -143041,15 +143228,15 @@ const MAPS3 = {
     id: 'gym-vermilion', name: 'Arcport Gym', music: 'gym-theme', indoor: true,
     rows: rows([
       'Ṛ===============',
-      '=νṅḘ++ṢλṆλ+++ṇθ=',
-      '=ḗμ++++++++++μḙ=',
-      '=+++ξξ++++ξξ+++=',
-      '=++++++++++++++=',
-      '=++++++//++++++=',
-      '=++++++//++++++=',
-      '=++++++++++++++=',
-      '=+++)++++++)+++=',
-      '=====++DD++=====',
+      '=νṅḘ␞␞ṢλṆλ␞␞␞ṇṅ=',
+      '=ḗμ␞␞␞␞␞␞␞␞␞␞μḙ=',
+      '=␞␞␞ξξ␞␞␞␞ξξ␞␞␞=',
+      '=␞␞␞␞␞␞␞␞␞␞␞␞␞␞=',
+      '=␞␞␞␞␞␞//␞␞␞␞␞␞=',
+      '=␞␞␞␞␞␞//␞␞␞␞␞␞=',
+      '=␞␞␞␞␞␞␞␞␞␞␞␞␞␞=',
+      '=␞␞␞)␞␞␞␞␞␞)␞␞␞=',
+      '=====␞␞DD␞␞=====',
     ]),
     warps: [
       { x: 7, y: 9, to: { map: 'vermilion', x: 15, y: 9 } },
@@ -143075,15 +143262,15 @@ const MAPS3 = {
     id: 'gym-celadon', name: 'Canopy Gym', music: 'gym-theme', indoor: true,
     rows: rows([
       'Ṛ===============',
-      '=νṊḗḘ++λṈλ++++ṉ=',
-      '=Ṣḙθ++++++++θ+κ=',
-      '=+++))++++))+++=',
-      '=++++++++++++++=',
-      '=++++++//++++++=',
-      '=++++++//++++++=',
-      '=++++++++++++++=',
-      '=+++)++++++)+++=',
-      '=====++DD++=====',
+      '=νṊḗḘ␟␟λṈλ␟␟␟␟ṉ=',
+      '=Ṣḙθ␟␟␟␟␟␟␟␟Ṉ␟κ=',
+      '=␟␟␟))␟␟␟␟))␟␟␟=',
+      '=␟␟␟␟␟␟␟␟␟␟␟␟␟␟=',
+      '=␟␟␟␟␟␟//␟␟␟␟␟␟=',
+      '=␟␟␟␟␟␟//␟␟␟␟␟␟=',
+      '=␟␟␟␟␟␟␟␟␟␟␟␟␟␟=',
+      '=␟␟␟)␟␟␟␟␟␟)␟␟␟=',
+      '=====␟␟DD␟␟=====',
     ]),
     warps: [
       { x: 7, y: 9, to: { map: 'celadon', x: 10, y: 4 } },
@@ -143844,15 +144031,15 @@ const MAPS3 = {
     id: 'gym-fuchsia', name: 'Bramble Gym', music: 'gym-theme', indoor: true,
     rows: rows([
       'Ṛ===============',
-      '=νṐḘ++ṢλṎλ+++ṏθ=',
-      '=++++++++++++οḗ=',
-      '=+++μμ++++μμ++ḙ=',
-      '=++++++++++++++=',
-      '=++++++//++++++=',
-      '=++++++//++++++=',
-      '=++++++++++++++=',
-      '=+++)++++++)+++=',
-      '=====++DD++=====',
+      '=νṐḘ␡␡ṢλṎλ␡␡␡ṏṎ=',
+      '=␡␡␡␡␡␡␡␡␡␡␡␡οḗ=',
+      '=␡␡␡μμ␡␡␡␡μμ␡␡ḙ=',
+      '=␡␡␡␡␡␡␡␡␡␡␡␡␡␡=',
+      '=␡␡␡␡␡␡//␡␡␡␡␡␡=',
+      '=␡␡␡␡␡␡//␡␡␡␡␡␡=',
+      '=␡␡␡␡␡␡␡␡␡␡␡␡␡␡=',
+      '=␡␡␡)␡␡␡␡␡␡)␡␡␡=',
+      '=====␡␡DD␡␡=====',
     ]),
     warps: [
       { x: 7, y: 9, to: { map: 'fuchsia', x: 13, y: 4 } },
@@ -144384,13 +144571,13 @@ const MAPS3 = {
     id: 'gym-viridian', name: 'Fernmere Gym', music: 'gym-theme', indoor: true,
     rows: rows([
       'Ṛ===========',
-      '=νṔṕλṖλ++Ḙθ=',
-      '=ḙμṢ+++++μḗ=',
-      '=++++++++++=',
-      '=++++//++++=',
-      '=++++//++++=',
-      '=++++//++++=',
-      '=+++)++)+++=',
+      '=νṔṕλṖλ␣␣ḘṖ=',
+      '=ḙμṢ␣␣␣␣␣μḗ=',
+      '=␣␣␣␣␣␣␣␣␣␣=',
+      '=␣␣␣␣//␣␣␣␣=',
+      '=␣␣␣␣//␣␣␣␣=',
+      '=␣␣␣␣//␣␣␣␣=',
+      '=␣␣␣)␣␣)␣␣␣=',
       '=====DD=====',
     ]),
     warps: [
@@ -145162,14 +145349,14 @@ const MAPS4 = {
     id: 'gym-saffron', name: 'Farsight Gym', music: 'gym-theme', indoor: true,
     rows: [
       'Ṛ===============',
-      '=νṌṍḗλṋSSλḘ+++θ=',
-      '=++++ḙ++++++++Ṣ=',
-      '=++++μ++++μ++++=',
-      '=++++++++++++++=',
-      '=++++++//++++++=',
-      '=++++μ+//+μ++++=',
-      '=++++++++++++++=',
-      '=+++)++++++)+++=',
+      '=νṌṍḗλṋSSλḘ␠␠␠Ṍ=',
+      '=␠␠␠␠ḙ␠␠␠␠␠␠␠␠Ṣ=',
+      '=␠␠␠␠μ␠␠␠␠μ␠␠␠␠=',
+      '=␠␠␠␠␠␠␠␠␠␠␠␠␠␠=',
+      '=␠␠␠␠␠␠//␠␠␠␠␠␠=',
+      '=␠␠␠␠μ␠//␠μ␠␠␠␠=',
+      '=␠␠␠␠␠␠␠␠␠␠␠␠␠␠=',
+      '=␠␠␠)␠␠␠␠␠␠)␠␠␠=',
       '=======DD=======',
     ],
     warps: [
@@ -145192,14 +145379,14 @@ const MAPS4 = {
     id: 'gym-cinnabar', name: 'Caldera Gym', music: 'gym-theme', indoor: true,
     rows: [
       'Ṛ===============',
-      '=νṒṓḙḗλSSṑλḘ++θ=',
-      '=++++Ṣ+++++++++=',
-      '=++++ξ++++ξ++++=',
-      '=++++++++++++++=',
-      '=++++++//++++++=',
-      '=++++ξ+//+ξ++++=',
-      '=++++++++++++++=',
-      '=+++)++++++)+++=',
+      '=νṒṓḙḗλSSṑλḘ␢␢Ṓ=',
+      '=␢␢␢␢Ṣ␢␢␢␢␢␢␢␢␢=',
+      '=␢␢␢␢ξ␢␢␢␢ξ␢␢␢␢=',
+      '=␢␢␢␢␢␢␢␢␢␢␢␢␢␢=',
+      '=␢␢␢␢␢␢//␢␢␢␢␢␢=',
+      '=␢␢␢␢ξ␢//␢ξ␢␢␢␢=',
+      '=␢␢␢␢␢␢␢␢␢␢␢␢␢␢=',
+      '=␢␢␢)␢␢␢␢␢␢)␢␢␢=',
       '=======DD=======',
     ],
     warps: [
@@ -189896,6 +190083,34 @@ const ARENA_AMBIENT = {
 // Ground's ARENA_ART / ARENA_AMBIENT treatment, byte-identical to the
 // pre-wave render.
 const GYM_ARENA_ART = {
+  // T1 Arden (WAVE-GYM-IDENTITY-PLAN §5): each entry layers over the
+  // gym's existing Ground — palette/motif/tex/amb only, rules frozen.
+  // Flintridge: quarry-cut stone, Boulder browns over Rubble — darker
+  // and warmer than the base treatment, dust motes for spark.
+  'gym': { sky: ['#6f8aa5', '#7d99b2', '#8ba7bf', '#99b4c9', '#a7c0d2', '#b5ccdc'], ground: ['#b28a58', '#a87f52', '#9e744c', '#947046', '#8a6440', '#7f5c3a'], dark: '#5f4a2c', light: '#f0e2bc', accent: '#d89a3a', motif: 'rocks', tex: 'chunk', amb: { kind: 'mote', n: 8, speed: 3 } },
+  // Tidehaven: pool-tile lagoon, Cascade blues over Tide — a tiled
+  // pool, not open sea: deeper lagoon ground, bubbles rising.
+  'gym-cerulean': { sky: ['#5fb2e8', '#6fbdef', '#7fc7f3', '#8fd0f6', '#9fd9f9', '#afe2fb'], ground: ['#3fa8d8', '#389ed0', '#3194c8', '#2a8ac0', '#237fb5', '#1c74ab'], dark: '#1d5f8a', light: '#e8fbff', accent: '#2fd4c4', motif: 'waves', tex: 'foam', haze: true, amb: { kind: 'bubble', n: 10, speed: 7 } },
+  // Arcport: naval signal-deck over Volt — deep navy sky, grey deck
+  // ground, signal amber; the pylon register is volt's own seed.
+  'gym-vermilion': { sky: ['#2c2c4c', '#36365c', '#403f6b', '#4a487a', '#544f89', '#5e5898'], ground: ['#7a7d8a', '#6f7280', '#646776', '#595c6a', '#4e515e', '#434652'], dark: '#26262e', light: '#ffe98a', accent: '#ffb020', motif: 'storm', tex: 'spark', pylon: true, amb: { kind: 'spark', n: 16, speed: 0 } },
+  // Canopy: greenhouse glass and leaf-light over Marsh — flowers
+  // under glass, brighter than the open reed-bed base.
+  'gym-celadon': { sky: ['#8fd0a0', '#9ad6aa', '#a5dcb4', '#b0e2be', '#bbe8c8', '#c6eed2'], ground: ['#7fae52', '#76a44c', '#6d9a46', '#649040', '#5b863a', '#527c34'], dark: '#2c4c26', light: '#eaffb0', accent: '#f28ac0', motif: 'flowers', tex: 'petal', haze: true, amb: { kind: 'petal', n: 14, speed: 8 } },
+  // Farsight: observatory dark over Mind — night indigo, star-gold
+  // accent, slow motes; the base's bright magenta is another gym's.
+  'gym-saffron': { sky: ['#2e2a55', '#38336a', '#423c7f', '#4c4594', '#564ea9', '#6057be'], ground: ['#4a3a6e', '#43345f', '#3c2e56', '#35284d', '#2e2244', '#271c3b'], dark: '#1c1430', light: '#e8e0ff', accent: '#ffd76a', motif: 'runes', tex: 'spark', amb: { kind: 'mote', n: 14, speed: 4 } },
+  // Bramble: ninja-shadow indigo over Venom — pushed blue-dark, the
+  // venom-lime fleck kept as the family mark, faster bubbles.
+  'gym-fuchsia': { sky: ['#343a5e', '#3c4268', '#444a72', '#4c527c', '#545a86', '#5c6290'], ground: ['#3d3260', '#372c56', '#31264c', '#2b2042', '#251a38', '#1f142e'], dark: '#17102a', light: '#c8f09a', accent: '#9ae85a', motif: 'shrooms', tex: 'bubble', amb: { kind: 'bubble', n: 14, speed: 9 } },
+  // Caldera: volcanic glass over Pyre — where the base is bright
+  // ember-orange, this is black glass under ash-smoke: near-black
+  // ground, greyed sky, dim amber glints, flame vents at the horizon.
+  'gym-cinnabar': { sky: ['#33272b', '#3d2d30', '#473336', '#51393c', '#5b4042', '#654748'], ground: ['#1c171c', '#181318', '#141014', '#100c10', '#0d090d', '#0a060a'], dark: '#05040a', light: '#e8a04c', accent: '#ff5a14', motif: 'flames', tex: 'chunk', amb: { kind: 'ember', n: 18, speed: 22 } },
+  // Fernmere: corporate earth over Spirit — deep umber, tombs,
+  // corporate gold; reads heavier than Flintridge's quarry (its
+  // skeleton twin), as the final gym should.
+  'gym-viridian': { sky: ['#6a6488', '#746f96', '#7e7aa4', '#8885b2', '#928fc0', '#9c99ce'], ground: ['#6e5a44', '#64503c', '#5a4634', '#50402e', '#463826', '#3c3020'], dark: '#2a2016', light: '#f2e8d0', accent: '#e8c832', motif: 'tombs', tex: 'chunk', amb: { kind: 'mote', n: 10, speed: 4 } },
 };
 
 function gymArenaFor(field) {
@@ -204732,6 +204947,6 @@ if (typeof Game !== 'undefined') Object.assign(Game.prototype, {
 });
 
 </script>
-<!-- contentHash:65f76da85cc997c17a21834a91ada9a5b5d0d8259d11a5ad69297c8024d185fe -->
+<!-- contentHash:26a60c98b2a0d197ad6f04d695087b11854555411ad100c0079aad082204639d -->
 </body>
 </html>
