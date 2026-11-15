@@ -1297,6 +1297,21 @@ export const WALKABLE = new Set(['.', ',', 'D', 'E', 'C', 'F', 'J', 'K', '1', '2
   // allocation closed at 1383 (W17-L..W17-T); 1111 stays
   // empty.)
   ...[1384, 1385, 1388, 1389, 1392, 1393, 1396, 1397, 1400]
+    .map((i) => String.fromCodePoint(0x1E00 + i)),
+  // Wave W17-V: the Borea tranche-2 ground/path chars
+  // (U+1E00+1402.., tiles.mjs W17V_KIND_DEFS) are walkable —
+  // galeturf/galefloor (Route 205), deepturf/deepfloor
+  // (Heritage Forest), pillarturf/pillarwayfloor (Route 206),
+  // climbturf/switchfloor (Route 207) and restturf/restfloor
+  // (Route 208), each swapped 1:1 from the walkable '_'
+  // ground / '.' path chars on its own route, so ground stays
+  // ground and path stays path. The tree chars (1404, 1408,
+  // 1412, 1416, 1420) and prop chars (1405, 1409, 1413, 1417,
+  // 1421) are NOT here: trees and props were never walkable.
+  // (Indices 1402-1421 per the Borea program plan; the Borea
+  // allocation opened at 1384 (W17-U takes 1384-1401 on its
+  // parallel branch); 1111 stays empty.)
+  ...[1402, 1403, 1406, 1407, 1410, 1411, 1414, 1415, 1418, 1419]
     .map((i) => String.fromCodePoint(0x1E00 + i))]);
 
 // Trainer definitions for the slice.

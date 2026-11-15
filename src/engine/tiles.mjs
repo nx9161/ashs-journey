@@ -3988,6 +3988,100 @@ W17U_KIND_DEFS.forEach(([kind], i) => {
 export const W17U_PROP_KINDS = W17U_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
 export const W17U_WALL_KINDS = W17U_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
 export const W17U_FLOOR_KINDS = W17U_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
+// Wave W17-V (Route Build Program, Borea Tranche 2 — the
+// valley, the forest, the road above, the climb: Honeyfield ->
+// Heritage -> Mt. Apex's doors): Route 205 -> Heritage Forest
+// -> Route 206 -> Route 207 -> Route 208. All five maps are
+// defined once in maps9.mjs (no dual copies in Borea, so no
+// registry re-pins arise). Conversions are char-for-char kind
+// swaps on grassground/path/tree; encounter cells/tables,
+// warps, NPC posts, sign records/texts and every shipped
+// biome/dressing kind stay byte-identical. Route 205 "Valley
+// Road" (1402-1405): galeturf is wind-valley grass with swirl
+// flecks, galefloor valley-road pale sand (design-authorised),
+// galepine a ridge pine with a wind-bent crown drawn in the
+// tree art, hivebox hive-yard boxes x2 on verified grassground
+// cells flanking the shipped honeytree in the flower grass;
+// the river water (15), the honeytree (1), flower (16), rock
+// (9), fence (4) and the Galeworks + Ironworks footprint pieces
+// (roofs/walls/doors, windmill 2) standing on this map stay
+// byte-identical entire. Twin: Route 206 — R205 is the open
+// honey valley, R206 the cycleway's shadow. Heritage Forest
+// "Manor Shade" (1406-1409): deepturf is deep shade green with
+// coin-light flecks, deepfloor canopy forest sand leaf-flecked,
+// manoroak a manor oak with an ancient spread crown, silklog a
+// fallen silk-strung log section x2 on verified grassground
+// cells (split from Maris's silkstrand by register: Borea's log
+// lies in manor shade, Maris's in bright silk shade); the
+// honeytrees (3), flower (25) and the Ruined Manor's footprint
+// pieces stay byte-identical. Twin: Meadowbrook Woods (Maris)
+// — the Woods are bright silk shade, Heritage Forest is dark
+// manor shade; in-region twin: Route 205. Route 206 "Pillar
+// Road" (1410-1413): pillarturf is pillar-shadow meadow with
+// cool flecks, pillarwayfloor the walking road's pale sand
+// under the pillars (design-authorised), pillarpine a shadow
+// pine, straypost cave-mouth marker posts x2 flanking the Stray
+// Cave mouths; the cycleway's pillar stone (rock 20), the two
+// 'L' cave-mouth warp cells, flower (28), fence (3) and
+// signposts (4) stay byte-identical (the cave itself is out of
+// program). Twin: Route 110 (Maris) — the fleet's closest
+// concept pair, named honestly: both are roads under a
+// cycleway; R206 splits by register — Borea's climbs north on
+// stone pillars with a cave in its shadow, Maris's keeps ponds
+// and a shore spur under its pillars. Route 207 "Switchback
+// Climb" (1414-1417): climbturf is foothill turf with
+// ring-glint flecks (the design's RELICT rings scattered in the
+// grass), switchfloor switchback sand (design-authorised; the
+// zigzag tread is drawn in the kind, the fallfloor discipline),
+// climbpine a climb pine, relicpost relic-ring marker posts x2
+// at the bends; pond water (12), fence (5) and rock (2) stay
+// byte-identical. Twin: Route 208 — R207 is the switchback
+// climb from Coalseam, R208 the rest-rock road from Inglenook.
+// Route 208 "Rest Road" (1418-1421): restturf is rest-meadow
+// turf with warm flecks, restfloor rest-road pale sand
+// (design-authorised), restpine a rest pine, reststone foothill
+// rest rocks x2 on verified grassground cells where the file of
+// travellers stretches; fence (6) and rock (4) stay
+// byte-identical. Twin: Route 207. Ground kinds deliberately do
+// NOT end in 'floor' (the desire-path audit counts '*floor' as
+// street tier; grounds must never masquerade as street); path
+// kinds DO end in 'floor' so they register as the route's path
+// tier per route (checklist point 3). Indices 1402-1421 per the
+// program plan (WAVE-W17-BOREA-ROUTE-PROGRAM-PLAN.md): the
+// Borea allocation opened at 1384 (W17-U); 1111 and every
+// earlier documented gap stay empty. Kind names verified
+// unclaimed against origin/main.
+export const W17V_KIND_DEFS = [
+  ['galeturf', 'floor'],
+  ['galefloor', 'floor'],
+  ['galepine', 'wall'],
+  ['hivebox', 'prop'],
+  ['deepturf', 'floor'],
+  ['deepfloor', 'floor'],
+  ['manoroak', 'wall'],
+  ['silklog', 'prop'],
+  ['pillarturf', 'floor'],
+  ['pillarwayfloor', 'floor'],
+  ['pillarpine', 'wall'],
+  ['straypost', 'prop'],
+  ['climbturf', 'floor'],
+  ['switchfloor', 'floor'],
+  ['climbpine', 'wall'],
+  ['relicpost', 'prop'],
+  ['restturf', 'floor'],
+  ['restfloor', 'floor'],
+  ['restpine', 'wall'],
+  ['reststone', 'prop'],
+];
+export const W17V_KIND_CHARS = {};
+W17V_KIND_DEFS.forEach(([kind], i) => {
+  const ch = String.fromCodePoint(0x1E00 + 1402 + i);
+  W17V_KIND_CHARS[kind] = ch;
+  TILE_CHARS[ch] = kind;
+});
+export const W17V_PROP_KINDS = W17V_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
+export const W17V_WALL_KINDS = W17V_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
+export const W17V_FLOOR_KINDS = W17V_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
 export const SINNOH_TOWN_GROUND_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg);
 export const SINNOH_TOWN_GROUND2_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg2);
 // TX-3: the 8 gym exteriors by town (original type-accent motifs).

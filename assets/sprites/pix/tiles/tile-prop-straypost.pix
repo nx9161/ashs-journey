@@ -1,0 +1,25 @@
+# Wave W17-V (Route 206): stray post — a cave-mouth marker post flanking the Stray Cave mouths under the pillars: a plain post carrying one black cave band, the dark mouth’s own mark cut into the wood (design: the cave under the cycling road, dark and echoing; the sign names it, the posts flank its doors). On pillar turf (fully opaque, ground baked in) — split from Route 204’s red-banded scree post by the black band: the scree post warns of falling stone, the stray post only says the dark is here.
+PIX tile-prop-straypost 16 16
+aaaaaaabbabaaaaa
+aaaaaawaaaaabaaa
+abaaaaaaaaaaaaaa
+aaaaaaawaabbabaa
+abaabaawwabaaaaa
+aaaaaaakdaaaaaaa
+waaabaazzabaaaaa
+aaaababzzbaaabaa
+baaaaabkdaabaaaa
+baaaaabkdbabawaa
+bbabaaakdabaaaaa
+aaaaabakdaaaaaab
+aaaaaaakdaaababa
+aaaaaaddddaaaaaa
+aaaaabaaaaaawaaa
+aaaaabaabaaaaaaa
+PAL
+a #67955c
+b #57814e
+w #ece7d2
+z #26221c
+d #6e5233
+k #7d5f3a
