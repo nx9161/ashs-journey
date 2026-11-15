@@ -347,6 +347,23 @@ const NPC_SWAP_KEYS = {
   'cmd-windworks': { S: 'skin', H: 'hair', J: 'shirt', P: 'pants' },
   'cmd-eterna': { S: 'skin', H: 'hair', J: 'shirt', P: 'pants' },
   'cmd-hq': { S: 'skin', H: 'hair', J: 'shirt', P: 'pants' },
+  // W-CHAR2 T1 (service register): per-region uniform kinds — the
+  // uniform fields (shirt/pants) are forced per region in
+  // KIT_CAST_SPEC; skin/hair stay the post's own (see below).
+  'clerk-arden': { S: 'skin', H: 'hair', J: 'shirt', P: 'pants' },
+  'clerk-yamato': { S: 'skin', H: 'hair', J: 'shirt', P: 'pants' },
+  'clerk-maris': { S: 'skin', H: 'hair', J: 'shirt', P: 'pants' },
+  'clerk-borea': { S: 'skin', H: 'hair', J: 'shirt', P: 'pants' },
+  'clerk-amber': { S: 'skin', H: 'hair', J: 'shirt', P: 'pants' },
+  'clerk-trial': { S: 'skin', H: 'hair', J: 'shirt', P: 'pants' },
+  'attendant-yamato': { S: 'skin', H: 'hair', J: 'shirt', P: 'pants' },
+  'attendant-maris': { S: 'skin', H: 'hair', J: 'shirt', P: 'pants' },
+  'attendant-borea': { S: 'skin', H: 'hair', J: 'shirt', P: 'pants' },
+  'attendant-amber': { S: 'skin', H: 'hair', J: 'shirt', P: 'pants' },
+  'host-arden': { S: 'skin', H: 'hair', J: 'shirt', P: 'pants' },
+  'host-yamato': { S: 'skin', H: 'hair', J: 'shirt', P: 'pants' },
+  'host-maris': { S: 'skin', H: 'hair', J: 'shirt', P: 'pants' },
+  'host-borea': { S: 'skin', H: 'hair', J: 'shirt', P: 'pants' },
   gym1: { S: 'skin', H: 'hair', J: 'shirt', P: 'pants' },
   gym2: { S: 'skin', H: 'hair', J: 'shirt', P: 'pants' },
   gym3: { S: 'skin', H: 'hair', J: 'shirt', P: 'pants' },
@@ -468,6 +485,30 @@ const KIT_CAST_SPEC = {
   'cmd-windworks': { acc: [['hair-pony', { T: '#2a2a3a' }], ['skirt', { C: '#3a3a4a', c: '#282832' }]] },
   'cmd-eterna': { acc: [['hair-long', {}], ['glasses', {}], ['skirt', { C: '#3a3a4a', c: '#282832' }]] },
   'cmd-hq': { acc: [['glasses', {}]] },
+  // W-CHAR2 T1 service register — uniform families per role × region.
+  // The fiction: service staff SHOULD read as staff — one staff palette
+  // per region (shirt/pants forced to the colours the region's own
+  // service posts already wear: Arden mart blue, Yamato rust, Maris
+  // green, Borea registrar slate, Amber isle teal, Trial ceremony
+  // purple), a role accessory (clerk apron per the pack's Clerk
+  // archetype, attendant cap, host long hair + uniform skirt), and the
+  // personal layer — skin and hair — NEVER forced: it stays the post's
+  // own, so no two staff read as the same person. Kinds key to the
+  // post's region, never to a display name (W-CHAR1 rule).
+  'clerk-arden': { force: { shirt: '#3a6ac0', pants: '#2a2a3a' }, acc: [['apron', {}]] },
+  'clerk-yamato': { force: { shirt: '#c05a3a', pants: '#2a2a3a' }, acc: [['apron', {}]] },
+  'clerk-maris': { force: { shirt: '#3a7a4a', pants: '#2a2a3a' }, acc: [['apron', {}]] },
+  'clerk-borea': { force: { shirt: '#3a4a6a', pants: '#2a2a3a' }, acc: [['apron', {}]] },
+  'clerk-amber': { force: { shirt: '#3a9ac0', pants: '#2a3a4a' }, acc: [['apron', {}]] },
+  'clerk-trial': { force: { shirt: '#7a4a8a', pants: '#2a2a3a' }, acc: [['apron', {}]] },
+  'attendant-yamato': { force: { shirt: '#c05a3a', pants: '#2a2a3a' }, acc: [['cap', { C: '@J', c: '@j', X: '@j' }]] },
+  'attendant-maris': { force: { shirt: '#3a7a4a', pants: '#2a2a3a' }, acc: [['cap', { C: '@J', c: '@j', X: '@j' }]] },
+  'attendant-borea': { force: { shirt: '#3a4a6a', pants: '#2a2a3a' }, acc: [['cap', { C: '@J', c: '@j', X: '@j' }]] },
+  'attendant-amber': { force: { shirt: '#3a9ac0', pants: '#2a3a4a' }, acc: [['cap', { C: '@J', c: '@j', X: '@j' }]] },
+  'host-arden': { force: { shirt: '#3a6ac0', pants: '#2a2a3a' }, acc: [['hair-long', {}], ['skirt', { C: '@J', c: '@j' }]] },
+  'host-yamato': { force: { shirt: '#c05a3a', pants: '#2a2a3a' }, acc: [['hair-long', {}], ['skirt', { C: '@J', c: '@j' }]] },
+  'host-maris': { force: { shirt: '#3a7a4a', pants: '#2a2a3a' }, acc: [['hair-long', {}], ['skirt', { C: '@J', c: '@j' }]] },
+  'host-borea': { force: { shirt: '#3a4a6a', pants: '#2a2a3a' }, acc: [['hair-long', {}], ['skirt', { C: '@J', c: '@j' }]] },
   // W-CHAR1 class closure — the remaining palette-ignored kinds get
   // class specs so NO posted NPC can fall through to the forge
   // placeholder again (guarded by tests/leader-cast-checks.mjs). The
