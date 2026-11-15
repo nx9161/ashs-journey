@@ -368,9 +368,16 @@ const VENUE_EXCLUDED = [
 // corrected 53 -> 48 as a labeled merge-side step at the T2 merge).
 // T3 +18 remaining legendary -> 38 (all 18 verified battle hosts at
 // build time — entry/step/interact gates + map events; none out).
-// T4 +10 frontier -> 48 of 48.
-const VENUE_ARENA_COVERED = 38;
-const VENUE_TUPLES_DISTINCT = 38;
+// T4 +9 frontier -> 47 (10 chartered; frontier-pyramid, the Pyramid
+// entrance hall, came OUT on build-time proof: encounters null,
+// events [], one booking-desk NPC — every Pyramid battle fires on
+// the floor maps a/b/c, Titus on floor 7 = map A. The census
+// correction 48 -> 47, moving the hall to VENUE_EXCLUDED beside
+// the chambers, is flagged for the T4 merge as a labeled
+// merge-side step — VENUE_IDS/VENUE_EXCLUDED are NOT adjusted in
+// the tranche commit, per the T2 pattern).
+const VENUE_ARENA_COVERED = 47;
+const VENUE_TUPLES_DISTINCT = 47;
 
 ok('V1 venue census is exactly the pinned 48 and every venue id is a merged map',
   VENUE_IDS.length === 48 && new Set(VENUE_IDS).size === 48
@@ -387,7 +394,7 @@ ok('V2c tripwire: no excluded chamber map carries a VENUE_ARENA_ART entry (a wir
   VENUE_EXCLUDED.every((id) => !(VENUE_ARENA_ART && VENUE_ARENA_ART[id])),
   VENUE_EXCLUDED.filter((id) => VENUE_ARENA_ART && VENUE_ARENA_ART[id]).join(','));
 const venueCovered = VENUE_IDS.filter((id) => VENUE_ARENA_ART && VENUE_ARENA_ART[id]);
-ok(`V3 ratchet: VENUE_ARENA_COVERED = pin ${VENUE_ARENA_COVERED} (T1 +14, T2 +6 — census 48 after the chamber exclusion, T3 +18, T4 +10)`,
+ok(`V3 ratchet: VENUE_ARENA_COVERED = pin ${VENUE_ARENA_COVERED} (T1 +14, T2 +6 — census 48 after the chamber exclusion, T3 +18, T4 +9 frontier with the Pyramid hall out on proof; census correction flagged for the merge)`,
   venueCovered.length === VENUE_ARENA_COVERED,
   venueCovered.length > VENUE_ARENA_COVERED
     ? `measured ${venueCovered.length} — coverage grew outside a pin move (unrecorded claim)`
