@@ -6921,6 +6921,38 @@ GYMID4_KIND_DEFS.forEach(([kind]) => {
 const GYMID4_PROP_KINDS = GYMID4_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
 const GYMID4_WALL_KINDS = GYMID4_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
 const GYMID4_FLOOR_KINDS = GYMID4_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
+// Gym Identity T5 (Amber Isles, WAVE CLOSURE): the four Amber gyms'
+// own floor kinds — eyefloor (Tangelo), rubyfloor (Pomelo),
+// spikefloor (Reefside), jadefloor (Calamondin) — indices 1596-1599
+// per WAVE-GYM-IDENTITY-PLAN §8 (continuing T4's 1588-1595), verified
+// free against TILE_CHARS and every map row. Name discipline:
+// coralfloor/shellfloor/starfloor/reeffloor are all taken by existing
+// kinds, so Tangelo takes eyefloor (the Coral-Eye badge, the
+// iciclefloor precedent), Pomelo takes rubyfloor (the Sea Ruby
+// accent), Reefside takes spikefloor (its spike-stone) and Calamondin
+// takes jadefloor (the Jade Star). Each is 'floor' class: swapped 1:1
+// from the walkable '+' gymfloor char inside its own gym ONLY, so
+// floor stays floor (the WALKABLE spread lands in maps.mjs beside the
+// other waves'). T5 closes the wave: the shared 'gymfloor' keeps NO
+// gyms after this tranche — GYMFLOOR_DOMINANT burns to 0.
+// Authored art: assets/sprites/pix/tiles/tile-<kind>.pix, spliced
+// into art-data.mjs by entry (generator-faithful, additions-only).
+const GYMID5_KIND_DEFS = [
+  ['eyefloor', 'floor'],
+  ['rubyfloor', 'floor'],
+  ['spikefloor', 'floor'],
+  ['jadefloor', 'floor'],
+];
+const GYMID5_KIND_INDEX = { eyefloor: 1596, rubyfloor: 1597, spikefloor: 1598, jadefloor: 1599 };
+const GYMID5_KIND_CHARS = {};
+GYMID5_KIND_DEFS.forEach(([kind]) => {
+  const ch = String.fromCodePoint(0x1E00 + GYMID5_KIND_INDEX[kind]);
+  GYMID5_KIND_CHARS[kind] = ch;
+  TILE_CHARS[ch] = kind;
+});
+const GYMID5_PROP_KINDS = GYMID5_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
+const GYMID5_WALL_KINDS = GYMID5_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
+const GYMID5_FLOOR_KINDS = GYMID5_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
 const SINNOH_TOWN_GROUND_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg);
 const SINNOH_TOWN_GROUND2_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg2);
 // TX-3: the 8 gym exteriors by town (original type-accent motifs).
@@ -11684,6 +11716,78 @@ const ART = {
     "bcbbacbcbabbbcbb",
     "ccaaaabbaaaaaaab",
     "dddddddddddddddd"
+  ] },
+  "tile-eyefloor": { w: 16, h: 16, pal: {"a":"#e8a7b0","b":"#dd939f","c":"#f4c3c9","d":"#c9748a"}, rows: [
+    "aaaaaaaaacaabbaa",
+    "aaccaaaaabccaabb",
+    "baabbaaabbcaaabb",
+    "aadaaaaacababaaa",
+    "acaabcaabcaacbca",
+    "ababbabacabbcabb",
+    "baaaaaaaaaadabca",
+    "bccbababaaaaaacc",
+    "cbbbbcbcaabacaaa",
+    "babaaaaaababaaba",
+    "acaabadbcaabbaba",
+    "aababcbacabbcacb",
+    "babaababbcbabdaa",
+    "babaacaaabaaaaca",
+    "bbbbdaacabaababa",
+    "aaabbabbcabbcaab"
+  ] },
+  "tile-rubyfloor": { w: 16, h: 16, pal: {"a":"#dfe9f2","b":"#ccd9e6","c":"#f4fafd","d":"#c22645"}, rows: [
+    "acabacacaabababc",
+    "aaabadaabcbbabaa",
+    "abaababbabbbbaab",
+    "baaaababbcaabaaa",
+    "aabaaabcaaaaaaaa",
+    "bbbbbbbbbbbbdbbb",
+    "bbbaaaabbaccacaa",
+    "aacabaaaaacaaaba",
+    "abaaaabaabbaaabb",
+    "abadaacaaaaaabaa",
+    "aaaaaacaabbaaaca",
+    "bbbbbbbbbbbbbbbb",
+    "abbaaabaabbaadaa",
+    "ababaaababaaabaa",
+    "aacaabaaaaaaaaba",
+    "bbacaadaabbaacba"
+  ] },
+  "tile-spikefloor": { w: 16, h: 16, pal: {"a":"#9a8a6e","b":"#87765c","c":"#ada084","d":"#6e5c42"}, rows: [
+    "abbbbbaababaaaaa",
+    "bdcaaaabaaabbabc",
+    "cccaaaacbbabcaaa",
+    "aaaaaaaccbaaacba",
+    "aaabbaabdbabaaaa",
+    "babaaccbbcbbbacc",
+    "acabbabcaaaacbab",
+    "abaaabcaabacaada",
+    "caaaacaaaacbacab",
+    "abaccdaaaabbaaab",
+    "acbbaacaaaaabbca",
+    "aaaabbcabaadbaba",
+    "aabcaaaabaaaaaca",
+    "aaadaabacaabaaab",
+    "ccbaaaccbacaadbb",
+    "aaaacaaaaacaaabb"
+  ] },
+  "tile-jadefloor": { w: 16, h: 16, pal: {"a":"#4f7a5c","b":"#42684e","c":"#63906f","d":"#d8b25c"}, rows: [
+    "aaabaabbabacaaaa",
+    "abcabaabadaaabaa",
+    "aabacbabaabaacbb",
+    "acadbcababaaaaba",
+    "aaaaaaabaaabaaaa",
+    "aabababbaaadaaaa",
+    "aaccbaabaaabbaba",
+    "bbbbbbbbbbbbbbbb",
+    "abaaaaabbbaabaaa",
+    "baaabaabaaaaaaac",
+    "aaaacaabaaaaaaaa",
+    "baabadabaaabacba",
+    "acbacabbaaaaaaab",
+    "aaacccbbaaacadbb",
+    "cbbabaabbacaaaab",
+    "bbbbbbbbbbbbbbbb"
   ] },
   "tile-dynamofloor": { w: 16, h: 16, pal: {"a":"#8a854e","b":"#74703f","c":"#a8a468","d":"#4a4630"}, rows: [
     "dddddddddddddddd",
@@ -131612,6 +131716,10 @@ for (const k of GYMID3_FLOOR_KINDS) TILE_ART[k] = 'tile-' + k;
 // Gym Identity T4 (Borea): the eight gyms' own floor kinds draw their
 // authored tiles (assets/sprites/pix/tiles/tile-<kind>.pix).
 for (const k of GYMID4_FLOOR_KINDS) TILE_ART[k] = 'tile-' + k;
+// Gym Identity T5 (Amber Isles, wave closure): the four gyms' own
+// floor kinds draw their authored tiles
+// (assets/sprites/pix/tiles/tile-<kind>.pix).
+for (const k of GYMID5_FLOOR_KINDS) TILE_ART[k] = 'tile-' + k;
 // Premium+ W6 (TX-3/PL-1): door-open frames, authored in TX-3 for every
 // door kind. The warp-fade engine that plays them lands in W7 — W6
 // wires the frames (this registry + cache.doorOpen + doorOpenCanvas)
@@ -142246,6 +142354,14 @@ const WALKABLE = new Set(['.', ',', 'D', 'E', 'C', 'F', 'J', 'K', '1', '2', 'V',
   // from the walkable '+' gymfloor char inside its own gym, so floor
   // stays floor.
   ...[1588, 1589, 1590, 1591, 1592, 1593, 1594, 1595]
+    .map((i) => String.fromCodePoint(0x1E00 + i)),
+  // Gym Identity T5: the four Amber gym floor chars (U+1E00+1596..1599,
+  // tiles.mjs GYMID5_KIND_DEFS) are walkable — eyefloor (Tangelo),
+  // rubyfloor (Pomelo), spikefloor (Reefside), jadefloor (Calamondin)
+  // — each swapped 1:1 from the walkable '+' gymfloor char inside its
+  // own gym, so floor stays floor. T5 closes the wave: no gym stands
+  // on the shared 'gymfloor' after this tranche.
+  ...[1596, 1597, 1598, 1599]
     .map((i) => String.fromCodePoint(0x1E00 + i))]);
 
 // Trainer definitions for the slice.
@@ -149927,14 +150043,14 @@ const MAPS5 = {
     "indoor": true,
     "rows": [
       "================",
-      "=+ṃ++++++++++ṃ+=",
-      "=++++++++++++++=",
-      "=++++Ṅ++++Ṅ++++=",
-      "=++++++++++++++=",
-      "=+++++////+++++=",
-      "=+++++////+++++=",
-      "=++++++++++++++=",
-      "=+++)++++++)+++=",
+      "=␼ṃ␼␼␼␼␼␼␼␼␼␼ṃ␼=",
+      "=␼␼␼␼␼␼␼␼␼␼␼␼␼␼=",
+      "=␼␼␼␼Ṅ␼␼␼␼Ṅ␼␼␼␼=",
+      "=␼␼␼␼␼␼␼␼␼␼␼␼␼␼=",
+      "=␼␼␼␼␼////␼␼␼␼␼=",
+      "=␼␼␼␼␼////␼␼␼␼␼=",
+      "=␼␼␼␼␼␼␼␼␼␼␼␼␼␼=",
+      "=␼␼␼)␼␼␼␼␼␼)␼␼␼=",
       "=======DD======="
     ],
     "warps": [
@@ -150006,14 +150122,14 @@ const MAPS5 = {
     "indoor": true,
     "rows": [
       "================",
-      "=+Ṫ++++++++++Ṫ+=",
-      "=++++++++++++++=",
-      "=++++ṫ++++ṫ++++=",
-      "=++++++++++++++=",
-      "=+++++////+++++=",
-      "=+++++////+++++=",
-      "=++++++++++++++=",
-      "=+++)++++++)+++=",
+      "=␽Ṫ␽␽␽␽␽␽␽␽␽␽Ṫ␽=",
+      "=␽␽␽␽␽␽␽␽␽␽␽␽␽␽=",
+      "=␽␽␽␽ṫ␽␽␽␽ṫ␽␽␽␽=",
+      "=␽␽␽␽␽␽␽␽␽␽␽␽␽␽=",
+      "=␽␽␽␽␽////␽␽␽␽␽=",
+      "=␽␽␽␽␽////␽␽␽␽␽=",
+      "=␽␽␽␽␽␽␽␽␽␽␽␽␽␽=",
+      "=␽␽␽)␽␽␽␽␽␽)␽␽␽=",
       "=======DD======="
     ],
     "warps": [
@@ -150085,14 +150201,14 @@ const MAPS5 = {
     "indoor": true,
     "rows": [
       "================",
-      "=+ḿ++++++++++ḿ+=",
-      "=++++++++++++++=",
-      "=++++Ṁ++++Ṁ++++=",
-      "=++++++++++++++=",
-      "=+++++////+++++=",
-      "=+++++////+++++=",
-      "=++++++++++++++=",
-      "=+++)++++++)+++=",
+      "=␾ḿ␾␾␾␾␾␾␾␾␾␾ḿ␾=",
+      "=␾␾␾␾␾␾␾␾␾␾␾␾␾␾=",
+      "=␾␾␾␾Ṁ␾␾␾␾Ṁ␾␾␾␾=",
+      "=␾␾␾␾␾␾␾␾␾␾␾␾␾␾=",
+      "=␾␾␾␾␾////␾␾␾␾␾=",
+      "=␾␾␾␾␾////␾␾␾␾␾=",
+      "=␾␾␾␾␾␾␾␾␾␾␾␾␾␾=",
+      "=␾␾␾)␾␾␾␾␾␾)␾␾␾=",
       "=======DD======="
     ],
     "warps": [
@@ -150164,14 +150280,14 @@ const MAPS5 = {
     "indoor": true,
     "rows": [
       "================",
-      "=+ḷ++++++++++ḷ+=",
-      "=++++++++++++++=",
-      "=++++Ṉ++++Ṉ++++=",
-      "=++++++++++++++=",
-      "=+θ+++////+++θ+=",
-      "=+θ+++////+++θ+=",
-      "=++++++++++++++=",
-      "=+++)++++++)+++=",
+      "=␿ḷ␿␿␿␿␿␿␿␿␿␿ḷ␿=",
+      "=␿␿␿␿␿␿␿␿␿␿␿␿␿␿=",
+      "=␿␿␿␿Ṉ␿␿␿␿Ṉ␿␿␿␿=",
+      "=␿␿␿␿␿␿␿␿␿␿␿␿␿␿=",
+      "=␿θ␿␿␿////␿␿␿θ␿=",
+      "=␿θ␿␿␿////␿␿␿θ␿=",
+      "=␿␿␿␿␿␿␿␿␿␿␿␿␿␿=",
+      "=␿␿␿)␿␿␿␿␿␿)␿␿␿=",
       "=======DD======="
     ],
     "warps": [
@@ -190228,6 +190344,21 @@ const GYM_ARENA_ART = {
   // Brightshore: lighthouse volt — bright coastal day over sunlit
   // sand-gold, waves under the light, beam-yellow accent, no pylon.
   'gym-sunnyshore': { sky: ['#4a90d8', '#5c9de2', '#6ea9e8', '#80b5ee', '#92c1f2', '#a4cdf6'], ground: ['#a89a58', '#9e9050', '#948648', '#8a7c40', '#807238', '#76682e'], dark: '#4a4020', light: '#fff8c8', accent: '#ffe93c', motif: 'waves', tex: 'spark', amb: { kind: 'spark', n: 12, speed: 0 } },
+  // Gym Identity T5 (Amber Isles, wave closure): the region's four
+  // own treatments — the last four of the wave.
+  // Tangelo: lagoon range — coral-pink dusk over shallow rose lagoon
+  // water, Coral-Eye pink accent, sparse lagoon bubbles over the Tide.
+  'mikan-gym': { sky: ['#d87f96', '#e08fa2', '#e89fae', '#efaeba', '#f6bdc6', '#fbccd2'], ground: ['#c97f8e', '#c07885', '#b7717c', '#ae6a73', '#a5636a', '#9c5c61'], dark: '#7c4450', light: '#fff0e8', accent: '#ff6f91', motif: 'waves', tex: 'foam', haze: true, amb: { kind: 'bubble', n: 8, speed: 6 } },
+  // Pomelo: summit frost — alpenglow sky over summit snow-stone,
+  // Sea Ruby red accent, thin summit snow over the Frost.
+  'navel-gym': { sky: ['#d8b8c8', '#e0c2cc', '#e8ccd4', '#eed6dc', '#f4e0e4', '#faeaec'], ground: ['#e6e2ea', '#ded9e4', '#d6d0de', '#cec7d8', '#c6bed2', '#beb5cc'], dark: '#8a7a9a', light: '#ffffff', accent: '#e0304e', motif: 'snow', tex: 'spark', haze: true, amb: { kind: 'snow', n: 10, speed: 8 } },
+  // Reefside: spike-stone rubble — dry amber glare over jagged
+  // spike-stone, shell-ivory accent, dry dust over the Rubble.
+  'trovita-gym': { sky: ['#a08a6c', '#a89272', '#b09a78', '#b8a27e', '#c0aa84', '#c8b28a'], ground: ['#8a7a5e', '#817154', '#78684a', '#6f5f40', '#665636', '#5d4d2c'], dark: '#46351e', light: '#fdf4dc', accent: '#f0e6ce', motif: 'rocks', tex: 'chunk', amb: { kind: 'mote', n: 10, speed: 4 } },
+  // Calamondin: resort Mind — jade dusk over deep resort turf, the
+  // Mentarch's rune-charts in Jade Star green, garden petals drifting
+  // through the starlight over the Mind.
+  'kumquat-gym': { sky: ['#3f6a58', '#48765f', '#518266', '#5a8e6d', '#63a074', '#6cb27d'], ground: ['#3d5c46', '#37543f', '#314c38', '#2b4431', '#253c2a', '#1f3423'], dark: '#14231a', light: '#eaffdc', accent: '#2fe07c', motif: 'runes', tex: 'fleck', amb: { kind: 'petal', n: 12, speed: 5 } },
 };
 
 function gymArenaFor(field) {
