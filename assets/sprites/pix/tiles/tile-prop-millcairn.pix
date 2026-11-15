@@ -1,0 +1,24 @@
+# Wave W17-I (Route 42): mill cairn — a waymark cairn of mountain stones with a round worn millstone leaning against it, the mountain’s namesake left at the roadside, on mill turf (fully opaque, ground baked in). The design’s road passes the mountain’s mouths; the cairns mark where it gives the road back.
+PIX tile-prop-millcairn 16 16
+aaaabaaaaaaaaaaa
+aabaaaaaaaabaasa
+aaaaaaabaaaaaaaa
+aaaabsabbaaabbaa
+aaaaaaaabaaaaaaa
+aaaaaaaasaaaaaaa
+aaababaaaaabaaaa
+aaaaaaaaaaasaabb
+aaabscaaaasdsasa
+aaaadddaasdcdsaa
+aaaasssbasdcdsaa
+aaadddddbasdsaab
+abasssssaassaaaa
+saddddddddddddaa
+sabaaaaaaaabaaaa
+aaaaaaaaaaaaaaaa
+PAL
+a #6d9c58
+b #59824a
+s #9a958a
+d #7e786c
+c #c2bcab

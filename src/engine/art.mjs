@@ -13,7 +13,7 @@
 import { ART } from '../../assets/sprites/art-data.mjs';
 import { KIT_ART } from '../../assets/sprites/kit-art-data.mjs';
 import { KITACC } from '../../assets/sprites/kitacc-data.mjs';
-import { forgeSprite, forgeHumanoid } from './sprites.mjs';import { paintTile, W6_PROP_KINDS, W6_RUG_KINDS, W6_FLOOR_KINDS, W6_WALL_KINDS, W7_PROP_KINDS, O1_PROP_KINDS, O1_FLOOR_KINDS, O1_WALL_KINDS, J3_PROP_KINDS, J3_FLOOR_KINDS, J3_WALL_KINDS, JOHTO_TOWN_ORDER, H3_PROP_KINDS, H3_FLOOR_KINDS, H3_WALL_KINDS, H3B_PROP_KINDS, H3B_FLOOR_KINDS, H3B_WALL_KINDS, HOENN_TOWN_ORDER, S3_PROP_KINDS, S3_FLOOR_KINDS, S3_WALL_KINDS, S3B_PROP_KINDS, S3B_FLOOR_KINDS, S3B_WALL_KINDS, SINNOH_TOWN_ORDER, G2_KINDS, T1_PROP_KINDS, T3_PROP_KINDS, T6_PROP_KINDS, T6_RUG_KINDS, T7_PROP_KINDS, T9_PROP_KINDS, T14_PROP_KINDS, T15_PROP_KINDS, T17_PROP_KINDS, T23_PROP_KINDS, WD_FLOOR_KINDS, WD_WALL_KINDS, T24_PROP_KINDS, T24_WALL_KINDS, T24_FLOOR_KINDS, T25_PROP_KINDS, T25_WALL_KINDS, T25_FLOOR_KINDS, WD3_PROP_KINDS, WD3_WALL_KINDS, WD3_FLOOR_KINDS, WD4_PROP_KINDS, WD4_WALL_KINDS, WD4_FLOOR_KINDS, T26_PROP_KINDS, T26_WALL_KINDS, T26_FLOOR_KINDS, WD5_PROP_KINDS, WD5_WALL_KINDS, WD5_FLOOR_KINDS, T27_PROP_KINDS, T27_WALL_KINDS, T27_FLOOR_KINDS, WD6_PROP_KINDS, WD6_WALL_KINDS, WD6_FLOOR_KINDS, T28_PROP_KINDS, T28_WALL_KINDS, T28_FLOOR_KINDS, WD7_PROP_KINDS, WD7_WALL_KINDS, WD7_FLOOR_KINDS, T29_PROP_KINDS, T29_WALL_KINDS, T29_FLOOR_KINDS, WD8_PROP_KINDS, WD8_WALL_KINDS, WD8_FLOOR_KINDS, T30_PROP_KINDS, T30_WALL_KINDS, T30_FLOOR_KINDS, T31_PROP_KINDS, T31_WALL_KINDS, T31_FLOOR_KINDS, T32_PROP_KINDS, T32_WALL_KINDS, T32_FLOOR_KINDS, T33_PROP_KINDS, T33_WALL_KINDS, T33_FLOOR_KINDS, T34_PROP_KINDS, T34_WALL_KINDS, T34_FLOOR_KINDS, T35_PROP_KINDS, T35_WALL_KINDS, T35_FLOOR_KINDS, T36_PROP_KINDS, T36_WALL_KINDS, T36_FLOOR_KINDS, T37_PROP_KINDS, T37_WALL_KINDS, T37_FLOOR_KINDS, T38_PROP_KINDS, T38_WALL_KINDS, T38_FLOOR_KINDS, T39_PROP_KINDS, T39_WALL_KINDS, T39_FLOOR_KINDS, T40_PROP_KINDS, T40_WALL_KINDS, T40_FLOOR_KINDS, T41_PROP_KINDS, T41_WALL_KINDS, T41_FLOOR_KINDS, T42_PROP_KINDS, T42_WALL_KINDS, T42_FLOOR_KINDS, T43_PROP_KINDS, T43_WALL_KINDS, T43_FLOOR_KINDS, T44_PROP_KINDS, T44_WALL_KINDS, T44_FLOOR_KINDS, T45_PROP_KINDS, T45_WALL_KINDS, T45_FLOOR_KINDS, T46_PROP_KINDS, T46_WALL_KINDS, T46_FLOOR_KINDS, T47_PROP_KINDS, T47_WALL_KINDS, T47_FLOOR_KINDS, T48_PROP_KINDS, T48_WALL_KINDS, T48_FLOOR_KINDS, T49_PROP_KINDS, T49_WALL_KINDS, T49_FLOOR_KINDS, T50_PROP_KINDS, T50_WALL_KINDS, T50_FLOOR_KINDS, T51_PROP_KINDS, T51_WALL_KINDS, T51_FLOOR_KINDS, T52_PROP_KINDS, T52_WALL_KINDS, T52_FLOOR_KINDS, T53_PROP_KINDS, T53_WALL_KINDS, T53_FLOOR_KINDS, T54_PROP_KINDS, T54_WALL_KINDS, T54_FLOOR_KINDS, T55_PROP_KINDS, T55_WALL_KINDS, T55_FLOOR_KINDS, T56_PROP_KINDS, T56_WALL_KINDS, T56_FLOOR_KINDS, T57_PROP_KINDS, T57_WALL_KINDS, T57_FLOOR_KINDS, T58_PROP_KINDS, T58_WALL_KINDS, T58_FLOOR_KINDS, T59_PROP_KINDS, T59_WALL_KINDS, T59_FLOOR_KINDS, T60_PROP_KINDS, T60_WALL_KINDS, T60_FLOOR_KINDS, T61_PROP_KINDS, T61_WALL_KINDS, T61_FLOOR_KINDS, T62_PROP_KINDS, T62_WALL_KINDS, T62_FLOOR_KINDS, T63_PROP_KINDS, T63_WALL_KINDS, T63_FLOOR_KINDS, T64_PROP_KINDS, T64_WALL_KINDS, T64_FLOOR_KINDS, T65_PROP_KINDS, T65_WALL_KINDS, T65_FLOOR_KINDS, WD9_PROP_KINDS, WD9_WALL_KINDS, WD9_FLOOR_KINDS, WD10_PROP_KINDS, WD10_WALL_KINDS, WD10_FLOOR_KINDS, W17A_PROP_KINDS, W17A_WALL_KINDS, W17A_FLOOR_KINDS, W17B_PROP_KINDS, W17B_WALL_KINDS, W17B_FLOOR_KINDS, W17C_PROP_KINDS, W17C_WALL_KINDS, W17C_FLOOR_KINDS, W17D_PROP_KINDS, W17D_WALL_KINDS, W17D_FLOOR_KINDS, W17E_PROP_KINDS, W17E_WALL_KINDS, W17E_FLOOR_KINDS, W17F_PROP_KINDS, W17F_WALL_KINDS, W17F_FLOOR_KINDS, W17G_PROP_KINDS, W17G_WALL_KINDS, W17G_FLOOR_KINDS, W17H_PROP_KINDS, W17H_WALL_KINDS, W17H_FLOOR_KINDS, TOWN_STYLE, JOHTO_TOWN_STYLE, HOENN_TOWN_STYLE, SINNOH_TOWN_STYLE } from './tiles.mjs';
+import { forgeSprite, forgeHumanoid } from './sprites.mjs';import { paintTile, W6_PROP_KINDS, W6_RUG_KINDS, W6_FLOOR_KINDS, W6_WALL_KINDS, W7_PROP_KINDS, O1_PROP_KINDS, O1_FLOOR_KINDS, O1_WALL_KINDS, J3_PROP_KINDS, J3_FLOOR_KINDS, J3_WALL_KINDS, JOHTO_TOWN_ORDER, H3_PROP_KINDS, H3_FLOOR_KINDS, H3_WALL_KINDS, H3B_PROP_KINDS, H3B_FLOOR_KINDS, H3B_WALL_KINDS, HOENN_TOWN_ORDER, S3_PROP_KINDS, S3_FLOOR_KINDS, S3_WALL_KINDS, S3B_PROP_KINDS, S3B_FLOOR_KINDS, S3B_WALL_KINDS, SINNOH_TOWN_ORDER, G2_KINDS, T1_PROP_KINDS, T3_PROP_KINDS, T6_PROP_KINDS, T6_RUG_KINDS, T7_PROP_KINDS, T9_PROP_KINDS, T14_PROP_KINDS, T15_PROP_KINDS, T17_PROP_KINDS, T23_PROP_KINDS, WD_FLOOR_KINDS, WD_WALL_KINDS, T24_PROP_KINDS, T24_WALL_KINDS, T24_FLOOR_KINDS, T25_PROP_KINDS, T25_WALL_KINDS, T25_FLOOR_KINDS, WD3_PROP_KINDS, WD3_WALL_KINDS, WD3_FLOOR_KINDS, WD4_PROP_KINDS, WD4_WALL_KINDS, WD4_FLOOR_KINDS, T26_PROP_KINDS, T26_WALL_KINDS, T26_FLOOR_KINDS, WD5_PROP_KINDS, WD5_WALL_KINDS, WD5_FLOOR_KINDS, T27_PROP_KINDS, T27_WALL_KINDS, T27_FLOOR_KINDS, WD6_PROP_KINDS, WD6_WALL_KINDS, WD6_FLOOR_KINDS, T28_PROP_KINDS, T28_WALL_KINDS, T28_FLOOR_KINDS, WD7_PROP_KINDS, WD7_WALL_KINDS, WD7_FLOOR_KINDS, T29_PROP_KINDS, T29_WALL_KINDS, T29_FLOOR_KINDS, WD8_PROP_KINDS, WD8_WALL_KINDS, WD8_FLOOR_KINDS, T30_PROP_KINDS, T30_WALL_KINDS, T30_FLOOR_KINDS, T31_PROP_KINDS, T31_WALL_KINDS, T31_FLOOR_KINDS, T32_PROP_KINDS, T32_WALL_KINDS, T32_FLOOR_KINDS, T33_PROP_KINDS, T33_WALL_KINDS, T33_FLOOR_KINDS, T34_PROP_KINDS, T34_WALL_KINDS, T34_FLOOR_KINDS, T35_PROP_KINDS, T35_WALL_KINDS, T35_FLOOR_KINDS, T36_PROP_KINDS, T36_WALL_KINDS, T36_FLOOR_KINDS, T37_PROP_KINDS, T37_WALL_KINDS, T37_FLOOR_KINDS, T38_PROP_KINDS, T38_WALL_KINDS, T38_FLOOR_KINDS, T39_PROP_KINDS, T39_WALL_KINDS, T39_FLOOR_KINDS, T40_PROP_KINDS, T40_WALL_KINDS, T40_FLOOR_KINDS, T41_PROP_KINDS, T41_WALL_KINDS, T41_FLOOR_KINDS, T42_PROP_KINDS, T42_WALL_KINDS, T42_FLOOR_KINDS, T43_PROP_KINDS, T43_WALL_KINDS, T43_FLOOR_KINDS, T44_PROP_KINDS, T44_WALL_KINDS, T44_FLOOR_KINDS, T45_PROP_KINDS, T45_WALL_KINDS, T45_FLOOR_KINDS, T46_PROP_KINDS, T46_WALL_KINDS, T46_FLOOR_KINDS, T47_PROP_KINDS, T47_WALL_KINDS, T47_FLOOR_KINDS, T48_PROP_KINDS, T48_WALL_KINDS, T48_FLOOR_KINDS, T49_PROP_KINDS, T49_WALL_KINDS, T49_FLOOR_KINDS, T50_PROP_KINDS, T50_WALL_KINDS, T50_FLOOR_KINDS, T51_PROP_KINDS, T51_WALL_KINDS, T51_FLOOR_KINDS, T52_PROP_KINDS, T52_WALL_KINDS, T52_FLOOR_KINDS, T53_PROP_KINDS, T53_WALL_KINDS, T53_FLOOR_KINDS, T54_PROP_KINDS, T54_WALL_KINDS, T54_FLOOR_KINDS, T55_PROP_KINDS, T55_WALL_KINDS, T55_FLOOR_KINDS, T56_PROP_KINDS, T56_WALL_KINDS, T56_FLOOR_KINDS, T57_PROP_KINDS, T57_WALL_KINDS, T57_FLOOR_KINDS, T58_PROP_KINDS, T58_WALL_KINDS, T58_FLOOR_KINDS, T59_PROP_KINDS, T59_WALL_KINDS, T59_FLOOR_KINDS, T60_PROP_KINDS, T60_WALL_KINDS, T60_FLOOR_KINDS, T61_PROP_KINDS, T61_WALL_KINDS, T61_FLOOR_KINDS, T62_PROP_KINDS, T62_WALL_KINDS, T62_FLOOR_KINDS, T63_PROP_KINDS, T63_WALL_KINDS, T63_FLOOR_KINDS, T64_PROP_KINDS, T64_WALL_KINDS, T64_FLOOR_KINDS, T65_PROP_KINDS, T65_WALL_KINDS, T65_FLOOR_KINDS, WD9_PROP_KINDS, WD9_WALL_KINDS, WD9_FLOOR_KINDS, WD10_PROP_KINDS, WD10_WALL_KINDS, WD10_FLOOR_KINDS, W17A_PROP_KINDS, W17A_WALL_KINDS, W17A_FLOOR_KINDS, W17B_PROP_KINDS, W17B_WALL_KINDS, W17B_FLOOR_KINDS, W17C_PROP_KINDS, W17C_WALL_KINDS, W17C_FLOOR_KINDS, W17D_PROP_KINDS, W17D_WALL_KINDS, W17D_FLOOR_KINDS, W17E_PROP_KINDS, W17E_WALL_KINDS, W17E_FLOOR_KINDS, W17F_PROP_KINDS, W17F_WALL_KINDS, W17F_FLOOR_KINDS, W17G_PROP_KINDS, W17G_WALL_KINDS, W17G_FLOOR_KINDS, W17H_PROP_KINDS, W17H_WALL_KINDS, W17H_FLOOR_KINDS, W17I_PROP_KINDS, W17I_WALL_KINDS, W17I_FLOOR_KINDS, TOWN_STYLE, JOHTO_TOWN_STYLE, HOENN_TOWN_STYLE, SINNOH_TOWN_STYLE } from './tiles.mjs';
 import { BATTLER_DRAW_SIZE } from './render.mjs';
 import { battlerDrawSize } from '../data/battler-tiers.mjs';
 
@@ -1056,6 +1056,9 @@ for (const k of W17G_FLOOR_KINDS) TILE_ART[k] = 'tile-' + k;
 for (const k of W17H_PROP_KINDS) TILE_ART[k] = 'tile-prop-' + k;
 for (const k of W17H_WALL_KINDS) TILE_ART[k] = 'tile-' + k;
 for (const k of W17H_FLOOR_KINDS) TILE_ART[k] = 'tile-' + k;
+for (const k of W17I_PROP_KINDS) TILE_ART[k] = 'tile-prop-' + k;
+for (const k of W17I_WALL_KINDS) TILE_ART[k] = 'tile-' + k;
+for (const k of W17I_FLOOR_KINDS) TILE_ART[k] = 'tile-' + k;
 // Premium+ W6 (TX-3/PL-1): door-open frames, authored in TX-3 for every
 // door kind. The warp-fade engine that plays them lands in W7 — W6
 // wires the frames (this registry + cache.doorOpen + doorOpenCanvas)
@@ -1865,9 +1868,12 @@ const CAVE_KINDS = new Set(['cavewall', 'cavefloor', 'caveboulder',
   // kinds to this set on its own branch; the merge unions the two.)
   'crownwall', 'crownfloor',
   // Wave W17-F: Junction Cave's kit (Junction Deep) is cave family too.
-  'junctionwall', 'junctionfloor']);
-const CAVE_FLOOR_KINDS = new Set(['cavefloor', 'lunefloor', 'darklunefloor', 'stratadeepfloor', 'crownfloor', 'junctionfloor']);
-const CAVE_WALL_KINDS = new Set(['cavewall', 'lunewall', 'darklunewall', 'stratadeepwall', 'crownwall', 'junctionwall']);
+  'junctionwall', 'junctionfloor',
+  // Wave W17-I: the Millstone halls' kits (Millstone Wet below,
+  // Millstone Spray above) are cave family too.
+  'wetmillwall', 'wetmillfloor', 'spraywall', 'sprayfloor']);
+const CAVE_FLOOR_KINDS = new Set(['cavefloor', 'lunefloor', 'darklunefloor', 'stratadeepfloor', 'crownfloor', 'junctionfloor', 'wetmillfloor', 'sprayfloor']);
+const CAVE_WALL_KINDS = new Set(['cavewall', 'lunewall', 'darklunewall', 'stratadeepwall', 'crownwall', 'junctionwall', 'wetmillwall', 'spraywall']);
 const DUNGEON_WALLS = new Set(['cavewall', 'towerwall', 'silphwall', 'plantwall',
   // Premium+ W6 (TX-5): the sub-theme wall kinds cast the same strip.
   'icewall', 'iceface', 'stratwall', 'bannerwall', 'cerwall', 'panelwall',
@@ -1876,7 +1882,9 @@ const DUNGEON_WALLS = new Set(['cavewall', 'towerwall', 'silphwall', 'plantwall'
   // Wave W17-E: the Crown Road's ashlar wall casts the same strip.
   'crownwall',
   // Wave W17-F: Junction Cave's wall kind casts the same strip.
-  'junctionwall']);
+  'junctionwall',
+  // Wave W17-I: the Millstone halls' wall kinds cast the same strip.
+  'wetmillwall', 'spraywall']);
 const FLOOR_VARIANTS = {
   grass: 'grassVariants', path: 'pathVariants', cavefloor: 'caveFloorVariants',
   towerfloor: 'towerFloorVariants', silphfloor: 'silphFloorVariants', plantfloor: 'plantFloorVariants',
@@ -2636,7 +2644,7 @@ export function resolveTileLayers(cache, kind, x, y, kindAt, t, phase, mapId) {
       }
       return layers.filter(Boolean);
     }
-    case 'cavewall': case 'lunewall': case 'darklunewall': case 'stratadeepwall': case 'crownwall': case 'junctionwall': {
+    case 'cavewall': case 'lunewall': case 'darklunewall': case 'stratadeepwall': case 'crownwall': case 'junctionwall': case 'wetmillwall': case 'spraywall': {
       // Strata walls by position hash; an exposed face (floor to the
       // south) wears the stalactite face. Perfection Pass Stage 2 Gate 0
       // (G0-5, standard B3): the face is DETERMINISTIC — 100% of exposed
@@ -2654,6 +2662,10 @@ export function resolveTileLayers(cache, kind, x, y, kindAt, t, phase, mapId) {
         // its pix art carries its own hanging points in the ceremonial
         // register; only the drip overlay below is shared with the
         // generic cavewall treatment.
+        // Wave W17-I: the Millstone halls' walls keep their own faces —
+        // the Lower's drip-heavy dark bands and the Upper's spray-pale
+        // bands are drawn in each hall's own pix art; only the drip
+        // overlay below is shared with the generic cavewall treatment.
         layers.push(cache[kind]);
       }
       // W3: cave drip on exposed faces (slow cadence, phase-offset).
@@ -2668,6 +2680,7 @@ export function resolveTileLayers(cache, kind, x, y, kindAt, t, phase, mapId) {
     case 'stratafloor': case 'crackedfloor': case 'cerfloor': case 'cerpool':
     case 'lunefloor': case 'darklunefloor': case 'stratadeepfloor':
     case 'crownfloor': case 'junctionfloor':
+    case 'wetmillfloor': case 'sprayfloor':
     case 'gratefloor': case 'cablefloor': {
       const layers = [groundBase(cache, kind, x, y)];
       // A dungeon wall directly north casts the shared shadow strip.
@@ -3158,6 +3171,16 @@ export function resolveTileLayers(cache, kind, x, y, kindAt, t, phase, mapId) {
     case 'hillpine':
     case 'hillcairn':
     case 'harbourrock':
+    // Wave W17-I: the Yamato tranche-4 route trees, signature props
+    // and sea stacks composite over their ground the same way (all
+    // arts are fully opaque — each route's own ground is baked in
+    // at its measured colours; the stack rock bakes in the sea it
+    // stands in).
+    case 'stackrock':
+    case 'millpine':
+    case 'millcairn':
+    case 'craterpine':
+    case 'tollpost':
     // Wave T17: the radio mast composites over its compound grass too.
     case 'radiomast': {
       // Object tiles carry transparent surrounds (Wave 1): lay the ground
@@ -3171,7 +3194,7 @@ export function resolveTileLayers(cache, kind, x, y, kindAt, t, phase, mapId) {
         for (const d of DIRS) { const f = groundFamilyOf(nb[d]); if (f) counts[f] = (counts[f] || 0) + 1; }
         ground = ['grass', 'path', 'cavefloor', 'towerfloor', 'silphfloor', 'plantfloor',
           'lunefloor', 'darklunefloor', 'stratadeepfloor',
-          'crownfloor', 'junctionfloor',
+          'crownfloor', 'junctionfloor', 'wetmillfloor', 'sprayfloor',
           'centerfloor', 'martfloor', 'housefloor', 'gymfloor', 'labfloor']
           .filter((f) => counts[f]).sort((a, b) => counts[b] - counts[a])[0] || 'grass';
       }

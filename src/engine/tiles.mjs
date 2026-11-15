@@ -2999,6 +2999,66 @@ W17H_KIND_DEFS.forEach(([kind], i) => {
 export const W17H_PROP_KINDS = W17H_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
 export const W17H_WALL_KINDS = W17H_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
 export const W17H_FLOOR_KINDS = W17H_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
+// Wave W17-I (Route Build Program, Yamato Tranche 4): the whirlpool
+// sea -> the mountain road -> the falls halls -> the crater gate —
+// Route 41, Route 42, Mt. Millstone Lower + Upper Halls and Route
+// 43, each its own kit under the NO-SAME-KIT law. All five are
+// defined once in maps6.mjs (no dual copies in Yamato, so no
+// registry re-pins arise). Route 41 "Maelstrom Sea" (idx
+// 1223-1224 — a surf lane whose land table is EMPTY as shipped:
+// only its 10 islet-top grassground cells and 21 rock cells
+// convert; the rock conversion is gated on the trigger census —
+// r41's encounter config has enc.cave=false and an EMPTY land
+// table, its surf branch fires only on '~' water chars, the grid
+// holds no '.' or ',' cells, and its single cavefloor warp-mouth
+// cell stays byte-identical, so no encounter trigger can move).
+// Route 42 "Millstone Road" (1225-1228) converts grassground/
+// path/tree by KIND (maps6 trees stand on both '#' and 'T' chars
+// — the W17-B lesson); its 4 cavefloor mouth cells stay
+// byte-identical. The Millstone halls convert by the cave method
+// (art layer only: cavefloor -> own floor, cavewall -> own wall;
+// the trigger census '.'/'R' is 0 -> 0 on both halls, and their
+// falls water, caveboulders and cavecrystals stay byte-identical):
+// Lower "Millstone Wet" (1229-1230, dark wet flags) and Upper
+// "Millstone Spray" (1231-1232, spray-bright, one value up — the
+// value split is the twin discipline for the halls' near-identical
+// grids, the Lunestone 1F/B1F precedent). Route 43 "Crater Gate
+// Road" (1233-1236) converts by KIND the same way; its shipped
+// rock cell and fences stay byte-identical. Ground kinds
+// deliberately do NOT end in 'floor' (the desire-path audit counts
+// '*floor' as street tier; grounds must never masquerade as
+// street); path kinds DO end in 'floor' so they register as the
+// route's path tier per route (checklist point 3). Indices
+// 1223-1236 per the program plan
+// (WAVE-W17-YAMATO-ROUTE-PROGRAM-PLAN.md): W17-F took 1168-1185,
+// W17-G 1186-1204 and W17-H takes 1205-1222 on its parallel
+// branch; 1111 and every earlier documented gap stay empty. Kind
+// names verified unclaimed against origin/main. Chars U+1E00+1223..
+export const W17I_KIND_DEFS = [
+  ['isleturf', 'floor'],
+  ['stackrock', 'wall'],
+  ['millturf', 'floor'],
+  ['millroadfloor', 'floor'],
+  ['millpine', 'wall'],
+  ['millcairn', 'prop'],
+  ['wetmillfloor', 'floor'],
+  ['wetmillwall', 'wall'],
+  ['sprayfloor', 'floor'],
+  ['spraywall', 'wall'],
+  ['craterturf', 'floor'],
+  ['tollfloor', 'floor'],
+  ['craterpine', 'wall'],
+  ['tollpost', 'prop'],
+];
+export const W17I_KIND_CHARS = {};
+W17I_KIND_DEFS.forEach(([kind], i) => {
+  const ch = String.fromCodePoint(0x1E00 + 1223 + i);
+  W17I_KIND_CHARS[kind] = ch;
+  TILE_CHARS[ch] = kind;
+});
+export const W17I_PROP_KINDS = W17I_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
+export const W17I_WALL_KINDS = W17I_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
+export const W17I_FLOOR_KINDS = W17I_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
 export const SINNOH_TOWN_GROUND_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg);
 export const SINNOH_TOWN_GROUND2_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg2);
 // TX-3: the 8 gym exteriors by town (original type-accent motifs).

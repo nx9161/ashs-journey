@@ -1,0 +1,25 @@
+# Wave W17-I (Route 43): toll post — a toll-gate post of the lake road, a stout post carrying a crossbar arm and a small square toll board, one of the pair that flank the road where the gate money is collected, on crater turf (fully opaque, ground baked in). The design names the toll gate mid-route; the sign in town names the money.
+PIX tile-prop-tollpost 16 16
+aaaoaaaaaaaaaaaa
+aaaaaaaabaaaaaaa
+aaaabaaaaaaaabaa
+abaaaabbaabaaaaa
+aaaakkkkkkkkabab
+aaaaaaakdbaoaaaa
+aaaaaaakdwwwwaaa
+aaaaaaakdwdwwbab
+aaaaaaakdwwdwaaa
+aaaaaaakdwwwwaaa
+aabaaaakdaaaaaaa
+aabaaaakdbaabaaa
+aaaaabakdabbabba
+aaaabaddddaabaaa
+aaaaaabbaabaaaaa
+bbaaaaaaaaabaaba
+PAL
+a #74a45e
+b #639450
+o #b06a3c
+w #b08d57
+d #7d5a34
+k #8a6844

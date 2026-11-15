@@ -1087,6 +1087,22 @@ export const WALKABLE = new Set(['.', ',', 'D', 'E', 'C', 'F', 'J', 'K', '1', '2
   // and W17-G takes 1186-1204 on its parallel branch; 1111 stays
   // empty.)
   ...[1205, 1206, 1209, 1210, 1213, 1214, 1217, 1218, 1221]
+    .map((i) => String.fromCodePoint(0x1E00 + i)),
+  // Wave W17-I: the Yamato tranche-4 ground/path/cave-floor chars
+  // (U+1E00+1223.., tiles.mjs W17I_KIND_DEFS) are walkable —
+  // isleturf (Route 41), millturf/millroadfloor (Route 42),
+  // wetmillfloor (Millstone Lower), sprayfloor (Millstone Upper),
+  // craterturf/tollfloor (Route 43), each swapped 1:1 from the
+  // walkable '_' ground / '.' path / 'L' cavefloor chars on its
+  // own map, so ground stays ground, path stays path and cave
+  // floor stays cave floor. The rock char (1224), tree chars
+  // (1227, 1235), prop chars (1228, 1236) and cave wall chars
+  // (1230, 1232) are NOT here: rocks/trees/props/walls were never
+  // walkable, and stackrock swaps from 'R' rock, which was never
+  // walkable. (Indices 1223-1236 per the program plan: W17-F took
+  // 1168-1185, W17-G 1186-1204 and W17-H takes 1205-1222 on its
+  // parallel branch; 1111 stays empty.)
+  ...[1223, 1225, 1226, 1229, 1231, 1233, 1234]
     .map((i) => String.fromCodePoint(0x1E00 + i))]);
 
 // Trainer definitions for the slice.

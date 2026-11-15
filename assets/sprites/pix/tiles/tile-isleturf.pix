@@ -1,0 +1,23 @@
+# Wave W17-I (Route 41): islet turf — wind-clipped turf on the Maelstrom islet tops, short salt-pale green combed flat by the spiral winds, white wind flecks lying one way (design: the Maelstrom Islands standing in the foam). Route 41’s only land ground; the lane’s water is byte-preserved entire.
+PIX isleturf 16 16
+abwaaaaabbaaaaaa
+aaabbaabaaabyaaa
+aabaaaabaaaaabaa
+aawwaaaaaaabaaab
+aabyayyabbaaaaaa
+ayabaaaaaababaaa
+abaaaaaaaaaaaaab
+baaaaaaaawabyaay
+aaaayaaaabaabaab
+aaawaaabaabaabaa
+aayyaayaaaaaaaba
+aaaaaabaaaabaaaa
+aaaabaaaabaybybb
+ababaaaaaaaaaaab
+aaayaaabbaaaaaya
+baaaaaaaaaaaaaaa
+PAL
+a #77a45c
+b #679250
+y #a9bd7d
+w #eef2dc
