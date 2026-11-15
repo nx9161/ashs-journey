@@ -191621,6 +191621,67 @@ const VENUE_ARENA_ART = {
   // Rubble — black rock, lava light, ember ambient at a heartbeat
   // density the ember base never reaches.
   'mt-mortar-2': { sky: ['#200c0c', '#2a1010', '#341414', '#3e1818', '#481c1c', '#522020'], ground: ['#2c1a14', '#26160f', '#20120a', '#1a0e06', '#140a03', '#0e0601'], dark: '#0a0302', light: '#ffc478', accent: '#ff6a1a', motif: 'flames', tex: 'spark', amb: { kind: 'ember', n: 16, speed: 18 } },
+  // T2 League & stadiums (WAVE-ARENAS-PLAN §3/§4): six of the
+  // tranche's eleven — the five Borea chamber maps came OUT on
+  // build-time proof (see below). Every entry layers over Open, the
+  // plainest Ground in the game; rules frozen, art only. Battle-
+  // hosting is proven per venue from the game's own data in the
+  // tranche SPEC (~/workspace/your_files/arenas-t2-league/SPEC.md):
+  // trainer posts, map battle events, story-post handlers and quest
+  // records — a map-data-only census misses the story posts, which
+  // is how the lobby and Silver Stadium read as unproven in the plan.
+  // The League (Arden) — the single-map gauntlet: five trainer posts
+  // (ISOLDE, GORAN, ODESSA, DARIAN, CHAMPION) and five battle events
+  // (ev_e4_1..4, ev_champion) stand in this one hall. Recorded
+  // identity is the name + the gauntlet role (plan flag: no region
+  // epithet exists) — full-league ceremonial over Open: torchlit
+  // plum gloom, ceremonial standards on the horizon, league gold.
+  'league': { sky: ['#2a1626', '#381c2c', '#462232', '#542838', '#623040', '#703844'], ground: ['#8a6a48', '#7f6242', '#74603c', '#695a36', '#5e5230', '#53482a'], dark: '#241418', light: '#ffe9b8', accent: '#e8b820', motif: 'steel', tex: 'fleck', amb: { kind: 'mote', n: 12, speed: 3 } },
+  // Perennial League (Maris) — the Perennial Conference floor:
+  // MORRISON and TYSON battle here (startHoennBattle handlers; the
+  // Tyson final sets hoenn_complete), after the registrar's bracket
+  // prelims. "Perennial League" is the map's recorded name and
+  // Perennial is Maris's flower town — everblooming register over
+  // Open: dawn-cream sky, deep perennial green, petals that never
+  // finish falling.
+  'league-evergrande': { sky: ['#c8a8a0', '#d4b4a4', '#e0c0a8', '#eacbb0', '#f2d6ba', '#f8e2c6'], ground: ['#4a7a44', '#437040', '#3c663c', '#356038', '#2c5432', '#23482c'], dark: '#1e3a24', light: '#fff4d0', accent: '#e85d8a', motif: 'flowers', tex: 'petal', haze: true, amb: { kind: 'petal', n: 14, speed: 6 } },
+  // The League (Borea) — the summit hall's own ground: wild Kin
+  // battle here (the map carries an encounter table, rate 0.09) on
+  // the road the porter keeps — "THE LEAGUE — Borea's summit hall.
+  // Four chambers, one champion, and the whole road behind you."
+  // Summit register over Open: thin cold air, snow-dusted stone,
+  // a beacon-amber accent, sparse wind-blown snow.
+  'pokemon-league': { sky: ['#5a7086', '#68809a', '#7690a8', '#84a0b6', '#94b0c4', '#a4c0d2'], ground: ['#9aa4a8', '#8f999d', '#848e92', '#798387', '#6e787c', '#636d71'], dark: '#3a464c', light: '#f4fbff', accent: '#f0a03c', motif: 'rocks', tex: 'spark', amb: { kind: 'snow', n: 8, speed: 10 } },
+  // League Lobby (Borea) — "The last quiet room" (its own sign):
+  // the Conference floor, where STELLAN's quarter-final and
+  // CASSIAN's semi-final actually start (SINNOH_NPCS posts +
+  // startSinnohBattle handlers; the semi-final sets
+  // sinnoh_complete). The lobby's recorded word is the bracket —
+  // "The bracket is honest here" — so: lamplit parchment, deep
+  // quiet carpet, brass bracket-glyphs on the horizon, the hushed
+  // dust of the last quiet room.
+  'league-lobby': { sky: ['#8a6a4e', '#96754f', '#a28052', '#ae8d58', '#ba9a62', '#c6a76e'], ground: ['#5c3040', '#54303e', '#4c2c38', '#442832', '#3c242e', '#341f28'], dark: '#241219', light: '#ffedc4', accent: '#d8a03c', motif: 'runes', tex: 'fleck', amb: { kind: 'mote', n: 8, speed: 2 } },
+  // Grapefruit Stadium (Amber) — the Amber league final's stage:
+  // BARROW's trainer post stands on this pitch (the map's Orange
+  // final). Citrus-festival register over Open: lime-and-gold
+  // morning, festival turf, a citrus grove ring, blossom drifting.
+  'pummelo-stadium': { sky: ['#7ab648', '#88c252', '#96cc5e', '#a4d66c', '#b2e07a', '#c0ea88'], ground: ['#5d9c3f', '#549237', '#4b882f', '#427e27', '#397420', '#306a19'], dark: '#2c5a1e', light: '#fdfcd0', accent: '#f8862a', motif: 'trees', tex: 'tuft', haze: true, amb: { kind: 'petal', n: 10, speed: 5 } },
+  // Lastlight Stadium (Yamato) — the Lastlight Conference floor:
+  // VALE and HARRISON battle here (JOHTO_NPCS posts + johto-actors
+  // handlers; quests q_johto_gary / q_johto_harrison stand on this
+  // map, and the Harrison match ends the Conference). Silver-
+  // lastlight register over Open: mauve dusk going silver, silvered
+  // turf, slow dusk motes.
+  'silver-stadium': { sky: ['#4a4460', '#584f6c', '#665a78', '#746584', '#827090', '#907b9c'], ground: ['#7a8a76', '#707f6c', '#667462', '#5c6958', '#525e4e', '#484f44'], dark: '#2e3440', light: '#f2f4ff', accent: '#c8d4e8', motif: 'trees', tex: 'fleck', amb: { kind: 'mote', n: 10, speed: 3 } },
+  // OUT on build-time proof (T2): league-chamber-1..4 and
+  // league-champion host NO battle in the shipped game — no trainer
+  // post, no map event, no story post, no system handler, no
+  // encounter table; each chamber's own sign defers its keeper to
+  // "the League's season", and Borea's campaign completes at the
+  // Conference in the lobby above (q_sinnoh_tobias ->
+  // sinnoh_complete). They stay in the guard's census UNCOVERED;
+  // whether the census pin itself drops 53 -> 48 is the Director's
+  // call at merge, flagged in the tranche SPEC — not adjusted here.
 };
 
 // The one arena-override seam (Gym Identity T0's gymArenaFor,
@@ -206498,6 +206559,6 @@ if (typeof Game !== 'undefined') Object.assign(Game.prototype, {
 });
 
 </script>
-<!-- contentHash:4baf1afcaa6697f85f83153d71e51ea10f5138603a62d1a738a85dc2cfdce5be -->
+<!-- contentHash:0970284e70c94bcb93104ac0041183a27bedf94d8aa62a4b835332b84cfa5086 -->
 </body>
 </html>
