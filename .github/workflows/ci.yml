@@ -4,7 +4,14 @@ jobs:
   build-verify:
     runs-on: ubuntu-latest
     steps:
+      # fetch-depth: 0 — the secret scan below resolves the pushed commit
+      # RANGE (before..after); with the default shallow checkout (depth 1)
+      # the range's parent commit is absent and git log fails fatally
+      # ("unknown revision"), which failed this job on every merge push
+      # even when the scan itself found nothing (legacy-ci repair).
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
       - uses: actions/setup-node@v4
         with:
           node-version: 24
@@ -76,6 +83,74 @@ jobs:
         # coverage is reported, never chased artificially.
         run: env -u DATABASE_URL node --experimental-test-coverage --test tools/api-scripts/validator.test.mjs tools/api-scripts/validator.fuzz.test.mjs tools/api-scripts/config.test.mjs tools/api-scripts/http-ip.test.mjs tools/api-scripts/save-contract.test.mjs tools/api-scripts/failclosed.test.mjs
       - name: secret scan
-        uses: gitleaks/gitleaks-action@v2
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        # Repaired (legacy-ci repair, 2026-11-15). Was gitleaks-action@v2,
+        # which failed this job on EVERY push, two ways:
+        #  (1) on range pushes (merges) its git log range could not resolve
+        #      in the shallow checkout — fixed by fetch-depth: 0 above;
+        #  (2) when the scan did run, it reported the same 9 verified false
+        #      positives in the tip commit and exited 2. The action accepts
+        #      no allowlist config, so the scan now runs the pinned gitleaks
+        #      binary directly with the repo .gitleaks.toml EXTENDED by an
+        #      allowlist that covers only those verified classes:
+        #      generated bundles + audit-register prose (by path), the
+        #      name-entry charset literal (by exact secret), and the
+        #      DATABASE_URL / BETTER_AUTH_SECRET test fixtures in
+        #      tests/run.mjs + tools/api-scripts/*.test.mjs (path AND name).
+        #      Verified locally with this exact gitleaks version: the tree
+        #      scans clean and planted fake secrets (github-pat, a real-shaped
+        #      DATABASE_URL in src/, a generic api key) are still caught.
+        run: |
+          GL_VERSION=8.24.3
+          GL_SHA256=9991e0b2903da4c8f6122b5c3186448b927a5da4deef1fe45271c3793f4ee29c
+          curl -sL -o "$RUNNER_TEMP/gitleaks.tar.gz" \
+            "https://github.com/gitleaks/gitleaks/releases/download/v${GL_VERSION}/gitleaks_${GL_VERSION}_linux_x64.tar.gz"
+          echo "$GL_SHA256  $RUNNER_TEMP/gitleaks.tar.gz" | sha256sum -c -
+          tar --no-same-owner -xzf "$RUNNER_TEMP/gitleaks.tar.gz" -C "$RUNNER_TEMP" gitleaks
+          cat > "$RUNNER_TEMP/gitleaks.toml" <<EOF
+          [extend]
+          path = "$GITHUB_WORKSPACE/.gitleaks.toml"
+
+          [allowlist]
+          description = "Verified false positives: generated bundles + audit-register prose by path; the name-entry charset literal by exact secret."
+          paths = [
+            '''^dist/standalone\.html$''',
+            '''^personal/game\.js$''',
+            '''^docs/audit-register\.md$''',
+          ]
+          regexes = [
+            '''^ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789$''',
+          ]
+          EOF
+          # The house rule is copied verbatim from the repo config at run
+          # time (no second copy to drift); the stanza appended after it is
+          # its allowlist for the verified test-fixture assignments.
+          sed -n '/^\[\[rules\]\]/,$p' .gitleaks.toml >> "$RUNNER_TEMP/gitleaks.toml"
+          cat >> "$RUNNER_TEMP/gitleaks.toml" <<'EOF'
+          [rules.allowlist]
+          condition = "AND"
+          paths = [
+            '''^tests/run\.mjs$''',
+            '''^tools/api-scripts/.*\.test\.mjs$''',
+          ]
+          regexes = [
+            '''(?i)^(database_url|better_auth_secret)$''',
+          ]
+          EOF
+          if [ "$GITHUB_EVENT_NAME" = "pull_request" ]; then
+            LOG_OPTS="--no-merges ${{ github.event.pull_request.base.sha }}..${{ github.event.pull_request.head.sha }}"
+          elif [ "${{ github.event.before }}" != "0000000000000000000000000000000000000000" ] && git cat-file -e "${{ github.event.before }}" 2>/dev/null; then
+            LOG_OPTS="--no-merges --first-parent ${{ github.event.before }}..${{ github.sha }}"
+          else
+            LOG_OPTS="-1"
+          fi
+          echo "gitleaks range: $LOG_OPTS"
+          "$RUNNER_TEMP/gitleaks" detect --redact -v --exit-code=2 \
+            --report-format=sarif --report-path=results.sarif \
+            --config "$RUNNER_TEMP/gitleaks.toml" --log-opts="$LOG_OPTS"
+      - name: secret scan report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: gitleaks-results.sarif
+          path: results.sarif
+          if-no-files-found: ignore
