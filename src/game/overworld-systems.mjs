@@ -4125,7 +4125,7 @@ Object.assign(OverworldScene.prototype, {
       spe: statValue(to.base.spe, mon.level, ivs.spe),
     };
     dexRegister(g.state.dex, 'caught', to.dexNo);
-    g.audio.playSfx('levelup');
+    g.audio.playSfx('evolution-fanfare'); // W12-T4: evolution has its own sting (levelup keeps the level-up moment)
     g.ui.say(['What? ' + fromName + ' is evolving!', fromName + ' evolved into ' + to.name + '!'], onDone || undefined);
     return true;
   },

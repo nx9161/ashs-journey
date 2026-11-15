@@ -181,7 +181,7 @@ export class ContestScene extends BattleScene {
     this.recallFx = null; this.catchFx = null; this.breakFx = null; this.fxSeq = null;
     this.trauma = 0; this.shakeT = 0; this.flashT = 0; this.fadeT = 0;
     this.xpFlashT = 0; this._lowHpPulseT = 0;
-    g.audio.playMusic('battle-trainer-theme', { area: false });
+    g.audio.playMusic('contest-theme', { area: false }); // W12-T4: contests have their own theme (no longer borrowed from trainer battles)
     const hallName = (this.returnTo && this.returnTo.map && this.returnTo.map.name) || 'Contest Hall';
     const field = this.contest.entrants.map((e) => e.name + ' & ' + displayName(e.mon, SPECIES)).join(', ');
     g.ui.say([

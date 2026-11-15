@@ -126,7 +126,7 @@ export const MAPS4 = {
   // the goods counter — Fernmere fields its SHOPKEEPER tale actor
   // instead (data/quests.mjs). Mart base npcs are therefore empty.
   mart: {
-    id: 'mart', name: 'Mart', music: 'viridian-theme', indoor: true,
+    id: 'mart', name: 'Mart', music: 'mart-theme', indoor: true,
     rows: [
       'Ṛṟ;;;;;;;;;;',
       ';ιιιḌ$$$$κκ;',

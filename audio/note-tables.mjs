@@ -100,7 +100,7 @@ export const MUSIC = {
   },
 
   'route1-theme': {
-    id: 'route1-theme', title: 'Road Out of Pallet (route, original)', bpm: 132, loop: true,
+    id: 'route1-theme', title: 'Road Out of Dawnwick (route, original)', bpm: 132, loop: true,
     tracks: [
       { wave: 'pulse', duty: 0.5, vol: 0.45, notes: [
         [0,'D5',0.5],[0.5,'F#5',0.5],[1,'A5',0.5],[1.5,'D6',0.5],[2,'B5',1],[3,'A5',0.5],[3.5,'G5',0.5],
@@ -117,7 +117,7 @@ export const MUSIC = {
   },
 
   'pallet-theme': {
-    id: 'pallet-theme', title: 'Hometown Morning (Pallet, original)', bpm: 96, loop: true,
+    id: 'pallet-theme', title: 'Hometown Morning (Dawnwick, original)', bpm: 96, loop: true,
     tracks: [
       { wave: 'pulse', duty: 0.5, vol: 0.4, notes: [
         [0,'G4',1],[1,'A4',1],[2,'B4',1],[3,'C5',2],[5,'B4',1],
@@ -134,7 +134,7 @@ export const MUSIC = {
   },
 
   'viridian-theme': {
-    id: 'viridian-theme', title: 'Crossroads City (Viridian, original)', bpm: 120, loop: true,
+    id: 'viridian-theme', title: 'Crossroads City (Fernmere, original)', bpm: 120, loop: true,
     tracks: [
       { wave: 'pulse', duty: 0.25, vol: 0.45, notes: [
         [0,'E5',0.5],[0.5,'G5',0.5],[1,'A5',1],[2,'G5',0.5],[2.5,'E5',0.5],[3,'D5',1],
@@ -168,7 +168,7 @@ export const MUSIC = {
   },
 
   'pewter-theme': {
-    id: 'pewter-theme', title: 'Stone & Slate (Pewter, original)', bpm: 104, loop: true,
+    id: 'pewter-theme', title: 'Stone & Slate (Flintridge, original)', bpm: 104, loop: true,
     tracks: [
       { wave: 'pulse', duty: 0.5, vol: 0.45, notes: [
         [0,'E5',1],[1,'G5',1],[2,'A5',1],[3,'B5',1],[4,'C6',2],[6,'B5',1],[7,'A5',1],
@@ -198,6 +198,80 @@ export const MUSIC = {
       ]},
       { wave: 'noise', vol: 0.4, notes:
         KICKS([0,4,8,12]).concat([[4,null,0.25],[12,null,0.25]]).concat(HATS(0,16,0.5,0.125)) },
+    ],
+  },
+
+  // ---- W12-T4 ceremony loops: one theme per ceremony (leader / legendary /
+  // contest / the shared Mart). Original melodies, each with its own interval
+  // fingerprint (verify-audio [9]); wiring pinned by verify-audio [8]. ----
+  'battle-leader-theme': {
+    id: 'battle-leader-theme', title: "The Leader's Standard (leader battle, original)", bpm: 172, loop: true,
+    tracks: [
+      { wave: 'pulse', duty: 0.25, vol: 0.5, notes: [
+        [0,'D5',0.75],[0.75,'F5',0.25],[1,'A5',0.5],[1.5,'D6',0.5],[2,'C6',0.75],[2.75,'A5',0.25],[3,'F5',0.5],[3.5,'E5',0.5],
+        [4,'F5',0.75],[4.75,'A5',0.25],[5,'D6',0.5],[5.5,'C6',0.5],[6,'Bb5',0.5],[6.5,'A5',0.5],[7,'G5',0.5],[7.5,'F5',0.5],
+        [8,'E5',0.75],[8.75,'F5',0.25],[9,'G5',0.5],[9.5,'A5',0.5],[10,'Bb5',1],[11,'A5',0.5],[11.5,'G5',0.5],
+        [12,'A5',0.75],[12.75,'C6',0.25],[13,'F6',0.5],[13.5,'E6',0.5],[14,'D6',2],
+      ]},
+      { wave: 'pulse', duty: 0.5, vol: 0.18, notes: [
+        [0,'D4',1],[1,'F4',1],[2,'A4',1],[3,'F4',1],[4,'Bb3',1],[5,'D4',1],[6,'F4',1],[7,'A4',1],
+        [8,'C4',1],[9,'E4',1],[10,'G4',1],[11,'E4',1],[12,'F4',1],[13,'A4',1],[14,'D4',2],
+      ]},
+      { wave: 'triangle', vol: 0.58, notes:
+        PUMP(0,4,'D2','D3').concat(PUMP(4,8,'Bb1','Bb2')).concat(PUMP(8,12,'C2','C3')).concat(PUMP(12,16,'A1','A2')) },
+      { wave: 'noise', vol: 0.3, notes: KICKS([0,2,4,6,8,10,12,14]).concat(HATS(0,16,0.5,0.125)) },
+    ],
+  },
+
+  'battle-legendary-theme': {
+    id: 'battle-legendary-theme', title: 'Presence of the Sovereign (legendary battle, original)', bpm: 120, loop: true,
+    tracks: [
+      { wave: 'pulse', duty: 0.5, vol: 0.46, notes: [
+        [0,'A4',2],[2,'E5',2],[4,'C6',3],[7,'B5',1],[8,'A5',2],[10,'G5',1],[11,'E5',1],[12,'F5',2],[14,'E5',2],
+      ]},
+      { wave: 'pulse', duty: 0.125, vol: 0.2, notes: [
+        [4,'E5',1],[5,'C5',1],[6,'D5',2],[12,'A4',2],[14,'B4',2],
+      ]},
+      { wave: 'triangle', vol: 0.6, notes: [
+        [0,'A2',4],[4,'F2',4],[8,'C3',4],[12,'E2',4],
+      ]},
+      { wave: 'noise', vol: 0.22, notes: KICKS([0,4,8,12]) },
+    ],
+  },
+
+  'contest-theme': {
+    id: 'contest-theme', title: 'Appeal in Bloom (contest, original)', bpm: 138, loop: true,
+    tracks: [
+      { wave: 'pulse', duty: 0.125, vol: 0.44, notes: [
+        [0,'E5',0.5],[0.5,'G5',0.5],[1,'C6',1],[2,'B5',0.5],[2.5,'G5',0.5],[3,'A5',1],
+        [4,'G5',0.5],[4.5,'E5',0.5],[5,'F5',0.5],[5.5,'A5',0.5],[6,'G5',1],[7,'E5',1],
+        [8,'F5',0.5],[8.5,'A5',0.5],[9,'D6',1],[10,'C6',0.5],[10.5,'A5',0.5],[11,'G5',1],
+        [12,'A5',0.5],[12.5,'F5',0.5],[13,'E5',0.5],[13.5,'G5',0.5],[14,'C6',2],
+      ]},
+      { wave: 'pulse', duty: 0.5, vol: 0.16, notes: [
+        [0,'E4',2],[2,'G4',2],[4,'A4',2],[6,'G4',2],[8,'F4',2],[10,'A4',2],[12,'G4',2],[14,'E4',2],
+      ]},
+      { wave: 'triangle', vol: 0.55, notes: [
+        [0,'C2',1],[1,'G2',1],[2,'C2',1],[3,'G2',1],[4,'F2',1],[5,'C3',1],[6,'G2',1],[7,'B2',1],
+        [8,'F2',1],[9,'C3',1],[10,'D2',1],[11,'A2',1],[12,'F2',1],[13,'C3',1],[14,'G2',2],
+      ]},
+      { wave: 'noise', vol: 0.12, notes: HATS(0, 16, 1, 0.125) },
+    ],
+  },
+
+  'mart-theme': {
+    id: 'mart-theme', title: 'Open All Hours (Mart, original)', bpm: 100, loop: true,
+    tracks: [
+      { wave: 'pulse', duty: 0.5, vol: 0.32, notes: [
+        [0,'A4',1],[1,'C5',1],[2,'F5',1.5],[3.5,'E5',0.5],[4,'D5',1],[5,'C5',1],[6,'A4',2],
+        [8,'Bb4',1],[9,'D5',1],[10,'C5',1.5],[11.5,'A4',0.5],[12,'G4',1],[13,'A4',1],[14,'F4',2],
+      ]},
+      { wave: 'pulse', duty: 0.125, vol: 0.15, notes: [
+        [0,'F4',2],[2,'A4',2],[4,'Bb3',2],[6,'A3',2],[8,'G3',2],[10,'A3',2],[12,'C4',2],[14,'F3',2],
+      ]},
+      { wave: 'triangle', vol: 0.5, notes: [
+        [0,'F2',2],[2,'C3',2],[4,'Bb1',2],[6,'C2',2],[8,'D2',2],[10,'C2',2],[12,'Bb1',2],[14,'F2',2],
+      ]},
     ],
   },
 
@@ -449,6 +523,9 @@ export const SFXSET = {
   'victory':  { id:'victory',  wave:'pulse', duty:0.125, vol:0.5, env:[0.003,0.2], notes:[[0,'G5',1],[1,'C6',1],[2,'E6',1],[3,'G6',2]] },
   'fanfare':  { id:'fanfare',  wave:'pulse', duty:0.125, vol:0.55, env:[0.003,0.25], notes:[[0,'C5',1.5],[1.5,'E5',1.5],[3,'G5',1.5],[4.5,'C6',2],[6.5,'G5',1],[7.5,'C6',3]] },
   'levelup':  { id:'levelup',  wave:'pulse', duty:0.25, vol:0.5, env:[0.003,0.2], notes:[[0,'C5',1],[1,'E5',1],[2,'G5',1],[3,'C6',2],[5,'E6',2],[7,'G6',3]] },
+  // W12-T4: the evolution ceremony's own sting (replaces the levelup reuse
+  // at evolveMon only; levelup keeps the level-up moment).
+  'evolution-fanfare': { id:'evolution-fanfare', wave:'pulse', duty:0.125, vol:0.5, env:[0.004,0.5], notes:[[0,'E5',1],[1,'G5',1],[2,'C6',1],[3,'E6',1],[4,'G6',2],[6,'C7',3]] },
   'badge':    { id:'badge',    wave:'pulse', duty:0.125, vol:0.55, env:[0.003,0.3], notes:[[0,'G4',1],[1,'C5',1],[2,'E5',1],[3,'G5',1],[4,'C6',2],[6,'E6',1],[7,'G6',3]] },
   'heal':     { id:'heal',     wave:'triangle', vol:0.5, env:[0.01,0.3], notes:[[0,'G4',1.5],[1.5,'C5',1.5],[3,'E5',1.5],[4.5,'G5',3]] },
   'save-confirm': { id:'save-confirm', wave:'pulse', duty:0.5, vol:0.4, env:[0.002,0.12], notes:[[0,'C5',1],[1,'G5',2]] },
@@ -604,8 +681,6 @@ export const TRACKLIST = {
   cries: Object.keys(CRIES),
 };
 
-// Scene → music map (mirrors src/data/maps.mjs `music` fields; build-validated there).
-export const AREA_MUSIC = {
-  pallet: 'pallet-theme', route1: 'route1-theme', viridian: 'viridian-theme',
-  center: 'center-theme', route2: 'route1-theme', pewter: 'pewter-theme', gym: 'gym-theme',
-};
+// W12-T4: the stale AREA_MUSIC slice mirror was deleted — it described the
+// 7-map Wave-1 world, not the 432-map one. The map `music` fields are the
+// single source of truth; verify-audio [8] reads them directly.

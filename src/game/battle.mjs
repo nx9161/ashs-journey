@@ -296,7 +296,15 @@ export class BattleScene {
     }
     this.t = 0;
     this.msg = '';
-    g.audio.playMusic(this.kind === 'trainer' ? 'battle-trainer-theme' : 'battle-wild-theme', { area: false });
+    // W12-T4 ceremony themes: the entryVariant the constructor already
+    // computed picks the battle's music class — boss-class trainers
+    // (badge holders + boss ids) get the leader theme, legendary/uncatchable
+    // presences get the legendary theme; ordinary trainer and wild battles
+    // keep their themes (verify-audio [8] pins this selection).
+    const battleTheme = this.entryVariant === 'boss' ? 'battle-leader-theme'
+      : this.entryVariant === 'legendary' ? 'battle-legendary-theme'
+      : this.kind === 'trainer' ? 'battle-trainer-theme' : 'battle-wild-theme';
+    g.audio.playMusic(battleTheme, { area: false });
     if (this.kind === 'trainer') {
       const t0 = this.trainer.team[0];
       // ADR-025 §4: difficulty levers land at instantiation — trainer team

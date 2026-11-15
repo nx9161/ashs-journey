@@ -10,6 +10,10 @@
 // engine's own resolution path; pairwise-distinct over independent
 // identities; authored precedence + partner alias pinned) and [11] the
 // 55,000 B audio byte budget.
+// W12-T4 added [8c] ceremony assignments (leader/legendary/contest/mart
+// themes + the evolution sting, call-site pinned + headlessly scheduled)
+// and deleted the stale AREA_MUSIC slice mirror from the note tables
+// (the map `music` fields are the single source of truth; [8] reads them).
 // Exit 0 = all pass. Run: node scripts/verify-audio.mjs
 
 import { execFileSync } from 'node:child_process';
@@ -27,7 +31,7 @@ for (const f of ['audio/note-tables.mjs', 'src/engine/audio.mjs']) {
   catch (e) { bad(f, 'node --check failed'); }
 }
 
-const { MUSIC, SFXSET, CRIES, TRACKLIST, AREA_MUSIC } = await import(path.join(ROOT, 'audio', 'note-tables.mjs'));
+const { MUSIC, SFXSET, CRIES, TRACKLIST } = await import(path.join(ROOT, 'audio', 'note-tables.mjs'));
 const { MAPS } = await import(path.join(ROOT, 'src', 'data', 'maps.mjs'));
 const engine = await import(path.join(ROOT, 'src', 'engine', 'audio.mjs'));
 
@@ -102,10 +106,6 @@ if (!failures) ok('loop lengths sane (1s..60s)');
 console.log('[4] map music cross-refs');
 for (const [id, m] of Object.entries(MAPS)) {
   if (m.music && !MUSIC[m.music]) bad('map:' + id, 'music id ' + m.music + ' not in score');
-}
-for (const [map, track] of Object.entries(AREA_MUSIC)) {
-  if (!MAPS[map]) bad('area-music:' + map, 'unknown map');
-  if (!MUSIC[track]) bad('area-music:' + map, 'unknown track ' + track);
 }
 if (!failures) ok('every map.music resolves to a composed track');
 
@@ -345,9 +345,10 @@ const REGION_CHARTER = {
   borea: ['borea-town-theme', 'borea-route-theme'], // W12-T3: burn-down closed
 };
 // Service themes follow the shared service, not the region (the law's own
-// code-fact exception): one gym system (Ruling 2), one Center map, the
-// title/front-door map.
-const SERVICE_THEMES = ['gym-theme', 'center-theme', 'title-theme'];
+// code-fact exception): one gym system (Ruling 2), one Center map, one Mart
+// map (W12-T4: the shared Mart has its own service theme), the title/front-
+// door map.
+const SERVICE_THEMES = ['gym-theme', 'center-theme', 'mart-theme', 'title-theme'];
 // Declared inheritance exceptions: vermilion (Arcport) is defined in the
 // Arden files; the maps5/maps6 entries are spread overrides that replace
 // npcs/events only, so its music is inherited from the Arden definition.
@@ -384,6 +385,81 @@ const MUSIC_REGION_OVERRIDE = { vermilion: 'arden' };
   let danglingThemes = 0;
   for (const [t, rel] of themeLits) if (!MUSIC[t]) { danglingThemes++; bad('context-theme:' + t, 'named in ' + rel + ' but not in MUSIC'); }
   if (!danglingThemes) ok('all ' + themeLits.size + ' code-selected theme ids resolve in MUSIC (' + [...themeLits.keys()].sort().join(', ') + ')');
+}
+
+console.log('[8c] ceremony assignments: leader / legendary / contest / mart / evolution (W12-T4)');
+// The ceremony charter, as data: each ceremony owns exactly one theme,
+// wired at exactly one call site. Battle selection rides the entryVariant
+// the BattleScene constructor already computes (boss = badge holders +
+// BOSS_TRAINER_IDS; legendary = legendary species + uncatchable presences).
+// Pinned three ways: the tables exist, the call sites name them (and the
+// neighbours keep theirs), and the engine schedules them headlessly.
+const CEREMONY_THEMES = {
+  leader: 'battle-leader-theme', legendary: 'battle-legendary-theme',
+  contest: 'contest-theme', mart: 'mart-theme',
+};
+const EVOLUTION_STING = 'evolution-fanfare';
+{
+  const f8c = failures;
+  for (const [ceremony, theme] of Object.entries(CEREMONY_THEMES)) {
+    if (!MUSIC[theme]) bad('ceremony:' + ceremony, theme + ' not in MUSIC');
+  }
+  if (!SFXSET[EVOLUTION_STING]) bad('ceremony:evolution', EVOLUTION_STING + ' not in SFXSET');
+  if (failures === f8c) ok('ceremony tables exist: leader/legendary/contest/mart themes + evolution sting');
+
+  const battleText = fs.readFileSync(path.join(ROOT, 'src', 'game', 'battle.mjs'), 'utf8');
+  const sel = battleText.match(/const battleTheme = [\s\S]*?;\n/);
+  if (!sel) bad('ceremony:battle-select', 'no battleTheme selection found in battle.mjs');
+  else {
+    const s = sel[0];
+    if (!s.includes("this.entryVariant === 'boss' ? 'battle-leader-theme'")) bad('ceremony:leader', 'boss entryVariant does not select battle-leader-theme');
+    if (!s.includes("this.entryVariant === 'legendary' ? 'battle-legendary-theme'")) bad('ceremony:legendary', 'legendary entryVariant does not select battle-legendary-theme');
+    if (!s.includes("'battle-trainer-theme'") || !s.includes("'battle-wild-theme'")) bad('ceremony:battle-base', 'ordinary trainer/wild themes dropped from the selection');
+    if (!battleText.includes('playMusic(battleTheme')) bad('ceremony:battle-play', 'battle.mjs does not play the selected battleTheme');
+    if (failures === f8c) ok('battle selection: boss → leader theme, legendary → legendary theme, trainer/wild keep theirs');
+  }
+  if (!battleText.includes("playSfx('levelup')")) bad('ceremony:levelup-neighbour', 'battle level-up lost its levelup fanfare');
+  else ok('neighbour pin: battle level-ups still play levelup (the sting is evolution-only)');
+
+  const contestText = fs.readFileSync(path.join(ROOT, 'src', 'game', 'contest.mjs'), 'utf8');
+  if (!contestText.includes("playMusic('contest-theme'")) bad('ceremony:contest', 'contest.mjs does not play contest-theme');
+  if (contestText.includes('battle-trainer-theme')) bad('ceremony:contest', 'contest.mjs still borrows battle-trainer-theme');
+  if (failures === f8c) ok('contest: plays contest-theme, no longer borrows the trainer theme');
+
+  // The shared Mart is ONE map; exactly one merged map may carry its theme.
+  let martMaps = 0;
+  for (let i = 0; i < MAP_FILES.length; i++) {
+    const mod = await import(path.join(ROOT, 'src', 'data', MAP_FILES[i]));
+    for (const m of Object.values(mod[MAP_EXPORTS[i]])) if (m.music === 'mart-theme') martMaps++;
+  }
+  const { MAPS4 } = await import(path.join(ROOT, 'src', 'data', 'maps4.mjs'));
+  if (!MAPS4.mart || MAPS4.mart.music !== 'mart-theme') bad('ceremony:mart', 'the shared mart map does not play mart-theme');
+  if (martMaps !== 1) bad('ceremony:mart', martMaps + ' merged maps play mart-theme (expected exactly the 1 shared Mart)');
+  if (failures === f8c) ok('mart: the one shared Mart map — and only it — plays mart-theme');
+
+  const owText = fs.readFileSync(path.join(ROOT, 'src', 'game', 'overworld-systems.mjs'), 'utf8');
+  const evoStart = owText.indexOf('evolveMon(mon');
+  const evoSpan = evoStart === -1 ? '' : owText.slice(evoStart, owText.indexOf('\n  },', evoStart));
+  if (!evoSpan.includes("playSfx('evolution-fanfare')")) bad('ceremony:evolution', 'evolveMon does not play the evolution sting');
+  if (evoSpan.includes("playSfx('levelup')")) bad('ceremony:evolution', 'evolveMon still reuses levelup');
+  if (failures === f8c) ok('evolution: evolveMon plays evolution-fanfare, levelup reuse retired at that moment only');
+
+  // Headless scheduling proof (the [5]/[7] harness): every ceremony theme
+  // actually schedules its full loop through the engine, and the sting
+  // schedules all its notes.
+  for (const theme of Object.values(CEREMONY_THEMES)) {
+    EVENTS.length = 0; B._live = []; // voices ended (fake clock is frozen — the [7] reset idiom)
+    B.playMusic(theme);
+    const want = MUSIC[theme].tracks.reduce((n, tr) => n + tr.notes.length, 0);
+    if (B._musicId !== theme || EVENTS.length !== want) bad('ceremony-sched:' + theme, 'scheduled ' + EVENTS.length + ' events, want ' + want);
+    else ok('playMusic(\'' + theme + '\') schedules all ' + want + ' notes headlessly');
+  }
+  B.stopMusic();
+  EVENTS.length = 0; A._live = [];
+  A.playSfx(EVOLUTION_STING);
+  const stingWant = SFXSET[EVOLUTION_STING].notes.length;
+  if (EVENTS.length !== stingWant) bad('ceremony-sched:evolution', 'sting scheduled ' + EVENTS.length + ' events != ' + stingWant + ' notes');
+  else ok('playSfx(\'evolution-fanfare\') schedules all ' + stingWant + ' notes');
 }
 
 console.log('[9] loop distinctness: lead-melody interval fingerprints (W12)');

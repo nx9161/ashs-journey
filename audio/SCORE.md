@@ -1,5 +1,5 @@
-# Ash's Journey — Original Score & Sound Design
-**Seat 24 (Voice Designer, Black Bolt) · Phase 4 Wave 2 · 2026-10-15**
+# Kian's Journey — Original Score & Sound Design
+**Seat 24 (Voice Designer, Black Bolt) · Phase 4 Wave 2 · 2026-10-15; W12 audio-identity refresh · 2026-11-15**
 
 All music and SFX are **100% original compositions** written for this
 project — no sampled audio, no audio files (the zero-audio-file rule is
@@ -13,25 +13,45 @@ duty-cycle pulse timbres via PeriodicWave, `[attack, decay]` envelopes on
 SFX. Music starts only after the first user gesture (autoplay policy);
 everything is a safe no-op when AudioContext is unavailable.
 
-## Track list — music (9 loops)
+## Track list — music (23 loops)
+
+The W12 charter: every region owns a town+route pair; Arden keeps its four
+authored loops as its identity; the shared services (gym system, Center,
+Mart) and the ceremonies (leader / legendary / contest) each own one theme;
+the title and wild-battle themes stay global by design.
 
 | Track | Title | Use | BPM |
 |---|---|---|---|
 | `title-theme` | First Light | Title screen | 112 |
 | `battle-wild-theme` | Tall Grass Gambit | Wild battles | 152 |
 | `battle-trainer-theme` | Challenger's Measure | Trainer battles | 164 |
-| `route1-theme` | Road Out of Pallet | Route 1, Route 2 | 132 |
-| `pallet-theme` | Hometown Morning | Pallet Town (waltz) | 96 |
-| `viridian-theme` | Crossroads City | Viridian City | 120 |
-| `center-theme` | Healing Light | Pokémon Center (soft) | 88 |
-| `pewter-theme` | Stone & Slate | Pewter City (march) | 104 |
-| `gym-theme` | House of Badges | Pewter Gym | 144 |
+| `battle-leader-theme` | The Leader's Standard | Leader / boss battles (W12-T4) | 172 |
+| `battle-legendary-theme` | Presence of the Sovereign | Legendary battles (W12-T4) | 120 |
+| `contest-theme` | Appeal in Bloom | Contests (W12-T4) | 138 |
+| `route1-theme` | Road Out of Dawnwick | Arden routes | 132 |
+| `pallet-theme` | Hometown Morning | Dawnwick (waltz) | 96 |
+| `viridian-theme` | Crossroads City | Fernmere register — Arden cities | 120 |
+| `center-theme` | Healing Light | Center (soft) | 88 |
+| `pewter-theme` | Stone & Slate | Flintridge register — Arden cities | 104 |
+| `gym-theme` | House of Badges | Gym interiors (shared service theme) | 144 |
+| `mart-theme` | Open All Hours | The shared Mart (W12-T4) | 100 |
+| `amber-town-theme` | Salt & Citrus | Amber Isles towns | 104 |
+| `amber-route-theme` | Trade Wind Run | Amber Isles sea lanes | 122 |
+| `yamato-town-theme` | Temple Bell Morning | Yamato towns | 92 |
+| `yamato-route-theme` | Pilgrim Road | Yamato routes | 132 |
+| `maris-town-theme` | Harbour Lights | Maris towns | 118 |
+| `maris-route-theme` | Open Water Road | Maris routes | 140 |
+| `borea-town-theme` | First Snow Hush | Borea towns | 84 |
+| `borea-route-theme` | Long White Road | Borea routes | 148 |
+| `trial-town-theme` | Bronze & Banner | Trial Grounds hub | 100 |
+| `trial-route-theme` | The Seven Trials | Trial Grounds island | 128 |
 
 Each loop is ≤ 4 tracks (2 pulse + 1 triangle + 1 noise max); the audit in
 `scripts/verify-audio.mjs` asserts no instant ever exceeds 6 simultaneous
-voices and that every `maps.mjs` `music` field resolves to a composed track.
+voices, that every merged map's `music` field resolves to a composed track,
+and that every map plays inside its region's charter (W12, §[8]).
 
-## Track list — SFX (43)
+## Track list — SFX (48)
 
 **UI set:** `ui-blip` (confirm), `ui-tick` (cursor), `ui-back` (cancel),
 `dialogue-blip` (line advance), `error-buzz`.
@@ -45,26 +65,42 @@ transition 400ms. `transition-whoosh` on the wipe.
 `catch-click`, `catch-breakout` (+tone), `catch-crit` (critical capture),
 `catch-gotcha`, `dex-register`.
 **Progression:** `victory` (wild win), `fanfare` (trainer win),
-`levelup`, `badge`, `heal`, `save-confirm`, `item-fanfare`,
-`partner-happy` (Pikachu interaction), `map-enter` (area banner).
+`levelup`, `evolution-fanfare` (evolution — W12-T4; the evolution moment
+no longer reuses `levelup`), `badge`, `heal`, `save-confirm`,
+`item-fanfare`, `partner-happy` (VOLTIK interaction), `map-enter`
+(area banner).
 **Legacy aliases** (`blip`, `tick`, `back`, `fanfare`, `heal`, `error`,
 `throw_`, `rattle`, `click`, `dex`, `encounter`) keep every Wave-1 call site
 working.
+**W6 completions:** `menu-move` (menu cursor), `item-get` (item pickup)
+and `warp` (warp tiles) were dead call sites — now tabled and played;
+`fanfare` is wired into the trainer-victory path (gated on no badge
+being awarded, so badge wins keep their own beat).
 
-## Species cries (14, synthesized — contract §2.3)
+## Species cries (509/509 — authored 14 + deterministic derivation, W12-T1)
 
-`cry-pikachu` (double chirp), `cry-pidgey`, `cry-rattata`, `cry-caterpie`,
-`cry-weedle`, `cry-spearow`, `cry-zubat`, `cry-geodude`, `cry-onix`,
-`cry-bulbasaur`, `cry-charmander`, `cry-squirtle`, `cry-nidoranm`,
-`cry-mankey`. Played on battle send-out (foe + ally) and via
-`audio.playCry(speciesId)` (unknown species → generic fallback motif).
+Fourteen authored tables (the Wave-1 slice species; contract §2.3):
+`cry-pikachu` (VOLTIK's double chirp), `cry-pidgey`, `cry-rattata`,
+`cry-caterpie`, `cry-weedle`, `cry-spearow`, `cry-zubat`, `cry-geodude`,
+`cry-onix`, `cry-bulbasaur`, `cry-charmander`, `cry-squirtle`,
+`cry-nidoranm`, `cry-mankey`. Every other species' cry is **derived**:
+`deriveCry(record)` builds the table deterministically from the species'
+own record (unique `spriteSeed` stream; primary type → timbre family,
+BST band + body plan → register, secondary type → contour, evolution
+stage → growth), so a line audibly grows as it evolves. Resolution order
+in `playCry`: authored table → alias (`partner` → VOLTIK's authored cry —
+the partner is VOLTIK, one creature one voice) → derived (formes share
+their base species) → the legacy two-note fallback, retained only as an
+unknown-id safety net. verify-audio [10] proves 509/509 resolve, with
+pairwise-distinct cries over the 493 independent identities. Played on
+battle send-out (foe + ally) and via `audio.playCry(speciesId)`.
 
 ## Visual twins (gameux §7 — mute never removes information)
 
 | Audio cue | Visual twin |
 |---|---|
 | `lowhp` | HP plate red pulse + ⚠ pip + stripe overlay |
-| `encounter-sting` | grass rustle anim, then the `!` mark over Ash |
+| `encounter-sting` | grass rustle anim, then the `!` mark over Kian |
 | `transition-whoosh` / `-fade` | encounter wipe / 150ms fade |
 | `catch-rattle` | ball wiggle ×3 |
 | `catch-click` | starburst |
@@ -75,7 +111,7 @@ working.
 | `heal` | HP bars refill |
 | `map-enter` | location banner slide-in |
 | `dialogue-blip` | ▾ indicator |
-| `partner-happy` | Pikachu hop + mood pip |
+| `partner-happy` | VOLTIK hop + mood pip |
 | `ui-*` | cursor movement / menu open / menu close |
 
 ## Options wiring (gameux §4.8)
@@ -89,39 +125,37 @@ working.
   encounter whoosh for a soft fade blip; shake/flash/ball-bounce/wipe are
   already visual-side. Audio itself never becomes the sole carrier of info.
 
-## Verification (2026-10-15)
+## Verification
 
-`scripts/verify-audio.mjs` — **ALL PASS** (24 checks):
-1. `node --check` on both modules.
-2. Contract schema on all 66 tables (waves, duties, vols, pitch notation,
-   `[attack, decay]` envelopes, non-empty note lists).
-3. Channel-budget audit: max simultaneous voices ≤ 6 on every music track;
-   loop lengths sane; every map `music` field resolves.
-4. Engine exercise through a fake AudioContext: headless no-op safety,
-   pitch math (A4=440), SFX event timing/frequency/envelope, live bus
-   volumes, mute suppression, full-loop music scheduling + loop timer,
-   no-restart-churn on same-id replay, battle music excluded from the area
-   restore target, `restoreAreaMusic()`, reduced-motion transition swap,
-   cry fallback, voice-budget cap, `applySettings`.
-5. Repo gates: `scripts/build.mjs` OK (bundle builds with the new module in
-   `module-order.json`), `scripts/contamination-scan.mjs` clean
-   (zero-audio-file rule holds), `verify-slice` 48/48 gameplay passes.
+`scripts/verify-audio.mjs` — **ALL PASS**, run inside the fleet via
+`tests/run-checks.mjs`. Sections: [1] syntax (`node --check`) · [2] note-
+table schema (contract §2.1) · [3] channel budget (≤ 6 simultaneous
+voices, loop lengths sane) · [4] map music cross-refs · [5] engine
+scheduling exercise through a fake AudioContext (headless no-op safety,
+pitch math, bus volumes, mute, loop scheduling, area restore,
+`applySettings`) · [6] SFX call-site cross-check (every played key
+resolves) · [7] audible proof + suspended-context resume · [8] region
+charter over the merged 432-map table · [8c] ceremony assignments
+(leader / legendary / contest / mart / evolution, call-site pinned +
+headlessly scheduled) · [9] loop distinctness (lead-melody interval
+fingerprints, pairwise over all loops) · [10] cry coverage + distinctness
+(509/509) · [11] audio byte budget (note-tables + engine ≤ 55,000 B;
+53,655 B at the W12 landing).
 
-Known non-audio findings (other seats' files, flagged not fixed):
-- QA Manager's new `verify-slice` QA extension (uncommitted, their file):
-  s9 "battle 2 resolves" fails because their battle-2 driver loop never
-  presses A on the battle message box (their battle-1 loop has the
-  `else pA(g9, 1)` line; battle-2 lacks it). Verified the game itself
-  resolves correctly when the message is advanced — driver bug, their seat.
-- QA-001/002 (text sizes, move-button type badges) and QA-003/f4
-  (encounter chain counters) flag other seats' in-flight work.
+## The W12 charter (landed 2026-11-15) — and what remains
 
-## Next audio wave owns
+W12 closed the audio-identity program: T1 gave all 509 species their own
+cry (authored 14 + derivation) and fixed the partner's voice; T2/T3 gave
+every region its own town+route pair (Arden keeps its authored four; the
+legacy pool serves no other region); T4 gave the ceremonies their themes
+(leader, legendary, contest, the shared Mart) and evolution its sting.
+Guards [8]/[8c]/[9]/[10]/[11] hold the charter mechanically — a map,
+battle, contest, or species that falls back to a shared sound fails CI
+by id.
 
-Later gyms/sagas per the §2.2 order: Orange Islands + Johto area themes,
-Gym Leader battle theme, Elite/League themes, evolution fanfare, day/night
-variants (palette-shift rule applies to audio too: same tables, different
-`duty`/tempo treatments), PC/storage jingles, surf/bike/movement motifs,
-Frontier facility stingers (v2), plus cries for every new species entering
-the slice. The engine already supports all of it — new tables + one-line
-`playMusic`/`playCry` call sites, no engine changes needed.
+Post-W12 backlog (named, not scheduled): per-region gym-interior variants
+(the shared `gym-theme` stands until then, by charter — Ruling 2);
+PC/storage jingles; surf/bike/movement motifs; Frontier facility
+stingers. **Struck:** day/night variants — seasons and day/night
+presentation were removed by owner order (SZ wave), so the score keeps
+one fixed treatment per place, like the art.
