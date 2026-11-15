@@ -4494,6 +4494,66 @@ W17H_KIND_DEFS.forEach(([kind], i) => {
 const W17H_PROP_KINDS = W17H_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
 const W17H_WALL_KINDS = W17H_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
 const W17H_FLOOR_KINDS = W17H_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
+// Wave W17-I (Route Build Program, Yamato Tranche 4): the whirlpool
+// sea -> the mountain road -> the falls halls -> the crater gate —
+// Route 41, Route 42, Mt. Millstone Lower + Upper Halls and Route
+// 43, each its own kit under the NO-SAME-KIT law. All five are
+// defined once in maps6.mjs (no dual copies in Yamato, so no
+// registry re-pins arise). Route 41 "Maelstrom Sea" (idx
+// 1223-1224 — a surf lane whose land table is EMPTY as shipped:
+// only its 10 islet-top grassground cells and 21 rock cells
+// convert; the rock conversion is gated on the trigger census —
+// r41's encounter config has enc.cave=false and an EMPTY land
+// table, its surf branch fires only on '~' water chars, the grid
+// holds no '.' or ',' cells, and its single cavefloor warp-mouth
+// cell stays byte-identical, so no encounter trigger can move).
+// Route 42 "Millstone Road" (1225-1228) converts grassground/
+// path/tree by KIND (maps6 trees stand on both '#' and 'T' chars
+// — the W17-B lesson); its 4 cavefloor mouth cells stay
+// byte-identical. The Millstone halls convert by the cave method
+// (art layer only: cavefloor -> own floor, cavewall -> own wall;
+// the trigger census '.'/'R' is 0 -> 0 on both halls, and their
+// falls water, caveboulders and cavecrystals stay byte-identical):
+// Lower "Millstone Wet" (1229-1230, dark wet flags) and Upper
+// "Millstone Spray" (1231-1232, spray-bright, one value up — the
+// value split is the twin discipline for the halls' near-identical
+// grids, the Lunestone 1F/B1F precedent). Route 43 "Crater Gate
+// Road" (1233-1236) converts by KIND the same way; its shipped
+// rock cell and fences stay byte-identical. Ground kinds
+// deliberately do NOT end in 'floor' (the desire-path audit counts
+// '*floor' as street tier; grounds must never masquerade as
+// street); path kinds DO end in 'floor' so they register as the
+// route's path tier per route (checklist point 3). Indices
+// 1223-1236 per the program plan
+// (WAVE-W17-YAMATO-ROUTE-PROGRAM-PLAN.md): W17-F took 1168-1185,
+// W17-G 1186-1204 and W17-H takes 1205-1222 on its parallel
+// branch; 1111 and every earlier documented gap stay empty. Kind
+// names verified unclaimed against origin/main. Chars U+1E00+1223..
+const W17I_KIND_DEFS = [
+  ['isleturf', 'floor'],
+  ['stackrock', 'wall'],
+  ['millturf', 'floor'],
+  ['millroadfloor', 'floor'],
+  ['millpine', 'wall'],
+  ['millcairn', 'prop'],
+  ['wetmillfloor', 'floor'],
+  ['wetmillwall', 'wall'],
+  ['sprayfloor', 'floor'],
+  ['spraywall', 'wall'],
+  ['craterturf', 'floor'],
+  ['tollfloor', 'floor'],
+  ['craterpine', 'wall'],
+  ['tollpost', 'prop'],
+];
+const W17I_KIND_CHARS = {};
+W17I_KIND_DEFS.forEach(([kind], i) => {
+  const ch = String.fromCodePoint(0x1E00 + 1223 + i);
+  W17I_KIND_CHARS[kind] = ch;
+  TILE_CHARS[ch] = kind;
+});
+const W17I_PROP_KINDS = W17I_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
+const W17I_WALL_KINDS = W17I_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
+const W17I_FLOOR_KINDS = W17I_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
 const SINNOH_TOWN_GROUND_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg);
 const SINNOH_TOWN_GROUND2_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg2);
 // TX-3: the 8 gym exteriors by town (original type-accent motifs).
@@ -114697,6 +114757,258 @@ const ART = {
     "aaaaaaaaaaaaaaaa",
     "amabaaaaaaaaaaba"
   ] },
+  "tile-isleturf": { w: 16, h: 16, pal: {"a":"#77a45c","b":"#679250","y":"#a9bd7d","w":"#eef2dc"}, rows: [
+    "abwaaaaabbaaaaaa",
+    "aaabbaabaaabyaaa",
+    "aabaaaabaaaaabaa",
+    "aawwaaaaaaabaaab",
+    "aabyayyabbaaaaaa",
+    "ayabaaaaaababaaa",
+    "abaaaaaaaaaaaaab",
+    "baaaaaaaawabyaay",
+    "aaaayaaaabaabaab",
+    "aaawaaabaabaabaa",
+    "aayyaayaaaaaaaba",
+    "aaaaaabaaaabaaaa",
+    "aaaabaaaabaybybb",
+    "ababaaaaaaaaaaab",
+    "aaayaaabbaaaaaya",
+    "baaaaaaaaaaaaaaa"
+  ] },
+  "tile-stackrock": { w: 16, h: 16, pal: {"w":"#567cbd","x":"#476baa","y":"#7093c7","z":"#424e55","c":"#8b9aa2","m":"#5a686f","f":"#dcebf8"}, rows: [
+    "wwwywwwwwwwwywwy",
+    "wwwywywwwwwwwyww",
+    "wywwwwzzzzwwywyw",
+    "wwwwwmccccmwwwww",
+    "wwwwmmzmcmmmwxxw",
+    "wwwwmzmzmmmmwwww",
+    "wwwzmcmmzccmmwww",
+    "wwwmzzmmzzzmmwww",
+    "wwwmmcmzmmmmmwww",
+    "wwcwmmmmmcmmcyww",
+    "wwwwzzmmmmmmxwww",
+    "wwwwwmzmzcmcwwww",
+    "wwffffwfffffffww",
+    "wwywfwwfwwwfywww",
+    "wwywwwcwwwwwcwww",
+    "wwwywwwwwwwwwwww"
+  ] },
+  "tile-millturf": { w: 16, h: 16, pal: {"a":"#6d9c58","b":"#59824a","d":"#4a6f3d","s":"#b9c4a4"}, rows: [
+    "abaaaaaaaaaaaaad",
+    "aababaaababdbaaa",
+    "aaaaaaaaadaaaaaa",
+    "aaaaaaabaabaaaaa",
+    "abaababaaaaaabaa",
+    "aaaaaaabasaabbaa",
+    "adaaaaaaaaaaaaba",
+    "bbaaaasaaaaaaaaa",
+    "aabbaaaaaabaaaaa",
+    "aabadaabadaasaaa",
+    "aadadbaaaaaaaaaa",
+    "baasaaaabaabbaaa",
+    "aadaaaaaaaaaaaaa",
+    "dbaaaabaaaabaaba",
+    "aaaaaaadaaaaadab",
+    "dbbaaaabbaaaaaaa"
+  ] },
+  "tile-millroadfloor": { w: 16, h: 16, pal: {"a":"#d3bf96","b":"#bfa87c","d":"#9c8a64","s":"#8d8578"}, rows: [
+    "aababaaabaaabbaa",
+    "baaaaaaaaaaaaaaa",
+    "basaadabaaaaaaab",
+    "aaaabbaaaaaaaaaa",
+    "aaaaaabaaaabaaaa",
+    "baaadaaaaaaabaaa",
+    "adaaababsbbaaaaa",
+    "aaaaasaaaaaaaaab",
+    "abaaaaaabaaaabaa",
+    "abaaaaaaaaaaaaaa",
+    "aaaaaaaaaaaaaaaa",
+    "adaaaaaaaaabaaaa",
+    "aaaaaabbababaaaa",
+    "baabaaaadaaabdaa",
+    "aaaaababbabaaaab",
+    "daaaabaabaabaaaa"
+  ] },
+  "tile-millpine": { w: 16, h: 16, pal: {"a":"#6d9c58","b":"#59824a","t":"#3d7350","u":"#2f5d43","h":"#5d9268","k":"#5e4630"}, rows: [
+    "baaaaahhuhabaaaa",
+    "aaaahhhhtuhuaaaa",
+    "abhhhhhhututhuaa",
+    "ahhhhhhhthttttua",
+    "autttutthhutuhta",
+    "ahhhhuttututhtua",
+    "aathhtthttutttba",
+    "aahttutthuutthaa",
+    "aaautuuuhthhuaab",
+    "aaahhuuuthtthaaa",
+    "aaaautuhhtthaaaa",
+    "baaaaaakkaabaaaa",
+    "aaaaaabkkaaaaaaa",
+    "abaaaaakkaaabaaa",
+    "aaaaaauuuuaaaaaa",
+    "aabaaaaaaaaaabaa"
+  ] },
+  "tile-prop-millcairn": { w: 16, h: 16, pal: {"a":"#6d9c58","b":"#59824a","s":"#9a958a","d":"#7e786c","c":"#c2bcab"}, rows: [
+    "aaaabaaaaaaaaaaa",
+    "aabaaaaaaaabaasa",
+    "aaaaaaabaaaaaaaa",
+    "aaaabsabbaaabbaa",
+    "aaaaaaaabaaaaaaa",
+    "aaaaaaaasaaaaaaa",
+    "aaababaaaaabaaaa",
+    "aaaaaaaaaaasaabb",
+    "aaabscaaaasdsasa",
+    "aaaadddaasdcdsaa",
+    "aaaasssbasdcdsaa",
+    "aaadddddbasdsaab",
+    "abasssssaassaaaa",
+    "saddddddddddddaa",
+    "sabaaaaaaaabaaaa",
+    "aaaaaaaaaaaaaaaa"
+  ] },
+  "tile-wetmillfloor": { w: 16, h: 16, pal: {"a":"#5d6066","b":"#4c4f55","d":"#3c3f45","p":"#7e8894"}, rows: [
+    "bbaaaaaabaaaaaaa",
+    "badaaaaaaaaaaaaa",
+    "aaaaaabbdaaaaaaa",
+    "aaaabbadaaaaaaab",
+    "adaaaaaaaaaapaaa",
+    "aaaaaaaaaaadaada",
+    "aaaaaaaaaaddbbaa",
+    "babppaadbdaadaaa",
+    "aaabaaaaappbaaaa",
+    "abaaaaaaaaaabada",
+    "aaaaaaabaaaaaaaa",
+    "dbababaaaaaaaaaa",
+    "aaabbapaaaababda",
+    "aaaaadaaabbaaaad",
+    "aaaaadbabaabbbaa",
+    "dbaaabaaabaaaaaa"
+  ] },
+  "tile-wetmillwall": { w: 16, h: 16, pal: {"z":"#33363b","m":"#565b61","a":"#6d7278","c":"#8b95a0","g":"#2e3136"}, rows: [
+    "zzzzzzzzzzzzzzzz",
+    "zzzzzzzzzzzzzzzz",
+    "zzzzzzzzzzzzzzzz",
+    "mmcgcmcgmmmgmmmm",
+    "mmmmcmmgmmmgmcmm",
+    "mmmgmcmmmmmmmmmm",
+    "mmmgmmmgmcmgmmmm",
+    "aaaaaaaaaaagaaaa",
+    "aaagaaagaaagaaaa",
+    "aaagaaagaaagaaaa",
+    "zzzzzzzzzzzzzzzz",
+    "zzzzzzzzzzzzzzzz",
+    "zzzzzzzzzzzzzzzz",
+    "gggmmmggmmgggmgm",
+    "mmmmmmmmmmmmmmmm",
+    "gggggggggmgmgggg"
+  ] },
+  "tile-sprayfloor": { w: 16, h: 16, pal: {"a":"#767c84","b":"#646a71","d":"#52575e","p":"#aeb8c2","w":"#e8eef4"}, rows: [
+    "aaaaaaaaaaaaaadb",
+    "baaaaaaababaadaa",
+    "abaabaaaaawaaaab",
+    "badaaaaaabbapaaa",
+    "abaaadbaabbaaaaa",
+    "aaaabaaabaabaaaa",
+    "bbaapdaaaaaaaaaa",
+    "aaaaabaaaaaabaab",
+    "aaababaadabadbaa",
+    "aaadaaaaadpabbab",
+    "aaaaababaaababaa",
+    "aaaaawaawaaaaaaa",
+    "baaaaaapaabbaada",
+    "bdaabaaaaababaaa",
+    "aababaaaaaaabaad",
+    "aaaabaaabbdadaad"
+  ] },
+  "tile-spraywall": { w: 16, h: 16, pal: {"z":"#4a4e54","m":"#6e747b","a":"#868d94","c":"#a7b1bc","g":"#43474d"}, rows: [
+    "zzzzzzzzzzzzzzzz",
+    "zzzzzzzzzzzzzzzz",
+    "zzzzzzzzzzzzzzzz",
+    "mmmcccmmmgcmcmcm",
+    "mcmcgccmmgmmmmcm",
+    "mmmmmmmmmgmmcmmm",
+    "mmcmgmmmmmmmmmmm",
+    "aaaagaaaaaaaaaaa",
+    "aaaaaaaaaaaaaaaa",
+    "aaaaaaaaaaaaaaaa",
+    "zzzzzzzzzzzzzzzz",
+    "zzzzzzzzzzzzzzzz",
+    "zzzzzzzzzzzzzzzz",
+    "ggggggggmgggmggg",
+    "mmmmmmmmmmmmmmmm",
+    "mgggggmmgggmgggg"
+  ] },
+  "tile-craterturf": { w: 16, h: 16, pal: {"a":"#74a45e","b":"#639450","d":"#527f42","o":"#b06a3c"}, rows: [
+    "abaaaaaaaaaaaaab",
+    "aaoaaabobaaaaaab",
+    "aaaaabaaaabaaaaa",
+    "aaaabaababbaaaad",
+    "oaaaaabaaaaababa",
+    "aaabaabaaabadbab",
+    "daaaaaabbbaaaaaa",
+    "aaaaaaaaodaaaaaa",
+    "aaaabaadaaaaaaaa",
+    "aaaaaaaaabaaaaba",
+    "aaaaaaaaabaaabaa",
+    "aaabbabababbaaaa",
+    "abaaaaboaabaaaba",
+    "aadaaabaaaaaaaaa",
+    "baaaaaabaaabaaaa",
+    "baaaaabaabbaaaaa"
+  ] },
+  "tile-tollfloor": { w: 16, h: 16, pal: {"a":"#d9c69c","b":"#c6ae7f","d":"#a98f5f"}, rows: [
+    "aaaaabbadbaababa",
+    "aaabaaaadabaabaa",
+    "aaaaaaadaaaabbaa",
+    "abaaabbdaaaaaabb",
+    "aaaaadaddaaaaaab",
+    "aaaaaaadaaaabaab",
+    "baaaaabddaaaaaaa",
+    "aaaaaaadbaababbb",
+    "aaaaaaaddaaaaaba",
+    "dbaaaaadbaaaabba",
+    "aaaaaaaaaaaaaaba",
+    "aadaabaadaaaaaad",
+    "aababaaaaaaaaaaa",
+    "abbaaabaaabaaaab",
+    "aabababadaaaaaaa",
+    "aaaaaaaadaabaaaa"
+  ] },
+  "tile-craterpine": { w: 16, h: 16, pal: {"a":"#74a45e","b":"#639450","t":"#57744a","u":"#44603a","h":"#7d9a68","o":"#b06a3c","k":"#5e4630"}, rows: [
+    "baaaaaaaaaabaaaa",
+    "aaaaaahhhhaaaaaa",
+    "abaaahhhhhoabaaa",
+    "aaaattttoutoaaaa",
+    "aabaahtthttaabaa",
+    "aaatuhottttuuaaa",
+    "aaabhhtuututaaba",
+    "aaatuuuthhtutaaa",
+    "aaaattttthutaaab",
+    "aatuttttototutaa",
+    "aaauhuttthttuaaa",
+    "baaaaaakkaabaaaa",
+    "aaaaaabkkaaaaaaa",
+    "abaaaaakkaaabaaa",
+    "aaaaaauuuuaaaaaa",
+    "aabaaaaaaaaaabaa"
+  ] },
+  "tile-prop-tollpost": { w: 16, h: 16, pal: {"a":"#74a45e","b":"#639450","o":"#b06a3c","w":"#b08d57","d":"#7d5a34","k":"#8a6844"}, rows: [
+    "aaaoaaaaaaaaaaaa",
+    "aaaaaaaabaaaaaaa",
+    "aaaabaaaaaaaabaa",
+    "abaaaabbaabaaaaa",
+    "aaaakkkkkkkkabab",
+    "aaaaaaakdbaoaaaa",
+    "aaaaaaakdwwwwaaa",
+    "aaaaaaakdwdwwbab",
+    "aaaaaaakdwwdwaaa",
+    "aaaaaaakdwwwwaaa",
+    "aabaaaakdaaaaaaa",
+    "aabaaaakdbaabaaa",
+    "aaaaabakdabbabba",
+    "aaaabaddddaabaaa",
+    "aaaaaabbaabaaaaa",
+    "bbaaaaaaaaabaaba"
+  ] },
   "tile-trialfloor": { w: 16, h: 16, pal: {"a":"#d8c08a","b":"#cdb481","m":"#bfa87c","f":"#b07a3f","l":"#e2cc9c"}, rows: [
     "aabaaafaaabaaaaa",
     "aaaaaaaaaaabaaaf",
@@ -121709,6 +122021,9 @@ for (const k of W17G_FLOOR_KINDS) TILE_ART[k] = 'tile-' + k;
 for (const k of W17H_PROP_KINDS) TILE_ART[k] = 'tile-prop-' + k;
 for (const k of W17H_WALL_KINDS) TILE_ART[k] = 'tile-' + k;
 for (const k of W17H_FLOOR_KINDS) TILE_ART[k] = 'tile-' + k;
+for (const k of W17I_PROP_KINDS) TILE_ART[k] = 'tile-prop-' + k;
+for (const k of W17I_WALL_KINDS) TILE_ART[k] = 'tile-' + k;
+for (const k of W17I_FLOOR_KINDS) TILE_ART[k] = 'tile-' + k;
 // Premium+ W6 (TX-3/PL-1): door-open frames, authored in TX-3 for every
 // door kind. The warp-fade engine that plays them lands in W7 — W6
 // wires the frames (this registry + cache.doorOpen + doorOpenCanvas)
@@ -122518,9 +122833,12 @@ const CAVE_KINDS = new Set(['cavewall', 'cavefloor', 'caveboulder',
   // kinds to this set on its own branch; the merge unions the two.)
   'crownwall', 'crownfloor',
   // Wave W17-F: Junction Cave's kit (Junction Deep) is cave family too.
-  'junctionwall', 'junctionfloor']);
-const CAVE_FLOOR_KINDS = new Set(['cavefloor', 'lunefloor', 'darklunefloor', 'stratadeepfloor', 'crownfloor', 'junctionfloor']);
-const CAVE_WALL_KINDS = new Set(['cavewall', 'lunewall', 'darklunewall', 'stratadeepwall', 'crownwall', 'junctionwall']);
+  'junctionwall', 'junctionfloor',
+  // Wave W17-I: the Millstone halls' kits (Millstone Wet below,
+  // Millstone Spray above) are cave family too.
+  'wetmillwall', 'wetmillfloor', 'spraywall', 'sprayfloor']);
+const CAVE_FLOOR_KINDS = new Set(['cavefloor', 'lunefloor', 'darklunefloor', 'stratadeepfloor', 'crownfloor', 'junctionfloor', 'wetmillfloor', 'sprayfloor']);
+const CAVE_WALL_KINDS = new Set(['cavewall', 'lunewall', 'darklunewall', 'stratadeepwall', 'crownwall', 'junctionwall', 'wetmillwall', 'spraywall']);
 const DUNGEON_WALLS = new Set(['cavewall', 'towerwall', 'silphwall', 'plantwall',
   // Premium+ W6 (TX-5): the sub-theme wall kinds cast the same strip.
   'icewall', 'iceface', 'stratwall', 'bannerwall', 'cerwall', 'panelwall',
@@ -122529,7 +122847,9 @@ const DUNGEON_WALLS = new Set(['cavewall', 'towerwall', 'silphwall', 'plantwall'
   // Wave W17-E: the Crown Road's ashlar wall casts the same strip.
   'crownwall',
   // Wave W17-F: Junction Cave's wall kind casts the same strip.
-  'junctionwall']);
+  'junctionwall',
+  // Wave W17-I: the Millstone halls' wall kinds cast the same strip.
+  'wetmillwall', 'spraywall']);
 const FLOOR_VARIANTS = {
   grass: 'grassVariants', path: 'pathVariants', cavefloor: 'caveFloorVariants',
   towerfloor: 'towerFloorVariants', silphfloor: 'silphFloorVariants', plantfloor: 'plantFloorVariants',
@@ -123289,7 +123609,7 @@ function resolveTileLayers(cache, kind, x, y, kindAt, t, phase, mapId) {
       }
       return layers.filter(Boolean);
     }
-    case 'cavewall': case 'lunewall': case 'darklunewall': case 'stratadeepwall': case 'crownwall': case 'junctionwall': {
+    case 'cavewall': case 'lunewall': case 'darklunewall': case 'stratadeepwall': case 'crownwall': case 'junctionwall': case 'wetmillwall': case 'spraywall': {
       // Strata walls by position hash; an exposed face (floor to the
       // south) wears the stalactite face. Perfection Pass Stage 2 Gate 0
       // (G0-5, standard B3): the face is DETERMINISTIC — 100% of exposed
@@ -123307,6 +123627,10 @@ function resolveTileLayers(cache, kind, x, y, kindAt, t, phase, mapId) {
         // its pix art carries its own hanging points in the ceremonial
         // register; only the drip overlay below is shared with the
         // generic cavewall treatment.
+        // Wave W17-I: the Millstone halls' walls keep their own faces —
+        // the Lower's drip-heavy dark bands and the Upper's spray-pale
+        // bands are drawn in each hall's own pix art; only the drip
+        // overlay below is shared with the generic cavewall treatment.
         layers.push(cache[kind]);
       }
       // W3: cave drip on exposed faces (slow cadence, phase-offset).
@@ -123321,6 +123645,7 @@ function resolveTileLayers(cache, kind, x, y, kindAt, t, phase, mapId) {
     case 'stratafloor': case 'crackedfloor': case 'cerfloor': case 'cerpool':
     case 'lunefloor': case 'darklunefloor': case 'stratadeepfloor':
     case 'crownfloor': case 'junctionfloor':
+    case 'wetmillfloor': case 'sprayfloor':
     case 'gratefloor': case 'cablefloor': {
       const layers = [groundBase(cache, kind, x, y)];
       // A dungeon wall directly north casts the shared shadow strip.
@@ -123811,6 +124136,16 @@ function resolveTileLayers(cache, kind, x, y, kindAt, t, phase, mapId) {
     case 'hillpine':
     case 'hillcairn':
     case 'harbourrock':
+    // Wave W17-I: the Yamato tranche-4 route trees, signature props
+    // and sea stacks composite over their ground the same way (all
+    // arts are fully opaque — each route's own ground is baked in
+    // at its measured colours; the stack rock bakes in the sea it
+    // stands in).
+    case 'stackrock':
+    case 'millpine':
+    case 'millcairn':
+    case 'craterpine':
+    case 'tollpost':
     // Wave T17: the radio mast composites over its compound grass too.
     case 'radiomast': {
       // Object tiles carry transparent surrounds (Wave 1): lay the ground
@@ -123824,7 +124159,7 @@ function resolveTileLayers(cache, kind, x, y, kindAt, t, phase, mapId) {
         for (const d of DIRS) { const f = groundFamilyOf(nb[d]); if (f) counts[f] = (counts[f] || 0) + 1; }
         ground = ['grass', 'path', 'cavefloor', 'towerfloor', 'silphfloor', 'plantfloor',
           'lunefloor', 'darklunefloor', 'stratadeepfloor',
-          'crownfloor', 'junctionfloor',
+          'crownfloor', 'junctionfloor', 'wetmillfloor', 'sprayfloor',
           'centerfloor', 'martfloor', 'housefloor', 'gymfloor', 'labfloor']
           .filter((f) => counts[f]).sort((a, b) => counts[b] - counts[a])[0] || 'grass';
       }
@@ -131261,6 +131596,22 @@ const WALKABLE = new Set(['.', ',', 'D', 'E', 'C', 'F', 'J', 'K', '1', '2', 'V',
   // and W17-G takes 1186-1204 on its parallel branch; 1111 stays
   // empty.)
   ...[1205, 1206, 1209, 1210, 1213, 1214, 1217, 1218, 1221]
+    .map((i) => String.fromCodePoint(0x1E00 + i)),
+  // Wave W17-I: the Yamato tranche-4 ground/path/cave-floor chars
+  // (U+1E00+1223.., tiles.mjs W17I_KIND_DEFS) are walkable —
+  // isleturf (Route 41), millturf/millroadfloor (Route 42),
+  // wetmillfloor (Millstone Lower), sprayfloor (Millstone Upper),
+  // craterturf/tollfloor (Route 43), each swapped 1:1 from the
+  // walkable '_' ground / '.' path / 'L' cavefloor chars on its
+  // own map, so ground stays ground, path stays path and cave
+  // floor stays cave floor. The rock char (1224), tree chars
+  // (1227, 1235), prop chars (1228, 1236) and cave wall chars
+  // (1230, 1232) are NOT here: rocks/trees/props/walls were never
+  // walkable, and stackrock swaps from 'R' rock, which was never
+  // walkable. (Indices 1223-1236 per the program plan: W17-F took
+  // 1168-1185, W17-G 1186-1204 and W17-H takes 1205-1222 on its
+  // parallel branch; 1111 stays empty.)
+  ...[1223, 1225, 1226, 1229, 1231, 1233, 1234]
     .map((i) => String.fromCodePoint(0x1E00 + i))]);
 
 // Trainer definitions for the slice.
@@ -150397,21 +150748,21 @@ const MAPS6 = {
     "music": "route1-theme",
     "rows": [
       "~~~~~~~~~~~~~~~~~~~~~~~~~~",
-      "~~~~~~~~~~~~R~~~~~~~~~~~~~",
-      "~~~~~~~~~~~~~~~~~~~~~~~R~~",
-      "~~~~RR~~~~~~~~~~~~~~~~~~~~",
-      "~~~~~~~___~R~~~~~~~~~~~~~~",
-      "~~~~~R~_L_~~~~R~~~~~~~~~~~",
-      "R~~R~~~S__~~~~~~~~~~~~~~~~",
-      "~~~~~~~~~~~~~~R~~~~~~~~~~~",
-      "~~~~~~~R~~~~~~~~~~R~~~~~~~",
-      "~~~~~~~~~~~~~~~~~~~~R~~~~~",
-      "~~~~~~~~~~~~~~~~~~R~~~~~~~",
-      "~~~~~~~~R~~~~R~~~~_R~~~~~~",
-      "~~~~~~R~~~~~~R~~~~__~~~~~~",
+      "~~~~~~~~~~~~⋈~~~~~~~~~~~~~",
+      "~~~~~~~~~~~~~~~~~~~~~~~⋈~~",
+      "~~~~⋈⋈~~~~~~~~~~~~~~~~~~~~",
+      "~~~~~~~⋇⋇⋇~⋈~~~~~~~~~~~~~~",
+      "~~~~~⋈~⋇L⋇~~~~⋈~~~~~~~~~~~",
+      "⋈~~⋈~~~S⋇⋇~~~~~~~~~~~~~~~~",
+      "~~~~~~~~~~~~~~⋈~~~~~~~~~~~",
+      "~~~~~~~⋈~~~~~~~~~~⋈~~~~~~~",
+      "~~~~~~~~~~~~~~~~~~~~⋈~~~~~",
+      "~~~~~~~~~~~~~~~~~~⋈~~~~~~~",
+      "~~~~~~~~⋈~~~~⋈~~~~⋇⋈~~~~~~",
+      "~~~~~~⋈~~~~~~⋈~~~~⋇⋇~~~~~~",
       "~~~~~~~~~~~~~~~~~~~~~~~~~~",
-      "~~~R~~~~~~~~~~~~~~~~~~~~~~",
-      "~~~~R~~~~~~~~~~~~~~~~~~~~~"
+      "~~~⋈~~~~~~~~~~~~~~~~~~~~~~",
+      "~~~~⋈~~~~~~~~~~~~~~~~~~~~~"
     ],
     "warps": [
       {
@@ -150843,22 +151194,22 @@ const MAPS6 = {
     "name": "Route 42",
     "music": "route1-theme",
     "rows": [
-      "########################",
-      "#_,,______n,__,,_,_,_F##",
-      "#_,F_____,___F,__F_____#",
-      "#____Ẉ_FRR_,,____F__F__#",
-      "#,,,,__RLLR__,_F,___,__#",
-      "#F______..S,Ấ__F____,__#",
-      "#F,,____.._________F___#",
-      "#_,S,__,..__F______,___#",
-      "........................",
-      "........................",
-      "#__F___,____,___..____,#",
-      "#__F,_F____F___RLLR____#",
-      "#___,__#R__F_,_,RRn,___#",
-      "#_____Ấ_________,__#_F_#",
-      "#___,__R_____F_,,_,_F__#",
-      "########################"
+      "⋋⋋⋋⋋⋋⋋⋋⋋⋋⋋⋋⋋⋋⋋⋋⋋⋋⋋⋋⋋⋋⋋⋋⋋",
+      "⋋⋉,,⋉⋉⋉⋉⋉⋉n,⋉⋉,,⋉,⋉,⋉F⋋⋋",
+      "⋋⋉,F⋉⋉⋉⋉⋉,⋉⋉⋉F,⋉⋉F⋉⋉⋉⋉⋉⋋",
+      "⋋⋉⋉⋉⋉Ẉ⋉FRR⋉,,⋉⋉⋉⋉F⋉⋉F⋉⋉⋋",
+      "⋋,,,,⋉⋉RLLR⋉⋉,⋉F,⋉⋉⋉,⋉⋉⋋",
+      "⋋F⋉⋉⋉⋉⋉⋉⋊⋊S,Ấ⋉⋉F⋉⋉⋉⋉,⋉⋉⋋",
+      "⋋F,,⋉⋉⋉⋉⋊⋊⋌⋉⋉⋉⋉⋉⋉⋉⋉F⋉⋉⋉⋋",
+      "⋋⋉,S,⋉⋉,⋊⋊⋉⋉F⋉⋉⋉⋉⋉⋉,⋉⋉⋉⋋",
+      "⋊⋊⋊⋊⋊⋊⋊⋊⋊⋊⋊⋊⋊⋊⋊⋊⋊⋊⋊⋊⋊⋊⋊⋊",
+      "⋊⋊⋊⋊⋊⋊⋊⋊⋊⋊⋊⋊⋊⋊⋊⋊⋊⋊⋊⋊⋊⋊⋊⋊",
+      "⋋⋉⋉F⋉⋉⋉,⋉⋉⋉⋉,⋉⋌⋉⋊⋊⋉⋉⋉⋉,⋋",
+      "⋋⋉⋉F,⋉F⋉⋉⋉⋉F⋉⋉⋉RLLR⋉⋉⋉⋉⋋",
+      "⋋⋉⋉⋉,⋉⋉⋋R⋉⋉F⋉,⋉,RRn,⋉⋉⋉⋋",
+      "⋋⋉⋉⋉⋉⋉Ấ⋉⋉⋉⋉⋉⋉⋉⋉⋉,⋉⋉⋋⋉F⋉⋋",
+      "⋋⋉⋉⋉,⋉⋉R⋉⋉⋉⋉⋉F⋉,,⋉,⋉F⋉⋉⋋",
+      "⋋⋋⋋⋋⋋⋋⋋⋋⋋⋋⋋⋋⋋⋋⋋⋋⋋⋋⋋⋋⋋⋋⋋⋋"
     ],
     "warps": [
       {
@@ -151079,20 +151430,20 @@ const MAPS6 = {
     "name": "Mt. Millstone — Lower Halls",
     "music": "pewter-theme",
     "rows": [
-      "GGGGGGGGGGGGGGGGGGGGGG",
-      "GLLLLLLLLLLLLLLLLL9LLG",
-      "GLLLLLLLLLLLLLLLLLLLLG",
-      "GLL~~~~~~LLLLLLLLLLLLG",
-      "GLL~~~~~~NLLLLLLLLLLLG",
-      "GLL~~~~~~LLLLLLLLýLLLG",
-      "GLL~~~~~~LLNLLLLLLLLLG",
-      "GLLLLNLLLLýLLLLLLýLLLG",
-      "GLLLLLLLLNLLLLLLLLLLLG",
-      "GLLLLLLLLLLLLLLLLLLLLG",
-      "GLLLLLLLNNLLLýLLLýLLLG",
-      "GLLLLLLLLLLLýLLLLLLLLG",
-      "GLLLLLNLLLLLLLLLLLLLLG",
-      "GGGGLLGGGGGGGGGGGGGGGG"
+      "⋎⋎⋎⋎⋎⋎⋎⋎⋎⋎⋎⋎⋎⋎⋎⋎⋎⋎⋎⋎⋎⋎",
+      "⋎⋍⋍⋍⋍⋍⋍⋍⋍⋍⋍⋍⋍⋍⋍⋍⋍⋍9⋍⋍⋎",
+      "⋎⋍⋍⋍⋍⋍⋍⋍⋍⋍⋍⋍⋍⋍⋍⋍⋍⋍⋍⋍⋍⋎",
+      "⋎⋍⋍~~~~~~⋍⋍⋍⋍⋍⋍⋍⋍⋍⋍⋍⋍⋎",
+      "⋎⋍⋍~~~~~~N⋍⋍⋍⋍⋍⋍⋍⋍⋍⋍⋍⋎",
+      "⋎⋍⋍~~~~~~⋍⋍⋍⋍⋍⋍⋍⋍ý⋍⋍⋍⋎",
+      "⋎⋍⋍~~~~~~⋍⋍N⋍⋍⋍⋍⋍⋍⋍⋍⋍⋎",
+      "⋎⋍⋍⋍⋍N⋍⋍⋍⋍ý⋍⋍⋍⋍⋍⋍ý⋍⋍⋍⋎",
+      "⋎⋍⋍⋍⋍⋍⋍⋍⋍N⋍⋍⋍⋍⋍⋍⋍⋍⋍⋍⋍⋎",
+      "⋎⋍⋍⋍⋍⋍⋍⋍⋍⋍⋍⋍⋍⋍⋍⋍⋍⋍⋍⋍⋍⋎",
+      "⋎⋍⋍⋍⋍⋍⋍⋍NN⋍⋍⋍ý⋍⋍⋍ý⋍⋍⋍⋎",
+      "⋎⋍⋍⋍⋍⋍⋍⋍⋍⋍⋍⋍ý⋍⋍⋍⋍⋍⋍⋍⋍⋎",
+      "⋎⋍⋍⋍⋍⋍N⋍⋍⋍⋍⋍⋍⋍⋍⋍⋍⋍⋍⋍⋍⋎",
+      "⋎⋎⋎⋎⋍⋍⋎⋎⋎⋎⋎⋎⋎⋎⋎⋎⋎⋎⋎⋎⋎⋎"
     ],
     "warps": [
       {
@@ -151240,20 +151591,20 @@ const MAPS6 = {
     "name": "Mt. Millstone — Upper Halls",
     "music": "pewter-theme",
     "rows": [
-      "GGGGGGGGGGGGGGGGGGGGGG",
-      "GLLL9ýLLLLLLLLLLLLLLLG",
-      "GLLLLLLLýLLLLLLLLLLLLG",
-      "GLLLLLLLLLLL~~~~~~LLLG",
-      "GLLLLLLLLLLL~~~~~~LLLG",
-      "GLLLLLLLLLLL~~~~~~LLLG",
-      "GLLLLLLLLLLL~~~~~~LLLG",
-      "GLLLLLLLLLLýLLLLLLLLLG",
-      "GNLLLNLLLLLLLLLLLLLLLG",
-      "GLLLLLLLLLLLLLLNLLLLLG",
-      "GLLLLLLLLLLLLLLLLýLLLG",
-      "GLLLLNSLLLNLLLLýLLLLLG",
-      "GLLLLLLLNLNLLLLLLLLLLG",
-      "GGGGGGGGGGGGGGGGGLLGGG"
+      "⋐⋐⋐⋐⋐⋐⋐⋐⋐⋐⋐⋐⋐⋐⋐⋐⋐⋐⋐⋐⋐⋐",
+      "⋐⋏⋏⋏9ý⋏⋏⋏⋏⋏⋏⋏⋏⋏⋏⋏⋏⋏⋏⋏⋐",
+      "⋐⋏⋏⋏⋏⋏⋏⋏ý⋏⋏⋏⋏⋏⋏⋏⋏⋏⋏⋏⋏⋐",
+      "⋐⋏⋏⋏⋏⋏⋏⋏⋏⋏⋏⋏~~~~~~⋏⋏⋏⋐",
+      "⋐⋏⋏⋏⋏⋏⋏⋏⋏⋏⋏⋏~~~~~~⋏⋏⋏⋐",
+      "⋐⋏⋏⋏⋏⋏⋏⋏⋏⋏⋏⋏~~~~~~⋏⋏⋏⋐",
+      "⋐⋏⋏⋏⋏⋏⋏⋏⋏⋏⋏⋏~~~~~~⋏⋏⋏⋐",
+      "⋐⋏⋏⋏⋏⋏⋏⋏⋏⋏⋏ý⋏⋏⋏⋏⋏⋏⋏⋏⋏⋐",
+      "⋐N⋏⋏⋏N⋏⋏⋏⋏⋏⋏⋏⋏⋏⋏⋏⋏⋏⋏⋏⋐",
+      "⋐⋏⋏⋏⋏⋏⋏⋏⋏⋏⋏⋏⋏⋏⋏N⋏⋏⋏⋏⋏⋐",
+      "⋐⋏⋏⋏⋏⋏⋏⋏⋏⋏⋏⋏⋏⋏⋏⋏⋏ý⋏⋏⋏⋐",
+      "⋐⋏⋏⋏⋏NS⋏⋏⋏N⋏⋏⋏⋏ý⋏⋏⋏⋏⋏⋐",
+      "⋐⋏⋏⋏⋏⋏⋏⋏N⋏N⋏⋏⋏⋏⋏⋏⋏⋏⋏⋏⋐",
+      "⋐⋐⋐⋐⋐⋐⋐⋐⋐⋐⋐⋐⋐⋐⋐⋐⋐⋏⋏⋐⋐⋐"
     ],
     "warps": [
       {
@@ -151392,24 +151743,24 @@ const MAPS6 = {
     "name": "Route 43",
     "music": "route1-theme",
     "rows": [
-      "###########..###########",
-      "#_,___,____.._________F#",
-      "#__F_______..__#_,,_,__#",
-      "#___n_Ấ_,,_..______,,_F#",
-      "#____,__,__..__________#",
-      "#____,,___R.._____,____#",
-      "#,#,_____,,.._____,__,_#",
-      "#,____,__,_.._F,____F__#",
-      "#____,_____..F__,F_____#",
-      "#____#_,_,_.._,_____,__#",
-      "#________,_..,,________#",
-      "#____,___,_..,,__,____F#",
-      "#_____,_,__..F___,_,,__#",
-      "#F____F__#_..F___F_____#",
-      "#F____,___,..__F_______#",
-      "#,____,____..S___,_F,Ấ_#",
-      "#____F_F_Ấ_..__,_____F_#",
-      "###########..###########"
+      "⋓⋓⋓⋓⋓⋓⋓⋓⋓⋓⋓⋒⋒⋓⋓⋓⋓⋓⋓⋓⋓⋓⋓⋓",
+      "⋓⋑,⋑⋑⋑,⋑⋑⋑⋑⋒⋒⋑⋑⋑⋑⋑⋑⋑⋑⋑F⋓",
+      "⋓⋑⋑F⋑⋑⋑⋑⋑⋑⋑⋒⋒⋑⋑⋓⋑,,⋑,⋑⋑⋓",
+      "⋓⋑⋑⋑n⋑Ấ⋑,,⋑⋒⋒⋑⋑⋑⋑⋑⋑,,⋑F⋓",
+      "⋓⋑⋑⋑⋑,⋑⋑,⋑⋑⋒⋒⋑⋑⋑⋑⋑⋑⋑⋑⋑⋑⋓",
+      "⋓⋑⋑⋑⋑,,⋑⋑⋑R⋒⋒⋑⋑⋑⋑⋑,⋑⋑⋑⋑⋓",
+      "⋓,⋓,⋑⋑⋑⋑⋑,,⋒⋒⋑⋑⋑⋑⋑,⋑⋑,⋑⋓",
+      "⋓,⋑⋑⋑⋑,⋑⋑,⋑⋒⋒⋑F,⋑⋑⋑⋑F⋑⋑⋓",
+      "⋓⋑⋑⋑⋑,⋑⋑⋑⋑⋑⋒⋒F⋑⋑,F⋑⋑⋑⋑⋑⋓",
+      "⋓⋑⋑⋑⋑⋓⋑,⋑,⋔⋒⋒⋔,⋑⋑⋑⋑⋑,⋑⋑⋓",
+      "⋓⋑⋑⋑⋑⋑⋑⋑⋑,⋑⋒⋒,,⋑⋑⋑⋑⋑⋑⋑⋑⋓",
+      "⋓⋑⋑⋑⋑,⋑⋑⋑,⋑⋒⋒,,⋑⋑,⋑⋑⋑⋑F⋓",
+      "⋓⋑⋑⋑⋑⋑,⋑,⋑⋑⋒⋒F⋑⋑⋑,⋑,,⋑⋑⋓",
+      "⋓F⋑⋑⋑⋑F⋑⋑⋓⋑⋒⋒F⋑⋑⋑F⋑⋑⋑⋑⋑⋓",
+      "⋓F⋑⋑⋑⋑,⋑⋑⋑,⋒⋒⋑⋑F⋑⋑⋑⋑⋑⋑⋑⋓",
+      "⋓,⋑⋑⋑⋑,⋑⋑⋑⋑⋒⋒S⋑⋑⋑,⋑F,Ấ⋑⋓",
+      "⋓⋑⋑⋑⋑F⋑F⋑Ấ⋑⋒⋒⋑⋑,⋑⋑⋑⋑⋑F⋑⋓",
+      "⋓⋓⋓⋓⋓⋓⋓⋓⋓⋓⋓⋒⋒⋓⋓⋓⋓⋓⋓⋓⋓⋓⋓⋓"
     ],
     "warps": [
       {
