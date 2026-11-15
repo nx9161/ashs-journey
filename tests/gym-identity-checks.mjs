@@ -366,9 +366,11 @@ const VENUE_EXCLUDED = [
 // T1 +14 sovereigns/finales -> 14. T2 +6 league/stadiums -> 20 (11
 // chartered; the 5 chambers excluded per the ruling above — census
 // corrected 53 -> 48 as a labeled merge-side step at the T2 merge).
-// T3 +18 remaining legendary -> 38, T4 +10 frontier -> 48 of 48.
-const VENUE_ARENA_COVERED = 20;
-const VENUE_TUPLES_DISTINCT = 20;
+// T3 +18 remaining legendary -> 38 (all 18 verified battle hosts at
+// build time — entry/step/interact gates + map events; none out).
+// T4 +10 frontier -> 48 of 48.
+const VENUE_ARENA_COVERED = 38;
+const VENUE_TUPLES_DISTINCT = 38;
 
 ok('V1 venue census is exactly the pinned 48 and every venue id is a merged map',
   VENUE_IDS.length === 48 && new Set(VENUE_IDS).size === 48
