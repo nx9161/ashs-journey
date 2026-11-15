@@ -10,6 +10,7 @@ export const SPECIES = {
     eggGroups: ['ground', 'fairy'], hatchCounter: 10,
     learnset: { 1: ['thundershock', 'growl'], 5: ['quickattack'] },
     flavor: 'A spirited partner who refused the easy path. Never leaves your side.',
+    design: { inspired: 'hamster', kind: 'animal', note: 'mint hamster, copper battery cap, cream belly, big ears' },
     // Yellow homage (hard rules): never boxed, never evolved. Guards in state.mjs.
     refusesEvolution: true,
     refusesBox: true,
@@ -103,6 +104,7 @@ export const SPECIES = {
     eggGroups: ['monster', 'dragon'], hatchCounter: 20,
     learnset: { 1: ['scratch', 'growl'], 5: ['ember'] },
     flavor: 'Its tail flame mirrors its spirit — bright and stubborn.',
+    design: { inspired: 'salamander', kind: 'animal', note: 'orange salamander, ember crest on head, flame-tipped tail' },
   },
   squirtle: {
     id: 'squirtle', name: 'BUBLET', dexNo: 7, types: ['water'],
@@ -111,6 +113,7 @@ export const SPECIES = {
     eggGroups: ['monster', 'water1'], hatchCounter: 20,
     learnset: { 1: ['tackle', 'tailwhip'], 5: ['watergun'] },
     flavor: 'Withdraws into its shell, then answers with a jet of water.',
+    design: { inspired: 'fish', kind: 'animal', note: 'round blue fish in a water bubble, tiny fins, big eyes' },
   },
   nidoranm: {
     id: 'nidoranm', name: 'TOXIBUCK', dexNo: 32, types: ['poison'],

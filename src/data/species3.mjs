@@ -57,6 +57,7 @@ export const SPECIES_JOHTO = {
     eggGroups: ['ground'], hatchCounter: 20,
     learnset: { 1: ['tackle', 'leer', 'smokescreen'], 112: ['ember'], 121: ['quickattack'], 142: ['swift'], 154: ['flamethrower'] },
     flavor: 'It twists mid-leap, and the fire on its back draws the turn.',
+    design: { inspired: 'mongoose', kind: 'animal', note: 'teal mongoose, flame quills down its back, flame tail tip' },
     evo: { to: 'typhlosion', method: 'level', level: 136 }, tm: [1, 3, 6, 8, 9, 10, 17, 18, 19, 20, 28, 31, 32, 34, 38, 40, 44, 50, 101, 104],
   },
   typhlosion: {
@@ -66,6 +67,7 @@ export const SPECIES_JOHTO = {
     eggGroups: ['ground'], hatchCounter: 20,
     learnset: { 1: ['tackle', 'leer', 'ember', 'smokescreen'], 121: ['quickattack'], 145: ['swift'], 160: ['flamethrower'] },
     flavor: 'Heat shimmers off its mane before the roar ever arrives.',
+    design: { inspired: 'bear', kind: 'animal', note: 'huge black bear, blazing mane, lava cracks on its back' },
     tm: [1, 2, 3, 5, 6, 8, 9, 10, 15, 17, 18, 19, 20, 26, 27, 28, 31, 32, 34, 38, 39, 40, 44, 50, 101, 102, 104],
   },
   totodile: {
@@ -195,6 +197,7 @@ export const SPECIES_JOHTO = {
     eggGroups: ['water2'], hatchCounter: 20,
     learnset: { 1: ['thunderwave', 'bubble'], 105: ['supersonic'], 117: ['watergun'], 129: ['confuseray'], 137: ['takedown'], 141: ['hydropump'] },
     flavor: 'Twin lanterns bob in the black water, fishing for the curious.',
+    design: { inspired: 'anglerfish', kind: 'animal', note: 'round blue anglerfish, twin glowing lures, huge eyes' },
     evo: { to: 'lanturn', method: 'level', level: 127 }, tm: [6, 9, 10, 20, 24, 25, 31, 32, 33, 34, 36, 39, 44, 50, 105],
   },
   lanturn: {
@@ -224,6 +227,7 @@ export const SPECIES_JOHTO = {
     eggGroups: ['no-eggs'], baby: true, hatchCounter: 10,
     learnset: { 1: ['pound', 'swift', 'metronome'], 108: ['sing'] },
     flavor: 'It dances on meteor-lit nights and is shy again by breakfast.',
+    design: { inspired: 'sprite', kind: 'class', note: 'pink sprite, star hands and feet, gold star curl' },
     evo: { to: 'clefairy', method: 'level', level: 110 }, tm: [1, 5, 6, 8, 9, 10, 11, 12, 13, 14, 17, 18, 19, 20, 24, 25, 29, 31, 32, 33, 34, 35, 38, 39, 40, 41, 42, 44, 45, 46, 49, 50, 105],
   },
   igglybuff: {
@@ -263,6 +267,7 @@ export const SPECIES_JOHTO = {
     eggGroups: ['flying'], hatchCounter: 20,
     learnset: { 1: ['leer', 'peck', 'nightshade'], 120: ['teleport'], 150: ['confuseray'], 165: ['psychic'] },
     flavor: 'One eye on yesterday, one on tomorrow; today it keeps to itself.',
+    design: { inspired: 'crane', kind: 'animal', note: 'tall patterned crane, sun-disc halo, banded long legs' },
     tm: [4, 6, 8, 9, 10, 15, 20, 31, 32, 33, 34, 39, 44, 49, 50, 102],
   },
   mareep: {
@@ -272,6 +277,7 @@ export const SPECIES_JOHTO = {
     eggGroups: ['monster', 'ground'], hatchCounter: 20,
     learnset: { 1: ['tackle', 'growl'], 109: ['thundershock'], 116: ['thunderwave'], 130: ['lightscreen'], 137: ['thunder'] },
     flavor: 'Its wool swells with static until the whole flock crackles.',
+    design: { inspired: 'ram', kind: 'animal', note: 'cream ram, huge striped curl horns, glowing tail orb' },
     evo: { to: 'flaaffy', method: 'level', level: 115 }, tm: [1, 5, 6, 9, 10, 16, 19, 24, 25, 31, 32, 33, 34, 39, 40, 44, 45, 50, 105],
   },
   flaaffy: {
@@ -291,6 +297,7 @@ export const SPECIES_JOHTO = {
     eggGroups: ['monster', 'ground'], hatchCounter: 20,
     learnset: { 1: ['tackle', 'growl', 'thundershock', 'thunderwave'], 130: ['thunderpunch'], 142: ['lightscreen'], 157: ['thunder'] },
     flavor: 'Its tail-light turns with the fog — harbours trust it like kin.',
+    design: { inspired: 'giraffe', kind: 'animal', note: 'tan giraffe, lantern on its head, red tail orb, long neck' },
     tm: [6, 8, 9, 10, 15, 20, 24, 25, 28, 31, 32, 34, 39, 44, 45, 50, 105],
   },
   bellossom: {
@@ -320,6 +327,7 @@ export const SPECIES_JOHTO = {
     eggGroups: ['mineral'], hatchCounter: 20,
     learnset: { 1: ['rockthrow', 'mimic'], 119: ['lowkick'], 128: ['rockslide'], 146: ['slam'] },
     flavor: 'It holds its pose through every season except the rainy one.',
+    design: { inspired: 'tree stump', kind: 'plant', note: 'ancient tree stump, bark face, branch arms, green orbs' },
     tm: [1, 6, 8, 9, 10, 17, 18, 19, 20, 26, 27, 28, 31, 32, 34, 36, 38, 44, 47, 48, 50, 104],
   },
   politoed: {
@@ -369,6 +377,7 @@ export const SPECIES_JOHTO = {
     eggGroups: ['ground'], hatchCounter: 20,
     learnset: { 1: ['scratch', 'tailwhip'], 106: ['sandattack'], 127: ['swift'], 136: ['screech'], 146: ['agility'] },
     flavor: 'The hand on its tail is quicker and considerably less honest.',
+    design: { inspired: 'monkey', kind: 'animal', note: 'purple monkey, cream face, giant hand on its tail' },
     evo: { to: 'ambipom', method: 'level', level: 310 }, tm: [2, 4, 6, 9, 10, 31, 32, 33, 34, 39, 44, 50, 102],
   },
   sunkern: {
@@ -468,6 +477,7 @@ export const SPECIES_JOHTO = {
     eggGroups: ['indeterminate'], hatchCounter: 25,
     learnset: { 1: ['growl', 'psywave'], 112: ['confuseray'], 127: ['psybeam'] },
     flavor: 'It practices its wail on windy nights and grades the echoes.',
+    design: { inspired: 'wisp', kind: 'class', note: 'teal wisp, flowing mist hair, red bead necklace, sad eyes' },
     evo: { to: 'mismagius', method: 'stone', stone: 'moonstone' }, tm: [6, 20, 21, 24, 25, 29, 31, 32, 34, 36, 42, 44, 46, 47, 50],
   },
   unown: {
@@ -477,6 +487,7 @@ export const SPECIES_JOHTO = {
     eggGroups: ['no-eggs'], hatchCounter: 40,
     learnset: { 1: ['confusion', 'psybeam', 'psychic', 'teleport'] },
     flavor: 'A single letter with a single thought, spelled out in the dark.',
+    design: { inspired: 'glyph disc', kind: 'object', note: 'grey glyph disc, one great amber eye, carved stone ring' },
     tm: [1, 5, 6, 8, 9, 10, 17, 18, 19, 29, 30, 31, 32, 33, 34, 35, 40, 42, 44, 45, 46, 49, 50, 105],
   },
   wobbuffet: {
@@ -486,6 +497,7 @@ export const SPECIES_JOHTO = {
     eggGroups: ['indeterminate'], hatchCounter: 20,
     learnset: { 1: ['counter', 'confusion', 'psybeam', 'psychic'] },
     flavor: 'It endures. Whatever happened, it endures that too, patiently.',
+    design: { inspired: 'blob', kind: 'class', note: 'plain blue blob, closed eyes, tiny curled tail' },
     tm: [1, 5, 6, 9, 10, 17, 18, 19, 28, 29, 30, 31, 32, 33, 34, 35, 40, 42, 44, 45, 46, 49, 50, 105],
   },
   girafarig: {
@@ -495,6 +507,7 @@ export const SPECIES_JOHTO = {
     eggGroups: ['ground'], hatchCounter: 20,
     learnset: { 1: ['stomp', 'tackle', 'growl', 'confusion'], 120: ['agility'], 141: ['psybeam'] },
     flavor: 'The small head on its tail keeps watch while the big one dreams.',
+    design: { inspired: 'giraffe', kind: 'animal', note: 'yellow giraffe, brown patches, small second head on tail' },
     tm: [1, 5, 6, 8, 9, 10, 11, 12, 13, 14, 15, 17, 18, 19, 29, 30, 31, 32, 33, 34, 35, 40, 42, 44, 45, 46, 49, 50, 103],
   },
   pineco: {
@@ -554,6 +567,7 @@ export const SPECIES_JOHTO = {
     eggGroups: ['ground', 'fairy'], hatchCounter: 20,
     learnset: { 1: ['tackle'], 104: ['tailwhip'], 113: ['bite'], 119: ['lick'], 138: ['rage'], 151: ['takedown'] },
     flavor: 'The jaw is real, the menace is theatre. It startles at thunder.',
+    design: { inspired: 'bulldog', kind: 'animal', note: 'giant mauve bulldog, huge jowls, bared fangs, curled tail' },
     tm: [1, 5, 6, 8, 9, 10, 15, 17, 18, 19, 20, 29, 30, 31, 32, 33, 34, 35, 40, 42, 44, 45, 46, 49, 50, 105],
   },
   qwilfish: {
@@ -623,6 +637,7 @@ export const SPECIES_JOHTO = {
     eggGroups: ['ground'], hatchCounter: 20,
     learnset: { 1: ['scratch', 'leer', 'lick'], 129: ['rest'], 139: ['slash'] },
     flavor: 'Whole forests give its grazing grounds a respectful berth.',
+    design: { inspired: 'bear', kind: 'animal', note: 'big brown bear, cream ring on its chest, heavy arms' },
     tm: [1, 5, 6, 8, 9, 10, 11, 12, 13, 14, 15, 17, 18, 19, 20, 24, 25, 26, 27, 28, 31, 32, 34, 36, 38, 39, 40, 44, 47, 48, 50, 104],
   },
   slugma: {
@@ -692,6 +707,7 @@ export const SPECIES_JOHTO = {
     eggGroups: ['water1', 'water2'], hatchCounter: 20,
     learnset: { 1: ['watergun'], 111: ['constrict'], 122: ['psybeam', 'bubblebeam', 'aurorabeam'], 138: ['focusenergy'], 154: ['icebeam'], 170: ['hyperbeam'] },
     flavor: 'It anchors in rock crevices and negotiates with eight arms.',
+    design: { inspired: 'octopus', kind: 'animal', note: 'red octopus, cannon snout, sucker-ringed tentacles' },
     tm: [6, 8, 9, 10, 11, 12, 13, 14, 15, 16, 20, 31, 32, 34, 44, 50, 103],
   },
   delibird: {
@@ -771,6 +787,7 @@ export const SPECIES_JOHTO = {
     eggGroups: ['mineral'], hatchCounter: 20,
     learnset: { 1: ['tackle', 'conversion'], 109: ['agility'], 112: ['psybeam'], 120: ['recover'], 124: ['defensecurl'], 136: ['triattack'] },
     flavor: 'Rebuilt for other worlds, it still wobbles in this one.',
+    design: { inspired: 'duck', kind: 'animal', note: 'glossy pink duck, cream bill and belly, webbed feet' },
     evo: { to: 'porygonz', method: 'trade' }, tm: [1, 5, 6, 8, 9, 10, 11, 12, 13, 14, 15, 17, 18, 19, 20, 24, 25, 26, 27, 28, 31, 32, 34, 36, 38, 39, 40, 44, 47, 48, 50, 104],
   },
   stantler: {
@@ -790,6 +807,7 @@ export const SPECIES_JOHTO = {
     eggGroups: ['ground'], hatchCounter: 20,
     learnset: { 1: ['tackle', 'quickattack', 'swift', 'takedown'] },
     flavor: 'It marks its ground in its own colours and signs every wall.',
+    design: { inspired: 'dog', kind: 'animal', note: 'cream puppy, green beret, rainbow paint-dipped tail' },
     tm: [1, 5, 6, 8, 9, 10, 11, 12, 13, 14, 17, 18, 19, 20, 24, 25, 29, 31, 32, 33, 34, 35, 38, 39, 40, 41, 42, 44, 45, 46, 49, 50, 105],
   },
   tyrogue: {
@@ -799,6 +817,7 @@ export const SPECIES_JOHTO = {
     eggGroups: ['no-eggs'], baby: true, hatchCounter: 25,
     learnset: { 1: ['tackle', 'lowkick', 'karatechop', 'submission'] },
     flavor: 'It picks fights with anything standing, to see what it becomes.',
+    design: { inspired: 'bear cub', kind: 'animal', note: 'tan bear cub, red headband, wrapped fists, fighting stance' },
     evo: { to: 'hitmontop', method: 'level', level: 120 }, tm: [1, 5, 6, 8, 9, 10, 17, 18, 19, 20, 26, 27, 28, 31, 32, 34, 38, 44, 48, 50, 104],
   },
   hitmontop: {
@@ -808,6 +827,7 @@ export const SPECIES_JOHTO = {
     eggGroups: ['humanshape'], hatchCounter: 25,
     learnset: { 107: ['focusenergy'], 119: ['quickattack'], 131: ['counter'], 137: ['agility'] },
     flavor: 'It spins into battle head-down and somehow lands every kick.',
+    design: { inspired: 'spinning top', kind: 'object', note: 'teal spinning top, spiral cheeks, balanced on its spike' },
     tm: [1, 5, 6, 8, 9, 10, 16, 17, 18, 19, 20, 24, 25, 28, 31, 32, 34, 39, 44, 48, 50, 104],
   },
   smoochum: {
@@ -817,6 +837,7 @@ export const SPECIES_JOHTO = {
     eggGroups: ['no-eggs'], baby: true, hatchCounter: 25,
     learnset: { 1: ['pound', 'lick'], 121: ['confusion'], 125: ['sing'], 137: ['psychic'], 149: ['blizzard'] },
     flavor: 'It checks every new feeling twice with a kiss-shaped test.',
+    design: { inspired: 'sprite', kind: 'class', note: 'pink sprite, huge blonde curls, ice-crystal tiara' },
     evo: { to: 'jynx', method: 'level', level: 130 }, tm: [1, 5, 6, 8, 9, 10, 11, 12, 13, 14, 15, 17, 18, 19, 29, 30, 31, 32, 33, 34, 35, 40, 42, 44, 45, 46, 49, 50, 103],
   },
   elekid: {
@@ -826,6 +847,7 @@ export const SPECIES_JOHTO = {
     eggGroups: ['no-eggs'], baby: true, hatchCounter: 25,
     learnset: { 1: ['leer', 'quickattack'], 109: ['thunderpunch'], 117: ['lightscreen'], 125: ['swift'], 133: ['screech'], 141: ['thunderbolt'], 149: ['thunder'] },
     flavor: 'It spins its arms to charge and butts heads when the charge fades.',
+    design: { inspired: 'imp', kind: 'class', note: 'yellow imp, twin plug horns, black belly stripes' },
     evo: { to: 'electabuzz', method: 'level', level: 130 }, tm: [6, 9, 10, 20, 24, 25, 31, 32, 33, 34, 36, 39, 44, 50, 105],
   },
   magby: {
@@ -845,6 +867,7 @@ export const SPECIES_JOHTO = {
     eggGroups: ['ground'], hatchCounter: 20,
     learnset: { 1: ['tackle'], 104: ['growl'], 108: ['defensecurl'], 113: ['stomp'], 126: ['bide'], 143: ['bodyslam'] },
     flavor: 'Its milk has settled sickrooms and sieges of bad temper alike.',
+    design: { inspired: 'cow', kind: 'animal', note: 'pink cow, black patches, gold bell collar, small horns' },
     tm: [1, 5, 6, 8, 9, 10, 11, 12, 13, 14, 15, 17, 18, 19, 20, 24, 25, 26, 27, 28, 31, 32, 34, 36, 38, 39, 40, 44, 47, 48, 50, 104],
   },
   blissey: {
@@ -854,6 +877,7 @@ export const SPECIES_JOHTO = {
     eggGroups: ['fairy'], hatchCounter: 40,
     learnset: { 1: ['pound'], 104: ['growl'], 107: ['tailwhip'], 110: ['softboiled'], 113: ['doubleslap'], 118: ['minimize'], 123: ['sing'], 128: ['eggbomb'], 133: ['defensecurl'], 140: ['lightscreen'], 147: ['doubleedge'] },
     flavor: 'It will feed its egg to a stranger’s sorrow before its own.',
+    design: { inspired: 'sprite', kind: 'class', note: 'pink egg sprite, nurse cap, cradled speckled egg' },
     tm: [1, 5, 6, 8, 9, 10, 11, 12, 13, 14, 15, 17, 18, 19, 20, 24, 25, 26, 27, 28, 29, 31, 32, 34, 36, 38, 39, 40, 42, 44, 46, 47, 50, 103, 104],
   },
   raikou: {
@@ -863,6 +887,7 @@ export const SPECIES_JOHTO = {
     eggGroups: ['no-eggs'], hatchCounter: 80,
     learnset: { 1: ['leer', 'bite'], 111: ['thundershock'], 131: ['quickattack'], 151: ['reflect'], 171: ['thunder'] },
     flavor: 'Thunder walks on four legs; storms follow a step behind.',
+    design: { inspired: 'tiger', kind: 'animal', note: 'indigo tiger, glowing gold bolt stripes, storm-cloud mane' },
     tm: [2, 4, 6, 9, 10, 15, 20, 24, 25, 31, 32, 33, 34, 39, 44, 45, 50, 102, 105],
   },
   entei: {
@@ -892,6 +917,7 @@ export const SPECIES_JOHTO = {
     eggGroups: ['monster'], hatchCounter: 40,
     learnset: { 1: ['leer', 'bite'], 115: ['screech'], 122: ['rockslide'], 150: ['earthquake'], 157: ['hyperbeam'] },
     flavor: 'It eats a hillside of earth, then sleeps until it is a mountain.',
+    design: { inspired: 'dinosaur', kind: 'animal', note: 'green dinosaur, grey boulders on head and back, one fang' },
     evo: { to: 'pupitar', method: 'level', level: 130 }, tm: [6, 8, 9, 10, 15, 20, 24, 25, 26, 27, 28, 31, 32, 34, 38, 44, 48, 50, 104],
   },
   pupitar: {
@@ -901,6 +927,7 @@ export const SPECIES_JOHTO = {
     eggGroups: ['monster'], hatchCounter: 40,
     learnset: { 1: ['leer', 'bite', 'screech'], 122: ['rockslide'], 156: ['earthquake'], 165: ['hyperbeam'] },
     flavor: 'A shell full of coming weather; it thrashes at its own future.',
+    design: { inspired: 'boulder', kind: 'object', note: 'grey boulder ball, spiked shell, red eyes in a crack' },
     evo: { to: 'tyranitar', method: 'level', level: 155 }, tm: [1, 6, 8, 9, 10, 17, 18, 19, 20, 26, 27, 28, 31, 32, 34, 36, 38, 44, 47, 48, 50, 104],
   },
   tyranitar: {

@@ -31,6 +31,7 @@ export const SPECIES2 = {
     eggGroups: ['monster', 'dragon'], hatchCounter: 20,
     learnset: { 1: ['scratch', 'growl', 'ember'], 12: ['leer'], 24: ['rage'], 36: ['slash'], 42: ['flamethrower'], 56: ['firespin'] },
     flavor: 'Impatient and proud. Its claws spark against cave stone.',
+    design: { inspired: 'lizard', kind: 'animal', note: 'tall crimson lizard, black spiked crest, long flame tail' },
     evo: { to: 'charizard', method: 'level', level: 36 }, tm: [1, 3, 6, 8, 9, 10, 17, 18, 19, 20, 28, 31, 32, 34, 38, 40, 44, 50, 101, 104],
   },
   charizard: {
@@ -50,6 +51,7 @@ export const SPECIES2 = {
     eggGroups: ['monster', 'water1'], hatchCounter: 20,
     learnset: { 1: ['tackle', 'tailwhip', 'bubble'], 10: ['watergun'], 18: ['bite'], 27: ['withdraw'], 36: ['skullbash'], 45: ['hydropump'] },
     flavor: 'Its fluffy tail reads the current before it dives.',
+    design: { inspired: 'dolphin', kind: 'animal', note: 'pale-blue dolphin, bubble crown, fluked tail, sweet eye' },
     evo: { to: 'blastoise', method: 'level', level: 36 }, tm: [1, 6, 8, 9, 10, 11, 12, 13, 14, 17, 18, 19, 28, 31, 32, 34, 44, 50, 103, 104],
   },
   blastoise: {
@@ -59,6 +61,7 @@ export const SPECIES2 = {
     eggGroups: ['monster', 'water1'], hatchCounter: 20,
     learnset: { 1: ['tackle', 'tailwhip', 'bubble', 'watergun'], 18: ['bite'], 27: ['withdraw'], 39: ['skullbash'], 52: ['hydropump'] },
     flavor: 'Twin cannons, calm aim. Lakes go quiet when it surfaces.',
+    design: { inspired: 'whale', kind: 'animal', note: 'deep-blue whale, swirling pale fins, bubble halo, cream belly' },
     tm: [1, 5, 6, 8, 9, 10, 11, 12, 13, 14, 15, 17, 18, 19, 26, 27, 28, 31, 32, 34, 44, 50, 103, 104],
   },
   metapod: {
@@ -168,6 +171,7 @@ export const SPECIES2 = {
     eggGroups: ['ground', 'fairy'], hatchCounter: 10,
     learnset: { 1: ['thundershock', 'growl'], 6: ['tailwhip'], 8: ['thunderwave'], 11: ['quickattack'], 20: ['swift'], 26: ['agility'], 33: ['thunderbolt'], 43: ['thunder'] },
     flavor: 'A wild spark-hoarder of the deep forest clearings.',
+    design: { inspired: 'hamster', kind: 'animal', note: 'mint hamster, copper battery cap, cream belly, big ears' },
     evo: { to: 'raichu', method: 'stone', stone: 'thunderstone' }, tm: [1, 5, 6, 9, 10, 16, 19, 24, 25, 31, 32, 33, 34, 39, 40, 44, 45, 50, 105],
   },
   raichu: {
@@ -277,6 +281,7 @@ export const SPECIES2 = {
     eggGroups: ['ground'], hatchCounter: 20,
     learnset: { 1: ['ember', 'tailwhip'], 16: ['quickattack'], 21: ['confuseray'], 28: ['flamethrower'], 35: ['firespin'] },
     flavor: 'Six tails, each curled with care. It preens by firelight.',
+    design: { inspired: 'fox', kind: 'animal', note: 'rust-orange fox, flame-tipped tails, ember-flecked coat' },
     evo: { to: 'ninetales', method: 'stone', stone: 'firestone' }, tm: [6, 8, 9, 10, 20, 28, 31, 32, 33, 34, 38, 39, 44, 50],
   },
   ninetales: {
@@ -1337,6 +1342,7 @@ export const SPECIES2 = {
     eggGroups: ['no-eggs'], hatchCounter: 80,
     learnset: { 1: ['peck', 'thundershock'], 51: ['thunder'], 55: ['agility'], 60: ['lightscreen'] },
     flavor: 'It nests inside thunderheads and argues with the storm.',
+    design: { inspired: 'eagle', kind: 'animal', note: 'great brown eagle, navy flight feathers, sparking wingtips' },
     tm: [2, 4, 6, 9, 10, 15, 20, 24, 25, 31, 32, 33, 34, 39, 44, 45, 50, 102, 105],
   },
   moltres: {
@@ -1386,6 +1392,7 @@ export const SPECIES2 = {
     eggGroups: ['no-eggs'], hatchCounter: 120,
     learnset: { 1: ['confusion', 'disable'], 55: ['barrier'], 60: ['psychic'], 66: ['recover'], 70: ['mist'], 75: ['amnesia'], 81: ['swift'] },
     flavor: 'It asks questions no laboratory ever thought to answer.',
+    design: { inspired: 'seraph', kind: 'cosmic', note: 'pale violet seraph, halo ring, twin orbiting orbs, closed eyes' },
     tm: [1, 5, 6, 8, 9, 10, 11, 12, 13, 14, 15, 17, 18, 19, 20, 24, 25, 29, 30, 31, 32, 33, 34, 35, 38, 39, 40, 42, 44, 45, 46, 49, 50, 103, 104, 105],
   },
   mew: {
@@ -1495,6 +1502,7 @@ export const SPECIES2 = {
     eggGroups: ['ground', 'fairy'], hatchCounter: 20,
     learnset: { 1: ['tackle', 'tailwhip', 'growl'], 7: ['bite'], 13: ['lick'], 19: ['headbutt'], 31: ['rage'], 37: ['takedown'] },
     flavor: 'All scowl and no bite — it would rather be carried home.',
+    design: { inspired: 'bulldog', kind: 'animal', note: 'pink bulldog, deep wrinkled jowls, grumpy underbite' },
     evo: { to: 'granbull', method: 'level', level: 23 },
   },
   donphan: {

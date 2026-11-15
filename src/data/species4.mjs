@@ -62,6 +62,7 @@ export const SPECIES_HOENN = {
     eggGroups: ['ground'], hatchCounter: 20,
     learnset: { 1: ['scratch', 'growl', 'ember', 'focusenergy'], 217: ['peck'], 221: ['sandattack'], 232: ['quickattack'], 239: ['slash'] },
     flavor: 'It trains by kicking the air until the air gives up.',
+    design: { inspired: 'rooster', kind: 'animal', note: 'red fighting rooster, spiked crest, crossed wing-arms' },
     evo: { to: 'blaziken', method: 'level', level: 236 }, tm: [1, 3, 6, 8, 9, 10, 17, 18, 19, 20, 28, 31, 32, 34, 38, 40, 44, 50, 101, 104],
   },
   blaziken: {
@@ -71,6 +72,7 @@ export const SPECIES_HOENN = {
     eggGroups: ['ground'], hatchCounter: 20,
     learnset: { 1: ['firepunch', 'scratch', 'growl', 'ember', 'focusenergy'], 217: ['peck'], 221: ['sandattack'], 232: ['quickattack'], 242: ['slash'] },
     flavor: 'Its leap clears rooftops; its landing writes the exclamation.',
+    design: { inspired: 'rooster', kind: 'animal', note: 'crimson rooster, flame crest, long gold tail streamers' },
     tm: [1, 2, 3, 5, 6, 8, 9, 10, 15, 17, 18, 19, 20, 26, 27, 28, 31, 32, 34, 38, 39, 40, 44, 50, 101, 102, 104],
   },
   mudkip: {
@@ -80,6 +82,7 @@ export const SPECIES_HOENN = {
     eggGroups: ['monster', 'water1'], hatchCounter: 20,
     learnset: { 1: ['tackle', 'growl'], 210: ['watergun'], 215: ['bide'], 228: ['takedown'], 242: ['hydropump'] },
     flavor: 'The fin on its head reads the water better than any map.',
+    design: { inspired: 'mudskipper', kind: 'animal', note: 'blue mudskipper, orange fan fins, mud-spotted back' },
     evo: { to: 'marshtomp', method: 'level', level: 216 }, tm: [1, 6, 8, 9, 10, 11, 12, 13, 14, 16, 20, 26, 27, 28, 29, 30, 31, 32, 33, 34, 38, 39, 42, 44, 45, 46, 50, 103, 105],
   },
   marshtomp: {
@@ -89,6 +92,7 @@ export const SPECIES_HOENN = {
     eggGroups: ['monster', 'water1'], hatchCounter: 20,
     learnset: { 1: ['tackle', 'growl', 'watergun'], 215: ['bide'], 231: ['takedown'], 246: ['earthquake'] },
     flavor: 'It plants itself in mud and becomes, briefly, geography.',
+    design: { inspired: 'mudskipper', kind: 'animal', note: 'upright mudskipper, orange cheek fans, tall tail fin' },
     evo: { to: 'swampert', method: 'level', level: 236 }, tm: [6, 8, 9, 10, 15, 20, 26, 27, 28, 31, 32, 34, 44, 48, 50],
   },
   swampert: {
@@ -98,6 +102,7 @@ export const SPECIES_HOENN = {
     eggGroups: ['monster', 'water1'], hatchCounter: 20,
     learnset: { 1: ['tackle', 'growl', 'watergun'], 215: ['bide'], 231: ['takedown'], 252: ['earthquake'] },
     flavor: 'It hauls beached boats back to sea and waves off the thanks.',
+    design: { inspired: 'mudskipper', kind: 'animal', note: 'giant mudskipper, orange fin ruff, mud-caked legs' },
     tm: [6, 8, 9, 10, 15, 20, 26, 27, 28, 31, 32, 34, 44, 48, 50],
   },
   poochyena: {
@@ -997,6 +1002,7 @@ export const SPECIES_HOENN = {
     eggGroups: ['water1', 'dragon'], hatchCounter: 20,
     learnset: { 1: ['watergun'], 205: ['wrap'], 230: ['recover'], 240: ['hydropump'] },
     flavor: 'The argument every river makes for gentleness. RAGFIN reaches it at level 220 here — beauty, in this region, is patience.',
+    design: { inspired: 'sea serpent', kind: 'class', note: 'teal sea serpent, finned crest, gentle coiled pose' },
     tm: [6, 8, 9, 10, 11, 12, 13, 14, 15, 20, 24, 25, 28, 31, 32, 34, 38, 39, 44, 50, 103, 104],
   },
   castform: {
@@ -1366,6 +1372,7 @@ export const SPECIES_HOENN = {
     eggGroups: ['no-eggs'], hatchCounter: 120,
     learnset: { 1: ['confusion', 'psybeam', 'psychic', 'teleport'] },
     flavor: 'XENOLASH at full stretch — every limb a drawn bow.',
+    design: { inspired: 'alien', kind: 'cosmic', note: 'same design, whip tentacles stretched long, clawed hooks' },
     tm: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 44, 45, 46, 47, 48, 49, 50, 101, 102, 103, 104, 105],
     form: true, baseSpecies: 'deoxys',
   },
@@ -1376,6 +1383,7 @@ export const SPECIES_HOENN = {
     eggGroups: ['no-eggs'], hatchCounter: 120,
     learnset: { 1: ['confusion', 'psybeam', 'psychic', 'teleport'] },
     flavor: 'XENOAEGIS braced — a wall that thinks at light-speed.',
+    design: { inspired: 'alien', kind: 'cosmic', note: 'same design, arms crossed into broad shield plates' },
     tm: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 44, 45, 46, 47, 48, 49, 50, 101, 102, 103, 104, 105],
     form: true, baseSpecies: 'deoxys',
   },
@@ -1386,6 +1394,7 @@ export const SPECIES_HOENN = {
     eggGroups: ['no-eggs'], hatchCounter: 120,
     learnset: { 1: ['wrap', 'leer'], 205: ['nightshade'], 210: ['doubletam'], 225: ['psychic'], 230: ['swift'], 235: ['agility'], 240: ['recover'] },
     flavor: 'XENOVELOX streamlined — the afterimage arrives first.',
+    design: { inspired: 'alien', kind: 'cosmic', note: 'same design, streamlined wings, mid-flight dive pose' },
     tm: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 44, 45, 46, 47, 48, 49, 50, 101, 102, 103, 104, 105],
     form: true, baseSpecies: 'deoxys',
   },
