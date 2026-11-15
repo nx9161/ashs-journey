@@ -994,12 +994,20 @@ const driver = `
     return finLines.some(function (l) { return l.indexOf(a.label + ' · ' + a.region + ' — ') === 0; });
   });
   var lastEntry = finEntries[finEntries.length - 1];
-  ok('C08 FULL CREDITS: the finale\\'s last presented scene IS the credits — every completed arc listed by its registry title (six, from regionsDone), the road-so-far counts 6 journeys at 492/493, and the sequence CLOSES on the end card (approved line verbatim, card lines as the tail)',
+  // W10-C T3 re-pin (disclosed): the finale panel (FINALE_PANEL —
+  // Director-ruled geometry: after the credits, as the game's
+  // closing image) is now the sequence's last presented entry; the
+  // credits remain the last DIALOGUE and still close on the end
+  // card verbatim. Both halves are asserted — nothing is dropped.
+  var dlgEntries = finEntries.filter(function (e) { return Array.isArray(e.lines); });
+  var lastDlg = dlgEntries[dlgEntries.length - 1];
+  ok('C08 FULL CREDITS: the finale\\'s last presented DIALOGUE is the credits — every completed arc listed by its registry title (six, from regionsDone), the road-so-far counts 6 journeys at 492/493, the dialogue CLOSES on the end card (approved line verbatim, card lines as the tail), and the finale panel (W10-C T3) is the closing image after it',
     arcTitlesOk
     && finLines.some(function (l) { return l.indexOf('The road so far:') === 0 && l.indexOf('6 journeys complete') >= 0 && l.indexOf('492/493') >= 0; })
-    && !!lastEntry && Array.isArray(lastEntry.lines)
-    && JSON.stringify(lastEntry.lines.slice(-FINALE_END_CARD.length)) === JSON.stringify(FINALE_END_CARD)
-    && lastEntry.lines.includes('Six journeys. Five leagues and a frontier. One road, walked whole.'),
+    && !!lastDlg
+    && JSON.stringify(lastDlg.lines.slice(-FINALE_END_CARD.length)) === JSON.stringify(FINALE_END_CARD)
+    && lastDlg.lines.includes('Six journeys. Five leagues and a frontier. One road, walked whole.')
+    && !!lastEntry && lastEntry.ui === 'panel' && lastEntry.art === 'panel-finale-road',
     finLines.slice(-4).join(' | '));
   // ---- C09: the Master entry is READABLE in the HoF viewer ----
   g.openHallOfFame(); tk(g, 2);
