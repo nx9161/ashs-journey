@@ -200,6 +200,7 @@ export const ORANGE_EVENTS = {
   ev_orange_2000_moltres: [
     { say: ['The shrine niche is wrapped in bars of hard light, humming — Halloway\'s cage, sunk into the old stone like a fence into a grave. Behind it, the kind fires have gone white and furious, and the heat coming off the altar has a heartbeat.'], who: 'NARRATOR' },
     { say: ['You work the cage the only way cages understand. Stone chips. Light cracks — and the shrine\'s tenant answers the noise the way it has answered everything for a thousand years: all at once, and on fire.'], who: 'NARRATOR' },
+    { panel: 'cagefire-pyrehawk' },
     { wildBattle: { species: 'moltres', level: 50, uncatchable: true } },
     { say: ['The great wings fold. The white rage banks down to ember, to glow, to the warm breathing dark the cave remembers. PYREHAWK regards you for a long moment — then the cave roof is sky, and it is gone into the clearing south wind, free and unhurried.'], who: 'NARRATOR' },
     { flag: 'orange_2000_moltres' },
@@ -209,6 +210,7 @@ export const ORANGE_EVENTS = {
   ev_orange_2000_zapdos: [
     { say: ['Copper offerings have fused into the cage bars, and the whole shrine rings at a pitch just below hearing. Halloway\'s light-cage is drinking the storm out of the stone — and the stone\'s owner has noticed the theft, and the thief\'s timing, and you.'], who: 'NARRATOR' },
     { say: ['The bars come down in a smell of hot rain. What rises out of the shrine is not angry the way fire is angry. It is angry the way weather is angry: personally, and at everything, all at once.'], who: 'NARRATOR' },
+    { panel: 'cagestorm-fulminis' },
     { wildBattle: { species: 'zapdos', level: 50, uncatchable: true } },
     { say: ['One last thunderclap — closer to a sentence than a sound — and FULMINIS shakes the cage-light off its wings like rain. It circles the cave once, sparks settling, then takes the east wind out over a sky that is suddenly, noticeably quieter.'], who: 'NARRATOR' },
     { flag: 'orange_2000_zapdos' },
@@ -218,6 +220,7 @@ export const ORANGE_EVENTS = {
   ev_orange_2000_articuno: [
     { say: ['The cage bars are rimes of black ice over hard light, and the shrine\'s frozen offerings hang mid-gesture inside it, preserved like flies in amber. Halloway would call that a preview. The cold coming through the bars has an opinion of its own.'], who: 'NARRATOR' },
     { say: ['The cage shatters outward in a ring of snow that never touches you. GLACIERNE unfolds from the shrine the way winter unfolds from a mountain: slowly, beautifully, and with complete indifference to your plans.'], who: 'NARRATOR' },
+    { panel: 'cageice-glacierne' },
     { wildBattle: { species: 'articuno', level: 50, uncatchable: true } },
     { say: ['The vast wings settle. Frost flowers close like eyes. GLACIERNE bows its head — a fraction, no more than courtesy owes — and lifts away north over water that has stopped arguing with itself. One storm remains, and it is the one in the middle.'], who: 'NARRATOR' },
     { flag: 'orange_2000_articuno' },
@@ -235,6 +238,7 @@ export const ORANGE_EVENTS = {
     { say: ['ORAPOTAM walks — unhurried, absolute — to the back passage, and down toward the deep chamber. It does not look back. It does not need to. You follow it into the cold, deep water-light, where the sealed altar waits... and the sea, at last, answers.'], who: 'NARRATOR' },
     { warp: { map: 'shamouti-deep', x: 7, y: 10 } },
     { say: ['It rises the way the tide rises: not fast, not slow — inevitably. Wings like white headlands. Eyes that have watched ten thousand festivals and every storm since the first one. The guardian of the sea does not rage. It MEASURES. The one who calmed the titans will be tested the way the sea tests everything: completely.'], who: 'NARRATOR' },
+    { panel: 'deep-abyssorn' },
     { wildBattle: { species: 'lugia', level: 55, uncatchable: true } },
     { say: ['ABYSSORN folds its wings. The proving is over — and somewhere far above, audible even here, the storm simply... stops. Rain first, then wind, then the long grinding argument of the currents, settling one by one into their old, kind roads.'], who: 'NARRATOR' },
     { say: ['Halloway\'s barge comes down in the harbour like a tired bird — cage swinging empty, lights drowned, engines full of seawater and second thoughts. Its owner stands on Sanctum\'s dock in the returning sunlight, holding his hat, looking at the calm he tried to steal and somehow helped to save.'], who: 'NARRATOR' },
@@ -254,6 +258,7 @@ export const ORANGE_EVENTS = {
   //    re-fires on the next descent. -------------------------------
   ev_orange_2000_lugia: [
     { say: ['The deep chamber is still as held breath. In the water-light at the altar, immense and patient, the guardian waits — not sleeping, not wary. Waiting the way the sea waits: because it can, and because you came back.'], who: 'NARRATOR' },
+    { panel: 'altar-abyssorn' },
     { arc: 'arc_lugia_shamouti', stage: 'active' },
     { wildBattle: { species: 'lugia', level: 55, legendary: true } },
     { arc: 'arc_lugia_shamouti', stage: 'complete' },

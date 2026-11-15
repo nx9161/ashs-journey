@@ -43,4 +43,15 @@ export const PANELS = {
   'inn-noctarch': { art: 'panel-inn-noctarch' },
   'meteor-astraeon': { art: 'panel-meteor-astraeon' },
   'crater-xenogene': { art: 'panel-crater-xenogene' },
+  // W10-B T4 — battle reveals (Class B, attach like catches)
+  'plant-fulminis': { art: 'panel-plant-fulminis' },
+  'crownroad-pyrehawk': { art: 'panel-crownroad-pyrehawk' },
+  'seafoam-glacierne': { art: 'panel-seafoam-glacierne' },
+  'stillheart-omnigen': { art: 'panel-stillheart-omnigen' },
+  'rain-primara': { art: 'panel-rain-primara' },
+  'cagefire-pyrehawk': { art: 'panel-cagefire-pyrehawk' },
+  'cagestorm-fulminis': { art: 'panel-cagestorm-fulminis' },
+  'cageice-glacierne': { art: 'panel-cageice-glacierne' },
+  'deep-abyssorn': { art: 'panel-deep-abyssorn' },
+  'altar-abyssorn': { art: 'panel-altar-abyssorn' },
 };
