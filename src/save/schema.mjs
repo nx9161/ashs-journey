@@ -366,7 +366,21 @@ export function fillV2Defaults(data) {
   // that is not a keepsake id) coerces to null on load — the same
   // closed-shape rebuild the houseRules block below performs — so a
   // tampered or legacy value opens clean; validateSave stays strict.
-  const fillMon = (m) => { if (isObj(m) && (typeof m.keepsake !== 'string' || !KEEPSAKES[m.keepsake])) m.keepsake = null; };
+  const fillMon = (m) => {
+    if (!isObj(m)) return;
+    if (typeof m.keepsake !== 'string' || !KEEPSAKES[m.keepsake]) m.keepsake = null;
+    // Battle-entry hotfix (2026-11-15): mon.stages joins the filled shape.
+    // BattleScene reads ally.stages.acc unconditionally at entry, and a
+    // mon record without a stages object (legacy/partial writer) froze
+    // the game at battle entry — the throw escaped the pre-battle
+    // dialogue callback and killed the frame loop. Fill the zero object
+    // when absent/malformed; coerce any present non-finite field to 0
+    // (valid values, acc/eva included, pass through untouched).
+    if (!isObj(m.stages)) m.stages = { atk: 0, def: 0, spa: 0, spd: 0, spe: 0 };
+    else for (const k of ['atk', 'def', 'spa', 'spd', 'spe', 'acc', 'eva']) {
+      if (m.stages[k] !== undefined && !Number.isFinite(m.stages[k])) m.stages[k] = 0;
+    }
+  };
   if (Array.isArray(data.party)) for (const m of data.party) fillMon(m);
   if (isObj(data.boxes)) for (const arr of Object.values(data.boxes)) {
     if (Array.isArray(arr)) for (const m of arr) fillMon(m);

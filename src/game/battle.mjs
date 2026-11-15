@@ -841,7 +841,10 @@ export class BattleScene {
     this.ally = this.firstAble(g);
     this.foe = this.foeMon;
     this.foeStages = { atk: 0, def: 0, spa: 0, spd: 0, spe: 0, acc: 0, eva: 0 };
-    this.allyStages = this.ally.stages;
+    // Hotfix 2026-11-15: tolerate a mon record with no stages object
+    // (the save layer fills it on load; this keeps any other writer
+    // from ever freezing a battle on the acc read below).
+    this.allyStages = this.ally.stages || (this.ally.stages = { atk: 0, def: 0, spa: 0, spd: 0, spe: 0 });
     if (this.allyStages.acc === undefined) { this.allyStages.acc = 0; this.allyStages.eva = 0; }
     // Fidelity pack (ADR-018): XP is split among participants — mons that
     // were active against THIS foe. Reset per foe in afterFaintFoe.
@@ -1320,7 +1323,10 @@ export class BattleScene {
       if (v === null || v === -1) { if (inFaint) this.openPartyMenu(true); else this.toCommand(); return; }
       const old = this.ally;
       this.ally = this.allyTeam(g)[v];
-      this.allyStages = this.ally.stages;
+      // Hotfix 2026-11-15: tolerate a mon record with no stages object
+      // (the save layer fills it on load; this keeps any other writer
+      // from ever freezing a battle on the acc read below).
+      this.allyStages = this.ally.stages || (this.ally.stages = { atk: 0, def: 0, spa: 0, spd: 0, spe: 0 });
       if (this.allyStages.acc === undefined) { this.allyStages.acc = 0; this.allyStages.eva = 0; }
       this.participants.add(this.ally); // switched-in mons share this foe's XP
       this.hpAnim.ally = this.ally.hp;
@@ -2370,7 +2376,10 @@ export class BattleScene {
     g.ui.showMenu('Choose a Kin', items, (v) => {
       if (v === null || v === -1) { this._showShiftMenu(); return; }
       this.ally = g.state.party[v];
-      this.allyStages = this.ally.stages;
+      // Hotfix 2026-11-15: tolerate a mon record with no stages object
+      // (the save layer fills it on load; this keeps any other writer
+      // from ever freezing a battle on the acc read below).
+      this.allyStages = this.ally.stages || (this.ally.stages = { atk: 0, def: 0, spa: 0, spd: 0, spe: 0 });
       if (this.allyStages.acc === undefined) { this.allyStages.acc = 0; this.allyStages.eva = 0; }
       this.hpAnim.ally = this.ally.hp;
       // Switch-in keepsake triggers evaluate exactly as a command-phase
