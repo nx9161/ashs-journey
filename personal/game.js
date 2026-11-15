@@ -4872,6 +4872,92 @@ W17N_KIND_DEFS.forEach(([kind], i) => {
 const W17N_PROP_KINDS = W17N_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
 const W17N_WALL_KINDS = W17N_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
 const W17N_FLOOR_KINDS = W17N_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
+// Wave W17-O (Route Build Program, Maris Tranche 4 — the broken
+// stair, the ash road, the crater road, the fallen sky): Ragged
+// Pass -> Route 113 -> Route 114 -> Comet Falls -> Route 115.
+// All five maps are defined once in maps7.mjs (no dual copies in
+// Maris, so no registry re-pins arise). Conversions are
+// char-for-char kind swaps on grassground/path/tree (land
+// routes) or cavefloor/cavewall (Comet Falls); encounter
+// cells/tables, warps, NPC posts, sign records/texts and every
+// shipped biome/dressing kind stay byte-identical. Ragged Pass
+// "the broken stair" (1304-1307): stairturf is ledge grass with
+// worn-lip stone-dust flecks, stairfloor broken-stair sand —
+// the design's cut stair flights drawn as stepped lip edges in
+// the path kind's own art (the fallfloor discipline) —
+// stairpine a compact ledge pine, springpost spring-terrace
+// marker posts x2 on the lower steps; volcrock dressing (5)
+// stays byte-identical. Route 113 "Ash Road" (1308-1311):
+// sweepturf is ash-dulled grass with swept-clean patches,
+// sweepfloor the swept pale road with broom streaks drawn in
+// the kind, sweeppine an ash-pale pine, ashdrift banked ash
+// drifts x2 on the road's verge (the shipped map carries no
+// fence kind, so the drifts bank against the ashground
+// patches — recorded in the checklist); the shipped ashground
+// (26) + ashshrub (7) are the route's permanent ash biome —
+// byte-preserved by spec (Director ruling #3, the Frost Path
+// precedent). Route 114 "Crater Road" (1312-1315): impacturf
+// is crater-field grass with stone-dust flecks, impactfloor
+// crater-road sand with fallen stone chips in the tread,
+// impactpine a sturdy crater pine, hunterpost fossil hunters'
+// marker posts x2 among the craters; meteorstone (3) and the
+// 2 'L' falls-mouth warp cells stay byte-identical. Comet
+// Falls "Comet Deep" (1316-1317) converts by the cave method:
+// cometfloor takes the generic cavefloor (star-stone cave
+// flags, the design's fallen-sky fragments drawn as star
+// flecks in the floor's own art, art layer only) and
+// cometwall takes the cavewall (breached cavern wall, the
+// broken sky-roof drawn as a pale star-stone seam band);
+// falls water (59), meteorstone (3), cavecrystal (3) and
+// caveboulder (1) stay byte-identical, the trigger census is
+// taken before/after, and NO props are placed (cave
+// discipline). Twin: Scorch Path — Comet is the wet
+// fallen-sky cave, Scorch the hot heart. Route 115 "Falls
+// Shore" (1318-1321): mistturf is spray-fresh shore grass,
+// mistfloor falls-foot pale sand (design-authorised),
+// mistpine a spray-fresh shore pine, swimpost swimmer's
+// marker posts x2 at the falls' foot pool; shore water (60),
+// the rock falls-foot boulders (30 — falls dressing, NOT a
+// lane conversion) and the 2 'L' north-mouth warp cells stay
+// byte-identical. Ground kinds deliberately do NOT end in
+// 'floor' (the desire-path audit counts '*floor' as street
+// tier; grounds must never masquerade as street); path kinds
+// DO end in 'floor' so they register as the route's path tier
+// per route (checklist point 3). Indices 1304-1321 per the
+// program plan (WAVE-W17-MARIS-ROUTE-PROGRAM-PLAN.md): W17-L
+// took 1257-1276, W17-M 1277-1286, and W17-N takes 1287-1303
+// on its parallel branch; 1111 and every earlier documented
+// gap stay empty. Kind names verified unclaimed against
+// origin/main. Chars U+1E00+1304..
+const W17O_KIND_DEFS = [
+  ['stairturf', 'floor'],
+  ['stairfloor', 'floor'],
+  ['stairpine', 'wall'],
+  ['springpost', 'prop'],
+  ['sweepturf', 'floor'],
+  ['sweepfloor', 'floor'],
+  ['sweeppine', 'wall'],
+  ['ashdrift', 'prop'],
+  ['impacturf', 'floor'],
+  ['impactfloor', 'floor'],
+  ['impactpine', 'wall'],
+  ['hunterpost', 'prop'],
+  ['cometfloor', 'floor'],
+  ['cometwall', 'wall'],
+  ['mistturf', 'floor'],
+  ['mistfloor', 'floor'],
+  ['mistpine', 'wall'],
+  ['swimpost', 'prop'],
+];
+const W17O_KIND_CHARS = {};
+W17O_KIND_DEFS.forEach(([kind], i) => {
+  const ch = String.fromCodePoint(0x1E00 + 1304 + i);
+  W17O_KIND_CHARS[kind] = ch;
+  TILE_CHARS[ch] = kind;
+});
+const W17O_PROP_KINDS = W17O_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
+const W17O_WALL_KINDS = W17O_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
+const W17O_FLOOR_KINDS = W17O_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
 const SINNOH_TOWN_GROUND_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg);
 const SINNOH_TOWN_GROUND2_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg2);
 // TX-3: the 8 gym exteriors by town (original type-accent motifs).
@@ -115615,6 +115701,330 @@ const ART = {
     "wwwwwwwwwwwwwwww",
     "wwwcywwwwwywwcww"
   ] },
+  "tile-stairturf": { w: 16, h: 16, pal: {"a":"#7fa04f","b":"#6b8c42","w":"#e3d9ae","d":"#5d7c38"}, rows: [
+    "aaabaaabaaaaaaaa",
+    "aaaawbababaaaada",
+    "aaaaaaaawaaaaaad",
+    "baaaabaaaaaaaaaa",
+    "aaaaaawaaaaaaabd",
+    "abaaaaaabaaaabaa",
+    "aaaawaaaaaabwaaa",
+    "abaawaaaaaaaaaaa",
+    "badabaaaaabaaaaa",
+    "aaaaaaaaaaaaaabb",
+    "abaabaaaaaaabaaa",
+    "adaaaaaabaabaaba",
+    "aaabaaadaaaaaaaa",
+    "awaaaabaawaadaaa",
+    "aaadaaabwbaaaaaa",
+    "aaabaaaaaaaaaaaa"
+  ] },
+  "tile-stairfloor": { w: 16, h: 16, pal: {"a":"#dcc79c","b":"#c8b183","d":"#a98f5f","l":"#a08654","h":"#efe0b8"}, rows: [
+    "aaaaabaaaadabaaa",
+    "aaaaababaadabbaa",
+    "baaaaaabaaabaaab",
+    "daaaabaaaaabaaba",
+    "aaabdaaaaabaaaaa",
+    "llllllllllllllll",
+    "hhhhhhhhhhhhhhhh",
+    "aaaaaaadaaababaa",
+    "aaaaaaadbbaaaaaa",
+    "aaaaabaaaaaadaaa",
+    "aaabaaaaaabaaaaa",
+    "llllllllllllllll",
+    "hhhhhhhhhhhhhhhh",
+    "aaabaaaabaaaabaa",
+    "aaaaaadaaaaadaaa",
+    "aaaabaaaabaaaada"
+  ] },
+  "tile-stairpine": { w: 16, h: 16, pal: {"a":"#7fa04f","b":"#6b8c42","t":"#4a7a3c","u":"#3a6530","h":"#74a85e","k":"#654832"}, rows: [
+    "baaaaaaaaaabaaaa",
+    "aaaaaahhhhaaaaaa",
+    "abaaahhhhhhabaaa",
+    "aaaahutthhhuaaaa",
+    "aabaatthtttaabaa",
+    "aaauuuhthhuthaaa",
+    "aaabttuttuttaaba",
+    "aaauuhhhuhhttaaa",
+    "aaaauuuuhutuaaab",
+    "aauttutthhthuuaa",
+    "aaatuhtutththaaa",
+    "baaaaaakkaabaaaa",
+    "aaaaaabkkaaaaaaa",
+    "abaaaaakkaaabaaa",
+    "aaaaaauuuuaaaaaa",
+    "aabaaaaaaaaaabaa"
+  ] },
+  "tile-prop-springpost": { w: 16, h: 16, pal: {"a":"#7fa04f","b":"#6b8c42","w":"#f2ecd8","s":"#7fb2d9","d":"#7d5a34","k":"#8a6844"}, rows: [
+    "aaaaaaaaaaaabaaa",
+    "aaaaaaaaaaaaaaaa",
+    "aaaaaaaaaaaaaaaa",
+    "aaaaaaaaaaaaaaab",
+    "abaaaaawwaaaaaaw",
+    "aaawaabwwaaaaaaa",
+    "aabaaabkdaaaaaaa",
+    "abaaaaasdaaaaaaa",
+    "abaaaaaksbbaaaaa",
+    "aaaaaaakdaaaabaa",
+    "aabaaaakdabaaaaa",
+    "aaabwaakdaaaabaa",
+    "aaaabaakdaawaawa",
+    "aaaaabddddaaaaba",
+    "aaaaaaaaabaaaaaa",
+    "abbaabaaaaaaaaaa"
+  ] },
+  "tile-sweepturf": { w: 16, h: 16, pal: {"a":"#8a9a72","b":"#7c8c64","g":"#b5b8a6","w":"#c9cbb4"}, rows: [
+    "aaaaaababbaaaaaa",
+    "aaabaagabbaaaaag",
+    "bbbaaaabbaaabagg",
+    "aaaaaaaagbaaaaaa",
+    "baaabagabaaagaaa",
+    "abaaaggawagabaab",
+    "aawaabggaaawagga",
+    "aaagabaaaaaaaaaa",
+    "aagaaaagaaaaaaaa",
+    "aaaaawaaaabaabaa",
+    "agaaagaabaaabgbg",
+    "aagagaaaaagaagba",
+    "waaabaabgaabbaaw",
+    "aabawaaaaabawaag",
+    "abababaaaaaabaaa",
+    "aaaaaaagggaagaag"
+  ] },
+  "tile-sweepfloor": { w: 16, h: 16, pal: {"a":"#ddd6bd","b":"#cdc4a4","d":"#b3a888","w":"#eae4cc"}, rows: [
+    "aaaaaaaaabaaadaa",
+    "abaabaaadaaaaabd",
+    "aaaaaaaaadbaaaaa",
+    "wwwwawaaawawawww",
+    "wwwbwwawwwwwwwaw",
+    "aaaaaaaaaaaaaaaa",
+    "ababaaaaabaaaaba",
+    "baaaaaaaaaaaaaaa",
+    "aaaaaababaaaaaaa",
+    "aaaaaaaaaaaaaaaa",
+    "wwwwwawadwwwawww",
+    "wbawwaaawwwwaaaa",
+    "abaaabaabaaabaaa",
+    "baaaaaaaaaaabaaa",
+    "aaabaaaaaaaaaaaa",
+    "aaaaaabaaabaaaaa"
+  ] },
+  "tile-sweeppine": { w: 16, h: 16, pal: {"a":"#8a9a72","b":"#7c8c64","t":"#5d7a5e","u":"#4c6650","h":"#93a88b","g":"#c2c4b2","k":"#5e4630"}, rows: [
+    "baaaaaaaaaabaaaa",
+    "aaaaaagghhaaaaaa",
+    "abaaahghhhhabaaa",
+    "aaaaghtuhthuaaaa",
+    "aabaatgghuhaabaa",
+    "aaahghuuhhthtaaa",
+    "aaabhuughtthaaba",
+    "aaattgthutuhtaaa",
+    "aaaatuuuttgtaaab",
+    "aauuhutgutguthaa",
+    "aaahttghtgghhaaa",
+    "baaaaaakkaabaaaa",
+    "aaaaaabkkaaaaaaa",
+    "abaaaaakkaaabaaa",
+    "aaaaaauuugaaaaaa",
+    "aabaaaaaaaaaabaa"
+  ] },
+  "tile-prop-ashdrift": { w: 16, h: 16, pal: {"a":"#8a9a72","b":"#7c8c64","g":"#b5b8a6","m":"#aeb09e","w":"#c6c8b8","p":"#dcdcc9"}, rows: [
+    "aaaaaaaaaaabaaaa",
+    "aaaabaaaaaaagaaa",
+    "aaaaaaaaaabbaaaa",
+    "gaabagaaaaaaaaaa",
+    "baaaaaabaaaaaaaa",
+    "aabaaaaaaaaaaaga",
+    "aaaabaaaaaabaaaa",
+    "aagabaabaaaagbaa",
+    "bbaabbaaaabaaaaa",
+    "aaaaaapaaabaaaaa",
+    "baaabaaaapaaaaaa",
+    "agabawwpwwwbgbaa",
+    "aaaamwwwwwwmaaaa",
+    "baamgmmgmmmgmaaa",
+    "aaababaaabaaaaaa",
+    "abgaaabaaabaaaag"
+  ] },
+  "tile-impacturf": { w: 16, h: 16, pal: {"a":"#86a75c","b":"#759550","s":"#c0b294","d":"#648243"}, rows: [
+    "aaaaaaabbaadaaaa",
+    "aaabasaaabsaaaaa",
+    "abaaaabaaaaaasaa",
+    "abaasaaaaaabdasd",
+    "aaaasaaaabdaaaaa",
+    "baaaababsaaaaaba",
+    "aaaaaasasbaabbas",
+    "aaaaaaabaaabaaaa",
+    "aaaaaabaaaaaaaaa",
+    "daadasaadabbadda",
+    "aaaaaaaabbaaaaaa",
+    "aadaaaaabaaabaas",
+    "abaaaaaaaabaaaas",
+    "aaababssaaaaaaaa",
+    "aaaabaaaabaadaaa",
+    "aaaaadaaaaaaaaba"
+  ] },
+  "tile-impactfloor": { w: 16, h: 16, pal: {"a":"#e2cf9f","b":"#d0ba85","g":"#9d927c","d":"#b39d68"}, rows: [
+    "aabaaaddaaagaabb",
+    "abaaaaabaabadaaa",
+    "adgaaaaaaabbbaaa",
+    "aaaaabadaaaaabga",
+    "aaaaaaaaadagaaag",
+    "aaaaaaaagbbaaaaa",
+    "aaaggagaaabbaaab",
+    "aaaaaagaaaagbaaa",
+    "aabbaaaaaaaaaaaa",
+    "aaababbaabaadaab",
+    "aaaabaaaaaaabaaa",
+    "aaaaabaaaaagaaab",
+    "bgaaaaaaaaaaaaaa",
+    "aaaabaaaaabaagaa",
+    "aabaagaagbaaaaaa",
+    "daaaaaababaadaad"
+  ] },
+  "tile-impactpine": { w: 16, h: 16, pal: {"a":"#86a75c","b":"#759550","t":"#4f7d43","u":"#406636","h":"#7cab62","k":"#6e4c34"}, rows: [
+    "baaaaaaaaaabaaaa",
+    "aaaaaahhhhaaaaaa",
+    "abaaahhhhhhabaaa",
+    "aaaatttuttutaaaa",
+    "aabaahtttttaabaa",
+    "aaatuthtuutuuaaa",
+    "aaabttuthtthaaba",
+    "aaatutuhuutuhaaa",
+    "aaaatthhhttuaaab",
+    "aauuuhtuhttutuaa",
+    "aaahtuhtthhthaaa",
+    "baaaaaakkaabaaaa",
+    "aaaaaabkkaaaaaaa",
+    "abaaaaakkaaabaaa",
+    "aaaaaauuuuaaaaaa",
+    "aabaaaaaaaaaabaa"
+  ] },
+  "tile-prop-hunterpost": { w: 16, h: 16, pal: {"a":"#86a75c","b":"#759550","s":"#c0b294","f":"#d98f3a","g":"#9d927c","d":"#7d5a34","k":"#8a6844"}, rows: [
+    "aaaaaaaabaasaaaa",
+    "aaaaaaaaaaaaaaas",
+    "aaaaaaaaaaaaaaaa",
+    "aaaaabaaaaaaaaaa",
+    "aaaaaaakdffaaaaa",
+    "aaabaabkdffaabas",
+    "aaaaabakdfabbaaa",
+    "abaaaaakdaaaaaaa",
+    "aaaaaaakdaaaaaaa",
+    "aabaaaakdasaaaaa",
+    "abaaaabkdabaaaaa",
+    "asbaaaakdbaaaaaa",
+    "aaaaagakdaaaaaaa",
+    "saaabgddddaaaaba",
+    "aaabaaabbaaaaaab",
+    "aaaaaaaaaaaaaaaa"
+  ] },
+  "tile-cometfloor": { w: 16, h: 16, pal: {"a":"#8d8578","b":"#6b6455","c":"#9d968a","e":"#dfe9e4","f":"#f2f7ee"}, rows: [
+    "aaaaaacabaaaaaaa",
+    "aaaaccaabaaaaaaa",
+    "caacaaaabacaaaca",
+    "aaaaceaabaeaaaaa",
+    "aaaaaaaabaaaaaaa",
+    "aaaaaaacbacaaaaa",
+    "acacaacabaaaaaca",
+    "bbbbbbbbbbbbbbbb",
+    "eaaabcaaaaaaaaaa",
+    "aaaabcaaaaaeaaaa",
+    "eaaabaacaeaaaaca",
+    "aaaabacaaaaaaaaa",
+    "aaaabaaaaaaaaaaa",
+    "aafabaaafaeaaaaa",
+    "aaaabaaaaaaaeaac",
+    "bbbbbbbbbbbbbbbb"
+  ] },
+  "tile-cometwall": { w: 16, h: 16, pal: {"z":"#35322c","m":"#4e4a41","a":"#5d574c","h":"#8f8a7a","g":"#28251f","e":"#e6efe8"}, rows: [
+    "zezzzzzzzzzzzzzz",
+    "zzzzzzzzzezzzzez",
+    "mmmmmmmmemmmmmmm",
+    "emmmmmmmmmmmmmmm",
+    "aaaaaaaaaaaaaaaa",
+    "aeaaaaaaaaaaaaaa",
+    "hhhhhhhhhhhhhhhh",
+    "hhhhehhhhhhhhhhh",
+    "eaaaaaaaaaaaeaea",
+    "aaaaaaaaaaaaaaaa",
+    "mmmmmmmmmmmemmmm",
+    "mmmmmmmmmmmmmmme",
+    "zzezzzzzzzzzzzzz",
+    "zzzzzzzzzzzzzzzz",
+    "gggggggggggggggg",
+    "ggeggggggggggggg"
+  ] },
+  "tile-mistturf": { w: 16, h: 16, pal: {"a":"#74b364","b":"#63a052","w":"#eaf4d8","d":"#529144"}, rows: [
+    "aawaaaaaaaaaabaa",
+    "aaaaaaaaaaaaaaaa",
+    "aadababaaabawbaa",
+    "aaaabaaaaawaaaba",
+    "aaaaabadaaadaaaa",
+    "aaaaaabaaaaababb",
+    "aaaaaawaaadaabaa",
+    "adaaaaaaaaaaaaaa",
+    "baabaaaaaaadaaaa",
+    "abaaaaaaawaabaaa",
+    "aaaaaaaaaabaaaaa",
+    "aaabaaaabawaaaab",
+    "aabaaaabbaaabaaa",
+    "dwdadbaaaaaabaab",
+    "aaaaaaaaawbaaaaa",
+    "babadaaaaaaabaaa"
+  ] },
+  "tile-mistfloor": { w: 16, h: 16, pal: {"a":"#e6d6ab","b":"#d3bf8d","s":"#c9d4c2","d":"#b7a26e"}, rows: [
+    "baaaaaaaaaaaabaa",
+    "daaabadaadaaaaaa",
+    "abbasaaabaasbaaa",
+    "baaaabsabaaaasaa",
+    "daaaaaasabaabaaa",
+    "aaaaaaaaadbaaaaa",
+    "aaaaaaaaaaaaaaba",
+    "aaaaaaaaaaasaaas",
+    "aaaadaaabaaaaaaa",
+    "aabaaaaaaaaaaasa",
+    "aaaaaaaaaaaaabaa",
+    "aaaaaaaabaaaabbd",
+    "aasaaabaaaaabaab",
+    "aaaaaabaaaaasaaa",
+    "abaaaaaababaaaba",
+    "bbaaaaaaaaaadbba"
+  ] },
+  "tile-mistpine": { w: 16, h: 16, pal: {"a":"#74b364","b":"#63a052","t":"#4c8142","u":"#3d6c34","h":"#79b364","k":"#654832"}, rows: [
+    "baaaaaaaaaabaaaa",
+    "aaaaaahhhhaaaaaa",
+    "abaaahhhhhhabaaa",
+    "aaaathttttutaaaa",
+    "aabaahttutuaabaa",
+    "aaattuttttthhaaa",
+    "aaabhuhutthuaaba",
+    "aaauthththtthaaa",
+    "aaaattutuhttaaab",
+    "aatthuhtttthttaa",
+    "aaattuhttuthuaaa",
+    "baaaaaakkaabaaaa",
+    "aaaaaabkkaaaaaaa",
+    "abaaaaakkaaabaaa",
+    "aaaaaauuuuaaaaaa",
+    "aabaaaaaaaaaabaa"
+  ] },
+  "tile-prop-swimpost": { w: 16, h: 16, pal: {"a":"#74b364","b":"#63a052","w":"#f2ecd8","s":"#5b93c4","d":"#7d5a34","k":"#8a6844"}, rows: [
+    "abaabaaaaaaabaaa",
+    "aaaaaaaaabbaabaa",
+    "aaaaaaabaaaaaaaa",
+    "aaaaaabaaaaaabaa",
+    "aawaaaaaaaabaaaa",
+    "abaaawwwwwwabaaa",
+    "aaaaawswswwaabaa",
+    "aaaaawwswswaabaa",
+    "waabawwwwwwbaaaa",
+    "abaaaaakdaaaaaba",
+    "aaaaaaakdabaaaaa",
+    "aaaaaaakdaaababa",
+    "aabbaaakdababaaa",
+    "aaaaaaddddaaaawa",
+    "bbaaaaaabaaaabba",
+    "babaawbaaaaabbaa"
+  ] },
   "tile-trialfloor": { w: 16, h: 16, pal: {"a":"#d8c08a","b":"#cdb481","m":"#bfa87c","f":"#b07a3f","l":"#e2cc9c"}, rows: [
     "aabaaafaaabaaaaa",
     "aaaaaaaaaaabaaaf",
@@ -123563,6 +123973,9 @@ for (const k of W17M_FLOOR_KINDS) TILE_ART[k] = 'tile-' + k;
 for (const k of W17N_PROP_KINDS) TILE_ART[k] = 'tile-prop-' + k;
 for (const k of W17N_WALL_KINDS) TILE_ART[k] = 'tile-' + k;
 for (const k of W17N_FLOOR_KINDS) TILE_ART[k] = 'tile-' + k;
+for (const k of W17O_PROP_KINDS) TILE_ART[k] = 'tile-prop-' + k;
+for (const k of W17O_WALL_KINDS) TILE_ART[k] = 'tile-' + k;
+for (const k of W17O_FLOOR_KINDS) TILE_ART[k] = 'tile-' + k;
 // Premium+ W6 (TX-3/PL-1): door-open frames, authored in TX-3 for every
 // door kind. The warp-fade engine that plays them lands in W7 — W6
 // wires the frames (this registry + cache.doorOpen + doorOpenCanvas)
@@ -124384,9 +124797,11 @@ const CAVE_KINDS = new Set(['cavewall', 'cavefloor', 'caveboulder',
   // Wave W17-K: Gloom Cave's kit (Gloom Deep) is cave family too.
   'gloomwall', 'gloomfloor',
   // Wave W17-N: Scorch Path's kit (Scorch Heart) is cave family too.
-  'scorchrock', 'scorchfloor']);
-const CAVE_FLOOR_KINDS = new Set(['cavefloor', 'lunefloor', 'darklunefloor', 'stratadeepfloor', 'crownfloor', 'junctionfloor', 'wetmillfloor', 'sprayfloor', 'gloomfloor', 'scorchfloor']);
-const CAVE_WALL_KINDS = new Set(['cavewall', 'lunewall', 'darklunewall', 'stratadeepwall', 'crownwall', 'junctionwall', 'wetmillwall', 'spraywall', 'frostwall', 'thawwall', 'gloomwall', 'scorchrock']);
+  'scorchrock', 'scorchfloor',
+  // Wave W17-O: Comet Falls' kit (Comet Deep) is cave family too.
+  'cometwall', 'cometfloor']);
+const CAVE_FLOOR_KINDS = new Set(['cavefloor', 'lunefloor', 'darklunefloor', 'stratadeepfloor', 'crownfloor', 'junctionfloor', 'wetmillfloor', 'sprayfloor', 'gloomfloor', 'scorchfloor', 'cometfloor']);
+const CAVE_WALL_KINDS = new Set(['cavewall', 'lunewall', 'darklunewall', 'stratadeepwall', 'crownwall', 'junctionwall', 'wetmillwall', 'spraywall', 'frostwall', 'thawwall', 'gloomwall', 'scorchrock', 'cometwall']);
 const DUNGEON_WALLS = new Set(['cavewall', 'towerwall', 'silphwall', 'plantwall',
   // Premium+ W6 (TX-5): the sub-theme wall kinds cast the same strip.
   'icewall', 'iceface', 'stratwall', 'bannerwall', 'cerwall', 'panelwall',
@@ -124403,7 +124818,9 @@ const DUNGEON_WALLS = new Set(['cavewall', 'towerwall', 'silphwall', 'plantwall'
   // Wave W17-K: Gloom Cave's wall kind casts the same strip.
   'gloomwall',
   // Wave W17-N: Scorch Path's wall kind casts the same strip.
-  'scorchrock']);
+  'scorchrock',
+  // Wave W17-O: Comet Falls' wall kind casts the same strip.
+  'cometwall']);
 const FLOOR_VARIANTS = {
   grass: 'grassVariants', path: 'pathVariants', cavefloor: 'caveFloorVariants',
   towerfloor: 'towerFloorVariants', silphfloor: 'silphFloorVariants', plantfloor: 'plantFloorVariants',
@@ -125163,7 +125580,7 @@ function resolveTileLayers(cache, kind, x, y, kindAt, t, phase, mapId) {
       }
       return layers.filter(Boolean);
     }
-    case 'cavewall': case 'lunewall': case 'darklunewall': case 'stratadeepwall': case 'crownwall': case 'junctionwall': case 'wetmillwall': case 'spraywall': case 'frostwall': case 'thawwall': case 'gloomwall': case 'scorchrock': {
+    case 'cavewall': case 'lunewall': case 'darklunewall': case 'stratadeepwall': case 'crownwall': case 'junctionwall': case 'wetmillwall': case 'spraywall': case 'frostwall': case 'thawwall': case 'gloomwall': case 'scorchrock': case 'cometwall': {
       // Strata walls by position hash; an exposed face (floor to the
       // south) wears the stalactite face. Perfection Pass Stage 2 Gate 0
       // (G0-5, standard B3): the face is DETERMINISTIC — 100% of exposed
@@ -125751,6 +126168,18 @@ function resolveTileLayers(cache, kind, x, y, kindAt, t, phase, mapId) {
     case 'fumepine':
     case 'gondolapost':
     case 'camppost':
+    // Wave W17-O: the Maris tranche-4 route trees and signature
+    // props composite over their ground the same way (all arts are
+    // fully opaque — each route's own ground is baked in at its
+    // measured colours).
+    case 'stairpine':
+    case 'springpost':
+    case 'sweeppine':
+    case 'ashdrift':
+    case 'impactpine':
+    case 'hunterpost':
+    case 'mistpine':
+    case 'swimpost':
     // Wave T17: the radio mast composites over its compound grass too.
     case 'radiomast': {
       // Object tiles carry transparent surrounds (Wave 1): lay the ground
@@ -133291,6 +133720,23 @@ const WALKABLE = new Set(['.', ',', 'D', 'E', 'C', 'F', 'J', 'K', '1', '2', 'V',
   // the Maris program plan; W17-L took 1257-1276 and W17-M takes
   // 1277-1286 on its parallel branch; 1111 stays empty.)
   ...[1287, 1288, 1291, 1292, 1295, 1296, 1299, 1301, 1302]
+    .map((i) => String.fromCodePoint(0x1E00 + i)),
+  // Wave W17-O: the Maris tranche-4 ground/path chars
+  // (U+1E00+1304.., tiles.mjs W17O_KIND_DEFS) are walkable —
+  // stairturf/stairfloor (Ragged Pass), sweepturf/sweepfloor
+  // (Route 113), impacturf/impactfloor (Route 114), cometfloor
+  // (Comet Falls, swapped 1:1 from the walkable 'L' cavefloor)
+  // and mistturf/mistfloor (Route 115), each swapped 1:1 from
+  // the walkable '_' ground / '.' path chars on its own route,
+  // so ground stays ground and path stays path. The tree chars
+  // (1306, 1310, 1314, 1320), prop chars (1307, 1311, 1315,
+  // 1321) and the cometwall wall char (1317, swapped from the
+  // 'G' cavewall, never walkable) are NOT here: trees, props
+  // and walls were never walkable. (Indices 1304-1321 per the
+  // Maris program plan; W17-L took 1257-1276, W17-M 1277-1286
+  // and W17-N takes 1287-1303 on its parallel branch; 1111
+  // stays empty.)
+  ...[1304, 1305, 1308, 1309, 1312, 1313, 1316, 1318, 1319]
     .map((i) => String.fromCodePoint(0x1E00 + i))]);
 
 // Trainer definitions for the slice.
@@ -157901,24 +158347,24 @@ const MAPS7 = {
     "music": "route1-theme",
     "weather": "sun",
     "rows": [
-      "###########..###########",
-      "#___,_,____..n,_,__F___#",
-      "#,__R,,_,,_.._______,__#",
-      "#_Ἀ_R____F_.._______R__#",
-      "#,__RR_F_,_..__,,____,_#",
-      "#___F_____,..,_FFR__F__#",
-      "#F_R_______..______Ἀ__R#",
-      "#___Fn_,,,F..__,RR_,___#",
-      "#__,F,F___n..____F_F___#",
-      "#_______Ἀ__..F___,,,,__#",
-      "#_,___FF,_,..n__Ἀ,_,n__#",
-      "#___,RR,,__.._n_F___Ẉ__#",
-      "#_,__F,,,_R.._____,_F__#",
-      "#__,___,F__..__FRR__,__#",
-      "#,F______n,.._n__R_F__R#",
-      "#___,__R__,..S,,___F___#",
-      "#__,__,___,..FR_,____Ἀ,#",
-      "###########..###########",
+      "⌚⌚⌚⌚⌚⌚⌚⌚⌚⌚⌚⌙⌙⌚⌚⌚⌚⌚⌚⌚⌚⌚⌚⌚",
+      "⌚⌘⌘⌘,⌘,⌘⌘⌘⌘⌙⌙n,⌘,⌘⌘F⌘⌘⌘⌚",
+      "⌚,⌘⌘R,,⌘,,⌘⌙⌙⌘⌘⌘⌘⌘⌘⌘,⌘⌘⌚",
+      "⌚⌘Ἀ⌘R⌘⌘⌘⌘F⌘⌙⌙⌘⌘⌘⌘⌘⌘⌘R⌘⌘⌚",
+      "⌚,⌘⌘RR⌘F⌘,⌘⌙⌙⌘⌘,,⌘⌘⌘⌘,⌘⌚",
+      "⌚⌘⌘⌘F⌘⌘⌘⌘⌘,⌙⌙,⌘FFR⌘⌘F⌘⌘⌚",
+      "⌚F⌘R⌘⌘⌘⌘⌘⌘⌘⌙⌙⌘⌘⌘⌘⌘⌘Ἀ⌘⌘R⌚",
+      "⌚⌘⌘⌘Fn⌘,,,F⌙⌙⌘⌘,RR⌘,⌘⌘⌘⌚",
+      "⌚⌘⌘,F,F⌘⌘⌘n⌙⌙⌘⌘⌘⌘F⌘F⌘⌘⌘⌚",
+      "⌚⌘⌘⌘⌘⌘⌘⌘Ἀ⌘⌘⌙⌙F⌘⌘⌘,,,,⌘⌘⌚",
+      "⌚⌘,⌘⌘⌘FF,⌘,⌙⌙n⌘⌘Ἀ,⌘,n⌘⌘⌚",
+      "⌚⌘⌘⌘,RR,,⌘⌘⌙⌙⌘n⌘F⌘⌘⌘Ẉ⌘⌘⌚",
+      "⌚⌘,⌘⌘F,,,⌘R⌙⌙⌘⌘⌘⌘⌘,⌘F⌘⌘⌚",
+      "⌚⌘⌘,⌘⌘⌘,F⌘⌛⌙⌙⌘⌘FRR⌘⌘,⌘⌘⌚",
+      "⌚,F⌘⌘⌘⌘⌘⌘n,⌙⌙⌛n⌘⌘R⌘F⌘⌘R⌚",
+      "⌚⌘⌘⌘,⌘⌘R⌘⌘,⌙⌙S,,⌘⌘⌘F⌘⌘⌘⌚",
+      "⌚⌘⌘,⌘⌘,⌘⌘⌘,⌙⌙FR⌘,⌘⌘⌘⌘Ἀ,⌚",
+      "⌚⌚⌚⌚⌚⌚⌚⌚⌚⌚⌚⌙⌙⌚⌚⌚⌚⌚⌚⌚⌚⌚⌚⌚",
     ],
     "warps": [
       {"x": 11, "y": 0, "to": {"map": "mt-chimney", "x": 12, "y": 1}},
@@ -157944,22 +158390,22 @@ const MAPS7 = {
     "music": "route1-theme",
     "weather": "ash",
     "rows": [
-      "############################",
-      "#__F_RF___ἅF_RR_________F__#",
-      "#,F_ἅ____ἅ__F_,_R________Ἁ_#",
-      "#___,_Fἅ___,___ἅ_________,,#",
-      "#_ἅ_,___,ἅ_,__,__ἅ_Ἁ,ἅ,_F,_#",
-      "#__,_,,_Rἅ,______,_,ἅ___F_,#",
-      "#__FF_,_ἅἉ__Ἁ____R__F_F__,_#",
-      "#_ἅἅS,___,_____ἅ____SἅF__,_#",
-      "............................",
-      "............................",
-      "#,_R_,F_,_______,_________..",
-      "#__F__,_ἅ___ἅ________,ἅ,__..",
-      "#ἅ_______,R,__,,Fἅ,___ἅ__ἅ..",
-      "#,_,______F___,_____,_ἅFFἉ..",
-      "#_ἅ_____,___F____,_Ἁἅ,__Ἁ_,#",
-      "############################",
+      "⌞⌞⌞⌞⌞⌞⌞⌞⌞⌞⌞⌞⌞⌞⌞⌞⌞⌞⌞⌞⌞⌞⌞⌞⌞⌞⌞⌞",
+      "⌞⌜⌜F⌜RF⌜⌜⌜ἅF⌜RR⌜⌜⌜⌜⌜⌜⌜⌜⌜F⌜⌜⌞",
+      "⌞,F⌜ἅ⌜⌜⌜⌜ἅ⌜⌜F⌜,⌜R⌜⌜⌜⌜⌜⌜⌜⌜Ἁ⌜⌞",
+      "⌞⌜⌜⌜,⌜Fἅ⌜⌜⌜,⌜⌜⌜ἅ⌜⌜⌜⌜⌜⌜⌜⌜⌜,,⌞",
+      "⌞⌜ἅ⌜,⌜⌜⌜,ἅ⌜,⌜⌜,⌜⌜ἅ⌜Ἁ,ἅ,⌜F,⌜⌞",
+      "⌞⌜⌜,⌜,,⌜Rἅ,⌜⌜⌜⌜⌜⌜,⌜,ἅ⌜⌜⌜F⌜,⌞",
+      "⌞⌜⌜FF⌜,⌜ἅἉ⌜⌜Ἁ⌜⌜⌜⌜R⌜⌜F⌜F⌜⌜,⌜⌞",
+      "⌞⌟ἅἅS,⌜⌜⌜,⌜⌜⌜⌜⌜ἅ⌟⌜⌜⌜SἅF⌜⌜,⌜⌞",
+      "⌝⌝⌝⌝⌝⌝⌝⌝⌝⌝⌝⌝⌝⌝⌝⌝⌝⌝⌝⌝⌝⌝⌝⌝⌝⌝⌝⌝",
+      "⌝⌝⌝⌝⌝⌝⌝⌝⌝⌝⌝⌝⌝⌝⌝⌝⌝⌝⌝⌝⌝⌝⌝⌝⌝⌝⌝⌝",
+      "⌞,⌜R⌜,F⌜,⌜⌜⌜⌜⌜⌜⌜,⌜⌜⌜⌜⌜⌜⌜⌜⌜⌝⌝",
+      "⌞⌜⌜F⌜⌜,⌜ἅ⌜⌜⌜ἅ⌜⌜⌜⌜⌜⌜⌜⌜,ἅ,⌜⌜⌝⌝",
+      "⌞ἅ⌜⌜⌜⌜⌜⌜⌜,R,⌜⌜,,Fἅ,⌜⌜⌜ἅ⌜⌜ἅ⌝⌝",
+      "⌞,⌜,⌜⌜⌜⌜⌜⌜F⌜⌜⌜,⌜⌜⌜⌜⌜,⌜ἅFFἉ⌝⌝",
+      "⌞⌜ἅ⌜⌜⌜⌜⌜,⌜⌜⌜F⌜⌜⌜⌜,⌜Ἁἅ,⌜⌜Ἁ⌜,⌞",
+      "⌞⌞⌞⌞⌞⌞⌞⌞⌞⌞⌞⌞⌞⌞⌞⌞⌞⌞⌞⌞⌞⌞⌞⌞⌞⌞⌞⌞",
     ],
     "warps": [
       {"x": 0, "y": 8, "to": {"map": "fallarbor", "x": 26, "y": 8}},
@@ -157986,24 +158432,24 @@ const MAPS7 = {
     "music": "route1-theme",
     "weather": "clear",
     "rows": [
-      "###########..###########",
-      "#_,____,_#_..__________#",
-      "#__,___F__,..S_____#_,n#",
-      "#n_,,,_n,_R..__________#",
-      "#__________.._R________#",
-      "#_F_~~~~~F,..____,,__,R#",
-      "#___~~~~~_F.._____Ἂ__,_#",
-      "#___~~~~~__..________FR#",
-      "#_,_~~~~~__..__________#",
-      "#___F______..___F,_____#",
-      "#__,,_n____.._,____Ἂ__F#",
-      "#____F____,..,,_____,,_#",
-      "#_____Ἂ____..____,___,_#",
-      "#__________..__,_______#",
-      "#__________..,_,_______#",
-      "#________,,..S__,_,_R_,#",
-      "#RRRRRRRRRRLLRRRRRRRRRR#",
-      "###########RR###########",
+      "⌢⌢⌢⌢⌢⌢⌢⌢⌢⌢⌢⌡⌡⌢⌢⌢⌢⌢⌢⌢⌢⌢⌢⌢",
+      "⌢⌠,⌠⌠⌠⌠,⌠⌢⌠⌡⌡⌠⌠⌠⌠⌠⌠⌠⌠⌠⌠⌢",
+      "⌢⌠⌠,⌠⌠⌠F⌠⌠,⌡⌡S⌠⌠⌠⌠⌠⌢⌠,n⌢",
+      "⌢n⌠,,,⌠n,⌠R⌡⌡⌠⌠⌠⌠⌠⌠⌠⌠⌠⌠⌢",
+      "⌢⌠⌠⌠⌠⌠⌠⌠⌠⌠⌠⌡⌡⌠R⌠⌠⌠⌠⌠⌠⌠⌠⌢",
+      "⌢⌠F⌠~~~~~F,⌡⌡⌠⌠⌠⌠,,⌠⌠,R⌢",
+      "⌢⌠⌠⌠~~~~~⌠F⌡⌡⌠⌠⌠⌠⌣Ἂ⌠⌠,⌠⌢",
+      "⌢⌠⌠⌠~~~~~⌠⌠⌡⌡⌠⌠⌠⌠⌠⌠⌠⌠FR⌢",
+      "⌢⌠,⌠~~~~~⌠⌠⌡⌡⌠⌠⌠⌠⌠⌠⌠⌠⌠⌠⌢",
+      "⌢⌠⌠⌠F⌠⌠⌠⌠⌠⌠⌡⌡⌠⌠⌠F,⌠⌠⌠⌠⌠⌢",
+      "⌢⌠⌠,,⌠n⌠⌠⌠⌠⌡⌡⌠,⌠⌠⌠⌠Ἂ⌠⌠F⌢",
+      "⌢⌠⌠⌠⌠F⌠⌠⌠⌠,⌡⌡,,⌠⌠⌠⌠⌠,,⌠⌢",
+      "⌢⌠⌠⌠⌠⌣Ἂ⌠⌠⌠⌠⌡⌡⌠⌠⌠⌠,⌠⌠⌠,⌠⌢",
+      "⌢⌠⌠⌠⌠⌠⌠⌠⌠⌠⌠⌡⌡⌠⌠,⌠⌠⌠⌠⌠⌠⌠⌢",
+      "⌢⌠⌠⌠⌠⌠⌠⌠⌠⌠⌠⌡⌡,⌠,⌠⌠⌠⌠⌠⌠⌠⌢",
+      "⌢⌠⌠⌠⌠⌠⌠⌠⌠,,⌡⌡S⌠⌠,⌠,⌠R⌠,⌢",
+      "⌢RRRRRRRRRRLLRRRRRRRRRR⌢",
+      "⌢⌢⌢⌢⌢⌢⌢⌢⌢⌢⌢RR⌢⌢⌢⌢⌢⌢⌢⌢⌢⌢⌢",
     ],
     "warps": [
       {"x": 11, "y": 0, "to": {"map": "fallarbor", "x": 13, "y": 16}},
@@ -158030,22 +158476,22 @@ const MAPS7 = {
     "music": "pewter-theme",
     "indoor": true,
     "rows": [
-      "GGGGGGGGGGGGGGGGGGGLLGGGGG",
-      "GLLLLLLLLLLLLLLLLLLLLLLLLG",
-      "GLLLLLLLLLLLLLLLLLLLLLLLLG",
-      "GLL~~~~~~~LLLLLLLLLLLLLLLG",
-      "GLL~~~~~~~LLLLLLLLLLLἊLLLG",
-      "GLL~~~~~~~LLἊLLLLLLLLLLLLG",
-      "GLL~~~~~~~LLLLLLLLLLLLLLLG",
-      "GLL~~~~~~~LLLLLLLLLLLLLLLG",
-      "GLLLLLLLLLLLLLLLýLLLLLLLLG",
-      "GLLLLLLLLLLLLLL~~~~~~LLLLG",
-      "GLLLLLLLLLLLLLL~~~~~~LLLLG",
-      "GLýLLLLLLLLLLἊL~~~~~~LLLLG",
-      "GLLLLLLLLLNLLLL~~~~~~LLLLG",
-      "GLLLLLLLLLLLSLLLLLLLýLLLLG",
-      "GLLLLLLLLLLLLLLLLLLLLLLLLG",
-      "GGGGGGLLGGGGGGGGGGGGGGGGGG",
+      "⌥⌥⌥⌥⌥⌥⌥⌥⌥⌥⌥⌥⌥⌥⌥⌥⌥⌥⌥⌤⌤⌥⌥⌥⌥⌥",
+      "⌥⌤⌤⌤⌤⌤⌤⌤⌤⌤⌤⌤⌤⌤⌤⌤⌤⌤⌤⌤⌤⌤⌤⌤⌤⌥",
+      "⌥⌤⌤⌤⌤⌤⌤⌤⌤⌤⌤⌤⌤⌤⌤⌤⌤⌤⌤⌤⌤⌤⌤⌤⌤⌥",
+      "⌥⌤⌤~~~~~~~⌤⌤⌤⌤⌤⌤⌤⌤⌤⌤⌤⌤⌤⌤⌤⌥",
+      "⌥⌤⌤~~~~~~~⌤⌤⌤⌤⌤⌤⌤⌤⌤⌤⌤Ἂ⌤⌤⌤⌥",
+      "⌥⌤⌤~~~~~~~⌤⌤Ἂ⌤⌤⌤⌤⌤⌤⌤⌤⌤⌤⌤⌤⌥",
+      "⌥⌤⌤~~~~~~~⌤⌤⌤⌤⌤⌤⌤⌤⌤⌤⌤⌤⌤⌤⌤⌥",
+      "⌥⌤⌤~~~~~~~⌤⌤⌤⌤⌤⌤⌤⌤⌤⌤⌤⌤⌤⌤⌤⌥",
+      "⌥⌤⌤⌤⌤⌤⌤⌤⌤⌤⌤⌤⌤⌤⌤⌤ý⌤⌤⌤⌤⌤⌤⌤⌤⌥",
+      "⌥⌤⌤⌤⌤⌤⌤⌤⌤⌤⌤⌤⌤⌤⌤~~~~~~⌤⌤⌤⌤⌥",
+      "⌥⌤⌤⌤⌤⌤⌤⌤⌤⌤⌤⌤⌤⌤⌤~~~~~~⌤⌤⌤⌤⌥",
+      "⌥⌤ý⌤⌤⌤⌤⌤⌤⌤⌤⌤⌤Ἂ⌤~~~~~~⌤⌤⌤⌤⌥",
+      "⌥⌤⌤⌤⌤⌤⌤⌤⌤⌤N⌤⌤⌤⌤~~~~~~⌤⌤⌤⌤⌥",
+      "⌥⌤⌤⌤⌤⌤⌤⌤⌤⌤⌤⌤S⌤⌤⌤⌤⌤⌤⌤ý⌤⌤⌤⌤⌥",
+      "⌥⌤⌤⌤⌤⌤⌤⌤⌤⌤⌤⌤⌤⌤⌤⌤⌤⌤⌤⌤⌤⌤⌤⌤⌤⌥",
+      "⌥⌥⌥⌥⌥⌥⌤⌤⌥⌥⌥⌥⌥⌥⌥⌥⌥⌥⌥⌥⌥⌥⌥⌥⌥⌥",
     ],
     "warps": [
       {"x": 6, "y": 15, "to": {"map": "r114", "x": 11, "y": 15}},
@@ -158071,22 +158517,22 @@ const MAPS7 = {
     "music": "route1-theme",
     "weather": "clear",
     "rows": [
-      "###################~~~~~",
-      "#__R_,__,______F___~~~~~",
-      "#__R,,,,__,____,___~~~~~",
-      "#,_R___,,,___,__,__~~~~~",
-      "#,_R,,___F__,__F__F~~~~~",
-      "#__R______,_____F_n~~~~~",
-      "#__R__n,_________F_~~~~~",
-      "#_,R__,________,_,,~~~~~",
-      "#_,RF_,___#,_______~~~~~",
-      "#__R__R_____,__F_,_~~~~~",
-      "#__R___F__,________~~~~~",
-      "#_FR,___,__Ẉ__F_,__~~~~~",
-      "#__R_,S,,____S____FẈ_n_#",
-      "........................",
-      "........................",
-      "#RRRRRRRRRRLLRRRR....RRR",
+      "⌨⌨⌨⌨⌨⌨⌨⌨⌨⌨⌨⌨⌨⌨⌨⌨⌨⌨⌨~~~~~",
+      "⌨⌦⌦R⌦,⌦⌦,⌦⌦⌦⌦⌦⌦F⌦⌦〈~~~~~",
+      "⌨⌦⌦R,,,,⌦⌦,⌦⌦⌦⌦,⌦⌦〈~~~~~",
+      "⌨,⌦R⌦⌦⌦,,,⌦⌦⌦,⌦⌦,⌦⌦~~~~~",
+      "⌨,⌦R,,⌦⌦⌦F⌦⌦,⌦⌦F⌦⌦F~~~~~",
+      "⌨⌦⌦R⌦⌦⌦⌦⌦⌦,⌦⌦⌦⌦⌦F⌦n~~~~~",
+      "⌨⌦⌦R⌦⌦n,⌦⌦⌦⌦⌦⌦⌦⌦⌦F⌦~~~~~",
+      "⌨⌦,R⌦⌦,⌦⌦⌦⌦⌦⌦⌦⌦,⌦,,~~~~~",
+      "⌨⌦,RF⌦,⌦⌦⌦⌨,⌦⌦⌦⌦⌦⌦⌦~~~~~",
+      "⌨⌦⌦R⌦⌦R⌦⌦⌦⌦⌦,⌦⌦F⌦,⌦~~~~~",
+      "⌨⌦⌦R⌦⌦⌦F⌦⌦,⌦⌦⌦⌦⌦⌦⌦⌦~~~~~",
+      "⌨⌦FR,⌦⌦⌦,⌦⌦Ẉ⌦⌦F⌦,⌦⌦~~~~~",
+      "⌨⌦⌦R⌦,S,,⌦⌦⌦⌦S⌦⌦⌦⌦FẈ⌦n⌦⌨",
+      "⌧⌧⌧⌧⌧⌧⌧⌧⌧⌧⌧⌧⌧⌧⌧⌧⌧⌧⌧⌧⌧⌧⌧⌧",
+      "⌧⌧⌧⌧⌧⌧⌧⌧⌧⌧⌧⌧⌧⌧⌧⌧⌧⌧⌧⌧⌧⌧⌧⌧",
+      "⌨RRRRRRRRRRLLRRRR⌧⌧⌧⌧RRR",
     ],
     "warps": [
       {"x": 18, "y": 15, "to": {"map": "rustboro", "x": 20, "y": 1}},
