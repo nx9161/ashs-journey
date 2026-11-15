@@ -227,39 +227,6 @@ export const MAPS3 = {
     start: null,
   },
 
-  'gym-saffron': {
-    id: 'gym-saffron', name: 'Farsight Gym', music: 'gym-theme', indoor: true,
-    rows: rows([
-      'Ṛ===============',
-      '=νṌṍḗλṋSSλḘ+++θ=',
-      '=++++ḙ++++++++Ṣ=',
-      '=++++μ++++μ++++=',
-      '=++++++++++++++=',
-      '=++++++//++++++=',
-      '=++++μ+//+μ++++=',
-      '=++++++++++++++=',
-      '=+++)++++++)+++=',
-      '=======DD=======',
-    ]),
-    warps: [
-      { x: 7, y: 9, to: { map: 'saffron', x: 13, y: 8 } },
-      { x: 8, y: 9, to: { map: 'saffron', x: 14, y: 8 } },
-    ],
-    signs: [],
-    npcs: [
-      { x: 8, y: 2, name: 'SYBIL', art: 'sabrina', skin: '#f0c8a0', shirt: '#7a1a3a', pants: '#2a2a3a', hair: '#1a1a2a',
-        trainer: 'sabrina',
-        dialogue: ["I foresaw your arrival three days ago, {player}. My vision also showed this battle's end. Shall we check it?", "...The vision was wrong. How wonderful. The Marsh Badge is yours."] },
-      { x: 4, y: 6, name: 'JOHAN', art: 'monk', skin: '#e8b888', shirt: '#6a5a8a', pants: '#3a3a4a', hair: '#1a1a1a',
-        trainer: 'gym_saffron_1', sight: { dir: 'right', range: 3 },
-        dialogue: ["Sybil bent a spoon with her mind at age nine. I can bend... a fork. Slowly.", "Fork or no fork — beaten is beaten. Proceed, prodigy."] },
-    ],
-    encounters: null,
-    items: [],
-    hidden: [],
-    events: [],
-    start: null,
-  },
 
   dojo: {
     id: 'dojo', name: 'Fighting Dojo', music: 'gym-theme', indoor: true,
@@ -1363,39 +1330,6 @@ export const MAPS3 = {
     start: null,
   },
 
-  'gym-cinnabar': {
-    id: 'gym-cinnabar', name: 'Caldera Gym', music: 'gym-theme', indoor: true,
-    rows: rows([
-      'Ṛ===============',
-      '=νṒṓḙḗλSSṑλḘ++θ=',
-      '=++++Ṣ+++++++++=',
-      '=++++ξ++++ξ++++=',
-      '=++++++++++++++=',
-      '=++++++//++++++=',
-      '=++++ξ+//+ξ++++=',
-      '=++++++++++++++=',
-      '=+++)++++++)+++=',
-      '=======DD=======',
-    ]),
-    warps: [
-      { x: 7, y: 9, to: { map: 'cinnabar', x: 15, y: 7 } },
-      { x: 8, y: 9, to: { map: 'cinnabar', x: 16, y: 7 } },
-    ],
-    signs: [],
-    npcs: [
-      { x: 8, y: 2, name: 'IGNAS', art: 'blaine', skin: '#e8b888', shirt: '#c03a3a', pants: '#3a3a3a', hair: '#c0c0c0',
-        trainer: 'blaine',
-        dialogue: ["Ignas's the name — quiz-master of Caldera and keeper of its flames! My fire Kin will incinerate all challengers!", "Burned down to the wick, I am! Take the Volcano Badge — mind you don't drop it, it's still warm."] },
-      { x: 4, y: 6, name: 'PYRO', art: 'youngster', skin: '#c89878', shirt: '#5a2a7a', pants: '#2a2a2a', hair: '#e07830',
-        trainer: 'gym_cinnabar_1', sight: { dir: 'right', range: 3 },
-        dialogue: ["I, uh, 'found' my way in here. Ignas lets me stay 'cause I sweep the ash. Battle?", "Swept... like the ash. The old man saw potential in you anyway."] },
-    ],
-    encounters: null,
-    items: [],
-    hidden: [],
-    events: [],
-    start: null,
-  },
 
   // ================= CHUNK 4 — endgame block ===========================
   // Fernmere override: COMPLETE copy of maps.mjs viridian. Wave T3

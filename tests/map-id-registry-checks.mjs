@@ -48,6 +48,16 @@
 // a dead copy: maps4 derives its winner from it, so the pair stands as a
 // frozen two-layer definition, pinned below. Folded view proven
 // byte-identical across the union (your_files/reconcile-r2).
+// Reconcile R3 (2026-11-15): the 17 behaviour-only MEDIUM ids reconciled —
+// 13 to single definitions (dojo, mansion, powerplant, rocktunnel, route19,
+// route22, route8, route9, safari, seafoam, tower2, gym-cinnabar,
+// gym-saffron) and 16 dead copies retired — 454 definitions, 20 duplicated
+// ids (14 identical / 6 drifted). Four of the 17 are NOT single: stanne,
+// gamecorner and hideout stand as frozen two-layer definitions (maps4
+// spreads the maps2 base and patches start/warps/events), and silph1's
+// maps2 corpse was retired leaving its maps3 base + maps4 patch pair
+// frozen. Folded view proven byte-identical across the change
+// (your_files/reconcile-r3).
 
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -78,7 +88,7 @@ const fnv = (s) => { let h = 0x811c9dc5; for (let i = 0; i < s.length; i++) { h 
 
 // ---------- 1. census ----------
 const totalDefs = [...byId.values()].reduce((a, v) => a + v.length, 0);
-ok('census: 470 map definitions across maps.mjs…maps9.mjs', totalDefs === 470, `got ${totalDefs} — a wave that adds/removes a definition updates this line in the same commit`);
+ok('census: 454 map definitions across maps.mjs…maps9.mjs', totalDefs === 454, `got ${totalDefs} — a wave that adds/removes a definition updates this line in the same commit`);
 ok('census: 432 unique map ids after the split', byId.size === 432, `got ${byId.size}`);
 
 // ---------- 2. the victory-road split is permanent ----------
@@ -116,40 +126,40 @@ ok('chain: victory-road -> r223 + pokemon-league (4 returns)',
 // updates that id's line here in the same commit. Nothing else may move it.
 const BASELINE = {
   "cinnabar": ['I', 'maps2.mjs:a0ef07ac', 'maps3.mjs:a0ef07ac'],
-  "dojo": ['D', 'maps2.mjs:767d8216', 'maps3.mjs:97e14c03'],
   "fuchsia": ['I', 'maps2.mjs:b9a6140b', 'maps3.mjs:b9a6140b'],
+  // Reconcile R3: maps2 is NOT a dead copy — maps4.mjs derives its winner
+  // from it ({...MAPS2.gamecorner, warps + the poster entrance}), so the
+  // pair is frozen as a two-layer single definition.
   "gamecorner": ['D', 'maps2.mjs:37481247', 'maps4.mjs:e32d7897'],
   "gym-celadon": ['I', 'maps2.mjs:e34e5a11', 'maps3.mjs:e34e5a11'],
   "gym-cerulean": ['I', 'maps2.mjs:36cf7ab1', 'maps3.mjs:36cf7ab1'],
-  "gym-cinnabar": ['D', 'maps2.mjs:0ca7ca05', 'maps3.mjs:0ca7ca05', 'maps4.mjs:f579cd03'],
   "gym-fuchsia": ['I', 'maps2.mjs:05d08fb4', 'maps3.mjs:05d08fb4'],
-  "gym-saffron": ['D', 'maps2.mjs:967597a7', 'maps3.mjs:967597a7', 'maps4.mjs:69814494'],
   "gym-vermilion": ['I', 'maps2.mjs:03a2c9bf', 'maps3.mjs:03a2c9bf'],
+  // Reconcile R3: maps2 is NOT a dead copy — maps4.mjs derives its winner
+  // from it ({...MAPS2.hideout, warps re-pointed at the Game Corner poster
+  // entrance, + the entry event}), so the pair is frozen as a two-layer
+  // single definition.
   "hideout": ['D', 'maps2.mjs:ce1ebeed', 'maps4.mjs:04c239d9'],
   "indigo": ['I', 'maps2.mjs:7f68717e', 'maps3.mjs:7f68717e'],
   "lavender": ['I', 'maps2.mjs:86ed9785', 'maps3.mjs:86ed9785'],
-  "mansion": ['D', 'maps2.mjs:6036b681', 'maps3.mjs:0b89e84d'],
   // Reconcile R2: maps2's alternate island retired; maps3 is NOT a dead copy —
   // maps4.mjs derives its winner from it ({...MAPS3.newisland, events, warps}),
   // so the pair is frozen as a two-layer single definition.
   "newisland": ['D', 'maps3.mjs:87e908ce', 'maps4.mjs:0a2b629f'],
-  "powerplant": ['D', 'maps2.mjs:7ce38a29', 'maps3.mjs:f19569a9'],
-  "rocktunnel": ['D', 'maps2.mjs:d9f17c08', 'maps3.mjs:3ede7ad3'],
   "route10": ['I', 'maps2.mjs:99d8bd20', 'maps3.mjs:99d8bd20'],
   "route15": ['I', 'maps2.mjs:acb066e0', 'maps3.mjs:acb066e0'],
   "route16": ['I', 'maps2.mjs:43aae40f', 'maps3.mjs:43aae40f'],
-  "route19": ['D', 'maps2.mjs:b6cce4ac', 'maps3.mjs:1652b921'],
   "route20": ['I', 'maps2.mjs:0fcaa6d0', 'maps3.mjs:0fcaa6d0'],
-  "route22": ['D', 'maps2.mjs:1b85e657', 'maps3.mjs:24c7d9bb'],
-  "route8": ['D', 'maps2.mjs:823c80b5', 'maps3.mjs:c714c021'],
-  "route9": ['D', 'maps2.mjs:c1e65a8a', 'maps3.mjs:943aca33'],
-  "safari": ['D', 'maps2.mjs:a840460d', 'maps3.mjs:2a374dee'],
   "saffron": ['I', 'maps2.mjs:5ec9dead', 'maps3.mjs:5ec9dead'],
-  "seafoam": ['D', 'maps2.mjs:e1621a14', 'maps3.mjs:00bf11b4'],
-  "silph1": ['D', 'maps2.mjs:33bf502b', 'maps3.mjs:de66dcd1', 'maps4.mjs:b46c0ad2'],
+  // Reconcile R3: maps2's corpse retired; maps3 is NOT a dead copy —
+  // maps4.mjs derives its winner from it ({...MAPS3.silph1, events + the
+  // rival ambush}), so the pair is frozen as a two-layer single definition.
+  "silph1": ['D', 'maps3.mjs:de66dcd1', 'maps4.mjs:b46c0ad2'],
+  // Reconcile R3: maps2 is NOT a dead copy — maps4.mjs derives its winner
+  // from it ({...MAPS2.stanne, start} — the boarding patch), so the pair
+  // is frozen as a two-layer single definition.
   "stanne": ['D', 'maps2.mjs:24a81714', 'maps4.mjs:99facee4'],
   "tower1": ['I', 'maps2.mjs:a29e8705', 'maps3.mjs:a29e8705'],
-  "tower2": ['D', 'maps2.mjs:67e834db', 'maps3.mjs:209d7be2'],
   // vermilion: FROZEN DERIVATION CHAIN (Reconcile R1, Director ruling) —
   // maps2's literal is the derivation base: MAPS4.vermilion spreads it
   // (+SAILOR BRINE, +ev_movie_arrive), MAPS5 spreads maps4 (+CAPT AMBER),
@@ -160,7 +170,7 @@ const BASELINE = {
 };
 
 const dupNow = new Map([...byId.entries()].filter(([, v]) => v.length > 1));
-ok('ratchet: duplicated-id set is exactly the baseline (33 ids after Reconcile R1 + R2)',
+ok('ratchet: duplicated-id set is exactly the baseline (20 ids after Reconcile R1 + R2 + R3)',
   eq([...dupNow.keys()].sort(), Object.keys(BASELINE).sort()),
   `added: ${[...dupNow.keys()].filter((id) => !BASELINE[id]).join(',') || 'none'} · removed: ${Object.keys(BASELINE).filter((id) => !dupNow.has(id)).join(',') || 'none'}`);
 const identicalNow = [];
