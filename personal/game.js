@@ -192301,7 +192301,21 @@ function fillV2Defaults(data) {
   // that is not a keepsake id) coerces to null on load — the same
   // closed-shape rebuild the houseRules block below performs — so a
   // tampered or legacy value opens clean; validateSave stays strict.
-  const fillMon = (m) => { if (isObj(m) && (typeof m.keepsake !== 'string' || !KEEPSAKES[m.keepsake])) m.keepsake = null; };
+  const fillMon = (m) => {
+    if (!isObj(m)) return;
+    if (typeof m.keepsake !== 'string' || !KEEPSAKES[m.keepsake]) m.keepsake = null;
+    // Battle-entry hotfix (2026-11-15): mon.stages joins the filled shape.
+    // BattleScene reads ally.stages.acc unconditionally at entry, and a
+    // mon record without a stages object (legacy/partial writer) froze
+    // the game at battle entry — the throw escaped the pre-battle
+    // dialogue callback and killed the frame loop. Fill the zero object
+    // when absent/malformed; coerce any present non-finite field to 0
+    // (valid values, acc/eva included, pass through untouched).
+    if (!isObj(m.stages)) m.stages = { atk: 0, def: 0, spa: 0, spd: 0, spe: 0 };
+    else for (const k of ['atk', 'def', 'spa', 'spd', 'spe', 'acc', 'eva']) {
+      if (m.stages[k] !== undefined && !Number.isFinite(m.stages[k])) m.stages[k] = 0;
+    }
+  };
   if (Array.isArray(data.party)) for (const m of data.party) fillMon(m);
   if (isObj(data.boxes)) for (const arr of Object.values(data.boxes)) {
     if (Array.isArray(arr)) for (const m of arr) fillMon(m);
@@ -196188,7 +196202,10 @@ class BattleScene {
     this.ally = this.firstAble(g);
     this.foe = this.foeMon;
     this.foeStages = { atk: 0, def: 0, spa: 0, spd: 0, spe: 0, acc: 0, eva: 0 };
-    this.allyStages = this.ally.stages;
+    // Hotfix 2026-11-15: tolerate a mon record with no stages object
+    // (the save layer fills it on load; this keeps any other writer
+    // from ever freezing a battle on the acc read below).
+    this.allyStages = this.ally.stages || (this.ally.stages = { atk: 0, def: 0, spa: 0, spd: 0, spe: 0 });
     if (this.allyStages.acc === undefined) { this.allyStages.acc = 0; this.allyStages.eva = 0; }
     // Fidelity pack (ADR-018): XP is split among participants — mons that
     // were active against THIS foe. Reset per foe in afterFaintFoe.
@@ -196667,7 +196684,10 @@ class BattleScene {
       if (v === null || v === -1) { if (inFaint) this.openPartyMenu(true); else this.toCommand(); return; }
       const old = this.ally;
       this.ally = this.allyTeam(g)[v];
-      this.allyStages = this.ally.stages;
+      // Hotfix 2026-11-15: tolerate a mon record with no stages object
+      // (the save layer fills it on load; this keeps any other writer
+      // from ever freezing a battle on the acc read below).
+      this.allyStages = this.ally.stages || (this.ally.stages = { atk: 0, def: 0, spa: 0, spd: 0, spe: 0 });
       if (this.allyStages.acc === undefined) { this.allyStages.acc = 0; this.allyStages.eva = 0; }
       this.participants.add(this.ally); // switched-in mons share this foe's XP
       this.hpAnim.ally = this.ally.hp;
@@ -197717,7 +197737,10 @@ class BattleScene {
     g.ui.showMenu('Choose a Kin', items, (v) => {
       if (v === null || v === -1) { this._showShiftMenu(); return; }
       this.ally = g.state.party[v];
-      this.allyStages = this.ally.stages;
+      // Hotfix 2026-11-15: tolerate a mon record with no stages object
+      // (the save layer fills it on load; this keeps any other writer
+      // from ever freezing a battle on the acc read below).
+      this.allyStages = this.ally.stages || (this.ally.stages = { atk: 0, def: 0, spa: 0, spd: 0, spe: 0 });
       if (this.allyStages.acc === undefined) { this.allyStages.acc = 0; this.allyStages.eva = 0; }
       this.hpAnim.ally = this.ally.hp;
       // Switch-in keepsake triggers evaluate exactly as a command-phase
