@@ -680,6 +680,7 @@ export const HOENN_EVENTS = {
   // every catch. Levels ride the late band (285-300).
   ev_hoenn_regirock: [
     { say: ['Beyond the parted sealstones, the inner chamber is older than the desert that buried it — and it is occupied. A shape unfolds from the gloom with the patience of geology: arms first, then shoulders, then a head with no face at all, only seven small lights arranged like a held thought.', 'It does not roar. Mountains do not roar. It simply stands where it has stood since before Maris had a name, and waits to see whether you are another century, or something new.'], who: 'NARRATOR' },
+    { panel: 'sealstones-petragolem' },
     { arc: 'arc_regirock', stage: 'active' },
     { wildBattleCatch: { species: 'regirock', level: 285, legendary: true } },
     { arc: 'arc_regirock', stage: 'complete' },
@@ -688,6 +689,7 @@ export const HOENN_EVENTS = {
   ],
   ev_hoenn_regice: [
     { say: ['The inner chamber is a held breath of blue-white. The cold coming off the figure at its heart is not weather — it is a decision, made a very long time ago, to never melt. Crystals tick and settle in its surface like a slow clock.', 'Seven lights wake in its featureless face, one by one, the way stars come out. It has been cold for three thousand years. It can spare you a battle.'], who: 'NARRATOR' },
+    { panel: 'frostchamber-cryogolem' },
     { arc: 'arc_regice', stage: 'active' },
     { wildBattleCatch: { species: 'regice', level: 285, legendary: true } },
     { arc: 'arc_regice', stage: 'complete' },
@@ -696,6 +698,7 @@ export const HOENN_EVENTS = {
   ],
   ev_hoenn_registeel: [
     { say: ['The inner chamber gleams dully, every surface worn smooth by centuries of stillness. At its heart, something the colour of old iron unfolds from a crouch it has held since the cliff above was young — slowly, joint by joint, like a gate deciding to be a guardian instead.', 'Seven lights arrange themselves in its face. The metal of it is wrong for any forge: too dark, too patient, fallen out of the sky before there were smiths to wonder at it.'], who: 'NARRATOR' },
+    { panel: 'gleamtomb-siderogolem' },
     { arc: 'arc_registeel', stage: 'active' },
     { wildBattleCatch: { species: 'registeel', level: 285, legendary: true } },
     { arc: 'arc_registeel', stage: 'complete' },
@@ -707,6 +710,7 @@ export const HOENN_EVENTS = {
   // holds (the rotation rides the persisted walked-step counter).
   ev_hoenn_latias: [
     { say: ['You almost miss her — the light here has a red edge to it that light should not have, and then the air folds, and she is simply THERE: small, bright, curious, hanging a wingspan away with her head tipped like a question.', 'She has crossed half of Maris ahead of you and behind you, outrunning weather and rumour alike, and now she has stopped running — not cornered, never cornered. Choosing. The choice, apparently, is a battle.'], who: 'NARRATOR' },
+    { panel: 'foldedair-rubiavis' },
     { arc: 'arc_latias', stage: 'active' },
     { wildBattleCatch: { species: 'latias', level: 290, legendary: true } },
     { arc: 'arc_latias', stage: 'complete' },
@@ -717,6 +721,7 @@ export const HOENN_EVENTS = {
   // shore on Route 125), fired by the sysOnStep shore hook.
   ev_hoenn_latios: [
     { say: ['The island\'s shore is quiet in the particular way of a place that is waited-in. Then the water offshore stands up in a clean blue line, and the line has wings, and the wings have opinions about you.', 'AZURAVIS folds out of his own speed at the tideline and regards you with the bright, measuring calm of something that has watched this shore for a very long time, waiting to see who would finally think to land on it.'], who: 'NARRATOR' },
+    { panel: 'tideline-azuravis' },
     { arc: 'arc_latios', stage: 'active' },
     { wildBattleCatch: { species: 'latios', level: 290, legendary: true } },
     { arc: 'arc_latios', stage: 'complete' },

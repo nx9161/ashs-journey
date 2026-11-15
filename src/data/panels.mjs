@@ -21,4 +21,14 @@ export const PANELS = {
   'magma-terratitan': { art: 'panel-magma-terratitan' },
   'trench-abyssorca': { art: 'panel-trench-abyssorca' },
   'darkmoon-noctarch': { art: 'panel-darkmoon-noctarch' },
+  // W10-B T2 — Yamato + Maris (Class A catch reveals)
+  'stormfield-voltigris': { art: 'panel-stormfield-voltigris' },
+  'millstone-magmalion': { art: 'panel-millstone-magmalion' },
+  'towerfoot-borepard': { art: 'panel-towerfoot-borepard' },
+  'summit-irisavis': { art: 'panel-summit-irisavis' },
+  'sealstones-petragolem': { art: 'panel-sealstones-petragolem' },
+  'frostchamber-cryogolem': { art: 'panel-frostchamber-cryogolem' },
+  'gleamtomb-siderogolem': { art: 'panel-gleamtomb-siderogolem' },
+  'foldedair-rubiavis': { art: 'panel-foldedair-rubiavis' },
+  'tideline-azuravis': { art: 'panel-tideline-azuravis' },
 };

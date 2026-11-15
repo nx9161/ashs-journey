@@ -644,6 +644,7 @@ export const JOHTO_EVENTS = {
   // the storm simply gathers again another day.
   ev_johto_raikou: [
     { say: ['The park\'s open ground has been holding its breath all day — the fountain still, the grass combed flat by a wind that only blows at ankle height. Then the thunder arrives, except the sky is empty, and the thunder has legs.', 'It stands in the storm field looking at you the way weather looks at a house: without malice, without negotiation. Every hair on your arms stands up to greet it.'], who: 'NARRATOR' },
+    { panel: 'stormfield-voltigris' },
     { arc: 'arc_raikou', stage: 'active' },
     { wildBattleCatch: { species: 'raikou', level: 178, legendary: true } },
     { arc: 'arc_raikou', stage: 'complete' },
@@ -653,6 +654,7 @@ export const JOHTO_EVENTS = {
   // MAGMALION's face: Mt. Millstone's deep chamber — the volcanic heart.
   ev_johto_entei: [
     { say: ['The mountain has been warm all the way up, but this chamber is the warmth\'s source — the rock ticks with cooling and heating, and somewhere below the floor something enormous turns over in the earth\'s sleep.', 'It steps out of the heat-shimmer already awake, already looking at you, ash sliding off a back broad as a lintel. The chamber\'s whole held breath goes out of it in one long, low note.'], who: 'NARRATOR' },
+    { panel: 'millstone-magmalion' },
     { arc: 'arc_entei', stage: 'active' },
     { wildBattleCatch: { species: 'entei', level: 180, legendary: true } },
     { arc: 'arc_entei', stage: 'complete' },
@@ -664,6 +666,7 @@ export const JOHTO_EVENTS = {
   // the tower when the others are quieted.
   ev_johto_suicune: [
     { say: ['It is standing at the tower\'s foot when you come in, exactly as the wardens said it would be once the others were quiet: patient as frost, ribbons hanging in air that has forgotten how to move.', 'It regards you the way deep water regards the shore — with total, courteous attention. The north wind, arriving politely late, moves through the tower bells and every one of them almost rings.'], who: 'NARRATOR' },
+    { panel: 'towerfoot-borepard' },
     { arc: 'arc_suicune', stage: 'active' },
     { wildBattleCatch: { species: 'suicune', level: 184, legendary: true } },
     { arc: 'arc_suicune', stage: 'complete' },
@@ -689,6 +692,7 @@ export const JOHTO_EVENTS = {
   // IRISAVIS: the Chime Tower summit, with the Clear Bell in hand.
   ev_johto_hooh: [
     { say: ['The summit bells take the Clear Bell\'s chime up like a relay — hand to hand, bronze to crystal — and throw it out over Lantern in a single widening ring.', 'Then the sky answers. It comes down out of the morning in no hurry at all: seven colours in good order, a crest like a sunrise deciding to stay, eyes that have watched a tower burn and a tower rise and are interested — genuinely, courteously interested — in what you are. The perch takes its weight the way the tower takes weather. Five hundred years of ash settle, very quietly, in your chest.'], who: 'NARRATOR' },
+    { panel: 'summit-irisavis' },
     { flag: 'hooh_summit' },
     { arc: 'arc_hooh', stage: 'active' },
     { wildBattleCatch: { species: 'hooh', level: 182, legendary: true } },
