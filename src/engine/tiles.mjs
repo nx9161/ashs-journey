@@ -3728,6 +3728,95 @@ W17R_KIND_DEFS.forEach(([kind], i) => {
 export const W17R_PROP_KINDS = W17R_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
 export const W17R_WALL_KINDS = W17R_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
 export const W17R_FLOOR_KINDS = W17R_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
+// Wave W17-S (Route Build Program, Maris Tranche 8 — the
+// unmapped country, the Perennial approach, the south-running
+// sea): the program's second dive-pair tranche. All five maps
+// are defined once in maps7.mjs (no dual copies in Maris, so
+// no registry re-pins arise). UNDERWATER METHOD (Director
+// ruling #1): the two trench maps convert by the cave-method
+// analogue — seasand -> own floor kind, uwrock -> own wall
+// kind, art layer only, NO props; the dive-pair mechanic
+// tiles are byte-preserved and censused on BOTH maps of each
+// pair (surface 'W' dive tiles + diveSpots records; trench
+// waterglow return tiles + surfaceSpots records). Both pairs
+// are internal to this tranche: each lane is its own trench's
+// surface partner and converts in the same wave. Route 127
+// "Kelp Sea" (1364-1365): kelpsand a kelp-shadowed shore
+// sand (green-shaded flecks — the forest's shadow standing in
+// the shallows), kelprock a frond-hung rock; water 395 +
+// waterglow 26 byte-preserved entire, coral 6 + lifering 1
+// byte-preserved; its 2 dive tiles on 'W' cells (13,7),(14,7)
+// + diveSpots records are mechanic data — byte-preserved,
+// censused. Only shore sand (8) and rock (11) convert.
+// Route 127 Trench "Kelp Floor" (1366-1367): kelpfloor a
+// golden sand swim-path (lit patches drawn in the floor's own
+// art per the design — the way back up stands lit through the
+// forest), kelpwall a forest-edge rock, green-dark; the
+// shipped dressing family stands byte-preserved inside the
+// new register — kelpbed 52 (the forest itself), moonmoss
+// 28, cerpool 12, plain sand 10, waterglow 9, cavelantern 7,
+// crystalcluster 5, uwcoral 5, kelp 5, cavecrystal 4, rock 4,
+// starrock 3. Route 128 "Perennial Approach" (1368-1369):
+// sunksand a deep-channel sand (sparse flecks in deep water
+// — spec presence is thin by nature, the plan's pre-recorded
+// R40-class exception: only sand 2 + rock 10 convert),
+// sunkrock a cavern-ring rock with warm-breathing joint
+// drawing (the drowned cavern's warmth read from above);
+// water 406 + waterglow 22 byte-preserved entire, coral 6 +
+// lifering 1 byte-preserved; dive tiles + records
+// byte-preserved, censused. Route 128 Trench "Breathing
+// Dark" (1370-1371): breathfloor a warm-niched trench sand
+// (ember-warm flecks standing in the tread), breathwall a
+// breathing cavern rock with warm seams; its 2 warp cells
+// (22,5),(23,5) -> seafloor-cavern stand on cavefloor — the
+// Sunken Cavern's walking mouth is byte-preserved entire
+// (cavefloor is neither seasand nor uwrock and never
+// converts); dressing byte-preserved: kelpbed 56, moonmoss
+// 27, cerpool 12, plain sand 10, waterglow 6, uwcoral 4,
+// cavelantern 3, starrock 3, cavecrystal 2, crystalcluster
+// 2, kelp 2, rock 1. Route 129 "Lee Water" (1372-1373):
+// leesand a lee-shore sand (calm flecks), leerock a
+// crater-lee rock with shadow-side drawing; water 403 +
+// waterglow 24 byte-preserved entire, coral 4 + lifering 2
+// byte-preserved; only sand 5 + rock 9 convert. The two
+// trenches are twin-split by register (the Lunestone 1F/B1F
+// discipline): 127 is the golden kelp floor under a green
+// forest edge, 128 the warm breathing dark; the three lanes
+// split by shore register: kelp-shadowed, deep-channel,
+// lee-calm. Encounter tables (0.10 surf set on the lanes,
+// 0.13 clamperl set in the trenches) and the trenches'
+// underwater flags are byte-identical. Sand kinds are
+// 'floor' class (the shipped sand char was walkable; the
+// swaps are 1:1), trench floor kinds 'floor' class (swapped
+// 1:1 from the walkable seasand), rock/wall kinds 'wall'
+// class (never walkable). Indices 1364-1373 per the program
+// plan (WAVE-W17-MARIS-ROUTE-PROGRAM-PLAN.md): W17-L took
+// 1257-1276, W17-M 1277-1286, W17-N 1287-1303, W17-O
+// 1304-1321, W17-P 1322-1339, W17-Q 1340-1355, and W17-R
+// takes 1356-1363 on its parallel branch; 1111 and every
+// earlier documented gap stay empty. Kind names verified
+// unclaimed against origin/main. Chars U+1E00+1364..
+export const W17S_KIND_DEFS = [
+  ['kelpsand', 'floor'],
+  ['kelprock', 'wall'],
+  ['kelpfloor', 'floor'],
+  ['kelpwall', 'wall'],
+  ['sunksand', 'floor'],
+  ['sunkrock', 'wall'],
+  ['breathfloor', 'floor'],
+  ['breathwall', 'wall'],
+  ['leesand', 'floor'],
+  ['leerock', 'wall'],
+];
+export const W17S_KIND_CHARS = {};
+W17S_KIND_DEFS.forEach(([kind], i) => {
+  const ch = String.fromCodePoint(0x1E00 + 1364 + i);
+  W17S_KIND_CHARS[kind] = ch;
+  TILE_CHARS[ch] = kind;
+});
+export const W17S_PROP_KINDS = W17S_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
+export const W17S_WALL_KINDS = W17S_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
+export const W17S_FLOOR_KINDS = W17S_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
 export const SINNOH_TOWN_GROUND_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg);
 export const SINNOH_TOWN_GROUND2_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg2);
 // TX-3: the 8 gym exteriors by town (original type-accent motifs).
