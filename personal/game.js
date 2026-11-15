@@ -14587,6 +14587,88 @@ const ART = {
     "....OBO..OBO....",
     "....OOO..OOO....",
   ] },
+  "panel-shrine-chronofae": { w: 128, h: 80, pal: {"O":"#201812","K":"#0e2a1c","D":"#1d4a30","d":"#2f6e45","G":"#57a75e","g":"#8ecf78","L":"#d9eda3","Y":"#f8eec2","S":"#9aa189","s":"#5f6355","M":"#71835a","F":"#7a5a36","B":"#5fd95e","b":"#2f9e46","W":"#eefaf0","P":"#bfe3ff"}, rows: [
+    "OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO",
+    "OKKKKKKKKKKKKKKKKKKKKKKKDDDDDDDDDDDDDKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKDDDDDDDDDDDDDKKKKKKKKKKKKKKKKKKKKKKO",
+    "OKKKKKKKKKKKKKKKKKKKKKDDDDDDDDDDDDDDDDDKKKKKKKKKKKKKKKKKLLLKKKKKKKKKKKLLLKKKKKKKKKKKKKKKKKDDDDDDDDDDDDDDDDDKKKKKKKKKKKKKKKKKKKKO",
+    "OKKKKKKKKKKKKKKKKKKKDDDDDDDDDDDDDDDDDDDDDKKKDKKKKKKKKKKKLLLKKKKKKKKKKKLLLKKKKKKKKKKDKKKKDDDDDDDDDDDDDDDDDDDDDKKKKKKKKKKKKKKKKKKO",
+    "OKKKKKKKDKKKKKKKKKKDDDDDDDDDDDDDDDDDDDDDDDKKKKKKKKDKKKKWLLLWWKKKKKKKWWLLLWKKKKKKKKKKKKKDDDDDDDDDDDDDDDDDDDDDDDKKKKKKKKKKDKKKKKKO",
+    "OKKKKDDDKKKKKKKKKKKDDDDDDDDDDDDDDDDDDDDDDDKKKKDKKKKKKWWWWWWbWKKKKDKDWbWWWWWWKKKKKKKKKKKDDDDDDDDDDDDDDDDDDDDDDDKKKKKKKKKKKDDDKKKO",
+    "OKKDDDKKKKKKKKKKKKDDDDDDDDDDDDDDDDDDDDDDDDDKKKKKKKKKWWWWWWWWbKDKKKKKbWWWWWWWWKKKKKKKKKDDDDDDDDDDDDDDDDDDDDDDDDDKKKKKKKKKKKKDDdKO",
+    "OKdddKKKKKKKKKKKKKKDddDDDDDDDDDDDDDDDDDDDDKKKKKKKKKWWWPWWWWWbKKKDKKKbWWWWWPWWWKKKKKKKKKDDDDDDDDDDDDDDDDDDDDdDDKKKKKKKKKKKKKKDdDO",
+    "ODDDDKKKKKKKKKKKKKDDDDDDDDDDDDDDDDDDDDDDDDKKKKKKKWWWWWWWWWWWKbKKKKKbKWWWWWWWWWWWKKKKKKKDDDDDDDDDDDDDDDDDDDDDdDDKKKKKKKKKKKKKddDO",
+    "ODDDKKKKKKKKKKKKKKKKDDDDDDDDDDDDDDDDDDDDDKKKKKKKWWWWWWWWWWWPKBBBBBBBKPWWWWWWWWWWWKKKKKKKDDDDDDDDDDDDDDDDDDDDDKKKKKKKKKKKKKKKKDDO",
+    "OddDKKKKKKKKKKKKKKKDKKDDDDDDDDDDDDDDDDDKKKKKKKKWWWPWWWWWWWPgBBBBBBBBBgPWWWWWWWPWWWKKgKKKKKDDDDDDDDDDDDDDDDDKKdKKKKKKKKKKKKKKKdDO",
+    "OdDDKKKKKKKKKKKKKKKDDKKKDDDDDDDDDDDDDKKKKKKKKKKWWPWWWWWWPLLBBBBBBBBBBBLLPWWWWWWPWWKKKKKKKKKKDDDDDDDDDDDDDKDKDDKKKKKKKKKKKKKKKDDO",
+    "OdDKKKKKKKKKKKKKKKKKDDDdDDDDDDDDDDDDDdDDDDDdDDWWWPWWWWWPLLBBOBBBBBBOBBBLLPWWWWWPWWWDDDDDDdDDDDDDDDDDDDDDDDDDDKKKKKKKKKKKKKKKKKdO",
+    "ODdDKKKKKKKKKKKKKKKDDDDDDDDDDDDDDDDDDDDDdDDDDDWWPPWWWPPLLLBOWOBBBBOWOBBLLLPPWWWPPWWDDDDDDDDDDDDDDDDDDDDDDDDDDDKKKKKKKKKKKKKKKDdO",
+    "ODDDKKKKKKKKKKKKKKKDDDDDDDDDDDDDdDDdDDDDDDDDDDWWPPPPPLYLLLBOOOBBBBOOOBBLLLggPPPPPWWDDDDDDDDDDDDDDDDDDDDDDDdDDdKKKKKKKKKKKKKKKDdO",
+    "ODDDKKKKKKKKKKKKKKKDDDDDDDDDDDDdDDDDDDDDDDDDDggLPPLgLLggLgBOOOBBBBOOObBLLLLLLLLPPLgLDDDDDDDDDdDDDDDdDDDDDdDDdDKKKKKKKKKKKKKKKDDO",
+    "ODDDDKKKKKKKKKKKKKDDDDDDDdDDDDdDDDDDDDDDDDDDgLLLLLgLLLgLLLBBOBBBBBBObbbLLgLLLggLLLLLgDDDDDDDdDDdDDDDDdDDDDDDdDdKKKKKKKKKKKKKDDDO",
+    "ODDDDKKKKKKKKKKKKKDDDDDDDDDDDDDDDDDDDDDDDDggLggLgLLLLggLggPPBBBBBBbbbPPLLLLLgLLLLLLgLggDDDDDDDDDDDDDDDdDDDDDdDDKKKKKKKKKKKKKDDDO",
+    "ODDDDDKKKKKKKKKKKddDDDDdDDDDDDDDDDDDDDDDDgLggLLLgLLLLLYLgLgLBBbOObbbbbbLLLLLLLYLLLLgLLLgDDDDdDDDDDDDDDDDDDDDDDDDKKKKKKKKKKKDdDDO",
+    "ODDDDDDDKKKKKKKDddDDDDDDDDDdDDDDDDDDDdDDgLLLLLLLLLLLLLgLLLLLLBBbbbbbbbgLLLLLLLLLLgLLLLLLgDDDDDDDDDDdDDDDDDDDDDDDDDKKKKKKKdDDdDDO",
+    "ODdddDDDdDDKdDdDDdDDDdDDDDDDDDDDDDDDDDDDLLgLggLLLLLLLLLLgLgLLLLBBBbbbLLLLLLLLLLLLLLLLLgLLDDDDDDDDDDDDDDDDDDDDDDDDDDDDKDDDDDdDDDO",
+    "OdDDDDDdDDDDDdDdDDDDdDDDDddDDDdDdDDdDDDgLgLLLLLLLLggLLLLLgLgLgBBBBBLLgLLLgLLLLLLLLLLLLLLLgDDDDDDDDdDDDDDDDDDDDDDDdDDDDDDDDDdDDDO",
+    "ODdDDDDDDDDdDDDDDDDDDDDDDDDDDDdDDDDDDDYLggLLgLgLLLLLLLLLLgLYYBBBBBBBYYLLLLLLLLLLLLPLLLgLLLgDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDddDO",
+    "ODDdDDDDdddDDDdDDDDDDDDDDDDDDDDDDDDDdgLLLgLLLgLgLLgLLLLLLYBBBBLLLBBBBBBYLLggLgLLLLgLgLLLLLLgDDDDDDDDDDDDDDDDDDDDDDdDDDdDDDDDDDDO",
+    "ODdDDDDDDdDdDDdDDDDDDDDDDDDDDDDDDDDDDgLLLLLgLLLLLLLgLgLLYYBBBLLLLLbbBBBYYLLLLLLgLLLLLgLLLLLLDDDDDdDDDDDDDDDdDDDDdDdDDDdDdDdDdDdO",
+    "OKDDDDDDDDdDDDDdDDDDDDDDDDDDDDDDDDDDLLLLgLLLgLLLLLLgLgYYYYBBBLLLLLbbBBBYYYYLLLLgLgLgLgLLLLLLgDDDDDDDDDDDDDDDdDDdDDDDDDDDDDDDDDDO",
+    "OdKddDDDDdddDddDdDDDddddddddddddddddLLLLLLLLLLPLLLYLLYYYYYBBBLLLLLbbbBBYYYYYLLgLLLPLLLLLLLLLgddddddddddddddddDDDDDDDDDDDDDDDdDdO",
+    "OdKdDDDDDDDDDDDDDDDddddddddddddddddgLLLLgLLgLLLLLgLgLYYYYYYYBLLLLLbbbYYYYYYYLgLLLLLLLLLLLLLLLgddddddddddddddddDDDDDdDdDdDdDDDKKO",
+    "OddKDDDDdDDDdDDddDDddddddddddddddddgLLLLggLLgLLLLLLLYYYYYYYYYLLLLLbbbYYYYYYYYLLLLgLLLLLLLLLLLLddddddddddddddddDDDDDDDDDDDDDdDKKO",
+    "OKddddDDDDDDDDDDDddddddddddddddddddgLLLLLLgLgLLLgLLLYYYYYYYYYbbLLbbbYYYYYYYYYLLLLLgLLLLLLLLLLLdddddddddddddddddddDDDDDDdDDDddKdO",
+    "OddddKdDDDDDDDDDddddddddddddddddddgLLLLLgLLLLgLLLLLYYYYYYYYYYbbbbbbbYYLYYYYYYYLLLLPLLLgLLLLLLLgddddddddddddddddddDDDDDDDDDdddddO",
+    "OKdKdddddFFDFsddddddddddddddddddddgLLLLLLLgLLLLLLLLYYYYYYYYYYbbYYYbbYYYYYYYYYYLLLLLLLLgLLLLLLLLddddddddddddddddddddFFDFsdddddddO",
+    "OddddddddFFFFsddddddddddddddddddddgLLLLLLLLLLLgLgLLYYYYYYYYYYBYYYYYBYYYYYYYYYYLLLLLLLggLLLLLLLgddddddddddddddddddddFFFFsddKdddKO",
+    "OKKKdddddFFFFsddddddddddddddddddddgLLLLLLgLLLLLLLLLMMMMMMMMMMYMMMYYMYMMMMMMYMMgLggLLLLLLLLLLLLLddddddddddddddddddddFFFFsdddddKKO",
+    "OddKdKdddFFFFsddddddddddddddddddddgLLLLLLLPLLLgLLgSSSSSSSSSSSSSSSSSSSSSSSSSSSSSLgLLLLLLLLLLLLLLddddddddddddddddddddFFFFsddKKdddO",
+    "OdKddKdddFFFFsddddddddddddddddddddgLLLLLgLLLLLLLLLsssssssssssssssssssssssssssssLggLLLLLLLLLLLLgddddddddddddddddddddFFFFsddKKKddO",
+    "OKdKdKdddFFFFsdddddddddddddddddddgLLLLLLLLLLLLLLLLsssssssssssssssssssssssssssssggLLLLLLLLLLLLLLLdddddddddddddddddddFFFFsddKKKddO",
+    "OddKdddddFFFFsddddddddddddddddddddgLLLLLLLLLLLLLLgLYSSSSSSSSSSSSSSSSSSSSSSSSSYLLggLLLLLLLLLLLLgddddddddddddddddddddFFFFsddDdKddO",
+    "OdddKddddFFFFsddddddddddddddddddddLLLLLLLLLLLLLgLgLYSSSSSSSSSSSSSSSSSSSSSSSSSYLLLLgLLLgLLLLLLLgddddddddddddddddddddFFFFsdddddKdO",
+    "OddKdKdddFFFFsddddddddddddddddddddgLLLLLLLLLLgLgLLLLSSSSSSSSSSSSSSSSSSSSSSSSSLLLLLgLLLLLLLLLLLgddddddddddddddddddddFFFFsdddddddO",
+    "OddddddddFFFFsddddddddddddddddddddLLLLLLLLLLggLLLLLLsssssssssssssssssssssssssLLLLLggLggLLLLLLLgddddddddddddddddddddFFFFsdddddddO",
+    "OddKKddddFFFFsddddddddddddddddddddLLLLLLgLLLLLLLLLLLgYYYYYYYYYYYYYYYYYYYYYYYgLgLLLLLLgggLLLLLLgddddddddddddddddddddFFFFsdddddddO",
+    "OdKdKddddFFFFsddddddddddddddddddddLLLLLLLLLLLgLggLgLLYSSSsSSSSSSSSSSSSsSSSSYLLLgLgLLLLLLLLLLLLgddddddddddddddddddddFFFFsddKdKddO",
+    "OdKKKKdddFFFFsdddddddddddddddddddddgLLLLgLLLLLLgLLLLgLSSssSSSMSSsSSSSSssSSSLLgggLgLLLLgLLLLLLgdddddddddddddddddddddFFFFsdddddKdO",
+    "OGGKKKGdGFFFFsGGGdGGGGGGGGGGGGGGGGGgLLLLgLLLLLLLLLLLLLSsSsSSSSSSSsSSsssSSMSLLgLLLgLLLLgLLLLLLLGGGGdGGGGGGGGGGGGGGGGFFFFsGGGGKKDO",
+    "OdGGKKGGGFFFFsGGGGGGGGGGGGGGGGGGGGGgLLLLLLgLLLLLLLLLLLSSSssSSSsSSSSSSSsSsSSLLLggLLLLLLgLLLLLLLGGGGGGGGGGGGGGGGGGGGGFFFFsGGGGGGGO",
+    "OGGGGGGGGFFFFsGGGGGGGGGGGGGGGGGGGGGGLLLLLLLLLgLgLLLLLLSSssMSSSsSsSsSsssMSSSLLLLLLLLLgLPLLLLLgGGGGGGGGGGGGGGGGGGGGGGFFFFsGGGKKdGO",
+    "OGKGGGGGGFFFFsGGGGGGGGdGGGGGGGGGGGGGLLLLgLLLLLLLLLgLLLSSSsSSSSSSOSSsSSsSSSSLgLgLLLLLLLLLLLLLgGGGGGGGGGGGGGdGGGdGGGGFFFFsGGGGKGGO",
+    "OGGKGGdGGFFFFsGGGGGGGGGGGGddGGGGddGGGLLLLLLLgLLLLLLgLgSMSssSSSOOOOOsSSsSsSSLLLLggLLLgLLLLLLgGGGGGGGGGGGGGGGGGGGGGGGFFFFsGGKGGGKO",
+    "OGKGGGGGGFFFFsGGGGdGGGGGGGGGGGGGGGGGGLLLLLLgLLLLLLLLgLSSSsSsSOOOsOOOSssSSSSLLLggLLgLLLgLLLLgGGGGGGGGGGGGGGGGGGGGGGdFFFFsGGGKGKGO",
+    "OGGGKGdGdFFFFsdGGGGGGGGGGGGGGGGGGGGGGGLLLLPLLLPLLLLgLLSSSsSSOOOsYsOOOSsMSSSLLLLLLLLgLLLLLLgGGGGGGGGGGGGGGGGGGGGGGGGFFFFsGGGKdGKO",
+    "OGKdGGGGGFFFFsGGGGGGGGGGGGGGGGGGGGGGGGGLLLLLgLLLgLLLLLSSSsSSOOsYYYsOOSsSSSSLLLgLLLLLLLgLLgGGGdGGGdGGGGGGGGGGGGGGGGGFFFFsGGKGGGGO",
+    "OGGGGKGGGFFFFsGGGGGGGGGGGGGGGGGGGGdGGGGGLLLLLLLLLLLLLgSSSsSSOOYYYYYOOssSSSSLLLLggLLLLLLLgGGGGGdGGGGGGGGGGGGGGGGGGGGFFFFsGGGKKGKO",
+    "OKGKGGGGGFFFFsGGGGGGGGGGGGGGGGGGGGGGGGGGgLggLLLgLLLLLLSSMsSOOssYYYssOOsSSMSgLLLLgLLLgLLLgGGGGGGGGGdGGGGGGGGGGGGGGGGFFFFsGGKGKKGO",
+    "OGGGGKGdGFFFFsGGGGddGGGGGGGGGGGGGGGGGdGGGgYLLLLgLLPLLLSSSsSSOOssYssOOSsSSSSLgLLgLLLLLLLgGGGGGGGGGGGGGGGGGGGGGGGGGGGFFFFsGGGGGKGO",
+    "OGKGKKGGGFFFFsGGGdGGGGGGGGGGGGGGGGGGGGdGGGggLLLLgLLLLgSSSMSSOOsssssOOSsSSSSLLgLLLgLLgggGGGGGGGGGGGGGGGGGGGGGGGGGGGGFFFFsGGGGGGGO",
+    "OGKGGGGGdFFFFsGGGGdGGGGGGGGGGGGGGGGGGGGGGGGGgLgLgLLLLLSSSMSSOOOsssOOOSsMMSSLLLLLLgLLgGGGGGGGGGGGdGGGGGGGGGGGGGGGGGGFFFFsGGGKKGGO",
+    "OKdKGGGdGFFFFsGGGGdGGGGGGGGGGGGGGGGGGGGGGGGGGggLLggLLgSSSsSSSOOOsOOOsSssSMSggLLLLLgLGGGGGGGddGGGGGGGGGGGGGGGGdGGGGGFFFFsGGGGGKGO",
+    "OGdKDDGGGFFFFsGdGGGGGGGGGGGGGGGGGGGGGGGGdGGGGGGgLLgLLLSSSsSMSSOOOOOSsSsSSSSLLLLLggGGGGGGGGGdGdGGGGGGGGGGGGGGGGGGGGGFFFFsddKGKGGO",
+    "OGGKKGGGGFFFFsGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGggLLLLSSMsSSsSSsOSSSsSsSSSSLLgLggGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGFFFFsGdKGGKGO",
+    "OddddKdddFFFFsddddddddddddddddddddddddddddddddddddggLLSSSsSSSSSMSMMSSSMSSMSLgggddddddddddddddddddddddddddddddddddddFFFFsddKdKdKO",
+    "OddddddddFFFFsdddddddddddddddddddddddddddddddddddddddgSMSsSSSSSSSSSSMSsSSSSLdddddddddddddddddddddddddddddddddddddddFFFFsdddddKdO",
+    "OddddKdddFFFFsdddddddddddddddddddddddddddddddddddSSSSSSSSsSSSSSSSSSSSSsSSSSSSSSSdddddddddddddddddddddddddddddddddddFFFFsdddKKddO",
+    "OddddKdddFFFFsdddddddddddddddddddddddddddddddddddsssssssssssssssssssssssssssssssdddddddddddddddddddddddddddddddddddFFFFsdddKKdKO",
+    "OdKdKKdddFFFFsddddddddddddddddddddddddddddddddSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSddddddddddddddddddddddddddddddddFFFFsddddddKO",
+    "OdKKdddddFFFFsddddddddddddddddddddddddddddddddsssssssssssssssssssssssssssssssssssssddddddddddddddddddddddddddddddddFFFFsdddddddO",
+    "OMsFsFFFFFFFFsFssFMFFFFFMFFFsFsFFssFFMFFFsFsFFFLFLFFFFFFLFFLFLLLFFFFFFLFFFFFFFFFFFFFsFFFFMMMFFMFFFFFFFsFFFFFFsFFFMFFFFFssMMsMsMO",
+    "OFFFFsFMFsFFFssMFssFFFFFMFFFFsFsFMFsMMFsFFLLFLLFLLFLFFFFLLLFLLLFFLFFFFLLFFFLFLLFFFFFFFFFFMFFFFFsMFsssFsFFFsFFFMFFFFFFsFssFFFMFFO",
+    "OsFFFMFMFMFMFFMMFFMFFssFFsFFFFFsFMsFFFsFFFFLFLFFFFFLFFFFLFFFFFFFFFLLFLLFFLFFLFLFFFFFFFFFFMFFsFFFFMssMFFsMFFFFFFsFFsMsFFFMssFFssO",
+    "OFsMFFFFsFMFFFssFMMFFFsMFFsFMFFsMMsMMFFFFFFLFFFFFFFLFLLLFFLFFFLFFFLFFLLLFLFFFLLLFFLFLLFFFFFMMFFMsFFFFFFFFMFsFssFFFFssFFssFsFMsFO",
+    "OFFsFFFFFMFMFMMsFMFFsFsMFsFMFsMFsMsMsFFFFFFFLLFFFLFFFFLFFFFLFFLLFFFFLFFFFFLFFFFFFLFFLLFFFFFFMFMFFMFFFFsMFFMsFsFFFFMsFMsFFFsMsFFO",
+    "OMFFFMFFFFMFFsFMFFFMFFMFFFMFMFsMMFFssFFFFFFFFFFLLFFFLFFLFFLFLFLFLFLLFLFFLFFFFFFFFFLFFLFFFFFFMsFsFsMMFFFMFFsFMFFssMFMsFFFFFFMsFFO",
+    "OsFFMFFMMFsFMFFMFFFsFFFFMFFFsFFsMFFssFsFFFFFFLFFFLFFFLFFFLFFFFFFFFFFFLLLLLLFFFFFFLLFFFFFFFFsFFFFFFMMFsFMFssFFFFFFFFFFFsFFFsMFsFO",
+    "OFMsFsFFFFsMsMsFFFsFMMMssFFFFFFFFsMsFMFFsFFFFLLFFLFFFLFFFLLFFFFLFFFFFFFLFFLLFFFFLLFLFFFFFFFFMsMFsFsMFssMFssFsFMsFMFFsMMMFFFsFFMO",
+    "OMssMMssFMFMFFFssFsMMFsFFFsFsFsFMFFFsFsFFFFFFFLFFFFLLFFFLFFFFLLFLLFFFFLFFFFFFFLLFLFLMsFFFFFsFFFFMsssMFFFFFsMFMFFMFsFsFFFFFFFFFFO",
+    "OMFFsFFMsFFFMsMFFMFsFMMFFFMFFFFFsFFFFFMFsFFFMMsFMLFFLFLFLFFLFFFLFFFFLLLLFFFFFFFssMLFMFMsMFFFFsFssFFsFsFFMFFMFsFFMFMFsMFFMFMssFFO",
+    "OFFssMFFFFssFMFFMFMFMMsFFFFFsFssMFMFMFssssFFsMFFFFFFsMFFFFFFsFFFFssMFFFFFMMFMMMsFFFFMFMFFMFFMMsFFFsMMFsFsMFFsMsFFFFFFFFssFFMssFO",
+    "OMFFFFMFFsssMsFMMFMFFFFFFMFMFFFFsFsFFFFsFFFFFFsFFsMFsMFFFFMsFFFMFsFFsFFFFFsFFsFFssFFMFFFFFFFFFFsFFFFssMFFFFFMsMMMFFsFsFMsFsMssMO",
+    "OFMFMFFMsMsMFMMFssMFsssMFsFFFMsMFFFFFFFFMFMFMFsFFFFFFFMMMsMFMsFFsFsMsMFFFFFFFFFFFsFFFsMMFssFFFsFFsFsFFMFFFsFFFMFMFFFMMFFFMFFsMFO",
+    "OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO",
+  ] },
   "title-keyart": { w: 64, h: 48, pal: {"O":"#1c1626","A":"#2e3a6e","B":"#5a4a8a","C":"#b05a7a","D":"#e88a4a","E":"#f8d890","S":"#fff0b0","T":"#3a2e4e","H":"#24301e","P":"#c8a878","K":"#14100e","Y":"#f0c838","W":"#ffffff","G":"#4a7a3a","L":"#79a85a","R":"#a83a32"}, rows: [
     "OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO",
     "OAAAWAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAWAAAAAAAAWAAAAAAAAAAAAAO",
@@ -174554,6 +174636,24 @@ function lockedChapters() {
 }
 
 
+// ---- src/data/panels.mjs ----
+// panels.mjs — W10 cutscene panel indirection table.
+// Story data names the MOMENT (a `{ panel: '<id>' }` step in an event's
+// step list, interpreted by runSteps in overworld-systems.mjs); this
+// table names the ART, so a panel can be re-cut without touching story
+// files (the narrative DB's single-sourcing discipline).
+// Panel art entries live in assets/sprites/pix/keyart/panel-<id>.pix and
+// flow through build-art into ART as `panel-<id>` (title-keyart
+// precedent). Canvas standard (Director ruling, W10): 128x80 authored,
+// presented at 2x integer scale by ui.showPanel.
+// A panel step is PRESENTATION ONLY: it writes no flags and no state —
+// the parity guard (tests/cutscene-panel-checks.mjs) proves an event's
+// end state is identical with and without its panel steps.
+const PANELS = {
+  'shrine-chronofae': { art: 'panel-shrine-chronofae' },
+};
+
+
 // ---- src/data/arcs.mjs ----
 // arcs.mjs — the ARCS registry (ADR-027, Stage F foundation): the SINGLE
 // data source for the arc chain. One arc = one edition-generation of the
@@ -177119,6 +177219,9 @@ const JOHTO_EVENTS = {
   // the shrine is a place you go to, not a room you pass through).
   ev_johto_celebi: [
     { say: ['The Sealed Orb comes out of your bag already warm. At the shrine\'s foot it clicks — a small, definite sound, like a latch being asked a question and answering yes — and the two halves open on nothing at all, and the nothing is looking at you.', 'Then the forest breathes in. For one held moment Ilex is young: saplings where the old oaks stand, light the colour of first mornings, leaf-mould unstepped-on by any boot that has ever existed. A small green shape hangs in that younger light, wings ticking like a clock that counts in seasons, and it is laughing — delighted, entirely unafraid — and the laugh says: you took the long way round, and the long way round was the way.'], who: 'NARRATOR' },
+    // W10 proof panel: the reveal, shown — presentation only (the
+    // panel step writes no state; see src/data/panels.mjs).
+    { panel: 'shrine-chronofae' },
     { flag: 'celebi_shrine_opened' },
     { arc: 'arc_celebi', stage: 'active' },
     { wildBattleCatch: { species: 'celebi', level: 170, legendary: true } },
@@ -186422,6 +186525,8 @@ class UI {
     this._hudToastQ = [];   // headless record for hudToast (cap 2, mirrors the DOM cap)
     this.chapterCard = null; // D2: chapter title card overlay while open
     this._ccT = 0;
+    this.panelCard = null;   // W10: cutscene panel overlay while open
+    this._panelCb = null;    // W10: step-chain resume callback while open
   }
 
   init() {
@@ -187735,6 +187840,41 @@ class UI {
     if (old && old.remove) old.remove();
   }
 
+  // ---- W10: cutscene panels ----
+  // A full-frame art panel on the frame layer (the chapter card's
+  // surface idiom), shown by the runSteps `panel` verb. artId is an ART
+  // entry id (panel standard: 128x80 authored, drawn at 2x integer
+  // scale = the 256-logical-px frame width). A / tap / START dismisses
+  // and resumes the step chain via cb — no auto-dismiss: the panel is a
+  // story beat the player advances, like dialogue. Headless: logs
+  // {ui:'panel'} and calls back immediately (the chapter-card pattern),
+  // so every headless drive converges on identical state.
+  showPanel(artId, cb) {
+    this.log.push({ ui: 'panel', art: artId });
+    if (this.headless) { if (cb) cb(); return; }
+    this.hidePanel(); // one panel at a time
+    const d = this.el('div', 'panelcard', this.frame);
+    const cv = artCanvas(document, artId, 2, false);
+    if (cv) d.appendChild(cv);
+    const hint = this.el('div', 'panel-hint', d);
+    hint.textContent = 'Press A / tap to continue';
+    d.addEventListener('pointerdown', (e) => {
+      e.preventDefault();
+      this.game.audio.unlock();
+      this.game.input.inject('a');
+    });
+    this.panelCard = d;
+    this._panelCb = cb || null;
+  }
+
+  hidePanel() {
+    this.panelCard = null;
+    this._panelCb = null;
+    if (this.headless || !this.root) return;
+    const old = this.root.querySelector('.panelcard');
+    if (old && old.remove) old.remove();
+  }
+
   // UI v2.1: sync the FRAME LAYER's box to the canvas rect. All in-game DOM
   // (dialogue, menus, battle commands, HUD chips/strip, toasts, chapter
   // cards) positions against this layer, so it is geometrically impossible
@@ -187831,6 +187971,17 @@ class UI {
       if (input.wasPressed('a') || input.wasPressed('start') || this._ccT >= 4) {
         this.game.audio.unlock();
         this.hideChapterCard();
+      }
+      return true;
+    }
+    // Cutscene panel is modal (W10: A/START/tap dismisses and resumes
+    // the step chain; no auto-dismiss — the player advances the beat).
+    if (this.panelCard) {
+      if (input.wasPressed('a') || input.wasPressed('start')) {
+        this.game.audio.unlock();
+        const cb = this._panelCb;
+        this.hidePanel();
+        if (cb) cb();
       }
       return true;
     }
@@ -197068,6 +197219,18 @@ Object.assign(OverworldScene.prototype, {
     if (s.chapterCard !== undefined) {
       const ch = CHAPTERS[s.chapterCard];
       if (ch && g.ui.showChapterCard) g.ui.showChapterCard(ch);
+      next(); return;
+    }
+    // W10: a cutscene panel — PRESENTATION ONLY. The step names a
+    // moment in PANELS (src/data/panels.mjs); the table names the art.
+    // showPanel resumes the chain on dismissal (headless: immediately),
+    // and the step writes no flags and no state, so an event's outcome
+    // is identical with or without it (tests/cutscene-panel-checks.mjs
+    // parity drive). An unknown id is a data bug the guard catches;
+    // at runtime it degrades to a no-op rather than stalling the chain.
+    if (s.panel) {
+      const p = PANELS[s.panel];
+      if (p && g.ui.showPanel) { g.ui.showPanel(p.art, next); return; }
       next(); return;
     }
     if (s.warp) {
