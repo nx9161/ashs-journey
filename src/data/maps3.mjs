@@ -285,7 +285,7 @@ export const MAPS3 = {
     ],
     signs: [],
     npcs: [
-      { x: 4, y: 4, name: 'GUARD VEX', art: 'grunt', skin: '#d8a878', shirt: '#2a2a3a', pants: '#1a1a2a', hair: '#3a2a1a',
+      { x: 4, y: 4, name: 'GUARD VEX', art: 'cast-vex', skin: '#d8a878', shirt: '#2a2a3a', pants: '#1a1a2a', hair: '#3a2a1a',
         dialogue: ["Vantage is under new management, kid — ours. Show yourself out.", "Management's gonna dock my pay for this..."] },
       { x: 13, y: 8, name: 'EMPLOYEE', art: 'lady', skin: '#f0c8a0', shirt: '#3a6ac0', pants: '#2a2a3a', hair: '#a05a2a',
         dialogue: ["They stormed the president's office upstairs. Someone dropped a Card Key in the lobby rush — check the corner by the plants!", "Please — my POLYCRANE project is up there. And, uh. My lunch. Mostly the project."] },
@@ -329,7 +329,7 @@ export const MAPS3 = {
       { x: 13, y: 9, name: 'HIKER BRANT', art: 'cast-brant', skin: '#c89878', shirt: '#9a603a', pants: '#3a3a3a', hair: '#4a3a2a',
         trainer: 'r9_hiker', sight: { dir: 'up', range: 3 },
         dialogue: ["Every stone on this route has met my boots. Now my team wants to meet YOU!", "Boots: scuffed. Team: scuffed-er. Well fought!"] },
-      { x: 4, y: 8, name: 'CAMPER LIO', art: 'camper', skin: '#f0c8a0', shirt: '#5d3fa5', pants: '#3a3a4a', hair: '#2a1a0a',
+      { x: 4, y: 8, name: 'CAMPER LIO', art: 'cast-lio-camper', skin: '#f0c8a0', shirt: '#5d3fa5', pants: '#3a3a4a', hair: '#2a1a0a',
         trainer: 'r9_camper', sight: { dir: 'right', range: 3 },
         dialogue: ["I pitched my tent on the best battling spot on the route. Coincidence? Never.", "Tent's yours if you want it. The view's great; the company was better."] },
     ],
@@ -1128,7 +1128,7 @@ export const MAPS3 = {
       { x: 11, y: 7, text: 'ROUTE 20 — Rime Isles west, Caldera east. The caves breathe cold air in summer.' },
     ],
     npcs: [
-      { x: 12, y: 8, name: 'SWIMMER BO', art: 'swimmer', skin: '#d8a878', shirt: '#3a9ac0', pants: '#2a3a4a', hair: '#1a1a1a',
+      { x: 12, y: 8, name: 'SWIMMER BO', art: 'cast-bo-swimmer', skin: '#d8a878', shirt: '#3a9ac0', pants: '#2a3a4a', hair: '#1a1a1a',
         dialogue: ["Something huge and blue nests in the Rime caves. The cold near its chamber isn't weather — it's presence.", "Push the boulders into the sea holes if you go. Slows the current. Old swimmer's trick."] },
     ],
     encounters: {
@@ -1453,7 +1453,7 @@ export const MAPS3 = {
       { x: 5, y: 7, text: 'ROUTE 22 — The League road. Beyond the gate, only badge-bearers pass. No exceptions. Ever.' },
     ],
     npcs: [
-      { x: 2, y: 4, name: 'GATE GUARD', art: 'officer', skin: '#d8a878', shirt: '#3a6ac0', pants: '#2a2a3a', hair: '#1a1a1a',
+      { x: 2, y: 4, name: 'GATE GUARD', art: 'cast-gateguard', skin: '#d8a878', shirt: '#3a6ac0', pants: '#2a2a3a', hair: '#1a1a1a',
         dialogue: ["League checkpoint. Eight badges open the mountain; seven open a long walk home.", "I've turned away champions-in-waiting for thirty years. The mountain doesn't grade on effort, kid."] },
     ],
     encounters: {

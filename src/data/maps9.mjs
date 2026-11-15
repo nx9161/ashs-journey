@@ -164,7 +164,7 @@ export const MAPS9 = {
     ],
     "npcs": [
       {"x": 17, "y": 4, "name": "MART CLERK", "art": "clerk-borea", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#4a3a2a", "dialogue": ["Shingle Town Mart — stocked for the road ahead."], "mart": {"stock": ["pokeball", "greatball", "potion", "superpotion", "antidote", "awakening"]}},
-      {"x": 11, "y": 7, "name": "LAB AIDE FERN", "art": "aide", "skin": "#e8b888", "shirt": "#3a6ac0", "pants": "#2a3a4a", "hair": "#1a1a1a", "dialogue": ["The Professor's bark is worse than his fieldwork, and his fieldwork once involved a STRAPTOR.", "Revelry's towers are a walk north. The city never sleeps; it broadcasts."]},
+      {"x": 11, "y": 7, "name": "LAB AIDE FERN", "art": "cast-fern-lab", "skin": "#e8b888", "shirt": "#3a6ac0", "pants": "#2a3a4a", "hair": "#1a1a1a", "dialogue": ["The Professor's bark is worse than his fieldwork, and his fieldwork once involved a STRAPTOR.", "Revelry's towers are a walk north. The city never sleeps; it broadcasts."]},
       {"x": 19, "y": 13, "name": "BEACHCOMBER ANA", "art": "cast-ana", "skin": "#d8a878", "shirt": "#7a4a8a", "pants": "#2a2a3a", "hair": "#c0c0c0", "dialogue": ["TIDESLUG change colour with the coast here. The lab writes it down; the beach just does it.", "Clover is west, past the first grass of the journey."]},
       {"x": 6, "y": 10, "name": "YOUNGSTER RUE", "art": "cast-rue-youngster", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#4a3a2a", "dialogue": ["I race the BRINEGULL along the shore. The BRINEGULL are winning on points.", "Route 202's grass rustles at knee height. That's the sound of starting."]},
     ],
@@ -1494,7 +1494,7 @@ export const MAPS9 = {
       {"x": 14, "y": 4, "text": "THE RUINED MANOR — The forest’s one house, long empty. The garden statue watches the path; the windows watch everything else."},
     ],
     "npcs": [
-      {"x": 9, "y": 10, "name": "BUG MANIAC FERN", "art": "bugcatcher", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#4a3a2a", "dialogue": ["Both Wurmple roads run through this forest, silk and cascoon alike, if your eyes are patient.", "DUSKMOTH drift down from the honey trees at dusk. The chateau garden is their ballroom."]},
+      {"x": 9, "y": 10, "name": "BUG MANIAC FERN", "art": "cast-fern-maniac", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#4a3a2a", "dialogue": ["Both Wurmple roads run through this forest, silk and cascoon alike, if your eyes are patient.", "DUSKMOTH drift down from the honey trees at dusk. The chateau garden is their ballroom."]},
     ],
     "encounters": {"rate": 0.14, "table": [{"species": "buneary", "min": 319, "max": 325, "weight": 18}, {"species": "burmy", "min": 319, "max": 325, "weight": 16}, {"species": "wurmple", "min": 319, "max": 324, "weight": 14}, {"species": "silcoon", "min": 320, "max": 325, "weight": 8}, {"species": "cascoon", "min": 320, "max": 325, "weight": 8}, {"species": "beautifly", "min": 321, "max": 326, "weight": 6}, {"species": "dustox", "min": 321, "max": 326, "weight": 6}, {"species": "mothim", "min": 320, "max": 326, "weight": 6}, {"species": "gastly", "min": 320, "max": 326, "weight": 8}, {"species": "hoothoot", "min": 319, "max": 325, "weight": 10}]},
     "items": [],
@@ -2292,7 +2292,7 @@ export const MAPS9 = {
       {"x": 8, "y": 2, "text": "SORREL'S FIELD BOARD — 'A Kin is not fully known until you have been muddy in its company. Evolution is not an ending; it is a question.'"},
     ],
     "npcs": [
-      {"x": 9, "y": 4, "name": "PROF. SORREL’S AIDE", "art": "aide", "skin": "#e8b888", "shirt": "#3a6ac0", "pants": "#2a3a4a", "hair": "#1a1a1a", "dialogue": ["The Professor is in the field. The Professor is always in the field. The field is wherever he is standing.", "Ninety-three percent of Borea's species, catalogued from this room. The other seven percent are being difficult on purpose."]},
+      {"x": 9, "y": 4, "name": "PROF. SORREL’S AIDE", "art": "cast-sorrel-aide", "skin": "#e8b888", "shirt": "#3a6ac0", "pants": "#2a3a4a", "hair": "#1a1a1a", "dialogue": ["The Professor is in the field. The Professor is always in the field. The field is wherever he is standing.", "Ninety-three percent of Borea's species, catalogued from this room. The other seven percent are being difficult on purpose."]},
       {"x": 5, "y": 8, "name": "AIDE COLM", "art": "cast-colm", "skin": "#c89878", "shirt": "#2a7a6a", "pants": "#3a3a4a", "hair": "#7a4a1a", "dialogue": ["Shingle doctrine: boots by the door, notebook in hand, opinions in pencil.", "Mind the specimen jars. The TIDESLUG inside is conducting its own study of you."]},
     ],
     "encounters": null,

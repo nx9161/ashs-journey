@@ -1086,7 +1086,7 @@ export const MAPS7 = {
       {"x": 12, "y": 7, "text": "ROUTE 102 — Eldergrove Town to Meadowbrook City. The ponds belong to the LILIPOLE; the road merely borrows them."},
     ],
     "npcs": [
-      {"x": 12, "y": 11, "name": "BUG CATCHER WREN", "art": "bugcatcher", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#4a3a2a", "dialogue": ["SILKWURM by day, and the ponds keep their own hours.", "A PSYLET crossed here once. Once. I check every morning."]},
+      {"x": 12, "y": 11, "name": "BUG CATCHER WREN", "art": "cast-wren-catcher", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#4a3a2a", "dialogue": ["SILKWURM by day, and the ponds keep their own hours.", "A PSYLET crossed here once. Once. I check every morning."]},
       {"x": 20, "y": 6, "name": "LASS MIRA", "art": "cast-mira-lass", "skin": "#d8a878", "shirt": "#7a4a8a", "pants": "#2a2a3a", "hair": "#c0c0c0", "dialogue": ["Meadowbrook's gym leader is the calmest man in Maris. His Kin are not.", "First ponds, first ripples. Route 102 is where journeys get their feet wet."]},
     ],
     "encounters": {"rate": 0.13, "table": [{"species": "zigzagoon", "min": 202, "max": 206, "weight": 24}, {"species": "poochyena", "min": 202, "max": 206, "weight": 22}, {"species": "wurmple", "min": 202, "max": 206, "weight": 18}, {"species": "lotad", "min": 203, "max": 207, "weight": 14}, {"species": "seedot", "min": 203, "max": 207, "weight": 10}, {"species": "surskit", "min": 203, "max": 207, "weight": 8}, {"species": "ralts", "min": 204, "max": 207, "weight": 4}], "water": [{"species": "tentacool", "min": 202, "max": 210, "weight": 28}, {"species": "magikarp", "min": 202, "max": 208, "weight": 24}, {"species": "wingull", "min": 203, "max": 210, "weight": 20}, {"species": "pelipper", "min": 206, "max": 212, "weight": 8}], "waterRate": 0.08},
@@ -1224,7 +1224,7 @@ export const MAPS7 = {
       {"x": 14, "y": 7, "text": "MEADOWBROOK WOODS — Deep shade, soft ground. The forest keeps a spare of everything: light, sound, and directions."},
     ],
     "npcs": [
-      {"x": 9, "y": 12, "name": "BUG MANIAC FERN", "art": "bugcatcher", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#4a3a2a", "dialogue": ["Both SILKWURM roads run through this forest, if your eyes are patient: silk and cascoon alike.", "Rarest thing here sheds its own skin and leaves it watching. HUSKCADA. Once a season, maybe."]},
+      {"x": 9, "y": 12, "name": "BUG MANIAC FERN", "art": "cast-fern-maniac", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#4a3a2a", "dialogue": ["Both SILKWURM roads run through this forest, if your eyes are patient: silk and cascoon alike.", "Rarest thing here sheds its own skin and leaves it watching. HUSKCADA. Once a season, maybe."]},
     ],
     "encounters": {"rate": 0.14, "table": [{"species": "wurmple", "min": 206, "max": 211, "weight": 20}, {"species": "silcoon", "min": 207, "max": 212, "weight": 12}, {"species": "cascoon", "min": 207, "max": 212, "weight": 12}, {"species": "shroomish", "min": 207, "max": 212, "weight": 18}, {"species": "slakoth", "min": 207, "max": 212, "weight": 12}, {"species": "taillow", "min": 206, "max": 211, "weight": 10}, {"species": "beautifly", "min": 208, "max": 212, "weight": 6}, {"species": "dustox", "min": 208, "max": 212, "weight": 6}, {"species": "shedinja", "min": 209, "max": 212, "weight": 2}]},
     "items": [],
@@ -2537,7 +2537,7 @@ export const MAPS7 = {
       {"x": 8, "y": 2, "text": "ASPEN'S FIELD BOARD — 'A Kin is not fully known until you have been muddy in its company.'"},
     ],
     "npcs": [
-      {"x": 9, "y": 4, "name": "AIDE FERN", "art": "aide", "skin": "#e8b888", "shirt": "#3a6ac0", "pants": "#2a3a4a", "hair": "#1a1a1a", "dialogue": ["The Professor does fieldwork the way weather does rain: personally and everywhere.", "Habitat charts on every wall. The mud on the floor is also a chart, unofficially."]},
+      {"x": 9, "y": 4, "name": "AIDE FERN", "art": "cast-fern-aide", "skin": "#e8b888", "shirt": "#3a6ac0", "pants": "#2a3a4a", "hair": "#1a1a1a", "dialogue": ["The Professor does fieldwork the way weather does rain: personally and everywhere.", "Habitat charts on every wall. The mud on the floor is also a chart, unofficially."]},
       {"x": 5, "y": 8, "name": "AIDE COLM", "art": "cast-colm", "skin": "#c89878", "shirt": "#2a7a6a", "pants": "#3a3a4a", "hair": "#7a4a1a", "dialogue": ["Rootlet doctrine: the lab coat is optional; the notebook is not.", "Mind the specimen jars. The LILIPOLE inside is conducting its own study of you."]},
     ],
     "encounters": null,
