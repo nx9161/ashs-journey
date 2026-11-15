@@ -368,6 +368,10 @@ const NPC_SWAP_KEYS = {
   // named persons of the lady/elder/worker/youngster/hiker duplicate
   // groups — kind keyed to the person (slug from their name), palette
   // stays the post's own; the signature lives in KIT_CAST_SPEC.
+  // (+cast-gensai: ELDER GENSAI's clone-breaker nudge vanished when
+  // BELL WARDEN YUKI left the shared elder design — measured side
+  // effect of this tranche, repaired in-kind, disclosed in T2's
+  // checklist.)
   'cast-chairman': { S: 'skin', H: 'hair', J: 'shirt', P: 'pants' },
   'cast-brant': { S: 'skin', H: 'hair', J: 'shirt', P: 'pants' },
   'cast-doss-hiker': { S: 'skin', H: 'hair', J: 'shirt', P: 'pants' },
@@ -495,6 +499,7 @@ const NPC_SWAP_KEYS = {
   'cast-bryn-hiker': { S: 'skin', H: 'hair', J: 'shirt', P: 'pants' },
   'cast-wren-hiker': { S: 'skin', H: 'hair', J: 'shirt', P: 'pants' },
   'cast-dunmore': { S: 'skin', H: 'hair', J: 'shirt', P: 'pants' },
+  'cast-gensai': { S: 'skin', H: 'hair', J: 'shirt', P: 'pants' },
   'cast-hald': { S: 'skin', H: 'hair', J: 'shirt', P: 'pants' },
   'cast-odo-tracker': { S: 'skin', H: 'hair', J: 'shirt', P: 'pants' },
   'cast-dust-ruin': { S: 'skin', H: 'hair', J: 'shirt', P: 'pants' },
@@ -792,6 +797,7 @@ const KIT_CAST_SPEC = {
   'cast-bryn-hiker': { acc: [['hat-wide', { C: '#8a5a2a', c: '#4c3217', X: '#e8c832' }], ['glasses', {}]] },
   'cast-wren-hiker': { acc: [['headband', { C: '#7a4a8a', c: '#43294c' }]] },
   'cast-dunmore': { acc: [['hat-fedora', { C: '#2a2a3a', c: '#171720' }]] },
+  'cast-gensai': { acc: [['bald', {}], ['headband', { C: '#e8c832', c: '#b8931f' }], ['cape', { C: '#a02a3a', c: '#5f1822' }]] },
   'cast-hald': { acc: [['cape', { C: '#4a4a6a', c: '#29293a' }], ['hat-wide', { C: '#2a2a3a', c: '#171720', X: '#c83a2a' }]] },
   'cast-odo-tracker': { acc: [['hat-wide', { C: '#e86a8a', c: '#803a4c', X: '#f4f4f0' }], ['cape', { C: '#803a4c', c: '#46202a' }]] },
   'cast-dust-ruin': { acc: [['hat-wide', { C: '#c05a3a', c: '#6a3220', X: '#8a5a2a' }], ['glasses', {}]] },
