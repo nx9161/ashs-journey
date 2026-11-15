@@ -1,0 +1,25 @@
+# Wave W17-U (Route 204): scree post — a scree warning post under the fallen slope: a post carrying one rust-red warning band, the bluff road’s own caution where the slope sheds its stone (design: a falling-rock slope over the road’s north reach). On bluff turf (fully opaque, ground baked in) — the fleet’s only warning post: split from every marker post by the red band, which measures nothing and announces nothing — it warns.
+PIX tile-prop-screepost 16 16
+aaaabaaaaaaaaaaa
+aaaaaaaaabaaaaaa
+aaaaaabbaaaaaaaa
+aaaaaaaaaaaaaaba
+aaabaaakdaaaaaaa
+aababaarraaaabaa
+aaaaaaarraaaaaaa
+aaaaaaakdaaaaaaa
+baaaaaakdaaaabaa
+aababaakdaaaaaaa
+baaaaaakdaaaaaab
+aaaaabakdaawaaaa
+aaabbaakdaaabaaa
+aaaabaddddaaaaba
+bbaaabaaaaaaaaba
+aaaaaaaaaaaaaaaa
+PAL
+a #74995c
+b #628850
+w #e9ecd9
+r #b0563a
+d #7d5a34
+k #8a6844

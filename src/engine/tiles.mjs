@@ -3893,6 +3893,101 @@ W17T_KIND_DEFS.forEach(([kind], i) => {
 export const W17T_PROP_KINDS = W17T_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
 export const W17T_WALL_KINDS = W17T_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
 export const W17T_FLOOR_KINDS = W17T_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
+// Wave W17-U (Route Build Program, Borea Tranche 1 — the first
+// roads: Clover -> Shingle -> Revelry -> Coalseam, the bluff
+// road, and the Ruined Path cave): Route 201 -> Route 202 ->
+// Route 203 -> Route 204 -> Ruined Path. All five maps are
+// defined once in maps9.mjs (no dual copies in Borea, so no
+// registry re-pins arise). Conversions are char-for-char kind
+// swaps on grassground/path/tree (land routes) or
+// cavefloor/cavewall (Ruined Path, cave method); encounter
+// cells/tables, warps, NPC posts, sign records/texts and every
+// shipped biome/dressing kind stay byte-identical. Route 201
+// "First Road (Borea)" (1384-1387): candorturf is lake-shore
+// first meadow (fresh green with shore flecks — Lake Candor's
+// shore water (15) stays byte-identical on its north side),
+// candorfloor first-road pale sand (design-authorised),
+// candorelm a young shore elm, milepost mile posts x2 on
+// verified grassground cells along the thinking-walk grass;
+// flower (16), rock (2), fence (2) and signposts (4) stay
+// byte-identical. Twin: Route 101 (Maris) — both are their
+// region's first road; R201 is lake-shore green under Candor's
+// glint, R101 camp-meadow by the field camp. Route 202 "City
+// Approach" (1388-1391): gateturf is approach meadow with
+// petal flecks where the city beds thicken (the shipped
+// flower dressing (31) stays byte-preserved, the ground
+// converts around it), spirefloor city-approach pale sand
+// (design-authorised; renamed in-plan — the draft 'gatefloor'
+// is a shipped kind), gateoak an approach oak (draft 'gateelm'
+// renamed in-plan likewise), citypost city-approach posts x2
+// flanking the path where the beds thicken; rock (8) and
+// fence (7) stay byte-identical. Twin: Route 201 — R202 is
+// the city approach under Revelry's towers, R201 the
+// lake-shore first road. Route 203 "Coal Approach"
+// (1392-1395): coalturf is grass greying toward coal country
+// with stone-dust flecks, coalfloor coal-road pale sand
+// (design-authorised), coalpine a mine-country pine with a
+// dusted crown, cartpost cart-track marker posts x2 where the
+// stone thickens; pond water (15), fence (5) and rock (4)
+// stay byte-identical. Twin: Route 207 — both are Coalseam's
+// roads; R203 is the flat coal approach, R207 the switchback
+// climb. Route 204 "Bluff Road" (1396-1399): bluffturf is
+// bluff-foot turf with scree flecks, blufffloor bluff-road
+// pale sand (design-authorised), bluffpine a bluff pine,
+// screepost scree warning posts x2 under the fallen slope;
+// the shipped flowerfield (32) and honeytree (1) are biome
+// dressing — byte-preserved by spec (Director ruling #3) —
+// and flower (15), rock (2), fence (2) stay byte-identical.
+// Twin: Ruined Path — R204 is the open bluff road, the Path
+// its collapsed continuation. Ruined Path "Ruined Road"
+// (1400-1401) converts by the cave method: oldroadfloor takes
+// the generic cavefloor (broken paving flags — the old road's
+// slabs, cracked joints drawn in the kind) and ruinwall takes
+// the cavewall (rubble-vault wall, fallen-stone seams, the
+// design's wall-niche glints drawn in the wall kind's art,
+// art layer only); drip water (15), rock (9) and caveboulder
+// (3) stay byte-identical, the trigger census is taken
+// before/after, and NO props are placed (cave discipline).
+// Twin: Copperbore Tunnel (Maris) — Copperbore is the tidy
+// dug bore, the Ruined Path is a road that collapsed and kept
+// working. Ground kinds deliberately do NOT end in 'floor'
+// (the desire-path audit counts '*floor' as street tier;
+// grounds must never masquerade as street); path kinds DO
+// end in 'floor' so they register as the route's path tier
+// per route (checklist point 3). Indices 1384-1401 per the
+// program plan (WAVE-W17-BOREA-ROUTE-PROGRAM-PLAN.md): the
+// Maris allocation closed at 1383 (W17-L..W17-T); 1111 and
+// every earlier documented gap stay empty. Kind names
+// verified unclaimed against origin/main.
+export const W17U_KIND_DEFS = [
+  ['candorturf', 'floor'],
+  ['candorfloor', 'floor'],
+  ['candorelm', 'wall'],
+  ['milepost', 'prop'],
+  ['gateturf', 'floor'],
+  ['spirefloor', 'floor'],
+  ['gateoak', 'wall'],
+  ['citypost', 'prop'],
+  ['coalturf', 'floor'],
+  ['coalfloor', 'floor'],
+  ['coalpine', 'wall'],
+  ['cartpost', 'prop'],
+  ['bluffturf', 'floor'],
+  ['blufffloor', 'floor'],
+  ['bluffpine', 'wall'],
+  ['screepost', 'prop'],
+  ['oldroadfloor', 'floor'],
+  ['ruinwall', 'wall'],
+];
+export const W17U_KIND_CHARS = {};
+W17U_KIND_DEFS.forEach(([kind], i) => {
+  const ch = String.fromCodePoint(0x1E00 + 1384 + i);
+  W17U_KIND_CHARS[kind] = ch;
+  TILE_CHARS[ch] = kind;
+});
+export const W17U_PROP_KINDS = W17U_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
+export const W17U_WALL_KINDS = W17U_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
+export const W17U_FLOOR_KINDS = W17U_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
 export const SINNOH_TOWN_GROUND_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg);
 export const SINNOH_TOWN_GROUND2_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg2);
 // TX-3: the 8 gym exteriors by town (original type-accent motifs).

@@ -1,0 +1,25 @@
+# Wave W17-U (Route 203): cart post — a cart-track marker post where the stone thickens: a heavy post bound with one dark iron band, the mark the cart crews repaint each spring where their track leaves the road for the mine country (design: cart tracks crossing the thinning grass east). On coal turf (fully opaque, ground baked in) — split from Route 202’s pale-banded city posts by the iron band: the city announces, the mine country just marks the turn.
+PIX tile-prop-cartpost 16 16
+ababaawaaaaaaaaa
+abbaaaaaaabaaaaa
+abaaabaawaaaaaba
+aaaaaaaaababaaaa
+aaaaaaawwaaaabaa
+aabaaaakdaabaaaa
+aaaaaaaccabwbaaa
+baabaaakdbaabaaa
+bbabaaakdabbaaab
+aaaaaaakdaaaaaaa
+aaaaabakdaaawaaa
+baaaaaakdaabaaaa
+abaaaabkdaaaaaaa
+aaaaabddddaabaaa
+aabaaaaawaabaaaa
+abaaabaaaaaababb
+PAL
+a #7a9464
+b #687f54
+w #e8e2cc
+c #4c4c48
+d #6e5233
+k #7d5f3a
