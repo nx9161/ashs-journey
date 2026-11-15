@@ -50,6 +50,24 @@
 // and tuples are compared as data, never judged as vocabulary. Whether
 // two identities are far enough APART to read as different gyms is
 // graded at merge by the Director's eye, the same split as every wave.
+//
+// Legendary Arenas wave (NO-SAME-KIT fix #10) extends this suite into
+// the ARENA-IDENTITY guard: the §V section below holds the 53 non-gym
+// special venues (WAVE-ARENAS-PLAN §1 census — 32 legendary face
+// venues, 9 league interiors, 2 stadiums, 10 Frontier facility maps)
+// to the same discipline. Arenas T0 generalizes the seam: gymArenaFor
+// becomes arenaOverrideFor, consulting GYM_ARENA_ART first (untouched)
+// then the new VENUE_ARENA_ART (ships EMPTY), Ground fallback last;
+// the M-section needles were re-cut to the generalized wiring in the
+// T0 commit, at the same strength, disclosed here. Venue ratchets:
+//   VENUE_ARENA_COVERED      venues with a VENUE_ARENA_ART entry  0 -> 53
+//   VENUE_TUPLES_DISTINCT    distinct arena signatures over the
+//                            covered venues                       0 -> 53
+// The freeze extends to the venues explicitly: each venue's
+// MAP_GROUND value is pinned per map in §V, and a whole-table
+// MAP_GROUND hash (all 432 assignments) is pinned there too — the §F
+// whole-table hashes over GROUNDS / ARENA_ART / ARENA_AMBIENT already
+// covered the rules and base treatments and stay as they are.
 
 import { buildGameJs } from '../scripts/build.mjs';
 import { TILE_CHARS } from '../src/engine/tiles.mjs';
@@ -116,8 +134,10 @@ const GYM_IDS = [
 const js = buildGameJs({ auth: true });
 const ctx = vm.createContext({ console, Math, JSON, Object, Array, Set, Map });
 vm.runInContext(js + '\n;this.__X = { MAPS, WALKABLE: [...WALKABLE], ARENA_ART, ARENA_AMBIENT,'
-  + ' GYM_ARENA_ART: (typeof GYM_ARENA_ART !== "undefined" ? GYM_ARENA_ART : undefined) };', ctx);
-const { MAPS, ARENA_ART, ARENA_AMBIENT, GYM_ARENA_ART } = ctx.__X;
+  + ' GYM_ARENA_ART: (typeof GYM_ARENA_ART !== "undefined" ? GYM_ARENA_ART : undefined),'
+  + ' VENUE_ARENA_ART: (typeof VENUE_ARENA_ART !== "undefined" ? VENUE_ARENA_ART : undefined),'
+  + ' arenaOverrideFor: (typeof arenaOverrideFor !== "undefined" ? arenaOverrideFor : undefined) };', ctx);
+const { MAPS, ARENA_ART, ARENA_AMBIENT, GYM_ARENA_ART, VENUE_ARENA_ART, arenaOverrideFor } = ctx.__X;
 const WALK = new Set(ctx.__X.WALKABLE);
 const battleSrc = readFileSync(join(ROOT, 'src/game/battle.mjs'), 'utf8');
 
@@ -139,13 +159,20 @@ ok('I3 named exclusions stay out: dojo, pummelo-stadium, silver-stadium',
 const count = (hay, needle) => hay.split(needle).length - 1;
 ok('M1 GYM_ARENA_ART table is declared in battle.mjs and reachable in the bundle',
   battleSrc.includes('const GYM_ARENA_ART = {') && !!GYM_ARENA_ART && typeof GYM_ARENA_ART === 'object');
-ok('M2 gymArenaFor(this.field) is consulted at exactly the drawArena + ptDisc read sites',
-  count(battleSrc, 'gymArenaFor(this.field)') === 2,
-  String(count(battleSrc, 'gymArenaFor(this.field)')));
-ok('M3 drawArenaAmbient consults the gym entry\'s own amb ahead of ARENA_AMBIENT[gid]',
+ok('M2 arenaOverrideFor(this.field) is consulted at exactly the drawArena + ptDisc read sites',
+  count(battleSrc, 'arenaOverrideFor(this.field)') === 2,
+  String(count(battleSrc, 'arenaOverrideFor(this.field)')));
+ok('M3 drawArenaAmbient consults the entry\'s own amb ahead of ARENA_AMBIENT[gid]',
   count(battleSrc, '(ga && ga.amb) || ARENA_AMBIENT[gid]') === 1);
-ok('M4 the resolver reads the table by field.mapId (map-id keying, Director ruling)',
-  battleSrc.includes('return GYM_ARENA_ART[field.mapId] || null;'));
+ok('M4 the resolver consults GYM_ARENA_ART then VENUE_ARENA_ART by field.mapId (map-id keying, gym first)',
+  battleSrc.includes('return GYM_ARENA_ART[field.mapId] || VENUE_ARENA_ART[field.mapId] || null;'));
+ok('M5 VENUE_ARENA_ART table is declared in battle.mjs and reachable in the bundle',
+  battleSrc.includes('const VENUE_ARENA_ART = {') && !!VENUE_ARENA_ART && typeof VENUE_ARENA_ART === 'object');
+ok('M6 resolver behaviour: a gym map resolves to its gym entry, a venue map to its venue entry (or null), null/empty fields to null',
+  typeof arenaOverrideFor === 'function'
+  && arenaOverrideFor({ mapId: 'gym' }) === GYM_ARENA_ART['gym']
+  && arenaOverrideFor({ mapId: 'hall-of-origin' }) === (VENUE_ARENA_ART['hall-of-origin'] || null)
+  && arenaOverrideFor(null) === null && arenaOverrideFor({}) === null);
 
 // ---------------- per-gym interior facts --------------------------------
 const kindOf = (ch) => TILE_CHARS[ch] || ('?' + ch);
@@ -290,6 +317,115 @@ const allTuples = GYM_IDS.map((id) => interiors[id].tuple);
 ok(`S5 ratchet: INTERIOR_TUPLES_DISTINCT = pin ${INTERIOR_TUPLES_DISTINCT} over all 36 (35 at T0 — the mauville/sunnyshore shared tuple; 36 when Mauville takes its own floor)`,
   new Set(allTuples).size === INTERIOR_TUPLES_DISTINCT,
   `measured ${new Set(allTuples).size}`);
+
+// ---------------- V: venues (Legendary Arenas wave, fix #10) -----------
+// The 53 special battle venues outside the gyms (WAVE-ARENAS-PLAN §1):
+// 32 legendary/mythical face venues, 9 league interiors, 2 stadiums,
+// 10 Frontier facility maps. Roamers are OUT (Director ruling: the
+// map-keyed law — a roaming battle reads as the place it found you);
+// two faces sharing one map (meteor-falls, spear-pillar) take ONE
+// treatment per map. The pinned list IS the census — a new
+// venue-shaped map fails here by name until a tranche charters it.
+const VENUE_IDS = [
+  'ancient-tomb', 'bell-tower-1', 'bell-tower-2', 'ceruleancave',
+  'desert-ruins', 'fire-cave', 'flower-paradise', 'frontier-arena',
+  'frontier-dome', 'frontier-factory', 'frontier-palace',
+  'frontier-pike', 'frontier-pyramid', 'frontier-pyramid-a',
+  'frontier-pyramid-b', 'frontier-pyramid-c', 'frontier-tower',
+  'hall-of-origin', 'ice-cave', 'ilex-forest', 'island-cave',
+  'lake-acuity-cave', 'lake-valor-cave', 'league', 'league-chamber-1',
+  'league-chamber-2', 'league-chamber-3', 'league-chamber-4',
+  'league-champion', 'league-evergrande', 'league-lobby',
+  'lightning-cave', 'magma-hideout', 'meteor-falls', 'mt-mortar-2',
+  'national-park', 'newisland', 'newmoon-island', 'powerplant',
+  'pokemon-league', 'pummelo-stadium', 'r125', 'r127-underwater',
+  'r209', 'seafoam', 'shamouti-deep', 'silver-stadium', 'sky-pillar',
+  'snowpoint-temple-depths', 'spear-pillar', 'stark-interior',
+  'turnback-cave', 'victoryroad',
+];
+// Ratchets (Arenas T0 measured; burn down per tranche, in-commit only):
+// T1 +14 sovereigns/finales -> 14, T2 +11 league/stadiums -> 25,
+// T3 +18 remaining legendary -> 43, T4 +10 frontier -> 53 (closure).
+const VENUE_ARENA_COVERED = 0;
+const VENUE_TUPLES_DISTINCT = 0;
+
+ok('V1 venue census is exactly the pinned 53 and every venue id is a merged map',
+  VENUE_IDS.length === 53 && new Set(VENUE_IDS).size === 53
+  && VENUE_IDS.every((id) => !!MAPS[id]),
+  'missing from MAPS: ' + VENUE_IDS.filter((id) => !MAPS[id]).join(','));
+ok('V2 venue census is disjoint from the gym census (no map is both a gym and a venue)',
+  VENUE_IDS.every((id) => !GYM_IDS.includes(id)),
+  VENUE_IDS.filter((id) => GYM_IDS.includes(id)).join(','));
+const venueCovered = VENUE_IDS.filter((id) => VENUE_ARENA_ART && VENUE_ARENA_ART[id]);
+ok(`V3 ratchet: VENUE_ARENA_COVERED = pin ${VENUE_ARENA_COVERED} (T1 +14, T2 +11, T3 +18, T4 +10 -> 53)`,
+  venueCovered.length === VENUE_ARENA_COVERED,
+  venueCovered.length > VENUE_ARENA_COVERED
+    ? `measured ${venueCovered.length} — coverage grew outside a pin move (unrecorded claim)`
+    : `measured ${venueCovered.length} — pin is stale; move it in the tranche commit that covered them`);
+const venueKeys = VENUE_ARENA_ART ? Object.keys(VENUE_ARENA_ART) : [];
+ok('V4 VENUE_ARENA_ART keys are exactly the covered census venues (no stray keys)',
+  venueKeys.every((id) => VENUE_IDS.includes(id)) && venueKeys.length === venueCovered.length,
+  venueKeys.filter((id) => !VENUE_IDS.includes(id)).join(','));
+ok('V5 key disjointness: VENUE_ARENA_ART keys ∩ GYM_ARENA_ART keys = ∅ (gym table wins by seam order, never by collision)',
+  venueKeys.every((id) => !(GYM_ARENA_ART && GYM_ARENA_ART[id])),
+  venueKeys.filter((id) => GYM_ARENA_ART && GYM_ARENA_ART[id]).join(','));
+const venueBadShape = [];
+for (const id of venueCovered) {
+  const e = VENUE_ARENA_ART[id];
+  const keysOk = Object.keys(e).every((k) => ENTRY_KEYS.has(k));
+  const bandsOk = Array.isArray(e.sky) && e.sky.length === 6 && e.sky.every((v) => typeof v === 'string')
+    && Array.isArray(e.ground) && e.ground.length === 6 && e.ground.every((v) => typeof v === 'string');
+  const scalarsOk = ['dark', 'light', 'accent', 'motif', 'tex'].every((k) => typeof e[k] === 'string' && e[k].length > 0);
+  const ambOk = !!e.amb && typeof e.amb.kind === 'string' && typeof e.amb.n === 'number' && typeof e.amb.speed === 'number';
+  if (!(keysOk && bandsOk && scalarsOk && ambOk)) venueBadShape.push(id);
+}
+ok(`V6 every VENUE_ARENA_ART entry carries the full treatment shape (${venueCovered.length} covered)`,
+  venueBadShape.length === 0, venueBadShape.join(','));
+const venueSigs = venueCovered.map((id) => sigOf(VENUE_ARENA_ART[id], VENUE_ARENA_ART[id].amb));
+ok(`V7 ratchet: VENUE_TUPLES_DISTINCT = pin ${VENUE_TUPLES_DISTINCT} (distinct signatures over covered venues == covered count)`,
+  new Set(venueSigs).size === venueSigs.length && new Set(venueSigs).size === VENUE_TUPLES_DISTINCT,
+  `measured ${new Set(venueSigs).size} distinct over ${venueSigs.length} covered`);
+const venueCopied = venueCovered.filter((id) => baseSigs.has(sigOf(VENUE_ARENA_ART[id], VENUE_ARENA_ART[id].amb))
+  || gymSigs.includes(sigOf(VENUE_ARENA_ART[id], VENUE_ARENA_ART[id].amb)));
+ok('V8 no covered venue\'s signature merely copies a base Ground treatment or a gym treatment',
+  venueCopied.length === 0, venueCopied.join(','));
+// Freeze extended to the venues: every venue's MAP_GROUND value is
+// pinned per map, and the whole assignment table (all 432) is hashed —
+// this wave changes no MAP_GROUND entry anywhere.
+const VENUE_GROUND_PINS = {
+  'ancient-tomb': 'spirit', 'bell-tower-1': 'spirit',
+  'bell-tower-2': 'spirit', 'ceruleancave': 'rubble',
+  'desert-ruins': 'spirit', 'fire-cave': 'ember',
+  'flower-paradise': 'bloom', 'frontier-arena': 'rubble',
+  'frontier-dome': 'open', 'frontier-factory': 'volt',
+  'frontier-palace': 'mind', 'frontier-pike': 'venom',
+  'frontier-pyramid': 'spirit', 'frontier-pyramid-a': 'spirit',
+  'frontier-pyramid-b': 'spirit', 'frontier-pyramid-c': 'spirit',
+  'frontier-tower': 'rubble', 'hall-of-origin': 'spirit',
+  'ice-cave': 'frost', 'ilex-forest': 'bloom', 'island-cave': 'frost',
+  'lake-acuity-cave': 'frost', 'lake-valor-cave': 'tide',
+  'league': 'open', 'league-chamber-1': 'open',
+  'league-chamber-2': 'open', 'league-chamber-3': 'open',
+  'league-chamber-4': 'open', 'league-champion': 'open',
+  'league-evergrande': 'open', 'league-lobby': 'open',
+  'lightning-cave': 'storm', 'magma-hideout': 'ember',
+  'meteor-falls': 'rubble', 'mt-mortar-2': 'rubble',
+  'national-park': 'bloom', 'newisland': 'tide',
+  'newmoon-island': 'grave', 'powerplant': 'storm',
+  'pokemon-league': 'open', 'pummelo-stadium': 'open', 'r125': 'tide',
+  'r127-underwater': 'tide', 'r209': 'bloom', 'seafoam': 'frost',
+  'shamouti-deep': 'tide', 'silver-stadium': 'open',
+  'sky-pillar': 'storm', 'snowpoint-temple-depths': 'frost',
+  'spear-pillar': 'spirit', 'stark-interior': 'ember',
+  'turnback-cave': 'grave', 'victoryroad': 'rubble',
+};
+for (const id of VENUE_IDS) {
+  ok(`V ${id} MAP_GROUND stays '${VENUE_GROUND_PINS[id]}' (freeze extended to venues)`,
+    MAP_GROUND[id] === VENUE_GROUND_PINS[id], String(MAP_GROUND[id]));
+}
+ok('V9 the whole MAP_GROUND table (all 432 assignments) hashes unchanged',
+  sha(JSON.stringify(MAP_GROUND)) === 'd61c7c5819a53e9e3cc92fe0212be002a69ae5cd3b9219e05baf23c1853ceeb1',
+  sha(JSON.stringify(MAP_GROUND)));
 
 console.log(`\ngym-identity-checks: ${pass} pass, ${fail} fail`);
 process.exit(fail ? 1 : 0);
