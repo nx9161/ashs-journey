@@ -191251,6 +191251,93 @@ const VENUE_ARENA_ART = {
   // event's fused copper offerings), storm clouds WITHOUT the
   // Coilworks' pylon: the shrine is stone, not plant.
   'lightning-cave': { sky: ['#2c2c34', '#363640', '#403f4a', '#4a4854', '#54525e', '#5e5c68'], ground: ['#4c3a2c', '#443428', '#3c2e24', '#342820', '#2c221c', '#241c18'], dark: '#17110c', light: '#ffeec9', accent: '#e88a3c', motif: 'storm', tex: 'spark', amb: { kind: 'spark', n: 14, speed: 0 } },
+  // T4 Frontier facilities (WAVE-ARENAS-PLAN §3/§4): the seven
+  // Trial Grounds facilities — nine entries over the ten census
+  // maps (the Pyramid hall came OUT on build-time proof, below).
+  // Every concept traces to the facility's own record in
+  // src/data/frontier.mjs (name, Brain, symbol, intro text —
+  // quoted in each comment); battles are proven per venue in the
+  // tranche SPEC (~/workspace/your_files/arenas-t4-frontier/SPEC.md):
+  // the frontier controller starts every run battle on the
+  // facility's own map. No new painters — the allowance was spent
+  // on 'dawnring' in T1, and it is not reused here.
+  // Trial Tower / Esme, Salon Maiden (Ability Symbol) — "Seven
+  // straight wins make a set at the Tower. No tricks, no mercy
+  // rounds"; the Brain "read[s] a battle the way you read a letter,
+  // all at once, every turn counted": the salon letter over Rubble —
+  // vellum stone under dove-lavender light, rune-letters standing
+  // like counted turns, sealing-wax gold, reading-room dust.
+  'frontier-tower': { sky: ['#8a84a0', '#968fa9', '#a29ab2', '#aea5bb', '#bab0c4', '#c6bbcd'], ground: ['#cfc4a8', '#c3b69c', '#b7a890', '#ab9a84', '#9f8c78', '#93806c'], dark: '#4a4038', light: '#fdf6dc', accent: '#c8a028', motif: 'runes', tex: 'fleck', amb: { kind: 'mote', n: 8, speed: 2 } },
+  // Trial Factory / Faber, Factory Head (Knowledge Symbol) —
+  // "Nobody fights with their own team at the Factory. You draft
+  // three rentals from six"; the Brain "built half the machines in
+  // this building": the machine hall over Volt — oiled iron under
+  // teal-grey gloom, a riveted girder row, forge-amber lamps,
+  // welding sparks standing where the Volt base strikes.
+  'frontier-factory': { sky: ['#3d4a4c', '#455456', '#4d5e60', '#55686a', '#5d7274', '#657c7e'], ground: ['#5c6658', '#545e50', '#4c5648', '#444e40', '#3c4638', '#343e30'], dark: '#1e2a26', light: '#ffe2b0', accent: '#ff9a2a', motif: 'steel', tex: 'chunk', amb: { kind: 'spark', n: 14, speed: 0 } },
+  // Trial Arena / Veda, Arena Tycoon (Guts Symbol) — "Three turns.
+  // That is all the Arena gives you. If nobody falls, the judge
+  // scores Mind, Skill and Body": the prize ring over Rubble —
+  // torchlit ring sand under a bronze dusk, flame torches on the
+  // horizon, a blood-orange accent, sparse ring embers.
+  'frontier-arena': { sky: ['#5e3a2c', '#6a4232', '#764a38', '#82523e', '#8e5a44', '#9a624a'], ground: ['#d8b384', '#cda878', '#c29d6c', '#b79260', '#ac8754', '#a17c48'], dark: '#40261a', light: '#ffedbe', accent: '#e8480c', motif: 'flames', tex: 'chunk', amb: { kind: 'ember', n: 10, speed: 12 } },
+  // Trial Dome / Dorian, Dome Ace (Tactics Symbol) — "Sixteen
+  // entrants, one bracket, no second chances... the crowd does the
+  // rest"; the Brain: "Give them a final worth the noise": the
+  // floodlit bowl over Open — stadium night, the light-rig girders
+  // standing over the turf, floodlight gold, and the crowd's
+  // camera flashes for an ambient (the Open trainer floor itself
+  // stays the legacy tournament sand, per the frozen Ground).
+  'frontier-dome': { sky: ['#141c34', '#1a2440', '#202c4c', '#263458', '#2e3c64', '#364470'], ground: ['#3f7a3a', '#397234', '#336a2e', '#2d6228', '#275a22', '#214e1c'], dark: '#0e2418', light: '#f8ffd8', accent: '#ffd94a', motif: 'steel', tex: 'spark', amb: { kind: 'spark', n: 18, speed: 0 } },
+  // Trial Pike / Selene, Pike Queen (Luck Symbol) — "Seven
+  // chambers, three doors each... Luck is just information you
+  // have not earned yet"; the Brain: "You walked my whole serpent
+  // and arrived unbitten": the serpent gloom over Venom — deep
+  // violet-green dark, the coils' crests along the horizon,
+  // fang-lime accent, venom seeping slow.
+  'frontier-pike': { sky: ['#1e2a24', '#24322a', '#2a3a30', '#304236', '#364a3c', '#3c5242'], ground: ['#2e4a34', '#2a4430', '#263e2c', '#223828', '#1e3224', '#1a2c20'], dark: '#0e1a12', light: '#d8f8c0', accent: '#a8e02c', motif: 'waves', tex: 'spark', amb: { kind: 'bubble', n: 10, speed: 8 } },
+  // Trial Palace / Ambrose, Palace Maven (Spirit Symbol) — "your
+  // Kin choose their own moves — you are the heart, not the hand";
+  // the Brain's "garden quiet... the way a river decides its
+  // course": the garden palace over Mind — dusky violet-green
+  // garden light, flower rows on the horizon, bloom-pink accent,
+  // petals drifting through the quiet.
+  'frontier-palace': { sky: ['#4a4460', '#544e6c', '#5e5878', '#686284', '#726c90', '#7c769c'], ground: ['#4e6a4c', '#476344', '#405c3c', '#395534', '#324e2c', '#2b4724'], dark: '#22241c', light: '#f4ffd8', accent: '#e8a8c8', motif: 'flowers', tex: 'petal', haze: true, amb: { kind: 'petal', n: 12, speed: 5 } },
+  // Trial Pyramid floors / Titus, Pyramid King (Brave Symbol) —
+  // "Seven floors up through the dark. No free healing, no shop,
+  // no way back but through"; the Brain waits on floor 7: "you
+  // climbed them all to stand in my light". ONE facility, a graded
+  // family over Spirit — the climb darkens floor by floor, the
+  // tuples distinct (guard V7, no waiver): floor A (the cycle's
+  // threshold — floors 1/4/7 land here, the King's own floor)
+  // carries the torchlit sandstone at its brightest, tomb rows on
+  // the horizon, wall-torch embers.
+  'frontier-pyramid-a': { sky: ['#4a3826', '#543e2a', '#5e442e', '#684a32', '#725036', '#7c563a'], ground: ['#a88454', '#9c7a4a', '#907040', '#846634', '#785c2c', '#6c5224'], dark: '#2a1c0e', light: '#ffe8b0', accent: '#f0a828', motif: 'tombs', tex: 'chunk', amb: { kind: 'ember', n: 10, speed: 10 } },
+  // Pyramid floor B (floors 2/5): the deepening — the same
+  // sandstone family one register darker, fallen rocks where A
+  // keeps its tombs, the torch embers thicker in the dark.
+  'frontier-pyramid-b': { sky: ['#33261a', '#3a2a1e', '#413022', '#483626', '#4f3c2a', '#56422e'], ground: ['#8a6c42', '#7e623a', '#726034', '#66542e', '#5a4828', '#4e3c22'], dark: '#1c1208', light: '#ffd9a0', accent: '#d88f1e', motif: 'rocks', tex: 'chunk', amb: { kind: 'ember', n: 12, speed: 12 } },
+  // Pyramid floor C (floors 3/6): the deepest floors of the cycle,
+  // the sealed stone's own dark — near-black stone, glyph rows for
+  // the stone that "stirs" in the King's chamber (the F3 record),
+  // brazier embers at their densest, the accent gone to the
+  // King's gold.
+  'frontier-pyramid-c': { sky: ['#1e150e', '#241a12', '#2a1f16', '#30241a', '#36291e', '#3c2e22'], ground: ['#6e5636', '#645030', '#5a4a2a', '#504224', '#463a1e', '#3c3218'], dark: '#0e0804', light: '#ffcf8a', accent: '#ffb020', motif: 'runes', tex: 'fleck', amb: { kind: 'ember', n: 14, speed: 14 } },
+  // OUT on build-time proof (T4): frontier-pyramid — the Pyramid
+  // HALL — hosts NO battle in the shipped game. It is the climb's
+  // entrance hall (the frontier controller's own words: "Leaving
+  // the Pyramid hall with a climb open ends the climb"): its map
+  // carries encounters: null, events: [], and a single desk NPC
+  // (PYRAMID CLERK) who books climbs; every Pyramid battle fires
+  // on the floor maps — wild encounters and the seeded trainer
+  // spots exist only on frontier-pyramid-a/-b/-c
+  // (PYRAMID_SPOT_CANDIDATES), and Titus stands on floor 7, which
+  // is map A (BRANDON_TILE + the floor cycle). An arena treatment
+  // for the hall would be dead code, the T2 chamber defect exactly.
+  // It stays in the guard's census UNCOVERED in this commit; the
+  // census correction (48 -> 47, the hall moving to VENUE_EXCLUDED
+  // beside the chambers) is flagged in the tranche SPEC for the
+  // merge as a labeled merge-side step — not adjusted here.
   // OUT on build-time proof (T2): league-chamber-1..4 and
   // league-champion host NO battle in the shipped game — no trainer
   // post, no map event, no story post, no system handler, no
