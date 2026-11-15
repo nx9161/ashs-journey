@@ -31,4 +31,16 @@ export const PANELS = {
   'gleamtomb-siderogolem': { art: 'panel-gleamtomb-siderogolem' },
   'foldedair-rubiavis': { art: 'panel-foldedair-rubiavis' },
   'tideline-azuravis': { art: 'panel-tideline-azuravis' },
+  // W10-B T3 — Borea lakes & the rest of the catches (Class A catch reveals)
+  'insight-loracle': { art: 'panel-insight-loracle' },
+  'gallant-volitar': { art: 'panel-gallant-volitar' },
+  'candor-empathis': { art: 'panel-candor-empathis' },
+  'crescent-lunacygn': { art: 'panel-crescent-lunacygn' },
+  'crater-magmarch': { art: 'panel-crater-magmarch' },
+  'temple-colossor': { art: 'panel-temple-colossor' },
+  'paradise-grathog': { art: 'panel-paradise-grathog' },
+  'keystone-centwisp': { art: 'panel-keystone-centwisp' },
+  'inn-noctarch': { art: 'panel-inn-noctarch' },
+  'meteor-astraeon': { art: 'panel-meteor-astraeon' },
+  'crater-xenogene': { art: 'panel-crater-xenogene' },
 };

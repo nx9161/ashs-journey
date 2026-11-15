@@ -769,6 +769,7 @@ export const HOENN_EVENTS = {
   // (13,11), fired by the meteorstone interact once the star fell.
   ev_hoenn_jirachi: [
     { say: ['The meteorstone is warm. Curled against it, no bigger than a secret, is a small yellow shape with streamers like ribbons on a parcel — asleep on its feet, swaying, humming a note you feel in your teeth more than hear.', 'One eye opens. Then the other. Then the third one — the true one, in its belly, the one that hears wishes the way ears hear thunder — and the little Wish Maker looks at you, looks at the comet going over far above, and makes a decision older than the Space Center, older than the falls: a wish is only real if somebody has to work for it. Catch, then. Earn the wish.'], who: 'NARRATOR' },
+    { panel: 'meteor-astraeon' },
     { arc: 'arc_jirachi', stage: 'active' },
     { wildBattleCatch: { species: 'jirachi', level: 292, legendary: true } },
     { arc: 'arc_jirachi', stage: 'complete' },
@@ -779,6 +780,7 @@ export const HOENN_EVENTS = {
   // fired by the meteorstone interact once the rumour is in hand.
   ev_hoenn_deoxys: [
     { say: ['The crater meteorite is not warm the way sun-warmed stone is warm. It is warm the way a held hand is warm — recently, and on purpose. As you reach it, the stone\'s heart answers with light: a core of orange fire, unfolding out of the rock in limbs that cannot decide what shape honesty requires.', 'It came down with the old shower, before there were falls to name it by, and it has been rehearsing shapes ever since — waiting for an audience worth the performance. The rehearsals are over. This is the performance.'], who: 'NARRATOR' },
+    { panel: 'crater-xenogene' },
     { arc: 'arc_deoxys', stage: 'active' },
     { wildBattleCatch: { species: 'deoxys', level: 295, legendary: true } },
     { arc: 'arc_deoxys', stage: 'complete' },

@@ -597,6 +597,7 @@ export const SINNOH_EVENTS = {
   // one-of-one is caught. Gates: the sysLoadMap S6 block.
   ev_sinnoh_uxie: [
     { say: ['Insight Cavern is colder inside than the lake above it, and quieter than either — a held thought of a room. At its heart the ice simply... decides to have a tenant.', 'LORACLE rises out of the stillness with its eyes closed, the way it has risen for everyone who ever truly needed to know something: unhurried, ungiving, complete. The being of knowledge does not offer answers. It offers a battle — the one examination it has ever set.'], who: '' },
+    { panel: 'insight-loracle' },
     { arc: 'arc_uxie', stage: 'active' },
     { wildBattleCatch: { species: 'uxie', level: 370, legendary: true } },
     { arc: 'arc_uxie', stage: 'complete' },
@@ -606,6 +607,7 @@ export const SINNOH_EVENTS = {
   ev_sinnoh_azelf: [
     { say: ['Gallant Cavern still smells faintly of hot stone from the day the lake was blown half skyward — and at its heart, where the water runs decision-coloured, something has come home to the ruin of its house and stayed anyway.', 'VOLITAR. The being of willpower, hovering over the scarred water with its chin up in a way that makes the whole cavern feel like a held chin too. It does not forgive the region. It does something harder: it stays, and it tests the hand that mended the sky. Yours.'], who: '' },
 
+    { panel: 'gallant-volitar' },
     { arc: 'arc_azelf', stage: 'active' },
     { wildBattleCatch: { species: 'azelf', level: 370, legendary: true } },
     { arc: 'arc_azelf', stage: 'complete' },
@@ -623,6 +625,7 @@ export const SINNOH_EVENTS = {
   // is a pure function of the persisted step counter).
   ev_sinnoh_mesprit: [
     { say: ['The light here has a pink edge it did not have a moment ago — and then the air simply admits she is in it: EMPATHIS, hanging a wingspan away, considering you with the unafraid calm of a creature who has never once been anywhere she did not choose to be.', 'She chose this. Remember that: the chase was hers, the landing is hers, and the battle — the battle she is offering like a hand held out. Take it honestly.'], who: '' },
+    { panel: 'candor-empathis' },
     { arc: 'arc_mesprit', stage: 'active' },
     { wildBattleCatch: { species: 'mesprit', level: 370, legendary: true } },
     { arc: 'arc_mesprit', stage: 'complete' },
@@ -671,6 +674,7 @@ export const SINNOH_EVENTS = {
   // MAGMARCH II: the revisit — the tenant, woken.
   ev_sinnoh_heatran: [
     { say: ['The Crater Hall is hotter than you left it — honestly hotter, the way a forge is honest. The stone glows at the edges like a coal that has remembered something. And the lava floor at the hall\u2019s heart is not a floor anymore. It is a back. Rising.', 'MAGMARCH comes up out of its own mountain the way grievances come up out of old ground: slowly, and with total conviction. It looks at the returned stone. It looks at the hands that returned it. The examination begins.'], who: '' },
+    { panel: 'crater-magmarch' },
     { arc: 'arc_heatran', stage: 'active' },
     { wildBattleCatch: { species: 'heatran', level: 375, legendary: true } },
     { arc: 'arc_heatran', stage: 'complete' },
@@ -679,6 +683,7 @@ export const SINNOH_EVENTS = {
   ],
   ev_sinnoh_regigigas: [
     { say: ['The deep room of Rimefall Temple has waited since the lake froze the first time — and today it does not wait alone. Three small giants stand in your party\u2019s light, and the dais at the room\u2019s heart answers them the way deep water answers a dropped stone: slowly, and then all at once.', 'The statue is not a statue. It never was. COLOSSOR unfolds out of ten thousand years of stillness joint by joint, moss and patience falling away, until the continent-mover stands at the height the room was built for and looks down — at its three, and at the trainer they chose to follow here. That choice is the only key this door ever had. It has turned. Defend it.'], who: '' },
+    { panel: 'temple-colossor' },
     { arc: 'arc_regigigas', stage: 'active' },
     { wildBattleCatch: { species: 'regigigas', level: 380, legendary: true } },
     { arc: 'arc_regigigas', stage: 'complete' },
@@ -695,6 +700,7 @@ export const SINNOH_EVENTS = {
   // LUNACYGN II: the roaming face (the shared step-counter idiom).
   ev_sinnoh_cresselia: [
     { say: ['The light here goes crescent at the edges — and then she is simply in it, the way moonrise is in a clear sky: LUNACYGN, hanging above the road with her ribbons moving in a wind that is entirely hers.', 'For every nightmare there is an antidote, and the antidote has stopped running — not cornered, never cornered. Choosing. The choice, apparently, is a battle, fought in good dreams\u2019 name. Accept it gently.'], who: '' },
+    { panel: 'crescent-lunacygn' },
     { arc: 'arc_cresselia', stage: 'active' },
     { wildBattleCatch: { species: 'cresselia', level: 372, legendary: true } },
     { arc: 'arc_cresselia', stage: 'complete' },
@@ -709,6 +715,7 @@ export const SINNOH_EVENTS = {
     { say: ['The harbour inn at Bridgeport has kept its best room locked for fifty years — one guest, the old keepers say, who never checked in and never left. Tonight the keeper looks at you — the hand that carried the Lunar Wing — and takes a key off its hook without a word.', '"Room\u2019s yours," she says. "Mind the dreams. They\u2019re local." The bed is narrow, the pillow cold, and the dark at the window not entirely the night\u2019s. You sleep the way sailors sleep before weather: completely, and on purpose.'], who: '' },
     { flag: 'darkrai_inn_done' },
     { say: ['The dream has a shoreline. Black water, a pond that reflects nothing the sky admits to, and trees that grow toward the water as if listening. You know this island. You have simply never arrived at it from inside a sleeping head before.', 'Darkmoon Island. And at its heart the dark shape that stood over a sailor\u2019s boy\u2019s bed for a month stands over its own — patient as debt, and considerably less patient about you.'], who: '' },
+    { panel: 'inn-noctarch' },
     { warp: { map: 'newmoon-island', x: 11, y: 11 } },
     { arc: 'arc_darkrai', stage: 'active' },
     { wildBattleCatch: { species: 'darkrai', level: 378, legendary: true } },
@@ -729,6 +736,7 @@ export const SINNOH_EVENTS = {
   ],
   ev_sinnoh_shaymin: [
     { say: ['Petal Paradise lives past its billing the way shrines do: quietly, and completely — a meadow at the end of the sea road, in bloom past all reason. The letter in your bag seems to weigh less here. The flowers seem to weigh more. Gratitude does that to a place.', 'At the meadow\u2019s heart the bloom moves against the wind — and a small green shape with a flower on either ear lifts its head out of the blossom, considers you with total unafraid calm, and makes the decision the Gracidea field made in Honeyfield: an appointment, kept. GRATHOG. The Gratitude Kin, in its own house, offering the house\u2019s one examination. Pass it gently.'], who: '' },
+    { panel: 'paradise-grathog' },
     { arc: 'arc_shaymin', stage: 'active' },
     { wildBattleCatch: { species: 'shaymin', level: 374, legendary: true } },
     { arc: 'arc_shaymin', stage: 'complete' },
@@ -737,6 +745,7 @@ export const SINNOH_EVENTS = {
   ],
   ev_sinnoh_spiritomb: [
     { say: ['The Sealed Keystone leaves your hands the way warm things leave cold ones — reluctantly, and then all at once — and seats itself into the Weathered Tower\u2019s stones like it was always the mortar. The tower... clears its throat. A sound with far too many voices in it, arriving at one word by committee.', 'One hundred and eight grudges, pressed into one cracked stone for longer than the road has had a name — and the stone has just been handed back its address. CENTWISP rises out of the keystone the way smoke rises out of a green fire: in spirals, in faces, in a grin that arrives several expressions before the rest of it. It was not summoned lightly. It will not leave early. Neither, it has decided, will you.'], who: '' },
+    { panel: 'keystone-centwisp' },
     { arc: 'arc_spiritomb', stage: 'active' },
     { wildBattleCatch: { species: 'spiritomb', level: 365, legendary: true } },
     { arc: 'arc_spiritomb', stage: 'complete' },

@@ -48,10 +48,11 @@ for (const [id, steps] of stepLists) steps.forEach((s, i) => { if (s && s.panel)
 
 // W10-B ratchet pins (move only in-commit with their tranche;
 // re-pinned by the merge coordinator against the MERGED tree:
-// W10 proof panel + T1's 8 sovereigns + T2's 9 Yamato+Maris panels).
-const PANEL_STEPS = 18;
-const PANELS_ENTRIES = 18;
-const PANEL_ART_BYTES = 199856;
+// W10 proof panel + T1's 8 sovereigns + T2's 9 Yamato+Maris panels
+// + T3's 11 Borea/rest panels).
+const PANEL_STEPS = 29;
+const PANELS_ENTRIES = 29;
+const PANEL_ART_BYTES = 322126;
 const PANEL_ART_BASELINE_W10 = 11171; // the W10 proof panel alone
 
 ok('A1 shipped data carries at least one panel step', panelSteps.length >= 1);
@@ -79,8 +80,8 @@ for (const { art } of Object.values(PANELS)) {
   if (start >= 0 && end > start) panelBytes += Buffer.byteLength(artDataText.slice(start, end + 7));
 }
 // W10-B ratchet pins (measured; move only in-commit with their tranche).
-const PANEL_ART_BYTES_PIN = PANEL_ART_BYTES;   // cumulative panel art after W10-B T1+T2 (merge re-pin: 199856)
-const PANEL_ART_BYTES_PREV = 99976;  // cumulative after W10-B T1 — the latest tranche (T2) delta is measured from here
+const PANEL_ART_BYTES_PIN = PANEL_ART_BYTES;   // cumulative panel art after W10-B T1+T2+T3 (merge re-pin: 322126)
+const PANEL_ART_BYTES_PREV = 199856;  // cumulative after W10-B T1+T2 — the latest tranche (T3) delta is measured from here
 console.log('  panel art cumulative: ' + panelBytes + ' B (pin ' + PANEL_ART_BYTES_PIN + ' B; this tranche delta ' + (panelBytes - PANEL_ART_BYTES_PREV) + ' B of the 153600 B per-tranche cap)');
 ok('A8 PANEL_ART_BYTES pin: cumulative panel art equals the ratchet pin (measured)', panelBytes === PANEL_ART_BYTES_PIN);
 ok('A8 per-tranche budget: the latest tranche\'s panel art is within 150 KB (Director ruling, W10-B)',
