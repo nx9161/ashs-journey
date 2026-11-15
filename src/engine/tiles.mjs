@@ -5005,6 +5005,38 @@ GYMID4_KIND_DEFS.forEach(([kind]) => {
 export const GYMID4_PROP_KINDS = GYMID4_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
 export const GYMID4_WALL_KINDS = GYMID4_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
 export const GYMID4_FLOOR_KINDS = GYMID4_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
+// Gym Identity T5 (Amber Isles, WAVE CLOSURE): the four Amber gyms'
+// own floor kinds — eyefloor (Tangelo), rubyfloor (Pomelo),
+// spikefloor (Reefside), jadefloor (Calamondin) — indices 1596-1599
+// per WAVE-GYM-IDENTITY-PLAN §8 (continuing T4's 1588-1595), verified
+// free against TILE_CHARS and every map row. Name discipline:
+// coralfloor/shellfloor/starfloor/reeffloor are all taken by existing
+// kinds, so Tangelo takes eyefloor (the Coral-Eye badge, the
+// iciclefloor precedent), Pomelo takes rubyfloor (the Sea Ruby
+// accent), Reefside takes spikefloor (its spike-stone) and Calamondin
+// takes jadefloor (the Jade Star). Each is 'floor' class: swapped 1:1
+// from the walkable '+' gymfloor char inside its own gym ONLY, so
+// floor stays floor (the WALKABLE spread lands in maps.mjs beside the
+// other waves'). T5 closes the wave: the shared 'gymfloor' keeps NO
+// gyms after this tranche — GYMFLOOR_DOMINANT burns to 0.
+// Authored art: assets/sprites/pix/tiles/tile-<kind>.pix, spliced
+// into art-data.mjs by entry (generator-faithful, additions-only).
+export const GYMID5_KIND_DEFS = [
+  ['eyefloor', 'floor'],
+  ['rubyfloor', 'floor'],
+  ['spikefloor', 'floor'],
+  ['jadefloor', 'floor'],
+];
+export const GYMID5_KIND_INDEX = { eyefloor: 1596, rubyfloor: 1597, spikefloor: 1598, jadefloor: 1599 };
+export const GYMID5_KIND_CHARS = {};
+GYMID5_KIND_DEFS.forEach(([kind]) => {
+  const ch = String.fromCodePoint(0x1E00 + GYMID5_KIND_INDEX[kind]);
+  GYMID5_KIND_CHARS[kind] = ch;
+  TILE_CHARS[ch] = kind;
+});
+export const GYMID5_PROP_KINDS = GYMID5_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
+export const GYMID5_WALL_KINDS = GYMID5_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
+export const GYMID5_FLOOR_KINDS = GYMID5_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
 export const SINNOH_TOWN_GROUND_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg);
 export const SINNOH_TOWN_GROUND2_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg2);
 // TX-3: the 8 gym exteriors by town (original type-accent motifs).

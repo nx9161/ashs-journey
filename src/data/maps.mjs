@@ -1363,6 +1363,14 @@ export const WALKABLE = new Set(['.', ',', 'D', 'E', 'C', 'F', 'J', 'K', '1', '2
   // from the walkable '+' gymfloor char inside its own gym, so floor
   // stays floor.
   ...[1588, 1589, 1590, 1591, 1592, 1593, 1594, 1595]
+    .map((i) => String.fromCodePoint(0x1E00 + i)),
+  // Gym Identity T5: the four Amber gym floor chars (U+1E00+1596..1599,
+  // tiles.mjs GYMID5_KIND_DEFS) are walkable — eyefloor (Tangelo),
+  // rubyfloor (Pomelo), spikefloor (Reefside), jadefloor (Calamondin)
+  // — each swapped 1:1 from the walkable '+' gymfloor char inside its
+  // own gym, so floor stays floor. T5 closes the wave: no gym stands
+  // on the shared 'gymfloor' after this tranche.
+  ...[1596, 1597, 1598, 1599]
     .map((i) => String.fromCodePoint(0x1E00 + i))]);
 
 // Trainer definitions for the slice.
