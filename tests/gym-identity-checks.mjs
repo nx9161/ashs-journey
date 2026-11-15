@@ -61,6 +61,8 @@
 // the M-section needles were re-cut to the generalized wiring in the
 // T0 commit, at the same strength, disclosed here. Venue ratchets:
 //   VENUE_ARENA_COVERED      venues with a VENUE_ARENA_ART entry  0 -> 53
+//                            (T2 measured path: -> 48 of 53, the 5
+//                            Borea chamber maps out on proof — §V)
 //   VENUE_TUPLES_DISTINCT    distinct arena signatures over the
 //                            covered venues                       0 -> 53
 // The freeze extends to the venues explicitly: each venue's
@@ -344,10 +346,17 @@ const VENUE_IDS = [
   'turnback-cave', 'victoryroad',
 ];
 // Ratchets (Arenas T0 measured; burn down per tranche, in-commit only):
-// T1 +14 sovereigns/finales -> 14, T2 +11 league/stadiums -> 25,
-// T3 +18 remaining legendary -> 43, T4 +10 frontier -> 53 (closure).
-const VENUE_ARENA_COVERED = 14;
-const VENUE_TUPLES_DISTINCT = 14;
+// T1 +14 sovereigns/finales -> 14. T2 +6 league/stadiums -> 20 (11
+// chartered; league-chamber-1..4 + league-champion came OUT on
+// build-time proof — they host no battle in the shipped game: no
+// trainer post, event, story post, handler or encounter table, and
+// their signs defer their keepers to "the League's season"; they
+// stay in the census above UNCOVERED). T3 +18 remaining legendary
+// -> 38, T4 +10 frontier -> 48 of 53 — whether the census itself
+// drops 53 -> 48 is the Director's call at the T2 merge, flagged in
+// the T2 SPEC; the pins here record only what T2 measured.
+const VENUE_ARENA_COVERED = 20;
+const VENUE_TUPLES_DISTINCT = 20;
 
 ok('V1 venue census is exactly the pinned 53 and every venue id is a merged map',
   VENUE_IDS.length === 53 && new Set(VENUE_IDS).size === 53
@@ -357,7 +366,7 @@ ok('V2 venue census is disjoint from the gym census (no map is both a gym and a 
   VENUE_IDS.every((id) => !GYM_IDS.includes(id)),
   VENUE_IDS.filter((id) => GYM_IDS.includes(id)).join(','));
 const venueCovered = VENUE_IDS.filter((id) => VENUE_ARENA_ART && VENUE_ARENA_ART[id]);
-ok(`V3 ratchet: VENUE_ARENA_COVERED = pin ${VENUE_ARENA_COVERED} (T1 +14, T2 +11, T3 +18, T4 +10 -> 53)`,
+ok(`V3 ratchet: VENUE_ARENA_COVERED = pin ${VENUE_ARENA_COVERED} (T1 +14, T2 +6 of 11 — 5 chambers out on proof, T3 +18, T4 +10)`,
   venueCovered.length === VENUE_ARENA_COVERED,
   venueCovered.length > VENUE_ARENA_COVERED
     ? `measured ${venueCovered.length} — coverage grew outside a pin move (unrecorded claim)`
