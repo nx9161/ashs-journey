@@ -2829,6 +2829,63 @@ W17E_KIND_DEFS.forEach(([kind], i) => {
 export const W17E_PROP_KINDS = W17E_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
 export const W17E_WALL_KINDS = W17E_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
 export const W17E_FLOOR_KINDS = W17E_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
+// Wave W17-F (Route Build Program, Yamato Tranche 1): the first road —
+// Routes 29, 30, 31, 32 and Junction Cave, each its own kit under the
+// NO-SAME-KIT law. All five are defined once in maps6.mjs (no dual
+// copies in Yamato, so no registry re-pins arise). Routes convert 1:1
+// off the generic grassground/path/tree vocabulary by KIND (maps6
+// trees stand on both '#' and 'T' chars — the W17-B lesson);
+// Junction Cave converts the generic cave base — char 'L' (cavefloor)
+// to its own floor kind, char 'G' (cavewall) to its own wall kind —
+// art layer only: encounter tables, warps (incl. Route 32's cave
+// mouths and the cave's door cells), NPC posts, sign records, items
+// and every shipped dressing kind (maple, rock cliff band, pools,
+// cavecrystal, cavelantern, caveboulder, waterglow) byte-identical,
+// and the shipped cave-encounter trigger chars ('.'/'R',
+// overworld-systems sysEncounterStep) occur in none of these grids
+// before or after. Route 29 "Lakewind Slope" (idx 1168-1171),
+// Route 30 "Berry Climb" (1172-1175), Route 31 "Tower-Shadow Valley"
+// (1176-1179), Route 32 "Cliff Shore Road" (1180-1183), Junction Cave
+// "Junction Deep" (1184-1185). Ground kinds deliberately do NOT end
+// in 'floor' (the desire-path audit counts '*floor' as street tier;
+// grounds must never masquerade as street); path kinds DO end in
+// 'floor' so they register as the route's path tier per route
+// (checklist point 3). Cave floor kinds end in 'floor' exactly as
+// cavefloor does, keeping their audit classification. Indices
+// 1168-1185 per the Director's index ruling: Arden took 1092-1110,
+// 1112-1131, 1132-1151, 1152-1165 and 1166-1167 (W17-E, landing in
+// parallel); 1111 and every earlier documented gap stay empty. Kind
+// names verified unclaimed against origin/main. Chars U+1E00+1168..
+// (Register: WAVE-W17-YAMATO-ROUTE-PROGRAM-PLAN.md.)
+export const W17F_KIND_DEFS = [
+  ['windturf', 'floor'],
+  ['windfloor', 'floor'],
+  ['podnut', 'wall'],
+  ['lakecairn', 'prop'],
+  ['berryturf', 'floor'],
+  ['climbfloor', 'floor'],
+  ['berrytree', 'wall'],
+  ['berrycrate', 'prop'],
+  ['shadowturf', 'floor'],
+  ['valleyfloor', 'floor'],
+  ['shadowoak', 'wall'],
+  ['towerstone', 'prop'],
+  ['cliffturf', 'floor'],
+  ['clifffloor', 'floor'],
+  ['cliffpine', 'wall'],
+  ['flagcairn', 'prop'],
+  ['junctionfloor', 'floor'],
+  ['junctionwall', 'wall'],
+];
+export const W17F_KIND_CHARS = {};
+W17F_KIND_DEFS.forEach(([kind], i) => {
+  const ch = String.fromCodePoint(0x1E00 + 1168 + i);
+  W17F_KIND_CHARS[kind] = ch;
+  TILE_CHARS[ch] = kind;
+});
+export const W17F_PROP_KINDS = W17F_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
+export const W17F_WALL_KINDS = W17F_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
+export const W17F_FLOOR_KINDS = W17F_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
 export const SINNOH_TOWN_GROUND_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg);
 export const SINNOH_TOWN_GROUND2_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg2);
 // TX-3: the 8 gym exteriors by town (original type-accent motifs).

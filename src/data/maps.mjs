@@ -1041,6 +1041,23 @@ export const WALKABLE = new Set(['.', ',', 'D', 'E', 'C', 'F', 'J', 'K', '1', '2
   // W17-D takes 1152-1165 on its parallel branch; 1111 stays
   // empty.)
   ...[1166]
+    .map((i) => String.fromCodePoint(0x1E00 + i)),
+  // Wave W17-F: the Yamato tranche-1 ground/path/floor chars
+  // (U+1E00+1168.., tiles.mjs W17F_KIND_DEFS) are walkable —
+  // windturf/windfloor (Route 29), berryturf/climbfloor
+  // (Route 30), shadowturf/valleyfloor (Route 31),
+  // cliffturf/clifffloor (Route 32), each swapped 1:1 from the
+  // walkable '_' ground / '.' path chars on its own route, and
+  // the cave floor junctionfloor (Junction Cave), swapped 1:1
+  // from the walkable 'L' cavefloor char in its own cave, so
+  // floor stays floor. The tree chars (1170, 1174, 1178, 1182),
+  // prop chars (1171, 1175, 1179, 1183) and the cave wall char
+  // (1185) are NOT here: trees/props were never walkable, and
+  // the wall swaps from 'G' cavewall, which was never walkable.
+  // (Indices 1168-1185 per the Director's index ruling: Arden
+  // took 1092-1110, 1112-1131, 1132-1151, 1152-1165 and
+  // 1166-1167 on its parallel branch; 1111 stays empty.)
+  ...[1168, 1169, 1172, 1173, 1176, 1177, 1180, 1181, 1184]
     .map((i) => String.fromCodePoint(0x1E00 + i))]);
 
 // Trainer definitions for the slice.

@@ -1,0 +1,26 @@
+# Wave W17-F (Route 32): flag cairn — a marker cairn with a small red wayflag on a pole, standing along the drops as the design’s marker-flag cairns do, on cliff turf (fully opaque, ground baked in).
+PIX tile-prop-flagcairn 16 16
+aaaaaaaabaaaawba
+aababaabaaaababa
+aaaaaaaabaaaaaaa
+awaaaaaakfffaaaa
+aaaaaaaakffaaaba
+aaaaaawbkaaaaaaa
+aaaaaaaakbabaaaa
+baawaaabkaaaaawa
+aabbaaaakawaaawa
+aaaaaaaakababbaa
+aabaaaaskaaaabaa
+aabaaasssdaaabab
+abaaaadsssaaaaaa
+abaaaawbawaaaawa
+abaaaaabaaaaaaaa
+abbaabaaaawaaaab
+PAL
+a #77a763
+b #689556
+w #e8efdd
+s #a9a294
+d #8a8474
+k #5d4a38
+f #c8503c

@@ -1,0 +1,25 @@
+# Wave W17-F (Route 29): lake cairn — a small stacked shore-stone cairn on wind turf (fully opaque, ground baked in), the kind travellers add a stone to at the lake end of the road.
+PIX tile-prop-lakecairn 16 16
+aaaabaaaabaaaaaa
+aaaaabbaaaaaaaba
+baaaabaaaabaawaa
+aaaabaaaaaaaaaaa
+aaaaaabaaaaaaaaa
+aaaaaaaaaaaabaaa
+aaaaaaaaaaaaabaa
+baaaaaaaaaaaaaaa
+aaaaaaaccawawbaa
+bbaaaaassaaaaaab
+aaaaabadsaaaaaaa
+aabaaasssdabaaba
+waaaaadsssabaaba
+aaawaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaabaaa
+PAL
+a #74a95f
+b #659452
+w #eef3e2
+s #a9a294
+d #8a8474
+c #c2bcab

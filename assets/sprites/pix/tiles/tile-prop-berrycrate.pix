@@ -1,0 +1,26 @@
+# Wave W17-F (Route 30): berry crate — a slatted wooden crate heaped with picked berries, left by the path on berry turf (fully opaque, ground baked in).
+PIX tile-prop-berrycrate 16 16
+aaaaaaaaabababar
+aaaaaabaaaraaaaa
+abaaaabaaaaaaaaa
+raaabaaaabaaaaaa
+aaaraaaaaaabaaaa
+aaaaarbaabaaaaaa
+aababflfbfaaabaa
+aaaaaffaflfbaaaa
+araadwwwwwwdaabb
+aaaadwwwwwwdaaba
+aaaaddddddddaaaa
+aaaadwwwwwwdaaaa
+aaaadwwwwwwdaaaa
+braaddddddddbaab
+ababbaaaaaabaaaa
+aaaaaaaaaaaaaara
+PAL
+a #6da657
+b #5c9247
+r #a84a6e
+w #a97c4c
+d #7d5a34
+f #c65b7a
+l #679c55
