@@ -94,6 +94,12 @@ const SHAPES = {
     down: { 16: '....OCCCCCCO....', 17: '....OCCWWCCO....', 18: '....OCcWWcCO....', 19: '...OCCCWWCCCO...', 20: '...OC......CO...', 21: '...OC......CO...', 22: '....C......C....', 23: '....Cc....cC....' },
     up: { 16: '....OCCCCCCO....', 17: '....OCCWWCCO....', 18: '....OCcWWcCO....', 19: '...OCCCWWCCCO...', 20: '...OCCCCCCCCO...', 21: '...OCCCCCCCCO...', 22: '....OCCCCCCO....', 23: '....OccccccO....' },
     right: { 16: '....OCCCCCO.....', 17: '....OCCCCCCO....', 18: '....OCcCCcCO....', 19: '....OCCCCCCO....', 20: '....OC....CO....', 21: '....OC....CO....', 22: '.....C....C.....', 23: '.....Cc..cC.....' } },
+  // lantern (W-CHAR2 T2): a keeper's hand lantern at the hip — frame
+  // C/c, glow X. Carried by lightkeepers and night walkers.
+  lantern: { pal: { O: '#241a20', C: '#6a6a76', c: '#43434e', X: '#fff2b0' },
+    down: { 24: '............OO..', 25: '...........OCCO.', 26: '...........OXCO.', 27: '...........OXCO.', 28: '...........OccO.', 29: '...........OOOO.' },
+    up: 'down',
+    right: { 24: '...........OO...', 25: '..........OCCO..', 26: '..........OXCO..', 27: '..........OXCO..', 28: '..........OccO..', 29: '..........OOOO..' } },
 };
 export const KITACC = {};
 for (const [shape, s] of Object.entries(SHAPES)) {
