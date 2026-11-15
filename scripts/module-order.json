@@ -36,6 +36,7 @@
  "src/data/dialogue.mjs",
  "src/data/rivals.mjs",
  "src/data/story.mjs",
+ "src/data/panels.mjs",
  "src/data/arcs.mjs",
  "src/data/story-kanto.mjs",
  "src/data/story-orange.mjs",

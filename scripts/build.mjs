@@ -698,6 +698,11 @@ body.desktop .controls{display:none}
 .cc-arc{font-size:17px;font-weight:700;color:#3c4a6a;margin-bottom:6px;line-height:1.4;-webkit-text-stroke:.8px currentColor;letter-spacing:-.3px}
 .cc-anime{font-size:16px;font-weight:700;color:#6a7799;line-height:1.4;margin-bottom:4px;-webkit-text-stroke:.8px currentColor;letter-spacing:-.3px}
 .cc-hint{font-size:16px;font-weight:700;color:var(--red);margin-top:10px;animation:blink 1s infinite;-webkit-text-stroke:.8px currentColor;letter-spacing:-.3px}
+/* W10 cutscene panel — the chapter card's frame idiom carrying art:
+   128x80 panel rasterized at 2x integer scale, letterboxed on paper */
+.panelcard{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:min(440px,92%);background:var(--paper);border:2px solid var(--frame);outline:2px solid var(--frame2);outline-offset:-5px;border-radius:3px;box-shadow:0 4px 18px rgba(0,0,0,.35);padding:10px;text-align:center;pointer-events:auto;z-index:36}
+.panelcard canvas{display:block;width:100%;height:auto;image-rendering:pixelated}
+.panel-hint{font-size:16px;font-weight:700;color:var(--red);margin-top:8px;animation:blink 1s infinite;-webkit-text-stroke:.8px currentColor;letter-spacing:-.3px}
 body.desktop.showtouch .controls{display:flex}
 @media (pointer:coarse){body.desktop .controls{display:flex}}
 /* Track B auth — Platinum frame card, system-blue head, silver tabs.
@@ -753,7 +758,7 @@ body.desktop.showtouch .controls{display:flex}
 .pwmeter.fair .fill{width:55%;background:#D99A26}
 .pwmeter.strong .fill{width:100%;background:#2FA84F}
 @media (prefers-reduced-motion: reduce){
-  .loginover *,.authcard *,.banner503 *,.syncdot *,.chaptercard *,.dialogue *,.hudchips *,.toasts *{animation:none!important;transition:none!important}
+  .loginover *,.authcard *,.banner503 *,.syncdot *,.chaptercard *,.panelcard *,.dialogue *,.hudchips *,.toasts *{animation:none!important;transition:none!important}
 }
 `;
 

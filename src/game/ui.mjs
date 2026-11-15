@@ -9,7 +9,7 @@
 export const TEXT_SPEED_CPS = { slow: 15, normal: 30, fast: 60, instant: 9999 };
 
 import { SFX } from '../engine/audio.mjs';
-import { speakerPortraitCanvas } from '../engine/art.mjs';
+import { speakerPortraitCanvas, artCanvas } from '../engine/art.mjs';
 import { TYPE_COLORS } from '../engine/sprites.mjs';
 
 function stubEl() {
@@ -72,6 +72,8 @@ export class UI {
     this._hudToastQ = [];   // headless record for hudToast (cap 2, mirrors the DOM cap)
     this.chapterCard = null; // D2: chapter title card overlay while open
     this._ccT = 0;
+    this.panelCard = null;   // W10: cutscene panel overlay while open
+    this._panelCb = null;    // W10: step-chain resume callback while open
   }
 
   init() {
@@ -1385,6 +1387,41 @@ export class UI {
     if (old && old.remove) old.remove();
   }
 
+  // ---- W10: cutscene panels ----
+  // A full-frame art panel on the frame layer (the chapter card's
+  // surface idiom), shown by the runSteps `panel` verb. artId is an ART
+  // entry id (panel standard: 128x80 authored, drawn at 2x integer
+  // scale = the 256-logical-px frame width). A / tap / START dismisses
+  // and resumes the step chain via cb — no auto-dismiss: the panel is a
+  // story beat the player advances, like dialogue. Headless: logs
+  // {ui:'panel'} and calls back immediately (the chapter-card pattern),
+  // so every headless drive converges on identical state.
+  showPanel(artId, cb) {
+    this.log.push({ ui: 'panel', art: artId });
+    if (this.headless) { if (cb) cb(); return; }
+    this.hidePanel(); // one panel at a time
+    const d = this.el('div', 'panelcard', this.frame);
+    const cv = artCanvas(document, artId, 2, false);
+    if (cv) d.appendChild(cv);
+    const hint = this.el('div', 'panel-hint', d);
+    hint.textContent = 'Press A / tap to continue';
+    d.addEventListener('pointerdown', (e) => {
+      e.preventDefault();
+      this.game.audio.unlock();
+      this.game.input.inject('a');
+    });
+    this.panelCard = d;
+    this._panelCb = cb || null;
+  }
+
+  hidePanel() {
+    this.panelCard = null;
+    this._panelCb = null;
+    if (this.headless || !this.root) return;
+    const old = this.root.querySelector('.panelcard');
+    if (old && old.remove) old.remove();
+  }
+
   // UI v2.1: sync the FRAME LAYER's box to the canvas rect. All in-game DOM
   // (dialogue, menus, battle commands, HUD chips/strip, toasts, chapter
   // cards) positions against this layer, so it is geometrically impossible
@@ -1481,6 +1518,17 @@ export class UI {
       if (input.wasPressed('a') || input.wasPressed('start') || this._ccT >= 4) {
         this.game.audio.unlock();
         this.hideChapterCard();
+      }
+      return true;
+    }
+    // Cutscene panel is modal (W10: A/START/tap dismisses and resumes
+    // the step chain; no auto-dismiss — the player advances the beat).
+    if (this.panelCard) {
+      if (input.wasPressed('a') || input.wasPressed('start')) {
+        this.game.audio.unlock();
+        const cb = this._panelCb;
+        this.hidePanel();
+        if (cb) cb();
       }
       return true;
     }

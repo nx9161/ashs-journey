@@ -14,6 +14,15 @@
 //        [--name "Display Name"]
 // The .pix lands in <dir>/<sprite-id>.pix (default dir: pix/species).
 // Design sources are archived under assets/sprites/designs/.
+//
+// W10 --scene mode (cutscene panels): full-frame area-average downscale
+// to the panel canvas (default 128x80, the W10 standard), median-cut
+// quantization to <=15 colors, NO background removal, NO outline pass.
+//   node assets/sprites/tools/convert-monster.mjs <scene.png> <panel-id>
+//        --scene [--out <dir>] [--width 128] [--height 80] [--colors 15]
+//        [--name "Display Name"]
+// The .pix lands in <dir>/<panel-id>.pix (default dir: pix/keyart).
+// Deterministic: same input + flags -> byte-identical output.
 
 import fs from 'node:fs';
 import path from 'node:path';
@@ -62,7 +71,106 @@ function deepenViolet(r, g, b) {
   ].map((v) => Math.max(0, Math.min(255, v)));
 }
 
+// ---- W10 --scene mode: full-frame panel conversion ----
+// Deterministic median-cut (same tie-breaking as the monster path's).
+function medianCut(pts, maxColors) {
+  if (!pts.length) return [];
+  let boxes = [pts];
+  while (boxes.length < maxColors) {
+    let bi = -1, brange = -1, bchan = 0;
+    for (let i = 0; i < boxes.length; i++) {
+      const b = boxes[i];
+      if (b.length < 2) continue;
+      for (let c = 0; c < 3; c++) {
+        let mn = 255, mx = 0;
+        for (const p of b) { if (p[c] < mn) mn = p[c]; if (p[c] > mx) mx = p[c]; }
+        if (mx - mn > brange) { brange = mx - mn; bi = i; bchan = c; }
+      }
+    }
+    if (bi < 0 || brange === 0) break;
+    const box = boxes.splice(bi, 1)[0];
+    box.sort((a, b2) => a[bchan] - b2[bchan] || a[0] - b2[0] || a[1] - b2[1] || a[2] - b2[2]);
+    const mid = box.length >> 1;
+    boxes.push(box.slice(0, mid), box.slice(mid));
+  }
+  return boxes.map((b) => {
+    let r = 0, g = 0, bl = 0;
+    for (const p of b) { r += p[0]; g += p[1]; bl += p[2]; }
+    return [Math.round(r / b.length), Math.round(g / b.length), Math.round(bl / b.length)];
+  });
+}
+
+function sceneMain(argv) {
+  const [png, id, ...rest] = argv;
+  if (!png || !id) {
+    console.error('usage: convert-monster.mjs <scene.png> <panel-id> --scene [--out dir] [--width n] [--height n] [--colors n] [--name "Name"]');
+    process.exit(2);
+  }
+  const o = { png, id, out: path.join(ROOT, 'pix', 'keyart'), width: 128, height: 80, colors: 15, name: id };
+  for (let i = 0; i < rest.length; i++) {
+    if (rest[i] === '--scene') continue;
+    else if (rest[i] === '--out') o.out = rest[++i];
+    else if (rest[i] === '--width') o.width = +rest[++i];
+    else if (rest[i] === '--height') o.height = +rest[++i];
+    else if (rest[i] === '--colors') o.colors = +rest[++i];
+    else if (rest[i] === '--name') o.name = rest[++i];
+    else { console.error('unknown flag: ' + rest[i]); process.exit(2); }
+  }
+  if (!(o.width > 0 && o.height > 0) || o.colors < 1 || o.colors > CHARS.length) {
+    console.error('convert-monster --scene: bad canvas or color count');
+    process.exit(2);
+  }
+  const { w, h, rgba } = decodePng(fs.readFileSync(o.png));
+  const tw = o.width, th = o.height;
+  // full-frame area-average downscale (opaque: the frame IS the scene —
+  // no background removal, no outline pass, per the W10 plan §4.5)
+  const small = new Float32Array(tw * th * 3);
+  for (let ty = 0; ty < th; ty++) {
+    for (let tx = 0; tx < tw; tx++) {
+      const x0 = (tx / tw) * w, x1 = ((tx + 1) / tw) * w;
+      const y0 = (ty / th) * h, y1 = ((ty + 1) / th) * h;
+      let rS = 0, gS = 0, bS = 0, wS = 0;
+      for (let y = Math.floor(y0); y < Math.ceil(y1); y++) {
+        for (let x = Math.floor(x0); x < Math.ceil(x1); x++) {
+          const wx = Math.min(x + 1, x1) - Math.max(x, x0);
+          const wy = Math.min(y + 1, y1) - Math.max(y, y0);
+          if (wx <= 0 || wy <= 0) continue;
+          const i = (y * w + x) * 4, wt = wx * wy;
+          rS += rgba[i] * wt; gS += rgba[i + 1] * wt; bS += rgba[i + 2] * wt; wS += wt;
+        }
+      }
+      const j = (ty * tw + tx) * 3;
+      small[j] = rS / wS; small[j + 1] = gS / wS; small[j + 2] = bS / wS;
+    }
+  }
+  const pts = [];
+  for (let i = 0; i < tw * th; i++) pts.push([Math.round(small[i * 3]), Math.round(small[i * 3 + 1]), Math.round(small[i * 3 + 2])]);
+  const palette = medianCut(pts, o.colors);
+  const nearest = (r, g, b) => {
+    let best = 0, bd = 1e9;
+    for (let i = 0; i < palette.length; i++) {
+      const d = (palette[i][0] - r) ** 2 + (palette[i][1] - g) ** 2 + (palette[i][2] - b) ** 2;
+      if (d < bd) { bd = d; best = i; }
+    }
+    return best;
+  };
+  const rows = [];
+  for (let ty = 0; ty < th; ty++) {
+    let row = '';
+    for (let tx = 0; tx < tw; tx++) row += CHARS[nearest(pts[ty * tw + tx][0], pts[ty * tw + tx][1], pts[ty * tw + tx][2])];
+    rows.push(row);
+  }
+  const hex = (c) => '#' + c.map((v) => v.toString(16).padStart(2, '0')).join('');
+  const palLines = palette.map((c, i) => `${CHARS[i]} ${hex(c)}`);
+  const text = `# ${o.id} cutscene panel, ${tw}x${th}. W10: converted by\n# assets/sprites/tools/convert-monster.mjs --scene from\n# ${path.basename(o.png)} (full-frame, deterministic).\nPIX ${o.id} ${tw} ${th}\n${rows.join('\n')}\nPAL\n${palLines.join('\n')}\n`;
+  fs.mkdirSync(o.out, { recursive: true });
+  const dest = path.join(o.out, o.id + '.pix');
+  fs.writeFileSync(dest, text);
+  console.log(`convert-monster --scene: ${o.id} <- ${path.basename(o.png)}  ${tw}x${th} panel, ${palette.length} colors -> ${dest}`);
+}
+
 function main() {
+  if (process.argv.slice(2).includes('--scene')) { sceneMain(process.argv.slice(2)); return; }
   const o = parseArgs(process.argv.slice(2));
   const { w, h, rgba } = decodePng(fs.readFileSync(o.png));
   const N = w * h;

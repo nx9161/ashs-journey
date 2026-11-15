@@ -31,6 +31,7 @@ import { DIVE_PAIRS } from '../data/maps7.mjs';
 import { QUESTS, taleSpotAt, taleStageOf, taleStatus, acceptTale, advanceTale, completeTale, IOU_PRIORITY } from '../data/quests.mjs';
 import { applyBond, applyBondOnce, bondOf, bondSceneLines, bondTrainerVariant, recordBattleBond, tierAtLeast, takeEchoGreeting, ECHO_LINE, BOND_NPC_IDS } from './bonds.mjs';
 import { CHAPTERS } from '../data/story.mjs';
+import { PANELS } from '../data/panels.mjs';
 import { statValue, hpValue } from '../engine/formulas.mjs';
 import { levelCapFor, HOME_MAP_ID, currentArcOf } from '../data/arcs.mjs';
 import { checkArcCompletion, tryHomecoming, arcFerryAllowed, arcFerryGateLine } from './arcs.mjs';
@@ -794,6 +795,18 @@ Object.assign(OverworldScene.prototype, {
     if (s.chapterCard !== undefined) {
       const ch = CHAPTERS[s.chapterCard];
       if (ch && g.ui.showChapterCard) g.ui.showChapterCard(ch);
+      next(); return;
+    }
+    // W10: a cutscene panel — PRESENTATION ONLY. The step names a
+    // moment in PANELS (src/data/panels.mjs); the table names the art.
+    // showPanel resumes the chain on dismissal (headless: immediately),
+    // and the step writes no flags and no state, so an event's outcome
+    // is identical with or without it (tests/cutscene-panel-checks.mjs
+    // parity drive). An unknown id is a data bug the guard catches;
+    // at runtime it degrades to a no-op rather than stalling the chain.
+    if (s.panel) {
+      const p = PANELS[s.panel];
+      if (p && g.ui.showPanel) { g.ui.showPanel(p.art, next); return; }
       next(); return;
     }
     if (s.warp) {

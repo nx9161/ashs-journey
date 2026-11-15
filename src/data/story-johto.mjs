@@ -675,6 +675,9 @@ export const JOHTO_EVENTS = {
   // the shrine is a place you go to, not a room you pass through).
   ev_johto_celebi: [
     { say: ['The Sealed Orb comes out of your bag already warm. At the shrine\'s foot it clicks — a small, definite sound, like a latch being asked a question and answering yes — and the two halves open on nothing at all, and the nothing is looking at you.', 'Then the forest breathes in. For one held moment Ilex is young: saplings where the old oaks stand, light the colour of first mornings, leaf-mould unstepped-on by any boot that has ever existed. A small green shape hangs in that younger light, wings ticking like a clock that counts in seasons, and it is laughing — delighted, entirely unafraid — and the laugh says: you took the long way round, and the long way round was the way.'], who: 'NARRATOR' },
+    // W10 proof panel: the reveal, shown — presentation only (the
+    // panel step writes no state; see src/data/panels.mjs).
+    { panel: 'shrine-chronofae' },
     { flag: 'celebi_shrine_opened' },
     { arc: 'arc_celebi', stage: 'active' },
     { wildBattleCatch: { species: 'celebi', level: 170, legendary: true } },
