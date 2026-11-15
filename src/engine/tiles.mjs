@@ -4549,6 +4549,107 @@ W17AB_KIND_DEFS.forEach(([kind], i) => {
 export const W17AB_PROP_KINDS = W17AB_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
 export const W17AB_WALL_KINDS = W17AB_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
 export const W17AB_FLOOR_KINDS = W17AB_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
+// Wave W17-AC (Borea Tranche 9 — the island circuit home,
+// the Borea finale): Route 226 takes the East Coast Road
+// register — eastturf (suffix-free ground, cliff-coast turf
+// with sea-spray flecks), eastfloor (the path tier, *floor
+// per checklist point 3 — the coast road's pale sand),
+// eastpine (wall class, as every route tree) and the
+// timberpost prop (two timber-works posts on verified
+// grassground cells at the pond's water edge — the design's
+// DAMBEAVER works standing in the prop register; the
+// design's cliff wall is the map's west water edge itself,
+// dressing, nothing built); cliff water 30, encounter grass
+// 56, flower 17, fence 3, rock 2 and signpost 1 stand
+// byte-preserved. Route 227 takes the Stark Road register —
+// starkturf (hot grass under ash, grey creep at the edges),
+// starkfloor (the ash road's pale sand), starkpine
+// (ash-dusted pine) and the flowpost prop (two cooled-flow
+// marker posts on verified grassground cells at the ash
+// field's edge — the design's glass ribbons are dressing
+// over byte-preserved cells, the posts mark where you do
+// not step); ASH DISCIPLINE (Ruling #3, the Maris R113
+// precedent in its second region): the shipped ashground
+// 28 cells stand byte-identical entire — the kit builds
+// AROUND the ash, starkturf converts the generic grass
+// register only; encounter grass 44, flower 16, water 15,
+// signpost 2, fence 2, rock 1 and Ash Walker Bryn's post
+// stand byte-preserved, weather stays ash (the map's own
+// field). Split from its twin Route 225 by register entire:
+// ash-grey creep on hot grass here, rust-ochre scorched
+// hardpan there. Route 228 takes the Sand Country register
+// — washturf (dry-wash green, dust flecks — the green
+// island the washes wander onto), washfloor (the wash
+// road's worn sand), washthorn (cactus-patch thorn tree —
+// the design's SCARECACT patch standing in the tree
+// register, honest sparse crown) and the stormpost prop
+// (two storm-fence marker posts on verified grassground
+// cells flanking the road where it gives out into the
+// sand); DESERT DISCIPLINE (Ruling #3, the Maris desertsand
+// precedent: the sand IS the route's identity): the shipped
+// sand family stands byte-identical entire — sand 122 +
+// beach-n 13, psand-w 8, psand-e 7, beach-e 6, beach-w 6,
+// beach-nsw 2, beach-nse 1, beach-ne 1 + sandcolumn 2 = 168
+// cells measured; the storm fence 23, encounter grass 32,
+// flower 8, rock 3 and Sand Herder Vey's post stand
+// byte-preserved; the map's only warp pair (S to Palmside)
+// is untouched and the design's storm-shelter cabin has no
+// backend record — omitted, not invented. Route 229 takes
+// the South Water register — loopsand (loop-lane sand,
+// offshore flecks) and looprock (headland rock); Route 230
+// takes the West Coast Water register — palmsand
+// (palm-shore sand, warm flecks) and palmrock (harbour-point
+// rock); both lanes' water (375/360), current cells (14/10
+// — MECHANIC DATA, byte-identical counts and positions) and
+// kelpbed / uwcoral / coral / kelp dressing stand
+// byte-preserved entire, and the lanes' low convertible
+// counts (seasand 5+5, rock 7+11, measured by census — the
+// plan's figures; R229 is the thinnest lane in the program)
+// are the pre-recorded R40-class spec-presence exception —
+// declared, never fixed by paving water (Ruling #5). The
+// design's LUMIVEIL runway on R230 is creature layer over
+// byte-preserved water — nothing planted. Ground kinds
+// deliberately do NOT end in 'floor' (the desire-path audit
+// keys its street tier on that suffix; grounds must never
+// masquerade as street); the path kinds DO end in 'floor'.
+// Sea-lane sand kinds carry the 'floor' class as every Maris
+// lane sand before them (swapped 1:1 from the walkable
+// seasand char). Indices 1520-1535 per the program plan
+// (WAVE-W17-BOREA-ROUTE-PROGRAM-PLAN.md) — the program's
+// last: the Borea allocation runs 1384-1535 (W17-U took
+// 1384-1401, W17-V 1402-1421, W17-W 1422-1431, W17-X
+// 1432-1451, W17-Y 1452-1469, W17-Z 1470-1491 and W17-AA
+// 1492-1506 on their parallel branches; W17-AB takes
+// 1507-1519 on its own); 1111 and every earlier documented
+// gap stay empty. Kind names verified unclaimed against
+// origin/main.
+export const W17AC_KIND_DEFS = [
+  ['eastturf', 'floor'],
+  ['eastfloor', 'floor'],
+  ['eastpine', 'wall'],
+  ['timberpost', 'prop'],
+  ['starkturf', 'floor'],
+  ['starkfloor', 'floor'],
+  ['starkpine', 'wall'],
+  ['flowpost', 'prop'],
+  ['washturf', 'floor'],
+  ['washfloor', 'floor'],
+  ['washthorn', 'wall'],
+  ['stormpost', 'prop'],
+  ['loopsand', 'floor'],
+  ['looprock', 'wall'],
+  ['palmsand', 'floor'],
+  ['palmrock', 'wall'],
+];
+export const W17AC_KIND_CHARS = {};
+W17AC_KIND_DEFS.forEach(([kind], i) => {
+  const ch = String.fromCodePoint(0x1E00 + 1520 + i);
+  W17AC_KIND_CHARS[kind] = ch;
+  TILE_CHARS[ch] = kind;
+});
+export const W17AC_PROP_KINDS = W17AC_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
+export const W17AC_WALL_KINDS = W17AC_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
+export const W17AC_FLOOR_KINDS = W17AC_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
 export const SINNOH_TOWN_GROUND_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg);
 export const SINNOH_TOWN_GROUND2_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg2);
 // TX-3: the 8 gym exteriors by town (original type-accent motifs).
