@@ -1,0 +1,656 @@
+{
+ "maps9:r223": {
+  "id": "r223",
+  "name": "Route 223",
+  "music": "route1-theme",
+  "weather": "clear",
+  "rows": [
+   "~~~~~~~~~~~~~~~~~~~~~~~~",
+   "~~~~~~~~~~~~~~~~~~~~~~~~",
+   "~~ᾍ~~~~~~ᾑ~~~~~~ẙ~~ᾍ~~~~",
+   "~~~Rᾐ~ᾐᾎ~~~~ẙ~~~ᾍR~~ẙᾍ~~",
+   "~~~~ᾍ~~ᾎᾑ~ᾍ~~~ᾎ~ᾌ~~ẙᾍ~~R",
+   "~~~~~~~~~~~ᾌ~~~~~~~~~ᾍ~ᾑ",
+   "~~~~~R~ᾍ~~~~~ᾍ~~ᾑᾌ~~~ᾎ~~",
+   "~~~~ᾎ~~ᾍ~~R~~~ẙ~~ᾌ~~~ᾎ~~",
+   "~ẙ~~~~~~~~~~ᾍ~~~~~~~~~~~",
+   "~~~~~~~~~~~~~S~~~~~~~ᾍ~~",
+   "~~~~~~ᾎẙ~~~~~~~~~~Rᾍᾍ~~~",
+   "~~~~ᾍ~~ᾍ~~~~ᾐ~~~ᾐ~~ᾍ~~~~",
+   "~~~~~~~ᾍᾍ~~~~~~~~~ᾌᾐ~~~~",
+   "~ẙ~~~ᾑ~~~~~~~~ᾌᾌ~~~~~~~~",
+   "~~~~~~~~~~~~ᾍ~~~~~~~~~~~",
+   "~~~~ᾌ~~~~~~ᾐ~~~~ẙ~ᾎ~ᾐᾍ~~",
+   "~~~~~~~~~~~~~~~~~~~~~~~~",
+   "~~~~~~~~~~~~~~~~~~~~~~~~"
+  ],
+  "warps": [
+   {
+    "x": 11,
+    "y": 0,
+    "to": {
+     "map": "sunnyshore",
+     "x": 13,
+     "y": 1
+    }
+   },
+   {
+    "x": 12,
+    "y": 0,
+    "to": {
+     "map": "sunnyshore",
+     "x": 13,
+     "y": 1
+    }
+   },
+   {
+    "x": 11,
+    "y": 17,
+    "to": {
+     "map": "victory-road",
+     "x": 12,
+     "y": 16
+    }
+   },
+   {
+    "x": 12,
+    "y": 17,
+    "to": {
+     "map": "victory-road",
+     "x": 12,
+     "y": 16
+    }
+   }
+  ],
+  "signs": [
+   {
+    "x": 13,
+    "y": 9,
+    "text": "ROUTE 223 — The League sea road. All water, north to the Summit Road shore. The cliff at the end of it has heard every promise trainers make."
+   }
+  ],
+  "npcs": [],
+  "encounters": {
+   "rate": 0.1,
+   "table": [
+    {
+     "species": "tentacruel",
+     "min": 376,
+     "max": 384,
+     "weight": 10
+    },
+    {
+     "species": "pelipper",
+     "min": 376,
+     "max": 384,
+     "weight": 16
+    },
+    {
+     "species": "mantine",
+     "min": 377,
+     "max": 385,
+     "weight": 10
+    },
+    {
+     "species": "lumineon",
+     "min": 377,
+     "max": 385,
+     "weight": 10
+    },
+    {
+     "species": "gyarados",
+     "min": 379,
+     "max": 386,
+     "weight": 4
+    }
+   ],
+   "water": [
+    {
+     "species": "tentacool",
+     "min": 368,
+     "max": 378,
+     "weight": 22
+    },
+    {
+     "species": "magikarp",
+     "min": 368,
+     "max": 375,
+     "weight": 16
+    },
+    {
+     "species": "wingull",
+     "min": 369,
+     "max": 378,
+     "weight": 18
+    },
+    {
+     "species": "pelipper",
+     "min": 371,
+     "max": 380,
+     "weight": 10
+    },
+    {
+     "species": "mantine",
+     "min": 372,
+     "max": 380,
+     "weight": 8
+    },
+    {
+     "species": "lumineon",
+     "min": 372,
+     "max": 380,
+     "weight": 8
+    },
+    {
+     "species": "gyarados",
+     "min": 374,
+     "max": 382,
+     "weight": 4
+    }
+   ],
+   "waterRate": 0.08
+  },
+  "items": [],
+  "hidden": [],
+  "events": [],
+  "start": {
+   "x": 11,
+   "y": 16
+  }
+ },
+ "maps9:r224": {
+  "id": "r224",
+  "name": "Route 224",
+  "music": "route1-theme",
+  "weather": "clear",
+  "rows": [
+   "##########################",
+   "##,__,______________F___F#",
+   "#___,__F______,,___,_____#",
+   "#,__,~~~~~_R,Ẉ,____,,,,_R#",
+   "#____~~~~~_,F_____,_,_,Ẉ_#",
+   "#_R__~~~~~,______,__,,F_F#",
+   "#_F____,__,_nF____,__,___#",
+   "#__,_____F,nS,,_,________#",
+   "..........................",
+   "..........................",
+   "#___Ẉ_,________F____,____#",
+   "#,,_,#_F__F_,____FnF____##",
+   "#___,_______F,___,_#___,_#",
+   "#____,Ẉ______FF____#_____#",
+   "#___,__,_______,____R____#",
+   "##########################"
+  ],
+  "warps": [
+   {
+    "x": 0,
+    "y": 8,
+    "to": {
+     "map": "pokemon-league",
+     "x": 26,
+     "y": 8
+    }
+   },
+   {
+    "x": 0,
+    "y": 9,
+    "to": {
+     "map": "pokemon-league",
+     "x": 26,
+     "y": 8
+    }
+   },
+   {
+    "x": 25,
+    "y": 8,
+    "to": {
+     "map": "seabreak-path",
+     "x": 1,
+     "y": 8
+    }
+   },
+   {
+    "x": 25,
+    "y": 9,
+    "to": {
+     "map": "seabreak-path",
+     "x": 1,
+     "y": 8
+    }
+   }
+  ],
+  "signs": [
+   {
+    "x": 12,
+    "y": 7,
+    "text": "ROUTE 224 — The stone coast east of the League. A white headstone stands at the far end of the Foamline Path, and flowers beyond counting."
+   }
+  ],
+  "npcs": [
+   {
+    "x": 9,
+    "y": 11,
+    "name": "STONE KEEPER MARL",
+    "art": "gent",
+    "skin": "#e8b888",
+    "shirt": "#3a6ac0",
+    "pants": "#2a3a4a",
+    "hair": "#1a1a1a",
+    "dialogue": [
+     "I tend the white stone at the path's end. Whose it is, the flowers know. I just keep the weeds honest.",
+     "OMELION walk this coast before storms. The coast has had opinions about the sky lately."
+    ]
+   }
+  ],
+  "encounters": {
+   "rate": 0.12,
+   "table": [
+    {
+     "species": "staravia",
+     "min": 384,
+     "max": 390,
+     "weight": 18
+    },
+    {
+     "species": "floatzel",
+     "min": 384,
+     "max": 390,
+     "weight": 14
+    },
+    {
+     "species": "pelipper",
+     "min": 385,
+     "max": 391,
+     "weight": 12
+    },
+    {
+     "species": "absol",
+     "min": 386,
+     "max": 392,
+     "weight": 6
+    },
+    {
+     "species": "bibarel",
+     "min": 384,
+     "max": 389,
+     "weight": 12
+    }
+   ],
+   "water": [
+    {
+     "species": "tentacool",
+     "min": 368,
+     "max": 378,
+     "weight": 22
+    },
+    {
+     "species": "magikarp",
+     "min": 368,
+     "max": 375,
+     "weight": 16
+    },
+    {
+     "species": "wingull",
+     "min": 369,
+     "max": 378,
+     "weight": 18
+    },
+    {
+     "species": "pelipper",
+     "min": 371,
+     "max": 380,
+     "weight": 10
+    },
+    {
+     "species": "mantine",
+     "min": 372,
+     "max": 380,
+     "weight": 8
+    },
+    {
+     "species": "lumineon",
+     "min": 372,
+     "max": 380,
+     "weight": 8
+    },
+    {
+     "species": "gyarados",
+     "min": 374,
+     "max": 382,
+     "weight": 4
+    }
+   ],
+   "waterRate": 0.08
+  },
+  "items": [],
+  "hidden": [],
+  "events": [],
+  "start": {
+   "x": 1,
+   "y": 8
+  }
+ },
+ "maps9:seabreak-path": {
+  "id": "seabreak-path",
+  "name": "Foamline Path",
+  "music": "route1-theme",
+  "weather": "sun",
+  "rows": [
+   "#~~~~~~~~~~~~~~~~~~~~~~~~#",
+   "#~~~~~~~~~~~~~~~~~~~~~~~~#",
+   "#~~~~~~~~~~~~~~~~~~~~~~~~#",
+   "#~~~~~~~~~~~~~~~~~~~~~~~~#",
+   "#~~~~~R~~~~~~~~~~~~~~~~~~#",
+   "#~~~~~~~~~~~~~~~~~~~R~~~~#",
+   "#~~~~~~~~~~~~~~~~~~~~~~~~#",
+   "#~~~~~~~~~~~S~~~~~~~~~~~~#",
+   "ἇἇἇἇἇἇἇἇἇἇἇἇἇἇἇἇἇἇἇἇἇἇἇἇἇἇ",
+   "ἇἇἇἇἇἇἇἇἇἇἇἇἇἇἇἇἇἇἇἇἇἇἇἇἇἇ",
+   "#~~~~~~~~~~~~~~~~~~~~~~~~#",
+   "#~~~~~~~~~~~~~~~~~~~~~~~~#",
+   "#~~~~~~~~~~~~~R~~~~~~~~~~#",
+   "#~~~~~~~~~~~~~~~~~~~~~~~~#",
+   "#~~~~~~~~~~~~~~~~~~~~~~~~#",
+   "#~~~~~~~~~~~~~~~~~~~~~~~~#"
+  ],
+  "warps": [
+   {
+    "x": 0,
+    "y": 8,
+    "to": {
+     "map": "r224",
+     "x": 24,
+     "y": 8
+    }
+   },
+   {
+    "x": 0,
+    "y": 9,
+    "to": {
+     "map": "r224",
+     "x": 24,
+     "y": 8
+    }
+   },
+   {
+    "x": 25,
+    "y": 8,
+    "to": {
+     "map": "flower-paradise",
+     "x": 1,
+     "y": 8
+    }
+   },
+   {
+    "x": 25,
+    "y": 9,
+    "to": {
+     "map": "flower-paradise",
+     "x": 1,
+     "y": 8
+    }
+   }
+  ],
+  "signs": [
+   {
+    "x": 12,
+    "y": 7,
+    "text": "FOAMLINE PATH — A plank road over bright water, east of the white stone. The flowers at the end of it are not a rumour."
+   }
+  ],
+  "npcs": [],
+  "encounters": {
+   "rate": 0.1,
+   "table": [
+    {
+     "species": "pelipper",
+     "min": 388,
+     "max": 394,
+     "weight": 18
+    },
+    {
+     "species": "wingull",
+     "min": 388,
+     "max": 394,
+     "weight": 18
+    },
+    {
+     "species": "mantine",
+     "min": 389,
+     "max": 395,
+     "weight": 10
+    }
+   ],
+   "water": [
+    {
+     "species": "tentacool",
+     "min": 388,
+     "max": 396,
+     "weight": 20
+    },
+    {
+     "species": "magikarp",
+     "min": 388,
+     "max": 395,
+     "weight": 14
+    },
+    {
+     "species": "wingull",
+     "min": 389,
+     "max": 396,
+     "weight": 16
+    },
+    {
+     "species": "pelipper",
+     "min": 390,
+     "max": 397,
+     "weight": 10
+    },
+    {
+     "species": "mantine",
+     "min": 391,
+     "max": 398,
+     "weight": 8
+    },
+    {
+     "species": "lumineon",
+     "min": 391,
+     "max": 398,
+     "weight": 8
+    },
+    {
+     "species": "gyarados",
+     "min": 392,
+     "max": 399,
+     "weight": 5
+    }
+   ],
+   "waterRate": 0.08
+  },
+  "items": [],
+  "hidden": [],
+  "events": [],
+  "start": {
+   "x": 1,
+   "y": 8
+  }
+ },
+ "maps9:r225": {
+  "id": "r225",
+  "name": "Route 225",
+  "music": "route1-theme",
+  "weather": "clear",
+  "rows": [
+   "##########################",
+   "#,___,___,_______,___F,_,#",
+   "#RF__F___F_F_______R_,___#",
+   "#___,#______,,,F__~~~~~F_#",
+   "#_____#__,____,___~~~~~,,#",
+   "#______F,_,,__,___~~~~~_F#",
+   "#__,,____F,,_____,,_Ẉ___,#",
+   "#___R_______SR,__________#",
+   "..........................",
+   "..........................",
+   "#_,FF__F___#___F______Ẉ_,#",
+   "#__,R_______,_,F__,___,_R#",
+   "#_,,___,____,_____,F___,##",
+   "#_________F___,F_#F,_,___#",
+   "#_F__,_____,__F_______,__#",
+   "##########################"
+  ],
+  "warps": [
+   {
+    "x": 0,
+    "y": 8,
+    "to": {
+     "map": "fight-area",
+     "x": 24,
+     "y": 8
+    }
+   },
+   {
+    "x": 0,
+    "y": 9,
+    "to": {
+     "map": "fight-area",
+     "x": 24,
+     "y": 8
+    }
+   },
+   {
+    "x": 25,
+    "y": 8,
+    "to": {
+     "map": "survival-area",
+     "x": 1,
+     "y": 8
+    }
+   },
+   {
+    "x": 25,
+    "y": 9,
+    "to": {
+     "map": "survival-area",
+     "x": 1,
+     "y": 8
+    }
+   }
+  ],
+  "signs": [
+   {
+    "x": 12,
+    "y": 7,
+    "text": "ROUTE 225 — The Battle Zone’s hard road. Everything out here trains, including the weather."
+   }
+  ],
+  "npcs": [
+   {
+    "x": 10,
+    "y": 11,
+    "name": "ZONE VETERAN KEST",
+    "art": "ranger",
+    "skin": "#e8b888",
+    "shirt": "#3a6ac0",
+    "pants": "#2a3a4a",
+    "hair": "#1a1a1a",
+    "dialogue": [
+     "Clashfield west, Survival east, and the mountain smoking beyond both. This island is a gym that outgrew its walls.",
+     "Nothing out here is below strong. Adjust your expectations or your route."
+    ]
+   }
+  ],
+  "encounters": {
+   "rate": 0.13,
+   "table": [
+    {
+     "species": "fearow",
+     "min": 390,
+     "max": 396,
+     "weight": 16
+    },
+    {
+     "species": "rhydon",
+     "min": 390,
+     "max": 396,
+     "weight": 12
+    },
+    {
+     "species": "skarmory",
+     "min": 391,
+     "max": 397,
+     "weight": 10
+    },
+    {
+     "species": "bibarel",
+     "min": 390,
+     "max": 395,
+     "weight": 14
+    },
+    {
+     "species": "luxray",
+     "min": 391,
+     "max": 397,
+     "weight": 10
+    },
+    {
+     "species": "graveler",
+     "min": 390,
+     "max": 396,
+     "weight": 12
+    }
+   ],
+   "water": [
+    {
+     "species": "tentacool",
+     "min": 388,
+     "max": 396,
+     "weight": 20
+    },
+    {
+     "species": "magikarp",
+     "min": 388,
+     "max": 395,
+     "weight": 14
+    },
+    {
+     "species": "wingull",
+     "min": 389,
+     "max": 396,
+     "weight": 16
+    },
+    {
+     "species": "pelipper",
+     "min": 390,
+     "max": 397,
+     "weight": 10
+    },
+    {
+     "species": "mantine",
+     "min": 391,
+     "max": 398,
+     "weight": 8
+    },
+    {
+     "species": "lumineon",
+     "min": 391,
+     "max": 398,
+     "weight": 8
+    },
+    {
+     "species": "gyarados",
+     "min": 392,
+     "max": 399,
+     "weight": 5
+    }
+   ],
+   "waterRate": 0.08
+  },
+  "items": [],
+  "hidden": [],
+  "events": [],
+  "start": {
+   "x": 1,
+   "y": 8
+  }
+ }
+}

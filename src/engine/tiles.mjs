@@ -4475,6 +4475,80 @@ W17AA_KIND_DEFS.forEach(([kind], i) => {
 export const W17AA_PROP_KINDS = W17AA_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
 export const W17AA_WALL_KINDS = W17AA_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
 export const W17AA_FLOOR_KINDS = W17AA_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
+// Wave W17-AB (Borea Tranche 8 — the League sea road, the
+// stone coast, the Foamline, the hard road): Route 223 takes
+// the League Sea Road register — leaguesand (deep-lane sand,
+// cliff-shadow flecks) and leaguerock (cliff-foot rock,
+// vertical joint drawing); the lane's water 366, current 8
+// (MECHANIC DATA, byte-identical counts and positions),
+// kelpbed 22, coral 9, kelp 7 and uwcoral 5 stand
+// byte-preserved entire, and the lane's low convertible
+// count (seasand 8 + rock 6) is the pre-recorded R40-class
+// spec-presence exception — declared, never fixed by paving
+// water (Ruling #5). Summit Road (victory-road) is EXCLUDED
+// from this program — its side of the r223 warp pair is not
+// edited. Route 224 takes the Stone Coast register —
+// headturf (suffix-free ground, stone-coast turf with flower
+// flecks), headfloor (the path tier, *floor per checklist
+// point 3 — the champion's road pale sand), headpine (wall
+// class, as every route tree) and the headpost prop (two
+// headstone marker posts on verified grassground cells —
+// the design's white stones standing in the prop register);
+// encounter grass 45, flower 17, shore water 15, rock 4,
+// signpost 4 and fence 3 stand byte-preserved. Foamline Path
+// takes its own register by THE CAUSEWAY METHOD (Ruling #4,
+// second use after Route 218): boardwalk converts entire to
+// foamfloor (foam-flecked plank floor — bright joints, foam
+// flecks drawn in the kind's own art), the shore-end trees
+// to foampine and the footing rocks to foamrock; NO ground
+// register ships on this map — recorded, not invented;
+// water 332 stands byte-preserved, and flower-paradise's
+// side of the east warp pair is not edited (out of
+// program). Route 225 takes the Hard Road register —
+// scorchturf (suffix-free ground, scorched hardpan turf
+// with crater-dust flecks), zonefloor (the hard road's worn
+// sand), zonepine (wall class — a tough sparse crown that
+// still reads as a tree) and the zonepost prop (two
+// training-ground marker posts on verified grassground
+// cells); encounter grass 46, flower 21, pond water 15,
+// rock 6 and signpost 2 stand byte-preserved. Ground kinds
+// deliberately do NOT end in 'floor' (the desire-path audit
+// keys its street tier on that suffix; grounds must never
+// masquerade as street); the path kinds DO end in 'floor'.
+// Sea-lane sand kinds carry the 'floor' class as every
+// Maris lane sand before them (swapped 1:1 from the
+// walkable seasand char). Indices 1507-1519 per the program
+// plan (WAVE-W17-BOREA-ROUTE-PROGRAM-PLAN.md): the Borea
+// allocation runs 1384-1535 (W17-U took 1384-1401, W17-V
+// 1402-1421, W17-W 1422-1431, W17-X 1432-1451, W17-Y
+// 1452-1469, W17-Z 1470-1491; W17-AA takes 1492-1506 on its
+// parallel branch); 1111 and every earlier documented gap
+// stay empty. Kind names verified unclaimed against
+// origin/main.
+export const W17AB_KIND_DEFS = [
+  ['leaguesand', 'floor'],
+  ['leaguerock', 'wall'],
+  ['headturf', 'floor'],
+  ['headfloor', 'floor'],
+  ['headpine', 'wall'],
+  ['headpost', 'prop'],
+  ['foamfloor', 'floor'],
+  ['foampine', 'wall'],
+  ['foamrock', 'wall'],
+  ['scorchturf', 'floor'],
+  ['zonefloor', 'floor'],
+  ['zonepine', 'wall'],
+  ['zonepost', 'prop'],
+];
+export const W17AB_KIND_CHARS = {};
+W17AB_KIND_DEFS.forEach(([kind], i) => {
+  const ch = String.fromCodePoint(0x1E00 + 1507 + i);
+  W17AB_KIND_CHARS[kind] = ch;
+  TILE_CHARS[ch] = kind;
+});
+export const W17AB_PROP_KINDS = W17AB_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
+export const W17AB_WALL_KINDS = W17AB_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
+export const W17AB_FLOOR_KINDS = W17AB_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
 export const SINNOH_TOWN_GROUND_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg);
 export const SINNOH_TOWN_GROUND2_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg2);
 // TX-3: the 8 gym exteriors by town (original type-accent motifs).

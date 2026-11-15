@@ -1406,6 +1406,27 @@ export const WALKABLE = new Set(['.', ',', 'D', 'E', 'C', 'F', 'J', 'K', '1', '2
   // 1432-1451, W17-Y 1452-1469 and W17-Z 1470-1491 on their
   // parallel branches); 1111 stays empty.)
   ...[1492, 1493, 1496, 1499, 1501, 1503, 1504]
+    .map((i) => String.fromCodePoint(0x1E00 + i)),
+  // Wave W17-AB: the Borea tranche-8 ground/path/sand chars
+  // (U+1E00+1507.., tiles.mjs W17AB_KIND_DEFS) are walkable —
+  // leaguesand (Route 223), swapped 1:1 from the walkable
+  // seasand char in its own lane; headturf/headfloor (Route
+  // 224) and scorchturf/zonefloor (Route 225), each swapped
+  // 1:1 from the walkable '_' ground / '.' path chars on its
+  // own route; foamfloor (Foamline Path), swapped 1:1 from
+  // the walkable boardwalk char by the causeway method, so
+  // ground stays ground and floor stays floor. The tree
+  // chars (1511, 1514, 1518), the prop chars (1512, 1519)
+  // and the rock chars (1508, 1515, swapped from rock, never
+  // walkable) are NOT here: trees, props and rocks were never
+  // walkable. The mechanic current chars are untouched by
+  // this wave entire. (Indices 1507-1519 per the Borea
+  // program plan; the Borea allocation opened at 1384
+  // (W17-U takes 1384-1401, W17-V 1402-1421, W17-W
+  // 1422-1431, W17-X 1432-1451, W17-Y 1452-1469, W17-Z
+  // 1470-1491 and W17-AA 1492-1506 on their parallel
+  // branches); 1111 stays empty.)
+  ...[1507, 1509, 1510, 1513, 1516, 1517]
     .map((i) => String.fromCodePoint(0x1E00 + i))]);
 
 // Trainer definitions for the slice.
