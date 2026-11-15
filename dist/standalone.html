@@ -191547,6 +191547,80 @@ const GYM_ARENA_ART = {
 // Ground's ARENA_ART / ARENA_AMBIENT treatment, byte-identical to the
 // pre-wave render.
 const VENUE_ARENA_ART = {
+  // T1 Sovereigns & finales (WAVE-ARENAS-PLAN §3/§4): each entry
+  // layers over the venue's existing Ground — palette/motif/tex/amb
+  // only, rules frozen — and traces to the face's recorded design
+  // field + arc title, quoted in its comment. One treatment per map:
+  // spear-pillar serves both its sequential faces.
+  // Hall of Dawning / PRIMARCH — "white horse, flowing mane, golden
+  // armillary ring" [The Hall of Dawning]: white-and-gold dawning
+  // over Spirit, on the wave's one new motif painter, 'dawnring' —
+  // armillary rings standing on the horizon (drawArena). The game's
+  // final arena shares its painter with nothing.
+  'hall-of-origin': { sky: ['#b8a888', '#c6b894', '#d4c8a2', '#e2d8b2', '#eee4c4', '#faf2d4'], ground: ['#e8dfc8', '#ded2b6', '#d2c4a4', '#c6b692', '#b8a680', '#aa9670'], dark: '#6a5836', light: '#fffdf2', accent: '#e8b820', motif: 'dawnring', tex: 'fleck', haze: true, amb: { kind: 'mote', n: 12, speed: 3 } },
+  // Spear Pillar / CHRONARCH + COSMARCH — "clockwork dragon, gear
+  // dial halo, glowing diamond core" / "pearl dragon, fin wings,
+  // twin water orbs": ONE dial-and-pearl summit over Spirit — rune
+  // pillars as dial markers, pearl-pale stone, diamond spark glints.
+  'spear-pillar': { sky: ['#2a2450', '#342c5e', '#3e346c', '#483c7a', '#524488', '#5c4c96'], ground: ['#8a86a0', '#7e7a94', '#726e88', '#66627c', '#5a5670', '#4e4a64'], dark: '#1e1836', light: '#fdf6ff', accent: '#8ae0f0', motif: 'runes', tex: 'spark', amb: { kind: 'spark', n: 12, speed: 0 } },
+  // Sanctum Deep / ABYSSORN — "white leviathan sea-bird, wing fins,
+  // crest plume" [The Song Under the Whirlpools]: deep-whirlpool
+  // white over Tide — dark water column, the leviathan's white as
+  // the only bright register, bubbles rising through it.
+  'shamouti-deep': { sky: ['#123a5e', '#174a72', '#1d5a86', '#236a98', '#2a7aaa', '#3288b8'], ground: ['#1d4a6e', '#1a4262', '#173a56', '#14324a', '#112a3e', '#0e2232'], dark: '#081c2c', light: '#eafcff', accent: '#f4fbff', motif: 'waves', tex: 'foam', amb: { kind: 'bubble', n: 14, speed: 6 } },
+  // Sky Pillar / STRATOWYRM — "green sky wyrm, gold mane, long
+  // coiling serpent body" [The Sky Settles It]: high green-gold
+  // stratosphere over Storm — cloud-sea ground far below the pillar.
+  'sky-pillar': { sky: ['#2e5a52', '#38685e', '#42766a', '#4e8476', '#5c9282', '#6ca08e'], ground: ['#9ab89a', '#8dab8d', '#80a080', '#749574', '#688a68', '#5c7f5c'], dark: '#1e3a30', light: '#fdf2a8', accent: '#e8b820', motif: 'storm', tex: 'spark', amb: { kind: 'mote', n: 10, speed: 5 } },
+  // Magma Hideout / TERRATITAN — "crimson rock titan, jagged shard
+  // armour, ember eyes" [The Land That Wants Everything]: crimson
+  // shard dark over Ember — the dragon ridge read as shard armour.
+  'magma-hideout': { sky: ['#33100e', '#40150f', '#4d1a10', '#5c2012', '#6b2614', '#7a2e16'], ground: ['#4a1a12', '#42160f', '#3a120c', '#320e09', '#2a0a06', '#220603'], dark: '#160404', light: '#ffb37a', accent: '#f84818', motif: 'dragon', tex: 'chunk', amb: { kind: 'ember', n: 18, speed: 20 } },
+  // R127 Underwater / ABYSSORCA — "black orca, red circuit markings,
+  // white underside" [The Sea That Wants Everything]: trench dark
+  // over Tide — near-black water, red-circuit spark glints, the
+  // white underside as the light register.
+  'r127-underwater': { sky: ['#060e1c', '#081426', '#0a1a30', '#0c203a', '#0e2644', '#102c4e'], ground: ['#0a1626', '#091220', '#080e1a', '#060a14', '#05060e', '#040408'], dark: '#02040a', light: '#e8f4ff', accent: '#f03030', motif: 'waves', tex: 'spark', amb: { kind: 'spark', n: 12, speed: 0 } },
+  // Turnback Cave / VOIDARCH — "shadow dragon, gold crown helm,
+  // wings of black smoke" [The World Behind the Waterfall]:
+  // smoke-black over Grave, the crown's gold the only warm note,
+  // smoke motes drifting where the grave base hangs still.
+  'turnback-cave': { sky: ['#17141f', '#1d1928', '#231e31', '#29233a', '#2f2843', '#352d4c'], ground: ['#221c2e', '#1e1828', '#1a1422', '#16101c', '#120c16', '#0e0810'], dark: '#07040c', light: '#e8dcc0', accent: '#d89a20', motif: 'dragon', tex: 'fleck', amb: { kind: 'mote', n: 14, speed: 3 } },
+  // Power Plant / FULMINIS — "great brown eagle, navy flight
+  // feathers, sparking wingtips" [The Storm That Stayed]: storm-dark
+  // Coilworks over Storm — navy register, plant pylons standing,
+  // spark-blue where the storm base strikes yellow.
+  'powerplant': { sky: ['#1c2440', '#232e52', '#2a3864', '#324276', '#3a4c88', '#42569a'], ground: ['#4a4640', '#423e38', '#3a3630', '#322e28', '#2a2620', '#221e18'], dark: '#10131f', light: '#fdf6c8', accent: '#6ab8f8', motif: 'storm', tex: 'spark', pylon: true, amb: { kind: 'spark', n: 16, speed: 0 } },
+  // Seafoam / GLACIERNE — "great ice sea-eagle, frost crest,
+  // glacier-blue wings" [Where the Sea Forgot to Move]: still-frozen
+  // sea glass over Frost — teal glass ground, static ice glints;
+  // nothing moves in the ambient, as the arc's sea does not.
+  'seafoam': { sky: ['#c4e4f2', '#cdeaf6', '#d6f0f9', '#dff4fb', '#e8f8fd', '#f2fcfe'], ground: ['#d8f0ee', '#cceae6', '#c0e4de', '#b4ded6', '#a8d6cc', '#9ccfc2'], dark: '#4a8a94', light: '#ffffff', accent: '#5ac8dc', motif: 'snow', tex: 'spark', haze: true, amb: { kind: 'spark', n: 8, speed: 0 } },
+  // National Park / VOLTIGRIS — "indigo tiger, glowing gold bolt
+  // stripes, storm-cloud mane" [The Thunder That Walks]: indigo
+  // storm field over Bloom — the park's green drowned in storm
+  // indigo, gold bolts, hard rain.
+  'national-park': { sky: ['#2c2a5e', '#36336e', '#403c7e', '#4a458e', '#544e9e', '#5e57ae'], ground: ['#4a6a44', '#425f3d', '#3a5436', '#32492f', '#2a3e28', '#223321'], dark: '#1c1c38', light: '#fff0a8', accent: '#f8c832', motif: 'storm', tex: 'spark', amb: { kind: 'rain', n: 16, speed: 130 } },
+  // Chime Tower summit / IRISAVIS — "rainbow phoenix, prism crest,
+  // streaming tail plumes" [The Rainbow Over the Ashes]: prism dawn
+  // over Spirit — the sky bands themselves run the spectrum down
+  // to the ash-pale summit stone; plume petals drift.
+  'bell-tower-2': { sky: ['#7a4a6e', '#a85a6a', '#d88a5a', '#e8c86a', '#a8d88a', '#8ac8d8'], ground: ['#9a8f88', '#91867f', '#887d76', '#7f746d', '#766b64', '#6d625b'], dark: '#4a3a3e', light: '#fff8ec', accent: '#f2a7c3', motif: 'tombs', tex: 'fleck', amb: { kind: 'petal', n: 10, speed: 6 } },
+  // Cerulean Cave / OMNIGEN — "pale violet seraph, halo ring, twin
+  // orbiting orbs, closed eyes" [The Dreaming Subject]: dreaming
+  // violet dark over Rubble — deep cave violet, orbiting rune
+  // glyphs, slow dream motes for the closed eyes.
+  'ceruleancave': { sky: ['#241a3e', '#2c2149', '#342854', '#3c2f5f', '#44366a', '#4c3d75'], ground: ['#3a2c56', '#33264c', '#2c2042', '#251a38', '#1e142e', '#170e24'], dark: '#120a20', light: '#e4dcff', accent: '#b49af0', motif: 'runes', tex: 'spark', amb: { kind: 'mote', n: 14, speed: 3 } },
+  // Crown Road / PYREHAWK — "ember hawk, flame-feathered wings,
+  // fierce crest" [The Last Ember]: ember-lit ceremonial stone over
+  // Rubble — pale road stone under a dusk sky, the reverse of the
+  // ember base's dark ground.
+  'victoryroad': { sky: ['#6e4a3a', '#7a5240', '#865a46', '#92624c', '#9e6a52', '#aa7258'], ground: ['#c8a878', '#bfa06e', '#b69864', '#ad905a', '#a48850', '#9b8046'], dark: '#6e5230', light: '#ffe4b0', accent: '#f07818', motif: 'flames', tex: 'chunk', amb: { kind: 'ember', n: 12, speed: 14 } },
+  // Mt. Mortar depths / MAGMALION — "black lion, lava mane, ember
+  // tail" [The Mountain's Heartbeat]: lava-heart chamber over
+  // Rubble — black rock, lava light, ember ambient at a heartbeat
+  // density the ember base never reaches.
+  'mt-mortar-2': { sky: ['#200c0c', '#2a1010', '#341414', '#3e1818', '#481c1c', '#522020'], ground: ['#2c1a14', '#26160f', '#20120a', '#1a0e06', '#140a03', '#0e0601'], dark: '#0a0302', light: '#ffc478', accent: '#ff6a1a', motif: 'flames', tex: 'spark', amb: { kind: 'ember', n: 16, speed: 18 } },
 };
 
 // The one arena-override seam (Gym Identity T0's gymArenaFor,
@@ -194390,6 +194464,20 @@ class BattleScene {
           F(D, x, horizon - 10, 3, 10);
           F(L, x + 1, horizon - 8, 1, 1); F(L, x + 1, horizon - 5, 1, 1);
           if (i % 2 === 0) F(A, x + 10, horizon - 9, 4, 2);
+        }
+        F(D, 0, horizon, w, 2);
+      } else if (M === 'dawnring') {
+        // Legendary Arenas T1 (Hall of Dawning; the wave's one new
+        // painter, Director-granted): armillary rings on posts — the
+        // First's golden ring stood upright along the horizon: a
+        // short post, a ring outline in accent with a light core,
+        // hashed heights so no two rings stand alike.
+        for (let x = 6, i = 0; x < w - 14; x += 30, i++) {
+          const rh = 12 + Math.floor(arenaHash(i, 79) * 6);
+          F(D, x + 5, horizon - 4, 2, 4);
+          F(A, x, horizon - rh, 12, 2); F(A, x, horizon - 4, 12, 2);
+          F(A, x, horizon - rh, 2, rh - 2); F(A, x + 10, horizon - rh, 2, rh - 2);
+          F(L, x + 5, horizon - Math.floor(rh / 2) - 1, 2, 2);
         }
         F(D, 0, horizon, w, 2);
       } else { // snow
@@ -206410,6 +206498,6 @@ if (typeof Game !== 'undefined') Object.assign(Game.prototype, {
 });
 
 </script>
-<!-- contentHash:720bab280d7e4b4d1e4a1ca737af12e1f9f5e8faf67336afb73480b5daef30c9 -->
+<!-- contentHash:4baf1afcaa6697f85f83153d71e51ea10f5138603a62d1a738a85dc2cfdce5be -->
 </body>
 </html>
