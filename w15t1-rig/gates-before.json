@@ -1,0 +1,388 @@
+[
+ {
+  "id": "lavender",
+  "name": "Hushmoor Town",
+  "doors": 7,
+  "weakLinks": 0,
+  "interrupts": 0,
+  "lamps": 2,
+  "unlitFrac": 0.411,
+  "merged": 0,
+  "tight": 5,
+  "buildings": 8,
+  "apronLow": 0,
+  "apronMin": 0.643,
+  "decor": 15,
+  "unanchoredPath": 3,
+  "unanchoredAny": 0,
+  "netComponents": 1,
+  "netCompSizes": [
+   56
+  ],
+  "stepOn": 7,
+  "stepTouch": 7,
+  "stepTot": 7,
+  "junctions": 2,
+  "junctionsBare": 0,
+  "trees": 57,
+  "treesIsolated": 0,
+  "noWalkway": 0,
+  "onFabric": 0,
+  "onFabricList": [],
+  "fabricPockets": 0,
+  "freestanding": 9,
+  "connPairs": 132,
+  "connOk": 132,
+  "connFails": [],
+  "junctionCells": 16,
+  "junctionSites": [
+   [
+    [
+     7,
+     6
+    ],
+    [
+     8,
+     7
+    ],
+    [
+     7,
+     7
+    ],
+    [
+     8,
+     6
+    ]
+   ],
+   [
+    [
+     10,
+     7
+    ],
+    [
+     11,
+     8
+    ],
+    [
+     11,
+     9
+    ],
+    [
+     11,
+     10
+    ],
+    [
+     11,
+     11
+    ],
+    [
+     11,
+     12
+    ],
+    [
+     10,
+     12
+    ],
+    [
+     10,
+     11
+    ],
+    [
+     10,
+     10
+    ],
+    [
+     10,
+     9
+    ],
+    [
+     10,
+     8
+    ],
+    [
+     11,
+     7
+    ]
+   ]
+  ],
+  "shoulderOrphans": 0,
+  "shoulderList": [],
+  "landscapingFloat": 0,
+  "examples": [],
+  "strict": 0.7211,
+  "fabric": 0.9873,
+  "gate": {
+   "id": "lavender",
+   "pass": true,
+   "gates": [
+    {
+     "name": "strict>=0.60",
+     "ok": true,
+     "detail": "strict=0.7211"
+    },
+    {
+     "name": "fabric>=0.98",
+     "ok": true,
+     "detail": "fabric=0.9873"
+    },
+    {
+     "name": "step-offs 100% on/touching",
+     "ok": true,
+     "detail": "7/7"
+    },
+    {
+     "name": "CONNECTIVITY all-pairs on fabric",
+     "ok": true,
+     "detail": "132/132 pairs"
+    },
+    {
+     "name": "exactly 1 fabric component",
+     "ok": true,
+     "detail": "components=1 sizes=56"
+    },
+    {
+     "name": "junction-mark>=90%",
+     "ok": true,
+     "detail": "covered 2/2"
+    },
+    {
+     "name": "unanchored<=5%",
+     "ok": true,
+     "detail": "0/15 decor unanchored"
+    },
+    {
+     "name": "APRON no <60% / no gap-0",
+     "ok": true,
+     "detail": "apronLow=0 min=0.643 merged=0 tight=5"
+    },
+    {
+     "name": "FREESTANDING-CLEARANCE on-fabric=0",
+     "ok": true,
+     "detail": "onFabric=0 pockets=0"
+    },
+    {
+     "name": "shoulder-adjacency",
+     "ok": true,
+     "detail": "orphans=0 of 9 freestanding"
+    }
+   ]
+  }
+ },
+ {
+  "id": "saffron",
+  "name": "Farsight City",
+  "doors": 10,
+  "weakLinks": 0,
+  "interrupts": 0,
+  "lamps": 8,
+  "unlitFrac": 0.075,
+  "merged": 0,
+  "tight": 2,
+  "buildings": 6,
+  "apronLow": 0,
+  "apronMin": 0.857,
+  "decor": 20,
+  "unanchoredPath": 0,
+  "unanchoredAny": 0,
+  "netComponents": 1,
+  "netCompSizes": [
+   67
+  ],
+  "stepOn": 10,
+  "stepTouch": 10,
+  "stepTot": 10,
+  "junctions": 2,
+  "junctionsBare": 0,
+  "trees": 61,
+  "treesIsolated": 0,
+  "noWalkway": 0,
+  "onFabric": 0,
+  "onFabricList": [],
+  "fabricPockets": 0,
+  "freestanding": 20,
+  "connPairs": 156,
+  "connOk": 156,
+  "connFails": [],
+  "junctionCells": 28,
+  "junctionSites": [
+   [
+    [
+     9,
+     4
+    ],
+    [
+     10,
+     5
+    ],
+    [
+     10,
+     6
+    ],
+    [
+     10,
+     7
+    ],
+    [
+     10,
+     8
+    ],
+    [
+     10,
+     9
+    ],
+    [
+     10,
+     10
+    ],
+    [
+     10,
+     11
+    ],
+    [
+     10,
+     12
+    ],
+    [
+     9,
+     12
+    ],
+    [
+     9,
+     11
+    ],
+    [
+     9,
+     10
+    ],
+    [
+     9,
+     9
+    ],
+    [
+     9,
+     8
+    ],
+    [
+     9,
+     7
+    ],
+    [
+     9,
+     6
+    ],
+    [
+     9,
+     5
+    ],
+    [
+     10,
+     4
+    ]
+   ],
+   [
+    [
+     12,
+     8
+    ],
+    [
+     13,
+     9
+    ],
+    [
+     14,
+     9
+    ],
+    [
+     15,
+     9
+    ],
+    [
+     16,
+     9
+    ],
+    [
+     17,
+     8
+    ],
+    [
+     16,
+     8
+    ],
+    [
+     15,
+     8
+    ],
+    [
+     14,
+     8
+    ],
+    [
+     13,
+     8
+    ]
+   ]
+  ],
+  "shoulderOrphans": 0,
+  "shoulderList": [],
+  "landscapingFloat": 0,
+  "examples": [],
+  "strict": 0.8655,
+  "fabric": 1,
+  "gate": {
+   "id": "saffron",
+   "pass": true,
+   "gates": [
+    {
+     "name": "strict>=0.60",
+     "ok": true,
+     "detail": "strict=0.8655"
+    },
+    {
+     "name": "fabric>=0.98",
+     "ok": true,
+     "detail": "fabric=1"
+    },
+    {
+     "name": "step-offs 100% on/touching",
+     "ok": true,
+     "detail": "10/10"
+    },
+    {
+     "name": "CONNECTIVITY all-pairs on fabric",
+     "ok": true,
+     "detail": "156/156 pairs"
+    },
+    {
+     "name": "exactly 1 fabric component",
+     "ok": true,
+     "detail": "components=1 sizes=67"
+    },
+    {
+     "name": "junction-mark>=90%",
+     "ok": true,
+     "detail": "covered 2/2"
+    },
+    {
+     "name": "unanchored<=5%",
+     "ok": true,
+     "detail": "0/20 decor unanchored"
+    },
+    {
+     "name": "APRON no <60% / no gap-0",
+     "ok": true,
+     "detail": "apronLow=0 min=0.857 merged=0 tight=2"
+    },
+    {
+     "name": "FREESTANDING-CLEARANCE on-fabric=0",
+     "ok": true,
+     "detail": "onFabric=0 pockets=0"
+    },
+    {
+     "name": "shoulder-adjacency",
+     "ok": true,
+     "detail": "orphans=0 of 20 freestanding"
+    }
+   ]
+  }
+ }
+]

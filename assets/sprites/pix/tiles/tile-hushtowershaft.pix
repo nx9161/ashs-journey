@@ -1,0 +1,25 @@
+# Wave W15-T1: Hushmoor Tower shaft — ashlar wall with a lit slit window, replacing borrowed gym wall on the tower shaft row.
+PIX tile-hushtowershaft 16 16
+wwwwwwwwwwwwwwww
+vvwvvwvvwvvwvvwv
+vwvvwvvwvvwvvwvv
+wvvwvvkkkkvvwvvw
+vvwvvwvoovvwvvwv
+vuuuuvuoouwuuuuv
+wvvwvvwoowvvwvvw
+vvwvvwvllvvwvvwv
+vwvvwvvllvwvvwvv
+wvvwvvwoowvvwvvw
+vuuuuwuoouvuuuuv
+vwvvwvvoovwvvwvv
+wvvwvvkkkkvvwvvw
+vvwvvwvvwvvwvvwv
+vwvvwvvwvvwvvwvv
+uuuuuuuuuuuuuuuu
+PAL
+k #31445e trim
+w #9aa3b1 ashlar-light
+v #7d8593 ashlar
+u #5f6773 ashlar-shade
+o #241f1c opening
+l #e8b34b lantern

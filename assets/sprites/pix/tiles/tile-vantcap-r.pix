@@ -1,0 +1,60 @@
+# Wave W15-T1: Vantage Co. HQ cap R — mirror shoulder of the HQ cap. 16x48 tall art, bottom-anchored (TX-3).
+PIX tile-vantcap-r 16 48
+aaabaaaaabaaaaab
+aaaabaaaaabaaaaa
+faaaabaaaaabaaaa
+efaaaabaaaaabaaa
+gefaaaabaaaaabaa
+egefaaaabaaaaaba
+eegefaaaabaaaaab
+eeegefaaaabaaaaa
+eeeegefaaaabaaaa
+eeeeegefaaaabaaa
+eeefeeefeeefeeef
+dddddddddddddddd
+aaabaaaaabaaaaab
+aanssnaaaabaacca
+aanssnaaaaabacca
+banssnbaaaaabcca
+abnssnabaaaaacca
+aanssnaabaaaacca
+aanssnaaabaaaccb
+aanssnaaaabaacca
+aannnnaaaaabacca
+banssnbaaaaabcca
+abnssnabaaaaacca
+aanssnaabaaaacca
+aanssnaaabaaaccb
+aanssnaaaabaacca
+aanssnaaaaabacca
+banssnbaaaaabcca
+abnssnabaaaaabaa
+bbbbbbbbbbbbbbbb
+eeeeeeeeeeeeeeee
+gggggggggggggggg
+aaaaabaaaaabaaaa
+baansssnaaaabaaa
+bbbbbbbbbbbbbbbb
+aabnsssnbaaaaaba
+aaansssnabaaaaab
+aaansssnaabaaaaa
+aaansssnaaabaaaa
+baannnnnaaaabaaa
+abansssnaaaaabaa
+aabnsssnbaaaaaba
+aaansssnabaaaaab
+aaansssnaabaaaaa
+aaansssnaaabaaaa
+bbbbbbbbbbbbbbbb
+bbbbbbbbbbbbbbbb
+dddddddddddddddd
+PAL
+a #d6c48c slab-face
+b #bfa96e slab-shade
+c #eee0ae slab-lit
+d #8a6d2f bronze-shadow
+e #d9a92e gold
+f #f2c14e gold-bright
+g #6e5626 gold-deep
+s #7f95ad glass
+n #3c4a5a glass-dark

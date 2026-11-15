@@ -1,0 +1,62 @@
+# Wave W15-T1: Hushmoor Tower cap C — spire + belfry with lit hanging lantern over ashlar, Hushmoor kit register. 16x48 tall art, bottom-anchored (TX-3).
+PIX tile-hushtowercap-c 16 48
+wdddzddlldddzddw
+dzwddzdkkzdddzwd
+dwzdddzmzdzddwzd
+wddzddmdgzdzdddw
+zdwdzdmggzddzdwd
+dwdddmggggzddwdd
+wdzddmdgdgzdddzw
+ddwzmggggggzddwz
+zwddmggggggzzwdd
+wzdmgdgdgdgdzzdw
+ddwmggggggggzdwd
+dwmggggggggggwdz
+wdmgdgdgdgdgdzdw
+dmwgggggggggggwd
+dwgggggggggggwzd
+wdgdgdgdgdgdgdgw
+kkwkkkkkkkkkkkwk
+uwuuuuuuuuuuuwuu
+wvvvvvovvovvvvvw
+vvwvvoooooovvvwv
+vwvvoookkooovwvv
+wvvvoookkooovvvw
+vvwvookkkkoovvwv
+vwvvoolffloovwvv
+wvvvoolffloovvvw
+vvwvookkkkoovvwv
+vwvvoooooooovwvv
+wvvvoooooooovvvw
+vvwvoooooooovvwv
+vwvvkkkkkkkkvwvv
+mkkkmkkkmkkkmkkk
+kkkkkkkkkkkkkkkk
+vvvvvvwvvvvvvwvv
+vvvvwvvvvvvwvvvv
+vvwvvvkkkkvvvvvv
+wuuuuvuoouvuuuuv
+vvvvvwvoovvvwvvv
+vvvwvvvoovwvvvvv
+vwvvvvvllvvvvvvw
+vuuuuvulluvuuuuv
+vvvvwvvoovvwvvvv
+vvwvvvvoowvvvvvv
+wvvvvvvoovvvvvwv
+vuuuuwkkkkvuuuuv
+vvvwvvvvvvwvvvvv
+vwvvvvvvwvvvvvvw
+uuuuuuuuuuuuuuuu
+uuuuuuuuuuuuuuuu
+PAL
+z #373f4b spire-deep
+d #485363 shingle-shade
+g #5e6d82 shingle
+m #7b8593 shingle-light
+k #31445e trim
+w #9aa3b1 ashlar-light
+v #7d8593 ashlar
+u #5f6773 ashlar-shade
+o #241f1c opening
+l #e8b34b lantern
+f #f5d67a lantern-core

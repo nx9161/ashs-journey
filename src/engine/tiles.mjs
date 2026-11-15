@@ -4726,6 +4726,39 @@ W17AD_KIND_DEFS.forEach(([kind], i) => {
 export const W17AD_PROP_KINDS = W17AD_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
 export const W17AD_WALL_KINDS = W17AD_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
 export const W17AD_FLOOR_KINDS = W17AD_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
+// Wave W15-T1 (Kit-Height Landmarks, Arden pair): the two Arden
+// landmarks the approved designs promise TALL but the tile builds
+// rendered at 32px — Hushmoor Tower (lavender) and the Vantage Co.
+// HQ (saffron). New 16x48 cap kinds swap onto each landmark's
+// EXISTING roof/top row only, bottom-anchored per Premium+ W6 TX-3
+// (overworld.mjs blit: y*T - max(0, h-T)); the 16x16 shaft kinds
+// replace the borrowed generic wall (wall-gym / wall-lab) on each
+// landmark's non-door wall row. All eight kinds are 'wall' class,
+// never in WALKABLE; doors, warps, posts and ground are untouched
+// (Hushmoor's door-gym pair stays — warp-coupled, plan §6(d)).
+// Dual-defined towns: maps2 + maps3 copies edited identically,
+// registry fingerprints re-pinned in the same commit. Indices
+// 1544-1551 per WAVE-W15-LANDMARKS-PLAN.md (the route program
+// closed at 1543; 1111 stays empty). Chars U+1E00+1544..
+export const W15T1_KIND_DEFS = [
+  ['hushtowercap-l', 'wall'],
+  ['hushtowercap-c', 'wall'],
+  ['hushtowercap-r', 'wall'],
+  ['hushtowershaft', 'wall'],
+  ['vantcap-l', 'wall'],
+  ['vantcap-c', 'wall'],
+  ['vantcap-r', 'wall'],
+  ['vantshaft', 'wall'],
+];
+export const W15T1_KIND_CHARS = {};
+W15T1_KIND_DEFS.forEach(([kind], i) => {
+  const ch = String.fromCodePoint(0x1E00 + 1544 + i);
+  W15T1_KIND_CHARS[kind] = ch;
+  TILE_CHARS[ch] = kind;
+});
+export const W15T1_PROP_KINDS = W15T1_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
+export const W15T1_WALL_KINDS = W15T1_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
+export const W15T1_FLOOR_KINDS = W15T1_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
 export const SINNOH_TOWN_GROUND_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg);
 export const SINNOH_TOWN_GROUND2_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg2);
 // TX-3: the 8 gym exteriors by town (original type-accent motifs).

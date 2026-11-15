@@ -1,0 +1,60 @@
+# Wave W15-T1: Vantage Co. HQ cap C — gold spire over slab tower body with glass column. 16x48 tall art, bottom-anchored (TX-3).
+PIX tile-vantcap-c 16 48
+baaaaabffaaabaaa
+aaaaabaeeaabaaaa
+aaaabaafgabaaaaa
+aaabaafeegaaaaab
+aabaaafeegaaaaba
+abaaafeeeegaabaa
+baaaafeeeegabaaa
+aaaafeeeeeegaaaa
+aaaafeeeeeegaaaa
+aaeeeeeeeeeeeeab
+feeefeeefeeefeee
+dddddddddddddddd
+baaaaabaaaaabaaa
+accaabnssnabacca
+accabanssnbaacca
+accbaanssnaaaccb
+accaaanssnaaacca
+accaaanssnaaacca
+bccaaanssnaabcca
+accaabnssnabacca
+accabannnnbaacca
+accbaanssnaaaccb
+accaaanssnaaacca
+accaaanssnaaacca
+bccaaanssnaabcca
+accaabnssnabacca
+accabanssnbaacca
+accbaanssnaaaccb
+aabaaanssnaaaaba
+bbbbbbbbbbbbbbbb
+eeeeeeeeeeeeeeee
+gggggggggggggggg
+aaaabaaaaabaaaaa
+aaabanssssnaaaab
+bbbbbbbbbbbbbbbb
+abaaanssssnaabaa
+baaaanssssnabaaa
+aaaaanssssnbaaaa
+aaaabnssssnaaaaa
+aaabannnnnnaaaab
+aabaanssssnaaaba
+abaaanssssnaabaa
+baaaanssssnabaaa
+aaaaanssssnbaaaa
+aaaabnssssnaaaaa
+bbbbbbbbbbbbbbbb
+bbbbbbbbbbbbbbbb
+dddddddddddddddd
+PAL
+a #d6c48c slab-face
+b #bfa96e slab-shade
+c #eee0ae slab-lit
+d #8a6d2f bronze-shadow
+e #d9a92e gold
+f #f2c14e gold-bright
+g #6e5626 gold-deep
+s #7f95ad glass
+n #3c4a5a glass-dark
