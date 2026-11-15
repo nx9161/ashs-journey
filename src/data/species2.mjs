@@ -723,7 +723,7 @@ export const SPECIES2 = {
     eggGroups: ['flying', 'ground'], hatchCounter: 20,
     learnset: { 1: ['peck', 'sandattack'], 7: ['leer'], 15: ['furyattack'], 23: ['swordsdance'], 31: ['agility'], 39: ['slash'] },
     flavor: 'It guards its leek like a family heirloom with edges.',
-    design: { inspired: 'duck', kind: 'animal', note: 'plump teal courier duck, mail satchel, crest cap' },
+    design: { inspired: 'duck', kind: 'animal', note: 'plump teal storm duck, wind-torn scarf, storm-feather crest, leek weather-vane' },
     tm: [2, 3, 4, 6, 8, 9, 10, 20, 31, 32, 33, 34, 39, 44, 50, 101, 102],
   },
   doduo: {
