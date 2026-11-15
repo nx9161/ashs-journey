@@ -3116,6 +3116,56 @@ W17J_KIND_DEFS.forEach(([kind], i) => {
 export const W17J_PROP_KINDS = W17J_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
 export const W17J_WALL_KINDS = W17J_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
 export const W17J_FLOOR_KINDS = W17J_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
+// Wave W17-K (Route Build Program, Yamato Tranche 6 — the Yamato
+// finale): the Gloom gut + the Conference road, the program's
+// endgame pair. Both are defined once in maps6.mjs (no dual copies
+// in Yamato, so no registry re-pins arise). Gloom Cave "Gloom Deep"
+// (idx 1251-1252) converts by the cave method (art layer only:
+// cavefloor -> own floor, cavewall -> own wall; the trigger census
+// '.'/'R'/',' is 0 -> 0, and its warm pools, caveboulders,
+// cavecrystals and sign stay byte-identical; NO props are placed —
+// cave discipline): gloomfloor is near-black WARM earth flags,
+// split from Junction Deep's lit warm-grey road flags by value and
+// hue and from the Crown Road's violet-charcoal ceremonial flags
+// by hue; gloomwall is near-black torch-warmed bands, split from
+// Junction's banded warm grey by value. Lastlight Pass "the
+// Conference road" (1253-1256) converts grassground/path/tree by
+// KIND (maps6 trees stand on both '#' and 'T' chars — the W17-B
+// lesson); its encounter grass, flowers, fences, rocks, maple and
+// sign stay byte-identical, and VETERAN HALD's post stands
+// untouched: passturf is thin pale high-pass grass (paler and
+// thinner than Route 46's wind-combed ridge grass), passfloor is
+// Conference-road stone-sand — light and worn, split from the
+// Crown Road's dark crownfloor by value and register — passpine
+// is a stern grey-green tiered pine, and memorialstone is the
+// design's memorial cairn, placed x2 at the road's bends. Ground
+// kinds deliberately do NOT end in 'floor' (the desire-path audit
+// counts '*floor' as street tier; grounds must never masquerade
+// as street); path kinds DO end in 'floor' so they register as
+// the route's path tier per route (checklist point 3). Indices
+// 1251-1256 per the program plan
+// (WAVE-W17-YAMATO-ROUTE-PROGRAM-PLAN.md): W17-F took 1168-1185,
+// W17-G 1186-1204, W17-H 1205-1222, W17-I 1223-1236 and W17-J
+// takes 1237-1250 on its parallel branch; 1111 and every earlier
+// documented gap stay empty. Kind names verified unclaimed
+// against origin/main. Chars U+1E00+1251..
+export const W17K_KIND_DEFS = [
+  ['gloomfloor', 'floor'],
+  ['gloomwall', 'wall'],
+  ['passturf', 'floor'],
+  ['passfloor', 'floor'],
+  ['passpine', 'wall'],
+  ['memorialstone', 'prop'],
+];
+export const W17K_KIND_CHARS = {};
+W17K_KIND_DEFS.forEach(([kind], i) => {
+  const ch = String.fromCodePoint(0x1E00 + 1251 + i);
+  W17K_KIND_CHARS[kind] = ch;
+  TILE_CHARS[ch] = kind;
+});
+export const W17K_PROP_KINDS = W17K_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
+export const W17K_WALL_KINDS = W17K_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
+export const W17K_FLOOR_KINDS = W17K_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
 export const SINNOH_TOWN_GROUND_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg);
 export const SINNOH_TOWN_GROUND2_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg2);
 // TX-3: the 8 gym exteriors by town (original type-accent motifs).

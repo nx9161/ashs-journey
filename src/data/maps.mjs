@@ -1120,6 +1120,21 @@ export const WALKABLE = new Set(['.', ',', 'D', 'E', 'C', 'F', 'J', 'K', '1', '2
   // 1205-1222 and W17-I takes 1223-1236 on its parallel branch;
   // 1111 stays empty.)
   ...[1237, 1238, 1243, 1244, 1247, 1248]
+    .map((i) => String.fromCodePoint(0x1E00 + i)),
+  // Wave W17-K: the Yamato tranche-6 ground/path/cave-floor chars
+  // (U+1E00+1251.., tiles.mjs W17K_KIND_DEFS) are walkable —
+  // gloomfloor (Gloom Cave), swapped 1:1 from the walkable 'L'
+  // cavefloor char in its own cave, so floor stays floor, and
+  // passturf/passfloor (Lastlight Pass), swapped 1:1 from the
+  // walkable '_' ground / '.' path chars on its own route, so
+  // ground stays ground and path stays path. The cave wall char
+  // (1252), tree char (1255) and prop char (1256) are NOT here:
+  // the wall swaps from 'G' cavewall, which was never walkable,
+  // and trees/props were never walkable. (Indices 1251-1256 per
+  // the program plan: W17-F took 1168-1185, W17-G 1186-1204,
+  // W17-H 1205-1222, W17-I 1223-1236 and W17-J takes 1237-1250
+  // on its parallel branch; 1111 stays empty.)
+  ...[1251, 1253, 1254]
     .map((i) => String.fromCodePoint(0x1E00 + i))]);
 
 // Trainer definitions for the slice.

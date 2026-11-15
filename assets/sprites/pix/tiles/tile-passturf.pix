@@ -1,0 +1,23 @@
+# Wave W17-K (Lastlight Pass): pass turf — thin high-pass grass, pale grey-green and sparse over the stern shoulder, dry flecks and the odd bare-earth patch where the wind keeps it thin (design: calm speckled grass on a high mountain pass, the rock closing in). The Pass’s own ground — paler and thinner than Route 46’s wind-combed ridge grass, and greyer than Route 45’s ledged green.
+PIX passturf 16 16
+aaaaaaaaaaabaaaa
+aaaabaaaabaaaaby
+aaaaaeaaaabaaaaa
+aaaaaaaaaaaaayaa
+aaaaabaaabaaaaaa
+aaayaabbbbaaaaaa
+aaabaaaaaeaayaaa
+aaaaaaaaaabybaaa
+aaaaaaaaabaabaaa
+abaabeyaaabaaaaa
+aabaaaaaaaaayaya
+aaaaaabyayaaaabb
+abaaaaaaaaaayaay
+baaabaaaaaaaaaay
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+PAL
+a #8fa873
+b #7d9862
+y #c9bd8f
+e #a08b62
