@@ -1,0 +1,3632 @@
+{
+ "wave": "W-CHAR2 T0",
+ "base": "49463353",
+ "actorHash": "b4e747a2542443ea1eaeeda6cdac3b17ab72d75c9dd1c66beb10f2c4b4446a2a",
+ "posts": {
+  "route1#1": {
+   "name": "CAL",
+   "inv": "49ceb338213598cfda3b64aeaef2d9a954a3d13c33f853d79bbc32e3de4dc6aa",
+   "design": "00fd6e67e6670fc5a1be74df83a6f112b558b5d64e93e458e513b7678815f781"
+  },
+  "route1#2": {
+   "name": "LISA",
+   "inv": "8d6e50276d218e733a1273c7fd8c8c6ee94310acf0a9f9af95105d53300b9fc3",
+   "design": "788e8d82ed10942d32f2acc01d538b30f13eef751b53f98ac61b63ffdb018f42"
+  },
+  "route2#0": {
+   "name": "RICK",
+   "inv": "6041a3a29a44845ad3121f9a5c59c097009a554381189f27e5a72a72022e9f37",
+   "design": "ce644f97447e533c5b06afd2ba6a823a08cb035176c1c619de3064e26b5b2b55"
+  },
+  "route2#1": {
+   "name": "BEA",
+   "inv": "4d49f41dbf11e669c1583b224e06055f01436cbc6e62e67753866245039fffe8",
+   "design": "7384a29e393f6912c35e264bd935c2121d177f1f09d33294c7a495b6013fa817"
+  },
+  "route2#2": {
+   "name": "NIA",
+   "inv": "6a547f85130e055583a8ee4c83dc535f48ead96c73b324f5d095ff1657840ccf",
+   "design": "ae6f197089f105796a57a44ae177790f1ba72daa6339ccb91d88046dee83d282"
+  },
+  "route2#3": {
+   "name": "ROB",
+   "inv": "931e079af0f7a6926a75b8880dd96304528d8fd986767fe28d1eb022593c8e62",
+   "design": "3f69750d28bc4cb8afb0fd914e7a3ca67bd44f51f8d19c746e88552600d41cbe"
+  },
+  "route2#4": {
+   "name": "RUE",
+   "inv": "b526110bbe967498720b4d1ca820fc013e30b8710a9279f2cd02a6937c6c40fb",
+   "design": "7559c505ce9b7250ca2c6567103c71f9be7de6daacc034c6544d7099c545bc77"
+  },
+  "route2#5": {
+   "name": "COLE",
+   "inv": "1af86a641cb3867938cdc0e853f03c89a53d034822c49f5fa07b22022c609c5d",
+   "design": "cdb97656fb021738d40e11f0558a22e308979279ce51c52dbeace26d75370707"
+  },
+  "gym#0": {
+   "name": "GARRAN",
+   "inv": "a8958d07b9fd135ba533b26735d894d712508814b33eead07f89f7c475e8b3b1",
+   "design": "7ca8a6c37823ad0919c44826559a82e9349cace2e52140d6dfd9f3b0d34f4818"
+  },
+  "pewter#0": {
+   "name": "MART CLERK",
+   "inv": "12e30ffecc2abfa387906f7baa6ae47b5d372d3a4707770817dda212acbd9607",
+   "design": "322b3251d89ef992ab0c3a9519407a2d3c74fef70c4b846e318ad9a7feb89749"
+  },
+  "pewter#2": {
+   "name": "CURATOR",
+   "inv": "5571b8936742f11cb201f0b768673af60a7f475d0e5539d7341470628e62f91a",
+   "design": "435abfb6a58dcc4f108dcd8b7cf1fad65c8f62cd50a8f27028d935093c901665"
+  },
+  "pewter#3": {
+   "name": "GARRAN",
+   "inv": "c1bf00460d5ac83a63cb5cadffa8d66a207225817f427fac1acc0c6ab2f948c4",
+   "design": "395c0f959a424f2b9ae508c52433a2883263f56e1fa7105d46aa59eeb01368b7"
+  },
+  "route3#0": {
+   "name": "LASS ANA",
+   "inv": "4f03716391178441ca8f6d9841705e47fba2d8bf75869ba659a6d507b5802157",
+   "design": "788e8d82ed10942d32f2acc01d538b30f13eef751b53f98ac61b63ffdb018f42"
+  },
+  "route3#1": {
+   "name": "BEX JR",
+   "inv": "edc3d99b7654c822f61bc48022cf3dafbb397efdf3d998b43f716335b2959569",
+   "design": "2bed494357fbeb240cea0b16e291be3269f61d63b3b1a84d5def69a451bd1918"
+  },
+  "moon1#0": {
+   "name": "HIKER TOMO",
+   "inv": "12822cf3583149107ee35c6e3047163138bc6d8fde01ca9b1a56d48e7e4d6235",
+   "design": "fc6c93796c07110389fa78a2583aefb49972bbcfeafa0424ddf4a8953ef28ccd"
+  },
+  "moon2#0": {
+   "name": "GRUNT REX",
+   "inv": "113b9dce0606bdaf32b996eb68841cdba8de6eba7833cd724569c09cc798b796",
+   "design": "43553c38705c8a9b5fb7e9cbd4fccdc09ee1280229d45e9afcaa5eeee72a5383"
+  },
+  "route4#0": {
+   "name": "MARCO",
+   "inv": "8422620dba251c52014b3f5f2b333378907ffa0963f663fc8c0458e39a34bd45",
+   "design": "27e7479ae6c95ad423adde598b90144ee12f714f869a214a8c6264077d792162"
+  },
+  "route4#1": {
+   "name": "LASS RUE2",
+   "inv": "8dbdb58dc6ce208ef129aeb7baf72b3e43dd582e9576e19e9b93c9001e461565",
+   "design": "7384a29e393f6912c35e264bd935c2121d177f1f09d33294c7a495b6013fa817"
+  },
+  "cerulean#0": {
+   "name": "MART CLERK",
+   "inv": "f8c9c02dbd861d65d4d7bebaba6dcba21a05c4a7b4de50e9199808904ddfc683",
+   "design": "322b3251d89ef992ab0c3a9519407a2d3c74fef70c4b846e318ad9a7feb89749"
+  },
+  "cerulean#1": {
+   "name": "ODO",
+   "inv": "735783936d257035ae03f94b55af9c0a077054c8dd193118da3782d1e11945f8",
+   "design": "9dd8b7c84480031b26564dc1940d13564fca764d8fe16904edc4839e113d6baf"
+  },
+  "cerulean#2": {
+   "name": "WREN",
+   "inv": "f77ede4ec50b9f6e23441b99601aa40597d47c573144f474bdfbcb17d7f91b20",
+   "design": "4cdf6d781c43c73ce5014f6c124eca9d7d087f47af6d58ae3c409b0686a0a42e"
+  },
+  "cerulean#3": {
+   "name": "ORIN",
+   "inv": "2a31f1c6b62875f1c4c252a9e9d81b20d38158685f92c07cad2ff1bc813fa59c",
+   "design": "39dae138ed43adc9a3381862d30da91655e42d4fc1824b1737d454c999640e30"
+  },
+  "cerulean#4": {
+   "name": "TESS",
+   "inv": "56c6a8c57867e8874a8e2e1c6b28bef17c8bd836a5da6970263166f998baad86",
+   "design": "8678180f06b69e40aabcc631b426d474ed8aeb2db44b827cfadd12385af58074"
+  },
+  "cerulean#6": {
+   "name": "PIP",
+   "inv": "7a1eba78c86a6e323baf554a9ab5cb4b42fc7244942694404cffdab4e491c3ef",
+   "design": "8b8fdcc81bc77434b1a7404fe04f30d2181beebc7345452e0a07ca01ec4bb2aa"
+  },
+  "route5#0": {
+   "name": "GRAMPS",
+   "inv": "c90adc29bfc08949949a2934784092a074adceadb2adb67e2abd2c2248753532",
+   "design": "792bfd3c56066d20ce99167d9e38d34bd50cb89b2581d2d086219f1f9559c402"
+  },
+  "route5#1": {
+   "name": "CAMPER JO",
+   "inv": "d9acd94d480d30f6ea7227138aa28c448af046d292e3985518903e44bd89d1ad",
+   "design": "8923303f041a7add6f1d332f420669bfb6caa91567b7e0cafd0c5ea4780acd90"
+  },
+  "route6#0": {
+   "name": "BUG CATCHER ELI",
+   "inv": "f18356f61463cb08a4a87ecca448d17ccef88ef187f2a1b8ac38d5019b54c954",
+   "design": "8cbac194f40d1e2f93e45e88bdd477263e5ef4c380973c455e8fa683c9c43ae6"
+  },
+  "vermilion#0": {
+   "name": "MART CLERK",
+   "inv": "2d064253784d43a9cc748e78491699466873554e96278ad1e56d1ba118281abb",
+   "design": "322b3251d89ef992ab0c3a9519407a2d3c74fef70c4b846e318ad9a7feb89749"
+  },
+  "vermilion#1": {
+   "name": "OFFICER RAE",
+   "inv": "abbf295d2c8790226ea0f095d9419fd8f3a464e548f0b3879439dea08aeea2ed",
+   "design": "0ee71f32947b8060f4fe6e5ccd854dfb5c162c9b6292d2445e730420ce375f4d"
+  },
+  "vermilion#2": {
+   "name": "HANK",
+   "inv": "f0e6bf6eba91e016234082ebc3e64972626bc36d7a8e5421bc782d5518e819fa",
+   "design": "d5a286f05d25fb23955902d4c54a893fac8dc5dc56d75acaecc92ade5b36f77d"
+  },
+  "vermilion#3": {
+   "name": "CHAIRMAN",
+   "inv": "9e063fcb6f9b886253bd42826a3a31e9ee8a5ad5aa7c188d184bae7abe7c9de7",
+   "design": "435abfb6a58dcc4f108dcd8b7cf1fad65c8f62cd50a8f27028d935093c901665"
+  },
+  "vermilion#4": {
+   "name": "SAILOR BRINE",
+   "inv": "a0be369e41769bba484c2a02ea7355afe66d6cd96b2c659e17bead4088c1bfdf",
+   "design": "e38933a36947c5ffc33d5044e704ebd9407c16dabae020f753c60b1897b44af8"
+  },
+  "vermilion#5": {
+   "name": "CAPT AMBER",
+   "inv": "41963f7417e614c84ae372043759b9bef4d40e39f39a2e25017eceb4db3bd7e7",
+   "design": "9a46fe40b52e7e3a5f70b5a74b1d44d528ce03fbc329a454fe574c701509d67a"
+  },
+  "vermilion#6": {
+   "name": "CAPT EASTBOUND",
+   "inv": "e2e4de446cbe95e6b0a76e1588cf07ade70bcf26fbf9c43f2648de81f6d456bb",
+   "design": "f7ac6c77929b46cdfc14f251cd6f4530a1f836e2163ebd1bf70f7a2c094a8db7"
+  },
+  "vermilion#7": {
+   "name": "CAPT MARIS",
+   "inv": "12e00daa1d894470b7e445069ad714547030cdf0b0c287fd05ccc256bb04df7c",
+   "design": "b73557596dcb80381ab46636bbb83406bc7a96840e2d68243019d1d87f8e84e6"
+  },
+  "vermilion#8": {
+   "name": "CAPT BOREA",
+   "inv": "6aaf528c5b695c706fee51bbac65d8cc2a737b17b805a0f77640dca91ee87424",
+   "design": "e755af327c434af98b866937e0bbeb353f37f534d67771ddd0e577a800b8b752"
+  },
+  "vermilion#9": {
+   "name": "HARBORMASTER",
+   "inv": "7f6ce0a06c8687313fa0e0a785e3ab1db5a02f2ab8fd32bb06391b1b416c7030",
+   "design": "ecb42c0f679f775964ee6ec375805ce3283650030c2d185bb4369b37179fcd7d"
+  },
+  "stanne#0": {
+   "name": "VALE",
+   "inv": "84e842dd8f6077effb0da87d2540b9ef870834dd79abdbde7d83bcb9a64f0533",
+   "design": "f9353d54f804c15a6e3492a9be1bda8bf411d2e0bb8e283a63a9b851cfd0a5d3"
+  },
+  "stanne#1": {
+   "name": "MARA",
+   "inv": "aaae6a2f2a3d38b7abe436f570e595fa60eb0095e17d923a662cf7c6fd662574",
+   "design": "37962f52cf81245a1570e3abea06afa48fead339516b710c07f3d0f8f15bd61d"
+  },
+  "stanne#2": {
+   "name": "JULES",
+   "inv": "66d654129a73f182f9dcd38f4fecb09a086bc2d363e894adafb64a0a02c8cfac",
+   "design": "8150d7614d6693c46a0f533a6162e4cb5c3301dd2f1c8dc381e7fb6cef813c9e"
+  },
+  "route11#0": {
+   "name": "GAMER HUGO",
+   "inv": "f32cbe784121b6f6d97e5432b6543bab08cb27ce6d0b7842f0bd2ff354631cc5",
+   "design": "27e7479ae6c95ad423adde598b90144ee12f714f869a214a8c6264077d792162"
+  },
+  "route7#0": {
+   "name": "LASS MINA",
+   "inv": "2fd0dd899aa20a27a67cc1c9a0f3e30776e7bfe48ddd12ff59d7e77ba8a6a4fb",
+   "design": "788e8d82ed10942d32f2acc01d538b30f13eef751b53f98ac61b63ffdb018f42"
+  },
+  "celadon#0": {
+   "name": "ELIAS",
+   "inv": "4fc6cfda53153355c94fbf01057cbf86013985665d5c16be7366eb1847bd5ebd",
+   "design": "792bfd3c56066d20ce99167d9e38d34bd50cb89b2581d2d086219f1f9559c402"
+  },
+  "celadon#1": {
+   "name": "HOSTESS",
+   "inv": "754c73ca6b2335a52238bf1090dbb2b2c1be342db93ef6603cd00b533dd400cf",
+   "design": "ade8c0512a8aa0c4fd190dc66f712540a17c5a83d995e1c6d0312e8192983972"
+  },
+  "celadon#2": {
+   "name": "PERFUMER",
+   "inv": "0563cc76c9e9041708511d92b99884ff2ffad6c3b94db63b7602fbf565bfbfc5",
+   "design": "7089fff734486f07de93c9ee120d1bdcea3dd26061a1bca8c96688ab108dbc86"
+  },
+  "celadon#3": {
+   "name": "MART CLERK",
+   "inv": "2aa3baad61b6a224264ad4c69beead6edfbd84af954f9c4b0bbc33a42ac05159",
+   "design": "322b3251d89ef992ab0c3a9519407a2d3c74fef70c4b846e318ad9a7feb89749"
+  },
+  "celadon#4": {
+   "name": "GARDENER",
+   "inv": "c4a3c1d2664e05891b4428ae63da18cf5180ea4a4d244724ef3b26605c852f08",
+   "design": "eda3f15dc35e211d411d56b817629df2e1862dac8119b566949944282ce2d632"
+  },
+  "celadon#5": {
+   "name": "RUE",
+   "inv": "0d7b005747b63767e622575f2585faea8ff0ffec0a92abdc09765ddb6699a583",
+   "design": "7559c505ce9b7250ca2c6567103c71f9be7de6daacc034c6544d7099c545bc77"
+  },
+  "celadon#6": {
+   "name": "COLE",
+   "inv": "ae7bf640f05d9b58df5ebec9484ab4dce2347b0a8d2ecfe6ca2b04eff00893cf",
+   "design": "cdb97656fb021738d40e11f0558a22e308979279ce51c52dbeace26d75370707"
+  },
+  "gamecorner#0": {
+   "name": "PRIZE CLERK",
+   "inv": "e5ed4c29ce7946dc762921d52f3b37d6edd670376174bc087f27c2ad1c8857d8",
+   "design": "f2bfc4b5fe7293ffe3df3704c8ba68e4897969aeb391b116a92172f37a94e5ea"
+  },
+  "gamecorner#1": {
+   "name": "COIN CLERK",
+   "inv": "0e8e6dd2471c680199d07f07b7c7fb4b291cd70c84ea3f504c5c8deef79e23dd",
+   "design": "f3f798c900fdc306cf741c5049ddb3738b101225778598343678df43205d7775"
+  },
+  "gamecorner#2": {
+   "name": "FAIRY CLERK",
+   "inv": "08f79e27f7d7452343f445b74c105953a323b104a0a396d4e8fce3adb47ec728",
+   "design": "26adf75875357811b1dfe450792cac9842e4ab5f83854595d504cf27e1fb8bce"
+  },
+  "gamecorner#3": {
+   "name": "REGULAR",
+   "inv": "0e4213739e5500f0a3b1b46abcef59186e6bba0a50c5fb68993afe083eb1154b",
+   "design": "b87ca49a796566e27467f48b39d0a46ade5fdcc88c465bb6b679100673a187c1"
+  },
+  "hideout#0": {
+   "name": "SENTRY SUE",
+   "inv": "dd77fe0575a9d010ed57fb40c9fb4a37f16a2b7ce607f9a0fbe2057f697b51c7",
+   "design": "e57e457b6fd206f6b3349aea3a2215fd50b77e4fd9232fac75a6613d16ac4f1d"
+  },
+  "gym-cerulean#0": {
+   "name": "MARINA",
+   "inv": "a2b3b995cfc8e790f8177348dae6fd75886f162c3f648dbef49c6eb12c420c4a",
+   "design": "6f2df334d8967b44b943a38ceb7b87c30896b7453c9d6ee73042a54ae9ae1eed"
+  },
+  "gym-cerulean#1": {
+   "name": "DIANA",
+   "inv": "a87ddd03ceade1dd61fab598e21b318ed7dcddf741a43e23b93013ada0fd04b6",
+   "design": "18700c2c82e3c4eced16cde6a94debe95374faf114bddf983c9adac7613fa900"
+  },
+  "gym-vermilion#0": {
+   "name": "LT. BRANDT",
+   "inv": "fb93ceb465ef8335ee381a9116143a867c367fe551891d808a044bac4bafe740",
+   "design": "4e567d06f6efaeef664b91821b8f89cf62f2a9d5008586153467d3b3351edeb1"
+  },
+  "gym-vermilion#1": {
+   "name": "WALT",
+   "inv": "d270a0109e0e3d3cba9873825c1499c5e795bbff880c5a7d953c8b1bab4df029",
+   "design": "680286a0a78ae16f90a85aeb75288d8f8d99648996f87d2c8afb89f9652719df"
+  },
+  "gym-celadon#0": {
+   "name": "VERNA",
+   "inv": "3665022731c5bad3cc0811a18447f748d7eff74c629b6626cca297a94a98a220",
+   "design": "bb77221cffec71083f8db36c01b1fded4e2951c5e9f3ed6700c7dc9384c0ae0a"
+  },
+  "gym-celadon#1": {
+   "name": "TAMIA",
+   "inv": "05eea314349d9089d6401ff3f4c142a884de8080c169b8e6e7d49a7da85aa332",
+   "design": "79477aee36d9d425eb9cc1eb73d8d1a822f1c19c7ed722d561c345fd84d999b5"
+  },
+  "route8#0": {
+   "name": "LASS PAIGE",
+   "inv": "6480eb7e98c4b61af5b1e903e8456f644d02839bdd1b3300f5e7585feac377de",
+   "design": "321efe4b3692884b32e10dcf5bec6033c60e4d0c217e7202a470881a57e18902"
+  },
+  "route8#1": {
+   "name": "GAMER DOSS",
+   "inv": "618f520778c2754971fe5a8b30333b2ce9065374148765e5a61f21e9b6ed0944",
+   "design": "27e7479ae6c95ad423adde598b90144ee12f714f869a214a8c6264077d792162"
+  },
+  "saffron#0": {
+   "name": "SEER IVO",
+   "inv": "ded2c5c1d976b833e128e6ceb2e43e6e8c39cc8bd21971646de01f76679cde54",
+   "design": "ea3ae5e827ca72ec989cffe99ccde0ace8c7cd829b9bf4260746eaf379483ed4"
+  },
+  "saffron#1": {
+   "name": "COPYCAT",
+   "inv": "f4215d12a655489d9fec8e52af898ef16856f7c1bc4707bc0b2509c9ede66fc0",
+   "design": "748c4e372b539ad3676b0c171158061e9b42f54e41037a4bd5be528180a2361a"
+  },
+  "saffron#2": {
+   "name": "MART CLERK",
+   "inv": "20f51e8e06be27c59e73fa7e6a8f78ab4a8985088cfc008c0f16baa0a1f6b577",
+   "design": "322b3251d89ef992ab0c3a9519407a2d3c74fef70c4b846e318ad9a7feb89749"
+  },
+  "dojo#0": {
+   "name": "MASTER KO",
+   "inv": "cd8daeb11671166b329b2792eb26ce88d2fa2af950f6ccd4e094ea621d3093d3",
+   "design": "62d0836c0f62614cdd3e745bd6c31076b9f1aea524e876ae0fd09dad2d4d9a8e"
+  },
+  "dojo#1": {
+   "name": "MONK TETSU",
+   "inv": "53bb6682e61c5b8e10eda660bccf99adbac387e15b1bb305a18916bb4181ded5",
+   "design": "89bc19ddbd555b8d59b518ad531296053728aef50d88f8002af4c95bd3b023b0"
+  },
+  "dojo#2": {
+   "name": "MONK BENEDIKT2",
+   "inv": "a8d648e6450641138b58271b69a67240246c1f37bb0963cacd489785f6c0cca0",
+   "design": "175cc2c7ae1a618df46bcb3089d558a536e7b028e94514a77cdc312db8173358"
+  },
+  "silph1#0": {
+   "name": "GUARD VEX",
+   "inv": "774dc2d1c8331b3e373d1a4fc452cfa799e23624de6c58b6a585f3a035644e9d",
+   "design": "43553c38705c8a9b5fb7e9cbd4fccdc09ee1280229d45e9afcaa5eeee72a5383"
+  },
+  "silph1#1": {
+   "name": "EMPLOYEE",
+   "inv": "cf4384a17bf95515470c134ee24b9eb38f5b2457eddd628d94eb08c0c3fc4a9a",
+   "design": "5e1ef13909f6319a4a706192b3942cf8ab113eb1a1c04fa6350de3291e7cf0d9"
+  },
+  "silph1#2": {
+   "name": "RECEPTIONIST",
+   "inv": "44f099f21ba67b6f0df513e402dbb46afadad46f207117dc944c0db28bf15847",
+   "design": "ade8c0512a8aa0c4fd190dc66f712540a17c5a83d995e1c6d0312e8192983972"
+  },
+  "route9#0": {
+   "name": "HIKER BRANT",
+   "inv": "198158c84d58d86626fa736dec3155686bcc75764a5c954d37cce02af1ade80e",
+   "design": "fc6c93796c07110389fa78a2583aefb49972bbcfeafa0424ddf4a8953ef28ccd"
+  },
+  "route9#1": {
+   "name": "CAMPER LIO",
+   "inv": "c054902dcee9530c6df423ce4a07cc4813846ac03d84c1a39d0c68a0f3f64403",
+   "design": "8923303f041a7add6f1d332f420669bfb6caa91567b7e0cafd0c5ea4780acd90"
+  },
+  "route10#0": {
+   "name": "ENGINEER RUI",
+   "inv": "dbfd7dd5fc7e4397e09953db09285c8ee3a7fff0cb29385139ef63b6a56806e9",
+   "design": "be193547f2fbb1d7d58ae55687be5a26f5f65b62921b58f414d53a5d257ea9bc"
+  },
+  "powerplant#0": {
+   "name": "CARETAKER",
+   "inv": "075a2ef8e862071e0bd762f6c080335f244d04e3ca2fb7ea221829dce23ffe6d",
+   "design": "fe9663aa1c6bec353262b27168475e7ab5c020fbf1ca85b4a4236a249dd1f546"
+  },
+  "rocktunnel#0": {
+   "name": "HIKER DOSS",
+   "inv": "a2cb7e2dd4e6255a651f5d4cf7b5a85ebc67edd489b69eb5ed99e7468162f7c3",
+   "design": "fc6c93796c07110389fa78a2583aefb49972bbcfeafa0424ddf4a8953ef28ccd"
+  },
+  "lavender#0": {
+   "name": "VOLUNTEER",
+   "inv": "5efe060492710ecf47fe8f761e7b3de32d2d4a5a5ac7ae0eb27476ed3502d2ce",
+   "design": "9a23cb2c1f867300151329260713d3378b98bed16d7e15b14b874aa5412b03e1"
+  },
+  "lavender#1": {
+   "name": "CHILD",
+   "inv": "9ee691b16012ec5d36b0f34d4a421cd23f11b7055303158276bd37a34151ac1c",
+   "design": "607d8b232bc1945509d99743c6a4fd18f2940d9e1ca846f980ae692944b80fc1"
+  },
+  "lavender#2": {
+   "name": "MART CLERK",
+   "inv": "6ceedd17225a4f09bd3042d4dfc6c2ca2e91d6acca03370fa627774afec1f889",
+   "design": "322b3251d89ef992ab0c3a9519407a2d3c74fef70c4b846e318ad9a7feb89749"
+  },
+  "lavender#3": {
+   "name": "ELDER BRAM",
+   "inv": "ae07254f907aca8007bcb353f00f3c6febc6c843cf223f55646a6e913491bcd2",
+   "design": "cde5ea7c61956c588812afcbc08bd57631ccba289a1e2f4ea3b81c953030a968"
+  },
+  "tower1#0": {
+   "name": "VALE",
+   "inv": "71599d19b09a533efb85a9cd28a26b5e9b097f7f546f154c41dfc6f6563bf420",
+   "design": "f9353d54f804c15a6e3492a9be1bda8bf411d2e0bb8e283a63a9b851cfd0a5d3"
+  },
+  "tower2#0": {
+   "name": "MR. FUJI",
+   "inv": "2f67f3f0ba7c763ad6301317538cc62acc5fba66db40791874aca22d77bf6116",
+   "design": "792bfd3c56066d20ce99167d9e38d34bd50cb89b2581d2d086219f1f9559c402"
+  },
+  "route12#0": {
+   "name": "FISHER ED",
+   "inv": "62334e29022475f3cee40877d716c9e08ec100a51df7b144630702634c3f56f4",
+   "design": "2750aad39c4652ef51894e47d0bd5ae83a23bd77932af051d222fe29f1df80d2"
+  },
+  "route15#0": {
+   "name": "BIKER REX2",
+   "inv": "eb4f6339bc6cc433443795fcf59fbddfd99c746beddb5fc3ec7317b5991a84f6",
+   "design": "6766d01a8117cbf6f922ca9e83e3eba73728e7fc42a9e0e6926590bddeb5f37f"
+  },
+  "fuchsia#0": {
+   "name": "PRESERVE WARDEN",
+   "inv": "da4193e421841b821a7cdc72078c667374a2930cf6ef4abd14dbc30798954b9d",
+   "design": "6196f53b2d7c133f0a95eb44431f07c2bdb7b51820d1bba6d7b2c5a82f5f700e"
+  },
+  "fuchsia#1": {
+   "name": "ZOO FAN",
+   "inv": "19c9bd9c613397ee2dc5cb51c5e4432f7bef6cae041f9539824076c1c2319115",
+   "design": "560e7e77edab9fad227afc3166004dec3a07a7b94ee8a8a6e3dd12e57e1e85a9"
+  },
+  "fuchsia#2": {
+   "name": "MART CLERK",
+   "inv": "271cad209f08da375fc6f1bc2a2c93d66b3ed0fa05d36b3e709b22305f58c72b",
+   "design": "322b3251d89ef992ab0c3a9519407a2d3c74fef70c4b846e318ad9a7feb89749"
+  },
+  "fuchsia#3": {
+   "name": "JESSA",
+   "inv": "a96286d8387f9409325df7499743f65dfd0bba657c136495f587f63abdfe5da7",
+   "design": "aab77723173fdaebfdbe0088c49d81a12a7f06a9b1241414e12030ab009d35bf"
+  },
+  "gym-fuchsia#0": {
+   "name": "MAREK",
+   "inv": "d073d081cbf9edba27393a83b5ce6ed552d4843740b007c5ccf4a0d4fe5c6995",
+   "design": "394d8664661b43e85b3904b3d6cbcd45e165b120ac0abb2db99230ca6c641f27"
+  },
+  "gym-fuchsia#1": {
+   "name": "EDGAR",
+   "inv": "46474d13d04a4f8ed202bdf1404c657d9c5c750f56bb1d44e893acbed45cd5f3",
+   "design": "4ee82bb6a31577515058f7d83829032b4167d433ce0a46ac0059495725cfe22b"
+  },
+  "safari#1": {
+   "name": "GATE RANGER",
+   "inv": "957ffd5ebb1ef70e6b32fd4f71398b1bdef93b51e4a040e41684e14fc51cb37b",
+   "design": "b3b16b0a00f5e723d2936400a2747909d1d12f5e5b921289f4bb58041798ece5"
+  },
+  "safari#2": {
+   "name": "KEEPER",
+   "inv": "397f6f7d3d440f6c4ee8dfe50c772e305db367fc2fe5e229f30d2126b8440908",
+   "design": "ec7fa2795a0d479263ddecb338899ec0dbc87aef7a8c6500d0aca4393801301b"
+  },
+  "route16#0": {
+   "name": "MARCUS",
+   "inv": "1679403a7cefdcb70fc044e4cde09744635870a64c1b674ac1e36657464b2417",
+   "design": "4cc3e32eb4ae997d9ef16d67d2a4c90f952478f74595f5efdac0fcf593db7740"
+  },
+  "route16#1": {
+   "name": "BIKER JOEL",
+   "inv": "e3053b9dedb76164fc33032516dd11a2a99db1a2dcec7daea61bd5ee0d6ca85b",
+   "design": "1111cc6f17c8eeb04c3497d008f54a0e2190fe812835422a434a0d827ee0c63c"
+  },
+  "route19#0": {
+   "name": "SWIMMER ADA",
+   "inv": "194be89b2225d4a85cb53dc770fdf275e536751352374358f18a2ecac697b411",
+   "design": "861b44f4d95586b4fa0b60af5d45cbf70797132d3179433c0f6fa28b37037685"
+  },
+  "route19#1": {
+   "name": "SWIMMER KIT",
+   "inv": "7cdddcc78a162f636f59baf60189f9bf56177d989ffac57ff61b999d9343a6da",
+   "design": "42deffebe146b93672d08ba28ad094a7392400047f12ce2bf47194bdc82e8863"
+  },
+  "route20#0": {
+   "name": "SWIMMER BO",
+   "inv": "1839852d96b435c681c6095eeaffce1fde4a01b4c7215a3956adbbcfd3866b34",
+   "design": "42deffebe146b93672d08ba28ad094a7392400047f12ce2bf47194bdc82e8863"
+  },
+  "seafoam#0": {
+   "name": "EXPLORER",
+   "inv": "dc4a69f3f0ebc7081daea0d0f2f2c26159f50f7af9eb2731aaacfd9532497e4a",
+   "design": "c7b767e7b3cf1a66140a97d2550d89e529a1e7097f3e46ece3a2f906c943210f"
+  },
+  "cinnabar#0": {
+   "name": "CAPT SALT",
+   "inv": "8069271c7370888e22dc7fd4c944c982959547bf189780c90a26aa85c130b74a",
+   "design": "9ace922fc3039eeb18de28356576431db66d51f318c6f1ecab3cfd21573e3729"
+  },
+  "cinnabar#1": {
+   "name": "TOM",
+   "inv": "f16f418489e311ee01e2af52320ed238d590a7f5b581660e7f325b69a3f370ed",
+   "design": "c11516229b64ca1d6040c140a3c8579c34d702b7987abf04b0f2ae35766cca87"
+  },
+  "cinnabar#2": {
+   "name": "UMA",
+   "inv": "8b5e6c5b3b0097758a16a552d08c7ed6ba2b8e50e8b973f61590517f08851eca",
+   "design": "bb4f126e869206914315993da929760069a51327cf4e6adc062e0c143ea90928"
+  },
+  "cinnabar#3": {
+   "name": "DR. EMBER",
+   "inv": "64dca2fc0da2bf91fc08995a3bbaf6ca57664a1d86e63b292aabef038a84250d",
+   "design": "d70db4736227efdc8ce33fe4b4948e0a3c54054b9c57324160ec017b89b0bc56"
+  },
+  "cinnabar#4": {
+   "name": "MART CLERK",
+   "inv": "68d9602c06b74af4f09f390487eb51afd20c51285aaed035afb33156deee55c2",
+   "design": "322b3251d89ef992ab0c3a9519407a2d3c74fef70c4b846e318ad9a7feb89749"
+  },
+  "cinnabar#5": {
+   "name": "LAB TECH",
+   "inv": "3dbb39bb6d47cd271d613d30ad543ae2954c2a350efa30960e7494965714e39f",
+   "design": "d5ebe1b73a40e3ee1482c3c9b73e3c239a28f0054cfdb3a48a7af10ac0426b1a"
+  },
+  "mansion#0": {
+   "name": "JOURNAL",
+   "inv": "6631eb1ea717f0bc3bf893cd3e07bea5821801edfb69dd855499c714df41d880",
+   "design": "3dcaf760ba51af9a7b4269be24eac9c98989ae389dc14fbdeff8b74d896238eb"
+  },
+  "viridian#1": {
+   "name": "GYM GUIDE",
+   "inv": "695feb10917bfa6c5368807aaa79c02f65fdaffe75ac2ff0286ddf835726f7d1",
+   "design": "24cbd4636e5af2d0b7c2bdd42e895090658d7b4661981fa4aff75ebe6a9a082e"
+  },
+  "viridian#2": {
+   "name": "ACE MARLOW",
+   "inv": "4d739624cd434c0374662e35cfa112fb9e3061aab84f189a0d3d8bcbf92b30af",
+   "design": "3e443da19287e2e763bb0507cdaeb5efbc85efc02de1ff8751350efa09139939"
+  },
+  "gym-viridian#0": {
+   "name": "VANE",
+   "inv": "8702bcadd134d0c2c4c7156e701783c0a63f5f4f424c952af268c1e07aba0751",
+   "design": "0701843a02a2c69732227a975c45d0163b1ac097c10bae24473dcc4540992e0d"
+  },
+  "gym-viridian#1": {
+   "name": "ACE RUE3",
+   "inv": "2bbbb8421f1eec48d6c8be56ed27532e7685546f47ab936befce5b80b45f052f",
+   "design": "23b4288d483426c52720038c10f30efd70e9ff36f69c509d157ac5d47a4f09a2"
+  },
+  "route22#0": {
+   "name": "GATE GUARD",
+   "inv": "384fb2f33d8ea0df9e0789fd0a0521f22121c18c4a1342d1b4b37298b29a2067",
+   "design": "0ee71f32947b8060f4fe6e5ccd854dfb5c162c9b6292d2445e730420ce375f4d"
+  },
+  "victoryroad#0": {
+   "name": "VETERAN",
+   "inv": "0117c44152c706b8783c42939ebb6ab8f38974a76cdb52a0c1f7862fc2c7cae8",
+   "design": "30cf68246d72ebf8f1e688e2dbf9818ae82aa04ef34dd7a31ebf8f4347bf5a8b"
+  },
+  "indigo#0": {
+   "name": "MART CLERK",
+   "inv": "ef2311211caef17fc0982d4905bcdc124ced4b6bc97ca851eb87b523e9e84af3",
+   "design": "322b3251d89ef992ab0c3a9519407a2d3c74fef70c4b846e318ad9a7feb89749"
+  },
+  "indigo#1": {
+   "name": "LEAGUE GUIDE",
+   "inv": "0ba318f00ce39f87cbdf1f686bfcf0c79b00fefba3f2faf7bdbfe973a602e6bd",
+   "design": "0119cace8578eeb6c11e4d646fe64b33de4f768b9cfecae489a0c9960609c861"
+  },
+  "league#0": {
+   "name": "ISOLDE",
+   "inv": "7c5403e4005a500ef852e09c83eecd5e046080f3c7ca7d11fcaccd41f550d03f",
+   "design": "8d110b2ccc54fd56ca3bdcf8e67efe694194610b183f6abf4b64240368df5a14"
+  },
+  "league#1": {
+   "name": "GORAN",
+   "inv": "4f8154f54ca58ddda6e53bec667f10baa1e5dbe4b534335debb6db6840155d1b",
+   "design": "2b0da064d7ea32b9711bb90550846298b8bc46cab75399b3b9fb3d51413a6d15"
+  },
+  "league#2": {
+   "name": "ODESSA",
+   "inv": "279b1da0307f78b481563a7c7940f7d3e491b0d23cdf3bfa2548a7507600a124",
+   "design": "d26b161ccabbc67093abff89f09898e0b3f2c7c77b723bf9f8162be2d358bedc"
+  },
+  "league#3": {
+   "name": "DARIAN",
+   "inv": "e6ff68ad550153971b891c0c8dde429a7f1217a13b9e40a4b6b48c5d06f7bba4",
+   "design": "5812fc5a58eed8a769e1524d2614345bb4f8e5c6843761a663c28ede5786eaa1"
+  },
+  "league#4": {
+   "name": "CHAMPION",
+   "inv": "9f954dfc3a907a99d5ba51991d2f0fe7500af2db96dbc81fa6720c1264df6a53",
+   "design": "902acf9203f424a6a98ce0fd64cb4d5e739ba36ef2ab16cf3d81b42b8f4117eb"
+  },
+  "newisland#0": {
+   "name": "WRECKED LOG",
+   "inv": "a904c1f2d1e33f9a2c44bedb0664fd117860f87174895373e0db21ad42b165ee",
+   "design": "3dcaf760ba51af9a7b4269be24eac9c98989ae389dc14fbdeff8b74d896238eb"
+  },
+  "pallet#0": {
+   "name": "MART CLERK",
+   "inv": "9a327c60908d20ccccefe28e94e5021cd8c3c2ebb4f8ed49f20b06cd9470625a",
+   "design": "322b3251d89ef992ab0c3a9519407a2d3c74fef70c4b846e318ad9a7feb89749"
+  },
+  "pallet#1": {
+   "name": "VALE",
+   "inv": "2c695802d20998e3cda45d5876fcf70b9c9fc7ffd606f08f1aa6d232b0b19f86",
+   "design": "f9353d54f804c15a6e3492a9be1bda8bf411d2e0bb8e283a63a9b851cfd0a5d3"
+  },
+  "pallet#4": {
+   "name": "PROF. HAWTHORN",
+   "inv": "1b89ec7d96cf3a9434f2fc296cca6b559449e45d727fd962eeb081a393a44b65",
+   "design": "7c447abc01ed96463060235f34492d3a4e078e49a277ecc40c365ae449ec620b"
+  },
+  "pallet#5": {
+   "name": "FERRYMAN",
+   "inv": "b86aa4709ce1d206aea1709a4b1b033d5f328a69657cc4dbdc5bbaf117f4b924",
+   "design": "9ace922fc3039eeb18de28356576431db66d51f318c6f1ecab3cfd21573e3729"
+  },
+  "pallet#6": {
+   "name": "CAPT YAMATO",
+   "inv": "10e406d98acb9ef49ddd89e86e7214215b2254bc09a8b8a7d4d664230462225a",
+   "design": "e1f92f44256d39c7dcc51c9e15714664ce29f5b33b0fa3bb6420fe4a92c06460"
+  },
+  "pallet#7": {
+   "name": "CAPT FRONTIER",
+   "inv": "bf7e7de2c4c71f805843fd2a3b26832bb67ab852128dfee005d4cc58c27edc9f",
+   "design": "0c50cbe6fabda91f3b9986cdcd9724128baeea741428cd1173769769caa71c5a"
+  },
+  "pallet#8": {
+   "name": "MOM",
+   "inv": "b58d7615b521493f18d332ddadf78bbd7c3e014c2668cae6d9620c69fea55b6a",
+   "design": "e3827757197e2a923388e9fcfe81996d83216ffec105a9994d408d6e8a76e59f"
+  },
+  "center#0": {
+   "name": "NURSE",
+   "inv": "74001bc37a5b968952ba42d07c3379dd2db1c6bb6950b0228eb254f3f4d0023e",
+   "design": "6a5632779a648efba7b901df72f4961781697c95a4000afa82ad8819bbad0879"
+  },
+  "center#1": {
+   "name": "SPARRING COACH",
+   "inv": "79c7e3e333eae62f575ffe6e91df09e1fec0c6d5d6a38b32301440d7b9cef5d7",
+   "design": "6daf2b6e0d9647624e1358b34751f8ef221372b32ef3ba463d863a5229a93292"
+  },
+  "center#4": {
+   "name": "WAITING TRAINER",
+   "inv": "6c988a1c2245985b95787964900c6658bc405bb1ca3b0f292931423d0631dfd8",
+   "design": "4b3063b56c4f0d33efa7c74bc0223526b8856b1c93d62fc992a0a2bdcbc32b40"
+  },
+  "gym-saffron#0": {
+   "name": "SYBIL",
+   "inv": "87bce6ec919e1460bd82beb0a48e9b7e2f219176200e7b96d0d680e6896fcabc",
+   "design": "9e383bffa154db231f299d7c13ce015de0aa90ab8cbd62e68e4004c74a567775"
+  },
+  "gym-saffron#1": {
+   "name": "MEDIUM LIA",
+   "inv": "ab1773d1235cb47ecb68b4e8f5000e6c3a6b565805e686c206137481dd95bec3",
+   "design": "ce7838390c82e3c7a7b0c7ed7c992482e1db3ce274043638bbdb4b34ef0c28ea"
+  },
+  "gym-cinnabar#0": {
+   "name": "IGNAS",
+   "inv": "bd0d646aa50b64d06fd1b09edc51b68fc84e70ac9cea97612b33d74b6affb023",
+   "design": "0b15781e23bc9156fba7515898a73d2dd36a60487149995be724b4e80312b329"
+  },
+  "gym-cinnabar#1": {
+   "name": "BURGLAR OTIS",
+   "inv": "63472150bf21b548ea557b3b1a24f83f54ddeb36546607043ac1e3ae8b6b7296",
+   "design": "d4d324f1e3e1629eebdef44590b56cbbe17f6150ffebbecf5a8f60849afd7821"
+  },
+  "silph2#0": {
+   "name": "THE PRESIDENT",
+   "inv": "92e7a0828d5aa5a010218969c93a6ce5806f2030688991d9daa8c3fea62536ec",
+   "design": "ab75ebbdec0fef33381ad2479dce553d16e86f2a40cc021d8ecaee4a63a7ef53"
+  },
+  "silph2#1": {
+   "name": "AIDE NOVA",
+   "inv": "9c2bca8cdb4bca4b4156a91c180fe98d0108cd99c6aec203973809bc64fe0383",
+   "design": "6299aeb55de995027fb3f456252bd77159ada86f6129c5eb4f87e80edb41c7a9"
+  },
+  "house-fuchsia#0": {
+   "name": "AUNTIE MOSS",
+   "inv": "e40e24a4e3de6e3c9e5523fbd64a9c11ab062c237869bda8a5aafedb73066592",
+   "design": "792bfd3c56066d20ce99167d9e38d34bd50cb89b2581d2d086219f1f9559c402"
+  },
+  "valencia#0": {
+   "name": "CAPT PICO-VERM",
+   "inv": "3c9817e56cdc60e124b56428246e84bbe86b26b72038dc23226ebf8989e6d419",
+   "design": "e38933a36947c5ffc33d5044e704ebd9407c16dabae020f753c60b1897b44af8"
+  },
+  "valencia#1": {
+   "name": "SAILOR GORAN-MIKA",
+   "inv": "892bea4e677e0abb78cf913a9f61cec65c86da5266f03efa9460e9aca492ff23",
+   "design": "83d1a342e731d5e4828e5be34f39dc0cb442f00aaafb980493d5ea93246067ca"
+  },
+  "valencia#2": {
+   "name": "CAPT DUNE-NAVE",
+   "inv": "18935b1770106d9600bb3e4ae5d6b561c32d4ad8cb12dd922f89c3f9038818f1",
+   "design": "5a9a8fddca80387d06ac8652a59584703efa820139b95103972c7bbfc06f9b53"
+  },
+  "valencia#3": {
+   "name": "MARA",
+   "inv": "04c40d704c3aca8ff8e03e2ed7a2af3b69d83defe493d6b1ed9e35c737eb9e2a",
+   "design": "d83b87a0719d43a3ee06613cce1c9250f8d230a05661d8390f6da26fdde27f31"
+  },
+  "valencia#4": {
+   "name": "THEO",
+   "inv": "617023691655f2e7d5b64e67b8127f65f0f1451832c70cce898d31b9bb53c36a",
+   "design": "41da1b3845bc49b1e8ea76e1a773f12851743f59f4a6f0354ea76e2f76154d00"
+  },
+  "valencia#5": {
+   "name": "MART CLERK",
+   "inv": "8e03db328e1bfdc8baedbd988e59b91c4316ce23228879ec8daab0311d042f73",
+   "design": "e65e5e9a6ffa883736cc86c71c4ddc33c61cddc4ce1ee08128482695bb76b33b"
+  },
+  "mikan#0": {
+   "name": "CAPT REGAL-VALE",
+   "inv": "576801273532914cfa0afc77fc95913b85e455de9274c2e34928c682e37db7b0",
+   "design": "e38933a36947c5ffc33d5044e704ebd9407c16dabae020f753c60b1897b44af8"
+  },
+  "mikan#1": {
+   "name": "SAILOR LILO-NAVE",
+   "inv": "57e2efe99e5d7f92845655fc8f1a8199dcfaf20b553cd6982d6f069d9682aad9",
+   "design": "83d1a342e731d5e4828e5be34f39dc0cb442f00aaafb980493d5ea93246067ca"
+  },
+  "mikan#2": {
+   "name": "SELA-FAN REN",
+   "inv": "8339510e440df10ba7d0419f046a9a4959f28c56ae84f07ed79b0bbf5b538f63",
+   "design": "b94ae09d287be692025fd4b6188310fb4cd35abd11dd30710f89cff097023ac9"
+  },
+  "mikan#3": {
+   "name": "ULA",
+   "inv": "5344e9c3305cfc1bb5f2ca082cc43912e2cb521f71e6046226beeba24327d1dc",
+   "design": "7ed44345e4ccb30a91c564a3f5347cd9a80a08d4b79ebd23e4a0c0dc24555e2d"
+  },
+  "mikan#4": {
+   "name": "MART CLERK",
+   "inv": "8445a36c965c27a81898e93591a89c33d42a59f57266d91bce3201ad66863591",
+   "design": "e65e5e9a6ffa883736cc86c71c4ddc33c61cddc4ce1ee08128482695bb76b33b"
+  },
+  "navel#0": {
+   "name": "MART CLERK",
+   "inv": "9f2a0fcb9816e9b4be2aa202f7ceec119c94a339a940ef7549a25bdc8bd144e2",
+   "design": "a53a509f435d28a8a6d6ab82bb4dcee8025a30a5d0d292ea709bc6be5d69b9c3"
+  },
+  "navel#1": {
+   "name": "CAPT FESTUS-VALE",
+   "inv": "c00f9d15d18ab8b154e7b1c3137524d77b96b5b3211c1ae21787938b2ced8ce1",
+   "design": "e38933a36947c5ffc33d5044e704ebd9407c16dabae020f753c60b1897b44af8"
+  },
+  "navel#2": {
+   "name": "SAILOR LILO-MIKA",
+   "inv": "cdb5d80d851efa9e42dd90f1af19d9ed657aef06831202d486ec3964d42fcbdc",
+   "design": "83d1a342e731d5e4828e5be34f39dc0cb442f00aaafb980493d5ea93246067ca"
+  },
+  "navel#3": {
+   "name": "CAPT MARINA-BERGAMOT",
+   "inv": "f8ba5d9c0f4656b5ab5b0da6341736d3ae578eb52452d79088b30c4c49213a13",
+   "design": "5a9a8fddca80387d06ac8652a59584703efa820139b95103972c7bbfc06f9b53"
+  },
+  "navel#4": {
+   "name": "BOULDER BEN",
+   "inv": "054a48fa482bb07b90ae2b9fc08cf126a3a37f60e3c5d9e0f89d510cc20ba23f",
+   "design": "42f987de31003ff4f70ff77e95b963e3d42e82be96d2107c6d379905c6916fd3"
+  },
+  "navel#5": {
+   "name": "IDA",
+   "inv": "d31fa7c2519c62f81c978c873571b87ff03a6330f29c4b5e2a6b7b7fc8201f7b",
+   "design": "68416f9e009abbc57242b2e24a24c94d8b9ac7223b6c6bdaa261a2a7dff98032"
+  },
+  "moro#0": {
+   "name": "MART CLERK",
+   "inv": "a2aed0c7d7e0cacbeee0ebe4c812519f6f6b35db3996f8201fa75113fa9b570c",
+   "design": "a53a509f435d28a8a6d6ab82bb4dcee8025a30a5d0d292ea709bc6be5d69b9c3"
+  },
+  "moro#1": {
+   "name": "CAPT GORAN-NAVE",
+   "inv": "6cc575f422e127f082931250e964cdc52f2b7a7462aaabf79b298cf1dbfb8511",
+   "design": "e38933a36947c5ffc33d5044e704ebd9407c16dabae020f753c60b1897b44af8"
+  },
+  "moro#2": {
+   "name": "SAILOR GORAN-TROV",
+   "inv": "e832a1852a2e6be816d911d20719066f8107c6b77d158b843e534016f5d8beca",
+   "design": "83d1a342e731d5e4828e5be34f39dc0cb442f00aaafb980493d5ea93246067ca"
+  },
+  "moro#3": {
+   "name": "WREN SR",
+   "inv": "d8a95fcd1426d92e0e5753137335b1b1b324eba73ed5aa81b3a17b2d5edd2a70",
+   "design": "20d2c79307d04240e45542916956c2525d9dd9896b783b3ec0463e8d2c6acdee"
+  },
+  "moro#4": {
+   "name": "PIP",
+   "inv": "298cb103359b643cd65936de26d385e7cb1970f25b57c4e861337b48be7ad140",
+   "design": "f4f704c5b78bf9bf2c6a07577576aa4d4f2754cc570215869e297a8457c078be"
+  },
+  "trovita#0": {
+   "name": "CAPT DUNE-BERGAMOT",
+   "inv": "1059642e58aa38871a1ec536ee454a6af7c3ad7410647d1b52201125bbee8cf5",
+   "design": "e38933a36947c5ffc33d5044e704ebd9407c16dabae020f753c60b1897b44af8"
+  },
+  "trovita#1": {
+   "name": "SAILOR DUNE-KUMQ",
+   "inv": "83a4545d90311bd42e6c92199a8cb800e8a6fc845e4b65ad613bce2ee4908a28",
+   "design": "83d1a342e731d5e4828e5be34f39dc0cb442f00aaafb980493d5ea93246067ca"
+  },
+  "trovita#2": {
+   "name": "CAPT DUNE-PUMM",
+   "inv": "b193f7c8e6a0a6ee596a627659ab6e3b87caac297c0cf386b8d9b63f55f89802",
+   "design": "5a9a8fddca80387d06ac8652a59584703efa820139b95103972c7bbfc06f9b53"
+  },
+  "trovita#3": {
+   "name": "SPIKE FAN SORA",
+   "inv": "17f4bff5e9e9ed2f5ccdb4ceef4dbd2ac22b63b5a7752c6f354286505d1441de",
+   "design": "ed7584f56b648e5831de6ea7c523f12578bb9c5909aaff5bf599d232ea604c8e"
+  },
+  "trovita#4": {
+   "name": "MARE",
+   "inv": "0eed82130f9057c6c01fded396ed53217ae7e35d35db3f8f65598a8aa1ed6935",
+   "design": "19b1e47dd20ade19d5ce30fa4bdd934498b2c543499a03448b86f9d89cb1b69c"
+  },
+  "trovita#5": {
+   "name": "MART CLERK",
+   "inv": "7f9ad92e12c199cd34dba8821e6ddd6f02edc2e562261bda5e8b2c094401530e",
+   "design": "e65e5e9a6ffa883736cc86c71c4ddc33c61cddc4ce1ee08128482695bb76b33b"
+  },
+  "kumquat#0": {
+   "name": "CAPT FESTUS-TROV",
+   "inv": "d9944437c05e5080bc3b94d466a3ba446be59112882b8b7948633d42163cf86d",
+   "design": "e38933a36947c5ffc33d5044e704ebd9407c16dabae020f753c60b1897b44af8"
+  },
+  "kumquat#1": {
+   "name": "SAILOR GORAN-PUMM",
+   "inv": "b7e5cd803bd43723119b57f6d34194de31768832a05aef77cb1c9d48f05c1ea2",
+   "design": "83d1a342e731d5e4828e5be34f39dc0cb442f00aaafb980493d5ea93246067ca"
+  },
+  "kumquat#2": {
+   "name": "LILO SR",
+   "inv": "269d31a0f3732cdfbe0218e23f9587fd3d10feb7a723eb21e767e41b2ac2ad0c",
+   "design": "6aaf5ed7f4a2e5f883fa9b4f11aa49226db95787e2825aafb4ffdf90d74e35e1"
+  },
+  "kumquat#3": {
+   "name": "SOL",
+   "inv": "96c222214c17e5e6ff2525dea1de5de8184e68b2e9f2cc0aaa9181cf76e7880e",
+   "design": "c0ab534eaba86dcaa945131612be4c49b8957d949740853be88bd4dd513acff9"
+  },
+  "kumquat#4": {
+   "name": "MART CLERK",
+   "inv": "1e45a071c6f8cc3b2b1fad60bc6c72206cafee2f100454b2e7c940d0b25c5be3",
+   "design": "e65e5e9a6ffa883736cc86c71c4ddc33c61cddc4ce1ee08128482695bb76b33b"
+  },
+  "pummelo#0": {
+   "name": "CAPT REGAL-TROV",
+   "inv": "853edd1d9e01d503ae5097d9d4cc9e472c12e6b3f07c2006fb75f4802a40dd91",
+   "design": "e38933a36947c5ffc33d5044e704ebd9407c16dabae020f753c60b1897b44af8"
+  },
+  "pummelo#1": {
+   "name": "SAILOR PICO-KUMQ",
+   "inv": "2612b38fc17903726809fe6b9c4de0b8456261db2722ca20578ffdbaeb4a1367",
+   "design": "83d1a342e731d5e4828e5be34f39dc0cb442f00aaafb980493d5ea93246067ca"
+  },
+  "pummelo#2": {
+   "name": "CAPT DUNE-SHAM",
+   "inv": "7158e6587b94fd4b8e958f298703d25e042afe5f92b336e37a9951a118cb822e",
+   "design": "5a9a8fddca80387d06ac8652a59584703efa820139b95103972c7bbfc06f9b53"
+  },
+  "pummelo#3": {
+   "name": "REGAL FAN ANA",
+   "inv": "562130043d9a5baf63d437c62e3227940ed488b94163e984d64cf0bcfaef75de",
+   "design": "d83b87a0719d43a3ee06613cce1c9250f8d230a05661d8390f6da26fdde27f31"
+  },
+  "pummelo#4": {
+   "name": "TOMAS",
+   "inv": "3f54193117aeb76db51331a166955ac66d2ab5693353a2ce062826351558a059",
+   "design": "190e77e2b6e11ccf563f49f0c7ce09fec0be274f6ed5f58c8f6502b3c5228b88"
+  },
+  "pummelo#5": {
+   "name": "MART CLERK",
+   "inv": "7b4e88f1ea65fc3868162c7590e9f710c935fea430b837ea34231b962dfe6dd0",
+   "design": "e65e5e9a6ffa883736cc86c71c4ddc33c61cddc4ce1ee08128482695bb76b33b"
+  },
+  "shamouti#0": {
+   "name": "MART CLERK",
+   "inv": "76d38105b14d156f6832754c54dd8bb251e6167fb3fbf723aadb32d432432a75",
+   "design": "a53a509f435d28a8a6d6ab82bb4dcee8025a30a5d0d292ea709bc6be5d69b9c3"
+  },
+  "shamouti#1": {
+   "name": "CAPT MARINA-PUMM",
+   "inv": "f064c4bef3b24005e42845b62953d4016333334e277f7a0ba939dc13b3e83520",
+   "design": "e38933a36947c5ffc33d5044e704ebd9407c16dabae020f753c60b1897b44af8"
+  },
+  "shamouti#2": {
+   "name": "SAILOR LILO-FIRE",
+   "inv": "33188130fc23d418abb8d71e59062cfc9819ad4d14bef23693acf09de519e390",
+   "design": "83d1a342e731d5e4828e5be34f39dc0cb442f00aaafb980493d5ea93246067ca"
+  },
+  "shamouti#3": {
+   "name": "CAPT MARINA-ICE-",
+   "inv": "8f5bb17c34e43c39bb84263ee5f8390b149214692f59f36952a688f3592a2710",
+   "design": "5a9a8fddca80387d06ac8652a59584703efa820139b95103972c7bbfc06f9b53"
+  },
+  "shamouti#4": {
+   "name": "SAILOR MARINA-LIGH",
+   "inv": "24a33aa9483aff7b80ed0cb6ce89747e0e07165031ec6afcecf8496a01821360",
+   "design": "186e3d4849af0bbe043c3ed69fc8f4473ed1727adc15dff0170ed19de609616f"
+  },
+  "shamouti#5": {
+   "name": "FEST ELDER MIRA",
+   "inv": "56ea57c2a4b2a2064310a6993995658e0883992bdf64beb638d791e85549f5d6",
+   "design": "68416f9e009abbc57242b2e24a24c94d8b9ac7223b6c6bdaa261a2a7dff98032"
+  },
+  "shamouti#7": {
+   "name": "KAI",
+   "inv": "c327a6fe837208372686ad62e0630f46c69d7062d8b51706162734e0b38cdb76",
+   "design": "5de2ef6eae58a9b6a30bbac36a03ee052150353271ec0a658508730af13e4991"
+  },
+  "fire-isle#0": {
+   "name": "SAILOR EMBER",
+   "inv": "adb33be3effe5a3f36a000c61653ad6b72b2b753b4a1539759e8783ff725c597",
+   "design": "e38933a36947c5ffc33d5044e704ebd9407c16dabae020f753c60b1897b44af8"
+  },
+  "fire-isle#1": {
+   "name": "EMBER KEEPER",
+   "inv": "168f174bfa8557eae5e7bd6b82c05f841fef0d948eef518d9b0ecbf03772283d",
+   "design": "6970fae87ec8c89129200b4f235ca9e7a7914d9161f0df2cf5c61b235e46e887"
+  },
+  "ice-isle#0": {
+   "name": "SAILOR FROST",
+   "inv": "dd652672e52cd61a03c0de431da335506ba4f302b3387038b82d5a1feace40a1",
+   "design": "e38933a36947c5ffc33d5044e704ebd9407c16dabae020f753c60b1897b44af8"
+  },
+  "ice-isle#1": {
+   "name": "FROST KEEPER",
+   "inv": "7aa8e94b1f6174e8f3edcb04556ae7b161a658d997726568f02c8f5ea5d6e098",
+   "design": "6970fae87ec8c89129200b4f235ca9e7a7914d9161f0df2cf5c61b235e46e887"
+  },
+  "lightning-isle#0": {
+   "name": "SAILOR VOLTA",
+   "inv": "5574f808359284cf84eb9b9350ed1faaf539cc4115421bf014f471be2088ce2d",
+   "design": "e38933a36947c5ffc33d5044e704ebd9407c16dabae020f753c60b1897b44af8"
+  },
+  "lightning-isle#1": {
+   "name": "VOLTA KEEPER",
+   "inv": "a663978fc928369c9559809aef3d4c621f1b39f98532d6f8e24b0fdddbccb14a",
+   "design": "6970fae87ec8c89129200b4f235ca9e7a7914d9161f0df2cf5c61b235e46e887"
+  },
+  "ivy-lab#0": {
+   "name": "PROF. ISLA",
+   "inv": "c27bcaa539fd812f8cb639922163c593c1ab047209c95870e6680452c4ab75e7",
+   "design": "0a203a5f30843e28a6e0347048136360db54df345f6c4016e31f44f2de8a2bb7"
+  },
+  "ivy-lab#1": {
+   "name": "AIDE SOLA",
+   "inv": "64426cdf279f2370e4613c8dcedda3b6549d6de11dfa554b2996e0692f8055a6",
+   "design": "e450f649cef2e4e94b5a1910db0352b44aed4f98871ed8fbe6c8d18be50d7ec2"
+  },
+  "mikan-gym#0": {
+   "name": "SELA",
+   "inv": "288bef39ff921d3a001170bd1d344295e5dbc2ac264e09ff92415a726e793dc9",
+   "design": "39411f84be74280c8c2adbd4d7f81461c4cfdf9c96115ac9a315542ba496fe6c"
+  },
+  "mikan-gym#1": {
+   "name": "GYM ATTENDANT",
+   "inv": "6fedf698b34b59fdb50f754859daedd31ac2bcffd691a7d04c21eaf79e1928a6",
+   "design": "23ca5929dc7dba4f1cb7a556b9b61f53e918b1063b420b3ad47829a24faf754e"
+  },
+  "navel-gym#0": {
+   "name": "OREN",
+   "inv": "cbb8b65fece2379a823c5460f259d98de575a813e5e34ef2f062c6f882a83803",
+   "design": "ef5256489318762801c174ea28f6fb196a5d6d2015dda0875a837b9e672f8df4"
+  },
+  "navel-gym#1": {
+   "name": "GYM ATTENDANT",
+   "inv": "6fedf698b34b59fdb50f754859daedd31ac2bcffd691a7d04c21eaf79e1928a6",
+   "design": "23ca5929dc7dba4f1cb7a556b9b61f53e918b1063b420b3ad47829a24faf754e"
+  },
+  "trovita-gym#0": {
+   "name": "RENZO",
+   "inv": "931b4a126b04f54b1ff3d12e794cf30d00fd6c9377ac940ab63b99c696fe4821",
+   "design": "36a7250f7678ad3359b95b804c26871887e841f6b29e0b5b6f9838d399589314"
+  },
+  "trovita-gym#1": {
+   "name": "GYM ATTENDANT",
+   "inv": "6fedf698b34b59fdb50f754859daedd31ac2bcffd691a7d04c21eaf79e1928a6",
+   "design": "23ca5929dc7dba4f1cb7a556b9b61f53e918b1063b420b3ad47829a24faf754e"
+  },
+  "kumquat-gym#0": {
+   "name": "ALBA",
+   "inv": "b008cb6a01cb3b57778f8537556ee546e89ccdea98db9f03eda5aecda219ca4d",
+   "design": "0496894d5478b8cedec7d24095472f6521f65f04c23e5feb3ba161e8bf2985e3"
+  },
+  "kumquat-gym#1": {
+   "name": "GYM ATTENDANT",
+   "inv": "6fedf698b34b59fdb50f754859daedd31ac2bcffd691a7d04c21eaf79e1928a6",
+   "design": "23ca5929dc7dba4f1cb7a556b9b61f53e918b1063b420b3ad47829a24faf754e"
+  },
+  "pummelo-stadium#0": {
+   "name": "LEAGUE OFFICIAL",
+   "inv": "cd8e17180321e709311c84112e7466ddc5612aa852f1a3b2016a620c638cb154",
+   "design": "9973ea29ad2502547a39d83d3637c5165c092dd4477bc771a3e62fef3363dc5a"
+  },
+  "pummelo-stadium#1": {
+   "name": "BARROW",
+   "inv": "5c2af819f1ac01fc641f69b49bcf70a2e1a6f2f27befd47e5ee669d34a2dbbea",
+   "design": "1daa12bc56d55f4b2dc90e07ff5a0b5830d101353631d72f76589cd709f45eec"
+  },
+  "pummelo-stadium#2": {
+   "name": "STADIUM USHER",
+   "inv": "d40f38be30612ef0517f1aab914f0eae062e1d15d1d752ad8ad188251b7d0afe",
+   "design": "332c74a2d267e81defb897ec7f6454d1c617d014a0b6d99e1518fc628cd5be3f"
+  },
+  "shamouti-shrine#0": {
+   "name": "SHRINE KEEPER ANO",
+   "inv": "c92b23cc94015800f17fc0e9f54dbe7fbd97a579c59dee09203a27f116091421",
+   "design": "7ae08c365a83a2d32deb280c1fe4a4e606f519975094a4ebd2beaadcf1927fe8"
+  },
+  "house-valencia#0": {
+   "name": "RESIDENT MARA-VAL",
+   "inv": "29b21b3daf34426d6443b0abfe9d7ae2179ee7c58e1238c37379f40cf372b3d4",
+   "design": "6aaf5ed7f4a2e5f883fa9b4f11aa49226db95787e2825aafb4ffdf90d74e35e1"
+  },
+  "house-mikan#0": {
+   "name": "RESIDENT ULA-MAE",
+   "inv": "8dc101c7fb9dda4c621d2cd9c3f3a408b2fb87781b8fe430c8069baaf17610ef",
+   "design": "6aaf5ed7f4a2e5f883fa9b4f11aa49226db95787e2825aafb4ffdf90d74e35e1"
+  },
+  "house-kumquat#0": {
+   "name": "RESIDENT SOLANGE",
+   "inv": "1cc995cee7ad35e64aa1cdc1b94f1aa03ceea7f7dece6998eac3c9ab940a3773",
+   "design": "6aaf5ed7f4a2e5f883fa9b4f11aa49226db95787e2825aafb4ffdf90d74e35e1"
+  },
+  "house-shamouti#0": {
+   "name": "FEST KEEPER WREN",
+   "inv": "c58bc4c8dc1797bc84e581d381e16f308e8d02c63f93450a620e69486c547d0c",
+   "design": "6aaf5ed7f4a2e5f883fa9b4f11aa49226db95787e2825aafb4ffdf90d74e35e1"
+  },
+  "newbark#0": {
+   "name": "MART CLERK",
+   "inv": "9d2e6b38794ce66240b6c9bafe31d76b650118cdae5c0d5d6797bf41f619f32f",
+   "design": "a53a509f435d28a8a6d6ab82bb4dcee8025a30a5d0d292ea709bc6be5d69b9c3"
+  },
+  "newbark#1": {
+   "name": "CAPT WESTWIND",
+   "inv": "09934252943c7eb15a75c1791f7280271885bb0010bce02c8534c178b9060bc7",
+   "design": "978854e6ef629d13441d20d8dada284f8767e6992d5be585f2a7a084580e672b"
+  },
+  "newbark#2": {
+   "name": "WREN",
+   "inv": "acdef610a11b90ccf680c5d12d90f496ee0abdf177f93de5604f8e253ef84d7f",
+   "design": "a52ecca8e2ae2f63df3880fe8efcab07cec56a5811fc11d6ad11f22eae0b6768"
+  },
+  "newbark#3": {
+   "name": "TOMO",
+   "inv": "933d2ade95928d55d7e4f880d42d411f7895b97c8cbf17f5c5aa742dda6ae74f",
+   "design": "0eec48d0b0124db5dbe0c70b808d9319cd2cf39a5310537ea5a223f91090ebb0"
+  },
+  "newbark#4": {
+   "name": "ELDER MARA",
+   "inv": "ad28719d525e915bb652db1d4b01bccd3f90641bd2b58aae3112a68d2af3b529",
+   "design": "ace5bf96837da58c4da8af242578bb7f7e3d9a6caa3072819d1919292e9e1906"
+  },
+  "cherrygrove#0": {
+   "name": "OLD MARIN",
+   "inv": "fa67b6a30d0fdb88d92cdbfb9d269d5a869d72d3b686a54ade1041eafb6ef20e",
+   "design": "9fe0d2d882a26824b99e3f8b9dac29911594c81fd6879bc206e15bca9947c96f"
+  },
+  "cherrygrove#1": {
+   "name": "PETAL",
+   "inv": "938d2a43e6dc95f356afadb88f409b26e2a3739c0d8f55e93ab4cfcc4c5c6270",
+   "design": "5b5c4269e0a4cd22bf59e74cd2fc84ec6cbd919daa2e7b4ac9c00ca1e7776f77"
+  },
+  "cherrygrove#2": {
+   "name": "GUIDE GENT",
+   "inv": "91dfedb7bf76c83488a83cc7cffa9656d5aa4c83b53d0fb97175bdb95a8e52a1",
+   "design": "e4df8859f2c0b36fd3e5f94433d4cda3b34f74529cbb1dc43cbfe9a03fa6f971"
+  },
+  "cherrygrove#3": {
+   "name": "MART CLERK",
+   "inv": "7e381cbe0e9f783646be2e5eceb21a9f38695efeda0af523bb6924b84254c687",
+   "design": "a53a509f435d28a8a6d6ab82bb4dcee8025a30a5d0d292ea709bc6be5d69b9c3"
+  },
+  "violet#1": {
+   "name": "IRIS",
+   "inv": "75e47c0f7c862c6a0c793600d548f01b10ad54fabde0584f3e0c7307159cc9e1",
+   "design": "5b5c4269e0a4cd22bf59e74cd2fc84ec6cbd919daa2e7b4ac9c00ca1e7776f77"
+  },
+  "violet#2": {
+   "name": "OLD TOWERKEEP",
+   "inv": "c18582b9770d9a15f4eda7c3a45b2e3c98ba51b57747b25054250a118b2bafd6",
+   "design": "ace5bf96837da58c4da8af242578bb7f7e3d9a6caa3072819d1919292e9e1906"
+  },
+  "violet#3": {
+   "name": "MART CLERK",
+   "inv": "ff65daa4a386f0c288997bebbe5836e1a153695eb64947d3f66d0f0b1bab7b16",
+   "design": "a53a509f435d28a8a6d6ab82bb4dcee8025a30a5d0d292ea709bc6be5d69b9c3"
+  },
+  "azalea#0": {
+   "name": "MAIZIE",
+   "inv": "ba2560e7f292d497bc6e5ea93cdf32931b85fd7a65caefcc5231caed39638049",
+   "design": "0eec48d0b0124db5dbe0c70b808d9319cd2cf39a5310537ea5a223f91090ebb0"
+  },
+  "azalea#1": {
+   "name": "WELLKEEPER JONAS",
+   "inv": "400efb70d7e2279bc3bd6c13ee1c08c7982de13c5578fabccc6693d669d97121",
+   "design": "ace5bf96837da58c4da8af242578bb7f7e3d9a6caa3072819d1919292e9e1906"
+  },
+  "azalea#2": {
+   "name": "CHARCOAL KID",
+   "inv": "a2618688cb7399a099d527625e44e032ea57d6cdb24c58c37b84e93fff9fdb1c",
+   "design": "b93091bbbfb5c593c1eac432fc2f7d3f8a5c69dfcbc44e4e7fe253197377aa8e"
+  },
+  "azalea#3": {
+   "name": "MART CLERK",
+   "inv": "4a9e69be5c57e03c1ed877277e58ec27428d92fdfc0b5f9a6acd9bbd077ed89b",
+   "design": "a53a509f435d28a8a6d6ab82bb4dcee8025a30a5d0d292ea709bc6be5d69b9c3"
+  },
+  "goldenrod#0": {
+   "name": "DJ MARY FAN",
+   "inv": "dcd5d3090d94ea79293b60ceac602f030b1b1f046dd1e582ac8a98b833343417",
+   "design": "5b5c4269e0a4cd22bf59e74cd2fc84ec6cbd919daa2e7b4ac9c00ca1e7776f77"
+  },
+  "goldenrod#1": {
+   "name": "COMMUTER KOBE",
+   "inv": "891869171ae4f845354c220ae2ebf12e9dea638c62c383999050bc0c97c692c7",
+   "design": "e4df8859f2c0b36fd3e5f94433d4cda3b34f74529cbb1dc43cbfe9a03fa6f971"
+  },
+  "goldenrod#2": {
+   "name": "FLOWER SELLER UNA",
+   "inv": "9e64ee4428c220ae43a2efc457b1b373cda6a9e4474e09830e835c29203e5aa4",
+   "design": "0ee4dc9c566d356fff9ccda7b33f6208f07a6ca9142eb9d361233328ee55f59a"
+  },
+  "goldenrod#3": {
+   "name": "BIKE HAND RYO",
+   "inv": "87395a7e28d1a03565694ef7f2a198d8a4d4661942e34bf52aea582a58a132fc",
+   "design": "b2381a9f6c2c23bff3a9c19f880506307e6d55cf4f5b8ebf6b7f409e3e4528bf"
+  },
+  "goldenrod#4": {
+   "name": "MART CLERK",
+   "inv": "663e17f02ce0070a624d25a27268576409855be3302c11c59846fec3c5b99227",
+   "design": "a53a509f435d28a8a6d6ab82bb4dcee8025a30a5d0d292ea709bc6be5d69b9c3"
+  },
+  "ecruteak#0": {
+   "name": "SAGE OF THE BELLS",
+   "inv": "976ff5a3a37c07c78b4001500bc5c5b094ac8a1ad4aa2dc636fb8d9333e8b59b",
+   "design": "43e934e58b2960f113b3f7a23ec7fd136c54a3ba5b1ba5af85e4d82ec539b7ab"
+  },
+  "ecruteak#1": {
+   "name": "KIMONO DANCER SAKURA",
+   "inv": "45a6d6e2aeee9a71c69ea4901a0ea05762e2304ab4563152dea49d903827d836",
+   "design": "6aaf5ed7f4a2e5f883fa9b4f11aa49226db95787e2825aafb4ffdf90d74e35e1"
+  },
+  "ecruteak#2": {
+   "name": "HISTORIAN ELIAS",
+   "inv": "8796807848a3dd3d8994e580c875a61e89b34cec4235ff0b1a99818a532503ca",
+   "design": "ace5bf96837da58c4da8af242578bb7f7e3d9a6caa3072819d1919292e9e1906"
+  },
+  "ecruteak#3": {
+   "name": "MART CLERK",
+   "inv": "5ef4dd9591c6720f7698bd27d3260b9cba93d136ee32becccb07e2a57a511ca2",
+   "design": "a53a509f435d28a8a6d6ab82bb4dcee8025a30a5d0d292ea709bc6be5d69b9c3"
+  },
+  "ecruteak#4": {
+   "name": "BELL WARDEN YUKI",
+   "inv": "8d5c603c66a98d2ffd194d3391706af2779e026837700019a956dadbc8960154",
+   "design": "2df10cdcd6135e4d62fe113dc41646185d2f77770ce50a45af60e99ef767a640"
+  },
+  "ecruteak#5": {
+   "name": "ELDER GENSAI",
+   "inv": "4c8cd47a9b85bad72015e26b745338311faa8c344ced2d6be3cdcef19a2476bb",
+   "design": "2df10cdcd6135e4d62fe113dc41646185d2f77770ce50a45af60e99ef767a640"
+  },
+  "r29#0": {
+   "name": "HIKER BRAM",
+   "inv": "7a6940f33537d468b7ad7fbc6b265883e8fc347a7831ded170de02c046dd3353",
+   "design": "30c311ceda8065670178196708cfd737eca455bb21d0d4e3666586d3399ad0e5"
+  },
+  "r30#0": {
+   "name": "CAMPER ELI",
+   "inv": "1b277f12e33173be30e3ac7b39b9131dc3d5180c0f5258e7cd1257816b0be971",
+   "design": "30c10b246b61b1956f421b92a60ac35d910601f38ba726e79afc6527c3b034af"
+  },
+  "r30#1": {
+   "name": "LASS FERN",
+   "inv": "1a47215b2f66470e4bf677711e47720d8e31370c5fbc34272cf1e53a8ade03ef",
+   "design": "08977cc1648a83a1304c0879b3c6e8ae8b6400f19b8650ed2cfeadbafe1c833a"
+  },
+  "r31#0": {
+   "name": "YOUNGSTER COLE",
+   "inv": "9f57313f7c0a368d15b358d6690f36bf118ea9bea1a827a31299d0ed2e03f718",
+   "design": "b93091bbbfb5c593c1eac432fc2f7d3f8a5c69dfcbc44e4e7fe253197377aa8e"
+  },
+  "r32#0": {
+   "name": "HIKER SOL",
+   "inv": "c933b71d8ea96ce9785005307195cdb4e7746e2dc8dc90fd5f8570943f759bb0",
+   "design": "30c311ceda8065670178196708cfd737eca455bb21d0d4e3666586d3399ad0e5"
+  },
+  "r32#1": {
+   "name": "FISHER WRENNA",
+   "inv": "70defb050acb520c97f716a01d5843ae023ef4f72acaa60373415d2735494768",
+   "design": "db080858c52b8e6c66ba4db8d335862c0d0620e34267de768b5262b914dad4c5"
+  },
+  "union-cave#0": {
+   "name": "CAVER DUN",
+   "inv": "e09e7bdf7b2150325ce73c31c81ee3baa63c863b4cb5d439d4d283b4ca5f0321",
+   "design": "88a4aec224df09c50f526a2405305967a9dd4432104ef6d8cd883de3bd0b88a7"
+  },
+  "r33#0": {
+   "name": "LASS WILLOW",
+   "inv": "d03770fdda14c3cc54f9443e1f81ae5c91ea426e7ea3b405ed43327783039609",
+   "design": "08977cc1648a83a1304c0879b3c6e8ae8b6400f19b8650ed2cfeadbafe1c833a"
+  },
+  "ilex-forest#0": {
+   "name": "BUG CATCHER NILS",
+   "inv": "aa72382e4679643b0b68d3f64f8012dc500c48c4ace462504bda70769b3e3869",
+   "design": "55b09919c7f5b696899856cf82d4d7cb55be723cf0965f33c8eb0eb8332dc9bc"
+  },
+  "ilex-forest#1": {
+   "name": "CHARCUTTER RUE",
+   "inv": "070ac4a2161afafa1f62f7d1eae3505b36b7a8da6ec5b3d36f5dbc72383880b2",
+   "design": "b2381a9f6c2c23bff3a9c19f880506307e6d55cf4f5b8ebf6b7f409e3e4528bf"
+  },
+  "r34#0": {
+   "name": "JOGGER AMARA",
+   "inv": "e9cd28b8279c76543623253deee2e95116c56c7afc6d61975c7a593f15a9be53",
+   "design": "5b5c4269e0a4cd22bf59e74cd2fc84ec6cbd919daa2e7b4ac9c00ca1e7776f77"
+  },
+  "r35#0": {
+   "name": "PICNICKER GAIL",
+   "inv": "c40b7b4859a6169b7e4274a79e6dda1175dbdca53f1bc223d041e396913219ac",
+   "design": "08977cc1648a83a1304c0879b3c6e8ae8b6400f19b8650ed2cfeadbafe1c833a"
+  },
+  "r35#1": {
+   "name": "CAMPER ORIN",
+   "inv": "684f26ea9ae1e6b74f96a6e4543c9eb231867212f37ed0164bbcfe617c83aa3e",
+   "design": "48ddaa0619368a6d8021acd1530757f64a3b7cb0febbad42a0b056ad4288716d"
+  },
+  "r35#2": {
+   "name": "STORMWATCHER IBEN",
+   "inv": "efbf6a10f7fd52ba82cd133a03c699a2f346abdcfebddcdcd2f17c4ad4d7a85c",
+   "design": "46d83ddb814ebce4422c0361311448868d93bb48bb2f0ed1defe32853def6461"
+  },
+  "national-park#0": {
+   "name": "PARK KEEPER LOU",
+   "inv": "57c30d9544a0388e5d972b397d03553f1ccfd73d5c028a08b6c120460439d589",
+   "design": "bc7d2dadb3360be9081cd690f6790d452984e2af58d4e0001d3d750fe94afa10"
+  },
+  "national-park#1": {
+   "name": "BUG MANIAC TESS",
+   "inv": "c293605cfcc36434c3cc5df39b1ee35b67663a999e489aee4e6d5ef5f660ea20",
+   "design": "5b5c4269e0a4cd22bf59e74cd2fc84ec6cbd919daa2e7b4ac9c00ca1e7776f77"
+  },
+  "national-park#2": {
+   "name": "ELDER PRAN",
+   "inv": "2eb4be3b5bb2c421c4074d93e554c7ddbe6d866e2ae36fc995fc5f7706dd66f9",
+   "design": "ace5bf96837da58c4da8af242578bb7f7e3d9a6caa3072819d1919292e9e1906"
+  },
+  "r36#0": {
+   "name": "HIKER PETRA",
+   "inv": "3c6692e6929158c80635153192ec8500908580e44fb0c6d2bd8762753f3e5a01",
+   "design": "30c311ceda8065670178196708cfd737eca455bb21d0d4e3666586d3399ad0e5"
+  },
+  "r36#1": {
+   "name": "RANGER SOLVEIG",
+   "inv": "163c7330f93bb6ee5c306343ed5cbab1f612c14473b349b277b6f52b275ed4b7",
+   "design": "25b1a077185add28d41c5a49e5649e6da5bf4df0987df373d31fe9dbad83901a"
+  },
+  "r37#0": {
+   "name": "WANDERER JUN",
+   "inv": "ffe9f2561ee005ed8ccf77ecd771fe6d9e4012e2eb1ef65edc323873dfee3483",
+   "design": "88a4aec224df09c50f526a2405305967a9dd4432104ef6d8cd883de3bd0b88a7"
+  },
+  "house-newbark#0": {
+   "name": "AUNTIE ROSE",
+   "inv": "787bcbb9aaa41f9cde06d4cf2a2861c3f50795715125d918272aba845cab11cd",
+   "design": "6aaf5ed7f4a2e5f883fa9b4f11aa49226db95787e2825aafb4ffdf90d74e35e1"
+  },
+  "house-cherrygrove#0": {
+   "name": "FLORIST HANA",
+   "inv": "1562badcad701c86675be1edf8bfbdd3cd35236d7e15d263bf65e1c19267f643",
+   "design": "0ee4dc9c566d356fff9ccda7b33f6208f07a6ca9142eb9d361233328ee55f59a"
+  },
+  "house-violet#0": {
+   "name": "EARL THE TUTOR",
+   "inv": "486227c79d093af002c490f0a98c8983c688061198792a1cd242195b5c8aaa77",
+   "design": "e4df8859f2c0b36fd3e5f94433d4cda3b34f74529cbb1dc43cbfe9a03fa6f971"
+  },
+  "house-azalea#0": {
+   "name": "CHARCOAL BURNER ODO",
+   "inv": "9e799f9092913c37a9eddc44754e31572677d91e47fd27596e4f7749402e2d91",
+   "design": "b2381a9f6c2c23bff3a9c19f880506307e6d55cf4f5b8ebf6b7f409e3e4528bf"
+  },
+  "house-goldenrod#0": {
+   "name": "ANNOUNCER VEE",
+   "inv": "164943d1bf1aa0841dbda71dd5bd41e16e483c4eeb540875a889b4044771ec44",
+   "design": "66e701f28fe3ba9fa1368fa83f6110d688bac8c40f2318d69ca77c4e86bf7683"
+  },
+  "house-ecruteak#0": {
+   "name": "TEA HOSTESS YUI",
+   "inv": "3b30755bdae1df9bbfc5151ca0168e5137415b0569ea32268fb19c147b226a54",
+   "design": "0ee4dc9c566d356fff9ccda7b33f6208f07a6ca9142eb9d361233328ee55f59a"
+  },
+  "elm-lab#0": {
+   "name": "AIDE LIN",
+   "inv": "e6be7b15717142fec1daa5475201b15cf69b89a22b7e53e06a8fed0633051569",
+   "design": "15e22cd7644c34f3e3067ad812962beef9706a78696410c356216898711df6ca"
+  },
+  "elm-lab#1": {
+   "name": "AIDE CORIN",
+   "inv": "7f8f65fe4cd63c9f7fdb450ee1355c5c4e33567b9681b07c5f08bf84ebeebdf4",
+   "design": "e450f649cef2e4e94b5a1910db0352b44aed4f98871ed8fbe6c8d18be50d7ec2"
+  },
+  "elm-lab#2": {
+   "name": "PROF. LINDEN",
+   "inv": "043b176dd4f7dae8d228d5a0f8ce01f88ec65765db4c0beb319b256f289cf730",
+   "design": "c185fe7d4d41ff282cbab9ec3105a3c3c80fe854fd94c26de18e51135dcf0673"
+  },
+  "kurt-house#0": {
+   "name": "APPRENTICE SOL",
+   "inv": "80877ef3edc1df79b2658dc74212eecacf04c754f79965fe247c8998290117a2",
+   "design": "b93091bbbfb5c593c1eac432fc2f7d3f8a5c69dfcbc44e4e7fe253197377aa8e"
+  },
+  "kurt-house#1": {
+   "name": "HENDRIK",
+   "inv": "de06976e94b534fb612b9c4d114b5e791d784b72e4dc5fb193d2263a04aeca31",
+   "design": "5bd93becb68e4ff2b1cb0e0ebbab5b90085bdab1684d64e11c21ae4c2d7e871a"
+  },
+  "gym-violet#0": {
+   "name": "GYM ATTENDANT SKYE",
+   "inv": "02948ebaf2e4006599954281d82b6a12e10fcc33fe9d0a5e5a45c88beac8aedd",
+   "design": "b94ae09d287be692025fd4b6188310fb4cd35abd11dd30710f89cff097023ac9"
+  },
+  "gym-violet#1": {
+   "name": "AVEN",
+   "inv": "8270f9fd3d991e12248b68a5013c7318b16ca7ecc8294452a6b3ee562ce4c9ef",
+   "design": "18a034283119c70a407a1e9f234df7a06d97a2db7ad1013833bde411c23b279c"
+  },
+  "gym-azalea#0": {
+   "name": "GYM ATTENDANT FERN",
+   "inv": "6dc07985e19067fb6bedf2ea2e85368463d7925ff31fc2f978d09137fc3dc762",
+   "design": "fd762d8b0cbe59bc87fee45a0750da348f1a53a0b3a61d1f20f5296791a06ab3"
+  },
+  "gym-azalea#1": {
+   "name": "BEX",
+   "inv": "26eade1a22b381e2bdd7ab2c4ffdfb5013b2eec9113979614c51689848668dfc",
+   "design": "c35bb725bf61033a8e243d27b7effd7908e8f393681311303f7353743a1b1c37"
+  },
+  "gym-goldenrod#0": {
+   "name": "GYM ATTENDANT MILA",
+   "inv": "397fbaef1b414e01e02893e5b1a71ce9bd5a93a6f1a897ae27586af89f6c3019",
+   "design": "fd762d8b0cbe59bc87fee45a0750da348f1a53a0b3a61d1f20f5296791a06ab3"
+  },
+  "gym-goldenrod#1": {
+   "name": "WILLA",
+   "inv": "3ac0e380fffed018f18b3599e80b092b3fddc34457d7b14edd9b77f9414efbe5",
+   "design": "003a46763b9e89d7c4f28f51bee97b71ed23b4a8cee6e7a7329d18a1fc935b1d"
+  },
+  "gym-ecruteak#0": {
+   "name": "GYM ATTENDANT REN",
+   "inv": "7ff5573afac04b496951938c5eda8d6fe31b635425f14560ada0c171924a1524",
+   "design": "798b467417620b80d02e94dd7a0ab6cd84973d825818543957cb002d7b67a2b8"
+  },
+  "gym-ecruteak#1": {
+   "name": "SILAS",
+   "inv": "0c669452547636c12729bb98008ea20df084efe0442539271c8e51d75e83c74a",
+   "design": "87d75d85b98e81d72306276d617d79903f8971011ab73f11a74dcc04356af916"
+  },
+  "sprout-tower-1#0": {
+   "name": "MONK THEO",
+   "inv": "1dee62477ac3336b25bf25bbd444e2913e59315ad86e8b0cc4093419b7581289",
+   "design": "43e934e58b2960f113b3f7a23ec7fd136c54a3ba5b1ba5af85e4d82ec539b7ab"
+  },
+  "sprout-tower-1#1": {
+   "name": "MONK JIN",
+   "inv": "65b62f6884a6c20eede901246be36b60b3cdb70969407bd3da8c09aa63837889",
+   "design": "0782f4e110d66d1b7b82eece1b6c172490d0318761eb188a76af9b791a3b958c"
+  },
+  "sprout-tower-2#0": {
+   "name": "SAGE IN TRAINING",
+   "inv": "0040ce3a9d7e81eabafb466608e5c5a49a132fad138df60b3197b74b8820e836",
+   "design": "a1c7dd8beef6d4bc2b9320a6282f9e79b3c2f49f94dd60da695b00f4207fc3cd"
+  },
+  "sprout-tower-2#1": {
+   "name": "MONK REI",
+   "inv": "7a6b366313df73b482a2e6e6f8d3643ac1dc73ee9de271b1dad9b8a3e77b8b5d",
+   "design": "a69a6cb6536cc51325661ae7d2a28c71b9e968624f51d2c06668342fa413440c"
+  },
+  "sprout-tower-2#2": {
+   "name": "ELDER LI",
+   "inv": "91263e8852a4baa14a8c992172a5f11a3f8073ba08b4ad07372c9547facdc4be",
+   "design": "cde5ea7c61956c588812afcbc08bd57631ccba289a1e2f4ea3b81c953030a968"
+  },
+  "radio-tower-1#0": {
+   "name": "RECEPTIONIST MAI",
+   "inv": "23861b47619d171b1b6d4950acb24f682d54390e6e611e5cb32209278f330388",
+   "design": "6aaf5ed7f4a2e5f883fa9b4f11aa49226db95787e2825aafb4ffdf90d74e35e1"
+  },
+  "radio-tower-2#0": {
+   "name": "ENGINEER DARA",
+   "inv": "c71f0d9094d27ad1eaecab6bdb060252e14450fb0968add388b813a75be59dfc",
+   "design": "3e3f878ecef1442936b264c948c81f5b5d530e7d2a54c258920d28c85a816a86"
+  },
+  "radio-tower-3#0": {
+   "name": "NIGHT DJ SOLENE",
+   "inv": "b6a59ac6cc1af1f7ebc50d7e2812c0c9269f652a77dd4627ca0ceea599a1efd9",
+   "design": "a52ecca8e2ae2f63df3880fe8efcab07cec56a5811fc11d6ad11f22eae0b6768"
+  },
+  "goldenrod-underground-1#0": {
+   "name": "BARGAIN HUNTER OLIN",
+   "inv": "e7b00f717bb63de9d9d71652ffcbcefbf6fd9a216048128bbb52ae6666fe4a94",
+   "design": "e4df8859f2c0b36fd3e5f94433d4cda3b34f74529cbb1dc43cbfe9a03fa6f971"
+  },
+  "goldenrod-underground-2#0": {
+   "name": "STALLKEEPER BRYN",
+   "inv": "6811d6e139d3cd9e301bde438c8c76b5bb60d6c28f820ab05ab5623605a7ad3f",
+   "design": "0ee4dc9c566d356fff9ccda7b33f6208f07a6ca9142eb9d361233328ee55f59a"
+  },
+  "bell-tower-1#0": {
+   "name": "TOWER SAGE ANSELM",
+   "inv": "a7997ecf2ca3b1d77922f7d00bc8f73bd9736939a6dffa0e4deefb6296354e6f",
+   "design": "43e934e58b2960f113b3f7a23ec7fd136c54a3ba5b1ba5af85e4d82ec539b7ab"
+  },
+  "dance-theater#0": {
+   "name": "DANCER MOMOKO",
+   "inv": "a69a71d7da01558cbe79b02ac76853c694de9487d68ba00eb40ab74fb736778f",
+   "design": "6aaf5ed7f4a2e5f883fa9b4f11aa49226db95787e2825aafb4ffdf90d74e35e1"
+  },
+  "dance-theater#1": {
+   "name": "DANCER CHIEMI",
+   "inv": "44bb01601271719c20e80fed5b3b9cc0d22d9be28a52c9428a73eb28f6e1184f",
+   "design": "a52ecca8e2ae2f63df3880fe8efcab07cec56a5811fc11d6ad11f22eae0b6768"
+  },
+  "dance-theater#2": {
+   "name": "KIMONO SISTER MOEKO",
+   "inv": "bb0f3d87e4aa3ec80264a04a334d1b69840d236400f241cfceb8efd46aa4eaa1",
+   "design": "4ac3a605d39b42d18fe6ea65575c1ca553c54f52279792d01990c4d0e7fb2162"
+  },
+  "daycare#0": {
+   "name": "DAY-CARE KEEPER",
+   "inv": "9e7da140ab2422bd1b15301d938a879aaabbc8aa46bf575c1c62281807bc9552",
+   "design": "ace5bf96837da58c4da8af242578bb7f7e3d9a6caa3072819d1919292e9e1906"
+  },
+  "daycare#1": {
+   "name": "DAY-CARE WOMAN",
+   "inv": "c2af6238f7d5e7f38a482a8b12564e252e547e1c6819ed6caaf4d77c47642cb7",
+   "design": "6ba49dc60ede5f9638848beff693f55471babdc0d986fed6d0cb65fd4246bc2f"
+  },
+  "olivine#0": {
+   "name": "CAPT EASTWIND",
+   "inv": "bc31853124d138c1487cb728265e9acb57de6c0a4e4df9f40a8c1b07094a9c55",
+   "design": "978854e6ef629d13441d20d8dada284f8767e6992d5be585f2a7a084580e672b"
+  },
+  "olivine#1": {
+   "name": "BOATMAN REEF",
+   "inv": "6144184ae370a7ec830c04f3d6911ac0f77cccd1cd83e064f3f9822f64080d9e",
+   "design": "8294f8d697a8a6d36f3521d2edbd976a69cb837e324170963392fa138019346c"
+  },
+  "olivine#2": {
+   "name": "LIGHTKEEPER ADA",
+   "inv": "6f2e4b99ac7092375b1e3dcbaa61f856682de997d33a6cff37f2b3afef130a60",
+   "design": "6aaf5ed7f4a2e5f883fa9b4f11aa49226db95787e2825aafb4ffdf90d74e35e1"
+  },
+  "olivine#3": {
+   "name": "SAILOR JOSS",
+   "inv": "76d96994407b100fa5d1d41135f85687d8f66ed997082f03f1face35942ebd94",
+   "design": "69811e6f658573e815238b46f52d68a262daf59b8b4d2105dc00639ad79cf5ad"
+  },
+  "olivine#4": {
+   "name": "MART CLERK",
+   "inv": "172121f223c55a174d7eccfe71807a1c1fe61412cbf0fd8ec2fbe77410cc9e15",
+   "design": "a53a509f435d28a8a6d6ab82bb4dcee8025a30a5d0d292ea709bc6be5d69b9c3"
+  },
+  "cianwood#0": {
+   "name": "MART CLERK",
+   "inv": "876d057923ce3f711d59a373cd0ce0e719c08fb455f1182e00872ed07168c36d",
+   "design": "a53a509f435d28a8a6d6ab82bb4dcee8025a30a5d0d292ea709bc6be5d69b9c3"
+  },
+  "cianwood#1": {
+   "name": "BOATWOMAN SULA",
+   "inv": "f5cc9c183c0bd8eb60b1715efccee2754c36b8ac6acf91da5a095165fbd509e2",
+   "design": "8294f8d697a8a6d36f3521d2edbd976a69cb837e324170963392fa138019346c"
+  },
+  "cianwood#2": {
+   "name": "ISLAND ELDER BRAN",
+   "inv": "d0ae091eb0508cd668fa5c10d090f782372ca9584e5f7bf68fd518d482c5076b",
+   "design": "ace5bf96837da58c4da8af242578bb7f7e3d9a6caa3072819d1919292e9e1906"
+  },
+  "cianwood#3": {
+   "name": "SURF KID NIA",
+   "inv": "b9367cf8fb617d2feae13b576d01e09c3d9a2c4e9f4058be767778b3b9bf34f9",
+   "design": "0eec48d0b0124db5dbe0c70b808d9319cd2cf39a5310537ea5a223f91090ebb0"
+  },
+  "cianwood#4": {
+   "name": "FISHERWOMAN NOOR",
+   "inv": "48652325926e8dca09d576c26894ab6986e27f8a7f1bd6393d7aa6674b1fd9b9",
+   "design": "027d34e0c90071ca35e9a4243cda464ead815ccee18f6e4c71de4fe78233ef95"
+  },
+  "mahogany#0": {
+   "name": "LAKEWATCHER FENN",
+   "inv": "b0993b6d70439b37d697aa9934cd0fa1617aba1fe0358b913966a19c28594950",
+   "design": "9fe0d2d882a26824b99e3f8b9dac29911594c81fd6879bc206e15bca9947c96f"
+  },
+  "mahogany#1": {
+   "name": "TIMBERWRIGHT ODA",
+   "inv": "ff483ee7b56fe47182877afad78154d4f6c3805741e86d8adf975ae4e34b6a63",
+   "design": "b2381a9f6c2c23bff3a9c19f880506307e6d55cf4f5b8ebf6b7f409e3e4528bf"
+  },
+  "mahogany#2": {
+   "name": "MART CLERK",
+   "inv": "3865d5c8c71b4ee037da12bc0735e86f9182aba08ea3ba1c39c6311ea83a4c81",
+   "design": "a53a509f435d28a8a6d6ab82bb4dcee8025a30a5d0d292ea709bc6be5d69b9c3"
+  },
+  "mahogany#3": {
+   "name": "DARIAN",
+   "inv": "2cd5702d5a3588557409cf4db7ee39dbaa34e392b2991956ba951e500800d656",
+   "design": "377f0398b3402ae3895932971a73115a4659d356c2e3b0f370fd18bdc52d89f8"
+  },
+  "mahogany#4": {
+   "name": "SHOPKEEPER PELL",
+   "inv": "18f4681a67d17e8d35a26fecd38f7507b8f5d1b21067b876c85b183ca7e2f1d2",
+   "design": "7feeb7cfef13ebb6f648abc6a2ee81c9b6828be98983a64fbb34455439fd2603"
+  },
+  "blackthorn#0": {
+   "name": "DRAGON TAMER RYU",
+   "inv": "2ae69c4542d24b68d4b4e731448d47a18c5e3792925672f92da089d42605ea1e",
+   "design": "b93091bbbfb5c593c1eac432fc2f7d3f8a5c69dfcbc44e4e7fe253197377aa8e"
+  },
+  "blackthorn#1": {
+   "name": "MOVE KEEPER ELDER",
+   "inv": "d8dc44ef0190c86bd100920c0c3c3af7d8a7f4df5c0285aa694a1d8fd4e836c0",
+   "design": "ace5bf96837da58c4da8af242578bb7f7e3d9a6caa3072819d1919292e9e1906"
+  },
+  "blackthorn#2": {
+   "name": "MART CLERK",
+   "inv": "3736bb15515eb74eacc620766b2875b288c409de837e07a7e55bf840aadfca0c",
+   "design": "a53a509f435d28a8a6d6ab82bb4dcee8025a30a5d0d292ea709bc6be5d69b9c3"
+  },
+  "silvertown#0": {
+   "name": "CONFERENCE HERALD",
+   "inv": "7666b2e1803d2affd4bdb60a411397a76a0e8b045c14b85667a0d724d56bfb34",
+   "design": "e4df8859f2c0b36fd3e5f94433d4cda3b34f74529cbb1dc43cbfe9a03fa6f971"
+  },
+  "silvertown#1": {
+   "name": "MEDAL ENGRAVER INES",
+   "inv": "dea70e2760aa4abc1a708d8b3af4c08d5e0d1ffb0ab2171bd9bb8f6a308c84f2",
+   "design": "6aaf5ed7f4a2e5f883fa9b4f11aa49226db95787e2825aafb4ffdf90d74e35e1"
+  },
+  "silvertown#2": {
+   "name": "MART CLERK",
+   "inv": "d8862837ff5c7df3d2420fd69f915526d9d1d0a283537781e24e0eaff9e4b9a2",
+   "design": "a53a509f435d28a8a6d6ab82bb4dcee8025a30a5d0d292ea709bc6be5d69b9c3"
+  },
+  "r38#0": {
+   "name": "FARMER OSS",
+   "inv": "8603c9743ac330f416bc916921e0a105829c794b27a54d4240210edf5708ec7b",
+   "design": "30c311ceda8065670178196708cfd737eca455bb21d0d4e3666586d3399ad0e5"
+  },
+  "r39#0": {
+   "name": "JOGGER MIRA",
+   "inv": "6b5d93930fd5c7f6f2da353ed300c124cf4d5419728328ee6da9cbaf54dd50e8",
+   "design": "5b5c4269e0a4cd22bf59e74cd2fc84ec6cbd919daa2e7b4ac9c00ca1e7776f77"
+  },
+  "whirl-islands-2#0": {
+   "name": "KEEPER OF THE DEEP",
+   "inv": "3dfc95041db3693435b743aca5b3b5778b491fa31be3e755120dba65a431080b",
+   "design": "43e934e58b2960f113b3f7a23ec7fd136c54a3ba5b1ba5af85e4d82ec539b7ab"
+  },
+  "r42#0": {
+   "name": "HIKER BRYN",
+   "inv": "e37c4565ea03901e7dd72cdf9935e8b03540923cb369be92f66b190ec2e09e3a",
+   "design": "30c311ceda8065670178196708cfd737eca455bb21d0d4e3666586d3399ad0e5"
+  },
+  "mt-mortar-1#0": {
+   "name": "CAVER OKTAY",
+   "inv": "492f526abf19c90a1a8c5c02b5e29de4638fff80225efda85aeabcbfb7f62acf",
+   "design": "88a4aec224df09c50f526a2405305967a9dd4432104ef6d8cd883de3bd0b88a7"
+  },
+  "mt-mortar-1#1": {
+   "name": "KARATE TRAINEE BO",
+   "inv": "1efc1258590b671ec22fa42d31e2a07b4629fae7db3f102e90f7b30d1bfe9229",
+   "design": "007b6eb440aa02e9a02df1c469fa8cb34e395afa2d10fb05b2dbff8b29ea1e66"
+  },
+  "r43#0": {
+   "name": "WANDERER SOLA",
+   "inv": "4f7247ba92e20059e01d799b3db35946179d5a1956e2916328a4e756ffc4b96d",
+   "design": "88a4aec224df09c50f526a2405305967a9dd4432104ef6d8cd883de3bd0b88a7"
+  },
+  "lake-of-rage#0": {
+   "name": "OLD FISHERMAN GARR",
+   "inv": "fe20aa37d4aae748e1ac4a5f3705783c86bdc99a18175eb43503a29b02836c10",
+   "design": "9fe0d2d882a26824b99e3f8b9dac29911594c81fd6879bc206e15bca9947c96f"
+  },
+  "lake-of-rage#1": {
+   "name": "DARIAN",
+   "inv": "e828abfa1ccfb37130df215a8010d41fd599f23c17aee243452e4762eafff669",
+   "design": "377f0398b3402ae3895932971a73115a4659d356c2e3b0f370fd18bdc52d89f8"
+  },
+  "r44#0": {
+   "name": "HIKER WREN",
+   "inv": "2ba873a9c49724c96cb02f407606954f2e8194dd616ae5f4eb1c3d352acb5254",
+   "design": "30c311ceda8065670178196708cfd737eca455bb21d0d4e3666586d3399ad0e5"
+  },
+  "dragons-den#0": {
+   "name": "DEN ELDER",
+   "inv": "a52ad0261e9328f8927ad4e91d26d1231661bd5e6487834947870d0b0326ca2f",
+   "design": "ace5bf96837da58c4da8af242578bb7f7e3d9a6caa3072819d1919292e9e1906"
+  },
+  "r45#0": {
+   "name": "HIKER DUNMORE",
+   "inv": "8e6064ed229a2225f3d09077cda8fa912bf4d17e34cec0d7b53e64d4044da5a1",
+   "design": "30c311ceda8065670178196708cfd737eca455bb21d0d4e3666586d3399ad0e5"
+  },
+  "dark-cave#0": {
+   "name": "CAVER LUX",
+   "inv": "cc4bc6a122daf2d12bd71f789b29376c8457844319455ed5b0ef3e3001e25ec4",
+   "design": "88a4aec224df09c50f526a2405305967a9dd4432104ef6d8cd883de3bd0b88a7"
+  },
+  "route-silver#0": {
+   "name": "VETERAN HALD",
+   "inv": "181a67ef10ec3e99f73c4c7758872e106fecf50c9fd7d434e339bec6c94234b8",
+   "design": "30c311ceda8065670178196708cfd737eca455bb21d0d4e3666586d3399ad0e5"
+  },
+  "mt-silver#0": {
+   "name": "HERMIT OSSIAN",
+   "inv": "2993ac405e2829637c1f0f1311833cb9a95568cc6e51b751613938aed21ec744",
+   "design": "ace5bf96837da58c4da8af242578bb7f7e3d9a6caa3072819d1919292e9e1906"
+  },
+  "house-olivine#0": {
+   "name": "NET MENDER SORREL",
+   "inv": "ecc492ac1722e5aa6cd834bd40b0077f0272e2ad2db4628d3f66bc8461b7042b",
+   "design": "6aaf5ed7f4a2e5f883fa9b4f11aa49226db95787e2825aafb4ffdf90d74e35e1"
+  },
+  "house-cianwood#0": {
+   "name": "PHARMACIST WREN",
+   "inv": "5236167083f418bcada6966b791b7942552fe03400311bb34067ec722a580028",
+   "design": "2328aecbd99a50e445c6a0a5b21ee8ed93ccceee1ffe344bece75dee8e47d69f"
+  },
+  "house-cianwood#1": {
+   "name": "ROURKE'S WIFE",
+   "inv": "3cdddddd0e32fdd74972c7245ae6152b5f6c644dcbe289289491dfc3e00553bc",
+   "design": "d2a70d3f0211322c967130ab22bd2b5dbdd41e91c775f657a9a5c5f82ee399d1"
+  },
+  "house-mahogany#0": {
+   "name": "GRANDMA TAM",
+   "inv": "402908f0ee66ab97695d2076da80f4a4ee1038894ffdd80b2935549381aa31e2",
+   "design": "1e1d2720265013748a94a1be05c30591b62596085ec8ce4c85b64336e9e8f6a3"
+  },
+  "house-blackthorn#0": {
+   "name": "CLAN SCRIBE YARA",
+   "inv": "c5935850a99600b9062b461e34a743dc198ef347c4a080b8e967c284216d7ba6",
+   "design": "a52ecca8e2ae2f63df3880fe8efcab07cec56a5811fc11d6ad11f22eae0b6768"
+  },
+  "house-silvertown#0": {
+   "name": "FLAG SEAMSTRESS OONA",
+   "inv": "90da3b7f84314f869f7635b3fda27d8f784b6da4d79db9f5bfd273911c4904a0",
+   "design": "a52ecca8e2ae2f63df3880fe8efcab07cec56a5811fc11d6ad11f22eae0b6768"
+  },
+  "gym-olivine#0": {
+   "name": "GYM ATTENDANT HARBOR",
+   "inv": "71aa66e62588704ae1bd6269491c64f553482e9f7c70e4b95729aa29107d9283",
+   "design": "da8c26a2aa8739b9efc34a266f72eae6e90bec7b3c9798c444a6a95f6237f99c"
+  },
+  "gym-olivine#1": {
+   "name": "LIORA",
+   "inv": "88c750ee2645b177e9a103c6138bf7f0f7430bb234203bfa64e9862d524bfd94",
+   "design": "4b1267d1d36b0d3d9c8e2540c8a39e931efd01312349ab618eb438953ec5ac26"
+  },
+  "gym-cianwood#0": {
+   "name": "GYM ATTENDANT BREAKWATER",
+   "inv": "9fb0a897e11faca98f687d248f9d3239ed8a135ffada7dd8d7384cb8e8f96406",
+   "design": "f645883dbd4b37af3ffe5686e09e6b5e10847c1de99ff166a62a097ade160318"
+  },
+  "gym-cianwood#1": {
+   "name": "ROURKE",
+   "inv": "d392c5c69c8c9b43041e0c7f65528b9dd1b394d1afd9303b7bb7b39cb3c937ca",
+   "design": "1cab50f065b71cc686af170f8a04b6c2583fc05c35c762249dcddf84904b371f"
+  },
+  "gym-mahogany#0": {
+   "name": "GYM ATTENDANT FROSTTUSK",
+   "inv": "16326c56df08180fe528844ca53c842f3b375a673d6032ec2e0c5183c333014a",
+   "design": "da8c26a2aa8739b9efc34a266f72eae6e90bec7b3c9798c444a6a95f6237f99c"
+  },
+  "gym-mahogany#1": {
+   "name": "ALBIN",
+   "inv": "64c08e6c5f47118ec60c07ef5a3bf35404204f2de3dd8524de566793f8db8f0f",
+   "design": "c390b37a30af14655cb8eaa82833b3af33034cc97f3aeac896a91c20ff12a5ba"
+  },
+  "gym-blackthorn#0": {
+   "name": "GYM ATTENDANT EMBERLINE",
+   "inv": "1331a52db122f419e63135fa4e3c2bbb7d016a60d4f248ef97e862d0b1453f22",
+   "design": "da8c26a2aa8739b9efc34a266f72eae6e90bec7b3c9798c444a6a95f6237f99c"
+  },
+  "gym-blackthorn#1": {
+   "name": "RHEA",
+   "inv": "55acfab00a841a419ca39d3ab57e02f3d9b863325aab3883ad658559c18f0823",
+   "design": "4132027c2fb0a0e6355c4091c3de8ef46e5720233047f08622af1dd548d0552a"
+  },
+  "lighthouse-1#0": {
+   "name": "KEEPER TRAINEE BO",
+   "inv": "7ac27d7728ba64d604d363d05a2c6cf1f79e89cdbe8a72a44df412c382c0d9b1",
+   "design": "b93091bbbfb5c593c1eac432fc2f7d3f8a5c69dfcbc44e4e7fe253197377aa8e"
+  },
+  "lighthouse-2#0": {
+   "name": "LIGHTKEEPER SOLA",
+   "inv": "ee822d5eaa6716358e34b3306c4ca5a0ca51e680dbf8f719a5a04e6f29617a1b",
+   "design": "6aaf5ed7f4a2e5f883fa9b4f11aa49226db95787e2825aafb4ffdf90d74e35e1"
+  },
+  "lighthouse-2#1": {
+   "name": "LIORA",
+   "inv": "3a323e70401afca455e5c6db52211b048aca24fd0fb304370a330284f269209a",
+   "design": "4b1267d1d36b0d3d9c8e2540c8a39e931efd01312349ab618eb438953ec5ac26"
+  },
+  "silver-stadium#0": {
+   "name": "CONFERENCE OFFICIAL",
+   "inv": "1e774d5a23025903d022d10b38a69e0c8ab7e98c1f25ba3358467145d559df36",
+   "design": "e4df8859f2c0b36fd3e5f94433d4cda3b34f74529cbb1dc43cbfe9a03fa6f971"
+  },
+  "silver-stadium#1": {
+   "name": "BRACKET KEEPER ULO",
+   "inv": "faef9f74d1beeb2d00fc51d03bf57e47ac56c737ded1e0f9d5e593c7286ff07b",
+   "design": "ace5bf96837da58c4da8af242578bb7f7e3d9a6caa3072819d1919292e9e1906"
+  },
+  "silver-stadium#2": {
+   "name": "VALE",
+   "inv": "432702b54f14bf5071cde2303a35a6cd0a6688b0191bafb56fc637f1f7fccf16",
+   "design": "f9353d54f804c15a6e3492a9be1bda8bf411d2e0bb8e283a63a9b851cfd0a5d3"
+  },
+  "silver-stadium#3": {
+   "name": "HARRISON",
+   "inv": "6b35adbb370e64ebe850b84d3a2759596d1efe6bcc4f12c4eb3200b054deddd5",
+   "design": "c8cd7ecaf6af95565af33a38c0fb06beecfcd5b33f00c2012c0e62d3ffda8926"
+  },
+  "littleroot#0": {
+   "name": "MART CLERK",
+   "inv": "977ef5ce584b69229ff63d6b1f241904176112681584f56f5de8083e24b8e4cf",
+   "design": "a53a509f435d28a8a6d6ab82bb4dcee8025a30a5d0d292ea709bc6be5d69b9c3"
+  },
+  "littleroot#1": {
+   "name": "MS. HARLOW",
+   "inv": "0668bbb5b8f2cc62eb792663a776841eb6668661f86b23b7f19066c01fa4ecea",
+   "design": "a52ecca8e2ae2f63df3880fe8efcab07cec56a5811fc11d6ad11f22eae0b6768"
+  },
+  "littleroot#2": {
+   "name": "PIP",
+   "inv": "9fc46cedc091be17085c032e9eec94d14b6000e634623519c02d3bb039b282ac",
+   "design": "0eec48d0b0124db5dbe0c70b808d9319cd2cf39a5310537ea5a223f91090ebb0"
+  },
+  "littleroot#3": {
+   "name": "ELDER BRAMBLE",
+   "inv": "1af3c08173720c07ec42702e59da58320c5523b1eb5afb09edebd75befb7342f",
+   "design": "ace5bf96837da58c4da8af242578bb7f7e3d9a6caa3072819d1919292e9e1906"
+  },
+  "littleroot#4": {
+   "name": "MAIA",
+   "inv": "a167bc71a4bcd79ef75e4b41ba49401ee121bc4e585270d970d1ed93ef705c96",
+   "design": "ded150ee37b6201943907e1e8642bf6328f0085c36c9281f16bd07c3c30112b9"
+  },
+  "oldale#0": {
+   "name": "TRACKER ODO",
+   "inv": "377a6aa87a108f0b1d900cb594144869b59111913bfc838dd9cfca8d4b231503",
+   "design": "30c311ceda8065670178196708cfd737eca455bb21d0d4e3666586d3399ad0e5"
+  },
+  "oldale#1": {
+   "name": "MIRA",
+   "inv": "6e05eb08a37cf147eccd5ff791b169257d94a9d917640548d9134050e685c3b7",
+   "design": "5b5c4269e0a4cd22bf59e74cd2fc84ec6cbd919daa2e7b4ac9c00ca1e7776f77"
+  },
+  "oldale#2": {
+   "name": "OLD SETH",
+   "inv": "95225c72d5e602888ebc14a2a3d889a1475b12fd43884e7f32e8001c6f58ba20",
+   "design": "ace5bf96837da58c4da8af242578bb7f7e3d9a6caa3072819d1919292e9e1906"
+  },
+  "oldale#3": {
+   "name": "MART CLERK",
+   "inv": "b58521d744008201be8d8860cb0625fd6496b911f4251f41f9955378a8cd6b91",
+   "design": "a53a509f435d28a8a6d6ab82bb4dcee8025a30a5d0d292ea709bc6be5d69b9c3"
+  },
+  "petalburg#0": {
+   "name": "EMIL’S NEIGHBOR UNA",
+   "inv": "ec280460af260b0e0acd405b7e86ac6a0589d72d0efee4dd7c367d3496ed2d31",
+   "design": "a52ecca8e2ae2f63df3880fe8efcab07cec56a5811fc11d6ad11f22eae0b6768"
+  },
+  "petalburg#1": {
+   "name": "BALANCE KEEPER ORIN",
+   "inv": "09a6215c3d53c9c970475233062465e8a03cc917aba51ec65a7cff0b169f8606",
+   "design": "2328aecbd99a50e445c6a0a5b21ee8ed93ccceee1ffe344bece75dee8e47d69f"
+  },
+  "petalburg#2": {
+   "name": "FISHER LIO",
+   "inv": "2b13cbdbf709638010a1040ef968ed114aa5c9e6b17e71a259723be9f4e98700",
+   "design": "db080858c52b8e6c66ba4db8d335862c0d0620e34267de768b5262b914dad4c5"
+  },
+  "petalburg#3": {
+   "name": "MART CLERK",
+   "inv": "a6f150e1f87c2e716f12d4e33279ab5cc1e884bd001e38620705e6fe137ca579",
+   "design": "a53a509f435d28a8a6d6ab82bb4dcee8025a30a5d0d292ea709bc6be5d69b9c3"
+  },
+  "petalburg#4": {
+   "name": "EMIL",
+   "inv": "531a92fe17fa6992a8c076dab337d6cd046b6e17d7613975dbfec7a5d7953de6",
+   "design": "73f99c95c6d2a49bffc0859fe337976ffb7c6b549396419aaa54f6590fb89170"
+  },
+  "rustboro#0": {
+   "name": "NORWICK RESEARCHER PELL",
+   "inv": "8b4e4b78edc15c88df21673e9f58fb4904fb4f29c6d449ae369d6e66118bd535",
+   "design": "e450f649cef2e4e94b5a1910db0352b44aed4f98871ed8fbe6c8d18be50d7ec2"
+  },
+  "rustboro#1": {
+   "name": "CUTTER’S APPRENTICE RUE",
+   "inv": "999f7e508f035b7d72c3f59dea676a3ad5ced4ef2fe89bdca9948de27e1198f6",
+   "design": "b93091bbbfb5c593c1eac432fc2f7d3f8a5c69dfcbc44e4e7fe253197377aa8e"
+  },
+  "rustboro#2": {
+   "name": "TRAINER SCHOOL KID MOSS",
+   "inv": "f3fa3a355c133440e826a37f371fa63728ecd90ac64d2538fd858e1720f5ec7a",
+   "design": "0eec48d0b0124db5dbe0c70b808d9319cd2cf39a5310537ea5a223f91090ebb0"
+  },
+  "rustboro#3": {
+   "name": "MART CLERK",
+   "inv": "30d7a7174958a8948416814ac06164516939e164080c1731ea87afb6ff5c9c37",
+   "design": "a53a509f435d28a8a6d6ab82bb4dcee8025a30a5d0d292ea709bc6be5d69b9c3"
+  },
+  "dewford#0": {
+   "name": "BOATMAN SULA",
+   "inv": "7ed45ce760cf3e2406d1aac446958acda39856e097815697ace71158f5f9ca81",
+   "design": "8294f8d697a8a6d36f3521d2edbd976a69cb837e324170963392fa138019346c"
+  },
+  "dewford#1": {
+   "name": "TRENDWATCHER IO",
+   "inv": "6bd0c720da91a376ecfb031c04002740463adddf82a385cd8b943f342db164a2",
+   "design": "5b5c4269e0a4cd22bf59e74cd2fc84ec6cbd919daa2e7b4ac9c00ca1e7776f77"
+  },
+  "dewford#2": {
+   "name": "FISHERMAN KETT",
+   "inv": "724f890b2715897632c4b69cfe8a4acb08a36917ba925ed3c71e853b5cea1ed6",
+   "design": "6b0d83fa80cb4b81770142441c833eb1753a2de43916faa17348fefd57c05cc5"
+  },
+  "dewford#3": {
+   "name": "MART CLERK",
+   "inv": "76f5557ac11bf2f4185bc7982392a19a247050bc77cd9b46eac0be6b0e198b6a",
+   "design": "a53a509f435d28a8a6d6ab82bb4dcee8025a30a5d0d292ea709bc6be5d69b9c3"
+  },
+  "slateport#0": {
+   "name": "CAPT MERIDIAN",
+   "inv": "3509cd8e27ec434f5df2a83f3b7a2e7c4ad20b8e69c7445761f5ef1526366dd4",
+   "design": "978854e6ef629d13441d20d8dada284f8767e6992d5be585f2a7a084580e672b"
+  },
+  "slateport#1": {
+   "name": "MARKET CRIER VESK",
+   "inv": "b584c08d2f9561a75c3f820812e24e1b9325d4b30a899cce7c851041de6c7260",
+   "design": "b2381a9f6c2c23bff3a9c19f880506307e6d55cf4f5b8ebf6b7f409e3e4528bf"
+  },
+  "slateport#2": {
+   "name": "MERRICK’S APPRENTICE LIO",
+   "inv": "b444e66cb3e9a079d226e16c0bc27ff88949413d346a660b420a4144a6f162f6",
+   "design": "b93091bbbfb5c593c1eac432fc2f7d3f8a5c69dfcbc44e4e7fe253197377aa8e"
+  },
+  "slateport#3": {
+   "name": "BEACHCOMBER ANA",
+   "inv": "7d52ddf30fc66bdd16c6d166ed3d0efd5dc41a7c8685c73b444d3d98b3b437cf",
+   "design": "a52ecca8e2ae2f63df3880fe8efcab07cec56a5811fc11d6ad11f22eae0b6768"
+  },
+  "slateport#4": {
+   "name": "MART CLERK",
+   "inv": "c490187f453b5151a9de5e3d3e0f162640845d0a83ee1ca4d08355f9a1019b5e",
+   "design": "a53a509f435d28a8a6d6ab82bb4dcee8025a30a5d0d292ea709bc6be5d69b9c3"
+  },
+  "mauville#0": {
+   "name": "RYDEL’S MECHANIC JUNO",
+   "inv": "f961e6ad247a5f93c17a0de8dbacede5cf6303a49d555832028ef5897e73ac11",
+   "design": "b2381a9f6c2c23bff3a9c19f880506307e6d55cf4f5b8ebf6b7f409e3e4528bf"
+  },
+  "mauville#1": {
+   "name": "VOLT FANATIC PELL",
+   "inv": "286854d9228b6fede037f2eed62ffb2f334a5678966ba5b614e7694e4247c3bd",
+   "design": "b93091bbbfb5c593c1eac432fc2f7d3f8a5c69dfcbc44e4e7fe253197377aa8e"
+  },
+  "mauville#2": {
+   "name": "CORNER REGULAR VEDA",
+   "inv": "128092081ea95e62810c5220673215826e1a83c624415a51ae5af0a61ec3b5b1",
+   "design": "a52ecca8e2ae2f63df3880fe8efcab07cec56a5811fc11d6ad11f22eae0b6768"
+  },
+  "mauville#3": {
+   "name": "MART CLERK",
+   "inv": "541c0cc529212eab02b89405ab79f27f169374a86dd4f8f48ed3df901eec495b",
+   "design": "a53a509f435d28a8a6d6ab82bb4dcee8025a30a5d0d292ea709bc6be5d69b9c3"
+  },
+  "verdanturf#0": {
+   "name": "MART CLERK",
+   "inv": "daec4d3fbf53a0e513b454afc094a2a8207e3021bdf85cdce4833d090bc4d7ac",
+   "design": "a53a509f435d28a8a6d6ab82bb4dcee8025a30a5d0d292ea709bc6be5d69b9c3"
+  },
+  "verdanturf#1": {
+   "name": "CONTEST AUNTIE ROSA",
+   "inv": "35612a291e925fab3befb2108925d0d3d7981db59d0303b0221a0f57bdb5e524",
+   "design": "a52ecca8e2ae2f63df3880fe8efcab07cec56a5811fc11d6ad11f22eae0b6768"
+  },
+  "verdanturf#2": {
+   "name": "EMIL’S UNCLE PIOTR",
+   "inv": "3bed3274c037a649ac01ad26340cb10e92ca6ede423e30ac6e0b718b26114540",
+   "design": "2328aecbd99a50e445c6a0a5b21ee8ed93ccceee1ffe344bece75dee8e47d69f"
+  },
+  "verdanturf#3": {
+   "name": "GARDENER FENN",
+   "inv": "b4c9ec2604732535650929d1a2cbcc89c69a926be8dfb48c68b8a51a9f99b40c",
+   "design": "b2381a9f6c2c23bff3a9c19f880506307e6d55cf4f5b8ebf6b7f409e3e4528bf"
+  },
+  "fallarbor#0": {
+   "name": "PROF. ANDO’S NEIGHBOR HANA",
+   "inv": "d5dc570d61a3af4552f78c35add2f05736ae3fed5cb2d82b79eee59abc741324",
+   "design": "a52ecca8e2ae2f63df3880fe8efcab07cec56a5811fc11d6ad11f22eae0b6768"
+  },
+  "fallarbor#1": {
+   "name": "ASH COLLECTOR BRIN",
+   "inv": "4590bba154e04f5cbcd748eb690721613e258878974f4d65116ccb04cdcfa2c5",
+   "design": "b93091bbbfb5c593c1eac432fc2f7d3f8a5c69dfcbc44e4e7fe253197377aa8e"
+  },
+  "fallarbor#2": {
+   "name": "METEOR WATCHER SOL",
+   "inv": "468b47d46172798e923446afce8f318935d6b9d204f744a6d49982430e85d90b",
+   "design": "ace5bf96837da58c4da8af242578bb7f7e3d9a6caa3072819d1919292e9e1906"
+  },
+  "fallarbor#3": {
+   "name": "MART CLERK",
+   "inv": "755d473ba6b45c406795fcc5753532b386004b54878c8124d0ee490584a36554",
+   "design": "a53a509f435d28a8a6d6ab82bb4dcee8025a30a5d0d292ea709bc6be5d69b9c3"
+  },
+  "lavaridge#0": {
+   "name": "SPRINGKEEPER MASA",
+   "inv": "665609cd81ba5015be1773dc9fc68d591be45f154ce904dcad100a5c87d3d054",
+   "design": "ace5bf96837da58c4da8af242578bb7f7e3d9a6caa3072819d1919292e9e1906"
+  },
+  "lavaridge#1": {
+   "name": "SOAKER VEDA",
+   "inv": "ed29ba25240d746c427cf4d6a9faf9f8c5eecd22ce8d7287998d45913323047d",
+   "design": "a52ecca8e2ae2f63df3880fe8efcab07cec56a5811fc11d6ad11f22eae0b6768"
+  },
+  "lavaridge#2": {
+   "name": "HERB SELLER KIO",
+   "inv": "31749ba699c164a8d1bfa62e889edd9412319076521f3d496db053a3c0d3765f",
+   "design": "b2381a9f6c2c23bff3a9c19f880506307e6d55cf4f5b8ebf6b7f409e3e4528bf"
+  },
+  "lavaridge#3": {
+   "name": "MART CLERK",
+   "inv": "b63556504ed32677c75b3591c8d9017a67c15cf907b614f17b6437eb38566e3e",
+   "design": "a53a509f435d28a8a6d6ab82bb4dcee8025a30a5d0d292ea709bc6be5d69b9c3"
+  },
+  "fortree#0": {
+   "name": "CANOPY WARDEN SORA",
+   "inv": "e34ab33d26ef69a4964ada95789425e88036e501819d4a61c11fb16a52b5891d",
+   "design": "bc7d2dadb3360be9081cd690f6790d452984e2af58d4e0001d3d750fe94afa10"
+  },
+  "fortree#1": {
+   "name": "TREEHOUSE KID WREN",
+   "inv": "b6c1c90e5e3ae6e8707e7a32ae21433db853e6d58e407c3b75aee9c368ef7096",
+   "design": "0eec48d0b0124db5dbe0c70b808d9319cd2cf39a5310537ea5a223f91090ebb0"
+  },
+  "fortree#2": {
+   "name": "WEATHER WATCHER ILSE",
+   "inv": "e1a17a4ed46224b7e5fc03172db4ca87097655342263d8fb125528ccd9a09005",
+   "design": "a52ecca8e2ae2f63df3880fe8efcab07cec56a5811fc11d6ad11f22eae0b6768"
+  },
+  "fortree#3": {
+   "name": "MART CLERK",
+   "inv": "d884a488c017020382a5a1525f772645187411f3f19eef2bf20e0f108ae09062",
+   "design": "a53a509f435d28a8a6d6ab82bb4dcee8025a30a5d0d292ea709bc6be5d69b9c3"
+  },
+  "fortree#4": {
+   "name": "WEATHER WATCHER ILSE",
+   "inv": "e2a1061b85832f0f2aeea27cbbc84a2db058d7b124fb784c63260d8a966ff358",
+   "design": "7afc84a4eb911c6bb1160e1e4c8761f26b4d07f5fa3903e8b030083b97a89db8"
+  },
+  "r101#0": {
+   "name": "YOUNGSTER TAM",
+   "inv": "9e5248c171a2e5552a0fdc6bf0645b54fddf3a24a3ba58f045b979dde117df6c",
+   "design": "b93091bbbfb5c593c1eac432fc2f7d3f8a5c69dfcbc44e4e7fe253197377aa8e"
+  },
+  "r102#0": {
+   "name": "BUG CATCHER WREN",
+   "inv": "2a718aa4627a227460d89d824bd21f7a8823e348b98a2b3df3e83427fbc8c20b",
+   "design": "55b09919c7f5b696899856cf82d4d7cb55be723cf0965f33c8eb0eb8332dc9bc"
+  },
+  "r102#1": {
+   "name": "LASS MIRA",
+   "inv": "36ebc378924e672c0123ef9d188f922d0232c69efc7fe4e3f9067eb2b4b6e9a0",
+   "design": "08977cc1648a83a1304c0879b3c6e8ae8b6400f19b8650ed2cfeadbafe1c833a"
+  },
+  "r103#0": {
+   "name": "SWIMMER DEL",
+   "inv": "f28a6d3ca25ba4531dad6da43b2b7e471cccd7c18c08ee60198f704bf8b43b87",
+   "design": "9fe0d2d882a26824b99e3f8b9dac29911594c81fd6879bc206e15bca9947c96f"
+  },
+  "r104#0": {
+   "name": "BOATMAN HALE",
+   "inv": "498250053551505949880b09c8c72daa9ca9b821591d23352dead40dc9159ec7",
+   "design": "8294f8d697a8a6d36f3521d2edbd976a69cb837e324170963392fa138019346c"
+  },
+  "r104#1": {
+   "name": "FLOWER GIRL POPPY",
+   "inv": "8cfd60a1d5de209cede645251ddc305509cb097047c989373b6c620cf7e3253b",
+   "design": "08977cc1648a83a1304c0879b3c6e8ae8b6400f19b8650ed2cfeadbafe1c833a"
+  },
+  "petalburg-woods#0": {
+   "name": "BUG MANIAC FERN",
+   "inv": "05302c14b1d28e5bdbd31e83d2ed88218d643c0314af6be54138dafdfba8f446",
+   "design": "55b09919c7f5b696899856cf82d4d7cb55be723cf0965f33c8eb0eb8332dc9bc"
+  },
+  "petalburg-woods#1": {
+   "name": "AURA KEEPER",
+   "inv": "0ed7f0ee20f104b680473d0e63936817573790b469c782f124527fc4435fde32",
+   "design": "b2c0d2c44113ad4290d5eb850ed4c00bf336243500c6ad90155a1a2cca18479a"
+  },
+  "r110#0": {
+   "name": "CYCLIST RHEA",
+   "inv": "4b654c8042092480ea9f11f6f7a5ff62f818b799f58f9d9658df5b1e517f16d8",
+   "design": "5b5c4269e0a4cd22bf59e74cd2fc84ec6cbd919daa2e7b4ac9c00ca1e7776f77"
+  },
+  "r110#1": {
+   "name": "TRIATHLETE BO",
+   "inv": "3e6de00cd7e13a99c68c27f4950e2d12b91d83c00f4b4ee4ac91f7570359f417",
+   "design": "b93091bbbfb5c593c1eac432fc2f7d3f8a5c69dfcbc44e4e7fe253197377aa8e"
+  },
+  "r111#0": {
+   "name": "RUIN MANIAC DUST",
+   "inv": "7811cb23ffbc04c77b1bc34fbd9514d67af567d2a1283d26494fe8212c7882f8",
+   "design": "30c311ceda8065670178196708cfd737eca455bb21d0d4e3666586d3399ad0e5"
+  },
+  "r111#1": {
+   "name": "PICNICKER SOLA",
+   "inv": "deeaadac733a4ea10d59158479df5af69abf14df99193d560a404360cbd6f486",
+   "design": "08977cc1648a83a1304c0879b3c6e8ae8b6400f19b8650ed2cfeadbafe1c833a"
+  },
+  "r112#0": {
+   "name": "HIKER EMBER",
+   "inv": "584da847cae3760b023cf296e247a5a99e1c4ec7eac1bc27b80d650b2279ac8d",
+   "design": "30c311ceda8065670178196708cfd737eca455bb21d0d4e3666586d3399ad0e5"
+  },
+  "mt-chimney#0": {
+   "name": "ASH RESEARCHER VUL",
+   "inv": "f55488d484ba64b5437e9e0f8543af93c1e002095d69ff4d4e97eb8ed4a542e7",
+   "design": "e450f649cef2e4e94b5a1910db0352b44aed4f98871ed8fbe6c8d18be50d7ec2"
+  },
+  "mt-chimney#1": {
+   "name": "ADMIN BRASK",
+   "inv": "1cf69f01e9b28d9920485e5e27e8dbb4394d887b174875b2b05e6c2c924d3c94",
+   "design": "eef699e83d26b43de1a556487740bc51da2feb13eec7cdf2a3d4fb69cf7631cb"
+  },
+  "mt-chimney#2": {
+   "name": "ADMIN SELKA",
+   "inv": "34eea3658a10fb61ec994149afaba9720ae97c07a9a182af0481664cfbf2453a",
+   "design": "62e59c3e1708beb8d2afb2bf7aa0bb7cb1d11c7cea9eee09effaea020adb4c89"
+  },
+  "jagged-pass#0": {
+   "name": "HIKER PAVEL",
+   "inv": "a73fb8258a11d42489149ef81e8b03408a744f131bd303d16e08e6812a9c0157",
+   "design": "30c311ceda8065670178196708cfd737eca455bb21d0d4e3666586d3399ad0e5"
+  },
+  "r113#0": {
+   "name": "ASH SWEEPER LIV",
+   "inv": "4081f517ac13f0e6027264609d2dbcaf827c6cd56909ca6bcaca325d7b3c31ae",
+   "design": "b2381a9f6c2c23bff3a9c19f880506307e6d55cf4f5b8ebf6b7f409e3e4528bf"
+  },
+  "r114#0": {
+   "name": "FOSSIL MANIAC ORR",
+   "inv": "2fbcd117a52ce8a0ff1b2255f76bc517ade23c2938d08f9548bcde2891a0a919",
+   "design": "30c311ceda8065670178196708cfd737eca455bb21d0d4e3666586d3399ad0e5"
+  },
+  "meteor-falls#0": {
+   "name": "DRAGON TAMER OSSA",
+   "inv": "001be8cfd9be3c8f829baf22c6f501fe6d442d9b592568e24dc06a6b6ef716e1",
+   "design": "bc7d2dadb3360be9081cd690f6790d452984e2af58d4e0001d3d750fe94afa10"
+  },
+  "meteor-falls#1": {
+   "name": "PROF. ANDO",
+   "inv": "25bbd8e1d22881137598c42a5512ba7d335ee3fef4f2e0a31706650688283ba7",
+   "design": "848f81842360a19ef34cc8b05c4cc4cfd8c813eb124c0ad68049dd84908f3258"
+  },
+  "r115#0": {
+   "name": "SWIMMER ANA",
+   "inv": "f2070487d47e00c3796de112e0b8b21bcb0febb6980bbe7e283990f98cfe0857",
+   "design": "db080858c52b8e6c66ba4db8d335862c0d0620e34267de768b5262b914dad4c5"
+  },
+  "r116#0": {
+   "name": "YOUNGSTER CAL",
+   "inv": "5e8fbb96054a1348b634e6c0a7e2d96f01e2ca529a761df4817e589cd08c4398",
+   "design": "b93091bbbfb5c593c1eac432fc2f7d3f8a5c69dfcbc44e4e7fe253197377aa8e"
+  },
+  "rusturf-tunnel#0": {
+   "name": "TUNNELER BRYN",
+   "inv": "9cd3d365516c37a32f02c30ad63d5a144cdc6862b6d9b2df42223eba3686d8c3",
+   "design": "b2381a9f6c2c23bff3a9c19f880506307e6d55cf4f5b8ebf6b7f409e3e4528bf"
+  },
+  "r117#0": {
+   "name": "JOGGER FEN",
+   "inv": "21346ff0c94e72083fbe046e41ebb347b5b63f8101dbe000057326b24a175363",
+   "design": "5b5c4269e0a4cd22bf59e74cd2fc84ec6cbd919daa2e7b4ac9c00ca1e7776f77"
+  },
+  "r118#0": {
+   "name": "FISHERMAN WADE",
+   "inv": "22ec298bcd4aa95ff827173cd313584e3ab7f276067e275431f02cc1dd127088",
+   "design": "9fe0d2d882a26824b99e3f8b9dac29911594c81fd6879bc206e15bca9947c96f"
+  },
+  "r119#0": {
+   "name": "INSTITUTE AIDE NORN",
+   "inv": "45e0d2ea6105a874f4327b90b46cfd773c542e753b27d3840a1cb8c89348bb53",
+   "design": "e450f649cef2e4e94b5a1910db0352b44aed4f98871ed8fbe6c8d18be50d7ec2"
+  },
+  "house-littleroot#0": {
+   "name": "MS. HARLOW",
+   "inv": "00be156c0f1b8162913436065e91a90799cd7c108f253e256a288a912af408c6",
+   "design": "a52ecca8e2ae2f63df3880fe8efcab07cec56a5811fc11d6ad11f22eae0b6768"
+  },
+  "house-littleroot-rival#0": {
+   "name": "MR. OKONKWO",
+   "inv": "c013723676977fc7b88611346e3398bb5e67f9e495f8c1c3859fb605013ec6cc",
+   "design": "2328aecbd99a50e445c6a0a5b21ee8ed93ccceee1ffe344bece75dee8e47d69f"
+  },
+  "house-oldale#0": {
+   "name": "FLORIST WREN",
+   "inv": "e10f3820df266a4137db4bb49013679ebaafbf676f57f5fe69ba1aa206bc46fd",
+   "design": "8fed9ab360d263ce733a621d78dd8fc353c23181170dac87d90cadb3ddf85238"
+  },
+  "house-petalburg#0": {
+   "name": "PONDKEEPER SOL",
+   "inv": "d3cc913f1ae62c7ab6662ffa1bb428a4e4d762ffb837484670079a16554f2fb1",
+   "design": "20d2c79307d04240e45542916956c2525d9dd9896b783b3ec0463e8d2c6acdee"
+  },
+  "house-rustboro#0": {
+   "name": "NORWICK HOSTESS VEE",
+   "inv": "95a9e6d1d6c5eacb9210aebf2f72fe1c69f0a7f92ec1b7a6f738f2a6dc1cd74e",
+   "design": "8fed9ab360d263ce733a621d78dd8fc353c23181170dac87d90cadb3ddf85238"
+  },
+  "house-dewford#0": {
+   "name": "SURF HOST IO",
+   "inv": "83e575fc5b599b8f5296a09ce1fa5dd3f0317b608ff68b7b0f5689f5ddcbc358",
+   "design": "91f8902f85000d036305a19caa14cf47871bc22e3419e0f8123c59b63d09a359"
+  },
+  "house-slateport#0": {
+   "name": "CURATOR MARA",
+   "inv": "6b91a53745a5e09a2e81e76541985ad0d49a7abe63a63780660663914fa8e884",
+   "design": "3dbb116e64dcbe22235d9b2408528b1a4ae79ff7cf2d60b36213ca838258beb1"
+  },
+  "house-mauville#0": {
+   "name": "CORNER HOST RUE",
+   "inv": "28caeed72ace7e6522eb39dd5f54291ecb9a95cedd006dfde042eb8427952cb9",
+   "design": "cb5442c0ca113d4f1bd1a50782ed88a1abff0c198a8e229ccf5d9c419bec9870"
+  },
+  "house-verdanturf#0": {
+   "name": "AUNTIE ROSA",
+   "inv": "fc80b982fe511ed0392d4fef80df6e51a5e654597d96f8739506b558e36cb0a6",
+   "design": "e95d8b2daafdf219edeca750ebdd5a59f50a105169d9ae212c4206e6556c6fd6"
+  },
+  "house-fallarbor#0": {
+   "name": "ANDO’S ASSISTANT FENN",
+   "inv": "afc83e5b182a7fb66d13da8b1a2becf8417aac06676442350bfecb02c8383c9c",
+   "design": "3140a86dc2ac44fb3cd3dc4c207a4ea11fe3de6528d08197d9ecc0f85e5e9e79"
+  },
+  "house-lavaridge#0": {
+   "name": "SPRING HOSTESS YUI",
+   "inv": "acdd6f5a30e17a9e4f08d86bc5e5be7dda7c9e2afe9af2d4e37dc569aac6f061",
+   "design": "0ee4dc9c566d356fff9ccda7b33f6208f07a6ca9142eb9d361233328ee55f59a"
+  },
+  "house-fortree#0": {
+   "name": "TREEHOST ALDER",
+   "inv": "7c3fe788728681a29a6a2f66427a4e1954784f2b1177c6e9a2c48e6f9db1d263",
+   "design": "aa378486842daf25ae7ba5dbaceca9e8cce65cef4bb01c4d4ca57c1e8ff1165c"
+  },
+  "birch-lab#0": {
+   "name": "AIDE FERN",
+   "inv": "b87eb7e2a5a1fd610dab3769020afc3e53526a4e6627c555d754a20bb4b09edc",
+   "design": "15e22cd7644c34f3e3067ad812962beef9706a78696410c356216898711df6ca"
+  },
+  "birch-lab#1": {
+   "name": "AIDE COLM",
+   "inv": "40858bc31b50dcb0af104357244f76d8e717070d70c4e020077cd1b0388479fb",
+   "design": "e450f649cef2e4e94b5a1910db0352b44aed4f98871ed8fbe6c8d18be50d7ec2"
+  },
+  "birch-lab#2": {
+   "name": "PROF. ASPEN",
+   "inv": "05891011b54b30029a2f2f1c37f503a3a101e3678c52d6f950021dfd845ec70d",
+   "design": "484789cd2723ef02748f27e9c2c9177c88a0b388cd37a126ff178a537019c44d"
+  },
+  "gym-rustboro#0": {
+   "name": "GYM ATTENDANT PETRA",
+   "inv": "577e0df2610d906ec3e3a0d62a05c340b50fde68155a8f6dbae6d1dfa9719e79",
+   "design": "f645883dbd4b37af3ffe5686e09e6b5e10847c1de99ff166a62a097ade160318"
+  },
+  "gym-rustboro#1": {
+   "name": "SAXA",
+   "inv": "116f0a01e10f36ef6f40df9f71fdd058ca0f14c7ae2254bb35990d89778fa2e7",
+   "design": "7982af381014c23793c108e0d2dd37c8cfa749df216567fa337c382f23c57c5d"
+  },
+  "gym-rustboro#2": {
+   "name": "YOUNGSTER BRAM",
+   "inv": "fd4c1ab78c305bc37168506d69e9f21063f9f4096d01f1a28acb88cfa3cf8d35",
+   "design": "8a704616b1e97b21282d4dfb077142e9cb670e8640d8e822a383d470128f89b3"
+  },
+  "gym-rustboro#3": {
+   "name": "HIKER SELLA",
+   "inv": "2eb3088d6251d4050c2dba1ef36b39acccf15739c6b163f73f8944ba0c6f43c3",
+   "design": "7deab8ba79e90bd034a8de660483182dbf14b6ce8a1f7ffe6e92d0bf388477c2"
+  },
+  "gym-dewford#0": {
+   "name": "GYM ATTENDANT KAI",
+   "inv": "d49047434cb7d23b77f9672d92ad4aa4e59d7518f6a02552e9f3f24871ec5f8b",
+   "design": "b93091bbbfb5c593c1eac432fc2f7d3f8a5c69dfcbc44e4e7fe253197377aa8e"
+  },
+  "gym-dewford#1": {
+   "name": "ENZO",
+   "inv": "602db13a5eac7182bea8c54cf678f48ce1e8ddc8501f53cce0a54b5243c69e6e",
+   "design": "e49c62c34cf006c7d9240d97d4ab03c19762ffeedc490e8645eb84f56ea44ceb"
+  },
+  "gym-dewford#2": {
+   "name": "BLACKBELT ROOK",
+   "inv": "f8875d3374ee002e5e90afa177d8615796f36bd3cad85856fbd2ea46cc51522c",
+   "design": "118f3574c121e87d04879ba0171785f7b05eaf96f134b24ff9fe488370a4a3a4"
+  },
+  "gym-dewford#3": {
+   "name": "BATTLE GIRL SANA",
+   "inv": "160015f770a6f6ba15084a8eb5acb55a7c0719e73ff5589f469f4b499358ccbf",
+   "design": "18a40e7539152160c38746e93e16400f1b0d767a435a26cfff100c198b93ebd2"
+  },
+  "gym-mauville#0": {
+   "name": "GYM ATTENDANT VOLTA",
+   "inv": "2dddd2d6858c504b5c03ca3f4a7cbba089b05e185773785b9dc713bfb995d1de",
+   "design": "f645883dbd4b37af3ffe5686e09e6b5e10847c1de99ff166a62a097ade160318"
+  },
+  "gym-mauville#1": {
+   "name": "OLIN",
+   "inv": "dd1878f3b960d89af4eca8c2a3bbc8e2c0478760533b38436283b0c2971b151a",
+   "design": "ab84023bc7f2147124be5598329491c77982e69d92c432f549e8bc6619638e65"
+  },
+  "gym-mauville#2": {
+   "name": "CAMPER ILYA",
+   "inv": "c7a8f38837cdee4c154e913f757c01dad5bc0105aea539bf9c99b656a3180d66",
+   "design": "6e78b8119fcb634573f660026c37c4f19ee092f0e035b9df453b17fa5c8534da"
+  },
+  "gym-mauville#3": {
+   "name": "ENGINEER PASK",
+   "inv": "dcb19398de0c7d663e9182c38b686bd327fa14902713af8bc4a638c4a0b0d019",
+   "design": "faabbd2e6af71c22d57814a81711e01d3f51554d0c1492fb000d16780568cae9"
+  },
+  "gym-lavaridge#0": {
+   "name": "GYM ATTENDANT EMBER",
+   "inv": "26db60094bca1c983f5e3198c6385df98c5426acf11698049ad70fade50f2d46",
+   "design": "b94ae09d287be692025fd4b6188310fb4cd35abd11dd30710f89cff097023ac9"
+  },
+  "gym-lavaridge#1": {
+   "name": "SOLA",
+   "inv": "f5b1e15d32c92844d8e71514bcd80e5faa5e9622d4d18d09aadc3b336f8cb439",
+   "design": "6cfc6ba5748387c9ffb0479271957b96fe2e913c84122c75f6fd6426996ed588"
+  },
+  "gym-lavaridge#2": {
+   "name": "KINDLER FENN",
+   "inv": "fda4c76f1f8f7717affc63ae33e0dd03a6d3384f3acd7c79baa965d2382988c3",
+   "design": "abe1fb1115b0f98e42710795e735ce9b4ee7712239f245d0b44cdab3b1d22923"
+  },
+  "gym-lavaridge#3": {
+   "name": "HIKER BRASA",
+   "inv": "83e19922ad3bd394df93d5e842d1f5bee625927ef25285dce8a6328cbc41e9ef",
+   "design": "8ed3d4e6e42e89c331733dcea38839cd7d10d1b00ec8de299961c4778787932c"
+  },
+  "gym-petalburg#0": {
+   "name": "GYM ATTENDANT REYES",
+   "inv": "32804c900d45ccaeb1391cfcc32fd7487a8bedf3b7b7b5c179c2a09c7764868d",
+   "design": "fd762d8b0cbe59bc87fee45a0750da348f1a53a0b3a61d1f20f5296791a06ab3"
+  },
+  "gym-petalburg#1": {
+   "name": "ALDEN",
+   "inv": "95edb12d740ed0cac4b6a1eabd9a5f78aff754f8ded15102e982249f285e9fa2",
+   "design": "300ea4028d92c45f0d919b32d713b98d0fc8c17af3bb4fda6945ab94c08b0f93"
+  },
+  "gym-petalburg#2": {
+   "name": "ACE TRAINER DARIO",
+   "inv": "688bed204cdbbdee7da8e38226b123af008b78ec9f5783d5736fe9a35764abc3",
+   "design": "cf139b7a15c42650edf3d07ad134e8dbd02cfac0f75ec7114b561df077418498"
+  },
+  "gym-petalburg#3": {
+   "name": "COOL TRAINER MARN",
+   "inv": "179af1f4cce8ad838171ace7727276d07628bc0d360ee2b526f3e6332579739e",
+   "design": "199fec44520276a02b5257b05741221af162565789923e5a0afdb3408d32b121"
+  },
+  "gym-fortree#0": {
+   "name": "GYM ATTENDANT WREN",
+   "inv": "95fbd47a68181c1be4efb93db3699dcfb72b604167945b9cc3711739aea0c4af",
+   "design": "b93091bbbfb5c593c1eac432fc2f7d3f8a5c69dfcbc44e4e7fe253197377aa8e"
+  },
+  "gym-fortree#1": {
+   "name": "ARIA",
+   "inv": "ee3348ec5d86ecceba5dd56cde2fb5a5aaf48f538e5bbd923b798b2403f7d605",
+   "design": "8e72bac159776bad67dc084087b1eb51afe87bb9cca2a547c515cd6cb52442d4"
+  },
+  "gym-fortree#2": {
+   "name": "BIRD KEEPER ANSEL",
+   "inv": "63851a809a4ef1c50127ca229d4caf90a28497b06625475b87c179e23065e189",
+   "design": "783633d6ac8d0abf30aeee8764d66f3dad9ee1033b8f1eb90e3a984611f103b7"
+  },
+  "gym-fortree#3": {
+   "name": "PICNICKER WREN",
+   "inv": "403049cf588b3896c28be03b6fdf86f464d6a02b787592bf7bb5d6e6c43287a4",
+   "design": "11df38476b259c56479b4ca02858b92ac9d0e510d5935cc3360eb037f58461eb"
+  },
+  "lilycove#0": {
+   "name": "CONTEST FAN YUKI",
+   "inv": "252e918317263a26dc2273492a71e7b07a0db4c58b65838bacd92e6756dc4816",
+   "design": "5b5c4269e0a4cd22bf59e74cd2fc84ec6cbd919daa2e7b4ac9c00ca1e7776f77"
+  },
+  "lilycove#1": {
+   "name": "HARBOURMASTER DOSS",
+   "inv": "219270bcfc294ec1fed0a960da38c07ae1b56c735e2a92fb55f8e972aadff8cd",
+   "design": "8294f8d697a8a6d36f3521d2edbd976a69cb837e324170963392fa138019346c"
+  },
+  "lilycove#2": {
+   "name": "SHOPPER MIREL",
+   "inv": "f135dd49d9c09dbb26e094655a2ad1248426dff2f822e05363ba24defc43a4f9",
+   "design": "a52ecca8e2ae2f63df3880fe8efcab07cec56a5811fc11d6ad11f22eae0b6768"
+  },
+  "lilycove#3": {
+   "name": "MART CLERK",
+   "inv": "05e906e2836e4ab9da486b1f61ebfab5e10365af99f0e3e2f868b07c8f9d0f99",
+   "design": "a53a509f435d28a8a6d6ab82bb4dcee8025a30a5d0d292ea709bc6be5d69b9c3"
+  },
+  "lilycove#4": {
+   "name": "MAIA",
+   "inv": "35038005df697c38fe8d03b67a6eecd0cc085c4ed8d2d58a8720267454097384",
+   "design": "ded150ee37b6201943907e1e8642bf6328f0085c36c9281f16bd07c3c30112b9"
+  },
+  "mossdeep#0": {
+   "name": "SPACE RESEARCHER ORBIT",
+   "inv": "f6f4671bef233f2fc8074462b3322e1b45790a1d5b067fbd1c227b81d040e0dc",
+   "design": "e450f649cef2e4e94b5a1910db0352b44aed4f98871ed8fbe6c8d18be50d7ec2"
+  },
+  "mossdeep#1": {
+   "name": "DIVE TUTOR MARA",
+   "inv": "a6a81051baeb1b628edb1697788a9a0e377362ef60242f55f7530466db04f7d0",
+   "design": "08977cc1648a83a1304c0879b3c6e8ae8b6400f19b8650ed2cfeadbafe1c833a"
+  },
+  "mossdeep#2": {
+   "name": "TWIN FAN SOL",
+   "inv": "c7d610eea81096b145bb7de0cc75e49a196e6a6c72823050225dfb4cc96ffbd9",
+   "design": "0eec48d0b0124db5dbe0c70b808d9319cd2cf39a5310537ea5a223f91090ebb0"
+  },
+  "mossdeep#3": {
+   "name": "MART CLERK",
+   "inv": "bbf8f164132e7270f6128f9c6d319e08ee5f1cc7d1bdb444bf56e804cc6a0972",
+   "design": "a53a509f435d28a8a6d6ab82bb4dcee8025a30a5d0d292ea709bc6be5d69b9c3"
+  },
+  "mossdeep#4": {
+   "name": "ALBAN",
+   "inv": "5cc762f312149d7be6cf6200be9add730e5982f29ab81595110255da72db185c",
+   "design": "ce286b0235048c7a1f82ab3c755ebe3bbae54c4976e60f47e88610cc45d63e5f"
+  },
+  "sootopolis#0": {
+   "name": "CAVE KEEPER ANTHEA",
+   "inv": "d955bef93979f0770a1825734ea9e0a6be9cf57688969e69f3200d4dc65d2b3d",
+   "design": "ace5bf96837da58c4da8af242578bb7f7e3d9a6caa3072819d1919292e9e1906"
+  },
+  "sootopolis#1": {
+   "name": "CASPIAN FAN RUE",
+   "inv": "16d762fc9eabc021486fd763fa3125d5238561baac40766b0a30ce4331d72056",
+   "design": "5b5c4269e0a4cd22bf59e74cd2fc84ec6cbd919daa2e7b4ac9c00ca1e7776f77"
+  },
+  "sootopolis#2": {
+   "name": "FISHER ONEN",
+   "inv": "2ff77c06e8e7cd68638114cb5af1c9c614457eeca20af13059d9b6f7afb7b87b",
+   "design": "9fe0d2d882a26824b99e3f8b9dac29911594c81fd6879bc206e15bca9947c96f"
+  },
+  "sootopolis#3": {
+   "name": "MART CLERK",
+   "inv": "1d96e9fbac2c1b82c14afb5f94767a1f167d5aa44ccc9021afcd8c1db38b1134",
+   "design": "a53a509f435d28a8a6d6ab82bb4dcee8025a30a5d0d292ea709bc6be5d69b9c3"
+  },
+  "pacifidlog#0": {
+   "name": "MART CLERK",
+   "inv": "79393103fde0c48fac8443de514ade893cd91346e0c519d7539f0f6c0e54c95c",
+   "design": "a53a509f435d28a8a6d6ab82bb4dcee8025a30a5d0d292ea709bc6be5d69b9c3"
+  },
+  "pacifidlog#1": {
+   "name": "RAFT ELDER CORALIE",
+   "inv": "b08ca7469b3f8106439fc0ccfa3387b65880dae4c18a2932117fab5bd8053bfc",
+   "design": "ace5bf96837da58c4da8af242578bb7f7e3d9a6caa3072819d1919292e9e1906"
+  },
+  "pacifidlog#2": {
+   "name": "CURRENT RIDER PIKE",
+   "inv": "7521755c5e7f6848a6187b7bd05cc913d3d407985afd2339c302e6c6488d097f",
+   "design": "8294f8d697a8a6d36f3521d2edbd976a69cb837e324170963392fa138019346c"
+  },
+  "pacifidlog#3": {
+   "name": "FLOAT KID WREN",
+   "inv": "1af90c0caaafcfd58000a21656abdcbdcf6eed3ec7d86bc7b9cd6f19a1b5a57d",
+   "design": "0eec48d0b0124db5dbe0c70b808d9319cd2cf39a5310537ea5a223f91090ebb0"
+  },
+  "evergrande#0": {
+   "name": "MART CLERK",
+   "inv": "2cd0313245a5f8d0d775665c2a539d8e0522fce7d4ba16bd94e7abdba23cba8f",
+   "design": "a53a509f435d28a8a6d6ab82bb4dcee8025a30a5d0d292ea709bc6be5d69b9c3"
+  },
+  "evergrande#1": {
+   "name": "CONFERENCE HERALD VOSS",
+   "inv": "39261537506c8a81f1f96702bc4b61940744d2640911ac3ca6db1ae96f279114",
+   "design": "e4df8859f2c0b36fd3e5f94433d4cda3b34f74529cbb1dc43cbfe9a03fa6f971"
+  },
+  "evergrande#2": {
+   "name": "ELITE GREETER SABLE",
+   "inv": "1a80049100aef5243be4b5b421cf9bf069c3eaa43e162ecea3fdd75745f39d82",
+   "design": "6aaf5ed7f4a2e5f883fa9b4f11aa49226db95787e2825aafb4ffdf90d74e35e1"
+  },
+  "evergrande#3": {
+   "name": "FINALIST’S SISTER KIT",
+   "inv": "7d7d32274dfe5910fbe5bd2b65941ddcf86964682f67d2796bf848fe28a35459",
+   "design": "0eec48d0b0124db5dbe0c70b808d9319cd2cf39a5310537ea5a223f91090ebb0"
+  },
+  "r120#0": {
+   "name": "INSTITUTE SCOUT WREN",
+   "inv": "603dca44ce6237360cbcc6ce25da8efcc6b31ae1f1d0eb918523044cf29e4881",
+   "design": "bc7d2dadb3360be9081cd690f6790d452984e2af58d4e0001d3d750fe94afa10"
+  },
+  "r121#0": {
+   "name": "PYRE PILGRIM OSSA",
+   "inv": "44660af29751d5fc92b92d22803fa408f800a80d35bf4ab87d4f16d7596afa59",
+   "design": "ace5bf96837da58c4da8af242578bb7f7e3d9a6caa3072819d1919292e9e1906"
+  },
+  "r121#1": {
+   "name": "BIRD KEEPER FENN",
+   "inv": "c908d2cb3c788b555333365da9010c002926c8f93f4aefb84b031f28ee924eef",
+   "design": "b93091bbbfb5c593c1eac432fc2f7d3f8a5c69dfcbc44e4e7fe253197377aa8e"
+  },
+  "r123#0": {
+   "name": "BERRY HAND LIO",
+   "inv": "a016586acf31c436b8727a7515f57151a9b7562abdb9d454afe02f91f7cbac96",
+   "design": "b2381a9f6c2c23bff3a9c19f880506307e6d55cf4f5b8ebf6b7f409e3e4528bf"
+  },
+  "mt-pyre#0": {
+   "name": "PYRE KEEPER SATO",
+   "inv": "71a0e0cb3a7fc9ca50a7b703ebdd86d3673aacfa03da766a6b84294f72e0da0a",
+   "design": "ace5bf96837da58c4da8af242578bb7f7e3d9a6caa3072819d1919292e9e1906"
+  },
+  "gym-mossdeep#0": {
+   "name": "GYM ATTENDANT IO",
+   "inv": "c5f7940d6c5708681d273c06eb2b09bff09de6d3cbf7adc023814be493d0c03d",
+   "design": "f645883dbd4b37af3ffe5686e09e6b5e10847c1de99ff166a62a097ade160318"
+  },
+  "gym-mossdeep#1": {
+   "name": "THEO",
+   "inv": "19c727ee1433f5b6013b1aee9c92aeeae53cbcae5d73653ab6e2fbf085a920a9",
+   "design": "2d35cc48bcae44a51c3bb213f201e105046f7446c814363680f46c97e958e3a3"
+  },
+  "gym-mossdeep#2": {
+   "name": "LENA",
+   "inv": "869c3793d61e9d4b9f12f9de18019fb19309dab4a2b0728cfc6848c6898ccf38",
+   "design": "c17c2619b0c78213557fb3032f29508270255f69d77d8c4db4126edb97d0d7ec"
+  },
+  "gym-mossdeep#3": {
+   "name": "PSYCHIC HOLLIS",
+   "inv": "c1ffa0682ef10d816443ca23b3cb2abdcbf3fa9b18db6754f76e5688a6e5a9c4",
+   "design": "52e90dff60b4ef7db2aa199aab6792af2085a0a82a698fb3cbc3e1a8975b5d4c"
+  },
+  "gym-mossdeep#4": {
+   "name": "HEX MANIAC IONE",
+   "inv": "da955234d7dcdbafe5f2dc2491bb90f5e6bf86236eb891e8c727b8c4a4a9343d",
+   "design": "ef1d724bdc0eb9abc5429afe452d48e398f67fd4b45ecbe398902c7e159111a1"
+  },
+  "gym-sootopolis#0": {
+   "name": "GYM ATTENDANT MARIS",
+   "inv": "fb0645c01a249e2eba749d1e9b544572484a354d9ffa9ba358028066f1273d60",
+   "design": "da8c26a2aa8739b9efc34a266f72eae6e90bec7b3c9798c444a6a95f6237f99c"
+  },
+  "gym-sootopolis#1": {
+   "name": "JULEN",
+   "inv": "51357b8b61589bd437735ef521075a002a0babf2ad77849c74f6424756f0f262",
+   "design": "1ad7e2421b5d0fcce12674e59af09a4bf9adc2fe7b38a4389bf50ac4b2f1d934"
+  },
+  "gym-sootopolis#2": {
+   "name": "SWIMMER CATO",
+   "inv": "d06222f25d7b22820e3e53dc747283fd134a4f2a70ace7f1ee9dac6c155dd921",
+   "design": "568c4ee8a77da9e7a1f780c57fff46010dacdc15cf940bbc35b8ec9ec46927f3"
+  },
+  "gym-sootopolis#3": {
+   "name": "BEAUTY ONDINE",
+   "inv": "d0764df8f78b8b483de4fcfc7a1fb7890a05ef4e89672c46a0dd9a9c66dedc5e",
+   "design": "0c0ca51c32f28f9788e8ae28236a79d86f67d3c11b50c8cc3988198db9778b6f"
+  },
+  "league-evergrande#0": {
+   "name": "CONFERENCE OFFICIAL",
+   "inv": "1e774d5a23025903d022d10b38a69e0c8ab7e98c1f25ba3358467145d559df36",
+   "design": "e4df8859f2c0b36fd3e5f94433d4cda3b34f74529cbb1dc43cbfe9a03fa6f971"
+  },
+  "league-evergrande#1": {
+   "name": "BRACKET KEEPER MAREN",
+   "inv": "7064df830ba3831235124235464cc99d3ac7da0a133670cf1b39a653f62032f0",
+   "design": "ace5bf96837da58c4da8af242578bb7f7e3d9a6caa3072819d1919292e9e1906"
+  },
+  "league-evergrande#2": {
+   "name": "LEAGUE REGISTRAR",
+   "inv": "9525578b54f65eac3d4902f9854e7939bb8663377749b5601821f87e2a11637b",
+   "design": "c7412cf8919605aec269d088478acc8d5892fa616a0b5589fe0de789dae70cf1"
+  },
+  "league-evergrande#3": {
+   "name": "MORRISON",
+   "inv": "a0a95a21e827479362f114ef134de7027fd5a0289bacdf978c1de928e37ccf56",
+   "design": "5148b864830e334b2f1856180379ff57f0b3624aa26d234503d99b3ab4c17ca1"
+  },
+  "league-evergrande#4": {
+   "name": "TYSON",
+   "inv": "3f6d4cf4ecc336d8676f15a8639b49fd9935fdff5d777e84f19e03c30d359e38",
+   "design": "ef4f1d77108789b9a138a56c17063999db9d489147aa284164e4c00638124fe2"
+  },
+  "league-evergrande#5": {
+   "name": "SUTTER",
+   "inv": "790ef7831470577e3da8793b2b04d49678b01ec99fad6aec86d2484a95ad7e00",
+   "design": "64407ecc8f3b15ce4573d6b8a79c2827e2028b0ddd56346ac46f1c74ac7a7a70"
+  },
+  "frontierhub#0": {
+   "name": "MART CLERK",
+   "inv": "5c35545fb820a3acfea87cf4e9f9be3f404cabc5160009d65fddb385795842c9",
+   "design": "a53a509f435d28a8a6d6ab82bb4dcee8025a30a5d0d292ea709bc6be5d69b9c3"
+  },
+  "frontierhub#1": {
+   "name": "CAPT BREAKWATER",
+   "inv": "7728a991e82a8f2475b23cc039eaf0b8fecae92daf1fef5c7ea079f4bfb1bebf",
+   "design": "8294f8d697a8a6d36f3521d2edbd976a69cb837e324170963392fa138019346c"
+  },
+  "frontierhub#2": {
+   "name": "SUTTER",
+   "inv": "b81c674d089868b1b4eef4a1da5296fa7216a166cccb4520b0c4b04031e32ec7",
+   "design": "e4df8859f2c0b36fd3e5f94433d4cda3b34f74529cbb1dc43cbfe9a03fa6f971"
+  },
+  "frontierhub#3": {
+   "name": "STREAKWATCHER LIO",
+   "inv": "093154681538dde2a823eb2f5718a92293a055a915314c30896ee4b51e5ee2f3",
+   "design": "5b5c4269e0a4cd22bf59e74cd2fc84ec6cbd919daa2e7b4ac9c00ca1e7776f77"
+  },
+  "frontierhub#4": {
+   "name": "OLD HAND BRAM",
+   "inv": "c9601b93aaa7f975efcd3975a43857068aacba37da4651756c06c6fa7fcb2c88",
+   "design": "ace5bf96837da58c4da8af242578bb7f7e3d9a6caa3072819d1919292e9e1906"
+  },
+  "frontier-tower#0": {
+   "name": "TOWER CLERK",
+   "inv": "13342ef78d1b1f67606f457df09e600a6af3c4f8192d3a6b25a53fd3109bcb8f",
+   "design": "c95722ca4bd483e3af70efdfd3f450b0543c16fb68cca84c5e139f4fd6709787"
+  },
+  "frontier-factory#0": {
+   "name": "FACTORY CLERK",
+   "inv": "89183876ebb9749242d415ea07b2d7666fe8694717e977b6a8594ee4c831ec9a",
+   "design": "f8c2b3363999a8c596ba772711e8afbf78a66e03b63fa8f27c94b6b5bd07865d"
+  },
+  "frontier-arena#0": {
+   "name": "ARENA CLERK",
+   "inv": "40b493ab656e5ee03f008b940a360d5752cb1cbaa5c8cf8994e7dc5c7d0b17c1",
+   "design": "96905047f412eb93dffd942fc89d3b85c2b36d716b59de004f7c3b33a8c533e1"
+  },
+  "frontier-dome#0": {
+   "name": "DOME CLERK",
+   "inv": "ae89c2bea588d022456098e02916b1446a1055d91f0dfef86f159d2f3d255fd5",
+   "design": "562d36cfcfd4e7b2475af3451e5f90aa406a6c65e0f7bba38b25ae731e939148"
+  },
+  "frontier-pike#0": {
+   "name": "PIKE CLERK",
+   "inv": "177e372d3215a1321f25c43bcf5c24beedce7918a13837602b118427f72f0533",
+   "design": "a53a509f435d28a8a6d6ab82bb4dcee8025a30a5d0d292ea709bc6be5d69b9c3"
+  },
+  "frontier-pike#1": {
+   "name": "SELENE",
+   "inv": "4159d9d4463dc0155f42d8ffe5b3b2297da3ae841d48ffade9416d1a08a639d6",
+   "design": "2610fff13a773fb8093608126657bb1307740a6cd5dfbbaf6194ac6083a9fd29"
+  },
+  "frontier-palace#0": {
+   "name": "PALACE CLERK",
+   "inv": "bffc4ce61089f373f2aa7db2aa86aebc06e8b515acaff2bef85916f613189108",
+   "design": "7751313db509e3fc4be94b45434699918324ae34fd6cfcc0e19cb1571662df5b"
+  },
+  "frontier-pyramid#0": {
+   "name": "PYRAMID CLERK",
+   "inv": "561b7234a597a3bc9f0522e680bc09cfe27c865bae80646c376b60810798e6ea",
+   "design": "c95722ca4bd483e3af70efdfd3f450b0543c16fb68cca84c5e139f4fd6709787"
+  },
+  "twinleaf#0": {
+   "name": "MART CLERK",
+   "inv": "0f8ec676a74578ba01738149b7d0f55b39bc238ba396ac256e9fd70725fb80aa",
+   "design": "a53a509f435d28a8a6d6ab82bb4dcee8025a30a5d0d292ea709bc6be5d69b9c3"
+  },
+  "twinleaf#1": {
+   "name": "MOM’S NEIGHBOR ASHA",
+   "inv": "ebe2c41379a53e54391a99a851e69912ca2da32ccf092a2c1fbf41a904f99109",
+   "design": "a52ecca8e2ae2f63df3880fe8efcab07cec56a5811fc11d6ad11f22eae0b6768"
+  },
+  "twinleaf#2": {
+   "name": "PIP ELDER",
+   "inv": "0fcd48425645cbf2c1227cdc06e0e452aaf7c228e7ceca6a0fc2f319e077c56a",
+   "design": "ace5bf96837da58c4da8af242578bb7f7e3d9a6caa3072819d1919292e9e1906"
+  },
+  "twinleaf#3": {
+   "name": "YOUNGSTER TAM",
+   "inv": "b343492def59eb87a700f07c4285d21c0693bbe17591f13c1626ab61606a1316",
+   "design": "0eec48d0b0124db5dbe0c70b808d9319cd2cf39a5310537ea5a223f91090ebb0"
+  },
+  "twinleaf#4": {
+   "name": "DARA",
+   "inv": "b6e09059c0377e19999e53f5919c9e4e6977a8a842a9a5e6a9cd49c2bdbc73d1",
+   "design": "0580294fc4bf0ed60334a700c87120f0c8d07090b40a159270c0cab68c8b30fd"
+  },
+  "sandgem#0": {
+   "name": "MART CLERK",
+   "inv": "8fc6364512aad0e8cb17988003187c103ae09a6e04c54dc2d725356729cae470",
+   "design": "a53a509f435d28a8a6d6ab82bb4dcee8025a30a5d0d292ea709bc6be5d69b9c3"
+  },
+  "sandgem#1": {
+   "name": "LAB AIDE FERN",
+   "inv": "50c6d1b3b131271a393161b1e0a74036e841482ed6056fc4f00c9703d4da05cc",
+   "design": "15e22cd7644c34f3e3067ad812962beef9706a78696410c356216898711df6ca"
+  },
+  "sandgem#2": {
+   "name": "BEACHCOMBER ANA",
+   "inv": "78e3958403846f61e94dd8f64a7d63d25c0dc5fa99dec3c63d3378d5576f823d",
+   "design": "a52ecca8e2ae2f63df3880fe8efcab07cec56a5811fc11d6ad11f22eae0b6768"
+  },
+  "sandgem#3": {
+   "name": "YOUNGSTER RUE",
+   "inv": "50567ed6c3afa44cc0b0a63a4858481e745163554816bf28b27feb0e140ba5e7",
+   "design": "b93091bbbfb5c593c1eac432fc2f7d3f8a5c69dfcbc44e4e7fe253197377aa8e"
+  },
+  "jubilife#0": {
+   "name": "MART CLERK",
+   "inv": "58fcb6c1efb46c84817818996379c7a6d57d2e4db2b1ed8a1e8086d37d59cf5b",
+   "design": "a53a509f435d28a8a6d6ab82bb4dcee8025a30a5d0d292ea709bc6be5d69b9c3"
+  },
+  "jubilife#1": {
+   "name": "BROADCAST INTERN VESK",
+   "inv": "b8173d21d6c9d2fa14e66ee89fee36fb2a5f107b292304fa5f7a8a6a366aee75",
+   "design": "b2381a9f6c2c23bff3a9c19f880506307e6d55cf4f5b8ebf6b7f409e3e4528bf"
+  },
+  "jubilife#2": {
+   "name": "CITY KID MOSS",
+   "inv": "0c23455fe3bcbf18f38fb713201ba1240ec7e79288a78a430098cfd418f9331d",
+   "design": "57112555a6f407b9832fa0e718b433656da7ea5ab5e947a7e079575464dd43cf"
+  },
+  "jubilife#3": {
+   "name": "COMMUTER UNA",
+   "inv": "63cc9845f906e7b16111e130e1ec6eb28425d20df363c210ce75f3c37a89472b",
+   "design": "a52ecca8e2ae2f63df3880fe8efcab07cec56a5811fc11d6ad11f22eae0b6768"
+  },
+  "jubilife#4": {
+   "name": "BARRY",
+   "inv": "776d022eca788036d604b8855a7290d43df2e7318061403000b96da7df46570f",
+   "design": "8b9d1f30111462ab9037a49e2c22b8ce136123144151909b33c750eb7143438d"
+  },
+  "oreburgh#0": {
+   "name": "MART CLERK",
+   "inv": "2d62340d05eccc141b586b609b01ac4f2d112d48a69db3695255fea1d4c46a4d",
+   "design": "a53a509f435d28a8a6d6ab82bb4dcee8025a30a5d0d292ea709bc6be5d69b9c3"
+  },
+  "oreburgh#1": {
+   "name": "MINER BRAM",
+   "inv": "afe9b14d7077ef4c06eaf9b6c636282cc4076986c39962e3ac6798e8962143dc",
+   "design": "b2381a9f6c2c23bff3a9c19f880506307e6d55cf4f5b8ebf6b7f409e3e4528bf"
+  },
+  "oreburgh#2": {
+   "name": "MUSEUM GUIDE SOL",
+   "inv": "7fe95b7a74c160ac47513b6a27924c072cd3977ae8df45e9614b9213c5ba439c",
+   "design": "e450f649cef2e4e94b5a1910db0352b44aed4f98871ed8fbe6c8d18be50d7ec2"
+  },
+  "oreburgh#3": {
+   "name": "APPRENTICE RUE",
+   "inv": "219756d3bf65dc8fbcf716a4ba34d956419c5657a0611461ebc12dc66a14f078",
+   "design": "b93091bbbfb5c593c1eac432fc2f7d3f8a5c69dfcbc44e4e7fe253197377aa8e"
+  },
+  "floaroma#0": {
+   "name": "MART CLERK",
+   "inv": "afec9063c17053595835c95085897680dd2619a479e68a1b268ec7bb05afd5d9",
+   "design": "a53a509f435d28a8a6d6ab82bb4dcee8025a30a5d0d292ea709bc6be5d69b9c3"
+  },
+  "floaroma#1": {
+   "name": "FLORIST WREN",
+   "inv": "e21e63b931cc99d9d0ae3cbcd929803c2dda8a7318a6595bf7ae4fe0e8646d31",
+   "design": "a52ecca8e2ae2f63df3880fe8efcab07cec56a5811fc11d6ad11f22eae0b6768"
+  },
+  "floaroma#2": {
+   "name": "BEEKEEPER ORIN",
+   "inv": "b8b58a4b348077922734d985e20186c923a25164e930f3d0997226110efea176",
+   "design": "2328aecbd99a50e445c6a0a5b21ee8ed93ccceee1ffe344bece75dee8e47d69f"
+  },
+  "floaroma#3": {
+   "name": "MEADOW KID FENN",
+   "inv": "580bcff5c999895f840ddd1ffba28c53d2dabf3a50d0f5dca7fd02b03a5e02de",
+   "design": "0eec48d0b0124db5dbe0c70b808d9319cd2cf39a5310537ea5a223f91090ebb0"
+  },
+  "eterna#0": {
+   "name": "MART CLERK",
+   "inv": "ab969a75665e145eb4f64c030a7185ea124b401210d9fcd8b35c6206d3d8384e",
+   "design": "a53a509f435d28a8a6d6ab82bb4dcee8025a30a5d0d292ea709bc6be5d69b9c3"
+  },
+  "eterna#1": {
+   "name": "HISTORIAN ILSE",
+   "inv": "6ca9022245c451b0e1f3ec626b4ae53965741dab34cd78c9fde041c49909319a",
+   "design": "a52ecca8e2ae2f63df3880fe8efcab07cec56a5811fc11d6ad11f22eae0b6768"
+  },
+  "eterna#2": {
+   "name": "CYCLING COACH BO",
+   "inv": "16df5e1fa1b5f7e8b54ff764e4ee97b6d90c3723b038eaa078254915df731551",
+   "design": "b93091bbbfb5c593c1eac432fc2f7d3f8a5c69dfcbc44e4e7fe253197377aa8e"
+  },
+  "eterna#3": {
+   "name": "STATUE KEEPER SOL",
+   "inv": "2cc5ff387c41b1801ea27c6ff46ea62afb096a9f716773cd8a22e8205a280793",
+   "design": "ace5bf96837da58c4da8af242578bb7f7e3d9a6caa3072819d1919292e9e1906"
+  },
+  "eterna#4": {
+   "name": "STELLAN",
+   "inv": "2ca3efb1f0d3d1a8aadbcc010ee1e5582a0597e7459057c4943bb36d19760b0b",
+   "design": "3ee3670e03b38b00976617d54d7e943bc018d914125eaddd1ba85c6dea949b37"
+  },
+  "hearthome#0": {
+   "name": "MART CLERK",
+   "inv": "5ce2237de0659c42552ed20004d0edc01e943d61fbc09ce25d5a4f56d9787ade",
+   "design": "a53a509f435d28a8a6d6ab82bb4dcee8025a30a5d0d292ea709bc6be5d69b9c3"
+  },
+  "hearthome#1": {
+   "name": "CONTEST AUNTIE ROSA",
+   "inv": "80537bbb988596c6b2fb84cb41c28363f37d0acc86435cd6fdc338a3e8b302ca",
+   "design": "a52ecca8e2ae2f63df3880fe8efcab07cec56a5811fc11d6ad11f22eae0b6768"
+  },
+  "hearthome#2": {
+   "name": "POFFIN COOK MASA",
+   "inv": "65a642ea8075a28295c5ae4c98e9c0c04b8b321236523476277df4b88ae87f89",
+   "design": "b2381a9f6c2c23bff3a9c19f880506307e6d55cf4f5b8ebf6b7f409e3e4528bf"
+  },
+  "hearthome#3": {
+   "name": "SQUARE WARDEN PIOTR",
+   "inv": "cdf8cf24d956a46e487319e76047561b5bd1ed0c681434fb1445d35469e3d153",
+   "design": "2328aecbd99a50e445c6a0a5b21ee8ed93ccceee1ffe344bece75dee8e47d69f"
+  },
+  "hearthome#4": {
+   "name": "STELLAN",
+   "inv": "e14c1d449f88016c2b96c1a5989b37d10dcc9b0db9dbddc679a2e4fff03b72fb",
+   "design": "3ee3670e03b38b00976617d54d7e943bc018d914125eaddd1ba85c6dea949b37"
+  },
+  "solaceon#0": {
+   "name": "MART CLERK",
+   "inv": "022e0c0375ca2113674e22c31bb287c2b45be2e11750c9745f6cbb17caa05d3e",
+   "design": "a53a509f435d28a8a6d6ab82bb4dcee8025a30a5d0d292ea709bc6be5d69b9c3"
+  },
+  "solaceon#1": {
+   "name": "DAY CARE LADY UNA",
+   "inv": "b0e9b1218d634cb07b58d51a07c38ee73bf00fa43fa04c1a6d8de15f6a449e66",
+   "design": "a52ecca8e2ae2f63df3880fe8efcab07cec56a5811fc11d6ad11f22eae0b6768"
+  },
+  "solaceon#2": {
+   "name": "RUIN DELVER OSSA",
+   "inv": "3ba43722a74103bbde80bc2118ffa50344dac9990a2fee2c08a8f6633a713e42",
+   "design": "bc7d2dadb3360be9081cd690f6790d452984e2af58d4e0001d3d750fe94afa10"
+  },
+  "solaceon#3": {
+   "name": "BREEDER KID WREN",
+   "inv": "e1cc659599f373d81d6047f53b86b77c322530ea7806b6aa8b3e8b183e77f197",
+   "design": "0eec48d0b0124db5dbe0c70b808d9319cd2cf39a5310537ea5a223f91090ebb0"
+  },
+  "veilstone#0": {
+   "name": "MART CLERK",
+   "inv": "89a1d972cba633e6896fd7ce104f11cec5f6cbc456c564c015fc51739954257d",
+   "design": "a53a509f435d28a8a6d6ab82bb4dcee8025a30a5d0d292ea709bc6be5d69b9c3"
+  },
+  "veilstone#1": {
+   "name": "DEPT CLERK VEE",
+   "inv": "c509c8ad0b3d986acd358be019b1f05bffe30e57cbe2f34bf6a9219302b8fd6e",
+   "design": "a53a509f435d28a8a6d6ab82bb4dcee8025a30a5d0d292ea709bc6be5d69b9c3"
+  },
+  "veilstone#2": {
+   "name": "METEOR WATCHER SOL",
+   "inv": "7568d01b8612b1b91447f94de28819fc1e36fd24657271351bd933c4c68c199b",
+   "design": "e450f649cef2e4e94b5a1910db0352b44aed4f98871ed8fbe6c8d18be50d7ec2"
+  },
+  "veilstone#3": {
+   "name": "WAREHOUSE HAND BRIN",
+   "inv": "41eb9dc847634dc60a4a51f204337abdf81081b534de99fb5cf56a034dd58a7a",
+   "design": "b2381a9f6c2c23bff3a9c19f880506307e6d55cf4f5b8ebf6b7f409e3e4528bf"
+  },
+  "veilstone#4": {
+   "name": "STELLAN",
+   "inv": "fb101654febb74d02ef59d36fa7b039fd28210eaefc2bd0f8e5f46051498c24e",
+   "design": "3ee3670e03b38b00976617d54d7e943bc018d914125eaddd1ba85c6dea949b37"
+  },
+  "veilstone#5": {
+   "name": "REGGIE",
+   "inv": "0effcb7cde3f4eb8bf3acea7757f35c1c35718f78fbb981d9bcb03f05859da4f",
+   "design": "fdbc53d125bcf2d4c2c6a0728f150ded59487c0c2f9187e1ff52a64297c47be1"
+  },
+  "canalave#0": {
+   "name": "MART CLERK",
+   "inv": "fa88af9237a2752452337f31186404cfb68d733229311b2048200faef24ae31c",
+   "design": "a53a509f435d28a8a6d6ab82bb4dcee8025a30a5d0d292ea709bc6be5d69b9c3"
+  },
+  "canalave#1": {
+   "name": "CAPT WESTWIND",
+   "inv": "9fd8144271bc6d14733c55e32c198edcf345ee232ce6c63ef16ea9983b79cc22",
+   "design": "8294f8d697a8a6d36f3521d2edbd976a69cb837e324170963392fa138019346c"
+  },
+  "canalave#2": {
+   "name": "LIBRARIAN MIRA",
+   "inv": "2a2fdea003e7134d3f5433d843c58509fd5448dfbad6db52b2d3aaf497b5a72b",
+   "design": "a52ecca8e2ae2f63df3880fe8efcab07cec56a5811fc11d6ad11f22eae0b6768"
+  },
+  "canalave#3": {
+   "name": "SAILOR KETT",
+   "inv": "ae02f4a4ae4287868a13949b2109be0b35c8afee9cf56b81f6ef03757bc9bfef",
+   "design": "5a9a8fddca80387d06ac8652a59584703efa820139b95103972c7bbfc06f9b53"
+  },
+  "canalave#4": {
+   "name": "SAILOR BRINE",
+   "inv": "c35875eb427f001c71e87f8119499bcf4f2143ccd93793b52f4cf7ff308f4550",
+   "design": "8294f8d697a8a6d36f3521d2edbd976a69cb837e324170963392fa138019346c"
+  },
+  "canalave#5": {
+   "name": "SAILOR LUNA",
+   "inv": "71cac1abb29f610415fd676f687e3363ee8c819d698ebd0c72308d700c849af3",
+   "design": "8294f8d697a8a6d36f3521d2edbd976a69cb837e324170963392fa138019346c"
+  },
+  "canalave#6": {
+   "name": "SAILOR ELDRIC",
+   "inv": "2728e3d64eca5696cc46b82b3c32b9673b2c835c0273ff08fb917d9740abc2b4",
+   "design": "48e48a179282c0b51270fc4100a02a23fccc19d066e9f83000a624b4efaa6806"
+  },
+  "r201#0": {
+   "name": "YOUNGSTER TAM",
+   "inv": "e7bc82c6a5c6593a8cfade23f161e15de3818876fbcd30863fd23dcb65b12fc2",
+   "design": "b93091bbbfb5c593c1eac432fc2f7d3f8a5c69dfcbc44e4e7fe253197377aa8e"
+  },
+  "r202#0": {
+   "name": "LASS MIRA",
+   "inv": "640ceddae132094e337a3d8ba8f7a25a8e8c0e3a3430723b6512117f608a1065",
+   "design": "08977cc1648a83a1304c0879b3c6e8ae8b6400f19b8650ed2cfeadbafe1c833a"
+  },
+  "r203#0": {
+   "name": "EXCAVATOR KID CAL",
+   "inv": "197edbac8f184c9e1412bfc2bc9eed0952171f6d84502a32e0adcefec3bded1a",
+   "design": "b93091bbbfb5c593c1eac432fc2f7d3f8a5c69dfcbc44e4e7fe253197377aa8e"
+  },
+  "r204#0": {
+   "name": "HIKER PAVEL",
+   "inv": "b850b9f46eda9bf32c89633a72aa9d27d190d0327cd46131f1ccedd35bc098e4",
+   "design": "30c311ceda8065670178196708cfd737eca455bb21d0d4e3666586d3399ad0e5"
+  },
+  "r205#0": {
+   "name": "TURBINE TECH JUNO",
+   "inv": "d6494a246f7640ee0cd7dfa8b1452d1a10eb79e99961c468aa90f6291a6c603e",
+   "design": "b2381a9f6c2c23bff3a9c19f880506307e6d55cf4f5b8ebf6b7f409e3e4528bf"
+  },
+  "r206#0": {
+   "name": "CYCLIST RHEA",
+   "inv": "719ea6225f2c1394f1160e2d617efcdb9b190693b6edf15dc85309c4fcba55c8",
+   "design": "5b5c4269e0a4cd22bf59e74cd2fc84ec6cbd919daa2e7b4ac9c00ca1e7776f77"
+  },
+  "r207#0": {
+   "name": "HIKER EMBER",
+   "inv": "472375626fc602bc560adf442417d3f478a4b503f49772edb3ba2962438ffd18",
+   "design": "30c311ceda8065670178196708cfd737eca455bb21d0d4e3666586d3399ad0e5"
+  },
+  "r208#0": {
+   "name": "HIKER DUST",
+   "inv": "188f4b1cc158cad961a567496ee7fc166b64612bcd0ee6f4639b4d721bff004f",
+   "design": "30c311ceda8065670178196708cfd737eca455bb21d0d4e3666586d3399ad0e5"
+  },
+  "r209#0": {
+   "name": "PILGRIM ANA",
+   "inv": "c62c1919a4fd64c4dfaf2f74031293e05bafd8d8b9cf6fe1304058b74a94664c",
+   "design": "a52ecca8e2ae2f63df3880fe8efcab07cec56a5811fc11d6ad11f22eae0b6768"
+  },
+  "r209#1": {
+   "name": "TRAVELLER MAREN",
+   "inv": "1114925c78c42cfb95956ba5c1dfc0151fe7ea7e82ac2c6b2702ea0df9c4b33c",
+   "design": "ee01fdb86005a79b763c4e3128072a81f9eb7ad575b2324408cdb44b10270892"
+  },
+  "r210#0": {
+   "name": "RANCHER BO",
+   "inv": "b24ca2813b2738214ca75f239360dc2a8ee3a35f411cd2bfd7f1a7bd801eb596",
+   "design": "b93091bbbfb5c593c1eac432fc2f7d3f8a5c69dfcbc44e4e7fe253197377aa8e"
+  },
+  "r211#0": {
+   "name": "HIKER PAVEL",
+   "inv": "fa5872ba47fcc71789db408bb7ef0d8a42c7a001cf4490d12a27a3c27b51ac54",
+   "design": "30c311ceda8065670178196708cfd737eca455bb21d0d4e3666586d3399ad0e5"
+  },
+  "r212#0": {
+   "name": "MARSH WARDEN IO",
+   "inv": "49e9c00f37b5e4da90fc713d064f0584ceaa48810bcedef2869cfab751a6770c",
+   "design": "bc7d2dadb3360be9081cd690f6790d452984e2af58d4e0001d3d750fe94afa10"
+  },
+  "r215#0": {
+   "name": "TRAINER SCHOOL KID MOSS",
+   "inv": "0d74df04359b1dc50f3a17df3d356364be0cd3185335a35670337fb705d3f46f",
+   "design": "0eec48d0b0124db5dbe0c70b808d9319cd2cf39a5310537ea5a223f91090ebb0"
+  },
+  "r218#0": {
+   "name": "CAUSEWAY KEEPER DEL",
+   "inv": "e00ad8d7c116c3bb0c71d980c3f1dc6ee404d08449c46b41bee8388b21ce01de",
+   "design": "9fe0d2d882a26824b99e3f8b9dac29911594c81fd6879bc206e15bca9947c96f"
+  },
+  "lake-verity#0": {
+   "name": "LAKESIDE ELDER BRAMBLE",
+   "inv": "5cb71aa7bf7c8481d0f3f736bbf8c7fc1253a678604ec02d04e4c32fc563c613",
+   "design": "ace5bf96837da58c4da8af242578bb7f7e3d9a6caa3072819d1919292e9e1906"
+  },
+  "oreburgh-mine#0": {
+   "name": "FOREMAN BRAM",
+   "inv": "75a2ded09603464ad5a235490b53492de1f30766ec66d428192c9fa3e14d7168",
+   "design": "b2381a9f6c2c23bff3a9c19f880506307e6d55cf4f5b8ebf6b7f409e3e4528bf"
+  },
+  "valley-windworks#0": {
+   "name": "WORKS CLERK",
+   "inv": "07ae8b4af878aabae97dee1461d6e15095f83e46a01a8851c9e1292f87d69ab1",
+   "design": "c95722ca4bd483e3af70efdfd3f450b0543c16fb68cca84c5e139f4fd6709787"
+  },
+  "valley-windworks#1": {
+   "name": "COMMANDER VESPER",
+   "inv": "87ad5fc93a45e5fec7737fe6b29dda1926d8e7013f6d2e0e8cf3180691d1d618",
+   "design": "2710741d6fda54df7b66392cdf2367299c391c7d29fca1b54e8f7bfaf7bdd3bc"
+  },
+  "eterna-forest#0": {
+   "name": "BUG MANIAC FERN",
+   "inv": "c15ec63a34731366fd8adba4c13223bcac3c203eecfed7e9d3ed828344743a40",
+   "design": "55b09919c7f5b696899856cf82d4d7cb55be723cf0965f33c8eb0eb8332dc9bc"
+  },
+  "amity-square#0": {
+   "name": "SQUARE WARDEN PIOTR",
+   "inv": "96895e93d1eecbca73d5bd5e4b45ddc2e5cd917bd8ee959726442677fbc98a43",
+   "design": "2328aecbd99a50e445c6a0a5b21ee8ed93ccceee1ffe344bece75dee8e47d69f"
+  },
+  "house-twinleaf#0": {
+   "name": "MS. HARLOW",
+   "inv": "92dc6c6985cc6e9cb5ff07a69bc7d0f73707554618a2c31684112e664a0b96df",
+   "design": "6aaf5ed7f4a2e5f883fa9b4f11aa49226db95787e2825aafb4ffdf90d74e35e1"
+  },
+  "house-twinleaf-rival#0": {
+   "name": "MR. OKONKWO",
+   "inv": "45a64bbed6dc5bc5ace5a46756bf357df1efe3d3c975510c18b52ad69bf4e8d4",
+   "design": "aa378486842daf25ae7ba5dbaceca9e8cce65cef4bb01c4d4ca57c1e8ff1165c"
+  },
+  "house-sandgem#0": {
+   "name": "RESEARCH HOSTESS VEE",
+   "inv": "668cda38bd5b9eaa5ff411dfbd2e008aaa65f0d6f38d7dc630e92c9eb2c9a985",
+   "design": "3dbb116e64dcbe22235d9b2408528b1a4ae79ff7cf2d60b36213ca838258beb1"
+  },
+  "house-jubilife#0": {
+   "name": "CONDO HOST RUE",
+   "inv": "66dd0e923485871ab246f24a9fa5630577b2217813c9d12b496adee3e2a35329",
+   "design": "aa378486842daf25ae7ba5dbaceca9e8cce65cef4bb01c4d4ca57c1e8ff1165c"
+  },
+  "house-jubilife-condo#0": {
+   "name": "PRODUCER MARA",
+   "inv": "4f3e8ffe2011524ae60f468b53704b475703eed36f6a4a787b9efa694490315e",
+   "design": "e95d8b2daafdf219edeca750ebdd5a59f50a105169d9ae212c4206e6556c6fd6"
+  },
+  "house-oreburgh#0": {
+   "name": "CURATOR MARA",
+   "inv": "1c04036430c34f04aa488704e35a560e4f0a16a844e0c212c62ffa2fc0b420d3",
+   "design": "0ee4dc9c566d356fff9ccda7b33f6208f07a6ca9142eb9d361233328ee55f59a"
+  },
+  "house-floaroma#0": {
+   "name": "FLORIST WREN",
+   "inv": "1a122a11f471195608f5d3fa96c94c770bc3a4e12dee770b3d5e96bcdd36eff4",
+   "design": "0ee4dc9c566d356fff9ccda7b33f6208f07a6ca9142eb9d361233328ee55f59a"
+  },
+  "house-eterna#0": {
+   "name": "HISTORIAN ILSE",
+   "inv": "e9ecbc4c38e836e5d300aa6c19e45b184228b6a1288ea0f69b6783987f5132b2",
+   "design": "3dbb116e64dcbe22235d9b2408528b1a4ae79ff7cf2d60b36213ca838258beb1"
+  },
+  "house-hearthome#0": {
+   "name": "CONTEST HOSTESS YUI",
+   "inv": "bbac045e4552f357d65a8fa2c19a37545e353c1e59ae55039364306181f5767f",
+   "design": "e95d8b2daafdf219edeca750ebdd5a59f50a105169d9ae212c4206e6556c6fd6"
+  },
+  "house-hearthome-poffin#0": {
+   "name": "POFFIN MASTER MASA",
+   "inv": "039331728d3919a914277a405512f93e326132c70038420ef32996bb1dc09d6d",
+   "design": "b2381a9f6c2c23bff3a9c19f880506307e6d55cf4f5b8ebf6b7f409e3e4528bf"
+  },
+  "house-solaceon#0": {
+   "name": "RUIN HOST PIOTR",
+   "inv": "4514ad2e4e93855f838a04041495bc249e13c70498051e94b523e2b766b2aa91",
+   "design": "e4df8859f2c0b36fd3e5f94433d4cda3b34f74529cbb1dc43cbfe9a03fa6f971"
+  },
+  "house-solaceon-daycare#0": {
+   "name": "DAY CARE MAN",
+   "inv": "db605df70b4462d7b95590b2c30d3622326c3faab44e30c6faab8ee2237125e2",
+   "design": "0386caccdcd930ac4e20a944d5885fa647da7509fb7f04e9bfe6a086b2b8e12f"
+  },
+  "house-veilstone#0": {
+   "name": "DEPT MANAGER VEE",
+   "inv": "f45cde7026b7da7404287c586a7919d6354e344a0125d128cddce71f98a7e42e",
+   "design": "f8c2b3363999a8c596ba772711e8afbf78a66e03b63fa8f27c94b6b5bd07865d"
+  },
+  "house-canalave#0": {
+   "name": "SAILOR HOSTESS ANA",
+   "inv": "791bd7aa6f973669579be4274f96f8b612340037962fad4550091dfa9a363cec",
+   "design": "0ee4dc9c566d356fff9ccda7b33f6208f07a6ca9142eb9d361233328ee55f59a"
+  },
+  "canalave-library#0": {
+   "name": "LIBRARIAN MIRA",
+   "inv": "c5bbc081f8164013120e3a2ea431cd09deb78e6ad680d7c57a984f6dea25eaa7",
+   "design": "a52ecca8e2ae2f63df3880fe8efcab07cec56a5811fc11d6ad11f22eae0b6768"
+  },
+  "rowan-lab#0": {
+   "name": "PROF. SORREL’S AIDE",
+   "inv": "27dbd4514e7db67bcec9aff77e618348ba9548307e4eeb1e3c0ba356bdba2341",
+   "design": "15e22cd7644c34f3e3067ad812962beef9706a78696410c356216898711df6ca"
+  },
+  "rowan-lab#1": {
+   "name": "AIDE COLM",
+   "inv": "5fe22b189ff78ca9aeeaf57874e1dc5a2f87b19c7444ade9b5d827e0f7c9030e",
+   "design": "e450f649cef2e4e94b5a1910db0352b44aed4f98871ed8fbe6c8d18be50d7ec2"
+  },
+  "rowan-lab#2": {
+   "name": "PROF. SORREL",
+   "inv": "aae482a769b110fc97ed49b23884a8fa9081c65846626038ab61eb4cdbffc64d",
+   "design": "d7e3d76da3df601a3811b7b2d852e5b49ca8ead9c90ee34a7340f7a777707bb2"
+  },
+  "jubilife-tv#0": {
+   "name": "STUDIO HOST",
+   "inv": "0b42fc92c6df02aaf8368393cf7f84f15c1f2d7e3a0653c53ecfc87f47060ef7",
+   "design": "a52ecca8e2ae2f63df3880fe8efcab07cec56a5811fc11d6ad11f22eae0b6768"
+  },
+  "galactic-eterna#0": {
+   "name": "RECEPTION CLERK",
+   "inv": "6790444cee317d43079c75c8188e453c85add06a68484b81e71282ad95b049c0",
+   "design": "f8c2b3363999a8c596ba772711e8afbf78a66e03b63fa8f27c94b6b5bd07865d"
+  },
+  "galactic-eterna#1": {
+   "name": "COMMANDER NOVA",
+   "inv": "ae5a4049ede01140afeb1192127d7aad42eb299d86a8334f1e678ec7385e3a4b",
+   "design": "d4ef70f1e5744185e1ef8d551ba7740400893923b12fd7b227087c605558b63b"
+  },
+  "galactic-hq#0": {
+   "name": "HQ RECEPTIONIST",
+   "inv": "c5994997cfa4cba9d3d12f849fcb8ef00868135670c053b3e48fed5b8903e7bd",
+   "design": "f8c2b3363999a8c596ba772711e8afbf78a66e03b63fa8f27c94b6b5bd07865d"
+  },
+  "galactic-hq#1": {
+   "name": "COMMANDER SORIN",
+   "inv": "ee4625419d3b1f86c7d34227fb4643bd2801888db0c52e548b919de0a2be9469",
+   "design": "25684adb8d149bb4ec3a10e67f53d3e0571d53bfe9d1221b09fe15fd67e6283a"
+  },
+  "gym-oreburgh#0": {
+   "name": "GYM ATTENDANT PETRA",
+   "inv": "63d8a39a822e0b355061f82f03a72b89cd1a3c540da9de3c45437d6b141ef970",
+   "design": "da8c26a2aa8739b9efc34a266f72eae6e90bec7b3c9798c444a6a95f6237f99c"
+  },
+  "gym-oreburgh#1": {
+   "name": "RONAN",
+   "inv": "abdb0833a2e557a6d6edcbdb8448abad4cfd6b9d517685f9caea238cb9947e11",
+   "design": "856dbdf6d4ec80a6f3922502a7b0a16b914e9f435f891b7ea4fe32d7474937d4"
+  },
+  "gym-oreburgh#2": {
+   "name": "MINER COLE",
+   "inv": "67fb4eaec964d0fe0483dfc972c2c79e416458afe6cb96607aad312201dde2ed",
+   "design": "88f503f68a78ba27998482b164762ac702c5242f7a2f78dcada3bbc9311e2eab"
+  },
+  "gym-oreburgh#3": {
+   "name": "MINER FENN",
+   "inv": "dc4b3a613f945a6f9aa4c5818e053498d3b162250fa531cdfb09a68e7cb91a70",
+   "design": "88f503f68a78ba27998482b164762ac702c5242f7a2f78dcada3bbc9311e2eab"
+  },
+  "gym-eterna#0": {
+   "name": "GYM ATTENDANT WREN",
+   "inv": "a3faabe641dee6a9f8f19011ace4bf34da79bea1a38817b7145fd747bed24019",
+   "design": "f645883dbd4b37af3ffe5686e09e6b5e10847c1de99ff166a62a097ade160318"
+  },
+  "gym-eterna#1": {
+   "name": "TANSY",
+   "inv": "866185cc6c88cb5d988e6f31f48ce239057cb9e52823641af0809eda77f74b1a",
+   "design": "e146186b8aa3fc439ad3bf806559c75c5eedcb1e7fa38bde4e8c3c4cbdeb9f51"
+  },
+  "gym-eterna#2": {
+   "name": "AROMA ADEPT LIA",
+   "inv": "d512822ae422203cfd50d106c1b8400d6eb4f33311d859873220486ce10f0b22",
+   "design": "0580294fc4bf0ed60334a700c87120f0c8d07090b40a159270c0cab68c8b30fd"
+  },
+  "gym-eterna#3": {
+   "name": "AROMA ADEPT ROSALIE",
+   "inv": "2fcec7ef7e4fcb0225fa18ae8f0666105e80806517147adf97e2bcf67d7e18bd",
+   "design": "12b8c05f851a47f1c95613346bf6b24abfe649c8fb284d0535acf7c1fb7f7c16"
+  },
+  "gym-hearthome#0": {
+   "name": "GYM ATTENDANT VESPER",
+   "inv": "272c8ca5da35e615e3eabeb143b0ea502e5141f08060127084eda3ad57d65d31",
+   "design": "fd762d8b0cbe59bc87fee45a0750da348f1a53a0b3a61d1f20f5296791a06ab3"
+  },
+  "gym-hearthome#1": {
+   "name": "ODILE",
+   "inv": "d75c478fcb4952a31f34e0abe0615a87f38959c4453a16116d768ab88e09b9aa",
+   "design": "1136f158cca05fd160cff32c43e23998894e56006d20849ab4fead1e60f9c91d"
+  },
+  "gym-hearthome#2": {
+   "name": "ACE TRAINER VERE",
+   "inv": "368c54a8dcc8da1a5aca3595150fe2944bb3ce4ec7707842a64f7923d87d813c",
+   "design": "aaed2d8eedbce6cf72b660d76d41645cfa567d50922897be797561e67445b57f"
+  },
+  "gym-hearthome#3": {
+   "name": "ACE TRAINER MIRA",
+   "inv": "92a6e1c055a110d3273686c14601c939e17f31fdeee4079da89dea18aebf33d4",
+   "design": "aaed2d8eedbce6cf72b660d76d41645cfa567d50922897be797561e67445b57f"
+  },
+  "gym-veilstone#0": {
+   "name": "GYM ATTENDANT KAI",
+   "inv": "72d992965f368576adfc8d21cce94bfeecaa575e5d8cc42d4337557e9c9ca3ff",
+   "design": "798b467417620b80d02e94dd7a0ab6cd84973d825818543957cb002d7b67a2b8"
+  },
+  "gym-veilstone#1": {
+   "name": "MAREN",
+   "inv": "44e0efca33a403ebad248483bc56290cad764b703d4e9ba669cca84c3266ec5e",
+   "design": "65787a3ff64109cd0ad10624601061d5d19a8bd8da7a8682c908498c1c7090bd"
+  },
+  "gym-veilstone#2": {
+   "name": "BLACK BELT JON",
+   "inv": "b37c1eab7131653c45456c909ff105b580c94d0c1e9fc9d791964272b7932d1b",
+   "design": "d8e365a90967e2b349cdcace4f44839403e8f7bdf3ed2db559c5a4d56f45dfc3"
+  },
+  "gym-veilstone#3": {
+   "name": "BLACK BELT RUE",
+   "inv": "7776674c7bf2b2d045653e43227049200b960bd2fbaf174d5c9cd691b1b5d7ed",
+   "design": "d8e365a90967e2b349cdcace4f44839403e8f7bdf3ed2db559c5a4d56f45dfc3"
+  },
+  "gym-canalave#0": {
+   "name": "GYM ATTENDANT FERRIC",
+   "inv": "e5eee29b40e5070a64d11b672efa1be194aec86c4539455a557d8151fd310fe2",
+   "design": "da8c26a2aa8739b9efc34a266f72eae6e90bec7b3c9798c444a6a95f6237f99c"
+  },
+  "gym-canalave#1": {
+   "name": "DORAN",
+   "inv": "02286fdff225a11a0e579a9556d59c70f2fbbea10c9d93e901f60139281f523f",
+   "design": "ec3d034dac80f14afaf97a0c7a80e2905216a18c96850bd71b5a35a4d8728a9d"
+  },
+  "gym-canalave#2": {
+   "name": "FOREMAN HOLLIS",
+   "inv": "b6e0cc1e874ee5128447820d17f204bd99cb22c22151f6612b6adecb35a45f5f",
+   "design": "88f503f68a78ba27998482b164762ac702c5242f7a2f78dcada3bbc9311e2eab"
+  },
+  "gym-canalave#3": {
+   "name": "FOREMAN ILD",
+   "inv": "681d217689313a3b64471a9cdbc57bd173056171e38fb43db624988f9042d620",
+   "design": "e05cf1e09a79462849ba7ea3e40ca825ee1a32c989694c5a10d2ec7146dbc49a"
+  },
+  "pastoria#0": {
+   "name": "MART CLERK",
+   "inv": "511545a0bc7437cf4689b7b2758a4344e9b69e10e531b82e7b735ea16481608d",
+   "design": "a53a509f435d28a8a6d6ab82bb4dcee8025a30a5d0d292ea709bc6be5d69b9c3"
+  },
+  "pastoria#1": {
+   "name": "MARSH GUIDE SOLENNE",
+   "inv": "04ca7752f05f832217ec3ed2a5140501c6ce087f50ee85d5e92beb68dd1bafb3",
+   "design": "bc7d2dadb3360be9081cd690f6790d452984e2af58d4e0001d3d750fe94afa10"
+  },
+  "pastoria#2": {
+   "name": "FEN FISHER ODO",
+   "inv": "688abda4e03519ff1485fe15d2759bd19d301c354906e6e54da3a6776e38caee",
+   "design": "e4308b77b5370fe08fee02b94cc204829f3cf99d3b95d9ab44febdf4b855dbcc"
+  },
+  "pastoria#3": {
+   "name": "BOG KID MIRE",
+   "inv": "e071c71dddc027d5add641857d9be7b6b67a495050dac7e5849a87b4a5c5ad37",
+   "design": "57112555a6f407b9832fa0e718b433656da7ea5ab5e947a7e079575464dd43cf"
+  },
+  "celestic#0": {
+   "name": "MART CLERK",
+   "inv": "31c6096ecf9a00e55b883de6ee32b515100721e56ce12f55f9f5acc65d7f8bfb",
+   "design": "a53a509f435d28a8a6d6ab82bb4dcee8025a30a5d0d292ea709bc6be5d69b9c3"
+  },
+  "celestic#1": {
+   "name": "SHRINE ELDER UME",
+   "inv": "afa168b373370ecb07796337c12c24e2dd29ac4b92efdd21907f93e1e47bdb1f",
+   "design": "ace5bf96837da58c4da8af242578bb7f7e3d9a6caa3072819d1919292e9e1906"
+  },
+  "celestic#2": {
+   "name": "HISTORIAN BLYTHE",
+   "inv": "b50b770aa3c4cf65e3bc4f5add3d2bd799190975d5fec968992d99d308a936d9",
+   "design": "e450f649cef2e4e94b5a1910db0352b44aed4f98871ed8fbe6c8d18be50d7ec2"
+  },
+  "celestic#3": {
+   "name": "FOG RUNNER KESTREL",
+   "inv": "d4a0737072abfb015ada9323cc62087ca14c27ca7b8c3f38815328d36d7e6720",
+   "design": "b93091bbbfb5c593c1eac432fc2f7d3f8a5c69dfcbc44e4e7fe253197377aa8e"
+  },
+  "snowpoint#0": {
+   "name": "CAPT NORTHSTAR",
+   "inv": "93baf39917cb12db415d88cc293fc0b890cd0ea553236a25ca5467d95f6a4efe",
+   "design": "8294f8d697a8a6d36f3521d2edbd976a69cb837e324170963392fa138019346c"
+  },
+  "snowpoint#1": {
+   "name": "MART CLERK",
+   "inv": "07b077494f256a0f7bdff02a961c1d4934f9480dfca878697db910e575587982",
+   "design": "a53a509f435d28a8a6d6ab82bb4dcee8025a30a5d0d292ea709bc6be5d69b9c3"
+  },
+  "snowpoint#2": {
+   "name": "TEMPLE ACOLYTE REN",
+   "inv": "e5bac72eed52240996949860de6f794977ceec2816b7b48328d19e42cde618f5",
+   "design": "b93091bbbfb5c593c1eac432fc2f7d3f8a5c69dfcbc44e4e7fe253197377aa8e"
+  },
+  "snowpoint#3": {
+   "name": "ICE FISHER SOLVI",
+   "inv": "7d2fce6896ee1129756c6da0e8d15ea42f7873590e8c15d04c7a2e3c05c234c4",
+   "design": "6b0d83fa80cb4b81770142441c833eb1753a2de43916faa17348fefd57c05cc5"
+  },
+  "sunnyshore#0": {
+   "name": "MART CLERK",
+   "inv": "0779690022efcbe986c07bd6aaaa57c06fbdb64dc71faafa89cbae6ef4d4c3e7",
+   "design": "a53a509f435d28a8a6d6ab82bb4dcee8025a30a5d0d292ea709bc6be5d69b9c3"
+  },
+  "sunnyshore#1": {
+   "name": "PANEL TECH JUNIPER",
+   "inv": "a04895c4b393d77d9c57cb0c91495fcf6455337b156bb5be3284249b68854243",
+   "design": "b2381a9f6c2c23bff3a9c19f880506307e6d55cf4f5b8ebf6b7f409e3e4528bf"
+  },
+  "sunnyshore#2": {
+   "name": "LIGHTHOUSE KEEPER BLY",
+   "inv": "130f6ac16987e762530ba75fdfa1a4ed1136c464cd245603e7c5f549cdbcf771",
+   "design": "8294f8d697a8a6d36f3521d2edbd976a69cb837e324170963392fa138019346c"
+  },
+  "sunnyshore#3": {
+   "name": "SUN KID SOLA",
+   "inv": "fb35bdd783bbe20b9581f8fd5a3d6570f06239aabbd7857e2c54235226aca926",
+   "design": "57112555a6f407b9832fa0e718b433656da7ea5ab5e947a7e079575464dd43cf"
+  },
+  "pokemon-league#0": {
+   "name": "LEAGUE PORTER ANSELM",
+   "inv": "1ce577c5e9c156156896f8a9a645d565f96fb90ffaafc29667ec11f2a5dbcaeb",
+   "design": "2328aecbd99a50e445c6a0a5b21ee8ed93ccceee1ffe344bece75dee8e47d69f"
+  },
+  "r212-south#0": {
+   "name": "MARSH RUNNER IO",
+   "inv": "9e464acb80bd6b11a4465ecd4193cb19a856819e72bebdd1035379f1e70f8da7",
+   "design": "bc7d2dadb3360be9081cd690f6790d452984e2af58d4e0001d3d750fe94afa10"
+  },
+  "r210-north#0": {
+   "name": "FOG WALKER UMBER",
+   "inv": "ed7eb3669eea76a12d36a6b16fdc52b39d742ded956c0390aa3ef46e67c26494",
+   "design": "30c311ceda8065670178196708cfd737eca455bb21d0d4e3666586d3399ad0e5"
+  },
+  "r213#0": {
+   "name": "BEACHCOMBER RUE",
+   "inv": "a82ffb565c6aded7f0f67e8c2ae2ff1097b4acda63a4e3ed920158dd0033229a",
+   "design": "a52ecca8e2ae2f63df3880fe8efcab07cec56a5811fc11d6ad11f22eae0b6768"
+  },
+  "r214#0": {
+   "name": "LAKESHORE HAND TOV",
+   "inv": "3a2d067acc0534259fbafefe46b7d8cfad587a3d2860f5acd987df597ecf0273",
+   "design": "b2381a9f6c2c23bff3a9c19f880506307e6d55cf4f5b8ebf6b7f409e3e4528bf"
+  },
+  "spring-path#0": {
+   "name": "QUIET WALKER ANKA",
+   "inv": "f515585f3f292b7b7a8b63a143c0671cbb6966e1ce197073a3449aaf687aed60",
+   "design": "a52ecca8e2ae2f63df3880fe8efcab07cec56a5811fc11d6ad11f22eae0b6768"
+  },
+  "r216#0": {
+   "name": "SKI PATROL VESK",
+   "inv": "1069817ceba6298343437eb44a52112bf0d970691e7d2d6c71ca7dd8ecaf9a05",
+   "design": "bc7d2dadb3360be9081cd690f6790d452984e2af58d4e0001d3d750fe94afa10"
+  },
+  "r217#0": {
+   "name": "CLIMBER SORREL",
+   "inv": "58ae4e9fc0c45ca388df625279572e468704e6f9dd2d889ca02a3e90cf1ccdc2",
+   "design": "30c311ceda8065670178196708cfd737eca455bb21d0d4e3666586d3399ad0e5"
+  },
+  "r221#0": {
+   "name": "COAST KID WREN",
+   "inv": "dfacccc44a2ecf6406d6acf8a3d956c1ca2c7c7ccbb507875b34b9dbb3665105",
+   "design": "0eec48d0b0124db5dbe0c70b808d9319cd2cf39a5310537ea5a223f91090ebb0"
+  },
+  "r222#0": {
+   "name": "BEACH TRAINER SOL",
+   "inv": "64f88a2dd97cd7178d4b964ecb30dd1e0ae2dd7e6951b74070ef14bbc0ccff7a",
+   "design": "b93091bbbfb5c593c1eac432fc2f7d3f8a5c69dfcbc44e4e7fe253197377aa8e"
+  },
+  "r224#0": {
+   "name": "STONE KEEPER MARL",
+   "inv": "a792cfa659c22d448e8c2431db90537aea568ef54256d8932b5deb597b90562e",
+   "design": "2328aecbd99a50e445c6a0a5b21ee8ed93ccceee1ffe344bece75dee8e47d69f"
+  },
+  "r225#0": {
+   "name": "ZONE VETERAN KEST",
+   "inv": "9d5d3549ebe2f73c01eccb059bf568a8d1574bc22c2742c38aa3aaf92d68a82d",
+   "design": "bc7d2dadb3360be9081cd690f6790d452984e2af58d4e0001d3d750fe94afa10"
+  },
+  "r227#0": {
+   "name": "ASH WALKER BRYN",
+   "inv": "672880ef8dc3feb10f7734554cc8cef55bfa93741fa2d9e15c0286c6f0661891",
+   "design": "30c311ceda8065670178196708cfd737eca455bb21d0d4e3666586d3399ad0e5"
+  },
+  "r228#0": {
+   "name": "SAND HERDER VEY",
+   "inv": "762e7d712d6ae3af5b111238c15fba035db9558f51dfd9c6a31899fa71b04540",
+   "design": "bc7d2dadb3360be9081cd690f6790d452984e2af58d4e0001d3d750fe94afa10"
+  },
+  "lake-valor#0": {
+   "name": "LAKEFRONT HOSTESS VERA",
+   "inv": "7ba1e55073eceffeb5790dbe92617cefd304eb9300f2ace2f20f8a6209891800",
+   "design": "a52ecca8e2ae2f63df3880fe8efcab07cec56a5811fc11d6ad11f22eae0b6768"
+  },
+  "lake-valor#1": {
+   "name": "DARA",
+   "inv": "0dd2cce2b0198edbb300babd5a754e681b4d8d1f6b027b7ef160a0c51fe48961",
+   "design": "0580294fc4bf0ed60334a700c87120f0c8d07090b40a159270c0cab68c8b30fd"
+  },
+  "lake-acuity#0": {
+   "name": "ICE WARDEN HALVOR",
+   "inv": "36a93b6d501e8c5dd6daecd23469a4c3e0dc17699d13d46e23c7cdeb6d032a60",
+   "design": "adc744fa402f6cd122c3159351ba224776c233349273afd2e420dab080a2b9f5"
+  },
+  "lake-acuity#1": {
+   "name": "STELLAN",
+   "inv": "433df7539930fcf44fb7458dfed034d5a1447d7c0e3baaf7949d6c13cd9fbc2e",
+   "design": "3ee3670e03b38b00976617d54d7e943bc018d914125eaddd1ba85c6dea949b37"
+  },
+  "sendoff-spring#0": {
+   "name": "SPRING KEEPER MOSS",
+   "inv": "9fa02c70f389f5aa1171209c56ba6a6417472cffda17ffa1b5b104974fef0f46",
+   "design": "ace5bf96837da58c4da8af242578bb7f7e3d9a6caa3072819d1919292e9e1906"
+  },
+  "great-marsh-gate#0": {
+   "name": "MARSH WARDEN IO",
+   "inv": "c4917b20622fc614b2c793874460cf4d49dcf4903f946a0455f137fa58844df5",
+   "design": "bc7d2dadb3360be9081cd690f6790d452984e2af58d4e0001d3d750fe94afa10"
+  },
+  "iron-island#0": {
+   "name": "SAILOR BRINE",
+   "inv": "d1621f9f8b9c3b00800982594ed016a570e5a47ac751f66a71ffaa3fd1c7c1e0",
+   "design": "8294f8d697a8a6d36f3521d2edbd976a69cb837e324170963392fa138019346c"
+  },
+  "iron-island#1": {
+   "name": "PROSPECTOR HALDEN",
+   "inv": "f3424b4503769dc7fc9e3679c6097a1d8d07688432b16171edf80a7dbba889c9",
+   "design": "b2381a9f6c2c23bff3a9c19f880506307e6d55cf4f5b8ebf6b7f409e3e4528bf"
+  },
+  "stark-mountain#0": {
+   "name": "CRATER WARDEN ASHA",
+   "inv": "416826e33550b3a258c63524089dd41e6702b2f1d015583e400d07dbc0d496bc",
+   "design": "bc7d2dadb3360be9081cd690f6790d452984e2af58d4e0001d3d750fe94afa10"
+  },
+  "fuego-ironworks#0": {
+   "name": "FOREMAN FUEGO",
+   "inv": "fb89cd7aaf7cf1aecd85725f1c80ee61c78ec8eda457150c168129f48ef08a17",
+   "design": "b2381a9f6c2c23bff3a9c19f880506307e6d55cf4f5b8ebf6b7f409e3e4528bf"
+  },
+  "fullmoon-island#0": {
+   "name": "SAILOR LUNA",
+   "inv": "397cae6d32396d88c2a48a6dc9ef7fc4c13a593e33a37ca33d274a0295be580b",
+   "design": "8294f8d697a8a6d36f3521d2edbd976a69cb837e324170963392fa138019346c"
+  },
+  "fullmoon-island#1": {
+   "name": "MOON BOATMAN REED",
+   "inv": "85c5a00b9230b1171a00e9ec520a1d861be3f9ef139f137af79d45fc4e587ce2",
+   "design": "5a9a8fddca80387d06ac8652a59584703efa820139b95103972c7bbfc06f9b53"
+  },
+  "newmoon-island#0": {
+   "name": "MOON BOATMAN REED",
+   "inv": "26a975454c920e8d158d22e829857b6dc8dbe369c83e4f017fec4f9a2e205db7",
+   "design": "5a9a8fddca80387d06ac8652a59584703efa820139b95103972c7bbfc06f9b53"
+  },
+  "fight-area#0": {
+   "name": "MART CLERK",
+   "inv": "68db37cb24978a02104aa18513b0d69346bf1fa01d99d69b1968172f5f6dc408",
+   "design": "a53a509f435d28a8a6d6ab82bb4dcee8025a30a5d0d292ea709bc6be5d69b9c3"
+  },
+  "fight-area#1": {
+   "name": "CAPT NORTHSTAR",
+   "inv": "747ada1e5a4de3197aaa0eb468570392dad0c3d087b7d87884422f7fe7b52120",
+   "design": "8294f8d697a8a6d36f3521d2edbd976a69cb837e324170963392fa138019346c"
+  },
+  "fight-area#2": {
+   "name": "ZONE REGISTRAR OKTAVIA",
+   "inv": "63c26931ba82309495a526f52554833affd382345c818094208dae49ac9dce5d",
+   "design": "a53a509f435d28a8a6d6ab82bb4dcee8025a30a5d0d292ea709bc6be5d69b9c3"
+  },
+  "survival-area#0": {
+   "name": "MART CLERK",
+   "inv": "8cb8b5b4f00ee384070fa5969b156060f45022004a7d16421cf3d2525219449b",
+   "design": "a53a509f435d28a8a6d6ab82bb4dcee8025a30a5d0d292ea709bc6be5d69b9c3"
+  },
+  "survival-area#1": {
+   "name": "TRAIL COOK BORIN",
+   "inv": "04e42c17439c1b2365d7df349af983508f56e50ec54e904167dd1edfb48a790a",
+   "design": "b2381a9f6c2c23bff3a9c19f880506307e6d55cf4f5b8ebf6b7f409e3e4528bf"
+  },
+  "survival-area#2": {
+   "name": "CARTOGRAPHER WREN",
+   "inv": "189bd7c35db6cd036c45c9c0ec5034a5ba2c81d0214cbeba963f2b8c0d8c9419",
+   "design": "e450f649cef2e4e94b5a1910db0352b44aed4f98871ed8fbe6c8d18be50d7ec2"
+  },
+  "survival-area#3": {
+   "name": "BIRK",
+   "inv": "e2d717db3db0afe80c0ee57a6f5d1dd8a337818a80d29a9d1a42f04e0e9064ff",
+   "design": "5ba2743893119670fc8746499276234119431f37c7a3453fd527d9114c809301"
+  },
+  "resort-area#0": {
+   "name": "MART CLERK",
+   "inv": "310250c53732e75680c57977ef7bba7157f4d872c1c1da12a1944b8c1c525a31",
+   "design": "a53a509f435d28a8a6d6ab82bb4dcee8025a30a5d0d292ea709bc6be5d69b9c3"
+  },
+  "resort-area#1": {
+   "name": "VILLA HOSTESS PRIA",
+   "inv": "48502af7f7a8ec96eac60655811ca189856d4a3f2ec314aa9ce8d145eab0536a",
+   "design": "a52ecca8e2ae2f63df3880fe8efcab07cec56a5811fc11d6ad11f22eae0b6768"
+  },
+  "resort-area#2": {
+   "name": "GROUNDSKEEPER TAM",
+   "inv": "5ca505aba81028a68aeee944b46a1398922d5852a2786cd507b1ddc34664d93a",
+   "design": "b2381a9f6c2c23bff3a9c19f880506307e6d55cf4f5b8ebf6b7f409e3e4528bf"
+  },
+  "house-pastoria#0": {
+   "name": "MARSH HOSTESS SOLENNE",
+   "inv": "5714c6a53501c923bb8db03402fe70fffc2f9a0b4f994df76ee649c0e446b207",
+   "design": "e95d8b2daafdf219edeca750ebdd5a59f50a105169d9ae212c4206e6556c6fd6"
+  },
+  "house-celestic#0": {
+   "name": "MURAL KEEPER UME",
+   "inv": "d694283083cc9ef53c58cf54a3e61959eaaf76075f71aacf9db01e84ccbb7eae",
+   "design": "8720c0a3eff12a24b846a3c12b68f859a24be044e83301290296964f12547735"
+  },
+  "house-snowpoint#0": {
+   "name": "FERRY HOSTESS SOLVI",
+   "inv": "a710208d53e2cf3fe13868d52891bc92934d73e2a7dd27b446b52a3827e8e67e",
+   "design": "e95d8b2daafdf219edeca750ebdd5a59f50a105169d9ae212c4206e6556c6fd6"
+  },
+  "house-sunnyshore#0": {
+   "name": "PANEL HOST JUNIPER",
+   "inv": "2edbee2c0f5643e8861c1d1966e2c1c96b70084448e0d95ae027123b3e29d81a",
+   "design": "b2381a9f6c2c23bff3a9c19f880506307e6d55cf4f5b8ebf6b7f409e3e4528bf"
+  },
+  "house-fight#0": {
+   "name": "REGISTRAR HOST OKTAVIA",
+   "inv": "15164ea9268d12c5d603f848fbaf916bf1f9d388831208ddb6f3127d848966e1",
+   "design": "562d36cfcfd4e7b2475af3451e5f90aa406a6c65e0f7bba38b25ae731e939148"
+  },
+  "house-survival#0": {
+   "name": "TRAIL HOST BORIN",
+   "inv": "cfca1cf5423d8f18b86bf96759386e336654e1e8b433296915fe34f1b5af79c3",
+   "design": "d8d727503fd5d7c2e994c706fffd1ecfb7d22a319827f2623b8b4b74fca6d240"
+  },
+  "house-resort#0": {
+   "name": "VILLA KEEPER PRIA",
+   "inv": "a74f862ab0d605af32e92f82bc98c3162ccce7499a41ed5b461b26b3ef950a70",
+   "design": "3dbb116e64dcbe22235d9b2408528b1a4ae79ff7cf2d60b36213ca838258beb1"
+  },
+  "house-resort-villa#0": {
+   "name": "GRAND HOST TAM",
+   "inv": "f5cba23f2f961823d478632d39b23a6c4c607393e5edd74e1c28d73d1b701fc9",
+   "design": "2328aecbd99a50e445c6a0a5b21ee8ed93ccceee1ffe344bece75dee8e47d69f"
+  },
+  "gym-pastoria#0": {
+   "name": "GYM ATTENDANT MIRE",
+   "inv": "8cf2e0f2877edd6bd83943d2121774f1a8cb033561f64ae968e849fabaced8ad",
+   "design": "b94ae09d287be692025fd4b6188310fb4cd35abd11dd30710f89cff097023ac9"
+  },
+  "gym-pastoria#1": {
+   "name": "BREAKER BRADDOCK",
+   "inv": "113eb8a9e1146c13b78e6394b813ee4b44005e17f97b58d50a053fd72c67f5fb",
+   "design": "1f55b71e603b15cd1637eceb927015742018aea3dd75e720fccc02a82016c0d0"
+  },
+  "gym-pastoria#2": {
+   "name": "FISHER TAMSIN",
+   "inv": "b1fbec2c83d19a06b7e71e10af8f5dd3d55a969a06f4fefd87853d5cd9e166c5",
+   "design": "d7a52ce123a69a33387046ccc63a85648e0fa95fc9ba93b93416eccda84b4ae8"
+  },
+  "gym-pastoria#3": {
+   "name": "FISHER BOGUE",
+   "inv": "b662e8e6c9a6a6bee85cb463ed970dc97ff254170b2f760afed0d708e971391f",
+   "design": "9ed22c2f46575a3564ee3d2c7d20999f1568456c8f87e5bc44d48033154e4c7a"
+  },
+  "gym-snowpoint#0": {
+   "name": "GYM ATTENDANT REN",
+   "inv": "bbfe692c41f7bcad25e7f32d22bc092dd917876e34f3e097b1fd9f4804949e6c",
+   "design": "798b467417620b80d02e94dd7a0ab6cd84973d825818543957cb002d7b67a2b8"
+  },
+  "gym-snowpoint#1": {
+   "name": "NEVE",
+   "inv": "a8d13f742513764dfd3938a71f21a95deab36325af78aec75e5ff401fc08c344",
+   "design": "ce67790963e494b68cea3cd4fb1c8c9e028b127390dacdd335f864856d4d9429"
+  },
+  "gym-snowpoint#2": {
+   "name": "SKIER WRENNA",
+   "inv": "fbc2e14d3c921b4cd7ad8d6648b993845e7f0bf68ee294e7272fb63ee1ee2e79",
+   "design": "f0e1fcc25cf0c5682dd93f2fc34ce6444b3149ca3cbd7c93dab2af33aa98d9e0"
+  },
+  "gym-snowpoint#3": {
+   "name": "SKIER TOMAS",
+   "inv": "0c6d9cc2dab0df1201edcdf8778c485429860a4f48d400343d7e15264c6ee587",
+   "design": "550ddeb50a9558ecb85ae4be2b714bb0e4793a1100c1a2fe430defb3f5f2c81d"
+  },
+  "gym-sunnyshore#0": {
+   "name": "GYM ATTENDANT VOLTA",
+   "inv": "81a4592b80b93e9fa448ac3e66b420adfb49ba3c9c12d58a1a152472852e04f8",
+   "design": "fd762d8b0cbe59bc87fee45a0750da348f1a53a0b3a61d1f20f5296791a06ab3"
+  },
+  "gym-sunnyshore#1": {
+   "name": "RAINER",
+   "inv": "871fcfc25c223f75c5fdebbdd6c8f3772cd7b0db8cbcbe5ec77896bf1f74f080",
+   "design": "5d8394ee3eee5207a35a3417bd7e78615ce81e94dd9d34132d034d18507c7ffe"
+  },
+  "gym-sunnyshore#2": {
+   "name": "TECHNICIAN SOLENNE",
+   "inv": "fc29fd590c53df8db43f14a642788f2b6a8f079a36b2fa53a330eec460946546",
+   "design": "adc57181c985f98921d2071a8d1d1cba53c798a8fcb4224a9f0f1da397405731"
+  },
+  "gym-sunnyshore#3": {
+   "name": "TECHNICIAN VOSS",
+   "inv": "c7111e30636ede3f653609a1fb9432a27411ca3ed2be54bc5e40f9b25ebf678e",
+   "design": "70de9fa8f1728931c23751fcb0d0fbdcb8a2c5191e30e75125ae6ba3f0100e2a"
+  },
+  "celestic-shrine#0": {
+   "name": "SHRINE ELDER UME",
+   "inv": "5ab9cfac22f0a1f9ce8d0a0bb84d2d799148001399480e86abeb12c3324f18a5",
+   "design": "ace5bf96837da58c4da8af242578bb7f7e3d9a6caa3072819d1919292e9e1906"
+  },
+  "sunnyshore-lighthouse#0": {
+   "name": "LIGHTHOUSE KEEPER BLY",
+   "inv": "e927fedd076b321765c92266e8705452be47a6224223771d2c9744d880e3151c",
+   "design": "8294f8d697a8a6d36f3521d2edbd976a69cb837e324170963392fa138019346c"
+  },
+  "league-lobby#0": {
+   "name": "LEAGUE NURSE-CLERK",
+   "inv": "c6523cb239e294304cdaaaa4156f6514458e7144924fcce767e01aaa6fc23545",
+   "design": "a53a509f435d28a8a6d6ab82bb4dcee8025a30a5d0d292ea709bc6be5d69b9c3"
+  },
+  "league-lobby#1": {
+   "name": "LEAGUE REGISTRAR",
+   "inv": "3be2950e52f8df812451a721ff0a501eea9ccbe22ba3102b5250e7f7270cd749",
+   "design": "c7412cf8919605aec269d088478acc8d5892fa616a0b5589fe0de789dae70cf1"
+  },
+  "league-lobby#2": {
+   "name": "STELLAN",
+   "inv": "abd19b971686128ddc5ce7a61b820d74a10dfa688abff3d50bad8e71ae2d60cc",
+   "design": "3ee3670e03b38b00976617d54d7e943bc018d914125eaddd1ba85c6dea949b37"
+  },
+  "league-lobby#3": {
+   "name": "CASSIAN",
+   "inv": "3a6a2567413f1f0f3ade74c4ac3080abca03697907cb73ae08fbe0bc25f02cd2",
+   "design": "cbab1373698aa3cd7137a20370e9f6926553dc97e0fa24c1d013a5e2febbe568"
+  },
+  "league-chamber-1#0": {
+   "name": "CHAMBER STEWARD",
+   "inv": "64b3568df4cb9f6f994ddf0bb138b1dcd3d523bb3c0b64e28bfaf4496fd29baf",
+   "design": "fd762d8b0cbe59bc87fee45a0750da348f1a53a0b3a61d1f20f5296791a06ab3"
+  },
+  "league-chamber-2#0": {
+   "name": "CHAMBER STEWARD",
+   "inv": "d2c1327991ce5f6f6e2c549bc3ac774bf902db2b92572123b6520817b9da7adc",
+   "design": "f645883dbd4b37af3ffe5686e09e6b5e10847c1de99ff166a62a097ade160318"
+  },
+  "league-chamber-3#0": {
+   "name": "CHAMBER STEWARD",
+   "inv": "945a8fbbb6268dd094125bf14cbc7ec7feb8b7e6b7ff07fcf6bf0de96db31712",
+   "design": "798b467417620b80d02e94dd7a0ab6cd84973d825818543957cb002d7b67a2b8"
+  },
+  "league-chamber-4#0": {
+   "name": "CHAMBER STEWARD",
+   "inv": "b5a2166d1b481c09ae1acae5b8769e2a24ff2aa38920c894efd646def29a9d14",
+   "design": "798b467417620b80d02e94dd7a0ab6cd84973d825818543957cb002d7b67a2b8"
+  },
+  "league-champion#0": {
+   "name": "CHAMBER STEWARD",
+   "inv": "797e570beb170626324d4056cf0e038c8460e51cba3edd9578a9a95da808fc6d",
+   "design": "fd762d8b0cbe59bc87fee45a0750da348f1a53a0b3a61d1f20f5296791a06ab3"
+  },
+  "slowpoke-well#0": {
+   "name": "VANTA GRUNT",
+   "inv": "00fec339aa787655e49b1cfee80df39bede8d28e123d0827a0504292779ce2ff",
+   "design": "62ed88c1a17affeca742328670565d2220d4315b56eca72e9d379f81e6dd8803"
+  },
+  "slowpoke-well#1": {
+   "name": "VANTA GRUNT",
+   "inv": "3fcedfa11972098d797098c4bbb35089ff9e068782870ef618c55083a9ded364",
+   "design": "50b2bf370bb204d9c1cbb695eca507bc64696418e383d337d538cf507e444faf"
+  },
+  "slowpoke-well#2": {
+   "name": "VANTA SENIOR",
+   "inv": "a6ef2d7d72d85baaabb2ad131cbf5665daddb84713847a341cb6483cbcc108d6",
+   "design": "8f9e0fefec34cea1c1bf72edca5b3993bc64457f81db310b27286082c7ee2cd8"
+  },
+  "mt-silver-cave#0": {
+   "name": "ROSS",
+   "inv": "bb4968355ff571e89e7a762a64470155727c8f0363334afcb9593cee487ae0ab",
+   "design": "9388324f34afb97ba385c90808ab249620e3e576490403ce638425f99e7cb4fb"
+  },
+  "burned-tower-1#0": {
+   "name": "ASHKEEPER MONK",
+   "inv": "8c0af7f59223b851cf01f3342bfa99782d6f3952ca6772304ffcf91c943939e6",
+   "design": "2df10cdcd6135e4d62fe113dc41646185d2f77770ce50a45af60e99ef767a640"
+  },
+  "contest-slateport#0": {
+   "name": "MAIA",
+   "inv": "49a51e123cbb51c8e4c50d6017c502d5f1f7d82bcde029e4f7d52efdbb814413",
+   "design": "ded150ee37b6201943907e1e8642bf6328f0085c36c9281f16bd07c3c30112b9"
+  },
+  "contest-verdanturf#0": {
+   "name": "MAIA",
+   "inv": "f61be6384609a7f35064912ad014c07fca9c621b2e7d1c9f83e6f22da4f95b33",
+   "design": "ded150ee37b6201943907e1e8642bf6328f0085c36c9281f16bd07c3c30112b9"
+  },
+  "contest-fallarbor#0": {
+   "name": "MAIA",
+   "inv": "51ee7786af9d824b6c7f012daf2f52b59c16acbc8b71f1fc178453ff83cd7183",
+   "design": "ded150ee37b6201943907e1e8642bf6328f0085c36c9281f16bd07c3c30112b9"
+  },
+  "contest-lilycove#0": {
+   "name": "MAIA",
+   "inv": "68fec85aad1579458ea08bc4a114dd90bd577f9d8a879bab71836a63d18e838e",
+   "design": "ded150ee37b6201943907e1e8642bf6328f0085c36c9281f16bd07c3c30112b9"
+  },
+  "victory-road-maris#0": {
+   "name": "EMIL",
+   "inv": "9202195008c8e25c0d07929a79babd56bc61b88c8e9b467239bebd64cfd5ea7e",
+   "design": "73f99c95c6d2a49bffc0859fe337976ffb7c6b549396419aaa54f6590fb89170"
+  },
+  "cave-of-origin#0": {
+   "name": "KEEPER ANTHEA",
+   "inv": "aa536f3091e69151ccaa48b7f0b962b957c73b71335a6b0e20855f38636de754",
+   "design": "2791dae6bfcf444098bc4a26418709e79ee5b7d5acb9cfa53c52c77eb80c4850"
+  },
+  "contest-hearthome#0": {
+   "name": "DARA",
+   "inv": "7d12ad4dab4e2bb8e7af1ff7b4fc5c9c8e367843687e79d7523f1629572b64de",
+   "design": "0580294fc4bf0ed60334a700c87120f0c8d07090b40a159270c0cab68c8b30fd"
+  },
+  "mart#0": {
+   "name": "SHOPKEEPER",
+   "inv": "38a1da28705589ec2a60419d45b8e8d6339c87c00685b976d063075292a53361",
+   "design": "60f802c8aa81c2896b7df1f62f39555dc90fc28fb504a5d88688d1f47c81247f"
+  },
+  "frontier-pyramid-a#0": {
+   "name": "TITUS",
+   "inv": "52c5386a709f3b521dad5630a28493d7ff9872f9a8c6b25f5079b47d4beb1220",
+   "design": "738b0f4ed7b5127306a50a989a15ce035b85cf4898fdb4becbe982b51d311f9b"
+  }
+ }
+}
