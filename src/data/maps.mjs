@@ -1451,6 +1451,24 @@ export const WALKABLE = new Set(['.', ',', 'D', 'E', 'C', 'F', 'J', 'K', '1', '2
   // parallel branches; W17-AB takes 1507-1519 on its own);
   // 1111 stays empty.)
   ...[1520, 1521, 1524, 1525, 1528, 1529, 1532, 1534]
+    .map((i) => String.fromCodePoint(0x1E00 + i)),
+  // Wave W17-AD: the Amber Sea lane sand chars (U+1E00+1536..,
+  // tiles.mjs W17AD_KIND_DEFS) are walkable — wakesand (West),
+  // gardensand (Central), resortsand (East) and shrinesand
+  // (North), each swapped 1:1 from the walkable shipped sand
+  // char on its own lane, so shore stays shore. The rock chars
+  // (1537, 1539, 1541, 1543, swapped from the 'R' rock char)
+  // are NOT here: rocks were never walkable. The islet
+  // dressing register (palm/tropgrass/grass/tree/flower) and
+  // coral stand byte-preserved entire (Director Ruling #2);
+  // the Ruling #1 islet repositioning moved sand cells as
+  // clusters with per-lane class counts identical, so this
+  // set's membership — and the lanes' dead-pocket census —
+  // cannot move. (Indices 1536-1543 per the Amber lanes
+  // program plan, WAVE-W17-AD-AMBER-LANES-PLAN.md — the
+  // route program's last allocation: the program closes at
+  // 451 kinds over 1092-1543; 1111 stays empty.)
+  ...[1536, 1538, 1540, 1542]
     .map((i) => String.fromCodePoint(0x1E00 + i))]);
 
 // Trainer definitions for the slice.

@@ -4650,6 +4650,82 @@ W17AC_KIND_DEFS.forEach(([kind], i) => {
 export const W17AC_PROP_KINDS = W17AC_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
 export const W17AC_WALL_KINDS = W17AC_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
 export const W17AC_FLOOR_KINDS = W17AC_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
+// Wave W17-AD (Route Build Program — THE AMBER SEA LANES,
+// the program finale): all four lanes are defined once in
+// maps5.mjs (no dual copies, no registry re-pins). All four
+// are SEA LANES with NO recorded backstory — dressing only,
+// nothing invented: sand -> own lane sand, rock -> own lane
+// rock ONLY (the R40/R41 discipline); every water cell and
+// warp pair stands byte-preserved, and the census proves
+// ZERO current cells, ZERO 'L' mouths, ZERO mechanic cells,
+// ZERO signs/NPCs/trainers/items/events on any lane; the
+// land encounter table is EMPTY and the 8-species surf table
+// is byte-identical across the four and byte-preserved.
+// Amber Sea — West "First Ferry Water" (1536-1537): wakesand
+// a warm gold-green shallows sand carrying the ferry wake as
+// pale streak flecks, wakerock a low rounded wake-washed
+// boulder; water 435 + coral 10 byte-preserved entire.
+// Amber Sea — Central "The Crossing Heart" (1538-1539):
+// gardensand a bright garden sand with coral-pink flecks,
+// gardenrock a taller bright-faced garden boulder; water
+// 434 + coral 11 byte-preserved entire; the only four-way
+// lane (four warp pairs). Amber Sea — East "Resort Water"
+// (1540-1541): resortsand the fleet's brightest warm harbour
+// sand, shell-flecked, resortrock a clean pale worked-face
+// boulder; water 435 + coral 10 byte-preserved entire.
+// Amber Sea — North "Pilgrim Water" (1542-1543): shrinesand
+// the fleet's darkest sand value (deep-channel olive-brown,
+// sparse flecks), shrinerock a deep-shadow boulder with a
+// lantern-warm glint at its top register (art layer only);
+// water 433 + coral 11 byte-preserved entire; the only
+// two-pair lane. DIRECTOR RULING #1 (islet variance): the
+// three sand islets + palms stood at byte-identical
+// coordinates on all four lanes (one shared template) — each
+// lane's clusters are repositioned as units (translate /
+// vertical flip) under strict parity: per-lane cell-class
+// counts identical, warp cells untouched (all stand on
+// water), surf tables byte-identical, per-lane dead pockets
+// proven identical (25/lane, the islet cells themselves);
+// any lane whose pockets would move would have kept the
+// template — none did. DIRECTOR RULING #2: the islet
+// dressing register (palm 4, tropgrass 3, grass 1, tree 1,
+// flower 1 per lane — the archipelago's shared shore
+// register) stands byte-preserved entire; only sand + rock
+// convert. Twin pairs: West <-> Central (the warm coral
+// pair — gold-green wake water vs garden-bright still
+// water) and East <-> North (the far-shore pair — the
+// brightest resort shallows vs the deep quiet channel).
+// Sand kinds are 'floor' class (the shipped sand char was
+// walkable; the swaps are 1:1), rock kinds 'wall' class
+// (never walkable). Spec-presence is the pre-recorded
+// R40-class thin-lane exception (sand 20 + rock 5-6 per
+// lane), declared at plan time, never fixed by paving
+// water. Indices 1536-1543 per the program plan
+// (WAVE-W17-AD-AMBER-LANES-PLAN.md) — THE ROUTE BUILD
+// PROGRAM CLOSES at 451 kinds over 1092-1543 (Arden
+// 1092-1167, Yamato 1168-1256, Maris 1257-1383, Borea
+// 1384-1535, Amber 1536-1543); 1111 and every earlier
+// documented gap stay empty. Kind names verified unclaimed
+// against origin/main. Chars U+1E00+1536..
+export const W17AD_KIND_DEFS = [
+  ['wakesand', 'floor'],
+  ['wakerock', 'wall'],
+  ['gardensand', 'floor'],
+  ['gardenrock', 'wall'],
+  ['resortsand', 'floor'],
+  ['resortrock', 'wall'],
+  ['shrinesand', 'floor'],
+  ['shrinerock', 'wall'],
+];
+export const W17AD_KIND_CHARS = {};
+W17AD_KIND_DEFS.forEach(([kind], i) => {
+  const ch = String.fromCodePoint(0x1E00 + 1536 + i);
+  W17AD_KIND_CHARS[kind] = ch;
+  TILE_CHARS[ch] = kind;
+});
+export const W17AD_PROP_KINDS = W17AD_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
+export const W17AD_WALL_KINDS = W17AD_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
+export const W17AD_FLOOR_KINDS = W17AD_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
 export const SINNOH_TOWN_GROUND_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg);
 export const SINNOH_TOWN_GROUND2_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg2);
 // TX-3: the 8 gym exteriors by town (original type-accent motifs).
