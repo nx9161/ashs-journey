@@ -36,6 +36,15 @@
 // keeps the class counted; A1/A2 extend over the union, and A9 unit-
 // tests the resolution helpers. The surface parity drives land with
 // their art tranches (T1 ferry, T2 card, T3 finale + intro).
+// W10-C T2 growth (endings — cards + champion): the six playable
+// arcs carry cardPanel fields (PANEL_FIELD_REFS 0 -> 6 on this
+// branch; the merged pin reads 11 with T1's five enRoutePanel refs),
+// ev_champion gains the wave's one step-attach at index 7, A7 gains
+// the chartered SEAL FORM (post-battle: after the event's final
+// say-class step, before its first sealing step) pinned to
+// ev_champion by an A5-style anchor, and Part F-card parity-drives
+// showArcCompleteCard at src level (panel before the card text;
+// a field-less arc card is byte-identical in flow).
 
 import fs from 'node:fs';
 import os from 'node:os';
@@ -70,10 +79,12 @@ for (const [id, steps] of stepLists) steps.forEach((s, i) => { if (s && s.panel)
 // W10 proof panel + T1's 8 sovereigns + T2's 9 Yamato+Maris panels
 // + T3's 11 Borea/rest panels + T4's 10 Class B battle reveals
 // + T5's 5 glimpse/set-piece panels; W10-C T1 adds 5 ENTRIES by
-// data field (the embark crossings) — PANEL_STEPS stays 44).
-const PANEL_STEPS = 44;
-const PANELS_ENTRIES = 49;
-const PANEL_ART_BYTES = 544623;
+// data field (the embark crossings) and W10-C T2 adds the
+// champion seal step (+1 STEP) and 6 card entries — merge
+// reconciliation on T1+T2: 45 steps / 56 entries / 622397 B).
+const PANEL_STEPS = 45;
+const PANELS_ENTRIES = 56;
+const PANEL_ART_BYTES = 622397;
 const PANEL_ART_BASELINE_W10 = 11171; // the W10 proof panel alone
 
 ok('A1 shipped data carries at least one panel step', panelSteps.length >= 1);
@@ -103,8 +114,8 @@ if (FINALE_PANEL) fieldRefs.push(FINALE_PANEL);
 if (INTRO_SCRIPT.starterPanel) fieldRefs.push(INTRO_SCRIPT.starterPanel);
 // W10-C ratchet pin (moves only in-commit with its tranche:
 // 0 at T0 -> 5 T1 -> 11 T2 -> 13 T3).
-const PANEL_FIELD_REFS = 5;
-ok('A1 PANEL_FIELD_REFS ratchet: data-field panel references == pin (5 at W10-C T1 — the five enRoutePanel fields)',
+const PANEL_FIELD_REFS = 11;
+ok('A1 PANEL_FIELD_REFS ratchet: data-field panel references == pin (11 at W10-C T1+T2 merged — five enRoutePanel + six cardPanel fields)',
   fieldRefs.length === PANEL_FIELD_REFS);
 ok('A1 every data-field panel reference resolves through PANELS (A1 extension)',
   fieldRefs.every((id) => !!PANELS[id]));
@@ -128,6 +139,50 @@ ok('A3 panel art obeys the gate: <=16 colors, 128x80 canvas standard, full row s
     return e && Object.keys(e.pal).length <= 16 && e.w === 128 && e.h === 80 && Array.isArray(e.rows) && e.rows.length === 80;
   }));
 
+// ---------- W10-C T2: Part F-card — the card seam parity drive ----------
+// Src-level, stub ui (showArcCompleteCard is exported and presentation-
+// pure): the shipped kanto card plays its panel BEFORE the card text
+// and still fires done; a cloned arc record without cardPanel plays
+// the say only — byte-identical flow — and arcCompleteSummary output
+// is identical across both legs.
+{
+  const stubState = () => ({
+    story: { flags: {}, hof: [], arcDexStart: 0, arcStartPlaytime: 0 },
+    dex: { caught: {} }, party: [], badges: {}, player: { playtimeSec: 0 },
+  });
+  const cardDrive = (arc) => {
+    const calls = [];
+    const g = {
+      state: stubState(),
+      ui: {
+        showPanel: (art, cb) => { calls.push(['panel', art]); if (cb) cb(); },
+        say: (lines, cb) => { calls.push(['say', lines]); if (cb) cb(); },
+      },
+    };
+    let doneFired = 0;
+    GA.showArcCompleteCard(g, arc, () => { doneFired++; });
+    return { calls, doneFired };
+  };
+  const kantoArc = ARCS.find((a) => a.id === 'kanto');
+  const strippedArc = { ...kantoArc };
+  delete strippedArc.cardPanel;
+  const shipped = cardDrive(kantoArc);
+  const stripped = cardDrive(strippedArc);
+  const shippedPanels = shipped.calls.filter(([k]) => k === 'panel');
+  const shippedSay = shipped.calls.find(([k]) => k === 'say');
+  const strippedSay = stripped.calls.find(([k]) => k === 'say');
+  ok('F1 card seam (shipped leg): showArcCompleteCard plays panel-card-kanto exactly once, BEFORE the card text',
+    shippedPanels.length === 1 && shippedPanels[0][1] === 'panel-card-kanto'
+    && shipped.calls[0][0] === 'panel' && !!shippedSay);
+  ok('F2 card seam (shipped leg): the done callback still fires after the card',
+    shipped.doneFired === 1);
+  ok('F3 card seam (stripped leg): a cardPanel-less arc records the say only — no panel — and done still fires',
+    stripped.calls.filter(([k]) => k === 'panel').length === 0 && !!strippedSay && stripped.doneFired === 1);
+  ok('F4 card seam PARITY: arcCompleteSummary output and the card text lines are identical across both legs',
+    JSON.stringify(GA.arcCompleteSummary(stubState(), kantoArc)) === JSON.stringify(GA.arcCompleteSummary(stubState(), strippedArc))
+    && JSON.stringify(shippedSay && shippedSay[1]) === JSON.stringify(strippedSay && strippedSay[1]));
+}
+
 // W10 art budget: the panel entries' serialized bytes in art-data.mjs.
 const artDataText = fs.readFileSync(path.join(ROOT, 'assets/sprites/art-data.mjs'), 'utf8');
 let panelBytes = 0;
@@ -137,8 +192,8 @@ for (const { art } of Object.values(PANELS)) {
   if (start >= 0 && end > start) panelBytes += Buffer.byteLength(artDataText.slice(start, end + 7));
 }
 // W10-B ratchet pins (measured; move only in-commit with their tranche).
-const PANEL_ART_BYTES_PIN = PANEL_ART_BYTES;   // cumulative panel art after W10-C T1 (merge re-pin: 544623)
-const PANEL_ART_BYTES_PREV = 488885;  // cumulative after W10-B T1+T2+T3+T4+T5 — the latest tranche (W10-C T1) delta is measured from here
+const PANEL_ART_BYTES_PIN = PANEL_ART_BYTES;   // cumulative panel art after W10-C T1+T2 merged (merge re-pin: 622397)
+const PANEL_ART_BYTES_PREV = 544623;  // cumulative after W10-C T1 — the latest tranche (W10-C T2) delta is measured from here
 console.log('  panel art cumulative: ' + panelBytes + ' B (pin ' + PANEL_ART_BYTES_PIN + ' B; this tranche delta ' + (panelBytes - PANEL_ART_BYTES_PREV) + ' B of the 153600 B per-tranche cap)');
 ok('A8 PANEL_ART_BYTES pin: cumulative panel art equals the ratchet pin (measured)', panelBytes === PANEL_ART_BYTES_PIN);
 ok('A8 per-tranche budget: the latest tranche\'s panel art is within 150 KB (Director ruling, W10-B)',
@@ -146,10 +201,19 @@ ok('A8 per-tranche budget: the latest tranche\'s panel art is within 150 KB (Dir
 
 // A7 attach geometry, generalized from the A5 proof-scene pin: every
 // panel step in a battle event sits after the event's final build-up
-// say and before its battle step; in a non-battle event, after a say.
+// say and before its battle step (the REVEAL form); in a non-battle
+// event, after a say. W10-C T2 adds the chartered second form — the
+// SEAL form: a panel step after the event's final say-class step
+// (say/sayVar) and before its first sealing step (flag/questDone/
+// ending). The seal form is pinned to ev_champion by the anchor
+// check below; any other seal-form step in shipped data fails here.
 {
   const BATTLE_KEYS = ['wildBattleCatch', 'wildBattle', 'battleAny', 'battle'];
+  const SAY_CLASS_KEYS = ['say', 'sayVar'];
+  const SEAL_KEYS = ['flag', 'questDone', 'ending'];
+  const SEAL_ANCHOR = 'ev_champion';
   const bad = [];
+  const sealForms = [];
   for (const [id, steps] of stepLists) {
     steps.forEach((s, i) => {
       if (!s || !s.panel) return;
@@ -157,12 +221,22 @@ ok('A8 per-tranche budget: the latest tranche\'s panel art is within 150 KB (Dir
       if (bi >= 0) {
         let lastSay = -1;
         for (let j = 0; j < bi; j++) if (steps[j] && steps[j].say) lastSay = j;
-        if (!(i > lastSay && i < bi)) bad.push(id + '@' + i);
+        if (i > lastSay && i < bi) return; // reveal form
+        let lastSayClass = -1;
+        steps.forEach((t, j) => { if (t && SAY_CLASS_KEYS.some((k) => t[k] !== undefined)) lastSayClass = j; });
+        const sealIdx = steps.findIndex((t) => t && SEAL_KEYS.some((k) => t[k] !== undefined));
+        if (i > lastSayClass && sealIdx >= 0 && i < sealIdx) {
+          sealForms.push(id + '@' + i);
+          if (id === SEAL_ANCHOR) return; // chartered seal form
+        }
+        bad.push(id + '@' + i);
       } else if (!steps.slice(0, i).some((t) => t && t.say)) bad.push(id + '@' + i);
     });
   }
   if (bad.length) console.log('  A7 violations: ' + bad.join(', '));
-  ok('A7 attach geometry (generalized): every panel step sits after the final build-up say, before the battle step', bad.length === 0);
+  ok('A7 attach geometry (generalized + seal form): every panel step sits after the final build-up say, before the battle step — or in the chartered seal position', bad.length === 0);
+  ok('A7 seal form is chartered to exactly one event: ev_champion holds the only post-battle seal panel step in shipped data',
+    sealForms.length === 1 && sealForms[0] === 'ev_champion@7');
 }
 
 // proof-scene attach geometry at source level
@@ -173,6 +247,17 @@ ok('A8 per-tranche budget: the latest tranche\'s panel art is within 150 KB (Dir
   const bi = ev.findIndex((s) => !!s.wildBattleCatch);
   ok('A5 proof scene: ev_johto_celebi carries exactly one panel step, after the build-up say, before the catch step',
     ev.filter((s) => !!s.panel).length === 1 && pi > si && pi < bi && ev[pi].panel === 'shrine-chronofae');
+}
+
+// champion seal anchor at source level (W10-C T2): the seal form's
+// one chartered home — ev_champion index 7, after the sayVar that
+// closes Vale's last words, before the flag that seals the ending.
+{
+  const ev = K.EVENTS.ev_champion;
+  const pi = ev.findIndex((s) => !!s.panel);
+  ok('A5 champion seal anchor: ev_champion carries exactly one panel step, at index 7, naming champion-chamber, after the sayVar and before the sealing flag',
+    ev.filter((s) => !!s.panel).length === 1 && pi === 7 && ev[pi].panel === 'champion-chamber'
+    && !!ev[6].sayVar && !!ev[8].flag);
 }
 
 // --scene converter: deterministic + gate-clean on a synthetic fixture
@@ -506,6 +591,19 @@ const driver = `
   ok('H6 field-less (Class H): the kanto leg fires no panel and no en-route card, stamps reachedarc_kanto, and lands',
     h3.panels.length === 0 && h3.logText.indexOf('days at sea') < 0 && h3.g.state.story.flags.reachedarc_kanto === true && h3.mapId === 'vermilion' && h3.atStart,
     'panels=' + h3.panels.length + ' map=' + h3.mapId);
+  // W10-C T2 — champion seal geometry inside the shipped bundle
+  // (the A5 anchor / A7 seal form, bundle side): ev_champion's one
+  // panel step sits at index 7, after the event's final say-class
+  // step and before its first sealing step.
+  var cSteps = EVENTS.ev_champion;
+  var cpi = cSteps.findIndex(function (s) { return !!s.panel; });
+  var cLastSay = -1;
+  cSteps.forEach(function (s, i) { if (s.say || s.sayVar) cLastSay = i; });
+  var cSeal = cSteps.findIndex(function (s) { return !!s.flag || !!s.questDone || !!s.ending; });
+  ok('C1 bundle: ev_champion panel step sits in seal position — exactly one, at index 7, after the final say-class step, before the sealing flag',
+    cSteps.filter(function (s) { return !!s.panel; }).length === 1 && cpi === 7 && cpi > cLastSay && cSeal >= 0 && cpi < cSeal);
+  ok('C1 bundle: the seal step names champion-chamber and PANELS resolves it to the panel art',
+    cpi >= 0 && cSteps[cpi].panel === 'champion-chamber' && PANELS['champion-chamber'] && PANELS['champion-chamber'].art === 'panel-champion-chamber');
 
   globalThis.__W10Q__ = Q;
 })();`;
