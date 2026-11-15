@@ -6751,6 +6751,38 @@ W15T3_KIND_DEFS.forEach(([kind]) => {
 const W15T3_PROP_KINDS = W15T3_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
 const W15T3_WALL_KINDS = W15T3_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
 const W15T3_FLOOR_KINDS = W15T3_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
+// Wave W15-T4: the Revelry TV tower caps — three 16x48
+// bottom-anchored cap kinds (Premium+ W6 TX-3) swapped onto the
+// TV station's existing beamroof row in jubilife (maps9) ONLY:
+// revtvcap-l (west shoulder pylon, x=15), revtvcap-c (broadcast
+// centre — beacon + dish on a mullion mast — worn at x=16 and
+// x=17), revtvcap-r (east shoulder pylon, x=18). The building is
+// recorded fourfold on main (interior jubilife-tv, the (16,3)
+// warp, signs at (24,4) and (2,5)) — the T42 rollout refusal was
+// of the earlier unrecorded state and the Director ruled it
+// superseded (WAVE-W15-LANDMARKS-PLAN.md §1.7/§6(a)). All three
+// are 'wall' class, never in any WALKABLE spread: doors, warps,
+// posts, signs and ground are untouched, the swap exchanges
+// non-walkable roof cells for non-walkable cap cells. Indices
+// 1559-1561 per the W15 plan's per-tranche allocation (T1 claims
+// 1544-1551, T2 1552-1558, T3 the mast/lamp pair, T4 1559-1561),
+// verified free against origin/main, TILE_CHARS and every map
+// row. Authored art: assets/sprites/pix/tiles/
+// tile-revtvcap-l.pix, tile-revtvcap-c.pix, tile-revtvcap-r.pix.
+const W15T4_KIND_DEFS = [
+  ['revtvcap-l', 'wall'],
+  ['revtvcap-c', 'wall'],
+  ['revtvcap-r', 'wall'],
+];
+const W15T4_KIND_CHARS = {};
+W15T4_KIND_DEFS.forEach(([kind], i) => {
+  const ch = String.fromCodePoint(0x1E00 + 1559 + i);
+  W15T4_KIND_CHARS[kind] = ch;
+  TILE_CHARS[ch] = kind;
+});
+const W15T4_PROP_KINDS = W15T4_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
+const W15T4_WALL_KINDS = W15T4_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
+const W15T4_FLOOR_KINDS = W15T4_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
 const SINNOH_TOWN_GROUND_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg);
 const SINNOH_TOWN_GROUND2_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg2);
 // TX-3: the 8 gym exteriors by town (original type-accent motifs).
@@ -124326,6 +124358,156 @@ const ART = {
     "wwwwwwwywwwxwxwx",
     "wwwwwwwwxwxwwwww"
   ] },
+  "tile-revtvcap-l": { w: 16, h: 48, pal: {"m":"#5d8aa8","l":"#84aec9","d":"#385a73","w":"#dceef8","g":"#c1a85f"}, rows: [
+    "..gg............",
+    "..dd............",
+    "..dd............",
+    ".dddd...........",
+    "..dd............",
+    "..dd............",
+    "..dd............",
+    "..dd............",
+    "..dd............",
+    "..dd............",
+    "..dddd..........",
+    "..dmmd..........",
+    ".dddddddd.......",
+    ".dmmmmmmd.......",
+    "dddddddddddd....",
+    "dddddddddddddddd",
+    "dmmmmdmmmmdmmmmd",
+    "dmmmmdmmmmdmmmmd",
+    "llllllllllllllll",
+    "dmmmmdmmmmdmmmmd",
+    "dmmmmdmmmmdmmmmd",
+    "dmmmmdmmmmdmmmmd",
+    "dmmmmdmmmmdmmmmd",
+    "dddddddddddddddd",
+    "llllllllllllllll",
+    "dmmmmdmmmmdmmmmd",
+    "dmmmmdmmmmdmmmmd",
+    "dmmmmdmmmmdmmmmd",
+    "dmmmmdmmmmdmmmmd",
+    "dddddddddddddddd",
+    "llllllllllllllll",
+    "dmmmmdmmmmdmmmmd",
+    "dmmmmdmmmmdmmmmd",
+    "dmmmmdmmmmdmmmmd",
+    "dmmmmdmmmmdmmmmd",
+    "dddddddddddddddd",
+    "llllllllllllllll",
+    "dmmmmdmmmmdmmmmd",
+    "dmmmmdmmmmdmmmmd",
+    "dmmmmdmmmmdmmmmd",
+    "dmmmmdmmmmdmmmmd",
+    "dddddddddddddddd",
+    "llllllllllllllll",
+    "dmmmmdmmmmdmmmmd",
+    "dmmmmdmmmmdmmmmd",
+    "gggggggggggggggg",
+    "dddddddddddddddd",
+    "dddddddddddddddd",
+  ] },
+  "tile-revtvcap-c": { w: 16, h: 48, pal: {"m":"#5d8aa8","l":"#84aec9","d":"#385a73","w":"#dceef8","g":"#c1a85f"}, rows: [
+    ".......ww.......",
+    "......wggw......",
+    "......dwwd......",
+    ".......dd.......",
+    ".ww..........ww.",
+    ".www........www.",
+    "..www......www..",
+    "...www.ww.www...",
+    "....www..www....",
+    ".....wwwwww.....",
+    ".......dd.......",
+    ".......dd.......",
+    "......dddd......",
+    ".......dd.......",
+    ".......dd.......",
+    ".......dd.......",
+    ".....dddddd.....",
+    "..dddddddddddd..",
+    "llllllllllllllll",
+    "dmmmmdmmmmdmmmmd",
+    "dmmmmdmmmmdmmmmd",
+    "dmmmmdmmmmdmmmmd",
+    "dmmmmdmmmmdmmmmd",
+    "dddddddddddddddd",
+    "llllllllllllllll",
+    "dmmmmdmmmmdmmmmd",
+    "dmmmmdmmmmdmmmmd",
+    "dmmmmdmmmmdmmmmd",
+    "dmmmmdmmmmdmmmmd",
+    "dddddddddddddddd",
+    "llllllllllllllll",
+    "dmmmmdmmmmdmmmmd",
+    "dmmmmdmmmmdmmmmd",
+    "dmmmmdmmmmdmmmmd",
+    "dmmmmdmmmmdmmmmd",
+    "dddddddddddddddd",
+    "llllllllllllllll",
+    "dmmmmdmmmmdmmmmd",
+    "dmmmmdmmmmdmmmmd",
+    "dmmmmdmmmmdmmmmd",
+    "dmmmmdmmmmdmmmmd",
+    "dddddddddddddddd",
+    "llllllllllllllll",
+    "dmmmmdmmmmdmmmmd",
+    "dmmmmdmmmmdmmmmd",
+    "gggggggggggggggg",
+    "dddddddddddddddd",
+    "dddddddddddddddd",
+  ] },
+  "tile-revtvcap-r": { w: 16, h: 48, pal: {"m":"#5d8aa8","l":"#84aec9","d":"#385a73","w":"#dceef8","g":"#c1a85f"}, rows: [
+    "............gg..",
+    "............dd..",
+    "............dd..",
+    "...........dddd.",
+    "............dd..",
+    "............dd..",
+    "............dd..",
+    "............dd..",
+    "............dd..",
+    "............dd..",
+    "..........dddd..",
+    "..........dmmd..",
+    ".......dddddddd.",
+    ".......dmmmmmmd.",
+    "....dddddddddddd",
+    "dddddddddddddddd",
+    "dmmmmdmmmmdmmmmd",
+    "dmmmmdmmmmdmmmmd",
+    "llllllllllllllll",
+    "dmmmmdmmmmdmmmmd",
+    "dmmmmdmmmmdmmmmd",
+    "dmmmmdmmmmdmmmmd",
+    "dmmmmdmmmmdmmmmd",
+    "dddddddddddddddd",
+    "llllllllllllllll",
+    "dmmmmdmmmmdmmmmd",
+    "dmmmmdmmmmdmmmmd",
+    "dmmmmdmmmmdmmmmd",
+    "dmmmmdmmmmdmmmmd",
+    "dddddddddddddddd",
+    "llllllllllllllll",
+    "dmmmmdmmmmdmmmmd",
+    "dmmmmdmmmmdmmmmd",
+    "dmmmmdmmmmdmmmmd",
+    "dmmmmdmmmmdmmmmd",
+    "dddddddddddddddd",
+    "llllllllllllllll",
+    "dmmmmdmmmmdmmmmd",
+    "dmmmmdmmmmdmmmmd",
+    "dmmmmdmmmmdmmmmd",
+    "dmmmmdmmmmdmmmmd",
+    "dddddddddddddddd",
+    "llllllllllllllll",
+    "dmmmmdmmmmdmmmmd",
+    "dmmmmdmmmmdmmmmd",
+    "gggggggggggggggg",
+    "dddddddddddddddd",
+    "dddddddddddddddd",
+  ] },
   "tile-shrinesand": { w: 16, h: 16, pal: {"a":"#a4936e","b":"#877650","d":"#77683f","s":"#c9bb96"}, rows: [
     "aaaaasaaaaaaaaba",
     "abaaaaaaabsdabab",
@@ -130698,6 +130880,12 @@ for (const k of W15CH_FLOOR_KINDS) TILE_ART[k] = 'tile-' + k;
 for (const k of W15T3_PROP_KINDS) TILE_ART[k] = 'tile-prop-' + k;
 for (const k of W15T3_WALL_KINDS) TILE_ART[k] = 'tile-' + k;
 for (const k of W15T3_FLOOR_KINDS) TILE_ART[k] = 'tile-' + k;
+// Wave W15-T4: the Revelry TV tower caps take their authored
+// 16x48 tiles (assets/sprites/pix/tiles/tile-revtvcap-*.pix),
+// bottom-anchored on the station's roof row by the TX-3 rule.
+for (const k of W15T4_PROP_KINDS) TILE_ART[k] = 'tile-prop-' + k;
+for (const k of W15T4_WALL_KINDS) TILE_ART[k] = 'tile-' + k;
+for (const k of W15T4_FLOOR_KINDS) TILE_ART[k] = 'tile-' + k;
 // Premium+ W6 (TX-3/PL-1): door-open frames, authored in TX-3 for every
 // door kind. The warp-fade engine that plays them lands in W7 — W6
 // wires the frames (this registry + cache.doorOpen + doorOpenCanvas)
@@ -170590,7 +170778,7 @@ const MAPS9 = {
     "rows": [
       "ᾮᾮᾮᾯᾮᾮᾮᾮᾮᾮᾯᾮᾮℌℌᾮᾮᾮᾯᾮᾮᾮᾮᾮᾮᾯᾮᾮᾮᾮ",
       "ᾮᾬᾬᾬᾬᾬᾬᾬṇnᾬᾬᾬℌℌᾬᾬᾬᾬᾬᾬᾬᾬᾬᾬᾯᾬᾬᾬᾮ",
-      "ᾮᾬᾬjklmᾬᾬdeefℌℌℍℍℍℍᾬSᾲᾲᾲᾬᾬᾬᾬᾬᾮ",
+      "ᾮᾬᾬjklmᾬᾬdeefℌℌ␗␘␘␙ᾬSᾲᾲᾲᾬᾬᾬᾬᾬᾮ",
       "ᾮᾬᾬAJKAᾬṇP12Pℌℌᾱsᾱᾱᾬᾬᾳsᾳᾬᾬᾬᾬᾬᾮ",
       "ᾮoℏℌℌℌℌℌℌℌℌℌℌℌℌℌℌℌℌẋℌℌℌℌSℏᾬᾬᾬᾮ",
       "ᾮᾬSᾬᾬᾬᾬᾬᾬᾬᾬℌSℌℌᾬᾬᾬᾬᾬᾬᾬᾬℌᾬᾬᾬᾬᾬᾮ",
