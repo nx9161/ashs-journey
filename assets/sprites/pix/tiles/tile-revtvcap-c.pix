@@ -1,0 +1,56 @@
+# Wave W15-T4 (Revelry TV tower): revtvcap-c — the broadcast centre cap of the Revelry TV tower, 16x48, bottom-anchored on the station's existing roof row (Premium+ W6 TX-3). A gold-cored beacon crowns a deep white dish on a mullion mast; below, the shaft stacks beamroof's own steel-glass bands, so the tower grows out of the station's T42 register and no other building in the fleet wears it. Worn twice across the roof run (x=16,17). (NO-SAME-KIT law; WAVE-W15-LANDMARKS-PLAN.md §1.7/§2.)
+PIX tile-revtvcap-c 16 48
+.......ww.......
+......wggw......
+......dwwd......
+.......dd.......
+.ww..........ww.
+.www........www.
+..www......www..
+...www.ww.www...
+....www..www....
+.....wwwwww.....
+.......dd.......
+.......dd.......
+......dddd......
+.......dd.......
+.......dd.......
+.......dd.......
+.....dddddd.....
+..dddddddddddd..
+llllllllllllllll
+dmmmmdmmmmdmmmmd
+dmmmmdmmmmdmmmmd
+dmmmmdmmmmdmmmmd
+dmmmmdmmmmdmmmmd
+dddddddddddddddd
+llllllllllllllll
+dmmmmdmmmmdmmmmd
+dmmmmdmmmmdmmmmd
+dmmmmdmmmmdmmmmd
+dmmmmdmmmmdmmmmd
+dddddddddddddddd
+llllllllllllllll
+dmmmmdmmmmdmmmmd
+dmmmmdmmmmdmmmmd
+dmmmmdmmmmdmmmmd
+dmmmmdmmmmdmmmmd
+dddddddddddddddd
+llllllllllllllll
+dmmmmdmmmmdmmmmd
+dmmmmdmmmmdmmmmd
+dmmmmdmmmmdmmmmd
+dmmmmdmmmmdmmmmd
+dddddddddddddddd
+llllllllllllllll
+dmmmmdmmmmdmmmmd
+dmmmmdmmmmdmmmmd
+gggggggggggggggg
+dddddddddddddddd
+dddddddddddddddd
+PAL
+m #5d8aa8 glass mid (beamroof register)
+l #84aec9 glass light course (beamroof register)
+d #385a73 mullion / shadow course (beamroof register)
+w #dceef8 beacon / dish white (beamroof register)
+g #c1a85f beacon gold (tl-jubilife landmark band)

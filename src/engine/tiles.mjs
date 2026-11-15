@@ -4835,6 +4835,38 @@ W15T3_KIND_DEFS.forEach(([kind]) => {
 export const W15T3_PROP_KINDS = W15T3_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
 export const W15T3_WALL_KINDS = W15T3_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
 export const W15T3_FLOOR_KINDS = W15T3_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
+// Wave W15-T4: the Revelry TV tower caps — three 16x48
+// bottom-anchored cap kinds (Premium+ W6 TX-3) swapped onto the
+// TV station's existing beamroof row in jubilife (maps9) ONLY:
+// revtvcap-l (west shoulder pylon, x=15), revtvcap-c (broadcast
+// centre — beacon + dish on a mullion mast — worn at x=16 and
+// x=17), revtvcap-r (east shoulder pylon, x=18). The building is
+// recorded fourfold on main (interior jubilife-tv, the (16,3)
+// warp, signs at (24,4) and (2,5)) — the T42 rollout refusal was
+// of the earlier unrecorded state and the Director ruled it
+// superseded (WAVE-W15-LANDMARKS-PLAN.md §1.7/§6(a)). All three
+// are 'wall' class, never in any WALKABLE spread: doors, warps,
+// posts, signs and ground are untouched, the swap exchanges
+// non-walkable roof cells for non-walkable cap cells. Indices
+// 1559-1561 per the W15 plan's per-tranche allocation (T1 claims
+// 1544-1551, T2 1552-1558, T3 the mast/lamp pair, T4 1559-1561),
+// verified free against origin/main, TILE_CHARS and every map
+// row. Authored art: assets/sprites/pix/tiles/
+// tile-revtvcap-l.pix, tile-revtvcap-c.pix, tile-revtvcap-r.pix.
+export const W15T4_KIND_DEFS = [
+  ['revtvcap-l', 'wall'],
+  ['revtvcap-c', 'wall'],
+  ['revtvcap-r', 'wall'],
+];
+export const W15T4_KIND_CHARS = {};
+W15T4_KIND_DEFS.forEach(([kind], i) => {
+  const ch = String.fromCodePoint(0x1E00 + 1559 + i);
+  W15T4_KIND_CHARS[kind] = ch;
+  TILE_CHARS[ch] = kind;
+});
+export const W15T4_PROP_KINDS = W15T4_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
+export const W15T4_WALL_KINDS = W15T4_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
+export const W15T4_FLOOR_KINDS = W15T4_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
 export const SINNOH_TOWN_GROUND_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg);
 export const SINNOH_TOWN_GROUND2_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg2);
 // TX-3: the 8 gym exteriors by town (original type-accent motifs).

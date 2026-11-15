@@ -1,0 +1,56 @@
+# Wave W15-T4 (Revelry TV tower): revtvcap-r — the east shoulder pylon of the Revelry TV tower, 16x48, bottom-anchored on the station's existing roof row (Premium+ W6 TX-3). Mirror of revtvcap-l: gold-tipped needle, crossarm, stepped shoulder, glass-band shaft in beamroof's register; worn only at the roof run's east end (x=18). (NO-SAME-KIT law; WAVE-W15-LANDMARKS-PLAN.md §1.7/§2.)
+PIX tile-revtvcap-r 16 48
+............gg..
+............dd..
+............dd..
+...........dddd.
+............dd..
+............dd..
+............dd..
+............dd..
+............dd..
+............dd..
+..........dddd..
+..........dmmd..
+.......dddddddd.
+.......dmmmmmmd.
+....dddddddddddd
+dddddddddddddddd
+dmmmmdmmmmdmmmmd
+dmmmmdmmmmdmmmmd
+llllllllllllllll
+dmmmmdmmmmdmmmmd
+dmmmmdmmmmdmmmmd
+dmmmmdmmmmdmmmmd
+dmmmmdmmmmdmmmmd
+dddddddddddddddd
+llllllllllllllll
+dmmmmdmmmmdmmmmd
+dmmmmdmmmmdmmmmd
+dmmmmdmmmmdmmmmd
+dmmmmdmmmmdmmmmd
+dddddddddddddddd
+llllllllllllllll
+dmmmmdmmmmdmmmmd
+dmmmmdmmmmdmmmmd
+dmmmmdmmmmdmmmmd
+dmmmmdmmmmdmmmmd
+dddddddddddddddd
+llllllllllllllll
+dmmmmdmmmmdmmmmd
+dmmmmdmmmmdmmmmd
+dmmmmdmmmmdmmmmd
+dmmmmdmmmmdmmmmd
+dddddddddddddddd
+llllllllllllllll
+dmmmmdmmmmdmmmmd
+dmmmmdmmmmdmmmmd
+gggggggggggggggg
+dddddddddddddddd
+dddddddddddddddd
+PAL
+m #5d8aa8 glass mid (beamroof register)
+l #84aec9 glass light course (beamroof register)
+d #385a73 mullion / shadow course (beamroof register)
+w #dceef8 beacon / dish white (beamroof register)
+g #c1a85f beacon gold (tl-jubilife landmark band)
