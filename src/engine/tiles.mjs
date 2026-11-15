@@ -4803,6 +4803,38 @@ W15CH_KIND_DEFS.forEach(([kind], i) => {
 export const W15CH_PROP_KINDS = W15CH_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
 export const W15CH_WALL_KINDS = W15CH_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
 export const W15CH_FLOOR_KINDS = W15CH_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
+// ---- Wave W15-T3 (the Light Pair): Signal's tall mast + the Gleam
+// Lighthouse's tall caps. Indices per WAVE-W15-LANDMARKS-PLAN §2
+// (the wave's claims interleave by design: T1 1544-1551, T2
+// 1552-1554 + 1556-1558, T3 1555 + 1562-1563, T4 1559-1561).
+// 'radiomast-tall' (prop, idx 1555): the Radio Tower's lattice at
+// its real height — a 16x48 cross-braced iron mast with side dish
+// and red beacon, bottom-anchored (Premium+ W6 TX-3) on the SAME
+// compound cell (goldenrod (25,2)) the 16x16 'radiomast' stood on;
+// the short kind stays registered for its other cells.
+// 'gleamcap-l'/'gleamcap-r' (wall, idx 1562-1563): the Gleam
+// Lighthouse's 16x48 lamp-tower caps — olivine stone shaft,
+// gallery + wraparound lamp room, harbour-red standing-seam
+// skirt — swapped onto the lighthouse's existing roof row only
+// (olivine y=2, x=21-24: l,l,r,r, the mirrored pair x2). Doors,
+// warps, posts, ground: zero cells touched. Authored art:
+// assets/sprites/pix/tiles/tile-prop-radiomast-tall.pix,
+// tile-gleamcap-l.pix, tile-gleamcap-r.pix.
+export const W15T3_KIND_DEFS = [
+  ['radiomast-tall', 'prop'],
+  ['gleamcap-l', 'wall'],
+  ['gleamcap-r', 'wall'],
+];
+export const W15T3_KIND_INDEX = { 'radiomast-tall': 1555, 'gleamcap-l': 1562, 'gleamcap-r': 1563 };
+export const W15T3_KIND_CHARS = {};
+W15T3_KIND_DEFS.forEach(([kind]) => {
+  const ch = String.fromCodePoint(0x1E00 + W15T3_KIND_INDEX[kind]);
+  W15T3_KIND_CHARS[kind] = ch;
+  TILE_CHARS[ch] = kind;
+});
+export const W15T3_PROP_KINDS = W15T3_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
+export const W15T3_WALL_KINDS = W15T3_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
+export const W15T3_FLOOR_KINDS = W15T3_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
 export const SINNOH_TOWN_GROUND_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg);
 export const SINNOH_TOWN_GROUND2_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg2);
 // TX-3: the 8 gym exteriors by town (original type-accent motifs).

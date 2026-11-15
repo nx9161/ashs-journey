@@ -1,0 +1,71 @@
+# Wave W15-T3: the Gleam Lighthouse's tall cap — olivine
+# stone shaft (cylindrical shading, brass landmark band, one
+# lit window), gallery + wraparound lamp room in brass and
+# warm glass, harbour-red standing-seam skirt tying the piece
+# to Beacon's roofs. 16x48 bottom-anchored on the lighthouse's
+# existing roof row. LEFT of the mirrored pair (x2) — see
+# tile-gleamcap-r. (WAVE-W15-LANDMARKS-PLAN §1.8/§2.)
+PIX tile-gleamcap-l 16 48
+KKKKKKKKKKKKKKKK
+KKKGKKKGKKKGKKKG
+GGGGGGGGGGGGGGGG
+KKKKKKKKKKKKKKKK
+KoooKoooKoooKooo
+KgggKgggKgggKggg
+KWWWKWWWKWWWKWWW
+KWWWKWWWKWWWKWWW
+KWWWKWWWKWWWKWWW
+KgggKgggKgggKggg
+KgggKgggKgggKggg
+KoooKoooKoooKooo
+KKKKKKKKKKKKKKKK
+GGGGGGGGGGGGGGGG
+K.K.K.K.K.K.K.K.
+KKKKKKKKKKKKKKKK
+TTTTTTTTTTTTTTTT
+TTTTTTTTTTTTTTTT
+TTTAAAAAAAALLLLL
+TTTAAAAAAAALLLLL
+TTTAAAAAKKKLLLLL
+TTTAAAAAKgKLLLLL
+TTTAAAAAKKKLLLLL
+TTTTTTTTTTTTTTTT
+TTTAAAAAAAALLLLL
+TTTAAAAAAAALLLLL
+TTTAAAAAAAALLLLL
+TTTAAAAAAAALLLLL
+TTTAAAAAAAALLLLL
+TTTTTTTTTTTTTTTT
+NNNNNNNNNNNNNNNN
+NNNNNNNNNNNNNNNN
+TTTTTTTTTTTTTTTT
+TTTAAAAAAAALLLLL
+TTTAAAAAAAALLLLL
+TTTTTTTTTTTTTTTT
+TTTAAAAAAAALLLLL
+TTTAAAAAAAALLLLL
+RRRHSRRHSRRHSRRH
+DDDHSDDHSDDHSDDH
+RRRHSRRHSRRHSRRH
+DDDHSDDHSDDHSDDH
+RRRHSRRHSRRHSRRH
+DDDHSDDHSDDHSDDH
+RRRHSRRHSRRHSRRH
+DDDHSDDHSDDHSDDH
+eeeeeeeeeeeeeeee
+eeeeeeeeeeeeeeee
+PAL
+R #b04a3c harbour-red
+D #a64434 harbour-red-deep
+H #cc7263 seam-light
+S #74302a seam-shadow
+e #5f241d eave
+A #6c8791 olivine-stone
+T #657e87 olivine-stone-trim
+L #8fa8b3 olivine-stone-light
+N #c19960 landmark-brass-band
+K #2e2a26 brass-dark
+G #c9a227 brass
+g #ffd98a lamp-glass
+o #f5a623 lamp-amber
+W #fff6d8 lamp-core
