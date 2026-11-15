@@ -321,6 +321,86 @@ const MUSIC = {
       { wave: 'noise', vol: 0.3, notes: KICKS([0, 2, 4, 6, 8, 10, 12, 14]).concat(HATS(0, 16, 0.5, 0.125)) },
     ],
   },
+
+  // ---- W12 region pairs II: Borea + Trial Grounds complete the charter —
+  // after this block every region owns its town+route pair and no region
+  // draws from Arden's legacy pool. Original melodies, each with its own
+  // interval fingerprint (verify-audio [9]). ----
+  'borea-town-theme': {
+    id: 'borea-town-theme', title: 'First Snow Hush (Borea town, original)', bpm: 84, loop: true,
+    tracks: [
+      { wave: 'pulse', duty: 0.5, vol: 0.4, notes: [
+        [0,'E5',2],[2,'A5',1.5],[3.5,'G5',0.5],[4,'E5',2],[6,'D5',1],[7,'C5',1],
+        [8,'A4',2],[10,'B4',1],[11,'D5',1],[12,'E5',1.5],[13.5,'G5',0.5],[14,'A5',2],
+      ]},
+      { wave: 'pulse', duty: 0.25, vol: 0.14, notes: [
+        [0,'A4',2],[2,'C5',2],[4,'F4',2],[6,'A4',2],
+        [8,'D4',2],[10,'F4',2],[12,'E4',2],[14,'A4',2],
+      ]},
+      { wave: 'triangle', vol: 0.5, notes: [
+        [0,'A2',4],[4,'F2',4],[8,'D2',4],[12,'E2',4],
+      ]},
+      { wave: 'noise', vol: 0.08, notes: HATS(0, 16, 2, 0.125).concat([[7.5,null,0.25],[15.5,null,0.25]]) },
+    ],
+  },
+
+  'borea-route-theme': {
+    id: 'borea-route-theme', title: 'Long White Road (Borea route, original)', bpm: 148, loop: true,
+    tracks: [
+      { wave: 'pulse', duty: 0.25, vol: 0.46, notes: [
+        [0,'A5',0.5],[0.5,'F5',0.5],[1,'D5',0.5],[1.5,'F5',0.5],[2,'A5',1],[3,'G5',0.5],[3.5,'F5',0.5],
+        [4,'E5',0.5],[4.5,'F5',0.5],[5,'G5',0.5],[5.5,'A5',0.5],[6,'D6',1],[7,'C6',1],
+        [8,'A5',0.5],[8.5,'G5',0.5],[9,'F5',0.5],[9.5,'E5',0.5],[10,'F5',1],[11,'D5',1],
+        [12,'E5',0.5],[12.5,'F5',0.5],[13,'G5',0.5],[13.5,'A5',0.5],[14,'F5',2],
+      ]},
+      { wave: 'pulse', duty: 0.5, vol: 0.15, notes: [
+        [0,'F4',1],[2,'D4',1],[4,'Bb3',1],[6,'A3',1],
+        [8,'F4',1],[10,'D4',1],[12,'C4',1],[14,'A3',1],
+      ]},
+      { wave: 'triangle', vol: 0.55, notes:
+        PUMP(0,4,'D1','D2').concat(PUMP(4,8,'Bb1','Bb2')).concat(PUMP(8,12,'F1','F2')).concat(PUMP(12,16,'A1','A2')) },
+      { wave: 'noise', vol: 0.28, notes: KICKS([0, 2, 4, 6, 8, 10, 12, 14]).concat(HATS(0, 16, 0.5, 0.125)) },
+    ],
+  },
+
+  'trial-town-theme': {
+    id: 'trial-town-theme', title: 'Bronze & Banner (Trial hub, original)', bpm: 100, loop: true,
+    tracks: [
+      { wave: 'pulse', duty: 0.125, vol: 0.44, notes: [
+        [0,'C5',1],[1,'E5',1],[2,'G5',1],[3,'C6',1],[4,'B5',1.5],[5.5,'G5',0.5],[6,'A5',1],[7,'G5',1],
+        [8,'E5',1],[9,'F5',1],[10,'A5',1],[11,'G5',1],[12,'E5',1.5],[13.5,'D5',0.5],[14,'C5',2],
+      ]},
+      { wave: 'pulse', duty: 0.5, vol: 0.18, notes: [
+        [0,'G4',2],[2,'E4',2],[4,'D4',2],[6,'B4',2],
+        [8,'C5',2],[10,'F4',2],[12,'G4',2],[14,'E4',2],
+      ]},
+      { wave: 'triangle', vol: 0.55, notes: [
+        [0,'C3',2],[2,'G2',2],[4,'C3',2],[6,'G2',2],
+        [8,'F2',2],[10,'A2',2],[12,'G2',2],[14,'C3',2],
+      ]},
+      { wave: 'noise', vol: 0.3, notes:
+        KICKS([0, 4, 8, 12]).concat([[2,null,0.25],[6,null,0.25],[10,null,0.25],[14,null,0.25],[15,null,0.25],[15.5,null,0.25]]) },
+    ],
+  },
+
+  'trial-route-theme': {
+    id: 'trial-route-theme', title: 'The Seven Trials (Trial island, original)', bpm: 128, loop: true,
+    tracks: [
+      { wave: 'pulse', duty: 0.25, vol: 0.46, notes: [
+        [0,'G5',0.5],[0.5,'D5',0.5],[1,'G5',0.5],[1.5,'Bb5',0.5],[2,'A5',1],[3,'G5',0.5],[3.5,'F5',0.5],
+        [4,'D5',1],[5,'F5',0.5],[5.5,'G5',0.5],[6,'D5',2],
+        [8,'Eb5',0.5],[8.5,'D5',0.5],[9,'C5',0.5],[9.5,'D5',0.5],[10,'Bb4',1],[11,'D5',1],
+        [12,'F5',0.5],[12.5,'G5',0.5],[13,'A5',0.5],[13.5,'Bb5',0.5],[14,'G5',2],
+      ]},
+      { wave: 'pulse', duty: 0.5, vol: 0.16, notes: [
+        [0,'Bb3',1],[2,'G3',1],[4,'F3',1],[6,'D4',1],
+        [8,'Eb4',1],[10,'C4',1],[12,'D4',1],[14,'G3',1],
+      ]},
+      { wave: 'triangle', vol: 0.55, notes:
+        PUMP(0,4,'G1','G2').concat(PUMP(4,8,'Eb1','Eb2')).concat(PUMP(8,12,'F1','F2')).concat(PUMP(12,16,'D1','D2')) },
+      { wave: 'noise', vol: 0.26, notes: KICKS([0, 4, 8, 12]).concat(HATS(0, 16, 0.5, 0.125)) },
+    ],
+  },
 };
 
 // ============================================================ SFX ====
@@ -167515,7 +167595,7 @@ const MAPS8 = {
   "frontierhub": {
     "id": "frontierhub",
     "name": "Trial Grounds",
-    "music": "pallet-theme",
+    "music": "trial-town-theme",
     "weather": "clear",
     "rows": [
       "########################################",
@@ -168632,7 +168712,7 @@ const MAPS8 = {
   "frontier-pyramid-a": {
     "id": "frontier-pyramid-a",
     "name": "Trial Pyramid — AF",
-    "music": "pewter-theme",
+    "music": "trial-route-theme",
     "indoor": true,
     "dark": true,
     "rows": [
@@ -168697,7 +168777,7 @@ const MAPS8 = {
   "frontier-pyramid-b": {
     "id": "frontier-pyramid-b",
     "name": "Trial Pyramid — BF",
-    "music": "pewter-theme",
+    "music": "trial-route-theme",
     "indoor": true,
     "dark": true,
     "rows": [
@@ -168762,7 +168842,7 @@ const MAPS8 = {
   "frontier-pyramid-c": {
     "id": "frontier-pyramid-c",
     "name": "Trial Pyramid — CF",
-    "music": "pewter-theme",
+    "music": "trial-route-theme",
     "indoor": true,
     "dark": true,
     "rows": [
@@ -168885,7 +168965,7 @@ const MAPS9 = {
   "twinleaf": {
     "id": "twinleaf",
     "name": "Clover Town",
-    "music": "pallet-theme",
+    "music": "borea-town-theme",
     "weather": "clear",
     "rows": [
       "ᾞᾞᾞᾟᾞᾞᾞᾞᾞᾞᾟᾞᾞᾞᾞᾞᾞᾟᾞᾞᾞᾞᾞᾞᾟᾞᾞᾞ",
@@ -168940,7 +169020,7 @@ const MAPS9 = {
   "sandgem": {
     "id": "sandgem",
     "name": "Shingle Town",
-    "music": "viridian-theme",
+    "music": "borea-town-theme",
     "weather": "clear",
     "rows": [
       "ᾦᾦᾦᾧᾦᾦᾦᾦᾦᾦᾧᾦᾦ℀℀ᾦᾦᾦᾧᾦᾦᾦᾦᾦᾦᾧᾦᾦ",
@@ -169007,7 +169087,7 @@ const MAPS9 = {
   "jubilife": {
     "id": "jubilife",
     "name": "Revelry City",
-    "music": "viridian-theme",
+    "music": "borea-town-theme",
     "weather": "clear",
     "rows": [
       "ᾮᾮᾮᾯᾮᾮᾮᾮᾮᾮᾯᾮᾮℌℌᾮᾮᾮᾯᾮᾮᾮᾮᾮᾮᾯᾮᾮᾮᾮ",
@@ -169077,7 +169157,7 @@ const MAPS9 = {
   "oreburgh": {
     "id": "oreburgh",
     "name": "Coalseam City",
-    "music": "pewter-theme",
+    "music": "borea-town-theme",
     "weather": "sun",
     "rows": [
       "ᾶᾶᾶᾷᾶᾶᾶᾶᾶᾶᾷᾶᾶ℘℘ᾶᾶᾶᾷᾶᾶᾶᾶᾶᾶᾷᾶᾶᾶᾶ",
@@ -169136,7 +169216,7 @@ const MAPS9 = {
   "floaroma": {
     "id": "floaroma",
     "name": "Honeyfield Town",
-    "music": "viridian-theme",
+    "music": "borea-town-theme",
     "weather": "clear",
     "rows": [
       "ιιι᾿ιιιιιι᾿ιιᾼᾼιιι᾿ιιιιιιᾼιι",
@@ -169193,7 +169273,7 @@ const MAPS9 = {
   "eterna": {
     "id": "eterna",
     "name": "Heritage City",
-    "music": "viridian-theme",
+    "music": "borea-town-theme",
     "weather": "clear",
     "rows": [
       "ῆῆῆῇῆῆῆῆῆῆῇῆῆῄῄῆῆῆῇῆῆῆῆῆῆῇῆῆῆῆ",
@@ -169254,7 +169334,7 @@ const MAPS9 = {
   "hearthome": {
     "id": "hearthome",
     "name": "Inglenook City",
-    "music": "viridian-theme",
+    "music": "borea-town-theme",
     "weather": "clear",
     "rows": [
       "῎῎῎῎῎῎ℼℼ῎῎῎῎῎ℼℼ῎῎῎῏῎῎῎῎῎῎῏῎῎῎῎",
@@ -169321,7 +169401,7 @@ const MAPS9 = {
   "solaceon": {
     "id": "solaceon",
     "name": "Repose Town",
-    "music": "viridian-theme",
+    "music": "borea-town-theme",
     "weather": "clear",
     "rows": [
       "ῖῖῖῗῖῖῖῖῖῖῗῖῖⅈⅈῖῖῖῗῖῖῖῖῖῖῗῖῖ",
@@ -169383,7 +169463,7 @@ const MAPS9 = {
   "veilstone": {
     "id": "veilstone",
     "name": "Shardfall City",
-    "music": "pewter-theme",
+    "music": "borea-town-theme",
     "weather": "clear",
     "rows": [
       "῞῞῞῟῞῞῞῞῞῞῟῞῞῜῜῞῞῞῞῜῜῞῞῞῟῞῞῞῞῞",
@@ -169445,7 +169525,7 @@ const MAPS9 = {
   "canalave": {
     "id": "canalave",
     "name": "Bridgeport City",
-    "music": "viridian-theme",
+    "music": "borea-town-theme",
     "weather": "clear",
     "rows": [
       "ῦῦῦῧῦῦῦῦῦῦῧῦῦῦῦῦῦῧῦῦῦῦῦῦῧῦῦῦῦῦ",
@@ -169507,7 +169587,7 @@ const MAPS9 = {
   "r201": {
     "id": "r201",
     "name": "Route 201",
-    "music": "route1-theme",
+    "music": "borea-route-theme",
     "weather": "clear",
     "rows": [
       "⍪⍪⍪⍪⍪⍪⍪⍪⍪⍪⍪⍪⍪⍪⍪⍪⍪⍪⍪⍪⍪⍪⍪⍪⍪⍪",
@@ -169548,7 +169628,7 @@ const MAPS9 = {
   "r202": {
     "id": "r202",
     "name": "Route 202",
-    "music": "route1-theme",
+    "music": "borea-route-theme",
     "weather": "clear",
     "rows": [
       "⍮⍮⍮⍮⍮⍮⍮⍮⍮⍮⍮⍭⍭⍮⍮⍮⍮⍮⍮⍮⍮⍮⍮⍮",
@@ -169591,7 +169671,7 @@ const MAPS9 = {
   "r203": {
     "id": "r203",
     "name": "Route 203",
-    "music": "route1-theme",
+    "music": "borea-route-theme",
     "weather": "clear",
     "rows": [
       "⍲⍲⍲⍲⍲⍲⍲⍲⍲⍲⍲⍲⍲⍲⍲⍲⍲⍲⍲⍲⍲⍲⍲⍲⍲⍲",
@@ -169632,7 +169712,7 @@ const MAPS9 = {
   "r204": {
     "id": "r204",
     "name": "Route 204",
-    "music": "route1-theme",
+    "music": "borea-route-theme",
     "weather": "clear",
     "rows": [
       "⍶⍶⍶⍶⍶⍶⍶⍶⍶⍶⍶⍵⍵⍶⍶⍶⍶⍶⍶⍶⍶⍶⍶⍶",
@@ -169675,7 +169755,7 @@ const MAPS9 = {
   "r205": {
     "id": "r205",
     "name": "Route 205",
-    "music": "route1-theme",
+    "music": "borea-route-theme",
     "weather": "clear",
     "rows": [
       "⍼⍼⍼⍼⍼⍼⍼⍼⍼⍼⍼⍼⍼⍼⍼⍼⍼⍼⍼⍼⍼⍼⍼⍼⍼⍼",
@@ -169721,7 +169801,7 @@ const MAPS9 = {
   "r206": {
     "id": "r206",
     "name": "Route 206",
-    "music": "route1-theme",
+    "music": "borea-route-theme",
     "weather": "clear",
     "rows": [
       "⎄⎄⎄⎄⎄⎄⎄⎄⎄⎄⎄⎃⎃⎄⎄⎄⎄⎄⎄⎄⎄⎄⎄⎄",
@@ -169766,7 +169846,7 @@ const MAPS9 = {
   "r207": {
     "id": "r207",
     "name": "Route 207",
-    "music": "route1-theme",
+    "music": "borea-route-theme",
     "weather": "sun",
     "rows": [
       "⎈⎈⎈⎈⎈⎈⎈⎈⎈⎈⎈⎈⎈⎈⎈⎈⎈⎈⎈⎈⎈⎈⎈⎈⎈⎈",
@@ -169807,7 +169887,7 @@ const MAPS9 = {
   "r208": {
     "id": "r208",
     "name": "Route 208",
-    "music": "route1-theme",
+    "music": "borea-route-theme",
     "weather": "clear",
     "rows": [
       "⎌⎌⎌⎌⎌⎌⎌⎌⎌⎌⎌⎌⎌⎌⎌⎌⎌⎌⎌⎌⎌⎌⎌⎌⎌⎌",
@@ -169848,7 +169928,7 @@ const MAPS9 = {
   "r209": {
     "id": "r209",
     "name": "Route 209",
-    "music": "route1-theme",
+    "music": "borea-route-theme",
     "weather": "clear",
     "rows": [
       "⎚⎚⎚⎚⎚⎚⎚⎚⎚⎚⎚⎙⎙⎚⎚⎚⎚⎚⎚⎚⎚⎚⎚⎚",
@@ -169893,7 +169973,7 @@ const MAPS9 = {
   "r210": {
     "id": "r210",
     "name": "Route 210",
-    "music": "route1-theme",
+    "music": "borea-route-theme",
     "weather": "clear",
     "rows": [
       "⎞⎞⎞⎞⎞⎞⎞⎞⎞⎞⎞⎝⎝⎞⎞⎞⎞⎞⎞⎞⎞⎞⎞⎞",
@@ -169938,7 +170018,7 @@ const MAPS9 = {
   "r211": {
     "id": "r211",
     "name": "Route 211",
-    "music": "route1-theme",
+    "music": "borea-route-theme",
     "weather": "clear",
     "rows": [
       "⎖⎖⎖⎖⎖⎖⎖⎖⎖⎖⎖⎖⎖⎖⎖⎖⎖⎖⎖⎖⎖⎖⎖⎖⎖⎖",
@@ -169979,7 +170059,7 @@ const MAPS9 = {
   "r212": {
     "id": "r212",
     "name": "Route 212 — North",
-    "music": "route1-theme",
+    "music": "borea-route-theme",
     "weather": "clear",
     "rows": [
       "⎦⎦⎦⎦⎦⎦⎦⎦⎦⎦⎦⎥⎥⎦⎦⎦⎦⎦⎦⎦⎦⎦⎦⎦",
@@ -170022,7 +170102,7 @@ const MAPS9 = {
   "r215": {
     "id": "r215",
     "name": "Route 215",
-    "music": "route1-theme",
+    "music": "borea-route-theme",
     "weather": "clear",
     "rows": [
       "⏄⏄⏄⏄⏄⏄⏄⏄⏄⏄⏄⏃⏃⏄⏄⏄⏄⏄⏄⏄⏄⏄⏄⏄",
@@ -170065,7 +170145,7 @@ const MAPS9 = {
   "r218": {
     "id": "r218",
     "name": "Route 218",
-    "music": "route1-theme",
+    "music": "borea-route-theme",
     "weather": "rain",
     "rows": [
       "⏙~~~~~~~~~~~~~~~~~~~~~~~~⏙",
@@ -170106,7 +170186,7 @@ const MAPS9 = {
   "lake-verity": {
     "id": "lake-verity",
     "name": "Lake Candor",
-    "music": "pallet-theme",
+    "music": "borea-route-theme",
     "weather": "clear",
     "rows": [
       "##########################",
@@ -170148,7 +170228,7 @@ const MAPS9 = {
   "lake-verity-cave": {
     "id": "lake-verity-cave",
     "name": "Candor Cavern",
-    "music": "pewter-theme",
+    "music": "borea-route-theme",
     "indoor": true,
     "rows": [
       "GGGGGGGGGGGGGGGG",
@@ -170180,7 +170260,7 @@ const MAPS9 = {
   "oreburgh-mine": {
     "id": "oreburgh-mine",
     "name": "Coalseam Mine",
-    "music": "pewter-theme",
+    "music": "borea-route-theme",
     "indoor": true,
     "rows": [
       "GGGGGGGGGGGGGGGGGGGGGG",
@@ -170217,7 +170297,7 @@ const MAPS9 = {
   "ravaged-path": {
     "id": "ravaged-path",
     "name": "Ruined Path",
-    "music": "pewter-theme",
+    "music": "borea-route-theme",
     "indoor": true,
     "rows": [
       "⍹⍹⍹⍹⍹⍹⍹⍹⍹⍹⍹⍹⍹⍹⍹⍹⍹⍹⍹⍹⍹⍹⍹⍹",
@@ -170255,7 +170335,7 @@ const MAPS9 = {
   "valley-windworks": {
     "id": "valley-windworks",
     "name": "Valley Galeworks",
-    "music": "viridian-theme",
+    "music": "borea-route-theme",
     "indoor": true,
     "rows": [
       "IIIIIIIIIIIIIIIIII",
@@ -170290,7 +170370,7 @@ const MAPS9 = {
   "eterna-forest": {
     "id": "eterna-forest",
     "name": "Heritage Forest",
-    "music": "viridian-theme",
+    "music": "borea-route-theme",
     "weather": "rain",
     "rows": [
       "⎀⎀⎀⎀⎀⎀⎀⎀⎀⎀⎀⎀⎀⎀⎀⎀⎀⎀⎀⎀⎀⎀⎀⎀⎀⎀⎀⎀",
@@ -170335,7 +170415,7 @@ const MAPS9 = {
   "old-chateau": {
     "id": "old-chateau",
     "name": "Ruined Manor",
-    "music": "pewter-theme",
+    "music": "borea-route-theme",
     "indoor": true,
     "rows": [
       "????????????????????",
@@ -170372,7 +170452,7 @@ const MAPS9 = {
   "wayward-cave": {
     "id": "wayward-cave",
     "name": "Stray Cave",
-    "music": "pewter-theme",
+    "music": "borea-route-theme",
     "indoor": true,
     "dark": true,
     "rows": [
@@ -170411,7 +170491,7 @@ const MAPS9 = {
   "mt-coronet-south": {
     "id": "mt-coronet-south",
     "name": "Mt. Apex — South",
-    "music": "pewter-theme",
+    "music": "borea-route-theme",
     "indoor": true,
     "rows": [
       "⎏⎏⎏⎏⎏⎏⎏⎏⎏⎏⎏⎏⎎⎎⎏⎏⎏⎏⎏⎏⎏⎏⎏⎏⎏⎏",
@@ -170455,7 +170535,7 @@ const MAPS9 = {
   "mt-coronet-central": {
     "id": "mt-coronet-central",
     "name": "Mt. Apex — Central",
-    "music": "pewter-theme",
+    "music": "borea-route-theme",
     "indoor": true,
     "rows": [
       "⎑⎑⎑⎑⎑⎑⎑⎑⎑⎑⎑⎑⎑⎐⎐⎑⎑⎑⎑⎑⎑⎑⎑⎑⎑⎑⎑⎑",
@@ -170506,7 +170586,7 @@ const MAPS9 = {
   "solaceon-ruins": {
     "id": "solaceon-ruins",
     "name": "Repose Ruins",
-    "music": "pewter-theme",
+    "music": "borea-route-theme",
     "indoor": true,
     "rows": [
       "MMMMMMMMMMMMMMMMMMMM",
@@ -170542,7 +170622,7 @@ const MAPS9 = {
   "lost-tower": {
     "id": "lost-tower",
     "name": "Forsaken Tower",
-    "music": "pewter-theme",
+    "music": "borea-route-theme",
     "indoor": true,
     "rows": [
       "MMMMMMMMMMMMMMMMMM",
@@ -170578,7 +170658,7 @@ const MAPS9 = {
   "amity-square": {
     "id": "amity-square",
     "name": "Kindred Square",
-    "music": "viridian-theme",
+    "music": "borea-town-theme",
     "weather": "clear",
     "rows": [
       "῎῎῎῎῎῎῎῎῎῎῎῎῎῎῎῎῎῎῎῎῎῎῎῎",
@@ -170615,7 +170695,7 @@ const MAPS9 = {
   "house-twinleaf": {
     "id": "house-twinleaf",
     "name": "Clover House",
-    "music": "viridian-theme",
+    "music": "borea-town-theme",
     "indoor": true,
     "rows": [
       "<<<<<<<<<<<<<<",
@@ -170647,7 +170727,7 @@ const MAPS9 = {
   "house-twinleaf-rival": {
     "id": "house-twinleaf-rival",
     "name": "Neighbor's House",
-    "music": "viridian-theme",
+    "music": "borea-town-theme",
     "indoor": true,
     "rows": [
       "<<<<<<<<<<<<<<",
@@ -170679,7 +170759,7 @@ const MAPS9 = {
   "house-sandgem": {
     "id": "house-sandgem",
     "name": "Shingle House",
-    "music": "viridian-theme",
+    "music": "borea-town-theme",
     "indoor": true,
     "rows": [
       "<<<<<<<<<<<<<<",
@@ -170711,7 +170791,7 @@ const MAPS9 = {
   "house-jubilife": {
     "id": "house-jubilife",
     "name": "Revelry House",
-    "music": "viridian-theme",
+    "music": "borea-town-theme",
     "indoor": true,
     "rows": [
       "<<<<<<<<<<<<<<",
@@ -170743,7 +170823,7 @@ const MAPS9 = {
   "house-jubilife-condo": {
     "id": "house-jubilife-condo",
     "name": "Revelry Condo",
-    "music": "viridian-theme",
+    "music": "borea-town-theme",
     "indoor": true,
     "rows": [
       "<<<<<<<<<<<<<<",
@@ -170775,7 +170855,7 @@ const MAPS9 = {
   "house-oreburgh": {
     "id": "house-oreburgh",
     "name": "Coalseam Museum",
-    "music": "viridian-theme",
+    "music": "borea-town-theme",
     "indoor": true,
     "rows": [
       "<<<<<<<<<<<<<<",
@@ -170807,7 +170887,7 @@ const MAPS9 = {
   "house-floaroma": {
     "id": "house-floaroma",
     "name": "Honeyfield House",
-    "music": "viridian-theme",
+    "music": "borea-town-theme",
     "indoor": true,
     "rows": [
       "<<<<<<<<<<<<<<",
@@ -170839,7 +170919,7 @@ const MAPS9 = {
   "house-eterna": {
     "id": "house-eterna",
     "name": "Heritage House",
-    "music": "viridian-theme",
+    "music": "borea-town-theme",
     "indoor": true,
     "rows": [
       "<<<<<<<<<<<<<<",
@@ -170871,7 +170951,7 @@ const MAPS9 = {
   "house-hearthome": {
     "id": "house-hearthome",
     "name": "Inglenook House",
-    "music": "viridian-theme",
+    "music": "borea-town-theme",
     "indoor": true,
     "rows": [
       "<<<<<<<<<<<<<<",
@@ -170903,7 +170983,7 @@ const MAPS9 = {
   "house-hearthome-poffin": {
     "id": "house-hearthome-poffin",
     "name": "Poffin House",
-    "music": "viridian-theme",
+    "music": "borea-town-theme",
     "indoor": true,
     "rows": [
       "<<<<<<<<<<<<<<",
@@ -170935,7 +171015,7 @@ const MAPS9 = {
   "house-solaceon": {
     "id": "house-solaceon",
     "name": "Repose House",
-    "music": "viridian-theme",
+    "music": "borea-town-theme",
     "indoor": true,
     "rows": [
       "<<<<<<<<<<<<<<",
@@ -170967,7 +171047,7 @@ const MAPS9 = {
   "house-solaceon-daycare": {
     "id": "house-solaceon-daycare",
     "name": "Day Care House",
-    "music": "viridian-theme",
+    "music": "borea-town-theme",
     "indoor": true,
     "rows": [
       "<<<<<<<<<<<<<<",
@@ -170999,7 +171079,7 @@ const MAPS9 = {
   "house-veilstone": {
     "id": "house-veilstone",
     "name": "Shardfall Department Store",
-    "music": "viridian-theme",
+    "music": "borea-town-theme",
     "indoor": true,
     "rows": [
       "<<<<<<<<<<<<<<",
@@ -171031,7 +171111,7 @@ const MAPS9 = {
   "house-canalave": {
     "id": "house-canalave",
     "name": "Bridgeport House",
-    "music": "viridian-theme",
+    "music": "borea-town-theme",
     "indoor": true,
     "rows": [
       "<<<<<<<<<<<<<<",
@@ -171063,7 +171143,7 @@ const MAPS9 = {
   "canalave-library": {
     "id": "canalave-library",
     "name": "Bridgeport Library",
-    "music": "viridian-theme",
+    "music": "borea-town-theme",
     "indoor": true,
     "rows": [
       "<<<<<<<<<<<<<<<<",
@@ -171098,7 +171178,7 @@ const MAPS9 = {
   "rowan-lab": {
     "id": "rowan-lab",
     "name": "Sorrel Lab",
-    "music": "viridian-theme",
+    "music": "borea-town-theme",
     "indoor": true,
     "rows": [
       ">>>>>>>>>>>>>>>>>>",
@@ -171134,7 +171214,7 @@ const MAPS9 = {
   "jubilife-tv": {
     "id": "jubilife-tv",
     "name": "Revelry TV",
-    "music": "viridian-theme",
+    "music": "borea-town-theme",
     "indoor": true,
     "rows": [
       "IIIIIIIIIIIIIIIIII",
@@ -171169,7 +171249,7 @@ const MAPS9 = {
   "galactic-eterna": {
     "id": "galactic-eterna",
     "name": "Heritage Building",
-    "music": "pewter-theme",
+    "music": "borea-route-theme",
     "indoor": true,
     "rows": [
       "IIIIIIIIIIIIIIIIII",
@@ -171204,7 +171284,7 @@ const MAPS9 = {
   "galactic-hq": {
     "id": "galactic-hq",
     "name": "Shardfall HQ",
-    "music": "pewter-theme",
+    "music": "borea-route-theme",
     "indoor": true,
     "rows": [
       "IIIIIIIIIIIIIIIIIIII",
@@ -171411,7 +171491,7 @@ const MAPS9 = {
   "contest-hearthome": {
     "id": "contest-hearthome",
     "name": "Inglenook Contest Hall",
-    "music": "viridian-theme",
+    "music": "borea-town-theme",
     "contestHall": "hearthome",
     "indoor": true,
     "rows": [
@@ -171446,7 +171526,7 @@ const MAPS9 = {
   "pastoria": {
     "id": "pastoria",
     "name": "Fenland City",
-    "music": "viridian-theme",
+    "music": "borea-town-theme",
     "weather": "clear",
     "rows": [
       "΅΅΅`΅΅΅΅΅΅`΅΅ⅬⅬ΅΅΅`΅΅΅΅΅΅`΅΅",
@@ -171511,7 +171591,7 @@ const MAPS9 = {
   "celestic": {
     "id": "celestic",
     "name": "Astral Town",
-    "music": "pallet-theme",
+    "music": "borea-town-theme",
     "weather": "clear",
     "rows": [
       "ῶῶῶῷῶῶῶῶῶῶῷῶῶῶῶῶῶῷῶῶῶῶῶῶῷῶῶῶ",
@@ -171568,7 +171648,7 @@ const MAPS9 = {
   "snowpoint": {
     "id": "snowpoint",
     "name": "Rimefall City",
-    "music": "pewter-theme",
+    "music": "borea-town-theme",
     "weather": "clear",
     "rows": [
       "῾῾῾῿῾῾῾῾῾῾῿῾῾῾῾῾῾῿῾῾῾῾῾῾῿῾῾῾",
@@ -171628,7 +171708,7 @@ const MAPS9 = {
   "sunnyshore": {
     "id": "sunnyshore",
     "name": "Brightshore City",
-    "music": "viridian-theme",
+    "music": "borea-town-theme",
     "weather": "sun",
     "rows": [
       "             ←←               ",
@@ -171688,7 +171768,7 @@ const MAPS9 = {
   "pokemon-league": {
     "id": "pokemon-league",
     "name": "League",
-    "music": "viridian-theme",
+    "music": "borea-town-theme",
     "weather": "clear",
     "rows": [
       "ᾗᾗᾗᾗᾗᾗᾗᾗᾗᾗᾗᾗᾗᾗᾗᾗᾗᾗᾗᾗᾗᾗᾗᾗᾗᾗᾗᾗ",
@@ -171733,7 +171813,7 @@ const MAPS9 = {
   "r212-south": {
     "id": "r212-south",
     "name": "Route 212 — South",
-    "music": "route1-theme",
+    "music": "borea-route-theme",
     "weather": "clear",
     "rows": [
       "⎪⎪⎪⎪⎪⎪⎪⎪⎪⎪⎪⎩⎩⎪⎪⎪⎪⎪⎪⎪⎪⎪⎪⎪",
@@ -171776,7 +171856,7 @@ const MAPS9 = {
   "r210-north": {
     "id": "r210-north",
     "name": "Route 210 — North",
-    "music": "route1-theme",
+    "music": "borea-route-theme",
     "weather": "fog",
     "rows": [
       "⎢⎢⎢⎢⎢⎢⎢⎢⎢⎢⎢⎢⎢⎢⎢⎢⎢⎢⎢⎢⎢⎢⎢⎢⎢⎢",
@@ -171817,7 +171897,7 @@ const MAPS9 = {
   "r213": {
     "id": "r213",
     "name": "Route 213",
-    "music": "route1-theme",
+    "music": "borea-route-theme",
     "weather": "clear",
     "rows": [
       "⎮⎮⎮⎮⎮⎮⎮⎮⎮⎮⎮⎮⎮⎮⎮⎮⎮⎮⎮⎮⎮⎮⎮⎮⎮⎮",
@@ -171858,7 +171938,7 @@ const MAPS9 = {
   "r214": {
     "id": "r214",
     "name": "Route 214",
-    "music": "route1-theme",
+    "music": "borea-route-theme",
     "weather": "clear",
     "rows": [
       "⎸⎸⎸⎸⎸⎸⎸⎸⎸⎸⎸⎷⎷⎸⎸⎸⎸⎸⎸⎸⎸⎸⎸⎸",
@@ -171904,7 +171984,7 @@ const MAPS9 = {
   "spring-path": {
     "id": "spring-path",
     "name": "Vernal Path",
-    "music": "route1-theme",
+    "music": "borea-route-theme",
     "weather": "clear",
     "rows": [
       "⎼⎼⎼⎼⎼⎼⎼⎼⎼⎼⎼⎼⎼⎼⎼⎼⎼⎼⎼⎼⎼⎼⎼⎼⎼⎼",
@@ -171945,7 +172025,7 @@ const MAPS9 = {
   "r216": {
     "id": "r216",
     "name": "Route 216",
-    "music": "route1-theme",
+    "music": "borea-route-theme",
     "weather": "clear",
     "rows": [
       "ṥṥ⏈⏈⏈⏈⏈⏈⏈⏈⏈⏈⏈⏈⏈⏈ṥ⏈⏈⏈⏈⏈ṥ⏈⏈ṥ",
@@ -171986,7 +172066,7 @@ const MAPS9 = {
   "r217": {
     "id": "r217",
     "name": "Route 217",
-    "music": "route1-theme",
+    "music": "borea-route-theme",
     "weather": "clear",
     "rows": [
       "⏌⏌ṥ⏌⏌ṥ⏌ṥ⏌⏌⏌⏌ṥṥṥṥ⏌⏌ṥṥ⏌⏌⏌⏌⏌⏌",
@@ -172028,7 +172108,7 @@ const MAPS9 = {
   "r219": {
     "id": "r219",
     "name": "Route 219",
-    "music": "route1-theme",
+    "music": "borea-route-theme",
     "weather": "clear",
     "rows": [
       "~~~~~~~~~~~~~~~~~~~~~~~~",
@@ -172070,7 +172150,7 @@ const MAPS9 = {
   "r220": {
     "id": "r220",
     "name": "Route 220",
-    "music": "route1-theme",
+    "music": "borea-route-theme",
     "weather": "clear",
     "rows": [
       "~~~~~~~~~~~~~~~~~~~~~~~~~~",
@@ -172110,7 +172190,7 @@ const MAPS9 = {
   "r221": {
     "id": "r221",
     "name": "Route 221",
-    "music": "route1-theme",
+    "music": "borea-route-theme",
     "weather": "clear",
     "rows": [
       "⏡⏡⏡⏡⏡⏡⏡⏡⏡⏡⏡⏠⏠⏡⏡⏡⏡⏡⏡⏡⏡⏡⏡⏡",
@@ -172153,7 +172233,7 @@ const MAPS9 = {
   "r222": {
     "id": "r222",
     "name": "Route 222",
-    "music": "route1-theme",
+    "music": "borea-route-theme",
     "weather": "clear",
     "rows": [
       "⏖⏖⏖⏖⏖⏖⏖⏖⏖⏖⏖⏖⏖⏖⏖⏖⏖⏖⏖⏖⏖⏖⏖⏖⏖⏖",
@@ -172194,7 +172274,7 @@ const MAPS9 = {
   "r223": {
     "id": "r223",
     "name": "Route 223",
-    "music": "route1-theme",
+    "music": "borea-route-theme",
     "weather": "clear",
     "rows": [
       "~~~~~~~~~~~~~~~~~~~~~~~~",
@@ -172236,7 +172316,7 @@ const MAPS9 = {
   "r224": {
     "id": "r224",
     "name": "Route 224",
-    "music": "route1-theme",
+    "music": "borea-route-theme",
     "weather": "clear",
     "rows": [
       "⏧⏧⏧⏧⏧⏧⏧⏧⏧⏧⏧⏧⏧⏧⏧⏧⏧⏧⏧⏧⏧⏧⏧⏧⏧⏧",
@@ -172277,7 +172357,7 @@ const MAPS9 = {
   "seabreak-path": {
     "id": "seabreak-path",
     "name": "Foamline Path",
-    "music": "route1-theme",
+    "music": "borea-route-theme",
     "weather": "sun",
     "rows": [
       "⏪~~~~~~~~~~~~~~~~~~~~~~~~⏪",
@@ -172317,7 +172397,7 @@ const MAPS9 = {
   "r225": {
     "id": "r225",
     "name": "Route 225",
-    "music": "route1-theme",
+    "music": "borea-route-theme",
     "weather": "clear",
     "rows": [
       "⏮⏮⏮⏮⏮⏮⏮⏮⏮⏮⏮⏮⏮⏮⏮⏮⏮⏮⏮⏮⏮⏮⏮⏮⏮⏮",
@@ -172358,7 +172438,7 @@ const MAPS9 = {
   "r226": {
     "id": "r226",
     "name": "Route 226",
-    "music": "route1-theme",
+    "music": "borea-route-theme",
     "weather": "clear",
     "rows": [
       "⏲⏲⏲⏲⏲⏲⏲⏲⏲⏲⏲⏱⏱⏲⏲⏲⏲⏲⏲⏲⏲⏲⏲⏲",
@@ -172400,7 +172480,7 @@ const MAPS9 = {
   "r227": {
     "id": "r227",
     "name": "Route 227",
-    "music": "route1-theme",
+    "music": "borea-route-theme",
     "weather": "ash",
     "rows": [
       "⏶⏶⏶⏶⏶⏶⏶⏶⏶⏶⏶⏶⏶⏶⏶⏶⏶⏶⏶⏶⏶⏶⏶⏶⏶⏶",
@@ -172441,7 +172521,7 @@ const MAPS9 = {
   "r228": {
     "id": "r228",
     "name": "Route 228",
-    "music": "route1-theme",
+    "music": "borea-route-theme",
     "weather": "sand",
     "rows": [
       "⏺⏺⏺⏺⏺⏺⏺⏺⏺⏺⏺⏹⏹⏺⏺⏺⏺⏺⏺⏺⏺⏺⏺⏺",
@@ -172482,7 +172562,7 @@ const MAPS9 = {
   "r229": {
     "id": "r229",
     "name": "Route 229",
-    "music": "route1-theme",
+    "music": "borea-route-theme",
     "weather": "clear",
     "rows": [
       "~~~~~~~~~~~~~~~~~~~~~~~~",
@@ -172524,7 +172604,7 @@ const MAPS9 = {
   "r230": {
     "id": "r230",
     "name": "Route 230",
-    "music": "route1-theme",
+    "music": "borea-route-theme",
     "weather": "clear",
     "rows": [
       "~~~~~~~~~~~~~~~~~~~~~~~~~~",
@@ -172564,7 +172644,7 @@ const MAPS9 = {
   "lake-valor": {
     "id": "lake-valor",
     "name": "Lake Gallant",
-    "music": "viridian-theme",
+    "music": "borea-route-theme",
     "weather": "clear",
     "rows": [
       "⎲⎲⎲⎲⎲⎲⎲⎲⎲⎲⎲⎲⎲⎱⎱⎲⎲⎲⎲⎲⎲⎲⎲⎲⎲⎲⎲⎲",
@@ -172612,7 +172692,7 @@ const MAPS9 = {
   "lake-valor-cave": {
     "id": "lake-valor-cave",
     "name": "Gallant Cavern",
-    "music": "pewter-theme",
+    "music": "borea-route-theme",
     "indoor": true,
     "rows": [
       "⎵⎵⎵⎵⎵⎵⎵⎵⎵⎵⎵⎵⎵⎵⎵⎵",
@@ -172644,7 +172724,7 @@ const MAPS9 = {
   "lake-acuity": {
     "id": "lake-acuity",
     "name": "Lake Insight",
-    "music": "pewter-theme",
+    "music": "borea-route-theme",
     "weather": "clear",
     "rows": [
       "⏐⏐⏐ṥ⏐⏐ṥ⏐⏐⏐ṥ⏐⏐⏐⏐⏐ṥ⏐⏐⏐⏐ṥ⏐ṥ⏐ṥ⏐⏐",
@@ -172689,7 +172769,7 @@ const MAPS9 = {
   "lake-acuity-cave": {
     "id": "lake-acuity-cave",
     "name": "Insight Cavern",
-    "music": "pewter-theme",
+    "music": "borea-route-theme",
     "indoor": true,
     "rows": [
       "⏓⏓⏓⏓⏓⏓⏓⏓⏓⏓⏓⏓⏓⏓⏓⏓",
@@ -172721,7 +172801,7 @@ const MAPS9 = {
   "sendoff-spring": {
     "id": "sendoff-spring",
     "name": "Farewell Spring",
-    "music": "pallet-theme",
+    "music": "borea-route-theme",
     "weather": "clear",
     "rows": [
       "⏀⏀⏀⏀⏀⏀⏀⏀⏀⏀⏀⏀⏀⏀⏀⏀⏀⏀⏀⏀⏀⏀⏀⏀",
@@ -172762,7 +172842,7 @@ const MAPS9 = {
   "turnback-cave": {
     "id": "turnback-cave",
     "name": "Reversal Cave",
-    "music": "pewter-theme",
+    "music": "borea-route-theme",
     "indoor": true,
     "dark": true,
     "rows": [
@@ -172805,7 +172885,7 @@ const MAPS9 = {
     "id": "great-marsh-gate",
     "safariHub": "great-marsh",
     "name": "Great Mire Gatehouse",
-    "music": "viridian-theme",
+    "music": "borea-town-theme",
     "indoor": true,
     "rows": [
       "<<<<<<<<**<<<<<<<<",
@@ -172843,7 +172923,7 @@ const MAPS9 = {
     "id": "great-marsh-west",
     "safariZone": "great-marsh",
     "name": "Great Mire — West",
-    "music": "viridian-theme",
+    "music": "borea-route-theme",
     "weather": "rain",
     "rows": [
       "##########################",
@@ -172884,7 +172964,7 @@ const MAPS9 = {
     "id": "great-marsh-east",
     "safariZone": "great-marsh",
     "name": "Great Mire — East",
-    "music": "viridian-theme",
+    "music": "borea-route-theme",
     "weather": "rain",
     "rows": [
       "#############ἇἇ###########",
@@ -172925,7 +173005,7 @@ const MAPS9 = {
     "id": "great-marsh-north",
     "safariZone": "great-marsh",
     "name": "Great Mire — North",
-    "music": "viridian-theme",
+    "music": "borea-route-theme",
     "weather": "rain",
     "rows": [
       "##########################",
@@ -172963,7 +173043,7 @@ const MAPS9 = {
   "mt-coronet-north": {
     "id": "mt-coronet-north",
     "name": "Mt. Apex — North",
-    "music": "pewter-theme",
+    "music": "borea-route-theme",
     "indoor": true,
     "rows": [
       "⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎒⎒⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓",
@@ -173010,7 +173090,7 @@ const MAPS9 = {
   "spear-pillar": {
     "id": "spear-pillar",
     "name": "Zenith Spire",
-    "music": "pewter-theme",
+    "music": "borea-route-theme",
     "weather": "clear",
     "rows": [
       "ᾗᾗᾗᾗᾗᾗᾗᾗᾗᾗᾗᾗᾗ..ᾗᾗᾗᾗᾗᾗᾗᾗᾗᾗᾗᾗᾗ",
@@ -173051,7 +173131,7 @@ const MAPS9 = {
   "hall-of-origin": {
     "id": "hall-of-origin",
     "name": "Hall of Dawning",
-    "music": "pewter-theme",
+    "music": "borea-route-theme",
     "indoor": true,
     "rows": [
       "ᾗᾗᾗᾗᾗᾗᾗᾗᾗᾗᾗᾗᾗᾗᾗᾗᾗᾗᾗᾗᾗᾗ",
@@ -173087,7 +173167,7 @@ const MAPS9 = {
   "iron-island": {
     "id": "iron-island",
     "name": "Foundry Isle",
-    "music": "pewter-theme",
+    "music": "borea-route-theme",
     "weather": "clear",
     "rows": [
       "##########################",
@@ -173127,7 +173207,7 @@ const MAPS9 = {
   "iron-island-mine": {
     "id": "iron-island-mine",
     "name": "Foundry Isle Mine",
-    "music": "pewter-theme",
+    "music": "borea-route-theme",
     "indoor": true,
     "rows": [
       "GGGGGGGGGGGGGGGGGGGGGGGG",
@@ -173165,7 +173245,7 @@ const MAPS9 = {
   "stark-mountain": {
     "id": "stark-mountain",
     "name": "Grim Mountain",
-    "music": "pewter-theme",
+    "music": "borea-route-theme",
     "weather": "ash",
     "rows": [
       "##########################",
@@ -173206,7 +173286,7 @@ const MAPS9 = {
   "stark-interior": {
     "id": "stark-interior",
     "name": "Grim Mountain — Crater Hall",
-    "music": "pewter-theme",
+    "music": "borea-route-theme",
     "indoor": true,
     "rows": [
       "GGGGGGGGGGGGGGGGGGGGGG",
@@ -173242,7 +173322,7 @@ const MAPS9 = {
   "victory-road": {
     "id": "victory-road",
     "name": "Summit Road",
-    "music": "pewter-theme",
+    "music": "borea-route-theme",
     "indoor": true,
     "rows": [
       "ᾗᾗᾗᾗᾗᾗᾗᾗᾗᾗᾗᾗᾖᾖᾗᾗᾗᾗᾗᾗᾗᾗᾗᾗᾗᾗ",
@@ -173285,7 +173365,7 @@ const MAPS9 = {
   "fuego-ironworks": {
     "id": "fuego-ironworks",
     "name": "Blaze Ironworks",
-    "music": "pewter-theme",
+    "music": "borea-route-theme",
     "indoor": true,
     "rows": [
       "@@@@@@@@@@@@@@@@@@",
@@ -173320,7 +173400,7 @@ const MAPS9 = {
   "fullmoon-island": {
     "id": "fullmoon-island",
     "name": "Brightmoon Island",
-    "music": "pallet-theme",
+    "music": "borea-route-theme",
     "weather": "clear",
     "rows": [
       "######################",
@@ -173356,7 +173436,7 @@ const MAPS9 = {
   "newmoon-island": {
     "id": "newmoon-island",
     "name": "Darkmoon Island",
-    "music": "pewter-theme",
+    "music": "borea-route-theme",
     "weather": "clear",
     "rows": [
       "######################",
@@ -173391,7 +173471,7 @@ const MAPS9 = {
   "flower-paradise": {
     "id": "flower-paradise",
     "name": "Petal Paradise",
-    "music": "pallet-theme",
+    "music": "borea-route-theme",
     "weather": "sun",
     "rows": [
       "########################",
@@ -173429,7 +173509,7 @@ const MAPS9 = {
   "fight-area": {
     "id": "fight-area",
     "name": "Clashfield",
-    "music": "viridian-theme",
+    "music": "borea-town-theme",
     "weather": "sun",
     "rows": [
       "                          ",
@@ -173481,7 +173561,7 @@ const MAPS9 = {
   "survival-area": {
     "id": "survival-area",
     "name": "Wildreach",
-    "music": "viridian-theme",
+    "music": "borea-town-theme",
     "weather": "clear",
     "rows": [
       "΅΅΅`΅΅΅΅΅΅`΅΅ῬῬ΅΅΅`΅΅΅΅΅",
@@ -173533,7 +173613,7 @@ const MAPS9 = {
   "resort-area": {
     "id": "resort-area",
     "name": "Palmside",
-    "music": "viridian-theme",
+    "music": "borea-town-theme",
     "weather": "sun",
     "rows": [
       "             ↴↴        ↴↴ ",
@@ -173595,7 +173675,7 @@ const MAPS9 = {
   "distortion-entrance": {
     "id": "distortion-entrance",
     "name": "Mirrorworld — Threshold",
-    "music": "pewter-theme",
+    "music": "borea-route-theme",
     "distortion": true,
     "indoor": true,
     "rows": [
@@ -173636,7 +173716,7 @@ const MAPS9 = {
   "distortion-depths": {
     "id": "distortion-depths",
     "name": "Mirrorworld — Depths",
-    "music": "pewter-theme",
+    "music": "borea-route-theme",
     "distortion": true,
     "indoor": true,
     "rows": [
@@ -173677,7 +173757,7 @@ const MAPS9 = {
   "distortion-isles": {
     "id": "distortion-isles",
     "name": "Mirrorworld — Isles",
-    "music": "pewter-theme",
+    "music": "borea-route-theme",
     "distortion": true,
     "indoor": true,
     "rows": [
@@ -173718,7 +173798,7 @@ const MAPS9 = {
   "distortion-falls": {
     "id": "distortion-falls",
     "name": "Mirrorworld — Falls",
-    "music": "pewter-theme",
+    "music": "borea-route-theme",
     "distortion": true,
     "indoor": true,
     "rows": [
@@ -173759,7 +173839,7 @@ const MAPS9 = {
   "distortion-abyss": {
     "id": "distortion-abyss",
     "name": "Mirrorworld — Abyss",
-    "music": "pewter-theme",
+    "music": "borea-route-theme",
     "distortion": true,
     "indoor": true,
     "rows": [
@@ -173800,7 +173880,7 @@ const MAPS9 = {
   "distortion-platform": {
     "id": "distortion-platform",
     "name": "Mirrorworld — Platform",
-    "music": "pewter-theme",
+    "music": "borea-route-theme",
     "distortion": true,
     "indoor": true,
     "rows": [
@@ -173839,7 +173919,7 @@ const MAPS9 = {
   "house-pastoria": {
     "id": "house-pastoria",
     "name": "Fenland House",
-    "music": "viridian-theme",
+    "music": "borea-town-theme",
     "indoor": true,
     "rows": [
       "<<<<<<<<<<<<<<",
@@ -173871,7 +173951,7 @@ const MAPS9 = {
   "house-celestic": {
     "id": "house-celestic",
     "name": "Astral House",
-    "music": "viridian-theme",
+    "music": "borea-town-theme",
     "indoor": true,
     "rows": [
       "<<<<<<<<<<<<<<",
@@ -173903,7 +173983,7 @@ const MAPS9 = {
   "house-snowpoint": {
     "id": "house-snowpoint",
     "name": "Rimefall House",
-    "music": "viridian-theme",
+    "music": "borea-town-theme",
     "indoor": true,
     "rows": [
       "<<<<<<<<<<<<<<",
@@ -173935,7 +174015,7 @@ const MAPS9 = {
   "house-sunnyshore": {
     "id": "house-sunnyshore",
     "name": "Brightshore House",
-    "music": "viridian-theme",
+    "music": "borea-town-theme",
     "indoor": true,
     "rows": [
       "<<<<<<<<<<<<<<",
@@ -173967,7 +174047,7 @@ const MAPS9 = {
   "house-fight": {
     "id": "house-fight",
     "name": "Clashfield House",
-    "music": "viridian-theme",
+    "music": "borea-town-theme",
     "indoor": true,
     "rows": [
       "<<<<<<<<<<<<<<",
@@ -173999,7 +174079,7 @@ const MAPS9 = {
   "house-survival": {
     "id": "house-survival",
     "name": "Wildreach House",
-    "music": "viridian-theme",
+    "music": "borea-town-theme",
     "indoor": true,
     "rows": [
       "<<<<<<<<<<<<<<",
@@ -174031,7 +174111,7 @@ const MAPS9 = {
   "house-resort": {
     "id": "house-resort",
     "name": "Palmside Villa",
-    "music": "viridian-theme",
+    "music": "borea-town-theme",
     "indoor": true,
     "rows": [
       "<<<<<<<<<<<<<<",
@@ -174063,7 +174143,7 @@ const MAPS9 = {
   "house-resort-villa": {
     "id": "house-resort-villa",
     "name": "Palmside Grand Villa",
-    "music": "viridian-theme",
+    "music": "borea-town-theme",
     "indoor": true,
     "rows": [
       "<<<<<<<<<<<<<<",
@@ -174197,7 +174277,7 @@ const MAPS9 = {
   "celestic-shrine": {
     "id": "celestic-shrine",
     "name": "Astral Shrine",
-    "music": "pallet-theme",
+    "music": "borea-town-theme",
     "indoor": true,
     "rows": [
       "ạạạạạạạạạạạạạạạạ",
@@ -174232,7 +174312,7 @@ const MAPS9 = {
   "snowpoint-temple": {
     "id": "snowpoint-temple",
     "name": "Rimefall Temple",
-    "music": "pewter-theme",
+    "music": "borea-route-theme",
     "indoor": true,
     "rows": [
       "ṥṥṥṥṥṥṥṥṨṨṥṥṥṥṥṥṥṥ",
@@ -174268,7 +174348,7 @@ const MAPS9 = {
   "snowpoint-temple-depths": {
     "id": "snowpoint-temple-depths",
     "name": "Rimefall Temple — Depths",
-    "music": "pewter-theme",
+    "music": "borea-route-theme",
     "indoor": true,
     "rows": [
       "ṥṥṥṥṥṥṥṥṥṥṥṥṥṥṥṥ",
@@ -174302,7 +174382,7 @@ const MAPS9 = {
   "sunnyshore-lighthouse": {
     "id": "sunnyshore-lighthouse",
     "name": "Brightshore Lighthouse",
-    "music": "viridian-theme",
+    "music": "borea-town-theme",
     "indoor": true,
     "rows": [
       "IIIIIIIIIIIIIIII",
@@ -174337,7 +174417,7 @@ const MAPS9 = {
   "league-lobby": {
     "id": "league-lobby",
     "name": "League Lobby",
-    "music": "viridian-theme",
+    "music": "borea-town-theme",
     "indoor": true,
     "rows": [
       "^^^^^^^^++^^^^^^^^",
