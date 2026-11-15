@@ -408,7 +408,7 @@ export const MAPS4 = {
 MAPS4.vermilion = {
   ...MAPS2.vermilion,  npcs: [
     ...MAPS2.vermilion.npcs,
-    { x: 10, y: 10, name: 'SAILOR BRINE', art: 'sailor', skin: '#d8a878', shirt: '#3a6ac0', pants: '#2a2a3a', hair: '#4a3a2a', ferry: 'stanne',
+    { x: 10, y: 10, name: 'SAILOR BRINE', art: 'cast-brine', skin: '#d8a878', shirt: '#3a6ac0', pants: '#2a2a3a', hair: '#4a3a2a', ferry: 'stanne',
       dialogue: ['The S.S. Tern is in port, shining like a coin in a fountain. Ticket holders, step lively!', 'Fine sailing, trainer. Mind the gulls — they have seen things.'] },
   ],
   events: [

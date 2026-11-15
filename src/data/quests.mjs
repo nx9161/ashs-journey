@@ -258,7 +258,7 @@ export const TALE_NPCS = [
     dialogue: ['Sixty years I walked that forest. It kept one thing of mine. Fair trade, I suppose.'] },
   { map: 'pewter', x: 5, y: 4, name: 'GARRAN', art: 'brock', ...APPEAR.brock, tale: 'tale_pewter', role: 'stage',
     dialogue: ['Off duty, I read to the museum fossils. They never heckle.'] },
-  { map: 'cerulean', x: 16, y: 1, name: 'PIP', art: 'kid', ...APPEAR.kid, tale: 'tale_cerulean', role: 'culprit',
+  { map: 'cerulean', x: 16, y: 1, name: 'PIP', art: 'cast-pip', ...APPEAR.kid, tale: 'tale_cerulean', role: 'culprit',
     dialogue: ['The cape is mine. The view is mine. The bell is — also around here somewhere.'] },
   // Wave S2 (quest integrity): the HARBORMASTER stood at (16,11) — a
   // td-vermilion TOWN DRESS tile (solid planter/signpost class), which

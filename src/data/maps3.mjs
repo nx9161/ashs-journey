@@ -1800,7 +1800,7 @@ export const MAPS3 = {
         dialogue: ["Ah, {player}! Out walking the town again? Good. Legs first, glory later — that is the order of things.", "VOLTIK still refusing every Capture Orb it sees, I hope. Some bonds are not meant to be carried in a pocket."] },
       // The Caldera ferryman, at the dock head on the south shore —
       // where his dialogue always said he waits.
-      { x: 7, y: 11, name: 'FERRYMAN', art: 'sailor', skin: '#d8a878', shirt: '#3a6ac0', pants: '#2a2a3a', hair: '#c0c0c0', ferry: 'cinnabar', ferryGate: 'surf',
+      { x: 7, y: 11, name: 'FERRYMAN', art: 'cast-ferryman', skin: '#d8a878', shirt: '#3a6ac0', pants: '#2a2a3a', hair: '#c0c0c0', ferry: 'cinnabar', ferryGate: 'surf',
         dialogue: ["My little ferry runs Dawnwick to Caldera for trainers who've earned the sea legs — and the badges.", "Say the word when you want the crossing. The volcano smokes a welcome the whole way in."] },
     ],
     encounters: null,

@@ -100,7 +100,7 @@ export const MAPS2 = {
       { x: 5, y: 7, text: 'ROUTE 3 — Flintridge City to Mt. Lunestone. Watch for falling rocks and eager trainers.' },
     ],
     npcs: [
-      { x: 12, y: 4, name: 'LASS ANA', art: 'lass', skin: '#f0c8a0', shirt: '#c03a7a', pants: '#3a3a4a', hair: '#7a4a1a',
+      { x: 12, y: 4, name: 'LASS ANA', art: 'cast-ana-lass', skin: '#f0c8a0', shirt: '#c03a7a', pants: '#3a3a4a', hair: '#7a4a1a',
         trainer: 'r3_lass', sight: { dir: 'left', range: 3 },
         dialogue: ["I just got my first badge — wanna see what it taught me?", "Okay, okay! Your badge energy is real!"] },
       { x: 8, y: 9, name: 'BEX JR', art: 'bugcatcher', skin: '#e8b888', shirt: '#a03a5f', pants: '#2a304a', hair: '#2a1a0a',
@@ -247,7 +247,7 @@ export const MAPS2 = {
       { x: 4, y: 4, name: 'MARCO', art: 'youngster', skin: '#e8b888', shirt: '#c03a3a', pants: '#2a2a3a', hair: '#1a1a1a',
         giveMon: { species: 'charmander', level: 10 },
         dialogue: ["My EMBRY's too much fire for a guy with my temper. We keep setting each other off.", "Take him. Raise that flame right — and when he roars someday, remember old Marco."] },
-      { x: 9, y: 9, name: 'LASS RUE2', art: 'lass', skin: '#f0c8a0', shirt: '#e08a3a', pants: '#2c3049', hair: '#a05a2a',
+      { x: 9, y: 9, name: 'LASS RUE2', art: 'cast-rue-lass', skin: '#f0c8a0', shirt: '#e08a3a', pants: '#2c3049', hair: '#a05a2a',
         trainer: 'r4_lass', sight: { dir: 'up', range: 3 },
         dialogue: ["Tidehaven's just ahead — but nobody passes my picnic spot unbattled!", "Fine, FINE. Tidehaven deserves you."] },
     ],
@@ -642,7 +642,7 @@ export const MAPS2 = {
       { x: 5, y: 7, text: 'ROUTE 7 — Arcport to Canopy. Short grass, tall stories at the gatehouse.' },
     ],
     npcs: [
-      { x: 8, y: 4, name: 'LASS MINA', art: 'lass', skin: '#f0c8a0', shirt: '#c03a7a', pants: '#3a3a4a', hair: '#7a4a1a',
+      { x: 8, y: 4, name: 'LASS MINA', art: 'cast-mina', skin: '#f0c8a0', shirt: '#c03a7a', pants: '#3a3a4a', hair: '#7a4a1a',
         trainer: 'r7_lass', sight: { dir: 'down', range: 3 },
         dialogue: ["Canopy's perfume shops can wait — battle first, shopping second!", "My wallet thanks you for the delay, at least."] },
     ],

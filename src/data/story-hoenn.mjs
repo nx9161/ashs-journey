@@ -1069,7 +1069,7 @@ export const HOENN_NPCS = [
     dialogue: ['No holding back, either of us. That IS the friendship.'] },
   { map: 'league-evergrande', x: 11, y: 8, name: 'TYSON', art: 'acetrainer', skin: '#d8a878', shirt: '#60243a', pants: '#2a2a3a', hair: '#2a2a1a', hoenn: 'tyson',
     dialogue: ['Come and take the ending, if it is yours.'] },
-  { map: 'league-evergrande', x: 15, y: 12, name: 'SUTTER', art: 'gent', skin: '#e8b888', shirt: '#7a6a2a', pants: '#3a3a2a', hair: '#5a4a2a', hoenn: 'scott',
+  { map: 'league-evergrande', x: 15, y: 12, name: 'SUTTER', art: 'cast-sutter', skin: '#e8b888', shirt: '#7a6a2a', pants: '#3a3a2a', hair: '#5a4a2a', hoenn: 'scott',
     dialogue: ['I scout battle the way other men scout weather: professionally, and with great enjoyment.'] },
 ];
 
