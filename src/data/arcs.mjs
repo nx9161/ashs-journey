@@ -319,9 +319,9 @@ export const FINALE_END_CARD = [
 
 // W10-C: the finale's closing panel moment (a PANELS id), resolved by
 // arcFinalePanel in src/game/arcs.mjs and shown after the credits.
-// null = dormant (the shipped state until W10-C T3 lands the panel):
-// the credits then end exactly as they always have.
-export const FINALE_PANEL = null;
+// null = dormant: the credits then end exactly as they always have.
+// W10-C T3 landed the panel: 'finale-road' (the long road, remembered).
+export const FINALE_PANEL = 'finale-road';
 
 // The committed national horizon: Platinum (ADR-027 Decision 5). Derived
 // from the Borea row so a registry edit moves every presentation at once.

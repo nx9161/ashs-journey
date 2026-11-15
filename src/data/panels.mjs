@@ -79,4 +79,8 @@ export const PANELS = {
   'card-hoenn': { art: 'panel-card-hoenn' },
   'card-frontier': { art: 'panel-card-frontier' },
   'card-sinnoh': { art: 'panel-card-sinnoh' },
+  // W10-C T3 — finale + intro (Class F8 surface attach via the
+  // FINALE_PANEL const; Class E2 via INTRO_SCRIPT.starterPanel)
+  'finale-road': { art: 'panel-finale-road' },
+  'intro-partner': { art: 'panel-intro-partner' },
 };

@@ -18,6 +18,10 @@ export const INTRO_SCRIPT = {
     'A bond like that is rarer than any badge. Treat it well, {player}.',
     'Your journey starts on Route 1, north of Dawnwick. Catch Kin, grow strong — and when you are ready, Flintridge Gym awaits.',
   ],
+  // W10-C T3: the starter moment's panel (a PANELS id), resolved by
+  // the intro seam in src/game/intro.mjs — plays after the lines
+  // above, before the partner grant. Absent = no panel, as shipped.
+  starterPanel: 'intro-partner',
 };
 
 // PARTNER_MOODS — Yellow homage: talking to the partner (face it + A, or tap
