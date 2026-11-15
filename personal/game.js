@@ -140163,44 +140163,6 @@ function freshFrontierState() {
 function rows(list) { return list; }
 
 const MAPS = {
-  pallet: {
-    id: 'pallet', name: 'Dawnwick', music: 'pallet-theme',
-    rows: rows([
-      'ËËËËËËËËËËËËËËËË',
-      'ËẆẈÀıııÀÀÀÀÀıÀẈË',
-      'ËẊāìāııÀÀıāāāÀÀË',
-      'ËẌęsęıÀÀÀÀęsęÀÀË',
-      'ËıÀÀÀıÀÀÀoÀÀıÖÀË',
-      'ËıÀÀıÀÀËËııÀÀııË',
-      'ËÀÀÀÀıÀËËÀıÀıÀıË',
-      'ËÀÖ÷÷ıııÀıı÷÷ÀẆË',
-      'ËÀÀıııoÀÀoÀıÀıÀË',
-      'ËÀÀıııÀ,,ııÀÀÀÀË',
-      'ËËËËËËıÀııËËËËËË',
-    ]),
-    warps: [
-      { x: 6, y: 10, to: { map: 'route1', x: 6, y: 14 } },
-      { x: 7, y: 10, to: { map: 'route1', x: 7, y: 14 } },
-      { x: 8, y: 10, to: { map: 'route1', x: 6, y: 14 } },
-      { x: 9, y: 10, to: { map: 'route1', x: 7, y: 14 } },
-    ],
-    signs: [
-      { x: 6, y: 3, text: "PROF. HAWTHORN'S LAB — Kin research. The professor is out on Route 1 today." },
-      { x: 7, y: 3, text: "PROF. HAWTHORN'S LAB — Kin research. The professor is out on Route 1 today." },
-    ],
-    npcs: [
-      { x: 10, y: 4, name: 'VALE', art: 'gary', skin: '#f0c8a0', shirt: '#3a5a9a', pants: '#2a2a3a', hair: '#6a4a2a',
-        // Yellow homage (original lines): the rival's partner is a PRISMKIT.
-        dialogue: ["Yo, {player}! The professor gave me a PRISMKIT — fluffy, clever, and all mine!", "He says it'll evolve to match how I battle. Just watch — we'll be champions!"] },
-      // UI v2.3 (defect 5): the lab's storage terminal, standing at the lab
-      // entrance — Dawnwick's lab has no interior map, so the terminal lives
-      // here (and in every Center) rather than nowhere.
-      { x: 5, y: 4, name: 'PC TERMINAL', art: 'pc', skin: '#c0c0c0', shirt: '#3a3a4a', pants: '#2a2a2a', hair: '#3a6ac0', pc: true,
-        dialogue: ["Lab PC — Kin Storage System. The professor keeps a terminal by the door for trainers passing through. Access your boxes here."] },
-    ],
-    encounters: null,
-    start: { x: 7, y: 7, dir: 'down' },
-  },
 
   route1: {
     id: 'route1', name: 'Route 1', music: 'route1-theme',
@@ -140258,74 +140220,7 @@ const MAPS = {
     start: null,
   },
 
-  viridian: {
-    id: 'viridian', name: 'Fernmere City', music: 'viridian-theme',
-    rows: rows([
-      'ÌÌÌÌÌÌÁÁĲÁÌÌÌÌÌÌ',
-      'ÌĲ×ĲÁĲĲÌÌÁÁÁĲ×ĲÌ',
-      'ÌÁăqăĲĲÌÌĲăăăÁÁÌ',
-      'ÌÁěsěĲÁĲÁÁěsěĲÁÌ',
-      'ÌÁÁÁÁĲââââÁÁĲĲÁÌ',
-      'ÌĲÁÁĲÁAJKAĲÁÁĲĲÌ',
-      'ÌÁÁ××ĲoÁĲoĲ××ÁĲÌ',
-      'ÌĲÁĲĲĲĲĲÁĲĲĲÁÁÁÌ',
-      'ÌÁ×FFĲÁÁÁĲÁFF×ÁÌ',
-      'ÌÁÁÁĲĲÁ,,ĲĲÁÁÁÁÌ',
-      'ÌÌÌÌÌÌĲÁĲĲÌÌÌÌÌÌ',
-    ]),
-    warps: [
-      { x: 7, y: 5, to: { map: 'center', x: 4, y: 4 } },
-      { x: 8, y: 5, to: { map: 'center', x: 5, y: 4 } },
-      { x: 6, y: 0, to: { map: 'route2', x: 6, y: 12 } },
-      { x: 7, y: 0, to: { map: 'route2', x: 7, y: 12 } },
-      { x: 8, y: 0, to: { map: 'route2', x: 6, y: 12 } },
-      { x: 9, y: 0, to: { map: 'route2', x: 7, y: 12 } },
-      { x: 6, y: 10, to: { map: 'route1', x: 6, y: 1 } },
-      { x: 7, y: 10, to: { map: 'route1', x: 7, y: 1 } },
-      { x: 8, y: 10, to: { map: 'route1', x: 6, y: 1 } },
-      { x: 9, y: 10, to: { map: 'route1', x: 7, y: 1 } },
-    ],
-    signs: [
-      { x: 3, y: 6, text: 'FERNMERE CITY — The city of evergreen. The Center heals your team for free.' },
-    ],
-    npcs: [
-      { x: 11, y: 7, name: 'HIKER', art: 'hiker', skin: '#d8a878', shirt: '#50368e', pants: '#4a4a5a', hair: '#3a2a1a',
-        dialogue: ["Heading north? Route 2's grass is thicker — I saw a FUSSAPE up there yesterday.", "Fighting-types crack rock wide open. A FUSSAPE that knows Low Kick will humble Garran's PEBBLET."] },
-    ],
-    encounters: null,
-    start: null,
-  },
 
-  center: {
-    id: 'center', name: 'Center', music: 'center-theme', indoor: true,
-    rows: rows([
-      'ṗṘ::::::::',
-      ':θḈḉḖβṢθγ:',
-      ':ḋ!!!ζ!!ṣ:',
-      ':ḝ!!αα!!!:',
-      ':ω!!!!!!ζ:',
-      ':ḊṢ!DD!ṣḊ:',
-      '::::::::::',
-    ]),
-    warps: [
-      { x: 4, y: 5, to: { map: 'viridian', x: 7, y: 6 } },
-      { x: 5, y: 5, to: { map: 'viridian', x: 8, y: 6 } },
-    ],
-    signs: [],
-    npcs: [
-      { x: 4, y: 2, name: 'NURSE', art: 'nurse', skin: '#f0c8a0', shirt: '#f0f0f0', pants: '#f0a0b0', hair: '#e86a5a',
-        dialogue: ["Welcome to the Center! Let me heal your team..."], heal: true,
-        afterHeal: ["All better! Your Kin are fighting fit. Come back any time."] },
-      // ADR-025 §4: Sparring Coach (Candy Coach House Rule) — present in
-      // every Center's data; the scene only fields him while the rule is
-      // on (loadMap gate in overworld.mjs).
-      { x: 2, y: 2, name: 'SPARRING COACH', art: 'sparcoach', skin: '#c88a5a', shirt: '#c05a3a', pants: '#3a3a4a', hair: '#2a1a0a',
-        sparCoach: true, sparSpecies: 'machop',
-        dialogue: ["Name's Coach — I run sparring drills out of this Center.", "Beat my partner and you earn an XP Candy. Lose, and all it costs you is sweat. We can go as many rounds as you like."] },
-    ],
-    encounters: null,
-    start: null,
-  },
 
   route2: {
     id: 'route2', name: 'Route 2', music: 'route1-theme',
@@ -140403,41 +140298,6 @@ const MAPS = {
     start: null,
   },
 
-  pewter: {
-    id: 'pewter', name: 'Flintridge City', music: 'pewter-theme',
-    rows: rows([
-      'ÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ',
-      'ÍĵĵĵÂoąîąąoÂĵÂĵÍ',
-      'ÍÂąąąĵḁḁḁḁÂąąąÂÍ',
-      'ÍÂğyğĵḁVYḁĵğyğÂÍ',
-      'ÍÂØÂØĵÂ99ÂÂÂĵØÂÍ',
-      'ÍĵÂÂĵÂÂÍÍĵĵÂÂĵĵÍ',
-      'ÍÂÂØØĵoÂĵoĵØØÂĵÍ',
-      'ÍĵÂĵĵĵĵĵÂĵĵĵÂÂÂÍ',
-      'ÍÂÂFFĵÂÂÂĵÂFFØÂÍ',
-      'ÍÂÂÂĵĵÂ,,ĵĵÂÂÂÂÍ',
-      'ÍÍÍÍÍÍĵÂĵĵÍÍÍÍÍÍ',
-    ]),
-    warps: [
-      { x: 7, y: 3, to: { map: 'gym', x: 5, y: 7 } },
-      { x: 8, y: 3, to: { map: 'gym', x: 6, y: 7 } },
-      { x: 6, y: 10, to: { map: 'route2', x: 6, y: 1 } },
-      { x: 7, y: 10, to: { map: 'route2', x: 7, y: 1 } },
-      { x: 8, y: 10, to: { map: 'route2', x: 6, y: 1 } },
-      { x: 9, y: 10, to: { map: 'route2', x: 7, y: 1 } },
-    ],
-    signs: [
-      { x: 3, y: 6, text: 'FLINTRIDGE CITY — A stone-gray city nestled between mountains.' },
-      { x: 11, y: 6, text: 'FLINTRIDGE GYM — Leader: Garran. The rock-solid Kin trainer!' },
-    ],
-    npcs: [
-      { x: 10, y: 4, name: 'COACH', art: 'coach', skin: '#d8a878', shirt: '#c03a3a', pants: '#2a2a3a', hair: '#1a1a1a',
-        dialogue: ["Garran's rock-types shrug off electric attacks — your partner's sparks won't cut it in there.", "Catch a FUSSAPE on Route 2 — fighting beats rock, and they learn Low Kick young. Water or grass would work too, but you won't find those this side of the forest.", "You've got heart, kid. Take these Capture Orbs — on the house."],
-        give: { flag: 'coach_balls', items: { pokeball: 3 }, text: '3 Capture Orbs' } },
-    ],
-    encounters: null,
-    start: null,
-  },
 
   gym: {
     id: 'gym', name: 'Flintridge Gym', music: 'gym-theme', indoor: true,
@@ -143911,94 +143771,8 @@ const MAPS2 = {
   },
 
   // ---------- DAWNWICK override: complete def + ferry captain & dock ----------
-  pallet: {
-    id: 'pallet', name: 'Dawnwick', music: 'pallet-theme',
-    rows: rows([
-      'ËËËËËËËËËËËËËËËË',
-      'ËẆẈÀıııÀÀÀÀÀıÀẈË',
-      'ËẊāìāııÀÀıāāāÀÀË',
-      'ËẌęsęıÀÀÀÀęsęÀÀË',
-      'ËıÀÀÀıÀÀÀoÀÀıÖÀË',
-      'ËıÀÀıÀÀËËııÀÀııË',
-      'ËÀÀÀÀıÀËËÀıÀıÀıË',
-      'ËÀÖ÷÷ıııÀıı÷÷ÀẆË',
-      'ËÀÀıııoÀÀoÀıÀıÀË',
-      'ËÀÀıııÀ,,ııÀÀÀÀË',
-      'ËËËËËËıÀııËËËËËË',
-    ]),
-    warps: [
-      { x: 6, y: 10, to: { map: 'route1', x: 6, y: 14 } },
-      { x: 7, y: 10, to: { map: 'route1', x: 7, y: 14 } },
-      { x: 8, y: 10, to: { map: 'route1', x: 6, y: 14 } },
-      { x: 9, y: 10, to: { map: 'route1', x: 7, y: 14 } },
-    ],
-    signs: [
-      { x: 6, y: 3, text: "PROF. HAWTHORN'S LAB — Kin research. The professor is out on Route 1 today." },
-      { x: 7, y: 3, text: "PROF. HAWTHORN'S LAB — Kin research. The professor is out on Route 1 today." },
-    ],
-    npcs: [
-      { x: 10, y: 4, name: 'VALE', art: 'gary', skin: '#f0c8a0', shirt: '#3a5a9a', pants: '#2a2a3a', hair: '#6a4a2a',
-        dialogue: ["Yo, {player}! The professor gave me a PRISMKIT — fluffy, clever, and all mine!", "He says it'll evolve to match how I battle. Just watch — we'll be champions!"] },
-      { x: 12, y: 8, name: 'CAPT MARA', art: 'sailor', skin: '#d8a878', shirt: '#3a6ac0', pants: '#2a2a3a', hair: '#e8e0f0',
-        dialogue: ["I run the little ferry out of Dawnwick's dock, dear. Mostly supplies, sometimes secrets.", "Once a year the fog takes me somewhere that isn't on any chart. Exile Isle. When it calls you, I'll be waiting."] },
-    ],
-    encounters: null,
-    items: [],
-    hidden: [],
-    events: [],
-    start: { x: 7, y: 7, dir: 'down' },
-  },
 
   // ---------- FERNMERE override: gym west side (locked), Route 22 exit ----------
-  viridian: {
-    id: 'viridian', name: 'Fernmere City', music: 'viridian-theme',
-    rows: rows([
-      'ÌÌÌÌÌÌÁÁĲÁÌÌÌÌÌÌ',
-      'ÌĲ×GGĲĲÁÁÁÁÁĲ×ĲÌ',
-      'ÌÁăíăĲĲÁÁĲăăăÁÁÌ',
-      'ÌÁḀḀḀĲÁĲÁÁěsěĲÁÌ',
-      'ÌÁḀVYĲââââ×Á×ĲÁÌ',
-      'ÁĲÁÁĲÁAJKAĲÁÁĲĲÌ',
-      'ÌÁÁ××ĲoÁĲoĲ××ÁĲÌ',
-      'ÌĲÁĲĲĲĲĲÁĲĲĲÁÁÁÌ',
-      'ÌÁ×FFĲÁÁÁĲÁFF×ÁÌ',
-      'ÌÁÁÁĲĲÁ,,ĲĲÁÁÁÁÌ',
-      'ÌĲÁÁĲÁĲÁĲĲĲĲĲÁÁÌ',
-      'ÌÌÌÌÌÌÁĲĲĲÌÌÌÌÌÌ',
-    ]),
-    warps: [
-      { x: 3, y: 3, to: { map: 'gym-viridian', x: 5, y: 7 } },
-      { x: 4, y: 3, to: { map: 'gym-viridian', x: 6, y: 7 } },
-      { x: 7, y: 5, to: { map: 'center', x: 4, y: 4 }, via: { map: 'viridian', x: 7, y: 6 } },
-      { x: 8, y: 5, to: { map: 'center', x: 5, y: 4 }, via: { map: 'viridian', x: 8, y: 6 } },
-      { x: 0, y: 5, to: { map: 'route22', x: 16, y: 5 } },
-      { x: 6, y: 0, to: { map: 'route2', x: 6, y: 12 } },
-      { x: 7, y: 0, to: { map: 'route2', x: 7, y: 12 } },
-      { x: 8, y: 0, to: { map: 'route2', x: 6, y: 12 } },
-      { x: 9, y: 0, to: { map: 'route2', x: 7, y: 12 } },
-      { x: 6, y: 11, to: { map: 'route1', x: 6, y: 1 } },
-      { x: 7, y: 11, to: { map: 'route1', x: 7, y: 1 } },
-      { x: 8, y: 11, to: { map: 'route1', x: 6, y: 1 } },
-      { x: 9, y: 11, to: { map: 'route1', x: 7, y: 1 } },
-    ],
-    signs: [
-      { x: 3, y: 6, text: 'FERNMERE CITY — The city of evergreen. The Center heals your team for free.' },
-      { x: 12, y: 6, text: 'FERNMERE GYM — Leader: UNKNOWN. The door has been locked for a long, long time.' },
-    ],
-    npcs: [
-      { x: 11, y: 7, name: 'HIKER', art: 'hiker', skin: '#d8a878', shirt: '#50368e', pants: '#4a4a5a', hair: '#3a2a1a',
-        dialogue: ["Heading north? Route 2's grass is thicker — I saw a FUSSAPE up there yesterday.", "Fighting-types crack rock wide open. A FUSSAPE that knows Low Kick will humble Garran's PEBBLET."] },
-      { x: 12, y: 4, name: 'OLD MAN', art: 'elder', skin: '#e8b888', shirt: '#50368e', pants: '#4a4a5a', hair: '#c0c0c0',
-        dialogue: ["That gym's leader vanished years ago — some say he runs... an organization. Some say he'll be back.", "When the door opens again, trainer, Arden will feel it. Mark an old man's words."] },
-    ],
-    encounters: null,
-    items: [],
-    hidden: [],
-    events: [
-      { id: 'ev_viridian_gym_locked', x: 3, y: 4, when: { flagNot: 'gym_open_viridian' } },
-    ],
-    start: null,
-  },
 
   'gym-viridian': {
     id: 'gym-viridian', name: 'Fernmere Gym', music: 'gym-theme', indoor: true,
@@ -144186,73 +143960,6 @@ const MAPS2 = {
     start: null,
   },
 
-  league: {
-    id: 'league', name: 'League', music: 'gym-theme', indoor: true,
-    rows: rows([
-      '^^^^^^^^^^^^^^^^^^',
-      '^++++++++++++++++^φ',
-      '^++++++++++++++++^',
-      '^μ+++++++++++++++^',
-      '^^/^^^/^DD/^^^/^^/μ',
-      '^++++++++++++++++^ν',
-      '^++++++++++++++++^',
-      '^++++++++++++++++^',
-      '^^^^^^^^DD^^^^^^^^',
-      '^θ++++))+++++++++^θ',
-      '^++++++++++++++++^',
-      '^++++++++++++++++^',
-      '^^^^^^^^DD^^^^^^^^',
-      '^++++++++++++++++^',
-      '^++++++++++++++++^',
-      '^++++++++++++++++^',
-      '^^^^^^^^DD^^^^^^^^',
-      '^++++++++++++++++^',
-      '^++++++++++++++++^',
-      '^+++++++DD+++++++^',
-      '^^^^^^^^^^^^^^^^^^',
-    ]),
-    warps: [
-      { x: 8, y: 4, to: { map: 'league', x: 8, y: 5 } },
-      { x: 9, y: 4, to: { map: 'league', x: 9, y: 3 } },
-      { x: 8, y: 8, to: { map: 'league', x: 8, y: 9 } },
-      { x: 9, y: 8, to: { map: 'league', x: 9, y: 7 } },
-      { x: 8, y: 12, to: { map: 'league', x: 8, y: 13 } },
-      { x: 9, y: 12, to: { map: 'league', x: 9, y: 11 } },
-      { x: 8, y: 16, to: { map: 'league', x: 8, y: 17 } },
-      { x: 9, y: 16, to: { map: 'league', x: 9, y: 15 } },
-      { x: 8, y: 19, to: { map: 'indigo', x: 6, y: 7 } },
-      { x: 9, y: 19, to: { map: 'indigo', x: 7, y: 7 } },
-    ],
-    signs: [],
-    npcs: [
-      { x: 9, y: 17, name: 'ISOLDE', art: 'lorelei', skin: '#f0c8a0', shirt: '#3a9ac0', pants: '#2a3a4a', hair: '#7a1a3a',
-        trainer: 'lorelei',
-        dialogue: ["I am Isolde of the Elite Four! My ice Kin are glaciers with tempers — no one breaks them. No one.", "Glaciers... melt. Astonishing. Goran waits above, and he hits far harder than winter."] },
-      { x: 9, y: 13, name: 'GORAN', art: 'bruno', skin: '#c89878', shirt: '#50368e', pants: '#3a3a3a', hair: '#1a1a1a',
-        trainer: 'bruno',
-        dialogue: ["I am Goran! Through rigorous training, my Kin and I became one machine of muscle!", "We train again. YOU — climb. Odessa's ghosts are older than my pride."] },
-      { x: 9, y: 9, name: 'ODESSA', art: 'agatha', skin: '#e8b888', shirt: '#5a4a6a', pants: '#2a2a3a', hair: '#c0c0c0',
-        trainer: 'agatha',
-        dialogue: ["I am Odessa. I battled that fool Hawthorn when we were both young and reckless... mostly him.", "Hmph. You fight like he dreamed of fighting. Darian awaits, child. Mind the dragons."] },
-      { x: 9, y: 5, name: 'DARIAN', art: 'lance', skin: '#f0c8a0', shirt: '#7a1a3a', pants: '#1a1a2a', hair: '#a02a2a',
-        trainer: 'lance',
-        dialogue: ["I am Darian — dragon master, and the League's final wall before its throne.", "A wall, breached by a better storm. The champion's room is yours to enter. Earn what's inside."] },
-      { x: 9, y: 1, name: 'VALE', art: 'gary', skin: '#f0c8a0', shirt: '#3a5a9a', pants: '#2a2a3a', hair: '#6a4a2a',
-        trainer: 'gary_champion',
-        dialogue: ["Well, well. Look who the mountain let in. I've been champion for exactly one satisfying afternoon, {player} — don't ruin it.", "No... NO! My reign can't end before it trends! ...Heh. Take the crown, then. It was always going to be one of us."] },
-    ],
-    encounters: null,
-    items: [],
-    hidden: [],
-    events: [
-      { id: 'ev_e4_1', x: 8, y: 17, when: { flagNot: 'ev_e4_1_done' } },
-      { id: 'ev_e4_2', x: 8, y: 13, when: { flagNot: 'ev_e4_2_done' } },
-      { id: 'ev_e4_3', x: 8, y: 9, when: { flagNot: 'ev_e4_3_done' } },
-      { id: 'ev_e4_4', x: 8, y: 5, when: { flagNot: 'ev_e4_4_done' } },
-      { id: 'ev_champion', x: 8, y: 1, when: { flagNot: 'ev_champion_done' } },
-    ],
-    start: null,
-  },
 
   ceruleancave: {
     id: 'ceruleancave', name: 'Tidehaven Cave', music: 'pewter-theme', indoor: true, dark: true,
