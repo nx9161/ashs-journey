@@ -2886,6 +2886,60 @@ W17F_KIND_DEFS.forEach(([kind], i) => {
 export const W17F_PROP_KINDS = W17F_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
 export const W17F_WALL_KINDS = W17F_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
 export const W17F_FLOOR_KINDS = W17F_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
+// Wave W17-G (Route Build Program, Yamato Tranche 2): the wet west
+// arc — Route 33, Holly Forest, Route 34, Route 35 and the National
+// Park, each its own kit under the NO-SAME-KIT law. All five are
+// defined once in maps6.mjs (no dual copies in Yamato, so no
+// registry re-pins arise). Routes convert 1:1 off the generic
+// grassground/path/tree vocabulary by KIND (maps6 trees stand on
+// both '#' and 'T' chars — the W17-B lesson); art layer only:
+// encounter tables, warps, NPC posts, sign records, items and every
+// shipped dressing kind (apricorn trees on Route 33; the forest's
+// jshrine and 19 maple; Route 34's Day-Care house stamp; the park's
+// tc-/td-goldenrod carpet, leaguefountain, lamps, benches) stay
+// byte-identical. Route 33 "Rain Road" (idx 1186-1189), Holly
+// Forest "Holly Deep" (1190-1193), Route 34 "Day-Care Coast"
+// (1194-1197), Route 35 "Park Road" (1198-1201), National Park
+// "The Front Garden" (1202-1204 — no tree cells ship in the park,
+// so its kit is ground + path + prop only). Ground kinds
+// deliberately do NOT end in 'floor' (the desire-path audit counts
+// '*floor' as street tier; grounds must never masquerade as
+// street); path kinds DO end in 'floor' so they register as the
+// route's path tier per route (checklist point 3). Indices
+// 1186-1204 per the program plan (WAVE-W17-YAMATO-ROUTE-PROGRAM-
+// PLAN.md): W17-F took 1168-1185 on its parallel branch; 1111 and
+// every earlier documented gap stay empty. Kind names verified
+// unclaimed against origin/main. Chars U+1E00+1186..
+export const W17G_KIND_DEFS = [
+  ['rainturf', 'floor'],
+  ['rainfloor', 'floor'],
+  ['driptree', 'wall'],
+  ['puddlepool', 'prop'],
+  ['hollyturf', 'floor'],
+  ['hollyfloor', 'floor'],
+  ['hollytree', 'wall'],
+  ['logstack', 'prop'],
+  ['coastturf', 'floor'],
+  ['coastfloor', 'floor'],
+  ['coastelm', 'wall'],
+  ['carefence', 'prop'],
+  ['parkturf', 'floor'],
+  ['parkfloor', 'floor'],
+  ['parkelm', 'wall'],
+  ['parkpost', 'prop'],
+  ['frontlawn', 'floor'],
+  ['frontfloor', 'floor'],
+  ['lawnbed', 'prop'],
+];
+export const W17G_KIND_CHARS = {};
+W17G_KIND_DEFS.forEach(([kind], i) => {
+  const ch = String.fromCodePoint(0x1E00 + 1186 + i);
+  W17G_KIND_CHARS[kind] = ch;
+  TILE_CHARS[ch] = kind;
+});
+export const W17G_PROP_KINDS = W17G_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
+export const W17G_WALL_KINDS = W17G_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
+export const W17G_FLOOR_KINDS = W17G_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
 export const SINNOH_TOWN_GROUND_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg);
 export const SINNOH_TOWN_GROUND2_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg2);
 // TX-3: the 8 gym exteriors by town (original type-accent motifs).

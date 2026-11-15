@@ -1,0 +1,24 @@
+# Wave W17-G (Route 35): park post — a dressed gate post of the park’s own stone with a pale cap, standing where the road meets the gate, on park turf (fully opaque, ground baked in). The design ends the road at the park’s gateposts.
+PIX tile-prop-parkpost 16 16
+aaaaaaaaaabaaaaa
+aaaabbbaaabaaaaa
+aabaabccccaaaaaa
+aaaaaaccccaaaaaa
+abaaaaassaaaaaab
+abaaaaassaabaaaa
+baabaabssaaaaaaa
+ababaabssaaaaaba
+aaaaaaaddaaabbaa
+baabaabssaaaaaaa
+aaaaaaassaaabaaa
+aabaaaassaaaaaaa
+aaabaaassaabaaaa
+aaaaabddddaaaaaa
+aaaaaaaaaaaaabaa
+aaaaabaaaaaaabba
+PAL
+a #77b364
+b #68a355
+s #a9a294
+d #8a8474
+c #c2bcab

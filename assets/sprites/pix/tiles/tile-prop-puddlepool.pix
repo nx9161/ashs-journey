@@ -1,0 +1,25 @@
+# Wave W17-G (Route 33): puddle pool — a standing rain pool on rain turf (fully opaque, ground baked in), rimmed darker where the road’s walkers keep stepping around it.
+PIX tile-prop-puddlepool 16 16
+aaabaabaabasaasa
+aaaaaaaaaaaaaaaa
+aaaaaaaaabaaaaaa
+aaaabaaaaaababaa
+abaabaaaaaaaaaba
+aaaaaddddddaaaab
+aaadppppppppdsab
+aadpphpppppppdaa
+aadpppppphpppdab
+aadppphppppppdaa
+abbdppppppppdbaa
+aaaabddddddaaaaa
+babbaaaaaabababa
+aasaaabaaaaaaabb
+aaaaaaaaaaabaaaa
+aaaaaaaaaaaaaaab
+PAL
+a #63995a
+b #548550
+s #3f6340
+p #7e97a8
+d #5b7a8c
+h #b9cbd6

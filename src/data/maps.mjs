@@ -1058,6 +1058,19 @@ export const WALKABLE = new Set(['.', ',', 'D', 'E', 'C', 'F', 'J', 'K', '1', '2
   // took 1092-1110, 1112-1131, 1132-1151, 1152-1165 and
   // 1166-1167 on its parallel branch; 1111 stays empty.)
   ...[1168, 1169, 1172, 1173, 1176, 1177, 1180, 1181, 1184]
+    .map((i) => String.fromCodePoint(0x1E00 + i)),
+  // Wave W17-G: the Yamato tranche-2 ground/path chars
+  // (U+1E00+1186.., tiles.mjs W17G_KIND_DEFS) are walkable —
+  // rainturf/rainfloor (Route 33), hollyturf/hollyfloor (Holly
+  // Forest), coastturf/coastfloor (Route 34), parkturf/parkfloor
+  // (Route 35), frontlawn/frontfloor (National Park), each
+  // swapped 1:1 from the walkable '_' ground / '.' path chars on
+  // its own map, so ground stays ground and path stays path. The
+  // tree chars (1188, 1192, 1196, 1200) and prop chars (1189,
+  // 1193, 1197, 1201, 1204) are NOT here: trees/props were never
+  // walkable. (Indices 1186-1204 per the program plan: W17-F
+  // took 1168-1185 on its parallel branch; 1111 stays empty.)
+  ...[1186, 1187, 1190, 1191, 1194, 1195, 1198, 1199, 1202, 1203]
     .map((i) => String.fromCodePoint(0x1E00 + i))]);
 
 // Trainer definitions for the slice.
