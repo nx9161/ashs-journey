@@ -22,6 +22,7 @@ export const SPECIES_HOENN = {
     eggGroups: ['monster', 'dragon'], hatchCounter: 20,
     learnset: { 1: ['pound', 'leer'], 206: ['absorb'], 211: ['quickattack'], 221: ['screech'], 226: ['megadrain'], 231: ['agility'], 236: ['slam'] },
     flavor: 'It scales bark like stairs and judges the forest from the top.',
+    design: { inspired: 'gecko', kind: 'animal', note: 'green gecko, curled sprout tail, leaf crest' },
     evo: { to: 'grovyle', method: 'level', level: 216 }, tm: [3, 6, 9, 10, 20, 21, 22, 31, 32, 33, 34, 44, 50, 101],
   },
   grovyle: {
@@ -31,6 +32,7 @@ export const SPECIES_HOENN = {
     eggGroups: ['monster', 'dragon'], hatchCounter: 20,
     learnset: { 1: ['pound', 'leer', 'absorb', 'quickattack'], 223: ['screech'], 235: ['agility'], 241: ['slam'] },
     flavor: 'Leaf blades at its wrists; it crosses the canopy without a sound.',
+    design: { inspired: 'gecko', kind: 'animal', note: 'leafy gecko, blade leaves, stern brow' },
     evo: { to: 'sceptile', method: 'level', level: 236 }, tm: [3, 6, 9, 10, 21, 22, 32, 33, 34, 44, 50, 101],
   },
   sceptile: {
@@ -40,6 +42,7 @@ export const SPECIES_HOENN = {
     eggGroups: ['monster', 'dragon'], hatchCounter: 20,
     learnset: { 1: ['pound', 'leer', 'absorb', 'quickattack'], 223: ['screech'], 235: ['agility'], 243: ['slam'] },
     flavor: 'The seeds on its back feed the forest it defends leaf by leaf.',
+    design: { inspired: 'gecko', kind: 'animal', note: 'forest gecko, fern crest, great leaf tail-fan' },
     tm: [6, 9, 10, 15, 20, 21, 22, 29, 30, 31, 32, 33, 34, 36, 37, 42, 44, 46, 47, 50, 104],
   },
   torchic: {
@@ -49,6 +52,7 @@ export const SPECIES_HOENN = {
     eggGroups: ['ground'], hatchCounter: 20,
     learnset: { 1: ['scratch', 'growl'], 207: ['focusenergy'], 210: ['ember'], 216: ['peck'], 219: ['sandattack'], 225: ['firespin'], 228: ['quickattack'], 234: ['slash'], 243: ['flamethrower'] },
     flavor: 'A warm coal with legs — it hugs like a tiny stove.',
+    design: { inspired: 'chick', kind: 'animal', note: 'orange chick, flame crest, round belly' },
     evo: { to: 'combusken', method: 'level', level: 216 }, tm: [6, 8, 9, 10, 20, 28, 31, 32, 33, 34, 38, 39, 44, 50],
   },
   combusken: {
@@ -103,6 +107,7 @@ export const SPECIES_HOENN = {
     eggGroups: ['ground'], hatchCounter: 15,
     learnset: { 1: ['tackle'], 209: ['sandattack'], 213: ['bite'], 233: ['takedown'] },
     flavor: 'It snarls at anything bigger, which is nearly everything.',
+    design: { inspired: 'hyena', kind: 'animal', note: 'scruffy grey hyena pup, ragged mane' },
     evo: { to: 'mightyena', method: 'level', level: 218 }, tm: [6, 8, 9, 10, 20, 28, 31, 32, 33, 34, 38, 39, 44, 50],
   },
   mightyena: {
@@ -112,6 +117,7 @@ export const SPECIES_HOENN = {
     eggGroups: ['ground'], hatchCounter: 15,
     learnset: { 1: ['sandattack', 'tackle', 'bite'], 237: ['takedown'] },
     flavor: 'The pack moves as one shadow with ten sets of teeth.',
+    design: { inspired: 'hyena', kind: 'animal', note: 'sable hyena, sleek coat, wary stance' },
     tm: [1, 5, 6, 8, 9, 10, 11, 12, 13, 14, 15, 17, 18, 19, 29, 30, 31, 32, 33, 34, 35, 40, 42, 44, 45, 46, 49, 50, 103],
   },
   zigzagoon: {
@@ -121,6 +127,7 @@ export const SPECIES_HOENN = {
     eggGroups: ['ground'], hatchCounter: 15,
     learnset: { 1: ['tackle', 'growl'], 205: ['tailwhip'], 209: ['headbutt'], 213: ['sandattack'], 225: ['pinmissile'], 237: ['rest'] },
     flavor: 'It cannot walk a straight line; curiosity keeps bending it.',
+    design: { inspired: 'raccoon', kind: 'animal', note: 'tan raccoon, bandit mask, zigzag-striped tail' },
     evo: { to: 'linoone', method: 'level', level: 220 }, tm: [1, 5, 6, 8, 9, 10, 11, 12, 13, 14, 17, 18, 19, 20, 24, 25, 29, 31, 32, 33, 34, 35, 38, 39, 40, 41, 42, 44, 45, 46, 49, 50, 105],
   },
   linoone: {
@@ -130,6 +137,7 @@ export const SPECIES_HOENN = {
     eggGroups: ['ground'], hatchCounter: 15,
     learnset: { 1: ['headbutt', 'tackle', 'tailwhip', 'growl'], 213: ['sandattack'], 241: ['slash'], 247: ['rest'] },
     flavor: 'At full stretch it outruns the rumour of its own arrival.',
+    design: { inspired: 'raccoon', kind: 'animal', note: 'long raccoon, racing stripes, lean runner pose' },
     tm: [6, 9, 10, 11, 12, 13, 14, 15, 24, 25, 28, 31, 32, 34, 39, 44, 50],
   },
   wurmple: {
@@ -139,6 +147,7 @@ export const SPECIES_HOENN = {
     eggGroups: ['bug'], hatchCounter: 15,
     learnset: { 1: ['tackle', 'stringshot', 'leechlife'], 205: ['poisonsting'] },
     flavor: 'Which silk it spins is a secret even it learns late.',
+    design: { inspired: 'caterpillar', kind: 'animal', note: 'rose caterpillar, cream face, nub horns' },
     evo: { to: 'silcoon', method: 'level', level: 207 }, evos: [{ to: 'silcoon', method: 'level', level: 207 }, { to: 'cascoon', method: 'level', level: 207 }], tm: [],
   },
   silcoon: {
@@ -148,6 +157,7 @@ export const SPECIES_HOENN = {
     eggGroups: ['bug'], hatchCounter: 15,
     learnset: { 1: ['harden', 'leechlife', 'pinmissile', 'twineedle'] },
     flavor: 'It drinks only dew and spends the rest on becoming.',
+    design: { inspired: 'moth pupa', kind: 'animal', note: 'white silk cocoon, single leaf cap, still pose' },
     evo: { to: 'beautifly', method: 'level', level: 210 }, tm: [],
   },
   beautifly: {
@@ -157,6 +167,7 @@ export const SPECIES_HOENN = {
     eggGroups: ['bug'], hatchCounter: 15,
     learnset: { 1: ['absorb'], 213: ['gust'], 217: ['stunspore'], 224: ['megadrain'], 227: ['whirlwind'] },
     flavor: 'Bright wings, sharp temper — it sips flowers and starts arguments.',
+    design: { inspired: 'butterfly', kind: 'animal', note: 'sun butterfly, violet-and-teal wings, curled proboscis' },
     tm: [2, 4, 6, 15, 21, 22, 29, 30, 31, 32, 33, 34, 42, 44, 46, 50, 105],
   },
   cascoon: {
@@ -1175,6 +1186,7 @@ export const SPECIES_HOENN = {
     eggGroups: ['water1', 'water2'], hatchCounter: 40,
     learnset: { 1: ['tackle', 'harden'], 208: ['watergun'], 229: ['takedown'], 250: ['rest'], 257: ['doubleedge'], 264: ['hydropump'] },
     flavor: 'A map of old coastlines written on a living fish.',
+    design: { inspired: 'coelacanth', kind: 'animal', note: 'grey coelacanth, lobed fins, ancient eyes' },
     tm: [6, 8, 9, 10, 11, 12, 13, 14, 15, 20, 31, 32, 34, 44, 50, 103, 104],
   },
   luvdisc: {

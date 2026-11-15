@@ -94,6 +94,7 @@ export const SPECIES = {
     eggGroups: ['monster', 'plant'], hatchCounter: 20,
     learnset: { 1: ['tackle', 'growl'], 5: ['vinewhip'] },
     flavor: 'A seed on its back drinks the morning sun.',
+    design: { inspired: 'sprout', kind: 'plant', note: 'green sprout sprite, twin-leaf crown, rootlet feet' },
   },
   charmander: {
     id: 'charmander', name: 'EMBRY', dexNo: 4, types: ['fire'],

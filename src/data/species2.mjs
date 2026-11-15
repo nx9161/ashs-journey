@@ -11,6 +11,7 @@ export const SPECIES2 = {
     eggGroups: ['monster', 'plant'], hatchCounter: 20,
     learnset: { 1: ['tackle', 'growl', 'leechseed', 'vinewhip'], 13: ['poisonpowder'], 14: ['sleeppowder'], 20: ['razorleaf'], 27: ['growth'], 34: ['solarbeam'] },
     flavor: 'Its bud drinks sunlight and swells a little more each dawn.',
+    design: { inspired: 'sapling', kind: 'plant', note: 'young sapling, leafy canopy crown, twig arms, root feet' },
     evo: { to: 'venusaur', method: 'level', level: 32 }, tm: [3, 6, 9, 10, 21, 22, 32, 33, 34, 44, 50, 101],
   },
   venusaur: {
@@ -20,6 +21,7 @@ export const SPECIES2 = {
     eggGroups: ['monster', 'plant'], hatchCounter: 20,
     learnset: { 1: ['tackle', 'growl', 'leechseed', 'vinewhip', 'petaldance'], 13: ['poisonpowder'], 14: ['sleeppowder'], 20: ['razorleaf'], 27: ['growth'], 34: ['solarbeam'], 46: ['petaldance'] },
     flavor: 'A walking garden. Bees follow it from route to route.',
+    design: { inspired: 'elder tree', kind: 'plant', note: 'vast elder tree, vine beard, broad canopy, root feet' },
     tm: [3, 6, 9, 10, 15, 21, 22, 32, 33, 34, 44, 50, 101],
   },
   charmeleon: {
@@ -38,6 +40,7 @@ export const SPECIES2 = {
     eggGroups: ['monster', 'dragon'], hatchCounter: 20,
     learnset: { 1: ['scratch', 'growl', 'ember', 'wingattack'], 12: ['leer'], 24: ['rage'], 36: ['slash'], 46: ['flamethrower'], 55: ['firespin'] },
     flavor: 'It circles high on warm updrafts, scouting far beyond the ridge.',
+    design: { inspired: 'drake', kind: 'class', note: 'magma drake, basalt back-plates, lava seams, flame tail' },
     tm: [1, 2, 3, 5, 6, 8, 9, 10, 15, 17, 18, 19, 20, 26, 27, 28, 31, 32, 34, 38, 39, 40, 44, 50, 101, 102, 104],
   },
   wartortle: {
@@ -1205,6 +1208,7 @@ export const SPECIES2 = {
     eggGroups: ['ground'], hatchCounter: 35,
     learnset: { 1: ['tackle', 'tailwhip'], 16: ['sandattack'], 23: ['quickattack'], 30: ['bite'], 37: ['focusenergy'], 45: ['takedown'] },
     flavor: 'Its genes hold a dozen answers to the same question.',
+    design: { inspired: 'kitten', kind: 'animal', note: 'fluffy grey kitten, rainbow forelock, cream ruff' },
     evos: [
       { to: 'vaporeon', method: 'stone', stone: 'waterstone' },
       { to: 'jolteon', method: 'stone', stone: 'thunderstone' },
@@ -1223,6 +1227,7 @@ export const SPECIES2 = {
     eggGroups: ['ground'], hatchCounter: 35,
     learnset: { 1: ['tackle', 'tailwhip', 'sandattack', 'watergun'], 16: ['quickattack'], 27: ['bite'], 33: ['acidarmor'], 42: ['haze'], 48: ['hydropump'] },
     flavor: 'It can melt into rain puddles and be gone by morning.',
+    design: { inspired: 'otter', kind: 'animal', note: 'sleek teal otter, sail-fin tail, cream muzzle' },
     tm: [6, 8, 9, 10, 11, 12, 13, 14, 15, 20, 28, 31, 32, 34, 39, 44, 50, 103],
   },
   jolteon: {
@@ -1232,6 +1237,7 @@ export const SPECIES2 = {
     eggGroups: ['ground'], hatchCounter: 35,
     learnset: { 1: ['tackle', 'tailwhip', 'sandattack', 'thundershock'], 16: ['quickattack'], 27: ['thunderwave'], 33: ['pinmissile'], 42: ['agility'], 48: ['thunder'] },
     flavor: 'Every bristled hair is a small, furious thundercloud.',
+    design: { inspired: 'hare', kind: 'animal', note: 'cream hare, long ears, sparking fur tufts' },
     tm: [6, 8, 9, 10, 15, 20, 24, 25, 28, 31, 32, 34, 39, 44, 45, 50, 105],
   },
   flareon: {
@@ -1241,6 +1247,7 @@ export const SPECIES2 = {
     eggGroups: ['ground'], hatchCounter: 35,
     learnset: { 1: ['tackle', 'tailwhip', 'sandattack', 'ember'], 16: ['quickattack'], 27: ['bite'], 33: ['smog'], 42: ['flamethrower'], 48: ['firespin'] },
     flavor: 'Its fluffy collar vents heat like a living chimney.',
+    design: { inspired: 'lion', kind: 'animal', note: 'lion cub, flame mane, ember tail-tip' },
     tm: [6, 8, 9, 10, 15, 20, 28, 31, 32, 34, 38, 39, 44, 50],
   },
   porygon: {
@@ -1320,6 +1327,7 @@ export const SPECIES2 = {
     eggGroups: ['no-eggs'], hatchCounter: 80,
     learnset: { 1: ['peck', 'icebeam'], 51: ['blizzard'], 55: ['agility'], 60: ['mist'] },
     flavor: 'Snow falls upward where its wings have just passed.',
+    design: { inspired: 'sea eagle', kind: 'animal', note: 'great ice sea-eagle, frost crest, glacier-blue wings' },
     tm: [2, 4, 6, 9, 10, 11, 12, 13, 14, 15, 20, 31, 32, 33, 34, 39, 44, 50, 102],
   },
   zapdos: {
@@ -1338,6 +1346,7 @@ export const SPECIES2 = {
     eggGroups: ['no-eggs'], hatchCounter: 80,
     learnset: { 1: ['peck', 'firespin'], 51: ['leer'], 55: ['agility'] },
     flavor: 'Embers trail it like a comet that refuses to burn out.',
+    design: { inspired: 'hawk', kind: 'animal', note: 'ember hawk, flame-feathered wings, fierce crest' },
     tm: [2, 4, 6, 9, 10, 15, 20, 31, 32, 33, 34, 38, 39, 44, 50, 102],
   },
   dratini: {
@@ -1427,6 +1436,7 @@ export const SPECIES2 = {
     eggGroups: ['ground', 'fairy'], hatchCounter: 10,
     learnset: { 1: ['thundershock', 'growl', 'surf'], 6: ['tailwhip'], 8: ['thunderwave'], 11: ['quickattack'], 20: ['swift'], 26: ['agility'], 33: ['thunderbolt'], 43: ['thunder'] },
     flavor: 'It rides its own little board and never, ever wipes out.',
+    design: { inspired: 'mouse', kind: 'animal', note: 'same design, riding its own little board' },
     form: true, baseSpecies: 'pikachu',
   },
   flyingpikachu: {
@@ -1436,6 +1446,7 @@ export const SPECIES2 = {
     eggGroups: ['ground', 'fairy'], hatchCounter: 10,
     learnset: { 1: ['thundershock', 'growl', 'fly'], 6: ['tailwhip'], 8: ['thunderwave'], 11: ['quickattack'], 20: ['swift'], 26: ['agility'], 33: ['thunderbolt'], 43: ['thunder'] },
     flavor: 'A fistful of balloons, a heart full of sky. It waves at planes.',
+    design: { inspired: 'mouse', kind: 'animal', note: 'same design, balloon-borne, waving at planes' },
     form: true, baseSpecies: 'pikachu',
   },
   giantdragonite: {
@@ -1464,6 +1475,7 @@ export const SPECIES2 = {
     eggGroups: ['no-eggs'], baby: true, hatchCounter: 10,
     learnset: { 1: ['pound', 'growl'], 9: ['metronome'], 17: ['doubleedge'] },
     flavor: 'It totters after whoever makes it happiest, shell and all.',
+    design: { inspired: 'chick', kind: 'animal', note: 'chick hatching from a diamond-patterned egg, tiny wings' },
     evo: { to: 'togetic', method: 'level', level: 25 },
   },
   marill: {
@@ -1473,6 +1485,7 @@ export const SPECIES2 = {
     eggGroups: ['water1', 'fairy'], hatchCounter: 10,
     learnset: { 1: ['tackle', 'tailwhip', 'watergun'], 6: ['bubblebeam'], 10: ['defensecurl'], 20: ['doubleedge'], 30: ['hydropump'] },
     flavor: 'Its round tail bobs on the water like a tiny blue buoy.',
+    design: { inspired: 'mouse', kind: 'animal', note: 'blue mouse, round ears, note-curved tail' },
     evo: { to: 'azumarill', method: 'level', level: 18 },
   },
   snubbull: {
@@ -1491,6 +1504,7 @@ export const SPECIES2 = {
     eggGroups: ['ground'], hatchCounter: 20,
     learnset: { 1: ['tackle', 'growl'], 6: ['defensecurl'], 24: ['slam'], 37: ['takedown'], 43: ['earthquake'] },
     flavor: 'It curls into a living boulder and rolls clean through trouble.',
+    design: { inspired: 'elephant', kind: 'animal', note: 'plated elephant curled in a ball, spiral trunk' },
   },
   hooh: {
     id: 'hooh', name: 'IRISAVIS', dexNo: 250, types: ['fire', 'flying'],
@@ -1499,6 +1513,7 @@ export const SPECIES2 = {
     eggGroups: ['no-eggs'], hatchCounter: 120,
     learnset: { 1: ['gust', 'whirlwind'], 23: ['recover'], 29: ['fireblast'], 43: ['swift'], 90: ['skyattack'] },
     flavor: 'Where its rainbow passes, the ash of old sorrow turns green.',
+    design: { inspired: 'phoenix', kind: 'cosmic', note: 'rainbow phoenix, prism crest, streaming tail plumes' },
   },
   // Stage O1 (Arc 1.5): ONE more full species on the IRISAVIS precedent —
   // National dex only (dexNo 249 > 151, so the Arden diploma cannot
@@ -1515,6 +1530,7 @@ export const SPECIES2 = {
     eggGroups: ['no-eggs'], hatchCounter: 120,
     learnset: { 1: ['gust', 'whirlwind'], 20: ['mist'], 29: ['recover'], 43: ['swift'], 55: ['psychic'], 71: ['hydropump'], 90: ['skyattack'] },
     flavor: 'It sleeps in the deep current so its wings need never trouble the sky.',
+    design: { inspired: 'sea bird', kind: 'class', note: 'white leviathan sea-bird, wing fins, crest plume' },
   },
 };
 
