@@ -41,6 +41,13 @@
 // it stands as a frozen layered definition, pinned below — NOT deleted.
 // Folded view proven byte-identical across the change
 // (your_files/reconcile-r1).
+// Reconcile R2 (2026-11-15, merged onto R1 by the Director): ceruleancave,
+// gym-viridian, route12, silph2 and victoryroad reconciled to single
+// definitions, and newisland's maps2 copy retired — 470 definitions,
+// 33 duplicated ids (14 identical / 19 drifted). maps3.newisland is NOT
+// a dead copy: maps4 derives its winner from it, so the pair stands as a
+// frozen two-layer definition, pinned below. Folded view proven
+// byte-identical across the union (your_files/reconcile-r2).
 
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -71,7 +78,7 @@ const fnv = (s) => { let h = 0x811c9dc5; for (let i = 0; i < s.length; i++) { h 
 
 // ---------- 1. census ----------
 const totalDefs = [...byId.values()].reduce((a, v) => a + v.length, 0);
-ok('census: 477 map definitions across maps.mjs…maps9.mjs', totalDefs === 477, `got ${totalDefs} — a wave that adds/removes a definition updates this line in the same commit`);
+ok('census: 470 map definitions across maps.mjs…maps9.mjs', totalDefs === 470, `got ${totalDefs} — a wave that adds/removes a definition updates this line in the same commit`);
 ok('census: 432 unique map ids after the split', byId.size === 432, `got ${byId.size}`);
 
 // ---------- 2. the victory-road split is permanent ----------
@@ -108,7 +115,6 @@ ok('chain: victory-road -> r223 + pokemon-league (4 returns)',
 // Burn-down rule: a commit that reconciles or deliberately edits a copy
 // updates that id's line here in the same commit. Nothing else may move it.
 const BASELINE = {
-  "ceruleancave": ['D', 'maps2.mjs:fdc075ab', 'maps3.mjs:46e003ef'],
   "cinnabar": ['I', 'maps2.mjs:a0ef07ac', 'maps3.mjs:a0ef07ac'],
   "dojo": ['D', 'maps2.mjs:767d8216', 'maps3.mjs:97e14c03'],
   "fuchsia": ['I', 'maps2.mjs:b9a6140b', 'maps3.mjs:b9a6140b'],
@@ -119,16 +125,17 @@ const BASELINE = {
   "gym-fuchsia": ['I', 'maps2.mjs:05d08fb4', 'maps3.mjs:05d08fb4'],
   "gym-saffron": ['D', 'maps2.mjs:967597a7', 'maps3.mjs:967597a7', 'maps4.mjs:69814494'],
   "gym-vermilion": ['I', 'maps2.mjs:03a2c9bf', 'maps3.mjs:03a2c9bf'],
-  "gym-viridian": ['D', 'maps2.mjs:b91d066d', 'maps3.mjs:11e2b64b'],
   "hideout": ['D', 'maps2.mjs:ce1ebeed', 'maps4.mjs:04c239d9'],
   "indigo": ['I', 'maps2.mjs:7f68717e', 'maps3.mjs:7f68717e'],
   "lavender": ['I', 'maps2.mjs:86ed9785', 'maps3.mjs:86ed9785'],
   "mansion": ['D', 'maps2.mjs:6036b681', 'maps3.mjs:0b89e84d'],
-  "newisland": ['D', 'maps2.mjs:06f895d7', 'maps3.mjs:87e908ce', 'maps4.mjs:0a2b629f'],
+  // Reconcile R2: maps2's alternate island retired; maps3 is NOT a dead copy —
+  // maps4.mjs derives its winner from it ({...MAPS3.newisland, events, warps}),
+  // so the pair is frozen as a two-layer single definition.
+  "newisland": ['D', 'maps3.mjs:87e908ce', 'maps4.mjs:0a2b629f'],
   "powerplant": ['D', 'maps2.mjs:7ce38a29', 'maps3.mjs:f19569a9'],
   "rocktunnel": ['D', 'maps2.mjs:d9f17c08', 'maps3.mjs:3ede7ad3'],
   "route10": ['I', 'maps2.mjs:99d8bd20', 'maps3.mjs:99d8bd20'],
-  "route12": ['D', 'maps2.mjs:4929a167', 'maps3.mjs:efd69836'],
   "route15": ['I', 'maps2.mjs:acb066e0', 'maps3.mjs:acb066e0'],
   "route16": ['I', 'maps2.mjs:43aae40f', 'maps3.mjs:43aae40f'],
   "route19": ['D', 'maps2.mjs:b6cce4ac', 'maps3.mjs:1652b921'],
@@ -140,7 +147,6 @@ const BASELINE = {
   "saffron": ['I', 'maps2.mjs:5ec9dead', 'maps3.mjs:5ec9dead'],
   "seafoam": ['D', 'maps2.mjs:e1621a14', 'maps3.mjs:00bf11b4'],
   "silph1": ['D', 'maps2.mjs:33bf502b', 'maps3.mjs:de66dcd1', 'maps4.mjs:b46c0ad2'],
-  "silph2": ['D', 'maps2.mjs:21068e6c', 'maps3.mjs:a3e6994c', 'maps4.mjs:c666a5eb'],
   "stanne": ['D', 'maps2.mjs:24a81714', 'maps4.mjs:99facee4'],
   "tower1": ['I', 'maps2.mjs:a29e8705', 'maps3.mjs:a29e8705'],
   "tower2": ['D', 'maps2.mjs:67e834db', 'maps3.mjs:209d7be2'],
@@ -151,11 +157,10 @@ const BASELINE = {
   // copies are load-bearing layers, not dead duplicates; do not delete
   // them without materializing the chain first.
   "vermilion": ['D', 'maps2.mjs:481e21e1', 'maps4.mjs:65ebc25b', 'maps5.mjs:8da66e0f', 'maps6.mjs:f9470985'],
-  "victoryroad": ['D', 'maps2.mjs:908dcf3c', 'maps3.mjs:835ebd37'],
 };
 
 const dupNow = new Map([...byId.entries()].filter(([, v]) => v.length > 1));
-ok('ratchet: duplicated-id set is exactly the baseline (38 ids after Reconcile R1)',
+ok('ratchet: duplicated-id set is exactly the baseline (33 ids after Reconcile R1 + R2)',
   eq([...dupNow.keys()].sort(), Object.keys(BASELINE).sort()),
   `added: ${[...dupNow.keys()].filter((id) => !BASELINE[id]).join(',') || 'none'} · removed: ${Object.keys(BASELINE).filter((id) => !dupNow.has(id)).join(',') || 'none'}`);
 const identicalNow = [];

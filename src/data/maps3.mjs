@@ -334,44 +334,6 @@ export const MAPS3 = {
     start: null,
   },
 
-  silph2: {
-    id: 'silph2', name: 'Vantage Co. — Top Floor', music: 'gym-theme', indoor: true,
-    rows: rows([
-      'ṛṠIIIIIIIIIIIIIIẀI',
-      'Iθḛ%%%%%%%%%%%%%θI',
-      'IḞ%ẃẃ%%SSSS%%%%%%I',
-      'I%%%%%%%%%%%%%%%%I',
-      'Ẁ%%%%%ẃ%%%%%%%%%%I',
-      'I%%ξḜψζ%ẃ%%%%%ξ%%I',
-      'Iẃ%%%%%%ε%%%%%%%%I',
-      'I%%%%%%%%%%%%%%%%I',
-      'I%%ξ%%%%%%%%γ%ξ%ẃI',
-      'I%ẃ%%%%%%%%%%%%%%I',
-      'Ẁ%%%%%%ẃ%%%%%%%%ḝẀ',
-      'IIIIIIẀIIIIIIẀIIII',
-    ]),
-    warps: [
-      { x: 8, y: 2, to: { map: 'silph1', x: 8, y: 6 } },
-      { x: 9, y: 2, to: { map: 'silph1', x: 9, y: 6 } },
-    ],
-    signs: [],
-    npcs: [
-      { x: 15, y: 2, name: 'PRESIDENT', art: 'gent', skin: '#e8b888', shirt: '#4a4a5a', pants: '#2a2a3a', hair: '#c0c0c0',
-        dialogue: ["You drove them out of my building?! Vantage owes you a debt no bonus could cover.", "Take our prototype — the Master Orb. It has never failed, and after today, I trust no hands but yours."],
-        give: { flag: 'pres_masterball', items: { masterball: 1 }, text: 'Master Orb' } },
-      { x: 13, y: 9, name: 'RESEARCHER', art: 'scientist', skin: '#f0c8a0', shirt: '#f0f0f0', pants: '#4a4a5a', hair: '#1a1a1a',
-        giveMon: { species: 'lapras', level: 25 },
-        dialogue: ["This KELPSAIL ferried our survey team for years — gentle, wise, unsinkable.", "She's yours now, with the president's blessing. The seas of Arden are open to you."] },
-    ],
-    encounters: null,
-    items: [],
-    hidden: [],
-    events: [
-      { id: 'ev_silph_rival', x: 9, y: 7, when: { flagNot: 'ev_silph_rival_done' } },
-      { id: 'ev_silph_boss', x: 9, y: 5, when: { flagNot: 'ev_silph_boss_done' } },
-    ],
-    start: null,
-  },
 
   // ================= CHUNK 2 — east block ==============================
   route9: {
