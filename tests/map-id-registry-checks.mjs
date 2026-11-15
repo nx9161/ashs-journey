@@ -152,6 +152,10 @@ ok('chain: victory-road -> r223 + pokemon-league (4 returns)',
 // vermilion's CHAIRMAN -> cast-chairman). Art field only; the frozen
 // layer structure is untouched, every layer's fingerprint moved only
 // because the resolved NPC data carries the new art value.
+// W-CHAR2 T3 (deliberate edit, disclosed): vermilion line moved again —
+// SAILOR BRINE -> cast-brine; his vermilion literal sits in the maps4
+// layer, so maps4/5/6 fingerprints moved and maps2's stands. Art field
+// only; the frozen layer structure is untouched.
 const BASELINE = {
   // Reconcile R3: maps2 is NOT a dead copy — maps4.mjs derives its winner
   // from it ({...MAPS2.gamecorner, warps + the poster entrance}), so the
@@ -180,7 +184,7 @@ const BASELINE = {
   // MAPS6 spreads maps5 (+CAPT EASTBOUND) and wins the fold. The earlier
   // copies are load-bearing layers, not dead duplicates; do not delete
   // them without materializing the chain first.
-  "vermilion": ['D', 'maps2.mjs:022cc4b9', 'maps4.mjs:1d07ae83', 'maps5.mjs:b01cd767', 'maps6.mjs:2476ce7d'],
+  "vermilion": ['D', 'maps2.mjs:022cc4b9', 'maps4.mjs:3330a8df', 'maps5.mjs:0930c14b', 'maps6.mjs:acf3c7e1'],
 };
 
 const dupNow = new Map([...byId.entries()].filter(([, v]) => v.length > 1));
