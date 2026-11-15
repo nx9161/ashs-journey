@@ -304,6 +304,21 @@ const GYM_ARENA_ART = {
   // Brightshore: lighthouse volt — bright coastal day over sunlit
   // sand-gold, waves under the light, beam-yellow accent, no pylon.
   'gym-sunnyshore': { sky: ['#4a90d8', '#5c9de2', '#6ea9e8', '#80b5ee', '#92c1f2', '#a4cdf6'], ground: ['#a89a58', '#9e9050', '#948648', '#8a7c40', '#807238', '#76682e'], dark: '#4a4020', light: '#fff8c8', accent: '#ffe93c', motif: 'waves', tex: 'spark', amb: { kind: 'spark', n: 12, speed: 0 } },
+  // Gym Identity T5 (Amber Isles, wave closure): the region's four
+  // own treatments — the last four of the wave.
+  // Tangelo: lagoon range — coral-pink dusk over shallow rose lagoon
+  // water, Coral-Eye pink accent, sparse lagoon bubbles over the Tide.
+  'mikan-gym': { sky: ['#d87f96', '#e08fa2', '#e89fae', '#efaeba', '#f6bdc6', '#fbccd2'], ground: ['#c97f8e', '#c07885', '#b7717c', '#ae6a73', '#a5636a', '#9c5c61'], dark: '#7c4450', light: '#fff0e8', accent: '#ff6f91', motif: 'waves', tex: 'foam', haze: true, amb: { kind: 'bubble', n: 8, speed: 6 } },
+  // Pomelo: summit frost — alpenglow sky over summit snow-stone,
+  // Sea Ruby red accent, thin summit snow over the Frost.
+  'navel-gym': { sky: ['#d8b8c8', '#e0c2cc', '#e8ccd4', '#eed6dc', '#f4e0e4', '#faeaec'], ground: ['#e6e2ea', '#ded9e4', '#d6d0de', '#cec7d8', '#c6bed2', '#beb5cc'], dark: '#8a7a9a', light: '#ffffff', accent: '#e0304e', motif: 'snow', tex: 'spark', haze: true, amb: { kind: 'snow', n: 10, speed: 8 } },
+  // Reefside: spike-stone rubble — dry amber glare over jagged
+  // spike-stone, shell-ivory accent, dry dust over the Rubble.
+  'trovita-gym': { sky: ['#a08a6c', '#a89272', '#b09a78', '#b8a27e', '#c0aa84', '#c8b28a'], ground: ['#8a7a5e', '#817154', '#78684a', '#6f5f40', '#665636', '#5d4d2c'], dark: '#46351e', light: '#fdf4dc', accent: '#f0e6ce', motif: 'rocks', tex: 'chunk', amb: { kind: 'mote', n: 10, speed: 4 } },
+  // Calamondin: resort Mind — jade dusk over deep resort turf, the
+  // Mentarch's rune-charts in Jade Star green, garden petals drifting
+  // through the starlight over the Mind.
+  'kumquat-gym': { sky: ['#3f6a58', '#48765f', '#518266', '#5a8e6d', '#63a074', '#6cb27d'], ground: ['#3d5c46', '#37543f', '#314c38', '#2b4431', '#253c2a', '#1f3423'], dark: '#14231a', light: '#eaffdc', accent: '#2fe07c', motif: 'runes', tex: 'fleck', amb: { kind: 'petal', n: 12, speed: 5 } },
 };
 
 function gymArenaFor(field) {

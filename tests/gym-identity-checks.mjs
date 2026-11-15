@@ -85,9 +85,13 @@ const sha12 = (s) => sha(s).slice(0, 12);
 // 12->4 (the four Amber gyms still stand on gymfloor until T5).
 // INTERIOR_TUPLES_DISTINCT stays 36, MEASURED at T4: every Borea tuple
 // was already distinct and each gym takes a unique floor kind.
-const GYM_ARENA_COVERED = 32;
-const GYM_FLOOR_OWNED = 32;
-const GYMFLOOR_DOMINANT = 4;
+// T5 (Amber, WAVE CLOSURE): COVERED 32->36, FLOOR_OWNED 32->36,
+// GYMFLOOR_DOMINANT 4->0 — every badge gym owns its arena and its
+// floor; the shared gymfloor serves no gym. INTERIOR_TUPLES_DISTINCT
+// stays 36, MEASURED at T5: all 36 tuples pairwise distinct at close.
+const GYM_ARENA_COVERED = 36;
+const GYM_FLOOR_OWNED = 36;
+const GYMFLOOR_DOMINANT = 0;
 const INTERIOR_TUPLES_DISTINCT = 36;
 
 // ---------------- the gym census (plan §1 enumeration) -----------------
