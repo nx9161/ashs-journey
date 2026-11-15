@@ -173,7 +173,11 @@ const BASELINE = {
   // Reconcile R3: maps2's corpse retired; maps3 is NOT a dead copy —
   // maps4.mjs derives its winner from it ({...MAPS3.silph1, events + the
   // rival ambush}), so the pair is frozen as a two-layer single definition.
-  "silph1": ['D', 'maps3.mjs:78f6b844', 'maps4.mjs:e3b8c1cd'],
+  // W-CHAR2 T4 re-pin (disclosed, design-fields-only): GUARD VEX's
+  // literal lives in the maps3 base (art grunt -> cast-vex); the
+  // maps4 derived fingerprint moves with its base. Proven per-post
+  // by char-design C5 (silph1#0 on the T4 spec list).
+  "silph1": ['D', 'maps3.mjs:08033ce1', 'maps4.mjs:96a32682'],
   // Reconcile R3: maps2 is NOT a dead copy — maps4.mjs derives its winner
   // from it ({...MAPS2.stanne, start} — the boarding patch), so the pair
   // is frozen as a two-layer single definition.

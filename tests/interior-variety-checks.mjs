@@ -464,10 +464,15 @@ const sha = (s) => crypto.createHash('sha256').update(s).digest('hex');
 const gridSha = (m) => sha(m.rows.join('\n'));
 const dataSha = (m) => sha(JSON.stringify({ warps: m.warps, start: m.start, npcs: m.npcs, signs: m.signs, items: m.items, hidden: m.hidden, events: m.events, encounters: m.encounters }));
 
+// W-CHAR2 T4 re-pin (disclosed): W16B2 data pins moved for the two
+// labs hosting repointed tail posts — birch-lab (AIDE FERN ->
+// cast-fern-aide), rowan-lab (PROF. SORREL'S AIDE -> cast-sorrel-aide).
+// Design fields only (art kind), proven per-post by char-design C5;
+// grids, templates, post cells, encounters and reach values stand.
 const PINS = {
  "birch-lab": {
   "grid": "914e613ee828ca3384634352688465e767af5f770271d07a624e70647241ef1d",
-  "data": "c20eecbf2177f25b661fbd372f92710129aac0808aa51f75ef41f2670ac82db5",
+  "data": "05ae1f58ce405772055f278900fa4e6d6e6fcb7b721b28474857b85963e5e4ed",
   "reach": 153,
   "pos": {
    "door": [
@@ -501,7 +506,7 @@ const PINS = {
  },
  "rowan-lab": {
   "grid": "fa74c6db08bd695fa29a0e2c2891219c5e63c61886fe6eaecdb4b6cc2377fa53",
-  "data": "1427863a45b488e3382f00a4d6dcda8775d8db1b69fc7211bacc997f5553860e",
+  "data": "60b2d004dfd02e7f6deaf739796e62eb61b967e64c9bb6db58a700ac7a11df86",
   "reach": 153,
   "pos": {
    "door": [
