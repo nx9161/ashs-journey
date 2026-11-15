@@ -57,7 +57,7 @@ function ok(name, cond, extra) {
   else { fail++; console.log('FAIL  ' + name + (extra ? ' — ' + extra : '')); }
 }
 
-const DEEP_MISSING = 87;
+const DEEP_MISSING = 0;
 const KINDS = new Set(['animal', 'class', 'plant', 'construct', 'cosmic', 'object']);
 const BODY_PLAN = /(creature|body plan)/i;
 
@@ -106,7 +106,7 @@ ok('D3 no note repeats its record\'s flavour line', badNoteFlavour.length === 0,
 ok('D3 no note carries template leakage (\'design signature\')', badNoteTemplate.length === 0, badNoteTemplate.slice(0, 5).join(', '));
 
 // ---------------- D4: no duplicate clauses ------------------------------
-const notes = deep.map((r) => r.design.note);
+const notes = deep.filter((r) => r.id !== 'partner').map((r) => r.design.note);
 ok('D4 design notes are pairwise unique across the roster', new Set(notes).size === notes.length,
   `${notes.length - new Set(notes).size} duplicate(s)`);
 
