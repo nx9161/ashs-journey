@@ -1,0 +1,25 @@
+# Wave W17-Q (Route 120): rain barrel — a Weather Institute rain barrel standing by the road: banded wooden staves under a pale disc of caught rainwater, one of the barrels the Institute logs this route’s rain by (design: the lake keeps a scorched secret; the cliff keeps a sealed one — and the Institute logs the rain by the barrel; the barrels objected). On ledger turf (fully opaque, ground baked in) — the fleet’s only barrel: split from Route 119’s gauge boxes by form (coopered wood and open water vs the Institute’s lidded instrument box).
+PIX tile-prop-rainbarrel 16 16
+aaaaaabaaaaaaaba
+aabbaaaaaaaaasaa
+aaaaaaaaabaaaaba
+aaaaaabaaaaaaaab
+aaaaabaaaaaaaaab
+asaaatwwwwtaaaaa
+aaaaatwttwtabaaa
+aasaaddddddaaaaa
+baaaattttttbaabb
+aaasbttttttaaaaa
+aaasbddddddbasaa
+aaaaattttttsbsab
+aaaabttttttaaaab
+aaaaddddddddabbb
+aaaabbabaaababaa
+aaaaabaaaaaaabab
+PAL
+a #5e8c66
+b #4e7a56
+s #c9ded2
+t #9a7648
+d #5e4630
+w #b9ccd4

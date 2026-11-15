@@ -3553,6 +3553,108 @@ W17P_KIND_DEFS.forEach(([kind], i) => {
 export const W17P_PROP_KINDS = W17P_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
 export const W17P_WALL_KINDS = W17P_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
 export const W17P_FLOOR_KINDS = W17P_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
+// Wave W17-Q (Route Build Program, Maris Tranche 6 — the long
+// rain, the Pyre shore, the Pyre water, the berry road, the
+// trench crossing): Route 120 -> Route 121 -> Route 122 ->
+// Route 123 -> Route 124. All five maps are defined once in
+// maps7.mjs (no dual copies in Maris, so no registry re-pins
+// arise). Conversions are char-for-char kind swaps on
+// grassground/path/tree (land routes) or sand/rock (sea
+// lanes); encounter cells/tables, warps, NPC posts, sign
+// records/texts and every shipped biome/dressing kind stay
+// byte-identical. Route 120 "Long Rain" (1340-1343):
+// ledgerturf is long-rain grass — cool blue-green with wet
+// flecks and rain-slick sheen (split from Route 119's deep
+// warm gorge green by temperature and from Yamato's rain turf
+// by value), ledgerfloor long-rain road sand (design-
+// authorised; grey-cool, puddle-polished in ruled sheen
+// pairs), ledgerpine a cold wet tiered pine, rainbarrel
+// Weather Institute rain barrels x2 (the Institute logs this
+// route's rain by the barrel); lake water (40), flower (35),
+// fence (8), rock (5), leafplanters (2) and the 4 'L'
+// tomb/slab-mouth warp cells standing on cavefloor stay
+// byte-identical (the tombs are out-of-program dungeons).
+// Weather: rain. Twin: Route 119 — R119 climbs in the gorge
+// rain, R120 holds the long-rain secrets by the lake.
+// Route 121 "Pyre Road" (1344-1347): wardenturf is warden-
+// patrolled road grass with bramble flecks, wardenfloor
+// cove-road sand (design-authorised; warm, drying out of the
+// rain), wardenpine a warm shoulder pine, standstone
+// pilgrim-track standing stones x2; shore water (29), fence
+// (14), leafplanters (4) and flower (29) stay byte-identical;
+// weather: rain (the Pyre shoulder keeps the rain country's
+// edge). Twin: Route 123 — both Requiem roads; R121 is the
+// warden's shore road, R123 the berry bend. Route 122 "Pyre
+// Water" (1348-1349) is a sea lane: pyresand is grave-shore
+// sand (ash-pale, grey-quiet) and pyrerock Requiem shoulder
+// rock (red-banded drawing — the fleet's only red-banded
+// rock); water (381) + waterglow (8) stay byte-identical
+// entire, the island's encounter grass (6), beach-family
+// dressing (13), coral (2) and the 2 'L' Pyre-mouth warp
+// cells standing on cavefloor stay byte-identical; only the
+// island shore's sand (27) and rock (7) convert, after the
+// trigger census (the R40/R41 discipline). Twin: Route 124 —
+// both island lanes; R122 is the dark respectful water, R124
+// the cheerful trench crossing. Route 123 "Berry Road
+// (Maris)" (1350-1353): masterturf is ordered-field green —
+// row lines drawn in the kind, the fleet's only row-drawn
+// ground — masterfloor berry-bend sand (design-authorised),
+// masterelm a tended field elm, berryrow berry-row end
+// markers x2 (split from Yamato's berrytree/berrycrate by
+// register: tended field rows vs wild climb); the shipped
+// flower beds (62) are the Berry Master's fields — byte-
+// preserved entire, the ground converts around them — and
+// shore water (15), rock (3) and fence (2) stay byte-
+// identical. Twin: Route 121. Route 124 "Trench Crossing"
+// (1354-1355) is a sea lane: trenchsand is crossing sand over
+// the dark water (grey-wet, dark depth flecks) and trenchrock
+// trench-rim rock (dark blue-grey, sheer rim block — the
+// darkest rock in Maris); water (410) + waterglow (18) stay
+// byte-identical entire, coral (3) stays byte-identical, and
+// the 2 dive tiles standing on 'W' cells (13,7),(14,7) plus
+// their diveSpots records are MECHANIC data — byte-preserved,
+// censused before/after on BOTH maps of the pair (the trench
+// map itself, r124-underwater, is Tranche 7's map and is NOT
+// touched by this wave; Director ruling #1). Only shore sand
+// (6) and rock (10) convert. Twin: Route 122. Ground kinds
+// deliberately do NOT end in 'floor' (the desire-path audit
+// counts '*floor' as street tier; grounds must never
+// masquerade as street); path kinds DO end in 'floor' so
+// they register as the route's path tier per route
+// (checklist point 3). Indices 1340-1355 per the program
+// plan (WAVE-W17-MARIS-ROUTE-PROGRAM-PLAN.md): W17-L took
+// 1257-1276, W17-M 1277-1286, W17-N 1287-1303, W17-O
+// 1304-1321, and W17-P takes 1322-1339 on its parallel
+// branch; 1111 and every earlier documented gap stay empty.
+// Kind names verified unclaimed against origin/main. Chars
+// U+1E00+1340..
+export const W17Q_KIND_DEFS = [
+  ['ledgerturf', 'floor'],
+  ['ledgerfloor', 'floor'],
+  ['ledgerpine', 'wall'],
+  ['rainbarrel', 'prop'],
+  ['wardenturf', 'floor'],
+  ['wardenfloor', 'floor'],
+  ['wardenpine', 'wall'],
+  ['standstone', 'prop'],
+  ['pyresand', 'floor'],
+  ['pyrerock', 'wall'],
+  ['masterturf', 'floor'],
+  ['masterfloor', 'floor'],
+  ['masterelm', 'wall'],
+  ['berryrow', 'prop'],
+  ['trenchsand', 'floor'],
+  ['trenchrock', 'wall'],
+];
+export const W17Q_KIND_CHARS = {};
+W17Q_KIND_DEFS.forEach(([kind], i) => {
+  const ch = String.fromCodePoint(0x1E00 + 1340 + i);
+  W17Q_KIND_CHARS[kind] = ch;
+  TILE_CHARS[ch] = kind;
+});
+export const W17Q_PROP_KINDS = W17Q_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
+export const W17Q_WALL_KINDS = W17Q_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
+export const W17Q_FLOOR_KINDS = W17Q_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
 export const SINNOH_TOWN_GROUND_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg);
 export const SINNOH_TOWN_GROUND2_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg2);
 // TX-3: the 8 gym exteriors by town (original type-accent motifs).

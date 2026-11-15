@@ -1211,6 +1211,24 @@ export const WALKABLE = new Set(['.', ',', 'D', 'E', 'C', 'F', 'J', 'K', '1', '2
   // 1257-1276, W17-M 1277-1286, W17-N 1287-1303 and W17-O
   // takes 1304-1321 on its parallel branch; 1111 stays empty.)
   ...[1322, 1323, 1326, 1328, 1329, 1332, 1333, 1336, 1337]
+    .map((i) => String.fromCodePoint(0x1E00 + i)),
+  // Wave W17-Q: the Maris tranche-6 ground/path/shore chars
+  // (U+1E00+1340.., tiles.mjs W17Q_KIND_DEFS) are walkable —
+  // ledgerturf/ledgerfloor (Route 120), wardenturf/wardenfloor
+  // (Route 121), pyresand (Route 122's island shore),
+  // masterturf/masterfloor (Route 123) and trenchsand (Route
+  // 124's crossing shore), each swapped 1:1 from the walkable
+  // '_' ground / '.' path / shore-sand chars on its own route,
+  // so ground stays ground, path stays path and shore stays
+  // shore. The tree chars (1342, 1346, 1352), prop chars
+  // (1343, 1347, 1353) and the lane rock chars (1349, 1355,
+  // swapped from the 'R' rock char, never walkable) are NOT
+  // here: trees, props and rocks were never walkable.
+  // (Indices 1340-1355 per the Maris program plan; W17-L took
+  // 1257-1276, W17-M 1277-1286, W17-N 1287-1303, W17-O
+  // 1304-1321 and W17-P takes 1322-1339 on its parallel
+  // branch; 1111 stays empty.)
+  ...[1340, 1341, 1344, 1345, 1348, 1350, 1351, 1354]
     .map((i) => String.fromCodePoint(0x1E00 + i))]);
 
 // Trainer definitions for the slice.

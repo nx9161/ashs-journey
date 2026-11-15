@@ -1,0 +1,25 @@
+# Wave W17-Q (Route 123): berry row marker — a berry-row end marker at the fields’ edge: a short post carrying a cluster of ripe berries at its head, marking where one tended row ends and the road’s jurisdiction begins (design: the Berry Master’s fields perfume the whole south bend; the rows are ended with markers, not fences). On master turf (fully opaque, ground baked in) — split from Yamato’s berrytree/berrycrate by register: a tended field’s row-end post, not a wild climb’s tree or a picker’s crate.
+PIX tile-prop-berryrow 16 16
+aaaaaaaabaaaaaab
+dabbaaabaaaabbab
+aaaaaaaaaaaaaaaa
+aaaabaaaabaaaaaa
+aaaaaagrgrbaaaaa
+aaababggrgaabaaa
+aabaaaargaaaaaaa
+aaaabadkdbaaaaaa
+abaaaaakdabaaaba
+aaabaaakdaaaaaab
+aaaabaakdaaaaaaa
+baaaaaakdaaaaaaa
+aaabaaakdaaaaaba
+aabbaaddddaabaaa
+babaabadabaaaaaa
+babaaaaaaabaaaaa
+PAL
+a #6fa653
+b #5f9245
+d #7d5a34
+k #8a6844
+g #4d8a3e
+r #c04a5a

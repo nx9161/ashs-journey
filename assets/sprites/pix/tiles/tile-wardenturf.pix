@@ -1,0 +1,23 @@
+# Wave W17-Q (Route 121): warden turf — warden-patrolled road grass under Mt. Requiem’s shoulder: a warm mid-green kept walked and watched, with dark bramble flecks standing in it from the Preserve side (design: calm speckled grass under a mountain’s shoulder; the wardens’ fence runs north of this road). Route 121’s own ground — warm where Route 120’s ledger turf is cold (the rain country’s edge, not its heart), and wilder than Route 123’s ordered field rows: this grass is patrolled, not planted.
+PIX wardenturf 16 16
+bbbbaaadaaaaaaaa
+aaaaaaaaaaaaaaaa
+aaababaaabaabaaa
+ddaababaaaaaaaad
+daadabaaaaaaaaab
+aababaavbaaaaaaa
+aaabaaabaaabaaab
+aaabbaaaaaabaaaa
+vaaaadabaaaavbaa
+aaaadaaaaabbaaav
+aaaabaaaabbaaaaa
+aaavaaabadbaabba
+aaaadaabaaabaadb
+aabaabavaaaaabaa
+aadaaaaabavabaaa
+aabbadabaaaaaaba
+PAL
+a #77a75c
+b #669450
+d #557f42
+v #7a4458

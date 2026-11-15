@@ -1,0 +1,26 @@
+# Wave W17-Q (Route 121): standing stones — a pair of pilgrim-track standing stones beside the road to Mt. Requiem: two grey uprights of different heights, moss creeping at their feet, the stones the pilgrim talks to the whole way (design: the pilgrim walks to the mountain twice a year and talks to the stones the whole way — they answer in their own time). On warden turf (fully opaque, ground baked in) — split from Route 39’s stacked hill cairn by form: these stones stand, they are not piled.
+PIX tile-prop-standstone 16 16
+aaabaaaaaaaaaaaa
+aabbabaabaaabaaa
+aaaaaaaabaaaaaaa
+aaaaaabbaaaaaaaa
+aaaaacccaaaaaaaa
+aaaaasssaabababa
+aababsssbcccaaaa
+baaaasssasssvaaa
+aaaaasdsasssaaaa
+aababsssasdsaaaa
+aabbasssasssaaaa
+baaaasssasssabab
+aabbbgsgbgsgaaaa
+aaaadddddddddaaa
+aaaaaaaaaaaaaaaa
+aaaaaaabaaaavaaa
+PAL
+a #77a75c
+b #669450
+v #7a4458
+s #9a958a
+c #c2bcab
+d #7e786c
+g #5d7355
