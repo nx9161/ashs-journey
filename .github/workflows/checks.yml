@@ -20,7 +20,9 @@
 # design-depth added by W13-T0 with its own ratchet baseline
 # (373 design units lacking; burns down per-tranche to 0);
 # kindex added by W14-T1 (list model + plate/semantics + geometry pins;
-# T2 adds the entry/redaction/paging sections)):
+# T2 adds the entry/redaction/paging sections);
+# interior-variety added by W16-T1 (G1-G3 group retirement + invariant
+# pins; T2/B extend it to G4-G10 and the labs/contests/chambers/gyms)):
 #   actor-lifecycle 37/0 · arc-foundation 47/47 · battle-model 45/45 ·
 #   branding 12/0 · cheat-shop 44/44 · fidelity 35/35 · frontier 136/136 ·
 #   hoenn-contest 28/0 · hoenn-legendary 24/0 · hoenn-story 88/0 ·
