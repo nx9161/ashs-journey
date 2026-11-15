@@ -150,7 +150,7 @@ export const MAPS3 = {
       { x: 8, y: 4, name: 'LASS PAIGE', art: 'lass', skin: '#f0c8a0', shirt: '#c03a7a', pants: '#3a3a4a', hair: '#a05a2a',
         trainer: 'r8_lass', sight: { dir: 'down', range: 3 },
         dialogue: ["I take this road to visit the tower graves. First — a battle, for luck!", "Luck noted. The road respects you."] },
-      { x: 13, y: 8, name: 'GAMER DOSS', art: 'youngster', skin: '#e8b888', shirt: '#c03a3a', pants: '#2a2a3a', hair: '#1a1a1a',
+      { x: 13, y: 8, name: 'GAMER DOSS', art: 'cast-doss-gamer', skin: '#e8b888', shirt: '#c03a3a', pants: '#2a2a3a', hair: '#1a1a1a',
         trainer: 'r8_gamer', sight: { dir: 'left', range: 3 },
         dialogue: ["I bet my lunch money on my CINDERPUP's nose. It has never once lied about snacks — or challengers!", "My nose for trainers needs recalibrating..."] },
     ],
@@ -326,7 +326,7 @@ export const MAPS3 = {
       { x: 5, y: 7, text: 'ROUTE 9 — The rocky road east. Hikers consider this their personal gym.' },
     ],
     npcs: [
-      { x: 13, y: 9, name: 'HIKER BRANT', art: 'hiker', skin: '#c89878', shirt: '#9a603a', pants: '#3a3a3a', hair: '#4a3a2a',
+      { x: 13, y: 9, name: 'HIKER BRANT', art: 'cast-brant', skin: '#c89878', shirt: '#9a603a', pants: '#3a3a3a', hair: '#4a3a2a',
         trainer: 'r9_hiker', sight: { dir: 'up', range: 3 },
         dialogue: ["Every stone on this route has met my boots. Now my team wants to meet YOU!", "Boots: scuffed. Team: scuffed-er. Well fought!"] },
       { x: 4, y: 8, name: 'CAMPER LIO', art: 'camper', skin: '#f0c8a0', shirt: '#5d3fa5', pants: '#3a3a4a', hair: '#2a1a0a',
@@ -495,7 +495,7 @@ export const MAPS3 = {
     ],
     signs: [],
     npcs: [
-      { x: 4, y: 5, name: 'HIKER DOSS', art: 'hiker', skin: '#c89878', shirt: '#9a603a', pants: '#3a3a3a', hair: '#4a3a2a',
+      { x: 4, y: 5, name: 'HIKER DOSS', art: 'cast-doss-hiker', skin: '#c89878', shirt: '#9a603a', pants: '#3a3a3a', hair: '#4a3a2a',
         dialogue: ["No light, no map, no problem — a hiker's pride lights the way! Usually!", "The SKREEBAT union runs this tunnel, friend. Pay the toll in dignity and walk on."] },
     ],
     encounters: {
@@ -646,7 +646,7 @@ export const MAPS3 = {
       { x: 12, y: 2, text: 'The oldest stone in the tower. Its inscription is in a language of scratches and pawprints.' },
     ],
     npcs: [
-      { x: 8, y: 2, name: 'MR. FUJI', art: 'elder', skin: '#e8b888', shirt: '#50368e', pants: '#4a4a5a', hair: '#c0c0c0',
+      { x: 8, y: 2, name: 'MR. FUJI', art: 'cast-fuji', skin: '#e8b888', shirt: '#50368e', pants: '#4a4a5a', hair: '#c0c0c0',
         dialogue: ["Easy, children... the old man means you no harm. I am Fuji — I keep this tower, and it keeps me.", "You calmed a grieving mother and freed an old fool. Hushmoor will not forget it. Neither will I."] },
       // Wave 4 addendum (world-art): the Wave 0 why-not below is RESOLVED.
       // Wave 0 (world-art): FOSSLET + FOSSILORD SPIRIT deliberately carried
@@ -1713,7 +1713,7 @@ export const MAPS3 = {
       { x: 9, y: 7, text: 'Below the scratches, one line survives in a careful hand: THE STRONGEST TRAINER IS INVITED.' },
     ],
     npcs: [
-      { x: 12, y: 8, name: 'WRECKED LOG', art: 'youngster', skin: '#e8b888', shirt: '#50368e', pants: '#4a4a5a', hair: '#3a2a1a',
+      { x: 12, y: 8, name: 'WRECKED LOG', art: 'cast-log', skin: '#e8b888', shirt: '#50368e', pants: '#4a4a5a', hair: '#3a2a1a',
         dialogue: ["A waterlogged logbook in a shattered case. The last entry is dated the night the storm swallowed the harbor lights.", "'The master of this island has made a Kin stronger than any that nature —' The rest is salt and ash."] },
     ],
     encounters: null,

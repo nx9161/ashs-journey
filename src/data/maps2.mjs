@@ -512,7 +512,7 @@ export const MAPS2 = {
       { x: 14, y: 9, name: 'HANK', art: 'fisher', skin: '#c89878', shirt: '#50368e', pants: '#4a4a5a', hair: '#3a2a1a',
         trade: { give: 'spearow', get: 'farfetchd', nickname: 'DUX' },
         dialogue: ["Caught this GALEDUCK — Dux — by the harbor. Clever bird. Keeps outsmarting my dinner plans.", "Swap me a KEENBEAK for him? A sailor needs a scout, not a chef."] },
-      { x: 4, y: 10, name: 'CHAIRMAN', art: 'elder', skin: '#e8b888', shirt: '#6a5a8a', pants: '#3a3a4a', hair: '#c0c0c0',
+      { x: 4, y: 10, name: 'CHAIRMAN', art: 'cast-chairman', skin: '#e8b888', shirt: '#6a5a8a', pants: '#3a3a4a', hair: '#c0c0c0',
         dialogue: ["I chair the Kin Fan Club! Did I tell you about my PYROGALOP? Its coat — like spun sunset!", "And my GLAREHAWK? Magnificent. I could talk for hours. I HAVE talked for hours. Ask anyone."] },
     ],
     encounters: null,
@@ -594,7 +594,7 @@ export const MAPS2 = {
       { x: 5, y: 7, text: "ROUTE 11 — Arcport's east meadow. Something huge once slept across this road, they say." },
     ],
     npcs: [
-      { x: 9, y: 4, name: 'GAMER HUGO', art: 'youngster', skin: '#e8b888', shirt: '#c03a3a', pants: '#2a2a3a', hair: '#1a1a1a',
+      { x: 9, y: 4, name: 'GAMER HUGO', art: 'cast-hugo', skin: '#e8b888', shirt: '#c03a3a', pants: '#2a2a3a', hair: '#1a1a1a',
         trainer: 'r11_gamer', sight: { dir: 'down', range: 3 },
         dialogue: ["Battles are a game of odds, kid — and my MOLING never folds!", "Read me like an open book... rematch after I reshuffle my pride."] },
       { x: 13, y: 9, name: 'ENGINEER', art: 'worker', skin: '#d8a878', shirt: '#e08a3a', pants: '#4a4a5a', hair: '#3a2a1a',
@@ -704,7 +704,7 @@ export const MAPS2 = {
       { x: 17, y: 9, text: 'CANOPY CITY — East: ROUTE 7 · West: ROUTE 16.' },
     ],
     npcs: [
-      { x: 5, y: 12, name: 'ELIAS', art: 'elder', skin: '#e8b888', shirt: '#50368e', pants: '#4a4a5a', hair: '#c0c0c0',
+      { x: 5, y: 12, name: 'ELIAS', art: 'cast-elias', skin: '#e8b888', shirt: '#50368e', pants: '#4a4a5a', hair: '#c0c0c0',
         giveMon: { species: 'eevee', level: 25 },
         dialogue: ["Atop the old condo I kept a PRISMKIT — bright little thing, brimming with possible futures.", "My traveling days are done. Take PRISMKIT, and let it become whatever your journey needs."] },
       { x: 11, y: 8, name: 'HOSTESS', art: 'host-arden', skin: '#f0c8a0', shirt: '#e86a5a', pants: '#2a2a3a', hair: '#1a1a1a',

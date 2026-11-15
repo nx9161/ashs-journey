@@ -97,8 +97,8 @@ export const MAPS9 = {
     ],
     "npcs": [
       {"x": 19, "y": 4, "name": "MART CLERK", "art": "clerk-borea", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#4a3a2a", "dialogue": ["Clover Town Mart — stocked for the road ahead."], "mart": {"stock": ["pokeball", "greatball", "potion", "superpotion", "antidote", "awakening"]}},
-      {"x": 8, "y": 7, "name": "MOM’S NEIGHBOR ASHA", "art": "lady", "skin": "#d8a878", "shirt": "#7a4a8a", "pants": "#2a2a3a", "hair": "#c0c0c0", "dialogue": ["Two kids in this town dream louder than the lake birds. The whole street can hear them growing.", "Professor Sorrel's lab is one town east. The road there is short; the road back always feels shorter."]},
-      {"x": 19, "y": 6, "name": "PIP ELDER", "art": "elder", "skin": "#e8b888", "shirt": "#b0503c", "pants": "#2a2a3a", "hair": "#5a3a2a", "dialogue": ["I have watched forty springs come to Clover. Each one brings a trainer out of it.", "Mind the lake mist at dawn. It has opinions."]},
+      {"x": 8, "y": 7, "name": "MOM’S NEIGHBOR ASHA", "art": "cast-asha", "skin": "#d8a878", "shirt": "#7a4a8a", "pants": "#2a2a3a", "hair": "#c0c0c0", "dialogue": ["Two kids in this town dream louder than the lake birds. The whole street can hear them growing.", "Professor Sorrel's lab is one town east. The road there is short; the road back always feels shorter."]},
+      {"x": 19, "y": 6, "name": "PIP ELDER", "art": "cast-elder-pip", "skin": "#e8b888", "shirt": "#b0503c", "pants": "#2a2a3a", "hair": "#5a3a2a", "dialogue": ["I have watched forty springs come to Clover. Each one brings a trainer out of it.", "Mind the lake mist at dawn. It has opinions."]},
       {"x": 6, "y": 13, "name": "YOUNGSTER TAM", "art": "kid", "skin": "#f0c8a0", "shirt": "#3a7a4a", "pants": "#4a3a2a", "hair": "#2a1a0a", "dialogue": ["When I start, I'm going EAST first. East is where journeys live. Then west. Then everywhere.", "The lake cave smells like rain that never left."]},
     ],
     "encounters": {"rate": 0.1, "table": [{"species": "starly", "min": 301, "max": 304, "weight": 30}, {"species": "bidoof", "min": 301, "max": 304, "weight": 30}, {"species": "kricketot", "min": 301, "max": 305, "weight": 22}, {"species": "shinx", "min": 302, "max": 305, "weight": 10}], "water": [{"species": "magikarp", "min": 301, "max": 305, "weight": 40}, {"species": "psyduck", "min": 302, "max": 306, "weight": 30}], "waterRate": 0.08},
@@ -165,8 +165,8 @@ export const MAPS9 = {
     "npcs": [
       {"x": 17, "y": 4, "name": "MART CLERK", "art": "clerk-borea", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#4a3a2a", "dialogue": ["Shingle Town Mart — stocked for the road ahead."], "mart": {"stock": ["pokeball", "greatball", "potion", "superpotion", "antidote", "awakening"]}},
       {"x": 11, "y": 7, "name": "LAB AIDE FERN", "art": "aide", "skin": "#e8b888", "shirt": "#3a6ac0", "pants": "#2a3a4a", "hair": "#1a1a1a", "dialogue": ["The Professor's bark is worse than his fieldwork, and his fieldwork once involved a STRAPTOR.", "Revelry's towers are a walk north. The city never sleeps; it broadcasts."]},
-      {"x": 19, "y": 13, "name": "BEACHCOMBER ANA", "art": "lady", "skin": "#d8a878", "shirt": "#7a4a8a", "pants": "#2a2a3a", "hair": "#c0c0c0", "dialogue": ["TIDESLUG change colour with the coast here. The lab writes it down; the beach just does it.", "Clover is west, past the first grass of the journey."]},
-      {"x": 6, "y": 10, "name": "YOUNGSTER RUE", "art": "youngster", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#4a3a2a", "dialogue": ["I race the BRINEGULL along the shore. The BRINEGULL are winning on points.", "Route 202's grass rustles at knee height. That's the sound of starting."]},
+      {"x": 19, "y": 13, "name": "BEACHCOMBER ANA", "art": "cast-ana", "skin": "#d8a878", "shirt": "#7a4a8a", "pants": "#2a2a3a", "hair": "#c0c0c0", "dialogue": ["TIDESLUG change colour with the coast here. The lab writes it down; the beach just does it.", "Clover is west, past the first grass of the journey."]},
+      {"x": 6, "y": 10, "name": "YOUNGSTER RUE", "art": "cast-rue-youngster", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#4a3a2a", "dialogue": ["I race the BRINEGULL along the shore. The BRINEGULL are winning on points.", "Route 202's grass rustles at knee height. That's the sound of starting."]},
     ],
     "encounters": {"rate": 0.1, "table": [{"species": "starly", "min": 303, "max": 307, "weight": 26}, {"species": "bidoof", "min": 303, "max": 307, "weight": 24}, {"species": "shinx", "min": 304, "max": 308, "weight": 16}, {"species": "buizel", "min": 304, "max": 308, "weight": 12}], "water": [{"species": "tentacool", "min": 303, "max": 308, "weight": 30}, {"species": "magikarp", "min": 303, "max": 307, "weight": 26}, {"species": "shellos", "min": 304, "max": 308, "weight": 20}, {"species": "wingull", "min": 304, "max": 308, "weight": 18}], "waterRate": 0.08},
     "items": [],
@@ -234,9 +234,9 @@ export const MAPS9 = {
     ],
     "npcs": [
       {"x": 9, "y": 4, "name": "MART CLERK", "art": "clerk-borea", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#4a3a2a", "dialogue": ["Revelry City Mart — stocked for the road ahead."], "mart": {"stock": ["pokeball", "greatball", "superpotion", "hyperpotion", "antidote", "parlyzheal", "revive"]}},
-      {"x": 11, "y": 7, "name": "BROADCAST INTERN VESK", "art": "worker", "skin": "#f0c8a0", "shirt": "#3a7a4a", "pants": "#4a3a2a", "hair": "#2a1a0a", "dialogue": ["I fetch coffee for people whose faces are on the building. The building is also their face. It's a lot.", "West gate: the causeway over the water to Bridgeport. East: Coalseam's smoke. North: flower country."]},
+      {"x": 11, "y": 7, "name": "BROADCAST INTERN VESK", "art": "cast-vesk-intern", "skin": "#f0c8a0", "shirt": "#3a7a4a", "pants": "#4a3a2a", "hair": "#2a1a0a", "dialogue": ["I fetch coffee for people whose faces are on the building. The building is also their face. It's a lot.", "West gate: the causeway over the water to Bridgeport. East: Coalseam's smoke. North: flower country."]},
       {"x": 18, "y": 12, "name": "CITY KID MOSS", "art": "kid", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#4a3a2a", "dialogue": ["The condos have a hundred windows and every one has a Kin in it. I counted the lit ones.", "My NAPSEER teleports to school before I do. Every day. Show-off."]},
-      {"x": 7, "y": 16, "name": "COMMUTER UNA", "art": "lady", "skin": "#d8a878", "shirt": "#7a4a8a", "pants": "#2a2a3a", "hair": "#c0c0c0", "dialogue": ["Coalseam miners, Bridgeport sailors, Honeyfield florists — this city's platforms hold all of Borea at rush hour.", "The TV station lets visitors watch a recording. The cameras are kind. Mostly."]},
+      {"x": 7, "y": 16, "name": "COMMUTER UNA", "art": "cast-una-commuter", "skin": "#d8a878", "shirt": "#7a4a8a", "pants": "#2a2a3a", "hair": "#c0c0c0", "dialogue": ["Coalseam miners, Bridgeport sailors, Honeyfield florists — this city's platforms hold all of Borea at rush hour.", "The TV station lets visitors watch a recording. The cameras are kind. Mostly."]},
     ],
     "encounters": {"rate": 0.09, "table": [{"species": "starly", "min": 306, "max": 311, "weight": 26}, {"species": "bidoof", "min": 306, "max": 311, "weight": 22}, {"species": "shinx", "min": 307, "max": 312, "weight": 18}, {"species": "abra", "min": 308, "max": 313, "weight": 8}, {"species": "bidoof", "min": 306, "max": 310, "weight": 10}], "water": [{"species": "tentacool", "min": 306, "max": 311, "weight": 30}, {"species": "magikarp", "min": 306, "max": 310, "weight": 26}], "waterRate": 0.08},
     "items": [],
@@ -293,9 +293,9 @@ export const MAPS9 = {
     ],
     "npcs": [
       {"x": 9, "y": 4, "name": "MART CLERK", "art": "clerk-borea", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#3a2a1a", "dialogue": ["Coalseam City Mart — stocked for the road ahead."], "mart": {"stock": ["pokeball", "greatball", "superpotion", "hyperpotion", "antidote", "parlyzheal", "revive"]}},
-      {"x": 11, "y": 7, "name": "MINER BRAM", "art": "worker", "skin": "#f0c8a0", "shirt": "#3a7a4a", "pants": "#4a3a2a", "hair": "#2a1a0a", "dialogue": ["Forty carts a day come up out of that dark, and every one of them sings on the rails.", "The gym leader is a miner first. His Rock types have calluses."]},
+      {"x": 11, "y": 7, "name": "MINER BRAM", "art": "cast-bram-miner", "skin": "#f0c8a0", "shirt": "#3a7a4a", "pants": "#4a3a2a", "hair": "#2a1a0a", "dialogue": ["Forty carts a day come up out of that dark, and every one of them sings on the rails.", "The gym leader is a miner first. His Rock types have calluses."]},
       {"x": 18, "y": 13, "name": "MUSEUM GUIDE SOL", "art": "scientist", "skin": "#c89878", "shirt": "#2a7a6a", "pants": "#3a3a4a", "hair": "#7a4a1a", "dialogue": ["We revive fossils in the museum lab — old stone into living proof.", "North road climbs to the Heritage side of the mountain country. East: Mt. Apex's own door."]},
-      {"x": 7, "y": 10, "name": "APPRENTICE RUE", "art": "youngster", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#4a3a2a", "dialogue": ["I polish the museum's RAMOSAUR skull every morning. It grins. I grin back.", "MUSCLING carry what the carts can't. Nobody here lifts alone."]},
+      {"x": 7, "y": 10, "name": "APPRENTICE RUE", "art": "cast-rue-apprentice", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#4a3a2a", "dialogue": ["I polish the museum's RAMOSAUR skull every morning. It grins. I grin back.", "MUSCLING carry what the carts can't. Nobody here lifts alone."]},
     ],
     "encounters": {"rate": 0.1, "table": [{"species": "geodude", "min": 309, "max": 314, "weight": 24}, {"species": "machop", "min": 309, "max": 314, "weight": 22}, {"species": "zubat", "min": 310, "max": 315, "weight": 18}, {"species": "onix", "min": 311, "max": 315, "weight": 8}, {"species": "ponyta", "min": 310, "max": 314, "weight": 12}], "water": [{"species": "magikarp", "min": 309, "max": 313, "weight": 40}], "waterRate": 0.08},
     "items": [],
@@ -350,7 +350,7 @@ export const MAPS9 = {
     ],
     "npcs": [
       {"x": 9, "y": 4, "name": "MART CLERK", "art": "clerk-borea", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#3a2a1a", "dialogue": ["Honeyfield Town Mart — stocked for the road ahead."], "mart": {"stock": ["pokeball", "greatball", "superpotion", "hyperpotion", "antidote", "parlyzheal", "revive"]}},
-      {"x": 11, "y": 6, "name": "FLORIST WREN", "art": "lady", "skin": "#d8a878", "shirt": "#7a4a8a", "pants": "#2a2a3a", "hair": "#c0c0c0", "dialogue": ["Every roof in Honeyfield is a garden that got promoted.", "HEXABEE read the flower fields like a newspaper. Today's headline is always the same: more flowers."]},
+      {"x": 11, "y": 6, "name": "FLORIST WREN", "art": "cast-wren-florist", "skin": "#d8a878", "shirt": "#7a4a8a", "pants": "#2a2a3a", "hair": "#c0c0c0", "dialogue": ["Every roof in Honeyfield is a garden that got promoted.", "HEXABEE read the flower fields like a newspaper. Today's headline is always the same: more flowers."]},
       {"x": 19, "y": 13, "name": "BEEKEEPER ORIN", "art": "gent", "skin": "#e8b888", "shirt": "#3a6ac0", "pants": "#2a3a4a", "hair": "#1a1a1a", "dialogue": ["Honey sweetens the sap, the sap sweetens the trees, the trees sweeten everything else.", "The windworks turbines east keep the valley's hair combed."]},
       {"x": 8, "y": 14, "name": "MEADOW KID FENN", "art": "kid", "skin": "#f0c8a0", "shirt": "#3a7a4a", "pants": "#4a3a2a", "hair": "#2a1a0a", "dialogue": ["I can name forty flowers and eleven bees. The bees can name me.", "ORCHLET ripen twice as fast when you compliment the tree. Science, probably."]},
     ],
@@ -411,9 +411,9 @@ export const MAPS9 = {
     ],
     "npcs": [
       {"x": 9, "y": 4, "name": "MART CLERK", "art": "clerk-borea", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#3a2a1a", "dialogue": ["Heritage City Mart — stocked for the road ahead."], "mart": {"stock": ["greatball", "ultraball", "hyperpotion", "fullheal", "revive", "superpotion"]}},
-      {"x": 11, "y": 7, "name": "HISTORIAN ILSE", "art": "lady", "skin": "#d8a878", "shirt": "#7a4a8a", "pants": "#2a2a3a", "hair": "#c0c0c0", "dialogue": ["Heritage was old when the roads were young. The statue in the square is older than the square.", "The forest west breathes through this city. Tansy's gym smells of it."]},
-      {"x": 18, "y": 12, "name": "CYCLING COACH BO", "art": "youngster", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#4a3a2a", "dialogue": ["South, the cycling road runs over Stray Cave to Coalseam. The cave keeps SHARKLET; the road keeps everyone else honest.", "East, Route 211 climbs to Mt. Apex's heart."]},
-      {"x": 7, "y": 14, "name": "STATUE KEEPER SOL", "art": "elder", "skin": "#e8b888", "shirt": "#b0503c", "pants": "#2a2a3a", "hair": "#5a3a2a", "dialogue": ["Travellers leave flowers at the statue for journeys past and coming.", "A team in star-sign shirts photographs the statue weekly. I sweep around them and say nothing."]},
+      {"x": 11, "y": 7, "name": "HISTORIAN ILSE", "art": "cast-ilse-historian", "skin": "#d8a878", "shirt": "#7a4a8a", "pants": "#2a2a3a", "hair": "#c0c0c0", "dialogue": ["Heritage was old when the roads were young. The statue in the square is older than the square.", "The forest west breathes through this city. Tansy's gym smells of it."]},
+      {"x": 18, "y": 12, "name": "CYCLING COACH BO", "art": "cast-bo-cycling", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#4a3a2a", "dialogue": ["South, the cycling road runs over Stray Cave to Coalseam. The cave keeps SHARKLET; the road keeps everyone else honest.", "East, Route 211 climbs to Mt. Apex's heart."]},
+      {"x": 7, "y": 14, "name": "STATUE KEEPER SOL", "art": "cast-sol-statue", "skin": "#e8b888", "shirt": "#b0503c", "pants": "#2a2a3a", "hair": "#5a3a2a", "dialogue": ["Travellers leave flowers at the statue for journeys past and coming.", "A team in star-sign shirts photographs the statue weekly. I sweep around them and say nothing."]},
     ],
     "encounters": {"rate": 0.1, "table": [{"species": "buneary", "min": 320, "max": 326, "weight": 20}, {"species": "staravia", "min": 321, "max": 327, "weight": 16}, {"species": "bidoof", "min": 320, "max": 325, "weight": 16}, {"species": "gastly", "min": 321, "max": 327, "weight": 10}, {"species": "meditite", "min": 321, "max": 326, "weight": 12}, {"species": "bibarel", "min": 322, "max": 327, "weight": 8}], "water": [{"species": "magikarp", "min": 320, "max": 325, "weight": 40}], "waterRate": 0.08},
     "items": [],
@@ -478,8 +478,8 @@ export const MAPS9 = {
     ],
     "npcs": [
       {"x": 9, "y": 4, "name": "MART CLERK", "art": "clerk-borea", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#2a4a2a", "dialogue": ["Inglenook City Mart — stocked for the road ahead."], "mart": {"stock": ["greatball", "ultraball", "hyperpotion", "fullheal", "revive", "superpotion"]}},
-      {"x": 11, "y": 7, "name": "CONTEST AUNTIE ROSA", "art": "lady", "skin": "#d8a878", "shirt": "#7a4a8a", "pants": "#2a2a3a", "hair": "#c0c0c0", "dialogue": ["A ribbon is a judge admitting, in the record books, that your Kin shone.", "Odile judges the gym AND half the contests. The city runs on her standards and her accent."]},
-      {"x": 19, "y": 13, "name": "POFFIN COOK MASA", "art": "worker", "skin": "#f0c8a0", "shirt": "#3a7a4a", "pants": "#4a3a2a", "hair": "#2a1a0a", "dialogue": ["Berries in, poffins out, patience throughout. The house by the square takes apprentices.", "Repose is north past the Forsaken Tower. Mind the tower's quiet; it minds you."]},
+      {"x": 11, "y": 7, "name": "CONTEST AUNTIE ROSA", "art": "cast-rosa", "skin": "#d8a878", "shirt": "#7a4a8a", "pants": "#2a2a3a", "hair": "#c0c0c0", "dialogue": ["A ribbon is a judge admitting, in the record books, that your Kin shone.", "Odile judges the gym AND half the contests. The city runs on her standards and her accent."]},
+      {"x": 19, "y": 13, "name": "POFFIN COOK MASA", "art": "cast-masa-cook", "skin": "#f0c8a0", "shirt": "#3a7a4a", "pants": "#4a3a2a", "hair": "#2a1a0a", "dialogue": ["Berries in, poffins out, patience throughout. The house by the square takes apprentices.", "Repose is north past the Forsaken Tower. Mind the tower's quiet; it minds you."]},
       {"x": 8, "y": 16, "name": "SQUARE WARDEN PIOTR", "art": "gent", "skin": "#e8b888", "shirt": "#3a6ac0", "pants": "#2a3a4a", "hair": "#1a1a1a", "dialogue": ["Amity's lawns are for strolling pairs. The Kin choose the route; we keep the gates.", "West road runs to the mountain's south door. South, Route 212 heads for the marsh country."]},
     ],
     "encounters": {"rate": 0.09, "table": [{"species": "buneary", "min": 326, "max": 332, "weight": 22}, {"species": "cleffa", "min": 326, "max": 331, "weight": 14}, {"species": "clefairy", "min": 327, "max": 332, "weight": 12}, {"species": "happiny", "min": 327, "max": 332, "weight": 6}, {"species": "chatot", "min": 327, "max": 333, "weight": 12}, {"species": "staravia", "min": 326, "max": 332, "weight": 16}], "water": [{"species": "magikarp", "min": 325, "max": 330, "weight": 40}], "waterRate": 0.08},
@@ -540,7 +540,7 @@ export const MAPS9 = {
     ],
     "npcs": [
       {"x": 9, "y": 4, "name": "MART CLERK", "art": "clerk-borea", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#2a4a2a", "dialogue": ["Repose Town Mart — stocked for the road ahead."], "mart": {"stock": ["greatball", "ultraball", "hyperpotion", "fullheal", "revive", "superpotion"]}},
-      {"x": 11, "y": 7, "name": "DAY CARE LADY UNA", "art": "lady", "skin": "#d8a878", "shirt": "#7a4a8a", "pants": "#2a2a3a", "hair": "#c0c0c0", "dialogue": ["We raise what trainers entrust to us, egg to elder. The fence has heard ten thousand first steps.", "Two eggs hatched the same morning last week. The whole town took the day off."]},
+      {"x": 11, "y": 7, "name": "DAY CARE LADY UNA", "art": "cast-una-daycare", "skin": "#d8a878", "shirt": "#7a4a8a", "pants": "#2a2a3a", "hair": "#c0c0c0", "dialogue": ["We raise what trainers entrust to us, egg to elder. The fence has heard ten thousand first steps.", "Two eggs hatched the same morning last week. The whole town took the day off."]},
       {"x": 18, "y": 13, "name": "RUIN DELVER OSSA", "art": "ranger", "skin": "#e8b888", "shirt": "#3a6ac0", "pants": "#2a3a4a", "hair": "#1a1a1a", "dialogue": ["The ruins' chambers spell nothing I will repeat, and I have read them all.", "North road climbs toward Shardfall country. The tower south keeps the road's dead company."]},
       {"x": 6, "y": 10, "name": "BREEDER KID WREN", "art": "kid", "skin": "#f0c8a0", "shirt": "#3a7a4a", "pants": "#4a3a2a", "hair": "#2a1a0a", "dialogue": ["My PETRILET pretends to be a plant until snack time. Then it pretends faster.", "Inglenook's domes are a walk south. I can see the gold from the north hill."]},
     ],
@@ -604,7 +604,7 @@ export const MAPS9 = {
       {"x": 9, "y": 4, "name": "MART CLERK", "art": "clerk-borea", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#2a2a4a", "dialogue": ["Shardfall City Mart — stocked for the road ahead."], "mart": {"stock": ["ultraball", "hyperpotion", "maxpotion", "fullheal", "revive", "escaperope"]}},
       {"x": 11, "y": 7, "name": "DEPT CLERK VEE", "art": "clerk-borea", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#2a4a2a", "dialogue": ["Four floors of shelves and I still run out of the one thing everyone wants. It's a gift.", "Maren's gym rearranges itself for challengers. The vegetables in the market do not; stand your ground there."]},
       {"x": 18, "y": 12, "name": "METEOR WATCHER SOL", "art": "scientist", "skin": "#c89878", "shirt": "#2a7a6a", "pants": "#3a3a4a", "hair": "#7a4a1a", "dialogue": ["The rocks north of town fell within living memory of the stones themselves. They hum at certain hours.", "Game corner coins, meteor dust, fighting mats — Shardfall collects intense hobbies."]},
-      {"x": 7, "y": 13, "name": "WAREHOUSE HAND BRIN", "art": "worker", "skin": "#f0c8a0", "shirt": "#3a7a4a", "pants": "#4a3a2a", "hair": "#2a1a0a", "dialogue": ["Crates in, crates out. The star-sign crates are heavier and nobody says why.", "South road runs down to the tower country and Repose beyond."]},
+      {"x": 7, "y": 13, "name": "WAREHOUSE HAND BRIN", "art": "cast-brin-warehouse", "skin": "#f0c8a0", "shirt": "#3a7a4a", "pants": "#4a3a2a", "hair": "#2a1a0a", "dialogue": ["Crates in, crates out. The star-sign crates are heavier and nobody says why.", "South road runs down to the tower country and Repose beyond."]},
     ],
     "encounters": {"rate": 0.1, "table": [{"species": "luxio", "min": 336, "max": 342, "weight": 20}, {"species": "staravia", "min": 336, "max": 342, "weight": 20}, {"species": "stunky", "min": 336, "max": 341, "weight": 16}, {"species": "croagunk", "min": 337, "max": 342, "weight": 8}, {"species": "skuntank", "min": 339, "max": 343, "weight": 6}, {"species": "bibarel", "min": 336, "max": 341, "weight": 12}], "water": [{"species": "magikarp", "min": 335, "max": 340, "weight": 40}], "waterRate": 0.08},
     "items": [],
@@ -663,7 +663,7 @@ export const MAPS9 = {
     "npcs": [
       {"x": 9, "y": 4, "name": "MART CLERK", "art": "clerk-borea", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#2a2a4a", "dialogue": ["Bridgeport City Mart — stocked for the road ahead."], "mart": {"stock": ["ultraball", "hyperpotion", "maxpotion", "fullheal", "revive", "escaperope"]}},
       {"x": 13, "y": 13, "name": "CAPT WESTWIND", "art": "sailor", "skin": "#e8b888", "shirt": "#3a6ac0", "pants": "#2a3a4a", "hair": "#1a1a1a", "dialogue": ["The Bridgeport run is the long crossing home — Arcport, straight across the weather.", "Once this port knows you, the whole ferry network does. Step aboard when you're ready."], "ferry": "vermilion", "ferryArc": "sinnoh"},
-      {"x": 18, "y": 6, "name": "LIBRARIAN MIRA", "art": "lady", "skin": "#d8a878", "shirt": "#7a4a8a", "pants": "#2a2a3a", "hair": "#c0c0c0", "dialogue": ["Our library holds Borea's oldest stories, including the ones about this harbour's first bridge.", "Doran's gym is all iron and certainty. The bridge approves; it is also iron."]},
+      {"x": 18, "y": 6, "name": "LIBRARIAN MIRA", "art": "cast-mira", "skin": "#d8a878", "shirt": "#7a4a8a", "pants": "#2a2a3a", "hair": "#c0c0c0", "dialogue": ["Our library holds Borea's oldest stories, including the ones about this harbour's first bridge.", "Doran's gym is all iron and certainty. The bridge approves; it is also iron."]},
       {"x": 6, "y": 10, "name": "SAILOR KETT", "art": "sailor", "skin": "#c89878", "shirt": "#2a7a6a", "pants": "#3a3a4a", "hair": "#7a4a1a", "dialogue": ["Foundry Isle boats leave from the north pier when the weather allows. The weather is a negotiator.", "East causeway runs to Revelry over the water. Gulls audit every crossing."]},
       {"x": 14, "y": 14, "name": "SAILOR BRINE", "art": "sailor", "skin": "#e8b888", "shirt": "#3a6ac0", "pants": "#2a3a4a", "hair": "#1a1a1a", "dialogue": ["Foundry Isle, when you're ready. The mine boats run in any weather the island respects, which is most of it.", "Mind the cave dust. It gets into everything, including the stories."], "ferry": "iron-island"},
       {"x": 12, "y": 14, "name": "SAILOR LUNA", "art": "sailor", "skin": "#e8b888", "shirt": "#3a6ac0", "pants": "#2a3a4a", "hair": "#1a1a1a", "dialogue": ["Brightmoon Island rides at anchor beyond the harbour lights. I keep the night run, crescent tides and all.", "Something sleeps in that island's dreams. We sail quiet past it."], "ferry": "fullmoon-island"},
@@ -707,7 +707,7 @@ export const MAPS9 = {
       {"x": 12, "y": 7, "text": "ROUTE 201 — Clover Town to Shingle Town. Every Borea journey starts with this grass on its shoes."},
     ],
     "npcs": [
-      {"x": 9, "y": 11, "name": "YOUNGSTER TAM", "art": "youngster", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#4a3a2a", "dialogue": ["My DUSKLING knows this route better than I do. It leads; I follow.", "Prof. Sorrel does his thinking walks up this way. If you hear muttering, it's science."]},
+      {"x": 9, "y": 11, "name": "YOUNGSTER TAM", "art": "cast-tam", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#4a3a2a", "dialogue": ["My DUSKLING knows this route better than I do. It leads; I follow.", "Prof. Sorrel does his thinking walks up this way. If you hear muttering, it's science."]},
     ],
     "encounters": {"rate": 0.13, "table": [{"species": "starly", "min": 301, "max": 305, "weight": 30}, {"species": "bidoof", "min": 301, "max": 305, "weight": 30}, {"species": "kricketot", "min": 301, "max": 306, "weight": 22}, {"species": "shinx", "min": 302, "max": 306, "weight": 10}], "water": [{"species": "tentacool", "min": 302, "max": 308, "weight": 28}, {"species": "magikarp", "min": 302, "max": 307, "weight": 24}, {"species": "wingull", "min": 303, "max": 308, "weight": 20}, {"species": "buizel", "min": 304, "max": 309, "weight": 14}], "waterRate": 0.08},
     "items": [],
@@ -791,7 +791,7 @@ export const MAPS9 = {
       {"x": 12, "y": 7, "text": "ROUTE 203 — Revelry City to Coalseam City. The grass thins, the stone thickens, the coal smoke begins."},
     ],
     "npcs": [
-      {"x": 14, "y": 11, "name": "EXCAVATOR KID CAL", "art": "youngster", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#4a3a2a", "dialogue": ["Coalseam's mine carts sing through the hill. You can hear them on quiet mornings.", "NAPSEER sleep standing up in this grass. Rude to wake them. I wake them."]},
+      {"x": 14, "y": 11, "name": "EXCAVATOR KID CAL", "art": "cast-cal-excavator", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#4a3a2a", "dialogue": ["Coalseam's mine carts sing through the hill. You can hear them on quiet mornings.", "NAPSEER sleep standing up in this grass. Rude to wake them. I wake them."]},
     ],
     "encounters": {"rate": 0.13, "table": [{"species": "shinx", "min": 307, "max": 312, "weight": 22}, {"species": "budew", "min": 307, "max": 312, "weight": 20}, {"species": "starly", "min": 306, "max": 311, "weight": 20}, {"species": "abra", "min": 308, "max": 313, "weight": 8}, {"species": "bidoof", "min": 306, "max": 311, "weight": 16}, {"species": "zubat", "min": 307, "max": 312, "weight": 10}], "water": [{"species": "tentacool", "min": 302, "max": 308, "weight": 28}, {"species": "magikarp", "min": 302, "max": 307, "weight": 24}, {"species": "wingull", "min": 303, "max": 308, "weight": 20}, {"species": "buizel", "min": 304, "max": 309, "weight": 14}], "waterRate": 0.08},
     "items": [],
@@ -834,7 +834,7 @@ export const MAPS9 = {
       {"x": 13, "y": 2, "text": "RUINED PATH — The cave under the north bluff. Through it: Honeyfield’s flowers. The path was a road before it was a cave, and remembers both."},
     ],
     "npcs": [
-      {"x": 14, "y": 12, "name": "HIKER PAVEL", "art": "hiker", "skin": "#e8b888", "shirt": "#3a6ac0", "pants": "#2a3a4a", "hair": "#1a1a1a", "dialogue": ["The ravaged path is the mountain changing its mind in public.", "ROSELET drink the cave drip at the north mouth. Walk gentle there."]},
+      {"x": 14, "y": 12, "name": "HIKER PAVEL", "art": "cast-pavel", "skin": "#e8b888", "shirt": "#3a6ac0", "pants": "#2a3a4a", "hair": "#1a1a1a", "dialogue": ["The ravaged path is the mountain changing its mind in public.", "ROSELET drink the cave drip at the north mouth. Walk gentle there."]},
     ],
     "encounters": {"rate": 0.13, "table": [{"species": "budew", "min": 309, "max": 314, "weight": 22}, {"species": "starly", "min": 309, "max": 314, "weight": 20}, {"species": "bidoof", "min": 309, "max": 314, "weight": 18}, {"species": "pachirisu", "min": 311, "max": 315, "weight": 8}, {"species": "cherubi", "min": 310, "max": 315, "weight": 12}, {"species": "kricketune", "min": 310, "max": 315, "weight": 10}], "water": [{"species": "tentacool", "min": 314, "max": 320, "weight": 26}, {"species": "magikarp", "min": 314, "max": 319, "weight": 22}, {"species": "wingull", "min": 315, "max": 320, "weight": 18}, {"species": "buizel", "min": 315, "max": 321, "weight": 16}, {"species": "shellos", "min": 315, "max": 320, "weight": 12}], "waterRate": 0.08},
     "items": [],
@@ -880,7 +880,7 @@ export const MAPS9 = {
       {"x": 7, "y": 4, "text": "BLAZE IRONWORKS — The charcoal works on the river bank. Iron, ash, and a foreman who counts both."},
     ],
     "npcs": [
-      {"x": 16, "y": 11, "name": "TURBINE TECH JUNO", "art": "worker", "skin": "#f0c8a0", "shirt": "#3a7a4a", "pants": "#4a3a2a", "hair": "#2a1a0a", "dialogue": ["Twelve turbines, one valley, zero calm days. The grid loves it here.", "A BALLOOM drifts round the building some days, like it pays rent in weather."]},
+      {"x": 16, "y": 11, "name": "TURBINE TECH JUNO", "art": "cast-juno-turbine", "skin": "#f0c8a0", "shirt": "#3a7a4a", "pants": "#4a3a2a", "hair": "#2a1a0a", "dialogue": ["Twelve turbines, one valley, zero calm days. The grid loves it here.", "A BALLOOM drifts round the building some days, like it pays rent in weather."]},
     ],
     "encounters": {"rate": 0.13, "table": [{"species": "combee", "min": 315, "max": 321, "weight": 20}, {"species": "buizel", "min": 315, "max": 321, "weight": 18}, {"species": "shellos", "min": 315, "max": 320, "weight": 16}, {"species": "pachirisu", "min": 316, "max": 322, "weight": 12}, {"species": "budew", "min": 315, "max": 320, "weight": 14}, {"species": "mothim", "min": 317, "max": 322, "weight": 4}, {"species": "drifloon", "min": 317, "max": 322, "weight": 6}], "water": [{"species": "tentacool", "min": 314, "max": 320, "weight": 26}, {"species": "magikarp", "min": 314, "max": 319, "weight": 22}, {"species": "wingull", "min": 315, "max": 320, "weight": 18}, {"species": "buizel", "min": 315, "max": 321, "weight": 16}, {"species": "shellos", "min": 315, "max": 320, "weight": 12}], "waterRate": 0.08},
     "items": [],
@@ -966,7 +966,7 @@ export const MAPS9 = {
       {"x": 12, "y": 7, "text": "ROUTE 207 — Coalseam City to Mt. Apex. The road climbs the whole way; so will you."},
     ],
     "npcs": [
-      {"x": 10, "y": 11, "name": "HIKER EMBER", "art": "hiker", "skin": "#e8b888", "shirt": "#3a6ac0", "pants": "#2a3a4a", "hair": "#1a1a1a", "dialogue": ["The mountain keeps its south door open for honest legs.", "RELICT ring faintly on this road when the wind is right. Nobody teaches them."]},
+      {"x": 10, "y": 11, "name": "HIKER EMBER", "art": "cast-ember", "skin": "#e8b888", "shirt": "#3a6ac0", "pants": "#2a3a4a", "hair": "#1a1a1a", "dialogue": ["The mountain keeps its south door open for honest legs.", "RELICT ring faintly on this road when the wind is right. Nobody teaches them."]},
     ],
     "encounters": {"rate": 0.13, "table": [{"species": "machop", "min": 312, "max": 319, "weight": 22}, {"species": "geodude", "min": 312, "max": 319, "weight": 20}, {"species": "ponyta", "min": 313, "max": 320, "weight": 16}, {"species": "bronzor", "min": 314, "max": 320, "weight": 12}, {"species": "onix", "min": 314, "max": 320, "weight": 8}, {"species": "kricketune", "min": 312, "max": 318, "weight": 10}], "water": [{"species": "tentacool", "min": 314, "max": 320, "weight": 26}, {"species": "magikarp", "min": 314, "max": 319, "weight": 22}, {"species": "wingull", "min": 315, "max": 320, "weight": 18}, {"species": "buizel", "min": 315, "max": 321, "weight": 16}, {"species": "shellos", "min": 315, "max": 320, "weight": 12}], "waterRate": 0.08},
     "items": [],
@@ -1007,7 +1007,7 @@ export const MAPS9 = {
       {"x": 12, "y": 7, "text": "ROUTE 208 — Inglenook City to Mt. Apex’s south door. The domes shrink behind you; the mountain does not."},
     ],
     "npcs": [
-      {"x": 16, "y": 11, "name": "HIKER DUST", "art": "hiker", "skin": "#e8b888", "shirt": "#3a6ac0", "pants": "#2a3a4a", "hair": "#1a1a1a", "dialogue": ["Two doors into the mountain from the south country, and both of them earned.", "PANTLET copy the hikers' stretches at the rest rocks. Form is terrible. Commitment is total."]},
+      {"x": 16, "y": 11, "name": "HIKER DUST", "art": "cast-dust-hiker", "skin": "#e8b888", "shirt": "#3a6ac0", "pants": "#2a3a4a", "hair": "#1a1a1a", "dialogue": ["Two doors into the mountain from the south country, and both of them earned.", "PANTLET copy the hikers' stretches at the rest rocks. Form is terrible. Commitment is total."]},
     ],
     "encounters": {"rate": 0.13, "table": [{"species": "ponyta", "min": 322, "max": 329, "weight": 20}, {"species": "machop", "min": 322, "max": 329, "weight": 18}, {"species": "bronzor", "min": 323, "max": 330, "weight": 14}, {"species": "buneary", "min": 322, "max": 328, "weight": 14}, {"species": "mimejr", "min": 323, "max": 329, "weight": 10}, {"species": "luxio", "min": 324, "max": 330, "weight": 8}], "water": [{"species": "tentacool", "min": 314, "max": 320, "weight": 26}, {"species": "magikarp", "min": 314, "max": 319, "weight": 22}, {"species": "wingull", "min": 315, "max": 320, "weight": 18}, {"species": "buizel", "min": 315, "max": 321, "weight": 16}, {"species": "shellos", "min": 315, "max": 320, "weight": 12}], "waterRate": 0.08},
     "items": [],
@@ -1052,7 +1052,7 @@ export const MAPS9 = {
       {"x": 20, "y": 10, "text": "FORSAKEN TOWER — The road’s quiet neighbour. Bells for the remembered, rest for the travellers."},
     ],
     "npcs": [
-      {"x": 9, "y": 12, "name": "PILGRIM ANA", "art": "lady", "skin": "#d8a878", "shirt": "#7a4a8a", "pants": "#2a2a3a", "hair": "#c0c0c0", "dialogue": ["I walk this road twice a year and leave flowers at the tower both times.", "The tower bells carry to Inglenook on still evenings. The city listens like family."]},
+      {"x": 9, "y": 12, "name": "PILGRIM ANA", "art": "cast-ana-pilgrim", "skin": "#d8a878", "shirt": "#7a4a8a", "pants": "#2a2a3a", "hair": "#c0c0c0", "dialogue": ["I walk this road twice a year and leave flowers at the tower both times.", "The tower bells carry to Inglenook on still evenings. The city listens like family."]},
     ],
     "encounters": {"rate": 0.13, "table": [{"species": "buneary", "min": 327, "max": 334, "weight": 20}, {"species": "clefairy", "min": 328, "max": 334, "weight": 14}, {"species": "ponyta", "min": 327, "max": 334, "weight": 18}, {"species": "chatot", "min": 328, "max": 335, "weight": 12}, {"species": "mimejr", "min": 328, "max": 334, "weight": 10}, {"species": "staravia", "min": 327, "max": 333, "weight": 14}], "water": [{"species": "tentacool", "min": 314, "max": 320, "weight": 26}, {"species": "magikarp", "min": 314, "max": 319, "weight": 22}, {"species": "wingull", "min": 315, "max": 320, "weight": 18}, {"species": "buizel", "min": 315, "max": 321, "weight": 16}, {"species": "shellos", "min": 315, "max": 320, "weight": 12}], "waterRate": 0.08},
     "items": [],
@@ -1097,7 +1097,7 @@ export const MAPS9 = {
       {"x": 13, "y": 15, "text": "ROUTE 210 — Repose Town to the Shardfall road. North the grass deepens and the towers begin."},
     ],
     "npcs": [
-      {"x": 14, "y": 8, "name": "RANCHER BO", "art": "youngster", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#4a3a2a", "dialogue": ["EMBERFOAL herds bunch at the north fence like the road owes them a race.", "Shardfall's store lights are visible from the top field. My wallet feels it from here."]},
+      {"x": 14, "y": 8, "name": "RANCHER BO", "art": "cast-bo-rancher", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#4a3a2a", "dialogue": ["EMBERFOAL herds bunch at the north fence like the road owes them a race.", "Shardfall's store lights are visible from the top field. My wallet feels it from here."]},
     ],
     "encounters": {"rate": 0.13, "table": [{"species": "ponyta", "min": 332, "max": 339, "weight": 20}, {"species": "chatot", "min": 332, "max": 338, "weight": 14}, {"species": "rapidash", "min": 335, "max": 340, "weight": 6}, {"species": "chansey", "min": 333, "max": 339, "weight": 6}, {"species": "meditite", "min": 332, "max": 338, "weight": 12}, {"species": "staravia", "min": 332, "max": 338, "weight": 16}, {"species": "bibarel", "min": 332, "max": 338, "weight": 12}], "water": [{"species": "tentacool", "min": 330, "max": 336, "weight": 24}, {"species": "magikarp", "min": 330, "max": 335, "weight": 20}, {"species": "wingull", "min": 331, "max": 336, "weight": 18}, {"species": "finneon", "min": 332, "max": 337, "weight": 12}, {"species": "floatzel", "min": 333, "max": 338, "weight": 8}, {"species": "gastrodon", "min": 334, "max": 339, "weight": 6}], "waterRate": 0.08},
     "items": [],
@@ -1138,7 +1138,7 @@ export const MAPS9 = {
       {"x": 12, "y": 7, "text": "ROUTE 211 — Heritage City to Mt. Apex’s west door. The road ends at the mountain; the mountain is not an ending."},
     ],
     "npcs": [
-      {"x": 9, "y": 11, "name": "HIKER PAVEL", "art": "hiker", "skin": "#e8b888", "shirt": "#3a6ac0", "pants": "#2a3a4a", "hair": "#1a1a1a", "dialogue": ["Inside that mountain, the caves run north like a spine. The upper gallery is as far as the marked road goes — for now.", "LOTUSFIST meditate on the bluff stones. The stones are winning."]},
+      {"x": 9, "y": 11, "name": "HIKER PAVEL", "art": "cast-pavel", "skin": "#e8b888", "shirt": "#3a6ac0", "pants": "#2a3a4a", "hair": "#1a1a1a", "dialogue": ["Inside that mountain, the caves run north like a spine. The upper gallery is as far as the marked road goes — for now.", "LOTUSFIST meditate on the bluff stones. The stones are winning."]},
     ],
     "encounters": {"rate": 0.13, "table": [{"species": "ponyta", "min": 323, "max": 329, "weight": 18}, {"species": "machop", "min": 323, "max": 329, "weight": 18}, {"species": "bronzor", "min": 324, "max": 330, "weight": 16}, {"species": "medicham", "min": 325, "max": 330, "weight": 6}, {"species": "chatot", "min": 324, "max": 330, "weight": 12}, {"species": "staravia", "min": 323, "max": 329, "weight": 14}], "water": [{"species": "tentacool", "min": 314, "max": 320, "weight": 26}, {"species": "magikarp", "min": 314, "max": 319, "weight": 22}, {"species": "wingull", "min": 315, "max": 320, "weight": 18}, {"species": "buizel", "min": 315, "max": 321, "weight": 16}, {"species": "shellos", "min": 315, "max": 320, "weight": 12}], "waterRate": 0.08},
     "items": [],
@@ -1307,7 +1307,7 @@ export const MAPS9 = {
       {"x": 20, "y": 12, "text": "THE NORTH CAVE — Cool, dripping, and older than the town it neighbours."},
     ],
     "npcs": [
-      {"x": 20, "y": 6, "name": "LAKESIDE ELDER BRAMBLE", "art": "elder", "skin": "#e8b888", "shirt": "#b0503c", "pants": "#2a2a3a", "hair": "#5a3a2a", "dialogue": ["Three lakes in Borea, three old stories. This one is ours, and it is the quietest.", "Something lived in that lake once that made the mist behave. The mist still behaves."]},
+      {"x": 20, "y": 6, "name": "LAKESIDE ELDER BRAMBLE", "art": "cast-bramble-lakeside", "skin": "#e8b888", "shirt": "#b0503c", "pants": "#2a2a3a", "hair": "#5a3a2a", "dialogue": ["Three lakes in Borea, three old stories. This one is ours, and it is the quietest.", "Something lived in that lake once that made the mist behave. The mist still behaves."]},
     ],
     "encounters": {"rate": 0.11, "table": [{"species": "starly", "min": 302, "max": 307, "weight": 22}, {"species": "bidoof", "min": 302, "max": 307, "weight": 22}, {"species": "psyduck", "min": 303, "max": 308, "weight": 14}, {"species": "kricketot", "min": 302, "max": 307, "weight": 16}], "water": [{"species": "magikarp", "min": 302, "max": 307, "weight": 30}, {"species": "psyduck", "min": 303, "max": 308, "weight": 26}, {"species": "golduck", "min": 305, "max": 309, "weight": 8}, {"species": "tentacool", "min": 303, "max": 308, "weight": 14}], "waterRate": 0.08},
     "items": [],
@@ -1376,7 +1376,7 @@ export const MAPS9 = {
       {"x": 11, "y": 2, "text": "COALSEAM MINE — The working face. Fossils surface here the way secrets surface in small towns: eventually, and to applause."},
     ],
     "npcs": [
-      {"x": 6, "y": 6, "name": "FOREMAN BRAM", "art": "worker", "skin": "#f0c8a0", "shirt": "#3a7a4a", "pants": "#4a3a2a", "hair": "#2a1a0a", "dialogue": ["Carts run on the hour; fossils run when they please.", "A RAMOSAUR came out of the east wall last spring mad as a wet cat. The museum has it now. It has the museum, some days."]},
+      {"x": 6, "y": 6, "name": "FOREMAN BRAM", "art": "cast-bram-foreman", "skin": "#f0c8a0", "shirt": "#3a7a4a", "pants": "#4a3a2a", "hair": "#2a1a0a", "dialogue": ["Carts run on the hour; fossils run when they please.", "A RAMOSAUR came out of the east wall last spring mad as a wet cat. The museum has it now. It has the museum, some days."]},
     ],
     "encounters": {"rate": 0.13, "table": [{"species": "geodude", "min": 310, "max": 317, "weight": 26}, {"species": "zubat", "min": 310, "max": 317, "weight": 22}, {"species": "onix", "min": 312, "max": 318, "weight": 12}, {"species": "cranidos", "min": 312, "max": 317, "weight": 4}, {"species": "shieldon", "min": 312, "max": 317, "weight": 4}, {"species": "bronzor", "min": 311, "max": 317, "weight": 12}]},
     "items": [],
@@ -1806,7 +1806,7 @@ export const MAPS9 = {
     "signs": [
     ],
     "npcs": [
-      {"x": 7, "y": 3, "name": "MS. HARLOW", "art": "lady", "skin": "#c89878", "shirt": "#2a7a6a", "pants": "#3a3a4a", "hair": "#7a4a1a", "dialogue": ["A trainer's house learns to keep a bag half-packed by the door.", "East is Shingle, and Shingle is the world beginning. Eat first."]},
+      {"x": 7, "y": 3, "name": "MS. HARLOW", "art": "cast-harlow", "skin": "#c89878", "shirt": "#2a7a6a", "pants": "#3a3a4a", "hair": "#7a4a1a", "dialogue": ["A trainer's house learns to keep a bag half-packed by the door.", "East is Shingle, and Shingle is the world beginning. Eat first."]},
     ],
     "encounters": null,
     "items": [],
@@ -1934,7 +1934,7 @@ export const MAPS9 = {
     "signs": [
     ],
     "npcs": [
-      {"x": 7, "y": 3, "name": "PRODUCER MARA", "art": "lady", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#4a3a2a", "dialogue": ["I cut the morning show in a room the size of this kitchen. The city watches it in rooms smaller still.", "Trainers pass through Revelry like weather systems. We just report them."]},
+      {"x": 7, "y": 3, "name": "PRODUCER MARA", "art": "cast-mara-producer", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#4a3a2a", "dialogue": ["I cut the morning show in a room the size of this kitchen. The city watches it in rooms smaller still.", "Trainers pass through Revelry like weather systems. We just report them."]},
     ],
     "encounters": null,
     "items": [],
@@ -1966,7 +1966,7 @@ export const MAPS9 = {
     "signs": [
     ],
     "npcs": [
-      {"x": 7, "y": 3, "name": "CURATOR MARA", "art": "lady", "skin": "#e8b888", "shirt": "#3a6ac0", "pants": "#2a3a4a", "hair": "#1a1a1a", "dialogue": ["The museum keeps the mine's autobiography: coal seams, cart rails, and one very patient RAMOSAUR skull.", "Revived fossils go on display after the lab work. The living ones visit on weekends. Supervised."]},
+      {"x": 7, "y": 3, "name": "CURATOR MARA", "art": "cast-mara-curator", "skin": "#e8b888", "shirt": "#3a6ac0", "pants": "#2a3a4a", "hair": "#1a1a1a", "dialogue": ["The museum keeps the mine's autobiography: coal seams, cart rails, and one very patient RAMOSAUR skull.", "Revived fossils go on display after the lab work. The living ones visit on weekends. Supervised."]},
     ],
     "encounters": null,
     "items": [],
@@ -1998,7 +1998,7 @@ export const MAPS9 = {
     "signs": [
     ],
     "npcs": [
-      {"x": 7, "y": 3, "name": "FLORIST WREN", "art": "lady", "skin": "#e8b888", "shirt": "#3a6ac0", "pants": "#2a3a4a", "hair": "#1a1a1a", "dialogue": ["Cut flowers by the door — Honeyfield houses compete by scent, same as anywhere honest.", "My Gracidea blooms when the meadow does. The whole town keeps the same calendar."]},
+      {"x": 7, "y": 3, "name": "FLORIST WREN", "art": "cast-wren-florist", "skin": "#e8b888", "shirt": "#3a6ac0", "pants": "#2a3a4a", "hair": "#1a1a1a", "dialogue": ["Cut flowers by the door — Honeyfield houses compete by scent, same as anywhere honest.", "My Gracidea blooms when the meadow does. The whole town keeps the same calendar."]},
     ],
     "encounters": null,
     "items": [],
@@ -2030,7 +2030,7 @@ export const MAPS9 = {
     "signs": [
     ],
     "npcs": [
-      {"x": 7, "y": 3, "name": "HISTORIAN ILSE", "art": "lady", "skin": "#f0c8a0", "shirt": "#3a7a4a", "pants": "#4a3a2a", "hair": "#2a1a0a", "dialogue": ["This house predates the road it stands on. Heritage keeps its old things standing, including me.", "The statue's inscription is half weathered away. The half that remains is the important half."]},
+      {"x": 7, "y": 3, "name": "HISTORIAN ILSE", "art": "cast-ilse-historian", "skin": "#f0c8a0", "shirt": "#3a7a4a", "pants": "#4a3a2a", "hair": "#2a1a0a", "dialogue": ["This house predates the road it stands on. Heritage keeps its old things standing, including me.", "The statue's inscription is half weathered away. The half that remains is the important half."]},
     ],
     "encounters": null,
     "items": [],
@@ -2094,7 +2094,7 @@ export const MAPS9 = {
     "signs": [
     ],
     "npcs": [
-      {"x": 7, "y": 3, "name": "POFFIN MASTER MASA", "art": "worker", "skin": "#f0c8a0", "shirt": "#3a7a4a", "pants": "#4a3a2a", "hair": "#2a1a0a", "dialogue": ["Berry in, poffin out, and mind the stir — a burnt poffin is a lesson with a crust.", "Apprentices welcome. Aprons are by the door; standards are by me."]},
+      {"x": 7, "y": 3, "name": "POFFIN MASTER MASA", "art": "cast-masa-master", "skin": "#f0c8a0", "shirt": "#3a7a4a", "pants": "#4a3a2a", "hair": "#2a1a0a", "dialogue": ["Berry in, poffin out, and mind the stir — a burnt poffin is a lesson with a crust.", "Apprentices welcome. Aprons are by the door; standards are by me."]},
     ],
     "encounters": null,
     "items": [],
@@ -2257,7 +2257,7 @@ export const MAPS9 = {
       {"x": 7, "y": 2, "text": "THE OLD STACKS — Histories of the three lakes, the mountain, and the first bridge. The librarian knows which shelf breathes."},
     ],
     "npcs": [
-      {"x": 8, "y": 4, "name": "LIBRARIAN MIRA", "art": "lady", "skin": "#d8a878", "shirt": "#7a4a8a", "pants": "#2a2a3a", "hair": "#c0c0c0", "dialogue": ["Every story Borea tells about itself is in this room, including the contradictory ones. Especially those.", "Read the lake chapters first. The mountain chapters read you back."]},
+      {"x": 8, "y": 4, "name": "LIBRARIAN MIRA", "art": "cast-mira", "skin": "#d8a878", "shirt": "#7a4a8a", "pants": "#2a2a3a", "hair": "#c0c0c0", "dialogue": ["Every story Borea tells about itself is in this room, including the contradictory ones. Especially those.", "Read the lake chapters first. The mountain chapters read you back."]},
     ],
     "encounters": null,
     "items": [],
@@ -2328,7 +2328,7 @@ export const MAPS9 = {
       {"x": 8, "y": 3, "text": "REVELRY TV — Studio floor. Every screen in Borea tuned to this tower; mind the cables and the charisma."},
     ],
     "npcs": [
-      {"x": 9, "y": 5, "name": "STUDIO HOST", "art": "lady", "skin": "#d8a878", "shirt": "#7a4a8a", "pants": "#2a2a3a", "hair": "#c0c0c0", "dialogue": ["We broadcast the weather, the contests, and the occasional roaming legend sighting. Two of those are reliable.", "Visitors can watch a recording from the gallery. The cameras are kind. Mostly."]},
+      {"x": 9, "y": 5, "name": "STUDIO HOST", "art": "cast-host", "skin": "#d8a878", "shirt": "#7a4a8a", "pants": "#2a2a3a", "hair": "#c0c0c0", "dialogue": ["We broadcast the weather, the contests, and the occasional roaming legend sighting. Two of those are reliable.", "Visitors can watch a recording from the gallery. The cameras are kind. Mostly."]},
     ],
     "encounters": null,
     "items": [],
@@ -2725,9 +2725,9 @@ export const MAPS9 = {
     ],
     "npcs": [
       {"x": 9, "y": 4, "name": "MART CLERK", "art": "clerk-borea", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#2a1a0a", "dialogue": ["Astral Town Mart — stocked for the road ahead."], "mart": {"stock": ["greatball", "ultraball", "hyperpotion", "fullheal", "revive", "superpotion"]}},
-      {"x": 11, "y": 7, "name": "SHRINE ELDER UME", "art": "elder", "skin": "#e8b888", "shirt": "#b0503c", "pants": "#2a2a3a", "hair": "#5a3a2a", "dialogue": ["Astral was old when the lakes were young, child. Walk softly; the stones are listening out of habit.", "The cave paintings in the shrine tell of three lake spirits and the beings above them. Told, not explained."]},
+      {"x": 11, "y": 7, "name": "SHRINE ELDER UME", "art": "cast-ume", "skin": "#e8b888", "shirt": "#b0503c", "pants": "#2a2a3a", "hair": "#5a3a2a", "dialogue": ["Astral was old when the lakes were young, child. Walk softly; the stones are listening out of habit.", "The cave paintings in the shrine tell of three lake spirits and the beings above them. Told, not explained."]},
       {"x": 19, "y": 12, "name": "HISTORIAN BLYTHE", "art": "scientist", "skin": "#c89878", "shirt": "#2a7a6a", "pants": "#3a3a4a", "hair": "#7a4a1a", "dialogue": ["I copy the shrine murals by hand, one panel a season. Some panels copy back, I swear it.", "East, the fog road drops to Route 210. West of the mountain, everything is somebody else's story."]},
-      {"x": 7, "y": 14, "name": "FOG RUNNER KESTREL", "art": "youngster", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#4a3a2a", "dialogue": ["I run the fog road to Repose and back before lunch. The fog lets me. It likes the company.", "On clear days you can see Zenith Spire from the shrine steps. On fog days, it sees you."]},
+      {"x": 7, "y": 14, "name": "FOG RUNNER KESTREL", "art": "cast-kestrel", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#4a3a2a", "dialogue": ["I run the fog road to Repose and back before lunch. The fog lets me. It likes the company.", "On clear days you can see Zenith Spire from the shrine steps. On fog days, it sees you."]},
     ],
     "encounters": {"rate": 0.1, "table": [{"species": "meditite", "min": 348, "max": 354, "weight": 18}, {"species": "bronzor", "min": 348, "max": 354, "weight": 16}, {"species": "chatot", "min": 349, "max": 355, "weight": 14}, {"species": "staravia", "min": 348, "max": 354, "weight": 16}, {"species": "buneary", "min": 348, "max": 353, "weight": 14}], "water": [{"species": "magikarp", "min": 347, "max": 353, "weight": 40}], "waterRate": 0.08},
     "items": [],
@@ -2786,7 +2786,7 @@ export const MAPS9 = {
     "npcs": [
       {"x": 13, "y": 13, "name": "CAPT NORTHSTAR", "art": "sailor", "skin": "#e8b888", "shirt": "#3a6ac0", "pants": "#2a3a4a", "hair": "#1a1a1a", "dialogue": ["The northern run — Clashfield, out on the Battle Zone island. My boat respects the ice and nothing else.", "Trainers come back from that island taller. Or quieter. Both are forms of taller."], "ferry": "fight-area"},
       {"x": 9, "y": 4, "name": "MART CLERK", "art": "clerk-borea", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#1a1a2a", "dialogue": ["Rimefall City Mart — stocked for the road ahead."], "mart": {"stock": ["ultraball", "hyperpotion", "maxpotion", "fullheal", "revive", "escaperope"]}},
-      {"x": 11, "y": 7, "name": "TEMPLE ACOLYTE REN", "art": "youngster", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#4a3a2a", "dialogue": ["The temple's deep room has slept since before the town had a name. We sweep its steps and do not knock.", "Neve trains in the gym yard at dawn, in the snow, on purpose. The snow respects her."]},
+      {"x": 11, "y": 7, "name": "TEMPLE ACOLYTE REN", "art": "cast-ren", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#4a3a2a", "dialogue": ["The temple's deep room has slept since before the town had a name. We sweep its steps and do not knock.", "Neve trains in the gym yard at dawn, in the snow, on purpose. The snow respects her."]},
       {"x": 19, "y": 13, "name": "ICE FISHER SOLVI", "art": "fisher", "skin": "#d8a878", "shirt": "#7a4a8a", "pants": "#2a2a3a", "hair": "#c0c0c0", "dialogue": ["Lake Insight's ice sings at night — expanding, settling, gossiping. The cave under it keeps the lake's old heart.", "SNOWFIR follow the drifts into town and apply for citizenship. Granted, mostly."]},
     ],
     "encounters": {"rate": 0.1, "table": [{"species": "snover", "min": 362, "max": 368, "weight": 22}, {"species": "sneasel", "min": 362, "max": 368, "weight": 16}, {"species": "swinub", "min": 361, "max": 367, "weight": 18}, {"species": "snorunt", "min": 362, "max": 368, "weight": 12}, {"species": "meditite", "min": 361, "max": 367, "weight": 12}], "water": [{"species": "tentacool", "min": 358, "max": 366, "weight": 22}, {"species": "magikarp", "min": 358, "max": 365, "weight": 18}, {"species": "wingull", "min": 359, "max": 366, "weight": 16}, {"species": "pelipper", "min": 361, "max": 368, "weight": 10}, {"species": "mantyke", "min": 360, "max": 367, "weight": 10}, {"species": "finneon", "min": 360, "max": 367, "weight": 12}], "waterRate": 0.08},
@@ -2845,7 +2845,7 @@ export const MAPS9 = {
     ],
     "npcs": [
       {"x": 9, "y": 4, "name": "MART CLERK", "art": "clerk-borea", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#1a1a2a", "dialogue": ["Brightshore City Mart — stocked for the road ahead."], "mart": {"stock": ["ultraball", "hyperpotion", "maxpotion", "fullheal", "revive", "escaperope"]}},
-      {"x": 11, "y": 7, "name": "PANEL TECH JUNIPER", "art": "worker", "skin": "#f0c8a0", "shirt": "#3a7a4a", "pants": "#4a3a2a", "hair": "#2a1a0a", "dialogue": ["Every road in Brightshore is a solar panel that permits feet. The city runs on sunlight and stubbornness.", "Rainer rebuilt the gym three times this year. Not broken — bored. There's a difference and it matters."]},
+      {"x": 11, "y": 7, "name": "PANEL TECH JUNIPER", "art": "cast-juniper-tech", "skin": "#f0c8a0", "shirt": "#3a7a4a", "pants": "#4a3a2a", "hair": "#2a1a0a", "dialogue": ["Every road in Brightshore is a solar panel that permits feet. The city runs on sunlight and stubbornness.", "Rainer rebuilt the gym three times this year. Not broken — bored. There's a difference and it matters."]},
       {"x": 18, "y": 13, "name": "LIGHTHOUSE KEEPER BLY", "art": "sailor", "skin": "#e8b888", "shirt": "#3a6ac0", "pants": "#2a3a4a", "hair": "#1a1a1a", "dialogue": ["North: Route 223, all water, to the Summit Road shore. I light the way; the way does the rest.", "The League cliff shows white over the water some mornings. Every trainer in town has aimed at it once."]},
       {"x": 7, "y": 10, "name": "SUN KID SOLA", "art": "kid", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#4a3a2a", "dialogue": ["I race the panel glints down the main street. The glints cheat — they move at light speed.", "POUCHBILL deliver the harbour mail. Tips are fish. I am not in the delivery business."]},
     ],
@@ -2976,7 +2976,7 @@ export const MAPS9 = {
       {"x": 12, "y": 7, "text": "ROUTE 210 — NORTH — The fog road. Astral sleeps west in the mountain’s lap; the Repose road drops east. In fog, walk by ear: the grass keeps talking."},
     ],
     "npcs": [
-      {"x": 14, "y": 11, "name": "FOG WALKER UMBER", "art": "hiker", "skin": "#e8b888", "shirt": "#3a6ac0", "pants": "#2a3a4a", "hair": "#1a1a1a", "dialogue": ["The fog here is a resident, not a weather. It has seniority and it knows the road better than the road does.", "Something with a bell clears its throat in the murk some mornings. The murk approves."]},
+      {"x": 14, "y": 11, "name": "FOG WALKER UMBER", "art": "cast-umber", "skin": "#e8b888", "shirt": "#3a6ac0", "pants": "#2a3a4a", "hair": "#1a1a1a", "dialogue": ["The fog here is a resident, not a weather. It has seniority and it knows the road better than the road does.", "Something with a bell clears its throat in the murk some mornings. The murk approves."]},
     ],
     "encounters": {"rate": 0.13, "table": [{"species": "meditite", "min": 346, "max": 353, "weight": 18}, {"species": "bronzor", "min": 346, "max": 353, "weight": 16}, {"species": "chatot", "min": 347, "max": 354, "weight": 14}, {"species": "staravia", "min": 346, "max": 353, "weight": 16}, {"species": "misdreavus", "min": 347, "max": 354, "weight": 8}, {"species": "bibarel", "min": 346, "max": 352, "weight": 12}], "water": [{"species": "tentacool", "min": 340, "max": 348, "weight": 24}, {"species": "magikarp", "min": 340, "max": 347, "weight": 20}, {"species": "wingull", "min": 341, "max": 348, "weight": 18}, {"species": "shellos", "min": 341, "max": 348, "weight": 14}, {"species": "gastrodon", "min": 344, "max": 350, "weight": 6}, {"species": "floatzel", "min": 343, "max": 350, "weight": 8}], "waterRate": 0.08},
     "items": [],
@@ -3017,7 +3017,7 @@ export const MAPS9 = {
       {"x": 12, "y": 7, "text": "ROUTE 213 — Fenland to the Gallant lakefront. Salt on the wind, hotels on the hill, and the lake shining through the trees."},
     ],
     "npcs": [
-      {"x": 10, "y": 11, "name": "BEACHCOMBER RUE", "art": "lady", "skin": "#d8a878", "shirt": "#7a4a8a", "pants": "#2a2a3a", "hair": "#c0c0c0", "dialogue": ["The lakefront hotels keep their boats painted and their secrets unpainted.", "Gallant's water runs bluer than the sea it neighbours. The lake has standards."]},
+      {"x": 10, "y": 11, "name": "BEACHCOMBER RUE", "art": "cast-rue", "skin": "#d8a878", "shirt": "#7a4a8a", "pants": "#2a2a3a", "hair": "#c0c0c0", "dialogue": ["The lakefront hotels keep their boats painted and their secrets unpainted.", "Gallant's water runs bluer than the sea it neighbours. The lake has standards."]},
     ],
     "encounters": {"rate": 0.13, "table": [{"species": "shellos", "min": 344, "max": 350, "weight": 18}, {"species": "buizel", "min": 344, "max": 350, "weight": 16}, {"species": "wingull", "min": 344, "max": 350, "weight": 16}, {"species": "psyduck", "min": 345, "max": 351, "weight": 14}, {"species": "floatzel", "min": 346, "max": 352, "weight": 8}, {"species": "gastrodon", "min": 346, "max": 352, "weight": 8}], "water": [{"species": "tentacool", "min": 340, "max": 348, "weight": 24}, {"species": "magikarp", "min": 340, "max": 347, "weight": 20}, {"species": "wingull", "min": 341, "max": 348, "weight": 18}, {"species": "shellos", "min": 341, "max": 348, "weight": 14}, {"species": "gastrodon", "min": 344, "max": 350, "weight": 6}, {"species": "floatzel", "min": 343, "max": 350, "weight": 8}], "waterRate": 0.08},
     "items": [],
@@ -3063,7 +3063,7 @@ export const MAPS9 = {
       {"x": 20, "y": 7, "text": "VERNAL PATH — East. The lane the seasons use."},
     ],
     "npcs": [
-      {"x": 9, "y": 12, "name": "LAKESHORE HAND TOV", "art": "worker", "skin": "#f0c8a0", "shirt": "#3a7a4a", "pants": "#4a3a2a", "hair": "#2a1a0a", "dialogue": ["I keep the fences between the road and the lake's temper. Both hold, most years.", "TWINNECK graze the east meadow. Two heads, two opinions, one lunch."]},
+      {"x": 9, "y": 12, "name": "LAKESHORE HAND TOV", "art": "cast-tov", "skin": "#f0c8a0", "shirt": "#3a7a4a", "pants": "#4a3a2a", "hair": "#2a1a0a", "dialogue": ["I keep the fences between the road and the lake's temper. Both hold, most years.", "TWINNECK graze the east meadow. Two heads, two opinions, one lunch."]},
     ],
     "encounters": {"rate": 0.13, "table": [{"species": "ponyta", "min": 350, "max": 357, "weight": 18}, {"species": "staravia", "min": 350, "max": 357, "weight": 16}, {"species": "luxio", "min": 351, "max": 358, "weight": 14}, {"species": "rapidash", "min": 353, "max": 359, "weight": 6}, {"species": "girafarig", "min": 351, "max": 358, "weight": 10}, {"species": "bibarel", "min": 350, "max": 356, "weight": 12}], "water": [{"species": "tentacool", "min": 340, "max": 348, "weight": 24}, {"species": "magikarp", "min": 340, "max": 347, "weight": 20}, {"species": "wingull", "min": 341, "max": 348, "weight": 18}, {"species": "shellos", "min": 341, "max": 348, "weight": 14}, {"species": "gastrodon", "min": 344, "max": 350, "weight": 6}, {"species": "floatzel", "min": 343, "max": 350, "weight": 8}], "waterRate": 0.08},
     "items": [],
@@ -3104,7 +3104,7 @@ export const MAPS9 = {
       {"x": 12, "y": 7, "text": "VERNAL PATH — The lane the seasons use. Farewell Spring lies east, quiet as held breath."},
     ],
     "npcs": [
-      {"x": 9, "y": 11, "name": "QUIET WALKER ANKA", "art": "lady", "skin": "#d8a878", "shirt": "#7a4a8a", "pants": "#2a2a3a", "hair": "#c0c0c0", "dialogue": ["People lower their voices on this path without being asked. The spring has that effect, and so does what is behind it.", "The cave at the spring is older than the path, the town, and possibly the mountain."]},
+      {"x": 9, "y": 11, "name": "QUIET WALKER ANKA", "art": "cast-anka", "skin": "#d8a878", "shirt": "#7a4a8a", "pants": "#2a2a3a", "hair": "#c0c0c0", "dialogue": ["People lower their voices on this path without being asked. The spring has that effect, and so does what is behind it.", "The cave at the spring is older than the path, the town, and possibly the mountain."]},
     ],
     "encounters": {"rate": 0.12, "table": [{"species": "buneary", "min": 352, "max": 358, "weight": 20}, {"species": "roselia", "min": 352, "max": 358, "weight": 16}, {"species": "combee", "min": 352, "max": 358, "weight": 14}, {"species": "cherubi", "min": 352, "max": 358, "weight": 12}, {"species": "staravia", "min": 352, "max": 357, "weight": 14}], "water": [{"species": "magikarp", "min": 351, "max": 357, "weight": 40}], "waterRate": 0.08},
     "items": [],
@@ -3187,7 +3187,7 @@ export const MAPS9 = {
       {"x": 17, "y": 6, "text": "THE CLIMB FACE — Cut holds in good stone, up to the high bench. A wall to most; a road to the ones who carry the climb."},
     ],
     "npcs": [
-      {"x": 9, "y": 12, "name": "CLIMBER SORREL", "art": "hiker", "skin": "#e8b888", "shirt": "#3a6ac0", "pants": "#2a3a4a", "hair": "#1a1a1a", "dialogue": ["I have read that face like a book for six winters. The last chapter needs a partner who knows the climb craft.", "Insight's cave is worth the cold. The lake keeps its heart under the ice, and the cave is where it beats."]},
+      {"x": 9, "y": 12, "name": "CLIMBER SORREL", "art": "cast-sorrel-climber", "skin": "#e8b888", "shirt": "#3a6ac0", "pants": "#2a3a4a", "hair": "#1a1a1a", "dialogue": ["I have read that face like a book for six winters. The last chapter needs a partner who knows the climb craft.", "Insight's cave is worth the cold. The lake keeps its heart under the ice, and the cave is where it beats."]},
     ],
     "encounters": {"rate": 0.13, "table": [{"species": "snover", "min": 364, "max": 371, "weight": 20}, {"species": "sneasel", "min": 364, "max": 371, "weight": 16}, {"species": "swinub", "min": 363, "max": 370, "weight": 16}, {"species": "piloswine", "min": 366, "max": 372, "weight": 8}, {"species": "snorunt", "min": 364, "max": 371, "weight": 12}, {"species": "abomasnow", "min": 367, "max": 373, "weight": 5}], "water": [{"species": "tentacool", "min": 358, "max": 366, "weight": 22}, {"species": "magikarp", "min": 358, "max": 365, "weight": 18}, {"species": "wingull", "min": 359, "max": 366, "weight": 16}, {"species": "pelipper", "min": 361, "max": 368, "weight": 10}, {"species": "mantyke", "min": 360, "max": 367, "weight": 10}, {"species": "finneon", "min": 360, "max": 367, "weight": 12}], "waterRate": 0.08},
     "items": [],
@@ -3353,7 +3353,7 @@ export const MAPS9 = {
       {"x": 12, "y": 7, "text": "ROUTE 222 — The Brightshore beach road. The panels start glinting a mile before the city does."},
     ],
     "npcs": [
-      {"x": 10, "y": 11, "name": "BEACH TRAINER SOL", "art": "youngster", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#4a3a2a", "dialogue": ["My VOLTIGRE charges off the road panels on bright days. Brightshore provides; we just plug in.", "The lake road west is all hotels and shining water. Rich people's weather."]},
+      {"x": 10, "y": 11, "name": "BEACH TRAINER SOL", "art": "cast-sol-beach", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#4a3a2a", "dialogue": ["My VOLTIGRE charges off the road panels on bright days. Brightshore provides; we just plug in.", "The lake road west is all hotels and shining water. Rich people's weather."]},
     ],
     "encounters": {"rate": 0.12, "table": [{"species": "wingull", "min": 368, "max": 375, "weight": 20}, {"species": "luxio", "min": 368, "max": 375, "weight": 16}, {"species": "pelipper", "min": 370, "max": 377, "weight": 10}, {"species": "pachirisu", "min": 368, "max": 375, "weight": 14}, {"species": "floatzel", "min": 370, "max": 377, "weight": 10}, {"species": "electabuzz", "min": 370, "max": 377, "weight": 6}], "water": [{"species": "tentacool", "min": 368, "max": 378, "weight": 22}, {"species": "magikarp", "min": 368, "max": 375, "weight": 16}, {"species": "wingull", "min": 369, "max": 378, "weight": 18}, {"species": "pelipper", "min": 371, "max": 380, "weight": 10}, {"species": "mantine", "min": 372, "max": 380, "weight": 8}, {"species": "lumineon", "min": 372, "max": 380, "weight": 8}, {"species": "gyarados", "min": 374, "max": 382, "weight": 4}], "waterRate": 0.08},
     "items": [],
@@ -3600,7 +3600,7 @@ export const MAPS9 = {
       {"x": 12, "y": 7, "text": "ROUTE 227 — The Stark road. Kian on the wind, heat in the stone, and the mountain’s door at the end of it."},
     ],
     "npcs": [
-      {"x": 9, "y": 12, "name": "ASH WALKER BRYN", "art": "hiker", "skin": "#e8b888", "shirt": "#3a6ac0", "pants": "#2a3a4a", "hair": "#1a1a1a", "dialogue": ["The mountain breathes out on this road. Walk like a guest and it tolerates you.", "MAGMADOME leave glass trails where the ash is hottest. Pretty. Do not step."]},
+      {"x": 9, "y": 12, "name": "ASH WALKER BRYN", "art": "cast-bryn-ashwalker", "skin": "#e8b888", "shirt": "#3a6ac0", "pants": "#2a3a4a", "hair": "#1a1a1a", "dialogue": ["The mountain breathes out on this road. Walk like a guest and it tolerates you.", "MAGMADOME leave glass trails where the ash is hottest. Pretty. Do not step."]},
     ],
     "encounters": {"rate": 0.13, "table": [{"species": "camerupt", "min": 393, "max": 399, "weight": 12}, {"species": "rhydon", "min": 393, "max": 399, "weight": 12}, {"species": "skarmory", "min": 393, "max": 399, "weight": 10}, {"species": "fearow", "min": 393, "max": 398, "weight": 14}, {"species": "golem", "min": 394, "max": 400, "weight": 8}, {"species": "magcargo", "min": 393, "max": 399, "weight": 10}], "water": [{"species": "tentacool", "min": 388, "max": 396, "weight": 20}, {"species": "magikarp", "min": 388, "max": 395, "weight": 14}, {"species": "wingull", "min": 389, "max": 396, "weight": 16}, {"species": "pelipper", "min": 390, "max": 397, "weight": 10}, {"species": "mantine", "min": 391, "max": 398, "weight": 8}, {"species": "lumineon", "min": 391, "max": 398, "weight": 8}, {"species": "gyarados", "min": 392, "max": 399, "weight": 5}], "waterRate": 0.08},
     "items": [],
@@ -3921,7 +3921,7 @@ export const MAPS9 = {
       {"x": 18, "y": 2, "text": "FAREWELL SPRING — A fourth lake that the old maps leave off, in the fourth direction. The cave behind it turns back on itself, and then keeps going."},
     ],
     "npcs": [
-      {"x": 12, "y": 6, "name": "SPRING KEEPER MOSS", "art": "elder", "skin": "#e8b888", "shirt": "#b0503c", "pants": "#2a2a3a", "hair": "#5a3a2a", "dialogue": ["Four lakes in Borea, whatever the maps say. This one sends off what the others keep.", "The cave turns back three times. What waits in the last turn is not for the keeper to name."]},
+      {"x": 12, "y": 6, "name": "SPRING KEEPER MOSS", "art": "cast-moss-spring", "skin": "#e8b888", "shirt": "#6a5a8a", "pants": "#2a2a3a", "hair": "#5a3a2a", "dialogue": ["Four lakes in Borea, whatever the maps say. This one sends off what the others keep.", "The cave turns back three times. What waits in the last turn is not for the keeper to name."]},
     ],
     "encounters": {"rate": 0.11, "table": [{"species": "buneary", "min": 354, "max": 360, "weight": 20}, {"species": "roselia", "min": 354, "max": 360, "weight": 16}, {"species": "staravia", "min": 354, "max": 360, "weight": 16}, {"species": "golduck", "min": 356, "max": 362, "weight": 8}], "water": [{"species": "magikarp", "min": 354, "max": 360, "weight": 28}, {"species": "psyduck", "min": 355, "max": 361, "weight": 22}, {"species": "golduck", "min": 357, "max": 363, "weight": 8}], "waterRate": 0.08},
     "items": [],
@@ -4286,7 +4286,7 @@ export const MAPS9 = {
     ],
     "npcs": [
       {"x": 13, "y": 12, "name": "SAILOR BRINE", "art": "sailor", "skin": "#e8b888", "shirt": "#3a6ac0", "pants": "#2a3a4a", "hair": "#1a1a1a", "dialogue": ["Bridgeport, when you're ready. The harbour keeps island hours: whenever the boat is in, which is now.", "The island gives back iron and stories in equal weight. Spend both carefully."], "ferry": "canalave"},
-      {"x": 8, "y": 6, "name": "PROSPECTOR HALDEN", "art": "worker", "skin": "#f0c8a0", "shirt": "#3a7a4a", "pants": "#4a3a2a", "hair": "#2a1a0a", "dialogue": ["Steel types grow fat on this island's dust. My ROCKWYRM has opinions about seasoning.", "A trainer with an egg walked these caves for a season. The island remembers him kindly."]},
+      {"x": 8, "y": 6, "name": "PROSPECTOR HALDEN", "art": "cast-halden", "skin": "#f0c8a0", "shirt": "#3a7a4a", "pants": "#4a3a2a", "hair": "#2a1a0a", "dialogue": ["Steel types grow fat on this island's dust. My ROCKWYRM has opinions about seasoning.", "A trainer with an egg walked these caves for a season. The island remembers him kindly."]},
     ],
     "encounters": {"rate": 0.12, "table": [{"species": "graveler", "min": 356, "max": 363, "weight": 18}, {"species": "onix", "min": 357, "max": 364, "weight": 12}, {"species": "steelix", "min": 361, "max": 368, "weight": 4}, {"species": "golbat", "min": 356, "max": 363, "weight": 14}, {"species": "bronzor", "min": 357, "max": 364, "weight": 14}], "water": [{"species": "tentacool", "min": 358, "max": 366, "weight": 22}, {"species": "magikarp", "min": 358, "max": 365, "weight": 18}, {"species": "wingull", "min": 359, "max": 366, "weight": 16}, {"species": "pelipper", "min": 361, "max": 368, "weight": 10}, {"species": "mantyke", "min": 360, "max": 367, "weight": 10}, {"species": "finneon", "min": 360, "max": 367, "weight": 12}], "waterRate": 0.08},
     "items": [],
@@ -4479,7 +4479,7 @@ export const MAPS9 = {
       {"x": 8, "y": 3, "text": "BLAZE IRONWORKS — Charcoal, river iron, and a floor that has never once been cold. The foreman counts ingots the way misers count birthdays."},
     ],
     "npcs": [
-      {"x": 9, "y": 5, "name": "FOREMAN FUEGO", "art": "worker", "skin": "#f0c8a0", "shirt": "#3a7a4a", "pants": "#4a3a2a", "hair": "#2a1a0a", "dialogue": ["Iron in, iron out, and the river pays the difference. My LAVAMANDER run the bellows and unionised the breaks themselves.", "The windworks spin for the towns; we burn for the mountain roads. Borea runs on both weathers."]},
+      {"x": 9, "y": 5, "name": "FOREMAN FUEGO", "art": "cast-fuego", "skin": "#f0c8a0", "shirt": "#3a7a4a", "pants": "#4a3a2a", "hair": "#2a1a0a", "dialogue": ["Iron in, iron out, and the river pays the difference. My LAVAMANDER run the bellows and unionised the breaks themselves.", "The windworks spin for the towns; we burn for the mountain roads. Borea runs on both weathers."]},
     ],
     "encounters": {"rate": 0.11, "table": [{"species": "magmar", "min": 350, "max": 357, "weight": 18}, {"species": "machop", "min": 350, "max": 357, "weight": 16}, {"species": "koffing", "min": 351, "max": 358, "weight": 12}, {"species": "numel", "min": 351, "max": 358, "weight": 12}]},
     "items": [],
@@ -4691,7 +4691,7 @@ export const MAPS9 = {
     ],
     "npcs": [
       {"x": 9, "y": 4, "name": "MART CLERK", "art": "clerk-borea", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#1a1a1a", "dialogue": ["Wildreach Mart — stocked for the road ahead."], "mart": {"stock": ["ultraball", "hyperpotion", "maxpotion", "fullheal", "revive", "escaperope"]}},
-      {"x": 11, "y": 7, "name": "TRAIL COOK BORIN", "art": "worker", "skin": "#f0c8a0", "shirt": "#3a7a4a", "pants": "#4a3a2a", "hair": "#2a1a0a", "dialogue": ["I feed everyone who walks in standing up. The Zone sends me the rest by stretcher, joking. Mostly joking.", "The Palmside road runs by water — cliffs make the land way a rumour. Sail it or swim it; the town recommends the first."]},
+      {"x": 11, "y": 7, "name": "TRAIL COOK BORIN", "art": "cast-borin", "skin": "#f0c8a0", "shirt": "#3a7a4a", "pants": "#4a3a2a", "hair": "#2a1a0a", "dialogue": ["I feed everyone who walks in standing up. The Zone sends me the rest by stretcher, joking. Mostly joking.", "The Palmside road runs by water — cliffs make the land way a rumour. Sail it or swim it; the town recommends the first."]},
       {"x": 18, "y": 12, "name": "CARTOGRAPHER WREN", "art": "scientist", "skin": "#c89878", "shirt": "#2a7a6a", "pants": "#3a3a4a", "hair": "#7a4a1a", "dialogue": ["I am re-charting this island at walking pace. It keeps being bigger than the charts, rudely.", "Stark's crater stone is the island's first fact. Everything else is commentary."]},
     ],
     "encounters": {"rate": 0.09, "table": [{"species": "bibarel", "min": 390, "max": 396, "weight": 18}, {"species": "fearow", "min": 390, "max": 396, "weight": 14}, {"species": "staravia", "min": 390, "max": 396, "weight": 16}], "water": [{"species": "tentacool", "min": 388, "max": 396, "weight": 20}, {"species": "magikarp", "min": 388, "max": 395, "weight": 14}, {"species": "wingull", "min": 389, "max": 396, "weight": 16}, {"species": "pelipper", "min": 390, "max": 397, "weight": 10}, {"species": "mantine", "min": 391, "max": 398, "weight": 8}, {"species": "lumineon", "min": 391, "max": 398, "weight": 8}, {"species": "gyarados", "min": 392, "max": 399, "weight": 5}], "waterRate": 0.08},
@@ -4754,7 +4754,7 @@ export const MAPS9 = {
     "npcs": [
       {"x": 9, "y": 4, "name": "MART CLERK", "art": "clerk-borea", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#1a1a1a", "dialogue": ["Palmside Mart — stocked for the road ahead."], "mart": {"stock": ["ultraball", "hyperpotion", "maxpotion", "fullheal", "revive", "escaperope"]}},
       {"x": 11, "y": 7, "name": "VILLA HOSTESS PRIA", "art": "host-borea", "skin": "#d8a878", "shirt": "#7a4a8a", "pants": "#2a2a3a", "hair": "#c0c0c0", "dialogue": ["Champions rest here between legends. The villas keep their towels folded and their stories unfolded.", "The desert gate is the north-east lane — sand country, storm fence, and SANDPOTAM with seniority."]},
-      {"x": 18, "y": 13, "name": "GROUNDSKEEPER TAM", "art": "worker", "skin": "#f0c8a0", "shirt": "#3a7a4a", "pants": "#4a3a2a", "hair": "#2a1a0a", "dialogue": ["I mow around the flower beds and the resting champions both. One of those compliments the work.", "Stark smokes east every clear day. The Palmside pretends not to notice, beautifully."]},
+      {"x": 18, "y": 13, "name": "GROUNDSKEEPER TAM", "art": "cast-tam-grounds", "skin": "#f0c8a0", "shirt": "#3a7a4a", "pants": "#4a3a2a", "hair": "#2a1a0a", "dialogue": ["I mow around the flower beds and the resting champions both. One of those compliments the work.", "Stark smokes east every clear day. The Palmside pretends not to notice, beautifully."]},
     ],
     "encounters": {"rate": 0.09, "table": [{"species": "bibarel", "min": 392, "max": 398, "weight": 16}, {"species": "staravia", "min": 392, "max": 398, "weight": 16}, {"species": "wingull", "min": 392, "max": 398, "weight": 16}], "water": [{"species": "tentacool", "min": 388, "max": 396, "weight": 20}, {"species": "magikarp", "min": 388, "max": 395, "weight": 14}, {"species": "wingull", "min": 389, "max": 396, "weight": 16}, {"species": "pelipper", "min": 390, "max": 397, "weight": 10}, {"species": "mantine", "min": 391, "max": 398, "weight": 8}, {"species": "lumineon", "min": 391, "max": 398, "weight": 8}, {"species": "gyarados", "min": 392, "max": 399, "weight": 5}], "waterRate": 0.08},
     "items": [],
@@ -5126,7 +5126,7 @@ export const MAPS9 = {
     "signs": [
     ],
     "npcs": [
-      {"x": 7, "y": 3, "name": "PANEL HOST JUNIPER", "art": "worker", "skin": "#f0c8a0", "shirt": "#3a7a4a", "pants": "#4a3a2a", "hair": "#2a1a0a", "dialogue": ["The roof is a panel, the road is a panel, and on bright days the whole house hums at a comfortable voltage.", "Rainer wired his own house twice. The second time was for the pleasure of the first, done better."]},
+      {"x": 7, "y": 3, "name": "PANEL HOST JUNIPER", "art": "cast-juniper-host", "skin": "#f0c8a0", "shirt": "#3a7a4a", "pants": "#4a3a2a", "hair": "#2a1a0a", "dialogue": ["The roof is a panel, the road is a panel, and on bright days the whole house hums at a comfortable voltage.", "Rainer wired his own house twice. The second time was for the pleasure of the first, done better."]},
     ],
     "encounters": null,
     "items": [],
@@ -5391,7 +5391,7 @@ export const MAPS9 = {
       {"x": 8, "y": 3, "text": "THE ASTRAL SHRINE — Three small shrines for three lake spirits, and a fourth space left empty on purpose, for what stands above them."},
     ],
     "npcs": [
-      {"x": 8, "y": 7, "name": "SHRINE ELDER UME", "art": "elder", "skin": "#e8b888", "shirt": "#b0503c", "pants": "#2a2a3a", "hair": "#5a3a2a", "dialogue": ["The murals through that door tell it in pictures: emotion, knowledge, willpower — and the world they were given to.", "Copy the paintings if you like. Everyone does. The shrine considers it correspondence."]},
+      {"x": 8, "y": 7, "name": "SHRINE ELDER UME", "art": "cast-ume", "skin": "#e8b888", "shirt": "#b0503c", "pants": "#2a2a3a", "hair": "#5a3a2a", "dialogue": ["The murals through that door tell it in pictures: emotion, knowledge, willpower — and the world they were given to.", "Copy the paintings if you like. Everyone does. The shrine considers it correspondence."]},
     ],
     "encounters": null,
     "items": [],

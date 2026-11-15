@@ -328,7 +328,7 @@ export const MAPS8 = {
         "x": 30,
         "y": 6,
         "name": "OLD HAND BRAM",
-        "art": "elder",
+        "art": "cast-bram-oldhand",
         "skin": "#e8b888",
         "shirt": "#b0503c",
         "pants": "#2a2a3a",

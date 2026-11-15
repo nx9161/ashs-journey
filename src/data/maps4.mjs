@@ -359,7 +359,7 @@ export const MAPS4 = {
       // Wave 5b: the one resident whose dialogue names her house ("My
       // house? The warden borrows it half the year...") — same NPC,
       // same lines, now standing inside it (was Bramble (2,5)).
-      { x: 6, y: 2, name: 'AUNTIE MOSS', art: 'elder', skin: '#e8b888', shirt: '#50368e', pants: '#4a4a5a', hair: '#c0c0c0',
+      { x: 6, y: 2, name: 'AUNTIE MOSS', art: 'cast-moss', skin: '#e8b888', shirt: '#50368e', pants: '#4a4a5a', hair: '#c0c0c0',
         dialogue: ["My house? The warden borrows it half the year and leaves it smelling of bait and boot polish.", "If I'd a spare set of teeth I'd trade him for his, just to end the mumbling. Family rates, of course."] },
     ],
     encounters: null, items: [], hidden: [], events: [], start: null,
