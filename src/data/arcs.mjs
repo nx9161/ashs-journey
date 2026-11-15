@@ -101,6 +101,7 @@ export const ARCS = [
       '— days at sea —',
       'The water turns the colour of warm glass. Somewhere ahead: Marisol Island, and a ball that will not open.',
     ],
+    enRoutePanel: 'crossing-orange',
   },
   {
     id: 'johto', n: 2, label: 'Arc 2', region: 'Yamato', regionKey: 'johto',
@@ -123,6 +124,7 @@ export const ARCS = [
       '— days at sea —',
       'Gulls first, then a coastline of old towers. Yamato.',
     ],
+    enRoutePanel: 'crossing-johto',
   },
   {
     id: 'hoenn', n: 3, label: 'Arc 3', region: 'Maris', regionKey: 'hoenn',
@@ -145,6 +147,7 @@ export const ARCS = [
       '— days at sea —',
       'The rain arrives before the land does. Maris, arguing with its own ocean.',
     ],
+    enRoutePanel: 'crossing-hoenn',
   },
   {
     id: 'frontier', n: 3.5, label: 'Arc 3.5', region: 'Trial Grounds', regionKey: 'kanto',
@@ -167,6 +170,7 @@ export const ARCS = [
       '— a short crossing —',
       'An island of arenas rises out of the haze. The Frontier.',
     ],
+    enRoutePanel: 'crossing-frontier',
   },
   {
     id: 'sinnoh', n: 4, label: 'Arc 4', region: 'Borea', regionKey: 'sinnoh',
@@ -189,6 +193,7 @@ export const ARCS = [
       '— days at sea —',
       'The air sharpens mile by mile. Ahead: snow on the peaks, and Borea.',
     ],
+    enRoutePanel: 'crossing-sinnoh',
   },
   // ---- Sealed future arcs (beyond Borea; ADR-027 Decision 2) ----
   // Designed skeleton per ADR-015 ch 9-13: rows exist so the Journey menu,

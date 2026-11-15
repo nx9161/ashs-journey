@@ -60,4 +60,12 @@ export const PANELS = {
   'gracidea-grathog': { art: 'panel-gracidea-grathog' },
   'storm-sanctum': { art: 'panel-storm-sanctum' },
   'parley-plaza': { art: 'panel-parley-plaza' },
+  // W10-C T1 — embark crossings (Class H, surface attach: the arc
+  // record's enRoutePanel field names the moment; the T0 ferry seam
+  // plays it after the en-route card, before landFerry())
+  'crossing-orange': { art: 'panel-crossing-orange' },
+  'crossing-johto': { art: 'panel-crossing-johto' },
+  'crossing-hoenn': { art: 'panel-crossing-hoenn' },
+  'crossing-frontier': { art: 'panel-crossing-frontier' },
+  'crossing-sinnoh': { art: 'panel-crossing-sinnoh' },
 };
