@@ -5232,6 +5232,63 @@ W17L_KIND_DEFS.forEach(([kind], i) => {
 const W17L_PROP_KINDS = W17L_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
 const W17L_WALL_KINDS = W17L_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
 const W17L_FLOOR_KINDS = W17L_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
+// Wave W17-M (Route Build Program, Maris Tranche 2 — the Mistford
+// surf arc): five sea lanes west and east of Mistford, each its
+// own shore register under the NO-SAME-KIT law. All five maps are
+// defined once in maps7.mjs (no dual copies in Maris, so no
+// registry re-pins arise). Sea-lane discipline (the R40/R41
+// precedent): the water is byte-preserved entire — conversions
+// are sand -> own sand + rock -> own rock only, after the
+// trigger-char census ('R' counts equal the shipped rock counts
+// exactly on all five lanes: 14/13/5/22/5; enc.cave=false
+// everywhere, so no encounter trigger can move). Route 105 "Sea
+// Tomb Lane" (1277-1278): tombsand a stone-pale tomb-shore sand,
+// tombrock the drowned colonnade rock with column-joint drawing;
+// its 2 'L' Sea Tomb mouth cells are warp cells standing on
+// cavefloor — byte-preserved, never converted. Route 106 "Last
+// Shallows" (1279-1280): cairnsand a bright town-shore sand,
+// cairnrock the dark crag rock — the cave-dark register against
+// the bright little town it guards. Route 107 "Open Swell"
+// (1281-1282): swellsand swell-shore sand flecks, nearly awash,
+// swellrock a reef-shadow rock barely breaking the surface; the
+// lane is open swell (5+5 convertible cells — the spec-presence
+// exception is pre-recorded in the program plan, R40 precedent).
+// Route 108 "Wreck Water" (1283-1284): wrecksand a foam-combed
+// wreck sand, wreckrock the rib-reef rock with a long rib-joint
+// drawing — the wreck herself is design dressing over the reef
+// (no shipped hull kind; the rock conversion carries her).
+// Route 109 "Fairhaven Beach" (1285-1286): baysand the warm bay
+// beach sand of the great curved beach, swimmer-bright, bayrock
+// the harbour-mouth rock; the harbour pier is Fairhaven's own
+// town-side dressing, byte-preserved. Sand kinds are 'floor'
+// class (the shipped sand char was walkable; the swaps are 1:1),
+// rock kinds 'wall' class (the shipped 'R' rock char was never
+// walkable). Indices 1277-1286 per the program plan
+// (WAVE-W17-MARIS-ROUTE-PROGRAM-PLAN.md): W17-L took 1257-1276
+// on its parallel branch; 1111 and every earlier documented gap
+// stay empty. Kind names verified unclaimed against origin/main.
+// Chars U+1E00+1277..
+const W17M_KIND_DEFS = [
+  ['tombsand', 'floor'],
+  ['tombrock', 'wall'],
+  ['cairnsand', 'floor'],
+  ['cairnrock', 'wall'],
+  ['swellsand', 'floor'],
+  ['swellrock', 'wall'],
+  ['wrecksand', 'floor'],
+  ['wreckrock', 'wall'],
+  ['baysand', 'floor'],
+  ['bayrock', 'wall'],
+];
+const W17M_KIND_CHARS = {};
+W17M_KIND_DEFS.forEach(([kind], i) => {
+  const ch = String.fromCodePoint(0x1E00 + 1277 + i);
+  W17M_KIND_CHARS[kind] = ch;
+  TILE_CHARS[ch] = kind;
+});
+const W17M_PROP_KINDS = W17M_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
+const W17M_WALL_KINDS = W17M_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
+const W17M_FLOOR_KINDS = W17M_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
 const SINNOH_TOWN_GROUND_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg);
 const SINNOH_TOWN_GROUND2_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg2);
 // TX-3: the 8 gym exteriors by town (original type-accent motifs).
@@ -115795,6 +115852,186 @@ const ART = {
     "abaaaaaabababaab",
     "abaaaayaaaaaayaa"
   ] },
+  "tile-tombsand": { w: 16, h: 16, pal: {"a":"#d9cfb4","b":"#c8bb9a","d":"#ab9c78","s":"#8f8672"}, rows: [
+    "aabadaabaaaaaaas",
+    "aaaaaasaaaabaaba",
+    "aaaaaabdbaaabaab",
+    "aaaaaabaababaaba",
+    "aabaaaaaadabaaba",
+    "aaaaadbaaaaaaaaa",
+    "aaaaabaaaaaaaaaa",
+    "aaaaaabaaaabbaaa",
+    "aaaaadaabaabaaaa",
+    "abaaaaaaadaaaaaa",
+    "aaaaabaaaaaaaaaa",
+    "aaaaaabaaaaabdaa",
+    "aaaaaaaaaaabaaaa",
+    "aaaaabaaaaaaaaaa",
+    "aabaaaabbaaaabaa",
+    "aaaaadddaddabaaa"
+  ] },
+  "tile-tombrock": { w: 16, h: 16, pal: {"w":"#567cbd","x":"#476baa","y":"#7093c7","c":"#93a3ac","f":"#c6d6e9","z":"#47535a","m":"#5f6d75","g":"#5d7355"}, rows: [
+    "wwwywwwwwwwwwcww",
+    "wwwywwwwwwwwcwww",
+    "wwwxwwwwwxwwwwwy",
+    "wxwcgcwwwwwwwcww",
+    "wwwzmmwwwwwcccww",
+    "wwwmmzwccgwmzmyw",
+    "wwwzzzwmcmwcccww",
+    "wwwzzmwmczwzzzww",
+    "wywmcmwzzzwmmzww",
+    "wwwzzzwmcmwmmmww",
+    "wwxmzzwmmzwzzzww",
+    "wwwmmmwzzzwmcmww",
+    "wwfffffwffffffww",
+    "wyfwyfwwwwfwwwww",
+    "wwwwcwwwwwwwwwcw",
+    "wwwwwwwywwwwwwww"
+  ] },
+  "tile-cairnsand": { w: 16, h: 16, pal: {"a":"#e7d09e","b":"#dbc284","d":"#c2a55e","w":"#f6efdb"}, rows: [
+    "aaabaababaaaaada",
+    "aaaaaabaaaaaaaaa",
+    "aadaaaaaaabwaaaa",
+    "waaaaaaabaaabaaa",
+    "aaawbadaabaaabaa",
+    "baabbaabdaaaadba",
+    "aaaaabaaaaaabaaa",
+    "aaaawaaaaaababaa",
+    "aaaaaaaabaaaaaaa",
+    "aaaaawbbaaaaaaaa",
+    "aabbaabaaaabbaaa",
+    "aaaaaaaababdaabb",
+    "aaaaaaaaaaaaaaaw",
+    "aaaaaaadbaabbaab",
+    "aaabaaaabaaadaaa",
+    "aabbaawabadaabba"
+  ] },
+  "tile-cairnrock": { w: 16, h: 16, pal: {"w":"#567cbd","x":"#476baa","y":"#7093c7","c":"#66727b","f":"#c6d6e9","z":"#2e3438","m":"#3f484e"}, rows: [
+    "wywwwwwwwwwwxwww",
+    "ywwywwwwywwwwwww",
+    "wxwwcwwwwwwwwwww",
+    "ywwwcwwwwwwwwwww",
+    "wxwwmwwwwcwwwwww",
+    "wwwczcwwwmwwwwwy",
+    "wwwmcmwwcmcwwwww",
+    "wwwmzcwwcmzwwcww",
+    "cwcmmzcwmcmwwmww",
+    "wwmmcczwmzmcwmcw",
+    "wxzmmzmwmcmzwmzw",
+    "wwmmzmcwmmzmxmcw",
+    "xwmcmmmwzcmzwmmw",
+    "wfffwfffffwwwfww",
+    "wfwwwfwwwwfwwwww",
+    "wwwwwwwwwwwwxwwx"
+  ] },
+  "tile-swellsand": { w: 16, h: 16, pal: {"a":"#c7ad7d","b":"#b3965f","d":"#96793f","w":"#eef2e2"}, rows: [
+    "aaaababdaaaaaada",
+    "aabaabababaaabaa",
+    "baaaaaawaabaabaa",
+    "aadaaaaaaaabbaaa",
+    "bbaaabaaaddwaaaa",
+    "aaaabaaabaaaabdd",
+    "aaabbaaadbawbaaa",
+    "aaabdbbaaawawaaa",
+    "badabbadabaabaaw",
+    "abaaaaadaaaaaaaa",
+    "baaabaadwaawaaaa",
+    "aaabbbabbaaaadaa",
+    "adababaaaaabaabw",
+    "daaabaadawaaaaba",
+    "aabaaaaadbbabwaa",
+    "aaaaadaadaaaaaaa"
+  ] },
+  "tile-swellrock": { w: 16, h: 16, pal: {"w":"#567cbd","x":"#476baa","y":"#7093c7","c":"#7d9184","f":"#c6d6e9","z":"#3d4a42","m":"#52645a"}, rows: [
+    "wwwwwwwwwwwcwwww",
+    "ywywwwwwwwwwwwww",
+    "wwwwwwwwwwwwwyww",
+    "wyywwwwwwwwwwwww",
+    "wwwwwwwwwwwwwwwc",
+    "wwwwwwwwwwxwwwww",
+    "wwwwffwfffffywww",
+    "wwwwcmcmmmmcwwww",
+    "wwwmzmzmcmmmzwww",
+    "wwycmmmccmczmwwx",
+    "wxywmzmmzmzzcwww",
+    "wywwwmccmmzwcwww",
+    "wxwfwffffffffwww",
+    "wwwfwwwwwwwwfwww",
+    "wwccwwcwwwwwxwww",
+    "wwwxwwwwwcwwwwww"
+  ] },
+  "tile-wrecksand": { w: 16, h: 16, pal: {"a":"#e2c08a","b":"#d3ab6d","d":"#b78f4e","w":"#f8f1dc"}, rows: [
+    "aaaaaaaaaaabawaa",
+    "bawwabaawaaaadda",
+    "aadabaaaaadawaaa",
+    "aaaaabaaaaabdbaa",
+    "aabdaaaabaaaaaaa",
+    "aaaaabaaabaabdab",
+    "aaababaaaaaaaaaa",
+    "aabababaaabaaaba",
+    "aaaaabbbaaawaaaa",
+    "aabwaaaaaaaaaaaa",
+    "abaaaabawaaabaaa",
+    "abaaaadaaaaaaaaa",
+    "aaabaaaaaaaaaaab",
+    "aaadaaaaaabbaaab",
+    "aaadaabaaaaaabaa",
+    "babbawaaaaaaaaaa"
+  ] },
+  "tile-wreckrock": { w: 16, h: 16, pal: {"w":"#567cbd","x":"#476baa","y":"#7093c7","c":"#a3804f","f":"#c6d6e9","z":"#54402c","m":"#715839"}, rows: [
+    "wwwwwwwwwywwwwxw",
+    "wwwwwwwwwwwwwwww",
+    "wwwwwwwwwwwwwwww",
+    "wwccwwccwwccwccw",
+    "wwmmwwcmwwmmwmcw",
+    "wwzmwwmmwxcmwmzy",
+    "wwwccwwzmwwzmwcm",
+    "wwwmmwwzcwwmzwcz",
+    "ywwmmcwcmwwzmwzz",
+    "wwwwcmwwcmwwzzwc",
+    "wwwwzzwwzcwwzmwc",
+    "wwwwzzwwmmwwmzwm",
+    "wwffwwffffffffww",
+    "wwfwwwwwwwfwwfww",
+    "ccwwwwwwwwwwwwyw",
+    "wwwwywwcwwwwxcww"
+  ] },
+  "tile-baysand": { w: 16, h: 16, pal: {"a":"#eed49f","b":"#e2c384","d":"#c6a55e","w":"#faf3de"}, rows: [
+    "aabaaawaaaaaaaad",
+    "aaabbaaaaababaaa",
+    "aaabaaaaaaaabaaa",
+    "aaadabaaabbbaaaa",
+    "baaaaaaaaaaababa",
+    "abaabaaaaaaaaaba",
+    "baaaaaaaaaaaaaaa",
+    "aaaaaaabaaaabaaa",
+    "baaaaaaaabbaaaba",
+    "bbaaawaaawaaaaaa",
+    "aaaaaaaadaaaabba",
+    "aaaabaaaaaaaadaa",
+    "baaabbaaaaaaaaaa",
+    "adaaaaabaaaaaaaa",
+    "baaaaabaaaaaaaaa",
+    "adaaaaaaaabaaaaa"
+  ] },
+  "tile-bayrock": { w: 16, h: 16, pal: {"w":"#567cbd","x":"#476baa","y":"#7093c7","c":"#a68d68","f":"#c6d6e9","z":"#584631","m":"#74614a"}, rows: [
+    "wwywwwywwwwwwwww",
+    "wcwwwwwwwwwwwwww",
+    "wwwwwwywwwwwwwww",
+    "ywwwwwwwwwwwwwww",
+    "wwwcccccwwwwwwww",
+    "wwcmmcmmwwxwwwyw",
+    "wwwczmzmwwcccccc",
+    "wwzmczcmmwzmmmcw",
+    "wwmmmcmmmmmmmmmz",
+    "wwwmcczcwczmzmcc",
+    "wwwmmmmcwwzmmmmw",
+    "cwcwmmmwwwmmmmmw",
+    "xwwfffffffffffww",
+    "ccwwywwwwyxwwfww",
+    "wwwwwwwwwwwwwwww",
+    "wwwcywwwwwywwcww"
+  ] },
   "tile-trialfloor": { w: 16, h: 16, pal: {"a":"#d8c08a","b":"#cdb481","m":"#bfa87c","f":"#b07a3f","l":"#e2cc9c"}, rows: [
     "aabaaafaaabaaaaa",
     "aaaaaaaaaaabaaaf",
@@ -123431,6 +123668,9 @@ for (const k of W17K_FLOOR_KINDS) TILE_ART[k] = 'tile-' + k;
 for (const k of W17L_PROP_KINDS) TILE_ART[k] = 'tile-prop-' + k;
 for (const k of W17L_WALL_KINDS) TILE_ART[k] = 'tile-' + k;
 for (const k of W17L_FLOOR_KINDS) TILE_ART[k] = 'tile-' + k;
+for (const k of W17M_PROP_KINDS) TILE_ART[k] = 'tile-prop-' + k;
+for (const k of W17M_WALL_KINDS) TILE_ART[k] = 'tile-' + k;
+for (const k of W17M_FLOOR_KINDS) TILE_ART[k] = 'tile-' + k;
 // Premium+ W6 (TX-3/PL-1): door-open frames, authored in TX-3 for every
 // door kind. The warp-fade engine that plays them lands in W7 — W6
 // wires the frames (this registry + cache.doorOpen + doorOpenCanvas)
@@ -125596,6 +125836,14 @@ function resolveTileLayers(cache, kind, x, y, kindAt, t, phase, mapId) {
     case 'bloombox':
     case 'silkoak':
     case 'silkstrand':
+    // Wave W17-M: the Maris tranche-2 sea rocks composite over
+    // their ground the same way (all arts are fully opaque —
+    // each lane's rock bakes in the sea it stands in).
+    case 'tombrock':
+    case 'cairnrock':
+    case 'swellrock':
+    case 'wreckrock':
+    case 'bayrock':
     // Wave T17: the radio mast composites over its compound grass too.
     case 'radiomast': {
       // Object tiles carry transparent surrounds (Wave 1): lay the ground
@@ -133108,6 +133356,18 @@ const WALKABLE = new Set(['.', ',', 'D', 'E', 'C', 'F', 'J', 'K', '1', '2', 'V',
   // the Maris program plan; the Yamato allocation ended at
   // 1256; 1111 stays empty.)
   ...[1257, 1258, 1261, 1262, 1265, 1266, 1269, 1270, 1273, 1274]
+    .map((i) => String.fromCodePoint(0x1E00 + i)),
+  // Wave W17-M: the Maris tranche-2 sea-lane sand chars
+  // (U+1E00+1277.., tiles.mjs W17M_KIND_DEFS) are walkable —
+  // tombsand (Route 105), cairnsand (Route 106), swellsand
+  // (Route 107), wrecksand (Route 108) and baysand (Route 109),
+  // each swapped 1:1 from the walkable sand char on its own
+  // lane, so shore stays shore. The rock chars (1278, 1280,
+  // 1282, 1284, 1286) are NOT here: they swap from the 'R'
+  // rock char, which was never walkable. (Indices 1277-1286
+  // per the Maris program plan; W17-L takes 1257-1276 on its
+  // parallel branch; 1111 stays empty.)
+  ...[1277, 1279, 1281, 1283, 1285]
     .map((i) => String.fromCodePoint(0x1E00 + i))]);
 
 // Trainer definitions for the slice.
@@ -157290,17 +157550,17 @@ const MAPS7 = {
       "~~~~~~~~~~~~~~~~~~~~~~~~",
       "~~~~~~~~~~~~~~~~~~~~~~~~",
       "~~~~~~~~~~~~~~~~~~~~~~~~",
-      "~~~~~~~~~ẞ~~~~~~~Ā~~~~~~",
-      "~~ẞ~~RLLR~~~~~~~~~~Ā~~~~",
-      "~~~~~RẞẞR~~~~~~Ā~~~~S~~~",
-      "~R~~~~~~~~~~~~~~~~~~~~~~",
-      "~~~ĀĀ~Ā~~~~~~~~ẞ~~~~~RR~",
-      "~~~Rṃ~~~~~~~~R~~~~~~~~~~",
-      "~~~~~~~~~~~~~~R~~~ẙ~~~~~",
+      "~~~~~~~~~⋽~~~~~~~Ā~~~~~~",
+      "~~⋽~~⋾LL⋾~~~~~~~~~~Ā~~~~",
+      "~~~~~⋾⋽⋽⋾~~~~~~Ā~~~~S~~~",
+      "~⋾~~~~~~~~~~~~~~~~~~~~~~",
+      "~~~ĀĀ~Ā~~~~~~~~⋽~~~~~⋾⋾~",
+      "~~~⋾ṃ~~~~~~~~⋾~~~~~~~~~~",
+      "~~~~~~~~~~~~~~⋾~~~ẙ~~~~~",
       "~~~~~~~~~~~~~~~~~~~~~~~~",
-      "~~R~~~~~~~~~~~~~~~~ẞ~~~~",
-      "~~~R~~~~~~~ẙ~~~~~~~~~~~~",
-      "~~~~~~~~~~~~R~~~~R~~~~~~",
+      "~~⋾~~~~~~~~~~~~~~~~⋽~~~~",
+      "~~~⋾~~~~~~~ẙ~~~~~~~~~~~~",
+      "~~~~~~~~~~~~⋾~~~~⋾~~~~~~",
       "~~~~~~Ā~~~~~~~~Ā~~~~~~~~",
       "~~~~~~~~~~~~~~~~~~~~~~~~",
     ],
@@ -157330,20 +157590,20 @@ const MAPS7 = {
     "weather": "clear",
     "rows": [
       "~~~~~~~~~~~~~~~~~~~~~~~~",
-      "~~~~~~~~~~~~ẙ~~~~R~~~~~~",
-      "~~~~~~~R~~~ẞ~Ā~~~~~~~~~~",
-      "~~~~~~~~~~~~~~R~~R~~Ā~R~",
-      "~R~~~~~~~R~~~~~~~~~~~~~~",
-      "~~~~~~~~~~~~~ẙ~~R~~~~~~~",
-      "~~~~~~~~~~~~ẞ~~~~~~~~~~~",
-      "~~~~~Rẙ~~~~~~ẙ~~~~~~~~~~",
-      "~~~~~~~~ẞ~~~R~~~~~~~~Ā~~",
+      "~~~~~~~~~~~~ẙ~~~~⌀~~~~~~",
+      "~~~~~~~⌀~~~⋿~Ā~~~~~~~~~~",
+      "~~~~~~~~~~~~~~⌀~~⌀~~Ā~⌀~",
+      "~⌀~~~~~~~⌀~~~~~~~~~~~~~~",
+      "~~~~~~~~~~~~~ẙ~~⌀~~~~~~~",
+      "~~~~~~~~~~~~⋿~~~~~~~~~~~",
+      "~~~~~⌀ẙ~~~~~~ẙ~~~~~~~~~~",
+      "~~~~~~~~⋿~~~⌀~~~~~~~~Ā~~",
       "~~Ā~~~~~~~Ā~~~~~~~~~~~~~",
-      "~~~~ṃ~~~~~~~~~~~~~~~~~R~",
+      "~~~~ṃ~~~~~~~~~~~~~~~~~⌀~",
       "~~~~~~~~~~~~~~ẙ~~~~~~~~~",
-      "~~~~~~~Ā~R~~~~~~~~~~~~~~",
-      "~~~ẞ~~Ā~~~~~~~S~~~~~~~~~",
-      "~~~~~~~~~~R~~~ẞ~~~~~~~~~",
+      "~~~~~~~Ā~⌀~~~~~~~~~~~~~~",
+      "~~~⋿~~Ā~~~~~~~S~~~~~~~~~",
+      "~~~~~~~~~~⌀~~~⋿~~~~~~~~~",
       "~~~~~~~~~~~~~~~~~~~~~~~~",
     ],
     "warps": [
@@ -157370,19 +157630,19 @@ const MAPS7 = {
     "weather": "clear",
     "rows": [
       "~~~~~~~~~~~~~~~~~~~~~~~~",
-      "~R~~~~~~~~~~~~~~~~~~~~~~",
-      "~~~~~~~~Ā~~~~ẙ~~~Āẞ~~~~~",
-      "~~~~~ẞ~~~~~~~~~~~Ā~~~~~~",
+      "~⌂~~~~~~~~~~~~~~~~~~~~~~",
+      "~~~~~~~~Ā~~~~ẙ~~~Ā⌁~~~~~",
+      "~~~~~⌁~~~~~~~~~~~Ā~~~~~~",
       "~~~~~~~~~~~~~Ā~ẙ~~~~~~~~",
       "~~~S~~~~Ā~~~~~~Ā~~~~~~~~",
       "~~~~~~~~~~~~Ā~~~~~~~~~~~",
       "~~~~~~~~~~~~~~~~~~~~~~~~",
       "~~ẙ~~~~~~~~~~~~~~~Ā~~~~~",
-      "~~~~~~~~~Ā~~~~~ẞ~~~R~~~~",
-      "~Ā~~~~~~~~~~~~~~~~ẞ~R~~~",
+      "~~~~~~~~~Ā~~~~~⌁~~~⌂~~~~",
+      "~Ā~~~~~~~~~~~~~~~~⌁~⌂~~~",
       "~~~~~~~~~~Ā~~Ā~~~~~~~~~~",
-      "~~~ẙ~Ā~Ā~~~~~~~~RR~~~~~~",
-      "~~~~~~~~~~~ẞ~~~~~~~~~~~~",
+      "~~~ẙ~Ā~Ā~~~~~~~~⌂⌂~~~~~~",
+      "~~~~~~~~~~~⌁~~~~~~~~~~~~",
       "~~ẙ~~~~~~~~Ā~~~~~~~~~~~~",
       "~~~~~~~~~~~~~~~~~~~~~~~~",
     ],
@@ -157410,20 +157670,20 @@ const MAPS7 = {
     "weather": "clear",
     "rows": [
       "~~~~~~~~~~~~~~~~~~~~~~~~~~",
-      "~~Ā~~R~~~~~~~~~~~~~~~~~~~~",
-      "~~~~~R~~ẙ~~~~~~~~~~~~~Ā~~~",
+      "~~Ā~~⌄~~~~~~~~~~~~~~~~~~~~",
+      "~~~~~⌄~~ẙ~~~~~~~~~~~~~Ā~~~",
       "~~~~~~Ā~~~Ā~~~ẙ~~~~~~~~~~~",
-      "~~~~~ĀĀ~~~~~~~~~~~~~~~ẞ~~~",
+      "~~~~~ĀĀ~~~~~~~~~~~~~~~⌃~~~",
       "~~~~~~Ā~~~Ā~~~~~~~~~~~~~~~",
-      "~~~~~~Ā~~~~ẞ~~~~~~~R~~~~~~",
-      "~~~~~~~~~~~RRRRRĀĀ~~~~~~~~",
-      "~~~~~~~~~Ā~R~S~R~~~~~~~~~~",
-      "~~~~~~~~~~~RRRRR~~~~~Ā~~~~",
-      "~R~~~~~~~~~~ẙ~~~~~R~~~~~~~",
-      "~~~~R~~~~~~~~~~~~~Ā~~~R~~~",
-      "~~~~Ā~~~~~~~~~~~~~~~~Rẞ~~~",
-      "~~~~~~~~~~~~~~Ā~ẞR~~~~~ẞR~",
-      "~~~~~ẞ~~~~~~~~~~~~~~~~~~ẙ~",
+      "~~~~~~Ā~~~~⌃~~~~~~~⌄~~~~~~",
+      "~~~~~~~~~~~⌄⌄⌄⌄⌄ĀĀ~~~~~~~~",
+      "~~~~~~~~~Ā~⌄~S~⌄~~~~~~~~~~",
+      "~~~~~~~~~~~⌄⌄⌄⌄⌄~~~~~Ā~~~~",
+      "~⌄~~~~~~~~~~ẙ~~~~~⌄~~~~~~~",
+      "~~~~⌄~~~~~~~~~~~~~Ā~~~⌄~~~",
+      "~~~~Ā~~~~~~~~~~~~~~~~⌄⌃~~~",
+      "~~~~~~~~~~~~~~Ā~⌃⌄~~~~~⌃⌄~",
+      "~~~~~⌃~~~~~~~~~~~~~~~~~~ẙ~",
       "~~~~~~~~~~~~~~~~~~~~~~~~~~",
     ],
     "warps": [
@@ -157450,21 +157710,21 @@ const MAPS7 = {
     "weather": "clear",
     "rows": [
       "~~~~~~~~~~~~~~~~~~~~~~~~~~",
-      "~~~Ā~~~~~Ā~~~R~~~~~~~~~~~~",
-      "~~~~~Ā~~~~~ẞ~~~~~~~~~~~~~~",
+      "~~~Ā~~~~~Ā~~~⌆~~~~~~~~~~~~",
+      "~~~~~Ā~~~~~⌅~~~~~~~~~~~~~~",
       "~~~~~~~~~~~~ẙ~~~~~~~~~~~~~",
-      "~~~~~ẙ~~~~ẞ~~~~~Ā~~~~~~~~~",
-      "~Ā~~~ẞ~~Ā~~~~ẙ~~ẙ~~~~~~~~~",
-      "~~~~~~~~~~Ā~Ā~~~~ẞ~~~~~~~~",
-      "~~~~~~~~~~~~ẞ~~~~~~~~~~R~~",
-      "~~~~~~ẞĀ~~~~~~~~~~~~~~~~~~",
-      "~~~~~~~~~~ẞẞ~ẞ~~~~~~~S~~~~",
-      "~ẞ~~~R~~~~~~~~~~~~~~ẞẞẞẞẞ~",
-      "~~R~~~~~ẙĀ~~~~R~~~~~ẞẘẞẞẞ~",
-      "~~~~~~~~~~~~~~~~~~~~ẞẞẞẞẞ~",
-      "~~~~~~ẙ~Ā~~~~~~Ā~~~~ẞẞẞẘẞ~",
-      "~~ẞ~~~~~~~~~~~~~~~~Āẞẘẞẞẞ~",
-      "~~~~~~~~~~~~~~~~~~~~ẞẞẞẞẞ~",
+      "~~~~~ẙ~~~~⌅~~~~~Ā~~~~~~~~~",
+      "~Ā~~~⌅~~Ā~~~~ẙ~~ẙ~~~~~~~~~",
+      "~~~~~~~~~~Ā~Ā~~~~⌅~~~~~~~~",
+      "~~~~~~~~~~~~⌅~~~~~~~~~~⌆~~",
+      "~~~~~~⌅Ā~~~~~~~~~~~~~~~~~~",
+      "~~~~~~~~~~⌅⌅~⌅~~~~~~~S~~~~",
+      "~⌅~~~⌆~~~~~~~~~~~~~~⌅⌅⌅⌅⌅~",
+      "~~⌆~~~~~ẙĀ~~~~⌆~~~~~⌅ẘ⌅⌅⌅~",
+      "~~~~~~~~~~~~~~~~~~~~⌅⌅⌅⌅⌅~",
+      "~~~~~~ẙ~Ā~~~~~~Ā~~~~⌅⌅⌅ẘ⌅~",
+      "~~⌅~~~~~~~~~~~~~~~~Ā⌅ẘ⌅⌅⌅~",
+      "~~~~~~~~~~~~~~~~~~~~⌅⌅⌅⌅⌅~",
     ],
     "warps": [
       {"x": 0, "y": 8, "to": {"map": "r108", "x": 24, "y": 8}},
@@ -197437,6 +197697,6 @@ if (typeof Game !== 'undefined') Object.assign(Game.prototype, {
 });
 
 </script>
-<!-- contentHash:3cd8805534a987d765458ddd7c53f46fbb932ede20a88165c4811c424cec41f2 -->
+<!-- contentHash:67d13d4aead37bf13204625ea574b436bd725c69fefce728a1dc2f0e98f25708 -->
 </body>
 </html>
