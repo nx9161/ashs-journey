@@ -56,15 +56,17 @@
 // special battle venues (WAVE-ARENAS-PLAN §1 census — 32 legendary
 // face venues, 9 league interiors, 2 stadiums, 10 Frontier facility
 // maps; census 48 since the T2 merge — 5 Borea chamber maps moved to
-// the VENUE_EXCLUDED list in §V on proof they host no battle) to the
+// the VENUE_EXCLUDED list in §V on proof they host no battle; census
+// 47 since the T4 merge — the Pyramid entrance hall joined them on
+// the same proof) to the
 // same discipline. Arenas T0 generalizes the seam: gymArenaFor
 // becomes arenaOverrideFor, consulting GYM_ARENA_ART first (untouched)
 // then the new VENUE_ARENA_ART (ships EMPTY), Ground fallback last;
 // the M-section needles were re-cut to the generalized wiring in the
 // T0 commit, at the same strength, disclosed here. Venue ratchets:
-//   VENUE_ARENA_COVERED      venues with a VENUE_ARENA_ART entry  0 -> 48
+//   VENUE_ARENA_COVERED      venues with a VENUE_ARENA_ART entry  0 -> 47
 //   VENUE_TUPLES_DISTINCT    distinct arena signatures over the
-//                            covered venues                       0 -> 48
+//                            covered venues                       0 -> 47
 // The freeze extends to the venues explicitly: each venue's
 // MAP_GROUND value is pinned per map in §V, and a whole-table
 // MAP_GROUND hash (all 432 assignments) is pinned there too — the §F
@@ -323,7 +325,9 @@ ok(`S5 ratchet: INTERIOR_TUPLES_DISTINCT = pin ${INTERIOR_TUPLES_DISTINCT} over 
 // ---------------- V: venues (Legendary Arenas wave, fix #10) -----------
 // The special battle venues outside the gyms (WAVE-ARENAS-PLAN §1):
 // 32 legendary/mythical face venues, 4 league interiors, 2 stadiums,
-// 10 Frontier facility maps = census 48. Roamers are OUT (Director
+// 10 Frontier facility maps = census 48 at T0 (47 since the T4 merge
+// — the Pyramid entrance hall excluded on proof, below). Roamers are
+// OUT (Director
 // ruling: the map-keyed law — a roaming battle reads as the place it
 // found you); two faces sharing one map (meteor-falls, spear-pillar)
 // take ONE treatment per map. The pinned list IS the census — a new
@@ -332,7 +336,7 @@ const VENUE_IDS = [
   'ancient-tomb', 'bell-tower-1', 'bell-tower-2', 'ceruleancave',
   'desert-ruins', 'fire-cave', 'flower-paradise', 'frontier-arena',
   'frontier-dome', 'frontier-factory', 'frontier-palace',
-  'frontier-pike', 'frontier-pyramid', 'frontier-pyramid-a',
+  'frontier-pike', 'frontier-pyramid-a',
   'frontier-pyramid-b', 'frontier-pyramid-c', 'frontier-tower',
   'hall-of-origin', 'ice-cave', 'ilex-forest', 'island-cave',
   'lake-acuity-cave', 'lake-valor-cave', 'league',
@@ -358,7 +362,18 @@ const VENUE_IDS = [
 // VENUE_IDS above and take a chartered treatment — the checks below
 // fail while it sits here carrying an entry, and the MAP_GROUND
 // freeze pins at the bottom of this section keep covering all five.
+// The Pyramid entrance hall (frontier-pyramid) joined this list at
+// the T4 merge (Director ruling, 2026-11-15, the same precedent):
+// it is NOT a battle venue. Proof (T4 build, verified against the
+// game's own data): encounters null, events [], one booking-desk
+// NPC — every Pyramid battle fires on the floor maps a/b/c (spots
+// and encounters live only there; Titus stands on floor 7 = map A),
+// so no battle can ever render in the hall and a treatment for it
+// would be dead code. Same tripwire: if a battle is ever wired into
+// the hall, its name moves back into VENUE_IDS and takes a chartered
+// treatment; the MAP_GROUND freeze pins keep covering it below.
 const VENUE_EXCLUDED = [
+  'frontier-pyramid',
   'league-chamber-1', 'league-chamber-2', 'league-chamber-3',
   'league-chamber-4', 'league-champion',
 ];
@@ -373,28 +388,28 @@ const VENUE_EXCLUDED = [
 // events [], one booking-desk NPC — every Pyramid battle fires on
 // the floor maps a/b/c, Titus on floor 7 = map A. The census
 // correction 48 -> 47, moving the hall to VENUE_EXCLUDED beside
-// the chambers, is flagged for the T4 merge as a labeled
-// merge-side step — VENUE_IDS/VENUE_EXCLUDED are NOT adjusted in
-// the tranche commit, per the T2 pattern).
+// the chambers, was applied as a labeled merge-side step at the
+// T4 merge — VENUE_IDS/VENUE_EXCLUDED were NOT adjusted in the
+// tranche commit, per the T2 pattern).
 const VENUE_ARENA_COVERED = 47;
 const VENUE_TUPLES_DISTINCT = 47;
 
-ok('V1 venue census is exactly the pinned 48 and every venue id is a merged map',
-  VENUE_IDS.length === 48 && new Set(VENUE_IDS).size === 48
+ok('V1 venue census is exactly the pinned 47 and every venue id is a merged map',
+  VENUE_IDS.length === 47 && new Set(VENUE_IDS).size === 47
   && VENUE_IDS.every((id) => !!MAPS[id]),
   'missing from MAPS: ' + VENUE_IDS.filter((id) => !MAPS[id]).join(','));
 ok('V2 venue census is disjoint from the gym census (no map is both a gym and a venue)',
   VENUE_IDS.every((id) => !GYM_IDS.includes(id)),
   VENUE_IDS.filter((id) => GYM_IDS.includes(id)).join(','));
-ok('V2b excluded list is exactly the 5 proof-excluded chamber maps, disjoint from the census, all real maps',
-  VENUE_EXCLUDED.length === 5 && new Set(VENUE_EXCLUDED).size === 5
+ok('V2b excluded list is exactly the 6 proof-excluded maps (5 chambers + the Pyramid entrance hall), disjoint from the census, all real maps',
+  VENUE_EXCLUDED.length === 6 && new Set(VENUE_EXCLUDED).size === 6
   && VENUE_EXCLUDED.every((id) => !!MAPS[id] && !VENUE_IDS.includes(id)),
   VENUE_EXCLUDED.filter((id) => !MAPS[id] || VENUE_IDS.includes(id)).join(','));
-ok('V2c tripwire: no excluded chamber map carries a VENUE_ARENA_ART entry (a wired battle must re-charter it into the census first)',
+ok('V2c tripwire: no excluded map carries a VENUE_ARENA_ART entry (a wired battle must re-charter it into the census first)',
   VENUE_EXCLUDED.every((id) => !(VENUE_ARENA_ART && VENUE_ARENA_ART[id])),
   VENUE_EXCLUDED.filter((id) => VENUE_ARENA_ART && VENUE_ARENA_ART[id]).join(','));
 const venueCovered = VENUE_IDS.filter((id) => VENUE_ARENA_ART && VENUE_ARENA_ART[id]);
-ok(`V3 ratchet: VENUE_ARENA_COVERED = pin ${VENUE_ARENA_COVERED} (T1 +14, T2 +6 — census 48 after the chamber exclusion, T3 +18, T4 +9 frontier with the Pyramid hall out on proof; census correction flagged for the merge)`,
+ok(`V3 ratchet: VENUE_ARENA_COVERED = pin ${VENUE_ARENA_COVERED} (T1 +14, T2 +6 — census 48 after the chamber exclusion, T3 +18, T4 +9 frontier with the Pyramid hall out on proof; census corrected 48 -> 47 at the T4 merge)`,
   venueCovered.length === VENUE_ARENA_COVERED,
   venueCovered.length > VENUE_ARENA_COVERED
     ? `measured ${venueCovered.length} — coverage grew outside a pin move (unrecorded claim)`
@@ -457,7 +472,7 @@ const VENUE_GROUND_PINS = {
   'turnback-cave': 'grave', 'victoryroad': 'rubble',
 };
 for (const id of [...VENUE_IDS, ...VENUE_EXCLUDED]) {
-  ok(`V ${id} MAP_GROUND stays '${VENUE_GROUND_PINS[id]}' (freeze extended to venues; excluded chambers stay pinned)`,
+  ok(`V ${id} MAP_GROUND stays '${VENUE_GROUND_PINS[id]}' (freeze extended to venues; excluded maps stay pinned)`,
     MAP_GROUND[id] === VENUE_GROUND_PINS[id], String(MAP_GROUND[id]));
 }
 ok('V9 the whole MAP_GROUND table (all 432 assignments) hashes unchanged',
