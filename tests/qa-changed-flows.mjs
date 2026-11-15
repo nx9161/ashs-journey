@@ -70,7 +70,7 @@ const driver = `
   ok('a1 fresh run boots to overworld', topA instanceof OverworldScene);
   var card = gA.ui.log.filter(function(e) { return e.ui === 'chaptercard'; });
   ok('a2 fresh run opens the Chapter 1 title card',
-    card.length >= 1 && card[0].chapter === 1 && card[0].title === 'The Indigo League');
+    card.length >= 1 && card[0].chapter === 1 && card[0].title === CHAPTERS[0].title); // title from story data ('The Crown League' post-scrub)
   // modal dismiss logic (DOM-less: drive the same update() branch the DOM uses)
   var gB = mkGame(112);
   gB.ui.chapterCard = {}; // simulate an open card (DOM path sets this)
@@ -92,8 +92,8 @@ const driver = `
   gJ.openJourney();
   var jm = gJ.ui.menu;
   ok('b1 Journey menu opens', gJ.ui.menuOpen && jm.title === 'Journey');
-  ok('b2 Journey menu has 30 rows (act header + 13 chapters + bonus header + 14 bonus + close)',
-    jm.items.length === 30);
+  ok('b2 Journey menu has 40 rows (Quest Log hub: hub rows + per-arc headers over 13 chapters + 14 bonus + close)',
+    jm.items.length === 40); // re-pinned: the menu grew into the Quest Log hub after this suite was parked
   var playable = jm.items.filter(function(it) { return it.value && it.value.indexOf('ch') === 0 && !it.disabled; });
   ok('b3 five playable chapter rows, enabled', playable.length === 5 &&
     playable.map(function(it) { return it.value; }).join(',') === 'ch1,ch2,ch3,ch4,ch5');
@@ -114,9 +114,9 @@ const driver = `
   ok('b9 playable chapter opens a detail card (dialogue)', gJ.ui.dialogueOpen);
   var dl = gJ.ui.dlg.lines;
   ok('b10 detail card: kicker + title + arc + anime + special events',
-    dl[0] === 'CHAPTER 1 — ACT 1' && dl[1] === 'The Indigo League' &&
-    dl[2].indexOf('Indigo Plateau') >= 0 && dl[3].indexOf('Anime:') === 0 &&
-    dl[4].indexOf('Special events:') === 0 && dl[4].indexOf('Mewtwo Strikes Back') >= 0);
+    dl[0] === 'CHAPTER 1 — ACT 1' && dl[1] === CHAPTERS[0].title &&
+    dl[2] === CHAPTERS[0].arc && dl[3] === 'Anime: ' + CHAPTERS[0].anime &&
+    dl[4].indexOf('Special events:') === 0 && dl[4].indexOf('OMNIGEN Strikes Back') >= 0); // scrub-era original text, title/arc/anime derived from CHAPTERS data
   drain(gJ);
   ok('b11 detail card closes back to the Journey menu', gJ.ui.menuOpen && gJ.ui.menu.title === 'Journey');
   var lockIdx = jm.items.findIndex(function(it) { return it.disabled && it.label.indexOf('Ch.6') === 0; });
@@ -133,7 +133,7 @@ const driver = `
   bootToOverworld(gD0);
   gD0.openDex();
   ok('c1 dex header row shows the current chapter',
-    gD0.ui.menu.items[0].label === 'Journey — Ch.1 · The Indigo League' &&
+    gD0.ui.menu.items[0].label === 'Journey — Ch.1 · ' + CHAPTERS[0].title &&
     gD0.ui.menu.items[0].disabled === true);
   gD0.state.story.chapter = 4;
   gD0.openDex();
@@ -158,7 +158,7 @@ const driver = `
   owT.petPartner();
   var toast = gT.ui.log.filter(function(e) { return e.ui === 'toast'; }).pop();
   ok('d3 petting cheers a sad partner to happy + original line',
-    gT.state.pikachu.mood === 'happy' && toast && toast.text === 'Pikachu ' + PARTNER_MOODS.happy);
+    gT.state.pikachu.mood === 'happy' && toast && toast.text === SPECIES.partner.name + ' ' + PARTNER_MOODS.happy); // partner display name from data (VOLTIK)
   ok('d4 mood-pip tap wired to petPartner', typeof owT.game.ui.onMoodTap === 'function');
   var yP2 = makeMon('partner', 5, SPECIES, MOVES);
   var yN2 = makeMon('pidgey', 5, SPECIES, MOVES);
@@ -181,9 +181,8 @@ const driver = `
   });
   var routeTrainers = sightNpcs.filter(function(s) { return s.id !== 'r2_duo'; });
   ok('d9 six route trainers have sight cones',
-    routeTrainers.length === 6 &&
     ['r1_cal', 'r1_lisa', 'r2_bug', 'r2_camper', 'r2_jr', 'r2_hiker']
-      .every(function(id) { return routeTrainers.some(function(s) { return s.id === id; }); }));
+      .every(function(id) { return routeTrainers.some(function(s) { return s.id === id; }); })); // the global ===6 count is retired: the sight system has since rolled out game-wide
   var brock = null;
   (MAPS.gym.npcs || []).forEach(function(n) { if (n.trainer === 'brock') brock = n; });
   ok('d10 Brock stays talk-only (no sight cone)', !!brock && !brock.sight);
@@ -347,9 +346,9 @@ console.log('\nqa-changed-flows: ' + (QF.results.length - QF.failures) + '/' + Q
 // ---------- served-file checks (outer script) ----------
 const css = fs.readFileSync('personal/index.html', 'utf8');
 const js = fs.readFileSync('personal/game.js', 'utf8');
-const pubCss = fs.readFileSync('public/index.html', 'utf8');
+const pubCss = fs.readFileSync('dist/standalone.html', 'utf8'); // shipped guest build — public/ was retired in c7575dc1
 const stripHash = (s) => s.replace(/<!-- contentHash:[0-9a-f]+ -->/, '');
-ok('css personal/public index.html identical except contentHash', stripHash(css) === stripHash(pubCss));
+ok('css personal/dist-standalone shell identical except contentHash', stripHash(css).split('<script')[0] === stripHash(pubCss).split('<script')[0]);
 
 function fontSizes(rule) {
   const m = css.match(new RegExp(rule + '\\{[^}]*\\}', 'g')) || [];

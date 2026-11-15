@@ -46,30 +46,22 @@
 #   `node --import ./register.mjs run.mjs` (PGlite): 114/114 at baseline.
 #   Needs npm ci at the repo root AND in tests/ (its own package).
 #
-# NON-BLOCKING — job `triage` (runs every push; continue-on-error):
-#   The known-red queue. It runs so its state is printed on every push —
-#   never silently unrun again — but it cannot fail the workflow until
-#   each suite is triaged green and PROMOTED (move its line in
-#   tests/run-checks.mjs from `triage` to `suites`, update this header).
-#   Baselines + failure character (all unclassified per audit Cluster 3;
-#   none is a title-literal issue after the W2 ratchet burn-down):
-#   - rejuv-phase1 41/44 — B14/B17/B18: XP Candy grants 0 XP; fleeing the
-#     spar pays candy (house-rules behaviour assertions).
-#   - rejuv-phase2 38/40 — A09 MAP_GROUND assignment expectation (audit:
-#     test-side proven); C01 browser parity (see below).
-#   - rejuv-phase3 56/61 — B21-B23/B32 keepsake/Sparrow Feather behaviour;
-#     C01.
-#   - rejuv-phase4 50/51 — C01 only.
-#   - rejuv-phase5 49/53 — B13-B15 parley behaviour; C01.
-#   - rejuv-phase6 42/45 — B05/B06 intro-reunion/HoF-viewer behaviour; C01.
-#   - C01 (all rejuv phases): the real-browser smoke reads public/index.html
-#     + public/game.js — the RETIRED Vercel build output — and a hardcoded
-#     /opt/meta-chromium/chrome path; it records its own skip as a FAIL.
-#     Cannot pass in CI as written; needs re-pointing at dist/ by its seat.
-#   - qa-changed-flows 51/57 then crashes — 6 stale chapter-system
-#     expectations from its @361d70b snapshot (title card, Journey menu
-#     rows, dex chapter header, petting line, sight cones), then ENOENT on
-#     the same retired public/index.html in its served-file tail.
+# PROMOTED — the former triage queue (parked-suite repair wave):
+#   All seven known-red suites were classified (every failure a stale
+#   test; zero real game defects) and repaired test-side only, then
+#   PROMOTED to the hard gate in tests/run-checks.mjs (`suites` group):
+#   - rejuv-phase1 44/44 · rejuv-phase2 42/42 · rejuv-phase3 63/63 ·
+#     rejuv-phase4 53/53 · rejuv-phase5 55/55 · rejuv-phase6 46/46 ·
+#     qa-changed-flows 57/57 + 19/19 served-file tail.
+#   Repair classes: scrub/naming-law renames (expectations now derive
+#   display names from game data), the C01 browser smokes repointed from
+#   the retired public/ Vercel output (c7575dc1) to dist/standalone.html
+#   with the Chromium binary resolved from CHROME_BIN/PATH, walkable
+#   checks deriving from the engine WALKABLE set, ACT parley-entry
+#   timing, section-state isolation, and exact-count re-pins for the
+#   MAP_GROUND / Journey-hub / sight-cone / merged-QUESTS rollouts.
+#   The `triage` group in run-checks.mjs is now EMPTY; the job below is
+#   retained so any future known-red suite has a non-blocking home.
 #
 # ALREADY IN CI ELSEWHERE (unchanged by W2): ci.yml — verify-slice,
 #   budgets-check, contamination-scan, drift-gate, gen-tables freshness,
@@ -162,7 +154,8 @@ jobs:
 
   triage:
     # Known-red queue: runs and prints counts on every push, never blocks.
-    # Promote a suite to the hard gate when it is green on main (see header).
+    # EMPTY since the parked-suite repair wave promoted all seven suites
+    # to the hard gate (see header); retained for future known-red suites.
     continue-on-error: true
     runs-on: ubuntu-latest
     timeout-minutes: 15

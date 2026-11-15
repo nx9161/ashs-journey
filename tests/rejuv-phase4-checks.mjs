@@ -10,12 +10,13 @@
 // redemption, keep-choice), and the Saffron spar branch.
 // Part C: damage-free real-browser smoke (bundle boots, log sections).
 // Run: node tests/rejuv-phase4-checks.mjs   (exit 1 on any failure)
-// Part C reads public/index.html + public/game.js — build first.
+// Part C serves dist/standalone.html (the shipped guest build) — build first.
 
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { readFileSync, existsSync, readdirSync } from 'node:fs';
 import { spawn, spawnSync } from 'node:child_process';
+import { createHash } from 'node:crypto';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 let pass = 0, fail = 0;
@@ -33,7 +34,7 @@ const { defaultState } = await import(join(ROOT, 'src/game/state.mjs'));
 const SCH = await import(join(ROOT, 'src/save/schema.mjs'));
 const VAL = await import(join(ROOT, 'api/_lib/validator.mjs'));
 const { MAIN_QUESTS, LEGENDARY_ARCS } = await import(join(ROOT, 'src/data/story-kanto.mjs'));
-const { MAPS } = await import(join(ROOT, 'src/data/maps.mjs'));
+const { MAPS, WALKABLE } = await import(join(ROOT, 'src/data/maps.mjs'));
 const { MAPS2 } = await import(join(ROOT, 'src/data/maps2.mjs'));
 const { MAPS3, TRAINERS3 } = await import(join(ROOT, 'src/data/maps3.mjs'));
 const { MAPS4, TRAINERS4 } = await import(join(ROOT, 'src/data/maps4.mjs'));
@@ -55,7 +56,7 @@ const ALL_TRAINERS = Object.assign({}, TRAINERS3, TRAINERS4);
   const SPEC = {
     tale_pallet: ['Dawnwick', "Mom's Care Package", 'mom', 2],
     tale_viridian: ['Fernmere City', 'The Retired Ace', 'retiredace', 0],
-    tale_pewter: ['Flintridge City', "Brock's Day Off", 'brock', 2],
+    tale_pewter: ['Flintridge City', "Garran's Day Off", 'brock', 2],
     tale_cerulean: ['Tidehaven City', 'The Stolen Bike Bell', 'misty', 1],
     tale_vermilion: ['Arcport City', 'Fan Club Founder', 'surge', 1],
     tale_lavender: ['Hushmoor Town', 'Names on the Wall', 'fuji', 2],
@@ -146,18 +147,10 @@ const ALL_TRAINERS = Object.assign({}, TRAINERS3, TRAINERS4);
     Q.TALE_NPCS.every((n) => {
       const m = ALL_MAPS[n.map]; if (!m) return false;
       const ch = m.rows[n.y] && m.rows[n.y][n.x];
-      // Wave 5b: '$' (Mart floor) joins the walkable-floor whitelist —
-      // the SHOPKEEPER tale actor now stands in the shared Mart scene.
-      // Premium+ W5: the 11 settlements' town-ground chars (TG
-      // U+00C0..U+00CA + TG2 U+0131..U+0144) are walkable floor by
-      // engine law (src/data/maps.mjs WALKABLE) — tale actors standing
-      // on redressed town ground are on walkable floor tiles.
-      // Wave T6: the boardwalk char (an H3 floor in WALKABLE) joins
-      // the whitelist — Arcport's tale actors (HARBORMASTER + the
-      // ferry captains) stand on the dock boardwalk by design.
-      if (!['.', ',', '$', 'ἇ'].includes(ch)
-        && !(ch >= 'À' && ch <= 'Ê')
-        && !(ch >= 'ı' && ch <= 'ń')) return false;
+      // Walkability derives from the engine's own WALKABLE set
+      // (src/data/maps.mjs) — the private char whitelist this replaced
+      // kept going stale every time a town re-dress added ground chars.
+      if (!WALKABLE.has(ch)) return false;
       if ((m.npcs || []).some((b) => b.x === n.x && b.y === n.y)) return false;
       if ((m.warps || []).some((w) => w.x === n.x && w.y === n.y)) return false;
       if ((m.signs || []).some((s2) => s2.x === n.x && s2.y === n.y)) return false;
@@ -440,7 +433,7 @@ const driver = `
     out.quizQ2 = D.chooseLabel('Helix Fossil');
     out.quizQ3 = D.chooseLabel('The mountain itself');
     out.pewterStage1 = Q('tale_pewter');
-    D.talkTo(ow, 'BROCK');
+    D.talkTo(ow, 'GARRAN'); // tale stage actor display name (scrub)
     out.pewterSparMenu = D.chooseLabel('Spar');
     out.pewterDone = Q('tale_pewter');
     out.pewterAcorn = st.bag.ironacorn || 0;
@@ -529,13 +522,13 @@ const driver = `
     D.talkTo(owD, 'MASTER KO');
     out.saffronAccepted = Q('tale_saffron');
     const owG = D.gotoMap('gym-saffron', 7, 5);
-    D.talkTo(owG, 'SABRINA'); // delivery -> stage 1
+    D.talkTo(owG, 'SYBIL'); // delivery -> stage 1
     out.saffronStage1 = Q('tale_saffron');
-    D.talkTo(owG, 'SABRINA'); // witness + choice menu
+    D.talkTo(owG, 'SYBIL'); // witness + choice menu
     out.saffronIouChoice = D.chooseLabel('keepsake IOU');
     out.saffronStage2 = Q('tale_saffron');
     out.saffronIouFlag = st.story.flags.tale_saffron_iou === true;
-    D.talkTo(owG, 'SABRINA'); // redeem (marshbadge held from the Celadon setup)
+    D.talkTo(owG, 'SYBIL'); // redeem (marshbadge held from the Celadon setup)
     out.saffronDone = Q('tale_saffron');
     out.saffronIouGranted = st.bag.sparrowfeather || 0; // first unowned piece at this point
     out.saffronBond = bond('sabrina');
@@ -610,7 +603,7 @@ const driver = `
     ow = E.gotoMap('pewter', 7, 7);
     E.talkTo(ow, 'CURATOR'); E.talkTo(ow, 'CURATOR');
     E.chooseLabel('Ancient DNA'); E.chooseLabel('Helix Fossil'); E.chooseLabel('The mountain itself');
-    E.talkTo(ow, 'BROCK'); E.chooseLabel('Spar');
+    E.talkTo(ow, 'GARRAN'); E.chooseLabel('Spar');
     out.latePewter = Q2('tale_pewter') + ':' + (st2.bag.ironacorn || 0);
     // Cerulean BATTLE path
     ow = E.gotoMap('cerulean', 8, 8);
@@ -641,9 +634,9 @@ const driver = `
     ow = E.gotoMap('dojo', 7, 3);
     E.talkTo(ow, 'MASTER KO');
     ow = E.gotoMap('gym-saffron', 7, 5);
-    E.talkTo(ow, 'SABRINA'); E.talkTo(ow, 'SABRINA');
+    E.talkTo(ow, 'SYBIL'); E.talkTo(ow, 'SYBIL');
     E.chooseLabel('keepsake IOU');
-    E.talkTo(ow, 'SABRINA');
+    E.talkTo(ow, 'SYBIL');
     out.lateSaffron = Q2('tale_saffron') + ':' + bond2('sabrina') + ':' + ((st2.bag.tortoisecharm || 0) + (st2.bag.sparrowfeather || 0));
     // Fuchsia late
     ow = E.gotoMap('fuchsia', 8, 8);
@@ -676,13 +669,13 @@ const driver = `
     let ow = F.gotoMap('dojo', 7, 3);
     F.talkTo(ow, 'MASTER KO');
     ow = F.gotoMap('gym-saffron', 7, 5);
-    F.talkTo(ow, 'SABRINA');
-    F.talkTo(ow, 'SABRINA');
+    F.talkTo(ow, 'SYBIL');
+    F.talkTo(ow, 'SYBIL');
     out.g3IouChoice = F.chooseLabel('keepsake IOU');
-    // Without the Marsh Badge the tale handler DECLINES Sabrina, so her
+    // Without the Marsh Badge the tale handler DECLINES Sybil, so her
     // ordinary gym flow (the battle) owns the talk — the tale cannot
     // strand or gate the badge.
-    const sab = ow.map.npcs.find((n) => n.name === 'SABRINA');
+    const sab = ow.map.npcs.find((n) => n.name === 'SYBIL');
     out.g3SabrinaDeclinesPreBadge = ow.sysNpc(sab) === false && Q3('tale_saffron') === 2;
     // Spar branch on a second run of the choice: rewind the choice flag
     // is not a game feature — instead prove the spar branch in a fresh
@@ -701,7 +694,7 @@ const driver = `
     let ow = G.gotoMap('dojo', 7, 3);
     G.talkTo(ow, 'MASTER KO');
     ow = G.gotoMap('gym-saffron', 7, 5);
-    G.talkTo(ow, 'SABRINA'); G.talkTo(ow, 'SABRINA');
+    G.talkTo(ow, 'SYBIL'); G.talkTo(ow, 'SYBIL');
     out.g4SparChoice = G.chooseLabel('Dojo spar (XP)');
     out.g4Stage2 = Q4('tale_saffron');
     ow = G.gotoMap('dojo', 7, 3);
@@ -744,7 +737,7 @@ ok('B09 Celadon badge pacing: visit 2 locked at 0 badges, visit 3 locked at 4, c
   && res.celadonDone === 'complete' && res.celadonSash === 1 && res.celadonBond === 2, J);
 ok('B10 Cinnabar end-to-end: mansion shelves in EAST-first order still complete the pair — Ember Seed, Blaine bond +1',
   res.cinnabarEastFirst === 'active:true' && res.cinnabarStage1 === 1 && res.cinnabarDone === 'complete' && res.cinnabarSeed === 1 && res.cinnabarBond === 1, J);
-ok('B11 Saffron end-to-end (IOU branch): message -> witness choice sets the IOU flag -> redeemed post-badge for the first unowned keepsake (Sparrow Feather here), Sabrina bond +1',
+ok('B11 Saffron end-to-end (IOU branch): message -> witness choice sets the IOU flag -> redeemed post-badge for the first unowned keepsake (Sparrow Feather here), Sybil bond +1',
   res.saffronAccepted === 'active' && res.saffronStage1 === 1 && res.saffronIouChoice === true && res.saffronStage2 === 2
   && res.saffronIouFlag === true && res.saffronDone === 'complete' && res.saffronIouGranted === 1 && res.saffronBond === 1, J);
 ok('B12 Fuchsia end-to-end: safari marsh spot advances, Warden + Janine complete it — +10 Safari Balls, Koga bond +1',
@@ -756,7 +749,7 @@ ok('B14 Quest Log renders three sections (Main Story / Legendary Arcs / Town Tal
   && res.logSections.some((l) => l.includes('LEGENDARY ARCS')) && res.logSections.some((l) => l.includes('TOWN TALES'))
   && (res.logTaleRows || []).length >= 2, J);
 ok('B15 Quest Log tale detail: stage text + stated reward + revelation for a completed tale',
-  typeof res.logTaleDetail === 'string' && res.logTaleDetail.includes('Reward: Gardenia Sash')
+  typeof res.logTaleDetail === 'string' && res.logTaleDetail.includes('Reward: ' + KEEPSAKES.gardeniasash.name) // reward display name from data (Tansy Sash)
   && res.logTaleDetail.includes('Complete.') && res.logTaleDetail.includes('first gym'), String(res.logTaleDetail).slice(0, 300));
 ok('B16 post-League missability: Pallet completes late (bond +2); Viridian KEEP path completes — charm owned, NO bond, no returned flag',
   res.latePallet === 'complete:2' && res.lateViridianChoice === true && res.lateViridian === 'complete:1:0:false', J);
@@ -768,25 +761,30 @@ ok('B19 post-League: Lavender, Celadon (all badges — 3 visits back-to-back, ne
   res.lateLavender === 'complete:1' && res.lateCeladon === 'complete:1:2' && res.lateFuchsia === 'complete:10' && res.lateCinnabar === 'complete:1:1', J);
 ok('B20 post-League: Saffron IOU redeemed with the badge already held; the completed arc in the same save is untouched',
   typeof res.lateSaffron === 'string' && res.lateSaffron.startsWith('complete:1:') && res.lateArcUntouched === 'complete', J);
-ok('B21 Saffron gate honesty: at IOU stage without the Marsh Badge, Sabrina\'s tale handler DECLINES (sysNpc false) so the gym battle owns the talk — stage stays 2, never stranded',
+ok('B21 Saffron gate honesty: at IOU stage without the Marsh Badge, Sybil\'s tale handler DECLINES (sysNpc false) so the gym battle owns the talk — stage stays 2, never stranded',
   res.g3IouChoice === true && res.g3SabrinaDeclinesPreBadge === true, J);
-ok('B22 Saffron SPAR branch resolves completely: choice -> Dojo spar won -> tale complete, Sabrina bond +1',
+ok('B22 Saffron SPAR branch resolves completely: choice -> Dojo spar won -> tale complete, Sybil bond +1',
   res.g4SparChoice === true && res.g4Stage2 === 2 && res.g4SparMenu === true && res.g4Done === 'complete' && res.g4Bond === 1, J);
 
 // ================= Part C: real headless Chromium =================
 {
-  const pubHtml = join(ROOT, 'public', 'index.html');
-  const pubJs = join(ROOT, 'public', 'game.js');
-  if (!existsSync(pubHtml) || !existsSync(pubJs) || !existsSync('/opt/meta-chromium/chrome')) {
+  const pubHtml = join(ROOT, 'dist', 'standalone.html'); // shipped guest build — the public/ Vercel target was retired in c7575dc1
+  const CHROME_BIN = process.env.CHROME_BIN || ['/opt/meta-chromium/chrome', '/usr/bin/google-chrome', '/usr/bin/google-chrome-stable', '/usr/bin/chromium', '/usr/bin/chromium-browser'].find((p) => existsSync(p));
+  if (!existsSync(pubHtml) || !CHROME_BIN) {
     ok('C01 real-browser smoke (skipped: built bundle or chromium missing)', false, 'build first: node scripts/build.mjs');
   } else {
-    const CSP = JSON.parse(readFileSync(join(ROOT, 'vercel.json'), 'utf8')).headers[0].headers
-      .find((h) => h.key === 'Content-Security-Policy').value;
-    const HTML_B64 = readFileSync(pubHtml).toString('base64');
-    const GAME_B64 = readFileSync(pubJs).toString('base64');
+    // No CSP header is served with the standalone: GitHub Pages serves
+    // the guest build without vercel.json's headers, and its
+    // script-src 'self' would block the standalone's inline bundle.
+    const HTML_B64 = readFileSync(pubHtml).toString('base64'); // standalone.html is self-contained: no separate game.js
     const cport = 9800 + (process.pid % 150);
-    const chrome = spawn('/opt/meta-chromium/chrome', [
-      '--headless=new', '--no-sandbox', '--disable-gpu', '--hide-scrollbars',
+    // Sandbox Chromium (Hatch) refuses to start without its WebGL domain
+    // policy flags; stock Chromium/Chrome neither needs nor accepts them,
+    // so they are added only when the policy file is present.
+    const HATCH_WGL = '/var/lib/hatch-browser/rootfs-base/usr/share/hatch/chromium/webgl-allowed-domains.txt';
+    const chromeFlags = existsSync(HATCH_WGL) ? ['--hatch-webgl-allowed-domains-file=' + HATCH_WGL, '--hatch-webgl-allowed-domains-sha256=' + createHash('sha256').update(readFileSync(HATCH_WGL)).digest('hex')] : [];
+    const chrome = spawn(CHROME_BIN, [
+      '--headless=new', '--no-sandbox', '--disable-gpu', '--hide-scrollbars', ...chromeFlags,
       '--remote-debugging-port=' + cport, '--user-data-dir=/tmp/rejuv4-chrome-' + cport,
       '--window-size=1280,800', 'about:blank',
     ], { stdio: 'ignore' });
@@ -816,10 +814,8 @@ ok('B22 Saffron SPAR branch resolves completely: choice -> Dojo spar won -> tale
         try {
           if (url.includes('/api/')) {
             await sendAny('Fetch.fulfillRequest', { requestId: p.requestId, responseCode: 200, responseHeaders: [{ name: 'Content-Type', value: 'application/json' }], body: Buffer.from('{"ok":true}').toString('base64') }, sessionId);
-          } else if (url.endsWith('/game.js')) {
-            await sendAny('Fetch.fulfillRequest', { requestId: p.requestId, responseCode: 200, responseHeaders: [{ name: 'Content-Type', value: 'text/javascript; charset=utf-8' }, { name: 'Content-Security-Policy', value: CSP }], body: GAME_B64 }, sessionId);
           } else {
-            await sendAny('Fetch.fulfillRequest', { requestId: p.requestId, responseCode: 200, responseHeaders: [{ name: 'Content-Type', value: 'text/html; charset=utf-8' }, { name: 'Content-Security-Policy', value: CSP }], body: HTML_B64 }, sessionId);
+            await sendAny('Fetch.fulfillRequest', { requestId: p.requestId, responseCode: 200, responseHeaders: [{ name: 'Content-Type', value: 'text/html; charset=utf-8' }], body: HTML_B64 }, sessionId);
           }
         } catch (e) { /* session gone */ }
       }
@@ -844,6 +840,7 @@ ok('B22 Saffron SPAR branch resolves completely: choice -> Dojo spar won -> tale
         const out = {};
         try {
           out.taleCount = Object.keys(QUESTS).length;
+          out.kantoTales = ['tale_pallet', 'tale_viridian', 'tale_pewter', 'tale_cerulean', 'tale_vermilion', 'tale_lavender', 'tale_celadon', 'tale_saffron', 'tale_fuchsia', 'tale_cinnabar'].filter((id) => !!QUESTS[id]).length;
           const game = new Game(null);
           game.ui.init(); game.input.bindKeyboard(); game.buildSprites(); game.applyLayout();
           game.state.story.quests.arc_zapdos = 'active'; // mid-game state: an arc in progress, as in Part B
@@ -857,9 +854,9 @@ ok('B22 Saffron SPAR branch resolves completely: choice -> Dojo spar won -> tale
         return out;
       })()`;
       const br = await evl(browserDriver);
-      ok('C01 real-browser: 10 tales in the shipped bundle; Quest Log shows all three section headers and all 10 tale rows',
-        !!br && br.taleCount === 10 && Array.isArray(br.sections) && br.sections.length === 3 && br.taleRows === 10,
-        JSON.stringify(br));
+      ok('C01 real-browser: the 10 Kanto tales in the shipped bundle; Quest Log shows the three tale section headers and all 10 tale rows',
+        !!br && br.kantoTales === 10 && Array.isArray(br.sections) && ['— MAIN STORY —', '— LEGENDARY ARCS —', '— TOWN TALES —'].every((h) => br.sections.includes(h)) && br.taleRows === 10,
+        JSON.stringify(br)); // the merged QUESTS table has since grown to 37 tales game-wide and the log gained a STORY header — the exact-total pins are retired, presence is the assertion
       ok('C02 real-browser: tale NPC injection live in the shipped bundle (MOM stands in Pallet)',
         !!br && br.momThere === true, JSON.stringify(br));
       ws.close();

@@ -46,7 +46,11 @@ const GROUPS = {
     T('narrative-db-checks.mjs'), T('orange-climax-checks.mjs'),
     T('orange-story-checks.mjs'), T('partner-guarantee-checks.mjs'),
     T('placement-gates-checks.mjs'),
-    T('quest-integrity-checks.mjs'), T('seasons-checks.mjs'),
+    T('quest-integrity-checks.mjs'),
+    T('rejuv-phase1-checks.mjs'), T('rejuv-phase2-checks.mjs'),
+    T('rejuv-phase3-checks.mjs'), T('rejuv-phase4-checks.mjs'),
+    T('rejuv-phase5-checks.mjs'), T('rejuv-phase6-checks.mjs'),
+    T('qa-changed-flows.mjs'), T('seasons-checks.mjs'),
     T('sinnoh-checks.mjs'), T('sinnoh-legendary-checks.mjs'),
     T('sinnoh-story-checks.mjs'), T('title-guard-checks.mjs'),
     T('viewport-matrix-checks.mjs'),
@@ -58,12 +62,10 @@ const GROUPS = {
   ],
   // Known-red at the W2 baseline (counts in checks.yml). They RUN on every
   // push so their state is never silent again, but they do not block.
-  triage: [
-    T('rejuv-phase1-checks.mjs'), T('rejuv-phase2-checks.mjs'),
-    T('rejuv-phase3-checks.mjs'), T('rejuv-phase4-checks.mjs'),
-    T('rejuv-phase5-checks.mjs'), T('rejuv-phase6-checks.mjs'),
-    T('qa-changed-flows.mjs'),
-  ],
+  // EMPTY since the parked-suite repair wave: all seven former triage
+  // suites (rejuv-phase1..6 + qa-changed-flows) were repaired test-side
+  // and PROMOTED to the hard gate above.
+  triage: [],
 };
 
 function summaryOf(out) {

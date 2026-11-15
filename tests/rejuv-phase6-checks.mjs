@@ -22,6 +22,7 @@ import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { readFileSync, existsSync } from 'node:fs';
 import { spawn } from 'node:child_process';
+import { createHash } from 'node:crypto';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 let pass = 0, fail = 0;
@@ -40,6 +41,9 @@ const Q = await import(join(ROOT, 'src/data/quests.mjs'));
 const { TRAINERS3 } = await import(join(ROOT, 'src/data/maps3.mjs'));
 const SCH = await import(join(ROOT, 'src/save/schema.mjs'));
 const VAL = await import(join(ROOT, 'api/_lib/validator.mjs'));
+const { SPECIES } = await import(join(ROOT, 'src/data/species.mjs'));
+const { SPECIES2 } = await import(join(ROOT, 'src/data/species2.mjs'));
+const NAME_OF = (id) => (SPECIES[id] || SPECIES2[id]).name; // display names from data — never hardcoded labels
 
 // A completed source run, built the way the shipped game writes one.
 function makeSource() {
@@ -455,11 +459,11 @@ if (B_out) {
   ok('B04 (d) source discovery + state construction never write storage: the source slot\'s bytes are byte-identical after creation reads them',
     B_out.pureCreate.n === 1 && B_out.pureCreate.ngPlus === 1 && B_out.sourceBytesIntact === true);
   ok('B05 (j) intro reunion offers the carried starter line; choosing it grants the mon as THIS run\'s own catch',
-    B_out.reunionMenu.some((l) => l.includes('Charmander'))
+    B_out.reunionMenu.some((l) => l.includes(NAME_OF('charmander')))
     && B_out.partyAfterReunion.includes('charmander') && B_out.partyAfterReunion.includes('partner')
     && B_out.runCaughtAfterReunion[4] === true, JSON.stringify(B_out.reunionMenu) + ' ' + JSON.stringify(B_out.partyAfterReunion));
   ok('B06 (g) prior HoF teams are viewable from the new run (viewer renders the PRIOR JOURNEYS section)',
-    typeof B_out.hofHtml === 'string' && B_out.hofHtml.includes('PRIOR JOURNEYS') && B_out.hofHtml.includes('Venusaur'));
+    typeof B_out.hofHtml === 'string' && B_out.hofHtml.includes('PRIOR JOURNEYS') && B_out.hofHtml.includes(NAME_OF('venusaur')));
   ok('B07 (b) diploma: carried archive alone does NOT grant it; the run\'s own 151 catches do',
     B_out.diplomaFromArchive === false && B_out.diplomaFromOwnCatches === true);
   ok('B08 (i) Traveler\'s Memory: fossil choice re-picks freely; without the memory the seal stands',
@@ -479,18 +483,23 @@ if (B_out) {
 
 // ================= Part C: real headless Chromium =================
 {
-  const pubHtml = join(ROOT, 'public', 'index.html');
-  const pubJs = join(ROOT, 'public', 'game.js');
-  if (!existsSync(pubHtml) || !existsSync(pubJs) || !existsSync('/opt/meta-chromium/chrome')) {
+  const pubHtml = join(ROOT, 'dist', 'standalone.html'); // shipped guest build — the public/ Vercel target was retired in c7575dc1
+  const CHROME_BIN = process.env.CHROME_BIN || ['/opt/meta-chromium/chrome', '/usr/bin/google-chrome', '/usr/bin/google-chrome-stable', '/usr/bin/chromium', '/usr/bin/chromium-browser'].find((p) => existsSync(p));
+  if (!existsSync(pubHtml) || !CHROME_BIN) {
     ok('C01 real-browser smoke (skipped: built bundle or chromium missing)', false, 'build first: node scripts/build.mjs');
   } else {
-    const CSP = JSON.parse(readFileSync(join(ROOT, 'vercel.json'), 'utf8')).headers[0].headers
-      .find((h) => h.key === 'Content-Security-Policy').value;
-    const HTML_B64 = readFileSync(pubHtml).toString('base64');
-    const GAME_B64 = readFileSync(pubJs).toString('base64');
+    // No CSP header is served with the standalone: GitHub Pages serves
+    // the guest build without vercel.json's headers, and its
+    // script-src 'self' would block the standalone's inline bundle.
+    const HTML_B64 = readFileSync(pubHtml).toString('base64'); // standalone.html is self-contained: no separate game.js
     const cport = 9900 + (process.pid % 90);
-    const chrome = spawn('/opt/meta-chromium/chrome', [
-      '--headless=new', '--no-sandbox', '--disable-gpu', '--hide-scrollbars',
+    // Sandbox Chromium (Hatch) refuses to start without its WebGL domain
+    // policy flags; stock Chromium/Chrome neither needs nor accepts them,
+    // so they are added only when the policy file is present.
+    const HATCH_WGL = '/var/lib/hatch-browser/rootfs-base/usr/share/hatch/chromium/webgl-allowed-domains.txt';
+    const chromeFlags = existsSync(HATCH_WGL) ? ['--hatch-webgl-allowed-domains-file=' + HATCH_WGL, '--hatch-webgl-allowed-domains-sha256=' + createHash('sha256').update(readFileSync(HATCH_WGL)).digest('hex')] : [];
+    const chrome = spawn(CHROME_BIN, [
+      '--headless=new', '--no-sandbox', '--disable-gpu', '--hide-scrollbars', ...chromeFlags,
       '--remote-debugging-port=' + cport, '--user-data-dir=/tmp/rejuv6-chrome-' + cport,
       '--window-size=1280,800', 'about:blank',
     ], { stdio: 'ignore' });
@@ -520,10 +529,8 @@ if (B_out) {
         try {
           if (url.includes('/api/')) {
             await sendAny('Fetch.fulfillRequest', { requestId: p.requestId, responseCode: 200, responseHeaders: [{ name: 'Content-Type', value: 'application/json' }], body: Buffer.from('{"ok":true}').toString('base64') }, sessionId);
-          } else if (url.endsWith('/game.js')) {
-            await sendAny('Fetch.fulfillRequest', { requestId: p.requestId, responseCode: 200, responseHeaders: [{ name: 'Content-Type', value: 'text/javascript; charset=utf-8' }, { name: 'Content-Security-Policy', value: CSP }], body: GAME_B64 }, sessionId);
           } else {
-            await sendAny('Fetch.fulfillRequest', { requestId: p.requestId, responseCode: 200, responseHeaders: [{ name: 'Content-Type', value: 'text/html; charset=utf-8' }, { name: 'Content-Security-Policy', value: CSP }], body: HTML_B64 }, sessionId);
+            await sendAny('Fetch.fulfillRequest', { requestId: p.requestId, responseCode: 200, responseHeaders: [{ name: 'Content-Type', value: 'text/html; charset=utf-8' }], body: HTML_B64 }, sessionId);
           }
         } catch (e) { /* session gone */ }
       }

@@ -251,13 +251,14 @@ const driver = `
   st.party = [mon];
   const xpBefore = mon.xp;
   game.useBagItem('xpcandy');
-  chooseLabel('Pidgey');
+  chooseLabel(SPECIES.pidgey.name); // display name from data (DUNPLUME) — never a hardcoded label
   out.candyXpGain = mon.xp - xpBefore;
   out.candyBagAfter = st.bag.xpcandy || 0;
   out.candyLevelConsistent = mon.xp >= xpForLevel(SPECIES.pidgey.growth, mon.level)
     && (mon.level >= 100 || mon.xp < xpForLevel(SPECIES.pidgey.growth, mon.level + 1));
 
   // ---------- QA D1 regression: fleeing the spar pays NOTHING ----------
+  st.bag.xpcandy = 0; // isolated section state: the flee assertions start from an empty candy slot
   // BattleScene escape paths end with won=true; the spar must only pay on
   // a real win. Both engines, driven the way a player flees.
   const sparToScene = () => {

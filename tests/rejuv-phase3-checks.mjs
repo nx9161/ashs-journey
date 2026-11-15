@@ -12,12 +12,13 @@
 // resolution) + A26 (client schema keepsake id set) + B33/B34 (Iron
 // Acorn literal first hit vs a multi-hit move, both engines).
 // Run: node tests/rejuv-phase3-checks.mjs   (exit 1 on any failure)
-// Part C reads public/index.html + public/game.js — build first.
+// Part C serves dist/standalone.html (the shipped guest build) — build first.
 
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { readFileSync, existsSync } from 'node:fs';
 import { spawn } from 'node:child_process';
+import { createHash } from 'node:crypto';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 let pass = 0, fail = 0;
@@ -596,19 +597,19 @@ const driver = `
     st.party = [partner, rat(10)];
     st.bag.sparrowfeather = 1;
     game.openParty();
-    out.giveRowSeen = chooseLabel('Pikachu') || chooseLabel('Partner') || !!rowOf('Lv12');
+    out.giveRowSeen = chooseLabel(SPECIES.partner.name) || !!rowOf('Lv12'); // row label = display name from data (VOLTIK)
     out.giveMenuSeen = chooseLabel('Give keepsake');
     out.giveItemSeen = chooseLabel('Sparrow Feather');
     out.partnerKeepsake = partner.keepsake;
     out.bagAfterGive = st.bag.sparrowfeather || 0;
     game.openParty();
-    chooseLabel('Pikachu') || chooseLabel('Partner') || chooseLabel('Lv12');
+    chooseLabel(SPECIES.partner.name) || chooseLabel('Lv12');
     out.takeRowSeen = chooseLabel('Take Sparrow Feather');
     out.partnerKeepsakeAfterTake = partner.keepsake;
     out.bagAfterTake = st.bag.sparrowfeather || 0;
     // Bag-use give flow
     game.useBagItem('sparrowfeather');
-    out.bagGiveSeen = chooseLabel('Rattata');
+    out.bagGiveSeen = chooseLabel(SPECIES.rattata.name); // display name from data (SCURRAT)
     out.ratKeepsake = st.party[1].keepsake;
   }
 
@@ -695,6 +696,10 @@ const driver = `
 
   // ---- B: hidden-item source pickup (Route 2 Sparrow Feather) ----
   {
+    // Isolated section state: the ADR-025 §6 source grant pays duplicate
+    // cash when the player already owns the keepsake, so start un-owned.
+    st.bag.sparrowfeather = 0;
+    for (const m of [...st.party, ...Object.values(st.boxes).flat()]) if (m && m.keepsake === 'sparrowfeather') m.keepsake = null;
     ow.loadMap('route2');
     const before = st.bag.sparrowfeather || 0;
     ow.sysInteract(1, 12); // face the hidden tile directly
@@ -786,18 +791,23 @@ ok('B34 RT Iron Acorn (rulings patch): identical multi-hit total in the RT engin
 
 // ================= Part C: real headless Chromium =================
 {
-  const pubHtml = join(ROOT, 'public', 'index.html');
-  const pubJs = join(ROOT, 'public', 'game.js');
-  if (!existsSync(pubHtml) || !existsSync(pubJs) || !existsSync('/opt/meta-chromium/chrome')) {
+  const pubHtml = join(ROOT, 'dist', 'standalone.html'); // shipped guest build — the public/ Vercel target was retired in c7575dc1
+  const CHROME_BIN = process.env.CHROME_BIN || ['/opt/meta-chromium/chrome', '/usr/bin/google-chrome', '/usr/bin/google-chrome-stable', '/usr/bin/chromium', '/usr/bin/chromium-browser'].find((p) => existsSync(p));
+  if (!existsSync(pubHtml) || !CHROME_BIN) {
     ok('C01 real-browser parity (skipped: built bundle or chromium missing)', false, 'build first: node scripts/build.mjs');
   } else {
-    const CSP = JSON.parse(readFileSync(join(ROOT, 'vercel.json'), 'utf8')).headers[0].headers
-      .find((h) => h.key === 'Content-Security-Policy').value;
-    const HTML_B64 = readFileSync(pubHtml).toString('base64');
-    const GAME_B64 = readFileSync(pubJs).toString('base64');
+    // No CSP header is served with the standalone: GitHub Pages serves
+    // the guest build without vercel.json's headers, and its
+    // script-src 'self' would block the standalone's inline bundle.
+    const HTML_B64 = readFileSync(pubHtml).toString('base64'); // standalone.html is self-contained: no separate game.js
     const cport = 9700 + (process.pid % 200);
-    const chrome = spawn('/opt/meta-chromium/chrome', [
-      '--headless=new', '--no-sandbox', '--disable-gpu', '--hide-scrollbars',
+    // Sandbox Chromium (Hatch) refuses to start without its WebGL domain
+    // policy flags; stock Chromium/Chrome neither needs nor accepts them,
+    // so they are added only when the policy file is present.
+    const HATCH_WGL = '/var/lib/hatch-browser/rootfs-base/usr/share/hatch/chromium/webgl-allowed-domains.txt';
+    const chromeFlags = existsSync(HATCH_WGL) ? ['--hatch-webgl-allowed-domains-file=' + HATCH_WGL, '--hatch-webgl-allowed-domains-sha256=' + createHash('sha256').update(readFileSync(HATCH_WGL)).digest('hex')] : [];
+    const chrome = spawn(CHROME_BIN, [
+      '--headless=new', '--no-sandbox', '--disable-gpu', '--hide-scrollbars', ...chromeFlags,
       '--remote-debugging-port=' + cport, '--user-data-dir=/tmp/rejuv3-chrome-' + cport,
       '--window-size=1280,800', 'about:blank',
     ], { stdio: 'ignore' });
@@ -827,10 +837,8 @@ ok('B34 RT Iron Acorn (rulings patch): identical multi-hit total in the RT engin
         try {
           if (url.includes('/api/')) {
             await sendAny('Fetch.fulfillRequest', { requestId: p.requestId, responseCode: 200, responseHeaders: [{ name: 'Content-Type', value: 'application/json' }], body: Buffer.from('{"ok":true}').toString('base64') }, sessionId);
-          } else if (url.endsWith('/game.js')) {
-            await sendAny('Fetch.fulfillRequest', { requestId: p.requestId, responseCode: 200, responseHeaders: [{ name: 'Content-Type', value: 'text/javascript; charset=utf-8' }, { name: 'Content-Security-Policy', value: CSP }], body: GAME_B64 }, sessionId);
           } else {
-            await sendAny('Fetch.fulfillRequest', { requestId: p.requestId, responseCode: 200, responseHeaders: [{ name: 'Content-Type', value: 'text/html; charset=utf-8' }, { name: 'Content-Security-Policy', value: CSP }], body: HTML_B64 }, sessionId);
+            await sendAny('Fetch.fulfillRequest', { requestId: p.requestId, responseCode: 200, responseHeaders: [{ name: 'Content-Type', value: 'text/html; charset=utf-8' }], body: HTML_B64 }, sessionId);
           }
         } catch (e) { /* session gone */ }
       }

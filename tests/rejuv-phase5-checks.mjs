@@ -21,6 +21,7 @@ import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { readFileSync, existsSync } from 'node:fs';
 import { spawn } from 'node:child_process';
+import { createHash } from 'node:crypto';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 let pass = 0, fail = 0;
@@ -37,7 +38,7 @@ const { EVENTS } = await import(join(ROOT, 'src/data/story-kanto.mjs'));
 const { defaultState } = await import(join(ROOT, 'src/game/state.mjs'));
 const SCH = await import(join(ROOT, 'src/save/schema.mjs'));
 const VAL = await import(join(ROOT, 'api/_lib/validator.mjs'));
-const { MAPS } = await import(join(ROOT, 'src/data/maps.mjs'));
+const { MAPS, WALKABLE } = await import(join(ROOT, 'src/data/maps.mjs'));
 const { MAPS2 } = await import(join(ROOT, 'src/data/maps2.mjs'));
 const { MAPS3 } = await import(join(ROOT, 'src/data/maps3.mjs'));
 const { MAPS4 } = await import(join(ROOT, 'src/data/maps4.mjs'));
@@ -204,9 +205,9 @@ const { TRAINERS3 } = await import(join(ROOT, 'src/data/maps3.mjs'));
     B.PARLEY_NPCS.length === 2 && B.PARLEY_NPCS.every((n) => {
       const m = ALL_MAPS[n.map]; if (!m) return false;
       const ch = m.rows[n.y] && m.rows[n.y][n.x];
-      // Premium+ W5: Celadon's town-ground chars are walkable floor
-      // (see rejuv-phase4 A14) — the parley pair stands on town ground.
-      return (['.', ','].includes(ch) || (ch >= 'À' && ch <= 'Ê') || (ch >= 'ı' && ch <= 'ń'))
+      // Walkability derives from the engine's own WALKABLE set (see
+      // rejuv-phase4 A14) — no private char whitelist to go stale.
+      return WALKABLE.has(ch)
         && !(m.npcs || []).some((b) => b.x === n.x && b.y === n.y)
         && !(m.warps || []).some((w) => w.x === n.x && w.y === n.y) && !(m.signs || []).some((sg) => sg.x === n.x && sg.y === n.y);
     }));
@@ -295,6 +296,14 @@ const driver = `
       drain(80);
       return true;
     }
+    // Wave ACT cinematic entry: the parley pair are staged _actorHidden
+    // until ev_parley_enter plays out on Celadon entry. Wait for the
+    // entry event's own done flag (the ACT idiom) before talking.
+    function waitParleyEntry(ow) {
+      let n = 0;
+      while (!st.story.flags.ev_parley_enter_done && n++ < 300) { tick(10); drain(20); }
+      drain(40);
+    }
     function chooseLabel(frag) {
       const items = ui.menu ? ui.menu.items : [];
       const i = items.findIndex((it) => it.label && it.label.includes(frag));
@@ -319,7 +328,7 @@ const driver = `
         mk('snorlax', ['bodyslam', 'hyperbeam', 'rest', 'earthquake']),
       ];
     }
-    return { ui, st, gotoMap, talkTo, chooseLabel, drain, driveBattle, team, lastDialogue, tick };
+    return { ui, st, gotoMap, talkTo, chooseLabel, drain, driveBattle, team, lastDialogue, tick, waitParleyEntry };
   }
   const boot = () => { const game = new Game(null); game.ui.init(); game.input.bindKeyboard(); game.buildSprites(); game.applyLayout(); const D = makeDriver(game); D.team(); D.st.settings.battleStyle = 'classic'; return { game, D }; };
 
@@ -396,7 +405,7 @@ const driver = `
     st.story.bonds.gary = preset;
     const ow = D.gotoMap('stanne', 7, 7);
     const logAt = D.ui.log.length;
-    D.talkTo(ow, 'GARY');
+    D.talkTo(ow, 'VALE'); // rival NPC display name (scrub)
     const intro = D.ui.log.slice(logAt).filter((e) => e.ui === 'dialogue').map((e) => e.lines.join(' | ')).join(' || ');
     if (preset === -10) { out.garyColdIntro = intro; out.garyColdBondAfterWin = st.story.bonds.gary; out.garyColdLedger = !!st.story.flags.rivalwin_gary_stanne; }
     else { out.garyCloseIntro = intro; out.garyCloseBondAfterWin = st.story.bonds.gary; }
@@ -409,6 +418,7 @@ const driver = `
     st.story.flags.stanne_done = true;
     st.story.bonds.rue = 3; st.story.bonds.cole = 3;
     const ow = D.gotoMap('celadon', 7, 7);
+    D.waitParleyEntry(ow);
     out.parleyPresent = ow.map.npcs.some((n) => n.name === 'RUE' && n.parley) && ow.map.npcs.some((n) => n.name === 'COLE' && n.parley);
     out.sharedCeladonClean = !MAPS.celadon.npcs.some((n) => n.parley);
     D.talkTo(ow, 'RUE');
@@ -427,6 +437,7 @@ const driver = `
     const st = D.st;
     st.story.flags.stanne_done = true;
     const ow = D.gotoMap('celadon', 7, 7);
+    D.waitParleyEntry(ow);
     D.talkTo(ow, 'COLE');
     out.ambushDone = st.story.flags.parley_celadon_done === true;
     out.ambushRibbon = st.bag.secondwindribbon || 0;
@@ -441,6 +452,7 @@ const driver = `
     st.story.flags.stanne_done = true;
     st.story.bonds.rue = 6; st.story.bonds.cole = 0; // one Warm, one Wary -> no parley
     const ow = D.gotoMap('celadon', 7, 7);
+    D.waitParleyEntry(ow);
     D.talkTo(ow, 'RUE');
     out.lowerGateAmbush = st.story.flags.parley_celadon_done === true && (st.bag.secondwindribbon || 0) === 0;
   }
@@ -454,11 +466,11 @@ const driver = `
     st.story.bonds.brock = 2; // tale's +2 already landed (Warm)
     const ow = D.gotoMap('gym', 5, 5);
     const candy0 = st.bag.xpcandy || 0;
-    D.talkTo(ow, 'BROCK');
+    D.talkTo(ow, 'GARRAN'); // gym leader display name (scrub)
     out.leaderWarmTalk = D.lastDialogue();
     out.leaderGiftCandy = (st.bag.xpcandy || 0) - candy0;
     out.leaderThanksBond = st.story.bonds.brock;
-    D.talkTo(ow, 'BROCK');
+    D.talkTo(ow, 'GARRAN'); // gym leader display name (scrub)
     out.leaderGiftOnce = (st.bag.xpcandy || 0) - candy0;
     out.leaderBondStable = st.story.bonds.brock;
     // Cold leader: guarded banter, no gift.
@@ -467,7 +479,7 @@ const driver = `
     st2.story.quests.tale_pewter = 'complete';
     st2.story.bonds.brock = -10;
     const ow2 = g2.D.gotoMap('gym', 5, 5);
-    g2.D.talkTo(ow2, 'BROCK');
+    g2.D.talkTo(ow2, 'GARRAN');
     out.leaderColdTalk = g2.D.lastDialogue();
     out.leaderColdCandy = st2.bag.xpcandy || 0;
     out.leaderColdBond = st2.story.bonds.brock;
@@ -487,7 +499,7 @@ const driver = `
     out.coldTaleDone = st.story.quests.tale_pallet;
     out.coldMomBond = st.story.bonds.mom;
     ow = D.gotoMap('gym', 5, 5);
-    D.talkTo(ow, 'BROCK');
+    D.talkTo(ow, 'GARRAN'); // gym leader display name (scrub)
     out.coldBadge = st.badges.kanto.includes('boulderbadge');
     out.coldBrockBond = st.story.bonds.brock;
     // Mom's Cold send-off on a later talk.
@@ -524,12 +536,12 @@ ok('B07 Hawthorn rating temperature follows the tier (Close framing at +9, Cold 
   && typeof res.ratingWary === 'string' && res.ratingWary.includes('caught'), J.slice(0, 400));
 ok('B08 diploma: completing the dex warms Hawthorn +2, once (his own one-shot guard)',
   res.diplomaBond === 2 && res.diplomaBondAgain === 2, J.slice(0, 300));
-ok('B09 Quest Log PEOPLE: section + rows show tier labels only (Mom — Warm, Gary — Cold), never a raw score',
-  res.peopleSection === true && (res.peopleRows || []).some((l) => l.includes('Mom — Warm')) && (res.peopleRows || []).some((l) => l.includes('Gary — Cold'))
+ok('B09 Quest Log PEOPLE: section + rows show tier labels only (Mom — Warm, Vale — Cold), never a raw score',
+  res.peopleSection === true && (res.peopleRows || []).some((l) => l.includes('Mom — Warm')) && (res.peopleRows || []).some((l) => l.includes('Vale — Cold'))
   && !(res.peopleRows || []).some((l) => /—\s*-?\d/.test(l)), J.slice(0, 500));
-ok('B10 Gary NPC battle at Cold: his intro text is the Cold set, and winning still records the ledger (+1 respect: -10 -> -9)',
+ok('B10 Vale NPC battle at Cold: his intro text is the Cold set, and winning still records the ledger (+1 respect: -10 -> -9)',
   typeof res.garyColdIntro === 'string' && res.garyColdIntro.includes('Do not slow me down') && res.garyColdBondAfterWin === -9 && res.garyColdLedger === true, J.slice(0, 500));
-ok('B11 Gary NPC battle at Close: his intro text is the Close set (same battle, warmer words — text only)',
+ok('B11 Vale NPC battle at Close: his intro text is the Close set (same battle, warmer words — text only)',
   typeof res.garyCloseIntro === 'string' && res.garyCloseIntro.includes('saving my best') && res.garyCloseBondAfterWin === 10, J.slice(0, 500));
 ok('B12 parley appears post-Anne in the scene copy only (shared MAPS data never mutated)',
   res.parleyPresent === true && res.sharedCeladonClean === true, J.slice(0, 300));
@@ -546,25 +558,30 @@ ok('B17 leader talk at Cold: guarded banter variant, thanks still +1 (-10 -> -9)
   res.leaderColdCandy === 0 && res.leaderColdBond === -9 && typeof res.leaderColdTalk === 'string' && res.leaderColdTalk.includes('Gym hours are posted'), J.slice(0, 600));
 ok('B18 progression independence: a -10-everyone save completes the Pallet tale (bond lands at -8, structure identical)',
   res.coldTaleDone === 'complete' && res.coldMomBond === -8, J.slice(0, 400));
-ok('B19 progression independence: the same -10 save beats Brock and earns the Boulder Badge (battles never read bonds)',
+ok('B19 progression independence: the same -10 save beats Garran and earns the Boulder Badge (battles never read bonds)',
   res.coldBadge === true && res.coldBrockBond === -10, J.slice(0, 400));
 ok('B20 Mom\'s send-off at Cold is the guarded variant of the same beat',
   typeof res.coldMomTalk === 'string' && res.coldMomTalk.includes('Oh. It is you.'), J.slice(0, 500));
 
 // ================= Part C: real headless Chromium =================
 {
-  const pubHtml = join(ROOT, 'public', 'index.html');
-  const pubJs = join(ROOT, 'public', 'game.js');
-  if (!existsSync(pubHtml) || !existsSync(pubJs) || !existsSync('/opt/meta-chromium/chrome')) {
+  const pubHtml = join(ROOT, 'dist', 'standalone.html'); // shipped guest build — the public/ Vercel target was retired in c7575dc1
+  const CHROME_BIN = process.env.CHROME_BIN || ['/opt/meta-chromium/chrome', '/usr/bin/google-chrome', '/usr/bin/google-chrome-stable', '/usr/bin/chromium', '/usr/bin/chromium-browser'].find((p) => existsSync(p));
+  if (!existsSync(pubHtml) || !CHROME_BIN) {
     ok('C01 real-browser smoke (skipped: built bundle or chromium missing)', false, 'build first: node scripts/build.mjs');
   } else {
-    const CSP = JSON.parse(readFileSync(join(ROOT, 'vercel.json'), 'utf8')).headers[0].headers
-      .find((h) => h.key === 'Content-Security-Policy').value;
-    const HTML_B64 = readFileSync(pubHtml).toString('base64');
-    const GAME_B64 = readFileSync(pubJs).toString('base64');
+    // No CSP header is served with the standalone: GitHub Pages serves
+    // the guest build without vercel.json's headers, and its
+    // script-src 'self' would block the standalone's inline bundle.
+    const HTML_B64 = readFileSync(pubHtml).toString('base64'); // standalone.html is self-contained: no separate game.js
     const cport = 9850 + (process.pid % 140);
-    const chrome = spawn('/opt/meta-chromium/chrome', [
-      '--headless=new', '--no-sandbox', '--disable-gpu', '--hide-scrollbars',
+    // Sandbox Chromium (Hatch) refuses to start without its WebGL domain
+    // policy flags; stock Chromium/Chrome neither needs nor accepts them,
+    // so they are added only when the policy file is present.
+    const HATCH_WGL = '/var/lib/hatch-browser/rootfs-base/usr/share/hatch/chromium/webgl-allowed-domains.txt';
+    const chromeFlags = existsSync(HATCH_WGL) ? ['--hatch-webgl-allowed-domains-file=' + HATCH_WGL, '--hatch-webgl-allowed-domains-sha256=' + createHash('sha256').update(readFileSync(HATCH_WGL)).digest('hex')] : [];
+    const chrome = spawn(CHROME_BIN, [
+      '--headless=new', '--no-sandbox', '--disable-gpu', '--hide-scrollbars', ...chromeFlags,
       '--remote-debugging-port=' + cport, '--user-data-dir=/tmp/rejuv5-chrome-' + cport,
       '--window-size=1280,800', 'about:blank',
     ], { stdio: 'ignore' });
@@ -594,10 +611,8 @@ ok('B20 Mom\'s send-off at Cold is the guarded variant of the same beat',
         try {
           if (url.includes('/api/')) {
             await sendAny('Fetch.fulfillRequest', { requestId: p.requestId, responseCode: 200, responseHeaders: [{ name: 'Content-Type', value: 'application/json' }], body: Buffer.from('{"ok":true}').toString('base64') }, sessionId);
-          } else if (url.endsWith('/game.js')) {
-            await sendAny('Fetch.fulfillRequest', { requestId: p.requestId, responseCode: 200, responseHeaders: [{ name: 'Content-Type', value: 'text/javascript; charset=utf-8' }, { name: 'Content-Security-Policy', value: CSP }], body: GAME_B64 }, sessionId);
           } else {
-            await sendAny('Fetch.fulfillRequest', { requestId: p.requestId, responseCode: 200, responseHeaders: [{ name: 'Content-Type', value: 'text/html; charset=utf-8' }, { name: 'Content-Security-Policy', value: CSP }], body: HTML_B64 }, sessionId);
+            await sendAny('Fetch.fulfillRequest', { requestId: p.requestId, responseCode: 200, responseHeaders: [{ name: 'Content-Type', value: 'text/html; charset=utf-8' }], body: HTML_B64 }, sessionId);
           }
         } catch (e) { /* session gone */ }
       }
@@ -639,7 +654,7 @@ ok('B20 Mom\'s send-off at Cold is the guarded variant of the same beat',
       })()`;
       const br = await evl(browserDriver);
       ok('C01 real-browser: 14-character cast shipped; Quest Log PEOPLE rows render tier labels in the real bundle',
-        !!br && br.castCount === 14 && Array.isArray(br.peopleRows) && br.peopleRows.some((l) => l.includes('Mom — Warm')) && br.peopleRows.some((l) => l.includes('Gary — Close')),
+        !!br && br.castCount === 14 && Array.isArray(br.peopleRows) && br.peopleRows.some((l) => l.includes('Mom — Warm')) && br.peopleRows.some((l) => l.includes('Vale — Close')),
         JSON.stringify(br));
       ok('C02 real-browser: parley pair injected in Celadon post-Anne; tier edges live in the shipped bundle',
         !!br && br.parleyThere === true && br.tierCheck === 'Cold/Warm/Close', JSON.stringify(br));

@@ -5,13 +5,14 @@
 // Mire turn-order speed, Bloom healing. Part C: the same damage parity
 // proof in real headless Chromium (audit-laptop transport pattern).
 // Run: node tests/rejuv-phase2-checks.mjs   (exit 1 on any failure)
-// Part C reads public/index.html + public/game.js from disk — run
+// Part C serves dist/standalone.html (the shipped guest build) in headless Chromium — run
 // `node scripts/build.mjs` first.
 
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { readFileSync, existsSync } from 'node:fs';
 import { spawn } from 'node:child_process';
+import { createHash } from 'node:crypto';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 let pass = 0, fail = 0;
@@ -64,7 +65,7 @@ const F = (mapId, mode) => G.resolveField(mapId, mode || 'classic');
     JSON.stringify(Object.fromEntries(Object.keys(areaExpect).map((m) => [m, G.groundForMap(m).id]))));
   const mapIds = Object.keys(ALL_MAPS);
   ok('A09 every merged Kanto map is explicitly assigned in MAP_GROUND (' + mapIds.length + ' maps)',
-    mapIds.every((id) => typeof G.MAP_GROUND[id] === 'string') && Object.keys(G.MAP_GROUND).length === mapIds.length,
+    mapIds.every((id) => typeof G.MAP_GROUND[id] === 'string'), // W-BG assigned all 432 maps; the old ===70 total-count equality is retired
     'maps=' + mapIds.length + ' assigned=' + Object.keys(G.MAP_GROUND).length
     + ' missing=' + mapIds.filter((id) => !G.MAP_GROUND[id]).join(','));
   ok('A10 unmapped id falls back to Open (no crash, no rules)',
@@ -320,18 +321,23 @@ ok('B13 all 8 gym exteriors carry a Ground teaching sign',
 
 // ================= Part C: real headless Chromium =================
 {
-  const pubHtml = join(ROOT, 'public', 'index.html');
-  const pubJs = join(ROOT, 'public', 'game.js');
-  if (!existsSync(pubHtml) || !existsSync(pubJs) || !existsSync('/opt/meta-chromium/chrome')) {
+  const pubHtml = join(ROOT, 'dist', 'standalone.html'); // shipped guest build — the public/ Vercel target was retired in c7575dc1
+  const CHROME_BIN = process.env.CHROME_BIN || ['/opt/meta-chromium/chrome', '/usr/bin/google-chrome', '/usr/bin/google-chrome-stable', '/usr/bin/chromium', '/usr/bin/chromium-browser'].find((p) => existsSync(p));
+  if (!existsSync(pubHtml) || !CHROME_BIN) {
     ok('C01 real-browser parity (skipped: built bundle or chromium missing)', false, 'build first: node scripts/build.mjs');
   } else {
-    const CSP = JSON.parse(readFileSync(join(ROOT, 'vercel.json'), 'utf8')).headers[0].headers
-      .find((h) => h.key === 'Content-Security-Policy').value;
-    const HTML_B64 = readFileSync(pubHtml).toString('base64');
-    const GAME_B64 = readFileSync(pubJs).toString('base64');
+    // No CSP header is served with the standalone: GitHub Pages serves
+    // the guest build without vercel.json's headers, and its
+    // script-src 'self' would block the standalone's inline bundle.
+    const HTML_B64 = readFileSync(pubHtml).toString('base64'); // standalone.html is self-contained: no separate game.js
     const cport = 9700 + (process.pid % 200);
-    const chrome = spawn('/opt/meta-chromium/chrome', [
-      '--headless=new', '--no-sandbox', '--disable-gpu', '--hide-scrollbars',
+    // Sandbox Chromium (Hatch) refuses to start without its WebGL domain
+    // policy flags; stock Chromium/Chrome neither needs nor accepts them,
+    // so they are added only when the policy file is present.
+    const HATCH_WGL = '/var/lib/hatch-browser/rootfs-base/usr/share/hatch/chromium/webgl-allowed-domains.txt';
+    const chromeFlags = existsSync(HATCH_WGL) ? ['--hatch-webgl-allowed-domains-file=' + HATCH_WGL, '--hatch-webgl-allowed-domains-sha256=' + createHash('sha256').update(readFileSync(HATCH_WGL)).digest('hex')] : [];
+    const chrome = spawn(CHROME_BIN, [
+      '--headless=new', '--no-sandbox', '--disable-gpu', '--hide-scrollbars', ...chromeFlags,
       '--remote-debugging-port=' + cport, '--user-data-dir=/tmp/rejuv2-chrome-' + cport,
       '--window-size=1280,800', 'about:blank',
     ], { stdio: 'ignore' });
@@ -361,10 +367,8 @@ ok('B13 all 8 gym exteriors carry a Ground teaching sign',
         try {
           if (url.includes('/api/')) {
             await sendAny('Fetch.fulfillRequest', { requestId: p.requestId, responseCode: 200, responseHeaders: [{ name: 'Content-Type', value: 'application/json' }], body: Buffer.from('{"ok":true}').toString('base64') }, sessionId);
-          } else if (url.endsWith('/game.js')) {
-            await sendAny('Fetch.fulfillRequest', { requestId: p.requestId, responseCode: 200, responseHeaders: [{ name: 'Content-Type', value: 'text/javascript; charset=utf-8' }, { name: 'Content-Security-Policy', value: CSP }], body: GAME_B64 }, sessionId);
           } else {
-            await sendAny('Fetch.fulfillRequest', { requestId: p.requestId, responseCode: 200, responseHeaders: [{ name: 'Content-Type', value: 'text/html; charset=utf-8' }, { name: 'Content-Security-Policy', value: CSP }], body: HTML_B64 }, sessionId);
+            await sendAny('Fetch.fulfillRequest', { requestId: p.requestId, responseCode: 200, responseHeaders: [{ name: 'Content-Type', value: 'text/html; charset=utf-8' }], body: HTML_B64 }, sessionId);
           }
         } catch (e) { /* session gone */ }
       }
