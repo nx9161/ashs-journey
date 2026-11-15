@@ -63,12 +63,12 @@ const sha = (s) => createHash('sha256').update(s).digest('hex');
 // ---------- ratchet pins (T0: measured on main 49463353) ----------
 const PIN = {
   NAMED_POSTS: 594,
-  NAMED_DESIGNS: 537, // T3: 418 + 116 crowd-II kinds + 3 second-palette variants (Brine/Westwind/Okonkwo posts carry two data palettes each)
+  NAMED_DESIGNS: 551, // T4: 537 + 14 tail kinds (wave final: every distinct named person uniquely designed)
   SERVICE_POSTS: 131,
   SERVICE_DESIGNS: 69,
   SCOPE_POSTS: 725,
-  NAMED_DUP_GROUPS: 8, // T3: 29 - 21 retired crowd-II groups
-  NAMED_DUP_POSTS: 23, // T3: 177 - 154 retired crowd-II posts
+  NAMED_DUP_GROUPS: 0, // T4: 8 - 8 retired tail groups (FINAL — no design shared by 2+ distinct named persons)
+  NAMED_DUP_POSTS: 0, // T4: 23 - 23 retired tail posts (FINAL)
   SERVICE_DUP_POSTS: 99,
   SERVICE_MAX_DESIGN_POSTS: 3,
   SERVICE_TOWN_REPEAT_PAIRS: 0,
@@ -84,7 +84,10 @@ const PIN = {
 // T3: + 116 cast-* kinds (named crowd II: the sailor/lass/gent/kid/
 // ranger/scientist/fisher groups; YOUNGSTER TAM and METEOR WATCHER
 // SOL repoint onto their existing T2 kinds, no new kind).
-const PINNED_CAST_KINDS = ['attendant-amber', 'attendant-borea', 'attendant-maris', 'attendant-yamato', 'cast-ada', 'cast-amara', 'cast-ana', 'cast-ana-lass', 'cast-ana-pilgrim', 'cast-ana-regal', 'cast-ana-swimmer', 'cast-anka', 'cast-anselm', 'cast-anthea', 'cast-asha', 'cast-asha-crater', 'cast-bly', 'cast-blythe', 'cast-bo-cycling', 'cast-bo-rancher', 'cast-bo-trainee', 'cast-bo-triathlete', 'cast-borin', 'cast-bram-foreman', 'cast-bram-miner', 'cast-bram-oldhand', 'cast-bramble', 'cast-bramble-lakeside', 'cast-bran', 'cast-brant', 'cast-breakwater', 'cast-brin-ash', 'cast-brin-warehouse', 'cast-brine', 'cast-bryn-ashwalker', 'cast-bryn-hiker', 'cast-bryn-stall', 'cast-bryn-tunneler', 'cast-cal', 'cast-cal-excavator', 'cast-chairman', 'cast-chiemi', 'cast-cole', 'cast-colm', 'cast-coralie', 'cast-corin', 'cast-dara', 'cast-del-causeway', 'cast-del-swimmer', 'cast-doss-gamer', 'cast-doss-harbour', 'cast-doss-hiker', 'cast-dunebergamot', 'cast-dunekumq', 'cast-dunepumm', 'cast-dunesham', 'cast-dunmore', 'cast-dust-hiker', 'cast-dust-ruin', 'cast-earl', 'cast-elder-den', 'cast-elder-move', 'cast-elder-pip', 'cast-elias', 'cast-elias-historian', 'cast-ember', 'cast-ember-sailor', 'cast-fen', 'cast-fenn-bird', 'cast-fenn-gardener', 'cast-fenn-lake', 'cast-fenn-meadow', 'cast-ferryman', 'cast-festustrov', 'cast-festusvale', 'cast-frost', 'cast-fuego', 'cast-fuji', 'cast-gail', 'cast-garr', 'cast-gensai', 'cast-gorannave', 'cast-goranpumm', 'cast-gorantrov', 'cast-hald', 'cast-halden', 'cast-hale', 'cast-hana', 'cast-hana-florist', 'cast-harlow', 'cast-herald', 'cast-hollis', 'cast-host', 'cast-hugo', 'cast-ilse', 'cast-ilse-historian', 'cast-ines', 'cast-io-runner', 'cast-io-trend', 'cast-io-warden', 'cast-iris', 'cast-jonas', 'cast-jun', 'cast-juniper-host', 'cast-juniper-tech', 'cast-juno-mechanic', 'cast-juno-turbine', 'cast-keeper-daycare', 'cast-kest', 'cast-kestrel', 'cast-kett-sailor', 'cast-kio', 'cast-kit', 'cast-kobe', 'cast-li', 'cast-lilofire', 'cast-lilomika', 'cast-lilonave', 'cast-lio-apprentice', 'cast-lio-berry', 'cast-lio-fisher', 'cast-lio-streak', 'cast-liv', 'cast-log', 'cast-luna', 'cast-lux', 'cast-maizie', 'cast-mara-curator', 'cast-mara-dive', 'cast-mara-producer', 'cast-maraval', 'cast-maren', 'cast-marina-ice', 'cast-marinabergamot', 'cast-marinapumm', 'cast-marl', 'cast-mary-fan', 'cast-masa-cook', 'cast-masa-master', 'cast-masa-spring', 'cast-meridian', 'cast-mina', 'cast-mira', 'cast-mira-fest', 'cast-mira-jogger', 'cast-mira-lass', 'cast-mira-oldale', 'cast-mire', 'cast-mirel', 'cast-momoko', 'cast-moss', 'cast-moss-school', 'cast-moss-spring', 'cast-nia', 'cast-norn', 'cast-northstar', 'cast-oda', 'cast-odo-burner', 'cast-odo-tracker', 'cast-official', 'cast-okonkwo', 'cast-oktay', 'cast-olin', 'cast-onen', 'cast-oona', 'cast-orbit', 'cast-orin-bee', 'cast-orr', 'cast-oss', 'cast-ossa', 'cast-ossa-dragon', 'cast-ossa-ruin', 'cast-ossian', 'cast-pavel', 'cast-pell', 'cast-pell-norwick', 'cast-petra', 'cast-picokumq', 'cast-pike', 'cast-piotr-host', 'cast-piotr-uncle', 'cast-piotr-warden', 'cast-pip', 'cast-poppy', 'cast-pran', 'cast-reed', 'cast-regaltrov', 'cast-regalvale', 'cast-ren', 'cast-rhea', 'cast-rosa', 'cast-rose', 'cast-rue', 'cast-rue-apprentice', 'cast-rue-caspian', 'cast-rue-charcutter', 'cast-rue-condo', 'cast-rue-cutter', 'cast-rue-lass', 'cast-rue-youngster', 'cast-ryu', 'cast-sable', 'cast-sakura', 'cast-sato', 'cast-seth', 'cast-sol-apprentice', 'cast-sol-beach', 'cast-sol-fan', 'cast-sol-guide', 'cast-sol-hiker', 'cast-sol-meteor', 'cast-sol-pond', 'cast-sol-statue', 'cast-sola', 'cast-sola-picnic', 'cast-sola-sun', 'cast-sola-wanderer', 'cast-solange', 'cast-solene', 'cast-solenne', 'cast-solvi', 'cast-sora', 'cast-sorrel', 'cast-sorrel-climber', 'cast-sula-boatman', 'cast-sula-boatwoman', 'cast-sutter', 'cast-tam', 'cast-tam-grounds', 'cast-tam-host', 'cast-tess', 'cast-tov', 'cast-towerkeep', 'cast-ulamae', 'cast-ulo', 'cast-umber', 'cast-ume', 'cast-una', 'cast-una-commuter', 'cast-una-daycare', 'cast-veda', 'cast-veda-soaker', 'cast-vesk-crier', 'cast-vesk-intern', 'cast-vesk-ski', 'cast-vey', 'cast-volta', 'cast-voss', 'cast-vul', 'cast-wade', 'cast-westwind', 'cast-willow', 'cast-wren-breeder', 'cast-wren-cartographer', 'cast-wren-coast', 'cast-wren-fest', 'cast-wren-float', 'cast-wren-florist', 'cast-wren-hiker', 'cast-wren-scout', 'cast-wren-treehouse', 'cast-yara', 'cast-yuki', 'cast-yuki-fan', 'clerk-amber', 'clerk-arden', 'clerk-borea', 'clerk-maris', 'clerk-trial', 'clerk-yamato', 'host-arden', 'host-borea', 'host-maris', 'host-yamato'];
+// T4: + 14 cast-* kinds (named tail: monk/bugcatcher/aide/grunt/
+// camper/officer/swimmer groups; BUG MANIAC FERN's two posts share
+// her one kind — same person, one design).
+const PINNED_CAST_KINDS = ['attendant-amber', 'attendant-borea', 'attendant-maris', 'attendant-yamato', 'cast-ada', 'cast-amara', 'cast-ana', 'cast-ana-lass', 'cast-ana-pilgrim', 'cast-ana-regal', 'cast-ana-swimmer', 'cast-anka', 'cast-anselm', 'cast-anselm-tower', 'cast-anthea', 'cast-asha', 'cast-asha-crater', 'cast-bly', 'cast-blythe', 'cast-bo-cycling', 'cast-bo-rancher', 'cast-bo-swimmer', 'cast-bo-trainee', 'cast-bo-triathlete', 'cast-borin', 'cast-bram-foreman', 'cast-bram-miner', 'cast-bram-oldhand', 'cast-bramble', 'cast-bramble-lakeside', 'cast-bran', 'cast-brant', 'cast-breakwater', 'cast-brin-ash', 'cast-brin-warehouse', 'cast-brine', 'cast-bryn-ashwalker', 'cast-bryn-hiker', 'cast-bryn-stall', 'cast-bryn-tunneler', 'cast-cal', 'cast-cal-excavator', 'cast-chairman', 'cast-chiemi', 'cast-cole', 'cast-colm', 'cast-coralie', 'cast-corin', 'cast-dara', 'cast-deepkeeper', 'cast-del-causeway', 'cast-del-swimmer', 'cast-doss-gamer', 'cast-doss-harbour', 'cast-doss-hiker', 'cast-dunebergamot', 'cast-dunekumq', 'cast-dunepumm', 'cast-dunesham', 'cast-dunmore', 'cast-dust-hiker', 'cast-dust-ruin', 'cast-earl', 'cast-elder-den', 'cast-elder-move', 'cast-elder-pip', 'cast-elias', 'cast-elias-historian', 'cast-ember', 'cast-ember-sailor', 'cast-fen', 'cast-fenn-bird', 'cast-fenn-gardener', 'cast-fenn-lake', 'cast-fenn-meadow', 'cast-fern-aide', 'cast-fern-lab', 'cast-fern-maniac', 'cast-ferryman', 'cast-festustrov', 'cast-festusvale', 'cast-frost', 'cast-frostkeeper', 'cast-fuego', 'cast-fuji', 'cast-gail', 'cast-garr', 'cast-gateguard', 'cast-gensai', 'cast-gorannave', 'cast-goranpumm', 'cast-gorantrov', 'cast-hald', 'cast-halden', 'cast-hale', 'cast-hana', 'cast-hana-florist', 'cast-harlow', 'cast-herald', 'cast-hollis', 'cast-host', 'cast-hugo', 'cast-ilse', 'cast-ilse-historian', 'cast-ines', 'cast-io-runner', 'cast-io-trend', 'cast-io-warden', 'cast-iris', 'cast-jonas', 'cast-jun', 'cast-juniper-host', 'cast-juniper-tech', 'cast-juno-mechanic', 'cast-juno-turbine', 'cast-keeper-daycare', 'cast-kest', 'cast-kestrel', 'cast-kett-sailor', 'cast-kio', 'cast-kit', 'cast-kobe', 'cast-li', 'cast-lilofire', 'cast-lilomika', 'cast-lilonave', 'cast-lio-apprentice', 'cast-lio-berry', 'cast-lio-camper', 'cast-lio-fisher', 'cast-lio-streak', 'cast-liv', 'cast-log', 'cast-luna', 'cast-lux', 'cast-maizie', 'cast-mara-curator', 'cast-mara-dive', 'cast-mara-producer', 'cast-maraval', 'cast-maren', 'cast-marina-ice', 'cast-marinabergamot', 'cast-marinapumm', 'cast-marl', 'cast-mary-fan', 'cast-masa-cook', 'cast-masa-master', 'cast-masa-spring', 'cast-meridian', 'cast-mina', 'cast-mira', 'cast-mira-fest', 'cast-mira-jogger', 'cast-mira-lass', 'cast-mira-oldale', 'cast-mire', 'cast-mirel', 'cast-momoko', 'cast-moss', 'cast-moss-school', 'cast-moss-spring', 'cast-nia', 'cast-norn', 'cast-northstar', 'cast-oda', 'cast-odo-burner', 'cast-odo-tracker', 'cast-official', 'cast-okonkwo', 'cast-oktay', 'cast-olin', 'cast-onen', 'cast-oona', 'cast-orbit', 'cast-orin-bee', 'cast-orr', 'cast-oss', 'cast-ossa', 'cast-ossa-dragon', 'cast-ossa-ruin', 'cast-ossian', 'cast-pavel', 'cast-pell', 'cast-pell-norwick', 'cast-petra', 'cast-picokumq', 'cast-pike', 'cast-piotr-host', 'cast-piotr-uncle', 'cast-piotr-warden', 'cast-pip', 'cast-poppy', 'cast-pran', 'cast-reed', 'cast-regaltrov', 'cast-regalvale', 'cast-ren', 'cast-rhea', 'cast-rosa', 'cast-rose', 'cast-rue', 'cast-rue-apprentice', 'cast-rue-caspian', 'cast-rue-charcutter', 'cast-rue-condo', 'cast-rue-cutter', 'cast-rue-lass', 'cast-rue-youngster', 'cast-ryu', 'cast-sable', 'cast-sakura', 'cast-sato', 'cast-seth', 'cast-sol-apprentice', 'cast-sol-beach', 'cast-sol-fan', 'cast-sol-guide', 'cast-sol-hiker', 'cast-sol-meteor', 'cast-sol-pond', 'cast-sol-statue', 'cast-sola', 'cast-sola-picnic', 'cast-sola-sun', 'cast-sola-wanderer', 'cast-solange', 'cast-solene', 'cast-solenne', 'cast-solvi', 'cast-sora', 'cast-sorrel', 'cast-sorrel-aide', 'cast-sorrel-climber', 'cast-sula-boatman', 'cast-sula-boatwoman', 'cast-sutter', 'cast-tam', 'cast-tam-grounds', 'cast-tam-host', 'cast-tess', 'cast-theo', 'cast-tov', 'cast-towerkeep', 'cast-ulamae', 'cast-ulo', 'cast-umber', 'cast-ume', 'cast-una', 'cast-una-commuter', 'cast-una-daycare', 'cast-veda', 'cast-veda-soaker', 'cast-vesk-crier', 'cast-vesk-intern', 'cast-vesk-ski', 'cast-vex', 'cast-vey', 'cast-volta', 'cast-voltakeeper', 'cast-voss', 'cast-vul', 'cast-wade', 'cast-westwind', 'cast-willow', 'cast-wren-breeder', 'cast-wren-cartographer', 'cast-wren-catcher', 'cast-wren-coast', 'cast-wren-fest', 'cast-wren-float', 'cast-wren-florist', 'cast-wren-hiker', 'cast-wren-scout', 'cast-wren-treehouse', 'cast-yara', 'cast-yuki', 'cast-yuki-fan', 'clerk-amber', 'clerk-arden', 'clerk-borea', 'clerk-maris', 'clerk-trial', 'clerk-yamato', 'host-arden', 'host-borea', 'host-maris', 'host-yamato'];
 // C5: post keys (map#ordinal) whose DESIGN fields may differ from the
 // T0 snapshot. T0: none — any design-field change fails. Tranches add
 // their spec-listed posts here in-commit, disclosed in the checklist.
@@ -97,11 +100,16 @@ const PINNED_CAST_KINDS = ['attendant-amber', 'attendant-borea', 'attendant-mari
 // SAILOR LUNA, league-evergrande#5 SUTTER, cerulean#6 + moro#4 PIP).
 // No palette splits in T3; the full design-by-design census diff vs
 // main measured exactly these 138 changes and zero side effects.
+// T4 adds 15 keys: the 15 repointed tail posts (BUG MANIAC FERN's
+// two posts both listed). No palette splits in T4; the census diff
+// vs main measured exactly these 15 changes and zero side effects.
 const SPEC_DESIGN_EXCEPTIONS = [
   'amity-square#0',
   'azalea#0',
   'azalea#1',
   'azalea#3',
+  'bell-tower-1#0',
+  'birch-lab#0',
   'birch-lab#1',
   'blackthorn#0',
   'blackthorn#1',
@@ -148,6 +156,7 @@ const SPEC_DESIGN_EXCEPTIONS = [
   'eterna#1',
   'eterna#2',
   'eterna#3',
+  'eterna-forest#0',
   'evergrande#0',
   'evergrande#1',
   'evergrande#2',
@@ -264,6 +273,7 @@ const SPEC_DESIGN_EXCEPTIONS = [
   'house-veilstone#0',
   'house-violet#0',
   'ice-isle#0',
+  'ice-isle#1',
   'ilex-forest#1',
   'indigo#0',
   'indigo#1',
@@ -297,6 +307,7 @@ const SPEC_DESIGN_EXCEPTIONS = [
   'lighthouse-1#0',
   'lighthouse-2#0',
   'lightning-isle#0',
+  'lightning-isle#1',
   'lilycove#0',
   'lilycove#1',
   'lilycove#2',
@@ -364,6 +375,7 @@ const SPEC_DESIGN_EXCEPTIONS = [
   'petalburg#0',
   'petalburg#2',
   'petalburg#3',
+  'petalburg-woods#0',
   'pewter#0',
   'pokemon-league#0',
   'pummelo#0',
@@ -372,6 +384,7 @@ const SPEC_DESIGN_EXCEPTIONS = [
   'pummelo#3',
   'pummelo#5',
   'r101#0',
+  'r102#0',
   'r102#1',
   'r103#0',
   'r104#0',
@@ -439,11 +452,15 @@ const SPEC_DESIGN_EXCEPTIONS = [
   'rocktunnel#0',
   'route-silver#0',
   'route11#0',
+  'route20#0',
   'route3#0',
   'route4#1',
   'route7#0',
   'route8#1',
   'route9#0',
+  'route9#1',
+  'route22#0',
+  'rowan-lab#0',
   'rowan-lab#1',
   'rustboro#0',
   'rustboro#1',
@@ -452,6 +469,7 @@ const SPEC_DESIGN_EXCEPTIONS = [
   'rusturf-tunnel#0',
   'saffron#2',
   'sandgem#0',
+  'sandgem#1',
   'sandgem#2',
   'sandgem#3',
   'sendoff-spring#0',
@@ -460,6 +478,7 @@ const SPEC_DESIGN_EXCEPTIONS = [
   'shamouti#2',
   'shamouti#3',
   'shamouti#5',
+  'silph1#0',
   'silph1#2',
   'silver-stadium#0',
   'silver-stadium#1',
@@ -484,6 +503,7 @@ const SPEC_DESIGN_EXCEPTIONS = [
   'sootopolis#2',
   'sootopolis#3',
   'spring-path#0',
+  'sprout-tower-1#0',
   'sprout-tower-2#2',
   'stark-mountain#0',
   'sunnyshore#0',
@@ -522,6 +542,7 @@ const SPEC_DESIGN_EXCEPTIONS = [
   'violet#2',
   'violet#3',
   'viridian#1',
+  'whirl-islands-2#0',
 ];
 
 // ---------- census, assembled per map in loadMap order ----------
