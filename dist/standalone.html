@@ -7383,6 +7383,42 @@ GYMID2_KIND_DEFS.forEach(([kind]) => {
 const GYMID2_PROP_KINDS = GYMID2_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
 const GYMID2_WALL_KINDS = GYMID2_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
 const GYMID2_FLOOR_KINDS = GYMID2_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
+// Gym Identity T3 (Maris): the eight Maris gyms' own floor kinds —
+// ochrefloor (Copperton), swashfloor (Mistford), dynamofloor (Lilac),
+// springfloor (Steamspring), meadowfloor (Meadowbrook), roostfloor
+// (Highbranch), mirrorfloor (Starfall), delugefloor (Craterlake) —
+// indices 1580-1587 per WAVE-GYM-IDENTITY-PLAN §8 (continuing T2's
+// 1572-1579), verified free against TILE_CHARS and every map row.
+// Name discipline: foamfloor/steamfloor/rainfloor/craterfloor are all
+// taken by existing kinds, so Mistford takes swashfloor (its foam is
+// swash), Steamspring takes springfloor (the spring, not the steam)
+// and Craterlake takes delugefloor (the Rain badge's conducted water).
+// Each is 'floor' class: swapped 1:1 from the walkable '+' gymfloor
+// char inside its own gym ONLY, so floor stays floor (the WALKABLE
+// spread lands in maps.mjs beside the other waves'). The shared
+// 'gymfloor' keeps its other 12 gyms until their tranches land.
+// Authored art: assets/sprites/pix/tiles/tile-<kind>.pix, spliced
+// into art-data.mjs by entry (generator-faithful, additions-only).
+const GYMID3_KIND_DEFS = [
+  ['ochrefloor', 'floor'],
+  ['swashfloor', 'floor'],
+  ['dynamofloor', 'floor'],
+  ['springfloor', 'floor'],
+  ['meadowfloor', 'floor'],
+  ['roostfloor', 'floor'],
+  ['mirrorfloor', 'floor'],
+  ['delugefloor', 'floor'],
+];
+const GYMID3_KIND_INDEX = { ochrefloor: 1580, swashfloor: 1581, dynamofloor: 1582, springfloor: 1583, meadowfloor: 1584, roostfloor: 1585, mirrorfloor: 1586, delugefloor: 1587 };
+const GYMID3_KIND_CHARS = {};
+GYMID3_KIND_DEFS.forEach(([kind]) => {
+  const ch = String.fromCodePoint(0x1E00 + GYMID3_KIND_INDEX[kind]);
+  GYMID3_KIND_CHARS[kind] = ch;
+  TILE_CHARS[ch] = kind;
+});
+const GYMID3_PROP_KINDS = GYMID3_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
+const GYMID3_WALL_KINDS = GYMID3_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
+const GYMID3_FLOOR_KINDS = GYMID3_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
 const SINNOH_TOWN_GROUND_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg);
 const SINNOH_TOWN_GROUND2_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg2);
 // TX-3: the 8 gym exteriors by town (original type-accent motifs).
@@ -11985,6 +12021,42 @@ const ART = {
     "cdaaaadbadaaacdb",
     "bbbbbbbbbbbbbbbb"
   ] },
+  "tile-delugefloor": { w: 16, h: 16, pal: {"a":"#2e5a66","b":"#244a54","c":"#3d707e","d":"#7ac8bc"}, rows: [
+    "bbbbbbbbbbbbbbbb",
+    "aaaaaaabaaaabaaa",
+    "aaaaaaabaaaabada",
+    "aabaadaaaaaabaaa",
+    "abadcaaaaaadbaaa",
+    "aabaaaaaaacabaaa",
+    "badaaaddaaaabbac",
+    "adaadaddaaabbaab",
+    "bbbbbbbbbbbbbbbb",
+    "aaacbaabaaaadaaa",
+    "aaabbaaaaaaaaaab",
+    "aaaabababaaaaaaa",
+    "aaabbbdaacdbaaaa",
+    "aaaababacaaaaaac",
+    "aabbbadaabbaaaab",
+    "aaadbaadaaaacaaa"
+  ] },
+  "tile-dynamofloor": { w: 16, h: 16, pal: {"a":"#8a854e","b":"#74703f","c":"#a8a468","d":"#4a4630"}, rows: [
+    "dddddddddddddddd",
+    "daaaaaaadaaaaaaa",
+    "dadaadaadadaadaa",
+    "daaaaaaadaaaaaca",
+    "daaaaaaadaaaaaaa",
+    "dadaadaadcdaadac",
+    "daaaacaadaaaaaaa",
+    "dbbbbbbbdbbbbbbb",
+    "dddddddddddddddd",
+    "daaaaaaadaaaaaaa",
+    "dadaadacdadaadaa",
+    "daaaaaaadaaaaaaa",
+    "daacaaaadaaaaaaa",
+    "dadaadaadadcadaa",
+    "daacaaaadaaaaaca",
+    "dbbbbbbbdbbbbbbb"
+  ] },
   "tile-glassfloor": { w: 16, h: 16, pal: {"a":"#79a852","b":"#679644","c":"#8fbc66","d":"#f2a7c3"}, rows: [
     "dacaaaabacaaaaaa",
     "cacaaacbababaaca",
@@ -12075,6 +12147,60 @@ const ART = {
     "dabadaaadaaadaaa",
     "bcbaaacaaaaaaaac"
   ] },
+  "tile-meadowfloor": { w: 16, h: 16, pal: {"a":"#7fae56","b":"#6d9a48","c":"#93c06a","d":"#557c38"}, rows: [
+    "aaaaaaaaaaaaabac",
+    "caaabaabaccaaaaa",
+    "aaaaaaaaaaaababa",
+    "aaacacaaacaaabaa",
+    "aaaacaaabbabcaaa",
+    "baaaaaaaaaaaaaaa",
+    "aabacacabaacaaaa",
+    "aaaaaaaacaaacccb",
+    "aacaacaaabbaaaab",
+    "aabaaaaaaaaaaaab",
+    "aaadacaacaaabaac",
+    "aaaaacacaaacaaba",
+    "aaccbabcaaaaacaa",
+    "aaaaacaaaaaaaaaa",
+    "aaababaaaababaab",
+    "aaabaabaaacacaca"
+  ] },
+  "tile-mirrorfloor": { w: 16, h: 16, pal: {"a":"#4a3a6e","b":"#3c2e5a","c":"#5d4c88","d":"#9adce8"}, rows: [
+    "daaaaaaaaaaaaaaa",
+    "aaaaaaaaaaaaaaad",
+    "aaaaaaaaaaaacaaa",
+    "aaaaaaaaaaaaadaa",
+    "caaaaaaaaaaadaaa",
+    "aaaaaaaaaaaaaaac",
+    "aaaaaaaaaaaaaaaa",
+    "aaaaaaaaadaaaaaa",
+    "bbbbaaaadaaaaaaa",
+    "bbbbaaadaaaaaaaa",
+    "bbbbaaaaaaaaacaa",
+    "bbbbaaaaaaaaaaaa",
+    "aacadaaaaaaaaaaa",
+    "aaadaaaaaaaaaaaa",
+    "aaaaaaaaaaaaaaaa",
+    "adaaaaaaaaaaaaaa"
+  ] },
+  "tile-ochrefloor": { w: 16, h: 16, pal: {"a":"#c49a5e","b":"#a87f4a","c":"#dcb87e","d":"#7d5a34"}, rows: [
+    "aacadabaccaaacaa",
+    "aaaaaabaaaabaaaa",
+    "aaaadaaaaaaaaaaa",
+    "aaaaaababbbbaaaa",
+    "aabadaaaaaaabaca",
+    "dddddddddddddddd",
+    "aaaaabcaaaadaaba",
+    "aaaaaacbaaaabcaa",
+    "aabaaaaaaaadaacc",
+    "abcaaabaaaaabcaa",
+    "aaaaaaaaaaadaaaa",
+    "dddddddddddddddd",
+    "aabaaaadaaabaaca",
+    "aacaacaaaaaaaaab",
+    "aaaaabbdaaaaaaaa",
+    "aaaaaaaaaabcaaac"
+  ] },
   "tile-pasturefloor": { w: 16, h: 16, pal: {"a":"#a5c86a","b":"#94b45c","c":"#bcd87e","d":"#7c9c48"}, rows: [
     "aaabaaaaaabacaaa",
     "ababbaaaadaaabaa",
@@ -12128,6 +12254,42 @@ const ART = {
     "caaaaaaaabaaabab",
     "aabaaaaabaaaaaaa",
     "bcbadacaaaaaaaaa"
+  ] },
+  "tile-roostfloor": { w: 16, h: 16, pal: {"a":"#8a6a44","b":"#77572f","c":"#9c7c50","d":"#5d4426"}, rows: [
+    "aaacaaaaaaaaaaaa",
+    "bbbbaaaaaaaabbbb",
+    "caaaaaaaaaaaaaaa",
+    "dddddddddddddddd",
+    "aaaaaaaaacaaaaaa",
+    "bbbbaaaaaaaabbbb",
+    "acaaaaaaaaaaaaaa",
+    "dddddddddddddddd",
+    "aaaaaaaaaaaaaaaa",
+    "bbbbbbbbaacaaaaa",
+    "aaacaaaaaaaacaaa",
+    "dddddddddddddddd",
+    "aaaaaaaaaaaacaaa",
+    "aaaaaaaaaaaaaaaa",
+    "acaaacaaaaaaaaaa",
+    "dddddddddddddddd"
+  ] },
+  "tile-springfloor": { w: 16, h: 16, pal: {"a":"#b87a5c","b":"#a06548","c":"#d09a78","d":"#e8cdb4"}, rows: [
+    "aaadaabbaabbaaaa",
+    "caadaabbaabbaaaa",
+    "aaadaaaaaabbcaaa",
+    "aaadaaaaaabbaaaa",
+    "aabdaaaabbaaaaaa",
+    "aabdacaabbaaaaaa",
+    "aaadaabbaaaaaaaa",
+    "dddddddddddddddd",
+    "aaacaabbbbbdaaaa",
+    "aaaaaabbbbbdaaaa",
+    "aabbaaaaaabdbbaa",
+    "aabbaacaacbdbbaa",
+    "aaaaaaaaaaadbbaa",
+    "aaaaaaaaaaadbbaa",
+    "caaaaaaaaaadaaaa",
+    "dddddddddddddddd"
   ] },
   "tile-steelfloor": { w: 16, h: 16, pal: {"a":"#7d8894","b":"#68727e","c":"#939ea9","d":"#4c565f"}, rows: [
     "aaabaaadaabacaad",
@@ -99381,6 +99543,24 @@ const ART = {
     "gggggggggggggggg",
     "gggggggggggggggg"
   ] },
+  "tile-swashfloor": { w: 16, h: 16, pal: {"a":"#5a6a72","b":"#48565e","c":"#8fa5ad","d":"#e8f2ec"}, rows: [
+    "aaaabdbaabaabaab",
+    "bdaaaaadaaaaaaaa",
+    "abababaaaaaaaaaa",
+    "aabaaaabacaaabaa",
+    "abaaaaaaaaabaaaa",
+    "aabaaaaaaabbabaa",
+    "ababaaaaaaaababb",
+    "ababaaaaaaaaabaa",
+    "dabbaabaaaaabaaa",
+    "babbaaaaaaabaaaa",
+    "aabaaaaaaaaaaaaa",
+    "aaaaaabaaaaaaaaa",
+    "aaaaaaaaaaabbdca",
+    "aaaabaaaaabaaaba",
+    "aaaaaaaaaaabaaba",
+    "aaaabadaaaaaaaab"
+  ] },
   "tile-timberroof": { w: 16, h: 16, pal: {"b":"#a39a90","l":"#bab2a6","d":"#6e675e","w":"#8d8478","a":"#d9d3c5","n":"#4e463c"}, rows: [
     "llldllllllllllll",
     "bbbdnwbbbbbbbbbb",
@@ -131780,6 +131960,9 @@ for (const k of GYMID1_FLOOR_KINDS) TILE_ART[k] = 'tile-' + k;
 // Gym Identity T2 (Yamato): the eight gyms' own floor kinds draw their
 // authored tiles (assets/sprites/pix/tiles/tile-<kind>.pix).
 for (const k of GYMID2_FLOOR_KINDS) TILE_ART[k] = 'tile-' + k;
+// Gym Identity T3 (Maris): the eight gyms' own floor kinds draw their
+// authored tiles (assets/sprites/pix/tiles/tile-<kind>.pix).
+for (const k of GYMID3_FLOOR_KINDS) TILE_ART[k] = 'tile-' + k;
 // Premium+ W6 (TX-3/PL-1): door-open frames, authored in TX-3 for every
 // door kind. The warp-fade engine that plays them lands in W7 — W6
 // wires the frames (this registry + cache.doorOpen + doorOpenCanvas)
@@ -142396,6 +142579,15 @@ const WALKABLE = new Set(['.', ',', 'D', 'E', 'C', 'F', 'J', 'K', '1', '2', 'V',
   // (Redwood), scalefloor (Cragmoor) — each swapped 1:1 from the
   // walkable '+' gymfloor char inside its own gym, so floor stays floor.
   ...[1572, 1573, 1574, 1575, 1576, 1577, 1578, 1579]
+    .map((i) => String.fromCodePoint(0x1E00 + i)),
+  // Gym Identity T3: the eight Maris gym floor chars (U+1E00+1580..1587,
+  // tiles.mjs GYMID3_KIND_DEFS) are walkable — ochrefloor (Copperton),
+  // swashfloor (Mistford), dynamofloor (Lilac), springfloor
+  // (Steamspring), meadowfloor (Meadowbrook), roostfloor (Highbranch),
+  // mirrorfloor (Starfall), delugefloor (Craterlake) — each swapped 1:1
+  // from the walkable '+' gymfloor char inside its own gym, so floor
+  // stays floor.
+  ...[1580, 1581, 1582, 1583, 1584, 1585, 1586, 1587]
     .map((i) => String.fromCodePoint(0x1E00 + i))]);
 
 // Trainer definitions for the slice.
@@ -166023,16 +166215,16 @@ const MAPS7 = {
     "indoor": true,
     "rows": [
       "================",
-      "=++++++λλ++++++=",
-      "=++ṕ++++++++Ṗ++=",
-      "=++++++++++++++=",
-      "=++++++++++++++=",
-      "=++++++//++++++=",
-      "=++++++//++++++=",
-      "=++++++++++++++=",
-      "=++ḿ++++++++ḙ++=",
-      "=++++++++++++++=",
-      "=++++++++++++++=",
+      "=␬␬␬␬␬␬λλ␬␬␬␬␬␬=",
+      "=␬␬ṕ␬␬␬␬␬␬␬␬Ṗ␬␬=",
+      "=␬␬␬␬␬␬␬␬␬␬␬␬␬␬=",
+      "=␬␬␬␬␬␬␬␬␬␬␬␬␬␬=",
+      "=␬␬␬␬␬␬//␬␬␬␬␬␬=",
+      "=␬␬␬␬␬␬//␬␬␬␬␬␬=",
+      "=␬␬␬␬␬␬␬␬␬␬␬␬␬␬=",
+      "=␬␬ḿ␬␬␬␬␬␬␬␬ḙ␬␬=",
+      "=␬␬␬␬␬␬␬␬␬␬␬␬␬␬=",
+      "=␬␬␬␬␬␬␬␬␬␬␬␬␬␬=",
       "=======DD=======",
     ],
     "warps": [
@@ -166057,16 +166249,16 @@ const MAPS7 = {
     "indoor": true,
     "rows": [
       "================",
-      "=++++++λλ++++++=",
-      "=++ḗ++++++++Ḙ++=",
-      "=++++++++++++++=",
-      "=++++++++++++++=",
-      "=++++++//++++++=",
-      "=++++++//++++++=",
-      "=++++++++++++++=",
-      "=++ḗ++++++++Ḋ++=",
-      "=++++++++++++++=",
-      "=++++++++++++++=",
+      "=␭␭␭␭␭␭λλ␭␭␭␭␭␭=",
+      "=␭␭ḗ␭␭␭␭␭␭␭␭Ḙ␭␭=",
+      "=␭␭␭␭␭␭␭␭␭␭␭␭␭␭=",
+      "=␭␭␭␭␭␭␭␭␭␭␭␭␭␭=",
+      "=␭␭␭␭␭␭//␭␭␭␭␭␭=",
+      "=␭␭␭␭␭␭//␭␭␭␭␭␭=",
+      "=␭␭␭␭␭␭␭␭␭␭␭␭␭␭=",
+      "=␭␭ḗ␭␭␭␭␭␭␭␭Ḋ␭␭=",
+      "=␭␭␭␭␭␭␭␭␭␭␭␭␭␭=",
+      "=␭␭␭␭␭␭␭␭␭␭␭␭␭␭=",
       "=======DD=======",
     ],
     "warps": [
@@ -166091,16 +166283,16 @@ const MAPS7 = {
     "indoor": true,
     "rows": [
       "================",
-      "=++++++λλ++++++=",
-      "=++ṅ++++++++Ṇ++=",
-      "=++++++++++++++=",
-      "=++++++++++++++=",
-      "=++++++//++++++=",
-      "=++++++//++++++=",
-      "=++++++++++++++=",
-      "=++ṇ++++++++ḙ++=",
-      "=++++++++++++++=",
-      "=++++++++++++++=",
+      "=␮␮␮␮␮␮λλ␮␮␮␮␮␮=",
+      "=␮␮ṅ␮␮␮␮␮␮␮␮Ṇ␮␮=",
+      "=␮␮␮␮␮␮␮␮␮␮␮␮␮␮=",
+      "=␮␮␮␮␮␮␮␮␮␮␮␮␮␮=",
+      "=␮␮␮␮␮␮//␮␮␮␮␮␮=",
+      "=␮␮␮␮␮␮//␮␮␮␮␮␮=",
+      "=␮␮␮␮␮␮␮␮␮␮␮␮␮␮=",
+      "=␮␮ṇ␮␮␮␮␮␮␮␮ḙ␮␮=",
+      "=␮␮␮␮␮␮␮␮␮␮␮␮␮␮=",
+      "=␮␮␮␮␮␮␮␮␮␮␮␮␮␮=",
       "=======DD=======",
     ],
     "warps": [
@@ -166125,16 +166317,16 @@ const MAPS7 = {
     "indoor": true,
     "rows": [
       "================",
-      "=++++++λλ++++++=",
-      "=++ṑ++++++++Ṓ++=",
-      "=++++++++++++++=",
-      "=++++++++++++++=",
-      "=++++++//++++++=",
-      "=++++++//++++++=",
-      "=++++++++++++++=",
-      "=++ḟ++++++++Ḡ++=",
-      "=++++++++++++++=",
-      "=++++++++++++++=",
+      "=␯␯␯␯␯␯λλ␯␯␯␯␯␯=",
+      "=␯␯ṑ␯␯␯␯␯␯␯␯Ṓ␯␯=",
+      "=␯␯␯␯␯␯␯␯␯␯␯␯␯␯=",
+      "=␯␯␯␯␯␯␯␯␯␯␯␯␯␯=",
+      "=␯␯␯␯␯␯//␯␯␯␯␯␯=",
+      "=␯␯␯␯␯␯//␯␯␯␯␯␯=",
+      "=␯␯␯␯␯␯␯␯␯␯␯␯␯␯=",
+      "=␯␯ḟ␯␯␯␯␯␯␯␯Ḡ␯␯=",
+      "=␯␯␯␯␯␯␯␯␯␯␯␯␯␯=",
+      "=␯␯␯␯␯␯␯␯␯␯␯␯␯␯=",
       "=======DD=======",
     ],
     "warps": [
@@ -166159,16 +166351,16 @@ const MAPS7 = {
     "indoor": true,
     "rows": [
       "================",
-      "=++++++λλ++++++=",
-      "=++Ḋ++++++++ḙ++=",
-      "=++++++++++++++=",
-      "=++++++++++++++=",
-      "=++++++//++++++=",
-      "=++++++//++++++=",
-      "=++++++++++++++=",
-      "=++Ḋ++++++++Ḛ++=",
-      "=++++++++++++++=",
-      "=++++++++++++++=",
+      "=␰␰␰␰␰␰λλ␰␰␰␰␰␰=",
+      "=␰␰Ḋ␰␰␰␰␰␰␰␰ḙ␰␰=",
+      "=␰␰␰␰␰␰␰␰␰␰␰␰␰␰=",
+      "=␰␰␰␰␰␰␰␰␰␰␰␰␰␰=",
+      "=␰␰␰␰␰␰//␰␰␰␰␰␰=",
+      "=␰␰␰␰␰␰//␰␰␰␰␰␰=",
+      "=␰␰␰␰␰␰␰␰␰␰␰␰␰␰=",
+      "=␰␰Ḋ␰␰␰␰␰␰␰␰Ḛ␰␰=",
+      "=␰␰␰␰␰␰␰␰␰␰␰␰␰␰=",
+      "=␰␰␰␰␰␰␰␰␰␰␰␰␰␰=",
       "=======DD=======",
     ],
     "warps": [
@@ -166193,16 +166385,16 @@ const MAPS7 = {
     "indoor": true,
     "rows": [
       "================",
-      "=++++++λλ++++++=",
-      "=++ḯ++++++++Ḧ++=",
-      "=++++++++++++++=",
-      "=++++++++++++++=",
-      "=++++++//++++++=",
-      "=++++++//++++++=",
-      "=++++++++++++++=",
-      "=++ḽ++++++++ḯ++=",
-      "=++++++++++++++=",
-      "=++++++++++++++=",
+      "=␱␱␱␱␱␱λλ␱␱␱␱␱␱=",
+      "=␱␱ḯ␱␱␱␱␱␱␱␱Ḧ␱␱=",
+      "=␱␱␱␱␱␱␱␱␱␱␱␱␱␱=",
+      "=␱␱␱␱␱␱␱␱␱␱␱␱␱␱=",
+      "=␱␱␱␱␱␱//␱␱␱␱␱␱=",
+      "=␱␱␱␱␱␱//␱␱␱␱␱␱=",
+      "=␱␱␱␱␱␱␱␱␱␱␱␱␱␱=",
+      "=␱␱ḽ␱␱␱␱␱␱␱␱ḯ␱␱=",
+      "=␱␱␱␱␱␱␱␱␱␱␱␱␱␱=",
+      "=␱␱␱␱␱␱␱␱␱␱␱␱␱␱=",
       "=======DD=======",
     ],
     "warps": [
@@ -167821,16 +168013,16 @@ const MAPS7 = {
     "indoor": true,
     "rows": [
       "================",
-      "=++++++λλ++++++=",
-      "=++ṋ++++++++Ṍ++=",
-      "=++++++++++++++=",
-      "=++++++++++++++=",
-      "=++++++//++++++=",
-      "=++++++//++++++=",
-      "=++++++++++++++=",
-      "=++ṍ++++++++ḙ++=",
-      "=++++++++++++++=",
-      "=++++++++++++++=",
+      "=␲␲␲␲␲␲λλ␲␲␲␲␲␲=",
+      "=␲␲ṋ␲␲␲␲␲␲␲␲Ṍ␲␲=",
+      "=␲␲␲␲␲␲␲␲␲␲␲␲␲␲=",
+      "=␲␲␲␲␲␲␲␲␲␲␲␲␲␲=",
+      "=␲␲␲␲␲␲//␲␲␲␲␲␲=",
+      "=␲␲␲␲␲␲//␲␲␲␲␲␲=",
+      "=␲␲␲␲␲␲␲␲␲␲␲␲␲␲=",
+      "=␲␲ṍ␲␲␲␲␲␲␲␲ḙ␲␲=",
+      "=␲␲␲␲␲␲␲␲␲␲␲␲␲␲=",
+      "=␲␲␲␲␲␲␲␲␲␲␲␲␲␲=",
       "=======DD=======",
     ],
     "warps": [
@@ -167855,16 +168047,16 @@ const MAPS7 = {
     "indoor": true,
     "rows": [
       "================",
-      "=++++++λλ++++++=",
-      "=++Ṃ++++++++ṃ++=",
-      "=++++++++++++++=",
-      "=++ḙ+++++++++++=",
-      "=++++++//++++++=",
-      "=++++++//++++++=",
-      "=++++++++++++++=",
-      "=+++++++++++Ḛ++=",
-      "=++++++++++++++=",
-      "=++++++++++++++=",
+      "=␳␳␳␳␳␳λλ␳␳␳␳␳␳=",
+      "=␳␳Ṃ␳␳␳␳␳␳␳␳ṃ␳␳=",
+      "=␳␳␳␳␳␳␳␳␳␳␳␳␳␳=",
+      "=␳␳ḙ␳␳␳␳␳␳␳␳␳␳␳=",
+      "=␳␳␳␳␳␳//␳␳␳␳␳␳=",
+      "=␳␳␳␳␳␳//␳␳␳␳␳␳=",
+      "=␳␳␳␳␳␳␳␳␳␳␳␳␳␳=",
+      "=␳␳␳␳␳␳␳␳␳␳␳Ḛ␳␳=",
+      "=␳␳␳␳␳␳␳␳␳␳␳␳␳␳=",
+      "=␳␳␳␳␳␳␳␳␳␳␳␳␳␳=",
       "=======DD=======",
     ],
     "warps": [
@@ -190326,6 +190518,33 @@ const GYM_ARENA_ART = {
   // Cragmoor: the den's lava-hearted dark — maroon-black sky, the new
   // 'dragon' scale-ridge motif with lava glints, dense embers.
   'gym-blackthorn': { sky: ['#3a2426', '#422a2c', '#4a3032', '#523638', '#5a3c3e', '#624244'], ground: ['#3c2c28', '#352722', '#2e211e', '#271c1a', '#201716', '#191212'], dark: '#140c0c', light: '#ffc478', accent: '#ff7a1a', motif: 'dragon', tex: 'chunk', amb: { kind: 'ember', n: 16, speed: 18 } },
+  // Gym Identity T3 (Maris): the region's eight own treatments.
+  // Copperton: quarry ochre — pale quarry-dust sky, saturated ochre
+  // strata, copper accent, slow dust motes over the Rubble.
+  'gym-rustboro': { sky: ['#93a8b8', '#a0b2c0', '#adc0c9', '#baccd2', '#c7d6da', '#d4e0e2'], ground: ['#c49a5e', '#ba9057', '#b08650', '#a67c49', '#9c7242', '#92683b'], dark: '#6e4f2a', light: '#f4e6c4', accent: '#c46a2a', motif: 'rocks', tex: 'chunk', amb: { kind: 'mote', n: 10, speed: 2 } },
+  // Mistford: surf-shore rubble — mist-pale sky over dark wet rock,
+  // foam crests, sea-green accent, surf bubbles.
+  'gym-dewford': { sky: ['#8fa8b0', '#9ab2b8', '#a5bcc0', '#b0c6c8', '#bbd0d0', '#c6dad8'], ground: ['#6a7a72', '#61716a', '#586862', '#4f5f5c', '#465654', '#3d4d4e'], dark: '#2e4038', light: '#eef8f0', accent: '#2a9a7a', motif: 'waves', tex: 'foam', amb: { kind: 'bubble', n: 12, speed: 8 } },
+  // Lilac: dynamo carnival — indigo-violet sky over warm brass,
+  // pylon storm, carnival-orange accent, dense blinking sparks.
+  'gym-mauville': { sky: ['#4a3a6e', '#55467c', '#604f8a', '#6b5898', '#7661a6', '#816ab4'], ground: ['#8a854e', '#7f7c47', '#747040', '#69643a', '#5e5834', '#534c2e'], dark: '#38341e', light: '#fff3a0', accent: '#ff9a1f', motif: 'storm', tex: 'spark', pylon: true, amb: { kind: 'spark', n: 18, speed: 0 } },
+  // Steamspring: hot-spring steam — pale steam-rose sky, terracotta
+  // bath stone, haze on, steam motes drifting over the flames.
+  'gym-lavaridge': { sky: ['#c8a49a', '#d0afa4', '#d8baae', '#e0c5b8', '#e8d0c2', '#f0dbcc'], ground: ['#b87a5c', '#ac6f52', '#a06448', '#94593e', '#884e34', '#7c432a'], dark: '#4a2c1c', light: '#ffe8d8', accent: '#ff8a5a', motif: 'flames', tex: 'spark', haze: true, amb: { kind: 'mote', n: 16, speed: 6 } },
+  // Meadowbrook: plain by design (Director ruling, Signal precedent) —
+  // Alden's honest-weight Open keeps the Open rules; the identity is a
+  // warm afternoon meadow: flowers, gold accent, falling petals.
+  'gym-petalburg': { sky: ['#6aa8e0', '#79b4e6', '#88c0ec', '#97ccf2', '#a6d8f6', '#b5e4fa'], ground: ['#7fae56', '#76a34e', '#6d9846', '#64903e', '#5b8436', '#52782e'], dark: '#40622a', light: '#f2f8c8', accent: '#e8b83c', motif: 'flowers', tex: 'tuft', haze: true, amb: { kind: 'petal', n: 10, speed: 6 } },
+  // Highbranch: canopy storm — dark canopy-green sky, mossy branch
+  // ground, leaf-litter texture and falling leaves, not rain.
+  'gym-fortree': { sky: ['#3a4a3a', '#43543f', '#4c5e44', '#556849', '#607254', '#6b7c5f'], ground: ['#6a5a3c', '#615234', '#584a2c', '#4f4224', '#463a1c', '#3d3214'], dark: '#26301e', light: '#e8f8b0', accent: '#a8e85a', motif: 'storm', tex: 'petal', amb: { kind: 'petal', n: 12, speed: 7 } },
+  // Starfall: the twins' shared Mind — ONE arena, two signatures
+  // mirrored: sky descends dark to light while the ground ascends
+  // light to dark; runes in twin-cyan over deep teal-navy night.
+  'gym-mossdeep': { sky: ['#2a2a55', '#343462', '#3e3e6f', '#48487c', '#525289', '#5c5c96'], ground: ['#3a3a6a', '#34325e', '#2e2c52', '#282646', '#222040', '#1c1a3a'], dark: '#16142e', light: '#d8f4ff', accent: '#7ae8e0', motif: 'runes', tex: 'fleck', amb: { kind: 'mote', n: 12, speed: 3 } },
+  // Craterlake: conducted water — grey-teal crater sky, deep dark
+  // water, haze on, the Rain badge's own rain over the Tide.
+  'gym-sootopolis': { sky: ['#5a7a84', '#68868e', '#769298', '#84a0a2', '#92aeac', '#a0bcb6'], ground: ['#2e5a66', '#29525e', '#244a56', '#1f424e', '#1a3a46', '#15323e'], dark: '#0e2830', light: '#d8f8f0', accent: '#5ae0c8', motif: 'waves', tex: 'foam', haze: true, amb: { kind: 'rain', n: 16, speed: 110 } },
 };
 
 function gymArenaFor(field) {
@@ -205185,6 +205404,6 @@ if (typeof Game !== 'undefined') Object.assign(Game.prototype, {
 });
 
 </script>
-<!-- contentHash:2a6494da1b79677e2c2df2de8dddf73f9f9530a22e8b4f0a1f994b2e1a2943be -->
+<!-- contentHash:71ed7bc165a7843db5866ff62e27796e0bd22360a7bb3ef72953888d62b3e71a -->
 </body>
 </html>
