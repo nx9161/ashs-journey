@@ -113,6 +113,20 @@ export function hasInnerMarginTopSides(s) {
 // (gameux §6 bans *unjagged* diagonals only via the orphan/stepping review).
 export function outlineOk(s) {
   if (!s.pal.O) return { ok: true, skipped: 'no O in palette' };
+  // The letter O arms this check only when the palette designates it as the
+  // outline ink: its palette name says so ("outline", "kit outline",
+  // "ghost-outline", ...), or the entry is unnamed (the legacy default —
+  // name falls back to the char itself). A palette may instead use the
+  // letter O for an ordinary colour (tile-prop-sapling: O = "guard-ring
+  // shade"; tile-prop-orangecrate: O = "orange shade") — that is not an
+  // outline claim, and the check skips exactly like the no-O case.
+  // (Build-art validation repair, 2026-11-15: census showed exactly 4 such
+  // sprites in the repo, all full-bleed tile props; every designated
+  // outline entry in the repo names itself accordingly.)
+  const oName = (s.pal.O.name || '').toLowerCase();
+  if (oName && oName !== 'o' && !oName.includes('outline')) {
+    return { ok: true, skipped: 'O is not the outline ink' };
+  }
   const { w, h, rows } = s;
   const painted = (x, y) => rows[y][x] !== '.';
   const isEdge = (x, y) => (

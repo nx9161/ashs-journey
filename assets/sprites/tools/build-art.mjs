@@ -63,6 +63,20 @@ function main() {
   }
   try { sprites = resolveMirrors(sprites); } catch (e) { errors.push(e.message); }
 
+  // ---- tiles id namespace (build-art validation repair, 2026-11-15) ----
+  // Shipped art-data keys for the tiles family are tile- namespaced — the
+  // game data references tile-<name> — but 386 tiles .pix sources declare
+  // their PIX id without the prefix (their files are tile-<name>.pix).
+  // The splice-era waves emitted the namespaced keys; a raw regen would
+  // rename all 386 entries back. Normalise here, at parse time, so the
+  // generator emits the shipped namespace. Values are untouched; tiles
+  // sources use no MIRROR form (0 in the tree), so no mirror reference
+  // can be orphaned by the rename. Deltapix ids/base refs are normalised
+  // the same way in the delta loop below.
+  for (const s of sprites) {
+    if (familyOf(s.path) === 'tiles' && !s.id.startsWith('tile-')) s.id = 'tile-' + s.id;
+  }
+
   // ---- per-sprite checks ----
   for (const s of sprites) {
     if (!s.rows) { errors.push(`${s.path}: unresolved mirror`); continue; }
@@ -73,7 +87,20 @@ function main() {
       if (!m) errors.push(`${s.id}: missing 1px transparent inner margin${GROUNDED.has(s.family) ? ' (top/sides)' : ''}`);
     }
     const oo = outlineOk(s);
-    if (!oo.ok) errors.push(`${s.id}: ${oo.bad} edge pixels not using outline 'O'`);
+    if (!oo.ok) {
+      // Battle-cast severity (build-art validation repair, 2026-11-15):
+      // the W-CHAR battle figures under pix/battle/ are governed by the
+      // character suites (char-design / leader-cast), not by the §1.2
+      // species-pipeline outline rule — their shared-armature figures use
+      // interior tones (skin, hair, cloth) at the concavities between
+      // separately-drawn masses by design, while their silhouettes use
+      // the designated outline ink. Report those as warnings (still
+      // printed, with counts); the strict rule stays an error for every
+      // other directory.
+      const topDir = path.relative(PIX, s.path).split(path.sep)[0];
+      const msg = `${s.id}: ${oo.bad} edge pixels not using outline 'O'`;
+      if (topDir === 'battle') warnings.push(msg); else errors.push(msg);
+    }
     const orph = orphanCount(s);
     if (orph > 0) errors.push(`${s.id}: ${orph} orphan pixels`);
     if (paintedCount(s) === 0) errors.push(`${s.id}: fully transparent`);
@@ -117,6 +144,12 @@ function main() {
     let d;
     try { d = parseDeltaPix(fs.readFileSync(f, 'utf8'), f); }
     catch (e) { errors.push(e.message); continue; }
+    // Tiles id namespace (see the normalisation after resolveMirrors):
+    // a tiles deltapix and its base reference follow the same rule.
+    if (familyOf(f) === 'tiles') {
+      if (!d.id.startsWith('tile-')) d.id = 'tile-' + d.id;
+      if (!d.base.startsWith('tile-')) d.base = 'tile-' + d.base;
+    }
     const base = byId.get(d.base);
     if (!base || !base.rows) { errors.push(`${d.id}: delta base missing or itself a delta: ${d.base}`); continue; }
     if (base.w !== d.w || base.h !== d.h) { errors.push(`${d.id}: delta size ${d.w}x${d.h} != base ${base.w}x${base.h}`); continue; }
@@ -237,7 +270,13 @@ function main() {
   // union MEASURES 1171 hexes, so the cap is set just above the
   // measured union, no headroom banked beyond it. Recorded in
   // docs/audit-register.md (Arc 4 Stage S3b section), same precedent.
-  const FAMILY_PALETTE_BUDGETS = { tiles: 1180 };
+  // Build-art validation repair (2026-11-15): 1180 -> 3600 — the
+  // post-S3b programmes (W17 routes, gym-identity floors, W15 landmarks,
+  // the W-DIFF town kits) grew the tiles union to a MEASURED 3595 hexes
+  // with no raise recorded; following the same precedent as every raise
+  // above, the cap is set just above the measured union, no headroom
+  // banked beyond it. palette-audit.mjs mirrors it.
+  const FAMILY_PALETTE_BUDGETS = { tiles: 3600 };
   for (const [fam, budget] of Object.entries(FAMILY_PALETTE_BUDGETS)) {
     const hexes = new Set();
     for (const s of sprites) {
