@@ -323,6 +323,7 @@ body.flip.landscape .sysbtns{grid-column:1}
 .menu.battlewin{left:2.5%;right:2.5%;top:auto;bottom:2.5%;transform:none;width:auto;min-width:0;max-height:25%;background-image:var(--rivets)}
 .menu.battlewin .menu-title{display:none}
 .menu.battlewin .menu-list{max-height:100%}
+.menu.battlewin.gridwin{max-height:94%}
 /* move menu — Platinum move buttons: framed plate cells in a 2x2 grid,
    name + type pill on the top line, PP + power/acc on the second line */
 .menugrid{display:grid;grid-template-columns:1fr 1fr;gap:4px;padding:4px}
@@ -193825,7 +193826,12 @@ class UI {
     // className assignment wipes the class list, so it must land BEFORE
     // the menu-open add below (QA Major 2, 2026-10-27: the transition
     // class was being stripped by this very line and never played).
-    this.menuEl.className = 'menu' + (m.menuClass ? ' ' + m.menuClass : '');
+    // gridwin: a grid menu (in practice only the battle move menus — the
+    // classic + RT FIGHT windows) carries the marker so the shell can size
+    // the window to the 2x2 grid; the battlewin 25% message-strip cap
+    // clipped the grid to a single visible row (owner report 2026-11-16:
+    // all 4 attacks must be on screen at once).
+    this.menuEl.className = 'menu' + (m.menuClass ? ' ' + m.menuClass : '') + (m.grid ? ' gridwin' : '');
     if (wasHidden) this.menuEl.classList.add('menu-open');
     // Full-takeover windows (party screen, PC box, summary) hide the
     // overworld HUD — Platinum screens own the whole frame.
@@ -211638,6 +211644,6 @@ if (typeof Game !== 'undefined') Object.assign(Game.prototype, {
 });
 
 </script>
-<!-- contentHash:e1bcef0122463949aa86fa0fe87576f1603a2aee47f2f1e42772bf9ac44e8672 -->
+<!-- contentHash:5f6cb5fabf947b07a43ef6b6defd4e2bd42e63ab6b546ee14601c35a7b92bb6a -->
 </body>
 </html>

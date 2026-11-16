@@ -193291,7 +193291,12 @@ class UI {
     // className assignment wipes the class list, so it must land BEFORE
     // the menu-open add below (QA Major 2, 2026-10-27: the transition
     // class was being stripped by this very line and never played).
-    this.menuEl.className = 'menu' + (m.menuClass ? ' ' + m.menuClass : '');
+    // gridwin: a grid menu (in practice only the battle move menus — the
+    // classic + RT FIGHT windows) carries the marker so the shell can size
+    // the window to the 2x2 grid; the battlewin 25% message-strip cap
+    // clipped the grid to a single visible row (owner report 2026-11-16:
+    // all 4 attacks must be on screen at once).
+    this.menuEl.className = 'menu' + (m.menuClass ? ' ' + m.menuClass : '') + (m.grid ? ' gridwin' : '');
     if (wasHidden) this.menuEl.classList.add('menu-open');
     // Full-takeover windows (party screen, PC box, summary) hide the
     // overworld HUD — Platinum screens own the whole frame.

@@ -599,6 +599,7 @@ body.flip.landscape .sysbtns{grid-column:1}
 .menu.battlewin{left:2.5%;right:2.5%;top:auto;bottom:2.5%;transform:none;width:auto;min-width:0;max-height:25%;background-image:var(--rivets)}
 .menu.battlewin .menu-title{display:none}
 .menu.battlewin .menu-list{max-height:100%}
+.menu.battlewin.gridwin{max-height:94%}
 /* move menu — Platinum move buttons: framed plate cells in a 2x2 grid,
    name + type pill on the top line, PP + power/acc on the second line */
 .menugrid{display:grid;grid-template-columns:1fr 1fr;gap:4px;padding:4px}
