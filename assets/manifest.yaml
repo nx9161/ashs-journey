@@ -1,4 +1,4 @@
-# Asset provenance manifest — Ash's Journey
+# Asset provenance manifest — Kian's Journey (repo/internal id: ashs-journey)
 # Every asset gets lineage: generator + version, seed, hand-finish author + date.
 # Lead Code Reviewer signs provenance; General Counsel signs IP clearance (Phase 4 gate).
 # Format per batch: one entry per asset family. `status: placeholder` assets are
@@ -6,6 +6,13 @@
 # output before any owner-visible sign-off (see docs/contracts.md).
 
 version: 1
+refreshed: |
+  2026-11-15 — hand-reconciled against the tracked tree at main a2cd7138
+  (git ls-files census; no manifest generator exists in-repo). Original
+  provenance fields preserved; stale present-tense counts are superseded
+  by each entry's census_2026_11_15 field. Families added this refresh:
+  species-designs-v1, cutscene-panels-v1, gassasin-kit-v1, fonts-v1.
+  Families removed: none — all 15 original families still exist in-tree.
 project: ashs-journey
 ip_posture: 100% original code/art/audio. No ripped sprites, no ROM-derived data,
   no sampled audio, no copied scripts. All research from docs/wikis only.
@@ -26,6 +33,11 @@ assets:
     notes: 13 hand-authored 16x16 tiles (grass/path/tree/water-1/water-2 animated/
       house/door/sign/gymwall/gymdoor/centerdoor/flower/rock). Replaces producer
       placeholder. Atlases: assets/sprites/dist/atlas-tiles.png.
+    census_2026_11_15: family grew to 1,791 .pix tile entries in
+      assets/sprites/pix/tiles/ (64 towns, 139 routes, 36 gym floors,
+      20 landmark kinds, bespoke arenas), all registered in
+      assets/sprites/art-data.mjs (4,907 entries total). Atlases in
+      assets/sprites/dist/ are now 9 pairs (18 files).
 
   - id: species-sprites-v1
     kind: sprites
@@ -44,6 +56,11 @@ assets:
       nidoranm/mankey/geodude/onix) front+back at 32x32. Pikachu partner front/
       back separate (see pikachu-sprites-v1). Replaces producer placeholder.
       Atlases: assets/sprites/dist/atlas-species.png.
+    census_2026_11_15: superseded — the dex is now 509 original species
+      (493 KinDex numbers), 1,052 .pix files in assets/sprites/pix/species/
+      (front/back + derived bob frames), design sources under
+      species-designs-v1. Species display names follow the naming law
+      (element + real animal); internal ids unchanged.
 
   - id: ash-sprites-v1
     kind: sprites
@@ -58,6 +75,9 @@ assets:
     palette_audit: per-sprite <= 12 colors (verified); 1px dark outline; no orphans.
     notes: Ash 4-direction walk (2-frame idle + 4-frame walk per direction, 16x16).
       Right-facing derived via MIRROR. Atlases: assets/sprites/dist/atlas-ash.png.
+    census_2026_11_15: 96 .pix files in assets/sprites/pix/ash/ (walk/run/
+      bike/surf/fish sets). Player character displays as Kian; internal
+      id 'ash' unchanged.
 
   - id: pikachu-sprites-v1
     kind: sprites
@@ -74,6 +94,8 @@ assets:
       (partner-front 32x32 capstone, partner-back 32x32) + refuses-the-ball beat
       (pikachu-refuse 32x16, cracked ball). Atlases: assets/sprites/dist/atlas-partner.png.
       Family renamed pikachu -> partner 2026-10-15 (LCR C4 cure; in-game ART ids unchanged).
+    census_2026_11_15: 23 .pix files in assets/sprites/pix/partner/.
+      The partner displays as VOLTIK, the game's mascot Kin.
 
   - id: brock-sprites-v1
     kind: sprites
@@ -88,6 +110,8 @@ assets:
     palette_audit: per-sprite <= 12 colors (verified); 1px dark outline; no orphans.
     notes: Brock overworld (idle-1/2, 16x16) + battle portrait (32x48).
       Atlases: assets/sprites/dist/atlas-brock.png.
+    census_2026_11_15: 13 .pix files in assets/sprites/pix/brock/.
+      The character displays as Garran; internal id 'brock' unchanged.
 
   - id: npc-sprites-v1
     kind: sprites
@@ -102,6 +126,9 @@ assets:
     palette_audit: per-sprite <= 12 colors (verified); 1px dark outline; no orphans.
     notes: 7 NPCs (professor-hawthorn/nurse/coach/aide/rival/youngster/lass)
       idle-1/2, 16x16. Atlases: assets/sprites/dist/atlas-npcs.png.
+    census_2026_11_15: superseded — 610 .pix files in
+      assets/sprites/pix/npcs/ serving the full named cast (594 posts /
+      551 designs) plus service and generic registers.
 
   - id: ui-icons-v1
     kind: ui
@@ -117,6 +144,8 @@ assets:
       icons <= 12 colors each (verified).
     notes: UI icons (pokeball/potion/boulder-badge, 16x16) + 24-token UI palette.
       Wiring into src/game/ui.mjs is Game UI/UX Designer wave.
+    census_2026_11_15: 21 .pix files in assets/sprites/pix/ui/ +
+      assets/sprites/ui/ui-palette.json; wired and live.
 
   - id: ui-chrome-v1
     kind: ui
@@ -142,6 +171,9 @@ assets:
       audio/SCORE.md. 4 channels (2 pulse, 1 triangle, 1 noise). Melodies are original
       compositions written for this project — chiptune *style* is fine, *melody* must
       be original (GC gate). Zero audio files ever.
+    census_2026_11_15: superseded — 23 loops (audio identity wave) + full
+      SFX set + a derived cry for every one of the 509 species, all in
+      audio/note-tables.mjs (SCORE.md track list is the census).
 
   - id: dialogue-v1
     kind: dialogue
@@ -186,6 +218,9 @@ assets:
       (gary-battle front pose with one hand out; ash-battle-back player back
       view in mid-throw pose). Complements brock-sprites-v1. Registered in
       art-data.mjs.
+    census_2026_11_15: family grew to 209 .pix files in
+      assets/sprites/pix/battle/ — trainer sprites plus a bespoke arena
+      treatment for all 36 gyms and all 47 legendary/venue sites.
 
   - id: title-keyart-v1
     kind: sprites
@@ -205,6 +240,10 @@ assets:
       cap on a hill path, small yellow partner beside him, distant plateau
       and tower silhouettes, banded sky with rising sun disc. Full-bleed
       composition; registered in art-data.mjs.
+    census_2026_11_15: the shipped keyart is the W-UI redraw (original,
+      live-verified); its .pix source in assets/sprites/pix/keyart/ is
+      the one known stale source in the tree (build-art validation
+      repair, 2026-11-15) — the shipped art itself is correct.
 
   - id: species-legendary-v1
     kind: sprites
@@ -223,6 +262,9 @@ assets:
       (articuno/zapdos/moltres/mewtwo/mew, fronts only). Original designs in
       the species-sprites-v1 style. Derived -front-bob frames are generated
       by the pipeline. Atlases: assets/sprites/dist/atlas-species.png.
+    census_2026_11_15: legendary/mythical Kin now ship under their
+      naming-law sovereign names inside the full 509-species family
+      (see species-sprites-v1 census); internal ids unchanged.
 
   - id: species-starters-v2
     kind: sprites
@@ -244,3 +286,63 @@ assets:
       caterpillar lines and the Eevee family. Derived -front-bob frames are
       generated by the pipeline. Atlases:
       assets/sprites/dist/atlas-species.png.
+    census_2026_11_15: folded into the full 509-species family
+      (see species-sprites-v1 census); this entry kept for lineage.
+
+  - id: species-designs-v1
+    kind: sprites
+    status: hand-authored
+    source: hand-authored
+    date: 2026-11-15
+    ai_assisted: true
+    notes: Design-source images for the species family —
+      assets/sprites/designs/ holds 1,045 files (a front + back per
+      species, forme variants, and the archived GALEDUCK carrier pair
+      postduck-carrier.png / postduck-carrier-back.png, kept in place
+      after the 2026-11-15 gear-free re-dress). The .pix conversions
+      under species-sprites-v1 are generated from these sources.
+    census_2026_11_15: 1,045 tracked files (incl. designs/backs/, 29).
+
+  - id: cutscene-panels-v1
+    kind: panels
+    status: hand-authored
+    source: hand-authored
+    generator: assets/sprites/tools/build-art.mjs (ArtForge pipeline v1)
+    date: 2026-11-15
+    ai_assisted: true
+    notes: Story panels at 128x80 (<=16 colours), hand-authored one per
+      moment — no kit reuse across panels. 58 panel entries registered
+      in art-data.mjs alongside the title keyart in
+      assets/sprites/pix/keyart/ (59 .pix files in that family):
+      sovereign reveals, catch/battle reveals, glimpses, ferry
+      crossings, arc cards, the champion chamber, the finale, and
+      VOLTIK's intro. Panel art totals 644,703 B in the shipped bundle.
+    census_2026_11_15: 58 entries / 45 steps / 13 field refs
+      (cutscene-panel guard, 68/68).
+
+  - id: gassasin-kit-v1
+    kind: tiles
+    status: third-party
+    source: CC-BY 3.0 tileset + character frames by Damian Gasinski
+      ("Gassasin"); full attribution and licence notes in
+      docs/THIRD-PARTY-ART.md — the one third-party family in the tree.
+    generator: assets/sprites/tools/build-kit-art.mjs (slices into
+      assets/sprites/kit-art-data.mjs)
+    date: 2026-11-15
+    notes: assets/kit/ holds the 16x16 sheet (gassasin-16x16.png) and
+      20 character frame PNGs (Idle/WalkDown/WalkLeft/WalkRight/WalkUp,
+      4 frames each) read by build-kit-art.mjs as Untitled-*_N.png.
+    census_2026_11_15: 21 tracked files after the 2026-11-15 junk
+      cleanup removed 3 Thumbs.db and 4 unreferenced .jpx project
+      files from this family (see below).
+
+  - id: fonts-v1
+    kind: fonts
+    status: third-party
+    source: Galmuri11 (woff2) and PtPixel (woff), SIL OFL — licence
+      texts in assets/fonts/OFL-Galmuri.txt and OFL-PixelifySans.txt,
+      notes in assets/fonts/README.md.
+    date: 2026-11-15
+    notes: UI typography for the shipped game (Galmuri lining figures
+      for battle databox numerals per the presentation standard).
+    census_2026_11_15: 7 tracked files in assets/fonts/.
