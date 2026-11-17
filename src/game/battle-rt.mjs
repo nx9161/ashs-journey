@@ -246,6 +246,17 @@ Object.assign(BattleScene.prototype, {
       }
       if (this.rtCheckFaints()) return;
     }
+    // Low-HP warning (placement parity with the classic engine, gameux
+    // §4.2): first crossing into red (<=25%), once per ally, re-arms when
+    // the ally heals back above red. RT never fired it before the viral
+    // audio pass — the alarm's absence was a placement defect.
+    if (this._lowHpAlly !== this.ally) { this._lowHpAlly = this.ally; this._lowHpWarned = false; }
+    const hpRatio = this.ally && this.ally.maxHp > 0 ? this.ally.hp / this.ally.maxHp : 1;
+    if (hpRatio > 0.25) this._lowHpWarned = false;
+    else if (!this._lowHpWarned && this.ally && this.ally.hp > 0) {
+      this._lowHpWarned = true;
+      g.audio.playSfx('lowhp');
+    }
     // Catch sequence animation runs on its own clock.
     if (rt.catchSeq) { this.rtUpdateCatch(dtms); return; }
     if (rt.ballFlight) { this.rtUpdateBall(dtms); return; }

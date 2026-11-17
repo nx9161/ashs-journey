@@ -2545,7 +2545,11 @@ export class BattleScene {
         if (leveled) msgs.push(displayName(m, SPECIES) + ' grew to Lv ' + m.level + '!');
       }
       this.xpShares = null;
-      g.audio.playSfx('dex-register');
+      // Mixing law (2026-11-17): one sting owns the moment. A level-up IS
+      // the beat, so the XP-banked cue yields to the levelup fanfare
+      // instead of stacking on the same frame; it plays when nobody
+      // leveled (its original "XP registered" role).
+      if (!msgs.length) g.audio.playSfx('dex-register');
       this.xpApplied = false;
       this.xpFlashT = 250; // P0/E3: level-up flash on the XP bar + fanfare below
       const cb = this.xpCb; this.xpCb = null;
