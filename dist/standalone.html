@@ -197136,10 +197136,17 @@ class BattleScene {
     // before everything else so a stalled paint can never leave the
     // wipe half-drawn — the first recovered tick pops the scene.
     if (this._exitPending) {
-      if (performance.now() - this._exitPending.start >= 300) {
-        const won = this._exitPending.won;
+      const p = this._exitPending;
+      p.ticks++;
+      // Complete on wall time (real play) OR sim ticks (tick-driven
+      // drivers burn thousands of ticks inside 300 ms of wall time —
+      // verify-slice s9 on fast CI runners). In real play the two
+      // agree (10 ticks at 30 Hz ≈ 333 ms); under paint starvation
+      // both stall together and the first recovered frames finish
+      // the exit within two catch-up frames, bands never drawn stale.
+      if (performance.now() - p.start >= 300 || p.ticks >= 10) {
         this._exitPending = null;
-        this._finishExit(won, true);
+        this._finishExit(p.won, true);
       }
       return;
     }
@@ -198976,7 +198983,7 @@ class BattleScene {
       this._finishExit(won, false);
       return;
     }
-    this._exitPending = { won, start: performance.now() };
+    this._exitPending = { won, start: performance.now(), ticks: 0 };
     this._exitStartT = this.t; // harness-visible exit marker (exitEl)
   }
 
@@ -199321,7 +199328,7 @@ class BattleScene {
     // LISA's defeat dialogue, clearing only when it advanced).
     const el = performance.now() - this._exitPending.start;
     if (el <= 0 || el >= 300) return;
-    const k = el / 300;
+    const k = Math.max(el / 300, Math.min(1, (this._exitPending.ticks || 0) / 10));
     const g = this.game;
     const F = (col, x, y, fw, fh) => g.ctx2dfill(col, x, y, fw, fh);
     const bands = 6, bh = h / bands;
@@ -211757,6 +211764,6 @@ if (typeof Game !== 'undefined') Object.assign(Game.prototype, {
 });
 
 </script>
-<!-- contentHash:a8c05431e1570fb54f5d9b11059e48d8616d91b1e69c9ebe6442eabf2871b23d -->
+<!-- contentHash:eff810e816c60961ea713a54741e9c14640f4b3339ff911ea6d3c18fe3ce3074 -->
 </body>
 </html>
