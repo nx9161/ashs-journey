@@ -7,27 +7,25 @@
 
 export const DISCLAIMER_BOOT = [
   "KIAN'S JOURNEY",
-  'An original work. Not affiliated with, endorsed by, or connected to',
-  'any existing game franchise or its owners.',
+  '© 2026 Naman Parmar. All rights reserved.',
+  "Kian's Journey is an original work by Naman Parmar.",
   '',
-  'VOLTIK, and all names and characters in this game, are original',
-  'creations of this project.',
-  'This is a free, non-commercial project made with love by its makers.',
-  'No purchase is required or accepted.',
+  'Its creatures, names, characters, story, music, and original',
+  'artwork were created by Naman Parmar for this game.',
+  'This is a free, non-commercial work. No purchase is required',
+  'or accepted.',
 ];
 
 export const DISCLAIMER_CREDITS = [
   'LEGAL',
   '',
-  'This game is an original work and is not affiliated with, endorsed by,',
-  'sponsored by, or connected to any existing game franchise or its owners.',
-  'All names, characters, and indicia in this game are original creations',
-  'of this project, except where credited below.',
+  '© 2026 Naman Parmar. All rights reserved.',
   '',
-  'All code, music, sound effects, and dialogue in this game are original',
-  'creations made for this project, as is its artwork except where',
-  'credited below; no game assets were copied or extracted from any',
-  'other game.',
+  'Kian\'s Journey is an original work by Naman Parmar. Its creatures,',
+  'names, characters, story, world, music, sound effects, dialogue,',
+  'code, and original artwork are original works by Naman Parmar,',
+  'created for this game, except for the third-party components',
+  'credited below.',
   '',
   'Third-party art: tileset and character by Damian',
   'Gasinski aka Gassasin',
@@ -44,10 +42,8 @@ export const DISCLAIMER_CREDITS = [
   'This game is free, carries no advertising, accepts no payments, donations,',
   'or tips, and collects no personal data for commercial purposes.',
   '',
-  'If you represent a rights holder and have concerns about this project,',
-  'please contact the developer through the GitHub account that',
-  'publishes this game (github.com/nx9161), or through the GitHub',
-  'copyright-reporting process.',
+  'Published by Naman Parmar. Project and contact:',
+  '(github.com/nx9161).',
 ];
 
 export const GAME_TITLE = "KIAN'S JOURNEY";
@@ -166,22 +162,22 @@ function dawnSky(w, h) {
 const LEGAL_PAGES = [
   [
     "KIAN'S JOURNEY",
-    'An original work.',
-    'Not affiliated with, endorsed',
-    'by, or connected to any',
-    'existing game franchise',
-    'or its owners.',
+    '© 2026 Naman Parmar.',
+    'All rights reserved.',
+    "Kian's Journey is an",
+    'original work by',
+    'Naman Parmar.',
   ],
   [
-    'VOLTIK, and all names and',
-    'characters in this game, are',
-    'original creations of',
-    'this project.',
-    'This is a free, non-commercial',
-    'project made with love',
-    'by its makers.',
-    'No purchase is required or',
-    'accepted.',
+    'Its creatures, names,',
+    'characters, story, music,',
+    'and original artwork were',
+    'created by Naman Parmar',
+    'for this game.',
+    'This is a free,',
+    'non-commercial work.',
+    'No purchase is required',
+    'or accepted.',
   ],
 ];
 
@@ -465,7 +461,7 @@ export class BootScene {
     }
 
     // ---- Footer: centered, inset from both edges, never clipped ----
-    r.text('An original work.', cx, footerY, { size: 14, align: 'center', color: '#f5efdc', display: true });
+    r.text('An original work by Naman Parmar.', cx, footerY, { size: 14, align: 'center', color: '#f5efdc', display: true });
     r.end(); r.camX = pcx; r.camY = pcy;
   }
   renderLegal(r) {

@@ -81,6 +81,20 @@ const metaLine = buildSrc.split('\n').find((l) => l.includes('name="description"
 ok('bundle meta (at source) carries no "100% original" claim',
   metaLine !== '' && !metaLine.includes('100% original'), metaLine.trim().slice(0, 90));
 
+// 6 — Original-work notice (owner ruling, 2026-11-17): the Legal screen
+// is an original-work/copyright notice naming the author — not a fan-work
+// disclaimer. It must carry the copyright line and the authorship line,
+// cover the creatures and the story, and carry no fan framing and no
+// non-affiliation disclaimer language.
+ok('legal notice carries the copyright line',
+  credits.includes('© 2026 Naman Parmar. All rights reserved.'));
+ok('legal notice names Naman Parmar as the author',
+  credits.includes("Kian's Journey is an original work by Naman Parmar."));
+ok('legal notice covers creatures, names, and story',
+  /creatures/.test(credits) && /names/.test(credits) && /story/.test(credits));
+ok('legal notice carries no fan framing or non-affiliation disclaimer',
+  !/fan[-\s]?(game|made|project|work|homage)|not affiliated/i.test(credits));
+
 // 5 — Mirror doc carries the same change indication.
 const tpa = fs.readFileSync(path.join(ROOT, 'docs', 'THIRD-PARTY-ART.md'), 'utf8');
 ok('THIRD-PARTY-ART.md states the modifications',

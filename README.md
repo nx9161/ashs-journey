@@ -6,12 +6,12 @@ created from scratch for this project; the world tileset and one character are
 third-party art used under CC-BY 3.0 and credited in the game's Legal screen.
 
 > **KIAN'S JOURNEY**
-> *An original work. Not affiliated with, endorsed by, or connected to
-> any existing game franchise or its owners.*
+> *© 2026 Naman Parmar. All rights reserved.*
 >
-> VOLTIK, and all names and characters in this game, are original creations
-> of this project. This is a free, non-commercial project made with love by
-> its makers. No purchase is required or accepted.
+> Kian's Journey is an original work by Naman Parmar. Its creatures, names,
+> characters, story, music, and original artwork were created by Naman Parmar
+> for this game. This is a free, non-commercial work. No purchase is required
+> or accepted.
 
 - Free, non-commercial, personal use only. No ads, no payments, no donations, no tips.
 - No analytics, no tracking, no network calls (guest build works fully offline).

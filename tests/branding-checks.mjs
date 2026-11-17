@@ -248,7 +248,9 @@ const BLOCK_TERMS = [
   'Sawsbuck', 'Pumpkaboo', 'Gourgeist', 'Nintendo', 'Creatures Inc',
   'GAME FREAK', 'Team Rocket', 'Team Magma', 'Team Aqua', 'Team Galactic',
   'GS Orb', 'Nurse Joy', 'Officer Jenny', 'Mr. Stone', 'fan homage',
-  'fan project', 'fan work', 'fan game', 'Icirrus', 'Castelia', 'Geosenge',
+  'fan project', 'fan work', 'fan game', 'fan-made', 'fan made', 'fangame',
+  'fan-game', 'fan-created', 'fan creation', 'fan tribute', 'unofficial fan',
+  'unofficial homage', 'Icirrus', 'Castelia', 'Geosenge',
   'Nebel', 'Liberty Pass', 'Azure Flute', 'Odd Keystone', 'Hallowed Tower',
   'Sun Flute', 'Altar of the Sunne', 'Prison Bottle', 'Diamond Domain',
   'Terminus Cave', 'P2 Laboratory', 'Moor of Icirrus',
@@ -299,6 +301,37 @@ for (const rel of allSrc) {
 }
 ok('no franchise names in display string literals (W-SCRUB blocklist)', blockViolations === 0,
   blockViolations + ' violation(s) over ' + blockScanned + ' scanned segments');
+
+// ---- Original-framing sweep (owner ruling, 2026-11-17): the game is an
+// original work, and fan-game framing is banned from shipped source text
+// in every form — display copy, metadata, and code comments alike (the
+// bundle ships comments verbatim, and a "fan project" header comment in
+// species.mjs is what this section exists to catch). The scan is raw
+// text, case-insensitive, over the shipped source trees plus the repo's
+// two framing surfaces (README + package metadata). Internal research
+// and design-history documents are not shipped text and stay out of
+// scope; the blocklist above still governs all display literals.
+const FAN_FRAMING_RE = /\bfan[-\s]?(?:game|made|project|work|homage|tribute|creation|created)\b|\bfangame\b|\bunofficial\s+(?:fan|homage)\b|\bhomage\b/i;
+const framingFiles = [...new Set([
+  ...allSrc,
+  ...execSync('find audio -name "*.mjs" | sort', { cwd: ROOT, encoding: 'utf8' })
+    .trim().split('\n').filter(Boolean),
+  'README.md', 'package.json',
+])];
+let fanFramingViolations = 0, fanFramingScanned = 0;
+for (const rel of framingFiles) {
+  const content = readFileSync(path.join(ROOT, rel), 'utf8');
+  content.split('\n').forEach((line, li) => {
+    fanFramingScanned++;
+    if (FAN_FRAMING_RE.test(line)) {
+      fanFramingViolations++;
+      console.log(`  fan-framing violation ${rel}:${li + 1} :: ${line.trim().slice(0, 110)}`);
+    }
+  });
+}
+ok('no fan-game framing in shipped source text, README, or package metadata (2026-11-17 sweep)',
+  fanFramingViolations === 0,
+  fanFramingViolations + ' violation(s) over ' + fanFramingScanned + ' scanned lines');
 
 // ---- W-SCRUB3: arc edition labels pinned to the approved originals ----
 // The quest log renders each arc's `edition` verbatim (main-systems:

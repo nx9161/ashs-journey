@@ -105,7 +105,7 @@ export class IntroScene {
   // fillV2Defaults in save/schema.mjs.)
   grantPartner() {
     const g = this.game;
-    // Partner joins OUTSIDE the ball system (EP014 homage — hard rule).
+    // Partner joins OUTSIDE the ball system (opening-story rule).
     if (!grantPartnerMon(g.state, SPECIES, MOVES)) return;
     g.audio.playSfx('dex-register');
     g.ui.toast(SPECIES.partner.name + ' joined your party!');

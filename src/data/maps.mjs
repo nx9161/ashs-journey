@@ -111,8 +111,8 @@ export const MAPS = {
         trainer: 'r2_hiker',
         sight: { dir: 'up', range: 4 }, // Yellow-style: spots you, "!", walks up
         dialogue: ["These boulders are my training weights! Let's see your form!", "Rock-solid... defeat. Heh. Good scrap."] },
-      // Yellow homage: the anime-trio ambush, reimagined with original
-      // characters (no motto quotes, no trademarked team name — GC C4).
+      // The Vanta trio ambush, staged with original characters
+      // and original dialogue.
       // The duo flank the path; either one spotting you pulls BOTH in.
       { x: 3, y: 7, name: 'RUE', art: 'rue', skin: '#e8b888', shirt: '#2a2a3a', pants: '#1a1a2a', hair: '#3a2a1a',
         trainer: 'r2_duo', duoPartner: 'COLE',
@@ -1437,8 +1437,8 @@ export const TRAINERS = {
     ],
     reward: 300,
   },
-  // Yellow homage: the anime-trio ambush as a sequential 2-mon duo battle
-  // (Gen 1 had no double battles — the trio fought back-to-back, as here).
+  // The Vanta trio ambush as a sequential 2-mon duo battle
+  // (the trio fights back-to-back).
   // Original characters, original banter; nicknamed mons for personality.
   r2_duo: {
     id: 'r2_duo', name: 'Rue & Cole', title: 'Uniformed Duo',

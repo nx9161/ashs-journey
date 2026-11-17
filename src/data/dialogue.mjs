@@ -24,7 +24,7 @@ export const INTRO_SCRIPT = {
   starterPanel: 'intro-partner',
 };
 
-// PARTNER_MOODS — Yellow homage: talking to the partner (face it + A, or tap
+// PARTNER_MOODS — partner reactions: talking to the partner (face it + A, or tap
 // the mood pip) reads its current emotion. Mood is driven by battle beats
 // (battle.mjs) and by petting (overworld.mjs). All lines original.
 export const PARTNER_MOODS = {

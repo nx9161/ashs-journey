@@ -106,10 +106,10 @@ const driver = `
   ok('boot scene pushed', boot instanceof BootScene);
   ok('legal phase first', boot.phase === 'legal');
   ok('disclaimer title verbatim', DISCLAIMER_BOOT[0] === "KIAN'S JOURNEY");
-  ok('disclaimer non-affiliation verbatim',
-    DISCLAIMER_BOOT.join('\\n').indexOf('Not affiliated with, endorsed by, or connected to') >= 0);
+  ok('disclaimer copyright verbatim',
+    DISCLAIMER_BOOT.join('\\n').indexOf('© 2026 Naman Parmar. All rights reserved.') >= 0);
   ok('disclaimer non-commercial verbatim',
-    DISCLAIMER_BOOT.join('\\n').indexOf('free, non-commercial project') >= 0);
+    DISCLAIMER_BOOT.join('\\n').indexOf('free, non-commercial work') >= 0);
   ok('not interactive before dwell', (function () { pressA(1); return boot.phase === 'legal'; })());
   loop.stepMs(3100); tick(2);
   ok('interactive after 3s dwell', boot.ready === true);

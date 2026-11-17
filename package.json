@@ -2,7 +2,7 @@
   "type": "module",
   "name": "ashs-journey",
   "private": true,
-  "description": "ASH'S JOURNEY — An Unofficial Fan Homage. Serverless API (Track B): better-auth accounts + cloud saves. Client game remains zero-dependency.",
+  "description": "KIAN'S JOURNEY — an original creature-catching web game by Naman Parmar. Serverless API: better-auth accounts + cloud saves. Client game remains zero-dependency.",
   "dependencies": {
     "better-auth": "1.7.10",
     "pg": "8.23.1",

@@ -1,5 +1,5 @@
 // species.mjs — slice roster data (Arden opening: Dawnwick -> Flintridge).
-// Original data tables for this fan project. spriteSeed feeds SpriteForge v1;
+// Original data tables for Kian's Journey. spriteSeed feeds SpriteForge v1;
 // Art Director replaces sprites per docs/contracts.md §1.
 
 export const SPECIES = {
@@ -11,7 +11,7 @@ export const SPECIES = {
     learnset: { 1: ['thundershock', 'growl'], 5: ['quickattack'] },
     flavor: 'A spirited partner who refused the easy path. Never leaves your side.',
     design: { inspired: 'hamster', kind: 'animal', note: 'mint hamster, copper battery cap, cream belly, big ears' },
-    // Yellow homage (hard rules): never boxed, never evolved. Guards in state.mjs.
+    // Partner rules: never boxed, never evolved. Guards in state.mjs.
     refusesEvolution: true,
     refusesBox: true,
   },

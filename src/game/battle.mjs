@@ -2272,7 +2272,7 @@ export class BattleScene {
       if (st.battleAnims !== false && !st.reducedMotion && st.shake) this.trauma = Math.min(1, Math.max(this.trauma + 0.12, 0.47));
     }
     this._faintByAttack = null;
-    // Yellow homage: the partner takes its own faint personally.
+    // Partner reaction: VOLTIK takes its own faint personally.
     if (side === 'ally' && mon.speciesId === 'partner') g.state.pikachu.mood = 'sad';
     const name = displayName(mon, SPECIES);
     g.audio.playSfx('battle-faint');
@@ -2796,7 +2796,7 @@ export class BattleScene {
     const prize = this.facility ? 0 : Math.floor(t.reward * moneyMultFor(g.state));
     g.state.player.money += prize;
     if (!this.facility) g.state.story.flags['beat_' + t.id] = true;
-    // Yellow homage: winning with the partner conscious leaves it buzzing.
+    // Partner reaction: winning with VOLTIK conscious leaves it buzzing.
     if (g.state.party.some((m) => m.speciesId === 'partner' && m.hp > 0)) {
       g.state.pikachu.mood = 'excited';
     }
@@ -2839,7 +2839,7 @@ export class BattleScene {
     // no money halving, no Center warp. onEnd still fires with won=false.
     if (this.friendly) { this.endBattle(false); return; }
     // Defeat: fade -> Center (overworld, healed, money halved) — architecture §2.2
-    g.state.pikachu.mood = 'sad'; // Yellow homage: the partner hates losing
+    g.state.pikachu.mood = 'sad'; // Partner reaction: VOLTIK hates losing
     g.state.player.money = Math.floor(g.state.player.money / 2);
     this.endBattle(false);
     g.ui.say(['You hurried to the Center...'], () => {

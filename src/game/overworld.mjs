@@ -1125,7 +1125,7 @@ export class OverworldScene {
 
   petPartner() {
     // P1/D7: mood-pip tap and the faced-tile interaction share one path.
-    // Yellow homage: the partner emotes when talked to; petting cheers it up.
+    // Partner interaction: VOLTIK emotes when talked to; petting cheers it up.
     const g = this.game;
     g.state.pikachu.mood = 'happy'; // a petting cheers it up (D7: mood reacts to beats)
     g.ui.toast('VOLTIK ' + (PARTNER_MOODS[g.state.pikachu.mood] || PARTNER_MOODS.happy));
