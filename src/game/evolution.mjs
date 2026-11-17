@@ -503,11 +503,11 @@ export class EvolutionScene {
     // Touch cancel affordance (transform phase only).
     this._cancelRect = null;
     if (this.phase === 'transform') {
-      const bw = 74, bh = 18, bx = w - bw - 8, by = h - barH - bh - 6;
+      const bw = 84, bh = 22, bx = w - bw - 8, by = h - barH - bh - 6;
       r.panel(bx, by, bw, bh, '#1a1a2e');
-      r.text('✕ STOP', bx + bw / 2, by + 4, { size: 10, bold: true, align: 'center', color: '#ffd7d7' });
+      r.text('✕ STOP', bx + bw / 2, by + 4, { size: 14, bold: true, align: 'center', color: '#ffd7d7' });
       this._cancelRect = { x: bx, y: by, w: bw, h: bh };
-      r.text('B: stop evolution', 8, h - barH - 16, { size: 8, color: '#9aa3c7' });
+      r.text('B: stop evolution', 8, h - barH - 18, { size: 14, color: '#9aa3c7' });
     }
 
     r.end();
