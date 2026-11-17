@@ -4333,6 +4333,13 @@ Object.assign(OverworldScene.prototype, {
       const sq = SINNOH_QUESTS.find((qq) => qq.flag && !g.state.story.flags[qq.flag]);
       if (sq) return '▶ ' + sq.text;
     }
+    // Game-feel F3: the opening objective names the actual first step —
+    // leave Dawnwick by the south road — until the player first sets
+    // foot on Route 1; only then does the badge chain lead the HUD.
+    const gf = g.state.story.flags;
+    if (gf.metPartner && !gf.reached_route1 && !gf.beat_brock) {
+      return '▶ Leave Dawnwick — Route 1 lies south';
+    }
     const q = MAIN_QUESTS.find((qq) => qq.flag && !g.state.story.flags[qq.flag]);
     if (q) return '▶ ' + q.text;
     const active = Object.keys(g.state.story.quests).find((k) => g.state.story.quests[k] === 'active');

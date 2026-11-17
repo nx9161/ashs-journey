@@ -1488,9 +1488,15 @@ export class OverworldScene {
         this._hudBannerObj = this.banner;
         ui.hudToast(this.banner.text, 2600);
       }
-      // Movement tutorial toast: once, when the tutorial starts.
-      if (this.moveTut && !this.moveTut._toastSent) {
-        this.moveTut._toastSent = true;
+      // Movement tutorial toast: once — Game-feel F3: it fires when the
+      // player takes their first step (the moment it teaches), never at
+      // spawn under the chapter card, and never while a chapter card is
+      // open (one overlay at a time). moveTut dismisses on that same
+      // first step, so the pending flag lives on the scene, not the tut.
+      if (this.moveTut) this._tutToastArmed = true;
+      if (this._tutToastArmed && !this._tutToastSent && this.trail && this.trail.length > 0 && !ui.chapterCard) {
+        this._tutToastSent = true;
+        this._tutToastArmed = false;
         ui.hudToast('Walk with the D-pad — VOLTIK follows you!', 3600);
       }
     }
