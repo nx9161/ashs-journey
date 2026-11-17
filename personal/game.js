@@ -203281,7 +203281,7 @@ class OverworldScene {
         ? { label: 'Account', value: 'account' }
         : null;
     g.ui.showMenu('MENU', [
-      { label: g.state.player.name + ' · ' + DIFFICULTY_LABELS[difficultyOf(g.state)] + ' · ' + badges + ' badges · ' + mins + 'm', value: null, disabled: true },
+      { label: g.state.player.name + ' · ' + DIFFICULTY_LABELS[difficultyOf(g.state)] + ' · ' + badges + ' badges · ' + mins + 'm · $' + g.state.player.money, value: null, disabled: true }, // Game-feel C: balance on the card (was Mart-menu only)
       { label: this.map.name, value: null, disabled: true },
       { label: 'Bag', value: 'bag' },
       { label: 'Party', value: 'party' },
