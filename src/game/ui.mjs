@@ -1153,6 +1153,17 @@ export class UI {
       e.stopPropagation();
       if (e.key === 'Backspace') this._nkbBack();
       else if (e.key === 'Enter') this._nkbOk();
+      // RUN2 FIX 1: the game's confirm/cancel keys keep their game meaning
+      // inside name entry (matched on e.code, the KEYMAP convention, so
+      // Shift/case is irrelevant). KeyZ is 'a' (confirm) everywhere else in
+      // the game, so here it CONFIRMS — it must never type a 'z'; the
+      // letter Z stays enterable via the on-screen grid cell, like every
+      // other letter. KeyX is 'b' (cancel/back); the grid's own back-step
+      // is deleting a character — exactly what Backspace, the other 'b'
+      // binding, already does above — so X deletes instead of typing an
+      // 'x' (the grid cell still types X). Escape/CANCEL keep full cancel.
+      else if (e.code === 'KeyZ') this._nkbOk();
+      else if (e.code === 'KeyX') this._nkbBack();
       else if (e.key === 'Escape' && this.nameEntry.opts && this.nameEntry.opts.allowCancel) this._nkbCancel();
       // Elevation B6: a physical keyboard types its own case (the real
       // Shift key is the toggle there); only the grid uses the aA key.

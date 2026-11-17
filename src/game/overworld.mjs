@@ -59,12 +59,21 @@ const WANDER_PIN_PROPS = [
 ];
 const WANDER_NAME_PINS = new Set(['ODO']);
 const WANDER_DIRS = [[0, -1, 'up'], [0, 1, 'down'], [-1, 0, 'left'], [1, 0, 'right']];
+// RUN2 FIX 2: post-dialogue re-talk grace. After a dialogue an interact
+// opened closes, the same faced target cannot be re-triggered until the
+// confirm key has been released AND this much scene time has elapsed.
+const RETALK_GRACE_MS = 300;
 
 export class OverworldScene {
   enter() {
     const g = this.game;
     this.mapId = g.state.story.position.map;
     this.loadMap(this.mapId);
+    // RUN2 FIX 2: re-talk re-arm state (see tryInteract / _trackTalkRearm).
+    this._clockMs = 0;
+    this._talkPending = null; // faced target whose dialogue is in flight
+    this._retalk = null;      // armed guard {key, at, released}
+    this._dlgOpenPrev = false;
     const p = g.state.story.position;
     this.player = { tx: p.x, ty: p.y, px: p.x * TILE, py: p.y * TILE, dir: p.dir || 'down', moving: false, moveT: 0, fx: p.x, fy: p.y };
     this.trail = []; // partner path history
@@ -115,6 +124,9 @@ export class OverworldScene {
       this.warpFx = null;
       if (this.game && this.game.renderer) this.game.renderer.fadeA = 0;
     }
+    // RUN2 FIX 2: a re-talk guard never follows the player across a warp.
+    this._talkPending = null;
+    this._retalk = null;
     this.mapId = id;
     this.map = MAPS[id];
     // ADR-025 §4 (Candy Coach): the Sparring Coach stands in every Pokemon
@@ -548,7 +560,13 @@ export class OverworldScene {
         if (k >= 1) { g.renderer.fadeA = 0; this.returnFade = null; }
       }
     }
-    if (g.ui.update(dt)) return; // modal UI consumes input
+    // RUN2 FIX 2: scene clock + re-talk bookkeeping run even on modal
+    // ticks — a dialogue closing into a menu/callback must still arm.
+    if (this._clockMs === undefined) { this._clockMs = 0; this._talkPending = null; this._retalk = null; this._dlgOpenPrev = false; }
+    this._clockMs += dt * 1000;
+    const modal = g.ui.update(dt);
+    this._trackTalkRearm(g);
+    if (modal) return; // modal UI consumes input
     if (this.warpFx) { this.updateWarpFx(dt); return; } // W7: warp transition owns the tick
     if (this.enc) { this.updateEncounter(dt); return; }
     if (this.challenge) { this.updateChallenge(dt); return; } // input locked: a trainer is walking up
@@ -568,9 +586,11 @@ export class OverworldScene {
       if (!(this.sysSelect && this.sysSelect())) g.ui.setHudVisible(!g.ui.hudVisible);
       return;
     }
-    // Interact
+    // Interact (RUN2 FIX 2: a confirm press that lands while the faced
+    // target's re-talk guard is armed is swallowed — it cannot re-open
+    // the talk it just closed. The press edge is already consumed.)
     if (input.wasPressed('a')) {
-      if (this.tryInteract()) return;
+      if (!this._retalkSwallow() && this.tryInteract()) return;
     }
 
     // Premium+ W3: per-tick presentation state. Run = B held on foot
@@ -1114,6 +1134,48 @@ export class OverworldScene {
     return true;
   }
 
+  // RUN2 FIX 2: the faced target's guard key (map + faced tile).
+  _facedKey() {
+    const p = this.player;
+    const dx = p.dir === 'left' ? -1 : p.dir === 'right' ? 1 : 0;
+    const dy = p.dir === 'up' ? -1 : p.dir === 'down' ? 1 : 0;
+    return this.mapId + '|' + (p.tx + dx) + ',' + (p.ty + dy);
+  }
+
+  // RUN2 FIX 2: should this confirm-key press be swallowed? True while
+  // the guard for the faced target is armed and either the key has not
+  // been released since the dialogue closed or the grace has not
+  // elapsed. Once both hold, the guard clears and the press talks —
+  // deliberate re-talk on a fresh press after release is instant.
+  _retalkSwallow() {
+    const g2 = this._retalk;
+    if (!g2 || g2.key !== this._facedKey()) return false;
+    if (g2.released && this._clockMs - g2.at >= RETALK_GRACE_MS) {
+      this._retalk = null; // re-armed
+      return false;
+    }
+    return true;
+  }
+
+  // RUN2 FIX 2: watch the dialogue an interact opened; when it closes,
+  // arm the re-talk guard for that faced target. Runs every tick (modal
+  // or not) from update(). Chained dialogues (a close whose callback
+  // immediately opens the next) never show a closed tick, so the guard
+  // arms only at the true end of the chain.
+  _trackTalkRearm(g) {
+    const open = !!(g.ui && g.ui.dialogueOpen);
+    if (this._talkPending && open) this._talkPending.live = true;
+    if (this._dlgOpenPrev && !open && this._talkPending && this._talkPending.live) {
+      this._retalk = {
+        key: this._talkPending.key, at: this._clockMs,
+        released: !(g.input && g.input.isHeld && g.input.isHeld('a')),
+      };
+      this._talkPending = null;
+    }
+    if (this._retalk && g.input && g.input.isHeld && !g.input.isHeld('a')) this._retalk.released = true;
+    this._dlgOpenPrev = open;
+  }
+
   tryInteract() {
     const g = this.game;
     const p = this.player;
@@ -1123,6 +1185,16 @@ export class OverworldScene {
     // Partner interaction (facing VOLTIK's tile)
     const ptx = Math.round(this.partner.px / TILE), pty = Math.round(this.partner.py / TILE);
     if (fx === ptx && fy === pty) return this.petPartner();
+    // RUN2 FIX 2: record the faced target — every dialogue an interact
+    // can open (NPC/sysNpc talk, trainer talk, signs, sysInteract
+    // objects) dispatches from below this point, so this one record
+    // covers them all. The re-arm guard itself is enforced on the
+    // INPUT path (see _retalkSwallow, called from update): the defect
+    // is a confirm-key mash, and only a key press can re-trigger a
+    // talk in play. The interact logic here stays instant for any
+    // caller — designed back-to-back talk chains (quiz re-asks, tale
+    // stages, object re-fires) are game logic, not key mashing.
+    this._talkPending = { key: this._facedKey(), live: false };
     // Systems interactions (item balls, hidden items, field moves, fishing)
     if (this.sysInteract && this.sysInteract(fx, fy)) return true;
     // Wave 5a: the Center counter (tile char '\u03b1') is furniture the
