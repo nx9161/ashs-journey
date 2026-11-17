@@ -203538,9 +203538,15 @@ class OverworldScene {
         this._hudBannerObj = this.banner;
         ui.hudToast(this.banner.text, 2600);
       }
-      // Movement tutorial toast: once, when the tutorial starts.
-      if (this.moveTut && !this.moveTut._toastSent) {
-        this.moveTut._toastSent = true;
+      // Movement tutorial toast: once — Game-feel F3: it fires when the
+      // player takes their first step (the moment it teaches), never at
+      // spawn under the chapter card, and never while a chapter card is
+      // open (one overlay at a time). moveTut dismisses on that same
+      // first step, so the pending flag lives on the scene, not the tut.
+      if (this.moveTut) this._tutToastArmed = true;
+      if (this._tutToastArmed && !this._tutToastSent && this.trail && this.trail.length > 0 && !ui.chapterCard) {
+        this._tutToastSent = true;
+        this._tutToastArmed = false;
         ui.hudToast('Walk with the D-pad — VOLTIK follows you!', 3600);
       }
     }
@@ -207895,6 +207901,13 @@ Object.assign(OverworldScene.prototype, {
     if (currentArcOf(g.state).id === 'sinnoh') {
       const sq = SINNOH_QUESTS.find((qq) => qq.flag && !g.state.story.flags[qq.flag]);
       if (sq) return '▶ ' + sq.text;
+    }
+    // Game-feel F3: the opening objective names the actual first step —
+    // leave Dawnwick by the south road — until the player first sets
+    // foot on Route 1; only then does the badge chain lead the HUD.
+    const gf = g.state.story.flags;
+    if (gf.metPartner && !gf.reached_route1 && !gf.beat_brock) {
+      return '▶ Leave Dawnwick — Route 1 lies south';
     }
     const q = MAIN_QUESTS.find((qq) => qq.flag && !g.state.story.flags[qq.flag]);
     if (q) return '▶ ' + q.text;
