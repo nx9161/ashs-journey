@@ -195053,7 +195053,13 @@ class UI {
     if (this.headless) { this.inBattle = !!on; return; }
     this.inBattle = !!on; // Track B: SYNC.tick defers the conflict sheet out of battle
     if (!on) this.hideRtMovePad(); // Elevation B7: the RT touch pad retires with the battle
-    this.dpadEl.classList.toggle('hidden', on);
+    // Game-feel F7: in battle the D-pad leaves VISUALLY but keeps its
+    // layout box (visibility, not the display:none 'hidden' class) —
+    // hiding it outright shrank #ctlband 220 -> 198 px and shifted
+    // every touch target the moment a battle started. visibility:
+    // hidden also drops pointer events, so the pad stays inert while
+    // its space is reserved: one band height, battle or not.
+    if (this.dpadEl) this.dpadEl.style.visibility = on ? 'hidden' : '';
     // UI v2.2: do NOT unhide the command panel here — renderCommands() owns
     // its visibility (it unhides only when real commands populate it). The
     // v2.1 toggle was invisible then (transparent zero-height shell); with
@@ -211879,6 +211885,6 @@ if (typeof Game !== 'undefined') Object.assign(Game.prototype, {
 });
 
 </script>
-<!-- contentHash:5df7c34e14779c2e948ac8521c65f8e887f9e821367a16e0d1f18d6c027633a1 -->
+<!-- contentHash:6d31f8aa36eaafdc36e3c264e189e95e765bfd0a7451fcc658b4445c281850a6 -->
 </body>
 </html>
