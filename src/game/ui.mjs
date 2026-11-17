@@ -1466,14 +1466,15 @@ export class UI {
     s.top = Math.round(r.top) + 'px';
     s.width = Math.round(r.width) + 'px';
     s.height = Math.round(r.height) + 'px';
-    // UI v2.6 (Wave CAM): on desktop the HUD band takes the canvas box's
-    // width (the stage centers it), so the band's chips column and strip
-    // align with the field's left/right edges — above it, never on it.
-    // Phones/landscape leave the band at its natural full/grid width.
-    if (this.hudBand) {
-      const desk = document.body && document.body.classList.contains('desktop');
-      this.hudBand.style.width = desk ? Math.round(r.width) + 'px' : '';
-    }
+    // F2 (fill the stage): the HUD band spans the stage at every mode
+    // (the landscape treatment, generalized) — one line: chips row at
+    // the left, quick-strip + mood pip at the right. The UI v2.6
+    // desktop width-sync to the canvas box is removed: in practice the
+    // band's contents overflowed the synced box by ~222px (the chips
+    // column alone is 184px + strip 220px + pip 48px in a 256px box),
+    // so the sync aligned nothing while the column cost 175px of
+    // vertical stage. The frame layer above still tracks the canvas
+    // box exactly — only the band's width is freed.
   }
 
   update(dt) {

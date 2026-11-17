@@ -386,20 +386,28 @@ export class Game {
     // factors absorb the renderer's snap tolerance (B2-G5, <= +8%).
     const wrap = document.getElementById && document.getElementById('screenwrap');
     const ww = wrap ? wrap.clientWidth : w, wh = wrap ? wrap.clientHeight : h;
+    // F2 (fill the stage): request the largest EXACT integer scale of
+    // the 256px view that fits the wrap box. The renderer snaps every
+    // request to an integer multiple within +8% (B2-G5); the old
+    // fractional requests (wrap - 128, wrap / 1.08) let that rule floor
+    // a whole scale step — 384 asked, 256 shipped at 1280x800. An
+    // exact-integer request makes the snap a no-op: it can neither
+    // spill past #screenwrap nor shrink below the fit.
+    const dpr = r.dpr || 1;
+    const fit = (availCss) => (256 * Math.max(1, Math.floor((availCss * dpr) / 256))) / dpr;
     if (mode === 'desktop') {
-      // Wave CAM (owner law): the viewport is 16x16 tiles in EVERY
-      // presentation. Square request capped 128px under the wrap box so
-      // the renderer's integer snap (B2-G5, <= +128px) can never spill
-      // past #screenwrap into the HUD band above or the hint zone below.
-      const s = Math.min(1120, w * 0.9, Math.max(160, Math.min(ww, wh) - 128));
+      // Wave CAM (owner law): the viewport is 16x16 tiles in EVERY presentation.
+      let s = fit(Math.min(ww, wh));
+      const cap = Math.min(1120, w * 0.9);
+      if (s > cap) s = fit(cap);
       r.resize(256, 256, Math.round(s), Math.round(s));
     } else if (mode === 'landscape') {
-      // Square in the screen column; same snap-safe cap as desktop.
-      const s = Math.max(160, Math.min(ww, wh) - 128);
+      // Square in the screen column; exact integer fit.
+      const s = fit(Math.min(ww, wh));
       r.resize(256, 256, Math.round(s), Math.round(s));
     } else {
-      // Square: short side requested, height pre-divided by snap tolerance.
-      const s = Math.min(ww, wh / 1.08);
+      // Square: exact integer fit of the wrap box.
+      const s = fit(Math.min(ww, wh));
       r.resize(256, 256, Math.round(s), Math.round(s));
     }
     document.body.classList.toggle('flip', !!this.state.settings.controlsFlip);
