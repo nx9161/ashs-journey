@@ -2237,6 +2237,25 @@
 //     Director renumbered these to #66/#67/#68 at
 //     this merge; the numbers are
 //     bookkeeping, the registrations are the substance.
+//     SIXTY-NINTH DOCUMENTED EXCEPTION (GAME-FEEL
+//     PROGRAM, item A — Dawnwick exit signposting,
+//     2026-11-17): pallet's pin is its POST-SIGNPOSTING
+//     tuple. The blind completion review proved players
+//     hunt for a north exit that does not exist; the fix
+//     is signposting only — the intro line's wrong
+//     "north of Dawnwick" corrected to south, the (9,10)
+//     sign strengthened, and redirect signs placed ON
+//     the two north bell posts (4,0) + (14,0). No map
+//     rows, warps, or posts moved. Gate STATUS stays
+//     PASS and every structural field is identical
+//     (conn 90/90, step-offs 6/6, components 1,
+//     junctions 5, apronMin 0.643, unanchoredAny 0);
+//     only the two clarity means move because the two
+//     new signs are desire-line endpoints in analyzeMap:
+//     meanStrict 0.9463 -> 0.8705 (still far above the
+//     0.60 gate), meanFabric 0.9945 -> 0.9952.
+//     (Register: your_files/game-feel-program/
+//     a-signposting/SPEC.md.)
 
 import { loadMaps, makeTiers, townSetOf, analyzeMap } from '../scripts/audit-desire-paths.mjs';
 import { scoreTown, gateCheck, tiersFor, STREET_REGISTRY } from '../scripts/audit-placement.mjs';
@@ -2327,7 +2346,7 @@ const PIN = {
   "olivine": [1, 110, 110, 7, 7, 1, 11, 0, 0, 0.857, 0, 0, 0, 0, 0.6186, 0.9819],
   "oreburgh": [1, 182, 182, 8, 8, 1, 3, 0, 0, 0.714, 0, 0, 0, 0, 0.7912, 0.9994],
   "pacifidlog": [1, 30, 30, 4, 4, 1, 4, 0, 0, 0.75, 0, 0, 0, 0, 0.6569, 0.9807],
-  "pallet": [1, 90, 90, 6, 6, 1, 5, 0, 0, 0.643, 0, 0, 0, 0, 0.9463, 0.9945],
+  "pallet": [1, 90, 90, 6, 6, 1, 5, 0, 0, 0.643, 0, 0, 0, 0, 0.8705, 0.9952],
   "pastoria": [1, 182, 182, 8, 8, 1, 4, 0, 0, 0.824, 0, 0, 0, 0, 0.6288, 0.994],
   "petalburg": [1, 110, 110, 7, 7, 1, 10, 1, 0, 0.643, 0, 0, 0, 1, 0.6643, 0.9896],
   "pewter": [1, 110, 110, 8, 8, 1, 6, 0, 0, 0.824, 0, 0, 0, 0, 0.8602, 1],

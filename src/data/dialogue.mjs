@@ -16,7 +16,7 @@ export const INTRO_SCRIPT = {
     '...It shocked you too! Ha! That means it likes you. Mostly.',
     'Listen well: this one will never stay inside a Capture Orb. It walks beside you, or not at all.',
     'A bond like that is rarer than any badge. Treat it well, {player}.',
-    'Your journey starts on Route 1, north of Dawnwick. Catch Kin, grow strong — and when you are ready, Flintridge Gym awaits.',
+    'Your journey starts on Route 1, south of Dawnwick. Catch Kin, grow strong — and when you are ready, Flintridge Gym awaits.',
   ],
   // W10-C T3: the starter moment's panel (a PANELS id), resolved by
   // the intro seam in src/game/intro.mjs — plays after the lines

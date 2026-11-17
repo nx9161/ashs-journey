@@ -1769,7 +1769,9 @@ export const MAPS3 = {
     signs: [
       { x: 2, y: 4, text: "PROF. HAWTHORN'S LAB — Kin research. The professor is out on Route 1 today." },
       { x: 6, y: 4, text: "PROF. HAWTHORN'S LAB — Kin research. The professor is out on Route 1 today." },
-      { x: 9, y: 10, text: "DAWNWICK — a quiet shore town. The road south leads to ROUTE 1." },
+      { x: 9, y: 10, text: "DAWNWICK — a quiet shore town. The road SOUTH leads to ROUTE 1 — follow the causeway at the bottom of town." },
+      { x: 4, y: 0, text: "The bell posts mark the old town line — no road runs north from Dawnwick. ROUTE 1 lies SOUTH, across the shore causeway." },
+      { x: 14, y: 0, text: "The bell posts mark the old town line — no road runs north from Dawnwick. ROUTE 1 lies SOUTH, across the shore causeway." },
       { x: 2, y: 10, text: "DAWNWICK DOCK — Ferries to Caldera Town, Galefield Town and the Trial Grounds. The captains book their own passengers." },
       { x: 18, y: 9, text: "THE OLD BARN — Mom's first map of Dawnwick is chalked inside its door. Half of Arden navigates by her handwriting." },
     ],
