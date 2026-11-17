@@ -40,8 +40,11 @@ for (const k in CMD_PIX) CMD_PIX[k] = CMD_PIX[k].split('/');
 
 export function typePill(type) {
   const col = TYPE_COLORS[type] || '#a8a878';
-  const abbr = String(type).slice(0, 2).toUpperCase();
-  return '<span class="tpill" style="background:' + col + '"><b>' + abbr + '</b>&nbsp;' + type + '</span>';
+  // D3 (game-feel polish): ONE clean label. The pill used to carry a
+  // bold 2-letter abbreviation AND the full type name; on the phone
+  // move grid the squeezed pill overprinted the two runs into
+  // garble ("NO normal", "FI fire" in the audit captures).
+  return '<span class="tpill" style="background:' + col + '">' + type + '</span>';
 }
 
 export class UI {

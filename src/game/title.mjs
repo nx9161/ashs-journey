@@ -242,10 +242,13 @@ export class BootScene {
     // stack did not.
     if (this.game.ui && this.game.ui.loginOpen) return;
     const items = this.menuItems();
-    if (input.wasPressed('up')) { this.menuIdx = (this.menuIdx + items.length - 1) % items.length; }
-    if (input.wasPressed('down')) { this.menuIdx = (this.menuIdx + 1) % items.length; }
+    // F5: the title menu was the one silent menu in the game — nav
+    // ticks and the activation blip now match every other menu.
+    if (input.wasPressed('up')) { this.menuIdx = (this.menuIdx + items.length - 1) % items.length; this.game.audio.playSfx('ui-tick'); }
+    if (input.wasPressed('down')) { this.menuIdx = (this.menuIdx + 1) % items.length; this.game.audio.playSfx('ui-tick'); }
     if (input.wasPressed('a') || input.wasPressed('start')) {
       this.game.audio.unlock();
+      this.game.audio.playSfx('ui-blip');
       this._activateMenuItem(items[this.menuIdx]);
     }
   }
@@ -400,6 +403,10 @@ export class BootScene {
       measureText(r, GAME_TITLE, titleSize, true),
       measureText(r, GAME_SUBTITLE, 14, false),
     );
+    // D4 (game-feel polish): the subtitle at 14px measures wider
+    // than the capped plate (w - 12) and spilled past both edges.
+    // Fit it to the plate — the legal screen's own precedent
+    // (renderLegal shrinks to fit, floor 11).
     if (hasEd) plateW = Math.max(plateW, measureText(r, EDITION_MARKER, 14, false) + 16);
     plateW = Math.min(plateW + 28, w - 12);
     const plateX = Math.round(cx - plateW / 2);
@@ -409,7 +416,9 @@ export class BootScene {
     // sized to the measured Galmuri title text.
     const titleW = measureText(r, GAME_TITLE, titleSize, true);
     g.ctx2dfill('rgba(232,200,50,0.55)', Math.round(cx - titleW / 2), titleY + titleSize + 1, titleW, 2);
-    r.text(GAME_SUBTITLE, cx, subY, { size: 14, align: 'center', color: '#ffe9a8', display: true });
+    let subSize = 14;
+    while (subSize > 11 && measureText(r, GAME_SUBTITLE, subSize, false) > plateW - 20) subSize--;
+    r.text(GAME_SUBTITLE, cx, subY, { size: subSize, align: 'center', color: '#ffe9a8', display: true });
     if (hasEd) {
       // ADR-012 personal-edition ribbon: measured dark band + gold underline,
       // centered under the subtitle. Guest/vercel bundles have
@@ -427,12 +436,18 @@ export class BootScene {
       this._menuHit = { x: menuX, y: menuY, w: menuW, rowH, padY: menuPadY, values: items.map((it) => it.value) };
       // ---- Menu: clean centered panel, gold-tinted highlight bar on selection ----
       r.panel(menuX, menuY, menuW, menuH, 'rgba(18,18,30,0.88)', GOLD);
+      const reducedT = !!(g.state.settings && g.state.settings.reducedMotion);
       items.forEach((it, i) => {
         const rowY = menuY + menuPadY + i * rowH;
         const sel = i === this.menuIdx;
         if (sel) {
           g.ctx2dfill('rgba(232,200,50,0.30)', menuX + 4, rowY, menuW - 8, rowH - 2);
           g.ctx2dfill(GOLD, menuX + 4, rowY, 3, rowH - 2);
+          // F5: the battle menus' cursor idiom — a red ▶ at the
+          // row's left edge with a gentle 2-frame nudge (static
+          // under reduced motion, the PRESS START precedent).
+          const nudge = reducedT ? 0 : (Math.floor(this.t * 2) % 2) * 2;
+          r.text('▶', menuX + 10 + nudge, rowY + 2, { size: 14, bold: true, color: '#e03c31', display: true });
         }
         r.text(it.label, cx, rowY + 2, {
           size: 14, bold: sel, align: 'center', display: true,

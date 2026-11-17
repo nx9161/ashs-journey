@@ -350,7 +350,11 @@ body.reduced-motion .menu.menu-open{animation:none}
 .menu-title{font-family:var(--font-display);background:#d7e1f2;color:var(--ink);font-size:14px;font-weight:bold;letter-spacing:1px;text-transform:uppercase;padding:10px 12px;border-bottom:2px solid var(--frame)}
 .menu-list{padding:6px}
 .menu-row{display:flex;width:100%;gap:8px;align-items:center;background:none;border:0;border-left:4px solid transparent;border-bottom:1px solid #ccd6ea;font:inherit;font-size:16px;line-height:1.35;color:var(--ink);text-align:left;padding:10px;border-radius:4px;min-height:48px;cursor:pointer}
-.menu-row .cur{width:18px;flex:none;color:var(--red);font-weight:bold}
+.menu-row .cur{width:18px;flex:none;color:var(--red);font-weight:bold;font-size:18px;line-height:1}
+/* F5: gentle 2-frame nudge pulse on the live cursor (steps() = pixel idiom) */
+@keyframes curpulse{0%{transform:translateX(0)}50%{transform:translateX(2px)}100%{transform:translateX(0)}}
+.menu-row.cursor .cur{animation:curpulse .5s steps(2,jump-none) infinite}
+body.reduced-motion .menu-row .cur{animation:none}
 .menu-row.cursor{background:var(--sky);outline:2px solid var(--navy);outline-offset:-2px;border-left-color:var(--navy)}
 .menu-row.disabled{color:#8a93a8;font-style:italic;cursor:default}
 .menu-row.emptyslot{border:2px dashed #9aa7c4;background:rgba(46,74,143,.05);color:#8a93a8;font-style:italic}
@@ -584,7 +588,11 @@ body.flip.landscape .sysbtns{grid-column:1}
 .cmdf-party{--cmdcol:#3d9240}
 .cmdf-run{--cmdcol:#3863b4}
 .cmdf.cursor{background:var(--sky);outline:2px solid var(--navy);outline-offset:-4px}
-.cmdf .cur{position:absolute;left:5px;top:50%;transform:translateY(-50%);width:13px;color:var(--red);font-weight:bold;text-align:center;z-index:1}
+.cmdf .cur{position:absolute;left:4px;top:50%;transform:translateY(-50%);width:17px;color:var(--red);font-weight:bold;font-size:18px;line-height:1;text-align:center;z-index:1}
+/* F5: the command cursor pulses too — its keyframes keep the -50% Y centering the base rule relies on */
+@keyframes curpulseY{0%{transform:translate(0,-50%)}50%{transform:translate(2px,-50%)}100%{transform:translate(0,-50%)}}
+.cmdf.cursor .cur{animation:curpulseY .5s steps(2,jump-none) infinite}
+body.reduced-motion .cmdf .cur{animation:none}
 .cmdf.cursor::before{visibility:hidden}
 .cmdf.disabled{background:#c9d2e4;color:#6a7799}
 .cmdf.dimmed{background:#e8edf6;color:#4a5878}
@@ -606,16 +614,16 @@ body.flip.landscape .sysbtns{grid-column:1}
 /* move menu — Platinum move buttons: framed plate cells in a 2x2 grid,
    name + type pill on the top line, PP + power/acc on the second line */
 .menugrid{display:grid;grid-template-columns:1fr 1fr;gap:4px;padding:4px}
-.menugrid .menu-row{flex-direction:column;align-items:stretch;min-height:44px;background-color:#fdfdff;border:2px solid var(--frame);border-radius:3px;position:relative;padding:4px 8px 4px 17px}
+.menugrid .menu-row{flex-direction:column;align-items:stretch;min-height:44px;background-color:#fdfdff;border:2px solid var(--frame);border-radius:3px;position:relative;padding:4px 8px 4px 24px}
 .menugrid .menu-row.cursor{background:var(--sky);outline:2px solid var(--navy);outline-offset:-2px;border-left-color:var(--frame)}
 .menugrid .menu-row.wide{grid-column:1/-1;min-height:28px;flex-direction:row;align-items:center;justify-content:center}
-.menugrid .menu-row .cur{position:absolute;left:4px;top:2px;width:auto;font-size:14px;color:var(--red);z-index:2}
+.menugrid .menu-row .cur{position:absolute;left:4px;top:2px;width:auto;font-size:18px;color:var(--red);z-index:2}
 .mvcell{display:grid;grid-template-columns:1fr auto;align-items:center;column-gap:8px;width:100%;line-height:1.15}
 .mvname{font-weight:bold;font-size:14px;grid-column:1}
 .mvpp{font-size:15px;color:#4a5878;grid-column:1}
 .mvpow{font-size:15px;color:#6a7799;grid-column:2;justify-self:end}
 .mvcell .tpill{grid-column:2;grid-row:1;justify-self:end;margin:0}
-@media (max-width:560px){.menugrid{gap:3px;padding:2px}.menugrid .menu-row{min-height:32px;padding:1px 6px 1px 15px}.mvpow{display:none}.mvcell{line-height:1.05;column-gap:4px}.menu.battlewin{bottom:1%;left:1%;right:1%;max-height:20%}.menu.battlewin .menu-row{min-height:42px}.mvname{grid-column:1/-1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.mvcell .tpill{grid-column:1;grid-row:2;justify-self:start;padding:0 5px}.mvpp{grid-column:2;grid-row:2;white-space:nowrap}}
+@media (max-width:560px){.menugrid{gap:3px;padding:2px}.menugrid .menu-row{min-height:32px;padding:1px 6px 1px 22px}.mvpow{display:none}.mvcell{line-height:1.05;column-gap:4px}.menu.battlewin{bottom:1%;left:1%;right:1%;max-height:20%}.menu.battlewin .menu-row{min-height:42px}.mvname{grid-column:1/-1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.mvcell .tpill{grid-column:1;grid-row:2;justify-self:start;padding:0 5px}.mvpp{grid-column:2;grid-row:2;white-space:nowrap}}
 .tpill{display:inline-block;font-size:14px;font-weight:bold;color:#fff;border:1px solid #232838;border-radius:3px;padding:1px 8px;margin:2px 0;text-shadow:1px 1px 0 rgba(0,0,0,.4)}
 .tpill b{font-weight:bold}
 .menu-row.zeropp{color:#a0a0a0}
