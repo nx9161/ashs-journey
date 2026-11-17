@@ -196618,6 +196618,13 @@ class BattleScene {
     // drains never advance it and bypass holds entirely by invoking
     // message callbacks directly, exactly as they always have.
     this._clockMs = (this._clockMs || 0) + dt * 1000;
+    // F6 (real-clock battle time): the presentation clock this.t —
+    // entry slides, plate choreography, idle bob, FX phases — advances
+    // on SIM time here, not by +16 per painted frame in render(). A
+    // stalled or throttled paint can no longer stretch or freeze any
+    // battle animation; both engines share this update (RT is a mixin
+    // on this scene), so both inherit the fix.
+    this.t += dt * 1000;
     // Game-feel D1: a pending exit owns the tick until its wall-clock
     // sweep completes; the pop then fires under full cover. Checked
     // before everything else so a stalled paint can never leave the
@@ -199598,7 +199605,7 @@ class BattleScene {
       // UI v2: red advance cue at the box's bottom-right while waiting for input.
       if (this.msgOpen) r.text('▼', w - 20, h - 24, { size: 14, bold: true, color: '#e03c31', shadow: false });
     }
-    this.t += 16;
+    // F6: this.t advances in update() on sim time — never in render.
   }
 
   // UI v2 (Platinum standard): a true Platinum databox on r.ptPlate.
@@ -202029,7 +202036,7 @@ Object.assign(BattleScene.prototype, {
       // UI v2: red advance cue at the box's bottom-right while waiting for input.
       if (this.msgOpen) r.text('▼', w - 20, h - 24, { size: 14, bold: true, color: '#e03c31', shadow: false });
     }
-    this.t += 16;
+    // F6: this.t advances in BattleScene.update() on sim time — never in render.
   },
 });
 
