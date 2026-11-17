@@ -935,6 +935,6 @@ Object.assign(BattleScene.prototype, {
       // UI v2: red advance cue at the box's bottom-right while waiting for input.
       if (this.msgOpen) r.text('▼', w - 20, h - 24, { size: 14, bold: true, color: '#e03c31', shadow: false });
     }
-    this.t += 16;
+    // F6: this.t advances in BattleScene.update() on sim time — never in render.
   },
 });
