@@ -829,11 +829,16 @@ Object.assign(BattleScene.prototype, {
     // the battler's arena position exactly as the old 48px draw was.
     const foeSize = (foeArt && foeArt.size) || BATTLER_DRAW_SIZE;
     const allySize = (allyArt && allyArt.size) || BATTLER_DRAW_SIZE;
-    if (!(rt.catchSeq || rt.ballFlight)) {
+    // Game-feel D5: in the victory/defeat beat the fainted battler stays
+    // down (it sank at the faint) — the survivor holds its RT position.
+    const endBeat = this.state === 'victory' || this.state === 'defeat';
+    if (!(rt.catchSeq || rt.ballFlight) && !(endBeat && this.foe.hp <= 0)) {
       r.blitS(foeArt.front, rt.fx * sx - foeSize / 2, rt.fy * sy - foeSize / 2 + bobA, foeSize, foeSize);
     }
     const allySpr = this.ally.status === 'sleep' ? allyArt.back : allyArt.back;
-    r.blitS(allySpr, rt.ax * sx - allySize / 2, rt.ay * sy - allySize / 2 - bobA, allySize, allySize);
+    if (!(endBeat && this.ally.hp <= 0)) {
+      r.blitS(allySpr, rt.ax * sx - allySize / 2, rt.ay * sy - allySize / 2 - bobA, allySize, allySize);
+    }
     // Projectiles — W1 FX-1 (shared path): the travel element is the
     // move's own type kit (the projectile carries its move object), so
     // RT specials read by type instead of one side-coloured circle.
@@ -861,62 +866,64 @@ Object.assign(BattleScene.prototype, {
     r.camX = pcx; r.camY = pcy;
     this.plate(r, 6, 6, this.foe, this.hpAnim.foe, false);
     this.plate(r, w - 146, h - 124, this.ally, this.hpAnim.ally, true);
-    // Cooldown chips for the ally's four moves (bottom strip). Chip width is
-    // derived from the actual view: the old fixed 108px assumed a 480-wide
-    // canvas, so at real 256/384-wide layouts chips 3-4 started offscreen.
-    // ADR-025 §1: a persistent Ground chip sits NEXT TO the cooldown
-    // chips on the same bottom row for the whole RT fight (non-Open
-    // Grounds only — Open has no rules to show). It reserves its width
-    // from the row, so the four cooldown chips shrink to make room.
-    // Rulings patch (2026-10-27): the chip's DRAWN width flexes to its
-    // full text below ('GROUND: Rubble' measures 99px at 14px PtPixel)
-    // — the reservation here stays 96, so the four cooldown chips keep
-    // their size and layout exactly; the flex draws on the right
-    // margin and the gap, never on the cooldown chips.
-    const groundLabel = this.field && this.field.id !== 'open'
-      ? 'GROUND: ' + this.field.name.replace(/ Ground$/, '') : null;
-    const groundReserve = groundLabel ? 96 : 0;
-    const chipW = Math.floor((w - 24 - (groundReserve ? groundReserve + 4 : 0)) / 4); // 4 chips, 3 gaps of 4, 6px margins
-    const labelMax = Math.max(4, Math.min(10, Math.floor((chipW - 8) / 7)));
-    for (let i = 0; i < 4; i++) {
-      const slot = this.ally.moves[i];
-      const x = 6 + i * (chipW + 4);
-      const y = h - 26;
-      if (!slot) { r.panel(x, y, chipW, 20, 'rgba(43,48,64,0.55)', PT_FRAME); continue; }
-      const mv = MOVES[slot.id];
-      const cd = rt.cds.ally[slot.id] || 0;
-      const ready = cd <= 0 && slot.pp > 0;
-      // UI v2: chips are Platinum windows (r.panel -> ptFrame) in PT tones —
-      // navy PT_FRAME interior, PT_PAPER text when ready, PT_FRAME2 when not.
-      r.panel(x, y, chipW, 20, ready ? 'rgba(43,48,64,0.92)' : 'rgba(43,48,64,0.6)', PT_FRAME);
-      const label = (i + 1) + ' ' + (mv ? mv.name : slot.id);
-      // A spent slot also carries 'NO PP' at the chip's right end — shorten
-      // the label so the two never collide on narrow chips.
-      const maxChars = slot.pp <= 0 ? Math.max(3, Math.min(labelMax, Math.floor((chipW - 46) / 7))) : labelMax;
-      r.text(label.slice(0, maxChars), x + 4, y + 2, { size: 14, color: ready ? PT_PAPER : PT_FRAME2, shadow: false });
-      if (!ready && slot.pp > 0) {
-        // Cooldown pip: a PT_FRAME2 sweep draining along the chip's base.
-        const total = cooldownMs(mv, 50, 50, this.field, this.ally);
-        const frac = Math.max(0, Math.min(1, cd / total));
-        c.fillStyle = PT_FRAME2;
-        c.fillRect(x + 2, y + 16, (chipW - 4) * (1 - frac), 2);
+    if (!endBeat) {
+      // Cooldown chips for the ally's four moves (bottom strip). Chip width is
+      // derived from the actual view: the old fixed 108px assumed a 480-wide
+      // canvas, so at real 256/384-wide layouts chips 3-4 started offscreen.
+      // ADR-025 §1: a persistent Ground chip sits NEXT TO the cooldown
+      // chips on the same bottom row for the whole RT fight (non-Open
+      // Grounds only — Open has no rules to show). It reserves its width
+      // from the row, so the four cooldown chips shrink to make room.
+      // Rulings patch (2026-10-27): the chip's DRAWN width flexes to its
+      // full text below ('GROUND: Rubble' measures 99px at 14px PtPixel)
+      // — the reservation here stays 96, so the four cooldown chips keep
+      // their size and layout exactly; the flex draws on the right
+      // margin and the gap, never on the cooldown chips.
+      const groundLabel = this.field && this.field.id !== 'open'
+        ? 'GROUND: ' + this.field.name.replace(/ Ground$/, '') : null;
+      const groundReserve = groundLabel ? 96 : 0;
+      const chipW = Math.floor((w - 24 - (groundReserve ? groundReserve + 4 : 0)) / 4); // 4 chips, 3 gaps of 4, 6px margins
+      const labelMax = Math.max(4, Math.min(10, Math.floor((chipW - 8) / 7)));
+      for (let i = 0; i < 4; i++) {
+        const slot = this.ally.moves[i];
+        const x = 6 + i * (chipW + 4);
+        const y = h - 26;
+        if (!slot) { r.panel(x, y, chipW, 20, 'rgba(43,48,64,0.55)', PT_FRAME); continue; }
+        const mv = MOVES[slot.id];
+        const cd = rt.cds.ally[slot.id] || 0;
+        const ready = cd <= 0 && slot.pp > 0;
+        // UI v2: chips are Platinum windows (r.panel -> ptFrame) in PT tones —
+        // navy PT_FRAME interior, PT_PAPER text when ready, PT_FRAME2 when not.
+        r.panel(x, y, chipW, 20, ready ? 'rgba(43,48,64,0.92)' : 'rgba(43,48,64,0.6)', PT_FRAME);
+        const label = (i + 1) + ' ' + (mv ? mv.name : slot.id);
+        // A spent slot also carries 'NO PP' at the chip's right end — shorten
+        // the label so the two never collide on narrow chips.
+        const maxChars = slot.pp <= 0 ? Math.max(3, Math.min(labelMax, Math.floor((chipW - 46) / 7))) : labelMax;
+        r.text(label.slice(0, maxChars), x + 4, y + 2, { size: 14, color: ready ? PT_PAPER : PT_FRAME2, shadow: false });
+        if (!ready && slot.pp > 0) {
+          // Cooldown pip: a PT_FRAME2 sweep draining along the chip's base.
+          const total = cooldownMs(mv, 50, 50, this.field, this.ally);
+          const frac = Math.max(0, Math.min(1, cd / total));
+          c.fillStyle = PT_FRAME2;
+          c.fillRect(x + 2, y + 16, (chipW - 4) * (1 - frac), 2);
+        }
+        if (slot.pp <= 0) r.text('NO PP', x + chipW - 40, y + 2, { size: 14, color: '#f84838', shadow: false });
       }
-      if (slot.pp <= 0) r.text('NO PP', x + chipW - 40, y + 2, { size: 14, color: '#f84838', shadow: false });
+      if (groundLabel) {
+        // Full label, never sliced (the fixed-96 chip cut 'GROUND:
+        // Rubble' to 'GROUND: Rubbl'). Width = measured text + padding,
+        // floored at the reserved 96; the right edge may advance from
+        // w-6 to w-2 and any further growth extends left over the 4px
+        // gap (bounded by the widest label to ~4px over the last chip's
+        // frame/pip zone — its label and NO PP text sit clear of it).
+        const gw = Math.max(96, Math.ceil(measureChipText(r, groundLabel, 14)) + 8);
+        const gx = Math.min(6 + 4 * (chipW + 4), w - 2 - gw);
+        const gy = h - 26;
+        r.panel(gx, gy, gw, 20, 'rgba(43,48,64,0.92)', PT_FRAME);
+        r.text(groundLabel, gx + 4, gy + 2, { size: 14, color: PT_PAPER, shadow: false });
+      }
+      if (this.game.ui.refreshRtMovePad) this.game.ui.refreshRtMovePad();
     }
-    if (groundLabel) {
-      // Full label, never sliced (the fixed-96 chip cut 'GROUND:
-      // Rubble' to 'GROUND: Rubbl'). Width = measured text + padding,
-      // floored at the reserved 96; the right edge may advance from
-      // w-6 to w-2 and any further growth extends left over the 4px
-      // gap (bounded by the widest label to ~4px over the last chip's
-      // frame/pip zone — its label and NO PP text sit clear of it).
-      const gw = Math.max(96, Math.ceil(measureChipText(r, groundLabel, 14)) + 8);
-      const gx = Math.min(6 + 4 * (chipW + 4), w - 2 - gw);
-      const gy = h - 26;
-      r.panel(gx, gy, gw, 20, 'rgba(43,48,64,0.92)', PT_FRAME);
-      r.text(groundLabel, gx + 4, gy + 2, { size: 14, color: PT_PAPER, shadow: false });
-    }
-    if (this.game.ui.refreshRtMovePad) this.game.ui.refreshRtMovePad();
     if (this.rtFloatText && this.rtFloatT > 0) {
       this.rtFloatT -= 16;
       // Panel fits the view and the text slice fits the panel (~7px/char at

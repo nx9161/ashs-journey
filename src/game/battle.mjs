@@ -3737,7 +3737,10 @@ export class BattleScene {
 
   render(r) {
     const g = this.game;
-    if (this.rtMode && this.rt && (this.state === 'rt' || this.state === 'xp')) { this.renderRt(r); return; }
+    // Game-feel D5: RT keeps its own theatre through the victory/defeat
+    // beat — routing those states to the classic renderer re-framed both
+    // battlers at the win moment. renderRt handles them explicitly.
+    if (this.rtMode && this.rt && (this.state === 'rt' || this.state === 'xp' || this.state === 'victory' || this.state === 'defeat')) { this.renderRt(r); return; }
     const w = r.viewW, h = r.viewH;
     this._fxView = { w, h }; // W1: FX anchors track the live view
     // Transform discipline (title/intro pattern): pin the camera to the
