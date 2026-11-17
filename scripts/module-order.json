@@ -74,6 +74,7 @@
  "src/game/frontier.mjs",
  "src/game/battle-rt.mjs",
  "src/game/overworld.mjs",
+ "src/game/evolution.mjs",
  "src/game/overworld-systems.mjs",
  "src/game/johto-actors.mjs",
  "src/game/storage-systems.mjs",

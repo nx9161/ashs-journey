@@ -17,6 +17,7 @@ import { roll, intIn, pickWeighted } from '../engine/rng.mjs';
 import { makeMon, dexRegister, displayName, evolutionCheck, boxCheck, grantPartnerMon, hasPartnerMon } from './state.mjs';
 import { sparLevelFor } from './rules.mjs';
 import { BattleScene } from './battle.mjs';
+import { EvolutionScene, HatchScene } from './evolution.mjs';
 import { ContestScene, hasRibbon } from './contest.mjs';
 import { startFrontier, startBrainAudience, talkFrontierScott, tryScottClosing, frontierOnWarpLanding, frontierOnStep } from './frontier.mjs';
 import { PYRAMID_FLOOR_MAPS } from '../data/frontier.mjs';
@@ -542,13 +543,30 @@ Object.assign(OverworldScene.prototype, {
     // hatch scene claims the step (no encounter rides over it).
     const j6tick = johtoStepTick(g.state);
     if (j6tick.hatched.length) {
-      const lines = [];
-      for (const m of j6tick.hatched) {
-        lines.push('Oh? The Egg is hatching!');
-        lines.push(displayName(m, SPECIES) + ' hatched from the Egg!');
-      }
       g.audio.playSfx('dex-register');
-      g.ui.say(lines);
+      // Egg Hatch ceremony (2026-11-17): the data layer has already
+      // hatched the mon (hatchMon owns the mutation — suites pin the
+      // state, and the state is identical either way); the ceremony is
+      // presentation only, chained per hatched mon. Without battle art
+      // on hand (bare headless contexts) the original say() lines run.
+      const hatched = j6tick.hatched.slice();
+      const artReady = g.spriteCache && hatched.every((m) => g.spriteCache[m.speciesId])
+        && g.scenes && g.scenes.top === this;
+      if (!artReady) {
+        const lines = [];
+        for (const m of hatched) {
+          lines.push('Oh? The Egg is hatching!');
+          lines.push(displayName(m, SPECIES) + ' hatched from the Egg!');
+        }
+        g.ui.say(lines);
+        return true;
+      }
+      const playNext = () => {
+        const m = hatched.shift();
+        if (!m) return;
+        g.scenes.push(new HatchScene({ mon: m, name: displayName(m, SPECIES), onDone: playNext }));
+      };
+      playNext();
       return true;
     }
     // Stage H6: the Regi tombs' seals + the Eon stop. Both pre-empt
@@ -4122,18 +4140,47 @@ Object.assign(OverworldScene.prototype, {
     if (!evo) return false;
     const fromName = displayName(mon, SPECIES);
     const to = SPECIES[evo.to];
-    const ivs = mon.ivs || {};
-    const oldMax = mon.maxHp;
-    mon.speciesId = evo.to;
-    mon.maxHp = hpValue(to.base.hp, mon.level, ivs.hp);
-    if (mon.hp > 0) mon.hp = Math.min(mon.maxHp, mon.hp + (mon.maxHp - oldMax));
-    mon.stats = {
-      atk: statValue(to.base.atk, mon.level, ivs.atk), def: statValue(to.base.def, mon.level, ivs.def),
-      spa: statValue(to.base.spa, mon.level, ivs.spa), spd: statValue(to.base.spd, mon.level, ivs.spd),
-      spe: statValue(to.base.spe, mon.level, ivs.spe),
-    };
-    dexRegister(g.state.dex, 'caught', to.dexNo);
+    if (!to) return false;
     g.audio.playSfx('evolution-fanfare'); // W12-T4: evolution has its own sting (levelup keeps the level-up moment)
+    // The data swap, unchanged from the original instant evolution —
+    // the Evolution Ceremony scene calls this exactly once, at the
+    // transformation's white-hold peak, and never on a B-cancel.
+    const applyEvolution = () => {
+      const ivs = mon.ivs || {};
+      const oldMax = mon.maxHp;
+      mon.speciesId = evo.to;
+      mon.maxHp = hpValue(to.base.hp, mon.level, ivs.hp);
+      if (mon.hp > 0) mon.hp = Math.min(mon.maxHp, mon.hp + (mon.maxHp - oldMax));
+      mon.stats = {
+        atk: statValue(to.base.atk, mon.level, ivs.atk), def: statValue(to.base.def, mon.level, ivs.def),
+        spa: statValue(to.base.spa, mon.level, ivs.spa), spd: statValue(to.base.spd, mon.level, ivs.spd),
+        spe: statValue(to.base.spe, mon.level, ivs.spe),
+      };
+      dexRegister(g.state.dex, 'caught', to.dexNo);
+    };
+    // Evolution Ceremony (2026-11-17): every trigger — post-battle
+    // level-up queue, stones, Link Transfer, storage — routes through
+    // this one function, so the ceremony fires for all of them. The
+    // scene needs both forms' battle art; without it (bare headless
+    // contexts) the legacy instant path below runs instead.
+    const artReady = g.spriteCache && g.spriteCache[mon.speciesId] && g.spriteCache[evo.to]
+      && g.scenes && g.scenes.top === this;
+    if (artReady) {
+      const scene = new EvolutionScene({
+        mon, fromId: mon.speciesId, toId: evo.to,
+        fromName, oldName: sp.name, newName: to.name,
+        apply: applyEvolution,
+        onDone: (completed) => {
+          // A cancelled stone evolution refunds the stone (the bag
+          // caller already decremented it before this function ran).
+          if (!completed && stoneId) g.state.bag[stoneId] = (g.state.bag[stoneId] || 0) + 1;
+          if (onDone) onDone(completed);
+        },
+      });
+      g.scenes.push(scene);
+      return true;
+    }
+    applyEvolution();
     g.ui.say(['What? ' + fromName + ' is evolving!', fromName + ' evolved into ' + to.name + '!'], onDone || undefined);
     return true;
   },
