@@ -149553,7 +149553,11 @@ const MAPS3 = {
       { x: 2, y: 8, item: 'gloomfang', n: 1 },
     ],
     events: [],
-    start: null,
+    // Just inside the gate doors (the DD row below) — the same tiles
+    // the gatehouse warps land on. (Was null: the warden's gate fell
+    // back to a stale hardcoded {10,17}, 3 rows below this 20x14 map —
+    // the 2026-11-17 campaign-ending softlock.)
+    start: { x: 8, y: 11 },
   },
 
   route16: {
@@ -202051,6 +202055,70 @@ Object.assign(BattleScene.prototype, {
 });
 
 
+// ---- src/game/start-pos.mjs ----
+// start-pos.mjs — the ONE resolver for "where does the player land on
+// this map" whenever a flow places the player by a map's start: the
+// Preserve/Marsh gate entries, the zone-hub bounce, the safari exit,
+// Fly, and the load-time rescue in OverworldScene.enter.
+//
+// Every candidate is validated against the target map's bounds and
+// standable tiles. An invalid candidate degrades to a scanned safe
+// tile — never to a hardcoded coordinate. (The 2026-11-17 Preserve
+// softlock: the gate's stale `{ x: 10, y: 17 }` fallback placed the
+// player 3 rows below the 20x14 safari map — invisible, immovable,
+// session counter frozen, Continue restoring the trap. Campaign-
+// ending. This module exists so that class can never recur.)
+
+
+function startTileAt(mapDef, x, y) {
+  if (!mapDef || !Array.isArray(mapDef.rows)) return ' ';
+  if (y < 0 || y >= mapDef.rows.length || x < 0 || x >= mapDef.rows[y].length) return ' ';
+  return mapDef.rows[y][x];
+}
+
+// Standable for a start placement: a WALKABLE tile, or open water —
+// the surf routes' authored starts are water tiles by design (the
+// player arrives there already surfing).
+function isStartStandable(mapDef, x, y) {
+  const t = startTileAt(mapDef, x, y);
+  return t !== ' ' && (WALKABLE.has(t) || t === '~');
+}
+
+// Resolve a landing position for mapDef: the authored start first,
+// then the caller's fallback (e.g. a session's planted exit), each
+// only if it is in-bounds and standable. Otherwise scan for a safe
+// tile: just inside one of the map's own warps first, then the first
+// standable tile from the south edge up. Warp tiles and NPC posts are
+// never landed on (a warp tile would bounce the player straight back
+// out; an NPC post is occupied ground).
+function resolveStartPos(mapDef, fallback) {
+  if (!mapDef || !Array.isArray(mapDef.rows) || !mapDef.rows.length) return { x: 0, y: 0 };
+  const ok = (p) => !!p && Number.isFinite(p.x) && Number.isFinite(p.y) && isStartStandable(mapDef, p.x, p.y);
+  if (ok(mapDef.start)) return { x: mapDef.start.x, y: mapDef.start.y };
+  if (ok(fallback)) return { x: fallback.x, y: fallback.y };
+  const warpSet = new Set((mapDef.warps || []).map((w) => w.x + ',' + w.y));
+  const npcSet = new Set((mapDef.npcs || []).map((n) => n.x + ',' + n.y));
+  const free = (x, y, water) => {
+    const t = startTileAt(mapDef, x, y);
+    if (t === ' ' || warpSet.has(x + ',' + y) || npcSet.has(x + ',' + y)) return false;
+    return water ? (WALKABLE.has(t) || t === '~') : WALKABLE.has(t);
+  };
+  for (const water of [false, true]) {
+    for (const w of mapDef.warps || []) {
+      for (const [dx, dy] of [[0, -1], [0, 1], [-1, 0], [1, 0]]) {
+        if (free(w.x + dx, w.y + dy, water)) return { x: w.x + dx, y: w.y + dy };
+      }
+    }
+    for (let y = mapDef.rows.length - 1; y >= 0; y--) {
+      for (let x = 0; x < mapDef.rows[y].length; x++) {
+        if (free(x, y, water)) return { x, y };
+      }
+    }
+  }
+  return { x: 0, y: 0 };
+}
+
+
 // ---- src/game/overworld.mjs ----
 // overworld.mjs — tile-map exploration: interpolated grid movement, tall-grass
 // encounters (rustle -> ! -> transition, 900ms per ADR-004), follower partner,
@@ -202102,6 +202170,18 @@ class OverworldScene {
     const g = this.game;
     this.mapId = g.state.story.position.map;
     this.loadMap(this.mapId);
+    // SOFTLOCK RESCUE (2026-11-17): a save whose position lies outside
+    // its map's bounds — the pre-fix Preserve gate wrote exactly that
+    // ({x:10,y:17} on the 20x14 safari map) and Continue restored the
+    // trap — is relocated to the map's resolved start on load, so
+    // updating the game frees the trapped save in place.
+    {
+      const sp = g.state.story.position;
+      if (sp && this.map && (sp.x < 0 || sp.y < 0 || sp.x >= this.w || sp.y >= this.h)) {
+        const st = resolveStartPos(this.map, null);
+        sp.x = st.x; sp.y = st.y;
+      }
+    }
     // RUN2 FIX 2: re-talk re-arm state (see tryInteract / _trackTalkRearm).
     this._clockMs = 0;
     this._talkPending = null; // faced target whose dialogue is in flight
@@ -204243,7 +204323,7 @@ Object.assign(OverworldScene.prototype, {
       const hubId = Object.keys(MAPS).find((id) => MAPS[id].safariHub === dest.safariZone);
       const hub = hubId && MAPS[hubId];
       if (hub) {
-        const st = hub.start || { x: 8, y: 10 };
+        const st = resolveStartPos(hub, null);
         this.loadMap(hubId);
         this.player.tx = st.x; this.player.ty = st.y;
         this.player.px = st.x * TILE; this.player.py = st.y * TILE;
@@ -205909,7 +205989,7 @@ Object.assign(OverworldScene.prototype, {
             name: zoneName, rock: npc.safariRock || 'ROCK', exit: npc.safariExit || null,
           };
           g.state.bag.safariball = (g.state.bag.safariball || 0) + balls;
-          const st = MAPS[entryMap].start || { x: 10, y: 17 };
+          const st = resolveStartPos(MAPS[entryMap], null);
           this.loadMap(entryMap);
           this.player.tx = st.x; this.player.ty = st.y;
           this.player.px = st.x * TILE; this.player.py = st.y * TILE;
@@ -207071,7 +207151,7 @@ Object.assign(OverworldScene.prototype, {
     g.state.bag.safariball = 0;
     g.ui.say(left > 0 ? [msg, '(The park keeps the ' + left + ' unused Safari Balls.)'] : [msg], () => {
       const destMap = exit ? exit.map : 'fuchsia';
-      const st = exit || MAPS.fuchsia.start || { x: 10, y: 10 };
+      const st = resolveStartPos(MAPS[destMap], exit ? { x: exit.x, y: exit.y } : null);
       this.loadMap(destMap);
       this.player.tx = st.x; this.player.ty = st.y;
       this.player.px = st.x * TILE; this.player.py = st.y * TILE;
@@ -211778,7 +211858,7 @@ Object.assign(Game.prototype, {
           if (!d) return;
           const city = MAPS[d];
           const viaWarp = (city.warps || []).find((w) => w.via);
-          const spot = viaWarp ? viaWarp.via : (city.start || { x: 8, y: 8 });
+          const spot = viaWarp ? viaWarp.via : resolveStartPos(city, null);
           g.state.story.position = { map: d, x: spot.x, y: spot.y, dir: 'down' };
           g.audio.playSfx('warp');
           g.startOverworld();
