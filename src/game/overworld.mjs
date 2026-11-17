@@ -589,6 +589,11 @@ export class OverworldScene {
     p0.fishPhase = this.fishing && this.fishing.t >= 450 ? 'hold' : 'cast';
     if (p0.moving) this.stillMs = 0; else this.stillMs += dt * 1000;
 
+    // B: the bounce guard lives only while the SAME direction stays
+    // held; any release or direction change is the fresh press that
+    // re-arms warps.
+    if (this._warpGuardDir && (!input.dir || input.dir() !== this._warpGuardDir)) this._warpGuardDir = null;
+
     // Movement
     const p = this.player;
     if (!p.moving) {
@@ -785,12 +790,30 @@ export class OverworldScene {
     // (Pike chamber entries key on the landing tile; the Pyramid
     // floor law keys on (from, to)).
     if (this.sysWarpLanding) this.sysWarpLanding(to.map, fromMap);
+    // Game-feel B (bounce guard): arm the re-entry guard on EVERY
+    // landing. While the player keeps holding the direction they
+    // travelled in, no warp may fire — connection landings sit one
+    // step from the return warp, so one continuous hold used to
+    // round-trip Dawnwick -> Route 1 -> Dawnwick in ~1.3 sim-s,
+    // fast enough to read as "the exit never triggered". The guard
+    // clears the moment the held direction changes or releases
+    // (see update), i.e. re-entry always takes a fresh press.
+    this._warpGuardDir = this.player.dir;
+    this._warpGuardFrom = fromMap;
   }
 
   onStep(x, y) {
     const g = this.game;
     const wp = this.warpAt(x, y);
-    if (wp) {
+    if (wp && this._warpGuardDir && wp.to && wp.to.map === this._warpGuardFrom
+      && g.input && typeof g.input.dir === 'function' && g.input.dir() === this._warpGuardDir) {
+      // B: the warp back to the map the player just came from, stepped
+      // on under the SAME continuous hold that carried them here —
+      // inert until a fresh press. Any other warp (a cave mouth, a
+      // door) fires normally even mid-hold, and with no direction
+      // held (headless drivers, scripted steps) nothing is ever
+      // suppressed. The step itself is otherwise normal (below).
+    } else if (wp) {
       let to = wp.to;
       // Wave 5b: viaExit resolves per shared interior — the Mart's
       // exit ticket is its own (martReturn), the Center's is unchanged.
