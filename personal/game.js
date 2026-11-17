@@ -194480,7 +194480,18 @@ class UI {
     return false;
   }
 
+  // Game-feel D2: retire every live toast (DOM + queue). Called when a
+  // battle is entered so overworld toasts (movement tutorial, pickups)
+  // never render over the battle entry or its first command menu.
+  // Toasts raised *during* the battle (Dex registration, blackout heal)
+  // are created after this runs and are unaffected.
+  clearToasts() {
+    this.toastQ.length = 0;
+    if (this.toastEl) this.toastEl.textContent = '';
+  }
+
   setBattleMode(on) {
+    if (on) this.clearToasts();
     if (this.headless) { this.inBattle = !!on; return; }
     this.inBattle = !!on; // Track B: SYNC.tick defers the conflict sheet out of battle
     if (!on) this.hideRtMovePad(); // Elevation B7: the RT touch pad retires with the battle
