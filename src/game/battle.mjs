@@ -1029,10 +1029,17 @@ export class BattleScene {
     // before everything else so a stalled paint can never leave the
     // wipe half-drawn — the first recovered tick pops the scene.
     if (this._exitPending) {
-      if (performance.now() - this._exitPending.start >= 300) {
-        const won = this._exitPending.won;
+      const p = this._exitPending;
+      p.ticks++;
+      // Complete on wall time (real play) OR sim ticks (tick-driven
+      // drivers burn thousands of ticks inside 300 ms of wall time —
+      // verify-slice s9 on fast CI runners). In real play the two
+      // agree (10 ticks at 30 Hz ≈ 333 ms); under paint starvation
+      // both stall together and the first recovered frames finish
+      // the exit within two catch-up frames, bands never drawn stale.
+      if (performance.now() - p.start >= 300 || p.ticks >= 10) {
         this._exitPending = null;
-        this._finishExit(won, true);
+        this._finishExit(p.won, true);
       }
       return;
     }
@@ -2869,7 +2876,7 @@ export class BattleScene {
       this._finishExit(won, false);
       return;
     }
-    this._exitPending = { won, start: performance.now() };
+    this._exitPending = { won, start: performance.now(), ticks: 0 };
     this._exitStartT = this.t; // harness-visible exit marker (exitEl)
   }
 
@@ -3214,7 +3221,7 @@ export class BattleScene {
     // LISA's defeat dialogue, clearing only when it advanced).
     const el = performance.now() - this._exitPending.start;
     if (el <= 0 || el >= 300) return;
-    const k = el / 300;
+    const k = Math.max(el / 300, Math.min(1, (this._exitPending.ticks || 0) / 10));
     const g = this.game;
     const F = (col, x, y, fw, fh) => g.ctx2dfill(col, x, y, fw, fh);
     const bands = 6, bh = h / bands;
