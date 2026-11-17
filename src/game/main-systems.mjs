@@ -7,6 +7,7 @@ import { SPECIES, DEX_TOTAL } from '../data/species.mjs';
 import { MOVES } from '../data/moves.mjs';
 import { ITEMS } from '../data/items.mjs';
 import { giveKeepsake } from './keepsakes.mjs';
+import { resolveStartPos } from './start-pos.mjs';
 import { displayName, dexCaughtCount, evolutionCheck, ownCaughtMap } from './state.mjs';
 import { MAIN_QUESTS, LEGENDARY_ARCS } from '../data/story-kanto.mjs';
 import { ORANGE_QUESTS } from '../data/story-orange.mjs';
@@ -792,7 +793,7 @@ Object.assign(Game.prototype, {
           if (!d) return;
           const city = MAPS[d];
           const viaWarp = (city.warps || []).find((w) => w.via);
-          const spot = viaWarp ? viaWarp.via : (city.start || { x: 8, y: 8 });
+          const spot = viaWarp ? viaWarp.via : resolveStartPos(city, null);
           g.state.story.position = { map: d, x: spot.x, y: spot.y, dir: 'down' };
           g.audio.playSfx('warp');
           g.startOverworld();

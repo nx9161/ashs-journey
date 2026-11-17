@@ -17,6 +17,7 @@ import { roll, intIn, pickWeighted } from '../engine/rng.mjs';
 import { makeMon, dexRegister, displayName, evolutionCheck, boxCheck, grantPartnerMon, hasPartnerMon } from './state.mjs';
 import { sparLevelFor } from './rules.mjs';
 import { BattleScene } from './battle.mjs';
+import { resolveStartPos } from './start-pos.mjs';
 import { EvolutionScene, HatchScene } from './evolution.mjs';
 import { ContestScene, hasRibbon } from './contest.mjs';
 import { startFrontier, startBrainAudience, talkFrontierScott, tryScottClosing, frontierOnWarpLanding, frontierOnStep } from './frontier.mjs';
@@ -78,7 +79,7 @@ Object.assign(OverworldScene.prototype, {
       const hubId = Object.keys(MAPS).find((id) => MAPS[id].safariHub === dest.safariZone);
       const hub = hubId && MAPS[hubId];
       if (hub) {
-        const st = hub.start || { x: 8, y: 10 };
+        const st = resolveStartPos(hub, null);
         this.loadMap(hubId);
         this.player.tx = st.x; this.player.ty = st.y;
         this.player.px = st.x * TILE; this.player.py = st.y * TILE;
@@ -1744,7 +1745,7 @@ Object.assign(OverworldScene.prototype, {
             name: zoneName, rock: npc.safariRock || 'ROCK', exit: npc.safariExit || null,
           };
           g.state.bag.safariball = (g.state.bag.safariball || 0) + balls;
-          const st = MAPS[entryMap].start || { x: 10, y: 17 };
+          const st = resolveStartPos(MAPS[entryMap], null);
           this.loadMap(entryMap);
           this.player.tx = st.x; this.player.ty = st.y;
           this.player.px = st.x * TILE; this.player.py = st.y * TILE;
@@ -2906,7 +2907,7 @@ Object.assign(OverworldScene.prototype, {
     g.state.bag.safariball = 0;
     g.ui.say(left > 0 ? [msg, '(The park keeps the ' + left + ' unused Safari Balls.)'] : [msg], () => {
       const destMap = exit ? exit.map : 'fuchsia';
-      const st = exit || MAPS.fuchsia.start || { x: 10, y: 10 };
+      const st = resolveStartPos(MAPS[destMap], exit ? { x: exit.x, y: exit.y } : null);
       this.loadMap(destMap);
       this.player.tx = st.x; this.player.ty = st.y;
       this.player.px = st.x * TILE; this.player.py = st.y * TILE;

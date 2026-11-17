@@ -9,6 +9,7 @@ import { dexHorizonFor } from '../data/arcs.mjs';
 import { TILE } from '../engine/render.mjs';
 import { roll, intIn, pickWeighted } from '../engine/rng.mjs';
 import { makeMon, dexRegister, displayName, dexCaughtCount } from './state.mjs';
+import { resolveStartPos } from './start-pos.mjs';
 import { DIFFICULTY_LABELS, difficultyOf, houseRule } from './rules.mjs';
 import { PARTNER_MOODS } from '../data/dialogue.mjs';
 import { TALE_NPCS, TALE_NPC_PATCHES } from '../data/quests.mjs';
@@ -69,6 +70,18 @@ export class OverworldScene {
     const g = this.game;
     this.mapId = g.state.story.position.map;
     this.loadMap(this.mapId);
+    // SOFTLOCK RESCUE (2026-11-17): a save whose position lies outside
+    // its map's bounds — the pre-fix Preserve gate wrote exactly that
+    // ({x:10,y:17} on the 20x14 safari map) and Continue restored the
+    // trap — is relocated to the map's resolved start on load, so
+    // updating the game frees the trapped save in place.
+    {
+      const sp = g.state.story.position;
+      if (sp && this.map && (sp.x < 0 || sp.y < 0 || sp.x >= this.w || sp.y >= this.h)) {
+        const st = resolveStartPos(this.map, null);
+        sp.x = st.x; sp.y = st.y;
+      }
+    }
     // RUN2 FIX 2: re-talk re-arm state (see tryInteract / _trackTalkRearm).
     this._clockMs = 0;
     this._talkPending = null; // faced target whose dialogue is in flight

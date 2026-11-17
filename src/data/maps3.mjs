@@ -854,7 +854,11 @@ export const MAPS3 = {
     items: [],
     hidden: [],
     events: [],
-    start: null,
+    // The south strip just outside the Preserve gatehouse — the same
+    // landing row as the gate door warps. endSafari resolves through
+    // this start; it was null and the exit fell back to {10,10}, a
+    // non-standable decor tile.
+    start: { x: 9, y: 12 },
   },
 
   'gym-fuchsia': {
@@ -972,7 +976,11 @@ export const MAPS3 = {
       { x: 2, y: 8, item: 'gloomfang', n: 1 },
     ],
     events: [],
-    start: null,
+    // Just inside the gate doors (the DD row below) — the same tiles
+    // the gatehouse warps land on. (Was null: the warden's gate fell
+    // back to a stale hardcoded {10,17}, 3 rows below this 20x14 map —
+    // the 2026-11-17 campaign-ending softlock.)
+    start: { x: 8, y: 11 },
   },
 
   route16: {
