@@ -104,9 +104,9 @@ export const MUSIC = {
   'pallet-theme': {
     id: 'pallet-theme', title: 'Hometown Morning Groove (Dawnwick, original)', bpm: 100, loop: true,
     tracks: [
-      { wave: 'pulse', duty: 0.5, vol: 0.4, notes: mel('G4 A4 B4x1 C5 B4 A4x1 G4 A4 B4x1.5 A4 G4x1 A4 B4 C5x1 D5 C5 B4x1 A4x1 G4 A4 B4 G4x1.5') },
+      { wave: 'pulse', duty: 0.5, vol: 0.36, notes: mel('G4 A4 B4x1 C5 B4 A4x1 G4 A4 B4x1.5 A4 G4x1 A4 B4 C5x1 D5 C5 B4x1 A4x1 G4 A4 B4 G4x1.5') },
       { wave: 'pulse', duty: 0.25, vol: 0.14, notes: ARP(['B3', 'D4', 'G4'], 0, 16, 2) },
-      { wave: 'triangle', vol: 0.5, notes: mel('G2x2 C3x2 D3x2 G2x2 E3x2 C3x2 D3x2 G2x2', 1) },
+      { wave: 'triangle', vol: 0.44, notes: mel('G2x2 C3x2 D3x2 G2x2 E3x2 C3x2 D3x2 G2x2', 1) },
       { wave: 'noise', vol: 0.15, notes: KICKS([0, 8]).concat(HATS(4, 16, 4, 0.125)) },
     ],
   },
@@ -166,10 +166,10 @@ export const MUSIC = {
   'battle-legendary-theme': {
     id: 'battle-legendary-theme', title: 'Sovereign Weather (legendary battle, original)', bpm: 126, loop: true,
     tracks: [
-      { wave: 'pulse', duty: 0.5, vol: 0.46, notes: mel('A4x2 E5x2 C6x3 B5x1 A5x2 G5x1 E5x1 F5x2 E5x2') },
+      { wave: 'pulse', duty: 0.5, vol: 0.38, notes: mel('A4x2 E5x2 C6x3 B5x1 A5x2 G5x1 E5x1 F5x2 E5x2') },
       { wave: 'pulse', duty: 0.125, vol: 0.18, notes: mel('A3x4 F3x4 C3x4 E3x4', 1) },
-      { wave: 'triangle', vol: 0.6, notes: mel('A2x4 F2x4 C3x4 E2x4', 1) },
-      { wave: 'noise', vol: 0.25, notes: KICKS([0, 4, 8, 12]).concat(CLAPS([6, 14])).concat(HATS(0, 16, 2, 0.125)) },
+      { wave: 'triangle', vol: 0.44, notes: mel('A2x4 F2x4 C3x4 E2x4', 1) },
+      { wave: 'noise', vol: 0.2, notes: KICKS([0, 4, 8, 12]).concat(CLAPS([6, 14])).concat(HATS(0, 16, 2, 0.125)) },
     ],
   },
 

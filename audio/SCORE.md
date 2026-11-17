@@ -124,9 +124,13 @@ a merge gate for any audio change, on the same footing as verify-audio.
 - The heal chime fires inside `healParty` / the medicine-use completion,
   as the HP lands.
 - The low-HP alarm fires once per ally per crossing into red (≤25%),
-  re-arms only above 25%, never at 0 HP. The classic engine always did
-  this; the RT engine never fired it at all — the viral pass fixed RT
-  (placement parity, same semantics).
+  re-arms only above 25%, never at 0 HP. The check lives in
+  `drainHp()`, which `update()` runs unconditionally every frame — so
+  it covers BOTH battle engines and every battle state (the viral
+  pass's audit initially mis-grepped this as an RT gap; the drives
+  proved RT firing through the shared path, and a redundant RT-side
+  duplicate added during the pass was removed again — one code path,
+  one semantics).
 - Choreographed timings are placement too: the encounter three-beat
   (rustle 0/0.9/1.8, melody at 2.8) and the catch-rattle shakes keep
   their exact beats — they are synced to their visual twins.
