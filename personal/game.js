@@ -194382,7 +194382,7 @@ class UI {
     // Chapter title card is modal (D2: auto-dismisses; A/START/tap dismiss early).
     if (this.chapterCard) {
       this._ccT += dt;
-      if (input.wasPressed('a') || input.wasPressed('start') || this._ccT >= 4) {
+      if (input.wasPressed('a') || input.wasPressed('start') || this._ccT >= 2.5) { // F1: auto-dismiss 4 s -> 2.5 s
         this.game.audio.unlock();
         this.hideChapterCard();
       }
@@ -195028,6 +195028,7 @@ class BootScene {
     this.phase = 'legal'; // legal -> title
     this.titleStage = 'pressStart'; // title sub-state: 'pressStart' -> 'menu'
     this.ready = false;  // interactive only after dwell
+    this._legalPressed = false; // F1: an early A/START is buffered, never swallowed
     this.menuIdx = 0;
     this.game.ui.log.push({ ui: 'boot' });
     // W-UI: the boot/title surfaces carry no gameplay chrome — hide the HUD
@@ -195039,8 +195040,12 @@ class BootScene {
     this.t += dt;
     const input = this.game.input;
     if (this.phase === 'legal') {
-      if (this.t >= 3) this.ready = true;
-      if (this.ready && (input.wasPressed('a') || input.wasPressed('start'))) {
+      // F1: dwell cut 3 s -> 0.8 s; a press landing before the card is
+      // ready is buffered and honoured the moment it is — no silent
+      // input swallowing in the first screen of the game.
+      if (input.wasPressed('a') || input.wasPressed('start')) this._legalPressed = true;
+      if (this.t >= 0.8) this.ready = true;
+      if (this.ready && this._legalPressed) {
         this.phase = 'title';
         this.titleStage = 'pressStart';
         this.t = 0;
@@ -195310,10 +195315,10 @@ class BootScene {
       }
       y += Math.round(size * 1.285);
     }
-    if (this.ready) {
-      const pulse = Math.floor(this.t * 2) % 2 === 0;
-      if (pulse) r.text('Press A / tap to continue', 14, h - 24, { size: 14, color: '#e8c832' });
-    }
+    // F1: the continue prompt shows from the start (it pulses while
+    // the short dwell runs out) instead of appearing at 3 s.
+    const pulse = Math.floor(this.t * 2) % 2 === 0;
+    if (pulse) r.text('Press A / tap to continue', 14, h - 24, { size: 14, color: '#e8c832' });
   }
 }
 
@@ -209236,6 +209241,19 @@ class Game {
   // Guest target: the stub keeps Track-A behavior (guest only, zero network).
   openLogin(mode) {
     this._loginMode = mode;
+    // F1: in the guest edition a NEW GAME no longer detours through
+    // the Trainer ID Terminal — its only guest action was the guest
+    // button itself. Take that branch immediately (identical end
+    // state) and go straight to the intro. The terminal remains on
+    // Continue / Second Journey and via the pause menu's account row;
+    // Track B (AUTH_ENABLED) keeps the full panel for every mode.
+    if (mode === 'new' && !(typeof AUTH_ENABLED !== 'undefined' && AUTH_ENABLED)) {
+      this.guestMode = true;
+      this.authUser = null;
+      AUTH.user = null;
+      this.newGame();
+      return;
+    }
     this.ui.showLogin((choice, data) => {
       if (choice === 'login') {
         this.guestMode = false;
