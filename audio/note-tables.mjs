@@ -351,9 +351,16 @@ export const SFXSET = {
   'victory':  { id:'victory',  wave:'pulse', duty:0.125, vol:0.5, env:[0.003,0.2], notes:[[0,'C6',0.7],[0.7,'E6',0.7],[1.4,'G6',0.7],[2.1,'C7',2.2]] },
   'fanfare':  { id:'fanfare',  wave:'pulse', duty:0.125, vol:0.52, env:[0.003,0.25], notes:[[0,'C5',1],[1,'E5',1],[2,'G5',1],[3,'C6',1.5],[4.5,'B5',0.5],[5,'C6',2.5]] },
   'levelup':  { id:'levelup',  wave:'pulse', duty:0.25, vol:0.5, env:[0.003,0.2], notes:[[0,'E5',0.7],[0.7,'G5',0.7],[1.4,'C6',0.7],[2.1,'E6',0.7],[2.8,'G6',2.2]] },
-  // The evolution ceremony's own sting — OWNED BY THE EVOLUTION CEREMONY
-  // BUILD; carried over byte-identical from the W12 table by its ruling.
-  'evolution-fanfare': { id:'evolution-fanfare', wave:'pulse', duty:0.125, vol:0.5, env:[0.004,0.5], notes:[[0,'E5',1],[1,'G5',1],[2,'C6',1],[3,'E6',1],[4,'G6',2],[6,'C7',3]] },
+  // Evolution ceremony (owner 2026-11-17): meme-energy, synthesized, no samples. MIX LAW: sequenced; build ends before the reveal.
+  'evolution-fanfare': { id:'evolution-fanfare', wave:'pulse', duty:0.125, vol:0.5, env:[0.002,0.08], notes:ARP(['C6','D6','E6','G6','A6','C7','E7'],0,3.5,0.5).concat([[3.5,'G7',2.5]]) },
+  'evolution-build-1': { id:'evolution-build-1', wave:'pulse', duty:0.5, vol:0.4, env:[0.002,0.1], notes:ARP(['A4','C5','E5','A5'],0,16,1) },
+  'evolution-build-2': { id:'evolution-build-2', wave:'pulse', duty:0.5, vol:0.42, env:[0.002,0.1], notes:ARP(['D5','F5','A5','D6'],0,16,1) },
+  'evolution-hats': { id:'evolution-hats', wave:'noise', vol:0.28, env:[0.001,0.04], notes:HATS(0,16,1,0.5) },
+  'evolution-build-3': { id:'evolution-build-3', wave:'pulse', duty:0.25, vol:0.45, env:[0.002,0.06], notes:ARP(['E5','G5','B5','E6'],0,14,0.5).concat([[14,'E6',1.5]]) },
+  'evolution-hit': { id:'evolution-hit', wave:'triangle', vol:0.6, env:[0.002,0.6], notes:[[0,'E1',9]] },
+  'evolution-hit-stab': { id:'evolution-hit-stab', wave:'pulse', duty:0.125, vol:0.5, env:[0.002,0.3], notes:[[0,'C6',1],[0.25,'E6',1],[0.5,'G6',1],[0.75,'C7',3]] },
+  'evolution-hit-noise': { id:'evolution-hit-noise', wave:'noise', vol:0.45, env:[0.002,0.25], notes:[[0,null,4]] },
+  'evolution-success': { id:'evolution-success', wave:'pulse', duty:0.125, vol:0.45, env:[0.002,0.15], notes:[[0,'C6',1],[1,'E6',1],[2,'G6',1],[3,'C7',3]] },
   'badge':    { id:'badge',    wave:'pulse', duty:0.25, vol:0.52, env:[0.003,0.3], notes:[[0,'G4',0.8],[0.8,'C5',0.8],[1.6,'E5',0.8],[2.4,'G5',0.8],[3.2,'C6',1.6],[4.8,'G5',0.8],[5.6,'C6',2.4]] },
   'heal':     { id:'heal',     wave:'triangle', vol:0.45, env:[0.01,0.35], notes:[[0,'C5',1.2],[1.2,'E5',1.2],[2.4,'G5',1.2],[3.6,'C6',2.4]] },
   'save-confirm': { id:'save-confirm', wave:'pulse', duty:0.5, vol:0.38, env:[0.002,0.12], notes:[[0,'G5',0.8],[0.8,'C6',1.6]] },

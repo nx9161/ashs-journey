@@ -150,10 +150,11 @@ export class HatchScene {
     this.barK = target > this.barK ? Math.min(1, this.barK + step) : Math.max(0, this.barK - step);
     if (this.phase === 'crack') {
       const dur = g.state.settings.reducedMotion ? CRACK_MS_RM : CRACK_MS;
-      if (this.t >= dur) { this.phase = 'reveal'; this.t = 0; if (g.audio && g.audio.playCry) g.audio.playCry(this.mon.speciesId); }
+      if (this.t >= dur) { this.phase = 'reveal'; this.t = 0; if (g.audio) { g.audio.playSfx('evolution-hit-stab'); if (g.audio.playCry) g.audio.playCry(this.mon.speciesId); } }
     } else if (this.phase === 'reveal') {
       if (this.t >= REVEAL_MS) {
         this.phase = 'line2';
+        if (g.audio) g.audio.playSfx('evolution-success');
         g.ui.say([this.name + ' hatched from the Egg!'], () => this._outro());
       }
     } else if (this.phase === 'outro') {
@@ -281,7 +282,17 @@ export class EvolutionScene {
       }
     }
     g.ui.say(['What? ' + this.fromName + ' is evolving!'], () => {
-      if (this.phase === 'intro') { this.phase = 'transform'; this.t = 0; }
+      if (this.phase === 'intro') {
+        this.phase = 'transform'; this.t = 0;
+        // Meme-energy build, segment 1 (owner audio direction,
+        // 2026-11-17): a rising hype loop across the transformation,
+        // in three ~1s segments — a B-cancel simply stops the segments.
+        this._buildSeg = 0;
+        if (!g.state.settings.reducedMotion && g.audio) {
+          g.audio.playSfx('evolution-build-1');
+          this._buildSeg = 1;
+        }
+      }
     });
   }
 
@@ -329,13 +340,32 @@ export class EvolutionScene {
 
     if (this.phase === 'transform') {
       if (g.input.wasPressed('b')) { this._cancel(); return; }
+      // Build segments 2/3 land on their second boundaries (skipped
+      // under reduced motion, and never after a cancel — this branch
+      // is only reached while the transform is live).
+      if (this._buildSeg === 1 && this.t >= 1000 && g.audio) {
+        g.audio.playSfx('evolution-build-2');
+        g.audio.playSfx('evolution-hats');
+        this._buildSeg = 2;
+      } else if (this._buildSeg === 2 && this.t >= 2000 && g.audio) {
+        g.audio.playSfx('evolution-build-3');
+        g.audio.playSfx('evolution-hats');
+        this._buildSeg = 3;
+      }
       const dur = g.state.settings.reducedMotion ? TRANSFORM_MS_RM : TRANSFORM_MS;
       if (this.t >= dur) {
         // The white-hold peak: the one moment the data swap lands.
         if (!this.applied) {
           this.applied = true;
           this.applyFn();
-          if (g.audio && g.audio.playCry) g.audio.playCry(this.toId);
+          // The hard hit on the reveal (sub drop + chord stab + noise
+          // burst, all synthesized in-engine), under the new form's cry.
+          if (g.audio) {
+            g.audio.playSfx('evolution-hit');
+            g.audio.playSfx('evolution-hit-stab');
+            g.audio.playSfx('evolution-hit-noise');
+            if (g.audio.playCry) g.audio.playCry(this.toId);
+          }
         }
         this.phase = 'reveal';
         this.t = 0;
@@ -343,6 +373,9 @@ export class EvolutionScene {
     } else if (this.phase === 'reveal') {
       if (this.t >= REVEAL_MS) {
         this.phase = 'line2';
+        // Success sting lands exactly as the congratulations line
+        // opens — after the reveal, never under the hit (MIX LAW).
+        if (g.audio) g.audio.playSfx('evolution-success');
         g.ui.say(['Congratulations! Your ' + this.oldName + ' evolved into ' + this.newName + '!'], () => this._outro());
       }
     } else if (this.phase === 'outro') {
