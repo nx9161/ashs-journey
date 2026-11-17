@@ -198407,7 +198407,7 @@ class BattleScene {
       // exact two writes Arden shipped, now set-driven.
       const setId = t.badgeSet || 'kanto';
       const setArr = g.state.badges[setId] || (g.state.badges[setId] = []);
-      if (!setArr.includes(t.badge)) setArr.push(t.badge);
+      if (!setArr.includes(t.badge)) { setArr.push(t.badge); this._gymWin = true; } // owner: autosave at the pop (see _finishExit)
       g.state.story.flags['badge_' + t.badge.replace(/badge$/, '')] = true; // quest chain (WS6)
       if (setId === 'orange' && setArr.length >= 4) g.state.story.flags.orange_crew_done = true;
       g.audio.playSfx('badge'); // badge fanfare (visual twin: badge-case shine animation)
@@ -198511,7 +198511,10 @@ class BattleScene {
       g.renderer.fadeColor = '#000';
       g.renderer.fadeA = 1;
     }
-    g.autosave('battle');
+    // Owner addition: a gym win gets the guaranteed, visible autosave;
+    // every other battle keeps the quiet throttled one.
+    if (this._gymWin) { this._gymWin = false; g.autosaveGymWin(); }
+    else g.autosave('battle');
     // Story-event continuation (WS6): scripted battles resume their script
     // only on victory — a loss leaves the event unconsumed for a retry.
     // ADR-025 QA D1: escape paths (RUN / Teleport / Safari run / foe fled)
@@ -209446,6 +209449,7 @@ class Game {
         else this.ui.toast('Save failed: ' + res.reason);
       }
       SYNC.afterLocalSave(this);
+      if (res.ok) this._lastSaveAt = Date.now();
       return res;
     }
     const res = this.store.save(this.state);
@@ -209453,7 +209457,26 @@ class Game {
       if (res.ok) { this.ui.toast('Game saved. (' + Math.round(res.bytes / 1024) + ' KB)'); this.audio.playSfx('save-confirm'); }
       else this.ui.toast('Save failed: ' + res.reason);
     }
+    if (res.ok) this._lastSaveAt = Date.now();
     return res;
+  }
+
+  // Owner addition (2026-11-17): a gym-leader win autosaves the moment
+  // the battle hands control back — badge in hand, no manual save
+  // needed. Unlike autosave() it is NOT subject to the 5 s throttle
+  // (the guarantee is that this save lands), and it saves LOUDLY with
+  // the standard 'Game saved.' toast + sting so the player sees it.
+  // Exactly-once is the caller's contract (BattleScene flags a newly
+  // awarded badge once); the guard below keeps it from double-saving
+  // when any save — manual included — landed in the last 3 s (that
+  // save already persisted this state and already showed feedback).
+  // The player's autosave toggle still rules.
+  autosaveGymWin() {
+    if (this.state.settings.autosave === false) return;
+    const now = Date.now();
+    if (this._lastSaveAt && now - this._lastSaveAt < 3000) return;
+    this._lastAutosave = now;
+    this.saveGame(false);
   }
 
   autosave(reason) {
