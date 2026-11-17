@@ -1,10 +1,21 @@
 # Kian's Journey — Original Score & Sound Design
-**Seat 24 (Voice Designer, Black Bolt) · Phase 4 Wave 2 · 2026-10-15; W12 audio-identity refresh · 2026-11-15**
+**Seat 24 (Voice Designer, Black Bolt) · Phase 4 Wave 2 · 2026-10-15; W12 audio-identity refresh · 2026-11-15; VIRAL AUDIO PASS · 2026-11-17**
 
 All music and SFX are **100% original compositions** written for this
 project — no sampled audio, no audio files (the zero-audio-file rule is
 CI-enforced), no melody borrowed from any official game or anime. Chiptune
 *style* is the idiom; every *melody* is new work (GC posture, binding).
+
+**Viral audio pass (2026-11-17, owner order):** every loop and SFX below
+was recomposed for trending-feed energy — hook-first leads, build-and-drop
+drum kits (four-on-the-floor drive, clap classes, offbeat hats), meme
+effect *classes* (boom, scratch-stop, orchestra hit, alarm) synthesized
+from scratch. No viral recording, sample, or melody was used or imitated;
+the style is the brief, the notes are new. Two holdings by ruling/scope:
+the evolution sting (`evolution-fanfare`) belongs to the Evolution
+Ceremony build and is carried byte-identical; species cries are out of
+scope and untouched. The pass also landed the owner's **mixing &
+placement law** — see the dedicated section below.
 
 Tables live in `audio/note-tables.mjs` (contract §2.1 format). The player is
 `src/engine/audio.mjs` — WebAudio, 4–6 channel budget enforced in code
@@ -22,29 +33,29 @@ the title and wild-battle themes stay global by design.
 
 | Track | Title | Use | BPM |
 |---|---|---|---|
-| `title-theme` | First Light | Title screen | 112 |
-| `battle-wild-theme` | Tall Grass Gambit | Wild battles | 152 |
-| `battle-trainer-theme` | Challenger's Measure | Trainer battles | 164 |
-| `battle-leader-theme` | The Leader's Standard | Leader / boss battles (W12-T4) | 172 |
-| `battle-legendary-theme` | Presence of the Sovereign | Legendary battles (W12-T4) | 120 |
-| `contest-theme` | Appeal in Bloom | Contests (W12-T4) | 138 |
-| `route1-theme` | Road Out of Dawnwick | Arden routes | 132 |
-| `pallet-theme` | Hometown Morning | Dawnwick (waltz) | 96 |
-| `viridian-theme` | Crossroads City | Fernmere register — Arden cities | 120 |
-| `center-theme` | Healing Light | Center (soft) | 88 |
-| `pewter-theme` | Stone & Slate | Flintridge register — Arden cities | 104 |
-| `gym-theme` | House of Badges | Gym interiors (shared service theme) | 144 |
-| `mart-theme` | Open All Hours | The shared Mart (W12-T4) | 100 |
-| `amber-town-theme` | Salt & Citrus | Amber Isles towns | 104 |
-| `amber-route-theme` | Trade Wind Run | Amber Isles sea lanes | 122 |
-| `yamato-town-theme` | Temple Bell Morning | Yamato towns | 92 |
-| `yamato-route-theme` | Pilgrim Road | Yamato routes | 132 |
-| `maris-town-theme` | Harbour Lights | Maris towns | 118 |
-| `maris-route-theme` | Open Water Road | Maris routes | 140 |
-| `borea-town-theme` | First Snow Hush | Borea towns | 84 |
-| `borea-route-theme` | Long White Road | Borea routes | 148 |
-| `trial-town-theme` | Bronze & Banner | Trial Grounds hub | 100 |
-| `trial-route-theme` | The Seven Trials | Trial Grounds island | 128 |
+| `title-theme` | Curtain Up | Title screen | 120 |
+| `battle-wild-theme` | Ambush Anthem | Wild battles | 160 |
+| `battle-trainer-theme` | Called Out | Trainer battles | 168 |
+| `battle-leader-theme` | Standard of the House | Leader / boss battles (W12-T4) | 176 |
+| `battle-legendary-theme` | Sovereign Weather | Legendary battles (W12-T4) | 126 |
+| `contest-theme` | Center Stage | Contests (W12-T4) | 140 |
+| `route1-theme` | Road Out, Loud | Arden routes | 138 |
+| `pallet-theme` | Hometown Morning Groove | Dawnwick | 100 |
+| `viridian-theme` | Crossroads Pop | Fernmere register — Arden cities | 124 |
+| `center-theme` | Soft Reset | Center (soft) | 92 |
+| `pewter-theme` | Stone & Swagger | Flintridge register — Arden cities | 110 |
+| `gym-theme` | Full House | Gym interiors (shared service theme) | 150 |
+| `mart-theme` | Checkout Groove | The shared Mart (W12-T4) | 104 |
+| `amber-town-theme` | Salt Air Pop | Amber Isles towns | 108 |
+| `amber-route-theme` | Trade Wind Sprint | Amber Isles sea lanes | 128 |
+| `yamato-town-theme` | Temple Bell Dusk | Yamato towns | 96 |
+| `yamato-route-theme` | Pilgrim Sprint | Yamato routes | 136 |
+| `maris-town-theme` | Harbour Bounce | Maris towns | 120 |
+| `maris-route-theme` | Open Water Sprint | Maris routes | 144 |
+| `borea-town-theme` | Snowfall Slow Jam | Borea towns | 88 |
+| `borea-route-theme` | Whiteout Run | Borea routes | 152 |
+| `trial-town-theme` | Banner Day | Trial Grounds hub | 104 |
+| `trial-route-theme` | Trial by Tempo | Trial Grounds island | 132 |
 
 Each loop is ≤ 4 tracks (2 pulse + 1 triangle + 1 noise max); the audit in
 `scripts/verify-audio.mjs` asserts no instant ever exceeds 6 simultaneous
@@ -76,6 +87,51 @@ working.
 and `warp` (warp tiles) were dead call sites — now tabled and played;
 `fanfare` is wired into the trainer-victory path (gated on no badge
 being awarded, so badge wins keep their own beat).
+
+## Mixing & placement law (owner order, 2026-11-17 — binding)
+
+*"No sounds should mix violently, placement should be perfect."* This is
+a merge gate for any audio change, on the same footing as verify-audio.
+
+**Mixing — priority order: ALERT > STING > MOMENT SFX > BGM**
+(`SFX_DUCK` in `src/engine/audio.mjs` is the class table).
+- ALERT cues (`lowhp`, `error-buzz`, `trainer-spot`, the encounter pair)
+  duck BGM to 0.25; STING cues (fanfares/ceremonies: `victory`, `fanfare`,
+  `badge`, `levelup`, `evolution-fanfare`, `catch-gotcha`, `catch-crit`,
+  `dex-register`, `heal`, item fanfares) duck to 0.35 — for exactly the
+  cue's audible length (notes + envelope tail), then the music eases back
+  over 180 ms. Overlapping cues extend the duck; they never fight it.
+- MOMENT cues (UI, hits, catch mechanics, warps) never duck and are
+  balanced in the tables to sit inside the music, not on top of it.
+- No two full-level cues sound simultaneously. Designed pairs that are
+  *one* cue (encounter sting + its melody; catch click + gotcha;
+  breakout + its tone; a hit + its tier tone) are balanced as a unit.
+  Call sites must sequence independent stings, never stack them — the
+  awardXp site was fixed under this law (the XP-banked cue yields to the
+  levelup fanfare instead of firing on the same frame).
+- BGM changes crossfade: each track plays through a per-track session
+  gain — the outgoing loop fades out in 90 ms (its scheduled notes go
+  silent with it; two loops never stack) and the incoming loop fades in
+  over 300 ms. A master compressor (where the platform offers one) is
+  the ceiling: threshold −14 dB, 12:1 — clipping is structurally
+  impossible, and table levels are balanced to live under it.
+
+**Placement — every cue fires at its event, and stops with it.**
+- Battle hits sound on the damage frame (both engines call
+  `hitFeedback` inside damage application, beside the impact FX).
+- The victory/fanfare/badge stings fire in the same call that sets the
+  victory state / pushes the badge id — not a frame earlier or later.
+- The heal chime fires inside `healParty` / the medicine-use completion,
+  as the HP lands.
+- The low-HP alarm fires once per ally per crossing into red (≤25%),
+  re-arms only above 25%, never at 0 HP. The classic engine always did
+  this; the RT engine never fired it at all — the viral pass fixed RT
+  (placement parity, same semantics).
+- Choreographed timings are placement too: the encounter three-beat
+  (rustle 0/0.9/1.8, melody at 2.8) and the catch-rattle shakes keep
+  their exact beats — they are synced to their visual twins.
+- Tails: SFX envelopes end inside their moment; BGM tails are cut by
+  the session fade, never left ringing into the next scene.
 
 ## Species cries (509/509 — authored 14 + deterministic derivation, W12-T1)
 
@@ -140,7 +196,7 @@ charter over the merged 432-map table · [8c] ceremony assignments
 headlessly scheduled) · [9] loop distinctness (lead-melody interval
 fingerprints, pairwise over all loops) · [10] cry coverage + distinctness
 (509/509) · [11] audio byte budget (note-tables + engine ≤ 55,000 B;
-53,655 B at the W12 landing).
+53,655 B at the W12 landing; 53,156 B at the viral-pass landing).
 
 ## The W12 charter (landed 2026-11-15) — and what remains
 
