@@ -453,6 +453,19 @@ export class Game {
   // Guest target: the stub keeps Track-A behavior (guest only, zero network).
   openLogin(mode) {
     this._loginMode = mode;
+    // F1: in the guest edition a NEW GAME no longer detours through
+    // the Trainer ID Terminal — its only guest action was the guest
+    // button itself. Take that branch immediately (identical end
+    // state) and go straight to the intro. The terminal remains on
+    // Continue / Second Journey and via the pause menu's account row;
+    // Track B (AUTH_ENABLED) keeps the full panel for every mode.
+    if (mode === 'new' && !(typeof AUTH_ENABLED !== 'undefined' && AUTH_ENABLED)) {
+      this.guestMode = true;
+      this.authUser = null;
+      AUTH.user = null;
+      this.newGame();
+      return;
+    }
     this.ui.showLogin((choice, data) => {
       if (choice === 'login') {
         this.guestMode = false;

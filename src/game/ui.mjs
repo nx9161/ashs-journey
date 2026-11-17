@@ -1536,7 +1536,7 @@ export class UI {
     // Chapter title card is modal (D2: auto-dismisses; A/START/tap dismiss early).
     if (this.chapterCard) {
       this._ccT += dt;
-      if (input.wasPressed('a') || input.wasPressed('start') || this._ccT >= 4) {
+      if (input.wasPressed('a') || input.wasPressed('start') || this._ccT >= 2.5) { // F1: auto-dismiss 4 s -> 2.5 s
         this.game.audio.unlock();
         this.hideChapterCard();
       }
