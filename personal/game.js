@@ -1101,6 +1101,11 @@ class Input {
       const action = this.remap[e.code];
       if (!action) return;
       if (['up', 'down', 'left', 'right', 'a', 'b'].includes(action)) e.preventDefault();
+      // Enter (= START) on a focused game BUTTON must not natively
+      // re-activate that button: the press belongs to the game, which
+      // confirms the menu's cursor cell. (Space/'a' is already covered
+      // above; form fields returned earlier via fromField.)
+      else if (action === 'start' && e.target && e.target.tagName === 'BUTTON') e.preventDefault();
       this._press(action, !!e.repeat);
     };
     const up = (e) => {
@@ -193063,6 +193068,11 @@ class UI {
     const m = this.menu;
     if (!m || m.kind !== 'commands') { this.cmdEl.classList.add('hidden'); return; }
     this.cmdEl.classList.remove('hidden');
+    // A clicked command button must never keep DOM focus into the next
+    // render: Enter would natively re-activate the stale button instead
+    // of confirming the cursor cell (owner report 2026-11-17).
+    const ae = document.activeElement;
+    if (ae && ae.tagName === 'BUTTON' && this.cmdEl.contains(ae)) ae.blur();
     this.cmdEl.innerHTML = '';
     m.items.forEach((it, i) => {
       const b = document.createElement('button');
@@ -193071,6 +193081,13 @@ class UI {
         + (it.disabled ? ' disabled' : '')
         + (it.dimmed ? ' dimmed' : '')
         + (m.focus && m.focus === it.value ? ' tut-focus' : '');
+      // The ▶ cursor marker (Bag-menu precedent): selection must read at
+      // a glance, not only as the sky fill. Fixed-width span on every
+      // cell so the layout never shifts as the cursor moves.
+      const cur = document.createElement('span');
+      cur.className = 'cur';
+      cur.textContent = i === m.idx ? '▶' : '';
+      b.appendChild(cur);
       b.appendChild(this.cmdIconCanvas(it.value));
       const lb = document.createElement('span');
       lb.className = 'cmdlabel';
@@ -193284,6 +193301,10 @@ class UI {
     if (this.headless) return;
     const m = this.menu;
     if (!m || m.kind === 'commands') { this.menuEl.classList.add('hidden'); return; }
+    // Same stale-focus guard as renderCommands: a clicked row/tab must
+    // not hold DOM focus under the rebuilt menu (Enter = cursor cell).
+    const ae = document.activeElement;
+    if (ae && ae.tagName === 'BUTTON' && this.menuEl.contains(ae)) ae.blur();
     // Elevation C1: the open transition plays only when the window was
     // actually hidden (a fresh open) — cursor moves and in-place
     // re-renders (bag pockets, the mart stepper) must not replay it.
@@ -196706,10 +196727,15 @@ class BattleScene {
       { label: 'FIGHT', value: 'fight', dimmed: tut && this._tutStage === 'bag' },
       { label: 'BAG', value: 'bag', dimmed: tut && this._tutStage !== 'bag' },
       { label: 'PARTY', value: 'party', dimmed: tut },
-      // GD: no running from the scripted tutorial — it's a lesson, not a gamble.
-      // F2: no running from a facility battle either — a Frontier
-      // contest is finished or forfeited at the desk, never fled.
-      { label: this.kind === 'wild' ? 'RUN' : 'RUN', value: 'run', disabled: this.kind !== 'wild' || tut || !!this.facility },
+      // RUN is always SELECTABLE (Platinum: the cell is never dead) — the
+      // refusal lives in onCommand('run'): trainer battles, the scripted
+      // tutorial (GD: a lesson, not a gamble) and facility battles (F2: a
+      // Frontier contest is finished or forfeited at the desk, never fled)
+      // answer with a message and return to the command grid. A disabled
+      // cell here was unreachable by grid nav (the skip loop wraps back),
+      // unclickable (no pointer handler), and left Enter confirming
+      // whatever the cursor sat on — owner report 2026-11-17.
+      { label: 'RUN', value: 'run' },
     ];
     let focus = null;
     if (tut && !this._tutFightDone) focus = 'fight';
@@ -196813,7 +196839,12 @@ class BattleScene {
     } else if (value === 'party') {
       this.openPartyMenu(false);
     } else if (value === 'run') {
-      if (this.kind === 'wild') {
+      if (this.tutorial || this.facility) {
+        // GD/F2: the scripted tutorial and facility battles cannot be
+        // fled — RUN stays selectable and is refused with a message,
+        // exactly like a trainer battle (below).
+        this.say("Can't escape!", () => this.toCommand());
+      } else if (this.kind === 'wild') {
         // Gen-1 escape formula (ADR-018): F = allySpe*128/foeSpe + 30*attempts;
         // escape iff F > 255 or a 0-255 roll lands under F. Failure costs the
         // turn — the foe acts.
@@ -198688,8 +198719,17 @@ class BattleScene {
 
   drawExitWipe(r, w, h) {
     if (this._exitStartT < 0 || !this.fxAnimsOn()) return;
-    const k = Math.min(1, (this.t - this._exitStartT) / 300);
-    if (k <= 0) return;
+    const el = this.t - this._exitStartT;
+    // FX-6 exit mirror, sweep-through: bands grow over 300ms, then
+    // retract over the next 300ms, then the frame is clean. The scene
+    // pop is dialogue-gated (victory messages / the trainer's lose
+    // lines play first, endBattle runs from their callback), so a
+    // wipe that clamped at full sweep froze the frame into torn
+    // black bands for the WHOLE dialogue — owner report 2026-11-17
+    // (black rectangles, shifted scene strips, cut-off sprites over
+    // LISA's defeat dialogue, clearing only when it advanced).
+    if (el <= 0 || el >= 600) return;
+    const k = el <= 300 ? el / 300 : 1 - (el - 300) / 300;
     const g = this.game;
     const F = (col, x, y, fw, fh) => g.ctx2dfill(col, x, y, fw, fh);
     const bands = 6, bh = h / bands;
@@ -201051,7 +201091,7 @@ Object.assign(BattleScene.prototype, {
       { label: 'FIGHT', value: 'fight' },
       { label: 'BAG', value: 'bag' },
       { label: 'PARTY', value: 'party' },
-      { label: 'RUN', value: 'run', disabled: this.kind !== 'wild' },
+      { label: 'RUN', value: 'run' }, // always selectable; rtTryRun refuses non-wild (classic parity)
     ];
     g.ui.showCommands(items, (value) => {
       if (value === null) return; // B backs out to the live arena
@@ -201720,6 +201760,9 @@ Object.assign(BattleScene.prototype, {
 
   rtTryRun() {
     const g = this.game;
+    // Classic parity: a trainer battle can never be fled — the RUN cell
+    // is selectable and the attempt is refused, never rolled.
+    if (this.kind !== 'wild') { this.rtFloat("Can't escape!"); return; }
     this.runAttempts++;
     const F = Math.floor((Math.max(1, this.ally.stats.spe) * 128) / Math.max(1, this.foe.stats.spe)) + 30 * this.runAttempts;
     if (F > 255 || Math.floor(g.rng.battle() * 256) < F) {

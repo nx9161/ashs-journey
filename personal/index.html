@@ -299,14 +299,16 @@ body.flip.landscape .sysbtns{grid-column:1}
    the battle UI (production read the v2.2/v2.3 plate-gradient + full-height
    colour stripe as "wide gradient bars"). Command colour now rides on a
    small square chip at the left, Platinum's flat command plates. */
-.cmdpanel{position:absolute;left:2.5%;right:2.5%;bottom:2.5%;display:grid;grid-template-columns:1fr 1fr;gap:6px;padding:7px;background-color:var(--paper);background-image:var(--rivets);border:2px solid var(--frame);outline:2px solid var(--frame2);outline-offset:-5px;border-radius:3px;pointer-events:auto;box-shadow:0 4px 18px rgba(0,0,0,.35)}
-.cmdf{position:relative;display:flex;flex-direction:row;align-items:center;justify-content:center;gap:8px;min-height:50px;padding:6px 10px 6px 18px;background-color:#fdfdff;color:var(--ink);border:2px solid var(--frame);border-radius:3px;font-family:var(--font);font-size:15px;font-weight:bold;letter-spacing:1px;cursor:pointer;touch-action:none}
+.cmdpanel{position:absolute;left:2.5%;right:2.5%;bottom:2.5%;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:6px;padding:7px;background-color:var(--paper);background-image:var(--rivets);border:2px solid var(--frame);outline:2px solid var(--frame2);outline-offset:-5px;border-radius:3px;pointer-events:auto;box-shadow:0 4px 18px rgba(0,0,0,.35)}
+.cmdf{position:relative;display:flex;flex-direction:row;align-items:center;justify-content:center;gap:8px;min-width:0;min-height:50px;padding:6px 10px 6px 18px;background-color:#fdfdff;color:var(--ink);border:2px solid var(--frame);border-radius:3px;font-family:var(--font);font-size:15px;font-weight:bold;letter-spacing:1px;cursor:pointer;touch-action:none}
 .cmdf::before{content:'';position:absolute;left:7px;top:50%;transform:translateY(-50%);width:10px;height:10px;background:var(--cmdcol,#8d9bbf);border:2px solid var(--frame);border-radius:2px}
 .cmdf-fight{--cmdcol:#c93327}
 .cmdf-bag{--cmdcol:#dd8a26}
 .cmdf-party{--cmdcol:#3d9240}
 .cmdf-run{--cmdcol:#3863b4}
 .cmdf.cursor{background:var(--sky);outline:2px solid var(--navy);outline-offset:-4px}
+.cmdf .cur{position:absolute;left:5px;top:50%;transform:translateY(-50%);width:13px;color:var(--red);font-weight:bold;text-align:center;z-index:1}
+.cmdf.cursor::before{visibility:hidden}
 .cmdf.disabled{background:#c9d2e4;color:#6a7799}
 .cmdf.dimmed{background:#e8edf6;color:#4a5878}
 .cmdf.tut-focus{outline:3px solid #58c94f;outline-offset:-3px;animation:cmdfocus 1s infinite}
@@ -327,16 +329,16 @@ body.flip.landscape .sysbtns{grid-column:1}
 /* move menu — Platinum move buttons: framed plate cells in a 2x2 grid,
    name + type pill on the top line, PP + power/acc on the second line */
 .menugrid{display:grid;grid-template-columns:1fr 1fr;gap:4px;padding:4px}
-.menugrid .menu-row{flex-direction:column;align-items:stretch;min-height:44px;background-color:#fdfdff;border:2px solid var(--frame);border-radius:3px;position:relative;padding:4px 8px}
+.menugrid .menu-row{flex-direction:column;align-items:stretch;min-height:44px;background-color:#fdfdff;border:2px solid var(--frame);border-radius:3px;position:relative;padding:4px 8px 4px 17px}
 .menugrid .menu-row.cursor{background:var(--sky);outline:2px solid var(--navy);outline-offset:-2px;border-left-color:var(--frame)}
 .menugrid .menu-row.wide{grid-column:1/-1;min-height:28px;flex-direction:row;align-items:center;justify-content:center}
-.menugrid .menu-row .cur{display:none}
+.menugrid .menu-row .cur{position:absolute;left:4px;top:2px;width:auto;font-size:14px;color:var(--red);z-index:2}
 .mvcell{display:grid;grid-template-columns:1fr auto;align-items:center;column-gap:8px;width:100%;line-height:1.15}
 .mvname{font-weight:bold;font-size:14px;grid-column:1}
 .mvpp{font-size:15px;color:#4a5878;grid-column:1}
 .mvpow{font-size:15px;color:#6a7799;grid-column:2;justify-self:end}
 .mvcell .tpill{grid-column:2;grid-row:1;justify-self:end;margin:0}
-@media (max-width:560px){.menugrid{gap:3px;padding:2px}.menugrid .menu-row{min-height:32px;padding:1px 6px}.mvpow{display:none}.mvcell{line-height:1.05;column-gap:4px}.menu.battlewin{bottom:1%;left:1%;right:1%;max-height:20%}.menu.battlewin .menu-row{min-height:42px}.mvname{grid-column:1/-1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.mvcell .tpill{grid-column:1;grid-row:2;justify-self:start;padding:0 5px}.mvpp{grid-column:2;grid-row:2;white-space:nowrap}}
+@media (max-width:560px){.menugrid{gap:3px;padding:2px}.menugrid .menu-row{min-height:32px;padding:1px 6px 1px 15px}.mvpow{display:none}.mvcell{line-height:1.05;column-gap:4px}.menu.battlewin{bottom:1%;left:1%;right:1%;max-height:20%}.menu.battlewin .menu-row{min-height:42px}.mvname{grid-column:1/-1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.mvcell .tpill{grid-column:1;grid-row:2;justify-self:start;padding:0 5px}.mvpp{grid-column:2;grid-row:2;white-space:nowrap}}
 .tpill{display:inline-block;font-size:14px;font-weight:bold;color:#fff;border:1px solid #232838;border-radius:3px;padding:1px 8px;margin:2px 0;text-shadow:1px 1px 0 rgba(0,0,0,.4)}
 .tpill b{font-weight:bold}
 .menu-row.zeropp{color:#a0a0a0}
@@ -533,6 +535,6 @@ body.desktop.showtouch .controls{display:flex}
 <div id="stage"><div id="hudband"></div><div id="screenwrap"><canvas id="game"></canvas></div><div id="ctlband"></div></div>
 <div id="ui"></div>
 <script src="game.js"></script>
-<!-- contentHash:8a30be1c677b7a2067de67680b125a911152708a82498b59180b97dcbf49323d -->
+<!-- contentHash:cad60474be3bf7dab2957cd5fb0ed08c7085100ff569a51f869b6f6d435a83d0 -->
 </body>
 </html>
