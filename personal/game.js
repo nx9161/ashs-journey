@@ -196434,6 +196434,7 @@ class BattleScene {
     this.fieldBanner = this.field.banner;
     this.ally = this.firstAble(g);
     this.foe = this.foeMon;
+    this.foePlateOut = null; // D6: fresh foe, plate in place
     this.foeStages = { atk: 0, def: 0, spa: 0, spd: 0, spe: 0, acc: 0, eva: 0 };
     // Hotfix 2026-11-15: tolerate a mon record with no stages object
     // (the save layer fills it on load; this keeps any other writer
@@ -196472,6 +196473,7 @@ class BattleScene {
     this.atkFx = null;   // { side, t } — README attack transform: 1.2x for 3 frames then back
     this.impactFx = null; // { side, t } — README impact: white palette-swap 2 frames + shake
     this.faintFx = null;  // { side, spr, t } — README faint: sink 8px + fade to 0 over 20 frames
+    this.foePlateOut = null; // Game-feel D6: ms since the foe fainted (plate exit slide); null = plate in place
     this.xpBarAnim = null; // [{ mon, from, to }] — P0/E3 XP bar ease-out over 600ms
     this.xpFlashT = 0;    // level-up flash on the XP bar
     this._lastMoveIdx = 0; // P0/E9: cursor memory (last-used move pre-selected)
@@ -196673,6 +196675,7 @@ class BattleScene {
     if (this.atkFx) { this.atkFx.t += dt * 1000; if (this.atkFx.t > 100) this.atkFx = null; } // 3 frames @30Hz
     if (this.impactFx) { this.impactFx.t += dt * 1000; if (this.impactFx.t > (this.impactFx.dur || 66)) this.impactFx = null; } // W1 FX-2: tiered white-swap (66ms ordinary / 110ms SE-crit); default stays 66
     if (this.faintFx) { this.faintFx.t += dt * 1000; if (this.faintFx.t > 660) this.faintFx = null; } // 20 frames
+    if (typeof this.foePlateOut === 'number' && this.foePlateOut < 450) this.foePlateOut += dt * 1000; // D6 plate exit clock (sim dt)
     if (this.catchFx) { this.catchFx.t += dt * 1000; if (this.catchFx.t > 500) this.catchFx = null; } // P1/E10 starburst
     // W1 FX clocks (visual only; particle integration lives here so
     // render() stays a pure draw).
@@ -197863,6 +197866,7 @@ class BattleScene {
     // while the message plays (visual-only; the flow is unchanged).
     const art = g.spriteCache[mon.speciesId] || g.spriteCache.partner;
     this.faintFx = { side, spr: side === 'ally' ? art.back : art.front, t: 0 };
+    if (side === 'foe') this.foePlateOut = 0; // D6: the foe plate leaves WITH the faint, before XP/prize text
     // SET/SHIFT faint beat (WP3, WP2 pacing spec): in classic battles
     // the faint LINE carries a 450ms dismissal hold — the KO lands
     // for a beat before the send-out / XP / victory text can replace
@@ -197904,6 +197908,7 @@ class BattleScene {
       if (this.trainerIdx < this.trainer.team.length) {
         const t = this.trainer.team[this.trainerIdx];
         this.foe = tuneFoeMon(authoredMoves(makeMon(t.species, trainerLevelFor(g.state, this.trainer, t.level), SPECIES, MOVES), t), g.state);
+        this.foePlateOut = null; // D6: the incoming foe's plate starts in place (it slides in on this.t)
         if (t.nickname) this.foe.nickname = t.nickname;
         const ksN = foeKeepsakeFor(g.state, this.trainer, this.trainerIdx, this.trainer.team.length);
         if (ksN) this.foe.keepsake = ksN;
@@ -198033,6 +198038,7 @@ class BattleScene {
     const incoming = this._shiftIncoming;
     this._shiftIncoming = null;
     this.foe = incoming;
+    this.foePlateOut = null; // D6: incoming foe, plate in place
     this.foeStages = { atk: 0, def: 0, spa: 0, spd: 0, spe: 0, acc: 0, eva: 0 };
     // The incoming foe's XP pool starts with whoever NOW faces it —
     // the ally who stayed, or the mon just switched in.
@@ -199632,6 +199638,16 @@ class BattleScene {
       slide = (1 - e) * (w + 16);
     }
     let px = isAlly ? x + slide : x - slide;
+    // Game-feel D6: once the foe has fainted, its databox slides away to
+    // the left over 450 ms of sim time (the entrance's mirror) instead of
+    // sitting empty through the XP / prize / defeat dialogue. Instant
+    // under reduced motion. Guarded like everything here: the QA
+    // minimal-this call carries no timer and gets offset 0.
+    if (!isAlly && typeof this.foePlateOut === 'number' && isFinite(this.foePlateOut)) {
+      const p = settings.reducedMotion ? 1 : Math.max(0, Math.min(1, this.foePlateOut / 450));
+      const e = p * p * (3 - 2 * p);
+      px -= e * (w + 16);
+    }
     // P1/E7: low-HP pulse — the ally plate nudges twice on first red crossing
     // (never under reduced motion; the pulse timer is only set when motion is on).
     if (isAlly && this._lowHpPulseT > 0) px += Math.sin(this._lowHpPulseT * 0.05) * 2;
@@ -201888,6 +201904,7 @@ Object.assign(BattleScene.prototype, {
       }
     }
     if (this.foe && this.foe.hp <= 0) {
+      if (typeof this.foePlateOut !== 'number') this.foePlateOut = 0; // D6: foe plate leaves at the faint (RT path)
       this.state = 'faintfoe';
       this.afterFaintFoe();
       return true;
