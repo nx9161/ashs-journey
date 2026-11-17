@@ -139757,7 +139757,7 @@ function ballBattleArt(doc, ballId) {
 
 // ---- src/data/species.mjs ----
 // species.mjs — slice roster data (Arden opening: Dawnwick -> Flintridge).
-// Original data tables for this fan project. spriteSeed feeds SpriteForge v1;
+// Original data tables for Kian's Journey. spriteSeed feeds SpriteForge v1;
 // Art Director replaces sprites per docs/contracts.md §1.
 
 const SPECIES = {
@@ -139769,7 +139769,7 @@ const SPECIES = {
     learnset: { 1: ['thundershock', 'growl'], 5: ['quickattack'] },
     flavor: 'A spirited partner who refused the easy path. Never leaves your side.',
     design: { inspired: 'hamster', kind: 'animal', note: 'mint hamster, copper battery cap, cream belly, big ears' },
-    // Yellow homage (hard rules): never boxed, never evolved. Guards in state.mjs.
+    // Partner rules: never boxed, never evolved. Guards in state.mjs.
     refusesEvolution: true,
     refusesBox: true,
   },
@@ -146358,8 +146358,8 @@ const MAPS = {
         trainer: 'r2_hiker',
         sight: { dir: 'up', range: 4 }, // Yellow-style: spots you, "!", walks up
         dialogue: ["These boulders are my training weights! Let's see your form!", "Rock-solid... defeat. Heh. Good scrap."] },
-      // Yellow homage: the anime-trio ambush, reimagined with original
-      // characters (no motto quotes, no trademarked team name — GC C4).
+      // The Vanta trio ambush, staged with original characters
+      // and original dialogue.
       // The duo flank the path; either one spotting you pulls BOTH in.
       { x: 3, y: 7, name: 'RUE', art: 'rue', skin: '#e8b888', shirt: '#2a2a3a', pants: '#1a1a2a', hair: '#3a2a1a',
         trainer: 'r2_duo', duoPartner: 'COLE',
@@ -147684,8 +147684,8 @@ const TRAINERS = {
     ],
     reward: 300,
   },
-  // Yellow homage: the anime-trio ambush as a sequential 2-mon duo battle
-  // (Gen 1 had no double battles — the trio fought back-to-back, as here).
+  // The Vanta trio ambush as a sequential 2-mon duo battle
+  // (the trio fights back-to-back).
   // Original characters, original banter; nicknamed mons for personality.
   r2_duo: {
     id: 'r2_duo', name: 'Rue & Cole', title: 'Uniformed Duo',
@@ -180477,7 +180477,7 @@ const INTRO_SCRIPT = {
   starterPanel: 'intro-partner',
 };
 
-// PARTNER_MOODS — Yellow homage: talking to the partner (face it + A, or tap
+// PARTNER_MOODS — partner reactions: talking to the partner (face it + A, or tap
 // the mood pip) reads its current emotion. Mood is driven by battle beats
 // (battle.mjs) and by petting (overworld.mjs). All lines original.
 const PARTNER_MOODS = {
@@ -194814,27 +194814,25 @@ const SYNC = {
 
 const DISCLAIMER_BOOT = [
   "KIAN'S JOURNEY",
-  'An original work. Not affiliated with, endorsed by, or connected to',
-  'any existing game franchise or its owners.',
+  '© 2026 Naman Parmar. All rights reserved.',
+  "Kian's Journey is an original work by Naman Parmar.",
   '',
-  'VOLTIK, and all names and characters in this game, are original',
-  'creations of this project.',
-  'This is a free, non-commercial project made with love by its makers.',
-  'No purchase is required or accepted.',
+  'Its creatures, names, characters, story, music, and original',
+  'artwork were created by Naman Parmar for this game.',
+  'This is a free, non-commercial work. No purchase is required',
+  'or accepted.',
 ];
 
 const DISCLAIMER_CREDITS = [
   'LEGAL',
   '',
-  'This game is an original work and is not affiliated with, endorsed by,',
-  'sponsored by, or connected to any existing game franchise or its owners.',
-  'All names, characters, and indicia in this game are original creations',
-  'of this project, except where credited below.',
+  '© 2026 Naman Parmar. All rights reserved.',
   '',
-  'All code, music, sound effects, and dialogue in this game are original',
-  'creations made for this project, as is its artwork except where',
-  'credited below; no game assets were copied or extracted from any',
-  'other game.',
+  'Kian\'s Journey is an original work by Naman Parmar. Its creatures,',
+  'names, characters, story, world, music, sound effects, dialogue,',
+  'code, and original artwork are original works by Naman Parmar,',
+  'created for this game, except for the third-party components',
+  'credited below.',
   '',
   'Third-party art: tileset and character by Damian',
   'Gasinski aka Gassasin',
@@ -194851,10 +194849,8 @@ const DISCLAIMER_CREDITS = [
   'This game is free, carries no advertising, accepts no payments, donations,',
   'or tips, and collects no personal data for commercial purposes.',
   '',
-  'If you represent a rights holder and have concerns about this project,',
-  'please contact the developer through the GitHub account that',
-  'publishes this game (github.com/nx9161), or through the GitHub',
-  'copyright-reporting process.',
+  'Published by Naman Parmar. Project and contact:',
+  '(github.com/nx9161).',
 ];
 
 const GAME_TITLE = "KIAN'S JOURNEY";
@@ -194973,22 +194969,22 @@ function dawnSky(w, h) {
 const LEGAL_PAGES = [
   [
     "KIAN'S JOURNEY",
-    'An original work.',
-    'Not affiliated with, endorsed',
-    'by, or connected to any',
-    'existing game franchise',
-    'or its owners.',
+    '© 2026 Naman Parmar.',
+    'All rights reserved.',
+    "Kian's Journey is an",
+    'original work by',
+    'Naman Parmar.',
   ],
   [
-    'VOLTIK, and all names and',
-    'characters in this game, are',
-    'original creations of',
-    'this project.',
-    'This is a free, non-commercial',
-    'project made with love',
-    'by its makers.',
-    'No purchase is required or',
-    'accepted.',
+    'Its creatures, names,',
+    'characters, story, music,',
+    'and original artwork were',
+    'created by Naman Parmar',
+    'for this game.',
+    'This is a free,',
+    'non-commercial work.',
+    'No purchase is required',
+    'or accepted.',
   ],
 ];
 
@@ -195272,7 +195268,7 @@ class BootScene {
     }
 
     // ---- Footer: centered, inset from both edges, never clipped ----
-    r.text('An original work.', cx, footerY, { size: 14, align: 'center', color: '#f5efdc', display: true });
+    r.text('An original work by Naman Parmar.', cx, footerY, { size: 14, align: 'center', color: '#f5efdc', display: true });
     r.end(); r.camX = pcx; r.camY = pcy;
   }
   renderLegal(r) {
@@ -195409,7 +195405,7 @@ class IntroScene {
   // fillV2Defaults in save/schema.mjs.)
   grantPartner() {
     const g = this.game;
-    // Partner joins OUTSIDE the ball system (EP014 homage — hard rule).
+    // Partner joins OUTSIDE the ball system (opening-story rule).
     if (!grantPartnerMon(g.state, SPECIES, MOVES)) return;
     g.audio.playSfx('dex-register');
     g.ui.toast(SPECIES.partner.name + ' joined your party!');
@@ -197838,7 +197834,7 @@ class BattleScene {
       if (st.battleAnims !== false && !st.reducedMotion && st.shake) this.trauma = Math.min(1, Math.max(this.trauma + 0.12, 0.47));
     }
     this._faintByAttack = null;
-    // Yellow homage: the partner takes its own faint personally.
+    // Partner reaction: VOLTIK takes its own faint personally.
     if (side === 'ally' && mon.speciesId === 'partner') g.state.pikachu.mood = 'sad';
     const name = displayName(mon, SPECIES);
     g.audio.playSfx('battle-faint');
@@ -198362,7 +198358,7 @@ class BattleScene {
     const prize = this.facility ? 0 : Math.floor(t.reward * moneyMultFor(g.state));
     g.state.player.money += prize;
     if (!this.facility) g.state.story.flags['beat_' + t.id] = true;
-    // Yellow homage: winning with the partner conscious leaves it buzzing.
+    // Partner reaction: winning with VOLTIK conscious leaves it buzzing.
     if (g.state.party.some((m) => m.speciesId === 'partner' && m.hp > 0)) {
       g.state.pikachu.mood = 'excited';
     }
@@ -198405,7 +198401,7 @@ class BattleScene {
     // no money halving, no Center warp. onEnd still fires with won=false.
     if (this.friendly) { this.endBattle(false); return; }
     // Defeat: fade -> Center (overworld, healed, money halved) — architecture §2.2
-    g.state.pikachu.mood = 'sad'; // Yellow homage: the partner hates losing
+    g.state.pikachu.mood = 'sad'; // Partner reaction: VOLTIK hates losing
     g.state.player.money = Math.floor(g.state.player.money / 2);
     this.endBattle(false);
     g.ui.say(['You hurried to the Center...'], () => {
@@ -203162,7 +203158,7 @@ class OverworldScene {
 
   petPartner() {
     // P1/D7: mood-pip tap and the faced-tile interaction share one path.
-    // Yellow homage: the partner emotes when talked to; petting cheers it up.
+    // Partner interaction: VOLTIK emotes when talked to; petting cheers it up.
     const g = this.game;
     g.state.pikachu.mood = 'happy'; // a petting cheers it up (D7: mood reacts to beats)
     g.ui.toast('VOLTIK ' + (PARTNER_MOODS[g.state.pikachu.mood] || PARTNER_MOODS.happy));
