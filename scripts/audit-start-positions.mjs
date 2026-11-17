@@ -79,8 +79,13 @@ for (const [id, m] of Object.entries(MAPS)) {
   }
 }
 
-// (5) Zone hubs (the bounce-back target) and the default safari exit
-// town must carry authored, valid starts.
+// (5) Zone hubs (the bounce-back target) must carry authored, valid
+// starts. The default safari-exit town (fuchsia) deliberately carries
+// NO authored start — one would move its pinned placement-gate tuple
+// (the desire-path audit counts start as a POI) — so its exit safety
+// rests on the resolver: what endSafari computes for it must be a
+// valid tile (this is the path whose old {10,10} fallback was a
+// non-standable decor tile).
 let hubsChecked = 0;
 for (const [id, m] of Object.entries(MAPS)) {
   if (!m.safariHub) continue;
@@ -90,8 +95,11 @@ for (const [id, m] of Object.entries(MAPS)) {
 }
 {
   const f = MAPS.fuchsia;
-  if (!f || !f.start) fail('fuchsia: default safari-exit town has NO authored start');
-  else if (!standable(f, f.start.x, f.start.y)) fail(`fuchsia: start (${f.start.x},${f.start.y}) not standable`);
+  if (!f) fail('fuchsia: default safari-exit town missing');
+  else {
+    const r = resolveStartPos(f, null);
+    if (!standable(f, r.x, r.y)) fail(`fuchsia: resolved exit landing (${r.x},${r.y}) not standable`);
+  }
 }
 
 // (6) Routing tripwire: no src/game module may resolve a start with

@@ -854,11 +854,7 @@ export const MAPS3 = {
     items: [],
     hidden: [],
     events: [],
-    // The south strip just outside the Preserve gatehouse — the same
-    // landing row as the gate door warps. endSafari resolves through
-    // this start; it was null and the exit fell back to {10,10}, a
-    // non-standable decor tile.
-    start: { x: 9, y: 12 },
+    start: null,
   },
 
   'gym-fuchsia': {
