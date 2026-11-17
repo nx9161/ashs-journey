@@ -1168,10 +1168,15 @@ export class BattleScene {
       { label: 'FIGHT', value: 'fight', dimmed: tut && this._tutStage === 'bag' },
       { label: 'BAG', value: 'bag', dimmed: tut && this._tutStage !== 'bag' },
       { label: 'PARTY', value: 'party', dimmed: tut },
-      // GD: no running from the scripted tutorial — it's a lesson, not a gamble.
-      // F2: no running from a facility battle either — a Frontier
-      // contest is finished or forfeited at the desk, never fled.
-      { label: this.kind === 'wild' ? 'RUN' : 'RUN', value: 'run', disabled: this.kind !== 'wild' || tut || !!this.facility },
+      // RUN is always SELECTABLE (Platinum: the cell is never dead) — the
+      // refusal lives in onCommand('run'): trainer battles, the scripted
+      // tutorial (GD: a lesson, not a gamble) and facility battles (F2: a
+      // Frontier contest is finished or forfeited at the desk, never fled)
+      // answer with a message and return to the command grid. A disabled
+      // cell here was unreachable by grid nav (the skip loop wraps back),
+      // unclickable (no pointer handler), and left Enter confirming
+      // whatever the cursor sat on — owner report 2026-11-17.
+      { label: 'RUN', value: 'run' },
     ];
     let focus = null;
     if (tut && !this._tutFightDone) focus = 'fight';
@@ -1275,7 +1280,12 @@ export class BattleScene {
     } else if (value === 'party') {
       this.openPartyMenu(false);
     } else if (value === 'run') {
-      if (this.kind === 'wild') {
+      if (this.tutorial || this.facility) {
+        // GD/F2: the scripted tutorial and facility battles cannot be
+        // fled — RUN stays selectable and is refused with a message,
+        // exactly like a trainer battle (below).
+        this.say("Can't escape!", () => this.toCommand());
+      } else if (this.kind === 'wild') {
         // Gen-1 escape formula (ADR-018): F = allySpe*128/foeSpe + 30*attempts;
         // escape iff F > 255 or a 0-255 roll lands under F. Failure costs the
         // turn — the foe acts.
@@ -3150,8 +3160,17 @@ export class BattleScene {
 
   drawExitWipe(r, w, h) {
     if (this._exitStartT < 0 || !this.fxAnimsOn()) return;
-    const k = Math.min(1, (this.t - this._exitStartT) / 300);
-    if (k <= 0) return;
+    const el = this.t - this._exitStartT;
+    // FX-6 exit mirror, sweep-through: bands grow over 300ms, then
+    // retract over the next 300ms, then the frame is clean. The scene
+    // pop is dialogue-gated (victory messages / the trainer's lose
+    // lines play first, endBattle runs from their callback), so a
+    // wipe that clamped at full sweep froze the frame into torn
+    // black bands for the WHOLE dialogue — owner report 2026-11-17
+    // (black rectangles, shifted scene strips, cut-off sprites over
+    // LISA's defeat dialogue, clearing only when it advanced).
+    if (el <= 0 || el >= 600) return;
+    const k = el <= 300 ? el / 300 : 1 - (el - 300) / 300;
     const g = this.game;
     const F = (col, x, y, fw, fh) => g.ctx2dfill(col, x, y, fw, fh);
     const bands = 6, bh = h / bands;

@@ -51,6 +51,11 @@ export class Input {
       const action = this.remap[e.code];
       if (!action) return;
       if (['up', 'down', 'left', 'right', 'a', 'b'].includes(action)) e.preventDefault();
+      // Enter (= START) on a focused game BUTTON must not natively
+      // re-activate that button: the press belongs to the game, which
+      // confirms the menu's cursor cell. (Space/'a' is already covered
+      // above; form fields returned earlier via fromField.)
+      else if (action === 'start' && e.target && e.target.tagName === 'BUTTON') e.preventDefault();
       this._press(action, !!e.repeat);
     };
     const up = (e) => {

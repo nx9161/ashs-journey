@@ -83,7 +83,7 @@ Object.assign(BattleScene.prototype, {
       { label: 'FIGHT', value: 'fight' },
       { label: 'BAG', value: 'bag' },
       { label: 'PARTY', value: 'party' },
-      { label: 'RUN', value: 'run', disabled: this.kind !== 'wild' },
+      { label: 'RUN', value: 'run' }, // always selectable; rtTryRun refuses non-wild (classic parity)
     ];
     g.ui.showCommands(items, (value) => {
       if (value === null) return; // B backs out to the live arena
@@ -752,6 +752,9 @@ Object.assign(BattleScene.prototype, {
 
   rtTryRun() {
     const g = this.game;
+    // Classic parity: a trainer battle can never be fled — the RUN cell
+    // is selectable and the attempt is refused, never rolled.
+    if (this.kind !== 'wild') { this.rtFloat("Can't escape!"); return; }
     this.runAttempts++;
     const F = Math.floor((Math.max(1, this.ally.stats.spe) * 128) / Math.max(1, this.foe.stats.spe)) + 30 * this.runAttempts;
     if (F > 255 || Math.floor(g.rng.battle() * 256) < F) {

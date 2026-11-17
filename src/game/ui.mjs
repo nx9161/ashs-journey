@@ -222,6 +222,11 @@ export class UI {
     const m = this.menu;
     if (!m || m.kind !== 'commands') { this.cmdEl.classList.add('hidden'); return; }
     this.cmdEl.classList.remove('hidden');
+    // A clicked command button must never keep DOM focus into the next
+    // render: Enter would natively re-activate the stale button instead
+    // of confirming the cursor cell (owner report 2026-11-17).
+    const ae = document.activeElement;
+    if (ae && ae.tagName === 'BUTTON' && this.cmdEl.contains(ae)) ae.blur();
     this.cmdEl.innerHTML = '';
     m.items.forEach((it, i) => {
       const b = document.createElement('button');
@@ -230,6 +235,13 @@ export class UI {
         + (it.disabled ? ' disabled' : '')
         + (it.dimmed ? ' dimmed' : '')
         + (m.focus && m.focus === it.value ? ' tut-focus' : '');
+      // The ▶ cursor marker (Bag-menu precedent): selection must read at
+      // a glance, not only as the sky fill. Fixed-width span on every
+      // cell so the layout never shifts as the cursor moves.
+      const cur = document.createElement('span');
+      cur.className = 'cur';
+      cur.textContent = i === m.idx ? '▶' : '';
+      b.appendChild(cur);
       b.appendChild(this.cmdIconCanvas(it.value));
       const lb = document.createElement('span');
       lb.className = 'cmdlabel';
@@ -443,6 +455,10 @@ export class UI {
     if (this.headless) return;
     const m = this.menu;
     if (!m || m.kind === 'commands') { this.menuEl.classList.add('hidden'); return; }
+    // Same stale-focus guard as renderCommands: a clicked row/tab must
+    // not hold DOM focus under the rebuilt menu (Enter = cursor cell).
+    const ae = document.activeElement;
+    if (ae && ae.tagName === 'BUTTON' && this.menuEl.contains(ae)) ae.blur();
     // Elevation C1: the open transition plays only when the window was
     // actually hidden (a fresh open) — cursor moves and in-place
     // re-renders (bag pockets, the mart stepper) must not replay it.
