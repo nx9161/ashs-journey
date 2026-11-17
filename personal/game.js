@@ -195391,7 +195391,7 @@ class IntroScene {
     // P0/C3: full A-Z grid ships now (replaces the Wave-1 two-option menu).
     const g = this.game;
     this.step = 'name';
-    g.ui.showNameEntry('Your name?', 'KIAN', 8, (value) => {
+    g.ui.showNameEntry('Your name? — step 1 of 2', 'KIAN', 8, (value) => {
       this.name = value;
       g.state.player.name = this.name;
       if (g.ui.headless) {
@@ -195402,7 +195402,7 @@ class IntroScene {
       }
       // P1/C4: rival name entry reuses the same grid.
       this.step = 'rival';
-      g.ui.showNameEntry("Rival's name?", 'VALE', 8, (rv) => {
+      g.ui.showNameEntry("Rival's name? — step 2 of 2", 'VALE', 8, (rv) => {
         this.rival = rv;
         g.state.player.rivalName = this.rival;
         this.rivalEntryDone();
@@ -195585,22 +195585,28 @@ class IntroScene {
     }
 
     // --- Professor: large portrait, centered above the dialogue zone ---
-    const scale = (w >= 320 || h >= 250) ? 5 : 4; // 24x24 art -> 120 or 96 px
+    // Game-feel F4: the portrait is bottom-anchored to the TOP of the
+    // dialogue zone (55% of frame height) and shrunk to fit the space
+    // above it — previously it stood on the floor line (floorY + 6) and
+    // the DOM dialogue box buried ~70% of it (audit B4).
+    const dlgTop = Math.round(h * 0.55);
+    let scale = (w >= 320 || h >= 250) ? 5 : 4; // 24x24 art -> 120 or 96 px
+    while (scale > 2 && 24 * scale > dlgTop - 10) scale--;
     const size = 24 * scale;
     const animT = (g && typeof g._animT === 'number') ? g._animT : 0;
     const bob = Math.round(Math.sin(animT / 600) * 1); // gentle +/-1px idle
     const px = Math.round(cx - size / 2);
-    const py = floorY + 6 - size + bob;
+    const py = dlgTop - size + bob;
     // Soft oval shadow / plate grounding the portrait on the floor line.
     try {
       const c = r.ctx;
       c.fillStyle = 'rgba(20,14,8,0.35)';
       c.beginPath();
-      if (typeof c.ellipse === 'function') c.ellipse(cx, floorY + 8, size * 0.42, 6, 0, 0, Math.PI * 2);
-      else c.arc(cx, floorY + 8, size * 0.3, 0, Math.PI * 2);
+      if (typeof c.ellipse === 'function') c.ellipse(cx, dlgTop + 2, size * 0.42, 6, 0, 0, Math.PI * 2);
+      else c.arc(cx, dlgTop + 2, size * 0.3, 0, Math.PI * 2);
       c.fill();
     } catch (e) {
-      g.ctx2dfill('rgba(20,14,8,0.35)', cx - size * 0.4, floorY + 5, size * 0.8, 5);
+      g.ctx2dfill('rgba(20,14,8,0.35)', cx - size * 0.4, dlgTop - 1, size * 0.8, 5);
     }
     let spr = null;
     try {
