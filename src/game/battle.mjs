@@ -903,6 +903,7 @@ export class BattleScene {
       : (LEGENDARY_SPECIES.has(this.foeMon && this.foeMon.speciesId) || this.uncatchable ? 'legendary' : 'wild');
     this.entryT = 0; // FX-6 transition clock (ms since enter)
     this._exitStartT = -1;
+    this._exitPending = null; // Game-feel D1: {won, start} while the exit sweep runs
     this.catchState = null;
     this.fled = false;
     this.critCap = false;
@@ -1023,6 +1024,18 @@ export class BattleScene {
     // drains never advance it and bypass holds entirely by invoking
     // message callbacks directly, exactly as they always have.
     this._clockMs = (this._clockMs || 0) + dt * 1000;
+    // Game-feel D1: a pending exit owns the tick until its wall-clock
+    // sweep completes; the pop then fires under full cover. Checked
+    // before everything else so a stalled paint can never leave the
+    // wipe half-drawn — the first recovered tick pops the scene.
+    if (this._exitPending) {
+      if (performance.now() - this._exitPending.start >= 300) {
+        const won = this._exitPending.won;
+        this._exitPending = null;
+        this._finishExit(won, true);
+      }
+      return;
+    }
     // Screen shake / flash decay — P0/E11: gated on the Screen-shake option +
     // reduced motion (assignment is gated at the source; decay is unconditional).
     // Trauma shake (WP3): offset = 12px x trauma^2 so small hits stay
@@ -2305,7 +2318,9 @@ export class BattleScene {
     } else {
       this.awardXp(() => {
         this.state = 'victory';
-        if (this._exitStartT < 0) this._exitStartT = this.t; // W1 FX-6
+        // Game-feel D1: the exit wipe no longer arms here — it runs at
+        // endBattle (the actual pop), so no bands ever cross the defeat
+        // dialogue. See endBattle/_finishExit.
         g.audio.playSfx('victory'); // wild-win sting (visual twin: the "defeated" message)
         this.say('Wild ' + displayName(this.foe, SPECIES) + ' was defeated!', () => this.afterMsg());
       });
@@ -2735,7 +2750,8 @@ export class BattleScene {
     const g = this.game;
     const t = this.trainer;
     this.state = 'victory';
-    if (this._exitStartT < 0) this._exitStartT = this.t; // W1 FX-6: exit mirror wipe
+    // Game-feel D1: exit wipe arms at endBattle, not at the victory
+    // moment — the trainer's lose dialogue plays over the settled scene.
     // W6 (audit D2): the composed trainer-win fanfare (SCORE.md: 'fanfare
     // (trainer win)') finally plays — ordinary trainer wins only; badge
     // wins already get the 'badge' fanfare at the award below.
@@ -2812,9 +2828,6 @@ export class BattleScene {
 
   endBattle(won) {
     const g = this.game;
-    g.ui.setBattleMode(false);
-    if (g.ui.hideCommands) g.ui.hideCommands(); // RT touch move pad retires with the battle
-    g.audio.restoreAreaMusic(); // back to the overworld's track
     g.renderer.shakeX = 0; g.renderer.shakeY = 0; g.renderer.flashA = 0;
     // Reset battle temp state on party mons (incl. Transform restoration).
     // F2: under a partyOverride, reset ONLY the mons that actually
@@ -2841,7 +2854,37 @@ export class BattleScene {
       clearKsState(m); // ADR-025 §3: per-battle keepsake flags never persist
       const st = m.stages; if (st) { st.atk = 0; st.def = 0; st.spa = 0; st.spd = 0; st.spe = 0; st.acc = 0; st.eva = 0; }
     }
+    // Game-feel D1: the exit transition runs HERE, as the scene pops —
+    // a 300 ms wall-clock sweep to full cover, the pop fires under it,
+    // and the overworld fades in (returnFade, overworld.mjs). It used
+    // to arm at the victory moment and sweep across the whole defeat
+    // dialogue; being render-clocked, any paint stall froze the bands
+    // mid-frame for as long as the stall lasted (the owner's torn-frame
+    // reports, 2026-11-16/17). Wall-clock timing + pop-at-full-cover
+    // makes a frozen wipe impossible: if paints stall, the first
+    // recovered frame pops instead of drawing stale bands. Headless
+    // (no document) and reduced-motion / anims-off keep the instant pop.
+    if (this._exitPending) return;
+    if (typeof document === 'undefined' || typeof performance === 'undefined' || !this.fxAnimsOn()) {
+      this._finishExit(won, false);
+      return;
+    }
+    this._exitPending = { won, start: performance.now() };
+    this._exitStartT = this.t; // harness-visible exit marker (exitEl)
+  }
+
+  _finishExit(won, animated) {
+    const g = this.game;
+    g.ui.setBattleMode(false);
+    if (g.ui.hideCommands) g.ui.hideCommands(); // RT touch move pad retires with the battle
+    g.audio.restoreAreaMusic(); // back to the overworld's track
     g.scenes.pop();
+    if (animated && this.returnTo) {
+      // Fade the overworld in from black under the wipe's full cover.
+      this.returnTo.returnFade = { t: 0 };
+      g.renderer.fadeColor = '#000';
+      g.renderer.fadeA = 1;
+    }
     g.autosave('battle');
     // Story-event continuation (WS6): scripted battles resume their script
     // only on victory — a loss leaves the event unconsumed for a retry.
@@ -3159,18 +3202,19 @@ export class BattleScene {
   }
 
   drawExitWipe(r, w, h) {
-    if (this._exitStartT < 0 || !this.fxAnimsOn()) return;
-    const el = this.t - this._exitStartT;
-    // FX-6 exit mirror, sweep-through: bands grow over 300ms, then
-    // retract over the next 300ms, then the frame is clean. The scene
-    // pop is dialogue-gated (victory messages / the trainer's lose
-    // lines play first, endBattle runs from their callback), so a
-    // wipe that clamped at full sweep froze the frame into torn
-    // black bands for the WHOLE dialogue — owner report 2026-11-17
+    if (!this._exitPending || !this.fxAnimsOn()) return;
+    // Game-feel D1: wall-clock sweep IN to full cover over 300 ms; the
+    // pop fires at 300 ms under the cover (see update()). Elapsed time
+    // comes from performance.now(), never from the render-counted
+    // battle clock: a paint stall can only skip the wipe (the first
+    // recovered frame pops), never freeze it mid-sweep. History: the
+    // FX-6 exit mirror used to arm at the victory moment and sweep
+    // across the dialogue-gated scene pop — owner report 2026-11-17
     // (black rectangles, shifted scene strips, cut-off sprites over
     // LISA's defeat dialogue, clearing only when it advanced).
-    if (el <= 0 || el >= 600) return;
-    const k = el <= 300 ? el / 300 : 1 - (el - 300) / 300;
+    const el = performance.now() - this._exitPending.start;
+    if (el <= 0 || el >= 300) return;
+    const k = el / 300;
     const g = this.game;
     const F = (col, x, y, fw, fh) => g.ctx2dfill(col, x, y, fw, fh);
     const bands = 6, bh = h / bands;

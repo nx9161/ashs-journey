@@ -535,6 +535,19 @@ export class OverworldScene {
 
   update(dt) {
     const g = this.game;
+    // Game-feel D1: fade-in after a battle exit (armed by BattleScene's
+    // _finishExit under the exit wipe's full cover). Wall-clock via dt,
+    // warp-fade idiom; a warp starting mid-fade takes the fade over.
+    if (this.returnFade) {
+      if (this.warpFx) { this.returnFade = null; }
+      else {
+        this.returnFade.t += dt * 1000;
+        const k = Math.min(1, this.returnFade.t / 250);
+        g.renderer.fadeColor = '#000';
+        g.renderer.fadeA = (1 - k) * (1 - k);
+        if (k >= 1) { g.renderer.fadeA = 0; this.returnFade = null; }
+      }
+    }
     if (g.ui.update(dt)) return; // modal UI consumes input
     if (this.warpFx) { this.updateWarpFx(dt); return; } // W7: warp transition owns the tick
     if (this.enc) { this.updateEncounter(dt); return; }
