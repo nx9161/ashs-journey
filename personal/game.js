@@ -1,14 +1,16 @@
 
 // ---- audio/note-tables.mjs ----
-// note-tables.mjs — the full original score for Ash's Journey.
+// note-tables.mjs — the full original score for Kian's Journey.
 // Seat 24 (Voice Designer), Wave 2. Contract: docs/contracts.md §2.
-//
-// PROVENANCE: 100% original compositions, composed 2026-10-15 for this
-// project. No sampled audio, no audio files (zero-audio-file rule),
-// no melody borrowed from any official game/anime. Melodies were
-// written to generic chiptune harmony and given deliberate rhythmic
-// "tells" (odd pickup figures, waltz bass, march snares) so a reviewer
-// can hear they are new works, not imitations.
+// VIRAL AUDIO PASS (2026-11-17): every music loop and SFX below (except the
+// evolution sting, owned by the Evolution Ceremony build, and the species
+// cries, out of scope) was recomposed for trending-feed energy — hook-first
+// leads, build-and-drop drum structures, four-on-the-floor drive, meme
+// effect CLASSES (boom, scratch-stop, orchestra-hit, alarm) synthesized
+// from scratch. 100% original compositions: no sampled audio, no audio
+// files (zero-audio-file rule), no melody or recording borrowed from any
+// existing track, viral or otherwise. The style is the brief; every note
+// is new work.
 //
 // FORMAT (contract §2.1):
 //   Music:  { id, title, bpm, loop:true, tracks:[{ wave:'pulse'|'triangle'|'noise',
@@ -18,541 +20,366 @@
 // SFX beats are engine-scaled at 0.06 s/beat; music beats are real beats at bpm.
 
 // --- tiny deterministic builders (still static note tables; no runtime randomness) ---
-const HATS = (from, to, step, beats, vol) => {
+const HATS = (from, to, step, beats) => {
   const n = [];
   for (let b = from; b < to - 1e-9; b += step) n.push([+b.toFixed(3), null, beats]);
   return n;
 };
-const KICKS = (beatsArr, vol) => beatsArr.map((b) => [b, null, 0.25]);
+const KICKS = (beatsArr) => beatsArr.map((b) => [b, null, 0.25]);
+const CLAPS = (beatsArr) => beatsArr.map((b) => [b, null, 0.5]); // noise burst = clap class
 const PUMP = (from, to, lo, hi) => {
   const n = [];
   for (let b = from; b < to - 1e-9; b += 0.5) n.push([+b.toFixed(3), (Math.round(b * 2) % 2 === 0 ? lo : hi), 0.5]);
   return n;
 };
+// mel('E5 G5x1.5 R A5x2', step) — compact melody notation: space-separated
+// tokens; each is a pitch with an optional x<beats> duration (default =
+// step, itself 0.5); 'R' is a rest (advances the cursor, emits no note).
+// Returns contract note tuples [beat, pitch, beats].
+const mel = (s, step = 0.5) => {
+  const out = []; let b = 0;
+  for (const tok of s.trim().split(/\s+/)) {
+    const m = /^([A-G][#b]?\d|R)(?:x(\d*\.?\d+))?$/.exec(tok);
+    const d = m[2] ? parseFloat(m[2]) : step;
+    if (m[1] !== 'R') out.push([+b.toFixed(3), m[1], d]);
+    b += d;
+  }
+  return out;
+};
+// ARP(['C4','E4','G4'], 0, 16, 1) — cycle pitches every `step` beats.
+const ARP = (pitches, from, to, step = 1) => {
+  const n = []; let i = 0;
+  for (let b = from; b < to - 1e-9; b += step) n.push([+b.toFixed(3), pitches[i++ % pitches.length], step]);
+  return n;
+};
+// Drum kits (noise stems; kick = short burst, clap = long burst, hat = tick).
+const DRIVE = () => KICKS([0, 1, 3, 4, 5, 7, 8, 9, 11, 12, 13, 15]).concat(CLAPS([2, 6, 10, 14])).concat(HATS(0.5, 16, 1, 0.125));
+const HALF = () => KICKS([0, 4, 8, 9, 11, 12, 13, 15]).concat(CLAPS([10, 14]))
+  .concat(HATS(0.5, 8, 1, 0.125)).concat(HATS(8.5, 16, 0.5, 0.125)); // build 8, drop 8
+const STONE = () => KICKS([0, 8]).concat(CLAPS([4, 12])).concat(HATS(0.5, 16, 1, 0.125));
 
 // ============================================================ MUSIC ====
+// The viral-pass idiom: hook-first lead (tracks[0]), chord arp or pads,
+// octave-pump or walking bass, and a kit with a build half and a drop half.
+// Every lead carries its own interval fingerprint (verify-audio [9]).
 const MUSIC = {
   'title-theme': {
-    id: 'title-theme', title: 'First Light (title, original)', bpm: 112, loop: true,
+    id: 'title-theme', title: 'Curtain Up (title, original)', bpm: 120, loop: true,
     tracks: [
-      { wave: 'pulse', duty: 0.125, vol: 0.45, notes: [
-        [0,'D5',0.5],[0.5,'E5',0.5],[1,'F#5',0.5],[1.5,'G5',0.5],[2,'A5',1],[3,'G5',1],
-        [4,'F#5',0.5],[4.5,'E5',0.5],[5,'D5',0.5],[5.5,'E5',0.5],[6,'F#5',1.5],[7.5,'E5',0.5],
-        [8,'G5',1],[9,'A5',0.5],[9.5,'G5',0.5],[10,'F#5',0.5],[10.5,'E5',0.5],[11,'D5',1],
-        [12,'E5',0.5],[12.5,'F#5',0.5],[13,'G5',0.5],[13.5,'A5',0.5],[14,'D6',2],
-      ]},
-      { wave: 'pulse', duty: 0.5, vol: 0.2, notes: [
-        [0,'F#4',1],[1,'G4',1],[2,'F#4',1],[3,'E4',1],
-        [4,'D4',1],[5,'E4',1],[6,'D4',1],[7,'C#4',1],
-        [8,'B4',1],[9,'A4',1],[10,'G4',1],[11,'F#4',1],
-        [12,'E4',1],[13,'F#4',1],[14,'G4',1],[15,'A4',1],
-      ]},
-      { wave: 'triangle', vol: 0.55, notes: [
-        [0,'D3',2],[2,'A2',2],[4,'B2',2],[6,'F#2',2],
-        [8,'G2',2],[10,'D3',2],[12,'A2',2],[14,'D3',2],
-      ]},
-      { wave: 'noise', vol: 0.18, notes: HATS(0, 16, 0.5, 0.125).concat(KICKS([0,4,8,12])) },
+      { wave: 'pulse', duty: 0.125, vol: 0.42, notes: mel('E5 G5 A5x1 G5 E5 D5 E5 G5 A5x1 G5 E5 D5x1 R E5 G5 A5 C6x1 B5 A5 G5 A5x1 G5 E5 D5x1 C5x1') },
+      { wave: 'pulse', duty: 0.5, vol: 0.18, notes: mel('C4x2 G3x2 A3x2 G3x2 F3x2 G3x2 C4x2 G3x2', 1) },
+      { wave: 'triangle', vol: 0.55, notes: mel('C2 G2 C2 G2 F2 C3 F2 C3 C2 G2 C2 G2 F2 G2 C2x2', 1) },
+      { wave: 'noise', vol: 0.3, notes: HALF() },
     ],
   },
 
   'battle-wild-theme': {
-    id: 'battle-wild-theme', title: 'Tall Grass Gambit (wild battle, original)', bpm: 152, loop: true,
+    id: 'battle-wild-theme', title: 'Ambush Anthem (wild battle, original)', bpm: 160, loop: true,
     tracks: [
-      { wave: 'pulse', duty: 0.25, vol: 0.5, notes: [
-        [0,'A4',0.5],[0.5,'C5',0.5],[1,'E5',0.5],[1.5,'A5',0.5],[2,'G5',1],[3,'E5',0.5],[3.5,'D5',0.5],
-        [4,'C5',0.5],[4.5,'E5',0.5],[5,'A5',0.5],[5.5,'G5',0.5],[6,'F5',1],[7,'E5',1],
-        [8,'A4',0.5],[8.5,'C5',0.5],[9,'E5',0.5],[9.5,'G5',0.5],[10,'A5',1],[11,'G5',0.5],[11.5,'F5',0.5],
-        [12,'E5',0.5],[12.5,'D5',0.5],[13,'C5',0.5],[13.5,'B4',0.5],[14,'A4',2],
-      ]},
-      { wave: 'pulse', duty: 0.5, vol: 0.22, notes: [
-        [0,'A3',1],[2,'F3',1],[4,'G3',1],[6,'E3',1],
-        [8,'A3',1],[10,'F3',1],[12,'G3',1],[14,'E3',1],
-      ]},
-      { wave: 'triangle', vol: 0.6, notes:
-        PUMP(0,4,'A1','A2').concat(PUMP(4,8,'F1','F2')).concat(PUMP(8,12,'G1','G2')).concat(PUMP(12,16,'E1','E2')) },
-      { wave: 'noise', vol: 0.4, notes:
-        KICKS([0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15])
-          .concat([[2,null,0.25],[6,null,0.25],[10,null,0.25],[14,null,0.25]])
-          .concat(HATS(0,16,0.5,0.125)) },
+      { wave: 'pulse', duty: 0.25, vol: 0.48, notes: mel('A4 A4 C5 E5 A5x1 G5 E5 D5 E5 G5x1 E5 D5 C5 A4 A4 A4 C5 E5 A5x1 C6x1 B5x1 G5 E5 D5x1 A4x1') },
+      { wave: 'pulse', duty: 0.5, vol: 0.16, notes: ARP(['A3', 'C4', 'E4'], 0, 16, 1) },
+      { wave: 'triangle', vol: 0.6, notes: PUMP(0, 4, 'A1', 'A2').concat(PUMP(4, 8, 'F1', 'F2')).concat(PUMP(8, 12, 'G1', 'G2')).concat(PUMP(12, 16, 'E1', 'E2')) },
+      { wave: 'noise', vol: 0.38, notes: DRIVE() },
     ],
   },
 
   'battle-trainer-theme': {
-    id: 'battle-trainer-theme', title: "Challenger's Measure (trainer battle, original)", bpm: 164, loop: true,
+    id: 'battle-trainer-theme', title: 'Called Out (trainer battle, original)', bpm: 168, loop: true,
     tracks: [
-      { wave: 'pulse', duty: 0.125, vol: 0.5, notes: [
-        [0,'E5',0.5],[0.5,'G5',0.5],[1,'B5',0.5],[1.5,'E6',0.5],[2,'D6',1],[3,'B5',0.5],[3.5,'A5',0.5],
-        [4,'G5',0.5],[4.5,'A5',0.5],[5,'B5',0.5],[5.5,'D6',0.5],[6,'C6',1],[7,'A5',1],
-        [8,'E5',0.5],[8.5,'G5',0.5],[9,'A5',0.5],[9.5,'B5',0.5],[10,'C6',1],[11,'B5',0.5],[11.5,'A5',0.5],
-        [12,'G5',0.5],[12.5,'F#5',0.5],[13,'E5',0.5],[13.5,'D5',0.5],[14,'E5',2],
-      ]},
-      { wave: 'pulse', duty: 0.5, vol: 0.22, notes: [
-        [0,'E4',0.5],[1,'E4',0.5],[2,'E4',0.5],[3,'E4',0.5],
-        [4,'C4',0.5],[5,'C4',0.5],[6,'C4',0.5],[7,'C4',0.5],
-        [8,'D4',0.5],[9,'D4',0.5],[10,'D4',0.5],[11,'D4',0.5],
-        [12,'B3',0.5],[13,'B3',0.5],[14,'B3',0.5],[15,'B3',0.5],
-      ]},
-      { wave: 'triangle', vol: 0.6, notes:
-        PUMP(0,4,'E1','E2').concat(PUMP(4,8,'C1','C2')).concat(PUMP(8,12,'D1','D2')).concat(PUMP(12,16,'B1','B2')) },
-      { wave: 'noise', vol: 0.4, notes:
-        KICKS([0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15])
-          .concat([[2,null,0.25],[6,null,0.25],[10,null,0.25],[14,null,0.25]])
-          .concat(HATS(0,16,0.5,0.125)) },
+      { wave: 'pulse', duty: 0.125, vol: 0.48, notes: mel('E5 E5 G5 B5x1 A5 G5 E5 F#5 G5 A5x1 B5x1 A5 G5 E5 E5 G5 B5x1 D6x1 C6 B5x1 A5 G5 F#5x1 E5x1') },
+      { wave: 'pulse', duty: 0.5, vol: 0.16, notes: ARP(['E4', 'G4', 'B4'], 0, 16, 1) },
+      { wave: 'triangle', vol: 0.6, notes: PUMP(0, 4, 'E1', 'E2').concat(PUMP(4, 8, 'C1', 'C2')).concat(PUMP(8, 12, 'D1', 'D2')).concat(PUMP(12, 16, 'B1', 'B2')) },
+      { wave: 'noise', vol: 0.38, notes: DRIVE() },
     ],
   },
 
   'route1-theme': {
-    id: 'route1-theme', title: 'Road Out of Dawnwick (route, original)', bpm: 132, loop: true,
+    id: 'route1-theme', title: 'Road Out, Loud (Arden route, original)', bpm: 138, loop: true,
     tracks: [
-      { wave: 'pulse', duty: 0.5, vol: 0.45, notes: [
-        [0,'D5',0.5],[0.5,'F#5',0.5],[1,'A5',0.5],[1.5,'D6',0.5],[2,'B5',1],[3,'A5',0.5],[3.5,'G5',0.5],
-        [4,'F#5',0.5],[4.5,'A5',0.5],[5,'D5',0.5],[5.5,'F#5',0.5],[6,'G5',1],[7,'E5',1],
-        [8,'A5',0.5],[8.5,'G5',0.5],[9,'F#5',0.5],[9.5,'E5',0.5],[10,'D5',1],[11,'F#5',1],
-        [12,'G5',0.5],[12.5,'A5',0.5],[13,'B5',0.5],[13.5,'A5',0.5],[14,'G5',1],[15,'F#5',1],
-      ]},
-      { wave: 'triangle', vol: 0.55, notes: [
-        [0,'D3',1],[1,'A2',1],[2,'B2',1],[3,'G2',1],[4,'D3',1],[5,'A2',1],[6,'G2',1],[7,'A2',1],
-        [8,'D3',1],[9,'A2',1],[10,'B2',1],[11,'G2',1],[12,'E3',1],[13,'A2',1],[14,'D3',1],[15,'A2',1],
-      ]},
-      { wave: 'noise', vol: 0.2, notes: HATS(0,16,0.5,0.125) },
+      { wave: 'pulse', duty: 0.5, vol: 0.44, notes: mel('D5 F#5 A5x1 D6 C#6 B5x1 A5 F#5 G5 A5x1 F#5 D5x1 A5 G5 F#5 E5 D5x1.5 F#5 G5 A5 B5 A5 G5x1 F#5x1') },
+      { wave: 'pulse', duty: 0.25, vol: 0.14, notes: ARP(['F#4', 'A4', 'D5'], 0, 16, 1) },
+      { wave: 'triangle', vol: 0.55, notes: mel('D2 A2 B2 G2 D2 A2 G2 A2 D2 A2 B2 G2 E2 A2 D2x2', 1) },
+      { wave: 'noise', vol: 0.26, notes: HALF() },
     ],
   },
 
   'pallet-theme': {
-    id: 'pallet-theme', title: 'Hometown Morning (Dawnwick, original)', bpm: 96, loop: true,
+    id: 'pallet-theme', title: 'Hometown Morning Groove (Dawnwick, original)', bpm: 100, loop: true,
     tracks: [
-      { wave: 'pulse', duty: 0.5, vol: 0.4, notes: [
-        [0,'G4',1],[1,'A4',1],[2,'B4',1],[3,'C5',2],[5,'B4',1],
-        [6,'A4',1],[7,'G4',1],[8,'A4',1],[9,'G4',2.5],[11.5,'F#4',0.5],
-        [12,'G4',1],[13,'A4',1],[14,'B4',1],[15,'D5',2],[17,'C5',1],
-        [18,'B4',1],[19,'A4',1],[20,'B4',1],[21,'G4',3],
-      ]},
-      { wave: 'triangle', vol: 0.5, notes: [
-        [0,'G2',3],[3,'C3',3],[6,'D3',3],[9,'G2',3],
-        [12,'E3',3],[15,'C3',3],[18,'D3',3],[21,'G2',3],
-      ]},
-      { wave: 'noise', vol: 0.12, notes: [[2,null,0.25],[5,null,0.25],[8,null,0.25],[11,null,0.25],[14,null,0.25],[17,null,0.25],[20,null,0.25],[23,null,0.25]] },
+      { wave: 'pulse', duty: 0.5, vol: 0.4, notes: mel('G4 A4 B4x1 C5 B4 A4x1 G4 A4 B4x1.5 A4 G4x1 A4 B4 C5x1 D5 C5 B4x1 A4x1 G4 A4 B4 G4x1.5') },
+      { wave: 'pulse', duty: 0.25, vol: 0.14, notes: ARP(['B3', 'D4', 'G4'], 0, 16, 2) },
+      { wave: 'triangle', vol: 0.5, notes: mel('G2x2 C3x2 D3x2 G2x2 E3x2 C3x2 D3x2 G2x2', 1) },
+      { wave: 'noise', vol: 0.15, notes: KICKS([0, 8]).concat(HATS(4, 16, 4, 0.125)) },
     ],
   },
 
   'viridian-theme': {
-    id: 'viridian-theme', title: 'Crossroads City (Fernmere, original)', bpm: 120, loop: true,
+    id: 'viridian-theme', title: 'Crossroads Pop (Fernmere register, original)', bpm: 124, loop: true,
     tracks: [
-      { wave: 'pulse', duty: 0.25, vol: 0.45, notes: [
-        [0,'E5',0.5],[0.5,'G5',0.5],[1,'A5',1],[2,'G5',0.5],[2.5,'E5',0.5],[3,'D5',1],
-        [4,'E5',1],[5,'C5',1],[6,'D5',1],[7,'E5',1],
-        [8,'F5',0.5],[8.5,'A5',0.5],[9,'G5',1],[10,'E5',0.5],[10.5,'D5',0.5],[11,'C5',1],
-        [12,'D5',1],[13,'E5',1],[14,'G5',1],[15,'C6',1],
-      ]},
-      { wave: 'triangle', vol: 0.55, notes: [
-        [0,'C3',1],[1,'E3',1],[2,'F3',1],[3,'G3',1],[4,'A3',1],[5,'G3',1],[6,'F3',1],[7,'E3',1],
-        [8,'F3',1],[9,'A3',1],[10,'G3',1],[11,'E3',1],[12,'D3',1],[13,'G3',1],[14,'C3',1],[15,'G2',1],
-      ]},
-      { wave: 'noise', vol: 0.22, notes: HATS(0,16,0.5,0.125).concat(KICKS([0,4,8,12])) },
+      { wave: 'pulse', duty: 0.25, vol: 0.44, notes: mel('E5 G5 A5x1 G5 E5 D5x1 E5x1 C5 D5 E5x1 G5x1 F5 A5 G5x1 E5 D5 C5x1 D5 E5 G5x1 C6x2') },
+      { wave: 'pulse', duty: 0.5, vol: 0.15, notes: ARP(['E4', 'G4', 'C5'], 0, 16, 1) },
+      { wave: 'triangle', vol: 0.55, notes: mel('C2 E2 F2 G2 A2 G2 F2 E2 F2 A2 G2 E2 D2 G2 C2x2', 1) },
+      { wave: 'noise', vol: 0.26, notes: HALF() },
     ],
   },
 
   'center-theme': {
-    id: 'center-theme', title: 'Healing Light (Center, original)', bpm: 88, loop: true,
+    id: 'center-theme', title: 'Soft Reset (Center, original)', bpm: 92, loop: true,
     tracks: [
-      { wave: 'pulse', duty: 0.5, vol: 0.32, notes: [
-        [0,'F5',1],[1,'A5',1],[2,'C6',2],[4,'A5',1],[5,'G5',1],[6,'F5',2],
-        [8,'E5',1],[9,'G5',1],[10,'Bb5',2],[12,'A5',1],[13,'G5',1],[14,'F5',2],
-      ]},
-      { wave: 'pulse', duty: 0.5, vol: 0.16, notes: [
-        [0,'F3',4],[4,'C3',4],[8,'Bb2',4],[12,'F3',4],
-      ]},
-      { wave: 'triangle', vol: 0.5, notes: [
-        [0,'F2',2],[2,'C3',2],[4,'F2',2],[6,'C3',2],
-        [8,'Bb2',2],[10,'F2',2],[12,'C3',2],[14,'F2',2],
-      ]},
+      { wave: 'pulse', duty: 0.5, vol: 0.3, notes: mel('F5 A5 C6x2 A5 G5 F5x2 E5 G5 Bb5x2 A5 G5 F5x1 E5x1 D5x1 F5x3') },
+      { wave: 'pulse', duty: 0.5, vol: 0.14, notes: mel('F3x4 C3x4 Bb2x4 F3x4', 1) },
+      { wave: 'triangle', vol: 0.5, notes: mel('F2x2 C3x2 F2x2 C3x2 Bb2x2 F2x2 C3x2 F2x2', 1) },
     ],
   },
 
   'pewter-theme': {
-    id: 'pewter-theme', title: 'Stone & Slate (Flintridge, original)', bpm: 104, loop: true,
+    id: 'pewter-theme', title: 'Stone & Swagger (Flintridge register, original)', bpm: 110, loop: true,
     tracks: [
-      { wave: 'pulse', duty: 0.5, vol: 0.45, notes: [
-        [0,'E5',1],[1,'G5',1],[2,'A5',1],[3,'B5',1],[4,'C6',2],[6,'B5',1],[7,'A5',1],
-        [8,'G5',1],[9,'A5',1],[10,'B5',2],[12,'A5',1],[13,'G5',1],[14,'E5',2],
-      ]},
-      { wave: 'triangle', vol: 0.55, notes: [
-        [0,'E2',2],[2,'G2',2],[4,'A2',2],[6,'B2',2],
-        [8,'C3',2],[10,'B2',2],[12,'A2',2],[14,'E2',2],
-      ]},
-      { wave: 'noise', vol: 0.25, notes:
-        [[2,null,0.25],[6,null,0.25],[10,null,0.25],[14,null,0.25]].concat(HATS(0,16,0.5,0.125)) },
+      { wave: 'pulse', duty: 0.5, vol: 0.44, notes: mel('E5x1 G5 A5 B5x1 C6x1 B5 A5 G5x1 A5 B5 Rx1 G5x1 A5 B5 C6x1 B5x1 A5 G5 E5x2.5 R') },
+      { wave: 'pulse', duty: 0.25, vol: 0.13, notes: ARP(['E4', 'G4', 'B4'], 0, 16, 2) },
+      { wave: 'triangle', vol: 0.55, notes: mel('E2x2 G2x2 A2x2 B2x2 C3x2 B2x2 A2x2 E2x2', 1) },
+      { wave: 'noise', vol: 0.3, notes: STONE() },
     ],
   },
 
   'gym-theme': {
-    id: 'gym-theme', title: 'House of Badges (gym, original)', bpm: 144, loop: true,
+    id: 'gym-theme', title: 'Full House (gym, original)', bpm: 150, loop: true,
     tracks: [
-      { wave: 'pulse', duty: 0.125, vol: 0.5, notes: [
-        [0,'B4',0.5],[0.5,'D5',0.5],[1,'F#5',0.5],[1.5,'B5',0.5],[2,'A5',1],[3,'G5',1],
-        [4,'F#5',0.5],[4.5,'E5',0.5],[5,'D5',0.5],[5.5,'E5',0.5],[6,'F#5',1],[7,'E5',1],
-        [8,'B4',0.5],[8.5,'D5',0.5],[9,'E5',0.5],[9.5,'F#5',0.5],[10,'G5',1],[11,'F#5',1],
-        [12,'E5',1],[13,'D5',1],[14,'B4',2],
-      ]},
-      { wave: 'triangle', vol: 0.6, notes: [
-        [0,'B1',1],[1,'B1',1],[2,'G2',1],[3,'G2',1],[4,'A2',1],[5,'A2',1],[6,'F#2',1],[7,'F#2',1],
-        [8,'B1',1],[9,'B1',1],[10,'G2',1],[11,'G2',1],[12,'A2',1],[13,'F#2',1],[14,'B1',2],
-      ]},
-      { wave: 'noise', vol: 0.4, notes:
-        KICKS([0,4,8,12]).concat([[4,null,0.25],[12,null,0.25]]).concat(HATS(0,16,0.5,0.125)) },
+      { wave: 'pulse', duty: 0.125, vol: 0.48, notes: mel('B4 D5 F#5x1 B5 A5 G5x1 F#5 E5 D5x1 E5 F#5 Rx1 B4 D5 E5 F#5 G5x1 F#5 R E5x1 D5 B4x2 R') },
+      { wave: 'pulse', duty: 0.5, vol: 0.17, notes: mel('B3 F#4 B3 F#4 G3 E4 G3 E4 A3 F#4 A3 F#4 B3x2 F#4x2', 1) },
+      { wave: 'triangle', vol: 0.6, notes: PUMP(0, 4, 'B1', 'B2').concat(PUMP(4, 8, 'G1', 'G2')).concat(PUMP(8, 12, 'A1', 'A2')).concat(PUMP(12, 16, 'F#1', 'F#2')) },
+      { wave: 'noise', vol: 0.38, notes: DRIVE() },
     ],
   },
 
-  // ---- W12-T4 ceremony loops: one theme per ceremony (leader / legendary /
-  // contest / the shared Mart). Original melodies, each with its own interval
-  // fingerprint (verify-audio [9]); wiring pinned by verify-audio [8]. ----
+  // ---- ceremony loops: one theme per ceremony (leader / legendary /
+  // contest / the shared Mart) — viral-pass recompositions, each with its
+  // own interval fingerprint (verify-audio [9]); wiring pinned by [8c]. ----
   'battle-leader-theme': {
-    id: 'battle-leader-theme', title: "The Leader's Standard (leader battle, original)", bpm: 172, loop: true,
+    id: 'battle-leader-theme', title: 'Standard of the House (leader battle, original)', bpm: 176, loop: true,
     tracks: [
-      { wave: 'pulse', duty: 0.25, vol: 0.5, notes: [
-        [0,'D5',0.75],[0.75,'F5',0.25],[1,'A5',0.5],[1.5,'D6',0.5],[2,'C6',0.75],[2.75,'A5',0.25],[3,'F5',0.5],[3.5,'E5',0.5],
-        [4,'F5',0.75],[4.75,'A5',0.25],[5,'D6',0.5],[5.5,'C6',0.5],[6,'Bb5',0.5],[6.5,'A5',0.5],[7,'G5',0.5],[7.5,'F5',0.5],
-        [8,'E5',0.75],[8.75,'F5',0.25],[9,'G5',0.5],[9.5,'A5',0.5],[10,'Bb5',1],[11,'A5',0.5],[11.5,'G5',0.5],
-        [12,'A5',0.75],[12.75,'C6',0.25],[13,'F6',0.5],[13.5,'E6',0.5],[14,'D6',2],
-      ]},
-      { wave: 'pulse', duty: 0.5, vol: 0.18, notes: [
-        [0,'D4',1],[1,'F4',1],[2,'A4',1],[3,'F4',1],[4,'Bb3',1],[5,'D4',1],[6,'F4',1],[7,'A4',1],
-        [8,'C4',1],[9,'E4',1],[10,'G4',1],[11,'E4',1],[12,'F4',1],[13,'A4',1],[14,'D4',2],
-      ]},
-      { wave: 'triangle', vol: 0.58, notes:
-        PUMP(0,4,'D2','D3').concat(PUMP(4,8,'Bb1','Bb2')).concat(PUMP(8,12,'C2','C3')).concat(PUMP(12,16,'A1','A2')) },
-      { wave: 'noise', vol: 0.3, notes: KICKS([0,2,4,6,8,10,12,14]).concat(HATS(0,16,0.5,0.125)) },
+      { wave: 'pulse', duty: 0.25, vol: 0.48, notes: mel('D5x.75 F5x.25 A5 D6 C6x1 A5 F5 F5x.75 A5x.25 D6 C6 Bb5x1 A5 G5 E5x.75 F5x.25 G5 A5 Bb5x1 A5 G5 A5x.75 C6x.25 F6 E6 D6x2') },
+      { wave: 'pulse', duty: 0.5, vol: 0.17, notes: mel('D4x2 F4x2 Bb3x2 A3x2 C4x2 E4x2 F4x2 D4x2', 1) },
+      { wave: 'triangle', vol: 0.58, notes: PUMP(0, 4, 'D2', 'D3').concat(PUMP(4, 8, 'Bb1', 'Bb2')).concat(PUMP(8, 12, 'C2', 'C3')).concat(PUMP(12, 16, 'A1', 'A2')) },
+      { wave: 'noise', vol: 0.34, notes: DRIVE() },
     ],
   },
 
   'battle-legendary-theme': {
-    id: 'battle-legendary-theme', title: 'Presence of the Sovereign (legendary battle, original)', bpm: 120, loop: true,
+    id: 'battle-legendary-theme', title: 'Sovereign Weather (legendary battle, original)', bpm: 126, loop: true,
     tracks: [
-      { wave: 'pulse', duty: 0.5, vol: 0.46, notes: [
-        [0,'A4',2],[2,'E5',2],[4,'C6',3],[7,'B5',1],[8,'A5',2],[10,'G5',1],[11,'E5',1],[12,'F5',2],[14,'E5',2],
-      ]},
-      { wave: 'pulse', duty: 0.125, vol: 0.2, notes: [
-        [4,'E5',1],[5,'C5',1],[6,'D5',2],[12,'A4',2],[14,'B4',2],
-      ]},
-      { wave: 'triangle', vol: 0.6, notes: [
-        [0,'A2',4],[4,'F2',4],[8,'C3',4],[12,'E2',4],
-      ]},
-      { wave: 'noise', vol: 0.22, notes: KICKS([0,4,8,12]) },
+      { wave: 'pulse', duty: 0.5, vol: 0.46, notes: mel('A4x2 E5x2 C6x3 B5x1 A5x2 G5x1 E5x1 F5x2 E5x2') },
+      { wave: 'pulse', duty: 0.125, vol: 0.18, notes: mel('A3x4 F3x4 C3x4 E3x4', 1) },
+      { wave: 'triangle', vol: 0.6, notes: mel('A2x4 F2x4 C3x4 E2x4', 1) },
+      { wave: 'noise', vol: 0.25, notes: KICKS([0, 4, 8, 12]).concat(CLAPS([6, 14])).concat(HATS(0, 16, 2, 0.125)) },
     ],
   },
 
   'contest-theme': {
-    id: 'contest-theme', title: 'Appeal in Bloom (contest, original)', bpm: 138, loop: true,
+    id: 'contest-theme', title: 'Center Stage (contest, original)', bpm: 140, loop: true,
     tracks: [
-      { wave: 'pulse', duty: 0.125, vol: 0.44, notes: [
-        [0,'E5',0.5],[0.5,'G5',0.5],[1,'C6',1],[2,'B5',0.5],[2.5,'G5',0.5],[3,'A5',1],
-        [4,'G5',0.5],[4.5,'E5',0.5],[5,'F5',0.5],[5.5,'A5',0.5],[6,'G5',1],[7,'E5',1],
-        [8,'F5',0.5],[8.5,'A5',0.5],[9,'D6',1],[10,'C6',0.5],[10.5,'A5',0.5],[11,'G5',1],
-        [12,'A5',0.5],[12.5,'F5',0.5],[13,'E5',0.5],[13.5,'G5',0.5],[14,'C6',2],
-      ]},
-      { wave: 'pulse', duty: 0.5, vol: 0.16, notes: [
-        [0,'E4',2],[2,'G4',2],[4,'A4',2],[6,'G4',2],[8,'F4',2],[10,'A4',2],[12,'G4',2],[14,'E4',2],
-      ]},
-      { wave: 'triangle', vol: 0.55, notes: [
-        [0,'C2',1],[1,'G2',1],[2,'C2',1],[3,'G2',1],[4,'F2',1],[5,'C3',1],[6,'G2',1],[7,'B2',1],
-        [8,'F2',1],[9,'C3',1],[10,'D2',1],[11,'A2',1],[12,'F2',1],[13,'C3',1],[14,'G2',2],
-      ]},
-      { wave: 'noise', vol: 0.12, notes: HATS(0, 16, 1, 0.125) },
+      { wave: 'pulse', duty: 0.125, vol: 0.44, notes: mel('E5 G5 C6x1 B5 G5 A5x1 G5 E5 F5 A5 G5x1 E5 R F5 A5 D6x1 C6 A5 G5x1 A5 F5 E5 G5 C6x2') },
+      { wave: 'pulse', duty: 0.5, vol: 0.15, notes: ARP(['E4', 'G4'], 0, 16, 1) },
+      { wave: 'triangle', vol: 0.55, notes: mel('C2 G2 C2 G2 F2 C3 G2 B2 F2 C3 D2 A2 F2 C3 G2x2', 1) },
+      { wave: 'noise', vol: 0.24, notes: HALF() },
     ],
   },
 
   'mart-theme': {
-    id: 'mart-theme', title: 'Open All Hours (Mart, original)', bpm: 100, loop: true,
+    id: 'mart-theme', title: 'Checkout Groove (Mart, original)', bpm: 104, loop: true,
     tracks: [
-      { wave: 'pulse', duty: 0.5, vol: 0.32, notes: [
-        [0,'A4',1],[1,'C5',1],[2,'F5',1.5],[3.5,'E5',0.5],[4,'D5',1],[5,'C5',1],[6,'A4',2],
-        [8,'Bb4',1],[9,'D5',1],[10,'C5',1.5],[11.5,'A4',0.5],[12,'G4',1],[13,'A4',1],[14,'F4',2],
-      ]},
-      { wave: 'pulse', duty: 0.125, vol: 0.15, notes: [
-        [0,'F4',2],[2,'A4',2],[4,'Bb3',2],[6,'A3',2],[8,'G3',2],[10,'A3',2],[12,'C4',2],[14,'F3',2],
-      ]},
-      { wave: 'triangle', vol: 0.5, notes: [
-        [0,'F2',2],[2,'C3',2],[4,'Bb1',2],[6,'C2',2],[8,'D2',2],[10,'C2',2],[12,'Bb1',2],[14,'F2',2],
-      ]},
+      { wave: 'pulse', duty: 0.5, vol: 0.34, notes: mel('A4 C5 F5x1.5 E5 D5 C5 A4x1 Bb4 C5x1 A4 G4x1 A4 C5 D5x1 C5 A4 G4x1 G4x1 A4 F4x2 R') },
+      { wave: 'pulse', duty: 0.125, vol: 0.14, notes: ARP(['F4', 'A4', 'C5'], 0, 16, 1) },
+      { wave: 'triangle', vol: 0.52, notes: PUMP(0, 4, 'F1', 'F2').concat(PUMP(4, 8, 'Bb1', 'Bb2')).concat(PUMP(8, 12, 'C2', 'C3')).concat(PUMP(12, 16, 'F1', 'F2')) },
+      { wave: 'noise', vol: 0.22, notes: KICKS([0, 8]).concat(CLAPS([4, 12])).concat(HATS(0.5, 16, 0.5, 0.125)) },
     ],
   },
 
-  // ---- W12 region pairs I: one town+route identity per region (NO-SAME-KIT
-  // audio charter). Original melodies, each with its own interval fingerprint
-  // (verify-audio [9] proves no two leads share an interval sequence). ----
+  // ---- region pairs: one town+route identity per region (NO-SAME-KIT
+  // audio charter), recomposed in the viral idiom. ----
   'amber-town-theme': {
-    id: 'amber-town-theme', title: 'Salt & Citrus (Amber town, original)', bpm: 104, loop: true,
+    id: 'amber-town-theme', title: 'Salt Air Pop (Amber town, original)', bpm: 108, loop: true,
     tracks: [
-      { wave: 'pulse', duty: 0.25, vol: 0.42, notes: [
-        [0,'G4',1],[1,'C5',1],[2,'E5',1.5],[3.5,'D5',0.5],
-        [4,'C5',1],[5,'A4',1],[6,'G4',2],
-        [8,'A4',1],[9,'C5',1],[10,'D5',1.5],[11.5,'E5',0.5],
-        [12,'G5',1],[13,'E5',1],[14,'D5',1],[15,'C5',1],
-      ]},
-      { wave: 'pulse', duty: 0.5, vol: 0.18, notes: [
-        [0,'E4',2],[2,'G4',2],[4,'A4',2],[6,'E4',2],
-        [8,'F4',2],[10,'A4',2],[12,'G4',2],[14,'E4',2],
-      ]},
-      { wave: 'triangle', vol: 0.5, notes: [
-        [0,'C3',2],[2,'G2',2],[4,'A2',2],[6,'E2',2],
-        [8,'F2',2],[10,'C3',2],[12,'G2',2],[14,'C3',2],
-      ]},
-      { wave: 'noise', vol: 0.15, notes: HATS(0, 16, 1, 0.125).concat(KICKS([0, 8])) },
+      { wave: 'pulse', duty: 0.25, vol: 0.42, notes: mel('G4 C5 E5x1.5 D5 C5 A4 G4x1 A4 C5x1 G4 E4x1 A4 C5 D5x1.5 E5 G5 E5 E5 D5 C5x2.5 R') },
+      { wave: 'pulse', duty: 0.5, vol: 0.15, notes: ARP(['E4', 'G4'], 0, 16, 1) },
+      { wave: 'triangle', vol: 0.5, notes: mel('C3x2 G2x2 A2x2 E2x2 F2x2 C3x2 G2x2 C3x2', 1) },
+      { wave: 'noise', vol: 0.18, notes: KICKS([0, 8]).concat(CLAPS([8])).concat(HATS(0.5, 16, 1, 0.125)) },
     ],
   },
 
   'amber-route-theme': {
-    id: 'amber-route-theme', title: 'Trade Wind Run (Amber route, original)', bpm: 122, loop: true,
+    id: 'amber-route-theme', title: 'Trade Wind Sprint (Amber route, original)', bpm: 128, loop: true,
     tracks: [
-      { wave: 'pulse', duty: 0.125, vol: 0.45, notes: [
-        [0,'A4',0.75],[0.75,'C5',0.75],[1.5,'E5',0.75],[2.25,'A5',0.75],[3,'G5',1],
-        [4,'E5',1],[5,'D5',0.5],[5.5,'E5',0.5],[6,'C5',2],
-        [8,'D5',0.75],[8.75,'E5',0.75],[9.5,'G5',0.75],[10.25,'E5',0.75],[11,'A5',1],
-        [12,'G5',1],[13,'E5',1],[14,'A4',2],
-      ]},
-      { wave: 'pulse', duty: 0.5, vol: 0.18, notes: [
-        [0,'E4',1],[2,'A4',1],[4,'C5',1],[6,'G4',1],
-        [8,'F4',1],[10,'A4',1],[12,'B4',1],[14,'E4',1],
-      ]},
-      { wave: 'triangle', vol: 0.55, notes:
-        PUMP(0,4,'A1','A2').concat(PUMP(4,8,'G1','G2')).concat(PUMP(8,12,'F1','F2')).concat(PUMP(12,16,'E1','E2')) },
-      { wave: 'noise', vol: 0.25, notes: HATS(0, 16, 0.5, 0.125).concat(KICKS([0, 4, 8, 12])) },
+      { wave: 'pulse', duty: 0.125, vol: 0.45, notes: mel('A4 C#5 E5x.75 A5x.75 G5x1 E5 D5 E5x1 C#5 A4x1 Rx1 D5 E5 G5x.75 E5x.75 A5x1 G5 E5x1 D5 A4x2 R') },
+      { wave: 'pulse', duty: 0.5, vol: 0.14, notes: ARP(['E4', 'A4', 'C#5'], 0, 16, 1) },
+      { wave: 'triangle', vol: 0.55, notes: PUMP(0, 4, 'A1', 'A2').concat(PUMP(4, 8, 'G1', 'G2')).concat(PUMP(8, 12, 'F1', 'F2')).concat(PUMP(12, 16, 'E1', 'E2')) },
+      { wave: 'noise', vol: 0.26, notes: HALF() },
     ],
   },
 
   'yamato-town-theme': {
-    id: 'yamato-town-theme', title: 'Temple Bell Morning (Yamato town, original)', bpm: 92, loop: true,
+    id: 'yamato-town-theme', title: 'Temple Bell Dusk (Yamato town, original)', bpm: 96, loop: true,
     tracks: [
-      { wave: 'pulse', duty: 0.5, vol: 0.4, notes: [
-        [0,'A4',1.5],[1.5,'D5',1.5],[3,'F#5',1],[4,'E5',2],[6,'D5',1],[7,'C#5',1],
-        [8,'D5',1.5],[9.5,'F#5',1.5],[11,'A5',1],[12,'G5',1.5],[13.5,'F#5',0.5],[14,'E5',1],[15,'D5',1],
-      ]},
-      { wave: 'pulse', duty: 0.25, vol: 0.15, notes: [
-        [0,'F#4',1],[4,'A4',1],[8,'F#4',1],[12,'E4',1],
-      ]},
-      { wave: 'triangle', vol: 0.5, notes: [
-        [0,'D3',4],[4,'G2',4],[8,'D3',4],[12,'A2',4],
-      ]},
-      { wave: 'noise', vol: 0.1, notes: [[3.5,null,0.25],[7.5,null,0.25],[11.5,null,0.25],[15.5,null,0.25]] },
+      { wave: 'pulse', duty: 0.5, vol: 0.4, notes: mel('A4x1.5 D5x1.5 F5 E5 D5x2 C5 A4 D5x1 F5x1.5 A5x1.5 G5 F5 E5x1.5 D5x1.5 C5 D5') },
+      { wave: 'pulse', duty: 0.25, vol: 0.14, notes: mel('F4 Rx3 A4 Rx3 F4 Rx3 E4 Rx3', 1) },
+      { wave: 'triangle', vol: 0.5, notes: mel('D3x4 G2x4 D3x4 A2x4', 1) },
+      { wave: 'noise', vol: 0.12, notes: [[0, null, 0.5], [8, null, 0.5]].concat(HATS(3.5, 16, 4, 0.125)) },
     ],
   },
 
   'yamato-route-theme': {
-    id: 'yamato-route-theme', title: 'Pilgrim Road (Yamato route, original)', bpm: 132, loop: true,
+    id: 'yamato-route-theme', title: 'Pilgrim Sprint (Yamato route, original)', bpm: 136, loop: true,
     tracks: [
-      { wave: 'pulse', duty: 0.25, vol: 0.45, notes: [
-        [0,'E5',0.5],[0.5,'B4',0.5],[1,'E5',0.5],[1.5,'G5',0.5],[2,'A5',1],[3,'G5',1],
-        [4,'E5',0.5],[4.5,'D5',0.5],[5,'B4',0.5],[5.5,'D5',0.5],[6,'E5',2],
-        [8,'G5',0.5],[8.5,'A5',0.5],[9,'B5',1],[10,'A5',0.5],[10.5,'G5',0.5],[11,'E5',1],
-        [12,'D5',0.5],[12.5,'E5',0.5],[13,'G5',0.5],[13.5,'A5',0.5],[14,'B5',2],
-      ]},
-      { wave: 'pulse', duty: 0.5, vol: 0.16, notes: [
-        [0,'B3',1],[2,'G3',1],[4,'C4',1],[6,'D4',1],
-        [8,'E4',1],[10,'D4',1],[12,'B3',1],[14,'G3',1],
-      ]},
-      { wave: 'triangle', vol: 0.55, notes:
-        PUMP(0,4,'E1','E2').concat(PUMP(4,8,'G1','G2')).concat(PUMP(8,12,'A1','A2')).concat(PUMP(12,16,'B1','B2')) },
-      { wave: 'noise', vol: 0.22, notes: HATS(0, 16, 0.5, 0.125).concat(KICKS([0, 4, 8, 12])) },
+      { wave: 'pulse', duty: 0.25, vol: 0.45, notes: mel('E5 B4 E5 G5 A5x1 G5 E5 E5 D5 B4 D5 E5x2 G5 A5 B5x1 A5 G5 E5x1 D5 E5 G5 A5 B5x2') },
+      { wave: 'pulse', duty: 0.5, vol: 0.13, notes: ARP(['B3', 'E4', 'G4'], 0, 16, 1) },
+      { wave: 'triangle', vol: 0.55, notes: PUMP(0, 4, 'E1', 'E2').concat(PUMP(4, 8, 'G1', 'G2')).concat(PUMP(8, 12, 'A1', 'A2')).concat(PUMP(12, 16, 'B1', 'B2')) },
+      { wave: 'noise', vol: 0.26, notes: HALF() },
     ],
   },
 
   'maris-town-theme': {
-    id: 'maris-town-theme', title: 'Harbour Lights (Maris town, original)', bpm: 118, loop: true,
+    id: 'maris-town-theme', title: 'Harbour Bounce (Maris town, original)', bpm: 120, loop: true,
     tracks: [
-      { wave: 'pulse', duty: 0.125, vol: 0.44, notes: [
-        [0,'F5',0.5],[0.5,'A5',1],[1.5,'G5',0.5],[2,'F5',1],[3,'E5',0.5],[3.5,'F5',0.5],
-        [4,'C5',1.5],[5.5,'D5',0.5],[6,'E5',1],[7,'F5',1],
-        [8,'A5',0.5],[8.5,'G5',1],[9.5,'F5',0.5],[10,'E5',1],[11,'D5',1],
-        [12,'E5',0.5],[12.5,'C5',0.5],[13,'D5',1],[14,'F5',2],
-      ]},
-      { wave: 'pulse', duty: 0.5, vol: 0.16, notes: [
-        [0,'C4',2],[2,'A3',2],[4,'Bb3',2],[6,'C4',2],
-        [8,'A3',2],[10,'F3',2],[12,'G3',2],[14,'A3',2],
-      ]},
-      { wave: 'triangle', vol: 0.55, notes: [
-        [0,'F2',1],[1,'C3',1],[2,'F2',1],[3,'C3',1],[4,'Bb1',1],[5,'F2',1],[6,'C2',1],[7,'G2',1],
-        [8,'F2',1],[9,'C3',1],[10,'D2',1],[11,'A2',1],[12,'Bb1',1],[13,'F2',1],[14,'C2',2],
-      ]},
-      { wave: 'noise', vol: 0.2, notes: HATS(0, 16, 0.5, 0.125).concat(KICKS([0, 4, 8, 12])) },
+      { wave: 'pulse', duty: 0.125, vol: 0.44, notes: mel('F5 A5x1 G5 F5 E5 F5x1 C5x1.5 D5 E5 F5 Rx1 A5 G5x1 F5 E5 D5x1 C5 D5 C5 D5x1 F5x2') },
+      { wave: 'pulse', duty: 0.5, vol: 0.14, notes: ARP(['C4', 'F4', 'A4'], 0, 16, 1) },
+      { wave: 'triangle', vol: 0.55, notes: mel('F2 C3 F2 C3 Bb1 F2 C2 G2 F2 C3 D2 A2 Bb1 F2 C2x2', 1) },
+      { wave: 'noise', vol: 0.2, notes: HALF() },
     ],
   },
 
   'maris-route-theme': {
-    id: 'maris-route-theme', title: 'Open Water Road (Maris route, original)', bpm: 140, loop: true,
+    id: 'maris-route-theme', title: 'Open Water Sprint (Maris route, original)', bpm: 144, loop: true,
     tracks: [
-      { wave: 'pulse', duty: 0.25, vol: 0.46, notes: [
-        [0,'D5',0.5],[0.5,'D5',0.5],[1,'G5',0.5],[1.5,'A5',0.5],[2,'B5',1],[3,'A5',1],
-        [4,'G5',0.5],[4.5,'F#5',0.5],[5,'E5',0.5],[5.5,'D5',0.5],[6,'E5',1],[7,'F#5',1],
-        [8,'G5',0.5],[8.5,'G5',0.5],[9,'B5',0.5],[9.5,'D6',0.5],[10,'B5',1],[11,'A5',1],
-        [12,'B5',0.5],[12.5,'A5',0.5],[13,'G5',0.5],[13.5,'F#5',0.5],[14,'G5',2],
-      ]},
-      { wave: 'pulse', duty: 0.5, vol: 0.15, notes: [
-        [0,'B3',1],[1,'D4',1],[2,'G3',1],[3,'D4',1],[4,'E4',1],[5,'B3',1],[6,'A3',1],[7,'D4',1],
-        [8,'G3',1],[9,'B3',1],[10,'D4',1],[11,'A3',1],[12,'B3',1],[13,'D4',1],[14,'G3',2],
-      ]},
-      { wave: 'triangle', vol: 0.55, notes:
-        PUMP(0,4,'G1','G2').concat(PUMP(4,8,'E1','E2')).concat(PUMP(8,12,'D1','D2')).concat(PUMP(12,16,'G1','G2')) },
-      { wave: 'noise', vol: 0.3, notes: KICKS([0, 2, 4, 6, 8, 10, 12, 14]).concat(HATS(0, 16, 0.5, 0.125)) },
+      { wave: 'pulse', duty: 0.25, vol: 0.46, notes: mel('D5 D5 G5 A5 B5x1 A5 G5 G5 F#5 E5 D5 E5x1 F#5 R G5 G5 B5 D6 B5x1 A5 G5 B5 A5 G5 F#5 G5x2') },
+      { wave: 'pulse', duty: 0.5, vol: 0.13, notes: ARP(['B3', 'D4', 'G4'], 0, 16, 1) },
+      { wave: 'triangle', vol: 0.55, notes: PUMP(0, 4, 'G1', 'G2').concat(PUMP(4, 8, 'E1', 'E2')).concat(PUMP(8, 12, 'D1', 'D2')).concat(PUMP(12, 16, 'G1', 'G2')) },
+      { wave: 'noise', vol: 0.32, notes: DRIVE() },
     ],
   },
 
-  // ---- W12 region pairs II: Borea + Trial Grounds complete the charter —
-  // after this block every region owns its town+route pair and no region
-  // draws from Arden's legacy pool. Original melodies, each with its own
-  // interval fingerprint (verify-audio [9]). ----
   'borea-town-theme': {
-    id: 'borea-town-theme', title: 'First Snow Hush (Borea town, original)', bpm: 84, loop: true,
+    id: 'borea-town-theme', title: 'Snowfall Slow Jam (Borea town, original)', bpm: 88, loop: true,
     tracks: [
-      { wave: 'pulse', duty: 0.5, vol: 0.4, notes: [
-        [0,'E5',2],[2,'A5',1.5],[3.5,'G5',0.5],[4,'E5',2],[6,'D5',1],[7,'C5',1],
-        [8,'A4',2],[10,'B4',1],[11,'D5',1],[12,'E5',1.5],[13.5,'G5',0.5],[14,'A5',2],
-      ]},
-      { wave: 'pulse', duty: 0.25, vol: 0.14, notes: [
-        [0,'A4',2],[2,'C5',2],[4,'F4',2],[6,'A4',2],
-        [8,'D4',2],[10,'F4',2],[12,'E4',2],[14,'A4',2],
-      ]},
-      { wave: 'triangle', vol: 0.5, notes: [
-        [0,'A2',4],[4,'F2',4],[8,'D2',4],[12,'E2',4],
-      ]},
-      { wave: 'noise', vol: 0.08, notes: HATS(0, 16, 2, 0.125).concat([[7.5,null,0.25],[15.5,null,0.25]]) },
+      { wave: 'pulse', duty: 0.5, vol: 0.4, notes: mel('E5x2 A5x1.5 G5 E5x2 D5 C5 A4x1 A4x2 B4 D5 E5x1 E5x1.5 G5x.5 A5x2') },
+      { wave: 'pulse', duty: 0.25, vol: 0.13, notes: mel('A3x2 C4x2 F3x2 A3x2 D3x2 F3x2 E3x2 A3x2', 1) },
+      { wave: 'triangle', vol: 0.5, notes: mel('A2x4 F2x4 D2x4 E2x4', 1) },
+      { wave: 'noise', vol: 0.07, notes: HATS(0, 16, 4, 0.125).concat([[15.5, null, 0.25]]) },
     ],
   },
 
   'borea-route-theme': {
-    id: 'borea-route-theme', title: 'Long White Road (Borea route, original)', bpm: 148, loop: true,
+    id: 'borea-route-theme', title: 'Whiteout Run (Borea route, original)', bpm: 152, loop: true,
     tracks: [
-      { wave: 'pulse', duty: 0.25, vol: 0.46, notes: [
-        [0,'A5',0.5],[0.5,'F5',0.5],[1,'D5',0.5],[1.5,'F5',0.5],[2,'A5',1],[3,'G5',0.5],[3.5,'F5',0.5],
-        [4,'E5',0.5],[4.5,'F5',0.5],[5,'G5',0.5],[5.5,'A5',0.5],[6,'D6',1],[7,'C6',1],
-        [8,'A5',0.5],[8.5,'G5',0.5],[9,'F5',0.5],[9.5,'E5',0.5],[10,'F5',1],[11,'D5',1],
-        [12,'E5',0.5],[12.5,'F5',0.5],[13,'G5',0.5],[13.5,'A5',0.5],[14,'F5',2],
-      ]},
-      { wave: 'pulse', duty: 0.5, vol: 0.15, notes: [
-        [0,'F4',1],[2,'D4',1],[4,'Bb3',1],[6,'A3',1],
-        [8,'F4',1],[10,'D4',1],[12,'C4',1],[14,'A3',1],
-      ]},
-      { wave: 'triangle', vol: 0.55, notes:
-        PUMP(0,4,'D1','D2').concat(PUMP(4,8,'Bb1','Bb2')).concat(PUMP(8,12,'F1','F2')).concat(PUMP(12,16,'A1','A2')) },
-      { wave: 'noise', vol: 0.28, notes: KICKS([0, 2, 4, 6, 8, 10, 12, 14]).concat(HATS(0, 16, 0.5, 0.125)) },
+      { wave: 'pulse', duty: 0.25, vol: 0.46, notes: mel('A5 F5 D5 F5 A5x1 G5 F5 E5 F5 G5 A5 D6x1 C6 R A5 G5 F5 E5 F5x1 D5 R E5 F5 G5 A5 F5x2') },
+      { wave: 'pulse', duty: 0.5, vol: 0.12, notes: ARP(['F4', 'A4', 'D5'], 0, 16, 1) },
+      { wave: 'triangle', vol: 0.55, notes: PUMP(0, 4, 'D1', 'D2').concat(PUMP(4, 8, 'Bb1', 'Bb2')).concat(PUMP(8, 12, 'F1', 'F2')).concat(PUMP(12, 16, 'A1', 'A2')) },
+      { wave: 'noise', vol: 0.3, notes: DRIVE() },
     ],
   },
 
   'trial-town-theme': {
-    id: 'trial-town-theme', title: 'Bronze & Banner (Trial hub, original)', bpm: 100, loop: true,
+    id: 'trial-town-theme', title: 'Banner Day (Trial hub, original)', bpm: 104, loop: true,
     tracks: [
-      { wave: 'pulse', duty: 0.125, vol: 0.44, notes: [
-        [0,'C5',1],[1,'E5',1],[2,'G5',1],[3,'C6',1],[4,'B5',1.5],[5.5,'G5',0.5],[6,'A5',1],[7,'G5',1],
-        [8,'E5',1],[9,'F5',1],[10,'A5',1],[11,'G5',1],[12,'E5',1.5],[13.5,'D5',0.5],[14,'C5',2],
-      ]},
-      { wave: 'pulse', duty: 0.5, vol: 0.18, notes: [
-        [0,'G4',2],[2,'E4',2],[4,'D4',2],[6,'B4',2],
-        [8,'C5',2],[10,'F4',2],[12,'G4',2],[14,'E4',2],
-      ]},
-      { wave: 'triangle', vol: 0.55, notes: [
-        [0,'C3',2],[2,'G2',2],[4,'C3',2],[6,'G2',2],
-        [8,'F2',2],[10,'A2',2],[12,'G2',2],[14,'C3',2],
-      ]},
-      { wave: 'noise', vol: 0.3, notes:
-        KICKS([0, 4, 8, 12]).concat([[2,null,0.25],[6,null,0.25],[10,null,0.25],[14,null,0.25],[15,null,0.25],[15.5,null,0.25]]) },
+      { wave: 'pulse', duty: 0.125, vol: 0.44, notes: mel('C5 E5 G5 C6 B5x1.5 G5 A5x1 G5 E5x1 F5 D5x1 E5 F5 A5 G5x1 E5 D5x1 E5x1.5 D5x.5 C5x2') },
+      { wave: 'pulse', duty: 0.5, vol: 0.16, notes: mel('G3x2 E3x2 D3x2 B3x2 C4x2 F3x2 G3x2 E3x2', 1) },
+      { wave: 'triangle', vol: 0.55, notes: mel('C3x2 G2x2 C3x2 G2x2 F2x2 A2x2 G2x2 C3x2', 1) },
+      { wave: 'noise', vol: 0.26, notes: KICKS([0, 4, 8, 12]).concat(CLAPS([2, 6, 10, 14, 15])).concat(HATS(0, 16, 1, 0.125)) },
     ],
   },
 
   'trial-route-theme': {
-    id: 'trial-route-theme', title: 'The Seven Trials (Trial island, original)', bpm: 128, loop: true,
+    id: 'trial-route-theme', title: 'Trial by Tempo (Trial island, original)', bpm: 132, loop: true,
     tracks: [
-      { wave: 'pulse', duty: 0.25, vol: 0.46, notes: [
-        [0,'G5',0.5],[0.5,'D5',0.5],[1,'G5',0.5],[1.5,'Bb5',0.5],[2,'A5',1],[3,'G5',0.5],[3.5,'F5',0.5],
-        [4,'D5',1],[5,'F5',0.5],[5.5,'G5',0.5],[6,'D5',2],
-        [8,'Eb5',0.5],[8.5,'D5',0.5],[9,'C5',0.5],[9.5,'D5',0.5],[10,'Bb4',1],[11,'D5',1],
-        [12,'F5',0.5],[12.5,'G5',0.5],[13,'A5',0.5],[13.5,'Bb5',0.5],[14,'G5',2],
-      ]},
-      { wave: 'pulse', duty: 0.5, vol: 0.16, notes: [
-        [0,'Bb3',1],[2,'G3',1],[4,'F3',1],[6,'D4',1],
-        [8,'Eb4',1],[10,'C4',1],[12,'D4',1],[14,'G3',1],
-      ]},
-      { wave: 'triangle', vol: 0.55, notes:
-        PUMP(0,4,'G1','G2').concat(PUMP(4,8,'Eb1','Eb2')).concat(PUMP(8,12,'F1','F2')).concat(PUMP(12,16,'D1','D2')) },
-      { wave: 'noise', vol: 0.26, notes: KICKS([0, 4, 8, 12]).concat(HATS(0, 16, 0.5, 0.125)) },
+      { wave: 'pulse', duty: 0.25, vol: 0.46, notes: mel('G5 D5 G5 Bb5 A5x1 G5 F5 D5x1 F5 G5 D5x1.5 R Eb5 D5 C5 D5 Bb4x1 D5 R F5 G5 A5 Bb5 G5x2') },
+      { wave: 'pulse', duty: 0.5, vol: 0.13, notes: ARP(['Bb3', 'D4', 'G4'], 0, 16, 1) },
+      { wave: 'triangle', vol: 0.55, notes: PUMP(0, 4, 'G1', 'G2').concat(PUMP(4, 8, 'Eb1', 'Eb2')).concat(PUMP(8, 12, 'F1', 'F2')).concat(PUMP(12, 16, 'D1', 'D2')) },
+      { wave: 'noise', vol: 0.28, notes: HALF() },
     ],
   },
 };
 
 // ============================================================ SFX ====
+// Priority classes (mixing law — the engine ducks BGM under ALERT/STING):
+// ALERT = lowhp / error / spot / encounter; STING = fanfares & ceremonies;
+// everything else is MOMENT (short, never ducks, never competes).
 const SFXSET = {
   // --- UI set (contract §2.2 item 3) ---
-  'ui-blip':   { id:'ui-blip',   wave:'pulse', duty:0.5,   vol:0.35, env:[0.002,0.09], notes:[[0,'E6',1]] },
-  'ui-tick':   { id:'ui-tick',   wave:'pulse', duty:0.5,   vol:0.22, env:[0.002,0.06], notes:[[0,'A5',1]] },
-  'ui-back':   { id:'ui-back',   wave:'pulse', duty:0.5,   vol:0.32, env:[0.002,0.10], notes:[[0,'C5',1],[1,'G4',1.5]] },
-  'dialogue-blip': { id:'dialogue-blip', wave:'pulse', duty:0.125, vol:0.18, env:[0.001,0.03], notes:[[0,'G6',0.5]] },
-  'error-buzz': { id:'error-buzz', wave:'pulse', duty:0.25, vol:0.35, env:[0.005,0.15], notes:[[0,'A3',2],[2,'G3',2.5]] },
+  // ui-blip is pinned by verify-audio [5c]: one E6 note at vol 0.35 — the
+  // refresh is timbral only (duty 0.25 + tighter envelope = crisper pop).
+  'ui-blip':   { id:'ui-blip',   wave:'pulse', duty:0.25, vol:0.35, env:[0.001,0.07], notes:[[0,'E6',1]] },
+  'ui-tick':   { id:'ui-tick',   wave:'pulse', duty:0.25, vol:0.18, env:[0.001,0.045], notes:[[0,'C6',0.5]] },
+  'ui-back':   { id:'ui-back',   wave:'pulse', duty:0.25, vol:0.3, env:[0.002,0.09], notes:[[0,'E5',0.8],[0.8,'B4',1.2]] },
+  'dialogue-blip': { id:'dialogue-blip', wave:'pulse', duty:0.125, vol:0.15, env:[0.001,0.025], notes:[[0,'A6',0.5]] },
+  'error-buzz': { id:'error-buzz', wave:'pulse', duty:0.5, vol:0.3, env:[0.004,0.12], notes:[[0,'D3',1.5],[1.5,'C#3',2]] },
 
-  // --- encounter + transitions (gameux §6 three-beat rule) ---
-  'encounter-sting': { id:'encounter-sting', wave:'noise', vol:0.5, env:[0.005,0.25], notes:[
+  // --- encounter + transitions (gameux §6 three-beat rule: rustle beats at
+  // 0/0.9/1.8 and the melody entering at 2.8 are choreography — kept exact;
+  // the melody's pitches and drive are the viral pass's). ---
+  'encounter-sting': { id:'encounter-sting', wave:'noise', vol:0.45, env:[0.005,0.25], notes:[
     [0,null,1],[0.9,null,1],[1.8,null,1],           // grass rustle x3 (visual twin: rustle anim)
   ]},
-  'encounter-sting-melody': { id:'encounter-sting-melody', wave:'pulse', duty:0.125, vol:0.5, env:[0.004,0.2], notes:[
-    [2.8,'G4',1],[3.8,'A4',1],[4.8,'B4',1],[5.8,'C5',3],   // the "!" beat (visual twin: ! mark)
+  'encounter-sting-melody': { id:'encounter-sting-melody', wave:'pulse', duty:0.125, vol:0.48, env:[0.004,0.2], notes:[
+    [2.8,'E4',0.7],[3.5,'G4',0.7],[4.2,'C5',0.7],[4.9,'E5',2.5],   // the "!" beat (visual twin: ! mark)
   ]},
-  'transition-whoosh': { id:'transition-whoosh', wave:'noise', vol:0.35, env:[0.01,0.2], notes:[[0,null,4]] },
+  'transition-whoosh': { id:'transition-whoosh', wave:'noise', vol:0.32, env:[0.008,0.22], notes:[[0,null,4]] },
   'transition-fade':   { id:'transition-fade',   wave:'triangle', vol:0.2, env:[0.02,0.15], notes:[[0,'C5',2]] },
-  // Yellow homage: the trainer-spot alert — an original ascending two-note
-  // sting (visual twin: the "!" mark over the challenger).
-  'trainer-spot': { id:'trainer-spot', wave:'pulse', duty:0.125, vol:0.5, env:[0.002,0.12], notes:[[0,'E5',1],[1,'A5',2]] },
-  // W6 (audit D1): the Fly teleport's own cue — a falling sparkle, distinct
-  // from the screen-transition whoosh/fade the engine plays separately.
-  'warp': { id:'warp', wave:'pulse', duty:0.125, vol:0.35, env:[0.002,0.18], notes:[[0,'E6',0.5],[0.5,'C6',0.5],[1,'G5',0.5],[1.5,'E5',1.5]] },
+  // The trainer-spot alert — a sharp two-note "!" ping (visual twin: the
+  // "!" mark over the challenger). ALERT class.
+  'trainer-spot': { id:'trainer-spot', wave:'pulse', duty:0.125, vol:0.45, env:[0.002,0.12], notes:[[0,'A5',0.7],[0.7,'E6',1.8]] },
+  // The Fly teleport's own cue — a falling sparkle.
+  'warp': { id:'warp', wave:'pulse', duty:0.125, vol:0.33, env:[0.002,0.16], notes:[[0,'E6',0.5],[0.5,'C6',0.5],[1,'G5',0.5],[1.5,'E5',1.5]] },
 
   // --- battle beats ---
   'battle-hit':   { id:'battle-hit',   wave:'noise', vol:0.5,  env:[0.002,0.12], notes:[[0,null,2]] },
-  'battle-hit-tone': { id:'battle-hit-tone', wave:'pulse', duty:0.25, vol:0.4, env:[0.002,0.1], notes:[[0,'A2',1.5]] },
-  'battle-super': { id:'battle-super', wave:'pulse', duty:0.125, vol:0.5, env:[0.003,0.18], notes:[[0,'E5',1],[1,'G5',1],[2,'B5',2]] },
-  'battle-super-boom': { id:'battle-super-boom', wave:'noise', vol:0.55, env:[0.002,0.15], notes:[[0,null,2.5]] },
-  'battle-noteff': { id:'battle-noteff', wave:'pulse', duty:0.5, vol:0.3, env:[0.005,0.18], notes:[[0,'D3',2]] },
-  'battle-faint':  { id:'battle-faint',  wave:'pulse', duty:0.25, vol:0.45, env:[0.004,0.2], notes:[[0,'G4',1],[1,'E4',1],[2,'C4',1],[3,'A3',2]] },
-  'battle-run':   { id:'battle-run',   wave:'pulse', duty:0.5, vol:0.4, env:[0.002,0.08], notes:[[0,'E5',0.5],[0.6,'G5',0.5],[1.2,'A5',0.5],[1.8,'C6',0.5],[2.4,'E6',1.5]] },
+  'battle-hit-tone': { id:'battle-hit-tone', wave:'triangle', vol:0.45, env:[0.002,0.12], notes:[[0,'C2',1.5]] },
+  'battle-super': { id:'battle-super', wave:'pulse', duty:0.125, vol:0.48, env:[0.003,0.16], notes:[[0,'G5',0.6],[0.6,'C6',0.6],[1.2,'E6',0.6],[1.8,'G6',1.8]] },
+  'battle-super-boom': { id:'battle-super-boom', wave:'noise', vol:0.52, env:[0.002,0.15], notes:[[0,null,2.5]] },
+  'battle-noteff': { id:'battle-noteff', wave:'pulse', duty:0.5, vol:0.28, env:[0.005,0.16], notes:[[0,'A2',2]] },
+  'battle-faint':  { id:'battle-faint',  wave:'pulse', duty:0.25, vol:0.42, env:[0.004,0.2], notes:[[0,'A4',1],[1,'F4',1],[2,'D4',1],[3,'A3',2.5]] },
+  'battle-run':   { id:'battle-run',   wave:'pulse', duty:0.5, vol:0.38, env:[0.002,0.08], notes:[[0,'E5',0.45],[0.45,'G5',0.45],[0.9,'A5',0.45],[1.35,'C6',0.45],[1.8,'E6',1.4]] },
 
-  // --- catch theater (contract §2.2 item 2) ---
-  'catch-throw': { id:'catch-throw', wave:'noise', vol:0.4, env:[0.005,0.18], notes:[[0,null,3]] },
-  'catch-rattle': { id:'catch-rattle', wave:'noise', vol:0.5, env:[0.002,0.08], notes:[[0,null,1.5],[2.5,null,1.5],[5,null,1.5]] },
-  'catch-click': { id:'catch-click', wave:'pulse', duty:0.125, vol:0.6, env:[0.001,0.12], notes:[[0,'C6',1],[1,'E6',2]] },
-  'catch-breakout': { id:'catch-breakout', wave:'noise', vol:0.5, env:[0.002,0.2], notes:[[0,null,2]] },
-  'catch-breakout-tone': { id:'catch-breakout-tone', wave:'pulse', duty:0.25, vol:0.4, env:[0.003,0.18], notes:[[0,'E4',1],[1,'C4',1.5]] },
-  'catch-crit':  { id:'catch-crit',  wave:'triangle', vol:0.5, env:[0.002,0.15], notes:[[0,'E6',1],[1,'G6',1],[2,'B6',1],[3,'E7',2]] },
-  'catch-gotcha': { id:'catch-gotcha', wave:'pulse', duty:0.125, vol:0.55, env:[0.003,0.2], notes:[[0,'D6',1],[1,'F#6',1],[2,'A6',1],[3,'D7',2.5]] },
-  'dex-register': { id:'dex-register', wave:'pulse', duty:0.5, vol:0.5, env:[0.003,0.25], notes:[[0,'E5',1.5],[1.5,'G5',1.5],[3,'B5',1.5],[4.5,'E6',3]] },
+  // --- catch theater (contract §2.2 item 2; rattle timing is choreography
+  // for the ball wiggles — kept; click+gotcha are one designed pair) ---
+  'catch-throw': { id:'catch-throw', wave:'noise', vol:0.38, env:[0.005,0.18], notes:[[0,null,3]] },
+  'catch-rattle': { id:'catch-rattle', wave:'noise', vol:0.48, env:[0.002,0.08], notes:[[0,null,1.2],[2.5,null,1.2],[5,null,1.2]] },
+  'catch-click': { id:'catch-click', wave:'pulse', duty:0.125, vol:0.55, env:[0.001,0.1], notes:[[0,'E6',0.7],[0.7,'A6',1.8]] },
+  'catch-breakout': { id:'catch-breakout', wave:'noise', vol:0.48, env:[0.002,0.2], notes:[[0,null,2]] },
+  'catch-breakout-tone': { id:'catch-breakout-tone', wave:'pulse', duty:0.25, vol:0.38, env:[0.003,0.16], notes:[[0,'C5',0.8],[0.8,'G4',1.4]] },
+  'catch-crit':  { id:'catch-crit',  wave:'triangle', vol:0.5, env:[0.002,0.15], notes:[[0,'E6',0.8],[0.8,'G6',0.8],[1.6,'B6',0.8],[2.4,'E7',2]] },
+  'catch-gotcha': { id:'catch-gotcha', wave:'pulse', duty:0.125, vol:0.52, env:[0.003,0.2], notes:[[0,'C6',0.8],[0.8,'E6',0.8],[1.6,'G6',0.8],[2.4,'C7',2.4]] },
+  'dex-register': { id:'dex-register', wave:'pulse', duty:0.25, vol:0.48, env:[0.003,0.22], notes:[[0,'A5',1],[1,'C6',1],[2,'E6',1],[3,'A6',2.5]] },
 
-  // --- progression fanfares ---
-  'victory':  { id:'victory',  wave:'pulse', duty:0.125, vol:0.5, env:[0.003,0.2], notes:[[0,'G5',1],[1,'C6',1],[2,'E6',1],[3,'G6',2]] },
-  'fanfare':  { id:'fanfare',  wave:'pulse', duty:0.125, vol:0.55, env:[0.003,0.25], notes:[[0,'C5',1.5],[1.5,'E5',1.5],[3,'G5',1.5],[4.5,'C6',2],[6.5,'G5',1],[7.5,'C6',3]] },
-  'levelup':  { id:'levelup',  wave:'pulse', duty:0.25, vol:0.5, env:[0.003,0.2], notes:[[0,'C5',1],[1,'E5',1],[2,'G5',1],[3,'C6',2],[5,'E6',2],[7,'G6',3]] },
-  // W12-T4: the evolution ceremony's own sting (replaces the levelup reuse
-  // at evolveMon only; levelup keeps the level-up moment).
+  // --- progression fanfares (STING class: BGM ducks under each) ---
+  'victory':  { id:'victory',  wave:'pulse', duty:0.125, vol:0.5, env:[0.003,0.2], notes:[[0,'C6',0.7],[0.7,'E6',0.7],[1.4,'G6',0.7],[2.1,'C7',2.2]] },
+  'fanfare':  { id:'fanfare',  wave:'pulse', duty:0.125, vol:0.52, env:[0.003,0.25], notes:[[0,'C5',1],[1,'E5',1],[2,'G5',1],[3,'C6',1.5],[4.5,'B5',0.5],[5,'C6',2.5]] },
+  'levelup':  { id:'levelup',  wave:'pulse', duty:0.25, vol:0.5, env:[0.003,0.2], notes:[[0,'E5',0.7],[0.7,'G5',0.7],[1.4,'C6',0.7],[2.1,'E6',0.7],[2.8,'G6',2.2]] },
+  // The evolution ceremony's own sting — OWNED BY THE EVOLUTION CEREMONY
+  // BUILD; carried over byte-identical from the W12 table by its ruling.
   'evolution-fanfare': { id:'evolution-fanfare', wave:'pulse', duty:0.125, vol:0.5, env:[0.004,0.5], notes:[[0,'E5',1],[1,'G5',1],[2,'C6',1],[3,'E6',1],[4,'G6',2],[6,'C7',3]] },
-  'badge':    { id:'badge',    wave:'pulse', duty:0.125, vol:0.55, env:[0.003,0.3], notes:[[0,'G4',1],[1,'C5',1],[2,'E5',1],[3,'G5',1],[4,'C6',2],[6,'E6',1],[7,'G6',3]] },
-  'heal':     { id:'heal',     wave:'triangle', vol:0.5, env:[0.01,0.3], notes:[[0,'G4',1.5],[1.5,'C5',1.5],[3,'E5',1.5],[4.5,'G5',3]] },
-  'save-confirm': { id:'save-confirm', wave:'pulse', duty:0.5, vol:0.4, env:[0.002,0.12], notes:[[0,'C5',1],[1,'G5',2]] },
-  'lowhp':    { id:'lowhp',    wave:'pulse', duty:0.25, vol:0.5, env:[0.002,0.12], notes:[[0,'A4',1.5],[2,'A4',1.5],[4,'A4',1.5]] },
-  'item-fanfare': { id:'item-fanfare', wave:'pulse', duty:0.5, vol:0.45, env:[0.002,0.15], notes:[[0,'A5',1],[1,'D6',1],[2,'F#6',2]] },
-  'partner-happy': { id:'partner-happy', wave:'pulse', duty:0.125, vol:0.4, env:[0.001,0.06], notes:[[0,'B5',0.5],[0.7,'E6',0.75],[1.7,'B5',0.5],[2.4,'E6',1]] },
-  'map-enter': { id:'map-enter', wave:'triangle', vol:0.32, env:[0.01,0.25], notes:[[0,'C5',1],[1,'E5',1],[2,'G5',2]] },
+  'badge':    { id:'badge',    wave:'pulse', duty:0.25, vol:0.52, env:[0.003,0.3], notes:[[0,'G4',0.8],[0.8,'C5',0.8],[1.6,'E5',0.8],[2.4,'G5',0.8],[3.2,'C6',1.6],[4.8,'G5',0.8],[5.6,'C6',2.4]] },
+  'heal':     { id:'heal',     wave:'triangle', vol:0.45, env:[0.01,0.35], notes:[[0,'C5',1.2],[1.2,'E5',1.2],[2.4,'G5',1.2],[3.6,'C6',2.4]] },
+  'save-confirm': { id:'save-confirm', wave:'pulse', duty:0.5, vol:0.38, env:[0.002,0.12], notes:[[0,'G5',0.8],[0.8,'C6',1.6]] },
+  'lowhp':    { id:'lowhp',    wave:'pulse', duty:0.25, vol:0.42, env:[0.002,0.1], notes:[[0,'B4',1.1],[1.6,'B4',1.1],[3.2,'B4',1.6]] },
+  'item-fanfare': { id:'item-fanfare', wave:'pulse', duty:0.5, vol:0.45, env:[0.002,0.15], notes:[[0,'G5',0.7],[0.7,'C6',0.7],[1.4,'E6',1.8]] },
+  'partner-happy': { id:'partner-happy', wave:'pulse', duty:0.125, vol:0.4, env:[0.001,0.06], notes:[[0,'C6',0.5],[0.7,'E6',0.75],[1.7,'C6',0.5],[2.4,'E6',1]] },
+  'map-enter': { id:'map-enter', wave:'triangle', vol:0.3, env:[0.01,0.25], notes:[[0,'E5',1],[1,'A5',1.8]] },
 
-  // --- legacy call-site aliases (engine's original stub keys; same original melodies, kept working) ---
-  'blip':      { id:'blip',      wave:'pulse', duty:0.5, vol:0.35, env:[0.002,0.09], notes:[[0,'E6',1]] },
-  'tick':      { id:'tick',      wave:'pulse', duty:0.5, vol:0.22, env:[0.002,0.06], notes:[[0,'A5',1]] },
-  'back':      { id:'back',      wave:'pulse', duty:0.5, vol:0.32, env:[0.002,0.10], notes:[[0,'C5',1],[1,'G4',1.5]] },
-  'throw_':    { id:'throw_',    wave:'noise', vol:0.4, env:[0.005,0.18], notes:[[0,null,3]] },
-  'rattle':    { id:'rattle',    wave:'noise', vol:0.5, env:[0.002,0.08], notes:[[0,null,1.5],[2.5,null,1.5],[5,null,1.5]] },
-  'click':     { id:'click',     wave:'pulse', duty:0.125, vol:0.6, env:[0.001,0.12], notes:[[0,'C6',1],[1,'E6',2]] },
-  'dex':       { id:'dex',       wave:'pulse', duty:0.5, vol:0.5, env:[0.003,0.25], notes:[[0,'E5',1.5],[1.5,'G5',1.5],[3,'B5',1.5],[4.5,'E6',3]] },
-  'lowhp_legacy': { id:'lowhp_legacy', wave:'pulse', duty:0.25, vol:0.5, env:[0.002,0.12], notes:[[0,'A4',1.5],[2,'A4',1.5],[4,'A4',1.5]] },
-  'encounter': { id:'encounter', wave:'pulse', duty:0.125, vol:0.5, env:[0.004,0.2], notes:[[0,'G4',1],[1,'A4',1],[2,'B4',1],[3,'C5',3]] },
+  // --- legacy call-site aliases (same tables as their primaries) ---
+  'blip':      { id:'blip',      wave:'pulse', duty:0.25, vol:0.35, env:[0.001,0.07], notes:[[0,'E6',1]] },
+  'tick':      { id:'tick',      wave:'pulse', duty:0.25, vol:0.18, env:[0.001,0.045], notes:[[0,'C6',0.5]] },
+  'back':      { id:'back',      wave:'pulse', duty:0.25, vol:0.3, env:[0.002,0.09], notes:[[0,'E5',0.8],[0.8,'B4',1.2]] },
+  'throw_':    { id:'throw_',    wave:'noise', vol:0.38, env:[0.005,0.18], notes:[[0,null,3]] },
+  'rattle':    { id:'rattle',    wave:'noise', vol:0.48, env:[0.002,0.08], notes:[[0,null,1.2],[2.5,null,1.2],[5,null,1.2]] },
+  'click':     { id:'click',     wave:'pulse', duty:0.125, vol:0.55, env:[0.001,0.1], notes:[[0,'E6',0.7],[0.7,'A6',1.8]] },
+  'dex':       { id:'dex',       wave:'pulse', duty:0.25, vol:0.48, env:[0.003,0.22], notes:[[0,'A5',1],[1,'C6',1],[2,'E6',1],[3,'A6',2.5]] },
+  'lowhp_legacy': { id:'lowhp_legacy', wave:'pulse', duty:0.25, vol:0.42, env:[0.002,0.1], notes:[[0,'B4',1.1],[1.6,'B4',1.1],[3.2,'B4',1.6]] },
+  'encounter': { id:'encounter', wave:'pulse', duty:0.125, vol:0.48, env:[0.004,0.2], notes:[[0,'E4',0.7],[0.7,'G4',0.7],[1.4,'C5',0.7],[2.1,'E5',2.5]] },
 
-  // --- W6 (audit D1): live call-site keys that were never tabled — the game
-  // played these names for years and heard nothing. The sounds were always
-  // the tables below; the keys just never landed in SFXSET. ---
-  'menu-move': { id:'menu-move', wave:'pulse', duty:0.5, vol:0.22, env:[0.002,0.06], notes:[[0,'A5',1]] },
-  'item-get':  { id:'item-get',  wave:'pulse', duty:0.5, vol:0.45, env:[0.002,0.15], notes:[[0,'A5',1],[1,'D6',1],[2,'F#6',2]] },
+  // --- W6 (audit D1): live call-site keys, tabled + played. ---
+  'menu-move': { id:'menu-move', wave:'pulse', duty:0.25, vol:0.18, env:[0.001,0.045], notes:[[0,'C6',0.5]] },
+  'item-get':  { id:'item-get',  wave:'pulse', duty:0.5, vol:0.45, env:[0.002,0.15], notes:[[0,'G5',0.7],[0.7,'C6',0.7],[1.4,'E6',1.8]] },
 };
+
 
 // ============================================================ CRIES ====
 // Synthesized species cries (contract §2.3 — never sampled). One original
@@ -1202,6 +1029,11 @@ class Input {
 // Music unlocks on first user gesture. Safe no-op when AudioContext is
 // unavailable (headless / SSR). Persisted mute + volume via applySettings.
 // Every gameplay-critical cue keeps a visual twin (see audio/SCORE.md).
+// MIXING LAW (owner, 2026-11-17 — "no sounds should mix violently"):
+// ALERT > STING > MOMENT SFX > BGM. BGM rides a per-track session gain
+// (changes crossfade; two loops never stack) and a duck bus (ALERT/STING
+// cues pull music down for the cue's length). A master compressor, where
+// offered, is the ceiling. See audio/SCORE.md "Mixing & placement law".
 
 
 const CHANNELS = ['pulse1', 'pulse2', 'triangle', 'noise'];
@@ -1268,12 +1100,39 @@ function resolveCry(speciesId) {
 // error/throw_/rattle/click/dex/lowhp/encounter all exist in SFXSET.
 const SFX = SFXSET;
 
+// Mixing-law classes: value = BGM duck floor while the cue sounds
+// (absent = MOMENT class: short, balanced, never ducks). ALERT ducks
+// deepest; STING (ceremonies/fanfares) next. Designed pairs (encounter
+// sting + melody, catch click + gotcha) count as single cues.
+const SFX_DUCK = {
+  'lowhp': 0.25, 'lowhp_legacy': 0.25, 'error-buzz': 0.25, 'trainer-spot': 0.25,
+  'encounter-sting': 0.25, 'encounter-sting-melody': 0.25, 'encounter': 0.25,
+  'victory': 0.35, 'fanfare': 0.35, 'badge': 0.35, 'levelup': 0.35,
+  'evolution-fanfare': 0.35, 'catch-gotcha': 0.35, 'catch-crit': 0.35,
+  'dex-register': 0.35, 'dex': 0.35, 'heal': 0.35,
+  'item-fanfare': 0.35, 'item-get': 0.35,
+};
+function sfxDuckLevel(key) {
+  return typeof key === 'string' ? (SFX_DUCK[key] || 1) : 1;
+}
+// Audible length of an SFX table in seconds (last note end + env tail).
+function sfxSeconds(table) {
+  const tr = table && (table.track || table);
+  if (!tr || !Array.isArray(tr.notes)) return 0;
+  let end = 0;
+  for (const [beat, , beats] of tr.notes) end = Math.max(end, beat + beats);
+  return end * SFX_SCALE + (tr.env ? tr.env[0] + tr.env[1] : 0) + 0.05;
+}
+
 class AudioEngine {
   constructor() {
     this.ctx = null;
     this.master = null;   // mute switch
     this.musicBus = null; // music volume
+    this.duckGain = null; // mixing law: BGM duck bus (musicBus -> duck -> master)
     this.sfxBus = null;   // sfx volume
+    this._session = null; // current music session { gain } — crossfade unit
+    this._duckTimer = null;
     this.muted = false;
     this.musicVol = 0.8;
     this.sfxVol = 0.8;
@@ -1305,9 +1164,25 @@ class AudioEngine {
       this.musicBus.gain.value = this.musicVol;
       this.sfxBus = this.ctx.createGain();
       this.sfxBus.gain.value = this.sfxVol;
-      this.musicBus.connect(this.master);
+      this.duckGain = this.ctx.createGain();
+      this.duckGain.gain.value = 1;
+      this.musicBus.connect(this.duckGain);
+      this.duckGain.connect(this.master);
       this.sfxBus.connect(this.master);
-      this.master.connect(this.ctx.destination);
+      // Master ceiling: a gentle compressor makes clipping structurally
+      // impossible; platforms without one (and test fakes) skip it.
+      let chained = false;
+      if (typeof this.ctx.createDynamicsCompressor === 'function') {
+        try {
+          const comp = this.ctx.createDynamicsCompressor();
+          comp.threshold.value = -14; comp.knee.value = 18; comp.ratio.value = 12;
+          comp.attack.value = 0.003; comp.release.value = 0.25;
+          this.master.connect(comp);
+          comp.connect(this.ctx.destination);
+          chained = true;
+        } catch (e) { /* fall through to the direct connection */ }
+      }
+      if (!chained) this.master.connect(this.ctx.destination);
       this._unlocked = true;
       // Suspended-context recovery (audit U4): iOS interruptions and tab
       // backgrounding can park the context at 'suspended' while the game
@@ -1388,6 +1263,21 @@ class AudioEngine {
     if (area) this._areaMusicId = id;
     if (!this._unlocked || !this.ctx) { this._pendingMusic = id; return; }
     this._clearSched();
+    // Mixing law: each track plays through its own session gain — the old
+    // session fades out in 90 ms (its scheduled notes go silent with it)
+    // and the new one fades in over 300 ms. A crossfade, not a collision.
+    const session = { gain: null };
+    try {
+      const gn = this.ctx.createGain();
+      const t = this.ctx.currentTime;
+      gn.gain.setValueAtTime(0.0001, t);
+      gn.gain.linearRampToValueAtTime(1, t + 0.3);
+      gn.connect(this.musicBus);
+      session.gain = gn;
+    } catch (e) { /* session stays gain-less: notes ride the bus directly */ }
+    this._retireSession();
+    this._session = session;
+    const bus = session.gain || this.musicBus;
     const table = MUSIC[id];
     const spb = 60 / (table.bpm || 120);
     const loopLen = Math.max(0.25, this._tableBeats(table) * spb);
@@ -1398,7 +1288,7 @@ class AudioEngine {
       try {
         for (const tr of table.tracks) {
           for (const [beat, pitch, beats] of tr.notes) {
-            this._schedule(tr, pitch, t0 + beat * spb, beats * spb, tr.vol || 0.5, this.musicBus);
+            this._schedule(tr, pitch, t0 + beat * spb, beats * spb, tr.vol || 0.5, bus, session);
           }
         }
       } catch (e) { /* never let audio break the game */ }
@@ -1408,9 +1298,54 @@ class AudioEngine {
     scheduleLoop();
   }
 
+  // Fade the outgoing session out and free its voice windows (inaudible
+  // inside 90 ms, so the incoming track schedules at full strength).
+  _retireSession() {
+    const old = this._session;
+    this._session = null;
+    if (!old) return;
+    this._live = this._live.filter((v) => v.tag !== old);
+    if (old.gain && this.ctx) {
+      try {
+        const t = this.ctx.currentTime;
+        old.gain.gain.setValueAtTime(Math.max(0.0001, old.gain.gain.value || 1), t);
+        old.gain.gain.linearRampToValueAtTime(0.0001, t + 0.09);
+        const gn = old.gain;
+        const tmr = setTimeout(() => { try { if (gn.disconnect) gn.disconnect(); } catch (e) { /* already gone */ } }, 200);
+        if (tmr.unref) tmr.unref();
+      } catch (e) { /* fade is best-effort */ }
+    }
+  }
+
   stopMusic() {
     this._clearSched();
+    this._retireSession();
     this._musicId = null;
+  }
+
+  // Pull the BGM down under an ALERT/STING cue for exactly the cue's
+  // length, then ease it back. Timer-driven release: overlapping cues
+  // extend the duck, never fight it.
+  _duck(level, seconds) {
+    if (!this.duckGain || !this.ctx) return;
+    try {
+      const t = this.ctx.currentTime;
+      const p = this.duckGain.gain;
+      p.setValueAtTime(Math.max(0.0001, p.value || 1), t);
+      p.linearRampToValueAtTime(level, t + 0.03);
+      if (this._duckTimer) clearTimeout(this._duckTimer);
+      this._duckTimer = setTimeout(() => {
+        this._duckTimer = null;
+        if (!this.duckGain || !this.ctx) return;
+        try {
+          const t2 = this.ctx.currentTime;
+          const p2 = this.duckGain.gain;
+          p2.setValueAtTime(Math.max(0.0001, p2.value || level), t2);
+          p2.linearRampToValueAtTime(1, t2 + 0.18);
+        } catch (e) { /* best-effort */ }
+      }, Math.max(30, seconds * 1000));
+      if (this._duckTimer.unref) this._duckTimer.unref();
+    } catch (e) { /* ducking is best-effort; levels are balanced regardless */ }
   }
 
   restoreAreaMusic() {
@@ -1427,6 +1362,9 @@ class AudioEngine {
     if (!this._unlocked || !this.ctx || this.muted) return;
     const table = typeof key === 'string' ? SFXSET[key] : key;
     if (!table) return;
+    // ALERT/STING cues duck the BGM before their first note lands.
+    const duck = sfxDuckLevel(key);
+    if (duck < 1) this._duck(duck, sfxSeconds(table));
     const t = this.ctx.currentTime;
     const tr = table.track || table;
     try {
@@ -1458,7 +1396,9 @@ class AudioEngine {
   catchBreakout() { this.playSfx('catch-breakout'); this.playSfx('catch-breakout-tone'); }
 
   // ---- voice synthesis ----
-  _schedule(tr, pitch, t, dur, vol, bus) {
+  // tag: the owning music session, when the voice belongs to a BGM loop —
+  // retiring that session frees its windows (see _retireSession).
+  _schedule(tr, pitch, t, dur, vol, bus, tag) {
     if (!this.ctx || !bus) return;
     if (!this._voiceSlot(t, dur)) return; // polyphony discipline: 4-6 channels
     const g = this.ctx.createGain();
@@ -1471,7 +1411,7 @@ class AudioEngine {
         f.type = 'highpass'; f.frequency.value = 1000;
         this._applyEnv(g.gain, t, vol, dur, env);
         src.connect(f); f.connect(g); g.connect(bus);
-        this._voiceStart(src, t, Math.max(dur, env ? env[0] + env[1] : dur));
+        this._voiceStart(src, t, Math.max(dur, env ? env[0] + env[1] : dur), tag);
       } else {
         const o = this.ctx.createOscillator();
         if (tr.wave === 'triangle') { o.type = 'triangle'; }
@@ -1479,7 +1419,7 @@ class AudioEngine {
         if (pitch) o.frequency.value = freqOf(pitch);
         this._applyEnv(g.gain, t, vol, dur, env);
         o.connect(g); g.connect(bus);
-        this._voiceStart(o, t, Math.max(dur, env ? env[0] + env[1] : dur));
+        this._voiceStart(o, t, Math.max(dur, env ? env[0] + env[1] : dur), tag);
       }
     } catch (e) { /* never let audio break the game */ }
   }
@@ -1515,10 +1455,10 @@ class AudioEngine {
     return true;
   }
 
-  _voiceStart(node, t, stopDur) {
+  _voiceStart(node, t, stopDur, tag) {
     // Budget window ends at stopDur (the +0.03 below is sub-audible scheduling
     // slack, excluded so the budget audit and the engine agree).
-    this._live.push({ start: t, stop: t + stopDur });
+    this._live.push({ start: t, stop: t + stopDur, tag });
     node.onended = () => { /* window-pruned in _voiceSlot; kept for debuggers */ };
     node.start(t);
     node.stop(t + stopDur + 0.03);
@@ -196392,6 +196332,15 @@ class BattleScene {
     this.field = null;      // ADR-025 §1: battle.field — resolved ONCE in enter() from the battle's map
     this.fieldBanner = null; // the Ground announcement line (null on Open Ground)
     this.trainerIdx = 0;
+    // FX-6 entry variant — computed HERE, in the constructor: enter()
+    // picks the battle's music from it BEFORE the assignment that used
+    // to sit mid-enter() ever ran, so boss/legendary battles silently
+    // got the ordinary themes (placement defect, found by the viral
+    // audio pass's trigger audit 2026-11-17). All inputs are
+    // constructor-final (kind / trainer / foeMon / uncatchable).
+    this.entryVariant = this.kind === 'trainer'
+      ? ((this.trainer && (this.trainer.badge || BOSS_TRAINER_IDS.has(String(this.trainer.id || '').toLowerCase()))) ? 'boss' : 'trainer')
+      : (LEGENDARY_SPECIES.has(this.foeMon && this.foeMon.speciesId) || this.uncatchable ? 'legendary' : 'wild');
   }
 
   enter() {
@@ -196519,9 +196468,8 @@ class BattleScene {
     this.entryFx = { ally: null, foe: null };     // { t, ballId } send-out in flight
     this.recallFx = null;                          // { side, spr, t } switch-out shrink
     this._ballArtCache = {};
-    this.entryVariant = this.kind === 'trainer'
-      ? ((this.trainer && (this.trainer.badge || BOSS_TRAINER_IDS.has(String(this.trainer.id || '').toLowerCase()))) ? 'boss' : 'trainer')
-      : (LEGENDARY_SPECIES.has(this.foeMon && this.foeMon.speciesId) || this.uncatchable ? 'legendary' : 'wild');
+    // entryVariant: computed in the constructor (see there) — enter()'s
+    // music selection reads it before this point in the flow.
     this.entryT = 0; // FX-6 transition clock (ms since enter)
     this._exitStartT = -1;
     this._exitPending = null; // Game-feel D1: {won, start} while the exit sweep runs
@@ -198164,7 +198112,11 @@ class BattleScene {
         if (leveled) msgs.push(displayName(m, SPECIES) + ' grew to Lv ' + m.level + '!');
       }
       this.xpShares = null;
-      g.audio.playSfx('dex-register');
+      // Mixing law (2026-11-17): one sting owns the moment. A level-up IS
+      // the beat, so the XP-banked cue yields to the levelup fanfare
+      // instead of stacking on the same frame; it plays when nobody
+      // leveled (its original "XP registered" role).
+      if (!msgs.length) g.audio.playSfx('dex-register');
       this.xpApplied = false;
       this.xpFlashT = 250; // P0/E3: level-up flash on the XP bar + fanfare below
       const cb = this.xpCb; this.xpCb = null;
@@ -201393,6 +201345,17 @@ Object.assign(BattleScene.prototype, {
         }
       }
       if (this.rtCheckFaints()) return;
+    }
+    // Low-HP warning (placement parity with the classic engine, gameux
+    // §4.2): first crossing into red (<=25%), once per ally, re-arms when
+    // the ally heals back above red. RT never fired it before the viral
+    // audio pass — the alarm's absence was a placement defect.
+    if (this._lowHpAlly !== this.ally) { this._lowHpAlly = this.ally; this._lowHpWarned = false; }
+    const hpRatio = this.ally && this.ally.maxHp > 0 ? this.ally.hp / this.ally.maxHp : 1;
+    if (hpRatio > 0.25) this._lowHpWarned = false;
+    else if (!this._lowHpWarned && this.ally && this.ally.hp > 0) {
+      this._lowHpWarned = true;
+      g.audio.playSfx('lowhp');
     }
     // Catch sequence animation runs on its own clock.
     if (rt.catchSeq) { this.rtUpdateCatch(dtms); return; }

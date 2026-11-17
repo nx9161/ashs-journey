@@ -773,6 +773,15 @@ export class BattleScene {
     this.field = null;      // ADR-025 §1: battle.field — resolved ONCE in enter() from the battle's map
     this.fieldBanner = null; // the Ground announcement line (null on Open Ground)
     this.trainerIdx = 0;
+    // FX-6 entry variant — computed HERE, in the constructor: enter()
+    // picks the battle's music from it BEFORE the assignment that used
+    // to sit mid-enter() ever ran, so boss/legendary battles silently
+    // got the ordinary themes (placement defect, found by the viral
+    // audio pass's trigger audit 2026-11-17). All inputs are
+    // constructor-final (kind / trainer / foeMon / uncatchable).
+    this.entryVariant = this.kind === 'trainer'
+      ? ((this.trainer && (this.trainer.badge || BOSS_TRAINER_IDS.has(String(this.trainer.id || '').toLowerCase()))) ? 'boss' : 'trainer')
+      : (LEGENDARY_SPECIES.has(this.foeMon && this.foeMon.speciesId) || this.uncatchable ? 'legendary' : 'wild');
   }
 
   enter() {
@@ -900,9 +909,8 @@ export class BattleScene {
     this.entryFx = { ally: null, foe: null };     // { t, ballId } send-out in flight
     this.recallFx = null;                          // { side, spr, t } switch-out shrink
     this._ballArtCache = {};
-    this.entryVariant = this.kind === 'trainer'
-      ? ((this.trainer && (this.trainer.badge || BOSS_TRAINER_IDS.has(String(this.trainer.id || '').toLowerCase()))) ? 'boss' : 'trainer')
-      : (LEGENDARY_SPECIES.has(this.foeMon && this.foeMon.speciesId) || this.uncatchable ? 'legendary' : 'wild');
+    // entryVariant: computed in the constructor (see there) — enter()'s
+    // music selection reads it before this point in the flow.
     this.entryT = 0; // FX-6 transition clock (ms since enter)
     this._exitStartT = -1;
     this._exitPending = null; // Game-feel D1: {won, start} while the exit sweep runs
