@@ -784,6 +784,7 @@ Object.assign(BattleScene.prototype, {
       }
     }
     if (this.foe && this.foe.hp <= 0) {
+      if (typeof this.foePlateOut !== 'number') this.foePlateOut = 0; // D6: foe plate leaves at the faint (RT path)
       this.state = 'faintfoe';
       this.afterFaintFoe();
       return true;
