@@ -2801,7 +2801,7 @@ export class BattleScene {
       // exact two writes Arden shipped, now set-driven.
       const setId = t.badgeSet || 'kanto';
       const setArr = g.state.badges[setId] || (g.state.badges[setId] = []);
-      if (!setArr.includes(t.badge)) setArr.push(t.badge);
+      if (!setArr.includes(t.badge)) { setArr.push(t.badge); this._gymWin = true; } // owner: autosave at the pop (see _finishExit)
       g.state.story.flags['badge_' + t.badge.replace(/badge$/, '')] = true; // quest chain (WS6)
       if (setId === 'orange' && setArr.length >= 4) g.state.story.flags.orange_crew_done = true;
       g.audio.playSfx('badge'); // badge fanfare (visual twin: badge-case shine animation)
@@ -2905,7 +2905,10 @@ export class BattleScene {
       g.renderer.fadeColor = '#000';
       g.renderer.fadeA = 1;
     }
-    g.autosave('battle');
+    // Owner addition: a gym win gets the guaranteed, visible autosave;
+    // every other battle keeps the quiet throttled one.
+    if (this._gymWin) { this._gymWin = false; g.autosaveGymWin(); }
+    else g.autosave('battle');
     // Story-event continuation (WS6): scripted battles resume their script
     // only on victory — a loss leaves the event unconsumed for a retry.
     // ADR-025 QA D1: escape paths (RUN / Teleport / Safari run / foe fled)

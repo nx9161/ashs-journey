@@ -580,6 +580,7 @@ export class Game {
         else this.ui.toast('Save failed: ' + res.reason);
       }
       SYNC.afterLocalSave(this);
+      if (res.ok) this._lastSaveAt = Date.now();
       return res;
     }
     const res = this.store.save(this.state);
@@ -587,7 +588,26 @@ export class Game {
       if (res.ok) { this.ui.toast('Game saved. (' + Math.round(res.bytes / 1024) + ' KB)'); this.audio.playSfx('save-confirm'); }
       else this.ui.toast('Save failed: ' + res.reason);
     }
+    if (res.ok) this._lastSaveAt = Date.now();
     return res;
+  }
+
+  // Owner addition (2026-11-17): a gym-leader win autosaves the moment
+  // the battle hands control back — badge in hand, no manual save
+  // needed. Unlike autosave() it is NOT subject to the 5 s throttle
+  // (the guarantee is that this save lands), and it saves LOUDLY with
+  // the standard 'Game saved.' toast + sting so the player sees it.
+  // Exactly-once is the caller's contract (BattleScene flags a newly
+  // awarded badge once); the guard below keeps it from double-saving
+  // when any save — manual included — landed in the last 3 s (that
+  // save already persisted this state and already showed feedback).
+  // The player's autosave toggle still rules.
+  autosaveGymWin() {
+    if (this.state.settings.autosave === false) return;
+    const now = Date.now();
+    if (this._lastSaveAt && now - this._lastSaveAt < 3000) return;
+    this._lastAutosave = now;
+    this.saveGame(false);
   }
 
   autosave(reason) {
