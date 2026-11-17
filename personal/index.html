@@ -24,6 +24,7 @@ body{font-family:var(--font);-webkit-user-select:none;user-select:none;-webkit-t
    canvas — the same structural trick v2.5 used for the touch pad below.
    On desktop ui.mjs width-syncs the band to the canvas box. */
 #hudband{width:100%;flex:0 0 auto;display:flex;align-items:flex-start;gap:8px;padding:8px 10px 2px}
+body.desktop #hudband{flex-wrap:wrap}
 body.desktop #ctlband{display:none}
 body.desktop.showtouch #ctlband{display:block}
 @media (pointer:coarse){body.desktop #ctlband{display:block}}
@@ -433,6 +434,14 @@ body.landscape .moodpip{display:none}
    desktop and the chip collapsed to an unreadable sliver at portrait.
    A floor under the column + a full-width objective chip fixes both. */
 #hudband .hudchips{position:static;max-width:44%;min-width:184px;margin-right:auto}
+/* F2: on desktop the band's chips lay out in a ROW (the W8-F1 landscape
+   treatment) — band height becomes the tallest chip instead of the
+   165px stack. Portrait keeps the column: at 390px the 300px objective
+   chip cannot share a line with loc+dex, and the wrapped row measured
+   TALLER (251px) than the column it replaced. */
+body.desktop #hudband .hudchips{max-width:none;min-width:0;flex-direction:row;flex-wrap:wrap;align-items:flex-start}
+body.desktop #hudband .locchip,body.desktop #hudband .dexchip{flex:none}
+body.desktop #hudband .objchip{flex:0 1 auto;min-width:0}
 #hudband .objchip{max-width:300px}
 #hudband .hudstrip{position:static}
 #hudband .moodpip{position:static;flex:0 0 auto}
@@ -535,6 +544,6 @@ body.desktop.showtouch .controls{display:flex}
 <div id="stage"><div id="hudband"></div><div id="screenwrap"><canvas id="game"></canvas></div><div id="ctlband"></div></div>
 <div id="ui"></div>
 <script src="game.js"></script>
-<!-- contentHash:0412d673c84f2cfea01142029d568af51f6463c7a971288eaba6b6fe2d6ce072 -->
+<!-- contentHash:4b20ebad31d9f36b0cea36e26513cc063736a8875fdac69230fb7f82607066ea -->
 </body>
 </html>
