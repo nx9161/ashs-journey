@@ -1,7 +1,7 @@
 # The Rejuvenation Package — Design Spec (ADR-025)
 
 **Status:** DESIGN ONLY — no code in this pass. Owner directive 2026-10-27:
-after a breakdown of the fan game *Pokémon Rejuvenation*, "thats exactly
+after a breakdown of *Pokémon Rejuvenation*, "thats exactly
 what we need in our game." Six systems adopted as **original clean-room
 implementations**. Systems and ideas are study material; Rejuvenation's
 names, field charts, items, text, and content are **not** used — every
