@@ -189986,7 +189986,16 @@ function defaultState(inherit) {
       },
     },
     facilities: { registry: [], unlocked: [] },
-    bag: { pokeball: 10, potion: 3 },
+    // The starting kit is the professor's hand-out (Route 1's AIDE:
+    // "The professor gave you ten to start"). NEAREST-CENTER wave
+    // (2026-11-17): the Town Map joins the kit — the item and its
+    // graphical panel shipped fully built but NOTHING ever granted
+    // the item, so no real player could ever open the map. No
+    // existing early-game grant flow fits it honestly (the intro's
+    // only grant is the partner ceremony, whose shared core is also
+    // the save-repair path; every event `give` step is a mid/late
+    // story beat), so it starts in the bag like the rest of the kit.
+    bag: { pokeball: 10, potion: 3, townmap: 1 },
     meta: {
       createdAt: 0, updatedAt: 0, playtimeSec: 0, location: 'Dawnwick',
       houseRulesTouched: false, // ADR-025: true once any House Rule is enabled
@@ -198444,8 +198453,11 @@ class BattleScene {
       const ow = this.returnTo;
       // P1: same blackout anchor as the overworld path — the defeat
       // warp loads 'center' directly, so the exit ticket must be set
-      // from the last-Center lineage first (see overworld.centerExit).
-      if (typeof ow.centerExit === 'function') ow.centerReturn = ow.centerExit();
+      // first. NEAREST-CENTER (owner rule, 2026-11-17): the anchor is
+      // the NEAREST Center town from the faint map
+      // (overworld.blackoutCenterAnchor), not the last-Center lineage.
+      if (typeof ow.blackoutCenterAnchor === 'function') ow.centerReturn = ow.blackoutCenterAnchor();
+      else if (typeof ow.centerExit === 'function') ow.centerReturn = ow.centerExit();
       ow.loadMap('center');
       ow.player.tx = 4; ow.player.ty = 3; ow.player.px = 4 * TILE; ow.player.py = 3 * TILE;
       ow.player.fx = 4; ow.player.fy = 3;
@@ -202087,6 +202099,194 @@ Object.assign(BattleScene.prototype, {
 });
 
 
+// ---- src/game/nearest-center.mjs ----
+// nearest-center.mjs — the ONE resolver for "which Center does a
+// blackout take the player to" (owner rule, 2026-11-17): the NEAREST
+// Center on the map from where the player fainted — not the last one
+// visited, not home. Before this module, both blackout paths anchored
+// through centerExit() (last-visited lineage), so a player who walked
+// past a town without entering its Center was carried all the way
+// back to the last Center he HAD entered — in the owner's own run,
+// from Route 2 back to Dawnwick, past Fernmere entirely.
+//
+// Cost model: breadth-first over the DIRECTED warp graph (warps are
+// followed exactly as authored, so a one-way drop can never nominate
+// a Center the player could not actually reach by that link); the
+// primary cost is MAP CROSSINGS. Ties break, in order:
+//   1. the player's persisted last-Center town (story.lastCenter),
+//      when it is among the nearest — with its exact persisted
+//      door-front anchor (the door he actually used);
+//   2. the walking distance from the faint tile to the first warp
+//      tile the path leaves by (within-map tile BFS), so a faint in
+//      Route 2's south half names Fernmere and one by its north
+//      ledges names Flintridge;
+//   3. authored warp order (deterministic).
+// The winning town's door is the Center door closest (same within-map
+// metric) to the tile the path arrives on — for a faint inside the
+// town itself, closest to the faint tile. The anchor returned is that
+// door's `via` (the door-front tile a voluntary entry would produce).
+//
+// A town qualifies iff it fields a warp into the shared 'center'
+// interior carrying a `via` on itself — the same census the Fly fix
+// uses: exactly 64 towns/hubs game-wide (Dawnwick included; its
+// Center stands on the main street like every town's).
+//
+// Returns null when no Center town is reachable by warps at all
+// (a small set of event/ferry-linked maps with no warp path — the
+// caller then falls back to the last-visited lineage, then home).
+
+
+// The enterable set for the within-map distance walks: the shipped
+// WALKABLE table + the W6 floor/rug chars + the system tiles
+// sysWalkableExtra admits ('~'/'W' surf, 'T' cut) — the same union
+// scripts/audit-warp-tiles.mjs uses. NPCs and boulders are ignored:
+// they move; the geography does not.
+const WALK = new Set([...WALKABLE, ...W6_WALKABLE_CHARS, '~', 'W', 'T']);
+
+function centerDoorsOf(mapDef) {
+  const out = [];
+  for (const w of (mapDef && mapDef.warps) || []) {
+    if (w.to && w.to.map === 'center' && w.via && w.via.map === mapDef.id) {
+      out.push({ door: { x: w.x, y: w.y }, via: { map: w.via.map, x: w.via.x, y: w.via.y } });
+    }
+  }
+  return out;
+}
+
+function isCenterTown(maps, id) {
+  const def = maps[id];
+  return !!def && centerDoorsOf(def).length > 0;
+}
+
+function tileAt(mapDef, x, y) {
+  if (!mapDef || !Array.isArray(mapDef.rows)) return ' ';
+  if (y < 0 || y >= mapDef.rows.length || x < 0 || x >= mapDef.rows[y].length) return ' ';
+  return mapDef.rows[y][x];
+}
+
+// Within-map walking distances from (sx, sy) over enterable tiles.
+// Warp tiles count as enterable ground (a door you can step on is a
+// tile you can stand on for distance purposes, whatever its char).
+// Returns a Map of 'x,y' -> steps. Unreached tiles are absent.
+function tileDistances(mapDef, sx, sy) {
+  const dist = new Map();
+  if (!mapDef || !Array.isArray(mapDef.rows) || !mapDef.rows.length) return dist;
+  const warpTiles = new Set(((mapDef.warps) || []).map((w) => w.x + ',' + w.y));
+  const enterable = (x, y) => {
+    const t = tileAt(mapDef, x, y);
+    return t !== ' ' && (WALK.has(t) || warpTiles.has(x + ',' + y));
+  };
+  if (!enterable(sx, sy)) return dist;
+  dist.set(sx + ',' + sy, 0);
+  const q = [[sx, sy]];
+  for (let i = 0; i < q.length; i++) {
+    const [x, y] = q[i];
+    const d = dist.get(x + ',' + y);
+    for (const [dx, dy] of [[0, -1], [0, 1], [-1, 0], [1, 0]]) {
+      const nx = x + dx, ny = y + dy, k = nx + ',' + ny;
+      if (dist.has(k) || !enterable(nx, ny)) continue;
+      dist.set(k, d + 1);
+      q.push([nx, ny]);
+    }
+  }
+  return dist;
+}
+
+// Distance between two tiles of one map: the tile-BFS distance, with
+// Manhattan distance as the fallback when the walking graph cannot
+// connect them (a ledge-separated pocket — the estimate stays finite
+// and deterministic rather than poisoning the comparison).
+function tileDist(mapDef, ax, ay, bx, by) {
+  if (ax === bx && ay === by) return 0;
+  const d = tileDistances(mapDef, ax, ay).get(bx + ',' + by);
+  return d === undefined ? Math.abs(ax - bx) + Math.abs(ay - by) : d;
+}
+
+// nearestCenterAnchor(fromId, fromX, fromY, lastCenter)
+//   -> { map, x, y, town, crossings } | null
+// (map, x, y) is the Center-exit anchor: the winning town's Center
+// door-front, in the exact shape centerExit() returns.
+function nearestCenterAnchor(fromId, fromX, fromY, lastCenter, maps = MAPS) {
+  const src = maps[fromId];
+  if (!src || !Array.isArray(src.rows)) return null;
+  const fx = Number.isFinite(fromX) ? fromX : (src.start ? src.start.x : 0);
+  const fy = Number.isFinite(fromY) ? fromY : (src.start ? src.start.y : 0);
+
+  // Dijkstra over the directed warp graph, keyed (crossings,
+  // firstHopDist, seq): uniform crossing cost, the first-hop walking
+  // distance as the secondary key. rec: per-map best record.
+  const rec = new Map();
+  let seq = 0;
+  const start = { id: fromId, crossings: 0, firstHop: 0, entry: { x: fx, y: fy }, seq: seq++ };
+  rec.set(fromId, start);
+  const open = [start];
+  const keyOf = (r) => (r.crossings * 100000) + Math.min(r.firstHop, 99999);
+  while (open.length) {
+    let bi = 0;
+    for (let i = 1; i < open.length; i++) {
+      const a = open[i], b = open[bi];
+      if (keyOf(a) < keyOf(b) || (keyOf(a) === keyOf(b) && a.seq < b.seq)) bi = i;
+    }
+    const cur = open.splice(bi, 1)[0];
+    if (rec.get(cur.id) !== cur) continue; // superseded record
+    const def = maps[cur.id];
+    if (!def) continue;
+    for (const w of def.warps || []) {
+      const to = w.to && w.to.map;
+      if (!to || !maps[to]) continue;
+      const firstHop = cur.id === fromId
+        ? tileDist(src, fx, fy, w.x, w.y)
+        : cur.firstHop;
+      const cand = {
+        id: to, crossings: cur.crossings + 1, firstHop,
+        entry: { x: w.to.x, y: w.to.y }, seq: seq++,
+      };
+      const prev = rec.get(to);
+      if (!prev || cand.crossings < prev.crossings
+        || (cand.crossings === prev.crossings && cand.firstHop < prev.firstHop)) {
+        rec.set(to, cand);
+        open.push(cand);
+      }
+    }
+  }
+
+  // Candidates: Center towns with a finite record.
+  let best = null;
+  for (const [id, r] of rec) {
+    if (!isCenterTown(maps, id)) continue;
+    if (!best || r.crossings < best.r.crossings
+      || (r.crossings === best.r.crossings && r.firstHop < best.r.firstHop)
+      || (r.crossings === best.r.crossings && r.firstHop === best.r.firstHop && r.seq < best.r.seq)) {
+      best = { id, r };
+    }
+  }
+  if (!best) return null;
+
+  // Tie-break 1: the persisted last-Center town, when it sits among
+  // the nearest (same crossings, and no strictly shorter first hop) —
+  // its exact persisted anchor wins, door and all.
+  if (lastCenter && typeof lastCenter.map === 'string' && isCenterTown(maps, lastCenter.map)) {
+    const lr = rec.get(lastCenter.map);
+    if (lr && lr.crossings === best.r.crossings && lr.firstHop <= best.r.firstHop
+      && Number.isFinite(lastCenter.x) && Number.isFinite(lastCenter.y)) {
+      return { map: lastCenter.map, x: lastCenter.x, y: lastCenter.y, town: lastCenter.map, crossings: lr.crossings };
+    }
+  }
+
+  // Door choice: the winning town's Center door closest to the tile
+  // the winning path arrives on (the faint tile itself at 0 crossings).
+  const townDef = maps[best.id];
+  const doors = centerDoorsOf(townDef);
+  let door = doors[0];
+  let doorDist = Infinity;
+  for (const d of doors) {
+    const dd = tileDist(townDef, best.r.entry.x, best.r.entry.y, d.door.x, d.door.y);
+    if (dd < doorDist) { doorDist = dd; door = d; }
+  }
+  return { map: door.via.map, x: door.via.x, y: door.via.y, town: best.id, crossings: best.r.crossings };
+}
+
+
 // ---- src/game/start-pos.mjs ----
 // start-pos.mjs — the ONE resolver for "where does the player land on
 // this map" whenever a flow places the player by a map's start: the
@@ -202536,12 +202736,34 @@ class OverworldScene {
   // the runtime ticket first, then the persisted last-Center anchor
   // (story.lastCenter survives a save/reload inside a Center, where
   // the runtime ticket is gone), then the genre fallback: Dawnwick,
-  // home (Dawnwick has no Center of its own in this world).
+  // home — (6,9) is Dawnwick's own Center door-front.
   centerExit() {
     if (this.centerReturn && this.centerReturn.map) return this.centerReturn;
     const lc = this.game && this.game.state && this.game.state.story && this.game.state.story.lastCenter;
     if (lc && typeof lc.map === 'string' && Number.isFinite(lc.x) && Number.isFinite(lc.y)) return { map: lc.map, x: lc.x, y: lc.y };
     return { map: 'pallet', x: 6, y: 9 };
+  }
+
+  // NEAREST-CENTER BLACKOUT (owner rule, 2026-11-17): a blackout
+  // respawns in the Center of the NEAREST town from where the player
+  // fainted (nearest-center.mjs — directed warp-graph BFS), never the
+  // last Center he happened to enter. The resolved door-front becomes
+  // BOTH the runtime exit ticket and the persisted story.lastCenter,
+  // so leaving the Center — and reloading inside it — lands on that
+  // town. When no Center town is reachable by warps (a handful of
+  // event/ferry-linked maps), the old lineage stands: centerExit()
+  // (last visited, then home). Non-blackout flows keep using
+  // centerExit() exactly as before.
+  blackoutCenterAnchor() {
+    const st = this.game && this.game.state;
+    const lc = st && st.story ? st.story.lastCenter : null;
+    const a = this.mapId ? nearestCenterAnchor(this.mapId, this.player ? this.player.tx : undefined, this.player ? this.player.ty : undefined, lc) : null;
+    if (a) {
+      const anchor = { map: a.map, x: a.x, y: a.y };
+      if (st && st.story) st.story.lastCenter = { map: anchor.map, x: anchor.x, y: anchor.y };
+      return anchor;
+    }
+    return this.centerExit();
   }
 
   // REGION-1 FIX WAVE (Bug 1): the Mart's resolver, mirroring
@@ -208554,11 +208776,11 @@ Object.assign(OverworldScene.prototype, {
     const g = this.game;
     g.state.player.money = Math.floor(g.state.player.money / 2);
     g.ui.say(['You scurried to a Center, protecting your exhausted team...'], () => {
-      // P1: anchor the exit BEFORE the direct loadMap — a blackout
-      // respawns in the last-visited Center, and leaving it must land
-      // on that Center's town door-front (centerExit resolves the
-      // persisted lineage), never back at the faint location.
-      this.centerReturn = this.centerExit();
+      // P1: anchor the exit BEFORE the direct loadMap, never back at
+      // the faint location. NEAREST-CENTER (owner rule, 2026-11-17):
+      // the anchor is the NEAREST Center town from the faint map
+      // (blackoutCenterAnchor), not the last-visited lineage.
+      this.centerReturn = this.blackoutCenterAnchor();
       this.loadMap('center');
       this.player.tx = 4; this.player.ty = 3;
       this.player.px = 4 * TILE; this.player.py = 3 * TILE;
