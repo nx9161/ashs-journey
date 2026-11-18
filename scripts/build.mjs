@@ -830,7 +830,23 @@ function shellHtml({ gameJs, inline }) {
   return '<!DOCTYPE html>\n<html lang="en">\n<head>\n<meta charset="utf-8">\n' +
     '<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">\n' +
     '<title>KIAN\'S JOURNEY — An Original Kin-Taming Adventure</title>\n' +
-    '<meta name="description" content="Kian\'s Journey — an original creature-catching web game. Original code, audio, and creature art; world tiles by Gassasin (CC-BY 3.0), credited in-game.">\n' +
+    '<meta name="description" content="Kian\'s Journey — an original creature-catching web game by Naman Parmar. Explore 64 towns across four regions, catch and train 493 Kin, and play free in your browser. Original code, art, and audio.">\n' +
+    '<meta property="og:type" content="website">\n' +
+    '<meta property="og:site_name" content="Kian\'s Journey">\n' +
+    '<meta property="og:title" content="Kian\'s Journey">\n' +
+    '<meta property="og:description" content="An original creature-catching web game by Naman Parmar. Explore 64 towns across four regions, catch and train 493 Kin, and play free in your browser. Original code, art, and audio.">\n' +
+    '<meta property="og:url" content="https://nx9161.github.io/ashs-journey/">\n' +
+    '<meta property="og:image" content="https://nx9161.github.io/ashs-journey/cover.png">\n' +
+    '<meta property="og:image:type" content="image/png">\n' +
+    '<meta property="og:image:width" content="1200">\n' +
+    '<meta property="og:image:height" content="630">\n' +
+    '<meta property="og:image:alt" content="Kian\'s Journey — original title keyart: Kian and Voltik on a hill path at dawn.">\n' +
+    '<meta name="twitter:card" content="summary_large_image">\n' +
+    '<meta name="twitter:title" content="Kian\'s Journey">\n' +
+    '<meta name="twitter:description" content="An original creature-catching web game by Naman Parmar. Play free in your browser — 64 towns, four regions, 493 Kin. Original code, art, and audio.">\n' +
+    '<meta name="twitter:image" content="https://nx9161.github.io/ashs-journey/cover.png">\n' +
+    '<meta name="twitter:image:alt" content="Kian\'s Journey — original title keyart: Kian and Voltik on a hill path at dawn.">\n' +
+    '<link rel="canonical" href="https://nx9161.github.io/ashs-journey/">\n' +
     '<style>' + FONT_FACE_CSS + SHELL_CSS + '</style>\n</head>\n<body>\n' +
     '<div id="bootveil"><div class="veil-plate"><div class="veil-title">KIAN\'S JOURNEY</div><div class="veil-rule"></div><div class="veil-sub">LOADING</div></div></div>\n' +
     '<script>(function(){var v=document.getElementById("bootveil");if(!v)return;var done=false;function hide(){if(done)return;done=true;v.classList.add("hide");setTimeout(function(){if(v.parentNode)v.parentNode.removeChild(v);},700);}function arm(){var t=setTimeout(hide,2500);if(document.fonts&&document.fonts.ready){document.fonts.ready.then(function(){clearTimeout(t);setTimeout(hide,350);});}}if(document.readyState==="complete")arm();else addEventListener("load",arm);})();</script>\n' +

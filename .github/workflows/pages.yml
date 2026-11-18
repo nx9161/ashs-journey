@@ -36,6 +36,7 @@ jobs:
         run: |
           mkdir -p _site
           cp dist/standalone.html _site/index.html
+          cp assets/social/cover.png _site/cover.png
       - uses: actions/upload-pages-artifact@v3
         with:
           path: _site
