@@ -10592,7 +10592,7 @@ export const MAPS6 = {
         "to": {
           "map": "blackthorn",
           "x": 14,
-          "y": 16
+          "y": 15
         }
       },
       {
@@ -11281,7 +11281,7 @@ export const MAPS6 = {
         "to": {
           "map": "silvertown",
           "x": 13,
-          "y": 1
+          "y": 2
         }
       },
       {

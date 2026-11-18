@@ -488,7 +488,7 @@ export const MAPS3 = {
       '⊍⊍⊍⊍⊍⊍⊍⊍⊌⊌⊍⊍⊍⊍Ṳ⊍',
     ]),
     warps: [
-      { x: 8, y: 0, to: { map: 'route10', x: 7, y: 12 } },
+      { x: 8, y: 0, to: { map: 'route10', x: 6, y: 12 } },
       { x: 9, y: 0, to: { map: 'route10', x: 8, y: 12 } },
       { x: 8, y: 12, to: { map: 'lavender', x: 10, y: 1 } },
       { x: 9, y: 12, to: { map: 'lavender', x: 11, y: 1 } },
@@ -1054,8 +1054,8 @@ export const MAPS3 = {
     warps: [
       { x: 8, y: 0, to: { map: 'fuchsia', x: 8, y: 12 } },
       { x: 9, y: 0, to: { map: 'fuchsia', x: 9, y: 12 } },
-      { x: 6, y: 12, to: { map: 'route20', x: 2, y: 1 } },
-      { x: 7, y: 12, to: { map: 'route20', x: 2, y: 1 } },
+      { x: 6, y: 12, to: { map: 'route20', x: 1, y: 1 } },
+      { x: 7, y: 12, to: { map: 'route20', x: 1, y: 1 } },
       { x: 8, y: 12, to: { map: 'route20', x: 3, y: 1 } },
       { x: 9, y: 12, to: { map: 'route20', x: 3, y: 1 } },
     ],
@@ -1495,7 +1495,7 @@ export const MAPS3 = {
       '⊏⊎⊎BB⊎⊎⊎⊎⊎⊎BB⊎⊎⊎⊎⊏',
       '⊏⊎⊎⊎⊎⊎⊎⊎Ṷ⊎⊎⊎⊎⊎⊎⊎⊎⊏',
       '⊏⊎⊎⊎⊎⊎⊎BBBB⊎⊎⊎⊎⊎⊎⊏',
-      '⊎⊎⊎⊎Ṷ⊎⊎⊎⊎⊎⊎⊎⊎⊎⊎⊎⊎Ṹ',
+      '⊎⊎⊎⊎Ṷ⊎⊎⊎⊎⊎⊎⊎⊎⊎⊎⊎⊎⊎',
       '⊏⊎⊎⊎⊎Ṷ⊎⊎⊎⊎⊎Ṷ⊎⊎⊎Ṷ⊎⊏',
       '⊏⊎⊎BB⊎⊎⊎⊎⊎⊎BB⊎⊎Ṷ⊎⊏',
       '⊏ṹ⊎⊎⊎⊎⊎⊎⊎⊎⊎⊎⊎⊎⊎⊎⊎⊏',
@@ -1503,6 +1503,13 @@ export const MAPS3 = {
       '⊏ṹ⊎⊎⊎ṷṷṷṷ⊎⊎⊎⊎⊎⊎⊎Ṷ⊏',
       'Ṹ⊏⊏⊏⊏⊏⊏⊏⊏⊏⊏Ṹ⊏⊏⊏⊏⊏⊏',
     ]),
+    // Both row-5 edge tiles are crownfloor exits, west and east alike.
+    // The east tile shipped as a bannerwall glyph (W6 dressing) in the
+    // W17-E swap — a solid wall under the warp, so the exit to
+    // Crownspire could never be stepped on and the League was
+    // unreachable (completion run 4, 2026-11-17). Corrected to
+    // crownfloor; scripts/audit-warp-tiles.mjs now guards every warp's
+    // source and destination tiles on every map.
     warps: [
       { x: 0, y: 5, to: { map: 'route22', x: 1, y: 5 } },
       { x: 17, y: 5, to: { map: 'indigo', x: 9, y: 13 } },
