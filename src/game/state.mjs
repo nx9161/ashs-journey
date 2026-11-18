@@ -112,6 +112,21 @@ export function hasTravelersMemory(state, gate) {
   return !!(state && state.story && Array.isArray(state.story.travelersMemory)
     && state.story.travelersMemory.includes(gate));
 }
+// REGION-1 FIX WAVE (Bug 4): the current row of a regional quest
+// chain — the first incomplete row AFTER the last completed one, not
+// the first incomplete row overall. A skipped step (its flag never
+// set while later rows completed) must not pin the objective HUD or
+// the Quest Log's active marker forever: when a later row's flag
+// stands, the player is demonstrably beyond the skipped row. In-order
+// play is unchanged — flags set in order make both readings agree.
+// Shared by the HUD (overworld-systems sysObjective) and the Quest
+// Log (main-systems) so the two surfaces can never disagree again.
+export function currentQuestOf(chain, flags) {
+  let lastDone = -1;
+  chain.forEach((qq, i) => { if (qq.flag && flags[qq.flag]) lastDone = i; });
+  for (let i = lastDone + 1; i < chain.length; i++) { if (chain[i].flag) return chain[i]; }
+  return null;
+}
 // Starter breadth (§6): the Arden starter lines, by base species. A
 // line counts as "chosen in the source run" when the shipped game
 // recorded it joining that run: the gift-event flags

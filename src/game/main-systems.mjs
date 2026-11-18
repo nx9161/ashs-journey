@@ -8,7 +8,7 @@ import { MOVES } from '../data/moves.mjs';
 import { ITEMS } from '../data/items.mjs';
 import { giveKeepsake } from './keepsakes.mjs';
 import { resolveStartPos } from './start-pos.mjs';
-import { displayName, dexCaughtCount, evolutionCheck, ownCaughtMap } from './state.mjs';
+import { displayName, dexCaughtCount, evolutionCheck, ownCaughtMap, currentQuestOf } from './state.mjs';
 import { MAIN_QUESTS, LEGENDARY_ARCS } from '../data/story-kanto.mjs';
 import { ORANGE_QUESTS } from '../data/story-orange.mjs';
 import { JOHTO_QUESTS } from '../data/story-johto.mjs';
@@ -385,7 +385,7 @@ Object.assign(Game.prototype, {
     items.push({ label: '— MAIN STORY —', value: null, disabled: true, band: true });
     for (const q of MAIN_QUESTS) {
       const doneF = q.flag && g.state.story.flags[q.flag];
-      const active = !doneF && MAIN_QUESTS.find((x) => !x.flag || !g.state.story.flags[x.flag]) === q;
+      const active = !doneF && currentQuestOf(MAIN_QUESTS, g.state.story.flags) === q;
       items.push({
         label: (doneF ? '★ ' : active ? '▶ ' : '· ') + q.text,
         value: 'q:' + q.id, disabled: !active && !doneF,
@@ -405,7 +405,7 @@ Object.assign(Game.prototype, {
       items.push({ label: '— AMBER ISLES —', value: null, disabled: true, band: true });
       for (const q of ORANGE_QUESTS) {
         const doneF = q.flag && g.state.story.flags[q.flag];
-        const active = !doneF && ORANGE_QUESTS.find((x) => !x.flag || !g.state.story.flags[x.flag]) === q;
+        const active = !doneF && currentQuestOf(ORANGE_QUESTS, g.state.story.flags) === q;
         const count = q.badgeCount ? ' — ' + ((g.state.badges.orange || []).length) + '/4 badges' : '';
         const tcount = q.titanCount ? ' — ' + ((g.state.story.flags.orange_2000_moltres ? 1 : 0) + (g.state.story.flags.orange_2000_zapdos ? 1 : 0) + (g.state.story.flags.orange_2000_articuno ? 1 : 0)) + '/3 titans calmed' : '';
         items.push({
@@ -428,7 +428,7 @@ Object.assign(Game.prototype, {
       items.push({ label: '— YAMATO —', value: null, disabled: true, band: true });
       for (const q of JOHTO_QUESTS) {
         const doneF = q.flag && g.state.story.flags[q.flag];
-        const active = !doneF && JOHTO_QUESTS.find((x) => !x.flag || !g.state.story.flags[x.flag]) === q;
+        const active = !doneF && currentQuestOf(JOHTO_QUESTS, g.state.story.flags) === q;
         items.push({
           label: (doneF ? '★ ' : active ? '▶ ' : '· ') + q.text,
           value: 'jq:' + q.id, disabled: !active && !doneF,
@@ -449,7 +449,7 @@ Object.assign(Game.prototype, {
       items.push({ label: '— BOREA —', value: null, disabled: true, band: true });
       for (const q of SINNOH_QUESTS) {
         const doneF = q.flag && g.state.story.flags[q.flag];
-        const active = !doneF && SINNOH_QUESTS.find((x) => !x.flag || !g.state.story.flags[x.flag]) === q;
+        const active = !doneF && currentQuestOf(SINNOH_QUESTS, g.state.story.flags) === q;
         items.push({
           label: (doneF ? '★ ' : active ? '▶ ' : '· ') + q.text,
           value: 'sq:' + q.id, disabled: !active && !doneF,
@@ -782,10 +782,19 @@ Object.assign(Game.prototype, {
         return;
       }
       if (v === 'fly') {
+        // REGION-1 FIX WAVE (Bug 2): destinations are the Center towns
+        // the player has actually been to. visited_<id> is written on
+        // entry by sysLoadMap (its writer was keyed on a map field no
+        // map defines — see overworld-systems); reached_<id> has been
+        // written on every map entry all along, so accepting it here
+        // heals existing saves (their real travel history) with no
+        // schema change. The Center-door filter keeps both honest:
+        // only a town that fields a Center can be a destination.
+        const isFlyTown = (id) => MAPS[id] && (MAPS[id].warps || []).some((w) => w.to && w.to.map === 'center');
         const cities = Object.keys(g.state.story.flags)
-          .filter((k) => k.startsWith('visited_'))
+          .filter((k) => k.startsWith('visited_') || k.startsWith('reached_'))
           .map((k) => k.slice(8))
-          .filter((id) => MAPS[id]);
+          .filter((id, i, a) => a.indexOf(id) === i && isFlyTown(id));
         if (!cities.length) { g.ui.say(['No town visited yet — nowhere to fly to.']); return; }
         const dests = cities.map((id) => ({ label: MAPS[id].name, value: id }));
         dests.push({ label: 'Back', value: null });

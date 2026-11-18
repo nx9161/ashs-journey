@@ -166,7 +166,10 @@ export class OverworldScene {
       // no ticket (scripted entry) it falls back to Fernmere, the
       // first Mart town — the Center's Dawnwick fallback pattern.
       if (id === 'mart') {
-        const origin = (this.martReturn && this.martReturn.map) || 'viridian';
+        // REGION-1 FIX WAVE (Bug 1): the clerk's origin town resolves
+        // through martExit() so a reloaded Mart fields the ORIGIN
+        // town's clerk, not the Fernmere fallback.
+        const origin = this.martExit().map;
         this._martOrigin = origin;
         const src = MAPS[origin];
         const clerk = src && Array.isArray(src.npcs) ? src.npcs.find((n) => n.mart) : null;
@@ -407,6 +410,24 @@ export class OverworldScene {
     const lc = this.game && this.game.state && this.game.state.story && this.game.state.story.lastCenter;
     if (lc && typeof lc.map === 'string' && Number.isFinite(lc.x) && Number.isFinite(lc.y)) return { map: lc.map, x: lc.x, y: lc.y };
     return { map: 'pallet', x: 6, y: 9 };
+  }
+
+  // REGION-1 FIX WAVE (Bug 1): the Mart's resolver, mirroring
+  // centerExit() — the runtime ticket first, then the PERSISTED
+  // story.lastMart anchor, then the genre fallback (Fernmere, the
+  // first Mart town). The Mart ticket used to be runtime-only: the
+  // Center's anchor was persisted in the P1 fix, the Mart's never
+  // was, so any save/reload (or closed tab — entering a Mart
+  // autosaves) inside a Mart forgot the origin town and the exit
+  // deposited the player in Fernmere, with Fernmere's clerk behind
+  // the counter. The shared 'mart' interior serves all 64 Center
+  // towns in every region, so the defect — and this fix — are
+  // game-wide.
+  martExit() {
+    if (this.martReturn && this.martReturn.map) return this.martReturn;
+    const lm = this.game && this.game.state && this.game.state.story && this.game.state.story.lastMart;
+    if (lm && typeof lm.map === 'string' && Number.isFinite(lm.x) && Number.isFinite(lm.y)) return { map: lm.map, x: lm.x, y: lm.y };
+    return { map: 'viridian', x: 13, y: 8 };
   }
 
   tileAt(x, y) {
@@ -745,7 +766,13 @@ export class OverworldScene {
       this.centerReturn = wp.via;
       g.state.story.lastCenter = { map: wp.via.map, x: wp.via.x, y: wp.via.y };
     }
-    if (to.map === 'mart' && wp.via) this.martReturn = wp.via;
+    if (to.map === 'mart' && wp.via) {
+      this.martReturn = wp.via;
+      // REGION-1 FIX WAVE (Bug 1): persist the Mart anchor exactly as
+      // the Center's is persisted (P1) — a save/reload inside the Mart
+      // must still exit to THIS town's door-front.
+      g.state.story.lastMart = { map: wp.via.map, x: wp.via.x, y: wp.via.y };
+    }
     if (g.state.settings.reducedMotion) { this.doWarp(to, wp); return; }
     const kind = g.tileKind(this.tileAt(this.player.tx, this.player.ty));
     const door = g.doorOpenSprite ? (g.doorOpenSprite(kind, this.mapId) ? kind : null) : null;
@@ -802,7 +829,10 @@ export class OverworldScene {
       // must still exit to THIS town's door-front.
       g.state.story.lastCenter = { map: wp.via.map, x: wp.via.x, y: wp.via.y };
     }
-    if (to.map === 'mart' && wp.via) this.martReturn = wp.via;
+    if (to.map === 'mart' && wp.via) {
+      this.martReturn = wp.via;
+      g.state.story.lastMart = { map: wp.via.map, x: wp.via.x, y: wp.via.y };
+    }
     this.loadMap(to.map);
     this.player.tx = to.x; this.player.ty = to.y;
     this.player.px = to.x * TILE; this.player.py = to.y * TILE;
@@ -851,7 +881,7 @@ export class OverworldScene {
       // Wave 5b: viaExit resolves per shared interior — the Mart's
       // exit ticket is its own (martReturn), the Center's is unchanged.
       if (wp.viaExit) to = this.mapId === 'mart'
-        ? (this.martReturn || { map: 'viridian', x: 13, y: 8 })
+        ? this.martExit()
         : this.centerExit();
       this.startWarpFade(to, wp);
       return;

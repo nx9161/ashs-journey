@@ -526,6 +526,16 @@ export function fillV2Defaults(data) {
         data.story.lastCenter = { map: lc.map, x: Math.trunc(lc.x), y: Math.trunc(lc.y) };
       } else delete data.story.lastCenter;
     }
+    // REGION-1 FIX WAVE (Bug 1): story.lastMart — the Mart twin of
+    // lastCenter (additive; absent in every legacy save, where the
+    // Mart exit simply keeps its Fernmere fallback until the next
+    // Mart visit writes the anchor). Same closed-shape sanitation.
+    if (data.story.lastMart !== undefined) {
+      const lm = data.story.lastMart;
+      if (isObj(lm) && typeof lm.map === 'string' && /^[a-z0-9-]{1,40}$/.test(lm.map) && Number.isFinite(lm.x) && Number.isFinite(lm.y)) {
+        data.story.lastMart = { map: lm.map, x: Math.trunc(lm.x), y: Math.trunc(lm.y) };
+      } else delete data.story.lastMart;
+    }
     // ADR-025 §6 (Phase 6): HoF lists normalize to the ONE canonical
     // shape on load — legacy { species, level } entries (the shape the
     // server validator was written against) and the pushed

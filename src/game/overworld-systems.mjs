@@ -14,7 +14,7 @@ import { grantKeepsake, grantKeepsakeFromSource, dupeKeepsakeLine, DUPE_KEEPSAKE
 import { hasTravelersMemory } from './state.mjs';
 import { TILE } from '../engine/render.mjs';
 import { roll, intIn, pickWeighted } from '../engine/rng.mjs';
-import { makeMon, dexRegister, displayName, evolutionCheck, boxCheck, grantPartnerMon, hasPartnerMon } from './state.mjs';
+import { makeMon, dexRegister, displayName, evolutionCheck, boxCheck, grantPartnerMon, hasPartnerMon, currentQuestOf } from './state.mjs';
 import { sparLevelFor } from './rules.mjs';
 import { BattleScene } from './battle.mjs';
 import { resolveStartPos } from './start-pos.mjs';
@@ -68,10 +68,19 @@ Object.assign(OverworldScene.prototype, {
     const g = this.game;
     const saf = g.state.session && g.state.session.safari;
     if (saf) {
-      // Zone-style sessions only (a hub is planted): the Arden
-      // session (no hub) keeps its exact legacy warp behaviour.
+      // Zone-style sessions (a hub is planted) end on hub/outside
+      // landings, as shipped.
       if (saf.hub && to === saf.hub && from !== saf.hub) { this.endSafari('You left the ' + (saf.name || 'Bramble Preserve') + '.'); return; }
       if (saf.hub && !(saf.maps || []).includes(to) && to !== saf.hub) this.endSafari('You left the ' + (saf.name || 'Bramble Preserve') + '.');
+      // REGION-1 FIX WAVE (Bug 3): hub-less sessions (the Arden
+      // Preserve) used to keep "exact legacy warp behaviour" — the
+      // leak: the Preserve's own door warps land in Bramble with no
+      // cleanup, so the session, its step HUD and the Safari Balls
+      // followed the player out (completion runs 3/4, observed on
+      // Crown Road). A landing outside the zone now ends a hub-less
+      // session IN PLACE — the warp already delivered the player to
+      // the exit town, so only the session state is wound up.
+      if (!saf.hub && !(saf.maps || []).includes(to)) this.endSafariInPlace('You left the ' + (saf.name || 'Bramble Preserve') + '.');
       return;
     }
     const dest = MAPS[to];
@@ -113,10 +122,37 @@ Object.assign(OverworldScene.prototype, {
           if (this.map.rows[y][x] === 'B') this.fxState.boulders.set(key(x, y), { x, y });
         }
       }
-      if (this.map.centerCity) g.state.story.flags['visited_' + id] = true;
+      // REGION-1 FIX WAVE (Bug 2 — Fly was dead): the visited_<id>
+      // writer keyed on a `centerCity` map field that NO map in any
+      // region defines, so no town was ever marked visited and Fly's
+      // destination list was always empty. The design's own record of
+      // "a place the player can fly back to" is the Center door:
+      // exactly 64 towns/hubs across all five regions + the Trial
+      // Grounds field a warp into the shared 'center' interior (the
+      // same 64 that field a Mart door — census in the wave SPEC).
+      // Derive the mark from that warp, game-wide, with no data edits;
+      // an explicit centerCity field, if ever authored, still counts.
+      if (this.map.centerCity || (this.map.warps || []).some((w) => w.to && w.to.map === 'center')) {
+        g.state.story.flags['visited_' + id] = true;
+      }
     }
     if (g.state.story.flags['in_' + id] === undefined) g.state.story.flags['in_' + id] = true;
     g.state.story.flags['reached_' + id] = true; // quest chain producers (WS6)
+    // REGION-1 FIX WAVE (Bug 3): a DIRECT load that lands a hub-less
+    // safari session outside its zone — Fly-out, a blackout's Center
+    // load, or Continue on a save written mid-leak (the run-4 save
+    // carried a live session onto Crown Road) — ends the session in
+    // place. Silent wind-up + a toast: loadMap runs inside other
+    // flows' dialogue callbacks (the blackout's say), where a nested
+    // dialogue would interleave. The door-warp landing performs the
+    // spoken version in sysWarpLanding.
+    {
+      const saf = g.state.session && g.state.session.safari;
+      if (saf && !saf.hub && !(saf.maps || []).includes(id)) {
+        const left = this.clearSafariSession();
+        if (left > 0) g.ui.toast('The park keeps the ' + left + ' unused Safari Balls.');
+      }
+    }
     // ADR-025 §6 (Traveler's Memory): the Farsight gate, remembered.
     // The shipped game never posted a guard at Farsight's doors (the
     // city is entered freely), so the memory surfaces as the city
@@ -2893,6 +2929,27 @@ Object.assign(OverworldScene.prototype, {
   // --- H4b: runHoennNpc east actors + the climax/Institute/Pyre/
   // hideout/Seafloor scenes extend the dispatch above ---
 
+  // REGION-1 FIX WAVE (Bug 3): the state wind-up shared by every
+  // session end — session cleared, unspent Safari Balls returned to
+  // the park. Returns the unspent-ball count for the caller's text.
+  clearSafariSession() {
+    const g = this.game;
+    g.state.session.safari = null;
+    const left = g.state.bag.safariball || 0;
+    g.state.bag.safariball = 0;
+    return left;
+  },
+
+  // REGION-1 FIX WAVE (Bug 3): end a hub-less safari session where
+  // the player already stands (the Preserve door-warp landing) —
+  // endSafari's words and wind-up, without its relocation warp.
+  endSafariInPlace(msg) {
+    const g = this.game;
+    if (!g.state.session.safari) return;
+    const left = this.clearSafariSession();
+    g.ui.say(left > 0 ? [msg, '(The park keeps the ' + left + ' unused Safari Balls.)'] : [msg]);
+  },
+
   endSafari(msg) {
     const g = this.game;
     // S4: the exit is the session's own data (the Marsh session exits
@@ -4342,6 +4399,24 @@ Object.assign(OverworldScene.prototype, {
   },
 
   // ---------- objective (quest-driven HUD line) ----------
+  // REGION-1 FIX WAVE (Bug 4): the current row of a quest chain is
+  // the first incomplete row AFTER the last completed one — not the
+  // first incomplete row overall. Every chain below used to take the
+  // first row whose flag was unset, so one skipped step pinned the
+  // HUD forever: a player who walked past the Sea Cottage beat (its
+  // only trigger is one event tile at the researcher's feet; talking
+  // to him from the side never fires it) and finished the campaign
+  // still read "Help the researcher at the Sea Cottage" at the
+  // League door (completion runs 3 AND 4). When a later row's flag
+  // stands, the player is demonstrably beyond the skipped row, and
+  // the objective follows their actual arc. In-order play is
+  // byte-identical: flags set in order make the two readings agree.
+  // The mechanism is shared by all five regional chains, so the fix
+  // is game-wide.
+  currentQuest(chain, flags) {
+    return currentQuestOf(chain, flags);
+  },
+
   sysObjective() {
     const g = this.game;
     // Stage O2: while the Amber arc is current, its chain leads the
@@ -4357,28 +4432,28 @@ Object.assign(OverworldScene.prototype, {
           ? '▶ The Storm over Sanctum — return to Sanctum Shrine: the guardian rises'
           : '▶ The Storm over Sanctum — calm the three titans (' + n + '/3)';
       }
-      const oq = ORANGE_QUESTS.find((qq) => qq.flag && !g.state.story.flags[qq.flag]);
+      const oq = this.currentQuest(ORANGE_QUESTS, g.state.story.flags);
       if (oq) return '▶ ' + oq.text + (oq.badgeCount ? ' (' + ((g.state.badges.orange || []).length) + '/4)' : '') + (oq.titanCount ? ' (' + ((f.orange_2000_moltres ? 1 : 0) + (f.orange_2000_zapdos ? 1 : 0) + (f.orange_2000_articuno ? 1 : 0)) + '/3 titans calmed)' : '');
     }
     // Stage J4a: while the Yamato arc is current, its chain leads the
     // HUD objective (the west rows in J4a; J4b's appended rows join
     // the same find, in chain order).
     if (currentArcOf(g.state).id === 'johto') {
-      const jq = JOHTO_QUESTS.find((qq) => qq.flag && !g.state.story.flags[qq.flag]);
+      const jq = this.currentQuest(JOHTO_QUESTS, g.state.story.flags);
       if (jq) return '▶ ' + jq.text;
     }
     // Stage H4a: while the Maris arc is current, its chain leads the
     // HUD objective (the first-half rows; H4b's appended rows join
     // the same find, in chain order).
     if (currentArcOf(g.state).id === 'hoenn') {
-      const hq = HOENN_QUESTS.find((qq) => qq.flag && !g.state.story.flags[qq.flag]);
+      const hq = this.currentQuest(HOENN_QUESTS, g.state.story.flags);
       if (hq) return '▶ ' + hq.text;
     }
     // Stage S5a: while the Borea arc is current, its chain leads the
     // HUD objective (the first-half rows; S5b's appended rows join
     // the same find, in chain order).
     if (currentArcOf(g.state).id === 'sinnoh') {
-      const sq = SINNOH_QUESTS.find((qq) => qq.flag && !g.state.story.flags[qq.flag]);
+      const sq = this.currentQuest(SINNOH_QUESTS, g.state.story.flags);
       if (sq) return '▶ ' + sq.text;
     }
     // Game-feel F3: the opening objective names the actual first step —
@@ -4388,7 +4463,7 @@ Object.assign(OverworldScene.prototype, {
     if (gf.metPartner && !gf.reached_route1 && !gf.beat_brock) {
       return '▶ Leave Dawnwick — Route 1 lies south';
     }
-    const q = MAIN_QUESTS.find((qq) => qq.flag && !g.state.story.flags[qq.flag]);
+    const q = this.currentQuest(MAIN_QUESTS, g.state.story.flags);
     if (q) return '▶ ' + q.text;
     const active = Object.keys(g.state.story.quests).find((k) => g.state.story.quests[k] === 'active');
     if (active && LEGENDARY_ARCS[active]) return '▶ Arc: ' + LEGENDARY_ARCS[active].title;
