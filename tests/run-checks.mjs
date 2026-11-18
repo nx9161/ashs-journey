@@ -59,7 +59,7 @@ const GROUPS = {
   audits: [
     S('verify-audio.mjs'), S('audit-towns.mjs'), S('audit-reachability.mjs'),
     S('audit-placement.mjs'), S('audit-desire-paths.mjs'), S('audit-battle-art.mjs'),
-    S('audit-start-positions.mjs'),
+    S('audit-start-positions.mjs'), S('audit-warp-tiles.mjs'),
   ],
   // Known-red at the W2 baseline (counts in checks.yml). They RUN on every
   // push so their state is never silent again, but they do not block.
