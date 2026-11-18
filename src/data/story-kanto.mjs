@@ -67,6 +67,8 @@ export const EVENTS = {
     { say: ['The fix is on that terminal. Big friendly button. Press it, and try not to enjoy this too much.'], who: 'ODO' },
     { say: ['...And — THERE. Two legs, ten fingers, one dignity, slightly used. Odo is back!'], who: 'ODO' },
     { say: ['You saved my career and my afternoon, in that order. Take this — I get invited to a floating trainer party every year and I never go. A spare ticket for the St. Anne, docked in Arcport.', 'Go. Mingle. Battle someone who owns a butler. You have earned it.'], who: 'ODO' },
+    { give: { items: { ssticket: 1 } } },
+    { toast: 'Received the S.S. Ticket!' },
     { flag: 'bill_helped' },
     { questDone: 'q_bill' },
     { toast: 'Odo is himself again!' },

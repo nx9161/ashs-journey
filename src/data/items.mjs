@@ -109,7 +109,7 @@ export const ITEMS = {
   thunderstone: { id: 'thunderstone', name: 'Thunder Stone', pocket: 'items', price: 2100, desc: 'Evolves certain Electric lines. The partner refuses it — firmly.' },
   leafstone: { id: 'leafstone', name: 'Leaf Stone', pocket: 'items', price: 2100, desc: 'Evolves certain Grass lines.' },
   moonstone: { id: 'moonstone', name: 'Moon Stone', pocket: 'items', price: 0, desc: 'A stone that fell with the MOONLET legends of Mt. Lunestone.' },
-  sunstone: { id: 'sunstone', name: 'Sun Stone', pocket: 'items', price: 0, desc: 'A stone that glows like bottled morning. Evolves certain sun-loving lines.' },
+  sunstone: { id: 'sunstone', name: 'Sun Stone', pocket: 'items', price: 2100, desc: 'A stone that glows like bottled morning. Evolves certain sun-loving lines.' },
   // Treasures / misc
   nugget: { id: 'nugget', name: 'Nugget', pocket: 'items', price: 10000, desc: 'A gold nugget. Sell it at a mart.' },
   stardust: { id: 'stardust', name: 'Stardust', pocket: 'items', price: 2000, desc: 'Fine red sand. Sell it at a mart.' },

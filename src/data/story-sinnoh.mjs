@@ -531,6 +531,8 @@ export const SINNOH_EVENTS = {
     { say: ['Honeyfield\'s meadow has done something the florists will talk about for a decade: overnight, in the wrong season, the Gracidea have opened — all of them, a whole field standing in pink-white bloom like the meadow is holding a celebration it forgot to announce.', 'The beekeepers say the flowers open like this only in gratitude, and only all at once. Gratitude for what, nobody can agree — until the bloom at the field\'s heart moves against the wind, and a small green shape with a flower on either ear lifts its head out of the blossom, considers you with total unafraid calm... and settles back down into the flowers, the way a guest settles into a house that is partly theirs.'], who: '' },
     { say: ['GRATHOG. The Gratitude Kin, in its own flower field, at its own celebration. It is not yours to disturb today, and it knows you know it. Some meetings are appointments. This one is a promise.'], who: '' },
     { panel: 'gracidea-grathog' },
+    { give: { items: { gracidea: 1 } } },
+    { toast: 'Received the Gracidea!' },
     { flag: 'gracidea_beat_done' },
     { flag: 'shaymin_glimpsed' },
     { flag: 'shaymin_unlocked' },

@@ -196,7 +196,9 @@ export const MAPS6 = {
             "potion",
             "superpotion",
             "antidote",
-            "awakening"
+            "awakening",
+            "burnheal",
+            "iceheal"
           ]
         }
       },
@@ -509,7 +511,8 @@ export const MAPS6 = {
         "dialogue": [
           "The pond's stocked by the city, but the big ones are nobody's fools.",
           "Flowers on the water, flowers on the wind. Blossom earns its name."
-        ]
+        ],
+        "give": { "flag": "marin_oldrod", "items": { "oldrod": 1 }, "text": "the Old Rod" }
       },
       {
         "x": 13,
@@ -558,7 +561,9 @@ export const MAPS6 = {
             "potion",
             "superpotion",
             "antidote",
-            "awakening"
+            "awakening",
+            "burnheal",
+            "iceheal"
           ]
         }
       }
@@ -908,7 +913,9 @@ export const MAPS6 = {
             "potion",
             "superpotion",
             "antidote",
-            "awakening"
+            "awakening",
+            "burnheal",
+            "iceheal"
           ]
         }
       }
@@ -1270,6 +1277,8 @@ export const MAPS6 = {
             "hyperpotion",
             "antidote",
             "parlyzheal",
+            "burnheal",
+            "iceheal",
             "revive"
           ]
         }
@@ -1636,7 +1645,8 @@ export const MAPS6 = {
         "dialogue": [
           "The Bike Shop lends wheels to half the trainers in Yamato.",
           "Signal legs are cycling legs. You'll see."
-        ]
+        ],
+        "give": { "flag": "ryo_bicycle", "items": { "bicycle": 1 }, "text": "the Bicycle" }
       },
       {
         "x": 12,
@@ -2045,6 +2055,8 @@ export const MAPS6 = {
             "hyperpotion",
             "antidote",
             "parlyzheal",
+            "burnheal",
+            "iceheal",
             "revive"
           ]
         }
@@ -4877,7 +4889,8 @@ export const MAPS6 = {
         "dialogue": [
           "The lab tracks every registered egg in western Yamato. Every one.",
           "Professor Linden names his notebooks by year and by weather. It works for him."
-        ]
+        ],
+        "give": { "flag": "lin_itemfinder", "items": { "itemfinder": 1 }, "text": "the Itemfinder" }
       },
       {
         "x": 5,
@@ -7315,6 +7328,8 @@ export const MAPS6 = {
             "hyperpotion",
             "antidote",
             "parlyzheal",
+            "burnheal",
+            "iceheal",
             "revive"
           ]
         }
@@ -7713,7 +7728,11 @@ export const MAPS6 = {
             "hyperpotion",
             "fullheal",
             "revive",
-            "superpotion"
+            "superpotion",
+            "tm20",
+            "tm21",
+            "tm22",
+            "tm23"
           ]
         }
       }
@@ -8035,7 +8054,11 @@ export const MAPS6 = {
             "hyperpotion",
             "fullheal",
             "revive",
-            "superpotion"
+            "superpotion",
+            "tm24",
+            "tm25",
+            "tm26",
+            "tm27"
           ]
         }
       }
@@ -9857,7 +9880,8 @@ export const MAPS6 = {
         "dialogue": [
           "Forty years I've fished this lake. This season the WRATHWYRM run shallow and angry, and the shallows run red.",
           "Something under that water is hurting, trainer. Fish can tell. So can old men."
-        ]
+        ],
+        "give": { "flag": "garr_goodrod", "items": { "goodrod": 1 }, "text": "the Good Rod" }
       }
     ],
     "encounters": {

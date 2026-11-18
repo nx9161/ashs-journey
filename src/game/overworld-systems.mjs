@@ -4160,6 +4160,13 @@ Object.assign(OverworldScene.prototype, {
       if (v === 'buy') {
         g.state.player.money -= 1000;
         g.state.bag.coin = (g.state.bag.coin || 0) + 50;
+        // Wire-the-dead-items: the Coin Case's first legitimate mint — the
+        // desk hands it over with a first coin purchase (it previously
+        // existed only via the NG+ handover, and nothing ever checked it).
+        if (!(g.state.bag.coincase > 0)) {
+          g.state.bag.coincase = 1;
+          g.ui.toast('Received the Coin Case!');
+        }
         this.openSlots();
         return;
       }

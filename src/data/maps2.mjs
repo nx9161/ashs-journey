@@ -60,7 +60,7 @@ export const MAPS2 = {
     ],
     npcs: [
       { x: 13, y: 11, name: 'MART CLERK', art: 'clerk-arden', skin: '#f0c8a0', shirt: '#3a6ac0', pants: '#2a2a3a', hair: '#2a1a0a',
-        mart: { stock: ['pokeball', 'greatball', 'potion', 'superpotion', 'antidote', 'awakening'] },
+        mart: { stock: ['pokeball', 'greatball', 'potion', 'superpotion', 'antidote', 'awakening', 'burnheal', 'iceheal'] },
         dialogue: ["Flintridge Mart — stone-country stock. The Lunestone road eats potions; plan ahead."] },
       { x: 10, y: 4, name: 'COACH', art: 'coach', skin: '#d8a878', shirt: '#c03a3a', pants: '#2a2a3a', hair: '#1a1a1a',
         dialogue: ["Garran's rock-types shrug off electric attacks — your partner's sparks won't cut it in there.", "Catch a FUSSAPE on Route 2 — fighting beats rock, and they learn Low Kick young. Water or grass would work too, but you won't find those this side of the forest.", "You've got heart, kid. Take these Capture Orbs — on the house."],
@@ -313,7 +313,7 @@ export const MAPS2 = {
     ],
     npcs: [
       { x: 14, y: 3, name: 'MART CLERK', art: 'clerk-arden', skin: '#f0c8a0', shirt: '#3a6ac0', pants: '#2a2a3a', hair: '#2a1a0a',
-        mart: { stock: ['pokeball', 'greatball', 'superpotion', 'hyperpotion', 'antidote', 'parlyzheal', 'revive'] },
+        mart: { stock: ['pokeball', 'greatball', 'superpotion', 'hyperpotion', 'antidote', 'parlyzheal', 'burnheal', 'iceheal', 'revive'] },
         dialogue: ["Tidehaven Mart — bridge-and-river stock, waterproofed twice over."] },
       { x: 17, y: 1, name: 'ODO', art: 'scientist', skin: '#f0c8a0', shirt: '#5d3fa5', pants: '#3a3a4a', hair: '#a05a2a',
         dialogue: ["Heya! I'm Odo — the PC box whiz. My teleport experiment hiccuped and I woke up dressed as a MOONLET.", "My Sea Cottage lab is shuttered while I fix it, so ask me anything here. Your boxes? I built those. You're welcome."] },
@@ -333,6 +333,7 @@ export const MAPS2 = {
     items: [],
     hidden: [
       { x: 8, y: 2, item: 'nugget', n: 1 },
+      { x: 9, y: 2, item: 'stardust', n: 1 },
     ],
     events: [
       { id: 'ev_rival_bridge', x: 8, y: 1, when: { flagNot: 'ev_rival_bridge_done' } },
@@ -504,7 +505,7 @@ export const MAPS2 = {
     ],
     npcs: [
       { x: 13, y: 4, name: 'MART CLERK', art: 'clerk-arden', skin: '#f0c8a0', shirt: '#3a6ac0', pants: '#2a2a3a', hair: '#2a1a0a',
-        mart: { stock: ['pokeball', 'greatball', 'superpotion', 'hyperpotion', 'antidote', 'parlyzheal', 'revive'] },
+        mart: { stock: ['pokeball', 'greatball', 'superpotion', 'hyperpotion', 'antidote', 'parlyzheal', 'burnheal', 'iceheal', 'revive'] },
         dialogue: ["Arcport Mart — harbour stock. Everything ferry-proof, gull-proof, and salt-proof."] },
       { x: 3, y: 9, name: 'OFFICER RAE', art: 'officer', skin: '#d8a878', shirt: '#3a6ac0', pants: '#2a2a3a', hair: '#1a1a1a',
         giveMon: { species: 'squirtle', level: 10 },
@@ -707,7 +708,7 @@ export const MAPS2 = {
       { x: 5, y: 12, name: 'ELIAS', art: 'cast-elias', skin: '#e8b888', shirt: '#50368e', pants: '#4a4a5a', hair: '#c0c0c0',
         giveMon: { species: 'eevee', level: 25 },
         dialogue: ["Atop the old condo I kept a PRISMKIT — bright little thing, brimming with possible futures.", "My traveling days are done. Take PRISMKIT, and let it become whatever your journey needs."] },
-      { x: 11, y: 8, name: 'HOSTESS', art: 'host-arden', skin: '#f0c8a0', shirt: '#e86a5a', pants: '#2a2a3a', hair: '#1a1a1a',
+      { x: 11, y: 8, name: 'HOSTESS', art: 'host-arden', skin: '#f0c8a0', shirt: '#e86a5a', pants: '#2a2a3a', hair: '#1a1a1a', slots: true,
         dialogue: ["Welcome to the Game Corner, hon! Coins, prizes, and absolutely no funny business by the poster. None. Ever.", "The boss counts the slot tokens twice a night. Paranoid? In THIS city? Ha."] },
       { x: 4, y: 8, name: 'PERFUMER', art: 'lady', skin: '#f0c8a0', shirt: '#5d3fa5', pants: '#3a3a4a', hair: '#a05a2a',
         dialogue: ["Verna's perfume is distilled from her own garden. One whiff and even a SOMNIBEAR sighs.", "Careful — her gym smells sweet right up until the Sleep Powder."] },
@@ -724,6 +725,7 @@ export const MAPS2 = {
     items: [],
     hidden: [
       { x: 8, y: 3, item: 'nugget', n: 1 },
+      { x: 8, y: 2, item: 'stardust', n: 1 },
     ],
     events: [],
     start: null,

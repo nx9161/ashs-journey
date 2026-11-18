@@ -560,7 +560,7 @@ export const MAPS3 = {
       { x: 9, y: 10, name: 'CHILD', art: 'kid', skin: '#f0c8a0', shirt: '#3a9ac0', pants: '#2a3a4a', hair: '#6a4a2a',
         dialogue: ["My grandma says the tower ghosts are just Kin who loved us too much to leave.", "Do you believe her? I do. It makes the tower feel less scary. Mostly."] },
       { x: 15, y: 11, name: 'MART CLERK', art: 'clerk-arden', skin: '#f0c8a0', shirt: '#3a6ac0', pants: '#2a2a3a', hair: '#1a1a2a',
-        mart: { stock: ['pokeball', 'greatball', 'superpotion', 'hyperpotion', 'antidote', 'awakening'] },
+        mart: { stock: ['pokeball', 'greatball', 'superpotion', 'hyperpotion', 'antidote', 'awakening', 'burnheal', 'iceheal'] },
         dialogue: ["Hushmoor Mart. Quiet shelves, honest prices. Travelers heading south stock up on Antidotes — the fishing road is all fangs."] },
     ],
     encounters: null,
@@ -845,7 +845,7 @@ export const MAPS3 = {
       { x: 3, y: 9, name: 'ZOO FAN', art: 'lady', skin: '#f0c8a0', shirt: '#e08a3a', pants: '#2c3049', hair: '#7a4a1a',
         dialogue: ["The zoo's NURSELING waved at me once. WAVED. I think about it every day.", "Marek's gym is full of invisible walls. Ninjas, man. Ninjas."] },
       { x: 15, y: 8, name: 'MART CLERK', art: 'clerk-arden', skin: '#f0c8a0', shirt: '#3a6ac0', pants: '#2a2a3a', hair: '#1a1a2a',
-        mart: { stock: ['greatball', 'ultraball', 'hyperpotion', 'fullheal', 'revive', 'antidote'] },
+        mart: { stock: ['greatball', 'ultraball', 'hyperpotion', 'fullheal', 'revive', 'antidote', 'burnheal', 'iceheal'] },
         dialogue: ["Bramble Mart! Safari-goers, take note: Ultra Balls and Full Heals, right here, no mud required."] },
       // Wave 5b: AUNTIE MOSS moved into her house (house-fuchsia in
       // maps4.mjs) — her dialogue names it as hers; same NPC, same lines.
@@ -1214,6 +1214,7 @@ export const MAPS3 = {
     ],
     hidden: [
       { x: 2, y: 9, item: 'nugget', n: 1 },
+      { x: 2, y: 10, item: 'starpiece', n: 1 },
     ],
     events: [
       { id: 'ev_articuno', x: 8, y: 6, when: { flagNot: 'ev_articuno_done' } },
@@ -1269,7 +1270,7 @@ export const MAPS3 = {
       { x: 12, y: 8, name: 'DR. EMBER', art: 'scientist', skin: '#f0c8a0', shirt: '#f0f0f0', pants: '#4a4a5a', hair: '#e07830', revive: true,
         dialogue: ["The lab behind me coaxes life out of stone — bring a fossil, any fossil, and our machines will do the rest.", "Helix, dome, even amber older than the island. Stone remembers, trainer. We just remind it how."] },
       { x: 14, y: 11, name: 'MART CLERK', art: 'clerk-arden', skin: '#f0c8a0', shirt: '#3a6ac0', pants: '#2a2a3a', hair: '#1a1a2a',
-        mart: { stock: ['ultraball', 'hyperpotion', 'maxpotion', 'fullrestore', 'revive', 'firestone', 'waterstone', 'thunderstone', 'leafstone'] },
+        mart: { stock: ['ultraball', 'hyperpotion', 'maxpotion', 'fullrestore', 'ether', 'maxether', 'elixir', 'revive', 'firestone', 'waterstone', 'thunderstone', 'leafstone', 'sunstone', 'tm01', 'tm02', 'tm03', 'tm05'] },
         dialogue: ["Caldera Mart — last proper shop before the League road turns north. Stones, balls, and burn insurance."] }
     ],
     encounters: null,
@@ -1583,7 +1584,7 @@ export const MAPS3 = {
     ],
     npcs: [
       { x: 14, y: 11, name: 'MART CLERK', art: 'clerk-arden', skin: '#f0c8a0', shirt: '#3a6ac0', pants: '#2a2a3a', hair: '#1a1a1a',
-        mart: { stock: ['ultraball', 'maxpotion', 'fullrestore', 'maxrevive', 'fullheal'] },
+        mart: { stock: ['ultraball', 'maxpotion', 'fullrestore', 'ether', 'maxether', 'elixir', 'maxrevive', 'fullheal', 'tm06', 'tm08', 'tm09', 'tm10'] },
         dialogue: ["Last shop on the mountain, trainer. Whatever you're missing, you're missing it all the way down."] },
       { x: 9, y: 7, name: 'LEAGUE GUIDE', art: 'clerk-arden', skin: '#e8b888', shirt: '#6a5a8a', pants: '#2a2a3a', hair: '#c0c0c0',
         dialogue: ["Four elites, one champion, zero exits once the first door shuts. Heal here. Save here. Breathe here.", "Win, and the Hall of Fame takes your team's names forever. Lose, and the mountain walk is... educational."] },
@@ -1790,7 +1791,7 @@ export const MAPS3 = {
       // Wave T1: the Mart's own clerk, re-seated from the west field
       // to the main street at his shop's east corner.
       { x: 14, y: 9, name: 'MART CLERK', art: 'clerk-arden', skin: '#f0c8a0', shirt: '#3a6ac0', pants: '#2a2a3a', hair: '#1a1a1a',
-        mart: { stock: ['pokeball', 'greatball', 'potion', 'superpotion', 'antidote', 'awakening'] },
+        mart: { stock: ['pokeball', 'greatball', 'potion', 'superpotion', 'antidote', 'awakening', 'burnheal', 'iceheal'] },
         dialogue: ["Dawnwick Mart — small shelves, honest prices. Everything a first road needs."] },
       { x: 10, y: 4, name: 'VALE', art: 'gary', skin: '#f0c8a0', shirt: '#3a5a9a', pants: '#2a2a3a', hair: '#6a4a2a',
         dialogue: ["Yo, {player}! The professor gave me a PRISMKIT — fluffy, clever, and all mine!", "He says it'll evolve to match how I battle. Just watch — we'll be champions!"] },

@@ -257,7 +257,9 @@ export const MAPS5 = {
             "superpotion",
             "hyperpotion",
             "revive",
-            "antidote"
+            "antidote",
+            "burnheal",
+            "iceheal"
           ]
         }
       }
@@ -602,7 +604,9 @@ export const MAPS5 = {
             "greatball",
             "superpotion",
             "antidote",
-            "awakening"
+            "awakening",
+            "burnheal",
+            "iceheal"
           ]
         }
       }
@@ -1217,7 +1221,9 @@ export const MAPS5 = {
             "superpotion",
             "hyperpotion",
             "revive",
-            "antidote"
+            "antidote",
+            "burnheal",
+            "iceheal"
           ]
         }
       },
@@ -1611,7 +1617,9 @@ export const MAPS5 = {
             "superpotion",
             "hyperpotion",
             "antidote",
-            "parlyzheal"
+            "parlyzheal",
+            "burnheal",
+            "iceheal"
           ]
         }
       }
@@ -2288,7 +2296,14 @@ export const MAPS5 = {
             "hyperpotion",
             "maxpotion",
             "fullrestore",
-            "revive"
+            "ether",
+            "maxether",
+            "elixir",
+            "revive",
+            "tm12",
+            "tm13",
+            "tm14",
+            "tm15"
           ]
         }
       }
@@ -2626,7 +2641,14 @@ export const MAPS5 = {
             "hyperpotion",
             "maxpotion",
             "fullrestore",
-            "revive"
+            "ether",
+            "maxether",
+            "elixir",
+            "revive",
+            "tm16",
+            "tm17",
+            "tm18",
+            "tm19"
           ]
         }
       },
