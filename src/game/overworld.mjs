@@ -10,6 +10,7 @@ import { TILE } from '../engine/render.mjs';
 import { roll, intIn, pickWeighted } from '../engine/rng.mjs';
 import { makeMon, dexRegister, displayName, dexCaughtCount } from './state.mjs';
 import { resolveStartPos } from './start-pos.mjs';
+import { nearestCenterAnchor } from './nearest-center.mjs';
 import { DIFFICULTY_LABELS, difficultyOf, houseRule } from './rules.mjs';
 import { PARTNER_MOODS } from '../data/dialogue.mjs';
 import { TALE_NPCS, TALE_NPC_PATCHES } from '../data/quests.mjs';
@@ -404,12 +405,34 @@ export class OverworldScene {
   // the runtime ticket first, then the persisted last-Center anchor
   // (story.lastCenter survives a save/reload inside a Center, where
   // the runtime ticket is gone), then the genre fallback: Dawnwick,
-  // home (Dawnwick has no Center of its own in this world).
+  // home — (6,9) is Dawnwick's own Center door-front.
   centerExit() {
     if (this.centerReturn && this.centerReturn.map) return this.centerReturn;
     const lc = this.game && this.game.state && this.game.state.story && this.game.state.story.lastCenter;
     if (lc && typeof lc.map === 'string' && Number.isFinite(lc.x) && Number.isFinite(lc.y)) return { map: lc.map, x: lc.x, y: lc.y };
     return { map: 'pallet', x: 6, y: 9 };
+  }
+
+  // NEAREST-CENTER BLACKOUT (owner rule, 2026-11-17): a blackout
+  // respawns in the Center of the NEAREST town from where the player
+  // fainted (nearest-center.mjs — directed warp-graph BFS), never the
+  // last Center he happened to enter. The resolved door-front becomes
+  // BOTH the runtime exit ticket and the persisted story.lastCenter,
+  // so leaving the Center — and reloading inside it — lands on that
+  // town. When no Center town is reachable by warps (a handful of
+  // event/ferry-linked maps), the old lineage stands: centerExit()
+  // (last visited, then home). Non-blackout flows keep using
+  // centerExit() exactly as before.
+  blackoutCenterAnchor() {
+    const st = this.game && this.game.state;
+    const lc = st && st.story ? st.story.lastCenter : null;
+    const a = this.mapId ? nearestCenterAnchor(this.mapId, this.player ? this.player.tx : undefined, this.player ? this.player.ty : undefined, lc) : null;
+    if (a) {
+      const anchor = { map: a.map, x: a.x, y: a.y };
+      if (st && st.story) st.story.lastCenter = { map: anchor.map, x: anchor.x, y: anchor.y };
+      return anchor;
+    }
+    return this.centerExit();
   }
 
   // REGION-1 FIX WAVE (Bug 1): the Mart's resolver, mirroring

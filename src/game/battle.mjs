@@ -2846,8 +2846,11 @@ export class BattleScene {
       const ow = this.returnTo;
       // P1: same blackout anchor as the overworld path — the defeat
       // warp loads 'center' directly, so the exit ticket must be set
-      // from the last-Center lineage first (see overworld.centerExit).
-      if (typeof ow.centerExit === 'function') ow.centerReturn = ow.centerExit();
+      // first. NEAREST-CENTER (owner rule, 2026-11-17): the anchor is
+      // the NEAREST Center town from the faint map
+      // (overworld.blackoutCenterAnchor), not the last-Center lineage.
+      if (typeof ow.blackoutCenterAnchor === 'function') ow.centerReturn = ow.blackoutCenterAnchor();
+      else if (typeof ow.centerExit === 'function') ow.centerReturn = ow.centerExit();
       ow.loadMap('center');
       ow.player.tx = 4; ow.player.ty = 3; ow.player.px = 4 * TILE; ow.player.py = 3 * TILE;
       ow.player.fx = 4; ow.player.fy = 3;

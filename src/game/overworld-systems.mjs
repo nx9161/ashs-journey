@@ -4248,11 +4248,11 @@ Object.assign(OverworldScene.prototype, {
     const g = this.game;
     g.state.player.money = Math.floor(g.state.player.money / 2);
     g.ui.say(['You scurried to a Center, protecting your exhausted team...'], () => {
-      // P1: anchor the exit BEFORE the direct loadMap — a blackout
-      // respawns in the last-visited Center, and leaving it must land
-      // on that Center's town door-front (centerExit resolves the
-      // persisted lineage), never back at the faint location.
-      this.centerReturn = this.centerExit();
+      // P1: anchor the exit BEFORE the direct loadMap, never back at
+      // the faint location. NEAREST-CENTER (owner rule, 2026-11-17):
+      // the anchor is the NEAREST Center town from the faint map
+      // (blackoutCenterAnchor), not the last-visited lineage.
+      this.centerReturn = this.blackoutCenterAnchor();
       this.loadMap('center');
       this.player.tx = 4; this.player.ty = 3;
       this.player.px = 4 * TILE; this.player.py = 3 * TILE;

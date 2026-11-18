@@ -249,7 +249,16 @@ export function defaultState(inherit) {
       },
     },
     facilities: { registry: [], unlocked: [] },
-    bag: { pokeball: 10, potion: 3 },
+    // The starting kit is the professor's hand-out (Route 1's AIDE:
+    // "The professor gave you ten to start"). NEAREST-CENTER wave
+    // (2026-11-17): the Town Map joins the kit — the item and its
+    // graphical panel shipped fully built but NOTHING ever granted
+    // the item, so no real player could ever open the map. No
+    // existing early-game grant flow fits it honestly (the intro's
+    // only grant is the partner ceremony, whose shared core is also
+    // the save-repair path; every event `give` step is a mid/late
+    // story beat), so it starts in the bag like the rest of the kit.
+    bag: { pokeball: 10, potion: 3, townmap: 1 },
     meta: {
       createdAt: 0, updatedAt: 0, playtimeSec: 0, location: 'Dawnwick',
       houseRulesTouched: false, // ADR-025: true once any House Rule is enabled

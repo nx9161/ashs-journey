@@ -73,6 +73,7 @@
  "src/game/contest.mjs",
  "src/game/frontier.mjs",
  "src/game/battle-rt.mjs",
+ "src/game/nearest-center.mjs",
  "src/game/start-pos.mjs",
  "src/game/overworld.mjs",
  "src/game/evolution.mjs",
