@@ -50,7 +50,7 @@
   },
   "pewter#0": {
    "name": "MART CLERK",
-   "inv": "12e30ffecc2abfa387906f7baa6ae47b5d372d3a4707770817dda212acbd9607",
+   "inv": "bbc94cd8c02bfe07b19973f786f6e14a838603626341b0afb647af4289be5518",
    "design": "322b3251d89ef992ab0c3a9519407a2d3c74fef70c4b846e318ad9a7feb89749"
   },
   "pewter#2": {
@@ -95,7 +95,7 @@
   },
   "cerulean#0": {
    "name": "MART CLERK",
-   "inv": "f8c9c02dbd861d65d4d7bebaba6dcba21a05c4a7b4de50e9199808904ddfc683",
+   "inv": "cd204bf35d5fb121a1c802c182be4c6b0c1fc5cb66751a34fe2a9eca84f56af3",
    "design": "322b3251d89ef992ab0c3a9519407a2d3c74fef70c4b846e318ad9a7feb89749"
   },
   "cerulean#1": {
@@ -140,7 +140,7 @@
   },
   "vermilion#0": {
    "name": "MART CLERK",
-   "inv": "2d064253784d43a9cc748e78491699466873554e96278ad1e56d1ba118281abb",
+   "inv": "0d70aba8cd0801cce33725ad907d9633fd7bff3d05e0a3f50787e307554d2937",
    "design": "322b3251d89ef992ab0c3a9519407a2d3c74fef70c4b846e318ad9a7feb89749"
   },
   "vermilion#1": {
@@ -220,7 +220,7 @@
   },
   "celadon#1": {
    "name": "HOSTESS",
-   "inv": "754c73ca6b2335a52238bf1090dbb2b2c1be342db93ef6603cd00b533dd400cf",
+   "inv": "c8f72e7b529ab06832a8934fbaa45a800a5a42f0741da0b6454d5c0d43828e16",
    "design": "ade8c0512a8aa0c4fd190dc66f712540a17c5a83d995e1c6d0312e8192983972"
   },
   "celadon#2": {
@@ -395,7 +395,7 @@
   },
   "lavender#2": {
    "name": "MART CLERK",
-   "inv": "6ceedd17225a4f09bd3042d4dfc6c2ca2e91d6acca03370fa627774afec1f889",
+   "inv": "ba3bbe710f7f8eb0c2813e6b3242cf9bdcef0aa619b3a4c776a34dd799cc6859",
    "design": "322b3251d89ef992ab0c3a9519407a2d3c74fef70c4b846e318ad9a7feb89749"
   },
   "lavender#3": {
@@ -435,7 +435,7 @@
   },
   "fuchsia#2": {
    "name": "MART CLERK",
-   "inv": "271cad209f08da375fc6f1bc2a2c93d66b3ed0fa05d36b3e709b22305f58c72b",
+   "inv": "6398ae046790f5425824f02664f112a7054955ca22314ad324992e9112c9183b",
    "design": "322b3251d89ef992ab0c3a9519407a2d3c74fef70c4b846e318ad9a7feb89749"
   },
   "fuchsia#3": {
@@ -515,7 +515,7 @@
   },
   "cinnabar#4": {
    "name": "MART CLERK",
-   "inv": "68d9602c06b74af4f09f390487eb51afd20c51285aaed035afb33156deee55c2",
+   "inv": "7de87ddcd2c0346d554ce38f68c2436493e36d4c401bd35110c6781d38184f2d",
    "design": "322b3251d89ef992ab0c3a9519407a2d3c74fef70c4b846e318ad9a7feb89749"
   },
   "cinnabar#5": {
@@ -560,7 +560,7 @@
   },
   "indigo#0": {
    "name": "MART CLERK",
-   "inv": "ef2311211caef17fc0982d4905bcdc124ced4b6bc97ca851eb87b523e9e84af3",
+   "inv": "282788848d5f450b6e26d99b66b7aa747afb04e705d9e4d044504b1b1f0c62e3",
    "design": "322b3251d89ef992ab0c3a9519407a2d3c74fef70c4b846e318ad9a7feb89749"
   },
   "indigo#1": {
@@ -600,7 +600,7 @@
   },
   "pallet#0": {
    "name": "MART CLERK",
-   "inv": "9a327c60908d20ccccefe28e94e5021cd8c3c2ebb4f8ed49f20b06cd9470625a",
+   "inv": "e6f403b5de6e97b62499a5192fe717b416bf71468c635c323628d9df47a18170",
    "design": "322b3251d89ef992ab0c3a9519407a2d3c74fef70c4b846e318ad9a7feb89749"
   },
   "pallet#1": {
@@ -710,7 +710,7 @@
   },
   "valencia#5": {
    "name": "MART CLERK",
-   "inv": "8e03db328e1bfdc8baedbd988e59b91c4316ce23228879ec8daab0311d042f73",
+   "inv": "14462899dedcaa52a88827553dcce1d83bd103ba23cd71b2d48400b3dd78be78",
    "design": "e65e5e9a6ffa883736cc86c71c4ddc33c61cddc4ce1ee08128482695bb76b33b"
   },
   "mikan#0": {
@@ -735,7 +735,7 @@
   },
   "mikan#4": {
    "name": "MART CLERK",
-   "inv": "8445a36c965c27a81898e93591a89c33d42a59f57266d91bce3201ad66863591",
+   "inv": "22680bc873cf57fd3ad711c974985e9d52636fc8cbe4d898027824b572c316ec",
    "design": "e65e5e9a6ffa883736cc86c71c4ddc33c61cddc4ce1ee08128482695bb76b33b"
   },
   "navel#0": {
@@ -770,7 +770,7 @@
   },
   "moro#0": {
    "name": "MART CLERK",
-   "inv": "a2aed0c7d7e0cacbeee0ebe4c812519f6f6b35db3996f8201fa75113fa9b570c",
+   "inv": "2c75726a44bbb9a9303a6a1f8da0fa5c8493902c76fbf35a871bda168a078a5e",
    "design": "a53a509f435d28a8a6d6ab82bb4dcee8025a30a5d0d292ea709bc6be5d69b9c3"
   },
   "moro#1": {
@@ -820,7 +820,7 @@
   },
   "trovita#5": {
    "name": "MART CLERK",
-   "inv": "7f9ad92e12c199cd34dba8821e6ddd6f02edc2e562261bda5e8b2c094401530e",
+   "inv": "9d97df5e224e3257b00b9f927b059d46d0b50359ac009e603f0a22c857c78e05",
    "design": "e65e5e9a6ffa883736cc86c71c4ddc33c61cddc4ce1ee08128482695bb76b33b"
   },
   "kumquat#0": {
@@ -875,12 +875,12 @@
   },
   "pummelo#5": {
    "name": "MART CLERK",
-   "inv": "7b4e88f1ea65fc3868162c7590e9f710c935fea430b837ea34231b962dfe6dd0",
+   "inv": "11af47ecfc609a6585ee158d4f239a1c4cce517e4fd8473dc0a3d310291f0962",
    "design": "e65e5e9a6ffa883736cc86c71c4ddc33c61cddc4ce1ee08128482695bb76b33b"
   },
   "shamouti#0": {
    "name": "MART CLERK",
-   "inv": "76d38105b14d156f6832754c54dd8bb251e6167fb3fbf723aadb32d432432a75",
+   "inv": "25907de60a9691509718846ea91781f55d9402d75391d7ccc7429b5900787c14",
    "design": "a53a509f435d28a8a6d6ab82bb4dcee8025a30a5d0d292ea709bc6be5d69b9c3"
   },
   "shamouti#1": {
@@ -1035,7 +1035,7 @@
   },
   "newbark#0": {
    "name": "MART CLERK",
-   "inv": "9d2e6b38794ce66240b6c9bafe31d76b650118cdae5c0d5d6797bf41f619f32f",
+   "inv": "073515f576d821e7d67364f192f1b9dd40a7b995ff8792cbc1366aac63e41b44",
    "design": "a53a509f435d28a8a6d6ab82bb4dcee8025a30a5d0d292ea709bc6be5d69b9c3"
   },
   "newbark#1": {
@@ -1060,7 +1060,7 @@
   },
   "cherrygrove#0": {
    "name": "OLD MARIN",
-   "inv": "fa67b6a30d0fdb88d92cdbfb9d269d5a869d72d3b686a54ade1041eafb6ef20e",
+   "inv": "e7d55369ddc3f3b90a39e3c2ede33b297e9314723b0d675c7d85a44faa68a2b0",
    "design": "9fe0d2d882a26824b99e3f8b9dac29911594c81fd6879bc206e15bca9947c96f"
   },
   "cherrygrove#1": {
@@ -1075,7 +1075,7 @@
   },
   "cherrygrove#3": {
    "name": "MART CLERK",
-   "inv": "7e381cbe0e9f783646be2e5eceb21a9f38695efeda0af523bb6924b84254c687",
+   "inv": "ccce39065f5a0afdb9607c89fea9677dc172b9523f4bd22126234d916ba20493",
    "design": "a53a509f435d28a8a6d6ab82bb4dcee8025a30a5d0d292ea709bc6be5d69b9c3"
   },
   "violet#1": {
@@ -1090,7 +1090,7 @@
   },
   "violet#3": {
    "name": "MART CLERK",
-   "inv": "ff65daa4a386f0c288997bebbe5836e1a153695eb64947d3f66d0f0b1bab7b16",
+   "inv": "ebd6f7e4920e43dc3cb33c69b8def9c0cb50b324c0696c8dad829c5905318213",
    "design": "a53a509f435d28a8a6d6ab82bb4dcee8025a30a5d0d292ea709bc6be5d69b9c3"
   },
   "azalea#0": {
@@ -1110,7 +1110,7 @@
   },
   "azalea#3": {
    "name": "MART CLERK",
-   "inv": "4a9e69be5c57e03c1ed877277e58ec27428d92fdfc0b5f9a6acd9bbd077ed89b",
+   "inv": "dba9e5d134f5a76a47249c4475531f30172dbc58cb3eca7658bfa724a53df338",
    "design": "a53a509f435d28a8a6d6ab82bb4dcee8025a30a5d0d292ea709bc6be5d69b9c3"
   },
   "goldenrod#0": {
@@ -1130,7 +1130,7 @@
   },
   "goldenrod#3": {
    "name": "BIKE HAND RYO",
-   "inv": "87395a7e28d1a03565694ef7f2a198d8a4d4661942e34bf52aea582a58a132fc",
+   "inv": "6b2c075fcd3941ec173969e845268038c2a1d007f287c7a6e0ac1a3e84cafc5b",
    "design": "b2381a9f6c2c23bff3a9c19f880506307e6d55cf4f5b8ebf6b7f409e3e4528bf"
   },
   "goldenrod#4": {
@@ -1155,7 +1155,7 @@
   },
   "ecruteak#3": {
    "name": "MART CLERK",
-   "inv": "5ef4dd9591c6720f7698bd27d3260b9cba93d136ee32becccb07e2a57a511ca2",
+   "inv": "681229f6cf9ed318b1e4b02e7a63a9f962702af74e87e327614d5d786eebb27b",
    "design": "a53a509f435d28a8a6d6ab82bb4dcee8025a30a5d0d292ea709bc6be5d69b9c3"
   },
   "ecruteak#4": {
@@ -1300,7 +1300,7 @@
   },
   "elm-lab#0": {
    "name": "AIDE LIN",
-   "inv": "e6be7b15717142fec1daa5475201b15cf69b89a22b7e53e06a8fed0633051569",
+   "inv": "3d299b01f509f28bd18a18f5ba1d622ff3875ece74413ac80a08ac798f81cfcd",
    "design": "15e22cd7644c34f3e3067ad812962beef9706a78696410c356216898711df6ca"
   },
   "elm-lab#1": {
@@ -1505,7 +1505,7 @@
   },
   "mahogany#2": {
    "name": "MART CLERK",
-   "inv": "3865d5c8c71b4ee037da12bc0735e86f9182aba08ea3ba1c39c6311ea83a4c81",
+   "inv": "5fb5ddf929ebe76431061784ded898f6cd7635a14213ddff8628afedd35a5757",
    "design": "a53a509f435d28a8a6d6ab82bb4dcee8025a30a5d0d292ea709bc6be5d69b9c3"
   },
   "mahogany#3": {
@@ -1530,7 +1530,7 @@
   },
   "blackthorn#2": {
    "name": "MART CLERK",
-   "inv": "3736bb15515eb74eacc620766b2875b288c409de837e07a7e55bf840aadfca0c",
+   "inv": "dd796271481dc3595bd3729b816c2b44c1db41aa00742ecd9749f3e15b30788f",
    "design": "a53a509f435d28a8a6d6ab82bb4dcee8025a30a5d0d292ea709bc6be5d69b9c3"
   },
   "silvertown#0": {
@@ -1545,7 +1545,7 @@
   },
   "silvertown#2": {
    "name": "MART CLERK",
-   "inv": "d8862837ff5c7df3d2420fd69f915526d9d1d0a283537781e24e0eaff9e4b9a2",
+   "inv": "09639dfa13aa34dddcf100953bbb1d25747cb6ab1f9ed01d2b0df7d62f8090dd",
    "design": "a53a509f435d28a8a6d6ab82bb4dcee8025a30a5d0d292ea709bc6be5d69b9c3"
   },
   "r38#0": {
@@ -1585,7 +1585,7 @@
   },
   "lake-of-rage#0": {
    "name": "OLD FISHERMAN GARR",
-   "inv": "fe20aa37d4aae748e1ac4a5f3705783c86bdc99a18175eb43503a29b02836c10",
+   "inv": "9009c19782d35d3acc595881e829765fcb2d85ec27aa1f60656dec38caa6c8bc",
    "design": "9fe0d2d882a26824b99e3f8b9dac29911594c81fd6879bc206e15bca9947c96f"
   },
   "lake-of-rage#1": {
@@ -1730,7 +1730,7 @@
   },
   "littleroot#0": {
    "name": "MART CLERK",
-   "inv": "977ef5ce584b69229ff63d6b1f241904176112681584f56f5de8083e24b8e4cf",
+   "inv": "6566c3ce59f775a6a92ac1a1740633858537cd0b5a53eaa768096c491cdb3d0b",
    "design": "a53a509f435d28a8a6d6ab82bb4dcee8025a30a5d0d292ea709bc6be5d69b9c3"
   },
   "littleroot#1": {
@@ -1770,7 +1770,7 @@
   },
   "oldale#3": {
    "name": "MART CLERK",
-   "inv": "b58521d744008201be8d8860cb0625fd6496b911f4251f41f9955378a8cd6b91",
+   "inv": "ae3e9606d541f4cfa7d30ff9d252cd465e500176390088e2c4166e7e166d850d",
    "design": "a53a509f435d28a8a6d6ab82bb4dcee8025a30a5d0d292ea709bc6be5d69b9c3"
   },
   "petalburg#0": {
@@ -1790,7 +1790,7 @@
   },
   "petalburg#3": {
    "name": "MART CLERK",
-   "inv": "a6f150e1f87c2e716f12d4e33279ab5cc1e884bd001e38620705e6fe137ca579",
+   "inv": "7c7a4aba6bf895c923f3a799ff94b14566bcbecec0e162b97423ce016c82a616",
    "design": "a53a509f435d28a8a6d6ab82bb4dcee8025a30a5d0d292ea709bc6be5d69b9c3"
   },
   "petalburg#4": {
@@ -1815,7 +1815,7 @@
   },
   "rustboro#3": {
    "name": "MART CLERK",
-   "inv": "30d7a7174958a8948416814ac06164516939e164080c1731ea87afb6ff5c9c37",
+   "inv": "0ba50aee5043481d1c1ffa41c742663b6055121f3facc85a40c03bdc2f91585a",
    "design": "a53a509f435d28a8a6d6ab82bb4dcee8025a30a5d0d292ea709bc6be5d69b9c3"
   },
   "dewford#0": {
@@ -1835,7 +1835,7 @@
   },
   "dewford#3": {
    "name": "MART CLERK",
-   "inv": "76f5557ac11bf2f4185bc7982392a19a247050bc77cd9b46eac0be6b0e198b6a",
+   "inv": "a32a332826e9bffc65d2192ce8219cf470553378dc3d005fd07937965098014e",
    "design": "a53a509f435d28a8a6d6ab82bb4dcee8025a30a5d0d292ea709bc6be5d69b9c3"
   },
   "slateport#0": {
@@ -1860,7 +1860,7 @@
   },
   "slateport#4": {
    "name": "MART CLERK",
-   "inv": "c490187f453b5151a9de5e3d3e0f162640845d0a83ee1ca4d08355f9a1019b5e",
+   "inv": "846238129cf40403a005bf34b824a8676fcd9ba5b54b109fb4ab683215970eca",
    "design": "a53a509f435d28a8a6d6ab82bb4dcee8025a30a5d0d292ea709bc6be5d69b9c3"
   },
   "mauville#0": {
@@ -1880,12 +1880,12 @@
   },
   "mauville#3": {
    "name": "MART CLERK",
-   "inv": "541c0cc529212eab02b89405ab79f27f169374a86dd4f8f48ed3df901eec495b",
+   "inv": "371c02d99b341a9e08b30dc89405aa9412edae521ff74257fcb42af80e36fa72",
    "design": "a53a509f435d28a8a6d6ab82bb4dcee8025a30a5d0d292ea709bc6be5d69b9c3"
   },
   "verdanturf#0": {
    "name": "MART CLERK",
-   "inv": "daec4d3fbf53a0e513b454afc094a2a8207e3021bdf85cdce4833d090bc4d7ac",
+   "inv": "2b6f3c9bfa6b0ac8d94660e002a250f615fb50da079c2bbb0a82a643b9a2b59a",
    "design": "a53a509f435d28a8a6d6ab82bb4dcee8025a30a5d0d292ea709bc6be5d69b9c3"
   },
   "verdanturf#1": {
@@ -2315,7 +2315,7 @@
   },
   "lilycove#3": {
    "name": "MART CLERK",
-   "inv": "05e906e2836e4ab9da486b1f61ebfab5e10365af99f0e3e2f868b07c8f9d0f99",
+   "inv": "f97565e42343d53493bae6201211150481efdc4736b4b19de2a7ab5ca93639e8",
    "design": "a53a509f435d28a8a6d6ab82bb4dcee8025a30a5d0d292ea709bc6be5d69b9c3"
   },
   "lilycove#4": {
@@ -2360,7 +2360,7 @@
   },
   "sootopolis#2": {
    "name": "FISHER ONEN",
-   "inv": "2ff77c06e8e7cd68638114cb5af1c9c614457eeca20af13059d9b6f7afb7b87b",
+   "inv": "b63b76a6082c72deca3fcb86d1e02e0b3b9aa4edc7765167fb37e1b663a5c7bc",
    "design": "9fe0d2d882a26824b99e3f8b9dac29911594c81fd6879bc206e15bca9947c96f"
   },
   "sootopolis#3": {
@@ -2390,7 +2390,7 @@
   },
   "evergrande#0": {
    "name": "MART CLERK",
-   "inv": "2cd0313245a5f8d0d775665c2a539d8e0522fce7d4ba16bd94e7abdba23cba8f",
+   "inv": "eeca208b6a34966ab4f7a6c660dfe3eb1403c9eaaaeab14caa854f6283256a89",
    "design": "a53a509f435d28a8a6d6ab82bb4dcee8025a30a5d0d292ea709bc6be5d69b9c3"
   },
   "evergrande#1": {
@@ -2575,7 +2575,7 @@
   },
   "twinleaf#0": {
    "name": "MART CLERK",
-   "inv": "0f8ec676a74578ba01738149b7d0f55b39bc238ba396ac256e9fd70725fb80aa",
+   "inv": "1a54c6ada24dff04c3a61b077f8dab0c39270cf4bdfa87e7bf1d172d886abee2",
    "design": "a53a509f435d28a8a6d6ab82bb4dcee8025a30a5d0d292ea709bc6be5d69b9c3"
   },
   "twinleaf#1": {
@@ -2600,7 +2600,7 @@
   },
   "sandgem#0": {
    "name": "MART CLERK",
-   "inv": "8fc6364512aad0e8cb17988003187c103ae09a6e04c54dc2d725356729cae470",
+   "inv": "826c851427762505c2644a4e8a5a18c044cd4152d2767426952c4cfc6425988d",
    "design": "a53a509f435d28a8a6d6ab82bb4dcee8025a30a5d0d292ea709bc6be5d69b9c3"
   },
   "sandgem#1": {
@@ -2620,7 +2620,7 @@
   },
   "jubilife#0": {
    "name": "MART CLERK",
-   "inv": "58fcb6c1efb46c84817818996379c7a6d57d2e4db2b1ed8a1e8086d37d59cf5b",
+   "inv": "eb10e97cd17e506628ad33f3541bf0e7f2e7b3d82f9ab7af38470135efc9d875",
    "design": "a53a509f435d28a8a6d6ab82bb4dcee8025a30a5d0d292ea709bc6be5d69b9c3"
   },
   "jubilife#1": {
@@ -2645,7 +2645,7 @@
   },
   "oreburgh#0": {
    "name": "MART CLERK",
-   "inv": "2d62340d05eccc141b586b609b01ac4f2d112d48a69db3695255fea1d4c46a4d",
+   "inv": "318b3233fb15b9030b5eaf636bd66f7e9a2c322ffa935de898de5aa5651a99c1",
    "design": "a53a509f435d28a8a6d6ab82bb4dcee8025a30a5d0d292ea709bc6be5d69b9c3"
   },
   "oreburgh#1": {
@@ -2665,7 +2665,7 @@
   },
   "floaroma#0": {
    "name": "MART CLERK",
-   "inv": "afec9063c17053595835c95085897680dd2619a479e68a1b268ec7bb05afd5d9",
+   "inv": "101ac11d50a30048e444b8ab3a38f0302f976567bc36eaf290b4bfef1e878773",
    "design": "a53a509f435d28a8a6d6ab82bb4dcee8025a30a5d0d292ea709bc6be5d69b9c3"
   },
   "floaroma#1": {
@@ -3185,7 +3185,7 @@
   },
   "snowpoint#1": {
    "name": "MART CLERK",
-   "inv": "07b077494f256a0f7bdff02a961c1d4934f9480dfca878697db910e575587982",
+   "inv": "847cf27b851c4eab6efb4d0411a1e950a13b1ffc86cfbcc191872c250c9ee6e6",
    "design": "a53a509f435d28a8a6d6ab82bb4dcee8025a30a5d0d292ea709bc6be5d69b9c3"
   },
   "snowpoint#2": {
@@ -3200,7 +3200,7 @@
   },
   "sunnyshore#0": {
    "name": "MART CLERK",
-   "inv": "0779690022efcbe986c07bd6aaaa57c06fbdb64dc71faafa89cbae6ef4d4c3e7",
+   "inv": "eabee52174bf2c647bf0492d40018a6e45a2ecc796846da09bd8bee915f0bd70",
    "design": "a53a509f435d28a8a6d6ab82bb4dcee8025a30a5d0d292ea709bc6be5d69b9c3"
   },
   "sunnyshore#1": {
@@ -3355,7 +3355,7 @@
   },
   "fight-area#0": {
    "name": "MART CLERK",
-   "inv": "68db37cb24978a02104aa18513b0d69346bf1fa01d99d69b1968172f5f6dc408",
+   "inv": "a83d490f44ab46488a748ef65f5513dd842a5e063cc5cd7daba5dd2c5697da12",
    "design": "a53a509f435d28a8a6d6ab82bb4dcee8025a30a5d0d292ea709bc6be5d69b9c3"
   },
   "fight-area#1": {

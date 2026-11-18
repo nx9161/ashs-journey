@@ -469,6 +469,13 @@ const dataSha = (m) => sha(JSON.stringify({ warps: m.warps, start: m.start, npcs
 // cast-fern-aide), rowan-lab (PROF. SORREL'S AIDE -> cast-sorrel-aide).
 // Design fields only (art kind), proven per-post by char-design C5;
 // grids, templates, post cells, encounters and reach values stand.
+// WIRE-DEAD-ITEMS re-pin (disclosed, 2026-11-18): elm-lab W16B2 data
+// pin moved for AIDE LIN's npc.give (the Itemfinder grant — the item
+// was cheat-only; the give rides the existing npc.give idiom). One
+// functional field on one post; grid, template, reach and pos pins
+// stand, and the post's char-design C5 invariant was re-pinned in the
+// same commit (46 posts: every Mart stock this wave restocked, the
+// five npc.give hosts, and the Game Corner HOSTESS's slots hook).
 const PINS = {
  "birch-lab": {
   "grid": "914e613ee828ca3384634352688465e767af5f770271d07a624e70647241ef1d",
@@ -489,7 +496,7 @@ const PINS = {
  },
  "elm-lab": {
   "grid": "b139fdde0a9ffcdd666ae962fd686139e1d6b973a92bd73a02359abb2dac4c78",
-  "data": "2308f685a22be83d38c3137c95b42729d56abce9adc4e87949d83ab863381b2b",
+  "data": "9cd35417fc007d3d2809ce2ceab21a3116e9afa387f5842751e111da8b8038e3",
   "reach": 153,
   "pos": {
    "door": [

@@ -188,7 +188,11 @@ const BASELINE = {
   // MAPS6 spreads maps5 (+CAPT EASTBOUND) and wins the fold. The earlier
   // copies are load-bearing layers, not dead duplicates; do not delete
   // them without materializing the chain first.
-  "vermilion": ['D', 'maps2.mjs:022cc4b9', 'maps4.mjs:3330a8df', 'maps5.mjs:0930c14b', 'maps6.mjs:acf3c7e1'],
+  // WIRE-DEAD-ITEMS re-pin (disclosed, 2026-11-18): the maps2 base
+  // literal's MART CLERK stock gained burnheal/iceheal (the missed
+  // status heals, stocked at every antidote Mart); the chain's
+  // derived fingerprints move with their base, as with silph1 above.
+  "vermilion": ['D', 'maps2.mjs:0e51053f', 'maps4.mjs:18b3ae4d', 'maps5.mjs:d516fa45', 'maps6.mjs:7c73297f'],
 };
 
 const dupNow = new Map([...byId.entries()].filter(([, v]) => v.length > 1));
