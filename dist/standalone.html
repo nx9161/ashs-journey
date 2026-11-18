@@ -202920,6 +202920,130 @@ function resolveStartPos(mapDef, fallback) {
   return { x: 0, y: 0 };
 }
 
+// ---- Foot safety (BUG-009) ----------------------------------------
+// A tile is FOOT-standable when a player on foot can stand on it
+// (WALKABLE; open water counts only while surfing). A player on foot
+// on a tile with no foot-standable neighbour can never take a step
+// again — that is the sea-lane trap shape: Marisol's open east edge
+// warps onto open water in the Amber Sea, and every return warp sits
+// on water too. These helpers are the shared vocabulary of the
+// foot-entry gate (overworld onStep), the landing safety net
+// (doWarp) and the load rescue (OverworldScene.enter).
+
+function tileAt(mapDef, x, y) {
+  return startTileAt(mapDef, x, y);
+}
+
+function isWaterTile(t) {
+  return t === '~' || t === 'W';
+}
+
+function isFootStandable(mapDef, x, y) {
+  return WALKABLE.has(startTileAt(mapDef, x, y));
+}
+
+const DIRS4 = [[1, 0], [-1, 0], [0, 1], [0, -1]];
+
+function footNeighbours(mapDef, x, y) {
+  const out = [];
+  for (const [dx, dy] of DIRS4) {
+    if (isFootStandable(mapDef, x + dx, y + dy)) out.push({ x: x + dx, y: y + dy });
+  }
+  return out;
+}
+
+// Foot-trapped: from (x, y) the player cannot step onto ANY
+// foot-standable tile — true for mid-sea water, false for water
+// beside a shore, false for any ordinary floor tile.
+function isFootTrapped(mapDef, x, y) {
+  return footNeighbours(mapDef, x, y).length === 0;
+}
+
+// Can a player standing at (x, y) reach a warp on foot? Floods the
+// foot-standable component; a land pocket with no warp in it (the
+// Amber Sea's islet) is standable ground but still a trap.
+function footReachable(mapDef, x, y) {
+  if (!isFootStandable(mapDef, x, y)) return false;
+  const warpSet = new Set((mapDef.warps || []).filter((w) => w.to).map((w) => w.x + ',' + w.y));
+  if (warpSet.has(x + ',' + y)) return true;
+  const seen = new Set([x + ',' + y]);
+  const queue = [{ x, y }];
+  while (queue.length) {
+    const c = queue.shift();
+    for (const n of footNeighbours(mapDef, c.x, c.y)) {
+      const k = n.x + ',' + n.y;
+      if (seen.has(k)) continue;
+      if (warpSet.has(k)) return true;
+      seen.add(k);
+      queue.push(n);
+    }
+  }
+  return false;
+}
+
+function isFootSafe(mapDef, x, y) {
+  return isFootStandable(mapDef, x, y) && footReachable(mapDef, x, y);
+}
+
+function footSpotOn(mapDef, pos) {
+  if (pos && isFootSafe(mapDef, pos.x, pos.y)) return { x: pos.x, y: pos.y };
+  const warpSet = new Set((mapDef.warps || []).map((w) => w.x + ',' + w.y));
+  const npcSet = new Set((mapDef.npcs || []).map((n) => n.x + ',' + n.y));
+  // A map with no warps at all (the dive trenches, the event
+  // islands) is entered and left by non-warp flows; there the best
+  // rescue is simply standable ground the player can step off —
+  // walkability restored, the map's own exits do the rest.
+  const warpless = !(mapDef.warps || []).some((w) => w.to);
+  const free = warpless
+    ? (x, y) => isFootStandable(mapDef, x, y) && !isFootTrapped(mapDef, x, y) && !npcSet.has(x + ',' + y)
+    : (x, y) => isFootSafe(mapDef, x, y) && !warpSet.has(x + ',' + y) && !npcSet.has(x + ',' + y);
+  if (mapDef.start && free(mapDef.start.x, mapDef.start.y)) return { x: mapDef.start.x, y: mapDef.start.y };
+  for (const w of mapDef.warps || []) {
+    for (const [dx, dy] of DIRS4) {
+      if (free(w.x + dx, w.y + dy)) return { x: w.x + dx, y: w.y + dy };
+    }
+  }
+  for (let y = mapDef.rows.length - 1; y >= 0; y--) {
+    for (let x = 0; x < mapDef.rows[y].length; x++) {
+      if (free(x, y)) return { x, y };
+    }
+  }
+  return null;
+}
+
+// resolveFootPos(mapId, maps, pos): where a player on foot in
+// trouble on `mapId` should be put — foot-safe ground on the same
+// map first (the authored start, then warp-adjacent ground, then a
+// scan from the south edge up, mirroring resolveStartPos), then
+// breadth-first through the warp graph (sea lanes chain route to
+// route before they reach a town): the nearest destination that
+// resolves foot-safe ground wins, so a trapped sea save washes up
+// in the town its lane serves. Returns {mapId, x, y}, or null when
+// nothing resolves — callers then leave the position exactly as it
+// was; the rescue never makes a save worse.
+function resolveFootPos(mapId, maps, pos) {
+  const mapDef = maps && maps[mapId];
+  if (!mapDef || !Array.isArray(mapDef.rows) || !mapDef.rows.length) return null;
+  const spot = footSpotOn(mapDef, pos);
+  if (spot) return { mapId, x: spot.x, y: spot.y };
+  const seen = new Set([mapId]);
+  let frontier = [mapId];
+  for (let depth = 0; depth < 4 && frontier.length; depth++) {
+    const next = [];
+    for (const id of frontier) {
+      for (const w of maps[id].warps || []) {
+        if (!w.to || seen.has(w.to.map) || !maps[w.to.map]) continue;
+        seen.add(w.to.map);
+        const destSpot = footSpotOn(maps[w.to.map], w.to);
+        if (destSpot) return { mapId: w.to.map, x: destSpot.x, y: destSpot.y };
+        next.push(w.to.map);
+      }
+    }
+    frontier = next;
+  }
+  return null;
+}
+
 
 // ---- src/game/overworld.mjs ----
 // overworld.mjs — tile-map exploration: interpolated grid movement, tall-grass
@@ -202982,6 +203106,35 @@ class OverworldScene {
       if (sp && this.map && (sp.x < 0 || sp.y < 0 || sp.x >= this.w || sp.y >= this.h)) {
         const st = resolveStartPos(this.map, null);
         sp.x = st.x; sp.y = st.y;
+      }
+    }
+    // BUG-009 LOAD RESCUE (2026-11-18): the block above covers
+    // out-of-bounds saves; this one covers a save standing IN-bounds
+    // on a tile the player cannot stand on or step off — open water
+    // reached on foot (the Marisol sea-lane trap), a wall, a one-tile
+    // enclosure. A surf-qualified party standing on water is legal:
+    // surfing is restored and the position kept. Water beside shore
+    // is left alone (one step reaches land). Anything else relocates
+    // to foot-safe ground — same map first, then through the map's
+    // own warps, so a trapped sea save washes up in the town its lane
+    // serves. If nothing resolves, the position is left exactly as
+    // saved: the rescue never makes a save worse.
+    {
+      const sp = g.state.story.position;
+      if (sp && this.map) {
+        const t = startTileAt(this.map, sp.x, sp.y);
+        const onWater = isWaterTile(t);
+        const surfQualified = this.partyKnows('surf') && (g.state.badges.kanto || []).includes('soulbadge');
+        if (onWater && surfQualified) {
+          this.surfing = true;
+        } else if (!(onWater && footNeighbours(this.map, sp.x, sp.y).length > 0)
+          && (!isFootStandable(this.map, sp.x, sp.y) || isFootTrapped(this.map, sp.x, sp.y))) {
+          const spot = resolveFootPos(this.mapId, MAPS, sp);
+          if (spot) {
+            if (spot.mapId !== this.mapId) { this.loadMap(spot.mapId); sp.map = spot.mapId; }
+            sp.x = spot.x; sp.y = spot.y;
+          }
+        }
       }
     }
     // RUN2 FIX 2: re-talk re-arm state (see tryInteract / _trackTalkRearm).
@@ -203758,12 +203911,24 @@ class OverworldScene {
       g.state.story.lastMart = { map: wp.via.map, x: wp.via.x, y: wp.via.y };
     }
     this.loadMap(to.map);
-    this.player.tx = to.x; this.player.ty = to.y;
-    this.player.px = to.x * TILE; this.player.py = to.y * TILE;
-    this.player.fx = to.x; this.player.fy = to.y;
+    // BUG-009 landing safety net: a warp must never place the player
+    // inside a wall or off the map — such a landing degrades to the
+    // destination's resolved start. Water landings stay exactly as
+    // authored: the foot-entry gate in onStep governs step-warps,
+    // and dive surfacing lands on water by design. (Shipped data has
+    // no such landing today; audit-warp-landings keeps it that way.)
+    let lx = to.x, ly = to.y;
+    const lt = startTileAt(this.map, lx, ly);
+    if (!WALKABLE.has(lt) && !isWaterTile(lt)) {
+      const safe = resolveStartPos(this.map, null);
+      lx = safe.x; ly = safe.y;
+    }
+    this.player.tx = lx; this.player.ty = ly;
+    this.player.px = lx * TILE; this.player.py = ly * TILE;
+    this.player.fx = lx; this.player.fy = ly;
     this.trail = [];
     this.partner.px = this.player.px; this.partner.py = this.player.py;
-    g.state.story.position = { map: to.map, x: to.x, y: to.y, dir: this.player.dir };
+    g.state.story.position = { map: to.map, x: lx, y: ly, dir: this.player.dir };
     this.banner = { text: this.map.name.toUpperCase(), t: 1.6 };
     g.state.meta.location = this.map.name;
     g.audio.playMusic(this.map.music || 'route1-theme'); // no-op when the track is already playing
@@ -203807,6 +203972,24 @@ class OverworldScene {
       if (wp.viaExit) to = this.mapId === 'mart'
         ? this.martExit()
         : this.centerExit();
+      // BUG-009 foot-entry gate: a warp whose landing is open water
+      // the player could never step off on foot (the sea lanes —
+      // Marisol's east edge onto the Amber Sea is the type case)
+      // must not fire for a player on foot: crossing requires
+      // already surfing, the way the game gates every other
+      // field-move terrain (the ferryGate:'surf' refusal is the
+      // idiom). Foot-escapable shore landings and every surfing
+      // crossing pass exactly as authored; viaExit tickets (the
+      // dynamic Center/Mart exits) are never gated.
+      if (!wp.viaExit && to) {
+        const dest = MAPS[to.map];
+        const lt = dest ? startTileAt(dest, to.x, to.y) : null;
+        if (dest && isWaterTile(lt) && !this.surfing && isFootTrapped(dest, to.x, to.y)) {
+          if (g.audio) g.audio.playSfx('error-buzz');
+          g.ui.say(['The sea lane is open water — you need to be surfing to cross.']);
+          return;
+        }
+      }
       this.startWarpFade(to, wp);
       return;
     }
@@ -213000,6 +213183,6 @@ if (typeof Game !== 'undefined') Object.assign(Game.prototype, {
 });
 
 </script>
-<!-- contentHash:4605630b3eadcc7a5200e4ebdf8ae7d77437964674721482576cb2fbe56baf64 -->
+<!-- contentHash:55b4c659afc2d0de0bd74d564f2e636f8591bfb58a6a6ae68df200209fb26fbe -->
 </body>
 </html>
