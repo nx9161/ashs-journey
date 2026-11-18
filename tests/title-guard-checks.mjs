@@ -33,8 +33,10 @@
 //      a written disposition, and its count may still only shrink.
 //   T4 captain coordinates — frontier-checks' A19/B01 stance literals must
 //      equal the live TALE_NPCS posts in src/data/quests.mjs.
-//   T5 Center anchors — battle-model's E02 fallback literal must equal
-//      centerExit()'s fallback in src/game/overworld.mjs, and its E03/E06/
+//   T5 Center anchors — battle-model's E02 literal must equal the
+//      merged-map via of the Fernmere door the nearest-Center resolver
+//      selects for its Route 1 faint (NEAREST-CENTER resync, 2026-11-17;
+//      it formerly pinned centerExit()'s home fallback), and its E03/E06/
 //      E07 door-front literals must equal the merged-map vias of the doors
 //      its driver steps on (merged exactly as src/data/merge.mjs folds
 //      MAPS..MAPS9 — later copies win).
@@ -127,12 +129,11 @@ for (const capName of ['CAPT FRONTIER', 'CAPT YAMATO']) {
 
 // ---------------- T5: Center anchors vs overworld + merged maps --------
 const battleModelText = read('tests/battle-model-checks.mjs');
-const owSrc = read('src/game/overworld.mjs');
-const fb = owSrc.match(/centerExit\(\) \{[\s\S]*?return \{ map: 'pallet', x: (\d+), y: (\d+) \}/);
+// NEAREST-CENTER resync (2026-11-17): E02's faint (route1, 7,7) now
+// resolves to Fernmere; the resolver enters Fernmere at (7,9)/(8,9)
+// and selects the (7,7) Center door — E02's literal must equal that
+// door's via in the merged maps (derived below, like its siblings).
 const e02 = battleModelText.match(/e1Exit\.x === (\d+) && r\.e1Exit\.y === (\d+)/);
-ok('T5 battle-model E02 fallback literal equals centerExit() fallback in overworld.mjs',
-  !!fb && !!e02 && +fb[1] === +e02[1] && +fb[2] === +e02[2],
-  `game fallback=${fb ? fb[1] + ',' + fb[2] : 'NOT FOUND'} driver=${e02 ? e02[1] + ',' + e02[2] : 'NOT FOUND'}`);
 
 // Fold the map packs exactly as src/data/merge.mjs does (later wins).
 const packs = [];
@@ -160,6 +161,12 @@ if (vVia) {
   expectPair(battleModelText, /e2VoluntaryExit\.x === (\d+) && r\.e2VoluntaryExit\.y === (\d+)/, 'E04 voluntary exit', vVia);
   expectPair(battleModelText, /e2BlackoutExit\.x === (\d+) && r\.e2BlackoutExit\.y === (\d+)/, 'E05 blackout exit', vVia);
 }
+// E02 (NEAREST-CENTER resync): the literal equals the via of the
+// Fernmere door the resolver selects for the driver's Route 1 faint.
+const e02Via = centerVia('viridian', 7, 7);
+ok('T5 battle-model E02 literal equals the merged-map via of the resolver-selected Fernmere door (7,7)',
+  !!e02Via && !!e02 && +e02[1] === e02Via[0] && +e02[2] === e02Via[1],
+  `door via=${e02Via ? e02Via.join(',') : 'NOT FOUND'} driver=${e02 ? e02[1] + ',' + e02[2] : 'NOT FOUND'}`);
 // The E3 town table: each stepped door must be a Center door, and E06/E07
 // must expect its via (E07 reloads to the LAST table town visited).
 const table = [...battleModelText.matchAll(/\['(fuchsia|cinnabar)', (\d+), (\d+)\]/g)]

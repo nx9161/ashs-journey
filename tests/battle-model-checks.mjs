@@ -497,6 +497,14 @@ const wp3Driver = `
 // _lastCity load-time snapshot. Fix: warp via owns the anchor, it is
 // persisted as story.lastCenter, blackout paths anchor through
 // centerExit(), and loadMap never touches the ticket.
+// NEAREST-CENTER RESYNC (owner rule, 2026-11-17): a blackout now
+// respawns at the NEAREST Center town from the faint map
+// (blackoutCenterAnchor — directed warp-graph BFS), not the
+// last-visited lineage. E02's expectation changed accordingly (a
+// mid-Route-1 faint is nearer Fernmere than Dawnwick); the P1
+// invariant it exists to pin — never back at the faint location —
+// is unchanged. E05 is preserved by the resolver's tie rule: a
+// last-Center town among the nearest keeps its exact anchor.
 const p1Driver = `
 ;(function () {
   const out = {};
@@ -515,7 +523,8 @@ const p1Driver = `
   const exitCenter = (scene) => stepOn(scene, 4, 5); // the center's exit warp tile
 
   // (E1) OWNER SCENARIO: fresh game -> leave Pallet -> battle defeat on
-  // Route 1 -> blackout Center -> exit must land in PALLET, not route1.
+  // Route 1 -> blackout Center -> exit must land at the NEAREST Center
+  // town (Fernmere from mid-Route 1), never back on route1.
   {
     ow.loadMap('pallet'); ow.player.tx = 7; ow.player.ty = 7;
     ow.loadMap('route1'); // the old bug's anchor snapshot is now route1
@@ -580,12 +589,16 @@ const p1Driver = `
   try { eval(gameJs + p1Driver); } finally { console.log = origLog4; }
   const r = JSON.parse((logs4.find((l) => l.startsWith('P1-RESULT')) || 'P1-RESULT {}').slice(10));
   ok('E01 P1 owner scenario: defeat on Route 1 blacks out to the Center', r.e1InCenter === 'center', JSON.stringify(r));
-  // W1 resync: E02 expects the current centerExit() fallback (pallet 6,9 —
-  // moved by f2c13cd to match rebuilt Dawnwick); E03–E05 expect Fernmere's
-  // rebuilt door-front (7,8); E06/E07 expect Caldera's rebuilt door-front
-  // (3,11). All values read from maps3 / overworld.mjs, game untouched.
-  ok('E02 P1 owner scenario: exiting lands in PALLET (6,9) — never back on route1',
-    r.e1Exit && r.e1Exit.map === 'pallet' && r.e1Exit.x === 6 && r.e1Exit.y === 9, JSON.stringify(r.e1Exit));
+  // W1 resync: E03–E05 expect Fernmere's rebuilt door-front (7,8);
+  // E06/E07 expect Caldera's rebuilt door-front (3,11). All values
+  // read from maps3 / overworld.mjs, game untouched.
+  // NEAREST-CENTER resync (2026-11-17): E02 expects Fernmere (7,8) —
+  // from the driver's faint tile (route1, 7,7) Fernmere is the
+  // nearest Center town (7 walking steps to its door path vs 8 to
+  // Dawnwick's), where the old last-visited/home lineage landed
+  // PALLET (6,9).
+  ok('E02 P1 owner scenario: exiting lands in FERNMERE (7,8), the nearest Center town — never back on route1',
+    r.e1Exit && r.e1Exit.map === 'viridian' && r.e1Exit.x === 7 && r.e1Exit.y === 8, JSON.stringify(r.e1Exit));
   ok('E03 P1 voluntary: Viridian Center door enters the Center and persists the door-front anchor',
     r.e2Entered === 'center' && r.e2Anchor && r.e2Anchor.map === 'viridian' && r.e2Anchor.x === 7 && r.e2Anchor.y === 8, JSON.stringify(r));
   ok('E04 P1 voluntary: exit returns to Viridian door-front (7,8)',
