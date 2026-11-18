@@ -189849,6 +189849,21 @@ function hasTravelersMemory(state, gate) {
   return !!(state && state.story && Array.isArray(state.story.travelersMemory)
     && state.story.travelersMemory.includes(gate));
 }
+// REGION-1 FIX WAVE (Bug 4): the current row of a regional quest
+// chain — the first incomplete row AFTER the last completed one, not
+// the first incomplete row overall. A skipped step (its flag never
+// set while later rows completed) must not pin the objective HUD or
+// the Quest Log's active marker forever: when a later row's flag
+// stands, the player is demonstrably beyond the skipped row. In-order
+// play is unchanged — flags set in order make both readings agree.
+// Shared by the HUD (overworld-systems sysObjective) and the Quest
+// Log (main-systems) so the two surfaces can never disagree again.
+function currentQuestOf(chain, flags) {
+  let lastDone = -1;
+  chain.forEach((qq, i) => { if (qq.flag && flags[qq.flag]) lastDone = i; });
+  for (let i = lastDone + 1; i < chain.length; i++) { if (chain[i].flag) return chain[i]; }
+  return null;
+}
 // Starter breadth (§6): the Arden starter lines, by base species. A
 // line counts as "chosen in the source run" when the shipped game
 // recorded it joining that run: the gift-event flags
@@ -192597,6 +192612,16 @@ function fillV2Defaults(data) {
       if (isObj(lc) && typeof lc.map === 'string' && /^[a-z0-9-]{1,40}$/.test(lc.map) && Number.isFinite(lc.x) && Number.isFinite(lc.y)) {
         data.story.lastCenter = { map: lc.map, x: Math.trunc(lc.x), y: Math.trunc(lc.y) };
       } else delete data.story.lastCenter;
+    }
+    // REGION-1 FIX WAVE (Bug 1): story.lastMart — the Mart twin of
+    // lastCenter (additive; absent in every legacy save, where the
+    // Mart exit simply keeps its Fernmere fallback until the next
+    // Mart visit writes the anchor). Same closed-shape sanitation.
+    if (data.story.lastMart !== undefined) {
+      const lm = data.story.lastMart;
+      if (isObj(lm) && typeof lm.map === 'string' && /^[a-z0-9-]{1,40}$/.test(lm.map) && Number.isFinite(lm.x) && Number.isFinite(lm.y)) {
+        data.story.lastMart = { map: lm.map, x: Math.trunc(lm.x), y: Math.trunc(lm.y) };
+      } else delete data.story.lastMart;
     }
     // ADR-025 §6 (Phase 6): HoF lists normalize to the ONE canonical
     // shape on load — legacy { species, level } entries (the shape the
@@ -202273,7 +202298,10 @@ class OverworldScene {
       // no ticket (scripted entry) it falls back to Fernmere, the
       // first Mart town — the Center's Dawnwick fallback pattern.
       if (id === 'mart') {
-        const origin = (this.martReturn && this.martReturn.map) || 'viridian';
+        // REGION-1 FIX WAVE (Bug 1): the clerk's origin town resolves
+        // through martExit() so a reloaded Mart fields the ORIGIN
+        // town's clerk, not the Fernmere fallback.
+        const origin = this.martExit().map;
         this._martOrigin = origin;
         const src = MAPS[origin];
         const clerk = src && Array.isArray(src.npcs) ? src.npcs.find((n) => n.mart) : null;
@@ -202514,6 +202542,24 @@ class OverworldScene {
     const lc = this.game && this.game.state && this.game.state.story && this.game.state.story.lastCenter;
     if (lc && typeof lc.map === 'string' && Number.isFinite(lc.x) && Number.isFinite(lc.y)) return { map: lc.map, x: lc.x, y: lc.y };
     return { map: 'pallet', x: 6, y: 9 };
+  }
+
+  // REGION-1 FIX WAVE (Bug 1): the Mart's resolver, mirroring
+  // centerExit() — the runtime ticket first, then the PERSISTED
+  // story.lastMart anchor, then the genre fallback (Fernmere, the
+  // first Mart town). The Mart ticket used to be runtime-only: the
+  // Center's anchor was persisted in the P1 fix, the Mart's never
+  // was, so any save/reload (or closed tab — entering a Mart
+  // autosaves) inside a Mart forgot the origin town and the exit
+  // deposited the player in Fernmere, with Fernmere's clerk behind
+  // the counter. The shared 'mart' interior serves all 64 Center
+  // towns in every region, so the defect — and this fix — are
+  // game-wide.
+  martExit() {
+    if (this.martReturn && this.martReturn.map) return this.martReturn;
+    const lm = this.game && this.game.state && this.game.state.story && this.game.state.story.lastMart;
+    if (lm && typeof lm.map === 'string' && Number.isFinite(lm.x) && Number.isFinite(lm.y)) return { map: lm.map, x: lm.x, y: lm.y };
+    return { map: 'viridian', x: 13, y: 8 };
   }
 
   tileAt(x, y) {
@@ -202852,7 +202898,13 @@ class OverworldScene {
       this.centerReturn = wp.via;
       g.state.story.lastCenter = { map: wp.via.map, x: wp.via.x, y: wp.via.y };
     }
-    if (to.map === 'mart' && wp.via) this.martReturn = wp.via;
+    if (to.map === 'mart' && wp.via) {
+      this.martReturn = wp.via;
+      // REGION-1 FIX WAVE (Bug 1): persist the Mart anchor exactly as
+      // the Center's is persisted (P1) — a save/reload inside the Mart
+      // must still exit to THIS town's door-front.
+      g.state.story.lastMart = { map: wp.via.map, x: wp.via.x, y: wp.via.y };
+    }
     if (g.state.settings.reducedMotion) { this.doWarp(to, wp); return; }
     const kind = g.tileKind(this.tileAt(this.player.tx, this.player.ty));
     const door = g.doorOpenSprite ? (g.doorOpenSprite(kind, this.mapId) ? kind : null) : null;
@@ -202909,7 +202961,10 @@ class OverworldScene {
       // must still exit to THIS town's door-front.
       g.state.story.lastCenter = { map: wp.via.map, x: wp.via.x, y: wp.via.y };
     }
-    if (to.map === 'mart' && wp.via) this.martReturn = wp.via;
+    if (to.map === 'mart' && wp.via) {
+      this.martReturn = wp.via;
+      g.state.story.lastMart = { map: wp.via.map, x: wp.via.x, y: wp.via.y };
+    }
     this.loadMap(to.map);
     this.player.tx = to.x; this.player.ty = to.y;
     this.player.px = to.x * TILE; this.player.py = to.y * TILE;
@@ -202958,7 +203013,7 @@ class OverworldScene {
       // Wave 5b: viaExit resolves per shared interior — the Mart's
       // exit ticket is its own (martReturn), the Center's is unchanged.
       if (wp.viaExit) to = this.mapId === 'mart'
-        ? (this.martReturn || { map: 'viridian', x: 13, y: 8 })
+        ? this.martExit()
         : this.centerExit();
       this.startWarpFade(to, wp);
       return;
@@ -204319,10 +204374,19 @@ Object.assign(OverworldScene.prototype, {
     const g = this.game;
     const saf = g.state.session && g.state.session.safari;
     if (saf) {
-      // Zone-style sessions only (a hub is planted): the Arden
-      // session (no hub) keeps its exact legacy warp behaviour.
+      // Zone-style sessions (a hub is planted) end on hub/outside
+      // landings, as shipped.
       if (saf.hub && to === saf.hub && from !== saf.hub) { this.endSafari('You left the ' + (saf.name || 'Bramble Preserve') + '.'); return; }
       if (saf.hub && !(saf.maps || []).includes(to) && to !== saf.hub) this.endSafari('You left the ' + (saf.name || 'Bramble Preserve') + '.');
+      // REGION-1 FIX WAVE (Bug 3): hub-less sessions (the Arden
+      // Preserve) used to keep "exact legacy warp behaviour" — the
+      // leak: the Preserve's own door warps land in Bramble with no
+      // cleanup, so the session, its step HUD and the Safari Balls
+      // followed the player out (completion runs 3/4, observed on
+      // Crown Road). A landing outside the zone now ends a hub-less
+      // session IN PLACE — the warp already delivered the player to
+      // the exit town, so only the session state is wound up.
+      if (!saf.hub && !(saf.maps || []).includes(to)) this.endSafariInPlace('You left the ' + (saf.name || 'Bramble Preserve') + '.');
       return;
     }
     const dest = MAPS[to];
@@ -204364,10 +204428,37 @@ Object.assign(OverworldScene.prototype, {
           if (this.map.rows[y][x] === 'B') this.fxState.boulders.set(key(x, y), { x, y });
         }
       }
-      if (this.map.centerCity) g.state.story.flags['visited_' + id] = true;
+      // REGION-1 FIX WAVE (Bug 2 — Fly was dead): the visited_<id>
+      // writer keyed on a `centerCity` map field that NO map in any
+      // region defines, so no town was ever marked visited and Fly's
+      // destination list was always empty. The design's own record of
+      // "a place the player can fly back to" is the Center door:
+      // exactly 64 towns/hubs across all five regions + the Trial
+      // Grounds field a warp into the shared 'center' interior (the
+      // same 64 that field a Mart door — census in the wave SPEC).
+      // Derive the mark from that warp, game-wide, with no data edits;
+      // an explicit centerCity field, if ever authored, still counts.
+      if (this.map.centerCity || (this.map.warps || []).some((w) => w.to && w.to.map === 'center')) {
+        g.state.story.flags['visited_' + id] = true;
+      }
     }
     if (g.state.story.flags['in_' + id] === undefined) g.state.story.flags['in_' + id] = true;
     g.state.story.flags['reached_' + id] = true; // quest chain producers (WS6)
+    // REGION-1 FIX WAVE (Bug 3): a DIRECT load that lands a hub-less
+    // safari session outside its zone — Fly-out, a blackout's Center
+    // load, or Continue on a save written mid-leak (the run-4 save
+    // carried a live session onto Crown Road) — ends the session in
+    // place. Silent wind-up + a toast: loadMap runs inside other
+    // flows' dialogue callbacks (the blackout's say), where a nested
+    // dialogue would interleave. The door-warp landing performs the
+    // spoken version in sysWarpLanding.
+    {
+      const saf = g.state.session && g.state.session.safari;
+      if (saf && !saf.hub && !(saf.maps || []).includes(id)) {
+        const left = this.clearSafariSession();
+        if (left > 0) g.ui.toast('The park keeps the ' + left + ' unused Safari Balls.');
+      }
+    }
     // ADR-025 §6 (Traveler's Memory): the Farsight gate, remembered.
     // The shipped game never posted a guard at Farsight's doors (the
     // city is entered freely), so the memory surfaces as the city
@@ -207144,6 +207235,27 @@ Object.assign(OverworldScene.prototype, {
   // --- H4b: runHoennNpc east actors + the climax/Institute/Pyre/
   // hideout/Seafloor scenes extend the dispatch above ---
 
+  // REGION-1 FIX WAVE (Bug 3): the state wind-up shared by every
+  // session end — session cleared, unspent Safari Balls returned to
+  // the park. Returns the unspent-ball count for the caller's text.
+  clearSafariSession() {
+    const g = this.game;
+    g.state.session.safari = null;
+    const left = g.state.bag.safariball || 0;
+    g.state.bag.safariball = 0;
+    return left;
+  },
+
+  // REGION-1 FIX WAVE (Bug 3): end a hub-less safari session where
+  // the player already stands (the Preserve door-warp landing) —
+  // endSafari's words and wind-up, without its relocation warp.
+  endSafariInPlace(msg) {
+    const g = this.game;
+    if (!g.state.session.safari) return;
+    const left = this.clearSafariSession();
+    g.ui.say(left > 0 ? [msg, '(The park keeps the ' + left + ' unused Safari Balls.)'] : [msg]);
+  },
+
   endSafari(msg) {
     const g = this.game;
     // S4: the exit is the session's own data (the Marsh session exits
@@ -208593,6 +208705,24 @@ Object.assign(OverworldScene.prototype, {
   },
 
   // ---------- objective (quest-driven HUD line) ----------
+  // REGION-1 FIX WAVE (Bug 4): the current row of a quest chain is
+  // the first incomplete row AFTER the last completed one — not the
+  // first incomplete row overall. Every chain below used to take the
+  // first row whose flag was unset, so one skipped step pinned the
+  // HUD forever: a player who walked past the Sea Cottage beat (its
+  // only trigger is one event tile at the researcher's feet; talking
+  // to him from the side never fires it) and finished the campaign
+  // still read "Help the researcher at the Sea Cottage" at the
+  // League door (completion runs 3 AND 4). When a later row's flag
+  // stands, the player is demonstrably beyond the skipped row, and
+  // the objective follows their actual arc. In-order play is
+  // byte-identical: flags set in order make the two readings agree.
+  // The mechanism is shared by all five regional chains, so the fix
+  // is game-wide.
+  currentQuest(chain, flags) {
+    return currentQuestOf(chain, flags);
+  },
+
   sysObjective() {
     const g = this.game;
     // Stage O2: while the Amber arc is current, its chain leads the
@@ -208608,28 +208738,28 @@ Object.assign(OverworldScene.prototype, {
           ? '▶ The Storm over Sanctum — return to Sanctum Shrine: the guardian rises'
           : '▶ The Storm over Sanctum — calm the three titans (' + n + '/3)';
       }
-      const oq = ORANGE_QUESTS.find((qq) => qq.flag && !g.state.story.flags[qq.flag]);
+      const oq = this.currentQuest(ORANGE_QUESTS, g.state.story.flags);
       if (oq) return '▶ ' + oq.text + (oq.badgeCount ? ' (' + ((g.state.badges.orange || []).length) + '/4)' : '') + (oq.titanCount ? ' (' + ((f.orange_2000_moltres ? 1 : 0) + (f.orange_2000_zapdos ? 1 : 0) + (f.orange_2000_articuno ? 1 : 0)) + '/3 titans calmed)' : '');
     }
     // Stage J4a: while the Yamato arc is current, its chain leads the
     // HUD objective (the west rows in J4a; J4b's appended rows join
     // the same find, in chain order).
     if (currentArcOf(g.state).id === 'johto') {
-      const jq = JOHTO_QUESTS.find((qq) => qq.flag && !g.state.story.flags[qq.flag]);
+      const jq = this.currentQuest(JOHTO_QUESTS, g.state.story.flags);
       if (jq) return '▶ ' + jq.text;
     }
     // Stage H4a: while the Maris arc is current, its chain leads the
     // HUD objective (the first-half rows; H4b's appended rows join
     // the same find, in chain order).
     if (currentArcOf(g.state).id === 'hoenn') {
-      const hq = HOENN_QUESTS.find((qq) => qq.flag && !g.state.story.flags[qq.flag]);
+      const hq = this.currentQuest(HOENN_QUESTS, g.state.story.flags);
       if (hq) return '▶ ' + hq.text;
     }
     // Stage S5a: while the Borea arc is current, its chain leads the
     // HUD objective (the first-half rows; S5b's appended rows join
     // the same find, in chain order).
     if (currentArcOf(g.state).id === 'sinnoh') {
-      const sq = SINNOH_QUESTS.find((qq) => qq.flag && !g.state.story.flags[qq.flag]);
+      const sq = this.currentQuest(SINNOH_QUESTS, g.state.story.flags);
       if (sq) return '▶ ' + sq.text;
     }
     // Game-feel F3: the opening objective names the actual first step —
@@ -208639,7 +208769,7 @@ Object.assign(OverworldScene.prototype, {
     if (gf.metPartner && !gf.reached_route1 && !gf.beat_brock) {
       return '▶ Leave Dawnwick — Route 1 lies south';
     }
-    const q = MAIN_QUESTS.find((qq) => qq.flag && !g.state.story.flags[qq.flag]);
+    const q = this.currentQuest(MAIN_QUESTS, g.state.story.flags);
     if (q) return '▶ ' + q.text;
     const active = Object.keys(g.state.story.quests).find((k) => g.state.story.quests[k] === 'active');
     if (active && LEGENDARY_ARCS[active]) return '▶ Arc: ' + LEGENDARY_ARCS[active].title;
@@ -211457,7 +211587,7 @@ Object.assign(Game.prototype, {
     items.push({ label: '— MAIN STORY —', value: null, disabled: true, band: true });
     for (const q of MAIN_QUESTS) {
       const doneF = q.flag && g.state.story.flags[q.flag];
-      const active = !doneF && MAIN_QUESTS.find((x) => !x.flag || !g.state.story.flags[x.flag]) === q;
+      const active = !doneF && currentQuestOf(MAIN_QUESTS, g.state.story.flags) === q;
       items.push({
         label: (doneF ? '★ ' : active ? '▶ ' : '· ') + q.text,
         value: 'q:' + q.id, disabled: !active && !doneF,
@@ -211477,7 +211607,7 @@ Object.assign(Game.prototype, {
       items.push({ label: '— AMBER ISLES —', value: null, disabled: true, band: true });
       for (const q of ORANGE_QUESTS) {
         const doneF = q.flag && g.state.story.flags[q.flag];
-        const active = !doneF && ORANGE_QUESTS.find((x) => !x.flag || !g.state.story.flags[x.flag]) === q;
+        const active = !doneF && currentQuestOf(ORANGE_QUESTS, g.state.story.flags) === q;
         const count = q.badgeCount ? ' — ' + ((g.state.badges.orange || []).length) + '/4 badges' : '';
         const tcount = q.titanCount ? ' — ' + ((g.state.story.flags.orange_2000_moltres ? 1 : 0) + (g.state.story.flags.orange_2000_zapdos ? 1 : 0) + (g.state.story.flags.orange_2000_articuno ? 1 : 0)) + '/3 titans calmed' : '';
         items.push({
@@ -211500,7 +211630,7 @@ Object.assign(Game.prototype, {
       items.push({ label: '— YAMATO —', value: null, disabled: true, band: true });
       for (const q of JOHTO_QUESTS) {
         const doneF = q.flag && g.state.story.flags[q.flag];
-        const active = !doneF && JOHTO_QUESTS.find((x) => !x.flag || !g.state.story.flags[x.flag]) === q;
+        const active = !doneF && currentQuestOf(JOHTO_QUESTS, g.state.story.flags) === q;
         items.push({
           label: (doneF ? '★ ' : active ? '▶ ' : '· ') + q.text,
           value: 'jq:' + q.id, disabled: !active && !doneF,
@@ -211521,7 +211651,7 @@ Object.assign(Game.prototype, {
       items.push({ label: '— BOREA —', value: null, disabled: true, band: true });
       for (const q of SINNOH_QUESTS) {
         const doneF = q.flag && g.state.story.flags[q.flag];
-        const active = !doneF && SINNOH_QUESTS.find((x) => !x.flag || !g.state.story.flags[x.flag]) === q;
+        const active = !doneF && currentQuestOf(SINNOH_QUESTS, g.state.story.flags) === q;
         items.push({
           label: (doneF ? '★ ' : active ? '▶ ' : '· ') + q.text,
           value: 'sq:' + q.id, disabled: !active && !doneF,
@@ -211854,10 +211984,19 @@ Object.assign(Game.prototype, {
         return;
       }
       if (v === 'fly') {
+        // REGION-1 FIX WAVE (Bug 2): destinations are the Center towns
+        // the player has actually been to. visited_<id> is written on
+        // entry by sysLoadMap (its writer was keyed on a map field no
+        // map defines — see overworld-systems); reached_<id> has been
+        // written on every map entry all along, so accepting it here
+        // heals existing saves (their real travel history) with no
+        // schema change. The Center-door filter keeps both honest:
+        // only a town that fields a Center can be a destination.
+        const isFlyTown = (id) => MAPS[id] && (MAPS[id].warps || []).some((w) => w.to && w.to.map === 'center');
         const cities = Object.keys(g.state.story.flags)
-          .filter((k) => k.startsWith('visited_'))
+          .filter((k) => k.startsWith('visited_') || k.startsWith('reached_'))
           .map((k) => k.slice(8))
-          .filter((id) => MAPS[id]);
+          .filter((id, i, a) => a.indexOf(id) === i && isFlyTown(id));
         if (!cities.length) { g.ui.say(['No town visited yet — nowhere to fly to.']); return; }
         const dests = cities.map((id) => ({ label: MAPS[id].name, value: id }));
         dests.push({ label: 'Back', value: null });
