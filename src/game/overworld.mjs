@@ -9,7 +9,7 @@ import { dexHorizonFor } from '../data/arcs.mjs';
 import { TILE } from '../engine/render.mjs';
 import { roll, intIn, pickWeighted } from '../engine/rng.mjs';
 import { makeMon, dexRegister, displayName, dexCaughtCount } from './state.mjs';
-import { resolveStartPos } from './start-pos.mjs';
+import { resolveStartPos, startTileAt, isWaterTile, isFootStandable, isFootTrapped, footNeighbours, resolveFootPos } from './start-pos.mjs';
 import { nearestCenterAnchor } from './nearest-center.mjs';
 import { DIFFICULTY_LABELS, difficultyOf, houseRule } from './rules.mjs';
 import { PARTNER_MOODS } from '../data/dialogue.mjs';
@@ -81,6 +81,35 @@ export class OverworldScene {
       if (sp && this.map && (sp.x < 0 || sp.y < 0 || sp.x >= this.w || sp.y >= this.h)) {
         const st = resolveStartPos(this.map, null);
         sp.x = st.x; sp.y = st.y;
+      }
+    }
+    // BUG-009 LOAD RESCUE (2026-11-18): the block above covers
+    // out-of-bounds saves; this one covers a save standing IN-bounds
+    // on a tile the player cannot stand on or step off — open water
+    // reached on foot (the Marisol sea-lane trap), a wall, a one-tile
+    // enclosure. A surf-qualified party standing on water is legal:
+    // surfing is restored and the position kept. Water beside shore
+    // is left alone (one step reaches land). Anything else relocates
+    // to foot-safe ground — same map first, then through the map's
+    // own warps, so a trapped sea save washes up in the town its lane
+    // serves. If nothing resolves, the position is left exactly as
+    // saved: the rescue never makes a save worse.
+    {
+      const sp = g.state.story.position;
+      if (sp && this.map) {
+        const t = startTileAt(this.map, sp.x, sp.y);
+        const onWater = isWaterTile(t);
+        const surfQualified = this.partyKnows('surf') && (g.state.badges.kanto || []).includes('soulbadge');
+        if (onWater && surfQualified) {
+          this.surfing = true;
+        } else if (!(onWater && footNeighbours(this.map, sp.x, sp.y).length > 0)
+          && (!isFootStandable(this.map, sp.x, sp.y) || isFootTrapped(this.map, sp.x, sp.y))) {
+          const spot = resolveFootPos(this.mapId, MAPS, sp);
+          if (spot) {
+            if (spot.mapId !== this.mapId) { this.loadMap(spot.mapId); sp.map = spot.mapId; }
+            sp.x = spot.x; sp.y = spot.y;
+          }
+        }
       }
     }
     // RUN2 FIX 2: re-talk re-arm state (see tryInteract / _trackTalkRearm).
@@ -857,12 +886,24 @@ export class OverworldScene {
       g.state.story.lastMart = { map: wp.via.map, x: wp.via.x, y: wp.via.y };
     }
     this.loadMap(to.map);
-    this.player.tx = to.x; this.player.ty = to.y;
-    this.player.px = to.x * TILE; this.player.py = to.y * TILE;
-    this.player.fx = to.x; this.player.fy = to.y;
+    // BUG-009 landing safety net: a warp must never place the player
+    // inside a wall or off the map — such a landing degrades to the
+    // destination's resolved start. Water landings stay exactly as
+    // authored: the foot-entry gate in onStep governs step-warps,
+    // and dive surfacing lands on water by design. (Shipped data has
+    // no such landing today; audit-warp-landings keeps it that way.)
+    let lx = to.x, ly = to.y;
+    const lt = startTileAt(this.map, lx, ly);
+    if (!WALKABLE.has(lt) && !isWaterTile(lt)) {
+      const safe = resolveStartPos(this.map, null);
+      lx = safe.x; ly = safe.y;
+    }
+    this.player.tx = lx; this.player.ty = ly;
+    this.player.px = lx * TILE; this.player.py = ly * TILE;
+    this.player.fx = lx; this.player.fy = ly;
     this.trail = [];
     this.partner.px = this.player.px; this.partner.py = this.player.py;
-    g.state.story.position = { map: to.map, x: to.x, y: to.y, dir: this.player.dir };
+    g.state.story.position = { map: to.map, x: lx, y: ly, dir: this.player.dir };
     this.banner = { text: this.map.name.toUpperCase(), t: 1.6 };
     g.state.meta.location = this.map.name;
     g.audio.playMusic(this.map.music || 'route1-theme'); // no-op when the track is already playing
@@ -906,6 +947,24 @@ export class OverworldScene {
       if (wp.viaExit) to = this.mapId === 'mart'
         ? this.martExit()
         : this.centerExit();
+      // BUG-009 foot-entry gate: a warp whose landing is open water
+      // the player could never step off on foot (the sea lanes —
+      // Marisol's east edge onto the Amber Sea is the type case)
+      // must not fire for a player on foot: crossing requires
+      // already surfing, the way the game gates every other
+      // field-move terrain (the ferryGate:'surf' refusal is the
+      // idiom). Foot-escapable shore landings and every surfing
+      // crossing pass exactly as authored; viaExit tickets (the
+      // dynamic Center/Mart exits) are never gated.
+      if (!wp.viaExit && to) {
+        const dest = MAPS[to.map];
+        const lt = dest ? startTileAt(dest, to.x, to.y) : null;
+        if (dest && isWaterTile(lt) && !this.surfing && isFootTrapped(dest, to.x, to.y)) {
+          if (g.audio) g.audio.playSfx('error-buzz');
+          g.ui.say(['The sea lane is open water — you need to be surfing to cross.']);
+          return;
+        }
+      }
       this.startWarpFade(to, wp);
       return;
     }

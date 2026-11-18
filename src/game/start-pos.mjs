@@ -60,3 +60,127 @@ export function resolveStartPos(mapDef, fallback) {
   }
   return { x: 0, y: 0 };
 }
+
+// ---- Foot safety (BUG-009) ----------------------------------------
+// A tile is FOOT-standable when a player on foot can stand on it
+// (WALKABLE; open water counts only while surfing). A player on foot
+// on a tile with no foot-standable neighbour can never take a step
+// again — that is the sea-lane trap shape: Marisol's open east edge
+// warps onto open water in the Amber Sea, and every return warp sits
+// on water too. These helpers are the shared vocabulary of the
+// foot-entry gate (overworld onStep), the landing safety net
+// (doWarp) and the load rescue (OverworldScene.enter).
+
+export function tileAt(mapDef, x, y) {
+  return startTileAt(mapDef, x, y);
+}
+
+export function isWaterTile(t) {
+  return t === '~' || t === 'W';
+}
+
+export function isFootStandable(mapDef, x, y) {
+  return WALKABLE.has(startTileAt(mapDef, x, y));
+}
+
+const DIRS4 = [[1, 0], [-1, 0], [0, 1], [0, -1]];
+
+export function footNeighbours(mapDef, x, y) {
+  const out = [];
+  for (const [dx, dy] of DIRS4) {
+    if (isFootStandable(mapDef, x + dx, y + dy)) out.push({ x: x + dx, y: y + dy });
+  }
+  return out;
+}
+
+// Foot-trapped: from (x, y) the player cannot step onto ANY
+// foot-standable tile — true for mid-sea water, false for water
+// beside a shore, false for any ordinary floor tile.
+export function isFootTrapped(mapDef, x, y) {
+  return footNeighbours(mapDef, x, y).length === 0;
+}
+
+// Can a player standing at (x, y) reach a warp on foot? Floods the
+// foot-standable component; a land pocket with no warp in it (the
+// Amber Sea's islet) is standable ground but still a trap.
+export function footReachable(mapDef, x, y) {
+  if (!isFootStandable(mapDef, x, y)) return false;
+  const warpSet = new Set((mapDef.warps || []).filter((w) => w.to).map((w) => w.x + ',' + w.y));
+  if (warpSet.has(x + ',' + y)) return true;
+  const seen = new Set([x + ',' + y]);
+  const queue = [{ x, y }];
+  while (queue.length) {
+    const c = queue.shift();
+    for (const n of footNeighbours(mapDef, c.x, c.y)) {
+      const k = n.x + ',' + n.y;
+      if (seen.has(k)) continue;
+      if (warpSet.has(k)) return true;
+      seen.add(k);
+      queue.push(n);
+    }
+  }
+  return false;
+}
+
+export function isFootSafe(mapDef, x, y) {
+  return isFootStandable(mapDef, x, y) && footReachable(mapDef, x, y);
+}
+
+function footSpotOn(mapDef, pos) {
+  if (pos && isFootSafe(mapDef, pos.x, pos.y)) return { x: pos.x, y: pos.y };
+  const warpSet = new Set((mapDef.warps || []).map((w) => w.x + ',' + w.y));
+  const npcSet = new Set((mapDef.npcs || []).map((n) => n.x + ',' + n.y));
+  // A map with no warps at all (the dive trenches, the event
+  // islands) is entered and left by non-warp flows; there the best
+  // rescue is simply standable ground the player can step off —
+  // walkability restored, the map's own exits do the rest.
+  const warpless = !(mapDef.warps || []).some((w) => w.to);
+  const free = warpless
+    ? (x, y) => isFootStandable(mapDef, x, y) && !isFootTrapped(mapDef, x, y) && !npcSet.has(x + ',' + y)
+    : (x, y) => isFootSafe(mapDef, x, y) && !warpSet.has(x + ',' + y) && !npcSet.has(x + ',' + y);
+  if (mapDef.start && free(mapDef.start.x, mapDef.start.y)) return { x: mapDef.start.x, y: mapDef.start.y };
+  for (const w of mapDef.warps || []) {
+    for (const [dx, dy] of DIRS4) {
+      if (free(w.x + dx, w.y + dy)) return { x: w.x + dx, y: w.y + dy };
+    }
+  }
+  for (let y = mapDef.rows.length - 1; y >= 0; y--) {
+    for (let x = 0; x < mapDef.rows[y].length; x++) {
+      if (free(x, y)) return { x, y };
+    }
+  }
+  return null;
+}
+
+// resolveFootPos(mapId, maps, pos): where a player on foot in
+// trouble on `mapId` should be put — foot-safe ground on the same
+// map first (the authored start, then warp-adjacent ground, then a
+// scan from the south edge up, mirroring resolveStartPos), then
+// breadth-first through the warp graph (sea lanes chain route to
+// route before they reach a town): the nearest destination that
+// resolves foot-safe ground wins, so a trapped sea save washes up
+// in the town its lane serves. Returns {mapId, x, y}, or null when
+// nothing resolves — callers then leave the position exactly as it
+// was; the rescue never makes a save worse.
+export function resolveFootPos(mapId, maps, pos) {
+  const mapDef = maps && maps[mapId];
+  if (!mapDef || !Array.isArray(mapDef.rows) || !mapDef.rows.length) return null;
+  const spot = footSpotOn(mapDef, pos);
+  if (spot) return { mapId, x: spot.x, y: spot.y };
+  const seen = new Set([mapId]);
+  let frontier = [mapId];
+  for (let depth = 0; depth < 4 && frontier.length; depth++) {
+    const next = [];
+    for (const id of frontier) {
+      for (const w of maps[id].warps || []) {
+        if (!w.to || seen.has(w.to.map) || !maps[w.to.map]) continue;
+        seen.add(w.to.map);
+        const destSpot = footSpotOn(maps[w.to.map], w.to);
+        if (destSpot) return { mapId: w.to.map, x: destSpot.x, y: destSpot.y };
+        next.push(w.to.map);
+      }
+    }
+    frontier = next;
+  }
+  return null;
+}
