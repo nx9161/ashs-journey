@@ -145658,6 +145658,12 @@ const HM_MOVES = { 1: 'cut', 2: 'fly', 3: 'surf', 4: 'strength', 5: 'flash', 6: 
 const HM_GRANTS = {
   defog: { item: 'hm06', move: 'defog', badge: 'fenbadge', source: 'Repose Ruins (Platinum)' },
   rockclimb: { item: 'hm07', move: 'rockclimb', badge: 'iciclebadge', source: 'Route 217 (Platinum)' },
+  // BUG-013 fix (owner ruling 2026-11-25): HM03 Surf joins the table.
+  // Its grant is the harbourmaster's teaching at Lotus Cove (the
+  // runHoennNpc 'harbourmaster' branch writes the same idempotent
+  // grant the giveHM step performs); badge = the field-use gate the
+  // overworld reads for Surf (badges.kanto soulbadge, sysInteract).
+  surf: { item: 'hm03', move: 'surf', badge: 'soulbadge', source: 'Lotus Cove harbour (this game)' },
 };
 const TM_PRICES = {
   1: 3000, 2: 2000, 3: 2000, 4: 1000, 5: 3000, 6: 4000, 7: 2000, 8: 4000, 9: 3000, 10: 4000,
@@ -171616,7 +171622,7 @@ const MAPS7 = {
     ],
     "npcs": [
       {"x": 12, "y": 13, "name": "CONTEST FAN YUKI", "art": "cast-yuki-fan", "skin": "#c89878", "shirt": "#2a7a6a", "pants": "#3a3a4a", "hair": "#7a4a1a", "dialogue": ["Four halls, four ribbons — and this is the grandest stage of the four, everyone agrees.", "I practise my appeals on the pier. The BRINEGULL are brutal judges."]},
-      {"x": 18, "y": 11, "name": "HARBOURMASTER DOSS", "art": "cast-doss-harbour", "skin": "#e8b888", "shirt": "#3a6ac0", "pants": "#2a3a4a", "hair": "#1a1a1a", "dialogue": ["Ships, subs, and things that are neither — this harbour has berthed them all and logged half.", "East is open sea to Starfall. Mind the trench on 124; the divers talk about it like a door."]},
+      {"x": 18, "y": 11, "name": "HARBOURMASTER DOSS", "art": "cast-doss-harbour", "hoenn": "harbourmaster", "skin": "#e8b888", "shirt": "#3a6ac0", "pants": "#2a3a4a", "hair": "#1a1a1a", "dialogue": ["Ships, subs, and things that are neither — this harbour has berthed them all and logged half.", "East is open sea to Starfall. Mind the trench on 124; the divers talk about it like a door."]},
       {"x": 7, "y": 14, "name": "SHOPPER MIREL", "art": "cast-mirel", "skin": "#d8a878", "shirt": "#7a4a8a", "pants": "#2a2a3a", "hair": "#c0c0c0", "dialogue": ["The department store's top floor sells what the marts dream about. I dream back, politely.", "A team in red was seen at the west cave mouth. A team in blue at the east. The gulls saw both first."]},
       {"x": 9, "y": 4, "name": "MART CLERK", "art": "clerk-maris", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#1a1a1a", "dialogue": ["Lotus Cove Mart — port stock, contest ribbons not included."], "mart": {"stock": ["greatball", "ultraball", "hyperpotion", "fullheal", "revive", "superpotion"]}},
     ],
@@ -206927,6 +206933,29 @@ Object.assign(OverworldScene.prototype, {
           g.audio.playSfx('dex-register');
           g.ui.say([displayName(mon, SPECIES) + ' learned Dive!', 'Mind the gate the League keeps on it: badge and knowledge, both, or the trench refuses you — by name, so you always know what is missing. The way UP asks nothing. Ever. Surface spots are doors that only open outward.'], null, 'ALBAN');
         });
+      });
+      return true;
+    }
+
+    // BUG-013 fix (owner ruling 2026-11-25): the Surf teaching the
+    // shipped game never had. The harbourmaster of Lotus Cove — the
+    // port the Starfall crossing departs from, whose shipped lines
+    // already point east across that water — grants HM03 through the
+    // HM_GRANTS idiom (the giveHM step's own semantics: idempotent on
+    // the bag, 'dex-register', "Received HM03!"). Repeatable like
+    // Alban's Dive teaching, so a trainer who passed this port before
+    // the grant existed is never locked out of it. The HM itself is
+    // taught from the bag (teachFromBag), and field use still reads
+    // the shipped gate: a partner who knows Surf + the Soul Badge.
+    if (kind === 'harbourmaster') {
+      if ((g.state.bag.hm03 || 0) > 0 || flags.surf_granted) { say(npc.dialogue || []); return true; }
+      say(['East is open sea to Starfall, trainer, and no boat of mine runs it for passengers — that crossing is a trainer\'s own work, on a partner\'s back. The League\'s law for it is old: a partner who knows Surf, and the Soul Badge in your case to make it lawful.', 'The harbour office keeps the teaching machine for exactly that road, and this port does not charge for weather. HM03 — Surf. Take it, teach it well, and mind the trench on 124; it does not forgive tourists.'], () => {
+        if (!((g.state.bag.hm03 || 0) > 0)) {
+          g.state.bag.hm03 = 1;
+          flags.surf_granted = true;
+          g.audio.playSfx('dex-register');
+          g.ui.toast('Received ' + ITEMS[HM_GRANTS.surf.item].name + '!');
+        }
       });
       return true;
     }
