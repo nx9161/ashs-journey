@@ -47,6 +47,12 @@ export const HM_MOVES = { 1: 'cut', 2: 'fly', 3: 'surf', 4: 'strength', 5: 'flas
 export const HM_GRANTS = {
   defog: { item: 'hm06', move: 'defog', badge: 'fenbadge', source: 'Repose Ruins (Platinum)' },
   rockclimb: { item: 'hm07', move: 'rockclimb', badge: 'iciclebadge', source: 'Route 217 (Platinum)' },
+  // BUG-013 fix (owner ruling 2026-11-25): HM03 Surf joins the table.
+  // Its grant is the harbourmaster's teaching at Lotus Cove (the
+  // runHoennNpc 'harbourmaster' branch writes the same idempotent
+  // grant the giveHM step performs); badge = the field-use gate the
+  // overworld reads for Surf (badges.kanto soulbadge, sysInteract).
+  surf: { item: 'hm03', move: 'surf', badge: 'soulbadge', source: 'Lotus Cove harbour (this game)' },
 };
 const TM_PRICES = {
   1: 3000, 2: 2000, 3: 2000, 4: 1000, 5: 3000, 6: 4000, 7: 2000, 8: 4000, 9: 3000, 10: 4000,

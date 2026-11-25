@@ -2220,6 +2220,29 @@ Object.assign(OverworldScene.prototype, {
       return true;
     }
 
+    // BUG-013 fix (owner ruling 2026-11-25): the Surf teaching the
+    // shipped game never had. The harbourmaster of Lotus Cove — the
+    // port the Starfall crossing departs from, whose shipped lines
+    // already point east across that water — grants HM03 through the
+    // HM_GRANTS idiom (the giveHM step's own semantics: idempotent on
+    // the bag, 'dex-register', "Received HM03!"). Repeatable like
+    // Alban's Dive teaching, so a trainer who passed this port before
+    // the grant existed is never locked out of it. The HM itself is
+    // taught from the bag (teachFromBag), and field use still reads
+    // the shipped gate: a partner who knows Surf + the Soul Badge.
+    if (kind === 'harbourmaster') {
+      if ((g.state.bag.hm03 || 0) > 0 || flags.surf_granted) { say(npc.dialogue || []); return true; }
+      say(['East is open sea to Starfall, trainer, and no boat of mine runs it for passengers — that crossing is a trainer\'s own work, on a partner\'s back. The League\'s law for it is old: a partner who knows Surf, and the Soul Badge in your case to make it lawful.', 'The harbour office keeps the teaching machine for exactly that road, and this port does not charge for weather. HM03 — Surf. Take it, teach it well, and mind the trench on 124; it does not forgive tourists.'], () => {
+        if (!((g.state.bag.hm03 || 0) > 0)) {
+          g.state.bag.hm03 = 1;
+          flags.surf_granted = true;
+          g.audio.playSfx('dex-register');
+          g.ui.toast('Received ' + ITEMS[HM_GRANTS.surf.item].name + '!');
+        }
+      });
+      return true;
+    }
+
     if (kind === 'liza_flavor') {
       if (hBadges.includes('mindbadge')) { say(['Two minds, one gym, one badge — given. Theo is replaying your second battle in his head and losing it more slowly each time. That is his way of applauding.']); return true; }
       if (flags.beat_tate) { say(['My half is next, challenger. Theo was the introduction. I am the argument. Speak to him when you are ready to begin again — we keep our order, even mid-lesson.']); return true; }
